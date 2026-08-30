@@ -1,28 +1,50 @@
-# Contributing to InteropAtlas
+# 为 InteropAtlas 贡献
 
-InteropAtlas is in a pre-alpha design phase. Contributions should prioritize verifiable facts, explicit provenance, clear distinctions between entity types, and machine-readable structure.
+InteropAtlas 当前处于 Pre-Alpha 设计阶段。贡献应优先保证：事实可验证、来源明确、对象类型区分清晰、结构机器可读。
 
-## Principles
+## 基本原则
 
-- Prefer authoritative primary sources where available.
-- Distinguish standards, protocols, specifications, APIs, formats, implementations, organizations, projects, and products.
-- Do not reduce openness to a single boolean. Record factual dimensions such as specification access, governance, patent/royalty terms, implementation availability, certification constraints, and vendor neutrality.
-- Treat relationships as contextual claims that require evidence.
-- Do not copy third-party specification text unless redistribution rights are clear.
-- Prefer small, reviewable pull requests.
+- 能使用权威一手来源时，优先使用一手来源。
+- 明确区分标准、协议、规范、API、格式、实现、组织、项目和产品。
+- 不要把“开放性”压缩成单一布尔值。应分别记录规范可访问性、治理开放度、专利/版税条件、开源实现、认证限制、厂商中立性等事实维度。
+- 关系应被视为需要证据支持的、带上下文的事实主张。
+- 除非再发布权利清晰，否则不要复制第三方规范全文。
+- 优先提交较小、可审查的 Pull Request。
 
-## Licensing of contributions
+## 语言规则
 
-By contributing, you agree that your contribution is provided under the license applicable to the destination material as described in `LICENSE.md`:
+项目采用“中文优先、英文机器标识、中英双语知识字段”。
 
-- software and functional schemas: Apache-2.0;
-- original structured factual data: CC0-1.0;
-- original prose documentation and research: CC BY 4.0.
+- `id`、字段名、枚举值、关系类型、路径、Schema 和 API 标识使用英文。
+- 中文是当前主文档和主要解释语言。
+- 名称、描述、定义等知识字段尽可能同时提供 `*_zh` 与 `*_en`。
+- 对官方名称、标准编号、组织名、协议名等，不应为了中文化而替换其正式原文。
+- 翻译存在不确定性时，应保留原文并明确标记译名，而不是把译名当成新的官方名称。
 
-Do not submit third-party material unless you have the right to do so and can preserve its required attribution and licensing information.
+示例：
 
-## Data workflow
+```yaml
+id: device_discovery
+name_zh: 设备发现
+name_en: Device Discovery
+description_zh: 系统发现可用设备、节点或服务的能力。
+description_en: The capability to discover available devices, nodes, or services.
+```
 
-The initial source of truth is intended to be human-editable YAML validated with JSON Schema. Derived JSON, RDF, graph, API, and website representations may be generated later.
+完整规则见 `docs/language-policy.zh-CN.md`。
 
-The ontology and schema are not yet stable. Breaking changes are expected during the v0.1 design phase.
+## 贡献内容的许可证
+
+提交贡献即表示，你同意按照 `LICENSE.md` 中与目标内容对应的许可证提供该贡献：
+
+- 软件及功能性 Schema：Apache-2.0；
+- 原创结构化事实数据：CC0-1.0；
+- 原创文字文档与研究内容：CC BY 4.0。
+
+不要提交无权再发布的第三方材料；如果第三方材料允许收录，应保留必要的归属和许可证信息。
+
+## 数据工作流
+
+初期计划使用人类可编辑的 YAML 作为事实源，并使用 JSON Schema 校验。未来可从同一事实源生成 JSON、RDF、图数据库、API 与网站表示。
+
+本体与 Schema 目前尚未稳定。v0.1 设计阶段允许破坏性变更。
