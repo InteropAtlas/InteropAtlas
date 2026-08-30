@@ -1,0 +1,163 @@
+# Linked Data and hypertext relation set.
+---
+id: json_ld_uses_json
+type: relation
+name_zh: JSON-LD 使用 JSON 语法
+name_en: JSON-LD uses JSON syntax
+source: {type: standard, id: json_ld_1.1}
+relation: uses
+target: {type: standard, id: json_rfc8259}
+capability_context: [linked_data_serialization, data_serialization]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/json-ld11/
+    title: JSON-LD 1.1
+    language: en
+    accessed: 2026-08-30
+---
+id: json_ld_maps_to_rdf
+type: relation
+name_zh: JSON-LD 可映射到 RDF 数据模型
+name_en: JSON-LD maps to the RDF data model
+source: {type: standard, id: json_ld_1.1}
+relation: maps_to
+target: {type: standard, id: rdf_1.2_concepts}
+capability_context: [graph_representation, linked_data_serialization]
+conditions_zh: JSON-LD 是 RDF 的一种序列化/交换表示，但其 JSON 表面结构不等同于 RDF 抽象数据模型本身。
+conditions_en: JSON-LD is a serialization and exchange representation for RDF; its JSON surface syntax is not itself the RDF abstract data model.
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/json-ld11/
+    title: JSON-LD 1.1
+    language: en
+    accessed: 2026-08-30
+---
+id: json_ld_provides_linked_data_serialization
+type: relation
+name_zh: JSON-LD 提供链接数据序列化能力
+name_en: JSON-LD provides linked data serialization
+source: {type: standard, id: json_ld_1.1}
+relation: provides
+target: {type: capability, id: linked_data_serialization}
+confidence: 1.0
+---
+id: json_ld_provides_graph_representation
+type: relation
+name_zh: JSON-LD 可表达图关系数据
+name_en: JSON-LD can represent graph-structured linked data
+source: {type: standard, id: json_ld_1.1}
+relation: provides
+target: {type: capability, id: graph_representation}
+conditions_zh: 该能力通过 JSON-LD 与 RDF 数据模型的映射实现；复杂关系元数据可能需要额外建模。
+conditions_en: This capability is provided through JSON-LD's mapping to the RDF data model; rich metadata about relationships may require additional modeling.
+confidence: 0.95
+---
+id: rdf_provides_graph_representation
+type: relation
+name_zh: RDF 提供图关系表示能力
+name_en: RDF provides graph representation
+source: {type: standard, id: rdf_1.2_concepts}
+relation: provides
+target: {type: capability, id: graph_representation}
+confidence: 1.0
+---
+id: skos_uses_rdf
+type: relation
+name_zh: SKOS 基于 RDF 数据模型
+name_en: SKOS is based on the RDF data model
+source: {type: standard, id: skos_reference}
+relation: uses
+target: {type: standard, id: rdf_1.2_concepts}
+capability_context: [knowledge_organization, graph_representation]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/skos-reference/
+    title: SKOS Simple Knowledge Organization System Reference
+    language: en
+    accessed: 2026-08-30
+---
+id: skos_provides_knowledge_organization
+type: relation
+name_zh: SKOS 提供知识组织能力
+name_en: SKOS provides knowledge organization
+source: {type: standard, id: skos_reference}
+relation: provides
+target: {type: capability, id: knowledge_organization}
+confidence: 1.0
+---
+id: topic_maps_provides_knowledge_organization
+type: relation
+name_zh: Topic Maps 提供知识组织能力
+name_en: Topic Maps provides knowledge organization
+source: {type: standard, id: topic_maps_iso_13250}
+relation: provides
+target: {type: capability, id: knowledge_organization}
+confidence: 1.0
+---
+id: topic_maps_provides_graph_representation
+type: relation
+name_zh: Topic Maps 提供关联式图结构表示能力
+name_en: Topic Maps provides association-oriented graph representation
+source: {type: standard, id: topic_maps_iso_13250}
+relation: provides
+target: {type: capability, id: graph_representation}
+confidence: 0.95
+---
+id: html_provides_hypertext_navigation
+type: relation
+name_zh: HTML 提供超文本导航能力
+name_en: HTML provides hypertext navigation
+source: {type: standard, id: html_living_standard}
+relation: provides
+target: {type: capability, id: hypertext_navigation}
+confidence: 1.0
+sources:
+  - url: https://html.spec.whatwg.org/
+    title: HTML Standard
+    language: en
+    accessed: 2026-08-30
+---
+id: html_provides_document_representation
+type: relation
+name_zh: HTML 提供文档结构表示能力
+name_en: HTML provides document representation
+source: {type: standard, id: html_living_standard}
+relation: provides
+target: {type: capability, id: document_representation}
+confidence: 1.0
+---
+id: json_ld_governed_by_w3c
+type: relation
+name_zh: JSON-LD 由 W3C 标准化
+name_en: JSON-LD is standardized by W3C
+source: {type: standard, id: json_ld_1.1}
+relation: governed_by
+target: {type: organization, id: w3c}
+confidence: 1.0
+---
+id: rdf_governed_by_w3c
+type: relation
+name_zh: RDF 由 W3C 标准化
+name_en: RDF is standardized by W3C
+source: {type: standard, id: rdf_1.2_concepts}
+relation: governed_by
+target: {type: organization, id: w3c}
+confidence: 1.0
+---
+id: skos_governed_by_w3c
+type: relation
+name_zh: SKOS 由 W3C 标准化
+name_en: SKOS is standardized by W3C
+source: {type: standard, id: skos_reference}
+relation: governed_by
+target: {type: organization, id: w3c}
+confidence: 1.0
+---
+id: html_governed_by_whatwg
+type: relation
+name_zh: HTML Living Standard 由 WHATWG 维护
+name_en: HTML Living Standard is maintained by WHATWG
+source: {type: standard, id: html_living_standard}
+relation: governed_by
+target: {type: organization, id: whatwg}
+confidence: 1.0
