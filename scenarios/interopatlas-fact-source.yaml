@@ -1,0 +1,47 @@
+id: interopatlas_fact_source
+type: scenario
+name_zh: InteropAtlas 机器可读事实源
+name_en: InteropAtlas Machine-readable Fact Source
+description_zh: 为 InteropAtlas 选择一种适合 Pre-Alpha 阶段的事实源表示与维护方式，使数据既适合人工贡献和 Git 审查，也能被 Schema 与未来 Engine 稳定解析。
+description_en: Select a fact-source representation and maintenance approach for InteropAtlas during Pre-Alpha, balancing human contribution and Git review with reliable schema validation and future engine parsing.
+actors:
+  - id: maintainer
+    role: editor
+    description_zh: 直接阅读、修改、审查和合并事实数据。
+    description_en: Directly reads, edits, reviews, and merges factual data.
+  - id: engine
+    role: consumer
+    description_zh: 机器读取、验证、建图和分析数据。
+    description_en: Machine-consumes, validates, graphs, and analyzes the data.
+requires:
+  - capability: data_serialization
+    priority: required
+  - capability: human_editable_structured_data
+    priority: required
+  - capability: schema_validation
+    priority: required
+  - capability: version_control
+    priority: required
+  - capability: diff_friendly_storage
+    priority: preferred
+  - capability: text_encoding
+    priority: required
+  - capability: language_identification
+    priority: preferred
+environment:
+  network_scope: mixed
+  mobility: unknown
+  safety_critical: false
+  real_time: false
+success_criteria_zh:
+  - 事实数据可以由普通贡献者直接阅读和编辑。
+  - 数据可以被自动验证并稳定转换为程序内部对象。
+  - Git 中的变更尽可能容易审查和追踪。
+  - 数据格式不应把 InteropAtlas 锁定到单一商业供应商。
+  - 后续可以从同一事实源生成 JSON、RDF、图数据库或 API 表示。
+success_criteria_en:
+  - Factual data can be directly read and edited by ordinary contributors.
+  - Data can be automatically validated and reliably converted into program objects.
+  - Changes remain reasonably reviewable and traceable in Git.
+  - The format should not lock InteropAtlas into a single commercial vendor.
+  - The same fact source can later generate JSON, RDF, graph-database, or API representations.
