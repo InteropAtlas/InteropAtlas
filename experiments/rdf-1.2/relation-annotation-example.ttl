@@ -1,0 +1,19 @@
+VERSION "1.2"
+PREFIX ia:  <https://interopatlas.org/vocab/>
+PREFIX std: <https://interopatlas.org/standard/>
+PREFIX cap: <https://interopatlas.org/capability/>
+PREFIX rel: <https://interopatlas.org/relation/>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+# Direct semantic edge + explicit reifier for the InteropAtlas Relation object.
+std:json_ld_1.1 ia:mapsTo std:rdf_1.2_concepts
+  ~ rel:json_ld_maps_to_rdf {|
+      ia:confidence "1.0"^^xsd:decimal ;
+      ia:capabilityContext cap:graph_representation,
+                           cap:linked_data_serialization ;
+      ia:conditions "JSON-LD is a serialization and exchange representation for RDF; its JSON surface syntax is not itself the RDF abstract data model."@en ;
+      ia:evidenceSource <https://www.w3.org/TR/json-ld11/>
+  |} .
+
+# The above compact syntax corresponds conceptually to an asserted semantic edge
+# plus a reifier that identifies that exact proposition and carries metadata.
