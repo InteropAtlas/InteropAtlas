@@ -1,0 +1,102 @@
+id: interopatlas_self_map
+type: map
+name_zh: InteropAtlas 自身建设地图
+name_en: InteropAtlas Self Map
+map_kind: self
+description_zh: >
+  展示 InteropAtlas 自身建设过程中实际依赖、直接使用、参考或可替代的标准、规范、能力、组织、参考项目及其关系。
+  本 Map 只定义视图入口和展开规则，不复制底层事实。
+description_en: >
+  A view of standards, specifications, capabilities, organizations, reference projects, and relations that InteropAtlas itself
+  uses, depends on, references, or may replace. This Map defines traversal and presentation only; it does not duplicate facts.
+roots:
+  - type: reference_project
+    id: interopatlas
+traversal:
+  relation_types:
+    - uses
+    - depends_on
+    - provides
+    - requires
+    - governed_by
+    - implemented_by
+    - alternative_to
+    - compatible_with
+    - bridges_to
+    - maps_to
+    - recommended_with
+    - inspired_by
+  direction: both
+  max_depth: 4
+  include_object_types:
+    - reference_project
+    - standard
+    - capability
+    - organization
+    - implementation
+    - adapter
+    - scenario
+    - relation
+pinned:
+  - type: scenario
+    id: interopatlas_fact_source
+  - type: standard
+    id: yaml_1.2.2
+  - type: standard
+    id: json_rfc8259
+  - type: standard
+    id: json_schema_2020_12
+  - type: standard
+    id: http_rfc9110
+  - type: standard
+    id: uri_rfc3986
+  - type: standard
+    id: git_protocol_v2
+  - type: standard
+    id: unicode_17.0
+  - type: standard
+    id: bcp47_rfc5646
+  - type: standard
+    id: rdf_1.2_concepts
+  - type: standard
+    id: skos_reference
+  - type: standard
+    id: topic_maps_iso_13250
+groups:
+  - id: fact_representation
+    name_zh: 事实表达与验证
+    name_en: Fact Representation and Validation
+    object_ids:
+      - yaml_1.2.2
+      - json_rfc8259
+      - json_schema_2020_12
+  - id: identification_and_web
+    name_zh: 标识与 Web
+    name_en: Identification and Web
+    object_ids:
+      - uri_rfc3986
+      - http_rfc9110
+  - id: text_and_language
+    name_zh: 文本与语言
+    name_en: Text and Language
+    object_ids:
+      - unicode_17.0
+      - bcp47_rfc5646
+  - id: versioning_and_collaboration
+    name_zh: 版本与协作
+    name_en: Versioning and Collaboration
+    object_ids:
+      - git_protocol_v2
+  - id: knowledge_organization
+    name_zh: 知识组织与图模型
+    name_en: Knowledge Organization and Graph Models
+    object_ids:
+      - rdf_1.2_concepts
+      - skos_reference
+      - topic_maps_iso_13250
+notes_zh: >
+  当前 pinned 对象用于保证在关系尚未补齐时，第一张 Self Map 仍可作为导航入口。
+  pinned 不表示 InteropAtlas 已经正式采用这些技术；是否“实际使用”“仅参考”应由底层 Relation 和事实对象表达。
+notes_en: >
+  Pinned objects keep the first Self Map useful while relations are still incomplete. Pinning does not mean adoption;
+  actual use versus reference-only status must be expressed by underlying facts and Relations.
