@@ -57,8 +57,6 @@ JSON-LD 则提供一种基于 JSON 的 Linked Data / RDF 序列化方式。Inter
 
 但这种最直接映射的含义是：InteropAtlas Relation 被表达成一个独立 RDF resource（资源节点），其 `source / relationType / target` 是该节点的属性，而不是直接把它压缩成一个裸 RDF triple。
 
-这点非常重要：
-
 ```text
 InteropAtlas Relation object
         ↓
@@ -70,17 +68,15 @@ rel:json_ld_maps_to_rdf
   └─ evidence → ...
 ```
 
-这种方式最忠实于当前 InteropAtlas 数据模型，但在通用 RDF 工具看来，它不是最简洁的：
+这种方式最忠实于当前 InteropAtlas 数据模型，但通用 RDF 查询通常更希望直接看到：
 
 `JSON-LD → mapsTo → RDF`
 
-直接三元组形式。
+## 第二轮：RDF 1.2 的重要变化
 
-## RDF 1.2 带来的重要变化
+RDF 1.2 引入 triple terms 和新的 reification 模型。reifier 可以指向一个 triple term，并作为普通 RDF resource 继续承载来源、置信度、条件等描述。
 
-2026 年的 RDF 1.2 Candidate Recommendation 已引入 triple terms（把三元组作为 RDF term）和 reification（关系/命题实体化）的新模型。
-
-这意味着 InteropAtlas 可以考虑双层导出：
+这意味着 InteropAtlas 可以采用双层导出：
 
 ```text
 JSON-LD ── mapsTo ──→ RDF
@@ -92,89 +88,117 @@ JSON-LD ── mapsTo ──→ RDF
                  └─ scenario context
 ```
 
-这样既保留标准 RDF 图中的直接语义边，又可以给该关系附加证据和上下文。
+这比 RDF 1.1 时代常见的 `rdf:subject / rdf:predicate / rdf:object` 旧式 reification 更贴近 InteropAtlas 的 first-class Relation。
 
-这比旧式“把每条三元组拆成 rdf:subject / rdf:predicate / rdf:object”更接近 InteropAtlas 的 first-class Relation 思路。
+## 第三轮：真实 RDF 1.2 reifier 实验
 
-不过 RDF 1.2 当前仍处于 Candidate Recommendation 阶段，因此 InteropAtlas 不应立即依赖其作为唯一稳定导出机制。
+新增：
 
-## 适配优势
+- `standards/rdf-1.2-turtle.yaml`
+- `experiments/rdf-1.2/relation-annotation-example.ttl`
 
-1. **全局可解析标识**：稳定对象 ID 可映射为 IRI。
-2. **语义明确**：Relation 类型可以映射为 RDF predicate。
-3. **外部互操作**：可进入 RDF、Linked Data、SPARQL 和知识图谱生态。
-4. **机器友好**：Agent 和外部工具不必只理解 InteropAtlas 私有 YAML 结构。
-5. **Web 原生**：JSON-LD 与 Web/HTTP/IRI 体系天然衔接。
-6. **Relation 元数据可以保留**：即使不用 RDF 1.2 triple annotation，也可将 Relation 保持为一级资源节点进行无损导出。
+使用 RDF 1.2 Turtle annotation syntax 对真实关系：
 
-## 当前阻力
+`json_ld_1.1 → maps_to → rdf_1.2_concepts`
 
-### 1. 人工编辑体验
+进行表示。实验模式：
 
-JSON-LD 比当前 YAML 更冗长，`@context`、IRI 和嵌套对象会增加认知负担。对于大量社区贡献者，直接把 JSON-LD 作为主要编辑格式可能降低可读性和 Git diff 体验。
+```turtle
+std:json_ld_1.1 ia:mapsTo std:rdf_1.2_concepts
+  ~ rel:json_ld_maps_to_rdf {|
+      ia:confidence "1.0"^^xsd:decimal ;
+      ia:capabilityContext cap:graph_representation ;
+      ia:conditions "..."@en ;
+      ia:evidenceSource <https://www.w3.org/TR/json-ld11/>
+  |} .
+```
 
-### 2. 内部 Relation 模型与通用 RDF 图之间需要映射层
+验证结果：**RDF 1.2 的“直接语义边 + 显式 reifier + annotation”与 InteropAtlas Relation 模型高度匹配。**
 
-直接将 Relation 导出为资源节点最无损，但图查询者可能更希望看到：
+对应关系非常自然：
 
-`A → predicate → B`
+- `source` → triple subject
+- `relation` → RDF predicate
+- `target` → triple object
+- Relation `id` → reifier IRI
+- `confidence` → reifier property
+- `conditions_*` → reifier property
+- `sources` / evidence → reifier property
+- `scenario_context` / `capability_context` → reifier property
 
-因此 Engine exporter 最终可能需要同时生成：
+而且 RDF 1.2 明确允许同一个 proposition 有多个 reifier，也允许一个 reifier 与多个 proposition 关联。这对 InteropAtlas 未来表达“不同来源对同一个兼容性关系有不同评估”非常有价值。
 
-- **Canonical relation resource**：完整保留 InteropAtlas Relation 元数据；
-- **Semantic edge**：生成便于 RDF/SPARQL 查询的直接 predicate 边；
-- 可选 RDF 1.2 reifier / annotation：把两者正式关联起来。
+## 一个重要限制：JSON-LD 1.1 ≠ RDF 1.2 全量语法
 
-### 3. 双链体验仍需 View / Engine
+第三轮同时发现：**JSON-LD 1.1 本身早于 RDF 1.2 triple terms，并没有 RDF 1.2 triple term / annotation 的原生 JSON-LD 表面语法。**
 
-JSON-LD 能让机器理解“这个值是链接”，但它本身不会自动提供：
+因此目前不能简单假设：
 
-- 点击跳转
-- Backlinks（反向链接）
-- Graph View（图视图）
-- Hover Preview（悬浮预览）
+`RDF 1.2 graph ↔ JSON-LD 1.1`
 
-这些仍然需要 Reference Resolver、Backlink Indexer 和最终的人类浏览 View。
+可以对新 triple-term 结构完全无损往返。
 
-## 当前结论（第二轮）
+当前最稳妥的 JSON-LD 导出仍然是把 InteropAtlas Relation 保持为普通资源节点：
 
-JSON-LD 的适配性比第一轮预估更好，但结论仍然是：**不替换 YAML，而是成为高优先级语义交换层。**
+```text
+rel:X
+├─ source → A
+├─ relationType → mapsTo
+├─ target → B
+├─ confidence → ...
+└─ evidence → ...
+```
 
-当前建议架构：
+这可以被 JSON-LD 1.1 无损表达。
+
+因此未来 Engine 可能需要同时支持两种 RDF-facing representation：
+
+### Compatibility representation
+
+使用普通 Relation resource，兼容 JSON-LD 1.1 和传统 RDF 工具。
+
+### Native RDF 1.2 representation
+
+生成 direct semantic edge + RDF 1.2 reifier / annotation，面向 RDF 1.2 / SPARQL 1.2 工具。
+
+两者都从同一个 InteropAtlas Canonical Relation 生成，不作为两份事实源维护。
+
+## 当前判断（第三轮）
+
+现在可以更明确地区分四层：
 
 ```text
 YAML
-  ↓
+↓
 InteropAtlas Canonical Data Model
-  ↓
-Engine Graph
-  ├─ Linked View / Backlinks
-  ├─ direct semantic edges
-  └─ canonical Relation resources
-          ↓
-    RDF-compatible mapping
-          ↓
-       JSON-LD
+↓
+Engine
+├─ Linked View / Backlinks
+├─ JSON-LD 1.1 compatibility export
+└─ RDF 1.2 native graph export
+      ├─ direct semantic edge
+      └─ reifier / annotation metadata
 ```
 
 角色分工：
 
-- YAML：主要人工编辑与 Git 事实源；
-- InteropAtlas Data Model：内部权威语义模型；
-- RDF：图语义兼容模型与查询生态基础；
-- JSON-LD：高优先级交换/发布/Agent 接口格式；
-- RDF 1.2 triple terms / reification：很有潜力成为 Relation 元数据的标准映射机制，但在标准成熟前保持实验状态。
+- **YAML**：人工编辑、Git diff、事实源；
+- **InteropAtlas Data Model**：内部权威模型；
+- **RDF 1.2**：目前最匹配 InteropAtlas Relation 语义的外部图模型；
+- **RDF 1.2 Turtle**：验证 relation annotation 的直接实验语法；
+- **JSON-LD 1.1**：仍是很有价值的 Web / Agent / API 交换格式，但不能视为 RDF 1.2 新特性的完整序列化；
+- **JSON-LD Relation resource representation**：当前最稳妥的无损兼容出口。
 
 ## 下一步验证
 
-1. 设计一个 Relation 的“双表示”导出：Relation resource + direct semantic edge。
-2. 研究 RDF 1.2 reifier / triple annotation 对 `confidence / evidence / conditions / scenario_context` 的精确映射。
-3. 用真实的 3–5 条复杂 Relation 测试。
-4. 后续用支持 JSON-LD/RDF 1.2 的库实际做 expand / compact / RDF round-trip。
-5. 若往返转换稳定，再将 JSON-LD exporter 纳入 Engine。
+1. 选择 3–5 条不同性质的 Relation：`provides`、`compatible_with`、`inspired_by`、带 scenario context 的关系。
+2. 测试“同一个语义边拥有多个来源/评估”的 multiple reifier 模型。
+3. 研究 SPARQL 1.2 是否能自然查询 InteropAtlas Relation metadata。
+4. 研究 SHACL 1.2 是否可以验证 Relation reifier 的结构约束。
+5. 后续才进入真实 library round-trip 测试。
 
 ## 架构原则
 
 > 概念兼容、实现不绑定。
 
-InteropAtlas 可以兼容 RDF / JSON-LD，而不必把自身内部模型完全绑定到 RDF 或 JSON-LD。
+InteropAtlas 应利用 RDF / JSON-LD 的成熟生态，但内部模型仍以 InteropAtlas 自身需求为准。
