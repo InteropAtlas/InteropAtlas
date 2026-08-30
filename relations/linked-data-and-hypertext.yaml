@@ -23,12 +23,16 @@ source: {type: standard, id: json_ld_1.1}
 relation: maps_to
 target: {type: standard, id: rdf_1.2_concepts}
 capability_context: [graph_representation, linked_data_serialization]
-conditions_zh: JSON-LD 是 RDF 的一种序列化/交换表示，但其 JSON 表面结构不等同于 RDF 抽象数据模型本身。
-conditions_en: JSON-LD is a serialization and exchange representation for RDF; its JSON surface syntax is not itself the RDF abstract data model.
-confidence: 1.0
+conditions_zh: JSON-LD 1.1 可表达 RDF 图的常规 Linked Data 模型，但并不原生覆盖 RDF 1.2 新增的 triple terms。
+conditions_en: JSON-LD 1.1 can express conventional RDF Linked Data graphs, but does not natively cover RDF 1.2 triple terms.
+confidence: 0.95
 sources:
   - url: https://www.w3.org/TR/json-ld11/
     title: JSON-LD 1.1
+    language: en
+    accessed: 2026-08-30
+  - url: https://www.w3.org/TR/rdf12-concepts/
+    title: RDF 1.2 Concepts and Abstract Data Model
     language: en
     accessed: 2026-08-30
 ---
@@ -48,9 +52,9 @@ name_en: JSON-LD can represent graph-structured linked data
 source: {type: standard, id: json_ld_1.1}
 relation: provides
 target: {type: capability, id: graph_representation}
-conditions_zh: 该能力通过 JSON-LD 与 RDF 数据模型的映射实现；复杂关系元数据可能需要额外建模。
-conditions_en: This capability is provided through JSON-LD's mapping to the RDF data model; rich metadata about relationships may require additional modeling.
-confidence: 0.95
+conditions_zh: 该能力通过 JSON-LD 与 RDF 数据模型的映射实现；RDF 1.2 triple-term 关系元数据当前仍需额外映射。
+conditions_en: This capability is provided through JSON-LD's mapping to RDF; RDF 1.2 triple-term relationship metadata currently requires an additional mapping.
+confidence: 0.9
 ---
 id: rdf_provides_graph_representation
 type: relation
@@ -59,6 +63,39 @@ name_en: RDF provides graph representation
 source: {type: standard, id: rdf_1.2_concepts}
 relation: provides
 target: {type: capability, id: graph_representation}
+confidence: 1.0
+---
+id: rdf_turtle_implements_rdf_model
+type: relation
+name_zh: RDF 1.2 Turtle 表达 RDF 1.2 数据模型
+name_en: RDF 1.2 Turtle serializes the RDF 1.2 data model
+source: {type: standard, id: rdf_1.2_turtle}
+relation: implements
+target: {type: standard, id: rdf_1.2_concepts}
+capability_context: [graph_representation, linked_data_serialization]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/rdf12-turtle/
+    title: RDF 1.2 Turtle
+    language: en
+    accessed: 2026-08-30
+---
+id: rdf_turtle_provides_graph_representation
+type: relation
+name_zh: RDF 1.2 Turtle 提供 RDF 图的文本表示
+name_en: RDF 1.2 Turtle provides textual RDF graph representation
+source: {type: standard, id: rdf_1.2_turtle}
+relation: provides
+target: {type: capability, id: graph_representation}
+confidence: 1.0
+---
+id: rdf_turtle_provides_linked_data_serialization
+type: relation
+name_zh: RDF 1.2 Turtle 提供链接数据序列化能力
+name_en: RDF 1.2 Turtle provides linked data serialization
+source: {type: standard, id: rdf_1.2_turtle}
+relation: provides
+target: {type: capability, id: linked_data_serialization}
 confidence: 1.0
 ---
 id: skos_uses_rdf
@@ -140,6 +177,15 @@ type: relation
 name_zh: RDF 由 W3C 标准化
 name_en: RDF is standardized by W3C
 source: {type: standard, id: rdf_1.2_concepts}
+relation: governed_by
+target: {type: organization, id: w3c}
+confidence: 1.0
+---
+id: rdf_turtle_governed_by_w3c
+type: relation
+name_zh: RDF 1.2 Turtle 由 W3C 标准化
+name_en: RDF 1.2 Turtle is standardized by W3C
+source: {type: standard, id: rdf_1.2_turtle}
 relation: governed_by
 target: {type: organization, id: w3c}
 confidence: 1.0
