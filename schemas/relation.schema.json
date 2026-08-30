@@ -2,6 +2,20 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://interopatlas.org/schemas/relation.schema.json",
   "title": "InteropAtlas Relation Object",
+  "$defs": {
+    "objectRef": {
+      "type": "object",
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["standard", "capability", "scenario", "relation", "open_gap", "organization", "implementation", "adapter", "reference_architecture"]
+        },
+        "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+      },
+      "additionalProperties": false
+    }
+  },
   "allOf": [
     {"$ref": "base-object.schema.json"},
     {
@@ -28,20 +42,6 @@
         "conditions_zh": {"type": "string"},
         "conditions_en": {"type": "string"},
         "confidence": {"type": "number", "minimum": 0, "maximum": 1}
-      },
-      "$defs": {
-        "objectRef": {
-          "type": "object",
-          "required": ["type", "id"],
-          "properties": {
-            "type": {
-              "type": "string",
-              "enum": ["standard", "capability", "scenario", "relation", "open_gap", "organization", "implementation", "adapter", "reference_architecture"]
-            },
-            "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
-          },
-          "additionalProperties": false
-        }
       }
     }
   ]
