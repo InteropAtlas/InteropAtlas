@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/relation.schema.json",
+  "title": "InteropAtlas Relation Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "source", "relation", "target"],
+      "properties": {
+        "type": {"const": "relation"},
+        "source": {"$ref": "#/$defs/objectRef"},
+        "relation": {
+          "type": "string",
+          "enum": ["depends_on", "uses", "implements", "extends", "replaces", "supersedes", "alternative_to", "compatible_with", "incompatible_with", "bridges_to", "maps_to", "encapsulates", "transports", "describes", "requires", "recommended_with", "governed_by", "implemented_by", "secures", "discovers", "identifies", "synchronizes", "provides"]
+        },
+        "target": {"$ref": "#/$defs/objectRef"},
+        "capability_context": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "scenario_context": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "conditions_zh": {"type": "string"},
+        "conditions_en": {"type": "string"},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1}
+      },
+      "$defs": {
+        "objectRef": {
+          "type": "object",
+          "required": ["type", "id"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["standard", "capability", "scenario", "relation", "open_gap", "organization", "implementation", "adapter", "reference_architecture"]
+            },
+            "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
