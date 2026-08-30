@@ -1,0 +1,45 @@
+{
+  "@context": "./interopatlas-context-v0.1.jsonld",
+  "@graph": [
+    {
+      "@id": "std:json_ld_1.1",
+      "@type": "Standard",
+      "name_zh": "JSON-LD 1.1 链接数据 JSON 序列化",
+      "name_en": "JSON-LD 1.1"
+    },
+    {
+      "@id": "std:rdf_1.2_concepts",
+      "@type": "Standard",
+      "name_zh": "RDF 1.2 概念与抽象数据模型",
+      "name_en": "RDF 1.2 Concepts and Abstract Data Model"
+    },
+    {
+      "@id": "cap:graph_representation",
+      "@type": "Capability",
+      "name_zh": "图关系表示",
+      "name_en": "Graph Representation"
+    },
+    {
+      "@id": "rel:json_ld_maps_to_rdf",
+      "@type": "Relation",
+      "source": "std:json_ld_1.1",
+      "relation": "maps_to",
+      "target": "std:rdf_1.2_concepts",
+      "confidence": 1.0,
+      "capability_context": [
+        "cap:graph_representation",
+        "cap:linked_data_serialization"
+      ],
+      "conditions_zh": "JSON-LD 是 RDF 的一种序列化/交换表示，但其 JSON 表面结构不等同于 RDF 抽象数据模型本身。",
+      "conditions_en": "JSON-LD is a serialization and exchange representation for RDF; its JSON surface syntax is not itself the RDF abstract data model.",
+      "sources": [
+        {
+          "url": "https://www.w3.org/TR/json-ld11/",
+          "title": "JSON-LD 1.1",
+          "language": "en",
+          "accessed": "2026-08-30"
+        }
+      ]
+    }
+  ]
+}
