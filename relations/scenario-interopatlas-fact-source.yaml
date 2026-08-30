@@ -1,0 +1,68 @@
+# Relations connecting the first self-analysis scenario to current candidate technologies.
+---
+id: fact_source_requires_serialization
+type: relation
+name_zh: InteropAtlas 事实源场景要求数据序列化能力
+name_en: InteropAtlas fact-source scenario requires data serialization
+source: {type: scenario, id: interopatlas_fact_source}
+relation: requires
+target: {type: capability, id: data_serialization}
+confidence: 1.0
+---
+id: fact_source_requires_human_editability
+type: relation
+name_zh: InteropAtlas 事实源场景要求人工可编辑结构化数据
+name_en: InteropAtlas fact-source scenario requires human-editable structured data
+source: {type: scenario, id: interopatlas_fact_source}
+relation: requires
+target: {type: capability, id: human_editable_structured_data}
+confidence: 1.0
+---
+id: fact_source_requires_schema_validation
+type: relation
+name_zh: InteropAtlas 事实源场景要求数据结构验证
+name_en: InteropAtlas fact-source scenario requires schema validation
+source: {type: scenario, id: interopatlas_fact_source}
+relation: requires
+target: {type: capability, id: schema_validation}
+confidence: 1.0
+---
+id: fact_source_requires_version_control
+type: relation
+name_zh: InteropAtlas 事实源场景要求版本控制
+name_en: InteropAtlas fact-source scenario requires version control
+source: {type: scenario, id: interopatlas_fact_source}
+relation: requires
+target: {type: capability, id: version_control}
+confidence: 1.0
+---
+id: fact_source_requires_text_encoding
+type: relation
+name_zh: InteropAtlas 事实源场景要求统一文本编码
+name_en: InteropAtlas fact-source scenario requires text encoding
+source: {type: scenario, id: interopatlas_fact_source}
+relation: requires
+target: {type: capability, id: text_encoding}
+confidence: 1.0
+---
+id: yaml_candidate_for_fact_source
+type: relation
+name_zh: YAML 是 InteropAtlas 事实源场景的当前候选格式
+name_en: YAML is a current candidate format for the InteropAtlas fact-source scenario
+source: {type: scenario, id: interopatlas_fact_source}
+relation: recommended_with
+target: {type: standard, id: yaml_1.2.2}
+conditions_zh: 这是当前架构选择和待评估候选，不代表已经计算得出“最佳方案”。
+conditions_en: This records the current architecture choice and evaluation candidate, not a computed best-solution judgment.
+confidence: 1.0
+---
+id: json_schema_candidate_for_fact_source
+type: relation
+name_zh: JSON Schema 是 InteropAtlas 事实源验证的当前候选规范
+name_en: JSON Schema is the current validation specification candidate for the InteropAtlas fact-source scenario
+source: {type: scenario, id: interopatlas_fact_source}
+relation: recommended_with
+target: {type: standard, id: json_schema_2020_12}
+conditions_zh: 当前用于定义 YAML/JSON 兼容数据结构的验证规则，后续仍需通过评估确认长期适用性。
+conditions_en: Currently used to define validation rules for YAML/JSON-compatible structures; long-term suitability remains subject to assessment.
+confidence: 1.0
