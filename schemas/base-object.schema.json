@@ -2,27 +2,45 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://interopatlas.org/schemas/base-object.schema.json",
   "title": "InteropAtlas Base Object",
+  "description": "Base schema using English machine identifiers with bilingual Chinese/English knowledge fields.",
   "type": "object",
-  "required": ["id", "name", "type"],
+  "required": ["id", "type", "name_zh", "name_en"],
   "properties": {
     "id": {
       "type": "string",
       "pattern": "^[a-z0-9][a-z0-9._-]*$",
-      "description": "Stable machine-readable identifier."
-    },
-    "name": {
-      "type": "string",
-      "minLength": 1
+      "description": "Stable English machine-readable identifier."
     },
     "type": {
       "type": "string",
-      "minLength": 1
+      "pattern": "^[a-z][a-z0-9_-]*$",
+      "description": "English machine-readable object type."
     },
-    "description": {
-      "type": "string"
+    "name_zh": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Primary Chinese human-readable name."
+    },
+    "name_en": {
+      "type": "string",
+      "minLength": 1,
+      "description": "English human-readable name or official English name where applicable."
+    },
+    "official_name": {
+      "type": "string",
+      "description": "Official source-language name when it should be preserved separately from translated display names."
+    },
+    "description_zh": {
+      "type": "string",
+      "description": "Chinese description."
+    },
+    "description_en": {
+      "type": "string",
+      "description": "English description."
     },
     "status": {
-      "type": "string"
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_-]*$"
     },
     "sources": {
       "type": "array",
@@ -32,6 +50,10 @@
         "properties": {
           "url": {"type": "string", "format": "uri"},
           "title": {"type": "string"},
+          "language": {
+            "type": "string",
+            "description": "BCP 47 language tag when known, for example en or zh-CN."
+          },
           "accessed": {"type": "string", "format": "date"}
         },
         "additionalProperties": true
