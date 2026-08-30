@@ -1,0 +1,133 @@
+# InteropAtlas bootstrap relation set.
+# This file intentionally starts as a multi-document YAML stream so relations can be tested together.
+---
+id: json_schema_uses_json
+type: relation
+name_zh: JSON Schema 使用 JSON 数据模型
+name_en: JSON Schema uses the JSON data model
+source: {type: standard, id: json_schema_2020_12}
+relation: uses
+target: {type: standard, id: json_rfc8259}
+capability_context: [schema_validation, data_serialization]
+confidence: 1.0
+sources:
+  - url: https://json-schema.org/draft/2020-12/json-schema-core
+    title: JSON Schema Core 2020-12
+    language: en
+    accessed: 2026-08-30
+---
+id: json_provides_serialization
+type: relation
+name_zh: JSON 提供数据序列化能力
+name_en: JSON provides data serialization
+source: {type: standard, id: json_rfc8259}
+relation: provides
+target: {type: capability, id: data_serialization}
+confidence: 1.0
+---
+id: yaml_provides_serialization
+type: relation
+name_zh: YAML 提供数据序列化能力
+name_en: YAML provides data serialization
+source: {type: standard, id: yaml_1.2.2}
+relation: provides
+target: {type: capability, id: data_serialization}
+confidence: 1.0
+---
+id: json_schema_provides_validation
+type: relation
+name_zh: JSON Schema 提供数据结构验证能力
+name_en: JSON Schema provides schema validation
+source: {type: standard, id: json_schema_2020_12}
+relation: provides
+target: {type: capability, id: schema_validation}
+confidence: 1.0
+---
+id: http_uses_uri
+type: relation
+name_zh: HTTP 使用 URI 标识资源
+name_en: HTTP uses URIs to identify resources
+source: {type: standard, id: http_rfc9110}
+relation: uses
+target: {type: standard, id: uri_rfc3986}
+capability_context: [resource_identification, web_resource_transfer]
+confidence: 1.0
+sources:
+  - url: https://www.rfc-editor.org/rfc/rfc9110.html
+    title: RFC 9110 - HTTP Semantics
+    language: en
+    accessed: 2026-08-30
+---
+id: uri_provides_resource_identification
+type: relation
+name_zh: URI 提供资源标识能力
+name_en: URI provides resource identification
+source: {type: standard, id: uri_rfc3986}
+relation: provides
+target: {type: capability, id: resource_identification}
+confidence: 1.0
+---
+id: http_provides_web_resource_transfer
+type: relation
+name_zh: HTTP 提供 Web 资源传输能力
+name_en: HTTP provides Web resource transfer
+source: {type: standard, id: http_rfc9110}
+relation: provides
+target: {type: capability, id: web_resource_transfer}
+confidence: 1.0
+---
+id: unicode_provides_text_encoding
+type: relation
+name_zh: Unicode 提供统一文本字符编码基础
+name_en: Unicode provides the basis for text character encoding
+source: {type: standard, id: unicode_17.0}
+relation: provides
+target: {type: capability, id: text_encoding}
+confidence: 1.0
+---
+id: bcp47_provides_language_identification
+type: relation
+name_zh: BCP 47 提供语言标识能力
+name_en: BCP 47 provides language identification
+source: {type: standard, id: bcp47_rfc5646}
+relation: provides
+target: {type: capability, id: language_identification}
+confidence: 1.0
+---
+id: git_protocol_provides_version_control_transport
+type: relation
+name_zh: Git 传输协议支持分布式版本控制
+name_en: Git wire protocol supports distributed version control
+source: {type: standard, id: git_protocol_v2}
+relation: provides
+target: {type: capability, id: version_control}
+conditions_zh: 这里描述的是 Git 技术体系中的网络传输部分，不代表该协议单独实现完整版本控制。
+conditions_en: This describes the network transport portion of Git and does not imply that the wire protocol alone implements complete version control.
+confidence: 0.9
+---
+id: interopatlas_inspired_by_i40kg
+type: relation
+name_zh: InteropAtlas 的关系图设计参考 I40KG
+name_en: InteropAtlas graph design is informed by I40KG
+source: {type: reference_project, id: interopatlas}
+relation: inspired_by
+target: {type: reference_project, id: i40kg}
+confidence: 1.0
+---
+id: interopatlas_inspired_by_nist_smart_grid
+type: relation
+name_zh: InteropAtlas 的场景与缺口生命周期参考 NIST 智能电网框架
+name_en: InteropAtlas scenario and gap lifecycle is informed by the NIST Smart Grid framework
+source: {type: reference_project, id: interopatlas}
+relation: inspired_by
+target: {type: reference_project, id: nist_smart_grid_framework}
+confidence: 1.0
+---
+id: interopatlas_inspired_by_w3c_aikr
+type: relation
+name_zh: InteropAtlas 的标准清单与缺口分析参考 W3C AIKR
+name_en: InteropAtlas standards inventory and gap analysis is informed by W3C AIKR
+source: {type: reference_project, id: interopatlas}
+relation: inspired_by
+target: {type: reference_project, id: w3c_aikr}
+confidence: 1.0
