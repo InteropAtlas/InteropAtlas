@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/open-gap.schema.json",
+  "title": "InteropAtlas Open Gap Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "gap_type", "priority", "gap_status", "capabilities"],
+      "properties": {
+        "type": {"const": "open_gap"},
+        "gap_type": {
+          "type": "string",
+          "enum": ["NO_STANDARD", "NO_OPEN_STANDARD", "INSUFFICIENT_OPEN_STANDARD", "FRAGMENTATION", "BRIDGE_MISSING", "SEMANTIC_GAP", "SECURITY_GAP", "DISCOVERY_GAP", "IDENTITY_GAP", "IMPLEMENTATION_GAP", "TESTING_GAP", "CERTIFICATION_GAP"]
+        },
+        "priority": {
+          "type": "string",
+          "enum": ["critical", "high", "medium", "low", "unassessed"]
+        },
+        "gap_status": {
+          "type": "string",
+          "enum": ["discovered", "verified", "scoped", "active", "candidate_solution", "testing", "resolved", "closed", "rejected"]
+        },
+        "capabilities": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "related_standards": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "existing_non_open_solutions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "existing_open_attempts": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "why_insufficient_zh": {"type": "string"},
+        "why_insufficient_en": {"type": "string"},
+        "impact_zh": {"type": "string"},
+        "impact_en": {"type": "string"},
+        "closure_criteria_zh": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "closure_criteria_en": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "tracking": {
+          "type": "object",
+          "properties": {
+            "issue_url": {"type": "string", "format": "uri"},
+            "working_group": {"type": "string"},
+            "draft_url": {"type": "string", "format": "uri"}
+          },
+          "additionalProperties": true
+        }
+      }
+    }
+  ]
+}
