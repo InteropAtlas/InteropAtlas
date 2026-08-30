@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/reference-project.schema.json",
+  "title": "InteropAtlas Reference Project Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "project_kind", "scope", "features"],
+      "properties": {
+        "type": {"const": "reference_project"},
+        "project_kind": {
+          "type": "string",
+          "enum": ["standards_landscape", "standards_catalog", "knowledge_graph", "interoperability_framework", "gap_analysis", "navigator", "observatory", "other"]
+        },
+        "scope": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["standards_catalog", "relationship_mapping", "knowledge_graph", "gap_analysis", "scenario_mapping", "reference_architecture", "conformance", "community_governance", "machine_readable_data", "search_navigation", "other"]
+          },
+          "uniqueItems": true
+        },
+        "organization": {"type": "string"},
+        "official_url": {"type": "string", "format": "uri"},
+        "machine_readable": {"type": "string", "enum": ["yes", "partial", "no", "unknown"]},
+        "license": {"type": "string"},
+        "last_verified": {"type": "string", "format": "date"},
+        "lessons_zh": {"type": "array", "items": {"type": "string"}},
+        "lessons_en": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  ]
+}
