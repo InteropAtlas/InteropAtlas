@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/organization.schema.json",
+  "title": "InteropAtlas Organization Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "organization_kind"],
+      "properties": {
+        "type": {"const": "organization"},
+        "organization_kind": {
+          "type": "string",
+          "enum": ["sdo", "consortium", "foundation", "government_agency", "community_group", "open_source_project", "company", "academic", "other"]
+        },
+        "jurisdiction": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "domains": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "official_url": {"type": "string", "format": "uri"},
+        "governance_notes_zh": {"type": "string"},
+        "governance_notes_en": {"type": "string"}
+      }
+    }
+  ]
+}
