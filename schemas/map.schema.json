@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/map.schema.json",
+  "title": "InteropAtlas Map View",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "roots", "traversal"],
+      "properties": {
+        "type": {"const": "map"},
+        "map_kind": {
+          "type": "string",
+          "enum": ["self", "domain", "capability", "scenario", "openness", "gap", "architecture", "research", "custom"]
+        },
+        "roots": {
+          "type": "array",
+          "minItems": 1,
+          "items": {"$ref": "#/$defs/objectRef"},
+          "uniqueItems": true
+        },
+        "traversal": {
+          "type": "object",
+          "required": ["relation_types"],
+          "properties": {
+            "relation_types": {
+              "type": "array",
+              "minItems": 1,
+              "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+              "uniqueItems": true
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["outgoing", "incoming", "both"],
+              "default": "both"
+            },
+            "max_depth": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 20
+            },
+            "include_object_types": {
+              "type": "array",
+              "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+              "uniqueItems": true
+            }
+          },
+          "additionalProperties": true
+        },
+        "pinned": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/objectRef"},
+          "uniqueItems": true,
+          "description": "Optional objects always shown even if traversal does not currently reach them. This is navigation metadata, not a factual relation."
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name_zh", "name_en"],
+            "properties": {
+              "id": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+              "name_zh": {"type": "string"},
+              "name_en": {"type": "string"},
+              "object_types": {
+                "type": "array",
+                "items": {"type": "string"},
+                "uniqueItems": true
+              },
+              "object_ids": {
+                "type": "array",
+                "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+                "uniqueItems": true
+              }
+            },
+            "additionalProperties": true
+          }
+        },
+        "notes_zh": {"type": "string"},
+        "notes_en": {"type": "string"}
+      },
+      "$defs": {
+        "objectRef": {
+          "type": "object",
+          "required": ["type", "id"],
+          "properties": {
+            "type": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+            "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+          },
+          "additionalProperties": false
+        }
+      }
+    }
+  ]
+}
