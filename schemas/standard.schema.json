@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/standard.schema.json",
+  "title": "InteropAtlas Standard Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "kind", "capabilities"],
+      "properties": {
+        "type": {"const": "standard"},
+        "kind": {
+          "type": "string",
+          "enum": ["standard", "protocol", "specification", "api", "format", "profile", "interface", "device_class"],
+          "description": "Entity kind inside the broader Standard object family."
+        },
+        "organization": {
+          "type": "string",
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "description": "Organization object id responsible for governance or publication."
+        },
+        "domains": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+          "uniqueItems": true
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["physical", "link_bus", "network_transport", "data_syntax", "semantics", "capability_service", "agent_coordination", "social_institutional"]
+          },
+          "uniqueItems": true
+        },
+        "system_roles": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["sense", "compute", "act", "store", "communicate", "coordinate", "identity_trust", "govern"]
+          },
+          "uniqueItems": true
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "communication_models": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["request_response", "publish_subscribe", "streaming", "event", "shared_memory", "message_queue", "peer_to_peer", "client_server", "bus", "federation", "other"]
+          },
+          "uniqueItems": true
+        },
+        "transports": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "maturity": {
+          "type": "string",
+          "enum": ["draft", "experimental", "emerging", "mature", "legacy", "deprecated", "unknown"]
+        },
+        "openness": {
+          "type": "object",
+          "properties": {
+            "specification_access": {"type": "string", "enum": ["open", "restricted", "paid", "unknown"]},
+            "governance": {"type": "string", "enum": ["open", "partially_open", "closed", "unknown"]},
+            "patent_terms": {"type": "string", "enum": ["royalty_free", "rand", "rand_z", "royalty_bearing", "unknown", "not_applicable"]},
+            "open_source_implementations": {"type": "string", "enum": ["multiple", "one", "none_known", "unknown"]},
+            "certification": {"type": "string", "enum": ["open", "restricted", "paid", "not_required", "unknown"]},
+            "vendor_neutrality": {"type": "string", "enum": ["high", "medium", "low", "unknown"]}
+          },
+          "additionalProperties": true
+        },
+        "official_url": {"type": "string", "format": "uri"},
+        "versions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["version"],
+            "properties": {
+              "version": {"type": "string"},
+              "date": {"type": "string", "format": "date"},
+              "status": {"type": "string"},
+              "url": {"type": "string", "format": "uri"}
+            },
+            "additionalProperties": true
+          }
+        }
+      }
+    }
+  ]
+}
