@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/capability.schema.json",
+  "title": "InteropAtlas Capability Object",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "category"],
+      "properties": {
+        "type": {"const": "capability"},
+        "category": {
+          "type": "string",
+          "enum": ["sense", "transport", "represent", "compute", "reason", "communicate", "coordinate", "act", "store", "identity_trust", "govern"]
+        },
+        "layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["physical", "link_bus", "network_transport", "data_syntax", "semantics", "capability_service", "agent_coordination", "social_institutional"]
+          },
+          "uniqueItems": true
+        },
+        "domains": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+          "uniqueItems": true
+        },
+        "parent_capabilities": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "constraints": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true,
+          "description": "Common constraint dimensions relevant to this capability, e.g. latency, bandwidth, range, power, safety."
+        }
+      }
+    }
+  ]
+}
