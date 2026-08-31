@@ -4,7 +4,7 @@
 
 ## 使用原则
 
-在设计新的数据模型、标识体系、验证规则、文档结构、治理流程或标准化机制之前，优先执行 Prior Art Check（既有方案调查）：
+在设计新的数据模型、标识体系、验证规则、文档结构、治理流程、交互方式或标准化机制之前，优先执行 Prior Art Check（既有方案调查）：
 
 ```text
 我们遇到了什么问题？
@@ -179,6 +179,103 @@ FAIR = Findable、Accessible、Interoperable、Reusable。
 - SWHID specification: https://docs.softwareheritage.org/devel/swh-model/persistent-identifiers.html
 
 对应 IA：自产标准 ID、对象 Persistent ID、Resolver、版本与 URL 分离。
+
+## 10. WHATWG HTML + WAI-ARIA APG + WCAG
+
+**重点参考：网站交互语义、Link / Button 分工、键盘行为、一致性与可预期性。**
+
+可借鉴：
+- `<a href>` 是前往资源的 Hyperlink，不应被随意劫持成局部动作；
+- `<button>` 用于当前上下文中的动作；
+- 同一功能的组件在不同页面应被一致识别和操作；
+- Link 文本应让用户能够理解点击后会发生什么；
+- 优先使用原生 HTML 语义，而不是自造相似控件。
+
+重点页面：
+- HTML links: https://html.spec.whatwg.org/multipage/links.html
+- HTML button: https://html.spec.whatwg.org/multipage/form-elements.html#the-button-element
+- WAI-ARIA Link Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/link/
+- WAI-ARIA Button Pattern: https://www.w3.org/WAI/ARIA/apg/patterns/button/
+- WCAG Consistent Identification: https://www.w3.org/WAI/WCAG22/Understanding/consistent-identification.html
+
+对应 IA：Human Route、Local Map、导航、筛选、可访问性、交互规范。
+
+## 11. Shneiderman Information Visualization Mantra
+
+**重点参考：信息可视化任务顺序。**
+
+经典原则：
+
+> Overview first, zoom and filter, then details-on-demand.
+
+可借鉴：
+- 先提供结构概览；
+- 再让用户缩小范围、筛选关系；
+- 最后按需进入对象详情；
+- 不应一开始就把全部图数据和全部细节同时压给用户。
+
+重点页面：
+- Ben Shneiderman: https://www.cs.umd.edu/~ben/about.html
+
+对应 IA：Capability-first 首页、Local Map、关系筛选、对象详情、后续全局地图。
+
+## 12. Furnas — Focus + Context / Fisheye Views
+
+**重点参考：大型信息结构中的焦点 + 周边上下文。**
+
+可借鉴：
+- 用户当前关注对象显示更详细；
+- 周边邻居作为上下文保留；
+- 不必为了理解一个局部对象而一次显示完整巨大网络。
+
+重点页面：
+- G. W. Furnas, Generalized Fisheye Views, CHI 1986: https://doi.org/10.1145/22627.22342
+
+对应 IA：一跳 Local Map、局部探索、未来 semantic zoom / focus+context 视图。
+
+## 13. Neo4j Bloom
+
+**重点参考：成熟知识图谱产品中的节点探索、Expand、Inspect、按关系类型 / 方向展开。**
+
+可借鉴：
+- Inspect（查看详情）与 Expand（展开邻居）是不同动作；
+- 可以从一个节点逐步扩展其 immediate neighbors；
+- 可以按关系类型和方向选择性扩展；
+- 图探索不等于对象详情页导航。
+
+重点页面：
+- Scene interactions: https://neo4j.com/docs/bloom-user-guide/current/bloom-visual-tour/bloom-scene-interactions/
+- Default actions: https://neo4j.com/docs/bloom-user-guide/current/bloom-appendix/bloom-appendix/
+
+对应 IA：Local Map、连续探索、关系筛选、对象详情与地图聚焦分工。
+
+## 14. Graph visualization libraries
+
+在进入复杂交互图之前需要重点评估：
+
+### Cytoscape.js
+- 图理论模型 + 分析 + 交互式可视化；
+- 支持 pan、zoom、selection 等成熟交互；
+- https://js.cytoscape.org/
+
+### Sigma.js
+- 面向大规模图的 WebGL 浏览器渲染；
+- 与 graphology 配合；
+- https://www.sigmajs.org/
+
+### Graphviz
+- 成熟自动图布局；
+- DOT 图描述语言；
+- 可输出 SVG 等格式；
+- https://graphviz.org/
+
+### D3 / d3-force
+- 可组合数据可视化与 force-directed layout；
+- https://d3js.org/d3-force
+
+对应 IA：未来 Mappable / Explorable 阶段的图渲染与布局选型。
+
+原则：现阶段小规模一跳视图可以继续使用简单 HTML/CSS 验证信息架构；一旦需求进入自由拖拽、缩放、复杂自动布局、上千节点等，应先评估成熟库，不自行重写完整图渲染基础设施。
 
 ## 后续可继续扩展的参考池
 
