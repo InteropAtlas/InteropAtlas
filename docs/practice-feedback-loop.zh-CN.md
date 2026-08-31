@@ -117,7 +117,47 @@ InteropAtlas 应帮助真实项目：
 
 ## 覆盖率作为反馈指标，而不是目标本身
 
-对于一个真实场景，可以统计：
+覆盖评估不能只回答“有没有收录某个标准”。至少应区分以下两个核心维度：
+
+### Standard Coverage（标准覆盖率）
+
+回答：
+
+> 面对一个 Scenario / Capability，实际需要的重要标准、规范、协议或约定，InteropAtlas 已经收录了多少？
+
+它主要衡量 Atlas 的对象层是否存在明显缺项。
+
+例如一个场景实际涉及 10 个重要标准，而 Atlas 在实践开始前已有 7 个，则可以记录对象层面的标准覆盖情况。具体百分比只有在候选集合边界足够明确时才应计算，不能制造虚假的精确度。
+
+### Solution-Space Coverage（方案空间覆盖率）
+
+回答：
+
+> 面对一个 Capability，InteropAtlas 是否发现并呈现了主要可行路线，而不是只找到第一个能用的方案？
+
+它关注的不只是对象数量，还包括：
+
+- 主要替代方案是否被发现；
+- 不同标准化性质的方案是否被正确区分；
+- 候选之间的重要关系是否存在；
+- 各方案优化目标、适用条件和限制是否足够明确；
+- 是否存在因搜索路径、生态偏好或先入为主而漏掉的重要路线。
+
+因此，“已经收录一个可用标准”不能自动视为方案空间覆盖完成。
+
+Engine v0.1 的版本表达实践就是第一个例子：仅收录 SemVer 时，`version_expression` 已经具有一个可用方案，因此 Standard Coverage 并非零；但由于 CalVer 这一主要替代路线尚未被发现，Solution-Space Coverage 仍明显不足。
+
+这两个指标互补：
+
+```text
+Standard Coverage
+  → 我需要的重要东西，Atlas 里有没有？
+
+Solution-Space Coverage
+  → Atlas 有没有让我看到主要有哪些路可以走？
+```
+
+对于一个真实场景，还可以继续记录：
 
 - 实际需要研究的标准数量；
 - 开始实践前 Atlas 已收录数量；
@@ -126,13 +166,13 @@ InteropAtlas 应帮助真实项目：
 - Atlas 成功帮助发现的候选数量；
 - Atlas 漏掉、最终由外部研究发现的候选数量。
 
-可以形成类似 Coverage Assessment（覆盖评估）的结果。
+此前提出的 Relation Coverage、Explanation Coverage、Decision Coverage、Practice Coverage 等维度仍然有效；Standard Coverage 与 Solution-Space Coverage 用来进一步区分“对象是否存在”和“方案空间是否被充分探索”。这些维度后续可逐渐形成正式的 Coverage Assessment（覆盖评估）模型。
 
 覆盖率的目的不是追求漂亮数字，而是回答：
 
 > 当一个真实项目需要标准知识时，InteropAtlas 到底能帮助到什么程度？
 
-随着项目成熟，同类型真实场景的初始覆盖率和发现质量应逐渐提高。
+随着项目成熟，同类型真实场景的初始覆盖率、方案发现完整度和决策支持质量应逐渐提高。
 
 ## 实践记录的长期价值
 
@@ -158,7 +198,7 @@ InteropAtlas 应帮助真实项目：
 2. 从这些需求发现可能涉及的标准、规范、协议、开放方法和实现；
 3. 对发现的候选执行 Alternative Discovery；
 4. 与当前 Atlas 数据比较；
-5. 记录初始覆盖率和缺失项；
+5. 记录 Standard Coverage 与 Solution-Space Coverage，并逐步补充其他覆盖维度；
 6. 收录重要缺项并建立关系；
 7. 开始 Engine 实现；
 8. 开发过程中继续发现并补充；
