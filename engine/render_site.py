@@ -12,15 +12,24 @@ import markdown
 
 from bootstrap_query import index_objects, load_atlas
 from graph_index import GraphIndex
-from render_markdown import display_name, human_value, output_path, render_object
+from render_markdown import (
+    FIELD_REFERENCE_LABELS,
+    RELATION_LABELS,
+    display_name,
+    human_value,
+    object_link,
+    output_path,
+    relation_group,
+    render_object,
+)
 
 SUPPORTED_TYPES = {"implementation", "capability", "standard"}
 
 STYLE = """
-:root{color-scheme:light dark;--bg:#fff;--fg:#202124;--muted:#57606a;--border:#d0d7de;--code:#f6f8fa;--link:#0969da;--card:#fff}
-@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22}}
-html[data-theme='light']{color-scheme:light;--bg:#fff;--fg:#202124;--muted:#57606a;--border:#d0d7de;--code:#f6f8fa;--link:#0969da;--card:#fff}
-html[data-theme='dark']{color-scheme:dark;--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22}
+:root{color-scheme:light dark;--bg:#fff;--fg:#202124;--muted:#57606a;--border:#d0d7de;--code:#f6f8fa;--link:#0969da;--card:#fff;--accent-soft:#f0f6ff}
+@media (prefers-color-scheme:dark){:root{--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22;--accent-soft:#0d1f33}}
+html[data-theme='light']{color-scheme:light;--bg:#fff;--fg:#202124;--muted:#57606a;--border:#d0d7de;--code:#f6f8fa;--link:#0969da;--card:#fff;--accent-soft:#f0f6ff}
+html[data-theme='dark']{color-scheme:dark;--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22;--accent-soft:#0d1f33}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:980px;margin:0 auto;padding:32px 20px;line-height:1.65;color:var(--fg);background:var(--bg)}
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
 nav{display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
@@ -32,6 +41,14 @@ h1,h2,h3{line-height:1.25}h2{margin-top:34px}.meta,.muted{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{border:1px solid var(--border);background:var(--card);border-radius:8px;padding:16px}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.category-card{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:18px;scroll-margin-top:24px}.category-card h3{margin:0 0 6px}.category-card ul{margin:12px 0 0;padding-left:20px}.category-card li+li{margin-top:8px}.count{font-size:.9em;color:var(--muted)}
 details{border-top:1px solid var(--border);padding:14px 0}summary{cursor:pointer;font-weight:600}details .grid{margin-top:14px}
+.local-map{margin:28px 0 10px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--code)}
+.local-map-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}.local-map-title strong{font-size:1.05em}.local-map-title span{font-size:.86em;color:var(--muted)}
+.local-map-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,.8fr) minmax(0,1fr);gap:16px;align-items:center}
+.map-column{display:flex;flex-direction:column;gap:10px}.map-column-title{text-align:center;color:var(--muted);font-size:.82em;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.map-node{border:1px solid var(--border);background:var(--card);border-radius:11px;padding:11px 12px;min-width:0}.map-node-name{font-weight:600;overflow-wrap:anywhere}.map-edge{display:block;margin-top:4px;color:var(--muted);font-size:.82em;line-height:1.4}.map-origin{display:inline-block;margin-left:5px;padding:1px 5px;border:1px solid var(--border);border-radius:999px;font-size:.9em}
+.map-center{border:2px solid var(--link);background:var(--accent-soft);text-align:center;padding:18px 14px}.map-center .map-node-name{font-size:1.05em}.map-center .map-edge{margin-top:6px}
+.map-empty{color:var(--muted);font-size:.9em;text-align:center;padding:10px}
+@media(max-width:760px){.local-map-grid{grid-template-columns:1fr}.map-center{order:-1}.map-column-title{text-align:left}.local-map-title{display:block}.local-map-title span{display:block;margin-top:4px}}
 """
 
 THEME_SCRIPT = """
@@ -85,6 +102,94 @@ def breadcrumb_for(obj: dict, prefix: str) -> str:
     labels = {"standard": "标准与规范", "implementation": "实现"}
     label = labels.get(str(object_type), str(object_type or "对象"))
     return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{name}'
+
+
+def object_html_link(source_obj: dict, target_obj: dict | None, fallback: str) -> str:
+    label = html.escape(display_name(target_obj, fallback))
+    if not target_obj or target_obj.get("type") not in SUPPORTED_TYPES:
+        return label
+    link = object_link(source_obj, target_obj)
+    if not link:
+        return label
+    href = html.escape(str(Path(link).with_suffix(".html")).replace("\\", "/"), quote=True)
+    return f'<a href="{href}">{label}</a>'
+
+
+def map_edge_label(edge) -> tuple[str, str]:
+    if edge.origin == "relation":
+        return RELATION_LABELS.get(edge.kind, edge.kind), relation_group(edge.kind)
+    return FIELD_REFERENCE_LABELS.get(edge.field or "", edge.field or "字段引用"), "字段引用"
+
+
+def map_column_html(source_obj: dict, index: dict[str, dict], edges: list, incoming: bool) -> str:
+    grouped: dict[str, list] = defaultdict(list)
+    for edge in edges:
+        neighbor_id = edge.source_id if incoming else edge.target_id
+        grouped[neighbor_id].append(edge)
+
+    if not grouped:
+        return '<div class="map-empty">暂无</div>'
+
+    cards = []
+    for neighbor_id, neighbor_edges in sorted(
+        grouped.items(),
+        key=lambda item: display_name(index.get(item[0]), item[0]),
+    ):
+        neighbor = index.get(neighbor_id)
+        labels = []
+        for edge in sorted(neighbor_edges, key=lambda item: (item.origin, item.kind, item.field or "")):
+            label, group = map_edge_label(edge)
+            origin = "Relation" if edge.origin == "relation" else "字段"
+            arrow = "→ 当前对象" if incoming else "当前对象 →"
+            labels.append(
+                f'<span class="map-edge">{html.escape(arrow)} {html.escape(label)} · {html.escape(group)}'
+                f'<span class="map-origin">{origin}</span></span>'
+            )
+        cards.append(
+            '<div class="map-node">'
+            f'<div class="map-node-name">{object_html_link(source_obj, neighbor, neighbor_id)}</div>'
+            f'{"".join(labels)}</div>'
+        )
+    return "".join(cards)
+
+
+def build_local_map(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str:
+    object_id = str(obj.get("id"))
+    outgoing = graph.forward(object_id)
+    incoming = graph.backlinks(object_id)
+    if not outgoing and not incoming:
+        return ""
+
+    neighbor_ids = {
+        edge.target_id for edge in outgoing
+    } | {
+        edge.source_id for edge in incoming
+    }
+    center_name = html.escape(display_name(obj, object_id))
+    center_type = html.escape(str(obj.get("type") or "object"))
+    return (
+        '<section class="local-map" aria-label="一跳局部地图">'
+        '<div class="local-map-title"><strong>一跳局部地图</strong>'
+        f'<span>{len(neighbor_ids)} 个邻居 · {len(incoming)} 条入向连接 · {len(outgoing)} 条出向连接</span></div>'
+        '<div class="local-map-grid">'
+        '<div class="map-column"><div class="map-column-title">指向当前对象</div>'
+        f'{map_column_html(obj, index, incoming, True)}</div>'
+        '<div class="map-node map-center">'
+        f'<div class="map-node-name">{center_name}</div>'
+        f'<span class="map-edge">当前对象 · {center_type}</span></div>'
+        '<div class="map-column"><div class="map-column-title">当前对象指向</div>'
+        f'{map_column_html(obj, index, outgoing, False)}</div>'
+        '</div></section>'
+    )
+
+
+def inject_local_map(content: str, local_map: str) -> str:
+    if not local_map:
+        return content
+    marker = "<h2>基本信息</h2>"
+    if marker in content:
+        return content.replace(marker, f"{local_map}{marker}", 1)
+    return local_map + content
 
 
 def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
@@ -144,6 +249,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target = output / html_path
         target.parent.mkdir(parents=True, exist_ok=True)
         content = markdown_to_html(render_object(obj, index, graph))
+        content = inject_local_map(content, build_local_map(obj, index, graph))
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(
             page_shell(
