@@ -41,15 +41,15 @@ h1,h2,h3{line-height:1.25}h2{margin-top:34px}.meta,.muted{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{border:1px solid var(--border);background:var(--card);border-radius:8px;padding:16px}
 .category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.category-card{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:18px;scroll-margin-top:24px}.category-card h3{margin:0 0 6px}.category-card ul{margin:12px 0 0;padding-left:20px}.category-card li+li{margin-top:8px}.count{font-size:.9em;color:var(--muted)}
 details{border-top:1px solid var(--border);padding:14px 0}summary{cursor:pointer;font-weight:600}details .grid{margin-top:14px}
-.local-map{margin:28px 0 10px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--code)}
+.local-map{margin:28px 0 10px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--code);scroll-margin-top:20px}
 .local-map-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}.local-map-title strong{font-size:1.05em}.local-map-title span{font-size:.86em;color:var(--muted)}
 .map-stats-current{color:var(--fg);font-weight:600}.map-stats-baseline{white-space:nowrap}
-.map-controls{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}.map-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.map-filter-label{font-size:.82em;color:var(--muted);margin-right:2px}.map-filter{border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:4px 9px;font-size:.8em;cursor:pointer}.map-filter:hover{border-color:var(--link)}.map-filter.is-active{border-color:var(--link);background:var(--accent-soft);color:var(--link)}
+.map-controls{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}.map-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.map-filter-label{font-size:.82em;color:var(--muted);margin-right:2px}.map-filter,.map-recenter{border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:4px 9px;font-size:.8em;cursor:pointer}.map-filter:hover,.map-recenter:hover{border-color:var(--link)}.map-filter.is-active{border-color:var(--link);background:var(--accent-soft);color:var(--link)}
 .local-map-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,.8fr) minmax(0,1fr);gap:16px;align-items:center}
 .map-column{display:flex;flex-direction:column;gap:10px}.map-column-title{text-align:center;color:var(--muted);font-size:.82em;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.map-node{border:1px solid var(--border);background:var(--card);border-radius:11px;padding:11px 12px;min-width:0}.map-node-name{font-weight:600;overflow-wrap:anywhere}.map-edge{display:block;margin-top:4px;color:var(--muted);font-size:.82em;line-height:1.4}.map-origin{display:inline-block;margin-left:5px;padding:1px 5px;border:1px solid var(--border);border-radius:999px;font-size:.9em}
+.map-node{border:1px solid var(--border);background:var(--card);border-radius:11px;padding:11px 12px;min-width:0}.map-node-name{font-weight:600;overflow-wrap:anywhere}.map-edge{display:block;margin-top:4px;color:var(--muted);font-size:.82em;line-height:1.4}.map-origin{display:inline-block;margin-left:5px;padding:1px 5px;border:1px solid var(--border);border-radius:999px;font-size:.9em}.map-node-actions{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}.map-recenter{padding:3px 8px;color:var(--link);background:transparent}
 .map-center{border:2px solid var(--link);background:var(--accent-soft);text-align:center;padding:18px 14px}.map-center .map-node-name{font-size:1.05em}.map-center .map-edge{margin-top:6px}
-.map-empty,.map-filter-empty{color:var(--muted);font-size:.9em;text-align:center;padding:10px}.map-filter-empty[hidden]{display:none}
+.map-empty,.map-filter-empty{color:var(--muted);font-size:.9em;text-align:center;padding:10px}.map-filter-empty[hidden]{display:none}.map-loading{opacity:.6;pointer-events:none}
 @media(max-width:760px){.local-map-grid{grid-template-columns:1fr}.map-center{order:-1}.map-column-title{text-align:left}.local-map-title{display:block}.local-map-title span{display:block;margin-top:4px}.map-filter-row{align-items:flex-start}.map-stats-baseline{white-space:normal}}
 """
 
@@ -83,15 +83,13 @@ MAP_SCRIPT = """
     let outgoing=0;
     section.querySelectorAll('.map-column[data-direction]').forEach(function(column){
       const direction=column.dataset.direction;
-      column.querySelectorAll('.map-node[data-neighbor-id]:not([hidden])').forEach(function(node){
-        neighborIds.add(node.dataset.neighborId);
-      });
+      column.querySelectorAll('.map-node[data-neighbor-id]:not([hidden])').forEach(function(node){neighborIds.add(node.dataset.neighborId);});
       const visibleEdges=Array.from(column.querySelectorAll('.map-edge[data-origin]')).filter(function(edge){return !edge.hidden;}).length;
-      if(direction==='incoming') incoming+=visibleEdges;
-      if(direction==='outgoing') outgoing+=visibleEdges;
+      if(direction==='incoming')incoming+=visibleEdges;
+      if(direction==='outgoing')outgoing+=visibleEdges;
     });
     const current=section.querySelector('.map-stats-current');
-    if(current) current.textContent='当前：'+neighborIds.size+' 个邻居 · '+incoming+' 条入向连接 · '+outgoing+' 条出向连接';
+    if(current)current.textContent='当前：'+neighborIds.size+' 个邻居 · '+incoming+' 条入向连接 · '+outgoing+' 条出向连接';
   }
   function apply(section){
     const origin=section.dataset.filterOrigin||'all';
@@ -106,12 +104,20 @@ MAP_SCRIPT = """
       column.querySelectorAll('.map-node:not(.map-center)').forEach(function(node){
         const hasVisible=Array.from(node.querySelectorAll('.map-edge[data-origin]')).some(function(edge){return !edge.hidden;});
         node.hidden=!hasVisible;
-        if(hasVisible) visible+=1;
+        if(hasVisible)visible+=1;
       });
       const empty=column.querySelector('.map-filter-empty');
-      if(empty) empty.hidden=visible!==0;
+      if(empty)empty.hidden=visible!==0;
     });
     updateStats(section);
+  }
+  function absolutizeMap(section, baseUrl){
+    section.querySelectorAll('a[href]').forEach(function(link){
+      link.setAttribute('href',new URL(link.getAttribute('href'),baseUrl).href);
+    });
+    section.querySelectorAll('[data-map-href]').forEach(function(button){
+      button.dataset.mapHref=new URL(button.dataset.mapHref,baseUrl).href;
+    });
   }
   window.filterLocalMap=function(button){
     const section=button.closest('.local-map');
@@ -133,6 +139,29 @@ MAP_SCRIPT = """
     }
     setActive(section,kind,value);
     apply(section);
+  };
+  window.recenterLocalMap=async function(button){
+    const section=button.closest('.local-map');
+    if(!section)return;
+    const href=new URL(button.dataset.mapHref,location.href).href;
+    section.classList.add('map-loading');
+    button.textContent='载入中…';
+    try{
+      const response=await fetch(href,{credentials:'same-origin'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      const documentText=await response.text();
+      const parsed=new DOMParser().parseFromString(documentText,'text/html');
+      const nextMap=parsed.querySelector('.local-map');
+      if(!nextMap){location.href=href;return;}
+      absolutizeMap(nextMap,response.url||href);
+      const replacement=document.importNode(nextMap,true);
+      section.replaceWith(replacement);
+      apply(replacement);
+      replacement.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(error){
+      console.warn('Local map recenter failed; opening target page instead.',error);
+      location.href=href;
+    }
   };
   addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.local-map').forEach(apply);});
 })();
@@ -177,15 +206,21 @@ def breadcrumb_for(obj: dict, prefix: str) -> str:
     return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{name}'
 
 
-def object_html_link(source_obj: dict, target_obj: dict | None, fallback: str) -> str:
-    label = html.escape(display_name(target_obj, fallback))
+def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
     if not target_obj or target_obj.get("type") not in SUPPORTED_TYPES:
-        return label
+        return None
     link = object_link(source_obj, target_obj)
     if not link:
+        return None
+    return str(Path(link).with_suffix(".html")).replace("\\", "/")
+
+
+def object_html_link(source_obj: dict, target_obj: dict | None, fallback: str) -> str:
+    label = html.escape(display_name(target_obj, fallback))
+    href = object_html_href(source_obj, target_obj)
+    if not href:
         return label
-    href = html.escape(str(Path(link).with_suffix(".html")).replace("\\", "/"), quote=True)
-    return f'<a href="{href}">{label}</a>'
+    return f'<a href="{html.escape(href, quote=True)}">{label}</a>'
 
 
 def map_edge_label(edge) -> tuple[str, str]:
@@ -220,10 +255,19 @@ def map_column_html(source_obj: dict, index: dict[str, dict], edges: list, incom
                 f'{html.escape(arrow)} {html.escape(label)} · {html.escape(group)}'
                 f'<span class="map-origin">{origin}</span></span>'
             )
+        href = object_html_href(source_obj, neighbor)
+        actions = ""
+        if href:
+            actions = (
+                '<div class="map-node-actions">'
+                f'<button type="button" class="map-recenter" data-map-href="{html.escape(href, quote=True)}" '
+                'onclick="recenterLocalMap(this)">设为中心</button>'
+                '</div>'
+            )
         cards.append(
             f'<div class="map-node" data-neighbor-id="{html.escape(neighbor_id, quote=True)}">'
             f'<div class="map-node-name">{object_html_link(source_obj, neighbor, neighbor_id)}</div>'
-            f'{"".join(labels)}</div>'
+            f'{"".join(labels)}{actions}</div>'
         )
     cards.append('<div class="map-filter-empty" hidden>当前筛选下暂无邻居</div>')
     return "".join(cards)
@@ -273,7 +317,8 @@ def build_local_map(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str
     current_stats = f"当前：{len(neighbor_ids)} 个邻居 · {len(incoming)} 条入向连接 · {len(outgoing)} 条出向连接"
     baseline_stats = f"完整：{len(neighbor_ids)} 个邻居 · {len(incoming)} 条入向连接 · {len(outgoing)} 条出向连接"
     return (
-        '<section class="local-map" aria-label="一跳局部地图" data-filter-origin="all" data-filter-group="all">'
+        f'<section class="local-map" aria-label="一跳局部地图" data-center-id="{html.escape(object_id, quote=True)}" '
+        'data-filter-origin="all" data-filter-group="all">'
         '<div class="local-map-title"><strong>一跳局部地图</strong>'
         f'<span><span class="map-stats-current">{current_stats}</span> ｜ '
         f'<span class="map-stats-baseline">{baseline_stats}</span></span></div>'
@@ -283,7 +328,7 @@ def build_local_map(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str
         f'{map_column_html(obj, index, incoming, True)}</div>'
         '<div class="map-node map-center">'
         f'<div class="map-node-name">{center_name}</div>'
-        f'<span class="map-edge">当前对象 · {center_type}</span></div>'
+        f'<span class="map-edge">当前中心 · {center_type}</span></div>'
         '<div class="map-column" data-direction="outgoing"><div class="map-column-title">当前对象指向</div>'
         f'{map_column_html(obj, index, outgoing, False)}</div>'
         '</div></section>'
