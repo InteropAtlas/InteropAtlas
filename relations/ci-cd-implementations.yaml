@@ -1,0 +1,21 @@
+id: forgejo_actions_alternative_to_github_actions
+type: relation
+name_zh: Forgejo Actions 是 GitHub Actions 的替代实现
+name_en: Forgejo Actions as an alternative to GitHub Actions
+source:
+  type: implementation
+  id: forgejo_actions
+relation: alternative_to
+target:
+  type: implementation
+  id: github_actions
+capability_context:
+  - automated_build_deployment
+conditions_zh: >-
+  两者都可用于仓库工作流自动化与 CI/CD。Forgejo Actions 有意保持与 GitHub Actions 相似的使用模型，
+  许多工作流可以少量修改后迁移，但 Forgejo 官方明确表示并不追求完全兼容，因此这里不使用 compatible_with。
+conditions_en: >-
+  Both can provide repository workflow automation and CI/CD. Forgejo Actions intentionally uses a familiar
+  model and many workflows can migrate with small changes, but Forgejo explicitly does not target full
+  compatibility, so this relation is not modeled as compatible_with.
+confidence: 0.95
