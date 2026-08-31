@@ -231,6 +231,49 @@ Map Center  = 当前局部地图正在观察的中心节点
 
 结论：**废弃该交互模式，不作为 IA 后续模式参考。**
 
+## 13. 浏览器级交互验收
+
+仅仅做到：
+
+```text
+Python 运行成功
+→ HTML 能生成
+→ GitHub Pages 部署成功
+```
+
+不能证明真实用户交互正确。
+
+依据：
+- W3C WebDriver：https://www.w3.org/TR/webdriver/
+- W3C Browser Testing and Tools Working Group：https://www.w3.org/groups/wg/browser-tools-testing/
+- Playwright Test：https://playwright.dev/docs/intro
+
+后续交互功能的最低交付要求应逐步升级为：
+
+```text
+Static / Unit checks
+        ↓
+Site build
+        ↓
+Real browser E2E
+        ↓
+Pages deployment
+```
+
+至少覆盖：
+- 点击对象标题，浏览器是否真实导航到目标对象页；
+- 点击 `以此为地图中心`，URL / 正文是否保持符合设计，地图中心是否真实变化；
+- 筛选按钮是否真实改变可见节点和统计；
+- 深色模式切换是否真实生效；
+- 浏览器 Back / Forward 在引入地图 History 状态后是否正确恢复；
+- Capability / Standard / Implementation 三类页面是否行为一致。
+
+工具层面优先采用现成浏览器自动化实现，例如 Playwright；不自行发明浏览器测试协议。
+
+原则：
+
+> **构建成功 ≠ 交互验收成功。**
+
 ---
 
 本文件本身不是最终 IA Standard；它是用于约束当前 Human-readable Route 的 Provisional Baseline，并应随真实使用反馈和外部标准研究持续修订。
