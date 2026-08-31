@@ -23,13 +23,14 @@ html[data-theme='light']{color-scheme:light;--bg:#fff;--fg:#202124;--muted:#5760
 html[data-theme='dark']{color-scheme:dark;--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:980px;margin:0 auto;padding:32px 20px;line-height:1.65;color:var(--fg);background:var(--bg)}
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
-nav{display:flex;align-items:center;gap:8px;margin-bottom:28px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+nav{display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .theme-toggle{margin-left:auto;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 11px;cursor:pointer}
+.breadcrumb{font-size:.92em;color:var(--muted);margin:0 0 24px}.breadcrumb span{margin:0 6px}.breadcrumb a{color:var(--muted)}
 code{background:var(--code);padding:.15em .35em;border-radius:4px}
 blockquote{color:var(--muted);border-left:4px solid var(--border);margin-left:0;padding-left:16px}
 h1,h2,h3{line-height:1.25}h2{margin-top:34px}.meta,.muted{color:var(--muted)}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}.card{border:1px solid var(--border);background:var(--card);border-radius:8px;padding:16px}
-.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.category-card{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:18px}.category-card h3{margin:0 0 6px}.category-card ul{margin:12px 0 0;padding-left:20px}.category-card li+li{margin-top:8px}.count{font-size:.9em;color:var(--muted)}
+.category-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:16px}.category-card{border:1px solid var(--border);background:var(--card);border-radius:10px;padding:18px;scroll-margin-top:24px}.category-card h3{margin:0 0 6px}.category-card ul{margin:12px 0 0;padding-left:20px}.category-card li+li{margin-top:8px}.count{font-size:.9em;color:var(--muted)}
 details{border-top:1px solid var(--border);padding:14px 0}summary{cursor:pointer;font-weight:600}details .grid{margin-top:14px}
 """
 
@@ -49,10 +50,11 @@ THEME_SCRIPT = """
 """
 
 
-def page_shell(title: str, body: str, prefix: str = "") -> str:
+def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None = None) -> str:
+    trail = f'<div class="breadcrumb">{breadcrumb}</div>' if breadcrumb else ""
     return f"""<!doctype html>
 <html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{html.escape(title)} · InteropAtlas</title><style>{STYLE}</style>{THEME_SCRIPT}</head>
-<body><nav><a href=\"{prefix}index.html\"><strong>InteropAtlas</strong></a><span>· 人类可读实验站</span><button id=\"theme-toggle\" class=\"theme-toggle\" type=\"button\" onclick=\"toggleTheme()\">主题</button></nav>{body}</body></html>"""
+<body><nav><a href=\"{prefix}index.html\"><strong>InteropAtlas</strong></a><span>· 人类可读实验站</span><button id=\"theme-toggle\" class=\"theme-toggle\" type=\"button\" onclick=\"toggleTheme()\">主题</button></nav>{trail}{body}</body></html>"""
 
 
 def markdown_to_html(text: str) -> str:
@@ -64,6 +66,25 @@ def object_card(obj: dict, path: Path) -> str:
     name = html.escape(display_name(obj, str(obj.get("id"))))
     summary = html.escape(str(obj.get("summary_zh") or obj.get("description_zh") or ""))
     return f'<div class="card"><a href="{path.as_posix()}"><strong>{name}</strong></a><p>{summary}</p></div>'
+
+
+def category_anchor(category: str) -> str:
+    return f"category-{category}"
+
+
+def breadcrumb_for(obj: dict, prefix: str) -> str:
+    name = html.escape(display_name(obj, str(obj.get("id"))))
+    object_type = obj.get("type")
+    home = f'<a href="{prefix}index.html">首页</a>'
+    separator = '<span>›</span>'
+    if object_type == "capability":
+        category = str(obj.get("category") or "uncategorized")
+        label = "未分类" if category == "uncategorized" else human_value(category)
+        category_link = f'<a href="{prefix}index.html#{category_anchor(category)}">{html.escape(label)}</a>'
+        return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{name}'
+    labels = {"standard": "标准与规范", "implementation": "实现"}
+    label = labels.get(str(object_type), str(object_type or "对象"))
+    return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{name}'
 
 
 def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
@@ -87,7 +108,7 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
     sections.append('<div class="category-grid">')
     for category, items in sorted(categories.items(), key=lambda item: human_value(item[0])):
         label = "未分类" if category == "uncategorized" else human_value(category)
-        sections.append('<section class="category-card">')
+        sections.append(f'<section class="category-card" id="{html.escape(category_anchor(category))}">')
         sections.append(f'<h3>{html.escape(label)}</h3><div class="count">{len(items)} 个能力</div><ul>')
         for obj, path in sorted(items, key=lambda item: display_name(item[0], str(item[0].get("id")))):
             name = html.escape(display_name(obj, str(obj.get("id"))))
@@ -124,7 +145,15 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target.parent.mkdir(parents=True, exist_ok=True)
         content = markdown_to_html(render_object(obj, index, graph))
         prefix = "../" * len(html_path.parent.parts)
-        target.write_text(page_shell(display_name(obj, str(obj.get("id"))), content, prefix), encoding="utf-8")
+        target.write_text(
+            page_shell(
+                display_name(obj, str(obj.get("id"))),
+                content,
+                prefix,
+                breadcrumb_for(obj, prefix),
+            ),
+            encoding="utf-8",
+        )
         rendered.append((obj, html_path))
 
     output.mkdir(parents=True, exist_ok=True)
