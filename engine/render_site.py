@@ -44,10 +44,10 @@ details{border-top:1px solid var(--border);padding:14px 0}summary{cursor:pointer
 .local-map{margin:28px 0 10px;padding:18px;border:1px solid var(--border);border-radius:14px;background:var(--code);scroll-margin-top:20px}
 .local-map-title{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:14px}.local-map-title strong{font-size:1.05em}.local-map-title span{font-size:.86em;color:var(--muted)}
 .map-stats-current{color:var(--fg);font-weight:600}.map-stats-baseline{white-space:nowrap}
-.map-controls{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}.map-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.map-filter-label{font-size:.82em;color:var(--muted);margin-right:2px}.map-filter,.map-recenter{border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:4px 9px;font-size:.8em;cursor:pointer}.map-filter:hover,.map-recenter:hover{border-color:var(--link)}.map-filter.is-active{border-color:var(--link);background:var(--accent-soft);color:var(--link)}
+.map-controls{display:flex;flex-direction:column;gap:8px;margin:0 0 16px}.map-filter-row{display:flex;align-items:center;flex-wrap:wrap;gap:7px}.map-filter-label{font-size:.82em;color:var(--muted);margin-right:2px}.map-filter{border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:4px 9px;font-size:.8em;cursor:pointer}.map-filter:hover{border-color:var(--link)}.map-filter.is-active{border-color:var(--link);background:var(--accent-soft);color:var(--link)}
 .local-map-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(190px,.8fr) minmax(0,1fr);gap:16px;align-items:center}
 .map-column{display:flex;flex-direction:column;gap:10px}.map-column-title{text-align:center;color:var(--muted);font-size:.82em;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
-.map-node{border:1px solid var(--border);background:var(--card);border-radius:11px;padding:11px 12px;min-width:0}.map-node-name{font-weight:600;overflow-wrap:anywhere}.map-edge{display:block;margin-top:4px;color:var(--muted);font-size:.82em;line-height:1.4}.map-origin{display:inline-block;margin-left:5px;padding:1px 5px;border:1px solid var(--border);border-radius:999px;font-size:.9em}.map-node-actions{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}.map-recenter{padding:3px 8px;color:var(--link);background:transparent}
+.map-node{border:1px solid var(--border);background:var(--card);border-radius:11px;padding:11px 12px;min-width:0}.map-node-name{font-weight:600;overflow-wrap:anywhere}.map-focus-link{cursor:pointer}.map-edge{display:block;margin-top:4px;color:var(--muted);font-size:.82em;line-height:1.4}.map-origin{display:inline-block;margin-left:5px;padding:1px 5px;border:1px solid var(--border);border-radius:999px;font-size:.9em}.map-node-actions{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap}.map-detail{display:inline-block;border:1px solid var(--border);border-radius:999px;padding:3px 8px;font-size:.8em}
 .map-center{border:2px solid var(--link);background:var(--accent-soft);text-align:center;padding:18px 14px}.map-center .map-node-name{font-size:1.05em}.map-center .map-edge{margin-top:6px}
 .map-empty,.map-filter-empty{color:var(--muted);font-size:.9em;text-align:center;padding:10px}.map-filter-empty[hidden]{display:none}.map-loading{opacity:.6;pointer-events:none}
 @media(max-width:760px){.local-map-grid{grid-template-columns:1fr}.map-center{order:-1}.map-column-title{text-align:left}.local-map-title{display:block}.local-map-title span{display:block;margin-top:4px}.map-filter-row{align-items:flex-start}.map-stats-baseline{white-space:normal}}
@@ -115,9 +115,31 @@ MAP_SCRIPT = """
     section.querySelectorAll('a[href]').forEach(function(link){
       link.setAttribute('href',new URL(link.getAttribute('href'),baseUrl).href);
     });
-    section.querySelectorAll('[data-map-href]').forEach(function(button){
-      button.dataset.mapHref=new URL(button.dataset.mapHref,baseUrl).href;
+    section.querySelectorAll('[data-map-href]').forEach(function(trigger){
+      trigger.dataset.mapHref=new URL(trigger.dataset.mapHref,baseUrl).href;
     });
+  }
+  async function recenter(trigger){
+    const section=trigger.closest('.local-map');
+    if(!section)return;
+    const href=new URL(trigger.dataset.mapHref||trigger.getAttribute('href'),location.href).href;
+    section.classList.add('map-loading');
+    try{
+      const response=await fetch(href,{credentials:'same-origin'});
+      if(!response.ok)throw new Error('HTTP '+response.status);
+      const documentText=await response.text();
+      const parsed=new DOMParser().parseFromString(documentText,'text/html');
+      const nextMap=parsed.querySelector('.local-map');
+      if(!nextMap){location.href=href;return;}
+      absolutizeMap(nextMap,response.url||href);
+      const replacement=document.importNode(nextMap,true);
+      section.replaceWith(replacement);
+      apply(replacement);
+      replacement.scrollIntoView({behavior:'smooth',block:'start'});
+    }catch(error){
+      console.warn('Local map recenter failed; opening target page instead.',error);
+      location.href=href;
+    }
   }
   window.filterLocalMap=function(button){
     const section=button.closest('.local-map');
@@ -140,28 +162,11 @@ MAP_SCRIPT = """
     setActive(section,kind,value);
     apply(section);
   };
-  window.recenterLocalMap=async function(button){
-    const section=button.closest('.local-map');
-    if(!section)return;
-    const href=new URL(button.dataset.mapHref,location.href).href;
-    section.classList.add('map-loading');
-    button.textContent='载入中…';
-    try{
-      const response=await fetch(href,{credentials:'same-origin'});
-      if(!response.ok)throw new Error('HTTP '+response.status);
-      const documentText=await response.text();
-      const parsed=new DOMParser().parseFromString(documentText,'text/html');
-      const nextMap=parsed.querySelector('.local-map');
-      if(!nextMap){location.href=href;return;}
-      absolutizeMap(nextMap,response.url||href);
-      const replacement=document.importNode(nextMap,true);
-      section.replaceWith(replacement);
-      apply(replacement);
-      replacement.scrollIntoView({behavior:'smooth',block:'start'});
-    }catch(error){
-      console.warn('Local map recenter failed; opening target page instead.',error);
-      location.href=href;
-    }
+  window.recenterLocalMapFromLink=function(event,link){
+    event.preventDefault();
+    event.stopPropagation();
+    recenter(link);
+    return false;
   };
   addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.local-map').forEach(apply);});
 })();
@@ -256,17 +261,23 @@ def map_column_html(source_obj: dict, index: dict[str, dict], edges: list, incom
                 f'<span class="map-origin">{origin}</span></span>'
             )
         href = object_html_href(source_obj, neighbor)
-        actions = ""
         if href:
+            escaped_href = html.escape(href, quote=True)
+            name_html = (
+                f'<a class="map-focus-link" href="{escaped_href}" data-map-href="{escaped_href}" '
+                f'onclick="return recenterLocalMapFromLink(event,this)">{html.escape(display_name(neighbor, neighbor_id))}</a>'
+            )
             actions = (
                 '<div class="map-node-actions">'
-                f'<button type="button" class="map-recenter" data-map-href="{html.escape(href, quote=True)}" '
-                'onclick="recenterLocalMap(this)">设为中心</button>'
+                f'<a class="map-detail" href="{escaped_href}">打开详情</a>'
                 '</div>'
             )
+        else:
+            name_html = html.escape(display_name(neighbor, neighbor_id))
+            actions = ""
         cards.append(
             f'<div class="map-node" data-neighbor-id="{html.escape(neighbor_id, quote=True)}">'
-            f'<div class="map-node-name">{object_html_link(source_obj, neighbor, neighbor_id)}</div>'
+            f'<div class="map-node-name">{name_html}</div>'
             f'{"".join(labels)}{actions}</div>'
         )
     cards.append('<div class="map-filter-empty" hidden>当前筛选下暂无邻居</div>')
