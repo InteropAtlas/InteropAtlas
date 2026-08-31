@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Render InteropAtlas objects into human-readable Chinese Markdown views."""
+"""Render InteropAtlas objects into linked, human-readable Chinese Markdown views."""
 
 from __future__ import annotations
 
 import argparse
+import posixpath
 from pathlib import Path
 from typing import Any
 
@@ -83,6 +84,30 @@ def summary_of(obj: dict[str, Any]) -> str | None:
     return str(value).strip() if value else None
 
 
+def output_path(obj: dict[str, Any]) -> str | None:
+    source = obj.get("_source")
+    if not isinstance(source, str) or not source.endswith(".yaml"):
+        return None
+    return source[:-5] + ".md"
+
+
+def object_link(source_obj: dict[str, Any], target_obj: dict[str, Any]) -> str | None:
+    source_path = output_path(source_obj)
+    target_path = output_path(target_obj)
+    if not source_path or not target_path:
+        return None
+    start = posixpath.dirname(source_path)
+    return posixpath.relpath(target_path, start=start or ".")
+
+
+def linked_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | None, fallback: str) -> str:
+    label = display_name(target_obj, fallback)
+    if not target_obj:
+        return label
+    link = object_link(source_obj, target_obj)
+    return f"[{label}]({link})" if link else label
+
+
 def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
     sources = obj.get("sources") or []
     if not sources:
@@ -104,7 +129,7 @@ def add_capabilities(lines: list[str], obj: dict[str, Any], index: dict[str, dic
     lines += ["## 它涉及什么能力？", ""]
     for capability_id in capability_ids:
         target = index.get(capability_id)
-        lines.append(f"- {display_name(target, capability_id)} (`{capability_id}`)")
+        lines.append(f"- {linked_name(obj, target, capability_id)} (`{capability_id}`)")
     lines.append("")
 
 
@@ -149,11 +174,25 @@ def render_implementation(obj: dict[str, Any], index: dict[str, dict[str, Any]])
     return finish(lines)
 
 
-def render_capability(obj: dict[str, Any], _index: dict[str, dict[str, Any]]) -> str:
+def render_capability(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> str:
     lines = common_header(obj)
     if obj.get("category") is not None:
         lines.append(f"- **能力类别：** {human_value(obj.get('category'))}")
     lines.append("")
+
+    capability_id = obj.get("id")
+    implementations = [
+        candidate
+        for candidate in index.values()
+        if candidate.get("type") == "implementation"
+        and capability_id in (candidate.get("capabilities") or [])
+    ]
+    if implementations:
+        lines += ["## 哪些实现提供这个能力？", ""]
+        for implementation in sorted(implementations, key=lambda item: str(item.get("id"))):
+            implementation_id = str(implementation.get("id"))
+            lines.append(f"- {linked_name(obj, implementation, implementation_id)}")
+        lines.append("")
     return finish(lines)
 
 
