@@ -12,6 +12,8 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 ## Core routes
 
 - [`human-readable-route.zh-CN.md`](human-readable-route.zh-CN.md) — 人类可读路线：Visible → Actionable。
+- [`human-interface-standards-baseline.zh-CN.md`](human-interface-standards-baseline.zh-CN.md) — Human Interface 的外部标准基线与 Adopt → Profile → Extend → Invent 原则。
+- [`human-interface-reference-map.zh-CN.md`](human-interface-reference-map.zh-CN.md) — 将交互、信息架构、视觉、无障碍、图探索、测试等问题映射到标准、方法与参考实现。
 - [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md) — Human Route 的暂定交互基线：Link / Button 语义、Local Map、可视化方法与 Prior Art。
 - [`machine-readable-maintainable-route.zh-CN.md`](machine-readable-maintainable-route.zh-CN.md) — 机器可用 / 可维护路线：Loadable → Interoperable。
 - [`practice-feedback-loop.zh-CN.md`](practice-feedback-loop.zh-CN.md) — Atlas ↔ Engine 实践驱动反馈机制。
