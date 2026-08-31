@@ -1,0 +1,127 @@
+id: engine_v0_1_uses_yaml
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: yaml_1_2_2
+---
+id: engine_v0_1_uses_json_schema
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: json_schema_2020_12
+---
+id: engine_v0_1_uses_html
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: html_living_standard
+---
+id: engine_v0_1_uses_bcp47
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: bcp47_rfc5646
+---
+id: engine_v0_1_uses_unicode
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: unicode_17_0
+---
+id: engine_v0_1_uses_git
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: git_protocol_v2
+---
+id: engine_v0_1_uses_commonmark
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: commonmark_0_31_2
+---
+id: engine_v0_1_uses_rfc3339
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: rfc3339
+---
+id: engine_v0_1_uses_spdx_expression
+source:
+  type: scenario
+  id: engine_v0_1_bootstrap
+relation: uses
+target:
+  type: standard
+  id: spdx_license_expressions_3_0_1
+---
+id: gfm_extends_commonmark
+source:
+  type: standard
+  id: gfm_0_29
+relation: extends
+target:
+  type: standard
+  id: commonmark_0_31_2
+---
+id: json_pointer_uses_json
+source:
+  type: standard
+  id: json_pointer_rfc6901
+relation: uses
+target:
+  type: standard
+  id: json_rfc8259
+---
+id: url_standard_alternative_context_uri
+source:
+  type: standard
+  id: url_living_standard
+relation: alternative_to
+target:
+  type: standard
+  id: uri_rfc3986
+notes_zh:
+  - 这里的 alternative_to 只作为需要进一步解释两套资源标识/解析模型边界的初始关系，不表示二者完全可互换。
+---
+id: css_recommended_with_html
+source:
+  type: standard
+  id: css_snapshot_2025
+relation: recommended_with
+target:
+  type: standard
+  id: html_living_standard
+---
+id: svg_recommended_with_html
+source:
+  type: standard
+  id: svg_2
+relation: recommended_with
+target:
+  type: standard
+  id: html_living_standard
