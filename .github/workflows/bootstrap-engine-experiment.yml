@@ -37,3 +37,7 @@ jobs:
         run: pip install -r engine/requirements.txt
       - name: Run deterministic supportability query
         run: python engine/bootstrap_query.py --capability automated_build_deployment
+      - name: Render human-readable Forgejo Actions page
+        run: |
+          python engine/render_markdown.py forgejo_actions --output build/implementations/forgejo-actions.md
+          cat build/implementations/forgejo-actions.md
