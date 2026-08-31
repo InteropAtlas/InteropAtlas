@@ -86,6 +86,21 @@ RELATION_LABELS = {
     "inspired_by": "参考 / 受启发于",
 }
 
+RELATION_GROUPS = [
+    ("能力与实现", {"provides", "implements", "implemented_by", "describes"}),
+    (
+        "替代与兼容",
+        {"alternative_to", "compatible_with", "incompatible_with", "replaces", "supersedes"},
+    ),
+    (
+        "依赖与使用",
+        {"depends_on", "uses", "requires", "recommended_with", "extends", "encapsulates", "transports"},
+    ),
+    ("治理与基础设施", {"governed_by", "secures", "discovers", "identifies", "synchronizes"}),
+    ("映射与桥接", {"bridges_to", "maps_to"}),
+    ("参考与来源", {"inspired_by"}),
+]
+
 HUMAN_VIEW_TYPES = {"implementation", "capability", "standard"}
 
 
@@ -144,6 +159,22 @@ def relationship_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | N
     return linked_name(source_obj, target_obj, fallback)
 
 
+def relation_group(kind: str) -> str:
+    for heading, kinds in RELATION_GROUPS:
+        if kind in kinds:
+            return heading
+    return "其他关系"
+
+
+def grouped_by_relation_kind(items: list[Any], kind_getter) -> list[tuple[str, list[Any]]]:
+    buckets: dict[str, list[Any]] = {}
+    for item in items:
+        heading = relation_group(str(kind_getter(item)))
+        buckets.setdefault(heading, []).append(item)
+    order = [heading for heading, _ in RELATION_GROUPS] + ["其他关系"]
+    return [(heading, buckets[heading]) for heading in order if heading in buckets]
+
+
 def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
     sources = obj.get("sources") or []
     if not sources:
@@ -198,21 +229,27 @@ def add_direct_relations(
         return
 
     lines += ["## 直接关系", ""]
-    if outgoing:
-        lines += ["### 从本对象出发", ""]
-        for edge in sorted(outgoing, key=lambda item: (item.kind, item.target_id)):
-            target = index.get(edge.target_id)
-            label = RELATION_LABELS.get(edge.kind, edge.kind)
-            lines.append(f"- **{label}** → {relationship_name(obj, target, edge.target_id)}")
-        lines.append("")
+    all_edges = outgoing + incoming
+    for group_heading, group_items in grouped_by_relation_kind(all_edges, lambda edge: edge.kind):
+        lines += [f"### {group_heading}", ""]
+        group_outgoing = [edge for edge in group_items if edge in outgoing]
+        group_incoming = [edge for edge in group_items if edge in incoming]
 
-    if incoming:
-        lines += ["### 指向本对象", ""]
-        for edge in sorted(incoming, key=lambda item: (item.kind, item.source_id)):
-            source = index.get(edge.source_id)
-            label = RELATION_LABELS.get(edge.kind, edge.kind)
-            lines.append(f"- {relationship_name(obj, source, edge.source_id)} → **{label}** → 本对象")
-        lines.append("")
+        if group_outgoing:
+            lines += ["**从本对象出发**", ""]
+            for edge in sorted(group_outgoing, key=lambda item: (item.kind, item.target_id)):
+                target = index.get(edge.target_id)
+                label = RELATION_LABELS.get(edge.kind, edge.kind)
+                lines.append(f"- **{label}** → {relationship_name(obj, target, edge.target_id)}")
+            lines.append("")
+
+        if group_incoming:
+            lines += ["**指向本对象**", ""]
+            for edge in sorted(group_incoming, key=lambda item: (item.kind, item.source_id)):
+                source = index.get(edge.source_id)
+                label = RELATION_LABELS.get(edge.kind, edge.kind)
+                lines.append(f"- {relationship_name(obj, source, edge.source_id)} → **{label}** → 本对象")
+            lines.append("")
 
 
 def render_implementation(
@@ -278,17 +315,22 @@ def add_capability_backlinks(
     relations = graph.relation_objects_for_capability(capability_id)
     if relations:
         lines += ["## 这个能力下已记录的关系", ""]
-        for relation in sorted(relations, key=lambda item: str(item.get("id"))):
-            source_id = ref_id(relation.get("source")) or "未知对象"
-            target_id = ref_id(relation.get("target")) or "未知对象"
-            source = index.get(source_id)
-            target = index.get(target_id)
-            predicate = relation_predicate(relation) or "related_to"
-            predicate_label = RELATION_LABELS.get(predicate, predicate)
-            lines.append(
-                f"- {relationship_name(obj, source, source_id)} **{predicate_label}** {relationship_name(obj, target, target_id)}"
-            )
-        lines.append("")
+        for group_heading, group_relations in grouped_by_relation_kind(
+            relations, lambda relation: relation_predicate(relation) or "related_to"
+        ):
+            lines += [f"### {group_heading}", ""]
+            for relation in sorted(group_relations, key=lambda item: str(item.get("id"))):
+                source_id = ref_id(relation.get("source")) or "未知对象"
+                target_id = ref_id(relation.get("target")) or "未知对象"
+                source = index.get(source_id)
+                target = index.get(target_id)
+                predicate = relation_predicate(relation) or "related_to"
+                predicate_label = RELATION_LABELS.get(predicate, predicate)
+                lines.append(
+                    f"- {relationship_name(obj, source, source_id)} **{predicate_label}** "
+                    f"{relationship_name(obj, target, target_id)}"
+                )
+            lines.append("")
 
 
 def render_capability(
@@ -304,7 +346,6 @@ def render_capability(
     if graph is not None:
         add_capability_backlinks(lines, obj, index, graph)
     else:
-        # Compatibility fallback for callers that have not yet adopted GraphIndex.
         capability_id = obj.get("id")
         implementations = [
             candidate
