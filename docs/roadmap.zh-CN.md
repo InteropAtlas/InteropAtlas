@@ -1,137 +1,235 @@
 # InteropAtlas 当前路线图
 
-这是一份面向人类阅读的中文待办与方向清单。它用于汇总当前优先级、尚未解决的问题和已经确定但尚未实现的方向。具体可执行任务可以继续拆成 GitHub Issue；本文件负责让项目整体状态一眼可读。
+> 状态：Living Roadmap（持续更新路线图）。用于回答“现在最重要的事情是什么、为什么要做、哪些方向已经提出但尚未实现”。具体执行任务继续放在 GitHub Issues。
 
-> 原则：前期先扩展，后期再整理结构。底层事实保持结构化、机器可读；人类阅读、解释、对比、图谱与导航由上层视图逐步提供。
+## 当前总体判断
 
-## P0 — 当前阻塞项目迭代的问题
+InteropAtlas 已完成第一轮从“仓库里的结构化事实”到“人可以打开的网页”的闭环：
 
-### Engine v0.1：人类可读层
+```text
+YAML Facts
+   ↓
+Loader / Renderer
+   ↓
+Static HTML
+   ↓
+GitHub Pages
+   ↓
+人可以浏览
+```
 
-目标：把现有 YAML / Relation 数据转换成可以直接阅读和检查的中文优先页面，让维护者不再需要直接阅读大量英文机器数据。
+因此 **Visible（看得到）已经基本成立**。当前最明显的问题不再是“看不到”，而是：页面缺乏结构、对象解释不足、导航弱、关系不能可靠展开，机器基础层仍是 bootstrap 状态。
 
-第一阶段至少包括：
+当前整体采用五路线协同模型：
 
-- 读取现有 YAML 对象与多文档 Relation 文件；
-- 基础结构与引用验证；
-- 稳定 ID 的 Reference Resolver（引用解析）；
-- Backlinks（反向链接）；
-- 中文优先的人类可读 Markdown / HTML 输出；
-- 基础关系图或图形化视图；
-- 原始数据与人类阅读页之间可以相互跳转。
+1. Human Route（人类可读）；
+2. Machine Route（机器可用 / 可维护）；
+3. Curation / Contribution Route（收录与贡献）；
+4. Evidence / Provenance / Trust Route（证据、溯源与可信）；
+5. Governance / Standardization Route（治理与标准化）。
 
-Engine 的第一目标不是立即引入 Neo4j、SPARQL、SHACL 等高级后端，而是先解决“看不到结果、难以发现问题、迭代速度慢”的问题。
+详见 `five-route-operating-model.zh-CN.md`。
 
-状态：尚未实现。
+## P0 — 当前最近的主闭环
 
-### 引用解析与反向链接
+近期不平均推进所有方向，而是先建立下面这一组互相驱动的能力：
 
-目标：对象 ID 可以点击跳转，并自动看到谁引用了当前对象、通过什么关系引用、出现在哪些 Map 中。
+```text
+Human:
+Readable + Navigable + Connected
+                ↕
+Machine:
+Validator + Reference Resolver + Graph/Backlink Index
+                ↕
+Trust / Curation:
+Minimum Evidence + Prior Art + 收录规则
+```
 
-原则：Backlink 不在 YAML 中手工维护，由 Engine 从单一事实源自动生成。
+### P0-A：Readable / Navigable / Connected
 
-状态：已建立 GitHub Issue #1。
+目标：让网站从“对象列表”逐步变成真正可理解、可导航的 Atlas。
 
-## P1 — 近期建设方向
+当前已完成：
+- Markdown / HTML Renderer；
+- Capability / Standard / Implementation 三类对象页；
+- GitHub Pages 自动部署；
+- 自动/手动深色模式；
+- 最小 Capability → Implementation backlink 实验。
 
-### 统一解释层：让用户尽量不必离开 InteropAtlas
+下一步：
+- 把单个对象页从字段转写升级为结构化知识页面；
+- 首页和导航从对象类型列表升级为能力优先、多入口结构；
+- 对象页显示可信的正向关系和反向关系；
+- Renderer 不再自行临时承担长期 Graph / Resolver 职责。
 
-InteropAtlas 不应只做标准原文链接的索引。长期目标是用统一语言、统一结构和统一阅读体验解释来自不同标准组织的标准，尽量减少用户在不同组织网站、不同文档风格之间反复跳转的成本。
+相关：Issue #1、#2、#3、#8。
 
-前期只要求每个标准有一小段清晰介绍，重点说明：
+### P0-B：Engine 基础层
 
-- 它是什么；
-- 它解决什么问题；
-- 它位于哪一层；
-- 它通常和哪些标准一起使用；
-- 它在 InteropAtlas 中为什么被收录。
+当前最需要补齐的机器基础：
 
-后期逐步扩展到：
+1. Validator；
+2. Reference Resolver；
+3. Graph / Backlink Index。
 
-- 标准族 / 协议族如何协作；
-- 标准之间如何衔接、转换、封装或替代；
-- 一条完整技术链路中的数据如何流动；
-- 不同版本之间如何演进；
-- 标准与实现、组织、能力、场景之间的完整关系。
+原因：一旦 Human Route 进入 Connected（看关系），机器路线的 Graphable / Resolvable 就开始成为直接阻塞项。
 
-说明文字应以 InteropAtlas 自己的语言重述和组织，不复制第三方标准全文；官方标准页面继续作为证据与深入阅读来源。
+相关：Issue #1、#8。
 
-状态：方向已记录，前期不要求一次性完成。
+### P0-C：最小建设规范
 
-### 同类标准 / 协议对比
+在继续快速扩充对象前，先遵守一组轻量规则，而不是建设重型治理体系：
 
-在收录一个标准时，尽可能识别与它相似、同类型、同级别或互为替代方案的标准与协议，并逐步形成统一的比较视图。
+- Reuse Before Invent；
+- Evidence Before Assertion；
+- Fact 与 Assessment 分离；
+- Structured Source, Linked View；
+- Flat Objects + Rich Relations + Dynamic Maps；
+- Practice-driven Feedback；
+- 新方法先标 Note / Methodology / Specification，不轻易称 Standard。
 
-对比内容可以包括：
+详见 `project-development-principles.zh-CN.md`。
 
-- 解决的问题与能力范围；
-- 所处互操作层级；
-- 技术模型与核心差异；
-- 相互兼容、竞争、替代、映射、桥接或组合关系；
-- 性能、实时性、复杂度、部署条件等约束；
-- 开放程度、治理方式、专利/许可、认证条件；
-- 开源实现与工具生态；
-- 各自更适合的环境、场景与限制；
-- 是否存在开放替代方案。
+## P1 — 第一轮闭环稳定后
 
-目标：用户找到一个标准时，可以同时理解“为什么不是另外几个”“什么时候应该选哪一个”，减少重复访问多个标准网站或临时依赖 AI 做一次性比较。
+### Curation / Contribution Route
 
-底层如何承载尚未决定。候选方式包括：结构化事实 / 关系数据、比较对象、人工解释文本、Engine 动态生成比较结果，或几种方式组合。当前保持开放，不因展示需求过早锁死数据库或文本模型。
+建立最小、可重复执行的收录流程：
 
-状态：需求已记录，数据模型与实现方式待设计。
+```text
+候选发现 → Prior Art / 来源调查 → 对象识别 → 建模 → Evidence → Relations → Validate → Review → Merge → 更新监控
+```
 
-### InteropAtlas 简称
+需要逐步明确：收录门槛、最小 Evidence、重复对象、版本更新、贡献者如何操作。
 
-目标：为日常输入、口语、CLI、Engine 等场景寻找更短、更顺口的简称，同时保留 InteropAtlas 作为正式项目名称。
+### Evidence / Provenance / Trust Route
 
-要求：
+从简单 `sources:` 字段逐步发展到可追踪的 Claim / Evidence / Source / Context / Time / Review 模型。
 
-- 易读、易输入；
-- 能和 InteropAtlas 建立直观联系；
-- 不要求作为独立品牌使用；
-- 尽量存在可注册的 `.org` 域名。
+优先从真实痛点扩展，不一次性设计完整 provenance ontology。
 
-状态：待系统筛选。
+### Queryable / Analysis 前置修复
 
-## P2 — 技术深化与运行时
+在开始依赖 Engine 做比较、路径、Open Gap、Coverage 之前：
+- 修复 Issue #7 的 `alternative_to` 查询作用域；
+- 建立可信基础查询 API；
+- 增加最小回归测试。
 
-以下方向值得继续实验，但不应阻塞当前的人类可读层：
+### 统一解释层与标准族指南
 
-- RDF / JSON-LD 兼容导出；
-- SPARQL 图查询；
-- SHACL 图约束验证；
-- OWL / SKOS 在需要时用于更正式的语义与知识组织；
-- Property Graph（属性图）；
-- Neo4j 或其他图数据库作为可选运行时；
-- Graph Backend abstraction（图后端抽象）；
-- Pathfinder（路径搜索）；
-- Open Gap / Coverage / Compatibility 等动态评估；
-- Dynamic Maps（动态地图）的自动生成与筛选。
+对象页负责 Reference；方案空间、标准族、历史演化和“为什么”逐步形成 Explanation / Guide，而不是无限扩张详情页。
 
-核心原则：
+相关：Issue #3、#4。
 
-> InteropAtlas is graph-native, but database-agnostic.
->
-> InteropAtlas 原生采用图式思维，但不绑定任何特定图数据库。
+## P2 — 中期能力
 
-> The canonical model defines the graph; databases are execution backends.
->
-> 权威数据模型定义“这张图是什么”，数据库只负责“如何运行这张图”。
+### Mappable / Explorable
+
+- Dynamic Maps；
+- 搜索；
+- 多维过滤；
+- 子图探索；
+- 基础图形化关系视图；
+- 路径视图。
+
+### Analyzable
+
+- Pathfinder；
+- Coverage Analyzer；
+- Gap Analyzer；
+- Comparator；
+- Dependency Audit；
+- Openness Analyzer；
+- Constraint Evaluator。
+
+### Atlas Health / Maintainability
+
+- broken references；
+- orphan objects；
+- stale sources / versions；
+- missing evidence；
+- duplicate candidates；
+- relation conflicts；
+- human-readable coverage；
+- relation coverage。
+
+逐步形成 Atlas Linter 和 Atlas Health。
+
+## P3 — 长期技术与生态方向
+
+### 多后端 / Federation
+
+- JSON / JSON-LD / RDF / CSV / Graph export；
+- API / Agent interface；
+- Property Graph / RDF backend；
+- Neo4j / SPARQL 等可选运行时；
+- Map of Maps / federated catalogs；
+- graph-native, database-agnostic。
+
+相关：Issue #6。
+
+### IA 自产规范与标准化
+
+项目建设过程中可能产生 Methodology、Specification、Profile、Skill，未来才可能出现正式 Standard。
+
+当前只研究：
+- stable ID；
+- version / date / URL 分离；
+- lifecycle；
+- repo boundary；
+- conformance test；
+- governance；
+- 如何重新被主 Atlas 作为普通标准收录。
+
+不在当前阶段规定“每个标准一个仓库”或固定 `IA-YYYYMMDD-XXX` 编号。
+
+详见 `project-generated-methods-standards.zh-CN.md`。
+
+## Prior Art 是持续流程，不是一次调研
+
+以后每进入一个新能力点，都优先参考已有成熟项目，而不是一次性把所有标准组织研究完。
+
+当前参考池见 `prior-art-and-method-reference.zh-CN.md`，包括：
+- Wikidata；
+- OpenStreetMap；
+- FAIR；
+- W3C DCAT；
+- W3C SHACL；
+- Diátaxis；
+- IETF；
+- W3C Process；
+- Software Heritage / SWHID。
+
+## 当前建议执行顺序
+
+### 立即
+
+1. 用当前 GitHub Pages 继续验证真实阅读体验；
+2. 补 Validator + Resolver + Graph/Backlink 的最小可信基础；
+3. 同时改善 Readable + Navigable + Connected；
+4. 每次增加新数据 / 新机制前遵循最小 Prior Art 与 Evidence 规则。
+
+### 紧随其后
+
+5. 把收录流程和 Evidence 模型从隐性做法变成可重复流程；
+6. 修复关系查询作用域并建立基础 Query API；
+7. 在真实对象族上试做 Explanation / Comparison / Map。
+
+### 暂不急做
+
+8. 重型标准治理组织；
+9. 每个自产标准独立仓库；
+10. 固定 IA 标准编号体系；
+11. 提前绑定 Neo4j / RDF Store；
+12. 一次性设计完整网站和完整 ontology。
 
 ## 待办管理方式
 
-本文件是中文总览，负责回答：
+- `docs/roadmap.zh-CN.md`：总体优先级与阶段；
+- GitHub Issues：可执行任务、验收条件、阻塞关系；
+- YAML / Schemas / Relations：事实与模型；
+- Engine：确定性解析、查询与分析；
+- Renderer / Site：人类可读 Projection；
+- Methodology docs：项目建设方法和暂定规范。
 
-- 现在最重要的事情是什么；
-- 为什么要做；
-- 哪些方向已经提出但尚未实现；
-- 当前优先级如何。
-
-GitHub Issue 用于更具体、可执行、需要跟踪状态的任务。一个方向成熟到可以明确描述验收条件时，再拆成一个或多个 Issue。
-
-因此：
-
-- `docs/roadmap.zh-CN.md` = 人类可读的中文总览；
-- GitHub Issues = 可执行任务与讨论记录；
-- YAML / Schema / Relations = 机器可读事实与模型；
-- Engine / Views = 将这些事实转换成人类可读结果。
+原则：**先建立最小闭环，再让真实使用决定下一轮结构扩展。**
