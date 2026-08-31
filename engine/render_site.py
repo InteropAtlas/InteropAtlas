@@ -10,6 +10,7 @@ from pathlib import Path
 import markdown
 
 from bootstrap_query import index_objects, load_atlas
+from graph_index import GraphIndex
 from render_markdown import display_name, output_path, render_object
 
 SUPPORTED_TYPES = {"implementation", "capability", "standard"}
@@ -56,8 +57,9 @@ def markdown_to_html(text: str) -> str:
 
 
 def build(root: Path, output: Path) -> dict[str, int]:
-    objects, _relations = load_atlas(root)
+    objects, relations = load_atlas(root)
     index = index_objects(objects)
+    graph = GraphIndex(index, relations)
     rendered = []
     for obj in objects:
         if obj.get("type") not in SUPPORTED_TYPES:
@@ -68,7 +70,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         html_path = Path(md_path).with_suffix(".html")
         target = output / html_path
         target.parent.mkdir(parents=True, exist_ok=True)
-        content = markdown_to_html(render_object(obj, index))
+        content = markdown_to_html(render_object(obj, index, graph))
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(page_shell(display_name(obj, str(obj.get("id"))), content, prefix), encoding="utf-8")
         rendered.append((obj, html_path))
@@ -89,7 +91,12 @@ def build(root: Path, output: Path) -> dict[str, int]:
     output.mkdir(parents=True, exist_ok=True)
     (output / "index.html").write_text(page_shell("首页", "".join(sections)), encoding="utf-8")
     (output / ".nojekyll").write_text("", encoding="utf-8")
-    return {"objects_loaded": len(objects), "pages_rendered": len(rendered)}
+    return {
+        "objects_loaded": len(objects),
+        "pages_rendered": len(rendered),
+        "graph_edges": len(graph.edges),
+        "reference_issues": len(graph.issues),
+    }
 
 
 def main() -> None:
@@ -98,7 +105,11 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=Path("build/site"))
     args = parser.parse_args()
     result = build(args.root, args.output)
-    print(f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects into {args.output}")
+    print(
+        f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects "
+        f"with {result['graph_edges']} graph edges and {result['reference_issues']} reference issues "
+        f"into {args.output}"
+    )
 
 
 if __name__ == "__main__":
