@@ -1,0 +1,39 @@
+name: Bootstrap Engine Experiment
+
+on:
+  push:
+    paths:
+      - 'standards/**'
+      - 'capabilities/**'
+      - 'scenarios/**'
+      - 'organizations/**'
+      - 'implementations/**'
+      - 'relations/**'
+      - 'maps/**'
+      - 'engine/**'
+      - '.github/workflows/bootstrap-engine-experiment.yml'
+  pull_request:
+    paths:
+      - 'standards/**'
+      - 'capabilities/**'
+      - 'scenarios/**'
+      - 'organizations/**'
+      - 'implementations/**'
+      - 'relations/**'
+      - 'maps/**'
+      - 'engine/**'
+      - '.github/workflows/bootstrap-engine-experiment.yml'
+  workflow_dispatch:
+
+jobs:
+  executable-experiment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install bootstrap dependency
+        run: pip install -r engine/requirements.txt
+      - name: Run deterministic supportability query
+        run: python engine/bootstrap_query.py --capability automated_build_deployment
