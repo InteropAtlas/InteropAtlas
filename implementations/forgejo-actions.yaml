@@ -1,0 +1,32 @@
+id: forgejo_actions
+type: implementation
+kind: platform_service
+name_zh: Forgejo Actions
+name_en: Forgejo Actions
+summary_zh: >-
+  Forgejo 提供的工作流自动化与 CI/CD 能力。工作流使用仓库中的 YAML 文件定义，
+  由 Forgejo Runner 执行。它在设计上强调让熟悉 GitHub Actions 的用户容易迁移，
+  但官方明确说明并不追求与 GitHub Actions 完全兼容。
+summary_en: >-
+  Forgejo's workflow automation and CI/CD capability. Workflows are defined in YAML files
+  stored in repositories and executed by Forgejo Runner. It is designed to feel familiar
+  to GitHub Actions users, but Forgejo explicitly does not claim full compatibility.
+capabilities:
+  - automated_build_deployment
+open_source: true
+self_hostable: true
+license_expression: GPL-3.0-or-later
+deployment_models:
+  - self_hosted_platform
+  - self_hosted_runner
+notes_zh:
+  - Forgejo Actions 与 GitHub Actions 在工作流、Runner、Actions 复用等概念上高度相似。
+  - Forgejo 官方采用“familiarity instead of compatibility”的定位，因此不能直接建模为 fully compatible。
+  - 许多 GitHub Actions 工作流只需少量修改即可迁移，但存在环境、上下文键和部分 workflow 语义差异。
+sources:
+  - title: Forgejo Actions and GitHub Actions
+    url: https://forgejo.org/docs/latest/user/actions/github-actions/
+  - title: Forgejo Actions quick start
+    url: https://forgejo.org/docs/latest/user/actions/quick-start/
+  - title: Forgejo FAQ - licensing
+    url: https://forgejo.org/faq/
