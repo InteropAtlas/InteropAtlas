@@ -101,6 +101,10 @@ RELATION_GROUPS = [
     ("参考与来源", {"inspired_by"}),
 ]
 
+FIELD_REFERENCE_LABELS = {
+    "capabilities": "能力字段引用",
+}
+
 HUMAN_VIEW_TYPES = {"implementation", "capability", "standard"}
 
 
@@ -235,6 +239,73 @@ def common_header(obj: dict[str, Any]) -> list[str]:
     return lines
 
 
+def add_one_hop_neighbors(
+    lines: list[str],
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex,
+) -> None:
+    object_id = str(obj.get("id"))
+    outgoing = graph.forward(object_id)
+    incoming = graph.backlinks(object_id)
+    edges = outgoing + incoming
+    if not edges:
+        return
+
+    neighbor_ids = {
+        edge.target_id if edge.source_id == object_id else edge.source_id
+        for edge in edges
+    }
+    lines += ["## 一跳邻居", ""]
+    lines.append(
+        f"当前对象通过 Graph 与 **{len(neighbor_ids)} 个直接邻居对象**相连。"
+        "显式 Relation 与对象字段引用分别展示，不把两种连接来源合并成同一种语义。"
+    )
+    lines.append("")
+
+    relation_edges = [edge for edge in edges if edge.origin == "relation"]
+    if relation_edges:
+        lines += ["### 显式 Relation", ""]
+        for group_heading, group_edges in grouped_by_relation_kind(relation_edges, lambda edge: edge.kind):
+            lines += [f"**{group_heading}**", ""]
+            for edge in sorted(
+                group_edges,
+                key=lambda item: (
+                    item.kind,
+                    item.target_id if item.source_id == object_id else item.source_id,
+                ),
+            ):
+                is_outgoing = edge.source_id == object_id
+                neighbor_id = edge.target_id if is_outgoing else edge.source_id
+                neighbor = index.get(neighbor_id)
+                label = RELATION_LABELS.get(edge.kind, edge.kind)
+                direction = "出" if is_outgoing else "入"
+                lines.append(
+                    f"- {relationship_name(obj, neighbor, neighbor_id)} — **{label}**（{direction}）"
+                )
+            lines.append("")
+
+    field_edges = [edge for edge in edges if edge.origin == "object"]
+    if field_edges:
+        lines += ["### 字段引用", ""]
+        for edge in sorted(
+            field_edges,
+            key=lambda item: (
+                item.field or "",
+                item.target_id if item.source_id == object_id else item.source_id,
+            ),
+        ):
+            is_outgoing = edge.source_id == object_id
+            neighbor_id = edge.target_id if is_outgoing else edge.source_id
+            neighbor = index.get(neighbor_id)
+            field_label = FIELD_REFERENCE_LABELS.get(edge.field or "", edge.field or "字段引用")
+            direction = "本对象引用它" if is_outgoing else "它引用本对象"
+            lines.append(
+                f"- {relationship_name(obj, neighbor, neighbor_id)} — **{field_label}**（{direction}）"
+            )
+        lines.append("")
+
+
 def add_direct_relations(
     lines: list[str],
     obj: dict[str, Any],
@@ -286,6 +357,7 @@ def render_implementation(
     lines.append("")
     add_capabilities(lines, obj, index)
     if graph is not None:
+        add_one_hop_neighbors(lines, obj, index, graph)
         add_direct_relations(lines, obj, index, graph)
 
     models = obj.get("deployment_models") or []
@@ -378,6 +450,7 @@ def render_capability(
     lines.append("")
 
     if graph is not None:
+        add_one_hop_neighbors(lines, obj, index, graph)
         add_capability_backlinks(lines, obj, index, graph)
     else:
         capability_id = obj.get("id")
@@ -411,6 +484,7 @@ def render_standard(
     lines.append("")
     add_capabilities(lines, obj, index)
     if graph is not None:
+        add_one_hop_neighbors(lines, obj, index, graph)
         add_direct_relations(lines, obj, index, graph)
 
     openness = obj.get("openness")
