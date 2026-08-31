@@ -35,6 +35,8 @@ jobs:
           python-version: '3.12'
       - name: Install bootstrap dependency
         run: pip install -r engine/requirements.txt
+      - name: Report resolved graph health
+        run: python engine/graph_index.py
       - name: Run deterministic supportability query
         run: python engine/bootstrap_query.py --capability automated_build_deployment
       - name: Render three human-readable object types
