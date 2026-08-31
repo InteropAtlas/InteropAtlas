@@ -11,8 +11,11 @@ without inventing semantic relationships that are not present in source data.
 
 from __future__ import annotations
 
+import argparse
+import json
 from collections import defaultdict
-from dataclasses import dataclass
+from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Any
 
 
@@ -168,3 +171,28 @@ class GraphIndex:
             if any(ref_id(value) == capability_id for value in values):
                 result.append(relation)
         return result
+
+
+def diagnostics(root: Path) -> dict[str, Any]:
+    # Local import avoids making bootstrap_query depend on graph_index.
+    from bootstrap_query import index_objects, load_atlas
+
+    objects, relations = load_atlas(root)
+    graph = GraphIndex(index_objects(objects), relations)
+    return {
+        "objects": len(objects),
+        "relations": len(relations),
+        "edges": len(graph.edges),
+        "reference_issues": [asdict(issue) for issue in graph.issues],
+    }
+
+
+def main() -> None:
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    args = parser.parse_args()
+    print(json.dumps(diagnostics(args.root), ensure_ascii=False, indent=2))
+
+
+if __name__ == "__main__":
+    main()
