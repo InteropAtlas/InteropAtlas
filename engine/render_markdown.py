@@ -175,6 +175,25 @@ def grouped_by_relation_kind(items: list[Any], kind_getter) -> list[tuple[str, l
     return [(heading, buckets[heading]) for heading in order if heading in buckets]
 
 
+def add_relation_overview(
+    lines: list[str],
+    items: list[Any],
+    kind_getter,
+    outgoing_count: int | None = None,
+    incoming_count: int | None = None,
+) -> None:
+    if not items:
+        return
+    lines += ["### 关系概览", ""]
+    if outgoing_count is not None and incoming_count is not None:
+        lines.append(f"- **直接关系总数：** {len(items)}（从本对象出发 {outgoing_count}，指向本对象 {incoming_count}）")
+    else:
+        lines.append(f"- **已记录关系总数：** {len(items)}")
+    for heading, group_items in grouped_by_relation_kind(items, kind_getter):
+        lines.append(f"- **{heading}：** {len(group_items)}")
+    lines.append("")
+
+
 def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
     sources = obj.get("sources") or []
     if not sources:
@@ -230,6 +249,7 @@ def add_direct_relations(
 
     lines += ["## 直接关系", ""]
     all_edges = outgoing + incoming
+    add_relation_overview(lines, all_edges, lambda edge: edge.kind, len(outgoing), len(incoming))
     for group_heading, group_items in grouped_by_relation_kind(all_edges, lambda edge: edge.kind):
         lines += [f"### {group_heading}", ""]
         group_outgoing = [edge for edge in group_items if edge in outgoing]
@@ -298,6 +318,21 @@ def add_capability_backlinks(
         if source:
             referenced_by.append(source)
 
+    standard_count = len([item for item in referenced_by if item.get("type") == "standard"])
+    implementation_count = len([item for item in referenced_by if item.get("type") == "implementation"])
+    relations = graph.relation_objects_for_capability(capability_id)
+
+    if referenced_by or relations:
+        lines += ["## 关系概览", ""]
+        lines.append(f"- **相关标准 / 规范：** {standard_count}")
+        lines.append(f"- **相关实现：** {implementation_count}")
+        lines.append(f"- **该能力上下文中的显式关系：** {len(relations)}")
+        for heading, group_relations in grouped_by_relation_kind(
+            relations, lambda relation: relation_predicate(relation) or "related_to"
+        ):
+            lines.append(f"- **{heading}：** {len(group_relations)}")
+        lines.append("")
+
     groups = [
         ("## 相关标准 / 规范", "standard"),
         ("## 哪些实现提供这个能力？", "implementation"),
@@ -312,7 +347,6 @@ def add_capability_backlinks(
             lines.append(f"- {linked_name(obj, item, item_id)}")
         lines.append("")
 
-    relations = graph.relation_objects_for_capability(capability_id)
     if relations:
         lines += ["## 这个能力下已记录的关系", ""]
         for group_heading, group_relations in grouped_by_relation_kind(
