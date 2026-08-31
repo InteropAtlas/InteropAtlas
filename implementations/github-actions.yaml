@@ -1,0 +1,29 @@
+id: github_actions
+type: implementation
+kind: platform_service
+name_zh: GitHub Actions
+name_en: GitHub Actions
+summary_zh: >-
+  GitHub 提供的工作流自动化与 CI/CD 平台服务。工作流定义存放在仓库中，
+  可使用 GitHub 托管 Runner，也可连接用户自行管理的 Self-hosted Runner。
+  需要注意：可自托管的是 Runner 执行环境，而不是完整的 GitHub Actions 控制平面。
+summary_en: >-
+  GitHub's workflow automation and CI/CD platform service. Workflows are stored in repositories
+  and can run on GitHub-hosted runners or user-managed self-hosted runners. The runner execution
+  environment can be self-hosted, but the complete GitHub Actions control plane is not self-hostable.
+capabilities:
+  - automated_build_deployment
+open_source: false
+self_hostable: false
+deployment_models:
+  - github_hosted_runner
+  - self_hosted_runner
+notes_zh:
+  - GitHub Actions 平台服务本身不应建模为开放标准。
+  - GitHub 官方说明 Self-hosted Runner 由用户部署和管理，但仍需连接 GitHub Actions 服务接收任务。
+  - GitHub Actions Runner 应视为可进一步拆分的独立软件实现；其开源属性不代表整个 GitHub Actions 平台服务开源。
+sources:
+  - title: GitHub Actions documentation
+    url: https://docs.github.com/en/actions
+  - title: Self-hosted runners
+    url: https://docs.github.com/en/actions/concepts/runners/self-hosted-runners
