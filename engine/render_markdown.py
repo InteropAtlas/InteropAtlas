@@ -9,6 +9,7 @@ from pathlib import Path
 from typing import Any
 
 from bootstrap_query import index_objects, load_atlas
+from graph_index import GraphIndex, ref_id, relation_predicate
 
 TYPE_LABELS = {
     "implementation": "实现（Implementation）",
@@ -56,6 +57,23 @@ VALUE_LABELS = {
     "open": "开放",
     "unknown": "未知",
     "not_required": "不要求",
+}
+
+RELATION_LABELS = {
+    "alternative_to": "可替代于",
+    "depends_on": "依赖",
+    "uses": "使用",
+    "implements": "实现",
+    "extends": "扩展",
+    "replaces": "替代",
+    "supersedes": "取代",
+    "compatible_with": "兼容",
+    "incompatible_with": "不兼容",
+    "bridges_to": "桥接到",
+    "maps_to": "映射到",
+    "requires": "要求",
+    "governed_by": "由其治理",
+    "implemented_by": "由其实现",
 }
 
 
@@ -174,25 +192,78 @@ def render_implementation(obj: dict[str, Any], index: dict[str, dict[str, Any]])
     return finish(lines)
 
 
-def render_capability(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> str:
+def add_capability_backlinks(
+    lines: list[str],
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex,
+) -> None:
+    capability_id = str(obj.get("id"))
+    referenced_by = []
+    for edge in graph.backlinks(capability_id):
+        if edge.origin != "object" or edge.field != "capabilities":
+            continue
+        source = index.get(edge.source_id)
+        if source:
+            referenced_by.append(source)
+
+    groups = [
+        ("## 相关标准 / 规范", "standard"),
+        ("## 哪些实现提供这个能力？", "implementation"),
+    ]
+    for heading, object_type in groups:
+        items = [item for item in referenced_by if item.get("type") == object_type]
+        if not items:
+            continue
+        lines += [heading, ""]
+        for item in sorted(items, key=lambda candidate: display_name(candidate, str(candidate.get("id")))):
+            item_id = str(item.get("id"))
+            lines.append(f"- {linked_name(obj, item, item_id)}")
+        lines.append("")
+
+    relations = graph.relation_objects_for_capability(capability_id)
+    if relations:
+        lines += ["## 这个能力下已记录的关系", ""]
+        for relation in sorted(relations, key=lambda item: str(item.get("id"))):
+            source_id = ref_id(relation.get("source")) or "未知对象"
+            target_id = ref_id(relation.get("target")) or "未知对象"
+            source = index.get(source_id)
+            target = index.get(target_id)
+            predicate = relation_predicate(relation) or "related_to"
+            predicate_label = RELATION_LABELS.get(predicate, predicate)
+            lines.append(
+                f"- {linked_name(obj, source, source_id)} **{predicate_label}** {linked_name(obj, target, target_id)}"
+            )
+        lines.append("")
+
+
+def render_capability(
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex | None = None,
+) -> str:
     lines = common_header(obj)
     if obj.get("category") is not None:
         lines.append(f"- **能力类别：** {human_value(obj.get('category'))}")
     lines.append("")
 
-    capability_id = obj.get("id")
-    implementations = [
-        candidate
-        for candidate in index.values()
-        if candidate.get("type") == "implementation"
-        and capability_id in (candidate.get("capabilities") or [])
-    ]
-    if implementations:
-        lines += ["## 哪些实现提供这个能力？", ""]
-        for implementation in sorted(implementations, key=lambda item: str(item.get("id"))):
-            implementation_id = str(implementation.get("id"))
-            lines.append(f"- {linked_name(obj, implementation, implementation_id)}")
-        lines.append("")
+    if graph is not None:
+        add_capability_backlinks(lines, obj, index, graph)
+    else:
+        # Compatibility fallback for callers that have not yet adopted GraphIndex.
+        capability_id = obj.get("id")
+        implementations = [
+            candidate
+            for candidate in index.values()
+            if candidate.get("type") == "implementation"
+            and capability_id in (candidate.get("capabilities") or [])
+        ]
+        if implementations:
+            lines += ["## 哪些实现提供这个能力？", ""]
+            for implementation in sorted(implementations, key=lambda item: str(item.get("id"))):
+                implementation_id = str(implementation.get("id"))
+                lines.append(f"- {linked_name(obj, implementation, implementation_id)}")
+            lines.append("")
     return finish(lines)
 
 
@@ -246,16 +317,19 @@ def finish(lines: list[str]) -> str:
     return "\n".join(lines)
 
 
-def render_object(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> str:
-    renderers = {
-        "implementation": render_implementation,
-        "capability": render_capability,
-        "standard": render_standard,
-    }
-    renderer = renderers.get(obj.get("type"))
-    if not renderer:
-        raise ValueError(f"renderer does not support object type yet: {obj.get('type')}")
-    return renderer(obj, index)
+def render_object(
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex | None = None,
+) -> str:
+    object_type = obj.get("type")
+    if object_type == "capability":
+        return render_capability(obj, index, graph)
+    if object_type == "implementation":
+        return render_implementation(obj, index)
+    if object_type == "standard":
+        return render_standard(obj, index)
+    raise ValueError(f"renderer does not support object type yet: {object_type}")
 
 
 def main() -> None:
@@ -265,13 +339,14 @@ def main() -> None:
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
-    objects, _relations = load_atlas(args.root)
+    objects, relations = load_atlas(args.root)
     index = index_objects(objects)
+    graph = GraphIndex(index, relations)
     obj = index.get(args.object_id)
     if not obj:
         raise SystemExit(f"unknown object id: {args.object_id}")
 
-    rendered = render_object(obj, index)
+    rendered = render_object(obj, index, graph)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(rendered, encoding="utf-8")
