@@ -71,10 +71,22 @@ RELATION_LABELS = {
     "incompatible_with": "不兼容",
     "bridges_to": "桥接到",
     "maps_to": "映射到",
+    "encapsulates": "封装",
+    "transports": "传输",
+    "describes": "描述",
     "requires": "要求",
+    "recommended_with": "建议与其配合",
     "governed_by": "由其治理",
     "implemented_by": "由其实现",
+    "secures": "保护",
+    "discovers": "发现",
+    "identifies": "标识",
+    "synchronizes": "同步",
+    "provides": "提供",
+    "inspired_by": "参考 / 受启发于",
 }
+
+HUMAN_VIEW_TYPES = {"implementation", "capability", "standard"}
 
 
 def human_value(value: Any) -> str:
@@ -126,6 +138,12 @@ def linked_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | None, f
     return f"[{label}]({link})" if link else label
 
 
+def relationship_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | None, fallback: str) -> str:
+    if not target_obj or target_obj.get("type") not in HUMAN_VIEW_TYPES:
+        return display_name(target_obj, fallback)
+    return linked_name(source_obj, target_obj, fallback)
+
+
 def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
     sources = obj.get("sources") or []
     if not sources:
@@ -167,7 +185,41 @@ def common_header(obj: dict[str, Any]) -> list[str]:
     return lines
 
 
-def render_implementation(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> str:
+def add_direct_relations(
+    lines: list[str],
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex,
+) -> None:
+    object_id = str(obj.get("id"))
+    outgoing = [edge for edge in graph.forward(object_id) if edge.origin == "relation"]
+    incoming = [edge for edge in graph.backlinks(object_id) if edge.origin == "relation"]
+    if not outgoing and not incoming:
+        return
+
+    lines += ["## 直接关系", ""]
+    if outgoing:
+        lines += ["### 从本对象出发", ""]
+        for edge in sorted(outgoing, key=lambda item: (item.kind, item.target_id)):
+            target = index.get(edge.target_id)
+            label = RELATION_LABELS.get(edge.kind, edge.kind)
+            lines.append(f"- **{label}** → {relationship_name(obj, target, edge.target_id)}")
+        lines.append("")
+
+    if incoming:
+        lines += ["### 指向本对象", ""]
+        for edge in sorted(incoming, key=lambda item: (item.kind, item.source_id)):
+            source = index.get(edge.source_id)
+            label = RELATION_LABELS.get(edge.kind, edge.kind)
+            lines.append(f"- {relationship_name(obj, source, edge.source_id)} → **{label}** → 本对象")
+        lines.append("")
+
+
+def render_implementation(
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex | None = None,
+) -> str:
     lines = common_header(obj)
     lines.append(f"- **实现类别：** {human_value(obj.get('kind'))}")
     lines.append(f"- **开源：** {human_value(obj.get('open_source'))}")
@@ -176,6 +228,8 @@ def render_implementation(obj: dict[str, Any], index: dict[str, dict[str, Any]])
         lines.append(f"- **许可证：** `{obj['license_expression']}`")
     lines.append("")
     add_capabilities(lines, obj, index)
+    if graph is not None:
+        add_direct_relations(lines, obj, index, graph)
 
     models = obj.get("deployment_models") or []
     if models:
@@ -232,7 +286,7 @@ def add_capability_backlinks(
             predicate = relation_predicate(relation) or "related_to"
             predicate_label = RELATION_LABELS.get(predicate, predicate)
             lines.append(
-                f"- {linked_name(obj, source, source_id)} **{predicate_label}** {linked_name(obj, target, target_id)}"
+                f"- {relationship_name(obj, source, source_id)} **{predicate_label}** {relationship_name(obj, target, target_id)}"
             )
         lines.append("")
 
@@ -267,7 +321,11 @@ def render_capability(
     return finish(lines)
 
 
-def render_standard(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> str:
+def render_standard(
+    obj: dict[str, Any],
+    index: dict[str, dict[str, Any]],
+    graph: GraphIndex | None = None,
+) -> str:
     lines = common_header(obj)
     if obj.get("kind") is not None:
         lines.append(f"- **标准类别：** {human_value(obj.get('kind'))}")
@@ -277,6 +335,8 @@ def render_standard(obj: dict[str, Any], index: dict[str, dict[str, Any]]) -> st
         lines.append(f"- **官方网站：** {obj['official_url']}")
     lines.append("")
     add_capabilities(lines, obj, index)
+    if graph is not None:
+        add_direct_relations(lines, obj, index, graph)
 
     openness = obj.get("openness")
     if isinstance(openness, dict) and openness:
@@ -326,9 +386,9 @@ def render_object(
     if object_type == "capability":
         return render_capability(obj, index, graph)
     if object_type == "implementation":
-        return render_implementation(obj, index)
+        return render_implementation(obj, index, graph)
     if object_type == "standard":
-        return render_standard(obj, index)
+        return render_standard(obj, index, graph)
     raise ValueError(f"renderer does not support object type yet: {object_type}")
 
 
