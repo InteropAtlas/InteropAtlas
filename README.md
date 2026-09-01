@@ -43,60 +43,25 @@ InteropAtlas 因此区分并连接多类知识对象：
 
 ## 核心架构
 
-当前 v0.1 采用三层架构：
-
-### 1. Facts（事实层）
-
-记录可以查证、引用来源并进行版本控制的事实，例如：
-
-- Normative Artifact（标准、规范、协议、Profile 等）；
-- Mature Precedent / Reference（成熟先例与参考项目）；
-- Method / Guideline / Framework（方法、指南与框架）；
-- Capability（能力）；
-- Organization（组织）；
-- Implementation（实现）；
-- Relation（关系）；
-- Evidence（证据）。
-
-当前这些是**概念类别**，不代表 Schema 已经冻结为同名 `type`。特别是 Method / Guideline / Design System / Mature Precedent 的最终对象模型仍在设计中。
-
-事实层是 InteropAtlas 的知识底座。GitHub 中的结构化数据将作为初期的 Source of Truth（事实源）。
-
-### 2. Rules & Engine（规则与分析引擎层）
-
-记录判断规则，并由 InteropAtlas Engine（InteropAtlas 分析引擎）读取事实数据进行计算，例如：
-
-- 数据验证；
-- 关系图构建；
-- 互操作路径搜索；
-- 场景约束匹配；
-- Openness Policy（开放性判定规则）；
-- Coverage（覆盖度）与方案空间分析；
-- Open Gap（开放缺口）检测。
-
-### 3. Assessments（动态评估结果层）
-
-保存或生成某个时间点、某套规则和某个场景下得到的分析结果，例如：
-
-- Gap Assessment（缺口评估）；
-- Path Assessment（路径评估）；
-- Coverage Assessment（覆盖度评估）；
-- Compatibility Assessment（兼容性评估）；
-- Maturity / Applicability 等需要依据上下文得出的评价。
-
-Open Gap（开放缺口）原则上不被视为永久事实，而是基于事实、场景、约束、开放性规则和时间得到的动态评估结果。经人工确认的重要缺口可以进一步形成长期跟踪的 Gap Case（缺口案例）。
-
-核心数据流为：
+概念上，InteropAtlas 仍以事实、确定性处理与动态评估之间的关系理解系统：
 
 ```text
-Facts（事实）
-    ↓
-Rules & Engine（规则与分析引擎）
-    ↓
-Assessments（动态评估结果）
+Facts / Current State
+        ↓
+Rules & Engine / Runtime
+        ↓
+Assessments / Generated Views
 ```
 
-这套架构目前用于指导 v0.1，但允许随着真实数据实验和程序实现继续调整。
+仓库物理结构不直接复制这些知识类别，而采用更稳定的生命周期结构：
+
+```text
+01_State      当前正式承认什么
+02_Runtime    当前如何运行和使用这些状态
+03_Evolution  项目如何研究、验证和改变自己
+```
+
+物理目录、知识分类和索引 / View 是三个不同层面。对象属于 Standard、Capability、Organization、Method、Implementation 等类别，由其数据字段和关系表达，而不是由文件夹名决定。
 
 ## Prior Art / 既有方案调查
 
@@ -133,8 +98,6 @@ InteropAtlas 将优先收录**项目自身实际依赖或参考的标准、规�
 3. Atlas 是否能够区分“正式标准”“成熟先例”“方法”“实现”和“评估”；
 4. 实践中暴露出的模型缺口能否反向推动 Atlas 演化。
 
-例如 YAML、JSON、JSON Schema、Git、HTTP、URI、Unicode 属于标准 / 规范类候选；GitHub Community Health、MDN Browser Compat Data、SPDX License List、成熟 Design System、Docs-as-Code 等则可能作为成熟先例或方法类候选。
-
 收录某项对象不等于认定它是开放标准，也不等于认定它是最佳方案。InteropAtlas 应记录事实、证据和身份差异，并让具体结论来自明确场景和规则下的评估。
 
 ## 语言策略
@@ -150,28 +113,45 @@ InteropAtlas 采用 **中文优先、英文机器标识、中英双语知识字�
 
 ## 仓库结构
 
-当前结构仍在演化。现有主要目录包括：
+当前核心结构为：
 
 ```text
-standards/           当前正式标准、协议、规范类结构化对象
-capabilities/        互操作能力
-scenarios/           互操作场景及约束
-organizations/       标准组织、项目、基金会及相关机构
-implementations/     实现 / 平台 / 工具类对象
-reference-projects/  当前成熟参考项目的临时对象模型
-relations/           显式关系
-gaps/                早期缺口数据
-maps/                动态地图 / View 的实验数据
-schemas/             数据结构与验证规则
-engine/              Loader / Graph / Query / Renderer 等确定性能力
-docs/                当前混合的架构、方法、规范、研究与项目文档
-experiments/         可执行或结构化实验材料
-tools/               仓库 / 贡献者工具候选区
+01_State/
+├── 01_Objects/       Canonical Objects + Object Schemas
+└── 02_Relations/     Canonical Relations + Relation Schema
+
+02_Runtime/
+├── 01_Engine/        Loader / Graph / Query / Renderer 等核心运行代码
+├── 02_Tools/         Human / Agent / CI 使用的辅助工具
+└── 03_Outputs/       生成物的逻辑区域；并非所有产物都提交 Git
+
+03_Evolution/
+├── 01_Research/      Prior Art、研究、Audit、方案比较
+├── 02_Experiments/   原型、实验、Dry Run
+└── 03_Change/        Proposal、Migration、Transition 等变更材料
 ```
 
-当前正在通过 #21 研究 Repository Structure & Artifact Taxonomy，**尚未批准或执行 `data/`、`specs/`、`research/` 等候选目录迁移**。
+根目录继续保留 GitHub / 开源项目接口：
 
-初期使用 YAML 作为适合人类编辑的源数据格式，并逐步通过 JSON Schema 与 Validator 进行验证。未来可以从同一事实源生成 JSON、RDF、图数据库、API、网站视图与动态评估结果。
+```text
+.github/
+docs/
+LICENSES/
+README.md
+CONTRIBUTING.md
+LICENSE.md
+AGENTS.md
+```
+
+关键规则：
+
+- `01_Objects/` 内不同对象类型平级存放，不再通过 Standard / Capability / Organization 等语义文件夹分类；
+- Properties 是 Object / Relation 自身字段，不建立独立目录；
+- Schema 与其约束的数据共置，README 给 Human / Agent 看，`*.schema.json` 给机器验证；
+- 公共对象地址使用稳定 ID：`/objects/<stable-id>.html`，不依赖 YAML 的物理文件位置；
+- 如果未来文件数量过大，需要分片时，应优先采用 ID / 哈希等非语义分片，而不是重新用对象类别建目录。
+
+初期使用 YAML 作为适合人类编辑的事实源格式，并逐步通过 JSON Schema 与 Validator 进行验证。未来可以从同一事实源生成 JSON、RDF、图数据库、API、网站视图与动态评估结果。
 
 ## 范围
 
