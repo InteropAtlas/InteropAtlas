@@ -41,6 +41,8 @@ jobs:
           python-version: '3.12'
       - name: Install bootstrap dependency
         run: pip install -r engine/requirements.txt
+      - name: Verify repository layout contract
+        run: python engine/test_repository_layout.py
       - name: Report resolved graph health
         run: python engine/graph_index.py
       - name: Run deterministic supportability query
