@@ -28,40 +28,46 @@ class SemanticModelTests(unittest.TestCase):
         self.assertEqual(normalize_record(legacy).profiles, ("capability",))
         self.assertEqual(normalize_record(v0).profiles, ("capability",))
 
-    def test_legacy_implementation_normalizes_to_system_profile(self) -> None:
-        record = {"id": "forgejo_actions", "type": "implementation", "kind": "software"}
+    def test_legacy_and_v0_software_share_implementation_semantics(self) -> None:
+        legacy = {"id": "forgejo_actions", "type": "implementation", "kind": "software"}
+        v0 = {"id": "forgejo_actions", "type": "system", "kind": "software"}
+
+        self.assertEqual(normalize_record(legacy).family, "system")
+        self.assertEqual(normalize_record(legacy).profiles, ("implementation",))
+        self.assertEqual(normalize_record(v0).profiles, ("implementation",))
+        self.assertTrue(is_implementation_system(legacy))
+        self.assertTrue(is_implementation_system(v0))
+
+    def test_reference_implementation_requires_identity_audit_without_guessed_family(self) -> None:
+        record = {"id": "sample", "type": "implementation", "kind": "reference_implementation"}
         descriptor = normalize_record(record)
-
-        self.assertEqual(descriptor.family, "system")
-        self.assertEqual(descriptor.kind, "software")
-        self.assertEqual(descriptor.profiles, ("implementation",))
-        self.assertTrue(is_implementation_system(record))
-
-    def test_reference_implementation_requires_identity_audit(self) -> None:
-        descriptor = normalize_record(
-            {"id": "sample", "type": "implementation", "kind": "reference_implementation"}
-        )
-        self.assertEqual(descriptor.family, "system")
+        self.assertIsNone(descriptor.family)
         self.assertEqual(descriptor.migration_status, "audit_required")
+        self.assertFalse(is_implementation_system(record))
 
-    def test_organization_open_source_project_requires_audit(self) -> None:
+    def test_organization_open_source_project_requires_audit_without_guessed_family(self) -> None:
         record = {
             "id": "sample",
             "type": "organization",
             "organization_kind": "open_source_project",
         }
         descriptor = normalize_record(record)
-        self.assertEqual(descriptor.family, "agent")
+        self.assertIsNone(descriptor.family)
+        self.assertEqual(descriptor.kind, "open_source_project")
         self.assertEqual(descriptor.migration_status, "audit_required")
-        self.assertTrue(is_organization_agent(record))
+        self.assertFalse(is_organization_agent(record))
 
     def test_legacy_standard_boundary_is_not_guessed(self) -> None:
         clear = normalize_record({"id": "yaml", "type": "standard", "kind": "standard"})
         boundary = normalize_record({"id": "api", "type": "standard", "kind": "api"})
+        unknown = normalize_record({"id": "odd", "type": "standard", "kind": "service"})
 
         self.assertEqual(clear.family, "artifact")
         self.assertEqual(clear.migration_status, "legacy")
+        self.assertIsNone(boundary.family)
         self.assertEqual(boundary.migration_status, "audit_required")
+        self.assertIsNone(unknown.family)
+        self.assertEqual(unknown.migration_status, "audit_required")
 
     def test_reference_project_has_no_guessed_family(self) -> None:
         descriptor = normalize_record(
