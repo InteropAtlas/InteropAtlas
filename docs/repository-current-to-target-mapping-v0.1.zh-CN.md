@@ -1,280 +1,335 @@
 # InteropAtlas Repository Current → Target Mapping v0.1
 
-> 状态：Migration Inventory / Corrected by #31
+> 状态：Migration Dry Run / Updated after #33–#36
 >
-> 关联：#21、#31。
+> 关联：#21、#31、#33、#34、#35、#36。
 >
-> 本文件记录“现在有什么”和“迁移时要处理什么”。旧版按 object family 一一映射到 `data/<family>/` 的方案已撤回。
+> 本文件记录当前仓库如何迁入已经确认的三大主结构。它是迁移计划，不代表已经授权或执行物理搬迁。
 
-## 1. 修正摘要
-
-旧版曾建议：
+## 1. 已确认的目标结构
 
 ```text
-standards/          → data/standards/
-capabilities/       → data/capabilities/
-implementations/    → data/implementations/
-...
+01_State/
+├── 01_Objects/
+├── 02_Relations/
+└── README.md
+
+02_Runtime/
+├── 01_Engine/
+├── 02_Tools/
+├── 03_Outputs/
+└── README.md
+
+03_Evolution/
+├── 01_Research/
+├── 02_Experiments/
+├── 03_Change/
+└── README.md
 ```
 
-#31 后该映射 **WITHDRAWN**。
+三个一级目录分别回答：
 
-原因很简单：
+- `01_State`：项目当前正式承认什么；
+- `02_Runtime`：项目如何运行、处理和产生输出；
+- `03_Evolution`：项目如何研究、验证并改变自己。
 
-> 当前文件夹只是历史形成的物理存储位置，不应该继续被当成未来知识分类结构。
+根目录外部接口继续保留，例如 `.github/`、`docs/`、`LICENSES/`、`README.md`、`CONTRIBUTING.md`、`LICENSE.md`、`AGENTS.md`。
 
-未来 Standard、Method、Design System、Capability、Organization、Relation 等对象是否共享一个物理目录、是否技术分片，应该按存储和工程需要决定；对象分类由数据字段、引用、Graph / Index / Map 决定。
+`docs/` 主要承担项目正式规范、治理、说明与长期有效文档；研究过程、实验过程、迁移/路线等演化材料应逐步迁入 `03_Evolution`。
 
 ---
 
-## 2. 当前 Root Inventory
+## 2. Canonical YAML 迁移
 
-当前仓库大致包含以下 root 内容：
+当前 Loader 扫描九个 legacy physical storage locations：
 
 ```text
+standards/
+capabilities/
+scenarios/
+organizations/
+implementations/
+reference-projects/
+gaps/
+relations/
+maps/
+```
+
+目标不是把这九种分类复制到新目录。
+
+迁移规则是：
+
+```text
+如果文档内容表示 Relation
+→ 01_State/02_Relations/
+
+其他 Canonical Object
+→ 01_State/01_Objects/
+```
+
+因此预期的大方向是：
+
+```text
+standards/          ┐
+capabilities/       │
+scenarios/          │
+organizations/      │
+implementations/    ├──→ 01_State/01_Objects/
+reference-projects/ │
+gaps/               │
+maps/               ┘
+
+relations/ ─────────────→ 01_State/02_Relations/
+```
+
+但真实迁移时不能简单依据旧目录名批量分类。最终判断必须使用文件内容。Relation 的判断继续兼容：
+
+- 正式形式：`type: relation`；
+- legacy 形式：没有显式 `type`，但具有 `source + relation/predicate/kind + target`。
+
+这能避免重新把文件夹变成知识模型。
+
+`Properties` 不建立独立目录，继续属于 Object 或 Relation 自身。
+
+### 规模风险
+
+`01_Objects/` 未来可能包含数百到数千文件。现阶段可以保持平坦；只有当实际浏览、工具或文件系统性能出现明确问题时，再引入**非语义分片**。例如按稳定 ID 前缀或哈希分片，而不是重新按 Standard / Method / Organization 等类型建目录。
+
+---
+
+## 3. `schemas/`：暂缓直接搬迁
+
+当前 `schemas/` 有一组按历史对象类型拆分的机器可读合同，例如：
+
+```text
+base-object.schema.json
+standard.schema.json
+capability.schema.json
+implementation.schema.json
+organization.schema.json
+scenario.schema.json
+reference-project.schema.json
+open-gap.schema.json
+map.schema.json
+relation.schema.json
+```
+
+新的结构原则是：数据长什么样的规则应尽量靠近数据本身，而不是为了“规则”再建立第三个 State 二级目录。
+
+因此 `schemas/` **不能直接原样搬成新的二级目录**。
+
+迁移前单独处理：
+
+- Object 通用数据规则进入 `01_State/01_Objects/README.md`，需要机器执行的合同也应靠近 Objects；
+- Relation 通用数据规则进入 `01_State/02_Relations/README.md`，需要机器执行的合同也应靠近 Relations；
+- 现有 type-specific Schema 是否继续保留、合并、改成组合式定义，属于 Schema/Data Model 改造，不与纯目录迁移混做。
+
+在该问题解决前，`schemas/` 保持原位。
+
+---
+
+## 4. Runtime 迁移
+
+```text
+engine/ ─────────→ 02_Runtime/01_Engine/
+tools/ ──────────→ 02_Runtime/02_Tools/
+```
+
+当前 `engine/` 包括 Loader、Graph Index、Query、Markdown/Site Renderer、Repository Layout 和测试，整体职责与 `01_Engine` 一致，可以作为一个整体迁移候选。
+
+当前 `tools/` 只有 README，迁移风险很低。
+
+### Outputs
+
+当前 Pages 工作流使用：
+
+```text
+python engine/render_site.py --output build/site
+```
+
+`build/site` 是 CI 生成物并上传到 GitHub Pages，不是 Canonical Source。
+
+因此暂时没有需要从旧仓库搬入 `02_Runtime/03_Outputs/` 的正式内容。未来可以让运行时输出路径落到该区域，但**不等于应该把所有生成文件提交进 Git**。
+
+---
+
+## 5. Evolution 迁移
+
+### Research
+
+以下性质的现有 `docs/` 内容应逐步进入：
+
+```text
+03_Evolution/01_Research/
+```
+
+包括：
+
+- Prior Art；
+- standards/reference intake research；
+- Fit Test；
+- Audit / Assessment；
+- 方案比较；
+- 为某个项目决策进行的调查。
+
+例如当前的 human-ai prior art、human-interface reference/audit、repository structure prior-art 等文档属于这一方向。
+
+### Experiments
+
+```text
+experiments/*
+        ↓
+03_Evolution/02_Experiments/
+```
+
+当前 `experiments/json-ld/`、`experiments/rdf-1.2/` 是直接候选。
+
+当前 `docs/experiments/` 中的实验报告也应与实验层统一，不再长期形成两个 experiment 区域。
+
+### Change
+
+以下性质的文档应逐步进入：
+
+```text
+03_Evolution/03_Change/
+```
+
+包括：
+
+- Roadmap；
+- Proposal；
+- Migration Plan / Dry Run；
+- Transition / Deprecation Plan；
+- 面向下一状态的实施计划。
+
+本 Mapping 文件本身在正式迁移时也属于 `03_Change`，现在继续留在 `docs/` 只是为了在迁移完成前保持现有文档索引和链接稳定。
+
+---
+
+## 6. `docs/` 最终保留什么
+
+`docs/` 不再承担“所有 Markdown 都往这里放”的角色。
+
+优先保留：
+
+- 项目 Definition / Scope；
+- 正式 Architecture；
+- 已采用的 Specification / Profile；
+- Governance / Policy；
+- Collaboration rules；
+- Language / Project development principles；
+- 其他长期有效、用于解释和规范项目本身的正式文档。
+
+判断方法不是“是不是 Markdown”，而是：
+
+> 它是在解释当前项目规则，还是在记录项目如何演化？
+
+前者留 `docs/`；后者进入 `03_Evolution`。
+
+---
+
+## 7. 根目录外围内容
+
+以下内容继续留在主三目录之外：
+
+```text
+.github/
+LICENSES/
 README.md
 CONTRIBUTING.md
 LICENSE.md
-LICENSES/
-.github/
-
-standards/
-capabilities/
-implementations/
-organizations/
-scenarios/
-reference-projects/
-gaps/
-relations/
-maps/
-
-schemas/
-engine/
-tools/
-experiments/
-docs/
+AGENTS.md
 ```
 
-其中：
-
-- README / CONTRIBUTING / LICENSE：公共项目入口 / 法务；
-- `.github/`：GitHub 平台集成；
-- 9 个知识对象目录：当前 Canonical YAML 的 **legacy physical storage shards**；
-- `schemas/`：数据合同；
-- `engine/`：确定性读取、Graph、Query、Renderer；
-- `tools/`：维护工具候选区；
-- `experiments/`：实验 artifact；
-- `docs/`：当前混合承载 Specification、Research、Architecture、Plan、Governance 等多种文档身份。
-
-这只是现状，不是目标结构。
+理由是它们承担 GitHub、开源协作、法务或项目入口职责，不属于三大项目内容区本体。
 
 ---
 
-## 3. Canonical Data：只记录 Current，不预设 Target
+## 8. 真实迁移前的三个阻塞点
 
-当前 Canonical YAML 分布在：
+### A. Public Route 与 Physical Source 解耦
 
-```text
-standards/
-capabilities/
-implementations/
-organizations/
-scenarios/
-reference-projects/
-gaps/
-relations/
-maps/
-```
+当前 Loader 明确保留 `_source` / `_physical_source` 的物理路径，并注明在未来迁移前仍保持当前 generated-view 行为。
 
-正确的解释是：
+如果先移动文件，生成页面或链接可能因为物理路径变化而改变。
+
+所以真实搬 Canonical Data 前，应先定义：
 
 ```text
-current physical storage shards
+stable object id
+        ↓
+stable public route
 ```
 
 而不是：
 
 ```text
-future ontology folders
+physical file path
+        ↓
+public route
 ```
 
-因此当前 → 未来的映射现在只能写成：
+### B. Schema 合同怎么落盘
+
+必须先决定现有 type-specific Schema 在新 Objects / Relations 模型下如何保持验证能力，避免为了目录简洁而破坏数据质量检查。
+
+### C. CI 路径更新
+
+当前两个 GitHub Actions workflow 都显式监听旧的 `standards/**`、`capabilities/**`、`relations/**`、`schemas/**`、`engine/**` 等路径，并直接运行 `engine/...`。
+
+真实迁移必须在同一个迁移 PR 中同步修改，否则迁移后 CI / Pages 可能不会触发或直接找不到程序。
+
+---
+
+## 9. 迁移验证基线
+
+#32 最后一次完整验证的行为基线：
 
 ```text
-current 9 storage locations
-          ↓
-[future canonical storage layout — OPEN]
+objects = 112
+relations = 107
+resolved edges = 161
+reference issues = 0
 ```
 
-不能提前写成九个同名子目录。
+同时：
 
-### 已知迁移要求
+- 4 个 storage/layout regression tests 通过；
+- 代表性 Query 语义不变；
+- 代表性 Markdown rendering 成功。
 
-无论未来 physical layout 最终是什么，迁移都必须：
-
-1. Loader 能显式知道要扫描哪些物理位置；
-2. Loader 根据对象内容判断 `type`，不能根据目录判断；
-3. stable IDs 保持不变；
-4. object / relation / Graph semantics 保持不变；
-5. CI path filters 同步更新；
-6. README / docs / generated routes / links 检查；
-7. public URL 不被 source path 无意改写；
-8. 可 rollback。
+物理迁移完成后必须至少保持这些语义基线，或者对任何变化给出明确的数据层原因，不能把“搬目录”变成静默的数据模型改变。
 
 ---
 
-## 4. 当前 9 个目录是否还叫 object families？
-
-在“当前数据”层面，它们历史上大致对应已有 Schema type，因此可以描述为 legacy family-oriented layout。
-
-但从 #31 开始：
-
-> **目录名本身不具有知识模型权威性。**
-
-例如一个 YAML 放在名为 `anything/` 的目录中，只要它的数据声明：
-
-```yaml
-type: relation
-```
-
-Loader 就应按 Relation 处理。
-
-反过来，一个文件仅仅位于 `relations/`，不能因此自动获得 Relation identity。
-
----
-
-## 5. 其他 Artifact 的 Current Inventory
-
-### `schemas/`
-
-当前身份：Schema / Contract。
-
-是否继续作为 root 一级目录：**待下一轮讨论**。
-
-### `engine/`
-
-当前身份：Implementation / Deterministic Engine。
-
-是否继续作为 root 一级目录：**待下一轮讨论**。
-
-### `tools/`
-
-当前身份：Repository operational tooling。
-
-是否保留、并入其他区或继续 root-level：**待讨论**。
-
-### `experiments/`
-
-当前身份：Experiment fixtures / prototypes / records 的一部分。
-
-当前还有 `docs/experiments/`，说明 experiment report 与 executable artifact 边界尚未统一。最终层级：**待讨论**。
-
-### `docs/`
-
-当前混合至少包括：
-
-- Specification / Profile；
-- Research / Prior Art；
-- Audit / Assessment；
-- Architecture；
-- Methodology / Guide；
-- Governance / Policy；
-- Roadmap / Plan / Working Notes；
-- Experiment report。
-
-这些 Artifact identity 需要区分，但**现在不再自动推导出** `specs/`、`research/`、`governance/` 等必须成为 root 一级目录。
-
-下一轮应先讨论 root 一级目录数量与职责，再决定它们怎样落盘。
-
----
-
-## 6. Current → Target 图（修正版）
+## 10. 建议迁移顺序
 
 ```text
-CURRENT
-
-9 个 Canonical YAML root dirs ──────┐
-                                     │
-                                     ├──→ [Canonical Storage — OPEN]
-                                     │     不按 ontology 自动拆目录
-                                     │
-                                     └──→ 分类由 type / kind / relations / Graph 完成
-
-schemas/ ───────────────────────────→ [root placement OPEN]
-engine/ ────────────────────────────→ [root placement OPEN]
-tools/ ─────────────────────────────→ [root placement OPEN]
-experiments/ ───────────────────────→ [root placement OPEN]
-
-docs/ mixed artifacts ─────────────→ 先按 Artifact identity 理清
-                                     再讨论物理一级目录
-
-.github/ ───────────────────────────→ 受 GitHub 平台位置约束的内容继续遵守平台
-LICENSES/ ──────────────────────────→ 若采用 REUSE，继续遵守 REUSE 约束
+M1  路径/URL 解耦准备
+ ↓
+M2  Schema 合同迁移方案
+ ↓
+M3  Canonical YAML 按内容 Dry Run 分类
+ ↓
+M4  同一 PR 中移动 State + Runtime + Evolution 文件并更新 CI/文档引用
+ ↓
+M5  回归验证
+ ↓
+M6  删除已经为空的 legacy root folders
 ```
+
+M4 是第一次真正发生大规模物理移动的步骤，需要 Human Maintainer 明确确认后再执行。
 
 ---
 
-## 7. #15 与目录迁移的关系（修正）
+## 11. 当前结论
 
-旧版路线曾把 #15 Non-normative Knowledge Object Model 当成 `reference-projects/` 未来文件夹命名的前置条件。
+两级结构目前可以容纳现有仓库的主要内容，没有发现必须增加第四个主目录或第四个二级目录的硬需求。
 
-这一依赖现在撤销。
+当前真正需要解决的不是“文件夹不够”，而是三个迁移工程问题：
 
-#15 负责：
+1. public route 不依赖 physical path；
+2. Schema 合同与 Objects / Relations 新结构对齐；
+3. CI、文档链接和生成流程与新路径同时切换。
 
-```text
-type / kind / roles / relations / evidence / assessment
-```
-
-Repository Structure 负责：
-
-```text
-physical storage / artifact zones / tooling boundary
-```
-
-因此两条路线可以并行。
-
----
-
-## 8. 现有迁移风险仍然有效
-
-### Loader / Engine
-
-- 当前扫描位置仍需集中管理；
-- Renderer 仍会使用 `_source` 参与 generated path；
-- 真实迁移前必须明确 public route 与 physical source 的关系。
-
-### CI
-
-Bootstrap / Pages workflow 仍然把当前真实路径写在 `paths:` 中。
-
-### Documentation
-
-- README links；
-- docs index；
-- cross-document relative links；
-- 历史 Issue / PR 中的 blob path。
-
-### External references
-
-外部可能已经链接当前 GitHub 文件路径。真实 move 前必须评估。
-
-### Licensing
-
-受 REUSE 或其他实际标准约束的位置不能因为“统一目录”而随意移动。
-
----
-
-## 9. 下一步
-
-本 Mapping 到此不再给出完整 Target Tree。
-
-下一步从 **Root 一级目录** 重新讨论，按以下顺序：
-
-1. 哪些位置是 GitHub / REUSE 等外部机制强约束；
-2. 哪些 Artifact responsibilities 必须一眼可区分；
-3. 哪些职责值得成为一级目录，哪些可以合并；
-4. Canonical Data 是否需要一个一级 storage zone、叫什么；
-5. 最后才讨论一级目录内部怎样物理组织。
-
-在这些决定明确之前，不再创建新的“目标目录树”。
+在这三个问题完成前，保留 legacy directories 是有意的兼容状态，不视为结构设计失败。
