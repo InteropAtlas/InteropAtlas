@@ -3,31 +3,13 @@ name: Bootstrap Engine Experiment
 on:
   push:
     paths:
-      - 'standards/**'
-      - 'capabilities/**'
-      - 'scenarios/**'
-      - 'organizations/**'
-      - 'implementations/**'
-      - 'reference-projects/**'
-      - 'gaps/**'
-      - 'relations/**'
-      - 'maps/**'
-      - 'schemas/**'
-      - 'engine/**'
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
       - '.github/workflows/bootstrap-engine-experiment.yml'
   pull_request:
     paths:
-      - 'standards/**'
-      - 'capabilities/**'
-      - 'scenarios/**'
-      - 'organizations/**'
-      - 'implementations/**'
-      - 'reference-projects/**'
-      - 'gaps/**'
-      - 'relations/**'
-      - 'maps/**'
-      - 'schemas/**'
-      - 'engine/**'
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
       - '.github/workflows/bootstrap-engine-experiment.yml'
   workflow_dispatch:
 
@@ -40,18 +22,18 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install bootstrap dependency
-        run: pip install -r engine/requirements.txt
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
       - name: Verify repository layout contract
-        run: python engine/test_repository_layout.py
+        run: python 02_Runtime/01_Engine/test_repository_layout.py
       - name: Report resolved graph health
-        run: python engine/graph_index.py
+        run: python 02_Runtime/01_Engine/graph_index.py --root .
       - name: Run deterministic supportability query
-        run: python engine/bootstrap_query.py --capability automated_build_deployment
+        run: python 02_Runtime/01_Engine/bootstrap_query.py --root . --capability automated_build_deployment
       - name: Render three human-readable object types
         run: |
-          python engine/render_markdown.py forgejo_actions --output build/implementations/forgejo-actions.md
-          python engine/render_markdown.py automated_build_deployment --output build/capabilities/automated-build-deployment.md
-          python engine/render_markdown.py yaml_1.2.2 --output build/standards/yaml-1.2.2.md
+          python 02_Runtime/01_Engine/render_markdown.py forgejo_actions --root . --output build/implementations/forgejo-actions.md
+          python 02_Runtime/01_Engine/render_markdown.py automated_build_deployment --root . --output build/capabilities/automated-build-deployment.md
+          python 02_Runtime/01_Engine/render_markdown.py yaml_1.2.2 --root . --output build/standards/yaml-1.2.2.md
           echo '=== Implementation ==='
           cat build/implementations/forgejo-actions.md
           echo '=== Capability ==='
