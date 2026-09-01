@@ -1,0 +1,170 @@
+name: Ready Work Item
+description: Publish a Human-ready / Agent-ready task under the InteropAtlas collaboration protocol.
+title: "[Task] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this form only when the task can be understood from public repository / Issue context. A Ready task must not depend on private chat memory.
+
+  - type: dropdown
+    id: status
+    attributes:
+      label: Status
+      description: Use Ready only when all required task-contract sections below are complete.
+      options:
+        - Ready
+        - Draft
+    validations:
+      required: true
+
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: What observable result should this task achieve?
+      placeholder: Define the target outcome, not only an activity.
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Why / Context
+      description: Why is this task needed now? What problem does it address?
+    validations:
+      required: true
+
+  - type: textarea
+    id: read-first
+    attributes:
+      label: Read First / Upstream Contracts
+      description: Repository definitions, Specifications, Schemas, Issues, or decisions the executor must follow.
+      placeholder: |
+        - docs/...
+        - #issue
+    validations:
+      required: true
+
+  - type: textarea
+    id: seed-references
+    attributes:
+      label: Seed References
+      description: Known high-value Atlas objects / external references. Prefer stable Atlas IDs when available. This is a starting set, not a whitelist.
+      placeholder: |
+        - standard: ...
+        - reference / method / implementation: ...
+    validations:
+      required: false
+
+  - type: textarea
+    id: freshness
+    attributes:
+      label: Freshness / Completeness Check
+      description: What must the executor re-check for newer versions, superseding artifacts, alternatives, mature precedents, or Atlas omissions?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Allowed research, files, object families, or implementation areas.
+    validations:
+      required: true
+
+  - type: textarea
+    id: non-goals
+    attributes:
+      label: Non-goals
+      description: Explicitly excluded work. Prevent adjacent cleanup from silently expanding the task.
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: Public artifacts, code, data, report, PR, or other outputs that must exist.
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence Requirements
+      description: Required first-party sources, tests, validation, comparison evidence, or traceability.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Observable conditions that must all be true before Review / Done.
+      placeholder: |
+        - [ ] ...
+        - [ ] ...
+    validations:
+      required: true
+
+  - type: dropdown
+    id: execution-mode
+    attributes:
+      label: Execution Mode
+      description: Expected or current execution mode. Unassigned is normal for a Ready task.
+      options:
+        - unassigned
+        - human
+        - agent
+        - mixed
+    validations:
+      required: true
+
+  - type: dropdown
+    id: review-class
+    attributes:
+      label: Review Class
+      options:
+        - normal
+        - high-impact
+    validations:
+      required: true
+
+  - type: input
+    id: parent
+    attributes:
+      label: Parent Work Package / Issue
+      description: Parent Issue number if applicable.
+      placeholder: "#22 or —"
+    validations:
+      required: false
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies / Blockers
+      description: blocked-by / blocking relationships, or state that there are none.
+    validations:
+      required: true
+
+  - type: input
+    id: lease-policy
+    attributes:
+      label: Lease Policy
+      description: Pilot default is a 72-hour initial review window unless this task overrides it.
+      placeholder: "exclusive; initial review in 72h"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: ready-check
+    attributes:
+      label: Ready Contract Check
+      options:
+        - label: The task can be started without private chat history.
+          required: true
+        - label: Scope, Non-goals, Deliverables, Evidence, Acceptance, Review Class, and Dependencies are explicit.
+          required: true
+        - label: Seed References are not treated as a closed answer set; freshness / completeness remains the executor's responsibility.
+          required: true
