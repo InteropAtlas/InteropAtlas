@@ -76,16 +76,56 @@ source + relation/predicate/kind + target
 
 所以同一个物理目录里可以混合不同 `type` 的对象，回归测试会验证这一点。后续应把旧 Relation 独立清理为显式 `type: relation`，但不在本次目录原则修正里顺便修改 Canonical Data。
 
-### Source path
+### Logical source 与 physical source
 
-Loader 当前保留：
+Loader 现在明确区分两个概念：
 
-- `_source`：为了保持现有 Renderer / public generated path 行为，当前仍等于 repository-relative physical path；
-- `_physical_source`：实际 repository-relative physical path，用于追踪和迁移诊断。
+- `_source`：稳定的逻辑 / 公开路径来源，由文档稳定 `id` 生成；
+- `_physical_source`：真实 repository-relative 文件路径，仅用于读取、追踪和迁移诊断。
 
-#31 修正删除了 `_object_family`，因为从目录名推断 semantic family 会重新把 ontology 绑回文件系统。
+Object 的逻辑路径统一为：
 
-真正执行未来目录迁移之前，必须另外确定 public view / URL 如何与物理 storage path 解耦。**本次修正没有假装这个问题已经解决。**
+```text
+objects/<stable-id>.yaml
+```
+
+Renderer 继续从 `_source` 派生 Markdown / HTML，因此公开对象页面稳定为：
+
+```text
+/objects/<stable-id>.html
+```
+
+例如：
+
+```text
+objects/sample_standard.yaml
+→ objects/sample_standard.md
+→ /objects/sample_standard.html
+```
+
+即使同一个源文件从：
+
+```text
+standards/sample.yaml
+```
+
+移动到：
+
+```text
+01_State/01_Objects/renamed.yaml
+```
+
+只要 `id: sample_standard` 不变，公开页面地址也不变。
+
+Relation 当前同样得到稳定逻辑路径：
+
+```text
+relations/<stable-id>.yaml
+```
+
+但目前 Renderer 尚不生成 Relation 独立页面。
+
+#31 修正删除了 `_object_family`，因为从目录名推断 semantic family 会重新把 ontology 绑回文件系统。现在公开页面路径也已经与物理 storage path 解耦。
 
 ### 可显式测试其他物理存储位置
 
@@ -98,11 +138,11 @@ python engine/bootstrap_query.py --storage-path standards --storage-path impleme
 
 如果不传，使用当前 9 个 legacy storage locations。
 
-将来讨论出新的物理布局后，可以把候选位置传给同一 Loader 做 Migration Dry Run，不需要让目录名承担知识分类语义。
+将来迁入新的物理布局后，可以把候选位置传给同一 Loader 做 Migration Dry Run，不需要让目录名承担知识分类语义，也不会改变对象公开 URL。
 
 ## 当前边界
 
-- 本合同没有决定未来根目录一级目录叫什么；
-- 没有决定 Canonical Data 内部应该平铺、分片还是采用其他物理布局；
+- Canonical Data 尚未发生物理迁移；
 - GitHub Actions `paths:` 仍然监听当前真实路径，正式迁移时必须一起调整；
+- Schema 目标位置已经确定，但 Schema enforcement 与 legacy data cleanup 仍是独立工作；
 - #15 Non-normative Knowledge Object Model 负责对象 `type / kind / roles / relations`，**不负责决定文件夹名字，也不再阻塞物理目录结构讨论。**
