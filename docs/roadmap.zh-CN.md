@@ -18,9 +18,9 @@ GitHub Pages
 人可以浏览
 ```
 
-因此 **Visible（看得到）已经基本成立**。当前最明显的问题不再是“看不到”，而是：页面缺乏结构、对象解释不足、导航弱、关系不能可靠展开，机器基础层仍是 bootstrap 状态。
+Visible（看得到）已经基本成立。Human Interface Prior Art、IA-HI v0.1 和第一次符合性审计也已经把“凭感觉继续堆页面”推进到了“按规范做小 vertical slice”的阶段。
 
-当前整体采用五路线协同模型：
+当前整体继续采用五路线协同模型：
 
 1. Human Route（人类可读）；
 2. Machine Route（机器可用 / 可维护）；
@@ -28,57 +28,53 @@ GitHub Pages
 4. Evidence / Provenance / Trust Route（证据、溯源与可信）；
 5. Governance / Standardization Route（治理与标准化）。
 
-详见 `five-route-operating-model.zh-CN.md`。
+开放协作不是新的 Atlas 数据路线，而是横跨 Curation / Contribution 与 Governance 的参与机制：人类贡献者和 AI / Agent 都可以成为协作参与者，自动化基础设施只负责 CI、测试、部署、调度等执行能力。
+
+详见 `five-route-operating-model.zh-CN.md`、`open-collaboration-route-v0-notes.zh-CN.md`。
 
 ## P0 — 当前最近的主闭环
 
-近期不平均推进所有方向，而是先建立下面这一组互相驱动的能力：
+当前不平均推进所有方向，而是先跑通这一组互相驱动的能力：
 
 ```text
 Human:
-Readable + Navigable + Connected
+Object Page Shell + Browser Acceptance + Connected View
                 ↕
 Machine:
 Validator + Reference Resolver + Graph/Backlink Index
                 ↕
-Trust / Curation:
-Minimum Evidence + Prior Art + 收录规则
+Standards / Trust:
+IA-HI Requirements + Minimum Evidence + Prior Art
 ```
 
-### P0-A：Readable / Navigable / Connected
+### P0-A：按 IA-HI v0.1 做第一个真实 Vertical Slice
 
-目标：让网站从“对象列表”逐步变成真正可理解、可导航的 Atlas。
+Human Interface 标准基线、IA-HI v0.1 和第一次 Conformance Audit 已经形成。当前第一优先不是重写整站，而是完成 Issue #17 的 Object Page Shell v0.1：
 
-当前已完成：
-- Markdown / HTML Renderer；
-- Capability / Standard / Implementation 三类对象页；
-- GitHub Pages 自动部署；
-- 自动/手动深色模式；
-- 最小 Capability → Implementation backlink 实验。
+- Capability / Standard / Implementation 三类对象页共用稳定的信息职责；
+- 先修 Web 语义、信息层级和重复关系展示；
+- Local Map 回到关系探索辅助角色；
+- 不在这一轮冻结完整视觉系统或引入大型前端框架。
 
-下一步：
-- 把单个对象页从字段转写升级为结构化知识页面；
-- 首页和导航从对象类型列表升级为能力优先、多入口结构；
-- 对象页显示可信的正向关系和反向关系；
-- Renderer 不再自行临时承担长期 Graph / Resolver 职责。
+随后立刻用 Issue #13 的真实浏览器 E2E 验证代表页，避免再次出现“build success = interaction success”的误判。
 
-相关：Issue #1、#2、#3、#8。
+相关：#13、#14、#16、#17。
 
-### P0-B：Engine 基础层
+### P0-B：Engine 基础层并行补齐
 
-当前最需要补齐的机器基础：
+当前机器基础继续由 Issue #8 推进：
 
 1. Validator；
 2. Reference Resolver；
 3. Graph / Backlink Index。
 
-原因：一旦 Human Route 进入 Connected（看关系），机器路线的 Graphable / Resolvable 就开始成为直接阻塞项。
+Human Route 越依赖真实关系、backlink 和 Connected View，这一层越成为直接基础。Renderer 不应长期自己扫描并重新计算第二套关系事实。
 
-相关：Issue #1、#8。
+相关：#1、#2、#8、#12。
 
-### P0-C：最小建设规范
+### P0-C：最小建设规范继续作为护栏
 
-在继续快速扩充对象前，先遵守一组轻量规则，而不是建设重型治理体系：
+继续遵守：
 
 - Reuse Before Invent；
 - Evidence Before Assertion；
@@ -88,148 +84,110 @@ Minimum Evidence + Prior Art + 收录规则
 - Practice-driven Feedback；
 - 新方法先标 Note / Methodology / Specification，不轻易称 Standard。
 
+Human Interface 设计同样遵守 `Adopt → Profile → Extend → Invent`，不再无依据地堆交互和视觉规则。
+
 详见 `project-development-principles.zh-CN.md`。
 
-## P1 — 第一轮闭环稳定后
+## P1 — 第一轮 P0 闭环稳定后
 
-### Curation / Contribution Route
+### Curation / Contribution + Evidence
 
-建立最小、可重复执行的收录流程：
+Issue #9 与 #10 应尽量使用同一批真实对象共同验证，而不是分别做纯理论设计：
 
 ```text
-候选发现 → Prior Art / 来源调查 → 对象识别 → 建模 → Evidence → Relations → Validate → Review → Merge → 更新监控
+候选发现 → Prior Art → 对象识别 → 建模 → Evidence → Relations → Validate → Review → Merge
 ```
 
-需要逐步明确：收录门槛、最小 Evidence、重复对象、版本更新、贡献者如何操作。
+同时通过真实 HCI / Design Prior Art 样本推进 #15 的非标准参考对象模型，避免把 Method / Guideline / Framework 错误塞进 Standard。
 
-### Evidence / Provenance / Trust Route
+### Open Collaboration V0
 
-从简单 `sources:` 字段逐步发展到可追踪的 Claim / Evidence / Source / Context / Time / Review 模型。
+推进 Issue #19，但先复用 GitHub 原生协作机制，不建设 Agent 专用任务系统：
 
-优先从真实痛点扩展，不一次性设计完整 provenance ontology。
+```text
+Issue / Ready
+   ↓
+一个主要执行者接手
+   ↓
+Work / PR
+   ↓
+独立 Review
+   ↓
+Done
+```
 
-### Queryable / Analysis 前置修复
+第一阶段重点是让 `CONTRIBUTING.md` 能回答“去哪里找任务、如何接手、如何提交和 Review”，并用 2–3 个真实 Issue 验证人类与 Agent 是否可以共用同一流程。只有实践证明不够时，再研究 Lease / Heartbeat / Scheduler。
 
-在开始依赖 Engine 做比较、路径、Open Gap、Coverage 之前：
-- 修复 Issue #7 的 `alternative_to` 查询作用域；
-- 建立可信基础查询 API；
-- 增加最小回归测试。
+### Queryable / Explanation 前置
 
-### 统一解释层与标准族指南
+- 修复 #7 `alternative_to` 查询作用域并增加回归测试；
+- 逐步推进 #3 标准解释层和 #4 同类比较；
+- 先在一个真实标准族上验证，不一次性扩展整个 Atlas。
 
-对象页负责 Reference；方案空间、标准族、历史演化和“为什么”逐步形成 Explanation / Guide，而不是无限扩张详情页。
+## P2 — 中期能力与生态
 
-相关：Issue #3、#4。
+### Mappable / Explorable / Analyzable
 
-## P2 — 中期能力
+- Dynamic Maps、搜索、多维过滤、子图探索、路径视图；
+- Pathfinder、Coverage / Gap Analyzer、Comparator、Dependency Audit 等；
+- broken references、orphan objects、stale sources、missing evidence 等逐步形成 Atlas Health。
 
-### Mappable / Explorable
+### Agent 可发现性与外部贡献入口
 
-- Dynamic Maps；
-- 搜索；
-- 多维过滤；
-- 子图探索；
-- 基础图形化关系视图；
-- 路径视图。
+Issue #18 记录一个重要的前中期生态方向：让外部 AI / Agent 在执行标准检索和相关任务时有机会发现 InteropAtlas，并知道 IA 是开放、可提交 Issue / Evidence / 建议 / PR 的项目。
 
-### Analyzable
+当前只记录能力目标，不立即建设“利用外部闲置算力”的系统。后续优先研究开放的机器可发现格式、AGENTS.md、贡献入口、身份与授权、质量控制，再决定 IA 是否需要自己的 Profile。
 
-- Pathfinder；
-- Coverage Analyzer；
-- Gap Analyzer；
-- Comparator；
-- Dependency Audit；
-- Openness Analyzer；
-- Constraint Evaluator。
+### 自产规范 / 多后端研究
 
-### Atlas Health / Maintainability
+- #6：Graph backend / RDF / Neo4j 等继续保持 database-agnostic；
+- #11：自产 Methodology / Specification / Standard 的标识、版本、生命周期与仓库边界；
+- 暂不建设重型标准组织。
 
-- broken references；
-- orphan objects；
-- stale sources / versions；
-- missing evidence；
-- duplicate candidates；
-- relation conflicts；
-- human-readable coverage；
-- relation coverage。
+## Prior Art 是持续流程
 
-逐步形成 Atlas Linter 和 Atlas Health。
+每进入一个新能力点都先调查成熟方案，不为“研究完整”提前研究所有标准。
 
-## P3 — 长期技术与生态方向
+当前参考池除了 Wikidata、OpenStreetMap、FAIR、W3C DCAT / SHACL、IETF、W3C Process 等，也已加入：
 
-### 多后端 / Federation
+- ISO/IEC Human-Machine Teaming 系列；
+- ISO/IEC 5339 / NIST AI RMF；
+- Linux Foundation AAIF / AGENTS.md；
+- GitHub Coding Agents / 开源协作实践。
 
-- JSON / JSON-LD / RDF / CSV / Graph export；
-- API / Agent interface；
-- Property Graph / RDF backend；
-- Neo4j / SPARQL 等可选运行时；
-- Map of Maps / federated catalogs；
-- graph-native, database-agnostic。
-
-相关：Issue #6。
-
-### IA 自产规范与标准化
-
-项目建设过程中可能产生 Methodology、Specification、Profile、Skill，未来才可能出现正式 Standard。
-
-当前只研究：
-- stable ID；
-- version / date / URL 分离；
-- lifecycle；
-- repo boundary；
-- conformance test；
-- governance；
-- 如何重新被主 Atlas 作为普通标准收录。
-
-不在当前阶段规定“每个标准一个仓库”或固定 `IA-YYYYMMDD-XXX` 编号。
-
-详见 `project-generated-methods-standards.zh-CN.md`。
-
-## Prior Art 是持续流程，不是一次调研
-
-以后每进入一个新能力点，都优先参考已有成熟项目，而不是一次性把所有标准组织研究完。
-
-当前参考池见 `prior-art-and-method-reference.zh-CN.md`，包括：
-- Wikidata；
-- OpenStreetMap；
-- FAIR；
-- W3C DCAT；
-- W3C SHACL；
-- Diátaxis；
-- IETF；
-- W3C Process；
-- Software Heritage / SWHID。
+详见 `prior-art-and-method-reference.zh-CN.md` 和 `human-ai-open-collaboration-prior-art.zh-CN.md`。
 
 ## 当前建议执行顺序
 
 ### 立即
 
-1. 用当前 GitHub Pages 继续验证真实阅读体验；
-2. 补 Validator + Resolver + Graph/Backlink 的最小可信基础；
-3. 同时改善 Readable + Navigable + Connected；
-4. 每次增加新数据 / 新机制前遵循最小 Prior Art 与 Evidence 规则。
+1. 完成 #17 Object Page Shell v0.1；
+2. 用 #13 给这一 vertical slice 加真实浏览器验收；
+3. #8 并行补齐 Validator + Resolver + Graph/Backlink 最小可信基础；
+4. 根据 #14 / #16 已形成的规范与审计，只选择下一小块 Human Route 继续改进。
 
 ### 紧随其后
 
-5. 把收录流程和 Evidence 模型从隐性做法变成可重复流程；
-6. 修复关系查询作用域并建立基础 Query API；
-7. 在真实对象族上试做 Explanation / Comparison / Map。
+5. 用真实对象共同推进 #9 Curation、#10 Evidence 和 #15 非标准参考对象模型；
+6. 用 2–3 个真实 Issue 实验 #19 Open Collaboration V0，并补充 CONTRIBUTING；
+7. 修复 #7，再在一个真实标准族上试做 #3 / #4 Explanation / Comparison。
 
-### 暂不急做
+### 先记录、不抢当前主线
 
-8. 重型标准治理组织；
-9. 每个自产标准独立仓库；
-10. 固定 IA 标准编号体系；
-11. 提前绑定 Neo4j / RDF Store；
-12. 一次性设计完整网站和完整 ontology。
+8. #18 Agent 可发现性与外部 AI 贡献入口；
+9. #6 多后端 / 图数据库；
+10. #11 自产规范完整生命周期；
+11. 重型标准治理、固定 IA 标准编号、每标准一仓库；
+12. 一次性设计完整网站、完整 ontology 或完整 Agent 自治系统。
 
 ## 待办管理方式
 
 - `docs/roadmap.zh-CN.md`：总体优先级与阶段；
-- GitHub Issues：可执行任务、验收条件、阻塞关系；
+- GitHub Issues：统一的可执行任务池，面向人类与未来 Agent；
+- GitHub Projects / Issue Fields：逐步承载 Status / Priority / Area 等协作状态；
 - YAML / Schemas / Relations：事实与模型；
 - Engine：确定性解析、查询与分析；
 - Renderer / Site：人类可读 Projection；
-- Methodology docs：项目建设方法和暂定规范。
+- Methodology / Prior Art docs：项目建设方法、依据和暂定规范。
 
 原则：**先建立最小闭环，再让真实使用决定下一轮结构扩展。**

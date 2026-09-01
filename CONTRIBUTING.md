@@ -2,6 +2,37 @@
 
 InteropAtlas 当前处于 Pre-Alpha 设计阶段。贡献应优先保证：事实可验证、来源明确、对象类型区分清晰、结构机器可读。
 
+## 如何参与一个任务
+
+InteropAtlas 使用 GitHub Issues 作为当前统一的可执行任务入口。人类贡献者与未来的 AI / Agent 原则上使用同一套公开协作流程。
+
+最小流程：
+
+```text
+找到 Issue
+   ↓
+确认目标 / 范围 / 完成条件
+   ↓
+留言说明希望接手，避免重复劳动
+   ↓
+工作并保持必要进展可见
+   ↓
+提交较小、可审查的 Pull Request
+   ↓
+独立 Review
+   ↓
+Merge / Done
+```
+
+- 默认一个普通任务同一时间只有一个主要执行者；大型任务应优先拆成互不冲突的子任务。
+- 如果 Issue 已有人执行，请先讨论，不要无意重复同一份工作。
+- 当前无法自行设置 Assignee 的外部贡献者，可以直接在 Issue 留言说明希望接手，由维护者确认。
+- Pull Request 应关联对应 Issue，并说明做了什么、依据是什么、还存在哪些已知问题。
+- 长期无进展的任务可以在沟通后重新开放给其他贡献者；具体超时 / Lease 机制尚未冻结。
+- AI / Agent 参与时仍需遵守与人类贡献相同的 Evidence、Review、许可证和质量要求。
+
+总体优先级见 `docs/roadmap.zh-CN.md`；当前协作机制的实验记录见 `docs/open-collaboration-route-v0-notes.zh-CN.md`。
+
 ## 基本原则
 
 - 能使用权威一手来源时，优先使用一手来源。
@@ -28,7 +59,7 @@ id: device_discovery
 name_zh: 设备发现
 name_en: Device Discovery
 description_zh: 系统发现可用设备、节点或服务的能力。
-description_en: The capability to discover available devices, nodes, or services.
+description_en: The capability to discover available devices, nodes or services.
 ```
 
 完整规则见 `docs/language-policy.zh-CN.md`。

@@ -55,6 +55,35 @@ V0 暂不实现完整 Lease、Heartbeat、Agent 自动目标生成和多 Agent �
 
 因此 V0 的“租约式认领”暂时不需要实现独立 Lease 服务。第一阶段先把 `Assignee + Status + activity / stale` 当作近似机制，用真实协作验证哪些地方确实缺能力。
 
+## 机器可发现性与外部 Agent 参与
+
+这是一个重要的长期方向，但当前只记录，不立即展开实现。
+
+目标不只是让人类在 GitHub 上发现 InteropAtlas，还要让其他 AI / Agent 在执行标准检索、技术调研或互操作相关任务时有机会发现 IA，并明确知道：
+
+- InteropAtlas 是一个开放、可贡献的项目；
+- Agent 可以提交发现的问题、缺失标准、改进建议和研究结果；
+- 条件允许时，Agent 可以进一步参与 Issue、PR、Review 等正常贡献流程；
+- 项目应尽量采用跨 Agent 可识别的公开元数据、说明文件和贡献入口，而不是只对某一种 Agent 产品可见。
+
+长期希望形成：
+
+```text
+外部 Agent 执行自己的任务
+        ↓
+发现 InteropAtlas
+        ↓
+识别 IA 与当前任务相关
+        ↓
+读取贡献说明 / Agent instructions
+        ↓
+提交反馈、Issue、研究结果或 PR
+        ↓
+进入 IA 正常 Review 流程
+```
+
+这个方向暂不等同于“无条件利用外部 Agent 的闲置算力”。权限、授权、身份、滥用防护、质量控制和资源激励都需要后续单独研究。当前只把“可发现 + 可贡献”作为前中期需要保留的重要能力目标。
+
 ## 当前上位依据
 
 - ISO/IEC CD 25589：Human-Machine Teaming framework；
