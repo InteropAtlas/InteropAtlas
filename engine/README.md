@@ -58,19 +58,23 @@ Standard、Method、Design System、Capability、Relation 等语义身份由 YAM
 
 ### Loader 如何判断对象身份
 
-例如 Relation 的判断是：
+目标模型中 Relation 应显式写：
 
 ```yaml
 type: relation
 ```
 
-而不是：
+但当前数据里仍有少量历史 Relation 没有这个字段。为保持兼容，Loader 也会根据文档自身是否具有：
 
 ```text
-文件位于 relations/ 目录
+source + relation/predicate/kind + target
 ```
 
-同一个物理目录里可以混合不同 `type` 的对象，回归测试会验证这一点。
+来识别这类旧 Relation。
+
+关键点是：**这两种判断都来自文件内容，不来自 `relations/` 这个目录名。**
+
+所以同一个物理目录里可以混合不同 `type` 的对象，回归测试会验证这一点。后续应把旧 Relation 独立清理为显式 `type: relation`，但不在本次目录原则修正里顺便修改 Canonical Data。
 
 ### Source path
 
