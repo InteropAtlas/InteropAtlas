@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/implementation-profile.v0.schema.json",
+  "title": "InteropAtlas Implementation Strong Profile v0",
+  "allOf": [
+    {"$ref": "identity-object.v0.schema.json"},
+    {
+      "type": "object",
+      "properties": {
+        "type": {"const": "system"},
+        "kind": {"enum": ["software", "library", "tool", "service", "platform", "hardware", "firmware"]},
+        "capabilities": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "open_source": {"type": "boolean"},
+        "self_hostable": {"type": "boolean"}
+      }
+    }
+  ]
+}
