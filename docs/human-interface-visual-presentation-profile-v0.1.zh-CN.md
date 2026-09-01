@@ -140,19 +140,40 @@ Navigation MAY 随空间改变结构，但信息身份和任务 MUST 保持一�
 
 稳定视觉决策 SHOULD 使用 semantic tokens 表达，减少散落的 magic values。
 
+- 用户任务 / Context：跨页面识别一致的视觉语义，并让实现可维护
+- 采用方式：**Profile**
+- 上游：ISO 9241-125 / 161 的一致视觉表达；成熟 Design System practice
+- Conformance：`Static + Machine + Multi-page`
+
 ### `IA-HI-TOK-002` — Token ≠ Design Rule
 
 Token MUST NOT 被当成“为什么这样设计”的全部规范。Profile 定义语义；Token 负责值的机器交换。
+
+- 用户任务 / Context：理解视觉语义、审查设计决策
+- 采用方式：**IA-specific Profile**
+- 上游：DTCG token model + IA Requirement / Profile 分层原则
+- Conformance：`Review + Static`
 
 ### `IA-HI-TOK-003` — DTCG Compatibility
 
 机器可读 Token Format SHOULD 优先评估兼容 DTCG Design Tokens Format 2025.10。
 
+- 用户任务 / Context：Human / Agent / tooling 交换和处理视觉 tokens
+- 采用方式：**Compatibility Profile**
+- 上游：DTCG Design Tokens Format 2025.10（Community Group Final Report）
+- Conformance：`Static + Machine + Review`
+- 说明：DTCG 不是 W3C Recommendation；兼容目标不得被描述成 W3C Recommendation conformance。
+
 ### `IA-HI-TOK-004` — Theme Mapping
 
 主题差异 SHOULD 通过 semantic token → concrete value 映射；组件不应各自维护独立主题逻辑。
 
-上述 Token Requirements 的 Conformance 主要是 `Static + Machine`，但具体数值本轮不冻结。
+- 用户任务 / Context：在 Light / Dark 等主题中保持相同信息和状态语义
+- 采用方式：**Profile**
+- 上游：WCAG；mature semantic-token / theming practice
+- Conformance：`Static + Machine + Accessibility + Multi-page`
+
+本轮只定义 Token 的语义合同与兼容方向，不冻结具体 token 数值。
 
 ---
 
