@@ -18,6 +18,7 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+from relation_model import compatibility_warnings, normalize_relation, ref_id, relation_predicate
 from semantic_model import is_capability
 
 
@@ -39,29 +40,13 @@ class ReferenceIssue:
     detail: str
 
 
-def ref_id(value: Any) -> str | None:
-    if isinstance(value, str):
-        return value
-    if isinstance(value, dict):
-        candidate = value.get("id")
-        return candidate if isinstance(candidate, str) else None
-    return None
-
-
-def relation_predicate(relation: dict[str, Any]) -> str | None:
-    for key in ("relation", "predicate", "kind"):
-        value = relation.get(key)
-        if isinstance(value, str):
-            return value
-    return None
-
-
 class GraphIndex:
     def __init__(self, objects: dict[str, dict[str, Any]], relations: list[dict[str, Any]]):
         self.objects = objects
         self.relations = relations
         self.edges: list[Edge] = []
         self.issues: list[ReferenceIssue] = []
+        self.compatibility_warnings = []
         self._forward: dict[str, list[Edge]] = defaultdict(list)
         self._backlinks: dict[str, list[Edge]] = defaultdict(list)
         self._build()
@@ -103,11 +88,7 @@ class GraphIndex:
         self._add_edge(Edge(source_id, target_id, "field_reference", "object", field=field))
 
     def _build_object_references(self) -> None:
-        # Start with fields already used by the current vertical slice. Extend only
-        # when real objects require more reference-bearing fields.
-        typed_list_fields = {
-            "capabilities": "capability",
-        }
+        typed_list_fields = {"capabilities": "capability"}
         for source in self.objects.values():
             for field, expected_type in typed_list_fields.items():
                 values = source.get(field) or []
@@ -120,12 +101,11 @@ class GraphIndex:
 
     def _build_relations(self) -> None:
         for relation in self.relations:
-            relation_id = str(relation.get("id", "<unnamed-relation>"))
-            source_ref = relation.get("source")
-            target_ref = relation.get("target")
-            source_id = ref_id(source_ref)
-            target_id = ref_id(target_ref)
-            predicate = relation_predicate(relation)
+            descriptor = normalize_relation(relation)
+            relation_id = descriptor.relation_id or "<unnamed-relation>"
+            source_id = descriptor.source_id
+            target_id = descriptor.target_id
+            predicate = descriptor.predicate
 
             if not source_id or not target_id or not predicate:
                 self.issues.append(
@@ -145,20 +125,10 @@ class GraphIndex:
                 )
                 continue
 
-            if isinstance(source_ref, dict) and source_ref.get("type") and source_ref.get("type") != source.get("type"):
-                self.issues.append(
-                    ReferenceIssue("relation_source_type_mismatch", relation_id, source_id, "declared source type does not match object")
-                )
-                continue
-            if isinstance(target_ref, dict) and target_ref.get("type") and target_ref.get("type") != target.get("type"):
-                self.issues.append(
-                    ReferenceIssue("relation_target_type_mismatch", relation_id, target_id, "declared target type does not match object")
-                )
-                continue
-
-            self._add_edge(
-                Edge(source_id, target_id, predicate, "relation", relation_id=relation_id)
-            )
+            # Legacy `{type,id}` hints are compatibility metadata, not identity.
+            # A stale hint is reported but the stable ID edge remains valid.
+            self.compatibility_warnings.extend(compatibility_warnings(relation, self.objects))
+            self._add_edge(Edge(source_id, target_id, predicate, "relation", relation_id=relation_id))
 
     def _build(self) -> None:
         self._build_object_references()
@@ -173,9 +143,8 @@ class GraphIndex:
     def relation_objects_for_capability(self, capability_id: str) -> list[dict[str, Any]]:
         result: list[dict[str, Any]] = []
         for relation in self.relations:
-            context = relation.get("capability_context")
-            values = context if isinstance(context, list) else [context] if context is not None else []
-            if any(ref_id(value) == capability_id for value in values):
+            capabilities = normalize_relation(relation).context.get("capabilities", [])
+            if capability_id in capabilities:
                 result.append(relation)
         return result
 
@@ -184,7 +153,6 @@ def diagnostics(
     root: Path,
     storage_paths: Iterable[Path | str] | None = None,
 ) -> dict[str, Any]:
-    # Local import avoids making bootstrap_query depend on graph_index.
     from bootstrap_query import index_objects, load_atlas
 
     objects, relations = load_atlas(root, storage_paths)
@@ -194,6 +162,7 @@ def diagnostics(
         "relations": len(relations),
         "edges": len(graph.edges),
         "reference_issues": [asdict(issue) for issue in graph.issues],
+        "compatibility_warnings": [asdict(item) for item in graph.compatibility_warnings],
     }
 
 
