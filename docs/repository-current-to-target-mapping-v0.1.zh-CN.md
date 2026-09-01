@@ -1,47 +1,78 @@
 # InteropAtlas Repository Current → Target Mapping v0.1
 
-> 状态：Migration Simulation（迁移模拟，不执行移动）
+> 状态：Migration Inventory / Corrected by #31
 >
-> 关联：#21；输入：`repository-structure-prior-art-and-options-v0.1.zh-CN.md`
+> 关联：#21、#31。
+>
+> 本文件记录“现在有什么”和“迁移时要处理什么”。旧版按 object family 一一映射到 `data/<family>/` 的方案已撤回。
 
-## 1. 目的
+## 1. 修正摘要
 
-把当前真实仓库逐项映射到 Artifact Taxonomy 与候选 Target Zone，验证 Layered Monorepo 是否真的比当前结构更清晰。
-
-本文件**不代表路径已经批准**，也不执行 rename / move。
-
----
-
-# 2. Root 当前对象
-
-| 当前路径 | Artifact identity | 当前判断 | 候选目标 |
-|---|---|---|---|
-| `README.md` | Project Entry / Reference | Root 保留 | `/README.md` |
-| `CONTRIBUTING.md` | Community / Contribution Guide | Root 保留；内容待 #19/#9 重写 | `/CONTRIBUTING.md` |
-| `LICENSE.md` | Licensing Overview | Root 保留 | `/LICENSE.md` |
-| `LICENSES/` | Machine-readable License Text Set | 与 REUSE 方向兼容 | `/LICENSES/` |
-| `.github/workflows/` | Platform Integration / Automation | 保留在 `.github` | `/.github/workflows/` |
-| `tools/` | Implementation / Tooling | 已有独立逻辑区 | `/tools/` |
-
-未来候选 Root / Community Health 文件（尚不创建）：
+旧版曾建议：
 
 ```text
-CODE_OF_CONDUCT.md
-SECURITY.md
-SUPPORT.md
-AGENTS.md            # 仅 #19 Profile 后
-.github/ISSUE_TEMPLATE/
-.github/PULL_REQUEST_TEMPLATE.md
-.github/CODEOWNERS 或 root CODEOWNERS（按 GitHub 支持位置决定）
+standards/          → data/standards/
+capabilities/       → data/capabilities/
+implementations/    → data/implementations/
+...
 ```
 
-原则：Root 保持“第一次打开仓库就应该理解的公开入口”，不把内部 Agent 状态、实验文件、生成产物堆到 Root。
+#31 后该映射 **WITHDRAWN**。
+
+原因很简单：
+
+> 当前文件夹只是历史形成的物理存储位置，不应该继续被当成未来知识分类结构。
+
+未来 Standard、Method、Design System、Capability、Organization、Relation 等对象是否共享一个物理目录、是否技术分片，应该按存储和工程需要决定；对象分类由数据字段、引用、Graph / Index / Map 决定。
 
 ---
 
-# 3. Canonical Data
+## 2. 当前 Root Inventory
 
-当前 object families：
+当前仓库大致包含以下 root 内容：
+
+```text
+README.md
+CONTRIBUTING.md
+LICENSE.md
+LICENSES/
+.github/
+
+standards/
+capabilities/
+implementations/
+organizations/
+scenarios/
+reference-projects/
+gaps/
+relations/
+maps/
+
+schemas/
+engine/
+tools/
+experiments/
+docs/
+```
+
+其中：
+
+- README / CONTRIBUTING / LICENSE：公共项目入口 / 法务；
+- `.github/`：GitHub 平台集成；
+- 9 个知识对象目录：当前 Canonical YAML 的 **legacy physical storage shards**；
+- `schemas/`：数据合同；
+- `engine/`：确定性读取、Graph、Query、Renderer；
+- `tools/`：维护工具候选区；
+- `experiments/`：实验 artifact；
+- `docs/`：当前混合承载 Specification、Research、Architecture、Plan、Governance 等多种文档身份。
+
+这只是现状，不是目标结构。
+
+---
+
+## 3. Canonical Data：只记录 Current，不预设 Target
+
+当前 Canonical YAML 分布在：
 
 ```text
 standards/
@@ -55,466 +86,195 @@ relations/
 maps/
 ```
 
-Artifact identity：**Canonical Data Objects**。
-
-候选映射：
+正确的解释是：
 
 ```text
-current                         candidate
-------------------------------------------------
-standards/                 →   data/standards/
-capabilities/              →   data/capabilities/
-implementations/           →   data/implementations/
-organizations/             →   data/organizations/
-scenarios/                 →   data/scenarios/
-reference-projects/        →   data/reference-projects/
-gaps/                      →   data/gaps/
-relations/                 →   data/relations/
-maps/                      →   data/maps/
+current physical storage shards
 ```
 
-### 为什么这个映射目前合理
-
-- 这些目录都被同一个 loader 作为 Atlas Canonical Data 读取；
-- 它们共享 ID / Relation / Graph / Schema contract；
-- `data/` 可以成为稳定的 Source-of-Truth boundary；
-- 新 object family 不再继续占用 root namespace。
-
-### 但现在不能直接移动
-
-当前 `engine/bootstrap_query.py` 的 `OBJECT_DIRS` 直接假设这些目录位于 root。
-
-CI path filters 也把这些目录逐一硬编码在：
-- `.github/workflows/bootstrap-engine-experiment.yml`；
-- `.github/workflows/pages.yml`。
-
-因此目标状态应该先变成：
+而不是：
 
 ```text
-Repository Root
-   ↓
-DATA_ROOT = root / "data"       # configuration / contract
-   ↓
-OBJECT_FAMILIES = ...
+future ontology folders
 ```
 
-而不是把 `data/` 路径散落写死到更多工具里。
+因此当前 → 未来的映射现在只能写成：
 
-### 迁移兼容要求
+```text
+current 9 storage locations
+          ↓
+[future canonical storage layout — OPEN]
+```
 
-D1 若批准，迁移 SHOULD：
+不能提前写成九个同名子目录。
 
-1. 先让 loader 可配置 `data_root`；
-2. 为 current root paths 与 candidate `data/` path 做 transition test；
-3. 更新 CI path filters；
-4. 更新所有 README / docs links；
-5. 确保 generated human URL 不依赖 source YAML physical path；
-6. 迁移前后 Graph object / relation / edge count MUST 不变；
-7. reference issues MUST 保持 0。
+### 已知迁移要求
+
+无论未来 physical layout 最终是什么，迁移都必须：
+
+1. Loader 能显式知道要扫描哪些物理位置；
+2. Loader 根据对象内容判断 `type`，不能根据目录判断；
+3. stable IDs 保持不变；
+4. object / relation / Graph semantics 保持不变；
+5. CI path filters 同步更新；
+6. README / docs / generated routes / links 检查；
+7. public URL 不被 source path 无意改写；
+8. 可 rollback。
 
 ---
 
-# 4. Schemas / Engine / Tools / Tests
+## 4. 当前 9 个目录是否还叫 object families？
 
-## `schemas/`
+在“当前数据”层面，它们历史上大致对应已有 Schema type，因此可以描述为 legacy family-oriented layout。
 
-Artifact identity：**Schema / Contract**。
+但从 #31 开始：
 
-当前判断：Root-level `schemas/` 可以继续成立。
+> **目录名本身不具有知识模型权威性。**
 
-原因：
-- 它不是 Canonical Facts；
-- 它定义 Canonical Facts 的结构合同；
-- W3C browser-specs / MDN BCD 等成熟 data repos 也把 schema 作为独立一等区。
+例如一个 YAML 放在名为 `anything/` 的目录中，只要它的数据声明：
 
-候选：`/schemas/` 保留。
-
-## `engine/`
-
-Artifact identity：**Implementation / Deterministic Engine**。
-
-当前判断：Root-level `engine/` 暂时保留。
-
-未来当 Engine 形成独立 release / API contract 后，可评估抽离独立 repo；当前不拆。
-
-## `tools/`
-
-Artifact identity：**Operational Tooling**。
-
-当前只有 README，说明这个 zone 已经存在但尚未真正使用。
-
-候选：保留 `/tools/`，未来放：
-- migration tooling；
-- curation helpers；
-- source checking；
-- export tooling；
-- repo maintenance scripts。
-
-Engine 与 Tools 边界：
-- Engine = Atlas deterministic product capability；
-- Tools = repo / contributor operational helpers。
-
-## `tests/`（当前不存在）
-
-当前 tests 分散在 CI 行为与 Engine 脚本自检里。
-
-Candidate B 建议未来出现明确 `/tests/`，但需要再决定：
-
-```text
-tests/data/          # canonical data / schema tests
-tests/engine/        # deterministic query / graph regression
-tests/conformance/   # IA-produced specifications conformance
-tests/site/          # Reference Implementation / E2E
+```yaml
+type: relation
 ```
 
-也可能采用 component-local tests，而只把 cross-cutting conformance tests 放 root `tests/`。
+Loader 就应按 Relation 处理。
 
-当前只记录，不创建空目录。
+反过来，一个文件仅仅位于 `relations/`，不能因此自动获得 Relation identity。
 
 ---
 
-# 5. `docs/` 当前混合状态
+## 5. 其他 Artifact 的 Current Inventory
 
-当前 `docs/` 已经同时承载至少 9 种 Artifact identity。
+### `schemas/`
 
-## 5.1 Specification / Profile
+当前身份：Schema / Contract。
 
-### 当前
-- `human-interface-specification-v0.1.zh-CN.md`
+是否继续作为 root 一级目录：**待下一轮讨论**。
 
-### 候选
+### `engine/`
 
-```text
-specs/human-interface/v0.1.md
-```
+当前身份：Implementation / Deterministic Engine。
 
-或：
+是否继续作为 root 一级目录：**待下一轮讨论**。
 
-```text
-specifications/human-interface/v0.1.md
-```
+### `tools/`
 
-当前倾向短名 `specs/`，但**尚未批准命名**。
+当前身份：Repository operational tooling。
 
-未来：
-- Repository Structure Profile；
-- Open Collaboration Profile；
-- Curation Profile；
-- Evidence Profile；
-都应该使用同一种 Artifact zone / lifecycle。
+是否保留、并入其他区或继续 root-level：**待讨论**。
 
----
+### `experiments/`
 
-## 5.2 Research / Prior Art
+当前身份：Experiment fixtures / prototypes / records 的一部分。
 
-### 当前
-- `human-ai-open-collaboration-prior-art.zh-CN.md`
-- `human-interface-reference-map.zh-CN.md`
-- `human-interface-standards-baseline.zh-CN.md`
-- `prior-art-and-method-reference.zh-CN.md`
-- `repository-structure-prior-art-and-options-v0.1.zh-CN.md`
+当前还有 `docs/experiments/`，说明 experiment report 与 executable artifact 边界尚未统一。最终层级：**待讨论**。
 
-### 候选
+### `docs/`
 
-```text
-research/prior-art/
-research/options/
-```
+当前混合至少包括：
 
-或：
+- Specification / Profile；
+- Research / Prior Art；
+- Audit / Assessment；
+- Architecture；
+- Methodology / Guide；
+- Governance / Policy；
+- Roadmap / Plan / Working Notes；
+- Experiment report。
 
-```text
-docs/research/
-```
+这些 Artifact identity 需要区分，但**现在不再自动推导出** `specs/`、`research/`、`governance/` 等必须成为 root 一级目录。
 
-当前倾向独立 `research/`，因为它不是用户文档，也不是 Specification。
+下一轮应先讨论 root 一级目录数量与职责，再决定它们怎样落盘。
 
 ---
 
-## 5.3 Audit / Assessment Report
-
-### 当前
-- `human-interface-conformance-audit-2026-09-01.zh-CN.md`
-- `route-alignment-audit-2026-09-01.zh-CN.md`
-
-Artifact identity：**Point-in-time Audit / Assessment**。
-
-候选：
+## 6. Current → Target 图（修正版）
 
 ```text
-research/audits/
-```
+CURRENT
 
-或未来独立：
+9 个 Canonical YAML root dirs ──────┐
+                                     │
+                                     ├──→ [Canonical Storage — OPEN]
+                                     │     不按 ontology 自动拆目录
+                                     │
+                                     └──→ 分类由 type / kind / relations / Graph 完成
 
-```text
-assessments/
-```
+schemas/ ───────────────────────────→ [root placement OPEN]
+engine/ ────────────────────────────→ [root placement OPEN]
+tools/ ─────────────────────────────→ [root placement OPEN]
+experiments/ ───────────────────────→ [root placement OPEN]
 
-当前倾向 `research/audits/`，避免在项目尚小时制造新 root namespace。
+docs/ mixed artifacts ─────────────→ 先按 Artifact identity 理清
+                                     再讨论物理一级目录
 
----
-
-## 5.4 Architecture Reference
-
-### 当前
-- `architecture-v0.1.zh-CN.md`
-- `flat-graph-and-dynamic-maps.zh-CN.md`
-- `json-ld-fit-experiment.zh-CN.md`（部分是实验，不纯 architecture）
-- `visualization-direction.zh-CN.md`（更像 Working Direction）
-
-候选：
-
-```text
-docs/architecture/
-```
-
-这里适合继续属于 Documentation，因为它主要帮助贡献者 / 维护者理解系统结构；如果未来某 architecture 文档出现 BCP 14 implementation contract，再考虑升级为 Specification。
-
----
-
-## 5.5 Methodology / Guide
-
-### 当前
-- `practice-feedback-loop.zh-CN.md`
-- `project-development-principles.zh-CN.md`
-- `five-route-operating-model.zh-CN.md`
-- `human-readable-route.zh-CN.md`
-- `machine-readable-maintainable-route.zh-CN.md`
-
-其中身份并不完全相同：
-- `practice-feedback-loop` 更像 Methodology；
-- `project-development-principles` 介于 Methodology / Governance；
-- route documents 介于 Methodology / Roadmap。
-
-候选：
-
-```text
-methodology/
-```
-
-或：
-
-```text
-docs/explanation/
-docs/reference/
-```
-
-这里需要下一轮判断：**Methodology 是否值得成为 root Artifact zone。**
-
-当前不强行拍板。
-
----
-
-## 5.6 Governance / Policy
-
-### 当前
-- `language-policy.zh-CN.md`
-- `project-generated-methods-standards.zh-CN.md`
-- `project-development-principles.zh-CN.md`（部分）
-
-候选：
-
-```text
-governance/
-```
-
-理由：这些文档不是普通知识解释，而是在约束项目自身的持续运行。
-
-未来可能加入：
-- governance model；
-- maintainer roles；
-- decision process；
-- specification lifecycle；
-- security policy relationship；
-- trademark policy。
-
----
-
-## 5.7 Plan / Roadmap / Working Notes
-
-### 当前
-- `roadmap.zh-CN.md`
-- `foundation-first-phase-v0.1.zh-CN.md`
-- `object-page-shell-v0.1-plan.zh-CN.md`
-- `open-collaboration-route-v0-notes.zh-CN.md`
-
-这些是**当前项目状态文档**，生命周期短于 Specification / Architecture Reference。
-
-候选方案：
-
-A. `docs/project/`
-
-```text
-docs/project/roadmap.md
-docs/project/plans/
-docs/project/notes/
-```
-
-B. `planning/`
-
-当前倾向 **A**，避免为短生命周期文件增加 root namespace。
-
----
-
-## 5.8 Experiment Records
-
-当前出现两套位置：
-
-```text
-docs/experiments/*.md          # 实验报告
-experiments/json-ld/*          # 实验输入 / 实际 artifact
-experiments/rdf-1.2/*
-```
-
-这是合理现象，但职责应明确：
-
-```text
-experiments/<experiment-id>/
-  README.md / report.md
-  input/
-  output/
-  fixture/
-  prototype/
-```
-
-即 Experiment report 与 executable artifact 最终最好聚合到同一个 experiment boundary，而不是一份在 docs、一份在 root experiments。
-
-当前不迁移；记录为 Candidate。
-
----
-
-# 6. 一个很重要的发现：现有 `docs/experiments/human-ai-collaboration-v0-checklist.zh-CN.md`
-
-该文件实际存在于仓库树中，但之前 `docs/README.md` 曾经把它误写成 root `docs/human-ai-collaboration-v0-checklist.zh-CN.md`，导致链接漂移。
-
-这正说明：
-
-> **当 Artifact identity 与目录职责不清楚时，Navigation Index 很容易与物理路径逐渐失同步。**
-
-未来应：
-- 自动检查 internal links；
-- 给 Docs / Spec / Research Index 建 CI；
-- 尽可能由 metadata / manifest 生成导航，而不是长期手工维护多个目录索引。
-
----
-
-# 7. Current → Target Zone 总览
-
-```text
-CURRENT ROOT
-
-standards/ ───────────────┐
-capabilities/             │
-implementations/          │
-organizations/            │
-scenarios/                ├──→ data/
-reference-projects/       │
-gaps/                     │
-relations/                │
-maps/ ────────────────────┘
-
-schemas/ ─────────────────────→ schemas/        (keep)
-engine/ ──────────────────────→ engine/         (keep now)
-tools/ ───────────────────────→ tools/          (keep)
-experiments/ ─────────────────→ experiments/    (clarify boundary)
-
-                                   ┌→ specs/
-docs/ mixed artifacts ────────────┼→ research/
-                                   ├→ docs/architecture + Diátaxis docs
-                                   ├→ governance/
-                                   └→ docs/project/ plans / roadmap
-
-.github/workflows/ ───────────────→ .github/ platform integration
-README / CONTRIBUTING / LICENSE ─→ root public entry contracts
-LICENSES/ ────────────────────────→ LICENSES/ (REUSE-compatible direction)
+.github/ ───────────────────────────→ 受 GitHub 平台位置约束的内容继续遵守平台
+LICENSES/ ──────────────────────────→ 若采用 REUSE，继续遵守 REUSE 约束
 ```
 
 ---
 
-# 8. 当前最需要解决的命名 / 结构 Decision
+## 7. #15 与目录迁移的关系（修正）
 
-下一版 Repository Structure Profile 不应该讨论几十个目录，只需要先定 6 个问题：
+旧版路线曾把 #15 Non-normative Knowledge Object Model 当成 `reference-projects/` 未来文件夹命名的前置条件。
 
-### RS-D1 — `data/` 是否成为 Canonical Data Root？
+这一依赖现在撤销。
 
-当前推荐：**YES / provisional**。
-
-### RS-D2 — IA-produced Specification 是否离开 `docs/`？
-
-当前推荐：**YES / provisional**。
-
-### RS-D3 — 使用 `specs/` 还是 `specifications/`？
-
-未决。
-
-需要考虑：
-- 人类可读性；
-- 常见开源惯例；
-- 与 `standards/` Canonical Data object family 的概念区分；
-- URL / package naming。
-
-### RS-D4 — Research 是否 root-level？
-
-当前推荐：**YES / provisional**，但需验证是否会过度增加 root zones。
-
-### RS-D5 — Methodology / Governance 是否分别 root-level？
-
-未决。
-
-可能最终：
+#15 负责：
 
 ```text
-governance/
-docs/methodology/
+type / kind / roles / relations / evidence / assessment
 ```
 
-而不是两个都 root-level。
+Repository Structure 负责：
 
-### RS-D6 — Experiments 是否把 report + fixture 聚在一个 experiment boundary？
+```text
+physical storage / artifact zones / tooling boundary
+```
 
-当前推荐：**YES / provisional**。
+因此两条路线可以并行。
 
 ---
 
-# 9. 迁移风险清单
+## 8. 现有迁移风险仍然有效
 
-## Code / Loader
-- `engine/bootstrap_query.py::OBJECT_DIRS`；
-- 任何按 root relative path 生成 `_source` 的逻辑；
-- Renderer / output path 是否错误耦合 source path。
+### Loader / Engine
 
-## CI
-- Bootstrap Engine workflow path filters；
-- Pages workflow path filters；
-- future schema / link / conformance checks。
+- 当前扫描位置仍需集中管理；
+- Renderer 仍会使用 `_source` 参与 generated path；
+- 真实迁移前必须明确 public route 与 physical source 的关系。
 
-## Documentation
+### CI
+
+Bootstrap / Pages workflow 仍然把当前真实路径写在 `paths:` 中。
+
+### Documentation
+
 - README links；
 - docs index；
 - cross-document relative links；
-- GitHub Issue 中不可自动更新的历史路径引用。
+- 历史 Issue / PR 中的 blob path。
 
-## External References
-- 用户 / Agent 可能已引用 GitHub blob path；
-- GitHub history 可追踪 rename，但旧 raw links 未必是稳定 API。
+### External references
 
-## Licensing
-- REUSE / file-level licensing 若后续采用，应在迁移前明确，避免大量文件移动后重复补 metadata。
+外部可能已经链接当前 GitHub 文件路径。真实 move 前必须评估。
+
+### Licensing
+
+受 REUSE 或其他实际标准约束的位置不能因为“统一目录”而随意移动。
 
 ---
 
-# 10. 下一小步
+## 9. 下一步
 
-基于这份映射，下一步可以开始写 **Repository Structure Profile v0.1 Requirements**，但只先写“职责合同”，不写所有具体目录：
+本 Mapping 到此不再给出完整 Target Tree。
 
-1. Root MUST remain a public project entry surface；
-2. Canonical Data MUST have one explicit source boundary；
-3. Generated Views MUST NOT be competing source of truth；
-4. Specification / Research / Governance artifact identity MUST be distinguishable；
-5. Agent instructions MUST NOT replace human contribution / governance contracts；
-6. path migration MUST preserve Graph semantics and be testable；
-7. physical path MUST NOT be the only artifact identity mechanism；
-8. repository structure SHOULD remain extraction-ready without premature multi-repo split。
+下一步从 **Root 一级目录** 重新讨论，按以下顺序：
 
-然后再用这些 Requirements 审核 Option B，而不是因为 Option B 看起来整齐就采用。
+1. 哪些位置是 GitHub / REUSE 等外部机制强约束；
+2. 哪些 Artifact responsibilities 必须一眼可区分；
+3. 哪些职责值得成为一级目录，哪些可以合并；
+4. Canonical Data 是否需要一个一级 storage zone、叫什么；
+5. 最后才讨论一级目录内部怎样物理组织。
+
+在这些决定明确之前，不再创建新的“目标目录树”。
