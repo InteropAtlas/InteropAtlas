@@ -17,6 +17,17 @@ def validate_storage_path(path: Path) -> Path:
     return path
 
 
+def resolve_repository_root(root: Path) -> Path:
+    """Normalize a caller-supplied root across the Engine directory migration."""
+
+    root = root.resolve()
+    if (root / "01_State").exists():
+        return root
+    if (root.parent / "01_State").exists():
+        return root.parent
+    return root
+
+
 @dataclass(frozen=True)
 class RepositoryLayout:
     root: Path
@@ -40,4 +51,4 @@ def repository_layout(
 ) -> RepositoryLayout:
     configured = storage_paths if storage_paths is not None else CURRENT_CANONICAL_STORAGE_PATHS
     paths = tuple(validate_storage_path(Path(item)) for item in configured)
-    return RepositoryLayout(root=root, storage_paths=paths)
+    return RepositoryLayout(root=resolve_repository_root(root), storage_paths=paths)
