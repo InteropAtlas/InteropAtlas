@@ -112,13 +112,20 @@ def implementations_for_capability(
 def alternative_relations(
     relations: list[dict[str, Any]], capability_id: str
 ) -> list[dict[str, Any]]:
+    """Return only alternatives explicitly scoped to the requested capability.
+
+    A Relation without capability context may still be a valid global statement,
+    but it is not evidence that the alternative applies to an arbitrary capability.
+    Capability-specific queries therefore require an explicit matching context.
+    """
+
     result = []
     for relation in relations:
         descriptor = normalize_relation(relation)
         if descriptor.predicate != "alternative_to":
             continue
-        capabilities = descriptor.context.get("capabilities")
-        if capabilities is not None and capability_id not in capabilities:
+        capabilities = descriptor.context.get("capabilities") or []
+        if capability_id not in capabilities:
             continue
         result.append(relation)
     return result
