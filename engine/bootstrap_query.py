@@ -12,6 +12,7 @@ import argparse
 import json
 from pathlib import Path
 from typing import Any, Iterable
+from urllib.parse import quote
 
 import yaml
 
@@ -53,6 +54,23 @@ def is_relation_document(document: dict[str, Any]) -> bool:
     )
 
 
+def logical_source_path(document: dict[str, Any], is_relation: bool) -> str | None:
+    """Return a stable logical source path derived from identity, not storage.
+
+    Renderers historically derive generated paths from ``_source``. During the
+    repository migration we preserve that interface while changing its meaning:
+    ``_source`` is now a stable logical/public path, whereas
+    ``_physical_source`` remains the repository-relative file location.
+    """
+
+    document_id = document.get("id")
+    if not isinstance(document_id, str) or not document_id:
+        return None
+    safe_id = quote(document_id, safe="-._~")
+    namespace = "relations" if is_relation else "objects"
+    return f"{namespace}/{safe_id}.yaml"
+
+
 def load_atlas(
     root: Path,
     storage_paths: Iterable[Path | str] | None = None,
@@ -60,7 +78,8 @@ def load_atlas(
     """Load canonical Atlas objects from configured physical storage locations.
 
     Storage locations are repository plumbing only. Object semantics come from
-    document content, not the directory name.
+    document content, not the directory name. Public/generated routes are also
+    independent of physical storage and derive from stable document IDs.
     """
 
     layout = repository_layout(root, storage_paths)
@@ -69,12 +88,12 @@ def load_atlas(
 
     for path in layout.iter_yaml_files():
         for document in yaml_documents(path):
-            source = layout.physical_source(path)
-            # Keep current generated-view behaviour unchanged until a later
-            # migration explicitly defines a storage-independent public route.
-            document.setdefault("_source", source)
-            document.setdefault("_physical_source", source)
-            if is_relation_document(document):
+            physical_source = layout.physical_source(path)
+            relation_document = is_relation_document(document)
+            logical_source = logical_source_path(document, relation_document)
+            document.setdefault("_physical_source", physical_source)
+            document.setdefault("_source", logical_source or physical_source)
+            if relation_document:
                 relations.append(document)
             else:
                 objects.append(document)
