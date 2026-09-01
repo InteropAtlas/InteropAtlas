@@ -277,6 +277,34 @@ FAIR = Findable、Accessible、Interoperable、Reusable。
 
 原则：现阶段小规模一跳视图可以继续使用简单 HTML/CSS 验证信息架构；一旦需求进入自由拖拽、缩放、复杂自动布局、上千节点等，应先评估成熟库，不自行重写完整图渲染基础设施。
 
+## 15. Human-Machine Teaming / Human-AI Collaboration
+
+**重点参考：人类与 AI / Agent 作为同一协作系统中的不同参与者时，如何定义角色、责任、监督、交接与组织实施。**
+
+当前最直接的标准化工作仍很新：
+- ISO/IEC CD 25589 — Framework for human-machine teaming：定义人机团队关系、技术特征和设计原则，目前仍在 Committee Draft 阶段；
+- ISO/IEC AWI 25880 — Requirements and guidance for the organizational implementation of human-machine teaming：面向组织实际部署人机团队，目前仍处于早期工作项目阶段；
+- ISO/IEC CD TR 42109 — Use cases of human-machine teaming：收集人机团队实际用例，目前仍在制定中；
+- ISO/IEC 5339:2024 — Guidance for AI applications：已发布，强调 AI 应用全生命周期中的 stakeholder engagement；
+- NIST AI RMF：要求明确区分 human-AI configuration 中的角色、责任、沟通与 human oversight，并持续记录和评估；
+- GitHub Coding Agents / Agentic Workflows：不是标准，但已形成可直接观察的开源协作实现，例如把 Issue 分配给 Agent、Agent 创建 PR、再进入人工 Review。
+
+对 IA 的初步启示：
+- AI / Agent 应被建模为协作参与者，而不是项目主题或独立“自动化层”；
+- 人与 Agent 应尽量共享同一任务、Review 和贡献流程，只在权限、时限、监督强度等方面按参与者类型 Profile；
+- 任务执行者、Reviewer / Overseer 和项目治理者应明确区分，不能把执行、审核和最终授权全部交给同一 Agent；
+- 任务分配、交接、超时释放等仓库级机制目前没有可直接照搬的国际标准，IA 应在上述上位原则基础上形成最小 Open Collaboration Profile，并继续观察 ISO/IEC 25589 / 25880 的演进。
+
+重点页面：
+- ISO/IEC 25589: https://www.iso.org/standard/90831.html
+- ISO/IEC 25880: https://www.iso.org/standard/91833.html
+- ISO/IEC TR 42109: https://www.iso.org/standard/88243.html
+- ISO/IEC 5339: https://www.iso.org/standard/81120.html
+- NIST AI RMF Core / Human-AI Interaction: https://airc.nist.gov/airmf-resources/airmf/5-sec-core/
+- GitHub coding agents: https://docs.github.com/en/copilot/concepts/agents/about-third-party-coding-agents
+
+对应 IA：Curation / Contribution Route、Open Collaboration、Agent participation、任务分配、Review / Oversight、未来多 Agent 协作。
+
 ## 后续可继续扩展的参考池
 
 已知还值得按需要逐步深入：
