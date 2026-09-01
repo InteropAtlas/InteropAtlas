@@ -79,21 +79,25 @@ CURRENT_CANONICAL_STORAGE_PATHS
 
 ## 4. Semantic Identity 来自对象内容
 
-修正前 Loader 允许通过：
-
-```text
-family == "relations"
-```
-
-辅助判断一个文档是不是 Relation。
-
-修正后：
+目标模型中，Relation 应显式声明：
 
 ```yaml
 type: relation
 ```
 
-才是语义判断依据。
+但 #31 实施时发现少量历史 Relation 记录没有显式 `type`；过去它们之所以仍被识别，是因为旧 Loader 同时依赖了 `relations/` 目录。
+
+修正后的兼容规则不再读取目录语义，而是只看文档本身：
+
+```text
+显式 type: relation
+    或
+历史结构：source + relation/predicate/kind + target
+```
+
+因此旧数据仍可工作，同时 Relation 即使被放到任意物理目录，也能根据内容被识别。
+
+长期应逐步把历史 Relation 规范化为显式 `type: relation`，但这属于独立 Canonical Data cleanup，不在 #31 中顺便修改事实数据。
 
 这意味着同一个物理目录可以同时存：
 
@@ -168,7 +172,7 @@ Canonical storage path 当前只接受 repository-relative path：
 
 1. 当前 `standards/sample.yaml` 仍生成原来的 `standards/sample.md`，所以本次修正不改变当前 public behavior；
 2. 一个任意命名的 `mixed/` 目录中可以同时放 Standard、Capability 和 Relation；
-3. Relation 由 `type: relation` 被识别，而不是由目录名识别；
+3. 测试中的 Relation 故意不放在 `relations/`，并使用历史的 `source + relation + target` 内容结构，证明兼容识别与目录名无关；
 4. nested storage 可以被扫描；
 5. storage path 不能逃出 repository；
 6. 不再注入 `_object_family`。
@@ -194,6 +198,8 @@ implementations = forgejo_actions, github_actions
 open-source + self-hostable = forgejo_actions
 ```
 
+#31 的第一版实现曾暴露真实技术债：只接受显式 `type: relation` 时，Graph 会错误变成 129 objects / 90 relations / 144 edges。加入“基于文档内容的旧 Relation 兼容规则”后，完整基线恢复为 112 / 107 / 161 / 0。这个过程进一步证明了：不能让文件夹位置承担隐含语义。
+
 ---
 
 ## 10. Residual Coupling
@@ -204,9 +210,10 @@ open-source + self-hostable = forgejo_actions
 2. Pages workflow `paths:` 同样如此；
 3. Renderer 目前的 public generated path 仍与 `_source` 有关系；
 4. README / docs / 历史 Issue 里存在当前路径引用；
-5. 真正 physical migration 还没有 current → target move table 和 rollback plan。
+5. 真正 physical migration 还没有 current → target move table 和 rollback plan；
+6. 少量 legacy Relation 尚未显式补齐 `type: relation`，后续应独立清理。
 
-这些都必须在 Migration Dry Run 里处理。
+这些都必须在相应后续任务中处理，不能混成一次大迁移。
 
 ---
 
