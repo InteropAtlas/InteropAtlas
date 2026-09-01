@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/identity-object.v0.schema.json",
+  "title": "InteropAtlas Identity Object v0",
+  "allOf": [
+    {"$ref": "base-object.schema.json"},
+    {
+      "type": "object",
+      "required": ["type", "kind"],
+      "properties": {
+        "type": {"enum": ["concept", "artifact", "system", "agent"]},
+        "kind": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+      }
+    }
+  ]
+}
