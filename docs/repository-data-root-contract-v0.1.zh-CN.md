@@ -1,22 +1,41 @@
-# Repository Data Root Contract v0.1
+# Repository Canonical Storage Contract v0.1
 
+> 文件名保留为 `repository-data-root-contract-v0.1.zh-CN.md` 以保持历史链接；标题已按 #31 修正。
+>
 > 状态：Implementation Preparation / Migration Guardrail
 >
-> Work Item：#25
+> 原 Work Item：#25；Corrigendum：#31
 >
-> 上位规范：`docs/repository-structure-profile-v0.1.zh-CN.md`
->
-> 本文只定义“迁移前路径解耦”的实现合同。**没有执行任何 Canonical Data 目录迁移。**
+> 本文只定义“怎样找到 Canonical Data 的物理位置”。**没有执行任何目录迁移，也不规定未来知识分类文件夹。**
 
-## 1. 为什么现在做
+## 1. 为什么修正
 
-Repository Structure Profile 已接受：
+#25 的正确目标是：迁移前先把路径耦合集中起来。
 
-> Layered Monorepo now, extraction-ready later.
+但第一版实现把当前 9 个目录写成 `OBJECT_FAMILIES`，并假设未来可能继续是：
 
-并把 `data/` 作为未来 Canonical Data 的候选逻辑边界。
+```text
+data/standards/
+data/capabilities/
+data/relations/
+...
+```
 
-当前真实仓库仍是：
+这会把两个问题重新绑在一起：
+
+```text
+物理文件放哪
+    ≠
+对象在知识模型里是什么
+```
+
+#31 明确修正：**路径合同只能描述 storage，不得充当 ontology registry。**
+
+---
+
+## 2. 当前真实情况
+
+现在 Canonical YAML 仍然物理分布在：
 
 ```text
 standards/
@@ -30,148 +49,135 @@ relations/
 maps/
 ```
 
-原 `engine/bootstrap_query.py` 自己维护了这 9 个目录名。未来如果直接把目录搬进 `data/`，至少会同时影响：
+这些目录现在统一称为：
 
-- Loader；
-- GraphIndex（通过 Loader）；
-- Markdown Renderer（通过 Loader）；
-- Site Renderer（通过 Loader）；
-- GitHub Actions path triggers；
-- 由 source path 派生的 generated page paths。
+> **Current / Legacy Canonical Storage Paths**
 
-因此不能把“移动目录”当成普通文件整理。
+它们是历史物理位置，不是未来必须保留的语义分区。
 
-## 2. 本轮决策
+---
 
-新增 `engine/repository_layout.py`，集中定义：
+## 3. 修正后的 Engine Contract
 
-- `OBJECT_FAMILIES`；
-- 当前 `DEFAULT_DATA_ROOT = .`；
-- repository root 与 data root 的关系；
-- family physical path；
-- physical source 与 logical source 的区别。
-
-当前并没有切换默认 Data Root。
+`engine/repository_layout.py` 现在集中定义：
 
 ```text
-DEFAULT_DATA_ROOT = .
+CURRENT_CANONICAL_STORAGE_PATHS
 ```
 
-所以所有 Canonical YAML 仍从现有 root directories 读取。
+它回答：
 
-## 3. Physical Source 与 Logical Source
+> 当前 Loader 应该到哪些 repository-relative paths 找 YAML？
 
-这是本轮最重要的迁移保护。
+它不回答：
 
-当前：
+> 这些 YAML 属于哪些知识类别？
+
+未来可以传入任意经批准的 repository-relative storage paths，例如一个统一区域或技术分片；Loader 不要求目录名等于 `standard`、`relation`、`method` 等对象类别。
+
+---
+
+## 4. Semantic Identity 来自对象内容
+
+修正前 Loader 允许通过：
 
 ```text
-physical: standards/yaml_1.2.2.yaml
-logical:  standards/yaml_1.2.2.yaml
+family == "relations"
 ```
 
-未来若批准迁移：
+辅助判断一个文档是不是 Relation。
+
+修正后：
+
+```yaml
+type: relation
+```
+
+才是语义判断依据。
+
+这意味着同一个物理目录可以同时存：
 
 ```text
-physical: data/standards/yaml_1.2.2.yaml
-logical:  standards/yaml_1.2.2.yaml
+Standard
+Capability
+Organization
+Relation
+Method
+Design System
+...
 ```
 
-Loader 运行时使用：
+只要对象自身的数据合同可以明确表达身份。
 
-- `_source` = stable logical source；
-- `_physical_source` = actual repository-relative source；
-- `_object_family` = logical family。
+目录不负责分类。
 
-Renderer 当前已经使用 `_source` 生成 Markdown / HTML 相对路径，因此保持 `_source` 为逻辑路径可以避免未来物理目录迁移自动改变 public object URL。
+---
 
-这实现了 Repository Structure Profile 中的重要 invariant：
+## 5. `_object_family` 被撤销
 
-> source physical path 的变化不应强制 generated public URL 变化。
-
-## 4. 明确未改变的内容
-
-本轮 MUST NOT 改变：
-
-- Canonical Data 文件的物理位置；
-- stable object IDs；
-- Schema；
-- relation semantics；
-- Graph edge semantics；
-- 现有 generated page logical paths；
-- `reference-projects/` 的最终命名决策。
-
-尤其是 `reference-projects/` 仍受 #15 Non-normative Knowledge Object Model 影响，本轮只把它当作**当前存在的 object family**，不冻结它的长期 ontology 身份。
-
-## 5. 风险分析
-
-### Risk 1 — Loader 漏读 object family
-
-如果集中路径列表遗漏某个现有 family，会直接减少 object / relation count。
-
-控制：
-- `OBJECT_FAMILIES` 按当前 9 个 families 原样迁移；
-- CI 比较 graph diagnostics；
-- object / relation / edge counts 必须保持。
-
-### Risk 2 — 生成 URL 意外改变
-
-若 Renderer 继续直接使用 physical path，则未来 `data/` 前缀会泄漏到 generated path。
-
-控制：
-- `_source` 保持 logical source；
-- 新增 `_physical_source` 单独提供真实路径；
-- regression test 同时模拟 root layout 与 future `data/` layout，要求 `output_path()` 完全相同。
-
-### Risk 3 — 配置允许逃出 repository
-
-若 `data_root` 接受绝对路径或 `../`，可能让 bootstrap Engine 意外加载 repository 外部数据，增加可复现性与安全风险。
-
-控制：
-- v0.1 只接受 repository-relative data root；
-- absolute path / parent escape 明确拒绝。
-
-### Risk 4 — 误以为 Engine 解耦等于整个仓库解耦
-
-GitHub Actions 的 `paths:` 是 GitHub 平台配置，不能直接 import Python path contract。
-
-控制：
-- 本轮不假装消除这个耦合；
-- workflow path triggers 继续保留现有 root paths；
-- 真正迁移前必须单独修改并验证 Bootstrap / Pages triggers。
-
-## 6. 当前影响范围
-
-本轮代码影响：
+#25 第一版 Loader 会从物理目录注入：
 
 ```text
-engine/repository_layout.py     NEW
-engine/bootstrap_query.py       Loader 改用集中合同
-engine/graph_index.py           增加可显式传入 data-root 的 diagnostics
-engine/test_repository_layout.py NEW regression checks
-engine/README.md                记录合同
-.github/workflows/bootstrap-engine-experiment.yml
-                                只增加 regression check step
+_object_family
 ```
 
-不修改：
+#31 删除这一行为。
 
-```text
-standards/
-capabilities/
-scenarios/
-organizations/
-implementations/
-reference-projects/
-gaps/
-relations/
-maps/
-schemas/
-```
+原因：这会让一个运行时“语义字段”来自文件夹，而不是对象数据，重新制造目录 = ontology 的耦合。
 
-## 7. Baseline
+当前保留：
 
-迁移前最近一次完整 Bootstrap Engine Run #89（Canonical Data 最新变化之后）报告：
+- `_physical_source`：真实 repository-relative 文件位置；
+- `_source`：当前为了兼容既有 Renderer / generated path，仍与当前 physical source 相同。
+
+---
+
+## 6. Public URL 问题重新定义
+
+#25 第一版用“保留 family-relative logical source”来模拟未来 `data/standards/...` 迁移后 URL 不变。
+
+这个办法隐含了“未来仍有 standards/ 等 family folders”的假设，因此不能继续作为通用方案。
+
+修正后明确：
+
+> **未来真实移动 Canonical Data 之前，必须单独定义 public view route / generated URL 与 physical storage path 的解耦方式。**
+
+可能依据 stable ID、显式 route、Renderer registry 或其他方案；现在不拍板。
+
+本次修正只保证：**当前 layout 下现有 generated path 不变化。**
+
+---
+
+## 7. Storage Path 的安全边界
+
+Canonical storage path 当前只接受 repository-relative path：
+
+- 不允许绝对路径；
+- 不允许 `..` 逃出 repository；
+- 可以配置一个或多个路径；
+- 目录内部可以递归扫描 YAML；
+- future storage path 名称不需要与 object type 相同。
+
+这样既保持可复现性，也不给未来目录方案预设 ontology。
+
+---
+
+## 8. 回归测试
+
+#31 的新测试验证：
+
+1. 当前 `standards/sample.yaml` 仍生成原来的 `standards/sample.md`，所以本次修正不改变当前 public behavior；
+2. 一个任意命名的 `mixed/` 目录中可以同时放 Standard、Capability 和 Relation；
+3. Relation 由 `type: relation` 被识别，而不是由目录名识别；
+4. nested storage 可以被扫描；
+5. storage path 不能逃出 repository；
+6. 不再注入 `_object_family`。
+
+---
+
+## 9. 当前 Graph Baseline
+
+#31 必须继续保持 #25 合并时的基线：
 
 ```text
 objects:          112
@@ -180,7 +186,7 @@ resolved edges:   161
 reference issues: 0
 ```
 
-代表性 deterministic query：
+代表性 query 也必须不变：
 
 ```text
 capability = automated_build_deployment
@@ -188,43 +194,60 @@ implementations = forgejo_actions, github_actions
 open-source + self-hostable = forgejo_actions
 ```
 
-PR CI 必须至少保持上述 graph / query semantics。
+---
 
-## 8. Residual Coupling
+## 10. Residual Coupling
 
-Step 1 完成后仍然存在：
+修正后仍然明确存在：
 
-1. `.github/workflows/bootstrap-engine-experiment.yml` 的 root path filters；
-2. `.github/workflows/pages.yml` 的 root path filters；
-3. README / docs 中描述当前路径的自然语言引用；
-4. 未来 #15 可能改变 `reference-projects` 的 object-family modeling / naming。
+1. Bootstrap workflow `paths:` 仍监听当前 legacy physical paths；
+2. Pages workflow `paths:` 同样如此；
+3. Renderer 目前的 public generated path 仍与 `_source` 有关系；
+4. README / docs / 历史 Issue 里存在当前路径引用；
+5. 真正 physical migration 还没有 current → target move table 和 rollback plan。
 
-其中 1–2 是正式 Migration Dry Run 前的硬前置；3 属于迁移后的 link/docs stabilization；4 是正式目录迁移前需要等待的模型决策。
+这些都必须在 Migration Dry Run 里处理。
 
-## 9. Step 1 完成 Gate
+---
 
-只有满足以下条件，#25 才可完成：
+## 11. #15 不再阻塞目录讨论
 
-- current root layout 仍可完整加载；
-- object = 112；
-- relation = 107；
-- edge = 161；
-- reference issues = 0；
-- representative query 语义不变；
-- current logical generated paths 不变；
-- regression test 证明 future `data/` physical prefix 不会自动改变 logical generated path；
-- 没有真实移动任何 Canonical Data 文件。
+#15 继续研究：
 
-## 10. 下一步不是迁移
+```text
+type / kind / roles / relations / evidence / assessment
+```
 
-#25 完成后仍然**不直接迁移**。
+但它不再决定：
 
-下一阶段按已批准顺序推进 #15，待关键 object-family naming / modeling 稳定后，再进入 Migration Dry Run。Dry Run 应再次向 Maintainer 明确说明：
+```text
+reference-projects/ 改成什么文件夹
+是否建 methods/
+是否建 precedents/
+```
 
-1. 准备移动哪些路径；
-2. 每条路径为什么移动；
-3. Loader / CI / URLs / external links 的影响；
-4. rollback 方法；
-5. 迁移前后不变量。
+因为这些语义分类根本不应该通过文件夹表达。
 
-只有 Maintainer 再次明确批准，才进入真实物理目录迁移。
+所以 Repository Root / first-level layout discussion 可以现在继续，而 #15 可并行推进。
+
+---
+
+## 12. 这次修正没有做什么
+
+没有：
+
+- 移动任何 Canonical Data 文件；
+- 修改任何 Schema；
+- 修改 stable object IDs；
+- 修改 Relation 语义；
+- 改变当前 public generated path；
+- 决定未来 root 一级目录；
+- 决定 future Canonical storage zone 的名字或内部布局。
+
+## 13. 下一步
+
+下一步不是搬目录，而是重新讨论：
+
+> **仓库根目录下面到底应该有哪些一级目录。**
+
+讨论时先按“技术职责 / Artifact responsibility / 外部平台约束”来分，而不是按 Standard / Method / Precedent 等知识类别来分。
