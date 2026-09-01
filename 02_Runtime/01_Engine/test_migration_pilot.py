@@ -66,12 +66,21 @@ class RepresentativeMigrationPilotTests(unittest.TestCase):
         self.assertEqual(descriptor.source_id, "engine_v0_1_bootstrap")
         self.assertEqual(descriptor.target_id, "semantic_versioning_2_0_0")
 
-    def test_supportability_query_is_semantically_unchanged(self) -> None:
+    def test_supportability_query_preserves_results_and_scope(self) -> None:
         result = run(ROOT, "automated_build_deployment")
         ids = set(result["implementation_ids"])
-        self.assertIn("forgejo_actions", ids)
-        self.assertIn("github_actions", ids)
-        self.assertIn("forgejo_actions", set(result["open_source_and_self_hostable_ids"]))
+        self.assertEqual(ids, {"forgejo_actions", "github_actions"})
+        self.assertEqual(set(result["open_source_and_self_hostable_ids"]), {"forgejo_actions"})
+        self.assertEqual(
+            result["alternative_relations"],
+            [
+                {
+                    "source": "forgejo_actions",
+                    "relation": "alternative_to",
+                    "target": "github_actions",
+                }
+            ],
+        )
 
     def test_negative_cases_remain_legacy_for_semantic_reasons(self) -> None:
         artifact = self.index["semantic_versioning_2_0_0"]
