@@ -15,7 +15,7 @@ from typing import Any, Iterable
 
 import yaml
 
-from repository_layout import RELATION_FAMILY, repository_layout
+from repository_layout import repository_layout
 
 
 def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
@@ -27,30 +27,27 @@ def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
 
 def load_atlas(
     root: Path,
-    data_root: Path | str | None = None,
+    storage_paths: Iterable[Path | str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Load canonical Atlas objects through the repository layout contract.
+    """Load canonical Atlas objects from configured physical storage locations.
 
-    ``root`` remains the repository checkout root. ``data_root`` is a
-    repository-relative physical location for canonical object families and
-    defaults to the current contract (``.``). No caller needs to know the list
-    of object-family directories.
+    Storage locations are repository plumbing only. Object semantics come from
+    the document itself: a Relation is a Relation because ``type: relation``,
+    not because the YAML happened to live in a directory named ``relations``.
     """
 
-    layout = repository_layout(root, data_root)
+    layout = repository_layout(root, storage_paths)
     objects: list[dict[str, Any]] = []
     relations: list[dict[str, Any]] = []
 
-    for family, path in layout.iter_yaml_files():
+    for path in layout.iter_yaml_files():
         for document in yaml_documents(path):
-            # `_source` is intentionally the stable logical source consumed by
-            # generated views. `_physical_source` preserves the actual repository
-            # path for migration/debug traceability. Today they are identical;
-            # after a future root -> data/ migration only the physical path changes.
-            document.setdefault("_source", layout.logical_source(family, path))
-            document.setdefault("_physical_source", layout.physical_source(path))
-            document.setdefault("_object_family", family)
-            if family == RELATION_FAMILY or document.get("type") == "relation":
+            source = layout.physical_source(path)
+            # Keep current generated-view behaviour unchanged until a later
+            # migration explicitly defines a storage-independent public route.
+            document.setdefault("_source", source)
+            document.setdefault("_physical_source", source)
+            if document.get("type") == "relation":
                 relations.append(document)
             else:
                 objects.append(document)
@@ -118,9 +115,9 @@ def alternative_relations(
 def run(
     root: Path,
     capability_id: str,
-    data_root: Path | str | None = None,
+    storage_paths: Iterable[Path | str] | None = None,
 ) -> dict[str, Any]:
-    objects, relations = load_atlas(root, data_root)
+    objects, relations = load_atlas(root, storage_paths)
     index = index_objects(objects)
     implementations = implementations_for_capability(objects, capability_id)
     open_self_hostable = [
@@ -160,15 +157,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument(
-        "--data-root",
+        "--storage-path",
         type=Path,
-        help="repository-relative canonical data root; defaults to the repository layout contract",
+        action="append",
+        dest="storage_paths",
+        help=(
+            "repository-relative canonical storage location; repeat for multiple "
+            "locations. If omitted, use the current legacy locations."
+        ),
     )
     parser.add_argument("--capability", default="automated_build_deployment")
     args = parser.parse_args()
     print(
         json.dumps(
-            run(args.root, args.capability, args.data_root),
+            run(args.root, args.capability, args.storage_paths),
             ensure_ascii=False,
             indent=2,
         )
