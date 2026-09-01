@@ -1,0 +1,144 @@
+# Human-interface standards, guidance, and design-system interoperability relations.
+---
+id: wai_aria_provides_web_accessibility
+type: relation
+name_zh: WAI-ARIA 提供 Web 无障碍语义能力
+name_en: WAI-ARIA provides web accessibility semantics
+source: {type: standard, id: wai_aria_1.2}
+relation: provides
+target: {type: capability, id: web_accessibility}
+capability_context: [web_accessibility, human_system_interaction]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/wai-aria-1.2/
+    title: WAI-ARIA 1.2
+    language: en
+    accessed: 2026-09-01
+---
+id: wai_aria_supports_human_system_interaction
+type: relation
+name_zh: WAI-ARIA 为可访问人机交互提供界面语义
+name_en: WAI-ARIA provides interface semantics for accessible human-system interaction
+source: {type: standard, id: wai_aria_1.2}
+relation: provides
+target: {type: capability, id: human_system_interaction}
+capability_context: [human_system_interaction, web_accessibility]
+confidence: 0.95
+---
+id: wai_aria_recommended_with_html
+type: relation
+name_zh: WAI-ARIA 与 HTML 语义配合使用
+name_en: WAI-ARIA is used together with HTML semantics
+source: {type: standard, id: wai_aria_1.2}
+relation: recommended_with
+target: {type: standard, id: html_living_standard}
+capability_context: [web_accessibility, human_system_interaction]
+conditions_zh: "优先使用原生 HTML 语义；当原生语义不足以表达可访问性角色、状态或属性时，再使用 ARIA。"
+conditions_en: "Prefer native HTML semantics; use ARIA when native semantics are insufficient to express accessibility roles, states, or properties."
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/wai-aria-1.2/
+    title: WAI-ARIA 1.2
+    language: en
+    accessed: 2026-09-01
+---
+id: wai_aria_recommended_with_svg
+type: relation
+name_zh: WAI-ARIA 与 SVG 2 可访问性语义配合使用
+name_en: WAI-ARIA complements SVG 2 accessibility semantics
+source: {type: standard, id: wai_aria_1.2}
+relation: recommended_with
+target: {type: standard, id: svg_2}
+capability_context: [web_accessibility, visual_information_presentation]
+confidence: 0.95
+sources:
+  - url: https://www.w3.org/TR/wai-aria-1.2/
+    title: WAI-ARIA 1.2
+    language: en
+    accessed: 2026-09-01
+---
+id: aria_apg_describes_wai_aria_patterns
+type: relation
+name_zh: ARIA APG 描述 WAI-ARIA 的常见组件实践模式
+name_en: ARIA APG describes common authoring patterns for WAI-ARIA
+source: {type: reference_project, id: aria_apg}
+relation: describes
+target: {type: standard, id: wai_aria_1.2}
+capability_context: [web_accessibility, human_system_interaction]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/WAI/ARIA/apg/
+    title: ARIA Authoring Practices Guide
+    language: en
+    accessed: 2026-09-01
+---
+id: act_rules_format_provides_accessibility_conformance_testing
+type: relation
+name_zh: ACT Rules Format 提供无障碍符合性测试规则表达能力
+name_en: ACT Rules Format provides accessibility conformance test-rule representation
+source: {type: standard, id: act_rules_format_1.1}
+relation: provides
+target: {type: capability, id: accessibility_conformance_testing}
+capability_context: [accessibility_conformance_testing, web_accessibility]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/act-rules-format/
+    title: ACT Rules Format 1.1
+    language: en
+    accessed: 2026-09-01
+---
+id: act_rules_format_recommended_with_wcag
+type: relation
+name_zh: ACT Rules Format 可用于表达针对 WCAG 要求的测试规则
+name_en: ACT Rules Format can express test rules for WCAG requirements
+source: {type: standard, id: act_rules_format_1.1}
+relation: recommended_with
+target: {type: standard, id: wcag_2.2}
+capability_context: [accessibility_conformance_testing, web_accessibility]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/TR/act-rules-format/
+    title: ACT Rules Format 1.1
+    language: en
+    accessed: 2026-09-01
+---
+id: design_tokens_format_provides_token_exchange
+type: relation
+name_zh: Design Tokens Format 提供设计令牌交换能力
+name_en: Design Tokens Format provides design token exchange
+source: {type: standard, id: design_tokens_format_2025.10}
+relation: provides
+target: {type: capability, id: design_token_exchange}
+capability_context: [design_token_exchange, visual_information_presentation]
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/
+    title: Design Tokens Format Module 2025.10
+    language: en
+    accessed: 2026-09-01
+---
+id: design_tokens_format_supports_visual_information_presentation
+type: relation
+name_zh: Design Tokens Format 支持视觉呈现决策的跨工具复用
+name_en: Design Tokens Format supports cross-tool reuse of visual presentation decisions
+source: {type: standard, id: design_tokens_format_2025.10}
+relation: provides
+target: {type: capability, id: visual_information_presentation}
+capability_context: [design_token_exchange, visual_information_presentation]
+conditions_zh: "该格式表达设计决策的可交换值，本身不规定具体视觉层级、排版或可用性规则。"
+conditions_en: "The format exchanges design-decision values; it does not itself prescribe visual hierarchy, typography, or usability rules."
+confidence: 0.85
+---
+id: design_tokens_format_governed_by_dtcg
+type: relation
+name_zh: Design Tokens Format 由 Design Tokens Community Group 治理发布
+name_en: Design Tokens Format is governed and published by the Design Tokens Community Group
+source: {type: standard, id: design_tokens_format_2025.10}
+relation: governed_by
+target: {type: organization, id: design_tokens_community_group}
+confidence: 1.0
+sources:
+  - url: https://www.w3.org/community/design-tokens/
+    title: Design Tokens Community Group
+    language: en
+    accessed: 2026-09-01
