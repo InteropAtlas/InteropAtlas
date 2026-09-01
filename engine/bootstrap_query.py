@@ -15,20 +15,7 @@ from typing import Any, Iterable
 
 import yaml
 
-# Canonical object directories currently modeled by the Atlas. Keep this list
-# aligned with repository object families so GraphIndex/Renderer do not silently
-# omit valid objects such as Reference Projects or Open Gaps.
-OBJECT_DIRS = (
-    "standards",
-    "capabilities",
-    "scenarios",
-    "organizations",
-    "implementations",
-    "reference-projects",
-    "gaps",
-    "relations",
-    "maps",
-)
+from repository_layout import RELATION_FAMILY, repository_layout
 
 
 def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
@@ -38,21 +25,35 @@ def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
                 yield document
 
 
-def load_atlas(root: Path) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+def load_atlas(
+    root: Path,
+    data_root: Path | str | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Load canonical Atlas objects through the repository layout contract.
+
+    ``root`` remains the repository checkout root. ``data_root`` is a
+    repository-relative physical location for canonical object families and
+    defaults to the current contract (``.``). No caller needs to know the list
+    of object-family directories.
+    """
+
+    layout = repository_layout(root, data_root)
     objects: list[dict[str, Any]] = []
     relations: list[dict[str, Any]] = []
 
-    for directory_name in OBJECT_DIRS:
-        directory = root / directory_name
-        if not directory.is_dir():
-            continue
-        for path in sorted(directory.glob("*.yaml")):
-            for document in yaml_documents(path):
-                document.setdefault("_source", str(path.relative_to(root)))
-                if directory_name == "relations" or document.get("type") == "relation":
-                    relations.append(document)
-                else:
-                    objects.append(document)
+    for family, path in layout.iter_yaml_files():
+        for document in yaml_documents(path):
+            # `_source` is intentionally the stable logical source consumed by
+            # generated views. `_physical_source` preserves the actual repository
+            # path for migration/debug traceability. Today they are identical;
+            # after a future root -> data/ migration only the physical path changes.
+            document.setdefault("_source", layout.logical_source(family, path))
+            document.setdefault("_physical_source", layout.physical_source(path))
+            document.setdefault("_object_family", family)
+            if family == RELATION_FAMILY or document.get("type") == "relation":
+                relations.append(document)
+            else:
+                objects.append(document)
 
     return objects, relations
 
@@ -114,8 +115,12 @@ def alternative_relations(
     return result
 
 
-def run(root: Path, capability_id: str) -> dict[str, Any]:
-    objects, relations = load_atlas(root)
+def run(
+    root: Path,
+    capability_id: str,
+    data_root: Path | str | None = None,
+) -> dict[str, Any]:
+    objects, relations = load_atlas(root, data_root)
     index = index_objects(objects)
     implementations = implementations_for_capability(objects, capability_id)
     open_self_hostable = [
@@ -154,9 +159,20 @@ def run(root: Path, capability_id: str) -> dict[str, Any]:
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument(
+        "--data-root",
+        type=Path,
+        help="repository-relative canonical data root; defaults to the repository layout contract",
+    )
     parser.add_argument("--capability", default="automated_build_deployment")
     args = parser.parse_args()
-    print(json.dumps(run(args.root, args.capability), ensure_ascii=False, indent=2))
+    print(
+        json.dumps(
+            run(args.root, args.capability, args.data_root),
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
 
 
 if __name__ == "__main__":
