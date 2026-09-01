@@ -29,6 +29,11 @@ jobs:
         run: python 02_Runtime/01_Engine/graph_index.py --root .
       - name: Run deterministic supportability query
         run: python 02_Runtime/01_Engine/bootstrap_query.py --root . --capability automated_build_deployment
+      - name: Build complete human-readable site
+        run: |
+          python 02_Runtime/01_Engine/render_site.py --root . --output build/site
+          test -f build/site/objects/yaml_1.2.2.html
+          test -f build/site/objects/forgejo_actions.html
       - name: Render three human-readable object types
         run: |
           python 02_Runtime/01_Engine/render_markdown.py forgejo_actions --root . --output build/implementations/forgejo-actions.md
