@@ -1,50 +1,167 @@
 # 为 InteropAtlas 贡献
 
-InteropAtlas 当前处于 Pre-Alpha 设计阶段。贡献应优先保证：事实可验证、来源明确、对象类型区分清晰、结构机器可读。
+InteropAtlas 当前处于 Pre-Alpha。项目采用 **Human-first, agent-compatible** 的公开协作方式：Human 与 AI / Agent 使用同一套 GitHub Work Item、Lease、Handoff 和 Review 协议，不建立只给 Agent 使用的隐藏任务系统。
 
-## 基本原则
+核心协作规范：
+- `docs/open-collaboration-profile-v0.1.zh-CN.md`
+- `docs/collaboration-task-system-v0.1.zh-CN.md`
+
+## 1. 基本原则
 
 - 能使用权威一手来源时，优先使用一手来源。
-- 明确区分标准、协议、规范、API、格式、实现、组织、项目和产品。
-- 不要把“开放性”压缩成单一布尔值。应分别记录规范可访问性、治理开放度、专利/版税条件、开源实现、认证限制、厂商中立性等事实维度。
-- 关系应被视为需要证据支持的、带上下文的事实主张。
+- 明确区分标准、协议、规范、方法、实现、组织、项目和产品。
+- Fact 与 Assessment 分离；关系与判断需要可追踪 Evidence。
 - 除非再发布权利清晰，否则不要复制第三方规范全文。
-- 优先提交较小、可审查的 Pull Request。
+- 优先提交较小、可独立 Review 的变更。
+- 稳定任务上下文必须进入 Issue / PR / repository artifact，不能只留在聊天窗口。
 
-## 语言规则
+## 2. 从哪里开始：找 Ready Work Item
+
+可自主执行的任务应使用 GitHub Issue，并明确标记：
+
+```text
+Status: Ready
+Primary Lease Holder: —
+Claimed At: —
+Lease Until: —
+Execution Mode: unassigned
+Review Class: normal | high-impact
+```
+
+`Ready` 任务必须已经包含 Objective、Context、Read First、Seed References、Freshness Check、Scope、Non-goals、Deliverables、Evidence、Acceptance、Review Class、Dependencies 和 Lease Policy。
+
+如果这些信息不足，请先把任务保持为 `Draft`，不要靠私人聊天补齐后直接执行。
+
+## 3. 认领任务：Lease-style Claim
+
+普通排他任务默认只有一个 Primary Lease Holder。
+
+认领时：
+
+1. 将负责账号设为 Assignee；
+2. 在 Issue 中留下公开 Claim comment；
+3. 记录 `Claimed At`、`Lease Until`、Execution Mode；
+4. 将 Status 改为 `Claimed`；
+5. 开始实质工作后改为 `In Progress`。
+
+Pilot 默认首次 Lease review window 为 **72 小时**，Task Author 可明确覆盖。
+
+Claim comment：
+
+```text
+Claim
+Holder: @account / agent identity
+Execution mode: human | agent | mixed
+Claimed at: YYYY-MM-DD HH:MM TZ
+Lease until: YYYY-MM-DD HH:MM TZ
+Planned first checkpoint: ...
+```
+
+续租应伴随可观察进展：commit、PR、draft artifact、研究结果、blocker report 或 substantive Issue update。Lease 到期不删除已有工作；任务可 Released 回 Ready，由下一位执行者继续。
+
+## 4. 执行过程中
+
+执行者必须遵守 Issue 的 Scope / Non-goals 和上位 Specification。
+
+研究或标准相关任务使用：
+
+### Read First / Upstream Contracts
+必须遵守的 IA Definition / Specification / Schema / Issue。
+
+### Seed References
+Task Author 已知并已进入 Atlas 的高价值 Standard / Mature Precedent / Method / Implementation。优先引用 stable Atlas ID。
+
+### Freshness / Completeness Check
+执行者仍需检查：新版本、superseding artifact、新标准、新替代方案、新成熟先例和 Atlas 漏项。
+
+Seed References 是共享起点，不是封闭答案集。新发现应进入 Atlas，或创建明确 Intake / Model Gap follow-up。
+
+## 5. Blocked / Released / Handoff
+
+阻塞时不要静默占用任务。将 Status 设为 `Blocked` 并公开说明 blocker。
+
+需要交接时使用：
+
+```text
+Handoff
+Status: ...
+Completed: ...
+Artifacts / commits / PRs: ...
+Validated: ...
+Remaining: ...
+Blockers / open questions: ...
+Recommended next action: ...
+Current branch / PR / commit: ...
+```
+
+Human→Agent、Agent→Agent、Human→Human 使用同一格式。
+
+## 6. Pull Request 与 Review
+
+改变 Canonical Repository 的完成产物应优先通过 PR 进入 Review。
+
+PR 至少说明：
+- Linked Work Item；
+- Execution Mode；
+- Scope / out-of-scope；
+- Evidence / sources；
+- Validation performed；
+- Remaining work / handoff；
+- Review Class。
+
+Executor 的 self-check 不等于 independent review。CI / Validator / E2E 是 Review Evidence，不是 Reviewer。
+
+### normal
+
+普通数据、研究、文档和非破坏性实现任务。SHOULD 由不同于 Executor 的 Human 或 Agent 独立 Review。
+
+### high-impact
+
+项目定义 / Scope、Governance / Collaboration、破坏性 Schema、License / Security、stable Specification 升级、main protection / ruleset、大规模数据删除、正式 Release 等变更，必须有 **Human Maintainer 最终授权**。
+
+## 7. Done 条件
+
+任务关闭为 Done 前确认：
+
+- Deliverables 已进入公开 Artifact / PR；
+- Acceptance Criteria 已满足；
+- 所需 Evidence / tests 已记录；
+- 所需 independent review 已完成；
+- high-impact 任务已有 Human Maintainer approval；
+- residual work 已形成 Handoff 或 follow-up Issue。
+
+## 8. AI / Agent 贡献
+
+Agent 可以作为 Executor 或 Reviewer，但流程不绑定任何厂商。
+
+Agent 开始任务前应读取：
+1. 当前 Issue；
+2. `AGENTS.md`；
+3. Issue 的 Read First / Upstream Contracts；
+4. 与修改区域相关的 Specification / Schema。
+
+Agent 不应假设私人 Chat 历史是公共项目状态。主要由 Agent 执行的任务 / PR 应记录 `Execution Mode: agent` 或 `mixed`。
+
+## 9. 数据与语言规则
 
 项目采用“中文优先、英文机器标识、中英双语知识字段”。
 
 - `id`、字段名、枚举值、关系类型、路径、Schema 和 API 标识使用英文。
 - 中文是当前主文档和主要解释语言。
 - 名称、描述、定义等知识字段尽可能同时提供 `*_zh` 与 `*_en`。
-- 对官方名称、标准编号、组织名、协议名等，不应为了中文化而替换其正式原文。
-- 翻译存在不确定性时，应保留原文并明确标记译名，而不是把译名当成新的官方名称。
-
-示例：
-
-```yaml
-id: device_discovery
-name_zh: 设备发现
-name_en: Device Discovery
-description_zh: 系统发现可用设备、节点或服务的能力。
-description_en: The capability to discover available devices, nodes, or services.
-```
+- 官方名称、标准编号、组织名、协议名保留正式原文。
+- 翻译不确定时保留原文并标记译名。
 
 完整规则见 `docs/language-policy.zh-CN.md`。
 
-## 贡献内容的许可证
+当前结构化事实源主要使用人类可编辑 YAML，并由 Schema / Engine / CI 验证。生成的 HTML、Markdown、JSON/RDF 等视图不是第二事实源。
 
-提交贡献即表示，你同意按照 `LICENSE.md` 中与目标内容对应的许可证提供该贡献：
+## 10. 许可证
+
+提交贡献即表示同意按照 `LICENSE.md` 中与目标内容对应的许可证提供贡献：
 
 - 软件及功能性 Schema：Apache-2.0；
 - 原创结构化事实数据：CC0-1.0；
 - 原创文字文档与研究内容：CC BY 4.0。
 
-不要提交无权再发布的第三方材料；如果第三方材料允许收录，应保留必要的归属和许可证信息。
-
-## 数据工作流
-
-初期计划使用人类可编辑的 YAML 作为事实源，并使用 JSON Schema 校验。未来可从同一事实源生成 JSON、RDF、图数据库、API 与网站表示。
-
-本体与 Schema 目前尚未稳定。v0.1 设计阶段允许破坏性变更。
+不要提交无权再发布的第三方材料；如果第三方材料允许收录，应保留必要归属与许可证信息。
