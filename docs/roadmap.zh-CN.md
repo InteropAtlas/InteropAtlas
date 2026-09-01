@@ -8,15 +8,18 @@
 
 ## 当前总体判断
 
-InteropAtlas 的主方向没有变化，但此前近期执行顺序有一处明显偏移：Human-readable Website / Object Page 的实现推进速度已经超过了底层规范、开放协作机制和仓库结构本身。
+InteropAtlas 当前不把网站、Renderer 或具体 Agent 自动化当作第一优先级，而是先建立能够长期指导实现的基础规范。
 
-因此当前不再把网站重构作为第一 P0，而是先回答三个更基础的问题：
+Foundation 当前四个工作包：
 
-1. **项目自身怎样组织？** — Repository Structure / Artifact Taxonomy；
-2. **面向人的信息怎样组织、呈现和交互？** — Human Interface Standards Package；
-3. **人类与 AI / Agent 怎样共同建设？** — Open Collaboration / Human–AI Collaboration Profile。
+1. **F1 Repository Structure / Artifact Taxonomy**；
+2. **F2 Human Interface Standards Package**；
+3. **F3 Open Collaboration / Human–AI Collaboration**；
+4. **F4 Curation / Evidence / Machine Correctness**。
 
-同时继续并行补齐 Canonical Data 的 Curation / Evidence / Validator / Query correctness。
+其中 Work Package A 已完成 **F1 + F3 的 Draft Profile**。
+
+完成审计：`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`。
 
 原则保持不变：
 - Interoperability 是问题边界；
@@ -30,77 +33,82 @@ InteropAtlas 的主方向没有变化，但此前近期执行顺序有一处明�
 - Practice-driven Feedback；
 - graph-native, database-agnostic。
 
-## 当前已有但尚未等于“基础完成”
+## 已完成的 Foundation Profiles
 
-### Human Interface
+### Gate A / F1 — Repository Structure：PASS at Draft level
 
-已有：
-- ISO 9241 / WCAG / WAI-ARIA 等 Standards Baseline；
-- Prior Art Reference Map；
-- `IA-HI Specification v0.1` 综合草案；
-- 第一次 requirement-based audit；
-- GitHub Pages Reference Implementation。
+已形成：
+- `repository-structure-prior-art-and-options-v0.1.zh-CN.md`；
+- `repository-current-to-target-mapping-v0.1.zh-CN.md`；
+- `repository-structure-profile-v0.1.zh-CN.md`。
 
-但仍缺：
-- Information Architecture Profile；
-- Information Presentation Profile；
-- Interaction Profile；
-- Visual Presentation Profile；
-- Accessibility / Conformance Profile；
-- Method / Guideline / Heuristic / Design System 的合适 Atlas 对象模型。
+当前决策：
 
-因此：**网站只是 Reference Implementation，不是当前规范来源。**
+> **Layered Monorepo now, extraction-ready later.**
 
-### Open Collaboration / Human–AI
+目标逻辑边界已经明确：
+- Canonical Data；
+- Schemas / Contracts；
+- Engine / Tools / Tests；
+- IA-produced Specifications；
+- Research / Prior Art / Audits；
+- Documentation；
+- Governance；
+- Experiments；
+- Generated Views。
 
-已有：
-- ISO/IEC Human-Machine Teaming / NIST AI RMF Prior Art；
-- Linux Foundation AAIF / AGENTS.md 调研；
-- GitHub Coding Agents / Issue / PR / Review Prior Art；
-- Open Collaboration V0 Working Notes。
+目标采用单一 Canonical Data boundary（候选 `data/`），但当前**尚未执行物理目录迁移**。
 
-但仍缺：
-- participant roles；
-- task lifecycle；
-- claim / lease semantics；
-- handoff / continuity；
-- review / oversight / authorization；
-- GitHub-native mapping；
-- AGENTS.md 与 README / CONTRIBUTING 的边界。
+迁移必须保持 stable IDs、object / relation / graph semantics 和 `reference_issues = 0` 等不变量。
 
-因此：**不先做 Agent-only task system，也不先写 AGENTS.md。先形成 Profile。**
+### Gate C / F3 — Open Collaboration：PASS at Draft level
 
-### Repository Structure
+已形成：
+- `human-ai-open-collaboration-prior-art.zh-CN.md`；
+- `open-collaboration-route-v0-notes.zh-CN.md`；
+- `open-collaboration-profile-v0.1.zh-CN.md`。
 
-当前根目录同时放置 Canonical Data 对象目录、docs、schemas、engine、experiments 等；`docs/` 又混合 Specification、Methodology、Research、Plan、Audit、Roadmap 等多种产物身份；`.github/` 当前主要只有 workflows。
+当前协作合同已经定义：
+- Steward / Planner / Executor / Reviewer / Maintainer / Automation roles；
+- Agent-ready / Human-ready Work Item Contract；
+- GitHub Issue / Sub-issue / Dependency Task Graph；
+- Draft → Ready → Claimed → In Progress → Review → Done 生命周期；
+- Lease-style Claim；
+- Handoff / Continuity；
+- Independent Review / Human authorization；
+- Agent contribution transparency；
+- AGENTS.md 的职责边界；
+- GitHub-native mapping。
 
-当前结构可以工作，但还没有经过“开放标准项目 + 多贡献者 + Agent-compatible”的结构审计。
+目标运行模型：
 
-因此：**不立即搬目录，先形成 Repository Structure & Artifact Taxonomy v0.1。**
+```text
+Vision / Specification
+       ↓
+Ready Work Items
+       ↓
+Lease-style Claim
+       ↓
+Independent Execution
+       ↓
+Public Artifact / PR
+       ↓
+Independent Review
+       ↓
+Maintainer Authorization where required
+       ↓
+Merge / Done / Handoff
+```
 
-## P0 — Foundation First
+当前**尚未实现** CONTRIBUTING 重写、AGENTS.md、templates、Project Fields、CODEOWNERS / Ruleset、Lease automation 或真实任务试运行。
 
-### P0-F1：Repository Structure & Artifact Taxonomy
+这些属于候选 Work Package B，不自动执行。
 
-相关：#21。
-
-输出：
-- 当前仓库结构审计；
-- Root / docs / data / specs / methodology / research / experiments / governance / tools / tests 等职责比较；
-- Artifact taxonomy 与 lifecycle；
-- Community Health / CONTRIBUTING / Issue / PR / CODEOWNERS / AGENTS.md 的目标位置和职责；
-- 是否把现有 `standards/`、`capabilities/` 等迁入 `data/` 的 Decision；
-- Migration Plan。
-
-Prior Art：GitHub Community Profile / Health Files、OpenSSF、REUSE、Diátaxis / docs-as-code、IETF / W3C / LF 开放规范项目等。
-
-在该 Profile 出来前，不大规模移动仓库目录。
+## 当前仍未完成的 Foundation
 
 ### P0-F2：Human Interface Standards Package
 
 相关：#14、#15。
-
-当前综合 `IA-HI v0.1` 作为输入，不作为“已经完成”。
 
 需要形成至少五个可审计模块：
 1. Information Architecture；
@@ -109,37 +117,20 @@ Prior Art：GitHub Community Profile / Health Files、OpenSSF、REUSE、Diátaxi
 4. Visual Presentation；
 5. Accessibility / Conformance。
 
-每个模块必须有：
+每个模块需要：
 - 用户任务 / context；
-- 上游标准 / Prior Art；
-- Adopt / Profile / Extend / Invent 判断；
+- 上游标准 / Mature Precedent；
+- Adopt / Profile / Extend / Invent；
 - BCP 14 Requirements；
 - 验收 / conformance 方法。
 
-#15 提升为 P0，因为大量设计方法 / Guideline / Design System 不能继续被模糊塞进 `standard` 或 `reference_project`。
-
-### P0-F3：Open Collaboration / Human–AI Collaboration Profile
-
-相关：#19。
-
-需要明确：
-- Contributor / Executor / Reviewer / Overseer / Maintainer / Automation roles；
-- Available → Claimed → In Progress → Blocked / Handoff → Review → Done；
-- “租赁式认领”的语义；
-- GitHub Assignee / activity / stale 能表达多少；
-- 什么时候才需要 Lease / Heartbeat；
-- 执行者与 Reviewer / Approver 的分离；
-- Human ↔ Agent / Agent ↔ Agent handoff；
-- AGENTS.md 的职责和边界；
-- GitHub Issue / PR / Review / CODEOWNERS / Rulesets 的映射。
-
-Profile 出来后，才修改 CONTRIBUTING、创建 AGENTS.md、Issue / PR templates，并用真实任务试运行。
+同时 #15 需要用真实 Mature Precedent / Method / Design System 做 Fit Test，形成 Non-normative Knowledge Object Model，再修改 Schema。
 
 ### P0-F4：Curation / Evidence / Machine Correctness
 
-相关：#8、#7、#9、#10。
+相关：#7、#8、#9、#10。
 
-并行补：
+继续需要：
 - Curation / Contribution minimum workflow；
 - Evidence / Provenance minimum model；
 - JSON Schema validation；
@@ -148,101 +139,69 @@ Profile 出来后，才修改 CONTRIBUTING、创建 AGENTS.md、Issue / PR templ
 - 修复 #7 query scope；
 - regression tests。
 
-这条线不依赖继续加网站 UI。
+## Candidate next Work Package — 由 Maintainer 决定
 
-## P1 — Foundation Gate 后的参考实现
+Work Package A 完成后不自动继续。
+
+### Candidate B — Collaboration Implementation Pilot
+
+把 `open-collaboration-profile-v0.1` 映射到 GitHub：
+- CONTRIBUTING；
+- Issue / PR Templates；
+- Issue / Project Fields；
+- CODEOWNERS / Rulesets；
+- AGENTS.md；
+- 2–3 个真实 Ready Task；
+- Lease / Handoff / Review 试运行。
+
+### Candidate C — Knowledge Object Model
+
+推进 #15：真实对象 Fit Test → Model Decision → Schema。
+
+### Candidate D — Human Interface Standards Package
+
+推进 #14：形成五个 Human Interface Draft Profiles。
+
+### Candidate F4 — Machine / Curation / Trust
+
+推进 #7/#8/#9/#10。
+
+## Reference Implementation 继续保持 P1
 
 ### #17 Object Page Shell
 
-已经完成的 `<main>`、semantic Breadcrumb、Identity Before Exploration 等兼容性修正保留，不回滚。
-
-但 #17 暂缓继续扩展，等待 Human Interface Standards Package 达到 Foundation Gate。
+已经完成的 `<main>`、semantic Breadcrumb、Identity Before Exploration 等修正保留，不回滚；等待 Gate B 再继续。
 
 ### #13 Browser E2E / Accessibility
 
-仍然重要，但应在 Interaction / Accessibility / Conformance Profile 明确测试合同后再恢复为实现 P0。
+等待 Interaction / Accessibility / Conformance Profile 明确测试合同后恢复。
 
-### Website / Global Information Architecture
+### Website / Global Information Architecture / Visual System
 
-Foundation Gate 之后再根据正式 Information Architecture Profile 推导：
-- 首页；
-- Capability / Domain / Organization / Scenario 入口；
-- Search；
-- Resource Pages；
-- Maps / Explore；
-- Comparison / Explanation Views。
-
-不是先画页面再反推规则。
-
-### Visual System / Design Tokens
-
-在信息架构、信息呈现和交互规则稳定后再实现：
-- typography；
-- spacing；
-- semantic color；
-- status / relation / evidence encoding；
-- light / dark；
-- DTCG-compatible Design Tokens。
-
-## P2 — 分析与规模化
-
-在 Foundation 与 Query correctness 稳定后逐步进入：
-- Search / Dynamic Maps / path exploration；
-- Comparator / Pathfinder；
-- Coverage / Gap / Openness analysis；
-- Atlas Linter / Atlas Health；
-- Agent discoverability / external AI contribution (#18)；
-- 多后端 / Federation / RDF / Neo4j 等。
+Foundation Gate 后再由规范推导，不先画页面再反推规则。
 
 ## Foundation Gate
 
-Reference Implementation 恢复为主 P0 前，至少满足：
-
 ### Gate A — Repository
-- Repository Structure Profile v0.1；
-- Artifact taxonomy / lifecycle；
-- 目录迁移 Decision；
-- Community Health / Collaboration 文件目标结构明确。
+
+**PASS at Draft Profile level.**
 
 ### Gate B — Human Interface
-- IA / Information Presentation / Interaction / Visual / Accessibility-Conformance 五个 Draft Profile；
-- 关键 Requirements 有依据和验收方式；
-- 非标准 HCI Prior Art 可正确建模。
+
+**NOT YET PASS.**
 
 ### Gate C — Open Collaboration
-- Human–AI Collaboration Profile v0.1；
-- roles / lifecycle / claim / review / handoff / authorization 明确；
-- GitHub-native mapping 明确；
-- AGENTS.md 职责边界明确。
 
-Gate 不要求它们已经成为成熟 Standard，只要求**规范足够指导实现，而不是由实现临时决定规范。**
+**PASS at Draft Profile level.**
 
-## 当前执行顺序
-
-```text
-#21 Repository Structure & Artifact Taxonomy
-        ↓
-#14 + #15 Human Interface Standards Package
-        ↓
-#19 Open Collaboration / Human–AI Profile
-        ↘
-         #8/#7/#9/#10 Machine / Curation / Trust 并行
-        ↓
-Foundation Gate Review
-        ↓
-#17 / #13 / Website Reference Implementation resumes
-```
-
-允许 F1 / F2 / F3 交叉研究，但当前**不继续新增网站功能，不大规模搬目录，不先实现 Agent-only 协作机制。**
+因此整个 Foundation Gate 仍未通过；当前不恢复网站作为主 P0。
 
 ## Prior Art 是持续前置流程
 
-仓库结构、AI 协作、网页设计与数据模型都属于需要互操作的系统设计问题。
+仓库结构、AI 协作、网页设计与数据模型都属于互操作系统设计问题。
 
-因此所有这些方向继续使用同一规则：
+所有方向继续遵守：
 
 > **Reuse Before Invent**
 >
 > **Adopt → Profile → Extend → Invent**
-
-不是只有 Atlas 收录外部标准时才遵守这条原则；InteropAtlas 自己的建设方式也必须遵守。
