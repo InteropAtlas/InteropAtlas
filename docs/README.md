@@ -31,10 +31,16 @@
 
 ### Human Interface
 
-- [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) — 当前 Human Interface 综合规范草案。
+- [`human-interface-profiles-v0.1.zh-CN.md`](human-interface-profiles-v0.1.zh-CN.md) — Gate B Human Interface Standards Package 模块入口。
+  - [`human-interface-information-architecture-profile-v0.1.zh-CN.md`](human-interface-information-architecture-profile-v0.1.zh-CN.md) — Information Architecture Draft Profile。
+  - [`human-interface-information-presentation-profile-v0.1.zh-CN.md`](human-interface-information-presentation-profile-v0.1.zh-CN.md) — Information Presentation Draft Profile。
+  - [`human-interface-interaction-profile-v0.1.zh-CN.md`](human-interface-interaction-profile-v0.1.zh-CN.md) — Interaction Draft Profile。
+  - [`human-interface-visual-presentation-profile-v0.1.zh-CN.md`](human-interface-visual-presentation-profile-v0.1.zh-CN.md) — Visual Presentation Draft Profile。
+  - [`human-interface-accessibility-conformance-profile-v0.1.zh-CN.md`](human-interface-accessibility-conformance-profile-v0.1.zh-CN.md) — Accessibility / Conformance Draft Profile。
+- [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) — 当前综合规范草案；Gate B Audit 前继续作为 umbrella source 与既有 Requirement ID 来源。
 - [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md) — 当前人类可读交互基线。
 
-相关研究依据已经迁入 [`03_Evolution/01_Research/`](../03_Evolution/01_Research/)，包括 Human Interface 外部标准基线、Reference Map、符合性审计与参考依据入库审计。
+相关研究依据已经迁入 [`03_Evolution/01_Research/`](../03_Evolution/01_Research/)，包括 Human Interface 外部标准基线、Reference Map、符合性审计、五 Profile consolidation audit 与参考依据入库审计。
 
 ### Open Collaboration / Human–AI 协作
 
