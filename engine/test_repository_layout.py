@@ -35,7 +35,7 @@ class RepositoryLayoutTests(unittest.TestCase):
             self.assertEqual(output_path(objects[0]), "standards/sample.md")
             self.assertNotIn("_object_family", objects[0])
 
-    def test_mixed_storage_classifies_from_document_type_not_directory(self) -> None:
+    def test_mixed_storage_classifies_from_content_not_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             mixed = root / "mixed" / "nested"
@@ -55,9 +55,10 @@ class RepositoryLayoutTests(unittest.TestCase):
                 "name_en: Sample Capability\n",
                 encoding="utf-8",
             )
+            # Intentionally omit `type: relation` to cover the current legacy
+            # structural relation form. It must still work outside relations/.
             (mixed / "edge.yaml").write_text(
                 "id: sample_relation\n"
-                "type: relation\n"
                 "source: sample_standard\n"
                 "relation: provides\n"
                 "target: sample_capability\n",
