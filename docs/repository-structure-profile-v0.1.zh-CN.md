@@ -177,7 +177,9 @@ Loader / CI / Tooling **SHOULD** 通过明确的 repository storage contract 获
 
 一个对象的 `type / kind / roles` **MUST NOT** 由其所在目录推断。
 
-Relation **MUST** 因对象数据声明 `type: relation` 而成为 Relation，而不是因为它位于 `relations/`。
+Canonical Relation 的目标模型 **SHOULD** 显式声明 `type: relation`。当前 Loader **MAY** 为兼容少量历史数据，根据文档自身的 `source + relation/predicate/kind + target` 结构识别旧 Relation，但 **MUST NOT** 根据它是否位于 `relations/` 来判断。
+
+这项兼容只是迁移期技术债，不改变“语义来自对象内容而不是目录”的原则。
 
 ### IA-RS-004 — 分类与索引使用数据和引用
 
