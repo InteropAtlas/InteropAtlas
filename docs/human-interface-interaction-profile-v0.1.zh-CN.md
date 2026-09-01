@@ -130,27 +130,70 @@ Filter、Selection、Expanded、Map Center、Current Page 等可感知状态 MUS
 
 ## 5. Graph / Map interaction requirements
 
-本 Profile 同时引用综合规范中的 Graph requirements：
+综合规范中的 `IA-HI-GR-001..007` 全部在 Package 中保留。它们横跨 Information Architecture、Information Presentation 与 Interaction；本 Profile 作为 Graph / Map 交互合同的主归属点，不允许模块化过程中丢失 Requirement。
+
+### `IA-HI-GR-001` — Task-defined Graph
+
+建立 Graph / Map View 前 MUST 明确用户任务，例如查看直接邻居、找替代方案、理解依赖、找路径或比较标准族；不得因为底层是 Graph 就默认绘制整个网络。
+
+- 用户任务：Explore / Relate / Compare
+- 采用方式：**Profile**
+- 上游：ISO 9241-210 task-first；information visualization mature practice
+- Conformance：`Review + Human`
+
+### `IA-HI-GR-002` — Focus + Context
+
+局部探索 SHOULD 优先呈现当前焦点与足够上下文，而不是无差别展示整个网络。
+
+- 用户任务：Explore / Understand
+- 采用方式：**Adopt + Profile**
+- 上游：Furnas Focus + Context
+- Conformance：`Visual + Human + Browser`
+
+### `IA-HI-GR-003` — Overview → Filter → Details
+
+较复杂 Graph exploration SHOULD 支持从概览到筛选，再到按需详情的工作流。
+
+- 用户任务：Explore / Filter / Inspect
+- 采用方式：**Adopt + Profile**
+- 上游：Shneiderman Information Visualization Mantra
+- Conformance：`Browser + Human`
 
 ### `IA-HI-GR-004` — Relation Provenance Is Visible
 
 Relation 与普通 field reference 如果语义不同，MUST NOT 被 View 悄悄合并。
 
+- 用户任务：Relate / Verify
+- 采用方式：**IA-specific Profile**
+- 上游：IA Knowledge Model — Facts / Statements / Views separation
 - Conformance：`Data + Static`
 
 ### `IA-HI-GR-005` — Inspect and Explore Are Separate
 
 查看对象详情与改变 Graph 焦点 SHOULD 是两个可辨认动作；标题保持 Link，Recenter 使用 action。
 
+- 用户任务：Inspect / Explore
+- 采用方式：**Profile**
+- 上游：HTML Link/Button semantics；ISO 9241-110 user expectations
 - Conformance：`Static + Browser`
+
+### `IA-HI-GR-006` — Mature Rendering Infrastructure First
+
+当需求进入 pan / zoom、drag、上千节点、复杂布局、WebGL、selection 等通用 Graph 能力时，MUST 在自研前评估成熟 rendering infrastructure，例如 Cytoscape.js、Sigma.js、Graphviz、D3 等。
+
+- 用户任务：Explore（复杂图）
+- 采用方式：**Profile**
+- 上游：Reuse Before Invent；成熟 Graph ecosystem
+- Conformance：`Review`
 
 ### `IA-HI-GR-007` — Map State Does Not Change Facts
 
 Filter、layout、zoom、center MUST NOT 回写 Canonical Facts。
 
+- 用户任务：Explore / Filter
+- 采用方式：**IA-specific Profile**
+- 上游：IA Knowledge Model — Canonical Facts ≠ View State
 - Conformance：`Data + Review`
-
-Graph task selection（`IA-HI-GR-001`）与 Information Architecture / Presentation 联合审计。
 
 ---
 
@@ -203,7 +246,7 @@ URL-worthy User State
 ### `HI-INT-GAP-002` — Browser E2E contract
 
 #13 应至少覆盖：
--普通 Link；
+- 普通 Link；
 - Filter；
 - Recenter；
 - Back / Forward；
