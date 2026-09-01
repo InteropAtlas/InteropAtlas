@@ -2,131 +2,209 @@
 
 > 状态：Working Plan / 暂定阶段计划
 >
-> 目的：纠正“基础规范尚未形成，却过早推进具体网站实现”的路线偏移。当前阶段先定义项目怎样组织知识、怎样设计人类界面、怎样让人类与 AI / Agent 协作、怎样组织仓库与贡献流程；Reference Implementation（网站、自动化交互等）在这些基础达到最小可用后再继续。
+> 目的：纠正“基础规范尚未形成，却过早推进具体网站实现”的路线偏移。当前阶段先让知识模型、Human Interface、开放协作、可信收录和机器正确性达到最小可依赖状态，再把 Reference Implementation 恢复为主要实现线。
 
 ## 0. 当前 Gate 状态
 
-截至 2026-09-01：
+截至 2026-09-01 当前仓库状态：
 
-- **Gate A — Repository Structure：PASS at Draft Profile level**；
+- **Gate A — Repository Structure：PASS + physical implementation completed**；
 - **Gate B — Human Interface：NOT YET PASS**；
-- **Gate C — Open Collaboration：PASS at Draft Profile level**。
+- **Gate C — Open Collaboration：PASS + V0.1 Pilot completed**。
 
-Work Package A 完成审计见：`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`。
+因此整个 Foundation Gate 仍未通过，当前唯一未通过的正式 Gate 是 Human Interface；同时 F4 Machine / Curation / Trust 仍需继续作为基础线补齐。
 
-Gate A 的上位产物：`repository-structure-profile-v0.1.zh-CN.md`。
+相关当前文档：
 
-Gate C 的上位产物：`open-collaboration-profile-v0.1.zh-CN.md`。
-
-整个 Foundation Gate 仍未通过，因为 Human Interface Standards Package 与 Non-normative Knowledge Object Model 仍未完成。
+- Repository Structure：[`../../docs/repository-structure-profile-v0.1.zh-CN.md`](../../docs/repository-structure-profile-v0.1.zh-CN.md)
+- Human Interface：[`../../docs/human-interface-specification-v0.1.zh-CN.md`](../../docs/human-interface-specification-v0.1.zh-CN.md)
+- Open Collaboration：[`../../docs/open-collaboration-profile-v0.1.zh-CN.md`](../../docs/open-collaboration-profile-v0.1.zh-CN.md)
+- Work Package A audit：[`../01_Research/foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](../01_Research/foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md)
+- Work Package B pilot audit：[`../01_Research/work-package-b-pilot-audit-2026-09-01.zh-CN.md`](../01_Research/work-package-b-pilot-audit-2026-09-01.zh-CN.md)
 
 ## 1. 当前判断
 
-InteropAtlas 已经有可工作的数据、Graph、Renderer 和 GitHub Pages，也已经形成若干 Human Interface 与 Open Collaboration 研究材料。
+Foundation First 原则继续成立：
 
-当前 Foundation First 原则继续成立：
+> **先让规则、模型和运行边界足够可靠，再继续扩大具体实现。**
 
-> **先建立规范与项目运行结构，再继续实现。**
+但“基础建设”不再等于继续整理文件夹。
 
-经过 Work Package A，Repository Structure 与 Open Collaboration 已经从 Research / Working Notes 进入 Draft Profile 阶段；Human Interface 与 Machine / Curation / Trust 仍需要继续补齐。
+Repository Structure 与 Open Collaboration 已经从“设计阶段”进入实际运行阶段；现在的主要瓶颈变成：
 
-## 2. 当前四个基础工作包
+```text
+Non-normative Knowledge Object Model
+        ↓
+Human Interface Standards Package
+        ↓
+Conformance Gate
+        ↓
+Reference Implementation
+```
 
-### F1 — Repository Structure & Artifact Taxonomy — Draft Profile COMPLETE
+同时 Curation / Evidence / Schema correctness / Query correctness 作为 F4 并行推进。
 
-已形成：
-- Prior Art / Options；
-- Current → Target Mapping；
-- Artifact Taxonomy；
-- Repository Structure Profile v0.1；
-- Migration Plan；
-- Community Health target set。
+## 2. 四个基础工作包
 
-当前决策：
+### F1 — Repository Structure & Artifact Boundaries — COMPLETE
 
-> **Layered Monorepo now, extraction-ready later.**
+已经形成并实施：
 
-逻辑目标包括 Canonical Data、Schemas、Engine、Tests、Tools、Specifications、Research、Docs、Governance、Experiments 等明确 Zone。
+```text
+01_State/
+02_Runtime/
+03_Evolution/
+```
 
-当前不大规模移动目录；物理迁移属于后续 implementation。
+State：
+
+```text
+01_State/
+├── 01_Objects/
+└── 02_Relations/
+```
+
+Runtime：
+
+```text
+02_Runtime/
+├── 01_Engine/
+├── 02_Tools/
+└── 03_Outputs/
+```
+
+Evolution：
+
+```text
+03_Evolution/
+├── 01_Research/
+├── 02_Experiments/
+└── 03_Change/
+```
+
+当前已经完成：
+
+- Storage ≠ Semantics ≠ View 原则落地；
+- Canonical State 物理迁移；
+- Schema 与 State 共置；
+- Runtime 迁移；
+- stable public route 与 physical path 解耦；
+- Research / Experiments / Change 与 `docs/` 分流；
+- CI / 文档路径检查更新。
+
+因此 F1 不再阻塞 #15，也不等待知识对象模型来决定语义文件夹。
 
 ### F2 — Human Interface Standards Package — IN PROGRESS / NOT PASS
 
-先回答：**IA 面向人的信息到底应该怎样组织、传递和交互？**
+回答：**IA 面向人的信息应该怎样组织、呈现、交互和验收？**
 
-当前 `IA-HI v0.1` 保留为综合草案，但下一阶段需要把它拆成可审计的模块或 Profile：
+现有 `IA-HI v0.1` 已经提供综合规范基础，但 Gate B 仍要求至少形成五个可独立审计的 Draft Profile：
 
-1. Information Architecture Profile；
-2. Information Presentation Profile；
-3. Interaction Profile；
-4. Visual Presentation Profile；
-5. Accessibility / Conformance Profile。
+1. Information Architecture；
+2. Information Presentation；
+3. Interaction；
+4. Visual Presentation；
+5. Accessibility / Conformance。
 
-每个模块必须记录：
-- 用户任务；
-- 上游标准与 Existing Standards & Prior Art；
-- Adopt / Profile / Extend / Invent；
-- BCP 14 Requirements；
-- 可验证验收方法。
+每个模块必须能回答：
 
-同时 #15 需要建立 Non-normative Knowledge Object Model，使 Method / Guideline / Design System / Mature Precedent 可以被正确收录。
+- 用户任务 / Context of Use 是什么；
+- 采用了哪些正式标准和 Mature Prior Art；
+- 属于 Adopt / Profile / Extend / Invent 哪一层；
+- BCP 14 Requirements 是什么；
+- 如何验证符合性；
+- 与其他模块冲突时如何处理。
 
-在这套 Package 达到最小 Draft coverage 之前，不继续增加网站功能。
+#### 当前前置瓶颈：#15
 
-### F3 — Open Collaboration / Human–AI Collaboration — Draft Profile COMPLETE
+Human Interface 已经需要引用大量 Method、Heuristic、Framework、Design System 和 Mature Precedent，但当前数据模型无法自然表达这些对象。
 
-已形成 `open-collaboration-profile-v0.1.zh-CN.md`，定义：
+因此当前先推进：
 
-- Participant Roles；
-- Agent-ready / Human-ready Work Item Contract；
-- Issue / Sub-issue / Dependency Task Graph；
-- Draft → Ready → Claimed → In Progress → Review → Done 生命周期；
-- Lease-style Claim；
-- Handoff / Continuity；
-- Review / Oversight / Authorization；
-- Agent contribution transparency；
-- AGENTS.md boundary；
-- GitHub-native mapping；
-- candidate gaps 与 implementation sequence。
+```text
+#23 / PR #30 — Batch 1 Fit Test
+        ↓
+Batch 2 — 累计达到 8–12 个样本
+        ↓
+候选模型比较
+        ↓
+#15 Model Decision
+        ↓
+必要时修改 Schema
+        ↓
+完成 #14 五个 Draft Profiles
+```
 
-下一阶段若选择 Collaboration Implementation Pilot，再把 Profile 投影到 GitHub Issues / Projects / PR / Review / AGENTS.md。
+这不是因为 #15 决定文件夹，而是因为 #15 决定这些知识对象在 Atlas 中**是什么**。
 
-### F4 — Curation / Evidence / Machine Correctness — NOT PASS
+### F3 — Open Collaboration / Human–AI Collaboration — COMPLETE AT V0.1 PILOT
 
-Canonical Data 的可信建设还需要并行补：
+Draft Profile 已经完成，Work Package B #22 也已经完成真实 GitHub-native Pilot。
 
-- Curation / Contribution minimum workflow；
-- Evidence / Provenance minimum model；
-- Validator / Schema correctness；
-- Query correctness + regression tests；
-- Reference / relation integrity。
+已经落地：
 
-这条线继续并行，但不把新网站功能作为验证它们的唯一方式。
+- `CONTRIBUTING.md`；
+- `AGENTS.md`；
+- Work Item Issue Form；
+- PR Template；
+- Ready / Claim / Lease / Handoff / Review Class；
+- 真实任务 #23 / #24 / #25；
+- #24 的完整 Pilot；
+- Pilot friction / gaps 记录。
+
+当前后续：
+
+- PR #26 v0.2 Draft 保持 high-impact Review Gate；
+- #27 Identity friction 保持 Draft；
+- Issue Fields / CODEOWNERS / Ruleset / automation 按真实需要再增强；
+- 不自动开发 Lease Server / heartbeat。
+
+F3 的这些后续演化不阻塞 F2 / F4。
+
+### F4 — Curation / Evidence / Machine Correctness — IN PROGRESS / NOT PASS
+
+当前 Engine 已经具备：
+
+- deterministic Loader；
+- Graph / Backlink Index；
+- stable object route；
+- canonical storage contract；
+- `reference_issues = 0` 的当前基线。
+
+仍需要补齐：
+
+1. JSON Schema 全量 enforcement；
+2. #9 Curation / Contribution minimum workflow；
+3. #10 Evidence / Provenance / Trust minimum model；
+4. #7 query scope correctness；
+5. regression tests；
+6. legacy Relation `type: relation` cleanup。
+
+F4 与 #15 / #14 并行，不通过增加新网站功能来代替验证。
 
 ## 3. Reference Implementation 的定位
 
-当前 GitHub Pages、Renderer、Local Map、Engine Bootstrap 都保留，但角色是：
+当前 GitHub Pages、Renderer、Local Map、Engine Bootstrap 继续保留为：
 
 > **Reference Implementation / Test Bed（参考实现 / 试验场）**
 
-它们用于验证 Specification 是否可实现、是否存在缺口，不负责反向定义 Specification。
+规则：
 
-因此：
-- 已完成且符合上游规范的语义修正无需回滚；
-- #17 Object Page Shell 暂停继续扩展；
-- #13 Browser E2E 保留，但在 Interaction / Conformance Profile 更清楚后继续；
-- 新 UI、首页重构、Local Map 功能、Visual Tokens 实现暂缓。
+- 已完成且符合上游规范的实现不回滚；
+- #12 / #13 / #16 / #17 暂不作为主 P0；
+- 新首页、Search、复杂 Local Map、全图 Explore、视觉品牌化等继续等待 Gate B；
+- Human Interface Profile 可以使用现有网站做 conformance evidence，但不能让现有代码反向决定规范。
 
 ## 4. Foundation Gate
 
-只有满足以下最小条件后，Human-readable Website 才恢复为 P0 实现工作。
-
 ### Gate A — Repository Structure — PASS
 
-- [x] Repository Structure Profile v0.1；
-- [x] Artifact taxonomy / lifecycle；
-- [x] 目录迁移 Decision；
-- [x] CONTRIBUTING / Community Health target structure。
+- [x] Repository Structure Profile；
+- [x] 三大生命周期区域；
+- [x] Canonical State / Runtime 物理迁移；
+- [x] storage / semantics / public route 解耦；
+- [x] docs / Evolution boundary；
+- [x] migration regression baseline。
 
 ### Gate B — Human Interface — NOT PASS
 
@@ -135,32 +213,45 @@ Canonical Data 的可信建设还需要并行补：
 - [ ] Interaction Draft；
 - [ ] Visual Presentation Draft；
 - [ ] Accessibility / Conformance Draft；
-- [ ] 各模块有上游依据与最小 Requirement IDs；
-- [ ] Non-normative HCI knowledge object model 可用。
+- [ ] 关键 Requirements 有上游依据；
+- [ ] Non-normative HCI Knowledge Object Model 可用；
+- [ ] 可以执行一次 Gate B conformance audit。
 
 ### Gate C — Open Collaboration — PASS
 
 - [x] Open Collaboration Profile v0.1；
 - [x] participant roles / task lifecycle / review / handoff / claim semantics；
 - [x] GitHub-native mapping；
-- [x] AGENTS.md 的职责与边界。
-
-Gate 不要求这些文档已经成为成熟 Standard，但要求它们已经足够指导实现，而不是由实现反向临时决定规则。
+- [x] AGENTS.md boundary；
+- [x] Collaboration Implementation Pilot；
+- [x] friction / gap audit。
 
 ## 5. 当前执行顺序
 
-Work Package A 完成后不自动进入 Collaboration Implementation。
-
-当前可由 Maintainer 选择：
+当前不再从多个 Candidate Work Package 中随机选择，而采用下面的主次关系：
 
 ```text
-Candidate B — Collaboration Implementation Pilot
-Candidate C — #15 Knowledge Object Model
-Candidate D — #14 Human Interface Standards Package
-Candidate F4 — #7/#8/#9/#10 Machine / Curation / Trust
+P0 主线
+#15 / #23 Knowledge Object Model
+        ↓
+#14 Human Interface Standards Package
+        ↓
+Gate B Audit
+        ↓
+Reference Implementation 恢复为 P0
+
+Foundation 并行线
+#8 剩余 Schema / Validator correctness
+#9 Curation
+#10 Evidence / Provenance
+#7 Query correctness
+
+后续演化线
+PR #26 Open Collaboration v0.2 review
+#27 Participant / Agent identity research
 ```
 
-物理仓库迁移仍不应先于对应 implementation work package。
+当前下一小步：**先把 #23 / PR #30 整理到符合新的 Repository Structure / Evolution 边界，再继续 Batch 2。**
 
 ## 6. 采用原则
 
@@ -170,4 +261,4 @@ Candidate F4 — #7/#8/#9/#10 Machine / Curation / Trust
 >
 > **Adopt → Profile → Extend → Invent**
 
-仓库结构、AI 协作、网页设计与数据模型都属于互操作问题，因此同样必须先研究成熟方案，而不是把它们当成“项目内部随便约定的小事”。
+仓库结构、AI 协作、网页设计、知识模型、Evidence 和自动化都属于互操作系统设计问题，因此都应先确认已有标准、成熟先例和方法，再决定 IA-specific 扩展。
