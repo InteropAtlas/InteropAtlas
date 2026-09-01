@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/organization-profile.v0.schema.json",
+  "title": "InteropAtlas Organization Strong Profile v0",
+  "allOf": [
+    {"$ref": "identity-object.v0.schema.json"},
+    {
+      "type": "object",
+      "properties": {
+        "type": {"const": "agent"},
+        "kind": {"const": "organization"},
+        "website": {"type": "string", "format": "uri"},
+        "jurisdiction": {"type": "string"}
+      }
+    }
+  ]
+}
