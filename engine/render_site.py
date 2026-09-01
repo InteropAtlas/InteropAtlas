@@ -348,10 +348,10 @@ def build_local_map(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str
 def inject_local_map(content: str, local_map: str) -> str:
     if not local_map:
         return content
-    marker = "<h2>基本信息</h2>"
+    marker = "<h2>一跳邻居</h2>"
     if marker in content:
         return content.replace(marker, f"{local_map}{marker}", 1)
-    return local_map + content
+    return content + local_map
 
 
 def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
