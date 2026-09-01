@@ -19,6 +19,16 @@ import yaml
 from repository_layout import repository_layout
 
 
+def repository_root() -> Path:
+    """Find the repository root without depending on Engine folder depth."""
+
+    current = Path(__file__).resolve()
+    for parent in current.parents:
+        if (parent / ".git").exists() or (parent / "01_State").exists():
+            return parent
+    raise RuntimeError("could not locate InteropAtlas repository root")
+
+
 def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
     with path.open("r", encoding="utf-8") as handle:
         for document in yaml.safe_load_all(handle):
@@ -35,14 +45,6 @@ def relation_predicate(relation: dict[str, Any]) -> str | None:
 
 
 def is_relation_document(document: dict[str, Any]) -> bool:
-    """Identify Relation semantics from document data, never from its folder.
-
-    Canonical data should use ``type: relation``. A small amount of legacy data
-    predates that explicit field, so the Loader keeps compatibility with the
-    historical structural form ``source + relation/predicate/kind + target``.
-    This compatibility rule is content-based and works in any storage location.
-    """
-
     if document.get("type") == "relation":
         return True
     if document.get("type") is not None:
@@ -55,14 +57,6 @@ def is_relation_document(document: dict[str, Any]) -> bool:
 
 
 def logical_source_path(document: dict[str, Any], is_relation: bool) -> str | None:
-    """Return a stable logical source path derived from identity, not storage.
-
-    Renderers historically derive generated paths from ``_source``. During the
-    repository migration we preserve that interface while changing its meaning:
-    ``_source`` is now a stable logical/public path, whereas
-    ``_physical_source`` remains the repository-relative file location.
-    """
-
     document_id = document.get("id")
     if not isinstance(document_id, str) or not document_id:
         return None
@@ -75,13 +69,6 @@ def load_atlas(
     root: Path,
     storage_paths: Iterable[Path | str] | None = None,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Load canonical Atlas objects from configured physical storage locations.
-
-    Storage locations are repository plumbing only. Object semantics come from
-    document content, not the directory name. Public/generated routes are also
-    independent of physical storage and derive from stable document IDs.
-    """
-
     layout = repository_layout(root, storage_paths)
     objects: list[dict[str, Any]] = []
     relations: list[dict[str, Any]] = []
@@ -193,7 +180,7 @@ def run(
 
 def main() -> None:
     parser = argparse.ArgumentParser()
-    parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
+    parser.add_argument("--root", type=Path, default=repository_root())
     parser.add_argument(
         "--storage-path",
         type=Path,
@@ -201,7 +188,7 @@ def main() -> None:
         dest="storage_paths",
         help=(
             "repository-relative canonical storage location; repeat for multiple "
-            "locations. If omitted, use the current legacy locations."
+            "locations. If omitted, use the current configured State locations."
         ),
     )
     parser.add_argument("--capability", default="automated_build_deployment")
