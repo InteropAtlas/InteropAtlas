@@ -15,12 +15,17 @@ from typing import Any, Iterable
 
 import yaml
 
+# Canonical object directories currently modeled by the Atlas. Keep this list
+# aligned with repository object families so GraphIndex/Renderer do not silently
+# omit valid objects such as Reference Projects or Open Gaps.
 OBJECT_DIRS = (
     "standards",
     "capabilities",
     "scenarios",
     "organizations",
     "implementations",
+    "reference-projects",
+    "gaps",
     "relations",
     "maps",
 )
