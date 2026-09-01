@@ -14,6 +14,8 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 ## Foundation work
 
 - **#21 Repository Structure & Artifact Taxonomy** — 仓库结构、文档 / 规范产物类型、生命周期、Community Health 与迁移决策。
+  - [`repository-structure-prior-art-and-options-v0.1.zh-CN.md`](repository-structure-prior-art-and-options-v0.1.zh-CN.md) — GitHub / REUSE / W3C / MDN / CNCF / SPDX / Diátaxis 等 Prior Art 与三种结构候选比较。
+  - [`repository-current-to-target-mapping-v0.1.zh-CN.md`](repository-current-to-target-mapping-v0.1.zh-CN.md) — 当前真实仓库逐项映射到 Artifact Taxonomy 与候选 Target Zone，不执行物理迁移。
 - **#14 Human Interface Standards Package** — Information Architecture / Presentation / Interaction / Visual / Accessibility-Conformance。
 - **#15 Non-standard Reference Object Model** — Method / Guideline / Heuristic / Framework / Design System 等非规范性参考对象。
 - **#19 Open Collaboration / Human–AI Collaboration Profile** — roles、task lifecycle、租赁式认领语义、Review / Handoff / Authorization、GitHub / AGENTS.md 映射。
