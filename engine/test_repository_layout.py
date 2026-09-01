@@ -13,12 +13,12 @@ from repository_layout import repository_layout, validate_storage_path
 
 
 class RepositoryLayoutTests(unittest.TestCase):
-    def test_current_storage_keeps_current_generated_path(self) -> None:
+    def test_public_route_is_stable_across_physical_storage(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            path = root / "standards" / "sample.yaml"
-            path.parent.mkdir(parents=True, exist_ok=True)
-            path.write_text(
+            legacy_path = root / "standards" / "sample.yaml"
+            legacy_path.parent.mkdir(parents=True, exist_ok=True)
+            legacy_path.write_text(
                 "id: sample_standard\n"
                 "type: standard\n"
                 "name_zh: 示例标准\n"
@@ -30,10 +30,22 @@ class RepositoryLayoutTests(unittest.TestCase):
 
             self.assertEqual(relations, [])
             self.assertEqual(len(objects), 1)
-            self.assertEqual(objects[0]["_source"], "standards/sample.yaml")
+            self.assertEqual(objects[0]["_source"], "objects/sample_standard.yaml")
             self.assertEqual(objects[0]["_physical_source"], "standards/sample.yaml")
-            self.assertEqual(output_path(objects[0]), "standards/sample.md")
+            self.assertEqual(output_path(objects[0]), "objects/sample_standard.md")
             self.assertNotIn("_object_family", objects[0])
+
+            moved_path = root / "new-storage" / "nested" / "renamed.yaml"
+            moved_path.parent.mkdir(parents=True, exist_ok=True)
+            moved_path.write_text(legacy_path.read_text(encoding="utf-8"), encoding="utf-8")
+
+            moved_objects, moved_relations = load_atlas(root, [Path("new-storage")])
+
+            self.assertEqual(moved_relations, [])
+            self.assertEqual(len(moved_objects), 1)
+            self.assertEqual(moved_objects[0]["_source"], "objects/sample_standard.yaml")
+            self.assertEqual(moved_objects[0]["_physical_source"], "new-storage/nested/renamed.yaml")
+            self.assertEqual(output_path(moved_objects[0]), "objects/sample_standard.md")
 
     def test_mixed_storage_classifies_from_content_not_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
@@ -69,6 +81,7 @@ class RepositoryLayoutTests(unittest.TestCase):
 
             self.assertEqual({obj["type"] for obj in objects}, {"standard", "capability"})
             self.assertEqual([relation["id"] for relation in relations], ["sample_relation"])
+            self.assertEqual(relations[0]["_source"], "relations/sample_relation.yaml")
             self.assertEqual(relations[0]["_physical_source"], "mixed/nested/edge.yaml")
 
     def test_storage_paths_are_repository_relative(self) -> None:
