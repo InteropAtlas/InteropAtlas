@@ -71,7 +71,7 @@ def normalize_record(record: Mapping[str, Any]) -> SemanticDescriptor:
 
     if raw_type == "implementation":
         if raw_kind == "reference_implementation":
-            return _audit_identity("system", raw_kind, raw_type)
+            return _audit_identity(None, raw_kind, raw_type)
         return SemanticDescriptor(
             record_class="identity",
             family="system",
@@ -83,12 +83,12 @@ def normalize_record(record: Mapping[str, Any]) -> SemanticDescriptor:
 
     if raw_type == "organization":
         if record.get("organization_kind") == "open_source_project":
-            return _audit_identity("agent", "organization", raw_type, ("organization",))
+            return _audit_identity(None, "open_source_project", raw_type)
         return _legacy_identity("agent", "organization", "organization")
 
     if raw_type == "standard":
         if raw_kind in _STANDARD_AUDIT_KINDS:
-            return _audit_identity("artifact", raw_kind, raw_type)
+            return _audit_identity(None, raw_kind, raw_type)
         if raw_kind in _CLEAR_ARTIFACT_STANDARD_KINDS or raw_kind is None:
             return SemanticDescriptor(
                 record_class="identity",
@@ -99,7 +99,7 @@ def normalize_record(record: Mapping[str, Any]) -> SemanticDescriptor:
                 migration_status="legacy",
             )
         # Unknown legacy Standard kinds are not guessed into a stable identity.
-        return _audit_identity("artifact", raw_kind, raw_type)
+        return _audit_identity(None, raw_kind, raw_type)
 
     if raw_type == "reference_project":
         return SemanticDescriptor(
@@ -165,6 +165,8 @@ def _profiles_for(family: str, kind: str | None) -> tuple[str, ...]:
         return ("capability",)
     if family == "concept" and kind == "scenario":
         return ("scenario",)
+    if family == "system" and kind == "software":
+        return ("implementation",)
     if family == "agent" and kind == "organization":
         return ("organization",)
     if family == "artifact" and kind in _CLEAR_ARTIFACT_STANDARD_KINDS:
@@ -188,7 +190,7 @@ def _legacy_identity(family: str, kind: str, profile: str) -> SemanticDescriptor
 
 
 def _audit_identity(
-    family: str,
+    family: str | None,
     kind: str | None,
     legacy_type: str | None,
     profiles: tuple[str, ...] = (),
