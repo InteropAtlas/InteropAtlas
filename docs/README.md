@@ -9,6 +9,7 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 - [`roadmap.zh-CN.md`](roadmap.zh-CN.md) — 当前路线图、优先级与近期执行顺序。
 - [`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md) — **当前 Foundation First 阶段：先建立仓库结构、Human Interface 标准包、Human–AI 协作 Profile，再恢复网站实现。**
 - [`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md) — **Work Package A 完成审计：Repository Gate 与 Open Collaboration Gate 已达到 Draft Profile 门槛。**
+- [`foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md) — **Work Package A 参考依据入库审计：把实际使用的标准与成熟先例从研究文档推进到 Canonical Atlas，并记录暂缓建模项。**
 - [`route-alignment-audit-2026-09-01.zh-CN.md`](route-alignment-audit-2026-09-01.zh-CN.md) — 2026-09-01 多会话 / 仓库路线对齐审计。
 - [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — 五路线协同模型：Human、Machine、Curation、Trust、Governance；Open Collaboration 当前作为横向协作层。
 - [`project-development-principles.zh-CN.md`](project-development-principles.zh-CN.md) — 当前项目建设原则与最小治理规则。
@@ -25,6 +26,7 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 ### Open Collaboration Foundation
 
 - [`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md) — **Open Collaboration / Human–AI Collaboration Profile v0.1：角色、Agent-ready Work Item、任务图、生命周期、租约式认领、Handoff、Review / Authorization、GitHub-native mapping 与 IA-OC Requirements。**
+- [`work-item-reference-seeding-v0.1.zh-CN.md`](work-item-reference-seeding-v0.1.zh-CN.md) — **Reference Seeding 增补：任务发布时预装 Must Read / Seed References，并要求执行者继续做 Freshness / Delta Check。**
 - [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md) — Human-Machine Teaming、NIST、Linux Foundation / AGENTS.md、GitHub 等开放协作 Prior Art。
 - [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — 早期 Open Collaboration V0 工作笔记；现由正式 Draft Profile 取代其规范角色。
 
