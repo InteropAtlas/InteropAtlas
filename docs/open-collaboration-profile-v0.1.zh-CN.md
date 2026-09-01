@@ -2,7 +2,7 @@
 
 > 状态：Draft / Provisional Specification（草案 / 暂定规范）
 >
-> 关联：Issue #19；输入包括 `human-ai-open-collaboration-prior-art.zh-CN.md` 与 `open-collaboration-route-v0-notes.zh-CN.md`。
+> 关联：Issue #19；输入包括 [`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](../03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md) 与 [`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](../03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)。
 >
 > 目的：定义 InteropAtlas 中 Human、AI / Agent、Reviewer、Maintainer 与 Automation 如何共享同一公开协作协议。本文先定义角色、任务生命周期、租约式认领、交接、审核与授权语义；不在本文发布时创建 Lease Server、AGENTS.md、Issue Template 或 Project automation。
 
@@ -314,7 +314,7 @@ CI、Validator、E2E、link checker 等输出 **SHOULD** 成为 Review Evidence�
 
 ### IA-OC-017 — 高风险区域 SHOULD 通过 ownership / ruleset 自动路由
 
-Repository Structure Profile 定义的高风险 Zones（例如 `schemas/`、`governance/`、stable specs、security / licensing）**SHOULD** 在实施阶段映射到 CODEOWNERS / Required Review / Rulesets。
+Repository Structure Profile 定义的高风险区域（例如 `01_State` 中的 Schema / Contract、stable specifications、security / licensing，以及其他会影响全项目合同的文件）**SHOULD** 在实施阶段映射到 CODEOWNERS / Required Review / Rulesets。
 
 ## 12. AI / Agent Contribution Transparency
 
