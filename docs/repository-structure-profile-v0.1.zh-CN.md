@@ -1,66 +1,14 @@
 # InteropAtlas Repository Structure Profile v0.1
 
-> 状态：Draft / Provisional Specification（草案 / 暂定规范）
+> 状态：Draft / Provisional Specification（已应用 #31 Corrigendum）
 >
-> 关联：Issue #21；输入包括 `repository-structure-prior-art-and-options-v0.1.zh-CN.md` 与 `repository-current-to-target-mapping-v0.1.zh-CN.md`。
+> 关联：Issue #21、#31。
 >
-> 本 Profile 定义仓库的**职责边界、产物类型、目标结构与迁移合同**。它不是一次文件整理，也不在本文发布时自动执行目录迁移。
+> 本 Profile 定义仓库的职责边界、Artifact identity 与迁移约束。它**不再把知识对象分类映射成文件夹分类**，也不在本文发布时自动执行目录迁移。
 
-## 1. 规范关键词
+## 1. 核心修正
 
-本文中的 MUST、MUST NOT、SHOULD、SHOULD NOT、MAY 按 BCP 14（RFC 2119 + RFC 8174）理解。
-
-## 2. 上游依据与依据强度
-
-本 Profile 不是来自某一个“国际仓库目录标准”，而是对多类 Existing Standards & Prior Art 的 Profile。
-
-| 上游依据 | 身份 | 直接采用的内容 | 依据强度 |
-|---|---|---|---|
-| GitHub Community Health / Issue & PR Templates | 平台官方约定 | README / CONTRIBUTING / CODE_OF_CONDUCT / SECURITY / SUPPORT / templates 的受支持位置与平台行为 | 强，平台级约束 |
-| GitHub CODEOWNERS / Rulesets / Required Review | 平台官方机制 | ownership / review / protected main 的实现原语 | 强，平台级约束 |
-| REUSE Specification 3.3 | 正式规范 | `LICENSES/` 根目录及许可证文件规则 | **规范性 MUST** |
-| OpenSSF Best Practices / Scorecard | 成熟开放项目安全实践 | 安全政策、review、CI、维护健康度等检查思路 | 强参考 |
-| W3C browser-specs / MDN BCD | 成熟机器可读知识仓库 | Data + Schema + Tooling + Tests 可在同一仓库共同演化 | 成熟先例 |
-| CNCF Landscape | 成熟 Landscape 项目 | Data 与 Generator 在合同稳定后可拆分 | 成熟先例 |
-| SPDX License List | 成熟标准数据项目 | Authoritative Source 与 Generated Outputs 明确分离 | 成熟先例 |
-| Diátaxis / Docs as Code | 方法 / 框架 | 用户文档按任务组织；文档进入 version/review/test 工作流 | 方法依据 |
-| InteropAtlas 自身实践 | 项目事实 | Data / Schema / Graph / Renderer 高频共同变化、现有路径耦合 | IA-specific evidence |
-
-主要来源：
-- GitHub Community Health: https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file
-- GitHub PR standardization: https://docs.github.com/en/pull-requests/reference/managing-and-standardizing-pull-requests
-- GitHub Rulesets: https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets
-- REUSE 3.3: https://reuse.software/spec/
-- OpenSSF Best Practices: https://openssf.org/projects/best-practices-badge/
-- W3C browser-specs: https://github.com/w3c/browser-specs
-- MDN BCD: https://github.com/mdn/browser-compat-data
-- CNCF Landscape: https://github.com/cncf/landscape
-- SPDX License List: https://github.com/spdx/license-list-XML
-- Diátaxis: https://diataxis.fr/
-- Docs as Code: https://www.writethedocs.org/guide/docs-as-code/
-
-## 3. 核心决策
-
-### RS-D1 — 当前采用 Layered Monorepo
-
-**Decision: ACCEPTED FOR v0.1.**
-
-InteropAtlas 当前 **SHOULD** 继续保持单仓，但在仓库内部建立明确逻辑层；现在不拆成 data / engine / site / specification 多仓。
-
-理由：
-- 项目仍处于 Pre-Alpha；
-- Canonical Data、Schema、Graph、Validator、Renderer 仍高频共同演化；
-- 原子 PR 可以同时修改 Data Contract 与实现；
-- 当前拆仓会提高 Issue / PR / Agent context 的协调成本；
-- 成熟先例表明“先单仓共同演化、合同稳定后抽离”是可行路径。
-
-### RS-D2 — Canonical Data 使用一个显式逻辑边界
-
-**Decision: ACCEPTED IN PRINCIPLE.**
-
-目标结构采用 `data/` 作为 Canonical Atlas Object 的候选根目录。物理迁移尚未执行。
-
-具体路径：
+早期 v0.1 一方面规定“Artifact / object identity 不得依赖目录”，另一方面又把未来 Canonical Data 画成：
 
 ```text
 data/
@@ -69,335 +17,300 @@ data/
   implementations/
   organizations/
   scenarios/
-  reference-projects/   # 名称未来可能随 #15 演化
+  reference-projects/
   relations/
   gaps/
   maps/
 ```
 
-`data/` 这个名字是 IA Profile 选择，不是国际标准要求。
+这两个设计存在内在矛盾。
 
-### RS-D3 — IA 自产 Specification 与普通知识文档分离
+#31 后采用以下原则：
 
-**Decision: ACCEPTED IN PRINCIPLE.**
+> **物理存储 ≠ 知识分类 ≠ 索引 / 视图。**
 
-目标采用独立 `specs/` Zone。`specs/` 是候选短名，迁移前允许在 migration review 中改成 `specifications/`，但 Specification Artifact 与 ordinary docs 的逻辑分离已确定。
+- 物理目录只解决文件怎样存、怎样被工具找到、怎样维护；
+- 对象是什么，由对象自身 `id / type / kind / roles / fields` 等数据合同表达；
+- 对象之间怎样分类、归组和连接，由引用、Relation、Graph、Index、Map、Query 表达；
+- 一个对象可以同时出现在多个动态分类 / 视图中，而无需复制文件；
+- Standard、Method、Design System、Mature Precedent、Implementation 等**不需要因为语义类别不同而住在不同文件夹**。
 
-### RS-D4 — Research 与 Specification 分离
+因此，旧的 `data/<object-family>/` 目标树 **WITHDRAWN / SUPERSEDED**。它不再是已接受迁移目标。
 
-**Decision: ACCEPTED IN PRINCIPLE.**
+## 2. 仍然有效的上位依据
 
-Prior Art、Options、Audit、Fit Test 等研究性产物目标进入 `research/` Zone，不与规范要求混在同一平铺目录。
+本 Profile 继续采用以下成熟约束与先例：
 
-### RS-D5 — Engine 当前不拆仓
+- GitHub Community Health / Issue & PR Templates：平台原生公共项目入口；
+- GitHub CODEOWNERS / Rulesets / Required Review：ownership / review 原语；
+- REUSE Specification 3.3：`LICENSES/` 等许可证布局约束；
+- OpenSSF Best Practices / Scorecard：安全、Review、CI、维护实践；
+- W3C browser-specs / MDN BCD / CNCF Landscape / SPDX License List：Data、Schema、Tooling、Generated Output 分工；
+- Diátaxis / Docs as Code：面向人的文档组织和版本化工作流；
+- InteropAtlas 自身实践：当前路径耦合、Graph / Renderer / Loader 的真实迁移风险。
+
+但这些来源**没有要求** InteropAtlas 必须按 ontology 类别建立物理目录。
+
+## 3. 核心决策
+
+### RS-D1 — 当前采用 Layered Monorepo
 
 **Decision: ACCEPTED.**
 
-先通过目录、API、Data Contract 建立 extraction-ready boundary；只有 Engine 出现独立 release / ownership / compatibility contract 后再评估拆仓。
+InteropAtlas 当前继续保持单仓。Canonical Data、Schema、Engine、Validator、Renderer、项目规范与研究仍处于高频共同演化阶段，现在拆成多个仓库会增加协作成本。
 
-### RS-D6 — Generated Site / Export 永不成为第二事实源
-
-**Decision: ACCEPTED.**
-
-GitHub Pages、HTML、Markdown、JSON/RDF export 等 Generated Views 必须从 Canonical Facts / Contracts 生成；Generated Artifact 不得成为 competing source of truth。
-
-### RS-D7 — AGENTS.md 属于 Repository Agent Instructions，而非项目定义
+### RS-D2 — Storage 与 Semantics 必须解耦
 
 **Decision: ACCEPTED.**
 
-未来可在 root 使用 `AGENTS.md`，但内容必须由 Open Collaboration Profile 约束。它不得替代 README、CONTRIBUTING、Governance 或领域 Specification。
+Canonical Data 的物理路径 **MUST NOT** 决定对象的知识身份。
+
+目录名 **MUST NOT** 被 Loader、Validator、GraphIndex 或其他核心工具当作判断 `standard`、`relation`、`method`、`implementation` 等语义类型的依据。
+
+语义分类 **MUST** 来自机器可读对象数据与引用 / Graph contract。
+
+### RS-D3 — Canonical Data 需要明确的存储边界，但名字与内部布局未决定
+
+**Decision: RESPONSIBILITY ACCEPTED; PHYSICAL LAYOUT REOPENED.**
+
+Canonical Facts 应具有可发现、可配置、可验证的物理存储边界。
+
+但是以下问题全部重新进入讨论：
+
+- 根目录是否使用 `data/`、其他名字，或其他结构；
+- Canonical Data 内部是否完全平铺；
+- 是否因文件数量、维护、分片、性能等**技术原因**建立子目录；
+- Relations / Maps 是否需要独立物理区。
+
+这些决定**不得从旧 object-family 目录自动继承**。
+
+### RS-D4 — Artifact identity 必须可区分，物理一级目录另行讨论
+
+**Decision: LOGICAL DISTINCTION ACCEPTED; ROOT PLACEMENT REOPENED.**
+
+以下 Artifact identity 仍然必须可区分：
+
+- Canonical Data Object；
+- Schema / Contract；
+- IA-produced Specification / Profile；
+- Research / Prior Art / Fit Test / Audit；
+- Architecture / User Documentation；
+- Governance Policy；
+- Experiment；
+- Implementation / Tooling；
+- Generated Artifact / View。
+
+但“逻辑上必须区分”**不等于**“每一种都必须成为 root 一级目录”。
+
+`specs/`、`research/`、`governance/`、`docs/`、`tests/` 等旧目标位置从现在起视为 **candidate / pending discussion**，不是自动批准的最终 root tree。
+
+### RS-D5 — Generated Site / Export 永不成为第二事实源
+
+**Decision: ACCEPTED.**
+
+Generated HTML、Markdown、JSON/RDF export、indexes 等必须能够从 Canonical Facts / Contracts 再生成，不得成为竞争事实源。
+
+### RS-D6 — AGENTS.md 是 Agent Instructions，不是项目本体
+
+**Decision: ACCEPTED.**
+
+AGENTS.md 不得替代 README、CONTRIBUTING、Governance 或领域 Specification。
 
 ## 4. Artifact Taxonomy
 
-仓库 Artifact identity 与物理路径是两个维度。
-
-| Artifact Class | 主要职责 | Canonical Fact? | 典型生命周期 |
-|---|---|---:|---|
-| Canonical Data Object | 对现实互操作知识对象的结构化事实 | 是 | active / deprecated / superseded |
-| Schema / Contract | 定义数据和接口允许的结构 | 否 | draft → stable → revised |
-| Specification / Profile | IA 自产、可实现和可验证的规范要求 | 否 | draft → candidate → stable → superseded |
-| Methodology / Guide | 推荐的方法和操作方式 | 否 | note → guide → revised |
-| Research / Prior Art | 调研、Fit Test、方案比较、证据汇总 | 否 | living / point-in-time / archived |
-| Architecture Reference | 系统结构、边界、数据流解释 | 否 | provisional → revised |
-| Decision Record | 重要选择、理由和替代方案 | 否 | proposed → accepted → superseded |
-| Experiment Record | 可复现探索、fixture、prototype、结果 | 否 | planned → completed / abandoned |
-| Audit / Conformance Report | 对某规范/实现版本的阶段性检查 | 否 | point-in-time |
-| Governance Policy | 角色、授权、生命周期、治理约束 | 否 | draft → adopted → revised |
-| Community / Contribution Guide | 参与、求助、提交和 Review 方式 | 否 | living |
-| Implementation / Tool | Engine、Validator、Renderer、CLI、CI | 否 | versioned software |
-| Generated Artifact / View | 网站、export、报告、索引 | 否 | regenerated |
+| Artifact Class | 主要职责 | Canonical Fact? |
+|---|---|---:|
+| Canonical Data Object | 对现实互操作知识对象的结构化事实 | 是 |
+| Schema / Contract | 定义数据和接口允许的结构 | 否 |
+| Specification / Profile | IA 自产的规范要求 | 否 |
+| Research / Prior Art / Fit Test | 调研、方案比较、证据汇总 | 否 |
+| Architecture / Documentation | 帮助理解、使用、贡献项目 | 否 |
+| Governance Policy | 角色、授权、生命周期、治理约束 | 否 |
+| Experiment | 可复现探索、fixture、prototype、结果 | 否 |
+| Implementation / Tool | Engine、Validator、Renderer、CLI、维护工具 | 否 |
+| Generated Artifact / View | 网站、export、报告、动态索引 | 否 |
 
 ### Artifact identity invariant
 
-Artifact identity **MUST NOT** 只依赖目录位置。未来移动文件时，其 stable ID、规范身份、版本、状态和语义 **SHOULD** 保持可追踪。
+Artifact identity **MUST NOT** 只依赖目录位置。
 
-## 5. Target Repository Zones
+同样，Canonical Data 内部的知识分类 **MUST NOT** 只依赖目录位置。
 
-v0.1 的目标逻辑结构：
+## 5. 三层结构模型
+
+以后讨论仓库结构时，必须把三个问题分开：
 
 ```text
-/
-  README.md
-  CONTRIBUTING.md
-  LICENSE.md
-  LICENSES/
-  [future CODE_OF_CONDUCT.md]
-  [future SECURITY.md]
-  [future SUPPORT.md]
-  [future AGENTS.md]
+A. Physical Storage
+   文件实际放在哪里？
 
-  .github/
-    workflows/
-    [future ISSUE_TEMPLATE/]
-    [future PULL_REQUEST_TEMPLATE.md]
-    [future CODEOWNERS or supported location]
+B. Semantic Model
+   对象是什么？type / kind / role / relation 是什么？
 
-  data/
-    standards/
-    capabilities/
-    implementations/
-    organizations/
-    scenarios/
-    reference-projects/
-    relations/
-    gaps/
-    maps/
-
-  schemas/
-  engine/
-  tools/
-  tests/
-
-  specs/
-    repository-structure/
-    knowledge-object-classification/
-    human-interface/
-    open-collaboration/
-    ...
-
-  research/
-    prior-art/
-    fit-tests/
-    audits/
-    options/
-
-  docs/
-    architecture/
-    project/
-    tutorial/
-    how-to/
-    reference/
-    explanation/
-
-  governance/
-  experiments/
-  examples/
+C. Projection / Navigation
+   用户或 Agent 想按什么维度看？有哪些 Index / Map / Query？
 ```
 
-### 重要说明
+例如一个 GOV.UK Design System 对象可以只有一个物理文件，但通过 Graph 同时出现在：
 
-- 这是**目标 Zone Map**，不是要求一次创建所有空目录。
-- 某个 Zone 只有出现真实 Artifact 后才 SHOULD 创建。
-- `docs/` 的 Diátaxis 子目录只适用于真正面向用户/贡献者的文档；Specification、Research、Governance 不应仅因为是 Markdown 就进入 `docs/`。
-- `reference-projects/` 的具体名称受 #15 Non-normative Knowledge Object Model 影响，迁移前不得冻结。
+- Design System；
+- Human Interface reference；
+- Accessibility precedent；
+- Government service precedent；
+- Pattern library related view。
+
+不需要为了这些视图复制文件，也不需要五个文件夹。
 
 ## 6. Normative Requirements
 
 ### IA-RS-001 — Root 是公开项目入口
 
-Root **MUST** 优先服务第一次进入仓库的人类贡献者和通用工具。
+Root **MUST** 优先服务第一次进入仓库的人类贡献者和通用工具；**MUST NOT** 演化成 Agent 私有状态或临时工作文件集合。
 
-Root **SHOULD** 只保留项目入口、社区健康、法务和少量一等逻辑 Zone；**MUST NOT** 演化成 Agent 私有状态或临时工作文件集合。
+### IA-RS-002 — Canonical Storage 必须可发现和可配置
 
-Basis: GitHub Community Health + Human-first principle.
+Loader / CI / Tooling **SHOULD** 通过明确的 repository storage contract 获取 Canonical Data 当前物理位置。
 
-### IA-RS-002 — Canonical Data 必须有唯一显式边界
+当前存在多个 root 目录，只能被视为 **legacy physical storage locations**，不得解释成未来 ontology layout。
 
-所有 Canonical Atlas object families **MUST** 属于同一个逻辑 Data Root。
+### IA-RS-003 — 目录不得定义知识分类
 
-Loader **MUST NOT** 依赖“某几类对象恰好散落在 root”作为长期数据模型。
+一个对象的 `type / kind / roles` **MUST NOT** 由其所在目录推断。
 
-Basis: W3C browser-specs / MDN BCD / IA current loader evidence.
+Canonical Relation 的目标模型 **SHOULD** 显式声明 `type: relation`。当前 Loader **MAY** 为兼容少量历史数据，根据文档自身的 `source + relation/predicate/kind + target` 结构识别旧 Relation，但 **MUST NOT** 根据它是否位于 `relations/` 来判断。
 
-### IA-RS-003 — Data、Schema、Implementation 必须可区分
+这项兼容只是迁移期技术债，不改变“语义来自对象内容而不是目录”的原则。
 
-Canonical Facts、Schema/Contract 与 Engine/Tooling **MUST** 是不同 Artifact zones。
+### IA-RS-004 — 分类与索引使用数据和引用
 
-Schema **MUST NOT** 被视为事实实例；Engine **MUST NOT** 成为隐藏事实源。
+面向 Standard、Method、Organization、Capability、Design System、成熟先例、某个主题或某个能力的分类 / 索引 **SHOULD** 由对象字段、稳定 ID、Relation、Graph、Index、Map 或 Query 生成。
 
-### IA-RS-004 — Source of Truth 与 Generated Projection 必须分离
+### IA-RS-005 — Data / Schema / Implementation 职责必须可区分
 
-Generated HTML、site、export、indexes **MUST NOT** 与 Canonical Facts 竞争事实源身份。
+Canonical Facts、Schema/Contract 与 Engine/Tooling **MUST** 保持职责清楚；具体是否分别成为 root 一级目录，由下一轮 Repository Layout Decision 决定。
 
-Generated artifacts **SHOULD** 可删除并从源重新生成。
+### IA-RS-006 — Source of Truth 与 Generated Projection 必须分离
 
-Basis: SPDX source/generated pattern + existing IA Pages pipeline.
+Generated artifacts **MUST NOT** 与 Canonical Facts 竞争事实源身份。
 
-### IA-RS-005 — Specification 与 Research 必须区分
+### IA-RS-007 — Specification / Research 身份必须清楚
 
-带 BCP 14 Requirements 的 IA Specification / Profile **MUST** 与 Prior Art、Options、Working Notes、Fit Test、Audit 等 Research Artifact 可区分。
+带 BCP 14 Requirements 的 IA Specification / Profile **MUST** 与 Prior Art、Options、Fit Test、Audit 等 Research Artifact 可区分；具体文件夹位置尚未冻结。
 
-Research result **MUST NOT** 因与 Specification 同在一个 `docs/` 目录而被误认为规范要求。
+### IA-RS-008 — Community Health 使用平台原生位置
 
-### IA-RS-006 — Governance 与 Agent Instructions 不得取代公共贡献合同
+GitHub 能原生识别的 Community Health / Issue / PR 文件 **SHOULD** 使用 GitHub 支持的位置和格式。
 
-AGENTS.md **MUST NOT** 替代 README / CONTRIBUTING / Governance / Specification。
+### IA-RS-009 — License layout 优先兼容 REUSE
 
-任何只有 Agent 能看到或理解的任务规则 **MUST NOT** 成为开放协作的唯一真实规则。
-
-Basis: AGENTS.md role + Open Collaboration Profile.
-
-### IA-RS-007 — Community Health 应采用平台原生位置
-
-GitHub 能原生识别的 Community Health / Issue / PR 文件 **SHOULD** 使用 GitHub 支持的位置和格式，而不是 IA 自创平行目录。
-
-Basis: GitHub official docs.
-
-### IA-RS-008 — License layout 应优先兼容 REUSE
-
-若项目采用 REUSE 3.3，则 License Files **MUST** 按 REUSE 规范位于根级 `LICENSES/`，且该目录 **MUST NOT** 混入其他文件。
-
-当前 `LICENSES/` 方向保留。
-
-### IA-RS-009 — Tests 是一等验证 Artifact
-
-随着 Validator、Query、Specification Conformance、Site E2E 出现，测试 **SHOULD** 具有明确可发现位置和职责。
-
-是否 root `tests/` 或 component-local tests 可以按测试类型 Profile；但测试 **MUST NOT** 只存在于聊天说明或不可复现人工步骤中。
+若项目采用 REUSE 3.3，`LICENSES/` 等受规范约束的位置继续遵守 REUSE；这属于外部格式 / 工具约束，而不是 IA 知识分类。
 
 ### IA-RS-010 — 迁移必须保持语义不变量
 
-Canonical path migration **MUST** 可验证。
+任何 Canonical storage migration 至少保持：
 
-对于 `data/` 迁移，至少保持：
 - object count 不因移动改变；
 - relation count 不变；
 - resolved graph edge count 不变；
 - `reference_issues = 0`；
 - stable object IDs 不变；
-- generated public URL 不因 source physical path 被强制改变。
+- 对象 `type / kind / relations` 不因文件位置改变；
+- public generated URL 不应被物理 source path 无意改变。
 
-### IA-RS-011 — 路径合同必须集中化
+### IA-RS-011 — 路径合同只表达物理位置
 
-Loader / CI / Tooling **SHOULD** 通过一个明确 Data Root / repository contract 获取路径，不应在多个文件重复硬编码全部 object-family root paths。
+Path / storage contract **MUST NOT** 同时充当 ontology registry。
 
 ### IA-RS-012 — Internal links 与索引必须可验证
 
-Specification、Research、Docs 的 internal links / navigation indexes **SHOULD** 进入自动检查，避免物理路径与手工导航长期漂移。
+迁移后的 internal links、generated routes、navigation indexes **SHOULD** 可自动检查。
 
-### IA-RS-013 — Monorepo 必须保持未来可抽离
+### IA-RS-013 — Monorepo 保持 extraction-ready
 
-当前单仓结构 **SHOULD** 通过清晰目录和接口边界保持 extraction-ready。
+通过明确职责和接口边界保持未来可抽离，但不提前拆仓。
 
-只有出现独立 release、治理、ownership、兼容性或部署需求时，才 SHOULD 拆出独立 repository。
+### IA-RS-014 — 不为分类制造目录
 
-### IA-RS-014 — 不创建空分类以追求形式完整
+项目 **MUST NOT** 仅为了让 taxonomy 看起来完整而创建 Standard / Method / Precedent / Design System 等物理目录。
 
-Target Zone **MUST NOT** 被解释为“一次性创建所有目录”。没有真实 Artifact 的 Zone MAY 不存在。
+如果未来创建物理子目录，必须说明它解决的是规模、所有权、性能、生命周期、工具约束或其他实际工程问题，而不是“这个对象属于某个类别”。
 
-### IA-RS-015 — Task context 必须能够指向 Artifact contract
+## 7. 对 #15 的边界修正
 
-公开 Work Item / Issue **SHOULD** 能引用其修改的 Artifact class、上位 Specification 和允许作用域，使 Human / Agent 无需依赖某个聊天窗口理解仓库边界。
+#15 Non-normative Knowledge Object Model 继续回答：
 
-Basis: Open Collaboration Profile shared interface.
+- 对象 `type / kind / roles / relations` 如何表达；
+- Method、Guideline、Design System、Precedent 等怎样保持现实身份；
+- Fact、Evidence、Assessment 怎样分离。
 
-## 7. Community Health / Collaboration Target Set
+#15 **不再负责决定**：
 
-Profile 只定义目标，不在本阶段创建内容。
+- `reference-projects/` 将来叫什么文件夹；
+- 是否建立 `methods/`、`precedents/` 等目录；
+- root 一级目录如何组织。
 
-| File / Mechanism | 目标职责 | 来源 |
-|---|---|---|
-| `README.md` | 项目是什么、入口在哪里 | GitHub convention |
-| `CONTRIBUTING.md` | Human-first 通用贡献合同 | GitHub Community Health |
-| `CODE_OF_CONDUCT.md` | 社区行为边界 | GitHub Community Health |
-| `SECURITY.md` | 漏洞报告与安全流程 | GitHub Community Health / OpenSSF |
-| `SUPPORT.md` | 支持与非任务问题入口 | GitHub Community Health |
-| `.github/ISSUE_TEMPLATE/` | 标准化 Work Item / Bug / Proposal 输入 | GitHub native |
-| PR template | 目的、Issue、Evidence、Test、AI disclosure、Review checklist | GitHub native |
-| `CODEOWNERS` | 责任区域与 Review routing | GitHub native |
-| Ruleset / Required Review | main 的合并保护 | GitHub native |
-| `AGENTS.md` | Agent-specific repository instructions | AAIF / AGENTS.md；受 #19 约束 |
+因此 #15 **不再是 Repository Physical Layout Discussion 的阻塞项**。
 
-## 8. Migration Plan
+## 8. 修正后的迁移阶段
 
-### Phase M0 — Contract first（当前阶段）
+### Phase M0 — Principles / Contracts
 
-完成：
-- Artifact Taxonomy；
-- Target Zones；
-- Repository Requirements；
-- Open Collaboration boundary。
+已完成或进行中：
 
-**不移动文件。**
+- Artifact identity；
+- Storage ≠ Semantics ≠ View；
+- Open Collaboration boundary；
+- 迁移语义不变量。
 
-### Phase M1 — Decouple paths
+### Phase M1 — Storage path decoupling
 
-在任何 `data/` 迁移前：
-1. Loader 引入显式 `data_root` contract；
-2. object-family registry 集中定义；
-3. CI path filter 来源集中化或减少重复；
-4. 建立 migration regression test；
-5. 建立 internal-link audit baseline。
+#25 已完成第一轮；#31 修正其语义：
 
-### Phase M2 — Move Canonical Data
+- 集中记录**当前物理 storage locations**；
+- Loader 从对象内容判断语义，而不是从目录判断；
+- 可以对任意候选物理 storage path 做 Dry Run；
+- 不预设未来必须保留 object-family 子目录。
 
-一次可审计迁移：root object dirs → `data/*`。
+### Phase M2 — Root / First-level Layout Decision
 
-必须通过 IA-RS-010 invariants。
+**下一阶段。**
 
-### Phase M3 — Classify non-data artifacts
+从 root 一级目录开始重新讨论：
 
-在 #15 / #14 / #19 模型稳定后，再迁移：
-- Specification → `specs/`；
-- Prior Art / Fit Test / Audit → `research/`；
-- Architecture / Project docs → `docs/*`；
-- Governance → `governance/`。
+- 哪些目录因为平台 / 许可证标准必须存在；
+- 哪些职责值得成为一级目录；
+- 哪些可以合并；
+- Canonical Data 的一级 storage zone 是否存在、叫什么；
+- 不先讨论 Standard / Method 等语义子目录。
 
-### Phase M4 — Community surface implementation
+### Phase M3 — Migration Dry Run
 
-根据 Open Collaboration Profile 实现：
-- CONTRIBUTING update；
-- templates；
-- CODEOWNERS / rulesets；
-- AGENTS.md；
-- task/project fields。
+在一级目录与 storage layout 经 Maintainer 明确批准后，生成完整 current → target move table、CI / links / Renderer / Loader 影响和 rollback plan。
 
-### Phase M5 — Extraction review
+### Phase M4 — Physical Migration
 
-只有在真实需求出现时评估 Engine / stable specification / generated distribution 是否拆仓。
+只有 Maintainer 再次明确批准后执行真实移动。
 
-## 9. Conformance Checklist
+## 9. 当前明确未决定
 
-一个仓库结构变更在 Merge 前 SHOULD 回答：
+以下全部 **OPEN / 待讨论**：
 
-- [ ] 变更对应哪个 Artifact class？
-- [ ] 是否违反 Root public surface？
-- [ ] 是否产生第二事实源？
-- [ ] Specification / Research 身份是否清楚？
-- [ ] 是否引入重复路径合同？
-- [ ] 是否保持 stable IDs / Graph invariants？
-- [ ] Internal links 是否验证？
-- [ ] 是否让 Agent-only instruction 覆盖了 Human contract？
-- [ ] 是否真的需要新 Zone / 新 repo，而不是为了形式整齐？
+- `data/` 是否是最终一级目录名；
+- Canonical Data 是否位于一个一级目录；
+- Canonical Data 内部是否平铺或技术分片；
+- `relations` 是否单独物理存放；
+- `specs/` / `research/` / `governance/` / `docs/` 是否分别作为一级目录；
+- `tests/` 是 root-level 还是 component-local；
+- experiments / examples / tools 的最终层级。
 
-## 10. v0.1 结论
+这正是下一轮“从根目录一级目录开始”的讨论范围。
 
-Repository Structure v0.1 的核心不是目录树，而是：
+## 10. v0.1 修正结论
 
 ```text
-Public Entry Surface
-        ↓
-Explicit Artifact Identity
-        ↓
-Canonical Data / Contracts / Implementations / Specs / Research / Governance 分层
-        ↓
-Generated Views 可再生
-        ↓
-Human-first, Agent-compatible collaboration
-        ↓
-Testable migration
-        ↓
-Extraction-ready, not prematurely split
+文件夹：负责存储和工程边界
+数据字段 / ID / Relation：负责知识身份与连接
+Graph / Index / Map / Query：负责分类、索引与视图
 ```
 
-**当前接受 Layered Monorepo 作为目标架构；物理迁移留给后续实施阶段。**
+**不要再让目录树承担知识图谱本来应该承担的工作。**

@@ -15,7 +15,7 @@ from typing import Any, Iterable
 
 import yaml
 
-from repository_layout import RELATION_FAMILY, repository_layout
+from repository_layout import repository_layout
 
 
 def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
@@ -25,32 +25,56 @@ def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
                 yield document
 
 
-def load_atlas(
-    root: Path,
-    data_root: Path | str | None = None,
-) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
-    """Load canonical Atlas objects through the repository layout contract.
+def relation_predicate(relation: dict[str, Any]) -> str | None:
+    for key in ("relation", "predicate", "kind"):
+        value = relation.get(key)
+        if isinstance(value, str):
+            return value
+    return None
 
-    ``root`` remains the repository checkout root. ``data_root`` is a
-    repository-relative physical location for canonical object families and
-    defaults to the current contract (``.``). No caller needs to know the list
-    of object-family directories.
+
+def is_relation_document(document: dict[str, Any]) -> bool:
+    """Identify Relation semantics from document data, never from its folder.
+
+    Canonical data should use ``type: relation``. A small amount of legacy data
+    predates that explicit field, so the Loader keeps compatibility with the
+    historical structural form ``source + relation/predicate/kind + target``.
+    This compatibility rule is content-based and works in any storage location.
     """
 
-    layout = repository_layout(root, data_root)
+    if document.get("type") == "relation":
+        return True
+    if document.get("type") is not None:
+        return False
+    return (
+        document.get("source") is not None
+        and document.get("target") is not None
+        and relation_predicate(document) is not None
+    )
+
+
+def load_atlas(
+    root: Path,
+    storage_paths: Iterable[Path | str] | None = None,
+) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
+    """Load canonical Atlas objects from configured physical storage locations.
+
+    Storage locations are repository plumbing only. Object semantics come from
+    document content, not the directory name.
+    """
+
+    layout = repository_layout(root, storage_paths)
     objects: list[dict[str, Any]] = []
     relations: list[dict[str, Any]] = []
 
-    for family, path in layout.iter_yaml_files():
+    for path in layout.iter_yaml_files():
         for document in yaml_documents(path):
-            # `_source` is intentionally the stable logical source consumed by
-            # generated views. `_physical_source` preserves the actual repository
-            # path for migration/debug traceability. Today they are identical;
-            # after a future root -> data/ migration only the physical path changes.
-            document.setdefault("_source", layout.logical_source(family, path))
-            document.setdefault("_physical_source", layout.physical_source(path))
-            document.setdefault("_object_family", family)
-            if family == RELATION_FAMILY or document.get("type") == "relation":
+            source = layout.physical_source(path)
+            # Keep current generated-view behaviour unchanged until a later
+            # migration explicitly defines a storage-independent public route.
+            document.setdefault("_source", source)
+            document.setdefault("_physical_source", source)
+            if is_relation_document(document):
                 relations.append(document)
             else:
                 objects.append(document)
@@ -93,14 +117,6 @@ def ref_id(value: Any) -> str | None:
     return None
 
 
-def relation_predicate(relation: dict[str, Any]) -> str | None:
-    for key in ("relation", "predicate", "kind"):
-        value = relation.get(key)
-        if isinstance(value, str):
-            return value
-    return None
-
-
 def alternative_relations(
     relations: list[dict[str, Any]], capability_id: str
 ) -> list[dict[str, Any]]:
@@ -118,9 +134,9 @@ def alternative_relations(
 def run(
     root: Path,
     capability_id: str,
-    data_root: Path | str | None = None,
+    storage_paths: Iterable[Path | str] | None = None,
 ) -> dict[str, Any]:
-    objects, relations = load_atlas(root, data_root)
+    objects, relations = load_atlas(root, storage_paths)
     index = index_objects(objects)
     implementations = implementations_for_capability(objects, capability_id)
     open_self_hostable = [
@@ -160,15 +176,20 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument(
-        "--data-root",
+        "--storage-path",
         type=Path,
-        help="repository-relative canonical data root; defaults to the repository layout contract",
+        action="append",
+        dest="storage_paths",
+        help=(
+            "repository-relative canonical storage location; repeat for multiple "
+            "locations. If omitted, use the current legacy locations."
+        ),
     )
     parser.add_argument("--capability", default="automated_build_deployment")
     args = parser.parse_args()
     print(
         json.dumps(
-            run(args.root, args.capability, args.data_root),
+            run(args.root, args.capability, args.storage_paths),
             ensure_ascii=False,
             indent=2,
         )

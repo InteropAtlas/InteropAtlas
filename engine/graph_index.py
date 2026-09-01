@@ -16,7 +16,7 @@ import json
 from collections import defaultdict
 from dataclasses import asdict, dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, Iterable
 
 
 @dataclass(frozen=True)
@@ -175,12 +175,12 @@ class GraphIndex:
 
 def diagnostics(
     root: Path,
-    data_root: Path | str | None = None,
+    storage_paths: Iterable[Path | str] | None = None,
 ) -> dict[str, Any]:
     # Local import avoids making bootstrap_query depend on graph_index.
     from bootstrap_query import index_objects, load_atlas
 
-    objects, relations = load_atlas(root, data_root)
+    objects, relations = load_atlas(root, storage_paths)
     graph = GraphIndex(index_objects(objects), relations)
     return {
         "objects": len(objects),
@@ -194,12 +194,17 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument(
-        "--data-root",
+        "--storage-path",
         type=Path,
-        help="repository-relative canonical data root; defaults to the repository layout contract",
+        action="append",
+        dest="storage_paths",
+        help=(
+            "repository-relative canonical storage location; repeat for multiple "
+            "locations. If omitted, use the current legacy locations."
+        ),
     )
     args = parser.parse_args()
-    print(json.dumps(diagnostics(args.root, args.data_root), ensure_ascii=False, indent=2))
+    print(json.dumps(diagnostics(args.root, args.storage_paths), ensure_ascii=False, indent=2))
 
 
 if __name__ == "__main__":

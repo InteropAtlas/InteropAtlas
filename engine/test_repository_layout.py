@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regression checks for the InteropAtlas repository layout contract."""
+"""Regression checks for the InteropAtlas physical storage contract."""
 
 from __future__ import annotations
 
@@ -9,63 +9,78 @@ from pathlib import Path
 
 from bootstrap_query import load_atlas
 from render_markdown import output_path
-from repository_layout import repository_layout, validate_data_root
+from repository_layout import repository_layout, validate_storage_path
 
 
 class RepositoryLayoutTests(unittest.TestCase):
-    @staticmethod
-    def write_standard(root: Path, data_root: Path, marker: str) -> Path:
-        path = root / data_root / "standards" / "sample.yaml"
-        path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(
-            "\n".join(
-                [
-                    "id: sample_standard",
-                    "type: standard",
-                    f"name_en: Sample Standard {marker}",
-                    "",
-                ]
-            ),
-            encoding="utf-8",
-        )
-        return path
-
-    def test_logical_source_and_generated_path_survive_data_root_move(self) -> None:
+    def test_current_storage_keeps_current_generated_path(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            self.write_standard(root, Path("."), "current")
-            self.write_standard(root, Path("data"), "future")
+            path = root / "standards" / "sample.yaml"
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(
+                "id: sample_standard\n"
+                "type: standard\n"
+                "name_zh: 示例标准\n"
+                "name_en: Sample Standard\n",
+                encoding="utf-8",
+            )
 
-            current_objects, current_relations = load_atlas(root)
-            future_objects, future_relations = load_atlas(root, Path("data"))
+            objects, relations = load_atlas(root, [Path("standards")])
 
-            self.assertEqual(len(current_objects), 1)
-            self.assertEqual(len(future_objects), 1)
-            self.assertEqual(current_relations, [])
-            self.assertEqual(future_relations, [])
+            self.assertEqual(relations, [])
+            self.assertEqual(len(objects), 1)
+            self.assertEqual(objects[0]["_source"], "standards/sample.yaml")
+            self.assertEqual(objects[0]["_physical_source"], "standards/sample.yaml")
+            self.assertEqual(output_path(objects[0]), "standards/sample.md")
+            self.assertNotIn("_object_family", objects[0])
 
-            current = current_objects[0]
-            future = future_objects[0]
-
-            self.assertEqual(current["id"], future["id"])
-            self.assertEqual(current["_source"], "standards/sample.yaml")
-            self.assertEqual(future["_source"], "standards/sample.yaml")
-            self.assertEqual(current["_physical_source"], "standards/sample.yaml")
-            self.assertEqual(future["_physical_source"], "data/standards/sample.yaml")
-            self.assertEqual(output_path(current), "standards/sample.md")
-            self.assertEqual(output_path(future), "standards/sample.md")
-
-    def test_data_root_is_repository_relative(self) -> None:
-        with self.assertRaises(ValueError):
-            validate_data_root(Path("../outside"))
-        with self.assertRaises(ValueError):
-            validate_data_root(Path("/absolute/data"))
-
-    def test_unknown_family_is_rejected(self) -> None:
+    def test_mixed_storage_classifies_from_content_not_directory(self) -> None:
         with tempfile.TemporaryDirectory() as temporary:
-            layout = repository_layout(Path(temporary))
-            with self.assertRaises(ValueError):
-                layout.family_path("not-a-family")
+            root = Path(temporary)
+            mixed = root / "mixed" / "nested"
+            mixed.mkdir(parents=True, exist_ok=True)
+
+            (mixed / "standard.yaml").write_text(
+                "id: sample_standard\n"
+                "type: standard\n"
+                "name_zh: 示例标准\n"
+                "name_en: Sample Standard\n",
+                encoding="utf-8",
+            )
+            (mixed / "capability.yaml").write_text(
+                "id: sample_capability\n"
+                "type: capability\n"
+                "name_zh: 示例能力\n"
+                "name_en: Sample Capability\n",
+                encoding="utf-8",
+            )
+            # Intentionally omit `type: relation` to cover the current legacy
+            # structural relation form. It must still work outside relations/.
+            (mixed / "edge.yaml").write_text(
+                "id: sample_relation\n"
+                "source: sample_standard\n"
+                "relation: provides\n"
+                "target: sample_capability\n",
+                encoding="utf-8",
+            )
+
+            objects, relations = load_atlas(root, [Path("mixed")])
+
+            self.assertEqual({obj["type"] for obj in objects}, {"standard", "capability"})
+            self.assertEqual([relation["id"] for relation in relations], ["sample_relation"])
+            self.assertEqual(relations[0]["_physical_source"], "mixed/nested/edge.yaml")
+
+    def test_storage_paths_are_repository_relative(self) -> None:
+        with self.assertRaises(ValueError):
+            validate_storage_path(Path("../outside"))
+        with self.assertRaises(ValueError):
+            validate_storage_path(Path("/absolute/data"))
+
+    def test_arbitrary_storage_name_is_allowed(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            layout = repository_layout(Path(temporary), [Path("anything-we-decide-later")])
+            self.assertEqual(layout.storage_paths, (Path("anything-we-decide-later"),))
 
 
 if __name__ == "__main__":
