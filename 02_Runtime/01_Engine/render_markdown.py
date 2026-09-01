@@ -10,6 +10,8 @@ from typing import Any
 
 from bootstrap_query import index_objects, load_atlas
 from graph_index import GraphIndex, ref_id, relation_predicate
+from kind_registry import has_profile, load_kind_registry
+from semantic_model import is_capability
 
 TYPE_LABELS = {
     "implementation": "实现（Implementation）",
@@ -105,7 +107,25 @@ FIELD_REFERENCE_LABELS = {
     "capabilities": "能力字段引用",
 }
 
-HUMAN_VIEW_TYPES = {"implementation", "capability", "standard"}
+_KIND_REGISTRY = load_kind_registry()
+
+
+def semantic_view_type(obj: dict[str, Any] | None) -> str | None:
+    """Return the current human-view specialization across Legacy and v0 data."""
+
+    if not obj:
+        return None
+    if is_capability(obj):
+        return "capability"
+    if has_profile(obj, "implementation", _KIND_REGISTRY):
+        return "implementation"
+    if has_profile(obj, "normative_artifact", _KIND_REGISTRY):
+        return "standard"
+    return None
+
+
+def is_human_view_object(obj: dict[str, Any] | None) -> bool:
+    return semantic_view_type(obj) is not None
 
 
 def human_value(value: Any) -> str:
@@ -158,7 +178,7 @@ def linked_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | None, f
 
 
 def relationship_name(source_obj: dict[str, Any], target_obj: dict[str, Any] | None, fallback: str) -> str:
-    if not target_obj or target_obj.get("type") not in HUMAN_VIEW_TYPES:
+    if not is_human_view_object(target_obj):
         return display_name(target_obj, fallback)
     return linked_name(source_obj, target_obj, fallback)
 
@@ -230,7 +250,9 @@ def common_header(obj: dict[str, Any]) -> list[str]:
     if summary:
         lines += [summary, ""]
     lines += ["## 基本信息", ""]
-    lines.append(f"- **对象类型：** {TYPE_LABELS.get(str(obj.get('type')), str(obj.get('type', '未知')))}")
+    view_type = semantic_view_type(obj)
+    display_type = view_type or str(obj.get("type", "未知"))
+    lines.append(f"- **对象类型：** {TYPE_LABELS.get(display_type, display_type)}")
     lines.append(f"- **内部 ID：** `{object_id}`")
     if obj.get("status") is not None:
         lines.append(f"- **状态：** {human_value(obj.get('status'))}")
@@ -390,8 +412,8 @@ def add_capability_backlinks(
         if source:
             referenced_by.append(source)
 
-    standard_count = len([item for item in referenced_by if item.get("type") == "standard"])
-    implementation_count = len([item for item in referenced_by if item.get("type") == "implementation"])
+    standard_count = len([item for item in referenced_by if semantic_view_type(item) == "standard"])
+    implementation_count = len([item for item in referenced_by if semantic_view_type(item) == "implementation"])
     relations = graph.relation_objects_for_capability(capability_id)
 
     if referenced_by or relations:
@@ -409,8 +431,8 @@ def add_capability_backlinks(
         ("## 相关标准 / 规范", "standard"),
         ("## 哪些实现提供这个能力？", "implementation"),
     ]
-    for heading, object_type in groups:
-        items = [item for item in referenced_by if item.get("type") == object_type]
+    for heading, view_type in groups:
+        items = [item for item in referenced_by if semantic_view_type(item) == view_type]
         if not items:
             continue
         lines += [heading, ""]
@@ -457,7 +479,7 @@ def render_capability(
         implementations = [
             candidate
             for candidate in index.values()
-            if candidate.get("type") == "implementation"
+            if semantic_view_type(candidate) == "implementation"
             and capability_id in (candidate.get("capabilities") or [])
         ]
         if implementations:
@@ -531,14 +553,16 @@ def render_object(
     index: dict[str, dict[str, Any]],
     graph: GraphIndex | None = None,
 ) -> str:
-    object_type = obj.get("type")
-    if object_type == "capability":
+    view_type = semantic_view_type(obj)
+    if view_type == "capability":
         return render_capability(obj, index, graph)
-    if object_type == "implementation":
+    if view_type == "implementation":
         return render_implementation(obj, index, graph)
-    if object_type == "standard":
+    if view_type == "standard":
         return render_standard(obj, index, graph)
-    raise ValueError(f"renderer does not support object type yet: {object_type}")
+    raise ValueError(
+        f"renderer does not support semantic view yet: type={obj.get('type')} kind={obj.get('kind')}"
+    )
 
 
 def main() -> None:
