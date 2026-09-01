@@ -1,8 +1,8 @@
 # InteropAtlas Repository Current → Target Mapping v0.1
 
-> 状态：Migration Dry Run / Updated after #33–#36
+> 状态：Migration Dry Run / Updated after Schema colocation decision
 >
-> 关联：#21、#31、#33、#34、#35、#36。
+> 关联：#21、#31、#33、#34、#35、#36、#37。
 >
 > 本文件记录当前仓库如何迁入已经确认的三大主结构。它是迁移计划，不代表已经授权或执行物理搬迁。
 
@@ -97,9 +97,9 @@ relations/ ─────────────→ 01_State/02_Relations/
 
 ---
 
-## 3. `schemas/`：暂缓直接搬迁
+## 3. Schema 放置：已确认与数据共置
 
-当前 `schemas/` 有一组按历史对象类型拆分的机器可读合同，例如：
+当前 `schemas/` 有一组机器可读合同，例如：
 
 ```text
 base-object.schema.json
@@ -114,17 +114,36 @@ map.schema.json
 relation.schema.json
 ```
 
-新的结构原则是：数据长什么样的规则应尽量靠近数据本身，而不是为了“规则”再建立第三个 State 二级目录。
+目标结构不建立独立 `Schemas/` 二级目录。
 
-因此 `schemas/` **不能直接原样搬成新的二级目录**。
+已确认的原则是：
 
-迁移前单独处理：
+```text
+Object 的数据说明与机器 Schema
+→ 01_State/01_Objects/
 
-- Object 通用数据规则进入 `01_State/01_Objects/README.md`，需要机器执行的合同也应靠近 Objects；
-- Relation 通用数据规则进入 `01_State/02_Relations/README.md`，需要机器执行的合同也应靠近 Relations；
-- 现有 type-specific Schema 是否继续保留、合并、改成组合式定义，属于 Schema/Data Model 改造，不与纯目录迁移混做。
+Relation 的数据说明与机器 Schema
+→ 01_State/02_Relations/
+```
 
-在该问题解决前，`schemas/` 保持原位。
+也就是说，同一个数据区内：
+
+- `README.md` 给 Human / Agent 解释数据格式；
+- `*.schema.json` 给机器执行验证；
+- `*.yaml` / `*.yml` 承载正式数据。
+
+Schema 因此不是 State 中与 Objects、Relations 平级的第三种内容，而是它所约束数据的机器可读合同。
+
+### 现有 Schema 的迁移仍需 Dry Run
+
+“放在哪里”已经决定，但现有 Schema 不能仅按文件名机械移动：
+
+- `relation.schema.json` 明确属于 `02_Relations`；
+- Object 相关 Schema 原则上属于 `01_Objects`；
+- `base-object.schema.json` 与各 type-specific Schema 之间的引用必须检查；
+- 是否合并或重构 type-specific Schema 属于 Data Model 改造，不应偷偷混入纯目录迁移。
+
+因此物理迁移时优先保持 Schema 语义和验证能力不变；结构性重构另开工作。
 
 ---
 
@@ -245,7 +264,7 @@ AGENTS.md
 
 ---
 
-## 8. 真实迁移前的三个阻塞点
+## 8. 真实迁移前的三个工程准备项
 
 ### A. Public Route 与 Physical Source 解耦
 
@@ -269,9 +288,11 @@ physical file path
 public route
 ```
 
-### B. Schema 合同怎么落盘
+### B. 现有 Schema 引用与验证迁移
 
-必须先决定现有 type-specific Schema 在新 Objects / Relations 模型下如何保持验证能力，避免为了目录简洁而破坏数据质量检查。
+Schema 的目标位置已经决定，但需要确认现有 Schema 之间的 `$ref`、Validator 调用位置以及 CI 路径，确保移动到 Objects / Relations 后验证能力不变。
+
+这一步只解决“安全搬迁”，不顺便重做 Data Model。
 
 ### C. CI 路径更新
 
@@ -307,7 +328,7 @@ reference issues = 0
 ```text
 M1  路径/URL 解耦准备
  ↓
-M2  Schema 合同迁移方案
+M2  Schema 引用与 Validator 路径 Dry Run
  ↓
 M3  Canonical YAML 按内容 Dry Run 分类
  ↓
@@ -324,12 +345,14 @@ M4 是第一次真正发生大规模物理移动的步骤，需要 Human Maintai
 
 ## 11. 当前结论
 
-两级结构目前可以容纳现有仓库的主要内容，没有发现必须增加第四个主目录或第四个二级目录的硬需求。
+两级结构目前可以容纳现有仓库的主要内容，没有发现必须增加第四个主目录或第四个编号二级目录的硬需求。
 
-当前真正需要解决的不是“文件夹不够”，而是三个迁移工程问题：
+Schema 的目标位置也已经明确：它跟随所约束的数据，不形成独立 `Schemas/` 区域。
+
+当前真正需要解决的是迁移工程问题：
 
 1. public route 不依赖 physical path；
-2. Schema 合同与 Objects / Relations 新结构对齐；
-3. CI、文档链接和生成流程与新路径同时切换。
+2. Schema 引用、Validator 与 CI 能随新路径安全切换；
+3. 文档链接和生成流程与新路径同时切换。
 
-在这三个问题完成前，保留 legacy directories 是有意的兼容状态，不视为结构设计失败。
+在这些准备完成前，保留 legacy directories 是有意的兼容状态，不视为结构设计失败。
