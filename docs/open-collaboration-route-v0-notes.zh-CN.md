@@ -41,6 +41,20 @@ Merge / Done
 
 V0 暂不实现完整 Lease、Heartbeat、Agent 自动目标生成和多 Agent 讨论。
 
+## 优先复用 GitHub 原生机制
+
+当前 GitHub 已经提供足够多的协作原语，可以先验证 V0，而不急于开发 IA 自有任务系统：
+
+- Issue：统一任务对象；
+- Assignee：表示当前主要执行者，人类与支持的 Coding Agent 都可进入这一流程；
+- Issue Fields / Projects：记录 Priority、Status、Area 等结构化状态；
+- Sub-issues / Dependencies：拆分大任务并表达 blocked-by / blocking；
+- Pull Request + Review：工作成果与独立审核；
+- CODEOWNERS / Required Review：按领域自动请求有责任的 Reviewer；
+- stale workflow：可用于提醒长期无进展任务，未来再根据真人 / Agent 形成不同释放策略。
+
+因此 V0 的“租约式认领”暂时不需要实现独立 Lease 服务。第一阶段先把 `Assignee + Status + activity / stale` 当作近似机制，用真实协作验证哪些地方确实缺能力。
+
 ## 当前上位依据
 
 - ISO/IEC CD 25589：Human-Machine Teaming framework；
@@ -48,6 +62,7 @@ V0 暂不实现完整 Lease、Heartbeat、Agent 自动目标生成和多 Agent �
 - ISO/IEC CD TR 42109：Human-Machine Teaming use cases；
 - ISO/IEC 5339:2024：stakeholder engagement；
 - NIST AI RMF：human-AI roles / responsibilities / oversight；
+- Linux Foundation AAIF / AGENTS.md：开放、跨 Agent 的仓库工作说明；
 - GitHub Coding Agents：Issue → Agent → PR → Human Review 的现实实现。
 
 详细见 `human-ai-open-collaboration-prior-art.zh-CN.md`。
@@ -59,4 +74,5 @@ V0 暂不实现完整 Lease、Heartbeat、Agent 自动目标生成和多 Agent �
 - 执行、Review、最终授权不要默认集中在同一 Agent；
 - 普通任务避免多个执行者重复工作；
 - Agent 特有的 Lease / Heartbeat 是实现细节，不应改变普通贡献者对项目的理解；
-- Roadmap 保持项目方向，Issues 保持可执行任务，不另造 Agent-only Goal / Task 系统。
+- Roadmap 保持项目方向，Issues 保持可执行任务，不另造 Agent-only Goal / Task 系统；
+- 先复用 GitHub 已有机制，只有真实实践证明不足时才新增 IA 自有协调能力。
