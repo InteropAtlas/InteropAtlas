@@ -28,7 +28,7 @@ IA Profile / Specification
 |---|---|---|---|---|
 | 人本设计过程 | ISO 9241-210:2019 | 用户任务、context of use、迭代评价 | USWDS “Start with real user needs” | 先理解任务/场景，再设计 View；网页不是流程起点 |
 | Usability（可用性） | ISO 9241-11:2018（待收录） | effectiveness / efficiency / satisfaction in context | 政府设计系统的用户研究流程 | 后续建立 IA usability requirements 与评价记录 |
-| Interaction（交互） | ISO 9241-110:2020；HTML；WAI-ARIA 1.2（待收录） | WAI-ARIA APG；Progressive Enhancement | USWDS / GOV.UK components | Link 做导航，Button 做动作；同类控件一致、可预测 |
+| Interaction（交互） | ISO 9241-110:2020；HTML；WAI-ARIA 1.2 | WAI-ARIA APG；Progressive Enhancement | USWDS / GOV.UK components | Link 做导航，Button 做动作；同类控件一致、可预测 |
 | Information Presentation（信息呈现） | ISO 9241-112:2025 | progressive disclosure、内容分层 | GOV.UK content/layout | 对象页先摘要和关键事实，再按需展开证据、关系和机器字段 |
 | Visual Presentation（视觉呈现） | ISO 9241-125:2017；ISO 9241-161:2025（待收录） | Gestalt / visual hierarchy 等成熟视觉组织方法需继续研究 | GOV.UK / USWDS / Carbon / Material | 建立 typography、spacing、hierarchy、state、relation coding 规则 |
 | Accessibility（无障碍） | WCAG 2.2 / ISO/IEC 40500:2025；ISO 9241-20/171（待收录） | APG；Universal Design | USWDS / GOV.UK accessibility testing | Human-readable Web 暂定目标 WCAG 2.2 AA；组件级测试 + 整站测试 |
@@ -40,7 +40,7 @@ IA Profile / Specification
 | Component semantics（组件语义） | HTML + WAI-ARIA | APG patterns | USWDS / GOV.UK components | 先用原生 HTML；需要复杂 widget 时再用 ARIA，并履行键盘交互合同 |
 | Graph Exploration（图探索） | 当前没有单一国际标准覆盖完整交互 | Shneiderman Overview→Filter→Details；Furnas Focus+Context | Neo4j Bloom；Cytoscape.js / Sigma.js 等 | IA 定义图语义与任务，成熟库负责布局/渲染/基础交互；Local Map 只是早期验证 |
 | Design Tokens（设计令牌） | DTCG Design Tokens Format 2025.10：稳定 Community Group Final Report，**不是 W3C Standard** | semantic token architecture | 多个成熟 Design Systems | IA Visual System 后续采用机器可读 token，优先兼容 DTCG 格式 |
-| Conformance（符合性） | WCAG；ACT Rules Format 1.1（待收录） | requirement → test rule → result | USWDS component accessibility checklists | IA Human Interface 规则要逐渐变成可执行/可人工复核的验收规则 |
+| Conformance（符合性） | WCAG；ACT Rules Format 1.1 | requirement → test rule → result | USWDS component accessibility checklists | IA Human Interface 规则要逐渐变成可执行/可人工复核的验收规则 |
 | Browser interaction testing | W3C WebDriver | E2E（端到端）测试 | Playwright 等成熟实现 | #13：真实点击行为成为交互交付门槛；build success ≠ interaction success |
 
 ## 3. Information Architecture 与 Navigation 的边界
@@ -211,13 +211,48 @@ Conformance / E2E / Human Evaluation
 
 这张 Reference Map 本身不是 IA Standard；它是形成 IA Human Interface Profile 前的 Prior Art 导航图。
 
-## 9. 主要参考
+## 9. 当前收录状态（2026-09-01）
+
+本轮已经从“参考清单”进入 Canonical Objects：
+
+### 已收录规范 / 格式
+- `wai_aria_1.2` — WAI-ARIA 1.2；
+- `act_rules_format_1.1` — ACT Rules Format 1.1；
+- `design_tokens_format_2025.10` — Design Tokens Format Module 2025.10；
+- 此前已有 ISO 9241-110 / 112 / 125 / 210、WCAG 2.2、HTML、CSS 等。
+
+### 已收录 Capability
+- `accessibility_conformance_testing` — 无障碍符合性测试；
+- `design_token_exchange` — 设计令牌交换；
+- 此前已有 `human_system_interaction`、`information_presentation`、`visual_information_presentation`、`web_accessibility` 等。
+
+### 已收录参考项目 / 指南集合
+- `aria_apg` — ARIA Authoring Practices Guide；
+- `uswds` — U.S. Web Design System；
+- `govuk_design_system` — GOV.UK Design System。
+
+### 已收录治理主体
+- `design_tokens_community_group` — W3C Design Tokens Community Group。
+
+并已通过 `relations/human-interface-foundations.yaml` 把上述标准、Capability、组织和参考项目连接起来，避免形成孤立条目。
+
+## 10. 当前建模缺口
+
+Nielsen Heuristics、Shneiderman Mantra、Furnas Focus+Context、Card Sorting、Tree Testing、Gestalt、Diátaxis、Munzner Nested Model、Grammar of Graphics 等对象并不是规范性 Standard，也不都适合叫 Reference Project。
+
+因此已经建立 #15：**为 Method / Guideline / Design System 建立非标准参考对象模型**。
+
+原则：在 #15 的最小模型验证前，不为了追求收录速度把方法、原则、研究成果错误塞进 `standard`。这是本轮 Human Interface 收录本身反向暴露出的 Atlas Schema 缺口。
+
+## 11. 主要参考
 
 - ISO 9241 family: https://www.iso.org/
+- WAI-ARIA 1.2: https://www.w3.org/TR/wai-aria-1.2/
 - WAI-ARIA APG: https://www.w3.org/WAI/ARIA/apg/
 - APG Breadcrumb: https://www.w3.org/WAI/ARIA/apg/patterns/breadcrumb/
 - APG Disclosure: https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/
 - APG Read Me First: https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/
+- ACT Rules Format 1.1: https://www.w3.org/TR/act-rules-format/
 - USWDS Design Principles: https://designsystem.digital.gov/design-principles/
 - USWDS Breadcrumb: https://designsystem.digital.gov/components/breadcrumb/
 - GOV.UK Layout: https://design-system.service.gov.uk/styles/layout/
