@@ -29,6 +29,8 @@ jobs:
         run: python 02_Runtime/01_Engine/test_semantic_model.py
       - name: Verify controlled kind vocabulary contract
         run: python 02_Runtime/01_Engine/test_kind_registry.py
+      - name: Verify v0 identity and profile schemas
+        run: python 02_Runtime/01_Engine/test_v0_schemas.py
       - name: Report resolved graph health
         run: python 02_Runtime/01_Engine/graph_index.py --root .
       - name: Run deterministic supportability query
