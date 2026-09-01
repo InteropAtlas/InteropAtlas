@@ -97,6 +97,38 @@ authority / confidence / review history
 
 详细方向见 `project-generated-methods-standards.zh-CN.md`。
 
+## Open Collaboration 不是第六条路线
+
+近期实践已经把“多 Agent 怎么一起工作”的问题重新定义为更一般的 **Open Collaboration（开放协作）** 问题。
+
+当前不把它升级为第六条 knowledge-system route。更合适的定位是 **cross-cutting operating layer（横向协作运行层）**：
+
+```text
+Open Collaboration
+   ↓
+谁发现任务？
+谁接手？
+如何避免重复？
+谁执行？
+谁 Review / Oversight？
+谁最终授权？
+```
+
+它主要横向补强：
+
+- **Curation / Contribution Route**：谁贡献、如何接手、成果如何进入 Review；
+- **Governance / Standardization Route**：执行者、Reviewer、Maintainer / Approver 如何分工；
+- Human 与 AI / Agent 尽量共享同一公开协作语义。
+
+当前 V0 优先复用 GitHub 原生机制：Issue、Assignee、Projects / Fields、Sub-issues / Dependencies、Pull Request / Review、CODEOWNERS、Required Review、activity / stale。
+
+Agent-specific Lease / Heartbeat / Scheduler 只属于潜在实现机制，不改变普通贡献者理解项目的方式；只有真实实践证明原生机制不足时才新增 IA 自有能力。
+
+详见：
+- `human-ai-open-collaboration-prior-art.zh-CN.md`；
+- `open-collaboration-route-v0-notes.zh-CN.md`；
+- Issue #19。
+
 ## 五条路线不是五个独立项目
 
 它们共享同一事实基础：
@@ -118,9 +150,12 @@ authority / confidence / review history
 
        Governance / Standardization
        约束上述方法如何长期演进
+
+       Open Collaboration
+       横向约束谁做、如何接手、Review 与授权
 ```
 
-Human Route 与 Machine Route 是主要消费路线；Curation、Trust 和 Governance 是保证系统能够长期生长且不失控的横向路线。
+Human Route 与 Machine Route 是主要消费路线；Curation、Trust 和 Governance 是保证系统能够长期生长且不失控的横向路线；Open Collaboration 是参与者如何共同运行这些路线的协作层。
 
 ## 双向驱动原则
 
@@ -136,16 +171,35 @@ Human Route 与 Machine Route 是主要消费路线；Curation、Trust 和 Gover
 
 真实使用暴露的问题，应允许反向修改 Schema、Relation vocabulary、Renderer、Engine、Curation 规则甚至治理方法。
 
+### Collaboration Practice → Coordination Feedback
+
+如果 GitHub 原生 Issue / Assignee / PR / Review 已经足够，就不创造 Agent-only 任务系统；只有多人 / 多 Agent 实践持续暴露重复执行、失联任务或授权问题，才研究 Lease / Heartbeat / Scheduler 等新机制。
+
 ## 当前阶段的重点
 
-近期不平均推进五条路线。当前最重要的是形成第一套闭环：
+近期不平均推进五条路线。当前主闭环已经从早期的“先把页面和 Graph 做出来”收敛为：
 
 ```text
-Readable + Navigable + Connected
-              ↕
-Validator + Resolver + Graph/Backlink Index
-              ↕
-Minimum Curation + Evidence Rules
+Human:
+IA-HI Specification
+      ↓
+Object Page Shell
+      ↓
+Browser / Accessibility Acceptance
+
+Machine:
+Graph / Resolver clean
+      ↓
+Validator / Schema correctness
+      ↓
+Query correctness
+
+Trust / Curation:
+Minimum Evidence + Prior Art + 收录规则
 ```
 
-Governance / Standardization 当前只建立最小护栏和记录机制，不建设重型标准组织流程。
+Governance / Standardization 已经开始通过 Human Interface 实践运行 **轻量 Specification Loop**：Prior Art → Draft Specification → Requirement → Audit → Implementation → Feedback；仍不建设重型标准组织。
+
+Open Collaboration 当前保持 P1：先使用 GitHub 原生机制运行真实任务，再判断是否需要 IA-specific coordination。
+
+最新阶段判断见 `route-alignment-audit-2026-09-01.zh-CN.md` 与 `roadmap.zh-CN.md`。
