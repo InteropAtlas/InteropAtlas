@@ -1,0 +1,98 @@
+# Apple HIG and Google Material Design 3 as product-level human-interface prior art.
+---
+id: apple_hig_governed_by_apple
+type: relation
+name_zh: Apple HIG 由 Apple 发布维护
+name_en: Apple HIG is published and maintained by Apple
+source: {type: reference_project, id: apple_human_interface_guidelines}
+relation: governed_by
+target: {type: organization, id: apple}
+confidence: 1.0
+sources:
+  - url: https://developer.apple.com/design/human-interface-guidelines/
+    title: Apple Human Interface Guidelines
+    language: en
+    accessed: 2026-09-01
+---
+id: apple_hig_supports_human_system_interaction
+type: relation
+name_zh: Apple HIG 为人机交互设计提供产品级实践指导
+name_en: Apple HIG provides product-level guidance for human-system interaction
+source: {type: reference_project, id: apple_human_interface_guidelines}
+relation: provides
+target: {type: capability, id: human_system_interaction}
+capability_context: [human_system_interaction]
+confidence: 0.95
+---
+id: apple_hig_supports_visual_information_presentation
+type: relation
+name_zh: Apple HIG 为视觉信息呈现提供产品级实践指导
+name_en: Apple HIG provides product-level guidance for visual information presentation
+source: {type: reference_project, id: apple_human_interface_guidelines}
+relation: provides
+target: {type: capability, id: visual_information_presentation}
+capability_context: [visual_information_presentation, information_presentation]
+confidence: 0.95
+sources:
+  - url: https://developer.apple.com/design/human-interface-guidelines/
+    title: Apple Human Interface Guidelines
+    language: en
+    accessed: 2026-09-01
+---
+id: apple_hig_supports_web_accessibility_principles
+type: relation
+name_zh: Apple HIG 提供可访问界面设计实践
+name_en: Apple HIG provides accessible interface design practices
+source: {type: reference_project, id: apple_human_interface_guidelines}
+relation: provides
+target: {type: capability, id: web_accessibility}
+capability_context: [web_accessibility, human_system_interaction]
+conditions_zh: "HIG 的 Accessibility 指南面向 Apple 平台，不等同于 WCAG Web 符合性标准；IA 将其作为产品级可访问设计 Prior Art。"
+conditions_en: "HIG accessibility guidance targets Apple platforms and is not equivalent to WCAG web conformance; IA uses it as product-level accessibility prior art."
+confidence: 0.8
+---
+id: material_design_3_governed_by_google
+type: relation
+name_zh: Material Design 3 由 Google 维护
+name_en: Material Design 3 is maintained by Google
+source: {type: reference_project, id: material_design_3}
+relation: governed_by
+target: {type: organization, id: google}
+confidence: 1.0
+sources:
+  - url: https://m3.material.io/
+    title: Material Design 3
+    language: en
+    accessed: 2026-09-01
+---
+id: material_design_3_supports_human_system_interaction
+type: relation
+name_zh: Material Design 3 为人机交互提供设计系统实践
+name_en: Material Design 3 provides design-system practices for human-system interaction
+source: {type: reference_project, id: material_design_3}
+relation: provides
+target: {type: capability, id: human_system_interaction}
+capability_context: [human_system_interaction]
+confidence: 0.95
+---
+id: material_design_3_supports_visual_information_presentation
+type: relation
+name_zh: Material Design 3 为视觉信息呈现提供系统化实践
+name_en: Material Design 3 provides systematic practices for visual information presentation
+source: {type: reference_project, id: material_design_3}
+relation: provides
+target: {type: capability, id: visual_information_presentation}
+capability_context: [visual_information_presentation, information_presentation]
+confidence: 0.95
+---
+id: material_design_3_recommended_with_design_tokens_format
+type: relation
+name_zh: Material Design 3 的令牌体系可与通用设计令牌交换格式结合参考
+name_en: Material Design 3 token architecture can be considered together with the generic Design Tokens exchange format
+source: {type: reference_project, id: material_design_3}
+relation: recommended_with
+target: {type: standard, id: design_tokens_format_2025.10}
+capability_context: [design_token_exchange, visual_information_presentation]
+conditions_zh: "Material 的设计令牌体系是具体设计系统架构；DTCG Design Tokens Format 是跨工具交换格式。IA 应学习两者的分层边界，而不是把 Material token 命名直接当作通用标准。"
+conditions_en: "Material tokens are a concrete design-system architecture while the DTCG Design Tokens Format is a cross-tool interchange format. IA should learn from both layers without treating Material token names as a universal standard."
+confidence: 0.9
