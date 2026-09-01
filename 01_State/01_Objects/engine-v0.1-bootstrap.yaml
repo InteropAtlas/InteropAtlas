@@ -1,5 +1,6 @@
 id: engine_v0_1_bootstrap
-type: scenario
+type: concept
+kind: scenario
 name_zh: InteropAtlas Engine v0.1 自举建设
 name_en: InteropAtlas Engine v0.1 Bootstrap
 status: active
@@ -10,18 +11,29 @@ summary_en: >-
   Use InteropAtlas itself to plan, build, validate, and publish Engine v0.1,
   while feeding standards, capabilities, relations, gaps, and practice evidence
   discovered during development back into the Atlas.
-requirements:
-  - human_editable_structured_data
-  - schema_validation
-  - resource_identification
-  - hypertext_navigation
-  - document_representation
-  - graph_representation
-  - language_identification
-  - text_encoding
-  - version_control
-  - web_resource_transfer
-  - automated_build_deployment
+requires:
+  - capability: human_editable_structured_data
+    priority: required
+  - capability: schema_validation
+    priority: required
+  - capability: resource_identification
+    priority: required
+  - capability: hypertext_navigation
+    priority: required
+  - capability: document_representation
+    priority: required
+  - capability: graph_representation
+    priority: required
+  - capability: language_identification
+    priority: required
+  - capability: text_encoding
+    priority: required
+  - capability: version_control
+    priority: required
+  - capability: web_resource_transfer
+    priority: required
+  - capability: automated_build_deployment
+    priority: required
 constraints:
   openness: prefer_open
   deployment: static_first
