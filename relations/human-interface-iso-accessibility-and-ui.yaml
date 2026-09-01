@@ -1,0 +1,95 @@
+# ISO 9241 foundations added for Human Interface profiles.
+---
+id: iso_9241_11_describes_human_system_interaction_usability
+type: relation
+name_zh: ISO 9241-11 描述人机交互中的可用性概念基础
+name_en: ISO 9241-11 describes the usability basis for human-system interaction
+source: {type: standard, id: iso_9241_11_2018}
+relation: describes
+target: {type: capability, id: human_system_interaction}
+capability_context: [human_system_interaction]
+confidence: 0.95
+sources:
+  - url: https://www.iso.org/standard/63500.html
+    title: "ISO 9241-11:2018"
+    language: en
+    accessed: 2026-09-01
+---
+id: iso_9241_20_provides_accessibility_approach
+type: relation
+name_zh: ISO 9241-20 提供 ISO 9241 系列中的无障碍方法
+name_en: ISO 9241-20 provides an accessibility approach within the ISO 9241 series
+source: {type: standard, id: iso_9241_20_2021}
+relation: provides
+target: {type: capability, id: web_accessibility}
+capability_context: [web_accessibility, human_system_interaction]
+conditions_zh: "该标准覆盖的是更广的人机交互无障碍方法；这里连接 web_accessibility 是 IA 当前 Capability 模型中的近似投影，不把其范围缩减为仅 Web。"
+conditions_en: "The standard addresses accessibility in human-system interaction more broadly; linking it to web_accessibility is a current IA capability projection and does not reduce its scope to the Web."
+confidence: 0.85
+sources:
+  - url: https://www.iso.org/standard/80709.html
+    title: "ISO 9241-20:2021"
+    language: en
+    accessed: 2026-09-01
+---
+id: iso_9241_20_recommended_with_iso_9241_210
+type: relation
+name_zh: ISO 9241-20 将无障碍活动与 ISO 9241-210 人本设计过程结合
+name_en: ISO 9241-20 relates accessibility activities to ISO 9241-210 human-centred design processes
+source: {type: standard, id: iso_9241_20_2021}
+relation: recommended_with
+target: {type: standard, id: iso_9241_210_2019}
+capability_context: [human_centered_design, web_accessibility]
+confidence: 1.0
+sources:
+  - url: https://www.iso.org/standard/80709.html
+    title: "ISO 9241-20:2021"
+    language: en
+    accessed: 2026-09-01
+---
+id: iso_9241_161_provides_visual_ui_guidance
+type: relation
+name_zh: ISO 9241-161 提供视觉用户界面元素规范与建议
+name_en: ISO 9241-161 provides requirements and recommendations for visual UI elements
+source: {type: standard, id: iso_9241_161_2025}
+relation: provides
+target: {type: capability, id: visual_information_presentation}
+capability_context: [visual_information_presentation, human_system_interaction]
+confidence: 0.95
+sources:
+  - url: https://www.iso.org/standard/85790.html
+    title: "ISO 9241-161:2025"
+    language: en
+    accessed: 2026-09-01
+---
+id: iso_9241_171_provides_software_accessibility
+type: relation
+name_zh: ISO 9241-171 提供软件无障碍要求与指南
+name_en: ISO 9241-171 provides software accessibility requirements and guidance
+source: {type: standard, id: iso_9241_171_2025}
+relation: provides
+target: {type: capability, id: web_accessibility}
+capability_context: [web_accessibility, human_system_interaction]
+conditions_zh: "该标准覆盖软件无障碍而不只 Web；当前关系使用 web_accessibility Capability 作为 IA 现有模型中的部分投影。"
+conditions_en: "The standard covers software accessibility beyond the Web; this relation uses the existing web_accessibility capability as a partial projection in the current IA model."
+confidence: 0.85
+sources:
+  - url: https://www.iso.org/standard/86308.html
+    title: "ISO 9241-171:2025"
+    language: en
+    accessed: 2026-09-01
+---
+id: iso_9241_171_recommended_with_iso_9241_11
+type: relation
+name_zh: ISO 9241-171 以 ISO 9241-11 的可用性概念作为重要补充基础
+name_en: ISO 9241-171 complements the usability basis in ISO 9241-11
+source: {type: standard, id: iso_9241_171_2025}
+relation: recommended_with
+target: {type: standard, id: iso_9241_11_2018}
+capability_context: [human_system_interaction, web_accessibility]
+confidence: 1.0
+sources:
+  - url: https://www.iso.org/standard/86308.html
+    title: "ISO 9241-171:2025"
+    language: en
+    accessed: 2026-09-01
