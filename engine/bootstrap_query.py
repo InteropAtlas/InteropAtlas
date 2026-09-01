@@ -25,6 +25,34 @@ def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
                 yield document
 
 
+def relation_predicate(relation: dict[str, Any]) -> str | None:
+    for key in ("relation", "predicate", "kind"):
+        value = relation.get(key)
+        if isinstance(value, str):
+            return value
+    return None
+
+
+def is_relation_document(document: dict[str, Any]) -> bool:
+    """Identify Relation semantics from document data, never from its folder.
+
+    Canonical data should use ``type: relation``. A small amount of legacy data
+    predates that explicit field, so the Loader keeps compatibility with the
+    historical structural form ``source + relation/predicate/kind + target``.
+    This compatibility rule is content-based and works in any storage location.
+    """
+
+    if document.get("type") == "relation":
+        return True
+    if document.get("type") is not None:
+        return False
+    return (
+        document.get("source") is not None
+        and document.get("target") is not None
+        and relation_predicate(document) is not None
+    )
+
+
 def load_atlas(
     root: Path,
     storage_paths: Iterable[Path | str] | None = None,
@@ -32,8 +60,7 @@ def load_atlas(
     """Load canonical Atlas objects from configured physical storage locations.
 
     Storage locations are repository plumbing only. Object semantics come from
-    the document itself: a Relation is a Relation because ``type: relation``,
-    not because the YAML happened to live in a directory named ``relations``.
+    document content, not the directory name.
     """
 
     layout = repository_layout(root, storage_paths)
@@ -47,7 +74,7 @@ def load_atlas(
             # migration explicitly defines a storage-independent public route.
             document.setdefault("_source", source)
             document.setdefault("_physical_source", source)
-            if document.get("type") == "relation":
+            if is_relation_document(document):
                 relations.append(document)
             else:
                 objects.append(document)
@@ -87,14 +114,6 @@ def ref_id(value: Any) -> str | None:
     if isinstance(value, dict):
         candidate = value.get("id")
         return candidate if isinstance(candidate, str) else None
-    return None
-
-
-def relation_predicate(relation: dict[str, Any]) -> str | None:
-    for key in ("relation", "predicate", "kind"):
-        value = relation.get(key)
-        if isinstance(value, str):
-            return value
     return None
 
 
