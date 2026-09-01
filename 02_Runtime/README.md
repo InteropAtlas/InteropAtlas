@@ -2,8 +2,20 @@
 
 `02_Runtime` 是 InteropAtlas 三个核心一级目录之一。
 
-它承载让项目**运行、处理、验证、转换、生成和导出**的内容，例如 Engine、工具、测试、生成器以及运行产物等。
+它承载让项目**运行、处理、验证、转换、生成和导出**的内容。
 
-本目录当前只建立一级边界，**二级目录尚未决定**。在后续结构讨论完成前，不迁入现有文件。
+当前二级结构：
 
-原则：源码、运行工具和生成产物虽然都属于 Runtime，但后续必须在二级结构中继续区分，避免 Source 与 Generated Artifact 混在一起。
+```text
+02_Runtime/
+├── 01_Engine/
+├── 02_Tools/
+├── 03_Outputs/
+└── README.md
+```
+
+- `01_Engine/`：核心运行代码；
+- `02_Tools/`：Human / Agent / CI 使用的辅助维护与操作工具；
+- `03_Outputs/`：由 Runtime 生成的网站、导出、索引和其他产物。
+
+原则：Source 与 Generated Artifact 必须保持边界。哪些 Outputs 需要提交进 Git、哪些只在 CI / 部署中生成，后续单独确定。
