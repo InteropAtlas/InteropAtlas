@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/relation.v0.schema.json",
+  "title": "InteropAtlas Relation Statement v0",
+  "type": "object",
+  "required": ["id", "type", "source", "relation", "target"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "type": {"const": "relation"},
+    "source": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "relation": {
+      "type": "string",
+      "enum": ["depends_on", "uses", "implements", "extends", "replaces", "supersedes", "alternative_to", "compatible_with", "incompatible_with", "bridges_to", "maps_to", "encapsulates", "transports", "describes", "requires", "recommended_with", "governed_by", "implemented_by", "secures", "discovers", "identifies", "synchronizes", "provides", "inspired_by"]
+    },
+    "target": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "context": {
+      "type": "object",
+      "properties": {
+        "capabilities": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "scenarios": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        },
+        "version_context": {},
+        "valid_from": {"type": "string", "format": "date"},
+        "valid_to": {"type": "string", "format": "date"},
+        "conditions_zh": {"type": "string"},
+        "conditions_en": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["url"],
+        "properties": {
+          "url": {"type": "string", "format": "uri"},
+          "title": {"type": "string"},
+          "language": {"type": "string"},
+          "accessed": {"type": "string", "format": "date"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "assertor": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "name_zh": {"type": "string"},
+    "name_en": {"type": "string"},
+    "description_zh": {"type": "string"},
+    "description_en": {"type": "string"}
+  },
+  "not": {"required": ["confidence"]},
+  "additionalProperties": true
+}

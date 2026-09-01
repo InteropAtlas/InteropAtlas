@@ -17,6 +17,7 @@ from urllib.parse import quote
 import yaml
 
 from kind_registry import has_profile, load_kind_registry
+from relation_model import normalize_relation, ref_id, relation_predicate
 from repository_layout import repository_layout
 
 
@@ -35,14 +36,6 @@ def yaml_documents(path: Path) -> Iterable[dict[str, Any]]:
         for document in yaml.safe_load_all(handle):
             if isinstance(document, dict):
                 yield document
-
-
-def relation_predicate(relation: dict[str, Any]) -> str | None:
-    for key in ("relation", "predicate", "kind"):
-        value = relation.get(key)
-        if isinstance(value, str):
-            return value
-    return None
 
 
 def is_relation_document(document: dict[str, Any]) -> bool:
@@ -116,24 +109,16 @@ def implementations_for_capability(
     ]
 
 
-def ref_id(value: Any) -> str | None:
-    if isinstance(value, str):
-        return value
-    if isinstance(value, dict):
-        candidate = value.get("id")
-        return candidate if isinstance(candidate, str) else None
-    return None
-
-
 def alternative_relations(
     relations: list[dict[str, Any]], capability_id: str
 ) -> list[dict[str, Any]]:
     result = []
     for relation in relations:
-        if relation_predicate(relation) != "alternative_to":
+        descriptor = normalize_relation(relation)
+        if descriptor.predicate != "alternative_to":
             continue
-        context = relation.get("capability_context")
-        if context is not None and ref_id(context) != capability_id and context != capability_id:
+        capabilities = descriptor.context.get("capabilities")
+        if capabilities is not None and capability_id not in capabilities:
             continue
         result.append(relation)
     return result
@@ -162,9 +147,9 @@ def run(
         "open_source_and_self_hostable_ids": [item.get("id") for item in open_self_hostable],
         "alternative_relations": [
             {
-                "source": ref_id(item.get("source")),
-                "relation": relation_predicate(item),
-                "target": ref_id(item.get("target")),
+                "source": normalize_relation(item).source_id,
+                "relation": normalize_relation(item).predicate,
+                "target": normalize_relation(item).target_id,
             }
             for item in alternative_relations(relations, capability_id)
         ],
