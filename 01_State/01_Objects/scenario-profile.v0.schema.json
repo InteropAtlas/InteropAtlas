@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/scenario-profile.v0.schema.json",
+  "title": "InteropAtlas Scenario Strong Profile v0",
+  "allOf": [
+    {"$ref": "identity-object.v0.schema.json"},
+    {
+      "type": "object",
+      "required": ["requires"],
+      "properties": {
+        "type": {"const": "concept"},
+        "kind": {"const": "scenario"},
+        "actors": {"type": "array", "items": {"type": "object"}},
+        "requires": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["capability"],
+            "properties": {
+              "capability": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+              "priority": {"type": "string", "enum": ["required", "preferred", "optional"]},
+              "constraints": {"type": "object"}
+            },
+            "additionalProperties": true
+          }
+        },
+        "environment": {"type": "object"},
+        "success_criteria_zh": {"type": "array", "items": {"type": "string"}},
+        "success_criteria_en": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  ]
+}
