@@ -43,11 +43,12 @@ def load_atlas(
 
     for family, path in layout.iter_yaml_files():
         for document in yaml_documents(path):
-            # Physical source remains available for traceability. Logical source
-            # is stable across a future root -> data/ root migration and is used
-            # by generated views to avoid accidental public URL changes.
-            document.setdefault("_source", layout.physical_source(path))
-            document.setdefault("_logical_source", layout.logical_source(family, path))
+            # `_source` is intentionally the stable logical source consumed by
+            # generated views. `_physical_source` preserves the actual repository
+            # path for migration/debug traceability. Today they are identical;
+            # after a future root -> data/ migration only the physical path changes.
+            document.setdefault("_source", layout.logical_source(family, path))
+            document.setdefault("_physical_source", layout.physical_source(path))
             document.setdefault("_object_family", family)
             if family == RELATION_FAMILY or document.get("type") == "relation":
                 relations.append(document)
