@@ -16,6 +16,7 @@ from urllib.parse import quote
 
 import yaml
 
+from kind_registry import has_profile, load_kind_registry
 from repository_layout import repository_layout
 
 
@@ -106,10 +107,11 @@ def index_objects(objects: list[dict[str, Any]]) -> dict[str, dict[str, Any]]:
 def implementations_for_capability(
     objects: list[dict[str, Any]], capability_id: str
 ) -> list[dict[str, Any]]:
+    registry = load_kind_registry()
     return [
         obj
         for obj in objects
-        if obj.get("type") == "implementation"
+        if has_profile(obj, "implementation", registry)
         and capability_id in (obj.get("capabilities") or [])
     ]
 
