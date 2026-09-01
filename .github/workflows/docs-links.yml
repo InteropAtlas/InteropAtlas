@@ -1,0 +1,55 @@
+name: Validate Markdown Links
+
+on:
+  pull_request:
+    paths:
+      - '**/*.md'
+      - '.github/workflows/docs-links.yml'
+  push:
+    branches: [main]
+    paths:
+      - '**/*.md'
+      - '.github/workflows/docs-links.yml'
+  workflow_dispatch:
+
+jobs:
+  local-links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check repository-local Markdown links
+        shell: python
+        run: |
+          import re
+          import sys
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          root = Path('.').resolve()
+          pattern = re.compile(r'(?<!!)\[[^\]]*\]\(([^)]+)\)')
+          failures = []
+
+          for source in sorted(root.rglob('*.md')):
+              text = source.read_text(encoding='utf-8')
+              for match in pattern.finditer(text):
+                  raw = match.group(1).strip()
+                  if not raw or raw.startswith(('#', 'http://', 'https://', 'mailto:')):
+                      continue
+                  target_text = raw.split('#', 1)[0].split('?', 1)[0].strip()
+                  if not target_text:
+                      continue
+                  target_text = unquote(target_text)
+                  target = (root / target_text.lstrip('/')) if target_text.startswith('/') else (source.parent / target_text)
+                  if not target.exists():
+                      failures.append((source.relative_to(root), raw, target.resolve()))
+
+          if failures:
+              print('Broken repository-local Markdown links:')
+              for source, raw, target in failures:
+                  print(f'- {source}: {raw} -> {target}')
+              sys.exit(1)
+
+          print('All repository-local Markdown links resolve.')
