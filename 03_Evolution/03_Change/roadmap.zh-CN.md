@@ -4,7 +4,7 @@
 >
 > 当前阶段：**Foundation First（基础先行）**
 >
-> 当前主任务：**#61 Schema / Compatibility Design for Knowledge Model v0**
+> 当前主任务：**#14 Human Interface Standards Package / IA Design Profile**
 >
 > 详细阶段定义：[`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md)
 
@@ -20,16 +20,16 @@
    ✅ 基本完成
 
 3. 定义“知识应该怎样被表达”
-   ✅ 语义模型 v0 已批准
+   ✅ Knowledge Model v0 已批准
 
 4. 把知识规则变成机器可执行合同
-   🟡 NOW — #61
+   ✅ I1–I6 + Representative Migration Pilot 已完成
 
 5. 完成面向人的信息组织 / 呈现 / 交互规范
-   ⬜ NEXT — #14 / Gate B
+   🟡 NOW — #14 / Gate B
 
 6. 按规范继续建设 Reference Implementation
-   ⬜ LATER
+   ⬜ NEXT AFTER GATE B
 
 7. 增加 Search / Compare / Maps / Pathfinder / Analysis
    ⬜ LATER
@@ -42,8 +42,8 @@
 
 - 项目 Scope 与边界；
 - 核心语义原则；
-- 高影响模型 / 迁移决策；
-- 当前阶段是否做最重要的事；
+- Human Interface 的关键取舍与用户任务；
+- 高影响迁移 / enforcement / governance 决策；
 - Foundation Gate 是否达到可依赖状态。
 
 具体 Schema 语法、Loader、CI、migration script 等属于 Implementation View，不要求负责人全部掌握。
@@ -52,11 +52,9 @@
 
 # 当前总体判断
 
-Repository Structure 和 Open Collaboration 已经不再是主阻塞。
+Repository Structure、Knowledge Model v0 的机器合同、Open Collaboration v0.1 都已不再是主阻塞。
 
-2026-09-01，#58 / PR #60 已正式批准并合并 **InteropAtlas Minimum Knowledge Representation Contract v0.1**。
-
-采用的 Core Identity Families：
+Knowledge Model 采用的 Core Identity Families：
 
 ```text
 concept
@@ -65,7 +63,7 @@ system
 agent
 ```
 
-同时正式采用：
+并已经把以下原则落实到 Runtime / Schema / Machine Review / 真实 Pilot：
 
 - Identity Target Rule；
 - `type / kind / Strong Profile / roles / authority` 分层；
@@ -77,16 +75,19 @@ agent
 - graph-native, database-agnostic；
 - **Physical Storage ≠ Semantic Classification ≠ Index / View**。
 
-因此知识模型已经从“研究 / Model Decision”进入“机器合同 / 兼容设计”阶段。
+#61 已完成从设计到 I1–I6 的整个 approved implementation sequence。Representative Migration Pilot 证明 Legacy/v0 可以共存，并在真实 Canonical Data 上保持 stable IDs、Graph、Query 和 Human Route。
+
+因此项目现在应停止把“继续钻知识模型实现”当作默认 P0，主线正式转回 Human Interface。
 
 当前 Foundation 状态：
 
 ```text
-F1 Repository Structure       ✅ COMPLETE
-F2 Knowledge + Human Interface 🟡 MAIN P0
-F3 Open Collaboration         ✅ V0.1 PILOT COMPLETE
+F1 Repository Structure        ✅ COMPLETE
+F2-A Knowledge Representation ✅ MACHINE CONTRACT + PILOT COMPLETE
+F2-B Human Interface           🟡 MAIN P0 / GATE B
+F3 Open Collaboration          ✅ V0.1 PILOT COMPLETE
 F4 Curation / Evidence /
-   Machine Correctness        🟡 PARALLEL FOUNDATION LINE
+   Machine Correctness         🟡 PARALLEL FOUNDATION LINE
 ```
 
 ---
@@ -130,7 +131,7 @@ F1 不再因知识模型变化重新设计语义文件夹。
 
 ## F2-A — Knowledge Representation
 
-### 已完成
+### ✅ 已完成的主闭环
 
 ```text
 Prior Art Check
@@ -146,60 +147,71 @@ Model Decision / Stress Test
 ✅
 
 Minimum Knowledge Representation Contract v0.1
-✅ APPROVED / ADOPTED — #58 / PR #60
+✅ APPROVED / ADOPTED
+
+#61 Schema / Compatibility Design
+✅
+
+I1 Semantic Normalization
+✅
+
+I2 Kind Registry + Validator skeleton
+✅
+
+I3 v0 Identity / Strong Profile Schemas
+✅
+
+I4 Relation ID-only + Context compatibility
+✅
+
+I5 Deterministic Machine Review
+✅
+
+I6 Representative Migration Pilot
+✅
 ```
 
-### 当前阶段
+### Representative Migration Pilot 结果
 
-**#61 — Schema / Compatibility Design for Knowledge Model v0**
+Pilot 已在真实 Canonical Data 中迁移小型代表切片：
 
-目的不是继续讨论 ontology，而是把批准的语义规则翻译成可执行机器合同。
+- Capability → `concept / capability`；
+- Scenario → `concept / scenario`；
+- Implementation → `system / platform_service`；
+- Organization → `agent / organization`；
+- 一个 Relation → ID-only endpoint。
 
-当前顺序：
+验证结果：
 
-```text
-#61 Phase A
-Schema / Compatibility Design
-        ↓
-Design Review
-        ↓
-Representative Migration Pilot
-        ↓
-验证 stable IDs / Graph / Query / Renderer / Evidence
-        ↓
-Canonical Data 分批迁移
-        ↓
-Validator / Schema Enforcement
-        ↓
-#15 Knowledge Model implementation complete
-```
+- stable IDs 保持；
+- 121 Objects / 107 Relations / 170 Graph edges 保持；
+- Graph reference issues = 0；
+- Machine Review deterministic errors = 0；
+- Legacy/v0 Human Route 双读工作；
+- stable public object route 保持；
+- capability supportability query 保持正确结果；
+- Pilot 还发现并修复了一个 capability context 泄漏造成的 Query 假阳性。
 
-### #61 必须解决
+### 仍存在、但不再阻塞 #14 的 migration debt
 
-- `type = concept | artifact | system | agent` 的机器表达；
-- `kind` 受控 vocabulary；
-- Capability / Scenario 等 Strong Profiles；
-- legacy `standard / implementation / organization / capability / scenario` compatibility；
-- `reference_project` 逐对象 Identity Target audit，不允许批量替换；
-- Relation → relationship Statement 的兼容演进；
-- Evidence / Assessment / missing-value 机器表达；
-- Engine dual-read；
-- stable ID / public route 保持。
+以下问题继续作为明确债务，而不是继续把 F2-A 无限延长：
 
-### 当前明确不做
+- Legacy `maturity` 等字段迁移到 Assessment；
+- bare `confidence` 的 assessor / basis；
+- `reference_project` 逐对象 Identity Target audit；
+- Standard `api / interface / device_class` Identity Target audit；
+- `organization_kind: open_source_project` Identity Target audit；
+- Legacy Relation stale type hints cleanup；
+- full Canonical migration；
+- repository-wide Schema enforcement。
 
-- 不全量迁移 01_State；
-- 不发明 IA Query Language；
-- 不选择数据库；
-- 不强制 RDF / OWL；
-- 不创建语义物理目录；
-- 不顺带启用全量 Schema enforcement。
+其中 **full migration / enforcement 是新的独立决策门**，不会因 Pilot PASS 自动启用。
 
 ---
 
 ## F2-B — Human Interface Standards Package
 
-**Gate B 仍 NOT PASS。**
+**Gate B 仍 NOT PASS。现在是主 P0。**
 
 #14 已有：
 
@@ -208,7 +220,7 @@ Validator / Schema Enforcement
 - 综合 `IA-HI v0.1`；
 - 第一轮 Requirement-based audit。
 
-但 Gate B 仍要求五个可独立审计的 Draft Profile：
+Gate B 仍要求五个可独立审计的 Draft Profile：
 
 1. Information Architecture；
 2. Information Presentation；
@@ -225,25 +237,25 @@ Validator / Schema Enforcement
 - 可执行 conformance 方法；
 - 与其他 Profile 的依赖 / 冲突处理。
 
-### 与知识模型的关系
+### 当前 Human Interface 主问题
 
-#15 的语义模型已经批准，因此 Human Interface 不再等待“我们到底怎样理解 Method / Framework / Design System”等基本身份问题。
-
-但在大量收录这些 Prior Art 前，应先让 #61 + Migration Pilot 给机器一个可用合同。
-
-因此当前顺序仍是：
+现在不应先问“网站再加什么功能”，而应先回答：
 
 ```text
-#61 Schema / Compatibility Design
-        ↓
-Representative Migration Pilot
-        ↓
-#14 五个 Human Interface Draft Profiles
-        ↓
-Gate B Audit
-        ↓
-Reference Implementation 恢复为主要 P0
+人来到 InteropAtlas 想完成什么任务？
+↓
+信息应该怎样组织？
+↓
+一个对象页面先让人看到什么？
+↓
+关系、证据、比较、地图应该什么时候出现？
+↓
+交互怎样保持可预测、可恢复、可访问？
+↓
+怎样证明实现符合规范？
 ```
+
+现有网站继续作为 Test Bed / Conformance Evidence Source，但不能反向决定规范。
 
 ---
 
@@ -279,21 +291,26 @@ Open Collaboration 继续作为 cross-cutting operating layer，不作为第六�
 已经具备：
 
 - deterministic Loader；
+- semantic normalization；
+- controlled Kind Registry；
+- v0 Identity / Strong Profile Schemas；
+- Relation ID-only compatibility；
 - Graph / Backlink Index；
 - stable public object route；
 - canonical storage contract；
+- deterministic Machine Review；
+- representative real-data migration tests；
 - reference resolution health baseline。
 
 当前并行重点：
 
-1. **#61 Schema / Compatibility** — 当前与 F2 共用的最重要机器基础；
-2. **#8 Validator / Schema correctness** — 待 v0 compatibility contract 明确后继续；
-3. **#9 Curation / Contribution** — 最小收录、去重、版本更新、Review；
-4. **#10 Evidence / Provenance / Trust** — Fact / Statement → Evidence → Source；
-5. **#7 Query correctness** — scope 与 regression；
-6. Legacy Relation cleanup — 与模型迁移分开处理。
+1. **#8 Validator / Schema correctness** — 扩展 Machine Review，但不提前开启 repository-wide enforcement；
+2. **#9 Curation / Contribution** — 最小收录、去重、版本更新、Review；
+3. **#10 Evidence / Provenance / Trust** — Fact / Statement → Evidence → Source / Assessment；
+4. **#7 Query correctness** — scope、context 与 regression；
+5. migration debt queue — Assessment、Identity Target audit、Legacy Relation cleanup。
 
-知识模型 v0 已经为 #9/#10 提供了重要上游语义：Statement、Evidence、Assessment、Agent、Missing Semantics 等不再需要重新发明。
+这些工作可以作为并行基础线推进，但不得抢占 #14 / Gate B 主闭环。
 
 ---
 
@@ -302,18 +319,18 @@ Open Collaboration 继续作为 cross-cutting operating layer，不作为第六�
 ## 主线
 
 ```text
-#61 Schema / Compatibility Design
+#14 Human Interface Standards Package
         ← NOW
         ↓
-Representative Migration Pilot
+五个 Draft Profiles
         ↓
-#15 Machine Contract / Migration readiness
-        ↓
-#14 Human Interface 五个 Draft Profiles
+Requirement IDs / upstream basis / conformance methods
         ↓
 Gate B Audit
         ↓
-Reference Implementation 恢复为 P0
+Reference Implementation 按规范恢复为 P0
+        ↓
+Search / Compare / Maps / Pathfinder / Analysis
 ```
 
 ## 并行线
@@ -323,9 +340,18 @@ Reference Implementation 恢复为 P0
 #9 Curation
 #10 Evidence / Provenance
 #7 Query correctness
+migration debt audit
 ```
 
-这些工作可以并行研究，但不得抢占 #61 / Gate B 主闭环。
+## 单独决策门
+
+```text
+Full Canonical Migration
+Repository-wide Schema Enforcement
+Ruleset / Governance Automation
+```
+
+这些不因 I6 PASS 自动执行。
 
 ---
 
@@ -370,7 +396,7 @@ Reference Implementation 恢复为 P0
 - [ ] Accessibility / Conformance Draft；
 - [ ] 关键 Requirement IDs + upstream basis；
 - [x] Knowledge Representation Model Decision available；
-- [ ] v0 machine compatibility / representative intake path usable；
+- [x] v0 machine compatibility / representative intake path usable；
 - [ ] Gate B conformance audit。
 
 ## Gate C — Open Collaboration
