@@ -8,6 +8,7 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 - [`knowledge-object-classification-specification-v0.1.zh-CN.md`](knowledge-object-classification-specification-v0.1.zh-CN.md) — **知识对象分类规范草案：区分 Normative Artifact、Mature Precedent、Method、Implementation 等，并规定证据与权威性边界。**
 - [`roadmap.zh-CN.md`](roadmap.zh-CN.md) — 当前路线图、优先级与近期执行顺序。
 - [`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md) — **当前 Foundation First 阶段：先建立仓库结构、Human Interface 标准包、Human–AI 协作 Profile，再恢复网站实现。**
+- [`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md) — **Work Package A 完成审计：Repository Gate 与 Open Collaboration Gate 已达到 Draft Profile 门槛。**
 - [`route-alignment-audit-2026-09-01.zh-CN.md`](route-alignment-audit-2026-09-01.zh-CN.md) — 2026-09-01 多会话 / 仓库路线对齐审计。
 - [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — 五路线协同模型：Human、Machine、Curation、Trust、Governance；Open Collaboration 当前作为横向协作层。
 - [`project-development-principles.zh-CN.md`](project-development-principles.zh-CN.md) — 当前项目建设原则与最小治理规则。
@@ -15,12 +16,23 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 
 ## Foundation work
 
-- **#21 Repository Structure & Artifact Taxonomy** — 仓库结构、文档 / 规范产物类型、生命周期、Community Health 与迁移决策。
-  - [`repository-structure-prior-art-and-options-v0.1.zh-CN.md`](repository-structure-prior-art-and-options-v0.1.zh-CN.md) — GitHub / REUSE / W3C / MDN / CNCF / SPDX / Diátaxis 等成熟先例与三种结构候选比较。
-  - [`repository-current-to-target-mapping-v0.1.zh-CN.md`](repository-current-to-target-mapping-v0.1.zh-CN.md) — 当前真实仓库逐项映射到 Artifact Taxonomy 与候选 Target Zone，不执行物理迁移。
+### Repository Foundation
+
+- [`repository-structure-profile-v0.1.zh-CN.md`](repository-structure-profile-v0.1.zh-CN.md) — **Repository Structure Profile v0.1：Layered Monorepo、Artifact Taxonomy、Target Zones、迁移合同与 15 条 IA-RS Requirements。**
+- [`repository-structure-prior-art-and-options-v0.1.zh-CN.md`](repository-structure-prior-art-and-options-v0.1.zh-CN.md) — GitHub / REUSE / W3C / MDN / CNCF / SPDX / Diátaxis 等成熟先例与三种结构候选比较。
+- [`repository-current-to-target-mapping-v0.1.zh-CN.md`](repository-current-to-target-mapping-v0.1.zh-CN.md) — 当前真实仓库逐项映射到 Artifact Taxonomy 与候选 Target Zone，不执行物理迁移。
+
+### Open Collaboration Foundation
+
+- [`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md) — **Open Collaboration / Human–AI Collaboration Profile v0.1：角色、Agent-ready Work Item、任务图、生命周期、租约式认领、Handoff、Review / Authorization、GitHub-native mapping 与 IA-OC Requirements。**
+- [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md) — Human-Machine Teaming、NIST、Linux Foundation / AGENTS.md、GitHub 等开放协作 Prior Art。
+- [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — 早期 Open Collaboration V0 工作笔记；现由正式 Draft Profile 取代其规范角色。
+
+### Remaining Foundation
+
 - **#14 Human Interface Standards Package** — Information Architecture / Presentation / Interaction / Visual / Accessibility-Conformance。
 - **#15 Non-normative Knowledge Object Model** — Mature Precedent / Method / Guideline / Heuristic / Framework / Design System 等非规范性知识对象。
-- **#19 Open Collaboration / Human–AI Collaboration Profile** — roles、task lifecycle、租赁式认领语义、Review / Handoff / Authorization、GitHub / AGENTS.md 映射。
+- **#7/#8/#9/#10** — Query / Validator / Curation / Evidence-Trust 基础。
 
 ## Core routes
 
@@ -38,11 +50,6 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 
 - [`machine-readable-maintainable-route.zh-CN.md`](machine-readable-maintainable-route.zh-CN.md) — 机器可用 / 可维护路线：Loadable → Interoperable。
 - [`practice-feedback-loop.zh-CN.md`](practice-feedback-loop.zh-CN.md) — Atlas ↔ Engine 实践驱动反馈机制。
-
-### Open Collaboration / Human + Agent
-
-- [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md) — Human-Machine Teaming、NIST、Linux Foundation / AGENTS.md、GitHub 等开放协作 Prior Art。
-- [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — Open Collaboration V0 工作笔记；下一步由 #19 推进为可审计 Profile。
 
 ## Architecture and modeling
 
