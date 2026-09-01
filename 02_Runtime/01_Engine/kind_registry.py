@@ -119,6 +119,30 @@ def profiles_for_v0_identity(
     return tuple(registry["terms"][kind].get("profiles", ()))
 
 
+def profiles_for_record(
+    record: Mapping[str, Any], registry: Mapping[str, Any] | None = None
+) -> tuple[str, ...]:
+    """Return effective Strong Profiles without duplicating v0 Registry rules.
+
+    Legacy records keep their I1 compatibility profiles. v0 Identity Objects use
+    the controlled Kind Registry as the sole source of profile membership.
+    """
+
+    descriptor = normalize_record(record)
+    if descriptor.migration_status == "v0":
+        active_registry = registry if registry is not None else load_kind_registry()
+        return profiles_for_v0_identity(record, active_registry)
+    return descriptor.profiles
+
+
+def has_profile(
+    record: Mapping[str, Any],
+    profile: str,
+    registry: Mapping[str, Any] | None = None,
+) -> bool:
+    return profile in profiles_for_record(record, registry)
+
+
 def _validate_registry_shape(data: Mapping[str, Any]) -> None:
     terms = data.get("terms")
     if not isinstance(terms, dict) or not terms:

@@ -18,6 +18,8 @@ from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
 
+from semantic_model import is_capability
+
 
 @dataclass(frozen=True)
 class Edge:
@@ -69,6 +71,11 @@ class GraphIndex:
         self._forward[edge.source_id].append(edge)
         self._backlinks[edge.target_id].append(edge)
 
+    def _matches_expected_semantics(self, target: dict[str, Any], expected_type: str) -> bool:
+        if expected_type == "capability":
+            return is_capability(target)
+        return target.get("type") == expected_type
+
     def _resolve_field_reference(
         self,
         source: dict[str, Any],
@@ -83,13 +90,13 @@ class GraphIndex:
                 ReferenceIssue("unknown_reference", source_id, target_id, f"{field} references unknown object")
             )
             return
-        if expected_type and target.get("type") != expected_type:
+        if expected_type and not self._matches_expected_semantics(target, expected_type):
             self.issues.append(
                 ReferenceIssue(
                     "type_mismatch",
                     source_id,
                     target_id,
-                    f"{field} expects {expected_type}, got {target.get('type')}",
+                    f"{field} expects semantic {expected_type}, got {target.get('type')}",
                 )
             )
             return
