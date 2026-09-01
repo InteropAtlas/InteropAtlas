@@ -6,7 +6,7 @@
 >
 > Parent Model Issue：#15
 >
-> 目的：拿真实对象试分类，观察现有模型在哪里自然、在哪里扭曲；**本文件不修改 Schema，不决定最终目录结构。**
+> 目的：拿真实对象试分类，观察现有模型在哪里自然、在哪里扭曲；**本文件不修改 Schema，也不改变已经确定的物理仓库结构。**
 
 ## 1. 这一批在解决什么问题
 
@@ -463,16 +463,17 @@ case_study
 ### 问题
 
 - taxonomy 会快速膨胀；
-- Diátaxis 同时是 Method + Framework，很快出现“到底放哪个”；
+- Diátaxis 同时是 Method + Framework，很快出现“到底归哪个主要身份”；
 - Design System 多角色会推动对象复制；
-- 每出现新知识身份都可能要求新 schema / directory；
-- 目录结构容易被 ontology 绑死。
+- 每出现新知识身份都可能要求新的 Schema 分支、验证规则和迁移处理。
 
 ### 本批判断
 
 **不推荐直接采用。**
 
 至少已经与 IA-KO-009、014 产生明显张力。
+
+物理目录不参与这个候选模型比较；无论最终有多少语义类型，Canonical Objects 仍共享既定物理边界。
 
 ---
 
@@ -490,7 +491,7 @@ roles: [...]
 
 - 顶层 type 少；
 - 容易表达多角色；
-- 物理目录不需要跟随每个 kind 增长。
+- 不要求为每个 `kind` 建立新的物理存储区域。
 
 ### 问题
 
@@ -534,7 +535,7 @@ best_practice → Assessment / source claim，不能裸 boolean
 - 能清楚区分 Card Sorting 与 GOV.UK Design System；
 - 不为 Method / Framework / Heuristic 各建一个顶层 type；
 - 多角色可以通过 kind / roles / relations 表达；
-- 更符合“Schema 服务概念、目录不等于 ontology”。
+- 更符合“Schema 服务概念、物理存储不承担 ontology”的原则。
 
 ### 风险 / 未解决
 
@@ -592,32 +593,59 @@ GOV.UK Design System 同时包含 guidance、patterns、coded components，并�
 
 ---
 
-# 10. 对仓库目录迁移的直接影响
+# 10. 对仓库结构的边界影响
 
-这一批研究支持此前“不要现在就冻结 `reference-projects/` 新目录名”的决定。
+本批研究现在**不再承担物理目录设计职责**。
 
-尤其现在还不能简单决定：
+Repository Structure 已经通过 #31 及后续迁移明确：
 
-```text
-reference-projects/ → methods/
-```
+> **Physical Storage ≠ Semantic Classification ≠ Index / View。**
 
-或：
+Canonical Object 的当前物理边界已经确定为：
 
 ```text
-reference-projects/ → precedents/
+01_State/01_Objects/
 ```
 
-因为：
-- Method 与 Concrete Reference System 显然不是同一类；
-- `precedent` 可能主要是 Atlas role / Assessment；
-- Design System 的最终 primary modeling 尚未验证完成。
+因此即使 #15 最终区分出 Method、Framework、Heuristic Set、Design System、Reference Artifact 等不同语义身份，也**不会**据此创建：
 
-因此目录迁移继续保持：
+```text
+methods/
+precedents/
+design-systems/
+heuristics/
+```
 
-> **等 #15 Model Decision 后再冻结 non-normative object-family naming。**
+之类的语义物理目录。
 
-这不影响已经完成的 Data Root Contract：物理目录与 object identity 已经被明确要求分离。
+本 Fit Test 可以影响的范围是：
+
+```text
+type
+kind
+roles
+relations
+attribution
+evidence
+assessment
+Schema / validation rules（若最终 Model Decision 需要）
+```
+
+它不影响：
+
+```text
+01_State/01_Objects/
+```
+
+这一已经确定的 Canonical Object 物理存储边界。
+
+所以 #15 的最终 Model Decision 回答的是：
+
+> **这些对象在知识模型中是什么、怎样被引用和评价？**
+
+而不是：
+
+> **这些对象应该住在哪个文件夹？**
 
 ---
 
@@ -641,7 +669,7 @@ reference-projects/ → precedents/
 本批没有足够证据确定最终 Schema，但已经可以排除两个危险方向：
 
 1. **不能继续把所有非标准知识塞入 `reference_project: other`；**
-2. **不能因为发现 Method / Heuristic / Design System 就各自创建一个顶层 type / directory。**
+2. **不能因为发现 Method / Heuristic / Design System 就各自创建一个顶层 type；物理目录与这些语义分类无关。**
 
 当前最值得继续验证的是：
 
