@@ -17,62 +17,88 @@
 
 原则：Engine 只做确定性读取、查询与计算，不把 Atlas 变成推理模型。
 
-## Repository Data Root Contract
+## Canonical Storage Contract
 
-`engine/repository_layout.py` 是当前 Engine 对 Canonical Data 物理位置的集中合同。
+`engine/repository_layout.py` 只负责一个问题：
 
-当前状态：
+> **Canonical YAML 现在物理存在哪里？**
 
-```text
-repository root
-├── standards/
-├── capabilities/
-├── scenarios/
-├── organizations/
-├── implementations/
-├── reference-projects/
-├── gaps/
-├── relations/
-└── maps/
-```
+它不负责回答：
 
-因此当前 `DEFAULT_DATA_ROOT = .`。
+> **这个对象在知识模型里属于什么类别？**
 
-未来若批准迁移，可测试：
+当前仓库历史上把 Canonical YAML 分散在：
 
 ```text
-repository root
-└── data/
-    ├── standards/
-    ├── capabilities/
-    └── ...
+standards/
+capabilities/
+scenarios/
+organizations/
+implementations/
+reference-projects/
+gaps/
+relations/
+maps/
 ```
 
-而不需要让每个 Engine 模块重新维护一份 object-family 路径列表。
+这些名称在 Engine 中被记录为 `CURRENT_CANONICAL_STORAGE_PATHS`，意思只是“当前需要扫描的物理位置”。
 
-### 两种 source path
+**它们不是未来必须保留的 object-family 目录，也不是 ontology。**
 
-Loader 为对象增加内部运行时元数据：
+未来完全可以出现这样的物理结构：
 
-- `_source`：逻辑 source path，例如 `standards/yaml_1.2.2.yaml`；生成视图使用这一稳定路径；
-- `_physical_source`：真实 repository-relative 位置；当前与 `_source` 相同，未来迁移后可能是 `data/standards/yaml_1.2.2.yaml`；
-- `_object_family`：逻辑 object family。
+```text
+<某个尚未决定的 canonical storage zone>/
+  a.yaml
+  b.yaml
+  nested/c.yaml
+```
 
-这样做是为了满足 Repository Structure Profile 的迁移不变量：**物理位置变化不应自动改变公开生成 URL。**
+Standard、Method、Design System、Capability、Relation 等语义身份由 YAML 内容、Schema、引用和 Graph 决定，而不是由文件夹决定。
 
-### 可显式测试候选 Data Root
+### Loader 如何判断对象身份
 
-Bootstrap / Graph diagnostics 支持 repository-relative `--data-root`：
+例如 Relation 的判断是：
+
+```yaml
+type: relation
+```
+
+而不是：
+
+```text
+文件位于 relations/ 目录
+```
+
+同一个物理目录里可以混合不同 `type` 的对象，回归测试会验证这一点。
+
+### Source path
+
+Loader 当前保留：
+
+- `_source`：为了保持现有 Renderer / public generated path 行为，当前仍等于 repository-relative physical path；
+- `_physical_source`：实际 repository-relative physical path，用于追踪和迁移诊断。
+
+#31 修正删除了 `_object_family`，因为从目录名推断 semantic family 会重新把 ontology 绑回文件系统。
+
+真正执行未来目录迁移之前，必须另外确定 public view / URL 如何与物理 storage path 解耦。**本次修正没有假装这个问题已经解决。**
+
+### 可显式测试其他物理存储位置
+
+CLI 使用可重复的 `--storage-path`：
 
 ```bash
-python engine/graph_index.py --data-root .
-python engine/bootstrap_query.py --data-root . --capability automated_build_deployment
+python engine/graph_index.py --storage-path standards --storage-path relations
+python engine/bootstrap_query.py --storage-path standards --storage-path implementations --capability automated_build_deployment
 ```
 
-未来 Migration Dry Run 可以在候选 `data/` 布局准备好后使用 `--data-root data` 验证，而不先修改默认合同。
+如果不传，使用当前 9 个 legacy storage locations。
 
-### 当前边界
+将来讨论出新的物理布局后，可以把候选位置传给同一 Loader 做 Migration Dry Run，不需要让目录名承担知识分类语义。
 
-本合同只集中 **Engine runtime 的 Canonical Data path knowledge**。
+## 当前边界
 
-GitHub Actions 的 `paths:` trigger 仍需要声明物理 repository paths；当前两个 workflows 仍列出 root object-family paths。这是已知 residual coupling，真正目录迁移前必须单独更新和验证，不能因为 Engine 已解耦就认为 CI 已迁移。
+- 本合同没有决定未来根目录一级目录叫什么；
+- 没有决定 Canonical Data 内部应该平铺、分片还是采用其他物理布局；
+- GitHub Actions `paths:` 仍然监听当前真实路径，正式迁移时必须一起调整；
+- #15 Non-normative Knowledge Object Model 负责对象 `type / kind / roles / relations`，**不负责决定文件夹名字，也不再阻塞物理目录结构讨论。**
