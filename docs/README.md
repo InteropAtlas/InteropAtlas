@@ -9,6 +9,8 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 - [`roadmap.zh-CN.md`](roadmap.zh-CN.md) — 当前路线图、优先级与近期执行顺序。
 - [`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md) — **当前 Foundation First 阶段：先建立仓库结构、Human Interface 标准包、Human–AI 协作 Profile，再恢复网站实现。**
 - [`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md) — **Work Package A 完成审计：Repository Gate 与 Open Collaboration Gate 已达到 Draft Profile 门槛。**
+- [`work-package-a-verification-2026-09-01.zh-CN.md`](work-package-a-verification-2026-09-01.zh-CN.md) — **重新核验 Work Package A：确认 A 在原始定义的 Draft/Profile 层已经完成，并记录进入 B 前的集成债务。**
+- [`work-package-b-pilot-audit-2026-09-01.zh-CN.md`](work-package-b-pilot-audit-2026-09-01.zh-CN.md) — **Work Package B Pilot Audit：公开任务协议、Lease、Handoff、PR Review 已实际试运行，并记录 Identity / Issue Fields / Ruleset friction。**
 - [`work-package-a-reference-intake-audit-2026-09-01.zh-CN.md`](work-package-a-reference-intake-audit-2026-09-01.zh-CN.md) — **Work Package A 参考依据入库审计：把实际使用的标准与成熟先例从研究文档推进到 Canonical Atlas，并记录暂缓建模项。**
 - [`route-alignment-audit-2026-09-01.zh-CN.md`](route-alignment-audit-2026-09-01.zh-CN.md) — 2026-09-01 多会话 / 仓库路线对齐审计。
 - [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — 五路线协同模型：Human、Machine、Curation、Trust、Governance；Open Collaboration 当前作为横向协作层。
@@ -27,6 +29,7 @@ This directory contains InteropAtlas architecture, methodology, governance, rese
 
 - [`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md) — **Open Collaboration / Human–AI Collaboration Profile v0.1：角色、Agent-ready Work Item、任务图、生命周期、租约式认领、Handoff、Review / Authorization、GitHub-native mapping 与 IA-OC Requirements。**
 - [`task-reference-seeding-profile-v0.1.zh-CN.md`](task-reference-seeding-profile-v0.1.zh-CN.md) — **Reference Seeding 增补：任务发布时预装 Read First / Seed References，并要求执行者继续做 Freshness / Completeness Check。**
+- [`collaboration-task-system-v0.1.zh-CN.md`](collaboration-task-system-v0.1.zh-CN.md) — **Work Package B Operational Profile：把协作规范映射为 Status、Lease、Claim、Handoff、Review Classes 与 PR boundary。**
 - [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md) — Human-Machine Teaming、NIST、Linux Foundation / AGENTS.md、GitHub 等开放协作 Prior Art。
 - [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — 早期 Open Collaboration V0 工作笔记；现由正式 Draft Profile 取代其规范角色。
 
