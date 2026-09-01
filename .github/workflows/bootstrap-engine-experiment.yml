@@ -35,6 +35,23 @@ jobs:
         run: python 02_Runtime/01_Engine/test_v0_schemas.py
       - name: Verify relation compatibility contract
         run: python 02_Runtime/01_Engine/test_relation_model.py
+      - name: Run deterministic Machine Review
+        run: |
+          mkdir -p build
+          set +e
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review.json --markdown build/machine-review.md
+          status=$?
+          cat build/machine-review.md >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - name: Upload Machine Review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: machine-review-report
+          path: |
+            build/machine-review.json
+            build/machine-review.md
+          if-no-files-found: warn
       - name: Report resolved graph health
         run: python 02_Runtime/01_Engine/graph_index.py --root .
       - name: Run deterministic supportability query
