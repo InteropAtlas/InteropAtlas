@@ -4,17 +4,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'standards/**'
-      - 'capabilities/**'
-      - 'implementations/**'
-      - 'organizations/**'
-      - 'scenarios/**'
-      - 'reference-projects/**'
-      - 'gaps/**'
-      - 'relations/**'
-      - 'maps/**'
-      - 'schemas/**'
-      - 'engine/**'
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
       - '.github/workflows/pages.yml'
   workflow_dispatch:
 
@@ -36,10 +27,10 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install site dependencies
-        run: pip install -r engine/requirements.txt
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
       - name: Build human-readable site
         run: |
-          python engine/render_site.py --output build/site
+          python 02_Runtime/01_Engine/render_site.py --root . --output build/site
           find build/site -maxdepth 2 -type f | sort
       - uses: actions/configure-pages@v5
         with:
