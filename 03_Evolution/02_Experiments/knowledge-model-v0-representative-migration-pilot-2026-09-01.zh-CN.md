@@ -69,12 +69,52 @@ target: semantic_versioning_2_0_0
 
 因此本 Pilot 不迁移该 Relation，只把它作为后续 Statement / Assessment 工作的真实样本。
 
-## 4. 必须通过的 Gate
+## 4. Pilot 实际发现的问题
+
+真实数据迁移比 synthetic test 多暴露了两类问题。
+
+### 4.1 YAML 日期类型被 Schema 正确拦截
+
+`apple` 的旧数据写成：
+
+```yaml
+accessed: 2026-09-01
+```
+
+PyYAML 会把这一值解析成日期对象，而 v0 Base Object Schema 要求来源日期是字符串。第一次 Machine Review 因此产生 2 条 `IA-MR-003` 并 FAIL。
+
+修正为：
+
+```yaml
+accessed: "2026-09-01"
+```
+
+这说明 Machine Gate 已经能在“旧数据进入 v0 合同”的真实迁移时发现过去没有暴露的序列化差异。
+
+### 4.2 Capability Query 暴露了上下文泄漏
+
+Pilot 首次通过后，`automated_build_deployment` 的能力查询虽然正确找到 Forgejo Actions 与 GitHub Actions，却同时返回了两个与该能力无关、且没有 capability context 的 `alternative_to` Relation。
+
+根因是旧查询逻辑把“没有 capability context”解释成“适用于任意 capability”。这会产生假阳性。
+
+修正规则：
+
+> capability-specific query 只接收**显式声明匹配 capability context** 的 Relation；没有上下文的全局 Relation 不能被自动推断为适用于任意能力。
+
+因此该查询现在应只返回：
+
+```text
+forgejo_actions --alternative_to--> github_actions
+```
+
+这不是为了让迁移测试“看起来通过”而修改结果，而是 Pilot 发现并修复了一个原有 Query 语义错误。
+
+## 5. 必须通过的 Gate
 
 1. Stable ID 不变；
 2. v0 Identity records 通过 Registry + Schema；
 3. Graph reference issues = 0；
-4. `automated_build_deployment` supportability query 仍能找到 Forgejo Actions 与 GitHub Actions；
+4. `automated_build_deployment` supportability query 只返回该能力明确记录的 Implementations 与 capability-scoped alternatives；
 5. Forgejo Actions 仍被识别为 open-source + self-hostable；
 6. Human Route 能继续生成 Capability / Implementation / Standard 页面；
 7. 原有 public object route 不因 `type` 迁移而变化；
@@ -82,7 +122,7 @@ target: semantic_versioning_2_0_0
 9. Legacy compatibility warnings / semantic-review records 可以存在，但不能伪装成 deterministic error；
 10. 不修改 Ruleset，不启用全库 Schema enforcement，不进行全量 Canonical migration。
 
-## 5. 解释边界
+## 6. 解释边界
 
 本 Pilot 验证的是：
 
@@ -96,7 +136,7 @@ target: semantic_versioning_2_0_0
 - 可以立刻开启 repository-wide enforcement；
 - 可以跳过 Human Interface 阶段。
 
-## 6. Pilot 后的决策规则
+## 7. Pilot 后的决策规则
 
 如果所有 Gate PASS：
 
