@@ -18,7 +18,7 @@ InteropAtlas 不应被理解成“一个数据仓库 + 一个网站”。随着�
 
 看得到 → 看得懂 → 找得到 → 看懂关系 → 形成地图 → 可探索 → 理解方案空间 → 辅助行动与决策。
 
-详细路线见 `human-readable-route.zh-CN.md`。
+详细路线见 [`03_Evolution/03_Change/human-readable-route.zh-CN.md`](../03_Evolution/03_Change/human-readable-route.zh-CN.md)。
 
 ### 2. Machine Route（机器可用 / 可维护路线）
 
@@ -28,7 +28,7 @@ InteropAtlas 不应被理解成“一个数据仓库 + 一个网站”。随着�
 
 `Loadable → Validatable → Resolvable → Graphable → Queryable → Analyzable → Maintainable → Observable → Evolvable → Interoperable`
 
-详细路线见 `machine-readable-maintainable-route.zh-CN.md`。
+详细路线见 [`03_Evolution/03_Change/machine-readable-maintainable-route.zh-CN.md`](../03_Evolution/03_Change/machine-readable-maintainable-route.zh-CN.md)。
 
 ### 3. Curation / Contribution Route（收录与贡献路线）
 
@@ -95,7 +95,7 @@ authority / confidence / review history
 - ID、版本、发布日期、URL、仓库名应视为不同问题，不急于混成一个编号；
 - “一个标准一个仓库”只是候选方案，不是当前规则。
 
-详细方向见 `project-generated-methods-standards.zh-CN.md`。
+详细方向见 [`03_Evolution/03_Change/project-generated-methods-standards.zh-CN.md`](../03_Evolution/03_Change/project-generated-methods-standards.zh-CN.md)。
 
 ## Open Collaboration 不是第六条路线
 
@@ -124,9 +124,11 @@ Open Collaboration
 
 Agent-specific Lease / Heartbeat / Scheduler 只属于潜在实现机制，不改变普通贡献者理解项目的方式；只有真实实践证明原生机制不足时才新增 IA 自有能力。
 
-详见：
-- `human-ai-open-collaboration-prior-art.zh-CN.md`；
-- `open-collaboration-route-v0-notes.zh-CN.md`；
+相关材料：
+
+- 当前 Profile：[`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md)；
+- Prior Art：[`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](../03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md)；
+- 早期工作笔记：[`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](../03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)；
 - Issue #19。
 
 ## 五条路线不是五个独立项目
@@ -202,4 +204,7 @@ Governance / Standardization 已经开始通过 Human Interface 实践运行 **�
 
 Open Collaboration 当前保持 P1：先使用 GitHub 原生机制运行真实任务，再判断是否需要 IA-specific coordination。
 
-最新阶段判断见 `route-alignment-audit-2026-09-01.zh-CN.md` 与 `roadmap.zh-CN.md`。
+最新阶段判断见：
+
+- [`03_Evolution/01_Research/route-alignment-audit-2026-09-01.zh-CN.md`](../03_Evolution/01_Research/route-alignment-audit-2026-09-01.zh-CN.md)
+- [`03_Evolution/03_Change/roadmap.zh-CN.md`](../03_Evolution/03_Change/roadmap.zh-CN.md)
