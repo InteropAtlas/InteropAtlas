@@ -32,7 +32,7 @@ html[data-theme='light']{color-scheme:light;--bg:#fff;--fg:#202124;--muted:#5760
 html[data-theme='dark']{color-scheme:dark;--bg:#0d1117;--fg:#e6edf3;--muted:#8b949e;--border:#30363d;--code:#161b22;--link:#58a6ff;--card:#161b22;--accent-soft:#0d1f33}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;max-width:980px;margin:0 auto;padding:32px 20px;line-height:1.65;color:var(--fg);background:var(--bg)}
 a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}
-nav{display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.site-nav{display:flex;align-items:center;gap:8px;margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
 .theme-toggle{margin-left:auto;border:1px solid var(--border);background:var(--card);color:var(--fg);border-radius:999px;padding:6px 11px;cursor:pointer}
 .breadcrumb{font-size:.92em;color:var(--muted);margin:0 0 24px}.breadcrumb span{margin:0 6px}.breadcrumb a{color:var(--muted)}
 code{background:var(--code);padding:.15em .35em;border-radius:4px}
@@ -175,10 +175,10 @@ MAP_SCRIPT = """
 
 
 def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None = None) -> str:
-    trail = f'<div class="breadcrumb">{breadcrumb}</div>' if breadcrumb else ""
+    trail = f'<nav class="breadcrumb" aria-label="面包屑">{breadcrumb}</nav>' if breadcrumb else ""
     return f"""<!doctype html>
 <html lang=\"zh-CN\"><head><meta charset=\"utf-8\"><meta name=\"viewport\" content=\"width=device-width,initial-scale=1\"><title>{html.escape(title)} · InteropAtlas</title><style>{STYLE}</style>{THEME_SCRIPT}{MAP_SCRIPT}</head>
-<body><nav><a href=\"{prefix}index.html\"><strong>InteropAtlas</strong></a><span>· 人类可读实验站</span><button id=\"theme-toggle\" class=\"theme-toggle\" type=\"button\" onclick=\"toggleTheme()\">主题</button></nav>{trail}{body}</body></html>"""
+<body><nav class=\"site-nav\" aria-label=\"主导航\"><a href=\"{prefix}index.html\"><strong>InteropAtlas</strong></a><span>· 人类可读实验站</span><button id=\"theme-toggle\" class=\"theme-toggle\" type=\"button\" onclick=\"toggleTheme()\">主题</button></nav>{trail}<main>{body}</main></body></html>"""
 
 
 def markdown_to_html(text: str) -> str:
@@ -198,17 +198,18 @@ def category_anchor(category: str) -> str:
 
 def breadcrumb_for(obj: dict, prefix: str) -> str:
     name = html.escape(display_name(obj, str(obj.get("id"))))
+    current = f'<span aria-current="page">{name}</span>'
     object_type = obj.get("type")
     home = f'<a href="{prefix}index.html">首页</a>'
-    separator = '<span>›</span>'
+    separator = '<span aria-hidden="true">›</span>'
     if object_type == "capability":
         category = str(obj.get("category") or "uncategorized")
         label = "未分类" if category == "uncategorized" else human_value(category)
         category_link = f'<a href="{prefix}index.html#{category_anchor(category)}">{html.escape(label)}</a>'
-        return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{name}'
+        return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{current}'
     labels = {"standard": "标准与规范", "implementation": "实现"}
     label = labels.get(str(object_type), str(object_type or "对象"))
-    return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{name}'
+    return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{current}'
 
 
 def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
