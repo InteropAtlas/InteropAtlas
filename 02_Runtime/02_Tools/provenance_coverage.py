@@ -18,7 +18,7 @@ from typing import Any
 
 import yaml
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 ENGINE = ROOT / "02_Runtime" / "01_Engine"
 if str(ENGINE) not in sys.path:
     sys.path.insert(0, str(ENGINE))
