@@ -2,6 +2,7 @@
 
 Upstream: #122.
 
+- [x] Knowledge Workspace Design Principles are promoted to v1.0 as a major design baseline.
 - [x] IA remains interoperability knowledge infrastructure, not a generic note app.
 - [x] Canonical Knowledge is separated from generated representations.
 - [x] Perspective / Selection is conceptually before Presentation.
