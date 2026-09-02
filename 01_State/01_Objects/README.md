@@ -1,5 +1,20 @@
 # 01_Objects
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-09-01T14:44:37+08:00
+Document Updated At: 2026-09-01T15:23:52+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 这里存放 InteropAtlas 当前正式收录的**对象**。
 
 对象类型不通过文件夹区分。Standard、Organization、Capability、Implementation、Method、Design System、Gap 等可以平级存放；对象是什么，由文件自身的数据字段决定。

@@ -1,5 +1,20 @@
 # 02_Runtime
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-09-01T14:31:59+08:00
+Document Updated At: 2026-09-01T14:47:53+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 `02_Runtime` 是 InteropAtlas 三个核心一级目录之一。
 
 它承载让项目**运行、处理、验证、转换、生成和导出**的内容。

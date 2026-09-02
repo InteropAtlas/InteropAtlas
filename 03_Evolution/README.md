@@ -1,5 +1,20 @@
 # 03_Evolution
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-09-01T14:31:59+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 `03_Evolution` 是 InteropAtlas 三个核心一级目录之一。
 
 它承载项目**如何观察自己、学习、验证、决策并改变自己**的内容。
