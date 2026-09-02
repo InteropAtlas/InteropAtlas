@@ -10,7 +10,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import expect, sync_playwright
 
 
-BASE_URL = os.environ.get("IA_E2E_BASE_URL", "http://127.0.0.1:8000/").rstrip("/") + "/"
+BASE_URL = os.environ.get('IA_E2E_BASE_URL', 'http://127.0.0.1:8000/').rstrip('/') + '/'
 
 
 def page_url(object_id: str) -> str:
@@ -47,6 +47,34 @@ class RepresentativeResourcePageTests(unittest.TestCase):
                     self.assertEqual(page.locator("main").count(), 1)
                     self.assertEqual(page.locator('nav[aria-label="面包屑"] [aria-current="page"]').count(), 1)
                     expect(page.locator("main")).to_contain_text("基本信息")
+        finally:
+            context.close()
+
+    def test_resource_task_navigation_only_exposes_real_page_targets_without_javascript(self) -> None:
+        context = self.browser.new_context(java_script_enabled=False)
+        page = context.new_page()
+        try:
+            page.goto(page_url("forgejo_actions"))
+            nav = page.locator('nav[aria-label="本页任务"]')
+            expect(nav).to_be_visible()
+            expected = {
+                "理解基本信息": "#basic-info",
+                "探索关系": "#local-map",
+                "查看来源": "#evidence",
+            }
+            for label, href in expected.items():
+                link = nav.get_by_role("link", name=label, exact=True)
+                expect(link).to_have_attribute("href", href)
+                self.assertEqual(page.locator(href).count(), 1)
+            nav.get_by_role("link", name="查看来源", exact=True).click()
+            self.assertTrue(page.url.endswith("#evidence"))
+            expect(page.locator("#evidence")).to_be_visible()
+
+            page.goto(page_url("automated_build_deployment"))
+            nav = page.locator('nav[aria-label="本页任务"]')
+            expect(nav.get_by_role("link", name="理解基本信息", exact=True)).to_be_visible()
+            expect(nav.get_by_role("link", name="探索关系", exact=True)).to_be_visible()
+            self.assertEqual(nav.get_by_role("link", name="查看来源", exact=True).count(), 0)
         finally:
             context.close()
 
@@ -132,5 +160,5 @@ class RepresentativeResourcePageTests(unittest.TestCase):
             context.close()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main(verbosity=2)
