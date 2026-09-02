@@ -23,17 +23,16 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Inventory and reconstruct Canonical Relation metadata in isolated workspace
+      - name: Inventory and reconstruct Canonical Relation records in isolated workspace
         run: |
           rm -rf build/backfill-bundle
           mkdir -p build/backfill-bundle
           BACKFILLED_AT="$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')"
-          python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
+          python 02_Runtime/02_Tools/relation_provenance_backfill.py \
             --root . \
             --baseline 38b0c80813db5e59757cbec0ac79cc3fd079161f \
             --cutoff 2026-09-02T10:28:00+08:00 \
             --backfilled-at "$BACKFILLED_AT" \
-            --scope relations \
             --apply \
             --bundle-dir build/backfill-bundle \
             --report build/lifecycle-backfill-report.json
@@ -48,7 +47,7 @@ jobs:
           print('relations_summary=', report['relations_summary'])
           print('missing_evidence=', len(missing))
           for item in missing:
-              print(item['path'])
+              print(item['record_id'], item['path'])
           PY
       - name: Validate candidate repository
         run: |
