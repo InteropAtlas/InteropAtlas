@@ -103,13 +103,15 @@ class HumanRouteBrowserTests(unittest.TestCase):
             expected_center = urlparse(urljoin(origin, target_href)).path.rsplit("/", 1)[-1].removesuffix(".html")
 
             button.click()
-            expect(page.locator(".local-map")).to_have_attribute("data-center-id", expected_center)
+            next_map = page.locator(".local-map")
+            expect(next_map).to_have_attribute("data-center-id", expected_center)
+            expect(next_map.locator(".map-status")).to_have_text("地图中心已更新。")
             self.assertEqual(page.url, origin)
             self.assertNotEqual(before_center, expected_center)
         finally:
             context.close()
 
-    def test_local_map_loading_state_is_observable(self) -> None:
+    def test_local_map_loading_state_is_perceivable(self) -> None:
         context, page = self.new_page()
         try:
             page.goto(page_url("forgejo_actions"))
@@ -119,32 +121,44 @@ class HumanRouteBrowserTests(unittest.TestCase):
                   recenterLocalMap(document.querySelector('.map-recenter'));
                 }"""
             )
-            expect(page.locator(".local-map")).to_have_class("local-map map-loading")
+            section = page.locator(".local-map")
+            expect(section).to_have_class("local-map map-loading")
             expect(page.locator(".map-recenter").first).to_have_text("载入中…")
+            status = section.locator(".map-status")
+            expect(status).to_have_attribute("role", "status")
+            expect(status).to_have_attribute("aria-live", "polite")
+            expect(status).to_have_text("正在加载局部地图…")
         finally:
             context.close()
 
-    def test_current_recenter_failure_preserves_resource_link(self) -> None:
-        """Lock the current failure behavior as evidence, while flagging its UI debt.
-
-        The current implementation exposes failure through a disabled button title.
-        That keeps a resource link available, but #80 still requires a more directly
-        perceivable failure message before Gate B can pass.
-        """
-
+    def test_recenter_failure_is_perceivable_and_retryable(self) -> None:
         context, page = self.new_page()
         try:
             page.goto(page_url("forgejo_actions"))
+            button = page.locator(".map-recenter").first
+            target_href = button.get_attribute("data-map-href")
+            self.assertTrue(target_href)
+            expected_center = urlparse(urljoin(page.url, target_href)).path.rsplit("/", 1)[-1].removesuffix(".html")
+
             page.evaluate(
                 """() => {
+                  window.__iaRealFetch = window.fetch.bind(window);
                   window.fetch = () => Promise.reject(new Error('forced E2E failure'));
                   recenterLocalMap(document.querySelector('.map-recenter'));
                 }"""
             )
-            button = page.locator(".map-recenter").first
-            expect(button).to_be_disabled()
+
+            expect(button).to_be_enabled()
             expect(button).to_have_attribute("title", "局部地图载入失败；对象详情仍可通过标题链接打开")
+            status = page.locator(".local-map .map-status")
+            expect(status).to_have_class("map-status is-error")
+            expect(status).to_have_text("局部地图载入失败；可以重试，或通过对象标题链接打开详情。")
             expect(page.locator(".local-map .map-node-name a").first).to_be_visible()
+
+            # Restore the network and prove the same action remains retryable.
+            page.evaluate("() => { window.fetch = window.__iaRealFetch; }")
+            button.click()
+            expect(page.locator(".local-map")).to_have_attribute("data-center-id", expected_center)
         finally:
             context.close()
 
@@ -211,6 +225,7 @@ class HumanRouteBrowserTests(unittest.TestCase):
             page.evaluate("() => { window.fetch = () => new Promise(() => {}); }")
             button.press("Enter")
             expect(button).to_have_text("载入中…")
+            expect(page.locator(".map-status")).to_have_text("正在加载局部地图…")
         finally:
             context.close()
 
@@ -239,6 +254,30 @@ class HumanRouteBrowserTests(unittest.TestCase):
                         """() => ({scrollWidth:document.documentElement.scrollWidth, clientWidth:document.documentElement.clientWidth})"""
                     )
                     self.assertLessEqual(metrics["scrollWidth"], metrics["clientWidth"] + 1, metrics)
+        finally:
+            context.close()
+
+    def test_recenter_respects_reduced_motion_preference(self) -> None:
+        context = self.browser.new_context(reduced_motion="reduce")
+        context.add_init_script(
+            """() => {
+              const original = Element.prototype.scrollIntoView;
+              Element.prototype.scrollIntoView = function(options) {
+                window.__iaScrollBehavior = options && options.behavior;
+                window.__iaScrollBlock = options && options.block;
+                if (original) original.call(this, {behavior:'auto', block:(options && options.block) || 'start'});
+              };
+            }"""
+        )
+        page = context.new_page()
+        try:
+            page.goto(page_url("forgejo_actions"))
+            page.locator(".map-recenter").first.click()
+            expect(page.locator(".map-status")).to_have_text("地图中心已更新。")
+            behavior = page.evaluate("() => window.__iaScrollBehavior")
+            block = page.evaluate("() => window.__iaScrollBlock")
+            self.assertEqual(behavior, "auto")
+            self.assertEqual(block, "start")
         finally:
             context.close()
 
