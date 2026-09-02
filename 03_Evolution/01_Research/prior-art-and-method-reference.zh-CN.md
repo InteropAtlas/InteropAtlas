@@ -1,5 +1,20 @@
 # InteropAtlas 参考项目与方法索引
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Living Reference（持续维护参考）。目的不是把 InteropAtlas 绑定到这些项目，而是在设计每一层能力时优先参考成熟实践，减少重复造轮子。
+Document Created At: 2026-08-31T19:35:31+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Living Reference（持续维护参考）。目的不是把 InteropAtlas 绑定到这些项目，而是在设计每一层能力时优先参考成熟实践，减少重复造轮子。
 
 ## 使用原则

@@ -1,5 +1,20 @@
 # InteropAtlas Human Interface Reference Map
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Living Reference（持续维护参考）
+Document Created At: 2026-09-01T07:55:53+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Living Reference（持续维护参考）
 >
 > 目的：把 Human Interface 的具体问题映射到“规范性标准 → 实现模式 / 方法 → 参考实现 → IA 采用方式”，避免把国际标准、W3C 规范、HCI 方法、Design System 和产品惯例混为一谈。

@@ -1,5 +1,20 @@
 # 为 InteropAtlas 贡献
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-08-30T17:51:19+08:00
+Document Updated At: 2026-09-02T08:31:22+08:00
+Metadata Backfilled At: 2026-09-02T10:49:00+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 InteropAtlas 当前处于 Pre-Alpha。项目采用 **Human-first, agent-compatible** 的公开协作方式：Human 与 AI / Agent 使用同一套 GitHub Work Item、Lease、Handoff 和 Review 协议，不建立只给 Agent 使用的隐藏任务系统。
 
 核心协作规范：

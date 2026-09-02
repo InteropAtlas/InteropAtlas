@@ -1,5 +1,20 @@
 # 图形化关系呈现方向
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Future Direction（后续方向），当前不冻结技术方案。
+Document Created At: 2026-08-30T19:10:31+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Future Direction（后续方向），当前不冻结技术方案。
 
 InteropAtlas 的核心数据天然具有图结构：标准、能力、组织、实现、场景、参考项目和未来的评估结果都是节点，`uses`（使用）、`provides`（提供）、`depends_on`（依赖）、`alternative_to`（替代）、`bridges_to`（桥接）等是边。

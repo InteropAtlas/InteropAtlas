@@ -1,5 +1,20 @@
 # Provenance / Traceability Prior Art 研究 — 2026-09-02
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Research Record（研究记录）
+Document Created At: 2026-09-02T09:10:00+08:00
+Document Updated At: 2026-09-02T09:25:24+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: mixed
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Research Record（研究记录）
 >
 > 创建时间：2026-09-02T09:10:00+08:00

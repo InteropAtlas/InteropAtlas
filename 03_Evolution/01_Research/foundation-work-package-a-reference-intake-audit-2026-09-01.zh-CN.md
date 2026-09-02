@@ -1,5 +1,20 @@
 # Foundation Work Package A — Reference Intake Audit — 2026-09-01
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Point-in-time Intake Audit（阶段性收录审计）
+Document Created At: 2026-09-01T12:02:25+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Point-in-time Intake Audit（阶段性收录审计）
 >
 > 目的：检查 Repository Structure Profile v0.1 与 Open Collaboration Profile v0.1 实际使用过的 Existing Standards & Prior Art 是否已经进入 InteropAtlas Canonical Atlas；能正确建模的立即纳入，不能正确建模的明确进入模型待办，而不是继续只留在研究文档中。

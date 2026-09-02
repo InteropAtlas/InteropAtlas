@@ -1,5 +1,20 @@
 # InteropAtlas Minimal Compare Contract v0.1
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Draft / Gate B Contract
+Document Created At: 2026-09-02T10:46:00+08:00
+Document Updated At: 2026-09-02T10:46:00+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: native
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Pending
+  GitHub Actor: ff6962757
+-->
+
 > Document Status: Draft / Gate B Contract
 >
 > Document Created At: 2026-09-02T10:46:00+08:00

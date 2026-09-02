@@ -1,5 +1,20 @@
 # Engine v0.1 第一轮覆盖基线
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: 初步基线，不作为最终统计
+Document Created At: 2026-08-31T13:34:21+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 状态：初步基线，不作为最终统计
 
 ## 统计目的

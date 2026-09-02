@@ -1,0 +1,62 @@
+name: Provenance Coverage Report
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
+
+      - name: Generate report-only coverage / staleness output
+        run: |
+          mkdir -p build
+          python 02_Runtime/02_Tools/provenance_coverage.py \
+            --root . \
+            --json build/provenance-coverage.json \
+            --markdown build/provenance-coverage.md
+
+      - name: Validate canonical compatibility and graph health
+        run: |
+          python 02_Runtime/01_Engine/test_repository_layout.py
+          python 02_Runtime/01_Engine/test_v0_schemas.py
+          python 02_Runtime/01_Engine/test_relation_model.py
+          python 02_Runtime/01_Engine/machine_review.py \
+            --root . \
+            --json build/machine-review-final.json \
+            --markdown build/machine-review-final.md
+          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-final.json
+          python - <<'PY'
+          import json
+          machine = json.load(open('build/machine-review-final.json'))
+          graph = json.load(open('build/graph-index-final.json'))
+          assert machine['summary']['errors'] == 0, machine
+          assert graph.get('reference_issues') == [], graph.get('reference_issues')
+          print('machine=', machine['summary'])
+          print('graph_reference_issues=', graph.get('reference_issues'))
+          PY
+
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: provenance-coverage-report
+          path: |
+            build/provenance-coverage.json
+            build/provenance-coverage.md
+            build/machine-review-final.json
+            build/machine-review-final.md
+            build/graph-index-final.json

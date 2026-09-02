@@ -1,5 +1,20 @@
 # InteropAtlas
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-08-30T17:49:18+08:00
+Document Updated At: 2026-09-01T16:44:53+08:00
+Metadata Backfilled At: 2026-09-02T10:49:00+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 **开放、机器可读、可持续分析的互操作知识地图。**
 
 InteropAtlas 是一个开放基础设施项目，用于描述彼此独立设计的系统如何交换信息、能力、控制、身份、资源与语义，并连接现实世界中与互操作有关的**既有标准、成熟先例、方法与指南、实现、组织、能力、场景、关系、证据与开放缺口**。

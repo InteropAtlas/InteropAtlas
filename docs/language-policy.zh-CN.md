@@ -1,5 +1,20 @@
 # InteropAtlas 语言策略
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active_document
+Document Created At: 2026-08-30T17:54:51+08:00
+Document Updated At: 2026-08-30T17:54:51+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 InteropAtlas 采用：**中文优先、英文机器标识、中英双语知识字段。**
 
 这不是“中文项目”与“英文项目”的二选一，而是把不同语言放在最适合它们的层级。

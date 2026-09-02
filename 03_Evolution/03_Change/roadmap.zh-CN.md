@@ -1,5 +1,20 @@
 # InteropAtlas 当前路线图
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Living Roadmap（持续更新路线图）
+Document Created At: 2026-08-31T01:10:03+08:00
+Document Updated At: 2026-09-01T23:37:20+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Living Roadmap（持续更新路线图）
 >
 > 当前阶段：**Foundation First（基础先行）**

@@ -1,5 +1,20 @@
 # InteropAtlas 五路线协同模型（暂定参考）
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Provisional Reference（暂定参考）。用于组织当前建设工作，不代表冻结架构。
+Document Created At: 2026-08-31T19:34:49+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Provisional Reference（暂定参考）。用于组织当前建设工作，不代表冻结架构。
 
 InteropAtlas 不应被理解成“一个数据仓库 + 一个网站”。随着实践展开，当前更合适的整体模型是：两条核心使用路线，加三条横向支撑路线。

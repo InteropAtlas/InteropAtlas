@@ -1,5 +1,20 @@
 # 02_Relations
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-09-01T14:44:37+08:00
+Document Updated At: 2026-09-01T15:23:52+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 这里存放 InteropAtlas 当前正式记录的**关系**。
 
 关系连接对象并描述它们之间的语义联系。关系本身也可以携带属性，因此不单独建立 `Properties/` 目录。

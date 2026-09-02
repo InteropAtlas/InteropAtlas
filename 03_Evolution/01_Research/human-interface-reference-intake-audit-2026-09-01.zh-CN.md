@@ -1,5 +1,20 @@
 # Human Interface — Reference Intake Audit — 2026-09-01
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Point-in-time Intake Audit
+Document Created At: 2026-09-01T12:33:56+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Point-in-time Intake Audit
 >
 > 目的：把 #14 Human Interface Standards Package 实际依赖的上游标准与成熟先例，从研究文档中的参考列表推进到 Canonical Atlas；能准确建模的直接入库，不能准确建模的明确记录为 Intake / Model Gap。

@@ -1,5 +1,20 @@
 ## Linked Work Item
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active_template
+Document Created At: 2026-09-01T12:43:49+08:00
+Document Updated At: 2026-09-02T10:43:23+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: reconstructed_from_git
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 Closes / relates to: #
 
 ## Execution Mode

@@ -1,5 +1,20 @@
 # InteropAtlas 自身产生的方法、规范、标准与 Skills（暂定方向）
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Future Direction / Provisional Note（后续方向 / 暂定记录）。记录项目建设过程中产生可复用方法论与规范的治理需求，不冻结编号、仓库结构或标准化流程。
+Document Created At: 2026-08-31T19:15:04+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Future Direction / Provisional Note（后续方向 / 暂定记录）。记录项目建设过程中产生可复用方法论与规范的治理需求，不冻结编号、仓库结构或标准化流程。
 
 ## 背景

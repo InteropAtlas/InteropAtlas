@@ -1,5 +1,20 @@
 # InteropAtlas 路线对齐审计 — 2026-09-01
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Point-in-time Alignment Audit（阶段性路线对齐审计）
+Document Created At: 2026-09-01T10:02:04+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Point-in-time Alignment Audit（阶段性路线对齐审计）
 >
 > 目的：把近期多会话讨论、仓库实际演化、当前 Issues 与既有 Roadmap 对齐，判断主方向是否需要转向，并给出新的近期执行顺序。

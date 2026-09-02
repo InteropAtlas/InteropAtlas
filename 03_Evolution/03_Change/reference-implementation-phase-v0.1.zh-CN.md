@@ -1,5 +1,20 @@
 # InteropAtlas Reference Implementation Phase v0.1
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Working Phase Plan
+Document Created At: 2026-09-02T11:07:48+08:00
+Document Updated At: 2026-09-02T11:07:48+08:00
+Metadata Backfilled At: 2026-09-02T11:35:52+08:00
+Metadata Provenance: reconstructed_from_git
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Pending
+  GitHub Actor: ff6962757
+-->
+
 > Status: Working Phase Plan
 >
 > Starts after: Gate B Final Conformance Audit 2026-09-02

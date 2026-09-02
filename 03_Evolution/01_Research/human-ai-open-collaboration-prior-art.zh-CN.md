@@ -1,5 +1,20 @@
 # InteropAtlas 人机开放协作 Prior Art 调研
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Research Note。用于为 InteropAtlas 后续 Open Collaboration Profile 提供依据，不代表已经冻结协作规范。
+Document Created At: 2026-09-01T09:41:27+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Research Note。用于为 InteropAtlas 后续 Open Collaboration Profile 提供依据，不代表已经冻结协作规范。
 
 ## 当前问题

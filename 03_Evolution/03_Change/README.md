@@ -1,5 +1,20 @@
 # 03_Change
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: change_record
+Document Created At: 2026-09-01T15:04:02+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 这里存放已经进入“准备改变项目本身”阶段的内容，以及为了理解项目演化而需要保留的迁移 / 过渡历史。
 
 它回答：**我们准备具体改变什么，以及怎样安全地改变。**
