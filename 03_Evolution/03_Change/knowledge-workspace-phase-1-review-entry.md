@@ -1,8 +1,8 @@
 # Knowledge Workspace Phase 1 Review Entry
 
 Review in this order:
-1. `03_Evolution/02_Design/knowledge-workspace-design-principles-v0.1.zh-CN.md`
-2. `03_Evolution/03_Change/knowledge-workspace-phase-plan-v0.1.zh-CN.md`
+1. `03_Evolution/02_Design/knowledge-workspace-design-principles-v1.0.zh-CN.md`
+2. `03_Evolution/03_Change/knowledge-workspace-phase-plan-v1.0.zh-CN.md`
 3. `03_Evolution/03_Change/knowledge-workspace-phase-1-review-checklist-v0.1.md`
 
 Supporting records: scope note, validation, handoff.
