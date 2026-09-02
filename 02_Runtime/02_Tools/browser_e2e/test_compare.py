@@ -52,6 +52,19 @@ class DedicatedCompareBrowserTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_compare_page_global_home_navigation_resolves_to_site_root(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.goto(COMPARE_URL)
+            home = page.get_by_role('link', name='InteropAtlas').first
+            expect(home).to_be_visible()
+            home.click()
+            self.assertEqual(urlparse(page.url).path, urlparse(urljoin(BASE_URL, 'index.html')).path)
+            expect(page.locator('main h1')).to_have_text('InteropAtlas')
+        finally:
+            context.close()
+
     def test_compare_exposes_missing_and_semantic_boundaries(self) -> None:
         context = self.browser.new_context()
         page = context.new_page()
