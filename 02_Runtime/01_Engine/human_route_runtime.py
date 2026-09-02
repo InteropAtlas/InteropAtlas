@@ -14,6 +14,8 @@ from collections.abc import Callable
 INTERACTION_STYLE = """
 .map-status{min-height:1.4em;margin:10px 0 14px;color:var(--muted);font-size:.9em}
 .map-status.is-error{color:var(--fg);font-weight:600}
+.resource-task-nav{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 24px;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.resource-task-nav .resource-task-label{color:var(--muted);margin-right:4px}.resource-task-nav a{border:1px solid var(--border);border-radius:999px;padding:4px 9px;background:var(--card)}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--link);outline-offset:2px}
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto!important}
@@ -202,6 +204,33 @@ def add_resource_fragment_targets(content: str) -> str:
         if marker in content:
             content = content.replace(marker, replacement, 1)
     return content
+
+
+def inject_resource_task_navigation(content: str) -> str:
+    """Expose only page-local tasks whose fragment targets actually exist."""
+
+    entries: list[tuple[str, str]] = []
+    if 'id="basic-info"' in content:
+        entries.append(("#basic-info", "理解基本信息"))
+    if 'id="local-map"' in content:
+        entries.append(("#local-map", "探索关系"))
+    if 'id="evidence"' in content:
+        entries.append(("#evidence", "查看来源"))
+    if not entries:
+        return content
+    links = "".join(
+        f'<a href="{html.escape(href, quote=True)}">{html.escape(label)}</a>'
+        for href, label in entries
+    )
+    navigation = (
+        '<nav class="resource-task-nav" aria-label="本页任务">'
+        '<span class="resource-task-label">本页可以：</span>'
+        f'{links}</nav>'
+    )
+    marker = '<h2 id="basic-info">'
+    if marker in content:
+        return content.replace(marker, navigation + marker, 1)
+    return navigation + content
 
 
 def build_local_map(
