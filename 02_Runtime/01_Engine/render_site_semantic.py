@@ -124,7 +124,7 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
         '<article class="card"><h3><a href="search.html">查找对象</a></h3><p>按名称、关键词或稳定 ID 查找当前已发布对象。</p></article>',
         '<article class="card"><h3><a href="objects/automated_build_deployment.html">理解一个对象</a></h3><p>从代表性 Resource Page 查看对象身份、基本信息和相关对象。</p></article>',
         '<article class="card"><h3><a href="compare/automated_build_deployment--forgejo_actions--github_actions.html">比较候选方案</a></h3><p>查看当前已实现的 Forgejo Actions 与 GitHub Actions 代表性比较；尚不是全站任意对象比较。</p></article>',
-        '<article class="card"><h3><a href="objects/forgejo_actions.html">验证来源</a></h3><p>查看代表性页面中 Canonical 来源与 InteropAtlas 说明 / 评估的明确分工。</p></article>',
+        '<article class="card"><h3><a href="objects/forgejo_actions.html#evidence">验证来源</a></h3><p>查看代表性页面中 Canonical 来源与 InteropAtlas 说明 / 评估的明确分工。</p></article>',
         '<article class="card"><h3><a href="objects/forgejo_actions.html#local-map">探索关系</a></h3><p>从代表性对象的 Local Map 探索局部关系；尚不是大型 Graph Explorer。</p></article>',
         '</div></section>',
         "<h2>按能力浏览</h2>",
@@ -177,6 +177,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target = output / html_path
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
+        content = human_route.add_resource_fragment_targets(content)
         content = human_compare.inject_compare_entry(content, obj)
         local_map = human_route.build_local_map(legacy_site, obj, index, graph, semantic_site_view_type)
         content = legacy_site.inject_local_map(content, local_map)
