@@ -103,6 +103,34 @@ class RepresentativeResourcePageTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_implementation_separates_ia_notes_from_canonical_sources(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.goto(page_url("forgejo_actions"))
+            main = page.locator("main")
+            expect(main).to_contain_text("InteropAtlas 说明与评估")
+            expect(main).to_contain_text("不等同于第三方权威来源")
+            expect(main).to_contain_text("来源与依据")
+            expect(main).to_contain_text("Renderer 不维护第二份来源事实")
+            expect(main.locator('a[href="https://forgejo.org/docs/latest/user/actions/github-actions/"]')).to_be_visible()
+            headings = main.locator("h2").all_inner_texts()
+            self.assertLess(headings.index("InteropAtlas 说明与评估"), headings.index("来源与依据"))
+        finally:
+            context.close()
+
+    def test_standard_has_source_section_without_invented_assessment(self) -> None:
+        context = self.browser.new_context(java_script_enabled=False)
+        page = context.new_page()
+        try:
+            page.goto(page_url("yaml_1.2.2"))
+            main = page.locator("main")
+            expect(main).to_contain_text("来源与依据")
+            expect(main.locator('a[href="https://yaml.org/spec/1.2.2/"]')).to_be_visible()
+            self.assertEqual(main.get_by_role("heading", name="InteropAtlas 说明与评估", exact=True).count(), 0)
+        finally:
+            context.close()
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
