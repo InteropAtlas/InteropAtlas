@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+"""Keep lifecycle/provenance timestamps as YAML strings during metadata backfill."""
 from __future__ import annotations
 
 import argparse
