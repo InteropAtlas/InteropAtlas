@@ -181,6 +181,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         content = human_compare.inject_compare_entry(content, obj)
         local_map = human_route.build_local_map(legacy_site, obj, index, graph, semantic_site_view_type)
         content = legacy_site.inject_local_map(content, local_map)
+        content = human_route.inject_resource_task_navigation(content)
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(
             page_shell(display_name(obj, str(obj.get("id"))), content, prefix, breadcrumb_for(obj, prefix)),
