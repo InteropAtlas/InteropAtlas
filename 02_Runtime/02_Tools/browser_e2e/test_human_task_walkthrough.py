@@ -44,8 +44,8 @@ class RepresentativeHumanTaskWalkthrough(unittest.TestCase):
 
             heading = page.get_by_role("heading", name="哪些实现提供这个能力？")
             expect(heading).to_be_visible()
-            forgejo = page.get_by_role("link", name="Forgejo Actions").first
-            github = page.get_by_role("link", name="GitHub Actions").first
+            forgejo = page.get_by_role("link", name="Forgejo Actions", exact=True).first
+            github = page.get_by_role("link", name="GitHub Actions", exact=True).first
             expect(forgejo).to_be_visible()
             expect(github).to_be_visible()
 
@@ -62,7 +62,7 @@ class RepresentativeHumanTaskWalkthrough(unittest.TestCase):
             page.goto(origin)
             relation_heading = page.get_by_role("heading", name="替代与兼容")
             expect(relation_heading.first).to_be_visible()
-            github = page.get_by_role("link", name="GitHub Actions").first
+            github = page.get_by_role("link", name="GitHub Actions", exact=True).first
             expect(github).to_be_visible()
             github.click()
             self.assertEqual(urlparse(page.url).path, urlparse(page_url("github_actions")).path)
