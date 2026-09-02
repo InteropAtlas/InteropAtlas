@@ -1,5 +1,20 @@
 # InteropAtlas Definition & Scope v0.2
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Project Definition / Provisional（项目定义 / 暂定）
+Document Created At: 2026-09-01T11:14:04+08:00
+Document Updated At: 2026-09-01T11:14:04+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Project Definition / Provisional（项目定义 / 暂定）
 >
 > 目的：更新 InteropAtlas 的项目定义与收录边界。本文先定义“项目是什么、收什么、为什么收”，不直接冻结 Schema 或对象 `type`。

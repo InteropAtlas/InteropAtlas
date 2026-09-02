@@ -1,5 +1,20 @@
 # InteropAtlas v0.1 核心架构
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Pre-Alpha（预发布早期阶段）
+Document Created At: 2026-08-30T18:29:47+08:00
+Document Updated At: 2026-09-01T11:15:19+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Pre-Alpha（预发布早期阶段）
 >
 > 本文描述当前工作架构，不是冻结的最终规范。真实数据实验、程序实现和社区反馈都可以推动它发生破坏性调整。

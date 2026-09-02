@@ -1,5 +1,20 @@
 # 扁平图谱与动态 Map 方法
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Architecture Principle（架构原则），Pre-Alpha。当前用于指导数据建模，不冻结底层存储与前端实现。
+Document Created At: 2026-08-30T21:19:57+08:00
+Document Updated At: 2026-08-30T21:19:57+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Architecture Principle（架构原则），Pre-Alpha。当前用于指导数据建模，不冻结底层存储与前端实现。
 
 InteropAtlas 不应依赖一棵深层、唯一、固定的分类树来组织全部知识。更适合当前项目方向的方法是：

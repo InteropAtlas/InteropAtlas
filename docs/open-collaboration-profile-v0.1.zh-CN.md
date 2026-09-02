@@ -1,5 +1,20 @@
 # InteropAtlas Open Collaboration / Human–AI Collaboration Profile v0.1
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Draft / Provisional Specification（草案 / 暂定规范）
+Document Created At: 2026-09-01T11:35:22+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Draft / Provisional Specification（草案 / 暂定规范）
 >
 > 关联：Issue #19；输入包括 [`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](../03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md) 与 [`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](../03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)。

@@ -1,5 +1,20 @@
 # InteropAtlas 人类可读交互基线
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Provisional Baseline（暂定交互基线）。
+Document Created At: 2026-08-31T22:31:22+08:00
+Document Updated At: 2026-08-31T22:34:35+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Provisional Baseline（暂定交互基线）。
 >
 > 目的：在继续建设 Human-readable Route 之前，为网站导航、局部地图、筛选与后续图探索建立可解释、可复用、可测试的交互依据。优先采用 Web 标准、成熟 HCI 方法和成熟图谱产品实践；只有真实缺口存在时才创造 IA 自有模式。

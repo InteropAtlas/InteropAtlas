@@ -1,5 +1,20 @@
 # InteropAtlas Knowledge Object Classification Specification v0.1
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Draft / Provisional Specification（草案 / 暂定规范）
+Document Created At: 2026-09-01T11:16:21+08:00
+Document Updated At: 2026-09-01T11:16:21+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Draft / Provisional Specification（草案 / 暂定规范）
 >
 > 上位定义：`interopatlas-definition-and-scope-v0.2.zh-CN.md`
