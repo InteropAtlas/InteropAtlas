@@ -139,6 +139,19 @@ Human View MUST NOT 只是按 YAML 字段顺序转写。
 - 上游：IA Evidence principle + public knowledge infrastructure goal
 - Conformance：`Static + Data + Human`
 
+### `IA-HI-IP-008` — Compare Preserves Semantic Class and Missing Meaning
+
+**用户任务：** Compare / Verify。
+
+Compare presentation MUST 对齐共享、可解释的比较维度，并 MUST 保留 Fact / Relation / Statement / Assessment 的语义类别。缺失值 MUST NOT 被默认为 `false` 或 `none`；至少需要区分明确 false、unknown、not recorded / absent 与 not applicable。
+
+Compare MUST NOT 通过隐藏总分、默认 winner 或无依据的推荐把多个事实压缩成新的 Assessment。
+
+- 采用方式：**Profile + IA-specific extension**
+- 上游：ISO 9241-112 information discriminability / understandability；Knowledge Model missing semantics and Fact / Assessment boundary
+- Conformance：`Static + Data + Human + Accessibility`
+- 验收：按 [`human-interface-minimal-compare-contract-v0.1.zh-CN.md`](human-interface-minimal-compare-contract-v0.1.zh-CN.md) 检查代表候选能否在保留上下文、缺失语义和来源边界的前提下形成可扫描差异。
+
 ---
 
 ## 6. 表达形式选择
@@ -155,9 +168,13 @@ Human View MUST NOT 只是按 YAML 字段顺序转写。
 
 适合：多个对象共享清楚比较维度时。不得为了“看起来结构化”把长叙述塞入宽表格。
 
+用于 Compare 时，Table 只是可选投影：必须保持维度与候选值关联、缺失值语义和语义类别；窄屏 / 辅助技术场景下如果宽表破坏这些关系，应使用 stacked comparison 或其他等价结构。
+
 ### Graph / Map
 
 适合：关系结构本身是用户问题时。Graph 不应在用户还没理解中心对象前抢占首要视觉权重。
+
+Graph 不适合替代属性维度比较，也不得把 `alternative_to` 的连线视觉误读成 compatibility / equivalence。
 
 ### Machine View
 
@@ -176,6 +193,8 @@ Human View MUST NOT 只是按 YAML 字段顺序转写。
 - Context / Evidence（当该关系需要时）。
 
 同一事实如果已经以明确正文或列表表达，Graph SHOULD 避免无信息增量的重复。
+
+在 Compare View 中，Relation MAY 成为比较上下文或维度，但 MUST 保留原 predicate，不能因页面标题是“Compare”就转换为 compatibility、equivalence 或 recommendation。
 
 ---
 
@@ -207,7 +226,11 @@ Knowledge Model 已明确 Evidence / Assessment 边界，但 Human Interface 尚
 
 ### `HI-IP-GAP-003` — Compare presentation
 
-Compare 尚缺“什么时候用表格、什么时候用并排卡片、什么时候用关系图”的任务型选择规则。
+**Gate B minimum：closed by #94 contract。**
+
+最小语义合同已经规定共享维度、Missing Semantics、Fact / Relation / Assessment boundary、No Hidden Ranking，以及 Table / stacked projection 的基本职责。
+
+**Remaining P1：** 最终 Compare UI pattern、并排卡片 / 表格切换、多候选密度、响应式产品体验与交互细节。
 
 ### `HI-IP-GAP-004` — Density measurement
 
