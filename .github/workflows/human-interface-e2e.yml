@@ -40,6 +40,7 @@ jobs:
           test -f build/site/objects/automated_build_deployment.html
           test -f build/site/objects/forgejo_actions.html
           test -f build/site/objects/yaml_1.2.2.html
+          test -f build/site/objects/apple.html
       - name: Start local site server
         run: |
           python -m http.server 8000 --bind 127.0.0.1 --directory build/site > /tmp/interopatlas-http.log 2>&1 &
@@ -60,10 +61,10 @@ jobs:
                   time.sleep(0.25)
           raise SystemExit(f'local site did not start: {last_error}')
           PY
-      - name: Run Gate B Chromium behavior baseline
+      - name: Run Gate B Chromium conformance slice
         env:
           IA_E2E_BASE_URL: http://127.0.0.1:8000/
-        run: python 02_Runtime/02_Tools/browser_e2e/test_human_route.py
+        run: python -m unittest discover -s 02_Runtime/02_Tools/browser_e2e -p 'test_*.py' -v
       - name: Show local server log on failure
         if: failure()
         run: cat /tmp/interopatlas-http.log || true
