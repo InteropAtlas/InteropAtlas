@@ -1,0 +1,63 @@
+name: Lifecycle Backfill Preview
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
+
+      - name: Reconstruct document metadata in isolated workspace
+        run: |
+          mkdir -p build/backfill-bundle
+          python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
+            --root . \
+            --baseline e712175131d068fe2c13d6cb78623f6a638b0624 \
+            --cutoff 2026-09-02T10:28:00+08:00 \
+            --backfilled-at 2026-09-02T10:49:00+08:00 \
+            --scope documents \
+            --apply \
+            --bundle-dir build/backfill-bundle \
+            --report build/lifecycle-backfill-report.json
+
+      - name: Validate repository layout and schemas
+        run: |
+          python 02_Runtime/01_Engine/test_repository_layout.py
+          python 02_Runtime/01_Engine/test_v0_schemas.py
+          python 02_Runtime/01_Engine/test_relation_model.py
+
+      - name: Run Machine Review
+        run: |
+          python 02_Runtime/01_Engine/machine_review.py \
+            --root . \
+            --json build/machine-review.json \
+            --markdown build/machine-review.md
+
+      - name: Check graph health
+        run: python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index.json
+
+      - name: Upload preview bundle and reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: lifecycle-backfill-preview
+          path: |
+            build/backfill-bundle
+            build/lifecycle-backfill-report.json
+            build/machine-review.json
+            build/machine-review.md
+            build/graph-index.json
