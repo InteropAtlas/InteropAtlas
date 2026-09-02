@@ -1,23 +1,8 @@
 # InteropAtlas Project State
 
-<!-- InteropAtlas Document Metadata v0
-Document Status: Living Project Checkpoint（持续更新的项目断点）
-Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-02T11:07:48+08:00
-Metadata Backfilled At: 2026-09-02T11:35:52+08:00
-Metadata Provenance: reconstructed_from_git
-Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: commit_explicit
-Latest Substantive Contribution:
-  Initiator: Human — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Pending
-  GitHub Actor: ff6962757
--->
-
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-02T11:02:00+08:00
+> Verified At: 2026-09-02T11:44:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -37,6 +22,7 @@ InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperabil
 - `Physical Storage ≠ Semantic Classification ≠ Index / View（物理存储 ≠ 语义分类 ≠ 索引 / 视图）`；
 - Stable Identity（稳定身份）不能依赖文件路径或显示名称；
 - Canonical State（规范状态）与 Generated View（生成视图）分离；
+- Search / Compare / Map 是 View / Projection（视图 / 投影），不是新的 Canonical Fact 来源；
 - Private Chat（私人聊天）不是项目状态；
 - Human / Agent 协作使用公开、可恢复的 GitHub / Repository Artifact；
 - 高影响治理、破坏性迁移和仓库规则变更需要明确 Human Maintainer 授权。
@@ -63,7 +49,7 @@ F4 — Curation / Evidence / Machine Correctness
 Gate B Final Conformance Audit：
 `03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`。
 
-Foundation 的三项主要 Gate 已经达到最小可依赖状态。项目不再以“继续补基础规范”为唯一主 P0。
+Foundation 的三项主要 Gate 已经达到最小可依赖状态。项目当前处于真实 Reference Implementation（参考实现）演进，而不是继续无限补 Foundation。
 
 ## 4. Current phase
 
@@ -74,40 +60,53 @@ Foundation 的三项主要 Gate 已经达到最小可依赖状态。项目不再
 
 当前主 umbrella：**#16 — 按 Human Interface Specification / Profiles 审计并重构当前网站**。
 
-Gate B 期间已经稳定形成：
+Post-Gate 第一批 vertical slices 已经落地：
 
-- 五个 Human Interface Draft Profiles；
-- Four-family representative Resource Page contract；
-- real Chromium Browser E2E；
-- keyboard / focus / reflow / semantic evidence；
-- Local Map loading / success / failure / retry evidence；
-- Minimal Compare semantic contract；
-- representative Human Task Walkthrough；
-- Final Gate B audit。
+1. **#101 / PR #102 — Permanent Human Route runtime boundary ✅**
+   - Local Map loading / success / failure / retry；
+   - focus / reduced-motion；
+   - 不再由 `render_site_semantic.py` 通过脆弱字符串 patch 注入；
+   - Human map-center label 不再泄漏 raw `system / concept / artifact / agent`。
 
-这些现在是后续网站建设的回归合同，而不是继续拖延产品实现的理由。
+2. **#103 / PR #104 — Task-oriented Search v0.1 ✅**
+   - 99 个当前 Human Resources 的 deterministic search index；
+   - name / stable ID / summary / Human type / alias 简单透明匹配；
+   - query 进入 `?q=`，支持刷新 / Back / Forward；
+   - 无 embedding、LLM ranking、隐藏推荐。
+
+3. **#105 / PR #106 — First dedicated Compare UI ✅**
+   - `automated_build_deployment` 下 Forgejo Actions vs GitHub Actions；
+   - 真实 dedicated Compare page；
+   - 保留 false / not recorded 边界；
+   - `alternative_to` 不升级为 `compatible_with`；
+   - 无 winner / score / recommendation；
+   - 修复 automated review 发现的 Compare → Home 相对路径问题。
+
+当前最新 Browser baseline：**30 / 30 Chromium tests PASS**；Human Route build 仍保持 99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues，并额外生成 99-record Search index 与 1 个 dedicated Compare view。
 
 ## 5. Resume Here
 
-当前下一条主线：
+Search 和第一个 Compare 已经证明 permanent Human Route 可以承载真实产品能力。现在不应立刻继续横向堆更多产品功能。
+
+下一条主线优先收敛第二批 renderer architecture debt（渲染器架构债务）：
 
 ```text
-1. #16 — Audit current transitional Human Route architecture
+1. #16 — Second permanent Human Route boundary slice
         ↓
-2. Define one small permanent-renderer migration slice
-   把 Gate B compatibility hooks 从临时桥接结构推进到长期 Human Route 架构
+2. Move Page Shell / semantic breadcrumb / shared Human labels
+   away from transitional semantic adapter where practical
         ↓
-3. Preserve existing Browser / task / semantic regression evidence
+3. Preserve Search / Compare / Resource Page / Browser regressions
         ↓
-4. Choose first high-value product slice
-   Task-oriented Search / entry OR dedicated Compare UI
+4. Re-evaluate next product slice
+   broader task-oriented entry points OR Compare generalization OR Evidence presentation
 ```
 
-### 第一小步的停止条件
+### 第二小步的停止条件
 
-> Human Route 从“Gate B 临时 compatibility adapter 能工作”推进到“长期实现结构可以继续承载产品能力”，但不重写整站、不改变 Knowledge Model。
+> 进一步缩窄 `render_site_semantic.py` 作为 Legacy/v0 compatibility adapter 的职责，把已经稳定、与 Legacy/v0 兼容无关的共享 Human Route 页面职责迁入长期模块；但不重写整站、不改变 Knowledge Model、不引入前端框架。
 
-新 Agent 收到“继续”时，应先验证 #16 当前状态和最近相关 PR，再从上述第一项尚未完成的工作继续。
+新 Agent 收到“继续”时，应先检查 #16 的最新 child Issue / PR，然后从这个第二 permanent-boundary slice 继续。
 
 ## 6. Gate B final result
 
@@ -137,14 +136,16 @@ Gate B PASS **不等于完整网站、完整 WCAG certification、完整 Search 
 - Machine Review；
 - Representative Migration Pilot；
 - Human Interface five-profile consolidation；
-- Gate B P0 gap priority audit；
-- Browser E2E / accessibility foundation；
+- Gate B Browser E2E / accessibility foundation；
 - Four-family representative Resource Page contract；
 - Minimal Compare Contract；
 - Minimal Human Task Walkthrough；
 - Gate B Final Conformance Audit；
 - Agent Onboarding / Context Continuity layer；
-- Contribution Identity + Provenance / Traceability baseline。
+- Contribution Identity + Provenance / Traceability baseline；
+- Permanent Human Route runtime boundary；
+- Task-oriented Search v0.1；
+- First dedicated Compare UI slice。
 
 ## 8. Cross-cutting / delegated work
 
@@ -166,7 +167,7 @@ F4 Validator / Curation / Evidence / Query correctness 继续并行。
 - License / Security policy 重大变化；
 - 大型 frontend framework rewrite / infrastructure replacement。
 
-Gate B PASS 不改变这些授权边界。
+Gate B PASS 和当前 Reference Implementation 进展不改变这些授权边界。
 
 ## 10. Known open / unrelated work
 
@@ -194,9 +195,11 @@ AGENTS.md
 
 ```text
 Issue #16
-→ Gate B Final Audit
-→ Human Interface Profiles
-→ render_site_semantic.py / current Human Route architecture
+→ PROJECT_STATE.md Resume Here
+→ human-route-renderer-boundary-v0.1.zh-CN.md
+→ human_route_runtime.py
+→ render_site_semantic.py
+→ Search / Compare modules
 → related Browser E2E
 ```
 
@@ -212,7 +215,7 @@ Issue #16
 
 新 Agent 在依赖 `Resume Here` 前必须检查：
 
-1. `Verified At` 之后 main 是否有改变 Phase / Gate / 主线的提交；
+1. `Verified At` 之后 main 是否有改变 Phase / 主线的提交；
 2. #16 或其最新 child PR / Issue 是否已完成或改变方向；
 3. 如果状态已经变化，先更新本文件，再继续。
 
