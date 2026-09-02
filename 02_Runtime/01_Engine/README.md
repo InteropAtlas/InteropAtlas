@@ -1,20 +1,5 @@
 # InteropAtlas Engine — Bootstrap Harness
 
-<!-- InteropAtlas Document Metadata v0
-Document Status: active
-Document Created At: 2026-09-01T14:47:53+08:00
-Document Updated At: 2026-09-01T16:44:53+08:00
-Metadata Backfilled At: 2026-09-02T11:02:46+08:00
-Metadata Provenance: mixed
-Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
-Latest Substantive Contribution:
-  Initiator: Human — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
-  GitHub Actor: ff6962757
--->
-
 这里是 InteropAtlas 当前的最小可执行 Engine，负责确定性读取、索引、查询、图构建、验证辅助与人类可读视图生成。
 
 ## 当前 Canonical Storage
