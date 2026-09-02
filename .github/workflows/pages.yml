@@ -28,9 +28,12 @@ jobs:
           python-version: '3.12'
       - name: Install site dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Build human-readable site
+      - name: Build semantic human-readable site
         run: |
-          python 02_Runtime/01_Engine/render_site.py --root . --output build/site
+          python 02_Runtime/01_Engine/render_site_semantic.py --root . --output build/site
+          test -f build/site/objects/automated_build_deployment.html
+          test -f build/site/objects/forgejo_actions.html
+          test -f build/site/objects/yaml_1.2.2.html
           find build/site -maxdepth 2 -type f | sort
       - uses: actions/configure-pages@v5
         with:

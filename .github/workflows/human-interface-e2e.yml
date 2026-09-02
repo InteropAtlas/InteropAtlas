@@ -1,0 +1,69 @@
+name: Human Interface Browser E2E
+
+on:
+  pull_request:
+    paths:
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
+      - '02_Runtime/02_Tools/browser_e2e/**'
+      - '.github/workflows/human-interface-e2e.yml'
+      - '.github/workflows/pages.yml'
+  push:
+    branches: [main]
+    paths:
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
+      - '02_Runtime/02_Tools/browser_e2e/**'
+      - '.github/workflows/human-interface-e2e.yml'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+jobs:
+  chromium-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install site dependencies
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
+      - name: Install browser test dependencies
+        run: |
+          pip install -r 02_Runtime/02_Tools/browser_e2e/requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Build semantic Human-readable Route
+        run: |
+          python 02_Runtime/01_Engine/render_site_semantic.py --root . --output build/site
+          test -f build/site/index.html
+          test -f build/site/objects/automated_build_deployment.html
+          test -f build/site/objects/forgejo_actions.html
+          test -f build/site/objects/yaml_1.2.2.html
+      - name: Start local site server
+        run: |
+          python -m http.server 8000 --bind 127.0.0.1 --directory build/site > /tmp/interopatlas-http.log 2>&1 &
+          echo $! > /tmp/interopatlas-http.pid
+          python - <<'PY'
+          import time
+          import urllib.request
+
+          url = 'http://127.0.0.1:8000/index.html'
+          last_error = None
+          for _ in range(40):
+              try:
+                  with urllib.request.urlopen(url, timeout=1) as response:
+                      if response.status == 200:
+                          raise SystemExit(0)
+              except Exception as exc:
+                  last_error = exc
+                  time.sleep(0.25)
+          raise SystemExit(f'local site did not start: {last_error}')
+          PY
+      - name: Run Gate B Chromium behavior baseline
+        env:
+          IA_E2E_BASE_URL: http://127.0.0.1:8000/
+        run: python 02_Runtime/02_Tools/browser_e2e/test_human_route.py
+      - name: Show local server log on failure
+        if: failure()
+        run: cat /tmp/interopatlas-http.log || true
