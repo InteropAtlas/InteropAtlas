@@ -5,7 +5,9 @@ Document Status: active
 Document Created At: 2026-08-30T17:49:18+08:00
 Document Updated At: 2026-09-01T16:44:53+08:00
 Metadata Backfilled At: 2026-09-02T10:49:00+08:00
-Metadata Provenance: reconstructed_from_git
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol

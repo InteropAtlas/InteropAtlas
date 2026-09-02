@@ -1,5 +1,20 @@
 # InteropAtlas Project State
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Living Project Checkpoint（持续更新的项目断点）
+Document Created At: 2026-09-02T10:43:23+08:00
+Document Updated At: 2026-09-02T10:43:23+08:00
+Metadata Backfilled At: 2026-09-02T10:49:00+08:00
+Metadata Provenance: reconstructed_from_git
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
 > Verified At: 2026-09-02T09:35:00+08:00
