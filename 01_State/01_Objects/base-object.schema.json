@@ -6,51 +6,29 @@
   "type": "object",
   "required": ["id", "type", "name_zh", "name_en"],
   "properties": {
-    "id": {
-      "type": "string",
-      "pattern": "^[a-z0-9][a-z0-9._-]*$",
-      "description": "Stable English machine-readable identifier."
-    },
-    "type": {
-      "type": "string",
-      "pattern": "^[a-z][a-z0-9_-]*$",
-      "description": "English machine-readable object type."
-    },
-    "name_zh": {
-      "type": "string",
-      "minLength": 1,
-      "description": "Primary Chinese human-readable name."
-    },
-    "name_en": {
-      "type": "string",
-      "minLength": 1,
-      "description": "English human-readable name or official English name where applicable."
-    },
-    "official_name": {
-      "type": "string",
-      "description": "Official source-language name when it should be preserved separately from translated display names."
-    },
-    "description_zh": {
-      "type": "string",
-      "description": "Chinese description."
-    },
-    "description_en": {
-      "type": "string",
-      "description": "English description."
-    },
-    "status": {
-      "type": "string",
-      "pattern": "^[a-z][a-z0-9_-]*$"
-    },
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$", "description": "Stable English machine-readable identifier."},
+    "type": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$", "description": "English machine-readable object type."},
+    "name_zh": {"type": "string", "minLength": 1, "description": "Primary Chinese human-readable name."},
+    "name_en": {"type": "string", "minLength": 1, "description": "English human-readable name or official English name where applicable."},
+    "official_name": {"type": "string", "description": "Official source-language name when it should be preserved separately from translated display names."},
+    "description_zh": {"type": "string", "description": "Chinese description."},
+    "description_en": {"type": "string", "description": "English description."},
+    "status": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
     "record_created_at": {
-      "type": "string",
-      "format": "date-time",
+      "type": "string", "format": "date-time",
       "description": "Timestamp when this InteropAtlas canonical record was first created. This is repository-record lifecycle metadata, not the real-world entity/artifact creation or publication time. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
     },
     "record_updated_at": {
-      "type": "string",
-      "format": "date-time",
+      "type": "string", "format": "date-time",
       "description": "Timestamp of the latest substantive update to this InteropAtlas canonical record. This is repository-record lifecycle metadata; Git history remains the authoritative event log. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
+    "last_verified_at": {
+      "type": "string", "format": "date-time",
+      "description": "Timestamp of the latest substantive verification of this record against its cited source/evidence. Verification may occur without changing record_updated_at. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
+    "last_verified_by": {
+      "type": "string",
+      "description": "Stable Human or Agent identity that performed the latest substantive verification. This is verification provenance, not the GitHub Actor."
     },
     "sources": {
       "type": "array",
@@ -60,10 +38,7 @@
         "properties": {
           "url": {"type": "string", "format": "uri"},
           "title": {"type": "string"},
-          "language": {
-            "type": "string",
-            "description": "BCP 47 language tag when known, for example en or zh-CN."
-          },
+          "language": {"type": "string", "description": "BCP 47 language tag when known, for example en or zh-CN."},
           "accessed": {"type": "string", "format": "date"}
         },
         "additionalProperties": true
