@@ -10,24 +10,24 @@ Closes / relates to: #
 
 ## Contribution Identity
 
-Record contribution roles separately from the GitHub account / App that performs repository actions. See `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
+Record the three core contribution roles separately from the GitHub account / App that performs repository actions. See `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
 
-Initiator:
+Initiator（发起人）:
 - Human / Agent identity:
 
-Executor:
+Executor（实际执行者）:
 - Human / Agent identity:
 - Agent system / model when known:
 
-Reviewer:
+Reviewer（审核人）:
 - Human / Agent identity, or `pending`:
 
-Approver:
-- Human identity when required, or `not required / pending`:
-
-GitHub Actor(s):
+GitHub Actor（GitHub 操作账号）:
 - account / App:
 - platform action performed:
+
+Governance Approver（治理批准人，仅高影响变更需要）:
+- Human identity, or `not required / pending`:
 
 If GitHub Actor and actual Executor differ, this distinction must be explicit.
 
@@ -85,9 +85,9 @@ Recommended next action:
 ## Final Self-check
 
 - [ ] The PR stays within the Work Item Scope / Non-goals.
-- [ ] Contribution Identity distinguishes Initiator / Executor / Reviewer / Approver / GitHub Actor where applicable.
+- [ ] Contribution Identity distinguishes Initiator / Executor / Reviewer from GitHub Actor where applicable.
 - [ ] Fact and Assessment are separated where relevant.
 - [ ] Stable IDs / semantic invariants are preserved unless migration was explicitly authorized.
-- [ ] New or substantively modified v0 Canonical Records update `record_created_at` / `record_updated_at` when applicable.
+- [ ] New or substantively modified v0 Canonical Records maintain lifecycle / verification metadata when applicable.
 - [ ] Generated outputs were not edited as a competing source of truth.
 - [ ] Durable context is recorded here, in the Issue, or in repository artifacts rather than only in private chat.
