@@ -14,6 +14,7 @@ import html
 from collections import defaultdict
 from pathlib import Path
 
+import human_route_compare as human_compare
 import human_route_runtime as human_route
 import human_route_search as human_search
 import render_markdown as human_markdown
@@ -191,6 +192,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target = output / html_path
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
+        content = human_compare.inject_compare_entry(content, obj)
         local_map = human_route.build_local_map(
             legacy_site,
             obj,
@@ -223,11 +225,13 @@ def build(root: Path, output: Path) -> dict[str, int]:
         human_markdown.summary_of,
         lambda obj: human_route.human_object_type_label(obj, semantic_site_view_type),
     )
+    human_compare.build_compare_artifact(output, index, relations, legacy_site.page_shell)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "objects_loaded": len(objects),
         "pages_rendered": len(rendered),
         "search_records": search_records,
+        "compare_pages": 1,
         "graph_edges": len(graph.edges),
         "reference_issues": len(graph.issues),
     }
@@ -241,8 +245,8 @@ def main() -> None:
     result = build(args.root, args.output)
     print(
         f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects, "
-        f"indexed {result['search_records']} Human resources, with {result['graph_edges']} graph edges "
-        f"and {result['reference_issues']} reference issues into {args.output}"
+        f"indexed {result['search_records']} Human resources, built {result['compare_pages']} Compare view, "
+        f"with {result['graph_edges']} graph edges and {result['reference_issues']} reference issues into {args.output}"
     )
 
 
