@@ -1,0 +1,83 @@
+name: Lifecycle Backfill Apply Batch
+
+on:
+  push:
+    branches:
+      - backfill-89-lifecycle-provenance
+
+permissions:
+  contents: write
+
+jobs:
+  apply-root-docs:
+    if: contains(github.event.head_commit.message, '[apply-docs-root]')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: backfill-89-lifecycle-provenance
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install dependencies
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
+
+      - name: Generate root document batch from fixed pre-backfill main
+        run: |
+          rm -rf /tmp/ia-root-batch
+          mkdir -p /tmp/ia-root-batch
+          python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
+            --root . \
+            --baseline e1c89f1eb1704017c8a52ae58d4c94ce5b8f55ec \
+            --cutoff 2026-09-02T10:28:00+08:00 \
+            --backfilled-at 2026-09-02T10:49:00+08:00 \
+            --scope documents \
+            --apply \
+            --report /tmp/ia-root-batch/report.json
+          cp AGENTS.md README.md CONTRIBUTING.md PROJECT_STATE.md /tmp/ia-root-batch/
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('/tmp/ia-root-batch/AGENTS.md')
+          text = path.read_text(encoding='utf-8')
+          text = text.replace('Document Status: Completed:', 'Document Status: active', 1)
+          path.write_text(text, encoding='utf-8')
+          PY
+          git reset --hard HEAD
+          cp /tmp/ia-root-batch/AGENTS.md AGENTS.md
+          cp /tmp/ia-root-batch/README.md README.md
+          cp /tmp/ia-root-batch/CONTRIBUTING.md CONTRIBUTING.md
+          cp /tmp/ia-root-batch/PROJECT_STATE.md PROJECT_STATE.md
+
+      - name: Validate root batch
+        run: |
+          python 02_Runtime/01_Engine/test_repository_layout.py
+          python 02_Runtime/01_Engine/test_v0_schemas.py
+          python 02_Runtime/01_Engine/test_relation_model.py
+          mkdir -p build
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-root.json --markdown build/machine-review-root.md
+          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-root.json
+          python - <<'PY'
+          import json
+          machine = json.load(open('build/machine-review-root.json'))
+          graph = json.load(open('build/graph-index-root.json'))
+          assert machine['summary']['errors'] == 0, machine
+          assert graph.get('reference_issues') == [], graph.get('reference_issues')
+          print(machine['summary'])
+          print('graph reference_issues:', graph.get('reference_issues'))
+          PY
+
+      - name: Commit validated root batch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add AGENTS.md README.md CONTRIBUTING.md PROJECT_STATE.md
+          git diff --cached --check
+          git commit -m 'docs: backfill root lifecycle metadata (#90)' \
+            -m 'Initiator: Human — ff6962757' \
+            -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
+            -m 'Reviewer: Pending' \
+            -m 'GitHub-Actor: github-actions[bot]'
+          git push origin HEAD:backfill-89-lifecycle-provenance
