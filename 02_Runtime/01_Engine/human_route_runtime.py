@@ -190,6 +190,20 @@ def install_runtime_contract(site_module) -> None:
     site_module.MAP_SCRIPT = MAP_SCRIPT
 
 
+def add_resource_fragment_targets(content: str) -> str:
+    """Add stable task-entry fragments to existing Human Resource sections."""
+
+    replacements = (
+        ("<h2>基本信息</h2>", '<h2 id="basic-info">基本信息</h2>'),
+        ("<h2>来源与依据</h2>", '<h2 id="evidence">来源与依据</h2>'),
+        ("<h2>来源</h2>", '<h2 id="evidence">来源</h2>'),
+    )
+    for marker, replacement in replacements:
+        if marker in content:
+            content = content.replace(marker, replacement, 1)
+    return content
+
+
 def build_local_map(
     site_module,
     obj: dict,
@@ -202,6 +216,7 @@ def build_local_map(
     content = site_module.build_local_map(obj, index, graph)
     if not content:
         return content
+    content = content.replace('<section class="local-map"', '<section id="local-map" class="local-map"', 1)
     raw_type = html.escape(str(obj.get("type") or "object"))
     human_type = html.escape(human_object_type_label(obj, view_type_resolver))
     return content.replace(
