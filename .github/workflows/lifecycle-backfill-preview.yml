@@ -14,44 +14,42 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-
-      - name: Reconstruct document metadata in isolated workspace
+      - name: Inventory and reconstruct Canonical Object metadata in isolated workspace
         run: |
+          rm -rf build/backfill-bundle
           mkdir -p build/backfill-bundle
+          BACKFILLED_AT="$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')"
           python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
             --root . \
-            --baseline e1c89f1eb1704017c8a52ae58d4c94ce5b8f55ec \
+            --baseline 38b0c80813db5e59757cbec0ac79cc3fd079161f \
             --cutoff 2026-09-02T10:28:00+08:00 \
-            --backfilled-at 2026-09-02T10:49:00+08:00 \
-            --scope documents \
+            --backfilled-at "$BACKFILLED_AT" \
+            --scope objects \
             --apply \
             --bundle-dir build/backfill-bundle \
             --report build/lifecycle-backfill-report.json
-
-      - name: Validate repository layout and schemas
+      - name: Validate candidate repository
         run: |
           python 02_Runtime/01_Engine/test_repository_layout.py
           python 02_Runtime/01_Engine/test_v0_schemas.py
           python 02_Runtime/01_Engine/test_relation_model.py
-
-      - name: Run Machine Review
-        run: |
-          python 02_Runtime/01_Engine/machine_review.py \
-            --root . \
-            --json build/machine-review.json \
-            --markdown build/machine-review.md
-
-      - name: Check graph health
-        run: python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index.json
-
-      - name: Upload preview bundle and reports
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review.json --markdown build/machine-review.md
+          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index.json
+          python - <<'PY'
+          import json
+          machine = json.load(open('build/machine-review.json'))
+          graph = json.load(open('build/graph-index.json'))
+          assert machine['summary']['errors'] == 0, machine
+          assert graph.get('reference_issues') == [], graph.get('reference_issues')
+          print(machine['summary'])
+          print('graph reference_issues:', graph.get('reference_issues'))
+          PY
+      - name: Upload inventory and preview reports
         uses: actions/upload-artifact@v4
         with:
           name: lifecycle-backfill-preview
