@@ -13,6 +13,16 @@
       "enum": ["depends_on", "uses", "implements", "extends", "replaces", "supersedes", "alternative_to", "compatible_with", "incompatible_with", "bridges_to", "maps_to", "encapsulates", "transports", "describes", "requires", "recommended_with", "governed_by", "implemented_by", "secures", "discovers", "identifies", "synchronizes", "provides", "inspired_by"]
     },
     "target": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "record_created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this InteropAtlas relation record was first created; not the real-world relationship start time. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
+    "record_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the latest substantive update to this InteropAtlas relation record. Git history remains the authoritative event log. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
     "context": {
       "type": "object",
       "properties": {
