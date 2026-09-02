@@ -115,11 +115,20 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
     organizations = [(obj, path) for obj, path in rendered if semantic_site_view_type(obj) == "organization"]
     sections = [
         "<h1>InteropAtlas</h1>",
-        "<p>从“能力”开始探索开放标准、规范与实现。当前网站仍处于早期实验阶段，导航结构会随着 Atlas 数据和关系逐步演进。</p>",
+        "<p>探索互操作方案空间中的能力、标准、规范、实现、组织、关系与证据。你可以先从要完成的任务进入，也可以继续按能力浏览。</p>",
         f'<p class="muted">当前可浏览：{len(capabilities)} 个能力 · {len(standards)} 个标准 / 规范 · {len(implementations)} 个实现 · {len(organizations)} 个组织</p>',
-        '<p><a href="search.html"><strong>搜索 InteropAtlas</strong></a> — 按名称、关键词或稳定 ID 查找当前已发布对象。</p>',
-        "<h2>从能力开始</h2>",
-        "<p>能力是当前第一版主入口。同一个标准或实现可以连接到多个能力，不把 Atlas 固定成唯一目录树。</p>",
+        '<section aria-labelledby="task-entry-heading">',
+        '<h2 id="task-entry-heading">你想做什么？</h2>',
+        '<p>这些入口只连接当前已经实现的 Human View 能力，不代表所有能力都已通用化。</p>',
+        '<div class="grid task-entry-grid">',
+        '<article class="card"><h3><a href="search.html">查找对象</a></h3><p>按名称、关键词或稳定 ID 查找当前已发布对象。</p></article>',
+        '<article class="card"><h3><a href="objects/automated_build_deployment.html">理解一个对象</a></h3><p>从代表性 Resource Page 查看对象身份、基本信息和相关对象。</p></article>',
+        '<article class="card"><h3><a href="compare/automated_build_deployment--forgejo_actions--github_actions.html">比较候选方案</a></h3><p>查看当前已实现的 Forgejo Actions 与 GitHub Actions 代表性比较；尚不是全站任意对象比较。</p></article>',
+        '<article class="card"><h3><a href="objects/forgejo_actions.html">验证来源</a></h3><p>查看代表性页面中 Canonical 来源与 InteropAtlas 说明 / 评估的明确分工。</p></article>',
+        '<article class="card"><h3><a href="objects/forgejo_actions.html#local-map">探索关系</a></h3><p>从代表性对象的 Local Map 探索局部关系；尚不是大型 Graph Explorer。</p></article>',
+        '</div></section>',
+        "<h2>按能力浏览</h2>",
+        "<p>Capability-first 仍是一个有效入口。同一个标准或实现可以连接到多个能力，不把 Atlas 固定成唯一目录树。</p>",
     ]
     categories: dict[str, list[tuple[dict, Path]]] = defaultdict(list)
     for obj, path in capabilities:
