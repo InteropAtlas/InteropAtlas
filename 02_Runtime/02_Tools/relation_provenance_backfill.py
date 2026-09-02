@@ -52,11 +52,31 @@ def relation_files(root: Path) -> list[str]:
     return sorted(p.relative_to(root).as_posix() for p in base.glob("*.yaml") if p.is_file())
 
 
-def split_stream(text: str) -> tuple[str, list[str], bool]:
-    if DELIM_RE.search(text):
-        parts = DELIM_RE.split(text)
-        return parts[0], parts[1:], True
-    return "", [text], False
+def _segment_is_record(segment: str) -> bool:
+    if not segment.strip():
+        return False
+    try:
+        data = yaml.safe_load(segment)
+    except yaml.YAMLError:
+        return False
+    return isinstance(data, dict) and bool(data.get("id"))
+
+
+def split_stream(text: str) -> tuple[str, list[str], str]:
+    """Split a YAML stream while preserving its original first-document style.
+
+    Modes:
+    - single: one document, no `---` separator.
+    - prefixed: comments/preamble appear before the first `---`.
+    - first_document: the first YAML document starts immediately and later documents
+      are separated by `---` (legacy engine-v0.1-bootstrap.yaml shape).
+    """
+    if not DELIM_RE.search(text):
+        return "", [text], "single"
+    parts = DELIM_RE.split(text)
+    if _segment_is_record(parts[0]):
+        return "", parts, "first_document"
+    return parts[0], parts[1:], "prefixed"
 
 
 def load_docs(text: str) -> dict[str, dict[str, Any]]:
@@ -212,7 +232,7 @@ def inject_metadata(segment: str, audit: dict[str, Any], backfilled_at: str, add
 
 def audit_file(root: Path, baseline: str, path: str, cutoff: str, backfilled_at: str, apply: bool) -> list[dict[str, Any]]:
     base_text = run_git(root, "show", f"{baseline}:{path}")
-    prefix, segments, had_delimiters = split_stream(base_text)
+    prefix, segments, stream_mode = split_stream(base_text)
     current_docs = load_docs(base_text)
     rows = file_history(root, baseline, path)
     snapshots = historical_snapshots(root, path, rows)
@@ -270,8 +290,10 @@ def audit_file(root: Path, baseline: str, path: str, cutoff: str, backfilled_at:
                 add_created=not bool(data.get("record_created_at")),
                 add_updated=not bool(data.get("record_updated_at")),
             ))
-        if had_delimiters:
+        if stream_mode == "prefixed":
             output = prefix + "".join("---\n" + segment for segment in rendered)
+        elif stream_mode == "first_document":
+            output = (rendered[0] if rendered else "") + "".join("---\n" + segment for segment in rendered[1:])
         else:
             output = rendered[0] if rendered else base_text
         (root / path).write_text(output, encoding="utf-8")
