@@ -178,7 +178,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
         content = human_route.add_resource_fragment_targets(content)
-        content = human_compare.inject_compare_entry(content, obj)
+        content = human_compare.inject_compare_entry(content, obj, index)
         local_map = human_route.build_local_map(legacy_site, obj, index, graph, semantic_site_view_type)
         content = legacy_site.inject_local_map(content, local_map)
         content = human_route.inject_resource_task_navigation(content)
