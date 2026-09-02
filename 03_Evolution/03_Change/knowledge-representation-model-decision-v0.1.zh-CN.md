@@ -1,5 +1,20 @@
 # InteropAtlas Minimum Knowledge Representation Contract v0.1 — Model Decision Draft
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: **Revised Draft / High-impact Decision — NOT ADOPTED**
+Document Created At: 2026-09-01T18:49:47+08:00
+Document Updated At: 2026-09-01T19:40:59+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：**Revised Draft / High-impact Decision — NOT ADOPTED**
 >
 > Work Item：#58

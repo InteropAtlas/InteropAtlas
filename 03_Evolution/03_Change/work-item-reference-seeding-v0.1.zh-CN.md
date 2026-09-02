@@ -1,5 +1,20 @@
 # InteropAtlas Work Item Reference Seeding v0.1
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Draft Addendum to Open Collaboration Profile v0.1
+Document Created At: 2026-09-01T11:59:32+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Draft Addendum to Open Collaboration Profile v0.1
 >
 > 目的：规定在发布 Issue / Work Item 时，如何预装任务已知会用到的 InteropAtlas 标准、成熟先例与上位规范，以减少后续 Human / Agent 重复检索，同时保留对新标准和新先例的持续发现能力。

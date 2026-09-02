@@ -1,5 +1,20 @@
 # InteropAtlas Open Collaboration Route v0 — Notes
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Working Notes。用于把“人类 + Agent 共同建设 IA”从 Agent 工程问题重新放回开放协作问题中；不代表已经形成正式路线或规范。
+Document Created At: 2026-09-01T09:41:39+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Working Notes。用于把“人类 + Agent 共同建设 IA”从 Agent 工程问题重新放回开放协作问题中；不代表已经形成正式路线或规范。
 
 ## 核心定位

@@ -1,5 +1,20 @@
 # docs / Evolution Responsibility Boundary Audit — 2026-09-01
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Audit / Classification Proposal
+Document Created At: 2026-09-01T16:55:36+08:00
+Document Updated At: 2026-09-01T16:55:36+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Audit / Classification Proposal
 >
 > 关联：Issue #46；三大区域物理迁移 #43 / PR #45。
