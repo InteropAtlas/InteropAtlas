@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""First dedicated, deterministic Compare view for the InteropAtlas Human Route."""
+"""Dedicated, deterministic Compare views for the InteropAtlas Human Route."""
 
 from __future__ import annotations
 
@@ -14,7 +14,7 @@ RELATION_ID = "forgejo_actions_alternative_to_github_actions"
 COMPARE_PATH = Path("compare/automated_build_deployment--forgejo_actions--github_actions.html")
 
 COMPARE_STYLE = """
-.compare-context{border-left:4px solid var(--link);padding:10px 14px;background:var(--accent-soft);margin:18px 0 24px}.compare-candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 26px}.compare-dimension{border-top:1px solid var(--border);padding:18px 0}.compare-dimension h2{margin:0 0 12px;font-size:1.08em}.compare-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.compare-value{border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--card)}.compare-value strong{display:block;margin-bottom:6px}.compare-boundary{margin:24px 0;padding:14px;border:1px solid var(--border);border-radius:8px}.compare-entry{margin:22px 0;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--card)}@media(max-width:620px){.compare-candidates,.compare-values{grid-template-columns:1fr}}
+.compare-context{border-left:4px solid var(--link);padding:10px 14px;background:var(--accent-soft);margin:18px 0 24px}.compare-candidates{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin:16px 0 26px}.compare-dimension{border-top:1px solid var(--border);padding:18px 0}.compare-dimension h2{margin:0 0 12px;font-size:1.08em}.compare-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.compare-value{border:1px solid var(--border);border-radius:8px;padding:12px;background:var(--card)}.compare-value strong{display:block;margin-bottom:6px}.compare-boundary{margin:24px 0;padding:14px;border:1px solid var(--border);border-radius:8px}.compare-entry{margin:22px 0;padding:14px;border:1px solid var(--border);border-radius:8px;background:var(--card)}.compare-entry ul{margin-bottom:10px}@media(max-width:620px){.compare-candidates,.compare-values{grid-template-columns:1fr}}
 """
 
 _DEPLOYMENT_LABELS = {
@@ -54,26 +54,52 @@ def _link(record: dict, label: str | None = None, prefix: str = "../") -> str:
     return f'<a href="{prefix}objects/{html.escape(object_id, quote=True)}.html">{html.escape(name)}</a>'
 
 
-def compare_entry_html() -> str:
-    """Callout injected into the representative Capability resource page."""
+def capability_candidates(capability_id: str, index: dict[str, dict]) -> list[dict]:
+    """Project implementation candidates from Canonical capability membership."""
 
-    href = "../" + COMPARE_PATH.as_posix()
+    candidates = [
+        record for record in index.values()
+        if capability_id in (record.get("capabilities") or [])
+    ]
+    return sorted(
+        candidates,
+        key=lambda record: str(record.get("name_zh") or record.get("name_en") or record.get("id")),
+    )
+
+
+def compare_entry_html(capability_id: str, index: dict[str, dict]) -> str:
+    """Render candidates from Canonical state and expose only an implemented Compare artifact."""
+
+    candidates = capability_candidates(capability_id, index)
+    if not candidates:
+        return ""
+    items = "".join(f"<li>{_link(candidate)}</li>" for candidate in candidates)
+    candidate_ids = {str(candidate.get("id")) for candidate in candidates}
+    compare_link = ""
+    if capability_id == CONTEXT_ID and set(CANDIDATE_IDS).issubset(candidate_ids):
+        href = "../" + COMPARE_PATH.as_posix()
+        compare_link = (
+            f'<p><a href="{html.escape(href, quote=True)}">比较 Forgejo Actions 与 GitHub Actions</a></p>'
+            '<p class="muted">当前 dedicated Compare 只覆盖上述这一对候选，不代表其他组合已经可比较。</p>'
+        )
     return (
-        '<section class="compare-entry" aria-label="比较候选">'
-        '<strong>比较候选</strong>'
-        '<p>Forgejo Actions 与 GitHub Actions 都支持这个能力。可以查看已经记录、可解释的差异。</p>'
-        f'<p><a href="{html.escape(href, quote=True)}">比较 Forgejo Actions 与 GitHub Actions</a></p>'
+        '<section class="compare-entry" aria-label="可比较实现">'
+        '<strong>支持这个能力的实现</strong>'
+        '<p>以下候选由当前 Canonical objects 的 capabilities 记录推导；Renderer 不维护第二份候选清单。</p>'
+        f'<ul>{items}</ul>{compare_link}'
         '</section>'
     )
 
 
-def inject_compare_entry(content: str, obj: dict) -> str:
-    if str(obj.get("id")) != CONTEXT_ID:
+def inject_compare_entry(content: str, obj: dict, index: dict[str, dict]) -> str:
+    capability_id = str(obj.get("id"))
+    entry = compare_entry_html(capability_id, index)
+    if not entry:
         return content
     marker = "<h2>一跳邻居</h2>"
     if marker in content:
-        return content.replace(marker, compare_entry_html() + marker, 1)
-    return content + compare_entry_html()
+        return content.replace(marker, entry + marker, 1)
+    return content + entry
 
 
 def build_compare_body(index: dict[str, dict], relations: list[dict]) -> str:
