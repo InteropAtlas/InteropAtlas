@@ -33,6 +33,8 @@ jobs:
             --apply \
             --bundle-dir build/backfill-bundle \
             --report build/lifecycle-backfill-report.json
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py 'build/backfill-bundle/01_State/01_Objects/*.yaml'
       - name: Validate candidate repository
         run: |
           python 02_Runtime/01_Engine/test_repository_layout.py
@@ -50,6 +52,7 @@ jobs:
           print('graph reference_issues:', graph.get('reference_issues'))
           PY
       - name: Upload inventory and preview reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: lifecycle-backfill-preview
