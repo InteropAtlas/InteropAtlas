@@ -50,6 +50,34 @@ class RepresentativeResourcePageTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_resource_task_navigation_only_exposes_real_page_targets_without_javascript(self) -> None:
+        context = self.browser.new_context(java_script_enabled=False)
+        page = context.new_page()
+        try:
+            page.goto(page_url("forgejo_actions"))
+            nav = page.locator('nav[aria-label="本页任务"]')
+            expect(nav).to_be_visible()
+            expected = {
+                "理解基本信息": "#basic-info",
+                "探索关系": "#local-map",
+                "查看来源": "#evidence",
+            }
+            for label, href in expected.items():
+                link = nav.get_by_role("link", name=label, exact=True)
+                expect(link).to_have_attribute("href", href)
+                self.assertEqual(page.locator(href).count(), 1)
+            nav.get_by_role("link", name="查看来源", exact=True).click()
+            self.assertTrue(page.url.endswith("#evidence"))
+            expect(page.locator("#evidence")).to_be_visible()
+
+            page.goto(page_url("automated_build_deployment"))
+            nav = page.locator('nav[aria-label="本页任务"]')
+            expect(nav.get_by_role("link", name="理解基本信息", exact=True)).to_be_visible()
+            expect(nav.get_by_role("link", name="探索关系", exact=True)).to_be_visible()
+            self.assertEqual(nav.get_by_role("link", name="查看来源", exact=True).count(), 0)
+        finally:
+            context.close()
+
     def test_organization_page_has_identity_context_key_facts_and_source(self) -> None:
         context = self.browser.new_context()
         page = context.new_page()
