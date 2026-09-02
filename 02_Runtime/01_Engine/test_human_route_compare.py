@@ -37,7 +37,8 @@ class HumanRouteCompareTests(unittest.TestCase):
         self.assertIn('alternative_to', self.body)
         self.assertIn('compatible_with', self.body)
         self.assertIn('不追求完全兼容', self.body)
-        self.assertNotIn('完全兼容</span>', self.body)
+        self.assertNotIn('两者完全兼容', self.body)
+        self.assertNotIn('已建立 compatible_with', self.body)
 
     def test_compare_does_not_create_ranking(self) -> None:
         self.assertIn('不输出 winner', self.body)
