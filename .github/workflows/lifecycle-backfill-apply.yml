@@ -22,7 +22,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Generate six latest-main document candidates
+      - name: Generate seven latest-main/sync-affected document candidates
         run: |
           rm -rf /tmp/ia-doc-latest
           mkdir -p /tmp/ia-doc-latest
@@ -39,6 +39,7 @@ jobs:
           git reset --hard HEAD
           paths=(
             PROJECT_STATE.md
+            02_Runtime/01_Engine/README.md
             03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md
             03_Evolution/03_Change/human-route-renderer-boundary-v0.1.zh-CN.md
             03_Evolution/03_Change/reference-implementation-phase-v0.1.zh-CN.md
@@ -57,7 +58,7 @@ jobs:
           python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-doc-latest.json --markdown build/machine-review-doc-latest.md
           python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-doc-latest.json
           python - <<'PY'
-          import json, re
+          import json
           from pathlib import Path
 
           machine = json.load(open('build/machine-review-doc-latest.json'))
@@ -94,6 +95,7 @@ jobs:
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git add \
             PROJECT_STATE.md \
+            02_Runtime/01_Engine/README.md \
             03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md \
             03_Evolution/03_Change/human-route-renderer-boundary-v0.1.zh-CN.md \
             03_Evolution/03_Change/reference-implementation-phase-v0.1.zh-CN.md \
