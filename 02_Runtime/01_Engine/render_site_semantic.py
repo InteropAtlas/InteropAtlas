@@ -3,8 +3,8 @@
 
 This module owns semantic compatibility concerns: Legacy/v0 Human View
 selection, representative Organization projection, route/link adaptation and
-homepage grouping. User-observable runtime behavior lives in permanent Human
-Route modules.
+homepage grouping. Stable document-shell, breadcrumb and user-observable runtime
+behavior live in permanent Human Route modules.
 """
 
 from __future__ import annotations
@@ -17,6 +17,7 @@ from pathlib import Path
 import human_route_compare as human_compare
 import human_route_runtime as human_route
 import human_route_search as human_search
+import human_route_shell as human_shell
 import render_markdown as human_markdown
 import render_site as legacy_site
 from bootstrap_query import index_objects, load_atlas
@@ -42,22 +43,22 @@ def semantic_site_view_type(obj: dict | None) -> str | None:
 
 
 def breadcrumb_for(obj: dict, prefix: str) -> str:
-    name = html.escape(display_name(obj, str(obj.get("id"))))
-    current = f'<span aria-current="page">{name}</span>'
-    view_type = semantic_site_view_type(obj)
-    home = f'<a href="{prefix}index.html">首页</a>'
-    separator = '<span aria-hidden="true">›</span>'
-    if view_type == "capability":
-        category = str(obj.get("category") or "uncategorized")
-        label = "未分类" if category == "uncategorized" else human_value(category)
-        category_link = (
-            f'<a href="{prefix}index.html#{legacy_site.category_anchor(category)}">'
-            f'{html.escape(label)}</a>'
-        )
-        return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{current}'
-    labels = {"standard": "标准与规范", "implementation": "实现", "organization": "组织"}
-    label = labels.get(str(view_type), "对象")
-    return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{current}'
+    """Compatibility callback delegating stable breadcrumb rendering to Human Route."""
+
+    return human_shell.breadcrumb_for(
+        obj,
+        prefix,
+        display_name=display_name,
+        view_type_resolver=semantic_site_view_type,
+        human_value=human_value,
+        category_anchor=legacy_site.category_anchor,
+    )
+
+
+def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None = None) -> str:
+    """Stable Human Route document shell backed by current shared assets."""
+
+    return human_shell.page_shell(legacy_site, title, body, prefix, breadcrumb)
 
 
 def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
@@ -203,7 +204,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         content = legacy_site.inject_local_map(content, local_map)
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(
-            legacy_site.page_shell(
+            page_shell(
                 display_name(obj, str(obj.get("id"))),
                 content,
                 prefix,
@@ -214,18 +215,16 @@ def build(root: Path, output: Path) -> dict[str, int]:
         rendered.append((obj, html_path))
 
     output.mkdir(parents=True, exist_ok=True)
-    (output / "index.html").write_text(
-        legacy_site.page_shell("首页", build_homepage(rendered)), encoding="utf-8"
-    )
+    (output / "index.html").write_text(page_shell("首页", build_homepage(rendered)), encoding="utf-8")
     search_records = human_search.build_search_artifacts(
         output,
         rendered,
-        legacy_site.page_shell,
+        page_shell,
         display_name,
         human_markdown.summary_of,
         lambda obj: human_route.human_object_type_label(obj, semantic_site_view_type),
     )
-    human_compare.build_compare_artifact(output, index, relations, legacy_site.page_shell)
+    human_compare.build_compare_artifact(output, index, relations, page_shell)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "objects_loaded": len(objects),
