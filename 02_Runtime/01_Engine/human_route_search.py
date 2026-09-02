@@ -109,6 +109,7 @@ def build_search_index(
 def search_page_body() -> str:
     return """<h1>搜索 InteropAtlas</h1>
 <p>按名称、关键词或稳定 ID 查找当前 Human Route 已发布的对象。Search 是 View / Projection，不改变 Canonical 分类，也不会生成隐藏排名或推荐。</p>
+<p class="muted search-progressive-note">搜索结果使用浏览器端脚本；对象页、首页入口和稳定链接不依赖 Search，脚本不可用时仍可正常浏览。</p>
 <form id="atlas-search-form" class="search-form" action="search.html" method="get">
 <label for="atlas-search-input">搜索词<input id="atlas-search-input" name="q" type="search" autocomplete="off" enterkeyhint="search"></label>
 <button type="submit">搜索</button>
