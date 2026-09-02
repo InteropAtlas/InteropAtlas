@@ -1,18 +1,18 @@
 # InteropAtlas Human Interface Profiles v0.1
 
-> 状态：**Draft Package / Gate B Working Baseline**
+> 状态：**Draft Package / Gate B Verified Baseline**
 >
 > Parent: #14
 >
 > Consolidation work item: #78
+>
+> Final Gate B audit: [`../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`](../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md)
 
 ## 1. 目的
 
 本文件是 InteropAtlas Human Interface Standards Package 的模块入口。
 
-现有 [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) 已经形成一套综合草案，但 Gate B 要求这些规则能够被分成独立、可审计、可测试的 Profile，而不是所有规则长期挤在一个大文件中。
-
-因此 v0.1 Package 分成五个 Profile：
+现有 [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) 已经形成一套综合草案；五个 Profile 将其关键规则拆成独立、可审计、可测试的模块：
 
 1. [`human-interface-information-architecture-profile-v0.1.zh-CN.md`](human-interface-information-architecture-profile-v0.1.zh-CN.md)
 2. [`human-interface-information-presentation-profile-v0.1.zh-CN.md`](human-interface-information-presentation-profile-v0.1.zh-CN.md)
@@ -20,7 +20,9 @@
 4. [`human-interface-visual-presentation-profile-v0.1.zh-CN.md`](human-interface-visual-presentation-profile-v0.1.zh-CN.md)
 5. [`human-interface-accessibility-conformance-profile-v0.1.zh-CN.md`](human-interface-accessibility-conformance-profile-v0.1.zh-CN.md)
 
-这些文件首先是对已经存在的 `IA-HI-*` Requirements 做**模块化、依据补全和验收方式显式化**，不是重新发明第二套 Human Interface 规则。
+这些文件是对已经存在的 `IA-HI-*` Requirements 做**模块化、依据补全和验收方式显式化**，不是重新发明第二套 Human Interface 规则。
+
+2026-09-02 Final Conformance Audit 已确认该 Draft Package 达到 Gate B Foundation 的最小可依赖状态。这里的“Verified”不等于 stable Specification promotion；稳定规范升级仍需要单独决策。
 
 ---
 
@@ -147,30 +149,35 @@ Accessibility / Conformance
 
 ## 7. 与综合规范的关系
 
-在 Gate B Audit 完成前：
+Gate B 已通过，但本轮**不自动执行 stable Specification promotion**。
 
-- `human-interface-specification-v0.1.zh-CN.md` 继续作为综合源与历史稳定 Requirement ID 的来源；
-- 五个 Profile 是 Gate B 的**模块化 Draft Projection**；
-- 两者共享同一 `IA-HI-*` Requirement IDs；
-- 本轮不通过改 ID 制造“新规范”；
-- 如果发现内容冲突，应进入 #14 / #78 Review，而不是静默选择其中一个版本。
+因此当前关系是：
 
-Gate B Audit 通过后，再决定综合文件是继续作为 umbrella specification，还是由 Package index + 五个 Profile 正式取代其规范职责。
+- `human-interface-specification-v0.1.zh-CN.md` 保留作为 umbrella / historical integrated specification；
+- 五个 Profile 是经过 Gate B 实证验证的模块化 Draft Baseline；
+- 两者继续共享同一 `IA-HI-*` Requirement IDs；
+- 新实现 SHOULD 优先从 Package + 五个 Profile 获取模块化合同；
+- 如果发现冲突，优先记录并通过新的 Change / Audit 解决，不静默选择；
+- 是否让 Package 正式取代综合文件的规范职责，属于后续稳定规范治理决策，而不是 Gate B PASS 的隐含结果。
 
 ---
 
-## 8. 当前 Gate B 状态
+## 8. Gate B 状态
 
 ```text
-Information Architecture Draft          🟡 extracted / audit pending
-Information Presentation Draft         🟡 extracted / audit pending
-Interaction Draft                      🟡 extracted / audit pending
-Visual Presentation Draft              🟡 extracted / audit pending
-Accessibility / Conformance Draft      🟡 extracted / audit pending
-Requirement upstream traceability      🟡 improving
+Information Architecture Draft          ✅ auditable / representative evidence
+Information Presentation Draft         ✅ auditable / representative evidence
+Interaction Draft                      ✅ auditable / Browser evidence
+Visual Presentation Draft              ✅ auditable / focus-motion-reflow evidence
+Accessibility / Conformance Draft      ✅ auditable / Browser + task evidence
+Requirement upstream traceability      ✅ Gate B minimum
 Cross-profile conflict rules           ✅ v0.1 defined
-Representative machine intake path     ✅ usable
-Gate B conformance audit               ⬜ pending
+Representative Resource Pages          ✅ four-family slice
+Minimal Compare contract               ✅
+Minimal Human Task Walkthrough         ✅
+Gate B Final Conformance Audit         ✅ PASS
 ```
 
-当前目标不是马上让 Gate B 变成 PASS，而是让五个模块第一次具备**可单独审计的形态**。
+Gate B PASS 的准确含义是：**Foundation contract 已达到最小可依赖状态。**
+
+它不意味着 Search、完整 Compare UI、大型 Graph、所有页面类型、完整 Visual Token artifact 或全面 WCAG certification 已完成。这些继续作为 P1 / Later 的 Reference Implementation 与质量工作。
