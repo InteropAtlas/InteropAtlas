@@ -10,7 +10,7 @@ from urllib.parse import urljoin
 from playwright.sync_api import expect, sync_playwright
 
 
-BASE_URL = os.environ.get('IA_E2E_BASE_URL', 'http://127.0.0.1:8000/').rstrip('/') + '/'
+BASE_URL = os.environ.get("IA_E2E_BASE_URL", "http://127.0.0.1:8000/").rstrip("/") + "/"
 
 
 def page_url(object_id: str) -> str:
@@ -160,5 +160,5 @@ class RepresentativeResourcePageTests(unittest.TestCase):
             context.close()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main(verbosity=2)
