@@ -2,9 +2,9 @@
 """Legacy/v0 compatibility adapter for the current InteropAtlas Human Route.
 
 This module owns semantic compatibility concerns: Legacy/v0 Human View
-selection, representative Organization projection, route/link adaptation and
-homepage grouping. User-observable runtime behavior lives in permanent Human
-Route modules.
+selection, representative Organization projection and homepage grouping.
+Shared page-shell, breadcrumb, route-link and Human-label behavior lives in
+permanent Human Route modules.
 """
 
 from __future__ import annotations
@@ -17,13 +17,13 @@ from pathlib import Path
 import human_route_compare as human_compare
 import human_route_runtime as human_route
 import human_route_search as human_search
+import human_route_shell as human_shell
 import render_markdown as human_markdown
 import render_site as legacy_site
 from bootstrap_query import index_objects, load_atlas
 from graph_index import GraphIndex
 from kind_registry import has_profile, load_kind_registry
 from render_markdown import display_name, human_value, output_path, render_object, semantic_view_type
-
 
 _BASE_SEMANTIC_VIEW_TYPE = semantic_view_type
 _KIND_REGISTRY = load_kind_registry()
@@ -32,7 +32,6 @@ SUPPORTED_VIEW_TYPES = {"capability", "standard", "implementation", "organizatio
 
 def semantic_site_view_type(obj: dict | None) -> str | None:
     """Extend the current Human View projection with the v0 Organization profile."""
-
     view_type = _BASE_SEMANTIC_VIEW_TYPE(obj)
     if view_type is not None:
         return view_type
@@ -42,36 +41,35 @@ def semantic_site_view_type(obj: dict | None) -> str | None:
 
 
 def breadcrumb_for(obj: dict, prefix: str) -> str:
-    name = html.escape(display_name(obj, str(obj.get("id"))))
-    current = f'<span aria-current="page">{name}</span>'
-    view_type = semantic_site_view_type(obj)
-    home = f'<a href="{prefix}index.html">首页</a>'
-    separator = '<span aria-hidden="true">›</span>'
-    if view_type == "capability":
-        category = str(obj.get("category") or "uncategorized")
-        label = "未分类" if category == "uncategorized" else human_value(category)
-        category_link = (
-            f'<a href="{prefix}index.html#{legacy_site.category_anchor(category)}">'
-            f'{html.escape(label)}</a>'
-        )
-        return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{current}'
-    labels = {"standard": "标准与规范", "implementation": "实现", "organization": "组织"}
-    label = labels.get(str(view_type), "对象")
-    return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{current}'
+    """Compatibility hook delegating stable breadcrumb behavior to Human Route."""
+    return human_shell.breadcrumb_for(
+        obj,
+        prefix,
+        semantic_site_view_type,
+        display_name,
+        human_value,
+        legacy_site.category_anchor,
+    )
 
 
 def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
-    if not target_obj or semantic_site_view_type(target_obj) not in SUPPORTED_VIEW_TYPES:
-        return None
-    link = legacy_site.object_link(source_obj, target_obj)
-    if not link:
-        return None
-    return str(Path(link).with_suffix(".html")).replace("\\", "/")
+    """Compatibility hook delegating stable Human route links to Human Route."""
+    return human_shell.object_html_href(
+        source_obj,
+        target_obj,
+        semantic_site_view_type,
+        SUPPORTED_VIEW_TYPES,
+        legacy_site.object_link,
+    )
+
+
+def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None = None) -> str:
+    """Shared Human Route shell entry point used by Resource/Search/Compare pages."""
+    return human_shell.page_shell(legacy_site, title, body, prefix, breadcrumb)
 
 
 def render_organization(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str:
     """Render the representative Agent/Organization Resource Page contract."""
-
     object_id = str(obj.get("id", "未命名对象"))
     lines = [f"# {display_name(obj, object_id)}", ""]
     summary = human_markdown.summary_of(obj)
@@ -81,7 +79,6 @@ def render_organization(obj: dict, index: dict[str, dict], graph: GraphIndex) ->
         org_kind = human_value(obj.get("organization_kind") or "organization")
         official = str(obj.get("official_name") or obj.get("name_en") or obj.get("name_zh") or object_id)
         lines += [f"{official} 是 InteropAtlas 当前记录的{org_kind}组织对象。", ""]
-
     lines += ["## 基本信息", ""]
     lines.append("- **对象类型：** 组织（Organization）")
     lines.append(f"- **内部 ID：** `{object_id}`")
@@ -94,13 +91,11 @@ def render_organization(obj: dict, index: dict[str, dict], graph: GraphIndex) ->
     if obj.get("official_url"):
         lines.append(f"- **官方网站：** {obj['official_url']}")
     lines.append("")
-
     domains = obj.get("domains") or []
     if domains:
         lines += ["## 相关领域", ""]
         lines.extend(f"- {human_value(item)}" for item in domains)
         lines.append("")
-
     human_markdown.add_one_hop_neighbors(lines, obj, index, graph)
     human_markdown.add_direct_relations(lines, obj, index, graph)
     human_markdown.add_sources(lines, obj)
@@ -118,7 +113,6 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
     standards = [(obj, path) for obj, path in rendered if semantic_site_view_type(obj) == "standard"]
     implementations = [(obj, path) for obj, path in rendered if semantic_site_view_type(obj) == "implementation"]
     organizations = [(obj, path) for obj, path in rendered if semantic_site_view_type(obj) == "organization"]
-
     sections = [
         "<h1>InteropAtlas</h1>",
         "<p>从“能力”开始探索开放标准、规范与实现。当前网站仍处于早期实验阶段，导航结构会随着 Atlas 数据和关系逐步演进。</p>",
@@ -127,47 +121,30 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
         "<h2>从能力开始</h2>",
         "<p>能力是当前第一版主入口。同一个标准或实现可以连接到多个能力，不把 Atlas 固定成唯一目录树。</p>",
     ]
-
     categories: dict[str, list[tuple[dict, Path]]] = defaultdict(list)
     for obj, path in capabilities:
-        category = str(obj.get("category") or "uncategorized")
-        categories[category].append((obj, path))
-
+        categories[str(obj.get("category") or "uncategorized")].append((obj, path))
     sections.append('<div class="category-grid">')
     for category, items in sorted(categories.items(), key=lambda item: human_value(item[0])):
         label = "未分类" if category == "uncategorized" else human_value(category)
-        sections.append(
-            f'<section class="category-card" id="{html.escape(legacy_site.category_anchor(category))}">'
-        )
+        sections.append(f'<section class="category-card" id="{html.escape(legacy_site.category_anchor(category))}">')
         sections.append(f'<h3>{html.escape(label)}</h3><div class="count">{len(items)} 个能力</div><ul>')
         for obj, path in sorted(items, key=lambda item: display_name(item[0], str(item[0].get("id")))):
             name = html.escape(display_name(obj, str(obj.get("id"))))
             sections.append(f'<li><a href="{path.as_posix()}">{name}</a></li>')
         sections.append('</ul></section>')
     sections.append('</div>')
-
-    sections += [
-        "<h2>其他入口</h2>",
-        "<p class=\"muted\">这些仍是辅助浏览入口；它们不代表 Atlas 存在唯一 Canonical 分类树。</p>",
-    ]
-    for heading, items in (
-        ("标准与规范", standards),
-        ("实现", implementations),
-        ("组织", organizations),
-    ):
-        sections.append(
-            f'<details><summary>{heading} <span class="count">({len(items)})</span></summary><div class="grid">'
-        )
+    sections += ["<h2>其他入口</h2>", '<p class="muted">这些仍是辅助浏览入口；它们不代表 Atlas 存在唯一 Canonical 分类树。</p>']
+    for heading, items in (("标准与规范", standards), ("实现", implementations), ("组织", organizations)):
+        sections.append(f'<details><summary>{heading} <span class="count">({len(items)})</span></summary><div class="grid">')
         for obj, path in sorted(items, key=lambda item: display_name(item[0], str(item[0].get("id")))):
             sections.append(legacy_site.object_card(obj, path))
         sections.append('</div></details>')
-
     return "".join(sections)
 
 
 def install_compatibility_hooks() -> None:
     """Install only Legacy/v0 semantic compatibility hooks."""
-
     human_markdown.semantic_view_type = semantic_site_view_type
     legacy_site.object_html_href = object_html_href
     legacy_site.breadcrumb_for = breadcrumb_for
@@ -181,7 +158,6 @@ def build(root: Path, output: Path) -> dict[str, int]:
     index = index_objects(objects)
     graph = GraphIndex(index, relations)
     rendered: list[tuple[dict, Path]] = []
-
     for obj in objects:
         if semantic_site_view_type(obj) not in SUPPORTED_VIEW_TYPES:
             continue
@@ -193,47 +169,26 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
         content = human_compare.inject_compare_entry(content, obj)
-        local_map = human_route.build_local_map(
-            legacy_site,
-            obj,
-            index,
-            graph,
-            semantic_site_view_type,
-        )
+        local_map = human_route.build_local_map(legacy_site, obj, index, graph, semantic_site_view_type)
         content = legacy_site.inject_local_map(content, local_map)
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(
-            legacy_site.page_shell(
-                display_name(obj, str(obj.get("id"))),
-                content,
-                prefix,
-                breadcrumb_for(obj, prefix),
-            ),
+            page_shell(display_name(obj, str(obj.get("id"))), content, prefix, breadcrumb_for(obj, prefix)),
             encoding="utf-8",
         )
         rendered.append((obj, html_path))
-
     output.mkdir(parents=True, exist_ok=True)
-    (output / "index.html").write_text(
-        legacy_site.page_shell("首页", build_homepage(rendered)), encoding="utf-8"
-    )
+    (output / "index.html").write_text(page_shell("首页", build_homepage(rendered)), encoding="utf-8")
     search_records = human_search.build_search_artifacts(
-        output,
-        rendered,
-        legacy_site.page_shell,
-        display_name,
-        human_markdown.summary_of,
+        output, rendered, page_shell, display_name, human_markdown.summary_of,
         lambda obj: human_route.human_object_type_label(obj, semantic_site_view_type),
     )
-    human_compare.build_compare_artifact(output, index, relations, legacy_site.page_shell)
+    human_compare.build_compare_artifact(output, index, relations, page_shell)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
-        "objects_loaded": len(objects),
-        "pages_rendered": len(rendered),
-        "search_records": search_records,
-        "compare_pages": 1,
-        "graph_edges": len(graph.edges),
-        "reference_issues": len(graph.issues),
+        "objects_loaded": len(objects), "pages_rendered": len(rendered),
+        "search_records": search_records, "compare_pages": 1,
+        "graph_edges": len(graph.edges), "reference_issues": len(graph.issues),
     }
 
 
