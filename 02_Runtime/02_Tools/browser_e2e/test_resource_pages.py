@@ -1,0 +1,89 @@
+#!/usr/bin/env python3
+"""Gate B representative Resource Page contract across four identity families."""
+
+from __future__ import annotations
+
+import os
+import unittest
+from urllib.parse import urljoin
+
+from playwright.sync_api import expect, sync_playwright
+
+
+BASE_URL = os.environ.get("IA_E2E_BASE_URL", "http://127.0.0.1:8000/").rstrip("/") + "/"
+
+
+def page_url(object_id: str) -> str:
+    return urljoin(BASE_URL, f"objects/{object_id}.html")
+
+
+class RepresentativeResourcePageTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.playwright = sync_playwright().start()
+        cls.browser = cls.playwright.chromium.launch()
+
+    @classmethod
+    def tearDownClass(cls) -> None:
+        cls.browser.close()
+        cls.playwright.stop()
+
+    def test_four_core_identity_families_have_stable_human_resources(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            representatives = {
+                "automated_build_deployment": "自动构建与部署",
+                "yaml_1.2.2": "YAML",
+                "forgejo_actions": "Forgejo Actions",
+                "apple": "苹果公司",
+            }
+            for object_id, title_fragment in representatives.items():
+                with self.subTest(object_id=object_id):
+                    response = page.goto(page_url(object_id))
+                    self.assertTrue(response and response.ok)
+                    self.assertEqual(page.url, page_url(object_id))
+                    expect(page.locator("main h1")).to_contain_text(title_fragment)
+                    self.assertEqual(page.locator("main").count(), 1)
+                    self.assertEqual(page.locator('nav[aria-label="面包屑"] [aria-current="page"]').count(), 1)
+                    expect(page.locator("main")).to_contain_text("基本信息")
+        finally:
+            context.close()
+
+    def test_organization_page_has_identity_context_key_facts_and_source(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.goto(page_url("apple"))
+            main = page.locator("main")
+            expect(main).to_contain_text("Apple Inc. 是 InteropAtlas 当前记录的company组织对象")
+            expect(main).to_contain_text("对象类型： 组织（Organization）")
+            expect(main).to_contain_text("官方名称： Apple Inc.")
+            expect(main).to_contain_text("组织类别： company")
+            expect(main).to_contain_text("活动范围 / 管辖： global")
+            expect(main.locator('a[href="https://developer.apple.com/design/human-interface-guidelines/"]')).to_be_visible()
+            expect(page.locator('nav[aria-label="面包屑"]')).to_contain_text("组织")
+        finally:
+            context.close()
+
+    def test_representative_pages_expose_profile_specific_key_facts(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            cases = (
+                ("automated_build_deployment", "能力类别"),
+                ("yaml_1.2.2", "标准类别"),
+                ("forgejo_actions", "实现类别"),
+                ("apple", "组织类别"),
+            )
+            for object_id, key_fact in cases:
+                with self.subTest(object_id=object_id):
+                    page.goto(page_url(object_id))
+                    expect(page.locator("main")).to_contain_text(key_fact)
+                    expect(page.locator("main")).to_contain_text("本页由 InteropAtlas 结构化数据自动生成")
+        finally:
+            context.close()
+
+
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
