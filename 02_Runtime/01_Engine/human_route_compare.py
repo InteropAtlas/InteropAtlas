@@ -151,7 +151,7 @@ def build_compare_artifact(
 ) -> Path:
     target = output / COMPARE_PATH
     target.parent.mkdir(parents=True, exist_ok=True)
-    page = page_shell("比较 Forgejo Actions 与 GitHub Actions", build_compare_body(index, relations), "../../")
+    page = page_shell("比较 Forgejo Actions 与 GitHub Actions", build_compare_body(index, relations), "../")
     page = page.replace("</style>", COMPARE_STYLE + "</style>", 1)
     target.write_text(page, encoding="utf-8")
     return target
