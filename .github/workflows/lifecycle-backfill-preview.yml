@@ -12,6 +12,7 @@ permissions:
 
 jobs:
   preview:
+    if: github.event_name != 'push' || contains(github.event.head_commit.message, '[preview-provenance]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
