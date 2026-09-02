@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 """Legacy/v0 compatibility adapter for the current InteropAtlas Human Route.
 
-This module now owns only semantic compatibility concerns: Legacy/v0 Human View
+This module owns semantic compatibility concerns: Legacy/v0 Human View
 selection, representative Organization projection, route/link adaptation and
-homepage grouping. User-observable interaction/accessibility behavior lives in
-the permanent `human_route_runtime` boundary.
+homepage grouping. User-observable runtime behavior lives in permanent Human
+Route modules.
 """
 
 from __future__ import annotations
@@ -15,6 +15,7 @@ from collections import defaultdict
 from pathlib import Path
 
 import human_route_runtime as human_route
+import human_route_search as human_search
 import render_markdown as human_markdown
 import render_site as legacy_site
 from bootstrap_query import index_objects, load_atlas
@@ -121,6 +122,7 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
         "<h1>InteropAtlas</h1>",
         "<p>从“能力”开始探索开放标准、规范与实现。当前网站仍处于早期实验阶段，导航结构会随着 Atlas 数据和关系逐步演进。</p>",
         f'<p class="muted">当前可浏览：{len(capabilities)} 个能力 · {len(standards)} 个标准 / 规范 · {len(implementations)} 个实现 · {len(organizations)} 个组织</p>',
+        '<p><a href="search.html"><strong>搜索 InteropAtlas</strong></a> — 按名称、关键词或稳定 ID 查找当前已发布对象。</p>',
         "<h2>从能力开始</h2>",
         "<p>能力是当前第一版主入口。同一个标准或实现可以连接到多个能力，不把 Atlas 固定成唯一目录树。</p>",
     ]
@@ -213,10 +215,19 @@ def build(root: Path, output: Path) -> dict[str, int]:
     (output / "index.html").write_text(
         legacy_site.page_shell("首页", build_homepage(rendered)), encoding="utf-8"
     )
+    search_records = human_search.build_search_artifacts(
+        output,
+        rendered,
+        legacy_site.page_shell,
+        display_name,
+        human_markdown.summary_of,
+        lambda obj: human_route.human_object_type_label(obj, semantic_site_view_type),
+    )
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "objects_loaded": len(objects),
         "pages_rendered": len(rendered),
+        "search_records": search_records,
         "graph_edges": len(graph.edges),
         "reference_issues": len(graph.issues),
     }
@@ -229,9 +240,9 @@ def main() -> None:
     args = parser.parse_args()
     result = build(args.root, args.output)
     print(
-        f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects "
-        f"with {result['graph_edges']} graph edges and {result['reference_issues']} reference issues "
-        f"into {args.output}"
+        f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects, "
+        f"indexed {result['search_records']} Human resources, with {result['graph_edges']} graph edges "
+        f"and {result['reference_issues']} reference issues into {args.output}"
     )
 
 
