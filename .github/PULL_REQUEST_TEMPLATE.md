@@ -65,6 +65,13 @@ Result summary:
 
 What newer versions, superseding artifacts, alternatives, mature precedents, or Atlas omissions were checked?
 
+## Project Continuity Impact
+
+Did this PR change the project-level Phase / Gate, current main line, `Resume Here`, or a Human decision gate?
+
+- [ ] no — task-level Issue / PR state is sufficient
+- [ ] yes — `PROJECT_STATE.md` has been updated
+
 ## Review Class
 
 - [ ] normal — independent review by a different Human / Agent SHOULD occur
@@ -91,3 +98,4 @@ Recommended next action:
 - [ ] New or substantively modified v0 Canonical Records maintain lifecycle / verification metadata when applicable.
 - [ ] Generated outputs were not edited as a competing source of truth.
 - [ ] Durable context is recorded here, in the Issue, or in repository artifacts rather than only in private chat.
+- [ ] If project-level direction changed, `PROJECT_STATE.md` was updated; otherwise it was intentionally left unchanged.
