@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-02T12:55:00+08:00
+Document Updated At: 2026-09-02T13:00:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -11,13 +11,13 @@ Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Pending
+  Reviewer: Not independently reviewed — checkpoint sync only
   GitHub Actor: ff6962757
 -->
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-02T12:55:00+08:00
+> Verified At: 2026-09-02T13:00:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -93,37 +93,43 @@ Post-Gate 已落地的主线 slices：
    - 无 winner / score / recommendation。
 
 4. **#107 / PR #109 — Second permanent Human Route shell boundary ✅**
-   - 新增 `human_route_shell.py`；
+   - `human_route_shell.py`；
    - semantic Breadcrumb / Human route-link helper / shared Human view labels 迁入 permanent Human Route；
-   - Resource / Search / Compare 共用 permanent Page Shell entry point；
-   - `render_site_semantic.py` 进一步收窄为 Legacy/v0 compatibility adapter；
-   - PR baseline：Browser E2E 30 / 30 PASS，99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues。
+   - Resource / Search / Compare 共用 permanent Page Shell entry point。
+
+5. **#110 / PR #111 — First Evidence / Assessment Human View ✅**
+   - Canonical `sources` 与 IA `notes_zh` 在 Human View 中明确分工；
+   - missing source 表达为 not recorded，而不是 false / none；
+   - Forgejo Actions + YAML 1.2.2 representative slice；
+   - Browser E2E **32 / 32 PASS**；
+   - 99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues。
 
 ## 5. Resume Here
 
-第二批 permanent Human Route boundary 已完成。按照 Reference Implementation Phase Plan，Search 与第一个 Compare 已有真实产品 slice，因此当前进入下一个未验证的高价值产品方向：**Evidence / Assessment presentation**。
+Search、Compare、Evidence presentation 和两批 permanent renderer boundary 已经形成可依赖的小闭环。当前最明显的产品缺口不是再发明一个新引擎，而是：这些能力分别存在，但 Homepage 仍主要要求用户从 Capability 分类理解 Atlas。
 
-当前 Work Item：**#110 — 第一批 Evidence / Assessment Human View**。
+当前 Work Item：**#112 — Task-oriented Homepage Entry v0.1**。
 
 ```text
 #16 Reference Implementation umbrella
         ↓
-#110 Evidence / Assessment Human View
+#112 Task-oriented Homepage Entry
         ↓
-1. Separate Canonical facts / Canonical sources / IA notes in presentation
+1. Expose existing Human Route abilities as user tasks
+   Find / Understand / Compare / Verify / Relate-Explore
         ↓
-2. First representative slice: forgejo_actions + yaml_1.2.2
+2. Keep Capability-first browse as one valid entry, not the only entry
         ↓
-3. Preserve stable routes / Search / Compare / Local Map / Browser regression
+3. Do not advertise unimplemented general Compare / large Graph Explorer
         ↓
-4. Re-evaluate next product slice after real evidence
+4. Preserve stable routes / JS-disabled reading / Browser regressions
 ```
 
-### #110 当前停止条件
+### #112 当前停止条件
 
-> 在不修改 Canonical data / Knowledge Model 的前提下，让至少一个真实 Resource Page 明确区分事实、`sources` 来源与 InteropAtlas 自己的说明 / assessment-like notes；缺失来源必须表达为 not recorded，而不是 false / none；并保持 Machine / Graph / Browser 回归。
+> Homepage 至少形成 4 个真实可用、任务导向的入口，并只连接已经存在且有验证证据的 Human Route 能力；不创建新的 Canonical taxonomy，不扩张成全站产品重写。
 
-当前 #110 已进入 In Progress。实现与测试应以 Issue / active PR 为任务级断点。
+#112 当前为 Ready。新的执行者应先 Claim / 更新 Lease，再开始实现。
 
 ## 6. Gate B final result
 
@@ -163,7 +169,8 @@ Gate B PASS **不等于完整网站、完整 WCAG certification、完整 Search 
 - Permanent Human Route runtime boundary；
 - Task-oriented Search v0.1；
 - First dedicated Compare UI slice；
-- Second permanent Human Route shell boundary。
+- Second permanent Human Route shell boundary；
+- First Evidence / Assessment Human View。
 
 ## 8. Cross-cutting / delegated work
 
@@ -171,7 +178,7 @@ Lifecycle / provenance historical backfill **#89–#93 已完成并关闭**。�
 
 Agent Continuity 的 fresh-session / different-agent takeover validation 由 #86 跟踪，是 P1 cross-cutting validation，不阻塞当前产品主线。
 
-F4 Validator / Curation / Evidence / Query correctness 继续并行；#110 是 Human View presentation slice，不等价于全量 Evidence 模型建设。
+F4 Validator / Curation / Evidence / Query correctness 继续并行；#110 只完成第一批 Human View presentation，不等价于全量 Evidence 模型建设。
 
 ## 9. Open decision gates — DO NOT auto-execute
 
@@ -213,15 +220,18 @@ AGENTS.md
 
 ```text
 Issue #16
-→ Issue #110 / active PR
-→ 03_Evolution/03_Change/human-evidence-presentation-v0.1.zh-CN.md
-→ render_markdown.py
-→ render_site_semantic.py
-→ related deterministic tests + Browser E2E
+→ Issue #112
+→ render_site_semantic.py / build_homepage()
+→ human_route_shell.py
+→ Search / Compare / Evidence Human View contracts
+→ related Browser E2E
 ```
 
 理解 renderer architecture：
 `03_Evolution/03_Change/human-route-renderer-boundary-v0.2.zh-CN.md` + `human_route_shell.py` + `human_route_runtime.py`。
+
+理解 Evidence presentation：
+`03_Evolution/03_Change/human-evidence-presentation-v0.1.zh-CN.md`。
 
 理解知识模型：
 `03_Evolution/03_Change/knowledge-representation-model-decision-v0.1.zh-CN.md` + current Schema / semantic engine。
@@ -236,7 +246,7 @@ Issue #16
 新 Agent 在依赖 `Resume Here` 前必须检查：
 
 1. `Verified At` 之后 main 是否有改变 Phase / 主线的提交；
-2. #16 / #110 或其最新 PR 是否已完成或改变方向；
+2. #16 / #112 或其最新 PR 是否已完成或改变方向；
 3. 如果状态已经变化，先更新本文件，再继续。
 
 不要让旧 `foundation-first-phase-v0.1.zh-CN.md` 的历史“NOW”状态覆盖本文件和更新的 Reference Implementation Phase Plan。
