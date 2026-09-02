@@ -37,7 +37,7 @@ jobs:
             --bundle-dir /tmp/ia-object-bundle \
             --report /tmp/ia-object-bundle/report.json
           python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
-          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '/tmp/ia-object-bundle/01_State/01_Objects/*.yaml'
+          (cd /tmp/ia-object-bundle && python "$GITHUB_WORKSPACE/02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py" '01_State/01_Objects/*.yaml')
           python 02_Runtime/01_Engine/test_repository_layout.py
           python 02_Runtime/01_Engine/test_v0_schemas.py
           python 02_Runtime/01_Engine/test_relation_model.py
