@@ -4,7 +4,7 @@
 >
 > 文档创建时间：2026-09-02T08:50:00+08:00
 >
-> 文档最后实质更新：2026-09-02T08:50:00+08:00
+> 文档最后实质更新：2026-09-02T09:10:00+08:00
 >
 > 目的：以尽量轻量、结构化、可检索的方式记录 InteropAtlas 知识与贡献的时间、身份、来源和验证留痕。
 
@@ -25,12 +25,19 @@ V0.1 采用四类留痕：
 
 本 Profile 采用 `Adopt → Profile → Extend → Invent（采用 → 定制 → 扩展 → 最后才自行发明）` 原则。
 
-主要上游参考：
+本轮已经正式研究并收录：
 
-- **W3C PROV-O（W3C 溯源本体）**：提供 Entity（实体）、Activity（活动）、Agent（参与者）及其来源关系的通用 Provenance（溯源）模型。InteropAtlas 采用其“对象、活动、参与者和来源应可分离追踪”的核心思想，不直接复制完整本体。
-- **SPDX 3.0.1 CreationInfo（SPDX 创建信息模型）**：提供 `created`、`createdBy`、`createdUsing`、`specVersion` 等结构化创建信息。InteropAtlas 采用其“时间、身份、工具应可结构化查询”的工程思想。
+- **W3C PROV-DM（W3C 溯源数据模型）**：提供 Entity（实体）、Activity（活动）、Agent（参与者）以及 Attribution（归因）、Association（关联）、Delegation（委派）、Derivation（派生）等概念边界；
+- **W3C PROV-O（W3C 溯源本体）**：PROV 数据模型的 OWL2（Web 本体语言）表达，用于可交换的结构化 Provenance（溯源）；
+- **W3C PROV-CONSTRAINTS（W3C 溯源约束）**：说明 Provenance 可以进行一致性和有效性机器检查；
+- **W3C PROV-AQ（W3C 溯源访问与查询）**：说明 Provenance 可以通过标准 Web 机制定位、获取和查询；该文档是 Working Group Note（工作组说明），不是 Recommendation（推荐标准）；
+- **SPDX 3.0.1 CreationInfo（SPDX 创建信息模型）**：提供 `created`、`createdBy`、`createdUsing`、`specVersion` 等结构化创建信息；
+- **DCMI Metadata Terms（都柏林核心元数据术语）**：提供 `modified`、`provenance` 等成熟通用元数据概念；
+- **SLSA 1.2 Provenance（SLSA 1.2 溯源规范）**：强调可验证 Provenance 的完整性、真实性、准确性，以及 Builder（构建者）、运行实例、输入和时间等工程边界。
 
-SLSA Provenance（SLSA 溯源规范）作为补充工程先例，用于理解可验证来源、产生过程和供应链完整性，但当前不直接采用其构建专用数据结构。
+详细对照研究见 `03_Evolution/01_Research/provenance-traceability-prior-art-2026-09-02.zh-CN.md`。
+
+研究结论是：InteropAtlas 当前不需要复制完整 PROV 本体、SLSA 构建结构或另建 Change Log（变更日志）系统，而应采用这些标准的核心边界并保持轻量 Profile（定制规范）。
 
 ## 3. 时间留痕
 
@@ -139,7 +146,13 @@ InteropAtlas 自产 Specification / Profile / Governance Document（规范 / 配
 
 Git 历史仍保存完整逐次变更；文档头部字段用于人类阅读和结构化检索。未来如果文档进入 Canonical Object 模型，可通过稳定 ID 与对应 Record 生命周期关联。
 
-## 10. V0.1 最小执行规则
+## 10. 可靠性边界
+
+当前结构化留痕提高的是可追溯性和可复核性，不等于自动证明内容真实。
+
+参考 SLSA（软件供应链等级）与 PROV-CONSTRAINTS（溯源约束）的思想，未来更高保证等级可以增加 Verification Event（验证事件）、Attestation（证明声明）、签名或更严格机器验证，但 V0.1 不提前引入这些复杂度。
+
+## 11. V0.1 最小执行规则
 
 1. Git / GitHub 继续独立承担变更历史，不重复建立 Change Log 数据模型；
 2. 新建或实质修改的 v0 Object / Relation SHOULD 维护 `record_created_at`、`record_updated_at`；
@@ -147,4 +160,5 @@ Git 历史仍保存完整逐次变更；文档头部字段用于人类阅读和�
 4. 标准类知识 SHOULD 保留权威来源 / Evidence；
 5. Agent / mixed contribution（智能体 / 混合贡献）按 Contribution Identity Profile 记录 Initiator / Executor / Reviewer，并分离 GitHub Actor；
 6. 自产规范文档 SHOULD 维护可见的创建 / 最后实质更新时间；
-7. 不因本 Profile 立即触发全仓库 Legacy Data（旧数据）批量迁移。
+7. 不因本 Profile 立即触发全仓库 Legacy Data（旧数据）批量迁移；
+8. 如果未来需要更高可靠性，优先增加独立 Verification / Attestation 层，而不是持续向 Object 顶层堆积字段。
