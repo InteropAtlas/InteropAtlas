@@ -3,10 +3,10 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-02T11:43:21+08:00
+Document Updated At: 2026-09-02T12:55:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
-Metadata Provenance: reconstructed_from_git
-Lifecycle Time Provenance: reconstructed_from_git
+Metadata Provenance: mixed
+Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-02T11:44:00+08:00
+> Verified At: 2026-09-02T12:55:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -75,53 +75,55 @@ Foundation 的三项主要 Gate 已经达到最小可依赖状态。项目当前
 
 当前主 umbrella：**#16 — 按 Human Interface Specification / Profiles 审计并重构当前网站**。
 
-Post-Gate 第一批 vertical slices 已经落地：
+Post-Gate 已落地的主线 slices：
 
 1. **#101 / PR #102 — Permanent Human Route runtime boundary ✅**
    - Local Map loading / success / failure / retry；
    - focus / reduced-motion；
-   - 不再由 `render_site_semantic.py` 通过脆弱字符串 patch 注入；
-   - Human map-center label 不再泄漏 raw `system / concept / artifact / agent`。
+   - Human map-center label 不再泄漏 raw core type。
 
 2. **#103 / PR #104 — Task-oriented Search v0.1 ✅**
-   - 99 个当前 Human Resources 的 deterministic search index；
-   - name / stable ID / summary / Human type / alias 简单透明匹配；
-   - query 进入 `?q=`，支持刷新 / Back / Forward；
-   - 无 embedding、LLM ranking、隐藏推荐。
+   - 99 个 Human Resources 的 deterministic search index；
+   - stable ID / name / summary / Human type / alias 透明匹配；
+   - query URL / Back / Forward；无隐藏 ranking。
 
 3. **#105 / PR #106 — First dedicated Compare UI ✅**
-   - `automated_build_deployment` 下 Forgejo Actions vs GitHub Actions；
-   - 真实 dedicated Compare page；
-   - 保留 false / not recorded 边界；
-   - `alternative_to` 不升级为 `compatible_with`；
-   - 无 winner / score / recommendation；
-   - 修复 automated review 发现的 Compare → Home 相对路径问题。
+   - Forgejo Actions vs GitHub Actions；
+   - false / not-recorded 边界；
+   - 无 winner / score / recommendation。
 
-当前最新 Browser baseline：**30 / 30 Chromium tests PASS**；Human Route build 仍保持 99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues，并额外生成 99-record Search index 与 1 个 dedicated Compare view。
+4. **#107 / PR #109 — Second permanent Human Route shell boundary ✅**
+   - 新增 `human_route_shell.py`；
+   - semantic Breadcrumb / Human route-link helper / shared Human view labels 迁入 permanent Human Route；
+   - Resource / Search / Compare 共用 permanent Page Shell entry point；
+   - `render_site_semantic.py` 进一步收窄为 Legacy/v0 compatibility adapter；
+   - PR baseline：Browser E2E 30 / 30 PASS，99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues。
 
 ## 5. Resume Here
 
-Search 和第一个 Compare 已经证明 permanent Human Route 可以承载真实产品能力。现在不应立刻继续横向堆更多产品功能。
+第二批 permanent Human Route boundary 已完成。按照 Reference Implementation Phase Plan，Search 与第一个 Compare 已有真实产品 slice，因此当前进入下一个未验证的高价值产品方向：**Evidence / Assessment presentation**。
 
-下一条主线优先收敛第二批 renderer architecture debt（渲染器架构债务）：
+当前 Work Item：**#110 — 第一批 Evidence / Assessment Human View**。
 
 ```text
-1. #16 — Second permanent Human Route boundary slice
+#16 Reference Implementation umbrella
         ↓
-2. Move Page Shell / semantic breadcrumb / shared Human labels
-   away from transitional semantic adapter where practical
+#110 Evidence / Assessment Human View
         ↓
-3. Preserve Search / Compare / Resource Page / Browser regressions
+1. Separate Canonical facts / Canonical sources / IA notes in presentation
         ↓
-4. Re-evaluate next product slice
-   broader task-oriented entry points OR Compare generalization OR Evidence presentation
+2. First representative slice: forgejo_actions + yaml_1.2.2
+        ↓
+3. Preserve stable routes / Search / Compare / Local Map / Browser regression
+        ↓
+4. Re-evaluate next product slice after real evidence
 ```
 
-### 第二小步的停止条件
+### #110 当前停止条件
 
-> 进一步缩窄 `render_site_semantic.py` 作为 Legacy/v0 compatibility adapter 的职责，把已经稳定、与 Legacy/v0 兼容无关的共享 Human Route 页面职责迁入长期模块；但不重写整站、不改变 Knowledge Model、不引入前端框架。
+> 在不修改 Canonical data / Knowledge Model 的前提下，让至少一个真实 Resource Page 明确区分事实、`sources` 来源与 InteropAtlas 自己的说明 / assessment-like notes；缺失来源必须表达为 not recorded，而不是 false / none；并保持 Machine / Graph / Browser 回归。
 
-新 Agent 收到“继续”时，应先检查 #16 的最新 child Issue / PR，然后从这个第二 permanent-boundary slice 继续。
+当前 #110 已进入 In Progress。实现与测试应以 Issue / active PR 为任务级断点。
 
 ## 6. Gate B final result
 
@@ -160,15 +162,16 @@ Gate B PASS **不等于完整网站、完整 WCAG certification、完整 Search 
 - Contribution Identity + Provenance / Traceability baseline；
 - Permanent Human Route runtime boundary；
 - Task-oriented Search v0.1；
-- First dedicated Compare UI slice。
+- First dedicated Compare UI slice；
+- Second permanent Human Route shell boundary。
 
 ## 8. Cross-cutting / delegated work
 
-Lifecycle / provenance historical backfill 已由 #89–#93 单独跟踪，并已交由其他 Agent 执行；当前 Reference Implementation 主线不要重复抢占这项工作。
+Lifecycle / provenance historical backfill **#89–#93 已完成并关闭**。它留下的 never-verified / source-evidence gaps 是后续质量债，不代表 #89 未完成；当前 Reference Implementation 主线不要重复执行历史 backfill。
 
 Agent Continuity 的 fresh-session / different-agent takeover validation 由 #86 跟踪，是 P1 cross-cutting validation，不阻塞当前产品主线。
 
-F4 Validator / Curation / Evidence / Query correctness 继续并行。
+F4 Validator / Curation / Evidence / Query correctness 继续并行；#110 是 Human View presentation slice，不等价于全量 Evidence 模型建设。
 
 ## 9. Open decision gates — DO NOT auto-execute
 
@@ -191,7 +194,7 @@ Gate B PASS 和当前 Reference Implementation 进展不改变这些授权边界
 - PR #26 — Open Collaboration v0.2：高影响 Review Gate；
 - PR #30 — Fit Test Batch 1：独立未合并工作；
 - Issue #15 — 更广泛 Schema / Validator / migration debt；
-- #89–#93 — delegated lifecycle/provenance backfill；
+- Issue #86 — Agent Continuity takeover validation；
 - F4 Machine / Curation / Evidence tasks。
 
 ## 11. Where to read next
@@ -210,13 +213,15 @@ AGENTS.md
 
 ```text
 Issue #16
-→ PROJECT_STATE.md Resume Here
-→ human-route-renderer-boundary-v0.1.zh-CN.md
-→ human_route_runtime.py
+→ Issue #110 / active PR
+→ 03_Evolution/03_Change/human-evidence-presentation-v0.1.zh-CN.md
+→ render_markdown.py
 → render_site_semantic.py
-→ Search / Compare modules
-→ related Browser E2E
+→ related deterministic tests + Browser E2E
 ```
+
+理解 renderer architecture：
+`03_Evolution/03_Change/human-route-renderer-boundary-v0.2.zh-CN.md` + `human_route_shell.py` + `human_route_runtime.py`。
 
 理解知识模型：
 `03_Evolution/03_Change/knowledge-representation-model-decision-v0.1.zh-CN.md` + current Schema / semantic engine。
@@ -231,7 +236,7 @@ Issue #16
 新 Agent 在依赖 `Resume Here` 前必须检查：
 
 1. `Verified At` 之后 main 是否有改变 Phase / 主线的提交；
-2. #16 或其最新 child PR / Issue 是否已完成或改变方向；
+2. #16 / #110 或其最新 PR 是否已完成或改变方向；
 3. 如果状态已经变化，先更新本文件，再继续。
 
 不要让旧 `foundation-first-phase-v0.1.zh-CN.md` 的历史“NOW”状态覆盖本文件和更新的 Reference Implementation Phase Plan。

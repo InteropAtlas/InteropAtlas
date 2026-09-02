@@ -219,6 +219,8 @@ def add_relation_overview(
 
 
 def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
+    """Legacy source-only presentation retained for Resource types not yet in #110 slice."""
+
     sources = obj.get("sources") or []
     if not sources:
         return
@@ -226,6 +228,41 @@ def add_sources(lines: list[str], obj: dict[str, Any]) -> None:
     for source in sources:
         if not isinstance(source, dict):
             continue
+        title = source.get("title") or source.get("url") or "来源"
+        url = source.get("url")
+        lines.append(f"- [{title}]({url})" if url else f"- {title}")
+    lines.append("")
+
+
+def add_evidence_and_assessment(
+    lines: list[str],
+    obj: dict[str, Any],
+    include_notes: bool = False,
+) -> None:
+    """Separate Canonical source links from IA-authored notes without inventing evidence."""
+
+    if include_notes:
+        notes = obj.get("notes_zh") or []
+        if notes:
+            lines += ["## InteropAtlas 说明与评估", ""]
+            lines.append("以下内容是 InteropAtlas 的说明、边界或评估性记录，不等同于第三方权威来源。")
+            lines.append("")
+            lines.extend(f"- {note}" for note in notes)
+            lines.append("")
+
+    lines += ["## 来源与依据", ""]
+    lines.append("以下链接直接来自当前 Canonical 对象的 `sources` 字段；Renderer 不维护第二份来源事实。")
+    lines.append("")
+    sources = obj.get("sources") or []
+    valid_sources = [source for source in sources if isinstance(source, dict)]
+    if not valid_sources:
+        lines.append(
+            "当前记录未提供来源 / Evidence 链接。这表示 **未记录**，"
+            "不等于该事实为 false、none 或现实中不存在。"
+        )
+        lines.append("")
+        return
+    for source in valid_sources:
         title = source.get("title") or source.get("url") or "来源"
         url = source.get("url")
         lines.append(f"- [{title}]({url})" if url else f"- {title}")
@@ -388,12 +425,7 @@ def render_implementation(
         lines.extend(f"- {human_value(item)}" for item in models)
         lines.append("")
 
-    notes = obj.get("notes_zh") or []
-    if notes:
-        lines += ["## 需要注意", ""]
-        lines.extend(f"- {note}" for note in notes)
-        lines.append("")
-    add_sources(lines, obj)
+    add_evidence_and_assessment(lines, obj, include_notes=True)
     return finish(lines)
 
 
@@ -534,7 +566,7 @@ def render_standard(
                     text += f" · {human_value(version['status'])}"
                 lines.append(f"- {text}")
         lines.append("")
-    add_sources(lines, obj)
+    add_evidence_and_assessment(lines, obj)
     return finish(lines)
 
 
