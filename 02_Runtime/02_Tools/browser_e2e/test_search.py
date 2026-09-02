@@ -90,7 +90,9 @@ class HumanRouteSearchBrowserTests(unittest.TestCase):
             response = page.goto(urljoin(BASE_URL, 'search.html?q=Forgejo'))
             self.assertTrue(response and response.ok)
             expect(page.locator('main h1')).to_have_text('搜索 InteropAtlas')
-            expect(page.locator('noscript')).to_contain_text('对象页、首页入口和稳定链接仍可正常使用')
+            expect(page.locator('.search-progressive-note')).to_contain_text(
+                '对象页、首页入口和稳定链接不依赖 Search'
+            )
             home = page.get_by_role('link', name='InteropAtlas').first
             expect(home).to_be_visible()
             home.click()
