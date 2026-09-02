@@ -84,6 +84,25 @@ class RepresentativeResourcePageTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_local_map_center_uses_human_semantic_type_labels(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            cases = (
+                ("automated_build_deployment", "当前地图中心 · 能力", "concept"),
+                ("yaml_1.2.2", "当前地图中心 · 标准 / 规范", "artifact"),
+                ("forgejo_actions", "当前地图中心 · 实现", "system"),
+                ("apple", "当前地图中心 · 组织", "agent"),
+            )
+            for object_id, expected, raw_type in cases:
+                with self.subTest(object_id=object_id):
+                    page.goto(page_url(object_id))
+                    center = page.locator(".local-map .map-center .map-edge")
+                    expect(center).to_have_text(expected)
+                    self.assertNotEqual(center.inner_text(), f"当前地图中心 · {raw_type}")
+        finally:
+            context.close()
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

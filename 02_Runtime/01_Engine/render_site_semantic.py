@@ -1,12 +1,10 @@
 #!/usr/bin/env python3
-"""Semantic compatibility adapter for the current InteropAtlas static site.
+"""Legacy/v0 compatibility adapter for the current InteropAtlas Human Route.
 
-The existing site UI remains intentionally stable while object selection,
-breadcrumbs, homepage grouping, and links become Legacy/v0 dual-read. During
-Gate B this transitional adapter also carries bounded Human Interface
-conformance hooks and the representative four-family Resource Page slice.
-These hooks should move into the final Human Route implementation during the
-post-Gate conformance refactor.
+This module now owns only semantic compatibility concerns: Legacy/v0 Human View
+selection, representative Organization projection, route/link adaptation and
+homepage grouping. User-observable interaction/accessibility behavior lives in
+the permanent `human_route_runtime` boundary.
 """
 
 from __future__ import annotations
@@ -16,6 +14,7 @@ import html
 from collections import defaultdict
 from pathlib import Path
 
+import human_route_runtime as human_route
 import render_markdown as human_markdown
 import render_site as legacy_site
 from bootstrap_query import index_objects, load_atlas
@@ -28,16 +27,6 @@ _BASE_SEMANTIC_VIEW_TYPE = semantic_view_type
 _KIND_REGISTRY = load_kind_registry()
 SUPPORTED_VIEW_TYPES = {"capability", "standard", "implementation", "organization"}
 
-INTERACTION_CONFORMANCE_STYLE = """
-.map-status{min-height:1.4em;margin:10px 0 14px;color:var(--muted);font-size:.9em}
-.map-status.is-error{color:var(--fg);font-weight:600}
-a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--link);outline-offset:2px}
-@media (prefers-reduced-motion:reduce){
-  html{scroll-behavior:auto!important}
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
-}
-"""
-
 
 def semantic_site_view_type(obj: dict | None) -> str | None:
     """Extend the current Human View projection with the v0 Organization profile."""
@@ -48,76 +37,6 @@ def semantic_site_view_type(obj: dict | None) -> str | None:
     if obj and has_profile(obj, "organization", _KIND_REGISTRY):
         return "organization"
     return None
-
-
-def _replace_once(source: str, old: str, new: str, label: str) -> str:
-    if old not in source:
-        raise RuntimeError(f"Human Interface compatibility hook marker missing: {label}")
-    return source.replace(old, new, 1)
-
-
-def interaction_conformance_script(source: str) -> str:
-    """Patch the transitional Local Map script with bounded Gate B behavior."""
-
-    source = _replace_once(
-        source,
-        "<script>\n(function(){\n  function setActive",
-        """<script>
-(function(){
-  function ensureStatus(section){
-    let status=section.querySelector('.map-status');
-    if(status)return status;
-    status=document.createElement('div');
-    status.className='map-status';
-    status.setAttribute('role','status');
-    status.setAttribute('aria-live','polite');
-    status.setAttribute('aria-atomic','true');
-    const controls=section.querySelector('.map-controls');
-    if(controls)controls.after(status);else section.prepend(status);
-    return status;
-  }
-  function setStatus(section,message,isError){
-    const status=ensureStatus(section);
-    status.textContent=message||'';
-    status.classList.toggle('is-error',Boolean(isError));
-  }
-  function setActive""",
-        "status helper insertion",
-    )
-    source = _replace_once(
-        source,
-        "    section.classList.add('map-loading');\n    const originalText=trigger.textContent;",
-        "    section.classList.add('map-loading');\n    setStatus(section,'正在加载局部地图…',false);\n    const originalText=trigger.textContent;",
-        "recenter loading status",
-    )
-    source = _replace_once(
-        source,
-        "      section.replaceWith(replacement);\n      apply(replacement);\n      replacement.scrollIntoView({behavior:'smooth',block:'start'});",
-        """      section.replaceWith(replacement);
-      apply(replacement);
-      setStatus(replacement,'地图中心已更新。',false);
-      const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
-      replacement.scrollIntoView({behavior:reduceMotion?'auto':'smooth',block:'start'});""",
-        "recenter success and reduced motion",
-    )
-    source = _replace_once(
-        source,
-        "      trigger.textContent=originalText;\n      trigger.disabled=true;\n      trigger.title='局部地图载入失败；对象详情仍可通过标题链接打开';",
-        """      trigger.textContent=originalText;
-      trigger.disabled=false;
-      trigger.title='局部地图载入失败；对象详情仍可通过标题链接打开';
-      setStatus(section,'局部地图载入失败；可以重试，或通过对象标题链接打开详情。',true);""",
-        "recenter failure feedback",
-    )
-    source = _replace_once(
-        source,
-        "  addEventListener('DOMContentLoaded',function(){document.querySelectorAll('.local-map').forEach(apply);});",
-        """  addEventListener('DOMContentLoaded',function(){
-    document.querySelectorAll('.local-map').forEach(function(section){ensureStatus(section);apply(section);});
-  });""",
-        "status initialization",
-    )
-    return source
 
 
 def breadcrumb_for(obj: dict, prefix: str) -> str:
@@ -135,7 +54,7 @@ def breadcrumb_for(obj: dict, prefix: str) -> str:
         )
         return f'{home}{separator}<span>能力</span>{separator}{category_link}{separator}{current}'
     labels = {"standard": "标准与规范", "implementation": "实现", "organization": "组织"}
-    label = labels.get(str(view_type), str(obj.get("type") or "对象"))
+    label = labels.get(str(view_type), "对象")
     return f'{home}{separator}<span>{html.escape(label)}</span>{separator}{current}'
 
 
@@ -244,18 +163,13 @@ def build_homepage(rendered: list[tuple[dict, Path]]) -> str:
 
 
 def install_compatibility_hooks() -> None:
-    """Install semantic and bounded Human Interface compatibility hooks."""
+    """Install only Legacy/v0 semantic compatibility hooks."""
 
-    # Let shared relation rendering recognize Organization targets as Human Views.
     human_markdown.semantic_view_type = semantic_site_view_type
     legacy_site.object_html_href = object_html_href
     legacy_site.breadcrumb_for = breadcrumb_for
     legacy_site.build_homepage = build_homepage
-
-    if INTERACTION_CONFORMANCE_STYLE not in legacy_site.STYLE:
-        legacy_site.STYLE += INTERACTION_CONFORMANCE_STYLE
-    if "function ensureStatus(section)" not in legacy_site.MAP_SCRIPT:
-        legacy_site.MAP_SCRIPT = interaction_conformance_script(legacy_site.MAP_SCRIPT)
+    human_route.install_runtime_contract(legacy_site)
 
 
 def build(root: Path, output: Path) -> dict[str, int]:
@@ -275,7 +189,14 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target = output / html_path
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
-        content = legacy_site.inject_local_map(content, legacy_site.build_local_map(obj, index, graph))
+        local_map = human_route.build_local_map(
+            legacy_site,
+            obj,
+            index,
+            graph,
+            semantic_site_view_type,
+        )
+        content = legacy_site.inject_local_map(content, local_map)
         prefix = "../" * len(html_path.parent.parts)
         target.write_text(
             legacy_site.page_shell(
