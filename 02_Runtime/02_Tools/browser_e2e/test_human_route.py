@@ -39,6 +39,13 @@ class HumanRouteBrowserTests(unittest.TestCase):
         context = self.browser.new_context(**context_options)
         return context, context.new_page()
 
+    def visible_neighbor_ids(self, page: Page) -> set[str]:
+        return set(
+            page.locator('.map-node[data-neighbor-id]:visible').evaluate_all(
+                "nodes => nodes.map(node => node.dataset.neighborId)"
+            )
+        )
+
     def test_semantic_shell_is_consistent_across_representative_pages(self) -> None:
         context, page = self.new_page()
         try:
@@ -146,7 +153,8 @@ class HumanRouteBrowserTests(unittest.TestCase):
         try:
             page.goto(page_url("forgejo_actions"))
             current_stats = page.locator(".map-stats-current")
-            before = current_stats.inner_text()
+            before_stats = current_stats.inner_text()
+            before_neighbors = self.visible_neighbor_ids(page)
 
             relation_filter = page.locator('.map-filter[data-filter-kind="origin"][data-filter-value="relation"]')
             field_filter = page.locator('.map-filter[data-filter-kind="origin"][data-filter-value="field"]')
@@ -156,13 +164,18 @@ class HumanRouteBrowserTests(unittest.TestCase):
             relation_filter.click()
             expect(relation_filter).to_have_attribute("aria-pressed", "true")
             relation_stats = current_stats.inner_text()
+            relation_neighbors = self.visible_neighbor_ids(page)
 
             field_filter.click()
             expect(field_filter).to_have_attribute("aria-pressed", "true")
             field_stats = current_stats.inner_text()
+            field_neighbors = self.visible_neighbor_ids(page)
 
-            self.assertTrue(before != relation_stats or before != field_stats)
-            self.assertNotEqual(relation_stats, field_stats)
+            self.assertNotEqual(before_stats, relation_stats)
+            self.assertNotEqual(before_stats, field_stats)
+            self.assertNotEqual(before_neighbors, relation_neighbors)
+            self.assertNotEqual(before_neighbors, field_neighbors)
+            self.assertNotEqual(relation_neighbors, field_neighbors)
         finally:
             context.close()
 
@@ -195,7 +208,7 @@ class HumanRouteBrowserTests(unittest.TestCase):
             self.assertTrue(has_outline or has_shadow, style)
 
             # Enter is the keyboard activation contract for the native button.
-            page.evaluate("window.fetch = () => new Promise(() => {})")
+            page.evaluate("() => { window.fetch = () => new Promise(() => {}); }")
             button.press("Enter")
             expect(button).to_have_text("载入中…")
         finally:
