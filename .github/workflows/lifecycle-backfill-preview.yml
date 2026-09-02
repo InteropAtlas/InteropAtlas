@@ -56,15 +56,20 @@ jobs:
                   for document in yaml.safe_load_all(handle):
                       if isinstance(document, dict) and is_relation_document(document):
                           engine.add((document.get('id'), source))
+          audit_only = audited - engine
+          engine_only = engine - audited
           print('relations_summary=', report['relations_summary'])
           print('engine_relation_count=', len(engine))
-          print('audit_only=', sorted(audited - engine))
-          print('engine_only=', sorted(engine - audited))
+          print('audit_only=', sorted(audit_only))
+          print('engine_only=', sorted(engine_only))
           missing = [item for item in report['relations'] if item.get('source_or_evidence_missing')]
           print('missing_evidence=', len(missing))
           for item in missing:
               print(item['record_id'], item['path'])
+          assert report['relations_summary']['total'] == 107
           assert len(engine) == 107
+          assert not audit_only
+          assert not engine_only
           PY
       - name: Validate candidate repository
         run: |
