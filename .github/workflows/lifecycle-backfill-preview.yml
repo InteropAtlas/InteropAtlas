@@ -23,7 +23,7 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Inventory and reconstruct Canonical Object metadata in isolated workspace
+      - name: Inventory and reconstruct Canonical Relation metadata in isolated workspace
         run: |
           rm -rf build/backfill-bundle
           mkdir -p build/backfill-bundle
@@ -33,20 +33,20 @@ jobs:
             --baseline 38b0c80813db5e59757cbec0ac79cc3fd079161f \
             --cutoff 2026-09-02T10:28:00+08:00 \
             --backfilled-at "$BACKFILLED_AT" \
-            --scope objects \
+            --scope relations \
             --apply \
             --bundle-dir build/backfill-bundle \
             --report build/lifecycle-backfill-report.json
-          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
-          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py 'build/backfill-bundle/01_State/01_Objects/*.yaml'
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/02_Relations/*.yaml'
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py 'build/backfill-bundle/01_State/02_Relations/*.yaml'
       - name: Print coverage gaps
         run: |
           python - <<'PY'
           import json
           report = json.load(open('build/lifecycle-backfill-report.json'))
-          missing = [item for item in report['objects'] if item.get('source_or_evidence_missing')]
-          print('objects_summary=', report['objects_summary'])
-          print('missing_sources=', len(missing))
+          missing = [item for item in report['relations'] if item.get('source_or_evidence_missing')]
+          print('relations_summary=', report['relations_summary'])
+          print('missing_evidence=', len(missing))
           for item in missing:
               print(item['path'])
           PY
