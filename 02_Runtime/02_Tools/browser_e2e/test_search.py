@@ -29,7 +29,7 @@ class HumanRouteSearchBrowserTests(unittest.TestCase):
         page = context.new_page()
         try:
             page.goto(urljoin(BASE_URL, 'index.html'))
-            link = page.get_by_role('link', name='查找对象')
+            link = page.get_by_role('link', name='开始搜索')
             expect(link).to_be_visible()
             link.click()
             self.assertEqual(urlparse(page.url).path, urlparse(urljoin(BASE_URL, 'search.html')).path)
