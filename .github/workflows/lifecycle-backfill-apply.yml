@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  apply-object-batches:
-    if: contains(github.event.head_commit.message, '[apply-objects]')
+  apply-relation-batches:
+    if: contains(github.event.head_commit.message, '[apply-relations]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,49 +22,84 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Generate and preflight all object candidates
+      - name: Generate, reconcile and preflight Relation candidates
         run: |
-          rm -rf /tmp/ia-object-bundle
-          mkdir -p /tmp/ia-object-bundle
+          rm -rf /tmp/ia-relation-bundle
+          mkdir -p /tmp/ia-relation-bundle
           BACKFILLED_AT="$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')"
-          python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
+          python 02_Runtime/02_Tools/relation_provenance_backfill.py \
             --root . \
             --baseline 38b0c80813db5e59757cbec0ac79cc3fd079161f \
             --cutoff 2026-09-02T10:28:00+08:00 \
             --backfilled-at "$BACKFILLED_AT" \
-            --scope objects \
             --apply \
-            --bundle-dir /tmp/ia-object-bundle \
-            --report /tmp/ia-object-bundle/report.json
-          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
-          (cd /tmp/ia-object-bundle && python "$GITHUB_WORKSPACE/02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py" '01_State/01_Objects/*.yaml')
+            --bundle-dir /tmp/ia-relation-bundle \
+            --report /tmp/ia-relation-bundle/report.json
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/02_Relations/*.yaml'
+          (cd /tmp/ia-relation-bundle && python "$GITHUB_WORKSPACE/02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py" '01_State/02_Relations/*.yaml')
+          PYTHONPATH=02_Runtime/01_Engine python - <<'PY'
+          import json, yaml
+          from collections import Counter
+          from pathlib import Path
+          from repository_layout import repository_layout
+          from bootstrap_query import is_relation_document
+
+          report = json.load(open('/tmp/ia-relation-bundle/report.json'))
+          audited = {(item['record_id'], item['path']) for item in report['relations']}
+          engine = set()
+          layout = repository_layout(Path('.').resolve())
+          for path in layout.iter_yaml_files():
+              source = layout.physical_source(path)
+              with path.open('r', encoding='utf-8') as handle:
+                  for document in yaml.safe_load_all(handle):
+                      if isinstance(document, dict) and is_relation_document(document):
+                          engine.add((document.get('id'), source))
+          assert report['relations_summary']['total'] == 107, report['relations_summary']
+          assert audited == engine, (sorted(audited - engine), sorted(engine - audited))
+
+          counts = Counter(item['path'] for item in report['relations'])
+          batches = []
+          current = []
+          current_count = 0
+          for path, count in sorted(counts.items()):
+              if count > 25:
+                  raise SystemExit(f'{path} contains {count} Relations; exceeds 25-record batch limit')
+              if current and current_count + count > 25:
+                  batches.append({'relation_count': current_count, 'paths': current})
+                  current = []
+                  current_count = 0
+              current.append(path)
+              current_count += count
+          if current:
+              batches.append({'relation_count': current_count, 'paths': current})
+          assert sum(batch['relation_count'] for batch in batches) == 107
+          assert all(1 <= batch['relation_count'] <= 25 for batch in batches)
+          json.dump(batches, open('/tmp/ia-relation-batches.json', 'w'), ensure_ascii=False, indent=2)
+          print('batch_plan=', json.dumps(batches, ensure_ascii=False))
+          print('coverage=', report['relations_summary'])
+          PY
           python 02_Runtime/01_Engine/test_repository_layout.py
           python 02_Runtime/01_Engine/test_v0_schemas.py
           python 02_Runtime/01_Engine/test_relation_model.py
           mkdir -p build
-          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-object-preflight.json --markdown build/machine-review-object-preflight.md
-          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-object-preflight.json
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-relation-preflight.json --markdown build/machine-review-relation-preflight.md
+          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-relation-preflight.json
           python - <<'PY'
           import json
-          machine = json.load(open('build/machine-review-object-preflight.json'))
-          graph = json.load(open('build/graph-index-object-preflight.json'))
-          report = json.load(open('/tmp/ia-object-bundle/report.json'))
-          assert report['objects_summary']['total'] == 131, report['objects_summary']
+          machine = json.load(open('build/machine-review-relation-preflight.json'))
+          graph = json.load(open('build/graph-index-relation-preflight.json'))
+          assert machine['summary']['relations'] == 107, machine['summary']
           assert machine['summary']['errors'] == 0, machine
           assert graph.get('reference_issues') == [], graph.get('reference_issues')
           print('preflight=', machine['summary'])
-          print('coverage=', report['objects_summary'])
           PY
           git reset --hard HEAD
-      - name: Apply seven validated object batches
+      - name: Apply record-bounded Relation batches
         shell: bash
         run: |
           set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          mapfile -t OBJECTS < <(find /tmp/ia-object-bundle/01_State/01_Objects -maxdepth 1 -type f -name '*.yaml' | sort)
-          total="${#OBJECTS[@]}"
-          test "$total" -eq 131
 
           validate_batch() {
             local tag="$1"
@@ -79,28 +114,40 @@ jobs:
           tag = sys.argv[1]
           machine = json.load(open(f'build/machine-review-{tag}.json'))
           graph = json.load(open(f'build/graph-index-{tag}.json'))
+          assert machine['summary']['relations'] == 107, machine['summary']
           assert machine['summary']['errors'] == 0, machine
           assert graph.get('reference_issues') == [], graph.get('reference_issues')
           print(tag, machine['summary'])
           PY
           }
 
-          batch=0
-          for start in 0 20 40 60 80 100 120; do
-            batch=$((batch+1))
-            end=$((start+20))
-            if [ "$end" -gt "$total" ]; then end="$total"; fi
-            paths=()
-            for ((i=start; i<end; i++)); do
-              src="${OBJECTS[$i]}"
-              rel="${src#/tmp/ia-object-bundle/}"
-              cp "$src" "$rel"
-              paths+=("$rel")
+          batch_total="$(python - <<'PY'
+          import json
+          print(len(json.load(open('/tmp/ia-relation-batches.json'))))
+          PY
+          )"
+
+          for ((index=0; index<batch_total; index++)); do
+            mapfile -t paths < <(python - "$index" <<'PY'
+          import json, sys
+          batch = json.load(open('/tmp/ia-relation-batches.json'))[int(sys.argv[1])]
+          for path in batch['paths']:
+              print(path)
+          PY
+          )
+            relation_count="$(python - "$index" <<'PY'
+          import json, sys
+          print(json.load(open('/tmp/ia-relation-batches.json'))[int(sys.argv[1])]['relation_count'])
+          PY
+          )"
+            for path in "${paths[@]}"; do
+              cp "/tmp/ia-relation-bundle/$path" "$path"
             done
-            validate_batch "objects-${batch}"
+            batch_number=$((index+1))
+            validate_batch "relations-${batch_number}"
             git add -- "${paths[@]}"
             git diff --cached --check
-            git commit -m "data: backfill object lifecycle provenance batch ${batch}/7 (#91)" \
+            git commit -m "data: backfill Relation lifecycle provenance batch ${batch_number}/${batch_total} (${relation_count} records) (#92)" \
               -m 'Initiator: Human — ff6962757' \
               -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
               -m 'Reviewer: Pending' \
