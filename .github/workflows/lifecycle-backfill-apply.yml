@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  apply-root-docs:
-    if: contains(github.event.head_commit.message, '[apply-docs-root]')
+  apply-document-batches:
+    if: contains(github.event.head_commit.message, '[apply-docs-rest]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -25,59 +25,99 @@ jobs:
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
 
-      - name: Generate root document batch from fixed pre-backfill main
+      - name: Generate candidates from fixed pre-backfill main
         run: |
-          rm -rf /tmp/ia-root-batch
-          mkdir -p /tmp/ia-root-batch
+          rm -rf /tmp/ia-doc-bundle
+          mkdir -p /tmp/ia-doc-bundle
+          BACKFILLED_AT="$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')"
           python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
             --root . \
             --baseline e1c89f1eb1704017c8a52ae58d4c94ce5b8f55ec \
             --cutoff 2026-09-02T10:28:00+08:00 \
-            --backfilled-at 2026-09-02T10:49:00+08:00 \
+            --backfilled-at "$BACKFILLED_AT" \
             --scope documents \
             --apply \
-            --report /tmp/ia-root-batch/report.json
-          cp AGENTS.md README.md CONTRIBUTING.md PROJECT_STATE.md /tmp/ia-root-batch/
+            --bundle-dir /tmp/ia-doc-bundle \
+            --report /tmp/ia-doc-bundle/report.json
           python - <<'PY'
           from pathlib import Path
-          path = Path('/tmp/ia-root-batch/AGENTS.md')
-          text = path.read_text(encoding='utf-8')
-          text = text.replace('Document Status: Completed:', 'Document Status: active', 1)
-          path.write_text(text, encoding='utf-8')
+          path = Path('/tmp/ia-doc-bundle/docs/human-interface-minimal-compare-contract-v0.1.zh-CN.md')
+          if path.exists():
+              text = path.read_text(encoding='utf-8')
+              text = text.replace('Document Updated At: 2026-09-02T10:51:11+08:00', 'Document Updated At: 2026-09-02T10:46:00+08:00', 1)
+              text = text.replace('Lifecycle Time Provenance: mixed', 'Lifecycle Time Provenance: native', 1)
+              path.write_text(text, encoding='utf-8')
           PY
           git reset --hard HEAD
-          cp /tmp/ia-root-batch/AGENTS.md AGENTS.md
-          cp /tmp/ia-root-batch/README.md README.md
-          cp /tmp/ia-root-batch/CONTRIBUTING.md CONTRIBUTING.md
-          cp /tmp/ia-root-batch/PROJECT_STATE.md PROJECT_STATE.md
 
-      - name: Validate root batch
+      - name: Apply and validate five document batches
+        shell: bash
         run: |
-          python 02_Runtime/01_Engine/test_repository_layout.py
-          python 02_Runtime/01_Engine/test_v0_schemas.py
-          python 02_Runtime/01_Engine/test_relation_model.py
-          mkdir -p build
-          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-root.json --markdown build/machine-review-root.md
-          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-root.json
-          python - <<'PY'
-          import json
-          machine = json.load(open('build/machine-review-root.json'))
-          graph = json.load(open('build/graph-index-root.json'))
-          assert machine['summary']['errors'] == 0, machine
-          assert graph.get('reference_issues') == [], graph.get('reference_issues')
-          print(machine['summary'])
-          print('graph reference_issues:', graph.get('reference_issues'))
-          PY
-
-      - name: Commit validated root batch
-        run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add AGENTS.md README.md CONTRIBUTING.md PROJECT_STATE.md
-          git diff --cached --check
-          git commit -m 'docs: backfill root lifecycle metadata (#90)' \
-            -m 'Initiator: Human — ff6962757' \
-            -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
-            -m 'Reviewer: Pending' \
-            -m 'GitHub-Actor: github-actions[bot]'
-          git push origin HEAD:backfill-89-lifecycle-provenance
+
+          validate_batch() {
+            local tag="$1"
+            python 02_Runtime/01_Engine/test_repository_layout.py
+            python 02_Runtime/01_Engine/test_v0_schemas.py
+            python 02_Runtime/01_Engine/test_relation_model.py
+            mkdir -p build
+            python 02_Runtime/01_Engine/machine_review.py --root . --json "build/machine-review-${tag}.json" --markdown "build/machine-review-${tag}.md"
+            python 02_Runtime/01_Engine/graph_index.py --root . > "build/graph-index-${tag}.json"
+            python - "$tag" <<'PY'
+          import json, sys
+          tag = sys.argv[1]
+          machine = json.load(open(f'build/machine-review-{tag}.json'))
+          graph = json.load(open(f'build/graph-index-{tag}.json'))
+          assert machine['summary']['errors'] == 0, machine
+          assert graph.get('reference_issues') == [], graph.get('reference_issues')
+          print(tag, machine['summary'], 'graph_reference_issues=', graph.get('reference_issues'))
+          PY
+          }
+
+          commit_batch() {
+            local tag="$1"
+            local title="$2"
+            shift 2
+            local paths=("$@")
+            for path in "${paths[@]}"; do
+              mkdir -p "$(dirname "$path")"
+              cp "/tmp/ia-doc-bundle/$path" "$path"
+            done
+            validate_batch "$tag"
+            git add -- "${paths[@]}"
+            git diff --cached --check
+            git commit -m "docs: backfill ${title} lifecycle metadata (#90)" \
+              -m 'Initiator: Human — ff6962757' \
+              -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
+              -m 'Reviewer: Pending' \
+              -m 'GitHub-Actor: github-actions[bot]'
+            git push origin HEAD:backfill-89-lifecycle-provenance
+          }
+
+          mapfile -t DOCS < <(find docs -type f -name '*.md' ! -name 'provenance-traceability-profile-v0.1.zh-CN.md' | sort)
+          commit_batch docs-core 'docs directory' "${DOCS[@]}"
+
+          mapfile -t RESEARCH < <(find 03_Evolution/01_Research -type f -name '*.md' | sort)
+          commit_batch research 'research documents' "${RESEARCH[@]}"
+
+          mapfile -t EXPERIMENTS < <(find 03_Evolution/02_Experiments -type f -name '*.md' | sort)
+          commit_batch experiments 'experiment documents' "${EXPERIMENTS[@]}"
+
+          mapfile -t CHANGE < <(find 03_Evolution/03_Change -type f -name '*.md' | sort)
+          commit_batch change 'change documents' "${CHANGE[@]}"
+
+          SUPPORT=(
+            LICENSE.md
+            01_State/README.md
+            01_State/01_Objects/README.md
+            01_State/02_Relations/README.md
+            02_Runtime/README.md
+            02_Runtime/01_Engine/README.md
+            02_Runtime/02_Tools/README.md
+            02_Runtime/03_Outputs/README.md
+            03_Evolution/README.md
+            .github/PULL_REQUEST_TEMPLATE.md
+          )
+          commit_batch support 'supporting repository documents' "${SUPPORT[@]}"
