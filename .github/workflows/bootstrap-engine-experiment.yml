@@ -35,6 +35,8 @@ jobs:
         run: python 02_Runtime/01_Engine/test_semantic_rendering.py
       - name: Verify permanent Human Route runtime contract
         run: python 02_Runtime/01_Engine/test_human_route_runtime.py
+      - name: Verify deterministic Human Route Search projection
+        run: python 02_Runtime/01_Engine/test_human_route_search.py
       - name: Verify I6 representative migration pilot
         run: python 02_Runtime/01_Engine/test_migration_pilot.py
       - name: Verify v0 identity and profile schemas
@@ -71,6 +73,8 @@ jobs:
           test -f build/site/objects/forgejo_actions.html
           test -f build/site/objects/automated_build_deployment.html
           test -f build/site/objects/apple.html
+          test -f build/site/search.html
+          test -f build/site/search-index.json
       - name: Render three human-readable object types
         run: |
           python 02_Runtime/01_Engine/render_markdown.py forgejo_actions --root . --output build/implementations/forgejo-actions.md
