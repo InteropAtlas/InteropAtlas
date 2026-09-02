@@ -155,7 +155,6 @@ class HumanRouteBrowserTests(unittest.TestCase):
             expect(status).to_have_text("局部地图载入失败；可以重试，或通过对象标题链接打开详情。")
             expect(page.locator(".local-map .map-node-name a").first).to_be_visible()
 
-            # Restore the network and prove the same action remains retryable.
             page.evaluate("() => { window.fetch = window.__iaRealFetch; }")
             button.click()
             expect(page.locator(".local-map")).to_have_attribute("data-center-id", expected_center)
@@ -221,7 +220,6 @@ class HumanRouteBrowserTests(unittest.TestCase):
             has_shadow = style["boxShadow"] != "none"
             self.assertTrue(has_outline or has_shadow, style)
 
-            # Enter is the keyboard activation contract for the native button.
             page.evaluate("() => { window.fetch = () => new Promise(() => {}); }")
             button.press("Enter")
             expect(button).to_have_text("载入中…")
@@ -259,19 +257,23 @@ class HumanRouteBrowserTests(unittest.TestCase):
 
     def test_recenter_respects_reduced_motion_preference(self) -> None:
         context = self.browser.new_context(reduced_motion="reduce")
-        context.add_init_script(
-            """() => {
-              const original = Element.prototype.scrollIntoView;
-              Element.prototype.scrollIntoView = function(options) {
-                window.__iaScrollBehavior = options && options.behavior;
-                window.__iaScrollBlock = options && options.block;
-                if (original) original.call(this, {behavior:'auto', block:(options && options.block) || 'start'});
-              };
-            }"""
-        )
         page = context.new_page()
         try:
             page.goto(page_url("forgejo_actions"))
+            # Install the observer after document load. add_init_script would need an
+            # invoked script body; doing it here also avoids conflating harness setup
+            # with the product behavior under test.
+            page.evaluate(
+                """() => {
+                  const original = Element.prototype.scrollIntoView;
+                  Element.prototype.scrollIntoView = function(options) {
+                    window.__iaScrollBehavior = options && options.behavior;
+                    window.__iaScrollBlock = options && options.block;
+                    if (original) original.call(this, {behavior:'auto', block:(options && options.block) || 'start'});
+                  };
+                }"""
+            )
+            self.assertTrue(page.evaluate("() => matchMedia('(prefers-reduced-motion: reduce)').matches"))
             page.locator(".map-recenter").first.click()
             expect(page.locator(".map-status")).to_have_text("地图中心已更新。")
             behavior = page.evaluate("() => window.__iaScrollBehavior")
