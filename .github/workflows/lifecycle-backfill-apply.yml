@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  apply-document-catchup:
-    if: contains(github.event.head_commit.message, '[apply-docs-catchup]')
+  apply-object-batches:
+    if: contains(github.event.head_commit.message, '[apply-objects]')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,57 +22,88 @@ jobs:
           python-version: '3.12'
       - name: Install dependencies
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
-      - name: Generate two concurrent document candidates
+      - name: Generate and preflight all object candidates
         run: |
-          rm -rf /tmp/ia-doc-catchup
-          mkdir -p /tmp/ia-doc-catchup
+          rm -rf /tmp/ia-object-bundle
+          mkdir -p /tmp/ia-object-bundle
           BACKFILLED_AT="$(TZ=Asia/Shanghai date '+%Y-%m-%dT%H:%M:%S+08:00')"
           python 02_Runtime/02_Tools/lifecycle_provenance_backfill.py \
             --root . \
             --baseline 38b0c80813db5e59757cbec0ac79cc3fd079161f \
             --cutoff 2026-09-02T10:28:00+08:00 \
             --backfilled-at "$BACKFILLED_AT" \
-            --scope documents \
+            --scope objects \
             --apply \
-            --bundle-dir /tmp/ia-doc-catchup \
-            --report /tmp/ia-doc-catchup/report.json
-          python - <<'PY'
-          from pathlib import Path
-          path = Path('/tmp/ia-doc-catchup/03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md')
-          text = path.read_text(encoding='utf-8')
-          text = text.replace('Document Updated At: 2026-09-02T10:59:28+08:00', 'Document Updated At: 2026-09-02T10:56:00+08:00', 1)
-          text = text.replace('Lifecycle Time Provenance: mixed', 'Lifecycle Time Provenance: native', 1)
-          path.write_text(text, encoding='utf-8')
-          PY
-          git reset --hard HEAD
-          cp /tmp/ia-doc-catchup/docs/human-interface-accessibility-conformance-profile-v0.1.zh-CN.md docs/
-          cp /tmp/ia-doc-catchup/03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md 03_Evolution/02_Experiments/
-      - name: Validate catch-up batch
-        run: |
+            --bundle-dir /tmp/ia-object-bundle \
+            --report /tmp/ia-object-bundle/report.json
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
+          python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '/tmp/ia-object-bundle/01_State/01_Objects/*.yaml'
           python 02_Runtime/01_Engine/test_repository_layout.py
           python 02_Runtime/01_Engine/test_v0_schemas.py
           python 02_Runtime/01_Engine/test_relation_model.py
           mkdir -p build
-          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-doc-catchup.json --markdown build/machine-review-doc-catchup.md
-          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-doc-catchup.json
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review-object-preflight.json --markdown build/machine-review-object-preflight.md
+          python 02_Runtime/01_Engine/graph_index.py --root . > build/graph-index-object-preflight.json
           python - <<'PY'
           import json
-          machine = json.load(open('build/machine-review-doc-catchup.json'))
-          graph = json.load(open('build/graph-index-doc-catchup.json'))
+          machine = json.load(open('build/machine-review-object-preflight.json'))
+          graph = json.load(open('build/graph-index-object-preflight.json'))
+          report = json.load(open('/tmp/ia-object-bundle/report.json'))
+          assert report['objects_summary']['total'] == 131, report['objects_summary']
           assert machine['summary']['errors'] == 0, machine
           assert graph.get('reference_issues') == [], graph.get('reference_issues')
-          print(machine['summary'])
-          print('graph reference_issues:', graph.get('reference_issues'))
+          print('preflight=', machine['summary'])
+          print('coverage=', report['objects_summary'])
           PY
-      - name: Commit validated catch-up batch
+          git reset --hard HEAD
+      - name: Apply seven validated object batches
+        shell: bash
         run: |
+          set -euo pipefail
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add docs/human-interface-accessibility-conformance-profile-v0.1.zh-CN.md 03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md
-          git diff --cached --check
-          git commit -m 'docs: catch up #97 lifecycle metadata (#90)' \
-            -m 'Initiator: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
-            -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
-            -m 'Reviewer: Pending' \
-            -m 'GitHub-Actor: github-actions[bot]'
-          git push origin HEAD:backfill-89-lifecycle-provenance
+          mapfile -t OBJECTS < <(find /tmp/ia-object-bundle/01_State/01_Objects -maxdepth 1 -type f -name '*.yaml' | sort)
+          total="${#OBJECTS[@]}"
+          test "$total" -eq 131
+
+          validate_batch() {
+            local tag="$1"
+            python 02_Runtime/01_Engine/test_repository_layout.py
+            python 02_Runtime/01_Engine/test_v0_schemas.py
+            python 02_Runtime/01_Engine/test_relation_model.py
+            mkdir -p build
+            python 02_Runtime/01_Engine/machine_review.py --root . --json "build/machine-review-${tag}.json" --markdown "build/machine-review-${tag}.md"
+            python 02_Runtime/01_Engine/graph_index.py --root . > "build/graph-index-${tag}.json"
+            python - "$tag" <<'PY'
+          import json, sys
+          tag = sys.argv[1]
+          machine = json.load(open(f'build/machine-review-{tag}.json'))
+          graph = json.load(open(f'build/graph-index-{tag}.json'))
+          assert machine['summary']['errors'] == 0, machine
+          assert graph.get('reference_issues') == [], graph.get('reference_issues')
+          print(tag, machine['summary'])
+          PY
+          }
+
+          batch=0
+          for start in 0 20 40 60 80 100 120; do
+            batch=$((batch+1))
+            end=$((start+20))
+            if [ "$end" -gt "$total" ]; then end="$total"; fi
+            paths=()
+            for ((i=start; i<end; i++)); do
+              src="${OBJECTS[$i]}"
+              rel="${src#/tmp/ia-object-bundle/}"
+              cp "$src" "$rel"
+              paths+=("$rel")
+            done
+            validate_batch "objects-${batch}"
+            git add -- "${paths[@]}"
+            git diff --cached --check
+            git commit -m "data: backfill object lifecycle provenance batch ${batch}/7 (#91)" \
+              -m 'Initiator: Human — ff6962757' \
+              -m 'Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol' \
+              -m 'Reviewer: Pending' \
+              -m 'GitHub-Actor: github-actions[bot]'
+            git push origin HEAD:backfill-89-lifecycle-provenance
+          done
