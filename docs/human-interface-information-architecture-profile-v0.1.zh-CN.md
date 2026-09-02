@@ -126,6 +126,19 @@ Breadcrumb MAY 表达当前导航路径，但 MUST NOT 冒充底层 Graph 的唯
 - Conformance：`Static + Accessibility`
 - 验收：使用 `nav` landmark / 可理解标签；current page 可识别；路径语义与 Graph 身份分离。
 
+### `IA-HI-IA-007` — Compare Requires Explicit Context
+
+**用户任务：** Compare。
+
+Compare View MUST 先明确用户正在比较什么任务 / Capability / Scenario / Requirement context，再决定 Candidate Set 与 Dimension Set；MUST NOT 因两个对象拥有相似字段就默认它们天然可比较。
+
+候选进入理由与比较维度 MUST 可追溯到 Canonical Facts / Relations / Statements / Assessments。Compare MUST NOT 擅自把 `alternative_to` 提升为 `compatible_with`、`equivalent_to` 或 recommendation。
+
+- 采用方式：**Profile + IA-specific extension**
+- 上游：ISO 9241-210 task/context suitability；Knowledge Model Fact / Relation / Assessment boundary
+- Conformance：`Static + Data + Human`
+- 验收：按 [`human-interface-minimal-compare-contract-v0.1.zh-CN.md`](human-interface-minimal-compare-contract-v0.1.zh-CN.md) 用代表候选完成 Context → Candidates → Dimensions → Explainable Differences walkthrough。
+
 ---
 
 ## 5. View 职责
@@ -144,7 +157,9 @@ Breadcrumb MAY 表达当前导航路径，但 MUST NOT 冒充底层 Graph 的唯
 
 ### Compare
 
-回答“多个候选对象有什么相同与不同”。比较维度必须来自可解释 Facts / Statements / Assessments。
+回答“多个候选对象在一个明确任务 / 上下文中有什么相同与不同”。候选进入理由和比较维度必须可解释；比较维度来自 Facts / Relations / Statements / Assessments，并保留其语义类别。Compare 是 View，不创造新的事实、兼容性结论或隐藏排名。
+
+Gate B minimum 由 [`human-interface-minimal-compare-contract-v0.1.zh-CN.md`](human-interface-minimal-compare-contract-v0.1.zh-CN.md) 定义；完整 Compare 产品继续作为 Gate B 后工作。
 
 ### Map / Graph View
 
@@ -182,7 +197,11 @@ Gate B 前至少需要定义一个可执行的任务型评价方法；优先使�
 
 ### `HI-IA-GAP-004` — Compare architecture
 
-Compare 是核心任务，但当前还没有独立 Compare View 的信息职责与维度选择合同。此 Gap 先记录，不在本 Draft 中提前设计 UI。
+**Gate B minimum：closed by #94 contract。**
+
+最小合同已经定义 Compare Context、Candidate Eligibility、Dimension Selection、Missing Semantics、Evidence / Assessment boundary 与 No Hidden Ranking，并绑定真实候选 walkthrough fixture。
+
+**Remaining P1：** 完整 Compare View 的产品 IA、入口、交互、筛选、多候选规模化与最终页面模式。
 
 ---
 
