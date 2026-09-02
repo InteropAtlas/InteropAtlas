@@ -42,6 +42,16 @@
       "type": "string",
       "pattern": "^[a-z][a-z0-9_-]*$"
     },
+    "record_created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when this InteropAtlas canonical record was first created. This is repository-record lifecycle metadata, not the real-world entity/artifact creation or publication time. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
+    "record_updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp of the latest substantive update to this InteropAtlas canonical record. This is repository-record lifecycle metadata; Git history remains the authoritative event log. Prefer RFC 3339 / ISO 8601 with an explicit timezone."
+    },
     "sources": {
       "type": "array",
       "items": {
