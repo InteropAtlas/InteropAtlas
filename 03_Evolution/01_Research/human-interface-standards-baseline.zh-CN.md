@@ -1,5 +1,20 @@
 # InteropAtlas Human Interface Standards Baseline
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Provisional Baseline（暂定标准基线）
+Document Created At: 2026-09-01T07:50:07+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Provisional Baseline（暂定标准基线）
 >
 > 目的：在继续设计 InteropAtlas Human-readable Route 之前，先建立可追溯的外部标准与成熟方法基础。IA 不把 ISO、W3C Recommendation、Authoring Pattern、Design System、产品实践混为一类，而是按依据强度分层采用。

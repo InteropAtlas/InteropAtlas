@@ -1,5 +1,20 @@
 # Work Package A Verification — 2026-09-01
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: Independent point-in-time verification
+Document Created At: 2026-09-01T12:41:59+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 > 状态：Independent point-in-time verification
 >
 > 目标：按最初 Work Package A 的完成标志重新核验 Repository Foundation + Open Collaboration Foundation，而不是沿用“Issue 已关闭”作为完成证据。

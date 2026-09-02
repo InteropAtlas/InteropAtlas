@@ -1,5 +1,20 @@
 # 01_Research
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: research_record
+Document Created At: 2026-09-01T15:04:02+08:00
+Document Updated At: 2026-09-01T17:15:05+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 这里存放为了推动 InteropAtlas 演化而进行的研究与分析。
 
 它回答：**我们依据什么、发现了什么、验证出了什么。**
