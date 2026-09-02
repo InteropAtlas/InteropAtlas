@@ -129,7 +129,22 @@ Accessibility SHOULD 组合：
 
 自动化不能替代真实用户任务评价；重大 IA / Interaction 变化 SHOULD 有真实任务 evidence。
 
-- Conformance：`Human`
+Gate B minimum 使用统一任务记录结构：
+
+```text
+Task
+Starting point
+Expected destination / outcome
+Observed path
+Friction / ambiguity
+Requirement affected
+Result: Conform / Partial / Non-conform / Unknown
+```
+
+代表任务至少覆盖 Identify、Find、Relate / Return、Verify、Compare，以及当前真实可触达的 Explore / Recenter path。Browser-observable 行为 SHOULD 由真实 Browser E2E 补强；没有 UI 的 Gate B minimum contract（例如当前 Minimal Compare）可以使用 deterministic semantic walkthrough，但必须明确它不是已实现的完整 UI。
+
+- Conformance：`Human + Browser + Evidence Artifact`
+- Gate B evidence：[`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)
 
 ### `IA-HI-CONF-008` — Evidence of Conformance
 
@@ -202,6 +217,8 @@ ACT Rules Format 可用于 Accessibility rule 的机器可共享表达，但 IA 
 - Verify evidence；
 - Explore and return。
 
+Gate B 的最小执行证据见 [`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)。更大规模 usability research 不是 v0.1 Foundation 的毕业前置条件，除非后续 P0 evidence 证明当前核心任务仍存在结构性阻塞。
+
 ---
 
 ## 7. Conformance 状态词
@@ -231,7 +248,11 @@ Profile Audit SHOULD 使用：
 - keyboard / focus / target size / reflow 等仍需要真实 Browser evaluation；
 - 当时还没有正式 Browser E2E / accessibility conformance pipeline。
 
-Knowledge Model 机器线现在已经有 deterministic Machine Review，但这**不能替代 Human Interface 的 Browser / Accessibility / Human evaluation**。
+此后 Gate B 已补充真实 Browser E2E，并覆盖 stable navigation、Back / Forward、keyboard / focus、JS disabled、narrow viewport / reflow、reduced-motion preference、Local Map loading / success / failure，以及四个 Core Identity Family 的代表 Resource Page。
+
+#96 进一步执行代表 Human Task Walkthrough：Chromium suite 在该切片上共执行 19 tests，全部通过；其中 5 个测试直接覆盖 Identify / Find / Relate / Verify / Local Map representative path。Compare 使用已合并的 Minimal Compare deterministic fixture，以明确任务上下文完成最小语义走查，而不是虚构一个尚不存在的完整 Compare UI。
+
+Knowledge Model 机器线的 deterministic Machine Review 仍然只是另一类证据，**不能替代 Human Interface 的 Browser / Accessibility / Human evaluation**。
 
 ---
 
@@ -239,7 +260,9 @@ Knowledge Model 机器线现在已经有 deterministic Machine Review，但这**
 
 ### `HI-CONF-GAP-001` — Browser test harness
 
-#13 需要把 Browser E2E 从计划变成可执行 Gate，优先覆盖三个代表 Resource Page + 首页，再扩大。
+**Gate B minimum：closed。**
+
+真实 Chromium E2E 已成为可重复 workflow，并覆盖当前代表 Human Route 核心行为。扩大所有页面 / 所有组件覆盖继续作为后续工程质量工作。
 
 ### `HI-CONF-GAP-002` — Requirement registry / report format
 
@@ -251,7 +274,9 @@ WCAG 2.2 AA 目前是 SHOULD target。后续需要明确：哪些类型的例外
 
 ### `HI-CONF-GAP-004` — Human evaluation protocol
 
-需要为 IA / Information Presentation 的重大变化定义最小任务评价模板，而不是只依赖维护者“看起来不错”。
+**Gate B minimum：closed by #96。**
+
+最小任务评价模板已经形成，并对代表切片实际执行；Browser-observable tasks 有真实 Chromium evidence，Compare 有明确 semantic fixture。更大规模用户研究、tree testing sample size 与长期 usability measurement 继续作为 Gate B 后工作，除非新的 P0 evidence 证明存在结构性问题。
 
 ### `HI-CONF-GAP-005` — Broader accessibility capability modeling
 
