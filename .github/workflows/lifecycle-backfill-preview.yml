@@ -38,16 +38,33 @@ jobs:
             --report build/lifecycle-backfill-report.json
           python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/02_Relations/*.yaml'
           python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py 'build/backfill-bundle/01_State/02_Relations/*.yaml'
-      - name: Print coverage gaps
+      - name: Reconcile coverage with engine loader
         run: |
-          python - <<'PY'
-          import json
+          PYTHONPATH=02_Runtime/01_Engine python - <<'PY'
+          import json, yaml
+          from pathlib import Path
+          from repository_layout import repository_layout
+          from bootstrap_query import is_relation_document
+
           report = json.load(open('build/lifecycle-backfill-report.json'))
-          missing = [item for item in report['relations'] if item.get('source_or_evidence_missing')]
+          audited = {(item['record_id'], item['path']) for item in report['relations']}
+          engine = set()
+          layout = repository_layout(Path('.').resolve())
+          for path in layout.iter_yaml_files():
+              source = layout.physical_source(path)
+              with path.open('r', encoding='utf-8') as handle:
+                  for document in yaml.safe_load_all(handle):
+                      if isinstance(document, dict) and is_relation_document(document):
+                          engine.add((document.get('id'), source))
           print('relations_summary=', report['relations_summary'])
+          print('engine_relation_count=', len(engine))
+          print('audit_only=', sorted(audited - engine))
+          print('engine_only=', sorted(engine - audited))
+          missing = [item for item in report['relations'] if item.get('source_or_evidence_missing')]
           print('missing_evidence=', len(missing))
           for item in missing:
               print(item['record_id'], item['path'])
+          assert len(engine) == 107
           PY
       - name: Validate candidate repository
         run: |
