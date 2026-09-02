@@ -2,6 +2,9 @@ name: Lifecycle Backfill Preview
 
 on:
   pull_request:
+  push:
+    branches:
+      - backfill-89-lifecycle-provenance
   workflow_dispatch:
 
 permissions:
@@ -35,6 +38,17 @@ jobs:
             --report build/lifecycle-backfill-report.json
           python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py '01_State/01_Objects/*.yaml'
           python 02_Runtime/02_Tools/normalize_backfill_yaml_scalars.py 'build/backfill-bundle/01_State/01_Objects/*.yaml'
+      - name: Print coverage gaps
+        run: |
+          python - <<'PY'
+          import json
+          report = json.load(open('build/lifecycle-backfill-report.json'))
+          missing = [item for item in report['objects'] if item.get('source_or_evidence_missing')]
+          print('objects_summary=', report['objects_summary'])
+          print('missing_sources=', len(missing))
+          for item in missing:
+              print(item['path'])
+          PY
       - name: Validate candidate repository
         run: |
           python 02_Runtime/01_Engine/test_repository_layout.py
