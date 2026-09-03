@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T05:17:00+08:00
+Document Updated At: 2026-09-04T05:49:28+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T05:17:00+08:00
+> Verified At: 2026-09-04T05:49:28+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -92,7 +92,7 @@ P2  Prior-art / standards research       ✅ Completed / #124 closed
         ↓
 P3  Current-state audit                  ✅ Completed / #126 closed
         ↓
-P4  Architecture / Roadmap reset         ← NOW
+P4  Architecture / Roadmap reset         ← NOW / #127
         ↓
 P5  Real-data experiments / intake stress test
         ↓
@@ -100,6 +100,8 @@ P6  Implementation + continuous intake
 ```
 
 ### NOW: P4 — Architecture / Roadmap Reset
+
+Primary Work Item: **Issue #127 — P4 Architecture / Roadmap Reset: Canonical Contract V1 → Intake → Migration → Workspace**。
 
 P4 的任务不是立即迁移数据或重写前端，而是把 P1/P2 原则与 P3 真实审计结果合并成一套明确的 V1 架构和新的执行路线。
 
@@ -145,7 +147,11 @@ P3 factual input: **Issue #126 final synthesis**。
 
 ### Resume Here
 
-Create / establish the P4 primary Work Item from Issue #122 + Issue #126 final synthesis, then begin with **Canonical Contract V1 architecture**, without performing destructive migration yet.
+Continue **Issue #127 / P4.1 Canonical Contract V1 architecture**.
+
+Checkpoint A has established five semantic contract surfaces: Identity; Entity/Object; Relation/Association; Knowledge Claim/Evidence; Lifecycle/State. It also recorded the current architectural direction of a stable Canonical Core plus explicit composable semantic contracts/profiles rather than continuing to grow one universal Object schema.
+
+Next small checkpoint: **Identity Contract + Object family / kind boundary**. Define identity levels, external-identifier and merge boundaries, then the minimal responsibilities of family/kind classification. Do not write the final field-level Schema yet and do not migrate data.
 
 ## 6. P4 guardrails
 
@@ -169,7 +175,8 @@ P4 首先做 Architecture / Decision / Roadmap。需要真实数据验证的设�
 - #124 P2 Prior-Art / Standards Research completed ✅；
 - Standards Candidate Pool v0.1 established ✅；
 - #126 P3 Current-State Audit completed ✅；
-- P3 conclusion: **V1 architecture + asset migration, not whole-project rewrite** ✅。
+- P3 conclusion: **V1 architecture + asset migration, not whole-project rewrite** ✅；
+- #127 P4 Primary Work Item established; Canonical Contract V1 architecture Checkpoint A recorded ✅。
 
 ## 8. Known open / parallel work
 
@@ -202,8 +209,8 @@ AGENTS.md
 Issue #122 Owner intent
 → Issue #124 final P2 synthesis
 → Issue #126 final P3 synthesis
-→ establish P4 primary Work Item
-→ Canonical Contract V1 architecture
+→ Issue #127 P4 Primary Work Item
+→ P4.1 Canonical Contract V1 architecture
 → Canonical Write / Intake Contract
 → Migration Architecture
 → Workspace / Human+Agent Architecture
@@ -214,7 +221,7 @@ Issue #122 Owner intent
 
 新 Agent 在继续前必须检查：
 1. `Verified At` 之后 main 是否有改变 Phase / main line 的提交；
-2. 是否已经建立新的 P4 Primary Work Item / architecture artifact；
+2. #127 是否有新的 architecture checkpoint / decision artifact；
 3. #122 是否有新的 Human Owner 意图；
 4. #126 后是否出现改变 P3 结论的新证据；
 5. Research Governance / Task Governance 是否已有更高版本。
