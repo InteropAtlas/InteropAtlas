@@ -3,18 +3,18 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active phase plan
 Document Created At: 2026-09-02T21:11:00+08:00
-Document Updated At: 2026-09-02T21:36:00+08:00
+Document Updated At: 2026-09-03T18:07:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Not independently reviewed
+  Reviewer: Human — ff6962757
   GitHub Actor: ff6962757
 -->
 
-> Upstream: Issue #122 and `03_Evolution/02_Design/knowledge-workspace-design-principles-v1.0.zh-CN.md`.
+> Upstream: Issue #122 and `docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`.
 >
 > Version note: v1.0 marks the project-level route reset that follows the new Knowledge Workspace design baseline; this does not make all inner concepts stable Specifications.
 >
@@ -32,20 +32,27 @@ Therefore the next work is a design/research/audit cycle before further product 
 
 ### P1 — Design Principles
 
-Deliverable: `knowledge-workspace-design-principles-v1.0.zh-CN.md`.
+Deliverable: `docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`.
 
 Acceptance: Canonical Knowledge vs representation boundary explicit; Perspective / Projection / Workspace defined provisionally; Wiki/Browse requirement, Human/Agent shared knowledge world, information-loss/recoverability boundary and decisions-vs-hypotheses recorded; no Schema/runtime change.
 
+**Status: accepted by Human Maintainer and ready to merge through PR #123.**
+
 ### P2 — Prior-art / standards research
 
+Primary Work Item: **#124 — P2 系统研究：InteropAtlas Prior-Art Map / Standards & Research Landscape**.
+
 Research clusters:
-- information retrieval / relevance / faceted navigation;
-- Dynamic Queries, standing / continuous queries, Focus+Context;
-- Multiple Coordinated Views / visual analytics / information visualization;
-- Topic Maps, RDF / Linked Data, hypertext, knowledge graphs, Web Annotation;
-- relevant modern PKM / database / task products.
+- Knowledge Modeling: Topic Maps, RDF / Linked Data / JSON-LD, Property Graph, Hypergraph, N-ary Relations, Identity, Scope / Context, Provenance / Evidence;
+- Selection / Attention: information retrieval, relevance, faceted navigation, Dynamic / Saved / Standing / Continuous Queries, Focus+Context, OmniFocus Custom Perspectives;
+- **Knowledge Lifecycle / Metabolism**: Active / Warm / Cold knowledge sets, freshness/staleness, superseded/deprecated/archive, decay/down-ranking, compaction, deletion, reactivation, retention and knowledge-maintenance debt;
+- Projection / Representation: Multiple Coordinated Views, visual analytics, representation transformation, information loss and transformation invariants;
+- Productization: modern PKM / database / task products including Capacities, Tana, Heptabase, Notion, Obsidian Bases, Logseq, Roam, Anytype and OmniFocus;
+- Human + Agent: shared Canonical Knowledge, explainable selection and Agent operation over Perspective / Workspace state.
 
 For each major concept answer: what problem it solves; what is mature/standardized; what IA can Adopt; what requires Profile/Extend; what appears genuinely uncovered and might eventually require Invent. Do not collect references without extracting design consequences.
+
+`Knowledge Metabolism` is currently a research term, not a stable architecture or Schema. P2 must distinguish validity, freshness, usage, relevance, historical value, authority and lifecycle instead of collapsing them into one permanent weight.
 
 ### P3 — Current-state audit
 
@@ -53,9 +60,11 @@ Audit Canonical Objects/identity, Relations, Evidence/Provenance/Lifecycle, Capa
 
 Classify findings as **Fits**, **Temporary View**, **Premature Constraint**, **Missing Capability**, or **Research Needed**. No destructive migration during audit.
 
+P3 must also ask whether current IA implicitly keeps all knowledge permanently active/equal-weight, how superseded/legacy material is down-ranked but recoverable, whether research materials can be compacted/archived after synthesis, and what should trigger reactivation.
+
 ### P4 — Architecture and Roadmap reset
 
-Using P2 + P3 evidence, reorganize future work across Knowledge, Selection/Perspective, Projection, Workspace, Machine/Agent and Evaluation concerns. Decide what happens to the previous page-feature roadmap and whether new Specifications/Schemas are justified. High-impact changes still require Human Maintainer authorization.
+Using P2 + P3 evidence, reorganize future work across Knowledge, Lifecycle/Metabolism if justified, Selection/Perspective, Projection, Workspace, Machine/Agent and Evaluation concerns. Decide what happens to the previous page-feature roadmap and whether new Specifications/Schemas are justified. High-impact changes still require Human Maintainer authorization.
 
 ### P5 — Small real-data experiments
 
@@ -73,10 +82,10 @@ Existing merged Search, Compare, Evidence, Human Route and Homepage work is pres
 
 ## 4. Stop conditions
 
-Pause for Human Maintainer decision before destructive Schema migration; making Perspective a mandatory persisted Canonical type; wholesale frontend/renderer replacement; opaque default personalization/recommendation ranking; promoting exploratory vocabulary into stable Specification without experiments; or discarding significant existing Reference Implementation work.
+Pause for Human Maintainer decision before destructive Schema migration; making Perspective or Knowledge Metabolism a mandatory persisted Canonical type; wholesale frontend/renderer replacement; opaque default personalization/recommendation ranking; promoting exploratory vocabulary into stable Specification without experiments; or discarding significant existing Reference Implementation work.
 
 ## 5. Current resume point
 
-**NOW: P1 — Design Principles.**
+**NOW: P2 — systematic prior-art / standards research under Issue #124.**
 
-After P1 review/merge, begin P2 systematic research as a separate Work Item. P2 must avoid tunnel vision around Perspective alone and remain bounded by the questions in the principles document.
+P1 has Human Maintainer acceptance. After PR #123 merges, continue P2 from #124 rather than resuming the old page-feature sequence. Do not automatically resume #118/#119 or other proposed UI expansion before P3/P4 re-evaluation.
