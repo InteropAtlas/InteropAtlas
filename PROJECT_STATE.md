@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-03T21:38:00+08:00
+Document Updated At: 2026-09-04T05:17:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-03T21:38:00+08:00
+> Verified At: 2026-09-04T05:17:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -52,37 +52,36 @@ Knowledge Model / Machine Contract         ✅ representative foundation complet
 F4 — Curation / Evidence / Correctness     🟡 parallel quality line
 ```
 
-此前 Reference Implementation 的 Permanent Human Route、Search、Compare、Evidence / Assessment presentation、Homepage task entry 等代表性成果保留，但不自动沿旧页面功能路线扩张。
+此前 Reference Implementation 的 Human Route、Search、Compare、Evidence / Assessment presentation、Local Map 等代表性成果保留为已验证资产，但不自动沿旧页面功能路线扩张。
 
-## 4. Design baseline after P2
+## 4. P1–P3 settled direction
 
-P1 Knowledge Workspace / Perspective 设计方向已通过 P2 prior-art / standards validation，没有发现需要推翻 P1 的重大错误。
+P1 设计原则已接受；P2 prior-art / standards research 没有发现需要推翻 P1 的重大错误；P3 Current-State Audit 已在 **Issue #126（Completed）** 收口。
 
-当前上层方向仍为：
+P3 的正式结论：
 
-```text
-Canonical Knowledge
-        ↓
-Selection / Perspective
-        ↓
-Projection
-        ↓
-Representation / Workspace
-        ↓
-Human / Agent Interaction
-```
+> **不推倒重写整个 InteropAtlas，也不继续在 V0 上无限打补丁。保留知识资产、仓库历史、协作体系、迁移基础设施和 Runtime 骨架；P4 建立干净的 Canonical Contract V1 与新的 Workspace / Product Architecture，再逐步迁移。**
 
-P2 对其增加以下边界：
+P3 认为值得保留：
+- Canonical knowledge content / stable IDs / sources / provenance history；
+- Relation 作为一等知识资产；
+- semantic normalization / migration layer；
+- Machine Review / Graph checks / CI skeleton；
+- Generated View ≠ Canonical boundary；
+- Human-first, agent-compatible collaboration；
+- Search / Compare / Local Graph 已验证的交互原则。
 
-- Perspective 仍是上位研究概念，不能提前把 filter / query / continuous reevaluation / ranking / recommendation / manual curation 压成单一机制；
-- Public Knowledge Lifecycle 关注 Validity / Freshness / Authority / Supersession / Archive / Historical Value / Retention / Reactivation；个人使用频率、注意力衰减、项目激活属于个人层；
-- Identity / Merge 比普通 Relation 更高风险、更保守；
-- Statement / Provenance 与 Relation / participants + roles 是不同层；
-- View 能正确生成，不代表能安全反向修改 Canonical；
-- Agent inference / artifact 默认不是公共事实；
-- 产品层可以默认简单，但必须能解释当前 scope / selection，并可下钻到 source / evidence / relations / history。
+P3 认为需要 P4 重建或补齐：
+- Canonical Contract V1；
+- external identifier semantics；
+- Lifecycle dimensions；
+- Source / Evidence / Assertion / Assessment / Provenance 边界；
+- binary Relation 的通用上限与 richer participants / roles 能力；
+- Candidate Assertion / Proposal / Patch → Review → Canonical mutation 写入边界；
+- Human Workspace / Product information architecture；
+- Legacy compatibility 的明确退役终点。
 
-P2 完整研究记录与总收口：**Issue #124（Completed）**。
+完整审计与 Keep / Refactor / Migrate / Rewrite / Retire Matrix：**Issue #126 final synthesis**。
 
 ## 5. Current phase and resume point
 
@@ -91,87 +90,88 @@ P1  Design Principles                    ✅ Completed / accepted
         ↓
 P2  Prior-art / standards research       ✅ Completed / #124 closed
         ↓
-P3  Current-state audit                  ← NOW
+P3  Current-state audit                  ✅ Completed / #126 closed
         ↓
-P4  Architecture / Roadmap reset
+P4  Architecture / Roadmap reset         ← NOW
         ↓
 P5  Real-data experiments / intake stress test
         ↓
 P6  Implementation + continuous intake
 ```
 
-### NOW: P3 — Current-State Audit
+### NOW: P4 — Architecture / Roadmap Reset
 
-P3 的任务不是继续做泛研究，也不是马上重写 Schema / UI，而是拿 P2 已验证和修正的认知，对**当前真实 InteropAtlas**做结构化体检，为 P4 Architecture / Roadmap Reset 提供事实依据。
+P4 的任务不是立即迁移数据或重写前端，而是把 P1/P2 原则与 P3 真实审计结果合并成一套明确的 V1 架构和新的执行路线。
 
 Long-term Owner intent anchor: **Issue #122**。
 
-P2 research record / P3 input: **Issue #124**，尤其最终 P2 总收口评论。
+P3 factual input: **Issue #126 final synthesis**。
 
-Standards Candidate Pool 已建立：`03_Evolution/01_Research/standards-candidate-pool-v0.1.zh-CN.md`。候选池可在 P3 并行增长，但当前不批量污染 Canonical Knowledge。
+### P4 recommended design order
 
-## 6. P3 required audit scope
+1. **Canonical Contract V1**
+   - Identity / external identifiers；
+   - Object family / kind hierarchy；
+   - Relation / participants / roles boundary；
+   - Evidence / Assertion / Assessment / Provenance；
+   - Lifecycle dimensions。
 
-### Identity / Canonical Model
-- Object ID、external identifier、Source URL 是否混淆；
-- merge / dedup 是否过度激进；
-- binary Relation 是否已经造成角色 / 多参与者语义损失；
-- Context / Scope / qualifier 是否缺失并造成真实错误。
+2. **Canonical Write / Intake Contract**
+   - Candidate Assertion / Proposal / Patch；
+   - Evidence requirements；
+   - review / authority gates；
+   - competing assertions / conflict preservation。
 
-### Evidence / State / Lifecycle
-- Validity、Freshness、Authority、last-updated 是否混用；
-- 是否能表达 old-but-valid、new-but-low-confidence、superseded-but-historically-important；
-- archive / invalidated / superseded / deleted 是否区分；
-- Fact / Assessment / generated output 是否混淆。
+3. **Migration Architecture**
+   - Legacy → V1 mapping；
+   - stable ID preservation；
+   - compatibility retirement plan；
+   - batch migration / validation strategy。
 
-### Selection / Perspective
-- Search / Compare / Graph / Browse 是否存在隐藏的 selection / ranking；
-- saved view / Perspective 是否 explainable / replayable；
-- manual curation、query、ranking、personalization 是否混为一种状态。
+4. **Selection / Projection / Workspace Architecture**
+   - Search / Browse / Compare / Graph / Evidence / Timeline；
+   - explicit scope / filter / selection reasons；
+   - readable projection vs updatable projection。
 
-### Projection / Representation
-- Article / Compare / Graph 是否只是派生 View，还是偷偷维护第二事实源；
-- Renderer / generated content 是否反向污染 Canonical；
-- 是否存在“改 View = 改底层”的隐含路径；
-- transformation provenance / known loss 是否可追踪。
+5. **Human + Agent Access Architecture**
+   - shared Canonical substrate；
+   - different interaction surfaces；
+   - no hidden Agent truth；
+   - no unrestricted write equivalence。
 
-### Human + Agent / Collaboration
-- Agent output 是否可能直接成为 Fact；
-- proposal / task artifact / workspace state / canonical artifact 是否区分；
-- 多 Agent 冲突是否可保留和审计；
-- executor / reviewer / authority / delegation 是否清楚；
-- high-impact mutation 是否有更高 gate。
+6. **Roadmap Reset**
+   - classify old #118/#119 and earlier implementation work；
+   - determine what moves to P5 experiments vs P6 implementation。
 
-### Product / Human Route
-- 页面是否围绕 raw Schema 而不是用户任务；
-- View 是否过度增殖；
-- 当前 scope / filter / hidden information 是否可见；
-- 是否能从简化表示下钻到 source / evidence / relations / history。
+### Resume Here
 
-## 7. Current stop conditions
+Create / establish the P4 primary Work Item from Issue #122 + Issue #126 final synthesis, then begin with **Canonical Contract V1 architecture**, without performing destructive migration yet.
 
-在 P3/P4 形成明确结论前，不自动执行：
+## 6. P4 guardrails
+
+P4 不应自动执行：
 - destructive Schema migration；
-- 把 Perspective / Knowledge Metabolism 设为 mandatory Canonical type；
-- 全量 Relation → N-ary / Hypergraph 迁移；
+- 全量 Canonical data rewrite；
+- 全量 Relation → N-ary / Hypergraph migration；
 - wholesale frontend / renderer rewrite；
 - opaque personalization / recommendation ranking；
 - stable Specification promotion；
-- 大规模数据删除；
-- Ruleset / Branch Protection / Governance Automation。
+- 大规模删除；
+- complex permission / governance automation。
 
-已有 #118/#119 等旧页面功能工作**不要机械恢复**。P3 应判断其属于 Fits / Temporary View / Premature Constraint / Missing Capability / Research Needed，再决定继续、降级或暂停。
+P4 首先做 Architecture / Decision / Roadmap。需要真实数据验证的设计进入 P5，而不是在 P4 直接固化。
 
-## 8. Recent stable milestones
+## 7. Recent stable milestones
 
 - #89–#93 lifecycle / provenance historical backfill ✅；
 - PR #123 Knowledge Workspace Design Principles v1.0 merged / Human Maintainer accepted ✅；
 - Research Governance v0.1 established ✅；
 - #124 P2 Prior-Art / Standards Research completed ✅；
-- P2 结论：无 P1 重大设计错误；形成 R2 边界修正并进入 P3 ✅；
-- Standards Candidate Pool v0.1 established ✅。
+- Standards Candidate Pool v0.1 established ✅；
+- #126 P3 Current-State Audit completed ✅；
+- P3 conclusion: **V1 architecture + asset migration, not whole-project rewrite** ✅。
 
-## 9. Known open / unrelated work
+## 8. Known open / parallel work
 
 不要自动吞并：
 - #122 — Knowledge Workspace / Perspective long-term anchor；
@@ -180,9 +180,10 @@ Standards Candidate Pool 已建立：`03_Evolution/01_Research/standards-candida
 - PR #30 — Fit Test Batch 1；
 - Issue #15 — wider Schema / Validator / migration debt；
 - Issue #86 — Agent Continuity takeover validation；
-- F4 Machine / Curation / Evidence quality line。
+- F4 Machine / Curation / Evidence quality line；
+- `docs/task-authority-governance-v0.1-draft.zh-CN.md` — P4 governance input, not yet stable policy。
 
-## 10. Where to read next
+## 9. Where to read next
 
 第一次理解项目：
 
@@ -198,20 +199,24 @@ AGENTS.md
 继续当前主线：
 
 ```text
-Issue #124 final P2 synthesis
-→ Issue #122
-→ audit current Canonical Objects / Relations / Evidence / Runtime / Human Route / Agent path
-→ classify findings
-→ produce P3 Current-State Audit
-→ P4 Architecture / Roadmap Reset
+Issue #122 Owner intent
+→ Issue #124 final P2 synthesis
+→ Issue #126 final P3 synthesis
+→ establish P4 primary Work Item
+→ Canonical Contract V1 architecture
+→ Canonical Write / Intake Contract
+→ Migration Architecture
+→ Workspace / Human+Agent Architecture
+→ Roadmap Reset
 ```
 
-## 11. Staleness check
+## 10. Staleness check
 
 新 Agent 在继续前必须检查：
 1. `Verified At` 之后 main 是否有改变 Phase / main line 的提交；
-2. 是否已经存在新的 P3 Primary Work Item / audit artifact；
+2. 是否已经建立新的 P4 Primary Work Item / architecture artifact；
 3. #122 是否有新的 Human Owner 意图；
-4. Research Governance / Task Governance 是否已有更高版本。
+4. #126 后是否出现改变 P3 结论的新证据；
+5. Research Governance / Task Governance 是否已有更高版本。
 
-不要根据旧 Reference Implementation Phase 或已完成的 P2 `NOW` 恢复页面功能扩张路线。
+不要根据旧 Reference Implementation Phase、旧 P2/P3 `NOW` 或 #118/#119 自动恢复页面功能扩张路线。
