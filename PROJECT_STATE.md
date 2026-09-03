@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-03T18:07:00+08:00
+Document Updated At: 2026-09-03T19:18:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-03T18:07:00+08:00
+> Verified At: 2026-09-03T19:18:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -103,6 +103,10 @@ Primary Work Item: **Issue #124**.
 
 Long-term direction / Owner intent anchor: **Issue #122**.
 
+Research governance baseline: `docs/research-governance-v0.1.zh-CN.md`.
+
+P2 后续研究必须按 Research Governance v0.1 执行：先定义 Research Question / Decision Question，默认采用最低充分深度（P2 默认上限 L2），使用显式 Stop Conditions；完整研究记录与 Owner 汇报分层，只有真正改变设计空间或需要管理判断的 R2/R3 结果重点上浮。
+
 P2 目标不是堆参考资料，而是形成 `InteropAtlas Prior-Art Map v0.1`，对主要问题分别判断：
 
 `Adopt / Profile / Extend / Invent`。
@@ -128,6 +132,8 @@ P2 当前一级研究主题：
 - stable Specification promotion；
 - 大规模数据删除；
 - Ruleset / Branch Protection / Governance Automation。
+
+研究本身还受 Research Governance v0.1 的局部停止条件约束：问题已足够回答、信息增量明显下降、进入未来实现细节、偏离当前问题、决策价值不足，或遇到需要 Human Owner 先判断的 R3 gate 时停止深挖。
 
 已有 #118/#119 等旧页面功能工作**不要机械恢复**。P3 应判断其属于 Fits / Temporary View / Premature Constraint / Missing Capability / Research Needed，再决定继续、降级或暂停。
 
@@ -160,7 +166,8 @@ P3 至少检查：
 - #116 / PR #117 Resource Page Task Navigation v0.1 ✅；
 - #122 Knowledge Workspace / Perspective long-term anchor OPEN；
 - #124 P2 Prior-Art Map research OPEN；
-- PR #123 Knowledge Workspace Design Principles v1.0 — Human Maintainer accepted, merge/closeout in progress。
+- PR #123 Knowledge Workspace Design Principles v1.0 — Human Maintainer accepted and merged；
+- Research Governance v0.1 established and integrated into Research Work Items / P2 execution。
 
 ## 9. Known open / unrelated work
 
@@ -187,7 +194,8 @@ AGENTS.md
 继续当前主线：
 
 ```text
-Issue #124
+docs/research-governance-v0.1.zh-CN.md
+→ Issue #124
 → Issue #122
 → P2 research notes / comments
 → produce Prior-Art Map v0.1
@@ -198,8 +206,8 @@ Issue #124
 
 新 Agent 在继续前必须检查：
 1. `Verified At` 之后 main 是否有改变 Phase / main line 的提交；
-2. PR #123 是否已合并；
-3. #124 是否已有更新的研究顺序 / durable artifact；
-4. P2 是否已形成正式 Prior-Art Map 或进入 P3。
+2. #124 是否已有更新的 Research Question / Decision Question / research order；
+3. P2 是否已形成正式 Prior-Art Map 或进入 P3；
+4. Research Governance 是否已有高于 v0.1 的版本。
 
 不要根据旧 Reference Implementation Phase 的历史 `NOW` 恢复页面功能扩张路线。
