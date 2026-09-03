@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Pilot Operational Profile
 Document Created At: 2026-09-01T12:42:42+08:00
-Document Updated At: 2026-09-02T10:43:23+08:00
+Document Updated At: 2026-09-03T19:16:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: reconstructed_from_git
 Lifecycle Time Provenance: reconstructed_from_git
@@ -22,6 +22,8 @@ Latest Substantive Contribution:
 > 上位规范：`docs/open-collaboration-profile-v0.1.zh-CN.md`
 >
 > Context Continuity：`docs/agent-onboarding-context-continuity-profile-v0.1.zh-CN.md`
+>
+> Research Tasks：`docs/research-governance-v0.1.zh-CN.md`
 
 本文把 Open Collaboration Profile 映射成当前仓库可直接执行的 GitHub 工作协议。它不建立第二套任务数据库；GitHub Issue 仍是 Work Item source of truth。
 
@@ -44,6 +46,27 @@ Latest Substantive Contribution:
 13. Lease Policy。
 
 `Seed References` 是已知高价值起点，不是封闭白名单。执行者仍要检查新版本、新标准、新替代方案和 Atlas 漏项。
+
+### 1.1 Research Work Item overlay
+
+Research / Prior-art / Standards / Landscape / Comparative Research 任务除上述通用字段外，必须遵守 `docs/research-governance-v0.1.zh-CN.md`。
+
+至少 SHOULD 明确：
+
+```text
+Research Question:
+Decision Question:
+Why Now:
+Depth: L1 | L2 | L3
+Scope:
+Non-goals:
+Stop Conditions:
+Expected Decision Output:
+Management Escalation:
+Deferred Questions:
+```
+
+研究任务不得用“研究某主题”作为无边界 Objective。默认采用满足决策所需的最低充分深度；新问题默认进入 Deferred Questions，而不是自动扩大当前任务。
 
 ## 2. V0 Task Metadata
 
