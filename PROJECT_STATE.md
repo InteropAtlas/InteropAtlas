@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-02T13:13:30+08:00
+Document Updated At: 2026-09-03T18:07:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -11,208 +11,167 @@ Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Not independently reviewed — checkpoint sync only
+  Reviewer: Human — ff6962757
   GitHub Actor: ff6962757
 -->
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-02T13:13:30+08:00
+> Verified At: 2026-09-03T18:07:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
 ## 1. Project in one sentence
 
-InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperability Solution Space（互操作方案空间）** 知识地图，用来连接标准、成熟先例、方法、实现、组织、能力、场景、关系、证据与开放缺口，并服务 Human（人类）与 Agent（智能体）的发现、比较、组合、验证和改进。
+InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperability Solution Space（互操作方案空间）** 知识基础设施，用来连接标准、成熟先例、方法、实现、组织、能力、场景、关系、证据与开放缺口，并服务 Human 与 Agent 的发现、比较、组合、验证和改进。
 
 完整定义：`docs/interopatlas-definition-and-scope-v0.2.zh-CN.md`。
 
-## 2. Core invariants（核心不变量）
+## 2. Core invariants
 
-任何方向判断先保护这些原则：
-
-- `Adopt → Profile → Extend → Invent（采用 → 定制 → 扩展 → 最后才自行发明）`；
-- `Evidence Before Assertion（先证据，后断言）`；
-- `Fact ≠ Assessment（事实 ≠ 评估）`；
-- `Physical Storage ≠ Semantic Classification ≠ Index / View（物理存储 ≠ 语义分类 ≠ 索引 / 视图）`；
-- Stable Identity（稳定身份）不能依赖文件路径或显示名称；
-- Canonical State（规范状态）与 Generated View（生成视图）分离；
-- Search / Compare / Map 是 View / Projection（视图 / 投影），不是新的 Canonical Fact 来源；
-- Private Chat（私人聊天）不是项目状态；
-- Human / Agent 协作使用公开、可恢复的 GitHub / Repository Artifact；
-- 高影响治理、破坏性迁移和仓库规则变更需要明确 Human Maintainer 授权。
+- `Adopt → Profile → Extend → Invent`；
+- Evidence Before Assertion；
+- Fact ≠ Assessment；
+- Physical Storage ≠ Semantic Classification ≠ Index / View；
+- Stable Identity 不能依赖文件路径或显示名称；
+- Canonical State ≠ Generated View；
+- Search / Compare / Map / Timeline / Wiki 等是 View / Projection / Workspace，不是新的 Canonical Fact 来源；
+- Private Chat 不是项目状态；
+- Human / Agent 必须共享可公开恢复的项目状态；
+- 高影响治理、破坏性迁移和稳定规范升级需要 Human Maintainer 明确授权。
 
 ## 3. Foundation status
 
 ```text
-Gate A — Repository Structure
-✅ PASS
-
-Gate B — Human Interface
-✅ PASS
-
-Gate C — Open Collaboration
-✅ PASS at v0.1 Pilot
-
-Knowledge Model / Machine Contract
-✅ representative foundation complete
-
-F4 — Curation / Evidence / Machine Correctness
-🟡 parallel quality line
+Gate A — Repository Structure             ✅ PASS
+Gate B — Human Interface                  ✅ PASS
+Gate C — Open Collaboration v0.1 Pilot    ✅ PASS
+Knowledge Model / Machine Contract         ✅ representative foundation complete
+F4 — Curation / Evidence / Correctness     🟡 parallel quality line
 ```
 
-Gate B Final Conformance Audit：
-`03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`。
+此前 Reference Implementation 已落地 Permanent Human Route、Search v0.1、dedicated Compare、Evidence / Assessment presentation、Homepage task entry 等代表性切片。这些成果保留，但不再自动按旧页面功能路线继续扩张。
 
-Foundation 的三项主要 Gate 已经达到最小可依赖状态。项目当前处于真实 Reference Implementation（参考实现）演进，而不是继续无限补 Foundation。
+## 4. Current design baseline
 
-## 4. Current phase
+Human Maintainer 已确认 Knowledge Workspace / Perspective 方向为新的项目级设计基线。
 
-**Reference Implementation Evolution（参考实现演进）**
+当前设计原则：`docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`。
 
-当前 Phase Plan：
-`03_Evolution/03_Change/reference-implementation-phase-v0.1.zh-CN.md`。
+当前 Phase Plan：`03_Evolution/03_Change/knowledge-workspace-phase-plan-v1.0.zh-CN.md`。
 
-当前主 umbrella：**#16 — 按 Human Interface Specification / Profiles 审计并重构当前网站**。
-
-Post-Gate 已落地的主线 slices：
-
-1. **#101 / PR #102 — Permanent Human Route runtime boundary ✅**
-   - Local Map loading / success / failure / retry；
-   - focus / reduced-motion；
-   - Human map-center label 不再泄漏 raw core type。
-
-2. **#103 / PR #104 — Task-oriented Search v0.1 ✅**
-   - 99 个 Human Resources 的 deterministic search index；
-   - stable ID / name / summary / Human type / alias 透明匹配；
-   - query URL / Back / Forward；无隐藏 ranking。
-
-3. **#105 / PR #106 — First dedicated Compare UI ✅**
-   - Forgejo Actions vs GitHub Actions；
-   - false / not-recorded 边界；
-   - 无 winner / score / recommendation。
-
-4. **#107 / PR #109 — Second permanent Human Route shell boundary ✅**
-   - `human_route_shell.py`；
-   - semantic Breadcrumb / Human route-link helper / shared Human view labels 迁入 permanent Human Route；
-   - Resource / Search / Compare 共用 permanent Page Shell entry point。
-
-5. **#110 / PR #111 — First Evidence / Assessment Human View ✅**
-   - Canonical `sources` 与 IA `notes_zh` 在 Human View 中明确分工；
-   - missing source 表达为 not recorded，而不是 false / none；
-   - Forgejo Actions + YAML 1.2.2 representative slice；
-   - Browser E2E **32 / 32 PASS**；
-   - 99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues。
-
-6. **#112 / PR #113 — Task-oriented Homepage Entry v0.1 ✅**
-   - Homepage 新增 Find / Understand / Compare / Verify / Relate-Explore 任务入口；
-   - Capability-first 浏览继续保留，但不再是唯一主入口；
-   - Compare / Local Map 明确当前能力边界，不冒充全站通用 Compare / 大型 Graph Explorer；
-   - Browser E2E **35 / 35 PASS**；
-   - Bootstrap Engine / Provenance Coverage PASS；
-   - 99 Resource Pages / 131 Objects / 170 Graph edges / 0 reference issues。
-
-## 5. Resume Here
-
-#112 / PR #113 已完成并合并。Homepage 现在已经把 Search、Resource Page、Compare、Evidence / Assessment 和 Local Map 组织成第一批真实任务入口，同时保留 Capability-first browse。
-
-当前主线仍是 **#16 — Reference Implementation Evolution**，但在 #112 之后**暂未锁定下一个 Work Item**。下一步应先从实际 Homepage / Human Route 效果出发，选择一个新的小 slice，而不是自动扩张范围。
+核心方向：
 
 ```text
-#16 Reference Implementation umbrella
+Canonical Knowledge
         ↓
-#112 Task-oriented Homepage Entry ✅
+Selection / Perspective
         ↓
-Current stable product entry set
-Find / Understand / Compare / Verify / Relate-Explore
+Projection
         ↓
-NEXT: inspect the resulting Human experience
+Representation / Workspace
         ↓
-choose one small next slice
-Compare generalization / Explore-Graph / Evidence depth / other exposed gap
+Human / Agent Interaction
 ```
 
-### 当前停止条件
+- **Knowledge is stable; representations are fluid.**
+- Wiki / Browse 是长期必需的基础 Workspace，但不是唯一形式；
+- 同一 Canonical Knowledge 可以支持 Timeline / Graph / Compare / Article 等不同 Workspace；
+- Human 与 Agent 使用同一 Canonical Knowledge，而不是两套事实世界；
+- Representation 可以有损，但不能反向覆盖 richer Canonical Knowledge；
+- Perspective / Projection / Workspace 仍是待 P2/P5 验证的概念边界，不是稳定 Schema。
 
-> 不自动创建或执行新的大任务。先基于 #112 合并后的实际页面效果判断下一个最小产品缺口，再建立新的 Work Item。
+## 5. Current phase and resume point
 
-#112 已 Done / Closed；PR #113 已 merged。当前没有新的 In Progress 主线 Work Item。
+```text
+P1  Design Principles                    ✅ Human Maintainer accepted
+        ↓
+P2  Prior-art / standards research       ← NOW
+        ↓
+P3  Current-state audit
+        ↓
+P4  Architecture / Roadmap reset
+        ↓
+P5  Small real-data experiments
+        ↓
+P6  Resume implementation
+```
 
-## 6. Gate B final result
+### NOW: P2 — Prior-Art Map / Standards & Research Landscape
 
-全部冻结的 Gate B Stop Conditions 已满足：
+Primary Work Item: **Issue #124**.
 
-- [x] 五个 Profile 可独立审计；
-- [x] 关键要求有 upstream basis；
-- [x] Adopt / Profile / Extend / Invent 边界已记录；
-- [x] 四类 representative Resource Page 已浏览器验证；
-- [x] Browser E2E baseline 可重复；
-- [x] keyboard / focus / reflow / semantic evidence；
-- [x] Local Map success / loading / failure feedback；
-- [x] Minimal Compare contract；
-- [x] representative Human Task Walkthrough；
-- [x] Final Conformance Audit 无 unresolved P0 structural non-conformance；
-- [x] 剩余 Human Interface gaps 已分类为 P1 / Later / accepted boundary。
+Long-term direction / Owner intent anchor: **Issue #122**.
 
-Gate B PASS **不等于完整网站、完整 WCAG certification、完整 Search / Compare / Graph 产品已经完成**。
+P2 目标不是堆参考资料，而是形成 `InteropAtlas Prior-Art Map v0.1`，对主要问题分别判断：
 
-## 7. Recent stable milestones
+`Adopt / Profile / Extend / Invent`。
 
-近期稳定落地：
+P2 当前一级研究主题：
+- Knowledge Modeling：Topic Maps、RDF / Linked Data / JSON-LD、Property Graph、Hypergraph、N-ary Relation、Identity、Scope / Context、Provenance；
+- Selection / Attention：IR / Relevance、Faceted Navigation、Dynamic / Saved / Standing / Continuous Query、Focus+Context、OmniFocus Perspective；
+- **Knowledge Lifecycle / Metabolism**：Active / Warm / Cold、freshness / staleness、superseded / deprecated / archive、decay / down-ranking、compaction、deletion、reactivation；
+- Projection / Representation：Multiple Coordinated Views、representation transformation、information loss、transformation invariants；
+- Productization：Capacities、Tana、Heptabase、Notion、Obsidian Bases、Logseq、Roam、Anytype、OmniFocus 等；
+- Human + Agent：共享 Canonical Knowledge、可解释 selection、Agent 操作 Perspective / Workspace。
 
-- Repository Structure 三大区：`01_State / 02_Runtime / 03_Evolution`；
-- Knowledge Representation Contract v0.1；
-- Semantic Normalization / Kind Registry / v0 Schemas / Relation compatibility；
-- Machine Review；
-- Representative Migration Pilot；
-- Human Interface five-profile consolidation；
-- Gate B Browser E2E / accessibility foundation；
-- Four-family representative Resource Page contract；
-- Minimal Compare Contract；
-- Minimal Human Task Walkthrough；
-- Gate B Final Conformance Audit；
-- Agent Onboarding / Context Continuity layer；
-- Contribution Identity + Provenance / Traceability baseline；
-- Permanent Human Route runtime boundary；
-- Task-oriented Search v0.1；
-- First dedicated Compare UI slice；
-- Second permanent Human Route shell boundary；
-- First Evidence / Assessment Human View；
-- Task-oriented Homepage Entry v0.1。
+`Knowledge Metabolism` 目前是研究术语，不是稳定架构。P2 必须特别区分 Validity、Freshness、Usage、Relevance、Historical Value、Authority 与 Lifecycle，避免把它们压缩为一个永久 weight。
 
-## 8. Cross-cutting / delegated work
+## 6. Current stop conditions
 
-Lifecycle / provenance historical backfill **#89–#93 已完成并关闭**。它留下的 never-verified / source-evidence gaps 是后续质量债，不代表 #89 未完成；当前 Reference Implementation 主线不要重复执行历史 backfill。
+在 P2/P3 证据不足前，不自动执行：
+- destructive Schema migration；
+- 把 Perspective 或 Knowledge Metabolism 设为 mandatory Canonical type；
+- 全量 Relation → N-ary / Hypergraph 迁移；
+- wholesale frontend / renderer rewrite；
+- opaque personalization / recommendation ranking；
+- stable Specification promotion；
+- 大规模数据删除；
+- Ruleset / Branch Protection / Governance Automation。
 
-Agent Continuity 的 fresh-session / different-agent takeover validation 由 #86 跟踪，是 P1 cross-cutting validation，不阻塞当前产品主线。
+已有 #118/#119 等旧页面功能工作**不要机械恢复**。P3 应判断其属于 Fits / Temporary View / Premature Constraint / Missing Capability / Research Needed，再决定继续、降级或暂停。
 
-F4 Validator / Curation / Evidence / Query correctness 继续并行；#110 只完成第一批 Human View presentation，不等价于全量 Evidence 模型建设。
+## 7. P3 preloaded audit questions
 
-## 9. Open decision gates — DO NOT auto-execute
+P3 至少检查：
+- Object Identity 是否稳定、可合并、可去重；
+- Source / Resource 是否与 Object / Subject 清晰分离；
+- Relation 是否被二元边先验限制，是否有真实 facts 需要 participants + roles；
+- Scope / Context 是否缺失并已造成语义错误；
+- Evidence 与 Provenance 是否混用；
+- Generated View 是否可能污染 Canonical State；
+- 当前 Search / Compare / Graph / Browse 是否只是 Projection，还是已经偷偷固化数据模型假设；
+- 当前 IA 是否默认所有知识永久 active / equal-weight；
+- superseded / legacy knowledge 如何降权但保留可恢复性；
+- 被综合吸收后的 Research Materials 哪些必须保留、哪些可归档/压缩/淘汰；
+- knowledge reactivation 应由 query / context / time / history 中哪些信号触发。
 
-以下事项仍需要单独 Human Maintainer 授权：
+## 8. Recent stable milestones
 
-- Full Canonical Migration（全量规范数据迁移）；
-- Repository-wide Schema Enforcement（全仓库 Schema 强制执行）；
-- Ruleset / Branch Protection / Governance Automation；
-- 大规模数据删除或破坏性 Schema 变更；
-- stable Specification promotion（稳定规范升级）；
-- License / Security policy 重大变化；
-- 大型 frontend framework rewrite / infrastructure replacement。
+- #89–#93 lifecycle / provenance historical backfill ✅；
+- PR #98 merged；
+- #101 / PR #102 Permanent Human Route ✅；
+- #103 / PR #104 Search v0.1 ✅；
+- #105 / PR #106 First Compare UI ✅；
+- #107 / PR #109 Human Route shell ✅；
+- #110 / PR #111 Evidence / Assessment Human View ✅；
+- #112 / PR #113 Homepage Task Entry v0.1 ✅；
+- #114 / PR #115 stable Homepage fragment navigation ✅；
+- #116 / PR #117 Resource Page Task Navigation v0.1 ✅；
+- #122 Knowledge Workspace / Perspective long-term anchor OPEN；
+- #124 P2 Prior-Art Map research OPEN；
+- PR #123 Knowledge Workspace Design Principles v1.0 — Human Maintainer accepted, merge/closeout in progress。
 
-Gate B PASS 和当前 Reference Implementation 进展不改变这些授权边界。
+## 9. Known open / unrelated work
 
-## 10. Known open / unrelated work
-
-不要自动合并或吞并无关工作：
-
-- PR #26 — Open Collaboration v0.2：高影响 Review Gate；
-- PR #30 — Fit Test Batch 1：独立未合并工作；
-- Issue #15 — 更广泛 Schema / Validator / migration debt；
+不要自动吞并：
+- PR #26 — Open Collaboration v0.2；
+- PR #30 — Fit Test Batch 1；
+- Issue #15 — wider Schema / Validator / migration debt；
 - Issue #86 — Agent Continuity takeover validation；
-- F4 Machine / Curation / Evidence tasks。
+- F4 Machine / Curation / Evidence quality line。
 
-## 11. Where to read next
+## 10. Where to read next
 
 第一次理解项目：
 
@@ -221,40 +180,26 @@ AGENTS.md
 → PROJECT_STATE.md
 → README.md
 → docs/interopatlas-definition-and-scope-v0.2.zh-CN.md
-→ 03_Evolution/03_Change/reference-implementation-phase-v0.1.zh-CN.md
+→ docs/knowledge-workspace-design-principles-v1.0.zh-CN.md
+→ 03_Evolution/03_Change/knowledge-workspace-phase-plan-v1.0.zh-CN.md
 ```
 
 继续当前主线：
 
 ```text
-Issue #16
-→ PR #113 / merged Homepage task-entry slice
-→ render_site_semantic.py / build_homepage()
-→ Search / Compare / Evidence / Local Map Human View contracts
-→ related Browser E2E
-→ identify the next smallest product gap before creating a new Work Item
+Issue #124
+→ Issue #122
+→ P2 research notes / comments
+→ produce Prior-Art Map v0.1
+→ P3 Current-State Audit
 ```
 
-理解 renderer architecture：
-`03_Evolution/03_Change/human-route-renderer-boundary-v0.2.zh-CN.md` + `human_route_shell.py` + `human_route_runtime.py`。
+## 11. Staleness check
 
-理解 Evidence presentation：
-`03_Evolution/03_Change/human-evidence-presentation-v0.1.zh-CN.md`。
+新 Agent 在继续前必须检查：
+1. `Verified At` 之后 main 是否有改变 Phase / main line 的提交；
+2. PR #123 是否已合并；
+3. #124 是否已有更新的研究顺序 / durable artifact；
+4. P2 是否已形成正式 Prior-Art Map 或进入 P3。
 
-理解知识模型：
-`03_Evolution/03_Change/knowledge-representation-model-decision-v0.1.zh-CN.md` + current Schema / semantic engine。
-
-理解协作：
-`CONTRIBUTING.md` + Collaboration Task System + Agent Continuity Profile。
-
-## 12. Staleness check
-
-这个文件是最后一次经过核验的项目快照，不是自动实时数据库。
-
-新 Agent 在依赖 `Resume Here` 前必须检查：
-
-1. `Verified At` 之后 main 是否有改变 Phase / 主线的提交；
-2. #16 后是否已经建立新的主线 Work Item / PR，或 #112 之后的方向是否改变；
-3. 如果状态已经变化，先更新本文件，再继续。
-
-不要让旧 `foundation-first-phase-v0.1.zh-CN.md` 的历史“NOW”状态覆盖本文件和更新的 Reference Implementation Phase Plan。
+不要根据旧 Reference Implementation Phase 的历史 `NOW` 恢复页面功能扩张路线。
