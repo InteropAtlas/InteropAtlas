@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T06:12:00+08:00
+Document Updated At: 2026-09-04T06:18:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T06:12:00+08:00
+> Verified At: 2026-09-04T06:18:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -103,34 +103,29 @@ P6  Implementation + continuous intake
 
 Primary Work Item: **Issue #127 — P4 Architecture / Roadmap Reset: Canonical Contract V1 → Intake → Migration → Workspace**。
 
-P4 的任务不是立即迁移数据或重写前端，而是把 P1/P2 原则与 P3 真实审计结果合并成一套明确的 V1 架构和新的执行路线。
-
 Long-term Owner intent anchor: **Issue #122**。
-
 P3 factual input: **Issue #126 final synthesis**。
 
-### P4 recommended design order
+### P4 design order / status
 
-1. **Canonical Contract V1** — first architecture pass documented in `docs/canonical-contract-v1-architecture-draft.zh-CN.md`
-2. **Canonical Write / Intake Contract** ← NEXT
-3. **Migration Architecture**
+1. **Canonical Contract V1** — first architecture pass documented in `docs/canonical-contract-v1-architecture-draft.zh-CN.md` ✅ draft
+2. **Canonical Write / Intake Contract** — documented in `docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md` ✅ draft
+3. **Migration Architecture** ← NEXT
 4. **Selection / Projection / Workspace Architecture**
 5. **Human + Agent Access Architecture**
 6. **Roadmap Reset**
 
 ### Resume Here
 
-Continue **Issue #127 / P4.2 Canonical Write / Intake Contract architecture**.
+Continue **Issue #127 / P4.3 Migration Architecture**.
 
-P4.1 first architecture pass is now consolidated in `docs/canonical-contract-v1-architecture-draft.zh-CN.md`. It establishes: Identity; Entity/Object family-kind boundary; binary Relation + richer Association boundary; Source/Evidence/Assertion/Assessment/Provenance separation; competing/unknown knowledge preservation; and multi-dimensional Lifecycle/State.
+P4.1 establishes the V1 semantic contract boundaries. P4.2 establishes a shared write/intake pipeline:
 
-P4.1 deliberately does **not** freeze final field names, enums, serialization, taxonomy, version granularity, assertion/evidence granularity, context attachment points or richer-association promotion criteria. Those require later serialization design and/or P5 real-data validation.
+`Candidate Assertion / Proposal / Patch + Evidence → Structural/Machine Validation → Semantic Review → Authority Gate when required → Accepted Canonical Mutation → provenance/correction path`
 
-Next small checkpoint: define the P4.2 write/intake pipeline boundary:
+P4.2 also introduces architecture-level mutation classes M0–M3 to distinguish additive metadata/evidence, ordinary knowledge mutation, structural/semantic mutation, and high-impact identity/destructive/governance mutation. These are **not** replacements for Task Authority T0–T3 or Review Class; mutation impact, claim authority and review authority remain distinct dimensions.
 
-`Candidate Assertion / Proposal / Patch + Evidence → validation → independent review / authority gate → Canonical mutation`
-
-Start with mutation classes and gate responsibilities. Do not implement permission automation, do not migrate Canonical data, and do not turn Agent output into accepted fact by default.
+Next small checkpoint: define Legacy → V1 migration architecture, including stable-ID preservation, unknown/conflict handling, migration batches, validation/review, rollback/correction and an explicit Legacy compatibility retirement endpoint. Do not execute migration yet.
 
 ## 6. P4 guardrails
 
@@ -156,7 +151,8 @@ P4 首先做 Architecture / Decision / Roadmap。需要真实数据验证的设�
 - #126 P3 Current-State Audit completed ✅；
 - P3 conclusion: **V1 architecture + asset migration, not whole-project rewrite** ✅；
 - #127 P4 Primary Work Item established ✅；
-- P4.1 Canonical Contract V1 first architecture pass consolidated as a durable draft artifact ✅。
+- P4.1 Canonical Contract V1 first architecture pass consolidated as a durable draft artifact ✅；
+- P4.2 Canonical Write / Intake architecture draft established ✅。
 
 ## 8. Known open / parallel work
 
@@ -191,8 +187,8 @@ Issue #122 Owner intent
 → Issue #126 final P3 synthesis
 → Issue #127 P4 Primary Work Item
 → docs/canonical-contract-v1-architecture-draft.zh-CN.md
-→ P4.2 Canonical Write / Intake Contract
-→ Migration Architecture
+→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
+→ P4.3 Migration Architecture
 → Workspace / Human+Agent Architecture
 → Roadmap Reset
 ```
