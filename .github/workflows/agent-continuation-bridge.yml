@@ -1,0 +1,140 @@
+name: Agent Continuation Bridge
+
+on:
+  workflow_run:
+    workflows:
+      - Bootstrap Engine Experiment
+      - Human Interface Browser E2E
+      - P6 V1 Intake Validation
+      - Provenance Coverage Report
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+  pull-requests: write
+
+concurrency:
+  group: agent-continuation-${{ github.event.workflow_run.head_sha }}
+  cancel-in-progress: false
+
+jobs:
+  signal:
+    if: >-
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.pull_requests[0].number != null
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+      PR_NUMBER: ${{ github.event.workflow_run.pull_requests[0].number }}
+      WEBHOOK_URL: ${{ secrets.AGENT_CONTINUATION_WEBHOOK_URL }}
+      WEBHOOK_TOKEN: ${{ secrets.AGENT_CONTINUATION_WEBHOOK_TOKEN }}
+    steps:
+      - name: Resolve required validation state
+        id: state
+        shell: bash
+        run: |
+          set -euo pipefail
+          required=(
+            "Bootstrap Engine Experiment"
+            "Human Interface Browser E2E"
+            "P6 V1 Intake Validation"
+            "Provenance Coverage Report"
+          )
+
+          runs="$(gh api --paginate \
+            -H 'Accept: application/vnd.github+json' \
+            "/repos/${REPO}/actions/runs?head_sha=${HEAD_SHA}&event=pull_request&per_page=100" \
+            --jq '.workflow_runs[] | [.name,.status,.conclusion,.id] | @tsv')"
+
+          all_complete=true
+          overall=success
+          summary=""
+          for name in "${required[@]}"; do
+            row="$(printf '%s\n' "$runs" | awk -F '\t' -v n="$name" '$1==n {print; exit}')"
+            if [[ -z "$row" ]]; then
+              all_complete=false
+              summary+="${name}:missing;"
+              continue
+            fi
+            IFS=$'\t' read -r _ status conclusion run_id <<< "$row"
+            summary+="${name}:${status}/${conclusion};"
+            if [[ "$status" != "completed" ]]; then
+              all_complete=false
+            elif [[ "$conclusion" != "success" ]]; then
+              overall=failure
+            fi
+          done
+
+          echo "all_complete=${all_complete}" >> "$GITHUB_OUTPUT"
+          echo "overall=${overall}" >> "$GITHUB_OUTPUT"
+          echo "summary=${summary}" >> "$GITHUB_OUTPUT"
+
+      - name: Stop until the last required check completes
+        if: steps.state.outputs.all_complete != 'true'
+        run: echo "Required checks are not all complete yet; a later workflow_run event will re-evaluate."
+
+      - name: Emit repository continuation signal
+        if: steps.state.outputs.all_complete == 'true'
+        shell: bash
+        env:
+          OVERALL: ${{ steps.state.outputs.overall }}
+          CHECK_SUMMARY: ${{ steps.state.outputs.summary }}
+        run: |
+          set -euo pipefail
+          marker="<!-- interopatlas-agent-continuation:${HEAD_SHA} -->"
+          existing="$(gh api --paginate "/repos/${REPO}/issues/${PR_NUMBER}/comments?per_page=100" --jq '.[].body' || true)"
+          if printf '%s\n' "$existing" | grep -Fq "$marker"; then
+            echo "Continuation signal already recorded for ${HEAD_SHA}."
+            exit 0
+          fi
+
+          if [[ "$OVERALL" == "success" ]]; then
+            action="continue"
+            text="All required validation workflows completed successfully. Agent continuation is ready."
+          else
+            action="repair"
+            text="All required validation workflows completed, with at least one failure. Agent repair/continuation is ready."
+          fi
+
+          body=$(cat <<EOF
+          ${marker}
+          **Agent Continuation Signal**
+
+          ${text}
+
+          - Head SHA: \`${HEAD_SHA}\`
+          - Result: \`${OVERALL}\`
+          - Requested action: \`${action}\`
+          - Checks: \`${CHECK_SUMMARY}\`
+
+          This is an event signal, not an independent review or Canonical acceptance.
+          EOF
+          )
+          gh api "/repos/${REPO}/issues/${PR_NUMBER}/comments" -f body="$body" >/dev/null
+
+      - name: Notify external Agent/Harness webhook
+        if: steps.state.outputs.all_complete == 'true' && env.WEBHOOK_URL != ''
+        shell: bash
+        env:
+          OVERALL: ${{ steps.state.outputs.overall }}
+          CHECK_SUMMARY: ${{ steps.state.outputs.summary }}
+        run: |
+          set -euo pipefail
+          payload="$(jq -nc \
+            --arg event "interopatlas.agent_continuation" \
+            --arg repo "$REPO" \
+            --argjson pr "$PR_NUMBER" \
+            --arg sha "$HEAD_SHA" \
+            --arg result "$OVERALL" \
+            --arg checks "$CHECK_SUMMARY" \
+            '{event:$event,repository:$repo,pull_request:$pr,head_sha:$sha,result:$result,checks:$checks,idempotency_key:("github:"+$repo+":"+$sha)}')"
+
+          args=(-fsS -X POST -H 'Content-Type: application/json' -H 'User-Agent: InteropAtlas-Agent-Continuation-Bridge')
+          if [[ -n "$WEBHOOK_TOKEN" ]]; then
+            args+=(-H "Authorization: Bearer ${WEBHOOK_TOKEN}")
+          fi
+          curl "${args[@]}" --data "$payload" "$WEBHOOK_URL"
