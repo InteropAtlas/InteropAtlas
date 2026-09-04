@@ -3,9 +3,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active master design — English parallel
 Document Created At: 2026-09-04T22:35:00+08:00
-Document Updated At: 2026-09-04T22:35:00+08:00
+Document Updated At: 2026-09-05T01:24:00+08:00
 Translation Source: interopatlas-master-design-v1.0.zh-CN.md
-Translation Source Blob SHA: 425c66375fab38af59ba8bbf84d9d2bd7d3c35b1
+Translation Source Blob SHA: 421cc2de5885f3e72de630975cc0f473dee691bb
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -22,7 +22,7 @@ Latest Substantive Contribution:
 >
 > This document is intentionally above implementation architecture, current phase plans, and individual Specifications. It does not replace them.
 
-Chinese parallel version: [`interopatlas-master-design-v1.0.zh-CN.md`](interopatlas-master-design-v1.0.zh-CN.md)
+[简体中文](interopatlas-master-design-v1.0.zh-CN.md) | [English](interopatlas-master-design-v1.0.md)
 
 ## 1. What InteropAtlas is
 
