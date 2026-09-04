@@ -1,0 +1,99 @@
+fixture_version: p5-v0
+sample_id: p5-intake-batch1-envelope
+source:
+  legacy_refs:
+    - 01_State/01_Objects/bcp47-rfc5646.yaml
+  candidate_refs:
+    - docs/p5-bounded-intake-batch-1-preflight-v1-draft.zh-CN.md
+  official_sources:
+    - https://www.rfc-editor.org/info/rfc9114/
+    - https://www.iso.org/standard/27001
+    - https://fetch.spec.whatwg.org/
+    - https://openid.net/specs/fapi-security-profile-2_0.html
+    - https://www.rfc-editor.org/info/rfc5646/
+contracts_under_test:
+  - identity
+  - family_kind
+  - evidence_assertion
+  - lifecycle
+  - human_agent_access
+mapping:
+  class: null
+  notes: "Fresh Candidate intake batch; no Legacy migration or production Canonical mutation is attempted."
+candidate:
+  intake_envelope:
+    state: experiment_candidate_batch
+    canonical_mutation_authorized: false
+    initiator: "Human — ff6962757"
+    executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
+    github_actor: "ff6962757"
+    independent_reviewer: null
+    items:
+      - candidate_id: intake1-rfc9114
+        subject_hint: "RFC 9114 — HTTP/3"
+        publisher: IETF
+        external_identifiers:
+          - namespace: rfc
+            value: "9114"
+        official_source: https://www.rfc-editor.org/info/rfc9114/
+        dedup_disposition: no_exact_match_found_preflight
+        proposed_action: candidate_proposal
+        unresolved:
+          - "Minimum relation set for initial intake is not yet fixed."
+      - candidate_id: intake1-iso27001-2022
+        subject_hint: "ISO/IEC 27001:2022"
+        publisher: ISO/IEC
+        external_identifiers:
+          - namespace: iso_iec_designation
+            value: "ISO/IEC 27001:2022"
+        official_source: https://www.iso.org/standard/27001
+        dedup_disposition: no_production_canonical_match_found_preflight
+        proposed_action: candidate_proposal
+        unresolved:
+          - "Work/edition boundary and amendment representation remain provisional."
+      - candidate_id: intake1-fetch-living
+        subject_hint: "Fetch Living Standard"
+        publisher: WHATWG
+        external_identifiers: []
+        official_source: https://fetch.spec.whatwg.org/
+        dedup_disposition: no_exact_match_found_preflight
+        proposed_action: candidate_proposal
+        unresolved:
+          - "Upstream living revision must not be confused with IA record or verification lifecycle."
+      - candidate_id: intake1-fapi2-security-profile
+        subject_hint: "FAPI 2.0 Security Profile"
+        publisher: OpenID Foundation
+        external_identifiers:
+          - namespace: openid_spec
+            value: "fapi-security-profile-2_0"
+        official_source: https://openid.net/specs/fapi-security-profile-2_0.html
+        dedup_disposition: no_production_canonical_match_found_preflight
+        proposed_action: candidate_proposal
+        unresolved:
+          - "Profile/base/framework relation semantics remain provisional."
+      - candidate_id: intake1-bcp47-rfc5646
+        subject_hint: "BCP 47 / RFC 5646 — Tags for Identifying Languages"
+        publisher: IETF
+        external_identifiers:
+          - namespace: bcp
+            value: "47"
+          - namespace: rfc
+            value: "5646"
+        official_source: https://www.rfc-editor.org/info/rfc5646/
+        dedup_disposition: existing_canonical_overlap
+        existing_ia_id: bcp47_rfc5646
+        proposed_action: stop_new_subject_creation
+        unresolved:
+          - "A future contribution may verify/update the existing subject, but this batch does not authorize mutation."
+unknowns:
+  - "A definitive negative dedup result requires a normalized identifier/alias index or equivalent bounded search contract; repository exact search alone is insufficient."
+  - "Independent semantic review has not yet occurred."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Four items exercise Candidate Proposal; one item exercises Duplicate/existing-overlap disposition."
+  - "Presence of a P5 fixture is not equivalent to Canonical existence."
+  - "GitHub Actor is recorded separately from actual Agent Executor."
+  - "No production Canonical write is authorized by this fixture."
