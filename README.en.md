@@ -5,9 +5,8 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
 Document Created At: 2026-09-04T22:15:00+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T03:55:00+08:00
 Translation Source: README.md
-Translation Source Blob SHA: 8a96305308ed2138e662fd947ff37be53e5c1f04
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -28,26 +27,11 @@ If you are here simply to find knowledge, you do not need to understand how the 
 
 ## What knowledge is here?
 
-InteropAtlas is not merely a standards directory. It aims to connect an interoperability solution from “what is the specification?” all the way to “who maintains it, how is it implemented, what problem does it solve, what alternatives exist, where is the evidence, and what is still missing?”
-
-Core knowledge includes:
-
-- **Standards / Specifications / Protocols / Profiles / APIs / Formats** — normative artifacts that formally define ways to interoperate;
-- **Methods / Guidelines / Frameworks** — ways to design, analyze, validate, govern, or maintain interoperable systems;
-- **Implementations / Tools / Services** — concrete real-world implementations of standards and methods;
-- **Mature Precedents / Prior Art** — long-running projects, architectures, and practices worth learning from;
-- **Organizations** — standards bodies, maintainers, governance actors, and related institutions;
-- **Capabilities / Needs / Scenarios** — what an interoperability problem actually needs to solve;
-- **Relations** — adoption, implementation, alternatives, dependencies, compatibility, extensions, evolution, and other connections;
-- **Evidence / Source / Provenance** — where a fact comes from and what supports it;
-- **Lifecycle / Events** — publication, revision, deprecation, replacement, and historical evolution;
-- **Assessment / Open Gap** — comparison, coverage, and unresolved problems in explicit contexts.
-
-Together, these form the Atlas rather than a collection of isolated entries.
+InteropAtlas is not merely a standards directory. It connects specifications, methods, implementations, Prior Art, organizations, capabilities, scenarios, relations, evidence, lifecycle, assessments, and Open Gaps into one Atlas rather than a collection of isolated entries.
 
 > **Map the solution space, preserve the authority distinction.**
 
-For example, a mature open-source project can be important Prior Art without being misrepresented as an “international standard”; a formal standard does not lose its normative identity merely because it has few implementations.
+A mature open-source project can be important Prior Art without being misrepresented as an international standard; a formal standard does not lose its normative identity merely because it has few implementations.
 
 For the full inclusion boundary, see [`Definition & Scope`](docs/interopatlas-definition-and-scope.md).
 
@@ -57,7 +41,7 @@ InteropAtlas aims to let both Humans and Agents operate over the same knowledge 
 
 **Find → Browse → Understand → Trace relations → Compare solutions → Inspect evidence → Discover gaps.**
 
-The project is still building its V1 foundation, so not every knowledge entry point or Workspace exists yet. Over time, the same knowledge base can support Wiki / Browse, Single Object / Article, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent / API access.
+The project is still building its V1 foundation. Over time, the same knowledge base can support Wiki / Browse, Single Object / Article, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent / API access.
 
 These are not separate databases. They are different representations of the same Atlas for different cognitive tasks.
 
@@ -65,37 +49,31 @@ These are not separate databases. They are different representations of the same
 
 ## Why an “Interoperability Solution Space”?
 
-InteropAtlas is not limited to a single industry. It focuses on a cross-domain question: **how can independently designed systems work together?**
+InteropAtlas focuses on a cross-domain question: **how can independently designed systems work together?** A real problem is rarely solved by one standard alone; it often involves specifications, implementations, methods, organizations, compatibility relations, and concrete scenarios together.
 
-This problem appears in communications, data representation, video and audio, time synchronization, identity, security, discovery, semantics, Agents, control, automation, and many other domains. A real problem is rarely solved by one standard alone; it often involves specifications, implementations, methods, organizations, compatibility relations, and concrete scenarios together.
-
-So IA does not merely ask “what standards exist?” It progressively helps answer:
+So IA progressively helps answer:
 
 > **What solutions has humanity already developed for this interoperability problem? How are they related? What is the evidence? Where should I explore next?**
 
 ## Product philosophy
 
-InteropAtlas's core product philosophy can be compressed into one interdependent proposition:
+InteropAtlas expresses its product philosophy through a structural and a dynamic proposition:
 
 > **Knowledge belongs to the commons. Perspective belongs to the individual.**
+>
+> **Knowledge travels. Creation continues.**
 
-The shared knowledge world should be as open, discoverable, verifiable, connected, and reusable as possible; each person can form a Perspective over that same world according to their goals, background, task, and cognitive mode.
+The first describes the structure of the knowledge world; the second describes its motion. Shared knowledge crosses boundaries into individual perspectives and concrete contexts, enabling new creation. New creation can then enter the commons and become the basis for another cycle.
 
-The dynamic expression of this philosophy is a continuing **Knowledge Flow Model**:
-
-> **Discover → Connect → Transmit → Transform → Reuse → Create → Commons ↺**
-
-Discover and Connect help form the shared knowledge world. Transmit and Transform carry knowledge across subjects, systems, time, media, representations, and cognitive boundaries. Reuse and Create bring existing knowledge into concrete tasks and generate new outcomes. New knowledge and creation can return to the commons and become the foundation of another cycle.
+At this deeper level, **Flow** and **Create** are the two fundamental movements. Discover, Connect, Transmit, Transform, and Reuse are no longer treated as mandatory peer-level stages. They are typical mechanisms by which existing knowledge crosses boundaries of visibility, isolation, subjects and systems, media and cognition, and usage context.
 
 > **Preservation is not the endpoint; knowledge should ultimately enable new creation.**
 
-Product philosophy and construction principles are explicitly separated. Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** are product and construction principles rather than peer-level philosophical slogans.
+Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** remain product and construction principles rather than peer-level philosophical slogans.
 
 See [`Knowledge Philosophy & Principles`](docs/knowledge-philosophy-and-principles.md) for the full structure and [`Master Design`](docs/interopatlas-master-design.md) for the long-term architecture. Ordinary knowledge users do not need to read these documents first.
 
 ## Want to go further?
-
-Different goals have different entry points; you do not need to read the entire repository from the beginning.
 
 | Goal | Start here |
 | --- | --- |
