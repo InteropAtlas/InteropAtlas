@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T09:58:00+08:00
+Document Updated At: 2026-09-04T10:01:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T09:58:00+08:00
+> Verified At: 2026-09-04T10:01:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -89,7 +89,7 @@ Critical path:
 
 ```text
 #137 Experiment Harness / V1-shaped fixtures          ✅ first usable harness / Review
-→ #130 Identity / Version / Family-Kind Fit Test      ← NOW
+→ #130 Identity / Version / Family-Kind Fit Test      ← NOW / activating
 → #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test
 → #133 Migration + Workspace + Human/Agent Write-back E2E
 → #136 Candidate→Canonical bounded Intake Stress Test
@@ -103,7 +103,7 @@ Supporting experiments (#154–#158, #153) are triggered as needed; they are not
 
 **Primary next small checkpoint: #130 — analyze the five seeded real fixtures (RFC 9110, ISO/IEC 27001:2022, WCAG 2.2, HTML Living Standard, OpenID Connect Core 1.0) into a unified identity/version/family-kind Fit Test matrix.**
 
-The experiment harness lives under `03_Evolution/04_Experiments/v1_contract_fixtures/`. It is structurally outside the current Canonical loader and has passed a six-fixture smoke/real-sample validation (`failures=0`).
+The experiment harness lives under `03_Evolution/04_Experiments/v1_contract_fixtures/`. It is structurally outside the current Canonical loader and has passed a six-fixture smoke/real-sample validation (`failures=0`). #137 is awaiting independent review; no further harness expansion is planned unless #130 exposes a concrete need.
 
 In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
 
