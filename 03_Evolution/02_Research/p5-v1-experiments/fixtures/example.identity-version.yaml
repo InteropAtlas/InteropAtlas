@@ -1,0 +1,33 @@
+fixture_version: p5-v1-experiment-0
+fixture_id: p5-example-identity-version
+experiment:
+  issue: 137
+  track: harness-smoke-test
+subject:
+  label: Example Standard (non-real smoke fixture)
+  source_refs:
+    - kind: synthetic
+      locator: https://example.invalid/interopatlas-p5-fixture
+legacy_refs: []
+expectations:
+  - stable IA identity must not be inferred from the locator
+  - external identifier and locator remain separate concepts
+v1_candidate:
+  identity:
+    ia_id: null
+    external_identifiers: []
+    locators:
+      - https://example.invalid/interopatlas-p5-fixture
+  family: null
+  kind: null
+unknowns:
+  - field: identity.ia_id
+    reason: synthetic fixture has no Canonical IA identity
+conflicts: []
+mapping:
+  class: null
+  notes: not a Legacy migration sample
+validation:
+  expected_v0_mismatch: true
+  notes:
+    - This file exists only to smoke-test the P5 experiment envelope.
