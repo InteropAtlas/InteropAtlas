@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T10:01:00+08:00
+Document Updated At: 2026-09-04T10:38:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T10:01:00+08:00
+> Verified At: 2026-09-04T10:38:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -82,28 +82,31 @@ These remain architecture/roadmap drafts. P4 completion does not stable-promote 
 ## 6. NOW — P5 Real-data Experiments / Intake Stress Test
 
 Primary umbrella: **#128**。
-
 Mainline index: **#193**。
 
 Critical path:
 
 ```text
 #137 Experiment Harness / V1-shaped fixtures          ✅ first usable harness / Review
-→ #130 Identity / Version / Family-Kind Fit Test      ← NOW / activating
-→ #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test
+→ #130 Identity / Version / Family-Kind Fit Test      ✅ fit test complete / Review
+→ #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test ← NOW / In Progress
 → #133 Migration + Workspace + Human/Agent Write-back E2E
 → #136 Candidate→Canonical bounded Intake Stress Test
 → #159 Gate Evidence Synthesis
 → #134 Contribution-Ready Owner/Governance Gate
 ```
 
-Supporting experiments (#154–#158, #153) are triggered as needed; they are not all serial blockers.
+#130 now has six fresh-source publication models plus a 12-object existing-V0 ambiguity inventory (#186 / Review). The identity architecture survived without reversal: IA identity remains independent of URL/name/path; version/publication behavior is polymorphic; exact serialization remains provisional.
 
 ### Resume Here
 
-**Primary next small checkpoint: #130 — analyze the five seeded real fixtures (RFC 9110, ISO/IEC 27001:2022, WCAG 2.2, HTML Living Standard, OpenID Connect Core 1.0) into a unified identity/version/family-kind Fit Test matrix.**
+**Primary next small checkpoint: #132 — complete the deliberately small Relation + Evidence/Assertion/Conflict + Lifecycle scenario matrix and test the two remaining pressure points: qualified/contextual binary relations, and minimal conflicting-assertion/evidence-gap representation.**
 
-The experiment harness lives under `03_Evolution/04_Experiments/v1_contract_fixtures/`. It is structurally outside the current Canonical loader and has passed a six-fixture smoke/real-sample validation (`failures=0`). #137 is awaiting independent review; no further harness expansion is planned unless #130 exposes a concrete need.
+First #132 artifact: `docs/p5-relation-evidence-lifecycle-fit-test-v1-draft.zh-CN.md`.
+
+First concrete risk found: current V0 relation `rfc3339_profiles_iso8601` uses `extends` only because the vocabulary lacks the more accurate `profile_of`; its notes preserve the caveat, but machine consumers can still mistake the approximate predicate for an exact Canonical fact. P5 records this as semantic pressure; it does not yet add a production relation type.
+
+The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137 remains Review. No harness expansion unless #132 exposes a concrete validation need.
 
 In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
 
@@ -132,7 +135,7 @@ Not allowed through fast lane: mass Canonical write, identity merge/split, produ
 
 ## 9. P6 preview
 
-P6 umbrella: **#129**; index: **#194**.
+P6 umbrella: **#129**; index: **#194**。
 
 First production chain after Gate:
 
@@ -176,11 +179,11 @@ AGENTS.md
 → PROJECT_STATE.md
 → docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
 → #128 / #193
-→ #130 (primary next)
-→ 03_Evolution/04_Experiments/v1_contract_fixtures/
+→ #132 (primary next)
+→ docs/p5-relation-evidence-lifecycle-fit-test-v1-draft.zh-CN.md
 → #192 (parallel Ready work)
 ```
 
 ## 13. Staleness check
 
-新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #130 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #132 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
