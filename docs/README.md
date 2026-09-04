@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:51:02+08:00
-Document Updated At: 2026-09-04T23:41:00+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -14,11 +14,13 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-`docs/` 保存**今天进入 InteropAtlas 时仍需要理解或遵守的长期文档**。
+`docs/` 保存**今天进入 InteropAtlas 时仍需要理解或遵守的长期文档（Living Documents）**。
 
-本索引按“设计尺度”组织，而不是按文件创建时间平铺。研究、实验和历史变更过程分别进入 `03_Evolution/01_Research`、`02_Experiments`、`03_Change`。
+本索引按“设计尺度”组织，而不是按文件创建时间平铺。研究、实验和历史变更过程分别进入 `03_Evolution/01_Research`、`03_Evolution/02_Experiments`、`03_Evolution/03_Change`。
 
-中文文档以自然中文为主阅读语言，首次出现的重要项目概念可保留规范英文锚点。项目的语言与翻译规则见 [`语言政策`](language-policy.zh-CN.md)，跨语言概念绑定见 [`术语登记表`](terminology-registry-v0.1.md)。
+Living Documents 的版本历史由 Git 提供，文件路径本身不再携带 `v0.1`、`v1.0` 等版本号。只有当版本号属于协议、Schema、标准对象、兼容契约或历史制品身份的一部分时，才保留在文件名中。
+
+中文文档以自然中文为主阅读语言，首次出现的重要项目概念可保留规范英文锚点。项目的语言与翻译规则见 [`语言政策`](language-policy.zh-CN.md)，跨语言概念绑定见 [`术语登记表`](terminology-registry.md)。
 
 ## 0. 第一次进入项目：先读什么
 
@@ -26,9 +28,9 @@ Latest Substantive Contribution:
 
 ```text
 README.md
-→ interopatlas-master-design-v1.0.zh-CN.md
-→ knowledge-philosophy-and-principles-v1.0.zh-CN.md
-→ public-commons-and-personal-knowledge-space-v0.1.zh-CN.md
+→ interopatlas-master-design.zh-CN.md
+→ knowledge-philosophy-and-principles.zh-CN.md
+→ public-commons-and-personal-knowledge-space.zh-CN.md
 → PROJECT_STATE.md
 ```
 
@@ -38,7 +40,7 @@ README.md
 AGENTS.md
 → PROJECT_STATE.md
 → README.md
-→ interopatlas-master-design-v1.0.zh-CN.md
+→ interopatlas-master-design.zh-CN.md
 → 当前阶段 / Issue / 契约（Current Phase / Issue / Contract）
 ```
 
@@ -48,32 +50,29 @@ AGENTS.md
 
 这些文件定义项目最高层方向。
 
-- [`interopatlas-master-design-v1.0.zh-CN.md`](interopatlas-master-design-v1.0.zh-CN.md) — **当前总体设计（Master Design）**。解释地图优先（Atlas-first）、共享 / 个人 / 体验（Shared / Personal / Experience）、知识操作空间（Knowledge Operation Spaces）、人与智能体（Human + Agent）、成长循环，以及 P1–P6 的正确位置。
-- [`knowledge-philosophy-and-principles-v1.0.zh-CN.md`](knowledge-philosophy-and-principles-v1.0.zh-CN.md) — 长期产品哲学，以及不应被局部实现静默改写的原则。
-- [`interopatlas-definition-and-scope-v0.2.zh-CN.md`](interopatlas-definition-and-scope-v0.2.zh-CN.md) — 项目定义、互操作问题边界和收录范围。
+- [`interopatlas-master-design.zh-CN.md`](interopatlas-master-design.zh-CN.md) — **当前总体设计（Master Design）**。解释地图优先（Atlas-first）、共享 / 个人 / 体验（Shared / Personal / Experience）、知识操作空间（Knowledge Operation Spaces）、人与智能体（Human + Agent）、成长循环，以及 P1–P6 的正确位置。
+- [`knowledge-philosophy-and-principles.zh-CN.md`](knowledge-philosophy-and-principles.zh-CN.md) — 长期产品哲学，以及不应被局部实现静默改写的产品与建设原则。
+- [`interopatlas-definition-and-scope.zh-CN.md`](interopatlas-definition-and-scope.zh-CN.md) — 项目定义、互操作问题边界和收录范围。
 
-四条长期哲学：
+InteropAtlas 的核心产品哲学压缩为一个相互依存的命题：
 
-> **知识属于公共共同体。**  
-> *Knowledge belongs to the commons.*
->
-> **视角属于个人。**  
-> *Perspective belongs to the individual.*
->
-> **表达应适应认知。**  
-> *Representation should adapt to cognition.*
->
-> **个性化必须可逆、透明、可检查。**  
-> *Personalization must remain reversible and transparent.*
+> **知识属于公共共同体。视角属于个人。**  
+> *Knowledge belongs to the commons. Perspective belongs to the individual.*
+
+其动态展开是知识流动模型（Knowledge Flow Model）：
+
+> **发现（Discover）→ 连接（Connect）→ 传递（Transmit）→ 转化（Transform）→ 复用（Reuse）→ 创造（Create）→ 公共共同体（Commons）↺**
+
+个性化透明 / 可控 / 可逆、地图优先、先有证据再有断言、先选择再呈现、真实使用塑造本体模型，以及“采用 → 配置 → 扩展 → 发明（Adopt → Profile → Extend → Invent）”属于产品与建设原则，不再与核心哲学并列。
 
 ## 2. L2：知识空间与长期产品架构
 
-- [`public-commons-and-personal-knowledge-space-v0.1.zh-CN.md`](public-commons-and-personal-knowledge-space-v0.1.zh-CN.md) — 公共知识共同体（Public Knowledge Commons）+ 个人知识空间（Personal Knowledge Space）；内容个性化、表达个性化、反信息茧房、隐私与可互操作个人空间。
-- [`knowledge-workspace-design-principles-v1.0.zh-CN.md`](knowledge-workspace-design-principles-v1.0.zh-CN.md) — `规范知识 → 视角 / 选择 → 投影 → 工作空间（Canonical Knowledge → Perspective / Selection → Projection → Workspace）` 设计基线，以及百科式浏览、时间线、关系图、比较、证据（Wiki / Browse, Timeline, Graph, Compare, Evidence）等工作空间原则。
-- [`human-agent-access-architecture-v1-draft.zh-CN.md`](human-agent-access-architecture-v1-draft.zh-CN.md) — V1 人 / 智能体访问（Human / Agent Access）、权限和候选写入（Candidate Write）架构草案。
+- [`public-commons-and-personal-knowledge-space.zh-CN.md`](public-commons-and-personal-knowledge-space.zh-CN.md) — 公共知识共同体（Public Knowledge Commons）+ 个人知识空间（Personal Knowledge Space）；内容个性化、表达个性化、反信息茧房、隐私与可互操作个人空间。
+- [`knowledge-workspace-design-principles.zh-CN.md`](knowledge-workspace-design-principles.zh-CN.md) — `规范知识 → 视角 / 选择 → 投影 → 工作空间（Canonical Knowledge → Perspective / Selection → Projection → Workspace）` 设计基线，以及百科式浏览、时间线、关系图、比较、证据（Wiki / Browse, Timeline, Graph, Compare, Evidence）等工作空间原则。
+- [`human-agent-access-architecture-draft.zh-CN.md`](human-agent-access-architecture-draft.zh-CN.md) — V1 人 / 智能体访问（Human / Agent Access）、权限和候选写入（Candidate Write）架构草案。
 - [`flat-graph-and-dynamic-maps.zh-CN.md`](flat-graph-and-dynamic-maps.zh-CN.md) — 扁平对象 + 丰富关系 + 动态地图（Flat Objects + Rich Relations + Dynamic Maps）的建模原则。
 
-`architecture-v0.1.zh-CN.md` 是 2026-09-02 总体设计升级之前的历史架构基线，**不再作为当前总体架构（Master Architecture）入口**。保留它用于理解演化历史；当前方向以总体设计 + V1 架构草案为准。
+`architecture.zh-CN.md` 是 2026-09-02 总体设计升级之前的历史架构基线，**不再作为当前总体架构（Master Architecture）入口**。保留它用于理解演化历史；当前方向以总体设计 + V1 架构草案为准。
 
 ## 3. L3：成长、运行与演化机制
 
@@ -81,17 +80,9 @@ AGENTS.md
 - [`project-development-principles.zh-CN.md`](project-development-principles.zh-CN.md) — 项目建设原则与最小治理规则。
 - [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — **历史 / 局部运行模型（Operating Model）**：人类（Human）、机器（Machine）、策展（Curation）、信任（Trust）、治理（Governance）。它仍可作为协作 / 运行参考，但不再代表项目总体设计或总路线图（Roadmap）。
 
-长期成长循环见总体设计：
-
-```text
-知晓（KNOW）→ 使用（USE）→ 发现（DISCOVER）→ 贡献（CONTRIBUTE）→ 知晓（KNOW）
-                                      +
-                                  匹配（MATCH）
-```
-
 ## 4. L4：路线图与当前基础建设周期
 
-- [`interopatlas-long-term-roadmap-v1.0.zh-CN.md`](interopatlas-long-term-roadmap-v1.0.zh-CN.md) — **当前长期路线图（Long-term Roadmap）**；明确 P1–P6 只是第一轮 V1 基础建设 / 架构重新验证周期（Foundation / Architecture Revalidation Cycle）。
+- [`interopatlas-long-term-roadmap.zh-CN.md`](interopatlas-long-term-roadmap.zh-CN.md) — **当前长期路线图（Long-term Roadmap）**；明确 P1–P6 只是第一轮 V1 基础建设 / 架构重新验证周期（Foundation / Architecture Revalidation Cycle）。
 - [`../PROJECT_STATE.md`](../PROJECT_STATE.md) — 当前项目断点、当前阶段（Phase）、恢复入口（Resume Here）和门禁（Gate）。
 - 当前 / 历史阶段计划、迁移计划和过渡材料（Phase Plan / Migration Plan / Transition Materials）位于 [`../03_Evolution/03_Change/`](../03_Evolution/03_Change/)。
 
@@ -101,36 +92,42 @@ AGENTS.md
 
 ### 规范知识 / 收录 / 迁移（Canonical / Intake / Migration）
 
-- [`canonical-contract-v1-architecture-draft.zh-CN.md`](canonical-contract-v1-architecture-draft.zh-CN.md)
-- [`canonical-write-intake-contract-v1-architecture-draft.zh-CN.md`](canonical-write-intake-contract-v1-architecture-draft.zh-CN.md)
-- [`canonical-migration-architecture-v1-draft.zh-CN.md`](canonical-migration-architecture-v1-draft.zh-CN.md)
-- [`knowledge-object-classification-specification-v0.1.zh-CN.md`](knowledge-object-classification-specification-v0.1.zh-CN.md)
+- [`canonical-contract-architecture-draft.zh-CN.md`](canonical-contract-architecture-draft.zh-CN.md)
+- [`canonical-write-intake-contract-architecture-draft.zh-CN.md`](canonical-write-intake-contract-architecture-draft.zh-CN.md)
+- [`canonical-migration-architecture-draft.zh-CN.md`](canonical-migration-architecture-draft.zh-CN.md)
+- [`knowledge-object-classification-specification.zh-CN.md`](knowledge-object-classification-specification.zh-CN.md)
 
 ### 人类界面（Human Interface）
 
-- [`human-interface-profiles-v0.1.zh-CN.md`](human-interface-profiles-v0.1.zh-CN.md) — 人类界面配置规范（Human Interface Profile）总入口。
-- `human-interface-information-architecture-profile-v0.1.zh-CN.md`
-- `human-interface-information-presentation-profile-v0.1.zh-CN.md`
-- `human-interface-interaction-profile-v0.1.zh-CN.md`
-- `human-interface-visual-presentation-profile-v0.1.zh-CN.md`
-- [`human-interface-accessibility-conformance-profile-v0.1.zh-CN.md`](human-interface-accessibility-conformance-profile-v0.1.zh-CN.md)
-- [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md)
+- [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md) — 人类界面配置规范（Human Interface Profile）总入口。
+- [`human-interface-information-architecture-profile.zh-CN.md`](human-interface-information-architecture-profile.zh-CN.md)
+- [`human-interface-information-presentation-profile.zh-CN.md`](human-interface-information-presentation-profile.zh-CN.md)
+- [`human-interface-interaction-profile.zh-CN.md`](human-interface-interaction-profile.zh-CN.md)
+- [`human-interface-visual-presentation-profile.zh-CN.md`](human-interface-visual-presentation-profile.zh-CN.md)
+- [`human-interface-accessibility-conformance-profile.zh-CN.md`](human-interface-accessibility-conformance-profile.zh-CN.md)
+- [`human-interface-specification.zh-CN.md`](human-interface-specification.zh-CN.md)
 - [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md)
 
 ### 开放协作 / 人机协作（Open Collaboration / Human–AI）
 
-- [`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md)
-- [`collaboration-task-system-v0.1.zh-CN.md`](collaboration-task-system-v0.1.zh-CN.md)
-- [`task-reference-seeding-profile-v0.1.zh-CN.md`](task-reference-seeding-profile-v0.1.zh-CN.md)
-- [`agent-onboarding-context-continuity-profile-v0.1.zh-CN.md`](agent-onboarding-context-continuity-profile-v0.1.zh-CN.md)
-- [`agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`](agent-attribution-contribution-identity-profile-v0.1.zh-CN.md)
-- [`agent-continuation-bridge-v0.1.zh-CN.md`](agent-continuation-bridge-v0.1.zh-CN.md)
+- [`open-collaboration-profile.zh-CN.md`](open-collaboration-profile.zh-CN.md)
+- [`collaboration-task-system.zh-CN.md`](collaboration-task-system.zh-CN.md)
+- [`task-reference-seeding-profile.zh-CN.md`](task-reference-seeding-profile.zh-CN.md)
+- [`agent-onboarding-context-continuity-profile.zh-CN.md`](agent-onboarding-context-continuity-profile.zh-CN.md)
+- [`agent-attribution-contribution-identity-profile.zh-CN.md`](agent-attribution-contribution-identity-profile.zh-CN.md)
+- [`agent-continuation-bridge.zh-CN.md`](agent-continuation-bridge.zh-CN.md)
+
+### 来源追踪 / 研究 / 治理（Provenance / Research / Governance）
+
+- [`provenance-traceability-profile.zh-CN.md`](provenance-traceability-profile.zh-CN.md)
+- [`research-governance.zh-CN.md`](research-governance.zh-CN.md)
+- [`task-authority-governance-draft.zh-CN.md`](task-authority-governance-draft.zh-CN.md)
 
 ### 仓库 / 政策（Repository / Policy）
 
-- [`repository-structure-profile-v0.1.zh-CN.md`](repository-structure-profile-v0.1.zh-CN.md)
+- [`repository-structure-profile.zh-CN.md`](repository-structure-profile.zh-CN.md)
 - [`language-policy.zh-CN.md`](language-policy.zh-CN.md) — 中文优先阅读、英文国际版本、翻译与语言标签规则。
-- [`terminology-registry-v0.1.md`](terminology-registry-v0.1.md) — 核心概念的规范英文身份、中文首选词和跨语言别名登记。
+- [`terminology-registry.md`](terminology-registry.md) — 核心概念的规范英文身份、中文首选词和跨语言别名登记。
 
 ## 6. 演化材料：过程文件放在哪里
 
@@ -167,7 +164,17 @@ Issue / PR / 实现（Implementation）
 
 高层设计改变需要人类项目所有者 / 维护者（Human Owner / Maintainer）授权；低层实现不得静默改写高层使命。
 
-## 8. 清理政策（Cleanup Policy）
+## 8. Living Document 路径与版本规则
+
+对于持续维护的正式文档：
+
+- 文件路径保持稳定，不携带内容版本号；
+- 版本历史由 Git commit / tag / release / provenance 留痕承担；
+- `draft`、`historical`、`superseded` 等生命周期状态可保留，因为它们不是版本号；
+- Schema、协议版本、标准编号、兼容契约和历史实验制品可继续在文件名中携带版本或日期；
+- 若需要引用一个不可变历史版本，应引用 commit SHA、tag、release 或 `03_Evolution` 中的历史制品，而不是复制新的 `-v2` Living Document。
+
+## 9. 清理政策（Cleanup Policy）
 
 为了避免再次出现“总体设计散落后丢失”的问题：
 
