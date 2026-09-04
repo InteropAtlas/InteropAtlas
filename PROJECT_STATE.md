@@ -77,14 +77,18 @@ First production chain:
 └→ #149 Agent structured read/query + Candidate Write
 ```
 
-### #145 first checkpoint landed
+### #145 identity-safety checkpoint landed
 
-Added:
+Added / wired:
 
 - `01_State/01_Objects/candidate-object.v1.schema.json`
+- `01_State/03_Candidates/README.md`
 - `02_Runtime/01_Engine/candidate_identity_validator.py`
+- `02_Runtime/01_Engine/legacy_identity_adapter.py`
+- `03_Evolution/04_Experiments/v1_contract_fixtures/candidate-identity-resolution-cases.fixture.yaml`
+- main `machine_review.py` now scans production Candidate carrier separately from Canonical objects and reports Candidate review states.
 
-The Candidate contract explicitly distinguishes:
+The Candidate contract distinguishes:
 
 ```text
 new
@@ -96,21 +100,27 @@ deferred
 
 and hard-codes `merge_authorized: false` for ordinary Candidate validation.
 
-The validator is conservative:
+Safety behavior:
 
 - known normalized identifier collision cannot silently remain `new`；
 - duplicate must name an existing Canonical target；
 - collisions against multiple Canonical subjects must defer/escalate；
 - identity-risk/deferred states require reasons；
-- machine PASS does not authorize semantic identity, Canonical acceptance, merge or split。
+- Candidate review state is not Canonical acceptance；
+- Machine Review PASS does not authorize semantic identity, merge or split；
+- title/name/version similarity is not used as an automatic merge signal。
 
-### Important compatibility finding
+### Legacy compatibility
 
-Existing V0 Canonical records often do **not** expose structured `external_identifiers`. Example: `bcp47-rfc5646.yaml` carries identity clues in `official_url` / `versions`, not a normalized identifier structure.
+Existing V0 Canonical records often do not expose structured `external_identifiers`. #145 therefore uses a conservative Legacy Identity Adapter that only emits identifiers from deterministic publisher-controlled evidence. Initial supported adapter: RFC Editor official/info URL → `rfc:<number>`.
 
-Therefore #145 MUST NOT solve Legacy dedup by guessing from title/URL/version strings. That would reintroduce silent identity errors.
+BCP 47 / RFC 5646 is the first known duplicate control: candidate `rfc:5646` can be matched to existing `bcp47_rfc5646` without guessing from title similarity.
 
-**Resume Here:** implement a conservative Legacy Identity Adapter / Index that exposes only evidence-backed normalized identifiers for old Canonical records, then test the Candidate validator against known duplicate and ambiguous cases. The adapter must prefer unresolved/defer over heuristic merge.
+### Validation caveat
+
+The current execution container still cannot resolve `github.com`, so a fresh full checkout Machine Review could not be executed after wiring. No repository-level PASS is claimed. GitHub also reported no workflow run for the direct-main commit. The code/fixtures are landed but still require an executable checkout/CI validation before #145 can move to Review.
+
+**Resume Here:** run/obtain executable validation for the new Candidate identity path, fix any integration errors, then add the minimal acceptance-boundary representation needed for an ordinary batch to reach review without performing automatic Canonical merge/write.
 
 ## 6. When Agent intake can scale
 
