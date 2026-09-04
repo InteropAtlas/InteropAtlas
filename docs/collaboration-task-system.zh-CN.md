@@ -19,7 +19,7 @@ Latest Substantive Contribution:
 >
 > Parent Work Package：#22
 >
-> 上位规范：`docs/open-collaboration-profile-v0.1.zh-CN.md`
+> 上位规范：`docs/open-collaboration-profile.zh-CN.md`
 >
 > Context Continuity：`docs/agent-onboarding-context-continuity-profile-v0.1.zh-CN.md`
 >

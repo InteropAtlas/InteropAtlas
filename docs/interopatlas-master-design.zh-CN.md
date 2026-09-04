@@ -20,7 +20,7 @@ Latest Substantive Contribution:
 >
 > 本文位于具体实现架构、当前阶段计划和单项规范（Specification）之上，但不取代这些更具体的文档。
 
-[简体中文](interopatlas-master-design-v1.0.zh-CN.md) | [English](interopatlas-master-design-v1.0.md)
+[简体中文](interopatlas-master-design.zh-CN.md) | [English](interopatlas-master-design.md)
 
 ## 1. InteropAtlas 是什么
 
@@ -505,10 +505,10 @@ InteropAtlas 的成功不应只用“收录了多少标准”衡量。
 
 1. [`README.md`](../README.md) — 项目入口；
 2. 本文 — 总体设计（Master Design）；
-3. [`知识哲学与原则`](knowledge-philosophy-and-principles-v1.0.zh-CN.md) — 哲学与长期不变量；
-4. [`公共共同体与个人知识空间`](public-commons-and-personal-knowledge-space-v0.1.zh-CN.md) — 公共知识与个人认知空间；
-5. [`知识工作空间设计原则`](knowledge-workspace-design-principles-v1.0.zh-CN.md) — 选择 / 投影 / 工作空间基线；
-6. [`长期路线图`](interopatlas-long-term-roadmap-v1.0.zh-CN.md) — 长期路线与当前基础建设周期；
+3. [`知识哲学与原则`](knowledge-philosophy-and-principles.zh-CN.md) — 哲学与长期不变量；
+4. [`公共共同体与个人知识空间`](public-commons-and-personal-knowledge-space.zh-CN.md) — 公共知识与个人认知空间；
+5. [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md) — 选择 / 投影 / 工作空间基线；
+6. [`长期路线图`](interopatlas-long-term-roadmap.zh-CN.md) — 长期路线与当前基础建设周期；
 7. [`项目状态（PROJECT_STATE.md）`](../PROJECT_STATE.md) — 当前施工断点；
 8. 当前 Issue / 契约（Contract）/ 规范（Specification）— 具体工作。
 

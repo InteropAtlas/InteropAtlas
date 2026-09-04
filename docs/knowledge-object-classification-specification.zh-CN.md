@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：Draft / Provisional Specification（草案 / 暂定规范）
 >
-> 上位定义：`interopatlas-definition-and-scope-v0.2.zh-CN.md`
+> 上位定义：`interopatlas-definition-and-scope.zh-CN.md`
 >
 > 目的：规定 InteropAtlas 在扩大到“既有标准 + 成熟先例 + 方法 + 实现”等互操作知识对象后，如何保持对象身份、规范权威性、成熟度、证据与收录边界的清晰区分。
 >

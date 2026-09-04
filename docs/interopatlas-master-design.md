@@ -4,7 +4,7 @@
 Document Status: active master design — English parallel
 Document Created At: 2026-09-04T22:35:00+08:00
 Document Updated At: 2026-09-05T01:24:00+08:00
-Translation Source: interopatlas-master-design-v1.0.zh-CN.md
+Translation Source: interopatlas-master-design.zh-CN.md
 Translation Source Blob SHA: 421cc2de5885f3e72de630975cc0f473dee691bb
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -22,7 +22,7 @@ Latest Substantive Contribution:
 >
 > This document is intentionally above implementation architecture, current phase plans, and individual Specifications. It does not replace them.
 
-[简体中文](interopatlas-master-design-v1.0.zh-CN.md) | [English](interopatlas-master-design-v1.0.md)
+[简体中文](interopatlas-master-design.zh-CN.md) | [English](interopatlas-master-design.md)
 
 ## 1. What InteropAtlas is
 
@@ -498,10 +498,10 @@ For the long-term project direction, the recommended reading order is:
 
 1. [`README.en.md`](../README.en.md) — project entry;
 2. this document — Master Design;
-3. [`Knowledge Philosophy`](knowledge-philosophy-and-principles-v1.0.md) — philosophy and long-term invariants;
-4. [`Public Commons and Personal Knowledge Space`](public-commons-and-personal-knowledge-space-v0.1.zh-CN.md) — public knowledge and personal cognitive space;
-5. [`Knowledge Workspace Design Principles`](knowledge-workspace-design-principles-v1.0.zh-CN.md) — Selection / Projection / Workspace baseline;
-6. [`Long-term Roadmap`](interopatlas-long-term-roadmap-v1.0.zh-CN.md) — long-term route and current Foundation Cycle;
+3. [`Knowledge Philosophy`](knowledge-philosophy-and-principles.md) — philosophy and long-term invariants;
+4. [`Public Commons and Personal Knowledge Space`](public-commons-and-personal-knowledge-space.zh-CN.md) — public knowledge and personal cognitive space;
+5. [`Knowledge Workspace Design Principles`](knowledge-workspace-design-principles.zh-CN.md) — Selection / Projection / Workspace baseline;
+6. [`Long-term Roadmap`](interopatlas-long-term-roadmap.zh-CN.md) — long-term route and current Foundation Cycle;
 7. [`PROJECT_STATE.md`](../PROJECT_STATE.md) — current construction checkpoint;
 8. current Issue / Contract / Specification — concrete work.
 

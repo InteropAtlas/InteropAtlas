@@ -189,7 +189,7 @@ PROJECT_STATE.md
 ↓
 README.md
 ↓
-docs/interopatlas-definition-and-scope-v0.2.zh-CN.md
+docs/interopatlas-definition-and-scope.zh-CN.md
 ↓
 current Phase Plan
 ↓

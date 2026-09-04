@@ -94,7 +94,7 @@ Canonical Concept / ID
 └── future language labels
 ```
 
-因此 IA 应维护独立的 [`Terminology Registry`](terminology-registry-v0.1.md)，使 Human、Agent、Schema、文档和不同语言版本能够确认自己谈论的是同一个概念。
+因此 IA 应维护独立的 [`Terminology Registry`](terminology-registry.md)，使 Human、Agent、Schema、文档和不同语言版本能够确认自己谈论的是同一个概念。
 
 英文术语在这里承担跨语言概念锚点的作用，但不等于要求中文正文持续显示英文。
 

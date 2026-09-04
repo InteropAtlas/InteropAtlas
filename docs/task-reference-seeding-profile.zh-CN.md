@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：Draft / Extension Profile
 >
-> 关联：`open-collaboration-profile-v0.1.zh-CN.md`
+> 关联：`open-collaboration-profile.zh-CN.md`
 >
 > 目的：规定 Task Author 在发布 Human-ready / Agent-ready Work Item 时，如何复用 InteropAtlas 已有的 Standards / Mature Precedents / Methods / Implementations 作为已知起点，同时避免因过度依赖旧参考而产生锚定和过时问题。
 
@@ -43,7 +43,7 @@ Seed References 是任务启动资产，不是封闭答案集。
 
 ```text
 Read First
-- docs/interopatlas-definition-and-scope-v0.2.zh-CN.md
+- docs/interopatlas-definition-and-scope.zh-CN.md
 - docs/knowledge-object-classification-specification-v0.1.zh-CN.md
 ```
 

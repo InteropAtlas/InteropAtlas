@@ -6,7 +6,7 @@
 >
 > Primary Work Item: Issue #127
 >
-> Upstream: `docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`, `docs/canonical-contract-v1-architecture-draft.zh-CN.md`
+> Upstream: `docs/knowledge-workspace-design-principles.zh-CN.md`, `docs/canonical-contract-v1-architecture-draft.zh-CN.md`
 >
 > Scope: 定义 Canonical State 如何被选择、投影、组合并进入 Human / Agent Workspace；**本文件不冻结最终 UI、Query DSL、Perspective Schema、ranking algorithm，也不授权 frontend rewrite。**
 

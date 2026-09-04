@@ -19,7 +19,7 @@ Latest Substantive Contribution:
 >
 > 目的：更新 InteropAtlas 的项目定义与收录边界。本文先定义“项目是什么、收什么、为什么收”，不直接冻结模式（Schema）或对象 `type`。
 
-[简体中文](interopatlas-definition-and-scope-v0.2.zh-CN.md) | [English](interopatlas-definition-and-scope-v0.2.md)
+[简体中文](interopatlas-definition-and-scope.zh-CN.md) | [English](interopatlas-definition-and-scope.md)
 
 ## 1. 核心定义
 

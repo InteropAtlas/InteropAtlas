@@ -19,7 +19,7 @@ Latest Substantive Contribution:
 >
 > 本文描述当前工作架构，不是冻结的最终规范。真实数据实验、程序实现和社区反馈都可以推动它发生破坏性调整。
 >
-> 项目定义与收录范围以 `interopatlas-definition-and-scope-v0.2.zh-CN.md` 为当前上位定义。
+> 项目定义与收录范围以 `interopatlas-definition-and-scope.zh-CN.md` 为当前上位定义。
 
 ## 0. 项目现在映射什么
 

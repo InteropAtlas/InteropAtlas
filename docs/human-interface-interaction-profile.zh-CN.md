@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：**Draft / Gate B Module**
 >
-> Package: [`human-interface-profiles-v0.1.zh-CN.md`](human-interface-profiles-v0.1.zh-CN.md)
+> Package: [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md)
 
 ## 1. 目标
 

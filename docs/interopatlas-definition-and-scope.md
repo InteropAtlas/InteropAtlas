@@ -4,7 +4,7 @@
 Document Status: Project Definition / Provisional
 Document Created At: 2026-09-04T21:55:00+08:00
 Document Updated At: 2026-09-05T01:24:00+08:00
-Translation Source: interopatlas-definition-and-scope-v0.2.zh-CN.md
+Translation Source: interopatlas-definition-and-scope.zh-CN.md
 Translation Source Blob SHA: c65d413b23f0acf624c4a1924b139f2bd7d71a08
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -20,7 +20,7 @@ Latest Substantive Contribution:
 >
 > Purpose: update the project definition and inclusion boundary of InteropAtlas. This document defines what the project is, what it includes, and why; it does not directly freeze the Schema or object `type` system.
 
-[简体中文](interopatlas-definition-and-scope-v0.2.zh-CN.md) | [English](interopatlas-definition-and-scope-v0.2.md)
+[简体中文](interopatlas-definition-and-scope.zh-CN.md) | [English](interopatlas-definition-and-scope.md)
 
 ## 1. Core definition
 
