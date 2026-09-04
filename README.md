@@ -3,132 +3,169 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:49:18+08:00
-Document Updated At: 2026-09-01T16:44:53+08:00
-Metadata Backfilled At: 2026-09-02T10:49:00+08:00
+Document Updated At: 2026-09-04T19:53:00+08:00
 Metadata Provenance: mixed
-Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
+Lifecycle Time Provenance: direct_record
+Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-**开放、机器可读、可持续分析的互操作知识地图。**
+**面向全人类的开放 Interoperability Solution Space（互操作方案空间）知识基础设施。**
 
-InteropAtlas 是一个开放基础设施项目，用于描述彼此独立设计的系统如何交换信息、能力、控制、身份、资源与语义，并连接现实世界中与互操作有关的**既有标准、成熟先例、方法与指南、实现、组织、能力、场景、关系、证据与开放缺口**。
+InteropAtlas 试图持续连接人类已经用于解决互操作问题的标准、规范、协议、成熟先例、方法、实现、组织、能力、场景、关系、证据、生命周期与开放缺口，让 Human 与 Agent 能够发现、理解、比较、组合、验证并继续改进这些方案。
 
-它的目标不是只建立一个 Standards Catalog（标准目录），而是逐步映射真实的 **Interoperability Solution Space（互操作方案空间）**，帮助人和机器发现、理解、比较、组合和改进互操作方案。
+它不是单纯的 Standards Catalog、网站、知识图谱产品、Agent 数据库或 PKM。核心资产是共享、可验证、可演化的 **Atlas / Canonical Knowledge**；网站、API、Agent 和未来的知识空间都是访问、选择、投影与操作这个公共知识世界的方式。
 
-项目遵循几个基本原则：
+## Product philosophy
 
-- **架构上通用，维护上聚焦。**
-- **互操作性是问题边界，而不是某个固定行业。**
-- **扩大方案空间覆盖，但严格区分对象身份与权威性。**
-- **当前架构是可演化的设计，而不是不可修改的最终规范。**
+> **Knowledge belongs to the commons.**  
+> 知识属于公共共同体。
+>
+> **Perspective belongs to the individual.**  
+> 视角属于个人。
+>
+> **Representation should adapt to cognition.**  
+> 表达应适应认知。
+>
+> **Personalization must remain reversible and transparent.**  
+> 个性化必须可逆、透明、可检查。
 
-> English summary: InteropAtlas is an open, machine-readable and continuously analyzable knowledge map of interoperability, connecting normative standards, mature precedents, methods, implementations and open gaps.
+完整设计见 [`docs/interopatlas-master-design-v1.0.zh-CN.md`](docs/interopatlas-master-design-v1.0.zh-CN.md)。
 
-项目定义与收录范围见 [`docs/interopatlas-definition-and-scope-v0.2.zh-CN.md`](docs/interopatlas-definition-and-scope-v0.2.zh-CN.md)。
+## One Atlas, many ways to know it
 
-## 收录的不是只有“标准”
+InteropAtlas 将公共知识与个人认知空间分开：
 
-现实中的互操作建设不仅依赖正式标准，还依赖经过实践验证的项目、方法、实现和治理机制。
+```text
+                    Public Knowledge Commons
+                              │
+                      Canonical Knowledge
+                              │
+                ┌─────────────┴─────────────┐
+                │                           │
+          Public Access              Personal Knowledge Space
+       Search / Browse / API       State / Intent / Preference
+                │                           │
+                └────────── Perspective / Selection
+                              ↓
+                          Projection
+                              ↓
+                    Representation / Workspace
+                              ↓
+                         Human / Agent
+```
 
-InteropAtlas 因此区分并连接多类知识对象：
+公共事实不应因为“谁在看”而改变；但什么知识值得进入某个人当前的注意力、以及用文字、图像、Timeline、Graph、Compare、视频、Simulation、Game 或其他形式表达，可以根据任务、Context 与认知方式变化。
 
-- **Normative Artifacts（规范性产物）**：Standard、Specification、Protocol、Profile、API / Interface、Format 等；
-- **Mature Precedents / Prior Art（成熟先例 / 既有方案）**：成熟知识项目、Landscape、Design System、协作机制、Reference Architecture、长期实践模式等；
-- **Methods / Guidelines / Frameworks（方法 / 指南 / 框架）**：设计、分析、文档、治理、验证等方法；
-- **Implementations / Tools / Services（实现 / 工具 / 服务）**；
-- **Organizations（组织与治理主体）**；
-- **Capabilities / Needs / Scenarios（能力、需求与场景）**；
-- **Evidence / Sources（证据与来源）**；
-- **Relations（关系）**；
-- **Assessments / Open Gaps（评估与开放缺口）**。
+因此：
 
-这些对象可以同时进入 Atlas，但不能混为一谈。一个成熟 Design System 不会因为值得参考就被描述成国际标准；一个正式标准也不会因为缺乏成熟实现就失去其规范身份。
+> **Knowledge is stable; representations are fluid.**
 
-核心原则：
+Personalization 不能替代完整公共世界。长期 Personal Knowledge Space 必须允许用户退出个性化、检查重要选择依据、主动扩大 Perspective，并尽量保持可携带和可互操作。
+
+详见：
+
+- [`docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md`](docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md)
+- [`docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md`](docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md)
+- [`docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`](docs/knowledge-workspace-design-principles-v1.0.zh-CN.md)
+
+## Knowledge operation spaces
+
+InteropAtlas 的长期产品不是一组固定页面，而是一套共享同一知识底座的 **Knowledge Operation Spaces（知识操作空间）**。
+
+基础形态包括 Wiki / Browse、Single Object / Article、Timeline、Graph / Ecosystem、Compare、Evidence / Verification；未来可以在真实认知任务证明有价值时扩展 Matrix、Map、交互解释、Simulation、Audio / Video、Game-like representation 或尚未出现的新形式。
+
+Workspace 不只是 View：Representation 决定怎样表达，Workspace 还包含适合该认知任务的操作能力。
+
+## Human + Agent
+
+Human-first 和 Agent-first 都不是最终定位；**Atlas-first** 才是。
+
+Human 与 Agent 应共享同一 Canonical Knowledge、Evidence、Provenance 和明确未知边界。Human 可以 Browse / Read / Compare / Verify；Agent 可以 Query / Traverse / Filter / Retrieve Evidence / Compose / Explain，并在授权边界内操作 Perspective / Workspace。
+
+长期目标是 Human 与 Agent 可以在同一个可解释的知识空间中协作，而不是各自维护互相漂移的事实世界。
+
+Agent 输出不自动成为 Canonical Fact。公共写入继续经过 Candidate → Validation → Acceptance / Review 边界。
+
+## How the Atlas grows
+
+InteropAtlas 不等待“把世界收录完”再开始使用。长期成长循环是：
+
+```text
+KNOW
+  ↓
+USE
+  ↓
+DISCOVER
+  ↓
+CONTRIBUTE
+  └────────→ KNOW
+
+Future: MATCH
+```
+
+真实 Query、真实工作流和真实 Intake 应持续暴露知识缺口、模型缺口和过时信息，再通过研究与贡献反馈给 Atlas。
+
+> **让真实使用塑造 Ontology，而不是先把世界分类完再要求现实服从模型。**
+
+项目对新问题优先遵循：
+
+> **Adopt → Profile → Extend → Invent**
+
+## What is collected
+
+InteropAtlas 不只收录“标准”。候选知识包括：
+
+- **Normative Artifacts** — Standard、Specification、Protocol、Profile、API / Interface、Format；
+- **Mature Prior Art / Precedents** — 成熟项目、Landscape、Reference Architecture、长期实践模式；
+- **Methods / Guidelines / Frameworks**；
+- **Implementations / Tools / Services**；
+- **Organizations**；
+- **Capabilities / Needs / Scenarios**；
+- **Evidence / Sources / Provenance**；
+- **Relations / Events / Context**；
+- **Assessments / Open Gaps**。
 
 > **Map the solution space, preserve the authority distinction.**
->
-> **扩大方案空间覆盖，但保持权威性与对象身份的严格区分。**
 
-## 核心架构
+一个成熟先例不会因为值得参考就变成国际标准；一个正式标准也不会因为缺乏成熟实现而失去其规范身份。
 
-概念上，InteropAtlas 仍以事实、确定性处理与动态评估之间的关系理解系统：
+项目定义与收录边界见 [`docs/interopatlas-definition-and-scope-v0.2.zh-CN.md`](docs/interopatlas-definition-and-scope-v0.2.zh-CN.md)。
 
-```text
-Facts / Current State
-        ↓
-Rules & Engine / Runtime
-        ↓
-Assessments / Generated Views
-```
+## Current project layers
 
-仓库物理结构不直接复制这些知识类别，而采用更稳定的生命周期结构：
+不要把当前施工阶段误认为整个项目生命周期：
 
 ```text
-01_State      当前正式承认什么
-02_Runtime    当前如何运行和使用这些状态
-03_Evolution  项目如何研究、验证和改变自己
+L0  Mission / Philosophy
+L1  Master Design
+L2  Architecture
+L3  Operating & Evolution Model
+L4  Foundation / Phase Roadmap
+L5  Contracts / Specifications / Profiles
+L6  Issues / PRs / Implementation
 ```
 
-物理目录、知识分类和索引 / View 是三个不同层面。对象属于 Standard、Capability、Organization、Method、Implementation 等类别，由其数据字段和关系表达，而不是由文件夹名决定。
-
-## Prior Art / 既有方案调查
-
-在设计新的数据模型、仓库结构、交互方式、治理流程或协作机制前，InteropAtlas 优先执行：
-
-> **Existing Standards & Prior Art Check（既有标准与成熟先例调查）**
-
-基本顺序是：
+2026-09-02 开始的 P1–P6 是把早期 InteropAtlas 转向 V1 新方向的第一轮 **Foundation / Architecture Revalidation Cycle**：
 
 ```text
-问题
- ↓
-已有标准或成熟先例是否已经解决？
- ↓
-能否直接 Adopt？
- ↓
-能否 Profile / 组合？
- ↓
-能否 Extend？
- ↓
-只有真实缺口仍存在时才 Invent
+P1 Design Principles                         ✅
+P2 Prior-Art / Standards Research            ✅
+P3 Current-State Audit                       ✅
+P4 V1 Architecture / Roadmap Reset           ✅
+P5 Real-data Experiments / Intake Stress     ✅ mainline
+P6 V1 Implementation + Migration + Intake    ← current cycle
 ```
 
-`Prior Art` 是调查活动的上位概念，不会成为 Canonical Atlas 中所有对象的统一类型；调查发现的对象仍应分别建模为 Standard、Method、Precedent、Implementation、Organization 等准确身份。
+**P6 完成 ≠ InteropAtlas 完成。** 它只意味着长期方向获得一个可信的 V1 operating foundation。
 
-## 先用项目自身做实验
+长期路线见 [`docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md`](docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md)；实时施工断点见 [`PROJECT_STATE.md`](PROJECT_STATE.md)。
 
-InteropAtlas 将优先收录**项目自身实际依赖或参考的标准、规范、成熟先例、方法、实现与基础技术**，作为第一批小范围实验数据。
-
-这样可以同时验证：
-
-1. InteropAtlas 的数据模型、关系模型和分析程序能否表达真实方案空间；
-2. 项目自身采用的技术、方法和协作机制是否存在更开放、更成熟或更可持续的替代方案；
-3. Atlas 是否能够区分“正式标准”“成熟先例”“方法”“实现”和“评估”；
-4. 实践中暴露出的模型缺口能否反向推动 Atlas 演化。
-
-收录某项对象不等于认定它是开放标准，也不等于认定它是最佳方案。InteropAtlas 应记录事实、证据和身份差异，并让具体结论来自明确场景和规则下的评估。
-
-## 语言策略
-
-InteropAtlas 采用 **中文优先、英文机器标识、中英双语知识字段** 的策略。
-
-- 人类可读的主文档：中文优先。
-- 稳定 ID、目录名、字段名、Schema、API、关系类型：使用英文。
-- 名称、描述、定义等知识字段：设计为中英双语。
-- 标准、组织、协议、项目、方法等专有名称保留官方原文，并可附中文名称或译名。
-
-详见 [`docs/language-policy.zh-CN.md`](docs/language-policy.zh-CN.md)。
-
-## 仓库结构
-
-当前核心结构为：
+## Repository structure
 
 ```text
 01_State/
@@ -136,70 +173,44 @@ InteropAtlas 采用 **中文优先、英文机器标识、中英双语知识字�
 └── 02_Relations/     Canonical Relations + Relation Schema
 
 02_Runtime/
-├── 01_Engine/        Loader / Graph / Query / Renderer 等核心运行代码
-├── 02_Tools/         Human / Agent / CI 使用的辅助工具
-└── 03_Outputs/       生成物的逻辑区域；并非所有产物都提交 Git
+├── 01_Engine/        Loader / Graph / Query / Renderer
+├── 02_Tools/         Human / Agent / CI tools
+└── 03_Outputs/       Generated outputs / projections
 
 03_Evolution/
-├── 01_Research/      Prior Art、研究、Audit、方案比较
-├── 02_Experiments/   原型、实验、Dry Run
-└── 03_Change/        Proposal、Migration、Transition 等变更材料
+├── 01_Research/      Prior Art / Research / Audit
+├── 02_Experiments/   Prototype / Experiment / Dry Run
+└── 03_Change/        Proposal / Migration / Phase history
+
+docs/                 Current durable design / specification / policy
 ```
 
-根目录继续保留 GitHub / 开源项目接口：
+物理存储、语义分类和 Index / View 是不同层面。Canonical State 与 Generated View 也必须保持分离。
+
+## Start reading
+
+如果第一次进入项目，建议：
 
 ```text
-.github/
-docs/
-LICENSES/
 README.md
-CONTRIBUTING.md
-LICENSE.md
-AGENTS.md
+→ docs/interopatlas-master-design-v1.0.zh-CN.md
+→ docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md
+→ docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md
+→ PROJECT_STATE.md
+→ current Phase / Issue / Contract
 ```
 
-关键规则：
+Agent 贡献者同时遵循 [`AGENTS.md`](AGENTS.md)。完整文档地图见 [`docs/README.md`](docs/README.md)。
 
-- `01_Objects/` 内不同对象类型平级存放，不再通过 Standard / Capability / Organization 等语义文件夹分类；
-- Properties 是 Object / Relation 自身字段，不建立独立目录；
-- Schema 与其约束的数据共置，README 给 Human / Agent 看，`*.schema.json` 给机器验证；
-- 公共对象地址使用稳定 ID：`/objects/<stable-id>.html`，不依赖 YAML 的物理文件位置；
-- 如果未来文件数量过大，需要分片时，应优先采用 ID / 哈希等非语义分片，而不是重新用对象类别建目录。
+## Language
 
-初期使用 YAML 作为适合人类编辑的事实源格式，并逐步通过 JSON Schema 与 Validator 进行验证。未来可以从同一事实源生成 JSON、RDF、图数据库、API、网站视图与动态评估结果。
+Human-facing project documents are Chinese-first. Stable IDs、Schema、API、field names and relation types use English; knowledge fields can be bilingual. See [`docs/language-policy.zh-CN.md`](docs/language-policy.zh-CN.md).
 
-## 范围
+## License
 
-如果一个对象满足以下至少一项，就可以成为候选：
+- Software code: Apache License 2.0
+- Structured factual data: CC0 1.0 Universal
+- Original documentation / research: CC BY 4.0
+- Names / logos / trademarks: outside the above grants; governed separately
 
-- 直接定义实体如何交换信息、能力、控制、身份、资源、语义、协调或行为；
-- 为这种互操作提供实现；
-- 为互操作系统的设计、治理、验证、发现、选择、组合或维护提供成熟方法；
-- 是具有可复用价值的成熟互操作案例 / 先例；
-- 为相关事实或 Assessment 提供必要证据；
-- 揭示现有方案空间中的 Open Gap。
-
-当前主动维护的核心范围聚焦于：感知、通信、数据表达、计算、存储、时间同步、身份、安全、发现、语义、Agent（智能体）、协调、控制、执行与反馈，以及支撑这些系统互操作的 Human Interface、协作、治理和知识组织方法。
-
-范围扩大并不意味着收录泛知识。与互操作没有明确关系、缺乏可靠来源、只有营销表述或无法提取可复用价值的对象，默认不进入核心维护范围。
-
-## 许可证
-
-InteropAtlas 使用多许可证：
-
-- **软件代码：** Apache License 2.0
-- **结构化事实数据：** CC0 1.0 Universal
-- **原创文档与研究内容：** Creative Commons Attribution 4.0 International（CC BY 4.0）
-- **名称、Logo 与商标：** 不包含在上述授权中，后续单独维护商标政策。
-
-完整边界见 [`LICENSE.md`](LICENSE.md)。第三方标准全文、规范文本、商标、Logo 以及其他第三方材料仍受各自权利与许可证约束。
-
-## 项目状态
-
-**Pre-Alpha / v0.1 设计阶段。**
-
-本体、Schema、规则、分析引擎、收录对象分类和初始数据集仍在设计中，当前允许破坏性变更。真实对象的早期收录首先服务于架构验证，而不是追求目录数量。
-
-## 网站
-
-计划使用 **interopatlas.org** 作为主要公共域名。当前 GitHub Pages 仅作为 Reference Implementation / Test Bed，不是事实源，也不负责反向定义项目规范。
+See [`LICENSE.md`](LICENSE.md) for boundaries. Third-party standards text, trademarks, logos and other materials remain subject to their own rights and licenses.
