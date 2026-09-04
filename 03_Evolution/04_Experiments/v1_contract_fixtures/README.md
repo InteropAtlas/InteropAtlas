@@ -131,6 +131,8 @@ Optionally pass fixture files/directories explicitly.
 
 Initial harness validation result: `Checked 6 fixture(s); failures=0`.
 
+#137 is ready for independent review; mainline semantic work proceeds in #130 using these fixtures.
+
 ## Guardrails
 
 - Do not import this directory into `repository_layout.CURRENT_CANONICAL_STORAGE_PATHS`.
