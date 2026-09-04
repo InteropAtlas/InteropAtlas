@@ -134,5 +134,4 @@ AGENTS.md
 → #146 for live intake
 → #149 for the next Agent Access slice after explicit Ready/promotion
 → docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
-→ docs/canonical-human-agent-access-v1-architecture-draft.zh-CN.md
 ```
