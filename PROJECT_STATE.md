@@ -3,9 +3,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T06:35:00+08:00
+Document Updated At: 2026-09-04T08:10:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
-Metadata Provenance: mixed
+Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T06:35:00+08:00
+> Verified At: 2026-09-04T08:10:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
 
@@ -111,27 +111,31 @@ P3 factual input: **Issue #126 final synthesis**。
 1. **Canonical Contract V1** — `docs/canonical-contract-v1-architecture-draft.zh-CN.md` ✅ draft
 2. **Canonical Write / Intake Contract** — `docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md` ✅ draft
 3. **Migration Architecture** — `docs/canonical-migration-architecture-v1-draft.zh-CN.md` ✅ draft
-4. **Selection / Projection / Workspace Architecture** ← NEXT
-5. **Human + Agent Access Architecture**
+4. **Selection / Projection / Workspace Architecture** — `docs/selection-projection-workspace-architecture-v1-draft.zh-CN.md` ✅ draft
+5. **Human + Agent Access Architecture** ← NEXT
 6. **Roadmap Reset**
 
 ### Resume Here
 
-Continue **Issue #127 / P4.4 Selection / Projection / Workspace Architecture**.
+Continue **Issue #127 / P4.5 Human + Agent Access Architecture**.
 
-P4.1 establishes V1 semantic boundaries. P4.2 establishes the shared write/intake path. P4.3 establishes Legacy → V1 as a governed semantic transformation rather than a bulk rewrite.
+P4.1 establishes V1 semantic boundaries. P4.2 establishes the shared write/intake path. P4.3 establishes Legacy → V1 as a governed semantic transformation rather than a bulk rewrite. P4.4 establishes the read/consumption architecture from Canonical through Selection / Projection / Workspace to Human / Agent interaction.
 
-P4.3 settled direction:
-- existing IA stable IDs are preserved by default across schema generations;
-- taxonomy/path/display-name changes are not identity migrations;
-- migration mapping distinguishes lossless, normalization, semantic promotion, ambiguous/unresolved, and identity/destructive cases;
-- unknown/conflict must survive migration instead of being guessed away;
-- migration uses small semantic batches, dry-run, semantic diff/loss reporting, Machine Review, Relation/Graph checks, independent review and authority gates when required;
-- migration does not bypass the P4.2 Write / Intake Contract;
-- rollback/correction preserves provenance;
-- Legacy compatibility is temporary and has an explicit retirement endpoint.
+P4.4 settled direction:
+- `Canonical → Selection → Projection → Workspace → Interaction` is the main consumption chain;
+- Selection / Projection are derived semantics, not a second source of truth;
+- Workspace is task-oriented representation + operations, not merely a page template;
+- Search / Browse / Object / Compare / Graph / Timeline / Evidence are foundational workspace families;
+- Workspace state may be coordinated across views, but Workspace State ≠ Canonical State;
+- Readable Projection ≠ Updatable Projection;
+- lossy / aggregate / ranked / generated views do not directly write back to Canonical by default;
+- corrections discovered in a Workspace become Candidate / Proposal / Patch / Evidence and enter P4.2 Intake;
+- unknown / conflict / scope remain visible or recoverable when task-relevant;
+- ranking/personalization remain separate from Canonical truth;
+- indexes/caches/materialized views are rebuildable derived infrastructure;
+- Human and Agent share one knowledge world but may use different representation and operation surfaces.
 
-Next small checkpoint: define how Canonical State is selected, projected and composed into Human/Agent workspaces such as Search / Compare / Map / Timeline / Wiki without turning generated views into a second source of truth or allowing lossy projections to write back directly.
+Next small checkpoint: define Human / Agent access modes, identity/capability/authority boundaries, read/query/candidate-write/canonical-acceptance separation, and Human+Agent collaboration traceability without confusing actual executor identity with GitHub Actor or repository permission.
 
 ## 6. P4 guardrails
 
@@ -159,7 +163,8 @@ P4 首先做 Architecture / Decision / Roadmap。需要真实数据验证的设�
 - #127 P4 Primary Work Item established ✅；
 - P4.1 Canonical Contract V1 first architecture pass consolidated as a durable draft artifact ✅；
 - P4.2 Canonical Write / Intake architecture draft established ✅；
-- P4.3 Canonical Migration architecture draft established ✅。
+- P4.3 Canonical Migration architecture draft established ✅；
+- P4.4 Selection / Projection / Workspace architecture draft established ✅。
 
 ## 8. Known open / parallel work
 
@@ -196,8 +201,8 @@ Issue #122 Owner intent
 → docs/canonical-contract-v1-architecture-draft.zh-CN.md
 → docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
 → docs/canonical-migration-architecture-v1-draft.zh-CN.md
-→ P4.4 Selection / Projection / Workspace Architecture
-→ Human+Agent Architecture
+→ docs/selection-projection-workspace-architecture-v1-draft.zh-CN.md
+→ P4.5 Human + Agent Access Architecture
 → Roadmap Reset
 ```
 
