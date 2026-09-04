@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T12:00:00+08:00
+Document Updated At: 2026-09-04T11:52:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T12:00:00+08:00
+> Verified At: 2026-09-04T11:52:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -106,26 +106,26 @@ BCP 47 / RFC 5646        → duplicate/existing overlap
 
 No production Canonical mutation occurred. Batch 1 confirmed `accept / defer / duplicate / reject` must remain separate, and that scalable automation should focus first on preflight rather than semantic acceptance.
 
-Durable gate input: `docs/p5-ordinary-intake-minimal-checklist-v1-draft.zh-CN.md`.
+Durable gate input: `docs/p5-ordinary-intake-minimal-checklist-v1-draft.zh-CN.md`。
 
 ### Resume Here
 
 **Primary next small checkpoint: #159 — synthesize Gate evidence from #137/#130/#132/#133/#136 into a concise PASS / PASS-WITH-BOUNDARIES / FAIL recommendation for #134. Do not ask Owner to decide implementation details. Explicitly separate architecture validity, bounded-intake validity, and production-readiness gaps.**
 
 The synthesis should answer:
-- which P4 contracts survived real data without reversal;
-- which ordinary M0/M1 intake steps are repeatable;
-- which checks can scale as T0/T1 preflight;
-- what must still defer/escalate;
-- which implementation gaps remain before broad continuous Canonical intake;
-- whether #134 should authorize P6 ordinary intake now, authorize with boundaries, or hold.
+- which P4 contracts survived real data without reversal；
+- which ordinary M0/M1 intake steps are repeatable；
+- which checks can scale as T0/T1 preflight；
+- what must still defer/escalate；
+- which implementation gaps remain before broad continuous Canonical intake；
+- whether #134 should authorize P6 ordinary intake now, authorize with boundaries, or hold。
 
 ## 7. When standard intake can scale
 
-- **Now / P5:** Candidate discovery/source confirmation/dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical.
-- **#136 result:** bounded intake semantics are viable; ordinary preflight is highly parallelizable, but actual Canonical acceptance still requires production validator/review-routing/acceptance-event implementation.
-- **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake may begin in early P6 through #145 → #146, with explicit escalation of ambiguous/high-impact cases.
-- M2/M3 identity/destructive/governance/stable changes retain higher gates.
+- **Now / P5:** Candidate discovery/source confirmation/dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical。
+- **#136 result:** bounded intake semantics are viable; ordinary preflight is highly parallelizable, but actual Canonical acceptance still requires production validator/review-routing/acceptance-event implementation。
+- **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake may begin in early P6 through #145 → #146, with explicit escalation of ambiguous/high-impact cases。
+- M2/M3 identity/destructive/governance/stable changes retain higher gates。
 
 ## 8. P5 parallel work
 
@@ -141,7 +141,7 @@ Allowed before Contribution-Ready Gate:
 - continuity/task-readability validation；
 - bounded non-destructive research。
 
-Not allowed through fast lane: mass Canonical write, identity merge/split, production Schema migration, stable governance promotion, destructive deletion, unrestricted Agent acceptance.
+Not allowed through fast lane: mass Canonical write, identity merge/split, production Schema migration, stable governance promotion, destructive deletion, unrestricted Agent acceptance。
 
 ## 9. P6 preview
 
@@ -157,7 +157,7 @@ First production chain after Gate:
 └→ #149 Agent structured read/query + Candidate Write
 ```
 
-A likely #134 boundary is that broad ordinary intake may be authorized conceptually but must still begin through #145 production serialization/validator before mass Canonical writes are actually enabled.
+A likely #134 boundary is that broad ordinary intake may be authorized conceptually but must still begin through #145 production serialization/validator before mass Canonical writes are actually enabled。
 
 ## 10. Legacy / parallel work
 
@@ -170,7 +170,7 @@ A likely #134 boundary is that broad ordinary intake may be authorized conceptua
 - F4 quality line remains parallel；
 - `docs/task-authority-governance-v0.1-draft.zh-CN.md` remains governance input, not stable policy。
 
-Do not mass-close old Issues merely because the roadmap reset exists.
+Do not mass-close old Issues merely because the roadmap reset exists。
 
 ## 11. Owner gates
 
