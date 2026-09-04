@@ -8,6 +8,18 @@ This directory is a deliberately isolated carrier for P5 real-data experiments. 
 
 The current production loader only scans the repository layout Canonical storage paths (`01_State/01_Objects`, `01_State/02_Relations`). Keeping fixtures under `03_Evolution/04_Experiments/` makes that boundary structural as well as documentary.
 
+## Current sample set
+
+One synthetic smoke fixture plus five real #130 identity/version samples are present:
+
+- RFC 9110 / STD 97 — RFC + Standards Track model;
+- ISO/IEC 27001:2022 — numbered International Standard + edition + amendment;
+- WCAG 2.2 — W3C Recommendation with latest and dated publication locators;
+- HTML Living Standard — continuous publication model;
+- OpenID Connect Core 1.0 — Final specification with approved errata revisions.
+
+These are experiment inputs, not accepted Canonical objects.
+
 ## Purpose
 
 Use small structured fixtures to test P4 architecture hypotheses before production serialization is frozen:
@@ -116,6 +128,8 @@ python 03_Evolution/04_Experiments/v1_contract_fixtures/validate_fixtures.py
 ```
 
 Optionally pass fixture files/directories explicitly.
+
+Initial harness validation result: `Checked 6 fixture(s); failures=0`.
 
 ## Guardrails
 
