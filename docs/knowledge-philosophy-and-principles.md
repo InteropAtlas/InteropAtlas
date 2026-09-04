@@ -1,10 +1,10 @@
-# InteropAtlas Knowledge Philosophy and Principles v2.0
+# InteropAtlas Knowledge Philosophy and Principles v2.1
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English philosophy baseline
 Document Created At: 2026-09-04T19:53:00+08:00
-Document Updated At: 2026-09-05T02:40:00+08:00
-Translation Source: knowledge-philosophy-and-principles-v1.0.zh-CN.md
+Document Updated At: 2026-09-05T03:50:00+08:00
+Translation Source: knowledge-philosophy-and-principles.zh-CN.md
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -15,7 +15,7 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-> This document preserves the product philosophy that InteropAtlas should not lose as pages, schemas, Agents, or implementation phases change. It explicitly separates product philosophy from the product and construction principles derived from it. Concrete architecture remains governed by the Master Design and V1 contracts.
+> This document preserves the product philosophy that InteropAtlas should not lose as pages, schemas, Agents, or implementation phases change. It explicitly separates product philosophy from the product and construction principles derived from it.
 
 ---
 
@@ -27,64 +27,61 @@ Latest Substantive Contribution:
 
 These are not two independent slogans. They are two interdependent sides of one product philosophy.
 
-The **Knowledge World** is a commons. Facts, evidence, relations, standards, specifications, methods, implementations, Prior Art, and history should, where possible, become open, discoverable, traceable, machine-readable, verifiable, reusable, and evolvable public knowledge infrastructure. InteropAtlas serves this shared world rather than creating separate factual worlds for individual users, organizations, Agents, or clients.
+The **Knowledge World** is a commons. Facts, evidence, relations, standards, specifications, methods, implementations, Prior Art, and history should, where possible, become open, discoverable, traceable, machine-readable, verifiable, reusable, and evolvable public knowledge infrastructure.
 
-A **Perspective** is individual. Public facts can be shared, but attention, goals, prior knowledge, interests, tasks, time budgets, and cognitive modes cannot be prescribed uniformly. Different Humans and Agents may select, emphasize, organize, and project different parts of the same shared knowledge world. A Personal Perspective is a window over the commons, not a replacement for public facts.
+A **Perspective** is individual. Public facts can be shared, but attention, goals, prior knowledge, interests, tasks, time budgets, and cognitive modes cannot be prescribed uniformly. A Personal Perspective is a window over the commons, not a replacement for public facts.
 
-InteropAtlas therefore does not compromise between “public” and “personal.” It distinguishes their proper layers: **what should be common should be common; what should be individual should remain individual.** A richer commons enables richer individual perspectives, while individual use and creation can in turn expand the commons.
+InteropAtlas therefore distinguishes their proper layers: **what should be common should be common; what should be individual should remain individual.** A richer commons enables richer individual perspectives, while individual use and creation can in turn expand the commons.
 
 ### Why: reserve creative capacity for what remains unsolved
 
-Human attention and creative capacity are scarce. When a problem has already been solved but prior knowledge is scattered, closed, undiscoverable, incomprehensible, or unusable, people repeatedly spend creative capacity solving the same problem again.
-
-InteropAtlas aims to reduce the cost of discovering, understanding, verifying, connecting, and reusing existing knowledge so that more creative effort can move toward genuinely unsolved problems.
+Human attention and creative capacity are scarce. InteropAtlas aims to reduce the cost of discovering, understanding, verifying, connecting, and reusing existing knowledge so that more creative effort can move toward genuinely unsolved problems.
 
 > **Map what humanity already knows. Expose the real open gaps. Create where creation is still needed.**
 
 This is a value direction, not a universal claim about intellectual-property systems or business models. Proprietary solutions are not automatically treated as low-value; the Atlas should represent openness, authority, licensing, portability, and interoperability boundaries accurately.
 
-## Dynamic expression of the philosophy: Knowledge Flow Model
+## Dynamic proposition: Knowledge travels. Creation continues.
 
-If the core philosophy describes the static relationship between commons and perspective, the Knowledge Flow Model describes the same philosophy in motion.
+If the core philosophy describes the **structure** of the knowledge world, its dynamic proposition describes how that world keeps moving:
 
-> **Knowledge should flow.**
+> **Knowledge travels. Creation continues.**
 
-InteropAtlas summarizes that movement as six connected actions forming a loop:
+At the deepest level, the model does not require six peer-level stages. It distinguishes two fundamental movements:
+
+1. **Flow** — existing knowledge crosses boundaries.
+2. **Create** — a subject builds on existing knowledge and crosses the boundary of the known to produce something that did not previously exist.
 
 ```text
-Discover
-   ↓
-Connect
-   ↓
-Transmit
-   ↓
-Transform
-   ↓
-Reuse
-   ↓
-Create
-   ↓
-New knowledge enters the Commons
-   ↺
+Knowledge Commons
+      ↓
+     FLOW
+      ↓
+Individual / Perspective / Context
+      ↓
+    CREATE
+      ↓
+New Knowledge / New Creation
+      ↓
+Knowledge Commons
+      ↺
 ```
 
-This is not a mandatory linear pipeline. The actions may overlap, repeat, reverse, or be performed by individuals, communities, organizations, software, or Agents. Together they describe knowledge moving from a shared world into concrete perspectives and contexts, being used to create something new, and returning to the commons.
+Commons and Individual are therefore not competing endpoints. Shared knowledge gives individuals a foundation to inherit, understand, and reuse; creation in individual and concrete contexts can in turn expand the commons.
 
-### Discover — make existing knowledge visible again
+### Flow — let existing knowledge cross boundaries
 
-Discover asks: **What does humanity already know?** InteropAtlas should make standards, Prior Art, methods, implementations, evidence, history, and open gaps discoverable, and apply Prior Art First before inventing.
+Knowledge Flow is not one action and not a fixed pipeline. The earlier sequence Discover → Connect → Transmit → Transform → Reuse remains useful, but these are now treated as **typical mechanisms by which knowledge crosses different boundaries**, not mandatory peer-level stages:
 
-### Connect — turn entries into a knowledge world
+- **Discover** crosses the boundary of visibility, bringing existing but unseen knowledge into attention.
+- **Connect** crosses the boundary between knowledge islands, linking objects, relations, evidence, organizations, scenarios, and history.
+- **Transmit** crosses boundaries between people, organizations, systems, cultures, and generations.
+- **Transform** crosses boundaries of language, medium, representation, and cognitive mode.
+- **Reuse** crosses boundaries of context, bringing existing knowledge into new tasks, combinations, implementations, and extensions.
 
-Connect asks: **How is what we know related?** A thousand isolated standards pages remain a thousand islands. Standards, problems, capabilities, scenarios, implementations, organizations, evidence, alternatives, dependencies, and history should become an Atlas through explicit relations.
+This set is open rather than exhaustive. Additional important mechanisms may be added without changing the top-level model.
 
-Discover and Connect are weighted toward the Commons: they help reveal the shared knowledge world and its structure.
-
-### Transmit — carry knowledge across subjects, systems, and time
-
-Transmit lets knowledge cross people, organizations, systems, cultures, and generations. Preservation matters because it enables knowledge to cross time, but preservation is a means rather than the endpoint.
-
-### Transform — carry knowledge across representations and cognitive boundaries
+Transform includes an important proposition:
 
 > **Knowledge is stable; representations are fluid.**
 
@@ -101,42 +98,24 @@ Representation
 Article / Graph / Image / Audio / Video / Simulation / Game / Agent / ...
 ```
 
-**Representation should adapt to cognition** is an important requirement of Transform. No representation is best for every person and task. InteropAtlas remains text-first, not text-only.
+**Representation should adapt to cognition.** InteropAtlas remains text-first, not text-only.
 
-Transmit and Transform form a bridge between the shared knowledge world and concrete perspectives: one carries meaning across subjects, systems, and time; the other across media, forms, and cognitive modes.
+### Create — cross the boundary of the known
 
-### Reuse — make existing knowledge a foundation for later work
-
-Knowledge should not only be read, cited, and preserved. It should be adoptable, composable, implementable, profileable, and extensible. Reuse connects directly to **Adopt → Profile → Extend → Invent**.
-
-### Create — move knowledge into the unknown
+Creation differs fundamentally from the Flow mechanisms above. Discover, Connect, Transmit, Transform, and Reuse primarily operate on **what already exists**. Create reaches toward **what does not yet exist**.
 
 > **Preservation is not the endpoint; knowledge should ultimately enable new creation.**
 
-Open knowledge matters because later people can stand on existing knowledge and continue creating. Creation may produce new knowledge, methods, implementations, specifications, standards, works, experiences, or questions. With evidence, provenance, and governance, these can return to the shared knowledge world and become the basis of another cycle.
+Creation may produce new knowledge, methods, implementations, specifications, standards, works, experiences, or questions. With evidence, provenance, and governance, these can enter the shared knowledge world and become the basis for another round of flow and creation.
 
 ```text
-COMMONS
-   ↓
-Discover + Connect
-   ↓
-Transmit + Transform
-   ↓
-Reuse + Create
-   ↓
-INDIVIDUAL / CONCRETE CONTEXT
-   ↓
-New Knowledge / New Creation
-   ↓
-COMMONS
-   ↺
+Existing Knowledge → Flow → Individual / Context → Create
+→ New Knowledge → Commons ↺
 ```
-
-“Commons-oriented” and “individual-oriented” describe shifts in emphasis, not ownership boundaries. Individuals can Discover and Connect; communities can Reuse and Create. The key relationship is reciprocal: the commons enables individual perspective and creation, and creation can expand the commons.
 
 ### Knowledge Flow and Knowledge Metabolism
 
-Knowledge Flow describes how knowledge crosses boundaries and reaches further creation. Knowledge Metabolism describes the longer lifecycle through which knowledge is acquired, used, distilled, decayed, archived, and reactivated. They are related but distinct models.
+Knowledge Flow describes how existing knowledge crosses boundaries and reaches further creation. Knowledge Metabolism describes the longer lifecycle through which knowledge is acquired, used, distilled, decayed, archived, and reactivated. They are related but distinct models.
 
 ```text
 Collect → Understand → Integrate → Apply → Create
@@ -149,58 +128,46 @@ For public knowledge infrastructure, forgetting must be cautious. Deprecated doe
 
 # Part II: Product & Construction Principles
 
-The following are not peer-level product philosophies. They specify how InteropAtlas should be built so that the core philosophy and Knowledge Flow can remain true in practice.
+These principles are derived constraints, not peer-level philosophical slogans.
 
 ## 1. Personalization must be transparent, controllable, and reversible
-
-A Personal Perspective must not overwrite public facts or become an opaque information filter. Users should be able to inspect why knowledge is shown or deemphasized, understand the active Perspective / Context, change or disable personalization, return to the Public Atlas, and deliberately explore beyond current interests.
+A Personal Perspective must not overwrite public facts or become an unexplained information black box.
 
 ## 2. Atlas-first, not Human-first or Agent-first
-
-Humans and Agents are participants in and accessors of the same knowledge world. Human UI and Agent access must not create separate factual universes. They should share Canonical Knowledge, Evidence, Provenance, and explicit unknown boundaries, differing only in access, selection, projection, representation, and permissions.
+Humans and Agents should share Canonical Knowledge, Evidence, Provenance, and explicit unknown boundaries, differing only in access, selection, projection, representation, and permissions.
 
 ## 3. Selection before presentation
-
-A polished interface cannot repair the wrong knowledge selection. Determine the task, relevant knowledge, dimensions and relations, representation, and supported operations before designing presentation.
+A polished interface cannot repair incorrect knowledge selection. Determine the task, relevant knowledge, dimensions, relations, and representation before designing presentation.
 
 ## 4. Workspace is a knowledge operation space
-
-A Workspace is more than a View. Representation determines how knowledge appears; a Workspace also determines what can be done with knowledge in that cognitive mode.
+A Workspace is not merely a View. Representation determines how knowledge is seen; a Workspace also determines what can be done with it.
 
 ## 5. Evidence before assertion
-
-Keep Reality, Source, Evidence, Fact, Inference, Assessment, and Recommendation distinguishable. Agent Output and Generated Views do not become Canonical Facts merely because they are fluent.
+Reality, Source, Evidence, Fact, Inference, Assessment, and Recommendation should remain distinguishable. Fluent Agent output is not automatically Canonical Fact.
 
 ## 6. Recoverability over false completeness
-
-Representations may be intentionally lossy, but presentation convenience must not silently destroy richer Canonical Knowledge, Evidence, Provenance, Scope, or Identity. Explicit `unknown` / `not_recorded` is preferable to fabricated completeness.
+Projection may intentionally lose information, but must not silently destroy richer Canonical Knowledge, Evidence, Provenance, Scope, or Identity. Explicit unknowns are better than fabricated completeness.
 
 ## 7. Real use shapes the ontology
-
-Do not design a theoretically perfect world model and force reality into it. Real queries, workflows, Intake, and failures should expose model gaps. Change the ontology only after a real need is demonstrated and Prior Art / Standards have been checked.
+Real queries, workflows, intake, and failures should expose model gaps before the project changes its ontology.
 
 ## 8. Adopt → Profile → Extend → Invent
+Prefer existing standards, theories, protocols, knowledge models, interaction research, and mature practice. Only after existing approaches fail real scenarios should IA Profile, Extend, and finally Invent.
 
-Do not invent merely because a problem looks new. Prefer existing standards, theories, protocols, knowledge models, interaction research, and mature practices. This applies to InteropAtlas itself: schemas, relations, APIs, Agent access, Human interfaces, governance, collaboration, formats, Personal Perspectives, and specifications should investigate and adopt prior art before profiling, extending, and finally inventing.
-
-IA should not map humanity's interoperability solution space while creating new interoperability islands through ignorance of prior art.
+This principle applies to InteropAtlas itself: the project should not map interoperability while creating new interoperability islands through ignorance of Prior Art.
 
 ## 9. Map the solved space, expose the unsolved space
+Mapping standards, Prior Art, methods, implementations, organizations, capabilities, scenarios, and evidence should progressively reveal the boundary between solved and unsolved space.
 
-Mapping standards, Prior Art, methods, implementations, organizations, capabilities, scenarios, and evidence should make the boundary between solved and unsolved space visible.
-
-A missing mature standard, fragmented or closed prior art, incompatible implementations, or repeated openness / portability / interoperability failures may indicate an Open Gap. But **discovering a gap does not mean immediately creating an IA standard.** Compare, validate, and distill prior art first; standardize only when necessary, and feed the result back into the Atlas.
+**Finding a Gap does not mean immediately creating an IA standard.** First verify whether mature open standards or Prior Art already address it; only confirmed Open Gaps should move toward new specification work when necessary.
 
 ---
 
-## In one statement
+## In one sentence
 
-InteropAtlas's product philosophy can be compressed into one unified proposition:
+InteropAtlas expresses its product philosophy through a structural and a dynamic proposition:
 
-> **Knowledge belongs to the commons. Perspective belongs to the individual.**
+> **Knowledge belongs to the commons. Perspective belongs to the individual.**  
+> **Knowledge travels. Creation continues.**
 
-Its dynamic expression is a continuing loop:
-
-> **Discover → Connect → Transmit → Transform → Reuse → Create → Commons ↺**
-
-The principles in Part II constrain how InteropAtlas is built so that it does not drift away from that philosophy.
+The first describes the structure of the knowledge world; the second describes its motion. Existing knowledge crosses boundaries through mechanisms such as Discover, Connect, Transmit, Transform, and Reuse; it reaches individual perspectives and concrete contexts, enables creation, and new creation can return to the commons as the basis for another cycle.
