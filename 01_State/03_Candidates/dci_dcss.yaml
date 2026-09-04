@@ -11,15 +11,17 @@ locators:
   - url: https://www.dcimovies.com/dci-specification/
     role: official
 identity_resolution:
-  state: new
+  state: identity_risk
   matched_canonical_ids: []
   reasons:
     - The DCI Digital Cinema System Specification defines digital cinema mastering, packaging (DCP), encryption and playback requirements, with editions v1.2/v1.3/v1.4.
     - Kept separate from SMPTE ST 429 (D-Cinema Packaging) as two distinct normative documents; no merge judgment is made here.
     - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+    - "Suite-versus-part identity: this candidate models a multi-part standard suite under a single family-level identifier while authoritative documents are separately numbered parts; per review guidance this is routed to identity review before canonical acceptance."
   merge_authorized: false
 unknowns:
   - Current DCSS edition (e.g. 1.4.x) left for review; locator points to the DCI specification landing page.
+  - Whether to model the suite's individual parts as separate candidate identities is left for review.
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
