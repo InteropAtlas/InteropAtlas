@@ -16,33 +16,31 @@
 
 ## 2. Scenario matrix
 
-| Scenario | Existing / real case | What is being tested | Initial result |
+| Scenario | Existing / real case | What is being tested | Result |
 | --- | --- | --- | --- |
-| S1 simple binary | `engine_v0_1_bootstrap uses semantic_versioning_2_0_0` | source-predicate-target 是否足够 | yes: binary fast path 足够；notes/provenance 可附加但不改变参与者结构 |
-| S2 qualified binary | Apple HIG `provides` web accessibility | relation 带 capability context + scope conditions | binary endpoints 仍足够，但 assertion 需要 qualifier/context；不能把条件压进 predicate 名称 |
-| S3 relation vocabulary mismatch | RFC 3339 vs ISO 8601 | V0 只有 `extends`，但记录自身说明更准确语义是 `profile_of` | relation type 不足会造成语义损失；应保留 unresolved semantic mismatch，而不是把近似 predicate 当事实 |
-| S4 composite / participant roles | BCP 14 + RFC 2119 + RFC 8174 | 多个 publication 共同参与一个 maintained practice | 简单 `A -> version -> B` 不足；需要能表达 participant role / composition semantics 的 rich association 或显式关系组 |
-| S5 same participants, different occurrence semantics | publication/work pairs | 同一对对象可同时存在 `updates`, `part_of`, `profile_of`, `supersedes` 等不同事实 | participant set 不能作为 relation identity；predicate/context/occurrence 必须参与区分 |
-| S6 evidence-supported stable fact | Apple HIG `governed_by` Apple | 官方来源直接支持低争议关系 | compact relation + source evidence 可作为 fast path；Source 仍不等于 Assertion 本身 |
-| S7 evidence gap / provisional assertion | RFC 3339 `extends` ISO 8601 approximation | 已知当前 predicate 只是近似 | 必须能表示 unverified/provisional/semantic-gap，而不是只有 confidence 数字 |
-| S8 historical / supersession lifecycle | ISO/IEC 27001:2013 vs 2022 | publication status、supersession、IA record lifecycle 是否正交 | superseded publication 不等于删除/archived IA record；历史对象仍应可查询 |
-| S9 source freshness vs IA verification | HTML Living Standard / Apple HIG / A2A current pages | upstream mutable revision 与 IA `last_verified_at` | 两种时间必须分离；网页更新不自动等于 IA record update，IA verification 也不定义 publisher status |
-| S10 conflicting assertion | generic conflicting-source case seeded from P4 contract | 同一 subject/predicate 出现 support/refute 或 incompatible assertions | 不能 last-writer-wins；冲突应保留为并存 Assertions + Evidence/Assessment，Canonical 可记录 disputed state |
+| S1 simple binary | `engine_v0_1_bootstrap uses semantic_versioning_2_0_0` | source-predicate-target 是否足够 | binary fast path 足够 |
+| S2 qualified binary | Apple HIG `provides` web accessibility | relation 带 capability context + scope conditions | endpoints 仍是 binary；qualifier/context 属于 assertion scope |
+| S3 relation vocabulary mismatch | RFC 3339 vs ISO 8601 | V0 只有 `extends`，但更准确语义是 `profile_of` | vocabulary gap 会造成语义损失，必须可标记 approximation/provisional |
+| S4 composite / participant roles | BCP 14 + RFC 2119 + RFC 8174 | 多个 publication 共同参与一个 maintained practice | 简单 version edge 不足；需要 rich association / explicit grouped semantics |
+| S5 same participants, different occurrence semantics | publication/work pairs | 同一 participants 下多种事实 | participant set 不能充当 relation identity |
+| S6 evidence-supported stable fact | Apple HIG `governed_by` Apple | 官方来源支持低争议关系 | compact relation + source/evidence fast path 可行 |
+| S7 evidence gap / provisional assertion | RFC 3339 `extends` approximation | predicate 只是近似 | `confidence` 数字不足以表达 semantic gap |
+| S8 historical / supersession lifecycle | ISO/IEC 27001:2013 vs 2022 | publication / supersession / IA lifecycle 正交 | superseded publication 不等于删除 IA record |
+| S9 source freshness vs IA verification | Living Standard / maintained guides | upstream revision 与 IA verification | 两种时间必须分离 |
+| S10 conflicting assertion | competing claims with different evidence | support/refute / incompatible claims | 保留并存 Assertions；禁止 last-writer-wins |
 
 ## 3. Binary fast path boundary
 
-第一批真实 V0 Relations 说明，简单二元边仍然有价值。例如 Engine `uses` SemVer，以及 Apple HIG `governed_by` Apple，都可以自然表达为：
+简单二元边仍然有价值，例如 Engine `uses` SemVer、Apple HIG `governed_by` Apple。
 
-`subject -> predicate -> object`
-
-但 binary fast path 的成立条件应该是：
+Binary fast path 成立条件：
 
 1. 两个 endpoint 足以定义参与者结构；
 2. predicate 的语义无需 participant roles 才能理解；
-3. qualifier/context 即使存在，也只是限定 assertion，不改变“谁以什么角色参与”；
+3. qualifier/context 即使存在，也只是限定 assertion，不改变参与者角色；
 4. 不需要把多个 relation occurrence 合并成一个复杂事件/组合结构。
 
-因此 V1 不应为了“语义纯洁”把所有边都强制对象化成重型 Association。
+因此 V1 不应把所有边都强制对象化成重型 Association。
 
 ## 4. Promotion to rich association
 
@@ -55,51 +53,98 @@
 - 需要把一组参与关系作为一个组合事实评审；
 - 简单 predicate 会把 composition/profile/amendment/errata 等语义压扁。
 
-BCP 14 是当前最强的 promotion candidate：把 RFC 2119 和 RFC 8174 当作 `versions[]` 会损失“多个独立 publication 共同构成 maintained BCP”的结构。
+BCP 14 是当前最强 promotion candidate：把 RFC 2119 和 RFC 8174 当作 `versions[]` 会损失“多个独立 publication 共同构成 maintained BCP”的结构。
 
 ## 5. Relation occurrence ≠ Assertion ≠ Evidence
 
-真实 V0 数据里已经存在把这些层揉在一起的迹象：
+V0 中已经存在把这些层揉在一起的迹象：relation record 表示关系 occurrence，`sources[]` 给来源，`confidence` 给评估，`notes` / `conditions` 又携带 assertion 限定和 caveat。
 
-- relation record 表示一个关系 occurrence；
-- `sources[]` 给出来源；
-- `confidence` 给出某种评估；
-- `notes` / `conditions` 又携带 assertion 限定与语义 caveat。
-
-P5 暂时确认 P4 的分离方向：
+P5 确认 P4 的语义分离方向：
 
 - **Relation / Association**：参与者和关系结构；
 - **Assertion**：IA 对某个关系/属性事实提出的可评审陈述；
 - **Source**：信息来源载体；
 - **Evidence**：Source 中实际支持或反驳 Assertion 的证据；
-- **Assessment**：对 Assertion/Evidence 的可信度、争议、验证状态等判断；
+- **Assessment**：可信度、争议、验证状态等判断；
 - **Provenance**：该记录/判断如何进入 IA、由谁执行/审查、何时发生。
 
-这些概念可以在低争议 fast path 中压缩存储，但语义上不能等同。
+低争议场景可以 compact serialization，但这些概念不能在语义上等同。
 
-## 6. Concrete problem found: approximate predicates can masquerade as facts
+## 6. Concrete V0 risk: approximate predicates can masquerade as facts
 
-现有 `rfc3339_profiles_iso8601` relation 使用：
+现有 `rfc3339_profiles_iso8601` 使用：
 
 `RFC 3339 --extends--> ISO 8601`
 
-但它自己的 `notes_zh` 已明确写明：RFC 3339 自称 ISO 8601 的 Internet profile，而当前 relation vocabulary 因没有 `profile_of`，才暂时用 `extends` 近似。
+但其 `notes_zh` 已说明：RFC 3339 是 ISO 8601 的 Internet profile，而当前 vocabulary 没有 `profile_of`，所以暂时使用 `extends` 近似。
 
-这是 #132 第一个非常具体的 V0 风险：
+这意味着 Human 能读到 caveat，机器却可能把 `extends` 当成精确 Canonical fact。
 
-> 当 vocabulary 不够精确时，机器只看到 `extends`，却看不到“这是近似表达”的语义等级。
-
-因此 V1 至少需要保证：
+V1 至少需要保证：
 
 - exact assertion 与 approximation/provisional mapping 可区分；
-- vocabulary gap 不应通过一个看似确定的 predicate 被静默隐藏；
-- 后续 vocabulary 增强时可以纠正语义，而不丢失原始来源和审查历史。
+- vocabulary gap 不通过确定 predicate 静默隐藏；
+- vocabulary 增强后可以纠正语义，同时保留原始来源和审查历史。
 
-这不等于现在立即新增生产 `profile_of` relation type；P5 只记录压力并验证 contract。
+这不授权现在新增生产 `profile_of`。
 
-## 7. Lifecycle orthogonality
+## 7. Second pressure point: qualified binary remains binary
 
-第一批场景继续支持“无万能 status”原则。至少需要概念上区分：
+现有 `iso_9241_20_provides_accessibility_approach` 是更强的真实案例：
+
+- source = ISO 9241-20:2021；
+- relation = `provides`；
+- target = `web_accessibility`；
+- `capability_context` 同时包含 `web_accessibility` 与 `human_system_interaction`；
+- `conditions_zh` 明确提醒：标准范围比 Web 更广，当前 target 只是 IA Capability 模型中的近似投影。
+
+这验证了一个重要边界：**上下文复杂，不等于参与者结构复杂。**
+
+该关系仍只有两个 endpoint，因此没有必要仅因为存在 scope/condition 就 promotion 成 rich association。正确做法是保持 binary relation，同时让 Assertion/qualifier 能表达 scope、projection caveat 和 verification state。
+
+## 8. Minimal conflict / evidence-gap representation
+
+为了避免把整个 V1 设计成重型 provenance graph，#132 只验证最小语义结构，不确定最终字段名：
+
+```yaml
+assertion:
+  subject: A
+  predicate: profile_of
+  object: B
+  qualifiers: {...}
+
+evidence:
+  - source: official_source_1
+    stance: supports
+  - source: source_2
+    stance: refutes
+
+assessment:
+  state: disputed
+  verification: reviewed
+```
+
+若只有来源但尚未找到支持该 Assertion 的具体证据，则应能表达：
+
+```yaml
+assessment:
+  state: unverified
+  evidence_gap: true
+```
+
+关键不在字段名，而在以下语义不被压平：
+
+- `unknown`：现实值未知；
+- `not_recorded`：IA 尚未记录；
+- `not_applicable`：该字段/关系不适用；
+- `unverified`：已有 assertion，但尚未完成验证；
+- `disputed`：存在相互冲突的 assertion/evidence。
+
+`confidence: 0.5` 无法替代这些状态。
+
+## 9. Lifecycle orthogonality
+
+至少需要概念上区分：
 
 - IA repository record lifecycle；
 - publisher publication lifecycle；
@@ -108,28 +153,42 @@ P5 暂时确认 P4 的分离方向：
 - verification freshness；
 - assertion dispute/verification state。
 
-例如一个 2013 edition 可以同时：publisher 层面 withdrawn/superseded、IA 层面仍 active/readable、历史研究层面仍 applicable to legacy systems、verification 层面 recently verified。
+一个 2013 edition 可以同时是 publisher 层面 withdrawn/superseded、IA 层面仍 active/readable、legacy applicability 仍成立、verification 层面 recently verified。因此不能用一个万能 `status` 压扁。
 
-这些状态不能被一个 `status: deprecated` 压扁。
+## 10. Serialization implications for P6
 
-## 8. First-checkpoint conclusions
+本 Fit Test 只给出生产实现约束，不冻结字段：
 
-目前没有发现需要推翻 P4.1 的问题，反而出现了一个明确的生产迁移风险：**V0 relation vocabulary 不足时，近似 predicate 可能被机器误读为精确 Canonical fact。**
+1. 保留二元 `subject/predicate/object` fast path；
+2. qualifier/context 应可附着到 assertion/relation occurrence，而不是发明无限 predicate；
+3. rich association 是 promotion path，不是默认形式；
+4. relation vocabulary 必须允许“尚无精确 predicate”的 provisional 状态；
+5. Source/Evidence/Assertion/Assessment/Provenance 语义分层必须可恢复；
+6. conflict preservation 是 Canonical contract requirement；
+7. lifecycle 是多维状态，不是单 `status`；
+8. compact serialization 可以存在，但必须能无损 promotion 到显式结构。
 
-P4.1 下列方向通过第一轮真实压力测试：
+## 11. Unresolved but intentionally deferred
 
-- binary Relation 保留 fast path；
-- rich Association 按复杂度 promotion，而非默认重型化；
-- relation occurrence 与 Assertion / Evidence / Assessment / Provenance 分离；
-- conflict 不使用 last-writer-wins；
-- unknown / provisional / disputed 不能压成 confidence 数字；
-- lifecycle 多维正交。
+以下问题没有必要在 #132 中继续展开：
 
-## 9. Next checkpoint
+- `profile_of`、`amends`、`errata_for` 等最终 relation registry；
+- Assertion 是否全部 first-class object；
+- rich association 的最终 ID / participant serialization；
+- Evidence 引用到 source 的粒度；
+- Assessment vocabulary 的最终枚举；
+- compact form 与 explicit form 的具体 JSON/YAML schema。
 
-下一步只补两类证据，不扩大范围：
+这些属于 P6 serialization / implementation，或在后续真实迁移中按压力决定。
 
-1. 从现有 Relations 中再找一个真正需要 qualifier/context 的案例，确认它是否仍可保持 binary fast path；
-2. 为 conflicting assertion + evidence gap 做最小实验表示，验证 Source/Evidence/Assertion/Assessment 分层是否会过度复杂。
+## 12. Exit conclusion
 
-如果这两类通过，就可以收束 #132，而不是继续无限增加 relation types。
+#132 的代表性测试通过，没有发现需要推翻 P4.1 的证据。
+
+最重要的新发现不是“需要更多 relation type”，而是：
+
+> **V1 必须显式区分“精确事实”和“由于当前模型不足而产生的近似表达”，否则 Canonical machine-readable data 会比 Human-readable notes 更确定。**
+
+同时确认：复杂 qualifier 不自动要求 rich association；conflict/evidence gap 可以用轻量但语义分层的结构表达，不需要把每条普通关系都建成重型 knowledge graph node。
+
+本 Work Item 可以进入 Review；独立审查仍待 Human / independent reviewer，self-check 不等于 independent review。
