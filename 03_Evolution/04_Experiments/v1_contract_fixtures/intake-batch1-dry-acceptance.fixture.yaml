@@ -1,0 +1,89 @@
+fixture_version: p5-v0
+sample_id: p5-intake-batch1-dry-acceptance
+source:
+  legacy_refs: []
+  candidate_refs:
+    - docs/p5-bounded-intake-batch-1-semantic-review-v1-draft.zh-CN.md
+    - 03_Evolution/04_Experiments/v1_contract_fixtures/intake-batch1-envelope.fixture.yaml
+    - 03_Evolution/04_Experiments/v1_contract_fixtures/intake-batch1-semantic-disposition.fixture.yaml
+  official_sources:
+    - https://www.rfc-editor.org/info/rfc9114/
+    - https://fetch.spec.whatwg.org/
+contracts_under_test:
+  - identity
+  - evidence_assertion
+  - lifecycle
+  - human_agent_access
+mapping:
+  class: null
+  notes: "Dry acceptance event shape only; no production Canonical mutation."
+candidate:
+  simulated_acceptance_events:
+    - candidate_id: intake1-rfc9114
+      subject_hint: "RFC 9114 — HTTP/3"
+      mutation_impact: M1
+      structural_validation: pass_at_experiment_shape_level
+      semantic_review:
+        executor_self_review: complete
+        independent_review: pending
+      authority_gate:
+        required: ordinary_intake_policy_dependent
+        status: not_executed
+      acceptance_event:
+        state: simulated_only
+        accepted_canonical_id: null
+        candidate_ref: intake1-rfc9114
+        evidence_basis:
+          - https://www.rfc-editor.org/info/rfc9114/
+        executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
+        github_actor: "ff6962757"
+        reviewer: null
+        accepted_at: null
+      rollback_path:
+        before_acceptance: discard_or_revise_candidate
+        after_future_acceptance: new_correction_candidate_preserving_history
+    - candidate_id: intake1-fetch-living
+      subject_hint: "Fetch Living Standard"
+      mutation_impact: M1
+      structural_validation: pass_at_experiment_shape_level
+      semantic_review:
+        executor_self_review: complete
+        independent_review: pending
+      required_invariant:
+        - upstream_source_revision_must_not_replace_ia_verification_or_record_lifecycle
+      authority_gate:
+        required: ordinary_intake_policy_dependent
+        status: not_executed
+      acceptance_event:
+        state: simulated_only
+        accepted_canonical_id: null
+        candidate_ref: intake1-fetch-living
+        evidence_basis:
+          - https://fetch.spec.whatwg.org/
+        executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
+        github_actor: "ff6962757"
+        reviewer: null
+        accepted_at: null
+      rollback_path:
+        before_acceptance: discard_or_revise_candidate
+        after_future_acceptance: new_correction_candidate_preserving_history
+  held_items:
+    - candidate_id: intake1-iso27001-2022
+      state: deferred
+      reason: semantic_model_boundary_unresolved
+    - candidate_id: intake1-fapi2-security-profile
+      state: deferred
+      reason: profile_relation_minimum_unresolved
+    - candidate_id: intake1-bcp47-rfc5646
+      state: duplicate_existing_overlap
+      reason: existing_canonical_subject
+unknowns:
+  - "Independent reviewer identity and ordinary-intake final authority mapping are not yet fixed for broad intake."
+  - "Production Canonical serialization and generated IA IDs are intentionally absent."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "A simulated acceptance event with null accepted_canonical_id/accepted_at prevents experiment state from masquerading as accepted Canonical state."
+  - "Rollback after future acceptance is modeled as a correction Candidate, not history deletion."
