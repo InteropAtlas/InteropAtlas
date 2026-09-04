@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: **Draft Package / Gate B Verified Baseline**
 Document Created At: 2026-09-02T07:39:56+08:00
-Document Updated At: 2026-09-02T11:07:48+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Backfilled At: 2026-09-02T11:35:52+08:00
 Metadata Provenance: reconstructed_from_git
 Lifecycle Time Provenance: reconstructed_from_git
@@ -27,13 +27,13 @@ Latest Substantive Contribution:
 
 本文件是 InteropAtlas Human Interface Standards Package 的模块入口。
 
-现有 [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) 已经形成一套综合草案；五个 Profile 将其关键规则拆成独立、可审计、可测试的模块：
+现有 [`human-interface-specification.zh-CN.md`](human-interface-specification.zh-CN.md) 已经形成一套综合草案；五个 Profile 将其关键规则拆成独立、可审计、可测试的模块：
 
-1. [`human-interface-information-architecture-profile-v0.1.zh-CN.md`](human-interface-information-architecture-profile-v0.1.zh-CN.md)
-2. [`human-interface-information-presentation-profile-v0.1.zh-CN.md`](human-interface-information-presentation-profile-v0.1.zh-CN.md)
-3. [`human-interface-interaction-profile-v0.1.zh-CN.md`](human-interface-interaction-profile-v0.1.zh-CN.md)
-4. [`human-interface-visual-presentation-profile-v0.1.zh-CN.md`](human-interface-visual-presentation-profile-v0.1.zh-CN.md)
-5. [`human-interface-accessibility-conformance-profile-v0.1.zh-CN.md`](human-interface-accessibility-conformance-profile-v0.1.zh-CN.md)
+1. [`human-interface-information-architecture-profile.zh-CN.md`](human-interface-information-architecture-profile.zh-CN.md)
+2. [`human-interface-information-presentation-profile.zh-CN.md`](human-interface-information-presentation-profile.zh-CN.md)
+3. [`human-interface-interaction-profile.zh-CN.md`](human-interface-interaction-profile.zh-CN.md)
+4. [`human-interface-visual-presentation-profile.zh-CN.md`](human-interface-visual-presentation-profile.zh-CN.md)
+5. [`human-interface-accessibility-conformance-profile.zh-CN.md`](human-interface-accessibility-conformance-profile.zh-CN.md)
 
 这些文件是对已经存在的 `IA-HI-*` Requirements 做**模块化、依据补全和验收方式显式化**，不是重新发明第二套 Human Interface 规则。
 
@@ -168,7 +168,7 @@ Gate B 已通过，但本轮**不自动执行 stable Specification promotion**�
 
 因此当前关系是：
 
-- `human-interface-specification-v0.1.zh-CN.md` 保留作为 umbrella / historical integrated specification；
+- `human-interface-specification.zh-CN.md` 保留作为 umbrella / historical integrated specification；
 - 五个 Profile 是经过 Gate B 实证验证的模块化 Draft Baseline；
 - 两者继续共享同一 `IA-HI-*` Requirement IDs；
 - 新实现 SHOULD 优先从 Package + 五个 Profile 获取模块化合同；
