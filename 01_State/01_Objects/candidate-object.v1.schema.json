@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schema/candidate-object.v1.schema.json",
+  "title": "InteropAtlas Candidate Object V1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "candidate_id",
+    "label",
+    "external_identifiers",
+    "locators",
+    "identity_resolution",
+    "provenance"
+  ],
+  "properties": {
+    "contract_version": {"const": "candidate-object-v1"},
+    "candidate_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+    "label": {"type": "string", "minLength": 1},
+    "publisher": {"type": ["string", "null"]},
+    "family": {"type": ["string", "null"]},
+    "kind": {"type": ["string", "null"]},
+    "external_identifiers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["namespace", "value"],
+        "properties": {
+          "namespace": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
+          "value": {"type": "string", "minLength": 1}
+        }
+      }
+    },
+    "locators": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["url", "role"],
+        "properties": {
+          "url": {"type": "string", "format": "uri"},
+          "role": {
+            "enum": ["official", "current", "dated", "catalog", "historical", "other"]
+          }
+        }
+      }
+    },
+    "identity_resolution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["state", "matched_canonical_ids", "reasons", "merge_authorized"],
+      "properties": {
+        "state": {
+          "enum": ["new", "duplicate", "possible_duplicate", "identity_risk", "deferred"]
+        },
+        "matched_canonical_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1}
+        },
+        "reasons": {
+          "type": "array",
+          "items": {"type": "string", "minLength": 1}
+        },
+        "merge_authorized": {"const": false}
+      }
+    },
+    "unknowns": {
+      "type": "array",
+      "items": {"type": "string", "minLength": 1}
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["initiator", "executor", "reviewer"],
+      "properties": {
+        "initiator": {"type": "string", "minLength": 1},
+        "executor": {"type": "string", "minLength": 1},
+        "reviewer": {"type": ["string", "null"]}
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {"identity_resolution": {"properties": {"state": {"const": "duplicate"}}}}
+      },
+      "then": {
+        "properties": {
+          "identity_resolution": {
+            "properties": {
+              "matched_canonical_ids": {"minItems": 1}
+            }
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {"identity_resolution": {"properties": {"state": {"enum": ["possible_duplicate", "identity_risk", "deferred"]}}}}
+      },
+      "then": {
+        "properties": {
+          "identity_resolution": {
+            "properties": {
+              "reasons": {"minItems": 1}
+            }
+          }
+        }
+      }
+    }
+  ]
+}
