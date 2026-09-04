@@ -1,0 +1,40 @@
+fixture_version: p5-v0
+sample_id: p5-migration-d-bcp14
+source:
+  legacy_refs:
+    - 01_State/01_Objects/bcp14-rfc2119-rfc8174.yaml#bcp14_rfc2119_rfc8174
+  candidate_refs: []
+  official_sources:
+    - https://www.rfc-editor.org/info/bcp14/
+    - https://www.rfc-editor.org/info/rfc2119/
+    - https://www.rfc-editor.org/info/rfc8174/
+contracts_under_test:
+  - identity
+  - relation
+  - migration
+mapping:
+  class: D
+  notes: "Legacy versions[] cannot be reliably interpreted as scalar versions; preserve IA identity and mark publication/composition mapping unresolved. No automatic split/merge."
+candidate:
+  id: bcp14_rfc2119_rfc8174
+  identity:
+    canonical_id: bcp14_rfc2119_rfc8174
+  publication_mapping:
+    state: unresolved
+    legacy_members:
+      - RFC 2119
+      - RFC 8174 update
+    possible_interpretations:
+      - publications_participate_in_bcp
+      - update_relation_between_publications
+      - publication_layer_under_stable_bcp_subject
+unknowns:
+  - "Exact work/publication boundary is unresolved."
+  - "Whether publication artifacts become first-class V1 records is not frozen."
+conflicts: []
+expected:
+  outcome: unresolved_hypothesis
+  diagnostics:
+    - MAPPING_REQUIRES_REVIEW
+notes:
+  - "Successful migration behavior for this sample is preserving unresolved state rather than guessing."
