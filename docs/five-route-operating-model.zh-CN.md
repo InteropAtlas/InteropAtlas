@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Provisional Reference（暂定参考）。用于组织当前建设工作，不代表冻结架构。
 Document Created At: 2026-08-31T19:34:49+08:00
-Document Updated At: 2026-09-01T17:15:05+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
@@ -141,7 +141,7 @@ Agent-specific Lease / Heartbeat / Scheduler 只属于潜在实现机制，不�
 
 相关材料：
 
-- 当前 Profile：[`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md)；
+- 当前 Profile：[`open-collaboration-profile.zh-CN.md`](open-collaboration-profile.zh-CN.md)；
 - Prior Art：[`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](../03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md)；
 - 早期工作笔记：[`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](../03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)；
 - Issue #19。
