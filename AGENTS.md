@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-09-01T12:43:20+08:00
-Document Updated At: 2026-09-04T23:50:00+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -48,18 +48,18 @@ Read in this order:
 
 1. `PROJECT_STATE.md` — current phase, main line, resume point and gates;
 2. `README.md` — concise project entry;
-3. `docs/interopatlas-master-design-v1.0.zh-CN.md` — long-term Master Design and layer model;
-4. `docs/interopatlas-definition-and-scope-v0.2.zh-CN.md` — definition / scope;
+3. `docs/interopatlas-master-design.zh-CN.md` — long-term Master Design and layer model;
+4. `docs/interopatlas-definition-and-scope.zh-CN.md` — definition / scope;
 5. the current Phase Plan / Issue referenced by `PROJECT_STATE.md`;
 6. `CONTRIBUTING.md` — collaboration / review rules;
 7. relevant Architecture / Specification / Research artifacts.
 
 For product philosophy, Personal Knowledge Space, Perspective / Projection / Workspace, Human+Agent shared knowledge or long-term roadmap questions, also read as relevant:
 
-- `docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md`;
-- `docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md`;
-- `docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`;
-- `docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md`.
+- `docs/knowledge-philosophy-and-principles.zh-CN.md`;
+- `docs/public-commons-and-personal-knowledge-space.zh-CN.md`;
+- `docs/knowledge-workspace-design-principles.zh-CN.md`;
+- `docs/interopatlas-long-term-roadmap.zh-CN.md`.
 
 You should then be able to explain:
 - why InteropAtlas exists and whom it serves;
@@ -78,7 +78,7 @@ Read in this order:
 2. the assigned GitHub Issue / Work Item;
 3. latest Handoff / active PR, if any;
 4. `CONTRIBUTING.md`;
-5. `docs/collaboration-task-system-v0.1.zh-CN.md`;
+5. `docs/collaboration-task-system.zh-CN.md`;
 6. the Issue's `Read First / Upstream Contracts`;
 7. relevant Schema / Specification / Research files.
 
@@ -124,7 +124,7 @@ L5  Decision Artifacts + Git history
 
 Use progressive context loading. Move upward for architecture, governance, Knowledge Model, Personalization, Human Interface, migration, security, licensing, major review or project-direction work.
 
-Full contract: `docs/agent-onboarding-context-continuity-profile-v0.1.zh-CN.md`.
+Full contract: `docs/agent-onboarding-context-continuity-profile.zh-CN.md`.
 
 ## 4. Source of truth
 
@@ -160,9 +160,9 @@ Preserve these unless an explicitly authorized change is about changing them:
 - real use should be allowed to expose model gaps before ontology expansion;
 - high-impact governance / destructive migration / project-direction decisions require Human Maintainer authorization.
 
-For repository structure read `docs/repository-structure-profile-v0.1.zh-CN.md`.
-For collaboration read `docs/open-collaboration-profile-v0.1.zh-CN.md`.
-For provenance read `docs/provenance-traceability-profile-v0.1.zh-CN.md` and `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
+For repository structure read `docs/repository-structure-profile.zh-CN.md`.
+For collaboration read `docs/open-collaboration-profile.zh-CN.md`.
+For provenance read `docs/provenance-traceability-profile.zh-CN.md` and `docs/agent-attribution-contribution-identity-profile.zh-CN.md`.
 
 ## 6. Task protocol
 
@@ -208,10 +208,11 @@ Use Claim / Handoff formats in `CONTRIBUTING.md`.
 - Do not update `PROJECT_STATE.md` for every small change; update only project-level phase, main line, resume point, decision gate or major milestone changes.
 - Durable design belongs in a small number of clearly layered documents. Do not recreate design fragmentation through redundant checkpoint files.
 - Historical design documents with independent value should normally be marked historical/superseded rather than deleted merely for tidiness.
+- Living Document paths should remain stable and normally omit content version numbers. Use Git history / tags / releases / provenance for version history; keep version identifiers in filenames only when they are part of a protocol, Schema, standard identity, compatibility contract or historical artifact identity.
 
 ## 10. Language and terminology
 
-InteropAtlas separates **reading language** from **concept identity**. Agents editing documentation MUST follow `docs/language-policy.zh-CN.md` and `docs/terminology-registry-v0.1.md`.
+InteropAtlas separates **reading language** from **concept identity**. Agents editing documentation MUST follow `docs/language-policy.zh-CN.md` and `docs/terminology-registry.md`.
 
 For Chinese documents:
 
@@ -290,7 +291,7 @@ Executor self-check is not independent review.
 
 ## 14. Agent transparency
 
-Record execution mode as `human`, `agent`, or `mixed` and follow `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
+Record execution mode as `human`, `agent`, or `mixed` and follow `docs/agent-attribution-contribution-identity-profile.zh-CN.md`.
 
 Core contribution roles are Initiator / Executor / Reviewer. GitHub Actor is platform provenance and must be recorded separately when it differs from actual Executor. Governance Approver is recorded only when high-impact authorization is required.
 
