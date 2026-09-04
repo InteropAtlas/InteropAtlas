@@ -21,6 +21,27 @@ def _label(record: dict[str, Any]) -> str:
     return str(record.get("name_zh") or record.get("name_en") or record.get("id") or "")
 
 
+def _project_sources(record: dict[str, Any]) -> list[dict[str, Any]]:
+    sources: list[dict[str, Any]] = []
+    for source in record.get("sources") or []:
+        if not isinstance(source, dict):
+            continue
+        url = source.get("url")
+        title = source.get("title") or url or "来源"
+        sources.append(
+            {
+                "title": str(title),
+                "url": str(url) if url else None,
+                "accessed": source.get("accessed"),
+                "recoverable_from": {
+                    "canonical_object_id": str(record.get("id")),
+                    "canonical_field": "sources",
+                },
+            }
+        )
+    return sources
+
+
 def select_by_capability(capability_id: str, index: dict[str, dict]) -> dict[str, Any]:
     """Select implementation candidates by explicit Canonical capability membership."""
 
@@ -43,6 +64,35 @@ def select_by_capability(capability_id: str, index: dict[str, dict]) -> dict[str
     }
 
 
+def project_evidence(record: dict[str, Any]) -> dict[str, Any]:
+    """Project source evidence separately from IA-authored notes/assessment."""
+
+    sources = _project_sources(record)
+    notes = [str(note) for note in (record.get("notes_zh") or [])]
+    return {
+        "projection_contract": "workspace-evidence-v1",
+        "object_id": str(record.get("id")),
+        "evidence_state": RECORDED if sources else NOT_RECORDED,
+        "sources": sources,
+        "assessment": {
+            "state": RECORDED if notes else NOT_RECORDED,
+            "notes": notes,
+            "authority": "interopatlas_authored",
+            "is_external_evidence": False,
+            "recoverable_from": {
+                "canonical_object_id": str(record.get("id")),
+                "canonical_field": "notes_zh",
+            },
+        },
+        "semantic_boundaries": {
+            "missing_evidence": NOT_RECORDED,
+            "source_is_assessment": False,
+            "assessment_is_external_authority": False,
+            "projection_is_canonical_write": False,
+        },
+    }
+
+
 def project_field(record: dict[str, Any], field: str) -> dict[str, Any]:
     """Project one field while preserving absence as not-recorded, never false/none."""
 
@@ -53,24 +103,13 @@ def project_field(record: dict[str, Any], field: str) -> dict[str, Any]:
         state = RECORDED
         value = record.get(field)
 
-    evidence = []
-    for source in record.get("sources") or []:
-        if isinstance(source, dict) and source.get("url"):
-            evidence.append(
-                {
-                    "url": str(source["url"]),
-                    "title": str(source.get("title") or source["url"]),
-                    "accessed": source.get("accessed"),
-                }
-            )
-
     return {
         "projection_contract": "workspace-projection-v1",
         "object_id": str(record.get("id")),
         "field": field,
         "state": state,
         "value": value,
-        "evidence": evidence,
+        "evidence": _project_sources(record),
         "recoverable_from": {
             "canonical_object_id": str(record.get("id")),
             "canonical_field": field,
