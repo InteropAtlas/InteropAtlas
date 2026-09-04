@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T11:13:00+08:00
+Document Updated At: 2026-09-04T11:25:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T11:13:00+08:00
+> Verified At: 2026-09-04T11:25:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -90,41 +90,41 @@ Critical path:
 #137 Experiment Harness / V1-shaped fixtures          ✅ first usable harness / Review
 → #130 Identity / Version / Family-Kind Fit Test      ✅ fit test complete / Review
 → #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test ✅ fit test complete / Review
-→ #133 Migration + Workspace + Human/Agent Write-back E2E ← NOW / In Progress
-→ #136 Candidate→Canonical bounded Intake Stress Test
+→ #133 Migration + Workspace + Human/Agent Write-back E2E ✅ representative E2E complete / Review
+→ #136 Candidate→Canonical bounded Intake Stress Test ← NOW / In Progress
 → #159 Gate Evidence Synthesis
 → #134 Contribution-Ready Owner/Governance Gate
 ```
 
-#130 confirmed polymorphic publication/version behavior and stable IA identity boundaries. #132 confirmed binary relation fast path + rich-association promotion, Source/Evidence/Assertion/Assessment/Provenance separation, conflict preservation, and multidimensional lifecycle without architecture reversal.
+#130 confirmed polymorphic publication/version behavior and stable IA identity boundaries. #132 confirmed binary relation fast path + rich-association promotion, Source/Evidence/Assertion/Assessment/Provenance separation, conflict preservation, and multidimensional lifecycle. #133 then ran A/B/C/D Legacy migration dry-runs through Compare/Evidence/Timeline/Graph projections and a Workspace correction→Candidate Patch path without opening a second write channel.
 
-A concrete #132 migration risk is now explicit: V0 approximate predicates can appear more certain to machine consumers than their Human-readable caveats. Example: `rfc3339_profiles_iso8601` uses `extends` as a temporary approximation for a more accurate profile relation.
+The #133 write-boundary result is explicit: generated interpretation remains derived state; only an explicit Candidate Patch enters Intake. No production Canonical mutation occurred.
 
 ### Resume Here
 
-**Primary next small checkpoint: #133 — select a deliberately small 3–5 record Legacy cohort that collectively covers migration mapping classes A lossless, B normalization, C semantic promotion, and D ambiguous. Produce a dry-run mapping table + semantic loss/ambiguity report only. Do not mutate production Canonical data and do not build Workspace UI yet.**
+**Primary next small checkpoint: #136 — select exactly 5 existing Candidate Pool / discovery candidates for the first bounded intake batch. Maximize publication-model diversity rather than convenience: include a numbered immutable publication, an editioned standard, a living/continuously maintained source, a profile/framework-like item, and an identity/dedup-ambiguous case if available. Produce only the source + dedup preflight matrix first. Do not mutate production Canonical data yet and do not create individual Issues.**
 
-#133 pipeline after that first checkpoint:
+#136 target loop:
 
 ```text
-Legacy cohort
-→ dry-run V1-shaped transformation
-→ structural/relation/graph checks
-→ semantic diff + loss/ambiguity report
-→ Workspace projections
-→ Human/Agent inspect
-→ correction Candidate Patch + Evidence
-→ review/authority path
+Candidate
+→ official source / evidence
+→ dedup / identity check
+→ V1-shaped proposal
+→ machine validation
+→ semantic review
+→ accepted / rejected / deferred decision
+→ provenance
 ```
 
-The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137 remains Review.
+The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137/#130/#132/#133 remain Review pending independent review where required.
 
-In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
+In parallel, Candidate discovery can continue through #125/#131/#140–#165 and the Fast Lane #192 without creating one Issue per candidate.
 
 ## 7. When standard intake can scale
 
 - **Now / P5:** Candidate discovery, official-source confirmation and dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical.
-- **P5:** bounded Canonical intake begins with #136 after representative identity/contract findings. Start 5–10, then enlarge only when repeatable.
+- **Now / #136:** bounded intake stress test begins with 5 candidates; this is an experiment, not broad intake authorization.
 - **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake begins in early P6 through #145 → #146, with #167 parallelism pilot.
 - M2/M3 identity/destructive/governance/stable changes retain higher gates even after broad ordinary intake opens.
 
@@ -133,8 +133,8 @@ In parallel, Ready fast-lane work can be claimed from **#192**, especially Candi
 Fast Lane index: **#192**.
 
 Allowed before Contribution-Ready Gate:
-- Candidate discovery / source confirmation / dedup;
-- evidence-gap discovery;
+- Candidate discovery / source confirmation / dedup；
+- evidence-gap discovery；
 - relation/lifecycle/identity/migration inventories；
 - Workspace current-asset audit；
 - machine/graph baseline；
@@ -190,12 +190,13 @@ AGENTS.md
 → PROJECT_STATE.md
 → docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
 → #128 / #193
-→ #133 (primary next)
-→ docs/p5-relation-evidence-lifecycle-fit-test-v1-draft.zh-CN.md
-→ docs/canonical-migration-architecture-v1-draft.zh-CN.md
+→ #136 (primary next)
+→ #125 / #131 candidate pool
+→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
+→ docs/p5-migration-workspace-writeback-e2e-fit-test-v1-draft.zh-CN.md
 → #192 (parallel Ready work)
 ```
 
 ## 13. Staleness check
 
-新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #133 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #136 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
