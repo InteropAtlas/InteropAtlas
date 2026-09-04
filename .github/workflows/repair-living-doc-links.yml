@@ -1,0 +1,77 @@
+name: One-time Living Document Link Repair
+
+on:
+  push:
+    paths:
+      - '.github/workflows/repair-living-doc-links.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Repair renamed Living Document links
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          replacements = {
+              'open-collaboration-profile-v0.1.zh-CN.md': 'open-collaboration-profile.zh-CN.md',
+              'human-interface-profiles-v0.1.zh-CN.md': 'human-interface-profiles.zh-CN.md',
+              'human-interface-minimal-compare-contract-v0.1.zh-CN.md': 'human-interface-minimal-compare-contract.zh-CN.md',
+              'human-interface-specification-v0.1.zh-CN.md': 'human-interface-specification.zh-CN.md',
+              'human-interface-information-architecture-profile-v0.1.zh-CN.md': 'human-interface-information-architecture-profile.zh-CN.md',
+              'human-interface-information-presentation-profile-v0.1.zh-CN.md': 'human-interface-information-presentation-profile.zh-CN.md',
+              'human-interface-interaction-profile-v0.1.zh-CN.md': 'human-interface-interaction-profile.zh-CN.md',
+              'human-interface-visual-presentation-profile-v0.1.zh-CN.md': 'human-interface-visual-presentation-profile.zh-CN.md',
+              'human-interface-accessibility-conformance-profile-v0.1.zh-CN.md': 'human-interface-accessibility-conformance-profile.zh-CN.md',
+              'interopatlas-definition-and-scope-v0.2.zh-CN.md': 'interopatlas-definition-and-scope.zh-CN.md',
+              'interopatlas-definition-and-scope-v0.2.md': 'interopatlas-definition-and-scope.md',
+              'knowledge-philosophy-and-principles-v1.0.zh-CN.md': 'knowledge-philosophy-and-principles.zh-CN.md',
+              'knowledge-philosophy-and-principles-v1.0.md': 'knowledge-philosophy-and-principles.md',
+              'interopatlas-master-design-v1.0.zh-CN.md': 'interopatlas-master-design.zh-CN.md',
+              'interopatlas-master-design-v1.0.md': 'interopatlas-master-design.md',
+              'public-commons-and-personal-knowledge-space-v0.1.zh-CN.md': 'public-commons-and-personal-knowledge-space.zh-CN.md',
+              'knowledge-workspace-design-principles-v1.0.zh-CN.md': 'knowledge-workspace-design-principles.zh-CN.md',
+              'interopatlas-long-term-roadmap-v1.0.zh-CN.md': 'interopatlas-long-term-roadmap.zh-CN.md',
+              'terminology-registry-v0.1.md': 'terminology-registry.md',
+          }
+
+          targets = [Path('README.md'), Path('README.en.md'), Path('AGENTS.md'), Path('PROJECT_STATE.md')]
+          targets += list(Path('docs').glob('*.md'))
+
+          changed = []
+          for path in targets:
+              if not path.exists():
+                  continue
+              text = path.read_text(encoding='utf-8')
+              new = text
+              for old, new_name in replacements.items():
+                  new = new.replace(old, new_name)
+              if new != text:
+                  path.write_text(new, encoding='utf-8')
+                  changed.append(str(path))
+
+          print('Changed files:')
+          for path in changed:
+              print(path)
+          PY
+      - name: Remove one-time workflow
+        run: rm .github/workflows/repair-living-doc-links.yml
+      - name: Commit repair
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "docs: repair links after living-doc rename"
+            git push
+          fi
