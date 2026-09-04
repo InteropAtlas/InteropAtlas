@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T10:38:00+08:00
+Document Updated At: 2026-09-04T11:13:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T10:38:00+08:00
+> Verified At: 2026-09-04T11:13:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -89,24 +89,35 @@ Critical path:
 ```text
 #137 Experiment Harness / V1-shaped fixtures          ✅ first usable harness / Review
 → #130 Identity / Version / Family-Kind Fit Test      ✅ fit test complete / Review
-→ #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test ← NOW / In Progress
-→ #133 Migration + Workspace + Human/Agent Write-back E2E
+→ #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test ✅ fit test complete / Review
+→ #133 Migration + Workspace + Human/Agent Write-back E2E ← NOW / In Progress
 → #136 Candidate→Canonical bounded Intake Stress Test
 → #159 Gate Evidence Synthesis
 → #134 Contribution-Ready Owner/Governance Gate
 ```
 
-#130 now has six fresh-source publication models plus a 12-object existing-V0 ambiguity inventory (#186 / Review). The identity architecture survived without reversal: IA identity remains independent of URL/name/path; version/publication behavior is polymorphic; exact serialization remains provisional.
+#130 confirmed polymorphic publication/version behavior and stable IA identity boundaries. #132 confirmed binary relation fast path + rich-association promotion, Source/Evidence/Assertion/Assessment/Provenance separation, conflict preservation, and multidimensional lifecycle without architecture reversal.
+
+A concrete #132 migration risk is now explicit: V0 approximate predicates can appear more certain to machine consumers than their Human-readable caveats. Example: `rfc3339_profiles_iso8601` uses `extends` as a temporary approximation for a more accurate profile relation.
 
 ### Resume Here
 
-**Primary next small checkpoint: #132 — complete the deliberately small Relation + Evidence/Assertion/Conflict + Lifecycle scenario matrix and test the two remaining pressure points: qualified/contextual binary relations, and minimal conflicting-assertion/evidence-gap representation.**
+**Primary next small checkpoint: #133 — select a deliberately small 3–5 record Legacy cohort that collectively covers migration mapping classes A lossless, B normalization, C semantic promotion, and D ambiguous. Produce a dry-run mapping table + semantic loss/ambiguity report only. Do not mutate production Canonical data and do not build Workspace UI yet.**
 
-First #132 artifact: `docs/p5-relation-evidence-lifecycle-fit-test-v1-draft.zh-CN.md`.
+#133 pipeline after that first checkpoint:
 
-First concrete risk found: current V0 relation `rfc3339_profiles_iso8601` uses `extends` only because the vocabulary lacks the more accurate `profile_of`; its notes preserve the caveat, but machine consumers can still mistake the approximate predicate for an exact Canonical fact. P5 records this as semantic pressure; it does not yet add a production relation type.
+```text
+Legacy cohort
+→ dry-run V1-shaped transformation
+→ structural/relation/graph checks
+→ semantic diff + loss/ambiguity report
+→ Workspace projections
+→ Human/Agent inspect
+→ correction Candidate Patch + Evidence
+→ review/authority path
+```
 
-The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137 remains Review. No harness expansion unless #132 exposes a concrete validation need.
+The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137 remains Review.
 
 In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
 
@@ -124,12 +135,12 @@ Fast Lane index: **#192**.
 Allowed before Contribution-Ready Gate:
 - Candidate discovery / source confirmation / dedup;
 - evidence-gap discovery;
-- relation/lifecycle/identity/migration inventories;
-- Workspace current-asset audit;
-- machine/graph baseline;
-- experiment fixtures;
-- continuity/task-readability validation;
-- bounded non-destructive research.
+- relation/lifecycle/identity/migration inventories；
+- Workspace current-asset audit；
+- machine/graph baseline；
+- experiment fixtures；
+- continuity/task-readability validation；
+- bounded non-destructive research。
 
 Not allowed through fast lane: mass Canonical write, identity merge/split, production Schema migration, stable governance promotion, destructive deletion, unrestricted Agent acceptance.
 
@@ -151,13 +162,13 @@ Scale is feedback-controlled: parallel pilot → first ~100 review → 100→1,0
 
 ## 10. Legacy / parallel work
 
-- #122 — long-term Owner intent anchor: retain;
-- #125 — Candidate Pool historical entry / accelerator: retain and activate in parallel;
-- #135 / #195 — legacy backlog reclassification / cleanup proposal;
-- PR #26 / #24 — Open Collaboration v0.2: retain pending P4.5 reconciliation;
-- PR #30 / #15 / #23 — retain as P5 non-normative Fit Test evidence;
-- #86 / #138 — Agent continuity validation;
-- F4 quality line remains parallel;
+- #122 — long-term Owner intent anchor: retain；
+- #125 — Candidate Pool historical entry / accelerator: retain and activate in parallel；
+- #135 / #195 — legacy backlog reclassification / cleanup proposal；
+- PR #26 / #24 — Open Collaboration v0.2: retain pending P4.5 reconciliation；
+- PR #30 / #15 / #23 — retain as P5 non-normative Fit Test evidence；
+- #86 / #138 — Agent continuity validation；
+- F4 quality line remains parallel；
 - `docs/task-authority-governance-v0.1-draft.zh-CN.md` remains governance input, not stable policy。
 
 Do not mass-close old Issues merely because the roadmap reset exists.
@@ -165,12 +176,12 @@ Do not mass-close old Issues merely because the roadmap reset exists.
 ## 11. Owner gates
 
 Ordinary P5 experiments/discovery proceed autonomously. Explicit Owner/Governance decision is required for:
-- #134 broad Contribution-Ready activation;
-- identity merge/split or destructive migration where authority requires;
-- material security/permission governance changes;
-- stable specification/governance promotion;
-- V1-only writer / Legacy retirement gates;
-- material project definition/scope changes.
+- #134 broad Contribution-Ready activation；
+- identity merge/split or destructive migration where authority requires；
+- material security/permission governance changes；
+- stable specification/governance promotion；
+- V1-only writer / Legacy retirement gates；
+- material project definition/scope changes。
 
 ## 12. Where to read next
 
@@ -179,11 +190,12 @@ AGENTS.md
 → PROJECT_STATE.md
 → docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
 → #128 / #193
-→ #132 (primary next)
+→ #133 (primary next)
 → docs/p5-relation-evidence-lifecycle-fit-test-v1-draft.zh-CN.md
+→ docs/canonical-migration-architecture-v1-draft.zh-CN.md
 → #192 (parallel Ready work)
 ```
 
 ## 13. Staleness check
 
-新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #132 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #133 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
