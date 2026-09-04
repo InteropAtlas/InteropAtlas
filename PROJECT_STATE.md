@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T09:11:00+08:00
+Document Updated At: 2026-09-04T09:40:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,9 +17,9 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T09:11:00+08:00
+> Verified At: 2026-09-04T09:40:00+08:00
 >
-> Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Phase Plan。
+> Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
 ## 1. Project in one sentence
 
@@ -36,8 +36,8 @@ InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperabil
 - Stable Identity 不能依赖文件路径或显示名称；
 - Canonical State ≠ Generated View；
 - Search / Compare / Map / Timeline / Wiki 等是 View / Projection / Workspace，不是新的 Canonical Fact 来源；
-- Readable Projection ≠ Updatable Projection；有损 / 筛选 / 聚合 View 默认不能直接反写 Canonical；
-- Agent Output ≠ Canonical Fact；Agent 默认产生 Candidate Assertion / Proposal / Patch / Evidence；
+- Readable Projection ≠ Updatable Projection；
+- Agent Output ≠ Canonical Fact；
 - Public Knowledge Lifecycle ≠ Personal Attention / Memory Metabolism；
 - Human / Agent 共用同一个公共知识底座，但不等于共享无边界写权限；
 - Identity ≠ Capability ≠ Task Authority ≠ Review Authority ≠ Platform Permission；
@@ -49,113 +49,135 @@ InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperabil
 Gate A — Repository Structure             ✅ PASS
 Gate B — Human Interface                  ✅ PASS
 Gate C — Open Collaboration v0.1 Pilot    ✅ PASS
-Knowledge Model / Machine Contract         ✅ representative foundation complete
+Knowledge Model / Machine Contract         ✅ representative V0 foundation
 F4 — Curation / Evidence / Correctness     🟡 parallel quality line
 ```
 
 此前 Reference Implementation 的 Human Route、Search、Compare、Evidence / Assessment presentation、Local Map 等代表性成果保留为已验证资产，但不自动沿旧页面功能路线扩张。
 
-## 4. P1–P3 settled direction
-
-P1 设计原则已接受；P2 prior-art / standards research 没有发现需要推翻 P1 的重大错误；P3 Current-State Audit 已在 **Issue #126（Completed）** 收口。
-
-P3 的正式结论：
-
-> **不推倒重写整个 InteropAtlas，也不继续在 V0 上无限打补丁。保留知识资产、仓库历史、协作体系、迁移基础设施和 Runtime 骨架；P4 建立干净的 Canonical Contract V1 与新的 Workspace / Product Architecture，再逐步迁移。**
-
-完整审计与 Keep / Refactor / Migrate / Rewrite / Retire Matrix：**Issue #126 final synthesis**。
-
-## 5. Current phase and resume point
+## 4. P1–P4 status
 
 ```text
 P1  Design Principles                    ✅ Completed / accepted
-        ↓
 P2  Prior-art / standards research       ✅ Completed / #124 closed
-        ↓
 P3  Current-state audit                  ✅ Completed / #126 closed
-        ↓
-P4  Architecture / Roadmap reset         ← NOW / #127
-        ↓
-P5  Real-data experiments / intake stress test
-        ↓
-P6  Implementation + continuous intake
+P4  Architecture / Roadmap reset         ✅ Draft architecture completed / #127
+P5  Real-data experiments / intake stress test ← NOW / #128
+P6  Implementation + continuous intake   Future / #129
 ```
 
-### NOW: P4 — Architecture / Roadmap Reset
+P3 结论仍有效：不推倒重写整个 InteropAtlas，也不继续在 V0 上无限打补丁；保留知识资产、仓库历史、协作体系、迁移基础设施和 Runtime 骨架，建立干净 V1 contracts 后逐步验证与迁移。
 
-Primary Work Item: **Issue #127 — P4 Architecture / Roadmap Reset: Canonical Contract V1 → Intake → Migration → Workspace**。
+## 5. P4 outputs
 
-### P4 design order / status
+1. `docs/canonical-contract-v1-architecture-draft.zh-CN.md` ✅
+2. `docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md` ✅
+3. `docs/canonical-migration-architecture-v1-draft.zh-CN.md` ✅
+4. `docs/selection-projection-workspace-architecture-v1-draft.zh-CN.md` ✅
+5. `docs/human-agent-access-architecture-v1-draft.zh-CN.md` ✅
+6. `docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md` ✅
 
-1. **Canonical Contract V1** — `docs/canonical-contract-v1-architecture-draft.zh-CN.md` ✅ draft
-2. **Canonical Write / Intake Contract** — `docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md` ✅ draft
-3. **Migration Architecture** — `docs/canonical-migration-architecture-v1-draft.zh-CN.md` ✅ draft
-4. **Selection / Projection / Workspace Architecture** — `docs/selection-projection-workspace-architecture-v1-draft.zh-CN.md` ✅ draft
-5. **Human + Agent Access Architecture** — `docs/human-agent-access-architecture-v1-draft.zh-CN.md` ✅ draft
-6. **Roadmap Reset** ← NEXT
+These remain architecture/roadmap drafts. P4 completion does not stable-promote them or authorize destructive migration / broad Canonical writes.
+
+## 6. NOW — P5 Real-data Experiments / Intake Stress Test
+
+Primary umbrella: **#128**。
+
+Mainline index: **#193**。
+
+Critical path:
+
+```text
+#137 Experiment Harness / V1-shaped fixtures
+→ #130 Identity / Version / Family-Kind Fit Test
+→ #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test
+→ #133 Migration + Workspace + Human/Agent Write-back E2E
+→ #136 Candidate→Canonical bounded Intake Stress Test
+→ #159 Gate Evidence Synthesis
+→ #134 Contribution-Ready Owner/Governance Gate
+```
+
+Supporting experiments (#154–#158, #153) are triggered as needed; they are not all serial blockers.
 
 ### Resume Here
 
-Continue **Issue #127 / P4.6 Roadmap Reset**.
+**Primary next small checkpoint: #137 — P5 Batch 0: V1 Experiment Harness / Fixtures（非生产 Schema）.**
 
-P4.5 settled direction:
-- Human / Agent share one Canonical knowledge world, but shared knowledge does not imply shared authority;
-- access separates Discover/Read, Query/Traverse, Compose/Analyze, Candidate Write, Review/Assess, Canonical Accept/Govern;
-- Identity, Capability, Task Authority, Review Authority and Platform Permission are orthogonal;
-- GitHub Actor / credential is not actual Executor identity or Owner authority;
-- capability is domain-scoped rather than a single contributor level;
-- T0–T3 Task Authority and M0–M3 Mutation Impact compose without replacing each other;
-- Agent can research/query/generate candidates/validate within authorization, but cannot self-approve high-impact identity/destructive/stable-governance mutations;
-- Human contribution also follows evidence/validation/review requirements;
-- self-check is not independent review; CI/Validator supplies review evidence but is not automatically a Reviewer;
-- delegation should be bounded, explicit and revocable;
-- public Human/Agent participation can expand first through Candidate/Evidence/bounded ordinary Patch paths without opening Schema/Governance authority.
+In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
 
-Next small checkpoint: convert P4.1–P4.5 into an executable P5 real-data experiment/intake stress-test plan and P6 implementation order; reconcile existing parallel Issues/PRs into keep/resequence/migrate/pause/retire buckets without automatically absorbing or closing them.
+## 7. When standard intake can scale
 
-## 6. P4 guardrails
+- **Now / P5:** Candidate discovery, official-source confirmation and dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical.
+- **P5:** bounded Canonical intake begins with #136 after representative identity/contract findings. Start 5–10, then enlarge only when repeatable.
+- **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake begins in early P6 through #145 → #146, with #167 parallelism pilot.
+- M2/M3 identity/destructive/governance/stable changes retain higher gates even after broad ordinary intake opens.
 
-P4 不应自动执行 destructive Schema migration、全量 Canonical rewrite、全量 Relation rich-model migration、frontend rewrite、opaque personalization、stable spec promotion、大规模删除或 complex permission automation。
+## 8. P5 parallel work
 
-## 7. Recent stable milestones
+Fast Lane index: **#192**.
 
-- #89–#93 lifecycle / provenance historical backfill ✅；
-- PR #123 Knowledge Workspace Design Principles v1.0 merged / Human Maintainer accepted ✅；
-- Research Governance v0.1 established ✅；
-- #124 P2 Prior-Art / Standards Research completed ✅；
-- Standards Candidate Pool v0.1 established ✅；
-- #126 P3 Current-State Audit completed ✅；
-- #127 P4 Primary Work Item established ✅；
-- P4.1 Canonical Contract V1 architecture draft ✅；
-- P4.2 Canonical Write / Intake architecture draft ✅；
-- P4.3 Canonical Migration architecture draft ✅；
-- P4.4 Selection / Projection / Workspace architecture draft ✅；
-- P4.5 Human + Agent Access architecture draft ✅。
+Allowed before Contribution-Ready Gate:
+- Candidate discovery / source confirmation / dedup;
+- evidence-gap discovery;
+- relation/lifecycle/identity/migration inventories;
+- Workspace current-asset audit;
+- machine/graph baseline;
+- experiment fixtures;
+- continuity/task-readability validation;
+- bounded non-destructive research.
 
-## 8. Known open / parallel work
+Not allowed through fast lane: mass Canonical write, identity merge/split, production Schema migration, stable governance promotion, destructive deletion, unrestricted Agent acceptance.
 
-Do not automatically absorb/close before P4.6 reconciliation:
-- #122 — Knowledge Workspace / Perspective long-term anchor；
-- #125 — Candidate Pool historical entry / acceleration work item；
-- PR #26 — Open Collaboration v0.2；
-- PR #30 — Fit Test Batch 1；
-- Issue #15 — wider Schema / Validator / migration debt；
-- Issue #86 — Agent Continuity takeover validation；
-- F4 Machine / Curation / Evidence quality line；
-- `docs/task-authority-governance-v0.1-draft.zh-CN.md` — governance input, not yet stable policy。
+## 9. P6 preview
 
-## 9. Where to read next
+P6 umbrella: **#129**; index: **#194**.
+
+First production chain after Gate:
 
 ```text
-Issue #127
-→ docs/canonical-contract-v1-architecture-draft.zh-CN.md
-→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
-→ docs/canonical-migration-architecture-v1-draft.zh-CN.md
-→ docs/selection-projection-workspace-architecture-v1-draft.zh-CN.md
-→ docs/human-agent-access-architecture-v1-draft.zh-CN.md
-→ P4.6 Roadmap Reset
+#145 V1 Serialization / Validator minimal production loop
+├→ #146 Continuous Intake
+├→ #147 Migration Cohort 1
+├→ #148 Compare + Evidence Workspace
+└→ #149 Agent structured read/query + Candidate Write
 ```
 
-## 10. Staleness check
+Scale is feedback-controlled: parallel pilot → first ~100 review → 100→1,000 gate → long-running operating model. Legacy retirement has separate gates.
 
-新 Agent 在继续前必须检查 `Verified At` 后 main / #127 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据旧 Reference Implementation Phase 恢复页面功能扩张路线。
+## 10. Legacy / parallel work
+
+- #122 — long-term Owner intent anchor: retain;
+- #125 — Candidate Pool historical entry / accelerator: retain and activate in parallel;
+- #135 / #195 — legacy backlog reclassification / cleanup proposal;
+- PR #26 / #24 — Open Collaboration v0.2: retain pending P4.5 reconciliation;
+- PR #30 / #15 / #23 — retain as P5 non-normative Fit Test evidence;
+- #86 / #138 — Agent continuity validation;
+- F4 quality line remains parallel;
+- `docs/task-authority-governance-v0.1-draft.zh-CN.md` remains governance input, not stable policy.
+
+Do not mass-close old Issues merely because the roadmap reset exists.
+
+## 11. Owner gates
+
+Ordinary P5 experiments/discovery proceed autonomously. Explicit Owner/Governance decision is required for:
+- #134 broad Contribution-Ready activation;
+- identity merge/split or destructive migration where authority requires;
+- material security/permission governance changes;
+- stable specification/governance promotion;
+- V1-only writer / Legacy retirement gates;
+- material project definition/scope changes.
+
+## 12. Where to read next
+
+```text
+AGENTS.md
+→ PROJECT_STATE.md
+→ docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
+→ #128 / #193
+→ #137 (primary next)
+→ #192 (parallel Ready work)
+```
+
+## 13. Staleness check
+
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #127 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据旧 `knowledge-workspace-phase-plan-v1.0` 的 NOW:P2 恢复页面功能扩张路线。
