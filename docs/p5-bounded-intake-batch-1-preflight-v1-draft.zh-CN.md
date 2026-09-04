@@ -105,4 +105,11 @@ The selected batch is suitable for continuing #136:
 - no identity merge/split is authorized;
 - no production Canonical file has been changed.
 
-Next checkpoint should create one common Candidate intake envelope for these five items, run the four proceed cases through source/evidence + dedup + V1-shaped proposal, and run the BCP 47 control through the duplicate disposition path. The output should still remain Candidate/experiment state until semantic review and any required authority gate.
+Follow-on semantic review: `docs/p5-bounded-intake-batch-1-semantic-review-v1-draft.zh-CN.md`.
+
+Final Batch 1 experiment outcomes:
+- RFC 9114 → proceed ordinary intake；
+- Fetch Living Standard → proceed with lifecycle/freshness boundary；
+- ISO/IEC 27001:2022 → defer；
+- FAPI 2.0 Security Profile → defer；
+- BCP 47 / RFC 5646 → duplicate/existing overlap。
