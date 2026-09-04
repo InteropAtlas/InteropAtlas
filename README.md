@@ -5,7 +5,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:49:18+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T03:55:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -75,23 +75,22 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 
 ## 产品哲学
 
-InteropAtlas 的核心产品哲学可以压缩为一个相互依存的命题：
+InteropAtlas 的产品哲学可以压缩成一组彼此对应的静态与动态命题：
 
 > **知识属于公共共同体。视角属于个人。**  
 > *Knowledge belongs to the commons. Perspective belongs to the individual.*
+>
+> **知识流动，创造不息。**  
+> *Knowledge travels. Creation continues.*
 
-公共知识世界应尽可能开放、可发现、可验证、可连接和可复用；但每个人面对这个共同世界时，都可以根据自己的目标、背景、任务和认知方式形成自己的视角。
+前一句描述知识世界的结构；后一句描述它的运动。公共知识通过各种方式跨越边界，进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。
 
-这套哲学的动态展开，是一个持续的**知识流动模型（Knowledge Flow Model）**：
-
-> **发现（Discover）→ 连接（Connect）→ 传递（Transmit）→ 转化（Transform）→ 复用（Reuse）→ 创造（Create）→ 公共共同体（Commons）↺**
-
-发现与连接帮助形成共同知识世界；传递与转化让知识跨越主体、系统、时间、媒介与认知边界；复用与创造让已有知识进入具体任务并产生新的成果。新的知识与创造又可以重新进入公共共同体，成为下一轮流动的基础。
+在这个更底层的模型中，**流动（Flow）**与**创造（Create）**是两个基本运动。此前的发现（Discover）、连接（Connect）、传递（Transmit）、转化（Transform）、复用（Reuse）不再被视为五个必须依次发生的一级阶段，而是知识跨越不同边界的典型机制：跨越可见性、知识孤岛、主体与系统、媒介与认知形式、以及使用情境。
 
 > **保存知识不是终点。知识最终应该帮助新的创造发生。**  
 > *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
 
-产品哲学与具体建设原则被明确分层。个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则，而不是与核心哲学并列的口号。
+个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则，而不是与核心哲学并列的口号。
 
 完整结构见 [`知识哲学与原则`](docs/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/interopatlas-master-design.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
 
