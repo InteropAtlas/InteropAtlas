@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T13:50:00+08:00
+Document Updated At: 2026-09-04T14:12:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T13:50:00+08:00
+> Verified At: 2026-09-04T14:12:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -85,8 +85,9 @@ Added / wired:
 - `01_State/03_Candidates/README.md`
 - `02_Runtime/01_Engine/candidate_identity_validator.py`
 - `02_Runtime/01_Engine/legacy_identity_adapter.py`
+- `02_Runtime/01_Engine/test_candidate_identity_validator.py`
 - `03_Evolution/04_Experiments/v1_contract_fixtures/candidate-identity-resolution-cases.fixture.yaml`
-- main `machine_review.py` now scans production Candidate carrier separately from Canonical objects and reports Candidate review states.
+- main `machine_review.py` scans production Candidate carrier separately from Canonical objects and now emits deterministic Candidate intake routes.
 
 The Candidate contract distinguishes:
 
@@ -99,6 +100,23 @@ deferred
 ```
 
 and hard-codes `merge_authorized: false` for ordinary Candidate validation.
+
+Deterministic intake routes now distinguish:
+
+```text
+review_required
+        = unique/new Candidate may proceed to independent semantic review;
+duplicate_existing
+        = known duplicate routes to the existing Canonical subject, without merge;
+identity_review_required
+        = possible duplicate / identity risk must stop for identity review;
+deferred
+        = unresolved semantic/identity case remains deferred;
+blocked_invalid_identity_state
+        = declared identity state contradicts deterministic evidence.
+```
+
+**No route means Canonical acceptance.** The strongest ordinary machine result is `review_required`.
 
 Safety behavior:
 
@@ -116,11 +134,18 @@ Existing V0 Canonical records often do not expose structured `external_identifie
 
 BCP 47 / RFC 5646 is the first known duplicate control: candidate `rfc:5646` can be matched to existing `bcp47_rfc5646` without guessing from title similarity.
 
-### Validation caveat
+### Validation evidence and caveat
 
-The current execution container still cannot resolve `github.com`, so a fresh full checkout Machine Review could not be executed after wiring. No repository-level PASS is claimed. GitHub also reported no workflow run for the direct-main commit. The code/fixtures are landed but still require an executable checkout/CI validation before #145 can move to Review.
+An isolated executable check of the Slice 0 identity logic passed the four core paths:
 
-**Resume Here:** run/obtain executable validation for the new Candidate identity path, fix any integration errors, then add the minimal acceptance-boundary representation needed for an ordinary batch to reach review without performing automatic Canonical merge/write.
+- unique/new → `review_required`；
+- known RFC 5646 duplicate → `duplicate_existing`；
+- normalized identifier collision incorrectly declared `new` → deterministic error / blocked；
+- identity-risk case → `identity_review_required`。
+
+This is **not** a full repository Machine Review PASS. The current execution container still cannot resolve `github.com`, so a fresh full checkout cannot be executed. GitHub also reports no status/check run for the direct-main commits.
+
+**Resume Here:** obtain a full executable repository validation (`machine_review.py` + graph/compatibility checks). If integration is clean, exercise a small real production Candidate batch through `review_required / duplicate_existing / identity_review_required` and record independent review/acceptance-event evidence. Only then move #145 to Review and prepare #146 Continuous Intake.
 
 ## 6. When Agent intake can scale
 
