@@ -3,15 +3,15 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Pilot Operational Profile
 Document Created At: 2026-09-01T12:42:42+08:00
-Document Updated At: 2026-09-03T19:16:00+08:00
+Document Updated At: 2026-09-04T14:55:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
-Metadata Provenance: reconstructed_from_git
-Lifecycle Time Provenance: reconstructed_from_git
+Metadata Provenance: direct_record
+Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: verification-evidence / Owner-directed governance clarification
   GitHub Actor: ff6962757
 -->
 
@@ -29,48 +29,9 @@ Latest Substantive Contribution:
 
 ## 1. Work Item 必备结构
 
-一个任务只有在以下信息足够完整时才能标记为 `Ready`：
-
-1. Objective；
-2. Why / Context；
-3. Read First / Upstream Contracts；
-4. Seed References；
-5. Freshness / Completeness Check；
-6. Scope；
-7. Non-goals；
-8. Deliverables；
-9. Evidence Requirements；
-10. Acceptance Criteria；
-11. Review Class；
-12. Dependencies / Parent；
-13. Lease Policy。
-
-`Seed References` 是已知高价值起点，不是封闭白名单。执行者仍要检查新版本、新标准、新替代方案和 Atlas 漏项。
-
-### 1.1 Research Work Item overlay
-
-Research / Prior-art / Standards / Landscape / Comparative Research 任务除上述通用字段外，必须遵守 `docs/research-governance-v0.1.zh-CN.md`。
-
-至少 SHOULD 明确：
-
-```text
-Research Question:
-Decision Question:
-Why Now:
-Depth: L1 | L2 | L3
-Scope:
-Non-goals:
-Stop Conditions:
-Expected Decision Output:
-Management Escalation:
-Deferred Questions:
-```
-
-研究任务不得用“研究某主题”作为无边界 Objective。默认采用满足决策所需的最低充分深度；新问题默认进入 Deferred Questions，而不是自动扩大当前任务。
+一个任务只有在以下信息足够完整时才能标记为 `Ready`：Objective、Why / Context、Read First、Scope、Non-goals、Deliverables、Evidence Requirements、Acceptance Criteria、Review Class、Dependencies 和 Lease Policy。Research Work Item 另外遵守 `docs/research-governance-v0.1.zh-CN.md`。
 
 ## 2. V0 Task Metadata
-
-当前仓库还没有配置 GitHub Project custom fields，因此 Pilot 使用 Issue body 中的结构化 metadata block 作为 fallback：
 
 ```text
 Status: Ready
@@ -83,11 +44,9 @@ Parent: #<issue> | —
 Blocked By: #<issue> | —
 ```
 
-未来配置 Project Fields 后，这些字段 SHOULD 迁移到原生 fields；Issue body 可保留为可读镜像，但不得形成两个相互冲突的状态源。
+未来配置 Project Fields 后，这些字段 SHOULD 迁移到原生 fields；Issue body 可保留可读镜像，但不得形成两个冲突状态源。
 
 ## 3. Lifecycle
-
-Pilot 使用：
 
 ```text
 Draft → Ready → Claimed → In Progress → Review → Done
@@ -101,86 +60,15 @@ Review → Changes Requested → In Progress
 
 ## 4. Claim / Lease
 
-### 4.1 Claim 成立条件
+排他任务需要公开 Claim、Primary Lease Holder、Claimed At、Lease Until。Pilot 默认首次 Lease review window 为 72 小时。续租必须伴随可观察进展。长期可恢复信息必须进入 Issue、PR 或 repository artifact。
 
-一个排他任务只有同时满足以下条件才视为被认领：
+## 5. Handoff / Continuity
 
-- GitHub Assignee 指向 Primary Lease Holder 或负责账号；
-- Issue 中存在公开 Claim 记录；
-- `Claimed At` 与 `Lease Until` 已记录；
-- Status 从 `Ready` 变为 `Claimed`。
+Handoff 至少记录 Completed、Artifacts、Validated、Remaining、Blockers、Recommended next action、current branch/PR/commit。
 
-### 4.2 Pilot 默认 Lease
+如果任务改变 Phase、主线 Work Item、Resume Here、Gate 或重大项目方向，SHOULD 同步 `PROJECT_STATE.md`。
 
-默认首次 Lease review window：**72 小时**。
-
-Task Author MAY 为明显更长或更短的任务指定不同期限。72 小时不是长期标准，只是 Pilot 参数。
-
-续租必须伴随可观察进展，例如 commit、PR、draft artifact、研究结果、blocker report 或 substantive Issue update。
-
-### 4.3 Claim comment
-
-```text
-Claim
-Holder: @account / agent identity
-Execution mode: human | agent | mixed
-Claimed at: YYYY-MM-DD HH:MM TZ
-Lease until: YYYY-MM-DD HH:MM TZ
-Planned first checkpoint: ...
-```
-
-到期且没有有效进展时，任务可以 `Released → Ready`。已有 branch / commit / PR / notes 不得删除。
-
-## 5. Handoff Contract
-
-Handoff 使用同一个公开格式，不区分 Human→Agent、Agent→Agent 或 Human→Human：
-
-```text
-Handoff
-Status: ...
-Completed: ...
-Artifacts / commits / PRs: ...
-Validated: ...
-Remaining: ...
-Blockers / open questions: ...
-Recommended next action: ...
-Current branch / PR / commit: ...
-```
-
-长期可恢复信息必须进入 Issue、PR 或 repository artifact，不能只留在聊天窗口。
-
-### 5.1 Context Exhaustion Handoff（上下文耗尽交接）
-
-当 Agent 因上下文窗口、工具 Session、时间或执行环境限制而无法在同一会话继续时，必须把“下一个 Agent 真正需要的状态”写进 Handoff，而不是只在私人 Chat 最后一条消息里总结。
-
-Handoff 至少要让新的 Executor 能回答：
-
-- 已经做了什么；
-- 哪些东西实际落到了仓库 / PR；
-- 哪些 Validation 已经跑过；
-- 哪些仍未完成；
-- 当前 branch / PR / commit 在哪里；
-- 下一步应该先做什么；
-- 是否存在需要 Human 决策的 blocker。
-
-### 5.2 Project-level Continuity（项目级连续性）
-
-Issue / PR Handoff 继续只负责**具体任务**。
-
-如果一次任务同时改变了以下任何项目级状态，SHOULD 同步根 `PROJECT_STATE.md`：
-
-- 当前 Foundation / Phase；
-- 当前主线 Work Item；
-- `Resume Here` 的下一断点；
-- Gate PASS / NOT PASS 状态；
-- 高影响 Decision Gate；
-- 一个足以改变后来 Agent 方向判断的重大里程碑。
-
-普通局部任务不得为了留痕而频繁改 `PROJECT_STATE.md`。
-
-### 5.3 Fresh-session Resume（新会话恢复）
-
-如果没有明确 assigned Issue，而用户只要求“继续”，Agent SHOULD：
+新会话在用户只说“继续”时：
 
 ```text
 AGENTS.md
@@ -194,72 +82,58 @@ PROJECT_STATE.md
 恢复第一项尚未完成的主线工作
 ```
 
-不得把私人聊天摘要当作唯一恢复机制。
+## 6. Review policy — risk-driven, evidence-first
 
-## 6. Review Classes
+Review 的目的是真正降低错误风险，不是制造形式上的第二签字。
 
-### normal
+### 6.1 Mechanically verifiable technical work
 
-适用于普通研究、数据、文档、非破坏性实现改动。
+当普通技术实现同时满足以下条件时，Executor MAY 基于可重复执行的证据完成任务，而不强制另找 Human/Agent 做 ceremonial independent review：
 
-要求：
-- Executor self-check 需要记录；
-- SHOULD 有与 Executor 不同的 Human 或 Agent 进行 independent review；
-- CI / Validator 是 Evidence，不是 Reviewer；
-- 满足 Acceptance 后才进入 Done。
+- 不改变项目定义、V1 方向或 Scope；
+- 不扩大 Agent / Contributor 权限或 Canonical acceptance authority；
+- 不涉及 identity merge/split、破坏性迁移、重大删除、Legacy retirement、stable promotion、License/Security/Release；
+- Acceptance Criteria 可以被 deterministic tests / schema validation / Machine Review / graph checks / compatibility checks / CI 等充分验证；
+- 验证实际执行并留下公开证据；
+- Executor 明确记录 self-check / evidence，并且不伪造不存在的 Reviewer。
 
-### high-impact
+这种情况下，CI / Validator 是 **Verification Evidence**。它仍不是一个 Human/Agent Reviewer，但任务也不因为缺少形式化 Reviewer 而自动阻塞。
 
-至少包括：
-- 项目定义 / Scope；
-- Governance / Collaboration Profile；
-- Canonical Schema 破坏性变更；
+### 6.2 Semantic / judgment-heavy work
+
+当正确性无法由机器充分判定，例如语义归类、证据解释、争议事实、identity ambiguity、复杂知识建模，SHOULD 使用与 Executor 不同的 Human 或 Agent 做 independent review；如果没有 Reviewer，可以保留明确 uncertainty / deferred 状态，而不是伪造批准。
+
+### 6.3 Governance / irreversible high-impact work
+
+以下事项仍必须升级，不适用 6.1 fast path：
+
+- Project Definition / Scope / V1 direction；
+- Governance authority / permission boundary；
+- Identity Merge/Split 的高影响决定；
+- destructive migration / major Canonical deletion / Legacy retirement；
 - License / Security policy；
-- stable Specification 状态升级；
-- main branch protection / ruleset；
-- 大规模 Canonical Data 删除；
-- 正式 Release。
+- stable Specification / Governance promotion；
+- branch protection / ruleset 的重大权限变化；
+- formal Release 或其他 materially irreversible decision。
 
-要求：
-- independent review；
-- **Human Maintainer 最终授权**；
-- 不允许执行 Agent 把自己的 self-review 当成最终批准。
+这类事项需要适当的 independent review，并在属于 Owner/Governance Gate 时取得 Human Owner / designated governance authority 的明确授权。
+
+### 6.4 Owner role
+
+Owner 不承担无法实质验证的日常技术签字。Owner 主要决定项目方向、价值取舍、重大风险边界和不可逆治理事项。技术细节应尽可能通过 executable evidence 和 Maintainer/Agent responsibility 解决。
 
 ## 7. Pull Request Boundary
 
-改变 Canonical Repository 的完成产物 SHOULD 通过 PR 交付。PR 至少说明：
-
-- Linked Work Item；
-- Execution Mode；
-- Scope / out-of-scope；
-- Evidence / sources；
-- Validation performed；
-- Remaining work / handoff；
-- Review Class。
-
-当前直接写 main 的 connector 工作属于 Bootstrap 过渡；Pilot 的 Agent-ready tasks 应优先采用 branch / PR。
+改变 Canonical Repository 的完成产物 SHOULD 通过 PR 交付。当前 connector 直接写 main 属于 Bootstrap 过渡；Agent-ready tasks 应逐步优先采用 branch / PR。PR 至少说明 Linked Work Item、Execution Mode、Scope、Evidence、Validation、Remaining work 和 Review Class。
 
 ## 8. Agent Transparency
 
-Agent 参与时记录 `Execution Mode`，并按 `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md` 区分 Initiator / Executor / Reviewer 与 GitHub Actor。
+Agent 参与时按 `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md` 区分 Initiator / Executor / Reviewer 与 GitHub Actor。Agent 在开始任务前必须读取 `AGENTS.md`，并按任务模式读取 `PROJECT_STATE.md`、Issue 和相关 Specification；不得假设私人聊天记忆属于公共项目上下文。
 
-Agent 在开始任务前必须读取 Repository `AGENTS.md`，并根据任务模式读取 `PROJECT_STATE.md`、Issue 的 Read First 与相关 Specification；不得假设私人聊天记忆属于项目公共上下文。
-
-具体工具名称 MAY 记录，但流程 MUST NOT 依赖 ChatGPT、Codex、Claude、Copilot、Gemini 或任何单一厂商。
+具体工具名称 MAY 记录，但流程 MUST NOT 依赖单一厂商。
 
 ## 9. Pilot Success Criteria
 
-Task System v0.1 只有在至少 3 个不同类型真实任务上可用，才算经过 Pilot：
+Task System v0.1 至少需要真实 Research / Modeling、Specification / Design、Code / Repository implementation 三类任务验证。Fresh-session takeover 和 different-agent takeover 继续作为 Project-level Continuity 实测。
 
-- 一个 Research / Modeling task；
-- 一个 Specification / Design task；
-- 一个 Code / Repository implementation task。
-
-试运行中遇到的 friction 必须记录。只有重复出现且 GitHub 原生机制无法覆盖的 friction，才升级为 automation / protocol gap。
-
-Project-level Continuity 另外通过以下实测验证：
-
-- 一个 fresh-session takeover（新会话接管）；
-- 一个 different-agent takeover（不同 Agent 接管）。
-
-测试目标不是要求新 Agent 读完所有历史，而是确认其能从仓库状态找到项目价值、当前主线、正确断点和相关任务上下文。
+试运行 friction 必须记录；只有重复出现且 GitHub 原生机制无法覆盖的 friction，才升级为 automation / protocol gap。
