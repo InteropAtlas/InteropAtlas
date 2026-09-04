@@ -1,0 +1,30 @@
+contract_version: candidate-object-v1
+candidate_id: arri_arriraw
+label: ARRIRAW (ARRI raw acquisition format; SMPTE RDD 30 / RDD 54)
+publisher: Arnold & Richter Cine Technik (ARRI); disclosed via SMPTE RDD 30 / RDD 54
+family: artifact
+kind: format
+external_identifiers:
+- namespace: smpte
+  value: rdd30
+- namespace: smpte
+  value: rdd54
+locators:
+- url: https://www.arri.com/en/learn-help/learn-help-camera-system/pre-postproduction/file-formats-data-handling/arriraw-faq
+  role: official
+- url: https://pub.smpte.org/latest/rdd30/
+  role: official
+identity_resolution:
+  state: identity_risk
+  matched_canonical_ids: []
+  reasons:
+  - ARRIRAW is ARRI's uncompressed raw sensor format for digital cinema cameras (.ari/.mxf), publicly documented in SMPTE RDD 30:2014 (image file structure) and RDD 54:2022 (MXF mapping).
+  - Like ProRes (RDD 36), the ARRI proprietary format is disclosed through an SMPTE Registered Disclosure Document.
+  - "Composite-identity boundary: the candidate attaches two SMPTE RDD identifiers (RDD 30 image-file structure, RDD 54 MXF mapping) to the ARRIRAW proprietary format, and unknowns leave open whether the subject is the proprietary format or the RDD documents; this composite/equivocal identity is routed to identity review."
+  merge_authorized: false
+unknowns:
+- Whether ARRIRAW should be modeled as the ARRI proprietary format with SMPTE RDD documentation, or primarily as the RDD 30/54 documents, is left for review.
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  reviewer: null
