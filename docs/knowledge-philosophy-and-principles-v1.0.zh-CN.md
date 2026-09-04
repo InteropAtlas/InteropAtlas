@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active philosophy baseline
 Document Created At: 2026-09-04T19:53:00+08:00
-Document Updated At: 2026-09-05T01:22:00+08:00
+Document Updated At: 2026-09-05T01:31:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -92,32 +92,14 @@ InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复�
 
 项目不能为了人类界面（Human UI）建立一套事实，又为了智能体建立另一套事实。它们应共享规范知识（Canonical Knowledge）、证据（Evidence）、来源追踪（Provenance）和明确的未知边界，只在访问、选择、投影、表达与权限上不同。
 
-## 6. 知识是为了创造，而不只是保存（Knowledge is for creation, not preservation alone）
+## 6. 知识应该流动（Knowledge should flow）
 
-> **我们把知识开放出来，最终不是为了保存知识，而是为了创造。**  
-> *We open knowledge not merely to preserve it, but ultimately to enable creation.*
+知识不应该停留在被记录和保存的状态。它应该被发现、理解、验证、使用、传播、组合、改进，并继续产生新的知识与创造。
 
-保存（Preservation）非常重要，但它是手段和基础，而不是终点。知识真正进入公共共同体之后，应能够被后来者发现、理解、验证、使用、组合和继续推进，使他们不必反复重新解决已经解决的问题，并能把有限的创造性注意力投入真正仍然未知、未解决、未被创造的空间。
+> **保存知识不是终点。知识最终应该帮助新的创造发生。**  
+> *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
 
-因此知识的价值不仅在于被保存，还在于被：
-
-```text
-发现
-→ 理解
-→ 使用
-→ 传播
-→ 组合
-→ 验证
-→ 创造
-→ 产生新知识
-→ 重新进入知识地图
-```
-
-这个循环意味着：**保存知识服务于继续创造；开放知识服务于让更多人能够站在已有知识之上继续创造。**
-
-因此 InteropAtlas 不应成为无限堆积材料的仓库。它要尽可能让已有知识成为下一次创造的基础。
-
-## 7. 知识应该流动（Knowledge should flow）
+因此，**我们把知识开放出来，最终不是为了保存知识，而是为了创造。** 保存（Preservation）是知识能够跨越时间继续流动的基础，但开放知识的长期价值，在于让后来者能够站在已有知识之上继续推进，而不必反复重新解决已经解决的问题。
 
 长期研究知识代谢（Knowledge Metabolism）：
 
@@ -132,11 +114,13 @@ InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复�
 → 重新激活（Reactivate）
 ```
 
+这里的创造（Create）不是知识流动之外的另一项目标，而是知识流动能够产生的重要结果之一：已有知识被应用、组合和推进，产生新的知识、方法、实现或规范，再重新进入公共知识地图，成为下一轮流动与创造的基础。
+
 但公共知识基础设施中的“遗忘”必须谨慎。**已废弃（Deprecated）≠ 没有价值，已被取代（Superseded）≠ 错误。** 历史知识可能在特定上下文（Context）下重新成为最相关的知识。
 
 公共知识生命周期（Lifecycle）与个人注意力生命周期（Attention Lifecycle）必须区分。
 
-## 8. 先选择，再呈现（Selection before presentation）
+## 7. 先选择，再呈现（Selection before presentation）
 
 一个漂亮界面无法修复错误的知识选择。
 
@@ -148,13 +132,13 @@ InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复�
 4. 哪种表达形式（Representation）最合适？
 5. 用户 / 智能体需要执行什么操作？
 
-## 9. 工作空间是知识操作空间（Workspace is a knowledge operation space）
+## 8. 工作空间是知识操作空间（Workspace is a knowledge operation space）
 
 工作空间（Workspace）不只是一个视图（View）。
 
 表达形式（Representation）决定“看到什么样子”，工作空间还决定“在这种认知方式下能够做什么”。因此时间线（Timeline）、关系图（Graph）、比较（Compare）、证据（Evidence）、模拟（Simulation）等形式的价值，来自它们支持不同的认知任务和操作。
 
-## 10. 先有证据，再有断言（Evidence before assertion）
+## 9. 先有证据，再有断言（Evidence before assertion）
 
 InteropAtlas 应尽可能把以下层次保持可区分：
 
@@ -168,7 +152,7 @@ InteropAtlas 应尽可能把以下层次保持可区分：
 
 智能体输出（Agent Output）和生成视图（Generated View）不会因为读起来流畅就自动成为规范事实（Canonical Fact）。
 
-## 11. 可恢复性优先于虚假的完整性（Recoverability over false completeness）
+## 10. 可恢复性优先于虚假的完整性（Recoverability over false completeness）
 
 知识进入系统并不断被选择、投影和表达时会发生信息损失。
 
@@ -176,13 +160,13 @@ InteropAtlas 应尽可能把以下层次保持可区分：
 
 明确的 `unknown` / `not_recorded` 比伪造完整性更好。
 
-## 12. 真实使用塑造本体模型（Real use shapes the ontology）
+## 11. 真实使用塑造本体模型（Real use shapes the ontology）
 
 InteropAtlas 不应先设计一个理论上完美的世界模型，再要求现实服从它。
 
 真实查询（Query）、真实工作流、真实收录（Intake）和真实失败应该持续暴露模型缺口。只有当问题被证明确实存在，并经过既有先例 / 标准（Prior Art / Standards）检查后，才决定是否改变模型。
 
-## 13. 采用 → 配置 → 扩展 → 发明（Adopt → Profile → Extend → Invent）
+## 12. 采用 → 配置 → 扩展 → 发明（Adopt → Profile → Extend → Invent）
 
 不要因为一个问题“看起来新”就自己发明。
 
@@ -192,7 +176,7 @@ InteropAtlas 不应先设计一个理论上完美的世界模型，再要求现�
 
 IA 不应一边绘制人类的互操作方案空间，一边因为不了解既有先例（Prior Art）而制造新的互操作孤岛。
 
-## 14. 映射已解决空间，暴露未解决空间（Map the solved space, expose the unsolved space）
+## 13. 映射已解决空间，暴露未解决空间（Map the solved space, expose the unsolved space）
 
 InteropAtlas 的目的不止是描述已经存在的标准。
 
@@ -245,7 +229,7 @@ IA 应能够把它识别为可研究的**开放缺口（Open Gap）/ 标准化�
 > **标准化是经过验证的缺口可能产生的结果，而不是知识地图的默认产物。**  
 > *Standardization is a possible consequence of a verified gap, not the default output of the Atlas.*
 
-## 15. 开放不等于没有权威边界（Open does not mean authority-free）
+## 14. 开放不等于没有权威边界（Open does not mean authority-free）
 
 开放贡献不等于任何输入自动成为公共事实。
 
@@ -261,7 +245,7 @@ IA 应能够把它识别为可研究的**开放缺口（Open Gap）/ 标准化�
 
 智能体、人类、组织的平台权限也不等于知识权威。
 
-## 16. 互操作也应适用于 InteropAtlas 自身（Interoperability should apply to InteropAtlas itself）
+## 15. 互操作也应适用于 InteropAtlas 自身（Interoperability should apply to InteropAtlas itself）
 
 一个研究互操作的项目，应尽可能让自己的：
 
@@ -276,13 +260,13 @@ IA 应能够把它识别为可研究的**开放缺口（Open Gap）/ 标准化�
 
 长期个人知识空间（Personal Knowledge Space）尤其不应天然锁死在某个客户端、账号或推荐模型中。
 
-## 17. 项目本身也是知识表达实验（The project is also an experiment in knowledge expression）
+## 16. 项目本身也是知识表达实验（The project is also an experiment in knowledge expression）
 
 InteropAtlas 不只是“收录互操作知识”。它也可以成为一个真实实验场：研究结构化知识怎样被选择、投影、转换和表达，人（Human）与智能体（Agent）如何共同操作复杂知识空间，以及几十年前因技术条件受限的知识组织思想在智能体时代能否获得新的生命。
 
 这不意味着 IA 要变成通用个人知识管理系统（PKM）。研究必须始终服务于真实的 InteropAtlas 使用和可验证的知识任务。
 
-## 18. 延伸阅读：思想谱系（Intellectual Lineage）
+## 17. 延伸阅读：思想谱系（Intellectual Lineage）
 
 如果希望继续追踪这些原则“从哪里来”，以及 IA 对前人思想究竟是采用（Adopt）、配置（Profile）、扩展（Extend）、综合（Synthesize）还是仍处于开放研究（Open Research），请继续阅读：
 
