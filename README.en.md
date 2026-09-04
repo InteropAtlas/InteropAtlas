@@ -5,9 +5,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
 Document Created At: 2026-09-04T22:15:00+08:00
-Document Updated At: 2026-09-04T23:56:00+08:00
+Document Updated At: 2026-09-05T02:45:00+08:00
 Translation Source: README.md
-Translation Source Blob SHA: cfdb2b11b73a2f8880a1085b22993854255a9851
+Translation Source Blob SHA: 57e97c655bfc9780ff01c5d9f57aa485cd02ddba
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -75,23 +75,23 @@ So IA does not merely ask “what standards exist?” It progressively helps ans
 
 ## Product philosophy
 
-InteropAtlas follows a small set of long-term principles:
+InteropAtlas's core product philosophy can be compressed into one interdependent proposition:
 
-> **Knowledge belongs to the commons.**
->
-> **Perspective belongs to the individual.**
->
-> **Representation should adapt to cognition.**
->
-> **Personalization must remain reversible and transparent.**
+> **Knowledge belongs to the commons. Perspective belongs to the individual.**
 
-And one principle runs through both knowledge construction and product design:
+The shared knowledge world should be as open, discoverable, verifiable, connected, and reusable as possible; each person can form a Perspective over that same world according to their goals, background, task, and cognitive mode.
 
-> **Adopt → Profile → Extend → Invent**
->
-> Prefer understanding and reusing existing standards and mature prior art; invent only when a real gap remains.
+The dynamic expression of this philosophy is a continuing **Knowledge Flow Model**:
 
-The full meaning of these principles, together with Atlas-first, Knowledge Workspace, Human + Agent, Personal Knowledge Space, and long-term directions, is documented in [`Master Design`](docs/interopatlas-master-design-v1.0.md) and [`Knowledge Philosophy`](docs/knowledge-philosophy-and-principles-v1.0.md). Ordinary knowledge users do not need to read them first.
+> **Discover → Connect → Transmit → Transform → Reuse → Create → Commons ↺**
+
+Discover and Connect help form the shared knowledge world. Transmit and Transform carry knowledge across subjects, systems, time, media, representations, and cognitive boundaries. Reuse and Create bring existing knowledge into concrete tasks and generate new outcomes. New knowledge and creation can return to the commons and become the foundation of another cycle.
+
+> **Preservation is not the endpoint; knowledge should ultimately enable new creation.**
+
+Product philosophy and construction principles are explicitly separated. Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** are product and construction principles rather than peer-level philosophical slogans.
+
+See [`Knowledge Philosophy & Principles`](docs/knowledge-philosophy-and-principles-v1.0.md) for the full structure and [`Master Design`](docs/interopatlas-master-design-v1.0.md) for the long-term architecture. Ordinary knowledge users do not need to read these documents first.
 
 ## Want to go further?
 
