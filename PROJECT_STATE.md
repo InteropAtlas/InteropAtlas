@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T19:53:00+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T19:53:00+08:00
+> Verified At: 2026-09-05T03:51:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Master Design、Issue、PR、Git history 或完整 Roadmap。
 
@@ -24,28 +24,25 @@ Latest Substantive Contribution:
 
 InteropAtlas 是一个面向全人类的、开放、机器可读、可持续分析与演化的 **Interoperability Solution Space（互操作方案空间）公共知识基础设施**，连接标准、成熟先例、方法、实现、组织、能力、场景、关系、证据与开放缺口，并服务 Human 与 Agent 的发现、比较、组合、验证、使用和持续改进。
 
-长期方向以 [`docs/interopatlas-master-design-v1.0.zh-CN.md`](docs/interopatlas-master-design-v1.0.zh-CN.md) 为上位设计基线。
+长期方向以 [`docs/interopatlas-master-design.zh-CN.md`](docs/interopatlas-master-design.zh-CN.md) 为上位设计基线。
 
 ## 2. Long-term orientation — do not reduce IA to the current phase
 
 InteropAtlas is **Atlas-first**, not Human-first or Agent-first.
 
-四条长期产品哲学：
+核心产品哲学压缩为一个相互依存的命题：
 
-- **Knowledge belongs to the commons.**
-- **Perspective belongs to the individual.**
-- **Representation should adapt to cognition.**
-- **Personalization must remain reversible and transparent.**
+> **Knowledge belongs to the commons. Perspective belongs to the individual.**
 
-长期形态区分 Public Knowledge Commons、Personal Knowledge Space 与 Experience / Workspace。Personalization 可以改变注意力、选择、排序和表达，但不能静默改变公共 Canonical facts。
-
-长期成长循环：
+其动态展开是知识流动模型（Knowledge Flow Model）：
 
 ```text
-KNOW → USE → DISCOVER → CONTRIBUTE → KNOW
-                         +
-                       MATCH
+Discover → Connect → Transmit → Transform → Reuse → Create → Commons ↺
 ```
+
+发现与连接偏向公共知识世界的形成；传递与转化承担跨主体、系统、时间、媒介与认知边界的桥接；复用与创造让知识进入具体任务，并把新的成果重新送回 Commons。
+
+长期形态区分 Public Knowledge Commons、Personal Knowledge Space 与 Experience / Workspace。Personalization 可以改变注意力、选择、排序和表达，但不能静默改变公共 Canonical facts；个性化必须保持透明、可控、可逆。
 
 这些长期方向不等于已授权的当前 Work Item。实时施工仍遵守下面的 P6 状态和 Issue Gate。
 
@@ -58,11 +55,12 @@ KNOW → USE → DISCOVER → CONTRIBUTE → KNOW
 - Agent Output ≠ Canonical Fact；
 - Public Canonical Knowledge ≠ Personal State / Perspective；
 - Human 与 Agent 共享同一 Canonical knowledge world；
-- Personalization 应透明、可逆，并允许回到公共 Atlas；
+- Personalization 应透明、可控、可逆，并允许回到公共 Atlas；
 - Identity ≠ Capability ≠ Task Authority ≠ Review Authority ≠ Platform Permission；
 - Identity Merge/Split、破坏性迁移、稳定规范升级和项目方向/权限边界变化需要更高 Gate；
 - **Ordinary intake MUST NOT silently merge Canonical subjects.**
 - Owner 管项目方向、重大边界和不可逆决策；可由确定性测试/Validator/CI充分验证且不改变这些边界的普通技术实现，不要求 Owner 做形式化技术签字。
+- Living Document 路径保持稳定，内容版本历史由 Git / tag / release / provenance 承担；只有协议、Schema、标准身份、兼容契约或历史制品需要把版本号保留在文件名中。
 
 ## 4. P1–P6 meaning and status
 
@@ -86,7 +84,7 @@ Long-term Atlas growth / Workspace / Personalization / Human+Agent evolution
 
 P1–P5 已经确定并压力测试新方向；**P6 的职责是把仓库实际改造成 V1，同时迁移旧资产并启动长期运行。P6 完成不等于 InteropAtlas 完成。**
 
-长期 Roadmap：`docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md`。
+长期 Roadmap：`docs/interopatlas-long-term-roadmap.zh-CN.md`。
 
 ## 5. P6 current mainline
 
@@ -168,10 +166,10 @@ Ordinary technical choices, implementation details and mechanically verifiable m
 
 ```text
 README.md
-→ docs/interopatlas-master-design-v1.0.zh-CN.md
-→ docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md
-→ docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md
-→ docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md
+→ docs/interopatlas-master-design.zh-CN.md
+→ docs/knowledge-philosophy-and-principles.zh-CN.md
+→ docs/public-commons-and-personal-knowledge-space.zh-CN.md
+→ docs/interopatlas-long-term-roadmap.zh-CN.md
 ```
 
 ### Resume current P6 construction
@@ -181,5 +179,5 @@ AGENTS.md
 → PROJECT_STATE.md
 → #146 for live intake
 → #149 for the next Agent Access slice after explicit Ready/promotion
-→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
+→ docs/canonical-write-intake-contract-architecture-draft.zh-CN.md
 ```
