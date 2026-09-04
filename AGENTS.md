@@ -3,57 +3,86 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-09-01T12:43:20+08:00
-Document Updated At: 2026-09-02T10:43:23+08:00
-Metadata Backfilled At: 2026-09-02T10:49:00+08:00
-Metadata Provenance: reconstructed_from_git
-Lifecycle Time Provenance: reconstructed_from_git
+Document Updated At: 2026-09-04T19:53:00+08:00
+Metadata Provenance: direct_record
+Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-This file is the repository-level Bootstrap / Router for AI / Agent contributors. It does **not** replace `README.md`, `PROJECT_STATE.md`, `CONTRIBUTING.md`, GitHub Issues / PRs, project governance, or domain Specifications.
+This file is the repository-level Bootstrap / Router for AI / Agent contributors. It does **not** replace `README.md`, `PROJECT_STATE.md`, the Master Design, `CONTRIBUTING.md`, GitHub Issues / PRs, governance, or domain Specifications.
 
-The goal is simple:
+The goal:
 
-> A new Agent should be able to enter this repository with no private chat history, understand where the project is, find the correct task context, and continue without asking a Human to reconstruct previous conversations.
+> A new Agent should be able to enter this repository with no private chat history, understand both the long-term project and the current construction phase, and continue without asking a Human to reconstruct previous conversations.
 
-## 1. Start mode
+## 1. Do not confuse project layers
 
-Choose the smallest reading path that is sufficient for the job.
+InteropAtlas has multiple design scales:
+
+```text
+L0  Mission / Philosophy
+L1  Master Design
+L2  Architecture / Long-term Directions
+L3  Operating & Evolution Model
+L4  Foundation / Phase Roadmap
+L5  Contracts / Specifications / Profiles
+L6  Issues / PRs / Implementation
+```
+
+**P1–P6 is the first V1 Foundation / Architecture Revalidation Cycle, not the whole project lifecycle.**
+
+The long-term project is Atlas-first: a public interoperability knowledge commons with multiple Human / Agent access modes, evolving Perspective / Projection / Workspace forms, and a long-term Personal Knowledge Space direction. Do not reduce the project to the current website, current P6 work, the historical five-route model, or one Workspace.
+
+## 2. Start mode
+
+Choose the smallest reading path sufficient for the job.
 
 ### First visit / project understanding
 
 Read in this order:
 
-1. `PROJECT_STATE.md` — current phase, current main line, resume point and decision gates;
-2. `README.md` — project purpose, architecture and scope summary;
-3. `docs/interopatlas-definition-and-scope-v0.2.zh-CN.md` — project definition / scope;
-4. the current Phase Plan referenced by `PROJECT_STATE.md`;
-5. `CONTRIBUTING.md` — collaboration / review rules;
-6. relevant Decision / Specification artifacts for the area being discussed.
+1. `PROJECT_STATE.md` — current phase, main line, resume point and gates;
+2. `README.md` — concise project entry;
+3. `docs/interopatlas-master-design-v1.0.zh-CN.md` — long-term Master Design and layer model;
+4. `docs/interopatlas-definition-and-scope-v0.2.zh-CN.md` — definition / scope;
+5. the current Phase Plan / Issue referenced by `PROJECT_STATE.md`;
+6. `CONTRIBUTING.md` — collaboration / review rules;
+7. relevant Architecture / Specification / Research artifacts.
+
+For product philosophy, Personal Knowledge Space, Perspective / Projection / Workspace, Human+Agent shared knowledge or long-term roadmap questions, also read as relevant:
+
+- `docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md`;
+- `docs/public-commons-and-personal-knowledge-space-v0.1.zh-CN.md`;
+- `docs/knowledge-workspace-design-principles-v1.0.zh-CN.md`;
+- `docs/interopatlas-long-term-roadmap-v1.0.zh-CN.md`.
 
 You should then be able to explain:
-- why InteropAtlas exists;
+- why InteropAtlas exists and whom it serves;
+- why the project is Atlas-first rather than Human-first or Agent-first;
+- the difference between Public Canonical Knowledge, Personal Perspective and Representation / Workspace;
 - what the current Foundation / Phase state is;
+- why P1–P6 is only one bounded reconstruction cycle;
 - the major invariants that must not be broken casually;
-- what the current main work is;
 - what requires explicit Human authorization.
 
 ### Assigned Issue / Work Item
 
 Read in this order:
 
-1. `PROJECT_STATE.md` to understand how the task fits the project main line;
+1. `PROJECT_STATE.md` to understand how the task fits the current main line;
 2. the assigned GitHub Issue / Work Item;
-3. latest Handoff / active PR for that Work Item, if any;
+3. latest Handoff / active PR, if any;
 4. `CONTRIBUTING.md`;
 5. `docs/collaboration-task-system-v0.1.zh-CN.md`;
 6. the Issue's `Read First / Upstream Contracts`;
-7. relevant Schema / Specification / Research files for the area being changed.
+7. relevant Schema / Specification / Research files.
+
+If the task may change project philosophy, public/personal boundary, Canonical truth model, long-term product direction or major architecture, move back up the ladder and read the Master Design before acting.
 
 ### User says only “continue” / “继续”
 
@@ -70,50 +99,50 @@ Do **not** guess from private chat memory.
 Do not review only the local Diff. Also read:
 
 1. `PROJECT_STATE.md`;
-2. project Definition / Scope when direction matters;
-3. the relevant Decision / Specification;
+2. Master Design / Definition when direction matters;
+3. relevant Decision / Specification;
 4. Work Item Scope / Non-goals / Acceptance Criteria;
-5. known decision gates and unresolved risks.
+5. known gates and unresolved risks.
 
 A technically correct change can still be wrong for the current project direction.
 
-## 2. Context ladder
-
-Use progressive context loading instead of reading the entire repository into one context window:
+## 3. Context ladder
 
 ```text
 L0  AGENTS.md
         ↓
 L1  PROJECT_STATE.md
         ↓
-L2  README + Definition / Scope + current Phase Plan
+L2  README + Master Design + Definition / Scope
         ↓
-L3  Issue + PR + Handoff
+L3  current Phase / Issue + PR + Handoff
         ↓
 L4  relevant Specification / Schema / Research
         ↓
 L5  Decision Artifacts + Git history
 ```
 
-Read only the minimum sufficient context for a local task, but move upward for architecture, governance, Knowledge Model, Human Interface, migration, security, licensing, major review or project-direction work.
+Use progressive context loading. Move upward for architecture, governance, Knowledge Model, Personalization, Human Interface, migration, security, licensing, major review or project-direction work.
 
 Full contract: `docs/agent-onboarding-context-continuity-profile-v0.1.zh-CN.md`.
 
-## 3. Source of truth
+## 4. Source of truth
 
+- Master Design = current long-term project direction and layer relationships, not live task status.
 - `PROJECT_STATE.md` = project-level current checkpoint / resume index, not task details.
 - GitHub Issue = default Work Item identity and task state.
 - PR / Handoff = active delivery and task-continuation state.
 - Canonical YAML objects and relations = knowledge facts.
 - Schema / Specifications = contracts, not fact instances.
-- Decision Artifacts = durable rationale for important project choices.
+- Decision Artifacts = durable rationale for important choices.
 - Git history = authoritative change/event history.
 - Generated website / Markdown / exports are views and MUST NOT become a second source of truth.
+- Personal Perspective / user state MUST NOT silently become Public Canonical Knowledge.
 - Private chat memory, hidden Agent memory and transient Messages are **not** project state.
 
-If two current-status artifacts conflict, inspect newer Git / merged PR / Issue evidence and repair the stale artifact before making a high-level direction decision.
+If current-status artifacts conflict, inspect newer Git / merged PR / Issue evidence and repair the stale artifact before making a high-level direction decision.
 
-## 4. Project invariants
+## 5. Project invariants
 
 Preserve these unless an explicitly authorized change is about changing them:
 
@@ -123,20 +152,19 @@ Preserve these unless an explicitly authorized change is about changing them:
 - Physical Storage ≠ Semantic Classification ≠ Index / View;
 - stable identity must not depend on display name or physical path;
 - Canonical State ≠ generated view;
+- **Knowledge belongs to the commons; Perspective belongs to the individual**;
+- personalization changes selection / emphasis / representation, not Public Canonical facts;
+- personalization should remain transparent and reversible;
+- Human and Agent share one Canonical knowledge world;
 - Agent-only hidden project state is not allowed;
-- high-impact governance / destructive migration decisions require Human Maintainer authorization.
+- real use should be allowed to expose model gaps before ontology expansion;
+- high-impact governance / destructive migration / project-direction decisions require Human Maintainer authorization.
 
-For repository-structure work also read:
-- `docs/repository-structure-profile-v0.1.zh-CN.md`
+For repository structure read `docs/repository-structure-profile-v0.1.zh-CN.md`.
+For collaboration read `docs/open-collaboration-profile-v0.1.zh-CN.md`.
+For provenance read `docs/provenance-traceability-profile-v0.1.zh-CN.md` and `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
 
-For collaboration / task-system work also read:
-- `docs/open-collaboration-profile-v0.1.zh-CN.md`
-
-For provenance / contribution identity work also read:
-- `docs/provenance-traceability-profile-v0.1.zh-CN.md`
-- `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`
-
-## 5. Task protocol
+## 6. Task protocol
 
 Do not autonomously start a `Draft` task as if it were `Ready`.
 
@@ -148,40 +176,44 @@ with `Blocked / Handoff / Released` when needed.
 
 Claims must be public and time-limited. During the Pilot, the default initial lease review window is 72 hours unless the Work Item specifies otherwise.
 
-Use the Claim and Handoff formats in `CONTRIBUTING.md`.
+Use Claim / Handoff formats in `CONTRIBUTING.md`.
 
-## 6. Scope discipline
+## 7. Scope discipline
 
-- Follow the Work Item's Scope and Non-goals.
+- Follow Work Item Scope and Non-goals.
+- Do not implement a long-term Master Design direction merely because it appears in the roadmap; it must enter an authorized Work Item.
 - Do not expand a task merely because adjacent cleanup is convenient.
-- If a new modeling problem, broken assumption, or unrelated defect is found, record it in the current Issue and create / request a follow-up Work Item when appropriate.
-- Do not invent facts to satisfy a Schema. If the current model cannot represent reality accurately, record a Model / Intake Gap.
+- Record newly discovered modeling problems / broken assumptions / unrelated defects as follow-up work.
+- Do not invent facts to satisfy a Schema. Record a Model / Intake Gap when reality cannot be represented accurately.
 - Do not silently cross a Human decision gate listed in `PROJECT_STATE.md`.
 
-## 7. Research and evidence
+## 8. Research and evidence
 
 - Prefer authoritative first-party sources.
-- Preserve the identity and publication status of standards accurately.
+- Preserve standards identity and publication status accurately.
 - Keep Fact and Assessment separate.
-- `Seed References` are starting points, not a closed whitelist.
-- Perform the Work Item's `Freshness / Completeness Check`.
-- New useful standards / mature prior art discovered during project work should enter the Atlas or become an explicit Intake follow-up when the model is not ready.
-- Do not copy protected standards text beyond redistribution rights; store identity, official source, concise original summaries, and IA assessments instead.
+- `Seed References` are starting points, not a whitelist.
+- Perform the Work Item's Freshness / Completeness Check.
+- Useful standards / prior art discovered during work should enter the Atlas or an explicit Intake follow-up when the model is not ready.
+- Do not copy protected standards text beyond redistribution rights.
+- Research should seek validation, correction and cognitive gain; do not select evidence merely to prove current IA ideas.
 
-## 8. Repository editing
+## 9. Repository editing
 
-- Preserve stable object IDs unless the Work Item explicitly authorizes an identity migration.
-- Avoid large directory moves unless the task explicitly covers migration and its invariants.
+- Preserve stable object IDs unless explicitly authorized otherwise.
+- Avoid large directory moves unless the task covers migration and invariants.
 - Do not create Agent-only project state directories.
 - Do not edit generated outputs as canonical inputs.
 - Prefer small, reviewable changes and a Pull Request for completed Work Items.
-- Do not update `PROJECT_STATE.md` for every small change. Update it only when project-level phase, main line, resume point, decision gate or major milestone changes.
+- Do not update `PROJECT_STATE.md` for every small change; update only project-level phase, main line, resume point, decision gate or major milestone changes.
+- Durable design belongs in a small number of clearly layered documents. Do not recreate design fragmentation through redundant checkpoint files.
+- Historical design documents with independent value should normally be marked historical/superseded rather than deleted merely for tidiness.
 
-## 9. Validation
+## 10. Validation
 
-For changes affecting Canonical data, relations, schemas or the engine, run the relevant deterministic checks when the environment permits. Current Runtime paths are under `02_Runtime/01_Engine/`.
+For changes affecting Canonical data, relations, schemas or engine, run relevant deterministic checks when environment permits. Current Runtime paths are under `02_Runtime/01_Engine/`.
 
-Typical checks include:
+Typical checks:
 
 ```bash
 pip install -r 02_Runtime/01_Engine/requirements.txt
@@ -190,17 +222,15 @@ python 02_Runtime/01_Engine/bootstrap_query.py --capability automated_build_depl
 python 02_Runtime/01_Engine/machine_review.py
 ```
 
-For renderer-related changes, exercise the relevant semantic renderer / representative pages and the browser E2E suite when applicable.
+For renderer changes, exercise representative semantic renderer pages and browser E2E when applicable.
 
-Do not copy old `engine/...` commands from pre-migration artifacts without checking current paths.
+Record validation in the PR. CI is evidence, not an independent reviewer.
 
-Record what was run and the result in the PR. CI output is evidence, not an independent reviewer.
+## 11. Context exhaustion / handoff
 
-## 10. Context exhaustion / handoff
+If a session ends while work is incomplete, do not leave recoverable state only in chat.
 
-If the current Agent session is ending while work is incomplete, do not leave the recoverable state only in the chat response.
-
-At task level, write / update the public Handoff with:
+At task level record:
 
 ```text
 Status:
@@ -213,24 +243,20 @@ Recommended next action:
 Current branch / PR / commit:
 ```
 
-If the work changed the project-level main line, Gate state, next resume point or a major decision gate, also update `PROJECT_STATE.md`.
+If work changed project-level main line, Gate, resume point or major decision, update `PROJECT_STATE.md`.
 
-A new Agent should be able to continue from repository state alone.
-
-## 11. Review and authorization
+## 12. Review and authorization
 
 Executor self-check is not independent review.
 
 `normal` tasks SHOULD receive review from a different Human or Agent.
 
-`high-impact` changes require Human Maintainer final authorization, including project scope, governance / collaboration rules, destructive Schema changes, license / security policy, stable Specification promotion, main-branch protection / rulesets, large Canonical Data deletion, formal releases and other explicitly marked decision gates.
+`high-impact` changes require Human Maintainer final authorization, including project scope / philosophy, governance / collaboration rules, destructive Schema changes, license / security policy, stable Specification promotion, major Personal/Public data boundary changes, main-branch protection, large Canonical deletion, formal releases and other explicit gates.
 
-## 12. Agent transparency
+## 13. Agent transparency
 
 Record execution mode as `human`, `agent`, or `mixed` and follow `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
 
-The core contribution roles are Initiator / Executor / Reviewer. GitHub Actor is platform provenance and must be recorded separately when it differs from the actual Executor. Governance Approver is recorded only when a high-impact authorization is required.
+Core contribution roles are Initiator / Executor / Reviewer. GitHub Actor is platform provenance and must be recorded separately when it differs from actual Executor. Governance Approver is recorded only when high-impact authorization is required.
 
-These instructions are vendor-neutral. Do not assume ChatGPT, Codex, Claude, Copilot, Gemini or any other product is the only supported execution environment.
-
-Do not create multiple vendor-specific copies of project state. If a vendor-specific bootstrap file is added later, it should be a thin adapter to these repository sources of truth.
+These instructions are vendor-neutral. Do not assume ChatGPT, Codex, Claude, Copilot, Gemini or another product is the only supported environment.
