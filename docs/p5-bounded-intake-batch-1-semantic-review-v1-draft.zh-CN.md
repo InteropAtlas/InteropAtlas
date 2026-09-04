@@ -165,17 +165,57 @@ Source confirmation, identifier normalization, duplicate search, completeness ch
 
 The batch exposed a practical P6 question: how much relation/classification detail is required before an otherwise clear subject may enter Canonical? The rule should be minimal enough not to block simple RFC/living-standard intake, but strong enough not to flatten Profile semantics. This should be resolved from #136 evidence before broad intake launch, not by adding fields ad hoc per candidate.
 
-## 7. Next checkpoint
+## 7. Dry acceptance path
 
-Run a dry acceptance path for the two `ACCEPT TO ORDINARY INTAKE` candidates without writing production Canonical:
+The two proceed cases were carried through an experiment-only acceptance event shape in:
+
+`03_Evolution/04_Experiments/v1_contract_fixtures/intake-batch1-dry-acceptance.fixture.yaml`
+
+The dry path is:
 
 ```text
 Candidate Proposal
-→ structural validation
-→ semantic review checklist
-→ mutation impact classification
-→ acceptance event shape + provenance
-→ simulated accepted / rollback path
+→ experiment structural validation state
+→ executor semantic self-review
+→ mutation-impact hypothesis (M1)
+→ independent review still pending
+→ authority gate not executed
+→ simulated acceptance event
+→ rollback/correction path
 ```
 
-For ISO/IEC 27001 and FAPI, retain explicit `deferred` state and record the minimum decision needed to unblock them. For BCP 47, retain `duplicate` disposition and do not create another subject.
+Both simulated events deliberately keep:
+
+- `accepted_canonical_id: null`；
+- `accepted_at: null`；
+- `reviewer: null`；
+- `state: simulated_only`。
+
+This prevents experiment data from masquerading as an accepted Canonical mutation.
+
+Rollback semantics are also explicit: before acceptance, discard/revise the Candidate; after a future real acceptance, corrections must be represented as a new Candidate preserving history rather than deleting or rewriting provenance.
+
+## 8. Gate evidence from Batch 1
+
+Batch 1 now demonstrates that a bounded intake can:
+
+- stop a duplicate before new-object creation；
+- allow simple candidates to continue while independently deferring harder semantic cases；
+- keep `defer` distinct from `reject`；
+- keep structural validation distinct from semantic review；
+- keep executor self-review distinct from independent review；
+- represent acceptance/provenance without actually mutating Canonical；
+- preserve rollback/correction semantics；
+- identify preflight as the strongest near-term automation surface。
+
+The remaining blocking question for broad ordinary intake is not “can every candidate be fully modeled automatically?” It is narrower: **what is the minimal safe admission contract for ordinary M0/M1 knowledge, and which semantic patterns must automatically defer/escalate?**
+
+## 9. Next checkpoint
+
+Translate Batch 1 findings into a minimal ordinary-intake checklist / decision table suitable for #159/#134 evidence synthesis. Do not build production automation yet. The checklist should separate:
+
+- T0/T1 preflight tasks that can scale now；
+- mandatory machine checks；
+- mandatory independent semantic review conditions；
+- automatic defer/escalate triggers；
+- conditions that would make ordinary M0/M1 intake contribution-ready after #134。
