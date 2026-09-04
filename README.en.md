@@ -5,9 +5,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
 Document Created At: 2026-09-04T22:15:00+08:00
-Document Updated At: 2026-09-04T22:15:00+08:00
+Document Updated At: 2026-09-04T23:56:00+08:00
 Translation Source: README.md
-Translation Source Blob SHA: bd70735c0db64c020a990cbf663bdab89987996e
+Translation Source Blob SHA: cfdb2b11b73a2f8880a1085b22993854255a9851
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -91,7 +91,7 @@ And one principle runs through both knowledge construction and product design:
 >
 > Prefer understanding and reusing existing standards and mature prior art; invent only when a real gap remains.
 
-The full meaning of these principles, together with Atlas-first, Knowledge Workspace, Human + Agent, Personal Knowledge Space, and long-term directions, is documented in [`Master Design`](docs/interopatlas-master-design-v1.0.zh-CN.md) and [`Knowledge Philosophy`](docs/knowledge-philosophy-and-principles-v1.0.md). Ordinary knowledge users do not need to read them first.
+The full meaning of these principles, together with Atlas-first, Knowledge Workspace, Human + Agent, Personal Knowledge Space, and long-term directions, is documented in [`Master Design`](docs/interopatlas-master-design-v1.0.md) and [`Knowledge Philosophy`](docs/knowledge-philosophy-and-principles-v1.0.md). Ordinary knowledge users do not need to read them first.
 
 ## Want to go further?
 
@@ -100,7 +100,7 @@ Different goals have different entry points; you do not need to read the entire 
 | Goal | Start here |
 | --- | --- |
 | Understand what IA includes | [`Definition & Scope`](docs/interopatlas-definition-and-scope-v0.2.md) |
-| Understand long-term design and philosophy | [`Master Design`](docs/interopatlas-master-design-v1.0.zh-CN.md) |
+| Understand long-term design and philosophy | [`Master Design`](docs/interopatlas-master-design-v1.0.md) |
 | See the current build state | [`PROJECT_STATE.md`](PROJECT_STATE.md) |
 | Human maintenance / contribution | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
 | Agent onboarding / maintenance | [`AGENTS.md`](AGENTS.md) |
