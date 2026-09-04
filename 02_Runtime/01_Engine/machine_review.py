@@ -19,7 +19,7 @@ import yaml
 from jsonschema import Draft202012Validator, RefResolver
 
 from bootstrap_query import is_relation_document
-from candidate_identity_validator import canonical_identifier_index, validate_candidate
+from candidate_identity_validator import canonical_identifier_index, identity_route, validate_candidate
 from graph_index import GraphIndex
 from kind_registry import load_kind_registry, profiles_for_record, validate_v0_identity
 from relation_model import normalize_relation
@@ -55,6 +55,7 @@ def run_machine_review(root: Path) -> dict[str, Any]:
     objects: list[dict[str, Any]] = []
     relations: list[dict[str, Any]] = []
     candidates: list[dict[str, Any]] = []
+    candidate_routes: list[dict[str, Any]] = []
     sources: dict[tuple[str, str], str] = {}
 
     for path in layout.iter_yaml_files():
@@ -145,6 +146,13 @@ def run_machine_review(root: Path) -> dict[str, Any]:
                         if not isinstance(document, dict):
                             continue
                         candidates.append(document)
+                        candidate_routes.append(
+                            {
+                                "candidate_id": document.get("candidate_id"),
+                                "source": source,
+                                "route": identity_route(document, candidate_index),
+                            }
+                        )
                         for item in validate_candidate(document, candidate_schema, candidate_index):
                             findings.append(
                                 MachineFinding(
@@ -214,10 +222,12 @@ def run_machine_review(root: Path) -> dict[str, Any]:
         "compatibility_warnings": compatibility_warnings,
         "semantic_review_records": semantic_review_records,
         "candidate_review_records": candidate_review_records,
+        "candidate_routes": candidate_routes,
         "boundary": (
             "Machine PASS is deterministic evidence only. Identity Target, evidence sufficiency, "
             "new vocabulary terms, high-impact governance, and any identity merge/split remain "
-            "independent semantic/governance review work. Candidate state is not Canonical acceptance."
+            "independent semantic/governance review work. Candidate state is not Canonical acceptance; "
+            "the strongest ordinary-machine route is review_required."
         ),
     }
 
@@ -422,6 +432,14 @@ def render_markdown(report: Mapping[str, Any]) -> str:
         f"- Candidate-review records: {summary['candidate_review_records']}",
         "",
     ]
+    candidate_routes = report.get("candidate_routes", [])
+    if candidate_routes:
+        lines.extend(["### Candidate intake routes", ""])
+        for item in candidate_routes[:50]:
+            lines.append(f"- `{item.get('candidate_id')}` → `{item.get('route')}` ({item.get('source')})")
+        if len(candidate_routes) > 50:
+            lines.append(f"- … {len(candidate_routes) - 50} more routes in JSON artifact")
+        lines.append("")
     findings = report.get("findings", [])
     if findings:
         lines.extend(["### Deterministic findings", ""])
