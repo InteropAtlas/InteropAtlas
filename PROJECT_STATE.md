@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T14:55:00+08:00
+Document Updated At: 2026-09-04T17:58:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T14:55:00+08:00
+> Verified At: 2026-09-04T17:58:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -60,18 +60,20 @@ P1–P5 已经确定并压力测试新方向；**P6 的职责是把仓库实际�
 
 #145 V1 Serialization / Validator minimal production loop is **Done / closed**.
 
-It delivered production Candidate serialization, identity-safe validation, Acceptance Event boundary, conservative Legacy identity compatibility, executable GitHub Actions validation, and a representative production batch covering unique / duplicate / identity-risk routes.
+#147 Migration Cohort 1 is **Done / closed**. It proved executable dry-run planning, rollback/correction, stable-ID preservation and multiple real low-ambiguity Class B Legacy→V1 additive migrations without hidden loss, identity merge/split or semantic promotion.
 
-Current P6 work now runs in parallel where safe:
+#148 Compare + Evidence Workspace Slice 1 is **Done / closed**. Production Human Compare and Evidence now consume an explicit shared Selection / Projection contract with recoverability, `not_recorded` semantics and read-only Projection boundaries.
+
+Continuous P6 work now runs in parallel where safe:
 
 ```text
-#146 Continuous Intake                         ← In Progress
-#147 Migration Cohort 1                       ← NEXT / may start now
-#148 Compare + Evidence Workspace             ← Ready after production substrate
-#149 Agent structured access + Candidate Write← Ready after production substrate
+#146 Continuous Intake                         ← In Progress / parallel lane
+#147 Migration Cohort 1                       ✅ Done
+#148 Compare + Evidence Workspace             ✅ Done
+#149 Agent structured access + Candidate Write← Draft / Future; prerequisites now materially satisfied, but not yet promoted to Ready
 ```
 
-The active zero-context video-industry intake Agent is a real #146 stress test. Experiment/audit baseline remains **2026-09-04 14:26 +08:00**; do not interrupt it merely for review work.
+Repository event continuation infrastructure is also active via `.github/workflows/agent-continuation-bridge.yml`: required PR checks emit an idempotent continuation/repair signal and can optionally notify an external Agent/Harness webhook. This is task-continuation infrastructure, not Reviewer or Canonical acceptance authority.
 
 ## 5. #146 Continuous Intake
 
@@ -96,22 +98,19 @@ Key rules:
 - Candidate state does not enter Canonical graph/index；
 - GitHub Actions `P6 V1 Intake Validation` is the executable production validation path。
 
-## 6. Resume Here — P6 migration starts now
+## 6. Resume Here — close completed slices, then promote the next authorized lane
 
-Continue **#146** as a live parallel intake lane, but do not wait for intake to finish.
+Do not reopen #147 or #148 merely to accumulate more work; both completed their bounded first-slice objectives.
 
-Start **#147 Migration Cohort 1** now:
+Continue **#146** as a live parallel intake lane.
 
-1. inventory Legacy Canonical objects；
-2. select only low-ambiguity P5-proven lossless/normalization mappings；
-3. preserve stable IA IDs by default；
-4. dry-run first；
-5. run schema / relation / graph / semantic-diff checks；
-6. exclude and escalate any identity merge/split, work-vs-edition ambiguity, semantic promotion or hidden-loss case；
-7. migrate a small first cohort and prove rollback/correction path；
-8. record provenance and post-migration verification。
+For the next ChatGPT / GPT-5.6 Sol mainline:
 
-Do not redesign P1–P5 unless execution reveals a genuine contradiction with the Owner's V1 direction. Prefer implementation/migration over further planning.
+1. inspect #149 `P6 Agent Access Slice 1` against its now-satisfied technical prerequisites；
+2. **do not autonomously treat it as Ready while the Issue itself remains `Draft / Future` and `Review Class: high-impact`**；
+3. once the task is explicitly promoted/authorized, implement only Structured Read / Query / Traverse + Candidate Write, preserving least privilege and the existing Candidate→Validation→Acceptance boundary；
+4. do not grant unrestricted Canonical acceptance, Agent self-approval of M2/M3, or identity merge/split authority；
+5. later Relation / Evidence / Lifecycle migration belongs to their dedicated P6 Work Items rather than expanding #147 indefinitely。
 
 ## 7. Owner escalation boundary
 
@@ -122,7 +121,8 @@ Escalate to Owner only when execution materially changes:
 - destructive migration / major deletion / Legacy retirement gate；
 - material security or repository permission boundary；
 - stable specification/governance promotion；
-- formal release or other materially irreversible project decision。
+- formal release or other materially irreversible project decision；
+- promotion of a still-`Draft / Future` high-impact task when AGENTS.md prohibits silently starting it as Ready。
 
 Ordinary technical choices, implementation details and mechanically verifiable migrations should proceed without ceremonial Owner review.
 
@@ -132,7 +132,7 @@ Ordinary technical choices, implementation details and mechanically verifiable m
 AGENTS.md
 → PROJECT_STATE.md
 → #146 for live intake
-→ #147 for current migration work
-→ docs/canonical-migration-architecture-v1-draft.zh-CN.md
-→ #148 / #149 as parallel P6 lanes open
+→ #149 for the next Agent Access slice after explicit Ready/promotion
+→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
+→ docs/canonical-human-agent-access-v1-architecture-draft.zh-CN.md
 ```
