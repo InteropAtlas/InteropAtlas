@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active policy
 Document Created At: 2026-08-30T17:54:51+08:00
-Document Updated At: 2026-09-04T21:30:00+08:00
+Document Updated At: 2026-09-04T22:25:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -14,34 +14,38 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-InteropAtlas 是面向全球的开放知识基础设施。语言策略必须同时服务于国际协作、自然阅读、概念稳定、跨语言检索和机器互操作。
+InteropAtlas 是面向全球的开放知识基础设施。语言策略必须同时服务于自然阅读、国际协作、概念稳定、跨语言检索和机器互操作。
 
 核心原则：
 
-> **English is the primary international project language.**  
-> **英语是项目的第一国际语言。**
+> **Simplified Chinese is the primary reading language.**  
+> **简体中文是当前默认的人类阅读语言。**
 >
-> **Simplified Chinese is the first guaranteed parallel language.**  
-> **简体中文是项目第一保证并行语言。**
+> **English is the primary international language and the first guaranteed parallel language.**  
+> **英语是第一国际协作语言，也是第一保证平行语言。**
 >
 > **Natural language should be coherent; terminology should be interoperable.**  
 > **自然语言应保持连贯，核心术语应保持跨语言互操作。**
 
-这意味着 IA 不追求无规则的“中英混写”，也不要求所有内容永远采用逐段双语。不同语言可以自然表达，但必须稳定地指向同一概念世界。
+这意味着 IA 不追求无规则的“中英混写”，也不把逐段重复的中英双语当作国际化本身。默认中文阅读流应自然、连续；核心概念通过英文术语锚定；英文读者通过独立、完整、自然的英文版本访问同一项目知识。
 
 ## 1. Language roles
 
-### 1.1 English — primary international language
+### 1.1 Simplified Chinese — primary reading language
 
-英语作为跨地区协作、国际传播和主要 Canonical project documentation 的默认语言。
+简体中文是当前 InteropAtlas 默认的人类阅读语言，也是项目 Owner、当前主要设计讨论和根 README 的默认表达语言。
 
-这是一项工程与协作选择，不意味着英语在知识、文化或表达上具有更高权威。
+这是一项当前项目阶段的阅读与协作选择，不意味着中文在知识、文化或事实权威上高于其他语言。
 
-### 1.2 Simplified Chinese — first guaranteed parallel language
+中文正文应优先保证自然阅读，而不是为了显示“双语完整”持续插入重复英文句段。
 
-InteropAtlas 承诺简体中文是第一保证并行语言。核心项目知识与主要公共文档不应长期只对英语读者可理解。
+### 1.2 English — primary international and first guaranteed parallel language
 
-中文版本不是低优先级摘要，而应尽可能保持完整语义，并与英文核心概念稳定对应。
+英语承担跨地区协作、国际传播、第一保证平行翻译以及大量既有技术术语的跨语言锚定作用。
+
+核心公共文档不应长期只对中文读者可理解。英文版本不是低优先级摘要，而应尽可能保持完整语义，并与中文版本稳定对应。
+
+英语同时是机器标识和大量 Canonical Terminology 的主要基础语言，但这不意味着英文文档自动拥有更高事实权威。
 
 ### 1.3 Additional languages
 
@@ -57,7 +61,7 @@ IA 区分：
 2. **Terminology / 术语层**：负责让不同语言稳定指向同一概念；
 3. **Machine Identifier / 机器标识**：负责 Schema、API、Graph、Agent 与实现之间的稳定互操作。
 
-因此中文文档应该写成自然中文，而不是大量夹杂英文造成阅读阻力。
+因此中文文档应该写成自然中文，而不是大量夹杂英文造成阅读阻力；但关键概念应保留稳定的英文锚点。
 
 推荐：
 
@@ -73,7 +77,7 @@ IA 区分：
 中文首选术语（Canonical English Term）
 ```
 
-之后在语义不含混的情况下，当前语言可以自然使用自己的术语。
+之后在语义不含混的情况下，当前语言可以自然使用自己的术语。API、Agent、Schema、W3C、RDF、JSON-LD 等已经具有稳定技术身份或翻译反而降低辨识度的名称，可根据实际语境保留英文。
 
 ## 3. Terminology is an interoperability layer
 
@@ -90,7 +94,7 @@ Canonical Concept / ID
 └── future language labels
 ```
 
-因此 IA 应维护独立的 Terminology Registry / Glossary，使 Human、Agent、Schema、文档和不同语言版本能够确认自己谈论的是同一个概念。
+因此 IA 应维护独立的 [`Terminology Registry`](terminology-registry-v0.1.md)，使 Human、Agent、Schema、文档和不同语言版本能够确认自己谈论的是同一个概念。
 
 英文术语在这里承担跨语言概念锚点的作用，但不等于要求中文正文持续显示英文。
 
@@ -98,38 +102,46 @@ Canonical Concept / ID
 
 不同文档不应机械采用同一种双语格式。
 
-### 4.1 Paired bilingual / 同文件逐段双语
+### 4.1 Primary pattern — parallel language documents
 
-适用于短、稳定、具有公共宣言或 Constitution-like 性质的内容，例如：
+对于 README、设计文档、技术文档、政策、研究和其他需要连续阅读的内容，默认采用独立语言版本，而不是逐段中英重复：
 
-- Project Mission；
-- README 中最核心的定义与口号；
-- 核心产品哲学；
-- 少量长期 Governance principles。
+```text
+README.md       简体中文默认入口
+README.en.md    English parallel version
 
-形式：
+example.zh-CN.md    简体中文
+example.md           English parallel version
+```
+
+中文版本保持自然中文阅读流；英文版本保持自然英文阅读流。两个版本通过显式语言入口和 Translation Provenance 建立对应关系。
+
+这既减少阅读中的语义重复，也减少 Git diff、搜索、Agent context 和维护噪声。
+
+### 4.2 Concept-level bilingual binding / 概念级双语绑定
+
+同一语言正文内部不追求句子级双语复制，而采用概念级绑定：
+
+```text
+规范知识（Canonical Knowledge）
+视角（Perspective）
+来源追踪（Provenance）
+```
+
+目标是让信息只表达一次，同时保留跨语言搜索、术语学习、Agent 映射和概念身份。
+
+### 4.3 Selective paired bilingual expression / 选择性短句双语
+
+极短、稳定、具有项目身份意义，并且两种语言并置本身有表达价值的内容可以保留双语，例如：
 
 ```text
 Knowledge belongs to the commons.
 知识属于公共共同体。
 ```
 
-逐段双语的价值是让两种语言同时成为公共表达，并允许读者直接比较语义。
+这是一种选择性表达方式，不再是 README 或短公共文档的默认格式。
 
-### 4.2 Parallel documents / 平行语言文件
-
-长篇、技术性强或频繁变化的文档原则上采用独立语言版本：
-
-```text
-example.md          English
-example.zh-CN.md    简体中文
-```
-
-这样避免长文长度翻倍，也减少 Git diff、搜索、Agent context 和维护上的噪声。
-
-英语版本默认承担 Canonical project-language source 的角色；中文版本必须记录并维护与其对应关系。若未来项目形成更成熟的 translation provenance / synchronization mechanism，应以明确版本关系替代人工猜测。
-
-### 4.3 Language-neutral / machine-oriented artifacts
+### 4.4 Language-neutral / machine-oriented artifacts
 
 Schema、ID、Relation、API、URL slug、CLI 参数、代码标识符等尽可能使用稳定英文机器标识，不因显示语言改变。
 
@@ -196,19 +208,33 @@ multiple language representations
 
 ## 8. Translation authority and semantic drift
 
-翻译版本不得静默改变 Canonical project decision。
+**中文默认阅读语言、英语第一国际语言，都不等于任何一个语言版本天然拥有更高知识权威。**
 
-当英文 Canonical source 与中文翻译出现实质语义冲突时，应首先判断：
+当中文与英文平行文档出现实质语义冲突时，应判断：
 
-- 是翻译漂移；
-- 是英文源文档已经过时；
-- 还是 Owner / Maintainer 在中文讨论中形成了尚未同步的新决定。
+- 是否发生翻译漂移；
+- 哪个版本已经陈旧；
+- 是否有较新的 Owner / Maintainer 决定尚未同步；
+- 对应 Translation Provenance 指向哪个版本。
 
-不能简单以“英文永远正确”掩盖新的项目事实，也不能让翻译文件在没有治理记录的情况下独立形成另一套项目规则。
+不能机械采用“英文永远正确”或“中文永远正确”。项目事实的权威应来自明确的决策、Provenance、版本和当前有效状态，而不是语言本身。
 
 正确处理方式是恢复共同的设计事实，然后同步各语言表达。
 
-## 9. Language preference is user-controlled
+## 9. Translation provenance and synchronization
+
+平行语言文件应逐步记录：
+
+- 对应源 / 平行文件；
+- 翻译时对应的 Blob SHA 或版本；
+- 更新时间；
+- translation status / freshness。
+
+Translation Provenance 的目的不是规定某一种语言永远是“母本”，而是让维护者和 Agent 能判断两个语言版本当前是否同步。
+
+长期应尽量让“翻译陈旧”成为机器可发现状态，而不是依靠人工逐篇猜测。
+
+## 10. Language preference is user-controlled
 
 未来 Website、Workspace、Agent 与 Personal Knowledge Space 可以根据用户偏好选择语言，但语言个性化必须遵守 IA 的通用原则：
 
@@ -222,15 +248,15 @@ multiple language representations
 - 在需要时查看对应术语；
 - 不被自动语言检测永久锁定。
 
-## 10. Contribution rule
+## 11. Contribution rule
 
 贡献者不需要为了修复一个事实而掌握所有支持语言。
 
 项目应逐步建立 translation status / freshness，使缺失翻译成为可见的待办状态，而不是阻止知识进入 Atlas。
 
-对于核心公共文档，English + Simplified Chinese 是目标保证；对于长尾知识对象和更多语言，允许逐步补全。
+对于核心公共文档，Simplified Chinese + English 是当前目标保证；对于长尾知识对象和更多语言，允许逐步补全。
 
-## 11. InteropAtlas should practice linguistic interoperability
+## 12. InteropAtlas should practice linguistic interoperability
 
 IA 研究互操作，也应把语言本身视为互操作问题。
 
@@ -241,31 +267,34 @@ IA 研究互操作，也应把语言本身视为互操作问题。
 
 因此，多语言能力最终应贯穿 Canonical Knowledge、Terminology、Search、Agent access、Representation、Workspace 和 Provenance，而不是停留在网页翻译层。
 
-## 12. Current implementation direction
+## 13. Current implementation direction
 
 当前立即采用：
 
 ```text
-English
-→ primary international / canonical project language
-
 Simplified Chinese
-→ first guaranteed parallel language
+→ primary reading language / default human-facing entry
 
-Core short public documents
-→ selective paired bilingual presentation
+English
+→ primary international language / first guaranteed parallel language
 
-Long technical documents
-→ parallel language files
+README and readable documents
+→ separate natural-language reading flows
 
 Terminology
 → natural local-language term + canonical English anchor
 
+Short identity-significant statements
+→ selective paired bilingual expression when useful
+
 Machine identifiers
 → stable English identifiers
+
+Translation authority
+→ determined by provenance / decisions / freshness, not language hierarchy
 
 Knowledge model
 → multilingual-ready, not permanently bilingual-only
 ```
 
-现有以中文为主的历史文档不要求一次性机械翻译。迁移应从 README、Master Design、Knowledge Philosophy、Definition & Scope 等最高价值公共文档开始，并在翻译机制明确后逐步推进，避免为了形式上的“双语完成率”制造大量迅速陈旧的翻译副本。
+现有以中文为主的历史文档不要求一次性机械翻译。迁移从 README、Definition & Scope、Knowledge Philosophy、Master Design 等最高价值公共文档开始，并逐步建立 Translation Provenance，避免为了形式上的“双语完成率”制造大量迅速陈旧的翻译副本。
