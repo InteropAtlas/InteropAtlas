@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 
-from workspace_projection import NOT_RECORDED, project_compare, project_field, select_by_capability
+from workspace_projection import (
+    NOT_RECORDED,
+    project_compare,
+    project_evidence,
+    project_field,
+    select_by_capability,
+)
 
 
 def _index():
@@ -12,6 +18,7 @@ def _index():
             "capabilities": ["cap"],
             "open_source": True,
             "sources": [{"url": "https://example.test/alpha", "title": "Alpha source", "accessed": "2026-09-04"}],
+            "notes_zh": ["InteropAtlas assessment note"],
         },
         "beta": {
             "id": "beta",
@@ -49,6 +56,24 @@ def test_evidence_stays_attached_to_projected_value():
     assert projection["state"] == "recorded"
     assert projection["value"] is True
     assert projection["evidence"][0]["url"] == "https://example.test/alpha"
+
+
+def test_evidence_workspace_separates_sources_from_ia_assessment():
+    projection = project_evidence(_index()["alpha"])
+    assert projection["evidence_state"] == "recorded"
+    assert projection["sources"][0]["recoverable_from"]["canonical_field"] == "sources"
+    assert projection["assessment"]["notes"] == ["InteropAtlas assessment note"]
+    assert projection["assessment"]["authority"] == "interopatlas_authored"
+    assert projection["assessment"]["is_external_evidence"] is False
+    assert projection["semantic_boundaries"]["source_is_assessment"] is False
+    assert projection["semantic_boundaries"]["projection_is_canonical_write"] is False
+
+
+def test_missing_evidence_is_not_recorded_not_negative_claim():
+    projection = project_evidence(_index()["beta"])
+    assert projection["evidence_state"] == NOT_RECORDED
+    assert projection["sources"] == []
+    assert projection["semantic_boundaries"]["missing_evidence"] == NOT_RECORDED
 
 
 def test_compare_excludes_non_selected_object_and_never_computes_winner():
