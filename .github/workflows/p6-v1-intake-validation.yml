@@ -1,0 +1,50 @@
+name: P6 V1 Intake Validation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
+      - '.github/workflows/p6-v1-intake-validation.yml'
+  pull_request:
+    paths:
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
+      - '.github/workflows/p6-v1-intake-validation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: 02_Runtime/01_Engine/requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
+
+      - name: Candidate identity safety tests
+        run: python 02_Runtime/01_Engine/test_candidate_identity_validator.py
+
+      - name: Acceptance boundary safety tests
+        run: python 02_Runtime/01_Engine/test_acceptance_event_validator.py
+
+      - name: Machine Review
+        run: python 02_Runtime/01_Engine/machine_review.py
+
+      - name: Graph validation
+        run: python 02_Runtime/01_Engine/graph_index.py
+
+      - name: Bootstrap compatibility query
+        run: python 02_Runtime/01_Engine/bootstrap_query.py --capability automated_build_deployment
