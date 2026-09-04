@@ -58,6 +58,7 @@ jobs:
       - name: Check current docs do not use pre-migration locations
         shell: python
         run: |
+          import re
           import sys
           from pathlib import Path
 
@@ -101,7 +102,8 @@ jobs:
           for source in sorted(Path('docs').rglob('*.md')):
               for number, line in enumerate(source.read_text(encoding='utf-8').splitlines(), 1):
                   for basename, expected_prefix in moved.items():
-                      if basename not in line:
+                      token = re.compile(r'(?<![A-Za-z0-9_.-])' + re.escape(basename) + r'(?![A-Za-z0-9_.-])')
+                      if not token.search(line):
                           continue
                       expected = expected_prefix + basename
                       if expected not in line:
