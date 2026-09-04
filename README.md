@@ -5,7 +5,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:49:18+08:00
-Document Updated At: 2026-09-04T22:04:00+08:00
+Document Updated At: 2026-09-05T02:35:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -75,27 +75,25 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 
 ## 产品哲学
 
-InteropAtlas 的长期设计遵循几条简单原则：
+InteropAtlas 的核心产品哲学可以压缩为一个相互依存的命题：
 
-> **知识属于公共共同体。**  
-> *Knowledge belongs to the commons.*
->
-> **视角属于个人。**  
-> *Perspective belongs to the individual.*
->
-> **表达应适应认知。**  
-> *Representation should adapt to cognition.*
->
-> **个性化必须可逆、透明、可检查。**  
-> *Personalization must remain reversible and transparent.*
+> **知识属于公共共同体。视角属于个人。**  
+> *Knowledge belongs to the commons. Perspective belongs to the individual.*
 
-以及一条贯穿知识建设和产品设计的原则：
+公共知识世界应尽可能开放、可发现、可验证、可连接和可复用；但每个人面对这个共同世界时，都可以根据自己的目标、背景、任务和认知方式形成自己的视角。
 
-> **采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**
->
-> 优先理解和复用已有标准与成熟先例；只有真实缺口仍然存在时才自行发明。
+这套哲学的动态展开，是一个持续的**知识流动模型（Knowledge Flow Model）**：
 
-这些原则的完整含义，以及地图优先（Atlas-first）、知识工作空间（Knowledge Workspace）、人与智能体协作（Human + Agent）、个人知识空间等长期方向，都放在 [`总体设计（Master Design）`](docs/interopatlas-master-design-v1.0.zh-CN.md) 与 [`知识哲学（Knowledge Philosophy）`](docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md) 中。普通知识使用者不需要先阅读这些文档。
+> **发现（Discover）→ 连接（Connect）→ 传递（Transmit）→ 转化（Transform）→ 复用（Reuse）→ 创造（Create）→ 公共共同体（Commons）↺**
+
+发现与连接帮助形成共同知识世界；传递与转化让知识跨越主体、系统、时间、媒介与认知边界；复用与创造让已有知识进入具体任务并产生新的成果。新的知识与创造又可以重新进入公共共同体，成为下一轮流动的基础。
+
+> **保存知识不是终点。知识最终应该帮助新的创造发生。**  
+> *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
+
+产品哲学与具体建设原则被明确分层。个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则，而不是与核心哲学并列的口号。
+
+完整结构见 [`知识哲学与原则`](docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/interopatlas-master-design-v1.0.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
 
 ## 想进一步参与？
 
