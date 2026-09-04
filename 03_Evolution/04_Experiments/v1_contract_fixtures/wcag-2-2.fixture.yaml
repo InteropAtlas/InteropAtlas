@@ -1,0 +1,45 @@
+fixture_version: p5-v0
+sample_id: p5-identity-wcag22
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://www.w3.org/TR/WCAG22/
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; no production migration attempted."
+candidate:
+  identity:
+    provisional_subject: "Web Content Accessibility Guidelines (WCAG) 2.2"
+    external_identifiers:
+      - namespace: w3c_tr
+        value: "WCAG22"
+    locators:
+      - https://www.w3.org/TR/WCAG22/
+      - https://www.w3.org/TR/2024/REC-WCAG22-20241212/
+    labels:
+      en: "Web Content Accessibility Guidelines (WCAG) 2.2"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: w3c_recommendation
+  version_publication:
+    publication_status: recommendation
+    dated_recommendation: "2024-12-12"
+    version_label: "2.2"
+  relations_hypothesis:
+    extends:
+      - "WCAG 2.1"
+unknowns:
+  - "The latest-version URI and dated Recommendation URI identify publication locators with different stability semantics; exact external-ID policy remains to be validated."
+  - "WCAG 2.x family/work identity versus each Recommendation version remains a P5 work/version decision."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests versioned W3C Recommendation plus latest-version and dated-version locators."
+  - "W3C states WCAG 2.2 extends 2.1 without deprecating or superseding 2.0/2.1, so relation semantics must not infer supersession from higher version number alone."
