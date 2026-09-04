@@ -5,7 +5,7 @@ Document Status: active philosophy baseline
 Document Created At: 2026-09-04T22:05:00+08:00
 Document Updated At: 2026-09-05T01:24:00+08:00
 Translation Source: knowledge-philosophy-and-principles-v1.0.zh-CN.md
-Translation Source Blob SHA: a94004c4d38a9fd673395ac8be5cd17cacc16e97
+Translation Source Blob SHA: b8cc89ae2c621550c27dd4e0e4a770e3c1d8b0e5
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -89,24 +89,13 @@ Humans and Agents are both participants in and visitors to the knowledge world.
 
 The project must not create one set of facts for Human UI and another for Agents. They should share Canonical Knowledge, Evidence, Provenance, and explicit unknown boundaries, differing only in access, selection, projection, representation, and permissions.
 
-## 6. Knowledge is for use, not accumulation alone
+## 6. Knowledge should flow
 
-The value of knowledge lies not only in preservation, but in being:
+> **Preserving knowledge is not the endpoint. Knowledge should ultimately help new creation happen.**
 
-```text
-discovered
-→ understood
-→ used
-→ communicated
-→ combined
-→ verified
-→ used to produce new knowledge
-→ returned to the Atlas
-```
+Knowledge should not remain merely recorded and preserved. Once it enters the commons, it should be discoverable, understandable, verifiable, usable, communicable, combinable, and capable of being carried forward into new creation.
 
-InteropAtlas should therefore not become a warehouse of endlessly accumulated material.
-
-## 7. Knowledge should flow
+Creation is therefore not a separate principle parallel to knowledge flow; it is one of the important outcomes of that flow. Preservation is a foundation and a means, not the final destination.
 
 Long-term research should investigate Knowledge Metabolism:
 
@@ -121,11 +110,13 @@ Collect
 → Reactivate
 ```
 
+This cycle should allow people to stand on existing knowledge rather than repeatedly solve problems that have already been solved, preserving scarce creative attention for spaces that remain unknown, unsolved, or uncreated. New knowledge and creations can then re-enter the Atlas and become foundations for future work.
+
 But “forgetting” in public knowledge infrastructure must be treated carefully. Deprecated ≠ Worthless, and Superseded ≠ False. Historical knowledge can become the most relevant knowledge again under a particular Context.
 
 Public Knowledge Lifecycle and Personal Attention Lifecycle must remain distinct.
 
-## 8. Selection before presentation
+## 7. Selection before presentation
 
 A beautiful interface cannot repair incorrect knowledge selection.
 
@@ -137,13 +128,13 @@ Before asking “how should the page look?”, ask:
 4. Which Representation is most suitable?
 5. What operations must the user / Agent perform?
 
-## 9. Workspace is a knowledge operation space
+## 8. Workspace is a knowledge operation space
 
 A Workspace is not merely a View.
 
 Representation determines how something appears. A Workspace also determines what can be done within that cognitive mode. Timeline, Graph, Compare, Evidence, Simulation, and other Workspaces derive their value from supporting different cognitive tasks and operations.
 
-## 10. Evidence before assertion
+## 9. Evidence before assertion
 
 InteropAtlas should keep the following distinguishable wherever possible:
 
@@ -157,7 +148,7 @@ InteropAtlas should keep the following distinguishable wherever possible:
 
 Agent output and Generated Views do not become Canonical Facts merely because they read fluently.
 
-## 11. Recoverability over false completeness
+## 10. Recoverability over false completeness
 
 Information loss occurs as knowledge enters the system and is repeatedly selected, projected, and represented.
 
@@ -165,13 +156,13 @@ Lossy Representations are allowed. Silently damaging richer Canonical Knowledge,
 
 An explicit `unknown` / `not_recorded` is better than fabricated completeness.
 
-## 12. Real use shapes the ontology
+## 11. Real use shapes the ontology
 
 InteropAtlas should not design a theoretically perfect world model first and then demand that reality conform to it.
 
 Real Queries, workflows, Intake, and failures should continuously expose modeling gaps. Only after a problem is shown to be real and Prior Art / Standards have been checked should the project decide whether the model needs to change.
 
-## 13. Adopt → Profile → Extend → Invent
+## 12. Adopt → Profile → Extend → Invent
 
 Do not invent simply because a problem looks new.
 
@@ -181,7 +172,7 @@ First look for standards, theories, protocols, knowledge models, interaction res
 
 IA should not map humanity's Interoperability Solution Space while simultaneously creating new interoperability islands through ignorance of Prior Art.
 
-## 14. Map the solved space, expose the unsolved space
+## 13. Map the solved space, expose the unsolved space
 
 InteropAtlas exists for more than describing standards that already exist.
 
@@ -223,7 +214,7 @@ Return it to the Atlas
 
 IA can therefore help advance more open, mature, reusable common solutions, but it should not become an organization that continuously manufactures IA-specific standards for the sake of “standardization.” **Standardization is a possible consequence of a verified gap, not the default output of the Atlas.**
 
-## 15. Open does not mean authority-free
+## 14. Open does not mean authority-free
 
 Open contribution does not mean every input automatically becomes a public fact.
 
@@ -231,19 +222,19 @@ An open system still requires Identity, Provenance, Evidence, Review, Lifecycle,
 
 Platform permissions held by an Agent, Human, or Organization do not themselves confer knowledge authority.
 
-## 16. Interoperability should apply to InteropAtlas itself
+## 15. Interoperability should apply to InteropAtlas itself
 
 A project that studies interoperability should keep its own Canonical data, API / Agent access, Personal Perspective, Workspace state, exports, and contribution records as portable, explainable, composable, and implementation-replaceable as possible.
 
 The long-term Personal Knowledge Space in particular should not be inherently locked to one client, account, or recommendation model.
 
-## 17. The project is also an experiment in knowledge expression
+## 16. The project is also an experiment in knowledge expression
 
 InteropAtlas does more than collect interoperability knowledge. It can also serve as a real experimental ground for studying how structured knowledge is selected, projected, transformed, and represented; how Humans and Agents jointly operate complex knowledge spaces; and whether ideas about knowledge organization that were technologically constrained decades ago can gain new life in the Agent era.
 
 This does not mean IA should become a generic PKM system. Research must remain grounded in real InteropAtlas use and verifiable knowledge tasks.
 
-## 18. Further reading: Intellectual Lineage
+## 17. Further reading: Intellectual Lineage
 
 To continue tracing where these principles come from, and whether IA is adopting, profiling, extending, synthesizing, or still openly researching earlier ideas, continue with:
 
