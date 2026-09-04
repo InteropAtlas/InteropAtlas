@@ -1,0 +1,35 @@
+fixture_version: p5-v0
+sample_id: p5-migration-b-apple-hig
+source:
+  legacy_refs:
+    - 01_State/01_Objects/apple-human-interface-guidelines.yaml#apple_human_interface_guidelines
+  candidate_refs: []
+  official_sources:
+    - https://developer.apple.com/design/human-interface-guidelines/
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+  - migration
+mapping:
+  class: B
+  notes: "Normalize official_url into locator semantics and last_verified into verification semantics; classification vocabulary remains provisional."
+candidate:
+  id: apple_human_interface_guidelines
+  classification:
+    family: reference_or_guidance_asset
+    kind: human_interface_guidance
+    provisional: true
+  locators:
+    - role: official_current
+      url: https://developer.apple.com/design/human-interface-guidelines/
+  verification:
+    last_verified_at: 2026-09-01
+unknowns:
+  - "Final V1 family/kind vocabulary is not frozen."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Structural normalization is separable from semantic taxonomy acceptance."
