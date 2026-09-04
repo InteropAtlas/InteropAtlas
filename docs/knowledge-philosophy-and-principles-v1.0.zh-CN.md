@@ -24,6 +24,36 @@ InteropAtlas 首先服务于全人类，而不是某个单独用户、组织、A
 
 公共知识世界应尽可能开放、可追溯、机器可读、可复用、可长期演化。任何 Personalization 都建立在这个公共世界之上，而不是取代它。
 
+### Why: preserve creative capacity for what remains unsolved
+
+这条原则背后还有一个更深的动机：**Human attention and creative capacity are scarce. 人类的注意力与创造能力是有限的。**
+
+如果一个问题已经被前人解决，但已有知识因为分散、封闭、不可发现、不可理解或不可复用而无法被后来者利用，人类就会不断把有限的创造性注意力重新投入已经解决过的问题。
+
+InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复发明，把更多创造力释放给真正尚未解决的问题。
+
+```text
+Human creative capacity is scarce.
+人类的创造性注意力是有限的。
+            ↓
+Knowledge should remain discoverable and reusable.
+已有知识应该尽可能可发现、可理解、可复用。
+            ↓
+Knowledge belongs to the commons.
+知识属于公共共同体。
+            ↓
+Map what humanity already knows.
+看清人类已经解决了什么。
+            ↓
+Expose the real open gaps.
+暴露真正尚未解决的问题。
+            ↓
+Create where creation is still needed.
+把创造力投入真正仍需创造之处。
+```
+
+这是一项价值方向，而不是关于所有知识产权制度、商业模式或创新行为的普遍因果定律。InteropAtlas 不要求所有实现、组织或创作者放弃私有权利，也不把 Proprietary 自动等同于低价值；它关注的是尽可能降低人类已有互操作知识的发现、理解、验证和复用成本，并如实记录不同方案的 openness、authority、license、portability 与 interoperability 边界。
+
 ## 2. Perspective belongs to the individual
 
 公共事实可以共享，注意力不能被统一规定。
@@ -155,7 +185,49 @@ InteropAtlas 不应先设计一个理论上完美的世界模型，再要求现�
 
 IA 不应一边绘制人类的互操作方案空间，一边因为不了解 Prior Art 而制造新的互操作孤岛。
 
-## 14. Open does not mean authority-free
+## 14. Map the solved space, expose the unsolved space
+
+InteropAtlas 的目的不止是描述已经存在的标准。
+
+完整映射 Standards、Prior Art、Methods、Implementations、Organizations、Capabilities、Scenarios 与 Evidence 的一个重要结果，是让“已经解决”与“仍未解决”之间的边界逐渐可见。
+
+当某个真实互操作需求：
+
+- 没有成熟 Standard；
+- 只有少量、彼此割裂或封闭的 Prior Art；
+- 存在多个互不兼容的实现；
+- 现有方案具有明显 openness / portability / interoperability 缺口；
+- 或已有标准无法覆盖反复出现的真实场景；
+
+IA 应能够把它识别为可研究的 **Open Gap / Standardization Gap / Openness Gap**，而不是把“没有找到答案”静默处理为搜索失败。
+
+理想的长期循环是：
+
+```text
+Map the existing Solution Space
+        ↓
+Find a real interoperability need
+        ↓
+Is there a mature, sufficiently open solution?
+        ↓
+Adopt / reuse / connect it when possible
+        ↓
+If not, examine Prior Art and competing approaches
+        ↓
+Verify the real gap
+        ↓
+Profile / Extend where sufficient
+        ↓
+Invent only when necessary
+        ↓
+New shared knowledge / implementation / specification
+        ↓
+Return it to the Atlas
+```
+
+因此 IA 可以帮助推动更开放、更成熟、更可复用的共同方案，但它不应成为一个为了“制定标准”而不断制造 IA 自有标准的组织。**Standardization is a possible consequence of a verified gap, not the default output of the Atlas.**
+
+## 15. Open does not mean authority-free
 
 开放贡献不等于任何输入自动成为公共事实。
 
@@ -171,7 +243,7 @@ IA 不应一边绘制人类的互操作方案空间，一边因为不了解 Prio
 
 Agent、Human、Organization 的平台权限也不等于知识权威。
 
-## 15. Interoperability should apply to InteropAtlas itself
+## 16. Interoperability should apply to InteropAtlas itself
 
 一个研究互操作的项目，应尽可能让自己的：
 
@@ -186,13 +258,13 @@ Agent、Human、Organization 的平台权限也不等于知识权威。
 
 长期 Personal Knowledge Space 尤其不应天然锁死在某个客户端、账号或推荐模型中。
 
-## 16. The project is also an experiment in knowledge expression
+## 17. The project is also an experiment in knowledge expression
 
 InteropAtlas 不只是“收录互操作知识”。它也可以成为一个真实实验场：研究结构化知识怎样被选择、投影、转换和表达，Human 与 Agent 如何共同操作复杂知识空间，以及几十年前因技术条件受限的知识组织思想在 Agent 时代能否获得新的生命。
 
 这不意味着 IA 要变成通用 PKM。研究必须始终服务于真实 InteropAtlas 使用和可验证的知识任务。
 
-## 17. Further reading: Intellectual Lineage
+## 18. Further reading: Intellectual Lineage
 
 如果希望继续追踪这些原则“从哪里来”，以及 IA 对前人思想究竟是 Adopt、Profile、Extend、Synthesize 还是仍处于 Open Research，请继续阅读：
 
