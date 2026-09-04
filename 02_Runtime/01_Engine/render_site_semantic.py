@@ -13,6 +13,7 @@ import argparse
 from pathlib import Path
 
 import human_route_compare as human_compare
+import human_route_evidence as human_evidence
 import human_route_runtime as human_route
 import human_route_search as human_search
 import human_route_shell as human_shell
@@ -29,7 +30,6 @@ SUPPORTED_VIEW_TYPES = {"capability", "standard", "implementation", "organizatio
 
 
 def semantic_site_view_type(obj: dict | None) -> str | None:
-    """Extend the current Human View projection with the v0 Organization profile."""
     view_type = _BASE_SEMANTIC_VIEW_TYPE(obj)
     if view_type is not None:
         return view_type
@@ -39,7 +39,6 @@ def semantic_site_view_type(obj: dict | None) -> str | None:
 
 
 def breadcrumb_for(obj: dict, prefix: str) -> str:
-    """Compatibility hook delegating stable breadcrumb behavior to Human Route."""
     return human_shell.breadcrumb_for(
         obj,
         prefix,
@@ -51,7 +50,6 @@ def breadcrumb_for(obj: dict, prefix: str) -> str:
 
 
 def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
-    """Compatibility hook delegating stable Human route links to Human Route."""
     return human_shell.object_html_href(
         source_obj,
         target_obj,
@@ -62,12 +60,13 @@ def object_html_href(source_obj: dict, target_obj: dict | None) -> str | None:
 
 
 def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None = None) -> str:
-    """Shared Human Route shell entry point used by Resource/Search/Compare pages."""
-    return human_shell.page_shell(legacy_site, title, body, prefix, breadcrumb)
+    page = human_shell.page_shell(legacy_site, title, body, prefix, breadcrumb)
+    if human_evidence.EVIDENCE_STYLE not in page:
+        page = page.replace("</style>", human_evidence.EVIDENCE_STYLE + "</style>", 1)
+    return page
 
 
 def render_organization(obj: dict, index: dict[str, dict], graph: GraphIndex) -> str:
-    """Render the representative Agent/Organization Resource Page contract."""
     object_id = str(obj.get("id", "未命名对象"))
     lines = [f"# {display_name(obj, object_id)}", ""]
     summary = human_markdown.summary_of(obj)
@@ -107,7 +106,6 @@ def render_human_object(obj: dict, index: dict[str, dict], graph: GraphIndex) ->
 
 
 def build_homepage(objects: list[dict], relations: list[dict], rendered: list[tuple[dict, Path]]) -> str:
-    """Keep the provisional Homepage neutral: one search action plus Atlas state."""
     return "".join(
         [
             "<h1>InteropAtlas</h1>",
@@ -131,7 +129,6 @@ def build_homepage(objects: list[dict], relations: list[dict], rendered: list[tu
 
 
 def install_compatibility_hooks() -> None:
-    """Install only Legacy/v0 semantic compatibility hooks."""
     human_markdown.semantic_view_type = semantic_site_view_type
     legacy_site.object_html_href = object_html_href
     legacy_site.breadcrumb_for = breadcrumb_for
@@ -144,6 +141,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
     index = index_objects(objects)
     graph = GraphIndex(index, relations)
     rendered: list[tuple[dict, Path]] = []
+    evidence_pages = 0
     for obj in objects:
         if semantic_site_view_type(obj) not in SUPPORTED_VIEW_TYPES:
             continue
@@ -155,6 +153,10 @@ def build(root: Path, output: Path) -> dict[str, int]:
         target.parent.mkdir(parents=True, exist_ok=True)
         content = legacy_site.markdown_to_html(render_human_object(obj, index, graph))
         content = human_route.add_resource_fragment_targets(content)
+        before_evidence = content
+        content = human_evidence.inject_evidence_workspace(content, obj)
+        if content != before_evidence:
+            evidence_pages += 1
         content = human_compare.inject_compare_entry(content, obj, index)
         local_map = human_route.build_local_map(legacy_site, obj, index, graph, semantic_site_view_type)
         content = legacy_site.inject_local_map(content, local_map)
@@ -176,7 +178,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "objects_loaded": len(objects), "pages_rendered": len(rendered),
-        "search_records": search_records, "compare_pages": 1,
+        "search_records": search_records, "compare_pages": 1, "evidence_pages": evidence_pages,
         "graph_edges": len(graph.edges), "reference_issues": len(graph.issues),
     }
 
@@ -190,6 +192,7 @@ def main() -> None:
     print(
         f"Rendered {result['pages_rendered']} pages from {result['objects_loaded']} objects, "
         f"indexed {result['search_records']} Human resources, built {result['compare_pages']} Compare view, "
+        f"added Evidence Workspace semantics to {result['evidence_pages']} pages, "
         f"with {result['graph_edges']} graph edges and {result['reference_issues']} reference issues into {args.output}"
     )
 
