@@ -3,20 +3,20 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T14:43:00+08:00
+Document Updated At: 2026-09-04T14:55:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Human review
+  Reviewer: verification-evidence / Owner direction
   GitHub Actor: ff6962757
 -->
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T14:43:00+08:00
+> Verified At: 2026-09-04T14:55:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -32,153 +32,107 @@ InteropAtlas 是一个开放、机器可读、可持续分析的 **Interoperabil
 - Readable Projection ≠ Updatable Projection；
 - Agent Output ≠ Canonical Fact；
 - Identity ≠ Capability ≠ Task Authority ≠ Review Authority ≠ Platform Permission；
-- 高影响治理、Identity Merge/Split、破坏性迁移和稳定规范升级需要更高授权 / Review Gate；
+- Identity Merge/Split、破坏性迁移、稳定规范升级和项目方向/权限边界变化需要更高 Gate；
 - **Ordinary intake MUST NOT silently merge Canonical subjects.**
+- Owner 管项目方向、重大边界和不可逆决策；可由确定性测试/Validator/CI充分验证且不改变这些边界的普通技术实现，不要求 Owner 做形式化技术签字。
 
-## 3. Phase status
+## 3. P1–P6 meaning and status
 
-```text
-P1  Design Principles                    ✅ Completed
-P2  Prior-art / standards research       ✅ Completed / #124 closed
-P3  Current-state audit                  ✅ Completed / #126 closed
-P4  Architecture / Roadmap reset         ✅ Completed / #127 closed
-P5  Real-data experiments / intake stress test ✅ representative mainline complete
-#134 Contribution-Ready Gate              ✅ PASS WITH BOUNDARIES / Owner confirmed
-P6  Implementation + continuous intake   ← NOW / #129
-```
-
-P4 architecture drafts remain drafts; #134 did not implicitly stable-promote all of them or authorize destructive migration.
-
-## 4. P5 gate result
-
-#159 synthesized evidence from #137/#130/#132/#133/#136.
-
-Owner decision at #134: **PASS WITH BOUNDARIES**.
-
-Meaning:
-
-- architecture survived representative real-data pressure without reversal；
-- Candidate/preflight work can scale immediately；
-- ordinary M0/M1 continuous intake may open in P6 once the minimum production safety path is operational；
-- mass direct Canonical writes on P5 experiment fixtures remain prohibited；
-- M2/M3, identity merge/split, destructive migration and stable/governance changes remain separately gated。
-
-## 5. NOW — P6 Slice 0 / #145
-
-Primary next task: **#145 — V1 Serialization / Validator minimal production loop**.
-
-First production chain:
+P1–P6 是把早期 InteropAtlas 转向新 V1 方向的第一轮 Foundation 重构工程，不是整个项目生命周期，也不是只写计划。
 
 ```text
-#145 V1 Serialization / Validator minimal production loop ← NOW
-├→ #146 Continuous Intake
-├→ #147 Migration Cohort 1
-├→ #148 Compare + Evidence Workspace
-└→ #149 Agent structured read/query + Candidate Write
+旧 InteropAtlas
+    ↓
+P1  Design Principles                         ✅ Completed
+P2  Prior-art / standards research            ✅ Completed / #124
+P3  Current-state audit                       ✅ Completed / #126
+P4  V1 Architecture / Roadmap reset           ✅ Completed / #127
+P5  Real-data experiments / intake stress     ✅ Mainline completed
+#134 Contribution-Ready Gate                  ✅ PASS WITH BOUNDARIES
+P6  V1 Implementation + Migration + Intake    ← NOW / #129
+    ↓
+V1 becomes the actual operating InteropAtlas
 ```
 
-### #145 production safety path landed
+P1–P5 已经确定并压力测试新方向；**P6 的职责是把仓库实际改造成 V1，同时迁移旧资产并启动长期运行。**
 
-Added / wired:
+## 4. P6 current mainline
 
-- `01_State/01_Objects/candidate-object.v1.schema.json`
-- `01_State/03_Candidates/README.md`
-- `02_Runtime/01_Engine/candidate_identity_validator.py`
-- `02_Runtime/01_Engine/legacy_identity_adapter.py`
-- `02_Runtime/01_Engine/test_candidate_identity_validator.py`
-- `01_State/04_Acceptance_Events/acceptance-event.v1.schema.json`
-- `01_State/04_Acceptance_Events/README.md`
-- `02_Runtime/01_Engine/acceptance_event_validator.py`
-- `02_Runtime/01_Engine/test_acceptance_event_validator.py`
-- `.github/workflows/p6-v1-intake-validation.yml`
-- main `machine_review.py` scans production Candidate carrier separately from Canonical objects and emits deterministic Candidate intake routes.
+#145 V1 Serialization / Validator minimal production loop is **Done / closed**.
 
-The Candidate contract distinguishes `new / duplicate / possible_duplicate / identity_risk / deferred` and hard-codes `merge_authorized: false` for ordinary Candidate validation.
+It delivered production Candidate serialization, identity-safe validation, Acceptance Event boundary, conservative Legacy identity compatibility, executable GitHub Actions validation, and a representative production batch covering unique / duplicate / identity-risk routes.
 
-Deterministic routes distinguish:
+Current P6 work now runs in parallel where safe:
 
 ```text
-review_required
-        = unique/new Candidate may proceed to independent semantic review;
-duplicate_existing
-        = known duplicate routes to the existing Canonical subject, without merge;
-identity_review_required
-        = possible duplicate / identity risk must stop for identity review;
-deferred
-        = unresolved semantic/identity case remains deferred;
-blocked_invalid_identity_state
-        = declared identity state contradicts deterministic evidence.
+#146 Continuous Intake                         ← In Progress
+#147 Migration Cohort 1                       ← NEXT / may start now
+#148 Compare + Evidence Workspace             ← Ready after production substrate
+#149 Agent structured access + Candidate Write← Ready after production substrate
 ```
 
-**No machine route means Canonical acceptance.** The strongest ordinary machine result is `review_required`.
+The active zero-context video-industry intake Agent is a real #146 stress test. Experiment/audit baseline remains **2026-09-04 14:26 +08:00**; do not interrupt it merely for review work.
 
-Acceptance Event minimally records `accepted / duplicate / deferred / rejected`, Candidate reference, machine route, independent reviewer, evidence basis, mutation impact/authority, decision time, and Canonical target when applicable. Identity-review/deferred routes cannot become ordinary-path acceptance; M2/M3 require non-ordinary authority and explicit approver.
+## 5. #146 Continuous Intake
 
-### Full repository validation now exists
-
-GitHub Actions workflow `P6 V1 Intake Validation` runs on the real repository and passed on commit `fee09adbe5b22af0381853b0a088186aabbe7dfb`.
-
-Passed steps:
-
-- Candidate identity safety tests — 6 tests / PASS；
-- Acceptance boundary safety tests — 5 tests / PASS；
-- Machine Review — `PASS + SEMANTIC REVIEW REQUIRED` with 0 deterministic errors；
-- Graph validation — 0 reference issues；
-- bootstrap compatibility query — PASS / expected deterministic output。
-
-The previous local-container DNS limitation is no longer a blocker for full-repository evidence because GitHub Actions now provides the executable repository validation path.
-
-### Real production Candidate batch
-
-Three production Candidate records now exercise the key routes:
+Production ordinary intake safety lane is open:
 
 ```text
-p6-slice0-rfc9114
-→ review_required
-
-p6-slice0-bcp47-rfc5646
-→ duplicate_existing
-
-p6-slice0-iso27001-2022
-→ identity_review_required
+Candidate discovery / first-party evidence
+→ production Candidate carrier
+→ identifier + identity/dedup preflight
+→ deterministic machine route
+→ semantic decision / Acceptance Event
+→ bounded Canonical mutation where authorized
 ```
 
-Machine Review observed exactly these three routes with 0 deterministic errors. The ISO item remains held for identity review; no merge/split was guessed.
+Key rules:
 
-**Resume Here:** complete independent semantic review / acceptance-event evidence for the ordinary RFC 9114 path and the duplicate disposition, keep ISO/IEC 27001:2022 held for identity review, then move #145 to Review and prepare #146 Continuous Intake. Do not count Agent self-check or CI as the independent reviewer.
+- Candidate Pool is the queue; do not create one Issue per standard；
+- bounded batches, public provenance, official/publisher-controlled sources preferred；
+- duplicate points to existing Canonical subject; no silent merge；
+- identity-risk / work-vs-edition / merge/split / equivalence / composite identity stop/escalate；
+- M2/M3 and genuinely high-impact mutations do not enter ordinary fast lane；
+- Candidate state does not enter Canonical graph/index；
+- GitHub Actions `P6 V1 Intake Validation` is the executable production validation path。
 
-## 6. When Agent intake can scale
+## 6. Resume Here — P6 migration starts now
 
-Already safe to scale now:
+Continue **#146** as a live parallel intake lane, but do not wait for intake to finish.
 
-- Candidate discovery；
-- first-party source confirmation；
-- identifier capture/normalization；
-- evidence-gap discovery；
-- preflight generation；
-- possible-duplicate / identity-risk routing。
+Start **#147 Migration Cohort 1** now:
 
-Broad production Canonical acceptance starts through **#146**, after #145 provides the minimum production serialization/validator + dedup/identity-risk + review/acceptance boundary.
+1. inventory Legacy Canonical objects；
+2. select only low-ambiguity P5-proven lossless/normalization mappings；
+3. preserve stable IA IDs by default；
+4. dry-run first；
+5. run schema / relation / graph / semantic-diff checks；
+6. exclude and escalate any identity merge/split, work-vs-edition ambiguity, semantic promotion or hidden-loss case；
+7. migrate a small first cohort and prove rollback/correction path；
+8. record provenance and post-migration verification。
 
-## 7. Owner / higher gates that remain
+Do not redesign P1–P5 unless execution reveals a genuine contradiction with the Owner's V1 direction. Prefer implementation/migration over further planning.
 
-Explicit Owner/Governance decision is still required for:
+## 7. Owner escalation boundary
 
-- identity merge/split where authority requires；
-- destructive migration / Legacy retirement；
-- material security/permission governance changes；
+Escalate to Owner only when execution materially changes:
+
+- InteropAtlas project definition / V1 direction / scope；
+- identity merge/split policy or a concrete irreversible identity decision；
+- destructive migration / major deletion / Legacy retirement gate；
+- material security or repository permission boundary；
 - stable specification/governance promotion；
-- V1-only writer / Legacy retirement gates；
-- material project definition/scope changes。
+- formal release or other materially irreversible project decision。
 
-## 8. Where to read next
+Ordinary technical choices, implementation details and mechanically verifiable migrations should proceed without ceremonial Owner review.
+
+## 8. Read next
 
 ```text
 AGENTS.md
 → PROJECT_STATE.md
-→ #145
-→ #134 decision
-→ docs/p5-gate-evidence-synthesis-v1-draft.zh-CN.md
-→ docs/p5-ordinary-intake-minimal-checklist-v1-draft.zh-CN.md
-→ #146 after #145 minimum safety loop is usable
+→ #146 for live intake
+→ #147 for current migration work
+→ docs/canonical-migration-architecture-v1-draft.zh-CN.md
+→ #148 / #149 as parallel P6 lanes open
 ```
