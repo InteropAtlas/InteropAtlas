@@ -1,0 +1,28 @@
+fixture_version: p5-v0
+sample_id: p5-migration-a-engine-semver
+source:
+  legacy_refs:
+    - 01_State/02_Relations/engine-v0.1-versioning.yaml#engine_v0_1_uses_semver
+  candidate_refs: []
+  official_sources: []
+contracts_under_test:
+  - relation
+  - migration
+mapping:
+  class: A
+  notes: "Lossless structural mapping of an existing binary relation; preserve IA relation identity and endpoints."
+candidate:
+  id: engine_v0_1_uses_semver
+  relation:
+    subject: engine_v0_1_bootstrap
+    predicate: uses
+    object: semantic_versioning_2_0_0
+  provenance:
+    legacy_record: engine_v0_1_uses_semver
+unknowns: []
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Experiment-only V1-shaped candidate; no Canonical mutation."
