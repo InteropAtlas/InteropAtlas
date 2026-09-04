@@ -5,9 +5,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
 Document Created At: 2026-09-04T22:15:00+08:00
-Document Updated At: 2026-09-05T02:45:00+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Translation Source: README.md
-Translation Source Blob SHA: 57e97c655bfc9780ff01c5d9f57aa485cd02ddba
+Translation Source Blob SHA: 8a96305308ed2138e662fd947ff37be53e5c1f04
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -49,7 +49,7 @@ Together, these form the Atlas rather than a collection of isolated entries.
 
 For example, a mature open-source project can be important Prior Art without being misrepresented as an “international standard”; a formal standard does not lose its normative identity merely because it has few implementations.
 
-For the full inclusion boundary, see [`Definition & Scope`](docs/interopatlas-definition-and-scope-v0.2.md).
+For the full inclusion boundary, see [`Definition & Scope`](docs/interopatlas-definition-and-scope.md).
 
 ## How can you use it?
 
@@ -91,7 +91,7 @@ Discover and Connect help form the shared knowledge world. Transmit and Transfor
 
 Product philosophy and construction principles are explicitly separated. Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** are product and construction principles rather than peer-level philosophical slogans.
 
-See [`Knowledge Philosophy & Principles`](docs/knowledge-philosophy-and-principles-v1.0.md) for the full structure and [`Master Design`](docs/interopatlas-master-design-v1.0.md) for the long-term architecture. Ordinary knowledge users do not need to read these documents first.
+See [`Knowledge Philosophy & Principles`](docs/knowledge-philosophy-and-principles.md) for the full structure and [`Master Design`](docs/interopatlas-master-design.md) for the long-term architecture. Ordinary knowledge users do not need to read these documents first.
 
 ## Want to go further?
 
@@ -99,8 +99,8 @@ Different goals have different entry points; you do not need to read the entire 
 
 | Goal | Start here |
 | --- | --- |
-| Understand what IA includes | [`Definition & Scope`](docs/interopatlas-definition-and-scope-v0.2.md) |
-| Understand long-term design and philosophy | [`Master Design`](docs/interopatlas-master-design-v1.0.md) |
+| Understand what IA includes | [`Definition & Scope`](docs/interopatlas-definition-and-scope.md) |
+| Understand long-term design and philosophy | [`Master Design`](docs/interopatlas-master-design.md) |
 | See the current build state | [`PROJECT_STATE.md`](PROJECT_STATE.md) |
 | Human maintenance / contribution | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
 | Agent onboarding / maintenance | [`AGENTS.md`](AGENTS.md) |
