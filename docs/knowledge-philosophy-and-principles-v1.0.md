@@ -3,9 +3,9 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active philosophy baseline
 Document Created At: 2026-09-04T22:05:00+08:00
-Document Updated At: 2026-09-04T22:05:00+08:00
+Document Updated At: 2026-09-05T01:24:00+08:00
 Translation Source: knowledge-philosophy-and-principles-v1.0.zh-CN.md
-Translation Source Blob SHA: 87878ddd8caf55a31e7c9c5ac01b1630254beb53
+Translation Source Blob SHA: a94004c4d38a9fd673395ac8be5cd17cacc16e97
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -20,7 +20,7 @@ Latest Substantive Contribution:
 >
 > These principles are not assumed to have been invented from nothing. For the intellectual traditions behind Knowledge Commons, Memex / Hypertext, Adaptive Hypermedia, Multiple Representation, Explainable / Controllable Personalization, and how IA inherits or recombines them, see [`InteropAtlas Intellectual Lineage`](interopatlas-intellectual-lineage-v0.1.zh-CN.md).
 
-Chinese parallel version: [`knowledge-philosophy-and-principles-v1.0.zh-CN.md`](knowledge-philosophy-and-principles-v1.0.zh-CN.md)
+[简体中文](knowledge-philosophy-and-principles-v1.0.zh-CN.md) | [English](knowledge-philosophy-and-principles-v1.0.md)
 
 ## 1. Knowledge belongs to the commons
 
