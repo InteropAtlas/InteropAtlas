@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-09-01T12:43:20+08:00
-Document Updated At: 2026-09-04T19:53:00+08:00
+Document Updated At: 2026-09-04T23:50:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -209,7 +209,42 @@ Use Claim / Handoff formats in `CONTRIBUTING.md`.
 - Durable design belongs in a small number of clearly layered documents. Do not recreate design fragmentation through redundant checkpoint files.
 - Historical design documents with independent value should normally be marked historical/superseded rather than deleted merely for tidiness.
 
-## 10. Validation
+## 10. Language and terminology
+
+InteropAtlas separates **reading language** from **concept identity**. Agents editing documentation MUST follow `docs/language-policy.zh-CN.md` and `docs/terminology-registry-v0.1.md`.
+
+For Chinese documents:
+
+- write natural Simplified Chinese as the primary reading language;
+- when a core IA concept first appears, prefer `中文首选术语（Canonical English Term）`;
+- after the concept is established, use natural Chinese without mechanically repeating English;
+- put the Chinese preferred term first — do **not** write `English Term（中文翻译）` as the default Chinese prose pattern;
+- preserve official names, protocol names, standard identifiers, trademarks, licenses, API names, code identifiers and other established technical identities when translation would reduce precision;
+- do not translate machine identifiers merely for visual consistency;
+- do not create a new concept simply because a different translation sounds better; register aliases or update the terminology registry explicitly;
+- use the terminology registry's preferred Chinese term by default, while allowing registered context-sensitive aliases where their distinction matters.
+
+Current examples include:
+
+```text
+规范知识（Canonical Knowledge）
+视角（Perspective）
+投影（Projection）
+表达（Representation）
+工作空间（Workspace）
+公共知识共同体（Public Knowledge Commons）
+个人知识空间（Personal Knowledge Space）
+互操作方案空间（Interoperability Solution Space）
+成熟先例（Prior Art）
+来源追踪（Provenance）
+地图优先（Atlas-first）
+```
+
+English parallel documents should read as natural English, not as sentence-by-sentence mirrors of Chinese. Translation MUST preserve concept identity, design status, uncertainty, normative strength and source meaning. Missing translation is a visible localization backlog; it is not by itself a reason to block valid knowledge intake.
+
+If a Chinese source document changes substantively, check whether an English parallel document exists and whether its translation provenance / semantic synchronization has become stale. Do not silently claim that translations are synchronized when they are not.
+
+## 11. Validation
 
 For changes affecting Canonical data, relations, schemas or engine, run relevant deterministic checks when environment permits. Current Runtime paths are under `02_Runtime/01_Engine/`.
 
@@ -226,7 +261,7 @@ For renderer changes, exercise representative semantic renderer pages and browse
 
 Record validation in the PR. CI is evidence, not an independent reviewer.
 
-## 11. Context exhaustion / handoff
+## 12. Context exhaustion / handoff
 
 If a session ends while work is incomplete, do not leave recoverable state only in chat.
 
@@ -245,7 +280,7 @@ Current branch / PR / commit:
 
 If work changed project-level main line, Gate, resume point or major decision, update `PROJECT_STATE.md`.
 
-## 12. Review and authorization
+## 13. Review and authorization
 
 Executor self-check is not independent review.
 
@@ -253,7 +288,7 @@ Executor self-check is not independent review.
 
 `high-impact` changes require Human Maintainer final authorization, including project scope / philosophy, governance / collaboration rules, destructive Schema changes, license / security policy, stable Specification promotion, major Personal/Public data boundary changes, main-branch protection, large Canonical deletion, formal releases and other explicit gates.
 
-## 13. Agent transparency
+## 14. Agent transparency
 
 Record execution mode as `human`, `agent`, or `mixed` and follow `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
 
