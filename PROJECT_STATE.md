@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T11:25:00+08:00
+Document Updated At: 2026-09-04T12:00:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T11:25:00+08:00
+> Verified At: 2026-09-04T12:00:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -66,8 +66,6 @@ P5  Real-data experiments / intake stress test ← NOW / #128
 P6  Implementation + continuous intake   Future / #129
 ```
 
-P3 结论仍有效：不推倒重写整个 InteropAtlas，也不继续在 V0 上无限打补丁；保留知识资产、仓库历史、协作体系、迁移基础设施和 Runtime 骨架，建立干净 V1 contracts 后逐步验证与迁移。
-
 ## 5. P4 outputs
 
 1. `docs/canonical-contract-v1-architecture-draft.zh-CN.md` ✅
@@ -91,46 +89,47 @@ Critical path:
 → #130 Identity / Version / Family-Kind Fit Test      ✅ fit test complete / Review
 → #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test ✅ fit test complete / Review
 → #133 Migration + Workspace + Human/Agent Write-back E2E ✅ representative E2E complete / Review
-→ #136 Candidate→Canonical bounded Intake Stress Test ← NOW / In Progress
-→ #159 Gate Evidence Synthesis
+→ #136 Candidate→Canonical bounded Intake Stress Test ✅ Batch 1 complete / Review
+→ #159 Gate Evidence Synthesis ← NOW
 → #134 Contribution-Ready Owner/Governance Gate
 ```
 
-#130 confirmed polymorphic publication/version behavior and stable IA identity boundaries. #132 confirmed binary relation fast path + rich-association promotion, Source/Evidence/Assertion/Assessment/Provenance separation, conflict preservation, and multidimensional lifecycle. #133 then ran A/B/C/D Legacy migration dry-runs through Compare/Evidence/Timeline/Graph projections and a Workspace correction→Candidate Patch path without opening a second write channel.
+#136 Batch 1 selected five deliberately diverse candidates and exercised source confirmation, dedup, Candidate Proposal, semantic disposition and dry acceptance/provenance paths. Experimental outcomes:
 
-The #133 write-boundary result is explicit: generated interpretation remains derived state; only an explicit Candidate Patch enters Intake. No production Canonical mutation occurred.
+```text
+RFC 9114                 → proceed ordinary intake
+Fetch Living Standard    → proceed with lifecycle/freshness boundary
+ISO/IEC 27001:2022       → defer semantic model decision
+FAPI 2.0 Security Profile→ defer profile/base/framework semantics
+BCP 47 / RFC 5646        → duplicate/existing overlap
+```
+
+No production Canonical mutation occurred. Batch 1 confirmed `accept / defer / duplicate / reject` must remain separate, and that scalable automation should focus first on preflight rather than semantic acceptance.
+
+Durable gate input: `docs/p5-ordinary-intake-minimal-checklist-v1-draft.zh-CN.md`.
 
 ### Resume Here
 
-**Primary next small checkpoint: #136 — select exactly 5 existing Candidate Pool / discovery candidates for the first bounded intake batch. Maximize publication-model diversity rather than convenience: include a numbered immutable publication, an editioned standard, a living/continuously maintained source, a profile/framework-like item, and an identity/dedup-ambiguous case if available. Produce only the source + dedup preflight matrix first. Do not mutate production Canonical data yet and do not create individual Issues.**
+**Primary next small checkpoint: #159 — synthesize Gate evidence from #137/#130/#132/#133/#136 into a concise PASS / PASS-WITH-BOUNDARIES / FAIL recommendation for #134. Do not ask Owner to decide implementation details. Explicitly separate architecture validity, bounded-intake validity, and production-readiness gaps.**
 
-#136 target loop:
-
-```text
-Candidate
-→ official source / evidence
-→ dedup / identity check
-→ V1-shaped proposal
-→ machine validation
-→ semantic review
-→ accepted / rejected / deferred decision
-→ provenance
-```
-
-The experiment harness remains under `03_Evolution/04_Experiments/v1_contract_fixtures/`, structurally outside the current Canonical loader. #137/#130/#132/#133 remain Review pending independent review where required.
-
-In parallel, Candidate discovery can continue through #125/#131/#140–#165 and the Fast Lane #192 without creating one Issue per candidate.
+The synthesis should answer:
+- which P4 contracts survived real data without reversal;
+- which ordinary M0/M1 intake steps are repeatable;
+- which checks can scale as T0/T1 preflight;
+- what must still defer/escalate;
+- which implementation gaps remain before broad continuous Canonical intake;
+- whether #134 should authorize P6 ordinary intake now, authorize with boundaries, or hold.
 
 ## 7. When standard intake can scale
 
-- **Now / P5:** Candidate discovery, official-source confirmation and dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical.
-- **Now / #136:** bounded intake stress test begins with 5 candidates; this is an experiment, not broad intake authorization.
-- **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake begins in early P6 through #145 → #146, with #167 parallelism pilot.
-- M2/M3 identity/destructive/governance/stable changes retain higher gates even after broad ordinary intake opens.
+- **Now / P5:** Candidate discovery/source confirmation/dedup can scale in parallel through #125/#131/#140–#165. Candidate ≠ Canonical.
+- **#136 result:** bounded intake semantics are viable; ordinary preflight is highly parallelizable, but actual Canonical acceptance still requires production validator/review-routing/acceptance-event implementation.
+- **After #134 PASS / PASS WITH BOUNDARIES:** broad ordinary M0/M1 continuous Canonical intake may begin in early P6 through #145 → #146, with explicit escalation of ambiguous/high-impact cases.
+- M2/M3 identity/destructive/governance/stable changes retain higher gates.
 
 ## 8. P5 parallel work
 
-Fast Lane index: **#192**.
+Fast Lane index: **#192**。
 
 Allowed before Contribution-Ready Gate:
 - Candidate discovery / source confirmation / dedup；
@@ -158,7 +157,7 @@ First production chain after Gate:
 └→ #149 Agent structured read/query + Candidate Write
 ```
 
-Scale is feedback-controlled: parallel pilot → first ~100 review → 100→1,000 gate → long-running operating model. Legacy retirement has separate gates.
+A likely #134 boundary is that broad ordinary intake may be authorized conceptually but must still begin through #145 production serialization/validator before mass Canonical writes are actually enabled.
 
 ## 10. Legacy / parallel work
 
@@ -188,15 +187,13 @@ Ordinary P5 experiments/discovery proceed autonomously. Explicit Owner/Governanc
 ```text
 AGENTS.md
 → PROJECT_STATE.md
+→ #159
+→ #134
+→ docs/p5-ordinary-intake-minimal-checklist-v1-draft.zh-CN.md
+→ #137/#130/#132/#133/#136 evidence as needed
 → docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
-→ #128 / #193
-→ #136 (primary next)
-→ #125 / #131 candidate pool
-→ docs/canonical-write-intake-contract-v1-architecture-draft.zh-CN.md
-→ docs/p5-migration-workspace-writeback-e2e-fit-test-v1-draft.zh-CN.md
-→ #192 (parallel Ready work)
 ```
 
 ## 13. Staleness check
 
-新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #136 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #159 / #134 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded historical phase plan 恢复旧路线。
