@@ -40,6 +40,15 @@ jobs:
       - name: Acceptance boundary safety tests
         run: python 02_Runtime/01_Engine/test_acceptance_event_validator.py
 
+      - name: Migration cohort safety tests
+        run: python 02_Runtime/01_Engine/test_migration_cohort.py
+
+      - name: Migration Cohort 1 dry run
+        run: >-
+          python 02_Runtime/01_Engine/migration_cohort.py
+          01_State/02_Relations/engine-v0.1-versioning.yaml
+          01_State/01_Objects/apple-human-interface-guidelines.yaml
+
       - name: Machine Review
         run: python 02_Runtime/01_Engine/machine_review.py
 
