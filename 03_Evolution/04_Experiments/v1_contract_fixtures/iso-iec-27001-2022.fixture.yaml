@@ -1,0 +1,47 @@
+fixture_version: p5-v0
+sample_id: p5-identity-iso27001-2022
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://www.iso.org/standard/27001
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; no production migration attempted."
+candidate:
+  identity:
+    provisional_subject: "ISO/IEC 27001:2022"
+    external_identifiers:
+      - namespace: iso_iec_designation
+        value: "ISO/IEC 27001:2022"
+    locators:
+      - https://www.iso.org/standard/27001
+    labels:
+      en: "Information security, cybersecurity and privacy protection — Information security management systems — Requirements"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: international_standard
+  version_publication:
+    edition: 3
+    publication_status: published
+    publication_date: "2022-10"
+  lifecycle_hypothesis:
+    prior_edition:
+      designation: "ISO/IEC 27001:2013"
+      status: withdrawn
+    amendment:
+      designation: "ISO/IEC 27001:2022/Amd 1:2024"
+unknowns:
+  - "Whether the amendment is modeled as its own Canonical Subject, a version component, or a relation-qualified publication artifact remains a P5 decision."
+  - "Whether ISO/IEC 27001 as a work/family should be a separate Canonical Subject from the 2022 edition remains to be tested."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests numbered standard + edition + amendment without collapsing edition identity into a mutable title string."
+  - "Only public ISO catalog metadata is used; no protected standard text is copied."
