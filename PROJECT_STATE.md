@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T09:40:00+08:00
+Document Updated At: 2026-09-04T09:58:00+08:00
 Metadata Backfilled At: 2026-09-02T11:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T09:40:00+08:00
+> Verified At: 2026-09-04T09:58:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -61,7 +61,7 @@ F4 — Curation / Evidence / Correctness     🟡 parallel quality line
 P1  Design Principles                    ✅ Completed / accepted
 P2  Prior-art / standards research       ✅ Completed / #124 closed
 P3  Current-state audit                  ✅ Completed / #126 closed
-P4  Architecture / Roadmap reset         ✅ Draft architecture completed / #127
+P4  Architecture / Roadmap reset         ✅ Completed / #127 closed
 P5  Real-data experiments / intake stress test ← NOW / #128
 P6  Implementation + continuous intake   Future / #129
 ```
@@ -88,8 +88,8 @@ Mainline index: **#193**。
 Critical path:
 
 ```text
-#137 Experiment Harness / V1-shaped fixtures
-→ #130 Identity / Version / Family-Kind Fit Test
+#137 Experiment Harness / V1-shaped fixtures          ✅ first usable harness / Review
+→ #130 Identity / Version / Family-Kind Fit Test      ← NOW
 → #132 Relation + Evidence/Assertion/Conflict + Lifecycle Fit Test
 → #133 Migration + Workspace + Human/Agent Write-back E2E
 → #136 Candidate→Canonical bounded Intake Stress Test
@@ -101,7 +101,9 @@ Supporting experiments (#154–#158, #153) are triggered as needed; they are not
 
 ### Resume Here
 
-**Primary next small checkpoint: #137 — P5 Batch 0: V1 Experiment Harness / Fixtures（非生产 Schema）.**
+**Primary next small checkpoint: #130 — analyze the five seeded real fixtures (RFC 9110, ISO/IEC 27001:2022, WCAG 2.2, HTML Living Standard, OpenID Connect Core 1.0) into a unified identity/version/family-kind Fit Test matrix.**
+
+The experiment harness lives under `03_Evolution/04_Experiments/v1_contract_fixtures/`. It is structurally outside the current Canonical loader and has passed a six-fixture smoke/real-sample validation (`failures=0`).
 
 In parallel, Ready fast-lane work can be claimed from **#192**, especially Candidate discovery #140–#165 and inventories #183–#189.
 
@@ -153,7 +155,7 @@ Scale is feedback-controlled: parallel pilot → first ~100 review → 100→1,0
 - PR #30 / #15 / #23 — retain as P5 non-normative Fit Test evidence;
 - #86 / #138 — Agent continuity validation;
 - F4 quality line remains parallel;
-- `docs/task-authority-governance-v0.1-draft.zh-CN.md` remains governance input, not stable policy.
+- `docs/task-authority-governance-v0.1-draft.zh-CN.md` remains governance input, not stable policy。
 
 Do not mass-close old Issues merely because the roadmap reset exists.
 
@@ -174,10 +176,11 @@ AGENTS.md
 → PROJECT_STATE.md
 → docs/p1-p6-roadmap-reset-v1-draft.zh-CN.md
 → #128 / #193
-→ #137 (primary next)
+→ #130 (primary next)
+→ 03_Evolution/04_Experiments/v1_contract_fixtures/
 → #192 (parallel Ready work)
 ```
 
 ## 13. Staleness check
 
-新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #127 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据旧 `knowledge-workspace-phase-plan-v1.0` 的 NOW:P2 恢复页面功能扩张路线。
+新 Agent 在继续前只需检查 `Verified At` 后 main / #128 / #130 / #122 是否出现改变主线的新决策，并确认 Research / Task Governance 是否已有更高版本。不要根据 superseded `knowledge-workspace-phase-plan-v1.0` 恢复页面功能扩张路线。
