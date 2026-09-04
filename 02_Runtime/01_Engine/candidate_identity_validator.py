@@ -19,6 +19,8 @@ from typing import Any, Iterable, Mapping
 import yaml
 from jsonschema import Draft202012Validator
 
+from legacy_identity_adapter import evidence_backed_legacy_identifiers
+
 
 SAFE_STATES = {
     "new",
@@ -44,22 +46,29 @@ def normalized_identifier(namespace: str, value: str) -> tuple[str, str]:
 
 
 def canonical_identifier_index(records: Iterable[Mapping[str, Any]]) -> dict[tuple[str, str], set[str]]:
+    """Build one conservative index across structured V1 and evidence-backed Legacy IDs."""
     index: dict[tuple[str, str], set[str]] = {}
     for record in records:
         record_id = record.get("id")
         if not isinstance(record_id, str):
             continue
+
         identifiers = record.get("external_identifiers")
-        if not isinstance(identifiers, list):
-            continue
-        for item in identifiers:
-            if not isinstance(item, Mapping):
-                continue
-            namespace = item.get("namespace")
-            value = item.get("value")
-            if not isinstance(namespace, str) or not isinstance(value, str):
-                continue
-            index.setdefault(normalized_identifier(namespace, value), set()).add(record_id)
+        if isinstance(identifiers, list):
+            for item in identifiers:
+                if not isinstance(item, Mapping):
+                    continue
+                namespace = item.get("namespace")
+                value = item.get("value")
+                if not isinstance(namespace, str) or not isinstance(value, str):
+                    continue
+                key = normalized_identifier(namespace, value)
+                index.setdefault(key, set()).add(record_id)
+
+        for namespace, value in evidence_backed_legacy_identifiers(record):
+            key = normalized_identifier(namespace, value)
+            index.setdefault(key, set()).add(record_id)
+
     return index
 
 
