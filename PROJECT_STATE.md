@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-04T14:12:00+08:00
+Document Updated At: 2026-09-04T14:43:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-04T14:12:00+08:00
+> Verified At: 2026-09-04T14:43:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Issue、PR、Git history 或完整 Roadmap。
 
@@ -77,7 +77,7 @@ First production chain:
 └→ #149 Agent structured read/query + Candidate Write
 ```
 
-### #145 identity-safety checkpoint landed
+### #145 production safety path landed
 
 Added / wired:
 
@@ -86,22 +86,16 @@ Added / wired:
 - `02_Runtime/01_Engine/candidate_identity_validator.py`
 - `02_Runtime/01_Engine/legacy_identity_adapter.py`
 - `02_Runtime/01_Engine/test_candidate_identity_validator.py`
-- `03_Evolution/04_Experiments/v1_contract_fixtures/candidate-identity-resolution-cases.fixture.yaml`
-- main `machine_review.py` scans production Candidate carrier separately from Canonical objects and now emits deterministic Candidate intake routes.
+- `01_State/04_Acceptance_Events/acceptance-event.v1.schema.json`
+- `01_State/04_Acceptance_Events/README.md`
+- `02_Runtime/01_Engine/acceptance_event_validator.py`
+- `02_Runtime/01_Engine/test_acceptance_event_validator.py`
+- `.github/workflows/p6-v1-intake-validation.yml`
+- main `machine_review.py` scans production Candidate carrier separately from Canonical objects and emits deterministic Candidate intake routes.
 
-The Candidate contract distinguishes:
+The Candidate contract distinguishes `new / duplicate / possible_duplicate / identity_risk / deferred` and hard-codes `merge_authorized: false` for ordinary Candidate validation.
 
-```text
-new
-duplicate
-possible_duplicate
-identity_risk
-deferred
-```
-
-and hard-codes `merge_authorized: false` for ordinary Candidate validation.
-
-Deterministic intake routes now distinguish:
+Deterministic routes distinguish:
 
 ```text
 review_required
@@ -116,36 +110,42 @@ blocked_invalid_identity_state
         = declared identity state contradicts deterministic evidence.
 ```
 
-**No route means Canonical acceptance.** The strongest ordinary machine result is `review_required`.
+**No machine route means Canonical acceptance.** The strongest ordinary machine result is `review_required`.
 
-Safety behavior:
+Acceptance Event minimally records `accepted / duplicate / deferred / rejected`, Candidate reference, machine route, independent reviewer, evidence basis, mutation impact/authority, decision time, and Canonical target when applicable. Identity-review/deferred routes cannot become ordinary-path acceptance; M2/M3 require non-ordinary authority and explicit approver.
 
-- known normalized identifier collision cannot silently remain `new`；
-- duplicate must name an existing Canonical target；
-- collisions against multiple Canonical subjects must defer/escalate；
-- identity-risk/deferred states require reasons；
-- Candidate review state is not Canonical acceptance；
-- Machine Review PASS does not authorize semantic identity, merge or split；
-- title/name/version similarity is not used as an automatic merge signal。
+### Full repository validation now exists
 
-### Legacy compatibility
+GitHub Actions workflow `P6 V1 Intake Validation` runs on the real repository and passed on commit `fee09adbe5b22af0381853b0a088186aabbe7dfb`.
 
-Existing V0 Canonical records often do not expose structured `external_identifiers`. #145 therefore uses a conservative Legacy Identity Adapter that only emits identifiers from deterministic publisher-controlled evidence. Initial supported adapter: RFC Editor official/info URL → `rfc:<number>`.
+Passed steps:
 
-BCP 47 / RFC 5646 is the first known duplicate control: candidate `rfc:5646` can be matched to existing `bcp47_rfc5646` without guessing from title similarity.
+- Candidate identity safety tests — 6 tests / PASS；
+- Acceptance boundary safety tests — 5 tests / PASS；
+- Machine Review — `PASS + SEMANTIC REVIEW REQUIRED` with 0 deterministic errors；
+- Graph validation — 0 reference issues；
+- bootstrap compatibility query — PASS / expected deterministic output。
 
-### Validation evidence and caveat
+The previous local-container DNS limitation is no longer a blocker for full-repository evidence because GitHub Actions now provides the executable repository validation path.
 
-An isolated executable check of the Slice 0 identity logic passed the four core paths:
+### Real production Candidate batch
 
-- unique/new → `review_required`；
-- known RFC 5646 duplicate → `duplicate_existing`；
-- normalized identifier collision incorrectly declared `new` → deterministic error / blocked；
-- identity-risk case → `identity_review_required`。
+Three production Candidate records now exercise the key routes:
 
-This is **not** a full repository Machine Review PASS. The current execution container still cannot resolve `github.com`, so a fresh full checkout cannot be executed. GitHub also reports no status/check run for the direct-main commits.
+```text
+p6-slice0-rfc9114
+→ review_required
 
-**Resume Here:** obtain a full executable repository validation (`machine_review.py` + graph/compatibility checks). If integration is clean, exercise a small real production Candidate batch through `review_required / duplicate_existing / identity_review_required` and record independent review/acceptance-event evidence. Only then move #145 to Review and prepare #146 Continuous Intake.
+p6-slice0-bcp47-rfc5646
+→ duplicate_existing
+
+p6-slice0-iso27001-2022
+→ identity_review_required
+```
+
+Machine Review observed exactly these three routes with 0 deterministic errors. The ISO item remains held for identity review; no merge/split was guessed.
+
+**Resume Here:** complete independent semantic review / acceptance-event evidence for the ordinary RFC 9114 path and the duplicate disposition, keep ISO/IEC 27001:2022 held for identity review, then move #145 to Review and prepare #146 Continuous Intake. Do not count Agent self-check or CI as the independent reviewer.
 
 ## 6. When Agent intake can scale
 
