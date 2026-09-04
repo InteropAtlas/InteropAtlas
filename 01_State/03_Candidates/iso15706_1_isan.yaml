@@ -11,13 +11,16 @@ locators:
   - url: https://www.iso.org/standard/83123.html
     role: official
 identity_resolution:
-  state: new
+  state: identity_risk
   matched_canonical_ids: []
   reasons:
     - ISO 15706-1 defines ISAN, the voluntary international identifier for audiovisual works (films, TV programmes).
     - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+    - "Work-versus-edition boundary: the label names an edition-neutral work while an edition-qualified ISO identifier is carried (e.g. 14496-12:2026); per the intake contract this ambiguity is routed to identity review rather than treated as a plain new candidate. Reviewer to confirm edition pinning and identifier semantics."
   merge_authorized: false
-unknowns: []
+unknowns:
+  - Edition pinning (which year/edition the candidate refers to) and whether the edition-neutral work identifier should carry edition context are left for review.
+
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
