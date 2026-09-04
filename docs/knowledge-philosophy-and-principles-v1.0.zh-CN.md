@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active philosophy baseline
 Document Created At: 2026-09-04T19:53:00+08:00
-Document Updated At: 2026-09-04T22:04:00+08:00
+Document Updated At: 2026-09-05T01:22:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -92,9 +92,14 @@ InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复�
 
 项目不能为了人类界面（Human UI）建立一套事实，又为了智能体建立另一套事实。它们应共享规范知识（Canonical Knowledge）、证据（Evidence）、来源追踪（Provenance）和明确的未知边界，只在访问、选择、投影、表达与权限上不同。
 
-## 6. 知识是为了使用，而不只是积累（Knowledge is for use, not accumulation alone）
+## 6. 知识是为了创造，而不只是保存（Knowledge is for creation, not preservation alone）
 
-知识的价值不仅在于被保存，还在于被：
+> **我们把知识开放出来，最终不是为了保存知识，而是为了创造。**  
+> *We open knowledge not merely to preserve it, but ultimately to enable creation.*
+
+保存（Preservation）非常重要，但它是手段和基础，而不是终点。知识真正进入公共共同体之后，应能够被后来者发现、理解、验证、使用、组合和继续推进，使他们不必反复重新解决已经解决的问题，并能把有限的创造性注意力投入真正仍然未知、未解决、未被创造的空间。
+
+因此知识的价值不仅在于被保存，还在于被：
 
 ```text
 发现
@@ -103,11 +108,14 @@ InteropAtlas 希望减少这种由知识不可见与不可复用造成的重复�
 → 传播
 → 组合
 → 验证
+→ 创造
 → 产生新知识
 → 重新进入知识地图
 ```
 
-因此 InteropAtlas 不应成为无限堆积材料的仓库。
+这个循环意味着：**保存知识服务于继续创造；开放知识服务于让更多人能够站在已有知识之上继续创造。**
+
+因此 InteropAtlas 不应成为无限堆积材料的仓库。它要尽可能让已有知识成为下一次创造的基础。
 
 ## 7. 知识应该流动（Knowledge should flow）
 
