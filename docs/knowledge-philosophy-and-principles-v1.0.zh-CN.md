@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active philosophy baseline
 Document Created At: 2026-09-04T19:53:00+08:00
-Document Updated At: 2026-09-04T19:53:00+08:00
+Document Updated At: 2026-09-04T21:00:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -15,6 +15,8 @@ Latest Substantive Contribution:
 -->
 
 > 本文保存 InteropAtlas 最不应该因为某个页面、Schema、Agent 或阶段计划而丢失的产品哲学。具体架构以 Master Design 和各 V1 Contract 为准。
+>
+> 这些原则并非被假定为凭空发明。其 Knowledge Commons、Memex / Hypertext、Adaptive Hypermedia、Multiple Representation、Explainable / Controllable Personalization 等思想来源与 IA 的继承/重新组合关系，见 [`InteropAtlas 思想谱系与产品哲学扩展阅读`](interopatlas-intellectual-lineage-v0.1.zh-CN.md)。
 
 ## 1. Knowledge belongs to the commons
 
@@ -149,6 +151,10 @@ InteropAtlas 不应先设计一个理论上完美的世界模型，再要求现�
 
 优先寻找几十年来已经存在的标准、理论、协议、知识模型、交互研究和成熟产品实践。研究既用于验证，也用于纠偏和获得认知增量。
 
+**这条原则同样约束 InteropAtlas 自己。** 当 IA 设计 Canonical Schema、Relation、API、Agent access、Human Interface、治理、协作机制、数据格式、Personal Perspective 或新的 Specification 时，必须优先调查和采用现有标准与成熟先例；只有它们经过真实场景验证仍无法满足需求时，才依次考虑 Profile、Extend，最后才 Invent。
+
+IA 不应一边绘制人类的互操作方案空间，一边因为不了解 Prior Art 而制造新的互操作孤岛。
+
 ## 14. Open does not mean authority-free
 
 开放贡献不等于任何输入自动成为公共事实。
@@ -185,3 +191,11 @@ Agent、Human、Organization 的平台权限也不等于知识权威。
 InteropAtlas 不只是“收录互操作知识”。它也可以成为一个真实实验场：研究结构化知识怎样被选择、投影、转换和表达，Human 与 Agent 如何共同操作复杂知识空间，以及几十年前因技术条件受限的知识组织思想在 Agent 时代能否获得新的生命。
 
 这不意味着 IA 要变成通用 PKM。研究必须始终服务于真实 InteropAtlas 使用和可验证的知识任务。
+
+## 17. Further reading: Intellectual Lineage
+
+如果希望继续追踪这些原则“从哪里来”，以及 IA 对前人思想究竟是 Adopt、Profile、Extend、Synthesize 还是仍处于 Open Research，请继续阅读：
+
+- [`InteropAtlas 思想谱系与产品哲学扩展阅读 v0.1`](interopatlas-intellectual-lineage-v0.1.zh-CN.md)
+
+这份扩展阅读应随着 Prior-Art Research 持续修正。发现更早或更成熟的前人工作，应被视为 IA 获得了更准确的知识，而不是削弱项目价值。
