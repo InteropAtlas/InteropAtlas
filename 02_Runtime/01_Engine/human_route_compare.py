@@ -56,7 +56,7 @@ def compare_entry_html(capability_id: str, index: dict[str, dict]) -> str:
     return (
         '<section class="compare-entry" aria-label="可比较实现">'
         '<strong>支持这个能力的实现</strong>'
-        '<p>以下候选来自 Workspace Selection V1：只接受 Canonical 中明确的 capability membership，不使用相似度或推荐推断。</p>'
+        '<p>以下候选由当前 Canonical objects 的 capabilities 记录推导，并通过 Workspace Selection V1 读取；不使用相似度、推荐或等价性推断。</p>'
         f'<ul>{items}</ul>{compare_link}'
         '</section>'
     )
@@ -153,8 +153,8 @@ def build_compare_body(index: dict[str, dict], relations: list[dict]) -> str:
         [
             '<section class="compare-boundary">',
             "<h2>关系语义边界</h2>",
-            f"<p>{html.escape(conditions)}</p>",
-            "<p><strong>本页不输出胜者、总分或推荐结论。</strong>这些边界由 Workspace Projection V1 明确声明。</p>",
+            f"<p><strong>关系类型：alternative_to。</strong> {html.escape(conditions)}</p>",
+            "<p><strong>本页不输出 winner（胜者）、overall score（总分）或推荐结论。</strong>这些边界由 Workspace Projection V1 明确声明。</p>",
             "<p>“当前记录未提供”是机器可区分的 not_recorded 状态，不等于 false、none 或现实中不存在该属性。</p>",
             "</section>",
         ]
