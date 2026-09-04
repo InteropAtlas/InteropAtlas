@@ -5,7 +5,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:49:18+08:00
-Document Updated At: 2026-09-05T02:35:00+08:00
+Document Updated At: 2026-09-05T03:51:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -48,7 +48,7 @@ InteropAtlas 不只是标准目录。它希望把一个互操作方案从“规�
 
 例如，一个成熟开源项目可以是重要的成熟先例（Prior Art），但不会因此被写成“国际标准”；一个正式标准也不会因为实现较少而失去其规范身份。
 
-更完整的收录边界见 [`项目定义与范围`](docs/interopatlas-definition-and-scope-v0.2.zh-CN.md)。
+更完整的收录边界见 [`项目定义与范围`](docs/interopatlas-definition-and-scope.zh-CN.md)。
 
 ## 你可以怎样使用它？
 
@@ -93,7 +93,7 @@ InteropAtlas 的核心产品哲学可以压缩为一个相互依存的命题：
 
 产品哲学与具体建设原则被明确分层。个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则，而不是与核心哲学并列的口号。
 
-完整结构见 [`知识哲学与原则`](docs/knowledge-philosophy-and-principles-v1.0.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/interopatlas-master-design-v1.0.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
+完整结构见 [`知识哲学与原则`](docs/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/interopatlas-master-design.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
 
 ## 想进一步参与？
 
@@ -101,8 +101,8 @@ InteropAtlas 的核心产品哲学可以压缩为一个相互依存的命题：
 
 | 你想做什么 | 从哪里开始 |
 | --- | --- |
-| 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/interopatlas-definition-and-scope-v0.2.zh-CN.md) |
-| 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/interopatlas-master-design-v1.0.zh-CN.md) |
+| 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/interopatlas-definition-and-scope.zh-CN.md) |
+| 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/interopatlas-master-design.zh-CN.md) |
 | 查看当前建设到哪里 | [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) |
 | 作为人类维护者参与贡献 | [`贡献指南（CONTRIBUTING.md）`](CONTRIBUTING.md) |
 | 让智能体接手或维护项目 | [`智能体指南（AGENTS.md）`](AGENTS.md) |
