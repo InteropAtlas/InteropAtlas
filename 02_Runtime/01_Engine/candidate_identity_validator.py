@@ -72,6 +72,52 @@ def canonical_identifier_index(records: Iterable[Mapping[str, Any]]) -> dict[tup
     return index
 
 
+def candidate_collisions(
+    candidate: Mapping[str, Any],
+    canonical_index: Mapping[tuple[str, str], set[str]],
+) -> set[str]:
+    collisions: set[str] = set()
+    for item in candidate.get("external_identifiers") or []:
+        if not isinstance(item, Mapping):
+            continue
+        namespace = item.get("namespace")
+        value = item.get("value")
+        if isinstance(namespace, str) and isinstance(value, str):
+            collisions.update(canonical_index.get(normalized_identifier(namespace, value), set()))
+    return collisions
+
+
+def identity_route(
+    candidate: Mapping[str, Any],
+    canonical_index: Mapping[tuple[str, str], set[str]],
+) -> str:
+    """Return the next deterministic intake route without accepting Canonical state.
+
+    This is an explicit acceptance boundary: the strongest ordinary-machine
+    result is ``review_required``. No route here means ``accepted`` and no route
+    authorizes merge/split.
+    """
+    resolution = candidate.get("identity_resolution")
+    if not isinstance(resolution, Mapping):
+        return "blocked_invalid_identity_state"
+
+    state = resolution.get("state")
+    collisions = candidate_collisions(candidate, canonical_index)
+
+    if state == "new":
+        return "blocked_invalid_identity_state" if collisions else "review_required"
+    if state == "duplicate":
+        matched = set(resolution.get("matched_canonical_ids") or [])
+        if not matched or (collisions and not collisions.issubset(matched)) or len(collisions) > 1:
+            return "blocked_invalid_identity_state"
+        return "duplicate_existing"
+    if state in {"possible_duplicate", "identity_risk"}:
+        return "identity_review_required"
+    if state == "deferred":
+        return "deferred"
+    return "blocked_invalid_identity_state"
+
+
 def validate_candidate(
     candidate: Mapping[str, Any],
     schema: Mapping[str, Any],
@@ -111,14 +157,7 @@ def validate_candidate(
         )
 
     matched = set(resolution.get("matched_canonical_ids") or [])
-    collisions: set[str] = set()
-    for item in candidate.get("external_identifiers") or []:
-        if not isinstance(item, Mapping):
-            continue
-        namespace = item.get("namespace")
-        value = item.get("value")
-        if isinstance(namespace, str) and isinstance(value, str):
-            collisions.update(canonical_index.get(normalized_identifier(namespace, value), set()))
+    collisions = candidate_collisions(candidate, canonical_index)
 
     if collisions and state == "new":
         findings.append(
@@ -201,8 +240,15 @@ def main() -> int:
 
     findings: list[IdentityFinding] = []
     candidates = load_yaml_records(args.candidate)
+    routes: list[dict[str, str | None]] = []
     for candidate in candidates:
         findings.extend(validate_candidate(candidate, schema, index))
+        routes.append(
+            {
+                "candidate_id": candidate.get("candidate_id") if isinstance(candidate.get("candidate_id"), str) else None,
+                "route": identity_route(candidate, index),
+            }
+        )
 
     errors = [item for item in findings if item.severity == "error"]
     payload = {
@@ -210,10 +256,11 @@ def main() -> int:
         "outcome": "FAIL" if errors else "PASS / IDENTITY-SAFE-PREFLIGHT",
         "candidates": len(candidates),
         "errors": len(errors),
+        "routes": routes,
         "findings": [asdict(item) for item in findings],
         "boundary": (
             "PASS means the Candidate is structurally safe for ordinary identity preflight only. "
-            "It does not prove semantic identity, authorize Canonical acceptance, or authorize merge/split."
+            "The strongest machine route is review_required; no route authorizes Canonical acceptance, merge, or split."
         ),
     }
     print(json.dumps(payload, ensure_ascii=False, indent=2))
