@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T14:40:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -24,7 +24,7 @@ Latest Substantive Contribution:
 
 InteropAtlas 是一个面向全人类的、开放、机器可读、可持续分析与演化的 **Interoperability Solution Space（互操作方案空间）公共知识基础设施**，连接标准、成熟先例、方法、实现、组织、能力、场景、关系、证据与开放缺口，并服务 Human 与 Agent 的发现、比较、组合、验证、使用和持续改进。
 
-长期方向以 [`docs/interopatlas-master-design.zh-CN.md`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) 为上位设计基线。
+长期方向以 [`总体设计（Master Design）`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) 为上位设计基线。
 
 ## 2. Long-term orientation — do not reduce IA to the current phase
 
@@ -84,7 +84,7 @@ Long-term Atlas growth / Workspace / Personalization / Human+Agent evolution
 
 P1–P5 已经确定并压力测试新方向；**P6 的职责是把仓库实际改造成 V1，同时迁移旧资产并启动长期运行。P6 完成不等于 InteropAtlas 完成。**
 
-长期 Roadmap：`docs/interopatlas-long-term-roadmap.zh-CN.md`。
+长期 Roadmap：`docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md`。
 
 ## 5. P6 current mainline
 
@@ -166,10 +166,10 @@ Ordinary technical choices, implementation details and mechanically verifiable m
 
 ```text
 README.md
-→ docs/interopatlas-master-design.zh-CN.md
-→ docs/knowledge-philosophy-and-principles.zh-CN.md
-→ docs/public-commons-and-personal-knowledge-space.zh-CN.md
-→ docs/interopatlas-long-term-roadmap.zh-CN.md
+→ docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md
+→ docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md
+→ docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md
+→ docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md
 ```
 
 ### Resume current P6 construction
@@ -179,5 +179,5 @@ AGENTS.md
 → PROJECT_STATE.md
 → #146 for live intake
 → #149 for the next Agent Access slice after explicit Ready/promotion
-→ docs/canonical-write-intake-contract-architecture-draft.zh-CN.md
+→ 03_Evolution/03_Change/p4-canonical-write-intake-contract-architecture-draft.zh-CN.md
 ```
