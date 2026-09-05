@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Draft / Provisional Specification
 Document Created At: 2026-09-01T11:34:09+08:00
-Document Updated At: 2026-09-05T15:10:00+08:00
+Document Updated At: 2026-09-05T15:50:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Reviewer: Human Owner — ff6962757
   GitHub Actor: ff6962757
 -->
 
@@ -45,6 +45,7 @@ Latest Substantive Contribution:
 - 同级编号 **MUST** 唯一；
 - 同级主要编号 **SHOULD** 限于 `01_ / 02_ / 03_`；
 - 出现第四个主要关注域时，默认继续向下一层分组，而不是新增 `04_ / 05_`；
+- 非主要入口、临时入口、辅助入口可以不编号；它们不得仅因“存在”就占用编号注意力位置；
 - `.github/`、`docs/`、`LICENSES/` 等辅助 / 平台目录可以不编号，但数量和职责仍应克制；
 - 三分是认知复杂度默认约束，不是 ontology 的数学硬限制。若强行三分会破坏真实语义、Canonical contract 或关键工程约束，应明确记录例外。
 
@@ -81,6 +82,13 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 前三个编号目录是项目本体的三个主要生命周期区域；外围目录不构成第四个主域。
 
 ```text
+01_State/
+├── 01_Objects/
+├── 02_Relations/
+└── Inbox/
+    ├── candidates/
+    └── acceptance-events/
+
 02_Runtime/
 ├── 01_Engine/
 ├── 02_Tools/
@@ -92,7 +100,7 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 └── 03_Change/
 ```
 
-`01_State` 的 Canonical 子结构属于数据合同层。当前存在 Objects、Relations、Candidates 与 Acceptance Events；是否压缩为三入口不能仅按文件整理原则决定，必须以 Canonical architecture / intake semantics 为依据。
+`01_State` 当前只有两个编号主入口：`01_Objects/` 与 `02_Relations/`，分别承载正式 Canonical 对象与正式关系。`Inbox/` 是不编号的 intake 辅助工作区，用于尚未正式收入的候选内容和接纳流程证据，因此不占主要注意力入口。不能证明已经满足正式接纳条件的新内容，默认应先进 `Inbox/`，不得直接写入正式 Canonical 目录。
 
 ## 3. `docs/` 注意力结构
 
@@ -149,6 +157,7 @@ HISTORY   已完成 / 被取代但仍有独立价值
 | Artifact | Primary Home |
 |---|---|
 | Canonical Data / Relation / State Contract | `01_State/` |
+| Intake Candidate / Acceptance Evidence | `01_State/Inbox/` |
 | Engine / Validator / Renderer / Tool | `02_Runtime/` |
 | Generated View / Export / Report | `02_Runtime/03_Outputs/` 或 CI artifact |
 | Philosophy / Definition / Master Design / Architecture | `docs/01_Foundation/` |
@@ -282,4 +291,4 @@ Code search、索引或第三方工具可能有范围 / 时效限制。因此重
 
 ## 10. 当前已知边界
 
-`01_State` 的 Objects、Relations、Candidates 与 Acceptance Events 属于 Canonical architecture / intake semantics 问题。不能仅为了满足三入口视觉结构而合并或重命名；应在对应数据模型决策中单独处理。
+`01_State` 的编号入口只用于正式 Canonical State。候选对象与接纳决策证据已经归入不编号的 `Inbox/`；它们参与 intake 流程，但不因此获得主要注意力编号。后续如果再出现类似“流程辅助物 / 临时物 / 未正式收入内容”，应优先判断是否属于不编号辅助入口，而不是机械增加新的编号目录。
