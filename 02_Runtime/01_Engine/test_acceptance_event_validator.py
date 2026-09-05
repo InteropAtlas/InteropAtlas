@@ -9,7 +9,7 @@ from pathlib import Path
 from acceptance_event_validator import validate_acceptance_event
 
 
-SCHEMA = json.loads(Path("01_State/04_Acceptance_Events/acceptance-event.v1.schema.json").read_text(encoding="utf-8"))
+SCHEMA = json.loads(Path("01_State/Inbox/acceptance-events/acceptance-event.v1.schema.json").read_text(encoding="utf-8"))
 
 
 def event(decision: str, route: str, impact: str = "M1") -> dict:
