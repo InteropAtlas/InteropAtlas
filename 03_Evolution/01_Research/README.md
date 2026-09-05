@@ -3,60 +3,30 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-01T17:15:05+08:00
-Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Document Updated At: 2026-09-05T14:25:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-这里存放为了推动 InteropAtlas 演化而进行的研究与分析。
+这里保存推动 InteropAtlas 演化所需的研究与分析。Research 不是当前规则本身；已经被正式采用的结论，应由 `docs/`、`01_State` 或 `02_Runtime` 中的 Primary Home 承担当前角色。
 
-它回答：**我们依据什么、发现了什么、验证出了什么。**
+## 三个主要入口
 
-主要包括：
+1. [`01_Prior_Art/`](01_Prior_Art/) — 外部标准、成熟先例、Reference Map、方案比较与思想来源。
+2. [`02_Audits/`](02_Audits/) — Gap、Conformance、Verification、Reference Intake、Work Package / Pilot Audit。
+3. [`03_Tests/`](03_Tests/) — Fit Test、Stress Test 与非规范性对象适配测试。
 
-- 外部标准、成熟先例与 Prior Art 调研；
-- Reference Map / Reference Intake；
-- Fit Test / Comparison；
-- Gap / Conformance / Verification；
-- Work Package / Pilot Audit；
-- 为后续 Specification、Profile、State 或 Runtime 变化提供依据的分析。
-
-Research 不是当前项目规则本身。研究结果如果已经被项目正式采用，应由 `docs/` 中的 Specification / Profile / Policy，或 `01_State` / `02_Runtime` 中的正式产物承担当前角色。
-
-## 当前材料
-
-### Repository / Foundation
-
-- [`repository-structure-prior-art-and-options-v0.1.zh-CN.md`](repository-structure-prior-art-and-options-v0.1.zh-CN.md)
-- [`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md)
-- [`foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md)
-- [`work-package-a-reference-intake-audit-2026-09-01.zh-CN.md`](work-package-a-reference-intake-audit-2026-09-01.zh-CN.md)
-- [`work-package-a-verification-2026-09-01.zh-CN.md`](work-package-a-verification-2026-09-01.zh-CN.md)
-- [`route-alignment-audit-2026-09-01.zh-CN.md`](route-alignment-audit-2026-09-01.zh-CN.md)
-
-### Human Interface
-
-- [`human-interface-standards-baseline.zh-CN.md`](human-interface-standards-baseline.zh-CN.md)
-- [`human-interface-reference-map.zh-CN.md`](human-interface-reference-map.zh-CN.md)
-- [`human-interface-reference-intake-audit-2026-09-01.zh-CN.md`](human-interface-reference-intake-audit-2026-09-01.zh-CN.md)
-- [`human-interface-conformance-audit-2026-09-01.zh-CN.md`](human-interface-conformance-audit-2026-09-01.zh-CN.md)
-
-### Open Collaboration / General Prior Art
-
-- [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md)
-- [`prior-art-and-method-reference.zh-CN.md`](prior-art-and-method-reference.zh-CN.md)
-- [`work-package-b-pilot-audit-2026-09-01.zh-CN.md`](work-package-b-pilot-audit-2026-09-01.zh-CN.md)
+它们分别回答：**我们依据什么？当前判断经得起什么审计？关键假设经过了什么测试？**
 
 ## 与 `docs/` 的边界
 
 - `docs/`：现在应该理解和遵守什么；
-- Research：为什么会形成这些判断。
+- Research：这些判断从哪里来、怎样被验证。
 
-研究文档可以长期保留，但不应因为历史上曾经重要，就继续冒充当前正式规则。
+研究记录可以长期保留，但不应因为历史上曾经重要，就继续冒充当前正式规则。

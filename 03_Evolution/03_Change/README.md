@@ -3,60 +3,30 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: change_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-01T17:15:05+08:00
-Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Document Updated At: 2026-09-05T14:25:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-这里存放已经进入“准备改变项目本身”阶段的内容，以及为了理解项目演化而需要保留的迁移 / 过渡历史。
+这里保存已经进入“准备改变项目本身”阶段的内容，以及理解项目演化所需的迁移与过渡历史。Change 不是当前规则的默认入口；正式生效后的规则应回到 `docs/`、`01_State` 或 `02_Runtime` 的 Primary Home。
 
-它回答：**我们准备具体改变什么，以及怎样安全地改变。**
+## 三个主要入口
 
-主要包括：
+1. [`01_Direction/`](01_Direction/) — Roadmap、Route、Phase Plan、Future Direction 与阶段性实施计划。
+2. [`02_Architecture/`](02_Architecture/) — 架构草案、设计决策、Contract、兼容性设计与方法形成记录。
+3. [`03_Migration/`](03_Migration/) — Current→Target Mapping、迁移预检、Dry Run、边界审计与过渡记录。
 
-- Roadmap；
-- Route / Phase Plan；
-- Proposal / Decision；
-- Implementation Plan；
-- Migration / Transition / Deprecation；
-- Future Direction；
-- 被更正式产物取代、但仍有演化价值的早期 Working Notes。
-
-Change 不是当前规则的默认入口。某个提案或路线一旦正式成为项目当前规范，应由 `docs/`、`01_State` 或 `02_Runtime` 中相应的正式产物承担当前角色。
-
-## 当前路线与阶段材料
-
-- [`roadmap.zh-CN.md`](roadmap.zh-CN.md)
-- [`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md)
-- [`human-readable-route.zh-CN.md`](human-readable-route.zh-CN.md)
-- [`machine-readable-maintainable-route.zh-CN.md`](machine-readable-maintainable-route.zh-CN.md)
-- [`object-page-shell-v0.1-plan.zh-CN.md`](object-page-shell-v0.1-plan.zh-CN.md)
-- [`visualization-direction.zh-CN.md`](visualization-direction.zh-CN.md)
-- [`project-generated-methods-standards.zh-CN.md`](project-generated-methods-standards.zh-CN.md)
-
-## 协作演化历史
-
-- [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — 早期工作笔记，当前规范角色已由 `docs/open-collaboration-profile-v0.1.zh-CN.md` 承担。
-- [`work-item-reference-seeding-v0.1.zh-CN.md`](work-item-reference-seeding-v0.1.zh-CN.md) — 早期 Reference Seeding 增补，当前更正式产物为 `docs/task-reference-seeding-profile-v0.1.zh-CN.md`。
-
-## Repository Migration 历史
-
-- [`repository-current-to-target-mapping-v0.1.zh-CN.md`](repository-current-to-target-mapping-v0.1.zh-CN.md)
-- [`repository-data-root-contract-v0.1.zh-CN.md`](repository-data-root-contract-v0.1.zh-CN.md)
-- [`migration-preflight-findings-2026-09-01.zh-CN.md`](migration-preflight-findings-2026-09-01.zh-CN.md)
-- [`schema-migration-dry-run-2026-09-01.zh-CN.md`](schema-migration-dry-run-2026-09-01.zh-CN.md)
-- [`docs-evolution-boundary-audit-2026-09-01.zh-CN.md`](docs-evolution-boundary-audit-2026-09-01.zh-CN.md)
+它们分别回答：**往哪里变？准备怎样设计？怎样安全迁移？**
 
 ## 与 `docs/` 的边界
 
 - `docs/`：现在项目是什么、当前应该遵守什么；
-- Change：项目下一步要变成什么，以及过去怎样完成迁移和过渡。
+- Change：项目曾经或准备怎样改变，以及这些改变如何被安全实施。
 
-历史材料可以保留，但应清楚标明其时代背景，避免被新贡献者误认为当前事实。
+历史材料可以长期保留，但应清楚保持其历史身份，避免被新贡献者误认为当前事实。

@@ -21,7 +21,7 @@ Latest Substantive Contribution:
 >
 > Consolidation work item: #78
 >
-> Final Gate B audit: [`../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`](/03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md)
+> Final Gate B audit: [`gate-b-final-conformance-audit-2026-09-02.zh-CN.md`](/03_Evolution/01_Research/02_Audits/gate-b-final-conformance-audit-2026-09-02.zh-CN.md)
 
 ## 1. 目的
 
