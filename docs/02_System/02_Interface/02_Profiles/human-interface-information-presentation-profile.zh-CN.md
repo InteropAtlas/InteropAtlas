@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：**Draft / Gate B Module**
 >
-> Package: [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md)
+> Package: [`human-interface-profiles.zh-CN.md`](/docs/02_System/02_Interface/01_Foundation/human-interface-profiles.zh-CN.md)
 
 ## 1. 目标
 
@@ -165,7 +165,7 @@ Compare MUST NOT 通过隐藏总分、默认 winner 或无依据的推荐把多�
 - 采用方式：**Profile + IA-specific extension**
 - 上游：ISO 9241-112 information discriminability / understandability；Knowledge Model missing semantics and Fact / Assessment boundary
 - Conformance：`Static + Data + Human + Accessibility`
-- 验收：按 [`human-interface-minimal-compare-contract.zh-CN.md`](human-interface-minimal-compare-contract.zh-CN.md) 检查代表候选能否在保留上下文、缺失语义和来源边界的前提下形成可扫描差异。
+- 验收：按 [`human-interface-minimal-compare-contract.zh-CN.md`](/docs/02_System/02_Interface/03_Contracts/human-interface-minimal-compare-contract.zh-CN.md) 检查代表候选能否在保留上下文、缺失语义和来源边界的前提下形成可扫描差异。
 
 ---
 

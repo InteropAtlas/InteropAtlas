@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：**Draft / Gate B Module**
 >
-> Package: [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md)
+> Package: [`human-interface-profiles.zh-CN.md`](/docs/02_System/02_Interface/01_Foundation/human-interface-profiles.zh-CN.md)
 
 ## 1. 目标
 
@@ -159,7 +159,7 @@ Result: Conform / Partial / Non-conform / Unknown
 代表任务至少覆盖 Identify、Find、Relate / Return、Verify、Compare，以及当前真实可触达的 Explore / Recenter path。Browser-observable 行为 SHOULD 由真实 Browser E2E 补强；没有 UI 的 Gate B minimum contract（例如当前 Minimal Compare）可以使用 deterministic semantic walkthrough，但必须明确它不是已实现的完整 UI。
 
 - Conformance：`Human + Browser + Evidence Artifact`
-- Gate B evidence：[`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)
+- Gate B evidence：[`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](/03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)
 
 ### `IA-HI-CONF-008` — Evidence of Conformance
 
@@ -232,7 +232,7 @@ ACT Rules Format 可用于 Accessibility rule 的机器可共享表达，但 IA 
 - Verify evidence；
 - Explore and return。
 
-Gate B 的最小执行证据见 [`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)。更大规模 usability research 不是 v0.1 Foundation 的毕业前置条件，除非后续 P0 evidence 证明当前核心任务仍存在结构性阻塞。
+Gate B 的最小执行证据见 [`../03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md`](/03_Evolution/02_Experiments/gate-b-minimal-human-task-walkthrough-2026-09-02.zh-CN.md)。更大规模 usability research 不是 v0.1 Foundation 的毕业前置条件，除非后续 P0 evidence 证明当前核心任务仍存在结构性阻塞。
 
 ---
 

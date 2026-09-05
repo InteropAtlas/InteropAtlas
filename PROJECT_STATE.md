@@ -24,7 +24,7 @@ Latest Substantive Contribution:
 
 InteropAtlas 是一个面向全人类的、开放、机器可读、可持续分析与演化的 **Interoperability Solution Space（互操作方案空间）公共知识基础设施**，连接标准、成熟先例、方法、实现、组织、能力、场景、关系、证据与开放缺口，并服务 Human 与 Agent 的发现、比较、组合、验证、使用和持续改进。
 
-长期方向以 [`docs/interopatlas-master-design.zh-CN.md`](docs/interopatlas-master-design.zh-CN.md) 为上位设计基线。
+长期方向以 [`docs/interopatlas-master-design.zh-CN.md`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) 为上位设计基线。
 
 ## 2. Long-term orientation — do not reduce IA to the current phase
 
