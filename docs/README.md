@@ -68,17 +68,20 @@ docs/
 ```text
 02_System/
 ├── 01_Knowledge/
-│   ├── Knowledge Object Classification
-│   ├── Knowledge Workspace Design
-│   ├── Public Commons & Personal Knowledge Space
-│   └── Provenance / Traceability
+│   ├── 01_Model/
+│   ├── 02_Workspace/
+│   └── 03_Provenance/
 └── 02_Interface/
     ├── 01_Foundation/
     ├── 02_Profiles/
     └── 03_Contracts/
 ```
 
-`01_Knowledge` 保存知识模型、Workspace 与来源追踪等当前系统规则。
+`01_Knowledge` 的三个入口分别承担：
+
+- `01_Model`：知识对象分类与模型契约；
+- `02_Workspace`：Knowledge Workspace，以及 Public Commons / Personal Knowledge Space 的边界与投影原则；
+- `03_Provenance`：来源、证据与可追踪性规则。
 
 `02_Interface` 继续保留 Human Interface 已有的 Specification / Profile / Contract 边界；这次整理只改变物理层级，不借结构清理擅自改变其规范状态或 Requirement IDs。
 
