@@ -2,7 +2,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-05T14:20:00+08:00
+Document Updated At: 2026-09-05T14:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -36,9 +36,9 @@ docs/
 └── 03_Operation/    项目怎样协作、治理和持续维护
 ```
 
-如果一个层级需要超过三个主要类别，默认继续向下一层拆分，而不是横向增加 `04_ / 05_`。辅助入口可以不编号，但必须保持少量。
+如果一个层级需要超过三个主要类别，默认继续向下一层拆分，而不是横向增加 `04_ / 05_`。但**只有一个或两个文件的主题，不应为了形式上的分类额外制造一层目录**；文件名本身已经足够表达职责时，应优先保持扁平。
 
-完整结构规则见 [`Repository Structure Profile`](03_Operation/03_Project/01_Structure/repository-structure-profile.zh-CN.md)。
+完整结构规则见 [`Repository Structure Profile`](03_Operation/03_Project/repository-structure-profile.zh-CN.md)。
 
 ## 01 Foundation
 
@@ -87,17 +87,21 @@ docs/
 ```text
 03_Operation/
 ├── 01_Collaboration/
-│   ├── 01_Model/
-│   ├── 02_Continuity/
-│   └── 03_Identity/
+│   ├── open-collaboration-profile.zh-CN.md
+│   ├── agent-onboarding-context-continuity-profile.zh-CN.md
+│   └── agent-attribution-contribution-identity-profile.zh-CN.md
 ├── 02_Governance/
+│   ├── research-governance.zh-CN.md
+│   ├── task-authority-governance-draft.zh-CN.md
+│   └── task-reference-seeding-profile.zh-CN.md
 └── 03_Project/
-    ├── 01_Structure/
-    ├── 02_Language/
-    └── 03_Development/
+    ├── repository-structure-profile.zh-CN.md
+    ├── language-policy.zh-CN.md
+    ├── terminology-registry.md
+    └── project-development-model.zh-CN.md
 ```
 
-这里保存仍然有效的协作模型、任务治理、Agent 续接、贡献身份、研究治理、仓库结构、语言与项目建设规则。
+这里保存仍然有效的协作模型、任务治理、Agent 续接、贡献身份、研究治理、仓库结构、语言与项目建设规则。`01_Collaboration` 和 `03_Project` 不再为单个文件额外制造子目录；真正需要新的目录层级时，应先出现足够的长期文档密度和清晰主题边界。
 
 ## 第一次进入项目
 
