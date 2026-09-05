@@ -3,90 +3,82 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-09-05T18:00:00+08:00
-Document Updated At: 2026-09-05T18:00:00+08:00
+Document Updated At: 2026-09-05T18:40:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Agent — Doubao / MainAgent
-  Executor: Agent — Doubao / MainAgent
+  Initiator: Human Owner — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
   Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-> 来源：#287 首轮历史议题整理。从 207 个 Open Issue 的真实样本中归纳任务类型、层级关系和标识规则。
+> 来源：#287 历史议题整理与 Owner 对当前任务可读性的修正。
 
 ## 1. 核心结论
 
-**GitHub Issue Number 是唯一稳定的 Work Item 身份。** 不建立与 #number 并行的自定义流水号（如 IA-TASK-001、P6-INT-03 等）。
+**GitHub Issue Number 是唯一稳定的 Work Item 身份。** 不建立与 `#number` 并行的项目阶段号或自定义流水号。
 
-理由：
-- Issue Number 由平台保证唯一、不可变、可引用；
-- 自定义流水号需要额外维护映射，且与 Issue Number 形成第二事实源；
-- 跨 Issue 引用使用 `#123` 即可，人类和 Agent 都能解析。
+因此，新任务标题默认不再添加 `P1 / P2 / P6`、`PH-*`、`IA-TASK-*`、`V1-*` 等项目级前缀。标题直接描述工作本身。
 
-## 2. 概念区分
+历史 Issue 中已有的阶段前缀可以留在历史记录中；它们不再定义当前路线，也不应出现在 Owner 的主线视图里。
 
-从真实样本中识别出以下容易混淆的概念：
+## 2. Owner View 与执行层分离
 
-| 概念 | 是什么 | 不是什么 | 载体 |
-|---|---|---|---|
-| **Phase** | 项目历史阶段（P1–P6），表达"什么时候定义的" | 不是优先级，不是任务层级 | 标题前缀（历史保留） |
-| **Workstream** | 长期维护的工作领域（Hygiene / CI / Docs 等） | 不是具体任务，不是 Phase | GitHub Project 字段 / Label |
-| **Task** | 有 Deliverable + Acceptance 的可执行工作 | 不是研究，不是决策 | Issue (type:task) |
-| **Research** | 开放式调查，产出 Research artifact | 不直接改 Canonical，不设 Acceptance checklist | Issue (type:research) + `03_Evolution/01_Research/` |
-| **Experiment** | 有假设的压力测试 / Fit Test | 不是普通 Task，有明确对照组 | Issue (type:experiment) + `03_Evolution/02_Experiments/` |
-| **Decision** | 需要做出选择的架构/治理事项 | 不是讨论，必须有结论 | Issue (type:decision) + `03_Evolution/03_Decisions/` |
-| **Umbrella** | 组织多个子 Issue 的上层跟踪 | 不自己承担 Deliverable | Issue (type:umbrella) 或 Project View |
-| **Maintenance** | 仓库长期维护的周期性工作 | 不是一次性建设任务 | Issue (type:maintenance) |
-| **Candidate** | 待收录的知识对象 | 不是 Work Item，不建 Issue | Candidate Pool / Project |
-
-## 3. 层级规则
-
-### 3.1 Parent / Sub-issue 层级
-
-- Parent Issue 是**执行组织层级**，不是语义分类；
-- 一个 Issue 最多有一个 Parent；
-- Parent 关闭时，子 Issue 必须全部关闭或重新指定 Parent；
-- 嵌套不超过 2 层（Parent → Child），避免深层树；
-- Umbrella 类型的 Parent 优先用 Project View 替代。
-
-### 3.2 当前仓库的真实层级样本
+Owner 默认只需要看到：
 
 ```text
-#129 P6 V1 Implementation (Umbrella, 47 children)
-  ├── #146 Continuous Intake (Umbrella, 17 children, In Progress)
-  │    ├── #167 Intake Parallelism Pilot (Task)
-  │    ├── #253 Candidate Discovery Automation (Task, Conditional)
-  │    └── ...
-  ├── #149 Agent Access Slice 1 (Task, Draft)
-  ├── #176 Lifecycle Migration Cohort 1 (Task, Draft)
-  └── ...
-#369 Long-term Operations (Umbrella, 7 children, Draft)
-  ├── #374 Workspace Feedback Loop (Research, Draft)
-  ├── #375 Architecture Fitness Loop (Research, Draft)
-  └── ...
+长期目标
+  ↓
+当前主线
+  ↓
+当前真正需要决策或推进的工作
 ```
 
-### 3.3 层级反模式（从样本中识别）
+实现层可以继续使用 Issue Number、Status、Type、Priority、Parent、Blocked By、Task Authority 等元数据，但这些内部标识不应机械地堆到 Owner-facing 汇报中。
 
-1. **Parent 已关闭但子 Issue 仍 Open** → Hygiene Action 可检测
-2. **Umbrella 嵌套 Umbrella** → 应扁平化，用 Project View 替代
-3. **一个 Issue 同时被多个 Parent 引用** → 应只保留一个 Parent
-4. **Task 作为 Parent 组织其他 Task** → 应改为 Umbrella 类型或 Project
+除非 Human Owner 正在讨论某个具体 Issue，否则汇报优先使用自然语言任务名，Issue Number 作为次级引用。
 
-## 4. ID 与引用规则
+## 3. 任务类型
 
-### 4.1 Issue 内引用
+| 类型 | 含义 | 主要载体 |
+|---|---|---|
+| **Task** | 有明确 Deliverable + Acceptance 的可执行工作 | Issue |
+| **Research** | 有边界的调查，产出可复用研究结果 | Issue + `03_Evolution/01_Research/`（达到长期价值门槛时） |
+| **Experiment** | 有假设、条件和观察结果的实验 | Issue + `03_Evolution/02_Experiments/`（达到长期价值门槛时） |
+| **Decision** | 需要明确选择并留下长期依据的事项 | Issue + `03_Evolution/03_Decisions/`（达到长期价值门槛时） |
+| **Umbrella** | 临时组织多个 Work Item 的上层任务 | Issue；规模增长后优先 Project View |
+| **Maintenance** | 有边界的维护批次 | Issue；长期责任由 Project / Automation 承担 |
+| **Candidate** | 待收录知识对象 | Candidate Pool；不是 Work Item，不建一对象一 Issue |
 
-- 跨 Issue 引用：`#123`
-- 跨仓库引用：`owner/repo#123`
-- PR 引用：`#123`（PR 与 Issue 共享编号空间）
-- Commit 引用：`@sha` 或完整 URL
+`Phase` 不再作为现行 Work Item 类型或标题前缀。历史 `P1–P6` 只解释过去某轮工作何时发生，不参与当前任务身份。
 
-### 4.2 Body 中的结构化字段
+## 4. 层级规则
 
-每个 Issue body 顶部应包含（过渡期间保留文本字段，长期可被 Label + Project 字段替代）：
+- Parent Issue 是执行组织关系，不是项目方向本身；
+- 一个 Issue 最多一个 Parent；
+- Parent 关闭时，子 Issue 应关闭、迁移或解除依赖；
+- 默认避免超过 Parent → Child 两层；
+- 大型 Umbrella 优先转为 GitHub Project / View，不建立深层 Issue 树；
+- Project 是组织和投影视图，不保存只能在那里找到的执行真相。
+
+## 5. ID 与引用
+
+- Issue：`#123`
+- 跨仓库 Issue：`owner/repo#123`
+- PR：使用 GitHub 原生编号
+- Commit：SHA / URL
+
+不使用：
+
+- `P1 / P2 / P6` 作为新任务身份或标题前缀；
+- `PH-xxx`；
+- `IA-TASK-xxx`；
+- `V1-* / V2-*` 作为项目计划任务体系；
+- 依赖重排的 `1.1 / 1.2 / 2.3` 子任务流水号。
+
+## 6. Issue 最小元数据
 
 ```text
 Status: draft | ready | claimed | in_progress | blocked | review
@@ -98,15 +90,9 @@ Task Authority: T0 | T1 | T2 | T3 (高影响任务必填)
 Review Class: normal | high-impact
 ```
 
-### 4.3 不使用的 ID 方案
+这些字段服务 Agent 与维护者执行，不要求在 Owner-facing 汇报里逐项呈现。
 
-以下方案在样本中出现过但被否决：
-
-- **PH-xxx（Phase-based ID）**：与 Issue Number 重复，且 Phase 结束后 ID 失去意义
-- **IA-TASK-xxx**：需要维护映射表，跨引用不直观
-- **子任务编号（1.1, 1.2）**：在 Issue 标题中使用时，重排后编号失效
-
-## 5. 新建 Issue 的最小模板
+## 7. 新建 Issue 的最小模板
 
 ```text
 ## Operational Metadata
@@ -114,7 +100,7 @@ Status: draft
 Type: task
 Priority: p2
 Parent: #123 (如适用)
-Blocked By: — (仅 blocked 时填写)
+Blocked By: —
 Task Authority: T1
 Review Class: normal
 
@@ -128,9 +114,32 @@ Review Class: normal
 - [ ] 可验证的完成条件
 ```
 
-## 6. 与 AGENTS.md 的对齐
+标题示例优先使用：
 
-- `Draft → Ready → Claimed → In Progress → Review → Done` 流程不变；
-- `Draft 不得被 Agent 自主当作 Ready` 不变；
-- 高影响事项需 Human Owner / Governance Gate 不变；
-- 本规范只增加 Type / Priority / Workstream 的正交 Label，不改变现有权限模型。
+```text
+Continuous Intake：扩大普通候选收录并验证真实摩擦
+Agent Structured Access：建立有边界的查询与 Candidate Write
+Relation Lifecycle Migration：迁移并验证关系生命周期数据
+```
+
+而不是：
+
+```text
+P6 V1 Continuous Intake
+P6 Agent Access Slice 1
+PH-07 V2 Migration
+```
+
+## 8. 项目版本边界
+
+项目路线、Living Documents 和 Owner View 不使用 `V1 / V2` 作为规划结构。
+
+版本号仍可以存在于真正具有版本身份的现实对象或技术制品中，例如某一版外部标准、协议、Schema、兼容契约、发布制品和历史快照。不要把“版本身份”与“项目计划版本号”混为一谈。
+
+## 9. 与 AGENTS.md 的对齐
+
+- `Draft → Ready → Claimed → In Progress → Review → Done` 不变；
+- Draft 不得被 Agent 自动视为 Ready；
+- 高影响事项仍需 Human Owner / Governance Gate；
+- GitHub Issue Number 是 Work Item 身份；
+- Owner 主线由 `PROJECT_STATE.md` 表达，不由阶段前缀、Project 字段或 Issue 树替代。
