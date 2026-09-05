@@ -499,8 +499,8 @@ For the long-term project direction, the recommended reading order is:
 1. [`README.en.md`](/README.en.md) — project entry;
 2. this document — Master Design;
 3. [`Knowledge Philosophy`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.md) — philosophy and long-term invariants;
-4. [`Public Commons and Personal Knowledge Space`](/docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md) — public knowledge and personal cognitive space;
-5. [`Knowledge Workspace Design Principles`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md) — Selection / Projection / Workspace baseline;
+4. [`Public Commons and Personal Knowledge Space`](/docs/02_System/01_Knowledge/02_Workspace/public-commons-and-personal-knowledge-space.zh-CN.md) — public knowledge and personal cognitive space;
+5. [`Knowledge Workspace Design Principles`](/docs/02_System/01_Knowledge/02_Workspace/knowledge-workspace-design-principles.zh-CN.md) — Selection / Projection / Workspace baseline;
 6. [`Long-term Roadmap`](/docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md) — long-term route and current Foundation Cycle;
 7. [`PROJECT_STATE.md`](/PROJECT_STATE.md) — current construction checkpoint;
 8. current Issue / Contract / Specification — concrete work.

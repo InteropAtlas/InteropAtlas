@@ -199,7 +199,7 @@ Workspace 可以包括 Search / Discovery、Wiki / Browse、Single Object / Arti
 
 Lossy aggregate、ranked list、generated summary、graph layout、recommendation 或 Agent narrative 默认不得直接反写 Canonical。发现需要修改的知识时，应转换为 Candidate / Proposal / Patch / Evidence，再进入统一 Intake。
 
-专项原则见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)。
+专项原则见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/02_Workspace/knowledge-workspace-design-principles.zh-CN.md)。
 
 ## 8. Human + Agent Access
 
@@ -267,7 +267,7 @@ V1 架构仍然不是最终本体。真实标准、Prior Art、Method、Implemen
 - [`项目定义与范围`](/docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md)：收录什么；
 - [`知识哲学与原则`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)：为什么这样建设；
 - [`总体设计`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)：长期系统是什么；
-- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)：Workspace / Perspective 专项原则；
+- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/02_Workspace/knowledge-workspace-design-principles.zh-CN.md)：Workspace / Perspective 专项原则；
 - Canonical Schema / Relation / Provenance / Intake Profiles：字段和可执行契约；
 - Governance / Collaboration Profiles：谁可以做什么、如何 Review；
 - [`PROJECT_STATE.md`](/PROJECT_STATE.md)：当前施工断点；

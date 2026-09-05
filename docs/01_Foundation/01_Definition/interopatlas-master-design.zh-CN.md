@@ -82,7 +82,7 @@ InteropAtlas 的长期形态可以用三个相互连接、但必须保持边界�
 
 公共事实原则上不应因为“谁在看”而改变。身份、证据、来源追踪、关系、生命周期与明确未知边界应保持稳定、可验证和可恢复。
 
-专项设计见 [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md)。
+专项设计见 [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/02_Workspace/public-commons-and-personal-knowledge-space.zh-CN.md)。
 
 ### 3.2 个人知识空间
 
@@ -111,7 +111,7 @@ InteropAtlas 的长期形态可以用三个相互连接、但必须保持边界�
 - **表达（Representation）**回答：这些知识应以什么形式出现？
 - **工作空间（Workspace）**进一步回答：在这种认知方式下，主体能够对知识做什么？
 
-具体工作空间家族、选择 / 投影边界和设计要求见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)。
+具体工作空间家族、选择 / 投影边界和设计要求见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/02_Workspace/knowledge-workspace-design-principles.zh-CN.md)。
 
 ## 4. 稳定知识，流动表达
 
@@ -267,8 +267,8 @@ InteropAtlas 的成功不只用“收录了多少标准”衡量。更重要的�
 总体设计故意保持在系统边界层，不继续展开专项规则。相关职责如下：
 
 - [`知识哲学与原则`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)：价值哲学、知识流动、创造循环与派生建设原则；
-- [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md)：公共 / 个人边界、个人状态、个性化、隐私、反信息茧房与个人空间互操作；
-- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)：Selection / Projection / Representation / Workspace；
+- [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/02_Workspace/public-commons-and-personal-knowledge-space.zh-CN.md)：公共 / 个人边界、个人状态、个性化、隐私、反信息茧房与个人空间互操作；
+- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/02_Workspace/knowledge-workspace-design-principles.zh-CN.md)：Selection / Projection / Representation / Workspace；
 - [`长期路线图`](/docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)：长期阶段关系与当前基础建设周期；
 - [`项目状态`](/PROJECT_STATE.md)：唯一的项目级实时施工断点；
 - 当前 Issue / Contract / Specification：具体可执行工作。
