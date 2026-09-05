@@ -1,0 +1,57 @@
+name: Temporary Evolution Link Migration
+
+on:
+  push:
+    branches:
+      - chore/living-doc-consolidation
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/living-doc-consolidation
+          fetch-depth: 0
+      - name: Replace exact migrated links
+        shell: python
+        run: |
+          from pathlib import Path
+
+          replacements = {
+              '/03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md': '/03_Evolution/01_Research/02_Audits/gate-b-final-conformance-audit-2026-09-02.zh-CN.md',
+              '/03_Evolution/01_Research/human-interface-standards-baseline.zh-CN.md': '/03_Evolution/01_Research/01_Prior_Art/human-interface-standards-baseline.zh-CN.md',
+              '/03_Evolution/01_Research/human-interface-reference-map.zh-CN.md': '/03_Evolution/01_Research/01_Prior_Art/human-interface-reference-map.zh-CN.md',
+              '/03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md': '/03_Evolution/01_Research/01_Prior_Art/human-ai-open-collaboration-prior-art.zh-CN.md',
+              '/03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md': '/03_Evolution/03_Change/01_Direction/open-collaboration-route-v0-notes.zh-CN.md',
+          }
+
+          files = [
+              Path('docs/02_System/02_Interface/01_Foundation/human-interface-profiles.zh-CN.md'),
+              Path('docs/02_System/02_Interface/01_Foundation/human-interface-specification.zh-CN.md'),
+              Path('docs/03_Operation/01_Collaboration/01_Model/open-collaboration-profile.zh-CN.md'),
+          ]
+          for path in files:
+              text = path.read_text(encoding='utf-8')
+              for old, new in replacements.items():
+                  text = text.replace(old, new)
+              if path.name == 'human-interface-specification.zh-CN.md':
+                  text = text.replace(
+                      '[`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md)',
+                      '[`human-interface-interaction-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-interaction-profile.zh-CN.md)'
+                  )
+              path.write_text(text, encoding='utf-8')
+      - name: Commit migration
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "docs: fix references after evolution archive reorg"
+          git push origin HEAD:chore/living-doc-consolidation
