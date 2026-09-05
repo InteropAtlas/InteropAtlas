@@ -2,8 +2,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Created At: 2026-09-01T12:43:20+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T14:20:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -14,242 +13,125 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-This file is the repository-level Bootstrap / Router for AI / Agent contributors. It does **not** replace `README.md`, `PROJECT_STATE.md`, the Master Design, `CONTRIBUTING.md`, GitHub Issues / PRs, governance, or domain Specifications.
+本文件只是仓库级 Agent 启动路由器（Bootstrap / Router），不是项目百科，也不替代 README、PROJECT_STATE、Master Design、Issue / PR、Specification 或 Governance。
 
-The goal:
-
-> A new Agent should be able to enter this repository with no private chat history, understand both the long-term project and the current construction phase, and continue without asking a Human to reconstruct previous conversations.
-
-## 1. Do not confuse project layers
-
-InteropAtlas has multiple design scales:
+## 1. 先理解三个层级
 
 ```text
-L0  Mission / Philosophy
-L1  Master Design
-L2  Architecture / Long-term Directions
-L3  Operating & Evolution Model
-L4  Foundation / Phase Roadmap
-L5  Contracts / Specifications / Profiles
-L6  Issues / PRs / Implementation
+项目为什么存在 / 长期是什么
+→ docs/01_Foundation/
+
+知识系统怎样组成 / 怎样被人和 Agent 使用
+→ docs/02_System/
+
+项目怎样协作、治理和维护
+→ docs/03_Operation/
 ```
 
-**P1–P6 is the first V1 Foundation / Architecture Revalidation Cycle, not the whole project lifecycle.**
-
-The long-term project is Atlas-first: a public interoperability knowledge commons with multiple Human / Agent access modes, evolving Perspective / Projection / Workspace forms, and a long-term Personal Knowledge Space direction. Do not reduce the project to the current website, current P6 work, the historical five-route model, or one Workspace.
-
-## 2. Start mode
-
-Choose the smallest reading path sufficient for the job.
-
-### First visit / project understanding
-
-Read in this order:
-
-1. `PROJECT_STATE.md` — current phase, main line, resume point and gates;
-2. `README.md` — concise project entry;
-3. `docs/interopatlas-master-design.zh-CN.md` — long-term Master Design and layer model;
-4. `docs/interopatlas-definition-and-scope.zh-CN.md` — definition / scope;
-5. the current Phase Plan / Issue referenced by `PROJECT_STATE.md`;
-6. `CONTRIBUTING.md` — collaboration / review rules;
-7. relevant Architecture / Specification / Research artifacts.
-
-For product philosophy, Personal Knowledge Space, Perspective / Projection / Workspace, Human+Agent shared knowledge or long-term roadmap questions, also read as relevant:
-
-- `docs/knowledge-philosophy-and-principles.zh-CN.md`;
-- `docs/public-commons-and-personal-knowledge-space.zh-CN.md`;
-- `docs/knowledge-workspace-design-principles.zh-CN.md`;
-- `docs/interopatlas-long-term-roadmap.zh-CN.md`.
-
-You should then be able to explain:
-- why InteropAtlas exists and whom it serves;
-- why the project is Atlas-first rather than Human-first or Agent-first;
-- the difference between Public Canonical Knowledge, Personal Perspective and Representation / Workspace;
-- what the current Foundation / Phase state is;
-- why P1–P6 is only one bounded reconstruction cycle;
-- the major invariants that must not be broken casually;
-- what requires explicit Human authorization.
-
-### Assigned Issue / Work Item
-
-Read in this order:
-
-1. `PROJECT_STATE.md` to understand how the task fits the current main line;
-2. the assigned GitHub Issue / Work Item;
-3. latest Handoff / active PR, if any;
-4. `CONTRIBUTING.md`;
-5. `docs/collaboration-task-system.zh-CN.md`;
-6. the Issue's `Read First / Upstream Contracts`;
-7. relevant Schema / Specification / Research files.
-
-If the task may change project philosophy, public/personal boundary, Canonical truth model, long-term product direction or major architecture, move back up the ladder and read the Master Design before acting.
-
-### User says only “continue” / “继续”
-
-Do **not** guess from private chat memory.
-
-1. Read `PROJECT_STATE.md`;
-2. check its `Verified At` and inspect newer main commits / merged PRs / Issue state if they may have changed the main direction;
-3. verify the first unfinished item under `Resume Here`;
-4. resume existing In Progress / Review work before starting a parallel replacement;
-5. update `PROJECT_STATE.md` if the real project state has moved on.
-
-### Review / Audit
-
-Do not review only the local Diff. Also read:
-
-1. `PROJECT_STATE.md`;
-2. Master Design / Definition when direction matters;
-3. relevant Decision / Specification;
-4. Work Item Scope / Non-goals / Acceptance Criteria;
-5. known gates and unresolved risks.
-
-A technically correct change can still be wrong for the current project direction.
-
-## 3. Context ladder
+当前施工状态不放在 `docs/`：
 
 ```text
-L0  AGENTS.md
-        ↓
-L1  PROJECT_STATE.md
-        ↓
-L2  README + Master Design + Definition / Scope
-        ↓
-L3  current Phase / Issue + PR + Handoff
-        ↓
-L4  relevant Specification / Schema / Research
-        ↓
-L5  Decision Artifacts + Git history
+PROJECT_STATE.md → 项目级当前断点
+GitHub Issue      → Work Item 状态
+PR / Handoff      → 当前交付与续接
+Git history       → 变化历史
 ```
 
-Use progressive context loading. Move upward for architecture, governance, Knowledge Model, Personalization, Human Interface, migration, security, licensing, major review or project-direction work.
+## 2. 第一次进入
 
-Full contract: `docs/agent-onboarding-context-continuity-profile.zh-CN.md`.
+按最小充分上下文读取：
 
-## 4. Source of truth
+1. `PROJECT_STATE.md`
+2. `README.md`
+3. `docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md`
+4. `docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md`
+5. 当前 Phase / Issue
+6. `CONTRIBUTING.md`
+7. 与任务直接相关的 Architecture / Specification / Research
 
-- Master Design = current long-term project direction and layer relationships, not live task status.
-- `PROJECT_STATE.md` = project-level current checkpoint / resume index, not task details.
-- GitHub Issue = default Work Item identity and task state.
-- PR / Handoff = active delivery and task-continuation state.
-- Canonical YAML objects and relations = knowledge facts.
-- Schema / Specifications = contracts, not fact instances.
-- Decision Artifacts = durable rationale for important choices.
-- Git history = authoritative change/event history.
-- Generated website / Markdown / exports are views and MUST NOT become a second source of truth.
-- Personal Perspective / user state MUST NOT silently become Public Canonical Knowledge.
-- Private chat memory, hidden Agent memory and transient Messages are **not** project state.
+需要理解哲学、长期方向、个人知识空间、Perspective / Projection / Workspace 时，再进入 `docs/01_Foundation/` 与 `docs/02_System/` 对应分支，不要无差别读取整个 `docs/`。
 
-If current-status artifacts conflict, inspect newer Git / merged PR / Issue evidence and repair the stale artifact before making a high-level direction decision.
+## 3. 用户只说“继续”
 
-## 5. Project invariants
+1. 读取 `PROJECT_STATE.md`；
+2. 检查 `Verified At` 后是否有改变主线的 main commit / merged PR / Issue 状态；
+3. 验证 `Resume Here` 第一项未完成工作；
+4. 优先续接已有 In Progress / Review，不创建平行替代任务；
+5. 只有项目级状态确实变化时才更新 `PROJECT_STATE.md`。
 
-Preserve these unless an explicitly authorized change is about changing them:
+私人聊天、隐藏记忆和临时终端输出不是 Project State。
 
-- `Adopt → Profile → Extend → Invent`;
-- Evidence Before Assertion;
-- Fact ≠ Assessment;
-- Physical Storage ≠ Semantic Classification ≠ Index / View;
-- stable identity must not depend on display name or physical path;
-- Canonical State ≠ generated view;
-- **Knowledge belongs to the commons; Perspective belongs to the individual**;
-- personalization changes selection / emphasis / representation, not Public Canonical facts;
-- personalization should remain transparent and reversible;
-- Human and Agent share one Canonical knowledge world;
-- Agent-only hidden project state is not allowed;
-- real use should be allowed to expose model gaps before ontology expansion;
-- high-impact governance / destructive migration / project-direction decisions require Human Maintainer authorization.
+## 4. Source of Truth
 
-For repository structure read `docs/repository-structure-profile.zh-CN.md`.
-For collaboration read `docs/open-collaboration-profile.zh-CN.md`.
-For provenance read `docs/provenance-traceability-profile.zh-CN.md` and `docs/agent-attribution-contribution-identity-profile.zh-CN.md`.
+按以下层级判断冲突：
 
-## 6. Task protocol
+1. Master Design — 长期项目方向与系统边界；
+2. `PROJECT_STATE.md` — 当前项目断点；
+3. GitHub Issue — Work Item；
+4. PR / Handoff — 当前交付；
+5. Canonical YAML — 知识事实；
+6. Schema / Specification / Profile — 合同；
+7. Git history / Evolution — 形成过程和历史；
+8. Generated views — 可重建视图，不是第二事实源。
 
-Do not autonomously start a `Draft` task as if it were `Ready`.
+## 5. 项目不变量
 
-For `Ready` tasks follow:
+除非任务本身获得明确授权去改变它们，否则保持：
 
-`Ready → Claimed → In Progress → Review → Done`
+- `Adopt → Profile → Extend → Invent`；
+- Evidence Before Assertion；
+- Fact ≠ Assessment；
+- Physical Storage ≠ Semantic Model ≠ Index / View；
+- stable identity 不依赖 display name 或 physical path；
+- Canonical State ≠ generated view；
+- **知识属于公共共同体，视角属于个人**；
+- 个性化改变选择、强调和表达，不篡改 Public Canonical facts；
+- Human 与 Agent 共享同一个 Canonical knowledge world；
+- Agent-only hidden project state 不允许存在；
+- 真实使用可以先暴露模型缺口，再决定是否扩展 ontology。
 
-with `Blocked / Handoff / Released` when needed.
+## 6. 权限与任务协议
 
-Claims must be public and time-limited. During the Pilot, the default initial lease review window is 72 hours unless the Work Item specifies otherwise.
-
-Use Claim / Handoff formats in `CONTRIBUTING.md`.
-
-## 7. Scope discipline
-
-- Follow Work Item Scope and Non-goals.
-- Do not implement a long-term Master Design direction merely because it appears in the roadmap; it must enter an authorized Work Item.
-- Do not expand a task merely because adjacent cleanup is convenient.
-- Record newly discovered modeling problems / broken assumptions / unrelated defects as follow-up work.
-- Do not invent facts to satisfy a Schema. Record a Model / Intake Gap when reality cannot be represented accurately.
-- Do not silently cross a Human decision gate listed in `PROJECT_STATE.md`.
-
-## 8. Research and evidence
-
-- Prefer authoritative first-party sources.
-- Preserve standards identity and publication status accurately.
-- Keep Fact and Assessment separate.
-- `Seed References` are starting points, not a whitelist.
-- Perform the Work Item's Freshness / Completeness Check.
-- Useful standards / prior art discovered during work should enter the Atlas or an explicit Intake follow-up when the model is not ready.
-- Do not copy protected standards text beyond redistribution rights.
-- Research should seek validation, correction and cognitive gain; do not select evidence merely to prove current IA ideas.
-
-## 9. Repository editing
-
-- Preserve stable object IDs unless explicitly authorized otherwise.
-- Avoid large directory moves unless the task covers migration and invariants.
-- Do not create Agent-only project state directories.
-- Do not edit generated outputs as canonical inputs.
-- Prefer small, reviewable changes and a Pull Request for completed Work Items.
-- Do not update `PROJECT_STATE.md` for every small change; update only project-level phase, main line, resume point, decision gate or major milestone changes.
-- Durable design belongs in a small number of clearly layered documents. Do not recreate design fragmentation through redundant checkpoint files.
-- Historical design documents with independent value should normally be marked historical/superseded rather than deleted merely for tidiness.
-- Living Document paths should remain stable and normally omit content version numbers. Use Git history / tags / releases / provenance for version history; keep version identifiers in filenames only when they are part of a protocol, Schema, standard identity, compatibility contract or historical artifact identity.
-
-## 10. Language and terminology
-
-InteropAtlas separates **reading language** from **concept identity**. Agents editing documentation MUST follow `docs/language-policy.zh-CN.md` and `docs/terminology-registry.md`.
-
-For Chinese documents:
-
-- write natural Simplified Chinese as the primary reading language;
-- when a core IA concept first appears, prefer `中文首选术语（Canonical English Term）`;
-- after the concept is established, use natural Chinese without mechanically repeating English;
-- put the Chinese preferred term first — do **not** write `English Term（中文翻译）` as the default Chinese prose pattern;
-- preserve official names, protocol names, standard identifiers, trademarks, licenses, API names, code identifiers and other established technical identities when translation would reduce precision;
-- do not translate machine identifiers merely for visual consistency;
-- do not create a new concept simply because a different translation sounds better; register aliases or update the terminology registry explicitly;
-- use the terminology registry's preferred Chinese term by default, while allowing registered context-sensitive aliases where their distinction matters.
-
-Current examples include:
+`Draft` 不得被 Agent 自主当作 `Ready`。
 
 ```text
-规范知识（Canonical Knowledge）
-视角（Perspective）
-投影（Projection）
-表达（Representation）
-工作空间（Workspace）
-公共知识共同体（Public Knowledge Commons）
-个人知识空间（Personal Knowledge Space）
-互操作方案空间（Interoperability Solution Space）
-成熟先例（Prior Art）
-来源追踪（Provenance）
-地图优先（Atlas-first）
+Draft → Ready → Claimed → In Progress → Review → Done
 ```
 
-English parallel documents should read as natural English, not as sentence-by-sentence mirrors of Chinese. Translation MUST preserve concept identity, design status, uncertainty, normative strength and source meaning. Missing translation is a visible localization backlog; it is not by itself a reason to block valid knowledge intake.
+必要时使用 `Blocked / Handoff / Released / Changes Requested`。
 
-If a Chinese source document changes substantively, check whether an English parallel document exists and whether its translation provenance / semantic synchronization has become stale. Do not silently claim that translations are synchronized when they are not.
+普通、可机械验证的技术工作可以用 deterministic evidence 完成自检；不得把 self-check 冒充 independent review。语义判断重的工作应使用独立 Reviewer。项目定义 / Scope、长期方向、治理权限、破坏性 Schema / Migration、大规模 Canonical 删除、License / Security、stable promotion、正式 Release 等高影响事项必须遵守 Human Owner / Governance Gate。
 
-## 11. Validation
+协作规则从 `docs/03_Operation/01_Collaboration/` 进入；治理规则从 `docs/03_Operation/02_Governance/` 进入。
 
-For changes affecting Canonical data, relations, schemas or engine, run relevant deterministic checks when environment permits. Current Runtime paths are under `02_Runtime/01_Engine/`.
+## 7. Repository Structure
 
-Typical checks:
+数字前缀是主要注意力入口，不只是排序装饰。同一级的主要编号默认只使用 `01_ / 02_ / 03_`；超过三个优先继续向下分层，不横向制造 `04_ / 05_`。辅助 / 平台目录可以不编号，但必须保持少量和明确职责。
+
+完整规则：`docs/03_Operation/03_Project/01_Structure/repository-structure-profile.zh-CN.md`。
+
+新增文件前先问：
+
+1. 这是 Current、Process 还是 History？
+2. 已经有没有 Primary Home？
+3. 能否修改已有 Durable Artifact，而不是新建文件？
+4. 是否只是重复已有定义？
+
+Living Documents → `docs/`；Research / Experiment / Change → `03_Evolution/`；实时状态 → PROJECT_STATE / Issue / PR。
+
+## 8. 研究、语言与来源追踪
+
+研究优先权威一手来源，保持标准身份和发布状态准确，区分 Fact / Assessment；Seed References 只是起点，不是白名单。
+
+中文文档以自然简体中文为主；核心概念首次出现优先采用 `中文首选术语（Canonical English Term）`。机器标识、官方标准名、协议名、API 名等保持准确身份。
+
+语言与术语：`docs/03_Operation/03_Project/02_Language/`  
+知识来源追踪：`docs/02_System/01_Knowledge/provenance-traceability-profile.zh-CN.md`  
+贡献身份：`docs/03_Operation/01_Collaboration/03_Identity/agent-attribution-contribution-identity-profile.zh-CN.md`
+
+## 9. 验证
+
+Canonical data、relations、schema 或 engine 变更应运行相关 deterministic checks。当前 Runtime 从 `02_Runtime/01_Engine/` 进入，例如：
 
 ```bash
 pip install -r 02_Runtime/01_Engine/requirements.txt
@@ -258,41 +140,23 @@ python 02_Runtime/01_Engine/bootstrap_query.py --capability automated_build_depl
 python 02_Runtime/01_Engine/machine_review.py
 ```
 
-For renderer changes, exercise representative semantic renderer pages and browser E2E when applicable.
+CI / Validator 是 Verification Evidence，不是独立 Reviewer。
 
-Record validation in the PR. CI is evidence, not an independent reviewer.
+## 10. Handoff
 
-## 12. Context exhaustion / handoff
-
-If a session ends while work is incomplete, do not leave recoverable state only in chat.
-
-At task level record:
+会话结束但任务未完成时，把可恢复状态写入公开持久位置：
 
 ```text
-Status:
-Completed:
-Artifacts / commits / PRs:
-Validated:
-Remaining:
-Blockers / open questions:
-Recommended next action:
-Current branch / PR / commit:
+Status
+Completed
+Artifacts / commits / PRs
+Validated
+Remaining
+Blockers / open questions
+Recommended next action
+Current branch / PR / commit
 ```
 
-If work changed project-level main line, Gate, resume point or major decision, update `PROJECT_STATE.md`.
+只有主线、Gate、Resume Here 或重大方向发生变化时才同步 `PROJECT_STATE.md`。
 
-## 13. Review and authorization
-
-Executor self-check is not independent review.
-
-`normal` tasks SHOULD receive review from a different Human or Agent.
-
-`high-impact` changes require Human Maintainer final authorization, including project scope / philosophy, governance / collaboration rules, destructive Schema changes, license / security policy, stable Specification promotion, major Personal/Public data boundary changes, main-branch protection, large Canonical deletion, formal releases and other explicit gates.
-
-## 14. Agent transparency
-
-Record execution mode as `human`, `agent`, or `mixed` and follow `docs/agent-attribution-contribution-identity-profile.zh-CN.md`.
-
-Core contribution roles are Initiator / Executor / Reviewer. GitHub Actor is platform provenance and must be recorded separately when it differs from actual Executor. Governance Approver is recorded only when high-impact authorization is required.
-
-These instructions are vendor-neutral. Do not assume ChatGPT, Codex, Claude, Copilot, Gemini or another product is the only supported environment.
+核心原则：**聊天可以中断，项目状态不能中断；文档可以分层，事实源不能分裂。**
