@@ -64,7 +64,7 @@ Agent structured access + Candidate Write 等高影响能力仍需 Human Owner �
 | --- | --- |
 | **发现地图空缺、补充新的标准 / 协议 / 方法 / 实现** | 从 [`Candidate Pool`](01_State/Inbox/candidates/) 查看候选与覆盖情况，再从 [当前开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 查找可执行的 intake / coverage 工作 |
 | **审核 Candidate，判断对象 / 关系 / 证据能否进入 Canonical** | 从 [`Inbox`](01_State/Inbox/) 查看待处理材料，并按 [`知识系统规范`](docs/02_System/01_Knowledge/) 进行 identity、evidence、relation 与 acceptance 审查 |
-| **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interaction/) 理解现有设计，再到 [开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 寻找当前 Human-facing 工作 |
+| **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再到 [开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 寻找当前 Human-facing 工作 |
 | **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 和 [`System`](docs/02_System/) 理解当前能力，再到 [开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 寻找当前 Machine / Agent 工作；高影响能力仍遵守 Owner Gate |
 | **研究项目大方向、提出新的能力或路线** | 先参考 [`长期路线`](docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)；尚未收敛的问题进入 [GitHub Discussions](https://github.com/InteropAtlas/InteropAtlas/discussions)，形成明确交付边界后再成为 Issue |
 | **领取一个已经明确的具体任务** | 进入 [GitHub Issues](https://github.com/InteropAtlas/InteropAtlas/issues)；Issue 是具体 Work Item 的执行事实源 |
