@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-05T14:25:00+08:00
+Document Updated At: 2026-09-05T18:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -44,9 +44,7 @@ InteropAtlas 的目标是让人（Human）与智能体（Agent）都能从同一
 
 **查找 → 浏览 → 理解 → 追踪关系 → 比较方案 → 检查证据 → 发现缺口。**
 
-当前项目仍在建设 V1 基础设施。长期会从同一份知识底座提供百科式浏览、单对象文章、时间线、关系图 / 生态图、比较、证据 / 验证，以及面向 Agent / API 的结构化访问。
-
-不同形式不是不同数据库，而是同一张知识地图面向不同认知任务的不同表达。
+项目正在把 Canonical Knowledge、持续收录（Intake）、Human / Agent Access 与真实数据使用变成可靠的长期运行能力。不同形式不是不同数据库，而是同一张知识地图面向不同认知任务的不同表达。
 
 > **知识相对稳定，表达可以流动。**  
 > *Knowledge is stable; representations are fluid.*
@@ -67,14 +65,14 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 > **知识流动，创造不息。**  
 > *Knowledge travels. Creation continues.*
 
-公共知识跨越边界进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。流动（Flow）与创造（Create）是两个基本运动；发现、连接、传递、转化和复用是知识跨越不同边界的典型机制，而不是必须并列的顶层阶段。
+公共知识跨越边界进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。
 
 > **保存知识不是终点。知识最终应该帮助新的创造发生。**  
 > *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
 
 个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则。
 
-完整结构见 [`知识哲学与原则`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
+完整结构见 [`知识哲学与原则`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)。
 
 ## 想进一步参与？
 
@@ -82,19 +80,20 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 | --- | --- |
 | 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md) |
 | 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) |
-| 查看当前建设到哪里 | [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) |
+| **查看现在真正的主线** | [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) |
+| 查看长期能力方向 | [`长期路线图`](docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md) |
 | 作为人类维护者参与贡献 | [`贡献指南（CONTRIBUTING.md）`](CONTRIBUTING.md) |
 | 让智能体接手或维护项目 | [`智能体指南（AGENTS.md）`](AGENTS.md) |
 | 查找规范、Profile、架构和政策 | [`文档地图（docs/README.md）`](docs/README.md) |
-| 查看研究、实验和变更过程 | [`演化记录（03_Evolution/）`](03_Evolution/) |
+| 查看研究、实验和决策过程 | [`演化记录（03_Evolution/）`](03_Evolution/) |
 
-项目维护结构、P1–P6、当前 P6 施工路线、Migration、Intake、Governance 等内容属于第二层维护上下文，不在首页展开。
+历史阶段编号、旧项目版本称呼、Migration 过程和内部任务树属于历史 / 执行层上下文，不作为 Owner-facing 主线。
 
 ## 当前状态
 
-InteropAtlas 仍处于早期建设阶段。当前重点是让 V1 规范知识（Canonical Knowledge）、持续收录（Intake）、人与智能体访问（Human / Agent Access）和真实数据使用形成可靠基础，而不是宣称已经覆盖完整的互操作世界。
+InteropAtlas 仍处于早期建设阶段，但已经从纯设计转向真实运行：持续收录、Canonical Knowledge、Human Workspace、Agent 协作与仓库运行机制正在并行演化。
 
-实时项目断点与下一步工作以 [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) 为准。
+**实时项目断点与下一步只看 [`PROJECT_STATE.md`](PROJECT_STATE.md)。**
 
 ## 许可证
 
