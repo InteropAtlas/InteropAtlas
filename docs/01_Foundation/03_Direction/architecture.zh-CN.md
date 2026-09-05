@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：当前有效的 V1 核心架构基线（Active V1 Core Architecture Baseline）
 >
-> 本文负责维护 InteropAtlas 当前有效的核心知识与访问架构。项目使命与长期系统边界见 [`总体设计`](interopatlas-master-design.zh-CN.md)；具体字段、Schema、Profile、运行规则与阶段实现由下位规范维护。
+> 本文负责维护 InteropAtlas 当前有效的核心知识与访问架构。项目使命与长期系统边界见 [`总体设计`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)；具体字段、Schema、Profile、运行规则与阶段实现由下位规范维护。
 >
 > 本版吸收 P4.1 Canonical Contract、P4.2 Write / Intake、P4.4 Selection / Projection / Workspace、P4.5 Human + Agent Access 中经过后续 P5/P6 延续的核心架构边界。P4 阶段性 Draft 归入 Evolution 保存设计历史，不再作为并列事实源。
 
@@ -199,7 +199,7 @@ Workspace 可以包括 Search / Discovery、Wiki / Browse、Single Object / Arti
 
 Lossy aggregate、ranked list、generated summary、graph layout、recommendation 或 Agent narrative 默认不得直接反写 Canonical。发现需要修改的知识时，应转换为 Candidate / Proposal / Patch / Evidence，再进入统一 Intake。
 
-专项原则见 [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)。
+专项原则见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)。
 
 ## 8. Human + Agent Access
 
@@ -264,13 +264,13 @@ V1 架构仍然不是最终本体。真实标准、Prior Art、Method、Implemen
 
 本文件是当前 V1 Core Architecture 的 Primary Home，但不承担所有细节：
 
-- [`项目定义与范围`](interopatlas-definition-and-scope.zh-CN.md)：收录什么；
-- [`知识哲学与原则`](knowledge-philosophy-and-principles.zh-CN.md)：为什么这样建设；
-- [`总体设计`](interopatlas-master-design.zh-CN.md)：长期系统是什么；
-- [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)：Workspace / Perspective 专项原则；
+- [`项目定义与范围`](/docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md)：收录什么；
+- [`知识哲学与原则`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)：为什么这样建设；
+- [`总体设计`](/docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)：长期系统是什么；
+- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)：Workspace / Perspective 专项原则；
 - Canonical Schema / Relation / Provenance / Intake Profiles：字段和可执行契约；
 - Governance / Collaboration Profiles：谁可以做什么、如何 Review；
-- [`PROJECT_STATE.md`](../PROJECT_STATE.md)：当前施工断点；
+- [`PROJECT_STATE.md`](/PROJECT_STATE.md)：当前施工断点；
 - `03_Evolution/`：P4/P5 等研究、实验和架构形成历史。
 
 核心架构应随已经被验证并接受的设计变化更新；阶段性研究或施工计划不应重新成为与本文并列的长期架构事实源。

@@ -18,7 +18,7 @@ Latest Substantive Contribution:
 >
 > 目的：回答 InteropAtlas **是什么、长期要成为怎样的系统、主要系统边界是什么，以及当前基础建设周期在长期路线中的位置**。
 >
-> 项目的价值哲学与派生建设原则由 [`knowledge-philosophy-and-principles.zh-CN.md`](knowledge-philosophy-and-principles.zh-CN.md) 维护；本文不重复建立第二套哲学清单。具体实现架构、阶段计划和单项规范由下位文档维护。
+> 项目的价值哲学与派生建设原则由 [`knowledge-philosophy-and-principles.zh-CN.md`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md) 维护；本文不重复建立第二套哲学清单。具体实现架构、阶段计划和单项规范由下位文档维护。
 
 [简体中文](interopatlas-master-design.zh-CN.md) | [English](interopatlas-master-design.md)
 
@@ -46,7 +46,7 @@ InteropAtlas 的核心产品哲学只有一个相互依存的命题：
 
 发现（Discover）、连接（Connect）、传递（Transmit）、转化（Transform）和复用（Reuse）是知识跨越不同边界的典型流动机制；创造（Create）让主体站在已有知识之上产生新的知识、方法、实现、规范或作品，并使新的成果有机会重新进入公共共同体。
 
-完整论证、知识流动模型、知识代谢边界以及产品与建设原则只在 [`知识哲学与原则`](knowledge-philosophy-and-principles.zh-CN.md) 中维护。总体设计只承接这些上位约束，不重新定义它们。
+完整论证、知识流动模型、知识代谢边界以及产品与建设原则只在 [`知识哲学与原则`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md) 中维护。总体设计只承接这些上位约束，不重新定义它们。
 
 ## 3. 长期系统结构：共享知识 → 个人视角 → 体验
 
@@ -82,7 +82,7 @@ InteropAtlas 的长期形态可以用三个相互连接、但必须保持边界�
 
 公共事实原则上不应因为“谁在看”而改变。身份、证据、来源追踪、关系、生命周期与明确未知边界应保持稳定、可验证和可恢复。
 
-专项设计见 [`公共知识共同体与个人知识空间`](public-commons-and-personal-knowledge-space.zh-CN.md)。
+专项设计见 [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md)。
 
 ### 3.2 个人知识空间
 
@@ -111,7 +111,7 @@ InteropAtlas 的长期形态可以用三个相互连接、但必须保持边界�
 - **表达（Representation）**回答：这些知识应以什么形式出现？
 - **工作空间（Workspace）**进一步回答：在这种认知方式下，主体能够对知识做什么？
 
-具体工作空间家族、选择 / 投影边界和设计要求见 [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)。
+具体工作空间家族、选择 / 投影边界和设计要求见 [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)。
 
 ## 4. 稳定知识，流动表达
 
@@ -219,7 +219,7 @@ V1 成为可运行基础
 长期知识地图成长 / 工作空间 / 个性化 / 人与智能体演化
 ```
 
-P6 完成只意味着新方向获得可信的运行基础，不意味着 InteropAtlas 完成。实时状态与恢复点只由 [`PROJECT_STATE.md`](../PROJECT_STATE.md) + GitHub Issue / PR + 更新的 Git 证据维护。
+P6 完成只意味着新方向获得可信的运行基础，不意味着 InteropAtlas 完成。实时状态与恢复点只由 [`PROJECT_STATE.md`](/PROJECT_STATE.md) + GitHub Issue / PR + 更新的 Git 证据维护。
 
 ## 9. 当前 V1 与长期愿景
 
@@ -227,7 +227,7 @@ P6 完成只意味着新方向获得可信的运行基础，不意味着 Interop
 
 个人知识空间、动态个人视角、表达转换、更多工作空间、知识代谢、匹配（MATCH）和人与智能体共享工作空间属于长期方向。当前设计应保留架构空间，但不能为了未来想象过早冻结模式（Schema）。
 
-长期阶段关系见 [`InteropAtlas 长期路线图`](interopatlas-long-term-roadmap.zh-CN.md)。
+长期阶段关系见 [`InteropAtlas 长期路线图`](/docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)。
 
 ## 10. 信息损失与开放边界
 
@@ -266,11 +266,11 @@ InteropAtlas 的成功不只用“收录了多少标准”衡量。更重要的�
 
 总体设计故意保持在系统边界层，不继续展开专项规则。相关职责如下：
 
-- [`知识哲学与原则`](knowledge-philosophy-and-principles.zh-CN.md)：价值哲学、知识流动、创造循环与派生建设原则；
-- [`公共知识共同体与个人知识空间`](public-commons-and-personal-knowledge-space.zh-CN.md)：公共 / 个人边界、个人状态、个性化、隐私、反信息茧房与个人空间互操作；
-- [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)：Selection / Projection / Representation / Workspace；
-- [`长期路线图`](interopatlas-long-term-roadmap.zh-CN.md)：长期阶段关系与当前基础建设周期；
-- [`项目状态`](../PROJECT_STATE.md)：唯一的项目级实时施工断点；
+- [`知识哲学与原则`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)：价值哲学、知识流动、创造循环与派生建设原则；
+- [`公共知识共同体与个人知识空间`](/docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md)：公共 / 个人边界、个人状态、个性化、隐私、反信息茧房与个人空间互操作；
+- [`知识工作空间设计原则`](/docs/02_System/01_Knowledge/knowledge-workspace-design-principles.zh-CN.md)：Selection / Projection / Representation / Workspace；
+- [`长期路线图`](/docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)：长期阶段关系与当前基础建设周期；
+- [`项目状态`](/PROJECT_STATE.md)：唯一的项目级实时施工断点；
 - 当前 Issue / Contract / Specification：具体可执行工作。
 
 面对重大设计问题，先判断它属于哪一层，再读取对应的正式文档；不要通过复制上位内容到多个文件来“确保不丢失”。Git 历史与 Evolution 保存演化过程，Living Documents 保存当前有效设计。

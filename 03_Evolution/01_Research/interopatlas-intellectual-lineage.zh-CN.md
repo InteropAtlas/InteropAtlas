@@ -14,7 +14,7 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-> **定位：** 本文是 [`Knowledge Philosophy & Principles`](knowledge-philosophy-and-principles.zh-CN.md) 的扩展阅读，不是新的稳定 Contract，也不是“InteropAtlas 发明史”。
+> **定位：** 本文是 [`Knowledge Philosophy & Principles`](/docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md) 的扩展阅读，不是新的稳定 Contract，也不是“InteropAtlas 发明史”。
 >
 > 它回答的是：**InteropAtlas 的产品哲学从哪些既有思想传统中生长出来？哪些内容是在继承，哪些是在重新组合，哪些仍然只是开放研究问题？**
 >

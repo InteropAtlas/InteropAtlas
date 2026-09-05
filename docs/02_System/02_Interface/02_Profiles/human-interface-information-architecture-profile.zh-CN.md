@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：**Draft / Gate B Module**
 >
-> Package: [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md)
+> Package: [`human-interface-profiles.zh-CN.md`](/docs/02_System/02_Interface/01_Foundation/human-interface-profiles.zh-CN.md)
 
 ## 1. 目标
 
@@ -152,7 +152,7 @@ Compare View MUST 先明确用户正在比较什么任务 / Capability / Scenari
 - 采用方式：**Profile + IA-specific extension**
 - 上游：ISO 9241-210 task/context suitability；Knowledge Model Fact / Relation / Assessment boundary
 - Conformance：`Static + Data + Human`
-- 验收：按 [`human-interface-minimal-compare-contract.zh-CN.md`](human-interface-minimal-compare-contract.zh-CN.md) 用代表候选完成 Context → Candidates → Dimensions → Explainable Differences walkthrough。
+- 验收：按 [`human-interface-minimal-compare-contract.zh-CN.md`](/docs/02_System/02_Interface/03_Contracts/human-interface-minimal-compare-contract.zh-CN.md) 用代表候选完成 Context → Candidates → Dimensions → Explainable Differences walkthrough。
 
 ---
 
@@ -174,7 +174,7 @@ Compare View MUST 先明确用户正在比较什么任务 / Capability / Scenari
 
 回答“多个候选对象在一个明确任务 / 上下文中有什么相同与不同”。候选进入理由和比较维度必须可解释；比较维度来自 Facts / Relations / Statements / Assessments，并保留其语义类别。Compare 是 View，不创造新的事实、兼容性结论或隐藏排名。
 
-Gate B minimum 由 [`human-interface-minimal-compare-contract.zh-CN.md`](human-interface-minimal-compare-contract.zh-CN.md) 定义；完整 Compare 产品继续作为 Gate B 后工作。
+Gate B minimum 由 [`human-interface-minimal-compare-contract.zh-CN.md`](/docs/02_System/02_Interface/03_Contracts/human-interface-minimal-compare-contract.zh-CN.md) 定义；完整 Compare 产品继续作为 Gate B 后工作。
 
 ### Map / Graph View
 

@@ -21,7 +21,7 @@ Latest Substantive Contribution:
 >
 > Consolidation work item: #78
 >
-> Final Gate B audit: [`../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`](../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md)
+> Final Gate B audit: [`../03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md`](/03_Evolution/01_Research/gate-b-final-conformance-audit-2026-09-02.zh-CN.md)
 
 ## 1. 目的
 
@@ -29,11 +29,11 @@ Latest Substantive Contribution:
 
 现有 [`human-interface-specification.zh-CN.md`](human-interface-specification.zh-CN.md) 已经形成一套综合草案；五个 Profile 将其关键规则拆成独立、可审计、可测试的模块：
 
-1. [`human-interface-information-architecture-profile.zh-CN.md`](human-interface-information-architecture-profile.zh-CN.md)
-2. [`human-interface-information-presentation-profile.zh-CN.md`](human-interface-information-presentation-profile.zh-CN.md)
-3. [`human-interface-interaction-profile.zh-CN.md`](human-interface-interaction-profile.zh-CN.md)
-4. [`human-interface-visual-presentation-profile.zh-CN.md`](human-interface-visual-presentation-profile.zh-CN.md)
-5. [`human-interface-accessibility-conformance-profile.zh-CN.md`](human-interface-accessibility-conformance-profile.zh-CN.md)
+1. [`human-interface-information-architecture-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-information-architecture-profile.zh-CN.md)
+2. [`human-interface-information-presentation-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-information-presentation-profile.zh-CN.md)
+3. [`human-interface-interaction-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-interaction-profile.zh-CN.md)
+4. [`human-interface-visual-presentation-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-visual-presentation-profile.zh-CN.md)
+5. [`human-interface-accessibility-conformance-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-accessibility-conformance-profile.zh-CN.md)
 
 这些文件是对已经存在的 `IA-HI-*` Requirements 做**模块化、依据补全和验收方式显式化**，不是重新发明第二套 Human Interface 规则。
 

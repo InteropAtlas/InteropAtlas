@@ -3,24 +3,24 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:51:19+08:00
-Document Updated At: 2026-09-02T08:31:22+08:00
+Document Updated At: 2026-09-05T14:40:00+08:00
 Metadata Backfilled At: 2026-09-02T10:49:00+08:00
 Metadata Provenance: mixed
-Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
+Lifecycle Time Provenance: direct_record
+Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
 InteropAtlas 当前处于 Pre-Alpha。项目采用 **Human-first, agent-compatible** 的公开协作方式：Human 与 AI / Agent 使用同一套 GitHub Work Item、Lease、Handoff 和 Review 协议，不建立只给 Agent 使用的隐藏任务系统。
 
 核心协作规范：
-- `docs/open-collaboration-profile-v0.1.zh-CN.md`
-- `docs/collaboration-task-system-v0.1.zh-CN.md`
-- `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`
+- `docs/03_Operation/01_Collaboration/01_Model/open-collaboration-profile.zh-CN.md`
+- `docs/03_Operation/01_Collaboration/01_Model/collaboration-task-system.zh-CN.md`
+- `docs/03_Operation/01_Collaboration/03_Identity/agent-attribution-contribution-identity-profile.zh-CN.md`
 
 ## 1. 基本原则
 
@@ -143,7 +143,7 @@ Human / Agent 是参与者类别；Initiator / Executor / Reviewer / Approver �
 
 当 Agent 使用 Human 的 GitHub Account、Connector、Token 或其他授权凭据写入仓库时，MUST 明确记录实际 Executor 与 GitHub Actor 的区别。
 
-Agent 不需要为了 Attribution 被强制注册独立 GitHub 账号。完整定义见 `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`。
+Agent 不需要为了 Attribution 被强制注册独立 GitHub 账号。完整定义见 `docs/03_Operation/01_Collaboration/03_Identity/agent-attribution-contribution-identity-profile.zh-CN.md`。
 
 Executor 的 self-check 不等于 independent review。CI / Validator / E2E 是 Review Evidence，不是 Reviewer。
 
@@ -189,7 +189,7 @@ Agent 不应假设私人 Chat 历史是公共项目状态。主要由 Agent 执�
 - 官方名称、标准编号、组织名、协议名保留正式原文。
 - 翻译不确定时保留原文并标记译名。
 
-完整规则见 `docs/language-policy.zh-CN.md`。
+完整规则见 `docs/03_Operation/03_Project/02_Language/language-policy.zh-CN.md`。
 
 ### Canonical Record lifecycle time
 

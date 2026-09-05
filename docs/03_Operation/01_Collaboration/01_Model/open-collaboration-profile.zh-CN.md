@@ -17,7 +17,7 @@ Latest Substantive Contribution:
 
 > 状态：Draft / Provisional Specification（草案 / 暂定规范）
 >
-> 关联：Issue #19；输入包括 [`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](../03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md) 与 [`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](../03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)。
+> 关联：Issue #19；输入包括 [`03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md`](/03_Evolution/01_Research/human-ai-open-collaboration-prior-art.zh-CN.md) 与 [`03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md`](/03_Evolution/03_Change/open-collaboration-route-v0-notes.zh-CN.md)。
 >
 > 目的：定义 InteropAtlas 中 Human、AI / Agent、Reviewer、Maintainer 与 Automation 如何共享同一公开协作协议。本文先定义角色、任务生命周期、租约式认领、交接、审核与授权语义；不在本文发布时创建 Lease Server、AGENTS.md、Issue Template 或 Project automation。
 

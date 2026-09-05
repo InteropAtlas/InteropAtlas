@@ -4,8 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Created At: 2026-08-30T17:49:18+08:00
-Document Updated At: 2026-09-05T03:55:00+08:00
+Document Updated At: 2026-09-05T14:25:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -28,27 +27,16 @@ Latest Substantive Contribution:
 
 InteropAtlas 不只是标准目录。它希望把一个互操作方案从“规范是什么”一直连接到“谁在维护、怎样实现、解决什么问题、有哪些替代方案、证据在哪里、还缺什么”。
 
-主要知识包括：
-
-- **标准 / 规范 / 协议 / 配置规范（Profile）/ API / 格式（Format）** — 正式定义互操作方式的规范性成果（Normative Artifacts）；
-- **方法 / 指南 / 框架（Framework）** — 如何设计、分析、验证、治理或维护互操作系统；
-- **实现 / 工具 / 服务** — 标准和方法在现实世界中的具体实现；
-- **成熟先例（Prior Art）** — 已经长期运行、值得借鉴的项目、架构和实践模式；
-- **组织** — 标准组织、维护者、治理主体和相关机构；
-- **能力 / 需求 / 场景** — 一个互操作问题到底需要解决什么；
-- **关系** — 采用、实现、替代、依赖、兼容、扩展、演化等知识之间的连接；
-- **证据 / 来源 / 来源追踪（Evidence / Source / Provenance）** — 一个事实从哪里来、依据是什么；
-- **生命周期 / 事件（Lifecycle / Events）** — 发布、修订、废弃、替代和历史演化；
-- **评估 / 开放缺口（Assessment / Open Gap）** — 在明确场景下的比较、覆盖情况和仍未解决的问题。
+主要知识包括标准 / 规范 / 协议 / Profile / API / Format，方法 / 指南 / Framework，实现 / 工具 / 服务，成熟先例（Prior Art），组织，能力 / 需求 / 场景，关系，证据 / 来源 / Provenance，生命周期 / 事件，以及评估 / Open Gap。
 
 这些知识共同构成这张知识地图，而不是彼此孤立的条目。
 
 > **映射完整方案空间，同时严格保持对象身份与权威性区别。**  
 > *Map the solution space, preserve the authority distinction.*
 
-例如，一个成熟开源项目可以是重要的成熟先例（Prior Art），但不会因此被写成“国际标准”；一个正式标准也不会因为实现较少而失去其规范身份。
+例如，一个成熟开源项目可以是重要的成熟先例，但不会因此被写成“国际标准”；一个正式标准也不会因为实现较少而失去其规范身份。
 
-更完整的收录边界见 [`项目定义与范围`](docs/interopatlas-definition-and-scope.zh-CN.md)。
+更完整的收录边界见 [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md)。
 
 ## 你可以怎样使用它？
 
@@ -56,7 +44,7 @@ InteropAtlas 的目标是让人（Human）与智能体（Agent）都能从同一
 
 **查找 → 浏览 → 理解 → 追踪关系 → 比较方案 → 检查证据 → 发现缺口。**
 
-当前项目仍在建设 V1 基础设施，并不是所有知识入口和知识工作空间（Workspace）都已经完成。长期会从同一份知识底座提供不同的访问方式，例如百科式浏览（Wiki / Browse）、单对象文章（Single Object / Article）、时间线（Timeline）、关系图 / 生态图（Graph / Ecosystem）、比较（Compare）、证据 / 验证（Evidence / Verification），以及面向智能体（Agent）和 API 的结构化访问。
+当前项目仍在建设 V1 基础设施。长期会从同一份知识底座提供百科式浏览、单对象文章、时间线、关系图 / 生态图、比较、证据 / 验证，以及面向 Agent / API 的结构化访问。
 
 不同形式不是不同数据库，而是同一张知识地图面向不同认知任务的不同表达。
 
@@ -67,15 +55,11 @@ InteropAtlas 的目标是让人（Human）与智能体（Agent）都能从同一
 
 InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**彼此独立设计的系统怎样协同工作。**
 
-这可能发生在通信、数据表达、视频与音频、时间同步、身份、安全、发现、语义、智能体（Agent）、控制与自动化等领域。一个现实问题通常也不会只靠一份标准解决，而会同时涉及规范、实现、方法、组织、兼容关系和具体场景。
-
-因此，InteropAtlas 的目标不是回答“有哪些标准”，而是逐步帮助回答：
+一个现实问题通常不会只靠一份标准解决，而会同时涉及规范、实现、方法、组织、兼容关系和具体场景。因此项目逐步帮助回答：
 
 > **这个互操作问题，人类已经有哪些可用方案？它们之间是什么关系？依据是什么？我应该从哪里继续探索？**
 
 ## 产品哲学
-
-InteropAtlas 的产品哲学可以压缩成一组彼此对应的静态与动态命题：
 
 > **知识属于公共共同体。视角属于个人。**  
 > *Knowledge belongs to the commons. Perspective belongs to the individual.*
@@ -83,32 +67,28 @@ InteropAtlas 的产品哲学可以压缩成一组彼此对应的静态与动态�
 > **知识流动，创造不息。**  
 > *Knowledge travels. Creation continues.*
 
-前一句描述知识世界的结构；后一句描述它的运动。公共知识通过各种方式跨越边界，进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。
-
-在这个更底层的模型中，**流动（Flow）**与**创造（Create）**是两个基本运动。此前的发现（Discover）、连接（Connect）、传递（Transmit）、转化（Transform）、复用（Reuse）不再被视为五个必须依次发生的一级阶段，而是知识跨越不同边界的典型机制：跨越可见性、知识孤岛、主体与系统、媒介与认知形式、以及使用情境。
+公共知识跨越边界进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。流动（Flow）与创造（Create）是两个基本运动；发现、连接、传递、转化和复用是知识跨越不同边界的典型机制，而不是必须并列的顶层阶段。
 
 > **保存知识不是终点。知识最终应该帮助新的创造发生。**  
 > *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
 
-个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则，而不是与核心哲学并列的口号。
+个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则。
 
-完整结构见 [`知识哲学与原则`](docs/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/interopatlas-master-design.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
+完整结构见 [`知识哲学与原则`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)。普通知识使用者不需要先阅读这些文档。
 
 ## 想进一步参与？
 
-不同目的有不同入口，不需要从头读完整个仓库：
-
 | 你想做什么 | 从哪里开始 |
 | --- | --- |
-| 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/interopatlas-definition-and-scope.zh-CN.md) |
-| 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/interopatlas-master-design.zh-CN.md) |
+| 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md) |
+| 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) |
 | 查看当前建设到哪里 | [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) |
 | 作为人类维护者参与贡献 | [`贡献指南（CONTRIBUTING.md）`](CONTRIBUTING.md) |
 | 让智能体接手或维护项目 | [`智能体指南（AGENTS.md）`](AGENTS.md) |
-| 查找规范、配置规范（Profile）、架构和政策 | [`文档索引（docs/README.md）`](docs/README.md) |
+| 查找规范、Profile、架构和政策 | [`文档地图（docs/README.md）`](docs/README.md) |
 | 查看研究、实验和变更过程 | [`演化记录（03_Evolution/）`](03_Evolution/) |
 
-项目维护结构、P1–P6、当前 P6 施工路线、仓库结构（Repository Structure）、迁移（Migration）、收录（Intake）、治理（Governance）等内容属于第二层维护上下文，不在首页展开。
+项目维护结构、P1–P6、当前 P6 施工路线、Migration、Intake、Governance 等内容属于第二层维护上下文，不在首页展开。
 
 ## 当前状态
 

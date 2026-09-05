@@ -55,7 +55,7 @@ jobs:
 
           print('All repository-local Markdown links resolve.')
 
-      - name: Check current docs do not use pre-migration locations
+      - name: Check current docs reference migrated Evolution locations
         shell: python
         run: |
           import re
@@ -64,57 +64,57 @@ jobs:
 
           moved = {
               # Research
-              'foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'human-ai-open-collaboration-prior-art.zh-CN.md': '../03_Evolution/01_Research/',
-              'human-interface-conformance-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'human-interface-reference-intake-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'human-interface-reference-map.zh-CN.md': '../03_Evolution/01_Research/',
-              'human-interface-standards-baseline.zh-CN.md': '../03_Evolution/01_Research/',
-              'prior-art-and-method-reference.zh-CN.md': '../03_Evolution/01_Research/',
-              'repository-structure-prior-art-and-options-v0.1.zh-CN.md': '../03_Evolution/01_Research/',
-              'route-alignment-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'work-package-a-reference-intake-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'work-package-a-verification-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
-              'work-package-b-pilot-audit-2026-09-01.zh-CN.md': '../03_Evolution/01_Research/',
+              'foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'foundation-work-package-a-reference-intake-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'human-ai-open-collaboration-prior-art.zh-CN.md': '03_Evolution/01_Research/',
+              'human-interface-conformance-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'human-interface-reference-intake-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'human-interface-reference-map.zh-CN.md': '03_Evolution/01_Research/',
+              'human-interface-standards-baseline.zh-CN.md': '03_Evolution/01_Research/',
+              'prior-art-and-method-reference.zh-CN.md': '03_Evolution/01_Research/',
+              'repository-structure-prior-art-and-options-v0.1.zh-CN.md': '03_Evolution/01_Research/',
+              'route-alignment-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'work-package-a-reference-intake-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'work-package-a-verification-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
+              'work-package-b-pilot-audit-2026-09-01.zh-CN.md': '03_Evolution/01_Research/',
               # Experiments
-              'automated-build-deployment-open-alternative.zh-CN.md': '../03_Evolution/02_Experiments/',
-              'engine-v0.1-bootstrap.zh-CN.md': '../03_Evolution/02_Experiments/',
-              'engine-v0.1-coverage-baseline.zh-CN.md': '../03_Evolution/02_Experiments/',
-              'human-ai-collaboration-v0-checklist.zh-CN.md': '../03_Evolution/02_Experiments/',
-              'json-ld-fit-experiment.zh-CN.md': '../03_Evolution/02_Experiments/',
-              'seed-experiment-01.zh-CN.md': '../03_Evolution/02_Experiments/',
+              'automated-build-deployment-open-alternative.zh-CN.md': '03_Evolution/02_Experiments/',
+              'engine-v0.1-bootstrap.zh-CN.md': '03_Evolution/02_Experiments/',
+              'engine-v0.1-coverage-baseline.zh-CN.md': '03_Evolution/02_Experiments/',
+              'human-ai-collaboration-v0-checklist.zh-CN.md': '03_Evolution/02_Experiments/',
+              'json-ld-fit-experiment.zh-CN.md': '03_Evolution/02_Experiments/',
+              'seed-experiment-01.zh-CN.md': '03_Evolution/02_Experiments/',
               # Change
-              'foundation-first-phase-v0.1.zh-CN.md': '../03_Evolution/03_Change/',
-              'human-readable-route.zh-CN.md': '../03_Evolution/03_Change/',
-              'machine-readable-maintainable-route.zh-CN.md': '../03_Evolution/03_Change/',
-              'object-page-shell-v0.1-plan.zh-CN.md': '../03_Evolution/03_Change/',
-              'open-collaboration-route-v0-notes.zh-CN.md': '../03_Evolution/03_Change/',
-              'project-generated-methods-standards.zh-CN.md': '../03_Evolution/03_Change/',
-              'repository-current-to-target-mapping-v0.1.zh-CN.md': '../03_Evolution/03_Change/',
-              'repository-data-root-contract-v0.1.zh-CN.md': '../03_Evolution/03_Change/',
-              'roadmap.zh-CN.md': '../03_Evolution/03_Change/',
-              'visualization-direction.zh-CN.md': '../03_Evolution/03_Change/',
-              'work-item-reference-seeding-v0.1.zh-CN.md': '../03_Evolution/03_Change/',
+              'foundation-first-phase-v0.1.zh-CN.md': '03_Evolution/03_Change/',
+              'human-readable-route.zh-CN.md': '03_Evolution/03_Change/',
+              'machine-readable-maintainable-route.zh-CN.md': '03_Evolution/03_Change/',
+              'object-page-shell-v0.1-plan.zh-CN.md': '03_Evolution/03_Change/',
+              'open-collaboration-route-v0-notes.zh-CN.md': '03_Evolution/03_Change/',
+              'project-generated-methods-standards.zh-CN.md': '03_Evolution/03_Change/',
+              'repository-current-to-target-mapping-v0.1.zh-CN.md': '03_Evolution/03_Change/',
+              'repository-data-root-contract-v0.1.zh-CN.md': '03_Evolution/03_Change/',
+              'roadmap.zh-CN.md': '03_Evolution/03_Change/',
+              'visualization-direction.zh-CN.md': '03_Evolution/03_Change/',
+              'work-item-reference-seeding-v0.1.zh-CN.md': '03_Evolution/03_Change/',
           }
 
           failures = []
           for source in sorted(Path('docs').rglob('*.md')):
               for number, line in enumerate(source.read_text(encoding='utf-8').splitlines(), 1):
-                  for basename, expected_prefix in moved.items():
+                  for basename, canonical_prefix in moved.items():
                       token = re.compile(r'(?<![A-Za-z0-9_.-])' + re.escape(basename) + r'(?![A-Za-z0-9_.-])')
                       if not token.search(line):
                           continue
-                      expected = expected_prefix + basename
+                      expected = canonical_prefix + basename
                       if expected not in line:
                           failures.append((source, number, basename, expected, line.strip()))
 
           if failures:
-              print('Current docs still contain references that look like pre-migration locations:')
+              print('Current docs still contain references that do not identify the canonical Evolution location:')
               for source, number, basename, expected, line in failures:
                   print(f'- {source}:{number}: {basename}')
-                  print(f'  expected path: {expected}')
+                  print(f'  expected path fragment: {expected}')
                   print(f'  line: {line}')
               sys.exit(1)
 
-          print('Current docs reference migrated Evolution artifacts through their new paths.')
+          print('Current docs identify migrated Evolution artifacts through their canonical locations.')
