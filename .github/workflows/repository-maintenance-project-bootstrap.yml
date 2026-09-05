@@ -1,0 +1,97 @@
+name: Repository Maintenance Project Bootstrap
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER: InteropAtlas
+      PROJECT_TITLE: InteropAtlas — 仓库长期维护
+      SEED_ISSUE_URL: https://github.com/InteropAtlas/InteropAtlas/issues/287
+    steps:
+      - name: Verify Projects token
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "Missing repository secret: IA_PROJECTS_TOKEN"
+            echo "Add a GitHub token with Projects read/write permission, then rerun this workflow."
+            exit 1
+          fi
+
+      - name: Find or create Project
+        id: project
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          PROJECT_NUMBER="$({ gh project list --owner "$PROJECT_OWNER" --format json || true; } \
+            | jq -r --arg title "$PROJECT_TITLE" '.projects[]? | select(.title == $title) | .number' \
+            | head -n 1)"
+
+          if [ -z "$PROJECT_NUMBER" ]; then
+            echo "Creating Project: $PROJECT_TITLE"
+            gh project create --owner "$PROJECT_OWNER" --title "$PROJECT_TITLE"
+            PROJECT_NUMBER="$(gh project list --owner "$PROJECT_OWNER" --format json \
+              | jq -r --arg title "$PROJECT_TITLE" '.projects[]? | select(.title == $title) | .number' \
+              | head -n 1)"
+          else
+            echo "Project already exists: #$PROJECT_NUMBER"
+          fi
+
+          if [ -z "$PROJECT_NUMBER" ]; then
+            echo "Unable to resolve Project number after creation."
+            exit 1
+          fi
+
+          echo "number=$PROJECT_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
+
+      - name: Ensure minimal custom fields
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ensure_single_select_field() {
+            local field_name="$1"
+            local options="$2"
+
+            if gh project field-list "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --format json \
+              | jq -e --arg name "$field_name" '.fields[]? | select(.name == $name)' >/dev/null; then
+              echo "Field already exists: $field_name"
+            else
+              echo "Creating field: $field_name"
+              gh project field-create "$PROJECT_NUMBER" \
+                --owner "$PROJECT_OWNER" \
+                --name "$field_name" \
+                --data-type SINGLE_SELECT \
+                --single-select-options "$options"
+            fi
+          }
+
+          ensure_single_select_field "工作流（Workstream）" "议题维护,候选池维护,文档维护,仓库结构,来源与贡献留痕,自动化与持续集成"
+          ensure_single_select_field "优先级（Priority）" "P0,P1,P2,P3"
+
+      - name: Add initial maintenance work item
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$SEED_ISSUE_URL" || true
+
+      - name: Print bootstrap result
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "Project bootstrap complete."
+          echo "Owner: $PROJECT_OWNER"
+          echo "Project: $PROJECT_TITLE"
+          echo "Project number: $PROJECT_NUMBER"
+          echo "Seed work item: $SEED_ISSUE_URL"
+          echo
+          echo "The built-in Status field is retained as the task-state projection."
+          echo "Execution-critical scope, acceptance criteria, decisions, and evidence remain in Issues / PRs / repository artifacts."
