@@ -4,8 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
-Document Created At: 2026-09-04T22:15:00+08:00
-Document Updated At: 2026-09-05T03:55:00+08:00
+Document Updated At: 2026-09-05T14:25:00+08:00
 Translation Source: README.md
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -33,7 +32,7 @@ InteropAtlas is not merely a standards directory. It connects specifications, me
 
 A mature open-source project can be important Prior Art without being misrepresented as an international standard; a formal standard does not lose its normative identity merely because it has few implementations.
 
-For the full inclusion boundary, see [`Definition & Scope`](docs/interopatlas-definition-and-scope.md).
+For the full inclusion boundary, see [`Definition & Scope`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.md).
 
 ## How can you use it?
 
@@ -57,28 +56,24 @@ So IA progressively helps answer:
 
 ## Product philosophy
 
-InteropAtlas expresses its product philosophy through a structural and a dynamic proposition:
-
 > **Knowledge belongs to the commons. Perspective belongs to the individual.**
 >
 > **Knowledge travels. Creation continues.**
 
-The first describes the structure of the knowledge world; the second describes its motion. Shared knowledge crosses boundaries into individual perspectives and concrete contexts, enabling new creation. New creation can then enter the commons and become the basis for another cycle.
-
-At this deeper level, **Flow** and **Create** are the two fundamental movements. Discover, Connect, Transmit, Transform, and Reuse are no longer treated as mandatory peer-level stages. They are typical mechanisms by which existing knowledge crosses boundaries of visibility, isolation, subjects and systems, media and cognition, and usage context.
+Shared knowledge crosses boundaries into individual perspectives and concrete contexts, enabling new creation. New creation can then enter the commons and become the basis for another cycle. At this deeper level, **Flow** and **Create** are the two fundamental movements; Discover, Connect, Transmit, Transform, and Reuse are mechanisms rather than mandatory peer-level stages.
 
 > **Preservation is not the endpoint; knowledge should ultimately enable new creation.**
 
-Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** remain product and construction principles rather than peer-level philosophical slogans.
+Transparent / controllable / reversible personalization, Atlas-first, Evidence before assertion, Selection before presentation, Real use shapes the ontology, and **Adopt → Profile → Extend → Invent** remain product and construction principles.
 
-See [`Knowledge Philosophy & Principles`](docs/knowledge-philosophy-and-principles.md) for the full structure and [`Master Design`](docs/interopatlas-master-design.md) for the long-term architecture. Ordinary knowledge users do not need to read these documents first.
+See [`Knowledge Philosophy & Principles`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.md) and [`Master Design`](docs/01_Foundation/01_Definition/interopatlas-master-design.md). Ordinary knowledge users do not need to read these documents first.
 
 ## Want to go further?
 
 | Goal | Start here |
 | --- | --- |
-| Understand what IA includes | [`Definition & Scope`](docs/interopatlas-definition-and-scope.md) |
-| Understand long-term design and philosophy | [`Master Design`](docs/interopatlas-master-design.md) |
+| Understand what IA includes | [`Definition & Scope`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.md) |
+| Understand long-term design and philosophy | [`Master Design`](docs/01_Foundation/01_Definition/interopatlas-master-design.md) |
 | See the current build state | [`PROJECT_STATE.md`](PROJECT_STATE.md) |
 | Human maintenance / contribution | [`CONTRIBUTING.md`](CONTRIBUTING.md) |
 | Agent onboarding / maintenance | [`AGENTS.md`](AGENTS.md) |
