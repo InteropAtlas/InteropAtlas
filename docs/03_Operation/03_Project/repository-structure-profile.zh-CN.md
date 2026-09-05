@@ -1,16 +1,16 @@
-# InteropAtlas Repository Structure Profile v0.2
+# InteropAtlas Repository Structure Profile v0.3
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: Draft / Provisional Specification
 Document Created At: 2026-09-01T11:34:09+08:00
-Document Updated At: 2026-09-05T15:50:00+08:00
+Document Updated At: 2026-09-05T16:35:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human Owner — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
@@ -28,9 +28,9 @@ Latest Substantive Contribution:
 
 不得为了浏览分类复制 Canonical 对象，也不得让路径承担 ontology 身份。
 
-### 1.2 数字前缀表示主要注意力入口
+### 1.2 注意力层级（Attention Hierarchy）
 
-数字不是装饰性排序，而是 Owner / Maintainer 应优先理解的认知入口。
+数字前缀不是装饰性排序，而是 Owner / Maintainer 应优先理解的主要注意力入口（Primary Attention Target）。
 
 同一物理层级默认：
 
@@ -44,10 +44,13 @@ Latest Substantive Contribution:
 
 - 同级编号 **MUST** 唯一；
 - 同级主要编号 **SHOULD** 限于 `01_ / 02_ / 03_`；
+- 默认只暴露 1–2 个主要入口，最多 3 个；三不是目标，而是上限；
 - 出现第四个主要关注域时，默认继续向下一层分组，而不是新增 `04_ / 05_`；
 - 非主要入口、临时入口、辅助入口可以不编号；它们不得仅因“存在”就占用编号注意力位置；
 - `.github/`、`docs/`、`LICENSES/` 等辅助 / 平台目录可以不编号，但数量和职责仍应克制；
 - 三分是认知复杂度默认约束，不是 ontology 的数学硬限制。若强行三分会破坏真实语义、Canonical contract 或关键工程约束，应明确记录例外。
+
+注意力层级限制的是**同时暴露给人的主要认知选择数量**，不是仓库可以拥有多少 Canonical Object、Relation、Issue、Project 或历史 Artifact。
 
 ### 1.3 一个概念一个 Primary Home
 
@@ -59,27 +62,70 @@ Latest Substantive Contribution:
 
 目录不是越多越清晰。新增一层目录必须解决真实问题，例如：
 
-- 同层项目已经造成明显注意力负担；
+- 同层内容已经造成明显注意力负担；
 - 有稳定的主题边界；
 - 生命周期、所有权或工具链确实不同；
 - 需要容纳一组会长期共同演化的 Artifact。
 
 **只有 1–2 个文件的主题，默认 SHOULD NOT 为了形式分类额外制造一层目录。** 文件名已能清楚表达职责时，优先保持扁平。不要创建“一文件一文件夹”的空壳层级。
 
-## 2. 仓库一级结构
+### 1.5 Repository 不是工作空间
+
+InteropAtlas Repository 保存**长期有效的状态、实现、规范和演化依据**，不承担普通任务管理或完整项目过程记录。
 
 ```text
-01_State/       当前正式承认的 Canonical State
-02_Runtime/     怎样运行、验证和使用 State
-03_Evolution/   怎样研究、实验、决策并改变项目
+正在发生的工作
+→ GitHub Issue / Project / Branch / PR
 
-docs/           当前 Living Documents
+工作完成后仍值得长期存在的结果
+→ Repository 对应 Primary Home
+```
+
+小活动、研究项目、整改任务、迁移施工等不会仅因为持续时间或参与人数而自动获得 Repository 项目文件夹。
+
+> **GitHub 管正在怎样工作；Repository 管工作之后值得长期存在什么。**
+
+## 2. 仓库一级结构与变化梯度
+
+```text
+01_State/       当前正式知识状态
+02_Runtime/     当前运行实现
+03_Evolution/   长期演化依据
+
+docs/           当前正式定义、原则、规范与治理
 .github/        GitHub 原生协作 / 自动化
 LICENSES/       外部许可证布局
 root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 ```
 
-前三个编号目录是项目本体的三个主要生命周期区域；外围目录不构成第四个主域。
+前三个编号目录是项目本体的三个主要内容入口；`docs/` 是约束和解释这些内容的规则层，不构成第四个编号主域。
+
+### 2.1 变化梯度（Change Gradient）
+
+```text
+变化频率：
+01_State  >  02_Runtime  >  03_Evolution  >  docs
+```
+
+这是设计倾向，不是机械 SLA：
+
+- `01_State` 持续吸收 Canonical Object、Relation 与 Evidence，集合变化最快；
+- `02_Runtime` 随 State、Schema、查询、验证和界面实现演化；
+- `03_Evolution` 只保存经过筛选的长期研究、实验和决策依据，变化更少；
+- `docs/` 承担当前项目正式定义、原则、规范与治理，实质变化最谨慎。
+
+### 2.2 变更权限梯度（Change Authority Gradient）
+
+```text
+既有内容的改写门槛：
+01_State  <  02_Runtime  <  03_Evolution  <  docs
+```
+
+这不表示 State 可以绕过 intake / validation，也不表示 docs 永远不可修改。它表达的是：越接近长期依据和正式规范，对既有内容做实质改写时，需要越强的理由、证据、review 与适用 authority gate。
+
+特别是 Evolution 中的历史依据，默认更适合补充、勘误或追加 successor，而不是为了配合当前结论任意重写过去。
+
+### 2.3 当前主要结构
 
 ```text
 01_State/
@@ -97,10 +143,14 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 03_Evolution/
 ├── 01_Research/
 ├── 02_Experiments/
-└── 03_Change/
+└── 03_Decisions/   ← target; existing 03_Change is pending content-level migration
 ```
 
-`01_State` 当前只有两个编号主入口：`01_Objects/` 与 `02_Relations/`，分别承载正式 Canonical 对象与正式关系。`Inbox/` 是不编号的 intake 辅助工作区，用于尚未正式收入的候选内容和接纳流程证据，因此不占主要注意力入口。不能证明已经满足正式接纳条件的新内容，默认应先进 `Inbox/`，不得直接写入正式 Canonical 目录。
+`01_State` 当前只有两个编号主入口：`01_Objects/` 与 `02_Relations/`。`Inbox/` 是不编号的 intake 辅助工作区，不能证明已经满足正式接纳条件的新内容默认应先进 `Inbox/`。
+
+`02_Runtime/03_Outputs/` 只有在生成结果确实需要版本控制时才使用；可重建输出默认优先 CI artifact / deployment，而不是为了三分长期提交空洞或重复输出。
+
+`03_Evolution` 的目标结构是 Research / Experiments / Decisions。旧 `03_Change/` 中的 Direction、Architecture、Migration 等材料必须先做内容级审计，再决定吸收到 `docs/`、保留为长期 Decision，或依赖 Issue / PR / Git history；不得按文件名机械批量迁移。
 
 ## 3. `docs/` 注意力结构
 
@@ -112,7 +162,7 @@ docs/
 └── 03_Operation/    项目怎样协作、治理和维护
 ```
 
-继续采用递归三分，但不为了凑三而增加无意义目录：
+继续采用递归注意力层级，但不为了凑三而增加无意义目录：
 
 ```text
 01_Foundation/
@@ -123,9 +173,6 @@ docs/
 02_System/
 ├── 01_Knowledge/
 └── 02_Interface/
-    ├── 01_Foundation/
-    ├── 02_Profiles/
-    └── 03_Contracts/
 
 03_Operation/
 ├── 01_Collaboration/
@@ -135,22 +182,57 @@ docs/
 
 目录只表达阅读与维护边界。Specification / Profile / Contract 是否独立，仍由其规范职责和演化节奏决定。
 
-## 4. Current / Process / History
+`docs/` 不因未编号而重要性较低。相反，它是前三个系统内容域的正式规则层，因此其长期职责更重，实质修改应更谨慎。
 
-任何 Artifact 先判断生命周期，再决定位置：
+## 4. Artifact 生命周期：Current / Work / Durable History
+
+任何 Artifact 先判断生命周期，再决定是否进入 Repository：
 
 ```text
-CURRENT   今天仍需理解 / 遵守
-          → docs/、01_State/、02_Runtime/ 或平台原生位置
+CURRENT
+今天仍需理解 / 遵守 / 运行
+→ docs/、01_State/、02_Runtime/ 或平台原生位置
 
-PROCESS   正在研究 / 实验 / 迁移
-          → 03_Evolution 对应区域 / Issue / PR
+WORK
+正在研究 / 实验 / 迁移 / 整改 / 协作
+→ GitHub Issue / Project / Branch / PR
+→ 默认不是 Repository Artifact
 
-HISTORY   已完成 / 被取代但仍有独立价值
-          → 03_Evolution / Git history
+DURABLE HISTORY / RATIONALE
+工作完成后仍具有独立阅读、引用、复用或解释价值
+→ 03_Evolution/ 或 Git history
 ```
 
 `draft` 是状态，不是位置。仍是当前入口的 Draft 可以留在 `docs/`；已经完成或被取代的 Draft 不得因为文件名而永久留在 Living Documents。
+
+### 4.1 工作成果吸收顺序
+
+一个任务 / 项目完成后，按以下顺序处理：
+
+```text
+1. 当前正式知识
+   → 01_State/
+
+2. 当前仍运行的实现
+   → 02_Runtime/
+
+3. 当前正式定义 / 原则 / 规范 / 治理
+   → docs/
+
+4. 不属于前三者，但仍有独立长期研究 / 实验 / 决策价值
+   → 03_Evolution/
+
+5. 只有过程价值
+   → Issue / PR / Git history；不新增 Repository 文件
+```
+
+因此 Research Project 可以在完成后被“拆空”；这不是信息损失，而是成果已经进入正确的长期 Primary Home。
+
+### 4.2 延迟分类
+
+无法归入 State / Runtime / docs，但仍可能有长期价值的材料，不应立即催生新的 `Shared/`、`Resources/`、`Misc/` 等宽泛类别。
+
+如果它已经形成独立长期研究 / 实验 / 决策价值，可以先随对应 Evolution Durable Artifact 保留；只有真实积累反复暴露同一种稳定新职责时，才设计新的 Primary Home。
 
 ## 5. Artifact 职责
 
@@ -158,18 +240,39 @@ HISTORY   已完成 / 被取代但仍有独立价值
 |---|---|
 | Canonical Data / Relation / State Contract | `01_State/` |
 | Intake Candidate / Acceptance Evidence | `01_State/Inbox/` |
-| Engine / Validator / Renderer / Tool | `02_Runtime/` |
-| Generated View / Export / Report | `02_Runtime/03_Outputs/` 或 CI artifact |
+| Engine / Validator / Renderer / current operational Tool | `02_Runtime/` |
+| Necessary versioned Generated View / Export / Report | `02_Runtime/03_Outputs/` 或 CI artifact |
 | Philosophy / Definition / Master Design / Architecture | `docs/01_Foundation/` |
 | Knowledge / Human Interface Specification / Profile / Contract | `docs/02_System/` |
 | Collaboration / Governance / Repository Policy | `docs/03_Operation/` |
-| Research / Prior Art / Audit | `03_Evolution/01_Research/` |
-| Experiment / Fixture / Prototype / Result | `03_Evolution/02_Experiments/` |
-| Proposal / Phase Plan / Migration / Superseded Design | `03_Evolution/03_Change/` |
+| Durable Research / Prior-art comparison | `03_Evolution/01_Research/` |
+| Durable Experiment / reproducible result | `03_Evolution/02_Experiments/` |
+| Durable architectural / directional Decision rationale | `03_Evolution/03_Decisions/` |
 | Current project checkpoint | `PROJECT_STATE.md` |
-| Work Item / Delivery | GitHub Issue / PR |
+| Work Item / Activity / Project coordination / Delivery | GitHub Issue / Project / PR |
+| Ordinary work history | Git / Issue / PR history |
 
-## 6. 文档去重与层级规则
+## 6. Evolution 准入规则
+
+Evolution 不是过程归档区，也不是 Primary Home 缺失时的兜底目录。
+
+一份材料只有同时满足以下条件，才应长期进入 `03_Evolution/`：
+
+1. 它不属于当前 `01_State / 02_Runtime / docs` 的 Primary Home；
+2. 原 Issue / PR / Project 完成以后，它仍具有独立阅读、引用、复用或解释价值；
+3. 仅依赖 Git / GitHub history 会明显损失未来理解某项重要研究、实验或决策的能力。
+
+默认三类：
+
+```text
+01_Research/      我们通过研究长期知道了什么
+02_Experiments/   我们通过实验长期验证了什么
+03_Decisions/     为什么 IA 演化成今天这样
+```
+
+默认不建立 `Projects/`、`Activities/`、`Archive/`、`Shared/`、`Resources/`、`Misc/` 等宽泛容器。
+
+## 7. 文档去重与层级规则
 
 ### IA-RS-DOC-001 — 一个概念一个主要维护位置
 当前正式文档 **MUST** 能指出概念的 Primary Home。
@@ -184,7 +287,7 @@ Philosophy 不维护具体架构；Master Design 不维护专项字段；Roadmap
 因上下文必须重复概念时，只保留最小摘要和明确链接。
 
 ### IA-RS-DOC-005 — Promotion / Supersession 闭环
-Research / Experiment / Change 被接受后，更新对应 Living Document；被替代的 Living Document 按 Current / Process / History 重新归位，历史由 Evolution / Git history 恢复。
+Research / Experiment / Decision 被接受并形成当前规则或实现后，更新对应 State / Runtime / Living Document；Evolution 只继续保存仍有独立长期价值的 rationale。
 
 ### IA-RS-DOC-006 — 文档数量不是安全性
 连续性来自稳定 Primary Home、Git history、Evolution、PROJECT_STATE、Issue / PR，而不是复制更多文件。
@@ -195,7 +298,10 @@ Research / Experiment / Change 被接受后，更新对应 Living Document；被
 ### IA-RS-DOC-008 — 单文件主题默认不建目录
 只有一个文件，或仅少量文件且没有稳定独立演化需求时，**SHOULD** 直接放在现有语义父目录中。只有文档密度或职责边界真实形成后再增加下一层。
 
-## 7. 路径与迁移不变量
+### IA-RS-DOC-009 — 工作对象默认不实体化为 Repository 文件夹
+Issue、活动、研究项目、整改项目、迁移项目等工作对象 **SHOULD NOT** 仅因为其存在就在 Repository 中建立一一对应的目录。需要长期保存的是其 Durable Output，而不是工作容器本身。
+
+## 8. 路径与迁移不变量
 
 - Stable object identity **MUST NOT** 依赖物理文件路径；
 - Generated view **MUST NOT** 成为第二事实源；
@@ -227,16 +333,17 @@ Code search、索引或第三方工具可能有范围 / 时效限制。因此重
 
 ### IA-RS-MIG-004 — 删除前先吸收长期语义
 
-删除重复 / 过渡 Living Document 前，必须先确认：
+删除重复 / 过渡 Living Document 或 Evolution Artifact 前，必须先确认：
 
-- 仍有效的独有规则已经迁入目标 Primary Home；
+- 仍有效的独有规则 / 知识已经迁入目标 Primary Home；
 - 下游引用已经指向 successor；
 - 删除不会静默改变规范状态、Requirement ID、Canonical semantics 或授权边界；
-- 历史可由 Git history / Evolution 恢复。
+- 需要保留的独立长期 rationale 已经进入 Evolution；
+- 普通过程历史可由 Git / GitHub history 恢复。
 
 如果不能满足，应该先合并内容或保留文件，而不是为了减少数量直接删除。
 
-## 8. 清理 / 重构方法
+## 9. 清理 / 重构方法
 
 执行仓库结构清理时，按以下顺序：
 
@@ -245,15 +352,15 @@ Code search、索引或第三方工具可能有范围 / 时效限制。因此重
    ↓
 2. 找出明显错层 / 重复编号 / 平行 Primary Home
    ↓
-3. 区分“纯物理问题”与“会改变语义的问题”
+3. 区分 Current、Work、Durable History
    ↓
-4. 先处理无歧义的物理整理
+4. 判断成果是否应吸收到 State / Runtime / docs
    ↓
-5. 对重复文档做内容级比较
+5. 判断剩余材料是否达到 Evolution 准入门槛
    ↓
-6. 把独有长期规则吸收到 Primary Home
+6. 把独有长期规则 / 知识吸收到 Primary Home
    ↓
-7. 删除 / 历史化被吸收 Artifact
+7. 删除 / 历史化没有独立长期价值的过程 Artifact
    ↓
 8. 修复所有引用与入口文档
    ↓
@@ -272,23 +379,25 @@ Code search、索引或第三方工具可能有范围 / 时效限制。因此重
 
 这些属于上层设计 / Owner Gate，而不是普通结构整理。
 
-## 9. 新增文件 / 文件夹检查表
+## 10. 新增文件 / 文件夹检查表
 
 创建之前依次问：
 
-1. 这是 Current、Process 还是 History？
-2. 它属于哪一个 `01 / 02 / 03` 主要注意力域？
-3. 同层是否已经有三个主要入口？如果有，能否继续向下分层？
-4. 是否已有 Primary Home？
-5. 它是新概念，还是旧概念的补充 / 操作化 / 临时过程？
+1. 这是 Current、Work 还是 Durable History？
+2. 如果是 Work，为什么不能只存在于 Issue / Project / PR？
+3. 如果是 Current，它属于 State、Runtime 还是 docs？
+4. 如果是 Durable History，它是否达到 Evolution 三项准入门槛？
+5. 是否已有 Primary Home？
 6. 是否能修改已有文件而不是新增？
 7. 新目录是否解决真实的规模、生命周期、所有权、工具或认知负担问题？
-8. 目录下预计是否只有 1–2 个文件？若是，为什么不能保持扁平？
-9. 是否会制造重复编号、第四主要入口或第二事实源？
+8. 同层是否已经暴露三个主要注意力入口？
+9. 目录下预计是否只有 1–2 个文件？若是，为什么不能保持扁平？
 10. 新路径将影响哪些链接、脚本、workflow 或消费者？
 
-默认选择：**少建一级、少建一份、优先归位、必要时继续向下三分；任何路径变化都要把引用完整性当作迁移的一部分。**
+默认选择：**先减少有资格成为 Repository Artifact 的东西，再讨论如何分类；少建一级、少建一份、优先归位，路径变化同时保证引用完整性。**
 
-## 10. 当前已知边界
+## 11. 当前迁移边界
 
-`01_State` 的编号入口只用于正式 Canonical State。候选对象与接纳决策证据已经归入不编号的 `Inbox/`；它们参与 intake 流程，但不因此获得主要注意力编号。后续如果再出现类似“流程辅助物 / 临时物 / 未正式收入内容”，应优先判断是否属于不编号辅助入口，而不是机械增加新的编号目录。
+`01_State` 的编号入口只用于正式 Canonical State；候选对象与接纳决策证据归入不编号 `Inbox/`。
+
+`03_Evolution` 的旧 `01_Research / 02_Experiments / 03_Change` 结构形成于“Repository 也保存较多工作过程”的旧模型。新目标结构为 `01_Research / 02_Experiments / 03_Decisions`，但旧材料必须逐件进行内容级审计：先吸收 Current 成果，再保留真正 Durable Rationale，最后删除仅有施工过程价值的 Artifact。不得为了快速得到漂亮目录而批量机械重命名或删除。
