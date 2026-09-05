@@ -2,7 +2,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-05T17:15:00+08:00
+Document Updated At: 2026-09-05T19:00:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -13,63 +13,58 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-本文件只是仓库级 Agent 启动路由器（Bootstrap / Router），不是项目百科，也不替代 README、PROJECT_STATE、Master Design、Issue / PR、Specification 或 Governance。
+本文件只是仓库级 Agent 启动路由器（Bootstrap / Router），不是项目百科，也不替代 README、PROJECT_STATE、Issue / PR、Specification 或 Governance。
 
-## 1. 先理解三个层级
+## 1. 最小启动路径
 
-```text
-项目为什么存在 / 长期是什么
-→ docs/01_Foundation/
-
-知识系统怎样组成 / 怎样被人和 Agent 使用
-→ docs/02_System/
-
-项目怎样协作、治理和维护
-→ docs/03_Operation/
-```
-
-当前工作状态不放在 `docs/`，也不为普通任务在 Repository 中另建工作目录：
+Agent 不应在接手项目时机械通读整个仓库。使用与 Human 一致的项目导航模型：
 
 ```text
-Discussion        → 尚未收敛的开放问题 / 社区讨论（启用后）
-GitHub Issue      → Work Item identity 与任务状态
-GitHub Project    → 多 Work Item 的实时组织 / 优先级 / 进度视图
-PR / Handoff      → 当前交付与续接
-GitHub Actions    → 自动验证 / 构建 / 例行操作
-Git history       → 变化历史
-PROJECT_STATE.md  → 项目级当前断点
+第一次理解 InteropAtlas
+→ README.md
+
+判断当前方向 / 找到参与入口
+→ PROJECT_STATE.md
+
+执行具体工作
+→ PROJECT_STATE 指向的 Discussion / Issue / Project / 相关资料
 ```
 
-## 2. 第一次进入
+如果用户已经明确给出具体 Issue / PR / Work Item，仍先快速读取 `PROJECT_STATE.md` 判断它是否与当前项目方向和授权一致，然后只补充该任务直接需要的上下文。
 
-按最小充分上下文读取：
+需要理解项目为什么存在、长期是什么时按需进入 `docs/01_Foundation/`；需要理解知识系统和 Human / Agent Interface 时按需进入 `docs/02_System/`；需要理解协作、治理和维护规则时按需进入 `docs/03_Operation/`。
 
-1. `PROJECT_STATE.md`
-2. `README.md`
-3. `docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md`
-4. `docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md`
-5. 当前 Phase / Issue / Project view
-6. `CONTRIBUTING.md`
-7. 与任务直接相关的 Architecture / Specification / Research
-
-需要理解哲学、长期方向、个人知识空间、Perspective / Projection / Workspace 时，再进入 `docs/01_Foundation/` 与 `docs/02_System/` 对应分支，不要无差别读取整个 `docs/`。
-
-## 3. 用户只说“继续”
+## 2. 用户只说“继续”
 
 1. 读取 `PROJECT_STATE.md`；
-2. 检查 `Verified At` 后是否有改变主线的 main commit / merged PR / Issue 状态；
-3. 验证 `Resume Here` 第一项未完成工作；
-4. 优先续接已有 In Progress / Review，不创建平行替代任务；
-5. 只有项目级状态确实变化时才更新 `PROJECT_STATE.md`。
+2. 检查 main / Issue / PR 是否出现改变主线或当前任务状态的新进展；
+3. 优先续接已经存在的 In Progress / Review 工作，不创建平行替代任务；
+4. 从 PROJECT_STATE 的稳定参与入口恢复对应实时 Work Item；
+5. 只有项目使命、当前建设方向、稳定参与入口或重大授权边界确实变化时才更新 `PROJECT_STATE.md`。
 
 私人聊天、隐藏记忆和临时终端输出不是 Project State。
+
+## 3. 复杂 Human 对话的持续捕获
+
+Human 可能在一次自然语言讨论中同时提出问题、不满、方向、研究需求、规范要求和具体任务。Agent 不得要求 Human 自己把这些内容重新拆成任务，也不得机械地“一点一个 Issue”。
+
+在一轮讨论形成可持续价值后，按性质分流：
+
+```text
+尚未收敛的问题 / 方向 / 方案讨论 → Discussion
+明确、有完成边界的工作             → Issue
+多个 Work Item 的组织 / 优先级     → Project
+稳定、长期有效的规则 / 设计 / 知识 → Repository
+```
+
+如果平台能力暂时无法写入某个目标表面，应选择最接近且公开可恢复的 GitHub-native 位置记录，并明确后续迁移目标。不要让影响后续工作的 Owner 意图只存在于私人聊天。
 
 ## 4. Source of Truth
 
 按以下层级判断冲突：
 
 1. Master Design — 长期项目方向与系统边界；
-2. `PROJECT_STATE.md` — 当前项目断点；
+2. `PROJECT_STATE.md` — 当前项目方向与稳定参与入口；
 3. GitHub Issue — Work Item；
 4. PR / Handoff — 当前交付；
 5. Canonical YAML — 知识事实；
@@ -109,13 +104,13 @@ Draft → Ready → Claimed → In Progress → Review → Done
 
 平台 Agent 只是 Executor / Automation capability，不因 UI 提供 Agent 入口而获得额外 Task Authority、Review Authority 或 Canonical acceptance 权限。
 
-协作规则从 `docs/03_Operation/01_Collaboration/` 进入；治理规则从 `docs/03_Operation/02_Governance/` 进入。
+协作规则从 [`docs/03_Operation/01_Collaboration/`](docs/03_Operation/01_Collaboration/) 进入；治理规则从 [`docs/03_Operation/02_Governance/`](docs/03_Operation/02_Governance/) 进入。
 
 ## 7. Repository Structure
 
 数字前缀是主要注意力入口，不只是排序装饰。同一级的主要编号默认只使用 `01_ / 02_ / 03_`；超过三个优先继续向下分层，不横向制造 `04_ / 05_`。辅助 / 平台目录可以不编号，但必须保持少量和明确职责。
 
-完整规则：`docs/03_Operation/03_Project/repository-structure-profile.zh-CN.md`。
+完整规则：[`repository-structure-profile.zh-CN.md`](docs/03_Operation/03_Project/repository-structure-profile.zh-CN.md)。
 
 新增文件前先问：
 
@@ -133,13 +128,13 @@ Living Documents → `docs/`；Durable Research / Experiment / Decision → `03_
 
 中文文档以自然简体中文为主；核心概念首次出现优先采用 `中文首选术语（Canonical English Term）`。机器标识、官方标准名、协议名、API 名等保持准确身份。
 
-语言与术语：`docs/03_Operation/03_Project/language-policy.zh-CN.md` 与 `terminology-registry.md`  
-知识来源追踪：`docs/02_System/01_Knowledge/03_Provenance/provenance-traceability-profile.zh-CN.md`  
-贡献身份：`docs/03_Operation/01_Collaboration/agent-attribution-contribution-identity-profile.zh-CN.md`
+语言与术语：[`language-policy.zh-CN.md`](docs/03_Operation/03_Project/language-policy.zh-CN.md) 与 [`terminology-registry.md`](docs/03_Operation/03_Project/terminology-registry.md)  
+知识来源追踪：[`provenance-traceability-profile.zh-CN.md`](docs/02_System/01_Knowledge/03_Provenance/provenance-traceability-profile.zh-CN.md)  
+贡献身份：[`agent-attribution-contribution-identity-profile.zh-CN.md`](docs/03_Operation/01_Collaboration/agent-attribution-contribution-identity-profile.zh-CN.md)
 
 ## 9. 验证
 
-Canonical data、relations、schema 或 engine 变更应运行相关 deterministic checks。当前 Runtime 从 `02_Runtime/01_Engine/` 进入，例如：
+Canonical data、relations、schema 或 engine 变更应运行相关 deterministic checks。当前 Runtime 从 [`02_Runtime/01_Engine/`](02_Runtime/01_Engine/) 进入，例如：
 
 ```bash
 pip install -r 02_Runtime/01_Engine/requirements.txt
@@ -165,6 +160,6 @@ Recommended next action
 Current branch / PR / commit
 ```
 
-只有主线、Gate、Resume Here 或重大方向发生变化时才同步 `PROJECT_STATE.md`。
+只有主线、稳定参与入口、Gate 或重大方向发生变化时才同步 `PROJECT_STATE.md`。
 
 核心原则：**聊天可以中断，项目状态不能中断；文档可以分层，事实源不能分裂。**

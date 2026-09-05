@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-05T18:45:00+08:00
+Document Updated At: 2026-09-05T19:00:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -74,26 +74,25 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 
 完整结构见 [`知识哲学与原则`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)。
 
-## 想进一步参与？
+## 想参与建设？
 
-| 你想做什么 | 从哪里开始 |
-| --- | --- |
-| 了解 InteropAtlas 收录什么 | [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md) |
-| 理解项目长期设计与哲学 | [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) |
-| **查看现在真正的主线** | [`项目状态（PROJECT_STATE.md）`](PROJECT_STATE.md) |
-| 查看长期能力方向 | [`长期路线图`](docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md) |
-| 作为人类维护者参与贡献 | [`贡献指南（CONTRIBUTING.md）`](CONTRIBUTING.md) |
-| 让智能体接手或维护项目 | [`智能体指南（AGENTS.md）`](AGENTS.md) |
-| 查找规范、Profile、架构和政策 | [`文档地图（docs/README.md）`](docs/README.md) |
-| 查看研究、实验和决策过程 | [`演化记录（03_Evolution/）`](03_Evolution/) |
+**只需要进入 [`PROJECT_STATE.md`](PROJECT_STATE.md)。**
 
-历史阶段编号、旧项目版本称呼、Migration 过程和内部任务树属于历史 / 执行层上下文，不作为 Owner-facing 主线。
+它是 Human 与 Agent 共用的当前建设入口，直接回答三个问题：
+
+1. 我们要去哪里；
+2. 我们现在在建设什么；
+3. 我可以从哪里参与。
+
+从那里可以继续进入当前适用的 Discussion、Issue、Project、Candidate Pool、Human / Machine 路线或深入文档。你不需要为了参与项目先通读 Master Design、Roadmap、全部 `docs/` 或完整 Issue backlog。
+
+如果你是 Agent，仓库级执行约束另见 [`AGENTS.md`](AGENTS.md)；具体贡献规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
 ## 当前状态
 
-InteropAtlas 仍处于早期建设阶段，但已经从纯设计转向真实运行：持续收录、Canonical Knowledge、Human Workspace、Agent 协作与仓库运行机制正在并行演化。
+InteropAtlas 仍处于早期建设阶段，但已经从纯设计转向真实运行：知识地图持续成长、可运行知识基础设施、Human / Agent 真实使用与反馈正在并行演化。
 
-**实时项目断点与下一步只看 [`PROJECT_STATE.md`](PROJECT_STATE.md)。**
+**实时方向、参与路径与下一步入口统一从 [`PROJECT_STATE.md`](PROJECT_STATE.md) 进入。**
 
 ## 许可证
 

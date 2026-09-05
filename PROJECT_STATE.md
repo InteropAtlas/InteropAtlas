@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-05T18:45:00+08:00
+Document Updated At: 2026-09-05T19:00:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -14,129 +14,87 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-> Status: Living Project Checkpoint（持续更新的项目断点）
+> **这是参与 InteropAtlas 建设的统一入口。**
 >
-> Purpose: 这是 Human Owner 与新 Agent 查看“现在主线是什么、做到哪里、从哪里继续”的首要入口。历史阶段编号、旧建设周期和已经完成的迁移过程不再占据 Owner View。
+> 第一次认识项目先读 [`README.md`](README.md)；准备参与、判断当前方向或寻找下一项工作时，从本文件进入。这里不复制完整任务列表，而只保存长期稳定的方向和导航入口。
 
-## 1. 项目长期目标
+## 1. 我们要去哪里
 
-InteropAtlas 是一个面向全人类的、开放、机器可读、可持续分析与演化的 **互操作方案空间（Interoperability Solution Space）公共知识基础设施**。
+InteropAtlas 是一张关于“人类已经如何解决互操作问题”的开放知识地图，并逐步建设成为面向全人类、开放、机器可读、可持续分析与演化的 **互操作方案空间（Interoperability Solution Space）公共知识基础设施**。
 
-长期系统坚持：
+长期坚持：
 
 > **知识属于公共共同体，视角属于个人。**
 
-核心知识世界保持公共、可验证、可追溯；Human 与 Agent 在同一知识世界上，通过选择（Selection）、视角（Perspective）、投影（Projection）和工作空间（Workspace）完成发现、比较、验证、组合、使用与贡献。
+Human 与 Agent 使用同一个可验证、可追溯的公共知识世界，通过不同的选择、视角、投影和工作空间完成发现、比较、验证、组合、使用与贡献。
 
-## 2. Owner View：当前主线
+需要理解项目边界时进入 [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md)；需要理解长期设计时进入 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)；需要展开长期能力方向时进入 [`长期路线`](docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)。这些是深入材料，不是参与项目的前置必读。
 
-当前主线只保留三个需要长期并行推进的方向：
+## 2. 我们现在在建设什么
+
+当前建设不是固定阶段流水线，而是三条共享同一知识底座、长期并行的方向：
 
 ```text
 知识地图持续成长
-    +
+        +
 可运行的知识基础设施
-    +
+        +
 Human / Agent 真实使用与反馈
 ```
 
 ### 知识地图持续成长
 
-持续发现和收录标准、协议、方法、实现、组织、能力、场景、关系、证据与开放缺口。Candidate Pool 是入口；Candidate 不等于 Canonical；普通收录必须经过 identity / dedup、验证、语义审查和明确接受边界。
-
-当前已具备可运行的持续收录链路，具体执行入口见当前 Intake Work Item。
+持续发现标准、协议、方法、实现、组织、能力、场景、关系、证据与开放缺口；让 Candidate 经过 identity / dedup、验证、语义审查与明确接受边界后进入 Canonical Knowledge。
 
 ### 可运行的知识基础设施
 
-继续把已经形成的知识模型、来源追踪、关系、生命周期、查询、验证、迁移和投影能力变成稳定的运行能力。实现应由真实数据和真实使用驱动，不再以一次性的阶段编号作为项目主线。
+持续完善知识模型、Relation、Evidence、Provenance、Lifecycle、查询、验证、迁移、Coverage / Freshness / Revalidation 等能力。真实数据和真实使用负责暴露模型缺口，再决定底层怎样演化。
 
 ### Human / Agent 真实使用与反馈
 
-Human 与 Agent 应逐步共享同一知识底座和可恢复的 Selection / Projection / Workspace 机制。Human 侧已经有 Compare / Evidence 的第一批真实切片；Agent 结构化读取、查询、遍历和 Candidate Write 仍属于高影响后续能力，未获得明确授权前不得自动启动。
+Human 侧持续改善浏览、理解、比较、证据检查与 Workspace；Machine / Agent 侧持续改善结构化读取、查询、遍历、验证和自动化。两条使用路线共享同一个 Canonical knowledge world，不各自建立事实源。
 
-## 3. 当前实际状态
+Agent structured access + Candidate Write 等高影响能力仍需 Human Owner 明确授权后才能进入施工。
 
-已经具备：
+## 3. 我可以从哪里参与
 
-- 共享 Canonical knowledge world 的基本结构；
-- 稳定身份、Evidence / Provenance、Fact ≠ Assessment 等核心边界；
-- Candidate → Validation → Review / Acceptance 的生产收录路径；
-- Legacy → 当前知识结构的可回滚迁移实践；
-- Human Compare / Evidence 对共享 Selection / Projection 合同的真实使用；
-- GitHub-native 协作、维护和 Agent continuation 基础设施；
-- Repository 当前结构：`01_State / 02_Runtime / 03_Evolution / docs`。
+不要从完整 Issue backlog 开始。先选择自己想参与的工作类型，再进入对应的稳定入口寻找当前 Work Item。
 
-仍需持续推进：
+| 我想做什么 | 去哪里 |
+| --- | --- |
+| **发现地图空缺、补充新的标准 / 协议 / 方法 / 实现** | 从 [`Candidate Pool`](01_State/Inbox/candidates/) 查看候选与覆盖情况，再从 [当前开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 查找可执行的 intake / coverage 工作 |
+| **审核 Candidate，判断对象 / 关系 / 证据能否进入 Canonical** | 从 [`Inbox`](01_State/Inbox/) 查看待处理材料，并按 [`知识系统规范`](docs/02_System/01_Knowledge/) 进行 identity、evidence、relation 与 acceptance 审查 |
+| **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再到 [开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 寻找当前 Human-facing 工作 |
+| **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 和 [`System`](docs/02_System/) 理解当前能力，再到 [开放 Issues](https://github.com/InteropAtlas/InteropAtlas/issues?q=is%3Aissue%20state%3Aopen) 寻找当前 Machine / Agent 工作；高影响能力仍遵守 Owner Gate |
+| **研究项目大方向、提出新的能力或路线** | 先参考 [`长期路线`](docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md)；尚未收敛的问题进入 [GitHub Discussions](https://github.com/InteropAtlas/InteropAtlas/discussions)，形成明确交付边界后再成为 Issue |
+| **领取一个已经明确的具体任务** | 进入 [GitHub Issues](https://github.com/InteropAtlas/InteropAtlas/issues)；Issue 是具体 Work Item 的执行事实源 |
+| **查看多项工作的组织、优先级和进度** | 进入 [GitHub Projects](https://github.com/orgs/InteropAtlas/projects)；Project 负责组织和投影，不替代 Issue 中的执行上下文 |
+| **维护仓库、自动化和长期卫生** | 进入 [`仓库长期维护 Project`](https://github.com/orgs/InteropAtlas/projects/4) |
 
-- 扩大知识覆盖与方案空间覆盖；
-- 用真实收录继续校验知识模型；
-- 补齐 Relation / Evidence / Lifecycle 等现实数据迁移与表达；
-- 扩展 Human Workspace；
-- 在 Owner 明确授权后推进 Agent structured access + Candidate Write；
-- 让 Coverage、Freshness、Revalidation、Open Gap 等维护能力逐步进入长期运行；
-- 之后再由真实需求决定 Personal Knowledge Space、动态 Perspective、MATCH、Federation 等长期能力何时进入施工。
+### 如果我的想法还不是一个任务
 
-## 4. 当前执行入口
-
-对 Human Owner：默认只看本文件，不需要记忆历史阶段编号或内部任务树。
-
-对 Agent：
-
-1. 先读 `AGENTS.md`；
-2. 再读本文件；
-3. 检查 main / Issue / PR 是否出现更新；
-4. 进入当前处于 Ready / In Progress 的具体 Issue；
-5. 不从历史阶段名称推断当前授权。
-
-当前持续收录入口由现行 Continuous Intake Work Item 承担。
-
-当前仓库长期维护由 Repository Maintenance Project 与其具体维护 Issue 承担；它是维护工作，不是产品主线。
-
-Agent structured access 相关工作仍需 Owner 明确提升后才可执行。
-
-## 5. 规划与命名规则
-
-### 不再使用项目级版本号描述当前计划
-
-InteropAtlas 的长期项目本身、总体路线、Living Documents 和当前主线不使用 `V1 / V2` 作为规划框架。Git 历史、提交、Issue、PR 和文档 provenance 负责记录演化。
-
-版本号仍可用于现实中本来具有版本身份的对象、外部标准版本、兼容契约、Schema / Protocol 等必须明确版本边界的制品；这与“给整个项目计划编号”是两回事。
-
-### 历史 P1–P6 不再作为现行路线
-
-过去的 P1–P6 只作为历史建设周期留在 Git history / closed Issues / Evolution 记录中，不再作为 Owner View、长期 Roadmap 或新任务命名体系。
-
-新 Work Item 使用 GitHub Issue Number 作为稳定身份，并以清晰任务标题、Status、Type、Priority、Workstream 表达当前意义，不再添加新的 `P1 / P2 / P6` 阶段前缀。
-
-## 6. 长期路线的阅读方式
-
-长期方向不是固定阶段流水线。当前使用四层关系理解：
+项目允许自然语言讨论先于任务结构。不要因为一个讨论里出现很多想法，就机械创建几十个 Issue。
 
 ```text
-长期使命 / 产品哲学
-        ↓
-长期能力域
-        ↓
-当前主线
-        ↓
-可执行 Work Item
+尚未收敛的问题 / 方向 / 方案讨论
+→ Discussion
+
+已经明确、有完成边界的工作
+→ Issue
+
+多个 Work Item 的长期组织与进度
+→ Project
+
+已经稳定、长期有效的规则 / 设计 / 知识
+→ Repository
 ```
 
-长期能力域见：`docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md`。
+私人聊天不是项目状态源。如果一轮 Human / Agent 对话产生了会影响后续工作的方向、问题或任务，在结束前应把它们分流到上述公开持久位置，而不是依赖参与者记住聊天内容。
 
-只有真实需求、真实数据、真实使用和明确授权共同支持时，长期方向才进入当前施工。
+当前这套入口与持续捕获机制的实施和讨论记录在 [`#404`](https://github.com/InteropAtlas/InteropAtlas/issues/404)。
 
-## 7. Owner escalation boundary
+---
 
-以下事项仍需 Human Owner 明确判断：
+**最短参与路径：** `README → PROJECT_STATE → 选择参与方向 → Discussion / Issue / Project / 对应资料`。
 
-- 项目定义、长期方向或 Scope 的实质变化；
-- Public Canonical ↔ Personal State / privacy 边界；
-- identity merge / split 或不可逆身份决策；
-- destructive migration / major deletion；
-- material security / permission boundary；
-- stable specification / governance promotion；
-- formal release 或其他重大不可逆决策；
-- 仍处于 Draft / Future 的高影响能力被提升为当前工作。
-
-普通技术实现、可机械验证的迁移、常规 intake 和维护工作不需要把内部细节持续呈现给 Owner。
+本文件只在项目使命、当前建设方向、稳定参与入口或重大授权边界发生变化时更新；具体 Issue 的增删、普通任务进度和日常维护不要求同步修改本文件。
