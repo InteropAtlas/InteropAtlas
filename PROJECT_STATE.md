@@ -91,8 +91,6 @@ Agent structured access + Candidate Write 等高影响能力仍需 Human Owner �
 
 私人聊天不是项目状态源。如果一轮 Human / Agent 对话产生了会影响后续工作的方向、问题或任务，在结束前应把它们分流到上述公开持久位置，而不是依赖参与者记住聊天内容。
 
-当前这套入口与持续捕获机制的实施和讨论记录在 [`#404`](https://github.com/InteropAtlas/InteropAtlas/issues/404)。
-
 ---
 
 **最短参与路径：** `README → PROJECT_STATE → 选择参与方向 → Discussion / Issue / Project / 对应资料`。
