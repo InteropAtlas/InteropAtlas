@@ -27,9 +27,9 @@ InteropAtlas 网站不是从视觉稿开始建设，而从用户任务、信息�
 
 本规范将此前分散在以下材料中的研究收敛成第一版可执行 Profile：
 
-- [`03_Evolution/01_Research/human-interface-standards-baseline.zh-CN.md`](/03_Evolution/01_Research/human-interface-standards-baseline.zh-CN.md)；
-- [`03_Evolution/01_Research/human-interface-reference-map.zh-CN.md`](/03_Evolution/01_Research/human-interface-reference-map.zh-CN.md)；
-- [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md)；
+- [`03_Evolution/01_Research/human-interface-standards-baseline.zh-CN.md`](/03_Evolution/01_Research/01_Prior_Art/human-interface-standards-baseline.zh-CN.md)；
+- [`03_Evolution/01_Research/human-interface-reference-map.zh-CN.md`](/03_Evolution/01_Research/01_Prior_Art/human-interface-reference-map.zh-CN.md)；
+- [`human-interface-interaction-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-interaction-profile.zh-CN.md)；
 - ISO 9241 人机交互标准族；
 - HTML / CSS / WCAG / WAI-ARIA / APG；
 - Apple Human Interface Guidelines；
