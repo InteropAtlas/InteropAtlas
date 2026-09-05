@@ -1,202 +1,276 @@
-# InteropAtlas v0.1 核心架构
+# InteropAtlas V1 核心架构（Core Architecture）
 
 <!-- InteropAtlas Document Metadata v0
-Document Status: Pre-Alpha（预发布早期阶段）
+Document Status: active architecture baseline
 Document Created At: 2026-08-30T18:29:47+08:00
-Document Updated At: 2026-09-01T11:15:19+08:00
+Document Updated At: 2026-09-05T04:45:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
-Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
+Lifecycle Time Provenance: direct_record
+Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-> 状态：Pre-Alpha（预发布早期阶段）
+> 状态：当前有效的 V1 核心架构基线（Active V1 Core Architecture Baseline）
 >
-> 本文描述当前工作架构，不是冻结的最终规范。真实数据实验、程序实现和社区反馈都可以推动它发生破坏性调整。
+> 本文负责维护 InteropAtlas 当前有效的核心知识与访问架构。项目使命与长期系统边界见 [`总体设计`](interopatlas-master-design.zh-CN.md)；具体字段、Schema、Profile、运行规则与阶段实现由下位规范维护。
 >
-> 项目定义与收录范围以 `interopatlas-definition-and-scope.zh-CN.md` 为当前上位定义。
+> 本版吸收 P4.1 Canonical Contract、P4.2 Write / Intake、P4.4 Selection / Projection / Workspace、P4.5 Human + Agent Access 中经过后续 P5/P6 延续的核心架构边界。P4 阶段性 Draft 归入 Evolution 保存设计历史，不再作为并列事实源。
 
-## 0. 项目现在映射什么
+## 1. 架构目标
 
-InteropAtlas 当前不再被定义为“只收录正式标准的标准目录”。
+InteropAtlas 映射的是**互操作方案空间（Interoperability Solution Space）**，而不是单一“标准目录”。Canonical Knowledge 可以覆盖规范性成果、成熟先例、方法、实现、组织、能力、需求、场景、关系、来源、证据、生命周期、评估与开放缺口等不同知识。
 
-它映射的是 **Interoperability Solution Space（互操作方案空间）**：
-
-- Normative Artifacts（正式标准、规范、协议、Profile 等）；
-- Mature Precedents / Prior Art（成熟先例与既有方案）；
-- Methods / Guidelines / Frameworks（方法、指南、框架）；
-- Implementations / Tools / Services（实现、工具、服务）；
-- Organizations（组织与治理主体）；
-- Capabilities / Needs / Scenarios（能力、需求、场景）；
-- Evidence / Sources（证据与来源）；
-- Relations（关系）；
-- Assessments / Open Gaps（评估与开放缺口）。
-
-这些是概念类别，不等于当前 Schema 已经有同名对象 `type`。特别是非规范性知识对象仍由 #15 继续反推最小模型。
-
-核心原则：
+核心目标不是一次冻结完整本体，而是建立一个稳定、可验证、可扩展的知识底座，使真实对象、关系、证据和使用不断挑战并改进模型。
 
 > **Map the solution space, preserve the authority distinction.**
->
-> **扩大方案空间覆盖，但保持权威性与对象身份的严格区分。**
 
-## 1. Facts（事实层）
+对象类别、权威性、成熟度、生命周期和评估必须保持语义区别；“被收录”本身不改变现实对象的身份或权威等级。
 
-事实层记录可验证、可引用来源、可版本控制的信息。它回答的是“目前已知世界是什么样”，而不是“我们认为哪个方案最好”。
-
-当前概念上的事实对象包括：
-
-- Normative Artifact：Standard、Specification、Protocol、Profile、API / Interface、Format 等；
-- Mature Precedent / Reference：成熟项目、Landscape、Design System、治理 / 协作先例、Reference Architecture 等；
-- Method / Guideline / Framework；
-- Capability；
-- Organization；
-- Implementation；
-- Relation；
-- Evidence / Source。
-
-Scenario 中客观描述的需求也可以作为分析输入，但场景本身不代表结论。
-
-### 1.1 Standard、Precedent、Method、Implementation 不能混淆
-
-事实层允许同时记录正式标准和成熟先例，但必须保持语义边界：
+## 2. 总体数据与访问链
 
 ```text
-Formal Standard / Specification
-        ≠
-Mature Precedent / Reference Project
-        ≠
-Method / Guideline / Framework
-        ≠
-Implementation / Tool / Service
+Reality / Sources
+       ↓
+Candidate / Evidence
+       ↓
+Validation / Review / Acceptance
+       ↓
+Canonical Knowledge
+       ↓
+Selection / Perspective
+       ↓
+Projection
+       ↓
+Workspace / Representation
+       ↓
+Human / Agent
 ```
 
-例如一个 Design System 可以是成熟先例，也可以包含 Method / Guideline；但它不能因为被广泛采用就自动变成 ISO / W3C 意义上的正式 Standard。
+这是一组**语义职责边界**，不要求每层都成为独立数据库、服务或文件格式。
 
-反过来，一个正式 Standard 即使当前缺少成熟实现，也仍然保持规范身份。
+关键不变量：
 
-### 1.2 Prior Art 是调查活动，不是统一对象类型
+- Stable IA identity ≠ display name ≠ physical path ≠ Source URL ≠ external identifier；
+- Physical Storage ≠ Semantic Classification ≠ View；
+- Relation 是一等知识资产；
+- Source ≠ Evidence ≠ Assertion ≠ Assessment ≠ Provenance；
+- Fact ≠ Assessment；
+- Canonical State ≠ Generated View；
+- Agent Output ≠ Canonical Fact；
+- Selection / Projection ≠ Canonical truth；
+- write capability ≠ canonical acceptance authority；
+- Human / Agent shared knowledge ≠ shared authority；
+- conflict、competing assertions 与 explicit unknown 可以被保留；
+- public knowledge lifecycle ≠ personal attention / memory lifecycle。
 
-`Existing Standards & Prior Art Check（既有标准与成熟先例调查）` 是设计新能力前的研究活动。
+## 3. Canonical Contract
 
-它可能发现：
+V1 采用：
 
-- Standard；
-- Method；
-- Mature Precedent；
-- Implementation；
-- Organization；
-- Research Result。
+> **Stable Canonical Core + explicit composable semantic contracts / profiles**
 
-真正进入 Canonical Atlas 后应回到准确对象身份，而不是全部标成 `prior_art`。
+而不是继续扩张一个承担所有语义的万能 Object Schema。
 
-### 1.3 成熟度与权威性不能只靠标签断言
+### 3.1 Identity Contract
 
-“成熟”“权威”“开放”“适用”中的一部分可能是事实，一部分可能需要 Assessment。
+回答：**这个 Canonical Subject / Record 是谁？**
 
-例如：
-- 官方发布状态可以是 Fact；
-- 是否存在长期维护证据可以记录为 Evidence；
-- “这个先例足够成熟、值得作为 IA Profile 的参考”更接近 evidence-backed Assessment；
-- “这个方案在某 Scenario 下最合适”明确属于 Assessment。
+至少区分：
 
-因此后续模型必须避免把复杂判断压成未经解释的 `mature: true` 或 `best_practice: true`。
+- **IA Canonical ID**：项目控制的稳定内部身份；
+- **External Identifier**：外部 authority / namespace 授予的 identifier；
+- **Locator / Access Address**：URL、文件路径、下载入口等；
+- **Human Name / Label**：官方名称、简称、译名、历史名称等。
 
-事实层初期以 GitHub 中的结构化文件作为 Source of Truth（事实源）。
+名称、URL 或外部 identifier 相同都不能单独推出两个记录必然是同一 Canonical Subject。Identity merge / split / reassignment 属高影响 mutation，必须保留依据、旧身份可解析性和决策来源追踪。
 
-## 2. Rules & Engine（规则与分析引擎层）
+### 3.2 Entity / Object Contract
 
-规则层描述“如何判断”，分析引擎负责“执行判断”。
+回答：**这是哪类可独立识别的知识对象？**
 
-InteropAtlas Engine（InteropAtlas 分析引擎）初期目标包括：
+V1 将稳定的基础 semantic family 与更具体、可扩展的 domain kind / profile 职责分离。分类用于描述对象“是什么”，不重新决定物理目录，也不承担 authority、maturity、validity、publication status 等其他语义。
 
-- Validator（验证器）：检查数据结构、引用和基本一致性；
-- Graph Builder（关系图构建器）：将事实对象与关系组织成可查询图；
-- Query（查询）：按 Capability、Scenario、Relation、对象类别等读取事实；
-- Pathfinder（路径搜索器）：寻找满足场景要求的互操作路径；
-- Constraint Evaluator（约束评估器）：检查带宽、延迟、范围、安全等约束；
-- Coverage Analyzer（覆盖分析器）：分析 Standards / Precedents / Implementations 对能力和方案空间的覆盖；
-- Gap Analyzer（缺口分析器）：识别没有充分解决方案的位置；
-- Openness Evaluator（开放性评估器）：根据明确的 Openness Policy（开放性判定规则）判断方案的开放程度；
-- Comparator（比较器）：比较规范、实现、方法或先例在明确维度上的差异。
+最终 taxonomy 应由真实数据和 Profile 演化，而不是在顶层架构中提前穷举。
 
-开放性不应被简化成一个永久的 `open = true/false` 标签。规范获取、治理、专利/许可、实现、认证、硬件依赖和供应商中立性等事实应分别记录，再由规则进行判断。
+### 3.3 Relation / Association Contract
 
-同样，“成熟先例”也不应只靠维护者印象。真实采用、维护年限、公开文档、生态规模、实现经验、持续性等 Evidence 应逐步进入可追踪模型。
+回答：**哪些参与者以什么语义发生联系？**
 
-## 3. Assessments（动态评估结果层）
+Simple binary relation 是常见 fast path，但不是通用上限。架构为需要 participants、roles、qualifiers 或 context 的 richer association 保留空间。
 
-评估层记录分析引擎或人工 / Agent 在特定时间、场景、规则和证据下得到的结果。
+Relation semantics 与 Evidence / Provenance semantics 分离：参与者不是 Evidence，provenance actor 也不自动成为 relation participant。
 
-主要结果候选包括：
+## 4. Knowledge Claim / Evidence Contract
 
-- Gap Assessment（缺口评估）；
-- Path Assessment（路径评估）；
-- Coverage Assessment（覆盖度评估）；
-- Compatibility Assessment（兼容性评估）；
-- Openness Assessment（开放性评估）；
-- Maturity / Applicability Assessment（成熟度 / 适用性评估）。
+至少保持五个概念的职责区别：
 
-因此，Open Gap（开放缺口）首先是一种动态评估，而不是永久事实。
+- **Source**：可定位的信息来源；
+- **Evidence**：实际用于支持、反驳或限定某个知识判断的依据；
+- **Assertion**：关于 subject / relation / proposition 的可判断陈述；
+- **Assessment**：基于事实与证据形成的评价、评分、成熟度或解释；
+- **Provenance**：知识资产或变更由谁、何时、通过什么过程产生、转换、审核、接受。
 
-可以把它抽象为：
+Canonical substrate 不要求在 Intake 时强制制造唯一真相。它必须能够保留 competing assertions、conflicting evidence、unresolved / unknown state、later correction / supersession，以及在需要时更细粒度的 evidence / provenance。
+
+> **Canonical acceptance 与“绝对真理”是两个不同问题。**
+
+被接受进入 Canonical 表示它通过项目定义的 intake / review boundary，而不是 InteropAtlas 宣称它永远不可争议。
+
+## 5. Lifecycle / State Contract
+
+单一 `status` 不足以表达知识世界。V1 至少在概念上区分：
+
+- Repository Record Lifecycle；
+- Real-world Validity / Applicability；
+- Publication / Version Status；
+- Verification / Freshness State；
+- Authority / Confidence / Maturity Assessment；
+- Supersession / Historical State。
+
+同一个对象可以同时“已被新版替代”“仍被大量部署”“最近刚核验过”。这些维度不能压成一个线性状态机。
+
+时间也应保持语义：created、updated、verified、published、effective、retired 等不能由一个模糊的 `last_updated` 替代。
+
+## 6. Canonical Write / Intake
+
+Canonical 写入采用统一候选路径：
 
 ```text
-事实 + 场景 + 约束 + 规则 + Evidence + 时间
-                        ↓
-                    分析引擎
-                        ↓
-        当前有哪些方案？覆盖如何？哪里存在缺口？
+Observation / Source / Existing Record
+        ↓
+Candidate / Proposal / Patch + Evidence
+        ↓
+Structural & Machine Validation
+        ↓
+Semantic Review
+        ↓
+Authority Gate（when required）
+        ↓
+Accepted Canonical Mutation
+        ↓
+Provenance + Revalidation / Correction
 ```
 
-重要且经过人工确认的动态缺口，可以升级为 Gap Case（缺口案例），用于长期跟踪、讨论、Issue、提案、新标准开发和最终关闭。
+Human、Agent 和自动工具都可以产生输入；是否成为 Canonical Knowledge 由 mutation semantics、Evidence、Validation、Review 与 Authority 决定，而不是由 GitHub 写权限或模型置信度决定。
 
-## 4. Self-Use Feedback：用 InteropAtlas 分析 InteropAtlas
+### 6.1 Mutation impact
 
-第一批真实数据优先选择项目自身实际使用或参考的：
+架构继续保留从低风险 additive evidence / metadata，到 ordinary knowledge mutation、structural / semantic mutation，再到 identity / destructive / governance mutation 的影响梯度。具体名称和映射由当前治理 Profile 维护，不在核心架构中重复冻结。
 
-- 标准 / 规范 / 协议；
-- 成熟先例；
-- Method / Guideline；
-- Implementation / Tool；
-- Governance / Collaboration practice。
+高影响 Identity merge / split、destructive migration、大规模删除、稳定治理 / Schema 改变不得由执行 Agent 自批。
 
-这样做的目的不是证明当前技术和方法选择正确，而是同时检验：
+### 6.2 Evidence before assertion
 
-1. 数据模型能否表达真实的互操作方案空间；
-2. 关系图能否同时连接 Standard、Method、Precedent、Implementation；
-3. Engine 是否能区分事实查询与评价；
-4. 项目自身是否重复发明已有成熟方案；
-5. 是否存在更开放、更成熟、更可持续的替代方案；
-6. 哪些真实对象无法自然表达，从而暴露 Schema / Relation vocabulary 缺口。
+默认遵循 **Evidence Before Assertion**，但不机械要求“每个字段都有 URL”。Direct repository observation、reproducible machine observation、project-owned governance decision、明确 hypothesis / unresolved candidate、带搜索范围的 absence finding 等可以形成不同 Evidence 类型或例外路径；例外仍必须保留 Provenance。
 
-例如：
-- YAML、JSON、JSON Schema、Git、HTTP、URI、Unicode 等属于规范性技术对象；
-- GitHub Community Health、MDN Browser Compat Data、SPDX License List、CNCF Landscape 等可能属于成熟先例；
-- Diátaxis、Docs as Code、Information Architecture methods 等可能属于 Method / Framework；
-- GitHub Actions / Forgejo Actions 属于 Implementation / Platform 类对象。
+### 6.3 Conflict handling
 
-每个对象是否“开放”“成熟”“适合 IA”必须依据来源、Evidence 和明确分析维度判断，不能因为项目使用或参考它就预设结论。
+冲突默认不是“最后写入者覆盖”：
 
-## 5. 演化原则
+```text
+new evidence / assertion
+→ detect conflict
+→ preserve competing state
+→ review context / scope / version / authority
+→ accept one / qualify both / supersede / remain unresolved / escalate
+```
 
-v0.1 的目标不是一次设计出最终本体，而是建立一个可以被真实对象反复挑战的最小架构。
+Rejected / deferred / unresolved 也不自动等于 false / invalid。
 
-如果真实标准无法自然表达，优先考虑修改模型，而不是强迫数据适应错误模型。
+## 7. Selection / Projection / Workspace
 
-如果真实成熟先例、Method 或 Design System 被迫塞进 `standard` / `reference_project` 才能进入 Atlas，应把这视为模型缺口，而不是命名问题。
+Canonical Knowledge 是共享知识状态；Selection、Projection 与 Workspace 是面向任务的镜头。
 
-如果分析结果无法解释其依据，优先增加 Evidence、规则和可追溯性，而不是增加不可解释的评分。
+- **Selection / Perspective**：什么知识现在进入注意范围；
+- **Projection**：当前任务暴露哪些维度、关系和结构；
+- **Representation**：以什么形式表达；
+- **Workspace**：围绕该认知任务允许哪些操作。
 
-如果新的对象类型或层次在实践中反复出现，应允许核心架构继续演化。
+Selection / Projection 可以有损，但不得把省略解释成不存在，也不得覆盖 richer Canonical state。重要的 scope、uncertainty、conflict 和 evidence boundary 在任务相关时必须可见或可恢复。
 
-继续遵守：
+Workspace 可以包括 Search / Discovery、Wiki / Browse、Single Object / Article、Compare、Graph / Ecosystem、Timeline / Evolution、Evidence / Verification 等家族，但是否长期保留某个 Workspace 由真实 cognitive gain 决定。
 
-> **Reuse Before Invent**
->
+> **Readable Projection ≠ Updatable Projection.**
+
+Lossy aggregate、ranked list、generated summary、graph layout、recommendation 或 Agent narrative 默认不得直接反写 Canonical。发现需要修改的知识时，应转换为 Candidate / Proposal / Patch / Evidence，再进入统一 Intake。
+
+专项原则见 [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)。
+
+## 8. Human + Agent Access
+
+Human 与 Agent 使用同一个 Canonical Knowledge World 和 Intake Contract，但允许不同的访问、表示、上下文窗口、工具和操作表面。
+
+至少保持以下维度正交：
+
+```text
+Identity
+Capability
+Task / Execution Authority
+Review Authority
+Acceptance / Governance Authority
+Platform Permission
+```
+
+GitHub Actor / credential 不等于实际 Executor，也不自动继承 Human Owner authority。
+
+访问能力也不只是“读 / 写”两级，而可以覆盖 Read / Query / Analyze / Candidate Write / Review / Canonical Accept 等不同能力。
+
+Agent 默认可以研究、查询、生成候选、运行验证，并在授权范围内执行普通操作；高影响 acceptance / governance authority 必须由相应治理边界决定。Human 贡献同样不能绕过 Evidence / Validation / Review。
+
+Delegation 应 bounded、explicit、revocable；平台 credential 不应被当作 delegation policy。
+
+具体贡献身份、任务授权与协作规则由对应 Profile / Governance 文档维护。
+
+## 9. Runtime / Engine / Derived Infrastructure
+
+Runtime 负责验证、读取、查询、构图、投影、渲染和其他可重建能力。未来可以存在：
+
+- Validator；
+- Graph Builder / Graph Index；
+- Search / Query；
+- Comparator；
+- Coverage / Gap analysis；
+- Evidence / lifecycle inspection；
+- Renderer / Projection；
+- cache / denormalized read model / materialized view。
+
+这些 Derived Infrastructure 都不能成为第二事实源。它们必须能够指向或重建自 Canonical State；stale state 应可检测，Derived Store 丢失不应导致 Canonical Knowledge 丢失。
+
+Assessment / ranking / recommendation 也必须与事实层分开，并保留其依据、上下文和评价主体。
+
+## 10. Real-use evolution
+
+V1 架构仍然不是最终本体。真实标准、Prior Art、Method、Implementation、Organization、Scenario、Relation、Evidence 与真实 Human / Agent 工作流应持续检验：
+
+- identity granularity 是否合理；
+- family / kind / profile 是否自然；
+- relation 是否需要 richer association；
+- Evidence / Assertion 粒度是否充分；
+- Lifecycle 是否能表达真实状态；
+- Workspace 是否产生真实 cognitive gain；
+- Intake gate 是否过重或过松；
+- Human / Agent authority 边界是否可执行。
+
+当现实反复无法自然表达时，应修改模型，而不是强迫数据适应错误模型。演化继续遵循：
+
 > **Adopt → Profile → Extend → Invent**
+
+## 11. 架构职责边界
+
+本文件是当前 V1 Core Architecture 的 Primary Home，但不承担所有细节：
+
+- [`项目定义与范围`](interopatlas-definition-and-scope.zh-CN.md)：收录什么；
+- [`知识哲学与原则`](knowledge-philosophy-and-principles.zh-CN.md)：为什么这样建设；
+- [`总体设计`](interopatlas-master-design.zh-CN.md)：长期系统是什么；
+- [`知识工作空间设计原则`](knowledge-workspace-design-principles.zh-CN.md)：Workspace / Perspective 专项原则；
+- Canonical Schema / Relation / Provenance / Intake Profiles：字段和可执行契约；
+- Governance / Collaboration Profiles：谁可以做什么、如何 Review；
+- [`PROJECT_STATE.md`](../PROJECT_STATE.md)：当前施工断点；
+- `03_Evolution/`：P4/P5 等研究、实验和架构形成历史。
+
+核心架构应随已经被验证并接受的设计变化更新；阶段性研究或施工计划不应重新成为与本文并列的长期架构事实源。
