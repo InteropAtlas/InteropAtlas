@@ -3,50 +3,40 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: experiment_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-01T17:15:05+08:00
+Document Updated At: 2026-09-05T14:55:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
+Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
-这里存放尚未进入正式 State / Runtime 的可复现实验、原型、试运行、Dry Run 和验证工作。
+这里存放尚未进入正式 State / Runtime 的可复现实验、原型、试运行、Dry Run 和验证工作。它回答：**我们实际怎样试过，这个想法能不能工作。**
 
-它回答：**我们实际怎样试过，这个想法能不能工作。**
+## 三个主要入口
 
-实验可以包含：
+1. [`01_Foundations/`](01_Foundations/) — 早期 Bootstrap、能力验证、开放替代方案、格式适配与协作基线实验。
+2. [`02_Pilots/`](02_Pilots/) — 代表性迁移、Gate walkthrough、bounded intake 等带明确对象与边界的 Pilot / Preflight。
+3. [`03_Evidence/`](03_Evidence/) — 实验索引、Gate synthesis、Coverage baseline 等用于证明实验结果的 Evidence。
 
-- 可执行 fixture / prototype；
-- Engine / Query / Coverage 等验证；
-- 格式与互操作适配实验；
-- Human–AI 协作试运行；
-- 实验说明、检查清单与结果记录。
+它们分别回答：**先怎么试？在真实边界里怎么跑？最后留下什么证据？**
 
-实验结果如果被正式采用，应进入 `01_State`、`02_Runtime` 或 `docs/` 中相应的当前产物；本目录继续保存其试验过程和证据。
+## 无编号可复现资产
 
-## 当前材料
+以下目录不是新的主要注意力入口，而是实验所依赖的可执行 / 可复现资产，因此暂时保持稳定路径：
 
-### Engine / Practice
-
-- [`engine-v0.1-bootstrap.zh-CN.md`](engine-v0.1-bootstrap.zh-CN.md)
-- [`engine-v0.1-coverage-baseline.zh-CN.md`](engine-v0.1-coverage-baseline.zh-CN.md)
-- [`automated-build-deployment-open-alternative.zh-CN.md`](automated-build-deployment-open-alternative.zh-CN.md)
-- [`seed-experiment-01.zh-CN.md`](seed-experiment-01.zh-CN.md)
-
-### Human–AI Collaboration
-
-- [`human-ai-collaboration-v0-checklist.zh-CN.md`](human-ai-collaboration-v0-checklist.zh-CN.md)
-
-### Linked Data / RDF
-
-- [`json-ld-fit-experiment.zh-CN.md`](json-ld-fit-experiment.zh-CN.md)
 - [`json-ld/`](json-ld/)
 - [`rdf-1.2/`](rdf-1.2/)
+- [`p5-v1-experiments/`](p5-v1-experiments/)
+- [`v1_contract_fixtures/`](v1_contract_fixtures/)
+
+这些路径可能被 Runtime、测试或历史复现流程引用；在没有完成依赖迁移前，不为了视觉整齐强制改名或搬动。
+
+实验结果如果被正式采用，应进入 `01_State`、`02_Runtime` 或 `docs/` 中相应的当前产物；本目录继续保存其试验过程和证据。
 
 ## 与 `docs/` 的边界
 
