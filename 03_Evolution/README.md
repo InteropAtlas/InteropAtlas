@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-09-01T14:31:59+08:00
-Document Updated At: 2026-09-05T16:30:00+08:00
+Document Updated At: 2026-09-05T17:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
@@ -18,7 +18,7 @@ Latest Substantive Contribution:
 
 它保存那些已经脱离具体 Issue / Project / PR 生命周期、但仍具有独立长期价值的**演化依据（Evolution Rationale）**：研究成果、实验成果，以及解释重大方向或架构为何形成的决策记录。
 
-目标结构：
+当前结构：
 
 ```text
 03_Evolution/
@@ -154,15 +154,17 @@ Evolution 默认保持扁平：`Research / Experiments / Decisions` 下直接放
 
 Evolution 本身已经是筛选后的长期记录层，因此默认不再设置 `Active / Archive` 双层生命周期。
 
-## 8. 当前结构迁移
+当前 `01_Research/` 与 `02_Experiments/` 保留已有下一层结构，是因为真实内容量与可复现性需求已经构成实际收益；这不意味着未来所有新主题都应提前建立子目录。
 
-仓库现有 `03_Evolution` 是在旧模型下形成的，仍包含 Prior Art、Audit、Test、Pilot、Evidence、Direction、Architecture、Migration 等混合材料。
+## 8. 结构迁移结果
 
-后续迁移必须逐件按本 README 的准入门槛判断：
+旧 `03_Change/` 已退出当前结构。
 
-- 应进入 `01_State / 02_Runtime / docs` 的先吸收到对应 Primary Home；
-- 仍具长期独立研究 / 实验 / 决策价值的保留并归入新三类；
-- 只有工作过程价值的依赖 Issue / PR / Git history，不因“历史”身份永久留在 Repository；
-- 删除或移动前必须遵守 Repository Structure Profile 的语义吸收与引用完整性规则。
+本轮迁移按内容职责处理：
 
-在完成内容级审计前，不对现有 Artifact 做机械批量删除或仅按文件名重分类。
+- 真正具有独立长期解释价值的方向与架构依据进入 `03_Decisions/`；
+- 阶段计划、旧 Roadmap、迁移预检、施工审计等只有过程价值的材料不再保留在当前树；
+- 这些退出当前树的历史仍可通过 Git / PR / Issue 恢复；
+- Current 规则继续由 `docs/`、`01_State/`、`02_Runtime/` 的 Primary Home 维护。
+
+这次迁移没有为了得到更整齐的目录而机械重排 `01_Research/` 或 `02_Experiments/`；后续只有在真实职责、规模或工具摩擦出现时再继续调整。

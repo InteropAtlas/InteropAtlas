@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-05T14:50:00+08:00
+Document Updated At: 2026-09-05T17:40:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-05T14:50:00+08:00
+> Verified At: 2026-09-05T17:40:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Master Design、Issue、PR、Git history 或完整 Roadmap。
 
@@ -105,7 +105,7 @@ Continuous P6 work now runs in parallel where safe:
 
 Repository event continuation infrastructure is active via `.github/workflows/agent-continuation-bridge.yml`. It is task-continuation infrastructure, not Reviewer or Canonical acceptance authority.
 
-Repository attention-hierarchy cleanup through PRs #388, #389, #390, #391 and #393 is merged. It changed physical organization and removed/merged redundant Living Documents without changing the P6 mainline, Canonical semantics or the #149 authorization gate.
+Repository information architecture is now defined by `docs/03_Operation/03_Project/repository-structure-profile.zh-CN.md`: Repository is not the work workspace; GitHub-native collaboration surfaces carry ongoing work; durable repository content is organized as `01_State / 02_Runtime / 03_Evolution`, with `docs/` as the current rule layer. `03_Evolution` now uses `01_Research / 02_Experiments / 03_Decisions` rather than the old general-purpose Change area.
 
 ## 6. #146 Continuous Intake
 
@@ -181,5 +181,5 @@ AGENTS.md
 → PROJECT_STATE.md
 → #146 for live intake
 → #149 for the next Agent Access slice after explicit Ready/promotion
-→ 03_Evolution/03_Change/02_Architecture/p4-canonical-write-intake-contract-architecture-draft.zh-CN.md
+→ 03_Evolution/03_Decisions/p4-canonical-write-intake-contract-architecture-draft.zh-CN.md
 ```
