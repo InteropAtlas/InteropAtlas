@@ -1,21 +1,21 @@
 # InteropAtlas Human Interface Profiles v0.1
 
 <!-- InteropAtlas Document Metadata v0
-Document Status: **Draft Package / Gate B Verified Baseline**
+Document Status: **Draft Package / Gate B Verified Primary Baseline**
 Document Created At: 2026-09-02T07:39:56+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T14:58:00+08:00
 Metadata Backfilled At: 2026-09-02T11:35:52+08:00
 Metadata Provenance: reconstructed_from_git
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Pending
+  Reviewer: Owner-authorized consolidation
   GitHub Actor: ff6962757
 -->
 
-> 状态：**Draft Package / Gate B Verified Baseline**
+> 状态：**Draft Package / Gate B Verified Primary Baseline**
 >
 > Parent: #14
 >
@@ -25,9 +25,9 @@ Latest Substantive Contribution:
 
 ## 1. 目的
 
-本文件是 InteropAtlas Human Interface Standards Package 的模块入口。
+本文件是 InteropAtlas Human Interface Standards Package 的模块入口，也是当前 Human Interface Living Specification 的 Primary Home。
 
-现有 [`human-interface-specification.zh-CN.md`](human-interface-specification.zh-CN.md) 已经形成一套综合草案；五个 Profile 将其关键规则拆成独立、可审计、可测试的模块：
+早期综合草案已经完成其收敛作用；Gate B 后，五个 Profile 将同一组 `IA-HI-*` Requirements 拆成独立、可审计、可测试的模块。当前实现和后续规范维护应从本 Package 与五个 Profile 获取 Human Interface 合同：
 
 1. [`human-interface-information-architecture-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-information-architecture-profile.zh-CN.md)
 2. [`human-interface-information-presentation-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-information-presentation-profile.zh-CN.md)
@@ -35,9 +35,9 @@ Latest Substantive Contribution:
 4. [`human-interface-visual-presentation-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-visual-presentation-profile.zh-CN.md)
 5. [`human-interface-accessibility-conformance-profile.zh-CN.md`](/docs/02_System/02_Interface/02_Profiles/human-interface-accessibility-conformance-profile.zh-CN.md)
 
-这些文件是对已经存在的 `IA-HI-*` Requirements 做**模块化、依据补全和验收方式显式化**，不是重新发明第二套 Human Interface 规则。
+这些文件是对同一套 Requirements 的模块化、依据补全和验收方式显式化，不是第二套规则。
 
-2026-09-02 Final Conformance Audit 已确认该 Draft Package 达到 Gate B Foundation 的最小可依赖状态。这里的“Verified”不等于 stable Specification promotion；稳定规范升级仍需要单独决策。
+2026-09-02 Final Conformance Audit 已确认该 Draft Package 达到 Gate B Foundation 的最小可依赖状态。这里的“Primary Baseline”表示当前 Living Document 的唯一主要维护入口；它**不等于**把整个 Package 晋升为 Stable Specification，稳定状态仍需独立治理决策。
 
 ---
 
@@ -70,7 +70,7 @@ Design System、产品实践和研究方法不能因为“成熟”就自动成�
 
 ## 3. 共同基础 Requirements
 
-下列要求属于五个 Profile 的共同上层约束，继续使用综合规范中的稳定 ID：
+下列要求属于五个 Profile 的共同上层约束，并继续使用已经稳定引用的 ID：
 
 | Requirement | 核心约束 | 主要依据 | 采用方式 |
 |---|---|---|---|
@@ -162,18 +162,17 @@ Accessibility / Conformance
 
 ---
 
-## 7. 与综合规范的关系
+## 7. Primary Home 与历史综合草案
 
-Gate B 已通过，但本轮**不自动执行 stable Specification promotion**。
+从本次仓库整理开始：
 
-因此当前关系是：
+- 本 Package + 五个 Profile 是 Human Interface 当前唯一主要规范维护入口；
+- 早期 integrated specification 不再作为并行 Living Specification 维护；其历史内容由 Git history / Evolution 保留；
+- `IA-HI-*` Requirement IDs 保持连续，不因物理文档收敛而重新编号；
+- Compare / Search 等独立功能 Contract 继续作为下游合同存在，不并入五个基础 Profile；
+- 后续发现跨 Profile 冲突时，在对应 Primary Home 修正规则，并通过 Change / Audit 留痕，不重新创建第二份综合规范。
 
-- `human-interface-specification.zh-CN.md` 保留作为 umbrella / historical integrated specification；
-- 五个 Profile 是经过 Gate B 实证验证的模块化 Draft Baseline；
-- 两者继续共享同一 `IA-HI-*` Requirement IDs；
-- 新实现 SHOULD 优先从 Package + 五个 Profile 获取模块化合同；
-- 如果发现冲突，优先记录并通过新的 Change / Audit 解决，不静默选择；
-- 是否让 Package 正式取代综合文件的规范职责，属于后续稳定规范治理决策，而不是 Gate B PASS 的隐含结果。
+这次职责收口是 **Primary Home consolidation**，不是 Stable Specification promotion。
 
 ---
 
@@ -195,4 +194,4 @@ Gate B Final Conformance Audit         ✅ PASS
 
 Gate B PASS 的准确含义是：**Foundation contract 已达到最小可依赖状态。**
 
-它不意味着 Search、完整 Compare UI、大型 Graph、所有页面类型、完整 Visual Token artifact 或全面 WCAG certification 已完成。这些继续作为 P1 / Later 的 Reference Implementation 与质量工作。
+它不意味着 Search、完整 Compare UI、大型 Graph、所有页面类型、完整 Visual Token artifact 或全面 WCAG certification 已完成。这些继续作为后续 Reference Implementation 与质量工作。
