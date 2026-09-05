@@ -1,0 +1,98 @@
+name: Temporary Docs Link Migration
+
+on:
+  push:
+    branches:
+      - chore/repository-attention-hierarchy
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-links:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/repository-attention-hierarchy
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Rewrite uniquely resolvable moved Markdown links
+        shell: python
+        run: |
+          import re
+          from collections import defaultdict
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          root = Path('.').resolve()
+          files_by_name = defaultdict(list)
+          for path in root.rglob('*'):
+              if path.is_file() and '.git' not in path.parts:
+                  files_by_name[path.name].append(path.resolve())
+
+          pattern = re.compile(r'(?<!!)\[([^\]]*)\]\(([^)]+)\)')
+          changed = []
+          unresolved = []
+
+          for source in sorted(root.rglob('*.md')):
+              original = source.read_text(encoding='utf-8')
+
+              def replace(match):
+                  label, raw = match.group(1), match.group(2).strip()
+                  if not raw or raw.startswith(('#', 'http://', 'https://', 'mailto:')):
+                      return match.group(0)
+
+                  main, anchor = (raw.split('#', 1) + [''])[:2] if '#' in raw else (raw, '')
+                  path_part, query = (main.split('?', 1) + [''])[:2] if '?' in main else (main, '')
+                  decoded = unquote(path_part.strip())
+                  if not decoded:
+                      return match.group(0)
+
+                  current = (root / decoded.lstrip('/')) if decoded.startswith('/') else (source.parent / decoded)
+                  if current.exists():
+                      return match.group(0)
+
+                  basename = Path(decoded).name
+                  candidates = files_by_name.get(basename, [])
+                  if len(candidates) != 1:
+                      unresolved.append((source, raw, len(candidates)))
+                      return match.group(0)
+
+                  rel = candidates[0].relative_to(root).as_posix()
+                  new = '/' + rel
+                  if query:
+                      new += '?' + query
+                  if anchor:
+                      new += '#' + anchor
+                  return f'[{label}]({new})'
+
+              updated = pattern.sub(replace, original)
+              if updated != original:
+                  source.write_text(updated, encoding='utf-8')
+                  changed.append(source.relative_to(root).as_posix())
+
+          print('Changed files:')
+          for path in changed:
+              print('-', path)
+          if unresolved:
+              print('Unresolved ambiguous/missing targets left untouched:')
+              for source, raw, count in unresolved:
+                  print(f'- {source.relative_to(root)}: {raw} ({count} basename candidates)')
+
+      - name: Commit migration results
+        run: |
+          if git diff --quiet; then
+            echo 'No link rewrites needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'docs: repair links after hierarchy migration'
+          git push origin HEAD:chore/repository-attention-hierarchy
