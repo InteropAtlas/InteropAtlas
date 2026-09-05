@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-05T14:40:00+08:00
+Document Updated At: 2026-09-05T14:50:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -16,7 +16,7 @@ Latest Substantive Contribution:
 
 > Status: Living Project Checkpoint（持续更新的项目断点）
 >
-> Verified At: 2026-09-05T03:51:00+08:00
+> Verified At: 2026-09-05T14:50:00+08:00
 >
 > Purpose: 给新的 Human / Agent 一个短小的“现在在哪、为什么、从哪里继续”入口。它不替代 Master Design、Issue、PR、Git history 或完整 Roadmap。
 
@@ -105,6 +105,8 @@ Continuous P6 work now runs in parallel where safe:
 
 Repository event continuation infrastructure is active via `.github/workflows/agent-continuation-bridge.yml`. It is task-continuation infrastructure, not Reviewer or Canonical acceptance authority.
 
+Repository attention-hierarchy cleanup through PRs #388, #389, #390, #391 and #393 is merged. It changed physical organization and removed/merged redundant Living Documents without changing the P6 mainline, Canonical semantics or the #149 authorization gate.
+
 ## 6. #146 Continuous Intake
 
 Production ordinary intake safety lane is open:
@@ -168,7 +170,7 @@ Ordinary technical choices, implementation details and mechanically verifiable m
 README.md
 → docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md
 → docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md
-→ docs/02_System/01_Knowledge/public-commons-and-personal-knowledge-space.zh-CN.md
+→ docs/02_System/01_Knowledge/02_Workspace/public-commons-and-personal-knowledge-space.zh-CN.md
 → docs/01_Foundation/03_Direction/interopatlas-long-term-roadmap.zh-CN.md
 ```
 
@@ -179,5 +181,5 @@ AGENTS.md
 → PROJECT_STATE.md
 → #146 for live intake
 → #149 for the next Agent Access slice after explicit Ready/promotion
-→ 03_Evolution/03_Change/p4-canonical-write-intake-contract-architecture-draft.zh-CN.md
+→ 03_Evolution/03_Change/02_Architecture/p4-canonical-write-intake-contract-architecture-draft.zh-CN.md
 ```
