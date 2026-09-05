@@ -1,0 +1,129 @@
+name: Issue Hygiene Check
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'  # 每周一 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: '只检查指定 Issue（留空则全量检查）'
+        required: false
+        type: number
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  hygiene-check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Run Issue Hygiene Checks
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          TARGET_ISSUE: ${{ inputs.issue_number }}
+        run: |
+          set -euo pipefail
+
+          echo "## Issue Hygiene Report" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Generated at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # 获取所有 open issues
+          if [ -n "$TARGET_ISSUE" ]; then
+            ISSUES=$(gh issue view "$TARGET_ISSUE" --repo "$REPO" --json number,title,labels,body,updatedAt,state --jq '[.]')
+          else
+            ISSUES=$(gh issue list --repo "$REPO" --state open --limit 500 --json number,title,labels,body,updatedAt)
+          fi
+
+          TOTAL=$(echo "$ISSUES" | jq 'length')
+          echo "**Total open issues checked: $TOTAL**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          VIOLATIONS=0
+
+          # === Check 1: 缺少 status label ===
+          echo "### 1. Missing status label" >> $GITHUB_STEP_SUMMARY
+          NO_STATUS=$(echo "$ISSUES" | jq -r '[.[] | select(.labels | map(.name) | all(startswith("status:") | not))] | length')
+          echo "Found: $NO_STATUS" >> $GITHUB_STEP_SUMMARY
+          if [ "$NO_STATUS" -gt 0 ]; then
+            echo "$ISSUES" | jq -r '.[] | select(.labels | map(.name) | all(startswith("status:") | not)) | "- #\(.number) \(.title)"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + NO_STATUS))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 2: 缺少 type label ===
+          echo "### 2. Missing type label" >> $GITHUB_STEP_SUMMARY
+          NO_TYPE=$(echo "$ISSUES" | jq -r '[.[] | select(.labels | map(.name) | all(startswith("type:") | not))] | length')
+          echo "Found: $NO_TYPE" >> $GITHUB_STEP_SUMMARY
+          if [ "$NO_TYPE" -gt 0 ]; then
+            echo "$ISSUES" | jq -r '.[] | select(.labels | map(.name) | all(startswith("type:") | not)) | "- #\(.number) \(.title)"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + NO_TYPE))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 3: 缺少 priority label ===
+          echo "### 3. Missing priority label" >> $GITHUB_STEP_SUMMARY
+          NO_PRIO=$(echo "$ISSUES" | jq -r '[.[] | select(.labels | map(.name) | all(startswith("priority:") | not))] | length')
+          echo "Found: $NO_PRIO" >> $GITHUB_STEP_SUMMARY
+          if [ "$NO_PRIO" -gt 0 ]; then
+            echo "$ISSUES" | jq -r '.[] | select(.labels | map(.name) | all(startswith("priority:") | not)) | "- #\(.number) \(.title)"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + NO_PRIO))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 4: blocked 但 body 中无 Blocked By ===
+          echo "### 4. Status blocked but no 'Blocked By' in body" >> $GITHUB_STEP_SUMMARY
+          BLOCKED_NO_REASON=$(echo "$ISSUES" | jq -r '[.[] | select(.labels | map(.name) | any(. == "status:blocked")) | select(.body | test("Blocked By:\\s*—|Blocked By:\\s*$") | not)] | length')
+          echo "Found: $BLOCKED_NO_REASON" >> $GITHUB_STEP_SUMMARY
+          if [ "$BLOCKED_NO_REASON" -gt 0 ]; then
+            echo "$ISSUES" | jq -r '.[] | select(.labels | map(.name) | any(. == "status:blocked")) | select(.body | test("Blocked By:\\s*—|Blocked By:\\s*$") | not) | "- #\(.number) \(.title)"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + BLOCKED_NO_REASON))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 5: in_progress 超过 14 天无更新 ===
+          echo "### 5. In Progress > 14 days without update" >> $GITHUB_STEP_SUMMARY
+          STALE_IN_PROGRESS=$(echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)" '[.[] | select(.labels | map(.name) | any(. == "status:in_progress")) | select(.updatedAt < $cutoff)] | length')
+          echo "Found: $STALE_IN_PROGRESS" >> $GITHUB_STEP_SUMMARY
+          if [ "$STALE_IN_PROGRESS" -gt 0 ]; then
+            echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)" '.[] | select(.labels | map(.name) | any(. == "status:in_progress")) | select(.updatedAt < $cutoff) | "- #\(.number) \(.title) (last update: \(.updatedAt))"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + STALE_IN_PROGRESS))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 6: 超过 90 天无任何更新 ===
+          echo "### 6. Stale (> 90 days without any update)" >> $GITHUB_STEP_SUMMARY
+          STALE_90=$(echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '90 days ago' +%Y-%m-%dT%H:%M:%SZ)" '[.[] | select(.updatedAt < $cutoff)] | length')
+          echo "Found: $STALE_90" >> $GITHUB_STEP_SUMMARY
+          if [ "$STALE_90" -gt 0 ]; then
+            echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '90 days ago' +%Y-%m-%dT%H:%M:%SZ)" '.[] | select(.updatedAt < $cutoff) | "- #\(.number) \(.title) (last update: \(.updatedAt))"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + STALE_90))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Check 7: body 中无 Status 字段 ===
+          echo "### 7. No 'Status:' field in body" >> $GITHUB_STEP_SUMMARY
+          NO_STATUS_FIELD=$(echo "$ISSUES" | jq -r '[.[] | select(.body | test("Status:") | not)] | length')
+          echo "Found: $NO_STATUS_FIELD" >> $GITHUB_STEP_SUMMARY
+          if [ "$NO_STATUS_FIELD" -gt 0 ]; then
+            echo "$ISSUES" | jq -r '.[] | select(.body | test("Status:") | not) | "- #\(.number) \(.title)"' >> $GITHUB_STEP_SUMMARY
+            VIOLATIONS=$((VIOLATIONS + NO_STATUS_FIELD))
+          fi
+          echo "" >> $GITHUB_STEP_SUMMARY
+
+          # === Summary ===
+          echo "---" >> $GITHUB_STEP_SUMMARY
+          echo "**Total violations: $VIOLATIONS**" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "> Note: This workflow only reports. It does NOT auto-close issues or auto-apply labels." >> $GITHUB_STEP_SUMMARY
+          echo "> Semantic judgments (is this issue still valuable?) require Human/Agent review." >> $GITHUB_STEP_SUMMARY
+
+          if [ "$VIOLATIONS" -gt 0 ]; then
+            echo "::warning::$VIOLATIONS issue hygiene violations found. See job summary for details."
+          fi
