@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-05T18:40:00+08:00
+Document Updated At: 2026-09-05T18:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -44,7 +44,7 @@ Human / Agent 真实使用与反馈
 
 持续发现和收录标准、协议、方法、实现、组织、能力、场景、关系、证据与开放缺口。Candidate Pool 是入口；Candidate 不等于 Canonical；普通收录必须经过 identity / dedup、验证、语义审查和明确接受边界。
 
-当前已具备可运行的持续收录链路，#146 是现行执行入口。
+当前已具备可运行的持续收录链路，具体执行入口见当前 Intake Work Item。
 
 ### 可运行的知识基础设施
 
@@ -88,9 +88,9 @@ Human 与 Agent 应逐步共享同一知识底座和可恢复的 Selection / Pro
 4. 进入当前处于 Ready / In Progress 的具体 Issue；
 5. 不从历史阶段名称推断当前授权。
 
-当前持续收录入口：#146。
+当前持续收录入口由现行 Continuous Intake Work Item 承担。
 
-当前仓库长期维护入口：#287 / Repository Maintenance Project；它是维护工作，不是产品主线。
+当前仓库长期维护由 Repository Maintenance Project 与其具体维护 Issue 承担；它是维护工作，不是产品主线。
 
 Agent structured access 相关工作仍需 Owner 明确提升后才可执行。
 
