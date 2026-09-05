@@ -1,12 +1,12 @@
-# InteropAtlas Repository Structure Profile v0.1
+# InteropAtlas Repository Structure Profile v0.2
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: Draft / Provisional Specification
 Document Created At: 2026-09-01T11:34:09+08:00
-Document Updated At: 2026-09-05T14:20:00+08:00
+Document Updated At: 2026-09-05T15:10:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
-Contribution Identity Provenance: owner_confirmed_cutoff
+Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
@@ -16,9 +16,9 @@ Latest Substantive Contribution:
 
 > 状态：Draft / Provisional Specification
 >
-> 本 Profile 是 InteropAtlas 仓库物理结构、注意力层级、Artifact 生命周期与文档去重规则的 Primary Home。
+> 本 Profile 是 InteropAtlas 仓库物理结构、注意力层级、Artifact 生命周期、文档去重与路径迁移完整性的 Primary Home。
 
-## 1. 三条核心原则
+## 1. 核心原则
 
 ### 1.1 物理存储不等于语义模型
 
@@ -26,13 +26,13 @@ Latest Substantive Contribution:
 
 文件放在哪里只解决维护与工具访问；对象是什么由机器可读合同、稳定 ID、Relation 与 Graph 表达；用户怎样看由 Index / Map / Query / Workspace 表达。
 
-因此不得为了某种浏览分类复制 Canonical 对象，也不得让路径承担 ontology 身份。
+不得为了浏览分类复制 Canonical 对象，也不得让路径承担 ontology 身份。
 
 ### 1.2 数字前缀表示主要注意力入口
 
 数字不是装饰性排序，而是 Owner / Maintainer 应优先理解的认知入口。
 
-同一物理层级默认遵守：
+同一物理层级默认：
 
 ```text
 01_*   第一主要关注域
@@ -42,17 +42,28 @@ Latest Substantive Contribution:
 
 规则：
 
-- 同级编号 **MUST** 唯一，不得出现两个 `02_*`；
+- 同级编号 **MUST** 唯一；
 - 同级主要编号 **SHOULD** 限于 `01_ / 02_ / 03_`；
 - 出现第四个主要关注域时，默认继续向下一层分组，而不是新增 `04_ / 05_`；
 - `.github/`、`docs/`、`LICENSES/` 等辅助 / 平台目录可以不编号，但数量和职责仍应克制；
-- 三分是认知复杂度默认约束，不是 ontology 的数学硬限制。若强行三分会破坏真实语义、Canonical contract 或关键工程约束，应明确记录例外，而不是为了形式移动语义边界。
+- 三分是认知复杂度默认约束，不是 ontology 的数学硬限制。若强行三分会破坏真实语义、Canonical contract 或关键工程约束，应明确记录例外。
 
 ### 1.3 一个概念一个 Primary Home
 
 同一长期概念的完整定义 **SHOULD** 只有一个主要维护位置（Primary Home）。其他文件可以保留最小摘要并链接，但不应复制第二套完整论证、规则表或平行定义。
 
 新增文件前首先判断能否修改既有 Primary Home。
+
+### 1.4 层级必须有真实收益
+
+目录不是越多越清晰。新增一层目录必须解决真实问题，例如：
+
+- 同层项目已经造成明显注意力负担；
+- 有稳定的主题边界；
+- 生命周期、所有权或工具链确实不同；
+- 需要容纳一组会长期共同演化的 Artifact。
+
+**只有 1–2 个文件的主题，默认 SHOULD NOT 为了形式分类额外制造一层目录。** 文件名已能清楚表达职责时，优先保持扁平。不要创建“一文件一文件夹”的空壳层级。
 
 ## 2. 仓库一级结构
 
@@ -69,8 +80,6 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 
 前三个编号目录是项目本体的三个主要生命周期区域；外围目录不构成第四个主域。
 
-`02_Runtime` 与 `03_Evolution` 的主要结构：
-
 ```text
 02_Runtime/
 ├── 01_Engine/
@@ -83,11 +92,9 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 └── 03_Change/
 ```
 
-`01_State` 的 Canonical 子结构属于数据合同层。当前存在 Objects、Relations、Candidates 与 Acceptance Events；是否进一步把这些 Canonical 类别压缩为三入口不能仅按文件整理原则决定，必须以 Canonical architecture / intake semantics 为依据。本次物理结构清理不擅自改变其语义边界。
+`01_State` 的 Canonical 子结构属于数据合同层。当前存在 Objects、Relations、Candidates 与 Acceptance Events；是否压缩为三入口不能仅按文件整理原则决定，必须以 Canonical architecture / intake semantics 为依据。
 
 ## 3. `docs/` 注意力结构
-
-`docs/` 只保留今天仍需理解或遵守的 Living Documents，并采用三个主要入口：
 
 ```text
 docs/
@@ -97,7 +104,7 @@ docs/
 └── 03_Operation/    项目怎样协作、治理和维护
 ```
 
-继续采用递归三分：
+继续采用递归三分，但不为了凑三而增加无意义目录：
 
 ```text
 01_Foundation/
@@ -118,7 +125,7 @@ docs/
 └── 03_Project/
 ```
 
-目录只表达阅读与维护边界。Specification / Profile / Contract 是否独立，仍由其规范职责和演化节奏决定，不因为“文件少”而强制合并。
+目录只表达阅读与维护边界。Specification / Profile / Contract 是否独立，仍由其规范职责和演化节奏决定。
 
 ## 4. Current / Process / History
 
@@ -132,7 +139,7 @@ PROCESS   正在研究 / 实验 / 迁移
           → 03_Evolution 对应区域 / Issue / PR
 
 HISTORY   已完成 / 被取代但仍有独立价值
-          → 03_Evolution + lifecycle marker / Git history
+          → 03_Evolution / Git history
 ```
 
 `draft` 是状态，不是位置。仍是当前入口的 Draft 可以留在 `docs/`；已经完成或被取代的 Draft 不得因为文件名而永久留在 Living Documents。
@@ -168,7 +175,7 @@ Philosophy 不维护具体架构；Master Design 不维护专项字段；Roadmap
 因上下文必须重复概念时，只保留最小摘要和明确链接。
 
 ### IA-RS-DOC-005 — Promotion / Supersession 闭环
-Research / Experiment / Change 被接受后，更新对应 Living Document；被替代的 Living Document 明确 successor，并按 Current / Process / History 重新归位。
+Research / Experiment / Change 被接受后，更新对应 Living Document；被替代的 Living Document 按 Current / Process / History 重新归位，历史由 Evolution / Git history 恢复。
 
 ### IA-RS-DOC-006 — 文档数量不是安全性
 连续性来自稳定 Primary Home、Git history、Evolution、PROJECT_STATE、Issue / PR，而不是复制更多文件。
@@ -176,16 +183,87 @@ Research / Experiment / Change 被接受后，更新对应 Living Document；被
 ### IA-RS-DOC-007 — 文件夹不能掩盖重复
 建立子目录只能降低同级注意力负担，不能替代去重。若两个文件实际拥有同一完整定义，应先决定 Primary Home，再合并 / 吸收 / 历史化。
 
+### IA-RS-DOC-008 — 单文件主题默认不建目录
+只有一个文件，或仅少量文件且没有稳定独立演化需求时，**SHOULD** 直接放在现有语义父目录中。只有文档密度或职责边界真实形成后再增加下一层。
+
 ## 7. 路径与迁移不变量
 
 - Stable object identity **MUST NOT** 依赖物理文件路径；
 - Generated view **MUST NOT** 成为第二事实源；
 - Canonical migration 必须保持 object / relation identity、resolved graph 与 reference integrity；
-- Living Document 路径 **SHOULD** 稳定，但当现有路径本身违反已接受的结构原则时，可以通过一次有验证、有引用修复的迁移建立新的稳定路径；
+- Living Document 路径 **SHOULD** 稳定；只有当现有路径违反已接受结构原则，或明显增加维护成本时才迁移；
+- 路径迁移不能只验证“新文件存在”，还必须验证所有已知消费者已更新；
 - 内容版本通常不进入 Living Document 文件名；Git commit / tag / release / provenance 负责版本历史；
 - GitHub 原生识别的 Issue / PR / Workflow / Community Health 文件继续放在平台原生位置。
 
-## 8. 新增文件 / 文件夹检查表
+### IA-RS-MIG-001 — Path move 必须带引用修复
+
+移动、重命名或删除被引用的文件 / 文件夹时，执行者 **MUST** 同步修复仓库内已知的显式引用。不得把“路径移动成功”当作迁移完成。
+
+### IA-RS-MIG-002 — 迁移后必须做引用完整性审计
+
+路径迁移完成前 **MUST** 至少执行：
+
+1. 全仓 Markdown / repository-local link validation；
+2. 搜索旧完整路径；
+3. 搜索旧文件名 / 被删除文件名；
+4. 对已知代码、workflow、validator、fixture、脚本中的硬编码路径进行检查；
+5. 如果涉及 Canonical / Runtime，再执行对应 schema / compatibility / graph validation。
+
+只有这些检查没有发现未处理引用，迁移才可视为完成。
+
+### IA-RS-MIG-003 — 搜索不到不等于绝对不存在
+
+Code search、索引或第三方工具可能有范围 / 时效限制。因此重要路径迁移应同时依赖 repository-local validator / CI，而不是只依赖搜索结果。若某类引用无法被自动覆盖，应在 PR 中明确记录残余风险或人工检查范围。
+
+### IA-RS-MIG-004 — 删除前先吸收长期语义
+
+删除重复 / 过渡 Living Document 前，必须先确认：
+
+- 仍有效的独有规则已经迁入目标 Primary Home；
+- 下游引用已经指向 successor；
+- 删除不会静默改变规范状态、Requirement ID、Canonical semantics 或授权边界；
+- 历史可由 Git history / Evolution 恢复。
+
+如果不能满足，应该先合并内容或保留文件，而不是为了减少数量直接删除。
+
+## 8. 清理 / 重构方法
+
+执行仓库结构清理时，按以下顺序：
+
+```text
+1. 盘点真实结构与职责
+   ↓
+2. 找出明显错层 / 重复编号 / 平行 Primary Home
+   ↓
+3. 区分“纯物理问题”与“会改变语义的问题”
+   ↓
+4. 先处理无歧义的物理整理
+   ↓
+5. 对重复文档做内容级比较
+   ↓
+6. 把独有长期规则吸收到 Primary Home
+   ↓
+7. 删除 / 历史化被吸收 Artifact
+   ↓
+8. 修复所有引用与入口文档
+   ↓
+9. 运行 Markdown links + 相关兼容性 / Graph / Provenance 检查
+   ↓
+10. 搜索旧路径与旧文件名做迁移后审计
+```
+
+遇到以下情况不得仅凭结构美观自行处理：
+
+- 会改变项目 Definition / Scope；
+- 会改变 Canonical semantic model；
+- 会执行 stable Specification / Governance promotion；
+- 会改变重大 authority / security / identity policy；
+- 为满足“三分”必须扭曲真实语义。
+
+这些属于上层设计 / Owner Gate，而不是普通结构整理。
+
+## 9. 新增文件 / 文件夹检查表
 
 创建之前依次问：
 
@@ -196,12 +274,12 @@ Research / Experiment / Change 被接受后，更新对应 Living Document；被
 5. 它是新概念，还是旧概念的补充 / 操作化 / 临时过程？
 6. 是否能修改已有文件而不是新增？
 7. 新目录是否解决真实的规模、生命周期、所有权、工具或认知负担问题？
-8. 是否会制造重复编号、第四主要入口或第二事实源？
+8. 目录下预计是否只有 1–2 个文件？若是，为什么不能保持扁平？
+9. 是否会制造重复编号、第四主要入口或第二事实源？
+10. 新路径将影响哪些链接、脚本、workflow 或消费者？
 
-默认选择：**少建一级、少建一份、优先归位、必要时继续向下三分。**
+默认选择：**少建一级、少建一份、优先归位、必要时继续向下三分；任何路径变化都要把引用完整性当作迁移的一部分。**
 
-## 9. 本次结构迁移边界
+## 10. 当前已知边界
 
-本轮整理依据 Human Owner 明确授权，处理明显重复编号、明显错层和 Living Documents 平铺问题；不借整理之名改变项目 Definition / Scope、长期路线、Canonical semantics、stable Specification 状态或 Agent authority。
-
-其中 `01_State` 的四类 Canonical 入口属于上层语义结构问题，保留现状，等待以 Canonical architecture 为依据单独判断。
+`01_State` 的 Objects、Relations、Candidates 与 Acceptance Events 属于 Canonical architecture / intake semantics 问题。不能仅为了满足三入口视觉结构而合并或重命名；应在对应数据模型决策中单独处理。
