@@ -13,75 +13,162 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER: InteropAtlas
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      REPOSITORY_ID: R_kgDOUIreng
       PROJECT_TITLE: InteropAtlas — 仓库长期维护
-      SEED_ISSUE_URL: https://github.com/InteropAtlas/InteropAtlas/issues/287
+      SEED_ISSUE_NUMBER: "287"
     steps:
       - name: Verify Projects token
+        shell: bash
         run: |
+          set -euo pipefail
           if [ -z "$GH_TOKEN" ]; then
             echo "Missing repository secret: IA_PROJECTS_TOKEN"
-            echo "Add a GitHub token with Projects read/write permission, then rerun this workflow."
             exit 1
           fi
 
-      - name: Find or create Project
+          # Verify the token itself before attempting Projects mutations.
+          gh api user --jq '.login' >/dev/null
+
+      - name: Find or create Project via GraphQL
         id: project
         shell: bash
         run: |
           set -euo pipefail
 
-          PROJECT_NUMBER="$({ gh project list --owner "$PROJECT_OWNER" --format json || true; } \
-            | jq -r --arg title "$PROJECT_TITLE" '.projects[]? | select(.title == $title) | .number' \
-            | head -n 1)"
+          PROJECTS_JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) {
+                  nodes { id number title }
+                }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
 
-          if [ -z "$PROJECT_NUMBER" ]; then
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$PROJECTS_JSON" | head -n 1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .number' <<<"$PROJECTS_JSON" | head -n 1)"
+
+          if [ -z "$PROJECT_ID" ]; then
             echo "Creating Project: $PROJECT_TITLE"
-            gh project create --owner "$PROJECT_OWNER" --title "$PROJECT_TITLE"
-            PROJECT_NUMBER="$(gh project list --owner "$PROJECT_OWNER" --format json \
-              | jq -r --arg title "$PROJECT_TITLE" '.projects[]? | select(.title == $title) | .number' \
-              | head -n 1)"
+            CREATE_JSON="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) {
+              createProjectV2(input: {ownerId: $owner, repositoryId: $repo, title: $title}) {
+                projectV2 { id number title }
+              }
+            }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$PROJECT_TITLE")"
+
+            PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATE_JSON")"
+            PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATE_JSON")"
           else
             echo "Project already exists: #$PROJECT_NUMBER"
           fi
 
-          if [ -z "$PROJECT_NUMBER" ]; then
-            echo "Unable to resolve Project number after creation."
+          if [ -z "$PROJECT_ID" ] || [ -z "$PROJECT_NUMBER" ]; then
+            echo "Unable to resolve Project after GraphQL create/list."
             exit 1
           fi
 
-          echo "number=$PROJECT_NUMBER" >> "$GITHUB_OUTPUT"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
+          echo "id=$PROJECT_ID" >> "$GITHUB_OUTPUT"
+          echo "number=$PROJECT_NUMBER" >> "$GITHUB_OUTPUT"
 
-      - name: Ensure minimal custom fields
+      - name: Ensure minimal custom fields via GraphQL
         shell: bash
         run: |
           set -euo pipefail
 
-          ensure_single_select_field() {
-            local field_name="$1"
-            local options="$2"
+          FIELD_JSON="$(gh api graphql -f query='query($project: ID!) {
+            node(id: $project) {
+              ... on ProjectV2 {
+                fields(first: 100) {
+                  nodes {
+                    ... on ProjectV2Field { id name }
+                    ... on ProjectV2SingleSelectField { id name }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
 
-            if gh project field-list "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --format json \
-              | jq -e --arg name "$field_name" '.fields[]? | select(.name == $name)' >/dev/null; then
-              echo "Field already exists: $field_name"
-            else
-              echo "Creating field: $field_name"
-              gh project field-create "$PROJECT_NUMBER" \
-                --owner "$PROJECT_OWNER" \
-                --name "$field_name" \
-                --data-type SINGLE_SELECT \
-                --single-select-options "$options"
+          create_single_select_field() {
+            local name="$1"
+            local options_json="$2"
+
+            if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELD_JSON" >/dev/null; then
+              echo "Field already exists: $name"
+              return 0
             fi
+
+            echo "Creating field: $name"
+            jq -n \
+              --arg query 'mutation($project: ID!, $name: String!, $options: [ProjectV2SingleSelectFieldOptionInput!]!) { createProjectV2Field(input: {projectId: $project, dataType: SINGLE_SELECT, name: $name, singleSelectOptions: $options}) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } } }' \
+              --arg project "$PROJECT_ID" \
+              --arg name "$name" \
+              --argjson options "$options_json" \
+              '{query: $query, variables: {project: $project, name: $name, options: $options}}' \
+              | gh api graphql --input - >/dev/null
           }
 
-          ensure_single_select_field "工作流（Workstream）" "议题维护,候选池维护,文档维护,仓库结构,来源与贡献留痕,自动化与持续集成"
-          ensure_single_select_field "优先级（Priority）" "P0,P1,P2,P3"
+          create_single_select_field "工作流（Workstream）" '[
+            {"name":"议题维护","color":"BLUE","description":"Issue hygiene and backlog normalization"},
+            {"name":"候选池维护","color":"GREEN","description":"Candidate Pool hygiene"},
+            {"name":"文档维护","color":"YELLOW","description":"Documentation staleness and links"},
+            {"name":"仓库结构","color":"PURPLE","description":"Repository structure maintenance"},
+            {"name":"来源与贡献留痕","color":"PINK","description":"Provenance and attribution maintenance"},
+            {"name":"自动化与持续集成","color":"GRAY","description":"Automation and CI hygiene"}
+          ]'
 
-      - name: Add initial maintenance work item
+          create_single_select_field "优先级（Priority）" '[
+            {"name":"P0","color":"RED","description":"Immediate / critical"},
+            {"name":"P1","color":"ORANGE","description":"High"},
+            {"name":"P2","color":"YELLOW","description":"Normal"},
+            {"name":"P3","color":"GRAY","description":"Low"}
+          ]'
+
+      - name: Add initial maintenance work item via GraphQL
         shell: bash
         run: |
           set -euo pipefail
-          gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$SEED_ISSUE_URL" || true
+
+          ISSUE_JSON="$(gh api graphql -f query='query($repo: ID!, $number: Int!) {
+            node(id: $repo) {
+              ... on Repository {
+                issue(number: $number) { id url }
+              }
+            }
+          }' -F repo="$REPOSITORY_ID" -F number="$SEED_ISSUE_NUMBER")"
+
+          ISSUE_ID="$(jq -r '.data.node.issue.id // empty' <<<"$ISSUE_JSON")"
+          if [ -z "$ISSUE_ID" ]; then
+            echo "Unable to resolve seed issue #$SEED_ISSUE_NUMBER"
+            exit 1
+          fi
+
+          ITEMS_JSON="$(gh api graphql -f query='query($project: ID!) {
+            node(id: $project) {
+              ... on ProjectV2 {
+                items(first: 100) {
+                  nodes {
+                    content {
+                      ... on Issue { id }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          if jq -e --arg id "$ISSUE_ID" '.data.node.items.nodes[]? | select(.content.id == $id)' <<<"$ITEMS_JSON" >/dev/null; then
+            echo "Issue #$SEED_ISSUE_NUMBER already exists in Project."
+          else
+            gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+              addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+                item { id }
+              }
+            }' -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null
+            echo "Added issue #$SEED_ISSUE_NUMBER to Project."
+          fi
 
       - name: Print bootstrap result
         shell: bash
@@ -91,7 +178,7 @@ jobs:
           echo "Owner: $PROJECT_OWNER"
           echo "Project: $PROJECT_TITLE"
           echo "Project number: $PROJECT_NUMBER"
-          echo "Seed work item: $SEED_ISSUE_URL"
+          echo "Seed work item: #$SEED_ISSUE_NUMBER"
           echo
-          echo "The built-in Status field is retained as the task-state projection."
+          echo "The built-in Status field remains the task-state projection."
           echo "Execution-critical scope, acceptance criteria, decisions, and evidence remain in Issues / PRs / repository artifacts."
