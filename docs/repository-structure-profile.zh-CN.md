@@ -3,79 +3,60 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Draft / Provisional Specification
 Document Created At: 2026-09-01T11:34:09+08:00
-Document Updated At: 2026-09-01T17:15:05+08:00
+Document Updated At: 2026-09-05T04:20:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: pending Owner review
   GitHub Actor: ff6962757
 -->
 
 > 状态：Draft / Provisional Specification
 >
-> 关联：Issue #21、#31、#43、#46、#48；物理迁移 PR #45。
->
-> 本 Profile 定义 InteropAtlas 当前仓库的职责边界、Artifact identity、物理结构原则与迁移不变量。
+> 本 Profile 定义 InteropAtlas 当前仓库的职责边界、Artifact identity、物理结构原则、文档生命周期与迁移不变量。
 
 ## 1. 核心原则
 
-InteropAtlas 曾经按知识对象类别把 Canonical Data 分散到 `standards/`、`capabilities/`、`organizations/`、`implementations/`、`relations/` 等根目录。
-
-该方式会让物理目录逐渐承担 ontology（知识分类模型）的职责。
-
-当前正式采用：
-
 > **物理存储 ≠ 知识分类 ≠ 索引 / 视图。**
 
-- 物理目录只解决文件怎样存、怎样被工具找到、怎样维护；
-- 对象是什么，由对象自身 `id / type / kind / roles / fields` 等数据合同表达；
-- 对象之间怎样分类、归组和连接，由引用、Relation、Graph、Index、Map、Query 表达；
-- 一个对象可以同时出现在多个动态分类 / 视图中，而无需复制文件；
-- Standard、Method、Design System、Mature Precedent、Implementation 等不因为语义类别不同而自动获得不同文件夹。
+物理目录只解决文件怎样存、怎样被工具找到和怎样维护；对象是什么由对象自身数据合同表达；分类、连接和视图由引用、Relation、Graph、Index、Map、Query 表达。
 
-因此，旧的 `data/<object-family>/` 目标和旧 root object-family 目录均视为 **WITHDRAWN / SUPERSEDED（已撤回 / 已被取代）**。
+因此，旧的按 Standard / Method / Organization 等语义类别划分物理目录的方式视为 **WITHDRAWN / SUPERSEDED（已撤回 / 已被取代）**。
 
-## 2. 上位依据
+## 2. 当前仓库的一级职责边界
 
-本 Profile 继续参考：
+当前正式结构：
 
-- GitHub Community Health / Issue & PR Templates：平台原生公共项目入口；
-- GitHub CODEOWNERS / Rulesets / Required Review：ownership / review 原语；
-- REUSE Specification：`LICENSES/` 等许可证布局约束；
-- OpenSSF Best Practices / Scorecard：安全、Review、CI、维护实践；
-- W3C browser-specs / MDN BCD / CNCF Landscape / SPDX License List：Data、Schema、Tooling、Generated Output 分工；
-- Diátaxis / Docs as Code：面向人的文档组织和版本化工作流；
-- InteropAtlas 自身迁移实践：Loader、Renderer、Graph、CI、public route 与 physical path 的真实解耦经验。
+```text
+01_State/       项目当前正式承认的 Canonical State
+02_Runtime/     项目怎样运行、验证和使用 State
+03_Evolution/   项目怎样研究、实验、决策并改变自己
 
-这些依据支持清晰的工程边界，但不要求 InteropAtlas 按 ontology 类别建立物理目录。
+docs/           当前仍需理解或遵守的 Living Documents
+.github/        GitHub 平台原生协作 / 自动化
+LICENSES/       外部许可证布局
+root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等公共入口
+```
 
-## 3. 当前已接受的核心决策
+`01_State`、`02_Runtime`、`03_Evolution` 是项目本体的三个生命周期区域；外围目录存在于平台、许可证、治理或公开入口需要，不构成第四个知识区域。
 
-### RS-D1 — 继续采用单仓结构
+## 3. 已接受的结构决策
 
-**Decision: ACCEPTED.**
+### RS-D1 — 单仓结构
 
-InteropAtlas 当前保持一个主仓库。Canonical State、Runtime、规范文档与 Evolution 材料仍处于高频共同演化阶段，现在拆成多个仓库会增加协作和同步成本。
+**ACCEPTED.** 当前保持 Monorepo。State、Runtime、规范文档与 Evolution 仍处于高频共同演化阶段，提前拆仓只会增加同步成本。
 
-### RS-D2 — Storage 与 Semantics 必须解耦
+### RS-D2 — Storage 与 Semantics 解耦
 
-**Decision: ACCEPTED.**
+**ACCEPTED.** Canonical Data 的物理路径 **MUST NOT** 决定知识身份或语义类型。语义分类 **MUST** 来自机器可读对象数据、稳定 ID、引用与 Graph contract。
 
-Canonical Data 的物理路径 **MUST NOT** 决定对象的知识身份。
+### RS-D3 — Canonical State 边界
 
-目录名 **MUST NOT** 被 Loader、Validator、Graph Index 或其他核心工具当作判断 `standard`、`relation`、`method`、`implementation` 等语义类型的依据。
-
-语义分类 **MUST** 来自机器可读对象数据、稳定 ID、引用与 Graph contract。
-
-### RS-D3 — Canonical State 的物理边界已经确定
-
-**Decision: ACCEPTED AND IMPLEMENTED.**
-
-当前 State：
+**ACCEPTED AND IMPLEMENTED.**
 
 ```text
 01_State/
@@ -84,134 +65,150 @@ Canonical Data 的物理路径 **MUST NOT** 决定对象的知识身份。
 └── README.md
 ```
 
-- `01_Objects/`：Canonical Objects；不同对象类型平级存放；
-- `02_Relations/`：Canonical Relations；
-- Properties 属于 Object / Relation 自身，不建立独立目录；
-- Object Schema 与 Objects 共置；Relation Schema 与 Relations 共置；
-- Schema 的 `$id / $ref` 是逻辑身份，不要求复制 Git 物理目录结构。
+未来如需分片，应优先采用稳定 ID、哈希或其他非语义分片，不恢复 ontology 文件夹。
 
-未来如果因规模、性能或维护需要分片，应优先采用稳定 ID、哈希或其他**非语义分片**，而不是恢复 Standard / Method / Organization 等分类目录。
+### RS-D4 — Runtime / Evolution 边界
 
-### RS-D4 — 三大生命周期一级目录已经确定
-
-**Decision: ACCEPTED AND IMPLEMENTED.**
-
-当前仓库的三个核心一级目录：
-
-```text
-01_State/
-02_Runtime/
-03_Evolution/
-```
-
-分别回答：
-
-- `01_State`：项目当前正式承认什么；
-- `02_Runtime`：项目当前怎样运行和使用 State；
-- `03_Evolution`：项目怎样研究、验证、决策并改变自己。
-
-当前 Runtime：
+**ACCEPTED AND IMPLEMENTED.**
 
 ```text
 02_Runtime/
 ├── 01_Engine/
 ├── 02_Tools/
-├── 03_Outputs/
-└── README.md
-```
+└── 03_Outputs/
 
-当前 Evolution：
-
-```text
 03_Evolution/
 ├── 01_Research/
 ├── 02_Experiments/
-├── 03_Change/
-└── README.md
+└── 03_Change/
 ```
 
-平台、开源和项目入口文件继续位于三大区域之外，例如：
+### RS-D5 — Generated View 永不成为第二事实源
 
-```text
-.github/
-docs/
-LICENSES/
-README.md
-CONTRIBUTING.md
-LICENSE.md
-AGENTS.md
-```
-
-这些外围内容存在是因为 GitHub、许可证、公开项目入口或治理需要，而不是因为它们构成第四个项目本体区域。
-
-### RS-D5 — Generated Site / Export 永不成为第二事实源
-
-**Decision: ACCEPTED.**
-
-Generated HTML、Markdown、JSON/RDF export、index、report 等必须能够从 Canonical State / Contracts / Runtime 重新生成，不得成为与 Canonical State 竞争的第二事实源。
-
-`02_Runtime/03_Outputs/` 是生成产物的逻辑职责区域，不代表所有生成文件都应该提交 Git。
+**ACCEPTED.** Generated HTML、Markdown、JSON/RDF export、index、report 等必须能够从 Canonical State / Contracts / Runtime 重新生成。
 
 ### RS-D6 — Public Route 与 Physical Source 分离
 
-**Decision: ACCEPTED AND IMPLEMENTED.**
+**ACCEPTED AND IMPLEMENTED.** 稳定对象 ID / public route 不依赖物理文件位置。移动或重命名文件不得无意改变对象身份。
 
-对象公开地址由稳定 ID 决定：
+### RS-D7 — `docs/` 与 Evolution 分离
 
-```text
-/objects/<stable-id>.html
-```
-
-Loader 区分：
-
-- `_source`：稳定逻辑 / public route source；
-- `_physical_source`：真实 repository-relative 文件路径。
-
-移动或重命名 YAML 不应改变对象公开 URL，只要稳定 `id` 不变。
-
-### RS-D7 — `docs/` 与 Evolution 的职责分离
-
-**Decision: ACCEPTED.**
-
-`docs/` 保存当前需要被理解或遵守的项目 Definition、Architecture、Specification、Profile、Policy、Operating Model 与长期规则。
+**ACCEPTED.** `docs/` 只保存今天进入项目仍需理解或遵守的 Definition、Master Design、Architecture、Specification、Profile、Policy、Operating Model 与长期规则。
 
 过程材料进入：
 
 ```text
-03_Evolution/01_Research/      为什么这样判断
-03_Evolution/02_Experiments/   怎样试过 / 验证过
-03_Evolution/03_Change/        接下来怎样改变
+03_Evolution/01_Research/      为什么这样判断：Prior Art / Research / Audit / Verification
+03_Evolution/02_Experiments/   怎样试过：Prototype / Experiment / Dry Run / Result
+03_Evolution/03_Change/        怎样改变：Proposal / Phase Plan / Migration / Transition / Historical Decision
 ```
 
-### RS-D8 — AGENTS.md 是 Agent Instructions，不是项目本体
+### RS-D8 — AGENTS.md 是 Router，不是项目本体
 
-**Decision: ACCEPTED.**
+**ACCEPTED.** `AGENTS.md` 指导 Agent 如何进入和参与项目，但不得替代 README、Master Design、CONTRIBUTING、Governance 或 Specification。
 
-`AGENTS.md` 可以指导 Agent 如何参与仓库，但不得替代 README、CONTRIBUTING、Governance、Specification 或其他正式项目文档。
+### RS-D9 — Living Documents 必须保持单一职责
+
+**ACCEPTED.** 同一长期概念的完整定义 **SHOULD** 有一个明确的主要维护位置（Primary Home）。其他 Living Documents 可以摘要并链接，但 **SHOULD NOT** 复制完整论证、完整规则表或另一套平行定义。
+
+典型职责：
+
+```text
+Philosophy          为什么；价值方向；最高层原则
+Master Design       系统长期是什么；主要边界和层之间怎样组合
+Architecture        关键系统结构与职责
+Long-term Direction 某一长期子系统的专项设计
+Roadmap             先后关系、阶段与 Gate
+Specification       可执行的规范要求
+Profile             针对特定场景的规范化选择 / 约束
+PROJECT_STATE       现在在哪里、从哪里继续
+Issue / PR           当前工作项与交付状态
+Evolution           研究、实验、提案、迁移与历史过程
+```
+
+### RS-D10 — Living Document 与历史制品必须分离
+
+**ACCEPTED.** 一个文件若不再描述当前有效设计，但仍具有独立的设计历史、决策、研究或迁移价值，**SHOULD** 进入对应的 `03_Evolution` 区域并明确 Historical / Superseded / Completed 状态，而不是继续与 Living Documents 平铺，也不应仅为整洁而删除。
+
+真正临时、重复且没有独立历史价值的文件可以删除；具有重要设计历史的删除属于高影响清理，应确认替代关系和 Git 可恢复性。
+
+### RS-D11 — Living Document 路径稳定
+
+**ACCEPTED.** 持续维护的正式文档路径 **SHOULD** 稳定，文件名通常不携带内容版本号。版本历史由 Git commit / tag / release / provenance 保存。
+
+只有协议、Schema、标准身份、兼容契约、不可变历史制品或版本号本身具有语义时，文件名才保留版本号。
+
+### RS-D12 — Draft 是状态，不是位置
+
+**ACCEPTED.** `draft` 可以出现在 Living Document 的状态中，只要该文档仍是当前正在形成的规范 / 架构入口；但已经完成、被取代或仅用于某一阶段施工的 Draft **MUST NOT** 因文件名带 `draft` 就永久留在 `docs/`。
+
+判断依据是**当前职责和生命周期**，不是文件名。
 
 ## 4. Artifact Taxonomy
 
-| Artifact Class | 主要职责 | 当前典型位置 | Canonical Fact? |
+| Artifact Class | 主要职责 | 默认位置 | Canonical Fact? |
 |---|---|---|---:|
-| Canonical Data Object | 对现实互操作知识对象的结构化事实 | `01_State/01_Objects/` | 是 |
+| Canonical Data Object | 对现实知识对象的结构化事实 | `01_State/01_Objects/` | 是 |
 | Canonical Relation | 对象之间的结构化关系 | `01_State/02_Relations/` | 是 |
-| Schema / Contract | 定义数据允许的结构 | 与 Objects / Relations 共置 | 否 |
-| Specification / Profile | IA 自产的当前规范要求 | `docs/` | 否 |
+| Schema / State Contract | 定义 Canonical 数据结构 | 与 State 共置 | 否 |
+| Philosophy / Master Design | 当前最高层方向 | `docs/` | 否 |
+| Architecture / Long-term Direction | 当前系统 / 专项长期结构 | `docs/` | 否 |
+| Specification / Profile / Policy | 当前可执行规则 | `docs/` | 否 |
+| Operating Model | 当前仍有效的运行 / 演化机制 | `docs/` | 否 |
 | Research / Prior Art / Audit | 调研、比较、证据、验证 | `03_Evolution/01_Research/` | 否 |
-| Architecture / Documentation | 帮助理解、使用、贡献项目 | `docs/` | 否 |
-| Governance / Policy | 角色、授权、生命周期、治理约束 | root / `docs/` | 否 |
 | Experiment | 可复现探索、fixture、prototype、结果 | `03_Evolution/02_Experiments/` | 否 |
-| Change Artifact | Roadmap、Proposal、Migration、Transition | `03_Evolution/03_Change/` | 否 |
+| Change Artifact | Roadmap 历史、Proposal、Phase Plan、Migration、Transition | `03_Evolution/03_Change/` | 否 |
 | Implementation / Tool | Engine、Validator、Renderer、CLI、维护工具 | `02_Runtime/` | 否 |
 | Generated Artifact / View | 网站、export、报告、动态索引 | `02_Runtime/03_Outputs/` 或 CI artifact | 否 |
 
-### Artifact identity invariant
+目录表达当前工程 / 生命周期职责；Artifact 的语义身份仍由内容、标识、状态和关系决定。
 
-Artifact identity **MUST NOT** 只依赖目录位置。
+## 5. 文档去重规则
 
-目录表达当前工程 / 生命周期职责；对象的语义身份仍由数据、标识和关系决定。
+### IA-RS-DOC-001 — 一个概念一个主要维护位置
 
-## 5. 三个必须分开的结构问题
+当前正式文档 **MUST** 明确谁拥有某一概念的完整定义。引用者可以保留理解上下文所需的最小摘要，但不得为了“保险”复制整段设计。
+
+### IA-RS-DOC-002 — 上位文档不承担下位细节
+
+Philosophy 不维护具体架构；Master Design 不维护专项规则；Roadmap 不维护实时施工细节；`PROJECT_STATE.md` 不承担完整 Roadmap；Specification 不重新解释整个项目使命。
+
+### IA-RS-DOC-003 — 下位文档不得重新定义上位概念
+
+下位文档可以把上位原则操作化，但若发现上位定义不足，应回到主要维护位置修改，而不是在下位文件中创建一个更完整、但不同的版本。
+
+### IA-RS-DOC-004 — 摘要必须指向 Primary Home
+
+当一个概念因上下文必须重复出现时，摘要 **SHOULD** 指向其主要维护文档，使读者知道哪里是完整定义。
+
+### IA-RS-DOC-005 — Current / Process / History 三态分离
+
+文档维护时必须先判断：
+
+```text
+CURRENT   今天仍需理解 / 遵守 → docs/
+PROCESS   正在研究 / 实验 / 迁移 → 03_Evolution 对应区域
+HISTORY   已完成 / 被取代但值得保存 → 03_Evolution + lifecycle marker
+```
+
+不要通过创建更多 checkpoint 文档解决上下文连续性。实时状态进入 `PROJECT_STATE.md` / Issue / PR；长期设计进入既有 Durable Artifact；历史过程由 Git 与 Evolution 保存。
+
+### IA-RS-DOC-006 — Promotion / Supersession 必须闭环
+
+当 Research / Experiment / Change 结论被接受为当前设计时：
+
+1. 更新对应 Living Document；
+2. 在过程制品中记录 accepted / completed / superseded 状态或指向结果；
+3. 更新必要索引；
+4. 不让过程文件继续冒充当前规范。
+
+当一个 Living Document 被替代时，应明确 successor；若只是局部内容被吸收，则将剩余独立价值重新判断为 Living / Evolution / 删除。
+
+### IA-RS-DOC-007 — 文档数量不是安全性
+
+设计连续性来自稳定 Primary Home、明确引用、Git history、Evolution 和项目状态，而不是在多个文件中保存相同文本。重复越多，长期漂移风险越高。
+
+## 6. 三个必须分开的结构问题
 
 以后讨论结构时必须区分：
 
@@ -226,193 +223,52 @@ C. Projection / Navigation
    用户或 Agent 想按什么维度看？有哪些 Index / Map / Query？
 ```
 
-例如一个 GOV.UK Design System 对象可以只有一个物理文件，但通过 Graph 同时出现在：
+一个对象可以通过 Graph 同时出现在多个分类和视图中，不需要复制文件，也不需要为了这些视图建立多个语义文件夹。
 
-- Design System；
-- Human Interface reference；
-- Accessibility precedent；
-- Government service precedent；
-- Pattern library related view。
+## 7. 其他规范要求
 
-不需要为了这些视图复制文件，也不需要建立五个语义文件夹。
+- Canonical State、Runtime 与 Evolution **MUST** 保持职责清楚。
+- Specification / Profile 与 Research / Audit **MUST** 可区分。
+- GitHub 能原生识别的 Community Health、Issue、PR、Workflow 文件 **SHOULD** 使用平台原生位置。
+- Path / storage contract **MUST NOT** 同时充当 ontology registry。
+- Internal links、generated routes、navigation indexes **SHOULD** 可自动检查。
+- Monorepo **SHOULD** 保持 extraction-ready，但 **MUST NOT** 为未来可能拆仓提前制造不必要复杂度。
+- 新物理目录必须解决规模、所有权、性能、生命周期、工具约束或其他真实工程问题，而不是仅为了分类。
 
-## 6. Normative Requirements
-
-### IA-RS-001 — Root 是公开项目入口
-
-Root **MUST** 优先服务第一次进入仓库的人类贡献者、Agent 与通用工具；**MUST NOT** 演化成 Agent 私有状态或临时工作文件集合。
-
-### IA-RS-002 — Canonical Storage 必须可发现和可配置
-
-Loader / CI / Tooling **SHOULD** 通过明确的 repository storage contract 获取 Canonical State 当前物理位置。
-
-当前默认 storage contract 指向：
-
-```text
-01_State/01_Objects/
-01_State/02_Relations/
-```
-
-工具不得通过遍历整个仓库的全部 YAML 来猜测 Canonical State。
-
-### IA-RS-003 — 目录不得定义知识分类
-
-一个对象的 `type / kind / roles` **MUST NOT** 由其所在目录推断。
-
-Canonical Relation 的目标模型 **SHOULD** 显式声明 `type: relation`。当前 Loader **MAY** 为兼容少量历史数据，根据文档自身的 `source + relation/predicate/kind + target` 结构识别旧 Relation，但 **MUST NOT** 根据它是否位于 `02_Relations/` 来判断。
-
-该兼容只是历史数据技术债，不改变“语义来自对象内容而不是目录”的原则。
-
-### IA-RS-004 — 分类与索引使用数据和引用
-
-面向 Standard、Method、Organization、Capability、Design System、Mature Precedent、主题或能力的分类 / 索引 **SHOULD** 由对象字段、稳定 ID、Relation、Graph、Index、Map 或 Query 生成。
-
-### IA-RS-005 — State / Runtime / Evolution 职责必须清楚
-
-Canonical State、运行实现与演化过程 **MUST** 保持职责清楚：
-
-- State 不存放临时研究和实验；
-- Runtime 不成为事实源；
-- Evolution 不冒充当前 Canonical State 或当前正式运行源码。
-
-### IA-RS-006 — Source of Truth 与 Generated Projection 必须分离
-
-Generated artifacts **MUST NOT** 与 Canonical State 竞争事实源身份。
-
-### IA-RS-007 — Specification / Research 身份必须清楚
-
-带 BCP 14 Requirements 的当前 IA Specification / Profile **MUST** 与 Prior Art、Options、Fit Test、Audit 等 Research Artifact 可区分。
-
-当前默认边界为：Specification / Profile → `docs/`；Research → `03_Evolution/01_Research/`。
-
-### IA-RS-008 — Community Health 使用平台原生位置
-
-GitHub 能原生识别的 Community Health、Issue、PR、Workflow 等文件 **SHOULD** 使用 GitHub 支持的位置和格式。
-
-### IA-RS-009 — License layout 优先兼容外部规范
-
-若项目采用 REUSE 等外部规范，`LICENSES/` 等受规范约束的位置继续遵守其要求；这属于工具 / 法务互操作约束，而不是 IA 知识分类。
-
-### IA-RS-010 — 迁移必须保持语义不变量
+## 8. Canonical 迁移不变量
 
 任何 Canonical storage migration 至少保持：
 
-- object count 不因移动改变；
-- relation count 不因移动改变；
-- resolved graph edge count 不因移动改变；
+- object / relation count 不因移动无意改变；
+- resolved graph edge count 不因移动无意改变；
 - `reference_issues = 0`；
 - stable object IDs 不变；
-- 对象 `type / kind / relations` 不因文件位置改变；
+- 对象语义不因文件位置改变；
 - public URL 不被 physical source path 无意改变。
 
-PR #45 的三大区域迁移以 `112 objects / 107 relations / 161 edges / 0 reference issues` 作为迁移基线并保持通过。
+## 9. 当前结构维护检查表
 
-### IA-RS-011 — 路径合同只表达物理位置
+新增或修改文档前至少检查：
 
-Path / storage contract **MUST NOT** 同时充当 ontology registry。
+1. 这是 Current、Process 还是 History？
+2. 它属于哪一设计层？
+3. 是否已经有 Primary Home？
+4. 是应该修改已有 Durable Artifact，还是确实需要新文件？
+5. 是否重复了其他文档的完整定义？
+6. 如果是 Draft，它仍是当前入口，还是已经成为阶段历史？
+7. 如果被替代，successor 和生命周期状态是否明确？
+8. 索引、AGENTS / PROJECT_STATE 的阅读路径是否仍然正确？
+9. 中文 / 英文并行文档的同步状态是否需要更新？
 
-### IA-RS-012 — Internal links 与索引必须可验证
-
-迁移后的 internal links、generated routes、navigation indexes **SHOULD** 可自动检查。
-
-仓库当前通过 Markdown link CI 检查本地文档链接，并通过 Engine regression / site build 检查 State 与 public route。
-
-### IA-RS-013 — Monorepo 保持 extraction-ready
-
-各区域 **SHOULD** 通过明确职责和接口边界保持未来可抽离能力，但 **MUST NOT** 为未来可能发生的拆仓提前制造当前不必要的复杂度。
-
-### IA-RS-014 — 不为分类制造目录
-
-项目 **MUST NOT** 仅为了让 taxonomy 看起来完整而创建 Standard / Method / Precedent / Design System 等物理目录。
-
-如果未来创建新的物理子目录，必须说明它解决的是规模、所有权、性能、生命周期、工具约束或其他实际工程问题，而不是“这个对象属于某个类别”。
-
-## 7. 与 Non-normative Knowledge Object Model 的边界
-
-Non-normative Knowledge Object Model 继续回答：
-
-- 对象 `type / kind / roles / relations` 如何表达；
-- Method、Guideline、Design System、Precedent 等怎样保持现实身份；
-- Fact、Evidence、Assessment 怎样分离。
-
-它不负责决定：
-
-- 是否创建 `methods/`、`precedents/` 等目录；
-- root 一级目录如何组织；
-- 某种知识类别应该住在哪个文件夹。
-
-因此 Knowledge Object Model 与 Repository Physical Layout 是两个不同问题。
-
-## 8. 已完成的结构迁移阶段
-
-### M0 — Principles / Contracts
-
-完成：
-
-- Artifact identity；
-- Storage ≠ Semantics ≠ View；
-- 迁移语义不变量。
-
-### M1 — Storage path decoupling
-
-完成：
-
-- Loader 的 physical storage contract 集中化；
-- Loader 从对象内容判断语义；
-- public route 与 physical path 解耦；
-- 任意候选 storage path 可用于 Dry Run。
-
-### M2 — Root / Second-level Layout Decision
-
-完成：
-
-```text
-01_State/
-02_Runtime/
-03_Evolution/
-```
-
-及各自已经确认的二级结构。
-
-### M3 — Migration Dry Run
-
-完成：
-
-- current → target mapping；
-- Schema placement / reference review；
-- public route review；
-- CI / Loader / Renderer 影响分析；
-- regression baseline。
-
-相关历史材料位于 [`03_Evolution/03_Change/`](../03_Evolution/03_Change/)。
-
-### M4 — Physical Migration
-
-已由 PR #45 完成并通过回归验证。
-
-### M5 — Documentation / Evolution Boundary
-
-当前执行：将 Research、Experiments 与 Change 历史从 `docs/` 迁入 `03_Evolution`，让 `docs/` 收敛为当前项目文档入口。
-
-## 9. 仍然开放的问题
-
-以下问题仍可根据真实规模与实践重新评估：
-
-- `01_Objects/` 文件量增长后是否需要非语义分片；
-- Relation 历史数据何时全部显式补齐 `type: relation`；
-- Schema enforcement 如何接入 CI；
-- `02_Runtime/03_Outputs/` 中哪些生成产物应该版本化；
-- tests 最终采用 component-local 还是更独立的技术布局；
-- 未来是否有充分理由从 Monorepo 抽离某一组件。
-
-这些开放问题**不重新打开已经接受的“目录不得定义知识分类”原则**。
-
-## 10. v0.1 当前结论
+## 10. 当前结论
 
 ```text
 文件夹：负责存储、生命周期和工程边界
 数据字段 / ID / Relation：负责知识身份与连接
 Graph / Index / Map / Query：负责分类、索引与视图
+Living Documents：保存当前有效设计
+Evolution：保存研究、实验、变更与有价值的历史过程
+Git / Issue / PR：保存事件与实时协作证据
 ```
 
-**不要再让目录树承担知识图谱本来应该承担的工作。**
+**不要再让目录树承担知识图谱的工作，也不要让重复文档承担版本控制和设计历史的工作。**
