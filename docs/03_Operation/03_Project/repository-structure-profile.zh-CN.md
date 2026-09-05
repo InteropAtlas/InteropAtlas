@@ -1,9 +1,9 @@
-# InteropAtlas Repository Structure Profile v0.3
+# InteropAtlas Repository Structure Profile v0.4
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: Draft / Provisional Specification
 Document Created At: 2026-09-01T11:34:09+08:00
-Document Updated At: 2026-09-05T16:35:00+08:00
+Document Updated At: 2026-09-05T17:35:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
@@ -143,14 +143,14 @@ root files      README / CONTRIBUTING / AGENTS / PROJECT_STATE 等入口
 03_Evolution/
 ├── 01_Research/
 ├── 02_Experiments/
-└── 03_Decisions/   ← target; existing 03_Change is pending content-level migration
+└── 03_Decisions/
 ```
 
 `01_State` 当前只有两个编号主入口：`01_Objects/` 与 `02_Relations/`。`Inbox/` 是不编号的 intake 辅助工作区，不能证明已经满足正式接纳条件的新内容默认应先进 `Inbox/`。
 
 `02_Runtime/03_Outputs/` 只有在生成结果确实需要版本控制时才使用；可重建输出默认优先 CI artifact / deployment，而不是为了三分长期提交空洞或重复输出。
 
-`03_Evolution` 的目标结构是 Research / Experiments / Decisions。旧 `03_Change/` 中的 Direction、Architecture、Migration 等材料必须先做内容级审计，再决定吸收到 `docs/`、保留为长期 Decision，或依赖 Issue / PR / Git history；不得按文件名机械批量迁移。
+`03_Evolution` 已按 Research / Experiments / Decisions 三个长期职责落实。旧 `03_Change/` 中真正具有独立长期解释价值的方向与架构依据已进入 `03_Decisions/`；阶段计划、旧 roadmap、迁移预检、施工审计与其他只有过程价值的材料不再保留在当前树，由 Git / GitHub history 继续提供历史恢复能力。
 
 ## 3. `docs/` 注意力结构
 
@@ -271,6 +271,8 @@ Evolution 不是过程归档区，也不是 Primary Home 缺失时的兜底目�
 ```
 
 默认不建立 `Projects/`、`Activities/`、`Archive/`、`Shared/`、`Resources/`、`Misc/` 等宽泛容器。
+
+`01_Research/` 与 `02_Experiments/` 当前保留已有下一层分组，是因为真实积累量和实验可复现性已经构成实际收益；后续仍应按内容价值审计，而不是为了“绝对扁平”机械移动。
 
 ## 7. 文档去重与层级规则
 
@@ -396,8 +398,8 @@ Code search、索引或第三方工具可能有范围 / 时效限制。因此重
 
 默认选择：**先减少有资格成为 Repository Artifact 的东西，再讨论如何分类；少建一级、少建一份、优先归位，路径变化同时保证引用完整性。**
 
-## 11. 当前迁移边界
+## 11. 当前实施状态
 
-`01_State` 的编号入口只用于正式 Canonical State；候选对象与接纳决策证据归入不编号 `Inbox/`。
+当前一级结构已经按本 Profile 落实：`01_State / 02_Runtime / 03_Evolution` 为三个编号内容域，`docs/` 为规则层；`01_State` 使用 `01_Objects / 02_Relations + Inbox`；`03_Evolution` 使用 `01_Research / 02_Experiments / 03_Decisions`。
 
-`03_Evolution` 的旧 `01_Research / 02_Experiments / 03_Change` 结构形成于“Repository 也保存较多工作过程”的旧模型。新目标结构为 `01_Research / 02_Experiments / 03_Decisions`，但旧材料必须逐件进行内容级审计：先吸收 Current 成果，再保留真正 Durable Rationale，最后删除仅有施工过程价值的 Artifact。不得为了快速得到漂亮目录而批量机械重命名或删除。
+本轮没有为了形式一致而重排已经合理的 Root、State、Runtime 与 docs，也没有机械扁平化 Research / Experiments。后续结构变化应由真实职责、规模或工具摩擦触发，而不是继续进行无目标的目录整理。
