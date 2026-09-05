@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
 Document Created At: 2026-08-30T17:51:02+08:00
-Document Updated At: 2026-09-05T03:51:00+08:00
+Document Updated At: 2026-09-05T05:05:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -14,92 +14,89 @@ Latest Substantive Contribution:
   GitHub Actor: ff6962757
 -->
 
-`docs/` 保存**今天进入 InteropAtlas 时仍需要理解或遵守的长期文档（Living Documents）**。
+`docs/` 只保存**今天进入 InteropAtlas 时仍需要理解或遵守的 Living Documents**。研究、实验、阶段计划、架构形成过程和已被取代但仍有价值的历史材料分别进入 `03_Evolution/01_Research`、`03_Evolution/02_Experiments`、`03_Evolution/03_Change`。
 
-本索引按“设计尺度”组织，而不是按文件创建时间平铺。研究、实验和历史变更过程分别进入 `03_Evolution/01_Research`、`03_Evolution/02_Experiments`、`03_Evolution/03_Change`。
+文档生命周期与 Primary Home 规则见 [`repository-structure-profile.zh-CN.md`](repository-structure-profile.zh-CN.md)。中文文档以自然中文为主阅读语言；语言与翻译规则见 [`language-policy.zh-CN.md`](language-policy.zh-CN.md)，跨语言概念绑定见 [`terminology-registry.md`](terminology-registry.md)。
 
-Living Documents 的版本历史由 Git 提供，文件路径本身不再携带 `v0.1`、`v1.0` 等版本号。只有当版本号属于协议、Schema、标准对象、兼容契约或历史制品身份的一部分时，才保留在文件名中。
+## 0. 第一次进入项目
 
-中文文档以自然中文为主阅读语言，首次出现的重要项目概念可保留规范英文锚点。项目的语言与翻译规则见 [`语言政策`](language-policy.zh-CN.md)，跨语言概念绑定见 [`术语登记表`](terminology-registry.md)。
-
-## 0. 第一次进入项目：先读什么
-
-### 人类贡献者 / 项目理解（Human）
+### 人类贡献者 / 项目理解
 
 ```text
 README.md
 → interopatlas-master-design.zh-CN.md
 → knowledge-philosophy-and-principles.zh-CN.md
-→ public-commons-and-personal-knowledge-space.zh-CN.md
+→ architecture.zh-CN.md
 → PROJECT_STATE.md
 ```
 
-### 智能体 / 维护者（Agent / Maintainer）
+### 智能体 / 维护者
 
 ```text
 AGENTS.md
 → PROJECT_STATE.md
 → README.md
 → interopatlas-master-design.zh-CN.md
-→ 当前阶段 / Issue / 契约（Current Phase / Issue / Contract）
+→ architecture.zh-CN.md
+→ 当前 Issue / Contract / Profile
 ```
 
-不要把某一份阶段计划（Phase Plan）、旧五路线模型、某个工作空间（Workspace）或某个 P6 Issue 当成整个 InteropAtlas。
+不要把阶段计划、历史 Draft、某个 Workspace、某个 Issue 或某一条旧运行路线当成整个 InteropAtlas。
 
 ## 1. L0–L1：使命、哲学与总体设计
 
-这些文件定义项目最高层方向。
-
-- [`interopatlas-master-design.zh-CN.md`](interopatlas-master-design.zh-CN.md) — **当前总体设计（Master Design）**。解释地图优先（Atlas-first）、共享 / 个人 / 体验（Shared / Personal / Experience）、知识操作空间（Knowledge Operation Spaces）、人与智能体（Human + Agent）、成长循环，以及 P1–P6 的正确位置。
-- [`knowledge-philosophy-and-principles.zh-CN.md`](knowledge-philosophy-and-principles.zh-CN.md) — 长期产品哲学，以及不应被局部实现静默改写的产品与建设原则。
+- [`interopatlas-master-design.zh-CN.md`](interopatlas-master-design.zh-CN.md) — **当前总体设计（Master Design）**：项目长期是什么、主要系统边界如何组合。
+- [`knowledge-philosophy-and-principles.zh-CN.md`](knowledge-philosophy-and-principles.zh-CN.md) — **哲学 Primary Home**：核心哲学、知识流动 / 创造与派生建设原则。
 - [`interopatlas-definition-and-scope.zh-CN.md`](interopatlas-definition-and-scope.zh-CN.md) — 项目定义、互操作问题边界和收录范围。
 
-InteropAtlas 的核心产品哲学压缩为一个相互依存的命题：
+核心哲学：
 
 > **知识属于公共共同体。视角属于个人。**  
 > *Knowledge belongs to the commons. Perspective belongs to the individual.*
 
-其动态展开是知识流动模型（Knowledge Flow Model）：
+动态命题：
 
-> **发现（Discover）→ 连接（Connect）→ 传递（Transmit）→ 转化（Transform）→ 复用（Reuse）→ 创造（Create）→ 公共共同体（Commons）↺**
+> **知识流动，创造不息。**  
+> *Knowledge travels. Creation continues.*
 
-个性化透明 / 可控 / 可逆、地图优先、先有证据再有断言、先选择再呈现、真实使用塑造本体模型，以及“采用 → 配置 → 扩展 → 发明（Adopt → Profile → Extend → Invent）”属于产品与建设原则，不再与核心哲学并列。
+发现、连接、传递、转化和复用是 Flow 的典型机制，不再作为必须并列的六阶段顶层模型。
 
-## 2. L2：知识空间与长期产品架构
+## 2. L2：当前核心架构与长期子系统
 
-- [`public-commons-and-personal-knowledge-space.zh-CN.md`](public-commons-and-personal-knowledge-space.zh-CN.md) — 公共知识共同体（Public Knowledge Commons）+ 个人知识空间（Personal Knowledge Space）；内容个性化、表达个性化、反信息茧房、隐私与可互操作个人空间。
-- [`knowledge-workspace-design-principles.zh-CN.md`](knowledge-workspace-design-principles.zh-CN.md) — `规范知识 → 视角 / 选择 → 投影 → 工作空间（Canonical Knowledge → Perspective / Selection → Projection → Workspace）` 设计基线，以及百科式浏览、时间线、关系图、比较、证据（Wiki / Browse, Timeline, Graph, Compare, Evidence）等工作空间原则。
-- [`human-agent-access-architecture-draft.zh-CN.md`](human-agent-access-architecture-draft.zh-CN.md) — V1 人 / 智能体访问（Human / Agent Access）、权限和候选写入（Candidate Write）架构草案。
-- [`flat-graph-and-dynamic-maps.zh-CN.md`](flat-graph-and-dynamic-maps.zh-CN.md) — 扁平对象 + 丰富关系 + 动态地图（Flat Objects + Rich Relations + Dynamic Maps）的建模原则。
+- [`architecture.zh-CN.md`](architecture.zh-CN.md) — **V1 Core Architecture Primary Home**：Canonical Contract、Evidence / Assertion、Lifecycle、Intake、Selection / Projection、Human + Agent Access 与 Runtime 边界。
+- [`public-commons-and-personal-knowledge-space.zh-CN.md`](public-commons-and-personal-knowledge-space.zh-CN.md) — 公共知识共同体 + 个人知识空间专项长期设计。
+- [`knowledge-workspace-design-principles.zh-CN.md`](knowledge-workspace-design-principles.zh-CN.md) — Perspective / Selection / Projection / Representation / Workspace 专项设计原则。
 
-`architecture.zh-CN.md` 是 2026-09-02 总体设计升级之前的历史架构基线，**不再作为当前总体架构（Master Architecture）入口**。保留它用于理解演化历史；当前方向以总体设计 + V1 架构草案为准。
+P4 Canonical Contract、Write / Intake、Migration、Selection / Projection / Workspace、Human + Agent Access 等阶段 Architecture Draft 已归入 `03_Evolution/03_Change/`；其仍有效的核心架构由 `architecture.zh-CN.md` 承接。
 
-## 3. L3：成长、运行与演化机制
+早期 `Flat Objects + Rich Relations + Dynamic Maps` 原则也已吸收到 V1 Core Architecture 与 Repository Structure Profile，不再维护第二份独立架构定义。
 
-- [`practice-feedback-loop.zh-CN.md`](practice-feedback-loop.zh-CN.md) — 知识地图 ↔ 运行 / 实践（Atlas ↔ Runtime / Practice）的反馈机制。
+## 3. L3：运行、反馈与项目演化
+
+- [`practice-feedback-loop.zh-CN.md`](practice-feedback-loop.zh-CN.md) — Atlas ↔ Runtime / Practice 的反馈机制。
 - [`project-development-principles.zh-CN.md`](project-development-principles.zh-CN.md) — 项目建设原则与最小治理规则。
-- [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — **历史 / 局部运行模型（Operating Model）**：人类（Human）、机器（Machine）、策展（Curation）、信任（Trust）、治理（Governance）。它仍可作为协作 / 运行参考，但不再代表项目总体设计或总路线图（Roadmap）。
 
-## 4. L4：路线图与当前基础建设周期
+早期五路线协同模型已移入 Evolution。Human / Machine / Curation / Trust / Governance 中仍有效的职责现在分别由 Master Design、Core Architecture、Intake、Provenance 和 Governance Profiles 承接。
 
-- [`interopatlas-long-term-roadmap.zh-CN.md`](interopatlas-long-term-roadmap.zh-CN.md) — **当前长期路线图（Long-term Roadmap）**；明确 P1–P6 只是第一轮 V1 基础建设 / 架构重新验证周期（Foundation / Architecture Revalidation Cycle）。
-- [`../PROJECT_STATE.md`](../PROJECT_STATE.md) — 当前项目断点、当前阶段（Phase）、恢复入口（Resume Here）和门禁（Gate）。
-- 当前 / 历史阶段计划、迁移计划和过渡材料（Phase Plan / Migration Plan / Transition Materials）位于 [`../03_Evolution/03_Change/`](../03_Evolution/03_Change/)。
+## 4. L4：长期路线图与当前施工状态
 
-实时施工状态始终以 `PROJECT_STATE.md` + GitHub Issue / PR + 更新的 Git 证据为准。
+- [`interopatlas-long-term-roadmap.zh-CN.md`](interopatlas-long-term-roadmap.zh-CN.md) — **长期路线图 Primary Home**；P1–P6 只是第一轮 V1 Foundation / Architecture Revalidation Cycle。
+- [`../PROJECT_STATE.md`](../PROJECT_STATE.md) — **唯一项目级实时施工断点**：当前阶段、Resume Here、Gate 与最新验证状态。
+- 当前 GitHub Issue / PR — 具体工作项、依赖、交付与协作状态。
 
-## 5. L5：V1 契约 / 规范 / 配置规范（Contracts / Specifications / Profiles）
+P4.6 Roadmap Reset、旧 Phase Plan、迁移计划与其他过渡材料属于 Change history，位于 [`../03_Evolution/03_Change/`](../03_Evolution/03_Change/)。
 
-### 规范知识 / 收录 / 迁移（Canonical / Intake / Migration）
+## 5. L5：契约 / 规范 / 配置规范
 
-- [`canonical-contract-architecture-draft.zh-CN.md`](canonical-contract-architecture-draft.zh-CN.md)
-- [`canonical-write-intake-contract-architecture-draft.zh-CN.md`](canonical-write-intake-contract-architecture-draft.zh-CN.md)
-- [`canonical-migration-architecture-draft.zh-CN.md`](canonical-migration-architecture-draft.zh-CN.md)
+### 规范知识 / 收录
+
 - [`knowledge-object-classification-specification.zh-CN.md`](knowledge-object-classification-specification.zh-CN.md)
 
-### 人类界面（Human Interface）
+Canonical Schema、Relation、Candidate / Intake 等机器可执行契约同时存在于 `01_State` 和对应 Profile / Runtime 中；不要从 Historical P4 Draft 推断当前字段级规则。
 
-- [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md) — 人类界面配置规范（Human Interface Profile）总入口。
+### 人类界面
+
+- [`human-interface-profiles.zh-CN.md`](human-interface-profiles.zh-CN.md) — Human Interface Profiles 总入口。
 - [`human-interface-information-architecture-profile.zh-CN.md`](human-interface-information-architecture-profile.zh-CN.md)
 - [`human-interface-information-presentation-profile.zh-CN.md`](human-interface-information-presentation-profile.zh-CN.md)
 - [`human-interface-interaction-profile.zh-CN.md`](human-interface-interaction-profile.zh-CN.md)
@@ -107,81 +104,67 @@ InteropAtlas 的核心产品哲学压缩为一个相互依存的命题：
 - [`human-interface-accessibility-conformance-profile.zh-CN.md`](human-interface-accessibility-conformance-profile.zh-CN.md)
 - [`human-interface-specification.zh-CN.md`](human-interface-specification.zh-CN.md)
 - [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md)
+- [`human-interface-minimal-compare-contract.zh-CN.md`](human-interface-minimal-compare-contract.zh-CN.md)
 
-### 开放协作 / 人机协作（Open Collaboration / Human–AI）
+### 开放协作 / 人机协作
 
 - [`open-collaboration-profile.zh-CN.md`](open-collaboration-profile.zh-CN.md)
 - [`collaboration-task-system.zh-CN.md`](collaboration-task-system.zh-CN.md)
 - [`task-reference-seeding-profile.zh-CN.md`](task-reference-seeding-profile.zh-CN.md)
 - [`agent-onboarding-context-continuity-profile.zh-CN.md`](agent-onboarding-context-continuity-profile.zh-CN.md)
 - [`agent-attribution-contribution-identity-profile.zh-CN.md`](agent-attribution-contribution-identity-profile.zh-CN.md)
-- [`agent-continuation-bridge.zh-CN.md`](agent-continuation-bridge.zh-CN.md)
+- [`agent-continuation-bridge.zh-CN.md`](agent-continuation-bridge.zh-CN.md) — 当前 workflow 的运行契约 / 说明，不是阶段路线文档。
 
-### 来源追踪 / 研究 / 治理（Provenance / Research / Governance）
+### 来源追踪 / 研究 / 治理
 
 - [`provenance-traceability-profile.zh-CN.md`](provenance-traceability-profile.zh-CN.md)
 - [`research-governance.zh-CN.md`](research-governance.zh-CN.md)
-- [`task-authority-governance-draft.zh-CN.md`](task-authority-governance-draft.zh-CN.md)
+- [`task-authority-governance-draft.zh-CN.md`](task-authority-governance-draft.zh-CN.md) — 当前仍在形成中的治理入口；`draft` 是状态，不自动意味着历史。
 
-### 仓库 / 政策（Repository / Policy）
+### 仓库 / 政策
 
-- [`repository-structure-profile.zh-CN.md`](repository-structure-profile.zh-CN.md)
-- [`language-policy.zh-CN.md`](language-policy.zh-CN.md) — 中文优先阅读、英文国际版本、翻译与语言标签规则。
-- [`terminology-registry.md`](terminology-registry.md) — 核心概念的规范英文身份、中文首选词和跨语言别名登记。
+- [`repository-structure-profile.zh-CN.md`](repository-structure-profile.zh-CN.md) — 仓库职责、Artifact taxonomy、文档生命周期、Primary Home 与去重规则。
+- [`language-policy.zh-CN.md`](language-policy.zh-CN.md)
+- [`terminology-registry.md`](terminology-registry.md)
 
-## 6. 演化材料：过程文件放在哪里
+## 6. Evolution：过程和历史放在哪里
 
 ```text
 03_Evolution/
-├── 01_Research/      成熟先例 / 研究 / 审计 / 验证（Prior Art / Research / Audit / Verification）
-├── 02_Experiments/   原型 / 实验 / 试运行（Prototype / Experiment / Dry Run）
-└── 03_Change/        路线图历史 / 阶段计划 / 提案 / 迁移（Roadmap History / Phase Plan / Proposal / Migration）
+├── 01_Research/      Prior Art / Research / Audit / Verification
+├── 02_Experiments/   Prototype / Experiment / Dry Run / Result
+└── 03_Change/        Proposal / Roadmap History / Phase Plan / Migration / Superseded Design
 ```
 
-- [`研究目录说明（Research README）`](../03_Evolution/01_Research/README.md)
-- [`实验目录说明（Experiments README）`](../03_Evolution/02_Experiments/README.md)
-- [`变更目录说明（Change README）`](../03_Evolution/03_Change/README.md)
+Research / Experiment / Change 中的文件存在于仓库，并不表示它仍是当前设计。研究结论被接受后，应更新对应 Living Document；过程文件保留为证据和设计历史。
 
-研究结论不能因为“很有启发”就自动成为稳定架构；历史变更（Change）文件也不能因为仍在仓库里就被当成当前路线。
-
-## 7. 文档层级规则
+## 7. Primary Home 与生命周期规则
 
 ```text
-使命 / 哲学（Mission / Philosophy）
-        ↓
-总体设计（Master Design）
-        ↓
-架构 / 长期方向（Architecture / Long-term Directions）
-        ↓
-路线图 / 阶段（Roadmap / Phase）
-        ↓
-契约 / 规范 / 配置规范（Contract / Specification / Profile）
-        ↓
-Issue / PR / 实现（Implementation）
+Philosophy          为什么
+Master Design       整个系统长期是什么
+Core Architecture   当前核心系统结构
+Long-term Direction 某一长期子系统
+Roadmap             长期阶段关系
+Specification       可执行规范
+Profile             特定场景的规范化选择
+PROJECT_STATE       现在在哪里
+Issue / PR           当前工作项
+Evolution           为什么这样形成、试过什么、怎样改变
 ```
 
-发生冲突时，不要机械按文件名判断。先判断它们是否属于同一层，再检查文档状态（Document Status）、更新时间、Git 历史、`PROJECT_STATE.md` 和明确的项目所有者决策（Owner Decision）。
+维护文档时先判断 `CURRENT / PROCESS / HISTORY`，再决定 `docs/`、Evolution 或删除。一个长期概念只维护一个完整 Primary Home；其他文件只保留必要摘要并链接，不复制第二套完整定义。
 
-高层设计改变需要人类项目所有者 / 维护者（Human Owner / Maintainer）授权；低层实现不得静默改写高层使命。
+Living Document 的路径保持稳定，内容版本由 Git / tag / release / provenance 留痕。`draft` 是状态，不是位置；已经完成或被取代的 Draft 必须离开 `docs/`。
 
-## 8. Living Document 路径与版本规则
+## 8. 清理原则
 
-对于持续维护的正式文档：
-
-- 文件路径保持稳定，不携带内容版本号；
-- 版本历史由 Git commit / tag / release / provenance 留痕承担；
-- `draft`、`historical`、`superseded` 等生命周期状态可保留，因为它们不是版本号；
-- Schema、协议版本、标准编号、兼容契约和历史实验制品可继续在文件名中携带版本或日期；
-- 若需要引用一个不可变历史版本，应引用 commit SHA、tag、release 或 `03_Evolution` 中的历史制品，而不是复制新的 `-v2` Living Document。
-
-## 9. 清理政策（Cleanup Policy）
-
-为了避免再次出现“总体设计散落后丢失”的问题：
-
-- 不再为每次聊天 / 阶段创建大量检查点（Checkpoint）文档；
-- 一个长期方向优先维护一个明确、持久的正式文档（Durable Artifact）；
-- 被新总体设计替代的旧文件优先标记为历史 / 已取代（Historical / Superseded），而不是直接删除历史；
-- 真正临时、重复且没有独立历史价值的文件再进入清理；
-- 删除具有历史设计价值的文档属于高影响清理，应先确认替代关系和 Git 可恢复性。
+- 不为聊天或阶段断点创建新的 checkpoint 文档；
+- 不用重复文本保护设计历史；
+- 有独立历史价值的 superseded 文件进入 Evolution；
+- 真正临时、重复且没有独立价值的文件可以删除；
+- 高层设计的 Primary Home 被替代时必须明确 successor；
+- 实时状态只进入 `PROJECT_STATE.md` / Issue / PR；
+- Git history + Evolution 承担历史恢复，而不是让旧 Draft 长期留在 `docs/`。
 
 本目录原创说明文档默认采用 **Creative Commons Attribution 4.0 International（CC BY 4.0）**，除非文件另有说明。
