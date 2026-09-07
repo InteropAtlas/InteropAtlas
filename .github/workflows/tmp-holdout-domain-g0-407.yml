@@ -1,0 +1,22 @@
+name: tmp-holdout-domain-g0-407
+on:
+  push:
+    branches: [tmp/holdout-domain-g0-407]
+  workflow_dispatch:
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe .org RDAP
+        shell: bash
+        run: |
+          names=(knowmere poivara persune poiever knewell commonet poivara poiever knowmere persune)
+          for n in "${names[@]}"; do
+            code=$(curl -L -sS -o /tmp/r -w '%{http_code}' "https://rdap.publicinterestregistry.org/rdap/domain/${n}.org" || true)
+            if [ "$code" = "404" ]; then state=AVAILABLE; elif [ "$code" = "200" ]; then state=REGISTERED; else state="UNRESOLVED:$code"; fi
+            echo "$n.org,$state"
+          done | tee g0-domain.csv
+      - uses: actions/upload-artifact@v4
+        with:
+          name: g0-domain
+          path: g0-domain.csv
