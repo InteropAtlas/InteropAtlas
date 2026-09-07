@@ -5,7 +5,6 @@ on:
     branches: [tmp/holdout-domain-g0-407]
     paths:
       - '.github/workflows/tmp-holdout-gate-a-407.yml'
-      - '.tmp/benchmark-407-candidates-valid-900.csv'
   workflow_dispatch:
 
 permissions:
@@ -14,64 +13,65 @@ permissions:
 jobs:
   gate-a-domain:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [G0, G1, G2, G3, G4, G5, G6, G7, G8]
     steps:
       - uses: actions/checkout@v4
-      - name: Batch authoritative RDAP gate
+      - name: Authoritative RDAP gate by arm
         shell: python
+        env:
+          GROUP: ${{ matrix.group }}
         run: |
-          import csv, json, re, time, urllib.request, urllib.error
+          import csv, json, os, re, time, urllib.request, urllib.error
           from pathlib import Path
 
-          inp = Path('.tmp/benchmark-407-candidates-valid-900.csv')
-          out = Path('gate-a-domain.csv')
+          group=os.environ['GROUP']
+          inp=Path('.tmp/benchmark-407-candidates-valid-900.csv')
+          out=Path(f'gate-a-domain-{group}.csv')
 
-          def label(name):
-              return re.sub(r'[^a-z0-9]', '', name.lower())
+          def label(name): return re.sub(r'[^a-z0-9]', '', name.lower())
 
           def rdap(url):
-              req = urllib.request.Request(url, headers={'User-Agent':'InteropAtlas-naming-benchmark/1.0'})
-              for attempt in range(4):
+              req=urllib.request.Request(url,headers={'User-Agent':'InteropAtlas-naming-benchmark/1.0'})
+              for attempt in range(8):
                   try:
-                      with urllib.request.urlopen(req, timeout=12) as r:
-                          if r.status == 200:
-                              return 'REGISTERED', r.status
-                          return 'UNKNOWN', r.status
+                      with urllib.request.urlopen(req,timeout=15) as r:
+                          return ('REGISTERED',r.status) if r.status==200 else ('UNKNOWN',r.status)
                   except urllib.error.HTTPError as e:
-                      if e.code == 404:
-                          return 'AVAILABLE', 404
+                      if e.code==404: return 'AVAILABLE',404
                       if e.code in (429,500,502,503,504):
-                          time.sleep(1.5*(attempt+1)); continue
-                      return 'UNKNOWN', e.code
+                          time.sleep(min(30,2**attempt)); continue
+                      return 'UNKNOWN',e.code
                   except Exception:
-                      time.sleep(1.5*(attempt+1))
-              return 'UNKNOWN', ''
+                      time.sleep(min(30,2**attempt))
+              return 'UNKNOWN',''
 
           rows=[]
-          with inp.open(newline='', encoding='utf-8') as f:
-              for n,row in enumerate(csv.DictReader(f),1):
-                  d=label(row['candidate'])
-                  org,org_http=rdap(f'https://rdap.publicinterestregistry.org/rdap/domain/{d}.org')
-                  com,com_http=rdap(f'https://rdap.verisign.com/com/v1/domain/{d}.com')
-                  gate='RED' if org=='REGISTERED' else ('PASS' if org=='AVAILABLE' else 'REVIEW')
-                  reason='required .org registered' if gate=='RED' else ('required .org available' if gate=='PASS' else 'org RDAP unresolved')
-                  rows.append({**row,'domain_label':d,'org':org,'org_http':org_http,'com':com,'com_http':com_http,'gateA_domain_status':gate,'failure_reason':reason})
-                  if n % 25 == 0:
-                      print('checked', n, flush=True)
-                  time.sleep(0.05)
-
+          with inp.open(newline='',encoding='utf-8') as f:
+              source=[r for r in csv.DictReader(f) if r['group']==group]
+          for n,row in enumerate(source,1):
+              d=label(row['candidate'])
+              org,org_http=rdap(f'https://rdap.publicinterestregistry.org/rdap/domain/{d}.org')
+              time.sleep(0.35)
+              com,com_http=rdap(f'https://rdap.verisign.com/com/v1/domain/{d}.com')
+              gate='RED' if org=='REGISTERED' else ('PASS' if org=='AVAILABLE' else 'REVIEW')
+              reason='required .org registered' if gate=='RED' else ('required .org available' if gate=='PASS' else 'org RDAP unresolved')
+              rows.append({**row,'domain_label':d,'org':org,'org_http':org_http,'com':com,'com_http':com_http,'gateA_domain_status':gate,'failure_reason':reason})
+              if n%10==0: print(group,'checked',n,flush=True)
+              time.sleep(0.35)
           fields=['group','index','candidate','domain_label','org','org_http','com','com_http','gateA_domain_status','failure_reason']
-          with out.open('w', newline='', encoding='utf-8') as f:
-              w=csv.DictWriter(f, fieldnames=fields); w.writeheader(); w.writerows(rows)
-
-          summary={}
-          for r in rows:
-              g=r['group']; summary.setdefault(g,{'PASS':0,'RED':0,'REVIEW':0}); summary[g][r['gateA_domain_status']]+=1
-          Path('gate-a-domain-summary.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
-          print(json.dumps(summary,indent=2))
+          with out.open('w',newline='',encoding='utf-8') as f:
+              w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(rows)
+          summary={'PASS':0,'RED':0,'REVIEW':0}
+          for r in rows: summary[r['gateA_domain_status']]+=1
+          Path(f'gate-a-domain-summary-{group}.json').write_text(json.dumps(summary,indent=2),encoding='utf-8')
+          print(group,json.dumps(summary))
       - uses: actions/upload-artifact@v4
         with:
-          name: gate-a-domain-407
+          name: gate-a-domain-407-${{ matrix.group }}
           path: |
-            gate-a-domain.csv
-            gate-a-domain-summary.json
+            gate-a-domain-${{ matrix.group }}.csv
+            gate-a-domain-summary-${{ matrix.group }}.json
