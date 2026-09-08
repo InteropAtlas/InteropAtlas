@@ -29,17 +29,25 @@ Select / implement
 3. Brand Architecture：名称必须能支撑未来产品族、子品牌和扩张。
 4. Parent-name system：部分公开案例体现 parent name + 可扩展命名家族的思路。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-建议：
+建议 **4 个 method-specific isolated worker contexts**：
 
-- Pivot Point Worker
-- Evergreen Concept Worker
-- Parent Name Development Worker
-- Architecture Stress-test Worker
-- Selection / Implementation Worker
+1. **G6-S1 Pivot / Evergreen Strategy Worker**
+   - 连续完成 enduring Pivot Point → evergreen umbrella concept。
+   - 输出冻结的长期核心与 architecture assumptions。
+2. **G6-S2 Parent Name Development Worker**
+   - 只读取 S1 的冻结输出生成 parent / corporate name candidates。
+   - 不读取 architecture stress-test 结果或其他 arm。
+3. **G6-S3 Architecture Stress-test Worker**
+   - 对候选分别测试 masterbrand / sub-brand / product family / future extension 承载能力。
+   - 只测试，不重新发明名字。
+4. **G6-S4 Selection / Implementation Worker**
+   - 综合候选与 architecture 结果进行选择和 contextual implementation。
 
-Architecture Worker 不负责重新生成名字，只检验候选在未来结构中的承载能力，避免“边测边修”污染 generation。
+如果 architecture stress-test 暴露结构性问题，应由 Orchestrator 决定是否开启新一轮 S2；不要让 S3 直接替 Generator 修名字。
+
+**Method stages：5 个公开阶段；建议独立方法上下文：4（Pivot+Evergreen 合并）。第三层 task packets：4。**
 
 ## 公开证据边界
 
