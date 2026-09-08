@@ -134,7 +134,7 @@ State Updater → Region Strategy：允许读取 arm-local failure topology / fe
 Region Strategy → Micro Generator：只交冻结 Region Brief，不交 survivor / Red / Yellow / domain / collision 记录
 ```
 
-Generator 不搜索；Observer 不生成；Updater 不直接创造候选。Reality feedback 先进入 Updater 的 arm-local internal state，再由新的 Region Strategy 压缩成不泄露具体 feasibility 结果的 Region Brief。S2/S3/S4 会重复实例化很多次，但第三层只需要 4 份模板。
+Generator 不搜索；Observer 不生成；Updater 不直接创造候选。Reality feedback 先进入 Updater 的 arm-local internal state，再由新的 Region Strategy 压缩成不泄露具体 feasibility 结果的 Region Brief。S1/S2/S3/S4 会重复实例化很多次，但第三层只需要 4 份模板。
 
 ## 4. Benchmark 共用评估层
 
@@ -145,11 +145,40 @@ Generator 不搜索；Observer 不生成；Updater 不直接创造候选。Reali
 2. **E2 Reality Identity / Collision Screener**
    - 公司、产品、项目、软件、人物、商标导向与严重混淆；不知道 arm。
 3. **E3 Quality / Pareto Reviewer**
-   - 只看冻结 Naming Job 与候选本身；原则上不知道 domain / reality 是否已经通过。
+   - 只看冻结 Naming Job 与候选本身；不知道 domain / reality 是否通过。
 4. **E4 Method-fidelity / Experiment Integrity Reviewer**
    - 只判断 Worker 是否按指定方法执行、是否 drift / template collapse / rationale decline；不重新生成名字。
 5. **E5 Owner Exposure / Decision Packet**
    - 最终把少量 quality-qualified、feasible candidates 给 Owner；隐藏 arm 身份与 benchmark 成绩，避免方法标签影响主观判断。
+
+### Shared evaluation fan-out / denominator rule
+
+正式 isolated benchmark 中，**feasibility 与 naming quality 必须从同一冻结的 benchmark-eligible proposal denominator 独立 fan-out**，不能先按现实可行性筛掉一批，再只对 survivor 做 E3 quality review。
+
+```text
+Frozen benchmark-eligible proposals
+          │
+          ├──→ E1 / E2 feasibility branch ──┐
+          │                                  │
+          ├──→ E3 quality branch ────────────┤→ Orchestrator merge → E5
+          │                                  │
+          └──→ E4 integrity / fidelity ──────┘
+```
+
+执行规则：
+
+- E1/E2 与 E3 使用相同的冻结 proposal denominator，分别用 opaque IDs；
+- E3 输入不能按 E1/E2 survivor status 过滤、排序或标注；
+- method-specific shortlist / prescreen / contextual evaluation 仍作为该方法自身的 end-to-end 流程证据保留，但**不能替代**共享 E3 对 benchmark-eligible proposals 的独立质量评价；
+- Orchestrator 分开保存至少两类结果：`generation-quality denominator` 与 `method-final / feasible output denominator`；不得混写；
+- E5 只在 E1/E2 与 E3 都完成后，取 quality-qualified 且具备必要 feasibility 的少量候选，并重新盲化 / 随机化呈现。
+
+这样可以同时回答两类问题：
+
+1. 某方法“生成出来的名字总体质量如何”；
+2. 某方法“走完整方法流程后，能交付多少质量合格且现实可行的名字”。
+
+二者不能用同一个 denominator 偷换。
 
 因此：
 
@@ -162,7 +191,7 @@ Generator 不搜索；Observer 不生成；Updater 不直接创造候选。Reali
 
 当前已建立：
 
-1. `Execution/worker-task-packet-schema-v0.1.zh-CN.md`：统一定义每份 Packet 必须包含 Role / Vision / Input / Allowed Context / Forbidden Context / Output / Stop Condition / Provenance。
+1. `Execution/worker-task-packet-schema-v0.1.zh-CN.md`：统一定义每份 Packet 必须包含 Role / Vision / Input / Allowed Context / Forbidden Context / Output / Stop Condition / Provenance，并规定 blind runtime view / opaque ID 规则。
 2. `Execution/shared-organization-vision-context-v0.1.zh-CN.md`：所有需要知道总体愿景的 Worker 共用的最小 Vision，不包含 benchmark 战略、其他 arm 或筛选结果。
 
 这两份属于执行基础设施，不计入上面的 51 个步骤包。
@@ -176,7 +205,7 @@ method-specific 46 个 Packet 与 Shared Evaluation 5 个 Packet 均已建立；
 - **Task Packet**：可复用的“岗位说明书”。
 - **Worker Session / Chat**：某一次实际执行实例。
 
-例如 G8 只有 4 个 Packet，但如果产生 20 个 micro-cycles，Generator / Observer / Updater 可以被多次实例化；不需要复制 60 份文档。
+例如 G8 只有 4 个 Packet，但如果产生 20 个 micro-cycles，相关 Packet 可以被多次实例化；不需要复制几十份文档。
 
 G5 正好相反：四个 category Generator 虽然只跑一轮，也必须使用四个彼此隔离的 session，因为并行多样性本身就是方法的一部分。
 
