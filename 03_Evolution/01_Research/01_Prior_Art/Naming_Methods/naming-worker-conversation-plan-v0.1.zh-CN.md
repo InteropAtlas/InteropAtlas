@@ -25,7 +25,7 @@ Method defines workflow
 - Generator：默认不知道其他 arm、历史 survivor、collision 统计、leaderboard、下游质量结论。
 - Screener：默认不知道候选来自哪个 arm。
 - Quality Reviewer：默认不看 feasibility / domain 结果，以免“可用”偷换成“质量高”。
-- 只有方法本身要求反馈进入下一轮时才允许结构化回流（G4 / G7 / G8）。
+- 只有方法本身要求反馈进入下一轮时才允许结构化回流（G4 / G7 / G8）；结构化回流不等于把原始 feasibility 记录、完整历史或 survivor 标签直接暴露给 Generator。
 
 ## 2. 九条路线的确定拆分
 
@@ -126,14 +126,15 @@ Feedback 只能经结构化压缩后进入新的 Refinement context。循环复�
 ### G8 — 4 context types
 
 ```text
-Region Strategy
-   ↓
-Micro Generator → Reality Observer → State Updater
-      ↑                              ↓
-      └──────── compressed state ────┘
+Region Strategy ───────────────→ Micro Generator → Reality Observer → State Updater
+     ↑                                                               │
+     └──────── arm-local internal compressed state ───────────────────┘
+
+State Updater → Region Strategy：允许读取 arm-local failure topology / feasibility observations
+Region Strategy → Micro Generator：只交冻结 Region Brief，不交 survivor / Red / Yellow / domain / collision 记录
 ```
 
-Generator 不搜索；Observer 不生成；Updater 不直接创造候选。S2/S3/S4 会重复实例化很多次，但第三层只需要 4 份模板。
+Generator 不搜索；Observer 不生成；Updater 不直接创造候选。Reality feedback 先进入 Updater 的 arm-local internal state，再由新的 Region Strategy 压缩成不泄露具体 feasibility 结果的 Region Brief。S2/S3/S4 会重复实例化很多次，但第三层只需要 4 份模板。
 
 ## 4. Benchmark 共用评估层
 
@@ -157,14 +158,16 @@ Generator 不搜索；Observer 不生成；Updater 不直接创造候选。S2/S3
 
 这不是 51/52 个同时存在的聊天窗口。实际 session 数由循环次数、并行方式和是否复用上下文实例决定。
 
-## 5. 还需要的两个基础设施文档（不属于某个方法步骤）
+## 5. 两个执行基础设施文档（不属于某个方法步骤）
 
-在批量写 51 个 Task Packet 前，先建立：
+当前已建立：
 
-1. `worker-task-packet-schema`：统一定义每份 Packet 必须包含 Role / Vision / Input / Allowed Context / Forbidden Context / Output / Stop Condition / Provenance。
-2. `shared-organization-vision-context`：所有需要知道总体愿景的 Worker 共用的最小 Vision，不包含 benchmark 战略、其他 arm 或筛选结果。
+1. `Execution/worker-task-packet-schema-v0.1.zh-CN.md`：统一定义每份 Packet 必须包含 Role / Vision / Input / Allowed Context / Forbidden Context / Output / Stop Condition / Provenance。
+2. `Execution/shared-organization-vision-context-v0.1.zh-CN.md`：所有需要知道总体愿景的 Worker 共用的最小 Vision，不包含 benchmark 战略、其他 arm 或筛选结果。
 
 这两份属于执行基础设施，不计入上面的 51 个步骤包。
+
+method-specific 46 个 Packet 与 Shared Evaluation 5 个 Packet 均已建立；当前工作已从“第三层建设”进入 **Integration Audit / dry-run validation**。
 
 ## 6. 文档与聊天窗口不是 1:1
 
@@ -179,8 +182,10 @@ G5 正好相反：四个 category Generator 虽然只跑一轮，也必须使用
 
 ## 7. 当前结论
 
-第二层 Method Profile 已完成一次 worker-topology 审计。第三层现在可以开始正式建设，但顺序应为：
+三层执行文档已建立：第一层 Method Map、第二层 9 份 Method Profile、第三层 46 个 method-specific + 5 个 shared evaluation Task Packets（G5 Testing +1 optional），以及两份执行基础设施文档。
 
-`Task Packet Schema → Shared Vision Context → 5 个共用评估包 → G0–G8 method-specific packets`
+当前顺序应为：
 
-这样可以先把所有第三层文档的格式和上下文隔离规则冻结，再批量展开，减少后续返工。
+`Integration Audit → 单路线完整 dry run → 修复真实交接缺口 → freeze packet versions → 正式 isolated benchmark`
+
+不得回退到“一个方法一个长对话框”或“所有方法共享长上下文”的执行方式。历史 #410 结果继续保留为 shared-context benchmark evidence，与后续 isolated-context denominator 分开。
