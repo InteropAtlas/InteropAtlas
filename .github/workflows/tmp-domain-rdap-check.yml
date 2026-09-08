@@ -1,0 +1,24 @@
+name: Temporary ORG RDAP Probe
+on:
+  push:
+    branches:
+      - tmp/domain-rdap-check
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe loomward.org
+        shell: bash
+        run: |
+          set +e
+          echo '=== authoritative PIR RDAP ==='
+          curl -sS -i --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.publicinterestregistry.org/rdap/domain/loomward.org'
+          echo
+          echo '=== rdap.org bootstrap ==='
+          curl -sS -i -L --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.org/domain/loomward.org'
+          echo
+          echo '=== PIR WHOIS web ==='
+          curl -sS -I --max-time 20 'https://whois.pir.org/'
+          echo
+          echo '=== control registered domain ==='
+          curl -sS -i --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.publicinterestregistry.org/rdap/domain/confluence.org' | head -80
