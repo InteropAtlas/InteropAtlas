@@ -34,20 +34,31 @@ Contextual Evaluation / Decision
 6. Preliminary Screening：商标、域名、搜索、社交等现实检查。
 7. Linguistic / Cultural Screening：目标市场语言与文化风险检查。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-可能的独立 Worker：
+建议 **7 个 method-specific isolated worker contexts**：
 
-- Discovery Worker
-- Brief / Parameters Worker
-- Vocabulary / Territory Worker
-- Divergent Generation Worker
-- Shortlist Worker
-- Reality Prescreen Worker
-- Linguistic / Cultural Worker
-- Decision Support Worker
+1. **G2-S1 Discovery + Brief Worker**
+   - Discovery 与 Naming Parameters / Creative Brief 连续完成；二者高度依赖，不为隔离而隔离。
+   - 输出冻结 brief。
+2. **G2-S2 Vocabulary / Territory Worker**
+   - 只基于 brief 扩展 project vocabulary、roots、territories、construction space。
+3. **G2-S3 Divergent Generation Worker**
+   - 只读取冻结 brief + vocabulary/territories；高容量发散。
+   - 禁止读取后续 collision / domain / shortlist 结果。
+4. **G2-S4 Internal Shortlist Worker**
+   - 按 brief / brand potential 收敛，不做现实搜索。
+5. **G2-S5 Reality Prescreen Worker**
+   - trademark / domain / search / social 等现实可行性检查。
+   - 只筛选，不改造候选。
+6. **G2-S6 Linguistic / Cultural Worker**
+   - 按目标市场需要进行独立语言文化检查；可与 S5 并行。
+7. **G2-S7 Contextual Evaluation / Decision-support Worker**
+   - 汇总 shortlist 与筛查结果，做 contextual evaluation。
 
-其中 Generator 原则上不应看到后面的 collision 结果，否则会破坏 Catchword 式“先发散、后收敛”。
+关键隔离是 **S3 Generator 与 S5/S6 Screening**；Catchword 的方法特征要求“先发散、后统一筛”。
+
+**Method stages：8 个公开阶段；建议独立方法上下文：7（Discovery+Brief 合并，Reality/Linguistic 可并行）。第三层 task packets：7。**
 
 ## 公开证据边界
 
