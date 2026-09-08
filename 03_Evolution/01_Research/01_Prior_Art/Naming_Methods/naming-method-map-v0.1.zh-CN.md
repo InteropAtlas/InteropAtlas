@@ -13,7 +13,7 @@
 3. 哪些阶段是串行、并行或循环；
 4. 后续应该把哪些阶段拆成独立 Worker / 对话上下文。
 
-后续第二层为每条路线建立 Method Profile；第三层再按真实步骤建立 Worker Task Packet。
+第二层为每条路线建立 Method Profile；第三层按真实步骤建立 Worker Task Packet。三层当前均已建立，正式执行前仍需通过 Integration Audit / dry run 验证真实交接。
 
 ## 2. 路线分类
 
@@ -34,7 +34,7 @@
 | Benchmark Arm | 来源 | 核心机制 | 注意事项 |
 |---|---|---|---|
 | G0 | IA Internal Baseline | Organization philosophy → semantic space → Familiar-but-New / pronounceability / symbolic compressibility → generation | **不是外部机构方法**；用于 baseline |
-| G8 | IA C1.0 Agent-native synthesis | region-first → collision prior → generate → observe/search → update region → repeat | **搜索反馈属于生成机制本身**，不能强行拆成“先生成 20 个再筛” |
+| G8 | IA C1.0 Agent-native synthesis | region-first → collision prior → generate → observe/search → update region → repeat | **搜索反馈属于生成机制本身**；反馈先进入 arm-local state / Region Strategy，再以冻结 Region Brief 进入新的 Generator，不能把 Observation / survivor 结果直接喂给 Generator |
 
 ## 3. 工作图
 
@@ -68,7 +68,7 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 - Screener 不应知道候选来自哪一种生成方法；
 - Quality Reviewer 原则上不看 feasibility 结果；
 - Owner Exposure Gate 不看 arm 身份；
-- 只有当某种原方法本身要求反馈进入下一轮生成时，才允许把该反馈传回同一路线（典型：G4 / G7 / G8）。
+- 只有当某种原方法本身要求反馈进入下一轮生成时，才允许把该反馈以方法允许的结构化形式传回同一路线（典型：G4 / G7 / G8）；即使如此，也不默认向 Generator 暴露原始 feasibility 记录或完整历史。
 
 ## 5. 证据边界
 
@@ -97,9 +97,9 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 
 九份 Method Profile 已完成第一轮 worker-topology 审计，分别明确 method stages、建议 isolated context 数、并行 / 循环边界和第三层 packet 数。
 
-## 7. 第三层建设基线
+## 7. 第三层执行基线
 
-当前已确定：
+当前已建立：
 
 - method-specific 基础 Task Packets：**46**；
 - benchmark 共用评估 Task Packets：**5**；
@@ -108,7 +108,7 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 
 注意：Task Packet 是可复用岗位模板，不等于实际聊天窗口数量。G4 / G7 / G8 的循环会重复实例化同一个 Packet。
 
-第三层统一规则与公共输入已经建立：
+第三层统一规则与公共输入：
 
 - `Execution/worker-task-packet-schema-v0.1.zh-CN.md`
 - `Execution/shared-organization-vision-context-v0.1.zh-CN.md`
@@ -118,4 +118,6 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 - `Execution/Shared_Evaluation/e4-method-fidelity-integrity-reviewer-v0.1.zh-CN.md`
 - `Execution/Shared_Evaluation/e5-owner-exposure-decision-packet-v0.1.zh-CN.md`
 
-下一步可以正式按 G0 → G8 写 46 个 method-specific Task Packet；在正式 run 前再统一 freeze packet versions。
+method-specific packets 位于 `Task_Packets/`，目录索引见 `Task_Packets/README.zh-CN.md`。
+
+当前下一步不是继续建设新的文档层，而是：**Integration Audit → 单路线完整 dry run → 修正真实交接缺口 → freeze → isolated benchmark。**
