@@ -30,18 +30,29 @@ Testing（按项目需要）
 4. Preference ≠ naming quality：简单投票或多数偏好不应自动决定结果。
 5. Governance：选择过程本身是方法的一部分。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-建议：
+建议 **8 个 method-specific isolated worker contexts**：
 
-- Strategy / Simplicity Worker
-- Category Strategy Worker
-- 多个平行 Generation Worker（按 category）
-- Contextual Evaluation Worker
-- Governance / Decision Worker
-- Optional Testing Worker
+1. **G5-S1 Strategy / Simplicity Worker**
+   - 输出冻结的 naming strategy 与 simplicity intent。
+2. **G5-S2 Category Strategy Worker**
+   - 明确各 category 的边界与任务，不生成具体名字。
+3. **G5-S3A Descriptive Generator**
+4. **G5-S3B Suggestive Generator**
+5. **G5-S3C Coined Generator**
+6. **G5-S3D Edgy / Unconventional Generator**
+   - 四个 Generator 平行、互不可见，只共享 S1/S2 的冻结输入。
+7. **G5-S4 Contextual Evaluation Worker**
+   - 将四路候选放回一致的品牌语境评价；不知道候选来自哪个 category 时优先盲评。
+8. **G5-S5 Governance / Decision Worker**
+   - 综合 evaluation 与必要 testing；明确避免简单多数投票代替判断。
 
-如果所有 category 都交给同一个长上下文 Generator，很容易再次收敛成相似词根，因此这一方法尤其适合并行隔离。
+Optional Testing 可以作为 S5 的外部输入，也可以在需要严谨测试时另开独立 Tester；但它不是所有项目必需，因此不计入基础上下文数。
+
+这里最重要的实验设计是：**四种 naming category 必须真正分成四个干净生成上下文**。过去把它们塞给同一个 Generator，会把“多类别探索”污染成一个混合风格。
+
+**Method stages：5 个主阶段，其中 generation 含 4 个平行分支。建议独立方法上下文：8（基础）；可选 testing +1。第三层 task packets：8 个基础包 + 1 个 optional testing 包。**
 
 ## 公开证据边界
 
