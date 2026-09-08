@@ -38,6 +38,23 @@ Generate candidates
 
 Generator 不应看到 collision statistics 或其他 arm 输出。
 
+## 推荐隔离执行拓扑
+
+方法步骤按 2 个执行阶段处理，建议 **2 个 method-specific isolated worker contexts**：
+
+1. **G0-S1 Vision / Semantic-space Worker**
+   - 输入：组织愿景、使命、命名对象边界。
+   - 输出：冻结的 semantic space 与基本生成原则。
+   - 不看：历史候选、其他 arm、筛选结果。
+2. **G0-S2 Baseline Generator**
+   - 输入：S1 的冻结输出。
+   - 输出：rationale-bearing candidates。
+   - 不看：collision / domain / quality / Owner 结果。
+
+后续 Reality / Domain / Quality / Owner 等属于 benchmark 共用的下游评估层，不算 G0 方法自身步骤，也不应把这些信息反馈给 Generator。
+
+**Method steps：2。建议独立方法上下文：2。第三层 task packets：2。**
+
 ## 证据边界
 
 这是 IA 自有方法，因此不存在“外部公开证据不足”的问题；但必须区分历史 Owner 偏好与正式方法规则。Owner 曾喜欢某些候选，只能作为偏好信号，不能变成构词模板。
