@@ -49,7 +49,7 @@ Selection 依据：
 完成方法内 funnel / shortlist 后停止。
 
 ## Handoff
-shortlist 交给 E4 Method-fidelity Reviewer，随后由 Orchestrator送入共用 feasibility / quality 层；必要 contextual implementation 交给 G1-S5。
+method-internal shortlist **必须先交给 G1-S5 Implementation / Decision-support Worker**，完成 G1 方法内的 contextual implementation 阶段。不得从 S4 直接跳到 E4 或共用 feasibility / quality 层。
 
 ## Blindness
 - blind_to_other_arms: true
