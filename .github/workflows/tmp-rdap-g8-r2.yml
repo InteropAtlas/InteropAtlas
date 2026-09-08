@@ -12,6 +12,8 @@ jobs:
         shell: bash
         run: |
           endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
-          n=morrowhinge
-          code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
-          echo "$n.org $code"
+          names=(owncurrent mosaiccurrent)
+          for n in "${names[@]}"; do
+            code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+            echo "$n.org $code"
+          done
