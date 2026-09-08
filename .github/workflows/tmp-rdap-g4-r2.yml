@@ -1,0 +1,20 @@
+name: tmp-rdap-g4-r2
+on:
+  push:
+    branches: [tmp-rdap-g4-r2]
+permissions:
+  contents: read
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query PIR RDAP
+        shell: bash
+        run: |
+          set -u
+          endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
+          names=(middenglass varefold commonmere orivane elsecurrent nearform veralen turningmere alluvane sharedrift perspectide commonvane midora manyshore relivum elsevane variafold orimere turnvane commonside)
+          for n in "${names[@]}"; do
+            code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+            echo "$n.org $code"
+          done
