@@ -24,7 +24,7 @@ Arm-local State Updater / Orchestrator。
 当前 micro-cycle 的结构化结果。
 
 ## 输出
-更新后的 compressed state，至少包含：
+更新后的 **arm-local internal compressed state**，至少包含：
 - explored region summary；
 - observed failure topology；
 - survivor / failure pattern，但不得压缩成“安全后缀模板”；
@@ -34,19 +34,22 @@ Arm-local State Updater / Orchestrator。
 - cumulative operation count / search count；
 - 是否触发 stop condition。
 
+该 internal state **只交给新的 G8 Task 01 Region Strategy 或后续 State Updater 实例，不得直接交给 Micro Generator**。
+
+若继续生成，真正交给 Generator 的唯一策略性反馈载体是由 Task 01 根据 internal state 重新生成并冻结的 `Region Brief`。Region Brief 只能表达下一段探索空间、construction boundaries 与 region-level guidance，不得携带具体 survivor / Red / Yellow、domain / registry 状态、collision identities、失败候选清单或“安全词根 / 后缀”结论。
+
 ## 规则
 - failure topology 只能影响 G8 自身后续，不外泄到其他 arm；
 - 不把 domain 404 等单一信号当作 overall quality；
 - 不直接生成名称；
-- 每轮只向下一个 Generator 传递压缩后的必要状态，不传完整历史；
+- 不把 Reality Observation Record 或 internal compressed state 直接交给 Generator；
 - 达到目标候选数量或 stop condition 后结束 micro-cycle loop，并进入共用 feasibility / quality / Owner gates。
 
 ## 完成条件
 状态已持久化，并明确下一步：
-- 回到 Task 02 继续当前/更新 region；
-- 回到 Task 01 重新选 region；
+- Continue → 交给新实例 G8 Task 01，由其冻结下一份 Region Brief，再进入 Task 02；
 - 或结束 G8 generation phase。
 
 ## 交接
-- Continue → 新实例 G8 Task 02 或 Task 01；
+- Continue → 新实例 G8 Task 01 Region Strategy；
 - Stop → 共用 E1/E2 feasibility、E3 Quality、E4 Integrity、E5 Owner Exposure。
