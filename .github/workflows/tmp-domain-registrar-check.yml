@@ -1,0 +1,25 @@
+name: Temporary Registrar Probe
+on:
+  push:
+    branches:
+      - tmp/domain-registrar-check
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe loomward.org registrar surfaces
+        shell: bash
+        run: |
+          set +e
+          for url in \
+            'https://www.namecheap.com/domains/registration/results/?domain=loomward.org' \
+            'https://www.godaddy.com/domainsearch/find?checkAvail=1&domainToCheck=loomward.org' \
+            'https://www.dynadot.com/domain/search?domain=loomward.org' ; do
+            echo "=== $url ==="
+            tmp=$(mktemp)
+            curl -sS -L --max-time 30 -A 'Mozilla/5.0' "$url" -o "$tmp"
+            wc -c "$tmp"
+            grep -io -E '.{0,120}(loomward\.org|available|unavailable|taken|register now|add to cart).{0,160}' "$tmp" | head -50
+            rm -f "$tmp"
+            echo
+          done
