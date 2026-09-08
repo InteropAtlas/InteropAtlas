@@ -1,0 +1,20 @@
+name: tmp-rdap-g6-r3b
+on:
+  push:
+    branches: [tmp-rdap-g6-r3b]
+permissions:
+  contents: read
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query PIR RDAP
+        shell: bash
+        run: |
+          set -u
+          endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
+          names=(everrelay carryground longweave passagehold commonlineage sourcecarry everpassage sharedcontinuum carrylineage throughfield longrelay inheritanceworks sourcecontinuum commonpassage everinherit carrysource longcommons throughlineage passageworks continuancefield)
+          for n in "${names[@]}"; do
+            code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+            echo "$n.org $code"
+          done
