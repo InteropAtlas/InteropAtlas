@@ -31,19 +31,29 @@ Final / ROI / implementation
 4. Feedback / Testing：显式吸收 stakeholder learning。
 5. Fine Tune：反馈会真正进入下一轮 refinement。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-建议：
+建议 **7 个 method-specific isolated worker contexts**：
 
-- Discover / Strategy Worker
-- Lightning Generation Worker
-- Prescreen Worker
-- Pitch / Context Worker
-- Feedback / Test Worker
-- Refinement Worker
-- Final Decision Worker
+1. **G7-S1 Discover / Strategy Worker**
+   - 输出冻结 strategy brief。
+2. **G7-S2 Lightning Generation Worker**
+   - 快速发散生成；只读取 S1。
+3. **G7-S3 Prescreen Worker**
+   - 基础现实筛查；不参与改名。
+4. **G7-S4 Pitch / Context Worker**
+   - 为通过基础筛查的候选形成 rationale / tagline / positioning support。
+5. **G7-S5 Feedback / Test Worker**
+   - 收集结构化 stakeholder feedback / test evidence，不直接生成替代名字。
+6. **G7-S6 Refinement Worker**
+   - 只接收冻结 strategy + 经 Orchestrator 压缩后的结构化 feedback，执行 fine tune / refinement。
+   - 不读取其他 arm，也不读取 benchmark 排名。
+7. **G7-S7 Final / Decision-support Worker**
+   - 对 refined set 做最终 contextual decision support。
 
-这一路线允许受控的信息回流：Feedback Worker 的输出可以进入 Refinement Worker；但不能把其他 arm 的结果回流进来。
+发生第二轮 refinement 时，优先启动新的 S6 context，并复用同一 task packet；不要在原对话中无限积累历史。这样既保留 NameStormers 的反馈回路，又控制上下文污染。
+
+**Method stages：7 个公开阶段；建议独立方法上下文：7 / 基础 cycle。第三层 task packets：7，循环阶段复用 S5/S6 包。**
 
 ## 公开证据边界
 
