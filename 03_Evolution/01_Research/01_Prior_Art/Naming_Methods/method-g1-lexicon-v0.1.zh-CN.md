@@ -30,17 +30,27 @@ Placek 后期公开表达可概括为 `Identify → Invent → Implement`。
 3. Linguistic Engineering：sound symbolism、letter structure、processing fluency 等参与生成与判断。
 4. Funnel：创意与语言工程结果汇流，再进入选择。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-至少存在天然的并行可能：
+建议把公开流程转成 **5 个 method-specific isolated worker contexts**，其中第 2、3 个并行：
 
-- Strategy / Creative Framework Worker
-- Creative Generation Worker
-- Linguistic Engineering Worker
-- Funnel / Selection Worker
-- Implementation Worker
+1. **G1-S1 Strategy / Creative Framework Worker**
+   - 连续完成 Diamond Questions → Creative Framework；这两步属于同一战略建模上下文，不强拆。
+   - 输出：冻结 Creative Framework。
+2. **G1-S2 Creative Generation Worker**
+   - 只读取 Creative Framework，负责 invention / candidate generation。
+   - 不读取语言工程判断、筛选结果或其他 arm。
+3. **G1-S3 Linguistic Engineering Worker**（与 S2 并行）
+   - 读取同一 Creative Framework；从 sound symbolism、letter structure、processing fluency 等角度形成语言工程建议/评价。
+   - 不读取 S2 的实时思考过程；可以在汇流阶段接收候选。
+4. **G1-S4 Funnel / Selection Worker**
+   - 接收 Creative candidates + Linguistic Engineering 输出，进行汇流与选择。
+5. **G1-S5 Implementation / Decision-support Worker**
+   - 对入选名称做 contextual implementation 支撑；不反向修改前面的生成规则。
 
-其中 Creative Generation 与 Linguistic Engineering 不宜默认放在同一对话上下文，否则会把原有并行机制压扁。
+这里最重要的是 **S2 与 S3 不能合并成一个长上下文**，否则 Lexicon 最有辨识度的 creative / linguistic 双轨结构会被压平。
+
+**Method stages：5（其中 Strategy 内含 Diamond→Framework，Creative/Linguistic 并行）。建议独立方法上下文：5。第三层 task packets：5。**
 
 ## 公开证据边界
 
