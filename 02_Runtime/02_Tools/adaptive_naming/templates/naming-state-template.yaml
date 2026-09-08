@@ -1,0 +1,169 @@
+schema_version: "0.1"
+
+job:
+  id: null
+  target_type: null
+  target_description: null
+  long_term_scope: null
+  audience: []
+  contexts: []
+  languages: []
+  success_definition: []
+  hard_constraints: []
+  avoid: []
+  required_reality_checks: []
+
+brief:
+  semantic_core: []
+  desired_character: []
+  communication_targets: []
+  abstraction_preference: null
+  architecture_requirements: []
+  pronunciation_requirements: []
+  spelling_requirements: []
+
+owner_preference:
+  stage_weight: low
+  stable_signals: []
+  provisional_signals: []
+  observations: []
+
+quality_dimensions:
+  active:
+    - distinctiveness
+    - pronounceability
+    - spelling_burden
+    - memorability
+    - semantic_fit
+    - semantic_room
+    - target_scale_fit
+    - longevity
+    - symbolic_compression
+    - cross_context_use
+    - architecture_extensibility
+  optional: []
+  notes: []
+
+map:
+  initial_landscape_summary: null
+  regions: []
+  # Example region object:
+  # - id: region-001
+  #   label: null
+  #   semantic_basis: []
+  #   construction_families: []
+  #   prior_crowding: unknown
+  #   observed_crowding: unknown
+  #   quality_potential: unknown
+  #   evidence: []
+  #   status: unexplored | exploring | promising | crowded | low-yield | paused
+  #   notes: []
+
+construction_strategies:
+  tried: []
+  # Example:
+  # - id: doubled_letters
+  #   region_ids: []
+  #   attempts: 0
+  #   quality_signal: unknown
+  #   feasibility_signal: unknown
+  #   recurring_risks: []
+  #   notes: []
+  new_discoveries: []
+
+candidates: []
+# Candidate example:
+# - id: N001
+#   name: null
+#   active: true
+#   region_id: null
+#   construction_strategy: null
+#   generation_rationale: null
+#   quality:
+#     distinctiveness: null
+#     pronounceability: null
+#     spelling_burden: null
+#     memorability: null
+#     semantic_fit: null
+#     semantic_room: null
+#     target_scale_fit: null
+#     longevity: null
+#     symbolic_compression: null
+#     cross_context_use: null
+#     architecture_extensibility: null
+#     optional: {}
+#     rationale: []
+#   pareto:
+#     dominated: false
+#     dominated_by: []
+#     dimensions: []
+#   reality:
+#     collision:
+#       observation: unverified
+#       confidence: null
+#       evidence: []
+#     domains: []
+#     trademark_oriented_risk:
+#       observation: unverified
+#       evidence: []
+#     namespaces: []
+#   owner_signal:
+#     observation: unseen | pull | neutral | repel
+#     confidence: null
+#     notes: []
+#   diagnosis: []
+#   retirement:
+#     retired: false
+#     reason: null
+#     learning_preserved: true
+
+observations: []
+# - id: O001
+#   timestamp: null
+#   scope: candidate | batch | region | strategy | owner | reality
+#   subject_ids: []
+#   observation: null
+#   evidence: []
+
+诊断: []
+# - id: D001
+#   triggered_by: []
+#   level: candidate | batch | region | strategy
+#   diagnosis_type: null
+#   statement: null
+#   confidence: low | medium | high
+#   counterevidence: []
+#   proposed_state_change: null
+
+experience_candidates: []
+# Only for potentially cross-task lessons; do not auto-promote to Skill.
+# - id: E001
+#   observation: null
+#   scope: task_local | potentially_general
+#   supporting_evidence: []
+#   supporting_jobs: []
+#   counterexamples: []
+#   confidence: low | medium | high
+#   possible_generalization: null
+#   proposed_change: null
+
+current_state:
+  strongest_candidates: []
+  pareto_front: []
+  current_region_ids: []
+  biggest_unknown: null
+  blockers: []
+  information_gain: unknown
+
+next_action:
+  action: null
+  target: null
+  rationale: null
+  triggered_by: []
+  expected_information_gain: null
+
+stop:
+  status: continue
+  # continue | finalist_ready | owner_decision | blocked | budget_stop
+  reason: null
+  unresolved: []
