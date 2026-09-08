@@ -1,0 +1,20 @@
+name: tmp-rdap-g1-r3
+on:
+  push:
+    branches: [tmp-rdap-g1-r3]
+permissions:
+  contents: read
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query PIR RDAP
+        shell: bash
+        run: |
+          set -u
+          endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
+          names=(virel orenda parilo nuvio sorel veyra reloa elyon avelo miren oriel verio rilan caelo neria tesora varen ovida liora auren)
+          for n in "${names[@]}"; do
+            code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+            echo "$n.org $code"
+          done
