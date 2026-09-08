@@ -32,19 +32,28 @@ Exploit or move
 5. Failure-topology feedback：失败不是只淘汰单个名字，而是更新对该区域的认识。
 6. Exploration / Exploitation：在继续深挖与换区之间做受控选择。
 
-## 对 Worker 拆分的直接含义
+## 推荐隔离执行拓扑
 
-G8 不能被简单拆成“Generator → 20 个名字 → Screener”。搜索反馈本身就是 generation mechanism。
+G8 不能被拆成普通 `Generator → 20 names → Screener`。建议 **4 个长期角色 / isolated context types**，按 micro-cycle 重复使用：
 
-合理结构更像：
+1. **G8-S1 Region Strategy Worker**
+   - 输入：组织愿景、当前 arm 的允许状态摘要。
+   - 输出：当前 naming region + collision prior assumptions。
+2. **G8-S2 Micro-cycle Generator**
+   - 每次只接收当前 region state 和必要生成约束，产出 1–3 个 formal proposals。
+   - 不直接搜索现实身份。
+3. **G8-S3 Reality Observer**
+   - 对刚提出的 formal proposals 做 multi-surface search / domain observation；只报告证据与置信度。
+   - 不生成替代名。
+4. **G8-S4 State Updater / Local Orchestrator**
+   - 读取 proposal + observation，更新 failure topology、region state、explore/exploit 决策。
+   - 给下一次 S2 只传递压缩后的局部状态，而不是完整历史。
 
-- Region Strategy Worker
-- Micro-cycle Generator
-- Reality Observer
-- State Updater / Orchestrator
-- 然后重复 Generator ↔ Observer ↔ Updater
+循环为：`S1（首次/换区时） → S2 → S3 → S4 → S2 ↔ S3 ↔ S4 ...`。如果 S4 决定换区，再回到新的 S1 context。
 
-为了隔离上下文，Generator 可以只收到当前 region state，而不必知道完整 benchmark；Observer 只负责现实搜索；Updater 掌握该 arm 的局部历史。
+这 4 个角色必须相互区分：Generator 不做搜索，Observer 不生成，Updater 不直接创造名字。这样才能避免一个长上下文同时承担“想名字、找证据、学会规避”后发生安全词根坍缩。
+
+**Method stages：6 个逻辑阶段；建议独立 context types：4。第三层 task packets：4；运行时会多次实例化 S2/S3/S4，而不是新增文档。**
 
 ## 证据边界
 
