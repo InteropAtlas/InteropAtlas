@@ -17,8 +17,14 @@ jobs:
           echo '=== rdap.org bootstrap ==='
           curl -sS -i -L --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.org/domain/loomward.org'
           echo
-          echo '=== PIR WHOIS web ==='
-          curl -sS -I --max-time 20 'https://whois.pir.org/'
+          echo '=== Namecheap search ==='
+          curl -sS -L --max-time 30 -A 'Mozilla/5.0' 'https://www.namecheap.com/domains/registration/results/?domain=loomward.org' | grep -io -E '.{0,100}(loomward\.org|available|unavailable|taken|register).{0,120}' | head -30
+          echo
+          echo '=== GoDaddy search ==='
+          curl -sS -L --max-time 30 -A 'Mozilla/5.0' 'https://www.godaddy.com/domainsearch/find?checkAvail=1&domainToCheck=loomward.org' | grep -io -E '.{0,100}(loomward\.org|available|unavailable|taken|register).{0,120}' | head -30
+          echo
+          echo '=== Dynadot search ==='
+          curl -sS -L --max-time 30 -A 'Mozilla/5.0' 'https://www.dynadot.com/domain/search?domain=loomward.org' | grep -io -E '.{0,100}(loomward\.org|available|unavailable|taken|register).{0,120}' | head -30
           echo
           echo '=== control registered domain ==='
-          curl -sS -i --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.publicinterestregistry.org/rdap/domain/confluence.org' | head -80
+          curl -sS -i --max-time 20 -H 'Accept: application/rdap+json' 'https://rdap.publicinterestregistry.org/rdap/domain/confluence.org' | head -60
