@@ -21,7 +21,7 @@
 
 ## Forbidden Context
 - 其他 arm 名称或成绩
-- reality / domain 结果，除非 Orchestrator 在正式决策阶段明确作为事实注入
+- reality / domain / trademark / collision 结果
 - Owner 历史偏好
 - leaderboard
 
@@ -48,9 +48,10 @@
 形成一致格式的 contextual implementation material 后停止。
 
 ## Handoff
-交给 Orchestrator；若候选随后进入共用 quality / Owner layer，arm identity 应在盲评阶段被隐藏。
+完整的 G1 method-stage artifact 交给 E4 Method-fidelity / Experiment Integrity Reviewer；通过方法完整性检查后，再由 Orchestrator送入共用 E1/E2 feasibility 与 E3 quality 层。Owner Exposure 仍由共用 E5 负责，且 arm identity 必须隐藏。
 
 ## Blindness
 - blind_to_other_arms: true
+- blind_to_feasibility: true
 - blind_to_leaderboard: true
 - blind_to_owner_preference: true
