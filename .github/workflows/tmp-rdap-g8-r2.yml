@@ -1,0 +1,17 @@
+name: tmp-rdap-g8-r2
+on:
+  push:
+    branches: [tmp-rdap-g8-r2]
+permissions:
+  contents: read
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query PIR RDAP
+        shell: bash
+        run: |
+          endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
+          n=morrowhinge
+          code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+          echo "$n.org $code"
