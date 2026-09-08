@@ -14,7 +14,7 @@
 对输入候选执行统一的 registry / domain hard-gate observation，并返回机器可复核结果。
 
 ## Required Inputs
-- candidate IDs
+- run-local opaque candidate IDs（不得带 G0–G8 / method / category 前缀）
 - exact display names
 - normalization rule
 - target TLD / registry
@@ -24,7 +24,8 @@
 仅允许当前候选及技术查询规则。
 
 ## Forbidden Context
-- arm / method identity
+- canonical candidate IDs / arm / method identity
+- packet/file path 或任何可推断 arm 的 provenance
 - rationale
 - Owner preference
 - quality score
@@ -36,13 +37,15 @@
 
 ## Output Contract
 每个候选输出：
-- candidate_id
+- opaque_candidate_id
 - normalized_name
 - registry / tld
 - observation
 - raw status code / machine signal
 - observed_at
 - confidence / caveat
+
+opaque ID 与 canonical ID 的映射只由 Orchestrator在 Session 外维护。
 
 ## Stop Condition
 完成全部输入候选查询并记录结果后停止。不得进入现实身份搜索、商标判断、质量评价或重新生成。
@@ -54,3 +57,5 @@
 - blind_to_arm: true
 - blind_to_owner_preference: true
 - blind_to_quality: true
+
+实际 Session 必须使用 Schema 的 Blind runtime instantiation rule；不能把 canonical Packet header、文件路径或 arm-coded candidate IDs 原样传给本 Worker。
