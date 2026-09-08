@@ -12,7 +12,7 @@ jobs:
         shell: bash
         run: |
           endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
-          names=(owncurrent mosaiccurrent)
+          names=(plurane limenmorrow)
           for n in "${names[@]}"; do
             code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
             echo "$n.org $code"
