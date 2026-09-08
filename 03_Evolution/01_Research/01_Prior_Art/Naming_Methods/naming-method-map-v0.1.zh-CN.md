@@ -36,7 +36,7 @@
 | G0 | IA Internal Baseline | Organization philosophy → semantic space → Familiar-but-New / pronounceability / symbolic compressibility → generation | **不是外部机构方法**；用于 baseline |
 | G8 | IA C1.0 Agent-native synthesis | region-first → collision prior → generate → observe/search → update region → repeat | **搜索反馈属于生成机制本身**，不能强行拆成“先生成 20 个再筛” |
 
-## 3. 第一版工作图
+## 3. 工作图
 
 ```text
 Orchestrator
@@ -56,6 +56,8 @@ Orchestrator
 
 Method defines workflow → Workflow defines roles → Roles define contexts → Contexts define chat / Agent sessions.
 
+详细拆分见：`naming-worker-conversation-plan-v0.1.zh-CN.md`。
+
 ## 4. Context Isolation 原则
 
 后续正式隔离实验采用最小知情原则：
@@ -66,7 +68,7 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 - Screener 不应知道候选来自哪一种生成方法；
 - Quality Reviewer 原则上不看 feasibility 结果；
 - Owner Exposure Gate 不看 arm 身份；
-- 只有当某种原方法本身要求反馈进入下一轮生成时，才允许把该反馈传回同一路线（典型：G7 / G8）。
+- 只有当某种原方法本身要求反馈进入下一轮生成时，才允许把该反馈传回同一路线（典型：G4 / G7 / G8）。
 
 ## 5. 证据边界
 
@@ -79,9 +81,9 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 - **Benchmark adaptation**：为 IA benchmark 做的执行化改造；
 - **Unknown / proprietary**：公开资料不足，不猜。
 
-## 6. 当前第二层文档
+## 6. 第二层文档
 
-本目录将分别维护：
+本目录维护：
 
 - `method-g0-ia-baseline-v0.1.zh-CN.md`
 - `method-g1-lexicon-v0.1.zh-CN.md`
@@ -93,8 +95,27 @@ Method defines workflow → Workflow defines roles → Roles define contexts →
 - `method-g7-namestormers-v0.1.zh-CN.md`
 - `method-g8-c1-agent-native-v0.1.zh-CN.md`
 
-## 7. 第三层暂不批量展开
+九份 Method Profile 已完成第一轮 worker-topology 审计，分别明确 method stages、建议 isolated context 数、并行 / 循环边界和第三层 packet 数。
 
-第三层 Task Packet 必须建立在第二层流程确认以后。现在先不机械创建几十份步骤文件，避免在方法结构尚未确认时把错误流程固化。
+## 7. 第三层建设基线
 
-下一步：逐个 Method Profile 确认“真实步骤 → 可拆 Worker → 必需上下文 → 禁止上下文 → 输出”。
+当前已确定：
+
+- method-specific 基础 Task Packets：**46**；
+- benchmark 共用评估 Task Packets：**5**；
+- 基础第三层合计：**51**；
+- G5 独立 Testing Worker：**+1 optional**。
+
+注意：Task Packet 是可复用岗位模板，不等于实际聊天窗口数量。G4 / G7 / G8 的循环会重复实例化同一个 Packet。
+
+第三层统一规则与公共输入已经建立：
+
+- `Execution/worker-task-packet-schema-v0.1.zh-CN.md`
+- `Execution/shared-organization-vision-context-v0.1.zh-CN.md`
+- `Execution/Shared_Evaluation/e1-domain-registry-screener-v0.1.zh-CN.md`
+- `Execution/Shared_Evaluation/e2-reality-collision-screener-v0.1.zh-CN.md`
+- `Execution/Shared_Evaluation/e3-quality-pareto-reviewer-v0.1.zh-CN.md`
+- `Execution/Shared_Evaluation/e4-method-fidelity-integrity-reviewer-v0.1.zh-CN.md`
+- `Execution/Shared_Evaluation/e5-owner-exposure-decision-packet-v0.1.zh-CN.md`
+
+下一步可以正式按 G0 → G8 写 46 个 method-specific Task Packet；在正式 run 前再统一 freeze packet versions。
