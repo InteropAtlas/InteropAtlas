@@ -1,0 +1,20 @@
+name: tmp-rdap-g2-r3
+on:
+  push:
+    branches: [tmp-rdap-g2-r3]
+permissions:
+  contents: read
+jobs:
+  rdap:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query PIR RDAP
+        shell: bash
+        run: |
+          set -u
+          endpoint="https://rdap.publicinterestregistry.org/rdap/domain"
+          names=(gatherbank otherthread relayharbor freshfield roundmorrow porchglass viewcurrent recastbank seedmorrow memoryfield elseharbor morrowbank lanternseed perspath waysource secondcurrent commonstide unfoldway manysource worldseed)
+          for n in "${names[@]}"; do
+            code=$(curl -sS -o /tmp/rdap.json -w '%{http_code}' "$endpoint/$n.org" || true)
+            echo "$n.org $code"
+          done
