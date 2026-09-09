@@ -1,17 +1,17 @@
-# InteropAtlas 项目定义与范围 v0.2（Definition & Scope）
+# InteropAtlas 项目定义与范围 v0.3（Definition & Scope）
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: Project Definition / Provisional（项目定义 / 暂定）
 Document Created At: 2026-09-01T11:14:04+08:00
-Document Updated At: 2026-09-04T22:30:00+08:00
+Document Updated At: 2026-09-09T10:34:00+08:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
-  Initiator: Human — ff6962757
+  Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Reviewer: Human Owner — ff6962757
   GitHub Actor: ff6962757
 -->
 
@@ -34,6 +34,29 @@ InteropAtlas 不再被定义为一个只收录正式标准的“标准目录”�
 > **InteropAtlas is an open, machine-readable and continuously analyzable knowledge map of interoperability, connecting normative standards, mature precedents, methods and guidelines, implementations, organizations, capabilities, scenarios, relations, evidence and open gaps.**
 
 互操作性仍然是项目的问题边界；收录对象范围扩大，不等于领域边界无限失控。
+
+### 1.1 互操作工作模型：互通、对齐、协同
+
+InteropAtlas 当前采用三个**并列、非互斥**的问题维度来理解和组织跨领域的互操作问题：
+
+- **互通（Exchange）——连得上。** 两个或以上彼此独立的系统或主体，能否建立可用的交互通路，并成功交换信号、数据、请求、能力、资源或控制。这个维度通常包含物理、技术和句法层面的部分问题，但不与任何一个既有 interoperability layer 一一等同。
+- **对齐（Alignment）——对得上。** 交换发生后，双方能否对结构、语义、身份、能力、状态、单位与上下文形成足够一致的解释，使同一信息、能力或状态在边界两侧保持可对应。
+- **协同（Coordination）——办得成。** 多个具有各自目标、状态、权限和约束的主体，能否在规则、流程、承诺与责任边界下组织彼此行动，使跨主体、跨系统或跨组织过程能够可靠完成。
+
+这三个维度**不是严格顺序、成熟度等级或协议栈**。一个标准、协议、方法、实现或治理机制可以同时解决其中多个维度。它们更适合作为 IA 的问题定位框架：
+
+- **互通**主要处理交换边界（exchange boundary）；
+- **对齐**主要处理意义边界（meaning boundary）；
+- **协同**主要处理行动边界（action boundary）。
+
+这不是对既有 interoperability taxonomy 的替代。European Interoperability Framework / Interoperable Europe Act 明确把互操作问题区分为 legal、organisational、semantic、technical 等层面；LCIM（Levels of Conceptual Interoperability Model）则进一步区分 technical、syntactic、semantic、pragmatic / dynamic、conceptual 等层面。[^eif][^lcim]
+
+IA 的工作模型是在这些既有研究之上做的问题导向综合：**Exchange** 大致吸收 technical / syntactic 一类“能否有效交换”的问题；**Alignment** 主要对应 semantic 一类“意义是否保持一致”的问题；**Coordination** 则覆盖 pragmatic、organisational、legal、governance 等“主体如何共同完成行动”的问题。这里的映射只是帮助理解，不宣称一一等价。
+
+因此，IA 对“互操作”的最简用户层表达是：
+
+> **互通 · 对齐 · 协同**  
+> **连得上 · 对得上 · 办得成**
 
 ## 2. 为什么不再只收“标准”
 
@@ -256,9 +279,11 @@ InteropAtlas **不得（MUST NOT）**把成熟先例描述成正式标准，也*
 
 范围扩大后仍必须保持明确的问题边界（Problem Boundary）。
 
+一个对象与 IA 核心问题边界的关系，原则上应能落到**互通（Exchange）、对齐（Alignment）、协同（Coordination）**中的至少一个维度；与多个维度相关也完全正常。
+
 一个对象进入 InteropAtlas **至少应该（SHOULD）**满足以下之一：
 
-1. 直接定义两个或以上实体如何交换信息、能力、控制、身份、资源、语义或行为；
+1. 直接定义、约束或帮助实现两个或以上实体之间的互通、对齐或协同，包括信息、能力、控制、身份、资源、语义或行为的交换与组织；
 2. 为这种互操作提供实现；
 3. 为互操作系统的设计、治理、验证、发现、选择、组合或维护提供成熟方法；
 4. 是具有可复用价值的成熟互操作案例 / 先例；
@@ -313,6 +338,10 @@ InteropAtlas 的长期目标仍包括增加开放替代方案，并减少“没�
 
 > **开放、机器可读、可持续分析的互操作知识地图。**
 
+推荐互操作问题描述：
+
+> **互通 · 对齐 · 协同——连得上 · 对得上 · 办得成。**
+
 推荐扩展定义：
 
 > **InteropAtlas 连接既有标准、成熟先例、方法、实现与开放缺口，帮助人和机器理解、比较、组合和改进互操作方案。**
@@ -336,3 +365,6 @@ InteropAtlas 的长期目标仍包括增加开放替代方案，并减少“没�
 - 可以收得更广；
 - 但必须标得更准；
 - 不能因为“都值得参考”就消除标准、方法、先例、实现（Standard / Method / Precedent / Implementation）之间的语义边界。
+
+[^eif]: European Union, [Interoperable Europe Act, Regulation (EU) 2024/903](https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation). Article 2 defines cross-border interoperability through legal, organisational, semantic and technical requirements; Article 6 requires the EIF to provide a model and recommendations across those dimensions and governance.
+[^lcim]: Andreas Tolk, Saikou Y. Diallo & Charles D. Turnitsa, [“Applying the Levels of Conceptual Interoperability Model in Support of Integratability, Interoperability, and Composability for System-of-Systems Engineering”](https://digitalcommons.odu.edu/msve_fac_pubs/27/), 2007. The paper describes LCIM's technical, syntactic, semantic, pragmatic, dynamic and conceptual layers; LCIM originated with Tolk & Muguira in 2003.
