@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
-Document Updated At: 2026-09-05T14:25:00+08:00
+Document Updated At: 2026-09-09T10:34:00+08:00
 Translation Source: README.md
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -12,7 +12,7 @@ Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Reviewer: Human Owner — ff6962757
   GitHub Actor: ff6962757
 -->
 
@@ -23,6 +23,18 @@ Devices, software, services, organizations, and Agents constantly need to exchan
 **InteropAtlas connects this knowledge and progressively maps the complete Interoperability Solution Space.**
 
 If you are here simply to find knowledge, you do not need to understand how the repository itself is built. Think of it as a growing atlas of interoperability knowledge.
+
+## What does “interoperability” mean here?
+
+InteropAtlas currently uses three **parallel, non-exclusive** problem dimensions to reason about interoperability:
+
+- **Exchange**: can independent systems or actors establish a usable interaction path and exchange information, requests, capabilities, or control? — **Can it get across?**
+- **Alignment**: can the parties maintain sufficiently consistent interpretations of structure, meaning, identity, capabilities, state, and context? — **Does it line up?**
+- **Coordination**: can the parties organize action under goals, permissions, rules, processes, and responsibilities to complete a cross-boundary task? — **Can they get the job done?**
+
+This is not a new international-standard taxonomy, nor a strict sequence or protocol stack. It is IA's working model for organizing interoperability problems across domains, informed by prior work on technical / syntactic / semantic / organisational / legal / pragmatic interoperability.[^interop-model] See [`Definition & Scope`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.md) for the stricter definition, boundaries, and mapping.
+
+[^interop-model]: Primary references: [Interoperable Europe Act / European Interoperability Framework](https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation); Tolk, Diallo & Turnitsa, [*Applying the Levels of Conceptual Interoperability Model…*](https://digitalcommons.odu.edu/msve_fac_pubs/27/) (2007; LCIM originated with Tolk & Muguira in 2003). IA's Exchange / Alignment / Coordination model is a problem-oriented synthesis of these prior frameworks and does not claim one-to-one equivalence with their categories.
 
 ## What knowledge is here?
 
