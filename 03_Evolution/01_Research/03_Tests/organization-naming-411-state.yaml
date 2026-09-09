@@ -5,121 +5,86 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 26
+  snapshot_version: 27
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
   preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
   latest_archives:
-  - {snapshot: 24, commit: 0f93b427660162a1326638abda73736f00ad824a, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v24.yaml}
-  - {snapshot: 25, commit: efadb8da83592720aab1c43ef3968329e3c3766a, blob_sha: b9aff88c58f7041e9971c8a45a310063328199cf, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v25.yaml, note: pointer; canonical full snapshot preserved in Git history}
+  - {snapshot: 25, commit: efadb8da83592720aab1c43ef3968329e3c3766a, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v25.yaml}
+  - {snapshot: 26, commit: 71931098c9082b4f3e24d2b92e2113e9ef0bc635, blob_sha: 1ed1282c26d327db4edcda550065a5fb2b24bc7b, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v26.yaml, note: pointer; canonical full snapshot in Git history}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
   quality_requirements:
   - 低误读、低听写分叉
-  - 连写后有稳定canonical segmentation，不因内部高频词块产生强制误断
+  - 连写后有稳定canonical segmentation
   - 字面语法与intended meaning一致；与愿景关系可自然说明，不靠虚构词源
   - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
   reality_constraints:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
-    trademark_defer_interpretation: 未筛查不等于安全或clear；最终采用/注册前应恢复
 current_status:
-  strongest_candidates: [N060]
-  promising_candidates: [N060]
+  strongest_candidates: []
+  promising_candidates: []
   finalists: []
-  quality_ready_for_owner_exposure: true
-  domain_gate_passed: true
-  trademark_screening: deferred_by_owner_for_now
   owner_review_needed_now: true
-  gate_eligible_now: true_under_owner_deferred_trademark
-  biggest_unknown: Owner第一次看到Plurifold时，直觉究竟是长期母组织/品牌，还是抽象概念、研究方法或技术框架；其次是是否自然感到多视角/多种展开，还是主要被manifold/fold/数学技术联想占据。
-  information_gain: Owner转交的隔离对话窗口完成blind independent quality review。Reviewer认为Plurifold名称结构强、词界稳定、听写负担轻至中、品牌架构延展强，无淘汰级本体问题；主要结构性风险收敛为裸名的身份类型与pluri-/fold带来的抽象技术概念感，因此建议KEEP并进入Owner Exposure Gate。
+  biggest_unknown: Owner在理解Plurifold构词与intended meaning之后，是否对它产生明显正向改观；若仍然一般，则该候选应退出promising并回到generate/change_strategy。
+  information_gain: Owner第一次未经解释看到Plurifold时，第一联想不是multiple perspectives或manifold，而是折叠屏手机中的Fold；整体观感“一般，没有特别感觉”。这是真实Exposure信号，说明fold在Owner实际语境中已被消费电子产品类别强烈占用为“折叠屏/折叠设备”联想。该信号不推翻blind reviewer对语言结构的评价，但削弱母组织第一身份与情感吸引力。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
-resolved_blockers:
-- {id: B04, type: blind_independent_quality_review, resolution: Owner提供另一隔离对话窗口的blind quality review；Reviewer只评价名称本身并给出KEEP→Owner Exposure Gate。}
 owner_signals:
 - id: OS-N039-01
   candidate_id: N039
   valence: negative_structural
   summary: Pluralway先触发subway、alway→always等词块，词界不稳；way使名称偏道路/过程/方法且语义走窄；若表达multiple ways则自然英语应为plural ways。
-  method_effect: 后续候选在语义前增加canonical segmentation与字面语法压力测试；不把该候选级反馈升级为所有复合词禁令。
-active_candidate:
+- id: OS-N060-01
+  candidate_id: N060
+  type: raw_owner_exposure_before_explanation
+  valence: neutral_to_negative
+  summary: 第一联想到折叠，因为大量折叠屏手机产品名使用Fold；整体感受一般、没有特别感觉；Owner追问为什么未先解释名称含义。
+  interpretation: 原始第一印象已成功捕获，未被品牌解释预先污染。Fold在Owner语境中有强消费电子产品类联想，降低裸名母组织身份与情感吸引力。
+  next_needed_signal: informed_owner_reaction_after_explanation
+candidate:
   id: N060
   name: Plurifold
   active: true
-  status: owner_exposure_ready_trademark_deferred
+  status: hold_owner_neutral_fold_device_association_pending_informed_reaction
   construction: pluri- + fold
   pronunciation_hint: PLOOR-ih-fold
-  intended_meaning: 多重、多面、多种展开；共同知识可以被不同个体展开为不同视角、形式与创造。名称不试图独立编码完整Commons→Perspective→Creation→Commons循环。
-  quality:
-    distinctiveness: strong
-    pronounceability: medium_to_good
-    spelling_recovery: light_to_medium_burden; fold提供强spelling anchor，主要分叉集中在pluri-
-    memorability: strong
-    semantic_fit: strong_but_partial; 强在multiplicity/perspectives/forms/unfolding，Commons与回流循环需由品牌架构补足
-    semantic_room: strong
-    target_scale_fit: medium_good_to_strong; 架构上可作为parent，但裸名仍有抽象概念/方法气质
-    longevity: strong
-    symbolic_compression: very_strong
-    cross_context_use: strong
-    architecture_extensibility: strong
-    canonical_segmentation: stable_as_pluri_plus_fold; 无Pluralway式subway/always强误断
-  blind_independent_review:
-    status: completed_blind
-    source: owner_relayed_external_conversation
-    overall_verdict: KEEP -> Owner Exposure Gate
-    strongest_point: 意义压缩能力 + 延展空间；pluri + fold紧凑承载multiplicity/perspectives/forms/layers/unfolding，同时不绑定具体项目形态。
-    primary_structural_risk: lexical identity稍像抽象概念/技术框架/研究方法，需真人确认能否自然长成长期机构身份。
-    visual_parsing: pluri + fold为最自然切分；视觉解析负担低至中低。
-    audio_recovery: 最可能恢复为Plurifold，次要可能Plurafold；整体轻至中度，不是淘汰级。
-    association_order:
-    - manifold / manyfold / pluriform
-    - fold / folding / layers
-    - multidimensional / mathematics
-    - materials / folding structures
-    - protein folding
-    interpretation: 数学/技术知识气质存在但未达到领域锁死；真正需要验证的是“概念/框架感”是否压过“组织品牌感”。
-    architecture_findings:
-      Plurifold: 身份开放，可能是brand/organization/research initiative/platform；裸名类别不立即明确。
-      Plurifold_Research: 很自然，母品牌感增强。
-      Plurifold_Commons: 非常自然，可补足主名称本身较弱的commons层。
-      Plurifold_Tools: 自然，不会让主品牌显得必然是软件产品。
-      Plurifold_InteropAtlas: 成立；abstract parent -> concrete project层级自然。
-      project_by_Plurifold: 表现很好，像独立机构署名。
-  reality:
-    exact_identity:
-      observation: no_material_exact_collision_found
-      confidence: medium
-      caveat: 仅公共Web/身份检索；不是商标clear。
-    domains:
-    - {domain: plurifold.org, observation: available, query_adapter: Namecheap connected plugin, query_layer: accredited_registrar_machine_signal, machine_result: 'isAvailable=true', price_snapshot: {purchase: 8.48, currency: USD}, caveat: 时点证据；不代表商标或未来仍可注册}
-    trademark: unresolved_deferred_by_owner
+  explanation:
+    pluri: 英语/拉丁来源构词成分，表示many/multiple；可联想到plural、plurilingual、pluripotent等“多/多元”。
+    fold_semantic_layer: 这里并非只取动词“折叠”，也借英语-fold在twofold/manyfold等结构中的“倍数、多重、多个方面”含义，并保留fold/unfold带来的“同一基础可形成多种结构/展开方式”隐喻。
+    intended_meaning: 同一个公共知识底座可以被不同个体展开为不同视角、形式与创造；名称主要压缩multiplicity/perspective/unfolding，不独立编码完整Commons→Perspective→Creation→Commons循环。
+  quality_preserved:
+    blind_review: KEEP -> Owner Exposure Gate
+    domain: plurifold.org available_at_checked_time
+    exact_public_identity: no_material_exact_collision_found_at_checked_time
+    trademark: unresolved_deferred
+  owner_exposure_result_so_far:
+    raw_first_association: Fold折叠屏手机/折叠设备
+    affect: neutral; 没有特别感觉
+    organization_identity: weakened_by_device_category_association
+    informed_reaction: pending
 rounds:
-- id: RND-032
-  action: accept_blind_review_and_open_owner_exposure_gate
+- id: RND-033
+  action: record_raw_owner_exposure_and_prepare_explanation
   generated_count: 0
   candidate_ids: [N060]
-  actions_performed: [record_external_blind_review, resolve_B04, re_evaluate_owner_gate, update_state]
-  result: Plurifold通过独立名称质量复核并进入Owner Exposure Ready；商标仍deferred/unresolved。
+  result: 原始Exposure为neutral_to_negative；Plurifold不升级为finalist，转hold，等待解释后的Owner informed reaction。若解释后仍无明显改观，则退出promising并回到generation/change_strategy。
 diagnostics:
-- {id: D71, subject: N060, statement: 'Blind reviewer确认Plurifold的主要问题不是机械语言缺陷，而是裸名身份类型：可能先像抽象概念/技术框架，再由使用塑造成机构。', confidence: high}
-- {id: D72, subject: N060, statement: 'Plurifold相对Pluralway已显著改善canonical segmentation与字面语法；当前Exposure重点应转向机构感与manifold/fold技术联想，而不是重复检查断词。', confidence: high}
+- {id: D73, subject: N060, statement: '对Owner而言Fold首先是折叠屏手机类别词，而不是manyfold/multiplicity语义；这是一项独立Reviewer未能代表的真实受众语境信号。', confidence: high}
+- {id: D74, subject: N060, statement: 'Owner“感受一般、没有特别感觉”意味着即使名称结构客观可用，也暂不具备足够Owner resonance进入finalist；解释后若无明显正向变化，应退出。', confidence: high}
+- {id: D75, statement: 'Owner Exposure应先捕获未经解释的第一反应，再补充名称构造与品牌叙事；先解释会污染raw exposure。', confidence: high}
 next_action:
-  action: owner_exposure_review
+  action: obtain_informed_owner_reaction_for_plurifold_then_decide
   target: [N060]
-  rationale: blind independent review、当前公共身份筛查与.org硬门槛均已达到Owner Exposure所需水平；商标由Owner明确延期。
-  owner_questions:
-  - 第一次看到Plurifold，你更自然觉得它像长期母组织/品牌，还是像抽象概念、研究方法、技术框架或软件名？
-  - 你的第一联想是什么？是“多重/多视角/展开”，还是manifold、数学、多维、折叠、材料等？
-  - 你对这个词本身的观感是喜欢、无感还是排斥？读音/拼写是否让你不舒服？
-  after_owner_signal:
-  - 若正向：保留为finalist候选，并继续寻找至少一个可比较的强候选；最终采用前恢复商标筛查。
-  - 若负向：记录具体Owner signal并hold/退出，回到change_strategy/generate；不把单次偏好自动升级为普遍规则。
+  rationale: raw first impression已捕获，当前唯一高信息价值是解释构词后Owner是否明显改观；无需继续理论分析。
+  decision_rule:
+  - 若解释后明显喜欢/认可并能自然接受fold双重含义：保留为hold/finalist-comparison候选，不自动winner。
+  - 若解释后仍然一般、主要想到折叠屏或觉得需要解释才成立：退出promising池，回到change_strategy/generate。
   owner_question: true
 stop:
-  status: awaiting_owner_judgment
-  reason: 当前已到真正需要Owner第一次真实曝光判断的阶段。
+  status: awaiting_informed_owner_judgment
+  reason: 需要区分“未经解释第一反应”与“理解构词后的品牌接受度”；这是当前真正的Owner判断点。
