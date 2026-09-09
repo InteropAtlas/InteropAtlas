@@ -5,12 +5,12 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 30
+  snapshot_version: 31
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
   preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
-  latest_archive: {snapshot: 29, commit: 811d7cc232eeab06addd79813b95d69f40e20f6a, source_commit: d81ca41f5a8640fca95c23f4c325844932a44a28, source_blob_sha: b4c4c94224b5c98637fcecf81da48adfcae3d6fb, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v29.yaml}
+  latest_archive: {snapshot: 30, commit: 5c091f068bd9100df0ce33703e4205297ae534ad, source_commit: 01c984d5e1c21c44ddba83b363f56a46d43085db, source_blob_sha: db2a1bd39d3f71e89baafec231426eecf6deac68, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v30.yaml}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -19,69 +19,95 @@ brief:
   - 连写后有稳定canonical segmentation
   - 字面语法与intended meaning一致；与愿景关系可自然说明，不靠虚构词源
   - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
-  - sound-first不等于随机幻想词；进入top slice的coinage必须有真实结构动机
   reality_constraints:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
 current_status:
-  strongest_candidates: [N060]
+  strongest_candidates: [N060, N061]
   promising_candidates: [N060]
+  promising_partials: [N061]
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: 能否找到语义锚点更强、但不回到拥挤现成词空间，同时Owner resonance高于Plurifold的候选。
-  information_gain: 按加速策略执行20-30级sound-first大批生成与硬语言压缩。多数候选在拼写恢复、词界、幻想名感、AI品牌模板感或构造动机不足阶段直接退出；top-slice现实抽查中Relume、Prilume、Virel、Toven、Norven等再次撞入AI/software/research高相关身份。sound-first单独使用不能解决问题：它能降低普通词collision，但很容易牺牲意义抓手或进入当代AI造词风格。
-blockers: []
+  biggest_unknown: Plurivocal在独立名称质量复核中，是否能保持长期母组织尺度，而不被vocal/voice语义拉向媒体、倡议、社区或对话平台；以及其形容词身份是否削弱proper parent brand感。
+  information_gain: hybrid semantic-backbone + sound optimization批次终于找到第二个具备真实语义锚点、稳定音形、当前公共exact空间较干净且.org可注册的候选Plurivocal。与此同时Scholion、Polylogue、Parhelion、Methexis、Loam、Solum、Alluvium、Understory等结构隐喻候选均出现高相关现实身份，说明现实拥挤仍是主要淘汰源。
+blockers:
+- id: B05
+  type: blind_independent_quality_review
+  target: N061
+  statement: Plurivocal已达到值得独立复核的门槛；主执行器不能把自己的语言/架构预检冒充blind review。
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
 owner_signals:
 - {id: OS-N039-01, candidate_id: N039, valence: negative_structural, summary: Pluralway词界不稳且way过度方法化；已hold。}
 - {id: OS-N060-01, candidate_id: N060, valence: neutral, summary: Plurifold第一联想到Fold折叠屏；总体感受一般。}
-- {id: OS-N060-02, candidate_id: N060, valence: neutral_accepting, summary: Owner澄清fold/折叠语义本身并无问题；折叠屏联想主要来自中文母语与日常英语暴露路径。}
-active_candidate:
-  id: N060
+- {id: OS-N060-02, candidate_id: N060, valence: neutral_accepting, summary: fold/折叠语义本身并无问题；折叠屏联想主要来自中文母语与日常英语暴露路径。}
+candidates:
+- id: N060
   name: Plurifold
   active: true
   status: promising_owner_neutral_comparison_candidate
-  construction: pluri- + fold
   pronunciation_hint: PLOOR-ih-fold
   intended_meaning: pluri-表示many/multiple；-fold借twofold/manyfold中的“多重、多个方面”以及fold/unfold的动态，压缩multiple perspectives/forms/unfoldings。
   quality: {blind_review: 'KEEP -> Owner Exposure Gate', canonical_segmentation: stable, spelling_recovery: light_to_medium, semantic_fit: strong_but_partial, semantic_room: strong, target_scale_fit: medium_good_to_strong, architecture_extensibility: strong}
-  owner_exposure: {raw_affect: neutral, informed_affect: neutral_accepting, rejection_reason: none, promotion_reason: none}
+  owner_exposure: {raw_affect: neutral, informed_affect: neutral_accepting}
   reality: {exact_public_identity: no_material_exact_collision_found_at_checked_time, domain: plurifold.org_available_at_checked_time, trademark: unresolved_deferred_by_owner}
+- id: N061
+  name: Plurivocal
+  active: true
+  status: promising_partial_domain_passed_needs_blind_review
+  pronunciation_hint: PLOOR-ih-VOH-kul
+  construction: pluri- + vocal；英语已有plurivocal用法，指多种声音/多种观点并存，常见于文学、组织与传播研究语境。
+  intended_meaning: 公共知识并不要求单一解释；不同个体的声音、视角和表达可以共同存在并参与形成更大的公共知识空间。
+  quality_preflight:
+    canonical_segmentation: stable_pluri_plus_vocal
+    pronounceability: good；vocal提供强读音锚点，pluri-仍有轻度元音/重音分叉
+    spelling_recovery: light_to_medium；主要分叉集中pluri-，后半vocal稳定
+    memorability: strong
+    semantic_fit: strong_but_partial；直接压缩multiple voices/perspectives/expression，对Commons与Creation回流仍需品牌叙事补足
+    semantic_room: good；不绑定软件/标准/地图，但vocal可能把身份拉向传播、媒体、倡议、社区/对话
+    target_scale_fit: medium_to_good；Plurivocal Research/Commons/Tools和A project by Plurivocal均可成立，但裸名形容词感与voice语义可能削弱天然institutional identity
+    architecture_extensibility: good_with_caution
+    longevity: good
+  reality:
+    exact_identity:
+      observation: no_material_exact_collision_found
+      confidence: medium
+      note: 当前公共Web exact检索主要返回plurivocal作为普通学术形容词/概念用法，未发现明显活跃同名organization/software/AI identity；负结果不等于商标clear。
+    semantic_field:
+      observation: established_academic_term
+      note: 在文学、传播和组织研究中已有“多声部/多种声音并存”用法；这是语义资产，也带来轻度学术/传播气质。
+    domains:
+    - {domain: plurivocal.org, observation: available, query_adapter: Namecheap connected plugin, query_layer: accredited_registrar_machine_signal, machine_result: 'isAvailable=true', price_snapshot: {purchase: 8.48, currency: USD}, caveat: 时点证据；不代表商标或未来仍可注册}
+    trademark: unresolved_deferred_by_owner
 rounds:
-- id: RND-035
-  action: accelerated_sound_first_large_batch
-  strategy: sound_first_controlled_coinage
-  internal_batch_size: 20_to_30
-  preflight_filters: [pronunciation_stability, spelling_recovery, canonical_segmentation, non_AI_template_feel, organization_scale, traceable_structure_motive]
-  result: no_new_owner_ready_candidate
-  notable_reality_rejections:
-  - {name: Relume, reason: active AI website-building platform exact identity}
-  - {name: Prilume, reason: active privacy-preserving AI assistant exact identity}
-  - {name: Virel, reason: active AI creative workspace + AI solutions identities}
-  - {name: Toven, reason: active institutional-brokerage AI agent platform}
-  - {name: Norven, reason: active AI governance institution + agent trust/compliance products}
-  - {name: Ciren, reason: NSF Cross-Institutional Research Engagement Network and ASU research identity}
-  - {name: Relen, reason: active software/financial-control platform}
-  - {name: Merren, reason: active AI-powered customer research platform}
-  secondary_notes:
-  - Veyrin现实主要表现为surname，但纯语音拼写分叉Veyrin/Vayrin/Veyren偏高，不值得推进。
-  - Talven现实冲突较弱但构造动机不足，过于像任意proper-name coinage，未达到语义质量门槛。
-  - Meldren现实高相关collision不明显，但人名/幻想角色感明显，且meld+render式解释过度事后赋义，未推进。
+- id: RND-036
+  action: hybrid_semantic_backbone_sound_optimized_large_batch
+  result: Plurivocal成为第二个通过主执行器quality preflight、公共exact身份筛查与.org硬门槛的promising partial。
+  notable_rejections:
+  - {name: Scholion, reason: active AI research/search identities and local-first knowledge tools}
+  - {name: Polylogue, reason: active AI conversation archive/writing products and current LLM research identity}
+  - {name: Parhelion, reason: active software studio exact identity}
+  - {name: Methexis, reason: active consulting organization plus close software-company derivation Mecexis from same concept}
+  - {name: Refluence, reason: multiple active companies/platforms}
+  - {name: Loam, reason: active organizational-intelligence AI platform and AI thinking workspace}
+  - {name: Solum, reason: major technology company + AI/health/blockchain identities}
+  - {name: Alluvium, reason: active research/AI consulting and Atlassian/AI organizations}
+  - {name: Understory, reason: active AI/environment company + software lab}
 diagnostics:
-- {id: D79, statement: 'sound-first能减少透明英语复合词的词界问题，但若缺少强结构动机，会迅速滑向任意人名/幻想名或AI品牌词；这不符合当前组织命名目标。', confidence: high}
-- {id: D80, statement: '当前真正稀缺的不是可注册的造词，而是同时满足自然音形、可解释意义、长期机构尺度和现实空间的名称。', confidence: high}
-- {id: D81, statement: 'Plurifold经过多路线压力后仍保持benchmark地位，说明其优势来自音形、意义与现实空间三者平衡，而不是单一维度突出。', confidence: high}
+- {id: D82, subject: N061, statement: 'Plurivocal是当前少数同时具备真实英语语义、稳定词界、可解释perspective关联、当前公共exact空间较干净和.org可注册的候选。', confidence: high}
+- {id: D83, subject: N061, statement: '其主要风险不是机械语言问题，而是vocal把品牌身份向voice/media/advocacy/community/dialogue拉动，以及形容词作为裸母品牌的机构感是否足够。', confidence: high}
+- {id: D84, statement: '结构隐喻路线比纯sound-first信息增益更高：它能产出像Plurivocal这样具有现成语义锚点但不必透明复合的候选。', confidence: high}
 next_action:
-  action: hybrid_semantic_backbone_sound_first_large_batch
-  target_count: 24_to_36_internal
-  strategy_delta:
-  - 不再做纯sound-first；每个候选必须先绑定一个清晰结构隐喻，再进行声音优化。
-  - 优先测试非热门语义骨架：共享底座/分枝/再汇入、共同文本/个人注解、同源光线/不同折射、共同场域/不同路径后回流。
-  - 禁止直接使用已高拥挤的common/plural/view/fold/form/way/research/open/mind/weave等表面词。
-  - 每个骨架可派生3-5个音形版本，一次性批量预检；只对top 3-5做现实与.org。
-  - Plurifold继续作为benchmark，不重复消耗时间。
+  action: obtain_blind_independent_review_for_plurivocal
+  target: [N061]
+  rationale: Plurivocal已通过主执行器quality/segmentation preflight、当前公共exact身份筛查和.org硬门槛；下一高价值未知是其长期母组织身份与vocal语义收窄风险，需要独立复核。
+  blind_review_scope:
+  - 不提供域名、现实collision、Owner历史偏好、Plurifold或当前排名
+  - 独立检查发音、听写、词界、记忆、语义、母组织尺度、长期性、架构延展
+  - 专门检查vocal是否强迫联想到媒体、音乐、声音技术、倡议、社区/对话平台
+  - 检查形容词裸名是否像长期organization proper name
+  - 架构测试: Plurivocal / Plurivocal Research / Plurivocal Commons / Plurivocal Tools / Plurivocal / InteropAtlas / A project by Plurivocal
   owner_question: null
 stop:
-  status: continue_internal_microcycles
-  reason: 当前没有需要Owner回答的新问题；继续自主批量生成与筛选，直到出现真正可比较候选或策略明显收敛。
+  status: blocked_on_independent_review
+  reason: 当前runtime无独立Reviewer；Plurivocal已达到值得blind review的门槛，继续批量生成的边际价值低于先确认其名称本体质量。
