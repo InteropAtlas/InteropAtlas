@@ -476,7 +476,7 @@ candidates:
 - id: N005
   name: Eachward
   active: true
-  status: promising
+  status: promising_quality_challenged_reality_partial
   region_id: R02
   secondary_region_ids: []
   construction_strategy: 前后缀/方向构词
@@ -490,8 +490,8 @@ candidates:
     etymology_status: author_construction_not_verified_etymology
   quality:
     distinctiveness: 强：常见词素形成少见方向词；现实唯一性另记。
-    pronounceability: 强：目标读法顺，但可能被听成Each Word。
-    spelling_burden: 低至中负担：可能写成Eachword/Each Word。
+    pronounceability: 中：构词后缀-ward本身可自然读，但意向读法/ˈiːtʃwərd/与连续语流中的Each Word高度近音；不能再只记为“可能误听”。
+    spelling_burden: 中偏高负担：口头首次接触时Eachward、Eachword与Each Word缺乏可靠边界，视觉形式仍清楚。
     memorability: 强：方向性解释后易复述；未做延迟记忆。
     semantic_fit: 强：个人视角与向外贡献最清楚，创造较隐含。
     semantic_room: 强：可容纳研究、参与与创造；each可能长期偏向个体服务。
@@ -509,6 +509,21 @@ candidates:
       reality_seen: false
       owner_preference_seen: false
       human_test: false
+    linguistic_followup:
+      observed_at: '2026-09-09T02:32:00Z'
+      human_test: false
+      evidence:
+      - id: LANG-N005-WARD
+        source: https://www.merriam-webster.com/dictionary/ward
+        observation: Merriam-Webster将后缀-ward标为wərd，并列出方向义；同页名词ward为wȯrd，含病区、行政区、受监护者及守护等义。
+      - id: LANG-N005-WEB-NEAR
+        queries:
+        - '"Each Word" organization research education software publishing'
+        - '"Eachword" company software education publishing'
+        - '"Each Ward" organization research software publishing'
+        observation: 未发现相关exact组织身份；Each Word大量作为普通短语出现，Each Ward结果集中于医院病区语境。
+        caveat: 搜索噪声支持语义/听写风险，不是商标冲突或真人听写实验。
+      diagnosis: 意向读法与Each Word高度近音是结构性口头识别成本；ward独立词义的负面反读真实存在，但裸名是否首先触发这些联想仍需人判断。
   pareto:
     dominated: false
     dominated_by: []
@@ -615,25 +630,36 @@ candidates:
         caveat: Madrid不等于各国全部国家注册；仅精确字标初筛，不是法律clearance。
       - id: TM-N005-EU-EXACT
         jurisdiction: EU
-        source: https://euipo.europa.eu/eSearch/#basic/1+1+1+1/eachward
+        source: https://euipo.europa.eu/eSearch/#basic/1+1+1+1/100+100+100+100/eachward
         authority: EUIPO eSearch Plus
-        query: Eachward
-        observed_at: '2026-09-09T02:08:00Z'
-        result: error_service_unavailable
-        observation: 官方页面明确显示The search facility is not available at the moment。
-        caveat: error不得解释为无结果或可用。
-      - id: TM-N005-CN-EXACT
+        query: eachward
+        observed_at: '2026-09-09T02:32:00Z'
+        result: no_results_found
+        observation: 重试后官方系统恢复，Trade marks显示0并明确No results were found using the criteria introduced。
+        caveat: 基础检索0条不是完整相似商标或法律clearance。
+      - id: TM-N005-EU-NEAR-EACHWORD
+        jurisdiction: EU
+        source: https://euipo.europa.eu/eSearch/#basic/1+1+1+1/100+100+100+100/eachword
+        authority: EUIPO eSearch Plus
+        query: eachword
+        observed_at: '2026-09-09T02:32:00Z'
+        result: no_results_found
+        observation: 核心拼写近形Eachword的Trade marks为0，页面明确无结果。
+        caveat: 只测试一个核心近形；不代表全部视觉、语音或概念近似已清查。
+      - id: TM-N005-CN-CLASS09
         jurisdiction: CN
-        source: https://wcjs.sbj.cnipa.gov.cn/home
+        source: https://wcjs.sbj.cnipa.gov.cn/list
         authority: CNIPA 商标网上检索系统
         query: Eachward
-        observed_at: '2026-09-09T02:08:00Z'
-        result: unknown_query_not_completed
-        observation: 官方库主页可访问，页面显示数据更新至2026-09-06；本次未取得可复核的词项结果。
-        caveat: unknown不得解释为无结果或可用；中国近似检索还涉及类别和类似群。
+        class_filter: '09'
+        observed_at: '2026-09-09T02:32:00Z'
+        result: error_access_denied_cloud_security
+        observation: 成功进入SGTMI并提交第9类Eachward；结果页明确显示“云安全平台检测到您当前的访问行为存在异常，请稍后重试”。一次刷新后仅余空白文档。
+        caveat: 未取得任何商标结果；error不得解释为无结果或可用。按反自动化规则停止继续尝试该站。
       notes:
-      - 美国和Madrid的0条仅降低精确同名注册的初步风险；欧盟与中国仍未解决，候选不可进入finalists。
-      - 后续相似字标检索优先覆盖09、16、41、42类；资助只作次级观察。
+      - 美国、欧盟与Madrid的精确0条降低相应官方库精确同名风险；中国仍为error，候选不可进入finalists。
+      - USPTO与EUIPO的Eachword核心近形均为0；Each Word在USPTO普通查询会被分词扩展，结果不可用于精确冲突判断。
+      - 09、16、41、42类的完整语音/视觉/概念近似仍未完成。
     namespaces:
     - namespace: GitHub repositories
       observation: no_exact_repository_found
@@ -647,6 +673,8 @@ candidates:
   diagnosis:
   - D10
   - D13
+  - D16
+  - D17
   retirement:
     retired: false
     reason: null
@@ -1073,14 +1101,14 @@ current_state:
   current_region_ids:
   - R02
   - R03
-  biggest_unknown: Eachward在EU/CN及09、16、41、42类近似字标中的风险是否可接受，以及Each Word/ward反读是否会破坏长期母组织身份？
+  biggest_unknown: Owner是否认为Eachward与Each Word的结构性近音、以及ward反读破坏了名称本身质量；这个判断会直接决定是否继续为其投入中国/近似商标深筛。
   blockers:
-  - EUIPO本次明确服务不可用；CNIPA本次未取得可复核词项结果，二者均为unknown/error。
-  - 尚未完成按相关类别的近似字标与Each Word/Eachward语言混淆深筛。
-  information_gain: 精确字标层面USPTO与Madrid未检出，证明继续深筛Eachward仍有价值；EU/CN未知意味着继续生成的价值仍低于补齐定向证据。
+  - CNIPA已确认对本云端浏览器触发安全拦截，第9类结果不可得；不得循环重试或记为无结果。
+  - 尚未完成09、16、41、42类的完整语音、视觉与概念近似。
+  information_gain: EUIPO精确Eachward及Eachword均0，现实前景改善；但语言证据把原“可能误听”升级为结构性近音，继续纯工具查询的信息价值低于一次定向Owner判断。
   notes:
   - N005尚未通过Owner Exposure Gate；.org已过时点门槛，但域名available不代表候选好或可依法采用。
-  - .org为finalists硬门槛，早期质量集合仍保留域名不满足者作为学习数据。
+  - 名称质量的口头识别问题与中国现实查询阻塞分开；任一问题都足以阻止当前进入finalists。
 diagnostics:
 - confidence: high
   counterevidence:
@@ -1241,6 +1269,24 @@ diagnostics:
   counterevidence:
   - 后续重试或官方替代入口可能补齐；单次不可用不能证明数据库长期不可用。
   proposed_state_change: 分法域保留unknown/error，继续定向重试；若持续阻塞则保持候选非finalist并转做独立语言测试。
+- id: D16
+  triggered_by: [O19, O20]
+  level: candidate
+  diagnosis_type: jurisdictional_trademark_update
+  statement: EU已从error转为精确Eachward及Eachword未检出；CN从未完成变为明确access_denied。现实总体仍unresolved，不能进入finalists。
+  confidence: high
+  counterevidence:
+  - EU基础检索未完成全部近似；CN没有结果数据；商标权还包括未注册使用与其他法域。
+  proposed_state_change: 更新分法域证据；不改变质量评价，不继续循环访问CNIPA。
+- id: D17
+  triggered_by: [O21]
+  level: candidate
+  diagnosis_type: structural_oral_ambiguity
+  statement: Eachward意向读法与Each Word高度近音并非偶然单次误听；它直接增加口头首次识别和听写恢复成本。ward负面词义是次级反读，不能自动假定所有人首先想到病区或监护。
+  confidence: high
+  counterevidence:
+  - 视觉形式清楚；Each Word也可被解释为“每个词/每种表达都重要”的正面延伸；尚无真人听写或Owner反应。
+  proposed_state_change: 下调N005发音/拼写评价但不直接退休；现在询问Owner，因为其判断会改变继续深筛还是回到生成。
 experience_candidates:
 - confidence: low
   counterexamples:
@@ -1441,17 +1487,13 @@ map:
     - 循环但不只是返回过去
     status: unexplored
 next_action:
-  action: verify_reality
-  target: N005 Eachward
-  rationale: Owner已补齐现实边界；USPTO与Madrid精确字标未检出，但EUIPO服务错误、CNIPA词项查询未完成，且近似字标/相关类别尚未筛查。当前最高信息价值是补齐这些证据并测试语言近混淆，不是继续生成。
-  triggered_by: [D10, D14, D15, C-TLD, C-TM]
-  expected_information_gain: 判断Eachward能否进入Owner Exposure Gate，或应因现实/语言风险hold；不把数据库0条冒充法律意见。
-  actions:
-  - 重试EUIPO或官方TMview，对Eachward及核心近形按09、16、41、42类检索
-  - 在CNIPA官方库按相关类别/类似群完成精确与近似检索；无法完成则保持unknown
-  - 对Eachward、Each Word及ward主要反读做有限语言/近名压力测试
-  - 仅在结果支持时检查GitHub组织handle并决定是否进入Owner少量展示
-  fallback: 若EU/CN持续不可用，保持N005 promising_reality_partial，不进入finalists；可转做语言测试或探索下一小批。
+  action: ask_owner
+  target: N005 Eachward的结构性口头识别风险
+  rationale: EUIPO已补齐精确与Eachword近形0条；CNIPA因明确安全拦截不能继续自动化。语言证据显示意向读法与Each Word高度近音，已从一般待测摩擦升级为会改变候选投资顺序的质量判断。
+  triggered_by: [D16, D17]
+  expected_information_gain: 若Owner认为Each Word联想可接受或有正面意义，则继续寻找中国可复核替代/人工法律检索并做完整近似筛查；若明显不可接受，则将N005降为质量学习数据并回到小批生成。
+  question: 当你看到并读出Eachward时，“听起来像Each Word”对你是可接受甚至有正面意义，还是已经足以让它退出优先候选？
+  fallback_if_unanswered: N005保持promising_quality_challenged_reality_partial且非finalist；下一轮可先探索3–5个新候选，不继续消耗中国深筛成本。
 observations:
 - evidence:
   - S01
@@ -1631,6 +1673,24 @@ observations:
   subject_ids: [N005]
   observation: EUIPO官方系统明确暂不可用；CNIPA主页可访问并显示数据日期，但本次未取得词项结果。两者保持unknown/error，阻止进入finalists。
   evidence: [TM-N005-EU-EXACT, TM-N005-CN-EXACT]
+- id: O19
+  timestamp: '2026-09-09T02:32:00Z'
+  scope: reality
+  subject_ids: [N005]
+  observation: EUIPO重试成功；Eachward与核心近形Eachword的Trade marks均为0。此前EU error被新证据取代，但0条仍不是clearance。
+  evidence: [TM-N005-EU-EXACT, TM-N005-EU-NEAR-EACHWORD]
+- id: O20
+  timestamp: '2026-09-09T02:32:00Z'
+  scope: reality
+  subject_ids: [N005]
+  observation: CNIPA SGTMI第9类Eachward提交成功，但结果页由云安全平台明确拦截；一次恢复失败后停止，CN保持error/access_denied。
+  evidence: [TM-N005-CN-CLASS09]
+- id: O21
+  timestamp: '2026-09-09T02:32:00Z'
+  scope: quality
+  subject_ids: [N005]
+  observation: 权威词典将后缀-ward读为wərd，与状态中Eachward意向读法一致；结合Each Word普通短语高频，口头边界风险从预测摩擦升级为结构性近音。ward独立词义的负面反读存在，但触发强度未真人验证。
+  evidence: [LANG-N005-WARD, LANG-N005-WEB-NEAR]
 open_constraints:
 - effect: .org不作为早期创意质量淘汰条件；不可用者可保留为学习数据，但不得进入最终可采用候选。
   id: C-TLD
@@ -1705,7 +1765,7 @@ provenance:
     human_test: false
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
   skill_version: 0.1.0
-  snapshot_version: 4
+  snapshot_version: 5
   sources:
   - id: S01
     notes: 读取body和全部评论（0条）
@@ -1904,6 +1964,29 @@ rounds:
   observations: [O16, O17, O18]
   diagnostics: [D14, D15]
   result: N005仍promising且.org满足时点硬门槛；US/Madrid精确未检出，EU/CN unresolved，故不是finalist或Owner-ready。
+- id: RND-005
+  action: verify_reality_and_language
+  question: EU/CN证据能否补齐，以及Eachward的核心语言近混淆是否只是轻微摩擦？
+  generated_count: 0
+  candidate_ids: [N005]
+  actions_performed: [retry_official_database, near_form_search, linguistic_diagnosis, update_state]
+  decision_sequence:
+  - EUIPO重试恢复并取得Eachward、Eachword各0条
+  - CNIPA成功提交第9类但结果页触发明确云安全拦截；仅恢复一次后停止
+  - USPTO Eachword精确Wordmark为0；Each Word普通查询因分词过宽，不作冲突证据
+  - 结合词典发音与网页语境诊断，确认Each Word近音是结构性质量成本
+  - 停止继续现实检索，转为会改变投资顺序的Owner定向判断
+  reality_checks_performed:
+  - EUIPO exact Eachward
+  - EUIPO core near-form Eachword
+  - CNIPA SGTMI class 09 submission and block observation
+  - USPTO exact Eachword spelling variant
+  quality_checks_performed:
+  - authoritative suffix pronunciation and ward sense review
+  - limited web context test for Each Word, Eachword, Each Ward
+  observations: [O19, O20, O21]
+  diagnostics: [D16, D17]
+  result: EU精确风险信号改善，CN仍error；N005质量由promising调整为promising_quality_challenged，当前需Owner判断近音是否可接受。
 schema_version: '0.1'
 skill_feedback:
 - confidence: high
@@ -1945,12 +2028,12 @@ skill_feedback:
   confidence: low
   core_modified: false
 stop:
-  status: continue
-  reason: 现实边界已确认，N005通过.org时点门槛且US/Madrid精确字标未检出，但EU/CN与近似/语言筛查仍未完成。
+  status: ask_owner
+  reason: EU证据已补齐但CN被安全拦截；Eachward与Each Word的结构性近音已足以让Owner判断改变下一步投资顺序。
   unresolved:
-  - N005的Each Word误听与ward照管/病区/行政区联想未做真人或独立语言测试
-  - EUIPO结果为service unavailable，CNIPA词项查询未完成
-  - 09、16、41、42相关类别的近似字标未核验
+  - Owner是否接受Each Word近音及ward反读
+  - CNIPA第9类结果被access_denied，16、41、42尚未执行
+  - 09、16、41、42相关类别的完整近似字标未核验
   - GitHub组织handle与完整多语言近名未核验
   - N002、N008继续hold
 pareto_review:
