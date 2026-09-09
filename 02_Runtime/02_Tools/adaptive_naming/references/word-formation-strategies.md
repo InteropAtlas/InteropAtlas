@@ -1,4 +1,4 @@
-# 构词策略工具箱 v0.2
+# 构词策略工具箱 v0.2.1
 
 本文件不是固定配方，也不是要求每轮平均覆盖所有方法。它的作用是提醒 Agent：**命名空间里存在这些可探索路径，不必每次重新发现。**
 
@@ -14,9 +14,21 @@
 - 如果近期候选连续共享同一词根、前后缀、语义家族或构词模板，应先触发搜索完整性检查，而不是继续做同族变体；
 - 不只检查 exact 字符串。不同表面形式也可能属于同一 morphological / semantic family；
 - 域名空、现实少撞名等 feasibility 信号不能直接成为“多生成这种结构”的理由；
+- task-local cooldown、incumbent 相似结构和 survivor pattern 默认由 Controller 私下维护，并在生成后过滤；不要为了“提醒不要使用”而把具体词根、候选名或长串负面例子反复写入 Generator Brief；
+- Generator Brief 优先使用正向搜索目标，例如待探索区域、目标气质、发音/尺度要求和构词方向；
+- 若同一模型/聊天历史已经见过 incumbent 或 cooldown 信息，只能视为 best-effort 隔离；需要真正隔离时切换 fresh context / isolated runtime；
 - 若需要围绕某个成功结构继续生成，应先显式切换为 `exploitation`，写明理由和退出条件。
 
 这些规则不是永久禁止复用词根。某个家族在明确 exploitation 中可以被有意识地深挖；问题是**无意识地把局部成功当成整个搜索空间的答案**。
+
+生成后的 Controller 可执行：
+
+1. cooled-family 检查；
+2. incumbent similarity 检查；
+3. strategy fidelity 检查；
+4. 其他 task-local exclusion 检查。
+
+若过滤命中率高，优先诊断上下文污染或正向 search frame 过窄，而不是继续给 Generator 增加更长的禁止列表。
 
 ---
 
