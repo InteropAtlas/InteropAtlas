@@ -1,4 +1,4 @@
-schema_version: "0.1"
+schema_version: "0.2"
 
 job:
   id: null
@@ -59,6 +59,85 @@ map:
   #   status: unexplored | exploring | promising | crowded | low-yield | paused
   #   notes: []
 
+search_control:
+  # exploration | exploitation
+  mode: exploration
+  mode_rationale: null
+
+  semantic_coverage: []
+  # Example:
+  # - region_id: region-001
+  #   label: null
+  #   sampling_level: none | low | medium | high
+  #   recent_candidate_count: 0
+  #   strong_candidate_count: 0
+  #   notes: []
+
+  family_concentration:
+    morphological: []
+    semantic: []
+    construction: []
+    # Example item:
+    # - family_id: null
+    #   recent_candidate_ids: []
+    #   promising_candidate_ids: []
+    #   concentration: low | medium | high
+    #   interpretation: null
+
+  incumbent_isolation:
+    comparison_only_candidate_ids: []
+    generation_visibility: sanitized
+    leaked_candidate_ids: []
+    notes: []
+
+  cooldowns: []
+  # Task-local only; never infer a permanent Skill blacklist from one job.
+  # - family_id: null
+  #   family_type: morphological | semantic | construction
+  #   reason: null
+  #   applies_until: null
+
+  reality_feedback_quarantine:
+    enabled_in_exploration: true
+    same_batch_feedback_to_generator: prohibited
+    notes: []
+
+  strategy_fidelity_checks: []
+  # - round_id: null
+  #   declared_target: null
+  #   actual_output_summary: null
+  #   faithful: true
+  #   diagnosis: null
+
+  sanitized_generation_brief:
+    objective: null
+    search_mode: exploration
+    underexplored_regions: []
+    target_regions: []
+    allowed_construction_families: []
+    blocked_or_cooled_families: []
+    language_and_scale_constraints: []
+    question_to_answer: null
+    omitted_context:
+      - incumbent_names
+      - reality_survivor_shapes
+      - owner_reactions_to_incumbents
+
+execution:
+  autonomous_microcycles: true
+  # Internal microcycles do not require a user "continue" after each one.
+  preferred_batch_size:
+    broad_exploration: 6-10
+    focused_or_exploitation: 3-5
+    validation: 0
+  pause_only_when:
+    - owner_decision_required
+    - irreducible_blocker
+    - convergence
+    - budget_or_time_boundary
+    - goal_or_boundary_ambiguity
+  current_budget_or_time_boundary: null
+
 construction_strategies:
   tried: []
   # Example:
@@ -76,9 +155,18 @@ candidates: []
 # - id: N001
 #   name: null
 #   active: true
+#   role: active | comparison_only | held | retired | finalist
+#   generation_use: allowed | prohibited_as_template_or_semantic_anchor
 #   region_id: null
+#   secondary_region_ids: []
+#   semantic_family_ids: []
+#   morphological_family_ids: []
 #   construction_strategy: null
 #   generation_rationale: null
+#   provenance:
+#     round: null
+#     source: null
+#     generation_brief_id: null
 #   quality:
 #     distinctiveness: null
 #     pronounceability: null
@@ -117,10 +205,25 @@ candidates: []
 #     reason: null
 #     learning_preserved: true
 
+rounds: []
+# - id: RND-001
+#   action: generate | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
+#   search_mode: exploration | exploitation
+#   generated_count: 0
+#   generation_brief_id: null
+#   findings: []
+#   integrity_check:
+#     semantic_coverage_checked: false
+#     family_concentration_checked: false
+#     incumbent_anchoring_checked: false
+#     survivorship_feedback_checked: false
+#     strategy_fidelity_checked: false
+#   next_action: null
+
 observations: []
 # - id: O001
 #   timestamp: null
-#   scope: candidate | batch | region | strategy | owner | reality
+#   scope: candidate | batch | region | strategy | search_integrity | owner | reality
 #   subject_ids: []
 #   observation: null
 #   evidence: []
@@ -128,7 +231,7 @@ observations: []
 diagnostics: []
 # - id: D001
 #   triggered_by: []
-#   level: candidate | batch | region | strategy
+#   level: candidate | batch | region | search_integrity | strategy
 #   diagnosis_type: null
 #   statement: null
 #   confidence: low | medium | high
@@ -149,11 +252,16 @@ experience_candidates: []
 
 current_state:
   strongest_candidates: []
+  promising_candidates: []
+  held_candidates: []
+  finalists: []
   pareto_front: []
   current_region_ids: []
+  search_mode: exploration
   biggest_unknown: null
   blockers: []
   information_gain: unknown
+  search_integrity_status: unknown
 
 next_action:
   action: null
@@ -161,6 +269,8 @@ next_action:
   rationale: null
   triggered_by: []
   expected_information_gain: null
+  search_mode: null
+  requires_owner: false
 
 stop:
   status: continue
