@@ -475,8 +475,8 @@ candidates:
   status: retired_reality
 - id: N005
   name: Eachward
-  active: true
-  status: promising_quality_challenged_reality_partial
+  active: false
+  status: hold_owner_quality_oral_ambiguity
   region_id: R02
   secondary_region_ids: []
   construction_strategy: 前后缀/方向构词
@@ -666,10 +666,11 @@ candidates:
       queried: true
       caveat: 仓库搜索不等于GitHub组织handle完整可用性。
   owner_signal:
-    observation: unseen
-    confidence: null
+    observation: negative
+    confidence: high
     notes:
-    - 尚未进入Owner偏好展示门槛。
+    - Owner明确表示最好不要选择容易误读的名称；Eachward的结构性Each Word近音因此足以退出优先推进。
+    - 这是Owner采用偏好，与现实商标/.org状态及此前质量来源分开记录。
   diagnosis:
   - D10
   - D13
@@ -677,8 +678,9 @@ candidates:
   - D17
   retirement:
     retired: false
-    reason: null
+    reason: 不作永久退休；因Owner明确不希望易误读名称而退出优先推进，保留为质量与现实学习数据。
     learning_preserved: true
+    reactivation_condition: 仅在Owner重新接受Each Word近音，或新命名语境实质改变口头识别要求时重审。
 - id: N006
   name: Manyfold
   active: false
@@ -1073,10 +1075,8 @@ construction_strategies:
     quality_signal: 创造汇聚明确但ori不自证、产品感强
     feasibility_signal: 有限无实质碰撞；.org available
 current_state:
-  strongest_candidates:
-  - N005
-  pareto_front:
-  - N005
+  strongest_candidates: []
+  pareto_front: []
   quality_frontier_before_reality:
   - N001
   - N002
@@ -1087,10 +1087,10 @@ current_state:
   - N007
   - N008
   quality_frontier_status: 分轮的无严格支配记录；未执行八名全体跨轮Pareto重评，不应解读为共同最终前沿。
-  promising_candidates:
-  - N005
+  promising_candidates: []
   held_candidates:
   - N002
+  - N005
   - N008
   reality_retired_candidates:
   - N001
@@ -1101,14 +1101,13 @@ current_state:
   current_region_ids:
   - R02
   - R03
-  biggest_unknown: Owner是否认为Eachward与Each Word的结构性近音、以及ward反读破坏了名称本身质量；这个判断会直接决定是否继续为其投入中国/近似商标深筛。
+  biggest_unknown: 在保持个人视角/转化语义价值的同时，能否生成口头边界清楚、听写恢复稳定且具母组织尺度的新候选？
   blockers:
-  - CNIPA已确认对本云端浏览器触发安全拦截，第9类结果不可得；不得循环重试或记为无结果。
-  - 尚未完成09、16、41、42类的完整语音、视觉与概念近似。
-  information_gain: EUIPO精确Eachward及Eachword均0，现实前景改善；但语言证据把原“可能误听”升级为结构性近音，继续纯工具查询的信息价值低于一次定向Owner判断。
+  - 当前无promising候选；N002、N008仍hold，N005因Owner口头识别偏好退出优先推进。
+  information_gain: Owner判断已解决N005是否值得继续投入的问题；继续其中国商标深筛价值下降，下一小批创意探索高于继续验证单一候选。
   notes:
-  - N005尚未通过Owner Exposure Gate；.org已过时点门槛，但域名available不代表候选好或可依法采用。
-  - 名称质量的口头识别问题与中国现实查询阻塞分开；任一问题都足以阻止当前进入finalists。
+  - N005的.org与部分商标证据保留，不因Owner偏好改写；它退出的是优先采用池，不是历史质量/Pareto学习记录。
+  - 下一批提高已有发音与拼写维度的实际权重，但不把单个Eachward失败概括成所有后缀或复合词无效。
 diagnostics:
 - confidence: high
   counterevidence:
@@ -1287,6 +1286,15 @@ diagnostics:
   counterevidence:
   - 视觉形式清楚；Each Word也可被解释为“每个词/每种表达都重要”的正面延伸；尚无真人听写或Owner反应。
   proposed_state_change: 下调N005发音/拼写评价但不直接退休；现在询问Owner，因为其判断会改变继续深筛还是回到生成。
+- id: D18
+  triggered_by: [O22, D17]
+  level: candidate
+  diagnosis_type: owner_quality_boundary
+  statement: Owner不接受容易误读的候选，Eachward的结构性Each Word近音已足以终止继续投入；这与一般命名质量方向一致，但仍作为Owner采用边界单独记录。
+  confidence: high
+  counterevidence:
+  - Owner使用“最好不要”而非宣布所有近音名称绝对禁用；其他构词若近音带来正面记忆且不破坏识别，仍须逐个判断。
+  proposed_state_change: N005转hold_owner_quality并退出promising/strongest；保留全部provenance、诊断和现实证据。下一轮生成3–5个口头边界更清楚的候选。
 experience_candidates:
 - confidence: low
   counterexamples:
@@ -1487,13 +1495,19 @@ map:
     - 循环但不只是返回过去
     status: unexplored
 next_action:
-  action: ask_owner
-  target: N005 Eachward的结构性口头识别风险
-  rationale: EUIPO已补齐精确与Eachword近形0条；CNIPA因明确安全拦截不能继续自动化。语言证据显示意向读法与Each Word高度近音，已从一般待测摩擦升级为会改变候选投资顺序的质量判断。
-  triggered_by: [D16, D17]
-  expected_information_gain: 若Owner认为Each Word联想可接受或有正面意义，则继续寻找中国可复核替代/人工法律检索并做完整近似筛查；若明显不可接受，则将N005降为质量学习数据并回到小批生成。
-  question: 当你看到并读出Eachward时，“听起来像Each Word”对你是可接受甚至有正面意义，还是已经足以让它退出优先候选？
-  fallback_if_unanswered: N005保持promising_quality_challenged_reality_partial且非finalist；下一轮可先探索3–5个新候选，不继续消耗中国深筛成本。
+  action: generate
+  target: 3–5个口头边界清楚的新候选
+  rationale: Owner已明确不希望名称容易误读；N005退出优先推进后当前无promising候选。最高信息价值是回到小批生成，而不是继续为N005补中国商标证据。
+  triggered_by: [D18, O22]
+  semantic_direction:
+  - 优先保留个人视角、解释、选择与向公共知识回流的内核
+  - 可与R01公共底座或R03创造/再生交叉；R02不是固定方向
+  construction_guidance:
+  - 生成时先做一次无解释口读与分词检查，避免与高频普通短语形成结构性近音
+  - 不禁用复合、后缀、混成或新造；逐候选判断读音、重音和听写恢复
+  - 仍先评价名称本身，再决定是否做现实查询
+  expected_information_gain: 测试能否保留Eachward的个人能动性优势，同时降低首次口头识别和误分词成本。
+  batch_size: 3-5
 observations:
 - evidence:
   - S01
@@ -1691,6 +1705,12 @@ observations:
   subject_ids: [N005]
   observation: 权威词典将后缀-ward读为wərd，与状态中Eachward意向读法一致；结合Each Word普通短语高频，口头边界风险从预测摩擦升级为结构性近音。ward独立词义的负面反读存在，但触发强度未真人验证。
   evidence: [LANG-N005-WARD, LANG-N005-WEB-NEAR]
+- id: O22
+  timestamp: '2026-09-09T02:44:00Z'
+  scope: owner_preference
+  subject_ids: [N005]
+  observation: Owner明确表示最好不要容易误读的名称；该判断使Eachward退出优先推进，但不改写其.org、商标证据或此前质量/Pareto来源。
+  evidence: [2026-09-09 Owner response]
 open_constraints:
 - effect: .org不作为早期创意质量淘汰条件；不可用者可保留为学习数据，但不得进入最终可采用候选。
   id: C-TLD
@@ -1742,6 +1762,11 @@ owner_preference:
     signal: .org为finalists硬门槛但不作早期质量淘汰；商标按全球长期母组织，依US、EU、CN、WIPO/Madrid顺序覆盖研究教育、软件技术、出版公共知识，资助次级。
     source: 2026-09-09当前Owner指令；通过#411本轮恢复记录持久化
     confidence: high
+  - type: current_candidate_judgment
+    signal: 最好不要选择容易误读的名称；Eachward因与Each Word结构性近音退出优先推进。
+    source: 2026-09-09 Owner对RND-005问题的直接回答
+    confidence: high
+    separation: Owner采用偏好；不自动成为所有任务的普遍质量规则
   provisional_signals:
   - '#411摘要称Owner喜欢短、视觉简洁、可后天赋义的新造品牌'
   - cycle/return/connection曾获正反馈
@@ -1765,7 +1790,7 @@ provenance:
     human_test: false
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
   skill_version: 0.1.0
-  snapshot_version: 5
+  snapshot_version: 6
   sources:
   - id: S01
     notes: 读取body和全部评论（0条）
@@ -1987,6 +2012,19 @@ rounds:
   observations: [O19, O20, O21]
   diagnostics: [D16, D17]
   result: EU精确风险信号改善，CN仍error；N005质量由promising调整为promising_quality_challenged，当前需Owner判断近音是否可接受。
+- id: RND-006
+  action: owner_judgment
+  question: Eachward与Each Word的结构性近音是否可接受并值得继续现实深筛？
+  generated_count: 0
+  candidate_ids: [N005]
+  actions_performed: [record_owner_signal, diagnose, reprioritize, update_state]
+  owner_response: 最好不要容易误读的名称。
+  separation:
+  - 不修改N005的.org、商标或碰撞证据
+  - 不把Owner偏好写成Pareto淘汰或一般构词禁令
+  observations: [O22]
+  diagnostics: [D18]
+  result: N005退出优先推进并保留为学习数据；当前无promising候选，下一动作恢复3–5个小批生成。
 schema_version: '0.1'
 skill_feedback:
 - confidence: high
@@ -2028,14 +2066,12 @@ skill_feedback:
   confidence: low
   core_modified: false
 stop:
-  status: ask_owner
-  reason: EU证据已补齐但CN被安全拦截；Eachward与Each Word的结构性近音已足以让Owner判断改变下一步投资顺序。
+  status: continue
+  reason: Owner已解决N005口头识别边界；N005退出优先推进，下一轮恢复受约束的小批生成。
   unresolved:
-  - Owner是否接受Each Word近音及ward反读
-  - CNIPA第9类结果被access_denied，16、41、42尚未执行
-  - 09、16、41、42相关类别的完整近似字标未核验
-  - GitHub组织handle与完整多语言近名未核验
-  - N002、N008继续hold
+  - 当前无promising候选
+  - 新候选需同时测试口头边界、个人能动性与母组织尺度
+  - N002、N005、N008继续hold；其现实/质量学习保留
 pareto_review:
   round: RND-002
   dimensions:
