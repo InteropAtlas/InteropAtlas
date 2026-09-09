@@ -5,7 +5,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 21
+  snapshot_version: 22
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
@@ -14,7 +14,8 @@ lineage:
   - {snapshot: 17, commit: 256037c76856349a05365112713d2e9945ce74e2, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v17.yaml}
   - {snapshot: 19, commit: 49be5bf960a97f3b2b2c1e5ab25b33f539f8e863, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v19.yaml}
   - {snapshot: 20, commit: ca11b1c912631122483403804c07deef502fcda3, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v20.yaml}
-  preservation_note: 历史完整状态按快照归档；current state只保留当前决策事实。未重新初始化任务，未恢复G0–G8 benchmark。
+  - {snapshot: 21, commit: 2cc9ae7b4a259818519a1bac7f2c128c4ad7a146, blob_sha: 20a7002adfe54d061413831b0cfc7719c2f3cdfb, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v21.yaml, note: pointer file; canonical full snapshot remains in Git history at source commit}
+  preservation_note: 历史完整状态由归档文件或对应Git commit保留；current state只保留当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -29,103 +30,106 @@ brief:
     trademark_priority: [US, EU, CN, WIPO/Madrid]
     primary_activity_scope: [研究与教育, 软件/在线工具/技术服务, 出版/公共知识/信息服务]
     secondary_activity_scope: [资助]
+    trademark_screening_current_policy: deferred_by_owner_for_now
+    trademark_defer_interpretation: 跳过不等于通过；不把unresolved写成safe/clear/no-conflict。若后续进入最终采用或注册动作，应恢复筛查。
 current_status:
-  biggest_unknown: Pluralway能否通过US→EU→CN→WIPO/Madrid官方exact+核心近似字标筛查；质量与域名门槛现已通过当前阶段要求。
   strongest_candidates: [N039]
   promising_candidates: [N039]
   finalists: []
   quality_ready_for_owner_exposure: true
-  owner_review_needed_now: false
-  gate_eligible_now: false
-  gate_block_reason: 官方商标导向筛查仍unresolved；#411要求Owner只看已完成必要现实筛查的候选。
-  information_gain: Owner转交的独立对话窗口完成blind quality review，明确未使用现实可用性、域名、商标、Owner历史偏好或其他排名。评审认为Pluralway总体合格以上，Plural Way空格恢复为中度弱点而非淘汰级问题；way带来的理念/方法论身份与母组织尺度下降是最重要结构性风险，但仍不足以退出候选池，并建议在质量层面进入Owner Exposure。
-  blockers:
-  - id: B03
-    type: official_trademark_query_adapter
-    statement: 当前聊天adapter不能完成USPTO/EUIPO/CNIPA/WIPO官方数据库的交互式或认证查询闭环；搜索索引无结果不得写成官方0条。
+  domain_gate_passed: true
+  trademark_screening: deferred_by_owner_for_now
+  owner_review_needed_now: true
+  gate_eligible_now: true_under_owner_deferred_trademark
+  biggest_unknown: Owner第一次真实看到Pluralway时，是否把它感知为有生命力的长期母组织品牌，而不是Plural Way理念短语/方法论；以及是否接受way带来的path/method气质与空格听写归一化成本。
+  information_gain: Owner明确要求商标筛查先跳过，因此B03不再作为当前Owner Exposure Gate阻塞项；它被转为deferred unresolved risk，而不是resolved/pass。Pluralway现已完成独立名称质量复核并通过.org时点硬门槛，可以正式进入Owner Exposure。
+blockers: []
+deferred_risks:
+- id: B03
+  type: official_trademark_query_adapter
+  status: deferred_by_owner
+  statement: USPTO/EUIPO/CNIPA/WIPO官方exact+核心近似字标筛查当前未完成。
+  interpretation: 未完成≠安全；若Owner后续希望进入最终采用/注册/法律清查，应恢复US→EU→CN→WIPO/Madrid筛查。
 resolved_blockers:
 - {id: B01, type: domain_adapter, resolution: 'Namecheap accredited registrar machine signal明确返回pluralway.org available；域名硬门槛通过。'}
 - id: B02
   type: independent_reviewer_runtime
   resolution: Owner提供另一隔离对话窗口的blind quality review；Reviewer明确声明未见/未查现实可用性、域名、商标、撞名、Owner历史偏好或其他排名，因此可作为独立质量复核证据。
-  caveat: 这是Owner转交的外部评审文本，不是本runtime自行调用subagent；按其明确blindness声明接受，保留来源性质。
 candidate:
   id: N039
   name: Pluralway
   active: true
-  construction: plural + way；公共知识允许多种个人路径、解释和创造方式，并让这些路径重新贡献公共世界。
+  status: owner_exposure_ready_trademark_deferred
   pronunciation_hint: PLOOR-ul-way
+  construction: plural + way
+  intended_meaning: 公共知识不是为了产生唯一视角；不同个体可以形成不同视角、路径与创造，并将创造重新贡献给公共世界。
+  compact_narrative: One commons, plural ways.
+  provenance:
+    round_origin: RND-017
+    generation_role: primary_executor
+    review_role: owner_relayed_blind_independent_reviewer
   quality:
     distinctiveness: 较强；组合有品牌轮廓，但plural根在目标领域拥挤
     pronounceability: 较好至强；通常可直接读出
     spelling_burden: 中；纯语音时自然可能恢复为Plural Way，属于空格归一化歧义，不是整体拼错
-    memorability: 较强；基础语素与概念关系形成记忆钩子
-    semantic_fit: 较强至强；直接承载plurality of perspectives / multiple paths，最强连接Perspective层
+    memorability: 较强
+    semantic_fit: 较强至强；最强连接plurality of perspectives / multiple paths
     semantic_room: 较强；不锁死research/standards/software/knowledge等具体业务
     target_scale_fit: 中至较强；plural足够大，但way稳定引入理念/方法/路径感，母组织尺度略降
-    longevity: 较好；无明显时代或技术潮流绑定
-    symbolic_compression: 强；可压缩plurality、perspective、choice、multiple paths
-    cross_context_use: 较好；Research/Tools/项目署名成立，Commons偏理论化
-    architecture_extensibility: 较好；parent brand可成立，但不是不解释就天然像机构的名字
+    longevity: 较好
+    symbolic_compression: 强
+    cross_context_use: 较好
+    architecture_extensibility: 较好
   independent_review:
     status: completed_blind
-    source: owner_relayed_external_conversation
-    blindness_declaration: Reviewer明确声明只评价名称本身，未看、未查或使用现实可用性、域名、商标、公司/产品/项目撞名、Owner历史偏好或其他评审排名。
-    overall: 合格以上；有明确思想内核和较强品牌架构，存在需要真实曝光验证的母组织尺度结构性弱点，但无淘汰级名称质量问题。
-    strongest_point: plural带来的意义压缩能力，与Knowledge belongs to the commons; perspective belongs to the individual存在直接哲学连接。
+    overall: 合格以上；无淘汰级名称质量问题，值得进入Owner Exposure。
+    strongest_point: plural带来的意义压缩能力，与“Knowledge belongs to the commons; perspective belongs to the individual.”有直接哲学连接。
     primary_risks:
-    - Pluralway在纯语音环境很自然被写成Plural Way；视觉体验优于纯语音体验。
+    - 纯语音中Pluralway很自然被写成Plural Way；视觉体验优于纯语音体验。
     - way会把身份向philosophy/methodology/framework/movement/approach/path拉动，而不是天然institutional parent brand。
-    - 名称主要压缩Perspective/multiplicity/paths；Commons与Creation较间接，回流Commons很弱，但评审认为名称无需编码完整循环。
-    architecture_findings:
-      Pluralway_Research: 成立且自然，为最强组合之一。
-      Pluralway_Commons: 成立但概念密度高，偏思想组织/公共知识倡议。
-      Pluralway_Tools: 成立，说明未锁死在理念组织，可自然承载工具集合。
-      Pluralway_InteropAtlas: 成立，哲学性parent与技术性project形成清楚层级。
-      project_by_Pluralway: 语法自然，但首次曝光可能不知道Pluralway是studio/collective/methodology group还是长期机构，暴露母组织尺度风险。
-    reviewer_recommendation: 质量层面值得进入Owner Exposure Gate；重点观察Owner是否自然把它感知成组织名，以及way的method/path感是形成品牌哲学还是削弱母组织尺度。
+    - 名称强编码Perspective/multiplicity/paths，对Commons与Creation较间接，对回流Commons很弱；但Reviewer认为名称无需压缩完整循环。
+  architecture_cases:
+    Pluralway: 成立；品牌感清楚，但首次身份类型仍开放。
+    Pluralway_Research: 很自然，为最强组合之一。
+    Pluralway_Commons: 成立但偏理论化、概念密度高。
+    Pluralway_Tools: 成立，说明可承载软件/工具层。
+    Pluralway_InteropAtlas: 成立，哲学性parent与技术性project层级清楚。
+    project_by_Pluralway: 语法自然，但初见者未必立即把Pluralway识别为长期机构，暴露母组织尺度风险。
   reality:
-    exact_and_spaced: {observation: no_material_exact_collision_found, confidence: low_to_medium, queries: ['Pluralway', 'Plural Way', 'Plural Ways'], caveat: 公共Web/身份检索，不等于官方商标0条}
+    exact_and_spaced:
+      observation: no_material_exact_collision_found
+      confidence: low_to_medium
+      caveat: 仅公共Web/身份检索；不是官方商标库0条证明。
     near_field:
       observation: yellow
       confidence: high
-      interpretation: Plurality Institute、Plural软件和Plural Policy等不是Pluralway exact Red，但表明Plural/Plurality根在AI、研究、软件、公共事务等相邻领域已有高相关占用；相似商标必须查。
+      interpretation: Plurality Institute、Plural软件和Plural Policy等不是Pluralway exact Red，但说明Plural/Plurality在AI、研究、软件、公共事务等相邻领域已有高相关命名占用。
     domains:
     - {domain: pluralway.org, observation: available, query_adapter: Namecheap connected plugin, query_layer: accredited_registrar_machine_signal, machine_result: 'isAvailable=true', price_snapshot: {purchase: 8.48, currency: USD}, caveat: 时点证据；不代表商标或未来仍可注册}
     trademark_oriented_risk:
-      observation: unresolved
-      jurisdiction_results:
-        US: {status: blocked_query_adapter, authority_target: USPTO Trademark Search}
-        EU: {status: blocked_query_adapter, authority_target: EUIPO eSearch/TMview}
-        CN: {status: blocked_query_adapter, authority_target: 中国商标网/CNIPA}
-        WIPO_Madrid: {status: blocked_captcha, authority_target: WIPO Global Brand Database/Madrid}
-      scope_pending: exact + core similar marks；优先Nice 09/16/41/42及研究教育、软件技术、出版公共知识范围
-  status: promising_quality_independently_passed_domain_gate_passed_trademark_blocked
+      observation: unresolved_deferred_by_owner
+      note: 当前Owner明确要求先跳过商标筛查；不得解释为clear/safe。
 rounds:
-- id: RND-021
-  action: ingest_external_blind_quality_review
+- id: RND-022
+  action: owner_defer_trademark_and_open_owner_exposure_gate
   generated_count: 0
   candidate_ids: [N039]
-  actions_performed: [blindness_check, independent_quality_review_ingest, dimension_reconciliation, architecture_reconciliation, diagnose, update_state]
-  result: 独立质量复核通过；Plural Way为空格归一化中度弱点，way的理念/方法感为主要结构性风险但非淘汰级；B02解决。Pluralway质量层面ready for Owner Exposure，但现实Gate仍被B03官方商标筛查阻塞。
+  actions_performed: [record_owner_constraint_change, move_trademark_to_deferred_risk, re-evaluate_gate, update_state]
+  result: 商标筛查不再阻塞当前Owner Exposure；Pluralway进入Owner Exposure Ready，但商标状态保持unresolved/deferred。
 diagnostics:
-- {id: D57, subject: N039, statement: '独立blind review与主执行器方向一致：Pluralway没有淘汰级名称质量问题；Plural Way空格恢复为中度弱点，不等同Eachward/Each Word式语义误读。', confidence: high}
-- {id: D58, subject: N039, statement: 'way是当前最重要内在风险：它将名称向理念、方法、路径或movement解释拉动，使母组织身份需要通过长期使用建立，而非第一次看到就天然成立。', confidence: high}
-- {id: D59, subject: N039, statement: 'Reviewer建议进入Owner Exposure是纯质量层建议；#411的现实筛查Gate仍优先，因此不能在官方商标unresolved时把N039写成finalist或正式交Owner选择。', confidence: high}
-- {id: D60, statement: '独立reviewer不必由当前runtime原生subagent产生；若Owner提供有明确blindness声明且内容覆盖冻结质量问题的隔离评审，可作为独立证据，但应标注source/caveat。', confidence: medium}
-skill_feedback:
-- {id: SF06, status: experience_candidate_strengthened, observation: 'runtime无subagent时，Owner可转交隔离blind review解决独立复核；需要记录blindness声明与来源性质', proposed_change: '未来模板可增加external_independent_review/source/blindness_declaration字段；目前单job证据不改Skill'}
-- {id: SF07, status: experience_candidate, observation: 官方商标screening存在UI/认证/captcha adapter blocker, proposed_change: 未来可补capability-driven商标adapter与分法域evidence contract；当前任务不改Skill}
+- {id: D59, subject: N039, statement: 'Owner显式跳过商标筛查只改变当前Gate要求，不改变商标事实状态；unresolved不得升级为clear。', confidence: high}
+- {id: D60, subject: N039, statement: 'Pluralway当前真正需要Owner判断的不是理论质量，而是第一感受：是否像长期母组织，以及way/path/method与Plural Way空格成本是否可接受。', confidence: high}
 next_action:
-  action: resolve_official_trademark_only
+  action: owner_exposure_review
   target: [N039]
-  rationale: 质量blind复核与.org硬门槛均已通过；继续生成边际信息价值低。进入Owner Exposure Gate前唯一关键缺口是官方四法域商标导向筛查。
-  steps:
-  - 按US→EU→CN→WIPO/Madrid执行Pluralway、Plural Way及核心近似字标；优先Nice 09/16/41/42与研究教育、软件技术、出版公共知识范围
-  - exact 0条不能代替近似字标；Plural/Plurality相邻领域占用必须纳入近似风险解释
-  - 官方库如继续因adapter/captcha阻塞，保持unresolved并进行明确handoff，不以公共搜索负结果代替
-  - 只有商标导向结果无decisive Red且风险可接受时，才把Pluralway作为完整Owner-facing候选进入Exposure Gate
-  owner_question: null
+  rationale: 名称质量已完成blind independent review，.org硬门槛已通过，商标筛查由Owner明确延期，因此当前最高信息价值是Owner真实第一反应。
+  owner_questions:
+  - 第一次看到Pluralway，你自然把它感知成一个长期母组织名称，还是更像“Plural Way”这一理念/方法短语？
+  - 你对Pluralway这个词本身的第一观感是什么：喜欢、无感、还是排斥？
+  - 你是否介意口头听到后很可能被写成Plural Way，以及way带来的“路径/方法”感？
+  after_owner_signal:
+  - 若正向：保留为finalist候选并继续与后续强候选比较；最终采用前恢复被延期的商标筛查。
+  - 若负向：记录具体Owner signal，退出或hold，不把单次偏好升级为普遍命名规则；回到change_strategy/generate。
 stop:
-  status: blocked_before_owner_gate
-  reason: Pluralway质量blind复核与.org门槛已通过；当前只剩官方四法域商标导向筛查阻塞。
+  status: awaiting_owner_judgment
+  reason: 当前已到真正需要Owner主观判断的Exposure Gate；不是执行器阻塞。
