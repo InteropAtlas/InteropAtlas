@@ -166,9 +166,12 @@ candidates:
       evidence: []
       next_scope: US、EU、CN、WIPO/Madrid；09/16/41/42及相关服务
     namespaces: [{namespace: GitHub organization, observation: unverified, queried: false}]
-  diagnosis: [D23, D25]
-  retirement: {retired: false, reason: null, learning_preserved: true}
-  status: promising_reality_partial
+  diagnosis: [D23, D25, D26, D27]
+  retirement:
+    retired: false
+    reason: null
+    learning_preserved: true
+  status: hold_quality_oral_and_genericity
 - active: false
   id: N015
   name: Stoneweave
@@ -1627,12 +1630,12 @@ construction_strategies:
     quality_signal: 完整词或清楚音节改善口头边界；双物象与直接视角构词分别增加解释成本或产品感。
     feasibility_signal: N012高相关研究工具Red；N009历史技术产品yellow；N010 .org available；N011 .org registered。
 current_state:
-  biggest_unknown: Reverna是否能通过近名/跨语言读写和首轮官方商标筛查；其.org已通过时点硬门槛，但现实证据仍远不足以进入finalists。
+  biggest_unknown: 在明确要求低误读且能说明与组织愿景关系后，下一小批能否同时获得自然可解释的语义、口头边界和母组织尺度？
   blockers: []
-  current_region_ids: [R03, R02, R01]
-  information_gain: 本轮确认非光学、组织尺度优先的取材能产生一个较强母组织候选；同时暴露新造词的读写恢复与高相关现实碰撞仍是主要损耗。
+  current_region_ids: [R02, R03, R01]
+  information_gain: Reverna的近形检查在商标投入前发现决定性质量摩擦；避免了让.org可用造成沉没成本偏差。当前应重新生成而非继续现实深筛。
   pareto_front: [N013, N014, N015, N016]
-  strongest_candidates: [N014]
+  strongest_candidates: []
 diagnostics:
 - confidence: high
   counterevidence:
@@ -1879,6 +1882,30 @@ diagnostics:
   confidence: medium
   counterevidence: [样本仅4名，且现实结果受具体词形影响。]
   proposed_state_change: 不切换固定构词法；先对Reverna做高信息量验证，再决定下一轮。
+- id: D26
+  level: candidate
+  diagnosis_type: oral_and_orthographic_ambiguity
+  statement: Reverna的意向发音不是词形自然锁定的唯一读法，且与Ravenna、Riverna、Riverina等已有形态距离近；这直接触及Owner明确的低误读偏好。
+  triggered_by: [O31, O32]
+  confidence: medium_high
+  counterevidence: [未完成真人盲听写实验；相似词存在不证明所有听者都会混淆。]
+  proposed_state_change: Reverna退出优先推进并保留为质量学习数据；停止商标投入。
+- id: D27
+  level: candidate
+  diagnosis_type: post_hoc_semantic_assignment
+  statement: Reverna exact词形出现在通用AI语音工具命名器的虚构名称列表中，结合裸名难以恢复本组织的回流/新生语义，说明其语义联系主要依赖解释，独特象征压缩被高估。
+  triggered_by: [O33]
+  confidence: medium
+  counterevidence: [命名器收录不构成商业身份、权利或现实Red，也不能证明本轮生成抄袭；只能作为音形通用性和后置赋义的证据。]
+  proposed_state_change: 调低distinctiveness、semantic_fit和symbolic_compression的判断；不把该证据混入现实碰撞Red。
+- id: D28
+  level: strategy
+  diagnosis_type: evaluation_priority_adjustment
+  statement: 对本任务，候选与愿景的联系必须能在一两句内自然解释，且指定发音不能替代词形自身的读写稳定；这是Owner反馈与连续两名强候选暴露相似摩擦后的任务级调整。
+  triggered_by: [O22, O31, O33]
+  confidence: medium_high
+  counterevidence: [品牌可通过长期使用获得意义；这不构成禁止所有抽象新造词的一般规则。]
+  proposed_state_change: 下一批优先可自然解释的语义结构与低误读音形，仍允许新造但不能只靠后置故事。
 experience_candidates:
 - confidence: low
   counterexamples:
@@ -2079,16 +2106,17 @@ map:
     - 循环但不只是返回过去
     status: unexplored
 next_action:
-  action: verify_quality_and_reality
-  target: N014 Reverna
-  rationale: 当前最大的未知已从能否生成转为唯一较强候选能否承受口头/拼写近混淆及全球长期母组织的现实筛查；继续生成的信息价值较低。
-  expected_information_gain: 近名与多语言初筛可先判断是否值得投入US/EU/CN/WIPO官方商标查询；真人判断只有在书面分析后仍会改变投入顺序时再询问。
-  tasks:
-  - 检查Reverna/Riverna/Revernia等核心近形、首音与听写分叉，不把指定发音当作已解决
-  - 复核跨语言显著负面/常用词联想
-  - 若质量仍过门，按US、EU、CN、WIPO/Madrid与09/16/41/42相关服务做首轮官方商标导向筛查
-  - 保持.org时点证据独立，不把域名可用当质量加分
-  triggered_by: [D23, D25]
+  action: generate
+  target: 3–5个内部候选
+  rationale: Reverna因任务级低误读要求与语义后置问题退出优先推进；当前无promising候选。下一批应直接检验名称能否自然说明与组织的关系，同时保持母组织尺度。
+  expected_information_gain: 比继续筛查Reverna商标更能回答当前核心未知，并可检验前两轮的误读问题是否来自具体候选而非新造策略整体。
+  generation_constraints:
+  - 每名必须有一条无需虚构词源即可说明的组织关系
+  - 优先音节边界明确、听写候选少的形态；指定读音不能抵消明显分叉
+  - 避免与著名地名、人名或常见品牌音形只差一个元音/辅音
+  - 保持名称质量与现实可用性分离；生成和质量评价先于搜索
+  - 不锁定普通英文词，仍可复合、词根组合或新造
+  triggered_by: [D26, D27, D28]
 observations:
 - evidence:
   - S01
@@ -2340,6 +2368,27 @@ observations:
   observation: Reverna有限exact网络初筛未发现实质身份；PIR RDAP同次控制有效，reverna.org返回404，记为时点available。
   evidence: [EV-N014-1]
   timestamp: '2026-09-09T06:33:00Z'
+- id: O31
+  scope: candidate
+  subject_ids: [N014]
+  observation: Reverna没有找到可靠的既定品牌发音；词形可被读作不同首元音/重音，意向ri-VER-na只是设计指定，不是自然共识。
+  evidence: [web-near-form-search]
+  timestamp: '2026-09-09T07:05:00Z'
+- id: O32
+  scope: candidate
+  subject_ids: [N014]
+  observation: 搜索中出现Ravenna、Riverna、Riverina和Revernia等相邻形态；它们分别已有地名、人名、姓氏或商业/内容使用，构成真实的视觉与口头恢复干扰，但不等同商标冲突。
+  evidence:
+  - https://www.behindthename.com/name/ravenna
+  - https://www.ancestry.com/last-name-meaning/riverna?geo-lang=en
+  - https://www.businesswire.com/news/home/20230905866634/en/Riverina-Selects-SugarCRM-to-Support-Sales-and-Customer-Service
+  timestamp: '2026-09-09T07:05:00Z'
+- id: O33
+  scope: candidate
+  subject_ids: [N014]
+  observation: NameStation的AI voice tool命名页面把Reverna列作批量生成的Invented & Made-Up名称；这不是现实身份Red，但削弱音形独特性与本任务语义内生性的信心。
+  evidence: [https://www.namestation.com/names/ai-voice-tool]
+  timestamp: '2026-09-09T07:05:00Z'
 open_constraints:
 - effect: .org不作为早期创意质量淘汰条件；不可用者可保留为学习数据，但不得进入最终可采用候选。
   id: C-TLD
@@ -2419,7 +2468,7 @@ provenance:
     human_test: false
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
   skill_version: 0.1.0
-  snapshot_version: 8
+  snapshot_version: 9
   sources:
   - id: S01
     notes: 读取body和全部评论（0条）
@@ -2456,7 +2505,7 @@ provenance:
     result: 未发现严格支配；保留语义入口/象征与开放容纳之间取舍，读写风险仍需真人证据
     canonical_acceptance: false
     human_test: false
-  previous_state_blob_sha: 79557636306bde3a3efe50d75054e4ccf45fd290
+  previous_state_blob_sha: ad9a7fbe439585435026c7d5e361a0ad3fe1971f
   notes:
   - 本轮核心Skill未修改：此前链接缺陷诊断被确定性证据推翻。
   - 只从最新state恢复，不重新读取Issue历史。
@@ -2689,6 +2738,21 @@ rounds:
   observations: [O26, O27, O28, O29, O30]
   diagnostics: [D22, D23, D24, D25]
   result: 四名无Pareto淘汰；Kindrel/Civora现实退休，Stoneweave hold，Reverna成为唯一promising_reality_partial；尚无finalist。
+- id: RND-009
+  action: verify_quality_and_language
+  question: Reverna是否满足低误读要求，并且其与组织愿景的联系足够内生，值得进入四法域商标首筛？
+  generated_count: 0
+  candidate_ids: [N014]
+  actions_performed: [near_form_search, pronunciation_diagnosis, semantic_provenance_check, reprioritize, update_state]
+  decision_sequence:
+  - 检查Reverna意向发音与相邻拼写
+  - 发现Ravenna、Riverna、Riverina、Revernia等真实近形及多种自然读法
+  - 发现exact词形被通用AI命名器列作虚构语音工具名；按质量证据处理，不标为现实Red
+  - 诊断认为低误读和内生语义均不足，停止四法域商标查询
+  - 当前无promising候选，下一动作恢复小批生成
+  observations: [O31, O32, O33]
+  diagnostics: [D26, D27, D28]
+  result: Reverna从promising_reality_partial转为hold_quality_oral_and_genericity；.org时点available证据保留但不改变质量结论；仍无finalist。
 schema_version: '0.1'
 skill_feedback:
 - confidence: high
@@ -2731,11 +2795,10 @@ skill_feedback:
   core_modified: false
 stop:
   status: continue
-  reason: RND-008完成并出现一个部分通过现实门槛的强候选；下一轮深查Reverna，不进入finalists。
+  reason: RND-009在商标投入前发现Reverna的任务级质量摩擦；下一轮重新生成小批候选。
   unresolved:
-  - Reverna真人口读/听写与核心近名风险
-  - Reverna在US、EU、CN、WIPO/Madrid的首轮商标导向筛查
-  - 当前无完成必要现实筛查的finalist
+  - 当前无promising候选或finalist
+  - 下一批需同时满足自然语义关系、低误读和母组织尺度
 
 pareto_review:
   round: RND-002
