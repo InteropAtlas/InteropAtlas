@@ -1,4 +1,4 @@
-schema_version: "0.2"
+schema_version: "0.2.1"
 
 job:
   id: null
@@ -86,9 +86,27 @@ search_control:
 
   incumbent_isolation:
     comparison_only_candidate_ids: []
-    generation_visibility: sanitized
     leaked_candidate_ids: []
     notes: []
+
+  generation_isolation:
+    # isolated_runtime | fresh_context | best_effort_same_context | none | unknown
+    level: unknown
+    runtime_identity: null
+    historical_context_may_have_seen_controller_only_exclusions: unknown
+    evidence: []
+    claim_policy: >-
+      Only isolated_runtime/fresh_context with supporting evidence may claim the Generator did not see hidden information.
+      best_effort_same_context may only claim that the current brief did not re-expose it.
+    notes: []
+
+  controller_only_exclusions:
+    incumbent_candidate_ids: []
+    cooled_family_ids: []
+    survivor_pattern_ids: []
+    owner_reaction_subject_ids: []
+    other: []
+    # These are for Controller/post-generation filtering; do not enumerate them in the Generator brief by default.
 
   cooldowns: []
   # Task-local only; never infer a permanent Skill blacklist from one job.
@@ -109,19 +127,37 @@ search_control:
   #   faithful: true
   #   diagnosis: null
 
-  sanitized_generation_brief:
-    objective: null
+  generator_brief:
+    id: null
     search_mode: exploration
-    underexplored_regions: []
-    target_regions: []
-    allowed_construction_families: []
-    blocked_or_cooled_families: []
-    language_and_scale_constraints: []
+    positive_objectives: []
+    positive_search_zones: []
+    positive_construction_targets: []
+    quality_targets: []
+    hard_constraints_only: []
     question_to_answer: null
-    omitted_context:
+    negative_examples_included: false
+    controller_only_exclusions_exposed: false
+    omitted_context_categories:
       - incumbent_names
+      - cooled_family_tokens
       - reality_survivor_shapes
       - owner_reactions_to_incumbents
+    notes: []
+
+  post_generation_filter:
+    enabled: true
+    check_cooled_families: true
+    check_incumbent_similarity: true
+    check_strategy_fidelity: true
+    check_other_controller_only_exclusions: true
+    last_round_id: null
+    generated_count: 0
+    blocked_count: 0
+    blocked_candidate_ids: []
+    violation_types: []
+    high_hit_rate: false
+    notes: []
 
 execution:
   autonomous_microcycles: true
@@ -167,6 +203,7 @@ candidates: []
 #     round: null
 #     source: null
 #     generation_brief_id: null
+#     generation_isolation_level: unknown
 #   quality:
 #     distinctiveness: null
 #     pronounceability: null
@@ -207,17 +244,24 @@ candidates: []
 
 rounds: []
 # - id: RND-001
-#   action: generate | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
+#   action: generate | post_generation_filter | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
 #   search_mode: exploration | exploitation
 #   generated_count: 0
 #   generation_brief_id: null
+#   generation_isolation_level: unknown
 #   findings: []
 #   integrity_check:
 #     semantic_coverage_checked: false
 #     family_concentration_checked: false
 #     incumbent_anchoring_checked: false
+#     negative_constraint_priming_checked: false
+#     isolation_claim_checked: false
+#     post_generation_filter_checked: false
 #     survivorship_feedback_checked: false
 #     strategy_fidelity_checked: false
+#   post_generation_filter:
+#     blocked_count: 0
+#     violation_types: []
 #   next_action: null
 
 observations: []
@@ -258,6 +302,7 @@ current_state:
   pareto_front: []
   current_region_ids: []
   search_mode: exploration
+  generation_isolation_level: unknown
   biggest_unknown: null
   blockers: []
   information_gain: unknown
