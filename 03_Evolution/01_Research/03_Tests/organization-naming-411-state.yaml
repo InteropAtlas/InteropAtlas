@@ -5,12 +5,12 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 29
+  snapshot_version: 30
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
   preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
-  latest_archive: {snapshot: 28, commit: fae6d570ab9dd4b070daf3dae55bc77cb15245da, source_commit: 85a77bc38d4f8c884ee455c5baf08788ca29a3cc, source_blob_sha: c0ac186f6c7bfb4ab97f4acb92c0e73200d5dccc, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v28.yaml}
+  latest_archive: {snapshot: 29, commit: 811d7cc232eeab06addd79813b95d69f40e20f6a, source_commit: d81ca41f5a8640fca95c23f4c325844932a44a28, source_blob_sha: b4c4c94224b5c98637fcecf81da48adfcae3d6fb, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v29.yaml}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -19,6 +19,7 @@ brief:
   - 连写后有稳定canonical segmentation
   - 字面语法与intended meaning一致；与愿景关系可自然说明，不靠虚构词源
   - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
+  - sound-first不等于随机幻想词；进入top slice的coinage必须有真实结构动机
   reality_constraints:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
@@ -27,8 +28,8 @@ current_status:
   promising_candidates: [N060]
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: sound-first受控新造词能否产生至少一个与Plurifold同等级、但Owner resonance更强且现实空间更干净的候选。
-  information_gain: 本轮按Owner要求提速，扩大为批量生成/批量预检/批量现实筛查。现成概念词、河流分流回流、共同文本、同步/多形态、plural派生等路线继续高密度撞入AI/research/software命名空间；没有新候选达到Plurifold的综合水平。继续围绕同义词和词根穷举边际收益低，应切到sound-first controlled coinage。
+  biggest_unknown: 能否找到语义锚点更强、但不回到拥挤现成词空间，同时Owner resonance高于Plurifold的候选。
+  information_gain: 按加速策略执行20-30级sound-first大批生成与硬语言压缩。多数候选在拼写恢复、词界、幻想名感、AI品牌模板感或构造动机不足阶段直接退出；top-slice现实抽查中Relume、Prilume、Virel、Toven、Norven等再次撞入AI/software/research高相关身份。sound-first单独使用不能解决问题：它能降低普通词collision，但很容易牺牲意义抓手或进入当代AI造词风格。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
@@ -48,35 +49,39 @@ active_candidate:
   owner_exposure: {raw_affect: neutral, informed_affect: neutral_accepting, rejection_reason: none, promotion_reason: none}
   reality: {exact_public_identity: no_material_exact_collision_found_at_checked_time, domain: plurifold.org_available_at_checked_time, trademark: unresolved_deferred_by_owner}
 rounds:
-- id: RND-034
-  action: accelerated_batch_expansion
-  strategy: [existing_concept, controlled_coinage, structural_metaphor, plural_derivatives]
-  batch_size: large_multi_batch
+- id: RND-035
+  action: accelerated_sound_first_large_batch
+  strategy: sound_first_controlled_coinage
+  internal_batch_size: 20_to_30
+  preflight_filters: [pronunciation_stability, spelling_recovery, canonical_segmentation, non_AI_template_feel, organization_scale, traceable_structure_motive]
   result: no_new_owner_ready_candidate
   notable_reality_rejections:
-  - {name: Pluriform, reason: active software platform/company exact identity}
-  - {name: Plurivox, reason: active PR/communications company exact identity}
-  - {name: Anabranch, reason: active agent-scale version-control product + other exact companies/software}
-  - {name: Variorum, reason: active AI engineering knowledge layer + LLNL software}
-  - {name: Pluralis, reason: active decentralized-AI research lab, highly adjacent}
-  - {name: Refluent, reason: multiple active AI/software identities}
-  - {name: Trellis, reason: multiple research/agent/graph software identities}
-  - {name: Accrete, reason: active AI company}
-  note: 其他候选在quality preflight阶段因读音/词界/过强技术或行业身份退出，未投入更深现实检查。
+  - {name: Relume, reason: active AI website-building platform exact identity}
+  - {name: Prilume, reason: active privacy-preserving AI assistant exact identity}
+  - {name: Virel, reason: active AI creative workspace + AI solutions identities}
+  - {name: Toven, reason: active institutional-brokerage AI agent platform}
+  - {name: Norven, reason: active AI governance institution + agent trust/compliance products}
+  - {name: Ciren, reason: NSF Cross-Institutional Research Engagement Network and ASU research identity}
+  - {name: Relen, reason: active software/financial-control platform}
+  - {name: Merren, reason: active AI-powered customer research platform}
+  secondary_notes:
+  - Veyrin现实主要表现为surname，但纯语音拼写分叉Veyrin/Vayrin/Veyren偏高，不值得推进。
+  - Talven现实冲突较弱但构造动机不足，过于像任意proper-name coinage，未达到语义质量门槛。
+  - Meldren现实高相关collision不明显，但人名/幻想角色感明显，且meld+render式解释过度事后赋义，未推进。
 diagnostics:
-- {id: D76, statement: '在research/software/public-knowledge相邻空间，现成高质量英语词、稀有概念词和古典派生词的现实占用率持续极高。', confidence: high}
-- {id: D77, statement: '继续沿plural/pluri同义派生会迅速撞入Pluralis/Pluriform/Plurivox等相邻身份，且语义差异有限，边际信息价值低。', confidence: high}
-- {id: D78, statement: '下一步应把生成与现实筛查解耦：先大批量sound-first造词，通过英语音形/词界/听写硬过滤后，仅对top slice做现实查询。', confidence: high}
+- {id: D79, statement: 'sound-first能减少透明英语复合词的词界问题，但若缺少强结构动机，会迅速滑向任意人名/幻想名或AI品牌词；这不符合当前组织命名目标。', confidence: high}
+- {id: D80, statement: '当前真正稀缺的不是可注册的造词，而是同时满足自然音形、可解释意义、长期机构尺度和现实空间的名称。', confidence: high}
+- {id: D81, statement: 'Plurifold经过多路线压力后仍保持benchmark地位，说明其优势来自音形、意义与现实空间三者平衡，而不是单一维度突出。', confidence: high}
 next_action:
-  action: sound_first_controlled_coinage_large_batch
-  target_count: 20-30_internal
+  action: hybrid_semantic_backbone_sound_first_large_batch
+  target_count: 24_to_36_internal
   strategy_delta:
-  - 不要求名称表面直接出现plural/common/view/way/fold/form等高频语义词根。
-  - 先定义声音约束：2-3音节；英语主读法明显；拼写恢复分叉低；避免-ara/-era/-ora/-iva等泛AI尾音模板；避免内部高频词块误断。
-  - 允许意义后置，但每个进入top slice的coinage必须能追溯到一个真实结构动机/隐喻，不得随机赋义。
-  - 从20-30个内部候选先压缩到3-5个，再做现实 exact/near-field 与.org；Owner只看真正过线者。
-  - Plurifold继续作为benchmark，不重复挑刺。
+  - 不再做纯sound-first；每个候选必须先绑定一个清晰结构隐喻，再进行声音优化。
+  - 优先测试非热门语义骨架：共享底座/分枝/再汇入、共同文本/个人注解、同源光线/不同折射、共同场域/不同路径后回流。
+  - 禁止直接使用已高拥挤的common/plural/view/fold/form/way/research/open/mind/weave等表面词。
+  - 每个骨架可派生3-5个音形版本，一次性批量预检；只对top 3-5做现实与.org。
+  - Plurifold继续作为benchmark，不重复消耗时间。
   owner_question: null
 stop:
   status: continue_internal_microcycles
-  reason: 当前没有需要Owner回答的新问题；下一步应自主执行大批量sound-first生成与筛选。
+  reason: 当前没有需要Owner回答的新问题；继续自主批量生成与筛选，直到出现真正可比较候选或策略明显收敛。
