@@ -1,19 +1,28 @@
-schema_version: '0.1'
+schema_version: '0.2'
 task:
   issue: 411
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 32
-  skill_version: 0.1.0
-  skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
+  snapshot_version: 33
+  skill_version: 0.2.0
+  skill_control_commits: [cbee63c, ef16007, d967470, 876598d]
 lineage:
-  preservation_note: 历史完整状态由Git commits与archive pointers保留；未重新初始化任务，未恢复G0–G8 benchmark。
-  latest_archive: {snapshot: 31, commit: 53a735581ea79d94d4fd0fd4faa79181601bb17b, source_commit: 3d3e174c680ae165ac6dbbbbc1f2875e18ff1520, source_blob_sha: c3635d0dbf69ffbb293ee1b1ccb76545c7004e2e, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v31.yaml}
+  preservation_note: 未重新初始化任务，未恢复G0–G8 benchmark。snapshot v32已原样归档；其旧Skill下的任务事实、失败证据与Owner信号继续有效，但从本snapshot起控制规则切换为Adaptive Naming Skill v0.2.0。
+  latest_archive:
+    snapshot: 32
+    archive_commit: 8de1e7fe86a3e0b1da462871e9804b177146183f
+    source_blob_sha: d0f3bb4c3e55286a51f527a5155588ccc1af24b8
+    path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v32.yaml
+  previous_archive: {snapshot: 31, commit: 53a735581ea79d94d4fd0fd4faa79181601bb17b, source_commit: 3d3e174c680ae165ac6dbbbbc1f2875e18ff1520, source_blob_sha: c3635d0dbf69ffbb293ee1b1ccb76545c7004e2e, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v31.yaml}
 brief:
-  object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
-  semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
+  object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、教育、工具/软件、公共知识工作、出版与创造/发现活动。
+  semantic_core:
+  - 公共共同体的共享知识
+  - 个人视角、解释与选择
+  - 视角产生创造与发现
+  - 创造回到公共知识并支持下一轮
   quality_requirements:
   - 低误读、低听写分叉
   - 连写后有稳定canonical segmentation
@@ -22,14 +31,62 @@ brief:
   reality_constraints:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
+search_control:
+  search_mode: exploration
+  incumbent_isolation:
+    comparison_only_candidates: [N060]
+    generator_access_to_incumbent_name: prohibited
+    generator_access_to_incumbent_roots_sound_or_success_pattern: prohibited
+    status: enforced
+  temporary_family_cooldown:
+    families: [plural, plur, pluri, poly, multi, many, divers, varia, direct_multiple_voices_views_forms]
+    scope: task_local
+    permanent_blacklist: false
+  sanitized_generation_brief:
+    exposed:
+      object: 长期umbrella organization，需承载research/education/tools/public knowledge/publishing/creation等不同项目类型。
+      quality_constraints: [2_to_3_or_clear_syllable_structure_when_coined, stable_visual_audio_parse, low_dictation_branching, natural_semantic_motive, umbrella_scale, avoid_industry_lock]
+      semantic_zones:
+      - Commons/shared substrate/stewardship/public inheritance
+      - Creation/generation/discovery/transformation
+      - Return/recirculation/contribution/re-entry/renewal
+      - Whole-loop/relationship structures encoding source-to-individual-transformation-to-return without naming plurality
+      question: 在不使用multiplicity家族、不看现有strongest名称的条件下，哪些语义承载结构仍能形成自然、可记、长期母组织尺度的名称？
+    withheld:
+    - Plurifold具体名称、构词、音形和Owner反应
+    - Plurivocal及其他plur-family幸存结果
+    - 域名可用性、现实collision幸存模式、商标结果
+  semantic_coverage:
+    rnd_038:
+      Commons_shared_substrate: 7
+      Creation_generation: 7
+      Return_recirculation: 7
+      Whole_loop_relationship: 7
+      total_internal: 28
+      result: reset_coverage_restored
+  concentration_check:
+    multiplicity_family_in_rnd_038_to_040_top_slices: 0
+    incumbent_pattern_leakage_found: false
+    construction_concentration: no_single_family_collapse; later focused probes explicitly bounded
+    result: pass_for_reset_phase
+  reality_feedback_quarantine:
+    same_batch_quality_before_reality: enforced
+    reality_results_exposed_to_generator: false
+    result: pass
+  strategy_fidelity:
+    rnd_038: pass_four_declared_zones_materially_sampled
+    rnd_039: pass_abstract_relational_process_probe
+    rnd_040: pass_controlled_carry_return_compound_probe
+    rnd_041: pass_integrity_review_no_generation
 current_status:
   strongest_candidates: [N060]
   promising_candidates: [N060]
+  comparison_only_candidates: [N060]
   held_candidates: [N061]
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: 在解除plurality/plur-语义与形态锚定后，其他三段核心愿景（Commons、Creation、Return-to-Commons）及其结构关系能否产生同等级候选；当前最大问题是搜索空间偏置而非缺少更多plur-变体。
-  information_gain: Owner指出连续第三个plur-开头候选异常。自查确认发生semantic/morphological mode collapse：Perspective/multiplicity被过度优化；Plurifold从comparison benchmark泄漏成隐性生成模板；v30虽禁止plural等表面词根，但执行中错误允许同家族pluri-绕过；现实筛查又使pluri+稀有后半词形成幸存者偏差。Plurivocal本体质量未被否定，但其生成来源受到策略污染，因此暂停继续推进blind review。
+  biggest_unknown: 搜索空间坍缩已解除；当前最大未知变为：能否找到一种非multiplicity、非通用过程词、也非过具体生态/材料物象的关系承载结构，使名称同时具备可恢复语义、独特机构身份和长期母组织尺度。
+  information_gain: anti-mode-collapse reset已成功恢复Commons、Creation、Return和Whole-loop覆盖，且未发生incumbent泄漏。新样本显示：直接表达continuity/reciprocity/relay/cultivation等过程与关系的现成词通常现实拥挤并偏方法/系统；用seed/tide/catchment等具体自然载体虽能表达循环，却容易锁到生态、农业、地理或项目尺度；少量受控英语复合词能改善可解释性，但容易显得刻意且仍可能撞入现有studio/AI/app命名空间。当前没有新候选达到N060的comparison bar。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
@@ -41,7 +98,7 @@ owner_signals:
   type: process_integrity_feedback
   valence: corrective
   summary: Owner发现Pluralway、Plurifold、Plurivocal连续以plur-族开头，要求自查生成是否失去多样性。
-  interpretation: 属于高价值方法反馈；需优先修复搜索空间坍缩，而不是继续为第三个plur-候选做精细评审。
+  interpretation: 已通过v0.2 anti-mode-collapse reset执行验证；本snapshot未再出现同族泄漏。
 candidates:
 - id: N060
   name: Plurifold
@@ -58,60 +115,141 @@ candidates:
   name: Plurivocal
   active: false
   status: hold_generation_strategy_contaminated_not_quality_failed
-  reason: 名称本体预检与现实/.org结果可保留，但其进入top slice发生在已确认的plur-/Perspective模式坍缩中；继续blind review会优化局部错误方向。待搜索空间恢复后，可作为历史候选重新比较，但不享有当前promising地位。
+  role: historical_hold_only
+  reason: 名称本体预检与现实/.org结果保留，但其进入top slice发生在已确认的plur-/Perspective模式坍缩中；v0.2 reset后未重新激活。
   quality_preflight: {canonical_segmentation: stable, pronounceability: good, spelling_recovery: light_to_medium, semantic_fit: strong_but_partial, semantic_room: good, target_scale_fit: medium_to_good}
   reality: {exact_public_identity: no_material_exact_collision_found_at_checked_time, domain: plurivocal.org_available_at_checked_time, trademark: unresolved_deferred_by_owner}
 rounds:
 - id: RND-037
+  inherited_from_snapshot: 32
   action: self_audit_after_owner_mode_collapse_signal
   generated_count: 0
   result: confirmed_semantic_and_morphological_mode_collapse
-  findings:
-  - id: F01
-    type: semantic_overfit
-    statement: Perspective/multiplicity被当作整个Vision的主要命名代理，Commons、Creation、Return-to-Commons被系统性低采样。
-  - id: F02
-    type: incumbent_anchoring
-    statement: Plurifold本应仅作为比较基准，但在后续生成中成为隐性成功模板，导致形态和语义邻域反复局部搜索。
-  - id: F03
-    type: constraint_bypass
-    statement: v30禁止plural等高拥挤表面词根，但执行错误把pluri-视为不同字符串而允许通过；规则应按morphological/semantic family而非exact substring执行。
-  - id: F04
-    type: survivorship_bias
-    statement: 现实筛查大量淘汰其他路线后，pluri+稀有后半词更容易留下，造成可用性反馈反向收窄创意生成。
-  - id: F05
-    type: strategy_fidelity_failure
-    statement: RND-036声称探索共享底座/分枝/回流等结构骨架，但最终top candidate Plurivocal实际上重新回到plurality/voice邻域，说明策略声明与实际候选选择不一致。
+  archive_reference: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v32.yaml
+- id: RND-038
+  action: anti_mode_collapse_semantic_space_reset_broad_exploration
+  search_mode: exploration
+  generated_count: 28
+  generation_order: independent_zone_buckets_then_cross_zone_funnel
+  reality_feedback_quarantine: true
+  internal_buckets:
+    Commons_shared_substrate: [Wellspring, Steward, Endowment, Heritage, Trustspring, Seedhold, Inheritance]
+    Creation_generation: [Kindling, Firstlight, Brightwork, Genesis, Emergence, Making, Discovery]
+    Return_recirculation: [Reciprocity, Renewal, Relay, Reprise, Replenish, Recircle, Giveback]
+    Whole_loop_relationship: [Seedfall, Catchment, Tidemark, Waterwheel, Refrain, Continuance, Circulation]
+  quality_funnel_top_slice: [Continuance, Reciprocity, Relay, Seedfall, Tidemark]
+  quality_observation: 本批成功恢复语义覆盖，但现成过程词普遍类别化/方法化；自然物象能表达循环但母组织尺度受限。Seedfall因生态/种子过程与项目感在质量层hold。
+  reality_after_funnel:
+  - name: Continuance
+    observation: 活跃The Continuance Foundation与The Continuance Institute等身份；不值得继续投入。
+    class: red
+    evidence: [https://continuance-institute.org/orientation]
+  - name: Reciprocity
+    observation: 活跃The Reciprocity Foundation；exact institutional identity已存在。
+    class: red
+    evidence: [https://www.reciprocityfoundation.org/]
+  - name: Relay
+    observation: 同名AI agent/workspace/control-plane等技术身份高度密集且直接相邻。
+    class: red
+    evidence: [https://relaycomputer.com/, https://www.relay-work.com/, https://www.relaydev.ai/]
+  - name: Tidemark
+    observation: 活跃软件studio及既有foundation/金融等多种组织身份。
+    class: red
+    evidence: [https://www.tidemark.one/, https://www.tidemarkfcu.org/]
+  - name: Seedfall
+    observation: 未因有限公共搜索发现决定性高相关exact身份而升级；但名称本身尺度问题已足以停止。
+    class: hold_quality_scale
+  domain_queries: 0
+  result: no_new_promising_candidate
+- id: RND-039
+  action: change_strategy_abstract_relational_process_probe
+  search_mode: exploration
+  generated_count: 8
+  generator_saw_prior_reality_results: false
+  internal_candidates: [Iterance, Tributary, Continuity, Vernacular, Cultivate, Accretion, Tradition, Revision]
+  quality_funnel_top_slice: [Iterance, Tributary, Continuity, Cultivate]
+  reality_after_funnel:
+  - name: Iterance
+    observation: 至少两个活跃同名技术身份，分别覆盖structured work/AI agents与architecture-to-outcomes knowledge graph。
+    class: red
+    evidence: [https://iterance.se/, https://iterance.dev/]
+  - name: Tributary
+    observation: Tributary Labs活跃，覆盖软件、智能自动化、AI及教育/政府/非营利服务对象。
+    class: red
+    evidence: [https://tributarylabs.com/]
+  - name: Continuity
+    observation: 活跃同名AI coding-agent coordination/work graph产品；exact技术身份与目标未来工具范围相邻。
+    class: red
+    evidence: [https://www.usecontinuity.dev/]
+  - name: Cultivate
+    observation: CUltivate AI为2026年成立、研究机构参与创建的AI平台组织；另有长期组织发展/文化服务身份。词本身也高度通用。
+    class: red
+    evidence: [https://getcultivate.ai/about/, https://www.cultivate.co/]
+  domain_queries: 0
+  result: no_new_promising_candidate
+- id: RND-040
+  action: controlled_carry_return_compound_probe
+  search_mode: exploration
+  generated_count: 8
+  generator_saw_prior_reality_results: false
+  internal_candidates: [Carryforth, Everturn, Seedward, Bringforth, Giveforth, Keepturn, Trustforth, Handforward]
+  quality_funnel_top_slice: [Carryforth, Everturn, Seedward]
+  quality_observation: 该构词可保持语义可解释性并脱离multiplicity家族，但多数样本仍偏短语化/项目化或带明显物理动作；top slice未超过comparison bar。
+  reality_after_funnel:
+  - name: Carryforth
+    observation: 活跃Carryforth Design exact studio身份；虽领域不完全相邻，但已形成清楚品牌身份。
+    class: red_or_strong_yellow_identity
+    evidence: [https://www.carryforthdesign.com/]
+  - name: Everturn
+    observation: 活跃Everturn AI求职平台；exact技术品牌直接存在。
+    class: red
+    evidence: [https://everturn.ai/]
+  - name: Seedward
+    observation: 活跃seedward.app exact身份；词形亦稳定触发seed/agriculture方向，母组织尺度不足。
+    class: red_plus_quality_scale
+    evidence: [https://www.seedward.app/]
+  domain_queries: 0
+  result: no_new_promising_candidate
+- id: RND-041
+  action: check_search_integrity_after_reset
+  generated_count: 0
+  result: reset_phase_passed_with_no_new_comparison_peer
+  checks:
+    semantic_coverage: pass
+    multiplicity_family_cooldown: pass
+    incumbent_isolation: pass
+    reality_feedback_quarantine: pass
+    strategy_fidelity: pass
+    owner_input_required: false
+  phase_convergence: anti-mode-collapse reset objective achieved;继续在同一批直白过程词/自然循环词上扩量的信息增益已明显下降。
 diagnostics:
-- {id: D85, statement: '当前问题不是plur-本身质量差，而是候选家族多样性失效；连续多个同族候选意味着生成器正在局部爬山而非开放探索。', confidence: high}
-- {id: D86, statement: 'Plurifold作为benchmark必须冻结为evaluation-only，不能再作为生成提示、词根来源、音形模板或“过线特征”来源。', confidence: high}
-- {id: D87, statement: '短期纠偏应按词根/语义家族做负约束，而非只禁exact字符串；plur/plural/pluri/poly/multi/many/divers/varia等直接multiplicity代理需要暂时冷却。', confidence: high}
-- {id: D88, statement: '为恢复覆盖率，应暂时对四段Vision做分区探索，优先补采样Commons、Creation、Return/Recirculation及它们之间的结构关系；这是本任务纠偏配额，不升级为Skill永久配额规则。', confidence: high}
+- {id: D85, inherited: true, statement: 'RND-037确认的核心问题是候选家族多样性失效，而不是plur-本身质量失败。', confidence: high}
+- {id: D89, statement: 'v0.2 anti-mode-collapse reset成功：四个低采样语义区均被实际采样，近期top slice无multiplicity家族泄漏，Plurifold未参与生成。', confidence: high}
+- {id: D90, statement: 'Commons/Return/whole-loop若直接使用continuance/reciprocity/relay/cultivate等通用过程或关系词，名称本身容易偏方法/系统且现实命名空间高度拥挤。', confidence: medium_high}
+- {id: D91, statement: 'seed/tide/catchment等自然过程载体能较自然表达共享底座与循环，但容易带农业、生态、地理或单项目尺度；这是一组局部样本，不升级为永久禁用。', confidence: medium}
+- {id: D92, statement: '受控英语动作复合可以避免空心AI造词与multiplicity锚定，但当前样本仍有短语化/刻意构造与现实名称占用问题，尚未形成值得exploitation的强区域。', confidence: medium}
+- {id: D93, statement: '当前没有证据说明应降低N060的comparison bar，也没有证据支持重新激活N061；搜索应继续保持exploration而非围绕任何incumbent深挖。', confidence: high}
 skill_feedback:
 - id: SF10
-  status: experience_candidate
-  observation: adaptive local optimization can collapse around a successful incumbent even when strategy labels change
-  proposed_change: diagnosis reference可增加incumbent-anchoring/mode-collapse检查；当多个候选共享同一词根/语义族时，检查生成多样性与策略声明-候选一致性
-  scope: current_job_high_confidence; cross_job_unvalidated
+  origin: snapshot_v32
+  status: incorporated_in_skill_v0.2_and_task_validated
+  observation: incumbent anchoring / semantic-family concentration / strategy fidelity / survivorship feedback需要显式控制。
+  current_test_result: 本轮v0.2控制成功阻止了同族回流，说明修复方向与RND-037故障模式一致；仍只算当前任务内验证，不冒充跨任务普遍验证。
 next_action:
-  action: anti_mode_collapse_semantic_space_reset
-  phases:
-  - phase: freeze_incumbent
-    rule: Plurifold只用于最终比较，不参与生成提示、构词、词根或筛选启发。
-  - phase: temporary_family_cooldown
-    rule: 下一批禁止plur/plural/pluri/poly/multi/many/divers/varia及直接“multiple voices/views/forms”代理；禁止仅换后半词的同族变体。
-  - phase: rebalance_semantic_coverage
-    zones:
-    - Commons/shared substrate/stewardship/public inheritance
-    - Creation/generation/discovery/transformation
-    - Return/recirculation/contribution/re-entry/renewal
-    - Whole-loop/relationship structures that encode source→individual transformation→return without naming plurality directly
-  - phase: independent_generation_buckets
-    rule: 每个zone先独立生成，不看其他zone候选；每区至少保留语义与构词多样性观察，再统一funnel。
-  - phase: funnel_without_reality_feedback
-    rule: 先完成跨zone名称本体比较，再对跨zone top slice做现实筛查；现实结果不得回馈同批生成。
-  target_count: 24_to_32_internal_total
+  action: remap_less_literal_relational_carriers_then_generate
+  search_mode: exploration
+  rationale: reset已完成；继续穷举直白过程词或自然循环词边际信息价值下降，需要寻找能承载关系/传承/贡献结构、但不直接等于一个过程词或具体物象的新语义载体。
+  generator_constraints:
+  - 继续隐藏N060/N061与所有现实幸存结果
+  - multiplicity家族cooldown继续至少一个新探索阶段
+  - 不把本轮现实Red的具体词形作为“反向成功模板”；只由控制器记录crowding
+  - 新批先quality与architecture，再reality；只有达到comparison bar附近才查.org
+  map_targets:
+  - cultural_or_symbolic_carriers_of_inheritance_and_reinterpretation
+  - institutional_or_social_structures_for_stewardship_and_contribution
+  - transmission_and_return_structures_without_path_method_or_cycle_literalism
+  target_generation: 18_to_24_internal_after_map
   owner_question: null
 stop:
-  status: continue_internal_microcycles_after_strategy_reset
-  reason: Owner已指出并确认需要方法纠偏；当前无需继续审核Plurivocal，应先恢复搜索空间多样性后再生成。
+  status: phase_convergence_pause_allowed
+  reason: anti-mode-collapse reset这一阶段已完成并通过search-integrity复核；连续三个新策略批次未形成comparison peer，当前应在下一执行段先重绘较不直白的关系承载语义，而不是继续同类扩量。当前无需Owner判断。
