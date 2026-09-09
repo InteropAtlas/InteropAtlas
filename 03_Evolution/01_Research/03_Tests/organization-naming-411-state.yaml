@@ -5,14 +5,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 27
+  snapshot_version: 28
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
   preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
   latest_archives:
-  - {snapshot: 25, commit: efadb8da83592720aab1c43ef3968329e3c3766a, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v25.yaml}
-  - {snapshot: 26, commit: 71931098c9082b4f3e24d2b92e2113e9ef0bc635, blob_sha: 1ed1282c26d327db4edcda550065a5fb2b24bc7b, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v26.yaml, note: pointer; canonical full snapshot in Git history}
+  - {snapshot: 26, commit: 71931098c9082b4f3e24d2b92e2113e9ef0bc635, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v26.yaml}
+  - {snapshot: 27, commit: b3534c0973e74269c26bc01705f0e2402e6c87dd, source_commit: e3ee18b06da74a96d8957ba2528df65239acafca, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v27.yaml}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -25,12 +25,12 @@ brief:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
 current_status:
-  strongest_candidates: []
-  promising_candidates: []
+  strongest_candidates: [N060]
+  promising_candidates: [N060]
   finalists: []
-  owner_review_needed_now: true
-  biggest_unknown: Owner在理解Plurifold构词与intended meaning之后，是否对它产生明显正向改观；若仍然一般，则该候选应退出promising并回到generate/change_strategy。
-  information_gain: Owner第一次未经解释看到Plurifold时，第一联想不是multiple perspectives或manifold，而是折叠屏手机中的Fold；整体观感“一般，没有特别感觉”。这是真实Exposure信号，说明fold在Owner实际语境中已被消费电子产品类别强烈占用为“折叠屏/折叠设备”联想。该信号不推翻blind reviewer对语言结构的评价，但削弱母组织第一身份与情感吸引力。
+  owner_review_needed_now: false
+  biggest_unknown: 是否能找到至少一个与Plurifold同等级但具有更强Owner resonance、同样低误读且母组织身份更自然的候选，以便进行真正比较。
+  information_gain: Owner澄清Fold→折叠屏手机不是对fold/折叠语义本身的否定，也不认为“折叠”不适合作为组织品牌；该联想主要来自中文母语与日常英语暴露路径中Fold手机品类的高显著性。理解pluri- + -fold解释后，Owner并未提出新的结构性反对，但总体情感仍为“一般、没有特别感觉”。因此Plurifold不应因该联想被淘汰，也不应因blind review较强而自动升级winner；最合理状态是保留为promising comparison candidate。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
@@ -42,49 +42,60 @@ owner_signals:
 - id: OS-N060-01
   candidate_id: N060
   type: raw_owner_exposure_before_explanation
-  valence: neutral_to_negative
-  summary: 第一联想到折叠，因为大量折叠屏手机产品名使用Fold；整体感受一般、没有特别感觉；Owner追问为什么未先解释名称含义。
-  interpretation: 原始第一印象已成功捕获，未被品牌解释预先污染。Fold在Owner语境中有强消费电子产品类联想，降低裸名母组织身份与情感吸引力。
-  next_needed_signal: informed_owner_reaction_after_explanation
+  valence: neutral
+  summary: 第一联想到折叠屏手机中的Fold；整体感受一般、没有特别感觉。
+  interpretation: 该联想是Owner语言环境中的高显著入口，不等于名称被消费电子语义客观锁死。
+- id: OS-N060-02
+  candidate_id: N060
+  type: informed_owner_clarification
+  valence: neutral_accepting
+  summary: 即便把fold理解为“折叠”本身也没有问题；Owner举“叠纸科技/叠纸游戏”为例说明具象动作词可以成为组织名。Fold手机联想主要因为Owner是中文母语者，平时英语中较少接触fold的其他语义。
+  interpretation: 撤回v27中“消费电子类别联想显著削弱母组织身份”的过强解释；保留Owner resonance仅为中性这一事实。
 candidate:
   id: N060
   name: Plurifold
   active: true
-  status: hold_owner_neutral_fold_device_association_pending_informed_reaction
+  status: promising_owner_neutral_comparison_candidate
   construction: pluri- + fold
   pronunciation_hint: PLOOR-ih-fold
-  explanation:
-    pluri: 英语/拉丁来源构词成分，表示many/multiple；可联想到plural、plurilingual、pluripotent等“多/多元”。
-    fold_semantic_layer: 这里并非只取动词“折叠”，也借英语-fold在twofold/manyfold等结构中的“倍数、多重、多个方面”含义，并保留fold/unfold带来的“同一基础可形成多种结构/展开方式”隐喻。
-    intended_meaning: 同一个公共知识底座可以被不同个体展开为不同视角、形式与创造；名称主要压缩multiplicity/perspective/unfolding，不独立编码完整Commons→Perspective→Creation→Commons循环。
-  quality_preserved:
+  intended_meaning: pluri-表示many/multiple；-fold既保留fold/unfold的折叠/展开动态，也借twofold/manyfold中的“多重、多个方面”语义，压缩multiple perspectives / forms / unfoldings。
+  quality:
     blind_review: KEEP -> Owner Exposure Gate
-    domain: plurifold.org available_at_checked_time
+    canonical_segmentation: stable_pluri_plus_fold
+    spelling_recovery: light_to_medium
+    semantic_fit: strong_but_partial
+    semantic_room: strong
+    target_scale_fit: medium_good_to_strong
+    architecture_extensibility: strong
+    primary_intrinsic_risks: [manifold/数学技术联想, fold/折叠与层次联想, 裸名轻微概念/框架感, 语义仍偏multiplicity而非完整循环]
+  owner_exposure:
+    raw_affect: neutral
+    informed_affect: neutral_accepting
+    rejection_reason: none
+    promotion_reason: none; 尚未产生明显偏爱
+  reality:
     exact_public_identity: no_material_exact_collision_found_at_checked_time
-    trademark: unresolved_deferred
-  owner_exposure_result_so_far:
-    raw_first_association: Fold折叠屏手机/折叠设备
-    affect: neutral; 没有特别感觉
-    organization_identity: weakened_by_device_category_association
-    informed_reaction: pending
+    domain: plurifold.org available_at_checked_time
+    trademark: unresolved_deferred_by_owner
 rounds:
-- id: RND-033
-  action: record_raw_owner_exposure_and_prepare_explanation
+- id: RND-034
+  action: refine_owner_signal_after_explanation
   generated_count: 0
   candidate_ids: [N060]
-  result: 原始Exposure为neutral_to_negative；Plurifold不升级为finalist，转hold，等待解释后的Owner informed reaction。若解释后仍无明显改观，则退出promising并回到generation/change_strategy。
+  result: Plurifold从v27的hold恢复为promising comparison candidate；Owner的Fold手机联想被重新分类为语言环境显著性，而非结构性负面。情感共鸣仍为neutral，因此不升级finalist/winner。
 diagnostics:
-- {id: D73, subject: N060, statement: '对Owner而言Fold首先是折叠屏手机类别词，而不是manyfold/multiplicity语义；这是一项独立Reviewer未能代表的真实受众语境信号。', confidence: high}
-- {id: D74, subject: N060, statement: 'Owner“感受一般、没有特别感觉”意味着即使名称结构客观可用，也暂不具备足够Owner resonance进入finalist；解释后若无明显正向变化，应退出。', confidence: high}
-- {id: D75, statement: 'Owner Exposure应先捕获未经解释的第一反应，再补充名称构造与品牌叙事；先解释会污染raw exposure。', confidence: high}
+- {id: D76, subject: N060, statement: 'Owner对某词的第一联想可能反映个人语言暴露路径而非名称对目标受众的普遍语义锁定；Owner resonance与general linguistic quality必须继续分轨记录。', confidence: high}
+- {id: D77, subject: N060, statement: '“理解解释后没有反对”不同于“明显喜欢”；Plurifold当前应保留比较价值，但需要新的强候选形成相对判断。', confidence: high}
 next_action:
-  action: obtain_informed_owner_reaction_for_plurifold_then_decide
-  target: [N060]
-  rationale: raw first impression已捕获，当前唯一高信息价值是解释构词后Owner是否明显改观；无需继续理论分析。
-  decision_rule:
-  - 若解释后明显喜欢/认可并能自然接受fold双重含义：保留为hold/finalist-comparison候选，不自动winner。
-  - 若解释后仍然一般、主要想到折叠屏或觉得需要解释才成立：退出promising池，回到change_strategy/generate。
-  owner_question: true
+  action: generate_comparison_candidates_against_plurifold
+  target_count: 3-5 per microbatch
+  strategy_delta:
+  - 保留proper-name-first、稳定读法/词界、母组织尺度要求。
+  - 不要求新候选必须避开所有具象词根；关键是不要产生像Pluralway那样的结构性误断与语义走窄。
+  - 优先探索能同时暗示shared base + individual variation / emergence / return，而不是继续只围绕pluri-/multiplicity打转。
+  - Plurifold作为benchmark candidate保留；新候选只有在质量上接近或超过它时才进入Owner Exposure。
+  - 商标筛查继续deferred；.org只对真正promising候选检查。
+  owner_question: null
 stop:
-  status: awaiting_informed_owner_judgment
-  reason: 需要区分“未经解释第一反应”与“理解构词后的品牌接受度”；这是当前真正的Owner判断点。
+  status: continue_internal_microcycles
+  reason: 当前没有必须由Owner回答的问题；最高信息价值是找到至少一个可与Plurifold直接比较的强候选。
