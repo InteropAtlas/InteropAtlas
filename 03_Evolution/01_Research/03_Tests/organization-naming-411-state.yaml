@@ -576,10 +576,64 @@ candidates:
         ldhName: example.org
         observed_at: '2026-09-09T01:26:14.041848+00:00'
     trademark_oriented_risk:
-      observation: preliminary_web_search_only
-      evidence: []
+      observation: partial_no_exact_hits_unresolved
+      overall_status: unresolved
+      legal_clearance: false
+      search_scope:
+        organization_horizon: 全球长期母组织
+        primary_jurisdictions: [US, EU, CN, WIPO_Madrid]
+        primary_activity_classes:
+        - '09: 可下载软件与电子出版物'
+        - '16: 印刷出版物'
+        - '41: 研究传播、教育与出版服务'
+        - '42: 软件、在线工具、技术与研究服务'
+        secondary_activity_scope: 资助只作次级观察
+      evidence:
+      - id: TM-N005-US-EXACT
+        jurisdiction: US
+        source: https://tmsearch.uspto.gov/search/search-results
+        authority: USPTO Trademark Search
+        query: Eachward
+        field: Wordmark
+        class_filter: all classes
+        status_filter: live and dead
+        observed_at: '2026-09-09T02:08:00Z'
+        result: no_results_found
+        observation: 官方界面显示Live 0、Dead 0及No results found。
+        caveat: 仅为精确字标初筛，不等于相似商标、州级权利或法律clearance。
+      - id: TM-N005-WIPO-MADRID-EXACT
+        jurisdiction: WIPO_Madrid
+        source: https://www3.wipo.int/madrid/monitor/en/
+        authority: WIPO Madrid Monitor
+        query: MARK_ALL:Eachward
+        field: mark_only
+        class_filter: all classes
+        status_filter: active_pending_inactive
+        observed_at: '2026-09-09T02:08:00Z'
+        result: no_documents_match
+        observation: 官方界面显示Active 0、Pending 0、Inactive 0及No documents match your query。
+        caveat: Madrid不等于各国全部国家注册；仅精确字标初筛，不是法律clearance。
+      - id: TM-N005-EU-EXACT
+        jurisdiction: EU
+        source: https://euipo.europa.eu/eSearch/#basic/1+1+1+1/eachward
+        authority: EUIPO eSearch Plus
+        query: Eachward
+        observed_at: '2026-09-09T02:08:00Z'
+        result: error_service_unavailable
+        observation: 官方页面明确显示The search facility is not available at the moment。
+        caveat: error不得解释为无结果或可用。
+      - id: TM-N005-CN-EXACT
+        jurisdiction: CN
+        source: https://wcjs.sbj.cnipa.gov.cn/home
+        authority: CNIPA 商标网上检索系统
+        query: Eachward
+        observed_at: '2026-09-09T02:08:00Z'
+        result: unknown_query_not_completed
+        observation: 官方库主页可访问，页面显示数据更新至2026-09-06；本次未取得可复核的词项结果。
+        caveat: unknown不得解释为无结果或可用；中国近似检索还涉及类别和类似群。
       notes:
-      - 未确定法域/类别，未完成官方商标数据库检索；不能称clearance。
+      - 美国和Madrid的0条仅降低精确同名注册的初步风险；欧盟与中国仍未解决，候选不可进入finalists。
+      - 后续相似字标检索优先覆盖09、16、41、42类；资助只作次级观察。
     namespaces:
     - namespace: GitHub repositories
       observation: no_exact_repository_found
@@ -1019,12 +1073,14 @@ current_state:
   current_region_ids:
   - R02
   - R03
-  biggest_unknown: Eachward的Each Word误听、ward的照管/病区/行政区联想是否会破坏长期母组织身份，以及目标法域/类别下是否存在商标风险？
+  biggest_unknown: Eachward在EU/CN及09、16、41、42类近似字标中的风险是否可接受，以及Each Word/ward反读是否会破坏长期母组织身份？
   blockers:
-  - 商标优先法域与服务类别尚未确认，无法定义必要官方数据库筛查边界。
-  information_gain: 第三批已出现首个同时具质量前景、有限身份初筛无实质碰撞且.org registry available的候选；继续盲目生成的信息价值低于定向深筛。
+  - EUIPO本次明确服务不可用；CNIPA本次未取得可复核词项结果，二者均为unknown/error。
+  - 尚未完成按相关类别的近似字标与Each Word/Eachward语言混淆深筛。
+  information_gain: 精确字标层面USPTO与Madrid未检出，证明继续深筛Eachward仍有价值；EU/CN未知意味着继续生成的价值仍低于补齐定向证据。
   notes:
-  - N005尚未通过Owner Exposure Gate；域名available不代表候选好或可依法采用。
+  - N005尚未通过Owner Exposure Gate；.org已过时点门槛，但域名available不代表候选好或可依法采用。
+  - .org为finalists硬门槛，早期质量集合仍保留域名不满足者作为学习数据。
 diagnostics:
 - confidence: high
   counterevidence:
@@ -1167,6 +1223,24 @@ diagnostics:
   counterevidence:
   - 仅一批4名；Eachward尚未通过真人语言判断，Manyfold的强架构候选现实碰撞。
   proposed_state_change: 先深筛Eachward；不立即继续生成或把本批学习升级为永久Skill规则。
+- id: D14
+  triggered_by: [O16, O17]
+  level: candidate
+  diagnosis_type: partial_trademark_signal
+  statement: Eachward在USPTO与Madrid精确字标层面未检出，降低了这两库的精确同名风险，但不能外推到相似字标、EU/CN国家权利或普通法使用。
+  confidence: high
+  counterevidence:
+  - EU/CN尚未完成；Madrid不覆盖所有国家注册；相关类别近似检索尚未执行。
+  proposed_state_change: N005继续promising但现实状态为partial/unresolved，不进入finalists；下一动作补EU/CN与近似检索。
+- id: D15
+  triggered_by: [O18]
+  level: strategy
+  diagnosis_type: verification_incompleteness
+  statement: 官方库服务不可用或查询未完成是证据缺口，不是候选风险为零；本轮不因工具摩擦切换语义区或生成策略。
+  confidence: high
+  counterevidence:
+  - 后续重试或官方替代入口可能补齐；单次不可用不能证明数据库长期不可用。
+  proposed_state_change: 分法域保留unknown/error，继续定向重试；若持续阻塞则保持候选非finalist并转做独立语言测试。
 experience_candidates:
 - confidence: low
   counterexamples:
@@ -1212,6 +1286,17 @@ experience_candidates:
   confidence: low
   possible_generalization: 质量观察可在适用时加入权力关系/伦理反读，而非只看正向品牌故事。
   proposed_change: 保持任务本地评价重点；跨任务复现后再考虑reference补充。
+- id: E04
+  observation: 多法域商标初筛会同时出现no-result、unknown与error；聚合成单一available/unavailable会丢失决定性边界。
+  scope: potentially_general
+  supporting_evidence: [O17, O18, D14, D15]
+  supporting_jobs: [organization-naming-411]
+  evidence_count: 1
+  counterexamples:
+  - 单法域、低风险或已有律师意见的任务可能不需要此粒度。
+  confidence: low
+  possible_generalization: 状态模板可选支持分法域证据及整体unresolved，明确未检出不等于clearance。
+  proposed_change: 本任务先扩展trademark_oriented_risk结构；不修改核心Skill。
 job:
   audience:
   - 公共知识的使用者与贡献者
@@ -1229,6 +1314,7 @@ job:
   - 组织层级，不绑定标准、协议、地图、atlas或当前单一项目
   - 可读、可说、可传播；不设未经确认的长度和音节数硬上限
   - 进入Owner候选展示前完成必要身份、域名、商标导向、近名与语言筛查
+  - 同名.org为finalists硬门槛；早期创意评价不据此淘汰，失败候选保留学习
   - unknown/error不能作为available；不得有已知decisive Red而进入finalists
   id: organization-naming-411
   languages:
@@ -1237,7 +1323,7 @@ job:
   required_reality_checks:
   - exact/near-name身份碰撞
   - 目标域名机器证据
-  - 商标导向检索（法域与商品服务范围待明确）
+  - 商标导向检索：US、EU、CN、WIPO/Madrid；优先09、16、41、42及实际服务描述，资助次级
   - 近名混淆与语言检查
   - 必要namespace；GitHub组织handle先作为拟检查项，非已确认硬门槛
   success_definition:
@@ -1355,19 +1441,17 @@ map:
     - 循环但不只是返回过去
     status: unexplored
 next_action:
-  action: ask_owner
-  target: 只确认会改变现实筛查边界的两项约束，不要求Owner先评名字
-  rationale: N005已达到值得深筛的门槛，下一步需要确定.org是否硬门槛，以及商标优先法域/预期组织活动类别。缺少这些信息会造成无边界的商标搜索或错误接受。
-  triggered_by:
-  - D10
-  - D13
-  - C-TLD
-  - C-TM
-  expected_information_gain: 确定正式现实筛查范围；随后对N005完成官方商标导向、必要namespace与语言/近混淆深筛，再决定是否进入Owner候选展示。
-  questions:
-  - 组织名是否必须拥有普通可注册的同名 .org，还是 .org 只是强偏好？
-  - 首轮商标导向筛查应优先哪些法域（例如中国、美国、欧盟/WIPO国际注册），以及组织近期最可能开展哪些活动（研究/教育、软件与在线服务、出版、资助等）？
-  fallback_if_unanswered: 保持N005 promising但未过现实门槛；可继续小批探索，不把缺失约束伪装成clearance。
+  action: verify_reality
+  target: N005 Eachward
+  rationale: Owner已补齐现实边界；USPTO与Madrid精确字标未检出，但EUIPO服务错误、CNIPA词项查询未完成，且近似字标/相关类别尚未筛查。当前最高信息价值是补齐这些证据并测试语言近混淆，不是继续生成。
+  triggered_by: [D10, D14, D15, C-TLD, C-TM]
+  expected_information_gain: 判断Eachward能否进入Owner Exposure Gate，或应因现实/语言风险hold；不把数据库0条冒充法律意见。
+  actions:
+  - 重试EUIPO或官方TMview，对Eachward及核心近形按09、16、41、42类检索
+  - 在CNIPA官方库按相关类别/类似群完成精确与近似检索；无法完成则保持unknown
+  - 对Eachward、Each Word及ward主要反读做有限语言/近名压力测试
+  - 仅在结果支持时检查GitHub组织handle并决定是否进入Owner少量展示
+  fallback: 若EU/CN持续不可用，保持N005 promising_reality_partial，不进入finalists；可转做语言测试或探索下一小批。
 observations:
 - evidence:
   - S01
@@ -1529,16 +1613,46 @@ observations:
   observation: 非光学批次比上一批更清楚暴露个人能动性、关系过程与母组织尺度之间的取舍；仍存在读写误切、同化/攫取反读和产品化风险。
   evidence:
   - quality_round3
+- id: O16
+  timestamp: '2026-09-09T02:08:00Z'
+  scope: constraint
+  subject_ids: [C-TLD, C-TM]
+  observation: Owner确认.org为finalists硬门槛但非早期质量淘汰条件；商标按全球母组织并指定US、EU、CN、WIPO/Madrid及主要活动范围。
+  evidence: [2026-09-09 Owner instruction]
+- id: O17
+  timestamp: '2026-09-09T02:08:00Z'
+  scope: reality
+  subject_ids: [N005]
+  observation: USPTO全类别精确Wordmark和WIPO Madrid mark-only精确检索均为0条；这是初筛未检出，不是法律可用结论。
+  evidence: [TM-N005-US-EXACT, TM-N005-WIPO-MADRID-EXACT]
+- id: O18
+  timestamp: '2026-09-09T02:08:00Z'
+  scope: reality
+  subject_ids: [N005]
+  observation: EUIPO官方系统明确暂不可用；CNIPA主页可访问并显示数据日期，但本次未取得词项结果。两者保持unknown/error，阻止进入finalists。
+  evidence: [TM-N005-EU-EXACT, TM-N005-CN-EXACT]
 open_constraints:
-- effect: 本轮Owner再次明确：不因.org未确认提前淘汰；目标硬性仍待定向溯源。
+- effect: .org不作为早期创意质量淘汰条件；不可用者可保留为学习数据，但不得进入最终可采用候选。
   id: C-TLD
-  item: 目标.org
-  source: 任务强调复用域名方法；该方法明确.org适配，但当前已读任务Brief未证明其为硬约束
-  status: provisional_working_target
-- effect: 不阻塞地图/少量内部生成；会影响最终必要筛查，现实推进前解决。
+  item: 同名.org
+  source: 2026-09-09 Owner明确指令
+  status: confirmed_hard_finalist_gate
+- effect: 商标首轮按全球长期母组织，而非当前单项目；依优先顺序和活动范围开展并保留分法域unknown/error。
   id: C-TM
   item: 商标检索法域与商品/服务范围
-  status: unknown
+  source: 2026-09-09 Owner明确指令
+  status: confirmed
+  jurisdictions:
+  - {priority: 1, id: US}
+  - {priority: 2, id: EU}
+  - {priority: 3, id: CN}
+  - {priority: 4, id: WIPO_Madrid}
+  primary_activity_scope:
+  - 研究与教育
+  - 软件、在线工具与技术服务
+  - 出版、公共知识与信息服务
+  secondary_activity_scope:
+  - 资助
 - effect: 不购买、不注册；不将已注册但可出售视为满足可注册条件。
   id: C-BUDGET
   item: 是否仅接受普通可注册域名、是否接受溢价/收购及预算
@@ -1565,7 +1679,7 @@ owner_preference:
     source: https://github.com/InteropAtlas/InteropAtlas/issues/411
     type: presentation_requirement
   - type: current_instruction
-    signal: 本轮明确不因.org未确认提前淘汰；允许单独修复真实链接缺陷。
+    signal: .org为finalists硬门槛但不作早期质量淘汰；商标按全球长期母组织，依US、EU、CN、WIPO/Madrid顺序覆盖研究教育、软件技术、出版公共知识，资助次级。
     source: 2026-09-09当前Owner指令；通过#411本轮恢复记录持久化
     confidence: high
   provisional_signals:
@@ -1591,7 +1705,7 @@ provenance:
     human_test: false
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
   skill_version: 0.1.0
-  snapshot_version: 3
+  snapshot_version: 4
   sources:
   - id: S01
     notes: 读取body和全部评论（0条）
@@ -1761,6 +1875,35 @@ rounds:
   - D12
   - D13
   result: 4名无Pareto淘汰；N005 promising，N008 quality hold，N006/N007 reality retired；N005/N008 .org为registry available时点观察。
+- id: RND-004
+  action: verify_reality
+  question: Owner确认现实边界后，Eachward是否通过优先法域的首轮精确商标筛查？
+  generated_count: 0
+  candidate_ids: [N005]
+  actions_performed: [confirm_constraints, official_trademark_exact_search, diagnose, update_state]
+  decision_sequence:
+  - 将.org设为finalists硬门槛但与早期质量评价分离
+  - 以全球长期母组织及US、EU、CN、WIPO/Madrid范围深筛N005
+  - USPTO与Madrid取得可复核0条；EUIPO服务不可用，CNIPA未取得词项结果
+  - 诊断为部分风险信号与证据缺口，不切换语义区域、不追加生成
+  queries:
+  - USPTO Wordmark exact Eachward, all classes, live and dead
+  - WIPO Madrid MARK_ALL exact Eachward, mark-only, all statuses/classes
+  - EUIPO eSearch exact Eachward
+  - CNIPA official database exact Eachward attempt
+  reality_checks_performed:
+  - USPTO official exact wordmark
+  - WIPO Madrid official exact mark
+  - EUIPO official service availability
+  - CNIPA official database reachability/data-date observation
+  reality_checks_not_performed:
+  - EUIPO completed result due service unavailable
+  - CNIPA completed word query
+  - class-focused similar-mark search in 09,16,41,42
+  - legal clearance
+  observations: [O16, O17, O18]
+  diagnostics: [D14, D15]
+  result: N005仍promising且.org满足时点硬门槛；US/Madrid精确未检出，EU/CN unresolved，故不是finalist或Owner-ready。
 schema_version: '0.1'
 skill_feedback:
 - confidence: high
@@ -1794,12 +1937,20 @@ skill_feedback:
   suggested_rule_change: 本任务暂保持单一事实源；后续观察是否需要current summary + append-only round records或压缩规则，不在单次运行修改核心。
   confidence: low
   core_modified: false
+- id: SF05
+  scope: 多法域现实验证的状态表达，可能一般性
+  what_happened: 同一候选在不同官方商标库同时出现0条、服务错误与未完成；单一商标风险标量不足以安全聚合。
+  why_insufficient: Skill要求区分unknown/error，但模板没有明确分法域证据与整体状态的推荐结构；本任务可扩展解决，尚非多任务证据。
+  suggested_rule_change: 未来评估在模板中增加jurisdiction_results和overall_status；当前仅记录experience candidate E04，不改核心。
+  confidence: low
+  core_modified: false
 stop:
   status: continue
-  reason: 第三轮完成并出现promising候选，但必要现实边界未确认，尚无Owner-ready finalist。
+  reason: 现实边界已确认，N005通过.org时点门槛且US/Madrid精确字标未检出，但EU/CN与近似/语言筛查仍未完成。
   unresolved:
-  - N005语言反读与真人感受未验证
-  - 官方商标导向筛查边界未确认/未执行
+  - N005的Each Word误听与ward照管/病区/行政区联想未做真人或独立语言测试
+  - EUIPO结果为service unavailable，CNIPA词项查询未完成
+  - 09、16、41、42相关类别的近似字标未核验
   - GitHub组织handle与完整多语言近名未核验
   - N002、N008继续hold
 pareto_review:
