@@ -5,38 +5,32 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 23
+  snapshot_version: 24
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
-  archives:
-  - {snapshot: 15, commit: c88ae5262fd419ba52d36b1804e9266bcce5486f, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v15.yaml}
-  - {snapshot: 17, commit: 256037c76856349a05365112713d2e9945ce74e2, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v17.yaml}
-  - {snapshot: 19, commit: 49be5bf960a97f3b2b2c1e5ab25b33f539f8e863, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v19.yaml}
-  - {snapshot: 20, commit: ca11b1c912631122483403804c07deef502fcda3, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v20.yaml}
-  - {snapshot: 21, commit: 2cc9ae7b4a259818519a1bac7f2c128c4ad7a146, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v21.yaml}
-  - {snapshot: 22, commit: 079c1a83e7c774f2e1bec5873785b4dbd2acd4fe, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v22.yaml, note: pointer; canonical snapshot preserved in Git history}
-  preservation_note: 历史状态由归档或对应Git commit保留；current state只保留当前决策事实。未重新初始化任务，未恢复G0–G8 benchmark。
+  preservation_note: 历史状态由archive pointers与对应Git commits保留；current state只保留当前决策事实。未重新初始化任务，未恢复G0–G8 benchmark。
+  latest_archives:
+  - {snapshot: 22, commit: 079c1a83e7c774f2e1bec5873785b4dbd2acd4fe, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v22.yaml}
+  - {snapshot: 23, commit: 31865cfbe4cc31b69bdcc7c6eea9f48dff8b4230, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v23.yaml}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
-  architecture_requirements: ['[Name]', '[Name] Research', '[Name] Commons', '[Name] Tools', '[Name] / InteropAtlas', 'A project by [Name]']
   quality_requirements:
-  - 低误读、低听写分叉；Owner明确偏好不要容易误读的名称
-  - 与愿景关系可在一两句内自然说明，不靠虚构词源
-  - 架构测试先判断呈现的组织身份类型，再判断语法是否可拼接
-  - 长期母组织尺度，不被单一工作室、平台、材料、行业或项目锁定
+  - 低误读、低听写分叉
+  - 与愿景关系可自然说明，不靠虚构词源
+  - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
+  - 品牌连写后应有稳定canonical segmentation；字面语法与intended meaning应一致
   reality_constraints:
-    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；不作为早期创意质量淘汰条件
+    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；不用于早期创意质量淘汰
     trademark_screening_current_policy: deferred_by_owner_for_now
-    trademark_defer_interpretation: 跳过不等于通过；最终采用/注册动作前应恢复筛查。
 current_status:
   strongest_candidates: []
   promising_candidates: []
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: 下一轮能否在保持语义契合的同时，避免Pluralway暴露出的词界解析不稳、方法/路径导向过强和字面语法张力，并恢复长期母组织尺度。
-  information_gain: Owner首次真实曝光给出负向结构性反馈。Pluralway意思没有偏离核心方向，但视觉/语音会先触发subway、always等既有词块，导致词界不知道如何断；way首先被读为道路/达成目标的方法，使名称偏方法导向且容易被简化为任何组织都可套用的“多元方法”；此外若 intended meaning 是 multiple ways，则正常英语需要 plural ways，使品牌Pluralway与叙事One commons, plural ways之间出现轻微字面语法错位。
+  biggest_unknown: 能否找到既不像透明方法复合词、又不像泛化AI人造词，同时具备稳定词界、低误读、母组织尺度和自然意义关联的 proper-name candidate。
+  information_gain: RND-023使Pluralway退出promising池。RND-024按新压力测试生成4个内部候选；其中Relata、Tessera、Constellate均出现现实exact高相关身份，Holarchy则因既有系统理论概念与hierarchy/governance结构含义而在质量阶段停留。该批没有可提交Owner的候选，但说明单纯转向已存在的“关系/整体/拼图/星座”概念词同样容易被概念占用或现实占用。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_query_adapter, status: deferred_by_owner, statement: 官方US/EU/CN/WIPO商标筛查未完成；未完成不等于安全。}
@@ -45,63 +39,96 @@ owner_signals:
   candidate_id: N039
   type: owner_first_exposure
   valence: negative_structural
-  observations:
-  - way第一联想到subway。
-  - alway片段第一联想到always，导致第一时间不知道Pluralway该如何断句/切分。
-  - 意义总体OK，没有偏离组织核心方向，但略微走窄。
-  - way首先意味着道路，也可理解为达成目标的过程/方法，因此名称明显方法导向。
-  - “任何组织都可以用这个名称”的感觉削弱了独特的母组织身份。
-  - 若要表达多条ways，直觉上应加s；Pluralways又会更强触发always，进一步恶化视觉/语音体验。
-  interpretation: 这是Owner对N039的候选级真实第一感受，不自动升级为所有名称都必须遵守的普遍规则；但足以使N039退出当前promising池，并指导下一轮局部策略改变。
+  summary: Pluralway先触发subway、alway→always等词块，词界不稳；way使名称明显偏道路/过程/方法且语义走窄；若表达multiple ways则自然英语需ways，加s又进一步强化always联想。
+  interpretation: 候选级真实第一感受；不自动升级为所有复合词的普遍禁令，但足以退出当前promising池并改变局部策略。
 candidates:
 - id: N039
   name: Pluralway
   active: false
   status: hold_owner_structural_parsing_and_method_narrowing
-  round_origin: RND-017
-  pronunciation_hint: PLOOR-ul-way
-  quality_prior:
-    independent_review: passed_with_structural_caution
-    strongest_point: plural对multiple perspectives / plurality具有较强意义压缩能力。
-    prior_risks: [Pluralway/Plural Way空格恢复, way带来的method/path气质, 母组织尺度中等]
-  owner_exposure_result:
-    outcome: negative_hold
-    decisive_reasons:
-    - joined form存在意外词块触发：subway / alway→always，导致canonical segmentation不稳定。
-    - way过强地把名称解释为道路/过程/方法，Owner感到语义略走窄。
-    - intended “multiple ways” 与 singular-looking way 存在字面语法张力；改成ways又会加重always联想。
-    - 名称可泛用于许多组织，独特机构身份不足。
-  reality_preserved_separately:
-    exact_web_identity: no_material_exact_collision_found_low_to_medium_confidence
-    near_field: yellow_plural_plurality_crowded
-    domain: {domain: pluralway.org, observation: available_at_checked_time, source: Namecheap machine signal}
-    trademark: unresolved_deferred_by_owner
-  note: 现实可用性不改变Owner质量/身份判断；domain available不构成保留理由。
+  reality_preserved: {domain: pluralway.org available_at_checked_time, near_field: yellow, trademark: unresolved_deferred}
+- id: N045
+  name: Relata
+  round: RND-024
+  active: false
+  quality_preflight:
+    canonical_segmentation: stable_visual_form_but_pronunciation_not_single_obvious
+    semantic_fit: relation/plurality direction可解释，但哲学术语感较强
+    target_scale_fit: medium
+    concern: 读音可能在re-LAH-ta / re-LAY-ta等之间摇摆，不满足当前低误读偏好
+  reality:
+    observation: red
+    evidence: relata.com存在Knowledge Worker Automation Software exact identity
+  status: retired_reality
+- id: N046
+  name: Holarchy
+  round: RND-024
+  active: false
+  quality_preflight:
+    canonical_segmentation: stable
+    semantic_fit: whole/part关系与系统层级可关联组织愿景
+    target_scale_fit: medium
+    concern: 已是系统理论/holonic manufacturing中的既有术语，且-archy稳定引入hierarchy/governance结构语义，容易把组织哲学锁到组织结构理论
+  reality:
+    observation: established_concept_field
+    evidence: 学术文献长期使用holarchy表示由holons组成的层级/网络结构
+  status: hold_quality_established_concept_and_hierarchy
+- id: N047
+  name: Tessera
+  round: RND-024
+  active: false
+  quality_preflight:
+    canonical_segmentation: stable
+    semantic_fit: 单个tile贡献于更大mosaic，可映射个体视角→共同整体
+    target_scale_fit: medium
+    concern: 物件/材料隐喻较强，singular fragment感会降低母组织尺度
+  reality:
+    observation: red
+    evidence:
+    - tessera.study为活跃research knowledge platform，直接处于研究/知识工具相邻范围
+    - TesseraOS/Tessera为AI coding agents的Context & Memory Operating System
+  status: retired_reality
+- id: N048
+  name: Constellate
+  round: RND-024
+  active: false
+  quality_preflight:
+    canonical_segmentation: stable
+    semantic_fit: 将彼此独立的点组织成有意义整体，兼具plurality与creation隐喻
+    target_scale_fit: medium_to_good
+    concern: verb/process气质仍存在，但比-way方法导向更宽
+  reality:
+    observation: red
+    evidence:
+    - constellate.com为活跃research-first marketing firm
+    - ITHAKA已有Constellate text-analysis/education platform
+  status: retired_reality
 rounds:
 - id: RND-023
   action: owner_exposure_diagnosis
-  generated_count: 0
-  candidate_ids: [N039]
-  actions_performed: [capture_owner_first_impression, distinguish_owner_signal_from_general_quality, grammar_semantic_check, diagnose, change_candidate_status, change_strategy]
-  result: Pluralway从唯一promising候选降为hold；当前无promising/finalist。下一轮回到generate，但改变局部构词策略而不降低质量门槛。
+  result: Pluralway由唯一promising候选降为hold；当前无promising/finalist。
+- id: RND-024
+  action: post_owner_strategy_microbatch
+  generated_count: 4
+  candidate_ids: [N045, N046, N047, N048]
+  quality_preflight_before_reality: true
+  segmentation_stress_test_before_reality: true
+  result: Relata/Tessera/Constellate reality Red；Holarchy因既有概念与结构语义过窄hold；无promising。
 diagnostics:
-- {id: D61, subject: N039, statement: '独立Reviewer已看到Plural Way空格歧义，但Owner真实曝光进一步发现subway/alway→always式内部词块会破坏canonical segmentation；这是新的候选级信息。', confidence: high}
-- {id: D62, subject: N039, statement: '若plural作为形容词修饰单数way，Pluralway可理解为“一个多元/复合的方式”；若意图是“多种方式/多条路径”，自然英语是plural ways。因此品牌字面与One commons, plural ways叙事存在轻微语法语义张力。', confidence: high}
-- {id: D63, subject: N039, statement: 'way的path/method读法不是抽象理论风险，而在Owner第一次曝光中成为主导解释，因此N039的母组织尺度不足已获得真实Owner信号。', confidence: high}
-- {id: D64, statement: '下一轮不应把“禁用所有复合词/所有普通英语词”升级为普遍规则；应局部增加canonical segmentation和semantic-role narrowing压力测试，并暂避-way路线。', confidence: high}
+- {id: D61, subject: N039, statement: 'Owner真实曝光发现subway/alway→always式内部词块会破坏canonical segmentation；这是独立Reviewer未充分捕获的新候选级信息。', confidence: high}
+- {id: D62, subject: N039, statement: '若intended meaning是multiple ways，自然英语为plural ways；Pluralway更自然可解释为a plural/pluralistic way，因此品牌字面与叙事存在轻微语法语义张力。', confidence: high}
+- {id: D65, statement: '从透明复合词转向既有概念词并不能自动解决问题：成熟关系/整体/拼图/星座隐喻往往已有强概念场或现实身份。', confidence: high}
+- {id: D66, statement: '下一步更值得测试proper-name-first构词：先保证单一读法、稳定词界和机构感，再以可解释联想连接愿景；同时避免Reverna式泛化AI拉丁化尾音。', confidence: medium_to_high}
 next_action:
-  action: change_strategy_and_generate
+  action: generate_proper_name_first_microbatch
   target_count: 3-5
-  rationale: 当前无promising候选；Pluralway提供了高信息量Owner反馈，需要换局部构词策略而不是继续同类transparent compound。
   strategy_delta:
-  - 下一批暂避-way/-ways以及明显path/route/method导向的尾词。
-  - 生成后、现实查询前增加canonical segmentation stress test：观察连写后是否自然触发其他高频词块、错误断句或品牌词界不稳定。
-  - 对复合/混成词检查字面语法是否真的支持 intended meaning，尤其单复数和修饰关系；不靠品牌解释掩盖语法张力。
-  - 优先“组织所创造/维持的条件、关系、共同空间或生成能力”，而不是“达成目标的道路/方法”，以恢复umbrella scale。
-  - 不要求裸名编码完整循环；仍优先低误读、自然发音、可解释且有长期语义余量。
-  - primary executor负责生成；独立Reviewer只在出现真正promising候选后介入，避免重复无增益评审。
-  reality_sequence: quality_and_segmentation_preflight_before_domain_or_collision_search
+  - 不继续-way/-ways路线，也不优先直接采用已被学术/组织领域占用的完整概念词。
+  - proper-name-first：目标是2–3音节、单一主读法、视觉词界无需拆分也能稳定识别。
+  - 避免典型泛化AI品牌式“任意辅音 + -ara/-era/-ora/-iva”空心造词；若为coinage必须能说明具体构造动机，但不伪造词源。
+  - 裸名不必字面编码Commons→Perspective→Creation全部循环；只要能承载一个核心原理并留出长期意义空间。
+  - 现实查询仍后置到quality/segmentation preflight之后；只有真正promising者才投入.org与更深现实筛查。
   owner_question: null
 stop:
   status: continue_internal_microcycles
-  reason: Owner判断已取得且产生明确策略增益；当前无需继续询问Owner，应自主进入下一批生成与筛选。
+  reason: 当前没有Owner需要回答的新问题；应继续自主生成与筛选，直到出现真正Owner-ready候选或新的高价值阻塞。
