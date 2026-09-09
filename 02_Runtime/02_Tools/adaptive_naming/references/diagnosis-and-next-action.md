@@ -1,4 +1,4 @@
-# 诊断与下一步决策规则 v0.2
+# 诊断与下一步决策规则 v0.2.1
 
 本文件回答一个核心问题：**观察到了什么以后，系统下一步应该干什么？**
 
@@ -37,7 +37,7 @@
 
 ### 搜索完整性级
 
-回答：Agent 是否还在探索真实的命名空间，还是已经围绕某个成功模式局部爬山？
+回答：Agent 是否还在探索真实的命名空间，还是已经围绕某个成功模式局部爬山？控制器声称的“隔离”是否与实际运行上下文一致？
 
 常见类型：
 
@@ -46,7 +46,9 @@
 - `construction_mode_collapse`：虽然表面词不同，但反复使用同一构词模板；
 - `incumbent_anchoring`：strongest / survivor 候选从比较基准泄漏成隐性生成模板；
 - `survivorship_feedback`：现实筛查的幸存形态反向塑造生成，导致“容易占用”被误学成“更好”；
-- `strategy_fidelity`：声称探索的区域 / 策略与实际生成或入选候选不一致。
+- `strategy_fidelity`：声称探索的区域 / 策略与实际生成或入选候选不一致；
+- `negative_constraint_priming`：为了避免旧模式，Generation Brief 反复点名 incumbent / cooldown / banned examples，反而维持或提高这些模式在生成上下文中的显著性；
+- `isolation_overclaim`：同一模型/聊天历史已经见过完整信息，却把“本轮 Brief 未重复写入”表述成“Generator 未看到”。
 
 这些诊断关注的是搜索过程，不等于相关候选本身质量失败。
 
@@ -62,7 +64,10 @@
 - 调整对象尺度要求；
 - 设置 task-local family cooldown；
 - 补地图 / 修复 semantic coverage；
-- 生成 sanitized Generation Brief；
+- 生成正向 Generation Brief；
+- 把具体 exclusions 留在 Controller-only 状态；
+- 增加或收紧 post-generation filter；
+- 切换 fresh / isolated runtime；
 - 先做现实验证而不是继续生成；
 - 询问 Owner；
 - 停止。
@@ -125,8 +130,10 @@
 1. 诊断 `semantic/morphological/construction_mode_collapse`；
 2. 比较长期目标各语义区域的实际采样覆盖；
 3. 对当前家族设置 task-local cooldown，而不是建立永久黑名单；
-4. 补采样被忽略区域；
-5. 重新生成 sanitized Generation Brief。
+4. 把具体 cooldown 信息留在 Controller-only 状态；
+5. 补采样被忽略区域；
+6. 重新生成正向 Generation Brief；
+7. 由 post-generation filter 检查意外回流。
 
 ### Incumbent 泄漏为生成模板
 
@@ -136,10 +143,52 @@
 下一步：
 
 - 将 incumbent 标记为 `comparison_only`；
-- Generator 不再看到其具体名称和成功词形；
-- 只保留与任务目标有关的抽象质量约束；
+- 将其具体名称和成功词形留在 Controller-only exclusions；
+- Generator Brief 只保留与任务目标有关的正向质量约束和待探索区域；
 - 必要时暂时冷却同一语义 / 形态家族；
+- 由 post-generation filter 拦截同族回流；
 - 恢复其他区域探索。
+
+### 负面提示本身开始成为锚点
+
+**如果**为了避免模式复发，Generation Brief 持续列出“不要某候选 / 不要某词根 / 不要某同族”的具体名称或 token，而后续仍频繁出现这些模式、其近邻变体，或 post-generation filter 命中率升高，  
+**那么**诊断 `negative_constraint_priming`。
+
+下一步按顺序处理：
+
+1. 从 Generator Brief 删除具体负面样本和 cooldown token 清单；
+2. 将它们保留在 Controller-only exclusions；
+3. 用正向目标、低采样区域、目标气质和构词方向重写 Brief；
+4. 先生成，再由控制器做 post-generation filter；
+5. 若同上下文仍持续回流，优先切换 fresh / isolated runtime，而不是继续增加更多负面提示。
+
+不要把“更长的禁止列表”当作默认修复手段。
+
+### 同一聊天中声称 Generator 从未看到旧候选
+
+**如果**同一个聊天 / 同一个模型上下文在历史消息、state、recovery 或用户讨论中已经暴露过 incumbent / cooldown / reality survivor 信息，而当前执行记录写成“Generator 未看到这些信息”，  
+**那么**诊断 `isolation_overclaim`。
+
+下一步：
+
+- 将隔离等级改为 `best_effort_same_context`；
+- 事实表述改为“当前 Generation Brief 未再次暴露，但历史上下文可能已见过”；
+- 若本轮目的需要真实 blind / isolated generation，切换 `fresh_context` 或 `isolated_runtime`；
+- 不需要因此否定已生成候选，但不能把本轮当作强隔离证据。
+
+### Post-generation filter 反复拦截大量候选
+
+**如果**同一批或连续批次有较高比例候选命中 cooldown / incumbent similarity / strategy mismatch，  
+**那么**不要把这些全部记成名称质量差；先诊断控制层问题。
+
+优先检查：
+
+- 当前 search frame 是否仍隐含旧锚点；
+- runtime isolation 是否不足；
+- 正向 Brief 是否过窄，导致模型只能回到旧模式；
+- strategy fidelity 是否实际失败。
+
+优先改 search frame 或 runtime isolation；只有真正属于任务硬约束的内容才需要直接加入 Generator Brief。
 
 ### 现实幸存结果反向影响创意生成
 
@@ -159,7 +208,7 @@
 
 该轮不能作为“A 已经失败”的证据。下一步应：
 
-- 重写更窄、更可检验的 sanitized Generation Brief；
+- 重写更窄、更可检验的正向 Generation Brief；
 - 必要时把生成与评价分开；
 - 对实际输出做策略一致性检查后再进入 funnel。
 
@@ -223,29 +272,33 @@
 每轮结束先检查搜索完整性，再选择最能减少关键不确定性的动作：
 
 1. **目标不清楚吗？** → `ask_owner / refine_brief`
-2. **搜索是否可能坍缩或偏置？** → `check_search_integrity`
+2. **搜索是否可能坍缩、被负面提示锚定或隔离表述不真实吗？** → `check_search_integrity`
 3. **不知道该去哪探索吗？** → `map`
 4. **知道区域但缺样本吗？** → `generate`
-5. **有候选但不知道好不好吗？** → `evaluate_quality`
-6. **质量强但不知道现实能不能用吗？** → `verify_reality`
-7. **有很多观察但不知道意味着什么吗？** → `diagnose`
-8. **重复模式已经明确吗？** → `change_strategy`
-9. **剩余差异主要是 Owner 主观选择吗？** → `ask_owner`
-10. **已有足够强且现实可推进的 finalist 吗？** → `stop / owner_decision`
+5. **生成结果是否先要过 Controller-only exclusions？** → `post_generation_filter`
+6. **有候选但不知道好不好吗？** → `evaluate_quality`
+7. **质量强但不知道现实能不能用吗？** → `verify_reality`
+8. **有很多观察但不知道意味着什么吗？** → `diagnose`
+9. **重复模式已经明确吗？** → `change_strategy`
+10. **剩余差异主要是 Owner 主观选择吗？** → `ask_owner`
+11. **已有足够强且现实可推进的 finalist 吗？** → `stop / owner_decision`
 
 不要因为“流程下一步本来应该是什么”选择动作，只根据当前最大未知、信息价值和搜索完整性选择。
 
 ## 5. 状态更新的最小要求
 
-每次策略变化都应写明：
+每次重要策略变化至少记录：
 
 - `trigger`：哪些观察触发；
 - `diagnosis`：如何解释；
 - `confidence`：低 / 中 / 高；
 - `state_change`：具体改了什么；
 - `search_mode_before / after`：如有模式切换；
-- `integrity_check`：是否发现家族集中、incumbent 泄漏、幸存者反馈或策略不忠实；
+- `generation_isolation_level`：isolated_runtime / fresh_context / best_effort_same_context / none；
+- `controller_only_exclusions_changed`：是否新增/解除 cooldown 或 incumbent 排除；
+- `post_generation_filter`：是否执行、命中多少、命中类型；
+- `integrity_check`：是否发现家族集中、incumbent 泄漏、负面提示锚定、隔离夸大、幸存者反馈或策略不忠实；
 - `next_action`：下一步；
 - `why_now`：为什么现在做这个动作比其他动作更有价值。
 
-这样后续 Agent 才能区分“事实地图”“当时的推断”和“搜索控制状态”。
+这样后续 Agent 才能区分“事实地图”“当时的推断”“控制器私有约束”“Generator 实际看到的上下文”和“搜索控制状态”。
