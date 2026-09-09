@@ -5,14 +5,12 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 28
+  snapshot_version: 29
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
   preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
-  latest_archives:
-  - {snapshot: 26, commit: 71931098c9082b4f3e24d2b92e2113e9ef0bc635, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v26.yaml}
-  - {snapshot: 27, commit: b3534c0973e74269c26bc01705f0e2402e6c87dd, source_commit: e3ee18b06da74a96d8957ba2528df65239acafca, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v27.yaml}
+  latest_archive: {snapshot: 28, commit: fae6d570ab9dd4b070daf3dae55bc77cb15245da, source_commit: 85a77bc38d4f8c884ee455c5baf08788ca29a3cc, source_blob_sha: c0ac186f6c7bfb4ab97f4acb92c0e73200d5dccc, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v28.yaml}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -29,73 +27,56 @@ current_status:
   promising_candidates: [N060]
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: 是否能找到至少一个与Plurifold同等级但具有更强Owner resonance、同样低误读且母组织身份更自然的候选，以便进行真正比较。
-  information_gain: Owner澄清Fold→折叠屏手机不是对fold/折叠语义本身的否定，也不认为“折叠”不适合作为组织品牌；该联想主要来自中文母语与日常英语暴露路径中Fold手机品类的高显著性。理解pluri- + -fold解释后，Owner并未提出新的结构性反对，但总体情感仍为“一般、没有特别感觉”。因此Plurifold不应因该联想被淘汰，也不应因blind review较强而自动升级winner；最合理状态是保留为promising comparison candidate。
+  biggest_unknown: sound-first受控新造词能否产生至少一个与Plurifold同等级、但Owner resonance更强且现实空间更干净的候选。
+  information_gain: 本轮按Owner要求提速，扩大为批量生成/批量预检/批量现实筛查。现成概念词、河流分流回流、共同文本、同步/多形态、plural派生等路线继续高密度撞入AI/research/software命名空间；没有新候选达到Plurifold的综合水平。继续围绕同义词和词根穷举边际收益低，应切到sound-first controlled coinage。
 blockers: []
 deferred_risks:
 - {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
 owner_signals:
-- id: OS-N039-01
-  candidate_id: N039
-  valence: negative_structural
-  summary: Pluralway先触发subway、alway→always等词块，词界不稳；way使名称偏道路/过程/方法且语义走窄；若表达multiple ways则自然英语应为plural ways。
-- id: OS-N060-01
-  candidate_id: N060
-  type: raw_owner_exposure_before_explanation
-  valence: neutral
-  summary: 第一联想到折叠屏手机中的Fold；整体感受一般、没有特别感觉。
-  interpretation: 该联想是Owner语言环境中的高显著入口，不等于名称被消费电子语义客观锁死。
-- id: OS-N060-02
-  candidate_id: N060
-  type: informed_owner_clarification
-  valence: neutral_accepting
-  summary: 即便把fold理解为“折叠”本身也没有问题；Owner举“叠纸科技/叠纸游戏”为例说明具象动作词可以成为组织名。Fold手机联想主要因为Owner是中文母语者，平时英语中较少接触fold的其他语义。
-  interpretation: 撤回v27中“消费电子类别联想显著削弱母组织身份”的过强解释；保留Owner resonance仅为中性这一事实。
-candidate:
+- {id: OS-N039-01, candidate_id: N039, valence: negative_structural, summary: Pluralway词界不稳且way过度方法化；已hold。}
+- {id: OS-N060-01, candidate_id: N060, valence: neutral, summary: Plurifold第一联想到Fold折叠屏；总体感受一般。}
+- {id: OS-N060-02, candidate_id: N060, valence: neutral_accepting, summary: Owner澄清fold/折叠语义本身并无问题；折叠屏联想主要来自中文母语与日常英语暴露路径。}
+active_candidate:
   id: N060
   name: Plurifold
   active: true
   status: promising_owner_neutral_comparison_candidate
   construction: pluri- + fold
   pronunciation_hint: PLOOR-ih-fold
-  intended_meaning: pluri-表示many/multiple；-fold既保留fold/unfold的折叠/展开动态，也借twofold/manyfold中的“多重、多个方面”语义，压缩multiple perspectives / forms / unfoldings。
-  quality:
-    blind_review: KEEP -> Owner Exposure Gate
-    canonical_segmentation: stable_pluri_plus_fold
-    spelling_recovery: light_to_medium
-    semantic_fit: strong_but_partial
-    semantic_room: strong
-    target_scale_fit: medium_good_to_strong
-    architecture_extensibility: strong
-    primary_intrinsic_risks: [manifold/数学技术联想, fold/折叠与层次联想, 裸名轻微概念/框架感, 语义仍偏multiplicity而非完整循环]
-  owner_exposure:
-    raw_affect: neutral
-    informed_affect: neutral_accepting
-    rejection_reason: none
-    promotion_reason: none; 尚未产生明显偏爱
-  reality:
-    exact_public_identity: no_material_exact_collision_found_at_checked_time
-    domain: plurifold.org available_at_checked_time
-    trademark: unresolved_deferred_by_owner
+  intended_meaning: pluri-表示many/multiple；-fold借twofold/manyfold中的“多重、多个方面”以及fold/unfold的动态，压缩multiple perspectives/forms/unfoldings。
+  quality: {blind_review: 'KEEP -> Owner Exposure Gate', canonical_segmentation: stable, spelling_recovery: light_to_medium, semantic_fit: strong_but_partial, semantic_room: strong, target_scale_fit: medium_good_to_strong, architecture_extensibility: strong}
+  owner_exposure: {raw_affect: neutral, informed_affect: neutral_accepting, rejection_reason: none, promotion_reason: none}
+  reality: {exact_public_identity: no_material_exact_collision_found_at_checked_time, domain: plurifold.org_available_at_checked_time, trademark: unresolved_deferred_by_owner}
 rounds:
 - id: RND-034
-  action: refine_owner_signal_after_explanation
-  generated_count: 0
-  candidate_ids: [N060]
-  result: Plurifold从v27的hold恢复为promising comparison candidate；Owner的Fold手机联想被重新分类为语言环境显著性，而非结构性负面。情感共鸣仍为neutral，因此不升级finalist/winner。
+  action: accelerated_batch_expansion
+  strategy: [existing_concept, controlled_coinage, structural_metaphor, plural_derivatives]
+  batch_size: large_multi_batch
+  result: no_new_owner_ready_candidate
+  notable_reality_rejections:
+  - {name: Pluriform, reason: active software platform/company exact identity}
+  - {name: Plurivox, reason: active PR/communications company exact identity}
+  - {name: Anabranch, reason: active agent-scale version-control product + other exact companies/software}
+  - {name: Variorum, reason: active AI engineering knowledge layer + LLNL software}
+  - {name: Pluralis, reason: active decentralized-AI research lab, highly adjacent}
+  - {name: Refluent, reason: multiple active AI/software identities}
+  - {name: Trellis, reason: multiple research/agent/graph software identities}
+  - {name: Accrete, reason: active AI company}
+  note: 其他候选在quality preflight阶段因读音/词界/过强技术或行业身份退出，未投入更深现实检查。
 diagnostics:
-- {id: D76, subject: N060, statement: 'Owner对某词的第一联想可能反映个人语言暴露路径而非名称对目标受众的普遍语义锁定；Owner resonance与general linguistic quality必须继续分轨记录。', confidence: high}
-- {id: D77, subject: N060, statement: '“理解解释后没有反对”不同于“明显喜欢”；Plurifold当前应保留比较价值，但需要新的强候选形成相对判断。', confidence: high}
+- {id: D76, statement: '在research/software/public-knowledge相邻空间，现成高质量英语词、稀有概念词和古典派生词的现实占用率持续极高。', confidence: high}
+- {id: D77, statement: '继续沿plural/pluri同义派生会迅速撞入Pluralis/Pluriform/Plurivox等相邻身份，且语义差异有限，边际信息价值低。', confidence: high}
+- {id: D78, statement: '下一步应把生成与现实筛查解耦：先大批量sound-first造词，通过英语音形/词界/听写硬过滤后，仅对top slice做现实查询。', confidence: high}
 next_action:
-  action: generate_comparison_candidates_against_plurifold
-  target_count: 3-5 per microbatch
+  action: sound_first_controlled_coinage_large_batch
+  target_count: 20-30_internal
   strategy_delta:
-  - 保留proper-name-first、稳定读法/词界、母组织尺度要求。
-  - 不要求新候选必须避开所有具象词根；关键是不要产生像Pluralway那样的结构性误断与语义走窄。
-  - 优先探索能同时暗示shared base + individual variation / emergence / return，而不是继续只围绕pluri-/multiplicity打转。
-  - Plurifold作为benchmark candidate保留；新候选只有在质量上接近或超过它时才进入Owner Exposure。
-  - 商标筛查继续deferred；.org只对真正promising候选检查。
+  - 不要求名称表面直接出现plural/common/view/way/fold/form等高频语义词根。
+  - 先定义声音约束：2-3音节；英语主读法明显；拼写恢复分叉低；避免-ara/-era/-ora/-iva等泛AI尾音模板；避免内部高频词块误断。
+  - 允许意义后置，但每个进入top slice的coinage必须能追溯到一个真实结构动机/隐喻，不得随机赋义。
+  - 从20-30个内部候选先压缩到3-5个，再做现实 exact/near-field 与.org；Owner只看真正过线者。
+  - Plurifold继续作为benchmark，不重复挑刺。
   owner_question: null
 stop:
   status: continue_internal_microcycles
-  reason: 当前没有必须由Owner回答的问题；最高信息价值是找到至少一个可与Plurifold直接比较的强候选。
+  reason: 当前没有需要Owner回答的新问题；下一步应自主执行大批量sound-first生成与筛选。
