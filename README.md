@@ -4,14 +4,14 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-05T19:00:00+08:00
+Document Updated At: 2026-09-09T10:34:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Reviewer: Human Owner — ff6962757
   GitHub Actor: ff6962757
 -->
 
@@ -22,6 +22,18 @@ Latest Substantive Contribution:
 **InteropAtlas 把这些知识连接起来，逐步映射完整的互操作方案空间（Interoperability Solution Space）。**
 
 如果你只是来查知识，不需要先理解这个仓库如何建设。可以把这里理解成一张仍在成长中的“互操作知识地图”。
+
+## 什么叫“互操作”？
+
+InteropAtlas 当前用三个**并列、非互斥**的问题维度来理解互操作：
+
+- **互通（Exchange）**：能否建立可用通路并交换信息、请求、能力或控制——**连得上**。
+- **对齐（Alignment）**：能否对结构、语义、身份、能力、状态与上下文形成足够一致的解释——**对得上**。
+- **协同（Coordination）**：能否在目标、权限、规则、流程与责任约束下组织行动并完成跨边界任务——**办得成**。
+
+这不是新的国际标准分类，也不是严格顺序或协议栈；它是 IA 为跨领域组织互操作问题采用的工作模型。它参考了既有互操作框架中对 technical / syntactic / semantic / organisational / legal / pragmatic 等问题的分层研究。[^interop-model] 更严格的定义、边界与映射见 [`项目定义与范围`](docs/01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md)。
+
+[^interop-model]: 主要参考：[Interoperable Europe Act / European Interoperability Framework](https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation)；Tolk, Diallo & Turnitsa, [*Applying the Levels of Conceptual Interoperability Model…*](https://digitalcommons.odu.edu/msve_fac_pubs/27/) (2007，LCIM 源于 Tolk & Muguira 2003)。IA 的“互通 / 对齐 / 协同”是对这些既有框架的问题导向综合，不宣称与其分类一一等价。
 
 ## 这里有什么知识？
 
