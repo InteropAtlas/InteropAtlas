@@ -5,130 +5,141 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 24
+  snapshot_version: 25
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
-  preservation_note: 历史状态由archive pointers与对应Git commits保留；current state只保留当前决策事实。未重新初始化任务，未恢复G0–G8 benchmark。
+  preservation_note: 历史完整状态由对应Git commit与archive pointers保留；current state聚焦当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
   latest_archives:
   - {snapshot: 22, commit: 079c1a83e7c774f2e1bec5873785b4dbd2acd4fe, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v22.yaml}
   - {snapshot: 23, commit: 31865cfbe4cc31b69bdcc7c6eea9f48dff8b4230, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v23.yaml}
+  - {snapshot: 24, commit: 0f93b427660162a1326638abda73736f00ad824a, blob_sha: a019704ec9cdf044fe249a520f7a36f4d2bebaf9, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v24.yaml, note: pointer; canonical full snapshot in Git history}
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
   quality_requirements:
   - 低误读、低听写分叉
-  - 与愿景关系可自然说明，不靠虚构词源
+  - 连写后有稳定canonical segmentation，不因内部高频词块产生强制误断
+  - 字面语法与intended meaning一致；与愿景关系可自然说明，不靠虚构词源
   - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
-  - 品牌连写后应有稳定canonical segmentation；字面语法与intended meaning应一致
+  - proper-name-first不等于无意义AI造词；coinage必须有真实构造动机且主读法稳定
   reality_constraints:
-    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；不用于早期创意质量淘汰
+    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
     trademark_screening_current_policy: deferred_by_owner_for_now
+    trademark_defer_interpretation: 未筛查不等于安全或clear；最终采用/注册前应恢复
 current_status:
-  strongest_candidates: []
-  promising_candidates: []
+  strongest_candidates: [N060]
+  promising_candidates: [N060]
   finalists: []
   owner_review_needed_now: false
-  biggest_unknown: 能否找到既不像透明方法复合词、又不像泛化AI人造词，同时具备稳定词界、低误读、母组织尺度和自然意义关联的 proper-name candidate。
-  information_gain: RND-023使Pluralway退出promising池。RND-024按新压力测试生成4个内部候选；其中Relata、Tessera、Constellate均出现现实exact高相关身份，Holarchy则因既有系统理论概念与hierarchy/governance结构含义而在质量阶段停留。该批没有可提交Owner的候选，但说明单纯转向已存在的“关系/整体/拼图/星座”概念词同样容易被概念占用或现实占用。
-blockers: []
+  biggest_unknown: Plurifold是否在blind independent quality review中仍能保持低误读、母组织尺度和非技术化身份；尤其是pluri-/fold、manifold联想、形容词感和纯语音拼写恢复。
+  information_gain: RND-025至RND-031系统测试了现成概念词、古典词根、受控混成、非英语commons词源和非pluri结构隐喻。多数高质量语义词在研究/AI/软件领域现实占用严重；Plurifold成为唯一通过当前exact公共身份筛查与.org硬门槛的promising partial，但仍存在manifold/折叠/形容词身份风险，不能由主执行器自行消除。
+blockers:
+- id: B04
+  type: blind_independent_quality_review
+  target: N060
+  statement: 当前runtime没有独立subagent/reviewer；Plurifold已值得独立复核，但主执行器不能把自己的architecture/linguistic preflight冒充blind review。
 deferred_risks:
-- {id: B03, type: official_trademark_query_adapter, status: deferred_by_owner, statement: 官方US/EU/CN/WIPO商标筛查未完成；未完成不等于安全。}
+- {id: B03, type: official_trademark_screening, status: deferred_by_owner, statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。}
 owner_signals:
 - id: OS-N039-01
   candidate_id: N039
-  type: owner_first_exposure
   valence: negative_structural
-  summary: Pluralway先触发subway、alway→always等词块，词界不稳；way使名称明显偏道路/过程/方法且语义走窄；若表达multiple ways则自然英语需ways，加s又进一步强化always联想。
-  interpretation: 候选级真实第一感受；不自动升级为所有复合词的普遍禁令，但足以退出当前promising池并改变局部策略。
-candidates:
-- id: N039
-  name: Pluralway
-  active: false
-  status: hold_owner_structural_parsing_and_method_narrowing
-  reality_preserved: {domain: pluralway.org available_at_checked_time, near_field: yellow, trademark: unresolved_deferred}
-- id: N045
-  name: Relata
-  round: RND-024
-  active: false
+  summary: Pluralway先触发subway、alway→always等词块，词界不稳；way使名称偏道路/过程/方法且语义走窄；若表达multiple ways则自然英语应为plural ways。
+  method_effect: 后续候选在语义前增加canonical segmentation与字面语法压力测试；不把该候选级反馈升级为所有复合词禁令。
+active_candidate:
+  id: N060
+  name: Plurifold
+  round_origin: RND-028
+  status: promising_partial_domain_passed_needs_blind_review
+  construction: pluri- + fold；借用英语/古典构词中的pluri-（多重）与-fold（倍、多重/层次）形成“manyfold / 多重展开”的整体词形；不是为品牌临时伪造词源，现实文本中已有稀疏形容词用法。
+  pronunciation_hint: PLOOR-ih-fold（主执行器预期；需blind reviewer验证实际恢复）
   quality_preflight:
-    canonical_segmentation: stable_visual_form_but_pronunciation_not_single_obvious
-    semantic_fit: relation/plurality direction可解释，但哲学术语感较强
-    target_scale_fit: medium
-    concern: 读音可能在re-LAH-ta / re-LAY-ta等之间摇摆，不满足当前低误读偏好
+    canonical_segmentation: substantially_better_than_Pluralway；更自然作为Plurifold整体或pluri+fold读取，未发现subway/always式强内部高频词块
+    pronounceability: medium_to_good；三个音节总体可读，但pluri-对普通英语使用者的拼写恢复仍需验证
+    spelling_burden: medium；可能出现plurafold/plurifold等听写分叉，尚不能标low
+    memorability: good
+    semantic_fit: good；表达多重、多面、多种展开，比way的方法/路线语义更宽，但仍主要编码multiplicity而非整个循环
+    semantic_room: good；不直接锁定research/software/standards/publishing
+    target_scale_fit: medium_to_good；裸名和Research/Tools/项目署名可像proper parent，但已有形容词感会削弱天然机构身份
+    architecture_extensibility: good_with_caution
+    longevity: good
+    primary_intrinsic_risks:
+    - 与manifold视觉/概念邻近，可能触发数学、技术、多维空间联想
+    - fold可触发折叠、层、材料、蛋白质折叠或群体/羊群等已有英语意义
+    - plurifold现实中作为稀有形容词使用，因此专有名独特性并非完全空白词形
+    - 仍使用pluri-，可能继续把组织核心压向“多元/多重”而弱化Commons→Creation→Commons循环
+  architecture_cases:
+    Plurifold: 成立但身份类型需独立检验
+    Plurifold_Research: 自然
+    Plurifold_Commons: 自然但概念密度偏高
+    Plurifold_Tools: 自然
+    Plurifold_InteropAtlas: parent/project层级可成立
+    project_by_Plurifold: 语法自然；是否像长期机构而非概念/技术名需blind review
   reality:
-    observation: red
-    evidence: relata.com存在Knowledge Worker Automation Software exact identity
-  status: retired_reality
-- id: N046
-  name: Holarchy
-  round: RND-024
-  active: false
-  quality_preflight:
-    canonical_segmentation: stable
-    semantic_fit: whole/part关系与系统层级可关联组织愿景
-    target_scale_fit: medium
-    concern: 已是系统理论/holonic manufacturing中的既有术语，且-archy稳定引入hierarchy/governance结构语义，容易把组织哲学锁到组织结构理论
-  reality:
-    observation: established_concept_field
-    evidence: 学术文献长期使用holarchy表示由holons组成的层级/网络结构
-  status: hold_quality_established_concept_and_hierarchy
-- id: N047
-  name: Tessera
-  round: RND-024
-  active: false
-  quality_preflight:
-    canonical_segmentation: stable
-    semantic_fit: 单个tile贡献于更大mosaic，可映射个体视角→共同整体
-    target_scale_fit: medium
-    concern: 物件/材料隐喻较强，singular fragment感会降低母组织尺度
-  reality:
-    observation: red
-    evidence:
-    - tessera.study为活跃research knowledge platform，直接处于研究/知识工具相邻范围
-    - TesseraOS/Tessera为AI coding agents的Context & Memory Operating System
-  status: retired_reality
-- id: N048
-  name: Constellate
-  round: RND-024
-  active: false
-  quality_preflight:
-    canonical_segmentation: stable
-    semantic_fit: 将彼此独立的点组织成有意义整体，兼具plurality与creation隐喻
-    target_scale_fit: medium_to_good
-    concern: verb/process气质仍存在，但比-way方法导向更宽
-  reality:
-    observation: red
-    evidence:
-    - constellate.com为活跃research-first marketing firm
-    - ITHAKA已有Constellate text-analysis/education platform
-  status: retired_reality
-rounds:
-- id: RND-023
-  action: owner_exposure_diagnosis
-  result: Pluralway由唯一promising候选降为hold；当前无promising/finalist。
-- id: RND-024
-  action: post_owner_strategy_microbatch
-  generated_count: 4
-  candidate_ids: [N045, N046, N047, N048]
-  quality_preflight_before_reality: true
-  segmentation_stress_test_before_reality: true
-  result: Relata/Tessera/Constellate reality Red；Holarchy因既有概念与结构语义过窄hold；无promising。
+    exact_identity:
+      observation: no_material_exact_collision_found
+      confidence: medium
+      note: 当前公共Web exact/组合检索主要返回plurifold作为稀疏形容词用法，未见活跃同名research/software/organization identity；搜索负结果不等于商标clear。
+      examples:
+      - plurifold ontological register / plurifold perspective等学术用法
+      - plurifold training / properties / forms等普通形容词用法
+    near_field:
+      observation: intrinsic_semantic_caution
+      note: manifold/fold技术与材料联想属于名称本身语义风险，不是已确认现实collision。
+    domains:
+    - {domain: plurifold.org, observation: available, query_adapter: Namecheap connected plugin, query_layer: accredited_registrar_machine_signal, machine_result: 'isAvailable=true', price_snapshot: {purchase: 8.48, currency: USD}, caveat: 时点证据；不代表商标或未来仍可注册}
+    trademark: unresolved_deferred_by_owner
+other_rounds:
+- id: RND-025
+  strategy: proper-name-first_existing_metaphor
+  candidates: [Asterism, Chorus, Panoply, Varia, Sheaf]
+  preflight: Varia因主读法不唯一退出；Sheaf因听写与数学/农业术语负担退出；Asterism/Chorus/Panoply进入现实筛查。
+  result: Asterism被AI agent registry、知识图谱/SPARQL/MCP及软件身份占用；Chorus被开放科研基础设施与AI research平台占用；Panoply为成熟云数据平台。无promising。
+- id: RND-026
+  strategy: classical_root_proper_forms
+  candidates: [Plurium, Alterum, Koinon, Singuli, Visum, Diversum]
+  result: Plurium存在“多AI、多视角、综合决策”高度相邻App及IT公司；Alterum有AI身份；Koinon为TUM数字论文管理平台；Singuli为软件公司；Visum/Diversum亦有软件/技术概念占用。无promising。
+- id: RND-027
+  strategy: controlled_semantic_blends
+  candidates: [Plurispect, Varispect, Polyspect, Perspect]
+  result: Perspect/Polyspect现实Red；Plurispect后续发现exact企业身份；Varispect质量上过度像仪器/技术产品。无promising。
+- id: RND-028
+  strategy: rare_real_word_semantic_migration
+  candidates: [Plurifold]
+  result: Plurifold通过主执行器quality/segmentation preflight、公共Web exact身份筛查与.org时点硬门槛，成为唯一promising partial；blind review待完成。
+- id: RND-029
+  strategy: non_english_commons_root
+  candidates: [Allmend]
+  result: Allmend词源语义精准（共同使用的公共土地），但英语中易重切all+mend，且德语区已有Digitale Allmend等高度相邻数字公共品/开放知识语境；退出。
+- id: RND-030
+  strategy: metaphor_derived_controlled_coinage
+  candidates: [Astren, Tessen, Pluren]
+  result: Astren/Tessen现实AI/技术Red；Pluren虽未见高相关组织identity，但存在荷兰语既有词义、消费产品exact身份与Plurin/Pluron听写分叉，质量hold。
+- id: RND-031
+  strategy: non_pluri_structural_metaphor_probe
+  candidates: [Commensa, Kaleid, Convivium, Ecotone]
+  result: Commensa为活跃AI research/product identity；Kaleid有数字转型公司、Kaleid.AI与教育项目；Convivium有LLM conversation app；Ecotone有软件/开源技术与企业集团身份。再次说明强现成结构隐喻现实拥挤；无新增promising。
 diagnostics:
-- {id: D61, subject: N039, statement: 'Owner真实曝光发现subway/alway→always式内部词块会破坏canonical segmentation；这是独立Reviewer未充分捕获的新候选级信息。', confidence: high}
-- {id: D62, subject: N039, statement: '若intended meaning是multiple ways，自然英语为plural ways；Pluralway更自然可解释为a plural/pluralistic way，因此品牌字面与叙事存在轻微语法语义张力。', confidence: high}
-- {id: D65, statement: '从透明复合词转向既有概念词并不能自动解决问题：成熟关系/整体/拼图/星座隐喻往往已有强概念场或现实身份。', confidence: high}
-- {id: D66, statement: '下一步更值得测试proper-name-first构词：先保证单一读法、稳定词界和机构感，再以可解释联想连接愿景；同时避免Reverna式泛化AI拉丁化尾音。', confidence: medium_to_high}
+- {id: D67, statement: '现成高质量概念词在research/software/public-knowledge相邻空间的现实占用密度极高；proper-name感本身不能解决collision。', confidence: high}
+- {id: D68, statement: '直接借古典语词或词形也频繁进入AI/软件/大学工具命名空间；需要受控新造，但必须避免空心AI尾音。', confidence: high}
+- {id: D69, subject: N060, statement: 'Plurifold相对Pluralway显著改善canonical segmentation和way的方法导向，但未证明解决母组织尺度：manifold/fold技术联想、形容词感和pluri-语义偏重仍需独立复核。', confidence: high}
+- {id: D70, statement: '连续多轮非pluri现成隐喻也被现实身份快速消耗，继续无约束扩大候选数量的边际信息价值下降。', confidence: medium_to_high}
+skill_feedback:
+- {id: SF08, status: experience_candidate, observation: Owner曝光发现内部高频词块可破坏joined-brand canonical segmentation, proposed_change: 未来模板可加入segmentation_stress_test；单任务证据暂不改Skill核心}
+- {id: SF09, status: experience_candidate, observation: 全球筛查中受控coinage可能意外成为其他语言既有词（如Pluren）, proposed_change: 对真正promising coinage增加主要语言/词典误义spot-check；暂不升级为普遍硬规则}
 next_action:
-  action: generate_proper_name_first_microbatch
-  target_count: 3-5
-  strategy_delta:
-  - 不继续-way/-ways路线，也不优先直接采用已被学术/组织领域占用的完整概念词。
-  - proper-name-first：目标是2–3音节、单一主读法、视觉词界无需拆分也能稳定识别。
-  - 避免典型泛化AI品牌式“任意辅音 + -ara/-era/-ora/-iva”空心造词；若为coinage必须能说明具体构造动机，但不伪造词源。
-  - 裸名不必字面编码Commons→Perspective→Creation全部循环；只要能承载一个核心原理并留出长期意义空间。
-  - 现实查询仍后置到quality/segmentation preflight之后；只有真正promising者才投入.org与更深现实筛查。
+  action: obtain_blind_independent_review_for_plurifold
+  target: [N060]
+  rationale: Plurifold是六个连续内部微循环中唯一通过当前quality preflight、exact公共身份筛查与.org硬门槛的候选；继续大量生成边际收益下降。真正剩余未知是主执行器无法独立回答的听写、manifold/fold联想和母组织第一身份。
+  blind_review_scope:
+  - 不提供域名、现实collision、Owner历史偏好、Pluralway结果或当前排名
+  - 独立检查11维名称本身质量
+  - 特别检查第一次看到如何断词、第一次听到如何拼写/恢复
+  - 检查manifold、fold、protein folding/material/technical等是否成为强主读法
+  - 检查Plurifold / Plurifold Research / Plurifold Commons / Plurifold Tools / Plurifold / InteropAtlas / A project by Plurifold的母组织身份
+  - 判断pluri-是否使语义仍过度收窄为“多元/多重”，以及是否存在比Pluralway不同的独立结构风险（Reviewer不应被告知Pluralway）
   owner_question: null
 stop:
-  status: continue_internal_microcycles
-  reason: 当前没有Owner需要回答的新问题；应继续自主生成与筛选，直到出现真正Owner-ready候选或新的高价值阻塞。
+  status: blocked_on_independent_review
+  reason: 当前runtime无独立Reviewer；Plurifold已达到值得blind review的门槛，主执行器不能自评冒充独立证据。若外部blind review支持，再进入Owner Exposure；若否，按具体失败点change_strategy并继续生成。
