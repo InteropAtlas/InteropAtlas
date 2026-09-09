@@ -5,7 +5,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 22
+  snapshot_version: 23
   skill_version: 0.1.0
   skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
 lineage:
@@ -14,8 +14,9 @@ lineage:
   - {snapshot: 17, commit: 256037c76856349a05365112713d2e9945ce74e2, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v17.yaml}
   - {snapshot: 19, commit: 49be5bf960a97f3b2b2c1e5ab25b33f539f8e863, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v19.yaml}
   - {snapshot: 20, commit: ca11b1c912631122483403804c07deef502fcda3, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v20.yaml}
-  - {snapshot: 21, commit: 2cc9ae7b4a259818519a1bac7f2c128c4ad7a146, blob_sha: 20a7002adfe54d061413831b0cfc7719c2f3cdfb, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v21.yaml, note: pointer file; canonical full snapshot remains in Git history at source commit}
-  preservation_note: 历史完整状态由归档文件或对应Git commit保留；current state只保留当前可执行事实。未重新初始化任务，未恢复G0–G8 benchmark。
+  - {snapshot: 21, commit: 2cc9ae7b4a259818519a1bac7f2c128c4ad7a146, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v21.yaml}
+  - {snapshot: 22, commit: 079c1a83e7c774f2e1bec5873785b4dbd2acd4fe, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v22.yaml, note: pointer; canonical snapshot preserved in Git history}
+  preservation_note: 历史状态由归档或对应Git commit保留；current state只保留当前决策事实。未重新初始化任务，未恢复G0–G8 benchmark。
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
   semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
@@ -27,109 +28,80 @@ brief:
   - 长期母组织尺度，不被单一工作室、平台、材料、行业或项目锁定
   reality_constraints:
     finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；不作为早期创意质量淘汰条件
-    trademark_priority: [US, EU, CN, WIPO/Madrid]
-    primary_activity_scope: [研究与教育, 软件/在线工具/技术服务, 出版/公共知识/信息服务]
-    secondary_activity_scope: [资助]
     trademark_screening_current_policy: deferred_by_owner_for_now
-    trademark_defer_interpretation: 跳过不等于通过；不把unresolved写成safe/clear/no-conflict。若后续进入最终采用或注册动作，应恢复筛查。
+    trademark_defer_interpretation: 跳过不等于通过；最终采用/注册动作前应恢复筛查。
 current_status:
-  strongest_candidates: [N039]
-  promising_candidates: [N039]
+  strongest_candidates: []
+  promising_candidates: []
   finalists: []
-  quality_ready_for_owner_exposure: true
-  domain_gate_passed: true
-  trademark_screening: deferred_by_owner_for_now
-  owner_review_needed_now: true
-  gate_eligible_now: true_under_owner_deferred_trademark
-  biggest_unknown: Owner第一次真实看到Pluralway时，是否把它感知为有生命力的长期母组织品牌，而不是Plural Way理念短语/方法论；以及是否接受way带来的path/method气质与空格听写归一化成本。
-  information_gain: Owner明确要求商标筛查先跳过，因此B03不再作为当前Owner Exposure Gate阻塞项；它被转为deferred unresolved risk，而不是resolved/pass。Pluralway现已完成独立名称质量复核并通过.org时点硬门槛，可以正式进入Owner Exposure。
+  owner_review_needed_now: false
+  biggest_unknown: 下一轮能否在保持语义契合的同时，避免Pluralway暴露出的词界解析不稳、方法/路径导向过强和字面语法张力，并恢复长期母组织尺度。
+  information_gain: Owner首次真实曝光给出负向结构性反馈。Pluralway意思没有偏离核心方向，但视觉/语音会先触发subway、always等既有词块，导致词界不知道如何断；way首先被读为道路/达成目标的方法，使名称偏方法导向且容易被简化为任何组织都可套用的“多元方法”；此外若 intended meaning 是 multiple ways，则正常英语需要 plural ways，使品牌Pluralway与叙事One commons, plural ways之间出现轻微字面语法错位。
 blockers: []
 deferred_risks:
-- id: B03
-  type: official_trademark_query_adapter
-  status: deferred_by_owner
-  statement: USPTO/EUIPO/CNIPA/WIPO官方exact+核心近似字标筛查当前未完成。
-  interpretation: 未完成≠安全；若Owner后续希望进入最终采用/注册/法律清查，应恢复US→EU→CN→WIPO/Madrid筛查。
-resolved_blockers:
-- {id: B01, type: domain_adapter, resolution: 'Namecheap accredited registrar machine signal明确返回pluralway.org available；域名硬门槛通过。'}
-- id: B02
-  type: independent_reviewer_runtime
-  resolution: Owner提供另一隔离对话窗口的blind quality review；Reviewer明确声明未见/未查现实可用性、域名、商标、撞名、Owner历史偏好或其他排名，因此可作为独立质量复核证据。
-candidate:
-  id: N039
+- {id: B03, type: official_trademark_query_adapter, status: deferred_by_owner, statement: 官方US/EU/CN/WIPO商标筛查未完成；未完成不等于安全。}
+owner_signals:
+- id: OS-N039-01
+  candidate_id: N039
+  type: owner_first_exposure
+  valence: negative_structural
+  observations:
+  - way第一联想到subway。
+  - alway片段第一联想到always，导致第一时间不知道Pluralway该如何断句/切分。
+  - 意义总体OK，没有偏离组织核心方向，但略微走窄。
+  - way首先意味着道路，也可理解为达成目标的过程/方法，因此名称明显方法导向。
+  - “任何组织都可以用这个名称”的感觉削弱了独特的母组织身份。
+  - 若要表达多条ways，直觉上应加s；Pluralways又会更强触发always，进一步恶化视觉/语音体验。
+  interpretation: 这是Owner对N039的候选级真实第一感受，不自动升级为所有名称都必须遵守的普遍规则；但足以使N039退出当前promising池，并指导下一轮局部策略改变。
+candidates:
+- id: N039
   name: Pluralway
-  active: true
-  status: owner_exposure_ready_trademark_deferred
+  active: false
+  status: hold_owner_structural_parsing_and_method_narrowing
+  round_origin: RND-017
   pronunciation_hint: PLOOR-ul-way
-  construction: plural + way
-  intended_meaning: 公共知识不是为了产生唯一视角；不同个体可以形成不同视角、路径与创造，并将创造重新贡献给公共世界。
-  compact_narrative: One commons, plural ways.
-  provenance:
-    round_origin: RND-017
-    generation_role: primary_executor
-    review_role: owner_relayed_blind_independent_reviewer
-  quality:
-    distinctiveness: 较强；组合有品牌轮廓，但plural根在目标领域拥挤
-    pronounceability: 较好至强；通常可直接读出
-    spelling_burden: 中；纯语音时自然可能恢复为Plural Way，属于空格归一化歧义，不是整体拼错
-    memorability: 较强
-    semantic_fit: 较强至强；最强连接plurality of perspectives / multiple paths
-    semantic_room: 较强；不锁死research/standards/software/knowledge等具体业务
-    target_scale_fit: 中至较强；plural足够大，但way稳定引入理念/方法/路径感，母组织尺度略降
-    longevity: 较好
-    symbolic_compression: 强
-    cross_context_use: 较好
-    architecture_extensibility: 较好
-  independent_review:
-    status: completed_blind
-    overall: 合格以上；无淘汰级名称质量问题，值得进入Owner Exposure。
-    strongest_point: plural带来的意义压缩能力，与“Knowledge belongs to the commons; perspective belongs to the individual.”有直接哲学连接。
-    primary_risks:
-    - 纯语音中Pluralway很自然被写成Plural Way；视觉体验优于纯语音体验。
-    - way会把身份向philosophy/methodology/framework/movement/approach/path拉动，而不是天然institutional parent brand。
-    - 名称强编码Perspective/multiplicity/paths，对Commons与Creation较间接，对回流Commons很弱；但Reviewer认为名称无需压缩完整循环。
-  architecture_cases:
-    Pluralway: 成立；品牌感清楚，但首次身份类型仍开放。
-    Pluralway_Research: 很自然，为最强组合之一。
-    Pluralway_Commons: 成立但偏理论化、概念密度高。
-    Pluralway_Tools: 成立，说明可承载软件/工具层。
-    Pluralway_InteropAtlas: 成立，哲学性parent与技术性project层级清楚。
-    project_by_Pluralway: 语法自然，但初见者未必立即把Pluralway识别为长期机构，暴露母组织尺度风险。
-  reality:
-    exact_and_spaced:
-      observation: no_material_exact_collision_found
-      confidence: low_to_medium
-      caveat: 仅公共Web/身份检索；不是官方商标库0条证明。
-    near_field:
-      observation: yellow
-      confidence: high
-      interpretation: Plurality Institute、Plural软件和Plural Policy等不是Pluralway exact Red，但说明Plural/Plurality在AI、研究、软件、公共事务等相邻领域已有高相关命名占用。
-    domains:
-    - {domain: pluralway.org, observation: available, query_adapter: Namecheap connected plugin, query_layer: accredited_registrar_machine_signal, machine_result: 'isAvailable=true', price_snapshot: {purchase: 8.48, currency: USD}, caveat: 时点证据；不代表商标或未来仍可注册}
-    trademark_oriented_risk:
-      observation: unresolved_deferred_by_owner
-      note: 当前Owner明确要求先跳过商标筛查；不得解释为clear/safe。
+  quality_prior:
+    independent_review: passed_with_structural_caution
+    strongest_point: plural对multiple perspectives / plurality具有较强意义压缩能力。
+    prior_risks: [Pluralway/Plural Way空格恢复, way带来的method/path气质, 母组织尺度中等]
+  owner_exposure_result:
+    outcome: negative_hold
+    decisive_reasons:
+    - joined form存在意外词块触发：subway / alway→always，导致canonical segmentation不稳定。
+    - way过强地把名称解释为道路/过程/方法，Owner感到语义略走窄。
+    - intended “multiple ways” 与 singular-looking way 存在字面语法张力；改成ways又会加重always联想。
+    - 名称可泛用于许多组织，独特机构身份不足。
+  reality_preserved_separately:
+    exact_web_identity: no_material_exact_collision_found_low_to_medium_confidence
+    near_field: yellow_plural_plurality_crowded
+    domain: {domain: pluralway.org, observation: available_at_checked_time, source: Namecheap machine signal}
+    trademark: unresolved_deferred_by_owner
+  note: 现实可用性不改变Owner质量/身份判断；domain available不构成保留理由。
 rounds:
-- id: RND-022
-  action: owner_defer_trademark_and_open_owner_exposure_gate
+- id: RND-023
+  action: owner_exposure_diagnosis
   generated_count: 0
   candidate_ids: [N039]
-  actions_performed: [record_owner_constraint_change, move_trademark_to_deferred_risk, re-evaluate_gate, update_state]
-  result: 商标筛查不再阻塞当前Owner Exposure；Pluralway进入Owner Exposure Ready，但商标状态保持unresolved/deferred。
+  actions_performed: [capture_owner_first_impression, distinguish_owner_signal_from_general_quality, grammar_semantic_check, diagnose, change_candidate_status, change_strategy]
+  result: Pluralway从唯一promising候选降为hold；当前无promising/finalist。下一轮回到generate，但改变局部构词策略而不降低质量门槛。
 diagnostics:
-- {id: D59, subject: N039, statement: 'Owner显式跳过商标筛查只改变当前Gate要求，不改变商标事实状态；unresolved不得升级为clear。', confidence: high}
-- {id: D60, subject: N039, statement: 'Pluralway当前真正需要Owner判断的不是理论质量，而是第一感受：是否像长期母组织，以及way/path/method与Plural Way空格成本是否可接受。', confidence: high}
+- {id: D61, subject: N039, statement: '独立Reviewer已看到Plural Way空格歧义，但Owner真实曝光进一步发现subway/alway→always式内部词块会破坏canonical segmentation；这是新的候选级信息。', confidence: high}
+- {id: D62, subject: N039, statement: '若plural作为形容词修饰单数way，Pluralway可理解为“一个多元/复合的方式”；若意图是“多种方式/多条路径”，自然英语是plural ways。因此品牌字面与One commons, plural ways叙事存在轻微语法语义张力。', confidence: high}
+- {id: D63, subject: N039, statement: 'way的path/method读法不是抽象理论风险，而在Owner第一次曝光中成为主导解释，因此N039的母组织尺度不足已获得真实Owner信号。', confidence: high}
+- {id: D64, statement: '下一轮不应把“禁用所有复合词/所有普通英语词”升级为普遍规则；应局部增加canonical segmentation和semantic-role narrowing压力测试，并暂避-way路线。', confidence: high}
 next_action:
-  action: owner_exposure_review
-  target: [N039]
-  rationale: 名称质量已完成blind independent review，.org硬门槛已通过，商标筛查由Owner明确延期，因此当前最高信息价值是Owner真实第一反应。
-  owner_questions:
-  - 第一次看到Pluralway，你自然把它感知成一个长期母组织名称，还是更像“Plural Way”这一理念/方法短语？
-  - 你对Pluralway这个词本身的第一观感是什么：喜欢、无感、还是排斥？
-  - 你是否介意口头听到后很可能被写成Plural Way，以及way带来的“路径/方法”感？
-  after_owner_signal:
-  - 若正向：保留为finalist候选并继续与后续强候选比较；最终采用前恢复被延期的商标筛查。
-  - 若负向：记录具体Owner signal，退出或hold，不把单次偏好升级为普遍命名规则；回到change_strategy/generate。
+  action: change_strategy_and_generate
+  target_count: 3-5
+  rationale: 当前无promising候选；Pluralway提供了高信息量Owner反馈，需要换局部构词策略而不是继续同类transparent compound。
+  strategy_delta:
+  - 下一批暂避-way/-ways以及明显path/route/method导向的尾词。
+  - 生成后、现实查询前增加canonical segmentation stress test：观察连写后是否自然触发其他高频词块、错误断句或品牌词界不稳定。
+  - 对复合/混成词检查字面语法是否真的支持 intended meaning，尤其单复数和修饰关系；不靠品牌解释掩盖语法张力。
+  - 优先“组织所创造/维持的条件、关系、共同空间或生成能力”，而不是“达成目标的道路/方法”，以恢复umbrella scale。
+  - 不要求裸名编码完整循环；仍优先低误读、自然发音、可解释且有长期语义余量。
+  - primary executor负责生成；独立Reviewer只在出现真正promising候选后介入，避免重复无增益评审。
+  reality_sequence: quality_and_segmentation_preflight_before_domain_or_collision_search
+  owner_question: null
 stop:
-  status: awaiting_owner_judgment
-  reason: 当前已到真正需要Owner主观判断的Exposure Gate；不是执行器阻塞。
+  status: continue_internal_microcycles
+  reason: Owner判断已取得且产生明确策略增益；当前无需继续询问Owner，应自主进入下一批生成与筛选。
