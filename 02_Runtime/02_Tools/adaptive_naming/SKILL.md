@@ -1,10 +1,10 @@
 ---
 name: adaptive-naming
 description: 自适应品牌、组织、项目与产品命名。先建立目标与边界，再通过探索、评价、现实验证、诊断、搜索完整性检查与状态更新循环寻找高质量且现实可采用的名称；适用于需要 Agent 自主决定下一步、保留探索地图并避免局部搜索坍缩的命名任务。
-version: 0.2.0
+version: 0.2.1
 ---
 
-# Adaptive Naming Skill v0.2
+# Adaptive Naming Skill v0.2.1
 
 ## 1. 目标
 
@@ -16,7 +16,9 @@ version: 0.2.0
 
 本 Skill 负责“怎么思考与行动”；单次任务产生的地图、候选、证据和局部经验写入独立状态文件，不写回本 Skill。
 
-v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不依赖生成模型自行保持。**
+v0.2 起额外要求：**搜索多样性和搜索完整性是控制器责任，不依赖生成模型自行保持。**
+
+v0.2.1 进一步要求：**控制器知道的排除信息，不等于 Generator 应该看到的信息。防坍缩约束优先放在控制器私有状态与生成后过滤中，不通过反复负面提示来实现。**
 
 ## 2. 使用边界
 
@@ -50,6 +52,10 @@ v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不�
 12. **现实幸存结果不得直接塑造同批或紧邻批次的词形模板。** 现实结果先进入控制器诊断，再决定是否改变区域或策略。
 13. **微循环是内部执行单位，不是用户交互单位。** 只要存在明确下一动作且不需要 Owner，Agent 应继续自主执行。
 14. 搜索完整性问题不得用“某个候选单独解释得通”掩盖；必须检查语义、词形和构词来源是否发生集中或坍缩。
+15. **防坍缩排除项默认属于 Controller-only 信息。** incumbent 名称、冷却词根/家族、现实幸存词形等，不应为了提醒 Generator 而反复出现在生成提示中。
+16. **Generator Brief 默认正向表达。** 优先描述目标、待探索区域、期望性质和真实硬约束；不要用长串“不要 X / 不要 Y”替代搜索设计。
+17. **生成后过滤负责执行多数 anti-collapse 排除。** 命中冷却家族或 incumbent 相似结构的候选可被控制器挡回，但不要把这些排除词再次喂给 Generator。
+18. **隔离强度必须诚实标注。** 同一聊天 / 同一模型历史上下文已经见过某些内容时，只能称为 `best_effort_same_context`；不能声称 Generator “未看到”这些历史信息。
 
 ## 4. 运行前：建立 Naming Job
 
@@ -64,7 +70,7 @@ v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不�
 
 同时建立一张**初始命名空间地图**：竞争者/相邻对象如何命名、哪些类别明显拥挤、哪些语义或构词区域值得探索。初始地图是先验，不是假定完整事实。
 
-状态中还应建立 `search_control`，至少记录当前搜索模式、已探索语义覆盖、近期词形/语义/构词家族集中度、当前 comparison-only 候选和必要 cooldown。
+状态中还应建立 `search_control`，至少记录当前搜索模式、已探索语义覆盖、近期词形/语义/构词家族集中度、当前 comparison-only 候选、必要 cooldown、生成隔离等级和生成后过滤状态。
 
 ## 5. 搜索模式：Exploration 与 Exploitation 必须显式区分
 
@@ -81,6 +87,7 @@ v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不�
 - 检查词根、前后缀、语义家族和构词模板是否过度集中；
 - 同一批先完成名称本身比较，再做现实筛查；
 - 现实筛查结果不得回灌同批生成，也不得被压缩成“这个词形更容易活下来”直接交给 Generator；
+- task-local cooldown 和 incumbent 相似性优先由控制器在生成后检查，不在 Generator Brief 中逐项点名；
 - 如需围绕某一强区域继续，应先通过搜索完整性检查，再显式切换到 exploitation。
 
 ### Exploitation｜深挖
@@ -104,10 +111,11 @@ v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不�
 
 - `map`：补充竞争 / 语义 / 构词空间地图；
 - `generate`：在选定区域生成；
+- `post_generation_filter`：执行 Controller-only cooldown / incumbent similarity / search-integrity 排除；
 - `evaluate_quality`：评价名称本身质量；
 - `verify_reality`：查询现实碰撞、域名或其他 namespace；
 - `diagnose`：解释观察意味着什么；
-- `check_search_integrity`：检查覆盖率、家族集中、incumbent 锚定、策略忠实度和幸存者反馈；
+- `check_search_integrity`：检查覆盖率、家族集中、incumbent 锚定、策略忠实度、隔离真实性和幸存者反馈；
 - `update_state`：更新地图、假设、候选与偏好；
 - `ask_owner`：只在人的判断能明显改变结果时询问；
 - `stress_test`：把强候选放入长期品牌/组织架构语境；
@@ -127,9 +135,13 @@ v0.2 额外要求：**搜索多样性和搜索完整性是控制器责任，不�
   ↓
 选择 search_mode 与下一动作
   ↓
-若需生成：形成 sanitized Generation Brief
+若需生成：Controller 形成正向 Generation Brief + 私有 exclusions
   ↓
-获得新观察
+Generator 只按其可见 Brief 生成
+  ↓
+Controller 执行 post-generation filter
+  ↓
+获得新观察 → 质量评价 / 现实验证
   ↓
 诊断
   ↓
@@ -160,25 +172,74 @@ Agent 应知道至少存在这些路线：
 
 这些是可选搜索路径，不是永久配额。Agent 可以创造列表之外的新构词策略；新策略要在状态中记录其做法、目的和观察结果。
 
-### Sanitized Generation Brief
+### 7.1 Controller-only exclusions
 
-控制器可以读取完整任务状态，但 Generator 在 exploration 阶段默认只接收压缩后的生成 Brief。Brief 应包含：
+控制器可以读取完整任务状态，并私下维护：
 
-- 当前目标与硬约束；
-- 本轮要探索的语义区域；
-- 应覆盖或尝试的构词方向；
-- 已知语言/尺度风险；
-- task-local cooldown 家族；
+- comparison-only / incumbent 候选；
+- task-local cooldown 的词形、语义或构词家族；
+- reality survivor shapes；
+- Owner 对具体 incumbent 的反应；
+- 需要在生成后执行的相似性 / 家族过滤规则。
+
+这些信息**默认不进入 Generator Brief**。它们存在的目的，是让控制器检查输出，而不是让生成模型反复“想到它们但不要使用它们”。
+
+真正属于任务本身的硬边界仍可进入 Generator Brief，例如语言、长度、发音、法律/伦理禁区、明确禁止的外部品牌身份等；但应尽量用类别性、正向、最小必要表述，不用大量具体负面样本提示。
+
+### 7.2 Positive Generation Brief
+
+Generator 在 exploration 阶段默认只接收压缩后的正向 Brief。优先包含：
+
+- 当前命名对象与长期尺度；
+- 本轮正向探索目标；
+- 待采样的语义区域或结构问题；
+- 可尝试的构词方向；
+- 期望的语言、口语、记忆和架构性质；
+- 真正不可省略的硬约束；
 - 本轮要回答的搜索问题。
 
-默认**不向 Generator 暴露**：
+默认**不向 Generator Brief 写入**：
 
 - strongest / survivor / finalist 的具体名称；
 - 它们成功的具体词根、词尾或音形模式；
+- task-local cooldown 的具体 token / 词根清单；
 - 域名可用、现实撞名、商标等幸存结果；
-- Owner 对具体 incumbent 的喜欢/接受程度。
+- Owner 对具体 incumbent 的喜欢/接受程度；
+- 为防止复发而列出的长串 negative examples。
 
-如果运行环境没有独立 subagent，也应先由控制器写出 sanitized brief，再只基于该 brief 生成；不要在生成时回看 incumbent 名称和现实结果。
+如果必须表达避让意图，优先使用抽象的正向搜索要求，例如“扩大此前低采样的结构空间”，而不是列出旧候选、旧词根和一串“不要”。
+
+### 7.3 Post-generation filter
+
+Generator 产出后，由控制器在质量评价前执行最小必要过滤：
+
+1. 是否命中 task-local cooled family；
+2. 是否与 comparison-only / incumbent 在词根、音形、语义代理或构词模板上过近；
+3. 是否违反本轮声明的 search_mode / strategy；
+4. 是否命中其他 controller-only exclusions。
+
+被挡回的候选记录为**控制层违反**，不自动记作名称本身质量失败，也不把具体排除项再次回喂 Generator。
+
+如果同一批过滤命中率持续很高：
+
+- 先诊断生成上下文污染、search frame 不清或 isolation 不足；
+- 优先改用 fresh / isolated runtime 或重写正向 search frame；
+- 不要第一反应就是增加更多具体负面提示。
+
+### 7.4 隔离等级与事实表述
+
+每轮生成应记录实际 `generation_isolation.level`：
+
+- `isolated_runtime`：独立 subagent / 独立上下文，且未接触 controller-only exclusions；
+- `fresh_context`：新会话 / 新上下文，只加载净化后的生成材料；
+- `best_effort_same_context`：同一聊天或同一模型上下文曾见过完整状态，只是在当前生成步骤不主动回看；
+- `none`：没有做上下文隔离。
+
+只有前两类且证据充分时，才可以说“Generator 未看到 X”。
+
+在 `best_effort_same_context` 中应准确写成：**“当前 Generation Brief 未再次暴露 X，但运行上下文历史中可能已见过 X。”**
+
+如果当前 runtime 不支持真正隔离，仍可继续任务，但必须诚实标注隔离等级，并把 post-generation filter 作为主要防线。
 
 只有显式进入 exploitation，且状态记录了理由时，才允许把被深挖的结构性特征有限提供给 Generator。
 
@@ -194,7 +255,7 @@ Agent 应知道至少存在这些路线：
 
 不要只检查 exact substring。识别共享词根、前后缀、同义/近义代理、声音骨架和构词模板是否在 recent / active / promising 候选中异常集中。
 
-例如 `plural / plur- / pluri- / poly- / multi- / many-` 可能属于同一任务中的 multiplicity 家族；具体家族必须由当前任务诊断，不建立永久黑名单。
+具体家族必须由当前任务诊断，不建立永久黑名单。发现某一家族集中时，应把具体家族信息放入 Controller-only exclusions；Generator 通常不需要看到该家族的具体词根清单。
 
 ### Incumbent anchoring
 
@@ -203,9 +264,31 @@ Agent 应知道至少存在这些路线：
 发现泄漏时：
 
 1. 将 incumbent 标为 `comparison_only`；
-2. 从 Generator 上下文移除具体名称和成功词形；
+2. 将具体名称与成功词形移入 Controller-only exclusions；
 3. 必要时对其语义/形态家族设置 task-local cooldown；
-4. 恢复被低采样区域。
+4. 用正向 Brief 恢复被低采样区域；
+5. 由 post-generation filter 拦截意外回流。
+
+### Negative-constraint priming
+
+如果为了防复发，Generation Brief 反复列出 incumbent、冷却词根或“不要 X / 不要 Y”，并出现这些模式持续高显著、变体回流或过滤命中率升高，诊断为 `negative_constraint_priming`。
+
+修复顺序：
+
+1. 把具体排除项移回 Controller-only 状态；
+2. 将 Generator Brief 改成正向目标；
+3. 生成后过滤；
+4. 若同上下文污染持续，切换 fresh / isolated runtime。
+
+### Isolation integrity
+
+不得把“逻辑上 omitted”误报成“模型事实上没见过”。每轮检查：
+
+- 当前 Generator 是否有独立上下文；
+- 历史聊天是否已暴露 incumbent / cooldown / survivor 信息；
+- state 中的 isolation level 是否与事实一致。
+
+发现夸大隔离效果时，诊断 `isolation_overclaim`，修正记录后继续；这属于方法执行完整性问题，不等于候选质量失败。
 
 ### Strategy fidelity
 
@@ -281,7 +364,7 @@ Agent 应使用当前运行环境可用的真实工具，不凭记忆断言可�
 
 1. 候选级：这个名字发生了什么？
 2. 批次 / 区域级：是否出现重复模式？
-3. 搜索完整性级：是否发生语义、形态、构词或 incumbent 坍缩？
+3. 搜索完整性级：是否发生语义、形态、构词、incumbent、负面提示或隔离完整性问题？
 4. 策略级：这些重复模式是否足以改变下一步或 search_mode？
 
 先诊断，再优化。不得从单个候选直接跳到永久策略结论。
@@ -299,6 +382,7 @@ Agent 应使用当前运行环境可用的真实工具，不凭记忆断言可�
 - 现实证据；
 - 区域 / 构词策略认识；
 - 搜索模式与搜索完整性状态；
+- generation isolation 与 post-generation filter 结果；
 - 诊断；
 - 当前最大未知；
 - 下一动作及理由。
@@ -373,6 +457,7 @@ A project by [Name]
 - 当前 Naming Job / 关键约束；
 - 已探索区域与主要学习；
 - 当前 search_mode 与重要搜索完整性诊断；
+- generation isolation 的实际等级；
 - 2–5 个当前强候选（或明确说明为何尚无）；
 - 每个候选的名称本身质量摘要；
 - 独立的现实可用性摘要；
