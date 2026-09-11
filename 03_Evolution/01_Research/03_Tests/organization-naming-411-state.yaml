@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 75
+  snapshot_version: 76
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v74 记录 N128 Transindividuality 因长度负担被 Owner 拒绝。
-    本快照继续 broad creation，并专门校准比 Multifinality 更短、更利落但仍有概念完整性的名称。多批候选先生成，再做 .com/identity/trademark 后筛；
-    本轮没有为了域名可用而降低 intrinsic quality。完整历史继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v75 继续 shorter conceptual / natural semiopaque search。
+    本快照记录两条 materially different survivor：N129 Plurivocal（真实概念词）与 N130 Merosophy（半透明词源专名）。
+    两者均未作为后续 Generator 模板；完整历史继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -75,17 +75,23 @@ rounds:
   - {id: RND-120, action: owner_clarifies_com_gate_as_obtainability_not_unregistered_only, result: aftermarket_path_enabled}
   - {id: RND-121, action: continue_creation_after_domain_gate_clarification, result: one_new_high_priority_commercial_candidate}
   - {id: RND-122, action: owner_reaction_to_transindividuality, result: rejected_for_excessive_length}
-  - id: RND-123
-    action: calibrated_shorter_conceptual_brand_search
-    result: no_owner_ready_survivor_yet
+  - {id: RND-123, action: calibrated_shorter_conceptual_brand_search, result: no_owner_ready_survivor_yet}
+  - id: RND-124
+    action: shorter_true_concept_and_semiopaque_search
+    result: two_materially_distinct_survivors
     findings:
-      - shorter established philosophical/concept words were overwhelmingly .com-occupied, confirming heavy namespace crowding in concise lexical territory
-      - available direct-registration forms included Variforma, Versiformity, Varianceo, Pluralon, Mutiform, Alterraxis, Plurona, Interraza, Versoriax, Recombra and Pluraliax
-      - Variforma was reality/trademark blocked by an active registered US trademark and existing industrial brand use
-      - Plurona was reality blocked by an active Italian company identity
-      - several remaining direct-registration strings were rejected for weak intrinsic quality, overly constructed SaaS-like appearance, or insufficient semantic/brand depth despite domain availability
-      - no candidate from this round exceeded Multifinality-level appeal while staying comfortably below Transindividuality-level length burden
-      - important control result: .com availability did not override intrinsic naming quality
+      - concise established concept words remained heavily .com-occupied; exact lexical territory is still crowded
+      - Plurivocal emerged as a real English adjective meaning multivoiced / having multiple voices or meanings; academic and organizational-discourse usage is established
+      - plurivocal.com and plurivocal.org were both directly registrable on 2026-09-11
+      - public exact-name search found academic/organizational usage but no material active exact-name company/software identity
+      - public trademark web precheck found no obvious exact PLURIVOCAL registration signal in US/EU/WIPO/CN indexed results; formal database/legal clearance remains pending
+      - Plurivocal's principal risk is distinctiveness/descriptiveness if goods/services directly emphasize multiple voices/perspectives
+      - Merosophy emerged as a semi-transparent proper-name construction with meros (part) + -sophy (wisdom/understanding) as intended semantic backbone
+      - merosophy.com and merosophy.org were directly registrable on 2026-09-11
+      - public searches for exact MEROSOPHY returned no meaningful company/software/organization/trademark identity, giving stronger preliminary ownability than ordinary dictionary terms
+      - Merosophy's principal risk is semantic interpretation burden: the intended root explanation is not self-evident and should not be overstated as an established historical term
+      - Alterence was rejected after an existing brand/identity usage surfaced
+      - multiple x-suffixed or forced-availability variants were rejected for intrinsic quality despite domain availability
 
 candidates:
   - {id: N096, name: Open Regard, role: commercial_gate_survivor_pending_tm_strength, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
@@ -107,27 +113,63 @@ candidates:
     active: false
     owner_feedback: too_long_not_liked
     generation_use: prohibited_as_template_or_seed
+  - id: N129
+    name: Plurivocal
+    role: owner_ready_provisional_pending_formal_tm
+    active: true
+    morphotype: established_concept_single_word
+    intrinsic_case:
+      - established word for multivoiced / multiple-voice or multiple-meaning expression
+      - shorter and visually lighter than N128 while retaining conceptual depth
+      - coherent single-word brand/organization form
+      - semantically adjacent to plural perspectives without literal mission wording
+    domain_status:
+      com: available_for_registration_2026_09_11
+      org: available_for_registration_2026_09_11
+    reality_status: preliminary_pass_academic_usage_no_material_exact_commercial_identity_found
+    trademark_status: preliminary_no_obvious_exact_signal_found_formal_clearance_pending
+    risks:
+      - may overemphasize voice/discourse relative to broader creation/knowledge mission
+      - existing ordinary/adjectival meaning can weaken trademark distinctiveness for directly related services
+    owner_exposure: now
+    generation_use: prohibited_as_template_or_seed
+  - id: N130
+    name: Merosophy
+    role: owner_ready_provisional_pending_formal_tm
+    active: true
+    morphotype: semiopaque_root_derived_proper_name
+    intrinsic_case:
+      - intended semantic backbone combines meros (part) with -sophy (wisdom/understanding)
+      - suggests understanding through parts / relation of parts and wholes without being a literal mission phrase
+      - compact, pronounceable, visually brand-like and more source-distinctive than ordinary concept words
+    domain_status:
+      com: available_for_registration_2026_09_11
+      org: available_for_registration_2026_09_11
+    reality_status: preliminary_pass_no_material_exact_identity_found
+    trademark_status: preliminary_strong_ownability_signal_formal_clearance_pending
+    risks:
+      - not an established dictionary/philosophical term; semantic explanation is constructed from roots
+      - may acquire mystical/philosophical tone due -sophy ending
+      - intended root reading may not be obvious to ordinary audiences
+    owner_exposure: now
+    generation_use: prohibited_as_template_or_seed
 
 current_state:
-  direct_registration_com_survivors: [N096, N113, N126]
+  direct_registration_com_survivors: [N096, N113, N126, N129, N130]
   aftermarket_pending: [N117, N119, N125, N127]
+  owner_rejected: [N128]
   search_mode: commercial_brand_hard_gate_divergence
   biggest_unknown: >-
-    Can a shorter true concept word or more natural semi-transparent proper name achieve Multifinality-level conceptual brandability without collapsing into generic SaaS coinage, while retaining practical .com obtainability and strong trademark outlook?
+    Owner reaction to N129/N130, especially the tradeoff between established-concept transparency (Plurivocal) and higher ownability / lower semantic transparency (Merosophy), while preserving broad morphotype diversity.
   blockers: []
-  owner_review_needed_now: false
+  owner_review_needed_now: true_for_N129_N130_reaction_but_not_for_continued_search
 
 next_action:
-  action: continue_parallel_true_concept_and_natural_semiopaque_search
-  priority_classes:
-    - shorter_established_concept_words
-    - natural_semiopaque_proper_names_with_semantic_backbone
-    - compact_single_token_compounds
-    - root_derived_forms_with_high_recoverability
+  action: collect_owner_reaction_to_N129_N130_while_continuing_noncloning_search
   rationale: >-
-    Namespace crowding is severe in concise conceptual language, but direct-registration vacancy alone is not enough. Preserve meaning-first quality and broad form diversity while seeking a shorter identity load than N128.
+    N129 and N130 are commercially plausible, materially different form classes with exact .com availability. Continue broad creation regardless of Owner reaction; do not exploit pluri- or -sophy as templates.
   requires_owner: false_for_continued_search
 
 stop:
-  status: continue
-  reason: search remains productive diagnostically; no new candidate yet merits Owner exposure
+  status: owner_feedback_plus_continue
+  reason: two new materially distinct candidates merit Owner exposure and broader search remains open
