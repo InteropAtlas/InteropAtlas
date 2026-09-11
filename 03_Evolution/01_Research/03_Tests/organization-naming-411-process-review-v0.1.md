@@ -345,3 +345,23 @@ That is the clearest method-level lesson from #411 so far.
 5. 分开报告过程合规、错误复发和 Owner 决策成本；不以规则复述作为通过，不以少数候选偏好证明普适效果。
 
 当前进度：证据缺口登记与恢复入口修正；完整证据重建、对照测试和稳定 Skill 改动尚未完成。保持 generation paused。方法有效性和组织命名分别验收。
+
+### 14.5 RND-129 → RND-130 定向重建结果
+
+检查范围：v79（03dfd91）、v80（f084b85）、v81（3927473）、v82，以及本轮重新读取的 #411 全部返回评论。未把事后重建冒充原始运行。
+
+| 链条环节 | 找到的记录 | 证据状态 |
+| --- | --- | --- |
+| 上批反馈 | [v79](https://github.com/InteropAtlas/InteropAtlas/blob/03dfd91bc2ddb2c3a67a6fdc156757a725b20330/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) 保存相对偏好的转述 | reported_owner_feedback；未定位带上下文的原始用户发言 |
+| 策略变化 | v79 将比较反馈解释为提高语义密度，并更改 early_creative_policy | Controller 推断可定位；因果关系未验证 |
+| 实际 Generator 输入 | v79/v80 有策略与隔离等级自述 | actual_input_artifact 未找到，不能证明正向 Brief 实际发送了什么 |
+| 生成与筛选 | v80 有七项展示记录及部分淘汰摘要 | 全量生成集合与逐阶段去留表未找到；无法量化筛选造成的形态收缩 |
+| 现实检查 | v80 有域名状态、low_noise 标签与日期 | 查询来源未找到；N143 的 .org 摘要矛盾仍未解决 |
+| 展示内容 | v80 有展示候选 IDs 与语义说明 | 实际用户收到的整段展示未定位；不能将状态文件当作原始展示 |
+| 后续反馈与归因 | [v81](https://github.com/InteropAtlas/InteropAtlas/blob/3927473f92022cc509ba186ee155abaac6c7de1e/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) 转述用户指出相似，并写 controller_overfit_confirmed | 支持“执行者当时作此诊断”；不是独立因果确认 |
+
+本轮对 #411 全部返回评论检索 RND-129/RND-130、v79/v80/v81 与事件标识，没有找到补齐上述原始链条的直接命中。不能据此排除私人聊天或其他历史位置存在证据。
+
+新增可定位问题：v79 将“整批不如参考项”的相对反馈，扩写为语义密度高于发音顺滑，并标 source_type: owner_explicit_batch_comparison。这一字段不足以区分“用户直接说出的理由”和“Controller 对排序的解释”。应保留比较结果，同时把原因降为 inference_pending_validation；不能因使用 owner_explicit 标签便视为已溯源。
+
+定向重建阶段完成；结论是 partial_reconstruction，不是完整重放。下一阶段应以缺失证据明确化和前瞻留痕试行为基础；若无法找回原始输入，只能开展明确标注的合成情境回归。
