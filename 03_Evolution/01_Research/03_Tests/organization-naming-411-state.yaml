@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 53
+  snapshot_version: 54
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v52 保存成熟品牌 morphotype probe 结果。
-    本快照记录 Owner 主动给出的更深层 expression / affective preference：总体偏向稳重、和谐、稳定、可靠；年轻可以，但希望是“年轻又靠谱”。
-    R/C/O 首字母带来安心感被保留为低置信声音/字母信号，不升级为规则。完整历史由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v53 (commit 1fd4de1d4c1431dd24a60881f4e2d65b257c92d3)
+    保存 Owner 的 stable-modern / reliable-youth expression signal 与 R/C/O 低置信字母偏好。本 compact snapshot 新增声音长度与节奏对称偏好；
+    完整历史候选、轮次与现实证据继续由 Git history 与 Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -22,83 +22,102 @@ constraint_registry:
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred, source_type: owner_explicit}
-    - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists, source_type: owner_explicit}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no obvious broad morphotype taboo from mature-brand probe; do not infer equal preference, source_type: owner_observed, confidence: medium}
+    - {id: PREF-CHOICE-SPACE, statement: Owner wants multiple credible ready-to-use choices, source_type: owner_explicit}
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no obvious broad morphotype taboo; do not infer equal preference, source_type: owner_observed, confidence: medium}
     - id: PREF-EXPRESSION-STABLE-MODERN
-      statement: Owner appears to prefer a stable, harmonious, reliable identity character; youthfulness is welcome when it still feels dependable and composed rather than flimsy or trend-chasing.
+      statement: stable, harmonious and reliable identity character preferred; youthfulness/modernity welcome when dependable rather than flimsy or trend-chasing.
       shorthand: reliable_youth / stable_modern / harmonious_confidence
       source_type: owner_explicit_self_report
       confidence: medium_high
       stability: emerging
-      observed_at: 2026-09-11
     - id: PREF-INITIAL-RCO
-      statement: Owner reports R/C/O initial letters often feel more reassuring/stable at first glance, but explicitly says this is not absolute and may be a surface correlate rather than a true causal preference.
+      statement: R/C/O initials often feel reassuring/stable to Owner, but this is not absolute and may be a surface correlate.
       source_type: owner_explicit_self_report
       confidence: low_medium
-      stability: one_off_emerging
       usage: observe_only_not_generation_rule
-      observed_at: 2026-09-11
+    - id: PREF-COMPACT-SPOKEN-RHYTHM
+      statement: >-
+        Owner strongly prefers names that feel short when spoken. Using Owner-perceived articulation beats rather than strict linguistic syllable count,
+        ideal total effort is about 4 beats; up to about 5 is preferred. The metric is perceptual and must not be falsely equated with formal syllable count.
+      source_type: owner_explicit_self_report
+      confidence: high
+      stability: emerging_strong
+      use: optimize_not_hard_gate_until_calibrated
+    - id: PREF-RHYTHMIC-SYMMETRY
+      statement: >-
+        Owner likes a balanced/symmetrical spoken identity, evoking the compact parallel feel of “Wade Watts”: repeated or corresponding sound/letter structure,
+        balanced chunks, similar stress/length, or other audible/visual symmetry. Exact alliteration is not required.
+      source_type: owner_explicit_self_report
+      confidence: high
+      stability: emerging_strong
+      use: optimize_not_template
 
-mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
+mission_value_model:
+  core_structure: Commons -> Perspective -> Creation -> Commons
+  value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
 
 owner_feedback:
   - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
-  - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise feels younger and semantically acceptable but too long/multipart.}
+  - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise semantically acceptable and young but feels too long/multipart.}
   - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable.}
-  - id: OF-EXPRESSION-01
-    signal: owner_expression_preference
+  - id: OF-RHYTHM-01
+    signal: owner_phonological_preference
     statement: >-
-      Owner says R/C/O-starting names often feel steadier and more reassuring, though not absolutely. More importantly, Owner may generally prefer stable, harmonious, dependable character.
-      Youthfulness is acceptable when it feels reliable: OpenAI and Apple are cited as examples of “young but trustworthy/stable,” while Owner explicitly notes that company culture and product experience may be contaminating those impressions.
+      Owner wants the full name to be compact in perceived spoken effort, preferably around four articulation beats and generally within about five,
+      with a balanced/symmetrical feel. Owner illustrates the desired symmetry with the feeling of the name Wade Watts.
     interpretation:
-      - deeper_signal_may_be_expression_not_morphotype
-      - stable_harmonious_reliable_is_more_plausible_than_specific_initial_letter_rule
-      - reliable_youth_is_preferred_over_fragile_or_fad_like_youth
-      - OpenAI_Apple_examples_are_confounded_by_brand_culture_product_experience
-      - RCO_initial_signal_requires_neutral_testing_before_use
+      - compactness_is_spoken_not_just_character_count
+      - owner_perceived_beats_must_be_distinguished_from_formal_syllables
+      - rhythmic_or_structural_symmetry_may_contribute_to_stability_harmony
+      - alliteration_is_one_possible_mechanism_not_a_requirement
+      - existing finalist N117 length concern is consistent with this signal
 
 expression_profile:
   status: activated
-  reason: Owner provided direct affective/personality evidence that may change search allocation more than morphotype preference alone
   desired_axes:
     stability: high
     harmony: high
     reliability: high
     modernity: medium_high
     youthfulness: allowed_positive_if_reliable
-    trendiness: low_preference_if_it_reduces_trust
-    heaviness_or_old_institutional_feel: not_required
-  unresolved_axes:
-    - whether stability comes from phonetics/orthography or post-use brand familiarity
-    - whether R/C/O initials contribute independently after unfamiliarity controls
-    - how much compactness interacts with dependable-modern character
-  use_policy:
-    - preference_not_gate
-    - do_not_force_R_C_O_initials
-    - do_not_use_OpenAI_or_Apple_as_generation_templates
-    - use neutral unfamiliar examples to separate intrinsic name affect from brand halo
+    compact_spoken_identity: high
+    rhythmic_balance: high
+    trendiness: low_if_it_reduces_trust
+  phonological_preferences:
+    owner_perceived_articulation_beats:
+      ideal: about_4
+      preferred_upper_range: about_5
+      formal_status: perceptual_owner_metric_not_standard_syllable_count
+    symmetry_examples:
+      - balanced_chunk_lengths
+      - repeated_or_corresponding_initial/final sounds
+      - alliteration_when_natural
+      - balanced_stress_pattern
+      - visual_length_balance
+    avoid_overfit:
+      - do_not_force_R_C_O
+      - do_not_force_alliteration
+      - do_not_force_exact_four_beats_if_name_quality_suffers
 
 preference_probe_design:
-  status: redirected_from_morphotype_only_to_expression_plus_form
-  first_stage_result: mature brand anchors showed no broad morphotype rejection but poor discrimination due familiarity/success halo
-  next_probe:
-    source: unfamiliar_neutral_non_candidate_examples
-    objective: distinguish intrinsic expression preference from brand halo while retaining some morphotype variation
-    design:
-      - contrast reliable_youth vs playful_fragile_youth vs traditional_heavy_stability using unfamiliar matched names
-      - vary initial letters so R/C/O effect can be observed without making it the main axis
-      - preserve multiple morphotypes to avoid conflating expression with construction form
-      - samples are preference-probe-only and do not enter candidate pool or Generator context
-      - allow all_ok / no_clear_preference responses
+  status: ready_for_neutral_expression_rhythm_probe
+  source: unfamiliar_neutral_non_candidate_examples
+  objective: separate intrinsic stable-modern / compact-balanced preference from famous-brand halo and morphotype effects
+  design:
+    - include multiple morphotypes
+    - contrast compact balanced vs similarly good but longer/asymmetric forms
+    - contrast reliable-youth vs playful-fragile vs traditional-heavy expression
+    - vary initials so R/C/O can be observed without enforcing them
+    - keep probe samples out of candidate pool and Generator context
   interpretation:
-    - update search budget and expression profile only
-    - do not convert letter initials or examples into hard constraints/templates
+    - preference signals rebalance search budget only
+    - do not convert sample strings into templates
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   morphotype_hypothesis_id: HYP-004
-  stable_skill_note: current Skill already supports expression_profile; this new evidence primarily tests activation/timing and preference-probe design rather than proving a new stable module is needed
+  note: latest evidence suggests preference discovery should include expression and phonological/rhythmic axes, not only construction morphotype; stable Skill rewrite still requires regression/counterevidence.
   stable_skill_rewrite_allowed_now: false
 
 candidates:
@@ -111,42 +130,43 @@ candidates:
 
 rounds:
   - {id: RND-083, action: mature_brand_morphotype_reference_probe, generated_count: 0, result: no_clear_morphotype_taboo_brand_halo_high}
-  - id: RND-084
-    action: owner_expression_signal_ingest_and_probe_redesign
+  - {id: RND-084, action: owner_expression_signal_ingest_and_probe_redesign, generated_count: 0, result: stable_modern_reliable_youth_signal}
+  - id: RND-085
+    action: owner_spoken_compactness_and_symmetry_signal_ingest
     generated_count: 0
     findings:
-      - Owner may be more sensitive to affective identity character than to morphotype category itself
-      - stable/harmonious/reliable is the strongest current expression signal
-      - “young but reliable” is acceptable and potentially attractive
-      - R/C/O initial preference is retained as low-confidence observational signal only
-      - famous-brand examples cannot isolate intrinsic name affect because culture/product experience contaminate perception
-      - existing Skill expression_profile is now explicitly activated; no stable Skill rewrite is justified yet
+      - short spoken effort matters more than raw character count
+      - Owner ideal is approximately four perceived articulation beats and prefers roughly five or fewer
+      - Owner likes audible/visual symmetry and balanced naming chunks
+      - this may mechanistically explain part of the stable/harmonious/reliable affective preference
+      - formal linguistic syllable count alone is insufficient to model Owner perception
 
 current_state:
   finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
-  search_mode: owner_expression_probe
+  search_mode: owner_expression_rhythm_probe
   search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: Is Owner's strongest intrinsic naming preference a stable-harmonious-reliable / reliable-youth expression profile, and does that preference persist when famous-brand halo is removed?
+  biggest_unknown: Does Owner consistently prefer compact, rhythmically balanced, stable-modern identities when unfamiliar examples remove brand halo, and how strongly should this influence formal candidate search?
   blockers: []
-  information_gain: high_from_neutral_expression_probe
+  information_gain: high_from_neutral_expression_rhythm_probe
   owner_review_needed_now: true
 
 next_action:
-  action: run_neutral_expression_plus_morphotype_probe
-  target: isolate_reliable_youth_and_stable_harmony_signal_from_brand_halo_and_surface_form
+  action: run_neutral_expression_rhythm_plus_morphotype_probe
+  target: calibrate_owner_compactness_symmetry_and_stable_modern_preference_before_more_formal_generation
   rationale: >-
-    Owner's latest self-report provides a stronger affective hypothesis than the first morphotype probe. Use unfamiliar, non-candidate, quality-matched examples to separate intrinsic expression preference from famous-brand culture/product halo, while retaining form diversity and observing (not enforcing) R/C/O initial effects.
-  triggered_by: [OF-EXPRESSION-01]
+    Owner has now provided a coherent cluster of affective and phonological preferences. A bounded unfamiliar non-candidate probe can test whether compactness/rhythmic symmetry and reliable-youth character persist without mature-brand halo, while preserving morphotype diversity.
+  triggered_by: [OF-RHYTHM-01]
   expected_information_gain: high
   requires_owner: true
   owner_gate_classification: preference_discovery
 
 stop:
-  status: pause_for_expression_probe
-  reason: owner expression preference is now the largest decision-relevant unknown; further formal candidate generation before separating intrinsic affect from brand halo risks inefficient search allocation
+  status: pause_for_neutral_expression_rhythm_probe
+  reason: preference calibration now has higher decision value than generating more formal candidates immediately
   unresolved:
-    - HYP-004 still requires regression/counterevidence before stable Skill promotion
+    - preference-beat metric is perceptual and still needs calibration
+    - HYP-004/stable Skill revision requires regression/counterevidence
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
