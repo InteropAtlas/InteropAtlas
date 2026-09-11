@@ -6,13 +6,13 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 42
+  snapshot_version: 43
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
     Naming Job 未重新初始化，G0–G8 benchmark 未恢复。完整历史候选与逐轮细节继续由 Git history / Issue #411 comments 保留。
-    snapshot v40 是 v0.3.3 job-level baseline；snapshot v41 按 additive migration 升级到 v0.4.0；本快照在其上新增 RND-065 category-parallel white-space probe。
+    snapshot v40 是 v0.3.3 job-level baseline；snapshot v41 按 additive migration 升级到 v0.4.0；snapshot v42 记录 RND-065 category-parallel probe；本快照新增 RND-066 bounded online-observe repeatability probe。
     本轮没有改写 historical candidate role、reality evidence、Owner boundary 或 isolation claim。
   previous_snapshots:
     - {snapshot: 36, commit: 3348d1650e68404704b11097c10f0818c4adeae1}
@@ -21,6 +21,7 @@ lineage:
     - {snapshot: 39, commit: b4867dda2053ac4916acd8fe3b616fe8e22fdd7d}
     - {snapshot: 40, blob_sha: 419db5e2355bdc94093ccec1f0cb39962069fa9b}
     - {snapshot: 41, commit: d92aa17599b1460b655c236da4395e35c18cdb0a}
+    - {snapshot: 42, commit: 627cfbbc5f778f80acc4a239c0c439fd7196bb56}
   v0_4_live_fit_comments:
     - {round: RND-062, comment_id: 5630184389, pattern: divergence_burst}
     - {round: RND-063, comment_id: 5630222646, pattern: creative_linguistic_parallel}
@@ -115,12 +116,9 @@ preference_model:
 optional_modules:
   territory_research:
     status: completed_for_current_trigger
-    learning:
-      - structural analogies are useful; literal territory vocabulary remained crowded
+    learning: [structural analogies are useful; literal territory vocabulary remained crowded]
   communication_load_allocation: {status: inactive}
-  expression_profile:
-    status: inactive
-    trigger: only_if_character_or_abstraction_becomes_decision-changing
+  expression_profile: {status: inactive, trigger: only_if_character_or_abstraction_becomes_decision-changing}
   linguistic_engineering:
     status: validated_optional_pattern_component
     trigger: recoverability_or_spoken_identity_is_high-information
@@ -129,7 +127,7 @@ optional_modules:
       - stable stress and common grapheme-to-phoneme recovery
       - dictation branch detection
       - avoid surname / fantasy / SaaS character drift when it weakens umbrella identity
-    candidate_observations: [RND-063 artifact preserved in issue comment 5630222646, RND-065 category-parallel funnel]
+    candidate_observations: [RND-063 artifact preserved in issue comment 5630222646, RND-065 category-parallel funnel, RND-066 repeatability funnel]
   decision_hygiene: {status: ready_on_trigger, trigger: high-value shortlist / Owner Exposure}
   temporal_evaluation: {status: inactive}
   validation_research: {status: inactive}
@@ -140,86 +138,35 @@ search_landscape:
   initial_landscape_summary: >-
     Historical search shows a persistent frontier between highly recoverable natural/transparent identities that are heavily occupied,
     and higher-distance invented identities that gain namespace room but lose spelling recovery or drift toward surname/fantasy/SaaS character.
-    White-space mapping therefore focuses on identity architecture between these poles rather than another undifferentiated word batch.
   prior_map_status: active_from_historical_evidence
   regions:
-    - region_id: REG-LEXICAL-EXISTING
-      semantic_position: [transparent, existing_concept]
-      character_position: [natural, familiar]
-      construction_position: [single_existing_word]
-      collision_prior: high
-      evidence_confidence: high
-      quality_yield: medium_high
-      reality_crowding: high
-      information_gain: low
-      sampling_status: sampled
-      move_or_stay_rationale: historical existing-word probes repeatedly produced meaningful/recoverable names but strong exact/adjacent identities
-    - region_id: REG-NATURAL-COMPOUND-PAIR
-      semantic_position: [transparent_to_evocative]
-      character_position: [recoverable, institutional_possible]
-      construction_position: [english_compound, two_word_pair]
-      collision_prior: high
-      evidence_confidence: medium_high
-      quality_yield: medium_high
-      reality_crowding: high
-      information_gain: medium
-      sampling_status: sampled
-      move_or_stay_rationale: RND-062/063 produced linguistically healthy forms but exact/adjacent identities were common; generic phrases also lacked proper-name distinctiveness
-    - region_id: REG-GROUNDED-COINAGE
-      semantic_position: [traceable, lightly_semantic]
-      character_position: [proper_name]
-      construction_position: [morpheme_grounded, derived, light_blend]
-      collision_prior: high
-      evidence_confidence: high
-      quality_yield: medium_high
-      reality_crowding: high
-      information_gain: low
-      sampling_status: sampled
-      move_or_stay_rationale: truthful roots improved provenance but familiar morphemes and brand morphology were repeatedly independently reinvented
-    - region_id: REG-SHORT-OPAQUE-COINED
-      semantic_position: [opaque_to_light]
-      character_position: [startup_like_risk]
-      construction_position: [short_coinage, sound_first]
-      collision_prior: medium_high
-      evidence_confidence: medium_high
-      quality_yield: mixed
-      reality_crowding: high
-      information_gain: low
-      sampling_status: sampled
-      move_or_stay_rationale: short invented shells remained crowded and often looked like software/startup names without enough organizational scale
-    - region_id: REG-LONGER-PHONOTACTIC-PROPER
-      semantic_position: [opaque_but_traceable_optional]
-      character_position: [proper_name, surname_fantasy_risk]
-      construction_position: [longer_coinage]
-      collision_prior: medium
-      evidence_confidence: medium
-      quality_yield: medium
-      reality_crowding: medium
-      information_gain: medium
-      sampling_status: sampled
-      move_or_stay_rationale: namespace yield improved modestly, but spelling recovery and surname/fantasy identity became the dominant counter-pressure
+    - {region_id: REG-LEXICAL-EXISTING, semantic_position: [transparent, existing_concept], character_position: [natural, familiar], construction_position: [single_existing_word], collision_prior: high, evidence_confidence: high, quality_yield: medium_high, reality_crowding: high, information_gain: low, sampling_status: sampled, move_or_stay_rationale: historical existing-word probes repeatedly produced meaningful/recoverable names but strong exact/adjacent identities}
+    - {region_id: REG-NATURAL-COMPOUND-PAIR, semantic_position: [transparent_to_evocative], character_position: [recoverable, institutional_possible], construction_position: [english_compound, two_word_pair], collision_prior: high, evidence_confidence: medium_high, quality_yield: medium_high, reality_crowding: high, information_gain: medium, sampling_status: sampled, move_or_stay_rationale: RND-062/063 produced linguistically healthy forms but exact/adjacent identities were common; generic phrases also lacked proper-name distinctiveness}
+    - {region_id: REG-GROUNDED-COINAGE, semantic_position: [traceable, lightly_semantic], character_position: [proper_name], construction_position: [morpheme_grounded, derived, light_blend], collision_prior: high, evidence_confidence: high, quality_yield: medium_high, reality_crowding: high, information_gain: low, sampling_status: sampled, move_or_stay_rationale: truthful roots improved provenance but familiar morphemes and brand morphology were repeatedly independently reinvented}
+    - {region_id: REG-SHORT-OPAQUE-COINED, semantic_position: [opaque_to_light], character_position: [startup_like_risk], construction_position: [short_coinage, sound_first], collision_prior: medium_high, evidence_confidence: medium_high, quality_yield: mixed, reality_crowding: high, information_gain: low, sampling_status: sampled, move_or_stay_rationale: short invented shells remained crowded and often looked like software/startup names without enough organizational scale}
+    - {region_id: REG-LONGER-PHONOTACTIC-PROPER, semantic_position: [opaque_but_traceable_optional], character_position: [proper_name, surname_fantasy_risk], construction_position: [longer_coinage], collision_prior: medium, evidence_confidence: medium, quality_yield: medium, reality_crowding: medium, information_gain: medium, sampling_status: sampled, move_or_stay_rationale: namespace yield improved modestly but spelling recovery and surname/fantasy identity became the dominant counter-pressure}
     - region_id: REG-HYBRID-ANCHORED-PAIR
       semantic_position: [evocative, indirect_value_connection]
       character_position: [institutional_creative_balance]
       construction_position: [distinctive_modifier_plus_familiar_anchor, stable_two_part_identity]
       collision_prior: unknown
-      evidence_confidence: medium_low
+      evidence_confidence: medium
       quality_yield: low_medium
       reality_crowding: unknown
-      information_gain: low_medium
-      sampling_status: sampled_probe
-      move_or_stay_rationale: RND-065 confirmed the anchor improves recovery, but all three probes weakened independent umbrella identity through generic institution/event/studio/field character before reality screening
+      information_gain: low
+      sampling_status: sampled_move_away
+      move_or_stay_rationale: RND-065 confirmed recovery benefit but all three probes weakened independent umbrella identity through generic institution/event/studio/field character before reality screening
     - region_id: REG-SEGMENTABLE-SEMI-OPAQUE
       semantic_position: [semantic_light, story_optional]
       character_position: [institutional_proper_name, non_fantasy_target]
       construction_position: [single_token_clear_segmentation, stable_orthography, non_latinate_shell]
-      collision_prior: medium_high_preliminary
-      evidence_confidence: low
-      quality_yield: medium_high_preliminary
-      reality_crowding: medium_high_preliminary
-      information_gain: high
-      sampling_status: sampled_probe_continue_guarded
-      move_or_stay_rationale: RND-065 produced two intrinsically stronger and recoverable forms, but both top-slice candidates were decisively reality-blocked; one more small observe/update probe is justified before treating the region as exhausted
+      collision_prior: high_current_task
+      evidence_confidence: medium
+      quality_yield: medium_high
+      reality_crowding: high_current_task
+      information_gain: low
+      sampling_status: sampled_move_away
+      move_or_stay_rationale: RND-065 and RND-066 repeated the intrinsic recovery/identity benefit, but top-slice progression repeatedly stopped on active exact identities, public trademark adjacency, or the finalist .org gate; current region budget is exhausted
   semantic_coverage:
     - {value_id: V-COMMONS, status: sampled_indirectly}
     - {value_id: V-AGENCY, status: sampled_but_no_strong_clean_identity}
@@ -230,21 +177,22 @@ search_landscape:
     - {round: RND-063, update: recoverable natural English region remains crowded; higher-distance region trades namespace space for recovery/identity-character risk}
     - {round: RND-064, update: two under-sampled architecture hypotheses identified between the dominant pressure fronts}
     - {round: RND-065, update: anchored-pair recovery benefit did not translate into independent umbrella identity; segmentable semi-opaque forms improved intrinsic identity but top-slice reality evidence was immediately crowded}
+    - {round: RND-066, update: segmentable intrinsic gain repeated, but progression again failed at reality/domain; move away and remap rather than extend the batch}
   integrity:
     survivor_shape_feedback_detected: false
     region_quality_reality_conflation_detected: false
     notes:
-      - white-space hypotheses remain empirical search priors, not availability facts
+      - region crowding is current-task evidence, not a universal method rule
       - raw reality survivor/failure shapes remain quarantined from Generator briefs
 
 search_control:
   mode: exploration
-  mode_rationale: no finalist exists; RND-065 narrowed the next high-information question to whether the segmentable region has any repeatable namespace yield beyond the first blocked top slice
+  mode_rationale: both RND-064 under-sampled hypotheses have now been tested enough for move/stay; next action should remap the search landscape instead of generating another equivalent batch
   search_cadence:
-    mode: micro_probe
-    target_count: 3
-    rationale: do not repeat the weaker anchored-pair branch; use one bounded segmentable observe/update probe before deciding whether to leave the region
-    stop_condition: funnel first; stop the region if top intrinsic forms are again reality-blocked or if recoverability/scale deteriorates
+    mode: validation_only
+    target_count: 0
+    rationale: consolidate RND-065/066 region evidence and identify the next under-sampled architecture before more generation
+    stop_condition: stop remap once at least one materially different high-information region or workflow question is identified
   generation_isolation:
     level: best_effort_same_context
     runtime_identity: ChatGPT current conversation runtime
@@ -253,22 +201,14 @@ search_control:
       - current execution occurs in one persisted conversation context
       - no evidenced true isolated sub-agent or fresh Generator context is available in this runtime
     claim_policy: current brief may omit hidden material, but this runtime cannot claim it was never historically visible
-  incumbent_isolation:
-    comparison_only_candidate_ids: [N060]
+  incumbent_isolation: {comparison_only_candidate_ids: [N060]}
   controller_only_exclusions:
     incumbent_candidate_ids: [N060]
     cooled_family_ids: [FAM-V34-01, FAM-RND046-01, FAM-RND051-01]
     owner_reaction_subject_ids: [N060]
     other: [N061_historical_hold_not_generation_seed, historical_reality_survivor_shapes]
-  reality_feedback_quarantine:
-    enabled_in_exploration: true
-    same_batch_feedback_to_generator: prohibited
-  post_generation_filter:
-    enabled: true
-    check_cooled_families: true
-    check_incumbent_similarity: true
-    check_strategy_fidelity: true
-    check_other_controller_only_exclusions: true
+  reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
+  post_generation_filter: {enabled: true, check_cooled_families: true, check_incumbent_similarity: true, check_strategy_fidelity: true, check_other_controller_only_exclusions: true}
 
 reality_screening:
   method_ref: reality-screening-contract-v0.3.3
@@ -276,25 +216,27 @@ reality_screening:
   minimum_level_for_held_or_promising: 1
   freshness_recheck_before_owner_exposure: true
   false_negative_history_preserved: true
-  query_classes:
-    - bare_exact
-    - company_organization
-    - software_product_project
-    - naming_job_adjacent_category
-    - public_trademark_signal
-    - near_name_and_recovery_branch_before_promotion
+  query_classes: [bare_exact, company_organization, software_product_project, naming_job_adjacent_category, public_trademark_signal, near_name_and_recovery_branch_before_promotion]
 
 workflow_scheduler:
   policy: diagnosis_driven_pattern_portfolio
   active_patterns:
-    - pattern_id: online_observe_update
+    - pattern_id: white_space_mapping
       status: active
+      trigger_diagnosis_ids: [D-R066-01]
+      question_to_answer: after both RND-064 middle-region hypotheses underperform for different reasons, what materially different region or workflow now has the highest information value?
+      expected_information_gain: high
+      runtime_requirements: []
+      attempts: 1
+      last_used_round: RND-064
+    - pattern_id: online_observe_update
+      status: completed_current_trigger
       trigger_diagnosis_ids: [D-R065-02]
       question_to_answer: does the segmentable semi-opaque region retain any namespace yield when sampled once more without feeding reality outcomes back as generator templates?
       expected_information_gain: medium_high
       runtime_requirements: [logical_generation_reality_separation_only_in_current_runtime]
-      attempts: 0
-      last_used_round: null
+      attempts: 1
+      last_used_round: RND-066
     - pattern_id: category_parallel
       status: completed_current_trigger
       trigger_diagnosis_ids: [D-R064-01]
@@ -303,37 +245,15 @@ workflow_scheduler:
       runtime_requirements: [logical_branch_separation_only_in_current_runtime]
       attempts: 1
       last_used_round: RND-065
-    - pattern_id: white_space_mapping
-      status: completed
-      trigger_diagnosis_ids: [D-R063-01]
-      question_to_answer: identify under-sampled identity architecture rather than another equivalent operator batch
-      expected_information_gain: high
-      runtime_requirements: []
-      attempts: 1
-      last_used_round: RND-064
-    - pattern_id: creative_linguistic_parallel
-      status: completed_current_trigger
-      trigger_diagnosis_ids: [RND-062-learning]
-      question_to_answer: separate linguistic recovery evidence from namespace feasibility
-      expected_information_gain: high
-      runtime_requirements: [best_effort_same_context]
-      attempts: 1
-      last_used_round: RND-063
-    - pattern_id: divergence_burst
-      status: completed_current_trigger
-      trigger_diagnosis_ids: [repeated_microprobe_low_gain]
-      question_to_answer: whether reopening architecture variety yields new evidence beyond micro-probes
-      expected_information_gain: medium
-      runtime_requirements: []
-      attempts: 1
-      last_used_round: RND-062
-  recent_allocations: [RND-062:divergence_burst, RND-063:creative_linguistic_parallel, RND-064:white_space_mapping, RND-065:category_parallel]
+    - {pattern_id: creative_linguistic_parallel, status: completed_current_trigger, trigger_diagnosis_ids: [RND-062-learning], question_to_answer: separate linguistic recovery evidence from namespace feasibility, expected_information_gain: high, runtime_requirements: [best_effort_same_context], attempts: 1, last_used_round: RND-063}
+    - {pattern_id: divergence_burst, status: completed_current_trigger, trigger_diagnosis_ids: [repeated_microprobe_low_gain], question_to_answer: whether reopening architecture variety yields new evidence beyond micro-probes, expected_information_gain: medium, runtime_requirements: [], attempts: 1, last_used_round: RND-062}
+  recent_allocations: [RND-062:divergence_burst, RND-063:creative_linguistic_parallel, RND-064:white_space_mapping, RND-065:category_parallel, RND-066:online_observe_update]
   diagnostics:
     workflow_monoculture: false
     workflow_operator_confusion: false
     notes:
       - v0.4 continues to schedule workflow independently from construction operator
-      - RND-065 answered the category comparison enough to stop the weaker branch without Owner input
+      - two RND-064 hypotheses are now closed for immediate exploitation and the scheduler returns to remapping
 
 method_scheduler:
   policy: adaptive_operator_portfolio
@@ -341,17 +261,15 @@ method_scheduler:
     - {strategy_id: longer_phonotactic_proper_name, family: controlled_coinage, status: active_guarded, rationale: useful identity distance but recovery and surname/fantasy risk must remain strict}
     - {strategy_id: opaque_but_traceable_proper_name, family: controlled_coinage, status: active, rationale: preserve semantic room without mandatory etymology}
     - {strategy_id: hybrid_anchored_pair_operator, family: compositional_derived, status: deprioritized_after_probe, rationale: RND-065 improved recovery but not independent umbrella identity enough to justify another immediate batch}
-    - {strategy_id: segmentable_semi_opaque_operator, family: controlled_coinage, status: active_guarded_probe, rationale: strongest RND-065 intrinsic yield but reality crowding needs one more bounded observation}
+    - {strategy_id: segmentable_semi_opaque_operator, family: controlled_coinage, status: deprioritized_after_repeatability_check, rationale: RND-065/066 repeated intrinsic quality but failed to produce namespace/domain yield; move away for now}
     - {strategy_id: morpheme_grounded_coinage, family: compositional_derived, status: deprioritized, rationale: grounding improves provenance but not namespace yield by itself}
-    - {strategy_id: sound_first, family: controlled_coinage, status: cooled_for_next_probe, rationale: next probe specifically tests stable segmentation rather than ambiguous sound-first recovery}
+    - {strategy_id: sound_first, family: controlled_coinage, status: cooled, rationale: ambiguous recovery remains counter to current hard constraint}
     - {strategy_id: transformation_operator, family: transformation_operator, status: rescue_only, rationale: no current seed passes rescue trigger}
   diagnostics:
     scheduler_monoculture: false
     method_underuse: false
     territory_material_starvation: false
-    notes:
-      - current question remains identity architecture rather than more territory vocabulary
-      - workflow and operator choices remain separated
+    notes: [next action is region/workflow remapping rather than selecting another operator prematurely]
 
 transformation_rescue:
   active_branches: []
@@ -371,19 +289,17 @@ execution:
     parallel_workers_available: false
     evidence:
       - current work is executed in one ChatGPT conversation
-      - GitHub read/write and public web/reality tools are available
+      - GitHub read/write and public web/reality/domain tools are available
       - no true sub-agent/fresh isolated Generator runtime is evidenced here
   runtime_adapter:
     logical_roles: [controller, generator_branch_a, generator_branch_b, linguistic_reviewer, reality_observer]
     instantiated_workers: [shared_context_sanitized_views]
     actual_isolation_level: best_effort_same_context
-    fidelity_limitations:
-      - logical branches share historical model context
-      - blindness claims are limited to current prompt/view omission
+    fidelity_limitations: [logical branches share historical model context, blindness claims are limited to current prompt/view omission]
   module_routing:
-    last_route: category_parallel
-    trigger: D-R064-01
-    expected_artifact: attributable comparison of two white-space architecture hypotheses plus top-slice reality evidence
+    last_route: online_observe_update
+    trigger: D-R065-02
+    expected_artifact: bounded repeatability evidence for the segmentable region without same-batch reality feedback into generation
     activation_budget_passed: true
   owner_interaction_gate:
     classification: search_strategy
@@ -391,91 +307,28 @@ execution:
     reversible_without_owner: true
     parallel_exploration_possible: true
     confirmed_constraint_ids_affected: []
-    rationale: branch selection, cadence and another bounded observe/update probe are internal reversible search decisions; no Owner goal/boundary change is implicated
+    rationale: region move/stay, remapping and workflow selection remain reversible Controller decisions; no Owner goal/boundary change is implicated
 
 candidates:
-  - id: N060
-    name: Plurifold
-    role: comparison_only
-    active: true
-    generation_use: prohibited_as_template_or_semantic_anchor
-    owner_signal: neutral
-    reality_summary: historical screen only; freshness recheck required before future promotion
-
+  - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor, owner_signal: neutral, reality_summary: historical screen only; freshness recheck required before future promotion}
   - id: N086
     name: Lumerand
     role: held_internal
     active: true
     construction_strategy: longer_phonotactic_proper_name
-    intrinsic:
-      distinctiveness: high
-      pronunciation: medium_good
-      spelling_recovery: medium
-      memorability: medium_good
-      semantic_grounding: low
-      semantic_room: high
-      target_scale_fit: good
-      architecture_fit: good
-    architecture_test:
-      - Lumerand Research
-      - Lumerand Commons
-      - Lumerand Tools
-      - Lumerand / InteropAtlas
-      - A project by Lumerand
+    intrinsic: {distinctiveness: high, pronunciation: medium_good, spelling_recovery: medium, memorability: medium_good, semantic_grounding: low, semantic_room: high, target_scale_fit: good, architecture_fit: good}
+    architecture_test: [Lumerand Research, Lumerand Commons, Lumerand Tools, Lumerand / InteropAtlas, A project by Lumerand]
     value_alignment: neutral_no_contradiction
     reality:
-      screening:
-        level: 1_plus_near_name_probe
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        exact_result: no_material_active_exact_org_or_software_found_current_queries
-        public_tm_signal: no_material_public_exact_signal_found_current_queries_not_formal_clearance
-        near_name_result: yellow
-        confidence: medium
-      evidence_summary:
-        - exact-name/company/software/research/public-TM query set did not surface a material active exact organization/software identity
-        - near spelling branches and personal/surname usage reduce recovery confidence
-        - exact/near fictional and OCR noise exists and reduces search cleanliness
-      domain:
-        name: lumerand.org
-        observation: available
-        source: Namecheap bulk availability
-        observed_at: 2026-09-11
-        price_usd_observed: 8.48
+      screening: {level: 1_plus_near_name_probe, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: no_material_active_exact_org_or_software_found_current_queries, public_tm_signal: no_material_public_exact_signal_found_current_queries_not_formal_clearance, near_name_result: yellow, confidence: medium}
+      evidence_summary: [exact-name/company/software/research/public-TM query set did not surface a material active exact organization/software identity, near spelling branches and personal/surname usage reduce recovery confidence, exact/near fictional and OCR noise exists and reduces search cleanliness]
+      domain: {name: lumerand.org, observation: available, source: Namecheap bulk availability, observed_at: 2026-09-11, price_usd_observed: 8.48}
       trademark_oriented_risk: public_signal_only_no_material_exact_found_formal_clearance_deferred
-    diagnosis:
-      - spelling_recovery_branch_risk
-      - semantic_grounding_weak
-      - surname_fantasy_identity_risk
+    diagnosis: [spelling_recovery_branch_risk, semantic_grounding_weak, surname_fantasy_identity_risk]
     owner_exposure: not_ready
-
-  - id: N087
-    name: Solace Assembly
-    role: retired_after_intrinsic_funnel
-    active: false
-    provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_low, target_scale_fit: medium, semantic_room: medium_good}
-    linguistic: {dictation_branch_risk: low, identity_character: assembly_event_or_collective_risk}
-    reality: {screening: not_run, reason: did_not_enter_top_slice}
-
-  - id: N088
-    name: Fallow House
-    role: retired_after_intrinsic_funnel
-    active: false
-    provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium, target_scale_fit: medium_low, semantic_room: medium}
-    linguistic: {dictation_branch_risk: low, identity_character: hospitality_creative_house_risk}
-    reality: {screening: not_run, reason: did_not_enter_top_slice}
-
-  - id: N089
-    name: Sonder Field
-    role: retired_after_intrinsic_funnel
-    active: false
-    provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}
-    intrinsic: {pronunciation: medium_good, spelling_recovery: good, distinctiveness: medium, target_scale_fit: medium, semantic_room: medium}
-    linguistic: {dictation_branch_risk: low_medium, identity_character: project_studio_or_research_field_risk}
-    reality: {screening: not_run, reason: did_not_enter_top_slice}
-
+  - {id: N087, name: Solace Assembly, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_low, target_scale_fit: medium, semantic_room: medium_good}, linguistic: {dictation_branch_risk: low, identity_character: assembly_event_or_collective_risk}, reality: {screening: not_run, reason: did_not_enter_top_slice}}
+  - {id: N088, name: Fallow House, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium, target_scale_fit: medium_low, semantic_room: medium}, linguistic: {dictation_branch_risk: low, identity_character: hospitality_creative_house_risk}, reality: {screening: not_run, reason: did_not_enter_top_slice}}
+  - {id: N089, name: Sonder Field, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-065, region: REG-HYBRID-ANCHORED-PAIR, strategy: hybrid_anchored_pair_operator}, intrinsic: {pronunciation: medium_good, spelling_recovery: good, distinctiveness: medium, target_scale_fit: medium, semantic_room: medium}, linguistic: {dictation_branch_risk: low_medium, identity_character: project_studio_or_research_field_risk}, reality: {screening: not_run, reason: did_not_enter_top_slice}}
   - id: N090
     name: Elsefold
     role: reality_blocked
@@ -483,20 +336,8 @@ candidates:
     provenance: {round: RND-065, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}
     intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, target_scale_fit: good, semantic_room: high}
     linguistic: {dictation_branch_risk: low, segmentation_stability: high, surname_fantasy_risk: low}
-    reality:
-      screening:
-        level: 1_decisive_exact_stop
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        exact_result: red_material_active_exact_identity
-        public_tm_signal: not_required_after_decisive_exact_stop
-        near_name_result: not_required
-        confidence: high
-      evidence_summary:
-        - active exact-name Elsefold website/identity was found in the current web screen
-      domain: {status: not_queried, reason: reality_failed_before_domain_gate}
+    reality: {screening: {level: 1_decisive_exact_stop, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: red_material_active_exact_identity, public_tm_signal: not_required_after_decisive_exact_stop, near_name_result: not_required, confidence: high}, evidence_summary: [active exact-name Elsefold website/identity was found in the current web screen], domain: {status: not_queried, reason: reality_failed_before_domain_gate}}
     owner_exposure: prohibited_current_evidence
-
   - id: N091
     name: Kindfold
     role: reality_blocked
@@ -504,113 +345,63 @@ candidates:
     provenance: {round: RND-065, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}
     intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, target_scale_fit: good, semantic_room: medium_high}
     linguistic: {dictation_branch_risk: low, segmentation_stability: high, surname_fantasy_risk: low}
+    reality: {screening: {level: 1_decisive_public_tm_stop, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: material_product_and_identity_signals_found, public_tm_signal: red_live_pending_us_word_mark_in_education_adjacent_class, near_name_result: material_near_kindful_signal_also_observed, confidence: high}, evidence_summary: [current product usage for Kindfold was found, live/pending U.S. KINDFOLD word-mark signal covers education services directly adjacent to the Naming Job, Kindful public terms explicitly reference Kindfold as a protected misspelling/search term], domain: {status: not_queried, reason: reality_failed_before_domain_gate}}
+    owner_exposure: prohibited_current_evidence
+  - {id: N092, name: Commonward, role: working_internal_not_promoted, active: false, provenance: {round: RND-065, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_good, target_scale_fit: medium_good, semantic_room: medium}, linguistic: {dictation_branch_risk: low, segmentation_stability: high, identity_character: advocacy_directional_semantic_risk}, reality: {screening: not_run, reason: weaker_than_top_slice_and_no_quantity_padding}}
+  - id: N093
+    name: Ownward
+    role: reality_blocked
+    active: false
+    provenance: {round: RND-066, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, target_scale_fit: good, semantic_room: high}
+    linguistic: {dictation_branch_risk: low, segmentation_stability: high, surname_fantasy_risk: low}
     reality:
-      screening:
-        level: 1_decisive_public_tm_stop
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        exact_result: material_product_and_identity_signals_found
-        public_tm_signal: red_live_pending_us_word_mark_in_education_adjacent_class
-        near_name_result: material_near_kindful_signal_also_observed
-        confidence: high
-      evidence_summary:
-        - current product usage for Kindfold was found
-        - live/pending U.S. KINDFOLD word-mark signal covers education services, directly adjacent to the Naming Job
-        - Kindful public terms also explicitly reference Kindfold as a protected misspelling/search term, increasing near-identity risk
+      screening: {level: 1_decisive_exact_stop, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: red_multiple_active_exact_identities, public_tm_signal: not_required_after_decisive_exact_stop, near_name_result: not_required, confidence: high}
+      evidence_summary: [multiple active exact-name Ownward identities were found across publishing/tools and an insurance product, including current 2026 sites]
       domain: {status: not_queried, reason: reality_failed_before_domain_gate}
     owner_exposure: prohibited_current_evidence
-
-  - id: N092
-    name: Commonward
-    role: working_internal_not_promoted
+  - id: N094
+    name: Senseward
+    role: domain_blocked_after_reality_screen
     active: false
-    provenance: {round: RND-065, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_good, target_scale_fit: medium_good, semantic_room: medium}
-    linguistic: {dictation_branch_risk: low, segmentation_stability: high, identity_character: advocacy_directional_semantic_risk}
-    reality: {screening: not_run, reason: weaker_than_top_slice_and_no_quantity_padding}
+    provenance: {round: RND-066, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, target_scale_fit: good, semantic_room: high}
+    linguistic: {dictation_branch_risk: low, segmentation_stability: high, surname_fantasy_risk: low, lexical_note: historical/common-language senseward usage exists but no material current identity found in screened categories}
+    reality:
+      screening: {level: 1_plus_near_query, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: no_material_exact_identity_found_current_multi_query_screen, public_tm_signal: no_material_public_tm_signal_found_current_screen_not_formal_clearance, near_name_result: no_material_high_adjacency_identity_found_current_queries, confidence: medium}
+      evidence_summary: [fast and slow web query sets covered bare exact, company/organization, software/product/project, research/education/nonprofit, trademark-oriented and spaced/near forms; returned uses were lexical/historical rather than a material current brand identity]
+      domain: {name: senseward.org, observation: unavailable, source: Namecheap bulk availability, observed_at: 2026-09-11}
+    owner_exposure: prohibited_domain_gate
+  - {id: N095, name: Viewstead, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-066, region: REG-SEGMENTABLE-SEMI-OPAQUE, strategy: segmentable_semi_opaque_operator}, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium, target_scale_fit: medium_low, semantic_room: medium}, linguistic: {dictation_branch_risk: low, segmentation_stability: high, identity_character: place_property_or_platform_risk}, reality: {screening: not_run, reason: did_not_enter_top_slice}}
 
 retired_recent_probes:
-  - id: RND-061-NEW
-    summary: longer-form microcycle produced no promoted candidate; exact/near identity, language/cultural, and recovery risks were caught before Owner Exposure
-  - id: RND-062-BURST
-    summary: broad architecture divergence produced no promoted candidate; some candidates were intrinsically weak while separate candidates were reality-blocked
-    details_ref: issue-comment-5630184389
-  - id: RND-063-PARALLEL
-    summary: creative + linguistic parallel separated healthy recoverability from namespace failure; no candidate reached domain gate
-    details_ref: issue-comment-5630222646
+  - {id: RND-061-NEW, summary: longer-form microcycle produced no promoted candidate; exact/near identity language/cultural and recovery risks were caught before Owner Exposure}
+  - {id: RND-062-BURST, summary: broad architecture divergence produced no promoted candidate; some candidates were intrinsically weak while separate candidates were reality-blocked, details_ref: issue-comment-5630184389}
+  - {id: RND-063-PARALLEL, summary: creative + linguistic parallel separated healthy recoverability from namespace failure; no candidate reached domain gate, details_ref: issue-comment-5630222646}
 
 rounds:
-  - id: RND-057-059
-    action: reality_reset_grounding_and_short_form_search
-    summary:
-      - v0.3.3 hardened Reality Screening Contract after false negatives
-      - truthful-root coinage improved provenance but remained namespace-crowded
-      - short invented proper-name shells also showed heavy namespace saturation
+  - {id: RND-057-059, action: reality_reset_grounding_and_short_form_search, summary: [v0.3.3 hardened Reality Screening Contract after false negatives, truthful-root coinage improved provenance but remained namespace-crowded, short invented proper-name shells also showed heavy namespace saturation]}
   - id: RND-060
     action: longer_form_probe
     search_mode: exploration
     generated_count: small_probe
-    findings:
-      - slightly longer less-templated forms improved namespace yield somewhat
-      - clean forms can drift toward surname/fantasy identity or weaker spoken recovery
-      - Lumerand survived Level-1 screening and .org gate internally, but remained below Owner Exposure threshold
+    findings: [slightly longer less-templated forms improved namespace yield somewhat, clean forms can drift toward surname/fantasy identity or weaker spoken recovery, Lumerand survived Level-1 screening and .org gate internally but remained below Owner Exposure threshold]
   - id: RND-061
     action: longer_form_microcycle_plus_regression_review
     search_mode: exploration
     generated_count: 7_new_internal_probes_plus_1_existing_stress_test
     selected_strategy_ids: [longer_phonotactic_proper_name, opaque_but_traceable_proper_name]
-    findings:
-      - no new candidate justified promotion
-      - hardened reality screen caught exact and near-name conflicts before domain checks
-      - no new architecture/control defect appeared
-      - naming difficulty was primarily the search problem rather than a v0.3.3 control failure
-  - id: RND-062
-    action: workflow_divergence_burst_live_fit
-    search_mode: exploration
-    search_cadence_mode: divergence_burst
-    selected_workflow_pattern_ids: [divergence_burst]
-    generated_count: bounded_internal_burst
-    findings:
-      - workflow changed independently of construction operator
-      - greater raw variety did not by itself solve the quality-versus-namespace frontier
-      - intrinsic weakness and reality crowding occurred in different candidates
-      - next high-information pattern was creative_linguistic_parallel
-    details_ref: issue-comment-5630184389
-  - id: RND-063
-    action: creative_linguistic_parallel_live_fit
-    search_mode: exploration
-    search_cadence_mode: portfolio_batch
-    selected_workflow_pattern_ids: [creative_linguistic_parallel]
-    generated_count: small_mixed_set
-    findings:
-      - linguistic quality and namespace feasibility produced independent evidence
-      - recoverable natural-English identities remained highly crowded
-      - higher-distance invented identities gained namespace room at the cost of recovery / surname-fantasy drift
-      - no new control defect appeared
-    details_ref: issue-comment-5630222646
+    findings: [no new candidate justified promotion, hardened reality screen caught exact and near-name conflicts before domain checks, no new architecture/control defect appeared, naming difficulty was primarily the search problem rather than a v0.3.3 control failure]
+  - {id: RND-062, action: workflow_divergence_burst_live_fit, search_mode: exploration, search_cadence_mode: divergence_burst, selected_workflow_pattern_ids: [divergence_burst], generated_count: bounded_internal_burst, findings: [workflow changed independently of construction operator, greater raw variety did not by itself solve the quality-versus-namespace frontier, intrinsic weakness and reality crowding occurred in different candidates, next high-information pattern was creative_linguistic_parallel], details_ref: issue-comment-5630184389}
+  - {id: RND-063, action: creative_linguistic_parallel_live_fit, search_mode: exploration, search_cadence_mode: portfolio_batch, selected_workflow_pattern_ids: [creative_linguistic_parallel], generated_count: small_mixed_set, findings: [linguistic quality and namespace feasibility produced independent evidence, recoverable natural-English identities remained highly crowded, higher-distance invented identities gained namespace room at the cost of recovery/surname-fantasy drift, no new control defect appeared], details_ref: issue-comment-5630222646}
   - id: RND-064
     action: white_space_mapping_and_v0_4_state_migration
     search_mode: exploration
     search_cadence_mode: validation_only
     selected_workflow_pattern_ids: [white_space_mapping]
     generated_count: 0
-    findings:
-      - canonical state migrated additively from v0.3.3 snapshot v40 to v0.4.0 without changing confirmed constraints, candidate roles, reality history or isolation claims
-      - explicit Search Landscape now separates quality yield from reality crowding
-      - dominant frontier has two pressure poles: recoverable natural identities are crowded; higher-distance invented names weaken recovery/identity character
-      - REG-HYBRID-ANCHORED-PAIR and REG-SEGMENTABLE-SEMI-OPAQUE are the highest-information under-sampled architecture hypotheses
-      - next workflow should compare those hypotheses without blending them into one generator style
-    integrity_check:
-      v0_3_3_baseline_preserved: true
-      hard_constraints_unchanged: true
-      owner_preference_not_promoted_to_gate: true
-      historical_candidate_roles_unchanged: true
-      historical_reality_not_rewritten: true
-      isolation_claim_not_upgraded: true
-      search_landscape_checked: true
-      workflow_operator_separation_checked: true
-      runtime_adapter_checked: true
-      owner_interaction_gate_checked: true
+    findings: [canonical state migrated additively from v0.3.3 snapshot v40 to v0.4.0 without changing confirmed constraints candidate roles reality history or isolation claims, explicit Search Landscape now separates quality yield from reality crowding, dominant frontier has two pressure poles, REG-HYBRID-ANCHORED-PAIR and REG-SEGMENTABLE-SEMI-OPAQUE were identified as highest-information under-sampled architecture hypotheses]
+    integrity_check: {v0_3_3_baseline_preserved: true, hard_constraints_unchanged: true, owner_preference_not_promoted_to_gate: true, historical_candidate_roles_unchanged: true, historical_reality_not_rewritten: true, isolation_claim_not_upgraded: true, search_landscape_checked: true, workflow_operator_separation_checked: true, runtime_adapter_checked: true, owner_interaction_gate_checked: true}
     next_action: run_category_parallel_white_space_probe
   - id: RND-065
     action: category_parallel_white_space_probe
@@ -622,45 +413,47 @@ rounds:
     branch_counts: {REG-HYBRID-ANCHORED-PAIR: 3, REG-SEGMENTABLE-SEMI-OPAQUE: 3}
     reality_screened_count: 2
     domain_queried_count: 0
+    findings: [anchored-pair branch met recoverability intent but none of its three candidates retained enough independent umbrella identity to justify reality cost, segmentable branch produced two top-slice names with stronger intrinsic identity and stable recovery, both segmentable top-slice candidates were decisively reality-blocked, no candidate passed reality into the .org gate, weak candidates were not pushed into reality/domain to satisfy quota, category attribution was preserved and same-batch reality outcomes were not fed back into the other generator branch]
+    integrity_check: {controller_only_exclusions_applied: true, positive_generation_brief_used_logically: true, post_generation_filter_applied: true, reality_feedback_quarantine_preserved: true, actual_generation_isolation: best_effort_same_context, no_false_blindness_claim: true, no_domain_before_reality_pass: true, no_owner_path_delegation: true}
+  - id: RND-066
+    action: segmentable_online_observe_repeatability_probe
+    search_mode: exploration
+    search_cadence_mode: micro_probe
+    selected_workflow_pattern_ids: [online_observe_update]
+    selected_strategy_ids: [segmentable_semi_opaque_operator]
+    generated_count: 3
+    reality_screened_count: 2
+    domain_queried_count: 1
     findings:
-      - anchored-pair branch met recoverability intent but none of its three candidates retained enough independent umbrella identity to justify reality cost
-      - segmentable branch produced two top-slice names with stronger intrinsic identity and stable recovery
-      - both segmentable top-slice candidates were decisively reality-blocked, one by an active exact identity and one by product usage plus a live/pending education-adjacent U.S. word-mark signal
-      - no candidate passed reality into the .org gate
-      - weak candidates were not pushed into reality/domain to satisfy quota
-      - category attribution was preserved and same-batch reality outcomes were not fed back into the other generator branch
-    integrity_check:
-      controller_only_exclusions_applied: true
-      positive_generation_brief_used_logically: true
-      post_generation_filter_applied: true
-      reality_feedback_quarantine_preserved: true
-      actual_generation_isolation: best_effort_same_context
-      no_false_blindness_claim: true
-      no_domain_before_reality_pass: true
-      no_owner_path_delegation: true
+      - intrinsic identity/recoverability benefit repeated in the segmentable region
+      - one top-slice candidate was immediately blocked by multiple active exact identities
+      - one top-slice candidate passed the current multi-query identity/public-TM screen with only lexical/historical exact-word usage, then failed the exact .org hard gate
+      - no Owner-ready candidate emerged and current segmentable region budget is exhausted
+      - move away is a job-level search decision, not a method failure or global rule
+    integrity_check: {controller_only_exclusions_applied: true, no_reality_failure_shape_fed_into_generation: true, post_generation_filter_applied: true, actual_generation_isolation: best_effort_same_context, no_false_blindness_claim: true, hardened_reality_before_domain: true, no_owner_path_delegation: true}
 
 observations:
   - {id: O-R061-LENGTH, scope: scheduler, observation: longer forms modestly improve namespace yield but do not eliminate collision; recoverability and identity character become the counter-pressure}
   - {id: O-R061-REALITY, scope: reality, observation: the v0.3.3 Reality Screening Contract catches exact and one-letter/high-adjacency conflicts early enough to avoid misleading domain checks}
   - {id: O-R062-WORKFLOW, scope: workflow, observation: bounded divergence changes the evidence surface even without finalist yield; it prevented another equivalent micro-probe loop}
-  - {id: O-R063-LINGUISTIC, scope: workflow, observation: linguistic engineering adds independent evidence because a name can be easy to recover yet reality-blocked, or reality-cleaner yet linguistically weak}
+  - {id: O-R063-LINGUISTIC, scope: workflow, observation: linguistic engineering adds independent evidence because a name can be easy to recover yet reality-blocked or reality-cleaner yet linguistically weak}
   - {id: O-R064-LANDSCAPE, scope: search_landscape, observation: the most useful current white-space question is identity architecture between crowded natural English names and harder-to-recover invented proper names}
   - {id: O-R065-PAIR, scope: search_landscape, observation: familiar anchors improved pronunciation/spelling recovery but did not automatically create a durable umbrella-organization identity}
-  - {id: O-R065-SEGMENT, scope: search_landscape, observation: stable segmentation can improve intrinsic proper-name identity without surname/fantasy drift, but the first top slice still showed strong reality crowding}
+  - {id: O-R065-SEGMENT, scope: search_landscape, observation: stable segmentation can improve intrinsic proper-name identity without surname/fantasy drift but the first top slice still showed strong reality crowding}
+  - {id: O-R066-SEGMENT-REPEAT, scope: search_landscape, observation: segmentable intrinsic benefit repeated but namespace yield still failed through exact-identity crowding or the .org gate; current region should be left rather than exploited further}
 
 diagnostics:
   - {id: D-R061-01, diagnosis_type: naming_search_frontier_not_method_failure, statement: current bottleneck is locating a clean recoverable organization-scale identity; no v0.3.3 control defect was found, confidence: high}
   - {id: D-R061-02, diagnosis_type: lumerand_recoverability_risk, statement: Lumerand is materially clean enough to keep internally but not strong enough for Owner Exposure because recovery and surname/fantasy character remain unresolved, confidence: medium_high}
   - {id: D-R063-01, diagnosis_type: two_pole_identity_frontier, statement: recoverable natural-English identities are linguistically healthy but reality-crowded while higher-distance invented names trade crowding relief for spelling/identity-character weakness, confidence: high}
-  - {id: D-R064-01, diagnosis_type: under_sampled_identity_architecture_gap, statement: the highest-information unexplored space is a controlled middle region using either a stable two-part anchored identity or a segmentable semi-opaque single-token identity, confidence: medium}
-  - id: D-R065-01
-    diagnosis_type: anchored_pair_intrinsic_identity_weakness
-    statement: the tested anchored-pair architecture improves recovery but currently collapses too easily into familiar organization/event/studio/category character before reality screening
-    confidence: medium
-  - id: D-R065-02
-    diagnosis_type: segmentable_region_promising_intrinsic_but_reality_crowded
-    statement: the segmentable semi-opaque architecture produced the stronger intrinsic evidence in this comparison, but two top-slice candidates were both reality-blocked; one bounded observe/update probe is warranted before move/stay is decided
-    confidence: medium
+  - {id: D-R064-01, diagnosis_type: under_sampled_identity_architecture_gap, statement: the highest-information unexplored space was a controlled middle region using either a stable two-part anchored identity or a segmentable semi-opaque single-token identity, confidence: medium}
+  - {id: D-R065-01, diagnosis_type: anchored_pair_intrinsic_identity_weakness, statement: the tested anchored-pair architecture improves recovery but currently collapses too easily into familiar organization/event/studio/category character before reality screening, confidence: medium}
+  - {id: D-R065-02, diagnosis_type: segmentable_region_promising_intrinsic_but_reality_crowded, statement: the segmentable semi-opaque architecture produced the stronger intrinsic evidence in the category comparison but required one bounded repeatability probe, confidence: medium}
+  - id: D-R066-01
+    diagnosis_type: white_space_hypotheses_closed_for_current_budget
+    statement: both RND-064 middle-region hypotheses now have enough task-local evidence to move away: anchored-pair failed mainly on intrinsic identity character, while segmentable repeated intrinsic quality but failed to yield a reality-plus-domain survivor
+    confidence: medium_high
+    proposed_state_change: return_to_white_space_mapping_without_generation
 
 regression_review:
   file: 02_Runtime/02_Tools/adaptive_naming/evals/regression-review-v0.3.3-2026-09-11.md
@@ -680,32 +473,32 @@ experience_export:
   exported_experience_ids: [EXP-001, EXP-002, EXP-003, EXP-004, EXP-005]
   pending_generalization_candidates: [E-R062-WORKFLOW-SWITCH, E-R063-LINGUISTIC-INDEPENDENCE, E-R064-LANDSCAPE]
   direct_skill_rewrite_allowed: false
-  rnd_065_method_level_export: none_candidate_outcome_only
+  rnd_065_066_method_level_export: none_task_local_search_evidence_only
 
 current_state:
   strongest_candidates: [N060]
   promising_candidates: []
   held_candidates: [N086, N061]
   finalists: []
-  current_region_ids: [REG-SEGMENTABLE-SEMI-OPAQUE]
+  current_region_ids: []
   current_value_target_ids: [V-COMMONS, V-AGENCY, V-CREATION]
-  active_workflow_pattern_ids: [online_observe_update]
-  active_strategy_ids: [segmentable_semi_opaque_operator]
+  active_workflow_pattern_ids: [white_space_mapping]
+  active_strategy_ids: []
   active_rescue_branch_ids: []
-  loaded_optional_modules: [linguistic_engineering, reality_screening_contract]
+  loaded_optional_modules: []
   search_mode: exploration
-  search_cadence_mode: micro_probe
+  search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
   biggest_unknown: >-
-    Does the segmentable semi-opaque region have any repeatable namespace yield while preserving the stable recoverability and umbrella identity seen in its strongest RND-065 forms, or was that intrinsic gain immediately offset by the same reality crowding pressure?
+    After the two RND-064 middle-region hypotheses failed for different reasons, what materially different identity architecture or workflow has the highest remaining information value without repeating already sampled lexical/compound/grounded/short-opaque/long-proper regions?
   blockers: []
-  information_gain: medium_high_for_one_more_bounded_region_probe
+  information_gain: high_for_remap
   mission_value_status: active
   name_job_status: active
   criteria_status: active
-  search_landscape_status: active_updated_after_rnd_065
+  search_landscape_status: active_requires_remap
   workflow_scheduler_status: active
-  method_scheduler_status: active
+  method_scheduler_status: waiting_for_region_selection
   runtime_adapter_status: active_with_best_effort_limitation
   search_integrity_status: pass
   constraint_integrity_status: pass
@@ -714,28 +507,28 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: run_segmentable_online_observe_microprobe
-  target: REG-SEGMENTABLE-SEMI-OPAQUE_repeatability_check
+  action: run_white_space_remap_after_rnd065_066
+  target: identify_next_materially_different_high_information_region_or_workflow
   rationale: >-
-    RND-065 supplied positive intrinsic evidence for the segmentable architecture but two decisive reality failures are too few to call the whole region exhausted.
-    Run one 3-name micro-probe with the same positive region contract but no reality-derived survivor/failure shapes in Generator context; funnel intrinsically first, then screen only the top slice. If top intrinsic forms are again reality-blocked, leave this region rather than repeat it.
-  triggered_by: [D-R065-02]
-  expected_information_gain: medium_high
+    RND-065/066 have answered the two RND-064 hypotheses enough for current budget. Continuing either branch would be low information gain.
+    Return to white-space mapping with zero generation, preserve quality-vs-reality separation, and identify a genuinely different next search region/workflow without using historical survivors or reality failures as Generator templates.
+  triggered_by: [D-R066-01]
+  expected_information_gain: high
   search_mode: exploration
-  search_cadence_mode: micro_probe
-  selected_workflow_pattern_ids: [online_observe_update]
-  selected_strategy_ids: [segmentable_semi_opaque_operator]
+  search_cadence_mode: validation_only
+  selected_workflow_pattern_ids: [white_space_mapping]
+  selected_strategy_ids: []
   value_targets: [V-AGENCY, V-CREATION, V-COMMONS]
-  modules_to_load: [linguistic_engineering, reality_screening_contract]
+  modules_to_load: []
   requires_owner: false
   owner_gate_classification: search_strategy
   affected_confirmed_constraint_ids: []
 
 stop:
   status: continue
-  reason: RND-065 produced useful region-level evidence but no Owner-ready finalist; one bounded segmentable repeatability probe remains high enough information value to run autonomously
+  reason: the first v0.4 category-parallel plus observe/update cycle produced meaningful Search Landscape evidence but still no Owner-ready finalist; remapping remains autonomous and high-information
   unresolved:
     - formal trademark clearance remains deferred_by_owner; public trademark signals are screened before promotion
     - true isolated generation runtime unavailable in this context
-    - Lumerand remains internal hold, not Owner Exposure
-    - segmentable white-space region requires one final bounded repeatability check before move/stay decision
+    - Lumerand remains internal hold not Owner Exposure
+    - both RND-064 white-space regions are closed for immediate exploitation and a new region/workflow must be mapped
