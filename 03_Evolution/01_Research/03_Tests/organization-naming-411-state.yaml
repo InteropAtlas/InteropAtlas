@@ -5,19 +5,19 @@ task:
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
-  status: owner_review_ready
-  snapshot_version: 49
+  status: in_progress
+  snapshot_version: 50
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v46 保存首次 Owner Exposure；snapshot v47 保存 Owner choice-space feedback；
-    snapshot v48 保存 RND-075 与第三个独立 finalist N117。本快照新增 RND-076–080 的多区域探索、第四个独立 finalist N119 与 Owner 批量复核入口。
-    完整历史候选、现实证据、淘汰原因与旧快照继续由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v49 保存四个 Owner-visible finalists 与 RND-076–080。
+    本快照记录 Owner 对 N117/N119 的反应，并诊断“语义/工作流多样 ≠ Owner-visible 形态多样”的方法层缺口；
+    完整历史候选、现实证据与旧轮次继续由 Git history 与 Issue #411 保留。
   previous_snapshots:
-    - {snapshot: 46, commit: 5898e8eeb9ae4a77977aa3825fce05666d0296a7}
     - {snapshot: 47, commit: d502ac3ce8a7638e13820f9acbae9037230c0aa7}
     - {snapshot: 48, commit: 26fa62d341e6967e4ee0edb56023abb131472efe}
+    - {snapshot: 49, commit: 5b5f07bbb5d98a8a4dfe4d23174073183e74148e}
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -26,164 +26,156 @@ constraint_registry:
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
-    - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists; minimum finalist count is not itself a stopping condition., source_type: owner_explicit, observed_at: 2026-09-11}
-    - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: Owner explicitly requested some surprise while continuing; novelty may increase but intrinsic/reality/domain gates remain unchanged., source_type: owner_explicit, observed_at: 2026-09-11}
+    - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists, source_type: owner_explicit}
+    - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: novelty may increase but intrinsic/reality/domain gates remain unchanged, source_type: owner_explicit}
+    - id: PREF-MORPHOTYPE-DISCOVERY
+      statement: Owner does not want to constrain search to coinages or compounds; Owner wants exposure to materially different name forms in order to discover which broad identity classes they prefer.
+      source_type: owner_explicit
+      observed_at: 2026-09-11
+      stability: explicit_current_task_goal
 
 mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
 
 owner_feedback:
-  - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard has no major problem, feels stable, is directly usable; Owner wants more choices., implications: [retain_as_finalist_baseline, do_not_use_as_generation_template, continue_independent_exploration]}
-  - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular is broadly acceptable but first-read meaning is unclear; Public can evoke public-sector/noncommercial character; unusualness may improve recognition., implications: [retain_for_comparison, validate_first_read_semantics_and_commercial_tone, do_not_use_as_generation_template]}
+  - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
+  - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
+  - id: OF-N117-01
+    candidate_id: N117
+    signal: positive_with_form_cost
+    statement: See Otherwise feels younger and semantically acceptable, but visual/verbal length is a drawback; Owner experiences it as multi-part/three-word-like rather than compact identity.
+    implications: [retain_candidate, add_length_and_surface_compactness_signal, do_not_generalize_to_all_phrases]
+  - id: OF-N119-01
+    candidate_id: N119
+    signal: positive_stable
+    statement: Elseground has no major semantic or visual problem and feels stable; however another compound-like form does not help reveal Owner preference across broader naming categories.
+    implications: [retain_candidate, do_not_use_as_template, reopen_form_space]
+  - id: OF-MORPHOTYPE-01
+    signal: method_feedback
+    statement: Owner explicitly notes that recent candidates remain dominated by word combinations and asks why materially different forms were not deliberately surfaced; Owner also notes that the system did not ask enough about broad naming-form preference.
+    implications: [treat_morphotype_preference_as_biggest_unknown, separate_semantic_diversity_from_surface_form_diversity, test_method_gap]
 
 search_control:
-  mode: convergence_batch_review
-  search_cadence: {mode: owner_batch_checkpoint, target_finalist_pool: 4_to_6, current_finalist_count: 4, stop_condition: Owner judges current choice space sufficient or requests further expansion}
+  mode: morphology_divergence
+  search_cadence:
+    mode: category_parallel
+    target: representative_morphotype_coverage_not_finalist_count
+    stop_condition: enough distinct form classes are represented for meaningful Owner category feedback or a class is intrinsically incompatible with hard constraints
   generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, historical_context_may_have_seen_controller_only_exclusions: true, claim_policy: sanitized logical briefs only; no literal blindness claim}
-  controller_only_exclusions: {finalist_candidate_ids: [N096, N113, N117, N119], comparison_only_candidate_ids: [N060], other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]}
+  controller_only_exclusions:
+    finalist_candidate_ids: [N096, N113, N117, N119]
+    comparison_only_candidate_ids: [N060]
+    other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
   post_generation_filter: {enabled: true, check_finalist_similarity: true, check_cooled_families: true, check_strategy_fidelity: true}
 
-reality_screening:
-  method_ref: reality-screening-contract-v0.3.3
-  status: active
-  freshness_recheck_before_owner_exposure: true
-  domain_after_reality_pass_only: true
-  formal_tm_clearance_claimed: false
-
-search_landscape:
-  recent_regions:
-    - {region_id: REG-AUTONOMY-IDIOM, sampling_status: sampled_move_away, result: strongest natural candidate had active exact company identity}
-    - {region_id: REG-RELATIONAL-POSITION, sampling_status: sampled_move_away, result: In Turn failed .org gate; Of Many had high-adjacency NYU Of Many Institute identity; Among Others carried strong existing title identity}
-    - {region_id: REG-CONTINUANCE-PHRASE, sampling_status: sampled_move_away, result: Further Still had multiple active exact identities including tattoo/construction/ministry uses}
-    - {region_id: REG-INTERSTITIAL-WORK, sampling_status: sampled_move_away, result: The Work Between already exists as highly adjacent collaboration/system-change platform}
-    - {region_id: REG-TRANSPARENT-FUSED-COMPOUND, sampling_status: sampled_one_finalist, result: Elseground survived intrinsic, recoverability, exact/near reality, public-web TM-oriented screen and .org gate}
-    - {region_id: REG-CONTRIBUTION-CARRY, sampling_status: sampled_move_away, result: Carry Forward/Give Rise/Pass Along had current trademark or organization conflicts}
-    - {region_id: REG-UNFINISHED-STATE, sampling_status: sampled_move_away, result: As Yet had exact active UK company identity despite available .org; not promoted}
-  integrity: {finalist_shape_feedback_detected: false, reality_feedback_to_generation_detected: false}
+morphotype_landscape:
+  purpose: distinguish semantic/search diversity from Owner-visible identity-form diversity
+  classes:
+    - {id: MT-LEXICAL-SINGLE, description: single existing word or semantic transfer, owner_visible_coverage: insufficient}
+    - {id: MT-PHRASE, description: natural phrase or proposition, owner_visible_coverage: high, examples_current: [N096, N117]}
+    - {id: MT-DYAD, description: two familiar words in deliberate conceptual relation/tension, owner_visible_coverage: medium, examples_current: [N113]}
+    - {id: MT-TRANSPARENT-COMPOUND, description: fused or compounded full words, owner_visible_coverage: medium, examples_current: [N119]}
+    - {id: MT-BLEND, description: clipped or blended source forms creating a new word, owner_visible_coverage: insufficient}
+    - {id: MT-ROOT-DERIVED, description: classical or other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient}
+    - {id: MT-OPAQUE-COINAGE, description: sound-first or low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: insufficient}
+    - {id: MT-NONENGLISH-LEXICAL, description: intact or lightly adapted non-English lexical identity with global usability, owner_visible_coverage: insufficient}
+    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity only if it can act as an independent brand, owner_visible_coverage: insufficient}
+    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity only when orally recoverable and domain-compatible, owner_visible_coverage: insufficient}
+  integrity: {do_not_force_equal_sampling: true, do_not_turn_into_fixed_questionnaire: true, owner_feedback_changes_budget_not_quality_definition: true}
 
 workflow_scheduler:
   policy: diagnosis_driven_pattern_portfolio
-  recent_allocations: [RND-074:owner_feedback_ingest, RND-075:white_space_mapping_plus_category_parallel, RND-076:autonomy_and_relational_probe, RND-077:continuance_probe, RND-078:interstitial_probe, RND-079:transparent_fused_compound_probe, RND-080:contribution_and_unfinished_state_probe]
   active_patterns:
-    - {pattern_id: decision_hygiene, status: active_next, question_to_answer: compare four materially different ready-to-use finalists with Owner without forcing selection}
+    - pattern_id: category_parallel
+      status: active
+      question_to_answer: Which broad naming morphotypes does the Owner actually respond to when shown credible representatives rather than abstract labels?
+    - pattern_id: divergence_burst
+      status: active_support
+      question_to_answer: Can the search escape phrase/compound surface-form concentration without sacrificing recoverability and umbrella scale?
 
 method_scheduler:
   policy: adaptive_operator_portfolio
   protected_from_imitation: [N096_survivor_shape, N113_survivor_shape, N117_survivor_shape, N119_survivor_shape]
-  diagnostics: {scheduler_monoculture: false, method_underuse: false}
+  priority_under_sampled_morphotypes: [MT-LEXICAL-SINGLE, MT-BLEND, MT-ROOT-DERIVED, MT-OPAQUE-COINAGE, MT-NONENGLISH-LEXICAL, MT-ACRONYM-INITIAL, MT-TYPOGRAPHIC-SYMBOLIC]
+  deprioritized_for_next_probe: [MT-PHRASE, MT-DYAD, MT-TRANSPARENT-COMPOUND]
 
 candidates:
-  - id: N096
-    name: Open Regard
-    role: finalist_baseline
-    active: true
-    owner_signal: positive_usable_not_selected
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, first_read_comprehension: high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
-    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_fresh_recheck_2026_09_11, formal_tm_clearance: not_claimed}
-    generation_use: prohibited_as_template
-  - id: N113
-    name: Public Singular
-    role: finalist_hold
-    active: true
-    owner_signal: hold_explanation_required
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, first_read_comprehension: medium_low, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}
-    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_fresh_recheck_2026_09_11, formal_tm_clearance: not_claimed}
-    owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern]
-    generation_use: prohibited_as_template
-  - id: N117
-    name: See Otherwise
-    role: finalist_owner_ready
-    active: true
-    provenance: {round: RND-075, region: REG-EPISTEMIC-VERB-STANCE}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, memorability: good, first_read_comprehension: high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
-    architecture_test: [See Otherwise Research, See Otherwise Education, See Otherwise Tools, See Otherwise Press, InteropAtlas by See Otherwise]
-    value_alignment: indirect_perspective_and_discovery_stance_without_public_noncommercial_tone
-    reality: {screen_2026_09_11: no_material_active_exact_brand_org_software_identity_found_current_queries, near_name: ordinary_phrase_and_academic_usage_only_current_queries, public_tm_signal: no_material_exact_public_signal_found_current_web_screen_not_formal_clearance, domain: seeotherwise.org_available_fresh_recheck_2026_09_11}
-    diagnosis: [mild_imperative_or_manifesto_tone_risk]
-    generation_use: prohibited_as_template
-  - id: N119
-    name: Elseground
-    role: finalist_owner_ready
-    active: true
-    provenance: {round: RND-079, region: REG-TRANSPARENT-FUSED-COMPOUND}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, memorability: good, first_read_comprehension: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
-    architecture_test: [Elseground Research, Elseground Education, Elseground Tools, Elseground Press, InteropAtlas by Elseground]
-    construction_truth: fused_full_words_else_plus_ground; not claimed as historical word or borrowed etymology
-    value_alignment: indirect_alternative_perspective_plus_shared_basis_metaphor; does_not_encode_full_mission
-    reality:
-      screening: {level: 1_plus_near_probe, observed_at: 2026-09-11, exact_result: no_material_active_exact_identity_found_current_queries, near_name_result: no_material_high_adjacency_identity_found_current_queries, public_tm_signal: no_material_exact_public_web_signal_found_not_formal_clearance, confidence: medium_high}
-      domain: {name: elseground.org, observation: available_fresh_recheck, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
-    diagnosis: [coined_compound_requires_brand_meaning_to_settle, slightly_more_constructed_than_N096_N117]
-    generation_use: prohibited_as_template
-  - {id: N120, name: As Yet, role: reality_yellow_not_promoted, active: false, provenance: {round: RND-080, region: REG-UNFINISHED-STATE}, reality: {exact_result: active_UK_AS_YET_LTD_currently_proposal_to_strike_off, domain: asyet.org_available_2026_09_11}, diagnosis: [exact_company_identity_even_if_dormant_or_strikeoff_pending, fragment_like_identity_risk]}
+  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, owner_signal: positive_usable_not_selected, generation_use: prohibited_as_template}
+  - {id: N113, name: Public Singular, role: finalist_hold, active: true, owner_signal: hold_explanation_required, generation_use: prohibited_as_template}
+  - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, owner_signal: positive_with_form_cost, generation_use: prohibited_as_template}
+  - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, owner_signal: positive_stable, generation_use: prohibited_as_template}
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
   - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed}
 
 rounds:
-  - {id: RND-074, action: owner_feedback_ingest_and_exploration_reopen, generated_count: 0}
-  - {id: RND-075, action: white_space_remap_plus_distinct_category_parallel_probe, result: third_independent_finalist_N117}
-  - {id: RND-076, action: autonomy_and_relational_position_probe, result: no_finalist; active exact identity, adjacent institutional identity, title identity or domain gate blocked strongest forms}
-  - {id: RND-077, action: continuance_phrase_probe, result: no_finalist_due_multiple_active_exact_identities}
-  - {id: RND-078, action: interstitial_work_probe, result: no_finalist_due_highly_adjacent_active_exact_platform_identity}
-  - id: RND-079
-    action: transparent_fused_full_word_compound_probe
-    generated_count: bounded_probe
-    result: fourth_independent_finalist_N119
+  - id: RND-081
+    action: owner_morphotype_feedback_ingest_and_method_gap_diagnosis
+    generated_count: 0
     findings:
-      - Elseground used two fully recoverable ordinary English components rather than opaque phonotactics
-      - exact and near reality searches did not surface a material active identity in current queries
-      - elseground.org was available on 2026-09-11
-      - construction is materially different from N096 phrase, N113 tension dyad and N117 verb-stance architectures
-    integrity_check: {existing_finalists_not_used_as_templates: true, reality_before_domain: true, N119_quarantined_after_survival: true, actual_generation_isolation: best_effort_same_context}
-  - {id: RND-080, action: contribution_cycle_plus_unfinished_state_probe, result: no_additional_finalist; carry/give/pass forms collided with live marks or organizations and As Yet had exact current company identity}
+      - Owner accepts N117 meaning but sees length/multipart form as a cost
+      - Owner sees N119 as stable/acceptable but explicitly wants genuinely different name forms rather than more compounds
+      - prior search varied semantic territories and workflow patterns more than Owner-visible morphotypes
+      - word-formation toolbox already includes lexical, blend, root-derived, coinage and other operators, so the failure is scheduling/feedback coverage rather than missing construction tools
+      - morphotype preference was not elicited early enough to inform portfolio allocation
+    integrity_check: {owner_feedback_not_converted_to_hard_constraint: true, current_finalists_not_used_as_templates: true, no_fixed_questionnaire_added_to_stable_skill: true}
 
 observations:
-  - {id: O-R079-FUSED, scope: search_landscape, observation: a transparent fused compound can retain dictation recoverability while creating namespace distance in this task; one success is task-local evidence only}
-  - {id: O-R080-GRAY, scope: reality, observation: available .org does not rescue an otherwise ambiguous exact company identity; As Yet was not promoted despite domain availability}
+  - id: O-R081-MORPHOTYPE
+    scope: method_and_task
+    observation: semantic diversity, workflow diversity and morphotype diversity are distinct; the first two can appear broad while Owner-visible name forms remain concentrated.
+  - id: O-R081-PREF-UNKNOWN
+    scope: owner_preference
+    observation: when broad form preference is unknown, category-level feedback may have higher information value than continued blind generation inside already-visible forms.
 
 diagnostics:
-  - id: D-R080-01
-    diagnosis_type: owner_batch_checkpoint_reached_with_four_independent_finalists
-    statement: four materially different ready-to-use candidates now satisfy current task gates; Owner requested more choice and surprise, and current pool is sufficient for a new comparative reaction before further search.
+  - id: D-R081-01
+    diagnosis_type: owner_visible_morphotype_coverage_gap
+    statement: current task has adequate semantic variation but insufficient representative coverage of major naming-form classes for Owner preference discovery.
     confidence: high
-    proposed_state_change: expose_four_candidate_batch_without_forcing_selection
+    proposed_state_change: run_morphotype_divergence_portfolio_before_deep_convergence
+  - id: D-R081-02
+    diagnosis_type: potential_method_level_scheduler_gap
+    statement: stable Skill treats construction form largely as Controller search variables and does not explicitly trigger morphotype-preference discovery when Owner-visible form coverage is narrow.
+    confidence: high_for_gap_medium_for_general_rule
+    proposed_state_change: export_EXP_008_and_HYP_004_without_direct_skill_rewrite
 
-experience_candidates:
-  - {id: E-R079-TRANSPARENT-FUSION, observation: full-word fusion may provide a recoverability/namespace compromise distinct from opaque coinage in this task, scope: task_local, confidence: low_medium, status: observed_not_exported}
-
-experience_export: {registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml, direct_skill_rewrite_allowed: false, method_level_export: none_new_cross_task_evidence_insufficient}
+experience_export:
+  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
+  exported_experience_id: EXP-008
+  exported_hypothesis_id: HYP-004
+  direct_skill_rewrite_allowed: false
+  rationale: one real Naming Job provides clear mechanism evidence, but stable method change still needs regression and preferably second-job evidence unless severe-control-defect promotion requirements are completed
 
 current_state:
   finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
-  held_candidates: [N086, N061]
-  search_mode: convergence_batch_review
-  search_cadence_mode: owner_batch_checkpoint
+  search_mode: morphology_divergence
+  search_cadence_mode: category_parallel
   target_finalist_pool: 4_to_6
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: which identity characters resonate with Owner now that the pool includes stable-natural, conceptual-tension, active-perspective and transparent-coined architectures?
+  biggest_unknown: Which broad naming-form classes fit the Owner when represented by credible task-specific names, not just abstract category descriptions?
   blockers: []
-  information_gain: high_from_owner_comparative_signal
-  owner_review_needed_now: true
+  information_gain: high_from_representative_morphotype_sampling
+  owner_review_needed_now: false
 
 next_action:
-  action: owner_review_four_distinct_finalists
-  target: compare_N096_N113_N117_N119_without_forcing_final_selection
+  action: run_representative_morphotype_portfolio
+  target: sample_underrepresented_name_forms_without_forcing_coinage_or_compound_bias
   rationale: >-
-    Owner requested more credible choice and some surprise. Four materially different candidates now pass the current working gates.
-    Expose the two new candidates alongside the two known candidates, gather comparative reaction, then either continue toward 5-6 or narrow/validate based on Owner sufficiency.
-  triggered_by: [D-R080-01]
+    Owner explicitly wants to discover category preference rather than constrain the search to one construction family. Generate credible representatives across under-sampled morphotypes,
+    funnel intrinsically first, reality-screen only strong representatives, and expose a compact form-diverse set for category-level Owner feedback.
+  triggered_by: [D-R081-01, D-R081-02]
   expected_information_gain: high
-  selected_workflow_pattern_ids: [decision_hygiene]
-  requires_owner: true
-  owner_gate_classification: comparative_owner_signal
+  selected_workflow_pattern_ids: [category_parallel, divergence_burst]
+  requires_owner: false_until_representative_set_exists
+  owner_gate_classification: search_strategy_then_category_preference
 
 stop:
-  status: pause_for_owner_batch_review
-  reason: four independent ready-to-use finalists are now available; further blind expansion has lower information value than a comparative Owner reaction
+  status: continue
+  reason: Owner-visible morphotype preference remains materially unknown and current candidate pool is structurally concentrated despite acceptable quality
   unresolved:
-    - formal trademark legal clearance remains deferred and is not implied by public screening
+    - HYP-004 requires regression/counterevidence before any stable Skill promotion
+    - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable in this context
-    - Owner may request expansion toward 5-6 after reviewing the four
