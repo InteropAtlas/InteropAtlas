@@ -37,6 +37,17 @@
 
 不要为了“完整”而机械跑完全部模块。
 
+### 1.1 Module activation budget
+
+每个 optional module 进入 active 前，Controller 至少回答：
+
+1. 当前具体未知是什么？
+2. 这个模块可能改变什么决策？
+3. 不执行它会损失什么信息？
+4. 是否存在更便宜的动作先回答同一问题？
+
+如果无法说明明确的信息价值，保持 inactive。
+
 ---
 
 # Part I · Name Job Model
