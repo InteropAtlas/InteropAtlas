@@ -1,4 +1,4 @@
-schema_version: "0.2.2"
+schema_version: "0.3"
 
 job:
   id: null
@@ -15,7 +15,6 @@ job:
 
 constraint_registry:
   confirmed_hard_constraints: []
-  # Example:
   # - id: HC001
   #   statement: null
   #   source_type: owner_explicit | task_source | legal | technical
@@ -24,10 +23,7 @@ constraint_registry:
   #   notes: []
 
   owner_preferences: []
-  # Preferences influence convergence but are not hard constraints unless explicitly promoted by the Owner.
-
   controller_search_variables: []
-  # Example:
   # - id: SV001
   #   name: word_count
   #   current_value: single_or_multiword_open
@@ -40,8 +36,53 @@ constraint_registry:
   #   statement: null
   #   source_ref: null
   #   confidence: low | medium | high
-  #   may_be_hard_constraint: false
   #   status: provisional | retracted | confirmed
+
+mission_value_model:
+  source_refs: []
+  actors: []
+  objects: []
+  transformations: []
+  relations_and_agency: []
+  temporal_or_causal_structure: []
+  desired_world: []
+  anti_values_or_non_goals: []
+
+  value_claims: []
+  # - id: V001
+  #   statement: null
+  #   source_ref: null
+  #   evidence_type: explicit | structural | derived
+  #   value_type: end | means | relation | procedural | identity
+  #   priority: core | high | supporting | optional | unknown
+  #   confidence: low | medium | high
+  #   notes: []
+
+  value_relations: []
+  # - value_a: V001
+  #   value_b: V002
+  #   relation: reinforce | balance | tension | sequence | subordinate | independent
+  #   rationale: null
+
+  naming_implications: []
+  # - value_id: V001
+  #   mode: direct | indirect | guardrail_only | optional_story | not_required
+  #   rationale: null
+
+  value_coverage: []
+  # - value_id: V001
+  #   sampling_level: none | low | medium | high
+  #   recent_strategy_ids: []
+  #   strong_candidate_ids: []
+  #   interpretation: null
+
+  integrity:
+    value_flattening_detected: false
+    mission_overcompression_detected: false
+    value_proxy_collapse_detected: false
+    value_priority_invention_detected: false
+    value_score_smuggling_detected: false
+    notes: []
 
 brief:
   semantic_core: []
@@ -77,42 +118,27 @@ quality_dimensions:
 map:
   initial_landscape_summary: null
   regions: []
-  # Example region object:
   # - id: region-001
   #   label: null
   #   semantic_basis: []
+  #   value_targets: []
   #   construction_families: []
   #   prior_crowding: unknown
   #   observed_crowding: unknown
   #   quality_potential: unknown
   #   evidence: []
   #   status: unexplored | exploring | promising | crowded | low-yield | paused
-  #   notes: []
 
 search_control:
-  # exploration | exploitation
   mode: exploration
   mode_rationale: null
 
   semantic_coverage: []
-  # Example:
-  # - region_id: region-001
-  #   label: null
-  #   sampling_level: none | low | medium | high
-  #   recent_candidate_count: 0
-  #   strong_candidate_count: 0
-  #   notes: []
-
   family_concentration:
     morphological: []
     semantic: []
     construction: []
-    # Example item:
-    # - family_id: null
-    #   recent_candidate_ids: []
-    #   promising_candidate_ids: []
-    #   concentration: low | medium | high
-    #   interpretation: null
+    method: []
 
   incumbent_isolation:
     comparison_only_candidate_ids: []
@@ -126,8 +152,8 @@ search_control:
     historical_context_may_have_seen_controller_only_exclusions: unknown
     evidence: []
     claim_policy: >-
-      Only isolated_runtime/fresh_context with supporting evidence may claim the Generator did not see hidden information.
-      best_effort_same_context may only claim that the current brief did not re-expose it.
+      Only isolated_runtime/fresh_context with evidence may claim the Generator did not see hidden information.
+      best_effort_same_context may only claim the current brief did not re-expose it.
     notes: []
 
   controller_only_exclusions:
@@ -136,38 +162,21 @@ search_control:
     survivor_pattern_ids: []
     owner_reaction_subject_ids: []
     other: []
-    # These are for Controller/post-generation filtering; do not enumerate them in the Generator brief by default.
 
   cooldowns: []
-  # Task-local only; never infer a permanent Skill blacklist from one job.
-  # - family_id: null
-  #   family_type: morphological | semantic | construction
-  #   reason: null
-  #   applies_until: null
-
   reality_feedback_quarantine:
     enabled_in_exploration: true
     same_batch_feedback_to_generator: prohibited
     notes: []
 
   strategy_fidelity_checks: []
-  # - round_id: null
-  #   declared_target: null
-  #   actual_output_summary: null
-  #   faithful: true
-  #   diagnosis: null
-
   constraint_integrity_checks: []
-  # - round_id: null
-  #   candidate_constraint: null
-  #   provenance_found: false
-  #   classification: confirmed_hard_constraint | owner_preference | controller_search_variable | assumption
-  #   drift_detected: false
-  #   action: null
 
   generator_brief:
     id: null
     search_mode: exploration
+    value_targets: []
+    naming_implication_modes: []
     positive_objectives: []
     positive_search_zones: []
     positive_construction_targets: []
@@ -198,9 +207,63 @@ search_control:
     high_hit_rate: false
     notes: []
 
+method_scheduler:
+  policy: adaptive_portfolio
+  exploration_default_parallel_families: 3-5
+  active_strategies: []
+  # - strategy_id: existing_word_semantic_shift
+  #   family: direct_lexical | compositional_derived | controlled_coinage | transformation_operator
+  #   status: unexplored | active | boosted | deprioritized | cooled | exploitation | rescue_only
+  #   value_targets: []
+  #   quality_yield: unknown | low | medium | high
+  #   distinctiveness_yield: unknown | low | medium | high
+  #   recoverability_yield: unknown | low | medium | high
+  #   reality_crowding: unknown | low | medium | high
+  #   recent_information_gain: unknown | low | medium | high
+  #   concentration_risk: unknown | low | medium | high
+  #   attempts: 0
+  #   last_used_round: null
+  #   budget_next: null
+  #   rationale: null
+
+  recent_allocations: []
+  # - round_id: null
+  #   selected_strategy_ids: []
+  #   parallel: true
+  #   allocation_rationale: null
+  #   expected_information_gain: null
+
+  diagnostics:
+    scheduler_monoculture: false
+    method_underuse: false
+    notes: []
+
+transformation_rescue:
+  active_branches: []
+  # - branch_id: RESCUE-001
+  #   seed_candidate_id: null
+  #   trigger: strong_intrinsic_quality_reality_failure
+  #   rationale: null
+  #   allowed_operators:
+  #     - controlled_spelling_mutation
+  #     - doubled_letters
+  #     - base_plus_single_letter
+  #     - meaningful_affix
+  #     - clipping_or_telescoping
+  #     - light_blend
+  #     - institutional_pair_or_phrase
+  #   attempt_budget: null
+  #   attempts_used: 0
+  #   exit_conditions: []
+  #   generated_candidate_ids: []
+  #   status: active | stopped | succeeded | exhausted
+  #   stop_reason: null
+
+  history: []
+  rescue_overfit_detected: false
+
 execution:
   autonomous_microcycles: true
-  # Internal microcycles do not require a user "continue" after each one.
   preferred_batch_size:
     broad_exploration: 6-10
     focused_or_exploitation: 3-5
@@ -209,7 +272,7 @@ execution:
   owner_interaction_gate:
     last_checked_at: null
     proposed_question: null
-    # true_boundary_change | final_subjective_choice | missing_goal_fact | search_strategy | reversible_architecture_expansion | none
+    # true_boundary_change | final_subjective_choice | missing_goal_fact | search_strategy | reversible_architecture_expansion | method_schedule | transformation_rescue | none
     classification: none
     confirmed_constraint_ids_affected: []
     missing_fact: null
@@ -228,18 +291,9 @@ execution:
 
 construction_strategies:
   tried: []
-  # Example:
-  # - id: doubled_letters
-  #   region_ids: []
-  #   attempts: 0
-  #   quality_signal: unknown
-  #   feasibility_signal: unknown
-  #   recurring_risks: []
-  #   notes: []
   new_discoveries: []
 
 candidates: []
-# Candidate example:
 # - id: N001
 #   name: null
 #   active: true
@@ -247,6 +301,7 @@ candidates: []
 #   generation_use: allowed | prohibited_as_template_or_semantic_anchor
 #   region_id: null
 #   secondary_region_ids: []
+#   value_target_ids: []
 #   semantic_family_ids: []
 #   morphological_family_ids: []
 #   construction_strategy: null
@@ -256,6 +311,8 @@ candidates: []
 #     source: null
 #     generation_brief_id: null
 #     generation_isolation_level: unknown
+#     scheduler_strategy_id: null
+#     rescue_branch_id: null
 #   quality:
 #     distinctiveness: null
 #     pronounceability: null
@@ -270,6 +327,13 @@ candidates: []
 #     architecture_extensibility: null
 #     optional: {}
 #     rationale: []
+#   value_alignment:
+#     aligned_value_ids: []
+#     tension_value_ids: []
+#     contradicted_value_ids: []
+#     neutral_value_ids: []
+#     overall_observation: null
+#     confidence: null
 #   pareto:
 #     dominated: false
 #     dominated_by: []
@@ -296,16 +360,23 @@ candidates: []
 
 rounds: []
 # - id: RND-001
-#   action: audit_constraints | generate | post_generation_filter | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
+#   action: model_values | audit_constraints | map | schedule_methods | generate | post_generation_filter | evaluate_quality | evaluate_value_alignment | verify_reality | open_rescue_branch | diagnose | check_search_integrity | change_strategy
 #   search_mode: exploration | exploitation
 #   generated_count: 0
 #   generation_brief_id: null
 #   generation_isolation_level: unknown
+#   selected_strategy_ids: []
+#   value_targets: []
 #   findings: []
 #   integrity_check:
+#     value_model_checked: false
+#     value_coverage_checked: false
 #     semantic_coverage_checked: false
 #     family_concentration_checked: false
+#     scheduler_monoculture_checked: false
+#     method_underuse_checked: false
 #     incumbent_anchoring_checked: false
+#     rescue_overfit_checked: false
 #     negative_constraint_priming_checked: false
 #     isolation_claim_checked: false
 #     constraint_drift_checked: false
@@ -313,15 +384,12 @@ rounds: []
 #     post_generation_filter_checked: false
 #     survivorship_feedback_checked: false
 #     strategy_fidelity_checked: false
-#   post_generation_filter:
-#     blocked_count: 0
-#     violation_types: []
 #   next_action: null
 
 observations: []
 # - id: O001
 #   timestamp: null
-#   scope: candidate | batch | region | strategy | search_integrity | owner | reality | constraint
+#   scope: candidate | batch | region | strategy | search_integrity | owner | reality | constraint | value | scheduler | rescue
 #   subject_ids: []
 #   observation: null
 #   evidence: []
@@ -329,7 +397,7 @@ observations: []
 diagnostics: []
 # - id: D001
 #   triggered_by: []
-#   level: candidate | batch | region | search_integrity | strategy | constraint
+#   level: candidate | batch | region | value_model | search_integrity | scheduler | strategy | constraint | rescue
 #   diagnosis_type: null
 #   statement: null
 #   confidence: low | medium | high
@@ -337,7 +405,6 @@ diagnostics: []
 #   proposed_state_change: null
 
 experience_candidates: []
-# Only for potentially cross-task lessons; do not auto-promote to Skill.
 # - id: E001
 #   observation: null
 #   scope: task_local | potentially_general
@@ -355,11 +422,17 @@ current_state:
   finalists: []
   pareto_front: []
   current_region_ids: []
+  current_value_target_ids: []
+  active_strategy_ids: []
+  active_rescue_branch_ids: []
   search_mode: exploration
   generation_isolation_level: unknown
   biggest_unknown: null
   blockers: []
   information_gain: unknown
+  value_model_status: unknown
+  value_coverage_status: unknown
+  method_scheduler_status: unknown
   search_integrity_status: unknown
   constraint_integrity_status: unknown
   owner_review_needed_now: false
@@ -371,6 +444,8 @@ next_action:
   triggered_by: []
   expected_information_gain: null
   search_mode: null
+  selected_strategy_ids: []
+  value_targets: []
   requires_owner: false
   owner_gate_classification: none
   affected_confirmed_constraint_ids: []
