@@ -6,13 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 73
+  snapshot_version: 74
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v72 将 commercial .com gate 定义为 practical obtainability，而不是只能直接注册。
-    Owner 要求继续创造，不要停留在 Multifinality 或域名尽调。本快照继续 balanced morphotype divergence，并将现实商业检查保持在后筛阶段。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v73 继续 broad creation，并新增 N128 Transindividuality。
+    Owner 对 N128 的反馈为：太长，不喜欢。该反馈不否定长词或概念词整体，而是说明长度/视觉/口头负担一旦超过阈值会明显破坏品牌感。
+    Multifinality 仍保留为正向偏好证据，但不得作为模板。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -31,7 +32,10 @@ constraint_registry:
 owner_preferences:
   - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
   - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary preference only, confidence: high, priority: secondary}
+  - id: PREF-COMPACT-SPOKEN-RHYTHM
+    statement: shorter spoken effort is secondary overall, but excessive length/visual burden is a real negative; Multifinality felt acceptable while Transindividuality felt too long
+    confidence: high
+    priority: secondary_with_upper_bound_signal
   - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
   - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
@@ -69,17 +73,15 @@ rounds:
   - {id: RND-118, action: owner_promotes_com_and_trademark_to_commercial_hard_gates, result: candidate_pool_reclassified}
   - {id: RND-119, action: existing_candidate_exact_com_rescreen, result: direct_registration_pool_contraction}
   - {id: RND-120, action: owner_clarifies_com_gate_as_obtainability_not_unregistered_only, result: aftermarket_path_enabled}
-  - id: RND-121
-    action: continue_creation_after_domain_gate_clarification
-    result: one_new_high_priority_commercial_candidate
+  - {id: RND-121, action: continue_creation_after_domain_gate_clarification, result: one_new_high_priority_commercial_candidate}
+  - id: RND-122
+    action: owner_reaction_to_transindividuality
+    result: rejected_for_excessive_length
     findings:
-      - multiple new morphotype-diverse batches were generated before commercial filtering
-      - direct-registration .com survivors included Interformity, Polyformity, Coactuality, Allomorphy, Permutability, Transmutability, Coindividuation, Transindividuality, Combinatoriality, Interpossibility, Equipossibility, Formvariance and Variogenesis
-      - several survivors were deprioritized for awkwardness, excessive technicality, weak intrinsic quality or title/term noise rather than promoted merely because .com was available
-      - Transindividuality emerged as the strongest new candidate from this continuation round
-      - transindividuality.com and transindividuality.org were both available for direct registration on 2026-09-11
-      - public exact-name search found primarily philosophical/organization-theory scholarship and no material active exact-name commercial software/company identity
-      - trademark web precheck found no obvious exact-name registration signal; formal multi-jurisdiction clearance remains pending
+      - Owner says Transindividuality feels too long and is not liked
+      - this is not evidence against long or conceptual words categorically
+      - contrast with positive Multifinality indicates a practical upper-bound effect on visual/spoken load
+      - do not convert this into a strict character-count rule; use as comparative preference evidence
 
 candidates:
   - {id: N096, name: Open Regard, role: commercial_gate_survivor_pending_tm_strength, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
@@ -97,42 +99,29 @@ candidates:
     generation_use: prohibited_as_template_or_seed
   - id: N128
     name: Transindividuality
-    role: owner_ready_provisional_pending_formal_tm
-    active: true
-    morphotype: established_philosophical_concept_single_word
-    intrinsic_case:
-      - established concept describing individuality as constituted through relations rather than isolated from them
-      - naturally spans individual and collective identity without literalizing mission wording
-      - reads as a coherent single-word institutional/brand identity despite length
-      - materially different semantic source from Multifinality and recent phrase candidates
+    role: owner_rejected_length
+    active: false
+    owner_feedback: too_long_not_liked
     domain_status:
       com: available_for_registration_2026_09_11
       org: available_for_registration_2026_09_11
-    reality_status: preliminary_pass_academic_usage_only
-    trademark_status: preliminary_no_obvious_exact_signal_found_formal_clearance_pending
-    risks:
-      - long word and academic/philosophical tone
-      - first-time pronunciation/spelling requires some familiarity
-      - established conceptual meaning may narrow trademark distinctiveness if claimed services directly teach or research the concept
-    owner_exposure: now
     generation_use: prohibited_as_template_or_seed
 
 current_state:
-  direct_registration_com_survivors: [N096, N113, N126, N128]
+  direct_registration_com_survivors: [N096, N113, N126]
   aftermarket_pending: [N117, N119, N125, N127]
   search_mode: commercial_brand_hard_gate_divergence
   biggest_unknown: >-
-    Can further materially different form classes match or exceed N128/N127-level semantic depth and brand feel while keeping exact .com obtainability and strong trademark distinctiveness?
+    Can further materially different form classes match Multifinality-level semantic depth and brand feel while staying clearly below the visual/spoken burden represented by Transindividuality and preserving .com obtainability plus trademark strength?
   blockers: []
-  owner_review_needed_now: true_for_N128_reaction_but_not_for_continued_search
+  owner_review_needed_now: false
 
 next_action:
-  action: continue_broad_creation_and_parallel_commercial_filtering_without_exploiting_N128
-  due_diligence_for_new_finalists: [exact_com_registration_or_aftermarket_obtainability, active_use_conflict, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck, identity_collision_screen]
+  action: continue_broad_creation_with_length_burden_calibration
   rationale: >-
-    Owner explicitly requested continued creation rather than domain-loop stalling. N128 is a useful new commercially plausible candidate but must not become a template; keep broad morphotype search active.
+    Preserve morphotype diversity and meaning-first search, but treat excessive visual/spoken length as a comparative negative. Do not impose a hard character limit and do not clone Multifinality.
   requires_owner: false_for_continued_search
 
 stop:
-  status: owner_feedback_plus_continue
-  reason: one new high-priority candidate exists and broad search remains productive
+  status: continue
+  reason: Owner feedback narrows practical identity load without collapsing the search space
