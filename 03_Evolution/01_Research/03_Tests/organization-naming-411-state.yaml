@@ -5,21 +5,15 @@ task:
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
-  status: owner_review_ready
-  snapshot_version: 46
+  status: in_progress
+  snapshot_version: 47
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v45 保存到 RND-069；本快照新增 RND-070–073，
-    包括 remap 后的 title-style、concrete-metaphor、relational-adverb 与 tension-dyad probes，以及 Owner Exposure freshness recheck。
-    历史 candidate / reality / Owner / isolation 事实不改写；完整逐轮细节由 Git history 与 Issue #411 保留。
-  previous_snapshots:
-    - {snapshot: 41, commit: d92aa17599b1460b655c236da4395e35c18cdb0a}
-    - {snapshot: 42, commit: 627cfbbc5f778f80acc4a239c0c439fd7196bb56}
-    - {snapshot: 43, commit: 1a693395d632586fc3a25b34eedd7652840f1897}
-    - {snapshot: 44, commit: e586385049a8454bdd6491494d8831ccb79676cf}
-    - {snapshot: 45, commit: 16a74acbad1f51d03e1e2e4e325a601c66b09b47}
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v46 (commit 5898e8eeb9ae4a77977aa3825fce05666d0296a7)
+    保存 RND-070–073 与首次 Owner Exposure。本快照记录 Owner 对 N096/N113 的真实反馈并重新打开探索；
+    完整历史候选、现实证据和旧快照由 Git history 与 Issue #411 保留，不在本 compact continuation snapshot 重写。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -28,306 +22,161 @@ constraint_registry:
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
-  controller_search_variables: [word_count, semantic_transparency, name_length, construction_operator, search_cadence, workflow_pattern]
+    - id: PREF-CHOICE-SPACE
+      statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists; minimum finalist count is not itself a stopping condition.
+      source_type: owner_explicit
+      observed_at: 2026-09-11
 
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
-  value_claims:
-    - {id: V-COMMONS, priority: core}
-    - {id: V-AGENCY, priority: core}
-    - {id: V-CREATION, priority: high}
-    - {id: V-RETURN, priority: high, naming_mode: guardrail_only}
-  integrity: {value_flattening_detected: false, mission_overcompression_detected: false, value_proxy_collapse_detected: false}
+  value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
 
-name_job_model:
-  primary_jobs: [durable independent umbrella identity, multi-project extensibility, acceptable spoken/written recovery, long-term semantic room]
-  non_jobs: [encode_complete_mission_loop, enumerate_future_activities]
-  tensions: [distinctiveness_vs_recoverability, grounding_vs_ownable_identity, institutional_scale_vs_creative_energy]
-  status: active
-
-decision_criteria:
-  items:
-    - {id: C-SCALE, role: gate}
-    - {id: C-RECOVERY, role: optimize}
-    - {id: C-DISTINCT, role: optimize}
-    - {id: C-VALUE, role: optimize}
-    - {id: C-DOMAIN, role: gate}
-    - {id: C-OWNER, role: prefer}
-    - {id: C-TM, role: observe}
-  integrity: {role_confusion_detected: false, role_drift_detected: false}
-
-preference_model:
-  signals: [{preference_id: PREF-MODEL-001, statement: low misread / low dictation branching preferred, scope: task, confidence: high, stability: emerging}]
-  generation_template_use: prohibited
-
-search_landscape:
-  regions:
-    - {region_id: REG-LEXICAL-EXISTING, sampling_status: sampled, quality_yield: medium_high, reality_crowding: high, information_gain: low}
-    - {region_id: REG-NATURAL-COMPOUND-PAIR, sampling_status: sampled, quality_yield: medium_high, reality_crowding: high, information_gain: low_medium}
-    - {region_id: REG-GROUNDED-COINAGE, sampling_status: sampled, quality_yield: medium_high, reality_crowding: high, information_gain: low}
-    - {region_id: REG-SHORT-OPAQUE-COINED, sampling_status: sampled, quality_yield: mixed, reality_crowding: high, information_gain: low}
-    - {region_id: REG-LONGER-PHONOTACTIC-PROPER, sampling_status: sampled, quality_yield: medium, reality_crowding: medium, information_gain: medium_low}
-    - {region_id: REG-HYBRID-ANCHORED-PAIR, sampling_status: sampled_move_away, quality_yield: low_medium, reality_crowding: unknown, information_gain: low}
-    - {region_id: REG-SEGMENTABLE-SEMI-OPAQUE, sampling_status: sampled_move_away, quality_yield: medium_high, reality_crowding: high_current_task, information_gain: low}
-    - region_id: REG-EVOCATIVE-RELATIONAL-PHRASE
-      semantic_position: [evocative, relational, indirect_value_connection]
-      character_position: [spoken_natural, institutional_creative_balance]
-      construction_position: [two_to_three_word_phrase_identity, syntactic_relation_not_generic_descriptor_pair]
-      collision_prior: medium_unknown
-      evidence_confidence: medium
-      quality_yield: medium_current_task
-      reality_crowding: medium_current_task
-      information_gain: low_medium_after_followup
-      sampling_status: sampled_hold_one_survivor_move_away_from_immediate_exploitation
-      move_or_stay_rationale: RND-068 produced N096; RND-069 did not reproduce a peer, so the survivor remains evidence rather than a generation template
-    - {region_id: REG-TITLE-STYLE-INSTITUTIONAL, sampling_status: sampled_move_away, quality_yield: low_medium, reality_crowding: high_top_slice, information_gain: low, move_or_stay_rationale: RND-070 top slice collided with active education/framework identities or became term/title-like}
-    - {region_id: REG-CONCRETE-METAPHOR-MONONYM, sampling_status: sampled_move_away, quality_yield: medium, reality_crowding: high_top_slice, information_gain: low, move_or_stay_rationale: RND-071 strongest concrete-image mononyms were occupied by active organizations/products/trademarks}
-    - {region_id: REG-RELATIONAL-ADVERB-MONONYM, sampling_status: sampled_move_away, quality_yield: medium, reality_crowding: high_top_slice, information_gain: low, move_or_stay_rationale: RND-072 -wise relational mononyms were crowded in AI/software/consumer identities, including current 2026 usage}
-    - region_id: REG-TENSION-DYAD
-      semantic_position: [conceptual_tension, indirect_value_connection]
-      character_position: [institutional_intellectual, spoken_recoverable]
-      construction_position: [two_familiar_words_in_deliberate_semantic_tension]
-      collision_prior: medium_unknown
-      evidence_confidence: medium
-      quality_yield: medium_high_current_probe
-      reality_crowding: low_medium_current_probe
-      information_gain: high_realized
-      sampling_status: sampled_one_finalist
-      move_or_stay_rationale: RND-073 produced an independent reality-plus-domain survivor without copying the phrase-family survivor
-  online_updates:
-    - {round: RND-067, update: move control variable from more invented morphology to relational/material source}
-    - {round: RND-068, update: phrase territory produced one promising internal survivor}
-    - {round: RND-069, update: independent phrase follow-up produced exact/near conflicts or slogan-like weakness; no second peer}
-    - {round: RND-070, update: title-style identities did not improve the frontier; top forms were occupied or term-like}
-    - {round: RND-071, update: concrete metaphor mononyms retained recoverability but reality crowding remained high}
-    - {round: RND-072, update: relational-adverb mononyms also showed current namespace crowding, including AI-adjacent identity}
-    - {round: RND-073, update: semantic-tension dyad yielded a second independent candidate that passed current reality and domain gates}
-  integrity: {survivor_shape_feedback_detected: false, region_quality_reality_conflation_detected: false}
+owner_feedback:
+  - id: OF-N096-01
+    candidate_id: N096
+    signal: positive_usable_not_selected
+    statement: Open Regard has no major problem, feels stable, is directly usable, and is not rejected; Owner wants more choices before selecting.
+    implications: [retain_as_finalist_baseline, do_not_use_as_generation_template, continue_independent_exploration]
+  - id: OF-N113-01
+    candidate_id: N113
+    signal: hold_explanation_required
+    statement: Public Singular looks broadly acceptable but first-read meaning is unclear; Public can evoke public facilities/public-sector or noncommercial character, raising commercialization-fit concern; unusualness may improve recognition.
+    implications: [retain_for_comparison, validate_first_read_semantics_and_commercial_tone_before_any_promotion, do_not_treat_internal_semantic_elegance_as_owner_comprehension]
 
 search_control:
-  mode: convergence
-  search_cadence: {mode: validation_only, target_count: 0, rationale: two independent Owner-ready candidates now exist; freshness and decision hygiene completed before exposure}
+  mode: exploration_reopened_by_owner
+  search_cadence: {mode: portfolio_batch, target_finalist_pool: 4_to_6, stop_condition: enough genuinely distinct ready-to-use choices or materially diminishing information gain}
   generation_isolation:
     level: best_effort_same_context
     runtime_identity: ChatGPT current conversation runtime
     historical_context_may_have_seen_controller_only_exclusions: true
     claim_policy: sanitized logical briefs only; no literal blindness claim
-  incumbent_isolation: {comparison_only_candidate_ids: [N060]}
   controller_only_exclusions:
-    incumbent_candidate_ids: [N060]
-    cooled_family_ids: [FAM-V34-01, FAM-RND046-01, FAM-RND051-01]
-    owner_reaction_subject_ids: [N060]
-    other: [N061_historical_hold_not_generation_seed, historical_reality_survivor_shapes, N096_not_a_generation_template, N098_same_family_not_a_generation_template]
+    finalist_candidate_ids: [N096, N113]
+    comparison_only_candidate_ids: [N060]
+    other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]
+  finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
-  post_generation_filter: {enabled: true, check_cooled_families: true, check_incumbent_similarity: true, check_strategy_fidelity: true}
+  post_generation_filter: {enabled: true, check_finalist_similarity: true, check_cooled_families: true, check_strategy_fidelity: true}
 
 reality_screening:
   method_ref: reality-screening-contract-v0.3.3
   status: active
-  minimum_level_for_held_or_promising: 1
   freshness_recheck_before_owner_exposure: true
-  query_classes: [bare_exact, company_organization, software_product_project, naming_job_adjacent_category, public_trademark_signal, near_name_and_recovery_branch_before_promotion]
+  domain_after_reality_pass_only: true
 
 workflow_scheduler:
   policy: diagnosis_driven_pattern_portfolio
-  recent_allocations: [RND-062:divergence_burst, RND-063:creative_linguistic_parallel, RND-064:white_space_mapping, RND-065:category_parallel, RND-066:online_observe_update, RND-067:white_space_mapping, RND-068:territory_expansion, RND-069:focused_exploitation, RND-070:white_space_mapping_plus_micro_probe, RND-071:territory_expansion, RND-072:category_probe, RND-073:category_probe_plus_owner_exposure_validation]
   active_patterns:
-    - {pattern_id: decision_hygiene, status: completed_current_trigger, last_used_round: RND-073}
-    - {pattern_id: validation_only, status: completed_current_trigger, last_used_round: RND-073}
+    - pattern_id: white_space_mapping
+      status: active_next
+      question_to_answer: >-
+        Which materially different identity architectures can add ready-to-use choices without cloning Open Regard or Public Singular,
+        while preserving low recovery burden and umbrella scale?
+    - {pattern_id: category_parallel, status: eligible_after_remap}
   diagnostics: {workflow_monoculture: false, workflow_operator_confusion: false}
 
 method_scheduler:
   policy: adaptive_operator_portfolio
-  active_strategies:
-    - {strategy_id: evocative_relational_phrase_operator, family: phrase_identity, status: finalist_source_not_generation_template}
-    - {strategy_id: tension_dyad_operator, family: conceptual_dyad, status: finalist_source}
-    - {strategy_id: title_style_operator, family: title_identity, status: deprioritized_after_probe}
-    - {strategy_id: concrete_metaphor_mononym, family: lexical_metaphor, status: deprioritized_after_probe}
-    - {strategy_id: relational_adverb_mononym, family: lexical_shift, status: deprioritized_after_probe}
-    - {strategy_id: longer_phonotactic_proper_name, family: controlled_coinage, status: guarded_hold}
-    - {strategy_id: transformation_operator, family: transformation_operator, status: rescue_only}
-  diagnostics: {scheduler_monoculture: false, method_underuse: false, territory_material_starvation: false}
-
-execution:
-  autonomous_microcycles: true
-  module_policy: progressive_disclosure
-  runtime_capability_profile: {shared_context_only: true, fresh_context_available: false, isolated_subagents_available: false, tool_rich_browser_or_shell: true, persistent_state_io: true, parallel_workers_available: false}
-  runtime_adapter: {actual_isolation_level: best_effort_same_context, fidelity_limitations: [logical roles share historical model context, blindness claims limited to omission/sanitized views]}
-  owner_interaction_gate:
-    classification: final_subjective_selection
-    decision: owner_review_now
-    reversible_without_owner: false
-    confirmed_constraint_ids_affected: []
-    rationale: two independent candidates have crossed intrinsic, architecture, current reality and .org gates; remaining difference is primarily long-term Owner resonance
+  protected_from_imitation: [evocative_relational_phrase_survivor_shape_N096, tension_dyad_survivor_shape_N113]
+  recent_deprioritized_regions: [title_style_institutional, concrete_metaphor_mononym, relational_adverb_mononym, immediate_phrase_family_exploitation, immediate_tension_dyad_family_exploitation]
+  diagnostics: {scheduler_monoculture: false, method_underuse: false}
 
 candidates:
-  - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor, owner_signal: neutral, reality_summary: historical screen only; freshness recheck required before future promotion}
-  - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed, note: unchanged historical hold}
-  - {id: N086, name: Lumerand, role: held_internal, active: true, intrinsic: {distinctiveness: high, pronunciation: medium_good, spelling_recovery: medium, semantic_room: high, target_scale_fit: good}, reality: {exact_result: no_material_active_exact_org_or_software_found_current_queries, near_name_result: yellow, domain: lumerand.org_available_2026-09-11}, diagnosis: [spelling_recovery_branch_risk, surname_fantasy_identity_risk], owner_exposure: not_ready}
-  - {id: N087, name: Solace Assembly, role: retired_after_intrinsic_funnel, active: false}
-  - {id: N088, name: Fallow House, role: retired_after_intrinsic_funnel, active: false}
-  - {id: N089, name: Sonder Field, role: retired_after_intrinsic_funnel, active: false}
-  - {id: N090, name: Elsefold, role: reality_blocked, active: false, reality: red_material_active_exact_identity}
-  - {id: N091, name: Kindfold, role: reality_blocked, active: false, reality: red_material_product_and_public_tm_signal}
-  - {id: N092, name: Commonward, role: working_internal_not_promoted, active: false}
-  - {id: N093, name: Ownward, role: reality_blocked, active: false, reality: red_multiple_active_exact_identities}
-  - {id: N094, name: Senseward, role: domain_blocked_after_reality_screen, active: false, reality: no_material_exact_identity_found_current_screen, domain: senseward.org_unavailable_2026-09-11}
-  - {id: N095, name: Viewstead, role: retired_after_intrinsic_funnel, active: false}
   - id: N096
     name: Open Regard
-    role: finalist_owner_ready
+    role: finalist_baseline
     active: true
-    provenance: {round: RND-068, region: REG-EVOCATIVE-RELATIONAL-PHRASE}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, memorability: good, semantic_room: high, target_scale_fit: good, architecture_fit: good}
-    architecture_test: [Open Regard Research, Open Regard Education, Open Regard Tools, Open Regard Press, InteropAtlas by Open Regard]
-    value_alignment: compatible_indirect_agency_and_perspective_connection
-    reality:
-      screening: {level: 1_plus_near_probe_freshness_rechecked, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: no_material_active_exact_identity_found_current_multi_query_recheck, near_name_result: no_material_high_adjacency_near_identity_found_current_queries, public_tm_signal: no_material_public_tm_signal_found_current_screen_not_formal_clearance, confidence: medium_high}
-      domain: {name: openregard.org, observation: available_fresh_recheck, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
-    diagnosis: [mild_phrase_or_arts_character_risk]
-    owner_exposure: ready
-  - {id: N097, name: Into Common, role: held_internal, active: true, reality: {exact_result: no_material_active_exact_identity_found_current_queries, domain: intocommon.org_available_2026-09-11}, diagnosis: [grammatical_markedness, mission_literalness_risk], owner_exposure: not_ready}
-  - {id: N098, name: Wide Regard, role: sibling_hold_not_independent_finalist, active: true, reality: {exact_result: no_material_active_exact_identity_found_current_queries, domain: wideregard.org_available_2026-09-11}, diagnosis: [same_family_as_N096, do_not_count_as_independent_peer], owner_exposure: not_ready}
-  - {id: N099, name: Known Otherwise, role: reality_yellow_internal, active: false, reality: {exact_result: yellow_current_exact_title_in_highly_adjacent_2026_design_sensemaking_exhibition, domain: knownotherwise.org_available_2026-09-11}, owner_exposure: not_ready}
-  - {id: N100, name: One Among Many, role: held_internal, active: true, reality: {exact_result: no_material_active_brand_identity_found_current_queries_but_common_phrase_and_academic_title_usage, domain: oneamongmany.org_available_2026-09-11}, diagnosis: [generic_phrase_pressure, possible_diminishing_connotation], owner_exposure: not_ready}
-  - {id: N101, name: Known Together, role: reality_blocked, active: false, reality: red_active_exact_commercial_identity}
-  - {id: N102, name: By Common Light, role: reality_yellow_internal, active: false, diagnosis: [poetic_religious_character_risk, near_identity_core_phrase]}
-  - {id: N103, name: Room for Many, role: retired_after_intrinsic_funnel, active: false, diagnosis: [slogan_program_character, insufficient_proper_name_identity]}
-  - {id: N104, name: The Open Measure, role: reality_blocked, active: false, provenance: {round: RND-070, region: REG-TITLE-STYLE-INSTITUTIONAL}, reality: {exact_result: red_active_exact_music_education_identity_and_open_measure_nonprofit_adjacency}, owner_exposure: prohibited_current_evidence}
-  - {id: N105, name: The Living Margin, role: reality_blocked, active: false, provenance: {round: RND-070, region: REG-TITLE-STYLE-INSTITUTIONAL}, reality: {exact_result: red_active_framework_book_identity}, owner_exposure: prohibited_current_evidence}
-  - {id: N106, name: The Common Interval, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-070, region: REG-TITLE-STYLE-INSTITUTIONAL}, diagnosis: [technical_term_pressure, insufficient_proper_name_identity]}
-  - {id: N107, name: Crossgrain, role: reality_blocked, active: false, provenance: {round: RND-071, region: REG-CONCRETE-METAPHOR-MONONYM}, reality: {exact_result: red_active_collective_and_current_public_tm_signal}}
-  - {id: N108, name: Openwork, role: reality_blocked, active: false, provenance: {round: RND-071, region: REG-CONCRETE-METAPHOR-MONONYM}, reality: {exact_result: red_active_2026_AI_software_identity_and_public_tm_signal}}
-  - {id: N109, name: Daymark, role: reality_blocked, active: false, provenance: {round: RND-071, region: REG-CONCRETE-METAPHOR-MONONYM}, reality: {exact_result: red_multiple_active_software_company_and_registered_tm_signals}}
-  - {id: N110, name: Elsewise, role: reality_blocked, active: false, provenance: {round: RND-072, region: REG-RELATIONAL-ADVERB-MONONYM}, reality: {exact_result: red_current_2026_AI_interactive_narrative_tool_plus_historical_software_identity}}
-  - {id: N111, name: Manywise, role: reality_blocked, active: false, provenance: {round: RND-072, region: REG-RELATIONAL-ADVERB-MONONYM}, reality: {exact_result: red_active_2026_multi_AI_workspace}}
-  - {id: N112, name: Ownwise, role: reality_blocked, active: false, provenance: {round: RND-072, region: REG-RELATIONAL-ADVERB-MONONYM}, reality: {exact_result: red_active_product_project_company_and_public_tm_signals}}
+    owner_signal: positive_usable_not_selected
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
+    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_2026_09_11, formal_tm_clearance: not_claimed}
+    generation_use: prohibited_as_template
   - id: N113
     name: Public Singular
-    role: finalist_owner_ready
+    role: finalist_hold
     active: true
-    provenance: {round: RND-073, region: REG-TENSION-DYAD}
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, memorability: good, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}
-    architecture_test: [Public Singular Research, Public Singular Education, Public Singular Tools, Public Singular Press, InteropAtlas by Public Singular]
-    value_alignment: strong_structural_connection_public_commons_plus_individual_singularity_without_encoding_full_mission
-    reality:
-      screening: {level: 1_plus_near_probe_freshness_rechecked, method_ref: reality-screening-contract-v0.3.3, observed_at: 2026-09-11, exact_result: no_material_active_exact_identity_found_current_multi_query_screen, near_name_result: no_material_high_adjacency_brand_identity_found_current_queries, public_tm_signal: no_material_public_tm_signal_found_current_screen_not_formal_clearance, confidence: medium_high}
-      evidence_summary: [ordinary academic and grammar uses of the words/phrase occur, including public-administration usage; no material active brand identity surfaced in the current contract queries]
-      domain: {name: publicsingular.org, observation: available_fresh_recheck, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
-    diagnosis: [academic_public_policy_tone_risk, conceptual_abstraction_higher_than_N096]
-    owner_exposure: ready
-  - {id: N114, name: Common Particular, role: held_internal, active: true, provenance: {round: RND-073, region: REG-TENSION-DYAD}, reality: {exact_result: no_material_active_brand_identity_found_current_queries, lexical_term_adjacency: common_particular_meter, domain: commonparticular.org_available_2026-09-11}, diagnosis: [technical_phrase_adjacency, weaker_naturalness_than_N113], owner_exposure: not_ready}
-  - {id: N115, name: Shared Particular, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-073, region: REG-TENSION-DYAD}, diagnosis: [grammatical_markedness, weak_proper_name_character]}
-  - {id: N116, name: Open Particular, role: retired_after_intrinsic_funnel, active: false, provenance: {round: RND-073, region: REG-TENSION-DYAD}, diagnosis: [grammatical_markedness, weak_proper_name_character]}
+    owner_signal: hold_explanation_required
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}
+    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_2026_09_11, formal_tm_clearance: not_claimed}
+    owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern]
+    generation_use: prohibited_as_template
+  - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
+  - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
+  - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed}
 
 rounds:
-  - {id: RND-065, action: category_parallel_white_space_probe, result: no_finalist}
-  - {id: RND-066, action: segmentable_online_observe_repeatability_probe, result: no_finalist_move_away}
-  - {id: RND-067, action: white_space_remap_after_rnd065_066, generated_count: 0, result: relational_phrase_region_opened}
-  - {id: RND-068, action: territory_expansion_plus_evocative_relational_phrase_probe, result: one_promising_internal_survivor_N096}
-  - {id: RND-069, action: bounded_independent_phrase_followup, generated_count: 3, result: no_second_peer_move_away}
-  - id: RND-070
-    action: white_space_remap_plus_title_style_probe
-    generated_count: 3
-    reality_screened_count: 2
-    findings: [title-style was structurally distinct from N096 but top candidates had active exact education/framework identities; weaker candidate was term-like; branch stopped early]
-  - id: RND-071
-    action: concrete_metaphor_mononym_probe
-    generated_count: 3
-    reality_screened_count: 3
-    findings: [recoverability and imagery were acceptable but all top candidates had active identities or trademark signals; no domain queries justified]
-  - id: RND-072
-    action: relational_adverb_mononym_probe
-    generated_count: 3
-    reality_screened_count: 3
-    findings: [natural spelling did not solve namespace pressure; all three had current active identities, including AI/software adjacency; branch closed]
-  - id: RND-073
-    action: tension_dyad_probe_plus_owner_exposure_validation
-    generated_count: 4
-    reality_screened_count: 2
-    domain_queried_count: 2
+  - id: RND-074
+    action: owner_feedback_ingest_and_exploration_reopen
+    generated_count: 0
     findings:
-      - N113 Public Singular provided a materially different identity architecture from N096 and passed intrinsic, architecture, current reality and .org gates
-      - N114 remained below exposure because technical phrase adjacency and weaker naturalness reduce quality despite current domain availability
-      - N096 and N113 both passed same-day freshness reality rechecks and same-day .org rechecks
-      - architecture stress found both support research, education, tools, publishing and InteropAtlas parent usage
-      - decision hygiene found no strict dominance: N096 is warmer and more natural; N113 is more structurally distinctive and intellectually explicit but more abstract/academic
-      - remaining choice is substantially Owner long-term resonance rather than another reversible search-path decision
-    integrity_check: {controller_only_exclusions_applied: true, N096_not_used_as_generation_template: true, reality_feedback_quarantine_preserved: true, actual_generation_isolation: best_effort_same_context, no_false_blindness_claim: true, hardened_reality_before_domain: true, freshness_recheck_before_owner_exposure: true, owner_gate_classification_correct: true}
+      - N096 is confirmed by Owner as directly usable and stable, but not selected because choice space is insufficient
+      - N113 is not rejected, but its intended semantic tension is not self-evident on first read and Public raises commercialization-tone concern
+      - the prior 2-3 finalist stop threshold was a minimum exposure trigger, not a sufficient final stopping condition for this Owner/task
+      - next search should broaden high-quality choice space rather than optimize around either exposed finalist
+    integrity_check: {owner_signal_not_reduced_to_like_dislike: true, finalists_not_used_as_generation_templates: true, no_owner_internal_route_delegation: true}
 
 observations:
-  - {id: O-R068-PHRASE, scope: search_landscape, observation: relational phrase identity can produce a reality-plus-domain survivor without invented-name recovery cost, but one survivor is not enough to generalize}
-  - {id: O-R069-PHRASE-REPEAT, scope: search_landscape, observation: follow-up did not reproduce independent finalist yield; exact/near identity and slogan-character remain pressures}
-  - {id: O-R070-TITLE, scope: search_landscape, observation: title-style identity did not outperform prior regions because top forms were already occupied or read as terms/titles}
-  - {id: O-R071-METAPHOR, scope: search_landscape, observation: concrete imagery improves memorability but common concrete metaphor words remain highly occupied}
-  - {id: O-R072-ADVERB, scope: search_landscape, observation: lexical-category shift alone does not create namespace distance; familiar -wise forms are heavily commercialized}
-  - {id: O-R073-DYAD, scope: search_landscape, observation: a semantic-tension dyad can preserve recoverability while creating enough identity distance to yield an independent finalist in this task}
+  - id: O-R074-CHOICE
+    scope: owner_decision
+    observation: an acceptable ready-to-use finalist can still leave insufficient decision choice space; stopping should depend on Owner sufficiency signal and marginal information gain, not finalist count alone
+  - id: O-R074-FIRSTREAD
+    scope: naming_quality
+    observation: internally coherent semantic construction may still impose first-read decoding cost; semantic elegance and immediate comprehension must remain separate observations
 
 diagnostics:
-  - {id: D-R068-01, diagnosis_type: phrase_region_initial_positive_signal_not_yet_converged, confidence: medium_high}
-  - {id: D-R069-01, diagnosis_type: phrase_region_single_survivor_no_peer_and_exploitation_risk, confidence: high}
-  - {id: D-R070-01, diagnosis_type: title_style_low_gain, confidence: high}
-  - {id: D-R071-01, diagnosis_type: concrete_metaphor_namespace_crowding, confidence: high}
-  - {id: D-R072-01, diagnosis_type: relational_adverb_namespace_crowding, confidence: high}
-  - id: D-R073-01
-    diagnosis_type: owner_exposure_gate_reached
-    statement: two independent candidates now satisfy current intrinsic, recoverability, umbrella architecture, hardened reality and .org requirements; remaining distinction is Owner preference/resonance
+  - id: D-R074-01
+    diagnosis_type: finalist_pool_insufficient_despite_usable_baseline
+    statement: Owner accepts N096 as usable but explicitly requests more choices; reopen exploration while quarantining exposed finalist shapes from generation
     confidence: high
-    proposed_state_change: pause_generation_for_owner_review
+    proposed_state_change: white_space_remap_for_distinct_additional_finalists
 
 experience_candidates:
-  - {id: E-R068-PHRASE-YIELD, observation: relational phrase architecture produced one reality-plus-domain promising survivor after several closed regions, scope: task_local, confidence: low_medium, status: observed_not_exported}
-  - {id: E-R069-PHRASE-NONREPEAT, observation: one phrase survivor did not repeat in a bounded independent follow-up, scope: task_local_counterevidence, confidence: medium, status: observed_not_exported}
-  - {id: E-R073-TENSION-DYAD, observation: one tension-dyad probe produced an independent finalist after several high-crowding regions, scope: task_local, confidence: low_medium, status: observed_not_exported}
+  - id: E-R074-STOP-SUFFICIENCY
+    observation: finalist-count threshold should not be treated as sufficient stopping evidence when Owner explicitly reports inadequate choice space
+    scope: potentially_general
+    confidence: medium
+    status: experience_candidate_not_skill_rewrite
+  - id: E-R074-FIRSTREAD
+    observation: first-read semantic comprehension should be distinguished from post-explanation conceptual fit
+    scope: potentially_general
+    confidence: medium
+    status: experience_candidate_not_skill_rewrite
 
 experience_export:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   direct_skill_rewrite_allowed: false
-  rnd_070_073_method_level_export: none_task_local_search_evidence_only
+  rnd_074_method_level_export: pending_cross_task_or_repeat_evidence
 
 current_state:
-  strongest_candidates: [N060]
-  promising_candidates: []
-  held_candidates: [N086, N061, N097, N098, N100, N114]
   finalists: [N096, N113]
-  current_region_ids: [REG-EVOCATIVE-RELATIONAL-PHRASE, REG-TENSION-DYAD]
-  active_workflow_pattern_ids: [validation_only, decision_hygiene]
-  active_strategy_ids: []
-  active_rescue_branch_ids: []
-  search_mode: convergence
-  search_cadence_mode: validation_only
+  baseline_candidate_id: N096
+  held_candidates: [N086, N061]
+  search_mode: exploration_reopened_by_owner
+  search_cadence_mode: portfolio_batch
+  target_finalist_pool: 4_to_6
   generation_isolation_level: best_effort_same_context
   biggest_unknown: >-
-    Which of the two independently derived Owner-ready candidates has stronger long-term resonance for the umbrella organization, or does Owner reject both and reopen exploration?
+    Can materially different naming architectures add several ready-to-use candidates that preserve Open Regard's low-friction usability while offering greater identity diversity, without copying either exposed finalist?
   blockers: []
-  information_gain: low_for_more_internal_search_before_owner_signal
-  search_integrity_status: pass
-  constraint_integrity_status: pass
-  reality_screen_status: v0.3.3_contract_active_freshness_rechecked
-  owner_review_needed_now: true
+  information_gain: high_for_broader_choice_space
+  owner_review_needed_now: false
 
 next_action:
-  action: owner_compare_two_finalists
-  target: compare_N096_Open_Regard_vs_N113_Public_Singular
+  action: remap_and_run_distinct_portfolio_search
+  target: add_independent_ready_to_use_candidates_without_finalist_imitation
   rationale: >-
-    Both candidates have crossed the current evidence gates through independent architectures. Additional autonomous generation before Owner resonance signal now has lower information value than exposing the two finalists.
-    Formal legal trademark clearance is still explicitly not claimed and remains deferred by current task policy.
-  triggered_by: [D-R073-01]
-  expected_information_gain: high_from_owner_signal
-  search_mode: convergence
-  search_cadence_mode: validation_only
-  selected_workflow_pattern_ids: [decision_hygiene]
-  selected_strategy_ids: []
-  value_targets: [V-AGENCY, V-CREATION, V-COMMONS]
-  modules_to_load: [decision_hygiene]
-  requires_owner: true
-  owner_gate_classification: final_subjective_selection
-  affected_confirmed_constraint_ids: []
+    Owner explicitly wants more choice and regards N096 as usable rather than selected. Reopen exploration, protect N096/N113 from template feedback,
+    remap materially different identity architectures, then use small parallel category probes. Apply intrinsic/linguistic funnel before hardened reality screening and .org gating.
+  triggered_by: [D-R074-01]
+  expected_information_gain: high
+  selected_workflow_pattern_ids: [white_space_mapping, category_parallel]
+  requires_owner: false
+  owner_gate_classification: search_strategy
 
 stop:
-  status: pause_for_owner
-  reason: two independent Owner-ready finalists now exist and have passed same-day freshness reality and .org checks; remaining comparison is legitimately subjective long-term resonance
+  status: continue
+  reason: Owner explicitly requested more credible choices; current two-finalist set is not sufficient for final selection
   unresolved:
-    - formal trademark legal clearance remains deferred_by_owner and is not implied by public screening
+    - formal trademark legal clearance remains deferred and is not implied by public screening
     - true isolated generation runtime remains unavailable in this context
-    - Owner may prefer one, reject both, or request continued exploration after seeing the two finalists
+    - additional finalists must be materially independent rather than near-family variants of N096/N113
