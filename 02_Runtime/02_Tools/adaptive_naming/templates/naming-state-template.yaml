@@ -1,4 +1,4 @@
-schema_version: "0.3.2"
+schema_version: "0.4.0"
 
 job:
   id: null
@@ -68,6 +68,18 @@ decision_criteria:
     role_drift_detected: false
     notes: []
 
+preference_model:
+  signals: []
+  # - preference_id: P001
+  #   statement: null
+  #   scope: task | organization | cross_task
+  #   evidence_count: 0
+  #   confidence: low | medium | high
+  #   stability: one_off | emerging | stable | contradicted
+  #   phase_influence: early_low | normal | late_high
+  #   source_refs: []
+  generation_template_use: prohibited
+
 optional_modules:
   communication_load_allocation:
     status: inactive
@@ -80,6 +92,16 @@ optional_modules:
     brand_architecture: []
     visual_identity: []
     organizational_practice: []
+
+  expression_profile:
+    status: inactive
+    trigger: null
+    desired_character: []
+    undesired_character: []
+    abstraction_continuum: null
+    familiarity_novelty_position: null
+    institutional_creative_balance: null
+    source_refs: []
 
   territory_research:
     status: inactive
@@ -94,6 +116,15 @@ optional_modules:
     #   metaphors: []
     #   etymological_material: []
     selected_material_for_generation: []
+
+  linguistic_engineering:
+    status: inactive
+    trigger: null
+    worker_isolation_level: unknown
+    guidance: []
+    candidate_observations: []
+    spoken_recovery_branches: []
+    target_language_risks: []
 
   decision_hygiene:
     status: inactive
@@ -134,14 +165,38 @@ optional_modules:
     internal_adoption: []
     future_naming_policy: []
 
-map:
+search_landscape:
   initial_landscape_summary: null
+  prior_map_status: uninitialized
   regions: []
+  # - region_id: R001
+  #   semantic_position: []
+  #   character_position: []
+  #   construction_position: []
+  #   collision_prior: unknown | low | medium | high
+  #   evidence_confidence: low | medium | high
+  #   quality_yield: unknown | low | medium | high
+  #   reality_crowding: unknown | low | medium | high
+  #   information_gain: unknown | low | medium | high
+  #   sampling_status: unsampled | under_sampled | sampled | saturated | cooled
+  #   move_or_stay_rationale: null
   semantic_coverage: []
+  online_updates: []
+  integrity:
+    survivor_shape_feedback_detected: false
+    region_quality_reality_conflation_detected: false
+    notes: []
 
 search_control:
   mode: exploration
   mode_rationale: null
+
+  search_cadence:
+    mode: portfolio_batch
+    # micro_probe | portfolio_batch | divergence_burst | focused_exploitation | validation_only
+    target_count: null
+    rationale: null
+    stop_condition: null
 
   family_concentration:
     morphological: []
@@ -206,8 +261,25 @@ search_control:
     violation_types: []
     high_hit_rate: false
 
+workflow_scheduler:
+  policy: diagnosis_driven_pattern_portfolio
+  active_patterns: []
+  # - pattern_id: white_space_mapping | territory_expansion | divergence_burst | creative_linguistic_parallel | category_parallel | architecture_stress | feedback_refinement | online_observe_update | transformation_rescue | validation_only
+  #   status: available | active | boosted | deprioritized | cooled | completed
+  #   trigger_diagnosis_ids: []
+  #   question_to_answer: null
+  #   expected_information_gain: unknown | low | medium | high
+  #   runtime_requirements: []
+  #   attempts: 0
+  #   last_used_round: null
+  recent_allocations: []
+  diagnostics:
+    workflow_monoculture: false
+    workflow_operator_confusion: false
+    notes: []
+
 method_scheduler:
-  policy: adaptive_portfolio
+  policy: adaptive_operator_portfolio
   exploration_default_parallel_families: 3-5
   active_strategies: []
   # - strategy_id: null
@@ -248,10 +320,21 @@ transformation_rescue:
 execution:
   autonomous_microcycles: true
   module_policy: progressive_disclosure
-  preferred_batch_size:
-    broad_exploration: 6-10
-    focused_or_exploitation: 3-5
-    validation: 0
+
+  runtime_capability_profile:
+    shared_context_only: unknown
+    fresh_context_available: unknown
+    isolated_subagents_available: unknown
+    tool_rich_browser_or_shell: unknown
+    persistent_state_io: unknown
+    parallel_workers_available: unknown
+    evidence: []
+
+  runtime_adapter:
+    logical_roles: []
+    instantiated_workers: []
+    actual_isolation_level: unknown
+    fidelity_limitations: []
 
   owner_interaction_gate:
     last_checked_at: null
@@ -287,6 +370,7 @@ candidates: []
 #     round: null
 #     generation_brief_id: null
 #     generation_isolation_level: unknown
+#     workflow_pattern_ids: []
 #     scheduler_strategy_id: null
 #     rescue_branch_id: null
 #     territory_material_refs: []
@@ -302,6 +386,7 @@ candidates: []
 #     symbolic_compression: null
 #     cross_context_use: null
 #     architecture_extensibility: null
+#     visual_feel: null
 #     optional: {}
 #   value_alignment:
 #     aligned_value_ids: []
@@ -340,9 +425,11 @@ candidates: []
 
 rounds: []
 # - id: RND-001
-#   action: model_values | define_name_job | audit_constraints | classify_decision_criteria | allocate_communication_load | map | territory_research | schedule_methods | generate | post_generation_filter | evaluate_quality | evaluate_value_alignment | apply_decision_hygiene | temporal_evaluation | verify_reality | define_validation_contract | audit_naming_scope | open_rescue_branch | diagnose | check_search_integrity | change_strategy
+#   action: model_values | define_name_job | audit_constraints | classify_decision_criteria | allocate_communication_load | map | update_search_landscape | territory_research | schedule_workflow | schedule_methods | set_search_cadence | generate | post_generation_filter | linguistic_engineering | evaluate_quality | evaluate_value_alignment | apply_decision_hygiene | temporal_evaluation | verify_reality | define_validation_contract | audit_naming_scope | open_rescue_branch | diagnose | check_search_integrity | adapt_runtime | change_strategy
 #   search_mode: exploration | exploitation
+#   search_cadence_mode: micro_probe | portfolio_batch | divergence_burst | focused_exploitation | validation_only
 #   loaded_modules: []
+#   selected_workflow_pattern_ids: []
 #   selected_strategy_ids: []
 #   value_targets: []
 #   generated_count: 0
@@ -352,6 +439,8 @@ rounds: []
 #     name_job_checked: false
 #     decision_criteria_checked: false
 #     value_coverage_checked: false
+#     search_landscape_checked: false
+#     workflow_operator_separation_checked: false
 #     family_concentration_checked: false
 #     scheduler_monoculture_checked: false
 #     method_underuse_checked: false
@@ -361,6 +450,7 @@ rounds: []
 #     rescue_overfit_checked: false
 #     negative_constraint_priming_checked: false
 #     isolation_claim_checked: false
+#     runtime_adapter_checked: false
 #     constraint_drift_checked: false
 #     owner_interaction_gate_checked: false
 #     strategy_fidelity_checked: false
@@ -372,6 +462,12 @@ observations: []
 diagnostics: []
 experience_candidates: []
 
+experience_export:
+  registry_ref: ../evolution/method-experience-registry.yaml
+  exported_experience_ids: []
+  pending_generalization_candidates: []
+  direct_skill_rewrite_allowed: false
+
 current_state:
   strongest_candidates: []
   promising_candidates: []
@@ -380,10 +476,12 @@ current_state:
   pareto_front: []
   current_region_ids: []
   current_value_target_ids: []
+  active_workflow_pattern_ids: []
   active_strategy_ids: []
   active_rescue_branch_ids: []
   loaded_optional_modules: []
   search_mode: exploration
+  search_cadence_mode: portfolio_batch
   generation_isolation_level: unknown
   biggest_unknown: null
   blockers: []
@@ -391,7 +489,10 @@ current_state:
   mission_value_status: unknown
   name_job_status: unknown
   criteria_status: unknown
+  search_landscape_status: unknown
+  workflow_scheduler_status: unknown
   method_scheduler_status: unknown
+  runtime_adapter_status: unknown
   search_integrity_status: unknown
   constraint_integrity_status: unknown
   reality_screen_status: unknown
@@ -404,6 +505,8 @@ next_action:
   triggered_by: []
   expected_information_gain: null
   search_mode: null
+  search_cadence_mode: null
+  selected_workflow_pattern_ids: []
   selected_strategy_ids: []
   value_targets: []
   modules_to_load: []
