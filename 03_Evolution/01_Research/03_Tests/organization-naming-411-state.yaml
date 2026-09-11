@@ -6,13 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 57
+  snapshot_version: 58
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v56 保存 compactness / symmetry / stable-modern / understated-cleverness 偏好簇。
-    本快照记录第一轮陌生中性样本 Owner 反应并对偏好强度做校准；完整历史、候选现实证据与旧轮次继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v57 保存第一轮陌生中性偏好探测。
+    本快照记录第二轮对称/巧劲定向探测，并结束偏好校准阶段，正式恢复 form-diverse generation。
+    完整历史、候选现实证据与旧轮次继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -23,16 +24,11 @@ constraint_registry:
     - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
     - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: short spoken effort preferred; ideal about 4 perceived beats and generally about 5 or fewer, confidence: high}
     - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken chunks / stress / corresponding sound structure preferred, confidence: high}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry or near-palindromic balance is an optional strong bonus, especially when it can echo cycle/return, confidence: high}
-    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained semantic trick / second-look reward is attractive; showy gimmick is not, confidence: high}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo currently observed, confidence: medium_high}
-    - {id: PREF-INITIAL-RCO, statement: R/C/O initials may feel reassuring but remain observational only, confidence: low_medium}
-    - id: PREF-NONPERSONAL-BRAND-IDENTITY
-      statement: names that read strongly as personal given names reduce appeal relative to equally compact brand-like forms.
-      source_type: owner_observed
-      confidence: medium
-      stability: emerging
-      use: prefer_not_gate
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry or near-palindromic balance is a meaningful optional bonus, especially when it can echo cycle/return, confidence: high}
+    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained semantic or structural trick / second-look reward is attractive; showy gimmick is not, confidence: high}
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo observed; preserve form diversity, confidence: medium_high}
+    - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: strong personal given-name reading reduces appeal, confidence: medium_high}
+    - {id: PREF-INITIAL-RCO, statement: R/C/O initials may feel reassuring but remain observational only, confidence: low_medium, usage: observe_only_not_generation_rule}
 
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
@@ -40,39 +36,28 @@ mission_value_model:
     - cycle_or_return_may_be_carried_by_visual_or_phonological_structure
     - subtle_semantic_compression_may_carry transformation / know-new style relations
 
-neutral_probe:
-  round_id: RND-088
+neutral_probe_2:
+  round_id: RND-089
   sample_status: preference_probe_only_not_candidates
   samples:
-    - {id: A, name: Coren, owner_reaction: acceptable, notes: reminded Owner of Intel Core}
-    - {id: B, name: Ovaro, owner_reaction: positive, notes: stronger than A; interesting; not boring}
-    - {id: C, name: Nolen, owner_reaction: positive, notes: stable; feels like a good name}
-    - {id: D, name: Rova, owner_reaction: strong_positive, notes: interesting; simple; direct; memorable}
-    - {id: E, name: Aroa, owner_reaction: positive, notes: simple; visually young; slightly less easy to read}
-    - {id: F, name: Ceral, owner_reaction: neutral, notes: ordinary / weak pull}
-    - {id: G, name: Nover, owner_reaction: positive, notes: acceptable}
-    - {id: H, name: Orin, owner_reaction: strong_positive, notes: memorable; simple; easy to remember}
-    - {id: I, name: Rilor, owner_reaction: mildly_positive, notes: simple; moderately memorable}
-    - {id: J, name: Valeo, owner_reaction: neutral, notes: acceptable but weak pull}
-    - {id: K, name: Civen, owner_reaction: neutral_negative, notes: feels like a person name}
-    - {id: L, name: Evara, owner_reaction: neutral_negative, notes: feels like a person name}
-  provisional_order_by_pull:
-    strongest: [H, D, B]
-    positive: [C, G, E]
-    acceptable_mild: [A, I]
-    neutral_or_weak: [F, J]
-    reduced_by_person_name_reading: [K, L]
+    - {id: A, name: Rovor, owner_reaction: positive, notes: symmetry noticed and considered interesting}
+    - {id: B, name: Rovek, owner_reaction: positive, notes: has a wink-like feel; interesting}
+    - {id: C, name: Nolon, owner_reaction: mildly_positive, notes: acceptable but no clear reason or strong pull}
+    - {id: D, name: Norel, owner_reaction: acceptable_neutral, notes: can accept; no special feeling}
+    - {id: E, name: Ovelo, owner_reaction: positive, notes: interesting}
+    - {id: F, name: Ovelin, owner_reaction: neutral, notes: ordinary}
+    - {id: G, name: Noven, owner_reaction: neutral, notes: ordinary}
+    - {id: H, name: Teral, owner_reaction: slightly_above_neutral, notes: only a little better than average}
   findings:
-    - unfamiliar neutral samples produced meaningful discrimination, unlike mature-brand anchors
-    - compactness and easy memorability correlate with stronger pull in this batch
-    - stable/brand-like forms outperform forms perceived as personal given names
-    - Owner still tolerates substantial form variation; no single morphotype dominates
-    - R/C/O initial hypothesis is not independently confirmed: strong pull includes O/R, but N-start Nolen also performs well and C-start examples are mixed
-    - visual youthfulness can help but does not override read-aloud ease (Aroa)
-    - external semantic association can affect reaction (Coren -> Intel Core)
+    - symmetry produces positive pull when it also creates a distinctive but natural identity; Rovor outperforms flatter controls
+    - symmetry alone is insufficient: Nolon remains only mildly positive
+    - understated wink / second-look character is independently attractive when recoverability remains easy; Rovek confirms this direction
+    - compactness remains baseline but does not by itself create pull
+    - Ovelo outperforms Ovelin, suggesting visual/rhythmic compactness plus distinctive shape matters more than simple phonological smoothness
+    - Owner preference cluster is now sufficiently calibrated to resume formal generation without another probe
 
 expression_profile:
-  status: calibrated_after_neutral_probe_1
+  status: calibrated_ready_for_generation
   desired_axes:
     stability: high
     harmony: high
@@ -80,23 +65,57 @@ expression_profile:
     modernity: medium_high
     compact_spoken_identity: high
     easy_memorability: high
-    rhythmic_balance: high
-    visual_balance: high_optional_bonus
+    nonpersonal_brand_identity: high
+    rhythmic_balance: high_optional_bonus
+    visual_balance_or_cycle_echo: medium_high_optional_bonus
     understated_cleverness: medium_high_optional_bonus
-    personal_given_name_reading: prefer_low
     showiness_or_gimmick: low
   interpretation:
-    - strongest confirmed cross-sample signal is compact, brand-like, easy-to-hold identity
-    - stable-modern remains supported
-    - symmetry and cleverness remain bonuses requiring further controlled comparison
-    - initials remain weak evidence only
+    - compact + brand-like + easy-to-hold identity is the baseline
+    - symmetry and restrained cleverness are real positive bonuses, but only when natural
+    - personal-name reading is a soft negative
+    - no morphotype class should be closed; preserve meaningful form diversity
+    - R/C/O initials remain too weak for intentional bias
+
+search_control:
+  mode: form_diverse_generation_reallocated
+  search_cadence:
+    mode: portfolio_batch
+    target: 4_to_6 material_owner_ready_finalists with morphotype diversity
+    stop_condition: new owner-ready candidate(s) materially expand the choice space, or sampled forms fail intrinsic/reality gates with low information gain
+  generation_isolation:
+    level: best_effort_same_context
+    claim_policy: sanitized logical briefs only; no literal blindness claim
+  finalist_template_use: prohibited
+  reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
+
+workflow_scheduler:
+  active_patterns:
+    - {pattern_id: category_parallel, status: active, question_to_answer: can distinct morphotypes produce compact stable-modern brand identities under the calibrated Owner profile?}
+    - {pattern_id: creative_linguistic_parallel, status: active_support, question_to_answer: can cleverness/symmetry survive recoverability checks without collapsing creativity?}
+
+method_scheduler:
+  priority_morphotypes:
+    - MT-LEXICAL-SINGLE
+    - MT-BLEND
+    - MT-ROOT-DERIVED
+    - MT-OPAQUE-COINAGE
+    - MT-NONENGLISH-LEXICAL
+    - MT-TYPOGRAPHIC-SYMBOLIC
+  preserve_minor_budget:
+    - MT-PHRASE
+    - MT-TRANSPARENT-COMPOUND
+  task_local_preferences_not_templates:
+    - compact_stable_modern
+    - natural_symmetry
+    - restrained_second_look_reward
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   hypothesis_id: HYP-004
-  latest_evidence: unfamiliar neutral probes discriminate preference better than famous mature-brand anchors; Owner preference discovery can materially improve search allocation without becoming a hard template.
+  latest_evidence: two-stage Owner preference probes materially improved search allocation; mature-brand anchors found no taboos, while unfamiliar neutral samples discriminated compactness, brand-likeness, non-personal identity, symmetry and understated cleverness.
   stable_skill_rewrite_allowed_now: false
-  reason: current Skill already supports Owner preference / expression_profile / feedback_refinement; evidence concerns scheduling and probe design, still under method-hypothesis validation.
+  reason: current Skill already supports Owner preference / expression_profile / feedback_refinement; remaining question is whether the preference-probe trigger/timing generalizes across another Naming Job or regression.
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -108,23 +127,23 @@ candidates:
 
 current_state:
   finalists: [N096, N113, N117, N119]
-  search_mode: owner_preference_probe_then_generation_reallocation
-  biggest_unknown: >-
-    Whether symmetry / understated cleverness provide additional pull beyond the now-confirmed compact-brand-like-stable signal, and how to use these preferences without collapsing formal search diversity.
+  search_mode: form_diverse_generation_reallocated
+  biggest_unknown: Which materially different name forms can now survive intrinsic + recoverability + reality + .org gates while fitting the calibrated Owner profile without imitating probe strings or current finalists?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: run_targeted_neutral_probe_2_then_resume_form_diverse_generation
-  target: isolate symmetry and understated-cleverness effects while holding compactness/recoverability roughly constant
+  action: resume_form_diverse_generation_with_calibrated_owner_profile
+  target: produce one_or_more_new_materially_distinct_owner_ready_candidates
   rationale: >-
-    Probe 1 confirmed that unfamiliar samples reveal useful preference signal. A small second probe should test the two least-calibrated high-value bonuses (symmetry and subtle cleverness), then formal naming search should resume with a broad morphotype portfolio weighted toward compact, stable-modern, non-personal brand identity.
-  requires_owner: true_for_probe_2_response
+    Two unfamiliar probes have reduced preference uncertainty enough to justify formal search. Preserve morphotype breadth, weight compact stable-modern non-personal brand identity, and treat natural symmetry/understated cleverness as bonuses only.
+  expected_information_gain: high
+  requires_owner: false_until_new_owner_ready_candidate_exists
 
 stop:
-  status: continue_after_owner_probe_2
+  status: continue
+  reason: preference calibration is sufficient; formal search should now resume autonomously
   unresolved:
-    - symmetry effect strength
-    - understated cleverness effect strength independent of recoverability
+    - new morphotype finalists still need intrinsic/reality/domain validation
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
