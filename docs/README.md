@@ -1,80 +1,121 @@
-# InteropAtlas Documentation
+# InteropAtlas 正式文档地图
 
-This directory contains InteropAtlas architecture, methodology, governance, research, and design documentation.
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Updated At: 2026-09-05T15:06:00+08:00
+Metadata Provenance: direct_record
+Lifecycle Time Provenance: direct_record
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human Owner — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Owner-authorized consolidation
+  GitHub Actor: ff6962757
+-->
 
-## Start here
+`docs/` 只保存**今天进入 InteropAtlas 时仍需要理解或遵守的 Living Documents**。它不是研究档案，也不是项目施工日志。
 
-- [`interopatlas-definition-and-scope-v0.2.zh-CN.md`](interopatlas-definition-and-scope-v0.2.zh-CN.md) — **当前项目定义与收录边界：InteropAtlas 是互操作知识地图，不只收录正式标准。**
-- [`knowledge-object-classification-specification-v0.1.zh-CN.md`](knowledge-object-classification-specification-v0.1.zh-CN.md) — **知识对象分类规范草案：区分 Normative Artifact、Mature Precedent、Method、Implementation 等，并规定证据与权威性边界。**
-- [`roadmap.zh-CN.md`](roadmap.zh-CN.md) — 当前路线图、优先级与近期执行顺序。
-- [`foundation-first-phase-v0.1.zh-CN.md`](foundation-first-phase-v0.1.zh-CN.md) — **当前 Foundation First 阶段：先建立仓库结构、Human Interface 标准包、Human–AI 协作 Profile，再恢复网站实现。**
-- [`foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md`](foundation-work-package-a-completion-audit-2026-09-01.zh-CN.md) — **Work Package A 完成审计：Repository Gate 与 Open Collaboration Gate 已达到 Draft Profile 门槛。**
-- [`work-package-a-verification-2026-09-01.zh-CN.md`](work-package-a-verification-2026-09-01.zh-CN.md) — **重新核验 Work Package A：确认 A 在原始定义的 Draft/Profile 层已经完成，并记录进入 B 前的集成债务。**
-- [`work-package-b-pilot-audit-2026-09-01.zh-CN.md`](work-package-b-pilot-audit-2026-09-01.zh-CN.md) — **Work Package B Pilot Audit：公开任务协议、Lease、Handoff、PR Review 已实际试运行，并记录 Identity / Issue Fields / Ruleset friction。**
-- [`work-package-a-reference-intake-audit-2026-09-01.zh-CN.md`](work-package-a-reference-intake-audit-2026-09-01.zh-CN.md) — **Work Package A 参考依据入库审计：把实际使用的标准与成熟先例从研究文档推进到 Canonical Atlas，并记录暂缓建模项。**
-- [`route-alignment-audit-2026-09-01.zh-CN.md`](route-alignment-audit-2026-09-01.zh-CN.md) — 2026-09-01 多会话 / 仓库路线对齐审计。
-- [`five-route-operating-model.zh-CN.md`](five-route-operating-model.zh-CN.md) — 五路线协同模型：Human、Machine、Curation、Trust、Governance；Open Collaboration 当前作为横向协作层。
-- [`project-development-principles.zh-CN.md`](project-development-principles.zh-CN.md) — 当前项目建设原则与最小治理规则。
-- [`prior-art-and-method-reference.zh-CN.md`](prior-art-and-method-reference.zh-CN.md) — 可持续维护的 Existing Standards & Prior Art / 参考项目与方法索引。
+研究、实验和变化过程进入 `03_Evolution/01_Research`、`02_Experiments`、`03_Change`。
 
-## Foundation work
+## 三个主要入口
 
-### Repository Foundation
+```text
+docs/
+├── README.md
+├── 01_Foundation/   项目为什么存在、是什么、长期往哪里走
+├── 02_System/       知识系统怎样组成、怎样被人和 Agent 使用
+└── 03_Operation/    项目怎样协作、治理和持续维护
+```
 
-- [`repository-structure-profile-v0.1.zh-CN.md`](repository-structure-profile-v0.1.zh-CN.md) — **Repository Structure Profile v0.1：Layered Monorepo、Artifact Taxonomy、Target Zones、迁移合同与 15 条 IA-RS Requirements。**
-- [`repository-structure-prior-art-and-options-v0.1.zh-CN.md`](repository-structure-prior-art-and-options-v0.1.zh-CN.md) — GitHub / REUSE / W3C / MDN / CNCF / SPDX / Diátaxis 等成熟先例与三种结构候选比较。
-- [`repository-current-to-target-mapping-v0.1.zh-CN.md`](repository-current-to-target-mapping-v0.1.zh-CN.md) — 当前真实仓库逐项映射到 Artifact Taxonomy 与候选 Target Zone，不执行物理迁移。
+数字前缀表示主要注意力入口。同级主要类别默认只使用 `01 / 02 / 03`；需要更多概念时继续向下分层。但只有一两个文件的主题不应为了形式分类额外制造目录层级。
 
-### Open Collaboration Foundation
+完整规则见 [`Repository Structure Profile`](03_Operation/03_Project/repository-structure-profile.zh-CN.md)。
 
-- [`open-collaboration-profile-v0.1.zh-CN.md`](open-collaboration-profile-v0.1.zh-CN.md) — **Open Collaboration / Human–AI Collaboration Profile v0.1：角色、Agent-ready Work Item、任务图、生命周期、租约式认领、Handoff、Review / Authorization、GitHub-native mapping 与 IA-OC Requirements。**
-- [`task-reference-seeding-profile-v0.1.zh-CN.md`](task-reference-seeding-profile-v0.1.zh-CN.md) — **Reference Seeding 增补：任务发布时预装 Read First / Seed References，并要求执行者继续做 Freshness / Completeness Check。**
-- [`collaboration-task-system-v0.1.zh-CN.md`](collaboration-task-system-v0.1.zh-CN.md) — **Work Package B Operational Profile：把协作规范映射为 Status、Lease、Claim、Handoff、Review Classes 与 PR boundary。**
-- [`human-ai-open-collaboration-prior-art.zh-CN.md`](human-ai-open-collaboration-prior-art.zh-CN.md) — Human-Machine Teaming、NIST、Linux Foundation / AGENTS.md、GitHub 等开放协作 Prior Art。
-- [`open-collaboration-route-v0-notes.zh-CN.md`](open-collaboration-route-v0-notes.zh-CN.md) — 早期 Open Collaboration V0 工作笔记；现由正式 Draft Profile 取代其规范角色。
+## 01 Foundation
 
-### Remaining Foundation
+```text
+01_Foundation/
+├── 01_Definition/   Master Design / Definition & Scope
+├── 02_Principles/   Knowledge Philosophy & Principles
+└── 03_Direction/    Core Architecture / Long-term Roadmap
+```
 
-- **#14 Human Interface Standards Package** — Information Architecture / Presentation / Interaction / Visual / Accessibility-Conformance。
-- **#15 Non-normative Knowledge Object Model** — Mature Precedent / Method / Guideline / Heuristic / Framework / Design System 等非规范性知识对象。
-- **#7/#8/#9/#10** — Query / Validator / Curation / Evidence-Trust 基础。
+第一次理解项目优先阅读：[`Master Design`](01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md) → [`Definition & Scope`](01_Foundation/01_Definition/interopatlas-definition-and-scope.zh-CN.md) → [`Knowledge Philosophy`](01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md) → [`Architecture`](01_Foundation/03_Direction/architecture.zh-CN.md)。
 
-## Core routes
+## 02 System
 
-### Human Route
+```text
+02_System/
+├── 01_Knowledge/
+│   ├── 01_Model/
+│   ├── 02_Workspace/
+│   └── 03_Provenance/
+└── 02_Interface/
+    ├── 01_Foundation/   Human Interface Package / Primary Baseline
+    ├── 02_Profiles/     五个模块化 IA-HI Profile
+    └── 03_Contracts/    Compare / Search 等独立功能合同
+```
 
-- [`human-readable-route.zh-CN.md`](human-readable-route.zh-CN.md) — 人类可读路线：Visible → Actionable。
-- [`human-interface-specification-v0.1.zh-CN.md`](human-interface-specification-v0.1.zh-CN.md) — Human Interface 综合草案；当前作为 Standards Package 的输入，而不是已完成的基础。
-- [`human-interface-standards-baseline.zh-CN.md`](human-interface-standards-baseline.zh-CN.md) — Human Interface 外部标准基线与 Adopt → Profile → Extend → Invent 原则。
-- [`human-interface-reference-map.zh-CN.md`](human-interface-reference-map.zh-CN.md) — 将交互、信息架构、视觉、无障碍、图探索、测试等问题映射到标准、方法与参考实现。
-- [`human-readable-interaction-baseline.zh-CN.md`](human-readable-interaction-baseline.zh-CN.md) — 暂定交互基线与 Existing Standards & Prior Art。
-- [`human-interface-conformance-audit-2026-09-01.zh-CN.md`](human-interface-conformance-audit-2026-09-01.zh-CN.md) — 第一次 IA-HI v0.1 符合性审计；作为反馈材料保留。
-- [`object-page-shell-v0.1-plan.zh-CN.md`](object-page-shell-v0.1-plan.zh-CN.md) — Reference Implementation vertical slice；当前等待 Foundation Gate 后继续。
+Human Interface 不再维护一份并行 integrated specification；Package + 五个 Profile 是当前唯一主要规范入口。这个收口不等于 Stable Specification promotion。
 
-### Machine / Practice
+## 03 Operation
 
-- [`machine-readable-maintainable-route.zh-CN.md`](machine-readable-maintainable-route.zh-CN.md) — 机器可用 / 可维护路线：Loadable → Interoperable。
-- [`practice-feedback-loop.zh-CN.md`](practice-feedback-loop.zh-CN.md) — Atlas ↔ Engine 实践驱动反馈机制。
+```text
+03_Operation/
+├── 01_Collaboration/
+│   ├── open-collaboration-profile.zh-CN.md
+│   ├── agent-onboarding-context-continuity-profile.zh-CN.md
+│   └── agent-attribution-contribution-identity-profile.zh-CN.md
+├── 02_Governance/
+│   └── research-governance.zh-CN.md
+└── 03_Project/
+    ├── repository-structure-profile.zh-CN.md
+    ├── language-policy.zh-CN.md
+    ├── terminology-registry.md
+    └── project-development-model.zh-CN.md
+```
 
-## Architecture and modeling
+Open Collaboration 已吸收 Task Authority 与 Task Reference Seeding 的长期规则；任务协作、T0–T3 授权、Seed References 与 Freshness 只维护一个 Primary Home。Research Governance 独立负责研究深度、停止条件、证据与管理上浮。
 
-- [`architecture-v0.1.zh-CN.md`](architecture-v0.1.zh-CN.md) — 当前架构草案，已同步“互操作方案空间”定义。
-- [`flat-graph-and-dynamic-maps.zh-CN.md`](flat-graph-and-dynamic-maps.zh-CN.md) — Flat Objects + Rich Relations + Dynamic Maps。
-- [`visualization-direction.zh-CN.md`](visualization-direction.zh-CN.md) — 图形化关系呈现方向。
-- [`json-ld-fit-experiment.zh-CN.md`](json-ld-fit-experiment.zh-CN.md) — JSON-LD / linked-data 适配实验。
+## 第一次进入项目
 
-## Project-generated methods and standards
+人类贡献者：
 
-- [`project-generated-methods-standards.zh-CN.md`](project-generated-methods-standards.zh-CN.md) — IA 自身产生的方法、规范、标准与 Skills 的暂定治理方向。
-- [`language-policy.zh-CN.md`](language-policy.zh-CN.md) — 语言政策。
+```text
+README.md → Master Design → Definition & Scope → 按任务读取 Philosophy / Architecture → PROJECT_STATE.md
+```
 
-## Experiments
+智能体 / 维护者：
 
-- [`experiments/`](experiments/) — Engine、Coverage、开放替代等实践实验记录。
-- [`seed-experiment-01.zh-CN.md`](seed-experiment-01.zh-CN.md) — 早期 seed experiment。
+```text
+AGENTS.md → PROJECT_STATE.md → README.md → Master Design → 当前 Issue → 相关 Contract / Profile
+```
 
-## Documentation status
+不要为了“保险”一次读取整个 `docs/`。沿目录层级进入最小充分上下文。
 
-Unless explicitly marked otherwise, current architecture and methodology documents are living / provisional references rather than frozen InteropAtlas standards.
+## Primary Home 与生命周期
 
-Original prose documentation in this directory is licensed under **CC BY 4.0**, unless explicitly stated otherwise.
+```text
+Philosophy          为什么
+Master Design       整个系统长期是什么
+Definition / Scope  项目边界是什么
+Architecture        当前核心系统怎样组成
+Roadmap             阶段关系与长期顺序
+Specification       可执行规范
+Profile             特定场景的规范化约束
+PROJECT_STATE       项目现在在哪里
+Issue / PR           当前工作项
+Evolution           为什么形成、试过什么、怎样改变
+```
+
+维护文件前先判断：
+
+```text
+CURRENT   今天仍需理解 / 遵守 → docs/
+PROCESS   正在研究 / 实验 / 迁移 → 03_Evolution/
+HISTORY   已完成 / 被取代但值得保存 → Git history / 必要时 Evolution
+```
+
+一个长期概念只维护一个完整 Primary Home。其他文档只保留必要摘要和链接，不复制第二套完整定义。实时状态只进入 `PROJECT_STATE.md` / Issue / PR。
+
+本目录原创说明文档默认采用 **Creative Commons Attribution 4.0 International（CC BY 4.0）**，除非文件另有说明。

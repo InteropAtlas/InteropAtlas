@@ -1,0 +1,46 @@
+fixture_version: p5-v0
+sample_id: p5-identity-fapi2-security-profile
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://openid.net/specs/fapi-security-profile-2_0.html
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; no production migration attempted."
+candidate:
+  identity:
+    provisional_subject: "FAPI 2.0 Security Profile"
+    external_identifiers:
+      - namespace: openid_spec
+        value: "fapi-security-profile-2_0"
+    locators:
+      - https://openid.net/specs/fapi-security-profile-2_0.html
+    labels:
+      en: "FAPI 2.0 Security Profile"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: security_profile
+  version_publication:
+    version_label: "2.0"
+    publication_status: final
+    publication_date: "2025-02-22"
+  relations_hypothesis:
+    profiles:
+      - "OAuth 2.0 Authorization Framework"
+    part_of_framework:
+      - "FAPI 2.0"
+unknowns:
+  - "Whether 'profile' belongs in Kind, relation role, or both depends on whether the object has stable intrinsic profile semantics across domains."
+  - "The broader FAPI 2.0 framework may deserve its own Canonical Subject, but the profile must not be duplicated merely to express framework membership."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests a first-class Profile that constrains/uses other specifications and participates in a wider specification framework."
+  - "Useful for validating Family vs Kind vs relation-role separation."

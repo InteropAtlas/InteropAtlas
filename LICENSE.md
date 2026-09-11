@@ -1,5 +1,20 @@
 # Licensing
 
+<!-- InteropAtlas Document Metadata v0
+Document Status: active
+Document Created At: 2026-08-30T17:49:32+08:00
+Document Updated At: 2026-08-30T17:49:32+08:00
+Metadata Backfilled At: 2026-09-02T11:02:46+08:00
+Metadata Provenance: mixed
+Lifecycle Time Provenance: reconstructed_from_git
+Contribution Identity Provenance: owner_confirmed_cutoff
+Latest Substantive Contribution:
+  Initiator: Human — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human — ff6962757
+  GitHub Actor: ff6962757
+-->
+
 InteropAtlas is a multi-license repository. The applicable license depends on the type and location of the material.
 
 ## Software

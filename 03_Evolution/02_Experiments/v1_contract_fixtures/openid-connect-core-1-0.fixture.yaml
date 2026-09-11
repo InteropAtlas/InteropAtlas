@@ -1,0 +1,46 @@
+fixture_version: p5-v0
+sample_id: p5-identity-openid-connect-core-1-0
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://openid.net/specs/openid-connect-core-1_0.html
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; no production migration attempted."
+candidate:
+  identity:
+    provisional_subject: "OpenID Connect Core 1.0"
+    external_identifiers:
+      - namespace: openid_spec
+        value: "openid-connect-core-1_0"
+    locators:
+      - https://openid.net/specs/openid-connect-core-1_0.html
+      - https://openid.net/specs/openid-connect-core-1_0-18.html
+    labels:
+      en: "OpenID Connect Core 1.0"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: foundation_final_specification
+  version_publication:
+    base_version: "1.0"
+    publication_status: final
+    current_errata_set: 2
+    current_errata_date: "2023-12-15"
+    original_final_date: "2014-02-25"
+  lifecycle_hypothesis:
+    update_model: final_plus_errata
+unknowns:
+  - "Whether approved errata sets are publication versions of one Canonical Subject or separate Canonical publication artifacts remains a P5 decision."
+  - "The stable no-draft locator currently resolves to an approved errata-incorporating specification, while historical numbered/final locators remain distinct publication locators."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests a specification whose named 1.0 identity remains stable while approved errata revisions evolve the published text."
+  - "Useful counterexample to both immutable edition and continuously edited Living Standard models."

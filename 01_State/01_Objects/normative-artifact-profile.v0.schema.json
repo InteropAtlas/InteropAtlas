@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/normative-artifact-profile.v0.schema.json",
+  "title": "InteropAtlas Normative Artifact Strong Profile v0",
+  "description": "Structural contract for records routed to the Normative Artifact Strong Profile by the controlled Kind Registry. Kind membership is not duplicated here.",
+  "allOf": [
+    {"$ref": "identity-object.v0.schema.json"},
+    {
+      "type": "object",
+      "properties": {
+        "type": {"const": "artifact"},
+        "official_url": {"type": "string", "format": "uri"},
+        "version": {"type": "string"},
+        "publisher": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"}
+      }
+    }
+  ]
+}

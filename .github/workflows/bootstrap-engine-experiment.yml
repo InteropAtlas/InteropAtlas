@@ -3,31 +3,13 @@ name: Bootstrap Engine Experiment
 on:
   push:
     paths:
-      - 'standards/**'
-      - 'capabilities/**'
-      - 'scenarios/**'
-      - 'organizations/**'
-      - 'implementations/**'
-      - 'reference-projects/**'
-      - 'gaps/**'
-      - 'relations/**'
-      - 'maps/**'
-      - 'schemas/**'
-      - 'engine/**'
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
       - '.github/workflows/bootstrap-engine-experiment.yml'
   pull_request:
     paths:
-      - 'standards/**'
-      - 'capabilities/**'
-      - 'scenarios/**'
-      - 'organizations/**'
-      - 'implementations/**'
-      - 'reference-projects/**'
-      - 'gaps/**'
-      - 'relations/**'
-      - 'maps/**'
-      - 'schemas/**'
-      - 'engine/**'
+      - '01_State/**'
+      - '02_Runtime/01_Engine/**'
       - '.github/workflows/bootstrap-engine-experiment.yml'
   workflow_dispatch:
 
@@ -40,18 +22,69 @@ jobs:
         with:
           python-version: '3.12'
       - name: Install bootstrap dependency
-        run: pip install -r engine/requirements.txt
+        run: pip install -r 02_Runtime/01_Engine/requirements.txt
       - name: Verify repository layout contract
-        run: python engine/test_repository_layout.py
+        run: python 02_Runtime/01_Engine/test_repository_layout.py
+      - name: Verify semantic normalization contract
+        run: python 02_Runtime/01_Engine/test_semantic_model.py
+      - name: Verify controlled kind vocabulary contract
+        run: python 02_Runtime/01_Engine/test_kind_registry.py
+      - name: Verify semantic engine consumers
+        run: python 02_Runtime/01_Engine/test_semantic_consumers.py
+      - name: Verify semantic Human Route rendering
+        run: python 02_Runtime/01_Engine/test_semantic_rendering.py
+      - name: Verify permanent Human Route runtime contract
+        run: python 02_Runtime/01_Engine/test_human_route_runtime.py
+      - name: Verify deterministic Human Route Search projection
+        run: python 02_Runtime/01_Engine/test_human_route_search.py
+      - name: Verify dedicated Compare Human View
+        run: python 02_Runtime/01_Engine/test_human_route_compare.py
+      - name: Verify Human Evidence / Assessment presentation
+        run: python 02_Runtime/01_Engine/test_human_route_evidence.py
+      - name: Verify I6 representative migration pilot
+        run: python 02_Runtime/01_Engine/test_migration_pilot.py
+      - name: Verify v0 identity and profile schemas
+        run: python 02_Runtime/01_Engine/test_v0_schemas.py
+      - name: Verify relation compatibility contract
+        run: python 02_Runtime/01_Engine/test_relation_model.py
+      - name: Verify Gate B minimal Compare contract
+        run: python 02_Runtime/01_Engine/test_minimal_compare_contract.py
+      - name: Run deterministic Machine Review
+        run: |
+          mkdir -p build
+          set +e
+          python 02_Runtime/01_Engine/machine_review.py --root . --json build/machine-review.json --markdown build/machine-review.md
+          status=$?
+          cat build/machine-review.md >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - name: Upload Machine Review report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: machine-review-report
+          path: |
+            build/machine-review.json
+            build/machine-review.md
+          if-no-files-found: warn
       - name: Report resolved graph health
-        run: python engine/graph_index.py
+        run: python 02_Runtime/01_Engine/graph_index.py --root .
       - name: Run deterministic supportability query
-        run: python engine/bootstrap_query.py --capability automated_build_deployment
+        run: python 02_Runtime/01_Engine/bootstrap_query.py --root . --capability automated_build_deployment
+      - name: Build complete human-readable site
+        run: |
+          python 02_Runtime/01_Engine/render_site_semantic.py --root . --output build/site
+          test -f build/site/objects/yaml_1.2.2.html
+          test -f build/site/objects/forgejo_actions.html
+          test -f build/site/objects/automated_build_deployment.html
+          test -f build/site/objects/apple.html
+          test -f build/site/search.html
+          test -f build/site/search-index.json
+          test -f build/site/compare/automated_build_deployment--forgejo_actions--github_actions.html
       - name: Render three human-readable object types
         run: |
-          python engine/render_markdown.py forgejo_actions --output build/implementations/forgejo-actions.md
-          python engine/render_markdown.py automated_build_deployment --output build/capabilities/automated-build-deployment.md
-          python engine/render_markdown.py yaml_1.2.2 --output build/standards/yaml-1.2.2.md
+          python 02_Runtime/01_Engine/render_markdown.py forgejo_actions --root . --output build/implementations/forgejo-actions.md
+          python 02_Runtime/01_Engine/render_markdown.py automated_build_deployment --root . --output build/capabilities/automated-build-deployment.md
+          python 02_Runtime/01_Engine/render_markdown.py yaml_1.2.2 --root . --output build/standards/yaml-1.2.2.md
           echo '=== Implementation ==='
           cat build/implementations/forgejo-actions.md
           echo '=== Capability ==='

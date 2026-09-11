@@ -1,0 +1,42 @@
+fixture_version: p5-v0
+sample_id: p5-identity-html-living
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://html.spec.whatwg.org/multipage/
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; no production migration attempted."
+candidate:
+  identity:
+    provisional_subject: "HTML Living Standard"
+    external_identifiers:
+      - namespace: whatwg_spec
+        value: "html"
+    locators:
+      - https://html.spec.whatwg.org/multipage/
+    labels:
+      en: "HTML"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: living_standard
+  version_publication:
+    publication_status: living_standard
+    observed_last_updated: "2026-09-02"
+  lifecycle_hypothesis:
+    update_model: continuous
+unknowns:
+  - "A continuously updated source should not create a new Canonical Subject for every upstream edit; what revision evidence should be persisted remains a P5/P6 decision."
+  - "Observed last-updated time is source publication metadata, not IA record_updated_at or last_verified_at."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests stable subject identity under a Living Standard publication model."
+  - "The source locator is current and mutable, so later evidence/snapshot handling must not confuse locator stability with identity stability."

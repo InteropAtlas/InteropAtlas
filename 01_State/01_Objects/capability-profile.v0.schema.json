@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://interopatlas.org/schemas/capability-profile.v0.schema.json",
+  "title": "InteropAtlas Capability Strong Profile v0",
+  "allOf": [
+    {"$ref": "identity-object.v0.schema.json"},
+    {
+      "type": "object",
+      "required": ["category"],
+      "properties": {
+        "type": {"const": "concept"},
+        "kind": {"const": "capability"},
+        "category": {
+          "type": "string",
+          "enum": ["sense", "transport", "represent", "compute", "reason", "communicate", "coordinate", "act", "store", "identity_trust", "govern"]
+        },
+        "layers": {
+          "type": "array",
+          "items": {"type": "string"},
+          "uniqueItems": true
+        },
+        "domains": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+          "uniqueItems": true
+        },
+        "parent_capabilities": {
+          "type": "array",
+          "items": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]*$"},
+          "uniqueItems": true
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,293 @@
+# InteropAtlas Definition & Scope v0.3
+
+<!-- InteropAtlas Document Metadata v0
+Document Status: Project Definition / Provisional
+Document Created At: 2026-09-04T21:55:00+08:00
+Document Updated At: 2026-09-09T10:34:00+08:00
+Translation Source: interopatlas-definition-and-scope.zh-CN.md
+Translation Source Blob SHA: cccf3cd7aff49d91e4b2be75177408b4586d59a2
+Metadata Provenance: direct_record
+Lifecycle Time Provenance: direct_record
+Contribution Identity Provenance: commit_explicit
+Latest Substantive Contribution:
+  Initiator: Human Owner — ff6962757
+  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  Reviewer: Human Owner — ff6962757
+  GitHub Actor: ff6962757
+-->
+
+> Status: Project Definition / Provisional
+>
+> Purpose: update the project definition and inclusion boundary of InteropAtlas. This document defines what the project is, what it includes, and why; it does not directly freeze the Schema or object `type` system.
+
+[简体中文](interopatlas-definition-and-scope.zh-CN.md) | [English](interopatlas-definition-and-scope.md)
+
+## 1. Core definition
+
+InteropAtlas is no longer defined as a standards directory that includes only formal standards.
+
+A more accurate definition is:
+
+> **InteropAtlas is an open, machine-readable, continuously analyzable knowledge map of interoperability. It describes and connects existing standards, mature precedents, methods and guidelines, implementations, organizations, capabilities, scenarios, relations, evidence, and open gaps so that Humans and machines can understand the real-world Interoperability Solution Space.**
+
+Interoperability remains the project's problem boundary. Expanding the kinds of objects included does not mean allowing the domain boundary to expand without limit.
+
+### 1.1 Interoperability working model: Exchange, Alignment, Coordination
+
+InteropAtlas currently uses three **parallel, non-exclusive** problem dimensions to reason about and organize interoperability across domains:
+
+- **Exchange — can it get across?** Can two or more independent systems or actors establish a usable interaction path and successfully exchange signals, data, requests, capabilities, resources, or control? This dimension often includes parts of physical, technical, and syntactic interoperability, but it is not identical to any one established interoperability layer.
+- **Alignment — does it line up?** Once exchange occurs, can the parties maintain sufficiently consistent interpretations of structure, meaning, identity, capability, state, units, and context so that the same information, capability, or state remains corresponding across boundaries?
+- **Coordination — can they get the job done?** Can actors with their own goals, states, permissions, and constraints organize their actions under rules, processes, commitments, and responsibilities so that a cross-actor, cross-system, or cross-organizational process can be completed reliably?
+
+These dimensions are **not a strict sequence, maturity ladder, or protocol stack**. A standard, protocol, method, implementation, or governance mechanism may address more than one dimension at the same time. They are best treated as IA's problem-location framework:
+
+- **Exchange** primarily addresses the exchange boundary;
+- **Alignment** primarily addresses the meaning boundary;
+- **Coordination** primarily addresses the action boundary.
+
+This working model does not replace established interoperability taxonomies. The European Interoperability Framework / Interoperable Europe Act explicitly distinguishes legal, organisational, semantic, and technical interoperability. LCIM (Levels of Conceptual Interoperability Model) distinguishes technical, syntactic, semantic, pragmatic / dynamic, and conceptual layers.[^eif][^lcim]
+
+IA's model is a problem-oriented synthesis informed by that prior work: **Exchange** roughly absorbs technical / syntactic questions about whether effective exchange is possible; **Alignment** primarily captures semantic questions about whether meaning is preserved and corresponding; **Coordination** covers pragmatic, organisational, legal, and governance questions about how independent actors complete action together. This mapping is explanatory rather than one-to-one.
+
+The shortest user-facing expression is therefore:
+
+> **Exchange · Alignment · Coordination**  
+> **Get across · Line up · Get the job done**
+
+## 2. Why not only “standards”
+
+Building real systems usually depends on three kinds of knowledge at the same time:
+
+1. **Normative knowledge** — formally specifies how systems should or must interoperate;
+2. **Practiced knowledge** — approaches validated in the real world by mature projects, ecosystems, or organizations;
+3. **Explanatory / methodological knowledge** — methods and guidance that help people understand, design, compare, implement, and evaluate solutions.
+
+Collecting only formal standards creates structural blind spots:
+
+- some important practices are widely adopted without becoming international standards;
+- some problems have reliable reference implementations only in mature projects or Design Systems;
+- some design problems depend primarily on methods such as HCI, Information Architecture, or Docs-as-Code;
+- some standards exist without mature implementations;
+- some mature implementations exist without specifications;
+- some problems are themselves Open Gaps where both standards and mature precedents are insufficient.
+
+InteropAtlas should therefore map the **Solution Space**, not merely the **Standards Space**.
+
+## 3. Existing standards and mature precedents must remain distinct
+
+Expanding scope must not come at the expense of semantic clarity.
+
+InteropAtlas MUST NOT describe a mature precedent as a formal standard, and MUST NOT automatically elevate a practice into a normative requirement merely because a large organization uses it.
+
+For example:
+
+- ISO 9241-110 is a formal international standard;
+- WCAG 2.2 is a W3C Recommendation and also has an international-standard identity through ISO/IEC 40500:2025;
+- WAI-ARIA APG is an Authoring Practice / Pattern Guide;
+- GOV.UK Design System is a mature Design System / Reference Implementation;
+- GitHub Community Health represents mature platform-level collaboration mechanisms and conventions;
+- MDN Browser Compat Data is a mature machine-readable knowledge project;
+- CNCF Landscape is a mature technology directory / Landscape project;
+- Diátaxis is a documentation-method framework;
+- an open-source library may simply be an Implementation.
+
+All can belong in the Atlas, but their authority, normativity, openness, maturity, and purpose differ.
+
+## 4. First-generation knowledge-object categories
+
+The following are conceptual categories, not final Schema `type` values.
+
+### A. Normative Artifacts
+
+Formal or quasi-formal artifacts defining how something should be done or how systems interoperate.
+
+They may include Standards, Specifications, Protocols, Profiles, API / Interface specifications, Data formats, device classes, and similar artifacts.
+
+Relevant properties include publishing or governing organization, formal status, version, access to the normative text, patent / license conditions, conformance / certification, and vendor neutrality.
+
+### B. Mature Precedents / Prior Art
+
+Objects that have demonstrated repeatable reference value through real projects, organizations, ecosystems, or sustained practice, without necessarily having formal normative status.
+
+They may include mature knowledge directories / Landscapes, large-scale data projects, open-source project structures, community collaboration mechanisms, Design Systems, Reference Architectures, long-running organizational or publishing patterns, and representative Cases / Precedents.
+
+A mature precedent entering the Atlas SHOULD satisfy at least the following:
+
+1. it has an identifiable and citable public source;
+2. it is not merely an individual's unvalidated temporary idea;
+3. there is evidence of real practice, use, adoption, or sustained maintenance;
+4. reusable lessons or patterns can be extracted from it;
+5. it has a clear relationship to an Interoperability Need, Capability, Governance, Human Interface, or Project Operation problem.
+
+“Maturity” should itself be an explainable, evidence-backed Assessment rather than an impression assigned by a maintainer.
+
+### C. Methods / Guidelines / Frameworks
+
+These primarily answer how to analyze, design, implement, validate, or organize something.
+
+They may include Methodologies, Guidelines, Heuristics, Frameworks, Design principles, Information Architecture methods, Human-centred design methods, and Docs-as-Code / documentation methods.
+
+Such objects can be highly mature without being formal Standards.
+
+### D. Implementations / Tools / Services
+
+Runnable systems that implement a specification, capability, or method.
+
+They include software, libraries, tools, services, platforms, hardware, firmware, and reference implementations.
+
+Implementation ≠ Standard.
+
+### E. Organizations / Governance Bodies
+
+These include SDOs, consortia, foundations, community groups, project governance bodies, companies, and public bodies where a concrete interoperability relationship exists.
+
+### F. Capabilities / Needs / Scenarios
+
+These describe why interoperability is needed and what a solution is expected to accomplish.
+
+They include Capabilities, Interoperability Needs, Scenarios, and Constraints.
+
+### G. Evidence / Sources / Claims
+
+These answer why a fact or Assessment should be believed.
+
+Long-term target:
+
+```text
+Claim / Fact
+   ↓
+Evidence
+   ↓
+Source
+   ↓
+version / retrieved_at / context / authority
+```
+
+### H. Relations
+
+Relations connect knowledge objects and express semantics such as:
+
+- `implements`;
+- `depends_on`;
+- `alternative_to`;
+- `compatible_with`;
+- `inspired_by`;
+- `governed_by`;
+- `profile_of`;
+- `maps_to`;
+- `bridges_to`;
+- and future relations for Methods / Precedents.
+
+### I. Assessments / Gaps
+
+These include Coverage Assessments, Compatibility Assessments, Openness Assessments, Gap Assessments, and confirmed Gap Cases.
+
+Assessment and Fact must remain separate.
+
+## 5. Formal meaning of Prior Art in InteropAtlas
+
+This project should prefer the phrase:
+
+> **Existing Standards & Prior Art**
+
+rather than using `Prior Art` alone when the distinction matters.
+
+Within IA, Prior Art is an umbrella research concept covering things that already existed before attempting to solve a problem: standards, specifications, methods, frameworks, mature projects, reference implementations, ecosystem conventions, research results, and governance models.
+
+Once an object enters the Canonical Atlas, however, it must return to its accurate type / kind rather than being generically labeled `prior_art`.
+
+Therefore:
+
+```text
+Prior Art Check (research activity)
+        ↓
+discover different objects
+        ↓
+Standard / Method / Precedent / Implementation / Organization / ...
+        ↓
+model each accurately
+```
+
+## 6. Inclusion boundary
+
+Even with a broader object range, the project must retain a clear Problem Boundary.
+
+An object's relationship to IA's core problem boundary should, in principle, be expressible through at least one of **Exchange, Alignment, or Coordination**. It is entirely normal for one object to address more than one dimension.
+
+An object entering InteropAtlas SHOULD satisfy at least one of the following:
+
+1. directly defines, constrains, or helps realize Exchange, Alignment, or Coordination between two or more entities, including the exchange and organization of information, capabilities, control, identity, resources, semantics, or behavior;
+2. provides an implementation for such interoperability;
+3. provides a mature method for designing, governing, validating, discovering, selecting, composing, or maintaining interoperable systems;
+4. is a mature interoperability case / precedent with reusable value;
+5. provides evidence necessary to evaluate a standard, implementation, method, or precedent;
+6. exposes an Open Gap in the existing Solution Space.
+
+The following are outside the core maintenance scope by default:
+
+- general knowledge without a clear interoperability relationship;
+- projects included only because they are famous;
+- personal opinions without reliable sources or verification;
+- pure brand / product directories with no extractable interoperability value;
+- cases containing only marketing claims without verifiable capability or practice evidence.
+
+## 7. Openness remains an important analysis axis, but not the only admission criterion
+
+A long-term goal of InteropAtlas remains increasing open alternatives and reducing places where no open alternative exists.
+
+To describe the Solution Space truthfully, however, the Atlas may include Open Standards, proprietary standards / protocols, open-source implementations, closed implementations, vendor platforms, and mature proprietary precedents, provided their facts and openness dimensions are recorded accurately.
+
+Otherwise the Atlas cannot answer how much of the real Solution Space is covered by open solutions.
+
+## 8. Impact on the current model
+
+The current `reference_project` model already carries some mature precedents provisionally, but its semantics are too narrow.
+
+For example, the current schema's `project_kind` primarily addresses standards landscapes, catalogs, knowledge graphs, navigators, and similar projects. It does not accurately represent Methods, Guidelines, Design Systems, Governance Patterns, Repository Practices, or Case Studies.
+
+This definition therefore directly motivates research into a **Non-normative Knowledge Object Model**.
+
+Until that modeling work is complete:
+
+- do not bulk-rename existing `reference_project` objects;
+- do not force every mature precedent into `reference_project`;
+- do not immediately create a separate directory for every new conceptual category;
+- use this definition as the modeling requirement and let real objects drive the minimum Schema.
+
+## 9. Impact on project-positioning language
+
+Recommended short definition:
+
+> **An open, machine-readable, continuously analyzable knowledge map of interoperability.**
+
+Recommended interoperability problem statement:
+
+> **Exchange · Alignment · Coordination — get across · line up · get the job done.**
+
+Recommended expanded definition:
+
+> **InteropAtlas connects existing standards, mature precedents, methods, implementations, and open gaps to help Humans and machines understand, compare, compose, and improve interoperability solutions.**
+
+“World standards map” may remain an informal shorthand, but it should no longer be treated as the precise definition of the project's data scope.
+
+## 10. Construction principles
+
+This scope expansion continues to follow:
+
+> **Reuse Before Invent**
+>
+> **Adopt → Profile → Extend → Invent**
+
+And adds an explicit principle:
+
+> **Map the solution space, preserve the authority distinction.**
+
+This means:
+
+- include more broadly;
+- classify more precisely;
+- never erase the semantic boundaries among Standard, Method, Precedent, and Implementation merely because all are worth learning from.
+
+[^eif]: European Union, [Interoperable Europe Act, Regulation (EU) 2024/903](https://interoperable-europe.ec.europa.eu/Interoperable-Europe-Act-Regulation). Article 2 defines cross-border interoperability through legal, organisational, semantic, and technical requirements; Article 6 requires the EIF to provide a model and recommendations across those dimensions and governance.
+[^lcim]: Andreas Tolk, Saikou Y. Diallo & Charles D. Turnitsa, [“Applying the Levels of Conceptual Interoperability Model in Support of Integratability, Interoperability, and Composability for System-of-Systems Engineering”](https://digitalcommons.odu.edu/msve_fac_pubs/27/), 2007. The paper describes LCIM's technical, syntactic, semantic, pragmatic, dynamic, and conceptual layers; LCIM originated with Tolk & Muguira in 2003.

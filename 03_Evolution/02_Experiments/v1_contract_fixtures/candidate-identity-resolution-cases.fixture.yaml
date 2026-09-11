@@ -1,0 +1,105 @@
+# P6 #145 identity-resolution safety cases
+# Experimental fixture only; not Canonical state.
+---
+contract_version: candidate-object-v1
+candidate_id: test-new-rfc9114
+label: HTTP/3
+publisher: IETF
+family: standard
+kind: specification
+external_identifiers:
+  - namespace: rfc
+    value: "9114"
+locators:
+  - url: https://www.rfc-editor.org/rfc/rfc9114.html
+    role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons: []
+  merge_authorized: false
+unknowns: []
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  reviewer: null
+---
+contract_version: candidate-object-v1
+candidate_id: test-duplicate-bcp47
+label: BCP 47 Language Tags
+publisher: IETF
+family: standard
+kind: specification
+external_identifiers:
+  - namespace: rfc
+    value: "5646"
+locators:
+  - url: https://www.rfc-editor.org/rfc/rfc5646.html
+    role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+    - bcp47_rfc5646
+  reasons:
+    - Deterministic RFC identifier matches existing Canonical subject.
+  merge_authorized: false
+unknowns: []
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  reviewer: null
+---
+contract_version: candidate-object-v1
+candidate_id: test-possible-duplicate-example
+label: Example Profile 2.0
+publisher: Example Publisher
+family: standard
+kind: profile
+external_identifiers:
+  - namespace: example_spec
+    value: profile-2.0
+locators:
+  - url: https://example.invalid/profile-2.0
+    role: official
+identity_resolution:
+  state: possible_duplicate
+  matched_canonical_ids:
+    - example_existing_subject
+  reasons:
+    - Similar publisher identity evidence exists, but semantic identity has not been established.
+  merge_authorized: false
+unknowns:
+  - Whether this publication is a revision of the existing subject or a distinct profile.
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  reviewer: null
+---
+contract_version: candidate-object-v1
+candidate_id: test-identity-risk-multiple-collision
+label: Composite Example Standard
+publisher: Example Publisher
+family: standard
+kind: specification
+external_identifiers:
+  - namespace: example_spec
+    value: composite-a
+  - namespace: example_spec
+    value: composite-b
+locators:
+  - url: https://example.invalid/composite
+    role: official
+identity_resolution:
+  state: identity_risk
+  matched_canonical_ids:
+    - example_subject_a
+    - example_subject_b
+  reasons:
+    - Candidate identifier set may refer to more than one Canonical subject; merge/split decision requires escalation.
+  merge_authorized: false
+unknowns:
+  - Whether the source is a composite publication, family container, or one subject with aliases.
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+  reviewer: null

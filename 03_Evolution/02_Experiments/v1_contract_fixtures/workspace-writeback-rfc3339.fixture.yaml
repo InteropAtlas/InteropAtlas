@@ -1,0 +1,52 @@
+fixture_version: p5-v0
+sample_id: p5-workspace-writeback-rfc3339
+source:
+  legacy_refs:
+    - 01_State/02_Relations/date-time-standards.yaml#rfc3339_profiles_iso8601
+    - 03_Evolution/04_Experiments/v1_contract_fixtures/migration-c-rfc3339-profile.fixture.yaml
+  candidate_refs:
+    - docs/p5-migration-workspace-writeback-e2e-fit-test-v1-draft.zh-CN.md
+  official_sources: []
+contracts_under_test:
+  - relation
+  - evidence_assertion
+  - migration
+  - selection_projection_workspace
+  - human_agent_access
+mapping:
+  class: C
+  notes: "A lossy Graph/Compare projection surfaces the Legacy predicate 'extends' but links back to richer evidence/context; the discovered correction becomes a Candidate Patch rather than direct Canonical write-back."
+candidate:
+  workspace_observation:
+    target_relation_id: rfc3339_profiles_iso8601
+    projection_kind: evidence_compare
+    observed_problem: "The compact relation label 'extends' overstates certainty relative to the preserved Legacy caveat."
+  generated_interpretation:
+    status: derived_not_canonical
+    suggestion: "Represent the relation as profile semantics rather than exact extends semantics."
+  candidate_patch:
+    mutation_class: M1_or_M2_pending_review
+    target_id: rfc3339_profiles_iso8601
+    proposed_change:
+      legacy_predicate: extends
+      proposed_predicate: profile_of
+      mapping_state: provisional
+    evidence_basis:
+      - "Legacy relation notes explicitly state that extends is a temporary approximation for Internet profile semantics."
+    acceptance_state: candidate_only
+  provenance:
+    initiator: "Human — ff6962757"
+    executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
+    github_actor: "ff6962757"
+    reviewer: pending_independent_review
+unknowns:
+  - "Final relation vocabulary and exact mutation class are not frozen."
+conflicts:
+  - "Compact Legacy predicate and Human-readable caveat carry different certainty levels."
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Readable/lossy projection is not directly updatable."
+  - "Generated interpretation remains derived state; only the explicit candidate_patch enters Intake."
+  - "No production Canonical file is modified by this fixture."

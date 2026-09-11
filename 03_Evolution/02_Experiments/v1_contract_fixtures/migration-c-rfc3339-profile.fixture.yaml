@@ -1,0 +1,34 @@
+fixture_version: p5-v0
+sample_id: p5-migration-c-rfc3339-profile
+source:
+  legacy_refs:
+    - 01_State/02_Relations/date-time-standards.yaml#rfc3339_profiles_iso8601
+  candidate_refs: []
+  official_sources: []
+contracts_under_test:
+  - relation
+  - evidence_assertion
+  - migration
+mapping:
+  class: C
+  notes: "Promote the Legacy caveat that extends is only an approximation into explicit provisional assertion semantics."
+candidate:
+  id: rfc3339_profiles_iso8601
+  relation:
+    subject: rfc3339
+    object: iso_8601_1_2019
+  assertion:
+    legacy_predicate: extends
+    proposed_predicate: profile_of
+    mapping_state: provisional
+  assessment:
+    state: semantic_gap
+unknowns:
+  - "Final relation registry and exact predicate serialization are not frozen."
+conflicts:
+  - "Legacy machine predicate says extends while Human-readable notes identify profile semantics."
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "The dry-run preserves the Legacy predicate and caveat rather than silently rewriting the fact."

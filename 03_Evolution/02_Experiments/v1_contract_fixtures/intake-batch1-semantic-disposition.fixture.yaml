@@ -1,0 +1,89 @@
+fixture_version: p5-v0
+sample_id: p5-intake-batch1-semantic-disposition
+source:
+  legacy_refs:
+    - 01_State/01_Objects/bcp47-rfc5646.yaml
+  candidate_refs:
+    - docs/p5-bounded-intake-batch-1-preflight-v1-draft.zh-CN.md
+    - docs/p5-bounded-intake-batch-1-semantic-review-v1-draft.zh-CN.md
+    - 03_Evolution/04_Experiments/v1_contract_fixtures/intake-batch1-envelope.fixture.yaml
+  official_sources:
+    - https://www.rfc-editor.org/info/rfc9114/
+    - https://www.iso.org/standard/27001
+    - https://fetch.spec.whatwg.org/
+    - https://openid.net/specs/fapi-security-profile-2_0.html
+    - https://www.rfc-editor.org/info/rfc5646/
+contracts_under_test:
+  - identity
+  - family_kind
+  - evidence_assertion
+  - lifecycle
+  - human_agent_access
+mapping:
+  class: null
+  notes: "Experiment-level semantic dispositions; no Canonical acceptance is authorized."
+candidate:
+  review_state:
+    semantic_review: executor_self_review_only
+    independent_review: pending
+    canonical_acceptance: not_authorized
+  dispositions:
+    - candidate_id: intake1-rfc9114
+      experiment_disposition: accept_to_ordinary_intake
+      production_state: candidate_only
+      mutation_impact_hypothesis: M1
+      automation:
+        preflight: high
+        final_semantic_acceptance: review_required
+    - candidate_id: intake1-iso27001-2022
+      experiment_disposition: defer
+      production_state: candidate_only
+      unblock_requires:
+        - work_vs_edition_identity_boundary
+        - amendment_representation_boundary
+      automation:
+        preflight: high
+        final_semantic_acceptance: not_safe_to_automate
+    - candidate_id: intake1-fetch-living
+      experiment_disposition: accept_to_ordinary_intake_with_boundary
+      production_state: candidate_only
+      mutation_impact_hypothesis: M1
+      required_boundary:
+        - upstream_revision_freshness_separate_from_ia_verification_and_record_lifecycle
+      automation:
+        preflight: high
+        final_semantic_acceptance: review_required
+    - candidate_id: intake1-fapi2-security-profile
+      experiment_disposition: defer
+      production_state: candidate_only
+      unblock_requires:
+        - minimum_profile_base_framework_relation_semantics
+        - minimally_valid_profile_representation
+      automation:
+        preflight: medium_high
+        final_semantic_acceptance: not_safe_to_automate
+    - candidate_id: intake1-bcp47-rfc5646
+      experiment_disposition: duplicate_existing_overlap
+      production_state: no_new_subject
+      existing_ia_id: bcp47_rfc5646
+      automation:
+        preflight: high
+        duplicate_routing: high_when_identifier_match_is_strong
+  batch_metrics:
+    total: 5
+    proceed: 2
+    defer: 2
+    duplicate: 1
+    reject: 0
+    production_writes: 0
+unknowns:
+  - "Independent semantic review has not occurred."
+  - "Minimal-admission relation/classification rule for broad ordinary intake is not yet frozen."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Accept means suitable to proceed through ordinary intake, not accepted into Canonical."
+  - "Defer is preserved separately from reject."
+  - "One novel semantic case must not block unrelated ordinary intake."

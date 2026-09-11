@@ -1,0 +1,54 @@
+fixture_version: p5-v0
+sample_id: p5-identity-rfc9110
+source:
+  legacy_refs: []
+  candidate_refs: []
+  official_sources:
+    - https://www.rfc-editor.org/info/rfc9110/
+contracts_under_test:
+  - identity
+  - family_kind
+  - lifecycle
+mapping:
+  class: null
+  notes: "Fresh real-data sample; Legacy mapping not yet selected."
+candidate:
+  identity:
+    provisional_subject: "RFC 9110 — HTTP Semantics"
+    external_identifiers:
+      - namespace: rfc
+        value: "9110"
+      - namespace: std
+        value: "97"
+    locators:
+      - https://www.rfc-editor.org/rfc/rfc9110.html
+    labels:
+      en: "HTTP Semantics"
+  classification:
+    provisional_family: normative_specification
+    provisional_kind: ietf_rfc
+  version_publication:
+    publication_status: internet_standard
+    published: "2022-06"
+  relations_hypothesis:
+    obsoletes:
+      - RFC 2818
+      - RFC 7230
+      - RFC 7231
+      - RFC 7232
+      - RFC 7233
+      - RFC 7235
+      - RFC 7538
+      - RFC 7615
+      - RFC 7694
+    updates:
+      - RFC 3864
+unknowns:
+  - "Whether HTTP as a broader protocol family/work should be a separate Canonical Subject from RFC 9110 is a P5 identity decision."
+conflicts: []
+expected:
+  outcome: pass
+  diagnostics: []
+notes:
+  - "Tests that RFC number and STD number are external identifiers, while the RFC Editor URL is a locator."
+  - "Tests predecessor/successor relations without treating them as same-subject aliases."
