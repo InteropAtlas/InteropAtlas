@@ -6,16 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 63
+  snapshot_version: 64
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v62 首次将 N121 Common Refrain 暴露给 Owner。
-    Owner 立即发现 Common/Commons 语义反复出现。审计确认这是 runtime/controller fidelity failure：
-    Mission/Value Model 中的字面 token Commons 被 meaning-first generation 重新当作高权重 lexical material，
-    违反稳定 Skill 的 Value Model != Name Job 与 mission-not-keyword-compression 不变量。
-    本快照执行 semantic-anchor reset；完整历史保留在 Git history / Issue #411。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v63 执行 semantic-anchor reset，
+    将 literal mission tokens 从 Generator context 隔离。本快照记录 reset 后第一批 clean divergence：
+    新生成区域已取得明显 lexical/conceptual distance，证明恢复机制有效。完整历史由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -33,136 +31,125 @@ constraint_registry:
     - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
 
 mission_value_model:
-  core_structure: Commons -> Perspective -> Creation -> Commons
-  use_policy:
-    semantic_structure_available_to_controller: true
-    literal_tokens_available_as_generator_material: false
-    note: >-
-      Mission/value language informs relations, transformations, tensions, agency and desired-world structure.
-      Literal words such as common/commons/perspective/creation/return must not become privileged generation vocabulary unless independently selected by a separate territory decision.
+  core_structure_available_to_controller: true
+  literal_value_tokens_available_to_generator: false
+  generator_representation: abstract_relations_and_transformations_only
 
 integrity_incident:
   id: INC-SEMANTIC-ANCHOR-001
-  detected_by: owner
-  trigger: repeated Common/Commons family and N121 Common Refrain exposure
+  status: corrected_and_live_recovery_observed
   classification: controller_runtime_fidelity_failure
-  stable_skill_defect: false
-  mechanism: >-
-    meaning-first search overexposed literal mission wording; Controller treated a Value Model token as lexical generation material.
-    This caused semantic mode collapse even though construction morphotypes remained varied.
-  violated_invariants:
-    - mission_vision_not_reduced_to_keywords
-    - value_model_not_equal_name_job
-    - name_need_not_encode_complete_mission
-    - positive_generation_brief_should_use_transformed_relational_material_not_literal_mission_tokens
+  mechanism: literal Value Model wording leaked into meaning-first lexical material and caused semantic mode collapse
   correction:
-    - semantic_anchor_reset
     - quarantine_literal_mission_tokens_from_generator_context
-    - represent mission as abstract relations/transformations only in generation briefs
-    - require post_generation_check_for_literal_value_token_leakage
-    - do_not_treat_N121_as_owner_ready_evidence
+    - positive_abstract_generation_brief
+    - post_generation_literal_value_token_leakage_check
+  method_evolution_status: experience_candidate_for_regression_not_stable_skill_rewrite
 
 controller_only_quarantine:
-  literal_value_tokens:
-    - common
-    - commons
-    - perspective
-    - creation
-    - return
-  policy: >-
-    These tokens are not banned names and are not global negatives. They are temporarily Controller-only for generation-integrity recovery because they are contaminated anchors in this job.
-    Do not show this negative list to Generator; instead provide a positive brief using abstract relational/identity targets.
+  literal_value_tokens: [common, commons, perspective, creation, return]
+  policy: temporary task-local contamination quarantine; not global banned names; never expose list to Generator
 
 expression_profile:
-  baseline: meaningful + stable-modern + easy-to-hold + organization-scale + recoverable + non-personal
+  baseline: meaningful + stable-modern + organization-scale + recoverable + non-personal
   secondary_preferences: [compactness, rhythmic_balance]
   optional_bonuses: [visual_cycle_echo, understated_cleverness]
   anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend]
 
 search_control:
-  mode: semantic_anchor_reset_then_divergence
+  mode: post_semantic_reset_divergence
   search_cadence:
-    mode: divergence_burst
-    target: restore semantic and lexical independence while preserving meaning-first quality
-    stop_condition: at least one batch demonstrates material conceptual distance from literal mission vocabulary without losing organization-scale meaning
+    mode: portfolio_batch
+    target: clean owner-ready candidate(s) with semantic depth and lexical independence from mission wording/current finalists
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
-positive_generation_brief_contract:
-  include:
-    - long_term_umbrella_organization_scale
-    - stable_modern_reliable_identity
-    - meaningful_but_not_mission_literalization
-    - abstract_relations_such_as transformation, reciprocity, reinterpretation, contribution, emergence, continuity
-    - multiple morphotypes and medium_length_allowed
-    - recoverability_and_long_term_identity_quality
-  exclude_from_generator_context:
-    - literal mission slogan
-    - mission arrows / exact wording
-    - current finalists
-    - probe sample strings
-    - quarantined literal value tokens
-    - reality survivor/failure strings
-
 rounds:
   - id: RND-104
     action: owner_detected_semantic_anchor_audit
-    generated_count: 0
     result: integrity_failure_confirmed
-    findings:
-      - repeated Common/Commons was not evidence of Owner preference
-      - meaning-first expansion accidentally increased literal mission-token salience
-      - N121 emerged from contaminated lexical territory and cannot count as clean owner-ready evidence
-      - stable Skill already contains the correct invariant; no stable Skill rewrite is justified
   - id: RND-105
     action: semantic_anchor_reset
-    generated_count: 0
     result: generation_contract_sanitized
+  - id: RND-106
+    action: semantically_sanitized_divergence_batch_1
+    result: conceptual_distance_restored
+    findings:
+      - generated material no longer clustered around literal mission wording
+      - multiple morphotypes and medium-length constructions reappeared without Common/Commons family reuse
+      - academic/concept terms such as Sympoiesis, Chiasm, Palinode remained reality-crowded and were rejected
+      - phrase architecture produced one clean preliminary survivor: Turn of Mind
+  - id: RND-107
+    action: clean_survivor_reality_probe
+    findings:
+      - Turn of Mind: no material active exact company/software/organization found in current public search; major exact uses are ordinary phrase, book/film title; turnofmind.org observed available at Namecheap for USD 8.48 on 2026-09-11; source distinctiveness remains moderate/weak because phrase is established English
+      - Mutual Matter: rejected due newly active exact-name creative/publication initiative with adjacent community/science/art positioning
+      - Farther Field: rejected due active exact-name 2025 marketing consultancy in New Zealand
+      - Further Field: lower priority due existing company-name use and generic field-language pressure
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
   - {id: N113, name: Public Singular, role: finalist_hold, active: true, generation_use: prohibited_as_template}
   - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
-  - id: N121
-    name: Common Refrain
-    role: diagnostic_contaminated_not_owner_ready
-    active: false
-    reason: generated under literal mission-token anchoring; preserve only as integrity evidence
-    generation_use: prohibited_as_template_or_seed
+  - {id: N121, name: Common Refrain, role: diagnostic_contaminated_not_owner_ready, active: false, generation_use: prohibited_as_template_or_seed}
+  - id: N122
+    name: Turn of Mind
+    role: held_internal_preliminary
+    active: true
+    morphotype: established_phrase_semantic_double_reading
+    intrinsic_case:
+      - established English phrase meaning a characteristic disposition or way of thinking
+      - second reading naturally suggests a change/turn in thinking without spelling out mission vocabulary
+      - meaning-first and organization-scale; medium length acceptable under updated Owner preference
+      - recoverable pronunciation/spelling; non-personal identity
+    owner_profile_fit:
+      meaning_first: strong
+      stable_modern: medium_high
+      recoverability: strong
+      understated_cleverness: medium_high
+      compactness: acceptable_secondary
+    reality_status: preliminary_pass_with_title_usage
+    domain_status: turnofmind.org_available_2026_09_11
+    risks:
+      - established phrase gives weaker source distinctiveness
+      - existing book/film title usage creates cultural identity noise though not high-adjacency organization/software conflict
+    owner_exposure: not_yet
+    generation_use: prohibited_as_template
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  hypothesis_id: HYP-004
+  new_experience_candidate: literal_value_token_leakage_can_create_semantic_mode_collapse_even_when_morphotype_diversity_looks_healthy
+  proposed_regression: verify Value Model literal vocabulary does not become privileged Generator material unless independently justified by a territory decision
   stable_skill_rewrite_allowed_now: false
-  latest_note: >-
-    Current incident is an execution-fidelity failure against an existing stable invariant, not evidence that the Skill lacks Owner preference or Mission/Name-Job separation.
-    A regression/check may later be added for literal mission-token leakage, but stable semantics do not need redesign now.
+  reason: stable invariants already prohibit the failure; first test regression/fidelity enforcement before semantic redesign
 
 current_state:
   finalists: [N096, N113, N117, N119]
-  search_mode: semantic_anchor_reset_then_divergence
+  held_clean_survivor: N122
+  search_mode: post_semantic_reset_divergence
   biggest_unknown: >-
-    Can meaning-first generation retain depth while achieving genuine conceptual/lexical independence from literal mission vocabulary and current finalist families?
+    Can a second clean survivor match or exceed N122 while offering stronger source distinctiveness, proving that meaning-first search can remain deep without literal mission anchoring or generic phrase dependence?
   blockers: []
   owner_review_needed_now: false
-  information_gain: high_from_reset
+  information_gain: high_from_successful_reset
 
 next_action:
-  action: run_semantically_sanitized_divergence_batch
+  action: generate_peer_to_N122_without_using_N122_as_template
+  selected_workflow_patterns: [divergence_burst, category_parallel, creative_linguistic_parallel]
   rationale: >-
-    Restore exploration using abstract relational and identity goals rather than literal mission words. Preserve Owner preferences as evaluation weights, not lexical generation seeds.
-  requires_owner: false_until_clean_owner_ready_survivor_exists
+    Semantic reset succeeded. Do not exploit N122's phrase shape; instead seek a materially different clean peer with comparable meaning depth and stronger source distinctiveness before Owner exposure.
+  requires_owner: false_until_clean_owner_ready_peer_or_stage_convergence
 
 stop:
   status: continue
-  reason: integrity issue is diagnosed and corrected; autonomous search can resume
+  reason: reset succeeded and meaningful clean search space remains
   unresolved:
-    - clean new owner-ready candidate still needed
+    - second clean peer with stronger source distinctiveness desired
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
