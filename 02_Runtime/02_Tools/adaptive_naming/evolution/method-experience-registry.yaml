@@ -128,6 +128,22 @@ experiences:
     scope: potentially_general
     status: observed
 
+  - experience_id: EXP-008
+    observation: A Controller can vary semantic regions and workflows while still exposing the Owner to a narrow surface-form family, leaving morphotype preference unknown until late convergence.
+    proposed_generalization: When naming form preference is genuinely unknown and could change search allocation, explicitly track morphotype coverage and obtain category-level Owner feedback from representative forms before deep convergence; do not replace this with a fixed upfront questionnaire.
+    mechanism: word-count/construction variables were treated mainly as Controller search variables, so semantic diversity was mistaken for sufficient identity-form diversity
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - RND-074 through RND-080 produced semantically distinct finalists but most Owner-visible forms still relied on ordinary-English phrase/compound structures
+      - Owner explicitly reported that this did not reveal preference across major naming-form classes
+      - existing toolbox already contained lexical, phrase, blend, root-derived, coinage, sound-first and transformation operators, indicating a scheduling/feedback gap rather than missing tools
+    counterevidence:
+      - early fixed-form questionnaires can prematurely narrow creativity
+      - one Naming Job does not establish the best timing or number of representative morphotypes
+    confidence: high_for_gap_medium_for_general_rule
+    scope: potentially_general
+    status: method_hypothesis_input
+
 method_hypotheses:
   - hypothesis_id: HYP-001
     claim: Adaptive Naming should schedule workflow patterns separately from construction operators.
@@ -186,3 +202,20 @@ method_hypotheses:
     status: testing
     introduced_in_version: 0.4.0
     rollback_target: 0.3.3
+
+  - hypothesis_id: HYP-004
+    claim: Adaptive Naming should distinguish semantic/search diversity from Owner-visible morphotype diversity and explicitly reduce morphotype-preference uncertainty before deep convergence when that preference can materially change the search.
+    changes:
+      - track_owner_visible_morphotype_coverage
+      - add_morphotype_preference_unknown_trigger
+      - use_representative_form_sampling_before_deep_convergence
+      - feed_category_level_owner_signal_to_budgeting_not_as_generation_template
+    expected_benefit: discover whether the Owner prefers lexical, phrase, blend, derived, coinage, non-English, acronymic or other identity forms without prematurely constraining the creative search
+    known_risk: excessive category sampling can become a mechanical checklist or fixed questionnaire and waste search budget
+    supporting_experience_ids: [EXP-008]
+    counterevidence:
+      - timing and minimum representative coverage are not yet validated across a second real Naming Job
+    regression_cases: []
+    status: testing_needs_regression
+    introduced_in_version: null
+    rollback_target: null
