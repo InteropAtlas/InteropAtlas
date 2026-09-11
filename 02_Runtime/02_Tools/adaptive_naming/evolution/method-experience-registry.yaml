@@ -147,6 +147,28 @@ experiences:
     scope: potentially_general
     status: method_hypothesis_input
 
+  - experience_id: EXP-009
+    observation: >-
+      Repeated positive Owner feedback can cause the Controller to reproduce the surface morphology of the liked candidate instead of learning the latent reasons for preference, even when the stable Skill already prohibits direct finalist-template use.
+    proposed_generalization: >-
+      Positive references should be abstracted into latent virtues versus surface morphology before feedback changes exploration, and Owner-visible batches should undergo a batch-level generalization/diversity audit before exposure.
+    mechanism: >-
+      In #411 the Controller correctly learned that semantic density and mature brandability mattered, but then overused Merosophy-adjacent classical roots, learned suffixes, and similar construction grammar. Candidate-level explanations differed while batch-level morphology remained homogeneous.
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - INC-MORPHOTYPE-COLLAPSE-002 showed earlier semantic diversity with narrow visible naming architecture
+      - RND-129 showed that smoother coined names did not beat Merosophy, implying the positive signal was not merely phonetic smoothness
+      - INC-MORPHOTYPE-OVERFIT-003 / RND-130 showed a second collapse after Merosophy became the reference leader
+      - Owner independently detected the batch-level similarity despite existing anti-template and anti-collapse Skill rules
+      - organization-naming-411-process-review-v0.1.md documents the full process and proposed controls
+    counterevidence:
+      - evidence is still from one Naming Job and one Owner
+      - some deliberate bounded exploitation should legitimately reuse morphology when explicitly declared and tested
+      - a homogeneous batch can be valid when the current question intentionally compares within one construction family
+    confidence: high_for_failure_medium_high_for_general_control
+    scope: potentially_general
+    status: method_hypothesis_input
+
 method_hypotheses:
   - hypothesis_id: HYP-001
     claim: Adaptive Naming should schedule workflow patterns separately from construction operators.
@@ -232,6 +254,52 @@ method_hypotheses:
     supporting_experience_ids: [EXP-008]
     counterevidence:
       - timing, sample construction and minimum representative coverage are not yet validated across a second real Naming Job
+    regression_cases: []
+    status: testing_needs_regression
+    introduced_in_version: null
+    rollback_target: null
+
+  - hypothesis_id: HYP-005
+    claim: >-
+      Adaptive Naming should treat positive-reference learning as a generalization problem: extract latent reasons for success separately from surface morphology, then audit Owner-visible batches for hidden family concentration before exposure.
+    proposed_mechanism:
+      trigger: positive_owner_signal_or_reference_candidate_begins_to_affect_search
+      steps:
+        - decompose_positive_reference_into_latent_virtues_and_surface_properties
+        - allow_latent_virtues_to_update_general_exploration
+        - keep_surface_properties_nonbinding_unless_independently_supported_or_explicitly_exploited
+        - classify_batch_candidates_by_construction_architecture_material_source_phonology_orthography_and_reference_distance
+        - run_batch_generalization_audit_before_owner_exposure
+        - block_or_reset_batch_when_surface_similarity_is_high_without_an_explicit_bounded_exploitation_hypothesis
+      batch_result_classes:
+        - candidate_quality_pass_batch_generalization_pass
+        - candidate_quality_pass_batch_diversity_fail
+        - high_information_with_intentional_family_focus
+        - reset_required
+      temporary_regression_scaffold:
+        - do_not_hardcode_five_classes_as_universal_rule
+        - do_not_hardcode_max_two_per_class_as_universal_rule
+        - use_these_thresholds_only_as_411_regression_fixtures_until_cross_task_evidence
+    changes:
+      - add_positive_reference_abstraction
+      - add_batch_level_quality_object
+      - add_batch_generalization_diversity_audit
+      - track_reference_distance_separately_from_owner_fit
+      - extend_owner_review_cadence_as_adaptive_state
+    expected_benefit: >-
+      Prevent the Controller from mistaking the visible form of a successful candidate for the cause of its success, reduce repeated Owner-detected morphotype collapse, and improve preference learning without forcing creative monoculture.
+    known_risk: >-
+      Over-policing similarity could suppress legitimate focused exploitation, coherent naming systems, or useful within-family comparisons; the audit must therefore distinguish broad exploration from explicit bounded exploitation.
+    supporting_experience_ids: [EXP-009, EXP-008]
+    counterevidence:
+      - cross-task replication is not yet available
+      - no regression has yet demonstrated improved finalist yield
+    proposed_regression_cases:
+      - positive_reference_followed_by_surface_clones_should_fail_generalization_audit
+      - semantic_diversity_with_shared_morphology_should_fail_batch_diversity
+      - explicit_bounded_exploitation_may_pass_with_documented_family_focus
+      - pronunciation_optimization_should_not_erase_semantic_substance
+      - direct_domain_availability_should_not_rescue_weak_intrinsic_names
     regression_cases: []
     status: testing_needs_regression
     introduced_in_version: null
