@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 58
+  snapshot_version: 59
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v57 保存第一轮陌生中性偏好探测。
-    本快照记录第二轮对称/巧劲定向探测，并结束偏好校准阶段，正式恢复 form-diverse generation。
-    完整历史、候选现实证据与旧轮次继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v58 完成 Owner preference calibration 并恢复 form-diverse generation。
+    本快照记录恢复生成后的现实筛查结果：现代短造词 / SaaS-like 独立品牌词在 2025–2026 呈现高占用，连续多批高质量原型被活跃 AI / software / consulting / organization identity 阻断。
+    这被解释为 region-level reality crowding，而不是 intrinsic quality 或 Owner preference 失败。完整历史由 Git history 与 Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -23,99 +23,94 @@ constraint_registry:
   owner_preferences:
     - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
     - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: short spoken effort preferred; ideal about 4 perceived beats and generally about 5 or fewer, confidence: high}
-    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken chunks / stress / corresponding sound structure preferred, confidence: high}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry or near-palindromic balance is a meaningful optional bonus, especially when it can echo cycle/return, confidence: high}
-    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained semantic or structural trick / second-look reward is attractive; showy gimmick is not, confidence: high}
+    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure preferred as optional bonus, confidence: high}
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry / near-palindromic balance is an optional bonus with task-local cycle fit, confidence: high}
+    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
     - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo observed; preserve form diversity, confidence: medium_high}
-    - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: strong personal given-name reading reduces appeal, confidence: medium_high}
-    - {id: PREF-INITIAL-RCO, statement: R/C/O initials may feel reassuring but remain observational only, confidence: low_medium, usage: observe_only_not_generation_rule}
+    - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
+    - {id: PREF-INITIAL-RCO, statement: R/C/O initial effect remains observational only, confidence: low_medium}
 
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
   structural_naming_implications:
-    - cycle_or_return_may_be_carried_by_visual_or_phonological_structure
-    - subtle_semantic_compression_may_carry transformation / know-new style relations
-
-neutral_probe_2:
-  round_id: RND-089
-  sample_status: preference_probe_only_not_candidates
-  samples:
-    - {id: A, name: Rovor, owner_reaction: positive, notes: symmetry noticed and considered interesting}
-    - {id: B, name: Rovek, owner_reaction: positive, notes: has a wink-like feel; interesting}
-    - {id: C, name: Nolon, owner_reaction: mildly_positive, notes: acceptable but no clear reason or strong pull}
-    - {id: D, name: Norel, owner_reaction: acceptable_neutral, notes: can accept; no special feeling}
-    - {id: E, name: Ovelo, owner_reaction: positive, notes: interesting}
-    - {id: F, name: Ovelin, owner_reaction: neutral, notes: ordinary}
-    - {id: G, name: Noven, owner_reaction: neutral, notes: ordinary}
-    - {id: H, name: Teral, owner_reaction: slightly_above_neutral, notes: only a little better than average}
-  findings:
-    - symmetry produces positive pull when it also creates a distinctive but natural identity; Rovor outperforms flatter controls
-    - symmetry alone is insufficient: Nolon remains only mildly positive
-    - understated wink / second-look character is independently attractive when recoverability remains easy; Rovek confirms this direction
-    - compactness remains baseline but does not by itself create pull
-    - Ovelo outperforms Ovelin, suggesting visual/rhythmic compactness plus distinctive shape matters more than simple phonological smoothness
-    - Owner preference cluster is now sufficiently calibrated to resume formal generation without another probe
+    - cycle_or_return_may_be_carried_by visual / phonological structure
+    - subtle semantic compression may carry transformation relations
 
 expression_profile:
   status: calibrated_ready_for_generation
-  desired_axes:
-    stability: high
-    harmony: high
-    reliability: high
-    modernity: medium_high
-    compact_spoken_identity: high
-    easy_memorability: high
-    nonpersonal_brand_identity: high
-    rhythmic_balance: high_optional_bonus
-    visual_balance_or_cycle_echo: medium_high_optional_bonus
-    understated_cleverness: medium_high_optional_bonus
-    showiness_or_gimmick: low
-  interpretation:
-    - compact + brand-like + easy-to-hold identity is the baseline
-    - symmetry and restrained cleverness are real positive bonuses, but only when natural
-    - personal-name reading is a soft negative
-    - no morphotype class should be closed; preserve meaningful form diversity
-    - R/C/O initials remain too weak for intentional bias
+  baseline: compact + brand-like + easy-to-hold + stable-modern + non-personal
+  optional_bonuses: [rhythmic_balance, visual_cycle_echo, understated_cleverness]
+  anti_overfit: [do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_four_beats]
 
 search_control:
-  mode: form_diverse_generation_reallocated
+  mode: reality_informed_form_diversification
   search_cadence:
     mode: portfolio_batch
-    target: 4_to_6 material_owner_ready_finalists with morphotype diversity
-    stop_condition: new owner-ready candidate(s) materially expand the choice space, or sampled forms fail intrinsic/reality gates with low information gain
+    target: expand_owner_ready_choice_space_without_repeating_saas_coinage_crowding
+    stop_condition: one_or_more_materially_distinct_owner_ready_candidates_or_low_information_across_new_regions
   generation_isolation:
     level: best_effort_same_context
-    claim_policy: sanitized logical briefs only; no literal blindness claim
+    claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
-  reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
+  reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
-workflow_scheduler:
-  active_patterns:
-    - {pattern_id: category_parallel, status: active, question_to_answer: can distinct morphotypes produce compact stable-modern brand identities under the calibrated Owner profile?}
-    - {pattern_id: creative_linguistic_parallel, status: active_support, question_to_answer: can cleverness/symmetry survive recoverability checks without collapsing creativity?}
+search_landscape:
+  regions:
+    - id: REG-MODERN-SHORT-COINAGE
+      intrinsic_quality_yield: high
+      reality_crowding: very_high
+      latest_evidence: >-
+        Multiple compact 5–7 letter brandable forms across several independent batches collided with active 2025–2026 AI/software/consulting identities.
+      status: deprioritized_cooldown
+      interpretation: crowded namespace; do not infer this morphotype is intrinsically poor
+    - id: REG-CLASSICAL-ROOT-SHORT
+      intrinsic_quality_yield: medium_high
+      reality_crowding: very_high
+      latest_evidence: Telos / Torus / Noema / Koinos and similar roots already active in adjacent technology/research spaces
+      status: deprioritized
+    - id: REG-LEXICAL-SINGLE
+      sampling_status: under_sampled_after_preference_calibration
+      reality_crowding: unknown_high_prior
+      status: active_probe
+    - id: REG-NONENGLISH-LEXICAL-LESS-OBVIOUS
+      sampling_status: under_sampled
+      reality_crowding: unknown
+      status: active_probe
+    - id: REG-SEMANTIC-TRANSFORMATION-SHORT
+      description: short existing/derived forms carrying return, reinterpretation, renewal or perspective without generic SaaS morphology
+      sampling_status: under_sampled
+      reality_crowding: unknown
+      status: active_probe
+    - id: REG-STRUCTURAL-SYMMETRY-NONSEED
+      description: natural symmetry / mirrored structure discovered independently, not generated from probe strings
+      sampling_status: under_sampled
+      status: minor_active_probe
 
-method_scheduler:
-  priority_morphotypes:
-    - MT-LEXICAL-SINGLE
-    - MT-BLEND
-    - MT-ROOT-DERIVED
-    - MT-OPAQUE-COINAGE
-    - MT-NONENGLISH-LEXICAL
-    - MT-TYPOGRAPHIC-SYMBOLIC
-  preserve_minor_budget:
-    - MT-PHRASE
-    - MT-TRANSPARENT-COMPOUND
-  task_local_preferences_not_templates:
-    - compact_stable_modern
-    - natural_symmetry
-    - restrained_second_look_reward
-
-method_evolution:
-  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  hypothesis_id: HYP-004
-  latest_evidence: two-stage Owner preference probes materially improved search allocation; mature-brand anchors found no taboos, while unfamiliar neutral samples discriminated compactness, brand-likeness, non-personal identity, symmetry and understated cleverness.
-  stable_skill_rewrite_allowed_now: false
-  reason: current Skill already supports Owner preference / expression_profile / feedback_refinement; remaining question is whether the preference-probe trigger/timing generalizes across another Naming Job or regression.
+rounds:
+  - id: RND-090
+    action: post_preference_form_diverse_coinage_generation
+    result: no_owner_ready_survivor
+    finding: compact modern coined forms produced good intrinsic fit but immediate adjacent identity collisions
+  - id: RND-091
+    action: coined_and_blend_reality_probe
+    result: no_owner_ready_survivor
+    finding: Revor/Corivo/Oravo/Cirel/Orven-family-like independent prototypes showed active AI/software/company collisions; raw names remain quarantined from generator reuse
+  - id: RND-092
+    action: higher_distance_coinage_probe
+    result: no_owner_ready_survivor
+    finding: added orthographic distance did not materially improve namespace yield; active identities still common
+  - id: RND-093
+    action: root_derived_and_nonenglish_probe
+    result: no_owner_ready_survivor
+    finding: short classical/conceptual roots such as Telos/Torus/Noema/Koinos region are also highly occupied in technology/research
+  - id: RND-094
+    action: reality_informed_white_space_remap
+    generated_count: 0
+    findings:
+      - repeated collision evidence is region-level crowding, not reason to lower quality bar
+      - modern SaaS-like short coinage should enter cooldown rather than endless local mutation
+      - next information gain is higher in lexical-single, less-obvious non-English lexical, and short semantic-transformation regions
+      - Owner profile remains useful as evaluation weighting but must not become string-shape template
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -125,25 +120,34 @@ candidates:
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
+method_evolution:
+  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
+  hypothesis_id: HYP-004
+  stable_skill_rewrite_allowed_now: false
+  latest_note: calibrated Owner preference improved intrinsic targeting, while reality feedback now correctly changes region allocation rather than preference definition or Generator templates
+
 current_state:
   finalists: [N096, N113, N117, N119]
-  search_mode: form_diverse_generation_reallocated
-  biggest_unknown: Which materially different name forms can now survive intrinsic + recoverability + reality + .org gates while fitting the calibrated Owner profile without imitating probe strings or current finalists?
+  search_mode: reality_informed_form_diversification
+  biggest_unknown: >-
+    Whether under-sampled lexical-single, less-obvious non-English lexical, or short semantic-transformation identities can preserve compact stable-modern Owner fit while escaping the 2026 SaaS/AI coined-name crowding frontier.
   blockers: []
   owner_review_needed_now: false
+  information_gain: high_from_region_shift
 
 next_action:
-  action: resume_form_diverse_generation_with_calibrated_owner_profile
-  target: produce one_or_more_new_materially_distinct_owner_ready_candidates
+  action: probe_non_saas_morphotype_regions
+  selected_workflow_patterns: [white_space_mapping, category_parallel, creative_linguistic_parallel]
+  priority_regions: [REG-LEXICAL-SINGLE, REG-NONENGLISH-LEXICAL-LESS-OBVIOUS, REG-SEMANTIC-TRANSFORMATION-SHORT]
+  minor_region: REG-STRUCTURAL-SYMMETRY-NONSEED
   rationale: >-
-    Two unfamiliar probes have reduced preference uncertainty enough to justify formal search. Preserve morphotype breadth, weight compact stable-modern non-personal brand identity, and treat natural symmetry/understated cleverness as bonuses only.
-  expected_information_gain: high
-  requires_owner: false_until_new_owner_ready_candidate_exists
+    Repeated reality collisions show that continuing to mutate short modern coinages has low information value. Shift to materially different form regions while preserving compactness, reliability, recoverability and umbrella scale as quality criteria.
+  requires_owner: false_until_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: preference calibration is sufficient; formal search should now resume autonomously
+  reason: no blocker; current evidence supports autonomous region shift, not Owner intervention
   unresolved:
-    - new morphotype finalists still need intrinsic/reality/domain validation
+    - new owner-ready candidate still needed to materially expand current four-choice pool
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
