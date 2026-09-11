@@ -6,18 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 50
+  snapshot_version: 51
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v49 保存四个 Owner-visible finalists 与 RND-076–080。
-    本快照记录 Owner 对 N117/N119 的反应，并诊断“语义/工作流多样 ≠ Owner-visible 形态多样”的方法层缺口；
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v49 保存四个 Owner-visible finalists；snapshot v50 记录 Owner-visible morphotype coverage gap 与 HYP-004。
+    本快照记录 Owner 对偏好探测机制的进一步建议：可用成熟品牌作为低成本对照样本，也可按需生成中性样本；稳定 Skill 不宜硬编码具体题库或品牌名单。
     完整历史候选、现实证据与旧轮次继续由 Git history 与 Issue #411 保留。
-  previous_snapshots:
-    - {snapshot: 47, commit: d502ac3ce8a7638e13820f9acbae9037230c0aa7}
-    - {snapshot: 48, commit: 26fa62d341e6967e4ee0edb56023abb131472efe}
-    - {snapshot: 49, commit: 5b5f07bbb5d98a8a4dfe4d23174073183e74148e}
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -28,154 +24,128 @@ constraint_registry:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
     - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists, source_type: owner_explicit}
     - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: novelty may increase but intrinsic/reality/domain gates remain unchanged, source_type: owner_explicit}
-    - id: PREF-MORPHOTYPE-DISCOVERY
-      statement: Owner does not want to constrain search to coinages or compounds; Owner wants exposure to materially different name forms in order to discover which broad identity classes they prefer.
-      source_type: owner_explicit
-      observed_at: 2026-09-11
-      stability: explicit_current_task_goal
+    - {id: PREF-MORPHOTYPE-DISCOVERY, statement: Owner wants exposure to materially different name forms to discover broad category preference rather than constrain search to coinage or compounds, source_type: owner_explicit}
 
 mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
 
 owner_feedback:
   - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
-  - id: OF-N117-01
-    candidate_id: N117
-    signal: positive_with_form_cost
-    statement: See Otherwise feels younger and semantically acceptable, but visual/verbal length is a drawback; Owner experiences it as multi-part/three-word-like rather than compact identity.
-    implications: [retain_candidate, add_length_and_surface_compactness_signal, do_not_generalize_to_all_phrases]
-  - id: OF-N119-01
-    candidate_id: N119
-    signal: positive_stable
-    statement: Elseground has no major semantic or visual problem and feels stable; however another compound-like form does not help reveal Owner preference across broader naming categories.
-    implications: [retain_candidate, do_not_use_as_template, reopen_form_space]
-  - id: OF-MORPHOTYPE-01
+  - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise feels younger and semantically acceptable but too long/multipart.}
+  - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable, but another compound-like form does not reveal broad form preference.}
+  - id: OF-MORPHOTYPE-PROBE-02
     signal: method_feedback
-    statement: Owner explicitly notes that recent candidates remain dominated by word combinations and asks why materially different forms were not deliberately surfaced; Owner also notes that the system did not ask enough about broad naming-form preference.
-    implications: [treat_morphotype_preference_as_biggest_unknown, separate_semantic_diversity_from_surface_form_diversity, test_method_gap]
+    statement: >-
+      Owner proposes a structured series of contrast questions to explore naming-form preference. Mature established brand names can be used as low-cost vocabulary/examples to save generation resources; generated examples remain optional. Stable Skill need not encode detailed fixed questions, but future Skill revision should handle this carefully as a methodological design problem.
+    implications:
+      - design_optional_bounded_morphotype_preference_probe
+      - prefer_reference_anchors_when_bias_can_be_controlled
+      - use_generated_neutral_examples_when_reference_brand_halo_or_coverage_is_problematic
+      - keep_specific_question_bank_outside_stable_skill
 
 search_control:
-  mode: morphology_divergence
+  mode: morphotype_preference_probe
   search_cadence:
-    mode: category_parallel
-    target: representative_morphotype_coverage_not_finalist_count
-    stop_condition: enough distinct form classes are represented for meaningful Owner category feedback or a class is intrinsically incompatible with hard constraints
-  generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, historical_context_may_have_seen_controller_only_exclusions: true, claim_policy: sanitized logical briefs only; no literal blindness claim}
-  controller_only_exclusions:
-    finalist_candidate_ids: [N096, N113, N117, N119]
-    comparison_only_candidate_ids: [N060]
-    other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]
+    mode: validation_only
+    target: learn_owner_form_preference_before_more_generation
+    stop_condition: enough category-level signal exists to reallocate search budget without hard-locking one form class
+  generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, claim_policy: sanitized logical briefs only; no literal blindness claim}
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
-  post_generation_filter: {enabled: true, check_finalist_similarity: true, check_cooled_families: true, check_strategy_fidelity: true}
 
 morphotype_landscape:
   purpose: distinguish semantic/search diversity from Owner-visible identity-form diversity
   classes:
     - {id: MT-LEXICAL-SINGLE, description: single existing word or semantic transfer, owner_visible_coverage: insufficient}
-    - {id: MT-PHRASE, description: natural phrase or proposition, owner_visible_coverage: high, examples_current: [N096, N117]}
-    - {id: MT-DYAD, description: two familiar words in deliberate conceptual relation/tension, owner_visible_coverage: medium, examples_current: [N113]}
+    - {id: MT-PHRASE, description: natural phrase/proposition, owner_visible_coverage: high, examples_current: [N096, N117]}
+    - {id: MT-DYAD, description: two familiar words in deliberate relation/tension, owner_visible_coverage: medium, examples_current: [N113]}
     - {id: MT-TRANSPARENT-COMPOUND, description: fused or compounded full words, owner_visible_coverage: medium, examples_current: [N119]}
-    - {id: MT-BLEND, description: clipped or blended source forms creating a new word, owner_visible_coverage: insufficient}
-    - {id: MT-ROOT-DERIVED, description: classical or other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient}
-    - {id: MT-OPAQUE-COINAGE, description: sound-first or low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: insufficient}
-    - {id: MT-NONENGLISH-LEXICAL, description: intact or lightly adapted non-English lexical identity with global usability, owner_visible_coverage: insufficient}
-    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity only if it can act as an independent brand, owner_visible_coverage: insufficient}
-    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity only when orally recoverable and domain-compatible, owner_visible_coverage: insufficient}
-  integrity: {do_not_force_equal_sampling: true, do_not_turn_into_fixed_questionnaire: true, owner_feedback_changes_budget_not_quality_definition: true}
+    - {id: MT-BLEND, description: clipped/blended source forms creating a new word, owner_visible_coverage: insufficient}
+    - {id: MT-ROOT-DERIVED, description: classical/other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient}
+    - {id: MT-OPAQUE-COINAGE, description: sound-first/low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: insufficient}
+    - {id: MT-NONENGLISH-LEXICAL, description: intact/lightly adapted non-English lexical identity with global usability, owner_visible_coverage: insufficient}
+    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity if independently brandable, owner_visible_coverage: insufficient}
+    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity when orally recoverable/domain-compatible, owner_visible_coverage: insufficient}
 
-workflow_scheduler:
-  policy: diagnosis_driven_pattern_portfolio
-  active_patterns:
-    - pattern_id: category_parallel
-      status: active
-      question_to_answer: Which broad naming morphotypes does the Owner actually respond to when shown credible representatives rather than abstract labels?
-    - pattern_id: divergence_burst
-      status: active_support
-      question_to_answer: Can the search escape phrase/compound surface-form concentration without sacrificing recoverability and umbrella scale?
+preference_probe_design:
+  status: active
+  objective: learn broad form preference, not choose a winner or define universal quality
+  source_policy:
+    mature_brand_references: preferred_when_owner_is_familiar_and_form_can_be_separated_from_brand_reputation
+    generated_neutral_examples: use_when_reference_examples_are_too_famous_biased_or_do_not_cover_needed_form
+    hybrid: allowed
+  question_style:
+    - balanced contrasts across form axes
+    - ask attraction/rejection plus brief reason, not only forced winner
+    - repeat classes across more than one anchor where halo bias is plausible
+    - include indifferent/both/neither responses
+  bias_controls:
+    - brand_success_halo
+    - industry_association
+    - logo_visual_identity
+    - existing_company_reputation
+    - semantic_content_confounded_with_surface_form
+  interpretation:
+    - infer category-level tendencies only
+    - update exploration budget, not hard constraints
+    - preserve minority exploration budget for surprise
+  stable_skill_revision_note: specify trigger, objective, design constraints and interpretation; do not hardcode exact brand list or fixed questionnaire
 
-method_scheduler:
-  policy: adaptive_operator_portfolio
-  protected_from_imitation: [N096_survivor_shape, N113_survivor_shape, N117_survivor_shape, N119_survivor_shape]
-  priority_under_sampled_morphotypes: [MT-LEXICAL-SINGLE, MT-BLEND, MT-ROOT-DERIVED, MT-OPAQUE-COINAGE, MT-NONENGLISH-LEXICAL, MT-ACRONYM-INITIAL, MT-TYPOGRAPHIC-SYMBOLIC]
-  deprioritized_for_next_probe: [MT-PHRASE, MT-DYAD, MT-TRANSPARENT-COMPOUND]
+method_evolution:
+  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
+  hypothesis_id: HYP-004
+  latest_refinement: mature-brand or generated anchor sets may support bounded morphotype preference probes; exact exemplars remain adaptive runtime material
+  stable_skill_rewrite_allowed_now: false
+  promotion_requirements_remaining: [regression_case, counterevidence_review, preferably_second_real_naming_job_or_severe_defect_contract]
 
 candidates:
-  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, owner_signal: positive_usable_not_selected, generation_use: prohibited_as_template}
-  - {id: N113, name: Public Singular, role: finalist_hold, active: true, owner_signal: hold_explanation_required, generation_use: prohibited_as_template}
-  - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, owner_signal: positive_with_form_cost, generation_use: prohibited_as_template}
-  - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, owner_signal: positive_stable, generation_use: prohibited_as_template}
+  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
+  - {id: N113, name: Public Singular, role: finalist_hold, active: true, generation_use: prohibited_as_template}
+  - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
+  - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
-  - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed}
 
 rounds:
   - id: RND-081
     action: owner_morphotype_feedback_ingest_and_method_gap_diagnosis
     generated_count: 0
+    result: HYP-004_exported
+  - id: RND-082
+    action: owner_preference_probe_design_refinement
+    generated_count: 0
     findings:
-      - Owner accepts N117 meaning but sees length/multipart form as a cost
-      - Owner sees N119 as stable/acceptable but explicitly wants genuinely different name forms rather than more compounds
-      - prior search varied semantic territories and workflow patterns more than Owner-visible morphotypes
-      - word-formation toolbox already includes lexical, blend, root-derived, coinage and other operators, so the failure is scheduling/feedback coverage rather than missing construction tools
-      - morphotype preference was not elicited early enough to inform portfolio allocation
-    integrity_check: {owner_feedback_not_converted_to_hard_constraint: true, current_finalists_not_used_as_templates: true, no_fixed_questionnaire_added_to_stable_skill: true}
-
-observations:
-  - id: O-R081-MORPHOTYPE
-    scope: method_and_task
-    observation: semantic diversity, workflow diversity and morphotype diversity are distinct; the first two can appear broad while Owner-visible name forms remain concentrated.
-  - id: O-R081-PREF-UNKNOWN
-    scope: owner_preference
-    observation: when broad form preference is unknown, category-level feedback may have higher information value than continued blind generation inside already-visible forms.
-
-diagnostics:
-  - id: D-R081-01
-    diagnosis_type: owner_visible_morphotype_coverage_gap
-    statement: current task has adequate semantic variation but insufficient representative coverage of major naming-form classes for Owner preference discovery.
-    confidence: high
-    proposed_state_change: run_morphotype_divergence_portfolio_before_deep_convergence
-  - id: D-R081-02
-    diagnosis_type: potential_method_level_scheduler_gap
-    statement: stable Skill treats construction form largely as Controller search variables and does not explicitly trigger morphotype-preference discovery when Owner-visible form coverage is narrow.
-    confidence: high_for_gap_medium_for_general_rule
-    proposed_state_change: export_EXP_008_and_HYP_004_without_direct_skill_rewrite
-
-experience_export:
-  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  exported_experience_id: EXP-008
-  exported_hypothesis_id: HYP-004
-  direct_skill_rewrite_allowed: false
-  rationale: one real Naming Job provides clear mechanism evidence, but stable method change still needs regression and preferably second-job evidence unless severe-control-defect promotion requirements are completed
+      - mature brand examples can reduce generation cost and provide intuitive form anchors
+      - mature brand references create halo/confound risk, so they should be balanced and supplemented with generated neutral anchors when needed
+      - stable Skill should encode trigger/design/interpretation rather than a frozen question bank
+      - next high-information action is Owner morphotype preference probe before additional naming generation
 
 current_state:
   finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
-  search_mode: morphology_divergence
-  search_cadence_mode: category_parallel
-  target_finalist_pool: 4_to_6
+  search_mode: morphotype_preference_probe
+  search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: Which broad naming-form classes fit the Owner when represented by credible task-specific names, not just abstract category descriptions?
+  biggest_unknown: Which broad naming-form classes does Owner prefer once form is separated as much as practical from specific semantic content and famous-brand halo?
   blockers: []
-  information_gain: high_from_representative_morphotype_sampling
-  owner_review_needed_now: false
+  information_gain: high_from_owner_preference_probe
+  owner_review_needed_now: true
 
 next_action:
-  action: run_representative_morphotype_portfolio
-  target: sample_underrepresented_name_forms_without_forcing_coinage_or_compound_bias
+  action: run_bounded_owner_morphotype_preference_probe
+  target: obtain_category_level_form_preference_signal_before_more_generation
   rationale: >-
-    Owner explicitly wants to discover category preference rather than constrain the search to one construction family. Generate credible representatives across under-sampled morphotypes,
-    funnel intrinsically first, reality-screen only strong representatives, and expose a compact form-diverse set for category-level Owner feedback.
-  triggered_by: [D-R081-01, D-R081-02]
+    Owner proposed a structured preference exploration using mature brand anchors where efficient. This is now more informative than additional blind candidate generation.
+    Use a small adaptive contrast set, control obvious brand-halo confounds, allow indifference/both/neither, and use results only to rebalance exploration rather than close categories.
+  triggered_by: [OF-MORPHOTYPE-PROBE-02]
   expected_information_gain: high
-  selected_workflow_pattern_ids: [category_parallel, divergence_burst]
-  requires_owner: false_until_representative_set_exists
-  owner_gate_classification: search_strategy_then_category_preference
+  requires_owner: true
+  owner_gate_classification: preference_discovery
 
 stop:
-  status: continue
-  reason: Owner-visible morphotype preference remains materially unknown and current candidate pool is structurally concentrated despite acceptable quality
+  status: pause_for_owner_preference_probe
+  reason: form preference is now the largest decision-relevant unknown; additional generation before probing would risk repeating the same concentration failure
   unresolved:
-    - HYP-004 requires regression/counterevidence before any stable Skill promotion
+    - HYP-004 requires regression/counterevidence before stable Skill promotion
     - formal trademark legal clearance remains deferred
-    - true isolated generation runtime remains unavailable in this context
+    - true isolated generation runtime remains unavailable
