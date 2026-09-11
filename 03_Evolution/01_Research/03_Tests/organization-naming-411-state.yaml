@@ -1,4 +1,4 @@
-schema_version: '0.2.1'
+schema_version: '0.3.1'
 task:
   issue: 411
   repository: InteropAtlas/InteropAtlas
@@ -6,105 +6,234 @@ task:
   mode: Adaptive Naming Fit Test
   status: in_progress
   snapshot_version: 36
-  skill_version: 0.2.1
-  skill_control_commits: [cbee63c, ef16007, d967470, 876598d, 9efa062, 3d8792a, 11eb28a, 39dfc31]
+  skill_version: 0.3.1
+  skill_control_commits: [cbee63c, ef16007, d967470, 876598d, 9efa062, 3d8792a, 11eb28a, 39dfc31, e35a28f, a22273c, 1ac19c9, 0e5aae1, c37bbf7, 5fed039, 6ba0c1e, 0db924a, c771e78]
 lineage:
-  preservation_note: 未重新初始化任务，未恢复G0–G8 benchmark。snapshot v35 的完整事实由Git commit/blob保留；本文件压缩为当前控制状态与RND-051–053新增证据。
+  preservation_note: >-
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v36 的候选、round、reality evidence 与诊断历史仍由 commit 3348d1650e68404704b11097c10f0818c4adeae1 及 Git history 保留；
+    本文件升级控制 schema / next_action，以使用 v0.3.1 的 Mission-Value → Name Job → Decision Criteria → Method Scheduler 架构。
   previous_snapshot:
-    snapshot: 35
-    commit: f92b319a074d039626e987c74242672c268d0003
-    blob_sha: 69342edc93806c666d7118057148c0df6336cf63
+    snapshot: 36
+    commit: 3348d1650e68404704b11097c10f0818c4adeae1
   historical_archive_v32: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v32.yaml
-brief:
-  object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、教育、工具/软件、公共知识工作、出版与创造/发现活动。
-  semantic_core:
-  - 公共共同体的共享知识
-  - 个人视角、解释与选择
-  - 视角产生创造与发现
-  - 创造回到公共知识并支持下一轮
-  quality_requirements:
-  - 低误读、低听写分叉
-  - 连写后有稳定canonical segmentation
-  - 字面语法与intended meaning一致；不靠虚构词源
-  - 长期母组织尺度，不被单一方法、工作室、平台、材料、行业或项目锁定
-  reality_constraints:
-    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；现实查询后置于名称质量预检
-    trademark_screening_current_policy: deferred_by_owner_for_now
+
+constraint_registry:
+  confirmed_hard_constraints:
+  - id: HC-ORG-SCALE
+    statement: 名称必须能够承载 InteropAtlas 上层长期 umbrella organization，而非锁死为单一项目、协议、地图、平台或行业。
+    source_type: owner_explicit
+    source_ref: organization-vision
+  - id: HC-RECOVERABILITY
+    statement: 避免明显高误读、高听写分叉；名称需具备可接受的口语与拼写恢复性。
+    source_type: owner_explicit
+    source_ref: prior-owner-feedback
+  - id: HC-ORG-DOMAIN
+    statement: 最终 finalist 的同名普通 .org 可注册性为硬门槛；早期创意质量阶段不以此淘汰。
+    source_type: owner_explicit
+    source_ref: issue-411-policy
+  owner_preferences:
+  - id: PREF-LOW-MISREAD
+    statement: 更偏好不容易误读的名称。
+  controller_search_variables:
+  - id: SV-WORD-COUNT
+    name: word_count
+    current_value: open
+    allowed_values: [single_token, multiword, both]
+    rationale: 历史 single-token focus 无 Owner hard-constraint provenance；v0.2.2 已诊断为 search variable。
+    owner_approval_required_to_change: false
+  - id: SV-SEMANTIC-TRANSPARENCY
+    name: semantic_transparency
+    current_value: adaptive
+    allowed_values: [transparent, light, opaque_but_traceable, mixed]
+    owner_approval_required_to_change: false
+  assumptions: []
+
+mission_value_model:
+  source_refs: [organization-vision, issue-411-recovery]
+  actors:
+  - commons / public
+  - individual
+  - contributors / creators
+  - projects / institutions
+  objects:
+  - knowledge
+  - perspective / interpretation
+  - creation / discovery
+  - shared public knowledge
+  transformations:
+  - shared knowledge enables individual perspective
+  - individual perspective enables creation / discovery
+  - creation can return to the commons
+  - returned knowledge supports another cycle
+  relations_and_agency:
+  - 公共知识属于共同体层面的共享资源；个人保有形成视角、解释与选择的自主性。
+  - commons 与 individual agency 是需要同时保留的关系，而不是“多人”替代“个人视角”。
+  temporal_or_causal_structure:
+  - Commons → Perspective → Creation → Commons ↺ 是循环 / 反馈结构，而非四个并列关键词。
+  desired_world:
+  - 公共知识持续积累且可被访问、理解和再利用。
+  - 个体可以从共享知识形成自己的解释、选择与创造。
+  - 新创造能够重新进入公共积累并支持下一轮。
+  anti_values_or_non_goals:
+  - 不把组织锁死成单一项目形式。
+  - 不要求所有个人形成统一视角。
+  value_claims:
+  - {id: V-COMMONS, statement: knowledge should remain part of a shared commons, evidence_type: explicit, value_type: end, priority: core, confidence: high}
+  - {id: V-AGENCY, statement: individuals should retain interpretive perspective and choice, evidence_type: explicit, value_type: relation, priority: core, confidence: high}
+  - {id: V-CREATION, statement: perspective should enable creation / discovery, evidence_type: structural, value_type: end, priority: high, confidence: high}
+  - {id: V-RETURN, statement: creation can contribute back into shared knowledge, evidence_type: structural, value_type: procedural, priority: high, confidence: high}
+  - {id: V-CONTINUITY, statement: the system should support durable renewal across cycles, evidence_type: structural, value_type: identity, priority: supporting, confidence: medium_high}
+  value_relations:
+  - {value_a: V-COMMONS, value_b: V-AGENCY, relation: balance, rationale: shared knowledge and individual perspective must coexist}
+  - {value_a: V-AGENCY, value_b: V-CREATION, relation: sequence, rationale: perspective enables creation}
+  - {value_a: V-CREATION, value_b: V-RETURN, relation: sequence, rationale: creation may return to commons}
+  naming_implications:
+  - {value_id: V-COMMONS, mode: indirect, rationale: 可作为共同、开放、共享或结构隐喻，但不要求字面出现 commons}
+  - {value_id: V-AGENCY, mode: indirect, rationale: 应防止 collective proxy 抹掉个体 agency；更适合通过视角、分化、解释、选择等结构表达}
+  - {value_id: V-CREATION, mode: indirect, rationale: 可通过生成、展开、形成、发现等隐喻表达}
+  - {value_id: V-RETURN, mode: guardrail_only, rationale: 不要求名字直接编码回流循环}
+  - {value_id: V-CONTINUITY, mode: optional_story, rationale: 可支持长期组织气质但不是字面硬要求}
+  value_coverage: []
+  integrity:
+    value_flattening_detected: false
+    mission_overcompression_detected: false
+    value_proxy_collapse_detected: false
+    value_priority_invention_detected: false
+    value_score_smuggling_detected: false
+
+name_job_model:
+  primary_jobs:
+  - 形成可长期积累、可独立识别的母组织 proper identity。
+  - 能承载多个独立项目、研究、工具、教育、出版与公共知识工作。
+  - 在口语与书写中保持较稳定的恢复性。
+  - 为长期品牌故事保留足够语义空间，而不锁死为当前 InteropAtlas 的单一形式。
+  secondary_jobs:
+  - 与一个或少数 core value / structural relation 建立真实但不必直白的联系。
+  - 具有足够记忆性、机构感与创造能量。
+  non_jobs:
+  - 裸名不需要逐字解释完整 Commons → Perspective → Creation → Commons 循环。
+  - 裸名不需要列举 research / education / tools / publishing 等业务。
+  - 名称不需要独自承担全部 mission narrative。
+  tensions:
+  - distinctiveness ↔ recoverability
+  - semantic transparency ↔ ownable identity
+  - institutional scale ↔ creative energy
+  success_evidence: []
+  source_refs: [organization-vision, rnd-042-053-diagnostics]
+  status: active
+
+decision_criteria:
+  items:
+  - {id: C-SCALE, statement: 长期 umbrella organization scale, role: gate, source_ref: HC-ORG-SCALE, confidence: high}
+  - {id: C-RECOVERY, statement: 低到可接受的发音 / 听写恢复负担, role: optimize, source_ref: HC-RECOVERABILITY, confidence: high}
+  - {id: C-DISTINCT, statement: 独立 proper-name identity / distinctiveness, role: optimize, source_ref: name-job-model, confidence: high}
+  - {id: C-VALUE, statement: 与 Mission / Value Model 不冲突并最好有真实连接, role: optimize, source_ref: mission-value-model, confidence: high}
+  - {id: C-DOMAIN, statement: 同名普通 .org 最终可注册, role: gate, source_ref: HC-ORG-DOMAIN, confidence: high}
+  - {id: C-OWNER, statement: Owner long-term resonance, role: prefer, source_ref: owner-preference, confidence: medium}
+  - {id: C-TM, statement: 官方商标风险, role: observe, source_ref: owner-deferred-policy, confidence: high}
+  integrity:
+    role_confusion_detected: false
+    role_drift_detected: false
+
+optional_modules:
+  communication_load_allocation:
+    status: inactive
+    trigger: activate only if name_overloading recurs
+    name: []
+    descriptor: []
+    tagline: []
+    mission_statement: []
+    brand_architecture: []
+    visual_identity: []
+    organizational_practice: []
+  territory_research:
+    status: ready_on_trigger
+    trigger: activate if multi-method probes still collapse to common lexical material
+    active_territories: []
+    material_maps: []
+    selected_material_for_generation: []
+  decision_hygiene:
+    status: ready_on_trigger
+    trigger: activate for high-value shortlist / Owner Exposure or multi-reviewer comparison
+    independent_first_pass: true
+    reviewer_blindness_contracts: []
+    anchoring_risks: []
+  temporal_evaluation:
+    status: inactive
+    trigger: only for strong candidates whose main uncertainty is novelty / familiarity
+    candidate_ids: []
+  validation_research:
+    status: inactive
+    trigger: only when external respondent evidence would reduce a concrete uncertainty
+    respondent_definition: null
+    research_questions: []
+    blindness_level: null
+    admissible_inferences: []
+    prohibited_inferences: []
+    results: []
+  naming_scope:
+    status: satisfied
+    trigger: null
+    object_role: standalone_umbrella_organization_brand
+    rationale: Issue #411 已明确为 InteropAtlas 上层长期母组织命名。
+  activation_governance:
+    status: deferred
+    trigger: finalist selected / rollout needed
+    migration: []
+    rollout: []
+    internal_adoption: []
+    future_naming_policy: []
+
+map:
+  initial_landscape_summary: 历史 single-token、semantic-light 与 morpheme-grounded 路线已显示明显现实身份拥挤；具体历史证据保留在 snapshot v36 / Git history。
+  regions: []
+  semantic_coverage: []
+
 search_control:
-  search_mode: exploration
+  mode: exploration
+  mode_rationale: v36 的 single-token semantic-recoverability frontier 属于局部路线收敛，不是 Owner boundary。
+  family_concentration:
+    morphological: []
+    semantic: []
+    construction: []
+    method: []
+  incumbent_isolation:
+    comparison_only_candidate_ids: [N060]
+    leaked_candidate_ids: []
+    notes: [comparison-only incumbent 不进入 general exploration brief]
   generation_isolation:
     level: best_effort_same_context
     runtime_identity: ChatGPT current conversation runtime
     historical_context_may_have_seen_controller_only_exclusions: true
     evidence:
-    - 本执行段在同一会话内读取了完整recovery、Skill与state，然后执行生成。
-    - 当前各Generation Brief未再次暴露具体incumbent、cooldown token、reality survivor shapes或Owner对incumbent的反应，但同一运行上下文历史中可能已见过。
-    - 本runtime没有可用的独立subagent/fresh generation context，因此不把逻辑omitted表述为模型从未见过。
-    claim_policy: 仅记录best_effort_same_context；post-generation filter作为主要防线。
-  incumbent_isolation:
-    comparison_only_candidates: [N060]
-    status: controller_only_comparison_reference
+    - 当前恢复环境读取完整 state / recovery 后再执行，不能声称 Generator 从未见过历史信息。
+    claim_policy: 当前 Brief 可不再次暴露 controller-only exclusions，但 isolation 仍只能按事实记录。
   controller_only_exclusions:
     incumbent_candidate_ids: [N060]
     cooled_family_ids: [FAM-V34-01, FAM-RND046-01, FAM-RND051-01]
     survivor_pattern_ids: []
     owner_reaction_subject_ids: [N060]
     other: [N061_historical_hold_not_generation_seed]
-  cooldowns:
-  - family_id: FAM-V34-01
-    scope: task_local
-    family_type: morphological_semantic
-    family_basis: multiplicity_family_from_prior_mode_collapse
-    reason: RND-037 mode-collapse recovery；继续作为Controller-only post-generation filter，不写入Generator Brief。
-    status: active
-  - family_id: FAM-RND046-01
-    scope: task_local
-    family_type: morphological_construction
-    family_basis: prior_semantic_light_local_compound_concentration
-    reason: RND-046局部复合结构集中；继续作为Controller-only过滤，不代表相关名称永久质量失败。
-    status: active
-  - family_id: FAM-RND051-01
-    scope: task_local
-    family_type: construction_surface
-    family_basis: ornamental_pseudo_latinate_shell_without_second_semantic_payload
-    reason: RND-051在morpheme-grounded任务中出现“换语义根但复用相似proper-name外壳”的局部集中；属于strategy/search-integrity问题，不是名称质量永久失败。
-    status: active
+  cooldowns: []
   reality_feedback_quarantine:
-    same_batch_quality_before_reality: enforced
-    exact_reality_results_exposed_to_generator_brief: false
-    controller_may_use_abstract_crowding_diagnosis_for_strategy_change: true
-    same_context_history_limitation_acknowledged: true
-    status: pass_with_best_effort_isolation_limitation
+    enabled_in_exploration: true
+    same_batch_feedback_to_generator: prohibited
   generator_brief:
-    id: GB-MORPH-051-052
+    id: null
     search_mode: exploration
-    positive_objectives:
-    - 为长期umbrella organization寻找具有独立proper-name身份的单词名称。
-    - 每个候选先有可核实、较轻的语义锚点，再进行有限声音、拼写或形态优化；名称不需要承担完整愿景循环。
-    positive_search_zones:
-    - public inheritance / stewardship
-    - individual reinterpretation / creation
-    - contribution / transmission / return
-    - continuity / renewal / durable relation
-    positive_construction_targets:
-    - morpheme-grounded controlled coinage
-    - traceable clipping or telescoping
-    - semantically motivated two-anchor fusion
-    - productive derivation with stable spoken recovery
-    - multiple surface architectures rather than a single decorative shell
-    quality_targets:
-    - 2到3音节优先
-    - 一个明显主读法
-    - 听写恢复负担低
-    - canonical visual parse稳定
-    - proper-name identity与长期母组织尺度强
-    - 构造动机可在一到两句内真实解释
-    hard_constraints_only:
-    - 不虚构词源；语义或构造依据必须可核实
-    - 名称架构必须能承载多个长期独立项目与功能线
+    name_job_focus: []
+    value_targets: []
+    naming_implication_modes: []
+    selected_material_refs: []
+    positive_objectives: []
+    positive_search_zones: []
+    positive_construction_targets: []
+    quality_targets: []
+    hard_constraints_only: []
+    hard_constraint_source_refs: []
+    question_to_answer: null
     negative_examples_included: false
     controller_only_exclusions_exposed: false
-    omitted_context_categories: [incumbent_names, cooled_family_tokens, reality_survivor_shapes, owner_reactions_to_incumbents]
   post_generation_filter:
     enabled: true
     check_cooled_families: true
@@ -112,131 +241,178 @@ search_control:
     check_strategy_fidelity: true
     check_other_controller_only_exclusions: true
     last_round_id: RND-052
-    generated_count_this_snapshot: 48
-    blocked_or_noncreditable_count_this_snapshot: 0
+    generated_count: 0
+    blocked_count: 0
+    blocked_candidate_ids: []
+    violation_types: []
     high_hit_rate: false
+
+method_scheduler:
+  policy: adaptive_portfolio
+  exploration_default_parallel_families: 3-5
+  active_strategies:
+  - {strategy_id: institutional_pair_phrase, family: direct_lexical, status: active, value_targets: [V-COMMONS, V-AGENCY, V-CREATION], quality_yield: unknown, distinctiveness_yield: unknown, recoverability_yield: high_expected, reality_crowding: unknown, recent_information_gain: high_expected, concentration_risk: medium, attempts: 0, last_used_round: null, budget_next: small_probe}
+  - {strategy_id: opaque_but_traceable_proper_name, family: controlled_coinage, status: active, value_targets: [V-AGENCY, V-CREATION], quality_yield: unknown, distinctiveness_yield: high_expected, recoverability_yield: medium_expected, reality_crowding: unknown, recent_information_gain: high_expected, concentration_risk: medium, attempts: 0, last_used_round: null, budget_next: small_probe}
+  - {strategy_id: adjacent_domain_metaphor, family: direct_lexical, status: active, value_targets: [V-AGENCY, V-CREATION, V-RETURN], quality_yield: unknown, distinctiveness_yield: medium_expected, recoverability_yield: high_expected, reality_crowding: unknown, recent_information_gain: medium_high, concentration_risk: low, attempts: 0, last_used_round: null, budget_next: small_probe}
+  - {strategy_id: semantically_motivated_fusion, family: compositional_derived, status: active, value_targets: [V-AGENCY, V-CREATION], quality_yield: unknown, distinctiveness_yield: high_expected, recoverability_yield: medium_expected, reality_crowding: unknown, recent_information_gain: medium_high, concentration_risk: medium, attempts: 0, last_used_round: null, budget_next: small_probe}
+  recent_allocations: []
+  diagnostics:
+    scheduler_monoculture: false
+    method_underuse: false
+    territory_material_starvation: unknown
     notes:
-    - RND-051未命中既有Controller-only exclusions，但concentration audit发现新的construction-surface集中，因此该轮不能被当作对morpheme-grounded coinage区域的完整失败证据。
-    - RND-052采用多种构造架构纠偏；未把新增cooldown具体token或历史负面样本写入Brief。
-  strategy_fidelity:
-    rnd_051: partial_fail_new_surface_shell_concentration
-    rnd_052: pass_diversified_morpheme_grounded_coinage
-    rnd_053: pass_integrity_and_phase_diagnosis_no_generation
-  concentration_check:
-    prior_mode_collapse_recurrence: false
-    new_local_family_detected: FAM-RND051-01
-    new_family_contained_before_phase_conclusion: true
-    negative_constraint_priming_current_brief: false
-    isolation_overclaim: false
-    result: pass_after_corrective_round
-current_status:
-  strongest_candidates: [N060]
-  promising_candidates: [N060]
-  comparison_only_candidates: [N060]
-  held_candidates: [N061]
-  finalists: []
-  owner_review_needed_now: true
-  biggest_unknown: 当前单词名称搜索已经逼近distinctiveness-versus-recoverability边界：更可恢复、更有真实语义锚点的proper-name结构仍非常容易在现实中被独立重造并形成exact identity；继续提高新造程度则快速增加拼写、发音或空心科技词风险。下一步最高信息价值不再是继续同样单词构词，而是确认是否允许打开新的名称架构空间。
-  information_gain: snapshot v35之后生成48个内部probe。RND-051暴露新的表层构词集中并被诊断；RND-052纠偏后，5个通过名称本体/架构funnel的top-slice候选现实检查得到4个red exact/high-adjacency identity和1个yellow exact identity，0个通过公共身份门槛，因此没有新.org查询，也没有新增Owner Exposure candidate。
-blockers: []
-deferred_risks:
-- id: B03
-  type: official_trademark_screening
-  status: deferred_by_owner
-  statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。
-owner_signals:
-- {id: OS-N060-01, candidate_id: N060, valence: neutral_accepting, summary: 当前comparison候选Owner接受但无明显偏爱；仅用于比较，不作为生成模板。}
-- {id: OS-METHOD-01, type: process_integrity_feedback, valence: corrective, summary: Owner要求防止语义/形态模式坍缩；v0.2.1本阶段继续执行Controller-only exclusions、positive Brief、post-generation filter与真实隔离语义。}
+    - 不再把 A/B/AB/C 交给 Owner；多条未被 hard constraints 禁止的高信息价值路线由 Controller 小批并行。
+
+transformation_rescue:
+  active_branches: []
+  history: []
+  rescue_overfit_detected: false
+  pending_seed_audit: true
+
+execution:
+  autonomous_microcycles: true
+  module_policy: progressive_disclosure
+  preferred_batch_size:
+    broad_exploration: 6-10
+    focused_or_exploitation: 3-5
+    validation: 0
+  owner_interaction_gate:
+    last_checked_at: null
+    proposed_question: null
+    classification: search_strategy
+    confirmed_constraint_ids_affected: []
+    missing_fact: null
+    reversible_without_owner: true
+    parallel_exploration_possible: true
+    decision: continue_autonomously
+    rationale: v36 的“单词 vs 两词 / 更不透明单词”属于可逆方法与架构探索，不改变有 provenance 的 Owner hard constraints。
+  pause_only_when:
+  - source_backed_owner_boundary_decision_required
+  - final_subjective_choice_required
+  - missing_goal_fact_cannot_be_recovered
+  - irreducible_blocker
+  - budget_or_time_boundary
+  current_budget_or_time_boundary: null
+
 candidates:
 - id: N060
   name: Plurifold
   active: true
-  status: promising_owner_neutral_comparison_candidate
-  role: frozen_comparison_only
+  role: comparison_only
   generation_use: prohibited_as_template_or_semantic_anchor
-  quality: {blind_review: 'KEEP -> Owner Exposure Gate', canonical_segmentation: stable, spelling_recovery: light_to_medium, semantic_fit: strong_but_partial, semantic_room: strong, target_scale_fit: medium_good_to_strong, architecture_extensibility: strong}
-  owner_exposure: {raw_affect: neutral, informed_affect: neutral_accepting}
-  reality: {exact_public_identity: no_material_exact_collision_found_at_checked_time, domain: plurifold.org_available_at_checked_time, trademark: unresolved_deferred_by_owner}
+  value_target_ids: []
+  construction_strategy: historical
+  quality: {distinctiveness: strong_historical, pronounceability: good, spelling_burden: light_to_medium, memorability: good, semantic_fit: strong_partial, semantic_room: strong, target_scale_fit: medium_good_to_strong, longevity: strong, symbolic_compression: strong_partial, cross_context_use: strong, architecture_extensibility: strong}
+  value_alignment: {aligned_value_ids: [V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-AGENCY, V-CREATION, V-RETURN], overall_observation: historical comparison only; do not use as generation seed, confidence: medium}
+  reality: {collision: {observation: no_material_exact_collision_found_at_checked_time, confidence: historical, evidence: []}, domains: [plurifold.org_available_at_checked_time], trademark_oriented_risk: {observation: unresolved_deferred, evidence: []}, namespaces: []}
+  owner_signal: {observation: neutral, confidence: medium, notes: [neutral accepting comparison reference]}
 - id: N061
   name: Plurivocal
   active: false
-  status: hold_generation_strategy_contaminated_not_quality_failed
-  role: historical_hold_only
+  role: held
+  generation_use: prohibited_as_template_or_semantic_anchor
+  diagnosis: [historical_hold_only]
+
 rounds:
-- id: RND-051
-  action: morpheme_grounded_semantic_light_coinage_initial_probe
+- id: RND-051-053
+  action: historical_phase_summary
   search_mode: exploration
-  generation_brief_id: GB-MORPH-051-052
-  generation_isolation_level: best_effort_same_context
-  generated_count: 24
-  internal_candidates: [Scripta, Scriptum, Scriba, Glossa, Glossant, Annotive, Notara, Tradence, Tradita, Legatum, Legant, Heritive, Curata, Curant, Fidara, Versance, Versive, Recensa, Addita, Durata, Perenna, Refolio, Folium, Vestiga]
-  post_generation_filter: {blocked_count: 0, preexisting_exclusions_hit: false}
-  quality_observation: 多个候选有真实词根或可解释锚点，但raw batch明显集中于相似的类拉丁proper-name表层；部分甚至滑回现成词/现成形态，未充分回答“受控新造能否打开身份空间”的问题。
-  post_round_integrity:
-    strategy_fidelity: partial_fail
-    new_local_concentration_detected: true
-    action: created_controller_only_cooldown_FAM-RND051-01_and_reframed_positive_construction_diversity
-  reality_policy: 本轮不把已观察到的零散现实身份用于证明该策略失败；先纠正strategy fidelity再评价该方向。
-  result: corrective_round_required
-- id: RND-052
-  action: diversified_morpheme_grounded_coinage_corrective_probe
-  search_mode: exploration
-  generation_brief_id: GB-MORPH-051-052
-  generation_isolation_level: best_effort_same_context
-  generated_count: 24
-  internal_candidates: [Herital, Inherance, Notance, Glossance, Everance, Curalen, Fidura, Tradura, Doxadon, Curifer, Heriven, Heritell, Tradell, Cairna, Trustward, Loreward, Handforth, Facetell, Givance, Ownward, Anewal, Perenel, Donifer, Legance]
-  post_generation_filter: {blocked_count: 0, preexisting_exclusions_hit: false, new_surface_family_dominance: false}
-  quality_funnel_top_slice: [Heritell, Cairna, Loreward, Trustward, Everance]
-  quality_observation: 纠偏后top slice的语义可追溯、口语恢复、proper-name身份与组织架构适配明显好于纯装饰性新造；但最强样本仍主要依赖可理解的语义根，因此现实中容易被其他团队独立重造。
-  reality_after_funnel:
-  - {name: Heritell, class: red, observation: exact名称已有活跃family-story/heritage平台，且存在同名heritage audio-tour身份；与传承/公共知识邻域高度接近。, evidence: ['https://heritell.com/', 'https://webappheritell.webflow.io/']}
-  - {name: Cairna, class: red, observation: exact名称已有活跃behavioral mobility design组织；其公开命名解释本身就是“多人逐石累积成共享路标”，与本任务的累积贡献结构高度相似。, evidence: ['https://cairna.co/', 'https://cairna.co/about/']}
-  - {name: Loreward, class: red, observation: exact名称同时存在family knowledge preservation产品、myth/folklore knowledge library与RPG knowledge manager；知识传承/公共知识邻域直接拥挤。, evidence: ['https://www.lorewardfamily.com/', 'https://loreward.org/about', 'https://loreward.ch/en']}
-  - {name: Trustward, class: red, observation: exact名称已有AI-built-app governance产品，并存在其他同名组织/服务身份；AI/治理邻域直接占用。, evidence: ['https://trustward.ai/', 'https://www.trustward.com/']}
-  - {name: Everance, class: yellow, observation: exact名称存在活跃英国公司与服装品牌/商标身份；邻域不直接重叠，但长期全球母组织所需独立身份空间不足以视为通过。, evidence: ['https://find-and-update.company-information.service.gov.uk/company/16670872', 'https://everanceshirt.com/']}
-  domain_queries: 0
-  result: no_new_promising_candidate
-- id: RND-053
-  action: search_integrity_and_morpheme_coinage_phase_convergence_check
-  search_mode: exploration
-  generated_count: 0
-  checks:
-    prior_mode_collapse_recurrence: false
-    new_surface_concentration_detected_and_corrected: true
-    controller_only_exclusions_reexposed_in_brief: false
-    negative_constraint_priming: false
-    generation_isolation_level: best_effort_same_context
-    isolation_overclaim: false
-    reality_feedback_quarantine: pass_with_same_context_limitation
-    strategy_fidelity_after_correction: pass
-    owner_input_required: true_for_next_search_architecture_boundary
-  result: morpheme_grounded_semantic_light_single_token_phase_converged
-  phase_convergence: 受控新造可以提升proper-name身份，但在保持低误读、低听写分叉和真实语义锚点时，最好的单词形态仍频繁被现实独立重造；进一步提高新造程度则开始牺牲recoverability或变成空心科技词。当前出现distinctiveness-versus-recoverability frontier。
+  loaded_modules: [legacy_morpheme_grounded_coinage]
+  selected_strategy_ids: [historical_single_token_morpheme_grounded]
+  value_targets: []
+  generated_count: 48
+  findings:
+  - controlled coinage improved proper-name identity but hit reality congestion / recoverability frontier
+  - one local construction-surface concentration was detected and corrected before phase conclusion
+  - 5 quality top-slice candidates produced 4 red exact/high-adjacency identities + 1 yellow exact identity
+  - no new .org query and no new Owner Exposure candidate
+  integrity_check:
+    value_model_checked: false
+    name_job_checked: false
+    decision_criteria_checked: false
+    value_coverage_checked: false
+    family_concentration_checked: true
+    scheduler_monoculture_checked: false
+    method_underuse_checked: false
+    territory_material_starvation_checked: false
+    evaluation_anchoring_checked: false
+    incumbent_anchoring_checked: true
+    rescue_overfit_checked: false
+    negative_constraint_priming_checked: true
+    isolation_claim_checked: true
+    constraint_drift_checked: true
+    owner_interaction_gate_checked: true
+    strategy_fidelity_checked: true
+  next_action: migrate_to_v0.3.1_controller
+
+observations:
+- id: O-V36-BOUNDARY
+  scope: search_integrity
+  observation: 历史 v36 把 single-token / semantic recoverability 路线收敛误判成 Owner architecture boundary；v0.3.1 将其重分类为可逆 search strategy。
+  evidence: [snapshot-v36]
+- id: O-V031-MODULE
+  scope: strategy
+  observation: 新控制架构采用 progressive disclosure；Name Job / Decision Criteria 为核心，Communication Load / Territory Research / Decision Hygiene / Temporal / Validation 等只在触发时加载。
+  evidence: [skill-v0.3.1]
+
 diagnostics:
-- {id: D103, statement: 'RND-051说明morpheme-grounded并不会自动防止construction collapse；如果只更换语义根而复用相似proper-name表层，仍会出现新的局部模式集中。', confidence: high}
-- {id: D104, statement: 'RND-052纠偏后strategy fidelity恢复；5个名称本体top-slice样本现实筛查得到4个red exact/high-adjacency identity与1个yellow exact identity，没有样本通过到.org门槛。', confidence: high}
-- {id: D105, statement: '当前单词路线的核心限制已从“语义压缩过强”进一步收敛为distinctiveness-versus-recoverability frontier：语义与读写越可恢复，越容易被独立重造；形态越独特，越容易失去可解释性、听写恢复或长期机构气质。', confidence: medium_high}
-- {id: D106, statement: '本runtime始终只能提供best_effort_same_context；当前Brief没有重新暴露Controller-only exclusions，但历史上下文与本执行段现实查询均可能影响同一模型后续生成，因此本段不作为强隔离生成证据。', confidence: high}
-- {id: D107, statement: '在继续同一单词构词前，最高信息价值的下一步是确认名称架构边界：是否允许两词机构名，和/或允许更不透明但内部构造真实可追溯的单词proper name。该选择会实质改变搜索空间。', confidence: high}
-next_action:
-  action: owner_boundary_decision_on_name_architecture
+- id: D-V36-01
+  level: search_integrity
+  diagnosis_type: owner_boundary_false_positive
+  statement: single-token frontier 不构成 source-backed Owner hard boundary。
+  confidence: high
+  proposed_state_change: continue_autonomously_with_method_portfolio
+- id: D-V031-01
+  level: strategy
+  diagnosis_type: name_job_ambiguity_historical
+  statement: 历史流程从 Mission / semantic core 过快进入生成；v0.3.1 已补 Name Job 与 Decision Criteria 层。
+  confidence: high
+  proposed_state_change: initialize_name_job_and_scheduler_before_next_generation
+
+experience_candidates: []
+
+current_state:
+  strongest_candidates: [N060]
+  promising_candidates: [N060]
+  held_candidates: [N061]
+  finalists: []
+  pareto_front: []
+  current_region_ids: []
+  current_value_target_ids: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
+  active_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
+  active_rescue_branch_ids: []
+  loaded_optional_modules: []
   search_mode: exploration
-  rationale: 当前单词、语义可恢复、低误读的proper-name空间经过semantic-light与morpheme-grounded两阶段后都出现稳定现实拥挤；继续同类微调信息增益下降。开放multiword institutional name或更opaque single-token proper name会改变硬边界，因此需要Owner确认。
-  recommended_option: allow_two_word_institutional_names_first_while_preserving_single_token_domain_and_abbreviation_evaluation
-  options:
-  - id: A
-    label: allow_two_word_institutional_names
-    effect: 保留低误读与真实语义，同时显著扩大现实身份空间；域名仍可用连写形式单独评估。
-  - id: B
-    label: allow_more_opaque_single_token_proper_names
-    effect: 继续坚持单词名称，但接受名称本体语义更轻，要求内部构造依据真实、发音拼写仍稳定。
-  - id: AB
-    label: allow_both_as_parallel_exploration
-    effect: 两个新空间并行探索，之后再比较架构与Owner resonance。
-  - id: C
-    label: keep_current_single_token_semantic_recoverability_boundary
-    effect: 继续现有单词空间；预计边际信息增益最低。
-  owner_question: 下一阶段是否允许A、B或AB；若仍坚持当前边界则选择C。
+  generation_isolation_level: best_effort_same_context
+  biggest_unknown: 在正确的 Name Job / value model 下，哪组差异化方法能同时提高独立身份、recoverability、长期母组织尺度与现实可推进性；以及历史强 intrinsic prototypes 中是否存在值得 bounded rescue 的 seed。
+  blockers: []
+  information_gain: high_for_method_portfolio_reset
+  mission_value_status: initialized_v0.3.1
+  name_job_status: active
+  criteria_status: active
+  method_scheduler_status: initialized_from_v36_diagnosis
+  search_integrity_status: ready_for_new_portfolio_exploration
+  constraint_integrity_status: pass_after_v36_reclassification
+  owner_review_needed_now: false
+
+next_action:
+  action: schedule_methods_then_generate_small_parallel_probes
+  target: active_method_portfolio
+  rationale: >-
+    v36 的局部路线已收敛，但没有真实 Owner boundary 阻止其他名称架构与方法。先用 3–5 个差异化 family 小批并行；若多方法仍回到相同词汇材料，则触发 territory_research；同时审计历史强 intrinsic / reality-failed prototypes 是否值得 bounded transformation rescue。
+  triggered_by: [D-V36-01, D-V031-01]
+  expected_information_gain: high
+  search_mode: exploration
+  selected_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
+  value_targets: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
+  modules_to_load: []
+  requires_owner: false
+  owner_gate_classification: search_strategy
+  affected_confirmed_constraint_ids: []
+
 stop:
-  status: owner_boundary_pause
-  reason: 当前阶段已明确收敛；下一高价值搜索动作会改变名称架构/语义透明度边界，需要Owner判断。
+  status: continue
+  reason: v36 only converged a local single-token route; v0.3.1 exposes additional reversible high-information search spaces.
+  unresolved:
+  - official trademark screening remains deferred_by_owner
+  - true isolated generation runtime is not available in this context
