@@ -6,13 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 65
+  snapshot_version: 66
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v64 确认 semantic-anchor reset 后 lexical/conceptual distance 已恢复。
-    本快照继续执行 clean peer search；不使用 N122 Turn of Mind 作为生成模板，也不暴露 literal mission tokens。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v65 在 semantic-anchor reset 后恢复了 lexical/conceptual distance，
+    但 Owner 发现新的表面形式收敛：Turn of Mind / New Grammar / Form of Thought / Part and Whole / Mutual Matter 等连续落入英语多词关系短语。
+    本快照将其识别为 morphotype/architecture scheduling collapse，并执行 form-coverage reset。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -26,7 +27,7 @@ constraint_registry:
     - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
     - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
     - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve form diversity, confidence: medium_high}
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
     - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
 
 mission_value_model:
@@ -34,59 +35,90 @@ mission_value_model:
   literal_value_tokens_available_to_generator: false
   generator_representation: abstract_relations_and_transformations_only
 
-integrity_incident:
-  id: INC-SEMANTIC-ANCHOR-001
-  status: corrected_and_live_recovery_observed
-  classification: controller_runtime_fidelity_failure
-  correction:
-    - quarantine_literal_mission_tokens_from_generator_context
-    - positive_abstract_generation_brief
-    - post_generation_literal_value_token_leakage_check
-  method_evolution_status: experience_candidate_for_regression_not_stable_skill_rewrite
+integrity_incidents:
+  - id: INC-SEMANTIC-ANCHOR-001
+    status: corrected_and_live_recovery_observed
+    classification: controller_runtime_fidelity_failure
+    mechanism: literal Value Model wording leaked into meaning-first lexical material and caused semantic mode collapse
+  - id: INC-MORPHOTYPE-COLLAPSE-002
+    detected_by: owner
+    status: corrected_in_scheduler
+    classification: workflow_scheduler_fidelity_failure
+    mechanism: >-
+      After several compact-coinage, classical-root and single-word regions showed high reality crowding, the Controller over-allocated search budget to natural-English semantic/relational phrases.
+      Semantic diversity recovered, but Owner-visible morphotype diversity collapsed.
+    evidence:
+      - Turn of Mind
+      - New Grammar
+      - Form of Thought
+      - Part and Whole
+      - Mutual Matter
+    interpretation: >-
+      Reality crowding in one or more morphotypes must reduce local exploitation without allowing a different single morphotype to monopolize the portfolio.
+      Meaning-first is an evaluation priority, not a phrase-construction instruction.
+    correction:
+      - explicit_morphotype_portfolio_coverage
+      - phrase_architecture_cooldown_for_next_divergence_batch
+      - parallel_generation_by_form_class
+      - evaluate_meaning_within_each_form_class_not_by_collapsing_to_phrases
+      - do_not_expose_controller_cooldown_lists_to_generator
 
 controller_only_quarantine:
   literal_value_tokens: [common, commons, perspective, creation, return]
-  policy: temporary task-local contamination quarantine; not global banned names; never expose list to Generator
+  temporary_architecture_cooldown:
+    - established_english_relational_phrase
+    - preposition_phrase_of_form
+    - adjective_noun_semantic_metaphor_phrase
+  policy: >-
+    These are task-local Controller controls, not global banned forms. Phrase forms may return after form diversity is restored; do not expose negative lists to Generator.
 
 expression_profile:
   baseline: meaningful + stable-modern + organization-scale + recoverable + non-personal
   secondary_preferences: [compactness, rhythmic_balance]
   optional_bonuses: [visual_cycle_echo, understated_cleverness]
-  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend]
+  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_phrase]
 
 search_control:
-  mode: post_semantic_reset_divergence
+  mode: morphotype_portfolio_reset
   search_cadence:
-    mode: portfolio_batch
-    target: clean owner-ready candidate(s) with semantic depth and stronger source distinctiveness than N122
+    mode: category_parallel
+    target: restore genuine Owner-visible form diversity while retaining meaning-first quality and semantic-anchor isolation
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
+morphotype_portfolio:
+  rule: no_single_form_class_should_dominate_the_next_divergence_batch
+  parallel_classes:
+    - lexical_single_semantic_transfer
+    - blend_or_semantic_fusion
+    - root_derived_or_affixal
+    - opaque_or_semiopaque_proper_name
+    - nonenglish_or_crosslanguage_identity
+    - symbolic_or_structural_identity
+    - compound_single_token
+    - phrase_or_relational_name_minor_budget_only
+  evaluation_policy: >-
+    Each class must be allowed to express meaning in its own way. Do not treat transparent phrase-level explainability as the definition of meaningfulness.
+
 rounds:
   - {id: RND-106, action: semantically_sanitized_divergence_batch_1, result: conceptual_distance_restored}
-  - id: RND-107
-    action: clean_survivor_reality_probe
+  - {id: RND-107, action: clean_survivor_reality_probe, result: Turn of Mind held_internal_preliminary}
+  - {id: RND-108, action: clean_peer_batch_2, result: phrase-heavy mixed survival}
+  - {id: RND-109, action: form_of_thought_reality_and_domain_probe, result: owner_ready_provisional}
+  - id: RND-110
+    action: owner_detected_morphotype_diversity_audit
+    result: architecture_collapse_confirmed
     findings:
-      - Turn of Mind survived preliminary identity/domain screening but has moderate source-distinctiveness due established phrase and book/film uses
-  - id: RND-108
-    action: clean_peer_batch_2
-    findings:
-      - Second Order rejected due multiple active exact/high-adjacency software, consulting, game and AI identities
-      - Working Theory rejected due multiple active technology/AI/consulting identities with highly adjacent positioning
-      - Counterform rejected due long-running exact-name creative/design company identities
-      - Second Voice rejected due active exact-name storytelling initiative and B2B sales company
-      - New Grammar remains internally promising but has strong first-read language/education association and natural-expression distinctiveness risk
-  - id: RND-109
-    action: form_of_thought_reality_and_domain_probe
-    result: owner_ready_provisional
-    findings:
-      - no material active exact company/software/organization found in current public search
-      - exact phrase has philosophical/academic/title uses, creating some cultural noise but lower adjacency than N122
-      - formofthought.org observed available via Namecheap on 2026-09-11 for USD 8.48
-      - meaning is independent of literal mission vocabulary and can support multiple project forms under a long-term organization
+      - semantic diversity alone did not guarantee form diversity
+      - meaning-first was implicitly operationalized as transparent English phrase explainability
+      - reality crowding caused local region pruning but the scheduler failed to reserve exploration budget across remaining form classes
+      - Owner-visible diversity therefore narrowed despite explicit PREF-MORPHOTYPE-OPENNESS
+  - id: RND-111
+    action: morphotype_portfolio_reset
+    result: next_generation_contract_rebalanced
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -94,79 +126,51 @@ candidates:
   - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N121, name: Common Refrain, role: diagnostic_contaminated_not_owner_ready, active: false, generation_use: prohibited_as_template_or_seed}
-  - id: N122
-    name: Turn of Mind
-    role: held_internal_preliminary
-    active: true
-    morphotype: established_phrase_semantic_double_reading
-    reality_status: preliminary_pass_with_title_usage
-    domain_status: turnofmind.org_available_2026_09_11
-    owner_exposure: not_yet
-    generation_use: prohibited_as_template
-  - id: N123
-    name: Form of Thought
-    role: finalist_owner_ready_provisional
-    active: true
-    morphotype: institutional_semantic_phrase
-    intrinsic_case:
-      - names the relation between an idea and the form it takes rather than literalizing mission wording
-      - broad enough to hold research, education, software, publishing and independent projects
-      - stable/serious institutional tone with understandable second reading
-      - medium length but recoverable and rhythmically coherent
-    owner_profile_fit:
-      meaning_first: strong
-      stable_modern: strong
-      recoverability: strong
-      understated_cleverness: medium
-      compactness: acceptable_secondary
-      personal_name_risk: low
-    reality_status: preliminary_pass
-    domain_status: formofthought.org_available_2026_09_11
-    risks:
-      - natural philosophical English phrase; trademark/source distinctiveness is moderate rather than coined-name strong
-      - some academic/title uses exist
-    owner_exposure: now
-    generation_use: prohibited_as_template
-  - id: N124
-    name: New Grammar
-    role: held_internal_preliminary
-    active: true
-    morphotype: semantic_metaphor_phrase
-    reality_status: preliminary_pass_with_education_noise
-    domain_status: newgrammar.org_available_2026_09_11
-    risks:
-      - strong first-read association with language/grammar education and textbooks
-      - natural phrase gives weaker source distinctiveness
-    owner_exposure: not_yet
-    generation_use: prohibited_as_template
+  - {id: N122, name: Turn of Mind, role: held_internal_preliminary, active: true, morphotype: established_phrase_semantic_double_reading, generation_use: prohibited_as_template}
+  - {id: N123, name: Form of Thought, role: provisional_owner_exposed_but_form_family_contaminated, active: true, morphotype: institutional_semantic_phrase, generation_use: prohibited_as_template}
+  - {id: N124, name: New Grammar, role: held_internal_preliminary, active: true, morphotype: semantic_metaphor_phrase, generation_use: prohibited_as_template}
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  new_experience_candidate: literal_value_token_leakage_can_create_semantic_mode_collapse_even_when_morphotype_diversity_looks_healthy
-  proposed_regression: verify Value Model literal vocabulary does not become privileged Generator material unless independently justified by a territory decision
+  active_hypothesis: HYP-004
+  latest_evidence: >-
+    This incident directly supports HYP-004: semantic/search diversity and Owner-visible morphotype diversity are distinct dimensions. A scheduler can restore semantic independence yet still collapse into one surface architecture.
+  proposed_regression_addition: ensure portfolio-level morphotype coverage is checked after region pruning or reality-crowding updates
   stable_skill_rewrite_allowed_now: false
+  reason: HYP-004 is already testing this class of gap; collect regression evidence before stable promotion
 
 current_state:
-  finalists: [N096, N113, N117, N119, N123]
-  held_clean_survivors: [N122, N124]
-  search_mode: post_semantic_reset_divergence
-  biggest_unknown: Owner reaction to N123 and whether a clean peer can achieve stronger source distinctiveness without falling back into SaaS coinage or generic natural phrases.
+  finalists: [N096, N113, N117, N119]
+  held_clean_survivors: [N122, N123, N124]
+  search_mode: morphotype_portfolio_reset
+  biggest_unknown: >-
+    Which materially different form classes can produce meaning-rich, source-distinctive, recoverable organization identities once transparent English phrases stop dominating the search budget?
   blockers: []
-  owner_review_needed_now: true
-  information_gain: high
+  owner_review_needed_now: false
+  information_gain: high_from_owner_detected_scheduler_failure
 
 next_action:
-  action: collect_owner_reaction_to_N123_while_continuing_distinctiveness_search
+  action: run_balanced_morphotype_divergence_batch
+  selected_workflow_patterns: [category_parallel, divergence_burst, creative_linguistic_parallel]
+  required_form_coverage:
+    - lexical_single_semantic_transfer
+    - blend_or_semantic_fusion
+    - root_derived_or_affixal
+    - opaque_or_semiopaque_proper_name
+    - nonenglish_or_crosslanguage_identity
+    - symbolic_or_structural_identity
+    - compound_single_token
+  phrase_budget: minor_only_until_diversity_restored
   rationale: >-
-    N123 is the first post-reset peer that improves on N122's organization-scale identity and preliminary source distinctiveness while retaining meaning depth and .org availability. Continue autonomous search because N123 remains a natural phrase rather than a highly distinctive proper name.
-  requires_owner: true_for_N123_reaction_not_for_continued_internal_search
+    Restore true form diversity without sacrificing meaning-first quality. Meaning may be implicit, etymological, structural, metaphorical or brand-built; it does not need to be transparently explainable as an English phrase.
+  requires_owner: false_until_materially_distinct_owner_ready_survivor_exists
 
 stop:
-  status: owner_feedback_plus_continue
+  status: continue
+  reason: Owner identified a reversible scheduler failure; correction is clear and autonomous search can continue
   unresolved:
-    - N123 Owner reaction needed
-    - stronger source-distinctive peer still desirable
+    - genuinely diverse clean peer set still needed
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
