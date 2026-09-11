@@ -1,103 +1,88 @@
 schema_version: '0.3.1'
+
 task:
   issue: 411
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 37
+  snapshot_version: 38
   skill_version: 0.3.2
-  skill_control_commits: [cbee63c, ef16007, d967470, 876598d, 9efa062, 3d8792a, 11eb28a, 39dfc31, e35a28f, a22273c, 1ac19c9, 0e5aae1, c37bbf7, 5fed039, 6ba0c1e, 0db924a, c771e78, 46f7e94, 26fc057, f96a30a]
+
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v36 以前的候选、round、reality evidence 与诊断历史仍由 commit 3348d1650e68404704b11097c10f0818c4adeae1 及 Git history 保留；
-    snapshot v37 在 v0.3.1 state migration 上继续使用 Skill v0.3.2 的 Module Routing Contract 与 Regression Eval policy。
-  previous_snapshot:
-    snapshot: 36
-    commit: 3348d1650e68404704b11097c10f0818c4adeae1
-  historical_archive_v32: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v32.yaml
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v36 及以前历史由 Git history 保留；
+    snapshot v37（commit 62a3d2508c73f32d8057a64b900e5d85a261804b）保存了 v0.3.2 router 首次实战、
+    RND-054 全部 probe/candidate 明细与 Territory Research material map。v38 只压缩已退休 working pool，
+    保留所有 active/held learning 与最新控制状态。
+  previous_snapshots:
+    - {snapshot: 36, commit: 3348d1650e68404704b11097c10f0818c4adeae1}
+    - {snapshot: 37, commit: 62a3d2508c73f32d8057a64b900e5d85a261804b}
 
 constraint_registry:
   confirmed_hard_constraints:
-  - id: HC-ORG-SCALE
-    statement: 名称必须能够承载 InteropAtlas 上层长期 umbrella organization，而非锁死为单一项目、协议、地图、平台或行业。
-    source_type: owner_explicit
-    source_ref: organization-vision
-  - id: HC-RECOVERABILITY
-    statement: 避免明显高误读、高听写分叉；名称需具备可接受的口语与拼写恢复性。
-    source_type: owner_explicit
-    source_ref: prior-owner-feedback
-  - id: HC-ORG-DOMAIN
-    statement: 最终 finalist 的同名普通 .org 可注册性为硬门槛；早期创意质量阶段不以此淘汰。
-    source_type: owner_explicit
-    source_ref: issue-411-policy
+    - id: HC-ORG-SCALE
+      statement: 名称必须承载 InteropAtlas 上层长期 umbrella organization，而非锁死为单一项目、协议、地图、平台或行业。
+      source_type: owner_explicit
+      source_ref: organization-vision
+    - id: HC-RECOVERABILITY
+      statement: 避免明显高误读、高听写分叉；名称需具备可接受的口语与拼写恢复性。
+      source_type: owner_explicit
+      source_ref: prior-owner-feedback
+    - id: HC-ORG-DOMAIN
+      statement: 最终 finalist 的同名普通 .org 可注册性为硬门槛；早期创意质量阶段不以此淘汰。
+      source_type: owner_explicit
+      source_ref: issue-411-policy
   owner_preferences:
-  - id: PREF-LOW-MISREAD
-    statement: 更偏好不容易误读的名称。
+    - {id: PREF-LOW-MISREAD, statement: 更偏好不容易误读的名称。}
   controller_search_variables:
-  - id: SV-WORD-COUNT
-    name: word_count
-    current_value: open
-    allowed_values: [single_token, multiword, both]
-    rationale: 历史 single-token focus 无 Owner hard-constraint provenance；v0.2.2 已诊断为 search variable。
-    owner_approval_required_to_change: false
-  - id: SV-SEMANTIC-TRANSPARENCY
-    name: semantic_transparency
-    current_value: adaptive
-    allowed_values: [transparent, light, opaque_but_traceable, mixed]
-    owner_approval_required_to_change: false
+    - id: SV-WORD-COUNT
+      name: word_count
+      current_value: open
+      allowed_values: [single_token, multiword, both]
+      rationale: historical single-token focus has no Owner hard-constraint provenance
+      owner_approval_required_to_change: false
+    - id: SV-SEMANTIC-TRANSPARENCY
+      name: semantic_transparency
+      current_value: adaptive
+      allowed_values: [transparent, light, opaque_but_traceable, mixed]
+      owner_approval_required_to_change: false
   assumptions: []
 
 mission_value_model:
   source_refs: [organization-vision, issue-411-recovery]
-  actors:
-  - commons / public
-  - individual
-  - contributors / creators
-  - projects / institutions
-  objects:
-  - knowledge
-  - perspective / interpretation
-  - creation / discovery
-  - shared public knowledge
+  actors: [commons / public, individual, contributors / creators, projects / institutions]
+  objects: [knowledge, perspective / interpretation, creation / discovery, shared public knowledge]
   transformations:
-  - shared knowledge enables individual perspective
-  - individual perspective enables creation / discovery
-  - creation can return to the commons
-  - returned knowledge supports another cycle
+    - shared knowledge enables individual perspective
+    - individual perspective enables creation / discovery
+    - creation can return to the commons
+    - returned knowledge supports another cycle
   relations_and_agency:
-  - 公共知识属于共同体层面的共享资源；个人保有形成视角、解释与选择的自主性。
-  - commons 与 individual agency 是需要同时保留的关系，而不是“多人”替代“个人视角”。
+    - 公共知识属于共同体层面的共享资源；个人保有形成视角、解释与选择的自主性。
+    - commons 与 individual agency 要同时保留，不能把“多人/多元”当成个人 agency 的替代。
   temporal_or_causal_structure:
-  - Commons → Perspective → Creation → Commons ↺ 是循环 / 反馈结构，而非四个并列关键词。
+    - Commons → Perspective → Creation → Commons ↺ is a feedback cycle, not four parallel keywords
   desired_world:
-  - 公共知识持续积累且可被访问、理解和再利用。
-  - 个体可以从共享知识形成自己的解释、选择与创造。
-  - 新创造能够重新进入公共积累并支持下一轮。
-  anti_values_or_non_goals:
-  - 不把组织锁死成单一项目形式。
-  - 不要求所有个人形成统一视角。
+    - public knowledge remains accumulative and reusable
+    - individuals form independent interpretation / choice / creation from shared knowledge
+    - new creation can re-enter the commons and support later cycles
   value_claims:
-  - {id: V-COMMONS, statement: knowledge should remain part of a shared commons, evidence_type: explicit, value_type: end, priority: core, confidence: high}
-  - {id: V-AGENCY, statement: individuals should retain interpretive perspective and choice, evidence_type: explicit, value_type: relation, priority: core, confidence: high}
-  - {id: V-CREATION, statement: perspective should enable creation / discovery, evidence_type: structural, value_type: end, priority: high, confidence: high}
-  - {id: V-RETURN, statement: creation can contribute back into shared knowledge, evidence_type: structural, value_type: procedural, priority: high, confidence: high}
-  - {id: V-CONTINUITY, statement: the system should support durable renewal across cycles, evidence_type: structural, value_type: identity, priority: supporting, confidence: medium_high}
+    - {id: V-COMMONS, statement: knowledge should remain part of a shared commons, evidence_type: explicit, value_type: end, priority: core, confidence: high}
+    - {id: V-AGENCY, statement: individuals should retain interpretive perspective and choice, evidence_type: explicit, value_type: relation, priority: core, confidence: high}
+    - {id: V-CREATION, statement: perspective should enable creation / discovery, evidence_type: structural, value_type: end, priority: high, confidence: high}
+    - {id: V-RETURN, statement: creation can contribute back into shared knowledge, evidence_type: structural, value_type: procedural, priority: high, confidence: high}
+    - {id: V-CONTINUITY, statement: the system should support durable renewal across cycles, evidence_type: structural, value_type: identity, priority: supporting, confidence: medium_high}
   value_relations:
-  - {value_a: V-COMMONS, value_b: V-AGENCY, relation: balance, rationale: shared knowledge and individual perspective must coexist}
-  - {value_a: V-AGENCY, value_b: V-CREATION, relation: sequence, rationale: perspective enables creation}
-  - {value_a: V-CREATION, value_b: V-RETURN, relation: sequence, rationale: creation may return to commons}
+    - {value_a: V-COMMONS, value_b: V-AGENCY, relation: balance}
+    - {value_a: V-AGENCY, value_b: V-CREATION, relation: sequence}
+    - {value_a: V-CREATION, value_b: V-RETURN, relation: sequence}
   naming_implications:
-  - {value_id: V-COMMONS, mode: indirect, rationale: 可作为共同、开放、共享或结构隐喻，但不要求字面出现 commons}
-  - {value_id: V-AGENCY, mode: indirect, rationale: 应防止 collective proxy 抹掉个体 agency；更适合通过视角、分化、解释、选择等结构表达}
-  - {value_id: V-CREATION, mode: indirect, rationale: 可通过生成、展开、形成、发现等隐喻表达}
-  - {value_id: V-RETURN, mode: guardrail_only, rationale: 不要求名字直接编码回流循环}
-  - {value_id: V-CONTINUITY, mode: optional_story, rationale: 可支持长期组织气质但不是字面硬要求}
-  value_coverage:
-  - {value_id: V-COMMONS, sampling_level: medium, recent_strategy_ids: [institutional_pair_phrase, semantically_motivated_fusion], strong_candidate_ids: [], interpretation: 表面 shared/open proxy 容易生成，但需避免重新把 commons 简化成 collective token}
-  - {value_id: V-AGENCY, sampling_level: medium, recent_strategy_ids: [adjacent_domain_metaphor, opaque_but_traceable_proper_name], strong_candidate_ids: [N062, N066], interpretation: interpretation/perspective 类材料有质量信号，但现实命名空间拥挤且部分术语偏学术}
-  - {value_id: V-CREATION, sampling_level: medium, recent_strategy_ids: [adjacent_domain_metaphor, semantically_motivated_fusion], strong_candidate_ids: [N067], interpretation: enabling/growth metaphor有潜力，但显性词空间高度占用}
-  - {value_id: V-RETURN, sampling_level: low, recent_strategy_ids: [], strong_candidate_ids: [], interpretation: 仍主要作为 guardrail；下一轮不要求字面表达}
+    - {value_id: V-COMMONS, mode: indirect}
+    - {value_id: V-AGENCY, mode: indirect}
+    - {value_id: V-CREATION, mode: indirect}
+    - {value_id: V-RETURN, mode: guardrail_only}
+    - {value_id: V-CONTINUITY, mode: optional_story}
   integrity:
     value_flattening_detected: false
     mission_overcompression_detected: false
@@ -107,532 +92,427 @@ mission_value_model:
 
 name_job_model:
   primary_jobs:
-  - 形成可长期积累、可独立识别的母组织 proper identity。
-  - 能承载多个独立项目、研究、工具、教育、出版与公共知识工作。
-  - 在口语与书写中保持较稳定的恢复性。
-  - 为长期品牌故事保留足够语义空间，而不锁死为当前 InteropAtlas 的单一形式。
+    - form a durable, independently recognizable umbrella-organization identity
+    - support multiple projects / research / tools / education / publishing / public knowledge work
+    - maintain acceptable spoken and written recoverability
+    - leave enough semantic room for long-term brand meaning
   secondary_jobs:
-  - 与一个或少数 core value / structural relation 建立真实但不必直白的联系。
-  - 具有足够记忆性、机构感与创造能量。
+    - establish a truthful connection to one or a few core values / structural relations when possible
+    - carry enough memorability, institutional scale and creative energy
   non_jobs:
-  - 裸名不需要逐字解释完整 Commons → Perspective → Creation → Commons 循环。
-  - 裸名不需要列举 research / education / tools / publishing 等业务。
-  - 名称不需要独自承担全部 mission narrative。
+    - the bare name does not need to encode the full Commons → Perspective → Creation → Commons loop
+    - the bare name does not need to enumerate future activities
+    - the name alone does not carry the whole mission narrative
   tensions:
-  - distinctiveness ↔ recoverability
-  - semantic transparency ↔ ownable identity
-  - institutional scale ↔ creative energy
-  success_evidence: []
-  source_refs: [organization-vision, rnd-042-054-diagnostics]
+    - distinctiveness ↔ recoverability
+    - semantic grounding ↔ ownable identity
+    - institutional scale ↔ creative energy
   status: active
 
 decision_criteria:
   items:
-  - {id: C-SCALE, statement: 长期 umbrella organization scale, role: gate, source_ref: HC-ORG-SCALE, confidence: high}
-  - {id: C-RECOVERY, statement: 低到可接受的发音 / 听写恢复负担, role: optimize, source_ref: HC-RECOVERABILITY, confidence: high}
-  - {id: C-DISTINCT, statement: 独立 proper-name identity / distinctiveness, role: optimize, source_ref: name-job-model, confidence: high}
-  - {id: C-VALUE, statement: 与 Mission / Value Model 不冲突并最好有真实连接, role: optimize, source_ref: mission-value-model, confidence: high}
-  - {id: C-DOMAIN, statement: 同名普通 .org 最终可注册, role: gate, source_ref: HC-ORG-DOMAIN, confidence: high}
-  - {id: C-OWNER, statement: Owner long-term resonance, role: prefer, source_ref: owner-preference, confidence: medium}
-  - {id: C-TM, statement: 官方商标风险, role: observe, source_ref: owner-deferred-policy, confidence: high}
-  integrity:
-    role_confusion_detected: false
-    role_drift_detected: false
+    - {id: C-SCALE, statement: long-term umbrella organization scale, role: gate, source_ref: HC-ORG-SCALE, confidence: high}
+    - {id: C-RECOVERY, statement: low-to-acceptable pronunciation / dictation burden, role: optimize, source_ref: HC-RECOVERABILITY, confidence: high}
+    - {id: C-DISTINCT, statement: independent proper-name identity, role: optimize, source_ref: name-job-model, confidence: high}
+    - {id: C-VALUE, statement: no contradiction with Mission / Value Model and preferably a truthful connection, role: optimize, source_ref: mission-value-model, confidence: high}
+    - {id: C-DOMAIN, statement: exact ordinary .org available for finalist, role: gate, source_ref: HC-ORG-DOMAIN, confidence: high}
+    - {id: C-OWNER, statement: Owner long-term resonance, role: prefer, source_ref: owner-preference, confidence: medium}
+    - {id: C-TM, statement: formal trademark-oriented clearance, role: observe, source_ref: owner-deferred-policy, confidence: high}
+  integrity: {role_confusion_detected: false, role_drift_detected: false}
 
 optional_modules:
-  communication_load_allocation:
-    status: inactive
-    trigger: activate only if name_overloading recurs
-    name: []
-    descriptor: []
-    tagline: []
-    mission_statement: []
-    brand_architecture: []
-    visual_identity: []
-    organizational_practice: []
   territory_research:
-    status: active
-    trigger: multi-method RND-054 still collapsed toward common lexical/material pool and strong visible terms were reality-crowded
-    activation_budget:
-      unknown: Need richer, less obvious real-world conceptual material before another equivalent generation batch.
-      decision: May change semantic/material territories supplied to Scheduler and Generator.
-      cheaper_alternative: Another unresearched generation batch would likely repeat the same lexical pool; no cheaper action has comparable information value.
-      stop_condition: Stop after a small material map yields several structurally distinct positive territories suitable for generation.
-    active_territories:
-    - printmaking / edition mechanics
-    - textual annotation / critical reading
-    - ecology / succession and boundary systems
-    material_maps:
-    - territory: printmaking / edition mechanics
-      sources: [National Gallery of Australia printmaking glossary, Hauser & Wirth printmaking glossary, Print Center New York glossary]
-      structural_material:
-      - shared matrix can produce multiple impressions
-      - variable editions preserve a common source while allowing deliberate difference
-      - proof / state records development rather than a single frozen final form
-      - registration aligns distinct elements without making them identical
-    - territory: textual annotation / critical reading
-      sources: [Getty AAT marginalia record, critical-edition terminology reference]
-      structural_material:
-      - a shared text can support independent annotations and readings
-      - multiple witnesses / readings can coexist around a common work
-      - apparatus preserves differences rather than erasing them
-    - territory: ecology / succession and boundary systems
-      sources: [US Forest Service ecology glossaries, USFS succession research]
-      structural_material:
-      - ecotones are transition zones between communities
-      - succession is staged change where earlier conditions can enable later states
-      - facilitation can let one community or stage support another without becoming identical to it
-      - root / crown and cohort concepts separate shared system structure from individual growth
-    selected_material_for_generation:
-    - shared source → distinct realizations → retained as a larger edition / archive
-    - shared work → independent readings / annotations → preserved differences
-    - boundary / transition zone where distinct communities interact
-    - successive enabling where one stage creates conditions for later creation
-  decision_hygiene:
-    status: ready_on_trigger
-    trigger: activate for high-value shortlist / Owner Exposure or multi-reviewer comparison
-    independent_first_pass: true
-    reviewer_blindness_contracts: []
-    anchoring_risks: []
-  temporal_evaluation:
-    status: inactive
-    trigger: only for strong candidates whose main uncertainty is novelty / familiarity
-    candidate_ids: []
-  validation_research:
-    status: inactive
-    trigger: only when external respondent evidence would reduce a concrete uncertainty
-    respondent_definition: null
-    research_questions: []
-    blindness_level: null
-    admissible_inferences: []
-    prohibited_inferences: []
-    results: []
-  naming_scope:
-    status: satisfied
-    trigger: null
-    object_role: standalone_umbrella_organization_brand
-    rationale: Issue #411 已明确为 InteropAtlas 上层长期母组织命名。
-  activation_governance:
-    status: deferred
-    trigger: finalist selected / rollout needed
-    migration: []
-    rollout: []
-    internal_adoption: []
-    future_naming_policy: []
-
-map:
-  initial_landscape_summary: 历史 single-token、semantic-light 与 morpheme-grounded 路线已显示明显现实身份拥挤；RND-054 进一步显示 multi-method probes 仍容易回到常见 lexical material，并在强可理解候选上遭遇现实 exact identities。
-  regions:
-  - {id: TERR-PRINT, label: printmaking-edition, semantic_basis: [shared source, distinct impressions, state, proof, registration], value_targets: [V-COMMONS, V-AGENCY, V-CREATION], status: researched}
-  - {id: TERR-TEXT, label: textual-reading-annotation, semantic_basis: [shared work, independent reading, annotation, witness], value_targets: [V-AGENCY, V-COMMONS], status: researched}
-  - {id: TERR-ECO, label: ecology-boundary-succession, semantic_basis: [transition, facilitation, succession, distinct communities], value_targets: [V-CREATION, V-RETURN, V-CONTINUITY], status: researched}
-  semantic_coverage: []
+    status: completed_for_current_trigger
+    trigger: RND-054 multi-method portfolio still collapsed toward common lexical/material pool
+    material_territories:
+      - id: TERR-PRINT
+        label: printmaking / edition mechanics
+        structural_material:
+          - shared matrix can produce distinct impressions
+          - variable editions preserve a common source while allowing deliberate difference
+          - proof/state records development rather than one frozen final form
+          - registration aligns distinct elements without making them identical
+      - id: TERR-TEXT
+        label: textual annotation / critical reading
+        structural_material:
+          - shared work can support independent readings / annotations
+          - multiple witnesses / readings can coexist around a common work
+          - critical apparatus can preserve difference rather than erase it
+      - id: TERR-ECO
+        label: ecology / succession / boundary systems
+        structural_material:
+          - transition zones allow distinct communities to interact
+          - succession is staged change
+          - facilitation lets one stage create conditions for another
+    learning:
+      - structural material became richer, but literal / near-literal territory terms were still heavily occupied in real namespaces
+      - future use should prefer structure as creative input over direct adoption of source-domain vocabulary
+  communication_load_allocation: {status: inactive, trigger: activate only if name_overloading recurs}
+  decision_hygiene: {status: ready_on_trigger, trigger: high-value shortlist / Owner Exposure, independent_first_pass: true}
+  temporal_evaluation: {status: inactive, trigger: strong candidate whose main uncertainty is novelty / familiarity}
+  validation_research: {status: inactive, trigger: external respondent evidence would reduce a concrete uncertainty}
+  naming_scope: {status: satisfied, object_role: standalone_umbrella_organization_brand}
+  activation_governance: {status: deferred, trigger: finalist selected / rollout needed}
 
 search_control:
   mode: exploration
-  mode_rationale: v36 的 single-token semantic-recoverability frontier 属于局部路线收敛；RND-054 多方法 probe 后触发 Territory Research，而不是回到单一路线。
-  family_concentration:
-    morphological: []
-    semantic:
-    - RND-054 showed mild concentration around explicit open/common/view/growth proxies
-    construction: []
-    method: []
-  incumbent_isolation:
-    comparison_only_candidate_ids: [N060]
-    leaked_candidate_ids: []
-    notes: [comparison-only incumbent 不进入 general exploration brief]
+  mode_rationale: >-
+    v36 false boundary was removed. RND-054 fixed method monoculture; RND-055 showed territory-derived natural language remains namespace-crowded;
+    RND-056 therefore tested higher-distinctiveness controlled coinage / sound-first forms while retaining recoverability.
   generation_isolation:
     level: best_effort_same_context
     runtime_identity: ChatGPT current conversation runtime
     historical_context_may_have_seen_controller_only_exclusions: true
-    evidence:
-    - 当前运行上下文已读取完整 state / recovery；只能声明本轮 Brief 不再次暴露 controller-only exclusions。
-    claim_policy: 当前 Brief 可不再次暴露 controller-only exclusions，但 isolation 仍只能按事实记录。
+    claim_policy: current brief may omit controller-only exclusions, but this runtime cannot claim the model never saw them historically
+  incumbent_isolation:
+    comparison_only_candidate_ids: [N060]
   controller_only_exclusions:
     incumbent_candidate_ids: [N060]
     cooled_family_ids: [FAM-V34-01, FAM-RND046-01, FAM-RND051-01]
-    survivor_pattern_ids: []
     owner_reaction_subject_ids: [N060]
     other: [N061_historical_hold_not_generation_seed]
-  cooldowns: []
   reality_feedback_quarantine:
     enabled_in_exploration: true
     same_batch_feedback_to_generator: prohibited
-  generator_brief:
-    id: GB-RND055
-    search_mode: exploration
-    name_job_focus: [long-lived umbrella proper identity, low-to-moderate recoverability burden, semantic room]
-    value_targets: [V-AGENCY, V-CREATION, V-COMMONS]
-    naming_implication_modes: [indirect]
-    selected_material_refs: [TERR-PRINT, TERR-TEXT, TERR-ECO]
-    positive_objectives:
-    - use structural analogies rather than directly naming the whole mission
-    - preserve a sense of shared source plus individual realization or enabling transition
-    - allow single-token and multiword architecture
-    positive_search_zones:
-    - shared source producing distinct realizations
-    - independent readings around a common work
-    - transition / facilitation / succession structures
-    positive_construction_targets:
-    - institutional pair / phrase
-    - controlled coinage grounded in researched material
-    - adjacent-domain metaphor
-    - semantically motivated fusion
-    quality_targets: [stable pronunciation, recoverable spelling, long-term organization scale, independent proper-name identity]
-    hard_constraints_only: [HC-ORG-SCALE, HC-RECOVERABILITY]
-    hard_constraint_source_refs: [organization-vision, prior-owner-feedback]
-    question_to_answer: Can researched structural material improve lexical diversity and intrinsic quality without falling back to the previously crowded obvious proxies?
-    negative_examples_included: false
-    controller_only_exclusions_exposed: false
   post_generation_filter:
     enabled: true
     check_cooled_families: true
     check_incumbent_similarity: true
     check_strategy_fidelity: true
     check_other_controller_only_exclusions: true
-    last_round_id: RND-054
-    generated_count: 8
-    blocked_count: 0
-    blocked_candidate_ids: []
-    violation_types: []
-    high_hit_rate: false
 
 method_scheduler:
   policy: adaptive_portfolio
-  exploration_default_parallel_families: 3-5
   active_strategies:
-  - {strategy_id: institutional_pair_phrase, family: direct_lexical, status: active, value_targets: [V-COMMONS, V-AGENCY, V-CREATION], quality_yield: medium, distinctiveness_yield: low_medium, recoverability_yield: high, reality_crowding: high, recent_information_gain: medium, concentration_risk: medium, attempts: 2, last_used_round: RND-054, budget_next: small_probe_with_territory_material}
-  - {strategy_id: opaque_but_traceable_proper_name, family: controlled_coinage, status: active, value_targets: [V-AGENCY, V-CREATION], quality_yield: medium, distinctiveness_yield: medium_high, recoverability_yield: medium, reality_crowding: high, recent_information_gain: medium, concentration_risk: medium, attempts: 2, last_used_round: RND-054, budget_next: small_probe_with_territory_material}
-  - {strategy_id: adjacent_domain_metaphor, family: direct_lexical, status: active, value_targets: [V-AGENCY, V-CREATION, V-RETURN], quality_yield: medium_high, distinctiveness_yield: medium, recoverability_yield: medium_high, reality_crowding: high, recent_information_gain: high, concentration_risk: low, attempts: 2, last_used_round: RND-054, budget_next: small_probe_with_new_territories}
-  - {strategy_id: semantically_motivated_fusion, family: compositional_derived, status: active, value_targets: [V-AGENCY, V-CREATION], quality_yield: low, distinctiveness_yield: medium, recoverability_yield: medium, reality_crowding: unknown, recent_information_gain: medium, concentration_risk: medium, attempts: 2, last_used_round: RND-054, budget_next: one_more_probe_after_research}
-  recent_allocations:
-  - round_id: RND-054
-    selected_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
-    parallel: true
-    allocation_rationale: first live v0.3.1/v0.3.2 portfolio reset after v36 false boundary
-    expected_information_gain: high
+    - strategy_id: adjacent_domain_metaphor
+      family: direct_lexical
+      status: deprioritized
+      rationale: territory material increased semantic richness but direct / near-direct lexical outputs remained heavily occupied
+    - strategy_id: institutional_pair_phrase
+      family: direct_lexical
+      status: deprioritized
+      rationale: good recoverability but low ownability / repeated exact identities
+    - strategy_id: opaque_but_traceable_proper_name
+      family: controlled_coinage
+      status: active
+      rationale: RND-056 produced lower-collision forms; semantic grounding remains the main weakness
+    - strategy_id: sound_first
+      family: controlled_coinage
+      status: active
+      rationale: improves identity space but must keep recoverability and avoid empty/random branding
+    - strategy_id: morpheme_grounded_coinage
+      family: compositional_derived
+      status: active
+      rationale: next high-information lane is greater morphological distance while preserving a truthful story
+    - strategy_id: transformation_operator
+      family: transformation_operator
+      status: rescue_only
+      rationale: explicit seed audit completed; no current seed justified a bounded branch
   diagnostics:
     scheduler_monoculture: false
     method_underuse: false
-    territory_material_starvation: true
+    territory_material_starvation: partially_resolved
     notes:
-    - Portfolio diversity improved construction coverage, but lexical/material diversity remained thinner than construction diversity.
-    - Territory Research was activated under v0.3.2 Routing Contract instead of simply increasing generation count or negative exclusions.
+      - current frontier is semantic grounding versus namespace distinctiveness / recoverability
 
 transformation_rescue:
   active_branches: []
-  history: []
   rescue_overfit_detected: false
-  pending_seed_audit: true
+  seed_audit:
+    status: complete_current_pool
+    audited_candidate_ids: [N062, N064, N065, N066, N067, N070, N071, N072, N073, N074, N075, N076, N077]
+    result: no_branch_opened
+    rationale:
+      - exact/high-adjacency identities would remain too close under low-distortion edits, or
+      - the prototype also had recoverability / scale / genericness weakness, so rescue would be polishing a weak base rather than preserving strong construction value
+    learning: anti-anchoring did not suppress rescue; the branch was explicitly considered and rejected on trigger criteria
+
+candidates:
+  - id: N060
+    name: Plurifold
+    role: comparison_only
+    active: true
+    generation_use: prohibited_as_template_or_semantic_anchor
+    owner_signal: neutral
+    reality_summary: historical no material exact collision found; plurifold.org historically available; formal trademark unresolved/deferred
+
+  - id: N078
+    name: Talven
+    role: held
+    active: true
+    construction_strategy: sound_first
+    generation_note: semantically light proper-name probe; no invented etymology claimed
+    intrinsic:
+      distinctiveness: medium_high
+      pronounceability: medium_good
+      spelling_recovery: high
+      memorability: medium_good
+      semantic_grounding: low
+      semantic_room: high
+      target_scale_fit: good
+      architecture_fit: good
+    value_alignment: neutral_no_contradiction
+    architecture_test: pass
+    reality:
+      collision: yellow_unrelated_public_identity
+      evidence_summary: exact Talven artist/music identities surfaced; no material organization/technology identity found in current search
+      domain: {name: talven.org, observation: available, source: Namecheap bulk availability, observed_at: 2026-09-11, price_usd_observed: 8.48}
+      trademark_oriented_risk: unverified_deferred
+    diagnosis: [semantic_grounding_weak, unrelated_exact_identity]
+
+  - id: N079
+    name: Drelan
+    role: promising
+    active: true
+    construction_strategy: sound_first
+    generation_note: semantically light proper-name probe; no invented etymology claimed
+    intrinsic:
+      distinctiveness: high
+      pronounceability: good
+      spelling_recovery: good
+      memorability: medium_good
+      semantic_grounding: low
+      semantic_room: high
+      target_scale_fit: good
+      architecture_fit: strong
+    value_alignment: neutral_no_contradiction
+    architecture_test:
+      - Drelan Research
+      - Drelan Commons
+      - Drelan Tools
+      - Drelan / InteropAtlas
+      - A project by Drelan
+    reality:
+      collision: no_material_collision_found_current_search
+      evidence_summary: personal-name / music usage surfaced, but no material exact organization/software identity found in current search
+      domain: {name: drelan.org, observation: available, source: Namecheap bulk availability, observed_at: 2026-09-11, price_usd_observed: 8.48}
+      trademark_oriented_risk: unverified_deferred
+    diagnosis: [semantic_grounding_weak]
+
+  - id: N080
+    name: Sernia
+    role: held
+    active: true
+    construction_strategy: controlled_coinage
+    generation_note: territory-informed sound/shape probe; no lexical meaning claimed
+    intrinsic:
+      distinctiveness: high
+      pronounceability: medium
+      spelling_recovery: medium_good
+      memorability: medium_good
+      semantic_grounding: low_medium
+      semantic_room: high
+      target_scale_fit: good
+      architecture_fit: good
+    value_alignment: neutral_no_contradiction
+    architecture_test: pass
+    reality:
+      collision: no_material_collision_found_current_search
+      evidence_summary: surname usage surfaced; no material exact organization/software identity found in current search
+      domain: {name: sernia.org, observation: available, source: Namecheap bulk availability, observed_at: 2026-09-11, price_usd_observed: 8.48}
+      trademark_oriented_risk: unverified_deferred
+    diagnosis: [pronunciation_branch_risk, semantic_grounding_weak]
+
+retired_probe_batches:
+  - id: RND-054
+    candidate_ids: [N062, N063, N064, N065, N066, N067, N068, N069]
+    summary: four-method portfolio; strongest natural/adjacent probes all hit material exact/high-adjacency identities; details preserved in snapshot v37
+  - id: RND-055
+    candidate_ids: [N070, N071, N072, N073, N074, N075, N076, N077]
+    names: [Living Edition, Field & Form, Varent, Edira, Interleaf, Ecotone, Tracefield, Edgework]
+    summary: territory-derived natural/near-natural vocabulary improved structural relevance but 8/8 had strong exact/historical/high-adjacency identities; retired before domain gating
+    evidence_summary:
+      - Field & Form has active product-lab / civic-design identities
+      - Varent has active healthcare cybersecurity / technology identities
+      - Edira has active technology/software identity
+      - Interleaf has strong historical software identity
+      - Ecotone is a large active multinational/company name with additional active uses
+      - Tracefield has active robotics/AI visibility/digital-forensics identities
+      - Edgework has active consulting/training/product identities
+      - Living Edition has active company identity
+  - id: RND-056-red
+    candidate_ids: [N081, N082, N083, N084, N085]
+    names: [Mavren, Norven, Rellan, Tavren, Veylan]
+    summary: higher-distinctiveness sound-first/coinage probes; all five had active exact technology/company identities and were retired
+    evidence_summary:
+      - Mavren active software/AI identities
+      - Norven multiple active AI/compliance/software identities
+      - Rellan active biopharma AI and household software identities
+      - Tavren active digital agency / AI toolkit identities
+      - Veylan active AI-native marketing software identity
+
+rounds:
+  - id: RND-054
+    action: parallel_method_portfolio_then_route
+    search_mode: exploration
+    generated_count: 8
+    selected_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
+    findings:
+      - construction diversity improved but lexical/material diversity remained thin
+      - top intrinsic probes remained highly reality-crowded
+      - router correctly activated only Territory Research
+    next_action: territory_informed_generation
+
+  - id: RND-055
+    action: generate_from_researched_structural_material
+    search_mode: exploration
+    generated_count: 8
+    selected_strategy_ids: [institutional_pair_phrase, adjacent_domain_metaphor, semantically_motivated_fusion]
+    value_targets: [V-COMMONS, V-AGENCY, V-CREATION]
+    findings:
+      - researched territories improved conceptual/structural relevance
+      - direct or near-direct adoption of source-domain vocabulary remained highly crowded
+      - all eight probes had material exact/historical/high-adjacency identities
+      - territory research therefore changes how material should be used: structural inspiration, not literal token harvesting
+    integrity_check:
+      territory_material_starvation_checked: true
+      scheduler_monoculture_checked: true
+      incumbent_anchoring_checked: true
+      isolation_claim_checked: true
+      progressive_disclosure_checked: true
+    next_action: controlled_coinage_sound_first_with_structure_only
+
+  - id: RND-056
+    action: controlled_coinage_sound_first_then_reality_gate
+    search_mode: exploration
+    generated_count: 8
+    selected_strategy_ids: [opaque_but_traceable_proper_name, sound_first]
+    findings:
+      - five probes again collided with active exact technology/company identities
+      - three probes survived current material-collision screen far enough for .org checks
+      - drelan.org, talven.org and sernia.org were observed available via Namecheap on 2026-09-11
+      - higher distinctiveness can improve reality space, but semantic grounding drops sharply; this is now the central frontier
+      - no current rescue seed passed trigger criteria
+    integrity_check:
+      scheduler_monoculture_checked: true
+      method_underuse_checked: true
+      rescue_trigger_checked: true
+      isolation_claim_checked: true
+      owner_interaction_gate_checked: true
+    next_action: parallel_grounding_and_stress_test
+
+observations:
+  - id: O-V36-BOUNDARY
+    scope: search_integrity
+    observation: historical single-token route convergence was a reversible search strategy, not an Owner boundary
+  - id: O-R054-MATERIAL
+    scope: scheduler
+    observation: construction diversity and lexical/material diversity are separate control variables
+  - id: O-R055-TERRITORY
+    scope: strategy
+    observation: Territory Research can improve semantic structure without automatically improving namespace ownability when source terms are adopted too literally
+  - id: O-R056-FRONTIER
+    scope: strategy
+    observation: current frontier is semantic grounding versus distinctiveness/recoverability; semantically light forms can survive reality screening but may underperform the Name Job secondary story requirement
+  - id: O-R056-DOMAIN
+    scope: reality
+    observation: three semantically-light probes passed current identity screen sufficiently to check .org and all three were available; domain availability is recorded only after intrinsic/reality gating
+  - id: O-R057-LEGAL-SIGNAL
+    scope: reality
+    observation: a territory-grounded coinage probe with an available-looking .org can still carry severe real-world legal/name-confusion history; domain availability cannot substitute for identity/legal screening
+    evidence_summary: Sigvara surfaced an active Brazilian business identity and published 2025 trademark/confusion litigation involving Vivara; it was rejected immediately as a naming seed
+
+diagnostics:
+  - id: D-V36-01
+    diagnosis_type: owner_boundary_false_positive
+    statement: single-token frontier is not a source-backed hard boundary
+    confidence: high
+  - id: D-R054-01
+    diagnosis_type: territory_material_starvation
+    statement: multiple construction families were sampling the same thin material pool
+    confidence: high
+  - id: D-R055-01
+    diagnosis_type: territory_literalization
+    statement: researched source-domain material was too often converted directly into candidate vocabulary; structural analogy should be retained while lexical distance increases
+    confidence: high
+    proposed_state_change: deprioritize direct lexical adoption; boost morpheme-grounded / controlled coinage with larger distance
+  - id: D-R056-01
+    diagnosis_type: semantic_grounding_distinctiveness_frontier
+    statement: lower-collision forms are now appearing, but the best survivors are semantically light; next work should add truthful grounding without collapsing back into crowded literal vocabulary
+    confidence: high
+  - id: D-R056-02
+    diagnosis_type: rescue_audit_pass_no_trigger
+    statement: Transformation Rescue was explicitly audited; no current seed justified a branch under the bounded-rescue contract
+    confidence: high
+
+experience_candidates:
+  - id: E-R054-ROUTING
+    observation: construction diversity can improve while lexical/material diversity remains starved; route these failures separately
+    scope: potentially_general
+    supporting_evidence: [RND-054, RND-055]
+    confidence: medium_high
+  - id: E-R055-STRUCTURE-NOT-TOKEN
+    observation: territory research is most useful when the Generator receives selected structural analogies rather than obvious domain terms as literal name material
+    scope: potentially_general
+    supporting_evidence: [RND-055]
+    confidence: medium
+  - id: E-R056-DOMAIN-SEQUENCE
+    observation: exact-domain availability is high-value only after intrinsic quality and identity-collision gates; an available domain does not repair weak semantics or legal/name-confusion risk
+    scope: potentially_general
+    supporting_evidence: [RND-056, O-R057-LEGAL-SIGNAL]
+    confidence: high
 
 execution:
   autonomous_microcycles: true
   module_policy: progressive_disclosure
-  preferred_batch_size:
-    broad_exploration: 6-10
-    focused_or_exploitation: 3-5
-    validation: 0
   module_routing:
-    last_route: territory_research
-    trigger: territory_material_starvation_after_multi_method_probe
-    reference: references/name-job-decision-and-research.md
-    expected_artifact: small material map + selected positive material
+    last_route: method_scheduler
+    trigger: semantic_grounding_distinctiveness_frontier
+    expected_artifact: two-lane small probe + architecture stress test
     activation_budget_passed: true
   owner_interaction_gate:
-    last_checked_at: RND-054
-    proposed_question: null
     classification: search_strategy
-    confirmed_constraint_ids_affected: []
-    missing_fact: null
+    decision: continue_autonomously
     reversible_without_owner: true
     parallel_exploration_possible: true
-    decision: continue_autonomously
-    rationale: Method portfolio reset and Territory Research do not change any source-backed Owner hard constraint.
-  pause_only_when:
-  - source_backed_owner_boundary_decision_required
-  - final_subjective_choice_required
-  - missing_goal_fact_cannot_be_recovered
-  - irreducible_blocker
-  - budget_or_time_boundary
-  current_budget_or_time_boundary: null
-
-candidates:
-- id: N060
-  name: Plurifold
-  active: true
-  role: comparison_only
-  generation_use: prohibited_as_template_or_semantic_anchor
-  value_target_ids: []
-  construction_strategy: historical
-  quality: {distinctiveness: strong_historical, pronounceability: good, spelling_burden: light_to_medium, memorability: good, semantic_fit: strong_partial, semantic_room: strong, target_scale_fit: medium_good_to_strong, longevity: strong, symbolic_compression: strong_partial, cross_context_use: strong, architecture_extensibility: strong}
-  value_alignment: {aligned_value_ids: [V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-AGENCY, V-CREATION, V-RETURN], overall_observation: historical comparison only; do not use as generation seed, confidence: medium}
-  reality: {collision: {observation: no_material_exact_collision_found_at_checked_time, confidence: historical, evidence: []}, domains: [plurifold.org_available_at_checked_time], trademark_oriented_risk: {observation: unresolved_deferred, evidence: []}, namespaces: []}
-  owner_signal: {observation: neutral, confidence: medium, notes: [neutral accepting comparison reference]}
-- id: N061
-  name: Plurivocal
-  active: false
-  role: held
-  generation_use: prohibited_as_template_or_semantic_anchor
-  diagnosis: [historical_hold_only]
-- id: N062
-  name: Open Margin
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-AGENCY, V-COMMONS]
-  construction_strategy: institutional_pair_phrase
-  quality: {distinctiveness: medium, pronounceability: high, spelling_burden: low, memorability: medium_high, semantic_fit: strong_indirect, semantic_room: strong, target_scale_fit: medium_good, longevity: good, symbolic_compression: strong, cross_context_use: good, architecture_extensibility: good}
-  value_alignment: {aligned_value_ids: [V-AGENCY, V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-CREATION, V-RETURN], overall_observation: margin can imply space for independent interpretation around shared work, confidence: medium}
-  reality: {collision: {observation: red_exact_identity, confidence: high, evidence: [active Open Margin creative-products brand, Open Margin open-source/PyPI project]}, domains: [], trademark_oriented_risk: {observation: unverified, evidence: []}, namespaces: [PyPI exact identity]}
-  diagnosis: [reality_collision]
-  retirement: {retired: true, reason: exact active identities, learning_preserved: true}
-- id: N063
-  name: Common Arc
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-COMMONS, V-RETURN]
-  construction_strategy: institutional_pair_phrase
-  quality: {distinctiveness: low_medium, pronounceability: high, spelling_burden: low, memorability: medium, semantic_fit: medium, semantic_room: medium_good, target_scale_fit: medium, longevity: medium, symbolic_compression: medium, cross_context_use: medium_good, architecture_extensibility: medium_good}
-  value_alignment: {aligned_value_ids: [V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-AGENCY, V-CREATION, V-RETURN], overall_observation: over-relies on commons proxy and adds little independent identity, confidence: medium}
-  reality: {collision: {observation: not_screened_intrinsic_below_top_slice, confidence: high, evidence: []}, domains: []}
-  diagnosis: [quality_distinctiveness, value_proxy_risk]
-  retirement: {retired: true, reason: insufficient intrinsic distinctiveness, learning_preserved: true}
-- id: N064
-  name: Virel
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-AGENCY, V-CREATION]
-  construction_strategy: opaque_but_traceable_proper_name
-  quality: {distinctiveness: medium_high, pronounceability: medium, spelling_burden: medium, memorability: medium, semantic_fit: light, semantic_room: strong, target_scale_fit: good, longevity: good, symbolic_compression: low, cross_context_use: good, architecture_extensibility: good}
-  value_alignment: {aligned_value_ids: [], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN], overall_observation: semantically light identity with no contradiction, confidence: low_medium}
-  reality: {collision: {observation: red_exact_identity, confidence: high, evidence: [active Virel creative AI system, Virel SAS, VIREL LTD]}, domains: [], trademark_oriented_risk: {observation: unverified, evidence: []}, namespaces: []}
-  diagnosis: [quality_linguistic_mild, reality_collision]
-  retirement: {retired: true, reason: exact active identities, learning_preserved: true}
-- id: N065
-  name: Aroven
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-AGENCY, V-CREATION]
-  construction_strategy: opaque_but_traceable_proper_name
-  quality: {distinctiveness: medium_high, pronounceability: good, spelling_burden: low_medium, memorability: medium, semantic_fit: light, semantic_room: strong, target_scale_fit: good, longevity: good, symbolic_compression: low, cross_context_use: good, architecture_extensibility: good}
-  value_alignment: {aligned_value_ids: [], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN], overall_observation: semantically light and usable in scale, but weak intrinsic story, confidence: low_medium}
-  reality: {collision: {observation: red_exact_identity, confidence: high, evidence: [AROVEN engineering company, Aroven AI platform]}, domains: [], trademark_oriented_risk: {observation: unverified, evidence: []}, namespaces: []}
-  diagnosis: [reality_collision]
-  retirement: {retired: true, reason: exact active identities, learning_preserved: true}
-- id: N066
-  name: Marginalia
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-AGENCY, V-COMMONS]
-  construction_strategy: adjacent_domain_metaphor
-  quality: {distinctiveness: medium_high, pronounceability: medium, spelling_burden: medium_high, memorability: high, semantic_fit: strong, semantic_room: medium_good, target_scale_fit: medium_good, longevity: good, symbolic_compression: strong, cross_context_use: medium_good, architecture_extensibility: medium_good}
-  value_alignment: {aligned_value_ids: [V-AGENCY, V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-CREATION, V-RETURN], overall_observation: independently authored interpretation around shared text is structurally close to the mission, confidence: high}
-  reality: {collision: {observation: red_exact_high_adjacency, confidence: high, evidence: [active Marginalia knowledge/research software projects]}, domains: [], trademark_oriented_risk: {observation: unverified, evidence: []}, namespaces: [GitHub projects]}
-  diagnosis: [quality_linguistic, reality_collision]
-  retirement: {retired: true, reason: exact adjacent knowledge-software identities plus recoverability burden, learning_preserved: true}
-- id: N067
-  name: Seedbed
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-CREATION, V-RETURN, V-CONTINUITY]
-  construction_strategy: adjacent_domain_metaphor
-  quality: {distinctiveness: medium, pronounceability: high, spelling_burden: low, memorability: high, semantic_fit: strong_indirect, semantic_room: medium_good, target_scale_fit: good, longevity: good, symbolic_compression: strong, cross_context_use: good, architecture_extensibility: good}
-  value_alignment: {aligned_value_ids: [V-CREATION, V-CONTINUITY], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-AGENCY, V-COMMONS, V-RETURN], overall_observation: shared enabling substrate for later growth/creation, confidence: medium_high}
-  reality: {collision: {observation: red_exact_identity, confidence: high, evidence: [active Seedbed nonprofit and publishing/resource organization]}, domains: [], trademark_oriented_risk: {observation: unverified, evidence: []}, namespaces: []}
-  diagnosis: [reality_collision]
-  retirement: {retired: true, reason: exact active nonprofit identity, learning_preserved: true}
-- id: N068
-  name: Viewcraft
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-AGENCY, V-CREATION]
-  construction_strategy: semantically_motivated_fusion
-  quality: {distinctiveness: medium, pronounceability: high, spelling_burden: low, memorability: medium, semantic_fit: direct, semantic_room: low_medium, target_scale_fit: low_medium, longevity: medium, symbolic_compression: medium, cross_context_use: low_medium, architecture_extensibility: low_medium}
-  value_alignment: {aligned_value_ids: [V-AGENCY, V-CREATION], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-COMMONS, V-RETURN], overall_observation: reads more like a tool/product than a long-lived umbrella organization, confidence: high}
-  reality: {collision: {observation: not_screened_intrinsic_below_top_slice, confidence: high, evidence: []}, domains: []}
-  diagnosis: [quality_scale]
-  retirement: {retired: true, reason: productized construction, learning_preserved: true}
-- id: N069
-  name: Commonform
-  active: false
-  role: retired
-  generation_use: allowed
-  value_target_ids: [V-COMMONS, V-CREATION]
-  construction_strategy: semantically_motivated_fusion
-  quality: {distinctiveness: low_medium, pronounceability: high, spelling_burden: low, memorability: medium, semantic_fit: medium, semantic_room: medium, target_scale_fit: medium, longevity: medium, symbolic_compression: medium, cross_context_use: medium, architecture_extensibility: medium}
-  value_alignment: {aligned_value_ids: [V-COMMONS], tension_value_ids: [], contradicted_value_ids: [], neutral_value_ids: [V-AGENCY, V-CREATION, V-RETURN], overall_observation: collective proxy dominates and individual agency disappears, confidence: medium}
-  reality: {collision: {observation: not_screened_intrinsic_below_top_slice, confidence: high, evidence: []}, domains: []}
-  diagnosis: [quality_distinctiveness, value_proxy_risk]
-  retirement: {retired: true, reason: insufficient independent identity / value balance, learning_preserved: true}
-
-rounds:
-- id: RND-051-053
-  action: historical_phase_summary
-  search_mode: exploration
-  loaded_modules: [legacy_morpheme_grounded_coinage]
-  selected_strategy_ids: [historical_single_token_morpheme_grounded]
-  value_targets: []
-  generated_count: 48
-  findings:
-  - controlled coinage improved proper-name identity but hit reality congestion / recoverability frontier
-  - one local construction-surface concentration was detected and corrected before phase conclusion
-  - 5 quality top-slice candidates produced 4 red exact/high-adjacency identities + 1 yellow exact identity
-  - no new .org query and no new Owner Exposure candidate
-  integrity_check:
-    value_model_checked: false
-    name_job_checked: false
-    decision_criteria_checked: false
-    value_coverage_checked: false
-    family_concentration_checked: true
-    scheduler_monoculture_checked: false
-    method_underuse_checked: false
-    territory_material_starvation_checked: false
-    evaluation_anchoring_checked: false
-    incumbent_anchoring_checked: true
-    rescue_overfit_checked: false
-    negative_constraint_priming_checked: true
-    isolation_claim_checked: true
-    constraint_drift_checked: true
-    owner_interaction_gate_checked: true
-    strategy_fidelity_checked: true
-  next_action: migrate_to_v0.3.1_controller
-- id: RND-054
-  action: schedule_methods_generate_evaluate_verify_then_route
-  search_mode: exploration
-  loaded_modules: [method_scheduler, reality_verification, territory_research]
-  selected_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
-  value_targets: [V-COMMONS, V-AGENCY, V-CREATION]
-  generated_count: 8
-  findings:
-  - four strategy families were actually sampled in parallel; no scheduler monoculture
-  - strongest intrinsic probes still came from obvious natural language / adjacent-domain material
-  - five probes were reality-screened; all five had material exact or highly adjacent active identities
-  - several semantically direct forms were either too generic or too product-like before reality screening
-  - construction diversity improved, but lexical/material diversity did not improve enough
-  - v0.3.2 router therefore activated Territory Research instead of asking Owner or merely increasing batch size
-  integrity_check:
-    value_model_checked: true
-    name_job_checked: true
-    decision_criteria_checked: true
-    value_coverage_checked: true
-    family_concentration_checked: true
-    scheduler_monoculture_checked: true
-    method_underuse_checked: true
-    territory_material_starvation_checked: true
-    evaluation_anchoring_checked: false
-    incumbent_anchoring_checked: true
-    rescue_overfit_checked: false
-    negative_constraint_priming_checked: true
-    isolation_claim_checked: true
-    constraint_drift_checked: true
-    owner_interaction_gate_checked: true
-    strategy_fidelity_checked: true
-  next_action: generate_from_researched_structural_material
-
-observations:
-- id: O-V36-BOUNDARY
-  scope: search_integrity
-  observation: 历史 v36 把 single-token / semantic recoverability 路线收敛误判成 Owner architecture boundary；v0.3.1 将其重分类为可逆 search strategy。
-  evidence: [snapshot-v36]
-- id: O-V031-MODULE
-  scope: strategy
-  observation: 新控制架构采用 progressive disclosure；Name Job / Decision Criteria 为核心，Communication Load / Territory Research / Decision Hygiene / Temporal / Validation 等只在触发时加载。
-  evidence: [skill-v0.3.1]
-- id: O-R054-MATERIAL
-  scope: strategy
-  observation: 多方法并行修复了 construction monoculture，但未充分修复 lexical/material starvation；强候选仍高度撞入现实 active identities。
-  evidence: [RND-054]
-- id: O-R054-ROUTER
-  scope: search_integrity
-  observation: v0.3.2 Module Routing Contract 正确把当前最大未知路由为 Territory Research；未机械加载其他 optional modules。
-  evidence: [RND-054, skill-v0.3.2]
-
-diagnostics:
-- id: D-V36-01
-  level: search_integrity
-  diagnosis_type: owner_boundary_false_positive
-  statement: single-token frontier 不构成 source-backed Owner hard boundary。
-  confidence: high
-  proposed_state_change: continue_autonomously_with_method_portfolio
-- id: D-V031-01
-  level: strategy
-  diagnosis_type: name_job_ambiguity_historical
-  statement: 历史流程从 Mission / semantic core 过快进入生成；v0.3.1 已补 Name Job 与 Decision Criteria 层。
-  confidence: high
-  proposed_state_change: initialize_name_job_and_scheduler_before_next_generation
-- id: D-R054-01
-  level: scheduler
-  diagnosis_type: territory_material_starvation
-  statement: 不同 construction family 已实际并行，但其词汇/概念材料仍集中在常见品牌语义与自然词，继续等价生成的边际信息价值偏低。
-  confidence: high
-  proposed_state_change: activate_bounded_territory_research_then_regenerate
-- id: D-R054-02
-  level: search_integrity
-  diagnosis_type: progressive_disclosure_pass
-  statement: 只激活了能回答当前材料缺口的 Territory Research；Decision Hygiene / Temporal / Validation / Activation 等未被机械执行。
-  confidence: high
-  proposed_state_change: keep_optional_modules_inactive_until_triggered
-
-experience_candidates:
-- id: E-R054-ROUTING
-  observation: Construction diversity can improve while lexical/material diversity remains starved; the Controller should diagnose these separately and route to Territory Research only after evidence of material starvation.
-  scope: potentially_general
-  supporting_evidence: [RND-054]
-  supporting_jobs: [organization-naming-411]
-  counterexamples: []
-  confidence: medium
-  possible_generalization: Module Router should distinguish method-selection failure from material-source failure.
-  proposed_change: already_covered_by_v0.3.2_router_keep_under_observation
+    confirmed_constraint_ids_affected: []
+    rationale: current issue is how to balance grounding and identity, not a change to Owner goals or hard constraints
 
 current_state:
   strongest_candidates: [N060]
-  promising_candidates: [N060]
-  held_candidates: [N061]
+  promising_candidates: [N079]
+  held_candidates: [N078, N080, N061]
   finalists: []
-  pareto_front: []
-  current_region_ids: [TERR-PRINT, TERR-TEXT, TERR-ECO]
   current_value_target_ids: [V-COMMONS, V-AGENCY, V-CREATION]
-  active_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
+  active_strategy_ids: [opaque_but_traceable_proper_name, sound_first, morpheme_grounded_coinage]
   active_rescue_branch_ids: []
-  loaded_optional_modules: [territory_research]
+  loaded_optional_modules: []
   search_mode: exploration
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: 经过 Territory Research 后，结构性材料能否提高 lexical diversity 与独立身份，同时保持 recoverability / umbrella scale；以及历史强 intrinsic / reality-failed prototypes 是否存在值得 bounded rescue 的 seed。
+  biggest_unknown: >-
+    Can the Controller preserve the improved reality-space / recoverability of semantically-light proper names while adding truthful structural grounding,
+    without falling back to literal territory vocabulary or fake etymology?
   blockers: []
-  information_gain: high_for_territory_informed_generation
-  mission_value_status: initialized_v0.3.1
+  information_gain: high
+  mission_value_status: active
   name_job_status: active
   criteria_status: active
-  method_scheduler_status: updated_after_RND054
-  search_integrity_status: territory_research_completed_ready_for_RND055
-  constraint_integrity_status: pass_after_v36_reclassification
+  method_scheduler_status: active_frontier_identified
+  search_integrity_status: pass_with_new_frontier
+  constraint_integrity_status: pass
   owner_review_needed_now: false
 
 next_action:
-  action: generate_small_parallel_probes_from_researched_structural_material
-  target: [TERR-PRINT, TERR-TEXT, TERR-ECO]
+  action: parallel_grounded_coinage_and_architecture_stress_test
+  target:
+    - semantically grounded controlled coinage with greater lexical distance from source terms
+    - architecture / value stress test of N078-N080 without Owner exposure
   rationale: >-
-    RND-054 已证明继续只换 construction 不足以扩大 lexical/material space；Territory Research 已形成三个结构差异明显的 material maps。下一轮使用同一多方法 portfolio，但只向 Generator 提供选中的正向结构材料，不暴露 incumbent / cooldown / reality survivor 形态。
-  triggered_by: [D-R054-01, O-R054-ROUTER]
+    RND-056 established that namespace survival improves as semantics become lighter; the next high-information test is whether one can regain truthful connection
+    through construction provenance / structural story rather than literal mission words. In parallel, test whether current low-collision holds are truly organization-scale or merely clean-sounding.
+  triggered_by: [D-R055-01, D-R056-01]
   expected_information_gain: high
   search_mode: exploration
-  selected_strategy_ids: [institutional_pair_phrase, opaque_but_traceable_proper_name, adjacent_domain_metaphor, semantically_motivated_fusion]
+  selected_strategy_ids: [morpheme_grounded_coinage, opaque_but_traceable_proper_name]
   value_targets: [V-AGENCY, V-CREATION, V-COMMONS]
   modules_to_load: [word_formation_strategies]
   requires_owner: false
   owner_gate_classification: search_strategy
-  affected_confirmed_constraint_ids: []
 
 stop:
   status: continue
-  reason: Territory Research produced new structural material and no Owner boundary blocks another high-information generation cycle.
+  reason: no finalist set yet; current grounding-versus-distinctiveness frontier still has actionable high-information search space
   unresolved:
-  - official trademark screening remains deferred_by_owner
-  - true isolated generation runtime is not available in this context
-  - bounded transformation rescue seed audit remains pending
+    - formal trademark screening remains deferred_by_owner
+    - true isolated generation runtime unavailable in this context
+    - no current transformation rescue seed passed trigger criteria
