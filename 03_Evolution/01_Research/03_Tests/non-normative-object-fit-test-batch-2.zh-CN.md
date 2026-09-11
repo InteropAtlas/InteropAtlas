@@ -21,7 +21,7 @@ Latest Substantive Contribution:
 >
 > Parent Model Issue：#15
 >
-> 上游：#53 Knowledge Model Prior Art Baseline；#55 Data Language Stack Comparison；Batch 1 PR #30
+> 上游：#53 Knowledge Model Prior Art Baseline；#55 Data Language Stack Comparison；[Batch 1 历史研究](non-normative-object-fit-test-batch-1.zh-CN.md)（原 PR #30；原文为当时研究，非当前规范）
 >
 > 目的：用 6 个差异更大的真实对象，对 InteropAtlas 当前“最小知识表示合同”做最后一轮主要现实压力测试。本批不修改 Schema，不冻结最终 ontology。
 
