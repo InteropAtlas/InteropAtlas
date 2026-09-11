@@ -98,6 +98,21 @@ experiences:
     scope: task_supported
     status: observed
 
+  - experience_id: EXP-006
+    observation: Changing workflow pattern can produce new diagnostic evidence even when construction operators and candidate outcome do not improve immediately.
+    proposed_generalization: Workflow patterns should be scheduled separately from construction operators when the current unknown concerns how evidence is generated rather than how a string is formed.
+    mechanism: divergence-burst and creative-linguistic-parallel changed search breadth and evidence separation without requiring a new word-formation family
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - RND-062 divergence_burst interrupted repetitive micro-probe cadence and reopened architecture coverage
+      - RND-063 creative_linguistic_parallel separated recoverability failures from reality collisions before domain work
+      - REG-017 workflow-vs-operator and REG-021 cadence-adaptation cover the intended behavior
+    counterevidence:
+      - both live patterns have so far produced no Owner-ready finalist, so outcome advantage is not established
+    confidence: medium_high
+    scope: potentially_general
+    status: observed
+
 method_hypotheses:
   - hypothesis_id: HYP-001
     claim: Adaptive Naming should schedule workflow patterns separately from construction operators.
@@ -106,7 +121,7 @@ method_hypotheses:
       - retain_operator_scheduler
     expected_benefit: preserve useful professional-method mechanisms without executing full fixed agency SOPs
     known_risk: orchestration complexity and over-modularization
-    supporting_experience_ids: []
+    supporting_experience_ids: [EXP-006]
     supporting_prior_art:
       - G1 creative_linguistic_parallel
       - G2 territory_and_divergence
@@ -114,10 +129,11 @@ method_hypotheses:
       - G6 architecture_stress
       - G7 feedback_refinement
       - G8 online_observe_update
-    counterevidence: []
-    regression_cases: []
-    status: proposed
-    introduced_in_version: null
+    counterevidence:
+      - current evidence is from one Naming Job and does not yet establish better finalist yield
+    regression_cases: [REG-017-workflow-vs-operator, REG-021-search-cadence-adaptation]
+    status: testing
+    introduced_in_version: 0.4.0
     rollback_target: 0.3.3
 
   - hypothesis_id: HYP-002
@@ -129,8 +145,9 @@ method_hypotheses:
     expected_benefit: enable cumulative method learning without turning one-off task outcomes into unstable global rules
     known_risk: registry maintenance overhead
     supporting_experience_ids: [EXP-001, EXP-002, EXP-003]
-    counterevidence: []
-    regression_cases: []
-    status: proposed
-    introduced_in_version: null
+    counterevidence:
+      - only one real Naming Job is currently represented; cross-task promotion behavior remains untested
+    regression_cases: [REG-018-method-evolution-gating]
+    status: testing
+    introduced_in_version: 0.4.0
     rollback_target: 0.3.3
