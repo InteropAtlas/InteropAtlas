@@ -24,9 +24,7 @@ constraint_registry:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
     - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists; minimum finalist count is not itself a stopping condition., source_type: owner_explicit, observed_at: 2026-09-11}
 
-mission_value_model:
-  core_structure: Commons -> Perspective -> Creation -> Commons
-  value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
+mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
 
 owner_feedback:
   - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard has no major problem, feels stable, is directly usable; Owner wants more choices., implications: [retain_as_finalist_baseline, do_not_use_as_generation_template, continue_independent_exploration]}
@@ -41,30 +39,13 @@ search_control:
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
   post_generation_filter: {enabled: true, check_finalist_similarity: true, check_cooled_families: true, check_strategy_fidelity: true}
 
-reality_screening:
-  method_ref: reality-screening-contract-v0.3.3
-  status: active
-  freshness_recheck_before_owner_exposure: true
-  domain_after_reality_pass_only: true
+reality_screening: {method_ref: reality-screening-contract-v0.3.3, status: active, freshness_recheck_before_owner_exposure: true, domain_after_reality_pass_only: true}
 
 search_landscape:
   new_regions:
-    - region_id: REG-EPISTEMIC-VERB-STANCE
-      architecture: familiar_verb_plus_orientation_adverb_or_complement
-      intent: express an active stance toward perspective/discovery without using public/commons vocabulary or copying exposed finalist syntax
-      sampling_status: sampled_one_survivor
-      quality_yield: medium_high_current_probe
-      reality_crowding: low_current_top_slice
-    - region_id: REG-COMMON-MAKING-IMPERATIVE
-      architecture: action_phrase_about_contribution_or_commoning
-      sampling_status: sampled_move_away
-      quality_yield: medium
-      reality_crowding: decisive_tm_conflict_top_slice
-      note: Make Common had a current Spanish MAKECOMMON software trademark signal; branch stopped before promotion
-    - region_id: REG-PLURAL-LOCUS
-      architecture: plurality_term_plus_place_or_basis_noun
-      sampling_status: not_promoted
-      note: avoided promotion because plural-root proximity to comparison/incumbent semantic space and active Plural/Plurality ecosystem identities reduce independence value
+    - {region_id: REG-EPISTEMIC-VERB-STANCE, architecture: familiar_verb_plus_orientation_adverb_or_complement, intent: active stance toward perspective/discovery without public/commons vocabulary or exposed-finalist syntax, sampling_status: sampled_one_survivor, quality_yield: medium_high_current_probe, reality_crowding: low_current_top_slice}
+    - {region_id: REG-COMMON-MAKING-IMPERATIVE, architecture: action_phrase_about_contribution_or_commoning, sampling_status: sampled_move_away, quality_yield: medium, reality_crowding: decisive_tm_conflict_top_slice, note: Make Common had a current Spanish MAKECOMMON software trademark signal}
+    - {region_id: REG-PLURAL-LOCUS, architecture: plurality_term_plus_place_or_basis_noun, sampling_status: not_promoted, note: plural-root proximity to comparison/incumbent semantic space and active Plural/Plurality ecosystem identities reduce independence value}
   integrity: {finalist_shape_feedback_detected: false, reality_feedback_to_generation_detected: false}
 
 workflow_scheduler:
@@ -73,32 +54,15 @@ workflow_scheduler:
   active_patterns:
     - {pattern_id: category_parallel, status: completed_current_probe, last_used_round: RND-075}
     - {pattern_id: white_space_mapping, status: active_next, question_to_answer: find at least one more materially independent ready-to-use architecture beyond N096/N113/N117}
-  diagnostics: {workflow_monoculture: false, workflow_operator_confusion: false}
 
 method_scheduler:
   policy: adaptive_operator_portfolio
   protected_from_imitation: [N096_survivor_shape, N113_survivor_shape, N117_survivor_shape]
   recent_deprioritized_regions: [title_style_institutional, concrete_metaphor_mononym, relational_adverb_mononym, immediate_phrase_family_exploitation, immediate_tension_dyad_family_exploitation, common_making_imperative]
-  diagnostics: {scheduler_monoculture: false, method_underuse: false}
 
 candidates:
-  - id: N096
-    name: Open Regard
-    role: finalist_baseline
-    active: true
-    owner_signal: positive_usable_not_selected
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
-    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_2026_09_11, formal_tm_clearance: not_claimed}
-    generation_use: prohibited_as_template
-  - id: N113
-    name: Public Singular
-    role: finalist_hold
-    active: true
-    owner_signal: hold_explanation_required
-    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}
-    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_2026_09_11, formal_tm_clearance: not_claimed}
-    owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern]
-    generation_use: prohibited_as_template
+  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, owner_signal: positive_usable_not_selected, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}, reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_2026_09_11, formal_tm_clearance: not_claimed}, generation_use: prohibited_as_template}
+  - {id: N113, name: Public Singular, role: finalist_hold, active: true, owner_signal: hold_explanation_required, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}, reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_2026_09_11, formal_tm_clearance: not_claimed}, owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern], generation_use: prohibited_as_template}
   - id: N117
     name: See Otherwise
     role: finalist_owner_ready_unexposed
@@ -109,31 +73,27 @@ candidates:
     value_alignment: indirect_perspective_and_discovery_stance_without_public_noncommercial_tone
     reality:
       screening: {level: 1_plus_near_probe, observed_at: 2026-09-11, exact_result: no_material_active_exact_brand_org_software_identity_found_current_queries, near_name_result: ordinary_phrase_and_academic_usage_only_current_queries, public_tm_signal: no_material_exact_public_signal_found_current_web_screen_not_formal_clearance, confidence: medium_high}
-      evidence_summary: [current exact/company/nonprofit/research/software/app/trademark-oriented searches surfaced ordinary phrase uses and academic usage rather than an active exact brand identity]
       domain: {name: seeotherwise.org, observation: available, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
     diagnosis: [mild_imperative_or_manifesto_tone_risk]
     generation_use: prohibited_as_template
     owner_exposure: ready_when_next_peer_or_batch_checkpoint_reached
-  - {id: N118, name: Make Common, role: reality_blocked, active: false, provenance: {round: RND-075, region: REG-COMMON-MAKING-IMPERATIVE}, reality: {result: red_current_MAKECOMMON_software_trademark_signal_Spain}, domain: makecommon.org_available_but_not_promotable, owner_exposure: prohibited_current_evidence}
+  - {id: N118, name: Make Common, role: reality_blocked, active: false, provenance: {round: RND-075, region: REG-COMMON-MAKING-IMPERATIVE}, reality: {result: red_current_MAKECOMMON_software_trademark_signal_Spain}, owner_exposure: prohibited_current_evidence}
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
   - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed}
 
 rounds:
-  - id: RND-074
-    action: owner_feedback_ingest_and_exploration_reopen
-    generated_count: 0
-    findings: [N096 confirmed usable but not selected, N113 retained with comprehension/commercial-tone concerns, choice-space target expanded]
+  - {id: RND-074, action: owner_feedback_ingest_and_exploration_reopen, generated_count: 0, findings: [N096 confirmed usable but not selected, N113 retained with comprehension/commercial-tone concerns, choice-space target expanded]}
   - id: RND-075
     action: white_space_remap_plus_distinct_category_parallel_probe
     generated_count: bounded_multi_region_probe
     reality_screened_top_slice: [N117, N118]
     domain_queried_after_reality_pass: [N117]
     findings:
-      - epistemic verb-stance architecture produced N117 See Otherwise, which is readable, immediately comprehensible, organization-scalable, current-reality-clean in the bounded screen, and seeotherwise.org is currently available
-      - common-making imperative top candidate N118 Make Common was blocked by a current MAKECOMMON software trademark signal and was not promoted despite domain availability
+      - N117 See Otherwise is readable, immediately comprehensible, organization-scalable, current-reality-clean in the bounded screen, and seeotherwise.org is currently available
+      - N118 Make Common was blocked by a current MAKECOMMON software trademark signal and was not promoted
       - plural-locus material was not promoted because it reduced independence from existing comparison/plurality semantic space
-      - N117 is materially different from N096 and N113 in syntax and brand mechanism; it is quarantined from further generation as soon as it survived
+      - N117 is quarantined from further generation as soon as it survived
     integrity_check: {N096_N113_not_used_as_generation_templates: true, N117_quarantined_after_survival: true, reality_before_domain_for_promoted_candidate: true, actual_generation_isolation: best_effort_same_context, no_false_blindness_claim: true}
 
 observations:
@@ -143,21 +103,14 @@ observations:
 
 diagnostics:
   - {id: D-R074-01, diagnosis_type: finalist_pool_insufficient_despite_usable_baseline, confidence: high}
-  - id: D-R075-01
-    diagnosis_type: third_independent_finalist_signal_found_choice_space_still_expandable
-    statement: N117 adds a third independent ready-to-use architecture, but Owner requested more choice and target pool remains 4-6; continue remap rather than exploit N117 family
-    confidence: high
-    proposed_state_change: continue_distinct_portfolio_search
+  - {id: D-R075-01, diagnosis_type: third_independent_finalist_signal_found_choice_space_still_expandable, statement: N117 adds a third independent ready-to-use architecture but target pool remains 4-6; continue remap rather than exploit N117 family, confidence: high, proposed_state_change: continue_distinct_portfolio_search}
 
 experience_candidates:
   - {id: E-R074-STOP-SUFFICIENCY, observation: finalist-count threshold should not be sufficient stopping evidence when Owner reports inadequate choice space, scope: potentially_general, confidence: medium, status: experience_candidate_not_skill_rewrite}
   - {id: E-R074-FIRSTREAD, observation: first-read semantic comprehension should be distinguished from post-explanation conceptual fit, scope: potentially_general, confidence: medium, status: experience_candidate_not_skill_rewrite}
   - {id: E-R075-STANCE, observation: epistemic verb-stance architecture yielded one independent survivor in this task, scope: task_local, confidence: low_medium, status: observed_not_exported}
 
-experience_export:
-  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  direct_skill_rewrite_allowed: false
-  method_level_export: none_new_cross_task_evidence_insufficient
+experience_export: {registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml, direct_skill_rewrite_allowed: false, method_level_export: none_new_cross_task_evidence_insufficient}
 
 current_state:
   finalists: [N096, N113, N117]
@@ -175,9 +128,7 @@ current_state:
 next_action:
   action: remap_for_fourth_independent_finalist
   target: find_materially_different_ready_to_use_candidate_beyond_N096_N113_N117
-  rationale: >-
-    Owner explicitly asked for more choice. N117 improves the pool but should not become a generation template. Remap again and probe a genuinely different identity architecture;
-    keep intrinsic/linguistic funnel before hardened reality screening and domain gating.
+  rationale: Owner asked for more choice; N117 improves the pool but is quarantined from generation. Remap again and probe a genuinely different identity architecture before the next Owner batch review.
   triggered_by: [D-R075-01]
   expected_information_gain: medium_high
   selected_workflow_pattern_ids: [white_space_mapping, category_parallel]
@@ -187,7 +138,4 @@ next_action:
 stop:
   status: continue
   reason: three independent ready-to-use candidates now exist, but Owner requested broader choice and target pool is 4-6
-  unresolved:
-    - formal trademark legal clearance remains deferred and is not implied by public screening
-    - true isolated generation runtime remains unavailable in this context
-    - at least one more independent finalist is preferred before next Owner batch review
+  unresolved: [formal trademark legal clearance remains deferred, true isolated generation runtime unavailable, at least one more independent finalist preferred before next Owner batch review]
