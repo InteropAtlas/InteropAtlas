@@ -5,16 +5,16 @@ task:
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
-  status: in_progress
-  snapshot_version: 81
+  status: process_review
+  snapshot_version: 82
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v80 在试图提高语义密度时再次发生明显 morphotype collapse：
-    多个候选围绕同一组古典词根与 mero-/noe-/poie- 等语源、相似抽象尾缀和 X+抽象后缀结构旋转。
-    Owner 明确指出这一批整体过于相似，并判断 Controller 偷懒。该判断成立：这是对 Merosophy 正向信号的过拟合，而不是合理收敛。
-    本快照将其记录为新的执行完整性事件，并强制下一轮做结构级 reset，而不是继续局部仿写。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v81 记录 INC-MORPHOTYPE-OVERFIT-003。
+    Owner 随后明确暂停继续生成名称，要求收集和整理本次生成全过程的数据/资料，判断哪些经验可用于改善 Adaptive Naming Skill。
+    本快照因此把生成暂停，进入 method/process review。复盘文档位于
+    03_Evolution/01_Research/03_Tests/organization-naming-411-process-review-v0.1.md。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -45,52 +45,40 @@ integrity_incidents:
   - {id: INC-SEMANTIC-ANCHOR-001, status: corrected_and_live_recovery_observed, classification: controller_runtime_fidelity_failure}
   - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_but_recurred_in_new_form, classification: workflow_scheduler_fidelity_failure}
   - id: INC-MORPHOTYPE-OVERFIT-003
-    status: active_reset_required
+    status: under_method_review
     classification: controller_overfit_to_positive_reference
     trigger: Owner detected that snapshot v80 batch was structurally too similar
     mechanism: >-
       Controller treated Merosophy's positive signal as evidence for a classical-root-derived morphology rather than evidence for semantic density and mature brandability.
       Search then overused mero-/noe-/poie-like classical roots, abstract suffixes, and X+learned-ending forms.
-    correction:
-      - prohibit use of Merosophy morphology, classical-root feel, or specific morpheme family as a generation template
-      - next batch must be partitioned by fundamentally different construction architectures before lexical realization
-      - require at least five materially different construction classes in Owner-visible batch
-      - cap any one construction class at two Owner-visible candidates
-      - evaluate semantic depth independently within each class
+    method_review_implication: >-
+      Current Skill already contains anti-collapse principles, but repeated Owner-detected failures suggest missing pre-exposure batch-level enforcement and positive-reference generalization controls.
 
-search_control:
-  mode: structural_diversity_reset
-  generation_isolation:
-    level: best_effort_same_context
-    claim_policy: sanitized positive briefs only; no literal blindness claim
-  finalist_template_use: prohibited
-  reference_overfit_guard: enabled
-  reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
-  owner_visible_batch_target: 5_to_8
-  temporary_controller_cooldowns:
-    - classical_greek_or_latin_root_stack
-    - mero_noe_poie_family_reuse
-    - X_plus_abstract_learned_suffix
-    - faux_academic_concept_word
-  required_next_batch_architectures:
-    - compact_semantic_fusion_without_classical_roots
-    - structural_or_visual_coinage
-    - transformed_everyday_morpheme_coinage
-    - symbolic_or_process_based_proper_name
-    - crosslanguage_but_nonclassical_fusion
-    - sound_first_but_semantically_backfilled_name
-    - optional_short_compound_single_token
-  architecture_rule: at_least_five_materially_distinct_classes_owner_visible; max_two_per_class
-
-rounds:
-  - id: RND-130
-    action: owner_detects_repeated_morphotype_collapse
-    result: controller_overfit_confirmed
-    findings:
-      - Owner states the batch is overall very similar and calls out apparent laziness
-      - diagnosis confirms structural overfitting to Merosophy rather than genuine search-space diversity
-      - semantic explanations differed but visible construction architecture did not
-      - next round requires architecture-first divergence before lexical generation
+process_review:
+  status: active
+  review_document: 03_Evolution/01_Research/03_Tests/organization-naming-411-process-review-v0.1.md
+  generation_paused: true
+  review_scope:
+    - semantic_anchor_collapse
+    - owner_visible_morphotype_collapse
+    - reality_and_commercial_gate_effects
+    - positive_reference_learning
+    - coined_name_strategy
+    - cross_language_pronounceability
+    - owner_review_batching
+    - positive_reference_overfit
+  primary_findings:
+    - current toolbox and diagnosis vocabulary are broadly sufficient; enforcement is the larger gap
+    - positive feedback needs abstraction into latent virtues vs surface morphology before it informs exploration
+    - candidate-level quality checks are insufficient; batch-level generalization/diversity audit is needed
+    - semantic diversity does not prove morphological diversity
+    - owner review cadence is itself an adaptive variable
+    - commercial ownability should filter and allocate search budget without becoming a proxy for intrinsic name quality
+    - cross-language pronounceability is important but should not outrank semantic substance by default
+  proposed_method_hypothesis: positive_reference_abstraction_plus_batch_generalization_audit
+  stable_skill_change_now: false
+  reason_for_not_immediate_promotion: >-
+    Mechanism is clear and repeated within #411, but cross-task evidence is still absent. Record as method-evolution evidence and add regression before stable promotion.
 
 candidates:
   - id: N130
@@ -106,18 +94,18 @@ current_state:
   owner_positive_commercial_candidates: [N130]
   weak_positive_comparison: [N135]
   preference_evidence: [N127]
-  search_mode: structural_diversity_reset
+  search_mode: process_review_no_generation
   biggest_unknown: >-
-    Which fundamentally different coined-name architectures can preserve semantic density and mature brand character without inheriting Merosophy's learned/classical morphology?
+    Which parts of the repeated #411 collapse/overfit behavior represent task-local execution defects versus generalizable method controls worth promoting into a future Adaptive Naming Skill revision?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: architecture_first_divergence_then_large_batch_screen
+  action: record_method_experience_and_design_regression_before_skill_change
   rationale: >-
-    Do not generate another lexically varied but structurally homogeneous batch. First allocate independent construction architectures, then generate within each, apply intrinsic/pronunciation/domain/reality/TM screens, and expose only a mixed 5-8 candidate batch.
-  requires_owner: false_for_continued_search
+    Do not resume name generation until the current process review is complete. Convert repeated positive-reference overfit and batch-homogeneity evidence into Method Experience Registry entries and regression hypotheses first.
+  requires_owner: false_for_method_review
 
 stop:
-  status: continue
-  reason: Owner identified a real controller fidelity defect; reset is defined and search should continue autonomously
+  status: generation_paused_process_review_active
+  reason: Owner explicitly requested process/data review instead of new names
