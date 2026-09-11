@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 74
+  snapshot_version: 75
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v73 继续 broad creation，并新增 N128 Transindividuality。
-    Owner 对 N128 的反馈为：太长，不喜欢。该反馈不否定长词或概念词整体，而是说明长度/视觉/口头负担一旦超过阈值会明显破坏品牌感。
-    Multifinality 仍保留为正向偏好证据，但不得作为模板。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v74 记录 N128 Transindividuality 因长度负担被 Owner 拒绝。
+    本快照继续 broad creation，并专门校准比 Multifinality 更短、更利落但仍有概念完整性的名称。多批候选先生成，再做 .com/identity/trademark 后筛；
+    本轮没有为了域名可用而降低 intrinsic quality。完整历史继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -74,14 +74,18 @@ rounds:
   - {id: RND-119, action: existing_candidate_exact_com_rescreen, result: direct_registration_pool_contraction}
   - {id: RND-120, action: owner_clarifies_com_gate_as_obtainability_not_unregistered_only, result: aftermarket_path_enabled}
   - {id: RND-121, action: continue_creation_after_domain_gate_clarification, result: one_new_high_priority_commercial_candidate}
-  - id: RND-122
-    action: owner_reaction_to_transindividuality
-    result: rejected_for_excessive_length
+  - {id: RND-122, action: owner_reaction_to_transindividuality, result: rejected_for_excessive_length}
+  - id: RND-123
+    action: calibrated_shorter_conceptual_brand_search
+    result: no_owner_ready_survivor_yet
     findings:
-      - Owner says Transindividuality feels too long and is not liked
-      - this is not evidence against long or conceptual words categorically
-      - contrast with positive Multifinality indicates a practical upper-bound effect on visual/spoken load
-      - do not convert this into a strict character-count rule; use as comparative preference evidence
+      - shorter established philosophical/concept words were overwhelmingly .com-occupied, confirming heavy namespace crowding in concise lexical territory
+      - available direct-registration forms included Variforma, Versiformity, Varianceo, Pluralon, Mutiform, Alterraxis, Plurona, Interraza, Versoriax, Recombra and Pluraliax
+      - Variforma was reality/trademark blocked by an active registered US trademark and existing industrial brand use
+      - Plurona was reality blocked by an active Italian company identity
+      - several remaining direct-registration strings were rejected for weak intrinsic quality, overly constructed SaaS-like appearance, or insufficient semantic/brand depth despite domain availability
+      - no candidate from this round exceeded Multifinality-level appeal while staying comfortably below Transindividuality-level length burden
+      - important control result: .com availability did not override intrinsic naming quality
 
 candidates:
   - {id: N096, name: Open Regard, role: commercial_gate_survivor_pending_tm_strength, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
@@ -102,9 +106,6 @@ candidates:
     role: owner_rejected_length
     active: false
     owner_feedback: too_long_not_liked
-    domain_status:
-      com: available_for_registration_2026_09_11
-      org: available_for_registration_2026_09_11
     generation_use: prohibited_as_template_or_seed
 
 current_state:
@@ -112,16 +113,21 @@ current_state:
   aftermarket_pending: [N117, N119, N125, N127]
   search_mode: commercial_brand_hard_gate_divergence
   biggest_unknown: >-
-    Can further materially different form classes match Multifinality-level semantic depth and brand feel while staying clearly below the visual/spoken burden represented by Transindividuality and preserving .com obtainability plus trademark strength?
+    Can a shorter true concept word or more natural semi-transparent proper name achieve Multifinality-level conceptual brandability without collapsing into generic SaaS coinage, while retaining practical .com obtainability and strong trademark outlook?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: continue_broad_creation_with_length_burden_calibration
+  action: continue_parallel_true_concept_and_natural_semiopaque_search
+  priority_classes:
+    - shorter_established_concept_words
+    - natural_semiopaque_proper_names_with_semantic_backbone
+    - compact_single_token_compounds
+    - root_derived_forms_with_high_recoverability
   rationale: >-
-    Preserve morphotype diversity and meaning-first search, but treat excessive visual/spoken length as a comparative negative. Do not impose a hard character limit and do not clone Multifinality.
+    Namespace crowding is severe in concise conceptual language, but direct-registration vacancy alone is not enough. Preserve meaning-first quality and broad form diversity while seeking a shorter identity load than N128.
   requires_owner: false_for_continued_search
 
 stop:
   status: continue
-  reason: Owner feedback narrows practical identity load without collapsing the search space
+  reason: search remains productive diagnostically; no new candidate yet merits Owner exposure
