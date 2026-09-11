@@ -1,260 +1,205 @@
-# 构词策略工具箱 v0.3
+# 构词策略工具箱 v0.3.1
 
-本文件回答“**有哪些可调用的命名方法 / operator**”；什么时候调用、并行多少、预算如何分配，由 `Method Scheduler` 决定，见：
-
-[`mission-value-model-and-method-scheduler.md`](mission-value-model-and-method-scheduler.md)
-
-本工具箱不是固定配方、阶段流程或优先级表。不同方法可以在同一 exploration round 并行；同一方法也可以被 Scheduler 降权、cooldown、重新激活或用于 bounded exploitation。
+本文件是 Method Scheduler 可调用的构词 / 结构工具箱，不是固定流程，也不是要求每轮平均覆盖所有方法。
 
 核心原则：
 
-> **方法是可调度资源，不是线性步骤。**
+> **方法只是 operator / strategy；何时调用、并行多少、何时降权或进入 rescue，由 Controller 根据 Name Job、价值覆盖、现实拥挤、信息增益与 concentration risk 动态决定。**
+
+不要把“第一路径 / 备用路径”永久写死。某个方法既可能用于一般 exploration，也可能只在特定事件中被调用。
 
 ---
 
-## 0. 方法角色与搜索完整性
+## 0. 调度与完整性约束
 
-每个方法在具体任务中可临时承担：
+在 exploration 中：
 
-- `general_exploration`：一般探索；
-- `focused_exploitation`：有限深挖；
-- `transformation_operator`：对强 seed 做低失真变形；
-- `rescue_only`：只在现实失败的强原型救援中使用；
-- `deprioritized / cooled`：暂时降权，不等于永久禁用。
-
-探索阶段：
-
-- comparison-only / incumbent 默认不作为 general exploration 模板；
-- reality survivor shapes 不直接回喂 Generator；
-- task-local cooldown 由 Controller-only state + post-generation filter 执行；
-- Generation Brief 使用正向目标；
-- 同一 family 过度集中时触发 search-integrity；
-- 如果一个强 seed 主要因现实占用失败，可单独开启 `transformation_rescue`，这是显式 bounded exploitation，不算无意识 incumbent anchoring。
+- strongest / survivor / finalist 默认只作 comparison；
+- task-local cooldown 与 incumbent similarity 由 Controller 私下维护；
+- Generator Brief 使用正向目标，不反复列具体禁止样本；
+- 同一 family 过度集中时先做 search-integrity，而不是继续近亲繁殖；
+- reality survivor shape 不直接回灌为“多生成这种结构”；
+- 多种方法都合理时可小批并行；不要求每轮只选一个；
+- 多方法仍落回相同词根 / 套壳时，问题可能是 `territory_material_starvation`，应先做真实 material research；
+- 若围绕一个强原型做变形，必须显式进入 bounded exploitation / rescue branch。
 
 ---
 
-## 1. 现成词 / 语义迁移
+## 1. Direct / lexical identity
 
-**做法**：使用已有单词，在新品牌语境中赋予组织身份。
+### 1.1 现成词 / 语义迁移
 
-**价值**：识别、记忆、口语恢复通常最好；自带真实语义和故事。
+使用已有词，但迁移到新的组织 / 品牌语境。
 
-**风险**：现实 namespace 通常拥挤；可能过于通用。
+价值：识别、记忆和语义抓手强。
 
-**常见角色**：general exploration；也可作为 rescue seed。
+风险：现实空间拥挤、类别化。
 
----
+### 1.2 相邻领域 / 隐喻迁移
 
-## 2. 相邻领域 / 隐喻迁移
+从自然、科学、工艺、空间、行为、仪式、职业、工具等承担相似结构的领域找材料，而不是只搜同义词。
 
-**做法**：不从目标概念同义词出发，而从承担相似结构 / 动作的物体、职业、自然过程、空间、仪式、工具等寻找材料。
+价值：跳出竞争者共用语言，形成真实故事和图像。
 
-**价值**：跳出直接语义拥挤区；提供画面、结构和故事。
+风险：隐喻过远或热门隐喻再次拥挤。
 
-**风险**：隐喻过远会与对象脱节；热门隐喻也会拥挤。
+### 1.3 Institutional pair / phrase
 
-**常见角色**：general exploration，尤其适合 value target 的间接表达。
+用两个自然词或极短机构性短语形成组织名，不要求压成单 token。
 
----
+价值：在保持可理解、可读写的同时扩大 identity space；适合长期 umbrella organization。
 
-## 3. Institutional pair / phrase
+风险：可能过于描述性、像基金会 / 咨询公司通用模板，域名连写后也需重新评价。
 
-**做法**：使用两个正常词或短机构式短语形成完整专名，而不是强行连成一个新词。
+### 1.4 自然复合词
 
-**价值**：扩大身份空间，同时保留可读、可写、可解释；适合长期 organization / institution。
+两个相对完整的词组成单一结构。
 
-**风险**：可能变成普通描述语、过长、缩写难看，或域名连写后分词不稳定。
+价值：兼顾两个概念和一定独特性。
 
-**常见角色**：general exploration；也可作为 single-token seed 的 rescue expansion。
-
----
-
-## 4. 自然复合词
-
-**做法**：两个相对完整的词组合成一个整体名称。
-
-**价值**：同时压缩两个概念，理解成本较低，组合空间大。
-
-**风险**：容易生成“合理但无个性”的普通组合；热门根会拥挤。
-
-**常见角色**：general exploration / focused exploitation。
+风险：热门词根机械复合会显得普通或产品化。
 
 ---
 
-## 5. 拼词 / 混成词（blend）
+## 2. Compositional / derived
 
-**做法**：融合两个或多个词的片段，而非完整拼接。
+### 2.1 拼词 / 混成词
 
-**价值**：保留语义影子并提高独特性。
+截取两个或多个词片段融合。
 
-**风险**：机械拼接容易成为 AI 式假品牌词；发音 / 拼写可能不稳。
+价值：保留语义影子并提高独特性。
 
-**常见角色**：general exploration；light blend 也可作为 rescue operator。
+风险：机械 AI 品牌词、难读难拼。
 
----
+### 2.2 词根组合 / 词源派生
 
-## 6. 词根组合 / 词源派生
+从可核实的拉丁、希腊、古英语或其他词源构造。
 
-**做法**：从真实可核实词源、词干、前后缀构造或派生。
+价值：跨出现代表面词汇，增加抽象空间。
 
-**价值**：语义压缩强，可扩展到现代英语表面词汇之外。
+风险：伪词源、假拉丁、过度学术化。
 
-**风险**：伪词源、过度学术化、装饰性“类拉丁壳”。
+### 2.3 前缀 / 后缀派生
 
-**常见角色**：general exploration / controlled coinage。
+只有在 affix 有真实语义作用时使用，不为“像品牌名”而添加。
 
-**要求**：词源或构造依据必须真实可核实；不能为了显得高级制造假来源。
+### 2.4 截短 / telescoping / phrase compression
 
----
+对强概念或长短语做可读压缩。
 
-## 7. Morpheme-grounded controlled coinage
+风险：首字母汤、语义消失、缩写碰撞。
 
-**做法**：先有真实轻语义锚点，再做有限声音、拼写、形态优化，形成更独立的 proper name。
+### 2.5 Semantically motivated fusion
 
-**价值**：在语义可解释和现实身份空间之间寻找平衡。
-
-**风险**：容易复用少数 decorative shell，形成新的 construction collapse。
-
-**常见角色**：general exploration / focused exploitation。
+两个语义锚点按可解释结构融合，而不是只为表面声音顺滑。
 
 ---
 
-## 8. 完全新造词
+## 3. Controlled coinage / open search
 
-**做法**：不要求字典语义，从目标声音、节奏、结构直接创造。
+### 3.1 Morpheme-grounded coinage
 
-**价值**：搜索空间最大，现实 exact identity 概率通常较低。
+先有真实、可核实的 morpheme / semantic anchor，再做有限声音或正字法优化。
 
-**风险**：随机、空心、难拼、难读、廉价科技词感。
+### 3.2 完全新造词
 
-**常见角色**：高开放度 exploration；不应因为普通词拥挤就自动大量使用。
+不要求字典语义，直接从声音、节奏、形态创造 proper name。
 
----
+价值：identity space 大。
 
-## 9. 声音先行
+风险：随机、空心、廉价科技词、恢复性差。
 
-**做法**：先定义节奏、音节、音感，再反推可成立的 spelling / meaning。
+### 3.3 声音先行
 
-**价值**：跳出同义词搜索，直接优化口语传播。
+先定义音节、节奏、辅元音感觉，再反推结构。
 
-**风险**：声音象征不是绝对规律；容易脱离真实意义。
+适用于语义路线高度同质化、口语传播重要时。
 
-**常见角色**：general exploration / open search。
+### 3.4 More opaque proper-name construction
 
----
-
-# Part II · Transformation Operators
-
-以下方法可以独立探索，也可以由 `Transformation Rescue` 对强 seed 有限调用。作为 rescue 时必须重新做完整质量与现实检查。
-
-## 10. 受控拼写改写
-
-**做法**：少量字母替换、增删、重排或正字法变化，尽量保留识别和读音。
-
-**价值**：以小改动扩大独特性 / namespace。
-
-**风险**：像 typo；听写无法恢复。
-
-**特别适合**：seed 本体强但 exact identity 被占。
+允许表面语义较轻，但内部构造必须真实可追溯、发音拼写稳定。
 
 ---
 
-## 11. 重复 / 双写字母
+## 4. Transformation operators
 
-**做法**：有控制地重复一个字母或局部结构。
+这些不是“备用方法”，而是 Scheduler 可在普通 exploration 或 Transformation Rescue 中调用的 operator。
 
-**价值**：极低失真独特化；可能保留原语义和发音。
+### 4.1 Controlled spelling mutation
 
-**风险**：听写不知哪个字母重复；视觉笨重；批量使用会模板化。
+少量替换、增删、重排或正字法改变，尽量保留读音 / 识别。
 
-**特别适合**：强 seed 现实拥挤，且双写后仍视觉自然。
+### 4.2 Doubled / repeated letters
 
-**不应做**：seed 本身弱时，不用双写掩盖质量问题。
+有控制地重复字母形成低失真 identity variation。
 
----
+适合：基础原型强但现实占用。
 
-## 12. 主体词 + 单字母
+风险：dictation ambiguity、typo 感。
 
-**做法**：完整主体词前 / 后附加一个有理由的字母。
+### 4.3 Base + single letter
 
-**价值**：最小结构变化即可形成新身份；保留主体意义。
+完整主体词前后附加一个有真实意义 / 架构作用的字母。
 
-**风险**：产品化、科技化、临时感；字母无理由时随意。
+风险：产品化、临时科技感；无意义字母不得只是装饰。
 
-**特别适合**：主体词非常强、裸词被占，且字母能承担真实架构 / 意义作用。
+### 4.4 Meaningful affix
 
----
+在强原型上加入有真实语义作用的 prefix / suffix。
 
-## 13. 前缀 / 后缀派生
+### 4.5 Clipping / telescoping
 
-**做法**：添加真实有意义的 prefix / suffix。
+保留主要识别和语义，降低长度或拉开 namespace。
 
-**价值**：改变词性、方向、身份或尺度。
+### 4.6 Light blend / second semantic anchor
 
-**风险**：热门 suffix 容易行业陈词滥调；AI 容易复用少数安全壳。
+给强原型增加少量第二语义负载，而不是无限字母微调。
 
-**角色**：general exploration / transformation operator。
+### 4.7 Segmentation / spacing change
 
----
+必要时通过自然分词、间隔或视觉 segmentation 改变身份；不能靠难以口语恢复的视觉 gimmick。
 
-## 14. 截短 / clipping / telescoping / 缩略
+### 4.8 Institutional expansion / contraction
 
-**做法**：压缩长词 / 短语 / 多概念，同时保持可发音和可恢复。
-
-**价值**：降低长度，形成新 identity。
-
-**风险**：语义消失、首字母汤、现实 acronym 碰撞高。
-
-**角色**：general exploration / transformation operator。
+单词原型可扩成两词机构名；长机构名也可在不损失核心身份时压缩。
 
 ---
 
-## 15. Segmentation / spacing change
+## 5. Territory-based strategy
 
-**做法**：在不改变主要语言材料时，测试分词、空格、连写、轻量重分段。
+如果多种构词方法仍反复回到相同常见材料，不应只继续换 operator。
 
-**价值**：同一语义材料可形成不同 institutional identity；有时能改善读法与视觉。
+先执行 `territory_research`：从真实领域采集 concepts / verbs / objects / structural analogies / metaphors / etymological material，再由 Controller 选择少量材料进入 Generator Brief。
 
-**风险**：域名仍需连写；canonical segmentation 不稳定时会增加听写成本。
-
-**角色**：transformation operator。
+Territory Research 是材料供给策略，不是直接搜索现成名字。
 
 ---
 
-## 16. Institutional expansion / contraction
+## 6. Transformation Rescue 使用合同
 
-**做法**：单词 seed 扩为两词机构名，或将两词结构压缩成更稳定 identity。
+当强候选主要因 reality / namespace 失败，而不是 intrinsic quality、value alignment、发音或尺度失败时，可开启 bounded rescue。
 
-**价值**：在保留强语义 / 声音原型的同时改变 namespace 和组织尺度。
+原则：
 
-**风险**：可能变描述语或缩写不佳。
-
-**角色**：transformation operator / architecture exploration。
-
----
-
-## 17. Second semantic anchor
-
-**做法**：对强 seed 增加第二个真实语义锚点，通过 light blend / compound / phrase 拉开现实身份距离。
-
-**价值**：比纯字母装饰更可能形成独立 identity，同时保留 seed 的核心价值。
-
-**风险**：变长、语义过满、失去 seed 的简洁性。
-
-**角色**：transformation rescue 中高价值 operator。
+1. 明确 seed 与 trigger；
+2. 只选择适配 operator，不按顺序机械全部执行；
+3. 设 attempt budget 与 exit conditions；
+4. 每个变形结果作为新候选重新评价；
+5. 若多个 surface variations 仍 near-collision，增加 semantic / structural distance 或关闭 branch；
+6. 若开始无限近亲繁殖，诊断 `rescue_overfit`。
 
 ---
 
-## 18. 新方法发现规则
+## 7. 新策略发现
 
-列表不是封闭集合。发现新策略时：
+列表不是封闭集合。发现新方法时记录：
 
-1. 记录 `strategy_id` 与 family；
-2. 写明它解决的具体问题；
-3. 标注一般 exploration / exploitation / rescue operator 角色；
-4. 记录候选与结果；
-5. 区分 task-local 与 potentially general；
-6. 不因一次成功直接升级稳定 Skill；
-7. 跨任务验证后再 review。
+- strategy id；
+- 解决的问题；
+- value / Name Job 目标；
+- 尝试与结果；
+- quality / feasibility / information gain；
+- concentration risk；
+- 本任务有效还是可能普遍有效。
 
-Method Scheduler 可在任务内立即使用新策略，但必须跟踪 yield、information gain 和 concentration risk。
+一次成功不自动升级为稳定 Skill；跨任务证据后再 review。
