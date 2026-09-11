@@ -1,4 +1,4 @@
-schema_version: "0.3"
+schema_version: "0.3.1"
 
 job:
   id: null
@@ -9,34 +9,13 @@ job:
   contexts: []
   languages: []
   success_definition: []
-  hard_constraints: []
-  avoid: []
   required_reality_checks: []
 
 constraint_registry:
   confirmed_hard_constraints: []
-  # - id: HC001
-  #   statement: null
-  #   source_type: owner_explicit | task_source | legal | technical
-  #   source_ref: null
-  #   confirmed_at: null
-  #   notes: []
-
   owner_preferences: []
   controller_search_variables: []
-  # - id: SV001
-  #   name: word_count
-  #   current_value: single_or_multiword_open
-  #   allowed_values: [single_token, multiword, both]
-  #   rationale: null
-  #   owner_approval_required_to_change: false
-
   assumptions: []
-  # - id: A001
-  #   statement: null
-  #   source_ref: null
-  #   confidence: low | medium | high
-  #   status: provisional | retracted | confirmed
 
 mission_value_model:
   source_refs: []
@@ -47,7 +26,6 @@ mission_value_model:
   temporal_or_causal_structure: []
   desired_world: []
   anti_values_or_non_goals: []
-
   value_claims: []
   # - id: V001
   #   statement: null
@@ -56,26 +34,9 @@ mission_value_model:
   #   value_type: end | means | relation | procedural | identity
   #   priority: core | high | supporting | optional | unknown
   #   confidence: low | medium | high
-  #   notes: []
-
   value_relations: []
-  # - value_a: V001
-  #   value_b: V002
-  #   relation: reinforce | balance | tension | sequence | subordinate | independent
-  #   rationale: null
-
   naming_implications: []
-  # - value_id: V001
-  #   mode: direct | indirect | guardrail_only | optional_story | not_required
-  #   rationale: null
-
   value_coverage: []
-  # - value_id: V001
-  #   sampling_level: none | low | medium | high
-  #   recent_strategy_ids: []
-  #   strong_candidate_ids: []
-  #   interpretation: null
-
   integrity:
     value_flattening_detected: false
     mission_overcompression_detected: false
@@ -84,56 +45,104 @@ mission_value_model:
     value_score_smuggling_detected: false
     notes: []
 
-brief:
-  semantic_core: []
-  desired_character: []
-  communication_targets: []
-  abstraction_preference: null
-  architecture_requirements: []
-  pronunciation_requirements: []
-  spelling_requirements: []
+name_job_model:
+  primary_jobs: []
+  secondary_jobs: []
+  non_jobs: []
+  tensions: []
+  success_evidence: []
+  source_refs: []
+  status: provisional
+  # provisional | active | revised | stable
 
-owner_preference:
-  stage_weight: low
-  stable_signals: []
-  provisional_signals: []
-  observations: []
+decision_criteria:
+  items: []
+  # - id: C001
+  #   statement: null
+  #   role: gate | optimize | prefer | observe
+  #   source_ref: null
+  #   confidence: low | medium | high
+  #   notes: []
+  integrity:
+    role_confusion_detected: false
+    role_drift_detected: false
+    notes: []
 
-quality_dimensions:
-  active:
-    - distinctiveness
-    - pronounceability
-    - spelling_burden
-    - memorability
-    - semantic_fit
-    - semantic_room
-    - target_scale_fit
-    - longevity
-    - symbolic_compression
-    - cross_context_use
-    - architecture_extensibility
-  optional: []
-  notes: []
+optional_modules:
+  communication_load_allocation:
+    status: inactive
+    # inactive | active | satisfied | deferred
+    trigger: null
+    name: []
+    descriptor: []
+    tagline: []
+    mission_statement: []
+    brand_architecture: []
+    visual_identity: []
+    organizational_practice: []
+
+  territory_research:
+    status: inactive
+    trigger: null
+    active_territories: []
+    material_maps: []
+    # - territory_id: null
+    #   concepts: []
+    #   verbs: []
+    #   objects: []
+    #   structural_analogies: []
+    #   metaphors: []
+    #   etymological_material: []
+    selected_material_for_generation: []
+
+  decision_hygiene:
+    status: inactive
+    trigger: null
+    independent_first_pass: false
+    reviewer_blindness_contracts: []
+    anchoring_risks: []
+    notes: []
+
+  temporal_evaluation:
+    status: inactive
+    trigger: null
+    candidate_ids: []
+    notes: []
+
+  validation_research:
+    status: inactive
+    trigger: null
+    respondent_definition: null
+    research_questions: []
+    blindness_level: null
+    admissible_inferences: []
+    prohibited_inferences: []
+    results: []
+
+  naming_scope:
+    status: inactive
+    trigger: null
+    object_role: null
+    # standalone_brand | endorsed_brand | sub_brand | descriptor | feature_label | internal_codename | no_separate_name | unknown
+    rationale: null
+
+  activation_governance:
+    status: inactive
+    trigger: null
+    migration: []
+    rollout: []
+    internal_adoption: []
+    future_naming_policy: []
 
 map:
   initial_landscape_summary: null
   regions: []
-  # - id: region-001
-  #   label: null
-  #   semantic_basis: []
-  #   value_targets: []
-  #   construction_families: []
-  #   prior_crowding: unknown
-  #   observed_crowding: unknown
-  #   quality_potential: unknown
-  #   evidence: []
-  #   status: unexplored | exploring | promising | crowded | low-yield | paused
+  semantic_coverage: []
 
 search_control:
   mode: exploration
   mode_rationale: null
 
-  semantic_coverage: []
   family_concentration:
     morphological: []
     semantic: []
@@ -146,15 +155,14 @@ search_control:
     notes: []
 
   generation_isolation:
-    # isolated_runtime | fresh_context | best_effort_same_context | none | unknown
     level: unknown
+    # isolated_runtime | fresh_context | best_effort_same_context | none | unknown
     runtime_identity: null
     historical_context_may_have_seen_controller_only_exclusions: unknown
     evidence: []
     claim_policy: >-
       Only isolated_runtime/fresh_context with evidence may claim the Generator did not see hidden information.
       best_effort_same_context may only claim the current brief did not re-expose it.
-    notes: []
 
   controller_only_exclusions:
     incumbent_candidate_ids: []
@@ -167,16 +175,14 @@ search_control:
   reality_feedback_quarantine:
     enabled_in_exploration: true
     same_batch_feedback_to_generator: prohibited
-    notes: []
-
-  strategy_fidelity_checks: []
-  constraint_integrity_checks: []
 
   generator_brief:
     id: null
     search_mode: exploration
+    name_job_focus: []
     value_targets: []
     naming_implication_modes: []
+    selected_material_refs: []
     positive_objectives: []
     positive_search_zones: []
     positive_construction_targets: []
@@ -186,12 +192,6 @@ search_control:
     question_to_answer: null
     negative_examples_included: false
     controller_only_exclusions_exposed: false
-    omitted_context_categories:
-      - incumbent_names
-      - cooled_family_tokens
-      - reality_survivor_shapes
-      - owner_reactions_to_incumbents
-    notes: []
 
   post_generation_filter:
     enabled: true
@@ -205,14 +205,13 @@ search_control:
     blocked_candidate_ids: []
     violation_types: []
     high_hit_rate: false
-    notes: []
 
 method_scheduler:
   policy: adaptive_portfolio
   exploration_default_parallel_families: 3-5
   active_strategies: []
-  # - strategy_id: existing_word_semantic_shift
-  #   family: direct_lexical | compositional_derived | controlled_coinage | transformation_operator
+  # - strategy_id: null
+  #   family: direct_lexical | compositional_derived | controlled_coinage | transformation_operator | territory_based
   #   status: unexplored | active | boosted | deprioritized | cooled | exploitation | rescue_only
   #   value_targets: []
   #   quality_yield: unknown | low | medium | high
@@ -224,18 +223,11 @@ method_scheduler:
   #   attempts: 0
   #   last_used_round: null
   #   budget_next: null
-  #   rationale: null
-
   recent_allocations: []
-  # - round_id: null
-  #   selected_strategy_ids: []
-  #   parallel: true
-  #   allocation_rationale: null
-  #   expected_information_gain: null
-
   diagnostics:
     scheduler_monoculture: false
     method_underuse: false
+    territory_material_starvation: false
     notes: []
 
 transformation_rescue:
@@ -244,26 +236,18 @@ transformation_rescue:
   #   seed_candidate_id: null
   #   trigger: strong_intrinsic_quality_reality_failure
   #   rationale: null
-  #   allowed_operators:
-  #     - controlled_spelling_mutation
-  #     - doubled_letters
-  #     - base_plus_single_letter
-  #     - meaningful_affix
-  #     - clipping_or_telescoping
-  #     - light_blend
-  #     - institutional_pair_or_phrase
+  #   allowed_operators: []
   #   attempt_budget: null
   #   attempts_used: 0
   #   exit_conditions: []
   #   generated_candidate_ids: []
   #   status: active | stopped | succeeded | exhausted
-  #   stop_reason: null
-
   history: []
   rescue_overfit_detected: false
 
 execution:
   autonomous_microcycles: true
+  module_policy: progressive_disclosure
   preferred_batch_size:
     broad_exploration: 6-10
     focused_or_exploitation: 3-5
@@ -272,8 +256,8 @@ execution:
   owner_interaction_gate:
     last_checked_at: null
     proposed_question: null
-    # true_boundary_change | final_subjective_choice | missing_goal_fact | search_strategy | reversible_architecture_expansion | method_schedule | transformation_rescue | none
     classification: none
+    # true_boundary_change | final_subjective_choice | missing_goal_fact | search_strategy | reversible_architecture_expansion | method_schedule | territory_research | transformation_rescue | decision_hygiene | none
     confirmed_constraint_ids_affected: []
     missing_fact: null
     reversible_without_owner: true
@@ -289,30 +273,23 @@ execution:
     - budget_or_time_boundary
   current_budget_or_time_boundary: null
 
-construction_strategies:
-  tried: []
-  new_discoveries: []
-
 candidates: []
 # - id: N001
 #   name: null
 #   active: true
 #   role: active | comparison_only | held | retired | finalist
 #   generation_use: allowed | prohibited_as_template_or_semantic_anchor
-#   region_id: null
-#   secondary_region_ids: []
 #   value_target_ids: []
 #   semantic_family_ids: []
 #   morphological_family_ids: []
 #   construction_strategy: null
-#   generation_rationale: null
 #   provenance:
 #     round: null
-#     source: null
 #     generation_brief_id: null
 #     generation_isolation_level: unknown
 #     scheduler_strategy_id: null
 #     rescue_branch_id: null
+#     territory_material_refs: []
 #   quality:
 #     distinctiveness: null
 #     pronounceability: null
@@ -326,7 +303,6 @@ candidates: []
 #     cross_context_use: null
 #     architecture_extensibility: null
 #     optional: {}
-#     rationale: []
 #   value_alignment:
 #     aligned_value_ids: []
 #     tension_value_ids: []
@@ -334,86 +310,54 @@ candidates: []
 #     neutral_value_ids: []
 #     overall_observation: null
 #     confidence: null
-#   pareto:
-#     dominated: false
-#     dominated_by: []
-#     dimensions: []
+#   temporal_evaluation:
+#     first_impression: null
+#     informed_impression: null
+#     delayed_recall: null
+#     delayed_affect: null
+#     stability_observation: null
 #   reality:
-#     collision:
-#       observation: unverified
-#       confidence: null
-#       evidence: []
+#     collision: {observation: unverified, confidence: null, evidence: []}
 #     domains: []
-#     trademark_oriented_risk:
-#       observation: unverified
-#       evidence: []
+#     trademark_oriented_risk: {observation: unverified, evidence: []}
 #     namespaces: []
 #   owner_signal:
 #     observation: unseen | pull | neutral | repel
 #     confidence: null
 #     notes: []
 #   diagnosis: []
-#   retirement:
-#     retired: false
-#     reason: null
-#     learning_preserved: true
 
 rounds: []
 # - id: RND-001
-#   action: model_values | audit_constraints | map | schedule_methods | generate | post_generation_filter | evaluate_quality | evaluate_value_alignment | verify_reality | open_rescue_branch | diagnose | check_search_integrity | change_strategy
+#   action: model_values | define_name_job | audit_constraints | classify_decision_criteria | allocate_communication_load | map | territory_research | schedule_methods | generate | post_generation_filter | evaluate_quality | evaluate_value_alignment | apply_decision_hygiene | temporal_evaluation | verify_reality | define_validation_contract | audit_naming_scope | open_rescue_branch | diagnose | check_search_integrity | change_strategy
 #   search_mode: exploration | exploitation
-#   generated_count: 0
-#   generation_brief_id: null
-#   generation_isolation_level: unknown
+#   loaded_modules: []
 #   selected_strategy_ids: []
 #   value_targets: []
+#   generated_count: 0
 #   findings: []
 #   integrity_check:
 #     value_model_checked: false
+#     name_job_checked: false
+#     decision_criteria_checked: false
 #     value_coverage_checked: false
-#     semantic_coverage_checked: false
 #     family_concentration_checked: false
 #     scheduler_monoculture_checked: false
 #     method_underuse_checked: false
+#     territory_material_starvation_checked: false
+#     evaluation_anchoring_checked: false
 #     incumbent_anchoring_checked: false
 #     rescue_overfit_checked: false
 #     negative_constraint_priming_checked: false
 #     isolation_claim_checked: false
 #     constraint_drift_checked: false
 #     owner_interaction_gate_checked: false
-#     post_generation_filter_checked: false
-#     survivorship_feedback_checked: false
 #     strategy_fidelity_checked: false
 #   next_action: null
 
 observations: []
-# - id: O001
-#   timestamp: null
-#   scope: candidate | batch | region | strategy | search_integrity | owner | reality | constraint | value | scheduler | rescue
-#   subject_ids: []
-#   observation: null
-#   evidence: []
-
 diagnostics: []
-# - id: D001
-#   triggered_by: []
-#   level: candidate | batch | region | value_model | search_integrity | scheduler | strategy | constraint | rescue
-#   diagnosis_type: null
-#   statement: null
-#   confidence: low | medium | high
-#   counterevidence: []
-#   proposed_state_change: null
-
 experience_candidates: []
-# - id: E001
-#   observation: null
-#   scope: task_local | potentially_general
-#   supporting_evidence: []
-#   supporting_jobs: []
-#   counterexamples: []
-#   confidence: low | medium | high
-#   possible_generalization: null
-#   proposed_change: null
 
 current_state:
   strongest_candidates: []
@@ -425,13 +369,15 @@ current_state:
   current_value_target_ids: []
   active_strategy_ids: []
   active_rescue_branch_ids: []
+  loaded_optional_modules: []
   search_mode: exploration
   generation_isolation_level: unknown
   biggest_unknown: null
   blockers: []
   information_gain: unknown
-  value_model_status: unknown
-  value_coverage_status: unknown
+  mission_value_status: unknown
+  name_job_status: unknown
+  criteria_status: unknown
   method_scheduler_status: unknown
   search_integrity_status: unknown
   constraint_integrity_status: unknown
@@ -446,6 +392,7 @@ next_action:
   search_mode: null
   selected_strategy_ids: []
   value_targets: []
+  modules_to_load: []
   requires_owner: false
   owner_gate_classification: none
   affected_confirmed_constraint_ids: []
