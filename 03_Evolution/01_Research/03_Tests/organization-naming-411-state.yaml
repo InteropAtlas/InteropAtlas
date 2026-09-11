@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 66
+  snapshot_version: 67
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v65 在 semantic-anchor reset 后恢复了 lexical/conceptual distance，
-    但 Owner 发现新的表面形式收敛：Turn of Mind / New Grammar / Form of Thought / Part and Whole / Mutual Matter 等连续落入英语多词关系短语。
-    本快照将其识别为 morphotype/architecture scheduling collapse，并执行 form-coverage reset。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v66 识别并修复 morphotype/architecture scheduling collapse。
+    本快照记录 form-coverage reset 后的首轮 balanced morphotype divergence：不同 form classes 实际产生了不同类型的原型与不同失败模式，
+    证明搜索没有再次塌缩回英语关系短语。完整历史由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -41,27 +41,9 @@ integrity_incidents:
     classification: controller_runtime_fidelity_failure
     mechanism: literal Value Model wording leaked into meaning-first lexical material and caused semantic mode collapse
   - id: INC-MORPHOTYPE-COLLAPSE-002
-    detected_by: owner
-    status: corrected_in_scheduler
+    status: corrected_and_live_recovery_observed
     classification: workflow_scheduler_fidelity_failure
-    mechanism: >-
-      After several compact-coinage, classical-root and single-word regions showed high reality crowding, the Controller over-allocated search budget to natural-English semantic/relational phrases.
-      Semantic diversity recovered, but Owner-visible morphotype diversity collapsed.
-    evidence:
-      - Turn of Mind
-      - New Grammar
-      - Form of Thought
-      - Part and Whole
-      - Mutual Matter
-    interpretation: >-
-      Reality crowding in one or more morphotypes must reduce local exploitation without allowing a different single morphotype to monopolize the portfolio.
-      Meaning-first is an evaluation priority, not a phrase-construction instruction.
-    correction:
-      - explicit_morphotype_portfolio_coverage
-      - phrase_architecture_cooldown_for_next_divergence_batch
-      - parallel_generation_by_form_class
-      - evaluate_meaning_within_each_form_class_not_by_collapsing_to_phrases
-      - do_not_expose_controller_cooldown_lists_to_generator
+    mechanism: reality crowding caused over-allocation to natural-English semantic/relational phrases
 
 controller_only_quarantine:
   literal_value_tokens: [common, commons, perspective, creation, return]
@@ -69,8 +51,7 @@ controller_only_quarantine:
     - established_english_relational_phrase
     - preposition_phrase_of_form
     - adjective_noun_semantic_metaphor_phrase
-  policy: >-
-    These are task-local Controller controls, not global banned forms. Phrase forms may return after form diversity is restored; do not expose negative lists to Generator.
+  policy: task-local Controller controls only; do not expose negatives to Generator
 
 expression_profile:
   baseline: meaningful + stable-modern + organization-scale + recoverable + non-personal
@@ -79,10 +60,10 @@ expression_profile:
   anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_phrase]
 
 search_control:
-  mode: morphotype_portfolio_reset
+  mode: balanced_morphotype_divergence_live
   search_cadence:
     mode: category_parallel
-    target: restore genuine Owner-visible form diversity while retaining meaning-first quality and semantic-anchor isolation
+    target: produce clean survivors from materially different form classes before Owner exposure
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
@@ -90,7 +71,7 @@ search_control:
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
 morphotype_portfolio:
-  rule: no_single_form_class_should_dominate_the_next_divergence_batch
+  rule: no_single_form_class_should_dominate
   parallel_classes:
     - lexical_single_semantic_transfer
     - blend_or_semantic_fusion
@@ -100,25 +81,34 @@ morphotype_portfolio:
     - symbolic_or_structural_identity
     - compound_single_token
     - phrase_or_relational_name_minor_budget_only
-  evaluation_policy: >-
-    Each class must be allowed to express meaning in its own way. Do not treat transparent phrase-level explainability as the definition of meaningfulness.
+  evaluation_policy: meaning may be implicit, etymological, structural, metaphorical or brand-built; phrase-level transparency is not required
 
 rounds:
-  - {id: RND-106, action: semantically_sanitized_divergence_batch_1, result: conceptual_distance_restored}
-  - {id: RND-107, action: clean_survivor_reality_probe, result: Turn of Mind held_internal_preliminary}
-  - {id: RND-108, action: clean_peer_batch_2, result: phrase-heavy mixed survival}
-  - {id: RND-109, action: form_of_thought_reality_and_domain_probe, result: owner_ready_provisional}
-  - id: RND-110
-    action: owner_detected_morphotype_diversity_audit
-    result: architecture_collapse_confirmed
+  - {id: RND-110, action: owner_detected_morphotype_diversity_audit, result: architecture_collapse_confirmed}
+  - {id: RND-111, action: morphotype_portfolio_reset, result: next_generation_contract_rebalanced}
+  - id: RND-112
+    action: balanced_morphotype_divergence_batch_1
+    result: diversity_restored_no_owner_ready_promotion_yet
     findings:
-      - semantic diversity alone did not guarantee form diversity
-      - meaning-first was implicitly operationalized as transparent English phrase explainability
-      - reality crowding caused local region pruning but the scheduler failed to reserve exploration budget across remaining form classes
-      - Owner-visible diversity therefore narrowed despite explicit PREF-MORPHOTYPE-OPENNESS
-  - id: RND-111
-    action: morphotype_portfolio_reset
-    result: next_generation_contract_rebalanced
+      - Viewcraft / Worldmaking / Schemata / Morphism / Axiomera / Meralis represented materially different form classes but exact .org was unavailable
+      - Bearing and Tessera had active high-adjacency software/technology identities
+      - Relatum had active relationship-intelligence and software-development identities
+      - Knowform had an active 2026 developer tool / PyPI package identity
+      - Anacycle had an existing conceptual/design identity
+      - Elsewise is a real lexical item but was not pursued because it is semantically too close to existing Otherwise/Else candidate territory
+      - domain/reality failures were distributed across classes rather than concentrated in one architecture, indicating genuine portfolio diversity
+  - id: RND-113
+    action: balanced_morphotype_divergence_batch_2
+    result: two_internal_survivor_signals
+    findings:
+      - Axiality.org was available but Axiality is an active UK IT/supply-chain consultancy and was rejected
+      - Compossibility.org was available; public search showed mainly philosophical usage rather than an active exact company/software identity
+      - Compossibility has strong systems meaning (things that can coexist in one world) but spelling/dictation burden is material and conflicts with HC-RECOVERABILITY
+      - Recomposure.org was available; public search showed mainly ordinary/airport terminology and title usage, with no material active exact company/software/organization found in current search
+      - Recomposure is a one-word derived lexical identity and is materially different from recent phrase finalists
+      - Senseform.org was available but SenseForm is an active 2026 AI design platform and company identity; rejected
+      - Afterform.org was available but Afterform is an active AI consulting identity; rejected
+      - additional lexical/root candidates Constellate / Accrete / Emergentia / Poiesis / Artifex / Syncretic / Manyfold all had unavailable .org domains
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -129,6 +119,39 @@ candidates:
   - {id: N122, name: Turn of Mind, role: held_internal_preliminary, active: true, morphotype: established_phrase_semantic_double_reading, generation_use: prohibited_as_template}
   - {id: N123, name: Form of Thought, role: provisional_owner_exposed_but_form_family_contaminated, active: true, morphotype: institutional_semantic_phrase, generation_use: prohibited_as_template}
   - {id: N124, name: New Grammar, role: held_internal_preliminary, active: true, morphotype: semantic_metaphor_phrase, generation_use: prohibited_as_template}
+  - id: N125
+    name: Recomposure
+    role: held_internal_preliminary
+    active: true
+    morphotype: lexical_single_root_derived
+    intrinsic_case:
+      - recomposition / regaining composure creates a natural second reading around re-forming and returning to a coherent state
+      - one-word architecture materially expands form diversity versus recent phrase-heavy search
+      - pronunciation and spelling are substantially more recoverable than long classical/philosophical alternatives
+      - organization-scale semantics are abstract enough for multiple projects, but require Owner reaction to determine whether emotional/airport associations are too strong
+    reality_status: preliminary_pass_with_ordinary_term_and_title_noise
+    domain_status: recomposure.org_available_2026_09_11
+    risks:
+      - established airport-security term for post-screening area creates a concrete secondary association
+      - musical title usage exists
+      - semantic fit may read more as recovery/calm than knowledge/creation depending on audience
+    owner_exposure: not_yet
+    generation_use: prohibited_as_template
+  - id: N126
+    name: Compossibility
+    role: diagnostic_hold_recoverability_risk
+    active: true
+    morphotype: lexical_philosophical_term
+    intrinsic_case:
+      - established Leibnizian concept for possibilities/entities that can coexist consistently
+      - unusually strong relation/system meaning and long-term conceptual depth
+    reality_status: preliminary_pass_public_search
+    domain_status: compossibility.org_available_2026_09_11
+    risks:
+      - spelling/dictation branching is material (compossibility vs composibility etc.)
+      - academic/philosophical density is high
+    owner_exposure: not_yet
+    generation_use: prohibited_as_template
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
@@ -136,25 +159,25 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   active_hypothesis: HYP-004
   latest_evidence: >-
-    This incident directly supports HYP-004: semantic/search diversity and Owner-visible morphotype diversity are distinct dimensions. A scheduler can restore semantic independence yet still collapse into one surface architecture.
+    Explicit form-class budgeting restored actual morphotype diversity after phrase collapse. Reality/domain failures were distributed across multiple distinct classes, and a one-word derived lexical survivor emerged without using phrase explainability as the meaning criterion.
   proposed_regression_addition: ensure portfolio-level morphotype coverage is checked after region pruning or reality-crowding updates
   stable_skill_rewrite_allowed_now: false
-  reason: HYP-004 is already testing this class of gap; collect regression evidence before stable promotion
 
 current_state:
   finalists: [N096, N113, N117, N119]
-  held_clean_survivors: [N122, N123, N124]
-  search_mode: morphotype_portfolio_reset
+  held_clean_survivors: [N122, N123, N124, N125]
+  diagnostic_holds: [N126]
+  search_mode: balanced_morphotype_divergence_live
   biggest_unknown: >-
-    Which materially different form classes can produce meaning-rich, source-distinctive, recoverable organization identities once transparent English phrases stop dominating the search budget?
+    Can additional non-phrase form classes produce one or more clean peers to N125 with comparable recoverability but stronger source distinctiveness and less accidental concrete association?
   blockers: []
   owner_review_needed_now: false
-  information_gain: high_from_owner_detected_scheduler_failure
+  information_gain: high_from_successful_form_coverage_reset
 
 next_action:
-  action: run_balanced_morphotype_divergence_batch
+  action: continue_balanced_nonphrase_peer_search
   selected_workflow_patterns: [category_parallel, divergence_burst, creative_linguistic_parallel]
-  required_form_coverage:
+  priority_classes:
     - lexical_single_semantic_transfer
     - blend_or_semantic_fusion
     - root_derived_or_affixal
@@ -162,15 +185,15 @@ next_action:
     - nonenglish_or_crosslanguage_identity
     - symbolic_or_structural_identity
     - compound_single_token
-  phrase_budget: minor_only_until_diversity_restored
+  phrase_budget: minor_only_until_owner_visible_diversity_is_restored
   rationale: >-
-    Restore true form diversity without sacrificing meaning-first quality. Meaning may be implicit, etymological, structural, metaphorical or brand-built; it does not need to be transparently explainable as an English phrase.
+    Form diversity is now demonstrably restored. Continue sampling multiple non-phrase classes rather than prematurely promoting the first clean one-word survivor.
   requires_owner: false_until_materially_distinct_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: Owner identified a reversible scheduler failure; correction is clear and autonomous search can continue
+  reason: reset succeeded; no Owner intervention needed yet
   unresolved:
-    - genuinely diverse clean peer set still needed
+    - at least one additional clean non-phrase peer desired before Owner exposure
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
