@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 68
+  snapshot_version: 69
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v67 记录 form-coverage reset 后 balanced morphotype divergence 已恢复真实形式多样性。
-    本快照继续 non-phrase peer search，并新增一个来自系统科学概念词形态的 clean provisional candidate：Multifinality。
-    完整历史继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v68 记录 balanced morphotype search 中 N127 Multifinality 成为新的系统概念词 clean peer。
+    本快照记录 Owner 对 Multifinality 的明确正反馈：有意思、看起来不错、像品牌名。该反馈提升 N127 为正式 Owner-ready finalist，
+    但不得把 -finality、系统理论术语或 N127 的词形/语义结构回灌为 Generator 模板。完整历史继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -29,6 +29,12 @@ constraint_registry:
     - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
     - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
     - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
+    - id: PREF-CONCEPTUAL-BRANDABILITY
+      statement: >-
+        Owner positively responds when an established concept word still reads visually as a coherent standalone brand identity; explicit reaction to Multifinality: interesting, looks good, feels like a brand name.
+      source_type: owner_explicit_reaction
+      confidence: high
+      use: evaluation_signal_not_generation_template
 
 mission_value_model:
   core_structure_available_to_controller: true
@@ -50,14 +56,14 @@ controller_only_quarantine:
 expression_profile:
   baseline: meaningful + stable-modern + organization-scale + recoverable + non-personal
   secondary_preferences: [compactness, rhythmic_balance]
-  optional_bonuses: [visual_cycle_echo, understated_cleverness]
-  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_phrase]
+  optional_bonuses: [visual_cycle_echo, understated_cleverness, conceptual_brandability]
+  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_phrase, do_not_force_systems_terms]
 
 search_control:
   mode: balanced_morphotype_divergence_live
   search_cadence:
     mode: category_parallel
-    target: produce clean survivors from materially different form classes before narrowing
+    target: produce additional clean survivors from materially different form classes without cloning N127
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
@@ -81,33 +87,18 @@ rounds:
   - {id: RND-110, action: owner_detected_morphotype_diversity_audit, result: architecture_collapse_confirmed}
   - {id: RND-111, action: morphotype_portfolio_reset, result: next_generation_contract_rebalanced}
   - {id: RND-112, action: balanced_morphotype_divergence_batch_1, result: diversity_restored_no_owner_ready_promotion_yet}
-  - id: RND-113
-    action: balanced_morphotype_divergence_batch_2
-    result: two_internal_survivor_signals
+  - {id: RND-113, action: balanced_morphotype_divergence_batch_2, result: two_internal_survivor_signals}
+  - {id: RND-114, action: balanced_nonphrase_peer_search_3, result: no_clean_peer_from_first_subbatch}
+  - {id: RND-115, action: systems_concept_nonphrase_probe, result: one_new_clean_peer}
+  - id: RND-116
+    action: owner_reaction_to_multifinality
+    result: strong_positive_brandability_signal
     findings:
-      - Recomposure.org available; no material active exact organization/software identity found in current public search
-      - Compossibility.org available but spelling/dictation burden remains material
-      - Senseform and Afterform were reality-blocked by active AI identities
-      - several additional lexical/root forms had unavailable .org domains
-  - id: RND-114
-    action: balanced_nonphrase_peer_search_3
-    result: no_clean_peer_from_first_subbatch
-    findings:
-      - Allotropy rejected because Benchling actively maintains an exact-name open-source software library
-      - Meronymy rejected because the name has both historical semantic-web software/company usage and a current AI-systems founder/project identity
-      - Consilience rejected because current AI/ontology products and strategy identities are highly adjacent
-      - Panarchy rejected because an active network-design lab uses the exact name in a directly adjacent systems/network-thinking space
-      - Transversality rejected due active exact-name business identity
-      - Contexture rejected due active AI/NLP company, health-information nonprofit, organizational-development practice and open-source AI context engine
-  - id: RND-115
-    action: systems_concept_nonphrase_probe
-    result: one_new_clean_peer
-    findings:
-      - Equifinality rejected because an active 2026 AI advisory / organizational-effectiveness firm uses Equifinality Solutions
-      - Multifinality showed no material active exact-name company/software/organization in current public search
-      - multifinality.org observed available via Namecheap on 2026-09-11 for USD 8.48
-      - public results are primarily academic systems/psychology/goal-theory usage
-      - Multistability.org is available but remains a technical physics/perception concept and was not promoted
+      - Owner finds Multifinality interesting
+      - Owner says it looks good and feels like a brand name
+      - positive reaction supports meaning-first long-form conceptual naming as a viable identity class
+      - do not infer preference for -finality suffix, systems jargon, or long academic words generally
+      - continue broad morphotype search to avoid exploitation collapse
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -140,7 +131,7 @@ candidates:
     generation_use: prohibited_as_template
   - id: N127
     name: Multifinality
-    role: finalist_owner_ready_provisional
+    role: finalist_owner_ready
     active: true
     morphotype: established_systems_concept_single_word
     intrinsic_case:
@@ -154,17 +145,19 @@ candidates:
       organization_scale: strong
       recoverability: medium_high
       source_distinctiveness: strong_relative_to_natural_phrases
+      conceptual_brandability: strong_owner_confirmed
       compactness: low_secondary_only
       personal_name_risk: low
     reality_status: preliminary_pass
     domain_status: multifinality.org_available_2026_09_11
+    owner_feedback: interesting_looks_good_feels_like_brand
     risks:
       - academic/technical tone is strong
       - developmental psychology and psychopathology are prominent existing usage domains
       - ordinary audiences may not know the word without explanation
       - public trademark screening remains preliminary only
-    owner_exposure: now
-    generation_use: prohibited_as_template
+    owner_exposure: positive
+    generation_use: prohibited_as_template_or_seed
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
@@ -172,7 +165,7 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   active_hypothesis: HYP-004
   latest_evidence: >-
-    Explicit form-class budgeting continues to prevent phrase relapse. New failures and survivors are distributed across genuinely different architectures; N127 emerged from a systems-concept single-word class rather than phrase/coinage exploitation.
+    Owner strongly accepted a long established concept word as brand-like, confirming that transparent phrase-level meaning and compactness are not prerequisites for Owner attraction. Form diversity must remain active because this is category-level evidence, not permission to exploit systems jargon.
   proposed_regression_addition: ensure portfolio-level morphotype coverage is checked after region pruning or reality-crowding updates
   stable_skill_rewrite_allowed_now: false
 
@@ -182,24 +175,31 @@ current_state:
   diagnostic_holds: [N126]
   search_mode: balanced_morphotype_divergence_live
   biggest_unknown: >-
-    Owner reaction to N127's meaning-versus-academic-tone tradeoff, and whether another non-phrase peer can match its semantic depth with a more immediately natural identity.
+    Can another materially different form class achieve Multifinality-level brandability and semantic depth with equal or better recoverability and less academic/domain-specific baggage?
   blockers: []
-  owner_review_needed_now: true
-  information_gain: high
+  owner_review_needed_now: false
+  information_gain: high_from_owner_confirmed_conceptual_brandability
 
 next_action:
-  action: collect_owner_reaction_to_N127_while_continuing_balanced_peer_search
+  action: continue_balanced_peer_search_without_systems_term_exploitation
   selected_workflow_patterns: [category_parallel, divergence_burst, creative_linguistic_parallel]
-  phrase_budget: minor_only_until_owner_visible_diversity_is_restored
+  priority_classes:
+    - lexical_single_semantic_transfer
+    - blend_or_semantic_fusion
+    - root_derived_or_affixal
+    - opaque_or_semiopaque_proper_name
+    - nonenglish_or_crosslanguage_identity
+    - symbolic_or_structural_identity
+    - compound_single_token
+  phrase_budget: minor_only
   rationale: >-
-    N127 materially expands Owner-visible form diversity and survives preliminary identity/domain checks. Continue parallel search because academic tone may be too strong and one clean systems term should not become the next template.
-  requires_owner: true_for_N127_reaction_not_for_continued_internal_search
+    N127 is now Owner-confirmed and materially expands the choice space. Continue broad form exploration to find peers from different meaning/construction sources rather than cloning its suffix, academic tone or systems-theory origin.
+  requires_owner: false_until_new_materially_distinct_owner_ready_survivor_exists
 
 stop:
-  status: owner_feedback_plus_continue
-  reason: clean materially distinct peer exists; Owner reaction is decision-relevant while autonomous search remains open
+  status: continue
+  reason: strong positive Owner signal received; search should broaden rather than converge immediately
   unresolved:
-    - N127 Owner reaction needed
-    - at least one more source-distinctive non-phrase peer remains desirable
+    - at least one additional clean peer from a different form class remains desirable
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
