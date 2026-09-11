@@ -11,9 +11,10 @@ task:
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v76 暴露 N129 Plurivocal（现成词）与 N130 Merosophy（半透明专名）。
-    Owner 进一步明确商业化目标下不希望继续以现成词作为主要命名来源，因为商标显著性/可保护性通常弱于自造或高度独特名称。
-    本快照将 fanciful / semi-coined proper-name construction 提升为正式 finalist 搜索优先级；现成词仍可作为语义研究材料或极少数 arbitrary-mark 例外，但不再是主要 finalist 来源。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v76 记录 N129 Plurivocal 与 N130 Merosophy。
+    Owner 随后明确：未来正式候选不再优先使用现成词，因商业母组织更重视商标可注册性与可保护性；主路线转为自造词/半自造专名，
+    但要求有清晰语义骨架、自然读写，不接受随机 SaaS 音节串。Owner 对 N130 Merosophy 的反馈为：整体可以用、看起来没大问题，
+    主要缺点是中国人念起来比较费劲。本快照据此提高跨语言可读性/发音恢复权重。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -32,121 +33,111 @@ constraint_registry:
 owner_preferences:
   - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
   - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-  - id: PREF-COMPACT-SPOKEN-RHYTHM
-    statement: shorter spoken effort is secondary overall, but excessive length/visual burden is a real negative; Multifinality felt acceptable while Transindividuality felt too long
-    confidence: high
-    priority: secondary_with_upper_bound_signal
+  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary overall, but excessive length/visual burden is a real negative; Multifinality felt acceptable while Transindividuality felt too long, confidence: high, priority: secondary_with_upper_bound_signal}
   - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
   - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-  - id: PREF-FANCIFUL-OWNABILITY
+  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive as preference evidence, but formal candidate generation should now prioritize coined/semi-coined proprietary names, confidence: high}
+  - id: PREF-CROSS-LANGUAGE-PRONOUNCEABILITY
     statement: >-
-      For the commercial umbrella brand, prefer invented or semi-coined proper names with strong ownability and trademark distinctiveness over existing dictionary/concept words. Existing words may still inform semantics or qualify only when used arbitrarily and commercially defensible.
+      Commercial names should be reasonably pronounceable by Chinese speakers from spelling and recoverable from hearing; Merosophy is acceptable overall but has noticeable Chinese-speaker pronunciation friction.
+    source_type: owner_explicit_reaction
     confidence: high
-    source_type: owner_explicit
-    use: search_allocation_and_finalist_filter_not_fixed_morpheme_template
-
-mission_value_model:
-  core_structure_available_to_controller: true
-  literal_value_tokens_available_to_generator: false
-  generator_representation: abstract_relations_and_transformations_only
-
-integrity_incidents:
-  - {id: INC-SEMANTIC-ANCHOR-001, status: corrected_and_live_recovery_observed, classification: controller_runtime_fidelity_failure}
-  - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_and_live_recovery_observed, classification: workflow_scheduler_fidelity_failure}
 
 search_control:
-  mode: fanciful_commercial_brand_divergence
+  mode: coined_semantic_brand_divergence
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
   early_creative_policy: >-
-    Continue broad invention before reality filtering. Prefer fanciful/semi-coined identity forms with a semantic backbone, natural pronunciation and recoverable spelling. Do not reduce this to random syllable generation, suffix cloning, or domain-driven string mutation.
+    Prioritize coined or semi-coined proprietary names with semantic backbone, natural orthography and cross-language pronounceability. Existing dictionary/concept words remain research material, not the dominant finalist source. .com, identity and trademark remain post-generation filters.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
   priority_classes:
     - semiopaque_root_derived_proper_name
-    - semantic_fusion_coinage
-    - phonotactically_natural_fanciful_name
-    - morpheme_grounded_coinage
-    - compact_single_token_compound_when_sufficiently_distinctive
+    - semantically_motivated_fusion
+    - coined_single_token_with_clear_morpheme_backbone
+    - symbolic_or_structural_coinage
+    - crosslanguage_root_fusion_with_high_pronounceability
   lower_priority_classes:
     - established_dictionary_or_concept_word
-    - ordinary_english_phrase
+    - transparent_english_phrase
   evaluation_policy: >-
-    Invented does not mean meaningless. Preferred names should have a defensible semantic/structural rationale while remaining source-distinctive enough to support strong trademark ownership.
+    Coined does not mean random. Every promoted coinage should have a coherent semantic rationale, strong recoverability, natural brand shape, and acceptable Chinese/English pronunciation burden.
 
 rounds:
   - {id: RND-124, action: shorter_true_concept_and_semiopaque_search, result: two_materially_distinct_survivors}
   - id: RND-125
-    action: owner_prefers_fanciful_or_semicoined_commercial_marks
-    result: search_allocation_shifted
+    action: owner_shifts_priority_to_proprietary_coinage
+    result: coined_name_route_promoted
     findings:
-      - Owner explicitly questioned continued use of existing words because commercial trademark registrability/protectability is a primary objective
-      - USPTO guidance supports fanciful marks as inherently distinctive and generally stronger/easier to protect than descriptive marks; arbitrary existing words can also be strong but are not the preferred search path here
-      - Plurivocal is therefore demoted from primary finalist consideration to semantic-reference / low-priority exception status
-      - Merosophy remains aligned with the new direction because it is a semi-transparent coined proper name rather than an established dictionary term
-      - future generation must favor coined ownability without degenerating into random SaaS-like strings
+      - Owner prefers not to rely on existing words because trademark registrability/protectability is a core commercial requirement
+      - existing words are not globally forbidden but are deprioritized as primary finalist sources
+      - coined/semi-coined names must retain semantic backbone and naturalness rather than become random SaaS syllables
+  - id: RND-126
+    action: owner_reaction_to_merosophy
+    result: acceptable_with_cross_language_pronunciation_risk
+    findings:
+      - Owner says Merosophy looks acceptable and could be used
+      - no major intrinsic objection was expressed
+      - main negative is that Chinese speakers may find it relatively hard to pronounce
+      - this supports adding cross-language pronounceability/recoverability as a meaningful evaluation weight
 
 candidates:
-  - {id: N096, name: Open Regard, role: legacy_commercial_survivor_not_priority_under_new_fanciful_policy, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N113, name: Public Singular, role: legacy_commercial_survivor_not_priority_under_new_fanciful_policy, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N117, name: See Otherwise, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
-  - {id: N119, name: Elseground, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
-  - {id: N125, name: Recomposure, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
-  - {id: N126, name: Compossibility, role: legacy_commercial_survivor_but_recoverability_risk, active: true, generation_use: prohibited_as_template}
-  - {id: N127, name: Multifinality, role: positive_preference_evidence_not_primary_due_existing_term_and_aftermarket, active: true, owner_feedback: interesting_looks_good_feels_like_brand, generation_use: prohibited_as_template_or_seed}
-  - {id: N128, name: Transindividuality, role: owner_rejected_length, active: false, generation_use: prohibited_as_template_or_seed}
-  - id: N129
-    name: Plurivocal
-    role: semantic_reference_low_priority_existing_word
-    active: false_for_primary_finalist_search
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    reason: existing lexical item; lower trademark ownability relative to fanciful/semi-coined alternatives for intended commercial brand strategy
-    generation_use: prohibited_as_template_or_seed
   - id: N130
     name: Merosophy
-    role: owner_ready_provisional_aligned_with_fanciful_policy
+    role: owner_positive_usable_with_pronunciation_risk
     active: true
     morphotype: semiopaque_root_derived_proper_name
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    domain_status:
+      com: available_for_registration_2026_09_11
+      org: available_for_registration_2026_09_11
+    reality_status: preliminary_pass_no_material_exact_identity_found
     trademark_status: preliminary_strong_ownability_signal_formal_clearance_pending
-    risks: [semantic_explanation_not_self_evident, possible_philosophical_or_mystical_tone]
+    owner_feedback: acceptable_usable_but_chinese_pronunciation_is_difficult
+    strengths: [brand_like, proprietary, semantically_explainable, good_preliminary_ownability]
+    risks: [cross_language_pronunciation_friction, semantic_backbone_not_self_evident, mild_philosophical_tone]
+    generation_use: prohibited_as_template_or_seed
+  - id: N129
+    name: Plurivocal
+    role: research_reference_deprioritized_existing_word
+    active: false
+    reason: existing_word_route_deprioritized_for_commercial_trademark_strategy
+    generation_use: prohibited_as_template_or_seed
+  - id: N127
+    name: Multifinality
+    role: preference_evidence_only_aftermarket_pending
+    active: true
+    owner_feedback: interesting_looks_good_feels_like_brand
+    generation_use: prohibited_as_template_or_seed
+  - id: N128
+    name: Transindividuality
+    role: owner_rejected_length
+    active: false
+    owner_feedback: too_long_not_liked
     generation_use: prohibited_as_template_or_seed
 
 current_state:
-  primary_search_mode: fanciful_commercial_brand_divergence
-  primary_owner_ready_provisional: [N130]
-  positive_preference_evidence: [N127]
-  legacy_or_low_priority_existing_word_candidates: [N096, N113, N117, N119, N125, N126, N129]
+  owner_positive_commercial_candidates: [N130]
+  preference_evidence: [N127]
+  owner_rejected: [N128]
+  search_mode: coined_semantic_brand_divergence
   biggest_unknown: >-
-    Can multiple materially different invented or semi-coined names achieve Multifinality-level brand appeal and semantic depth, while staying below the Transindividuality length burden and offering stronger trademark distinctiveness plus practical .com obtainability?
+    Can a proprietary coined/semi-coined name match or exceed Merosophy's brandability and ownability while being easier for Chinese speakers to pronounce and recover, without becoming semantically empty or SaaS-generic?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: generate_diverse_fanciful_and_semicoined_commercial_names
-  required_properties:
-    - meaningful_semantic_or_structural_backbone
-    - natural_pronunciation
-    - recoverable_spelling
-    - nonpersonal_brand_identity
-    - moderate_identity_load
-    - strong_source_distinctiveness
-  prohibited_overfit:
-    - clone_Merosophy_suffix
-    - clone_Multifinality_structure
-    - random_saas_syllables
-    - domain_availability_driven_mutation
-    - literal_mission_vocabulary
-  due_diligence_for_survivors: [exact_com_registration_or_aftermarket_obtainability, active_use_conflict, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck]
-  requires_owner: false_until_new_materially_distinct_survivors_exist
+  action: continue_semantic_coinage_with_cross_language_pronounceability
+  rationale: >-
+    Search for proprietary names with clear semantic construction, lower Chinese-speaker pronunciation friction, exact .com obtainability, and strong trademark prospects. Do not clone Merosophy's -sophy ending or its specific roots.
+  requires_owner: false_for_continued_search
 
 stop:
   status: continue
-  reason: Owner clarified commercial trademark strategy; search should now prioritize ownable invented identities without sacrificing meaning or form diversity
+  reason: Owner accepted N130 conditionally and provided a useful new cross-language filter; further creation should continue autonomously
