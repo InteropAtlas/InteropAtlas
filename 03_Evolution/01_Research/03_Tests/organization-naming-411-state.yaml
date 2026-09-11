@@ -5,15 +5,15 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 35
+  snapshot_version: 36
   skill_version: 0.2.1
   skill_control_commits: [cbee63c, ef16007, d967470, 876598d, 9efa062, 3d8792a, 11eb28a, 39dfc31]
 lineage:
-  preservation_note: 未重新初始化任务，未恢复G0–G8 benchmark。snapshot v34 的完整事实由Git commit/blob保留；本文件压缩为当前控制状态与RND-046–050新增证据。
+  preservation_note: 未重新初始化任务，未恢复G0–G8 benchmark。snapshot v35 的完整事实由Git commit/blob保留；本文件压缩为当前控制状态与RND-051–053新增证据。
   previous_snapshot:
-    snapshot: 34
-    commit: 2629839c20418b993b2e61a2a080c6884d46940a
-    blob_sha: 3f04b43146c1919792894a213a99f0f7a68bd254
+    snapshot: 35
+    commit: f92b319a074d039626e987c74242672c268d0003
+    blob_sha: 69342edc93806c666d7118057148c0df6336cf63
   historical_archive_v32: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v32.yaml
 brief:
   object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、教育、工具/软件、公共知识工作、出版与创造/发现活动。
@@ -37,15 +37,16 @@ search_control:
     runtime_identity: ChatGPT current conversation runtime
     historical_context_may_have_seen_controller_only_exclusions: true
     evidence:
-    - 本执行段在同一会话内先读取了完整 recovery / Skill / state，再进入生成。
-    - 当前 Generation Brief 未再次暴露具体 incumbent、cooldown token、reality survivor shapes 或 Owner 对 incumbent 的反应，但历史上下文可能已见过。
-    claim_policy: 仅记录 best_effort_same_context；不声称 Generator 从未看到历史排除信息。
+    - 本执行段在同一会话内读取了完整recovery、Skill与state，然后执行生成。
+    - 当前各Generation Brief未再次暴露具体incumbent、cooldown token、reality survivor shapes或Owner对incumbent的反应，但同一运行上下文历史中可能已见过。
+    - 本runtime没有可用的独立subagent/fresh generation context，因此不把逻辑omitted表述为模型从未见过。
+    claim_policy: 仅记录best_effort_same_context；post-generation filter作为主要防线。
   incumbent_isolation:
     comparison_only_candidates: [N060]
     status: controller_only_comparison_reference
   controller_only_exclusions:
     incumbent_candidate_ids: [N060]
-    cooled_family_ids: [FAM-V34-01, FAM-RND046-01]
+    cooled_family_ids: [FAM-V34-01, FAM-RND046-01, FAM-RND051-01]
     survivor_pattern_ids: []
     owner_reaction_subject_ids: [N060]
     other: [N061_historical_hold_not_generation_seed]
@@ -53,36 +54,44 @@ search_control:
   - family_id: FAM-V34-01
     scope: task_local
     family_type: morphological_semantic
-    family_basis: [plural, plur, pluri, poly, multi, many, divers, varia, direct_multiple_voices_views_forms]
+    family_basis: multiplicity_family_from_prior_mode_collapse
     reason: RND-037 mode-collapse recovery；继续作为Controller-only post-generation filter，不写入Generator Brief。
     status: active
   - family_id: FAM-RND046-01
     scope: task_local
     family_type: morphological_construction
-    family_basis: [morrow, mark_compounds]
-    reason: RND-046 raw batch出现新的局部词形/复合结构集中；这是搜索完整性信号，不是这些词本身的永久质量失败。
-    status: active_for_next_semantic_light_phase
+    family_basis: prior_semantic_light_local_compound_concentration
+    reason: RND-046局部复合结构集中；继续作为Controller-only过滤，不代表相关名称永久质量失败。
+    status: active
+  - family_id: FAM-RND051-01
+    scope: task_local
+    family_type: construction_surface
+    family_basis: ornamental_pseudo_latinate_shell_without_second_semantic_payload
+    reason: RND-051在morpheme-grounded任务中出现“换语义根但复用相似proper-name外壳”的局部集中；属于strategy/search-integrity问题，不是名称质量永久失败。
+    status: active
   reality_feedback_quarantine:
     same_batch_quality_before_reality: enforced
     exact_reality_results_exposed_to_generator_brief: false
     controller_may_use_abstract_crowding_diagnosis_for_strategy_change: true
-    status: pass
+    same_context_history_limitation_acknowledged: true
+    status: pass_with_best_effort_isolation_limitation
   generator_brief:
-    id: GB-SEM-LIGHT-046-049
+    id: GB-MORPH-051-052
     search_mode: exploration
     positive_objectives:
-    - 为长期umbrella organization寻找更像可独立成长的proper name，而不是让裸名承担完整愿景循环。
-    - 每个名称只需真实连接一个核心原则、关系或弱结构暗示，并保留跨研究、教育、工具、出版与创造活动的语义空间。
+    - 为长期umbrella organization寻找具有独立proper-name身份的单词名称。
+    - 每个候选先有可核实、较轻的语义锚点，再进行有限声音、拼写或形态优化；名称不需要承担完整愿景循环。
     positive_search_zones:
-    - public inheritance / stewardship 的轻语义锚点
-    - individual reinterpretation / creation 的轻语义锚点
-    - durable contribution / continuity / renewal 的轻语义锚点
-    - broad relational carriers with institutional scale
+    - public inheritance / stewardship
+    - individual reinterpretation / creation
+    - contribution / transmission / return
+    - continuity / renewal / durable relation
     positive_construction_targets:
-    - existing-word semantic transfer
-    - natural derivation
-    - transparent but name-like compound
-    - low-frequency ordinary-language carrier with simple explanation
+    - morpheme-grounded controlled coinage
+    - traceable clipping or telescoping
+    - semantically motivated two-anchor fusion
+    - productive derivation with stable spoken recovery
+    - multiple surface architectures rather than a single decorative shell
     quality_targets:
     - 2到3音节优先
     - 一个明显主读法
@@ -102,35 +111,33 @@ search_control:
     check_incumbent_similarity: true
     check_strategy_fidelity: true
     check_other_controller_only_exclusions: true
-    last_round_id: RND-049
-    generated_count_total: 102
-    blocked_count_total: 4
+    last_round_id: RND-052
+    generated_count_this_snapshot: 48
+    blocked_or_noncreditable_count_this_snapshot: 0
     high_hit_rate: false
     notes:
-    - RND-046对既有exclusions无命中；批后concentration audit发现新的局部compound family并加入Controller-only cooldown。
-    - RND-047命中1个新cooldown样本；RND-048命中3个；均按控制层违反处理，不记作名称质量失败，也未将具体排除再次喂给Generator。
+    - RND-051未命中既有Controller-only exclusions，但concentration audit发现新的construction-surface集中，因此该轮不能被当作对morpheme-grounded coinage区域的完整失败证据。
+    - RND-052采用多种构造架构纠偏；未把新增cooldown具体token或历史负面样本写入Brief。
   strategy_fidelity:
-    rnd_046: pass_semantic_light_proper_name_broad_sample
-    rnd_047: pass_lower_frequency_existing_and_transparent_construction_sample
-    rnd_048: pass_controlled_semantic_transfer_sample_after_postfilter
-    rnd_049: pass_new_family_cooldown_respected
-    rnd_050: pass_integrity_review_no_generation
+    rnd_051: partial_fail_new_surface_shell_concentration
+    rnd_052: pass_diversified_morpheme_grounded_coinage
+    rnd_053: pass_integrity_and_phase_diagnosis_no_generation
   concentration_check:
     prior_mode_collapse_recurrence: false
-    new_local_family_detected: FAM-RND046-01
-    new_family_contained_by_post_generation_filter: true
+    new_local_family_detected: FAM-RND051-01
+    new_family_contained_before_phase_conclusion: true
     negative_constraint_priming_current_brief: false
     isolation_overclaim: false
-    result: pass_with_new_local_concentration_detected_and_contained
+    result: pass_after_corrective_round
 current_status:
   strongest_candidates: [N060]
   promising_candidates: [N060]
   comparison_only_candidates: [N060]
   held_candidates: [N061]
   finalists: []
-  owner_review_needed_now: false
-  biggest_unknown: semantic-light现成词/自然派生/透明复合已经显著改善部分候选的proper-name感，但质量top slice在当前AI、软件、研究、知识工具和组织命名空间仍呈极高exact占用率。下一未知是：能否用morpheme-grounded、语义可追溯的受控新造/变形，在不退回空心科技词的前提下打开现实身份空间。
-  information_gain: RND-046到RND-049共生成102个内部probe；post-generation filter挡回4个控制层回流样本。18个通过名称本体funnel进入公共现实检查的top-slice名称全部出现material exact/high-adjacency identity；因此本阶段没有新.org查询，也没有新增Owner Exposure candidate。
+  owner_review_needed_now: true
+  biggest_unknown: 当前单词名称搜索已经逼近distinctiveness-versus-recoverability边界：更可恢复、更有真实语义锚点的proper-name结构仍非常容易在现实中被独立重造并形成exact identity；继续提高新造程度则快速增加拼写、发音或空心科技词风险。下一步最高信息价值不再是继续同样单词构词，而是确认是否允许打开新的名称架构空间。
+  information_gain: snapshot v35之后生成48个内部probe。RND-051暴露新的表层构词集中并被诊断；RND-052纠偏后，5个通过名称本体/架构funnel的top-slice候选现实检查得到4个red exact/high-adjacency identity和1个yellow exact identity，0个通过公共身份门槛，因此没有新.org查询，也没有新增Owner Exposure candidate。
 blockers: []
 deferred_risks:
 - id: B03
@@ -139,7 +146,7 @@ deferred_risks:
   statement: US/EU/CN/WIPO官方商标筛查未完成；未完成不等于安全。
 owner_signals:
 - {id: OS-N060-01, candidate_id: N060, valence: neutral_accepting, summary: 当前comparison候选Owner接受但无明显偏爱；仅用于比较，不作为生成模板。}
-- {id: OS-METHOD-01, type: process_integrity_feedback, valence: corrective, summary: Owner要求防止语义/形态模式坍缩；v0.2.1本阶段继续执行Controller-only exclusions与真实隔离语义。}
+- {id: OS-METHOD-01, type: process_integrity_feedback, valence: corrective, summary: Owner要求防止语义/形态模式坍缩；v0.2.1本阶段继续执行Controller-only exclusions、positive Brief、post-generation filter与真实隔离语义。}
 candidates:
 - id: N060
   name: Plurifold
@@ -156,116 +163,80 @@ candidates:
   status: hold_generation_strategy_contaminated_not_quality_failed
   role: historical_hold_only
 rounds:
-- id: RND-046
-  action: semantic_light_proper_name_broad_exploration
+- id: RND-051
+  action: morpheme_grounded_semantic_light_coinage_initial_probe
   search_mode: exploration
-  generation_brief_id: GB-SEM-LIGHT-046-049
+  generation_brief_id: GB-MORPH-051-052
   generation_isolation_level: best_effort_same_context
-  generated_count: 30
+  generated_count: 24
+  internal_candidates: [Scripta, Scriptum, Scriba, Glossa, Glossant, Annotive, Notara, Tradence, Tradita, Legatum, Legant, Heritive, Curata, Curant, Fidara, Versance, Versive, Recensa, Addita, Durata, Perenna, Refolio, Folium, Vestiga]
   post_generation_filter: {blocked_count: 0, preexisting_exclusions_hit: false}
-  internal_candidates: [Morrow, Canopy, Parallax, Reprise, Fieldmark, Hearthline, Provenance, Aperture, Margin, Cadence, Afterword, Overture, Primer, Almanac, Charter, Steward, Remainder, Continuum, Folio, Marginalia, Sourcewell, Hearthward, Inherit, Refrain, Cairn, Archivewell, Tracewell, Morrowfield, Evermark, Handmark]
-  quality_funnel_top_slice: [Morrow, Canopy, Parallax, Reprise, Fieldmark]
-  quality_observation: semantic-light降低了领域术语/过程词负担；top slice更接近可长成品牌的普通词或轻结构名，但仍需现实筛查。
-  reality_after_funnel:
-  - {name: Morrow, class: red, observation: exact名称已有生产中的AI decision/workspace产品，覆盖知识、证据与决策工作流。, evidence: ['https://meetmorrow.ai/documentation']}
-  - {name: Canopy, class: red, observation: exact名称已有多个活跃AI agent/workspace/software平台，技术身份高度拥挤。, evidence: ['https://www.mycanopy.ai/', 'https://canopy.pm/platform/']}
-  - {name: Parallax, class: red, observation: Parallax Advanced Research为活跃非营利研究组织并明确实施AI能力，母组织/研究范围高度重叠。, evidence: ['https://parallaxresearch.org/about-us']}
-  - {name: Reprise, class: red, observation: exact名称为成熟enterprise AI demo/software platform。, evidence: ['https://www.reprise.com/']}
-  - {name: Fieldmark, class: red, observation: exact名称为面向研究人员与FAIR数据的开源研究数据采集软件。, evidence: ['https://docs.fieldmark.au/en/latest/intro/about.html']}
-  domain_queries: 0
-  result: no_new_promising_candidate
+  quality_observation: 多个候选有真实词根或可解释锚点，但raw batch明显集中于相似的类拉丁proper-name表层；部分甚至滑回现成词/现成形态，未充分回答“受控新造能否打开身份空间”的问题。
   post_round_integrity:
+    strategy_fidelity: partial_fail
     new_local_concentration_detected: true
-    action: created_controller_only_cooldown_FAM-RND046-01
-- id: RND-047
-  action: semantic_light_lower_frequency_and_transparent_construction
+    action: created_controller_only_cooldown_FAM-RND051-01_and_reframed_positive_construction_diversity
+  reality_policy: 本轮不把已观察到的零散现实身份用于证明该策略失败；先纠正strategy fidelity再评价该方向。
+  result: corrective_round_required
+- id: RND-052
+  action: diversified_morpheme_grounded_coinage_corrective_probe
   search_mode: exploration
-  generation_brief_id: GB-SEM-LIGHT-046-049
+  generation_brief_id: GB-MORPH-051-052
   generation_isolation_level: best_effort_same_context
   generated_count: 24
-  internal_candidates: [Vernal, Lorestead, Morrowmark, Lantern, Arbor, Hearthstead, Accession, Cairnline, Borough, Vellum, Codex, Beacon, Hearth, Legacy, Pasture, Quire, Leaflet, Palinode, Accord, Temper, Kinship, Fount, Trove, Mantle]
-  post_generation_filter:
-    blocked_count: 1
-    blocked_candidates: [Morrowmark]
-    reason: new_local_family_cooldown
-  quality_funnel_top_slice: [Vernal, Lorestead, Lantern, Arbor, Beacon]
+  internal_candidates: [Herital, Inherance, Notance, Glossance, Everance, Curalen, Fidura, Tradura, Doxadon, Curifer, Heriven, Heritell, Tradell, Cairna, Trustward, Loreward, Handforth, Facetell, Givance, Ownward, Anewal, Perenel, Donifer, Legance]
+  post_generation_filter: {blocked_count: 0, preexisting_exclusions_hit: false, new_surface_family_dominance: false}
+  quality_funnel_top_slice: [Heritell, Cairna, Loreward, Trustward, Everance]
+  quality_observation: 纠偏后top slice的语义可追溯、口语恢复、proper-name身份与组织架构适配明显好于纯装饰性新造；但最强样本仍主要依赖可理解的语义根，因此现实中容易被其他团队独立重造。
   reality_after_funnel:
-  - {name: Vernal, class: red, observation: exact名称为2026活跃creative-industries AI index/product。, evidence: ['https://www.wearevernal.com/']}
-  - {name: Lorestead, class: red, observation: exact名称为2026活跃productivity/focus web app并准备移动端发布。, evidence: ['https://lorestead.vercel.app/', 'https://note.com/suke_ai_code/n/nd99ad58f7158']}
-  - {name: Lantern, class: red, observation: exact名称同时存在开源AI/Postgres工具与AI hiring平台等活跃技术身份。, evidence: ['https://lantern.dev/', 'https://www.lantern.md/']}
-  - {name: Arbor, class: red, observation: exact名称存在autonomous research agent及长期research organization，和研究/AI范围高度相邻。, evidence: ['https://github.com/RUC-NLPIR/Arbor', 'https://www.arborresearch.org/']}
-  - {name: Beacon, class: red, observation: exact名称存在多个AI-native software/platform身份，包括agentic engineering与AI supply-chain workspace。, evidence: ['https://beacon.com/', 'https://beacon.build/platform']}
+  - {name: Heritell, class: red, observation: exact名称已有活跃family-story/heritage平台，且存在同名heritage audio-tour身份；与传承/公共知识邻域高度接近。, evidence: ['https://heritell.com/', 'https://webappheritell.webflow.io/']}
+  - {name: Cairna, class: red, observation: exact名称已有活跃behavioral mobility design组织；其公开命名解释本身就是“多人逐石累积成共享路标”，与本任务的累积贡献结构高度相似。, evidence: ['https://cairna.co/', 'https://cairna.co/about/']}
+  - {name: Loreward, class: red, observation: exact名称同时存在family knowledge preservation产品、myth/folklore knowledge library与RPG knowledge manager；知识传承/公共知识邻域直接拥挤。, evidence: ['https://www.lorewardfamily.com/', 'https://loreward.org/about', 'https://loreward.ch/en']}
+  - {name: Trustward, class: red, observation: exact名称已有AI-built-app governance产品，并存在其他同名组织/服务身份；AI/治理邻域直接占用。, evidence: ['https://trustward.ai/', 'https://www.trustward.com/']}
+  - {name: Everance, class: yellow, observation: exact名称存在活跃英国公司与服装品牌/商标身份；邻域不直接重叠，但长期全球母组织所需独立身份空间不足以视为通过。, evidence: ['https://find-and-update.company-information.service.gov.uk/company/16670872', 'https://everanceshirt.com/']}
   domain_queries: 0
   result: no_new_promising_candidate
-- id: RND-048
-  action: semantic_light_controlled_semantic_transfer
-  search_mode: exploration
-  generation_brief_id: GB-SEM-LIGHT-046-049
-  generation_isolation_level: best_effort_same_context
-  generated_count: 24
-  internal_candidates: [Overtone, Patina, Cambium, Loremark, Morrowkeep, Inhere, Concord, Amity, Alloy, Oxbow, Underlay, Sideline, Handprint, Aftermark, Keepsake, Headwater, Corpus, Lexis, Parley, Mettle, Rosette, Interleaf, Liminal, Serein]
-  post_generation_filter:
-    blocked_count: 3
-    blocked_candidates: [Loremark, Morrowkeep, Aftermark]
-    reason: new_local_family_cooldown
-  quality_funnel_top_slice: [Overtone, Patina, Cambium]
-  reality_after_funnel:
-  - {name: Overtone, class: red, observation: exact名称为活跃AI contextual-intelligence/media platform，覆盖出版、公共信息与AI邻域。, evidence: ['https://overtone.ai/']}
-  - {name: Patina, class: red, observation: exact名称存在面向AI agents的团队知识库/共享context产品，并有多个其他活跃品牌身份。, evidence: ['https://patina.so/']}
-  - {name: Cambium, class: red, observation: exact名称存在活跃AI decision-simulation/research产品及AI-enabled technology company。, evidence: ['https://www.cambium.ai/', 'https://www.cambium.com/']}
-  domain_queries: 0
-  result: no_new_promising_candidate
-- id: RND-049
-  action: semantic_light_new_family_cooldown_control_probe
-  search_mode: exploration
-  generation_brief_id: GB-SEM-LIGHT-046-049
-  generation_isolation_level: best_effort_same_context
-  generated_count: 24
-  internal_candidates: [Lucent, Vantage, Verity, Daybreak, Hinterland, Resound, Gleaning, Bedrock, Wellspring, Rosetta, Palisade, Inscript, Headland, Skylight, Locus, Datum, Praxis, Ethos, Meridian, Newleaf, Restory, Gathering, Bearing, Witness]
-  post_generation_filter: {blocked_count: 0, new_local_family_recurrence: false}
-  quality_funnel_top_slice: [Lucent, Vantage, Daybreak, Hinterland, Witness]
-  reality_after_funnel:
-  - {name: Lucent, class: red, observation: exact名称存在Institutional AI for Investment Research平台，直接占据AI research语境。, evidence: ['https://www.lucent.fund/']}
-  - {name: Vantage, class: red, observation: exact名称存在多个AI-native software/data/portfolio平台及成熟cloud software identity。, evidence: ['https://vantage-now.com/', 'https://www.vantage.sh/']}
-  - {name: Daybreak, class: red, observation: exact名称存在大型enterprise AI平台及OpenAI当前cybersecurity产品/计划，技术身份极强。, evidence: ['https://daybreak.ai/', 'https://openai.com/daybreak/']}
-  - {name: Hinterland, class: red, observation: exact名称已有systems-change consultancy、nonprofit institute、software/AI technology identities，组织尺度与目标邻域均有占用。, evidence: ['https://www.hinterlandlab.com/', 'https://www.hinterlandinstitute.com/', 'https://www.hinterlandtech.com.au/']}
-  - {name: Witness, class: red, observation: exact名称为长期全球非营利组织WITNESS且当前明确开展AI、公共信息真实性与技术工作。, evidence: ['https://www.witness.org/']}
-  domain_queries: 0
-  result: no_new_promising_candidate
-- id: RND-050
-  action: search_integrity_and_semantic_light_phase_convergence_check
+- id: RND-053
+  action: search_integrity_and_morpheme_coinage_phase_convergence_check
   search_mode: exploration
   generated_count: 0
   checks:
     prior_mode_collapse_recurrence: false
-    new_local_family_concentration_detected: true
-    new_local_family_contained: true
+    new_surface_concentration_detected_and_corrected: true
     controller_only_exclusions_reexposed_in_brief: false
     negative_constraint_priming: false
     generation_isolation_level: best_effort_same_context
     isolation_overclaim: false
-    reality_feedback_quarantine: pass
-    strategy_fidelity: pass
-    owner_input_required: false
-  result: semantic_light_existing_word_and_transparent_compound_phase_converged
-  phase_convergence: 名称本体的proper-name感有改善，但通过质量funnel的18个样本全部在现实中遭遇material exact/high-adjacency identity；继续扩大普通英语词、自然派生与透明复合的同类池，边际信息增益已经下降。
+    reality_feedback_quarantine: pass_with_same_context_limitation
+    strategy_fidelity_after_correction: pass
+    owner_input_required: true_for_next_search_architecture_boundary
+  result: morpheme_grounded_semantic_light_single_token_phase_converged
+  phase_convergence: 受控新造可以提升proper-name身份，但在保持低误读、低听写分叉和真实语义锚点时，最好的单词形态仍频繁被现实独立重造；进一步提高新造程度则开始牺牲recoverability或变成空心科技词。当前出现distinctiveness-versus-recoverability frontier。
 diagnostics:
-- {id: D98, statement: '降低bare-name semantic compression是正确方向之一：候选不再必须模拟完整循环后，部分样本的口语自然度、proper-name感与母组织架构适配确有改善。', confidence: high}
-- {id: D99, statement: '但semantic-light现成词/自然派生/透明复合的质量top slice在当前AI、software、research、knowledge/public-information命名空间仍高度拥挤；本阶段18个现实验证样本全部出现material exact/high-adjacency identity。', confidence: high}
-- {id: D100, statement: 'RND-046出现了新的局部compound family concentration。v0.2.1 Controller在批后发现并创建task-local cooldown；后续由post-generation filter挡回4个回流样本，且未把具体token重新写入Generator Brief。该信号属于搜索完整性，不等于相关名称本体永久失败。', confidence: high}
-- {id: D101, statement: '本runtime没有真正独立生成上下文；本阶段严格记录为best_effort_same_context。当前Brief省略Controller-only信息不等于模型历史上从未见过这些信息，因此没有isolation_overclaim。', confidence: high}
-- {id: D102, statement: '下一阶段应打开现实身份空间，但不能回到纯随机音形。最有信息价值的方向是morpheme-grounded受控新造/轻变形：每个名称先有一个可核实的轻语义锚点，再做有限声音/正字法优化。', confidence: medium_high}
+- {id: D103, statement: 'RND-051说明morpheme-grounded并不会自动防止construction collapse；如果只更换语义根而复用相似proper-name表层，仍会出现新的局部模式集中。', confidence: high}
+- {id: D104, statement: 'RND-052纠偏后strategy fidelity恢复；5个名称本体top-slice样本现实筛查得到4个red exact/high-adjacency identity与1个yellow exact identity，没有样本通过到.org门槛。', confidence: high}
+- {id: D105, statement: '当前单词路线的核心限制已从“语义压缩过强”进一步收敛为distinctiveness-versus-recoverability frontier：语义与读写越可恢复，越容易被独立重造；形态越独特，越容易失去可解释性、听写恢复或长期机构气质。', confidence: medium_high}
+- {id: D106, statement: '本runtime始终只能提供best_effort_same_context；当前Brief没有重新暴露Controller-only exclusions，但历史上下文与本执行段现实查询均可能影响同一模型后续生成，因此本段不作为强隔离生成证据。', confidence: high}
+- {id: D107, statement: '在继续同一单词构词前，最高信息价值的下一步是确认名称架构边界：是否允许两词机构名，和/或允许更不透明但内部构造真实可追溯的单词proper name。该选择会实质改变搜索空间。', confidence: high}
 next_action:
-  action: morpheme_grounded_semantic_light_coinage
+  action: owner_boundary_decision_on_name_architecture
   search_mode: exploration
-  rationale: semantic-light existing-word / natural-derivation / transparent-compound阶段已出现明确现实拥挤收敛。下一阶段测试“可追溯轻语义锚点 + 受控新造或轻变形”，目标是增加proper-name独特性和现实身份空间，同时保持稳定发音/听写与长期母组织尺度。
-  generation_isolation_preference: fresh_context_preferred
-  fallback_if_fresh_context_unavailable: best_effort_same_context_with_truthful_isolation_record_and_post_filter
-  generator_brief_policy: positive_first_controller_only_exclusions_omitted
-  target_generation: 18_to_24_internal
-  funnel: post_generation_filter_then_quality_and_architecture_then_top_3_to_5_reality
-  domain_policy: 只有真正通过名称本体与公共身份筛查的candidate才查询.org
-  owner_question: null
+  rationale: 当前单词、语义可恢复、低误读的proper-name空间经过semantic-light与morpheme-grounded两阶段后都出现稳定现实拥挤；继续同类微调信息增益下降。开放multiword institutional name或更opaque single-token proper name会改变硬边界，因此需要Owner确认。
+  recommended_option: allow_two_word_institutional_names_first_while_preserving_single_token_domain_and_abbreviation_evaluation
+  options:
+  - id: A
+    label: allow_two_word_institutional_names
+    effect: 保留低误读与真实语义，同时显著扩大现实身份空间；域名仍可用连写形式单独评估。
+  - id: B
+    label: allow_more_opaque_single_token_proper_names
+    effect: 继续坚持单词名称，但接受名称本体语义更轻，要求内部构造依据真实、发音拼写仍稳定。
+  - id: AB
+    label: allow_both_as_parallel_exploration
+    effect: 两个新空间并行探索，之后再比较架构与Owner resonance。
+  - id: C
+    label: keep_current_single_token_semantic_recoverability_boundary
+    effect: 继续现有单词空间；预计边际信息增益最低。
+  owner_question: 下一阶段是否允许A、B或AB；若仍坚持当前边界则选择C。
 stop:
-  status: phase_convergence_pause_allowed
-  reason: semantic-light existing-word/transparent-construction阶段已经形成稳定结论；当前没有Owner问题或不可绕过的业务阻塞，下一执行段应切换新的construction strategy。
+  status: owner_boundary_pause
+  reason: 当前阶段已明确收敛；下一高价值搜索动作会改变名称架构/语义透明度边界，需要Owner判断。
