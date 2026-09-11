@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 67
+  snapshot_version: 68
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v66 识别并修复 morphotype/architecture scheduling collapse。
-    本快照记录 form-coverage reset 后的首轮 balanced morphotype divergence：不同 form classes 实际产生了不同类型的原型与不同失败模式，
-    证明搜索没有再次塌缩回英语关系短语。完整历史由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v67 记录 form-coverage reset 后 balanced morphotype divergence 已恢复真实形式多样性。
+    本快照继续 non-phrase peer search，并新增一个来自系统科学概念词形态的 clean provisional candidate：Multifinality。
+    完整历史继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -36,14 +36,8 @@ mission_value_model:
   generator_representation: abstract_relations_and_transformations_only
 
 integrity_incidents:
-  - id: INC-SEMANTIC-ANCHOR-001
-    status: corrected_and_live_recovery_observed
-    classification: controller_runtime_fidelity_failure
-    mechanism: literal Value Model wording leaked into meaning-first lexical material and caused semantic mode collapse
-  - id: INC-MORPHOTYPE-COLLAPSE-002
-    status: corrected_and_live_recovery_observed
-    classification: workflow_scheduler_fidelity_failure
-    mechanism: reality crowding caused over-allocation to natural-English semantic/relational phrases
+  - {id: INC-SEMANTIC-ANCHOR-001, status: corrected_and_live_recovery_observed, classification: controller_runtime_fidelity_failure}
+  - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_and_live_recovery_observed, classification: workflow_scheduler_fidelity_failure}
 
 controller_only_quarantine:
   literal_value_tokens: [common, commons, perspective, creation, return]
@@ -63,7 +57,7 @@ search_control:
   mode: balanced_morphotype_divergence_live
   search_cadence:
     mode: category_parallel
-    target: produce clean survivors from materially different form classes before Owner exposure
+    target: produce clean survivors from materially different form classes before narrowing
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
@@ -86,29 +80,34 @@ morphotype_portfolio:
 rounds:
   - {id: RND-110, action: owner_detected_morphotype_diversity_audit, result: architecture_collapse_confirmed}
   - {id: RND-111, action: morphotype_portfolio_reset, result: next_generation_contract_rebalanced}
-  - id: RND-112
-    action: balanced_morphotype_divergence_batch_1
-    result: diversity_restored_no_owner_ready_promotion_yet
-    findings:
-      - Viewcraft / Worldmaking / Schemata / Morphism / Axiomera / Meralis represented materially different form classes but exact .org was unavailable
-      - Bearing and Tessera had active high-adjacency software/technology identities
-      - Relatum had active relationship-intelligence and software-development identities
-      - Knowform had an active 2026 developer tool / PyPI package identity
-      - Anacycle had an existing conceptual/design identity
-      - Elsewise is a real lexical item but was not pursued because it is semantically too close to existing Otherwise/Else candidate territory
-      - domain/reality failures were distributed across classes rather than concentrated in one architecture, indicating genuine portfolio diversity
+  - {id: RND-112, action: balanced_morphotype_divergence_batch_1, result: diversity_restored_no_owner_ready_promotion_yet}
   - id: RND-113
     action: balanced_morphotype_divergence_batch_2
     result: two_internal_survivor_signals
     findings:
-      - Axiality.org was available but Axiality is an active UK IT/supply-chain consultancy and was rejected
-      - Compossibility.org was available; public search showed mainly philosophical usage rather than an active exact company/software identity
-      - Compossibility has strong systems meaning (things that can coexist in one world) but spelling/dictation burden is material and conflicts with HC-RECOVERABILITY
-      - Recomposure.org was available; public search showed mainly ordinary/airport terminology and title usage, with no material active exact company/software/organization found in current search
-      - Recomposure is a one-word derived lexical identity and is materially different from recent phrase finalists
-      - Senseform.org was available but SenseForm is an active 2026 AI design platform and company identity; rejected
-      - Afterform.org was available but Afterform is an active AI consulting identity; rejected
-      - additional lexical/root candidates Constellate / Accrete / Emergentia / Poiesis / Artifex / Syncretic / Manyfold all had unavailable .org domains
+      - Recomposure.org available; no material active exact organization/software identity found in current public search
+      - Compossibility.org available but spelling/dictation burden remains material
+      - Senseform and Afterform were reality-blocked by active AI identities
+      - several additional lexical/root forms had unavailable .org domains
+  - id: RND-114
+    action: balanced_nonphrase_peer_search_3
+    result: no_clean_peer_from_first_subbatch
+    findings:
+      - Allotropy rejected because Benchling actively maintains an exact-name open-source software library
+      - Meronymy rejected because the name has both historical semantic-web software/company usage and a current AI-systems founder/project identity
+      - Consilience rejected because current AI/ontology products and strategy identities are highly adjacent
+      - Panarchy rejected because an active network-design lab uses the exact name in a directly adjacent systems/network-thinking space
+      - Transversality rejected due active exact-name business identity
+      - Contexture rejected due active AI/NLP company, health-information nonprofit, organizational-development practice and open-source AI context engine
+  - id: RND-115
+    action: systems_concept_nonphrase_probe
+    result: one_new_clean_peer
+    findings:
+      - Equifinality rejected because an active 2026 AI advisory / organizational-effectiveness firm uses Equifinality Solutions
+      - Multifinality showed no material active exact-name company/software/organization in current public search
+      - multifinality.org observed available via Namecheap on 2026-09-11 for USD 8.48
+      - public results are primarily academic systems/psychology/goal-theory usage
+      - Multistability.org is available but remains a technical physics/perception concept and was not promoted
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -124,17 +123,9 @@ candidates:
     role: held_internal_preliminary
     active: true
     morphotype: lexical_single_root_derived
-    intrinsic_case:
-      - recomposition / regaining composure creates a natural second reading around re-forming and returning to a coherent state
-      - one-word architecture materially expands form diversity versus recent phrase-heavy search
-      - pronunciation and spelling are substantially more recoverable than long classical/philosophical alternatives
-      - organization-scale semantics are abstract enough for multiple projects, but require Owner reaction to determine whether emotional/airport associations are too strong
     reality_status: preliminary_pass_with_ordinary_term_and_title_noise
     domain_status: recomposure.org_available_2026_09_11
-    risks:
-      - established airport-security term for post-screening area creates a concrete secondary association
-      - musical title usage exists
-      - semantic fit may read more as recovery/calm than knowledge/creation depending on audience
+    risks: [airport-security-term-association, musical-title-usage, may_read_as_recovery_more_than_creation]
     owner_exposure: not_yet
     generation_use: prohibited_as_template
   - id: N126
@@ -142,15 +133,37 @@ candidates:
     role: diagnostic_hold_recoverability_risk
     active: true
     morphotype: lexical_philosophical_term
-    intrinsic_case:
-      - established Leibnizian concept for possibilities/entities that can coexist consistently
-      - unusually strong relation/system meaning and long-term conceptual depth
     reality_status: preliminary_pass_public_search
     domain_status: compossibility.org_available_2026_09_11
-    risks:
-      - spelling/dictation branching is material (compossibility vs composibility etc.)
-      - academic/philosophical density is high
+    risks: [material_spelling_dictation_branching, high_academic_density]
     owner_exposure: not_yet
+    generation_use: prohibited_as_template
+  - id: N127
+    name: Multifinality
+    role: finalist_owner_ready_provisional
+    active: true
+    morphotype: established_systems_concept_single_word
+    intrinsic_case:
+      - established systems/development/goal-theory concept describing one starting condition or means leading to multiple possible outcomes/ends
+      - naturally expresses generativity and plurality of possible outcomes without literal mission wording
+      - one-word architecture materially differs from current phrase/compound finalists and from Recomposure's re-forming semantics
+      - length is acceptable under Owner's meaning-first preference; spelling is decomposable as multi + finality and substantially more recoverable than Compossibility
+    owner_profile_fit:
+      meaning_first: strong
+      stable_modern: medium_high
+      organization_scale: strong
+      recoverability: medium_high
+      source_distinctiveness: strong_relative_to_natural_phrases
+      compactness: low_secondary_only
+      personal_name_risk: low
+    reality_status: preliminary_pass
+    domain_status: multifinality.org_available_2026_09_11
+    risks:
+      - academic/technical tone is strong
+      - developmental psychology and psychopathology are prominent existing usage domains
+      - ordinary audiences may not know the word without explanation
+      - public trademark screening remains preliminary only
+    owner_exposure: now
     generation_use: prohibited_as_template
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
@@ -159,41 +172,34 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   active_hypothesis: HYP-004
   latest_evidence: >-
-    Explicit form-class budgeting restored actual morphotype diversity after phrase collapse. Reality/domain failures were distributed across multiple distinct classes, and a one-word derived lexical survivor emerged without using phrase explainability as the meaning criterion.
+    Explicit form-class budgeting continues to prevent phrase relapse. New failures and survivors are distributed across genuinely different architectures; N127 emerged from a systems-concept single-word class rather than phrase/coinage exploitation.
   proposed_regression_addition: ensure portfolio-level morphotype coverage is checked after region pruning or reality-crowding updates
   stable_skill_rewrite_allowed_now: false
 
 current_state:
-  finalists: [N096, N113, N117, N119]
+  finalists: [N096, N113, N117, N119, N127]
   held_clean_survivors: [N122, N123, N124, N125]
   diagnostic_holds: [N126]
   search_mode: balanced_morphotype_divergence_live
   biggest_unknown: >-
-    Can additional non-phrase form classes produce one or more clean peers to N125 with comparable recoverability but stronger source distinctiveness and less accidental concrete association?
+    Owner reaction to N127's meaning-versus-academic-tone tradeoff, and whether another non-phrase peer can match its semantic depth with a more immediately natural identity.
   blockers: []
-  owner_review_needed_now: false
-  information_gain: high_from_successful_form_coverage_reset
+  owner_review_needed_now: true
+  information_gain: high
 
 next_action:
-  action: continue_balanced_nonphrase_peer_search
+  action: collect_owner_reaction_to_N127_while_continuing_balanced_peer_search
   selected_workflow_patterns: [category_parallel, divergence_burst, creative_linguistic_parallel]
-  priority_classes:
-    - lexical_single_semantic_transfer
-    - blend_or_semantic_fusion
-    - root_derived_or_affixal
-    - opaque_or_semiopaque_proper_name
-    - nonenglish_or_crosslanguage_identity
-    - symbolic_or_structural_identity
-    - compound_single_token
   phrase_budget: minor_only_until_owner_visible_diversity_is_restored
   rationale: >-
-    Form diversity is now demonstrably restored. Continue sampling multiple non-phrase classes rather than prematurely promoting the first clean one-word survivor.
-  requires_owner: false_until_materially_distinct_owner_ready_survivor_exists
+    N127 materially expands Owner-visible form diversity and survives preliminary identity/domain checks. Continue parallel search because academic tone may be too strong and one clean systems term should not become the next template.
+  requires_owner: true_for_N127_reaction_not_for_continued_internal_search
 
 stop:
-  status: continue
-  reason: reset succeeded; no Owner intervention needed yet
+  status: owner_feedback_plus_continue
+  reason: clean materially distinct peer exists; Owner reaction is decision-relevant while autonomous search remains open
   unresolved:
-    - at least one additional clean non-phrase peer desired before Owner exposure
+    - N127 Owner reaction needed
+    - at least one more source-distinctive non-phrase peer remains desirable
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
