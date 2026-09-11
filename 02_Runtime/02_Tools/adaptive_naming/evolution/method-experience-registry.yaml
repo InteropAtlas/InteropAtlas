@@ -1,0 +1,136 @@
+schema_version: "0.1"
+registry: adaptive-naming-method-experience
+purpose: >-
+  Cross-task evidence store for method evolution. Per-job experience candidates enter here before
+  they can become stable naming-method rules. This registry is Controller/evolution-layer context,
+  not Generator context.
+
+promotion_policy:
+  cross_task_default:
+    minimum_independent_jobs: 2
+    require_counterevidence_check: true
+    require_regression: true
+  severe_control_defect_exception:
+    allowed: true
+    requirements:
+      - real_task_evidence
+      - reproducible_or_mechanistically_clear_failure
+      - explicit_control_layer_cause
+      - regression_case_added_or_updated
+      - rollback_or_supersede_path
+  prohibited_shortcuts:
+    - promote_because_one_candidate_won
+    - promote_because_domain_was_available
+    - promote_owner_one_off_preference_as_general_quality_rule
+    - feed_registry_survivor_shapes_to_generator
+
+experiences:
+  - experience_id: EXP-001
+    observation: A thin or undocumented reality search can create false-negative feasibility claims.
+    proposed_generalization: Reality-negative claims require a minimum auditable query contract and freshness rule.
+    mechanism: search incompleteness was mistaken for negative evidence
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - RND-056 apparent survivors were invalidated by stronger recheck in RND-057
+      - Reality Screening Contract v0.3.3 added
+      - REG-016 regression passed in live review
+    counterevidence: []
+    confidence: high
+    scope: potentially_general
+    status: provisional_rule
+    promoted_under: severe_control_defect_exception
+    introduced_in_version: 0.3.3
+    rollback_target: 0.3.2
+
+  - experience_id: EXP-002
+    observation: Internal search-path choices can be mistakenly escalated into Owner boundaries.
+    proposed_generalization: Owner decides true goals/boundaries; Controller decides reversible search strategy and method schedule.
+    mechanism: controller uncertainty was misclassified as owner decision need
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - v36 A/B/AB/C pause later reclassified as search_strategy
+      - REG-001 and REG-002 regression coverage
+    counterevidence: []
+    confidence: high
+    scope: potentially_general
+    status: provisional_rule
+    promoted_under: severe_control_defect_exception
+    introduced_in_version: 0.2.2
+    rollback_target: 0.2.1
+
+  - experience_id: EXP-003
+    observation: Long negative exclusion lists can prime the Generator toward the very families being avoided.
+    proposed_generalization: Keep exclusions Controller-only and use positive Generation Briefs plus post-generation filtering.
+    mechanism: negative constraint priming and same-context contamination
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - mode-collapse reset around historical incumbent/family patterns
+      - REG-003 isolation honesty and current controller-only exclusion policy
+    counterevidence: []
+    confidence: medium_high
+    scope: potentially_general
+    status: provisional_rule
+    promoted_under: severe_control_defect_exception
+    introduced_in_version: 0.2.1
+    rollback_target: 0.2.0
+
+  - experience_id: EXP-004
+    observation: Verifiable etymological grounding improves provenance honesty but does not necessarily reduce namespace crowding.
+    proposed_generalization: Semantic grounding should remain an objective/strategy option rather than a universal construction requirement.
+    mechanism: familiar morphemes plus familiar brand morphology remain heavily occupied
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - RND-058 grounded-root probe
+    counterevidence: []
+    confidence: medium
+    scope: task_supported
+    status: observed
+
+  - experience_id: EXP-005
+    observation: Slightly longer and less templated forms may improve namespace yield while increasing spelling-recovery and surname/fantasy risk.
+    proposed_generalization: Length/structural distance is a search variable with counter-pressure, not a global preference.
+    mechanism: greater string/phonotactic distance reduces exact collisions but weakens familiar recovery cues
+    source_jobs: [organization-naming-411]
+    supporting_evidence:
+      - RND-060 and RND-061
+    counterevidence: []
+    confidence: medium
+    scope: task_supported
+    status: observed
+
+method_hypotheses:
+  - hypothesis_id: HYP-001
+    claim: Adaptive Naming should schedule workflow patterns separately from construction operators.
+    changes:
+      - add_workflow_pattern_scheduler
+      - retain_operator_scheduler
+    expected_benefit: preserve useful professional-method mechanisms without executing full fixed agency SOPs
+    known_risk: orchestration complexity and over-modularization
+    supporting_experience_ids: []
+    supporting_prior_art:
+      - G1 creative_linguistic_parallel
+      - G2 territory_and_divergence
+      - G3 white_space_mapping
+      - G6 architecture_stress
+      - G7 feedback_refinement
+      - G8 online_observe_update
+    counterevidence: []
+    regression_cases: []
+    status: proposed
+    introduced_in_version: null
+    rollback_target: 0.3.3
+
+  - hypothesis_id: HYP-002
+    claim: Cross-task method evolution should be evidence-gated and separate from per-job adaptive state.
+    changes:
+      - add_cross_task_registry
+      - add_promotion_contract
+      - preserve_generator_quarantine
+    expected_benefit: enable cumulative method learning without turning one-off task outcomes into unstable global rules
+    known_risk: registry maintenance overhead
+    supporting_experience_ids: [EXP-001, EXP-002, EXP-003]
+    counterevidence: []
+    regression_cases: []
+    status: proposed
+    introduced_in_version: null
+    rollback_target: 0.3.3
