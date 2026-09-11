@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 83
+  snapshot_version: 84
   skill_version: 0.4.0
 
 lineage:
@@ -101,9 +101,9 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: reconstruct_RND130_evidence_chain_and_validate_recovery_before_method_regression
+  action: apply_evidence_pilot_to_next_authorized_batch_and_restore_remaining_state
   rationale: >-
-    Do not resume name generation until the current process review is complete. Convert repeated positive-reference overfit and batch-homogeneity evidence into Method Experience Registry entries and regression hypotheses first.
+    Evidence pilot is implemented and structurally tested. Keep generation paused; restore current Mission/Value and Name Job with provenance, then apply the pilot to the next authorized execution. Historical missing input cannot support exact replay.
   requires_owner: false_for_method_review
 
 stop:
@@ -111,7 +111,7 @@ stop:
   reason: Owner explicitly requested process/data review instead of new names
 
 audit_recovery:
-  status: evidence_inventory_started_not_complete
+  status: bounded_reconstruction_complete_pilot_structural_validation_complete
   review_section: organization-naming-411-process-review-v0.1.md#14
   supersedes_interpretation: v82_primary_cause_and_latent_preference_claims_are_provisional
   historical_assertion_policy: preserve_without_reaffirming_unverified_reality_or_preference_claims
@@ -142,3 +142,22 @@ audit_recovery:
     - resolve_or_mark_unrecoverable_each_evidence_gap
     - restore_required_current_state_or_precise_recovery_pointers
     - execute_comparative_regression_with_recorded_outputs
+
+evidence_pilot:
+  status: task_local_structurally_tested_not_stable_skill
+  contract: naming-evidence-pilot/contract.md
+  validator: naming-evidence-pilot/validate_evidence.py
+  regression: naming-evidence-pilot/test_evidence.py
+  results: naming-evidence-pilot/test-results.json
+  historical_sample: naming-evidence-pilot/rnd130-reconstruction.json
+  historical_check: naming-evidence-pilot/rnd130-check.json
+  independence: isolated_reviewer_for_validator_only_not_historical_generation
+  interpretation: structural_capture_is_not_semantic_truth_or_reality_clearance
+  stable_skill_version_unchanged: '0.4.0'
+  owner_pause_retained: true
+  preference_correction:
+    preference_id: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS
+    evidence_type: controller_inference_pending_validation
+    original_user_reason: not_located
+    historical_statement_preserved: true
+    allowed_use: reversible_hypothesis_not_hard_gate
