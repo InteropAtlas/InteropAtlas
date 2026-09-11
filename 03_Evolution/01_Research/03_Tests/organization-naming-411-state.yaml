@@ -6,15 +6,16 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 62
+  snapshot_version: 63
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v61 记录 expanded white-space search。
-    本快照吸收 Owner 新反馈：shortness is a preference, not a requirement; semantic meaning and long-term identity quality outrank compactness.
-    由此扩大到中等长度、意义更完整的 organization-scale constructions，并首次得到新的 Owner-ready survivor。
-    完整历史、旧轮次和 reality evidence 继续由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v62 首次将 N121 Common Refrain 暴露给 Owner。
+    Owner 立即发现 Common/Commons 语义反复出现。审计确认这是 runtime/controller fidelity failure：
+    Mission/Value Model 中的字面 token Commons 被 meaning-first generation 重新当作高权重 lexical material，
+    违反稳定 Skill 的 Value Model != Name Job 与 mission-not-keyword-compression 不变量。
+    本快照执行 semantic-anchor reset；完整历史保留在 Git history / Issue #411。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -22,22 +23,55 @@ constraint_registry:
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
-    - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when the meaning is worthwhile, source_type: owner_explicit, confidence: high}
+    - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
     - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort remains preferred when natural, but no longer receives strong optimization pressure or acts as an implicit gate, confidence: high, priority: secondary}
-    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is an optional bonus, confidence: high}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry / cycle echo is an optional bonus, confidence: high}
+    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary preference only, confidence: high, priority: secondary}
+    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
     - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo observed; preserve form diversity, confidence: medium_high}
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve form diversity, confidence: medium_high}
     - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-    - {id: PREF-INITIAL-RCO, statement: R/C/O initial effect remains observational only, confidence: low_medium}
 
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
-  structural_naming_implications:
-    - cycle_or_return may be expressed semantically or structurally
-    - restrained semantic double reading may express transformation/return
-    - name need not encode complete mission
+  use_policy:
+    semantic_structure_available_to_controller: true
+    literal_tokens_available_as_generator_material: false
+    note: >-
+      Mission/value language informs relations, transformations, tensions, agency and desired-world structure.
+      Literal words such as common/commons/perspective/creation/return must not become privileged generation vocabulary unless independently selected by a separate territory decision.
+
+integrity_incident:
+  id: INC-SEMANTIC-ANCHOR-001
+  detected_by: owner
+  trigger: repeated Common/Commons family and N121 Common Refrain exposure
+  classification: controller_runtime_fidelity_failure
+  stable_skill_defect: false
+  mechanism: >-
+    meaning-first search overexposed literal mission wording; Controller treated a Value Model token as lexical generation material.
+    This caused semantic mode collapse even though construction morphotypes remained varied.
+  violated_invariants:
+    - mission_vision_not_reduced_to_keywords
+    - value_model_not_equal_name_job
+    - name_need_not_encode_complete_mission
+    - positive_generation_brief_should_use_transformed_relational_material_not_literal_mission_tokens
+  correction:
+    - semantic_anchor_reset
+    - quarantine_literal_mission_tokens_from_generator_context
+    - represent mission as abstract relations/transformations only in generation briefs
+    - require post_generation_check_for_literal_value_token_leakage
+    - do_not_treat_N121_as_owner_ready_evidence
+
+controller_only_quarantine:
+  literal_value_tokens:
+    - common
+    - commons
+    - perspective
+    - creation
+    - return
+  policy: >-
+    These tokens are not banned names and are not global negatives. They are temporarily Controller-only for generation-integrity recovery because they are contaminated anchors in this job.
+    Do not show this negative list to Generator; instead provide a positive brief using abstract relational/identity targets.
 
 expression_profile:
   baseline: meaningful + stable-modern + easy-to-hold + organization-scale + recoverable + non-personal
@@ -46,47 +80,47 @@ expression_profile:
   anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend]
 
 search_control:
-  mode: meaning_first_form_diverse_generation
+  mode: semantic_anchor_reset_then_divergence
   search_cadence:
-    mode: portfolio_batch
-    target: materially expand Owner-ready choice space while preserving semantic depth and reality viability
+    mode: divergence_burst
+    target: restore semantic and lexical independence while preserving meaning-first quality
+    stop_condition: at least one batch demonstrates material conceptual distance from literal mission vocabulary without losing organization-scale meaning
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
+positive_generation_brief_contract:
+  include:
+    - long_term_umbrella_organization_scale
+    - stable_modern_reliable_identity
+    - meaningful_but_not_mission_literalization
+    - abstract_relations_such_as transformation, reciprocity, reinterpretation, contribution, emergence, continuity
+    - multiple morphotypes and medium_length_allowed
+    - recoverability_and_long_term_identity_quality
+  exclude_from_generator_context:
+    - literal mission slogan
+    - mission arrows / exact wording
+    - current finalists
+    - probe sample strings
+    - quarantined literal value tokens
+    - reality survivor/failure strings
+
 rounds:
-  - id: RND-101
-    action: owner_shortness_relaxation_ingest
-    result: search_window_expanded
+  - id: RND-104
+    action: owner_detected_semantic_anchor_audit
+    generated_count: 0
+    result: integrity_failure_confirmed
     findings:
-      - shortness remains positive but is subordinate to meaning
-      - medium-length names may enter formal search when rhythm/recoverability remain acceptable
-      - previous four-beat preference must not be treated as an implicit gate
-  - id: RND-102
-    action: meaning_first_semantic_double_reading_portfolio
-    result: one_new_owner_ready_survivor
-    findings:
-      - longer search window produced several meaningful relational/semantic constructions with exact .org availability
-      - most remain generic, weakly ownable, or semantically less distinctive
-      - Common Refrain showed the strongest combined intrinsic + Owner-profile fit and survived preliminary public identity screening
-  - id: RND-103
-    action: common_refrain_preliminary_reality_screen
-    result: provisional_pass
-    evidence:
-      exact_active_identity: no_material_exact_active_company_organization_project_or_software_found_in_current_public_web_search
-      trademark_public_web_signal: no_material_exact_public_signal_found; not formal legal clearance
-      domain:
-        queried: commonrefrain.org
-        observation: available
-        source: Namecheap exact availability signal
-        observed_at: 2026-09-11
-        price_usd: 8.48
-    risks:
-      - Common Refrain is an ordinary English collocation meaning a recurring statement/phrase, so source-distinctiveness and trademark strength may be weaker than a coined proper name
-      - common can also mean ordinary; refrain can also mean abstain/hold back
-      - public web trademark screening is preliminary only
+      - repeated Common/Commons was not evidence of Owner preference
+      - meaning-first expansion accidentally increased literal mission-token salience
+      - N121 emerged from contaminated lexical territory and cannot count as clean owner-ready evidence
+      - stable Skill already contains the correct invariant; no stable Skill rewrite is justified
+  - id: RND-105
+    action: semantic_anchor_reset
+    generated_count: 0
+    result: generation_contract_sanitized
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -95,26 +129,10 @@ candidates:
   - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - id: N121
     name: Common Refrain
-    role: finalist_owner_ready_provisional
-    active: true
-    morphotype: semantic_double_reading_relational_phrase
-    intrinsic_case:
-      - Common directly touches shared/common knowledge without naming a specific product or standard
-      - Refrain means a recurring line/chorus and naturally carries return/cycle imagery
-      - the established phrase common refrain creates a restrained second-look double meaning rather than conspicuous wordplay
-      - spoken shape is compact for a two-word name (roughly 2+2 syllabic rhythm) and balanced
-      - organization-scale semantics remain broad enough for research, education, software, publishing and multiple projects
-    owner_profile_fit:
-      stable_modern: strong
-      meaning_first: strong
-      recoverability: strong
-      rhythmic_balance: strong_bonus
-      cycle_return_fit: strong_bonus
-      understated_cleverness: strong_bonus
-      personal_name_risk: low
-    reality_status: preliminary_pass
-    domain_status: commonrefrain.org_available_2026_09_11
-    generation_use: prohibited_as_template
+    role: diagnostic_contaminated_not_owner_ready
+    active: false
+    reason: generated under literal mission-token anchoring; preserve only as integrity evidence
+    generation_use: prohibited_as_template_or_seed
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
@@ -122,27 +140,29 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   hypothesis_id: HYP-004
   stable_skill_rewrite_allowed_now: false
-  latest_note: Owner preference calibration must remain revisable; explicit Owner feedback can lower a previously strong preference (compactness) without changing true hard constraints.
+  latest_note: >-
+    Current incident is an execution-fidelity failure against an existing stable invariant, not evidence that the Skill lacks Owner preference or Mission/Name-Job separation.
+    A regression/check may later be added for literal mission-token leakage, but stable semantics do not need redesign now.
 
 current_state:
-  finalists: [N096, N113, N117, N119, N121]
-  new_owner_ready_candidate: N121
-  search_mode: meaning_first_form_diverse_generation
-  biggest_unknown: Owner reaction to N121 and whether additional meaning-first medium-length architectures can produce peers with stronger source distinctiveness.
+  finalists: [N096, N113, N117, N119]
+  search_mode: semantic_anchor_reset_then_divergence
+  biggest_unknown: >-
+    Can meaning-first generation retain depth while achieving genuine conceptual/lexical independence from literal mission vocabulary and current finalist families?
   blockers: []
-  owner_review_needed_now: true
+  owner_review_needed_now: false
+  information_gain: high_from_reset
 
 next_action:
-  action: expose_N121_to_owner_and_continue_peer_search
+  action: run_semantically_sanitized_divergence_batch
   rationale: >-
-    N121 materially expands the choice space and is the first post-preference-calibration candidate to survive intrinsic, recoverability, preliminary reality and exact .org checks.
-    Owner reaction is now decision-relevant, but search should continue for peers because N121's ordinary-collocation nature may limit trademark/source distinctiveness.
-  requires_owner: true_for_reaction_not_for_continued_internal_search
+    Restore exploration using abstract relational and identity goals rather than literal mission words. Preserve Owner preferences as evaluation weights, not lexical generation seeds.
+  requires_owner: false_until_clean_owner_ready_survivor_exists
 
 stop:
-  status: owner_feedback_plus_continue
+  status: continue
+  reason: integrity issue is diagnosed and corrected; autonomous search can resume
   unresolved:
-    - N121 needs Owner reaction
-    - stronger formal trademark clearance remains deferred
-    - peer candidates with greater source distinctiveness are still desirable
+    - clean new owner-ready candidate still needed
+    - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
