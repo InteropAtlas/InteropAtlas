@@ -1,10 +1,10 @@
 ---
 name: adaptive-naming
 description: 自适应品牌、组织、项目与产品命名。先建立目标、价值模型、名称职责与真实边界，再由 Controller 按当前最大未知动态调度研究、生成、评价、现实验证与救援模块。
-version: 0.3.1
+version: 0.3.2
 ---
 
-# Adaptive Naming Skill v0.3.1
+# Adaptive Naming Skill v0.3.2
 
 ## 1. 定位：薄核心，而不是巨型流程
 
@@ -42,6 +42,8 @@ version: 0.3.1
 14. 阶段性路线收敛不等于 Owner pause；仍有高信息价值空间时 Controller 自主继续。
 15. 评价过程本身也可能被锚定；在高价值决策中应使用最小必要 blindness / independent first pass。
 16. 不为了“完整”机械加载所有模块；只执行能显著降低当前关键不确定性的工作。
+17. **模块清单不是流程清单。** Optional module 必须由 trigger / biggest unknown / expected decision value 激活，而不是因为“存在这个模块”就执行。
+18. Skill 结构修改若影响既有控制行为，应优先用 `evals/` 中对应 regression case 检查是否复发已知缺陷；Regression Evals 不等于重新启动方法 benchmark。
 
 ---
 
@@ -125,6 +127,48 @@ Decision Criteria 不用统一总分，按角色区分：
 - 已进入 rebrand / rollout / governance → `activation_governance`
 
 未触发模块不得变成工作量配额。
+
+### 4.1 Module Routing Contract
+
+Controller 每次准备加载 reference / optional module 前，先根据**当前症状与最大未知**路由，而不是凭记忆随意挑模块。
+
+| 当前症状 / 最大未知 | 优先动作 | 读取 | 预期 artifact |
+| --- | --- | --- | --- |
+| mission / vision 被压成关键词；agency、循环、价值关系不清 | `model_values` | `mission-value-model-and-method-scheduler.md` | Mission / Value Model + value coverage |
+| 不清楚“名称本身到底负责什么”；一个名字承担过多使命 | `define_name_job` / `allocate_communication_load` | `name-job-decision-and-research.md` | Name Job + optional communication-load allocation |
+| gate / optimize / prefer / observe 混淆或发生 criteria drift | `classify_decision_criteria` | `name-job-decision-and-research.md` | Decision Criteria roles + provenance |
+| 不知道下一轮该用哪些方法 / 是否并行 | `schedule_methods` | `mission-value-model-and-method-scheduler.md` + 必要时 `word-formation-strategies.md` | method portfolio + budget + question-to-answer |
+| 已知 value / method，但缺构词 operator 或变形手段 | `generate` / `open_rescue_branch` | `word-formation-strategies.md` | selected strategy / operator contract |
+| 多种构词方式仍反复使用同一薄弱词汇材料 | `territory_research` | `name-job-decision-and-research.md` | material map + selected positive material |
+| 已观察到重复失败，但不确定它属于候选、方法、搜索控制还是评价过程 | `diagnose` | `diagnosis-and-next-action.md` | diagnosis + state change + next action |
+| shortlist 价值高且 reviewer 可能看到排名、Owner reaction 或 reality 结果 | `apply_decision_hygiene` | `name-job-decision-and-research.md` | reviewer blindness / independent-pass contract |
+| 强候选主要因陌生感、第一印象或记忆不确定 | `temporal_evaluation` | `name-job-decision-and-research.md` | raw / informed / delayed observations |
+| 外部用户 / 专家证据可能改变具体决策 | `define_validation_contract` | `name-job-decision-and-research.md` | respondent + question + admissible-inference contract |
+| 已选 finalist，需要迁移、rollout、未来命名治理 | `activation_governance` | `name-job-decision-and-research.md` | activation / governance handoff |
+
+Reality / domain verification 属于工具合同：只有候选达到相应 reality gate 时调用，不因加载其他 reference 自动执行。
+
+### 4.2 Module Activation Budget
+
+任何非核心模块启动前至少能回答：
+
+1. `unknown`：现在缺的具体信息是什么？
+2. `decision`：这个模块的输出可能改变什么决策？
+3. `cheaper_alternative`：有没有更轻量的动作能回答同一问题？
+4. `stop_condition`：获得什么信息后立即退出模块？
+
+如果无法说明预期 decision value，模块保持 inactive。
+
+### 4.3 Routing precedence
+
+当多个模块同时看似可用时，优先：
+
+1. 修复会污染后续所有步骤的上游问题：constraint / Mission-Value / Name Job / Criteria；
+2. 再解决当前最大搜索未知：Scheduler / Territory / Generation；
+3. 再做候选评价、Reality、Validation；
+4. Activation / Governance 只在选定结果后运行。
+
+不要因为某一批候选弱就直接启动所有研究模块；先诊断失败来自**材料、构词、Name Job、criteria 还是 reality**。
 
 ---
 
@@ -317,7 +361,7 @@ Mission / Value + Constraint + Name Job / Criteria
   ↓
 判断当前最大未知
   ↓
-按需加载模块
+Module Routing Contract + Activation Budget
   ↓
 Value/Search Integrity + Method Scheduler
   ↓
@@ -388,11 +432,18 @@ Diagnose + Update State
 
 ---
 
-## 14. 状态、学习与停止
+## 14. 状态、学习、回归与停止
 
 每轮只更新**本轮实际使用的模块和观察**，不要为了模板完整填空。
 
 任务内经验可直接改变当前 search；跨任务经验先记 `experience_candidate`，不因一次成功自动升级稳定 Skill。
+
+行为回归测试见：
+
+- [`evals/README.md`](evals/README.md)
+- [`evals/regression-cases.yaml`](evals/regression-cases.yaml)
+
+Regression Evals 只验证控制行为与方法完整性，不以“生成哪个名字”作为固定答案，也不恢复已停止的 G0–G8 benchmark。
 
 可以停止的主要情况：
 
