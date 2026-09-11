@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 60
+  snapshot_version: 61
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v59 记录现代短造词 / SaaS-like 独立品牌词在 2025–2026 的高现实占用。
-    本快照继续验证 lexical/non-English/classical-root 路线，发现多个看似更“真实词/概念词”的短名称同样被活跃软件、AI、技术或组织实体占用；
-    该结果继续作为 region-level reality crowding 处理，而不是 Owner preference 或 intrinsic quality 失败。完整历史由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v60 记录 classical/non-English short lexical 区域同样拥挤。
+    本快照继续探测 concrete/process metaphor、compact relational construction 与 less-obvious cross-language concept 路线。
+    多个语义/气质匹配原型仍被 active technology/software/organization identities 阻断，因此继续扩大 white-space；完整历史由 Git history 与 Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -43,11 +43,11 @@ expression_profile:
   anti_overfit: [do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_four_beats]
 
 search_control:
-  mode: broad_whitespace_expansion_beyond_saas_and_classical_roots
+  mode: extended_whitespace_search
   search_cadence:
     mode: portfolio_batch
-    target: expand_owner_ready_choice_space_without_repeating_known_crowded_short-name regions
-    stop_condition: one_or_more_materially_distinct_owner_ready_candidates_or_low_information_across_new_regions
+    target: find one_or_more materially distinct owner-ready survivors outside crowded tech naming zones
+    stop_condition: owner_ready_survivor_or_repeated_low_information_across_additional_regions
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
@@ -56,62 +56,69 @@ search_control:
 
 search_landscape:
   regions:
-    - id: REG-MODERN-SHORT-COINAGE
-      intrinsic_quality_yield: high
+    - {id: REG-MODERN-SHORT-COINAGE, reality_crowding: very_high, status: cooldown}
+    - {id: REG-CLASSICAL-ROOT-SHORT, reality_crowding: very_high, status: cooldown}
+    - {id: REG-NONENGLISH-LEXICAL-LESS-OBVIOUS, reality_crowding: high, status: lower_weight}
+    - id: REG-METAPHOR-OBJECT-SINGLE
       reality_crowding: very_high
-      status: deprioritized_cooldown
-    - id: REG-CLASSICAL-ROOT-SHORT
-      intrinsic_quality_yield: medium_high
-      reality_crowding: very_high
-      latest_evidence: >-
-        Origo, Ousia, Metaxy, Limen, Nodus, Nexum, Metis and similarly compact conceptual/root-derived identities have active adjacent software/AI/technology/organization uses.
-      status: deprioritized_cooldown
-    - id: REG-NONENGLISH-LEXICAL-LESS-OBVIOUS
-      intrinsic_quality_yield: medium_high
+      latest_evidence: Lintel / Gyre / Weft / Plinth / Rill / Vellum all have active adjacent technology/software/company identities
+      status: deprioritized
+    - id: REG-RELATIONAL-SHORT-PHRASE
+      reality_crowding: high_mixed
+      latest_evidence: Quiet Current directly occupied by 2026 ERP/AI automation identity; Open Fold is highly confusable with active OpenFold open-AI biology consortium; Even Arc has an active exact engineering LLP.
+      status: active_with_stronger_distinctiveness_filter
+    - id: REG-CROSSLANGUAGE-PERSPECTIVE-CONCEPT
+      description: culturally grounded concepts of reinterpretation/perspective/reciprocity with natural global pronunciation
       reality_crowding: high
-      latest_evidence: >-
-        Renga and Koru both show active software/technology identities despite culturally grounded lexical provenance.
-      status: active_but_lower_weight
-    - id: REG-LEXICAL-SINGLE-OBLIQUE
-      description: uncommon existing words or semantic-transfer identities whose ordinary meaning is not a generic tech/AI concept
+      latest_evidence: Mitate is semantically strong but already used by active career platform, current agent-skill project, restaurant group and semiconductor/genome technology company; Ayni/Minga/Yugen also have active adjacent organization/technology uses.
+      status: lower_weight
+    - id: REG-SEMANTIC-DOUBLE-READING-LEXICAL
+      description: ordinary or near-ordinary lexical forms with a restrained second reading relevant to commons/perspective/creation/return
       sampling_status: under_sampled
       reality_crowding: unknown
       status: priority_active
-    - id: REG-RELATIONAL-SHORT-PHRASE
-      description: compact two-unit constructions with balanced rhythm, not SaaS coinage and not generic manifesto phrasing
-      sampling_status: under_sampled_after_owner_profile
-      reality_crowding: unknown
-      status: priority_active
-    - id: REG-METAPHOR-OBJECT-SINGLE
-      description: concrete or quasi-concrete object/process metaphors with umbrella-scale semantic room
+    - id: REG-COMPACT-INSTITUTIONAL-PROPER-NAME
+      description: short organization-scale proper names not shaped like SaaS coinage and not dependent on personal-name morphology
       sampling_status: under_sampled
       reality_crowding: unknown
       status: priority_active
     - id: REG-STRUCTURAL-SYMMETRY-NONSEED
-      description: natural symmetry / mirrored structure discovered independently, not generated from probe strings
       sampling_status: under_sampled
       status: minor_active_probe
 
 rounds:
-  - id: RND-095
-    action: non_saas_lexical_and_root_probe
+  - id: RND-097
+    action: object_process_metaphor_probe
     result: no_owner_ready_survivor
     findings:
-      - Origo has multiple active technology/software identities including decentralized infrastructure, fintech, AI/PIM and digital-presence businesses
-      - Noria has long-running industrial knowledge/training identity plus an active AI software firm
-      - Metaxy is an active small-business operating-system / AI automation product
-      - Renga is active CAD/software and fintech/enterprise IT identity
-      - Ousia is active AI/consulting/NLP identity
-      - Koru has active software/health-tech/task-management uses
-      - Limen, Nodus, Nexum and Metis have highly adjacent AI/software/organizational identities
-      - short real-word / classical-root / culturally grounded forms are not an easy escape hatch from 2026 namespace crowding
-  - id: RND-096
-    action: reality_informed_whitespace_expansion
+      - Lintel has an active end-to-end technology company identity
+      - Gyre has both software and public biotech identities
+      - Weft has active custom-software/automation identity and AI orchestration language use
+      - Plinth has active AI/software/data-company identities
+      - Rill is an active cloud/data product
+      - Vellum is an active AI company and adjacent service identity
+  - id: RND-098
+    action: compact_relational_probe
+    result: no_owner_ready_survivor
+    findings:
+      - Quiet Current is directly occupied by active ERP/AI/automation company and adjacent Labs/film uses
+      - Open Fold fails near-identity screening because OpenFold is an established open-source AI/biology consortium and software identity
+      - Even Arc has active exact engineering-company identity
+      - relational constructions remain possible but require stronger distinctiveness than ordinary adjective+noun pairing
+  - id: RND-099
+    action: crosslanguage_perspective_probe
+    result: no_owner_ready_survivor
+    findings:
+      - Mitate (見立て; seeing one thing as another) has unusually strong philosophical fit but active career-platform, agent-skill, restaurant-group and genome-tech identities make it unsuitable
+      - Ayni, Minga and Yugen also show active organization/technology usage
+      - strong semantic fit must remain separate from reality availability
+  - id: RND-100
+    action: whitespace_remap_after_three_region_failures
     generated_count: 0
     findings:
-      - do not continue local mutation inside classical-root or globally familiar non-English short words
-      - next information gain is higher in oblique lexical transfer, compact relational constructions, and concrete/process metaphor identities
-      - preserve Owner compact/stable-modern profile as quality weighting only
+      - obvious metaphor nouns and culturally famous concept words are almost as crowded as SaaS coinage
+      - move toward restrained semantic double-reading and institution-scale proper-name architectures rather than familiar dictionary/heritage concepts
+      - keep symmetry/cleverness as optional bonuses, not construction requirements
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -125,29 +132,29 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   hypothesis_id: HYP-004
   stable_skill_rewrite_allowed_now: false
-  latest_note: Owner preference calibration remains useful; reality evidence now forces a broader Search Landscape move rather than string-level mutation.
+  latest_note: calibrated Owner preference remains useful; repeated reality failures continue to change region allocation without altering preference definition or creating survivor-shaped generator templates.
 
 current_state:
   finalists: [N096, N113, N117, N119]
-  search_mode: broad_whitespace_expansion_beyond_saas_and_classical_roots
+  search_mode: extended_whitespace_search
   biggest_unknown: >-
-    Whether oblique lexical transfer, compact relational constructions, or concrete/process metaphors can preserve compact stable-modern Owner fit while escaping the heavily occupied short-tech-name namespace.
+    Whether restrained semantic double-reading or institution-scale proper-name architectures can retain compact stable-modern Owner fit while escaping crowded dictionary/concept/metaphor namespaces.
   blockers: []
   owner_review_needed_now: false
-  information_gain: high_from_new_region_shift
+  information_gain: medium_high_from_architecture_shift
 
 next_action:
-  action: probe_oblique_lexical_relational_and_metaphor_regions
-  selected_workflow_patterns: [white_space_mapping, category_parallel, creative_linguistic_parallel]
-  priority_regions: [REG-LEXICAL-SINGLE-OBLIQUE, REG-RELATIONAL-SHORT-PHRASE, REG-METAPHOR-OBJECT-SINGLE]
+  action: probe_semantic_double_reading_and_institutional_proper_name_regions
+  selected_workflow_patterns: [category_parallel, creative_linguistic_parallel, architecture_stress]
+  priority_regions: [REG-SEMANTIC-DOUBLE-READING-LEXICAL, REG-COMPACT-INSTITUTIONAL-PROPER-NAME]
   minor_region: REG-STRUCTURAL-SYMMETRY-NONSEED
   rationale: >-
-    Modern coinage and classical/non-English short-word regions are both heavily occupied. Move to materially different identity architectures while preserving compactness, recoverability, reliability and umbrella scale.
+    Modern coinage, classical roots, familiar non-English concepts, obvious metaphor nouns and simple relational phrases are all reality-crowded. Shift to less obvious semantic architectures while retaining compactness, recoverability, reliability, umbrella scale and Owner-profile fit.
   requires_owner: false_until_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: no blocker; evidence supports another autonomous search-region shift rather than Owner intervention
+  reason: no blocker; autonomous search still has meaningful untested architecture space
   unresolved:
     - new owner-ready candidate still needed to materially expand current four-choice pool
     - formal trademark legal clearance remains deferred
