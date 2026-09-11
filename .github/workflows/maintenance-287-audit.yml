@@ -1,0 +1,112 @@
+name: Maintenance 287 read-only audit
+on:
+  push:
+    branches: [maintenance/287-branch-pr-audit-20260911]
+    paths: [.github/workflows/maintenance-287-audit.yml]
+permissions:
+  contents: read
+concurrency:
+  group: maintenance-287-audit
+  cancel-in-progress: false
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Collect complete read-only inventory and portable Git evidence
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p audit-output
+          python3 - <<'PY'
+          import concurrent.futures, datetime, json, os, pathlib, subprocess, urllib.request, urllib.error
+          root=pathlib.Path('audit-output')
+          repo=os.environ['REPO']
+          assert repo == 'InteropAtlas/InteropAtlas'
+          base='https://api.github.com/repos/'+repo
+          pages=[]
+          def api(path):
+              req=urllib.request.Request(base+path,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','User-Agent':'InteropAtlas-maintenance-287'})
+              try:
+                  with urllib.request.urlopen(req,timeout=60) as r:
+                      return json.load(r)
+              except urllib.error.HTTPError as e:
+                  return {'http_error':e.code,'path':path,'body':e.read().decode()}
+          def collection(path):
+              result=[]
+              for page in range(1,101):
+                  sep='&' if '?' in path else '?'
+                  part=api(path+sep+'per_page=100&page='+str(page))
+                  if not isinstance(part,list): raise RuntimeError(json.dumps(part))
+                  pages.append({'path':path,'page':page,'count':len(part)})
+                  result.extend(part)
+                  if not part: return result
+              raise RuntimeError('pagination bound exceeded')
+          def git(*args,check=True):
+              p=subprocess.run(['git',*args],text=True,capture_output=True)
+              if check and p.returncode: raise RuntimeError(p.stderr)
+              return p.stdout.strip() if check else p.returncode
+          metadata=api('')
+          branches=collection('/branches')
+          prs=collection('/pulls?state=all&sort=created&direction=asc')
+          open_prs=collection('/pulls?state=open&sort=created&direction=asc')
+          closed_prs=collection('/pulls?state=closed&sort=created&direction=asc')
+          assert len({p['number'] for p in prs}) == len(prs)
+          assert {p['number'] for p in prs} == {p['number'] for p in open_prs+closed_prs}
+          rules=api('/rulesets?includes_parents=true&per_page=100')
+          protection=api('/branches/main/protection')
+          git('fetch','origin','+refs/heads/*:refs/remotes/origin/*','+refs/pull/*/head:refs/maintenance/pr/*')
+          main=next(b['commit']['sha'] for b in branches if b['name']=='main')
+          details={}
+          for n in [p['number'] for p in open_prs]:
+              details[str(n)]={'pr':api('/pulls/'+str(n)), 'comments':collection('/issues/'+str(n)+'/comments'), 'reviews':collection('/pulls/'+str(n)+'/reviews'), 'files':collection('/pulls/'+str(n)+'/files')}
+          issues={}
+          for n in [287,408,411,24,23,107,18,19]:
+              issues[str(n)]={'issue':api('/issues/'+str(n)), 'comments':collection('/issues/'+str(n)+'/comments')}
+          def pr_commits(p):
+              return str(p['number']),collection('/pulls/'+str(p['number'])+'/commits')
+          with concurrent.futures.ThreadPoolExecutor(max_workers=6) as pool:
+              commit_lists=dict(pool.map(pr_commits,prs))
+          by_branch={}
+          for p in prs:
+              if p['head'].get('repo') and p['head']['repo']['full_name']==repo:
+                  by_branch.setdefault(p['head']['ref'],[]).append(p)
+          rows=[]
+          for b in branches:
+              name,head=b['name'],b['commit']['sha']
+              assert git('cat-file','-t',head)=='commit'
+              mb=git('merge-base',main,head)
+              cherry=git('cherry',main,head).splitlines()
+              matches=[]
+              for p in by_branch.get(name,[]):
+                  cs=commit_lists[str(p['number'])]
+                  terminal=cs[-1]['sha'] if cs else p['head']['sha']
+                  same=head==terminal
+                  desc=git('merge-base','--is-ancestor',terminal,head,check=False)==0
+                  matches.append({'number':p['number'],'state':p['state'],'merged_at':p['merged_at'],'api_head':p['head']['sha'],'terminal_pr_commit':terminal,'current_head_equals_pr_terminal':same,'pr_terminal_is_ancestor':desc,'post_pr_commits':int(git('rev-list','--count',terminal+'..'+head)) if desc else None,'merge_commit_sha':p['merge_commit_sha']})
+              rows.append({'branch':name,'head':head,'protected':b['protected'],'head_time':git('show','-s','--format=%cI',head),'head_subject':git('show','-s','--format=%s',head),'ancestor_of_main':git('merge-base','--is-ancestor',head,main,check=False)==0,'merge_base':mb,'ahead_main':int(git('rev-list','--count',main+'..'+head)),'behind_main':int(git('rev-list','--count',head+'..'+main)),'cherry_unique':[s[2:] for s in cherry if s.startswith('+ ')],'cherry_equivalent':[s[2:] for s in cherry if s.startswith('- ')],'changed_from_merge_base':git('diff','--name-status',mb,head).splitlines(),'prs':matches})
+          doc={'scope':'read-only; no branch deletion/merge/setting mutation','as_of':datetime.datetime.now(datetime.timezone.utc).isoformat(),'run_id':os.environ['GITHUB_RUN_ID'],'repository':metadata,'main':main,'pages':pages,'branches':branches,'pulls':prs,'open_pull_details':details,'pr_commits':commit_lists,'issues':issues,'rulesets':rules,'main_protection':protection,'analysis':rows}
+          (root/'inventory.json').write_text(json.dumps(doc,ensure_ascii=False,indent=2))
+          git('bundle','create',str(root/'repository.bundle'),'--all')
+          summary=['# #287 read-only inventory', 'main: '+main, 'branches (including audit branch): '+str(len(branches)), 'PRs all/open/closed: '+str((len(prs),len(open_prs),len(closed_prs))), 'delete_branch_on_merge: '+str(metadata.get('delete_branch_on_merge')), 'rulesets: '+json.dumps(rules,ensure_ascii=False), '|branch|head|main ancestor|ahead|PRs|unique patches|','|---|---|---|---:|---|---:|']
+          for r in rows:
+              summary.append('|'+r['branch']+'|'+r['head']+'|'+str(r['ancestor_of_main'])+'|'+str(r['ahead_main'])+'|'+','.join(str(p['number']) for p in r['prs'])+'|'+str(len(r['cherry_unique']))+'|')
+          text='\n'.join(summary)+'\n'
+          (root/'summary.md').write_text(text)
+          pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(text)
+          print(text)
+          print('PAGINATION',json.dumps(pages))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: maintenance-287-read-only-evidence
+          path: audit-output/
+          retention-days: 30
+          if-no-files-found: error
