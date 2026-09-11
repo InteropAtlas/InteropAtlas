@@ -6,23 +6,29 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 70
+  snapshot_version: 71
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v69 记录 Owner 对 N127 Multifinality 的明确正反馈。
-    本快照新增 Owner 要求：finalist 不只检查 .org，还要记录 exact .com 状态，并对美国、欧盟、中国、WIPO/Madrid 做公开商标可注册性初筛。
-    该筛查仍不是正式法律意见或完整 clearance。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v70 新增 .com 与商标初筛但仍把 .com 视为风险信号。
+    Owner 现明确商业化母组织的硬门槛：exact .com 必须可注册，且名称必须具有良好的商标注册前景；母组织主要使用 .com，.org 主要服务开源/公共项目。
+    因此本快照将 .com 与 trademark registrability 提升为 finalist hard gates，并重新筛查现有候选。
 
 constraint_registry:
   confirmed_hard_constraints:
     - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale, source_type: owner_explicit}
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
-    - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
-  finalist_due_diligence_requirements:
-    - {id: DD-COM, statement: check exact .com availability/occupancy for finalists; .com is an important risk signal but Owner has not made it a hard gate, source_type: owner_explicit}
-    - {id: DD-TM, statement: perform preliminary trademark registrability/collision screening across US, EU, CN, and WIPO/Madrid before final adoption; distinguish exact collision from descriptiveness/distinctiveness risk, source_type: owner_explicit}
+    - id: HC-COM-DOMAIN
+      statement: exact ordinary .com must be available for registration for the commercial umbrella organization; .com is the primary organization domain
+      source_type: owner_explicit
+    - id: HC-TM-REGISTRABILITY
+      statement: finalist must have a good trademark-registration outlook for long-term commercial organization use, not merely absence of an obvious exact-name collision
+      source_type: owner_explicit
+      priority_jurisdictions: [US, EU, CN, WIPO_Madrid]
+    - id: HC-ORG-SECONDARY
+      statement: .org is secondary and mainly intended for open-source/public-interest projects; .org availability is not the primary mother-organization gate
+      source_type: owner_explicit
 
 owner_preferences:
   - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
@@ -33,7 +39,7 @@ owner_preferences:
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: Owner positively responds when an established concept word still reads visually as a coherent standalone brand identity; explicit reaction to Multifinality was positive, confidence: high, use: evaluation_signal_not_generation_template}
+  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive when they read as coherent standalone brands; Multifinality remains positive preference evidence only, confidence: high}
 
 mission_value_model:
   core_structure_available_to_controller: true
@@ -45,12 +51,14 @@ integrity_incidents:
   - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_and_live_recovery_observed, classification: workflow_scheduler_fidelity_failure}
 
 search_control:
-  mode: balanced_morphotype_divergence_live
+  mode: commercial_brand_hard_gate_divergence
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
+  early_creative_policy: >-
+    .com and trademark gates remain finalist-stage reality constraints rather than Generator vocabulary constraints. Do not let availability patterns become naming templates.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
@@ -59,62 +67,96 @@ morphotype_portfolio:
 
 rounds:
   - {id: RND-116, action: owner_reaction_to_multifinality, result: strong_positive_brandability_signal}
-  - id: RND-117
-    action: multifinality_domain_and_trademark_due_diligence_extension
-    result: mixed_domain_preliminary_tm_pass
+  - {id: RND-117, action: multifinality_domain_and_trademark_due_diligence_extension, result: .com_unavailable}
+  - id: RND-118
+    action: owner_promotes_com_and_trademark_to_commercial_hard_gates
+    result: candidate_pool_reclassified
     findings:
-      - multifinality.org remains available at Namecheap for USD 8.48 on 2026-09-11
-      - multifinality.com is unavailable at Namecheap on 2026-09-11
-      - current public exact-name searches found no obvious MULTIFINALITY trademark/company/software identity signal in USPTO/EUIPO/WIPO/CNIPA-indexed web results
-      - exact database absence cannot be proven from web indexing alone; this is preliminary screening only
-      - the word is an established term in systems theory, developmental psychology and goal-systems research
-      - registrability risk therefore depends partly on goods/services: stronger for arbitrary/suggestive use in unrelated software/organization services, weaker if claimed services directly teach/research/analyze multifinality because descriptiveness/genericness objections become more plausible
+      - commercial mother organization will primarily use .com
+      - exact .com registration availability is now mandatory for any finalist
+      - good trademark registrability is mandatory; absence of exact collision alone is insufficient
+      - .org is secondary and mainly relevant to open-source/public projects
+  - id: RND-119
+    action: existing_candidate_exact_com_rescreen
+    result: major_pool_contraction
+    findings:
+      - openregard.com available on 2026-09-11
+      - publicsingular.com available on 2026-09-11
+      - compossibility.com available on 2026-09-11
+      - seeotherwise.com unavailable on 2026-09-11
+      - elseground.com unavailable on 2026-09-11
+      - multifinality.com unavailable on 2026-09-11
+      - recomposure.com unavailable on 2026-09-11
+      - turnofmind.com unavailable on 2026-09-11
+      - formofthought.com unavailable on 2026-09-11
+      - newgrammar.com unavailable on 2026-09-11
 
 candidates:
-  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
-  - {id: N113, name: Public Singular, role: finalist_hold, active: true, generation_use: prohibited_as_template}
-  - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
-  - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
+  - id: N096
+    name: Open Regard
+    role: commercial_gate_survivor_pending_tm_strength
+    active: true
+    com_status: available_2026_09_11
+    generation_use: prohibited_as_template
+  - id: N113
+    name: Public Singular
+    role: commercial_gate_survivor_pending_tm_strength
+    active: true
+    com_status: available_2026_09_11
+    generation_use: prohibited_as_template
+  - id: N117
+    name: See Otherwise
+    role: disqualified_com_unavailable
+    active: false
+    com_status: unavailable_2026_09_11
+    generation_use: prohibited_as_template
+  - id: N119
+    name: Elseground
+    role: disqualified_com_unavailable
+    active: false
+    com_status: unavailable_2026_09_11
+    generation_use: prohibited_as_template
   - id: N127
     name: Multifinality
-    role: finalist_owner_ready
-    active: true
-    morphotype: established_systems_concept_single_word
+    role: preference_evidence_disqualified_com_unavailable
+    active: false
     owner_feedback: interesting_looks_good_feels_like_brand
-    reality_status: preliminary_pass
-    domain_status:
-      org: available_2026_09_11
-      com: unavailable_2026_09_11
-    trademark_screening:
-      status: preliminary_no_material_exact_signal_found
-      jurisdictions: [US, EU, CN, WIPO_Madrid]
-      registrability_risk: medium
-      key_issue: established technical/academic term; distinctiveness depends on claimed goods/services
-      legal_clearance: not_performed
-    risks:
-      - academic/technical tone is strong
-      - developmental psychology and psychopathology are prominent existing usage domains
-      - ordinary audiences may not know the word without explanation
-      - .com unavailable
-      - trademark distinctiveness could weaken for services directly describing the concept
-    owner_exposure: positive
+    com_status: unavailable_2026_09_11
+    trademark_note: established technical/academic term; medium distinctiveness risk depending on goods/services
     generation_use: prohibited_as_template_or_seed
+  - id: N125
+    name: Recomposure
+    role: disqualified_com_unavailable
+    active: false
+    com_status: unavailable_2026_09_11
+    generation_use: prohibited_as_template
+  - id: N126
+    name: Compossibility
+    role: commercial_gate_survivor_but_recoverability_risk
+    active: true
+    com_status: available_2026_09_11
+    risks: [material_spelling_dictation_branching, high_academic_density]
+    generation_use: prohibited_as_template
+  - {id: N122, name: Turn of Mind, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
+  - {id: N123, name: Form of Thought, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
+  - {id: N124, name: New Grammar, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
 
 current_state:
-  finalists: [N096, N113, N117, N119, N127]
-  search_mode: balanced_morphotype_divergence_live
+  commercial_gate_survivors: [N096, N113, N126]
+  disqualified_by_com: [N117, N119, N122, N123, N124, N125, N127]
+  search_mode: commercial_brand_hard_gate_divergence
   biggest_unknown: >-
-    Can another materially different form class achieve Multifinality-level brandability and semantic depth with equal or better recoverability, cleaner .com posture, and stronger trademark distinctiveness?
+    Can broad morphotype exploration produce names with Multifinality-level brand appeal and semantic depth while also preserving exact .com availability and strong trademark distinctiveness across intended commercial categories?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: continue_balanced_peer_search_with_extended_finalist_due_diligence
-  due_diligence_for_new_finalists: [exact_org, exact_com, US_TM_precheck, EU_TM_precheck, CN_TM_precheck, WIPO_Madrid_precheck]
+  action: trademark_strength_rescreen_com_survivors_then_continue_balanced_search
+  due_diligence_for_new_finalists: [exact_com, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck, identity_collision_screen]
   rationale: >-
-    Preserve broad form exploration while adding .com and trademark-distinctiveness/collision evidence before final adoption. Do not let .com availability become an early creative filter unless Owner later promotes it to a hard gate.
-  requires_owner: false_until_new_materially_distinct_owner_ready_survivor_exists
+    The commercial umbrella organization requires a registrable .com-centered brand. Existing .com-unavailable candidates may remain preference or method evidence but cannot re-enter finalists unless the hard constraint changes.
+  requires_owner: false_until_new_commercially_viable_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: N127 remains viable but has .com and distinctiveness tradeoffs; broader peer search remains valuable
+  reason: hard gates clarified; current pool must now optimize for commercially adoptable naming rather than project/open-source naming
