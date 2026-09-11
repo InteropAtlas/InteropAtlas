@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 55
+  snapshot_version: 56
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v54 保存 Owner 的 spoken compactness / rhythmic symmetry 偏好。
-    本 compact snapshot 新增 visual symmetry / palindrome-like balance 偏好，并将其与 Commons -> Perspective -> Creation -> Commons 的循环愿景建立“可能的结构呼应”，
-    但不升级为硬约束或强制回文规则。完整历史候选、轮次与现实证据继续由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v55 保存 visual symmetry / cycle-fit 偏好。
+    本快照新增 Owner 对“克制的巧劲 / 第二眼奖励”的明确偏好，并记录历史备选 Knewn 作为 Owner 自述的偏好证据，而不是恢复为 active candidate。
+    仓库 code search 未找到 Knewn 的现存记录，因此不重建其旧现实筛查或旧结论；完整历史仍以 Git history / Issue #411 为准。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -26,20 +26,13 @@ constraint_registry:
     - {id: PREF-MORPHOTYPE-OPENNESS, statement: no obvious broad morphotype taboo; do not infer equal preference, source_type: owner_observed, confidence: medium}
     - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious and reliable identity character preferred; youthfulness/modernity welcome when dependable, shorthand: reliable_youth / stable_modern / harmonious_confidence, source_type: owner_explicit_self_report, confidence: medium_high}
     - {id: PREF-INITIAL-RCO, statement: R/C/O initials often feel reassuring/stable but are not absolute, source_type: owner_explicit_self_report, confidence: low_medium, usage: observe_only_not_generation_rule}
-    - id: PREF-COMPACT-SPOKEN-RHYTHM
-      statement: Owner prefers short perceived spoken effort; ideal about 4 articulation beats and generally about 5 or fewer.
-      source_type: owner_explicit_self_report
-      confidence: high
-      use: optimize_not_hard_gate_until_calibrated
-    - id: PREF-RHYTHMIC-SYMMETRY
-      statement: Owner likes balanced/symmetrical spoken identity: corresponding sounds/letters, balanced chunks, similar stress/length; Wade Watts is the motivating feel, not a required template.
-      source_type: owner_explicit_self_report
-      confidence: high
-      use: optimize_not_template
-    - id: PREF-VISUAL-SYMMETRY-CYCLE
+    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: Owner prefers short perceived spoken effort; ideal about 4 articulation beats and generally about 5 or fewer, source_type: owner_explicit_self_report, confidence: high, use: optimize_not_hard_gate_until_calibrated}
+    - {id: PREF-RHYTHMIC-SYMMETRY, statement: Owner likes balanced/symmetrical spoken identity; Wade Watts is the motivating feel, not a required template, source_type: owner_explicit_self_report, confidence: high, use: optimize_not_template}
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: Owner likes visual symmetry / near-palindromic balance and sees task-specific fit with the Commons -> Perspective -> Creation -> Commons cycle, source_type: owner_explicit_self_report, confidence: high, use: optimize_and_explore_not_gate}
+    - id: PREF-UNDERSTATED-CLEVERNESS
       statement: >-
-        Owner also finds visual symmetry attractive, citing SONOS-like near-palindromic balance. This is especially interesting because the organization vision contains a return/cycle structure.
-        Treat visual symmetry, reversible-looking structure, repeated endpoints, mirrored letter-patterns or other balanced orthography as optional positive identity mechanisms, not mandatory construction rules.
+        Owner likes names with a restrained conceptual trick or semantic compression that rewards a second look, but dislikes cleverness that feels showy, gimmicky or self-conscious.
+        Historical backup Knewn is cited positively because it fuses Know + New in a compact form; however its spoken/pronunciation recovery feels effortful, so cleverness must not override recoverability.
       source_type: owner_explicit_self_report
       confidence: high
       stability: emerging_strong
@@ -50,23 +43,24 @@ mission_value_model:
   value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
   structural_naming_implication:
     cycle_or_return_can_optionally_be_expressed_by_name_structure_itself: true
-    note: semantic meaning and orthographic/phonological structure may independently or jointly carry the cycle motif
+    subtle_semantic_compression_can_optionally_express_relation_or_transformation: true
 
 owner_feedback:
   - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
   - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise semantically acceptable and young but feels too long/multipart.}
   - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable.}
-  - id: OF-VISUAL-SYMMETRY-01
-    signal: owner_visual_structural_preference
+  - id: OF-CLEVERNESS-01
+    signal: owner_expression_and_construction_preference
     statement: >-
-      Owner says visual symmetry can also be appealing, giving SONOS as the intuitive example. The appeal is increased by the fit with the organization's cyclic/return mission structure.
+      Owner says the desirable features do not need to coexist in every name, but simultaneous fit can create a strong positive reaction. Owner also cites Knewn (Know + New) as a past backup they still find interesting because of its compact conceptual trick, while noting that it is somewhat effortful to pronounce/read. Owner likes this kind of cleverness when understated, not flashy.
     interpretation:
-      - visual_symmetry_may_be_intrinsically_preferred
-      - cycle_fit_gives_it_additional_task_specific_relevance
-      - exact_palindrome_is_not_required
-      - do_not_force_sonos_like_shape_or_specific_letters
-      - test visual_balance alongside spoken rhythm and reliable-youth expression
+      - preferences_are_composable_bonuses_not_joint_hard_requirements
+      - second_look_reward_is_positive
+      - semantic_compression_or_blend_can_be_attractive
+      - understated_wit_preferred_over_gimmick
+      - recoverability_remains_counterpressure
+      - Knewn_is_preference_evidence_not_generation_template
 
 expression_profile:
   status: activated
@@ -79,41 +73,63 @@ expression_profile:
     compact_spoken_identity: high
     rhythmic_balance: high
     visual_balance: high
+    understated_cleverness: medium_high
+    second_look_reward: medium_high
+    showiness_or_gimmick: low
     trendiness: low_if_it_reduces_trust
   structural_preferences:
     spoken_target: about_4_owner_perceived_beats_preferably_not_over_5
-    visual_symmetry_examples:
-      - palindrome_or_near_palindrome_when_natural
-      - repeated_or_corresponding_endpoints
-      - balanced_letter_mass_or_chunk_length
-      - mirrored_or_returning_pattern
-      - orthographic_shape_that_can_support_cycle_or_return_story
+    visual_symmetry: optional_bonus
+    semantic_compression: optional_bonus
+    subtle_double_reading_or_blend: optional_bonus
     avoid_overfit:
       - do_not_force_exact_palindrome
       - do_not_force_R_C_O
       - do_not_force_alliteration
-      - do_not_sacrifice_meaning_recoverability_scale_or_reality_for_symmetry
+      - do_not_force_blends_or_wordplay
+      - do_not_sacrifice_pronunciation_spelling_recovery_scale_or_reality_for_cleverness
+
+preference_model_note:
+  combination_policy: >-
+    Owner explicitly says these preferences are not conjunctive requirements. Treat them as separable positive signals that may stack synergistically; a name can still be strong without satisfying all of them.
+  synergy_examples:
+    - compact_plus_balanced
+    - stable_modern_plus_understated_cleverness
+    - visual_cycle_structure_plus_semantic_fit
+    - short_recoverable_plus_second_look_reward
 
 preference_probe_design:
-  status: ready_for_neutral_expression_rhythm_visual_probe
+  status: ready_for_neutral_expression_rhythm_visual_cleverness_probe
   source: unfamiliar_neutral_non_candidate_examples
-  objective: calibrate intrinsic stable-modern / compact-balanced / visual-symmetry preference without famous-brand halo
+  objective: calibrate intrinsic stable-modern / compact-balanced / visual-symmetry / understated-cleverness preference without famous-brand halo
   design:
     - include multiple morphotypes
-    - contrast compact balanced vs longer/asymmetric forms
-    - include some visually symmetric/near-symmetric forms and some equally strong asymmetric controls
+    - contrast compact balanced vs longer/asymmetric controls
+    - include some subtle semantic tricks/blends and equally strong plain controls
+    - separate cleverness from pronunciation difficulty where possible
+    - include some visually symmetric/near-symmetric forms and asymmetric controls
     - contrast reliable-youth vs playful-fragile vs traditional-heavy expression
     - vary initials so R/C/O is observed rather than enforced
     - keep probe samples out of formal candidate pool and Generator context
   interpretation:
     - preference signals rebalance search budget only
-    - cycle-compatible symmetry may receive a task-local exploration bonus, not a universal quality bonus
+    - stacked preference matches may receive task-local bonus, not universal quality bonus
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   morphotype_hypothesis_id: HYP-004
-  note: latest evidence suggests preference discovery should include expression, phonological rhythm and orthographic structure; stable Skill rewrite still requires regression/counterevidence.
+  note: latest evidence suggests Owner preference discovery needs expression, spoken rhythm, visual structure and understated semantic cleverness; stable Skill rewrite still requires regression/counterevidence.
   stable_skill_rewrite_allowed_now: false
+
+historical_owner_examples:
+  - id: HX-KNEWN
+    name: Knewn
+    status: preference_evidence_only_not_active_candidate
+    owner_reported_construction: Know + New
+    owner_positive: compact conceptual cleverness / interesting fusion
+    owner_negative: somewhat effortful to pronounce/read
+    repository_record_lookup_2026_09_11: no_current_code_search_match_found
+    generation_use: prohibited_as_template_or_seed
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -124,44 +140,43 @@ candidates:
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
 rounds:
-  - {id: RND-084, action: owner_expression_signal_ingest_and_probe_redesign, generated_count: 0, result: stable_modern_reliable_youth_signal}
   - {id: RND-085, action: owner_spoken_compactness_and_symmetry_signal_ingest, generated_count: 0, result: compact_spoken_plus_rhythmic_balance_signal}
-  - id: RND-086
-    action: owner_visual_symmetry_and_cycle_fit_signal_ingest
+  - {id: RND-086, action: owner_visual_symmetry_and_cycle_fit_signal_ingest, generated_count: 0, result: visual_symmetry_cycle_signal}
+  - id: RND-087
+    action: owner_understated_cleverness_and_composable_preference_ingest
     generated_count: 0
     findings:
-      - Owner values visual symmetry in addition to spoken symmetry
-      - near-palindromic or mirrored structure is attractive when natural
-      - cyclic/return mission makes structural symmetry unusually relevant for this task
-      - this is an optional identity mechanism rather than a mandatory palindrome requirement
+      - preferences are bonuses that can combine, not mandatory simultaneous requirements
+      - Owner likes restrained conceptual cleverness / second-look reward
+      - Knewn illustrates positive semantic compression but also the recoverability tradeoff
+      - cleverness should remain subordinate to natural pronunciation/spelling and long-term identity quality
 
 current_state:
   finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
-  search_mode: owner_expression_rhythm_visual_probe
+  search_mode: owner_expression_rhythm_visual_cleverness_probe
   search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: How strongly does Owner prefer compact spoken rhythm plus visual/structural symmetry once unfamiliar examples remove brand halo, and should cycle-compatible structure receive more search budget?
+  biggest_unknown: How strongly do compactness, balance, stable-modern character, visual/cycle structure and understated cleverness persist in unfamiliar examples, and which combinations create disproportionate Owner pull without harming recoverability?
   blockers: []
-  information_gain: high_from_neutral_expression_rhythm_visual_probe
+  information_gain: high_from_neutral_multiaxis_probe
   owner_review_needed_now: true
 
 next_action:
-  action: run_neutral_expression_rhythm_visual_plus_morphotype_probe
-  target: calibrate_owner_compactness_rhythmic_balance_visual_symmetry_and_stable_modern_preference_before_more_formal_generation
+  action: run_neutral_multiaxis_owner_preference_probe
+  target: calibrate_compactness_balance_stable_modern_visual_cycle_and_understated_cleverness_before_more_formal_generation
   rationale: >-
-    Owner has now supplied a coherent preference cluster spanning affect, spoken compactness, rhythmic symmetry and visual symmetry. The cycle mission makes visual structural balance especially task-relevant.
-    Use unfamiliar, non-candidate, quality-matched examples to test these features without famous-brand halo before reallocating formal search budget.
-  triggered_by: [OF-VISUAL-SYMMETRY-01]
+    Owner has now supplied a coherent but non-conjunctive preference cluster. A bounded unfamiliar non-candidate probe can distinguish which axes are genuinely intrinsic, which are weak, and whether stacked matches create strong pull without repeating mature-brand halo.
+  triggered_by: [OF-CLEVERNESS-01]
   expected_information_gain: high
   requires_owner: true
   owner_gate_classification: preference_discovery
 
 stop:
-  status: pause_for_neutral_expression_rhythm_visual_probe
-  reason: preference calibration has higher decision value than more formal candidate generation immediately
+  status: pause_for_neutral_multiaxis_probe
+  reason: calibrating the now-richer preference profile has higher decision value than immediately generating more formal candidates
   unresolved:
-    - preference-beat metric and visual-symmetry strength still need calibration
+    - preference strength and interactions still need neutral calibration
     - HYP-004/stable Skill revision requires regression/counterevidence
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
