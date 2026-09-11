@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 84
+  snapshot_version: 85
   skill_version: 0.4.0
 
 lineage:
@@ -32,8 +32,8 @@ constraint_registry:
 
 owner_preferences:
   - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
-  - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: excessive visual/spoken burden is a real negative, but compactness cannot replace meaning, confidence: high}
+  - {id: PREF-EXPRESSION-STABLE-MODERN, statement: "stable, harmonious, reliable; youthfulness welcome when dependable", confidence: high}
+  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: "excessive visual/spoken burden is a real negative, but compactness cannot replace meaning", confidence: high}
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
@@ -101,9 +101,10 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: apply_evidence_pilot_to_next_authorized_batch_and_restore_remaining_state
+  action: reconcile_remaining_search_runtime_and_screening_evidence_without_generation
   rationale: >-
-    Evidence pilot is implemented and structurally tested. Keep generation paused; restore current Mission/Value and Name Job with provenance, then apply the pilot to the next authorized execution. Historical missing input cannot support exact replay.
+    Mission/Value 与 Name Job 已作有来源的当前重建，商业域名边界保持 v84。下一步定向核对搜索/调度、实际运行及筛查证据；缺失继续记 unknown。
+    先验证留痕与恢复合同，不生成新名称；只有以后明确获准时才将试行用于真实新批次。
   requires_owner: false_for_method_review
 
 stop:
@@ -111,13 +112,15 @@ stop:
   reason: Owner explicitly requested process/data review instead of new names
 
 audit_recovery:
-  status: bounded_reconstruction_complete_pilot_structural_validation_complete
-  review_section: organization-naming-411-process-review-v0.1.md#14
+  status: mission_value_and_name_job_reconstructed_remaining_evidence_partial
+  review_section: organization-naming-411-process-review-v0.1.md#state-recovery-v85
   supersedes_interpretation: v82_primary_cause_and_latent_preference_claims_are_provisional
   historical_assertion_policy: preserve_without_reaffirming_unverified_reality_or_preference_claims
-  missing_current_state:
+  recovered_current_state:
     - mission_value_model
     - name_job_model
+  recovered_state_status: reconstructed_with_repository_provenance_not_owner_verbatim
+  missing_current_state:
     - search_landscape
     - scheduler_state
     - generation_runtime_evidence
@@ -140,7 +143,7 @@ audit_recovery:
   remaining:
     - locate_actual_RND130_input_output_filter_and_owner_feedback_sources
     - resolve_or_mark_unrecoverable_each_evidence_gap
-    - restore_required_current_state_or_precise_recovery_pointers
+    - reconcile_remaining_search_scheduler_runtime_and_reality_evidence_with_precise_pointers
     - execute_comparative_regression_with_recorded_outputs
 
 evidence_pilot:
@@ -161,3 +164,340 @@ evidence_pilot:
     original_user_reason: not_located
     historical_statement_preserved: true
     allowed_use: reversible_hypothesis_not_hard_gate
+
+# v85 恢复层：当前模型与证据等级；不覆盖上述历史断言为新确认。
+state_recovery:
+  id: REC-411-V85
+  status: bounded_current_state_reconstruction
+  base_commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5641934180
+  executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+  review_class: source_retrieval_and_structural_self_check_not_independent_semantic_review
+  context_role: controller_audit_only_not_generator_brief
+  provenance_rules:
+  - '仓库原文已回取不等于找到 Owner 原始发言；source_type: owner_explicit 等继承字段只说明旧执行者如何标记。'
+  - 沿用 v84 当前任务边界，不将 v70/v71 或更早的域名门槛覆盖回来；不作新的 Owner 确认。
+  - 恢复的是当前可用的有出处重建，不声称与历史实际 Generator 输入相同。
+  - 不复制旧 priority/weight 或 integrity=false 为当前通过证明；不把来源缺口填成已验证偏好。
+  source_registry:
+    VISION:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 03_Evolution/01_Research/01_Prior_Art/Naming_Methods/Execution/shared-organization-vision-context-v0.1.zh-CN.md
+      sections:
+      - '## 1. 命名对象'
+      - '## 2. 核心愿景'
+      - '## 4. 组织级要求'
+      evidence_kind: repository_vision_document
+      blob: 1701fe0f51960572dd6c49d9d0dd547c143d3764
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    MODEL36:
+      commit: d84864570861956259961ba45824481dd2902d75
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'mission_value_model:'
+      - 'name_job_model:'
+      evidence_kind: historical_controller_model
+      blob: 7366c3e14d4e43b8d6e0a87c558c213ca8141bca
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    JOBS46:
+      commit: 5898e8eeb9ae4a77977aa3825fce05666d0296a7
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'name_job_model:'
+      - 'decision_criteria:'
+      evidence_kind: historical_controller_summary
+      blob: 0828468a72dde2946b8d9e15b7f3bb101de100a0
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    DROP47:
+      commit: d502ac3ce8a7638e13820f9acbae9037230c0aa7
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'mission_value_model:'
+      evidence_kind: historical_compact_snapshot
+      blob: 5d21cff8257f85810532c812f297c7b5614e56cf
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY70:
+      commit: b9f4c99062d81334bd94419499c3d72eedd2f12a
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'finalist_due_diligence_requirements:'
+      evidence_kind: reported_owner_direction
+      blob: 6be86e93f4d25e00c5e8dcbe7be21c5373dc098f
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY71:
+      commit: 1a11c1848b4bf6b6c4cf757479eb479482309d75
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: reported_owner_direction
+      blob: 53761f3467b3549ccd11aa64d996549cb5cf529f
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY72:
+      commit: 1c4b73d3d0ce7eef8ee1309af81da5a757748f56
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: reported_owner_direction
+      blob: 9c9250bc882832671f829130e15890f688aa339a
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    MODEL77A:
+      commit: f0573e27bdf86a0b23e7eaae07e07785e739ac67
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'mission_value_model:'
+      evidence_kind: historical_summary_not_runtime_proof
+      blob: 1b5a5ab2285e23fe45a8cecedf8fdd9d0f98d9d5
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    DROP77B:
+      commit: 52f2444b60f946b7af41f5e5689509a72c197bd9
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: historical_compact_snapshot
+      blob: 566acca14e9fa14932e01e198bfd62735b6ff498
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    BASE84:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'constraint_registry:'
+      - 'audit_recovery:'
+      - 'evidence_pilot:'
+      evidence_kind: current_baseline_before_this_recovery
+      blob: b5ba4e449dcbad4132241d163fa41d926f94eadf
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    SKILL040:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 02_Runtime/02_Tools/adaptive_naming/SKILL.md
+      sections:
+      - '## 3. 稳定不变量'
+      - '## 4. Naming Job 的最小核心状态'
+      - '## 10. Generator Context 与信息隔离'
+      evidence_kind: method_contract_not_owner_quote
+      blob: 28e4d3bac89bebc6c6d1fb277b043260fa342956
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+  constraint_sources:
+    HC-ORG-SCALE:
+      source_refs:
+      - VISION
+      - BASE84
+      status: repository_direction_recovered
+    HC-RECOVERABILITY:
+      source_refs:
+      - VISION
+      - MODEL36
+      - BASE84
+      status: carried_forward_recorded_direction_no_new_threshold
+    HC-COM-DOMAIN:
+      source_refs:
+      - POLICY70
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_reported_owner_direction
+      effective_rule: exact_com_practical_obtainability_not_registration_only
+      acquisition_budget: not_specified_in_inspected_sources
+    HC-TM-REGISTRABILITY:
+      source_refs:
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_reported_owner_direction
+      limits: 不是本轮商标查询、注册保证或法律结论。
+    HC-ORG-SECONDARY:
+      source_refs:
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_secondary_domain_not_primary_finalist_gate
+  representation_loss:
+  - field: name_job_model
+    last_present_ref: JOBS46
+    first_absent_ref: DROP47
+    finding: v46→v47 压缩后字段缺失；不是原使命或名称职责被证明撤销。
+  - field: mission_value_model
+    last_present_ref: MODEL77A
+    first_absent_ref: DROP77B
+    finding: 两份 v77 的后者删除字段；前者已仅剩摘要/执行自述，不能冒充完整模型或隔离证明。
+  search_scope:
+    state_path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+    reachable_file_versions_indexed: 85
+    yaml_parseable_versions: 81
+    yaml_parse_errors: 4
+    baseline_commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+    reading_method: 85份正文可回取，81份YAML可解析，4份保留解析错误并作原文定位；只定向审读相关内容，不等于验证全部历史。
+    issue_records: '#411 已有53条与#408已有26条维护快照用于定位；本轮开始时核对议题/PR当前元数据；未穷尽私人聊天或#407全流。'
+  known_gaps:
+  - 使命与商业约束已有仓库来源，但相应 Owner 原始发言与完整上下文仍未定位。
+  - 最新搜索地图与调度状态需单独对账；没有恢复为零尝试、未探索或新的搜索分配。
+  - 历史实际输入、原始输出、各筛选阶段及查询证据链仍未补齐。
+  - 语义密度高于发音顺滑仍是待验证推断，不是本轮确认的用户理由。
+  serialization_repairs:
+    preference_ids:
+    - PREF-EXPRESSION-STABLE-MODERN
+    - PREF-COMPACT-SPOKEN-RHYTHM
+    source_ref: BASE84
+    change: 仅给原文加YAML字符串引号，防止逗号把statement拆成额外null键；不改变偏好原文或置信度。
+  generation_permission: paused_no_generation_authorized
+  stable_skill_change: false
+mission_value_model:
+  status: reconstructed_current_provisional
+  source_refs:
+  - VISION
+  - MODEL36
+  - BASE84
+  statement: 公共知识为个人理解、选择与创造提供基础；个人形成自己的视角，新创造又可以回到公共知识，支持后续循环。
+  actors:
+  - 公共知识共同体
+  - 具有自身视角的个人
+  - 创造者/贡献者
+  - 可承载多项目的母组织
+  objects:
+  - 共享知识
+  - 个人视角与解释
+  - 创造/发现
+  - 可回流和再利用的知识
+  transformations:
+  - 共享知识支持个人形成视角
+  - 个人视角支持理解、选择与创造
+  - 新创造可以回流公共知识
+  - 公共积累支持下一轮理解与创造
+  relations_and_agency:
+  - 共享的是知识基础，不要求个人形成同一视角。
+  - 公共知识与个人解释自主性需同时保留，不能把多人/多元代替个人能动性。
+  temporal_or_causal_structure:
+  - Commons → Perspective → Creation → Commons ↺；保留循环与转换关系，而非四个词的并列。
+  desired_world:
+  - 公共知识可积累与再利用；个人从中形成独立理解和创造，创造可继续贡献公共积累。
+  anti_values_or_non_goals:
+  - 不把母组织锁死为单一标准、协议、地图、产品或 InteropAtlas 本身。
+  - 不要求名称逐字解释整个使命循环。
+  value_claims:
+  - id: V-COMMONS
+    statement: 知识作为共享公共基础。
+    source_ref: VISION
+    evidence_type: explicit
+    explicit_in: repository_document_not_verified_owner_quote
+    priority: unknown
+  - id: V-AGENCY
+    statement: 个人保有自身视角和解释空间。
+    source_ref: VISION
+    evidence_type: explicit
+    explicit_in: repository_document_not_verified_owner_quote
+    priority: unknown
+  - id: V-CREATION
+    statement: 知识与个人视角支持创造/发现。
+    source_ref: VISION
+    evidence_type: structural
+    priority: unknown
+  - id: V-RETURN
+    statement: 新创造可以回到公共积累。
+    source_ref: VISION
+    evidence_type: structural
+    priority: unknown
+  - id: V-CONTINUITY
+    statement: 循环可支持长期积累和更新。
+    source_ref: MODEL36
+    evidence_type: derived
+    priority: unknown
+  value_relations:
+  - V-COMMONS 与 V-AGENCY 并存，而非二选一。
+  - V-AGENCY → V-CREATION → V-RETURN → 新一轮公共积累。
+  naming_implications:
+  - 价值模型是理解与对齐依据，不是必须拼接的词根池。
+  - 完整使命由名称之外的叙事、说明与组织实践共同承载。
+  value_coverage_status: unknown_current_no_sampling_metrics_reconstructed
+  limits: 这是有来源的结构化重建；没有新定价值排序、政治/法律立场、知识许可或强制回馈义务。
+name_job_model:
+  status: reconstructed_current_provisional
+  source_refs:
+  - VISION
+  - MODEL36
+  - JOBS46
+  - POLICY72
+  - BASE84
+  primary_jobs:
+  - 形成长期、可独立识别并积累信誉的母组织身份。
+  - 能容纳多个独立项目、研究、工具和公共知识/创造工作，而不绑定当前项目形态。
+  - 在口语和书写中具有可接受的辨认与恢复性。
+  - 保留长期意义空间，并与当前商业可拥有性要求相容。
+  secondary_jobs:
+  - 与一个或少数价值/结构关系建立真实而不必直白的联系。
+  - 在可读性、记忆性、组织尺度与创造感之间进行有依据的比较。
+  non_jobs:
+  - 裸名不需要编码完整使命循环或列出全部业务。
+  - 不要求固定词数、字母数、语源、后缀或形态。
+  - 不靠低价/可注册域名替代名称质量。
+  tensions:
+  - 独特性 ↔ 读写恢复性
+  - 意义可理解性 ↔ 独立可拥有的身份
+  - 组织尺度 ↔ 创造表达
+  - 跨语言使用负担 ↔ 意义与整体身份质量
+  success_evidence: []
+  reality_requirements_ref: constraint_registry.confirmed_hard_constraints
+  limits: 结构来自旧 Name Job 与已记录的新边界；是当前 Controller 恢复结果，不声称每句话都是 Owner 原话或已完成质量验证。
+decision_criteria:
+  status: reconstructed_roles_not_new_owner_policy
+  source_refs:
+  - JOBS46
+  - POLICY72
+  - BASE84
+  - SKILL040
+  items:
+  - id: C-SCALE
+    role: gate
+    source_ref: HC-ORG-SCALE
+    statement: 长期母组织尺度。
+  - id: C-RECOVERY-MIN
+    role: gate
+    source_ref: HC-RECOVERABILITY
+    statement: 避免明显高误读/高听写分叉；不新增量化阈值。
+  - id: C-RECOVERY
+    role: optimize
+    source_ref: HC-RECOVERABILITY
+    statement: 最低可用性之外的读写与跨语言负担可比较权衡。
+  - id: C-DISTINCT
+    role: optimize
+    source_ref: VISION
+    statement: 独立身份与长期意义空间。
+  - id: C-VALUE
+    role: optimize
+    source_ref: VISION
+    statement: 有真实联系而非强行字面编码；不新增使命词汇门槛。
+  - id: C-COM
+    role: gate
+    stage: finalist
+    source_ref: HC-COM-DOMAIN
+    statement: 同名 .com 可实际取得；不只接受未注册域名。
+  - id: C-TM
+    role: gate
+    stage: finalist
+    source_ref: HC-TM-REGISTRABILITY
+    statement: 按当前范围审查注册前景；本轮未查询或给出法律结论。
+  - id: C-ORG
+    role: observe
+    source_ref: HC-ORG-SECONDARY
+    statement: .org 为次要用途，不恢复成母组织主门槛。
+  - id: C-OWNER
+    role: prefer
+    source_ref: SKILL040
+    statement: 比较中的偏好不伪装成一般质量；最终采用另需 Owner 决定。
+  owner_final_adoption_required: true
+  preference_reason_status: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS remains controller_inference_pending_validation
+  no_new_numeric_weights: true
