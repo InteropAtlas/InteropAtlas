@@ -6,14 +6,15 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 61
+  snapshot_version: 62
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v60 记录 classical/non-English short lexical 区域同样拥挤。
-    本快照继续探测 concrete/process metaphor、compact relational construction 与 less-obvious cross-language concept 路线。
-    多个语义/气质匹配原型仍被 active technology/software/organization identities 阻断，因此继续扩大 white-space；完整历史由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v61 记录 expanded white-space search。
+    本快照吸收 Owner 新反馈：shortness is a preference, not a requirement; semantic meaning and long-term identity quality outrank compactness.
+    由此扩大到中等长度、意义更完整的 organization-scale constructions，并首次得到新的 Owner-ready survivor。
+    完整历史、旧轮次和 reality evidence 继续由 Git history 与 Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -21,10 +22,11 @@ constraint_registry:
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
+    - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when the meaning is worthwhile, source_type: owner_explicit, confidence: high}
     - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: short spoken effort preferred; ideal about 4 perceived beats and generally about 5 or fewer, confidence: high}
-    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure preferred as optional bonus, confidence: high}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry / near-palindromic balance is an optional bonus with task-local cycle fit, confidence: high}
+    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort remains preferred when natural, but no longer receives strong optimization pressure or acts as an implicit gate, confidence: high, priority: secondary}
+    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is an optional bonus, confidence: high}
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry / cycle echo is an optional bonus, confidence: high}
     - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
     - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo observed; preserve form diversity, confidence: medium_high}
     - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
@@ -33,98 +35,86 @@ constraint_registry:
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
   structural_naming_implications:
-    - cycle_or_return_may_be_carried_by visual / phonological structure
-    - subtle semantic compression may carry transformation relations
+    - cycle_or_return may be expressed semantically or structurally
+    - restrained semantic double reading may express transformation/return
+    - name need not encode complete mission
 
 expression_profile:
-  status: calibrated_ready_for_generation
-  baseline: compact + brand-like + easy-to-hold + stable-modern + non-personal
-  optional_bonuses: [rhythmic_balance, visual_cycle_echo, understated_cleverness]
-  anti_overfit: [do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_four_beats]
+  baseline: meaningful + stable-modern + easy-to-hold + organization-scale + recoverable + non-personal
+  secondary_preferences: [compactness, rhythmic_balance]
+  optional_bonuses: [visual_cycle_echo, understated_cleverness]
+  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend]
 
 search_control:
-  mode: extended_whitespace_search
+  mode: meaning_first_form_diverse_generation
   search_cadence:
     mode: portfolio_batch
-    target: find one_or_more materially distinct owner-ready survivors outside crowded tech naming zones
-    stop_condition: owner_ready_survivor_or_repeated_low_information_across_additional_regions
+    target: materially expand Owner-ready choice space while preserving semantic depth and reality viability
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
 
-search_landscape:
-  regions:
-    - {id: REG-MODERN-SHORT-COINAGE, reality_crowding: very_high, status: cooldown}
-    - {id: REG-CLASSICAL-ROOT-SHORT, reality_crowding: very_high, status: cooldown}
-    - {id: REG-NONENGLISH-LEXICAL-LESS-OBVIOUS, reality_crowding: high, status: lower_weight}
-    - id: REG-METAPHOR-OBJECT-SINGLE
-      reality_crowding: very_high
-      latest_evidence: Lintel / Gyre / Weft / Plinth / Rill / Vellum all have active adjacent technology/software/company identities
-      status: deprioritized
-    - id: REG-RELATIONAL-SHORT-PHRASE
-      reality_crowding: high_mixed
-      latest_evidence: Quiet Current directly occupied by 2026 ERP/AI automation identity; Open Fold is highly confusable with active OpenFold open-AI biology consortium; Even Arc has an active exact engineering LLP.
-      status: active_with_stronger_distinctiveness_filter
-    - id: REG-CROSSLANGUAGE-PERSPECTIVE-CONCEPT
-      description: culturally grounded concepts of reinterpretation/perspective/reciprocity with natural global pronunciation
-      reality_crowding: high
-      latest_evidence: Mitate is semantically strong but already used by active career platform, current agent-skill project, restaurant group and semiconductor/genome technology company; Ayni/Minga/Yugen also have active adjacent organization/technology uses.
-      status: lower_weight
-    - id: REG-SEMANTIC-DOUBLE-READING-LEXICAL
-      description: ordinary or near-ordinary lexical forms with a restrained second reading relevant to commons/perspective/creation/return
-      sampling_status: under_sampled
-      reality_crowding: unknown
-      status: priority_active
-    - id: REG-COMPACT-INSTITUTIONAL-PROPER-NAME
-      description: short organization-scale proper names not shaped like SaaS coinage and not dependent on personal-name morphology
-      sampling_status: under_sampled
-      reality_crowding: unknown
-      status: priority_active
-    - id: REG-STRUCTURAL-SYMMETRY-NONSEED
-      sampling_status: under_sampled
-      status: minor_active_probe
-
 rounds:
-  - id: RND-097
-    action: object_process_metaphor_probe
-    result: no_owner_ready_survivor
+  - id: RND-101
+    action: owner_shortness_relaxation_ingest
+    result: search_window_expanded
     findings:
-      - Lintel has an active end-to-end technology company identity
-      - Gyre has both software and public biotech identities
-      - Weft has active custom-software/automation identity and AI orchestration language use
-      - Plinth has active AI/software/data-company identities
-      - Rill is an active cloud/data product
-      - Vellum is an active AI company and adjacent service identity
-  - id: RND-098
-    action: compact_relational_probe
-    result: no_owner_ready_survivor
+      - shortness remains positive but is subordinate to meaning
+      - medium-length names may enter formal search when rhythm/recoverability remain acceptable
+      - previous four-beat preference must not be treated as an implicit gate
+  - id: RND-102
+    action: meaning_first_semantic_double_reading_portfolio
+    result: one_new_owner_ready_survivor
     findings:
-      - Quiet Current is directly occupied by active ERP/AI/automation company and adjacent Labs/film uses
-      - Open Fold fails near-identity screening because OpenFold is an established open-source AI/biology consortium and software identity
-      - Even Arc has active exact engineering-company identity
-      - relational constructions remain possible but require stronger distinctiveness than ordinary adjective+noun pairing
-  - id: RND-099
-    action: crosslanguage_perspective_probe
-    result: no_owner_ready_survivor
-    findings:
-      - Mitate (見立て; seeing one thing as another) has unusually strong philosophical fit but active career-platform, agent-skill, restaurant-group and genome-tech identities make it unsuitable
-      - Ayni, Minga and Yugen also show active organization/technology usage
-      - strong semantic fit must remain separate from reality availability
-  - id: RND-100
-    action: whitespace_remap_after_three_region_failures
-    generated_count: 0
-    findings:
-      - obvious metaphor nouns and culturally famous concept words are almost as crowded as SaaS coinage
-      - move toward restrained semantic double-reading and institution-scale proper-name architectures rather than familiar dictionary/heritage concepts
-      - keep symmetry/cleverness as optional bonuses, not construction requirements
+      - longer search window produced several meaningful relational/semantic constructions with exact .org availability
+      - most remain generic, weakly ownable, or semantically less distinctive
+      - Common Refrain showed the strongest combined intrinsic + Owner-profile fit and survived preliminary public identity screening
+  - id: RND-103
+    action: common_refrain_preliminary_reality_screen
+    result: provisional_pass
+    evidence:
+      exact_active_identity: no_material_exact_active_company_organization_project_or_software_found_in_current_public_web_search
+      trademark_public_web_signal: no_material_exact_public_signal_found; not formal legal clearance
+      domain:
+        queried: commonrefrain.org
+        observation: available
+        source: Namecheap exact availability signal
+        observed_at: 2026-09-11
+        price_usd: 8.48
+    risks:
+      - Common Refrain is an ordinary English collocation meaning a recurring statement/phrase, so source-distinctiveness and trademark strength may be weaker than a coined proper name
+      - common can also mean ordinary; refrain can also mean abstain/hold back
+      - public web trademark screening is preliminary only
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
   - {id: N113, name: Public Singular, role: finalist_hold, active: true, generation_use: prohibited_as_template}
   - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
+  - id: N121
+    name: Common Refrain
+    role: finalist_owner_ready_provisional
+    active: true
+    morphotype: semantic_double_reading_relational_phrase
+    intrinsic_case:
+      - Common directly touches shared/common knowledge without naming a specific product or standard
+      - Refrain means a recurring line/chorus and naturally carries return/cycle imagery
+      - the established phrase common refrain creates a restrained second-look double meaning rather than conspicuous wordplay
+      - spoken shape is compact for a two-word name (roughly 2+2 syllabic rhythm) and balanced
+      - organization-scale semantics remain broad enough for research, education, software, publishing and multiple projects
+    owner_profile_fit:
+      stable_modern: strong
+      meaning_first: strong
+      recoverability: strong
+      rhythmic_balance: strong_bonus
+      cycle_return_fit: strong_bonus
+      understated_cleverness: strong_bonus
+      personal_name_risk: low
+    reality_status: preliminary_pass
+    domain_status: commonrefrain.org_available_2026_09_11
+    generation_use: prohibited_as_template
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
@@ -132,30 +122,27 @@ method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   hypothesis_id: HYP-004
   stable_skill_rewrite_allowed_now: false
-  latest_note: calibrated Owner preference remains useful; repeated reality failures continue to change region allocation without altering preference definition or creating survivor-shaped generator templates.
+  latest_note: Owner preference calibration must remain revisable; explicit Owner feedback can lower a previously strong preference (compactness) without changing true hard constraints.
 
 current_state:
-  finalists: [N096, N113, N117, N119]
-  search_mode: extended_whitespace_search
-  biggest_unknown: >-
-    Whether restrained semantic double-reading or institution-scale proper-name architectures can retain compact stable-modern Owner fit while escaping crowded dictionary/concept/metaphor namespaces.
+  finalists: [N096, N113, N117, N119, N121]
+  new_owner_ready_candidate: N121
+  search_mode: meaning_first_form_diverse_generation
+  biggest_unknown: Owner reaction to N121 and whether additional meaning-first medium-length architectures can produce peers with stronger source distinctiveness.
   blockers: []
-  owner_review_needed_now: false
-  information_gain: medium_high_from_architecture_shift
+  owner_review_needed_now: true
 
 next_action:
-  action: probe_semantic_double_reading_and_institutional_proper_name_regions
-  selected_workflow_patterns: [category_parallel, creative_linguistic_parallel, architecture_stress]
-  priority_regions: [REG-SEMANTIC-DOUBLE-READING-LEXICAL, REG-COMPACT-INSTITUTIONAL-PROPER-NAME]
-  minor_region: REG-STRUCTURAL-SYMMETRY-NONSEED
+  action: expose_N121_to_owner_and_continue_peer_search
   rationale: >-
-    Modern coinage, classical roots, familiar non-English concepts, obvious metaphor nouns and simple relational phrases are all reality-crowded. Shift to less obvious semantic architectures while retaining compactness, recoverability, reliability, umbrella scale and Owner-profile fit.
-  requires_owner: false_until_owner_ready_survivor_exists
+    N121 materially expands the choice space and is the first post-preference-calibration candidate to survive intrinsic, recoverability, preliminary reality and exact .org checks.
+    Owner reaction is now decision-relevant, but search should continue for peers because N121's ordinary-collocation nature may limit trademark/source distinctiveness.
+  requires_owner: true_for_reaction_not_for_continued_internal_search
 
 stop:
-  status: continue
-  reason: no blocker; autonomous search still has meaningful untested architecture space
+  status: owner_feedback_plus_continue
   unresolved:
-    - new owner-ready candidate still needed to materially expand current four-choice pool
-    - formal trademark legal clearance remains deferred
+    - N121 needs Owner reaction
+    - stronger formal trademark clearance remains deferred
+    - peer candidates with greater source distinctiveness are still desirable
     - true isolated generation runtime remains unavailable
