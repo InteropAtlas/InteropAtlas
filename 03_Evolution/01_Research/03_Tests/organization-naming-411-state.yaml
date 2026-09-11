@@ -6,18 +6,19 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 39
+  snapshot_version: 40
   skill_version: 0.3.3
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v38 及其全部 RND-054–056 working evidence 由
-    commit c37f62548cac26aa5850aae368af3330af94a12d 保留。本快照记录 v0.3.3 Reality Screening Contract
-    触发后的 reality false-negative 审计、grounded-root probe 与新的控制前沿。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。完整历史候选与逐轮细节继续由 Git history 保留。
+    snapshot v38 保存 RND-054–056；snapshot v39 保存 v0.3.3 reality false-negative reset、RND-057–059。
+    本快照压缩 working history，记录 RND-060/061、Lumerand 压力测试与 v0.3.3 regression review。
   previous_snapshots:
     - {snapshot: 36, commit: 3348d1650e68404704b11097c10f0818c4adeae1}
     - {snapshot: 37, commit: 62a3d2508c73f32d8057a64b900e5d85a261804b}
     - {snapshot: 38, commit: c37f62548cac26aa5850aae368af3330af94a12d}
+    - {snapshot: 39, commit: b4867dda2053ac4916acd8fe3b616fe8e22fdd7d}
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -29,6 +30,7 @@ constraint_registry:
   controller_search_variables:
     - {id: SV-WORD-COUNT, name: word_count, current_value: open, allowed_values: [single_token, multiword, both], owner_approval_required_to_change: false}
     - {id: SV-SEMANTIC-TRANSPARENCY, name: semantic_transparency, current_value: adaptive, allowed_values: [transparent, light, opaque_but_traceable, mixed], owner_approval_required_to_change: false}
+    - {id: SV-NAME-LENGTH, name: name_length, current_value: adaptive_longer_than_prior_short_shells, owner_approval_required_to_change: false}
   assumptions: []
 
 mission_value_model:
@@ -41,46 +43,39 @@ mission_value_model:
     - creation can return to the commons
     - returned knowledge supports another cycle
   relations_and_agency:
-    - 公共知识属于共同体层面的共享资源；个人保有形成视角、解释与选择的自主性。
-    - commons 与 individual agency 要同时保留，不能把“多人/多元”当成个人 agency 的替代。
+    - public knowledge is a shared resource while individuals retain interpretive agency and choice
+    - commons and individual agency must coexist; plurality is not a proxy for agency
   temporal_or_causal_structure:
     - Commons → Perspective → Creation → Commons ↺ is a feedback cycle, not four parallel keywords
   value_claims:
-    - {id: V-COMMONS, statement: knowledge should remain part of a shared commons, evidence_type: explicit, value_type: end, priority: core, confidence: high}
-    - {id: V-AGENCY, statement: individuals should retain interpretive perspective and choice, evidence_type: explicit, value_type: relation, priority: core, confidence: high}
-    - {id: V-CREATION, statement: perspective should enable creation / discovery, evidence_type: structural, value_type: end, priority: high, confidence: high}
-    - {id: V-RETURN, statement: creation can contribute back into shared knowledge, evidence_type: structural, value_type: procedural, priority: high, confidence: high}
-    - {id: V-CONTINUITY, statement: the system should support durable renewal across cycles, evidence_type: structural, value_type: identity, priority: supporting, confidence: medium_high}
-  value_relations:
-    - {value_a: V-COMMONS, value_b: V-AGENCY, relation: balance}
-    - {value_a: V-AGENCY, value_b: V-CREATION, relation: sequence}
-    - {value_a: V-CREATION, value_b: V-RETURN, relation: sequence}
+    - {id: V-COMMONS, statement: knowledge should remain part of a shared commons, evidence_type: explicit, priority: core, confidence: high}
+    - {id: V-AGENCY, statement: individuals should retain interpretive perspective and choice, evidence_type: explicit, priority: core, confidence: high}
+    - {id: V-CREATION, statement: perspective should enable creation / discovery, evidence_type: structural, priority: high, confidence: high}
+    - {id: V-RETURN, statement: creation can contribute back into shared knowledge, evidence_type: structural, priority: high, confidence: high}
   naming_implications:
     - {value_id: V-COMMONS, mode: indirect}
     - {value_id: V-AGENCY, mode: indirect}
     - {value_id: V-CREATION, mode: indirect}
     - {value_id: V-RETURN, mode: guardrail_only}
-    - {value_id: V-CONTINUITY, mode: optional_story}
   integrity:
     value_flattening_detected: false
     mission_overcompression_detected: false
     value_proxy_collapse_detected: false
-    value_priority_invention_detected: false
     value_score_smuggling_detected: false
 
 name_job_model:
   primary_jobs:
-    - form a durable, independently recognizable umbrella-organization identity
+    - form a durable independently recognizable umbrella-organization identity
     - support multiple projects / research / tools / education / publishing / public knowledge work
     - maintain acceptable spoken and written recoverability
     - leave enough semantic room for long-term brand meaning
   secondary_jobs:
-    - establish a truthful connection to one or a few core values / structural relations when possible
+    - establish a truthful connection to one or a few core values / structural relations when useful
     - carry enough memorability, institutional scale and creative energy
   non_jobs:
-    - the bare name does not need to encode the full Commons → Perspective → Creation → Commons loop
-    - the bare name does not need to enumerate future activities
-    - the name alone does not carry the whole mission narrative
+    - bare name does not need to encode the complete mission loop
+    - bare name does not need to enumerate future activities
+    - semantic/etymological grounding is not a mandatory construction rule
   tensions:
     - distinctiveness ↔ recoverability
     - semantic grounding ↔ ownable identity
@@ -89,24 +84,22 @@ name_job_model:
 
 decision_criteria:
   items:
-    - {id: C-SCALE, statement: long-term umbrella organization scale, role: gate, source_ref: HC-ORG-SCALE, confidence: high}
-    - {id: C-RECOVERY, statement: low-to-acceptable pronunciation / dictation burden, role: optimize, source_ref: HC-RECOVERABILITY, confidence: high}
-    - {id: C-DISTINCT, statement: independent proper-name identity, role: optimize, source_ref: name-job-model, confidence: high}
-    - {id: C-VALUE, statement: no contradiction with Mission / Value Model and preferably a truthful connection, role: optimize, source_ref: mission-value-model, confidence: high}
-    - {id: C-DOMAIN, statement: exact ordinary .org available for finalist, role: gate, source_ref: HC-ORG-DOMAIN, confidence: high}
-    - {id: C-OWNER, statement: Owner long-term resonance, role: prefer, source_ref: owner-preference, confidence: medium}
-    - {id: C-TM, statement: formal trademark-oriented clearance, role: observe, source_ref: owner-deferred-policy, confidence: high}
+    - {id: C-SCALE, statement: long-term umbrella organization scale, role: gate, source_ref: HC-ORG-SCALE}
+    - {id: C-RECOVERY, statement: low-to-acceptable pronunciation / dictation burden, role: optimize, source_ref: HC-RECOVERABILITY}
+    - {id: C-DISTINCT, statement: independent proper-name identity, role: optimize, source_ref: name-job-model}
+    - {id: C-VALUE, statement: no contradiction with Mission / Value Model and preferably a truthful connection, role: optimize, source_ref: mission-value-model}
+    - {id: C-DOMAIN, statement: exact ordinary .org available for finalist, role: gate, source_ref: HC-ORG-DOMAIN}
+    - {id: C-OWNER, statement: Owner long-term resonance, role: prefer, source_ref: owner-preference}
+    - {id: C-TM, statement: formal trademark clearance, role: observe, source_ref: owner-deferred-policy}
   integrity: {role_confusion_detected: false, role_drift_detected: false}
 
 optional_modules:
   territory_research:
     status: completed_for_current_trigger
-    trigger: RND-054 multi-method portfolio still collapsed toward common lexical/material pool
     learning:
-      - structural analogies were more useful than literal source-domain vocabulary
-      - direct territory tokens remained namespace-crowded
+      - structural analogies are useful; literal territory vocabulary remained crowded
   communication_load_allocation: {status: inactive}
-  decision_hygiene: {status: ready_on_trigger, trigger: high-value shortlist / Owner Exposure, independent_first_pass: true}
+  decision_hygiene: {status: ready_on_trigger, trigger: high-value shortlist / Owner Exposure}
   temporal_evaluation: {status: inactive}
   validation_research: {status: inactive}
   naming_scope: {status: satisfied, object_role: standalone_umbrella_organization_brand}
@@ -114,14 +107,11 @@ optional_modules:
 
 search_control:
   mode: exploration
-  mode_rationale: >-
-    v0.3.3 reality audit invalidated the apparent low-collision survivors from RND-056. Current task is no longer to stress-test those survivors;
-    it is to improve identity distinctiveness under a hardened reality contract without drifting into random/empty branding or mission over-compression.
   generation_isolation:
     level: best_effort_same_context
     runtime_identity: ChatGPT current conversation runtime
     historical_context_may_have_seen_controller_only_exclusions: true
-    claim_policy: current brief may omit controller-only exclusions, but this runtime cannot claim the model never saw them historically
+    claim_policy: current brief may omit hidden material, but this runtime cannot claim it was never historically visible
   incumbent_isolation:
     comparison_only_candidate_ids: [N060]
   controller_only_exclusions:
@@ -141,50 +131,38 @@ search_control:
 
 reality_screening:
   method_ref: reality-screening-contract-v0.3.3
-  last_audit_round: RND-057
-  status: hardened_after_false_negative
+  status: active
   minimum_level_for_held_or_promising: 1
   freshness_recheck_before_owner_exposure: true
-  false_negative_detected: true
-  same_batch_survivors_rechecked: true
+  false_negative_history_preserved: true
+  query_classes:
+    - bare_exact
+    - company_organization
+    - software_product_project
+    - naming_job_adjacent_category
+    - public_trademark_signal
+    - near_name_and_recovery_branch_before_promotion
 
 method_scheduler:
   policy: adaptive_portfolio
   active_strategies:
-    - strategy_id: opaque_but_traceable_proper_name
-      family: controlled_coinage
-      status: active
-      rationale: still useful, but promotion now requires hardened reality screening
-    - strategy_id: sound_first
-      family: controlled_coinage
-      status: active
-      rationale: identity space is larger, but short familiar startup-like phonotactics are proving crowded
-    - strategy_id: morpheme_grounded_coinage
-      family: compositional_derived
-      status: deprioritized
-      rationale: RND-058 showed that truthful roots plus familiar brand morphology can remain heavily occupied; grounding remains useful but not as a mandatory construction source
-    - strategy_id: longer_phonotactic_proper_name
-      family: controlled_coinage
-      status: active
-      rationale: test greater identity distance while preserving recoverability and organization scale
-    - strategy_id: transformation_operator
-      family: transformation_operator
-      status: rescue_only
-      rationale: no current seed passes rescue trigger criteria
+    - {strategy_id: longer_phonotactic_proper_name, family: controlled_coinage, status: boosted, rationale: longer forms show better namespace yield than short startup-like shells, but recoverability must remain strict}
+    - {strategy_id: opaque_but_traceable_proper_name, family: controlled_coinage, status: active, rationale: preserve semantic room without mandatory etymology}
+    - {strategy_id: sound_first, family: controlled_coinage, status: active_but_guarded, rationale: useful for identity space; avoid fantasy/person-name drift and short startup templates}
+    - {strategy_id: morpheme_grounded_coinage, family: compositional_derived, status: deprioritized, rationale: grounding improves provenance but not namespace yield by itself}
+    - {strategy_id: transformation_operator, family: transformation_operator, status: rescue_only, rationale: no current seed passes rescue trigger}
   diagnostics:
     scheduler_monoculture: false
     method_underuse: false
     territory_material_starvation: partially_resolved
     notes:
-      - semantic grounding is a secondary Name Job objective, not a gate; do not force every new name to encode mission or etymology
-      - short pronounceable Latin-ish / startup-like forms themselves appear highly crowded and should not dominate the next portfolio
+      - current scarce resource is a clean, recoverable, organization-scale identity rather than a clever etymology
+      - longer form is a search variable, not an Owner boundary
 
 transformation_rescue:
   active_branches: []
   rescue_overfit_detected: false
-  seed_audit:
-    status: complete_current_pool
-    result: no_branch_opened
+  seed_audit: {status: complete_current_pool, result: no_branch_opened}
 
 candidates:
   - id: N060
@@ -193,170 +171,168 @@ candidates:
     active: true
     generation_use: prohibited_as_template_or_semantic_anchor
     owner_signal: neutral
-    reality_summary: historical screen only; freshness recheck required before any future promotion
+    reality_summary: historical screen only; freshness recheck required before future promotion
 
-  - id: N061
-    name: Plurivocal
-    role: held_historical_only
-    active: false
-    generation_use: prohibited_as_template_or_semantic_anchor
+  - id: N086
+    name: Lumerand
+    role: held_internal
+    active: true
+    construction_strategy: longer_phonotactic_proper_name
+    intrinsic:
+      distinctiveness: high
+      pronunciation: medium_good
+      spelling_recovery: medium
+      memorability: medium_good
+      semantic_grounding: low
+      semantic_room: high
+      target_scale_fit: good
+      architecture_fit: good
+    architecture_test:
+      - Lumerand Research
+      - Lumerand Commons
+      - Lumerand Tools
+      - Lumerand / InteropAtlas
+      - A project by Lumerand
+    value_alignment: neutral_no_contradiction
+    reality:
+      screening:
+        level: 1_plus_near_name_probe
+        method_ref: reality-screening-contract-v0.3.3
+        observed_at: 2026-09-11
+        exact_result: no_material_active_exact_org_or_software_found_current_queries
+        public_tm_signal: no_material_public_exact_signal_found_current_queries_not_formal_clearance
+        near_name_result: yellow
+        confidence: medium
+      evidence_summary:
+        - exact-name/company/software/research/public-TM query set did not surface a material active exact organization/software identity
+        - near spelling Lumerant occurs as personal/surname usage
+        - near spelling Lumirand occurs as a company/name and a micronation term; not strongly category-adjacent but relevant to dictation recovery
+        - exact/near fictional and OCR noise exists and reduces search cleanliness
+      domain:
+        name: lumerand.org
+        observation: available
+        source: Namecheap bulk availability
+        observed_at: 2026-09-11
+        price_usd_observed: 8.48
+      trademark_oriented_risk: public_signal_only_no_material_exact_found_formal_clearance_deferred
+    diagnosis:
+      - spelling_recovery_branch_risk
+      - semantic_grounding_weak
+      - surname_fantasy_identity_risk
+    owner_exposure: not_ready
 
-retired_reality_false_negatives:
-  - id: N078
-    name: Talven
-    prior_role: held
-    current_role: retired
-    intrinsic_preserved: true
-    diagnosis: [reality_screen_false_negative, exact_active_software_identity]
-    reality:
-      screening:
-        level: 1
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        query_intents: [bare_exact, company_organization, software_product, adjacent_category, trademark_oriented]
-        exact_result: red
-        public_tm_signal: unknown
-        confidence: high
-      evidence_summary:
-        - active Talven financial-management software for freelancers/businesses at talven.app
-        - additional active Talven software/company identities surfaced in recheck
-      domain_history: talven.org was observed available before the stronger identity screen; this did not protect the candidate
-  - id: N079
-    name: Drelan
-    prior_role: promising
-    current_role: retired
-    intrinsic_preserved: true
-    diagnosis: [reality_screen_false_negative, material_public_tm_signal]
-    reality:
-      screening:
-        level: 1
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        query_intents: [bare_exact, company_organization, software_product, adjacent_category, trademark_oriented]
-        exact_result: material_public_tm_signal
-        public_tm_signal: registered_US_standard_character_mark_class_009
-        confidence: high
-      evidence_summary:
-        - DRELAN US registration 6033454 / serial 88624312, registered 2020, class 009 including data-processing/computer/audio goods
-      domain_history: drelan.org was observed available before the stronger identity/TM-oriented screen; this did not protect the candidate
-  - id: N080
-    name: Sernia
-    prior_role: held
-    current_role: retired
-    intrinsic_preserved: true
-    diagnosis: [reality_screen_false_negative, exact_active_company_identity, material_public_tm_signal]
-    reality:
-      screening:
-        level: 1
-        method_ref: reality-screening-contract-v0.3.3
-        observed_at: 2026-09-11
-        query_intents: [bare_exact, company_organization, software_product, adjacent_category, trademark_oriented]
-        exact_result: red
-        public_tm_signal: exact_EU_word_mark_found
-        confidence: high
-      evidence_summary:
-        - active Sernia Capital identity with production AI operations and long-running real-estate business
-        - Sernia GmbH has IT-related purpose
-        - exact SERNIA EU word-mark record surfaced
-      domain_history: sernia.org was observed available before the stronger identity screen; this did not protect the candidate
+retired_recent_probes:
+  - id: RND-061-NEW
+    names: [Averandis, Talemere, Calidren, Orivane, Varenell, Navirent, Mirevane]
+    summary: >-
+      small longer-form independent probe; no candidate promoted. Failures included exact active business/software identities,
+      one-letter highly adjacent IT identity, historical toxic/material trade-name association, cross-language adverse meaning,
+      and recovery/near-name risk.
+    evidence_summary:
+      - Averandis was stopped on near-name screening because active Averantis Global Services is an IT/software business one-letter away
+      - Orivane surfaced active software/product, business and live public trademark signals
+      - Navirent is an active vehicle-rental business identity
+      - Mirevane is an active ecommerce/store identity
+      - Calidren surfaced historical use as an asbestos trade name/synonym and ambiguous prior web usage
+      - Talemere has an established Kannada sense associated with boastful/proud behavior, creating unnecessary global semantic risk
+      - Varenell is established as a surname and sits close to Varenelle, a prescription pharmaceutical name; recoverability/category association is weak
 
 rounds:
-  - id: RND-057
-    action: reality_false_negative_recheck_and_method_patch
-    search_mode: exploration
-    loaded_modules: [reality_screening_contract]
-    generated_count: 0
-    findings:
-      - all three RND-056 survivors failed the hardened identity / public-TM recheck
-      - previous reality negative claims were under-specified; this was a control-method defect, not intrinsic-quality evidence
-      - `.org` availability did not predict identity feasibility
-      - v0.3.3 Reality Screening Contract and REG-016 were added
-    integrity_check:
-      reality_screen_contract_checked: true
-      reality_false_negative_checked: true
-      criteria_role_checked: true
-      owner_interaction_gate_checked: true
-    next_action: test truthful-root and higher-distance identity routes under new screen
+  - id: RND-057-059
+    action: reality_reset_grounding_and_short_form_search
+    summary:
+      - v0.3.3 hardened Reality Screening Contract after false negatives
+      - truthful-root coinage improved provenance but remained namespace-crowded
+      - short invented proper-name shells also showed heavy namespace saturation
 
-  - id: RND-058
-    action: morpheme_grounded_coinage_probe
+  - id: RND-060
+    action: longer_form_probe
     search_mode: exploration
     generated_count: small_probe
-    selected_strategy_ids: [morpheme_grounded_coinage, opaque_but_traceable_proper_name]
     findings:
-      - verified roots from distinguish/decide, perceive/think, arise/create, shape, common/shared and weave families were explored without fake etymology
-      - many natural root-derived forms already had active software/company/product identities
-      - one plausible cernere/oriri-derived form was retired due to a highly adjacent active Cernari AI/data product rather than being sent to domain gate
-      - koin-derived forms were especially risky because an active Koinara public-record commons for cooperative AI agents is semantically adjacent to the Organization Vision
-      - truthful grounding alone does not solve namespace congestion; familiar root + brand-suffix morphology is itself crowded
-    next_action: reduce grounding from construction requirement to secondary story objective; increase structural/phonotactic distance
+      - slightly longer less-templated forms improved namespace yield somewhat
+      - clean forms can drift toward surname/fantasy identity or weaker spoken recovery
+      - Lumerand survived Level-1 screening and .org gate internally, but remained below Owner Exposure threshold
+    next_action: stress_lumerand_and_run_one_independent_longer_form_microcycle
 
-  - id: RND-059
-    action: higher_distance_phonotactic_probe_with_hardened_screen
+  - id: RND-061
+    action: longer_form_microcycle_plus_regression_review
     search_mode: exploration
-    generated_count: 9_internal_probes
-    selected_strategy_ids: [sound_first, opaque_but_traceable_proper_name]
+    generated_count: 7_new_internal_probes_plus_1_existing_stress_test
+    selected_strategy_ids: [longer_phonotactic_proper_name, opaque_but_traceable_proper_name]
     findings:
-      - short recoverable proper-name forms continued to collide quickly under the stronger screen
-      - examples of failure modes included live/pending trademark, active ecommerce/company exact identities, active registered companies, and highly adjacent near identities
-      - a near-clean-looking candidate was stopped at near-name screening because of a large active adjacent corporate identity rather than wasting a domain check
-      - no candidate from this probe was promoted; no `.org` checks were performed after reality failure
+      - no new candidate from the independent batch justified promotion
+      - hardened reality screen caught both exact and near-name conflicts before domain checks
+      - Lumerand remained materially cleaner than the new batch but has medium spelling-recovery / surname-fantasy risk
+      - lumerand.org remained available on a fresh 2026-09-11 check
+      - no new architecture/control defect appeared
+      - naming difficulty is now primarily the search problem itself rather than an identified Skill-control failure
     integrity_check:
       reality_screen_contract_checked: true
+      criteria_role_checked: true
       scheduler_monoculture_checked: true
+      method_underuse_checked: true
       incumbent_anchoring_checked: true
       isolation_claim_checked: true
-    next_action: test longer / less templated proper-name architecture before reopening ordinary short coinage
+      owner_interaction_gate_checked: true
+      progressive_disclosure_checked: true
+      rescue_trigger_checked: true
+    next_action: freeze_skill_baseline_continue_naming_search
 
 observations:
-  - id: O-R057-REALITY
+  - id: O-R061-LENGTH
+    scope: scheduler
+    observation: longer forms modestly improve namespace yield but do not eliminate collision; recoverability and identity character become the counter-pressure
+  - id: O-R061-REALITY
     scope: reality
-    observation: apparent namespace survivors can be false negatives when reality search lacks a fixed query contract; this invalidated the entire RND-056 survivor set
-  - id: O-R058-GROUNDED
-    scope: scheduler
-    observation: verifiable etymological grounding improves story honesty but does not materially reduce namespace crowding when output morphology remains familiar
-  - id: O-R059-SHORTFORM
-    scope: scheduler
-    observation: short, easy-to-pronounce invented proper names are themselves a heavily occupied namespace; greater length/structural distance is now a high-information search variable
+    observation: the v0.3.3 Reality Screening Contract catches exact and one-letter/high-adjacency conflicts early enough to avoid misleading domain checks
+  - id: O-R061-SKILL
+    scope: method_fit
+    observation: no new repeatable Controller defect appeared; remaining failures are candidate/search outcomes rather than evidence for further Skill expansion
 
 diagnostics:
-  - id: D-R057-01
-    diagnosis_type: reality_screen_false_negative
-    statement: previous single/thin reality searches supported overly strong negative claims for N078–N080
+  - id: D-R061-01
+    diagnosis_type: naming_search_frontier_not_method_failure
+    statement: current bottleneck is locating a clean, recoverable, organization-scale identity; no new control-layer defect was found in RND-061
     confidence: high
-    proposed_state_change: require Reality Screening Contract before held/promising/finalist promotion
-  - id: D-R058-01
-    diagnosis_type: grounded_morphology_crowding
-    statement: truthful morphemes combined with familiar brand morphology remain highly collision-prone
+    proposed_state_change: freeze_v0.3.3_fit_test_baseline_and_continue_search
+  - id: D-R061-02
+    diagnosis_type: lumerand_recoverability_risk
+    statement: Lumerand is materially clean enough to keep internally but not strong enough for Owner Exposure because near-spelling recovery and surname/fantasy character remain unresolved
     confidence: medium_high
-    proposed_state_change: deprioritize mandatory morpheme grounding; keep it as one strategy and secondary story source
-  - id: D-R059-01
-    diagnosis_type: short_proper_name_namespace_saturation
-    statement: current evidence suggests short recoverable startup-like proper-name shells have low namespace yield
-    confidence: medium
-    counterevidence: longer/nonstandard architectures remain under-tested
-    proposed_state_change: test longer / less templated proper-name forms in a small portfolio
+
+regression_review:
+  file: 02_Runtime/02_Tools/adaptive_naming/evals/regression-review-v0.3.3-2026-09-11.md
+  commit: dd9ca9d62402e1cda7ad2e8efeb67d2171865f66
+  summary:
+    exercised_pass: 13
+    not_triggered_but_contract_present: 3
+    fail: 0
+  baseline_decision: freeze_v0.3.3_unless_new_repeatable_control_defect_appears
 
 experience_candidates:
   - id: E-R057-REALITY-CONTRACT
     observation: negative reality claims need a minimum query contract and freshness rule; domain availability cannot substitute for identity screening
     scope: potentially_general
-    supporting_evidence: [RND-056, RND-057]
     confidence: high
-    proposed_change: adopted_in_skill_v0.3.3
-  - id: E-R058-GROUNDING
-    observation: semantic/etymological grounding should not be promoted from secondary Name Job objective into a mandatory construction rule merely because semantically-light names feel uncomfortable
+    status: adopted_in_skill_v0.3.3
+  - id: E-R061-LONGER-FORM
+    observation: increasing phonotactic/structural distance can improve namespace yield, but recoverability and surname/fantasy identity risk must be measured separately
+    scope: task_supported_not_yet_generalized
+    confidence: medium
+  - id: E-R061-NEAR-COLLISION
+    observation: one-letter near identities in highly adjacent technology categories can invalidate an otherwise clean exact-name result before domain gating
     scope: potentially_general
-    supporting_evidence: [RND-056, RND-058]
     confidence: medium_high
 
 execution:
   autonomous_microcycles: true
   module_policy: progressive_disclosure
+  skill_change_policy: frozen_by_default_after_v0.3.3_regression_pass
   module_routing:
     last_route: method_scheduler
-    trigger: short_proper_name_namespace_saturation
-    expected_artifact: small longer-form identity portfolio followed by hardened Level-1 reality screens only for intrinsic top slice
+    trigger: naming_search_frontier_not_method_failure
+    expected_artifact: continued naming search without automatic Skill expansion
     activation_budget_passed: true
   owner_interaction_gate:
     classification: search_strategy
@@ -364,43 +340,46 @@ execution:
     reversible_without_owner: true
     parallel_exploration_possible: true
     confirmed_constraint_ids_affected: []
-    rationale: reality-screen repair and search architecture are internal method choices; Owner goals and hard constraints are unchanged
+    rationale: current search architecture and candidate filtering remain internal; no Owner goal/boundary change is implicated
 
 current_state:
   strongest_candidates: [N060]
   promising_candidates: []
-  held_candidates: [N061]
+  held_candidates: [N086, N061]
   finalists: []
   current_value_target_ids: [V-COMMONS, V-AGENCY, V-CREATION]
-  active_strategy_ids: [opaque_but_traceable_proper_name, sound_first, longer_phonotactic_proper_name]
+  active_strategy_ids: [longer_phonotactic_proper_name, opaque_but_traceable_proper_name, sound_first]
   active_rescue_branch_ids: []
   loaded_optional_modules: []
   search_mode: exploration
   generation_isolation_level: best_effort_same_context
   biggest_unknown: >-
-    Can a slightly longer / less templated proper-name architecture materially improve identity ownability while retaining low pronunciation/spelling burden,
-    organization scale, and value compatibility, with semantic grounding treated as secondary rather than mandatory?
+    Can continued naming search produce 2–3 candidates that simultaneously pass organization-scale intrinsic quality,
+    low-to-acceptable recovery burden, value compatibility, hardened reality screening and the .org finalist gate,
+    without requiring another method redesign?
   blockers: []
-  information_gain: high
+  information_gain: medium_for_method_design_high_for_naming_search
   mission_value_status: active
   name_job_status: active
   criteria_status: active
-  method_scheduler_status: active_after_reality_reset
+  method_scheduler_status: active
   search_integrity_status: pass
   constraint_integrity_status: pass
   reality_screen_status: v0.3.3_contract_active
+  skill_fit_test_status: baseline_frozen_v0.3.3
   owner_review_needed_now: false
 
 next_action:
-  action: generate_small_longer_form_portfolio_then_hardened_reality_screen
-  target: longer_phonotactic_proper_name
+  action: continue_real_naming_search_under_frozen_v0.3.3
+  target: build_reality_screened_owner_shortlist
   rationale: >-
-    RND-057 removed false-positive survivors, RND-058 showed root grounding does not solve crowding, and RND-059 indicates short familiar invented-name shells are themselves saturated.
-    The next cheap, reversible test is a small set of slightly longer, low-ambiguity proper-name forms. Intrinsic/value review comes first; only the top slice receives the full Reality Screening Contract.
-  triggered_by: [D-R057-01, D-R058-01, D-R059-01]
-  expected_information_gain: high
+    One additional complete microcycle plus regression review found no new architecture-level defect. Further Skill changes are now disfavored unless a repeatable control failure appears.
+    Continue search with slightly longer / structurally distant but recoverable proper-name architectures, apply hardened reality screening before domain checks,
+    and stop for Owner decision only after 2–3 credible finalists remain or a true boundary/blocker appears.
+  triggered_by: [D-R061-01]
+  expected_information_gain: high_for_naming_outcome_low_for_skill_redesign
   search_mode: exploration
-  selected_strategy_ids: [longer_phonotactic_proper_name, opaque_but_traceable_proper_name]
+  selected_strategy_ids: [longer_phonotactic_proper_name, opaque_but_traceable_proper_name, sound_first]
   value_targets: [V-AGENCY, V-CREATION, V-COMMONS]
   modules_to_load: [word_formation_strategies, reality_screening_contract]
   requires_owner: false
@@ -408,8 +387,8 @@ next_action:
 
 stop:
   status: continue
-  reason: no finalist set; hardened reality screening invalidated prior survivors but exposes a clear high-information next search architecture
+  reason: Skill Fit Test baseline is frozen, but the real Organization Naming task still lacks an Owner-ready finalist set
   unresolved:
-    - formal trademark clearance remains deferred_by_owner; public trademark signals are now screened separately
+    - formal trademark clearance remains deferred_by_owner; public trademark signals are screened before promotion
     - true isolated generation runtime unavailable in this context
-    - no current transformation rescue seed passed trigger criteria
+    - Lumerand remains internal hold, not Owner Exposure
