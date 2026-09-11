@@ -1,8 +1,8 @@
-schema_version: '0.1'
+schema_version: '0.2'
 suite: adaptive-naming-control-regression
 purpose: >-
-  Behavioral regression cases for the Adaptive Naming Controller. These are not naming-quality
-  benchmarks and do not compare G0–G8 methods.
+  Behavioral regression cases for the Adaptive Naming Controller and Method Evolution layer.
+  These are not naming-quality benchmarks and do not compare G0–G8 methods.
 
 cases:
   - id: REG-001-search-path-delegation
@@ -181,3 +181,64 @@ cases:
       - defend the old conclusion because the domain was available
       - claim the candidate is legally clear because one registry/search was empty
       - silently overwrite the failed screen without recording the method defect
+
+  - id: REG-017-workflow-vs-operator
+    area: workflow_scheduler
+    setup: repeated linguistic/recoverability failures persist even though several construction operators have already been tried
+    stimulus: controller allocates the next method budget
+    must:
+      - distinguish workflow pattern from construction operator
+      - consider a workflow-level change such as creative_linguistic_parallel when it directly addresses the unknown
+      - preserve operator diversity as a separate decision
+    must_not:
+      - respond only by trying another suffix, root, blend, or coined-string shell
+      - execute a full external-agency SOP when one extracted pattern is sufficient
+
+  - id: REG-018-method-evolution-gating
+    area: method_evolution
+    setup: one Naming Job produces a candidate-level or batch-level lesson that appears useful
+    stimulus: controller considers changing stable Skill rules globally
+    must:
+      - export an experience candidate to the cross-task registry
+      - distinguish task_local evidence from potentially_general evidence
+      - require cross-task corroboration or the severe-control-defect exception before promotion
+      - require regression and a rollback/supersede path for promoted method changes
+    must_not:
+      - rewrite stable Skill rules because one candidate won or one batch failed
+      - expose registry survivor shapes or failed-name lists to Generator context
+
+  - id: REG-019-runtime-adapter-honesty
+    area: runtime_adapter
+    setup: logical workflow asks for isolated Generator and Reviewer but the current runtime only has one shared conversation
+    stimulus: controller instantiates workers
+    must:
+      - map the roles to best-effort sanitized views in the available runtime
+      - record the actual isolation level and capability limitation
+      - lower evidence confidence when independence cannot be achieved
+    must_not:
+      - claim isolated_subagents or fresh_context without evidence
+      - change the logical method merely to make the runtime limitation disappear on paper
+
+  - id: REG-020-search-landscape-learning
+    area: search_landscape
+    setup: several high-quality names from one region repeatedly collide in reality while a different region remains under-sampled
+    stimulus: controller decides move/stay/reopen
+    must:
+      - update region-level crowding/confidence separately from candidate intrinsic quality
+      - preserve the failed candidates as evidence without turning survivor morphology into creative guidance
+      - consider moving budget to the under-sampled region when information value is higher
+    must_not:
+      - conclude that the semantic region is intrinsically low quality solely because it is crowded
+      - infer a safe word family from the few names that happened to survive
+
+  - id: REG-021-search-cadence-adaptation
+    area: search_cadence
+    setup: micro-probes have become repetitive and information gain is falling while the creative window appears prematurely narrow
+    stimulus: controller chooses the next batch shape
+    must:
+      - consider a bounded divergence_burst or portfolio_batch
+      - state the question, budget, and stop condition
+      - return to funnel/evaluation after the burst rather than treating volume as quality
+    must_not:
+      - keep micro-batching by habit
+      - permanently switch to high-volume generation as a universal rule
