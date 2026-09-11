@@ -6,15 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 52
+  snapshot_version: 53
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v51 保存 morphotype preference probe 设计。
-    本快照记录第一轮成熟品牌锚点探测结果：Owner 对所展示的多种成熟品牌形态均无明显违和或排斥，
-    因而只能支持“当前无明显 morphotype 禁区”，不能支持“所有 morphotype 同等偏好”；品牌成功/熟悉度 halo 被确认是主要混杂因素。
-    完整历史候选、现实证据与旧轮次继续由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v52 保存成熟品牌 morphotype probe 结果。
+    本快照记录 Owner 主动给出的更深层 expression / affective preference：总体偏向稳重、和谐、稳定、可靠；年轻可以，但希望是“年轻又靠谱”。
+    R/C/O 首字母带来安心感被保留为低置信声音/字母信号，不升级为规则。完整历史由 Git history 与 Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -22,14 +21,22 @@ constraint_registry:
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching; acceptable spoken and spelling recovery, source_type: owner_explicit}
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
-    - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
+    - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred, source_type: owner_explicit}
     - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists, source_type: owner_explicit}
-    - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: novelty may increase but intrinsic/reality/domain gates remain unchanged, source_type: owner_explicit}
-    - {id: PREF-MORPHOTYPE-DISCOVERY, statement: Owner wants exposure to materially different name forms to discover broad category preference rather than constrain search to coinage or compounds, source_type: owner_explicit}
-    - id: PREF-MORPHOTYPE-OPENNESS
-      statement: Owner showed no obvious rejection of any mature-brand morphotype in the first reference-anchor probe; treat as openness/no-clear-taboo, not as equal preference across classes.
-      source_type: owner_observed
-      confidence: medium
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no obvious broad morphotype taboo from mature-brand probe; do not infer equal preference, source_type: owner_observed, confidence: medium}
+    - id: PREF-EXPRESSION-STABLE-MODERN
+      statement: Owner appears to prefer a stable, harmonious, reliable identity character; youthfulness is welcome when it still feels dependable and composed rather than flimsy or trend-chasing.
+      shorthand: reliable_youth / stable_modern / harmonious_confidence
+      source_type: owner_explicit_self_report
+      confidence: medium_high
+      stability: emerging
+      observed_at: 2026-09-11
+    - id: PREF-INITIAL-RCO
+      statement: Owner reports R/C/O initial letters often feel more reassuring/stable at first glance, but explicitly says this is not absolute and may be a surface correlate rather than a true causal preference.
+      source_type: owner_explicit_self_report
+      confidence: low_medium
+      stability: one_off_emerging
+      usage: observe_only_not_generation_rule
       observed_at: 2026-09-11
 
 mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
@@ -38,67 +45,61 @@ owner_feedback:
   - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
   - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise feels younger and semantically acceptable but too long/multipart.}
-  - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable, but another compound-like form does not reveal broad form preference.}
-  - id: OF-MORPHOTYPE-PROBE-03
-    signal: preference_probe_result
-    statement: Owner reports that all mature-brand examples across lexical, coined, phrase/compound, non-English, acronymic and symbolic categories feel harmonious/acceptable with no obvious违和感.
+  - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable.}
+  - id: OF-EXPRESSION-01
+    signal: owner_expression_preference
+    statement: >-
+      Owner says R/C/O-starting names often feel steadier and more reassuring, though not absolutely. More importantly, Owner may generally prefer stable, harmonious, dependable character.
+      Youthfulness is acceptable when it feels reliable: OpenAI and Apple are cited as examples of “young but trustworthy/stable,” while Owner explicitly notes that company culture and product experience may be contaminating those impressions.
     interpretation:
-      - supports_no_clear_morphotype_taboo
-      - does_not_support_equal_preference
-      - mature_brand_success_and_familiarity_halo_likely_reduces_discrimination
-      - next_probe_should_use_unfamiliar_neutral_matched_examples
+      - deeper_signal_may_be_expression_not_morphotype
+      - stable_harmonious_reliable_is_more_plausible_than_specific_initial_letter_rule
+      - reliable_youth_is_preferred_over_fragile_or_fad_like_youth
+      - OpenAI_Apple_examples_are_confounded_by_brand_culture_product_experience
+      - RCO_initial_signal_requires_neutral_testing_before_use
 
-search_control:
-  mode: morphotype_preference_probe
-  search_cadence:
-    mode: validation_only
-    target: reduce remaining morphotype preference uncertainty with unfamiliar neutral anchors
-    stop_condition: enough category-level signal exists to rebalance formal name search, or second probe again shows broad openness and low discriminability
-  generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, claim_policy: sanitized logical briefs only; no literal blindness claim}
-  finalist_template_use: prohibited
-  reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
-
-morphotype_landscape:
-  purpose: distinguish semantic/search diversity from Owner-visible identity-form diversity
-  classes:
-    - {id: MT-LEXICAL-SINGLE, description: single existing word or semantic transfer, owner_visible_coverage: reference_probe_seen_no_rejection}
-    - {id: MT-PHRASE, description: natural phrase/proposition, owner_visible_coverage: high_current_candidates_plus_reference_probe}
-    - {id: MT-DYAD, description: two familiar words in deliberate relation/tension, owner_visible_coverage: medium_current_candidates}
-    - {id: MT-TRANSPARENT-COMPOUND, description: fused or compounded full words, owner_visible_coverage: medium_current_candidates}
-    - {id: MT-BLEND, description: clipped/blended source forms creating a new word, owner_visible_coverage: reference_probe_seen_no_rejection}
-    - {id: MT-ROOT-DERIVED, description: classical/other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient_neutral_probe}
-    - {id: MT-OPAQUE-COINAGE, description: sound-first/low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: reference_probe_seen_no_rejection}
-    - {id: MT-NONENGLISH-LEXICAL, description: intact/lightly adapted non-English lexical identity with global usability, owner_visible_coverage: reference_probe_seen_no_rejection}
-    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity if independently brandable, owner_visible_coverage: reference_probe_seen_no_rejection}
-    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity when orally recoverable/domain-compatible, owner_visible_coverage: reference_probe_seen_no_rejection}
+expression_profile:
+  status: activated
+  reason: Owner provided direct affective/personality evidence that may change search allocation more than morphotype preference alone
+  desired_axes:
+    stability: high
+    harmony: high
+    reliability: high
+    modernity: medium_high
+    youthfulness: allowed_positive_if_reliable
+    trendiness: low_preference_if_it_reduces_trust
+    heaviness_or_old_institutional_feel: not_required
+  unresolved_axes:
+    - whether stability comes from phonetics/orthography or post-use brand familiarity
+    - whether R/C/O initials contribute independently after unfamiliarity controls
+    - how much compactness interacts with dependable-modern character
+  use_policy:
+    - preference_not_gate
+    - do_not_force_R_C_O_initials
+    - do_not_use_OpenAI_or_Apple_as_generation_templates
+    - use neutral unfamiliar examples to separate intrinsic name affect from brand halo
 
 preference_probe_design:
-  status: active_second_stage
-  objective: learn broad form preference, not choose a winner or define universal quality
-  first_stage_result:
-    source: mature_brand_references
-    result: no_clear_rejection_across_classes
-    limitation: high_brand_success_and_familiarity_halo
-  second_stage:
-    source: generated_or_curated_unfamiliar_neutral_examples
-    candidate_status: preference_probe_only_not_naming_candidates
+  status: redirected_from_morphotype_only_to_expression_plus_form
+  first_stage_result: mature brand anchors showed no broad morphotype rejection but poor discrimination due familiarity/success halo
+  next_probe:
+    source: unfamiliar_neutral_non_candidate_examples
+    objective: distinguish intrinsic expression preference from brand halo while retaining some morphotype variation
     design:
-      - matched_quality_across_classes
-      - minimize obvious semantic/industry/logo confounds
-      - compare feel, compactness, pronounceability and identity character
-      - allow all_ok / no_preference responses
-      - do not reality-screen these samples unless later promoted independently as real candidates
+      - contrast reliable_youth vs playful_fragile_youth vs traditional_heavy_stability using unfamiliar matched names
+      - vary initial letters so R/C/O effect can be observed without making it the main axis
+      - preserve multiple morphotypes to avoid conflating expression with construction form
+      - samples are preference-probe-only and do not enter candidate pool or Generator context
+      - allow all_ok / no_clear_preference responses
   interpretation:
-    - no-clear-taboo may justify broad portfolio search
-    - positive class signal may rebalance budget only
-    - do not convert probe samples into generation templates
+    - update search budget and expression profile only
+    - do not convert letter initials or examples into hard constraints/templates
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  hypothesis_id: HYP-004
-  latest_refinement: mature-brand references are efficient for detecting obvious rejection, but may be weak for discriminating positive preference because successful-brand familiarity normalizes many forms; a two-stage probe may be superior.
+  morphotype_hypothesis_id: HYP-004
+  stable_skill_note: current Skill already supports expression_profile; this new evidence primarily tests activation/timing and preference-probe design rather than proving a new stable module is needed
   stable_skill_rewrite_allowed_now: false
-  promotion_requirements_remaining: [regression_case, counterevidence_review, preferably_second_real_naming_job_or_severe_defect_contract]
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -109,42 +110,43 @@ candidates:
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
 rounds:
-  - {id: RND-081, action: owner_morphotype_feedback_ingest_and_method_gap_diagnosis, generated_count: 0, result: HYP-004_exported}
-  - {id: RND-082, action: owner_preference_probe_design_refinement, generated_count: 0, result: mature_brand_anchor_probe_selected}
-  - id: RND-083
-    action: mature_brand_morphotype_reference_probe
+  - {id: RND-083, action: mature_brand_morphotype_reference_probe, generated_count: 0, result: no_clear_morphotype_taboo_brand_halo_high}
+  - id: RND-084
+    action: owner_expression_signal_ingest_and_probe_redesign
     generated_count: 0
     findings:
-      - Owner reports all shown mature-brand form classes feel harmonious/acceptable
-      - no broad morphotype can currently be excluded from search on preference grounds
-      - mature successful brands have insufficient discrimination for positive preference because familiarity/success halo is strong
-      - next probe should use unfamiliar neutral matched examples and remain separate from formal candidate generation
+      - Owner may be more sensitive to affective identity character than to morphotype category itself
+      - stable/harmonious/reliable is the strongest current expression signal
+      - “young but reliable” is acceptable and potentially attractive
+      - R/C/O initial preference is retained as low-confidence observational signal only
+      - famous-brand examples cannot isolate intrinsic name affect because culture/product experience contaminate perception
+      - existing Skill expression_profile is now explicitly activated; no stable Skill rewrite is justified yet
 
 current_state:
   finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
-  search_mode: morphotype_preference_probe
+  search_mode: owner_expression_probe
   search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: Does Owner actually prefer some form classes when familiarity/success halo is removed, or is form preference genuinely broad and weak relative to name-level quality?
+  biggest_unknown: Is Owner's strongest intrinsic naming preference a stable-harmonious-reliable / reliable-youth expression profile, and does that preference persist when famous-brand halo is removed?
   blockers: []
-  information_gain: medium_high_from_neutral_unfamiliar_probe
+  information_gain: high_from_neutral_expression_probe
   owner_review_needed_now: true
 
 next_action:
-  action: run_neutral_unfamiliar_morphotype_probe
-  target: distinguish_broad_true_openness_from_mature_brand_halo
+  action: run_neutral_expression_plus_morphotype_probe
+  target: isolate_reliable_youth_and_stable_harmony_signal_from_brand_halo_and_surface_form
   rationale: >-
-    First-stage mature-brand anchors showed no rejection but poor discrimination. Use unfamiliar, non-candidate, quality-matched examples across several form classes to test whether any genuine category preference emerges.
-  triggered_by: [OF-MORPHOTYPE-PROBE-03]
-  expected_information_gain: medium_high
+    Owner's latest self-report provides a stronger affective hypothesis than the first morphotype probe. Use unfamiliar, non-candidate, quality-matched examples to separate intrinsic expression preference from famous-brand culture/product halo, while retaining form diversity and observing (not enforcing) R/C/O initial effects.
+  triggered_by: [OF-EXPRESSION-01]
+  expected_information_gain: high
   requires_owner: true
   owner_gate_classification: preference_discovery
 
 stop:
-  status: pause_for_second_stage_preference_probe
-  reason: mature-brand reference probe established openness but not preference; a neutral unfamiliar probe is the next highest-information action
+  status: pause_for_expression_probe
+  reason: owner expression preference is now the largest decision-relevant unknown; further formal candidate generation before separating intrinsic affect from brand halo risks inefficient search allocation
   unresolved:
-    - HYP-004 requires regression/counterevidence before stable Skill promotion
+    - HYP-004 still requires regression/counterevidence before stable Skill promotion
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
