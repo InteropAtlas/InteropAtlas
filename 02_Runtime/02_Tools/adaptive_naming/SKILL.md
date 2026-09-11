@@ -1,10 +1,10 @@
 ---
 name: adaptive-naming
 description: 自适应品牌、组织、项目与产品命名。先建立目标、价值模型、名称职责与真实边界，再由 Controller 按当前最大未知动态调度研究、生成、评价、现实验证与救援模块。
-version: 0.3.2
+version: 0.3.3
 ---
 
-# Adaptive Naming Skill v0.3.2
+# Adaptive Naming Skill v0.3.3
 
 ## 1. 定位：薄核心，而不是巨型流程
 
@@ -44,6 +44,7 @@ version: 0.3.2
 16. 不为了“完整”机械加载所有模块；只执行能显著降低当前关键不确定性的工作。
 17. **模块清单不是流程清单。** Optional module 必须由 trigger / biggest unknown / expected decision value 激活，而不是因为“存在这个模块”就执行。
 18. Skill 结构修改若影响既有控制行为，应优先用 `evals/` 中对应 regression case 检查是否复发已知缺陷；Regression Evals 不等于重新启动方法 benchmark。
+19. **Reality negative claim 必须有查询合同。** 单个 query 没看到结果，不得升级为 `no material collision found`；held/promising 候选必须满足 Reality Screening Contract，并在 Owner Exposure / finalist 前 freshness recheck。
 
 ---
 
@@ -141,6 +142,7 @@ Controller 每次准备加载 reference / optional module 前，先根据**当�
 | 已知 value / method，但缺构词 operator 或变形手段 | `generate` / `open_rescue_branch` | `word-formation-strategies.md` | selected strategy / operator contract |
 | 多种构词方式仍反复使用同一薄弱词汇材料 | `territory_research` | `name-job-decision-and-research.md` | material map + selected positive material |
 | 已观察到重复失败，但不确定它属于候选、方法、搜索控制还是评价过程 | `diagnose` | `diagnosis-and-next-action.md` | diagnosis + state change + next action |
+| 候选准备进入 held/promising/finalist，或旧 reality 结论需要 recheck | `verify_reality` | `reality-screening-contract.md` | auditable exact/near/public-TM screen + freshness state |
 | shortlist 价值高且 reviewer 可能看到排名、Owner reaction 或 reality 结果 | `apply_decision_hygiene` | `name-job-decision-and-research.md` | reviewer blindness / independent-pass contract |
 | 强候选主要因陌生感、第一印象或记忆不确定 | `temporal_evaluation` | `name-job-decision-and-research.md` | raw / informed / delayed observations |
 | 外部用户 / 专家证据可能改变具体决策 | `define_validation_contract` | `name-job-decision-and-research.md` | respondent + question + admissible-inference contract |
@@ -293,7 +295,7 @@ Rescue 是显式 exploitation exception：必须记录 seed、trigger、allowed 
 
 ### C. Reality Feasibility
 
-单独记录 exact / near identity、domain、trademark-oriented risk、必要 namespace 与查询不确定性。
+单独记录 exact / near identity、domain、trademark-oriented public signal、必要 namespace 与查询不确定性。
 
 ### Decision Hygiene
 
@@ -309,15 +311,24 @@ Rescue 是显式 exploitation exception：必须记录 seed、trigger、allowed 
 
 ## 10. 现实验证合同
 
-现实可用性必须使用当前 runtime 的真实工具，不凭记忆断言。
+Reality identity / public trademark signal 按需读取：
 
-Reality identity 优先 exact + near-name，记录 query、对象类型、相关程度、source、observed_at、observation / uncertainty。
+[`references/reality-screening-contract.md`](references/reality-screening-contract.md)
+
+关键要求：
+
+- `held / promising` 至少完成一次可审计 Level-1 exact screen；
+- 不允许用单个空搜索结果写 `no_material_collision_found`；
+- promising 以上候选按需要补 near-name / spelling-recovery / 高邻接类别检查；
+- Owner Exposure / finalist 前必须 freshness recheck；
+- 显眼的公开 active / registered trademark signal 必须记录，但不冒充正式法律 clearance；
+- 现实碰撞只更新 feasibility，不自动降低 intrinsic quality。
 
 Domain 使用 IA 方法：
 
 [`Domain Availability Verification Method v0.1`](../../../03_Evolution/01_Research/01_Prior_Art/Naming_Methods/Execution/domain-availability-verification-method-v0.1.zh-CN.md)
 
-`unknown / error` 永远不能变成 `available`。
+`unknown / error` 永远不能变成 `available`。Domain availability 不得替代 identity / public-TM screening。
 
 若做外部用户 / 专家研究，先定义 Validation Contract；不要简单把“你喜欢哪个”当成证据。
 
@@ -412,8 +423,9 @@ Diagnose + Update State
 - `search_path_delegation`
 - `owner_boundary_false_positive`
 - `value_score_smuggling`
+- `reality_screen_false_negative`
 
-先诊断，再优化；候选失败、方法失败、搜索控制失败、评价过程失败必须区分。
+先诊断，再优化；候选失败、方法失败、搜索控制失败、评价过程失败、现实验证失败必须区分。
 
 ---
 
