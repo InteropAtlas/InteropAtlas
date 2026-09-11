@@ -1,310 +1,160 @@
-# Organization Naming #411 · Process Review v0.1
+# 组织命名 #411 · 过程复盘 v0.1
 
-Status: process review / generation paused
+状态：过程复盘进行中；名称生成暂停。
 
-This document reviews the live Adaptive Naming Fit Test in Issue #411. It does **not** select a final name and does not restart generation. The purpose is to convert the observed search behavior, Owner feedback, integrity incidents, commercial constraints, and repeated failure modes into method-level evidence.
+本文复盘 #411 的自适应命名实测，将搜索行为、用户反馈、执行完整性事件、商业条件及反复出现的失败转为方法研究证据。本文不决定最终名称，也不恢复生成。
 
-Canonical task state: `03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml`
+当前任务状态：[organization-naming-411-state.yaml](organization-naming-411-state.yaml)。
 
----
+阅读说明：第1–13节保留首轮复盘的观察与建议，属于待验证解释；第14节修正其证据等级。中文化保留原文件路径及历史，不把翻译视为新实测。原文中“已经学到偏好原因”等确定性表述，按第14节的限定理解。
 
-## 1. What happened
+## 1. 发生了什么
 
-The live job produced several distinct learning phases rather than one linear naming funnel.
+这次真实任务经历了多个学习阶段，而非一次线性的筛选过程。
 
-### 1.1 Semantic anchoring failure
+### 1.1 语义锚定失败
 
-After the organization philosophy was emphasized, generation repeatedly surfaced literal mission vocabulary such as Commons-related constructions. The Controller had correctly understood that meaning mattered, but operationalized `meaning-first` as `mission-keyword-first`.
+强调组织哲学后，生成结果反复采用使命的字面词汇。控制者（Controller）将“意义优先”落实成“使命关键词优先”。
 
-Diagnosis: `semantic_mode_collapse / incumbent-style semantic anchoring`.
+当时诊断为语义模式坍缩（semantic_mode_collapse）。启示是：保留意义不等于把使命词汇直接写入名字；生成前应提取关系、转化及命名启示。
 
-Key lesson: preserving meaning does not require lexicalizing the mission. The Mission / Value Model must be abstracted into relations, transformations and naming implications before generation.
+### 1.2 语义不同，表面形态仍然集中
 
-### 1.2 Surface-form collapse despite semantic diversity
+隔离字面使命词汇后，语义有所变化，但面向用户的名称仍集中于自然英语关系短语或复合结构。含义不同，不代表名称形态不同。
 
-After literal mission tokens were quarantined, the semantic content improved but many Owner-visible candidates converged on natural-English relational phrases / compounds. The meanings differed while the identity architecture did not.
+当时诊断为形态模式坍缩与用户可见形态覆盖不足。应区分语义多样性、搜索方式多样性和名称形态多样性。
 
-Diagnosis: `morphological_mode_collapse / Owner-visible morphotype undercoverage`.
+### 1.3 商业条件成为正式门槛
 
-Key lesson: semantic/search diversity is not the same as visible naming-form diversity.
+记录显示：商业母组织需要能够实际取得完全匹配的 .com，并具备良好的商标注册前景；.org 调整为主要服务开源、公益项目的次要域名。已注册的 .com 如有现实可行的收购路径，不自动淘汰。
 
-### 1.3 Commercial constraints became first-class gates
+启示是：域名和商标证据与名称本体质量分开。现实筛查可以排除候选，但不应为了直接可注册而把创作挤向生硬字符串。这些是已记录条件，原始授权的可追溯性仍受第14节限定。
 
-The Owner clarified that the commercial umbrella organization ultimately needs practical control of the exact `.com` and good trademark registrability. `.org` became secondary, mainly for open-source/public-interest projects. A registered `.com` is not automatically fatal if realistic aftermarket acquisition is possible.
+### 1.4 正向参考：Multifinality
 
-Key lesson: domain and trademark evidence must be separated from intrinsic name quality. Reality filtering may remove names but must not become the hidden generator that shapes all creative output toward awkward directly-available strings.
+记录中的正向反应是：虽然这是已有概念，仍有完整品牌的观感。后续对 Transindividuality 的比较显示，概念深度不能抵消全部视觉和口语负担。
 
-### 1.4 Positive reference: Multifinality
+首轮复盘将原因解释为“概念可形成品牌”，而非某个后缀、学术语体、长度或系统论术语。这个原因属于偏好解释，不能冒充已经验证的用户原话。
 
-`Multifinality` produced a strong positive Owner reaction because it looked and felt like a coherent brand despite being an established concept. The later `Transindividuality` probe showed that conceptual depth does not remove the practical upper bound on visual/spoken burden.
+### 1.5 因商业可拥有性提高自造词路线的预算
 
-Key lesson: the positive signal was **conceptual brandability**, not the suffix, academic register, length, or systems terminology itself.
+记录显示，用户后来降低已有词的优先级，倾向自造或半自造专名。该选择改变搜索分配，但不免除语义基础和成熟身份质量要求。
 
-### 1.5 Coined-name route promoted for trademark ownability
+“自造词”在此是任务内商业策略，不等于可以生成空洞的音节串，也不代表自造词普遍优于已有词。
 
-The Owner later explicitly deprioritized existing words because coined / semi-coined names generally provide better trademark ownability for a commercial umbrella brand. This changed the search allocation, but not the rule that coined names still need semantic backbone and mature identity quality.
+### 1.6 Merosophy 成为当时最强的自造词参考
 
-Key lesson: `coined` is a commercial strategy preference here, not permission to generate empty SaaS-like syllable strings.
+记录显示用户总体认为可用，主要顾虑是中文使用者的发音负担。
 
-### 1.6 Merosophy became the strongest coined reference
+首轮复盘据此推测，语义密度与成熟身份感可能超过纯粹的发音简单性。此排序仅作为任务内假设，不是一般命名原则。
 
-`Merosophy` was accepted as broadly usable with no major intrinsic objection. The main weakness identified by the Owner was Chinese-speaker pronunciation friction.
+### 1.7 较大展示批次提供了比较反馈
 
-Key lesson: semantic density and mature identity can outweigh perfect phonetic simplicity. Cross-language pronounceability is important, but it is a secondary optimization once a name has enough substance.
+用户要求每次看到约5–8个已筛查候选。记录中的比较结果是：原参考项仍明显领先，Coemera 仅获得较弱正向反应，其他候选缺乏吸引力。
 
-### 1.7 Larger Owner-visible batches improved feedback efficiency
+用户注意力也是成本。并排比较可能增加信息，但必须先有合格候选；数量不能成为凑数指标。尚未进行用户时间成本的对照测量。
 
-The Owner explicitly requested 5–8 screened candidates per review turn rather than one-name-at-a-time exposure. A larger batch produced stronger comparative evidence: `Merosophy` remained clearly stronger; `Coemera` received only a weak-positive signal; most smoother coinages produced no pull.
+### 1.8 对正向参考的形态过拟合再次出现
 
-Key lesson: Owner interaction itself has a budget. Candidate batching can increase information gain, but only when quality is screened first. Batch size must not become a quota that encourages filler.
+控制者尝试从参考项学习后，候选继续集中于相近古典词根、学术化尾缀及类似组合结构。用户指出整批相似。
 
-### 1.8 Repeated morphology overfit to Merosophy
+当时诊断为对正向参考的过拟合（controller_overfit_to_positive_reference）：可能复制了成功样例的外形，而没有正确提取喜欢它的原因。批次集中有记录支持，具体原因仍需证据区分。
 
-The most important new incident occurred after the system attempted to learn from the Merosophy success. The Controller correctly inferred that semantic density mattered, but then repeatedly generated names from similar classical roots, especially `mero-/noe-/poie-`, abstract learned suffixes, and `X + learned ending` structures.
+## 2. 当前 Skill 已有的能力
 
-The Owner detected that the entire batch looked structurally similar and explicitly called out the repetition.
+v0.4.0 已包含或支持：幸存候选不可成为隐含模板；工作流与构词算子分开；识别语义及形态坍缩、参考项锚定、材料贫乏；现实幸存形态不直接回流到生成；使用正向生成简报，并将排除项留给控制者。
 
-Diagnosis: `controller_overfit_to_positive_reference`.
+诊断词汇已覆盖 semantic_mode_collapse、morphological_mode_collapse、scheduler_monoculture、territory_material_starvation、incumbent_anchoring、rescue_overfit。明确的“用户可见形态覆盖”机制仍在经验假设中，不能全部算作已实施规则。
 
-This is materially different from merely generating a few near variants. The system extracted the **surface morphology of the positive example** instead of the **latent reasons the example was liked**.
+首轮认为主要缺口在执行落实；第14节将此降为暂定解释。已有工具和术语，不证明方法整体充分。
 
----
+## 3. 方法缺口假设：事后解释强于展示前预防
 
-## 2. What the current Skill already gets right
+即使 Skill 已警告形态坍缩，用户仍多次先于控制者发现问题。因此建议试验批次泛化与多样性审查（Batch Generalization / Diversity Audit），检查整批是在探索目标品质，还是重复正向参考的形态。
 
-The failure is not primarily caused by a missing word-formation toolbox.
+单项质量通过不能替代整批判断。但明确、有预算的同族探索可以合理集中，不能一律拦截。
 
-Adaptive Naming v0.4.0 already states that:
+## 4. 改进建议 A：分解正向参考
 
-- survivor / finalist names should not become implicit templates;
-- workflow pattern and construction operator are different layers;
-- semantic/search diversity must not be confused with Owner-visible morphotype diversity;
-- incumbent anchoring and morphological mode collapse are integrity failures;
-- multiple methods that still reuse the same material can indicate territory-material starvation;
-- reality survivor shapes must not feed back into generation;
-- positive Generation Briefs and Controller-only exclusions should be used under same-context constraints.
+把正向反应拆为候选原因，例如语义密度、成熟身份感、克制的巧思、解释连贯性、组织尺度、记忆性和可接受的读写负担；同时记录具体词根、前后缀、音节轮廓、语言来源、语体、长度和字形等表面特征。
 
-The current diagnostic reference already contains `semantic_mode_collapse`, `morphological_mode_collapse`, `scheduler_monoculture`, `territory_material_starvation`, `incumbent_anchoring`, and `rescue_overfit`.
+首轮建议潜在品质可影响一般探索，表面特征需另有证据才能深挖。二次审查补充：两类特征都可能是真实偏好，都应区分直接表述与推断；抽象品质并不天然更可信。
 
-Therefore the principal gap is **not conceptual vocabulary**. It is operational enforcement.
+保留机器标识 positive_reference_abstraction，作为待验证机制。
 
----
+## 5. 改进建议 B：批次多样性合同
 
-## 3. Main method gap: post-hoc diagnosis is stronger than pre-exposure prevention
+展示前记录构词结构、语义机制、材料来源、语音和字形特征、解释模式，以及与正向参考的距离。目标是发现隐性集中，不是最大化一个多样性分数。
 
-The current system is good at explaining why a batch collapsed **after** the collapse becomes visible. In #411, the Owner detected morphology concentration more than once even though the stable Skill already warned against it.
+拟议检查包括：
 
-This suggests a missing control layer between generation and Owner exposure:
+1. 单一构词结构占据主导时，应有明确的定向探索假设。
+2. 广泛探索应尝试保留推测的目标品质，同时显著改变表面形态。
+3. 相同词根、后缀机制配上不同解释，不自动算作结构多样性。
+4. 相同命名语法的不同拼写，不自动算作独立探索。
+5. 用户要求广泛探索时，结构高度同质的批次应先由控制者处理。
 
-> **Batch Generalization / Diversity Audit**
+v81 的“至少五类、每类最多两个”只适合作为本任务测试情境，不是永久通用常数。还需比较生成、筛选及展示各阶段，定位集中发生在哪里。
 
-The audit should answer whether a batch genuinely generalizes the desired qualities or merely copies the morphology of a recent positive reference.
+## 6. 改进建议 C：正反馈后的泛化测试
 
-A batch should be blocked from Owner exposure when it passes individual-candidate quality checks but fails batch-level diversity / reference-distance checks.
+待验证的问题是：能否在明显改变样例外形后，仍获得用户认可的品质？
 
----
+可以用结构差异较大的测试材料检验同一偏好假设。如果换形态后质量下降，应重新考虑偏好解释、生成能力及筛选影响；单次下降不能独自证明过拟合。
 
-## 4. Proposed improvement A · Positive Reference Abstraction
+这使“过拟合”成为可检验的解释，而不只是比喻。
 
-When an Owner likes a candidate, the Controller should explicitly split the evidence into two classes before using it:
+## 7. 改进建议 D：候选质量与批次质量分开
 
-### Latent positive properties
+一个批次可能每个名称都有合理解释，却不能提供有价值的新探索。批次层可观察形态、词根、后缀、材料、解释模板、语音及参考项相似度，以及相对上一批的信息增益。
 
-Examples:
+可区分“单项质量通过、批次多样性失败”和“单项质量参差、但有高信息价值的探索”等结果。七个可解释变体不等于七次独立探索。分类与相似性仍需语义审查，不能仅凭自填标签证明。
 
-- semantic density;
-- mature standalone identity;
-- restrained cleverness;
-- coherent explanation;
-- institutional scale;
-- memorable structure;
-- acceptable visual/spoken load.
+## 8. 改进建议 E：用户审阅节奏也是可调变量
 
-### Surface properties that must **not** automatically become search directives
+用户要求较大批次，是本任务证据。通用方法不固定5–8，可试用 owner_review_cadence：
 
-Examples:
+- 小型探测：只解决一个明确未知时，使用少量样例。
+- 比较批次：并排比较有助于理解偏好时，展示若干已筛查候选。
+- 暂不展示：证据、质量或当前探索目的尚不支持展示。
 
-- specific roots;
-- suffixes;
-- prefix family;
-- syllable contour;
-- language of origin;
-- academic/classical register;
-- word length;
-- orthographic shape.
+这是对搜索节奏的扩展；尚不能宣称已经测得效率提升。
 
-Only latent properties may flow into broad exploration by default. Surface properties require independent evidence before exploitation.
+## 9. 改进建议 F：商业可拥有性不代替创意质量
 
-This can be treated as a `positive_reference_abstraction` step.
+在有域名、商标条件的任务中，可拥有性可以影响搜索区域预算；现实验证仍与名称本体判断分开。直接注册空缺不能当作好名字的证据，已注册域名也可能通过收购取得，低质量字符串不会因为多个后缀可用而变好。
 
----
+相关原则已有基础，本次可贡献回归情境。不能把“记录写已筛查”误当作完整查询证据。
 
-## 5. Proposed improvement B · Batch-level diversity contract
+## 10. 改进建议 G：跨语言发音的任务内权衡
 
-Before a 5–8 candidate Owner-visible batch is exposed, the Controller should record at least:
+首轮根据参考项与后续比较，建议依次考虑最低读写恢复门槛、语义及身份质量、跨语言发音优化、阶段所需的现实验证。
 
-- construction architecture;
-- semantic mechanism;
-- material provenance / source family;
-- phonological profile;
-- orthographic profile;
-- explanation pattern;
-- distance from current positive reference(s).
+这是本次偏好解释，不是固定流水线。不得默认发音永远次于语义，也不得以发音优化为由让全部生成趋同。具体排序需有任务来源。
 
-The purpose is not to maximize diversity numerically. The purpose is to detect hidden monoculture.
+## 11. 现在能记录什么，哪些还不能推广
 
-A practical pre-exposure contract could be:
+现在可以记录：反复出现的批次集中；正向参考可能被过度模仿；需要将用户反馈与原因解释分开；需要批次层和阶段间观察；用户审阅节奏可以调整；留痕不足限制归因。
 
-1. no single construction architecture dominates without an explicit exploitation hypothesis;
-2. if a positive reference exists, at least part of the batch must preserve its **latent virtues** while changing its surface morphology substantially;
-3. different semantic explanations do not count as structural diversity if the strings use the same root/suffix machine;
-4. different spellings do not count as diversity if the same naming grammar generated them;
-5. if the Owner asked for broad exploration, the Controller should reject a structurally homogeneous batch before presentation.
+尚无充分依据推广为通用规则的包括：固定五类结构、每类最多两个、固定构词清单、某一参考项代表普适品质、自造词普遍优于已有词、统一5–8个展示，以及统一的语义与发音排序。
 
-The exact class count should remain adaptive. The temporary `five materially distinct classes / max two per class` rule from snapshot v81 is useful as a regression test, not necessarily a permanent universal constant.
+## 12. 建议的方法演化路径
 
----
+1. 将观察及假设写入经验登记表，保留反证与不确定性。EXP-009 / HYP-005 已存在，无需重复创建。
+2. 优先补证据定位，再将正向参考后的克隆批次、语义多样但形态同质、域名可用但质量弱、发音优化损害其他品质等转为测试情境。
+3. 增加允许合理同族探索的反例，并检查筛选引起的集中。
+4. 对照现有控制与拟议控制，保存实际输入、输出和评审结果；缺少历史输入时明确标合成测试。
+5. 回归结果只是晋升依据之一，仍须遵守跨任务证据或严重控制缺陷例外、回滚与审查条件。
 
-## 6. Proposed improvement C · Generalization test after positive feedback
+## 13. 首轮结论及证据限定
 
-Positive feedback should trigger a question analogous to model generalization:
+首轮提出：系统可能重复成功样例的表面形态，而没有学到成功原因，下一步应验证泛化控制。
 
-> Can the system reproduce the **reason for success** without reproducing the **form of the successful example**?
-
-A useful test batch would deliberately create several structurally distant candidates that all target the same latent qualities.
-
-If quality collapses as soon as morphology changes, the system has not learned the preference; it has overfit the example.
-
-This gives `overfitting` a precise operational meaning inside Adaptive Naming rather than using it only as a metaphor.
-
----
-
-## 7. Proposed improvement D · Separate candidate quality from batch quality
-
-Current evaluation is heavily candidate-centric. #411 shows that a batch may contain individually defensible names while still be poor as an exploration artifact.
-
-Add a distinct batch-level object with signals such as:
-
-- morphotype concentration;
-- shared-root concentration;
-- shared-suffix concentration;
-- material-source concentration;
-- explanation-template concentration;
-- phonological similarity;
-- reference similarity;
-- information gain vs previous batch.
-
-A batch can therefore be:
-
-- `candidate_quality_pass + batch_diversity_fail`, or
-- `candidate_quality_mixed + high_information_probe`, etc.
-
-This prevents the Controller from treating 7 individually explainable variants as 7 independent explorations.
-
----
-
-## 8. Proposed improvement E · Owner review throughput as a controlled variable
-
-The Owner requested larger batches because one-at-a-time presentation wasted time. This is useful task evidence.
-
-The stable method should not hard-code `5–8` globally, but could add an `owner_review_cadence` state variable:
-
-- micro probe: 1–3 only when a single uncertainty is being tested;
-- comparative batch: typically several screened candidates when preference learning benefits from side-by-side comparison;
-- no exposure: when the batch fails diversity/intrinsic/reality readiness.
-
-This extends the existing search cadence concept to human review cadence.
-
----
-
-## 9. Proposed improvement F · Commercial ownability without availability-shaped creativity
-
-#411 repeatedly showed the temptation to prefer strings simply because `.com` was free. The task correctly resisted this, but the pressure recurred.
-
-For tasks with commercial trademark/domain hard gates:
-
-- ownability can influence **which construction regions receive budget**;
-- domain / trademark checks remain post-generation or post-intrinsic-screen;
-- direct-registration vacancy must not become a proxy for name quality;
-- a strong registered-domain name may remain viable through aftermarket acquisition;
-- a weak coined string does not become stronger because both `.com` and `.org` are available.
-
-This is already conceptually present in v0.4.0, but #411 provides strong live regression evidence.
-
----
-
-## 10. Proposed improvement G · Cross-language pronounceability as an optimization layer
-
-Merosophy showed that a strong name may survive despite moderate Chinese pronunciation friction. The later batch showed that optimizing smoothness too early can produce semantically thin names.
-
-Recommended ordering:
-
-1. minimum recoverability gate;
-2. intrinsic semantic / identity quality;
-3. cross-language pronounceability optimization;
-4. reality / ownability validation according to task stage.
-
-Do not let cross-language smoothness become a generator monoculture unless the Owner explicitly upgrades it to a hard requirement.
-
----
-
-## 11. What should change now vs later
-
-### Safe to record now
-
-- repeated positive-reference overfit is a real #411 control failure;
-- candidate-level diversity is insufficient; batch-level diversity needs explicit representation;
-- positive feedback should be abstracted into latent virtues vs surface morphology;
-- Owner review cadence is a legitimate adaptive variable;
-- cross-language pronounceability should not outrank semantic substance by default.
-
-### Not yet justified as a universal stable rule
-
-- exactly five architecture classes;
-- maximum two candidates per class;
-- any fixed list of construction families;
-- Merosophy-like semantic density as a universal naming preference;
-- coined words as universally superior to existing words;
-- 5–8 names as the universal batch size.
-
-Those are task-specific or regression scaffolds until reproduced on another Naming Job.
-
----
-
-## 12. Recommended method-evolution path
-
-1. Add a new Experience Registry entry for repeated positive-reference morphology overfit.
-2. Add a method hypothesis for `positive_reference_abstraction + batch_generalization_audit`.
-3. Create regression cases using #411 incidents:
-   - strong positive candidate followed by structurally cloned batch;
-   - semantically diverse but morphologically homogeneous batch;
-   - domain-available weak coinages vs stronger intrinsically good names;
-   - pronunciation optimization that reduces semantic quality.
-4. Run the regression against v0.4.0 plus the proposed control.
-5. Only after regression success decide whether to promote the mechanism into a stable Skill revision.
-
----
-
-## 13. Core conclusion
-
-The most important finding from this naming run is not a new construction technique.
-
-It is this:
-
-> **Adaptive Naming can overfit positive Owner feedback exactly as a model overfits training data: it can reproduce the visible form of a successful example instead of learning the underlying reason it succeeded.**
-
-The next method improvement should therefore focus on **generalization control**, not on adding more generators.
-
-A stronger system should be able to say:
-
-> “I learned that the Owner values semantic density, mature identity and restrained cleverness — not that I should keep generating classical-root words that resemble Merosophy.”
-
-That is the clearest method-level lesson from #411 so far.
-
+二次审查确认该方向值得测试，但“真正喜欢的原因”仍是推断。当前最稳妥的表述是：我们记录了相对偏好和批次集中，应验证哪些品质可迁移，以及集中由哪个环节造成。完整留痕是这项验证的前提。
 
 ## 14. 二次审查：证据充分性与恢复机制（2026-09-11）
 
-本节修订前文结论的证据等级。Executor / Reviewer：OpenAI ChatGPT 当前会话；这是对既有产物的后续审查，不是原始执行重放或独立用户实验。Owner 本次授权继续整理当前状态、留痕与复盘；生成保持暂停，稳定 Skill 不在本次直接升级。
+本节修订前文结论的证据等级。执行与审查身份：OpenAI ChatGPT 当前会话；这是对既有产物的后续审查，不是原始执行重放或独立用户实验。用户本次授权继续整理当前状态、留痕与复盘；生成保持暂停，稳定 Skill 不在本次直接升级。
 
 **结论：现有记录足以描述阶段与已记录结果，不足以可靠分配失败原因或证明修复有效。** 前文“主要是执行问题”“已学到真正喜欢的原因”等表述均应按待验证解释读取。未知不能通过事后补写变成当时的事实。
 
@@ -313,7 +163,7 @@ That is the clearest method-level lesson from #411 so far.
 | 证据入口 | 已观察事实 | 可支持与不可支持的结论 |
 | --- | --- | --- |
 | [v80 快照](https://github.com/InteropAtlas/InteropAtlas/blob/f084b859293a598f9ad66f2780827ff824da7430/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | RND-130 保留七个展示候选；构词材料明显集中；批次总结称七项 .org 均可注册，而 N143 写 not_checked_in_this_snapshot | 支持批次集中和内部记录矛盾；不证明实际域名可用，也不能据此判定全部查询未执行 |
-| [v82 快照](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | 缺少 Mission/Value、Name Job、搜索地图、调度、runtime 隔离及候选现实证据的当前完整表示或精确恢复指针 | 支持恢复合同不充分；Git 历史尚在，不等于历史被永久删除 |
+| [v82 快照](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | 缺少 使命/价值、名称职责、搜索地图、调度、运行环境隔离及候选现实证据的当前完整表示或精确恢复指针 | 支持恢复合同不充分；Git 历史尚在，不等于历史被永久删除 |
 | [v59 快照](https://github.com/InteropAtlas/InteropAtlas/blob/e8fe6320d57e9e23d0f46ef1d0b77c4cdf48e90b/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | 尚有 mission_value_model、search_landscape、rounds 等字段，但内容已是摘要 | 可用于定向追溯；不能直接恢复成最新事实，尤其不能覆盖后来 .com 条件 |
 | [v40 回归回顾](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/02_Runtime/02_Tools/adaptive_naming/evals/regression-review-v0.3.3-2026-09-11.md) | 13 exercised_pass、3 not_triggered、0 fail，明确对应 v40 | 仅为历史观察，不是 v82 通过记录，不证明新增机制有效 |
 | [#411 最新复盘 checkpoint](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5635800432) | 记录暂停生成及 EXP-009/HYP-005 | 是恢复与解释来源，不等于原始用户反馈、生成输入或查询证据 |
@@ -323,16 +173,16 @@ That is the clearest method-level lesson from #411 so far.
 
 ### 14.2 对方法解释的修正
 
-- 潜在偏好与表面特征都可能是真实偏好；抽象词汇不天然更正确。保存 Owner 原始表述、Controller 假设、支持/反证与置信度，分别建模。
-- 比较生成集合、intrinsic 筛后集合、reality 筛后集合和展示集合，才能定位多样性在哪一步收缩。不得只凭最终批次归因于 Generator。
+- 潜在偏好与表面特征都可能是真实偏好；抽象词汇不天然更正确。保存 用户原始表述、控制者假设、支持/反证与置信度，分别建模。
+- 比较生成集合、本体质量筛后集合、现实筛后集合和展示集合，才能定位多样性在哪一步收缩。不得只凭最终批次归因于 Generator。
 - 同上下文隔离诚实性与隔离有效性分开；best_effort 声明不证明污染已消除。
 - 跨语言发音与语义的排序是本任务待溯源的偏好，不能提升为通用固定顺序。
 - 自述“遵守了规则”与输入/输出证据分开；行为合规与命名效果分开验收。
-- 本轮不确认任何候选达到现实接受门槛；已记录的 available / low_noise 保留为历史断言，使用前需按来源与 freshness 复核。
+- 本轮不确认任何候选达到现实接受门槛；已记录的 available / low_noise 保留为历史断言，使用前需按来源与新鲜度 复核。
 
 ### 14.3 本任务的最小留痕试行合同（尚非稳定 Skill）
 
-每个重要批次留存：批次 ID、规则版本/提交、实际输入 artifact、实际 runtime/隔离条件、原始输出、各筛选阶段候选 ID 与去留理由、现实查询的时间/意图/来源/结果、最终展示、Owner 原始反馈定位、Controller 解释与下一动作。只保存可观察产物和决策摘要，不要求隐藏思维链。不存在的历史输入不能伪造；重建内容明确标 reconstructed。
+每个重要批次留存：批次 ID、规则版本/提交、实际输入产物、实际运行环境/隔离条件、原始输出、各筛选阶段候选 ID 与去留理由、现实查询的时间/意图/来源/结果、最终展示、用户原始反馈定位、控制者解释与下一动作。只保存可观察产物和决策摘要，不要求隐藏思维链。不存在的历史输入不能伪造；重建内容明确标 reconstructed。
 
 当前状态保持精简，但任何移出的必要状态必须留下精确 commit/path 或 artifact 引用。更新状态应检查必要字段是否仍在或有恢复指针、候选 ID 引用可解析、当前摘要与明细不矛盾；检查通过不替代语义复核。
 
@@ -344,7 +194,7 @@ That is the clearest method-level lesson from #411 so far.
 4. 正例包含形态集中应被识别；反例包含明确、有预算的同族探索应被允许；另检查筛选导致集中、偏好被误升硬约束、现实证据不足和状态迁移丢字段。
 5. 分开报告过程合规、错误复发和 Owner 决策成本；不以规则复述作为通过，不以少数候选偏好证明普适效果。
 
-当前进度：证据缺口登记与恢复入口修正；完整证据重建、对照测试和稳定 Skill 改动尚未完成。保持 generation paused。方法有效性和组织命名分别验收。
+当前进度：证据缺口登记与恢复入口修正；完整证据重建、对照测试和稳定 Skill 改动尚未完成。保持生成暂停。方法有效性和组织命名分别验收。
 
 ### 14.5 RND-129 → RND-130 定向重建结果
 
@@ -353,8 +203,8 @@ That is the clearest method-level lesson from #411 so far.
 | 链条环节 | 找到的记录 | 证据状态 |
 | --- | --- | --- |
 | 上批反馈 | [v79](https://github.com/InteropAtlas/InteropAtlas/blob/03dfd91bc2ddb2c3a67a6fdc156757a725b20330/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) 保存相对偏好的转述 | reported_owner_feedback；未定位带上下文的原始用户发言 |
-| 策略变化 | v79 将比较反馈解释为提高语义密度，并更改 early_creative_policy | Controller 推断可定位；因果关系未验证 |
-| 实际 Generator 输入 | v79/v80 有策略与隔离等级自述 | actual_input_artifact 未找到，不能证明正向 Brief 实际发送了什么 |
+| 策略变化 | v79 将比较反馈解释为提高语义密度，并更改 early_creative_policy | 控制者推断可定位；因果关系未验证 |
+| 实际 生成者输入 | v79/v80 有策略与隔离等级自述 | actual_input_artifact 未找到，不能证明正向 Brief 实际发送了什么 |
 | 生成与筛选 | v80 有七项展示记录及部分淘汰摘要 | 全量生成集合与逐阶段去留表未找到；无法量化筛选造成的形态收缩 |
 | 现实检查 | v80 有域名状态、low_noise 标签与日期 | 查询来源未找到；N143 的 .org 摘要矛盾仍未解决 |
 | 展示内容 | v80 有展示候选 IDs 与语义说明 | 实际用户收到的整段展示未定位；不能将状态文件当作原始展示 |
