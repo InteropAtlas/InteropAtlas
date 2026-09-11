@@ -6,130 +6,97 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 56
+  snapshot_version: 57
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v55 保存 visual symmetry / cycle-fit 偏好。
-    本快照新增 Owner 对“克制的巧劲 / 第二眼奖励”的明确偏好，并记录历史备选 Knewn 作为 Owner 自述的偏好证据，而不是恢复为 active candidate。
-    仓库 code search 未找到 Knewn 的现存记录，因此不重建其旧现实筛查或旧结论；完整历史仍以 Git history / Issue #411 为准。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v56 保存 compactness / symmetry / stable-modern / understated-cleverness 偏好簇。
+    本快照记录第一轮陌生中性样本 Owner 反应并对偏好强度做校准；完整历史、候选现实证据与旧轮次继续由 Git history / Issue #411 保留。
 
 constraint_registry:
   confirmed_hard_constraints:
-    - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale; not a single project/protocol/map/platform/industry, source_type: owner_explicit}
-    - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching; acceptable spoken and spelling recovery, source_type: owner_explicit}
+    - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale, source_type: owner_explicit}
+    - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
   owner_preferences:
-    - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred, source_type: owner_explicit}
-    - {id: PREF-CHOICE-SPACE, statement: Owner wants multiple credible ready-to-use choices, source_type: owner_explicit}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no obvious broad morphotype taboo; do not infer equal preference, source_type: owner_observed, confidence: medium}
-    - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious and reliable identity character preferred; youthfulness/modernity welcome when dependable, shorthand: reliable_youth / stable_modern / harmonious_confidence, source_type: owner_explicit_self_report, confidence: medium_high}
-    - {id: PREF-INITIAL-RCO, statement: R/C/O initials often feel reassuring/stable but are not absolute, source_type: owner_explicit_self_report, confidence: low_medium, usage: observe_only_not_generation_rule}
-    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: Owner prefers short perceived spoken effort; ideal about 4 articulation beats and generally about 5 or fewer, source_type: owner_explicit_self_report, confidence: high, use: optimize_not_hard_gate_until_calibrated}
-    - {id: PREF-RHYTHMIC-SYMMETRY, statement: Owner likes balanced/symmetrical spoken identity; Wade Watts is the motivating feel, not a required template, source_type: owner_explicit_self_report, confidence: high, use: optimize_not_template}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: Owner likes visual symmetry / near-palindromic balance and sees task-specific fit with the Commons -> Perspective -> Creation -> Commons cycle, source_type: owner_explicit_self_report, confidence: high, use: optimize_and_explore_not_gate}
-    - id: PREF-UNDERSTATED-CLEVERNESS
-      statement: >-
-        Owner likes names with a restrained conceptual trick or semantic compression that rewards a second look, but dislikes cleverness that feels showy, gimmicky or self-conscious.
-        Historical backup Knewn is cited positively because it fuses Know + New in a compact form; however its spoken/pronunciation recovery feels effortful, so cleverness must not override recoverability.
-      source_type: owner_explicit_self_report
-      confidence: high
-      stability: emerging_strong
-      use: optimize_and_explore_not_gate
+    - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
+    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: short spoken effort preferred; ideal about 4 perceived beats and generally about 5 or fewer, confidence: high}
+    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken chunks / stress / corresponding sound structure preferred, confidence: high}
+    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry or near-palindromic balance is an optional strong bonus, especially when it can echo cycle/return, confidence: high}
+    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained semantic trick / second-look reward is attractive; showy gimmick is not, confidence: high}
+    - {id: PREF-MORPHOTYPE-OPENNESS, statement: no broad form taboo currently observed, confidence: medium_high}
+    - {id: PREF-INITIAL-RCO, statement: R/C/O initials may feel reassuring but remain observational only, confidence: low_medium}
+    - id: PREF-NONPERSONAL-BRAND-IDENTITY
+      statement: names that read strongly as personal given names reduce appeal relative to equally compact brand-like forms.
+      source_type: owner_observed
+      confidence: medium
+      stability: emerging
+      use: prefer_not_gate
 
 mission_value_model:
   core_structure: Commons -> Perspective -> Creation -> Commons
-  value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]
-  structural_naming_implication:
-    cycle_or_return_can_optionally_be_expressed_by_name_structure_itself: true
-    subtle_semantic_compression_can_optionally_express_relation_or_transformation: true
+  structural_naming_implications:
+    - cycle_or_return_may_be_carried_by_visual_or_phonological_structure
+    - subtle_semantic_compression_may_carry transformation / know-new style relations
 
-owner_feedback:
-  - {id: OF-N096-01, candidate_id: N096, signal: positive_usable_not_selected, statement: Open Regard stable and directly usable; retain baseline while expanding choice.}
-  - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
-  - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise semantically acceptable and young but feels too long/multipart.}
-  - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable.}
-  - id: OF-CLEVERNESS-01
-    signal: owner_expression_and_construction_preference
-    statement: >-
-      Owner says the desirable features do not need to coexist in every name, but simultaneous fit can create a strong positive reaction. Owner also cites Knewn (Know + New) as a past backup they still find interesting because of its compact conceptual trick, while noting that it is somewhat effortful to pronounce/read. Owner likes this kind of cleverness when understated, not flashy.
-    interpretation:
-      - preferences_are_composable_bonuses_not_joint_hard_requirements
-      - second_look_reward_is_positive
-      - semantic_compression_or_blend_can_be_attractive
-      - understated_wit_preferred_over_gimmick
-      - recoverability_remains_counterpressure
-      - Knewn_is_preference_evidence_not_generation_template
+neutral_probe:
+  round_id: RND-088
+  sample_status: preference_probe_only_not_candidates
+  samples:
+    - {id: A, name: Coren, owner_reaction: acceptable, notes: reminded Owner of Intel Core}
+    - {id: B, name: Ovaro, owner_reaction: positive, notes: stronger than A; interesting; not boring}
+    - {id: C, name: Nolen, owner_reaction: positive, notes: stable; feels like a good name}
+    - {id: D, name: Rova, owner_reaction: strong_positive, notes: interesting; simple; direct; memorable}
+    - {id: E, name: Aroa, owner_reaction: positive, notes: simple; visually young; slightly less easy to read}
+    - {id: F, name: Ceral, owner_reaction: neutral, notes: ordinary / weak pull}
+    - {id: G, name: Nover, owner_reaction: positive, notes: acceptable}
+    - {id: H, name: Orin, owner_reaction: strong_positive, notes: memorable; simple; easy to remember}
+    - {id: I, name: Rilor, owner_reaction: mildly_positive, notes: simple; moderately memorable}
+    - {id: J, name: Valeo, owner_reaction: neutral, notes: acceptable but weak pull}
+    - {id: K, name: Civen, owner_reaction: neutral_negative, notes: feels like a person name}
+    - {id: L, name: Evara, owner_reaction: neutral_negative, notes: feels like a person name}
+  provisional_order_by_pull:
+    strongest: [H, D, B]
+    positive: [C, G, E]
+    acceptable_mild: [A, I]
+    neutral_or_weak: [F, J]
+    reduced_by_person_name_reading: [K, L]
+  findings:
+    - unfamiliar neutral samples produced meaningful discrimination, unlike mature-brand anchors
+    - compactness and easy memorability correlate with stronger pull in this batch
+    - stable/brand-like forms outperform forms perceived as personal given names
+    - Owner still tolerates substantial form variation; no single morphotype dominates
+    - R/C/O initial hypothesis is not independently confirmed: strong pull includes O/R, but N-start Nolen also performs well and C-start examples are mixed
+    - visual youthfulness can help but does not override read-aloud ease (Aroa)
+    - external semantic association can affect reaction (Coren -> Intel Core)
 
 expression_profile:
-  status: activated
+  status: calibrated_after_neutral_probe_1
   desired_axes:
     stability: high
     harmony: high
     reliability: high
     modernity: medium_high
-    youthfulness: allowed_positive_if_reliable
     compact_spoken_identity: high
+    easy_memorability: high
     rhythmic_balance: high
-    visual_balance: high
-    understated_cleverness: medium_high
-    second_look_reward: medium_high
+    visual_balance: high_optional_bonus
+    understated_cleverness: medium_high_optional_bonus
+    personal_given_name_reading: prefer_low
     showiness_or_gimmick: low
-    trendiness: low_if_it_reduces_trust
-  structural_preferences:
-    spoken_target: about_4_owner_perceived_beats_preferably_not_over_5
-    visual_symmetry: optional_bonus
-    semantic_compression: optional_bonus
-    subtle_double_reading_or_blend: optional_bonus
-    avoid_overfit:
-      - do_not_force_exact_palindrome
-      - do_not_force_R_C_O
-      - do_not_force_alliteration
-      - do_not_force_blends_or_wordplay
-      - do_not_sacrifice_pronunciation_spelling_recovery_scale_or_reality_for_cleverness
-
-preference_model_note:
-  combination_policy: >-
-    Owner explicitly says these preferences are not conjunctive requirements. Treat them as separable positive signals that may stack synergistically; a name can still be strong without satisfying all of them.
-  synergy_examples:
-    - compact_plus_balanced
-    - stable_modern_plus_understated_cleverness
-    - visual_cycle_structure_plus_semantic_fit
-    - short_recoverable_plus_second_look_reward
-
-preference_probe_design:
-  status: ready_for_neutral_expression_rhythm_visual_cleverness_probe
-  source: unfamiliar_neutral_non_candidate_examples
-  objective: calibrate intrinsic stable-modern / compact-balanced / visual-symmetry / understated-cleverness preference without famous-brand halo
-  design:
-    - include multiple morphotypes
-    - contrast compact balanced vs longer/asymmetric controls
-    - include some subtle semantic tricks/blends and equally strong plain controls
-    - separate cleverness from pronunciation difficulty where possible
-    - include some visually symmetric/near-symmetric forms and asymmetric controls
-    - contrast reliable-youth vs playful-fragile vs traditional-heavy expression
-    - vary initials so R/C/O is observed rather than enforced
-    - keep probe samples out of formal candidate pool and Generator context
   interpretation:
-    - preference signals rebalance search budget only
-    - stacked preference matches may receive task-local bonus, not universal quality bonus
+    - strongest confirmed cross-sample signal is compact, brand-like, easy-to-hold identity
+    - stable-modern remains supported
+    - symmetry and cleverness remain bonuses requiring further controlled comparison
+    - initials remain weak evidence only
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  morphotype_hypothesis_id: HYP-004
-  note: latest evidence suggests Owner preference discovery needs expression, spoken rhythm, visual structure and understated semantic cleverness; stable Skill rewrite still requires regression/counterevidence.
+  hypothesis_id: HYP-004
+  latest_evidence: unfamiliar neutral probes discriminate preference better than famous mature-brand anchors; Owner preference discovery can materially improve search allocation without becoming a hard template.
   stable_skill_rewrite_allowed_now: false
-
-historical_owner_examples:
-  - id: HX-KNEWN
-    name: Knewn
-    status: preference_evidence_only_not_active_candidate
-    owner_reported_construction: Know + New
-    owner_positive: compact conceptual cleverness / interesting fusion
-    owner_negative: somewhat effortful to pronounce/read
-    repository_record_lookup_2026_09_11: no_current_code_search_match_found
-    generation_use: prohibited_as_template_or_seed
+  reason: current Skill already supports Owner preference / expression_profile / feedback_refinement; evidence concerns scheduling and probe design, still under method-hypothesis validation.
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
@@ -139,44 +106,25 @@ candidates:
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
-rounds:
-  - {id: RND-085, action: owner_spoken_compactness_and_symmetry_signal_ingest, generated_count: 0, result: compact_spoken_plus_rhythmic_balance_signal}
-  - {id: RND-086, action: owner_visual_symmetry_and_cycle_fit_signal_ingest, generated_count: 0, result: visual_symmetry_cycle_signal}
-  - id: RND-087
-    action: owner_understated_cleverness_and_composable_preference_ingest
-    generated_count: 0
-    findings:
-      - preferences are bonuses that can combine, not mandatory simultaneous requirements
-      - Owner likes restrained conceptual cleverness / second-look reward
-      - Knewn illustrates positive semantic compression but also the recoverability tradeoff
-      - cleverness should remain subordinate to natural pronunciation/spelling and long-term identity quality
-
 current_state:
   finalists: [N096, N113, N117, N119]
-  baseline_candidate_id: N096
-  search_mode: owner_expression_rhythm_visual_cleverness_probe
-  search_cadence_mode: validation_only
-  generation_isolation_level: best_effort_same_context
-  biggest_unknown: How strongly do compactness, balance, stable-modern character, visual/cycle structure and understated cleverness persist in unfamiliar examples, and which combinations create disproportionate Owner pull without harming recoverability?
+  search_mode: owner_preference_probe_then_generation_reallocation
+  biggest_unknown: >-
+    Whether symmetry / understated cleverness provide additional pull beyond the now-confirmed compact-brand-like-stable signal, and how to use these preferences without collapsing formal search diversity.
   blockers: []
-  information_gain: high_from_neutral_multiaxis_probe
-  owner_review_needed_now: true
+  owner_review_needed_now: false
 
 next_action:
-  action: run_neutral_multiaxis_owner_preference_probe
-  target: calibrate_compactness_balance_stable_modern_visual_cycle_and_understated_cleverness_before_more_formal_generation
+  action: run_targeted_neutral_probe_2_then_resume_form_diverse_generation
+  target: isolate symmetry and understated-cleverness effects while holding compactness/recoverability roughly constant
   rationale: >-
-    Owner has now supplied a coherent but non-conjunctive preference cluster. A bounded unfamiliar non-candidate probe can distinguish which axes are genuinely intrinsic, which are weak, and whether stacked matches create strong pull without repeating mature-brand halo.
-  triggered_by: [OF-CLEVERNESS-01]
-  expected_information_gain: high
-  requires_owner: true
-  owner_gate_classification: preference_discovery
+    Probe 1 confirmed that unfamiliar samples reveal useful preference signal. A small second probe should test the two least-calibrated high-value bonuses (symmetry and subtle cleverness), then formal naming search should resume with a broad morphotype portfolio weighted toward compact, stable-modern, non-personal brand identity.
+  requires_owner: true_for_probe_2_response
 
 stop:
-  status: pause_for_neutral_multiaxis_probe
-  reason: calibrating the now-richer preference profile has higher decision value than immediately generating more formal candidates
+  status: continue_after_owner_probe_2
   unresolved:
-    - preference strength and interactions still need neutral calibration
-    - HYP-004/stable Skill revision requires regression/counterevidence
+    - symmetry effect strength
+    - understated cleverness effect strength independent of recoverability
     - formal trademark legal clearance remains deferred
     - true isolated generation runtime remains unavailable
