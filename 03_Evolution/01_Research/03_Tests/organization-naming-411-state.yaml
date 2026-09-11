@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 76
+  snapshot_version: 77
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v75 继续 shorter conceptual / natural semiopaque search。
-    本快照记录两条 materially different survivor：N129 Plurivocal（真实概念词）与 N130 Merosophy（半透明词源专名）。
-    两者均未作为后续 Generator 模板；完整历史继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v76 暴露 N129 Plurivocal（现成词）与 N130 Merosophy（半透明专名）。
+    Owner 进一步明确商业化目标下不希望继续以现成词作为主要命名来源，因为商标显著性/可保护性通常弱于自造或高度独特名称。
+    本快照将 fanciful / semi-coined proper-name construction 提升为正式 finalist 搜索优先级；现成词仍可作为语义研究材料或极少数 arbitrary-mark 例外，但不再是主要 finalist 来源。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -41,7 +41,12 @@ owner_preferences:
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive when they read as coherent standalone brands; Multifinality remains positive preference evidence, confidence: high}
+  - id: PREF-FANCIFUL-OWNABILITY
+    statement: >-
+      For the commercial umbrella brand, prefer invented or semi-coined proper names with strong ownability and trademark distinctiveness over existing dictionary/concept words. Existing words may still inform semantics or qualify only when used arbitrarily and commercially defensible.
+    confidence: high
+    source_type: owner_explicit
+    use: search_allocation_and_finalist_filter_not_fixed_morpheme_template
 
 mission_value_model:
   core_structure_available_to_controller: true
@@ -53,123 +58,95 @@ integrity_incidents:
   - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_and_live_recovery_observed, classification: workflow_scheduler_fidelity_failure}
 
 search_control:
-  mode: commercial_brand_hard_gate_divergence
+  mode: fanciful_commercial_brand_divergence
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
   early_creative_policy: >-
-    Continue broad form/semantic creation first; .com, identity and trademark remain post-generation/finalist filters and must not become Generator shape templates.
+    Continue broad invention before reality filtering. Prefer fanciful/semi-coined identity forms with a semantic backbone, natural pronunciation and recoverable spelling. Do not reduce this to random syllable generation, suffix cloning, or domain-driven string mutation.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
-  parallel_classes: [lexical_single_semantic_transfer, blend_or_semantic_fusion, root_derived_or_affixal, opaque_or_semiopaque_proper_name, nonenglish_or_crosslanguage_identity, symbolic_or_structural_identity, compound_single_token, phrase_or_relational_name_minor_budget_only]
-  evaluation_policy: meaning may be implicit, etymological, structural, metaphorical or brand-built; phrase-level transparency is not required
+  priority_classes:
+    - semiopaque_root_derived_proper_name
+    - semantic_fusion_coinage
+    - phonotactically_natural_fanciful_name
+    - morpheme_grounded_coinage
+    - compact_single_token_compound_when_sufficiently_distinctive
+  lower_priority_classes:
+    - established_dictionary_or_concept_word
+    - ordinary_english_phrase
+  evaluation_policy: >-
+    Invented does not mean meaningless. Preferred names should have a defensible semantic/structural rationale while remaining source-distinctive enough to support strong trademark ownership.
 
 rounds:
-  - {id: RND-116, action: owner_reaction_to_multifinality, result: strong_positive_brandability_signal}
-  - {id: RND-117, action: multifinality_domain_and_trademark_due_diligence_extension, result: .com_registered_aftermarket_status_unknown}
-  - {id: RND-118, action: owner_promotes_com_and_trademark_to_commercial_hard_gates, result: candidate_pool_reclassified}
-  - {id: RND-119, action: existing_candidate_exact_com_rescreen, result: direct_registration_pool_contraction}
-  - {id: RND-120, action: owner_clarifies_com_gate_as_obtainability_not_unregistered_only, result: aftermarket_path_enabled}
-  - {id: RND-121, action: continue_creation_after_domain_gate_clarification, result: one_new_high_priority_commercial_candidate}
-  - {id: RND-122, action: owner_reaction_to_transindividuality, result: rejected_for_excessive_length}
-  - {id: RND-123, action: calibrated_shorter_conceptual_brand_search, result: no_owner_ready_survivor_yet}
-  - id: RND-124
-    action: shorter_true_concept_and_semiopaque_search
-    result: two_materially_distinct_survivors
+  - {id: RND-124, action: shorter_true_concept_and_semiopaque_search, result: two_materially_distinct_survivors}
+  - id: RND-125
+    action: owner_prefers_fanciful_or_semicoined_commercial_marks
+    result: search_allocation_shifted
     findings:
-      - concise established concept words remained heavily .com-occupied; exact lexical territory is still crowded
-      - Plurivocal emerged as a real English adjective meaning multivoiced / having multiple voices or meanings; academic and organizational-discourse usage is established
-      - plurivocal.com and plurivocal.org were both directly registrable on 2026-09-11
-      - public exact-name search found academic/organizational usage but no material active exact-name company/software identity
-      - public trademark web precheck found no obvious exact PLURIVOCAL registration signal in US/EU/WIPO/CN indexed results; formal database/legal clearance remains pending
-      - Plurivocal's principal risk is distinctiveness/descriptiveness if goods/services directly emphasize multiple voices/perspectives
-      - Merosophy emerged as a semi-transparent proper-name construction with meros (part) + -sophy (wisdom/understanding) as intended semantic backbone
-      - merosophy.com and merosophy.org were directly registrable on 2026-09-11
-      - public searches for exact MEROSOPHY returned no meaningful company/software/organization/trademark identity, giving stronger preliminary ownability than ordinary dictionary terms
-      - Merosophy's principal risk is semantic interpretation burden: the intended root explanation is not self-evident and should not be overstated as an established historical term
-      - Alterence was rejected after an existing brand/identity usage surfaced
-      - multiple x-suffixed or forced-availability variants were rejected for intrinsic quality despite domain availability
+      - Owner explicitly questioned continued use of existing words because commercial trademark registrability/protectability is a primary objective
+      - USPTO guidance supports fanciful marks as inherently distinctive and generally stronger/easier to protect than descriptive marks; arbitrary existing words can also be strong but are not the preferred search path here
+      - Plurivocal is therefore demoted from primary finalist consideration to semantic-reference / low-priority exception status
+      - Merosophy remains aligned with the new direction because it is a semi-transparent coined proper name rather than an established dictionary term
+      - future generation must favor coined ownability without degenerating into random SaaS-like strings
 
 candidates:
-  - {id: N096, name: Open Regard, role: commercial_gate_survivor_pending_tm_strength, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N113, name: Public Singular, role: commercial_gate_survivor_pending_tm_strength, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N117, name: See Otherwise, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
-  - {id: N119, name: Elseground, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
-  - {id: N125, name: Recomposure, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
-  - {id: N126, name: Compossibility, role: commercial_gate_survivor_but_recoverability_risk, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
-  - id: N127
-    name: Multifinality
-    role: owner_positive_aftermarket_pending
-    active: true
-    owner_feedback: interesting_looks_good_feels_like_brand
-    com_status: registered_aftermarket_status_unknown_2026_09_11
-    generation_use: prohibited_as_template_or_seed
-  - id: N128
-    name: Transindividuality
-    role: owner_rejected_length
-    active: false
-    owner_feedback: too_long_not_liked
-    generation_use: prohibited_as_template_or_seed
+  - {id: N096, name: Open Regard, role: legacy_commercial_survivor_not_priority_under_new_fanciful_policy, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
+  - {id: N113, name: Public Singular, role: legacy_commercial_survivor_not_priority_under_new_fanciful_policy, active: true, com_status: available_for_registration_2026_09_11, generation_use: prohibited_as_template}
+  - {id: N117, name: See Otherwise, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
+  - {id: N119, name: Elseground, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
+  - {id: N125, name: Recomposure, role: aftermarket_pending_legacy, active: true, generation_use: prohibited_as_template}
+  - {id: N126, name: Compossibility, role: legacy_commercial_survivor_but_recoverability_risk, active: true, generation_use: prohibited_as_template}
+  - {id: N127, name: Multifinality, role: positive_preference_evidence_not_primary_due_existing_term_and_aftermarket, active: true, owner_feedback: interesting_looks_good_feels_like_brand, generation_use: prohibited_as_template_or_seed}
+  - {id: N128, name: Transindividuality, role: owner_rejected_length, active: false, generation_use: prohibited_as_template_or_seed}
   - id: N129
     name: Plurivocal
-    role: owner_ready_provisional_pending_formal_tm
-    active: true
-    morphotype: established_concept_single_word
-    intrinsic_case:
-      - established word for multivoiced / multiple-voice or multiple-meaning expression
-      - shorter and visually lighter than N128 while retaining conceptual depth
-      - coherent single-word brand/organization form
-      - semantically adjacent to plural perspectives without literal mission wording
-    domain_status:
-      com: available_for_registration_2026_09_11
-      org: available_for_registration_2026_09_11
-    reality_status: preliminary_pass_academic_usage_no_material_exact_commercial_identity_found
-    trademark_status: preliminary_no_obvious_exact_signal_found_formal_clearance_pending
-    risks:
-      - may overemphasize voice/discourse relative to broader creation/knowledge mission
-      - existing ordinary/adjectival meaning can weaken trademark distinctiveness for directly related services
-    owner_exposure: now
+    role: semantic_reference_low_priority_existing_word
+    active: false_for_primary_finalist_search
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    reason: existing lexical item; lower trademark ownability relative to fanciful/semi-coined alternatives for intended commercial brand strategy
     generation_use: prohibited_as_template_or_seed
   - id: N130
     name: Merosophy
-    role: owner_ready_provisional_pending_formal_tm
+    role: owner_ready_provisional_aligned_with_fanciful_policy
     active: true
     morphotype: semiopaque_root_derived_proper_name
-    intrinsic_case:
-      - intended semantic backbone combines meros (part) with -sophy (wisdom/understanding)
-      - suggests understanding through parts / relation of parts and wholes without being a literal mission phrase
-      - compact, pronounceable, visually brand-like and more source-distinctive than ordinary concept words
-    domain_status:
-      com: available_for_registration_2026_09_11
-      org: available_for_registration_2026_09_11
-    reality_status: preliminary_pass_no_material_exact_identity_found
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
     trademark_status: preliminary_strong_ownability_signal_formal_clearance_pending
-    risks:
-      - not an established dictionary/philosophical term; semantic explanation is constructed from roots
-      - may acquire mystical/philosophical tone due -sophy ending
-      - intended root reading may not be obvious to ordinary audiences
-    owner_exposure: now
+    risks: [semantic_explanation_not_self_evident, possible_philosophical_or_mystical_tone]
     generation_use: prohibited_as_template_or_seed
 
 current_state:
-  direct_registration_com_survivors: [N096, N113, N126, N129, N130]
-  aftermarket_pending: [N117, N119, N125, N127]
-  owner_rejected: [N128]
-  search_mode: commercial_brand_hard_gate_divergence
+  primary_search_mode: fanciful_commercial_brand_divergence
+  primary_owner_ready_provisional: [N130]
+  positive_preference_evidence: [N127]
+  legacy_or_low_priority_existing_word_candidates: [N096, N113, N117, N119, N125, N126, N129]
   biggest_unknown: >-
-    Owner reaction to N129/N130, especially the tradeoff between established-concept transparency (Plurivocal) and higher ownability / lower semantic transparency (Merosophy), while preserving broad morphotype diversity.
+    Can multiple materially different invented or semi-coined names achieve Multifinality-level brand appeal and semantic depth, while staying below the Transindividuality length burden and offering stronger trademark distinctiveness plus practical .com obtainability?
   blockers: []
-  owner_review_needed_now: true_for_N129_N130_reaction_but_not_for_continued_search
+  owner_review_needed_now: false
 
 next_action:
-  action: collect_owner_reaction_to_N129_N130_while_continuing_noncloning_search
-  rationale: >-
-    N129 and N130 are commercially plausible, materially different form classes with exact .com availability. Continue broad creation regardless of Owner reaction; do not exploit pluri- or -sophy as templates.
-  requires_owner: false_for_continued_search
+  action: generate_diverse_fanciful_and_semicoined_commercial_names
+  required_properties:
+    - meaningful_semantic_or_structural_backbone
+    - natural_pronunciation
+    - recoverable_spelling
+    - nonpersonal_brand_identity
+    - moderate_identity_load
+    - strong_source_distinctiveness
+  prohibited_overfit:
+    - clone_Merosophy_suffix
+    - clone_Multifinality_structure
+    - random_saas_syllables
+    - domain_availability_driven_mutation
+    - literal_mission_vocabulary
+  due_diligence_for_survivors: [exact_com_registration_or_aftermarket_obtainability, active_use_conflict, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck]
+  requires_owner: false_until_new_materially_distinct_survivors_exist
 
 stop:
-  status: owner_feedback_plus_continue
-  reason: two new materially distinct candidates merit Owner exposure and broader search remains open
+  status: continue
+  reason: Owner clarified commercial trademark strategy; search should now prioritize ownable invented identities without sacrificing meaning or form diversity
