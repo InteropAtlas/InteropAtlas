@@ -6,22 +6,26 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 71
+  snapshot_version: 72
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v70 新增 .com 与商标初筛但仍把 .com 视为风险信号。
-    Owner 现明确商业化母组织的硬门槛：exact .com 必须可注册，且名称必须具有良好的商标注册前景；母组织主要使用 .com，.org 主要服务开源/公共项目。
-    因此本快照将 .com 与 trademark registrability 提升为 finalist hard gates，并重新筛查现有候选。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v71 将 commercial mother organization 的 .com 与商标注册前景提升为硬门槛。
+    Owner 随后澄清：exact .com 不要求必须未注册；已注册但现实可购买/可通过经纪取得且成本与风险可接受，也满足商业域名门槛。
+    因此本快照把 HC-COM-DOMAIN 从 registration-availability 改为 practical obtainability，并把此前仅因 .com 已注册而退出的候选重分类为 aftermarket-pending，而不是直接淘汰。
 
 constraint_registry:
   confirmed_hard_constraints:
     - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale, source_type: owner_explicit}
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
     - id: HC-COM-DOMAIN
-      statement: exact ordinary .com must be available for registration for the commercial umbrella organization; .com is the primary organization domain
+      statement: >-
+        exact .com must be practically obtainable for the commercial umbrella organization; direct registration is preferred but a registered domain may qualify if it is clearly purchasable through sale, broker or owner negotiation at acceptable cost/risk
       source_type: owner_explicit
+      primary_domain: .com
+      qualifying_states: [available_for_registration, explicitly_for_sale, broker_obtainable, owner_negotiable_at_acceptable_cost]
+      nonqualifying_states: [active_nontransferable_use, prohibitively_priced, material_dispute_or_ownership_risk, unknown_aftermarket_status_at_final_decision]
     - id: HC-TM-REGISTRABILITY
       statement: finalist must have a good trademark-registration outlook for long-term commercial organization use, not merely absence of an obvious exact-name collision
       source_type: owner_explicit
@@ -39,7 +43,7 @@ owner_preferences:
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive when they read as coherent standalone brands; Multifinality remains positive preference evidence only, confidence: high}
+  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive when they read as coherent standalone brands; Multifinality remains positive preference evidence, confidence: high}
 
 mission_value_model:
   core_structure_available_to_controller: true
@@ -58,7 +62,7 @@ search_control:
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
   early_creative_policy: >-
-    .com and trademark gates remain finalist-stage reality constraints rather than Generator vocabulary constraints. Do not let availability patterns become naming templates.
+    .com and trademark gates remain finalist-stage reality constraints rather than Generator vocabulary constraints. Do not let domain-market patterns become naming templates.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
@@ -67,96 +71,87 @@ morphotype_portfolio:
 
 rounds:
   - {id: RND-116, action: owner_reaction_to_multifinality, result: strong_positive_brandability_signal}
-  - {id: RND-117, action: multifinality_domain_and_trademark_due_diligence_extension, result: .com_unavailable}
-  - id: RND-118
-    action: owner_promotes_com_and_trademark_to_commercial_hard_gates
-    result: candidate_pool_reclassified
+  - {id: RND-117, action: multifinality_domain_and_trademark_due_diligence_extension, result: .com_registered_aftermarket_status_unknown}
+  - {id: RND-118, action: owner_promotes_com_and_trademark_to_commercial_hard_gates, result: candidate_pool_reclassified}
+  - {id: RND-119, action: existing_candidate_exact_com_rescreen, result: direct_registration_pool_contraction}
+  - id: RND-120
+    action: owner_clarifies_com_gate_as_obtainability_not_unregistered_only
+    result: aftermarket_path_enabled
     findings:
-      - commercial mother organization will primarily use .com
-      - exact .com registration availability is now mandatory for any finalist
-      - good trademark registrability is mandatory; absence of exact collision alone is insufficient
-      - .org is secondary and mainly relevant to open-source/public projects
-  - id: RND-119
-    action: existing_candidate_exact_com_rescreen
-    result: major_pool_contraction
-    findings:
-      - openregard.com available on 2026-09-11
-      - publicsingular.com available on 2026-09-11
-      - compossibility.com available on 2026-09-11
-      - seeotherwise.com unavailable on 2026-09-11
-      - elseground.com unavailable on 2026-09-11
-      - multifinality.com unavailable on 2026-09-11
-      - recomposure.com unavailable on 2026-09-11
-      - turnofmind.com unavailable on 2026-09-11
-      - formofthought.com unavailable on 2026-09-11
-      - newgrammar.com unavailable on 2026-09-11
+      - commercial mother organization still primarily requires the exact .com
+      - direct registration is not mandatory if the exact .com can realistically be acquired
+      - registered domains must be classified as for-sale / broker-obtainable / owner-negotiable / active-nontransferable / prohibitively-priced / unknown
+      - price, dispute risk, active-use conflict and acquisition practicality become part of domain due diligence
+      - candidates previously rejected solely because .com was registered must be moved to aftermarket-pending until obtainability is checked
+      - Multifinality.com is registered; current public web search found no explicit sale listing, so aftermarket status remains unknown rather than failed
 
 candidates:
   - id: N096
     name: Open Regard
     role: commercial_gate_survivor_pending_tm_strength
     active: true
-    com_status: available_2026_09_11
+    com_status: available_for_registration_2026_09_11
     generation_use: prohibited_as_template
   - id: N113
     name: Public Singular
     role: commercial_gate_survivor_pending_tm_strength
     active: true
-    com_status: available_2026_09_11
+    com_status: available_for_registration_2026_09_11
     generation_use: prohibited_as_template
   - id: N117
     name: See Otherwise
-    role: disqualified_com_unavailable
-    active: false
-    com_status: unavailable_2026_09_11
+    role: aftermarket_pending
+    active: true
+    com_status: registered_obtainability_not_checked
     generation_use: prohibited_as_template
   - id: N119
     name: Elseground
-    role: disqualified_com_unavailable
-    active: false
-    com_status: unavailable_2026_09_11
+    role: aftermarket_pending
+    active: true
+    com_status: registered_obtainability_not_checked
     generation_use: prohibited_as_template
   - id: N127
     name: Multifinality
-    role: preference_evidence_disqualified_com_unavailable
-    active: false
+    role: owner_positive_aftermarket_pending
+    active: true
     owner_feedback: interesting_looks_good_feels_like_brand
-    com_status: unavailable_2026_09_11
-    trademark_note: established technical/academic term; medium distinctiveness risk depending on goods/services
+    com_status: registered_aftermarket_status_unknown_2026_09_11
+    domain_market_note: public web search found no explicit for-sale listing; broker/owner-negotiation feasibility not yet established
+    trademark_note: established technical/academic term; registrability depends on goods/services and still requires stronger jurisdictional screening
     generation_use: prohibited_as_template_or_seed
   - id: N125
     name: Recomposure
-    role: disqualified_com_unavailable
-    active: false
-    com_status: unavailable_2026_09_11
+    role: aftermarket_pending
+    active: true
+    com_status: registered_obtainability_not_checked
     generation_use: prohibited_as_template
   - id: N126
     name: Compossibility
     role: commercial_gate_survivor_but_recoverability_risk
     active: true
-    com_status: available_2026_09_11
+    com_status: available_for_registration_2026_09_11
     risks: [material_spelling_dictation_branching, high_academic_density]
     generation_use: prohibited_as_template
-  - {id: N122, name: Turn of Mind, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N123, name: Form of Thought, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
-  - {id: N124, name: New Grammar, role: disqualified_com_unavailable, active: false, com_status: unavailable_2026_09_11, generation_use: prohibited_as_template}
+  - {id: N122, name: Turn of Mind, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
+  - {id: N123, name: Form of Thought, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
+  - {id: N124, name: New Grammar, role: aftermarket_pending, active: true, com_status: registered_obtainability_not_checked, generation_use: prohibited_as_template}
 
 current_state:
-  commercial_gate_survivors: [N096, N113, N126]
-  disqualified_by_com: [N117, N119, N122, N123, N124, N125, N127]
+  direct_registration_com_survivors: [N096, N113, N126]
+  aftermarket_pending: [N117, N119, N122, N123, N124, N125, N127]
   search_mode: commercial_brand_hard_gate_divergence
   biggest_unknown: >-
-    Can broad morphotype exploration produce names with Multifinality-level brand appeal and semantic depth while also preserving exact .com availability and strong trademark distinctiveness across intended commercial categories?
+    Which strong names have an exact .com that is either directly registrable or realistically purchasable, while also retaining strong trademark registrability and Owner-level brand appeal?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: trademark_strength_rescreen_com_survivors_then_continue_balanced_search
-  due_diligence_for_new_finalists: [exact_com, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck, identity_collision_screen]
+  action: trademark_strength_rescreen_direct_com_survivors_and_check_aftermarket_obtainability_for_high_value_registered_coms_then_continue_balanced_search
+  due_diligence_for_new_finalists: [exact_com_registration_status, aftermarket_sale_or_broker_status_if_registered, price_or_quote_if_observable, active_use_conflict, US_TM_registrability_precheck, EU_TM_registrability_precheck, CN_TM_registrability_precheck, WIPO_Madrid_precheck, identity_collision_screen]
   rationale: >-
-    The commercial umbrella organization requires a registrable .com-centered brand. Existing .com-unavailable candidates may remain preference or method evidence but cannot re-enter finalists unless the hard constraint changes.
+    Commercial adoption requires control of the exact .com, not necessarily an unregistered .com. Registered-but-obtainable domains remain viable, while active/nontransferable or economically unrealistic domains fail the gate.
   requires_owner: false_until_new_commercially_viable_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: hard gates clarified; current pool must now optimize for commercially adoptable naming rather than project/open-source naming
+  reason: hard gate refined from registration availability to practical obtainability; broader commercially viable search remains open
