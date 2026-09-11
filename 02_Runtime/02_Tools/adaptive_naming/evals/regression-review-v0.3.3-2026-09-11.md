@@ -40,3 +40,5 @@ No new control-level defect appeared in the latest live microcycles. Therefore:
 3. only reopen Skill design if a new repeatable control failure is observed;
 4. continue #411 primarily as a naming-search problem;
 5. keep PR #416 Draft until the real naming task reaches a sufficiently stable outcome or Owner explicitly requests merge/review-state change.
+
+Latest canonical task state: snapshot v40, commit `b1472e2ca5fe6dc82efdfe266de9078d6c88d967`.
