@@ -6,15 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 77
+  snapshot_version: 78
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v76 记录 N129 Plurivocal 与 N130 Merosophy。
-    Owner 随后明确：未来正式候选不再优先使用现成词，因商业母组织更重视商标可注册性与可保护性；主路线转为自造词/半自造专名，
-    但要求有清晰语义骨架、自然读写，不接受随机 SaaS 音节串。Owner 对 N130 Merosophy 的反馈为：整体可以用、看起来没大问题，
-    主要缺点是中国人念起来比较费劲。本快照据此提高跨语言可读性/发音恢复权重。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v77 将正式候选主路线切换为自造/半自造专名，并加入中文母语者跨语言发音恢复权重。
+    Owner 随后要求提高每次交付的候选数量，避免每轮只看一个名字造成交互成本。本快照因此提高内部生成量与 Owner-visible batch size，
+    但仍要求先做 intrinsic / pronunciation / .com / reality 快筛，避免用低质量名字凑数。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -33,17 +32,16 @@ constraint_registry:
 owner_preferences:
   - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
   - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary overall, but excessive length/visual burden is a real negative; Multifinality felt acceptable while Transindividuality felt too long, confidence: high, priority: secondary_with_upper_bound_signal}
-  - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
-  - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
+  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary overall, but excessive length/visual burden is a real negative; Multifinality felt acceptable while Transindividuality felt too long, confidence: high}
   - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
   - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
   - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive as preference evidence, but formal candidate generation should now prioritize coined/semi-coined proprietary names, confidence: high}
+  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: established concept words may still be attractive as preference evidence, but formal candidate generation should prioritize coined/semi-coined proprietary names, confidence: high}
   - id: PREF-CROSS-LANGUAGE-PRONOUNCEABILITY
-    statement: >-
-      Commercial names should be reasonably pronounceable by Chinese speakers from spelling and recoverable from hearing; Merosophy is acceptable overall but has noticeable Chinese-speaker pronunciation friction.
-    source_type: owner_explicit_reaction
+    statement: Commercial names should be reasonably pronounceable by Chinese speakers from spelling and recoverable from hearing; Merosophy is acceptable overall but has noticeable Chinese-speaker pronunciation friction.
+    confidence: high
+  - id: PREF-BATCHED-OWNER-REVIEW
+    statement: Owner prefers seeing multiple screened names per review turn rather than one-at-a-time exposure; target 5-8 meaningful screened candidates when available.
     confidence: high
 
 search_control:
@@ -53,8 +51,10 @@ search_control:
     claim_policy: sanitized positive briefs only; no literal blindness claim
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
+  owner_visible_batch_target: 5_to_8
   early_creative_policy: >-
-    Prioritize coined or semi-coined proprietary names with semantic backbone, natural orthography and cross-language pronounceability. Existing dictionary/concept words remain research material, not the dominant finalist source. .com, identity and trademark remain post-generation filters.
+    Generate larger internal coined/semi-coined batches, then screen for semantic backbone, brand shape, Chinese/English pronunciation, .com obtainability and reality collision before Owner exposure.
+    Coined must not degrade into random SaaS syllable strings.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
@@ -64,80 +64,122 @@ morphotype_portfolio:
     - coined_single_token_with_clear_morpheme_backbone
     - symbolic_or_structural_coinage
     - crosslanguage_root_fusion_with_high_pronounceability
-  lower_priority_classes:
-    - established_dictionary_or_concept_word
-    - transparent_english_phrase
   evaluation_policy: >-
-    Coined does not mean random. Every promoted coinage should have a coherent semantic rationale, strong recoverability, natural brand shape, and acceptable Chinese/English pronunciation burden.
+    Promoted coinages should have coherent semantic rationale, strong recoverability, natural brand shape, and acceptable Chinese/English pronunciation burden.
 
 rounds:
   - {id: RND-124, action: shorter_true_concept_and_semiopaque_search, result: two_materially_distinct_survivors}
-  - id: RND-125
-    action: owner_shifts_priority_to_proprietary_coinage
-    result: coined_name_route_promoted
+  - {id: RND-125, action: owner_shifts_priority_to_proprietary_coinage, result: coined_name_route_promoted}
+  - {id: RND-126, action: owner_reaction_to_merosophy, result: acceptable_with_cross_language_pronunciation_risk}
+  - id: RND-127
+    action: owner_requests_larger_candidate_batches
+    result: owner_visible_batch_size_increased
     findings:
-      - Owner prefers not to rely on existing words because trademark registrability/protectability is a core commercial requirement
-      - existing words are not globally forbidden but are deprioritized as primary finalist sources
-      - coined/semi-coined names must retain semantic backbone and naturalness rather than become random SaaS syllables
-  - id: RND-126
-    action: owner_reaction_to_merosophy
-    result: acceptable_with_cross_language_pronunciation_risk
+      - Owner says one-name-at-a-time review wastes time
+      - future review turns should expose 5-8 already-screened names when enough quality candidates exist
+      - batching does not relax quality or commercial gates
+  - id: RND-128
+    action: large_semantic_coinage_batch_with_cross_language_screen
+    result: eight_owner_visible_preliminary_survivors
     findings:
-      - Owner says Merosophy looks acceptable and could be used
-      - no major intrinsic objection was expressed
-      - main negative is that Chinese speakers may find it relatively hard to pronounce
-      - this supports adding cross-language pronounceability/recoverability as a meaningful evaluation weight
+      - multiple internal batches were generated; many short strings were rejected because .com was occupied or semantic backbone was too weak
+      - direct-registration .com survivors selected for Owner review: Noemavia, Noetivia, Variavera, Pluravera, Coemera, Synmeros, Cohavera, Versivon
+      - exact .org was also directly registrable for all eight on 2026-09-11
+      - public exact-name web screening found a material issue for Relavera-like forms and Merovida/Merovon, which were excluded from Owner-visible batch
+      - preliminary exact-name searches for the eight selected names found no material active exact commercial identity in current search; formal trademark database clearance remains pending
 
 candidates:
   - id: N130
     name: Merosophy
     role: owner_positive_usable_with_pronunciation_risk
     active: true
-    morphotype: semiopaque_root_derived_proper_name
-    domain_status:
-      com: available_for_registration_2026_09_11
-      org: available_for_registration_2026_09_11
-    reality_status: preliminary_pass_no_material_exact_identity_found
-    trademark_status: preliminary_strong_ownability_signal_formal_clearance_pending
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
     owner_feedback: acceptable_usable_but_chinese_pronunciation_is_difficult
-    strengths: [brand_like, proprietary, semantically_explainable, good_preliminary_ownability]
-    risks: [cross_language_pronunciation_friction, semantic_backbone_not_self_evident, mild_philosophical_tone]
     generation_use: prohibited_as_template_or_seed
-  - id: N129
-    name: Plurivocal
-    role: research_reference_deprioritized_existing_word
-    active: false
-    reason: existing_word_route_deprioritized_for_commercial_trademark_strategy
-    generation_use: prohibited_as_template_or_seed
-  - id: N127
-    name: Multifinality
-    role: preference_evidence_only_aftermarket_pending
+  - {id: N127, name: Multifinality, role: preference_evidence_only_aftermarket_pending, active: true, owner_feedback: interesting_looks_good_feels_like_brand, generation_use: prohibited_as_template_or_seed}
+  - {id: N128, name: Transindividuality, role: owner_rejected_length, active: false, owner_feedback: too_long_not_liked, generation_use: prohibited_as_template_or_seed}
+  - id: N131
+    name: Noemavia
+    role: owner_review_batch_preliminary
     active: true
-    owner_feedback: interesting_looks_good_feels_like_brand
+    semantic_backbone: noema/noesis + via; intended sense is pathways of meaning/understanding
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [noe_sequence_may_have_pronunciation_variation, semantic_root_not_obvious]
     generation_use: prohibited_as_template_or_seed
-  - id: N128
-    name: Transindividuality
-    role: owner_rejected_length
-    active: false
-    owner_feedback: too_long_not_liked
+  - id: N132
+    name: Noetivia
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: noetic + via; intended sense is pathways of knowing/thought
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [slightly_academic_root, five_syllable_load]
+    generation_use: prohibited_as_template_or_seed
+  - id: N133
+    name: Variavera
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: varia + vera; intended sense is variation/plural forms with a truth/realness backbone
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [vera_can_feel_name_like, philosophical_interpretation_needed]
+    generation_use: prohibited_as_template_or_seed
+  - id: N134
+    name: Pluravera
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: pluri + vera; intended sense is plurality with authenticity/truth
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [pluralism_reading_may_be_too_direct, vera_can_feel_name_like]
+    generation_use: prohibited_as_template_or_seed
+  - id: N135
+    name: Coemera
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: co-emerge compressed into a proper-name form; intended sense is things/people/ideas emerging together
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [semantic_construction_not_self_evident, mild_personal_name_risk]
+    generation_use: prohibited_as_template_or_seed
+  - id: N136
+    name: Synmeros
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: syn (together) + meros (parts); intended sense is parts brought into relation / whole through parts
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [greek_root_explanation_needed, first_syllable_pronunciation_can_vary]
+    generation_use: prohibited_as_template_or_seed
+  - id: N137
+    name: Cohavera
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: cohere + vera; intended sense is coherence grounded in something true/real
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [longer_four_to_five_beat_reading, vera_name_association]
+    generation_use: prohibited_as_template_or_seed
+  - id: N138
+    name: Versivon
+    role: owner_review_batch_preliminary
+    active: true
+    semantic_backbone: vers/versi (turn/change/many-sidedness) + proprietary ending; intended sense is capacity to turn, reinterpret, or take multiple orientations
+    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
+    risks: [ending_is_more_brand_built_than_semantically_loaded]
     generation_use: prohibited_as_template_or_seed
 
 current_state:
   owner_positive_commercial_candidates: [N130]
+  owner_review_batch: [N131, N132, N133, N134, N135, N136, N137, N138]
   preference_evidence: [N127]
   owner_rejected: [N128]
   search_mode: coined_semantic_brand_divergence
   biggest_unknown: >-
-    Can a proprietary coined/semi-coined name match or exceed Merosophy's brandability and ownability while being easier for Chinese speakers to pronounce and recover, without becoming semantically empty or SaaS-generic?
+    Which proprietary coined morphology best balances semantic depth, trademark ownability, Chinese pronounceability and brand character once Owner can compare several screened names side by side?
   blockers: []
-  owner_review_needed_now: false
+  owner_review_needed_now: true
 
 next_action:
-  action: continue_semantic_coinage_with_cross_language_pronounceability
+  action: collect_batch_owner_reaction_then_continue_large_internal_generation
   rationale: >-
-    Search for proprietary names with clear semantic construction, lower Chinese-speaker pronunciation friction, exact .com obtainability, and strong trademark prospects. Do not clone Merosophy's -sophy ending or its specific roots.
-  requires_owner: false_for_continued_search
+    Batch exposure should reduce interaction overhead and generate richer comparative preference evidence. Continue autonomous generation after Owner reaction; do not overfit to one suffix/root from this batch.
+  requires_owner: true_for_batch_reaction_not_for_continued_search
 
 stop:
-  status: continue
-  reason: Owner accepted N130 conditionally and provided a useful new cross-language filter; further creation should continue autonomously
+  status: owner_feedback_plus_continue
+  reason: eight screened coined candidates are ready for side-by-side Owner review
