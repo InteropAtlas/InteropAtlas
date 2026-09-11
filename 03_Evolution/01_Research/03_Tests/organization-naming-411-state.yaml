@@ -5,15 +5,19 @@ task:
   repository: InteropAtlas/InteropAtlas
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
-  status: in_progress
-  snapshot_version: 48
+  status: owner_review_ready
+  snapshot_version: 49
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v46 (commit 5898e8eeb9ae4a77977aa3825fce05666d0296a7) 保存首次 Owner Exposure；
-    snapshot v47 (commit d502ac3ce8a7638e13820f9acbae9037230c0aa7) 记录 Owner choice-space feedback。本快照新增 RND-075 portfolio remap/probe。
-    完整历史候选与现实证据由 Git history 与 Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v46 保存首次 Owner Exposure；snapshot v47 保存 Owner choice-space feedback；
+    snapshot v48 保存 RND-075 与第三个独立 finalist N117。本快照新增 RND-076–080 的多区域探索、第四个独立 finalist N119 与 Owner 批量复核入口。
+    完整历史候选、现实证据、淘汰原因与旧快照继续由 Git history 与 Issue #411 保留。
+  previous_snapshots:
+    - {snapshot: 46, commit: 5898e8eeb9ae4a77977aa3825fce05666d0296a7}
+    - {snapshot: 47, commit: d502ac3ce8a7638e13820f9acbae9037230c0aa7}
+    - {snapshot: 48, commit: 26fa62d341e6967e4ee0edb56023abb131472efe}
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -23,6 +27,7 @@ constraint_registry:
   owner_preferences:
     - {id: PREF-LOW-MISREAD, statement: lower misread burden preferred}
     - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists; minimum finalist count is not itself a stopping condition., source_type: owner_explicit, observed_at: 2026-09-11}
+    - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: Owner explicitly requested some surprise while continuing; novelty may increase but intrinsic/reality/domain gates remain unchanged., source_type: owner_explicit, observed_at: 2026-09-11}
 
 mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
 
@@ -31,111 +36,154 @@ owner_feedback:
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular is broadly acceptable but first-read meaning is unclear; Public can evoke public-sector/noncommercial character; unusualness may improve recognition., implications: [retain_for_comparison, validate_first_read_semantics_and_commercial_tone, do_not_use_as_generation_template]}
 
 search_control:
-  mode: exploration_reopened_by_owner
-  search_cadence: {mode: portfolio_batch, target_finalist_pool: 4_to_6, stop_condition: enough genuinely distinct ready-to-use choices or materially diminishing information gain}
+  mode: convergence_batch_review
+  search_cadence: {mode: owner_batch_checkpoint, target_finalist_pool: 4_to_6, current_finalist_count: 4, stop_condition: Owner judges current choice space sufficient or requests further expansion}
   generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, historical_context_may_have_seen_controller_only_exclusions: true, claim_policy: sanitized logical briefs only; no literal blindness claim}
-  controller_only_exclusions: {finalist_candidate_ids: [N096, N113], comparison_only_candidate_ids: [N060], other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]}
+  controller_only_exclusions: {finalist_candidate_ids: [N096, N113, N117, N119], comparison_only_candidate_ids: [N060], other: [historical_reality_survivor_shapes, historical_owner_reaction_subjects]}
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
   post_generation_filter: {enabled: true, check_finalist_similarity: true, check_cooled_families: true, check_strategy_fidelity: true}
 
-reality_screening: {method_ref: reality-screening-contract-v0.3.3, status: active, freshness_recheck_before_owner_exposure: true, domain_after_reality_pass_only: true}
+reality_screening:
+  method_ref: reality-screening-contract-v0.3.3
+  status: active
+  freshness_recheck_before_owner_exposure: true
+  domain_after_reality_pass_only: true
+  formal_tm_clearance_claimed: false
 
 search_landscape:
-  new_regions:
-    - {region_id: REG-EPISTEMIC-VERB-STANCE, architecture: familiar_verb_plus_orientation_adverb_or_complement, intent: active stance toward perspective/discovery without public/commons vocabulary or exposed-finalist syntax, sampling_status: sampled_one_survivor, quality_yield: medium_high_current_probe, reality_crowding: low_current_top_slice}
-    - {region_id: REG-COMMON-MAKING-IMPERATIVE, architecture: action_phrase_about_contribution_or_commoning, sampling_status: sampled_move_away, quality_yield: medium, reality_crowding: decisive_tm_conflict_top_slice, note: Make Common had a current Spanish MAKECOMMON software trademark signal}
-    - {region_id: REG-PLURAL-LOCUS, architecture: plurality_term_plus_place_or_basis_noun, sampling_status: not_promoted, note: plural-root proximity to comparison/incumbent semantic space and active Plural/Plurality ecosystem identities reduce independence value}
+  recent_regions:
+    - {region_id: REG-AUTONOMY-IDIOM, sampling_status: sampled_move_away, result: strongest natural candidate had active exact company identity}
+    - {region_id: REG-RELATIONAL-POSITION, sampling_status: sampled_move_away, result: In Turn failed .org gate; Of Many had high-adjacency NYU Of Many Institute identity; Among Others carried strong existing title identity}
+    - {region_id: REG-CONTINUANCE-PHRASE, sampling_status: sampled_move_away, result: Further Still had multiple active exact identities including tattoo/construction/ministry uses}
+    - {region_id: REG-INTERSTITIAL-WORK, sampling_status: sampled_move_away, result: The Work Between already exists as highly adjacent collaboration/system-change platform}
+    - {region_id: REG-TRANSPARENT-FUSED-COMPOUND, sampling_status: sampled_one_finalist, result: Elseground survived intrinsic, recoverability, exact/near reality, public-web TM-oriented screen and .org gate}
+    - {region_id: REG-CONTRIBUTION-CARRY, sampling_status: sampled_move_away, result: Carry Forward/Give Rise/Pass Along had current trademark or organization conflicts}
+    - {region_id: REG-UNFINISHED-STATE, sampling_status: sampled_move_away, result: As Yet had exact active UK company identity despite available .org; not promoted}
   integrity: {finalist_shape_feedback_detected: false, reality_feedback_to_generation_detected: false}
 
 workflow_scheduler:
   policy: diagnosis_driven_pattern_portfolio
-  recent_allocations: [RND-074:owner_feedback_ingest, RND-075:white_space_mapping_plus_category_parallel]
+  recent_allocations: [RND-074:owner_feedback_ingest, RND-075:white_space_mapping_plus_category_parallel, RND-076:autonomy_and_relational_probe, RND-077:continuance_probe, RND-078:interstitial_probe, RND-079:transparent_fused_compound_probe, RND-080:contribution_and_unfinished_state_probe]
   active_patterns:
-    - {pattern_id: category_parallel, status: completed_current_probe, last_used_round: RND-075}
-    - {pattern_id: white_space_mapping, status: active_next, question_to_answer: find at least one more materially independent ready-to-use architecture beyond N096/N113/N117}
+    - {pattern_id: decision_hygiene, status: active_next, question_to_answer: compare four materially different ready-to-use finalists with Owner without forcing selection}
 
 method_scheduler:
   policy: adaptive_operator_portfolio
-  protected_from_imitation: [N096_survivor_shape, N113_survivor_shape, N117_survivor_shape]
-  recent_deprioritized_regions: [title_style_institutional, concrete_metaphor_mononym, relational_adverb_mononym, immediate_phrase_family_exploitation, immediate_tension_dyad_family_exploitation, common_making_imperative]
+  protected_from_imitation: [N096_survivor_shape, N113_survivor_shape, N117_survivor_shape, N119_survivor_shape]
+  diagnostics: {scheduler_monoculture: false, method_underuse: false}
 
 candidates:
-  - {id: N096, name: Open Regard, role: finalist_baseline, active: true, owner_signal: positive_usable_not_selected, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}, reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_2026_09_11, formal_tm_clearance: not_claimed}, generation_use: prohibited_as_template}
-  - {id: N113, name: Public Singular, role: finalist_hold, active: true, owner_signal: hold_explanation_required, intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}, reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_2026_09_11, formal_tm_clearance: not_claimed}, owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern], generation_use: prohibited_as_template}
+  - id: N096
+    name: Open Regard
+    role: finalist_baseline
+    active: true
+    owner_signal: positive_usable_not_selected
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, first_read_comprehension: high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
+    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: openregard.org_available_fresh_recheck_2026_09_11, formal_tm_clearance: not_claimed}
+    generation_use: prohibited_as_template
+  - id: N113
+    name: Public Singular
+    role: finalist_hold
+    active: true
+    owner_signal: hold_explanation_required
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, first_read_comprehension: medium_low, semantic_room: medium_high, target_scale_fit: good, architecture_fit: good}
+    reality: {fresh_screen_2026_09_11: no_material_active_exact_identity_found, domain: publicsingular.org_available_fresh_recheck_2026_09_11, formal_tm_clearance: not_claimed}
+    owner_risks: [first_read_semantic_decode_cost, public_sector_noncommercial_tone_concern]
+    generation_use: prohibited_as_template
   - id: N117
     name: See Otherwise
-    role: finalist_owner_ready_unexposed
+    role: finalist_owner_ready
     active: true
     provenance: {round: RND-075, region: REG-EPISTEMIC-VERB-STANCE}
     intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: medium_high, memorability: good, first_read_comprehension: high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
     architecture_test: [See Otherwise Research, See Otherwise Education, See Otherwise Tools, See Otherwise Press, InteropAtlas by See Otherwise]
     value_alignment: indirect_perspective_and_discovery_stance_without_public_noncommercial_tone
-    reality:
-      screening: {level: 1_plus_near_probe, observed_at: 2026-09-11, exact_result: no_material_active_exact_brand_org_software_identity_found_current_queries, near_name_result: ordinary_phrase_and_academic_usage_only_current_queries, public_tm_signal: no_material_exact_public_signal_found_current_web_screen_not_formal_clearance, confidence: medium_high}
-      domain: {name: seeotherwise.org, observation: available, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
+    reality: {screen_2026_09_11: no_material_active_exact_brand_org_software_identity_found_current_queries, near_name: ordinary_phrase_and_academic_usage_only_current_queries, public_tm_signal: no_material_exact_public_signal_found_current_web_screen_not_formal_clearance, domain: seeotherwise.org_available_fresh_recheck_2026_09_11}
     diagnosis: [mild_imperative_or_manifesto_tone_risk]
     generation_use: prohibited_as_template
-    owner_exposure: ready_when_next_peer_or_batch_checkpoint_reached
-  - {id: N118, name: Make Common, role: reality_blocked, active: false, provenance: {round: RND-075, region: REG-COMMON-MAKING-IMPERATIVE}, reality: {result: red_current_MAKECOMMON_software_trademark_signal_Spain}, owner_exposure: prohibited_current_evidence}
+  - id: N119
+    name: Elseground
+    role: finalist_owner_ready
+    active: true
+    provenance: {round: RND-079, region: REG-TRANSPARENT-FUSED-COMPOUND}
+    intrinsic: {pronunciation: high, spelling_recovery: high, distinctiveness: high, memorability: good, first_read_comprehension: medium_high, semantic_room: high, target_scale_fit: good, architecture_fit: good}
+    architecture_test: [Elseground Research, Elseground Education, Elseground Tools, Elseground Press, InteropAtlas by Elseground]
+    construction_truth: fused_full_words_else_plus_ground; not claimed as historical word or borrowed etymology
+    value_alignment: indirect_alternative_perspective_plus_shared_basis_metaphor; does_not_encode_full_mission
+    reality:
+      screening: {level: 1_plus_near_probe, observed_at: 2026-09-11, exact_result: no_material_active_exact_identity_found_current_queries, near_name_result: no_material_high_adjacency_identity_found_current_queries, public_tm_signal: no_material_exact_public_web_signal_found_not_formal_clearance, confidence: medium_high}
+      domain: {name: elseground.org, observation: available_fresh_recheck, source: Namecheap, observed_at: 2026-09-11, price_usd_observed: 8.48}
+    diagnosis: [coined_compound_requires_brand_meaning_to_settle, slightly_more_constructed_than_N096_N117]
+    generation_use: prohibited_as_template
+  - {id: N120, name: As Yet, role: reality_yellow_not_promoted, active: false, provenance: {round: RND-080, region: REG-UNFINISHED-STATE}, reality: {exact_result: active_UK_AS_YET_LTD_currently_proposal_to_strike_off, domain: asyet.org_available_2026_09_11}, diagnosis: [exact_company_identity_even_if_dormant_or_strikeoff_pending, fragment_like_identity_risk]}
   - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
   - {id: N061, role: held_historical, active: true, generation_use: prohibited_as_seed}
 
 rounds:
-  - {id: RND-074, action: owner_feedback_ingest_and_exploration_reopen, generated_count: 0, findings: [N096 confirmed usable but not selected, N113 retained with comprehension/commercial-tone concerns, choice-space target expanded]}
-  - id: RND-075
-    action: white_space_remap_plus_distinct_category_parallel_probe
-    generated_count: bounded_multi_region_probe
-    reality_screened_top_slice: [N117, N118]
-    domain_queried_after_reality_pass: [N117]
+  - {id: RND-074, action: owner_feedback_ingest_and_exploration_reopen, generated_count: 0}
+  - {id: RND-075, action: white_space_remap_plus_distinct_category_parallel_probe, result: third_independent_finalist_N117}
+  - {id: RND-076, action: autonomy_and_relational_position_probe, result: no_finalist; active exact identity, adjacent institutional identity, title identity or domain gate blocked strongest forms}
+  - {id: RND-077, action: continuance_phrase_probe, result: no_finalist_due_multiple_active_exact_identities}
+  - {id: RND-078, action: interstitial_work_probe, result: no_finalist_due_highly_adjacent_active_exact_platform_identity}
+  - id: RND-079
+    action: transparent_fused_full_word_compound_probe
+    generated_count: bounded_probe
+    result: fourth_independent_finalist_N119
     findings:
-      - N117 See Otherwise is readable, immediately comprehensible, organization-scalable, current-reality-clean in the bounded screen, and seeotherwise.org is currently available
-      - N118 Make Common was blocked by a current MAKECOMMON software trademark signal and was not promoted
-      - plural-locus material was not promoted because it reduced independence from existing comparison/plurality semantic space
-      - N117 is quarantined from further generation as soon as it survived
-    integrity_check: {N096_N113_not_used_as_generation_templates: true, N117_quarantined_after_survival: true, reality_before_domain_for_promoted_candidate: true, actual_generation_isolation: best_effort_same_context, no_false_blindness_claim: true}
+      - Elseground used two fully recoverable ordinary English components rather than opaque phonotactics
+      - exact and near reality searches did not surface a material active identity in current queries
+      - elseground.org was available on 2026-09-11
+      - construction is materially different from N096 phrase, N113 tension dyad and N117 verb-stance architectures
+    integrity_check: {existing_finalists_not_used_as_templates: true, reality_before_domain: true, N119_quarantined_after_survival: true, actual_generation_isolation: best_effort_same_context}
+  - {id: RND-080, action: contribution_cycle_plus_unfinished_state_probe, result: no_additional_finalist; carry/give/pass forms collided with live marks or organizations and As Yet had exact current company identity}
 
 observations:
-  - {id: O-R074-CHOICE, scope: owner_decision, observation: acceptable finalist does not imply sufficient choice space; stop depends on Owner sufficiency and marginal information gain}
-  - {id: O-R074-FIRSTREAD, scope: naming_quality, observation: semantic elegance and first-read comprehension must be observed separately}
-  - {id: O-R075-STANCE, scope: search_landscape, observation: an active epistemic stance phrase can preserve ordinary spelling and immediate comprehension while creating a distinct organization identity in this task}
+  - {id: O-R079-FUSED, scope: search_landscape, observation: a transparent fused compound can retain dictation recoverability while creating namespace distance in this task; one success is task-local evidence only}
+  - {id: O-R080-GRAY, scope: reality, observation: available .org does not rescue an otherwise ambiguous exact company identity; As Yet was not promoted despite domain availability}
 
 diagnostics:
-  - {id: D-R074-01, diagnosis_type: finalist_pool_insufficient_despite_usable_baseline, confidence: high}
-  - {id: D-R075-01, diagnosis_type: third_independent_finalist_signal_found_choice_space_still_expandable, statement: N117 adds a third independent ready-to-use architecture but target pool remains 4-6; continue remap rather than exploit N117 family, confidence: high, proposed_state_change: continue_distinct_portfolio_search}
+  - id: D-R080-01
+    diagnosis_type: owner_batch_checkpoint_reached_with_four_independent_finalists
+    statement: four materially different ready-to-use candidates now satisfy current task gates; Owner requested more choice and surprise, and current pool is sufficient for a new comparative reaction before further search.
+    confidence: high
+    proposed_state_change: expose_four_candidate_batch_without_forcing_selection
 
 experience_candidates:
-  - {id: E-R074-STOP-SUFFICIENCY, observation: finalist-count threshold should not be sufficient stopping evidence when Owner reports inadequate choice space, scope: potentially_general, confidence: medium, status: experience_candidate_not_skill_rewrite}
-  - {id: E-R074-FIRSTREAD, observation: first-read semantic comprehension should be distinguished from post-explanation conceptual fit, scope: potentially_general, confidence: medium, status: experience_candidate_not_skill_rewrite}
-  - {id: E-R075-STANCE, observation: epistemic verb-stance architecture yielded one independent survivor in this task, scope: task_local, confidence: low_medium, status: observed_not_exported}
+  - {id: E-R079-TRANSPARENT-FUSION, observation: full-word fusion may provide a recoverability/namespace compromise distinct from opaque coinage in this task, scope: task_local, confidence: low_medium, status: observed_not_exported}
 
 experience_export: {registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml, direct_skill_rewrite_allowed: false, method_level_export: none_new_cross_task_evidence_insufficient}
 
 current_state:
-  finalists: [N096, N113, N117]
+  finalists: [N096, N113, N117, N119]
   baseline_candidate_id: N096
   held_candidates: [N086, N061]
-  search_mode: exploration_reopened_by_owner
-  search_cadence_mode: portfolio_batch
+  search_mode: convergence_batch_review
+  search_cadence_mode: owner_batch_checkpoint
   target_finalist_pool: 4_to_6
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: can one or more additional materially independent architectures reach the ready-to-use bar without reducing recoverability or copying current finalists?
+  biggest_unknown: which identity characters resonate with Owner now that the pool includes stable-natural, conceptual-tension, active-perspective and transparent-coined architectures?
   blockers: []
-  information_gain: medium_high_for_one_more_independent_region
-  owner_review_needed_now: false
+  information_gain: high_from_owner_comparative_signal
+  owner_review_needed_now: true
 
 next_action:
-  action: remap_for_fourth_independent_finalist
-  target: find_materially_different_ready_to_use_candidate_beyond_N096_N113_N117
-  rationale: Owner asked for more choice; N117 improves the pool but is quarantined from generation. Remap again and probe a genuinely different identity architecture before the next Owner batch review.
-  triggered_by: [D-R075-01]
-  expected_information_gain: medium_high
-  selected_workflow_pattern_ids: [white_space_mapping, category_parallel]
-  requires_owner: false
-  owner_gate_classification: search_strategy
+  action: owner_review_four_distinct_finalists
+  target: compare_N096_N113_N117_N119_without_forcing_final_selection
+  rationale: >-
+    Owner requested more credible choice and some surprise. Four materially different candidates now pass the current working gates.
+    Expose the two new candidates alongside the two known candidates, gather comparative reaction, then either continue toward 5-6 or narrow/validate based on Owner sufficiency.
+  triggered_by: [D-R080-01]
+  expected_information_gain: high
+  selected_workflow_pattern_ids: [decision_hygiene]
+  requires_owner: true
+  owner_gate_classification: comparative_owner_signal
 
 stop:
-  status: continue
-  reason: three independent ready-to-use candidates now exist, but Owner requested broader choice and target pool is 4-6
-  unresolved: [formal trademark legal clearance remains deferred, true isolated generation runtime unavailable, at least one more independent finalist preferred before next Owner batch review]
+  status: pause_for_owner_batch_review
+  reason: four independent ready-to-use finalists are now available; further blind expansion has lower information value than a comparative Owner reaction
+  unresolved:
+    - formal trademark legal clearance remains deferred and is not implied by public screening
+    - true isolated generation runtime remains unavailable in this context
+    - Owner may request expansion toward 5-6 after reviewing the four
