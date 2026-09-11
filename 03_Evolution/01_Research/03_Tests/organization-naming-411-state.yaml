@@ -6,35 +6,34 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 69
+  snapshot_version: 70
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v68 记录 balanced morphotype search 中 N127 Multifinality 成为新的系统概念词 clean peer。
-    本快照记录 Owner 对 Multifinality 的明确正反馈：有意思、看起来不错、像品牌名。该反馈提升 N127 为正式 Owner-ready finalist，
-    但不得把 -finality、系统理论术语或 N127 的词形/语义结构回灌为 Generator 模板。完整历史继续由 Git history / Issue #411 保留。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v69 记录 Owner 对 N127 Multifinality 的明确正反馈。
+    本快照新增 Owner 要求：finalist 不只检查 .org，还要记录 exact .com 状态，并对美国、欧盟、中国、WIPO/Madrid 做公开商标可注册性初筛。
+    该筛查仍不是正式法律意见或完整 clearance。
 
 constraint_registry:
   confirmed_hard_constraints:
     - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale, source_type: owner_explicit}
     - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
     - {id: HC-ORG-DOMAIN, statement: exact ordinary .org availability is a finalist hard gate but not an early creative filter, source_type: owner_explicit}
-  owner_preferences:
-    - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
-    - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
-    - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary preference only, confidence: high, priority: secondary}
-    - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
-    - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
-    - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
-    - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
-    - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
-    - id: PREF-CONCEPTUAL-BRANDABILITY
-      statement: >-
-        Owner positively responds when an established concept word still reads visually as a coherent standalone brand identity; explicit reaction to Multifinality: interesting, looks good, feels like a brand name.
-      source_type: owner_explicit_reaction
-      confidence: high
-      use: evaluation_signal_not_generation_template
+  finalist_due_diligence_requirements:
+    - {id: DD-COM, statement: check exact .com availability/occupancy for finalists; .com is an important risk signal but Owner has not made it a hard gate, source_type: owner_explicit}
+    - {id: DD-TM, statement: perform preliminary trademark registrability/collision screening across US, EU, CN, and WIPO/Madrid before final adoption; distinguish exact collision from descriptiveness/distinctiveness risk, source_type: owner_explicit}
+
+owner_preferences:
+  - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
+  - {id: PREF-EXPRESSION-STABLE-MODERN, statement: stable, harmonious, reliable; youthfulness welcome when dependable, confidence: high}
+  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: shorter spoken effort is secondary preference only, confidence: high, priority: secondary}
+  - {id: PREF-RHYTHMIC-SYMMETRY, statement: balanced spoken structure is optional bonus, confidence: high}
+  - {id: PREF-VISUAL-SYMMETRY-CYCLE, statement: visual symmetry/cycle echo is optional bonus, confidence: high}
+  - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
+  - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
+  - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
+  - {id: PREF-CONCEPTUAL-BRANDABILITY, statement: Owner positively responds when an established concept word still reads visually as a coherent standalone brand identity; explicit reaction to Multifinality was positive, confidence: high, use: evaluation_signal_not_generation_template}
 
 mission_value_model:
   core_structure_available_to_controller: true
@@ -45,25 +44,8 @@ integrity_incidents:
   - {id: INC-SEMANTIC-ANCHOR-001, status: corrected_and_live_recovery_observed, classification: controller_runtime_fidelity_failure}
   - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_and_live_recovery_observed, classification: workflow_scheduler_fidelity_failure}
 
-controller_only_quarantine:
-  literal_value_tokens: [common, commons, perspective, creation, return]
-  temporary_architecture_cooldown:
-    - established_english_relational_phrase
-    - preposition_phrase_of_form
-    - adjective_noun_semantic_metaphor_phrase
-  policy: task-local Controller controls only; do not expose negatives to Generator
-
-expression_profile:
-  baseline: meaningful + stable-modern + organization-scale + recoverable + non-personal
-  secondary_preferences: [compactness, rhythmic_balance]
-  optional_bonuses: [visual_cycle_echo, understated_cleverness, conceptual_brandability]
-  anti_overfit: [do_not_force_shortness, do_not_force_RCO, do_not_force_palindrome, do_not_force_blend, do_not_force_phrase, do_not_force_systems_terms]
-
 search_control:
   mode: balanced_morphotype_divergence_live
-  search_cadence:
-    mode: category_parallel
-    target: produce additional clean survivors from materially different form classes without cloning N127
   generation_isolation:
     level: best_effort_same_context
     claim_policy: sanitized positive briefs only; no literal blindness claim
@@ -72,134 +54,67 @@ search_control:
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
-  parallel_classes:
-    - lexical_single_semantic_transfer
-    - blend_or_semantic_fusion
-    - root_derived_or_affixal
-    - opaque_or_semiopaque_proper_name
-    - nonenglish_or_crosslanguage_identity
-    - symbolic_or_structural_identity
-    - compound_single_token
-    - phrase_or_relational_name_minor_budget_only
+  parallel_classes: [lexical_single_semantic_transfer, blend_or_semantic_fusion, root_derived_or_affixal, opaque_or_semiopaque_proper_name, nonenglish_or_crosslanguage_identity, symbolic_or_structural_identity, compound_single_token, phrase_or_relational_name_minor_budget_only]
   evaluation_policy: meaning may be implicit, etymological, structural, metaphorical or brand-built; phrase-level transparency is not required
 
 rounds:
-  - {id: RND-110, action: owner_detected_morphotype_diversity_audit, result: architecture_collapse_confirmed}
-  - {id: RND-111, action: morphotype_portfolio_reset, result: next_generation_contract_rebalanced}
-  - {id: RND-112, action: balanced_morphotype_divergence_batch_1, result: diversity_restored_no_owner_ready_promotion_yet}
-  - {id: RND-113, action: balanced_morphotype_divergence_batch_2, result: two_internal_survivor_signals}
-  - {id: RND-114, action: balanced_nonphrase_peer_search_3, result: no_clean_peer_from_first_subbatch}
-  - {id: RND-115, action: systems_concept_nonphrase_probe, result: one_new_clean_peer}
-  - id: RND-116
-    action: owner_reaction_to_multifinality
-    result: strong_positive_brandability_signal
+  - {id: RND-116, action: owner_reaction_to_multifinality, result: strong_positive_brandability_signal}
+  - id: RND-117
+    action: multifinality_domain_and_trademark_due_diligence_extension
+    result: mixed_domain_preliminary_tm_pass
     findings:
-      - Owner finds Multifinality interesting
-      - Owner says it looks good and feels like a brand name
-      - positive reaction supports meaning-first long-form conceptual naming as a viable identity class
-      - do not infer preference for -finality suffix, systems jargon, or long academic words generally
-      - continue broad morphotype search to avoid exploitation collapse
+      - multifinality.org remains available at Namecheap for USD 8.48 on 2026-09-11
+      - multifinality.com is unavailable at Namecheap on 2026-09-11
+      - current public exact-name searches found no obvious MULTIFINALITY trademark/company/software identity signal in USPTO/EUIPO/WIPO/CNIPA-indexed web results
+      - exact database absence cannot be proven from web indexing alone; this is preliminary screening only
+      - the word is an established term in systems theory, developmental psychology and goal-systems research
+      - registrability risk therefore depends partly on goods/services: stronger for arbitrary/suggestive use in unrelated software/organization services, weaker if claimed services directly teach/research/analyze multifinality because descriptiveness/genericness objections become more plausible
 
 candidates:
   - {id: N096, name: Open Regard, role: finalist_baseline, active: true, generation_use: prohibited_as_template}
   - {id: N113, name: Public Singular, role: finalist_hold, active: true, generation_use: prohibited_as_template}
   - {id: N117, name: See Otherwise, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
   - {id: N119, name: Elseground, role: finalist_owner_ready, active: true, generation_use: prohibited_as_template}
-  - {id: N121, name: Common Refrain, role: diagnostic_contaminated_not_owner_ready, active: false, generation_use: prohibited_as_template_or_seed}
-  - {id: N122, name: Turn of Mind, role: held_internal_preliminary, active: true, morphotype: established_phrase_semantic_double_reading, generation_use: prohibited_as_template}
-  - {id: N123, name: Form of Thought, role: provisional_owner_exposed_but_form_family_contaminated, active: true, morphotype: institutional_semantic_phrase, generation_use: prohibited_as_template}
-  - {id: N124, name: New Grammar, role: held_internal_preliminary, active: true, morphotype: semantic_metaphor_phrase, generation_use: prohibited_as_template}
-  - id: N125
-    name: Recomposure
-    role: held_internal_preliminary
-    active: true
-    morphotype: lexical_single_root_derived
-    reality_status: preliminary_pass_with_ordinary_term_and_title_noise
-    domain_status: recomposure.org_available_2026_09_11
-    risks: [airport-security-term-association, musical-title-usage, may_read_as_recovery_more_than_creation]
-    owner_exposure: not_yet
-    generation_use: prohibited_as_template
-  - id: N126
-    name: Compossibility
-    role: diagnostic_hold_recoverability_risk
-    active: true
-    morphotype: lexical_philosophical_term
-    reality_status: preliminary_pass_public_search
-    domain_status: compossibility.org_available_2026_09_11
-    risks: [material_spelling_dictation_branching, high_academic_density]
-    owner_exposure: not_yet
-    generation_use: prohibited_as_template
   - id: N127
     name: Multifinality
     role: finalist_owner_ready
     active: true
     morphotype: established_systems_concept_single_word
-    intrinsic_case:
-      - established systems/development/goal-theory concept describing one starting condition or means leading to multiple possible outcomes/ends
-      - naturally expresses generativity and plurality of possible outcomes without literal mission wording
-      - one-word architecture materially differs from current phrase/compound finalists and from Recomposure's re-forming semantics
-      - length is acceptable under Owner's meaning-first preference; spelling is decomposable as multi + finality and substantially more recoverable than Compossibility
-    owner_profile_fit:
-      meaning_first: strong
-      stable_modern: medium_high
-      organization_scale: strong
-      recoverability: medium_high
-      source_distinctiveness: strong_relative_to_natural_phrases
-      conceptual_brandability: strong_owner_confirmed
-      compactness: low_secondary_only
-      personal_name_risk: low
-    reality_status: preliminary_pass
-    domain_status: multifinality.org_available_2026_09_11
     owner_feedback: interesting_looks_good_feels_like_brand
+    reality_status: preliminary_pass
+    domain_status:
+      org: available_2026_09_11
+      com: unavailable_2026_09_11
+    trademark_screening:
+      status: preliminary_no_material_exact_signal_found
+      jurisdictions: [US, EU, CN, WIPO_Madrid]
+      registrability_risk: medium
+      key_issue: established technical/academic term; distinctiveness depends on claimed goods/services
+      legal_clearance: not_performed
     risks:
       - academic/technical tone is strong
       - developmental psychology and psychopathology are prominent existing usage domains
       - ordinary audiences may not know the word without explanation
-      - public trademark screening remains preliminary only
+      - .com unavailable
+      - trademark distinctiveness could weaken for services directly describing the concept
     owner_exposure: positive
     generation_use: prohibited_as_template_or_seed
-  - {id: N060, name: Plurifold, role: comparison_only, active: true, generation_use: prohibited_as_template_or_semantic_anchor}
-  - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
-
-method_evolution:
-  registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
-  active_hypothesis: HYP-004
-  latest_evidence: >-
-    Owner strongly accepted a long established concept word as brand-like, confirming that transparent phrase-level meaning and compactness are not prerequisites for Owner attraction. Form diversity must remain active because this is category-level evidence, not permission to exploit systems jargon.
-  proposed_regression_addition: ensure portfolio-level morphotype coverage is checked after region pruning or reality-crowding updates
-  stable_skill_rewrite_allowed_now: false
 
 current_state:
   finalists: [N096, N113, N117, N119, N127]
-  held_clean_survivors: [N122, N123, N124, N125]
-  diagnostic_holds: [N126]
   search_mode: balanced_morphotype_divergence_live
   biggest_unknown: >-
-    Can another materially different form class achieve Multifinality-level brandability and semantic depth with equal or better recoverability and less academic/domain-specific baggage?
+    Can another materially different form class achieve Multifinality-level brandability and semantic depth with equal or better recoverability, cleaner .com posture, and stronger trademark distinctiveness?
   blockers: []
   owner_review_needed_now: false
-  information_gain: high_from_owner_confirmed_conceptual_brandability
 
 next_action:
-  action: continue_balanced_peer_search_without_systems_term_exploitation
-  selected_workflow_patterns: [category_parallel, divergence_burst, creative_linguistic_parallel]
-  priority_classes:
-    - lexical_single_semantic_transfer
-    - blend_or_semantic_fusion
-    - root_derived_or_affixal
-    - opaque_or_semiopaque_proper_name
-    - nonenglish_or_crosslanguage_identity
-    - symbolic_or_structural_identity
-    - compound_single_token
-  phrase_budget: minor_only
+  action: continue_balanced_peer_search_with_extended_finalist_due_diligence
+  due_diligence_for_new_finalists: [exact_org, exact_com, US_TM_precheck, EU_TM_precheck, CN_TM_precheck, WIPO_Madrid_precheck]
   rationale: >-
-    N127 is now Owner-confirmed and materially expands the choice space. Continue broad form exploration to find peers from different meaning/construction sources rather than cloning its suffix, academic tone or systems-theory origin.
+    Preserve broad form exploration while adding .com and trademark-distinctiveness/collision evidence before final adoption. Do not let .com availability become an early creative filter unless Owner later promotes it to a hard gate.
   requires_owner: false_until_new_materially_distinct_owner_ready_survivor_exists
 
 stop:
   status: continue
-  reason: strong positive Owner signal received; search should broaden rather than converge immediately
-  unresolved:
-    - at least one additional clean peer from a different form class remains desirable
-    - formal trademark legal clearance remains deferred
-    - true isolated generation runtime remains unavailable
+  reason: N127 remains viable but has .com and distinctiveness tradeoffs; broader peer search remains valuable
