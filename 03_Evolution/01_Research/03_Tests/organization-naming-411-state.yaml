@@ -6,13 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 51
+  snapshot_version: 52
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v49 保存四个 Owner-visible finalists；snapshot v50 记录 Owner-visible morphotype coverage gap 与 HYP-004。
-    本快照记录 Owner 对偏好探测机制的进一步建议：可用成熟品牌作为低成本对照样本，也可按需生成中性样本；稳定 Skill 不宜硬编码具体题库或品牌名单。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v51 保存 morphotype preference probe 设计。
+    本快照记录第一轮成熟品牌锚点探测结果：Owner 对所展示的多种成熟品牌形态均无明显违和或排斥，
+    因而只能支持“当前无明显 morphotype 禁区”，不能支持“所有 morphotype 同等偏好”；品牌成功/熟悉度 halo 被确认是主要混杂因素。
     完整历史候选、现实证据与旧轮次继续由 Git history 与 Issue #411 保留。
 
 constraint_registry:
@@ -25,6 +26,11 @@ constraint_registry:
     - {id: PREF-CHOICE-SPACE, statement: Owner wants more credible ready-to-use choices even when one acceptable candidate already exists, source_type: owner_explicit}
     - {id: PREF-SURPRISE-WITHOUT-LOWERING-BAR, statement: novelty may increase but intrinsic/reality/domain gates remain unchanged, source_type: owner_explicit}
     - {id: PREF-MORPHOTYPE-DISCOVERY, statement: Owner wants exposure to materially different name forms to discover broad category preference rather than constrain search to coinage or compounds, source_type: owner_explicit}
+    - id: PREF-MORPHOTYPE-OPENNESS
+      statement: Owner showed no obvious rejection of any mature-brand morphotype in the first reference-anchor probe; treat as openness/no-clear-taboo, not as equal preference across classes.
+      source_type: owner_observed
+      confidence: medium
+      observed_at: 2026-09-11
 
 mission_value_model: {core_structure: Commons -> Perspective -> Creation -> Commons, value_claims: [V-COMMONS, V-AGENCY, V-CREATION, V-RETURN]}
 
@@ -33,22 +39,21 @@ owner_feedback:
   - {id: OF-N113-01, candidate_id: N113, signal: hold_explanation_required, statement: Public Singular broadly acceptable but first-read meaning unclear and Public may imply public-sector/noncommercial tone.}
   - {id: OF-N117-01, candidate_id: N117, signal: positive_with_form_cost, statement: See Otherwise feels younger and semantically acceptable but too long/multipart.}
   - {id: OF-N119-01, candidate_id: N119, signal: positive_stable, statement: Elseground has no major semantic or visual problem and feels stable, but another compound-like form does not reveal broad form preference.}
-  - id: OF-MORPHOTYPE-PROBE-02
-    signal: method_feedback
-    statement: >-
-      Owner proposes a structured series of contrast questions to explore naming-form preference. Mature established brand names can be used as low-cost vocabulary/examples to save generation resources; generated examples remain optional. Stable Skill need not encode detailed fixed questions, but future Skill revision should handle this carefully as a methodological design problem.
-    implications:
-      - design_optional_bounded_morphotype_preference_probe
-      - prefer_reference_anchors_when_bias_can_be_controlled
-      - use_generated_neutral_examples_when_reference_brand_halo_or_coverage_is_problematic
-      - keep_specific_question_bank_outside_stable_skill
+  - id: OF-MORPHOTYPE-PROBE-03
+    signal: preference_probe_result
+    statement: Owner reports that all mature-brand examples across lexical, coined, phrase/compound, non-English, acronymic and symbolic categories feel harmonious/acceptable with no obvious违和感.
+    interpretation:
+      - supports_no_clear_morphotype_taboo
+      - does_not_support_equal_preference
+      - mature_brand_success_and_familiarity_halo_likely_reduces_discrimination
+      - next_probe_should_use_unfamiliar_neutral_matched_examples
 
 search_control:
   mode: morphotype_preference_probe
   search_cadence:
     mode: validation_only
-    target: learn_owner_form_preference_before_more_generation
-    stop_condition: enough category-level signal exists to reallocate search budget without hard-locking one form class
+    target: reduce remaining morphotype preference uncertainty with unfamiliar neutral anchors
+    stop_condition: enough category-level signal exists to rebalance formal name search, or second probe again shows broad openness and low discriminability
   generation_isolation: {level: best_effort_same_context, runtime_identity: ChatGPT current conversation runtime, claim_policy: sanitized logical briefs only; no literal blindness claim}
   finalist_template_use: prohibited
   reality_feedback_quarantine: {enabled_in_exploration: true, same_batch_feedback_to_generator: prohibited}
@@ -56,45 +61,42 @@ search_control:
 morphotype_landscape:
   purpose: distinguish semantic/search diversity from Owner-visible identity-form diversity
   classes:
-    - {id: MT-LEXICAL-SINGLE, description: single existing word or semantic transfer, owner_visible_coverage: insufficient}
-    - {id: MT-PHRASE, description: natural phrase/proposition, owner_visible_coverage: high, examples_current: [N096, N117]}
-    - {id: MT-DYAD, description: two familiar words in deliberate relation/tension, owner_visible_coverage: medium, examples_current: [N113]}
-    - {id: MT-TRANSPARENT-COMPOUND, description: fused or compounded full words, owner_visible_coverage: medium, examples_current: [N119]}
-    - {id: MT-BLEND, description: clipped/blended source forms creating a new word, owner_visible_coverage: insufficient}
-    - {id: MT-ROOT-DERIVED, description: classical/other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient}
-    - {id: MT-OPAQUE-COINAGE, description: sound-first/low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: insufficient}
-    - {id: MT-NONENGLISH-LEXICAL, description: intact/lightly adapted non-English lexical identity with global usability, owner_visible_coverage: insufficient}
-    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity if independently brandable, owner_visible_coverage: insufficient}
-    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity when orally recoverable/domain-compatible, owner_visible_coverage: insufficient}
+    - {id: MT-LEXICAL-SINGLE, description: single existing word or semantic transfer, owner_visible_coverage: reference_probe_seen_no_rejection}
+    - {id: MT-PHRASE, description: natural phrase/proposition, owner_visible_coverage: high_current_candidates_plus_reference_probe}
+    - {id: MT-DYAD, description: two familiar words in deliberate relation/tension, owner_visible_coverage: medium_current_candidates}
+    - {id: MT-TRANSPARENT-COMPOUND, description: fused or compounded full words, owner_visible_coverage: medium_current_candidates}
+    - {id: MT-BLEND, description: clipped/blended source forms creating a new word, owner_visible_coverage: reference_probe_seen_no_rejection}
+    - {id: MT-ROOT-DERIVED, description: classical/other-language root-derived proper name with verifiable provenance, owner_visible_coverage: insufficient_neutral_probe}
+    - {id: MT-OPAQUE-COINAGE, description: sound-first/low-semantic proper name with stable spelling and pronunciation, owner_visible_coverage: reference_probe_seen_no_rejection}
+    - {id: MT-NONENGLISH-LEXICAL, description: intact/lightly adapted non-English lexical identity with global usability, owner_visible_coverage: reference_probe_seen_no_rejection}
+    - {id: MT-ACRONYM-INITIAL, description: acronymic/initial/letter-number identity if independently brandable, owner_visible_coverage: reference_probe_seen_no_rejection}
+    - {id: MT-TYPOGRAPHIC-SYMBOLIC, description: punctuation/segmentation/symbolic identity when orally recoverable/domain-compatible, owner_visible_coverage: reference_probe_seen_no_rejection}
 
 preference_probe_design:
-  status: active
+  status: active_second_stage
   objective: learn broad form preference, not choose a winner or define universal quality
-  source_policy:
-    mature_brand_references: preferred_when_owner_is_familiar_and_form_can_be_separated_from_brand_reputation
-    generated_neutral_examples: use_when_reference_examples_are_too_famous_biased_or_do_not_cover_needed_form
-    hybrid: allowed
-  question_style:
-    - balanced contrasts across form axes
-    - ask attraction/rejection plus brief reason, not only forced winner
-    - repeat classes across more than one anchor where halo bias is plausible
-    - include indifferent/both/neither responses
-  bias_controls:
-    - brand_success_halo
-    - industry_association
-    - logo_visual_identity
-    - existing_company_reputation
-    - semantic_content_confounded_with_surface_form
+  first_stage_result:
+    source: mature_brand_references
+    result: no_clear_rejection_across_classes
+    limitation: high_brand_success_and_familiarity_halo
+  second_stage:
+    source: generated_or_curated_unfamiliar_neutral_examples
+    candidate_status: preference_probe_only_not_naming_candidates
+    design:
+      - matched_quality_across_classes
+      - minimize obvious semantic/industry/logo confounds
+      - compare feel, compactness, pronounceability and identity character
+      - allow all_ok / no_preference responses
+      - do not reality-screen these samples unless later promoted independently as real candidates
   interpretation:
-    - infer category-level tendencies only
-    - update exploration budget, not hard constraints
-    - preserve minority exploration budget for surprise
-  stable_skill_revision_note: specify trigger, objective, design constraints and interpretation; do not hardcode exact brand list or fixed questionnaire
+    - no-clear-taboo may justify broad portfolio search
+    - positive class signal may rebalance budget only
+    - do not convert probe samples into generation templates
 
 method_evolution:
   registry_ref: 02_Runtime/02_Tools/adaptive_naming/evolution/method-experience-registry.yaml
   hypothesis_id: HYP-004
-  latest_refinement: mature-brand or generated anchor sets may support bounded morphotype preference probes; exact exemplars remain adaptive runtime material
+  latest_refinement: mature-brand references are efficient for detecting obvious rejection, but may be weak for discriminating positive preference because successful-brand familiarity normalizes many forms; a two-stage probe may be superior.
   stable_skill_rewrite_allowed_now: false
   promotion_requirements_remaining: [regression_case, counterevidence_review, preferably_second_real_naming_job_or_severe_defect_contract]
 
@@ -107,18 +109,16 @@ candidates:
   - {id: N086, name: Lumerand, role: held_internal, active: true, owner_exposure: not_ready}
 
 rounds:
-  - id: RND-081
-    action: owner_morphotype_feedback_ingest_and_method_gap_diagnosis
-    generated_count: 0
-    result: HYP-004_exported
-  - id: RND-082
-    action: owner_preference_probe_design_refinement
+  - {id: RND-081, action: owner_morphotype_feedback_ingest_and_method_gap_diagnosis, generated_count: 0, result: HYP-004_exported}
+  - {id: RND-082, action: owner_preference_probe_design_refinement, generated_count: 0, result: mature_brand_anchor_probe_selected}
+  - id: RND-083
+    action: mature_brand_morphotype_reference_probe
     generated_count: 0
     findings:
-      - mature brand examples can reduce generation cost and provide intuitive form anchors
-      - mature brand references create halo/confound risk, so they should be balanced and supplemented with generated neutral anchors when needed
-      - stable Skill should encode trigger/design/interpretation rather than a frozen question bank
-      - next high-information action is Owner morphotype preference probe before additional naming generation
+      - Owner reports all shown mature-brand form classes feel harmonious/acceptable
+      - no broad morphotype can currently be excluded from search on preference grounds
+      - mature successful brands have insufficient discrimination for positive preference because familiarity/success halo is strong
+      - next probe should use unfamiliar neutral matched examples and remain separate from formal candidate generation
 
 current_state:
   finalists: [N096, N113, N117, N119]
@@ -126,25 +126,24 @@ current_state:
   search_mode: morphotype_preference_probe
   search_cadence_mode: validation_only
   generation_isolation_level: best_effort_same_context
-  biggest_unknown: Which broad naming-form classes does Owner prefer once form is separated as much as practical from specific semantic content and famous-brand halo?
+  biggest_unknown: Does Owner actually prefer some form classes when familiarity/success halo is removed, or is form preference genuinely broad and weak relative to name-level quality?
   blockers: []
-  information_gain: high_from_owner_preference_probe
+  information_gain: medium_high_from_neutral_unfamiliar_probe
   owner_review_needed_now: true
 
 next_action:
-  action: run_bounded_owner_morphotype_preference_probe
-  target: obtain_category_level_form_preference_signal_before_more_generation
+  action: run_neutral_unfamiliar_morphotype_probe
+  target: distinguish_broad_true_openness_from_mature_brand_halo
   rationale: >-
-    Owner proposed a structured preference exploration using mature brand anchors where efficient. This is now more informative than additional blind candidate generation.
-    Use a small adaptive contrast set, control obvious brand-halo confounds, allow indifference/both/neither, and use results only to rebalance exploration rather than close categories.
-  triggered_by: [OF-MORPHOTYPE-PROBE-02]
-  expected_information_gain: high
+    First-stage mature-brand anchors showed no rejection but poor discrimination. Use unfamiliar, non-candidate, quality-matched examples across several form classes to test whether any genuine category preference emerges.
+  triggered_by: [OF-MORPHOTYPE-PROBE-03]
+  expected_information_gain: medium_high
   requires_owner: true
   owner_gate_classification: preference_discovery
 
 stop:
-  status: pause_for_owner_preference_probe
-  reason: form preference is now the largest decision-relevant unknown; additional generation before probing would risk repeating the same concentration failure
+  status: pause_for_second_stage_preference_probe
+  reason: mature-brand reference probe established openness but not preference; a neutral unfamiliar probe is the next highest-information action
   unresolved:
     - HYP-004 requires regression/counterevidence before stable Skill promotion
     - formal trademark legal clearance remains deferred
