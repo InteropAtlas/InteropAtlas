@@ -1,0 +1,58 @@
+name: Maintenance 287 preserve reviewed history retry
+on:
+  push:
+    branches: [maintenance/287-branch-pr-audit-20260911]
+    paths: [.github/workflows/maintenance-287-preserve-retry.yml]
+permissions:
+  contents: write
+  issues: write
+  pull-requests: read
+  actions: read
+concurrency:
+  group: maintenance-287-mutations
+  cancel-in-progress: false
+jobs:
+  preserve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Persist the reviewed one-line multi-PR classification correction
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import base64, json, os, pathlib, subprocess
+          path='.github/maintenance/branch_pr_287.py'
+          source=pathlib.Path(path).read_text()
+          old="elif r['prs'] and all(p['merged_at'] for p in r['prs']):"
+          new="elif r['prs'] and any(p['merged_at'] for p in r['prs']):"
+          assert source.count(old)==1
+          fixed=source.replace(old,new)
+          compile(fixed,path,'exec')
+          repo='InteropAtlas/InteropAtlas'
+          branch='maintenance/287-branch-pr-audit-20260911'
+          assert os.environ['GITHUB_REPOSITORY']==repo
+          current=json.loads(subprocess.check_output(['gh','api','repos/'+repo+'/git/ref/heads/'+branch]))
+          assert current['object']['sha']==os.environ['GITHUB_SHA']
+          sha=subprocess.check_output(['git','rev-parse','HEAD:'+path],text=True).strip()
+          payload={'message':'fix(#287): handle merged branches also linked to closed duplicate PRs','branch':branch,'sha':sha,'content':base64.b64encode(fixed.encode()).decode()}
+          pathlib.Path('fix-payload.json').write_text(json.dumps(payload))
+          result=json.loads(subprocess.check_output(['gh','api','--method','PUT','repos/'+repo+'/contents/'+path,'--input','fix-payload.json']))
+          print('Persisted correction commit:',result['commit']['sha'])
+          pathlib.Path(path).write_text(fixed)
+          PY
+      - name: Preserve frozen evidence and prepare two-file historical PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python3 .github/maintenance/branch_pr_287.py prepare
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: maintenance-287-preservation-result
+          path: maintenance-output/
+          retention-days: 30
+          if-no-files-found: error
