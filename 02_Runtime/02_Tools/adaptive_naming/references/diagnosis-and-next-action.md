@@ -1,8 +1,8 @@
-# 诊断与下一步决策规则 v0.2.1
+# 诊断与下一步决策规则 v0.2.2
 
 本文件回答一个核心问题：**观察到了什么以后，系统下一步应该干什么？**
 
-原则：先区分事实、诊断和策略结论。不要从一个候选直接跳到全局规则；也不要因为每个候选单独都说得通，就忽略整个搜索过程已经发生偏置。
+原则：先区分事实、诊断和策略结论。不要从一个候选直接跳到全局规则；也不要因为每个候选单独都说得通，就忽略整个搜索过程已经发生偏置。Owner 只负责真实目标、真实边界与最终主观选择；内部搜索路径由 Controller 负责。
 
 ## 1. 四层诊断
 
@@ -37,7 +37,7 @@
 
 ### 搜索完整性级
 
-回答：Agent 是否还在探索真实的命名空间，还是已经围绕某个成功模式局部爬山？控制器声称的“隔离”是否与实际运行上下文一致？
+回答：Agent 是否还在探索真实的命名空间，还是已经围绕某个成功模式局部爬山？控制器声称的“隔离”是否与实际运行上下文一致？当前所谓“边界”是否真有来源？
 
 常见类型：
 
@@ -48,7 +48,10 @@
 - `survivorship_feedback`：现实筛查的幸存形态反向塑造生成，导致“容易占用”被误学成“更好”；
 - `strategy_fidelity`：声称探索的区域 / 策略与实际生成或入选候选不一致；
 - `negative_constraint_priming`：为了避免旧模式，Generation Brief 反复点名 incumbent / cooldown / banned examples，反而维持或提高这些模式在生成上下文中的显著性；
-- `isolation_overclaim`：同一模型/聊天历史已经见过完整信息，却把“本轮 Brief 未重复写入”表述成“Generator 未看到”。
+- `isolation_overclaim`：同一模型/聊天历史已经见过完整信息，却把“本轮 Brief 未重复写入”表述成“Generator 未看到”；
+- `constraint_drift`：Agent 自己选择的搜索属性被后续误写成 Owner / task hard constraint，但查不到明确 provenance；
+- `search_path_delegation`：只属于内部路线选择的问题被包装成 A/B/C 菜单转交 Owner；
+- `owner_boundary_false_positive`：阶段性路线收敛被误判为“需要 Owner 放宽边界”，但其实存在未被 confirmed constraints 禁止的可逆搜索空间。
 
 这些诊断关注的是搜索过程，不等于相关候选本身质量失败。
 
@@ -62,14 +65,17 @@
 - 保持构词法、换语义区；
 - 调整语言约束；
 - 调整对象尺度要求；
+- 调整名称架构，如单词 / 多词、透明 / 更轻语义；
 - 设置 task-local family cooldown；
 - 补地图 / 修复 semantic coverage；
 - 生成正向 Generation Brief；
 - 把具体 exclusions 留在 Controller-only 状态；
 - 增加或收紧 post-generation filter；
 - 切换 fresh / isolated runtime；
+- 审计 constraint provenance；
+- 自主并行两个高信息价值搜索分支；
 - 先做现实验证而不是继续生成；
-- 询问 Owner；
+- 在 Owner Interaction Gate 通过后询问 Owner；
 - 停止。
 
 ## 2. 典型 if / then 规则
@@ -118,7 +124,9 @@
 ### 当前区域新信息越来越少
 
 **如果**连续若干微循环只得到已知失败模式或近似候选，  
-**那么**认为边际信息增益下降；换语义区、换构词策略、补充外部地图，或做搜索空间重置。
+**那么**认为边际信息增益下降；换语义区、换构词策略、换名称架构、补充外部地图，或做搜索空间重置。
+
+若这些替代路线没有违反 confirmed hard constraints，Controller 应自主执行，不需要 Owner 先选路线。
 
 ### 近期 / 强候选连续属于同一语义或形态家族
 
@@ -212,6 +220,67 @@
 - 必要时把生成与评价分开；
 - 对实际输出做策略一致性检查后再进入 funnel。
 
+### Agent 自己把搜索路线升级成硬约束
+
+**如果**某个属性出现在当前 Brief / Generation Brief / 状态里，例如：
+
+- 必须单词；
+- 必须两词；
+- 必须语义透明；
+- 必须使用现成词；
+- 必须使用新造词；
+- 必须某个构词家族或抽象程度；
+
+但在 Owner 明确输入、Issue/任务来源、法律/技术条件里找不到对应来源，  
+**那么**诊断 `constraint_drift`。
+
+下一步：
+
+1. 标记该属性的 provenance 为 `unconfirmed / controller_assumption`；
+2. 从 hard constraint 撤回；
+3. 放入 `controller_search_variables`；
+4. 回看它是否导致搜索空间被无意缩窄；
+5. 若是，恢复未被真实边界禁止的路线；
+6. 不因为“放宽这个假约束”询问 Owner。
+
+原则：**没有来源的限制，不是 Owner 边界。**
+
+### 当前路线到达 frontier，但存在其他未禁止路线
+
+**如果**当前路线出现稳定的 trade-off / frontier，例如“更独特就更难拼、更易恢复就更拥挤”，而相邻搜索架构仍未充分测试，  
+**那么**先检查这些相邻路线是否被 confirmed hard constraints 明确禁止。
+
+- 若没有禁止：诊断为当前路线阶段性收敛，不是 Owner boundary；Controller 自主换路或并行探索。
+- 若只有偏好而非硬约束：保留偏好权重，同时仍可小批探索以获得证据。
+- 只有确实要违反 Owner / task-source 明确边界时，才进入 `true_boundary_change` 并询问 Owner。
+
+### 把 A/B/AB/C 搜索菜单交给 Owner
+
+**如果**Agent 想让 Owner 在多个内部搜索路线之间选择，而这些路线都不改变已确认目标和硬约束，  
+**那么**诊断 `search_path_delegation`。
+
+修复：
+
+1. 取消 Owner 路径选择问题；
+2. 按 expected information gain、可逆性、成本和覆盖增益排序；
+3. 若两条路线都高价值且成本可控，默认并行小批探索；
+4. 用实际质量/现实结果比较，再决定后续资源；
+5. 只在出现强候选或真实边界冲突时再找 Owner。
+
+不要把 Controller 的职责外包给 Owner。
+
+### Owner Interaction Gate
+
+任何 `ask_owner` 前必须先分类：
+
+- `true_boundary_change`：需要改变 Owner / task-source 明确确认的硬约束；
+- `final_subjective_choice`：少数强候选剩余差异主要是长期认同、气质、偏好；
+- `missing_goal_fact`：缺失事实会改变成功定义且现有来源无法恢复；
+- `search_strategy`：只改变寻找路径、名称架构、构词路线、语义透明度、抽象度、search mode；
+- `reversible_architecture_expansion`：当前路线收敛，但存在未被硬约束禁止的新架构空间。
+
+只有前三类允许 `ask_owner`。后二类必须自主执行。
+
 ### Exploration 与 Exploitation 切换
 
 **从 exploration → exploitation** 只有在以下情况之一成立时才合理：
@@ -269,21 +338,23 @@
 
 ## 4. 下一动作选择优先级
 
-每轮结束先检查搜索完整性，再选择最能减少关键不确定性的动作：
+每轮结束先检查约束来源和搜索完整性，再选择最能减少关键不确定性的动作：
 
-1. **目标不清楚吗？** → `ask_owner / refine_brief`
-2. **搜索是否可能坍缩、被负面提示锚定或隔离表述不真实吗？** → `check_search_integrity`
-3. **不知道该去哪探索吗？** → `map`
-4. **知道区域但缺样本吗？** → `generate`
-5. **生成结果是否先要过 Controller-only exclusions？** → `post_generation_filter`
-6. **有候选但不知道好不好吗？** → `evaluate_quality`
-7. **质量强但不知道现实能不能用吗？** → `verify_reality`
-8. **有很多观察但不知道意味着什么吗？** → `diagnose`
-9. **重复模式已经明确吗？** → `change_strategy`
-10. **剩余差异主要是 Owner 主观选择吗？** → `ask_owner`
-11. **已有足够强且现实可推进的 finalist 吗？** → `stop / owner_decision`
+1. **当前所谓硬约束都有明确 provenance 吗？** → 否：`audit_constraints / constraint_drift`
+2. **准备问 Owner 吗？** → 先跑 `owner_interaction_gate`
+3. **目标/真实硬边界本身不清楚吗？** → `ask_owner / refine_brief`
+4. **搜索是否可能坍缩、被负面提示锚定或隔离表述不真实吗？** → `check_search_integrity`
+5. **当前路线收敛但还有未被禁止的高价值路线吗？** → `change_strategy / parallel_exploration`
+6. **不知道该去哪探索吗？** → `map`
+7. **知道区域但缺样本吗？** → `generate`
+8. **生成结果是否先要过 Controller-only exclusions？** → `post_generation_filter`
+9. **有候选但不知道好不好吗？** → `evaluate_quality`
+10. **质量强但不知道现实能不能用吗？** → `verify_reality`
+11. **有很多观察但不知道意味着什么吗？** → `diagnose`
+12. **剩余差异主要是 Owner 主观选择吗？** → `ask_owner`
+13. **已有足够强且现实可推进的 finalist 吗？** → `stop / owner_decision`
 
-不要因为“流程下一步本来应该是什么”选择动作，只根据当前最大未知、信息价值和搜索完整性选择。
+不要因为“流程下一步本来应该是什么”选择动作，也不要因为当前路线阶段性收敛就自动问 Owner。只根据当前最大未知、信息价值、confirmed constraints 和搜索完整性选择。
 
 ## 5. 状态更新的最小要求
 
@@ -293,12 +364,15 @@
 - `diagnosis`：如何解释；
 - `confidence`：低 / 中 / 高；
 - `state_change`：具体改了什么；
+- `constraint_provenance_check`：涉及边界时，确认来源是什么；
+- `search_variable_changes`：哪些只是 Controller 路线参数；
+- `owner_interaction_gate`：若考虑 `ask_owner`，记录分类与结论；
 - `search_mode_before / after`：如有模式切换；
 - `generation_isolation_level`：isolated_runtime / fresh_context / best_effort_same_context / none；
 - `controller_only_exclusions_changed`：是否新增/解除 cooldown 或 incumbent 排除；
 - `post_generation_filter`：是否执行、命中多少、命中类型；
-- `integrity_check`：是否发现家族集中、incumbent 泄漏、负面提示锚定、隔离夸大、幸存者反馈或策略不忠实；
+- `integrity_check`：是否发现家族集中、incumbent 泄漏、负面提示锚定、隔离夸大、constraint drift、path delegation、幸存者反馈或策略不忠实；
 - `next_action`：下一步；
 - `why_now`：为什么现在做这个动作比其他动作更有价值。
 
-这样后续 Agent 才能区分“事实地图”“当时的推断”“控制器私有约束”“Generator 实际看到的上下文”和“搜索控制状态”。
+这样后续 Agent 才能区分“事实地图”“Owner 真边界”“Controller 搜索变量”“当时的推断”“控制器私有约束”“Generator 实际看到的上下文”和“搜索控制状态”。
