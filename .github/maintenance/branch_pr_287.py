@@ -132,7 +132,7 @@ def decisions(rows):
             decision, why = '保留', '#416 Draft; Skill 0.4.0 / v84; generation remains paused; live-fit gate not satisfied'
         elif b == PR30_BRANCH:
             decision, why = '历史研究整理后合并', '#30 Batch1 missing from main but cited by Batch2; preserve original text with temporal disclaimer; no current model promotion'
-        elif r['prs'] and all(p['merged_at'] for p in r['prs']):
+        elif r['prs'] and any(p['merged_at'] for p in r['prs']):
             decision, why = '可直接删除', 'merged PR terminal=head; zero later commits; exact reconstructed merge-tree equivalence and merge reachable from main'
         elif b == 'docs/p1-closeout-state-sync':
             assert r['head'] == 'b0b529b2faf0855ade960c81b325cbf825742383' and ancestor(r['head'], MAIN)
