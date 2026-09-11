@@ -6,14 +6,14 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: in_progress
-  snapshot_version: 78
+  snapshot_version: 79
   skill_version: 0.4.0
 
 lineage:
   preservation_note: >-
-    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v77 将正式候选主路线切换为自造/半自造专名，并加入中文母语者跨语言发音恢复权重。
-    Owner 随后要求提高每次交付的候选数量，避免每轮只看一个名字造成交互成本。本快照因此提高内部生成量与 Owner-visible batch size，
-    但仍要求先做 intrinsic / pronunciation / .com / reality 快筛，避免用低质量名字凑数。
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v78 提高 Owner-visible batch size，并展示 8 个经过初筛的自造/半自造候选。
+    Owner 对整批给出明确相对反馈：全部不如 Merosophy；Coemera 比一般好一点；其余没有感觉。
+    本快照据此确认：单纯顺口、域名可用、商标可拥有的音节型 coinage 不够，下一轮要提高语义完整性、成熟品牌感和“克制但有内涵”的结构质量。
 
 constraint_registry:
   confirmed_hard_constraints:
@@ -43,6 +43,10 @@ owner_preferences:
   - id: PREF-BATCHED-OWNER-REVIEW
     statement: Owner prefers seeing multiple screened names per review turn rather than one-at-a-time exposure; target 5-8 meaningful screened candidates when available.
     confidence: high
+  - id: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS
+    statement: Owner clearly prefers Merosophy over smoother but semantically thinner coined names; pronunciation ease helps but cannot replace meaningful internal structure and mature brand character.
+    confidence: high
+    source_type: owner_explicit_batch_comparison
 
 search_control:
   mode: coined_semantic_brand_divergence
@@ -53,8 +57,8 @@ search_control:
   reality_feedback_quarantine: {enabled: true, raw_failed_strings_to_generator: prohibited}
   owner_visible_batch_target: 5_to_8
   early_creative_policy: >-
-    Generate larger internal coined/semi-coined batches, then screen for semantic backbone, brand shape, Chinese/English pronunciation, .com obtainability and reality collision before Owner exposure.
-    Coined must not degrade into random SaaS syllable strings.
+    Generate larger coined/semi-coined batches, but raise intrinsic quality threshold: semantic backbone and mature brand identity must dominate over phonetic smoothness or domain vacancy.
+    Coined must not degrade into random SaaS syllable strings, name-like vowel chains, or weak proprietary endings.
 
 morphotype_portfolio:
   rule: no_single_form_class_should_dominate
@@ -65,121 +69,67 @@ morphotype_portfolio:
     - symbolic_or_structural_coinage
     - crosslanguage_root_fusion_with_high_pronounceability
   evaluation_policy: >-
-    Promoted coinages should have coherent semantic rationale, strong recoverability, natural brand shape, and acceptable Chinese/English pronunciation burden.
+    Promoted coinages should have coherent semantic rationale, mature standalone brand shape, strong recoverability, acceptable Chinese/English pronunciation burden, and enough internal meaning to reward explanation.
 
 rounds:
   - {id: RND-124, action: shorter_true_concept_and_semiopaque_search, result: two_materially_distinct_survivors}
   - {id: RND-125, action: owner_shifts_priority_to_proprietary_coinage, result: coined_name_route_promoted}
   - {id: RND-126, action: owner_reaction_to_merosophy, result: acceptable_with_cross_language_pronunciation_risk}
-  - id: RND-127
-    action: owner_requests_larger_candidate_batches
-    result: owner_visible_batch_size_increased
+  - {id: RND-127, action: owner_requests_larger_candidate_batches, result: owner_visible_batch_size_increased}
+  - {id: RND-128, action: large_semantic_coinage_batch_with_cross_language_screen, result: eight_owner_visible_preliminary_survivors}
+  - id: RND-129
+    action: owner_batch_reaction_to_N131_N138
+    result: merosophy_remains_clear_reference_leader
     findings:
-      - Owner says one-name-at-a-time review wastes time
-      - future review turns should expose 5-8 already-screened names when enough quality candidates exist
-      - batching does not relax quality or commercial gates
-  - id: RND-128
-    action: large_semantic_coinage_batch_with_cross_language_screen
-    result: eight_owner_visible_preliminary_survivors
-    findings:
-      - multiple internal batches were generated; many short strings were rejected because .com was occupied or semantic backbone was too weak
-      - direct-registration .com survivors selected for Owner review: Noemavia, Noetivia, Variavera, Pluravera, Coemera, Synmeros, Cohavera, Versivon
-      - exact .org was also directly registrable for all eight on 2026-09-11
-      - public exact-name web screening found a material issue for Relavera-like forms and Merovida/Merovon, which were excluded from Owner-visible batch
-      - preliminary exact-name searches for the eight selected names found no material active exact commercial identity in current search; formal trademark database clearance remains pending
+      - Owner says all eight are worse than Merosophy
+      - Coemera is slightly better than average but still below Merosophy
+      - Noemavia, Noetivia, Variavera, Pluravera, Synmeros, Cohavera and Versivon generated no meaningful positive pull
+      - this rejects the hypothesis that smoother pronunciation alone would outperform Merosophy
+      - stronger semantic density and more mature brand form should be prioritized over generic coined smoothness
+      - do not promote Coemera into a template; it is only a weak-positive comparison signal
 
 candidates:
   - id: N130
     name: Merosophy
-    role: owner_positive_usable_with_pronunciation_risk
+    role: owner_positive_reference_leader
     active: true
     domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    owner_feedback: acceptable_usable_but_chinese_pronunciation_is_difficult
+    owner_feedback: strongest_current_coined_candidate_usable_but_chinese_pronunciation_is_difficult
     generation_use: prohibited_as_template_or_seed
   - {id: N127, name: Multifinality, role: preference_evidence_only_aftermarket_pending, active: true, owner_feedback: interesting_looks_good_feels_like_brand, generation_use: prohibited_as_template_or_seed}
   - {id: N128, name: Transindividuality, role: owner_rejected_length, active: false, owner_feedback: too_long_not_liked, generation_use: prohibited_as_template_or_seed}
-  - id: N131
-    name: Noemavia
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: noema/noesis + via; intended sense is pathways of meaning/understanding
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [noe_sequence_may_have_pronunciation_variation, semantic_root_not_obvious]
-    generation_use: prohibited_as_template_or_seed
-  - id: N132
-    name: Noetivia
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: noetic + via; intended sense is pathways of knowing/thought
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [slightly_academic_root, five_syllable_load]
-    generation_use: prohibited_as_template_or_seed
-  - id: N133
-    name: Variavera
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: varia + vera; intended sense is variation/plural forms with a truth/realness backbone
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [vera_can_feel_name_like, philosophical_interpretation_needed]
-    generation_use: prohibited_as_template_or_seed
-  - id: N134
-    name: Pluravera
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: pluri + vera; intended sense is plurality with authenticity/truth
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [pluralism_reading_may_be_too_direct, vera_can_feel_name_like]
-    generation_use: prohibited_as_template_or_seed
+  - {id: N131, name: Noemavia, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
+  - {id: N132, name: Noetivia, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
+  - {id: N133, name: Variavera, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
+  - {id: N134, name: Pluravera, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
   - id: N135
     name: Coemera
-    role: owner_review_batch_preliminary
+    role: weak_positive_below_reference
     active: true
-    semantic_backbone: co-emerge compressed into a proper-name form; intended sense is things/people/ideas emerging together
     domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [semantic_construction_not_self_evident, mild_personal_name_risk]
+    owner_feedback: slightly_better_than_average_but_worse_than_Merosophy
     generation_use: prohibited_as_template_or_seed
-  - id: N136
-    name: Synmeros
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: syn (together) + meros (parts); intended sense is parts brought into relation / whole through parts
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [greek_root_explanation_needed, first_syllable_pronunciation_can_vary]
-    generation_use: prohibited_as_template_or_seed
-  - id: N137
-    name: Cohavera
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: cohere + vera; intended sense is coherence grounded in something true/real
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [longer_four_to_five_beat_reading, vera_name_association]
-    generation_use: prohibited_as_template_or_seed
-  - id: N138
-    name: Versivon
-    role: owner_review_batch_preliminary
-    active: true
-    semantic_backbone: vers/versi (turn/change/many-sidedness) + proprietary ending; intended sense is capacity to turn, reinterpret, or take multiple orientations
-    domain_status: {com: available_for_registration_2026_09_11, org: available_for_registration_2026_09_11}
-    risks: [ending_is_more_brand_built_than_semantically_loaded]
-    generation_use: prohibited_as_template_or_seed
+  - {id: N136, name: Synmeros, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
+  - {id: N137, name: Cohavera, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
+  - {id: N138, name: Versivon, role: owner_no_pull, active: false, owner_feedback: no_feeling, generation_use: prohibited_as_template_or_seed}
 
 current_state:
   owner_positive_commercial_candidates: [N130]
-  owner_review_batch: [N131, N132, N133, N134, N135, N136, N137, N138]
+  weak_positive_comparison: [N135]
   preference_evidence: [N127]
-  owner_rejected: [N128]
+  owner_rejected_or_no_pull: [N128, N131, N132, N133, N134, N136, N137, N138]
   search_mode: coined_semantic_brand_divergence
   biggest_unknown: >-
-    Which proprietary coined morphology best balances semantic depth, trademark ownability, Chinese pronounceability and brand character once Owner can compare several screened names side by side?
+    Can a coined/semi-coined proprietary name exceed Merosophy by preserving its semantic density and mature brand feel while reducing Chinese pronunciation friction and keeping .com/trademark ownability?
   blockers: []
-  owner_review_needed_now: true
+  owner_review_needed_now: false
 
 next_action:
-  action: collect_batch_owner_reaction_then_continue_large_internal_generation
+  action: generate_larger_semantically_dense_coinage_batch_with_stricter_intrinsic_filter
   rationale: >-
-    Batch exposure should reduce interaction overhead and generate richer comparative preference evidence. Continue autonomous generation after Owner reaction; do not overfit to one suffix/root from this batch.
-  requires_owner: true_for_batch_reaction_not_for_continued_search
+    Smooth but semantically thin coinages failed Owner comparison. Next batch should privilege deeper morphemic logic, restrained cleverness and institutional brand character, while retaining cross-language pronounceability and commercial ownability.
+  requires_owner: false_for_continued_search
 
 stop:
-  status: owner_feedback_plus_continue
-  reason: eight screened coined candidates are ready for side-by-side Owner review
+  status: continue
+  reason: Owner feedback sharply improved the target profile; continue with larger batches and stronger intrinsic threshold
