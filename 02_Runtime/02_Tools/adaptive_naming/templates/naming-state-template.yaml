@@ -1,4 +1,4 @@
-schema_version: "0.2.1"
+schema_version: "0.2.2"
 
 job:
   id: null
@@ -12,6 +12,36 @@ job:
   hard_constraints: []
   avoid: []
   required_reality_checks: []
+
+constraint_registry:
+  confirmed_hard_constraints: []
+  # Example:
+  # - id: HC001
+  #   statement: null
+  #   source_type: owner_explicit | task_source | legal | technical
+  #   source_ref: null
+  #   confirmed_at: null
+  #   notes: []
+
+  owner_preferences: []
+  # Preferences influence convergence but are not hard constraints unless explicitly promoted by the Owner.
+
+  controller_search_variables: []
+  # Example:
+  # - id: SV001
+  #   name: word_count
+  #   current_value: single_or_multiword_open
+  #   allowed_values: [single_token, multiword, both]
+  #   rationale: null
+  #   owner_approval_required_to_change: false
+
+  assumptions: []
+  # - id: A001
+  #   statement: null
+  #   source_ref: null
+  #   confidence: low | medium | high
+  #   may_be_hard_constraint: false
+  #   status: provisional | retracted | confirmed
 
 brief:
   semantic_core: []
@@ -127,6 +157,14 @@ search_control:
   #   faithful: true
   #   diagnosis: null
 
+  constraint_integrity_checks: []
+  # - round_id: null
+  #   candidate_constraint: null
+  #   provenance_found: false
+  #   classification: confirmed_hard_constraint | owner_preference | controller_search_variable | assumption
+  #   drift_detected: false
+  #   action: null
+
   generator_brief:
     id: null
     search_mode: exploration
@@ -135,6 +173,7 @@ search_control:
     positive_construction_targets: []
     quality_targets: []
     hard_constraints_only: []
+    hard_constraint_source_refs: []
     question_to_answer: null
     negative_examples_included: false
     controller_only_exclusions_exposed: false
@@ -166,12 +205,25 @@ execution:
     broad_exploration: 6-10
     focused_or_exploitation: 3-5
     validation: 0
+
+  owner_interaction_gate:
+    last_checked_at: null
+    proposed_question: null
+    # true_boundary_change | final_subjective_choice | missing_goal_fact | search_strategy | reversible_architecture_expansion | none
+    classification: none
+    confirmed_constraint_ids_affected: []
+    missing_fact: null
+    reversible_without_owner: true
+    parallel_exploration_possible: false
+    decision: continue_autonomously
+    rationale: null
+
   pause_only_when:
-    - owner_decision_required
+    - source_backed_owner_boundary_decision_required
+    - final_subjective_choice_required
+    - missing_goal_fact_cannot_be_recovered
     - irreducible_blocker
-    - convergence
     - budget_or_time_boundary
-    - goal_or_boundary_ambiguity
   current_budget_or_time_boundary: null
 
 construction_strategies:
@@ -244,7 +296,7 @@ candidates: []
 
 rounds: []
 # - id: RND-001
-#   action: generate | post_generation_filter | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
+#   action: audit_constraints | generate | post_generation_filter | evaluate_quality | verify_reality | diagnose | check_search_integrity | change_strategy
 #   search_mode: exploration | exploitation
 #   generated_count: 0
 #   generation_brief_id: null
@@ -256,6 +308,8 @@ rounds: []
 #     incumbent_anchoring_checked: false
 #     negative_constraint_priming_checked: false
 #     isolation_claim_checked: false
+#     constraint_drift_checked: false
+#     owner_interaction_gate_checked: false
 #     post_generation_filter_checked: false
 #     survivorship_feedback_checked: false
 #     strategy_fidelity_checked: false
@@ -267,7 +321,7 @@ rounds: []
 observations: []
 # - id: O001
 #   timestamp: null
-#   scope: candidate | batch | region | strategy | search_integrity | owner | reality
+#   scope: candidate | batch | region | strategy | search_integrity | owner | reality | constraint
 #   subject_ids: []
 #   observation: null
 #   evidence: []
@@ -275,7 +329,7 @@ observations: []
 diagnostics: []
 # - id: D001
 #   triggered_by: []
-#   level: candidate | batch | region | search_integrity | strategy
+#   level: candidate | batch | region | search_integrity | strategy | constraint
 #   diagnosis_type: null
 #   statement: null
 #   confidence: low | medium | high
@@ -307,6 +361,8 @@ current_state:
   blockers: []
   information_gain: unknown
   search_integrity_status: unknown
+  constraint_integrity_status: unknown
+  owner_review_needed_now: false
 
 next_action:
   action: null
@@ -316,9 +372,11 @@ next_action:
   expected_information_gain: null
   search_mode: null
   requires_owner: false
+  owner_gate_classification: none
+  affected_confirmed_constraint_ids: []
 
 stop:
   status: continue
-  # continue | finalist_ready | owner_decision | blocked | budget_stop
+  # continue | finalist_ready | owner_decision | blocked | budget_stop | true_boundary_pause
   reason: null
   unresolved: []
