@@ -300,3 +300,48 @@ A stronger system should be able to say:
 > “I learned that the Owner values semantic density, mature identity and restrained cleverness — not that I should keep generating classical-root words that resemble Merosophy.”
 
 That is the clearest method-level lesson from #411 so far.
+
+
+## 14. 二次审查：证据充分性与恢复机制（2026-09-11）
+
+本节修订前文结论的证据等级。Executor / Reviewer：OpenAI ChatGPT 当前会话；这是对既有产物的后续审查，不是原始执行重放或独立用户实验。Owner 本次授权继续整理当前状态、留痕与复盘；生成保持暂停，稳定 Skill 不在本次直接升级。
+
+**结论：现有记录足以描述阶段与已记录结果，不足以可靠分配失败原因或证明修复有效。** 前文“主要是执行问题”“已学到真正喜欢的原因”等表述均应按待验证解释读取。未知不能通过事后补写变成当时的事实。
+
+### 14.1 可复核证据与缺口
+
+| 证据入口 | 已观察事实 | 可支持与不可支持的结论 |
+| --- | --- | --- |
+| [v80 快照](https://github.com/InteropAtlas/InteropAtlas/blob/f084b859293a598f9ad66f2780827ff824da7430/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | RND-130 保留七个展示候选；构词材料明显集中；批次总结称七项 .org 均可注册，而 N143 写 not_checked_in_this_snapshot | 支持批次集中和内部记录矛盾；不证明实际域名可用，也不能据此判定全部查询未执行 |
+| [v82 快照](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | 缺少 Mission/Value、Name Job、搜索地图、调度、runtime 隔离及候选现实证据的当前完整表示或精确恢复指针 | 支持恢复合同不充分；Git 历史尚在，不等于历史被永久删除 |
+| [v59 快照](https://github.com/InteropAtlas/InteropAtlas/blob/e8fe6320d57e9e23d0f46ef1d0b77c4cdf48e90b/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml) | 尚有 mission_value_model、search_landscape、rounds 等字段，但内容已是摘要 | 可用于定向追溯；不能直接恢复成最新事实，尤其不能覆盖后来 .com 条件 |
+| [v40 回归回顾](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/02_Runtime/02_Tools/adaptive_naming/evals/regression-review-v0.3.3-2026-09-11.md) | 13 exercised_pass、3 not_triggered、0 fail，明确对应 v40 | 仅为历史观察，不是 v82 通过记录，不证明新增机制有效 |
+| [#411 最新复盘 checkpoint](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5635800432) | 记录暂停生成及 EXP-009/HYP-005 | 是恢复与解释来源，不等于原始用户反馈、生成输入或查询证据 |
+| [归档 v21 指针](https://github.com/InteropAtlas/InteropAtlas/blob/28a2883e385386075c8ed111c3e2436c92ee7c2f/03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v21.yaml) | 保存 source_commit、source_blob_sha、source_path | 说明归档存在不同表示；需要索引，不应误判小文件就是截断的完整快照 |
+
+缺口分类：已有且可定位 / 已有但待定位 / 在已查范围未找到 / 经确认不可恢复。现在不得将“未找到”写成“从未记录”。本轮未穷尽全部历史提交和私人聊天。
+
+### 14.2 对方法解释的修正
+
+- 潜在偏好与表面特征都可能是真实偏好；抽象词汇不天然更正确。保存 Owner 原始表述、Controller 假设、支持/反证与置信度，分别建模。
+- 比较生成集合、intrinsic 筛后集合、reality 筛后集合和展示集合，才能定位多样性在哪一步收缩。不得只凭最终批次归因于 Generator。
+- 同上下文隔离诚实性与隔离有效性分开；best_effort 声明不证明污染已消除。
+- 跨语言发音与语义的排序是本任务待溯源的偏好，不能提升为通用固定顺序。
+- 自述“遵守了规则”与输入/输出证据分开；行为合规与命名效果分开验收。
+- 本轮不确认任何候选达到现实接受门槛；已记录的 available / low_noise 保留为历史断言，使用前需按来源与 freshness 复核。
+
+### 14.3 本任务的最小留痕试行合同（尚非稳定 Skill）
+
+每个重要批次留存：批次 ID、规则版本/提交、实际输入 artifact、实际 runtime/隔离条件、原始输出、各筛选阶段候选 ID 与去留理由、现实查询的时间/意图/来源/结果、最终展示、Owner 原始反馈定位、Controller 解释与下一动作。只保存可观察产物和决策摘要，不要求隐藏思维链。不存在的历史输入不能伪造；重建内容明确标 reconstructed。
+
+当前状态保持精简，但任何移出的必要状态必须留下精确 commit/path 或 artifact 引用。更新状态应检查必要字段是否仍在或有恢复指针、候选 ID 引用可解析、当前摘要与明细不矛盾；检查通过不替代语义复核。
+
+### 14.4 修复验证设计与推进顺序
+
+1. 从 RND-130 及相邻反馈开始建立证据链；分别判断输入、输出、筛选、用户反馈的可恢复程度。
+2. 优先修复状态恢复和来源缺口；不能恢复的保留 unknown，不以完整表象为目标。
+3. 对相同可恢复输入比较现行控制与拟议控制，保留实际输出和独立评审；历史输入缺失时只能称合成情境测试。
+4. 正例包含形态集中应被识别；反例包含明确、有预算的同族探索应被允许；另检查筛选导致集中、偏好被误升硬约束、现实证据不足和状态迁移丢字段。
+5. 分开报告过程合规、错误复发和 Owner 决策成本；不以规则复述作为通过，不以少数候选偏好证明普适效果。
+
+当前进度：证据缺口登记与恢复入口修正；完整证据重建、对照测试和稳定 Skill 改动尚未完成。保持 generation paused。方法有效性和组织命名分别验收。
