@@ -1,32 +1,32 @@
 ---
 name: adaptive-naming
-description: 自适应品牌、组织、项目与产品命名。先建立目标与真实边界，再通过探索、评价、现实验证、诊断、搜索完整性检查与状态更新循环寻找高质量且现实可采用的名称；适用于需要 Agent 自主决定搜索路径、保留探索地图并避免局部搜索坍缩的命名任务。
-version: 0.2.2
+description: 自适应品牌、组织、项目与产品命名。先建立真实目标、价值模型与边界，再由 Controller 动态调度多种命名方法，通过生成、评价、现实验证、诊断、变形救援与状态更新循环寻找高质量且现实可采用的名称。
+version: 0.3.0
 ---
 
-# Adaptive Naming Skill v0.2.2
+# Adaptive Naming Skill v0.3
 
 ## 1. 目标
 
-本 Skill 不是固定流水线，也不是一次性名字生成器。它给 Agent 一套稳定方法、目标边界和判断规则，同时允许 Agent 根据当前状态自主决定搜索路径。
+本 Skill 不是固定流水线，也不是一次性名字生成器。它是一套 Naming Controller：理解任务目标与价值结构，维护真实边界和搜索状态，自主选择或并行调度方法，并根据观察不断改变下一步。
 
 核心原则：
 
 > **目标明确，边界稳定，路径开放，经验累积，方法进化。**
 
-本 Skill 负责“怎么思考与行动”；单次任务产生的地图、候选、证据和局部经验写入独立状态文件，不写回本 Skill。
+进一步的角色分工：
 
-v0.2 起额外要求：**搜索多样性和搜索完整性是控制器责任，不依赖生成模型自行保持。**
+> **Owner 决定“要什么、真正不能变什么、最后喜欢什么”；Controller 决定“怎么理解、怎么找、先试什么、何时换路、哪些方法并行、哪些强原型值得救援”。**
 
-v0.2.1 进一步要求：**控制器知道的排除信息，不等于 Generator 应该看到的信息。防坍缩约束优先放在控制器私有状态与生成后过滤中，不通过反复负面提示来实现。**
+本 Skill 负责“怎么思考与行动”；单次任务的地图、候选、价值覆盖、方法状态、证据和局部经验写入独立 state，不写回稳定 Skill。
 
-v0.2.2 进一步要求：**Owner 决定目标与真正边界；Controller 决定搜索路径。未被 Owner 或任务来源明确确认的命名属性，不得被 Agent 自行升级为硬约束，也不得因为内部路线选择而把决策负担转嫁给 Owner。**
+---
 
 ## 2. 使用边界
 
 适用于：
 
-- Organization / umbrella organization；
+- organization / umbrella organization；
 - brand / company；
 - product / project / service；
 - open-source project / public initiative；
@@ -36,454 +36,471 @@ v0.2.2 进一步要求：**Owner 决定目标与真正边界；Controller 决定
 
 正式商标法律意见不属于本 Skill 能力；现实筛查只能作为研究与决策支持。
 
+---
+
 ## 3. 稳定不变量
 
-运行过程中不得为了“得到结果”随意改变以下原则：
+运行中不得为了“得到结果”随意改变以下原则：
 
 1. 先明确被命名对象、长期目标、真实硬约束和成功定义。
-2. **名称本身质量**与**现实可用性**分开观察、分开记录。
-3. 域名可注册不代表名字好；现实撞名不自动代表创意质量差。
-4. 不把多维质量默认压成一个平均总分。
-5. 可使用严格帕累托支配淘汰明显被全面支配的候选。
-6. 候选可以退出 active pool，但其 provenance、诊断与学习信号不得丢失。
-7. 单个失败不得直接升级为普遍规则；策略变化要基于诊断与足够证据。
-8. `unknown / error` 不得伪装成现实可用。
-9. Owner 偏好与一般命名质量分开；前期权重低，收敛期权重可提高，最终采用权属于 Owner。
-10. 若已有上下文足够，不要求 Owner 重复回答；只有缺失信息会实质改变目标、真实边界或最终主观选择时才询问。
-11. **探索阶段不得让当前 strongest / survivor 候选成为隐性生成模板。** 比较用候选与生成用上下文必须分离。
-12. **现实幸存结果不得直接塑造同批或紧邻批次的词形模板。** 现实结果先进入控制器诊断，再决定是否改变区域或策略。
-13. **微循环是内部执行单位，不是用户交互单位。** 只要存在明确下一动作且不需要真实 Owner 判断，Agent 应继续自主执行。
-14. 搜索完整性问题不得用“某个候选单独解释得通”掩盖；必须检查语义、词形和构词来源是否发生集中或坍缩。
-15. **防坍缩排除项默认属于 Controller-only 信息。** incumbent 名称、冷却词根/家族、现实幸存词形等，不应为了提醒 Generator 而反复出现在生成提示中。
-16. **Generator Brief 默认正向表达。** 优先描述目标、待探索区域、期望性质和真实硬约束；不要用长串“不要 X / 不要 Y”替代搜索设计。
-17. **生成后过滤负责执行多数 anti-collapse 排除。** 命中冷却家族或 incumbent 相似结构的候选可被控制器挡回，但不要把这些排除词再次喂给 Generator。
-18. **隔离强度必须诚实标注。** 同一聊天 / 同一模型历史上下文已经见过某些内容时，只能称为 `best_effort_same_context`；不能声称 Generator “未看到”这些历史信息。
-19. **硬约束必须有来源。** 只有 Owner 明确表达、任务来源明确规定、或不可回避的法律/技术条件，才能进入 confirmed hard constraints；每项都应可追溯到 source / evidence。
-20. **搜索属性默认不是硬约束。** 单词还是多词、现成词还是新造词、语义透明度、抽象程度、构词家族、语义区域、search mode、批量大小等，若没有明确来源，默认属于 Controller 可调整的 search variables。
-21. **不得把 Agent 自己的上一轮假设升级成 Owner 边界。** 若发现某属性只出现在 Generation Brief / 临时策略中，却没有 confirmed constraint provenance，应诊断 `constraint_drift`，撤回该约束并继续探索。
-22. **内部路径选择不得转嫁给 Owner。** 在 `ask_owner` 前必须先做 Owner Interaction Gate；若问题只是在 A/B/C 搜索路线之间选择，应由 Controller 按信息增益、可逆性和预算自主选择或并行探索。
+2. **使命 / 愿景先解构，再生成。** 不把长文本直接压成几个关键词就开始命名。
+3. **价值观不等于字面语义。** 名字不需要压缩全部使命；可以只承载一个核心价值、关系、气质或长期身份，只要不与核心价值发生实质冲突。
+4. **名称本身质量、价值对齐、现实可用性分开观察、分开记录。**
+5. 域名可注册不代表名字好；现实撞名不自动代表创意质量差。
+6. 不把多维质量或价值张力默认压成一个平均总分。
+7. 可使用严格 Pareto dominance 淘汰明显被全面支配的候选。
+8. 候选可以退出 active pool，但 provenance、诊断与学习信号不得丢失。
+9. 单个失败不得直接升级为普遍规则；策略变化必须基于诊断和足够证据。
+10. `unknown / error` 不得伪装成现实可用。
+11. Owner preference 与一般命名质量分开；前期权重低，收敛期可提高，最终采用权属于 Owner。
+12. 若已有上下文足够，不要求 Owner 重复回答；只有缺失信息会实质改变目标、真实边界或最终主观选择时才询问。
+13. **搜索多样性、价值覆盖和方法调度是 Controller 责任。** 不依赖 Generator 自己维持。
+14. **探索阶段 strongest / survivor 默认只作 comparison，不得无意识泄漏成生成模板。**
+15. **现实幸存结果不得直接塑造同批或紧邻批次词形模板。**
+16. 搜索完整性不能被“某个候选单独解释得通”掩盖；必须检查语义、价值代理、词形、构词来源和方法调用是否集中。
+17. **Controller-only exclusions 不应反复写进 Generator Brief。** incumbent、冷却词根/家族、现实幸存形态等由 Controller 私下维护并在生成后过滤。
+18. **Generator Brief 默认正向表达。** 用目标、价值方向、待探索空间、质量要求和真实硬约束指导生成，不用长串“不要 X / 不要 Y”。
+19. **隔离强度必须诚实。** 同一聊天 / 同一模型历史上下文已见过某信息时，只能记为 `best_effort_same_context`，不得声称 Generator 从未见过。
+20. **硬约束必须有来源。** 只有 Owner 明确表达、任务来源明确规定或不可回避的法律/技术条件，才能进入 confirmed hard constraints。
+21. **搜索属性默认不是硬约束。** 单词/多词、现成/新造、透明/不透明、抽象度、构词法、语义区、search mode、批量大小等，默认属于 Controller search variables。
+22. **不得把 Agent 自己的上一轮假设升级成 Owner 边界。** 无 provenance 时诊断 `constraint_drift`。
+23. **内部路径选择不得转嫁给 Owner。** A/B/C 方法菜单通常应由 Controller 自主选择或并行试验。
+24. **工具箱不是固定路径。** 不执行“第一方法失败后才允许第二方法”的线性流程；由 Method Scheduler 动态分配预算。
+25. **探索默认允许多方法小批并行。** 不要求每轮只用一个构词方法，也不要求所有方法平均覆盖。
+26. **现实撞名不等于强原型价值归零。** 若候选本体强而主要死于 namespace，可开启有限 transformation rescue。
+27. **Transformation Rescue 是显式、有限、可审计的 exploitation exception。** Seed 只能进入救援分支，不得回流成主探索池隐性模板。
+28. **价值排序必须有证据。** 不为了方便调度而凭空给价值打 1–10 分或制造 Owner 未表达的优先级。
+29. **阶段性路线收敛不等于 Owner pause。** 仍有未被真实硬约束禁止的高信息价值搜索空间时，Controller 应自主继续。
 
-## 4. 运行前：建立 Naming Job 与约束登记
+---
 
-在首次生成候选前，建立或补全状态文件。至少确认：
+## 4. 建立 Naming Job：目标、约束与 Mission / Value Model
 
-- 被命名对象及其长期尺度；
-- 主要受众与使用语境；
-- 应表达 / 应避免的概念、气质和联想；
-- 语言、发音、拼写、长度、架构等真实硬约束；
-- 必要现实条件，例如目标 TLD、商标/组织/项目名称冲突；
-- Owner 已知偏好，但不得把偏好伪装成普遍质量标准。
+首次执行或使命 / 愿景发生实质变化时，先建立 Naming Job。
 
-同时建立 `constraint_registry`，至少区分：
+至少恢复：
 
-1. `confirmed_hard_constraints`：有明确来源、改变它需要 Owner / task-source 重新确认；
+- 被命名对象与长期尺度；
+- 主要受众与真实使用语境；
+- mission / vision / philosophy；
+- 成功定义；
+- confirmed hard constraints；
+- Owner 已知偏好；
+- 必要现实条件，例如目标 TLD、商标 / 组织 / 项目 namespace。
+
+### 4.1 Constraint Registry
+
+至少区分：
+
+1. `confirmed_hard_constraints`：有明确 provenance；
 2. `owner_preferences`：偏好信号，不等于硬约束；
-3. `controller_search_variables`：Agent 可自主调整的搜索参数；
-4. `assumptions`：暂时假设，必须标注来源不足，不能悄悄升级为边界。
+3. `controller_search_variables`：Agent 可自主改变；
+4. `assumptions`：证据不足的暂时假设。
 
-如果一个“限制”无法回答“谁明确要求的、证据在哪里”，默认先放入 search variable / assumption，而不是 hard constraint。
+如果一个限制无法回答“谁明确要求、证据在哪里”，默认不是 hard constraint。
 
-同时建立一张**初始命名空间地图**：竞争者/相邻对象如何命名、哪些类别明显拥挤、哪些语义或构词区域值得探索。初始地图是先验，不是假定完整事实。
+### 4.2 Mission / Value Model
 
-状态中还应建立 `search_control`，至少记录当前搜索模式、已探索语义覆盖、近期词形/语义/构词家族集中度、当前 comparison-only 候选、必要 cooldown、生成隔离等级和生成后过滤状态。
+按需读取：
 
-## 5. 搜索模式：Exploration 与 Exploitation 必须显式区分
+[`references/mission-value-model-and-method-scheduler.md`](references/mission-value-model-and-method-scheduler.md)
 
-每次生成前明确当前 `search_mode`：
+不要只提取 `semantic_core`。至少拆解：
 
-### Exploration｜探索
+- actors / stakeholders；
+- objects / resources；
+- actions / transformations；
+- relations / rights / agency；
+- temporal / causal structure；
+- desired world / end state；
+- 有证据的 anti-values / non-goals；
+- value claims、来源、priority 与 confidence；
+- value relations / tensions；
+- naming implications：direct / indirect / guardrail_only / optional_story / not_required。
 
-目标是扩大或修复搜索空间覆盖，而不是围绕当前最强名字爬山。
+如果 Mission 包含循环、反馈或主体关系，必须保留结构，不得把它压成几个同义词。
 
-探索阶段：
+### 4.3 Value Coverage
 
-- strongest / finalist / survivor 候选默认只用于评价比较，不用于生成提示；
-- 检查 semantic coverage，优先补采样长期目标中被忽略的区域；
-- 检查词根、前后缀、语义家族和构词模板是否过度集中；
-- 同一批先完成名称本身比较，再做现实筛查；
-- 现实筛查结果不得回灌同批生成，也不得被压缩成“这个词形更容易活下来”直接交给 Generator；
-- task-local cooldown 和 incumbent 相似性优先由控制器在生成后检查，不在 Generator Brief 中逐项点名；
-- 如需围绕某一强区域继续，应先通过搜索完整性检查，再显式切换到 exploitation。
+维护搜索中的价值覆盖，而不只统计 semantic region 数量。
 
-### Exploitation｜深挖
+若大量候选围绕某个表面 proxy，而 core value 的另一部分长期低采样，诊断 `value_proxy_collapse`。
 
-目标是验证一个已经有独立证据支持的强区域或结构。
+---
 
-深挖阶段允许局部变体、相邻词根和结构对照，但必须：
+## 5. Method Scheduler：动态调度，而不是固定路径
 
-- 明确记录为什么值得深挖；
-- 设定有限范围或退出条件；
-- 不把“现实更容易存活”单独作为进入深挖的理由；
-- 若候选家族越来越相似而新信息下降，应退回 exploration。
+按需读取同一 reference：
 
-不能在状态中写着 exploration，实际却围绕一个 incumbent 持续生成同族变体。
+[`references/mission-value-model-and-method-scheduler.md`](references/mission-value-model-and-method-scheduler.md)
 
-## 6. 核心循环：先判断“当前最值得做什么”
+构词工具箱见：
 
-不要机械执行固定 Step 1 → Step 2 → Step 3。每一轮先读取当前状态，然后选择信息价值最高的下一动作。
+[`references/word-formation-strategies.md`](references/word-formation-strategies.md)
+
+Scheduler 维护每个活跃 strategy / family 的动态状态，例如：
+
+- value targets；
+- quality yield；
+- distinctiveness yield；
+- recoverability yield；
+- reality crowding；
+- recent information gain；
+- concentration risk；
+- attempts / last used；
+- active / boosted / deprioritized / cooled / exploitation / rescue_only。
+
+### Exploration
+
+当没有单一明显最优方法时：
+
+- 默认选择约 3–5 个差异足够大的方法 / family，小批并行；
+- 同时补价值覆盖、构词结构和抽象度差异；
+- 不为了公平平均预算；
+- 若两条路线都合理且试验成本低，默认并行，而不是问 Owner。
+
+### Exploitation
+
+只在跨批稳定强信号、search-integrity 通过且存在明确问题时，把预算集中到 1–2 个方法，并设退出条件。
+
+### Scheduler 更新
+
+每批完成后更新**方法状态**，不仅更新候选状态。
+
+- 高质量 + 高信息增益 + 覆盖价值缺口 + concentration 可控 → boost；
+- 连续重复已知失败 / 现实拥挤高 / 错误尺度 / 低信息增益 → deprioritize；
+- mode collapse / overuse → task-local cooldown；
+- 条件变化或新组合出现 → 可重新激活。
+
+降低优先级不等于永久删除方法。
+
+---
+
+## 6. Search Mode：Exploration 与 Exploitation
+
+### Exploration
+
+目标是扩大或修复真实搜索空间覆盖。
+
+要求：
+
+- comparison candidate 不进入通用生成提示；
+- 检查 semantic coverage、value coverage、family concentration、method concentration；
+- 同批先做名称本体 / value alignment，再做现实筛查；
+- reality 结果只进入 Controller feasibility / crowding 诊断；
+- task-local cooldown 主要由 post-generation filter 执行。
+
+### Exploitation
+
+目标是验证一个已有独立证据支持的强区域、方法、结构或 rescue seed。
+
+必须记录：
+
+- 为什么值得深挖；
+- 本轮允许看到什么结构信息；
+- 最大预算；
+- 退出条件。
+
+不能在 state 中写 exploration，实际却围绕一个 incumbent 无限生成同族变体。
+
+---
+
+## 7. 核心循环：选择当前信息价值最高的动作
 
 允许动作包括：
 
-- `audit_constraints`：核对当前所谓硬约束是否有真实来源，发现 constraint drift；
-- `map`：补充竞争 / 语义 / 构词空间地图；
-- `generate`：在选定区域生成；
-- `post_generation_filter`：执行 Controller-only cooldown / incumbent similarity / search-integrity 排除；
-- `evaluate_quality`：评价名称本身质量；
-- `verify_reality`：查询现实碰撞、域名或其他 namespace；
-- `diagnose`：解释观察意味着什么；
-- `check_search_integrity`：检查覆盖率、家族集中、incumbent 锚定、策略忠实度、隔离真实性和幸存者反馈；
-- `update_state`：更新地图、假设、候选与偏好；
+- `model_values`：建立 / 修正 mission-value model；
+- `audit_constraints`：核对硬约束 provenance；
+- `map`：补充竞争 / 语义 / 价值 / 构词空间地图；
+- `schedule_methods`：分配方法组合与预算；
+- `generate`：按本轮 Brief 生成；
+- `post_generation_filter`：执行 Controller-only exclusions；
+- `evaluate_quality`：评价名称本身；
+- `evaluate_value_alignment`：评价价值对齐；
+- `verify_reality`：查询碰撞、域名或其他 namespace；
+- `open_rescue_branch`：对强原型开启有限变形救援；
+- `diagnose`：解释观察；
+- `check_search_integrity`：检查覆盖、坍缩、策略忠实、隔离真实性、constraint drift、scheduler monoculture；
+- `update_state`：更新地图、价值模型、方法状态、候选与偏好；
 - `ask_owner`：只在 Owner Interaction Gate 通过后使用；
-- `stress_test`：把强候选放入长期品牌/组织架构语境；
-- `change_strategy`：换语义区、构词法、名称架构、搜索模式、探索深度或评价重点；
+- `stress_test`：长期品牌 / 组织架构压力测试；
+- `change_strategy`：换价值目标、语义区、构词法、名称架构、search mode 或预算；
 - `stop`：达到停止条件。
 
-批量大小不是固定配额：
-
-- 新区域或搜索空间重置时，可一次生成约 **6–10 个轻量内部候选**，用于提高地图信息密度；
-- 已知区域的精细探索或 exploitation，通常 **3–5 个**；
-- 若当前最大未知不是“缺候选”，可以生成 **0 个**。
-
 ```text
-读取完整状态
+恢复完整状态
   ↓
-约束来源审计 + 搜索完整性检查 + 判断最大未知
+Mission / Value Model + Constraint Audit
   ↓
-选择 search_mode 与下一动作
+搜索完整性 + Value Coverage + 最大未知
   ↓
-若需生成：Controller 形成正向 Generation Brief + 私有 exclusions
+Method Scheduler 分配方法 / 分支 / 预算
   ↓
-Generator 只按其可见 Brief 生成
+Controller 形成正向 Generation Brief + 私有 exclusions
   ↓
-Controller 执行 post-generation filter
+Generator 生成
   ↓
-获得新观察 → 质量评价 / 现实验证
+Controller post-generation filter
   ↓
-诊断
+名称质量 + Value Alignment
   ↓
-更新状态
+必要时 Reality Verification / Transformation Rescue
   ↓
-自动继续 / 换方向 / Owner Interaction Gate / 停止
+诊断 + 更新方法状态 / 候选 / 覆盖
+  ↓
+自主继续 / 换方向 / Owner Gate / Stop
   ↺
 ```
 
-## 7. 生成：控制器与 Generator 隔离
+批量大小不是固定配额。广泛 exploration 可用多个小批；focused exploitation 通常更小；当前最大未知不是缺候选时可以生成 0 个。
 
-生成前按需读取 [`references/word-formation-strategies.md`](references/word-formation-strategies.md)。
+---
 
-Agent 应知道至少存在这些路线：
+## 8. Generator Context 与隔离
 
-- 现成词 / 语义迁移；
-- 复合词；
-- 拼词 / 混成词；
-- 词根组合；
-- 完全新造词；
-- 受控改写拼写；
-- 重复 / 双写字母；
-- 主体词 + 单字母；
-- 前缀 / 后缀；
-- 截短 / 短语压缩 / 缩略；
-- 声音先行；
-- 从相邻领域、物体、动作、自然现象、职业、空间和隐喻寻找材料。
+### 8.1 Controller-only exclusions
 
-这些是可选搜索路径，不是永久配额，也不是默认硬边界。Agent 可以创造列表之外的新构词策略；新策略要在状态中记录其做法、目的和观察结果。
+控制器可读取完整 state，并私下维护：
 
-### 7.1 Controller-only exclusions
-
-控制器可以读取完整任务状态，并私下维护：
-
-- comparison-only / incumbent 候选；
-- task-local cooldown 的词形、语义或构词家族；
+- comparison-only / incumbent；
+- task-local cooled families；
 - reality survivor shapes；
 - Owner 对具体 incumbent 的反应；
-- 需要在生成后执行的相似性 / 家族过滤规则。
+- post-generation similarity / family rules。
 
-这些信息**默认不进入 Generator Brief**。它们存在的目的，是让控制器检查输出，而不是让生成模型反复“想到它们但不要使用它们”。
+这些默认不进入 Generator Brief。
 
-真正属于任务本身的硬边界仍可进入 Generator Brief，例如语言、长度、发音、法律/伦理禁区、明确禁止的外部品牌身份等；但应尽量用类别性、正向、最小必要表述，不用大量具体负面样本提示。
+### 8.2 Positive Generation Brief
 
-### 7.2 Positive Generation Brief
+Generator 在 exploration 阶段只接收压缩后的正向 Brief，优先包括：
 
-Generator 在 exploration 阶段默认只接收压缩后的正向 Brief。优先包含：
-
-- 当前命名对象与长期尺度；
-- 本轮正向探索目标；
-- 待采样的语义区域或结构问题；
-- 可尝试的构词方向；
-- 期望的语言、口语、记忆和架构性质；
-- 真正不可省略且有 provenance 的硬约束；
+- 当前对象与长期尺度；
+- 本轮选择的 value target / naming implication；
+- 本轮正向搜索区域；
+- Scheduler 选定的构词方向；
+- 期望语言、口语、记忆、尺度与架构性质；
+- 有 provenance 的硬约束；
 - 本轮要回答的搜索问题。
 
-默认**不向 Generator Brief 写入**：
+默认不写入：
 
-- strongest / survivor / finalist 的具体名称；
-- 它们成功的具体词根、词尾或音形模式；
-- task-local cooldown 的具体 token / 词根清单；
-- 域名可用、现实撞名、商标等幸存结果；
-- Owner 对具体 incumbent 的喜欢/接受程度；
-- 为防止复发而列出的长串 negative examples。
+- incumbent / survivor 具体名称；
+- successful root / suffix / sound pattern；
+- cooldown token 清单；
+- reality survivor shapes；
+- Owner 对 incumbent 的喜欢程度；
+- 长串 negative examples。
 
-如果必须表达避让意图，优先使用抽象的正向搜索要求，例如“扩大此前低采样的结构空间”，而不是列出旧候选、旧词根和一串“不要”。
+### 8.3 Post-generation filter
 
-如果 Brief 中出现“必须单词 / 必须两词 / 必须语义透明 / 必须某构词法”等架构要求，控制器必须先检查它是否来自 confirmed hard constraint。没有 provenance 时，应把它改写成“本轮测试变量”，不能当成任务边界。
+Generator 产出后，由 Controller 检查：
 
-### 7.3 Post-generation filter
+1. cooled family；
+2. incumbent similarity；
+3. strategy / scheduler fidelity；
+4. 其他 Controller-only exclusions。
 
-Generator 产出后，由控制器在质量评价前执行最小必要过滤：
+被挡回者是控制层违反，不自动算名称质量失败。
 
-1. 是否命中 task-local cooled family；
-2. 是否与 comparison-only / incumbent 在词根、音形、语义代理或构词模板上过近；
-3. 是否违反本轮声明的 search_mode / strategy；
-4. 是否命中其他 controller-only exclusions。
+### 8.4 隔离等级
 
-被挡回的候选记录为**控制层违反**，不自动记作名称本身质量失败，也不把具体排除项再次回喂 Generator。
+每轮记录：
 
-如果同一批过滤命中率持续很高：
+- `isolated_runtime`；
+- `fresh_context`；
+- `best_effort_same_context`；
+- `none`。
 
-- 先诊断生成上下文污染、search frame 不清或 isolation 不足；
-- 优先改用 fresh / isolated runtime 或重写正向 search frame；
-- 不要第一反应就是增加更多具体负面提示。
+只有前两类且有证据时，才可说“Generator 未看到 X”。
 
-### 7.4 隔离等级与事实表述
+---
 
-每轮生成应记录实际 `generation_isolation.level`：
+## 9. Transformation Rescue：强原型现实失败后的有限变形
 
-- `isolated_runtime`：独立 subagent / 独立上下文，且未接触 controller-only exclusions；
-- `fresh_context`：新会话 / 新上下文，只加载净化后的生成材料；
-- `best_effort_same_context`：同一聊天或同一模型上下文曾见过完整状态，只是在当前生成步骤不主动回看；
-- `none`：没有做上下文隔离。
+当候选名称本体强，但主要因为现实 identity / namespace / domain 拥挤失败时，不应自动丢弃其 construction value。
 
-只有前两类且证据充分时，才可以说“Generator 未看到 X”。
+可开启 `transformation_rescue`，前提是：
 
-在 `best_effort_same_context` 中应准确写成：**“当前 Generation Brief 未再次暴露 X，但运行上下文历史中可能已见过 X。”**
+- 本体质量强；
+- 主要失败不是发音、拼写、尺度或价值冲突；
+- 变形仍有机会形成独立身份；
+- rescue 预算有限。
 
-如果当前 runtime 不支持真正隔离，仍可继续任务，但必须诚实标注隔离等级，并把 post-generation filter 作为主要防线。
+优先考虑低失真 operator：
 
-只有显式进入 exploitation，且状态记录了理由时，才允许把被深挖的结构性特征有限提供给 Generator。
+- controlled spelling mutation；
+- doubled / repeated letters；
+- base word + single letter；
+- meaningful prefix / suffix；
+- clipping / telescoping；
+- light blend / second semantic anchor；
+- institutional pair / phrase expansion；
+- 更大的 controlled coinage。
 
-## 8. 搜索完整性 / 防坍缩检查
+这不是固定流水线；明显不适配的 operator 可跳过。
 
-以下检查不是要求平均分配，而是用于判断搜索是否失真。
+每个变形结果必须作为**新候选重新评价**，不能继承 seed 的高质量。
 
-### 语义覆盖
+重新检查：发音、听写恢复、视觉自然、proper-name identity、长期尺度、value alignment、exact/near collision、商标导向近似风险和目标域名。
 
-观察长期目标的主要语义区域是否被持续低采样。某一区域胜出不自动说明其他区域已经充分探索。
+若 rescue 开始损害 recoverability、产生 typo / 廉价科技词、near identity 仍高度集中、出现新 mode collapse 或信息增益下降，则停止。
 
-### 形态与语义家族集中
+---
 
-不要只检查 exact substring。识别共享词根、前后缀、同义/近义代理、声音骨架和构词模板是否在 recent / active / promising 候选中异常集中。
+## 10. 搜索完整性与典型控制缺陷
 
-具体家族必须由当前任务诊断，不建立永久黑名单。发现某一家族集中时，应把具体家族信息放入 Controller-only exclusions；Generator 通常不需要看到该家族的具体词根清单。
+至少检查：
 
-### Incumbent anchoring
+- `semantic_mode_collapse`；
+- `value_proxy_collapse`；
+- `mission_overcompression`；
+- `morphological_mode_collapse`；
+- `construction_mode_collapse`；
+- `scheduler_monoculture`；
+- `method_underuse`；
+- `incumbent_anchoring`；
+- `rescue_overfit`；
+- `survivorship_feedback`；
+- `strategy_fidelity`；
+- `negative_constraint_priming`；
+- `isolation_overclaim`；
+- `constraint_drift`；
+- `search_path_delegation`；
+- `owner_boundary_false_positive`；
+- `value_score_smuggling`。
 
-如果 strongest candidate 的词根、语义代理、音形或结构持续出现在新候选中，检查它是否从评价基准泄漏为生成模板。
+详细 if / then 规则见：
 
-发现泄漏时：
+[`references/diagnosis-and-next-action.md`](references/diagnosis-and-next-action.md)
 
-1. 将 incumbent 标为 `comparison_only`；
-2. 将具体名称与成功词形移入 Controller-only exclusions；
-3. 必要时对其语义/形态家族设置 task-local cooldown；
-4. 用正向 Brief 恢复被低采样区域；
-5. 由 post-generation filter 拦截意外回流。
+原则：先诊断，再优化；不得从单个候选直接跳到永久策略结论。
 
-### Negative-constraint priming
+---
 
-如果为了防复发，Generation Brief 反复列出 incumbent、冷却词根或“不要 X / 不要 Y”，并出现这些模式持续高显著、变体回流或过滤命中率升高，诊断为 `negative_constraint_priming`。
-
-修复顺序：
-
-1. 把具体排除项移回 Controller-only 状态；
-2. 将 Generator Brief 改成正向目标；
-3. 生成后过滤；
-4. 若同上下文污染持续，切换 fresh / isolated runtime。
-
-### Isolation integrity
-
-不得把“逻辑上 omitted”误报成“模型事实上没见过”。每轮检查：
-
-- 当前 Generator 是否有独立上下文；
-- 历史聊天是否已暴露 incumbent / cooldown / survivor 信息；
-- state 中的 isolation level 是否与事实一致。
-
-发现夸大隔离效果时，诊断 `isolation_overclaim`，修正记录后继续；这属于方法执行完整性问题，不等于候选质量失败。
-
-### Constraint integrity
-
-每次准备扩大、缩小或停止某条搜索路径时，检查当前“边界”是否真的来自 confirmed hard constraint。
-
-如果单词/多词、透明/不透明、现成/新造、某种构词家族或某个抽象度只是 Agent 之前选择的路线，却被后续写成“Owner boundary”，诊断 `constraint_drift`。
-
-修复：
-
-1. 查找 constraint provenance；
-2. 没有明确来源则从 hard constraint 撤回；
-3. 放回 `controller_search_variables`；
-4. 根据当前信息增益自主扩展、切换或并行探索；
-5. 不因为这类内部路径变化询问 Owner。
-
-### Strategy fidelity
-
-每批完成后比较：**声称探索的方向**与**实际生成/入选候选**是否一致。
-
-若计划探索 A/B/C，却最终仍回到旧家族 X，不能把该轮记作“A/B/C 已失败”；应记录为策略执行失败，并重新生成或调整生成合同。
-
-### Survivorship feedback
-
-现实筛查大量淘汰某些路线后，剩余路线可能只是“更容易占用”，不一定“创意更好”。
-
-探索阶段将现实结果与下一批 Generator 隔离。现实可用性只能通过控制器更新 crowding / feasibility，不得直接形成“多生成这种词形”的提示。
-
-## 9. 双轨评价
+## 11. 三层评价
 
 ### A. 名称本身质量
 
-按任务需要从以下维度观察，不默认求平均分：
+按任务需要观察，不默认求平均分：
 
-- 独特性；
-- 发音自然度；
-- 拼写 / 听写负担；
-- 记忆性；
-- 语义契合；
-- 语义空间与延展余量；
-- 对当前对象尺度的适配；
-- 长期性；
-- 象征 / 意义压缩能力；
-- 跨场景使用能力；
-- 品牌架构延展；
-- 视觉感受；
-- 必要时的跨语言 / 文化联想。
+- distinctiveness；
+- pronounceability；
+- spelling / dictation burden；
+- memorability；
+- semantic fit；
+- semantic room；
+- target scale fit；
+- longevity；
+- symbolic compression；
+- cross-context use；
+- architecture extensibility；
+- visual feel；
+- 必要时跨语言 / 文化联想。
 
-对候选比较可使用严格帕累托支配：若 A 在所有当前重要质量维度都不差于 B，且至少一个维度严格优于 B，则 B 可以退出 active pool。退出原因必须保留。
+### B. Value Alignment
 
-不要仅因一个候选“均衡”就优先，也不要把主观偏好偷偷变成统一分数。
+与 `semantic_fit` 分开。
 
-### B. 现实可用性
+至少记录：
+
+- aligned core values；
+- tensions；
+- contradictions；
+- neutral values；
+- confidence。
+
+候选可以只直接承载一个 core value，而对其他价值保持 neutral。真正需要警惕的是与 core value 明显 contradiction。
+
+### C. 现实可用性
 
 单独记录：
 
-- 同名 / 近名公司、组织、产品、项目与软件；
+- exact / near-name identity；
 - 域名；
 - 商标导向风险；
-- 必要的平台名称 / handle / package namespace；
-- 查询不确定性与证据来源。
+- 必要的平台 / handle / package namespace；
+- 查询不确定性和证据来源。
 
-现实碰撞只能更新可行性和命名空间地图，除非它同时暴露了独特性等内在问题，否则不要反向改写质量评价。
+现实碰撞只能更新 feasibility / crowding；除非同时暴露名称本身问题，否则不要反向改写 intrinsic quality。
 
-## 10. 现实验证工具合同
+---
 
-Agent 应使用当前运行环境可用的真实工具，不凭记忆断言可用性。
+## 12. 现实验证工具合同
 
-### 现实身份 / 碰撞
+Agent 必须使用当前 runtime 的真实工具，不凭记忆断言现实可用性。
 
-优先进行 exact-name 与 near-name 搜索，并记录：query、对象类型、相关程度、source、observed_at、observation / uncertainty。
+### Reality identity
 
-### 域名
+优先 exact-name 与 near-name 搜索，记录 query、对象类型、相关程度、source、observed_at、observation / uncertainty。
 
-调用 IA 已验证的统一方法：
+### Domain
+
+调用 IA 统一方法：
 
 [`Domain Availability Verification Method v0.1`](../../../03_Evolution/01_Research/01_Prior_Art/Naming_Methods/Execution/domain-availability-verification-method-v0.1.zh-CN.md)
 
-其核心顺序为：registry authoritative RDAP / official availability → IANA bootstrap resolver → registry RDDS/WHOIS → registrar machine/API → two-registrar corroboration → unresolved。
+顺序：registry authoritative RDAP / official availability → IANA bootstrap → registry RDDS/WHOIS → registrar machine/API → two-registrar corroboration → unresolved。
 
-运行环境只决定 adapter，不改变证据标准。`unknown / error` 永远不能自动转换为 `available`。
+`unknown / error` 永远不能自动变成 `available`。
 
-## 11. 诊断：失败必须回答“为什么”
+---
 
-出现重要观察或一批候选完成评价后，按需读取 [`references/diagnosis-and-next-action.md`](references/diagnosis-and-next-action.md)。
+## 13. 状态与学习
 
-诊断至少区分：
-
-1. 候选级：这个名字发生了什么？
-2. 批次 / 区域级：是否出现重复模式？
-3. 搜索完整性级：是否发生语义、形态、构词、incumbent、负面提示、隔离完整性或 constraint drift？
-4. 策略级：这些重复模式是否足以改变下一步或 search_mode？
-
-先诊断，再优化。不得从单个候选直接跳到永久策略结论。
-
-## 12. 状态与学习
-
-每个 Naming Job 使用独立状态文件，结构见：
+每个 Naming Job 使用独立 state，模板：
 
 [`templates/naming-state-template.yaml`](templates/naming-state-template.yaml)
 
-每轮至少更新与本轮有关的：
+每轮至少按需更新：
 
-- 新观察；
-- 候选状态；
-- 现实证据；
-- 区域 / 构词策略认识；
-- confirmed constraints 与 search variables；
-- 搜索模式与搜索完整性状态；
-- generation isolation 与 post-generation filter 结果；
-- 诊断；
-- 当前最大未知；
-- 下一动作及理由。
+- mission / value model；
+- value coverage；
+- confirmed constraints / search variables；
+- method scheduler state；
+- rescue branches；
+- 新观察与候选；
+- reality evidence；
+- generation isolation / post-filter；
+- search-integrity diagnostics；
+- biggest unknown；
+- next action / why now。
 
 ### 任务内经验
 
-可以直接影响当前任务，例如“当前语义区拥挤”“某种结构在本任务中过于产品化”“某个形态家族暂时需要 cooldown”。
+可直接改变当前任务，例如当前区域拥挤、某方法过度产品化、某 family 需要 cooldown。
 
 ### 跨任务经验
 
-若发现 Skill 中没有的新方法或反复出现的经验，不直接无审核修改本 Skill。先记录为 `experience_candidate`，至少包含 observation、scope、evidence_count / supporting jobs、possible generalization、counterexample / risk、confidence、proposed change。
+新发现先记录 `experience_candidate`，不因一次成功自动写回核心 Skill。跨任务证据稳定后再 review / PR。
 
-只有跨任务证据稳定后，再通过独立 review / PR 提升为 Skill 或 reference 的新版本。
+---
 
-## 13. Owner 反馈、自主执行与 Owner Interaction Gate
+## 14. Owner Interaction Gate
 
-减少人的工作量。通常先由 Agent 做地图、生成、质量评价、现实筛查和内部策略切换，只把少量真正需要人的目标/边界/主观选择交给 Owner。
+任何 `ask_owner` 前必须回答：
 
-核心分工：
+1. 是否在改变 Owner / task-source 已确认目标或 hard constraint？
+2. 还是只在改变方法、名称架构、构词路线、语义透明度、value sampling 或预算？
+3. 路径变化是否可逆、可测试、预算可承受？
+4. 多条合理路线是否可以先并行小批验证？
 
-> **Owner 决定“要什么、真正不能变什么、最后喜欢什么”；Controller 决定“怎么找、先试哪条路、何时换路、是否并行”。**
+判定：
 
-**不要因为完成一个微循环而停止当前用户回合。**
+- `true_boundary_change` → 可以问 Owner；
+- `final_subjective_choice` → 可以问 Owner；
+- `missing_goal_fact` 且无法从现有来源恢复 → 可以问 Owner；
+- `search_strategy` → 不得问 Owner；
+- `reversible_architecture_expansion` → Controller 自主扩大或并行；
+- `method_schedule` → Controller 自主执行；
+- `transformation_rescue` → Controller 自主执行。
 
-只要同时满足：
+禁止把内部搜索菜单包装成 Owner boundary。
 
-- 当前状态存在明确 `next_action`；
-- 不需要新的真实 Owner 判断；
-- 没有无法绕过的工具/证据阻塞；
-- 尚未达到预算/时间边界；
+---
 
-Agent 就应自主进入下一微循环，并持续维护状态。
+## 15. 长期架构压力测试
 
-### 13.1 `ask_owner` 前置门
-
-任何 `ask_owner` 之前，必须先记录一次 `owner_interaction_gate`，回答：
-
-1. **这是不是在改变已确认的目标或有来源的硬约束？**
-2. **还是只在改变寻找结果的方法 / 名称架构 / 构词路线 / 语义透明度 / 搜索范围？**
-3. **这个路径变化是否可逆、可测试，并且在当前预算内？**
-4. **如果有两条以上同样合理的路线，能否并行探索后再用证据比较？**
-
-判定规则：
-
-- `true_boundary_change`：确实要改变 Owner / task-source 明确的硬约束 → 可以询问 Owner；
-- `final_subjective_choice`：少数强候选剩余差异主要是长期认同、气质、偏好 → 可以询问 Owner；
-- `missing_goal_fact`：缺失事实会改变成功定义且无法从现有来源恢复 → 可以询问 Owner；
-- `search_strategy`：只是在单词/多词、透明/不透明、现成/新造、语义区、构词法、search mode 等路线之间选择 → **不得询问 Owner，Controller 自主执行**；
-- `reversible_architecture_expansion`：当前路线低收益，但其他未被禁止的名称架构可以试验 → **自主扩大或并行探索**。
-
-禁止把内部路径菜单包装成 Owner boundary，例如在没有明确硬约束来源时要求 Owner 选择 “A 单词 / B 两词 / C 新造 / D 继续”。如果路线都没有违反 confirmed constraints，应由 Controller 根据最高信息增益决定；相近时默认并行小批探索。
-
-适合暂停并询问 Owner 的情况：
-
-- 两个或少数强候选客观上难区分，剩余差异主要是主观长期认同；
-- Owner 明确提出的新硬边界需要确认适用范围；
-- 已确认的硬约束之间出现实质矛盾；
-- 目标或成功定义缺失，现有来源无法恢复；
-- 已进入最终采用决策；
-- 预算/时间边界需要 Owner 决定是否继续。
-
-重大**内部搜索策略**变化通常不需要 Owner 批准；应记录诊断后自主执行。阶段性收敛只代表当前路线收敛，不自动等于需要 Owner。如果仍存在未被硬约束禁止、且信息价值明显的搜索架构，Controller 应先继续探索。
-
-Owner preference 仍与一般命名质量分开，最终采用权属于 Owner。
-
-## 14. 长期架构压力测试
-
-对强候选，根据对象类型放进真实语境，而不是只看裸名字。对于 umbrella organization，可测试例如：
+对强候选放进真实使用语境，而不只看裸名。umbrella organization 可测试：
 
 ```text
 [Name]
@@ -494,36 +511,48 @@ Owner preference 仍与一般命名质量分开，最终采用权属于 Owner。
 A project by [Name]
 ```
 
-若候选在架构语境中暴露问题，记录为诊断事件，不只判断文字是否顺口；还要判断它呈现出的组织身份是否符合长期尺度。
+还应检查：名称呈现的组织身份是否与 mission / value model 长期兼容。
 
-## 15. 停止条件
+---
 
-满足下列任一情况时可以停止当前循环：
+## 16. 停止条件
 
-- 已有足够数量的高质量、现实可推进候选进入 Owner 最终决策；
+满足任一情况可停止当前循环：
+
+- 已有足够高质量、价值兼容、现实可推进候选进入 Owner 最终决策；
 - 当前继续探索的信息增益很低，且已有候选满足任务目标；
-- 关键现实验证被环境阻塞，需要明确 handoff；
-- Naming Brief / 已确认目标或硬约束本身出现实质矛盾，必须回到 Owner；
-- 预算 / 时间边界达到，需输出当前地图、最强候选和未解决问题，而不是假装完成。
+- 关键现实验证被环境阻塞，需要 handoff；
+- confirmed goals / hard constraints 本身出现实质矛盾，需要 Owner；
+- 预算 / 时间边界达到。
 
-**某一条搜索路线或名称架构达到阶段性收敛，不是单独的 Owner pause 条件。** 若其他未被 confirmed constraints 排除的路线仍有明显信息价值，应由 Controller 自主切换、扩大或并行探索。
+以下**不是**单独停止条件：
 
-若尚无足够强候选，不得为了凑数量降低质量或现实证据门槛；应诊断失败分布、搜索完整性与 constraint drift 后换区域、换构词方式、换名称架构、切换 search_mode 或重新检查目标。
+- 某一个 semantic region 收敛；
+- 某一个构词方法低收益；
+- single-token 路线收敛；
+- 某一批现实碰撞率高；
+- 一个 rescue branch 失败。
 
-## 16. 最小输出合同
+若仍存在未被 confirmed constraints 排除、且信息价值明显的 value / method / architecture 空间，Controller 应继续调度。
 
-任务中途可只输出必要的 Owner-facing 内容；完整收敛时至少给出：
+---
 
-- 当前 Naming Job / 已确认关键约束；
-- 已探索区域与主要学习；
-- 当前 search_mode 与重要搜索完整性诊断；
-- generation isolation 的实际等级；
-- 2–5 个当前强候选（或明确说明为何尚无）；
-- 每个候选的名称本身质量摘要；
-- 独立的现实可用性摘要；
+## 17. 最小输出合同
+
+Owner-facing 输出只保留必要信息。完整收敛时至少说明：
+
+- Naming Job / confirmed constraints；
+- mission / value model 的关键结论；
+- 已探索 value / semantic / method 空间；
+- 当前 Method Scheduler 诊断；
+- generation isolation 实际等级；
+- 2–5 个强候选（或为何尚无）；
+- intrinsic quality；
+- value alignment；
+- 独立 reality summary；
 - 主要风险 / 未知；
 - 下一步或停止理由。
 
-如果暂停询问 Owner，还应说明 `owner_interaction_gate.classification` 与对应的 confirmed constraint / missing fact / finalist choice 来源；不能只说“需要 Owner 决定路径”。
+如果暂停询问 Owner，必须说明 `owner_interaction_gate.classification` 与真实来源；不能只说“需要 Owner 决定路径”。
 
 不要把内部海量 working pool 机械倾倒给 Owner。
