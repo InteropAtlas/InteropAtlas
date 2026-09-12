@@ -137,12 +137,12 @@ class WorkflowTests(unittest.TestCase):
         result=self.run_flow();self.assertEqual(result['display'],[])
     def test_supplied_screening_checked_then_feedback_without_assistant(self):
         self.init();out=self.run_flow();ev=self.root/'source.txt';ev.write_text('FIXTURE not an actual registry result')
-        evidence={'round_digest':out['round_digest'],'items':[{'id':'C001','status':'pass','scope':'fixture_initial_checks_only',
+        evidence={'round_digest':out['round_digest'],'items':[{'id':'C002','status':'pass','scope':'fixture_initial_checks_only',
           'reviewer_ref':'fixture_reviewer','evidence':[{'file':'source.txt','sha256':p.digest(ev.read_bytes()),'source_ref':'fixture', 'checked_at':r.now()}]}]}
         inp=self.base/'evidence.json';p.write_new(inp,evidence);w.attach(self.root,'screening',inp)
         shown=self.run_flow();self.assertEqual(shown['status'],'awaiting_owner_feedback');self.assertEqual(len(shown['display']),1)
         fb={'round_digest':shown['round_digest'],'source_ref':'fixture_owner','verbatim':'TEST FEEDBACK',
-            'action':'accept_for_research','candidate_ids':['C001']}
+            'action':'accept_for_research','candidate_ids':['C002']}
         f=self.base/'feedback.json';p.write_new(f,fb);w.attach(self.root,'feedback',f)
         done=self.run_flow();self.assertEqual(done['status'],'research_review_complete_not_adoption');self.assertEqual(len(Handler.posts),6)
     def test_bad_source_file_rejected_before_attachment(self):

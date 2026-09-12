@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 93
+  snapshot_version: 94
   skill_version: 0.4.0
 
 lineage:
@@ -101,10 +101,10 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: narrow_selector_claim_boundary_and_priority_queue_using_existing_candidates
+  action: review_fixed_pool_selection_results_before_further_method_changes
   rationale: >-
-    REAL-408-003已完成既有材料知情审计；三路线生成收益微弱且评审敏感，不足以抵偿额外成本成为默认。
-    优先分开生成者猜测与事实、优先项与hold，并对完整多层包装做窄修复。使用同一候选池，不先开新生成轮。
+    v94已接入简单默认、生成者意图/风险边界、优先待定分流与完整包装兼容。
+    检查SELECT-408-001已保存结果及剩余语义问题，不新增名称，不把决定改变当质量改善。
   requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation
 
 stop:
@@ -782,4 +782,25 @@ real_model_audit_003:
     "skill_changed": false,
     "stable_promotion": false,
     "independent_review": "not_performed"
+  }
+
+# v94 selection-only revision; old trials and their historical counts remain unchanged.
+selection_revision:
+  {
+    "version": "0.2.0-experimental",
+    "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5647290998",
+    "baseline_commit": "036568195c8996aff710fe75e87982d571ff6d43",
+    "implementation": "naming-evidence-pilot/model-aware/selection_policy.py",
+    "default_method_for_new_sessions": "simple",
+    "old_results_unchanged": true,
+    "experiment": "SELECT-408-001",
+    "run_id": "34706709251",
+    "model_requests_with_saved_intent": 4,
+    "completed_selection_requests": 4,
+    "new_names": 0,
+    "paid_api_calls": 0,
+    "ia_generation": false,
+    "stable_promotion": false,
+    "semantic_validation": "development_only_not_independent_quality_proof",
+    "evidence": "naming-evidence-pilot/model-aware/selection-pilot/results/evidence.json"
   }

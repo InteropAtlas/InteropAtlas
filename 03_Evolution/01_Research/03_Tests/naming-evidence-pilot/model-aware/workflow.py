@@ -16,6 +16,8 @@ import re
 import unicodedata
 import protocol as p
 import local_runner as r
+import format_adapter as f
+import selection_policy as selection
 
 HERE = Path(__file__).resolve().parent
 LENSES = (
@@ -37,7 +39,7 @@ def text(value, limit=1200):
 
 
 def source_hashes():
-    return {n: p.digest((HERE / n).read_bytes()) for n in ('workflow.py', 'protocol.py', 'local_runner.py')}
+    return {n: p.digest((HERE / n).read_bytes()) for n in ('workflow.py', 'protocol.py', 'local_runner.py', 'format_adapter.py', 'selection_policy.py')}
 
 
 @contextmanager
@@ -51,7 +53,7 @@ def lock(root: Path):
         target.unlink()
 
 
-def initialize(root: Path, config: dict, task: dict, runtime: dict, method='redesign',
+def initialize(root: Path, config: dict, task: dict, runtime: dict, method='simple',
                rounds=1, seed=91, diagnostic_preview=False):
     p.validate_config(config)
     require(task.get('record_kind') == 'synthetic' and task.get('scope') == 'method_development',
@@ -70,7 +72,7 @@ def initialize(root: Path, config: dict, task: dict, runtime: dict, method='rede
     # Fixed per-session identity, not a license to reset a running ledger.
     nonce = p.digest(p.canonical({'task': clean, 'runtime': runtime, 'method': method, 'seed': seed, 'path': str(root.resolve())}))[:16]
     c['experiment_id'] += '-flow-' + nonce
-    plan = {'schema_version': 1, 'created_at': r.now(), 'task': clean, 'config': c,
+    plan = {'schema_version': 2, 'selection_policy': selection.VERSION, 'created_at': r.now(), 'task': clean, 'config': c,
             'runtime': runtime, 'method': method, 'max_rounds': rounds, 'seed': seed,
             'diagnostic_preview_authorized': bool(diagnostic_preview), 'source_hashes': source_hashes(),
             'candidate_target': 6, 'generation_output_allowance': c['budgets']['max_output_tokens_per_call'],
@@ -89,6 +91,7 @@ def load_plan(root: Path):
     plan = p.read(root / 'plan.json')
     require(p.digest(p.canonical(plan)) == (root / 'plan.sha256').read_text(), 'plan_changed_create_explicit_new_session')
     require(plan['source_hashes'] == source_hashes(), 'implementation_changed_explicit_migration_required')
+    require(plan.get('selection_policy') == selection.VERSION, 'explicit_policy_migration_required')
     return plan
 
 
@@ -153,7 +156,8 @@ def step_call(root, plan, step, question, role, limit, backend, instruction=''):
     if op.exists():
         saved = p.read(op)
         require(p.digest((directory / 'answer.raw').read_bytes()) == saved['raw_sha256'], 'cached_answer_changed')
-        return json_answer((directory / 'answer.raw').read_bytes())
+        normalized = normalized_answer(directory, (directory / 'answer.raw').read_bytes(), question)
+        return json_answer(normalized)
     raw, execution_ref, execution_kind = backend(root, plan, step, task, role, limit)
     raw_path = directory / 'answer.raw'
     if raw_path.exists():
@@ -161,7 +165,8 @@ def step_call(root, plan, step, question, role, limit, backend, instruction=''):
     else:
         with raw_path.open('xb') as stream:
             stream.write(raw)
-    parsed = json_answer(raw)  # Invalid raw output stays recorded; no automatic repair.
+    normalized = normalized_answer(directory, raw, question)
+    parsed = json_answer(normalized)  # No semantic repairs or automatic model retries.
     p.write_new(op, {'raw_sha256': p.digest(raw), 'execution_ref': execution_ref,
                     'execution_kind': execution_kind})
     return parsed
@@ -187,12 +192,27 @@ def reviews(answer, ids):
     return rows
 
 
-def review_question(stage, rows):
-    return p.canonical({'stage': stage,
-        'task': '比较全部条目。只使用当前给定数据，不推测来源路线、域名或Owner偏好。允许不确定，hold不等于通过。',
-        'items': rows,
-        'output_contract': {'reviews': [{'id': '原ID', 'decision': 'keep/hold/drop', 'reason': '具体判断依据'}]}}).decode()
+def normalized_answer(directory, raw, question):
+    normalized, audit = f.normalize(raw, json.loads(question))
+    target = directory / 'normalization.json'
+    if target.exists():
+        require(p.read(target) == audit, 'normalization_audit_changed')
+    else:
+        p.write_new(target, audit)
+    if audit['action'].startswith('refused_'):
+        raise ValueError(audit['action'])
+    if audit['changed']:
+        target = directory / 'normalized-answer.json'
+        if target.exists():
+            require(target.read_bytes() == normalized, 'normalized_answer_changed')
+        else:
+            with target.open('xb') as stream:
+                stream.write(normalized)
+    return normalized
 
+
+def review_question(stage, rows):
+    return selection.review_question(stage, rows)
 
 def compute_round(root, plan, round_no, backend, instruction=''):
     prefix = 'r' + str(round_no)
@@ -243,6 +263,8 @@ def compute_round(root, plan, round_no, backend, instruction=''):
               'intrinsic_shortlist_ids': kept, 'exact_duplicates_removed': duplicate_count,
               'review_independence': 'separate_requests_same_model_not_independent_expert',
               'semantic_truth': 'not_programmatically_verified', 'reality_clearance': 'not_assessed'}
+    result.update(selection.resource_queues(result))
+    result['unverified_inquiries'] = selection.inquiry_register(pool)
     rp = root / ('round-' + str(round_no) + '.json')
     if rp.exists():
         require(p.read(rp) == result, 'round_projection_changed')
@@ -255,7 +277,7 @@ def screening_status(root, plan, result, report=None):
     if report is None:
         paths = sorted(root.glob('screening-' + str(result['round']) + '-*.json'))
         if not paths:
-            return [], list(result['intrinsic_shortlist_ids'])
+            return [], list(result['screening_queue_ids'])
         report = p.read(paths[-1])
     require(report.get('round_digest') == p.digest(p.canonical(result)), 'screening_from_different_round')
     rows = report.get('items')
@@ -278,11 +300,11 @@ def screening_status(root, plan, result, report=None):
             age = (datetime.now(timezone.utc) - at).total_seconds()
             verified = verified and 0 <= age <= plan['screening_freshness_days'] * 86400
         # Only checks supplied evidence identity/freshness, not its truth or legal scope.
-        if row['status'] == 'pass' and verified and text(row.get('reviewer_ref')) and text(row.get('scope')):
+        if ident in result['priority_ids'] and row['status'] == 'pass' and verified and text(row.get('reviewer_ref')) and text(row.get('scope')):
             allowed.append(ident)
         else:
             unresolved.append(ident)
-    return allowed, sorted(set(unresolved) | (set(result['intrinsic_shortlist_ids']) - seen))
+    return allowed, sorted(set(unresolved) | (set(result['screening_queue_ids']) - seen))
 
 
 def summarize_calls(root):
@@ -344,12 +366,14 @@ def _advance(root: Path, execute=False, backend=None):
                     status = 'stopped' if feedback['action'] == 'stop' else 'research_review_complete_not_adoption'
             else:
                 status = ('awaiting_owner_feedback' if allowed or plan['diagnostic_preview_authorized']
-                          else 'awaiting_screening_evidence' if result['intrinsic_shortlist_ids'] else 'no_intrinsic_survivor')
+                          else 'awaiting_screening_evidence' if result['priority_ids'] else 'awaiting_substantive_hold_resolution' if result['hold_ids'] else 'no_intrinsic_survivor')
             visible = result['intrinsic_shortlist_ids'] if plan['diagnostic_preview_authorized'] else allowed
             summary = {'status': status, 'round': round_no, 'round_digest': p.digest(p.canonical(result)),
                 'diagnostic_only': plan['diagnostic_preview_authorized'],
                 'display': [dict(v, intrinsic_decision=next(x['decision'] for x in result['explained'] if x['id'] == v['id']),
                     audit_disagreement=v['id'] in result['audit_disagreement_ids']) for v in result['pool'] if v['id'] in visible],
+                'priority_ids': result['priority_ids'], 'hold_ids': result['hold_ids'],
+                'not_pursued_ids': result['not_pursued_ids'],
                 'unresolved_screening_ids': unknown, 'costs': summarize_calls(root),
                 'next_step_owner_dependency': 'substantive_feedback_or_evidence_only_not_external_assistant',
                 'limits': 'Synthetic development; supplied screening requires semantic verification; no adoption or method efficacy claim.'}
@@ -401,7 +425,7 @@ def main():
         q.add_argument('--' + key, type=Path, required=True)
     for key in ('endpoint', 'model', 'revision', 'runtime-version'):
         q.add_argument('--' + key, required=True)
-    q.add_argument('--method', choices=('simple', 'redesign'), default='redesign')
+    q.add_argument('--method', choices=('simple', 'redesign'), default='simple')
     q.add_argument('--rounds', type=int, default=1)
     q.add_argument('--seed', type=int, default=91)
     q.add_argument('--diagnostic-preview-authorized', action='store_true')
