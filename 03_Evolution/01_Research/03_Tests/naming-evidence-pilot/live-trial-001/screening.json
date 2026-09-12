@@ -1,0 +1,44 @@
+{
+  "batch_id": "LIVE-411-001",
+  "record_kind": "live_tool_observations",
+  "quality_frozen_commit": "a595725398ed3b56fbdaea91b9497dc3dfbaa26f",
+  "observation_date": "2026-09-12",
+  "timestamp_limit": "web与Namecheap返回未附精确响应时刻；只记录本会话日期和调用顺序，不虚构每项秒级observed_at。Git保存时间不是查询时刻。",
+  "capture_scope": "请求原文、工具来源标识、必要返回片段与执行者判断；不是完整搜索引擎日志。批量查询的结果未按query拆开，不能虚构逐query零命中证明。",
+  "web_calls": [
+    {"sequence": 1, "queries": ["\"Elseforge\"", "\"Unfoldry\"", "\"Betweave\"", "\"Commonary\""], "result_refs": ["turn920857search0", "turn920857search1", "turn920857search3", "turn920857search6", "turn920857search7", "turn920857search12"], "summary_kind": "executor_summary", "summary": "返回Unfoldry同名AI业务页面、Betweave法人目录线索、Commonary品牌/产品/商标申请线索；Elseforge未返回可识别同名主体。"},
+    {"sequence": 2, "queries": ["\"Elseforge\" company organization", "\"Elseforge\" software app product project", "\"Elseforge\" research education foundation nonprofit", "\"Elseforge\" trademark"], "opens": ["https://unfoldry.ai/", "https://www.commonarylabs.com/"], "result_refs": ["turn906077search0", "turn906077view0", "turn906077view1"], "summary_kind": "executor_summary", "summary": "Elseforge查询返回无关教材中的词边界拼接文本；另两官网已实际打开。"},
+    {"sequence": 3, "queries": ["\"Elseforge\" -site:yumpu.com", "\"Else Forge\" company software", "\"Betweave\"", "\"Betweave\" organization company"], "query_3_domains": ["info.gbiz.go.jp", "houjin-bangou.nta.go.jp"], "result_refs": ["turn583853search0", "turn583853search1", "turn583853search2"], "summary_kind": "executor_summary", "summary": "返回一般forge品牌噪音和相同第三方法人目录；没有获得Betweave官方登记原文。"},
+    {"sequence": 4, "queries": ["\"elseforge\"", "\"elseforge\" \"trademark\"", "\"elseforge\" \"company\"", "\"3290005020152\""], "query_3_recency_days": 365, "result_refs": ["turn953636search0", "turn953636search1", "turn953636search4"], "summary_kind": "executor_summary", "summary": "返回Betweave多个第三方目录；没有获得Elseforge同名主体或商标的实质命中。"},
+    {"sequence": 5, "queries": ["\"Elseforge\""], "result_refs": ["turn495103search0"], "summary_kind": "executor_summary", "summary": "单query复核仍返回教材词边界噪音，不作为该名称的现实主体。"},
+    {"sequence": 6, "queries": ["\"Elseforge\" \"research\"", "\"Elseforge\" \"software\"", "\"Elseforge\" \"trademark\" OR \"registered trademark\"", "\"Elseforged\" OR \"Else Forge\" OR \"Elsforge\""], "opens": ["https://www.houjin-bangou.nta.go.jp/henkorireki-johoto.html?selHouzinNo=3290005020152", "https://www.commonarylabs.com/", "https://www.abbeglasses.com/eyeglasses/frames/Commonary-220822001Pink.html"], "result_refs": ["turn349043search0", "turn349043view0", "turn349043view1", "turn349043view2"], "summary_kind": "executor_summary", "summary": "日本官方登记入口未成功读取；另两个现存主体/产品页面成功读取；Elseforge仍只有无关结果。"},
+    {"sequence": 7, "queries": ["\"elseforge.com\"", "\"Elseforge\" \"trademark\""], "query_2_domains": ["uspto.gov", "euipo.europa.eu", "wipo.int"], "opens": ["https://elseforge.com", "https://rdap.verisign.com/com/v1/domain/elseforge.com"], "result_refs": ["turn222694view0", "turn222694view1"], "returned_search_text": "No results were found for the provided queries", "open_result": "两次open均被工具拒绝为not safe to open (non-retryable error)，未绕过或重复该读取；不解释为域名未注册或网站不存在。"}
+  ],
+  "retrieved_fragments": [
+    {"id": "UNFOLDRY-OFFICIAL", "source_url": "https://unfoldry.ai/", "tool_ref": "turn906077view0", "fragment": "Unfoldry | AI and Automation Consulting for SMEs", "interpretation": "同名主体经营AI/自动化咨询，业务高度邻接，足以停止该候选其余昂贵筛查。"},
+    {"id": "COMMONARY-OFFICIAL", "source_url": "https://www.commonarylabs.com/", "tool_ref": "turn349043view1", "fragment": "Commonary Labs | Coming soon", "interpretation": "同名基础词已被另一机构使用；coming soon不能被描述为业务已成熟或商标已注册。"},
+    {"id": "COMMONARY-PRODUCT", "source_url": "https://www.abbeglasses.com/eyeglasses/frames/Commonary-220822001Pink.html", "tool_ref": "turn349043view2", "fragment": "Commonary - Pink Square Eyeglasses Frame | ABBE Glasses", "interpretation": "确有同名零售产品；行业不同，不直接推出法律禁止采用，但不是无现实名称。"},
+    {"id": "COMMONARY-TM-LEAD", "source_url": "https://trademarking.in/details/Commonary-6886362.html", "tool_ref": "turn920857search0", "fragment": "Application No 6886362", "interpretation": "第三方公开商标申请线索，标注Commonary Labs与2025-03-03申请；本轮没有官方数据库复核，不宣称已注册或有效商标。"},
+    {"id": "BETWEAVE-DIRECTORY", "source_url": "https://houjin.jp/c/3290005020152", "tool_ref": "turn953636search1", "fragment": "一般社団法人Betweave", "interpretation": "第三方记录同名一般社团法人，编号3290005020152；本轮未取回官方登记原文，按需复核风险保留，不冒充官方确认或法律结论。"},
+    {"id": "ELSEFORGE-NOISE", "source_url": "https://www.yumpu.com/en/document/view/48878944/students-book-a-dec-2009-59mb-the-curriculum-project", "tool_ref": "turn495103search0", "fragment": "dependent (adj) – relying on something or someone elseforge (v) – to create or make", "interpretation": "解析文本中的someone else与forge词条相接；不是名为Elseforge的组织、产品或商标。没有打开PDF或把教材内容用于历史研究。"}
+  ],
+  "registrar_call": {
+    "service": "Namecheap.domain-bulk-check",
+    "requested_domains": ["elseforge.com", "elseforge.org"],
+    "position_in_sequence": "after_web_call_6_before_web_call_7",
+    "returned_payload": {"domainCheckResult": {"availableDomains": [{"name": "elseforge.org", "isAvailable": true, "prices": {"purchase": {"amount": 8.48, "currency": "USD"}}}], "unavailableDomains": [{"name": "elseforge.com", "isAvailable": false}], "tldNotSupportedDomains": [], "invalidNameDomains": []}},
+    "interpretation": ".com不可在此注册商直接注册；不等于已证明不能收购。没有报价、持有人授权或可验证收购路径，practical_obtainability保持unknown。.org不是当前母组织的主门槛，不因其可注册就放行。",
+    "query_scope": "非交易性观察，没有付款或注册；身份检索未发现实质exact命中，但索引与分query证据有限，此查询不提升身份初筛置信度。"
+  },
+  "candidate_dispositions": [
+    {"candidate_id": "L001-01", "identity_result": "no_material_exact_identity_identified_in_returned_results_with_search_quality_limits", "public_tm_result": "no_material_signal_identified_not_official_clearance", "domain_result": "com_not_directly_registrable_acquisition_path_unknown", "decision": "pending_evidence_not_exposed", "not_a_rejection_of_intrinsic_quality": true},
+    {"candidate_id": "L001-03", "identity_result": "material_exact_collision_official_ai_services", "decision": "drop_reality", "remaining_queries": "stopped_on_decisive_identity_collision"},
+    {"candidate_id": "L001-04", "identity_result": "exact_organization_lead_secondary_sources_only", "decision": "pending_identity_confirmation_not_exposed", "remaining_queries": "deferred_until_official_identity_and_adjacency_are_resolved"},
+    {"candidate_id": "L001-07", "identity_result": "existing_lab_brand_and_product_plus_tm_application_lead", "decision": "deprioritized_due_to_material_identity_risk_not_exposed", "legal_registration_status": "not_determined"}
+  ],
+  "exposure_ready_ids": [],
+  "actual_owner_candidate_review_requested": false,
+  "no_new_names_after_budget": true,
+  "no_current_legal_clearance_claim": true,
+  "unresolved": ["Elseforge.com实际可取得性与官方登记记录", "Betweave官方身份与业务邻接核实", "独立语义评审未执行", "逐次工具响应未给秒级时刻；仅有当次日期/顺序，不能伪造完整时间戳"]
+}

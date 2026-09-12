@@ -1,0 +1,242 @@
+{
+  "adoption": "not_assessed",
+  "assessment_surface_sha256": "4326da96b6295f463f88da0801d08124fda18e5e18ea0b9319a0bd6c00487f47",
+  "cells": [
+    {
+      "author_tiers": {
+        "not_priority": 1,
+        "priority": 2,
+        "reserve": 2
+      },
+      "cell": "cell-1-redesign-411921",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 3,
+        "input_tokens": 1451,
+        "output_tokens": 660,
+        "seconds": 130.83806385800006
+      },
+      "method": "redesign",
+      "pool_count": 5,
+      "r1explained": {
+        "decisions": {
+          "hold": 1,
+          "keep": 4
+        },
+        "parser_coverage_valid": true
+      },
+      "r1surface": {
+        "decisions": {
+          "hold": 3,
+          "keep": 2
+        },
+        "parser_coverage_valid": true
+      },
+      "recorded_status": "awaiting_screening_evidence",
+      "retained_after_audit": 5,
+      "seed": 411921
+    },
+    {
+      "author_tiers": {
+        "not_priority": 1,
+        "priority": 2,
+        "reserve": 3
+      },
+      "cell": "cell-2-simple-411921",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 1,
+        "input_tokens": 456,
+        "output_tokens": 458,
+        "seconds": 75.89303211100014
+      },
+      "method": "simple",
+      "pool_count": 6,
+      "r1audit": {
+        "decisions": {
+          "hold": 2
+        },
+        "parser_coverage_valid": true
+      },
+      "r1explained": {
+        "decisions": {
+          "drop": 2,
+          "hold": 4
+        },
+        "parser_coverage_valid": true
+      },
+      "r1surface": {
+        "decisions": {
+          "hold": 5,
+          "keep": 1
+        },
+        "parser_coverage_valid": true
+      },
+      "recorded_status": "awaiting_screening_evidence",
+      "retained_after_audit": 6,
+      "seed": 411921
+    },
+    {
+      "author_tiers": {
+        "priority": 1,
+        "reserve": 5
+      },
+      "cell": "cell-3-simple-411922",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 1,
+        "input_tokens": 456,
+        "output_tokens": 456,
+        "seconds": 75.97965446600006
+      },
+      "method": "simple",
+      "pool_count": 6,
+      "r1audit": {
+        "decisions": {},
+        "parser_coverage_valid": false
+      },
+      "r1explained": {
+        "decisions": {
+          "drop": 1,
+          "hold": 5
+        },
+        "parser_coverage_valid": true
+      },
+      "r1surface": {
+        "decisions": {
+          "hold": 4,
+          "keep": 2
+        },
+        "parser_coverage_valid": true
+      },
+      "recorded_status": "blocked",
+      "seed": 411922
+    },
+    {
+      "author_tiers": {
+        "priority": 2,
+        "reserve": 4
+      },
+      "cell": "cell-4-redesign-411922",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 3,
+        "input_tokens": 1451,
+        "output_tokens": 598,
+        "seconds": 121.6465727379998
+      },
+      "method": "redesign",
+      "pool_count": 6,
+      "r1explained": {
+        "decisions": {},
+        "parser_coverage_valid": false
+      },
+      "r1surface": {
+        "decisions": {
+          "drop": 1,
+          "hold": 3,
+          "keep": 2
+        },
+        "parser_coverage_valid": true
+      },
+      "recorded_status": "blocked",
+      "seed": 411922
+    }
+  ],
+  "coverage_error_correction": {
+    "actual_nested_ids": [
+      "C005"
+    ],
+    "actual_review_location": "output_contract.reviews",
+    "complete_required_content_exists": true,
+    "decision": "hold",
+    "diagnosis": "Nested response envelope, not semantic omission; data.json missing_ids refers only to original parser-visible field.",
+    "expected_ids": [
+      "C005"
+    ],
+    "old_result_changed": false,
+    "program_reported": "review_coverage_incomplete",
+    "raw_sha256": "ef162602d50fb5d97f67a6165ffa2036ab206fb87b6fc2a801df561b9062fa99",
+    "root_keys": [
+      "output_contract"
+    ],
+    "source_path": "model/cell-3-simple-411922/calls/r1audit/output.txt"
+  },
+  "generation_cost_ratio_redesign_over_simple": {
+    "observed_seconds": 1.6624756056316217,
+    "total_tokens": 2.2782037239868567
+  },
+  "groups": {
+    "redesign": {
+      "author_tiers_unique": {
+        "not_priority": 1,
+        "priority": 3,
+        "reserve": 6
+      },
+      "generated_occurrences": 12,
+      "generation_calls": 6,
+      "generation_input_tokens": 2902,
+      "generation_output_tokens": 1258,
+      "generation_seconds": 252.48463659599986,
+      "generation_total_tokens": 4160,
+      "name_ids": [
+        "N-2c7d3ba1",
+        "N-48e5de32",
+        "N-4936b269",
+        "N-6ff0f43f",
+        "N-a8610950",
+        "N-a9b13b97",
+        "N-c0102a73",
+        "N-c6ca803d",
+        "N-e2d14018",
+        "N-f1db31c4"
+      ],
+      "pool_occurrences": 11,
+      "unique_names": 10
+    },
+    "simple": {
+      "author_tiers_unique": {
+        "not_priority": 1,
+        "priority": 2,
+        "reserve": 7
+      },
+      "generated_occurrences": 12,
+      "generation_calls": 2,
+      "generation_input_tokens": 912,
+      "generation_output_tokens": 914,
+      "generation_seconds": 151.8726865770002,
+      "generation_total_tokens": 1826,
+      "name_ids": [
+        "N-19c7668b",
+        "N-27bdbd4a",
+        "N-2c7d3ba1",
+        "N-3bdbffcf",
+        "N-4421f327",
+        "N-4936b269",
+        "N-6557622f",
+        "N-6ff0f43f",
+        "N-71ab9552",
+        "N-c6ca803d"
+      ],
+      "pool_occurrences": 12,
+      "unique_names": 10
+    }
+  },
+  "independent_review": "not_performed",
+  "kind": "deterministic_aggregation_of_subjective_author_judgments_not_independent_quality_test",
+  "method_winner": "not_established",
+  "new_inference_calls": 0,
+  "occurrences": 24,
+  "recommended_development_default": "simple_pending_independent_evidence_not_runtime_config_change",
+  "scope": "one fictional task, two seeds, 4B Q4_K_M; no causal or general superiority claim",
+  "sensitivity": {
+    "hypothetical_only": "Move borderline EditGap priority to reserve; original judgments unchanged",
+    "redesign_unique_priority_then": 2,
+    "simple_unique_priority_then": 2
+  },
+  "source_sha256": "5ce04a228551fb3a3586e07dcad610e25ed0ae20e776a18fe9d1ddf6d5be1d75",
+  "surface_freeze_commit": "20a93804c3d1fda7cb43f02d4a7d4474f9830b06",
+  "unique_explanations": 24,
+  "unique_names": 16,
+  "verified_embedded_files": 252
+}

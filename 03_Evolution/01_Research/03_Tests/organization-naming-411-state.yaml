@@ -1,0 +1,806 @@
+schema_version: '0.4.0'
+
+task:
+  issue: 411
+  repository: InteropAtlas/InteropAtlas
+  branch: feat/adaptive-naming-skill-v0.1
+  mode: Adaptive Naming Fit Test
+  status: process_review
+  snapshot_version: 94
+  skill_version: 0.4.0
+
+lineage:
+  preservation_note: >-
+    Naming Job 未重新初始化，G0–G8 benchmark 未恢复。snapshot v81 记录 INC-MORPHOTYPE-OVERFIT-003。
+    Owner 随后明确暂停继续生成名称，要求收集和整理本次生成全过程的数据/资料，判断哪些经验可用于改善 Adaptive Naming Skill。
+    本快照因此把生成暂停，进入 method/process review。复盘文档位于
+    03_Evolution/01_Research/03_Tests/organization-naming-411-process-review-v0.1.md。
+
+constraint_registry:
+  confirmed_hard_constraints:
+    - {id: HC-ORG-SCALE, statement: long-term umbrella organization scale, source_type: owner_explicit}
+    - {id: HC-RECOVERABILITY, statement: avoid obvious high misread / dictation branching, source_type: owner_explicit}
+    - id: HC-COM-DOMAIN
+      statement: exact .com must be practically obtainable for the commercial umbrella organization; direct registration preferred, aftermarket purchase acceptable when realistic
+      source_type: owner_explicit
+      primary_domain: .com
+    - id: HC-TM-REGISTRABILITY
+      statement: finalist must have a good trademark-registration outlook for long-term commercial organization use
+      source_type: owner_explicit
+      priority_jurisdictions: [US, EU, CN, WIPO_Madrid]
+    - {id: HC-ORG-SECONDARY, statement: .org is secondary and mainly intended for open-source/public-interest projects, source_type: owner_explicit}
+
+owner_preferences:
+  - {id: PREF-MEANING-FIRST, statement: meaningfulness and overall identity quality outrank shortness; longer names are acceptable when worthwhile, confidence: high}
+  - {id: PREF-EXPRESSION-STABLE-MODERN, statement: "stable, harmonious, reliable; youthfulness welcome when dependable", confidence: high}
+  - {id: PREF-COMPACT-SPOKEN-RHYTHM, statement: "excessive visual/spoken burden is a real negative, but compactness cannot replace meaning", confidence: high}
+  - {id: PREF-UNDERSTATED-CLEVERNESS, statement: restrained second-look reward attractive; showy gimmick not, confidence: high}
+  - {id: PREF-MORPHOTYPE-OPENNESS, statement: preserve broad form diversity; no single naming architecture should dominate Owner-visible exploration absent evidence of preference, confidence: high}
+  - {id: PREF-NONPERSONAL-BRAND-IDENTITY, statement: personal given-name reading is a soft negative, confidence: medium_high}
+  - {id: PREF-CROSS-LANGUAGE-PRONOUNCEABILITY, statement: names should be reasonably pronounceable by Chinese speakers and recoverable from hearing, confidence: high}
+  - {id: PREF-BATCHED-OWNER-REVIEW, statement: target 5-8 meaningful screened candidates per review turn when available, confidence: high}
+  - {id: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS, statement: semantic structure and mature brand character outrank generic coined smoothness, confidence: high}
+
+integrity_incidents:
+  - {id: INC-SEMANTIC-ANCHOR-001, status: corrected_and_live_recovery_observed, classification: controller_runtime_fidelity_failure}
+  - {id: INC-MORPHOTYPE-COLLAPSE-002, status: corrected_but_recurred_in_new_form, classification: workflow_scheduler_fidelity_failure}
+  - id: INC-MORPHOTYPE-OVERFIT-003
+    status: under_method_review
+    classification: controller_overfit_to_positive_reference
+    trigger: Owner detected that snapshot v80 batch was structurally too similar
+    mechanism: >-
+      Controller treated Merosophy's positive signal as evidence for a classical-root-derived morphology rather than evidence for semantic density and mature brandability.
+      Search then overused mero-/noe-/poie-like classical roots, abstract suffixes, and X+learned-ending forms.
+    method_review_implication: >-
+      Current Skill already contains anti-collapse principles, but repeated Owner-detected failures suggest missing pre-exposure batch-level enforcement and positive-reference generalization controls.
+
+process_review:
+  status: active
+  review_document: 03_Evolution/01_Research/03_Tests/organization-naming-411-process-review-v0.1.md
+  generation_paused: true
+  review_scope:
+    - semantic_anchor_collapse
+    - owner_visible_morphotype_collapse
+    - reality_and_commercial_gate_effects
+    - positive_reference_learning
+    - coined_name_strategy
+    - cross_language_pronounceability
+    - owner_review_batching
+    - positive_reference_overfit
+  primary_findings:
+    - toolbox_sufficiency_and_primary_cause_remain_provisional_pending_evidence_reconstruction
+    - positive feedback needs abstraction into latent virtues vs surface morphology before it informs exploration
+    - candidate-level quality checks are insufficient; batch-level generalization/diversity audit is needed
+    - semantic diversity does not prove morphological diversity
+    - owner review cadence is itself an adaptive variable
+    - commercial ownability should filter and allocate search budget without becoming a proxy for intrinsic name quality
+    - cross_language_vs_semantic_priority_is_task_specific_and_requires_feedback_provenance
+  proposed_method_hypothesis: positive_reference_abstraction_plus_batch_generalization_audit
+  stable_skill_change_now: false
+  reason_for_not_immediate_promotion: >-
+    Repeated concentration is recorded, but causal attribution and preference interpretation remain provisional. Restore evidence links and run observable regression before promotion.
+
+candidates:
+  - id: N130
+    name: Merosophy
+    role: owner_positive_reference_leader
+    active: true
+    owner_feedback: strongest_current_coined_candidate_usable_but_chinese_pronunciation_is_difficult
+    generation_use: prohibited_as_template_or_seed
+  - {id: N135, name: Coemera, role: weak_positive_below_reference, active: true, owner_feedback: slightly_better_than_average_but_worse_than_Merosophy, generation_use: prohibited_as_template_or_seed}
+  - {id: N127, name: Multifinality, role: preference_evidence_only, active: true, owner_feedback: interesting_looks_good_feels_like_brand, generation_use: prohibited_as_template_or_seed}
+
+current_state:
+  owner_positive_commercial_candidates: [N130]
+  weak_positive_comparison: [N135]
+  preference_evidence: [N127]
+  search_mode: method_redesign_no_ia_generation
+  biggest_unknown: >-
+    Which parts of the repeated #411 collapse/overfit behavior represent task-local execution defects versus generalizable method controls worth promoting into a future Adaptive Naming Skill revision?
+  blockers: []
+  owner_review_needed_now: false
+
+next_action:
+  action: review_fixed_pool_selection_results_before_further_method_changes
+  rationale: >-
+    v94已接入简单默认、生成者意图/风险边界、优先待定分流与完整包装兼容。
+    检查SELECT-408-001已保存结果及剩余语义问题，不新增名称，不把决定改变当质量改善。
+  requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation
+
+stop:
+  status: generation_paused_process_review_active
+  reason: Owner redirected work to method redesign and model-budget evaluation, not continuation of the old naming mainline
+
+audit_recovery:
+  status: bounded_evidence_reconciliation_complete_capture_incomplete
+  review_section: organization-naming-411-process-review-v0.1.md#evidence-reconciliation-v86
+  supersedes_interpretation: v82_primary_cause_and_latent_preference_claims_are_provisional
+  historical_assertion_policy: preserve_without_reaffirming_unverified_reality_or_preference_claims
+  recovered_current_state:
+    - mission_value_model
+    - name_job_model
+  recovered_state_status: reconstructed_with_repository_provenance_not_owner_verbatim
+  missing_current_state:
+    - search_landscape
+    - scheduler_state
+    - generation_runtime_evidence
+    - candidate_reality_evidence_links
+  historical_recovery_sources:
+    - {snapshot: 80, commit: f084b859293a598f9ad66f2780827ff824da7430, path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml, use: RND130_batch_and_recorded_screen_assertions}
+    - {snapshot: 59, commit: e8fe6320d57e9e23d0f46ef1d0b77c4cdf48e90b, path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml, use: historical_landscape_not_current_constraints}
+    - {snapshot: 82, commit: 28a2883e385386075c8ed111c3e2436c92ee7c2f, path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml, use: pre_audit_state}
+  known_inconsistency:
+    candidate_id: N143
+    snapshot: 80
+    detail: batch_claims_all_org_available_but_candidate_says_not_checked
+    disposition: unresolved_no_current_availability_assertion
+  evidence_search_limit: v86_bounded_scope_in_rnd130_reconstruction_not_all_private_or_external_history
+  interpretation_rules:
+    - owner_verbatim_and_controller_inference_must_be_separate
+    - absence_in_inspected_artifact_is_not_proof_of_no_execution
+    - reconstructed_artifacts_must_not_claim_original_execution
+  generation_resume_readiness: false
+  remaining:
+    - reopen_RND130_primary_source_search_only_when_a_new_concrete_locator_is_available
+    - resolve_or_mark_unrecoverable_each_evidence_gap
+    - run_anonymous_synthetic_control_cases_with_recorded_inputs_outputs_no_new_names
+    - execute_comparative_regression_with_recorded_outputs
+
+evidence_pilot:
+  status: task_local_structurally_tested_not_stable_skill
+  contract: naming-evidence-pilot/contract.md
+  validator: naming-evidence-pilot/validate_evidence.py
+  regression: naming-evidence-pilot/test_evidence.py
+  results: naming-evidence-pilot/test-results.json
+  historical_sample: naming-evidence-pilot/rnd130-reconstruction.json
+  historical_check: naming-evidence-pilot/rnd130-check.json
+  independence: isolated_reviewer_for_validator_only_not_historical_generation
+  interpretation: structural_capture_is_not_semantic_truth_or_reality_clearance
+  stable_skill_version_unchanged: '0.4.0'
+  owner_pause_retained: true
+  preference_correction:
+    preference_id: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS
+    evidence_type: controller_inference_pending_validation
+    original_user_reason: not_located
+    historical_statement_preserved: true
+    allowed_use: reversible_hypothesis_not_hard_gate
+
+# v85 恢复层：当前模型与证据等级；不覆盖上述历史断言为新确认。
+state_recovery:
+  id: REC-411-V85
+  status: bounded_current_state_reconstruction
+  base_commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5641934180
+  executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+  review_class: source_retrieval_and_structural_self_check_not_independent_semantic_review
+  context_role: controller_audit_only_not_generator_brief
+  provenance_rules:
+  - '仓库原文已回取不等于找到 Owner 原始发言；source_type: owner_explicit 等继承字段只说明旧执行者如何标记。'
+  - 沿用 v84 当前任务边界，不将 v70/v71 或更早的域名门槛覆盖回来；不作新的 Owner 确认。
+  - 恢复的是当前可用的有出处重建，不声称与历史实际 Generator 输入相同。
+  - 不复制旧 priority/weight 或 integrity=false 为当前通过证明；不把来源缺口填成已验证偏好。
+  source_registry:
+    VISION:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 03_Evolution/01_Research/01_Prior_Art/Naming_Methods/Execution/shared-organization-vision-context-v0.1.zh-CN.md
+      sections:
+      - '## 1. 命名对象'
+      - '## 2. 核心愿景'
+      - '## 4. 组织级要求'
+      evidence_kind: repository_vision_document
+      blob: 1701fe0f51960572dd6c49d9d0dd547c143d3764
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    MODEL36:
+      commit: d84864570861956259961ba45824481dd2902d75
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'mission_value_model:'
+      - 'name_job_model:'
+      evidence_kind: historical_controller_model
+      blob: 7366c3e14d4e43b8d6e0a87c558c213ca8141bca
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    JOBS46:
+      commit: 5898e8eeb9ae4a77977aa3825fce05666d0296a7
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'name_job_model:'
+      - 'decision_criteria:'
+      evidence_kind: historical_controller_summary
+      blob: 0828468a72dde2946b8d9e15b7f3bb101de100a0
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    DROP47:
+      commit: d502ac3ce8a7638e13820f9acbae9037230c0aa7
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'mission_value_model:'
+      evidence_kind: historical_compact_snapshot
+      blob: 5d21cff8257f85810532c812f297c7b5614e56cf
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY70:
+      commit: b9f4c99062d81334bd94419499c3d72eedd2f12a
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'finalist_due_diligence_requirements:'
+      evidence_kind: reported_owner_direction
+      blob: 6be86e93f4d25e00c5e8dcbe7be21c5373dc098f
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY71:
+      commit: 1a11c1848b4bf6b6c4cf757479eb479482309d75
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: reported_owner_direction
+      blob: 53761f3467b3549ccd11aa64d996549cb5cf529f
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    POLICY72:
+      commit: 1c4b73d3d0ce7eef8ee1309af81da5a757748f56
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: reported_owner_direction
+      blob: 9c9250bc882832671f829130e15890f688aa339a
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    MODEL77A:
+      commit: f0573e27bdf86a0b23e7eaae07e07785e739ac67
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'mission_value_model:'
+      evidence_kind: historical_summary_not_runtime_proof
+      blob: 1b5a5ab2285e23fe45a8cecedf8fdd9d0f98d9d5
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    DROP77B:
+      commit: 52f2444b60f946b7af41f5e5689509a72c197bd9
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'lineage:'
+      - 'constraint_registry:'
+      evidence_kind: historical_compact_snapshot
+      blob: 566acca14e9fa14932e01e198bfd62735b6ff498
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    BASE84:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      sections:
+      - 'constraint_registry:'
+      - 'audit_recovery:'
+      - 'evidence_pilot:'
+      evidence_kind: current_baseline_before_this_recovery
+      blob: b5ba4e449dcbad4132241d163fa41d926f94eadf
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+    SKILL040:
+      commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+      path: 02_Runtime/02_Tools/adaptive_naming/SKILL.md
+      sections:
+      - '## 3. 稳定不变量'
+      - '## 4. Naming Job 的最小核心状态'
+      - '## 10. Generator Context 与信息隔离'
+      evidence_kind: method_contract_not_owner_quote
+      blob: 28e4d3bac89bebc6c6d1fb277b043260fa342956
+      verified_as_repository_artifact: true
+      owner_verbatim_verified: false
+  constraint_sources:
+    HC-ORG-SCALE:
+      source_refs:
+      - VISION
+      - BASE84
+      status: repository_direction_recovered
+    HC-RECOVERABILITY:
+      source_refs:
+      - VISION
+      - MODEL36
+      - BASE84
+      status: carried_forward_recorded_direction_no_new_threshold
+    HC-COM-DOMAIN:
+      source_refs:
+      - POLICY70
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_reported_owner_direction
+      effective_rule: exact_com_practical_obtainability_not_registration_only
+      acquisition_budget: not_specified_in_inspected_sources
+    HC-TM-REGISTRABILITY:
+      source_refs:
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_reported_owner_direction
+      limits: 不是本轮商标查询、注册保证或法律结论。
+    HC-ORG-SECONDARY:
+      source_refs:
+      - POLICY71
+      - POLICY72
+      - BASE84
+      status: carried_forward_secondary_domain_not_primary_finalist_gate
+  representation_loss:
+  - field: name_job_model
+    last_present_ref: JOBS46
+    first_absent_ref: DROP47
+    finding: v46→v47 压缩后字段缺失；不是原使命或名称职责被证明撤销。
+  - field: mission_value_model
+    last_present_ref: MODEL77A
+    first_absent_ref: DROP77B
+    finding: 两份 v77 的后者删除字段；前者已仅剩摘要/执行自述，不能冒充完整模型或隔离证明。
+  search_scope:
+    state_path: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+    reachable_file_versions_indexed: 85
+    yaml_parseable_versions: 81
+    yaml_parse_errors: 4
+    baseline_commit: 10125cb04dcbe4270230f3ba7db45f039c7a7330
+    reading_method: 85份正文可回取，81份YAML可解析，4份保留解析错误并作原文定位；只定向审读相关内容，不等于验证全部历史。
+    issue_records: '#411 已有53条与#408已有26条维护快照用于定位；本轮开始时核对议题/PR当前元数据；未穷尽私人聊天或#407全流。'
+  known_gaps:
+  - 使命与商业约束已有仓库来源，但相应 Owner 原始发言与完整上下文仍未定位。
+  - 最新搜索地图与调度状态需单独对账；没有恢复为零尝试、未探索或新的搜索分配。
+  - 历史实际输入、原始输出、各筛选阶段及查询证据链仍未补齐。
+  - 语义密度高于发音顺滑仍是待验证推断，不是本轮确认的用户理由。
+  serialization_repairs:
+    preference_ids:
+    - PREF-EXPRESSION-STABLE-MODERN
+    - PREF-COMPACT-SPOKEN-RHYTHM
+    source_ref: BASE84
+    change: 仅给原文加YAML字符串引号，防止逗号把statement拆成额外null键；不改变偏好原文或置信度。
+  generation_permission: paused_no_generation_authorized
+  stable_skill_change: false
+mission_value_model:
+  status: reconstructed_current_provisional
+  source_refs:
+  - VISION
+  - MODEL36
+  - BASE84
+  statement: 公共知识为个人理解、选择与创造提供基础；个人形成自己的视角，新创造又可以回到公共知识，支持后续循环。
+  actors:
+  - 公共知识共同体
+  - 具有自身视角的个人
+  - 创造者/贡献者
+  - 可承载多项目的母组织
+  objects:
+  - 共享知识
+  - 个人视角与解释
+  - 创造/发现
+  - 可回流和再利用的知识
+  transformations:
+  - 共享知识支持个人形成视角
+  - 个人视角支持理解、选择与创造
+  - 新创造可以回流公共知识
+  - 公共积累支持下一轮理解与创造
+  relations_and_agency:
+  - 共享的是知识基础，不要求个人形成同一视角。
+  - 公共知识与个人解释自主性需同时保留，不能把多人/多元代替个人能动性。
+  temporal_or_causal_structure:
+  - Commons → Perspective → Creation → Commons ↺；保留循环与转换关系，而非四个词的并列。
+  desired_world:
+  - 公共知识可积累与再利用；个人从中形成独立理解和创造，创造可继续贡献公共积累。
+  anti_values_or_non_goals:
+  - 不把母组织锁死为单一标准、协议、地图、产品或 InteropAtlas 本身。
+  - 不要求名称逐字解释整个使命循环。
+  value_claims:
+  - id: V-COMMONS
+    statement: 知识作为共享公共基础。
+    source_ref: VISION
+    evidence_type: explicit
+    explicit_in: repository_document_not_verified_owner_quote
+    priority: unknown
+  - id: V-AGENCY
+    statement: 个人保有自身视角和解释空间。
+    source_ref: VISION
+    evidence_type: explicit
+    explicit_in: repository_document_not_verified_owner_quote
+    priority: unknown
+  - id: V-CREATION
+    statement: 知识与个人视角支持创造/发现。
+    source_ref: VISION
+    evidence_type: structural
+    priority: unknown
+  - id: V-RETURN
+    statement: 新创造可以回到公共积累。
+    source_ref: VISION
+    evidence_type: structural
+    priority: unknown
+  - id: V-CONTINUITY
+    statement: 循环可支持长期积累和更新。
+    source_ref: MODEL36
+    evidence_type: derived
+    priority: unknown
+  value_relations:
+  - V-COMMONS 与 V-AGENCY 并存，而非二选一。
+  - V-AGENCY → V-CREATION → V-RETURN → 新一轮公共积累。
+  naming_implications:
+  - 价值模型是理解与对齐依据，不是必须拼接的词根池。
+  - 完整使命由名称之外的叙事、说明与组织实践共同承载。
+  value_coverage_status: unknown_current_no_sampling_metrics_reconstructed
+  limits: 这是有来源的结构化重建；没有新定价值排序、政治/法律立场、知识许可或强制回馈义务。
+name_job_model:
+  status: reconstructed_current_provisional
+  source_refs:
+  - VISION
+  - MODEL36
+  - JOBS46
+  - POLICY72
+  - BASE84
+  primary_jobs:
+  - 形成长期、可独立识别并积累信誉的母组织身份。
+  - 能容纳多个独立项目、研究、工具和公共知识/创造工作，而不绑定当前项目形态。
+  - 在口语和书写中具有可接受的辨认与恢复性。
+  - 保留长期意义空间，并与当前商业可拥有性要求相容。
+  secondary_jobs:
+  - 与一个或少数价值/结构关系建立真实而不必直白的联系。
+  - 在可读性、记忆性、组织尺度与创造感之间进行有依据的比较。
+  non_jobs:
+  - 裸名不需要编码完整使命循环或列出全部业务。
+  - 不要求固定词数、字母数、语源、后缀或形态。
+  - 不靠低价/可注册域名替代名称质量。
+  tensions:
+  - 独特性 ↔ 读写恢复性
+  - 意义可理解性 ↔ 独立可拥有的身份
+  - 组织尺度 ↔ 创造表达
+  - 跨语言使用负担 ↔ 意义与整体身份质量
+  success_evidence: []
+  reality_requirements_ref: constraint_registry.confirmed_hard_constraints
+  limits: 结构来自旧 Name Job 与已记录的新边界；是当前 Controller 恢复结果，不声称每句话都是 Owner 原话或已完成质量验证。
+decision_criteria:
+  status: reconstructed_roles_not_new_owner_policy
+  source_refs:
+  - JOBS46
+  - POLICY72
+  - BASE84
+  - SKILL040
+  items:
+  - id: C-SCALE
+    role: gate
+    source_ref: HC-ORG-SCALE
+    statement: 长期母组织尺度。
+  - id: C-RECOVERY-MIN
+    role: gate
+    source_ref: HC-RECOVERABILITY
+    statement: 避免明显高误读/高听写分叉；不新增量化阈值。
+  - id: C-RECOVERY
+    role: optimize
+    source_ref: HC-RECOVERABILITY
+    statement: 最低可用性之外的读写与跨语言负担可比较权衡。
+  - id: C-DISTINCT
+    role: optimize
+    source_ref: VISION
+    statement: 独立身份与长期意义空间。
+  - id: C-VALUE
+    role: optimize
+    source_ref: VISION
+    statement: 有真实联系而非强行字面编码；不新增使命词汇门槛。
+  - id: C-COM
+    role: gate
+    stage: finalist
+    source_ref: HC-COM-DOMAIN
+    statement: 同名 .com 可实际取得；不只接受未注册域名。
+  - id: C-TM
+    role: gate
+    stage: finalist
+    source_ref: HC-TM-REGISTRABILITY
+    statement: 按当前范围审查注册前景；本轮未查询或给出法律结论。
+  - id: C-ORG
+    role: observe
+    source_ref: HC-ORG-SECONDARY
+    statement: .org 为次要用途，不恢复成母组织主门槛。
+  - id: C-OWNER
+    role: prefer
+    source_ref: SKILL040
+    statement: 比较中的偏好不伪装成一般质量；最终采用另需 Owner 决定。
+  owner_final_adoption_required: true
+  preference_reason_status: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS remains controller_inference_pending_validation
+  no_new_numeric_weights: true
+
+# v86：对账结论与原始证据缺口分开；详细来源仅保存在既有重建记录中。
+evidence_reconciliation:
+  id: REC-411-V86
+  status: bounded_reconciliation_complete_not_replayable
+  baseline_commit: d4aaf5d773dee7d25459cc90e36cb98d437ba5ad
+  record: naming-evidence-pilot/rnd130-reconstruction.json
+  check: naming-evidence-pilot/rnd130-check.json
+  test: naming-evidence-pilot/test_reconciliation.py
+  history_pointers:
+    last_dedicated_scheduler: SCHED50
+    next_without_dedicated_scheduler: DROP51
+    last_dedicated_search_landscape: LAND61
+    next_without_dedicated_search_landscape: DROP62
+    last_morphotype_portfolio: POLICY79
+    next_without_morphotype_portfolio: BATCH80
+  pointer_registry: naming-evidence-pilot/rnd130-reconstruction.json#/reconciliation/source_registry
+  findings:
+    - 后续存在search_control等摘要，专用字段丢失不等于没有执行调度。
+    - v79→v80丢失形态组合记录且修改策略摘要；仅支持记录变化，不确认实际Generator输入或失败因果。
+    - 七项展示候选只有可定位的历史筛查断言；未找到原始查询，不重新确认当前可用性。
+    - RND130对应提交的CI检查文档与知识图谱，并非命名运行或现实筛查证据。
+  historical_exact_replay_ready: false
+  original_generation_or_screening_rerun: false
+  broad_history_search: closed_until_new_concrete_source
+  confirmed_unrecoverable: false
+  current_unknowns_preserved: true
+  current_mission_name_job_refs_synced_in_reconstruction: true
+  generation_paused: true
+  stable_skill_changed: false
+
+# v87：程序防线完成并接入；不把程序通过当作真实命名验证。
+control_validation:
+  id: CTRL-411-V87
+  status: task_local_controls_implemented_and_programmatically_validated
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643048373
+  baseline_commit: fc84a477c805e828ce47666dbb5c3e0470c57324
+  baseline_validator_blob: a045604850ec9490ce0bce37f44f90e003891e5d
+  gate: naming-evidence-pilot/control_gate.py
+  frozen_cases: naming-evidence-pilot/control-cases.json
+  runner: naming-evidence-pilot/test_controls.py
+  results: naming-evidence-pilot/control-results.json
+  contract: naming-evidence-pilot/contract.md
+  ci_workflow: .github/workflows/naming-evidence-pilot.yml
+  evidence_class: same_author_deterministic_synthetic_validation_not_model_AB
+  original_validator_changed: false
+  stable_skill_changed: false
+  historical_gaps_preserved: true
+  real_generation_executed: false
+  independent_semantic_review: not_performed
+  live_effectiveness_validated: false
+  baseline_comparison_limit: 旧结构校验器与新增可执行防线的覆盖对照，不是旧Skill或模型与新Skill或模型的智能横评。
+  operational_enforcement: 本地受保护写入入口和分支CI已接入；无管理权限将CI设置为平台required check，不宣称可拦截任意直接写入。
+  owner_interaction: 内部修复/回归不逐项等待；只集中升级生成恢复、最终采用、重大边界和实际权限阻塞。
+live_trial_plan:
+  status: first_bounded_trial_executed_not_ready_for_exposure
+  permission: scoped_trial_authority_recorded_general_pause_not_globally_removed
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643216469
+  result_entry: naming-evidence-pilot/live-trial-001/result.md
+  entry_contract: naming-evidence-pilot/contract.md#live-trial
+  initial_budget: 单个有边界批次，内部最多8项；不足合格展示量则少展示或不展示，不为凑数降低门槛。
+  initial_budget_status: proposed_task_local_limit_not_stable_rule
+  prerequisites:
+    - 明确获得恢复真实名称生成的授权，单独记录授权原句与上下文。
+    - 建立当次搜索/调度计划与实际运行能力；旧历史未知继续保留，不填为零或宣称重放。
+    - 验证输入已冻结、实际输出可保存、来源原文与Controller解释分开。
+    - 实际隔离能力按运行环境选择并如实披露；同上下文不声称盲法。
+    - 展示前执行结构防线并完成必要的语义与现实证据审查；程序pass不替代这些审查。
+  stop_conditions:
+    - 出现证据缺口、矛盾、预算超限或新的暂停指令时，不扩大批次；保留实际输入输出和失败记录。
+    - 不因一个真实批次成功而自动晋升Skill或合并PR416。
+
+# v88：当次真实试行与历史审计层分开；此处不改写v87阶段的历史结论。
+live_validation:
+  id: LIVE-411-001
+  status: bounded_trial_complete_no_exposure_ready_candidate
+  baseline_commit: 64d7896254c9a320c3632f55d41b5bb879f96cb8
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643216469
+  authority_interpretation: 相邻对话要求连续执行，解析为本次有限真实试行；不是伪造Owner逐字解除全部暂停。
+  artifacts_home: naming-evidence-pilot/live-trial-001/
+  result: naming-evidence-pilot/live-trial-001/result.md
+  verification: naming-evidence-pilot/live-trial-001/validation.json
+  reproducible_record_builder: naming-evidence-pilot/live-trial-001/check_trial.py
+  actual_generation_executed: true
+  generated: 8
+  intrinsic_prioritized: 4
+  display_eligible: 0
+  owner_candidate_review_invitation_count: 0
+  runtime_isolation: best_effort_same_context
+  independent_semantic_review: not_performed
+  budget_extended_or_extra_names_generated: false
+  active_historical_candidate_list_changed: false
+  current_trial_candidate_registry: naming-evidence-pilot/live-trial-001/generated.json
+  current_trial_dispositions: naming-evidence-pilot/live-trial-001/screening.json
+  real_evidence_capture: 冻结计划、原始名称输出、先于查询的质量判断、实际搜索/注册商观察、完整阶段去留；网页只保留必要片段，非完整供应商日志。
+  timing_limit: 初次查询仅保留日期与顺序；重查有执行者时钟起止区间，不回填供应商精确响应时刻。
+  gate_disposition: review
+  gate_errors: []
+  remaining_gate_review: [screen_result_unresolved]
+  capture_complete: false
+  capture_limit: 校验器因现实筛查未解决而保持false；不等于缺失本次原始生成，也不等于过去缺口已填补。
+  verification_run: 34671475110
+  verification_head: 6c565caca7fe6e8f4f201878e1190938094996a0
+  verification_artifact: 10290443155
+  verification_artifact_sha256: 1213896f1c5d0415094041e99df730f70bbda7eb409ca5d9532d87341a4dc082
+  repeat_record_and_checks_byte_identical: true
+  counterfactual_checks: 已知撞名强行展示被block；未知结果伪改available仍review。仅反例拷贝，没有真实错误展示。
+  overall_naming_task_complete: false
+  stable_method_promoted: false
+  purchase_registration_or_final_adoption_performed: false
+  inherited_pause_scope: process_review/audit_recovery旧暂停字段用于一般无限生成与历史恢复就绪；本次有独立限定授权，不声称程序自动批准生成。
+  remaining_substantive_barriers:
+    - 一个名称的.com不可直接注册，未获得实际取得路径；索引未命中不是身份或商标许可。
+    - 另有同名主体/产品及第三方商标申请线索，需要官方身份或商标证据，而不是让Owner凭猜测裁定。
+    - 没有独立语义复核；单次未展示批次不能证明命名质量改善或用户判断成本下降。
+
+# v89：当前方法重构入口；旧试行/暂停解释保留历史，不提供新生成权限。
+model_aware_rebuild:
+  id: MAM-408-001
+  status: existing_003_material_audited_simple_default_recommended_not_promoted
+  primary_issue: 408
+  dependent_naming_issue: 411
+  baseline_commit: 64b973c5c21e4a13accbbf79bf5ad619996f8dcb
+  skill_version_unchanged: '0.4.0'
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522
+  current_entry: naming-evidence-pilot/model-aware/real-pilot-003/audit/REPORT.zh-CN.md
+  experiment_config: naming-evidence-pilot/model-aware/experiment.json
+  offline_protocol: naming-evidence-pilot/model-aware/protocol.py
+  protocol_tests: naming-evidence-pilot/model-aware/test_protocol.py
+  scope:
+    - 名称交付与方法研究分开；用户的上上层长期组织不被降为IA项目或单一互操作业务。
+    - 强而简洁的A、冻结旧B与重构C，按本地/参考配置分别比较；不以参数量替代逐角色实测。
+    - 保留实际记录与防错；多层调度/全量历史/跨任务演化不作为新实验默认前提。
+  authorization:
+    implementation_and_offline_tests: true
+    model_trial_dispatch: false
+    ia_naming: false
+    paid_calls: false
+    purchase_or_registration: false
+    merge_or_stable_promotion: false
+    dispatch_note: REAL-408-001在免费标准CPU测试机完成11次实际调用；该限定试验已结束，默认投递保持关闭。用户本地部署仍未连接，不提供IA或付费权限。
+  evidence:
+    implementation_sources: present
+    original_naming_evidence: unchanged
+    synthetic_tests: separate_from_model_runs
+    actual_model_runs: 8
+    actual_model_calls: 28
+    count_scope: REAL_408_001_and_003_full_raw_capture_only
+    additional_log_only_REAL_408_002_calls: 19
+    latest_audit_ref: real_model_audit_003
+    historical_missing_fields_ref: audit_recovery.missing_current_state
+  screening:
+    current_trial_ref: live_validation
+    current_reality_rechecked: false
+    original_unknowns_and_conflicts_preserved: true
+  validation:
+    deterministic_protocol_tests: implemented
+    local_model_support: not_tested
+    reference_model_support: not_tested
+    independent_semantic_review: not_performed
+    cross_task_effectiveness: not_tested
+    stable_method_promoted: false
+  execution_defaults:
+    mode: local_only
+    max_paid_calls: 0
+    max_cloud_spend: 0
+    model_identity: unresolved_exact_deployment_required
+    user_model_label: qwen3.6-30b-a3b
+    role_support: all_untested_no_parameter_size_ranking
+  remaining:
+    - 绑定实际可访问的本地推理环境；记录型号/版本/量化/框架/推理/采样/上下文和真实输入计数。
+    - 绑定开发任务的冻结简报及真实负责人，缺少负责人时只报告模拟任务质量，不报告采用成功。
+    - 在实际模型电脑运行执行器；LM Studio传输/分词与单机单元共享额度已有代码，尚未在真实部署验证；Ollama推理、全研究总预算和完整方法编排未实现。
+    - 首先开展A/C与本地/参考的有限公平比较，再决定是否扩大B组、留出任务或角色交叉。
+
+  local_transport:
+    version: '0.1'
+    implementation: naming-evidence-pilot/model-aware/local_runner.py
+    tests: naming-evidence-pilot/model-aware/test_local_runner.py
+    development_tasks: naming-evidence-pilot/model-aware/development-tasks.json
+    validation: naming-evidence-pilot/model-aware/transport-validation.json
+    authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645154433
+    implemented_inference_backend: lmstudio_raw_completion
+    probe_only_backend: ollama
+    actual_user_endpoint: null
+    observed_current_container_ports: connection_refused_not_owner_computer
+    sdk_and_model_integration: not_tested_on_real_service
+    transport_test_class: mock_http_and_tokenizer_not_model_trials
+    shared_budget_scope: one_ledger_per_run_root_per_task_method_model_cell
+    global_study_budget: not_implemented
+    full_method_comparison: not_implemented
+    actual_model_calls: 0
+    old_protocol_and_skill_bytes_unchanged: true
+
+# v91：运行阶段由程序续接，不将外部开发者作为默认控制中心。
+standalone_workflow:
+  version: '0.1.0-experimental'
+  baseline_commit: f1d29f066547624ec28c313c160aec81664e399a
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645696051
+  primary_issue: 408
+  entry: naming-evidence-pilot/model-aware/workflow.py
+  skill: naming-evidence-pilot/model-aware/SKILL.md
+  tests: naming-evidence-pilot/model-aware/test_workflow.py
+  stages: [frozen_brief, separate_proposals, name_only_review, explanation_review, rejection_audit, evidence_checkpoint, owner_feedback]
+  current_task_scope: synthetic_development_only
+  external_assistant_required: false
+  real_model_runs: 8
+  actual_model_calls: 28
+  count_scope: REAL_408_001_and_003_full_raw_capture_only_002_19_calls_log_only
+  latest_audit_ref: real_model_audit_003
+  real_model_pilot_ref: real_model_pilot
+  engineering_verification: mock_http_workflow_not_model_efficacy
+  actual_semantic_review: exploratory_author_audit_003_not_independent
+  actual_reality_search: not_performed
+  independent_expert_review: not_performed
+  route_planning: fixed_experimental_lenses_not_intelligent_controller
+  feedback_resume: bounded_no_budget_refill_no_inferred_hard_preferences
+  missing: [actual_model_binding, automatic_brief_calibration, adaptive_route_planning, reality_query_adapter, full_method_model_comparison]
+  old_ia_naming_resumed: false
+  stable_skill_changed: false
+
+# v92: actual inference evidence, distinct from synthetic service tests.
+real_model_pilot:
+  {
+    "id": "REAL-408-001",
+    "status": "executed_interface_failures_no_method_winner",
+    "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5646030674",
+    "workflow_baseline": "e5d538964e15db5f84d2c73296a5d033b9e2f68f",
+    "evidence_commit": "81f8382e38341f2af92f53b5abf1b46d4dfa826f",
+    "run_id": 34695283689,
+    "model": "Qwen3-4B-Instruct-2507",
+    "quantization": "Q4_K_M",
+    "environment": "standard_public_GitHub_CPU_not_owner_machine",
+    "report": "naming-evidence-pilot/model-aware/real-pilot/REPORT.zh-CN.md",
+    "evidence": "naming-evidence-pilot/model-aware/real-pilot/results/evidence.json",
+    "summary": "naming-evidence-pilot/model-aware/real-pilot/results/summary.json",
+    "diagnosis": "naming-evidence-pilot/model-aware/real-pilot/results/diagnosis.json",
+    "task_kind": "synthetic_development",
+    "model_execution": "real",
+    "cells": 4,
+    "actual_model_calls": 11,
+    "completed_cells": 1,
+    "schema_blocked_cells": 3,
+    "paid_inference_api_calls": 0,
+    "user_model_tested": false,
+    "independent_semantic_review": false,
+    "method_effectiveness_established": false,
+    "core_code_modified_or_answers_repaired": false,
+    "next_fix_status": "proposed_not_implemented",
+    "ia_naming_resumed": false,
+    "stable_promotion": false
+  }
+
+# v93 current exploratory audit; prior experiment objects remain historical.
+real_model_audit_003:
+  {
+    "id": "REAL-408-003-AUDIT-01",
+    "status": "completed_exploratory_author_assessment_independent_review_pending",
+    "source_commit": "edde49b36c4fc39df0fa64c6959f9a01b75b2f09",
+    "source_run": 34700578647,
+    "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5647137409",
+    "report": "naming-evidence-pilot/model-aware/real-pilot-003/audit/REPORT.zh-CN.md",
+    "data": "naming-evidence-pilot/model-aware/real-pilot-003/audit/data.json",
+    "assessment": "naming-evidence-pilot/model-aware/real-pilot-003/audit/assessment.json",
+    "metrics": "naming-evidence-pilot/model-aware/real-pilot-003/audit/metrics.json",
+    "verified_embedded_files": 252,
+    "candidate_occurrences": 24,
+    "unique_names": 16,
+    "explanation_variants": 24,
+    "new_model_execution_calls": 0,
+    "real_003_calls": 17,
+    "002_calls": 19,
+    "002_capture": "logs_only_full_workspace_not_preserved",
+    "review_independence": "not_independent_author_preexposed",
+    "winner": "not_established",
+    "development_default_recommendation": "simple_three_lenses_optional_runtime_not_changed",
+    "correction": "003 review_coverage_incomplete actually has complete C005 review nested under output_contract; original blocked result not rescored",
+    "ia_naming_resumed": false,
+    "skill_changed": false,
+    "stable_promotion": false,
+    "independent_review": "not_performed"
+  }
+
+# v94 selection-only revision; old trials and their historical counts remain unchanged.
+selection_revision:
+  {
+    "version": "0.2.0-experimental",
+    "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5647290998",
+    "baseline_commit": "036568195c8996aff710fe75e87982d571ff6d43",
+    "implementation": "naming-evidence-pilot/model-aware/selection_policy.py",
+    "default_method_for_new_sessions": "simple",
+    "old_results_unchanged": true,
+    "experiment": "SELECT-408-001",
+    "run_id": "34706709251",
+    "model_requests_with_saved_intent": 4,
+    "completed_selection_requests": 4,
+    "new_names": 0,
+    "paid_api_calls": 0,
+    "ia_generation": false,
+    "stable_promotion": false,
+    "semantic_validation": "development_only_not_independent_quality_proof",
+    "evidence": "naming-evidence-pilot/model-aware/selection-pilot/results/evidence.json"
+  }

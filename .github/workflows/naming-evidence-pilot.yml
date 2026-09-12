@@ -1,0 +1,142 @@
+name: Naming evidence pilot controls
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths:
+      - 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/**
+      - 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      - .github/workflows/naming-evidence-pilot.yml
+permissions:
+  contents: read
+concurrency:
+  group: naming-evidence-pilot-${{ github.ref }}
+  cancel-in-progress: false
+jobs:
+  task-local-controls:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Install parser
+        run: python -m pip install PyYAML==6.0.2
+      - name: Run control comparison, transition checks, and historical regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$PWD"
+          PILOT="03_Evolution/01_Research/03_Tests/naming-evidence-pilot"
+          STATE="03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml"
+          BASE="fc84a477c805e828ce47666dbb5c3e0470c57324"
+          OUT="$RUNNER_TEMP/naming-control-evidence"
+          mkdir -p "$OUT/original"
+          python "$PILOT/test_controls.py" --repository . --output "$OUT/control-results.json"
+          python "$PILOT/test_controls.py" --repository . --output "$OUT/repeat-results.json"
+          cmp "$OUT/control-results.json" "$OUT/repeat-results.json"
+          git worktree add --detach "$RUNNER_TEMP/naming-v86-baseline" "$BASE"
+          OLD="$RUNNER_TEMP/naming-v86-baseline"
+          (cd "$OUT/original"; python "$ROOT/$PILOT/test_evidence.py")
+          python "$OLD/$PILOT/test_reconciliation.py" --repository "$OLD" --output "$OUT/historical-reconciliation.json"
+          CHANGE=$(git log -1 --format=%H -- "$STATE")
+          git show "$CHANGE^:$STATE" > "$OUT/previous-state.yaml"
+          python "$PILOT/control_gate.py" state "$STATE" --previous "$OUT/previous-state.yaml" --repository . > "$OUT/current-transition.json"
+          set +e
+          python "$PILOT/validate_evidence.py" "$PILOT/rnd130-reconstruction.json" > "$OUT/historical-capture.json"
+          CAPTURE_EXIT=$?
+          set -e
+          test "$CAPTURE_EXIT" -eq 2
+          python -m py_compile "$PILOT/control_gate.py" "$PILOT/test_controls.py"
+          git diff --check "$CHANGE^" "$CHANGE"
+          export OUT CHANGE STATE
+          python - <<'PY'
+          import hashlib,json,os,pathlib
+          out=pathlib.Path(os.environ['OUT'])
+          controls=json.loads((out/'control-results.json').read_text())
+          historical=json.loads((out/'historical-reconciliation.json').read_text())
+          transition=json.loads((out/'current-transition.json').read_text())
+          capture=json.loads((out/'historical-capture.json').read_text())
+          assert transition['write_allowed'] and not transition['generation_ready']
+          assert not capture['errors'] and not capture['capture_complete'] and len(capture['gaps'])==10
+          summary={'kind':'task_local_deterministic_ci_not_naming_efficacy','run_id':os.environ['GITHUB_RUN_ID'],'head_sha':os.environ['GITHUB_SHA'],'state_change_commit':os.environ['CHANGE'],'control_summary':controls['summary'],'historical_source_checks':historical['reconciliation_validation']['passed'],'historical_capture_complete':False,'historical_gap_count':len(capture['gaps']),'transition_write_allowed':True,'generation_ready':False,'repeat_byte_identical':True,'state_sha256':hashlib.sha256(pathlib.Path(os.environ['STATE']).read_bytes()).hexdigest(),'limitations':['same-author fixtures and implementation, not independent semantic review','not a required protection rule; no main writes or repository administration changes','synthetic outcomes do not establish naming quality, user preference, or current reality clearance']}
+          (out/'ci-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+          pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('# Naming evidence pilot\n\n```json\n'+json.dumps(summary,ensure_ascii=False,indent=2)+'\n```\n')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
+      - name: Verify actual LIVE-411-001 record and exposure withholding
+        shell: bash
+        run: |
+          set -euo pipefail
+          PILOT="03_Evolution/01_Research/03_Tests/naming-evidence-pilot"
+          OUT="$RUNNER_TEMP/naming-control-evidence"
+          python "$PILOT/live-trial-001/check_trial.py" --repository . --output "$OUT/live-trial-001"
+          python "$PILOT/live-trial-001/check_trial.py" --repository . --output "$RUNNER_TEMP/live-trial-repeat"
+          for FILE in record.json checks.json summary.json; do
+            cmp "$OUT/live-trial-001/$FILE" "$RUNNER_TEMP/live-trial-repeat/$FILE"
+          done
+          # A correctly withheld trial is a successful check, not a cleared name.
+          cat "$OUT/live-trial-001/summary.json"
+      - name: Verify model-aware protocol and recorded inference scopes without model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          mkdir -p "$OUT"
+          python "$P/test_protocol.py" --output "$OUT/tests.json"
+          python "$P/protocol.py" matrix --config "$P/experiment.json" --output "$OUT/planned-matrix.json"
+          python -m py_compile "$P/protocol.py" "$P/test_protocol.py"
+          git diff --exit-code 64b973c5c21e4a13accbbf79bf5ad619996f8dcb HEAD -- 02_Runtime/02_Tools/adaptive_naming/ 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/validate_evidence.py 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control-cases.json 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control-results.json
+          python - <<'PY'
+          import hashlib,json,pathlib,yaml
+          root=pathlib.Path('03_Evolution/01_Research/03_Tests')
+          p=root/'naming-evidence-pilot/model-aware'
+          state=yaml.safe_load((root/'organization-naming-411-state.yaml').read_text())
+          current=state['model_aware_rebuild'];config=json.loads((p/'experiment.json').read_text())
+          # Historical counts are explicitly scoped to original 001/003, not all future studies.
+          assert current['evidence']['count_scope']=='REAL_408_001_and_003_full_raw_capture_only'
+          histories=[json.loads((p/name/'results/summary.json').read_text()) for name in ('real-pilot','real-pilot-003')]
+          assert current['evidence']['actual_model_runs']==sum(len(v['cells']) for v in histories)
+          assert current['evidence']['actual_model_calls']==sum(v['real_inference_attempts'] for v in histories)
+          assert current['local_transport']['actual_model_calls']==0
+          assert current['validation']['local_model_support']=='not_tested'
+          assert not current['authorization']['ia_naming'] and not current['authorization']['paid_calls']
+          assert config['budgets']['max_cloud_spend']==0 and config['comparison']['model_effectiveness_results']==[]
+          if 'selection_revision' in state:
+              revision=state['selection_revision'];e=json.loads((p/'selection-pilot/results/evidence.json').read_text())
+              for value in e['files'].values():assert hashlib.sha256(value['content'].encode()).hexdigest()==value['sha256']
+              intents=sum(path.startswith('model/request-') and path.endswith('/intent.json') for path in e['files'])
+              assert intents==revision['model_requests_with_saved_intent']==e['model_requests_with_saved_intent']
+              assert 0<=intents<=4 and revision['new_names']==0 and not revision['stable_promotion']
+          print('Historical actual calls reconciled; no new model calls or efficacy claim in CI.')
+          PY
+      - name: Verify local transport with explicit mock server; no LLM calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          python "$P/test_local_runner.py" --output "$OUT/transport-tests.json"
+          python "$P/test_local_runner.py" --output "$OUT/transport-repeat.json"
+          cmp "$OUT/transport-tests.json" "$OUT/transport-repeat.json"
+          python "$P/local_runner.py" tasks --output-dir "$OUT/development-tasks"
+          python -m py_compile "$P/local_runner.py" "$P/test_local_runner.py"
+      - name: Verify standalone workflow, selection boundary and exact envelopes with mocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          python "$P/test_workflow.py" --output "$OUT/workflow-tests.json"
+          python "$P/test_workflow.py" --output "$OUT/workflow-repeat.json"
+          cmp "$OUT/workflow-tests.json" "$OUT/workflow-repeat.json"
+          python "$P/test_selection_policy.py" --output "$OUT/selection-tests.json"
+          python "$P/test_format_adapter.py" --output "$OUT/format-tests.json"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: naming-evidence-pilot-controls
+          path: ${{ runner.temp }}/naming-control-evidence/
+          retention-days: 30
+          if-no-files-found: error
