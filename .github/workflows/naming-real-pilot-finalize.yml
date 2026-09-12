@@ -1,0 +1,97 @@
+name: Record REAL-408-001 state and diagnosis
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-real-pilot-finalize.yml]
+permissions:
+  contents: write
+jobs:
+  record-results:
+    if: github.repository == 'InteropAtlas/InteropAtlas' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          persist-credentials: false
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Verify observed outputs and update only evidence pointers
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          import base64,collections,hashlib,json,os,pathlib,re,textwrap,urllib.request,yaml
+          H=pathlib.Path('03_Evolution/01_Research/03_Tests')
+          P=H/'naming-evidence-pilot/model-aware/real-pilot'
+          raw=(P/'results/evidence.json').read_bytes();ev=json.loads(raw);files=ev['files']
+          for f in files.values(): assert hashlib.sha256(f['content'].encode()).hexdigest()==f['sha256']
+          summary=json.loads((P/'results/summary.json').read_text())
+          assert summary['real_inference_attempts']==11 and len(summary['cells'])==4
+          def read(name):return json.loads(files[name]['content'])
+          normalization=[]
+          for cell in ['cell-2-simple-411921','cell-3-simple-411922']:
+              rows=read(cell+'/calls/r1g1/output.txt')
+              assert isinstance(rows,list) and len(rows)==6
+              assert all(set(x)=={'name','pronunciation','meaning','derivation','risk'} for x in rows)
+              normalization.append({'cell':cell,'actual_failure':'root_array_not_object','raw_candidate_count':len(rows),'candidate_values_not_missing':True,'hypothetical_wrapper_only':True,'original_result_not_rescored':True})
+          cell='cell-4-redesign-411922'
+          reviews=read(cell+'/calls/r1surface/output.txt')['reviews']
+          inp=read(cell+'/steps/r1surface/input.json')
+          items=json.loads(inp['task']['question'])['items'];names={v['id']:v['name'] for v in items}
+          extra=[v for v in reviews if set(v)!={'id','decision','reason'}]
+          assert len(extra)==1 and extra[0]['id']=='C003' and set(extra[0])=={'id','decision','reason','name'}
+          assert extra[0]['name']==names['C003']
+          normalization.append({'cell':cell,'actual_failure':'extra_name_field','extra_field_matches_original_input':True,'original_result_not_rescored':True})
+          rnd=read('cell-1-redesign-411921/round-1.json')
+          surface={v['id']:v['decision'] for v in rnd['surface']}
+          shifts=[v['id'] for v in rnd['explained'] if surface[v['id']]=='hold' and v['decision']=='keep']
+          assert shifts==['C003','C004']
+          diagnosis={'kind':'post_run_deterministic_artifact_audit_not_semantic_judge','evidence_sha256':hashlib.sha256(raw).hexdigest(),
+            'raw_model_calls':11,'cells_completed_to_evidence_checkpoint':1,'cells_blocked_by_schema':3,
+            'schema_findings':normalization,'completed_cell_surface_counts':dict(collections.Counter(v['decision'] for v in rnd['surface'])),
+            'completed_cell_explained_counts':dict(collections.Counter(v['decision'] for v in rnd['explained'])),
+            'hold_to_keep_after_explanation':shifts,'input_tokens':sum(c['input_tokens'] for c in summary['cells']),
+            'output_tokens':sum(c['output_tokens'] for c in summary['cells']),
+            'recorded_inference_seconds':sum(c['inference_seconds'] for c in summary['cells']),
+            'normalization_applied_to_experiment':False,'method_winner':'not_determined',
+            'limits':'No repair/rescore, no independent semantic review, no reality clearance, no Owner-Qwen validation.'}
+          sp=H/'organization-naming-411-state.yaml';original=sp.read_text();old=yaml.safe_load(original)
+          assert hashlib.sha1(b'blob '+str(len(original.encode())).encode()+b'\0'+original.encode()).hexdigest()=='fa75dff8d473b0c440fab6ffcff676636380d95f'
+          updated=original.replace('  snapshot_version: 91\n','  snapshot_version: 92\n',1)
+          block='next_action:\n  action: fix_shared_format_boundary_then_repeat_frozen_development_pilot\n  rationale: >-\n    REAL-408-001已产生真实4B模型材料；3格因格式接口阻断，尚不能比较命名效果。\n    下一轮仅考虑两组共享的无损格式层和证据措辞审查；保留旧结果，不追认成功，不先换更贵模型或扩充调度。\n  requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation\n'
+          updated,n=re.subn(r'^next_action:\n.*?(?=^stop:)',block+'\n',updated,flags=re.M|re.S);assert n==1
+          a,b=updated.split('model_aware_rebuild:\n',1);model,standalone=b.split('standalone_workflow:\n',1)
+          model=model.replace('status: standalone_development_workflow_implemented_real_model_unbound','status: actual_cpu_pilot_completed_interface_failures_method_benefit_unresolved',1)
+          model=model.replace('    actual_model_runs: 0\n','    actual_model_runs: 4\n    actual_model_calls: 11\n',1)
+          model=model.replace('    dispatch_note: 首个本地执行器已具备投递代码，开发材料为明确虚构任务；真实服务未连接，尚无实际推理。准备和执行需操作者显式启用本地诊断，不提供IA或付费权限。','    dispatch_note: REAL-408-001在免费标准CPU测试机完成11次实际调用；该限定试验已结束，默认投递保持关闭。用户本地部署仍未连接，不提供IA或付费权限。',1)
+          standalone=standalone.replace('  real_model_runs: 0\n','  real_model_runs: 4\n  actual_model_calls: 11\n  real_model_pilot_ref: real_model_pilot\n',1)
+          updated=a+'model_aware_rebuild:\n'+model+'standalone_workflow:\n'+standalone
+          pilot={'id':'REAL-408-001','status':'executed_interface_failures_no_method_winner','authority_ref':'https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5646030674',
+            'workflow_baseline':'e5d538964e15db5f84d2c73296a5d033b9e2f68f','evidence_commit':'81f8382e38341f2af92f53b5abf1b46d4dfa826f','run_id':34695283689,
+            'model':'Qwen3-4B-Instruct-2507','quantization':'Q4_K_M','environment':'standard_public_GitHub_CPU_not_owner_machine',
+            'report':'naming-evidence-pilot/model-aware/real-pilot/REPORT.zh-CN.md','evidence':'naming-evidence-pilot/model-aware/real-pilot/results/evidence.json',
+            'summary':'naming-evidence-pilot/model-aware/real-pilot/results/summary.json','diagnosis':'naming-evidence-pilot/model-aware/real-pilot/results/diagnosis.json',
+            'task_kind':'synthetic_development','model_execution':'real','cells':4,'actual_model_calls':11,'completed_cells':1,'schema_blocked_cells':3,
+            'paid_inference_api_calls':0,'user_model_tested':False,'independent_semantic_review':False,'method_effectiveness_established':False,
+            'core_code_modified_or_answers_repaired':False,'next_fix_status':'proposed_not_implemented','ia_naming_resumed':False,'stable_promotion':False}
+          updated+='\n# v92: actual inference evidence, distinct from synthetic service tests.\nreal_model_pilot:\n'+textwrap.indent(json.dumps(pilot,ensure_ascii=False,indent=2),'  ')+'\n'
+          new=yaml.safe_load(updated)
+          assert new['task']==dict(old['task'],snapshot_version=92)
+          for k in old:
+              if k not in ('task','next_action','model_aware_rebuild','standalone_workflow'):assert new[k]==old[k],k
+          assert new['model_aware_rebuild']['local_transport']==old['model_aware_rebuild']['local_transport']
+          assert new['model_aware_rebuild']['authorization']['paid_calls'] is False
+          assert new['model_aware_rebuild']['authorization']['ia_naming'] is False
+          base='https://api.github.com/repos/InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1'
+          def api(path,method='GET',body=None):
+              q=urllib.request.Request(base+path,method=method,data=json.dumps(body,ensure_ascii=False).encode() if body is not None else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(q,timeout=60) as response:return json.load(response)
+          expected=os.environ['GITHUB_SHA'];assert api('/git/ref/heads/'+branch)['object']['sha']==expected
+          tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+expected)['tree']['sha'],'tree':[
+              {'path':str(sp),'mode':'100644','type':'blob','content':updated},
+              {'path':str(P/'results/diagnosis.json'),'mode':'100644','type':'blob','content':json.dumps(diagnosis,ensure_ascii=False,indent=2)+'\n'}]})['sha']
+          commit=api('/git/commits','POST',{'message':'research(#408,#411): record v92 real inference and isolate schema failures from method quality','tree':tree,'parents':[expected]})['sha']
+          assert api('/git/ref/heads/'+branch)['object']['sha']==expected
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          print(json.dumps({'commit':commit,'diagnosis':diagnosis},ensure_ascii=False))
+          PY
