@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 89
+  snapshot_version: 90
   skill_version: 0.4.0
 
 lineage:
@@ -101,7 +101,7 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: bind_actual_local_runtime_and_development_tasks_for_model_method_comparison
+  action: run_local_transport_on_actual_deployment_then_implement_full_comparison
   rationale: >-
     Owner明确要求先重构和验证方法而非续跑旧命名主线。模型/预算感知实验入口已实施；下一步绑定实际本地部署、精确配置和开发任务，
     在有边界的计划中开展真实模型比较。没有部署访问或完整任务材料时，保留not_run，不把本轮程序测试写成已适配Qwen。
@@ -621,7 +621,7 @@ live_validation:
 # v89：当前方法重构入口；旧试行/暂停解释保留历史，不提供新生成权限。
 model_aware_rebuild:
   id: MAM-408-001
-  status: experimental_protocol_implemented_model_trials_not_run
+  status: local_transport_implemented_actual_deployment_not_connected
   primary_issue: 408
   dependent_naming_issue: 411
   baseline_commit: 64b973c5c21e4a13accbbf79bf5ad619996f8dcb
@@ -642,7 +642,7 @@ model_aware_rebuild:
     paid_calls: false
     purchase_or_registration: false
     merge_or_stable_promotion: false
-    dispatch_note: 尚未绑定实际部署和开发任务，未形成可投递计划；不是要求Owner逐个批准内部技术步骤。
+    dispatch_note: 首个本地执行器已具备投递代码，开发材料为明确虚构任务；真实服务未连接，尚无实际推理。准备和执行需操作者显式启用本地诊断，不提供IA或付费权限。
   evidence:
     implementation_sources: present
     original_naming_evidence: unchanged
@@ -670,5 +670,24 @@ model_aware_rebuild:
   remaining:
     - 绑定实际可访问的本地推理环境；记录型号/版本/量化/框架/推理/采样/上下文和真实输入计数。
     - 绑定开发任务的冻结简报及真实负责人，缺少负责人时只报告模拟任务质量，不报告采用成功。
-    - 执行端接入本地模型、共享预算预留与隔离证据；本轮离线协议不会自行联网或调用模型。
+    - 在实际模型电脑运行执行器；LM Studio传输/分词与单机单元共享额度已有代码，尚未在真实部署验证；Ollama推理、全研究总预算和完整方法编排未实现。
     - 首先开展A/C与本地/参考的有限公平比较，再决定是否扩大B组、留出任务或角色交叉。
+
+  local_transport:
+    version: '0.1'
+    implementation: naming-evidence-pilot/model-aware/local_runner.py
+    tests: naming-evidence-pilot/model-aware/test_local_runner.py
+    development_tasks: naming-evidence-pilot/model-aware/development-tasks.json
+    validation: naming-evidence-pilot/model-aware/transport-validation.json
+    authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645154433
+    implemented_inference_backend: lmstudio_raw_completion
+    probe_only_backend: ollama
+    actual_user_endpoint: null
+    observed_current_container_ports: connection_refused_not_owner_computer
+    sdk_and_model_integration: not_tested_on_real_service
+    transport_test_class: mock_http_and_tokenizer_not_model_trials
+    shared_budget_scope: one_ledger_per_run_root_per_task_method_model_cell
+    global_study_budget: not_implemented
+    full_method_comparison: not_implemented
+    actual_model_calls: 0
+    old_protocol_and_skill_bytes_unchanged: true

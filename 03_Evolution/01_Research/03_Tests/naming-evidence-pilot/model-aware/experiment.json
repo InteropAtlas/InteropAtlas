@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "experiment_id": "MAM-408-001",
-  "status": "implemented_not_model_tested",
+  "status": "local_transport_implemented_not_model_tested",
   "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522",
   "baseline": {
     "commit": "64b973c5c21e4a13accbbf79bf5ad619996f8dcb",
@@ -98,15 +98,17 @@
         "id": "DEV-01",
         "split": "development",
         "kind": "organization",
-        "brief_ref": null,
-        "owner_ref": null
+        "brief_ref": "development-tasks.json#/tasks/0",
+        "owner_ref": null,
+        "task_evidence_kind": "synthetic_development_only"
       },
       {
         "id": "DEV-02",
         "split": "development",
         "kind": "product",
-        "brief_ref": null,
-        "owner_ref": null
+        "brief_ref": "development-tasks.json#/tasks/1",
+        "owner_ref": null,
+        "task_evidence_kind": "synthetic_development_only"
       },
       {
         "id": "HOLD-01",
@@ -155,5 +157,20 @@
     ],
     "selection_pool_experiment": "planned_not_run",
     "model_effectiveness_results": []
+  },
+  "transport": {
+    "entry": "local_runner.py",
+    "inference_backend": "lmstudio_raw_completion",
+    "probe_backends": [
+      "lmstudio",
+      "ollama"
+    ],
+    "endpoint": null,
+    "execution_status": "no_user_endpoint_bound",
+    "ollama_inference_status": "not_implemented_no_verified_tokenizer_path",
+    "automatic_model_calls": false,
+    "paid_backends": "unsupported",
+    "comparison_orchestrator": "not_implemented",
+    "actual_model_calls": 0
   }
 }

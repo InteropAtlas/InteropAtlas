@@ -1,6 +1,6 @@
 # 模型与预算感知命名 · 实验入口 v0.1
 
-状态：实验实现；不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
+状态：v90 已增加本地传输与分词入口；真实模型尚未接入。不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
 
 授权：[本轮记录](https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522)。执行者：OpenAI / ChatGPT / GPT-6 Astra Pro。用户要求先重构并判断方法是否有用，不继续旧候选主线。本轮只实现协议、配置、离线任务包及确定性测试；无模型调用、无新名称、无现实查询、无付款或方法晋升。
 
@@ -61,7 +61,7 @@
 
 ## 6. 已实现工具和真实边界
 
-`protocol.py`只在本地编译单任务包、检查投递条件、登记运行回执和汇总；**不会调用模型，不联网，不启动工作者，不自动执行收费或仓库写入**。这是可接入本地运行器的协议，不是完整模型Adapter。真实服务连接、输入token计数、上下文隔离和独立复核必须由执行端提供证据。
+`protocol.py`只在本地编译单任务包、检查投递条件、登记运行回执和汇总；**不会调用模型，不联网，不启动工作者，不自动执行收费或仓库写入**。这是可接入本地运行器的协议，不是完整模型Adapter。v90新增的本地执行端见第8节；离线协议本身仍不联网。真实模型效果与独立复核仍未验证。
 
 ```bash
 P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
@@ -88,3 +88,62 @@ python "$P/test_protocol.py" --output /tmp/model-aware-tests.json
 本轮工程结束点：方案/配置/接口落库、反例测试及旧回归运行、远端读回、恢复入口同步。模型效果的结束点另列：至少一个真实可负担配置的运行证据、独立质量复核和公平比较；本轮不提前报告通过。
 
 最重要的剩余不是再次扩展框架，而是绑定实际本地部署与开发任务，取得第一份真实模型运行回执。缺少真实环境时保留`not_run`，不把本次同作者确定性测试伪装成已适配Qwen。
+
+
+## 8. v90：本地执行器，不再只有离线任务包
+
+授权：[本轮边界](https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645154433)。`local_runner.py` 增加以下实际代码路径：
+
+- `probe` 只读取指定回环地址的模型列表；支持 LM Studio 和 Ollama，只读探测不调用模型。
+- `prepare` 只绑定显式授权的虚构开发任务：读取精确已加载实例，调用官方 LM Studio SDK 的 prompt template 与 tokenizer，保存完整输入、分词依据和实际传输请求。不存在的模型不会被主动下载；已加载检查与SDK获取之间仍有竞态，SDK本身可能加载刚卸载的实例，不能声明绝对无加载行为。
+- `run --execute` 对已冻结包使用 LM Studio `/v1/completions` 发送已渲染的原文，避免再次套 chat template；调用前后复查加载配置。服务器报告输入计数与预检不一致、输出超限或截断时保留材料并标为无效，不悄悄通过。
+- SQLite 在投递前预留调用和最大输出额度；同一 run-root 的合作调用者共享账本。失败、断连或崩溃的预留不自动退回，也不自动重试；避免不知道请求是否执行时又重复消耗。
+
+**实现范围**：首个实际推理后端是 LM Studio。Ollama仅实现列表/版本发现，没有冒称其推理与分词已接通。本轮没有实际 LM Studio/Qwen；测试调用真实本地HTTP栈，但服务与分词器均是明确的测试替身。`test_local_runner.py` 的通过不是模型兼容性或命名效果通过。
+
+### 8.1 在实际运行模型的电脑使用
+
+脚本支持Python 3.10+；准备实际LM Studio任务还需要官方 `lmstudio` Python SDK。探测、任务导出和模拟测试不依赖该SDK。不自动安装SDK或下载任何模型。当前版本未实现认证令牌传递；认证服务器将返回失败，不应为此关闭已有安全配置或开放公网端口。
+
+从仓库根目录执行，下列服务地址是本机示例，不是已确认的Owner部署：
+
+```bash
+P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+python "$P/local_runner.py" probe --endpoint http://127.0.0.1:1234 --output /tmp/naming-local-probe.json
+python "$P/local_runner.py" tasks --output-dir /tmp/naming-dev-tasks
+# 使用已加载列表中的完整实例ID；revision与runtime-version需由操作者提供真实值。
+python "$P/local_runner.py" prepare --config "$P/experiment.json"   --task /tmp/naming-dev-tasks/DEV-01.json --endpoint http://127.0.0.1:1234   --model "$MODEL_ID" --revision "$WEIGHTS_REVISION" --runtime-version "$RUNTIME_VERSION"   --method simple --role generate --authorize-local-diagnostic --output /tmp/naming-prepared
+python "$P/local_runner.py" run --prepared /tmp/naming-prepared   --run-root ./local-naming-runs --run-id DEV01-simple-r1 --execute
+```
+
+`prepare` 需要显式的 `--authorize-local-diagnostic`；仅在新输出包的配置中开启虚构开发诊断权限，不改变仓库默认配置或IA授权。`run` 仍须 `--execute`，没有默认自动调用。所有输出目录/运行ID拒绝覆盖；重复执行请使用有意义的新运行ID，不可靠删账本重置预算。
+
+输出保存request、response原始字节、output文本、tokenization、调用意图、模型前后元数据与protocol回执。它们可能包含模型内容，应留在本地审查；不会自动上传仓库。不要把API原始日志中的私密信息随意公开。内部模型推理文本不是本任务要求的留痕材料。
+
+### 8.2 仍需诚实保留的限制
+
+精确实例、量化及已加载上下文来自服务；`revision`与运行软件版本仍是操作者声明，不是服务已测得的权重校验和。程序不能只凭实例ID证明磁盘权重未变；真实比较前应另行核实版本。服务器默认推理方式不被伪装为受控开关：本执行器冻结实际模板与请求，未显式覆盖的推理行为记录为限制。
+
+回环地址和本地声明不能证明服务没有转发云端。执行者须确认该实例在本机推理；本工具不控制服务出站网络。当前仅接受字面回环IP、拒绝代理/重定向/公网地址，既不扫描Owner内网，也不让聊天访问Owner电脑的127.0.0.1。
+
+账本的额度范围沿用实验配置：每个任务/方法/模型单元。全研究总预算、多机全局账本和完整多工作者调度尚未实现；本地多个run-root不共享额度。超时是网络I/O等待上限，不保证服务器立即停止已提交推理；未知用量保留，不报零。
+
+这仍是**单任务传输与诊断路径**，不是完整A/B/C流程。`simple/redesign`任务包差别不能冒充整套方法对照，完整独立提案与两阶段选择仍须由后续编排实现。
+
+### 8.3 开发任务与证据分类
+
+`development-tasks.json`提供两个执行者编写的虚构开发任务：地方影像保存教育组织、离线字幕对照产品。均不是IA主线、真实客户或留出样本；没有真实负责人，所以不得报告采用成功。配置仅绑定开发任务材料，留出任务仍未绑定且禁止执行。
+
+真实服务执行虚构任务时，同时记录 `record_kind=synthetic`（任务性质）与 `execution_kind=local_service_attempt_on_synthetic_task`（执行性质）；测试替身则记录 `mock_transport_test`。原协议汇总继续排除synthetic采用证据，但原始回执仍保留真实服务调用及成本，不把它们抹成从未执行。`backend_model_execution_confirmed`只表示成功返回的服务响应条件，不是第三方远程证明。
+
+本轮实际结果及源代码哈希见 `transport-validation.json`。程序18项传输测试和旧25项协议测试通过；实际模型调用0。当前容器的1234与11434端口连接拒绝，只说明本执行环境无相应服务，不说明Owner电脑是否在运行。
+
+### 8.4 主要API依据
+
+实现参考官方接口，不引用第三方兼容性猜测；这些文档不替代目标部署实测。
+
+- [LM Studio模型列表](https://lmstudio.ai/docs/developer/rest/list)
+- [LM Studio分词与模板](https://lmstudio.ai/docs/python/tokenization)
+- [LM Studio模型访问](https://lmstudio.ai/docs/python/manage-models/loading)
+- [LM Studio兼容接口](https://lmstudio.ai/docs/developer/openai-compat)
+- [Ollama只读模型列表](https://docs.ollama.com/api/tags)
