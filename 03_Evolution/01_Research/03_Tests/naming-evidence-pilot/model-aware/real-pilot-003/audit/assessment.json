@@ -1,0 +1,40 @@
+{
+  "audit_id": "REAL-408-003-AUDIT-01",
+  "reviewer": "OpenAI / ChatGPT / GPT-6 Astra Pro",
+  "review_kind": "exploratory_author_assessment_not_independent_blind_review",
+  "source_commit": "edde49b36c4fc39df0fa64c6959f9a01b75b2f09",
+  "packet_blob": "e3f99961cfe91aa65dbe9e86422fad96818bb335",
+  "disclosure": "作者已从历史上下文看过首个重构组的部分名称、解释和来源；读取匿名包边界时还看到了SideBy的一条风险描述。匿名化不能消除记忆。本次统一裸名意见在查看完整来源映射及其余解释之前冻结，但不是严格无先验暴露的盲测。",
+  "task": "DEV-02虚构离线字幕修改对照产品；清楚、专业、便于团队口头交流，不需要母组织尺度，不强求裸名表达全部使命。",
+  "rubric": {
+    "priority": "相较本批其他材料，值得优先进一步讨论；不是现实可用、用户认可或最终采用。",
+    "reserve": "存在可取点，但读写、任务识别或区分度至少一处需要说明或验证。",
+    "not_priority": "对本简报有较明显身份或使用理解偏移，本批不优先投入；不是普遍差名。",
+    "dimensions": ["读写自然度（作者估计，未做母语用户测试）", "本任务的软件身份与用途契合", "名称自身表达区分度（非商标或市场独占性）"],
+    "constraints": "不使用来源方案、原模型keep/drop或实际可注册性作评分依据；不以总加权分掩盖取舍。解释审计另行记录，不事后调整这些分组来迎合方法胜负。"
+  },
+  "surface": [
+    {"id":"N-19c7668b","name":"Linetap","tier":"reserve","reading":"两个短词容易读写。","fit":"line可连到字幕行，tap更容易让人理解为点击或输入，而非比较修改。","distinction":"有产品感，但需要一句定位说明建立对照工具身份。"},
+    {"id":"N-27bdbd4a","name":"Scribble","tier":"not_priority","reading":"词形整体容易识别。","fit":"容易偏向随手书写、涂画，而不是专业的版本差异复核。","distinction":"词本身有形象性，但本简报中的识别方向不够准确。"},
+    {"id":"N-2c7d3ba1","name":"DiffSub","tier":"reserve","reading":"短，但两个缩写的倒序组合没有SubDiff自然。","fit":"技术用户可联想到字幕差异，非技术使用者可能不易拆解。","distinction":"功能指向明确，独立身份较弱；处于priority/reserve边界。"},
+    {"id":"N-3bdbffcf","name":"SideBy","tier":"priority","reading":"两个熟悉短词，口头传播较轻。","fit":"能提示并排查看，与比较任务相容；不直接锁定字幕。","distinction":"较像产品名而不是纯功能标签，但短语截断感需要实际口头使用验证。"},
+    {"id":"N-4421f327","name":"TextCompare","tier":"reserve","reading":"容易读懂和拼写，但相对长。","fit":"用途准确，不要求听者理解术语。","distinction":"更像功能菜单名，产品区分度弱；可以作为描述性基准，不因此判不合格。"},
+    {"id":"N-48e5de32","name":"SubDiff","tier":"priority","reading":"短，字幕工作者较容易理解两个部分。","fit":"字幕差异指向直接，与离线文字修改对照一致；不宣称同步或云端。","distinction":"简洁实用但描述性强，后续应与更有独立身份的路线比较。"},
+    {"id":"N-4936b269","name":"Diffly","tier":"priority","reading":"连贯且较容易按dif-lee理解，实际听写仍待测。","fit":"diff提供比较/差异线索，不要求名称编码离线特性。","distinction":"较简洁的产品化表达，仍可能被理解为通用文件比较工具。"},
+    {"id":"N-6557622f","name":"EditVerse","tier":"reserve","reading":"构词清楚，读写负担不大。","fit":"容易给出编辑套件、内容世界或诗歌工具联想，范围大于字幕对照。","distinction":"有产品感但表达较泛，不能仅靠空间大就判断适配好。"},
+    {"id":"N-6ff0f43f","name":"SubSync","tier":"reserve","reading":"短且易读。","fit":"更容易指向字幕时间同步；本工具比较文字版本，不应暗示会自动同步或改写。","distinction":"专业但功能方向存在偏移；sync本身不等于联网，不能以含sync判云依赖。"},
+    {"id":"N-71ab9552","name":"Textal","tier":"reserve","reading":"短，有产品感，但尾部读法/听写未必一致。","fit":"text提供文本线索，比较职责需要定位说明。","distinction":"较独立但意义联系偏弱；不能因是造词就判低质量。"},
+    {"id":"N-a8610950","name":"ClipCheck","tier":"reserve","reading":"两部分清楚，节奏自然。","fit":"像视频片段检查或素材质检，比字幕文字差异复核更广。","distinction":"好理解但较通用；priority/reserve边界，可用实际场景验证。"},
+    {"id":"N-a9b13b97","name":"SubsCheck","tier":"reserve","reading":"词边界可读，连续辅音及复数s稍增口述负担。","fit":"能指字幕检查，但检查与版本比较并非一回事。","distinction":"描述性强、范围较泛，优点在易懂而非独特。"},
+    {"id":"N-c0102a73","name":"Editrune","tier":"not_priority","reading":"edit与rune拼接的词边界和重音需要说明。","fit":"符文/记号意象与明确、专业的字幕对照之间距离较大。","distinction":"有区别度，但目前解释负担大于本任务收益；并非判定此名不能用于别的产品。"},
+    {"id":"N-c6ca803d","name":"Sublyte","tier":"reserve","reading":"lyte可能读成light或leet一类，拼写恢复需测试。","fit":"sub可指字幕，其余部分含义不直接；不应自动因含light联想就判好。","distinction":"有一定独立产品感，但目前需在读写成本与身份感间取舍。"},
+    {"id":"N-e2d14018","name":"EditGap","tier":"priority","reading":"两个短词清楚，口头使用轻。","fit":"可提示修改之间的差别；也可能被理解为剪辑中的空隙，需用场景澄清。","distinction":"在易懂和间接表达之间有余量；属于有明确保留风险的priority边界项。"},
+    {"id":"N-f1db31c4","name":"DiffSync","tier":"reserve","reading":"技术组合清楚，但非专业听者可能不熟悉diff。","fit":"差异线索准确，sync又暗示同步/合并而不只是观察差异。","distinction":"较工具化，与任务部分相容但功能承诺不够精确。"}
+  ],
+  "surface_tier_changes_after_mapping": false,
+  "explanation_review": "pending_separate_step",
+  "independent_review": "not_performed",
+  "actual_owner_adoption": "not_assessed",
+  "real_availability": "not_assessed",
+  "additional_model_inference_calls": 0
+}
