@@ -1,0 +1,22 @@
+name: Cancel duplicate REAL-408-002 queue entry
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/cancel-duplicate-real-408-002.yml]
+permissions:
+  actions: write
+  contents: read
+jobs:
+  cancel-duplicate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Cancel only duplicate run 34697209432
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          curl --fail-with-body -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            https://api.github.com/repos/InteropAtlas/InteropAtlas/actions/runs/34697209432/cancel
