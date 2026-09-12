@@ -1,0 +1,134 @@
+name: Model-aware v90 bounded local transport delivery
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/v90-local-transport-delivery.yml]
+permissions:
+  contents: write
+concurrency:
+  group: naming-v90-bounded-delivery
+  cancel-in-progress: false
+jobs:
+  verify-and-publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Verify frozen patch, exact scope and post-apply bytes
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/v90-evidence"
+          python - <<'PY'
+          import base64,hashlib,json,os,pathlib,subprocess,zlib
+          root=pathlib.Path('.')
+          base='47e60e6fc805d202829f40caea35bdde18e2409e'
+          assert os.environ['GITHUB_REPOSITORY']=='InteropAtlas/InteropAtlas'
+          assert os.environ['GITHUB_REF']=='refs/heads/feat/adaptive-naming-skill-v0.1'
+          parts=['.github/maintenance/v90-transport.part'+i for i in ['1','2','3','4','5a','5b','5c']]
+          transient=parts+['.github/workflows/v90-local-transport-delivery.yml']
+          changes=subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines()
+          assert set(changes)==set(transient),changes
+          data=''.join((root/p).read_text().strip() for p in parts)
+          raw=zlib.decompress(base64.b64decode(data,validate=True))
+          assert hashlib.sha256(raw).hexdigest()=='0ab8f63affd1e41aab8cb750fdb4fd3f914dde8b151ca539d9542001aaf320fb'
+          spec=json.loads(raw)
+          assert spec['base_commit']==base
+          home='03_Evolution/01_Research/03_Tests/'
+          model=home+'naming-evidence-pilot/model-aware/'
+          expected={'.github/workflows/naming-evidence-pilot.yml',home+'organization-naming-411-state.yaml'}|{model+n for n in ['README.md','experiment.json','local_runner.py','test_local_runner.py','development-tasks.json','transport-validation.json']}
+          assert set(spec['file_sha256'])==expected
+          patch=spec['patch'].encode()
+          subprocess.run(['git','apply','--check'],input=patch,check=True)
+          subprocess.run(['git','apply'],input=patch,check=True)
+          for path,sha in spec['file_sha256'].items():
+              assert hashlib.sha256((root/path).read_bytes()).hexdigest()==sha,path
+          subprocess.run(['git','add','--intent-to-add',*sorted(expected)],check=True)
+          actual=subprocess.check_output(['git','diff','--name-only'],text=True).splitlines()
+          assert set(actual)==expected,actual
+          subprocess.run(['git','diff','--check'],check=True)
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'v90-evidence'
+          (out/'manifest.json').write_text(json.dumps({'base_commit':base,'files':spec['file_sha256'],'transient':transient},indent=2)+'\n')
+          PY
+      - name: Exercise local HTTP test doubles and preserved historical checks
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT="$PWD"
+          PILOT="03_Evolution/01_Research/03_Tests/naming-evidence-pilot"
+          STATE="03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml"
+          OUT="$RUNNER_TEMP/v90-evidence"
+          python "$PILOT/model-aware/test_local_runner.py" --output "$OUT/transport-tests.json" 2>&1 | tee "$OUT/transport-test-log.txt"
+          python "$PILOT/model-aware/test_local_runner.py" --output "$OUT/transport-repeat.json"
+          cmp "$OUT/transport-tests.json" "$OUT/transport-repeat.json"
+          python "$PILOT/model-aware/test_protocol.py" --output "$OUT/protocol-tests.json"
+          python "$PILOT/test_controls.py" --repository . --output "$OUT/control-results.json"
+          mkdir -p "$OUT/original"
+          (cd "$OUT/original"; python "$ROOT/$PILOT/test_evidence.py")
+          git worktree add --detach "$RUNNER_TEMP/v90-historical-v86" fc84a477c805e828ce47666dbb5c3e0470c57324
+          OLD="$RUNNER_TEMP/v90-historical-v86"
+          python "$OLD/$PILOT/test_reconciliation.py" --repository "$OLD" --output "$OUT/historical-reconciliation.json"
+          python "$PILOT/live-trial-001/check_trial.py" --repository . --output "$OUT/live-trial-001"
+          git show "47e60e6fc805d202829f40caea35bdde18e2409e:$STATE" > "$OUT/previous-state.yaml"
+          python "$PILOT/control_gate.py" state "$STATE" --previous "$OUT/previous-state.yaml" --repository . > "$OUT/current-transition.json"
+          python -m py_compile "$PILOT/model-aware/local_runner.py" "$PILOT/model-aware/test_local_runner.py"
+          python - <<'PY'
+          import json,os,pathlib,yaml,subprocess
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'v90-evidence'
+          assert json.loads((out/'transport-tests.json').read_text())['passed']==18
+          assert json.loads((out/'protocol-tests.json').read_text())['passed']==25
+          t=json.loads((out/'current-transition.json').read_text())
+          assert t['write_allowed'] and not t['generation_ready']
+          statepath='03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml'
+          old=yaml.safe_load((out/'previous-state.yaml').read_text())
+          new=yaml.safe_load(pathlib.Path(statepath).read_text())
+          assert new['task']==dict(old['task'],snapshot_version=90)
+          for key in ['candidates','owner_preferences','constraint_registry','mission_value_model','name_job_model','audit_recovery','live_validation']:
+              assert new[key]==old[key],key
+          subprocess.run(['git','diff','--exit-code','47e60e6fc805d202829f40caea35bdde18e2409e','--','02_Runtime/02_Tools/adaptive_naming/'],check=True)
+          (out/'verification.json').write_text(json.dumps({'kind':'same_author_mock_transport_and_regression_not_model_effectiveness','transport_tests':18,'protocol_tests':25,'real_model_calls':0,'paid_calls':0,'state_transition_allowed':True,'old_ia_generation_resumed':False,'independent_semantic_review':'not_performed'},indent=2)+'\n')
+          PY
+      - name: Publish exact tested files on current branch; remove delivery assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import hashlib,json,os,pathlib,urllib.request
+          repo='InteropAtlas/InteropAtlas'; branch='feat/adaptive-naming-skill-v0.1'
+          out=pathlib.Path(os.environ['RUNNER_TEMP'])/'v90-evidence'
+          manifest=json.loads((out/'manifest.json').read_text())
+          expected=os.environ['GITHUB_SHA']
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=json.dumps(body,ensure_ascii=False).encode() if body is not None else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'})
+              with urllib.request.urlopen(req,timeout=60) as response:return json.load(response)
+          assert api('/git/ref/heads/'+branch)['object']['sha']==expected,'Concurrent branch change; stop without overwrite'
+          base=api('/git/commits/'+expected)['tree']['sha']
+          entries=[]
+          for path,sha in manifest['files'].items():
+              raw=pathlib.Path(path).read_bytes()
+              assert hashlib.sha256(raw).hexdigest()==sha,path
+              entries.append({'path':path,'mode':'100644','type':'blob','content':raw.decode('utf-8')})
+          entries += [{'path':path,'mode':'100644','type':'blob','sha':None} for path in manifest['transient']]
+          tree=api('/git/trees','POST',{'base_tree':base,'tree':entries})['sha']
+          commit=api('/git/commits','POST',{'message':'feat(#408,#411): add local model transport and v90 deployment handoff\n\nExact rendered-prompt tokenization, loopback-only LM Studio transport, durable per-cell reservations, raw failures and mock HTTP tests. Synthetic development fixtures only; no real model run, paid calls or old IA generation. Remove one-shot delivery assets.','tree':tree,'parents':[expected]})['sha']
+          assert api('/git/ref/heads/'+branch)['object']['sha']==expected,'Concurrent branch change; do not update ref'
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          assert api('/git/ref/heads/'+branch)['object']['sha']==commit
+          result={'repository':repo,'branch':branch,'base_commit':manifest['base_commit'],'delivery_commit':expected,'published_commit':commit,'tree':tree,'files':manifest['files'],'transient_removed':manifest['transient'],'run_id':os.environ['GITHUB_RUN_ID'],'actual_model_calls':0,'scope':'tested mock transport; no real Qwen/LM Studio inference or independent review'}
+          (out/'publication.json').write_text(json.dumps(result,ensure_ascii=False,indent=2)+'\n')
+          pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('# v90 local transport publication\n\n```json\n'+json.dumps(result,ensure_ascii=False,indent=2)+'\n```\n')
+          print(json.dumps(result,ensure_ascii=False,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: model-aware-v90-local-transport-evidence
+          path: ${{ runner.temp }}/v90-evidence/
+          retention-days: 30
+          if-no-files-found: error
