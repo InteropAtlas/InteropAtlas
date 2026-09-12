@@ -1,0 +1,116 @@
+name: SELECT-408-002 selector stability, fixed pool only
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-selection-stability-v95-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: select-408-002
+  cancel-in-progress: false
+jobs:
+  stability:
+    if: github.repository == 'InteropAtlas/InteropAtlas' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    env:
+      P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+      LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify current selector boundary before dispatch
+        id: validation
+        shell: bash
+        run: |
+          set -euo pipefail
+          O="$RUNNER_TEMP/select408002-evidence"
+          mkdir -p "$O"
+          python "$P/test_selection_policy.py" --output "$O/selection-tests.json"
+          python "$P/test_format_adapter.py" --output "$O/format-tests.json"
+          python "$P/test_workflow.py" --output "$O/workflow-tests.json"
+          python -m py_compile "$P/selection-stability-pilot/run.py"
+          python - <<'PY'
+          import ast,pathlib
+          p=pathlib.Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/selection-stability-pilot/run.py')
+          s=p.read_text(); assert "SOURCE_CELL='cell-2-simple-411921'" in s
+          assert "('original',52001)" in s and "('reversed',52002)" in s
+          assert "new_names':0" in s and "quality_ground_truth':None" in s
+          ast.parse(s)
+          PY
+      - name: Prepare exact model and frozen stability plan
+        id: setup
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/select408002-runtime"
+          mkdir -p "$R"
+          curl --fail --location --max-time 120 "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/$LLAMA_REV" -o "$R/llama.tar.gz"
+          tar -xzf "$R/llama.tar.gz" -C "$R"
+          cmake -S "$R/llama.cpp-$LLAMA_REV" -B "$R/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DBUILD_SHARED_LIBS=OFF
+          cmake --build "$R/build" --target llama-server -j 4
+          python "$P/selection-stability-pilot/run.py" prepare --output "$RUNNER_TEMP/select408002-evidence/model" --runtime "$R"
+      - name: Execute four fixed-pool selection requests
+        id: selection
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/select408002-runtime"
+          "$R/build/bin/llama-server" -m "$R/model.gguf" --host 127.0.0.1 --port 8081 -c 8192 -t 4 -tb 4 -np 1 -b 512 -ub 128 --alias SELECT-408-002-Qwen4B > "$RUNNER_TEMP/select408002-evidence/model/server.log" 2>&1 &
+          PID=$!
+          trap 'kill "$PID" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import urllib.request,time
+          for _ in range(90):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8081/health',timeout=2) as r:
+                      if r.status==200: break
+              except Exception: time.sleep(1)
+          else: raise RuntimeError('model_server_not_ready')
+          PY
+          python -u "$P/selection-stability-pilot/run.py" execute --output "$RUNNER_TEMP/select408002-evidence/model"
+      - name: Preserve raw evidence and deterministic stability metrics
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VALIDATION: ${{ steps.validation.outcome }}
+          SETUP: ${{ steps.setup.outcome }}
+          SELECTION: ${{ steps.selection.outcome }}
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib,json,os,pathlib,subprocess,urllib.request,urllib.error
+          repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';source=os.environ['GITHUB_SHA']
+          base='https://api.github.com/repos/'+repo
+          def api(path,method='GET',body=None):
+              q=urllib.request.Request(base+path,method=method,data=json.dumps(body,ensure_ascii=False).encode() if body is not None else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(q,timeout=60) as r:return json.load(r)
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'select408002-evidence';files={};size=0
+          for path in sorted(root.rglob('*')) if root.exists() else []:
+              if not path.is_file() or path.name=='model.gguf': continue
+              raw=path.read_bytes(); size+=len(raw); assert size<5_000_000
+              files[str(path.relative_to(root))]={'sha256':hashlib.sha256(raw).hexdigest(),'content':raw.decode('utf-8')}
+          summary=json.loads((root/'model/summary.json').read_text()) if (root/'model/summary.json').exists() else None
+          result={'run_id':os.environ['GITHUB_RUN_ID'],'source_commit':source,'validation':os.environ['VALIDATION'],'setup':os.environ['SETUP'],'selection':os.environ['SELECTION'],'new_names':0,'paid_api_calls':0,'quality_ground_truth':None,'independent_review':False,'files':files}
+          home='03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/selection-stability-pilot/results'
+          entries=[{'path':home+'/evidence.json','mode':'100644','type':'blob','content':json.dumps(result,ensure_ascii=False,indent=2)+'\n'}]
+          if summary: entries.append({'path':home+'/summary.json','mode':'100644','type':'blob','content':json.dumps(summary,ensure_ascii=False,indent=2)+'\n'})
+          for attempt in range(3):
+              current=api('/git/ref/heads/'+branch)['object']['sha']
+              if current!=source:
+                  cmp=api('/compare/'+source+'...'+current); assert cmp['merge_base_commit']['sha']==source and cmp['status']=='ahead'
+              try:
+                  api('/contents/'+home+'/evidence.json?ref='+current); raise RuntimeError('result_destination_exists')
+              except urllib.error.HTTPError as e:
+                  if e.code!=404: raise
+              tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+current)['tree']['sha'],'tree':entries})['sha']
+              commit=api('/git/commits','POST',{'message':'evidence(#408): preserve SELECT-408-002 controlled selector stability run\n\nExisting six-name pool only; order/seed variation, no name generation, no quality-ground-truth or stable-method claim.','tree':tree,'parents':[current]})['sha']
+              if api('/git/ref/heads/'+branch)['object']['sha']!=current: continue
+              try: api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False}); break
+              except urllib.error.HTTPError as e:
+                  if e.code not in (409,422) or attempt==2: raise
+          else: raise RuntimeError('publication_concurrency_exhausted')
+          print(json.dumps({'commit':commit,'run_id':os.environ['GITHUB_RUN_ID'],'files':len(files),'bytes':size,'selection':os.environ['SELECTION']}))
+          PY
