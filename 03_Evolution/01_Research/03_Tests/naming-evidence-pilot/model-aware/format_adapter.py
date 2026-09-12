@@ -1,9 +1,7 @@
-"""Lossless boundary normalization for model JSON envelopes.
+"""Bounded lossless JSON-envelope normalization; original bytes stay authoritative.
 
-This module may repair only representation differences whose semantic payload is
-fully present and mechanically provable. Raw model bytes remain authoritative and
-must be stored separately by the caller. It never invents candidates, IDs,
-decisions, reasons or screening facts.
+Only complete unambiguous candidate arrays and the exact output_contract wrapper
+are accepted. No field, decision, ID, reason, risk or missing answer is invented.
 """
 from __future__ import annotations
 import json
@@ -30,50 +28,54 @@ def _valid_candidate_rows(value: Any) -> bool:
 
 
 def normalize(raw: bytes, question: dict) -> tuple[bytes, dict]:
-    """Return normalized bytes plus an audit record; unsafe differences stay raw."""
     value = _decode(raw)
     stage = question.get('stage')
-    audit = {'schema_version': 1, 'stage': stage, 'raw_sha256': p.digest(raw),
+    audit = {'schema_version': 2, 'stage': stage, 'raw_sha256': p.digest(raw),
              'changed': False, 'action': 'none', 'semantic_fields_added': False,
              'semantic_fields_removed': False, 'limits': 'Representation-only; semantic truth is not assessed.'}
-
-    if stage == 'proposal' and isinstance(value, list):
-        if not _valid_candidate_rows(value):
+    original = value
+    wrapped = isinstance(value, dict) and set(value) == {'output_contract'}
+    if wrapped:
+        value = value['output_contract']
+    if stage == 'proposal':
+        rows = value if isinstance(value, list) else value.get('candidates') if isinstance(value, dict) and set(value) == {'candidates'} else None
+        if not _valid_candidate_rows(rows):
             audit['action'] = 'refused_candidate_array_not_complete_exact_contract'
             return raw, audit
-        normalized = p.canonical({'candidates': value})
-        audit.update(changed=True, action='wrap_complete_candidate_array_in_candidates_object',
-                     normalized_sha256=p.digest(normalized), rows=len(value))
-        return normalized, audit
-
-    if stage != 'proposal' and isinstance(value, dict) and isinstance(value.get('reviews'), list):
+        maximum = question.get('maximum_candidates')
+        if maximum is not None and (type(maximum) is not int or len(rows) > maximum):
+            audit['action'] = 'refused_candidate_count'; return raw, audit
+        if wrapped or isinstance(original, list):
+            value = {'candidates': rows}
+            action = 'unwrap_exact_output_contract' if wrapped else 'wrap_complete_candidate_array_in_candidates_object'
+        else:
+            return raw, audit
+    else:
+        if not isinstance(value, dict) or set(value) != {'reviews'} or not isinstance(value['reviews'], list):
+            audit['action'] = 'refused_ambiguous_or_unknown_review_envelope'; return raw, audit
         items = question.get('items')
-        if not isinstance(items, list):
-            audit['action'] = 'refused_review_without_input_items'
-            return raw, audit
-        names = {row.get('id'): row.get('name') for row in items
-                 if isinstance(row, dict) and isinstance(row.get('id'), str) and isinstance(row.get('name'), str)}
+        if not isinstance(items, list) or not items or not all(isinstance(v, dict) and isinstance(v.get('id'), str) and isinstance(v.get('name'), str) for v in items):
+            audit['action'] = 'refused_review_without_input_items'; return raw, audit
+        names = {v['id']: v['name'] for v in items}
+        rows = value['reviews']
+        if len(names) != len(items) or len(rows) != len(items) or not all(isinstance(v, dict) and isinstance(v.get('id'), str) for v in rows) or {v['id'] for v in rows} != set(names):
+            audit['action'] = 'refused_review_coverage_or_input_ambiguity'; return raw, audit
         normalized_rows, removed = [], []
-        for row in value['reviews']:
-            if not isinstance(row, dict):
-                audit['action'] = 'refused_review_non_object'
-                return raw, audit
+        for row in rows:
             keys = set(row)
-            if keys == REVIEW_FIELDS:
-                normalized_rows.append(row)
-                continue
-            if keys == REVIEW_FIELDS | {'name'} and row.get('id') in names and row.get('name') == names[row['id']]:
-                normalized_rows.append({key: row[key] for key in ('id', 'decision', 'reason')})
+            if keys not in (REVIEW_FIELDS, REVIEW_FIELDS | {'name'}) or row.get('decision') not in ('keep', 'hold', 'drop') or not isinstance(row.get('reason'), str) or not row['reason'].strip():
+                audit['action'] = 'refused_review_extra_or_mismatched_field'; return raw, audit
+            if 'name' in row:
+                if row['name'] != names[row['id']]:
+                    audit['action'] = 'refused_review_extra_or_mismatched_field'; return raw, audit
                 removed.append({'id': row['id'], 'field': 'name', 'value_sha256': p.digest(row['name'].encode())})
-                continue
-            audit['action'] = 'refused_review_extra_or_mismatched_field'
-            audit['refused_id'] = row.get('id')
+            normalized_rows.append({k: row[k] for k in ('id', 'decision', 'reason')})
+        if not wrapped and not removed:
             return raw, audit
-        if removed:
-            normalized_value = dict(value, reviews=normalized_rows)
-            normalized = p.canonical(normalized_value)
-            audit.update(changed=True, action='remove_exact_redundant_review_name_fields',
-                         normalized_sha256=p.digest(normalized), removed=removed)
-            return normalized, audit
-
-    return raw, audit
+        value = {'reviews': normalized_rows}
+        action = 'unwrap_exact_output_contract' if wrapped else 'remove_exact_redundant_review_name_fields'
+        audit['removed'] = removed
+    normalized = p.canonical(value)
+    audit.update(changed=True, action=action, normalized_sha256=p.digest(normalized),
+                 exact_outer_wrapper_removed=wrapped)
+    return normalized, audit
