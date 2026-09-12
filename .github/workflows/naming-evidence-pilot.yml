@@ -113,6 +113,15 @@ jobs:
           cmp "$OUT/transport-tests.json" "$OUT/transport-repeat.json"
           python "$P/local_runner.py" tasks --output-dir "$OUT/development-tasks"
           python -m py_compile "$P/local_runner.py" "$P/test_local_runner.py"
+      - name: Verify standalone development workflow with explicit mocks
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          python "$P/test_workflow.py" --output "$OUT/workflow-tests.json"
+          python "$P/test_workflow.py" --output "$OUT/workflow-repeat.json"
+          cmp "$OUT/workflow-tests.json" "$OUT/workflow-repeat.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:

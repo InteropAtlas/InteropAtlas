@@ -1,6 +1,6 @@
 # 模型与预算感知命名 · 实验入口 v0.1
 
-状态：v90 已增加本地传输与分词入口；真实模型尚未接入。不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
+状态：v91 已增加连续开发工作流；真实模型尚未接入。不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
 
 授权：[本轮记录](https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522)。执行者：OpenAI / ChatGPT / GPT-6 Astra Pro。用户要求先重构并判断方法是否有用，不继续旧候选主线。本轮只实现协议、配置、离线任务包及确定性测试；无模型调用、无新名称、无现实查询、无付款或方法晋升。
 
@@ -147,3 +147,49 @@ python "$P/local_runner.py" run --prepared /tmp/naming-prepared   --run-root ./l
 - [LM Studio模型访问](https://lmstudio.ai/docs/python/manage-models/loading)
 - [LM Studio兼容接口](https://lmstudio.ai/docs/developer/openai-compat)
 - [Ollama只读模型列表](https://docs.ollama.com/api/tags)
+
+
+<a id="workflow-v91"></a>
+
+## 9. v91：无需外部助手控制的开发流程
+
+本轮授权见 #408 中的 v91 实施记录。新增 [实验 Skill](SKILL.md) 和 `workflow.py`：程序负责阶段转换，用户选定的同一个本地模型负责提案与判断。不再以“识别后把结果发回ChatGPT”作为运行依赖。
+
+### 9.1 已串联的实际路径
+
+输入为已整理、冻结的开发简报。简洁组一次直接提出最多6项；重构组将同样生成输出上限分到关系、变化和独立身份三条请求，每条最多2项。上述视角与数量是v91实验切片，不是通用最佳方案。程序保留原文并精确去重，将同一个候选池先做真正不含说明的名称评审，再以独立请求审阅说明，随后抽查淘汰项。评审只见匿名ID与当前必要材料，不见路线及生成者排名；同一模型不同请求仍不是独立专家。
+
+`advance`连续执行一轮，最多6次调用（简洁组最多4次）；有错误、预算不足或实质证据缺失才停止，不等待每步“继续”。缓存校验输入和输出，已完成步骤不重复调用。执行锁冲突、源码/计划变化、错误JSON、漏评或ID变化均保持阻塞，不把结构失败悄悄补写为成功。计划中的总预算是上限，不保证每个任务或第二轮一定有足够余额。
+
+反馈由用户或获授权的本地Agent录入，保存原话与来源。下一轮只使用明确`next_instruction`，不把偏好理由自动泛化；已授权的`brief_patch`可纠正使命/名称职责等软表示，但不能改对象与硬约束。所有轮次仍使用同一本预算账本。原始简报、各轮结果和反馈不回改。
+
+### 9.2 运行与证据接口
+
+沿用v90本机服务限制、加载实例和SDK要求；无需向这个聊天传probe结果。模型部署信息由实际使用者/Agent在本机一次绑定。命令示例不代表目标部署已核实：
+
+```bash
+P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+python "$P/local_runner.py" tasks --output-dir ./naming-dev-tasks
+python "$P/workflow.py" init --config "$P/experiment.json" --task ./naming-dev-tasks/DEV-01.json \
+  --workdir ./naming-session --endpoint http://127.0.0.1:1234 --model "$MODEL_ID" \
+  --revision "$WEIGHTS_REVISION" --runtime-version "$RUNTIME_VERSION" --method redesign
+python "$P/workflow.py" advance --workdir ./naming-session --execute
+```
+
+`--diagnostic-preview-authorized`只能在init时明确开启，允许查看本次虚构任务的诊断材料，不增加现实采用权限。默认没有候选展示，先等待筛查证据。没有外部查证执行器时停在`awaiting_screening_evidence`，不是让生成模型把unknown改成pass，也不是已完成全自动现实尽调。
+
+`report.json`是可重建的当前投影；`plan.json`、`steps/`、`calls/`、`round-N.json`与追加的反馈/筛查记录是原始执行依据。结构出错时report写blocked且不再保留旧可展示列表。路径内可能有敏感模型输出，不自动上传仓库。
+
+证据文件通过`screening --workdir ... --file ...`接入，含当前`round_digest`、候选ID、status、reviewer_ref、scope及evidence（本地file、sha256、source_ref、checked_at）。校验源字节与试行7天新鲜度窗口，不代表核查范围充分或结论正确。可追加更正版本，原记录不覆盖。接入外部查询工具的实际执行与认证仍未实现。
+
+反馈通过`feedback --workdir ... --file ...`接入，再运行advance。反馈含当前`round_digest`、source_ref、verbatim、action（continue_search/stop/accept_for_research）、candidate_ids。继续时另需next_instruction；修改简报另需brief_change_authorized=true和brief_patch。错误反馈在落库前拒绝，不占用唯一反馈位置。accept_for_research必须引用已获准展示的候选，仅完成研究意见采集，不登记实际采用。
+
+### 9.3 本轮验证与剩余边界
+
+`test_workflow.py`在真实回环HTTP栈上使用明确的模拟服务与分词器，覆盖两组阶段顺序、评审输入分离、淘汰抽查、证据检查点、反馈续接、保留原简报、预算耗尽及断点不重发。所有TEST_ONLY条目只是程序夹具。实际语言模型调用0，真实语义质量/可采用性与跨任务效果均未测试。
+
+本轮修改local_runner只增加“请求可降低输出上限”和“冻结采样seed”两个可选参数；旧默认行为和预算上限保留。首轮新增测试随报告行为修改出现一条期待不一致：新程序已经写入blocked报告，旧期待仍要求没有report文件。已改为明确检查blocked且display为空，失败输出保留在本轮证据中，不隐去。
+
+当前不是全部方案已经完成：自动理解自然语言并校准简报、由模型提出并比较探索路线、真实域名/身份/商标查询适配、完整A/B/C跨模型试验及独立语义复核仍未完成。B旧方法未被压缩成simple组；当前A/C运行器切片也不代表整套新旧方法验证。程序已有连续调用与本地反馈接口，没有开发者补救这一默认节点。
+
+复跑新测试：`python "$P/test_workflow.py" --output /tmp/workflow-tests.json`。这是同作者工程验证，正式方法效果须以真实模型与真实评价另行报告。

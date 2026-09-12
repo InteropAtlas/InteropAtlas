@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 90
+  snapshot_version: 91
   skill_version: 0.4.0
 
 lineage:
@@ -101,12 +101,9 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: run_local_transport_on_actual_deployment_then_implement_full_comparison
-  rationale: >-
-    Owner明确要求先重构和验证方法而非续跑旧命名主线。模型/预算感知实验入口已实施；下一步绑定实际本地部署、精确配置和开发任务，
-    在有边界的计划中开展真实模型比较。没有部署访问或完整任务材料时，保留not_run，不把本轮程序测试写成已适配Qwen。
-    内部技术步骤连续执行；.com/商标、候选、偏好和旧证据不变，不恢复G0–G8、不启动旧IA候选生成、不付费或晋升。
-  requires_owner: false_for_internal_implementation_non_resolvable_runtime_or_material_access_only
+  action: validate_standalone_development_workflow_on_actual_local_deployment
+  rationale: 先取得无需外部助手接管的一轮真实模型材料，随后比较A/C开发切片。不要继续扩充泛用校验器；没有实际部署时保持not_tested。
+  requires_owner: only_for_actual_environment_or_substantive_feedback_not_internal_steps
 
 stop:
   status: generation_paused_process_review_active
@@ -621,7 +618,7 @@ live_validation:
 # v89：当前方法重构入口；旧试行/暂停解释保留历史，不提供新生成权限。
 model_aware_rebuild:
   id: MAM-408-001
-  status: local_transport_implemented_actual_deployment_not_connected
+  status: standalone_development_workflow_implemented_real_model_unbound
   primary_issue: 408
   dependent_naming_issue: 411
   baseline_commit: 64b973c5c21e4a13accbbf79bf5ad619996f8dcb
@@ -691,3 +688,26 @@ model_aware_rebuild:
     full_method_comparison: not_implemented
     actual_model_calls: 0
     old_protocol_and_skill_bytes_unchanged: true
+
+# v91：运行阶段由程序续接，不将外部开发者作为默认控制中心。
+standalone_workflow:
+  version: '0.1.0-experimental'
+  baseline_commit: f1d29f066547624ec28c313c160aec81664e399a
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645696051
+  primary_issue: 408
+  entry: naming-evidence-pilot/model-aware/workflow.py
+  skill: naming-evidence-pilot/model-aware/SKILL.md
+  tests: naming-evidence-pilot/model-aware/test_workflow.py
+  stages: [frozen_brief, separate_proposals, name_only_review, explanation_review, rejection_audit, evidence_checkpoint, owner_feedback]
+  current_task_scope: synthetic_development_only
+  external_assistant_required: false
+  real_model_runs: 0
+  engineering_verification: mock_http_workflow_not_model_efficacy
+  actual_semantic_review: not_performed
+  actual_reality_search: not_performed
+  independent_expert_review: not_performed
+  route_planning: fixed_experimental_lenses_not_intelligent_controller
+  feedback_resume: bounded_no_budget_refill_no_inferred_hard_preferences
+  missing: [actual_model_binding, automatic_brief_calibration, adaptive_route_planning, reality_query_adapter, full_method_model_comparison]
+  old_ia_naming_resumed: false
+  stable_skill_changed: false

@@ -128,7 +128,8 @@ def model_snapshot(client: LocalHTTP, model_id: str) -> tuple[dict, bytes]:
 
 def prepare(config: dict, task: dict, origin: str, model_id: str, revision: str,
             runtime_version: str, method: str, role: str, output: Path,
-            attest_local: bool = False, sdk=None) -> dict:
+            attest_local: bool = False, sdk=None, output_limit: int | None = None,
+            sampling_seed: int | None = None) -> dict:
     """Only a synthetic development diagnostic can be bound by this helper.
 
     The explicitly supplied weights revision is an operator assertion, not a
@@ -141,6 +142,10 @@ def prepare(config: dict, task: dict, origin: str, model_id: str, revision: str,
         raise RunnerError('helper_only_binds_synthetic_development_not_ia_or_holdout')
     if not revision.strip() or not runtime_version.strip():
         raise RunnerError('explicit_weights_revision_and_runtime_version_required')
+    if output_limit is not None and (type(output_limit) is not int or not 0 < output_limit <= config['budgets']['max_output_tokens_per_call']):
+        raise RunnerError('per_request_output_limit_must_fit_frozen_cap')
+    if sampling_seed is not None and (type(sampling_seed) is not int or not 0 <= sampling_seed < 2**31):
+        raise RunnerError('invalid_sampling_seed')
     origin = endpoint(origin)
     c = copy.deepcopy(config)
     if c['default_mode'] != 'local_only' or c['authorization']['paid_calls']:
@@ -160,7 +165,7 @@ def prepare(config: dict, task: dict, origin: str, model_id: str, revision: str,
     profile.update(deployment_id=model_id, revision=revision, quantization=quant,
         runtime_version=runtime_version, context_limit_tokens=observed['context_limit_tokens'],
         token_counter='lmstudio.loaded_model.tokenize.rendered_prompt', reasoning_mode='frozen_prompt_template_no_inference_override',
-        sampling={'temperature': 0.7, 'top_p': 0.9, 'seed': 41190}, identity_verified=True,
+        sampling={'temperature': 0.7, 'top_p': 0.9, 'seed': 41190 if sampling_seed is None else sampling_seed}, identity_verified=True,
         execution_location='local', billing='unmetered_local',
         roles={r: 'untested' for r in p.ROLES})
     c['local_transport'] = {'backend': 'lmstudio_raw_completion', 'endpoint': origin,
@@ -173,6 +178,8 @@ def prepare(config: dict, task: dict, origin: str, model_id: str, revision: str,
         'evidence_ref': 'prepared:wire-request.json',
         'scope': 'single_stateless_request_not_independent_reviewer_or_training_blindness'}
     request = p.packet(c, t, 'local', method, role)
+    if output_limit is not None:
+        request['max_output_tokens'] = output_limit
     messages = [{'role': 'system', 'content': SYSTEM},
                 {'role': 'user', 'content': p.canonical(request['model_input']).decode()}]
     # The instance has already been observed loaded; no download/load endpoint is used.
