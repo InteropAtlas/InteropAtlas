@@ -38,7 +38,9 @@ class Handler(t.Handler):
                 rows.append(row)
             answer = {'candidates': rows}
         else:
-            answer = {'reviews': [{'id': v['id'], 'decision': 'drop' if v['id'] == 'C001' and stage != 'independent_recheck' else 'keep',
+            reversed_explained = stage == 'with_explanation' and q['items'] and q['items'][0]['id'] != 'C001'
+            answer = {'reviews': [{'id': v['id'],
+                'decision': ('keep' if v['id'] != 'C001' or reversed_explained else 'drop'),
                 'reason': 'TEST_ONLY_JUDGMENT_NOT_SEMANTIC_EVIDENCE'} for v in q['items']]}
             if self.mode == 'missing_review': answer['reviews'] = []
         output = '{' if self.mode == 'invalid_json' else json.dumps(answer)
@@ -73,7 +75,7 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(len(Handler.posts), 6)
         self.assertEqual(out['status'], 'awaiting_screening_evidence'); self.assertEqual(out['display'], [])
         self.assertEqual(out['costs']['mock_attempts'], 6); self.assertEqual(out['costs']['real_service_attempts'], 0)
-        self.assertEqual([q['stage'] for q, _ in Handler.questions], ['proposal']*3 + ['name_only', 'with_explanation', 'independent_recheck'])
+        self.assertEqual([q['stage'] for q, _ in Handler.questions], ['proposal']*3 + ['name_only', 'with_explanation', 'with_explanation'])
     def test_blind_inputs_and_route_separation(self):
         self.init(); self.run_flow()
         for q, data in Handler.questions[:3]:
@@ -123,9 +125,12 @@ class WorkflowTests(unittest.TestCase):
         self.assertEqual(len(Handler.posts), 4)
         self.assertEqual(p.read(self.root/'report.json')['status'], 'blocked')
         self.assertEqual(p.read(self.root/'report.json')['display'], [])
-    def test_rejection_audit_keeps_disagreement_visible(self):
+    def test_order_crosscheck_moves_disagreement_to_hold(self):
         self.init();self.run_flow();r1=p.read(self.root/'round-1.json')
-        self.assertEqual(r1['audit_disagreement_ids'], ['C001']);self.assertIn('C001',r1['intrinsic_shortlist_ids'])
+        self.assertEqual(r1['order_disagreement_ids'], ['C001'])
+        self.assertIn('C001',r1['hold_ids']);self.assertNotIn('C001',r1['priority_ids'])
+        self.assertNotIn('C001',r1['not_pursued_ids']);self.assertIn('C001',r1['intrinsic_shortlist_ids'])
+        self.assertEqual(r1['audit'],[])
     def test_exact_duplicates_retained_in_raw_removed_in_pool(self):
         self.init();Handler.mode='duplicate';self.run_flow();r1=p.read(self.root/'round-1.json')
         self.assertEqual(len(r1['pool']),1);self.assertEqual(r1['exact_duplicates_removed'],5)

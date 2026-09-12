@@ -1,7 +1,7 @@
 """Self-contained, resumable *development* naming workflow; no ChatGPT dependency.
 
-Frozen brief -> isolated proposals -> name-only review -> explained review ->
-rejection audit -> supplied screening evidence -> substantive owner feedback.
+Frozen brief -> isolated proposals -> name-only review -> two-order explained crosscheck ->
+supplied screening evidence -> substantive owner feedback.
 No web searches, paid backend, IA/holdout tasks, silent retries or adoption.
 """
 from __future__ import annotations
@@ -72,7 +72,7 @@ def initialize(root: Path, config: dict, task: dict, runtime: dict, method='simp
     # Fixed per-session identity, not a license to reset a running ledger.
     nonce = p.digest(p.canonical({'task': clean, 'runtime': runtime, 'method': method, 'seed': seed, 'path': str(root.resolve())}))[:16]
     c['experiment_id'] += '-flow-' + nonce
-    plan = {'schema_version': 2, 'selection_policy': selection.VERSION, 'created_at': r.now(), 'task': clean, 'config': c,
+    plan = {'schema_version': 3, 'selection_policy': selection.VERSION, 'created_at': r.now(), 'task': clean, 'config': c,
             'runtime': runtime, 'method': method, 'max_rounds': rounds, 'seed': seed,
             'diagnostic_preview_authorized': bool(diagnostic_preview), 'source_hashes': source_hashes(),
             'candidate_target': 6, 'generation_output_allowance': c['budgets']['max_output_tokens_per_call'],
@@ -244,26 +244,22 @@ def compute_round(root, plan, round_no, backend, instruction=''):
                                'select', plan['review_output_allowance'], backend), ids)
     explained = reviews(step_call(root, plan, prefix + 'explained', review_question('with_explanation', pool),
                                  'select', plan['review_output_allowance'], backend), ids)
-    dropped = [v['id'] for v in explained if v['decision'] == 'drop']
-    # No cardinal scores: a deterministic boundary proxy plus a random rejected item.
-    boundary = [v['id'] for v in surface if v['decision'] != 'drop' and v['id'] in dropped]
-    sampled = (boundary or dropped)[:1]
-    rest = [v for v in dropped if v not in sampled]
-    if rest:
-        sampled += random.Random(plan['seed'] + 1000 + round_no).sample(rest, 1)
-    audit = []
-    if sampled:
-        selected = [v for v in pool if v['id'] in sampled]
-        audit = reviews(step_call(root, plan, prefix + 'audit', review_question('independent_recheck', selected),
-                                  'select', plan['review_output_allowance'], backend), sampled)
-    disputed = {v['id'] for v in audit if v['decision'] != 'drop'}
-    kept = [v['id'] for v in explained if v['decision'] != 'drop' or v['id'] in disputed]
+    # SELECT-408-002 showed strong order sensitivity. Re-run the exact same
+    # selection task with the same seed and reversed item order. This is not an
+    # independent expert; it is a conservative single-model stability check.
+    reverse_pool = list(reversed(pool))
+    explained_reverse = reviews(step_call(root, plan, prefix + 'explained_reverse',
+        review_question('with_explanation', reverse_pool), 'select',
+        plan['review_output_allowance'], backend), ids)
+    queues = selection.order_crosschecked_queues(pool, explained, explained_reverse)
+    kept = [v['id'] for v in pool if v['id'] not in queues['not_pursued_ids']]
     result = {'round': round_no, 'pool': pool, 'surface': surface, 'explained': explained,
-              'audit': audit, 'rejected_sample_ids': sampled, 'audit_disagreement_ids': sorted(disputed),
+              'explained_reverse': explained_reverse,
+              'audit': [], 'rejected_sample_ids': [], 'audit_disagreement_ids': [],
               'intrinsic_shortlist_ids': kept, 'exact_duplicates_removed': duplicate_count,
-              'review_independence': 'separate_requests_same_model_not_independent_expert',
+              'review_independence': 'two_order_permutations_same_model_same_seed_not_independent_experts',
               'semantic_truth': 'not_programmatically_verified', 'reality_clearance': 'not_assessed'}
-    result.update(selection.resource_queues(result))
+    result.update(queues)
     result['unverified_inquiries'] = selection.inquiry_register(pool)
     rp = root / ('round-' + str(round_no) + '.json')
     if rp.exists():
@@ -371,7 +367,7 @@ def _advance(root: Path, execute=False, backend=None):
             summary = {'status': status, 'round': round_no, 'round_digest': p.digest(p.canonical(result)),
                 'diagnostic_only': plan['diagnostic_preview_authorized'],
                 'display': [dict(v, intrinsic_decision=next(x['decision'] for x in result['explained'] if x['id'] == v['id']),
-                    audit_disagreement=v['id'] in result['audit_disagreement_ids']) for v in result['pool'] if v['id'] in visible],
+                    audit_disagreement=False, order_disagreement=v['id'] in result.get('order_disagreement_ids', [])) for v in result['pool'] if v['id'] in visible],
                 'priority_ids': result['priority_ids'], 'hold_ids': result['hold_ids'],
                 'not_pursued_ids': result['not_pursued_ids'],
                 'unresolved_screening_ids': unknown, 'costs': summarize_calls(root),
