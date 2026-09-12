@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 85
+  snapshot_version: 86
   skill_version: 0.4.0
 
 lineage:
@@ -101,10 +101,10 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: reconcile_remaining_search_runtime_and_screening_evidence_without_generation
+  action: design_and_run_anonymous_synthetic_control_cases_no_new_names
   rationale: >-
-    Mission/Value 与 Name Job 已作有来源的当前重建，商业域名边界保持 v84。下一步定向核对搜索/调度、实际运行及筛查证据；缺失继续记 unknown。
-    先验证留痕与恢复合同，不生成新名称；只有以后明确获准时才将试行用于真实新批次。
+    v86 已完成有边界的搜索/调度、运行与筛查证据对账；找回历史摘要与精确指针，但真实输入/全量输出/查询来源仍不完整。
+    停止重复全量追溯，下一步用匿名合成情境验证控制问题，不声称历史重放，不生成新名称；有新的具体原始来源时再重开追溯。
   requires_owner: false_for_method_review
 
 stop:
@@ -112,8 +112,8 @@ stop:
   reason: Owner explicitly requested process/data review instead of new names
 
 audit_recovery:
-  status: mission_value_and_name_job_reconstructed_remaining_evidence_partial
-  review_section: organization-naming-411-process-review-v0.1.md#state-recovery-v85
+  status: bounded_evidence_reconciliation_complete_capture_incomplete
+  review_section: organization-naming-411-process-review-v0.1.md#evidence-reconciliation-v86
   supersedes_interpretation: v82_primary_cause_and_latent_preference_claims_are_provisional
   historical_assertion_policy: preserve_without_reaffirming_unverified_reality_or_preference_claims
   recovered_current_state:
@@ -134,16 +134,16 @@ audit_recovery:
     snapshot: 80
     detail: batch_claims_all_org_available_but_candidate_says_not_checked
     disposition: unresolved_no_current_availability_assertion
-  evidence_search_limit: selected_snapshots_and_issue_records_not_all_history
+  evidence_search_limit: v86_bounded_scope_in_rnd130_reconstruction_not_all_private_or_external_history
   interpretation_rules:
     - owner_verbatim_and_controller_inference_must_be_separate
     - absence_in_inspected_artifact_is_not_proof_of_no_execution
     - reconstructed_artifacts_must_not_claim_original_execution
   generation_resume_readiness: false
   remaining:
-    - locate_actual_RND130_input_output_filter_and_owner_feedback_sources
+    - reopen_RND130_primary_source_search_only_when_a_new_concrete_locator_is_available
     - resolve_or_mark_unrecoverable_each_evidence_gap
-    - reconcile_remaining_search_scheduler_runtime_and_reality_evidence_with_precise_pointers
+    - run_anonymous_synthetic_control_cases_with_recorded_inputs_outputs_no_new_names
     - execute_comparative_regression_with_recorded_outputs
 
 evidence_pilot:
@@ -501,3 +501,33 @@ decision_criteria:
   owner_final_adoption_required: true
   preference_reason_status: PREF-SEMANTIC-DENSITY-OVER-PHONETIC-SMOOTHNESS remains controller_inference_pending_validation
   no_new_numeric_weights: true
+
+# v86：对账结论与原始证据缺口分开；详细来源仅保存在既有重建记录中。
+evidence_reconciliation:
+  id: REC-411-V86
+  status: bounded_reconciliation_complete_not_replayable
+  baseline_commit: d4aaf5d773dee7d25459cc90e36cb98d437ba5ad
+  record: naming-evidence-pilot/rnd130-reconstruction.json
+  check: naming-evidence-pilot/rnd130-check.json
+  test: naming-evidence-pilot/test_reconciliation.py
+  history_pointers:
+    last_dedicated_scheduler: SCHED50
+    next_without_dedicated_scheduler: DROP51
+    last_dedicated_search_landscape: LAND61
+    next_without_dedicated_search_landscape: DROP62
+    last_morphotype_portfolio: POLICY79
+    next_without_morphotype_portfolio: BATCH80
+  pointer_registry: naming-evidence-pilot/rnd130-reconstruction.json#/reconciliation/source_registry
+  findings:
+    - 后续存在search_control等摘要，专用字段丢失不等于没有执行调度。
+    - v79→v80丢失形态组合记录且修改策略摘要；仅支持记录变化，不确认实际Generator输入或失败因果。
+    - 七项展示候选只有可定位的历史筛查断言；未找到原始查询，不重新确认当前可用性。
+    - RND130对应提交的CI检查文档与知识图谱，并非命名运行或现实筛查证据。
+  historical_exact_replay_ready: false
+  original_generation_or_screening_rerun: false
+  broad_history_search: closed_until_new_concrete_source
+  confirmed_unrecoverable: false
+  current_unknowns_preserved: true
+  current_mission_name_job_refs_synced_in_reconstruction: true
+  generation_paused: true
+  stable_skill_changed: false
