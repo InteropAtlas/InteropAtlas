@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 87
+  snapshot_version: 88
   skill_version: 0.4.0
 
 lineage:
@@ -101,11 +101,12 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: await_explicit_generation_authorization_then_prepare_bounded_live_trial
+  action: resolve_trial_evidence_and_prepare_next_bounded_probe_under_existing_authority
   rationale: >-
-    已连贯完成匿名控制对照、任务内最小修复、程序回归、实际状态写入保护及CI接入。
-    不再要求 Owner 对内部修复逐步回复继续；若恢复真实生成，先按试行合同建立当前搜索/调度/运行证据，不能复用历史未知为已完成。
-  requires_owner: only_for_resuming_real_generation_or_major_boundary_changes
+    LIVE-411-001已实际完成生成8项、质量优先4项及现实初筛，0项达到展示条件；不把试行未出finalist当作整个命名任务完成。
+    内部证据补查、复核和下一次有预算探测的技术准备沿用连续执行授权，不再要求Owner逐项发送继续。
+    优先处理实际证据阻塞或调整下批材料，不回退为重复工程整修；付款、注册、最终采用和稳定晋升仍不在授权内。
+  requires_owner: false_for_internal_work_final_adoption_and_spending_reserved
 
 stop:
   status: generation_paused_process_review_active
@@ -556,8 +557,10 @@ control_validation:
   operational_enforcement: 本地受保护写入入口和分支CI已接入；无管理权限将CI设置为平台required check，不宣称可拦截任意直接写入。
   owner_interaction: 内部修复/回归不逐项等待；只集中升级生成恢复、最终采用、重大边界和实际权限阻塞。
 live_trial_plan:
-  status: prepared_not_started
-  permission: generation_remains_paused
+  status: first_bounded_trial_executed_not_ready_for_exposure
+  permission: scoped_trial_authority_recorded_general_pause_not_globally_removed
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643216469
+  result_entry: naming-evidence-pilot/live-trial-001/result.md
   entry_contract: naming-evidence-pilot/contract.md#live-trial
   initial_budget: 单个有边界批次，内部最多8项；不足合格展示量则少展示或不展示，不为凑数降低门槛。
   initial_budget_status: proposed_task_local_limit_not_stable_rule
@@ -570,3 +573,47 @@ live_trial_plan:
   stop_conditions:
     - 出现证据缺口、矛盾、预算超限或新的暂停指令时，不扩大批次；保留实际输入输出和失败记录。
     - 不因一个真实批次成功而自动晋升Skill或合并PR416。
+
+# v88：当次真实试行与历史审计层分开；此处不改写v87阶段的历史结论。
+live_validation:
+  id: LIVE-411-001
+  status: bounded_trial_complete_no_exposure_ready_candidate
+  baseline_commit: 64d7896254c9a320c3632f55d41b5bb879f96cb8
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643216469
+  authority_interpretation: 相邻对话要求连续执行，解析为本次有限真实试行；不是伪造Owner逐字解除全部暂停。
+  artifacts_home: naming-evidence-pilot/live-trial-001/
+  result: naming-evidence-pilot/live-trial-001/result.md
+  verification: naming-evidence-pilot/live-trial-001/validation.json
+  reproducible_record_builder: naming-evidence-pilot/live-trial-001/check_trial.py
+  actual_generation_executed: true
+  generated: 8
+  intrinsic_prioritized: 4
+  display_eligible: 0
+  owner_candidate_review_invitation_count: 0
+  runtime_isolation: best_effort_same_context
+  independent_semantic_review: not_performed
+  budget_extended_or_extra_names_generated: false
+  active_historical_candidate_list_changed: false
+  current_trial_candidate_registry: naming-evidence-pilot/live-trial-001/generated.json
+  current_trial_dispositions: naming-evidence-pilot/live-trial-001/screening.json
+  real_evidence_capture: 冻结计划、原始名称输出、先于查询的质量判断、实际搜索/注册商观察、完整阶段去留；网页只保留必要片段，非完整供应商日志。
+  timing_limit: 初次查询仅保留日期与顺序；重查有执行者时钟起止区间，不回填供应商精确响应时刻。
+  gate_disposition: review
+  gate_errors: []
+  remaining_gate_review: [screen_result_unresolved]
+  capture_complete: false
+  capture_limit: 校验器因现实筛查未解决而保持false；不等于缺失本次原始生成，也不等于过去缺口已填补。
+  verification_run: 34671475110
+  verification_head: 6c565caca7fe6e8f4f201878e1190938094996a0
+  verification_artifact: 10290443155
+  verification_artifact_sha256: 1213896f1c5d0415094041e99df730f70bbda7eb409ca5d9532d87341a4dc082
+  repeat_record_and_checks_byte_identical: true
+  counterfactual_checks: 已知撞名强行展示被block；未知结果伪改available仍review。仅反例拷贝，没有真实错误展示。
+  overall_naming_task_complete: false
+  stable_method_promoted: false
+  purchase_registration_or_final_adoption_performed: false
+  inherited_pause_scope: process_review/audit_recovery旧暂停字段用于一般无限生成与历史恢复就绪；本次有独立限定授权，不声称程序自动批准生成。
+  remaining_substantive_barriers:
+    - 一个名称的.com不可直接注册，未获得实际取得路径；索引未命中不是身份或商标许可。
+    - 另有同名主体/产品及第三方商标申请线索，需要官方身份或商标证据，而不是让Owner凭猜测裁定。
+    - 没有独立语义复核；单次未展示批次不能证明命名质量改善或用户判断成本下降。
