@@ -1,9 +1,9 @@
-"""v94: input provenance and resource queues, not semantic truth certification."""
+"""v95: input provenance and resource queues, not semantic truth certification."""
 from __future__ import annotations
 import copy
 import protocol as p
 
-VERSION = '0.2.0-experimental'
+VERSION = '0.3.0-experimental'
 DEFAULT_METHOD = 'simple'
 STAGES = {'name_only', 'with_explanation', 'independent_recheck'}
 
@@ -22,8 +22,6 @@ def review_question(stage: str, rows: list[dict]) -> str:
             item['creator_intent'] = {k: row[k] for k in ('meaning', 'derivation')}
             item['creator_intent_status'] = 'unverified_proposal_not_linguistic_or_external_fact'
         items.append(item)
-    # Risk text remains in the original pool and the unresolved inquiry register.
-    # It is deliberately not a quality selector input or a source of verified facts.
     return p.canonical({
         'stage': stage,
         'task': '逐一评估全部给定ID，不生成名称。只完成本阶段；keep=值得优先进一步核查，hold=待证保留，drop=当前不再投入。不要凑足keep数量，也不要因不确定就一律淘汰。',
@@ -39,8 +37,53 @@ def review_question(stage: str, rows: list[dict]) -> str:
     }).decode()
 
 
+def _decision_map(rows: list[dict], ids: list[str]) -> dict[str, str]:
+    if not isinstance(rows, list) or len(rows) != len(ids):
+        raise ValueError('incomplete_crosscheck_reviews')
+    if any(not isinstance(v, dict) for v in rows):
+        raise ValueError('crosscheck_review_object_required')
+    if len({v.get('id') for v in rows}) != len(ids) or {v.get('id') for v in rows} != set(ids):
+        raise ValueError('crosscheck_ids_changed_or_duplicated')
+    decisions = {v['id']: v.get('decision') for v in rows}
+    if any(v not in ('keep', 'hold', 'drop') for v in decisions.values()):
+        raise ValueError('crosscheck_unknown_decision')
+    return decisions
+
+
+def order_crosschecked_queues(pool: list[dict], first_reviews: list[dict], second_reviews: list[dict]) -> dict:
+    """Conservative resource allocation across two order permutations.
+
+    The two reviews must cover the exact same candidate IDs. This function does
+    not decide semantic truth. It only prevents one batch ordering from being a
+    single-point priority/drop decision: keep+keep -> priority, drop+drop ->
+    not_pursued, everything else -> hold.
+    """
+    ids = [v['id'] for v in pool]
+    if not ids or len(ids) != len(set(ids)):
+        raise ValueError('duplicate_or_empty_pool_id')
+    first = _decision_map(first_reviews, ids)
+    second = _decision_map(second_reviews, ids)
+    priority = [i for i in ids if first[i] == second[i] == 'keep']
+    not_pursued = [i for i in ids if first[i] == second[i] == 'drop']
+    hold = [i for i in ids if i not in set(priority + not_pursued)]
+    disagreements = [i for i in ids if first[i] != second[i]]
+    return {
+        'priority_ids': priority,
+        'hold_ids': hold,
+        'not_pursued_ids': not_pursued,
+        'screening_queue_ids': priority,
+        'order_disagreement_ids': disagreements,
+        'decision_pairs': {i: [first[i], second[i]] for i in ids},
+        'crosscheck_semantics': 'conservative_resource_allocation_not_quality_truth',
+        'priority_semantics': 'keep_in_both_order_permutations_relative_research_investment_only',
+        'hold_semantics': 'any_hold_or_order_disagreement_preserved_not_auto_screened',
+        'semantic_truth': 'not_programmatically_verified',
+        'reality_clearance': 'not_assessed',
+    }
+
+
 def resource_queues(result: dict) -> dict:
-    """Project declared decisions; never rejudge or manufacture confidence."""
+    """Project one declared review plus optional rejection audit; legacy v94 path."""
     ids = [v['id'] for v in result['pool']]
     if len(ids) != len(set(ids)):
         raise ValueError('duplicate_pool_id')
