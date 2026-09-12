@@ -64,6 +64,19 @@ jobs:
           pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('# Naming evidence pilot\n\n```json\n'+json.dumps(summary,ensure_ascii=False,indent=2)+'\n```\n')
           print(json.dumps(summary,ensure_ascii=False,indent=2))
           PY
+      - name: Verify actual LIVE-411-001 record and exposure withholding
+        shell: bash
+        run: |
+          set -euo pipefail
+          PILOT="03_Evolution/01_Research/03_Tests/naming-evidence-pilot"
+          OUT="$RUNNER_TEMP/naming-control-evidence"
+          python "$PILOT/live-trial-001/check_trial.py" --repository . --output "$OUT/live-trial-001"
+          python "$PILOT/live-trial-001/check_trial.py" --repository . --output "$RUNNER_TEMP/live-trial-repeat"
+          for FILE in record.json checks.json summary.json; do
+            cmp "$OUT/live-trial-001/$FILE" "$RUNNER_TEMP/live-trial-repeat/$FILE"
+          done
+          # A correctly withheld trial is a successful check, not a cleared name.
+          cat "$OUT/live-trial-001/summary.json"
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
