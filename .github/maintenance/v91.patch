@@ -1,0 +1,273 @@
+--- /dev/null
++++ b/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/SKILL.md
+@@ -0,0 +1,53 @@
++---
++name: model-aware-naming-development
++version: 0.1.0-experimental
++status: development-only-not-stable
++---
++
++# 可独立执行的命名方法：开发入口
++
++这是 #408 的实验入口，不覆盖冻结的 Adaptive Naming v0.4.0。执行者是用户选定的模型/Agent，不依赖本聊天、特定供应商或另一个高价模型。当前程序入口只接受明确的虚构开发任务；真实 IA 主线、留出实验、付款、注册和最终采用不在本版本授权内。
++
++## 1. 开始之前：理解、简报、边界
++
++### 理解对象
++
++从用户给出的当前资料整理对象、使命和名称职责。名称不必逐字表达整个使命，但不能为了容易造词而换掉对象。既有来源能回答的问题不再问用户；真正改变身份理解的歧义集中说明。缺少依据写未知，不替用户编造偏好原因。
++
++### 冻结输入
++
++执行模型整理 `task.json`，包含 `id`、`record_kind=synthetic`、`scope=method_development` 和 `brief`。brief使用 `object`、`mission`、`name_jobs`、`non_jobs`、`constraints`、`confirmed_preferences`。本阶段原文与解释应分开；程序只验证基本结构，不能证明理解正确。当前已提供的两个开发简报可以直接试用，不是实际Owner认可的任务。
++
++### 选择运行方式
++
++冻结本机部署信息和预算。默认无云端、无付费。`workflow.py init` 只建计划；`advance --execute` 才调用选定的本地模型并连续推进。不要每个内部步骤询问用户，不自动升级模型，也不要让用户把中间结果搬回某位开发者审批。
++
++## 2. 一轮运行：探索、比较、核查
++
++### 探索
++
++实验简洁组为一次直接探索；实验重构组为关系、变化和身份三种视角的独立请求。这是当前可运行切片，不是最佳路线的结论。每组本轮生成输出上限相同；重构组分摊到三次请求。各路线不读取其他路线输出或排名。构词依据不能伪造词源，未知现实条件不预测为可用。原始结果先保存，再精确去重。
++
++### 比较
++
++先只给名称与匿名ID，另一次请求才给完整简短说明，生成路线和排名不进入评审包。记录keep/hold/drop及理由；hold不是通过。对前后判断不一致的淘汰项与随机淘汰项做独立请求复查，分歧保留，不自动宣称原淘汰错误。请求分离不等于独立专家或无同源偏差。
++
++### 核查
++
++生成与评审都不能批准域名、商标或现实身份。当前未接通查证服务：程序输出证据检查点，接收工具/操作者提供的源文件、哈希、时间、核查范围和审查身份；校验出处与新鲜度，不验证来源的语义或法律充分性。没有这些资料不得展示为已核查候选。明确授权的虚构任务诊断预览可先看创意，但一直标记为诊断，不是正式推荐或采用。
++
++## 3. 反馈之后：更新、停止、报告
++
++### 更新
++
++用户反馈一次性保存原话与出处。`continue_search`必须带用户明确的`next_instruction`，不可自行从“喜欢A”推导后缀偏好。需要更正简报时，用明确授权的`brief_patch`改使命/名称职责等软表示，原简报保留。不得通过该接口改变对象或硬约束。反馈装入后再次advance，由程序续接，不需要开发者参与。
++
++### 停止
++
++预算、轮次、真实证据、结构错误或未完成请求会停止后续调用。已完成步骤复用，不重发；不确定请求是否完成时不自动重试。硬边界更改需要独立确认，程序不能自己授权。`stop`停止实验；`accept_for_research`仅表示研究反馈完成，绝不是付款、法律许可或最终采用。
++
++### 报告
++
++分别报告程序链条、目标模型运行、语义质量、现实核查和实际采用。即使使用真实模型完成虚构任务，也不能统计实际采用成功。报告包括失败与未知成本，不能只统计成功候选。工程测试替身不得混作模型效果；用相同信息和资源上限比较简洁组与重构组，尚不能据单次结果宣布哪组优越。
++
++详见 [运行说明](README.md#workflow-v91)、[配置](experiment.json) 与 `workflow.py --help`。正式跨模型比较、真实命名权限与稳定方法晋升仍待后续独立验收。
+--- a/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/local_runner.py
++++ b/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/local_runner.py
+@@ -128,7 +128,8 @@
+ 
+ def prepare(config: dict, task: dict, origin: str, model_id: str, revision: str,
+             runtime_version: str, method: str, role: str, output: Path,
+-            attest_local: bool = False, sdk=None) -> dict:
++            attest_local: bool = False, sdk=None, output_limit: int | None = None,
++            sampling_seed: int | None = None) -> dict:
+     """Only a synthetic development diagnostic can be bound by this helper.
+ 
+     The explicitly supplied weights revision is an operator assertion, not a
+@@ -141,6 +142,10 @@
+         raise RunnerError('helper_only_binds_synthetic_development_not_ia_or_holdout')
+     if not revision.strip() or not runtime_version.strip():
+         raise RunnerError('explicit_weights_revision_and_runtime_version_required')
++    if output_limit is not None and (type(output_limit) is not int or not 0 < output_limit <= config['budgets']['max_output_tokens_per_call']):
++        raise RunnerError('per_request_output_limit_must_fit_frozen_cap')
++    if sampling_seed is not None and (type(sampling_seed) is not int or not 0 <= sampling_seed < 2**31):
++        raise RunnerError('invalid_sampling_seed')
+     origin = endpoint(origin)
+     c = copy.deepcopy(config)
+     if c['default_mode'] != 'local_only' or c['authorization']['paid_calls']:
+@@ -160,7 +165,7 @@
+     profile.update(deployment_id=model_id, revision=revision, quantization=quant,
+         runtime_version=runtime_version, context_limit_tokens=observed['context_limit_tokens'],
+         token_counter='lmstudio.loaded_model.tokenize.rendered_prompt', reasoning_mode='frozen_prompt_template_no_inference_override',
+-        sampling={'temperature': 0.7, 'top_p': 0.9, 'seed': 41190}, identity_verified=True,
++        sampling={'temperature': 0.7, 'top_p': 0.9, 'seed': 41190 if sampling_seed is None else sampling_seed}, identity_verified=True,
+         execution_location='local', billing='unmetered_local',
+         roles={r: 'untested' for r in p.ROLES})
+     c['local_transport'] = {'backend': 'lmstudio_raw_completion', 'endpoint': origin,
+@@ -173,6 +178,8 @@
+         'evidence_ref': 'prepared:wire-request.json',
+         'scope': 'single_stateless_request_not_independent_reviewer_or_training_blindness'}
+     request = p.packet(c, t, 'local', method, role)
++    if output_limit is not None:
++        request['max_output_tokens'] = output_limit
+     messages = [{'role': 'system', 'content': SYSTEM},
+                 {'role': 'user', 'content': p.canonical(request['model_input']).decode()}]
+     # The instance has already been observed loaded; no download/load endpoint is used.
+--- a/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/README.md
++++ b/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/README.md
+@@ -1,6 +1,6 @@
+ # 模型与预算感知命名 · 实验入口 v0.1
+ 
+-状态：v90 已增加本地传输与分词入口；真实模型尚未接入。不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
++状态：v91 已增加连续开发工作流；真实模型尚未接入。不是稳定 Skill，不是模型能力或命名效果已通过验证。方法研究归 #408，实际组织命名归 #411；当前任务状态仍只有一个来源：上级的 `organization-naming-411-state.yaml`。
+ 
+ 授权：[本轮记录](https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522)。执行者：OpenAI / ChatGPT / GPT-6 Astra Pro。用户要求先重构并判断方法是否有用，不继续旧候选主线。本轮只实现协议、配置、离线任务包及确定性测试；无模型调用、无新名称、无现实查询、无付款或方法晋升。
+ 
+@@ -147,3 +147,49 @@
+ - [LM Studio模型访问](https://lmstudio.ai/docs/python/manage-models/loading)
+ - [LM Studio兼容接口](https://lmstudio.ai/docs/developer/openai-compat)
+ - [Ollama只读模型列表](https://docs.ollama.com/api/tags)
++
++
++<a id="workflow-v91"></a>
++
++## 9. v91：无需外部助手控制的开发流程
++
++本轮授权见 #408 中的 v91 实施记录。新增 [实验 Skill](SKILL.md) 和 `workflow.py`：程序负责阶段转换，用户选定的同一个本地模型负责提案与判断。不再以“识别后把结果发回ChatGPT”作为运行依赖。
++
++### 9.1 已串联的实际路径
++
++输入为已整理、冻结的开发简报。简洁组一次直接提出最多6项；重构组将同样生成输出上限分到关系、变化和独立身份三条请求，每条最多2项。上述视角与数量是v91实验切片，不是通用最佳方案。程序保留原文并精确去重，将同一个候选池先做真正不含说明的名称评审，再以独立请求审阅说明，随后抽查淘汰项。评审只见匿名ID与当前必要材料，不见路线及生成者排名；同一模型不同请求仍不是独立专家。
++
++`advance`连续执行一轮，最多6次调用（简洁组最多4次）；有错误、预算不足或实质证据缺失才停止，不等待每步“继续”。缓存校验输入和输出，已完成步骤不重复调用。执行锁冲突、源码/计划变化、错误JSON、漏评或ID变化均保持阻塞，不把结构失败悄悄补写为成功。计划中的总预算是上限，不保证每个任务或第二轮一定有足够余额。
++
++反馈由用户或获授权的本地Agent录入，保存原话与来源。下一轮只使用明确`next_instruction`，不把偏好理由自动泛化；已授权的`brief_patch`可纠正使命/名称职责等软表示，但不能改对象与硬约束。所有轮次仍使用同一本预算账本。原始简报、各轮结果和反馈不回改。
++
++### 9.2 运行与证据接口
++
++沿用v90本机服务限制、加载实例和SDK要求；无需向这个聊天传probe结果。模型部署信息由实际使用者/Agent在本机一次绑定。命令示例不代表目标部署已核实：
++
++```bash
++P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
++python "$P/local_runner.py" tasks --output-dir ./naming-dev-tasks
++python "$P/workflow.py" init --config "$P/experiment.json" --task ./naming-dev-tasks/DEV-01.json \
++  --workdir ./naming-session --endpoint http://127.0.0.1:1234 --model "$MODEL_ID" \
++  --revision "$WEIGHTS_REVISION" --runtime-version "$RUNTIME_VERSION" --method redesign
++python "$P/workflow.py" advance --workdir ./naming-session --execute
++```
++
++`--diagnostic-preview-authorized`只能在init时明确开启，允许查看本次虚构任务的诊断材料，不增加现实采用权限。默认没有候选展示，先等待筛查证据。没有外部查证执行器时停在`awaiting_screening_evidence`，不是让生成模型把unknown改成pass，也不是已完成全自动现实尽调。
++
++`report.json`是可重建的当前投影；`plan.json`、`steps/`、`calls/`、`round-N.json`与追加的反馈/筛查记录是原始执行依据。结构出错时report写blocked且不再保留旧可展示列表。路径内可能有敏感模型输出，不自动上传仓库。
++
++证据文件通过`screening --workdir ... --file ...`接入，含当前`round_digest`、候选ID、status、reviewer_ref、scope及evidence（本地file、sha256、source_ref、checked_at）。校验源字节与试行7天新鲜度窗口，不代表核查范围充分或结论正确。可追加更正版本，原记录不覆盖。接入外部查询工具的实际执行与认证仍未实现。
++
++反馈通过`feedback --workdir ... --file ...`接入，再运行advance。反馈含当前`round_digest`、source_ref、verbatim、action（continue_search/stop/accept_for_research）、candidate_ids。继续时另需next_instruction；修改简报另需brief_change_authorized=true和brief_patch。错误反馈在落库前拒绝，不占用唯一反馈位置。accept_for_research必须引用已获准展示的候选，仅完成研究意见采集，不登记实际采用。
++
++### 9.3 本轮验证与剩余边界
++
++`test_workflow.py`在真实回环HTTP栈上使用明确的模拟服务与分词器，覆盖两组阶段顺序、评审输入分离、淘汰抽查、证据检查点、反馈续接、保留原简报、预算耗尽及断点不重发。所有TEST_ONLY条目只是程序夹具。实际语言模型调用0，真实语义质量/可采用性与跨任务效果均未测试。
++
++本轮修改local_runner只增加“请求可降低输出上限”和“冻结采样seed”两个可选参数；旧默认行为和预算上限保留。首轮新增测试随报告行为修改出现一条期待不一致：新程序已经写入blocked报告，旧期待仍要求没有report文件。已改为明确检查blocked且display为空，失败输出保留在本轮证据中，不隐去。
++
++当前不是全部方案已经完成：自动理解自然语言并校准简报、由模型提出并比较探索路线、真实域名/身份/商标查询适配、完整A/B/C跨模型试验及独立语义复核仍未完成。B旧方法未被压缩成simple组；当前A/C运行器切片也不代表整套新旧方法验证。程序已有连续调用与本地反馈接口，没有开发者补救这一默认节点。
++
++复跑新测试：`python "$P/test_workflow.py" --output /tmp/workflow-tests.json`。这是同作者工程验证，正式方法效果须以真实模型与真实评价另行报告。
+--- a/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/experiment.json
++++ b/03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/experiment.json
+@@ -1,7 +1,7 @@
+ {
+   "schema_version": 1,
+   "experiment_id": "MAM-408-001",
+-  "status": "local_transport_implemented_not_model_tested",
++  "status": "development_workflow_implemented_target_models_not_tested",
+   "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522",
+   "baseline": {
+     "commit": "64b973c5c21e4a13accbbf79bf5ad619996f8dcb",
+@@ -170,7 +170,22 @@
+     "ollama_inference_status": "not_implemented_no_verified_tokenizer_path",
+     "automatic_model_calls": false,
+     "paid_backends": "unsupported",
+-    "comparison_orchestrator": "not_implemented",
++    "comparison_orchestrator": "development_A_C_slice_not_full_method_or_cross_model_comparison",
+     "actual_model_calls": 0
++  },
++  "workflow": {
++    "entry": "workflow.py",
++    "skill": "SKILL.md",
++    "tests": "test_workflow.py",
++    "requires_external_assistant": false,
++    "task_scope": "synthetic_development_only",
++    "current_routes": "fixed_experimental_lenses_not_model_planner",
++    "default_rounds": 1,
++    "candidate_target_per_round": 6,
++    "max_calls_redesign_round": 6,
++    "max_calls_simple_round": 4,
++    "generation_output_allowance": "same_total_for_A_C_split_across_routes",
++    "web_screening_adapter": "not_implemented_supplied_evidence_interface_only",
++    "real_model_effectiveness": "not_tested"
+   }
+ }
+--- a/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
++++ b/03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+@@ -6,7 +6,7 @@
+   branch: feat/adaptive-naming-skill-v0.1
+   mode: Adaptive Naming Fit Test
+   status: process_review
+-  snapshot_version: 90
++  snapshot_version: 91
+   skill_version: 0.4.0
+ 
+ lineage:
+@@ -101,12 +101,9 @@
+   owner_review_needed_now: false
+ 
+ next_action:
+-  action: run_local_transport_on_actual_deployment_then_implement_full_comparison
+-  rationale: >-
+-    Owner明确要求先重构和验证方法而非续跑旧命名主线。模型/预算感知实验入口已实施；下一步绑定实际本地部署、精确配置和开发任务，
+-    在有边界的计划中开展真实模型比较。没有部署访问或完整任务材料时，保留not_run，不把本轮程序测试写成已适配Qwen。
+-    内部技术步骤连续执行；.com/商标、候选、偏好和旧证据不变，不恢复G0–G8、不启动旧IA候选生成、不付费或晋升。
+-  requires_owner: false_for_internal_implementation_non_resolvable_runtime_or_material_access_only
++  action: validate_standalone_development_workflow_on_actual_local_deployment
++  rationale: 先取得无需外部助手接管的一轮真实模型材料，随后比较A/C开发切片。不要继续扩充泛用校验器；没有实际部署时保持not_tested。
++  requires_owner: only_for_actual_environment_or_substantive_feedback_not_internal_steps
+ 
+ stop:
+   status: generation_paused_process_review_active
+@@ -621,7 +618,7 @@
+ # v89：当前方法重构入口；旧试行/暂停解释保留历史，不提供新生成权限。
+ model_aware_rebuild:
+   id: MAM-408-001
+-  status: local_transport_implemented_actual_deployment_not_connected
++  status: standalone_development_workflow_implemented_real_model_unbound
+   primary_issue: 408
+   dependent_naming_issue: 411
+   baseline_commit: 64b973c5c21e4a13accbbf79bf5ad619996f8dcb
+@@ -691,3 +688,26 @@
+     full_method_comparison: not_implemented
+     actual_model_calls: 0
+     old_protocol_and_skill_bytes_unchanged: true
++
++# v91：运行阶段由程序续接，不将外部开发者作为默认控制中心。
++standalone_workflow:
++  version: '0.1.0-experimental'
++  baseline_commit: f1d29f066547624ec28c313c160aec81664e399a
++  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5645696051
++  primary_issue: 408
++  entry: naming-evidence-pilot/model-aware/workflow.py
++  skill: naming-evidence-pilot/model-aware/SKILL.md
++  tests: naming-evidence-pilot/model-aware/test_workflow.py
++  stages: [frozen_brief, separate_proposals, name_only_review, explanation_review, rejection_audit, evidence_checkpoint, owner_feedback]
++  current_task_scope: synthetic_development_only
++  external_assistant_required: false
++  real_model_runs: 0
++  engineering_verification: mock_http_workflow_not_model_efficacy
++  actual_semantic_review: not_performed
++  actual_reality_search: not_performed
++  independent_expert_review: not_performed
++  route_planning: fixed_experimental_lenses_not_intelligent_controller
++  feedback_resume: bounded_no_budget_refill_no_inferred_hard_preferences
++  missing: [actual_model_binding, automatic_brief_calibration, adaptive_route_planning, reality_query_adapter, full_method_model_comparison]
++  old_ia_naming_resumed: false
++  stable_skill_changed: false
+--- a/.github/workflows/naming-evidence-pilot.yml
++++ b/.github/workflows/naming-evidence-pilot.yml
+@@ -113,6 +113,15 @@
+           cmp "$OUT/transport-tests.json" "$OUT/transport-repeat.json"
+           python "$P/local_runner.py" tasks --output-dir "$OUT/development-tasks"
+           python -m py_compile "$P/local_runner.py" "$P/test_local_runner.py"
++      - name: Verify standalone development workflow with explicit mocks
++        shell: bash
++        run: |
++          set -euo pipefail
++          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
++          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
++          python "$P/test_workflow.py" --output "$OUT/workflow-tests.json"
++          python "$P/test_workflow.py" --output "$OUT/workflow-repeat.json"
++          cmp "$OUT/workflow-tests.json" "$OUT/workflow-repeat.json"
+       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+         if: always()
+         with:

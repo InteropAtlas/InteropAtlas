@@ -1,0 +1,130 @@
+    if body.startswith('```json\n') and body.endswith('\n```'):
+        body = body[8:-4]
+    value = json.loads(body, object_pairs_hook=p.unique,
+                       parse_constant=lambda _: (_ for _ in ()).throw(ValueError('nonfinite_json')))
+    require(isinstance(value, dict), 'model_must_return_one_json_object')
+    return value
+
+
+def step_call(root, plan, step, question, role, limit, backend, instruction=''):
+    task = copy.deepcopy(plan['task'])
+    task.update(question=question, materials=[], requires_independent_context=True)
+    if instruction:
+        task['materials'] = [{'text': instruction, 'source_ref': 'owner-feedback:next_instruction', 'permitted_roles': [role]}]
+    directory = root / 'steps' / step
+    directory.mkdir(parents=True, exist_ok=True)
+    expected = {'task': task, 'role': role, 'limit': limit}
+    ip = directory / 'input.json'
+    if ip.exists():
+        require(p.read(ip) == expected, 'step_input_changed')
+    else:
+        p.write_new(ip, expected)
+    op = directory / 'parsed.json'
+    if op.exists():
+        saved = p.read(op)
+        require(p.digest((directory / 'answer.raw').read_bytes()) == saved['raw_sha256'], 'cached_answer_changed')
+        return json_answer((directory / 'answer.raw').read_bytes())
+    raw, execution_ref, execution_kind = backend(root, plan, step, task, role, limit)
+    raw_path = directory / 'answer.raw'
+    if raw_path.exists():
+        require(raw_path.read_bytes() == raw, 'raw_answer_conflict')
+    else:
+        with raw_path.open('xb') as stream:
+            stream.write(raw)
+    parsed = json_answer(raw)  # Invalid raw output stays recorded; no automatic repair.
+    p.write_new(op, {'raw_sha256': p.digest(raw), 'execution_ref': execution_ref,
+                    'execution_kind': execution_kind})
+    return parsed
+
+
+def candidates(answer, maximum):
+    rows = answer.get('candidates')
+    require(isinstance(rows, list) and 0 < len(rows) <= maximum, 'candidate_count_invalid')
+    for row in rows:
+        require(isinstance(row, dict) and set(row) == set(CANDIDATE_FIELDS), 'candidate_fields_invalid')
+        for key in CANDIDATE_FIELDS:
+            require(text(row[key], 80 if key in ('name', 'pronunciation') else 400), 'candidate_text_invalid:' + key)
+    return rows
+
+
+def reviews(answer, ids):
+    rows = answer.get('reviews')
+    require(isinstance(rows, list) and len(rows) == len(ids), 'review_coverage_incomplete')
+    require(all(isinstance(v, dict) for v in rows), 'review_object_required')
+    require(len({v.get('id') for v in rows}) == len(ids) and {v.get('id') for v in rows} == set(ids), 'review_ids_changed_or_duplicated')
+    for row in rows:
+        require(set(row) == {'id', 'decision', 'reason'} and row['decision'] in DECISIONS and text(row['reason']), 'review_fields_invalid')
+    return rows
+
+
+def review_question(stage, rows):
+    return p.canonical({'stage': stage,
+        'task': '比较全部条目。只使用当前给定数据，不推测来源路线、域名或Owner偏好。允许不确定，hold不等于通过。',
+        'items': rows,
+        'output_contract': {'reviews': [{'id': '原ID', 'decision': 'keep/hold/drop', 'reason': '具体判断依据'}]}}).decode()
+
+
+def compute_round(root, plan, round_no, backend, instruction=''):
+    prefix = 'r' + str(round_no)
+    count = plan['candidate_target']
+    routes = LENSES if plan['method'] == 'redesign' else ('根据完整简报直接探索不同表达，独立形成有价值的候选；不限定构词法。',)
+    all_rows = []
+    total = plan['generation_output_allowance']
+    for index, route in enumerate(routes):
+        n = count // len(routes)
+        limit = total // len(routes) + (index < total % len(routes))
+        question = p.canonical({'stage': 'proposal', 'exploration_question': route, 'maximum_candidates': n,
+            'output_contract': {'candidates': [{k: '非空字符串' for k in CANDIDATE_FIELDS}]},
+            'limits': '只返回JSON。不编造词源，不预测可注册性，不排名。允许少于上限，不凑数。'}).decode()
+        answer = step_call(root, plan, prefix + 'g' + str(index + 1), question, 'generate', limit, backend, instruction)
+        all_rows.extend(candidates(answer, n))
+    seen, pool, duplicate_count = set(), [], 0
+    random.Random(plan['seed'] + round_no).shuffle(all_rows)
+    for row in all_rows:
+        norm = unicodedata.normalize('NFKC', row['name']).strip().casefold()
+        if norm in seen:
+            duplicate_count += 1
+            continue
+        seen.add(norm)
+        pool.append(dict(row, id='C' + str(len(pool) + 1).zfill(3)))
+    ids = [v['id'] for v in pool]
+    # First call genuinely has no pronunciation/meaning/rationale or route labels.
+    surface_items = [{'id': v['id'], 'name': v['name']} for v in pool]
+    surface = reviews(step_call(root, plan, prefix + 'surface', review_question('name_only', surface_items),
+                               'select', plan['review_output_allowance'], backend), ids)
+    explained = reviews(step_call(root, plan, prefix + 'explained', review_question('with_explanation', pool),
+                                 'select', plan['review_output_allowance'], backend), ids)
+    dropped = [v['id'] for v in explained if v['decision'] == 'drop']
+    # No cardinal scores: a deterministic boundary proxy plus a random rejected item.
+    boundary = [v['id'] for v in surface if v['decision'] != 'drop' and v['id'] in dropped]
+    sampled = (boundary or dropped)[:1]
+    rest = [v for v in dropped if v not in sampled]
+    if rest:
+        sampled += random.Random(plan['seed'] + 1000 + round_no).sample(rest, 1)
+    audit = []
+    if sampled:
+        selected = [v for v in pool if v['id'] in sampled]
+        audit = reviews(step_call(root, plan, prefix + 'audit', review_question('independent_recheck', selected),
+                                  'select', plan['review_output_allowance'], backend), sampled)
+    disputed = {v['id'] for v in audit if v['decision'] != 'drop'}
+    kept = [v['id'] for v in explained if v['decision'] != 'drop' or v['id'] in disputed]
+    result = {'round': round_no, 'pool': pool, 'surface': surface, 'explained': explained,
+              'audit': audit, 'rejected_sample_ids': sampled, 'audit_disagreement_ids': sorted(disputed),
+              'intrinsic_shortlist_ids': kept, 'exact_duplicates_removed': duplicate_count,
+              'review_independence': 'separate_requests_same_model_not_independent_expert',
+              'semantic_truth': 'not_programmatically_verified', 'reality_clearance': 'not_assessed'}
+    rp = root / ('round-' + str(round_no) + '.json')
+    if rp.exists():
+        require(p.read(rp) == result, 'round_projection_changed')
+    else:
+        p.write_new(rp, result)
+    return result
+
+
+def screening_status(root, plan, result, report=None):
+    if report is None:
+        paths = sorted(root.glob('screening-' + str(result['round']) + '-*.json'))
+        if not paths:
+            return [], list(result['intrinsic_shortlist_ids'])
+        report = p.read(paths[-1])
+    require(report.get('round_digest') == p.digest(p.canonical(result)), 'screening_from_different_round')

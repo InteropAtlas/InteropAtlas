@@ -1,0 +1,94 @@
+name: Verify v91 development workflow sources
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/v91-dev-materialize.yml]
+permissions:
+  contents: write
+jobs:
+  verify-source-blobs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Assemble readable source fragments and verify exact changes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import hashlib,json,os,subprocess
+          assert os.environ['GITHUB_REPOSITORY']=='InteropAtlas/InteropAtlas'
+          assert os.environ['GITHUB_REF']=='refs/heads/feat/adaptive-naming-skill-v0.1'
+          base='f1d29f066547624ec28c313c160aec81664e399a'
+          tmp=['.github/maintenance/v91-workflow'+str(i)+'.txt' for i in range(1,4)]+['.github/maintenance/v91-test'+str(i)+'.txt' for i in range(1,3)]+['.github/maintenance/v91.patch','.github/workflows/v91-dev-materialize.yml']
+          assert set(subprocess.check_output(['git','diff','--name-only',base,'HEAD'],text=True).splitlines())==set(tmp)
+          home=Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware')
+          for target,prefix,n in [('workflow.py','workflow',3),('test_workflow.py','test',2)]:
+              raw=b''.join(Path('.github/maintenance/v91-'+prefix+str(i)+'.txt').read_bytes() for i in range(1,n+1))
+              (home/target).write_bytes(raw)
+          subprocess.run(['git','apply','--check','.github/maintenance/v91.patch'],check=True)
+          subprocess.run(['git','apply','.github/maintenance/v91.patch'],check=True)
+          names=['workflow.py','test_workflow.py','SKILL.md','local_runner.py','README.md','experiment.json']
+          paths=[str(home/n) for n in names]+['03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml','.github/workflows/naming-evidence-pilot.yml']
+          expected=['bc06a15b69bece5a9c268fa2b61e9085c2495ccfb54363cdb8cd238dfbd8773f','ae514c7baad7882dd7a72ee7d01234f1a4450cb730183caf77837e75f0ed6cad','35e0962409302424a801ca47408635406d204d598d9eb3324e9865d352f93c59','3dd2cb269b911db1ade58e2f8372940d2bb08170b73d1c9b77a3f2e2219bcf7f','35a3623b802fca42adcf5bfdb53e6f12cec164f55c669786b464ab4ff9613259','a7d3473fe6bb27ac95a465f676f25c48e94b4cdc138a3720eed2bf6ac388256b','130921f43b6f3bd37046ec84196bf55953548d44b77cd3a8cf49ea7886668b3e','97ac7fc023855ddfd636e0a76d617316e694f6125342d0a20e6ed22833df1240']
+          for path,sha in zip(paths,expected):assert hashlib.sha256(Path(path).read_bytes()).hexdigest()==sha,path
+          subprocess.run(['git','add','--intent-to-add',*paths],check=True)
+          assert set(subprocess.check_output(['git','diff','--name-only'],text=True).splitlines())==set(paths)
+          subprocess.run(['git','diff','--check'],check=True)
+          out=Path(os.environ['RUNNER_TEMP'])/'v91';out.mkdir()
+          (out/'manifest.json').write_text(json.dumps({'base':base,'files':dict(zip(paths,expected)),'transient':tmp},indent=2)+'\n')
+          PY
+      - name: Run workflow and existing deterministic regressions
+        shell: bash
+        run: |
+          set -euo pipefail
+          P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+          PILOT=03_Evolution/01_Research/03_Tests/naming-evidence-pilot
+          OUT="$RUNNER_TEMP/v91"
+          python "$P/test_workflow.py" --output "$OUT/workflow-tests.json"
+          python "$P/test_workflow.py" --output "$OUT/workflow-repeat.json"
+          cmp "$OUT/workflow-tests.json" "$OUT/workflow-repeat.json"
+          python "$P/test_local_runner.py" --output "$OUT/transport-tests.json"
+          python "$P/test_protocol.py" --output "$OUT/protocol-tests.json"
+          python "$PILOT/test_controls.py" --repository . --output "$OUT/control-tests.json"
+          git show f1d29f066547624ec28c313c160aec81664e399a:03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml > "$OUT/old-state.yaml"
+          python "$PILOT/control_gate.py" state 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml --previous "$OUT/old-state.yaml" --repository . > "$OUT/state-check.json"
+          git diff --exit-code f1d29f066547624ec28c313c160aec81664e399a -- 02_Runtime/02_Tools/adaptive_naming/ "$P/protocol.py" "$P/test_protocol.py" "$PILOT/control_gate.py"
+          python -m py_compile "$P/workflow.py" "$P/test_workflow.py" "$P/local_runner.py"
+      - name: Materialize tested content blobs only; no ref or workflow mutation
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import base64,hashlib,json,os,urllib.request
+          out=Path(os.environ['RUNNER_TEMP'])/'v91'
+          mf=json.loads((out/'manifest.json').read_text())
+          assert json.loads((out/'workflow-tests.json').read_text())['passed']==20
+          assert json.loads((out/'transport-tests.json').read_text())['passed']==18
+          assert json.loads((out/'protocol-tests.json').read_text())['passed']==25
+          transition=json.loads((out/'state-check.json').read_text())
+          assert transition['write_allowed'] and not transition['generation_ready']
+          files=[]
+          for path,sha in mf['files'].items():
+              raw=Path(path).read_bytes();assert hashlib.sha256(raw).hexdigest()==sha
+              blob=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+              req=urllib.request.Request('https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs',method='POST',headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'},data=json.dumps({'content':base64.b64encode(raw).decode(),'encoding':'base64'}).encode())
+              with urllib.request.urlopen(req,timeout=60) as response:result=json.load(response)
+              assert result['sha']==blob
+              files.append({'path':path,'sha':blob,'sha256':sha})
+          report={'kind':'tested_blobs_no_ref_update','head':os.environ['GITHUB_SHA'],'run_id':os.environ['GITHUB_RUN_ID'],'files':files,'actual_language_models':0,'independent_semantic_review':False}
+          (out/'blobs.json').write_text(json.dumps(report,indent=2)+'\n')
+          Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('```json\n'+json.dumps(report,indent=2)+'\n```')
+          print(json.dumps(report,indent=2))
+          PY
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: naming-v91-workflow-verification
+          path: ${{ runner.temp }}/v91/
+          retention-days: 30
+          if-no-files-found: error

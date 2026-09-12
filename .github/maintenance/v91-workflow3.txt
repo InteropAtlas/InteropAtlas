@@ -1,0 +1,170 @@
+    rows = report.get('items')
+    require(isinstance(rows, list), 'screening_items_required')
+    allowed, unresolved, seen = [], [], set()
+    for row in rows:
+        ident = row.get('id')
+        require(ident in result['intrinsic_shortlist_ids'] and ident not in seen, 'screening_candidate_invalid')
+        seen.add(ident)
+        require(row.get('status') in ('pass', 'unknown', 'conflict'), 'invalid_screening_status')
+        evidence = row.get('evidence', [])
+        require(isinstance(evidence, list), 'evidence_list_required')
+        verified = bool(evidence)
+        for source in evidence:
+            require(text(source.get('source_ref')) and text(source.get('file')), 'evidence_locator_required')
+            target = (root / source['file']).resolve()
+            require(target.is_relative_to(root.resolve()) and target.is_file(), 'evidence_must_be_local_file_inside_workdir')
+            require(p.digest(target.read_bytes()) == source.get('sha256'), 'evidence_digest_mismatch')
+            at = p.stamp(source['checked_at'])
+            age = (datetime.now(timezone.utc) - at).total_seconds()
+            verified = verified and 0 <= age <= plan['screening_freshness_days'] * 86400
+        # Only checks supplied evidence identity/freshness, not its truth or legal scope.
+        if row['status'] == 'pass' and verified and text(row.get('reviewer_ref')) and text(row.get('scope')):
+            allowed.append(ident)
+        else:
+            unresolved.append(ident)
+    return allowed, sorted(set(unresolved) | (set(result['intrinsic_shortlist_ids']) - seen))
+
+
+def summarize_calls(root):
+    records = [p.read(path) for path in sorted((root / 'calls').glob('*/record.json'))]
+    costs = {}
+    for key in ('cloud_spend', 'setup_spend', 'owner_minutes', 'local_seconds'):
+        vals = [v['receipt']['costs'][key] for v in records]
+        costs[key] = {'known_sum': sum(v for v in vals if v is not None), 'unknown_count': sum(v is None for v in vals)}
+    return {'recorded_attempts': len(records), 'completed': sum(v['receipt']['outcome'] == 'completed' for v in records),
+            'real_service_attempts': sum(v['receipt']['execution_kind'] != 'mock_transport_test' for v in records),
+            'mock_attempts': sum(v['receipt']['execution_kind'] == 'mock_transport_test' for v in records),
+            'pending_without_receipt': len(list((root / 'calls').glob('*/dispatch-intent.json'))) - len(records),
+            'costs_including_failed_and_synthetic_task_attempts': costs,
+            'naming_effectiveness': 'not_assessed', 'actual_adoption': 'not_assessed'}
+
+
+def validate_feedback(plan, result, allowed, feedback):
+    require(feedback.get('round_digest') == p.digest(p.canonical(result)), 'feedback_from_different_round')
+    require(text(feedback.get('source_ref')) and text(feedback.get('verbatim')), 'feedback_source_and_verbatim_required')
+    require(feedback.get('action') in ('continue_search', 'stop', 'accept_for_research'), 'unsupported_feedback_action')
+    targets = feedback.get('candidate_ids', [])
+    require(isinstance(targets, list) and all(isinstance(v, str) for v in targets)
+            and len(set(targets)) == len(targets), 'invalid_feedback_ids')
+    permitted = result['intrinsic_shortlist_ids'] if plan['diagnostic_preview_authorized'] else allowed
+    require(set(targets) <= set(permitted), 'feedback_targets_not_exposed')
+    patch = feedback.get('brief_patch', {})
+    require(isinstance(patch, dict) and set(patch) <= {'mission', 'name_jobs', 'non_jobs', 'confirmed_preferences'}, 'brief_patch_cannot_change_object_or_constraints')
+    if patch:
+        require(feedback.get('brief_change_authorized') is True and feedback['action'] == 'continue_search', 'brief_change_needs_explicit_feedback_authority')
+        require(all(isinstance(v, (str, list)) and bool(v) for v in patch.values()), 'brief_patch_values_invalid')
+    if feedback['action'] == 'continue_search':
+        require(text(feedback.get('next_instruction')), 'explicit_next_instruction_required_no_invented_preference_reason')
+    if feedback['action'] == 'accept_for_research':
+        require(bool(targets), 'research_acceptance_requires_visible_target')
+
+
+def _advance(root: Path, execute=False, backend=None):
+    require(execute, 'explicit_execute_required')
+    plan = load_plan(root)
+    backend = backend or LocalBackend()
+    with lock(root):
+        instruction = ''
+        round_plan = copy.deepcopy(plan)
+        for round_no in range(1, plan['max_rounds'] + 1):
+            result = compute_round(root, round_plan, round_no, backend, instruction)
+            allowed, unknown = screening_status(root, plan, result)
+            fp = root / ('feedback-' + str(round_no) + '.json')
+            if fp.exists():
+                feedback = p.read(fp)
+                validate_feedback(plan, result, allowed, feedback)
+                if feedback['action'] == 'continue_search':
+                    require(text(feedback.get('next_instruction')), 'explicit_next_instruction_required_no_invented_preference_reason')
+                    instruction = feedback['next_instruction']
+                    round_plan['task']['brief'].update(copy.deepcopy(feedback.get('brief_patch', {})))
+                    if round_no < plan['max_rounds']:
+                        continue
+                    status = 'round_budget_exhausted'
+                else:
+                    status = 'stopped' if feedback['action'] == 'stop' else 'research_review_complete_not_adoption'
+            else:
+                status = ('awaiting_owner_feedback' if allowed or plan['diagnostic_preview_authorized']
+                          else 'awaiting_screening_evidence' if result['intrinsic_shortlist_ids'] else 'no_intrinsic_survivor')
+            visible = result['intrinsic_shortlist_ids'] if plan['diagnostic_preview_authorized'] else allowed
+            summary = {'status': status, 'round': round_no, 'round_digest': p.digest(p.canonical(result)),
+                'diagnostic_only': plan['diagnostic_preview_authorized'],
+                'display': [dict(v, intrinsic_decision=next(x['decision'] for x in result['explained'] if x['id'] == v['id']),
+                    audit_disagreement=v['id'] in result['audit_disagreement_ids']) for v in result['pool'] if v['id'] in visible],
+                'unresolved_screening_ids': unknown, 'costs': summarize_calls(root),
+                'next_step_owner_dependency': 'substantive_feedback_or_evidence_only_not_external_assistant',
+                'limits': 'Synthetic development; supplied screening requires semantic verification; no adoption or method efficacy claim.'}
+            # A replaceable report is a projection, never original evidence.
+            (root / 'report.json').write_bytes(p.canonical(summary))
+            return summary
+    raise ValueError('no_round_executed')
+
+
+def advance(root: Path, execute=False, backend=None):
+    try:
+        return _advance(root, execute, backend)
+    except (OSError, ValueError, KeyError, TypeError, ImportError) as error:
+        if root.exists() and not (root / 'workflow.lock').exists():
+            path = root / 'report.json'
+            prior = p.read(path) if path.exists() else {}
+            projection = {k: prior[k] for k in ('round', 'round_digest') if k in prior}
+            projection.update(status='blocked', error=str(error), display=[], automatic_retry=False,
+                              costs=summarize_calls(root))
+            path.write_bytes(p.canonical(projection))
+        raise
+
+
+def attach(root: Path, kind: str, file: Path):
+    require(kind in ('feedback', 'screening'), 'unknown_attachment_kind')
+    plan = load_plan(root)
+    with lock(root):
+        report = p.read(root / 'report.json')
+        value = p.read(file)
+        result = p.read(root / ('round-' + str(report['round']) + '.json'))
+        require(value.get('round_digest') == report['round_digest'], 'attachment_must_reference_current_round_digest')
+        if kind == 'screening':
+            screening_status(root, plan, result, value)
+            revision = len(list(root.glob('screening-' + str(report['round']) + '-*.json'))) + 1
+            target = root / ('screening-' + str(report['round']) + '-' + str(revision).zfill(4) + '.json')
+        else:
+            allowed, _ = screening_status(root, plan, result)
+            validate_feedback(plan, result, allowed, value)
+            target = root / ('feedback-' + str(report['round']) + '.json')
+        p.write_new(target, value)
+    return {'status': kind + '_recorded_not_yet_accepted', 'model_calls': 0}
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    sub = parser.add_subparsers(dest='command', required=True)
+    q = sub.add_parser('init')
+    for key in ('config', 'task', 'workdir'):
+        q.add_argument('--' + key, type=Path, required=True)
+    for key in ('endpoint', 'model', 'revision', 'runtime-version'):
+        q.add_argument('--' + key, required=True)
+    q.add_argument('--method', choices=('simple', 'redesign'), default='redesign')
+    q.add_argument('--rounds', type=int, default=1)
+    q.add_argument('--seed', type=int, default=91)
+    q.add_argument('--diagnostic-preview-authorized', action='store_true')
+    q = sub.add_parser('advance'); q.add_argument('--workdir', type=Path, required=True); q.add_argument('--execute', action='store_true')
+    for command in ('feedback', 'screening'):
+        q = sub.add_parser(command); q.add_argument('--workdir', type=Path, required=True); q.add_argument('--file', type=Path, required=True)
+    args = parser.parse_args()
+    try:
+        if args.command == 'init':
+            result = initialize(args.workdir, p.read(args.config), p.read(args.task),
+                {'endpoint': args.endpoint, 'model_id': args.model, 'revision': args.revision,
+                 'runtime_version': args.runtime_version}, args.method, args.rounds, args.seed,
+                args.diagnostic_preview_authorized)
+        elif args.command == 'advance':
+            result = advance(args.workdir, args.execute)
+        else:
+            result = attach(args.workdir, args.command, args.file)
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+        return 0
+    except (OSError, ValueError, KeyError, TypeError, ImportError) as error:
+        print(json.dumps({'status': 'blocked', 'error': str(error), 'automatic_retry': False}, ensure_ascii=False))
+        return 2
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
