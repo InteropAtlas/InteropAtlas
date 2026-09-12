@@ -30,11 +30,10 @@ jobs:
           python "$P/test_workflow.py" --output "$RUNNER_TEMP/real408003-evidence/workflow-tests.json"
           python "$P/test_local_runner.py" --output "$RUNNER_TEMP/real408003-evidence/transport-tests.json"
           python "$P/test_protocol.py" --output "$RUNNER_TEMP/real408003-evidence/protocol-tests.json"
+          git diff --exit-code 32d8f72937b620e79ad260c9f13e94f164202000 -- "$P/format_adapter.py" "$P/workflow.py" "$P/protocol.py" "$P/local_runner.py" "$P/experiment.json" "$P/development-tasks.json" "$P/real-pilot/run.py" "$P/real-pilot-002/run.py"
           python - <<'PY'
           from pathlib import Path
-          import hashlib
           p=Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware')
-          assert hashlib.sha256((p/'format_adapter.py').read_bytes()).hexdigest()=='a2468c05c1ba92b00e1eb5f69b6bd2b923b1293954f3159a3d40e8abf04a7db5'
           src=(p/'real-pilot-003/run.py').read_text()
           assert 'evidence_persistence_strategy_outside_model_workflow' in src
           assert "BASE_RUN=HOME/'real-pilot-002/run.py'" in src
@@ -83,7 +82,7 @@ jobs:
         shell: bash
         run: |
           python - <<'PY'
-          import json,os,pathlib,hashlib,urllib.parse,urllib.request
+          import json,os,pathlib,hashlib,urllib.request
           repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';base='https://api.github.com/repos/'+repo
           def api(path,method='GET',body=None):
               req=urllib.request.Request(base+path,method=method,data=json.dumps(body,ensure_ascii=False).encode() if body is not None else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
