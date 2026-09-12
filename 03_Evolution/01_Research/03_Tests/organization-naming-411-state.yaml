@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 94
+  snapshot_version: 95
   skill_version: 0.4.0
 
 lineage:
@@ -101,10 +101,10 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: review_fixed_pool_selection_results_before_further_method_changes
+  action: design_independent_semantic_validation_on_existing_candidates
   rationale: >-
-    v94已接入简单默认、生成者意图/风险边界、优先待定分流与完整包装兼容。
-    检查SELECT-408-001已保存结果及剩余语义问题，不新增名称，不把决定改变当质量改善。
+    SELECT-408-002在同seed仅改变候选顺序时4/6改判，v95已用正序/反序一致性做保守资源分流。
+    当前主要未知转为语义判断是否正确，而非继续增加生成或selector规则；下一步只使用既有候选建立独立语义验证。
   requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation
 
 stop:
@@ -803,4 +803,92 @@ selection_revision:
     "stable_promotion": false,
     "semantic_validation": "development_only_not_independent_quality_proof",
     "evidence": "naming-evidence-pilot/model-aware/selection-pilot/results/evidence.json"
+  }
+
+# v95 selector stability evidence and conservative order crosscheck.
+selection_stability_revision:
+  {
+    "version": "0.3.0-experimental",
+    "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5648508810",
+    "experiment": "SELECT-408-002",
+    "run_id": 34717382400,
+    "source_pool": "REAL-408-003/cell-2-simple-411921",
+    "requests_dispatched": 4,
+    "valid_requests": 3,
+    "invalid_json_requests": 1,
+    "new_names": 0,
+    "paid_api_calls": 0,
+    "same_seed_order_changed_ids": [
+      "C001",
+      "C002",
+      "C004",
+      "C005"
+    ],
+    "same_reversed_order_seed_changed_ids": [
+      "C003"
+    ],
+    "full_seed_effect_estimable": false,
+    "reason": "original_order_seed_52002_invalid_json",
+    "conservative_projection_seed_52001": {
+      "priority_ids": [
+        "C003",
+        "C006"
+      ],
+      "hold_ids": [
+        "C001",
+        "C002",
+        "C004",
+        "C005"
+      ],
+      "not_pursued_ids": [],
+      "screening_queue_ids": [
+        "C003",
+        "C006"
+      ],
+      "order_disagreement_ids": [
+        "C001",
+        "C002",
+        "C004",
+        "C005"
+      ],
+      "decision_pairs": {
+        "C001": [
+          "keep",
+          "drop"
+        ],
+        "C002": [
+          "hold",
+          "keep"
+        ],
+        "C003": [
+          "keep",
+          "keep"
+        ],
+        "C004": [
+          "hold",
+          "drop"
+        ],
+        "C005": [
+          "keep",
+          "hold"
+        ],
+        "C006": [
+          "keep",
+          "keep"
+        ]
+      },
+      "crosscheck_semantics": "conservative_resource_allocation_not_quality_truth",
+      "priority_semantics": "keep_in_both_order_permutations_relative_research_investment_only",
+      "hold_semantics": "any_hold_or_order_disagreement_preserved_not_auto_screened",
+      "semantic_truth": "not_programmatically_verified",
+      "reality_clearance": "not_assessed"
+    },
+    "workflow_wired": true,
+    "report": "naming-evidence-pilot/model-aware/selection-stability-pilot/REPORT.zh-CN.md",
+    "evidence": "naming-evidence-pilot/model-aware/selection-stability-pilot/results/evidence.json",
+    "summary": "naming-evidence-pilot/model-aware/selection-stability-pilot/results/summary.json",
+    "independent_semantic_review": false,
+    "quality_ground_truth": null,
+    "ia_generation": false,
+    "stable_promotion": false
   }
