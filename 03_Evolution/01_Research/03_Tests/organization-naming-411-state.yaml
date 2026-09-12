@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 86
+  snapshot_version: 87
   skill_version: 0.4.0
 
 lineage:
@@ -101,11 +101,11 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: design_and_run_anonymous_synthetic_control_cases_no_new_names
+  action: await_explicit_generation_authorization_then_prepare_bounded_live_trial
   rationale: >-
-    v86 已完成有边界的搜索/调度、运行与筛查证据对账；找回历史摘要与精确指针，但真实输入/全量输出/查询来源仍不完整。
-    停止重复全量追溯，下一步用匿名合成情境验证控制问题，不声称历史重放，不生成新名称；有新的具体原始来源时再重开追溯。
-  requires_owner: false_for_method_review
+    已连贯完成匿名控制对照、任务内最小修复、程序回归、实际状态写入保护及CI接入。
+    不再要求 Owner 对内部修复逐步回复继续；若恢复真实生成，先按试行合同建立当前搜索/调度/运行证据，不能复用历史未知为已完成。
+  requires_owner: only_for_resuming_real_generation_or_major_boundary_changes
 
 stop:
   status: generation_paused_process_review_active
@@ -531,3 +531,42 @@ evidence_reconciliation:
   current_mission_name_job_refs_synced_in_reconstruction: true
   generation_paused: true
   stable_skill_changed: false
+
+# v87：程序防线完成并接入；不把程序通过当作真实命名验证。
+control_validation:
+  id: CTRL-411-V87
+  status: task_local_controls_implemented_and_programmatically_validated
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5643048373
+  baseline_commit: fc84a477c805e828ce47666dbb5c3e0470c57324
+  baseline_validator_blob: a045604850ec9490ce0bce37f44f90e003891e5d
+  gate: naming-evidence-pilot/control_gate.py
+  frozen_cases: naming-evidence-pilot/control-cases.json
+  runner: naming-evidence-pilot/test_controls.py
+  results: naming-evidence-pilot/control-results.json
+  contract: naming-evidence-pilot/contract.md
+  ci_workflow: .github/workflows/naming-evidence-pilot.yml
+  evidence_class: same_author_deterministic_synthetic_validation_not_model_AB
+  original_validator_changed: false
+  stable_skill_changed: false
+  historical_gaps_preserved: true
+  real_generation_executed: false
+  independent_semantic_review: not_performed
+  live_effectiveness_validated: false
+  baseline_comparison_limit: 旧结构校验器与新增可执行防线的覆盖对照，不是旧Skill或模型与新Skill或模型的智能横评。
+  operational_enforcement: 本地受保护写入入口和分支CI已接入；无管理权限将CI设置为平台required check，不宣称可拦截任意直接写入。
+  owner_interaction: 内部修复/回归不逐项等待；只集中升级生成恢复、最终采用、重大边界和实际权限阻塞。
+live_trial_plan:
+  status: prepared_not_started
+  permission: generation_remains_paused
+  entry_contract: naming-evidence-pilot/contract.md#live-trial
+  initial_budget: 单个有边界批次，内部最多8项；不足合格展示量则少展示或不展示，不为凑数降低门槛。
+  initial_budget_status: proposed_task_local_limit_not_stable_rule
+  prerequisites:
+    - 明确获得恢复真实名称生成的授权，单独记录授权原句与上下文。
+    - 建立当次搜索/调度计划与实际运行能力；旧历史未知继续保留，不填为零或宣称重放。
+    - 验证输入已冻结、实际输出可保存、来源原文与Controller解释分开。
+    - 实际隔离能力按运行环境选择并如实披露；同上下文不声称盲法。
+    - 展示前执行结构防线并完成必要的语义与现实证据审查；程序pass不替代这些审查。
+  stop_conditions:
+    - 出现证据缺口、矛盾、预算超限或新的暂停指令时，不扩大批次；保留实际输入输出和失败记录。
+    - 不因一个真实批次成功而自动晋升Skill或合并PR416。
