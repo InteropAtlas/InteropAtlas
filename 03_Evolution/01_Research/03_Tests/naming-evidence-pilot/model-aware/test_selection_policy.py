@@ -63,6 +63,22 @@ class PolicyTests(unittest.TestCase):
         q=s.resource_queues(result)
         self.assertEqual(q['priority_ids'],['A']);self.assertEqual(q['hold_ids'],['B','C'])
         self.assertEqual(q['not_pursued_ids'],['D']);self.assertEqual(q['screening_queue_ids'],['A'])
+    def test_order_crosscheck_requires_agreement_for_priority_or_drop(self):
+        pool=[dict(ROW,id=x) for x in ['A','B','C','D','E']]
+        first=[dict(REVIEW,id=x,decision=d) for x,d in [('A','keep'),('B','keep'),('C','hold'),('D','drop'),('E','drop')]]
+        second=[dict(REVIEW,id=x,decision=d) for x,d in [('E','drop'),('D','hold'),('C','hold'),('B','drop'),('A','keep')]]
+        q=s.order_crosschecked_queues(pool,first,second)
+        self.assertEqual(q['priority_ids'],['A'])
+        self.assertEqual(q['not_pursued_ids'],['E'])
+        self.assertEqual(q['hold_ids'],['B','C','D'])
+        self.assertEqual(q['order_disagreement_ids'],['B','D'])
+        self.assertEqual(q['screening_queue_ids'],['A'])
+    def test_order_crosscheck_rejects_incomplete_or_changed_ids(self):
+        pool=[dict(ROW,id='A'),dict(ROW,id='B')]
+        good=[dict(REVIEW,id='A',decision='keep'),dict(REVIEW,id='B',decision='hold')]
+        with self.assertRaises(ValueError):s.order_crosschecked_queues(pool,good[:1],good)
+        bad=[dict(REVIEW,id='A',decision='keep'),dict(REVIEW,id='X',decision='hold')]
+        with self.assertRaises(ValueError):s.order_crosschecked_queues(pool,good,bad)
     def test_no_forced_priority_when_all_uncertain(self):
         q=s.resource_queues({'pool':[ROW],'explained':[REVIEW]})
         self.assertEqual(q['priority_ids'],[]);self.assertEqual(q['hold_ids'],['C005'])
@@ -74,7 +90,6 @@ class PolicyTests(unittest.TestCase):
             with self.assertRaises(ValueError):w.normalized_answer(root,raw,p.canonical(self.question()).decode())
 
 class IntegrationTests(WorkflowTests):
-    # Inherited v91 fixtures are not rediscovered in this test suite.
     def test_default_simple_and_policy_bound(self):
         w.initialize(self.root,self.cfg,self.task,self.runtime)
         self.assertEqual(p.read(self.root/'plan.json')['method'],'simple')
