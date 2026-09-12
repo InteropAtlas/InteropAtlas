@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 88
+  snapshot_version: 89
   skill_version: 0.4.0
 
 lineage:
@@ -94,23 +94,23 @@ current_state:
   owner_positive_commercial_candidates: [N130]
   weak_positive_comparison: [N135]
   preference_evidence: [N127]
-  search_mode: process_review_no_generation
+  search_mode: method_redesign_no_ia_generation
   biggest_unknown: >-
     Which parts of the repeated #411 collapse/overfit behavior represent task-local execution defects versus generalizable method controls worth promoting into a future Adaptive Naming Skill revision?
   blockers: []
   owner_review_needed_now: false
 
 next_action:
-  action: resolve_trial_evidence_and_prepare_next_bounded_probe_under_existing_authority
+  action: bind_actual_local_runtime_and_development_tasks_for_model_method_comparison
   rationale: >-
-    LIVE-411-001已实际完成生成8项、质量优先4项及现实初筛，0项达到展示条件；不把试行未出finalist当作整个命名任务完成。
-    内部证据补查、复核和下一次有预算探测的技术准备沿用连续执行授权，不再要求Owner逐项发送继续。
-    优先处理实际证据阻塞或调整下批材料，不回退为重复工程整修；付款、注册、最终采用和稳定晋升仍不在授权内。
-  requires_owner: false_for_internal_work_final_adoption_and_spending_reserved
+    Owner明确要求先重构和验证方法而非续跑旧命名主线。模型/预算感知实验入口已实施；下一步绑定实际本地部署、精确配置和开发任务，
+    在有边界的计划中开展真实模型比较。没有部署访问或完整任务材料时，保留not_run，不把本轮程序测试写成已适配Qwen。
+    内部技术步骤连续执行；.com/商标、候选、偏好和旧证据不变，不恢复G0–G8、不启动旧IA候选生成、不付费或晋升。
+  requires_owner: false_for_internal_implementation_non_resolvable_runtime_or_material_access_only
 
 stop:
   status: generation_paused_process_review_active
-  reason: Owner explicitly requested process/data review instead of new names
+  reason: Owner redirected work to method redesign and model-budget evaluation, not continuation of the old naming mainline
 
 audit_recovery:
   status: bounded_evidence_reconciliation_complete_capture_incomplete
@@ -617,3 +617,58 @@ live_validation:
     - 一个名称的.com不可直接注册，未获得实际取得路径；索引未命中不是身份或商标许可。
     - 另有同名主体/产品及第三方商标申请线索，需要官方身份或商标证据，而不是让Owner凭猜测裁定。
     - 没有独立语义复核；单次未展示批次不能证明命名质量改善或用户判断成本下降。
+
+# v89：当前方法重构入口；旧试行/暂停解释保留历史，不提供新生成权限。
+model_aware_rebuild:
+  id: MAM-408-001
+  status: experimental_protocol_implemented_model_trials_not_run
+  primary_issue: 408
+  dependent_naming_issue: 411
+  baseline_commit: 64b973c5c21e4a13accbbf79bf5ad619996f8dcb
+  skill_version_unchanged: '0.4.0'
+  authority_ref: https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522
+  current_entry: naming-evidence-pilot/model-aware/README.md
+  experiment_config: naming-evidence-pilot/model-aware/experiment.json
+  offline_protocol: naming-evidence-pilot/model-aware/protocol.py
+  protocol_tests: naming-evidence-pilot/model-aware/test_protocol.py
+  scope:
+    - 名称交付与方法研究分开；用户的上上层长期组织不被降为IA项目或单一互操作业务。
+    - 强而简洁的A、冻结旧B与重构C，按本地/参考配置分别比较；不以参数量替代逐角色实测。
+    - 保留实际记录与防错；多层调度/全量历史/跨任务演化不作为新实验默认前提。
+  authorization:
+    implementation_and_offline_tests: true
+    model_trial_dispatch: false
+    ia_naming: false
+    paid_calls: false
+    purchase_or_registration: false
+    merge_or_stable_promotion: false
+    dispatch_note: 尚未绑定实际部署和开发任务，未形成可投递计划；不是要求Owner逐个批准内部技术步骤。
+  evidence:
+    implementation_sources: present
+    original_naming_evidence: unchanged
+    synthetic_tests: separate_from_model_runs
+    actual_model_runs: 0
+    historical_missing_fields_ref: audit_recovery.missing_current_state
+  screening:
+    current_trial_ref: live_validation
+    current_reality_rechecked: false
+    original_unknowns_and_conflicts_preserved: true
+  validation:
+    deterministic_protocol_tests: implemented
+    local_model_support: not_tested
+    reference_model_support: not_tested
+    independent_semantic_review: not_performed
+    cross_task_effectiveness: not_tested
+    stable_method_promoted: false
+  execution_defaults:
+    mode: local_only
+    max_paid_calls: 0
+    max_cloud_spend: 0
+    model_identity: unresolved_exact_deployment_required
+    user_model_label: qwen3.6-30b-a3b
+    role_support: all_untested_no_parameter_size_ranking
+  remaining:
+    - 绑定实际可访问的本地推理环境；记录型号/版本/量化/框架/推理/采样/上下文和真实输入计数。
+    - 绑定开发任务的冻结简报及真实负责人，缺少负责人时只报告模拟任务质量，不报告采用成功。
+    - 执行端接入本地模型、共享预算预留与隔离证据；本轮离线协议不会自行联网或调用模型。
+    - 首先开展A/C与本地/参考的有限公平比较，再决定是否扩大B组、留出任务或角色交叉。

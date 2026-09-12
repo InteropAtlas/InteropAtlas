@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "experiment_id": "MAM-408-001",
+  "status": "implemented_not_model_tested",
+  "authority_ref": "https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5644664522",
+  "baseline": {
+    "commit": "64b973c5c21e4a13accbbf79bf5ad619996f8dcb",
+    "skill_path": "02_Runtime/02_Tools/adaptive_naming/SKILL.md",
+    "skill_blob": "28e4d3bac89bebc6c6d1fb277b043260fa342956",
+    "validator_blob": "a045604850ec9490ce0bce37f44f90e003891e5d",
+    "state_blob": "dafdab7ee18dea9aaead6333979e94bce6af3422"
+  },
+  "default_mode": "local_only",
+  "allowed_modes": [
+    "local_only",
+    "hybrid",
+    "reference"
+  ],
+  "authorization": {
+    "method_rebuild": true,
+    "offline_tests": true,
+    "model_trials": false,
+    "ia_naming": false,
+    "paid_calls": false,
+    "diagnostic_untested_roles": false
+  },
+  "budgets": {
+    "max_calls": 6,
+    "max_cloud_calls": 0,
+    "max_cloud_spend": 0.0,
+    "currency": "USD",
+    "max_output_tokens_total": 12000,
+    "max_output_tokens_per_call": 2000,
+    "max_attempts_per_packet": 2,
+    "limits_status": "proposed_for_future_trial_not_call_authorization",
+    "scope": "per_task_method_model_repeat_cell"
+  },
+  "profiles": {
+    "local": {
+      "reported_label": "qwen3.6-30b-a3b",
+      "deployment_id": null,
+      "revision": null,
+      "quantization": null,
+      "runtime_version": null,
+      "context_limit_tokens": null,
+      "token_counter": null,
+      "reasoning_mode": null,
+      "sampling": null,
+      "identity_verified": false,
+      "roles": {
+        "generate": "untested",
+        "select": "untested",
+        "extract": "untested"
+      },
+      "execution_location": "local",
+      "billing": "unmetered_local"
+    },
+    "reference": {
+      "reported_label": "未选择；非默认必需资源",
+      "deployment_id": null,
+      "revision": null,
+      "quantization": null,
+      "runtime_version": null,
+      "context_limit_tokens": null,
+      "token_counter": null,
+      "reasoning_mode": null,
+      "sampling": null,
+      "identity_verified": false,
+      "roles": {
+        "generate": "untested",
+        "select": "untested",
+        "extract": "untested"
+      },
+      "execution_location": "cloud",
+      "billing": "metered"
+    }
+  },
+  "comparison": {
+    "methods": [
+      "simple",
+      "legacy",
+      "redesign"
+    ],
+    "tiers": [
+      "local",
+      "reference"
+    ],
+    "core_methods": [
+      "simple",
+      "redesign"
+    ],
+    "repeats": 2,
+    "seed": 41189,
+    "unit": "task",
+    "current_ia_is_holdout": false,
+    "task_slots": [
+      {
+        "id": "DEV-01",
+        "split": "development",
+        "kind": "organization",
+        "brief_ref": null,
+        "owner_ref": null
+      },
+      {
+        "id": "DEV-02",
+        "split": "development",
+        "kind": "product",
+        "brief_ref": null,
+        "owner_ref": null
+      },
+      {
+        "id": "HOLD-01",
+        "split": "holdout",
+        "kind": "organization",
+        "brief_ref": null,
+        "owner_ref": null
+      },
+      {
+        "id": "HOLD-02",
+        "split": "holdout",
+        "kind": "consumer_product",
+        "brief_ref": null,
+        "owner_ref": null
+      },
+      {
+        "id": "HOLD-03",
+        "split": "holdout",
+        "kind": "professional_tool",
+        "brief_ref": null,
+        "owner_ref": null
+      },
+      {
+        "id": "HOLD-04",
+        "split": "holdout",
+        "kind": "education_project",
+        "brief_ref": null,
+        "owner_ref": null
+      }
+    ],
+    "holdout_enabled": false,
+    "freeze_ref": null,
+    "fairness": [
+      "same_confirmed_brief_and_feedback",
+      "same_tier_runtime_and_resource_limits",
+      "count_all_workers_and_retries",
+      "blind_method_labels_and_balance_order",
+      "record_failures_and_unknown_cost",
+      "development_and_holdout_separate"
+    ],
+    "role_crossovers": [
+      "local/local",
+      "local/reference",
+      "reference/local",
+      "reference/reference"
+    ],
+    "selection_pool_experiment": "planned_not_run",
+    "model_effectiveness_results": []
+  }
+}

@@ -77,6 +77,31 @@ jobs:
           done
           # A correctly withheld trial is a successful check, not a cleared name.
           cat "$OUT/live-trial-001/summary.json"
+      - name: Verify model-aware offline protocol without model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          mkdir -p "$OUT"
+          python "$P/test_protocol.py" --output "$OUT/tests.json"
+          python "$P/protocol.py" matrix --config "$P/experiment.json" --output "$OUT/planned-matrix.json"
+          python -m py_compile "$P/protocol.py" "$P/test_protocol.py"
+          # The original method and its tests remain an unchanged reference.
+          git diff --exit-code 64b973c5c21e4a13accbbf79bf5ad619996f8dcb HEAD -- 02_Runtime/02_Tools/adaptive_naming/ 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/validate_evidence.py 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control-cases.json 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control-results.json
+          python - <<'PY'
+          import json, pathlib, yaml
+          root=pathlib.Path('03_Evolution/01_Research/03_Tests')
+          state=yaml.safe_load((root/'organization-naming-411-state.yaml').read_text())
+          current=state['model_aware_rebuild']
+          config=json.loads((root/'naming-evidence-pilot/model-aware/experiment.json').read_text())
+          assert current['evidence']['actual_model_runs']==0
+          assert current['validation']['local_model_support']=='not_tested'
+          assert not current['authorization']['ia_naming']
+          assert config['budgets']['max_cloud_spend']==0
+          assert config['comparison']['model_effectiveness_results']==[]
+          print('Protocol implementation checked; no model effect or adoption claim.')
+          PY
       - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
         if: always()
         with:
