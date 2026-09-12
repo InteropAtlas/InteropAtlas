@@ -1,0 +1,78 @@
+name: Finalize naming v95 stability evidence
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-v95-finalize-once.yml]
+permissions:
+  contents: write
+jobs:
+  finalize:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Verify evidence, regression and update v95 state
+        run: |
+          set -euo pipefail
+          P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+          python "$P/test_selection_policy.py" --output "$RUNNER_TEMP/selection.json"
+          python "$P/test_workflow.py" --output "$RUNNER_TEMP/workflow.json"
+          python - <<'PY'
+          import json,pathlib,re,yaml
+          root=pathlib.Path('03_Evolution/01_Research/03_Tests')
+          p=root/'naming-evidence-pilot/model-aware'
+          summary=json.loads((p/'selection-stability-pilot/results/summary.json').read_text())
+          assert summary['id']=='SELECT-408-002' and summary['requests_dispatched']==4 and summary['new_names']==0
+          results={v['request']:v for v in summary['results']}
+          assert [results[i]['status'] for i in range(1,5)]==['selection_complete_not_clearance','blocked','selection_complete_not_clearance','selection_complete_not_clearance']
+          assert 'JSONDecodeError' in results[2]['error']
+          def dm(n):return {v['id']:v['decision'] for v in results[n]['reviews']}
+          d1,d3,d4=dm(1),dm(3),dm(4)
+          order_changed=sorted(i for i in d1 if d1[i]!=d3[i]);seed_changed=sorted(i for i in d3 if d3[i]!=d4[i])
+          assert order_changed==['C001','C002','C004','C005']
+          assert seed_changed==['C003']
+          import sys;sys.path.insert(0,str(p));import selection_policy as s
+          assert s.VERSION=='0.3.0-experimental'
+          pool=[{'id':i} for i in d1]
+          q=s.order_crosschecked_queues(pool,results[1]['reviews'],results[3]['reviews'])
+          assert q['priority_ids']==['C003','C006'] and q['hold_ids']==['C001','C002','C004','C005'] and q['not_pursued_ids']==[]
+          workflow=(p/'workflow.py').read_text();assert 'explained_reverse' in workflow and 'order_crosschecked_queues' in workflow
+          report=p/'selection-stability-pilot/REPORT.zh-CN.md';assert report.exists()
+          state=root/'organization-naming-411-state.yaml';original=state.read_text();old=yaml.safe_load(original)
+          assert old['task']['snapshot_version']==94
+          text=original.replace('  snapshot_version: 94\n','  snapshot_version: 95\n',1)
+          block='next_action:\n  action: design_independent_semantic_validation_on_existing_candidates\n  rationale: >-\n    SELECT-408-002在同seed仅改变候选顺序时4/6改判，v95已用正序/反序一致性做保守资源分流。\n    当前主要未知转为语义判断是否正确，而非继续增加生成或selector规则；下一步只使用既有候选建立独立语义验证。\n  requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation\n\n'
+          text,n=re.subn(r'^next_action:\n.*?(?=^stop:)',block,text,flags=re.M|re.S);assert n==1
+          details={
+            'version':'0.3.0-experimental','authority_ref':'https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5648508810',
+            'experiment':'SELECT-408-002','run_id':34717382400,'source_pool':'REAL-408-003/cell-2-simple-411921',
+            'requests_dispatched':4,'valid_requests':3,'invalid_json_requests':1,'new_names':0,'paid_api_calls':0,
+            'same_seed_order_changed_ids':order_changed,'same_reversed_order_seed_changed_ids':seed_changed,
+            'full_seed_effect_estimable':False,'reason':'original_order_seed_52002_invalid_json',
+            'conservative_projection_seed_52001':q,'workflow_wired':True,
+            'report':'naming-evidence-pilot/model-aware/selection-stability-pilot/REPORT.zh-CN.md',
+            'evidence':'naming-evidence-pilot/model-aware/selection-stability-pilot/results/evidence.json',
+            'summary':'naming-evidence-pilot/model-aware/selection-stability-pilot/results/summary.json',
+            'independent_semantic_review':False,'quality_ground_truth':None,'ia_generation':False,'stable_promotion':False
+          }
+          text+='\n# v95 selector stability evidence and conservative order crosscheck.\nselection_stability_revision:\n'+''.join('  '+line+'\n' for line in json.dumps(details,ensure_ascii=False,indent=2).splitlines())
+          new=yaml.safe_load(text)
+          for k in old:
+              if k not in ('task','next_action'):assert old[k]==new[k],k
+          assert new['task']==dict(old['task'],snapshot_version=95)
+          state.write_text(text)
+          print(json.dumps({'order_changed':order_changed,'seed_changed':seed_changed,'queues':q},ensure_ascii=False,indent=2))
+          PY
+          git diff --check
+      - name: Commit v95 state and remove one-shot workflows
+        run: |
+          set -euo pipefail
+          rm .github/workflows/naming-selection-stability-v95-once.yml .github/workflows/naming-v95-finalize-once.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'research(#408,#411): record v95 selector order sensitivity and conservative crosscheck' -m 'Snapshot 95. Same-seed order reversal changed 4/6 decisions; one seed cell was invalid JSON. Experimental workflow now requires two order permutations to agree for priority/drop. No semantic truth, IA generation, paid inference, stable promotion or merge claim.'
+          git push origin HEAD:feat/adaptive-naming-skill-v0.1
