@@ -7,16 +7,18 @@ reviewer: Agent — OpenAI / Codex GitHub Reviewer
 review_summary_zh:
 - AES67：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
 - ARIB STD-B67：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
-- EBU R 128：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
+- EBU R 128：内容获准；机器检查发现recommendation不是受控kind后，Reviewer另行确认改回原候选受控kind standard仍acceptable_for_ordinary_acceptance。
 - AES3：deferred + identity_risk；不批准拆分、合并、删除或改写候选ID/标识。
 review_urls:
 - https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334438
 - https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334441
 - https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334445
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000348887
 - https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334450
 review_scope_zh:
 - 本包处理四个既有候选：AES67、ARIB STD-B67、EBU R 128、AES3；未新增候选身份。
 - Reviewer核对完整Canonical、原候选blob和包内一手官方来源；审核仅独立解释这些有限材料，未独立验证网络抓取真实性或全文。
+- EBU R 128的受控kind修正只恢复原候选既有分类standard；versions[].status仍保留recommendation以表达出版物正式状态。
 source_evidence:
 - evidence_id: aes67_2023
   url: https://aes.org/publications/standards-store/
@@ -55,8 +57,7 @@ objects:
     external_identifiers: [{namespace: aes, value: aes67}]
     official_url: https://aes.org/publications/standards-store/
     versions: [{version: 'AES67-2023', status: published_standard, url: 'https://aes.org/publications/standards-store/'}]
-    sources:
-    - {url: 'https://aes.org/publications/standards-store/', title: AES Standards Store — AES67-2023, language: en, accessed: '2026-09-14'}
+    sources: [{url: 'https://aes.org/publications/standards-store/', title: AES Standards Store — AES67-2023, language: en, accessed: '2026-09-14'}]
 - round_id: L
   candidate_id: arib_std_b67
   candidate_blob: 74c6cfa46df3721e6713da40ac29af94764532bf
@@ -73,8 +74,7 @@ objects:
     external_identifiers: [{namespace: arib, value: std-b67}]
     official_url: https://www.arib.or.jp/english/std_tr/broadcasting/std-b67.html
     versions: [{version: '2.0', status: published_standard, url: 'https://www.arib.or.jp/english/std_tr/broadcasting/std-b67.html'}]
-    sources:
-    - {url: 'https://www.arib.or.jp/english/std_tr/broadcasting/desc/std-b67.html', title: ARIB STD-B67 overview and amendment history, language: en, accessed: '2026-09-14'}
+    sources: [{url: 'https://www.arib.or.jp/english/std_tr/broadcasting/desc/std-b67.html', title: ARIB STD-B67 overview and amendment history, language: en, accessed: '2026-09-14'}]
 - round_id: L
   candidate_id: ebu_r128
   candidate_blob: 60910adbf143dba9ae0d9d3802e1d32aaaed0602
@@ -82,7 +82,7 @@ objects:
   proposed_record:
     id: ebu_r128
     type: artifact
-    kind: recommendation
+    kind: standard
     name_zh: EBU R 128 音频响度归一化与允许最大电平建议
     name_en: EBU R 128 — Loudness normalisation and permitted maximum level of audio signals
     description_zh: 建议节目平均响度采用-23 LUFS，并使用响度范围和最大真峰值电平等描述符来规范音频响度与电平。
@@ -91,8 +91,7 @@ objects:
     external_identifiers: [{namespace: ebu, value: r.128}]
     official_url: https://tech.ebu.ch/publications/r128
     versions: [{version: '5.0', status: recommendation, url: 'https://tech.ebu.ch/publications/r128'}]
-    sources:
-    - {url: 'https://tech.ebu.ch/publications/r128', title: EBU R 128 Version 5.0, language: en, accessed: '2026-09-14'}
+    sources: [{url: 'https://tech.ebu.ch/publications/r128', title: EBU R 128 Version 5.0, language: en, accessed: '2026-09-14'}]
 identity_diagnoses:
 - round_id: M
   candidate_id: aes3
