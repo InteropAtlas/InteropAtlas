@@ -1,0 +1,71 @@
+packet_id: continuous_d_relations_20260913
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 0d4cb6ca0c98b8bf13ccc7aa5bf9bf5cc465208f
+executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+reviewer: null
+review_scope_zh:
+- 连续轮次D，落实已有mcp_jsonrpc和quic_tls_version提案；只审核下列proposed_record，不新建对象或关系词表。
+- 三轮12个对象已按独立Reviewer逐项结论写入上述分支基线；本包关系另行审核，不借用对象接纳结论。
+- 对照完整当前正式图核查ID、两端主体与重复边；只允许明确通过的字段原样复制，逐项给出acceptable_for_ordinary_acceptance、deferred或rejected。
+- 作者本轮实际读取下列官方固定版页面及定位，提供有限摘录；Reviewer独立解释材料，不冒充直连官网、全文复核或抓取真实性认证。
+- 使用现有relation.v0.schema.json的字符串端点形式，不扩展Schema或谓词；不表示项目采用、部署安全认证或任意未来版本兼容。
+source_evidence:
+- evidence_id: mcp_jsonrpc_requirement
+  url: https://modelcontextprotocol.io/specification/2025-11-25/basic
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Base Protocol / Messages
+  excerpt: All messages between MCP clients and servers MUST follow the JSON-RPC 2.0 specification.
+  observation_zh: 正文JSON-RPC 2.0超链接直接指向https://www.jsonrpc.org/specification，支持固定MCP版本到既有JSON-RPC2.0规范的uses关系。这里只收消息规范关系，不等同于全部授权、生命周期或传输规范。
+- evidence_id: quic_explicit_tls_reference
+  url: https://www.rfc-editor.org/rfc/rfc9001.html
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Sections 3, 4.2 and 11.1 Normative References / TLS13
+  excerpts:
+  - QUIC uses the TLS handshake
+  - The Transport Layer Security (TLS) Protocol Version 1.3
+  - TLS record protection is not used by QUIC.
+  observed_reference:
+    section: '11.1'
+    reference_label: TLS13
+    rfc_number: '8446'
+    doi: 10.17487/RFC8446
+    url: https://www.rfc-editor.org/info/rfc8446
+  observation_zh: 第11.1节是Normative References，TLS13明确列RFC8446及DOI，不是只从TLS版本号推断。第3节说明QUIC使用TLS握手而自行承担记录层职责，第4.2节允许具备所需特性的更新TLS版本；因此本关系限于固定RFC9001对RFC8446规范的使用，不宣称只能使用1.3或承载TLS记录。
+relations:
+- proposal_id: mcp_jsonrpc
+  evidence_ids: [mcp_jsonrpc_requirement]
+  proposed_record:
+    id: mcp_jsonrpc
+    type: relation
+    name_zh: MCP 日期版使用 JSON-RPC 2.0 消息规范
+    name_en: Dated MCP specification uses JSON-RPC 2.0 messages
+    source: mcp_2025_11_25
+    relation: uses
+    target: json_rpc_2.0
+    context:
+      version_context: {source: '2025-11-25', target: '2.0'}
+      conditions_zh: 仅表述2025-11-25版MCP客户端与服务器消息遵循JSON-RPC 2.0；不等同于完整传输、授权或生命周期要求，也不表明IA实际采用。
+      conditions_en: Limited to JSON-RPC 2.0 messages between clients and servers in the dated MCP specification; this does not cover all transport, authorization or lifecycle requirements or assert adoption by IA.
+    evidence:
+    - {url: 'https://modelcontextprotocol.io/specification/2025-11-25/basic#messages', title: MCP base protocol message requirement, language: en, accessed: '2026-09-13'}
+- proposal_id: quic_tls_version
+  evidence_ids: [quic_explicit_tls_reference]
+  proposed_record:
+    id: quic_tls_version
+    type: relation
+    name_zh: QUIC TLS 映射使用 RFC 8446 的 TLS 1.3 规范
+    name_en: QUIC TLS mapping uses the TLS 1.3 specification in RFC 8446
+    source: quic_tls_rfc9001
+    relation: uses
+    target: tls13_rfc8446
+    context:
+      version_context: {source: RFC 9001, target: RFC 8446}
+      conditions_zh: 由RFC9001的TLS13规范性引用及握手使用支持；QUIC自行承担记录层职责。本边不限制未来TLS版本，不把两份文档合并，也不证明任何部署安全。
+      conditions_en: Supported by RFC 9001's normative TLS13 reference and use of the handshake; QUIC supplies its own record-layer functions. This edge neither excludes later TLS versions nor merges document identities or certifies deployment security.
+    evidence:
+    - {url: 'https://www.rfc-editor.org/rfc/rfc9001.html#section-11.1', title: RFC 9001 normative TLS13 reference to RFC 8446, language: en, accessed: '2026-09-13'}
+    - {url: 'https://www.rfc-editor.org/rfc/rfc9001.html#section-3', title: QUIC and TLS protocol interaction, language: en, accessed: '2026-09-13'}
+    - {url: 'https://www.rfc-editor.org/rfc/rfc9001.html#section-4.2', title: TLS version boundary, language: en, accessed: '2026-09-13'}
