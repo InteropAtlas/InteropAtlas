@@ -309,5 +309,31 @@ class IntakeCoverageAuditTests(unittest.TestCase):
             audit(self.root)
 
 
+    def add_historical_shadow(self, content: str) -> None:
+        path = Path('01_State/Inbox/candidates/shadow.yaml')
+        (self.root / path).write_text(content, encoding='utf-8')
+        self.git('add', str(path))
+        self.git('-c', 'commit.gpgsign=false', 'commit', '-qm', 'Ambiguous historical candidate tree')
+        self.object['intake_provenance']['reviewed_against_commit'] = self.git('rev-parse', 'HEAD')
+        # Restore uniqueness only in the current working tree. The referenced
+        # ancestor still contains both copies, which must be rejected.
+        (self.root / path).unlink()
+        self.write(OBJECTS, self.object)
+
+    def test_conflicting_candidate_id_elsewhere_in_frozen_tree_is_rejected(self) -> None:
+        shadow = copy.deepcopy(self.candidate)
+        shadow['identity_resolution'].update(state='identity_risk', matched_canonical_ids=[])
+        shadow['provenance']['reviewer'] = None
+        self.add_historical_shadow(yaml.safe_dump(shadow, sort_keys=False))
+        with self.assertRaisesRegex(ValueError, 'Duplicate frozen candidate_id'):
+            audit(self.root)
+
+    def test_identical_blob_in_two_frozen_paths_is_still_duplicate(self) -> None:
+        blob = self.object['intake_provenance']['reviewed_candidate_blob']
+        self.add_historical_shadow(self.git('cat-file', 'blob', blob) + '\n')
+        with self.assertRaisesRegex(ValueError, 'Duplicate frozen candidate_id'):
+            audit(self.root)
+
+
 if __name__ == '__main__':
     unittest.main(verbosity=2)

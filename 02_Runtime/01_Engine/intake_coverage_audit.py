@@ -67,6 +67,8 @@ def frozen_context(root: Path, commit: str, cache: dict) -> dict[str, Any]:
                         '01_State/01_Objects', '01_State/Inbox/candidates')
         objects = []
         candidate_blobs = set()
+        frozen_candidates = {}
+        candidate_origins = {}
         for entry in tree.split('\0'):
             if not entry:
                 continue
@@ -78,6 +80,18 @@ def frozen_context(root: Path, commit: str, cache: dict) -> dict[str, Any]:
                 continue
             if path.startswith('01_State/Inbox/candidates/'):
                 candidate_blobs.add(blob)
+                # Count documents across paths, even when two files share a
+                # blob SHA. A selected safe copy cannot hide an ambiguous tree.
+                for document in yaml.safe_load_all(git_text(root, 'cat-file', 'blob', blob)):
+                    if not isinstance(document, dict):
+                        raise ValueError(f'Non-record in frozen Candidate file: {path}')
+                    cid = document.get('candidate_id')
+                    if not isinstance(cid, str) or not cid:
+                        raise ValueError(f'Missing candidate_id in frozen file: {path}')
+                    if cid in frozen_candidates:
+                        raise ValueError(f'Duplicate frozen candidate_id: {cid}')
+                    frozen_candidates[cid] = document
+                    candidate_origins[cid] = blob
             elif path.startswith('01_State/01_Objects/'):
                 for document in yaml.safe_load_all(git_text(root, 'cat-file', 'blob', blob)):
                     if not isinstance(document, dict):
@@ -85,7 +99,8 @@ def frozen_context(root: Path, commit: str, cache: dict) -> dict[str, Any]:
                     objects.append(document)
         indexed = unique(objects, 'id')
         cache[commit] = dict(objects=indexed, index=canonical_identifier_index(indexed.values()),
-                             candidate_blobs=candidate_blobs)
+                             candidate_blobs=candidate_blobs, candidates=frozen_candidates,
+                             candidate_origins=candidate_origins)
     return cache[commit]
 
 
@@ -107,12 +122,10 @@ def verify_frozen_acceptance(root: Path, event: dict[str, Any], candidate: dict[
     context = frozen_context(root, commit, cache)
     if blob not in context['candidate_blobs']:
         raise ValueError('Frozen Candidate blob is not in the referenced baseline Candidate tree')
-    documents = list(yaml.safe_load_all(git_text(root, 'cat-file', 'blob', blob)))
-    matches = [doc for doc in documents if isinstance(doc, dict)
-               and doc.get('candidate_id') == candidate['candidate_id']]
-    if len(matches) != 1:
-        raise ValueError('Frozen Candidate snapshot must contain exactly one matching candidate_id')
-    frozen = matches[0]
+    cid = candidate['candidate_id']
+    if context['candidate_origins'].get(cid) != blob:
+        raise ValueError('Frozen Candidate snapshot must contain exactly one global matching candidate_id')
+    frozen = context['candidates'][cid]
     errors = validate_candidate(frozen, schema, context['index'])
     if errors:
         raise ValueError('Invalid frozen Candidate preflight: ' + '; '.join(x.message for x in errors))
