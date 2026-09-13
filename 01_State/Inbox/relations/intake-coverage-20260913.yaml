@@ -115,35 +115,15 @@ memberships:
   ref: {surface: canonical, id: skos_reference}
 - category_id: semantics
   ref: {surface: canonical, id: json_ld_1.1}
+canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
 proposals:
-- id: http3_http_semantics
-  source: {surface: canonical, id: http3_rfc9114}
-  proposed_relation: uses
-  target: {surface: canonical, id: http_rfc9110}
-  status: review_required
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-1']
-  conditions_zh: HTTP/3 沿用 HTTP 语义；不能表述为替代 RFC 9110。
-- id: http3_quic
-  source: {surface: canonical, id: http3_rfc9114}
-  proposed_relation: depends_on
-  target: {surface: candidate, id: quic_rfc9000}
-  status: review_required
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-2']
-  conditions_zh: 此边只涉及 RFC 9114 的 QUIC 映射，不推断所有未来 HTTP/QUIC 版本。
-- id: quic_tls_security
-  source: {surface: candidate, id: quic_tls_rfc9001}
-  proposed_relation: secures
-  target: {surface: candidate, id: quic_rfc9000}
-  status: review_required
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
-  conditions_zh: 使用 TLS 为 QUIC 提供安全，不把两份规范合并。
 - id: quic_tls_version
   source: {surface: candidate, id: quic_tls_rfc9001}
   proposed_relation: uses
   target: {surface: candidate, id: tls13_rfc8446}
   status: review_required
   evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
-  conditions_zh: 须保留 QUIC 对 TLS 集成方式的限制。
+  conditions_zh: 须保留 QUIC 对 TLS 集成方式的限制。PR422 独立审查暂缓此边；需补充 RFC9001 对 RFC8446 的特定文档规范性引用证据，不从 TLS 版本约束推导文档引用。
 - id: mcp_jsonrpc
   source: {surface: candidate, id: mcp_2025_11_25}
   proposed_relation: uses

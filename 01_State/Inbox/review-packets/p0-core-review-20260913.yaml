@@ -1,170 +1,36 @@
 packet_id: p0_core_review_20260913
-status: pending_minimal_record_confirmation
+status: materialized_with_deferred_relation
+source_issue: 146
+delivery_pr: 422
+frozen_packet_commit: 232583f26d4613f725f71eb865afc2704a23f355
+frozen_packet_blob: c508ecb07eb7e83ca52e70d6d419e68f46a156da
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/232583f26d4613f725f71eb865afc2704a23f355/01_State/Inbox/review-packets/p0-core-review-20260913.yaml
 baseline_commit: 08e4365ae5d7cd510d48f3e9d235272ce554a7fa
-candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
 candidate_blob: f6866b7ebbb7a539b7df10654883013f9163779f
 executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-source_issue: 146
-review_scope_zh: >
-  只审核以下六个固定文档身份、名称、摘要、版本状态及明确列出的关系。
-  不宣称核验全部规范正文、全部勘误、实现兼容性、专利或认证。
-  本文件是 Inbox 送审材料，不是正式对象或接纳事件，不进入正式图。
-  只有独立 Reviewer 明确逐项给出可接纳结论后，才可物化这些草稿；代码评审无发现不等于语义批准。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
 objects:
-- candidate_id: quic_rfc9000
-  proposed_object:
-    id: quic_rfc9000
-    type: standard
-    kind: protocol
-    name_zh: QUIC v1 传输协议（RFC 9000）
-    name_en: 'QUIC: A UDP-Based Multiplexed and Secure Transport (RFC 9000)'
-    description_zh: 定义 QUIC v1。
-    description_en: Defines QUIC v1.
-    organization: ietf
-    domains: [networking]
-    layers: [network_transport]
-    capabilities: []
-    external_identifiers: [{namespace: rfc, value: '9000'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc9000.html
-    versions: [{version: RFC 9000, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc9000.html'}]
-    sources:
-    - {url: 'https://datatracker.ietf.org/doc/rfc9000/', title: 'RFC 9000 — document identity, status and introduction', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: 固定 RFC 9000 的文档身份，不是所有 QUIC 版本或扩展的总称；capabilities 空表表示映射未完成，不表示没有功能。
-- candidate_id: quic_tls_rfc9001
-  proposed_object:
-    id: quic_tls_rfc9001
-    type: standard
-    kind: specification
-    name_zh: QUIC 的 TLS 安全集成（RFC 9001）
-    name_en: Using TLS to Secure QUIC (RFC 9001)
-    description_zh: QUIC 使用 TLS 握手，而不是在 QUIC 上传输 TLS 记录。
-    description_en: QUIC uses the TLS handshake rather than carrying TLS records over QUIC.
-    organization: ietf
-    domains: [networking, security]
-    layers: [network_transport]
-    capabilities: []
-    external_identifiers: [{namespace: rfc, value: '9001'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc9001.html
-    versions: [{version: RFC 9001, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc9001.html'}]
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc9001/', title: 'RFC 9001 — status and Sections 1, 3, 4.2', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: 客户端不得提供低于 TLS 1.3 的版本。本条目仅记录 RFC 9001，不合并 RFC 9000 或推定后续版本兼容。
-- candidate_id: tls13_rfc8446
-  proposed_object:
-    id: tls13_rfc8446
-    type: standard
-    kind: protocol
-    status: superseded
-    name_zh: TLS 1.3 原始规范（RFC 8446，已被取代）
-    name_en: TLS 1.3 Original Specification (RFC 8446, obsoleted)
-    description_zh: TLS 1.3 的原始规范，定义握手与记录协议。保留为历史引用目标；RFC Editor 和 IETF Datatracker 均记录它已被 RFC 9846 取代。
-    description_en: The original TLS 1.3 specification for handshake and record protocol, retained as a historical reference. RFC Editor and IETF Datatracker record it as obsoleted by RFC 9846.
-    organization: ietf
-    domains: [security, networking]
-    layers: [network_transport]
-    capabilities: []
-    external_identifiers: [{namespace: rfc, value: '8446'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc8446.html
-    versions: [{version: RFC 8446, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc8446.html'}]
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc8446/', title: 'RFC 8446 — original text and About this RFC / Obsoleted by', language: en, accessed: '2026-09-13'}
-    - {url: 'https://datatracker.ietf.org/doc/rfc8446/', title: 'RFC 8446 — status and obsoleted-by metadata', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: proposed_standard 是该 RFC 的标准成熟等级；superseded 是文档生命周期，两者不同。此记录不表示 TLS 1.3 协议整体已弃用。RFC 9846 待单独收录，不覆盖或重命名 RFC 8446。
-- candidate_id: cbor_rfc8949
-  proposed_object:
-    id: cbor_rfc8949
-    type: standard
-    kind: format
-    name_zh: CBOR 简明二进制对象表示（RFC 8949）
-    name_en: Concise Binary Object Representation (RFC 8949)
-    description_zh: RFC 8949 是 CBOR 的 STD 94 互联网标准文档；它不创建格式的新版本。CBOR 数据模型是 JSON 数据模型的扩展。
-    description_en: RFC 8949 is the CBOR Internet Standard document, STD 94; it does not create a new format version. CBOR uses an extended JSON data model.
-    organization: ietf
-    domains: [data_representation]
-    layers: [data_syntax]
-    capabilities: [data_serialization]
-    external_identifiers: [{namespace: rfc, value: '8949'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc8949.html
-    versions: [{version: RFC 8949 / STD 94, status: internet_standard, url: 'https://www.rfc-editor.org/rfc/rfc8949.html'}]
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc8949/', title: 'RFC 8949 — status, abstract and Section 6', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: 本轮接纳范围限文档身份、标准等级、格式连续性和数据模型概括；具体转换规则另行核验。
-- candidate_id: openapi_3.1.1
-  proposed_object:
-    id: openapi_3.1.1
-    type: standard
-    kind: specification
-    name_zh: OpenAPI 接口描述规范 3.1.1
-    name_en: OpenAPI Specification 3.1.1
-    description_zh: 面向 HTTP API 的语言无关接口描述规范。
-    description_en: A language-agnostic interface description specification for HTTP APIs.
-    domains: [web, api]
-    layers: [data_syntax, capability_service]
-    capabilities: []
-    external_identifiers: [{namespace: openapi, value: '3.1.1'}]
-    official_url: https://spec.openapis.org/oas/v3.1.1.html
-    versions: [{version: '3.1.1', date: '2024-10-24', status: published, url: 'https://spec.openapis.org/oas/v3.1.1.html'}]
-    sources:
-    - {url: 'https://spec.openapis.org/oas/v3.1.1.html', title: 'OpenAPI 3.1.1 — version, introduction and Section 4.8.24', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: 固定 3.1.1 版本，不声称最新；本轮不接纳 Schema 方言或可执行实现的判断。
-- candidate_id: sparql11_query_2013
-  proposed_object:
-    id: sparql11_query_2013
-    type: standard
-    kind: specification
-    name_zh: SPARQL 1.1 查询语言（2013年推荐标准）
-    name_en: SPARQL 1.1 Query Language (2013 Recommendation)
-    description_zh: SPARQL 1.1 查询语言文档，支持聚合与子查询；查询结果可以是结果集或 RDF 图。
-    description_en: The SPARQL 1.1 query language document supports aggregation and subqueries; query results may be result sets or RDF graphs.
-    organization: w3c
-    domains: [knowledge_representation]
-    layers: [semantics]
-    capabilities: []
-    external_identifiers: [{namespace: w3c, value: REC-sparql11-query-20130321}]
-    official_url: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/
-    versions: [{version: SPARQL 1.1 Query Language, date: '2013-03-21', status: recommendation, url: 'https://www.w3.org/TR/2013/REC-sparql11-query-20130321/'}]
-    sources:
-    - {url: 'https://www.w3.org/TR/2013/REC-sparql11-query-20130321/', title: 'SPARQL 1.1 Query Language — abstract and status', language: en, accessed: '2026-09-13'}
-    scope_notes_zh: 只收 Query Language 文档，不把 SPARQL Update、Protocol、结果格式和整个套件合为一个对象；不声明已集成到 IA 引擎。
-relations_to_review:
-- proposal_id: http3_http_semantics
-  source_id: http3_rfc9114
-  relation: uses
-  target_id: http_rfc9110
-  conditions_zh: RFC 9114 沿用 RFC 9110 的共同 HTTP 语义，而不是取代它。
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-1']
-- proposal_id: http3_quic
-  source_id: http3_rfc9114
-  relation: depends_on
-  target_id: quic_rfc9000
-  conditions_zh: 只表述固定 RFC 9114 的 QUIC 传输依赖，不推定所有未来版本。
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-2']
-- proposal_id: quic_tls_security
-  source_id: quic_tls_rfc9001
-  relation: secures
-  target_id: quic_rfc9000
-  conditions_zh: 技术规范级安全机制关系，不表示某个部署已通过安全验证，也不把两份规范合并。
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
-- proposal_id: quic_tls_version
-  source_id: quic_tls_rfc9001
-  relation: uses
-  target_id: tls13_rfc8446
-  conditions_zh: 记录 RFC 9001 发布时规范性引用的 TLS 1.3 文档；RFC 8446 现已被 RFC 9846 取代，不能把这条历史引用当作当前安全部署建议。
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-4.2']
-remaining_zh:
-- 实际独立语义审查、正式化时的 schema/identity 检查和验收事件尚待完成。
-- 专利、认证、具体实现兼容性和未列出的扩展不在本批审核范围，不写未经核实的肯定值。
-- RFC 9846 的单独候选以及 OpenAPI 后续版本应在后续有界批次处理，保留此处官方发现依据。
+- {candidate_id: quic_rfc9000, canonical_id: quic_rfc9000, acceptance_event_id: accept-20260913-p0-quic_rfc9000, review_comment_id: 3999644662}
+- {candidate_id: quic_tls_rfc9001, canonical_id: quic_tls_rfc9001, acceptance_event_id: accept-20260913-p0-quic_tls_rfc9001, review_comment_id: 3999644665}
+- {candidate_id: tls13_rfc8446, canonical_id: tls13_rfc8446, acceptance_event_id: accept-20260913-p0-tls13_rfc8446, review_comment_id: 3999644668}
+- {candidate_id: cbor_rfc8949, canonical_id: cbor_rfc8949, acceptance_event_id: accept-20260913-p0-cbor_rfc8949, review_comment_id: 3999644669}
+- {candidate_id: openapi_3.1.1, canonical_id: openapi_3.1.1, acceptance_event_id: accept-20260913-p0-openapi_3.1.1, review_comment_id: 3999644672}
+- {candidate_id: sparql11_query_2013, canonical_id: sparql11_query_2013, acceptance_event_id: accept-20260913-p0-sparql11_query_2013, review_comment_id: 3999644675}
+canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
+relation_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
+deferred_relation_refs: [quic_tls_version]
 source_capture:
   workflow_run: 34756528326
   artifact_id: 10317452877
   archive_sha256: 745a4685cb4d730709f6392fdbae671b75559d91e9164f929576dfb605039e62
   captured_sources: 9
-  artifact_url: https://github.com/InteropAtlas/InteropAtlas/actions/runs/34756528326/artifacts/10317452877
-  manifest_path_in_archive: manifest.json
-  capture_commit: d8d0876ce21b6da0bcb2798ea2002a30e0d1c26f
-  notes_zh: 原始网页字节及版权保留于30天有效的Actions产物。仓库短摘录只供有限内容复核，抓取成功不是语义接纳。
-review_followup_zh:
-- 第三轮Reviewer已读取仓库短摘录，提出六项最小删减，本版逐项执行；未将原changes_required状态自动改成批准。
-- 三条关系明确可接纳：http3_http_semantics、http3_quic、quic_tls_security。quic_tls_version明确deferred，暂不物化。
-- 独立审查意见见PR422的discussion_r3999620955、3999620958、3999620959、3999620961、3999620962、3999620963、3999620964；证据传输方式仍为作者提供的有限一手摘录。
+  retention_days: 30
+  excerpts_path: 01_State/Inbox/review-packets/p0-primary-excerpts-20260913.yaml
+notes_zh:
+- 这是交付回执，不是第二份正式对象库。完整被审原稿保存在不可变Git提交/原blob中，正式字段只维护在Canonical文件。
+- 第四轮独立Reviewer对六项最小字段分别明确可接纳；三条关系第三轮已通过，第四轮保留结论。
+- Reviewer实际读取的是作者提供的一手短摘录，不是直连官网或全文复核，也未独立验证传输真实性。
+- 作者机械序列化已审字段并补充溯源元数据；未声称这一步另外取得独立审核，相关贡献字段明确pending。
+- 已删减的详细技术解释、专利、认证、实现兼容性仍在本批接纳范围之外；后续扩充需要对应证据与复核。
+- quic_tls_version 暂缓，不能从最低TLS版本约束推导特定RFC文档的规范性引用。
+- RFC9846及OpenAPI后续版本是明确的后续收录事项，不覆盖旧版本身份，不重复新建本批六项候选。

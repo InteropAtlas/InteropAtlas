@@ -1,0 +1,59 @@
+id: http3_http_semantics
+type: relation
+name_zh: HTTP/3 使用 HTTP 共同语义
+name_en: HTTP/3 uses common HTTP semantics
+source: {type: standard, id: http3_rfc9114}
+relation: uses
+target: {type: standard, id: http_rfc9110}
+conditions_zh: RFC 9114 沿用 RFC 9110 的共同 HTTP 语义，而不是取代它。
+evidence:
+- {url: 'https://www.rfc-editor.org/rfc/rfc9114.html#section-1', title: HTTP/3 — Introduction, accessed: '2026-09-13'}
+record_created_at: '2026-09-13T12:51:12+00:00'
+record_updated_at: '2026-09-13T12:51:12+00:00'
+latest_substantive_contribution: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: pending independent serialization review, github_actor: ff6962757}
+semantic_review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_packet_commit: 4f9bb1045627516a8e9ca1e1ab04d0698c98fbce
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
+  scope_zh: 独立评价仓库内有限一手摘录及此关系的方向、端点和条件；不声称核验全文或传输真实性。序列化不是新的独立审核。
+---
+id: http3_quic
+type: relation
+name_zh: HTTP/3 依赖 QUIC v1
+name_en: HTTP/3 depends on QUIC v1
+source: {type: standard, id: http3_rfc9114}
+relation: depends_on
+target: {type: standard, id: quic_rfc9000}
+conditions_zh: 只表述固定 RFC 9114 的 QUIC 传输依赖，不推定所有未来版本。
+evidence:
+- {url: 'https://www.rfc-editor.org/rfc/rfc9114.html#section-2', title: HTTP/3 — HTTP/3 Protocol Overview, accessed: '2026-09-13'}
+record_created_at: '2026-09-13T12:51:12+00:00'
+record_updated_at: '2026-09-13T12:51:12+00:00'
+latest_substantive_contribution: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: pending independent serialization review, github_actor: ff6962757}
+semantic_review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_packet_commit: 4f9bb1045627516a8e9ca1e1ab04d0698c98fbce
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
+  scope_zh: 独立评价仓库内有限一手摘录及此关系的方向、端点和条件；不声称核验全文或传输真实性。序列化不是新的独立审核。
+---
+id: quic_tls_security
+type: relation
+name_zh: QUIC 的 TLS 安全映射
+name_en: TLS security mapping for QUIC
+source: {type: standard, id: quic_tls_rfc9001}
+relation: secures
+target: {type: standard, id: quic_rfc9000}
+conditions_zh: 技术规范级安全机制关系，不表示某个部署已通过安全验证，也不把两份规范合并。
+evidence:
+- {url: 'https://www.rfc-editor.org/rfc/rfc9001.html#section-1', title: Using TLS to Secure QUIC — Introduction, accessed: '2026-09-13'}
+record_created_at: '2026-09-13T12:51:12+00:00'
+record_updated_at: '2026-09-13T12:51:12+00:00'
+latest_substantive_contribution: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: pending independent serialization review, github_actor: ff6962757}
+semantic_review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_packet_commit: 4f9bb1045627516a8e9ca1e1ab04d0698c98fbce
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
+  scope_zh: 独立评价仓库内有限一手摘录及此关系的方向、端点和条件；不声称核验全文或传输真实性。序列化不是新的独立审核。
