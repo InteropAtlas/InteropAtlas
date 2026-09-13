@@ -1,0 +1,97 @@
+{
+  "id": "DELIVERY-411-001-SCREEN-03",
+  "status": "interactive_queries_in_progress_no_full_screen_promotion",
+  "date": "2026-09-13",
+  "executor": "OpenAI / ChatGPT / GPT-6 Astra Pro",
+  "primary_issue": 411,
+  "previous_checkpoint": {
+    "path": "03_Evolution/01_Research/03_Tests/organization-naming-411-delivery-001-screening-stage2.json",
+    "commit": "289f2dc3ce83b2a15f5671490f2cb899a8db3f8f"
+  },
+  "candidate": {"id": "D012", "name": "Common Latitude"},
+  "connection": {"provider": "TinyFish", "connected_for_current_request": true, "actual_browser_invoked": true},
+  "purpose": "Finish actual candidate trademark screening through normal official interfaces; not a model benchmark or new reviewer framework.",
+  "evidence_level": "browser_executor_report; source-page screenshots or exports have not been returned for independent inspection",
+  "counts": {"new_names_this_stage": 0, "inherited_generated": 48, "inherited_internally_retained": 6, "fully_screened_for_owner_exposure": 0, "formal_owner_review_presented": 0, "new_owner_accepted": 0},
+  "runs": [
+    {
+      "id": "271c9de3-7eb1-42d6-902f-0c205bacf03d",
+      "url": "https://agent.tinyfish.ai/runs/271c9de3-7eb1-42d6-902f-0c205bacf03d",
+      "target": "https://tmsearch.uspto.gov/",
+      "status": "completed",
+      "reported_step_count": 21,
+      "reported_duration_seconds": 378,
+      "reported_queries": [
+        {"query": "\"COMMON LATITUDE\"", "mode": "Wordmark basic", "status_filters": "live_and_dead", "reported_count": 3128, "reported_inspected_scope": "first_page_50_not_all_3128", "adjudication": "query_behavior_uncertain_no_exact_absence_conclusion"},
+        {"query": "COMMONLATITUDE", "mode": "Wordmark basic", "status_filters": "live_and_dead", "reported_count": 0, "reported_message": "No results found", "adjudication": "reported_single_token_no_hits_only_not_composite_or_near_clearance"}
+      ],
+      "executor_report_errors_not_adopted": [
+        "Report called all 3128 results LATITUDE-only although its own limitation said only the first 50 were viewed.",
+        "Report said quoted phrase search is unsupported; the official USPTO guidance explicitly prescribes CM plus a quoted multiword phrase.",
+        "Report inferred no application or registration exists from one search; only no hits for the actual submitted query can be recorded."
+      ],
+      "screenshots_exported_to_controller": false,
+      "candidate_us_full_screen": "incomplete"
+    },
+    {
+      "id": "ece9d968-8854-4ade-a600-2dc0aea122b8",
+      "url": "https://agent.tinyfish.ai/runs/ece9d968-8854-4ade-a600-2dc0aea122b8",
+      "target": "https://www.tmdn.org/tmview/",
+      "status": "failed",
+      "error": "This task timed out before it finished. Try a simpler goal, or retry.",
+      "reported_step_count": 34,
+      "reported_duration_seconds": 1189,
+      "candidate_results": null,
+      "scope": "No EU, CN or WIPO record absence can be inferred.",
+      "boundary_observation": "Progress text mentioned clicking a proxy/firewall check despite explicit no-bypass instructions. No complete action trace or successful access was returned; compliance cannot be established from those labels. No result was accepted. Do not repeat or endorse access-check circumvention."
+    },
+    {
+      "id": "2607d67f-b3e7-469f-89ea-325d920cfa40",
+      "url": "https://agent.tinyfish.ai/runs/2607d67f-b3e7-469f-89ea-325d920cfa40",
+      "target": "https://tmsearch.uspto.gov/",
+      "status": "running_at_checkpoint",
+      "requested_queries": ["CM:\"common latitude\"", "CM:(common AND latitude)", "CM:commonlatitude"],
+      "requested_mode": "Expert",
+      "purpose": "Correct basic-mode ambiguity, not rerun an accepted full screen.",
+      "latest_reported_step_count": 42,
+      "configured_limits": {"max_steps": 32, "max_duration_seconds": 240},
+      "limit_observation": "Returned progress exceeded requested max_steps; do not claim the configured limits were enforced.",
+      "results": null
+    },
+    {
+      "id": "77944434-3d73-4142-a358-828c87b175e7",
+      "url": "https://agent.tinyfish.ai/runs/77944434-3d73-4142-a358-828c87b175e7",
+      "target": "https://www3.wipo.int/madrid/monitor/en/",
+      "status": "pending_at_creation",
+      "requested_queries": ["COMMON LATITUDE", "COMMONLATITUDE"],
+      "scope": "Madrid international registrations only, not complete domestic registries.",
+      "results": null
+    },
+    {
+      "id": "591a394d-8f09-4864-9e8e-26370af7e819",
+      "url": "https://agent.tinyfish.ai/runs/591a394d-8f09-4864-9e8e-26370af7e819",
+      "target": "https://sbj.cnipa.gov.cn/sbj/sbcx/",
+      "status": "pending_at_creation",
+      "requested_queries": ["COMMON LATITUDE", "COMMONLATITUDE"],
+      "scope": "Normal official domestic CN search; stop on CAPTCHA, login, access refusal or firewall verification.",
+      "results": null
+    }
+  ],
+  "official_query_guidance": {
+    "url": "https://www.uspto.gov/trademarks/search/federal-trademark-searching",
+    "read_this_stage": true,
+    "relevant_sections": ["Search strategy for words", "Combined term search"],
+    "observation": "Official guidance supports CM quoted phrase and expanded/alternative/combined queries. Exact knockout alone does not complete a confusing-similarity screen."
+  },
+  "access_read_observations": {
+    "madrid_monitor": "TinyFish fetch_content returned official help text; this confirms readable interface/help only, not candidate results.",
+    "cnipa_landing": "TinyFish fetch_content returned official links including wcjs.sbj.cnipa.gov.cn; no candidate-level results yet.",
+    "wipo_branddb": "No usable candidate search content returned; do not infer zero records."
+  },
+  "billing": {"browser_is_metered": true, "amount_charged": null, "no_zero_cost_claim": true, "name_registrations_or_purchases": 0, "new_naming_model_benchmarks": 0},
+  "next_action": "wait_for_existing_three_run_ids_until_terminal_then_record_candidate_bound_results_and_update_recovery; do_not_duplicate_active_runs_or_promote_unverified_absence",
+  "current_candidate_disposition": "internal_hold_screening_incomplete",
+  "historical_results_mutated": false,
+  "stable_skill_changed": false,
+  "owner_aesthetic_decision_requested": false
+}
