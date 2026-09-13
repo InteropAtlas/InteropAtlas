@@ -1,0 +1,77 @@
+name: Naming state v98 semantic validation checkpoint
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-state-v98-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: naming-state-v98-once
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      STATE: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      UPDATER: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-review-task-gate/state_v98.py
+      EXPECTED_BLOB: d9970e8d5c8bb5e9f0e6c15235d46e717198e83c
+      BRANCH: feat/adaptive-naming-skill-v0.1
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build and validate bounded v98 proposal
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object "$STATE")" = "$EXPECTED_BLOB"
+          cp "$STATE" "$RUNNER_TEMP/previous.yaml"
+          python "$UPDATER" "$STATE" "$RUNNER_TEMP/proposed.yaml"
+          python -m pip install PyYAML==6.0.2
+          python 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py state "$RUNNER_TEMP/proposed.yaml" --previous "$RUNNER_TEMP/previous.yaml" --repository . > "$RUNNER_TEMP/transition.json"
+          python - <<'PY'
+          import json,os,pathlib,yaml
+          t=pathlib.Path(os.environ['RUNNER_TEMP'])
+          report=json.loads((t/'transition.json').read_text());assert report['write_allowed'] and not report['generation_ready']
+          old=yaml.safe_load((t/'previous.yaml').read_text());new=yaml.safe_load((t/'proposed.yaml').read_text())
+          assert old['task']['snapshot_version']==97 and new['task']['snapshot_version']==98
+          assert new['task']['skill_version']==old['task']['skill_version']=='0.4.0'
+          assert new['constraint_registry']==old['constraint_registry'] and new['owner_preferences']==old['owner_preferences'] and new['candidates']==old['candidates']
+          assert new['next_action']['action']=='define_semantic_judgment_validation_contract_and_small_model_role_boundary_without_new_inference'
+          rev=new['semantic_task_gate_revision'];assert rev['gate_v2']['replay']=={'SEM-408-004_C003':'pass','SEM-408-005_C002':'block','SEM-408-005_C006':'block'}
+          assert rev['current_inference_policy']['new_reviewer_calls']=='paused_pending_semantic_validation_contract'
+          assert rev['model_budget_since_v96']['total_reviewer_requests']==3 and rev['model_budget_since_v96']['paid_api_calls']==0
+          assert new['process_review']['generation_paused'] and not new['audit_recovery']['generation_resume_readiness']
+          print(json.dumps({'snapshot':98,'transition':report,'next_action':new['next_action'],'new_reviewer_calls':'paused'},ensure_ascii=False))
+          PY
+      - name: Preserve proposed state before publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: naming-state-v98-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/previous.yaml
+            ${{ runner.temp }}/proposed.yaml
+            ${{ runner.temp }}/transition.json
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish only if branch and state are unchanged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,json,os,pathlib,urllib.request
+          repo='InteropAtlas/InteropAtlas';branch=os.environ['BRANCH'];state=os.environ['STATE'];expected=os.environ['EXPECTED_BLOB'];source=os.environ['GITHUB_SHA']
+          proposed=(pathlib.Path(os.environ['RUNNER_TEMP'])/'proposed.yaml').read_text()
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=(json.dumps(body).encode() if body is not None else None),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch changed; keep artifact and stop'
+          current_state=api('/contents/'+state+'?ref='+current);assert current_state['sha']==expected,'state changed; keep artifact and stop'
+          body={'message':'state(#408): record task-gate false negatives and pause reviewer inference at v98','content':base64.b64encode(proposed.encode()).decode(),'sha':expected,'branch':branch}
+          result=api('/contents/'+state,'PUT',body)
+          print(json.dumps({'published_commit':result['commit']['sha'],'snapshot':98,'new_names':0,'paid_api_calls':0,'new_reviewer_calls':0}))
+          PY
