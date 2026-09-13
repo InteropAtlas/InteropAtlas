@@ -1,5 +1,5 @@
 packet_id: p0_core_review_20260913
-status: pending_independent_review
+status: pending_snapshot_review
 baseline_commit: 08e4365ae5d7cd510d48f3e9d235272ce554a7fa
 candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
 candidate_blob: f6866b7ebbb7a539b7df10654883013f9163779f
@@ -98,7 +98,6 @@ objects:
     name_en: OpenAPI Specification 3.1.1
     description_zh: 描述 HTTP API 的结构与交互约定；其 Schema Object 方言以 JSON Schema 2020-12 为基础并包含 OAS 基础词汇。
     description_en: Describes HTTP API structure and interaction contracts. Its Schema Object dialect builds on JSON Schema 2020-12 with the OAS base vocabulary.
-    publisher: OpenAPI Initiative
     domains: [web, api]
     layers: [data_syntax, capability_service]
     capabilities: []
@@ -156,3 +155,16 @@ remaining_zh:
 - 实际独立语义审查、正式化时的 schema/identity 检查和验收事件尚待完成。
 - 专利、认证、具体实现兼容性和未列出的扩展不在本批审核范围，不写未经核实的肯定值。
 - RFC 9846 的单独候选以及 OpenAPI 后续版本应在后续有界批次处理，保留此处官方发现依据。
+source_capture:
+  workflow_run: 34756528326
+  artifact_id: 10317452877
+  archive_sha256: 745a4685cb4d730709f6392fdbae671b75559d91e9164f929576dfb605039e62
+  captured_sources: 9
+  artifact_url: https://github.com/InteropAtlas/InteropAtlas/actions/runs/34756528326/artifacts/10317452877
+  manifest_path_in_archive: manifest.json
+  capture_commit: d8d0876ce21b6da0bcb2798ea2002a30e0d1c26f
+  notes_zh: 原始网页字节保持不变，manifest逐项保存来源URL、获取时间、HTTP状态与SHA256；正文保留原版权，不作为CC0数据。快照获取是机械证据，不是独立语义审核。
+review_followup_zh:
+- 首轮独立Reviewer完成底库判重，但官方站点访问失败；尚未取得内容接纳，原结论保存在PR422 review5190635940。
+- 删除 OpenAPI 草稿中的自由文本 publisher 字段，不虚构组织ID或扩大范围新建组织。
+- 独立Reviewer可从固定快照复核具体原文；如果其环境仍不能取得快照，则保持deferred，不由作者改判。
