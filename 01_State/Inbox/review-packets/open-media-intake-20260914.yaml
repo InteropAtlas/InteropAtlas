@@ -1,88 +1,36 @@
 packet_id: open_media_intake_20260914
-status: pending_independent_semantic_review
+status: reviewed_and_materialized
 source_issue: 146
 baseline_commit: fd80c25a003312d837c2c8014a17fb5e8b4dede7
+reviewed_packet_commit: 88b59bfdca214c663b0c26569bab3440eef42747
 executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-reviewer: null
-review_scope_zh:
-- 连续处理四个既有开放媒体候选：AV1、C2PA、SRT、RIST；不新增候选身份。
-- AV1拟普通接纳；C2PA、SRT、RIST先做身份诊断。Reviewer须先核对完整Canonical、原候选blob、名称和外部标识，不靠同名/不同名自动判定。
-- 作者已读取官方一手来源。独立Reviewer仅解释本包有限材料，未独立验证网络抓取真实性或全文；不得把CI、代码无发现或点赞当作语义接受。
-- AV1旧候选的aom:av1标识作为既有工作级/项目内标识保留，不声称其是外部注册机构的正式版次标识；固定举证文本明确为Version 1.0.0 with Errata 1。
-- C2PA旧候选把通用c2pa:c2pa-spec标识与固定2.1 locator混合，而官方同一系列现有2.1、2.2、2.3、2.4等版本；本轮不自动决定工作级主体还是2.1固定出版物。
-- SRT候选同时指向协议、开源实现仓库和仍处Internet-Draft工作区的协议文档；RIST候选把TR-06系列与一个具体TR-06-2历史版本locator混在一起。两项均先诊断，不自动拆分或合并。
-source_evidence:
-- evidence_id: av1_spec
-  url: https://aomediacodec.github.io/av1-spec/av1-spec.pdf
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: Cover page and Abstract
-  observation_zh: AOMedia官方规范PDF页首明确“AV1 Bitstream & Decoding Process Specification”、Version 1.0.0 with Errata 1，并说明该版本对应git tag v1.0.0-errata1；摘要说明文档定义AV1视频编解码器的比特流格式与解码过程。
-- evidence_id: c2pa_21
-  url: https://spec.c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: Specification selector, title, Introduction and Scope
-  observation_zh: 官方页面明确属于C2PA Specifications 2.1，标题为Content Credentials: C2PA Technical Specification；同一官方导航列出1.x及2.0、2.1、2.2、2.3、2.4等多个版本。2.1正文说明其技术架构用于存储和访问可加密验证的来源信息。
-- evidence_id: srt_protocol
-  url: https://github.com/Haivision/srt
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: README What is SRT / Getting Started
-  observation_zh: Haivision官方仓库将SRT称为Secure Reliable Transport Protocol，同时仓库既包含开源实现代码又链接独立的IETF Internet-Draft工作区；另有Haivision/srt-rfc仓库明确说明其是“The SRT Protocol” Internet-Draft工作区。候选当前没有明确主体是协议概念、某版草案还是实现项目。
-- evidence_id: rist_series
-  url: https://vsf.tv/technical-recommendations/
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: RIST Technical Recommendations 6-1 to 6-4
-  observation_zh: VSF官方页面把RIST分为TR-06-1 Simple Profile、TR-06-2 Main Profile、TR-06-3 Advanced Profile及TR-06-4多项扩展，并列出多个年份版本及已deprecated版本。原候选外部标识仅vsf:tr-06，却具体locator到TR-06-2:2022，主体层级不明确。
-objects:
-- round_id: J
-  candidate_id: aom_av1
-  candidate_path: 01_State/Inbox/candidates/aom_av1.yaml
-  candidate_blob: adcd8ef0920cabdcd6ffe9621c299f131ea94a94
-  evidence_ids: [av1_spec]
-  proposed_record:
-    id: aom_av1
-    type: artifact
-    kind: specification
-    name_zh: AV1 比特流与解码过程规范
-    name_en: AV1 Bitstream & Decoding Process Specification
-    description_zh: 定义Alliance for Open Media AV1视频编解码器的比特流格式与解码过程。
-    description_en: Defines the bitstream formats and decoding process for the Alliance for Open Media AV1 video codec.
-    version: '1.0.0-errata1'
-    external_identifiers: [{namespace: aom, value: av1}]
-    official_url: https://aomediacodec.github.io/av1-spec/
-    versions: [{version: '1.0.0-errata1', status: published_specification, url: 'https://aomediacodec.github.io/av1-spec/av1-spec.pdf'}]
-    scope_notes_zh: 保留原候选既有aom:av1工作级标识，不声称其是外部正式版次注册号；当前最小语义由Version 1.0.0 with Errata 1固定文本支持，不把参考解码器实现并入规范主体。
-    scope_notes_en: Retains the candidate's existing work-level aom:av1 identifier without claiming it is an external edition registry identifier. The minimum semantics are evidenced by the Version 1.0.0 with Errata 1 text; the reference decoder implementation remains a distinct subject.
-    sources:
-    - {url: 'https://aomediacodec.github.io/av1-spec/av1-spec.pdf', title: AV1 Bitstream & Decoding Process Specification — Version 1.0.0 with Errata 1, language: en, accessed: '2026-09-14'}
-identity_diagnoses:
-- round_id: K
-  candidate_id: c2pa_spec
-  candidate_path: 01_State/Inbox/candidates/c2pa_spec.yaml
-  candidate_blob: b02b512b674975a07b04ec92fab6cc2866e19a9f
-  evidence_ids: [c2pa_21]
-  proposed_decision: deferred
-  proposed_state: identity_risk
-  reason_zh: 候选使用通用c2pa:c2pa-spec标识，但locator固定到2.1；官方同一规范系列存在多个独立版本。需要先确定Canonical主体是工作级C2PA规范系列还是固定2.1出版物，不能让通用标识静默等同2.1。
-  next_action_zh: 保留候选ID及原标识，明确work-level/publication-level身份策略后再审；不自动更新到2.4、不静默改成2.1专用标识，也不拆分主体。
-- round_id: K
-  candidate_id: haivision_srt
-  candidate_path: 01_State/Inbox/candidates/haivision_srt.yaml
-  candidate_blob: de02b18789c51d8e2bbce6a35767483be2441350
-  evidence_ids: [srt_protocol]
-  proposed_decision: deferred
-  proposed_state: identity_risk
-  reason_zh: 候选同时把Secure Reliable Transport协议、Haivision开源实现仓库和IETF Internet-Draft工作区作为同一artifact/protocol入口，但三者不是天然同一固定文档身份。
-  next_action_zh: 保留候选ID和haivision:srt标识，先定义协议概念、协议草案与参考实现的标识角色；不自动拆分、合并或把Internet-Draft称为RFC。
-- round_id: K
-  candidate_id: vsf_rist
-  candidate_path: 01_State/Inbox/candidates/vsf_rist.yaml
-  candidate_blob: 73b282fa9e896d5d179d77e96e222661f20f6a67
-  evidence_ids: [rist_series]
-  proposed_decision: deferred
-  proposed_state: identity_risk
-  reason_zh: 候选用vsf:tr-06概括整个RIST系列，却把具体locator指向TR-06-2:2022 Main Profile；官方系列包含TR-06-1/2/3/4及多个年份版本，当前主体层级和版本边界混杂。
-  next_action_zh: 保留原ID和标识，先确定系列/配置/具体版本的建模策略；不自动把不同Profile或不同年份版本合成一个固定规范，也不静默以当前2024版本覆盖旧locator。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+review_outcomes:
+- candidate_id: aom_av1
+  decision: accepted
+  canonical_id: aom_av1
+  event_id: accept-20260914-openmedia-aom_av1
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298710
+  note_zh: 独立Reviewer明确允许整个proposed_record原样复制；正式对象只增加溯源元数据。
+- candidate_id: c2pa_spec
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-c2pa_spec
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298713
+  note_zh: 通用工作级标识与固定2.1出版物边界未厘清；不自动升级、拆分或删除标识。
+- candidate_id: haivision_srt
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-haivision_srt
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298715
+  note_zh: 协议概念、Internet-Draft与开源实现身份未厘清；不把draft称作RFC。
+- candidate_id: vsf_rist
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-vsf_rist
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298717
+  note_zh: TR-06系列、Profile及具体年份版次边界未厘清；不静默覆盖历史版本。
+boundaries:
+- 完整送审原稿、来源摘录与proposed_record固定保存在Git提交88b59bfdca214c663b0c26569bab3440eef42747，不在活跃树复制第二份事实源。
+- Reviewer仅独立解释作者提供的有限一手材料，未独立验证网络抓取真实性或全文。
+- CI成功、代码无发现或点赞均不构成语义接受；本回执只记录明确的独立语义结论。
