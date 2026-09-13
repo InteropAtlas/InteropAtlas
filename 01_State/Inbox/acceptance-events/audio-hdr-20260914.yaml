@@ -1,0 +1,83 @@
+contract_version: acceptance-event-v1
+event_id: accept-20260914-audiohdr-aes67
+candidate_id: aes67
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: aes67
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:37:48+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer核对完整Canonical、原候选blob和AES官方有限材料后，明确给出acceptable_for_ordinary_acceptance。
+  - Reviewer允许将固定送审包中的整个AES67 proposed_record原样复制；不批准包外关系或实现互通断言。
+authority: {mutation_impact: M1, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334438
+- https://github.com/InteropAtlas/InteropAtlas/blob/3843ca1baa87f31b3cda718fef3596f8f4315fdd/01_State/Inbox/review-packets/audio-hdr-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/52e5e902ad0261fdc2215e995b8174c2081a388a
+decided_at: '2026-09-13T17:40:00+00:00'
+notes: [正式记录仅序列化获准字段并补充接纳溯源元数据。]
+---
+contract_version: acceptance-event-v1
+event_id: accept-20260914-audiohdr-arib_std_b67
+candidate_id: arib_std_b67
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: arib_std_b67
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:37:48+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer核对完整Canonical、原候选blob和ARIB官方有限材料后，明确给出acceptable_for_ordinary_acceptance。
+  - Reviewer允许将STD-B67 v2.0 proposed_record原样复制，并确认其标题与范围已固定到v2.0。
+authority: {mutation_impact: M1, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334441
+- https://github.com/InteropAtlas/InteropAtlas/blob/3843ca1baa87f31b3cda718fef3596f8f4315fdd/01_State/Inbox/review-packets/audio-hdr-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/74c6cfa46df3721e6713da40ac29af94764532bf
+decided_at: '2026-09-13T17:40:00+00:00'
+notes: [正式记录仅序列化获准字段并补充接纳溯源元数据。]
+---
+contract_version: acceptance-event-v1
+event_id: accept-20260914-audiohdr-ebu_r128
+candidate_id: ebu_r128
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: ebu_r128
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:37:48+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer核对完整Canonical、原候选blob和EBU官方有限材料后，明确给出acceptable_for_ordinary_acceptance。
+  - Reviewer允许将R128 v5.0 proposed_record原样复制；不接纳未列出的技术关系或部署结论。
+authority: {mutation_impact: M1, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334445
+- https://github.com/InteropAtlas/InteropAtlas/blob/3843ca1baa87f31b3cda718fef3596f8f4315fdd/01_State/Inbox/review-packets/audio-hdr-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/60910adbf143dba9ae0d9d3802e1d32aaaed0602
+decided_at: '2026-09-13T17:40:00+00:00'
+notes: [正式记录仅序列化获准字段并补充接纳溯源元数据。]
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-audiohdr-aes3
+candidate_id: aes3
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:37:48+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确确认deferred + identity_risk合理。
+  - AES3存在系列、Part 1-4、总包及不同reaffirmation状态；在身份层级定义前不能静默合并为单一Canonical对象。
+  - 本结论不批准拆分、合并、删除或改写现有候选ID/标识。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334450
+- https://github.com/InteropAtlas/InteropAtlas/blob/3843ca1baa87f31b3cda718fef3596f8f4315fdd/01_State/Inbox/review-packets/audio-hdr-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/2382be5f93b4f3cce9dbf96b853e744bce1d2752
+decided_at: '2026-09-13T17:40:00+00:00'
+notes: [保留候选ID与aes:aes3标识，后续先定义系列/总包/分部分文档的身份层级。]
