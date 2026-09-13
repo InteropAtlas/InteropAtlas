@@ -1,37 +1,39 @@
 # Naming Recovery
 
-这是 InteropAtlas Naming Workstream 的**稳定单一恢复入口**。新 Agent 接管命名相关工作时，从本文件开始；不要依赖旧聊天记忆，也不要要求 Owner 重新提供历史上下文。
+InteropAtlas Naming Workstream 的稳定单一恢复入口。更换对话或执行者时，Owner不需要重述历史或管理内部步骤。
 
-## 当前 Owner 指令：先批量交付，再优化（2026-09-13）
+## 1. 当前目标与权威指令
 
-**当前主线已由 Owner 明确调整。首先读取 [#411 当前交付指令](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652226777)，再解释 state。** [#408 方法研究同步](https://github.com/InteropAtlas/InteropAtlas/issues/408#issuecomment-5652241067)。这项优先级变化来自 Owner，不是 CI 或模型自行解除边界。
+**第一目标是减少Owner为完成任务付出的总注意力。先批量达到及格，再提高优秀程度、效率及降低成本。** 使用既有复杂命名系统和当前实际可用的高能力模型，Simple不替代当前主线。
 
-- 第一阶段：使用既有复杂命名系统和当前实际可用的高能力模型，先一次交付几十个可判断名称，累积 Owner 认可的及格池；首批40个待审提案、累计30个Owner-OK名称是当前执行目标，不是预先宣布已合格。
-- 第二阶段：在已交付及格结果的基础上，把复杂系统优化到优秀；再做有目的的 Simple 对照、效率和成本优化。Simple 不替代当前复杂系统主线。
-- 减少 Owner 注意力占用：集中交付、集中反馈，不以一个两个名称或每个微循环打断。历史正面反馈保留；未知不冒充确认，初筛不冒充商标/域名可采用许可。
+当前指令依次由以下记录细化；最新补充优先，不恢复已被取代的安排：
 
-**当前下一动作：`generate_screen_and_present_40_organization_name_proposals_with_existing_complex_method`。** 不先继续4B/12B/30–35B测试、Reviewer校准、gate扩写或旧实验归档。主线不等待这些维护事项。
+- [先交付再优化](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652226777)。
+- [全部既定筛选前置](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652287651)，取代“仅初筛后展示、Owner挑完再尽调”。
+- [注意力第一](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652314999)和[最新偏好、三类请示、小步留痕](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652364077)。
 
-截至本次恢复入口更新，结构化 state 仍为 v99，v100 迁移在远端投递时遇到403，尚未写回。v99 的研究 `next_action` 与一般生成暂停已被上述 Owner 指令在本轮批量提案范围内取代；其历史证据、未验证结论和最终采用条件仍保留。不要因为 state 的过时动作重跑 SEM-408-006，也不要把修复同步脚本排在名称交付之前。结构化同步属于非阻塞维护；未完成的同步不可伪称完成。
+当前执行目标为首批40个全筛通过待审名称、累计30个Owner-OK，数字是Agent对“几十个”的具体化，不是已获认可。展示前完成全部既定语言、语义、组织尺度、批次差异性、现实撞名、同名.com实际取得路径及既定范围商标风险筛选。待查、证据不足或关键风险未解决者留内部并补充探索，不凑数、不让Owner先挑。筛选通过不等于已核准、已购买或法律保证；交易、最终采用、合并及稳定晋升权限不自动扩大。
 
-本轮恢复授权不等于启动 G0–G8、注册/购买、外部订阅购买、最终采用、合并或稳定晋升。复杂系统的研究潜力是建设目标，不要求先证明其胜过 Simple 才允许交付。
+旧认可保留；优秀偏好不全部变成及格硬门槛。40按全筛通过数计算，不按原始生成数计算；是否审美及格由Owner判断。
 
-## 恢复
+## 2. 当前断点与最小读取范围
 
-1. 先遵守 [`AGENTS.md`](AGENTS.md) 与 [`PROJECT_STATE.md`](PROJECT_STATE.md) 的仓库级规则。
-2. 先检查上述当前 Owner 指令与其后续更新；读取 [`03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml`](03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml)，区分当前授权和历史研究断点。
-3. 按状态中的引用，只读取当前交付直接需要的 Issue / PR / brief / 历史反馈。实时交付主入口为 #411；#408 支持方法研究；PR #416 不替代当前交付指令。
-4. 从最新 Owner 授权对应的交付动作继续。不要从头重跑历史，也不要创建平行替代流程。
+遵守 [AGENTS.md](AGENTS.md) 与 [PROJECT_STATE.md](PROJECT_STATE.md)。随后读取最新#411 checkpoint及[个人偏好摘要](03_Evolution/01_Research/03_Tests/organization-naming-411-owner-preferences.zh-CN.md)第1节。只按当前单元需要展开[结构化state](03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml)、使命、既有Skill和历史来源。#411为交付主入口，#408支持方法研究；#416保持实际PR状态。
 
-## 解释规则
+最新完成：PREF-411-001偏好证据首轮定向整理，已记录两项当前直接偏好和十个历史主题的证据等级。音节紧凑是帮助记忆的软偏好，没有2–3音节上限；“字形轮廓节奏”偏好少量、有秩序的高低起伏，不要求全平。旧转述与Agent原因推断分开，未声称已收齐全部历史原话。具体旧候选只供Controller对照，不给Generator作词根模板。
 
-- 仓库中的可追溯 Owner 指令与证据优先于聊天记忆。最新明确授权可以变更旧工作断点，但不能改写历史结果。
-- `paused / blocked / draft / experimental / not_tested` 等历史状态不因 CI 或模型答案自动晋级；本次批量生成范围的改变应引用上面的 Owner 授权。
-- 是否允许生成、付费、现实注册/购买、稳定晋升、合并或最终采用，分别判断，不互相推导授权。
-- 分别记录：候选已生成、已展示、Owner已评、Owner认可、现实可采用、优秀程度。规划、CI、归档和快照数不是名称交付进度。
+本单元没有新名称生成、全筛、展示或Owner新认可，没有候选视觉测试或外部模型试验；资料整理不计为命名交付。当前无需要Owner决策的偏好冲突。
 
-## 持续接管
+**下一动作：`generate_fully_screen_and_present_40_organization_names_with_existing_complex_method`。** 内部按小单元生成、筛选、补充并即时写入；名字仍在全部既定筛选后集中展示。不得把完整历史偏好审计、问卷、模型测试、Reviewer校准、gate扩写、对照实验或降本研究排在交付前。
 
-完成一段有持续价值的工作后，把结果、证据、阻塞和下一动作写回当前 Primary Home，并同步 state。普通内部工程问题不要求 Owner 逐项确认，且不得反复取代交付主线。以后结构化 state 与本指令同步后，可将本页的临时冲突说明收敛为指针，不保留重复状态源。
+历史同步限制：结构化state此前仍为v99研究断点，迁移曾投递失败；本页不宣称该迁移已完成。最新Owner指令已在批量交付范围内取代旧研究next_action与一般生成暂停，不能据过时state重跑SEM-408-006。旧证据及未知项保留，普通同步维护不阻塞交付。
 
-**目标：聊天可以丢失；只靠本文件和仓库当前事实，也能恢复并继续。**
+## 3. 小步执行、请示及接管
+
+每个小单元完成或中断即在既有Primary Home记录：完成内容、产物路径/版本、未完成项、真实候选及各筛选计数、下一动作、阻塞。不要把完整状态只留在聊天，也不要等所有工作成功再写。内部小步不等于每步请示或每轮展示一两个名字。聊天只给简短实质进展，详情留仓库；不让Owner搬运上下文或重复催促。
+
+请示采用最新三类：必要且必须由Owner决定的价值观/战略等事项；实质影响目标完成率的事项；对效率有极大影响的事项。真正影响当前选择的个人偏好冲突可少量集中澄清；已回答内容不重问。请示带依据、影响、推荐方案与最小问题，其他可分开的工作继续。
+
+普通淘汰、低保留率、工具切换和可逆局部修复自主处理。个别名称无法核实则内部搁置；必需筛选普遍不可执行并威胁整批交付时及时升级，不能隐瞒或交半成品。留痕故障先自行处理；若实质影响接管/完成率则如实说明。
+
+不把CI、规划、归档或快照数当成果；不把Agent推断当Owner原话；不伪称独立隔离或会话结束后的后台执行。后继Agent沿本入口的明确断点恢复，不需要重跑旧实验或重新初始化Naming Job。
