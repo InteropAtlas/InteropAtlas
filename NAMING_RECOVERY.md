@@ -133,16 +133,32 @@ Rescue 001 说明：Transformation Rescue 能提高命名空间存活率，但�
 
 当前仍为0 Owner-visible 新候选；既有 preliminary internal survivor 继续只内部保留，不展示。
 
-### 当前 next_action
+### DELIVERY-411-010：最终 pre-escalation micro-probe 已完成
 
-下一步不恢复 G0–G8，不扩大量，不重开同 seed rescue：
+按上一版 next_action 完成 8 项 morpheme-grounded / more-opaque proper-name 微型探针：
 
-1. 开一个 **6–9项 morpheme-grounded / more-opaque proper-name micro-probe**，回答能否在保持真实 semantic lineage 的同时摆脱成熟 lexical surface 拥挤；
-2. Generation Contract 必须使用改变后的 consonant / stress portfolio，并显式设置 personal-name、fantasy、biotech、generic-tech post-filter；先 intrinsic，后 reality；
-3. reality 中把 `direct registration` 与 `transparent realistic aftermarket` 分成两条 feasibility channel；只有本体真正强且 identity 先通过的 registered 名称才允许查价格；
-4. 若该 micro-probe 仍为0个 realistically feasible survivor，停止静默生成，并把“名称质量 ↔ exact .com aftermarket budget”作为实质预算边界交给 Owner 判断。
+- Raw：`organization-naming-411-delivery-010.json`
+- Screening：`organization-naming-411-delivery-010-screening.json`
+- 提交：`2f71b8a93364955bf414ee20031999cdf180720c`、`c41a1ed4488122b3d90fb44590c2f2950e1b7542`
 
-当前 biggest unknown：**更隐性的、morpheme-grounded proper-name construction 能否同时提高名称完整性、非个人读感和现实命名空间存活率；若不能，是否需要为更强名称接受明确的二级市场预算。**
+Generation Contract 在候选前冻结，并更换 consonant / stress portfolio；8项中4项被 personal-name、fantasy/biotech、generic/category 或 dictation-branching post-filter 在现实查询前 hold，4项 intrinsic advance。Generation integrity 通过，未出现 simple-compound matrix、classical suffix shell dominance、Owner-positive surface copying 或 prior-survivor feedback。
+
+现实筛查严格先 identity、后 domain：4个 advance 全部出现 material exact identity，且4个 exact `.com` 均为 Verisign RDAP registered。具体包括 exact IT/AI identity、exact software 与商业/个人名负担、exact health-information umbrella organization 且意义同构、以及 exact treasury SaaS/media/trademark identity cluster。因无一项先通过 identity，aftermarket price lookup 计数为0，没有用域名价格反向抬高候选质量。
+
+结果：0个 realistically feasible survivor，0个 Owner-visible 新候选。既有 Recenvia 仍只作为 preliminary internal survivor，不因本轮失败自动升级。
+
+### 当前 next_action：停止静默生成，等待 Owner 预算边界判断
+
+上一版预先承诺的停止条件已经触发。Controller 不继续生成、不恢复 G0–G8、不再用更严格筛选制造“进展”。
+
+需要 Owner 判断的实质边界只有一个：
+
+1. **质量优先 / 接受透明售后**：保留 meaning-rich、mature identity 与 exact `.com`，为通过身份筛查的强名称设置明确的二级市场预算区间；或
+2. **低购置成本优先**：继续要求 direct registration / 近零售后成本，并接受成熟、有意义、非个人读感名称的成功概率显著下降。
+
+Owner 未选择前，不启动下一批生成。若选择质量优先，下一阶段先冻结可接受 aftermarket budget，再针对 intrinsic-strong + identity-clean 注册域名查透明价格；若选择低成本优先，需把低命中率作为显式约束，而不是归因于筛选不足。
+
+当前 biggest unknown 已从“更隐性 morphology 是否能改善存活率”收敛为：**Owner 对 exact `.com` 的现实二级市场预算边界是多少，以及它在名称质量与低购置成本之间的优先级。**
 
 ## 9. 接管规则
 
