@@ -10,13 +10,13 @@ InteropAtlas Naming Workstream 的稳定恢复入口。更换对话或执行者�
 
 当前母组织 Owner-visible 形态规则：优先单词 / 连写专名；多词短语和短句不进入当前审阅批次，除非 Owner 后续改变。
 
-展示前仍采用 practical screening；但**现在暂停扩大筛选与新候选现实查询，先修生成端。** 现实筛查不是当前最大未知。
+展示前仍采用 practical screening；但**现在暂停大规模生成与现实筛查，先完成生成方法修复的接入。**
 
 ## 2. 最新 Owner 反馈：Batch 001 暴露生成端故障
 
 累计历史原始生成 300 项（001=48、002=36、003=48、004=48、005=48、006=48、007=24），历史记录不改写。
 
-原40项 Owner Review Batch 去掉多词短语后剩16项。Owner 最新直接反馈已写入 #411 comment `5654581018`：
+原40项 Owner Review Batch 去掉多词短语后剩16项。Owner 直接反馈已写入 #411 comment `5654581018`：
 
 - 整批整体“不太行”；
 - #12 **Morrowrange** 是本批明确正向例外；
@@ -24,7 +24,7 @@ InteropAtlas Naming Workstream 的稳定恢复入口。更换对话或执行者�
 - 其余整体“不太像名称”；
 - 批次级主要问题：词用得太简单、组合太简单，有“小学生想出来的词汇”感。
 
-这说明当前问题不是再增加 `name-likeness` 末端筛选，而是生成机制本身退化。
+Owner 随后进一步指出：应先优化**生成方法**，而不是继续提高末端筛选强度；特别追问此前总结的“变形方法”为何没有使用。
 
 重要边界：Morrowrange / Elsehorizon 以及更早的 Reloa / Merosophy / Multifinality 等 Owner-positive 名称只能用于抽象潜在品质；不得作为 Generator 的词根、后缀、音节、拼写或表面模板。
 
@@ -46,17 +46,22 @@ InteropAtlas Naming Workstream 的稳定恢复入口。更换对话或执行者�
 
 `需要更多候选 → 简单语义词根矩阵拼接 → reality/domain 筛选`。
 
-DELIVERY-411-005 的 `Each/Common/Else/Many + trace/grain/arc/relay/...` 等批量矩阵是直接证据。主要故障分类：`scheduler_bypass + method_underuse + construction_mode_collapse`。
+DELIVERY-411-005 的 `Each/Common/Else/Many + trace/grain/arc/relay/...` 等批量矩阵是直接证据。主要故障分类：
+
+- `scheduler_bypass`
+- `method_underuse`
+- `construction_mode_collapse`
+- `generation_capability_recovery_failure`
 
 “不要恢复 G0–G8 benchmark”仍有效，但只禁止恢复已停止的 benchmark 实验；**不禁止使用已经提炼进入 Adaptive Naming 的 Lexicon / Catchword / Igor / River+Wolf / Siegel+Gale / NameStormers 等方法组件。**
 
-## 4. 当前方法修复：Generation Capability Recovery Contract
+## 4. 当前方法修复：Generation Capability Recovery Contract v0.2
 
-新增 provisional control fix：
+当前 provisional control fix：
 
 `02_Runtime/02_Tools/adaptive_naming/references/generation-capability-recovery-contract.md`
 
-提交：`e69d1301360a923abf99d2e781deed49be0c8949`
+当前提交：`6dab4c2811ed1757d9dd2d09b61a2d689a7f24ab`
 
 核心规则：
 
@@ -68,35 +73,69 @@ Generation Contract 至少明确：
 - workflow patterns；
 - construction operator portfolio；
 - territory material；
+- prototype stage；
 - Transformation Operators 用于 exploration / rescue 的方式；
+- sound-led 时的 phonetic character brief；
 - cadence / runtime isolation；
 - anti-collapse checks；
 - stop condition。
 
 普通探索默认至少使用 3 个真正不同的 construction family；“换前缀 / 换后缀 / 换第二普通词”不算不同 family。
 
-Transformation Operators 明确恢复为普通 exploration 与 rescue 都可调用：controlled spelling mutation、meaningful affix、clipping / telescoping、light blend、segmentation 等；同时可并行 root-derived、morpheme-grounded coinage、sound-led、opaque proper-name construction、lexical/metaphorical transfer。
+Transformation Operators 明确恢复为普通 exploration 与 rescue 都可调用。使用 transformation 时默认 `Prototype discovery → bounded transformation`，弱 seed 不因“还没用过某 operator”而被机械变形。
 
-这份合同目前是 **provisional**，不冒充已经验证成功的稳定 Skill 升级。
+当前 #411 中 simple natural compound 降为低预算路线；纯 sound-led opaque route 也因 fantasy / personal-name 风险降权，优先 `semantic / morpheme anchor + phonetic engineering`。
 
-## 5. 当前唯一下一动作：小规模 Generation Regression
+## 5. 已完成两轮无现实查询 Generation Regression
 
-**暂停大规模生成，暂停域名 / 商标 / reality 筛查。**
+### REG-411-GEN-001
 
-下一步先用新的 Generation Contract 生成 **15–20 个内部回归样本**：
+证据：
 
-- 不查询域名；
-- 不查询商标；
-- 不查询现实撞名；
-- 不作为正式 Owner 候选展示；
-- 不用 Owner-positive 名称当模板；
-- 只验证生成机制是否真正覆盖多个 operator family，以及是否显著减少简单拼词 / 小学生式组合并恢复成熟 proper-name 感。
+`03_Evolution/01_Research/03_Tests/organization-naming-411-generation-regression-001.md`
 
-若内部回归仍明显失败：继续修生成方法，**不进入现实筛查**。
+结果：provisional pass。
 
-若回归显示方法机制恢复：再决定是否把 Generation Capability Recovery Contract 吸收到 `SKILL.md` / regression cases，并恢复批量候选生成。
+- 18项内部样本覆盖 lexical transfer、root-derived、telescoping/fusion、bounded transformation、sound-led 五个 family；
+- 简单普通词矩阵显著减少；
+- Transformation Operators 有真实 lineage，不再只存在于文档；
+- 暴露问题：root-derived 可能过度学术化；sound-led 可能 fantasy 化；弱 seed transformation 仍弱。
 
-## 6. 接管规则
+### REG-411-GEN-002
+
+证据：
+
+`03_Evolution/01_Research/03_Tests/organization-naming-411-generation-regression-002.md`
+
+结果：pass with routing change。
+
+- Prototype → Transformation 两阶段改善变形自然度；
+- Lexicon / Igor / River+Wolf / Catchword / NameStormers 的已提炼组件实际进入 Generation Contract；不是恢复 benchmark；
+- simple compound 未重新主导；
+- pure sound-led 虽有 Character Brief 仍容易人名 / fantasy 化，因此当前任务继续降权。
+
+两轮都是 same-context Controller regression，**不是 Owner 质量验收，也不是独立 Reviewer 证据。** 回归中的名称不计入正式候选池，不做现实查询，不要求 Owner 评价。
+
+聚焦控制回归已新增：
+
+`02_Runtime/02_Tools/adaptive_naming/evals/generation-capability-recovery-regression.yaml`
+
+提交：`b4ec35ddafa27696ab3007bca1d141dd1ad0ca89`
+
+## 6. 当前下一动作
+
+**还不恢复100级别批量生成，也不恢复域名 / 商标筛查。**
+
+当前先完成方法接入：
+
+1. 把 Generation Contract before `generate` 作为 Adaptive Naming 生成入口的显式控制规则；
+2. 保留 focused regression，防止换上下文后再次只恢复状态而丢失方法；
+3. 记录这是严重 control-layer defect 的 provisional fix，保留 rollback / supersede；
+4. 接入后再跑一轮小型真实 generation（仍先不做现实查询），确认入口本身会触发 contract，而不是靠当前对话记忆。
+
+只有生成端连续通过后，才恢复真实候选批量 production + practical screening。
+
+## 7. 接管规则
 
 后继 Agent 在任何 `generate` 前必须读取：
 
