@@ -1,0 +1,95 @@
+packet_id: audio_hdr_intake_20260914
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: fd80c25a003312d837c2c8014a17fb5e8b4dede7
+executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+reviewer: null
+review_scope_zh:
+- 连续处理四个既有候选：AES67、ARIB STD-B67、EBU R 128、AES3；不新增候选身份。
+- AES67、ARIB STD-B67、EBU R 128拟按固定当前举证版本普通接纳；AES3先做identity_risk诊断，因为候选把AES3工作级总称与多部分文档/不同再确认年份混在一起。
+- Reviewer须核对完整Canonical、原候选blob和包内一手官方来源；CI、代码无发现或名称相似不能代替语义审核。
+source_evidence:
+- evidence_id: aes67_2023
+  url: https://aes.org/publications/standards-store/
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  observation_zh: AES官方Standards Store列出AES67-2023，Printing Date 2023-06-01；摘要明确其提供高性能网络音频在同步、时钟标识、网络传输、编码/流、会话描述和连接管理方面的互操作建议。
+- evidence_id: arib_b67_v2
+  url: https://www.arib.or.jp/english/std_tr/broadcasting/desc/std-b67.html
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  observation_zh: ARIB官方页面列出STD-B67 Version 2.0，2018-01-22；标题为Parameter Values for the Hybrid Log-Gamma (HLG) High Dynamic Range Television (HDR-TV) System for Programme Production，并给出v1.0/v2.0修订历史。
+- evidence_id: ebu_r128_v5
+  url: https://tech.ebu.ch/publications/r128
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  observation_zh: EBU官方页面标示EBU R 128 Version 5.0，2023-11-21；建议平均节目响度-23 LUFS，并使用Loudness Range与Maximum True Peak Level描述符。
+- evidence_id: aes3_family
+  url: https://aes.org/publications/standards-store/
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  observation_zh: AES官方商店将AES3作为由Part 1至Part 4构成的多部分标准；可见AES3-2009 (r2019)总包及分部分文档，官方预览又显示部分文档已reaffirmed 2024。原候选只有通用aes:aes3，未明确主体是工作级系列、总包还是各Part的固定出版物。
+objects:
+- round_id: L
+  candidate_id: aes67
+  candidate_blob: 52e5e902ad0261fdc2215e995b8174c2081a388a
+  evidence_ids: [aes67_2023]
+  proposed_record:
+    id: aes67
+    type: artifact
+    kind: standard
+    name_zh: AES67 高性能网络音频互操作标准
+    name_en: AES67 — High-performance streaming audio-over-IP interoperability
+    description_zh: 为专业高性能网络音频系统规定互操作建议，覆盖同步、媒体时钟标识、网络传输、编码与流、会话描述和连接管理。
+    description_en: Provides interoperability recommendations for high-performance professional networked audio, including synchronization, media clock identification, network transport, encoding and streaming, session description and connection management.
+    version: '2023'
+    external_identifiers: [{namespace: aes, value: aes67}]
+    official_url: https://aes.org/publications/standards-store/
+    versions: [{version: 'AES67-2023', status: published_standard, url: 'https://aes.org/publications/standards-store/'}]
+    sources:
+    - {url: 'https://aes.org/publications/standards-store/', title: AES Standards Store — AES67-2023, language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: arib_std_b67
+  candidate_blob: 74c6cfa46df3721e6713da40ac29af94764532bf
+  evidence_ids: [arib_b67_v2]
+  proposed_record:
+    id: arib_std_b67
+    type: artifact
+    kind: standard
+    name_zh: ARIB STD-B67 HLG HDR-TV节目制作系统参数标准
+    name_en: ARIB STD-B67 — Parameter Values for the Hybrid Log-Gamma (HLG) High Dynamic Range Television (HDR-TV) System for Programme Production
+    description_zh: 规定HLG HDR-TV节目制作系统的系统参数，包括图像空间与时间特性、系统色度学、信号格式及数字表示。
+    description_en: Specifies system parameters for HLG HDR-TV programme production, including image spatial and temporal characteristics, system colorimetry, signal format and digital representation.
+    version: '2.0'
+    external_identifiers: [{namespace: arib, value: std-b67}]
+    official_url: https://www.arib.or.jp/english/std_tr/broadcasting/std-b67.html
+    versions: [{version: '2.0', status: published_standard, url: 'https://www.arib.or.jp/english/std_tr/broadcasting/std-b67.html'}]
+    sources:
+    - {url: 'https://www.arib.or.jp/english/std_tr/broadcasting/desc/std-b67.html', title: ARIB STD-B67 overview and amendment history, language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: ebu_r128
+  candidate_blob: 60910adbf143dba9ae0d9d3802e1d32aaaed0602
+  evidence_ids: [ebu_r128_v5]
+  proposed_record:
+    id: ebu_r128
+    type: artifact
+    kind: recommendation
+    name_zh: EBU R 128 音频响度归一化与允许最大电平建议
+    name_en: EBU R 128 — Loudness normalisation and permitted maximum level of audio signals
+    description_zh: 建议节目平均响度采用-23 LUFS，并使用响度范围和最大真峰值电平等描述符来规范音频响度与电平。
+    description_en: Recommends an average programme loudness of -23 LUFS together with Loudness Range and Maximum True Peak Level descriptors for audio loudness normalisation and level management.
+    version: '5.0'
+    external_identifiers: [{namespace: ebu, value: r.128}]
+    official_url: https://tech.ebu.ch/publications/r128
+    versions: [{version: '5.0', status: recommendation, url: 'https://tech.ebu.ch/publications/r128'}]
+    sources:
+    - {url: 'https://tech.ebu.ch/publications/r128', title: EBU R 128 Version 5.0, language: en, accessed: '2026-09-14'}
+identity_diagnoses:
+- round_id: M
+  candidate_id: aes3
+  candidate_blob: 2382be5f93b4f3cce9dbf96b853e744bce1d2752
+  evidence_ids: [aes3_family]
+  proposed_decision: deferred
+  proposed_state: identity_risk
+  reason_zh: 原候选以通用aes:aes3表示主体，但AES3是多部分标准，存在总包、Part 1-4及不同reaffirmation状态；当前无法确认Canonical应表示工作级系列还是某个固定出版物集合。
+  next_action_zh: 保留候选ID与标识，先定义AES3系列/总包/分部分文档的身份层级；不静默把2009(r2019)总包、2024再确认分部分文档或未来版本合成一个固定文档。
