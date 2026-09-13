@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 96
+  snapshot_version: 97
   skill_version: 0.4.0
 
 lineage:
@@ -101,13 +101,14 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: qualify_independent_reviewer_task_understanding_before_further_inference
+  action: confirm_task_understanding_on_two_distinct_historical_failure_types
   rationale: >-
-    SEM-408-003已经执行六次，但归档因分支推进失败；现仅恢复Actions日志，不是完整原始响应。
-    事后审计发现把名称当产品、把说明词当名称和循环论证；不能把六项hold当质量结论。
-    先在既有材料上定义最小任务理解对照及停止条件，确认能区分命名对象与产品能力，
-    再决定是否进行一个有界真实canary；不直接重跑六项，不改selector、不新增名称。
-  requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation
+    SEM-408-TASK-GATE-001已建立确定性任务理解门槛，历史SEM-408-003六项重放为5 block / 1 review / 0 pass。
+    SEM-408-004随后只对既有C003/Linetap执行一次真实canary，在明确identity-label与产品实现边界后得到task_gate=pass；
+    这说明包装修复值得继续，但单一样本不足以证明泛化。下一步只用既有C002与C006，分别覆盖历史instruction leakage与
+    circular grounding失败类型；每项独立、无重试、无新名称，任一非pass即停止扩大。即使全部pass也只进入语义正确性研究，
+    不构成名称质量真值、方法胜负或稳定晋升。
+  requires_owner: false_for_bounded_existing_candidate_method_research_no_paid_or_ia_generation
 
 stop:
   status: generation_paused_process_review_active
@@ -921,3 +922,57 @@ semantic_review_recovery:
     "stable_promotion": false,
     "historical_counts_scope_unchanged": true
   }
+
+# v97: task-understanding qualification is distinct from semantic-quality validity.
+semantic_task_understanding_validation:
+  id: SEM-408-TASK-QUAL-001
+  status: deterministic_gate_validated_single_real_canary_passed_confirmation_pending
+  primary_issue: 408
+  gate:
+    implementation: naming-evidence-pilot/model-aware/semantic-review-task-gate/gate.py
+    fixtures: naming-evidence-pilot/model-aware/semantic-review-task-gate/fixtures.json
+    tests: naming-evidence-pilot/model-aware/semantic-review-task-gate/test_gate.py
+    report: naming-evidence-pilot/model-aware/semantic-review-task-gate/REPORT.zh-CN.md
+    ci_run: 34744133574
+    ci_artifact: 10312508886
+    historical_sem003_replay: {block: 5, review: 1, pass: 0, semantic_evidence_eligible: 0}
+    scope: task_understanding_only_not_name_quality_or_disposition_correctness
+    same_author_rule_based_gate: true
+  canary:
+    experiment: SEM-408-004
+    candidate: {id: C003, name: Linetap, source: existing_DEV-02_only}
+    run: 34744282097
+    job: 103689175084
+    evidence_commit: 6659c3ac5b3e19affa5fe556d9362a025dd6ad1b
+    artifact: 10313663077
+    artifact_sha256: b109baee713b7b7601fa06da53877fbfdd6bfd633de486256563202f2cf6eb79
+    requests_dispatched: 1
+    retries: 0
+    task_gate: pass
+    gate_findings: []
+    semantic_evidence_eligible: true
+    semantic_quality_validated: false
+    quality_ground_truth: null
+    input_tokens: 540
+    output_tokens: 213
+    inference_seconds: 31.01624691500001
+    report: naming-evidence-pilot/model-aware/semantic-review-pilot-004/REPORT.zh-CN.md
+  interpretation:
+    - single_canary_pass_supports_continuing_task_packaging_validation_not_reviewer_quality
+    - no_qwen_gemma_quality_winner_or_method_winner_inferred
+    - association_hypotheses_remain_unverified_even_when_task_gate_passes
+  confirmation_plan:
+    candidates: [C002, C006]
+    historical_failure_types: [instruction_or_brief_leakage, circular_candidate_grounding]
+    max_requests: 2
+    retries: 0
+    stop_on_first_nonpass: true
+    new_names: 0
+    paid_api_calls: 0
+    automatic_expansion_after_pass: false
+  new_model_calls_this_revision: 1
+  new_names: 0
+  paid_api_calls: 0
+  ia_generation: false
+  stable_skill_changed: false
+  stable_promotion: false
