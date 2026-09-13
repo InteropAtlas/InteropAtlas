@@ -1,0 +1,163 @@
+packet_id: media_recovery_20260913
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 761cd417f65694270ec18e13c72ab72e2df07cfc
+executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+reviewer: null
+review_scope_zh:
+- 连续轮次E为HLS与SRTP，F为IMSC与TTML2；复用四个旧候选，不另建候选名单。
+- 只审核proposed_record的最小字段及原候选到该主体的身份保持；先核对基线和当前完整正式库的ID、外部标识与名称。逐项给出acceptable_for_ordinary_acceptance、deferred或rejected，不以无代码发现、CI或点赞替代。
+- IMSC原标签和locator已明确1.2，保留遗留w3c:imsc标识但不声称其是W3C官方版本注册号；TTML2保持文档工作级入口，以2018推荐文本举证，不将所有后续修订视为同一份固定文本。
+- 轮次G只诊断FLAC与Matroska的工作级格式/具体RFC混合标识，拟保留原身份并标记identity_risk；不得自动删标识、拆分或创建对应正式主体。请明确是否支持该暂缓处置。
+- 来源为作者实际web读取的一手页面的有限材料。Reviewer独立解释这些材料，不冒充独立网络抓取、全文复核或部署符合性认证。
+- 不写入先前被工具拦截的两条关系，不改对应覆盖计划，不绕过安全检查；不改变Schema、治理、命名工作或许可。
+source_evidence:
+- evidence_id: hls
+  url: https://www.rfc-editor.org/info/rfc8216/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Header, Abstract, Status of This Memo
+  excerpt: not an Internet Standards Track specification
+  version_excerpt: version 7
+  observed_fields: {rfc: '8216', title: HTTP Live Streaming, status: Informational, stream: Independent Submission}
+  observation_zh: 摘要描述多媒体流传输、文件格式及收发端动作。旧候选所称IETF标准是错误断言；这是独立投稿的信息类RFC，描述协议版本7，不代表所有后续HLS扩展。
+- evidence_id: srtp
+  url: https://www.rfc-editor.org/info/rfc3711/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Header, current status and Abstract
+  excerpt: confidentiality, message authentication, and replay protection
+  observed_fields: {rfc: '3711', status: Proposed Standard, title: The Secure Real-time Transport Protocol (SRTP)}
+  observation_zh: 摘要将SRTP定义为RTP的profile，面向RTP与RTCP流量提供所列安全机制；页面列出后续更新，不据此保证具体部署安全。
+- evidence_id: imsc
+  url: https://www.w3.org/TR/2020/REC-ttml-imsc1.2-20200804/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Heading and Abstract
+  excerpt: a text-only profile and an image-only profile
+  observed_fields: {version: '1.2', status: W3C Recommendation, publication_date: '2020-08-04', basis: TTML2}
+  observation_zh: 原候选locator的This version链接直接指向本固定文本。摘要定义面向字幕交付的两种TTML2 profile；不证明任意渲染器、格式转换均无损兼容。
+- evidence_id: ttml2
+  url: https://www.w3.org/TR/2018/REC-ttml2-20181108/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Heading, Abstract and Status of This Document
+  excerpt: interchange among authoring systems
+  observed_fields: {title: Timed Text Markup Language 2 (TTML2), status: W3C Recommendation, publication_date: '2018-11-08'}
+  observation_zh: 原候选/TR/ttml2/入口的This version指向本推荐文本；摘要规定第2版的词汇和语义，支持带时间信息文本的交换。本轮不沿用旧候选关于SMPTE-TT起源的未核实断言。
+- evidence_id: flac_identity
+  url: https://www.rfc-editor.org/info/rfc9639/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Header and Abstract
+  observed_fields: {rfc: '9639', status: Proposed Standard, title: Free Lossless Audio Codec (FLAC)}
+  observation_zh: 页面定义FLAC格式及其可流式处理子集，RFC号对应该具体规范文档。旧候选另列xiph:flac及项目入口，尚未声明工作级标识与文档标识的不同角色。
+- evidence_id: matroska_identity
+  url: https://datatracker.ietf.org/doc/rfc9559/
+  accessed: '2026-09-13'
+  observed_via: author_web_retrieval
+  locator: Document metadata and Abstract
+  observed_fields: {rfc: '9559', status: Proposed Standard, title: Matroska Media Container Format Specification}
+  observation_zh: 实际读取的是IETF Datatracker，不把此前RFC Editor info页的访问错误写成成功。RFC9559定义容器结构；旧候选同时列matroska:matroska工作级别名，身份范围需明确后再接纳。
+objects:
+- round_id: E
+  candidate_id: ietf_hls
+  candidate_path: 01_State/Inbox/candidates/ietf_hls.yaml
+  candidate_blob: 4f1cc1339153ee1ff73cb941483d5f811ff518c3
+  evidence_ids: [hls]
+  proposed_record:
+    id: hls_rfc8216
+    type: artifact
+    kind: protocol
+    name_zh: HTTP直播流协议文档（RFC 8216）
+    name_en: HTTP Live Streaming (RFC 8216)
+    description_zh: 描述多媒体流传输协议的第7版，包括媒体文件格式及服务器和客户端的动作。
+    description_en: Describes version 7 of a multimedia streaming protocol, including file formats and server/client actions.
+    version: RFC 8216
+    external_identifiers: [{namespace: rfc, value: '8216'}]
+    official_url: https://www.rfc-editor.org/rfc/rfc8216.html
+    versions: [{version: RFC 8216, status: informational, url: 'https://www.rfc-editor.org/rfc/rfc8216.html'}]
+    scope_notes_zh: 独立投稿的信息类RFC，不是IETF标准轨规范；固定文档不代表全部HLS扩展，未验证部署、许可或实现兼容性。
+    scope_notes_en: An Informational Independent Submission, not an IETF Standards Track specification; later HLS extensions, deployments, licensing and implementation compatibility are outside scope.
+    sources:
+    - {url: 'https://www.rfc-editor.org/info/rfc8216/', title: RFC 8216 publication status and abstract, language: en, accessed: '2026-09-13'}
+- round_id: E
+  candidate_id: ietf_srtp
+  candidate_path: 01_State/Inbox/candidates/ietf_srtp.yaml
+  candidate_blob: 9a16eb8751ddb93d4f6de5d0cdffb80efa2f67bd
+  evidence_ids: [srtp]
+  proposed_record:
+    id: srtp_rfc3711
+    type: artifact
+    kind: protocol
+    name_zh: 安全实时传输协议文档（RFC 3711）
+    name_en: The Secure Real-time Transport Protocol (RFC 3711)
+    description_zh: 描述针对RTP及RTCP流量提供保密性、消息认证和重放防护机制的SRTP协议。
+    description_en: Describes SRTP mechanisms for confidentiality, message authentication and replay protection of RTP and RTCP traffic.
+    version: RFC 3711
+    external_identifiers: [{namespace: rfc, value: '3711'}]
+    official_url: https://www.rfc-editor.org/rfc/rfc3711.html
+    versions: [{version: RFC 3711, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc3711.html'}]
+    scope_notes_zh: 固定基础文档；后续更新和具体密码配置另行核验。收录不证明任意部署或实现安全。
+    scope_notes_en: A fixed foundational document; later updates and cryptographic configurations require separate review. Inclusion does not certify deployment or implementation security.
+    sources:
+    - {url: 'https://www.rfc-editor.org/info/rfc3711/', title: RFC 3711 status and abstract, language: en, accessed: '2026-09-13'}
+- round_id: F
+  candidate_id: w3c_imsc
+  candidate_path: 01_State/Inbox/candidates/w3c_imsc.yaml
+  candidate_blob: 08f268ef477f2c54875a27cd3786da13015b1a54
+  evidence_ids: [imsc]
+  proposed_record:
+    id: w3c_imsc
+    type: artifact
+    kind: profile
+    name_zh: 互联网媒体字幕与说明字幕TTML配置规范1.2
+    name_en: TTML Profiles for Internet Media Subtitles and Captions 1.2
+    description_zh: 为字幕交付定义TTML2的纯文本和纯图像两种配置。
+    description_en: Defines text-only and image-only TTML2 profiles for subtitle and caption delivery.
+    version: '1.2'
+    external_identifiers: [{namespace: w3c, value: imsc}]
+    official_url: https://www.w3.org/TR/ttml-imsc1.2/
+    scope_notes_zh: 原标签及入口限定IMSC1.2；保留既有遗留标识，不将其声称为官方版本注册号，也不扩展为所有IMSC版本或任意实现兼容性证明。
+    scope_notes_en: The original label and locator scope this record to IMSC 1.2. The retained legacy identifier is not claimed to be an official edition registry identifier; all-version equivalence and implementation compatibility are not asserted.
+    sources:
+    - {url: 'https://www.w3.org/TR/2020/REC-ttml-imsc1.2-20200804/', title: IMSC 1.2 Recommendation text, language: en, accessed: '2026-09-13'}
+- round_id: F
+  candidate_id: w3c_ttml2
+  candidate_path: 01_State/Inbox/candidates/w3c_ttml2.yaml
+  candidate_blob: 7c52d81e0b5815269daad791c1c94a0b880aea7a
+  evidence_ids: [ttml2]
+  proposed_record:
+    id: w3c_ttml2
+    type: artifact
+    kind: format
+    name_zh: 定时文本标记语言2规范
+    name_en: Timed Text Markup Language 2 (TTML2)
+    description_zh: 规定TTML第2版的词汇和语义，用于创作系统之间交换带时间信息的文本内容。
+    description_en: Specifies the vocabulary and semantics of TTML version 2 for exchanging timed-text content between authoring systems.
+    version: '2'
+    external_identifiers: [{namespace: w3c, value: ttml2}]
+    official_url: https://www.w3.org/TR/ttml2/
+    scope_notes_zh: 保持TTML2文档工作级入口，以2018-11-08推荐文本支持最小定义；不将不同修订当作同一份固定文本，也不推定与其他字幕格式无损互转。
+    scope_notes_en: Retains the TTML2 document-level entry, using the 2018 Recommendation for the minimum definition. Distinct revisions are not treated as identical texts, and lossless conversion to other caption formats is not asserted.
+    sources:
+    - {url: 'https://www.w3.org/TR/2018/REC-ttml2-20181108/', title: TTML2 2018 Recommendation text, language: en, accessed: '2026-09-13'}
+identity_diagnoses:
+- round_id: G
+  candidate_id: xiph_flac
+  candidate_path: 01_State/Inbox/candidates/xiph_flac.yaml
+  candidate_blob: 805a7ec9002107b003bbdd2980d4bcae5fc7fcab
+  evidence_ids: [flac_identity]
+  proposed_decision: deferred
+  proposed_state: identity_risk
+  reason_zh: 同一external_identifiers数组并列具体RFC9639与工作级xiph:flac，尚未明确主体是格式、规范文档还是项目。来源说明有关联不足以证明两标识可无条件合并为单一文档身份。
+  next_action_zh: 形成明确的工作/文档标识角色方案再走身份审查；不自动删除任何旧标识，不新建或拆分正式主体。
+- round_id: G
+  candidate_id: matroska
+  candidate_path: 01_State/Inbox/candidates/matroska.yaml
+  candidate_blob: b9aefc4ba8f6741a5e49f1f414b082ebee426a38
+  evidence_ids: [matroska_identity]
+  proposed_decision: deferred
+  proposed_state: identity_risk
+  reason_zh: 同一external_identifiers数组并列具体RFC9559与工作级matroska:matroska，候选混用了容器格式和固定文档范围。需要标識角色与版本边界，不能直接当作可合并同义标识。
+  next_action_zh: 保持原标识与候选ID，先完成工作/文档身份界定；不在普通路径自动合并、拆分或取代RFC文档。
