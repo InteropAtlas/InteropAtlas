@@ -9,18 +9,20 @@ from __future__ import annotations
 
 import copy
 import json
+import subprocess
 from pathlib import Path
 import tempfile
 import unittest
 
 import yaml
 
-from intake_coverage_audit import BATCH_EVENTS, PLAN, audit
+from intake_coverage_audit import PLAN, audit
 
 ROOT = Path(__file__).resolve().parents[2]
 CANDIDATES = Path('01_State/Inbox/candidates/fixture.yaml')
 OBJECTS = Path('01_State/01_Objects/fixture.yaml')
 EXTRA_EVENTS = Path('01_State/Inbox/acceptance-events/extra.yaml')
+BATCH_EVENTS = Path('01_State/Inbox/acceptance-events/rfc-intake-20260913.yaml')
 
 
 class IntakeCoverageAuditTests(unittest.TestCase):
@@ -66,10 +68,39 @@ class IntakeCoverageAuditTests(unittest.TestCase):
             'memberships': [{'category_id': 'fixture', 'ref': {'surface': 'candidate', 'id': 'candidate-one'}}],
             'proposals': [],
         }
+        self.freeze([self.candidate], [self.object])
         self.write(CANDIDATES, self.candidate)
         self.write(OBJECTS, self.object)
         self.write(BATCH_EVENTS, self.event)
         self.write(PLAN, self.plan)
+
+    def git(self, *args: str) -> str:
+        return subprocess.run(['git', '-C', str(self.root), *args], check=True,
+                              capture_output=True, text=True).stdout.strip()
+
+    def freeze(self, candidates: list[dict], objects: list[dict], *,
+               state: str = 'new', baseline_objects: list[dict] | None = None) -> None:
+        """Create authentic committed fixture evidence, then restore work files."""
+        if not (self.root / '.git').exists():
+            self.git('init', '-q')
+            self.git('config', 'user.name', 'Synthetic fixture')
+            self.git('config', 'user.email', 'fixture@example.invalid')
+        frozen = copy.deepcopy(candidates)
+        for candidate in frozen:
+            candidate['identity_resolution'].update(state=state, matched_canonical_ids=[])
+            candidate['provenance']['reviewer'] = None
+        self.write(CANDIDATES, *frozen)
+        self.write(OBJECTS, *(baseline_objects or []))
+        self.git('add', str(CANDIDATES), str(OBJECTS))
+        self.git('-c', 'commit.gpgsign=false', 'commit', '--allow-empty', '-qm', 'Freeze synthetic evidence')
+        commit = self.git('rev-parse', 'HEAD')
+        blob = self.git('rev-parse', 'HEAD:' + str(CANDIDATES))
+        for candidate, obj in zip(candidates, objects):
+            obj.setdefault('intake_provenance', {}).update(
+                candidate_id=candidate['candidate_id'], reviewed_candidate_blob=blob,
+                reviewed_against_commit=commit, candidate_executor=candidate['provenance']['executor'])
+        self.write(CANDIDATES, *candidates)
+        self.write(OBJECTS, *objects)
 
     def write(self, path: Path, *items: dict) -> None:
         target = self.root / path
@@ -115,6 +146,7 @@ class IntakeCoverageAuditTests(unittest.TestCase):
         obj.update(id='object-two', external_identifiers=[{'namespace': 'fixture', 'value': 'two'}])
         obj['intake_provenance']['acceptance_event_id'] = 'event-two'
         event = dict(self.event, event_id='event-two', candidate_id='candidate-two', accepted_canonical_id='object-two')
+        self.freeze([self.candidate, candidate], [self.object, obj])
         self.write(CANDIDATES, self.candidate, candidate)
         self.write(OBJECTS, self.object, obj)
         self.write(BATCH_EVENTS, self.event, event)
@@ -211,6 +243,70 @@ class IntakeCoverageAuditTests(unittest.TestCase):
                 self.write(PLAN, self.plan)
                 with self.assertRaisesRegex(ValueError, 'Unsafe proposed relationship'):
                     audit(self.root)
+
+    def test_accepted_event_outside_initial_file_is_replayed(self) -> None:
+        (self.root / BATCH_EVENTS).unlink()
+        self.write(EXTRA_EVENTS, self.event)
+        self.assertEqual(audit(self.root)['pre_materialization_routes'], {'candidate-one': 'review_required'})
+
+    def test_blocked_frozen_candidate_cannot_forge_a_safe_route(self) -> None:
+        for state in ('identity_risk', 'deferred', 'possible_duplicate'):
+            with self.subTest(state=state):
+                self.freeze([self.candidate], [self.object], state=state)
+                (self.root / BATCH_EVENTS).unlink(missing_ok=True)
+                self.write(EXTRA_EVENTS, self.event)
+                with self.assertRaisesRegex(ValueError, 'Frozen pre-materialization route mismatch'):
+                    audit(self.root)
+
+    def test_current_blocked_candidate_cannot_claim_accepted(self) -> None:
+        self.candidate['identity_resolution']['state'] = 'identity_risk'
+        self.write(CANDIDATES, self.candidate)
+        with self.assertRaisesRegex(ValueError, 'not remain blocked'):
+            audit(self.root)
+
+    def test_missing_frozen_commit_is_rejected(self) -> None:
+        del self.object['intake_provenance']['reviewed_against_commit']
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'full 40-character'):
+            audit(self.root)
+
+    def test_unavailable_frozen_history_fails_closed(self) -> None:
+        self.object['intake_provenance']['reviewed_against_commit'] = 'f' * 40
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'Frozen Git evidence unavailable'):
+            audit(self.root)
+
+    def test_blob_must_belong_to_frozen_candidate_tree(self) -> None:
+        self.object['intake_provenance']['reviewed_candidate_blob'] = 'f' * 40
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'not in the referenced baseline'):
+            audit(self.root)
+
+    def test_frozen_identifier_collision_is_not_ordinary_acceptance(self) -> None:
+        old_object = dict(self.object, id='preexisting-object')
+        self.freeze([self.candidate], [self.object], baseline_objects=[old_object])
+        with self.assertRaisesRegex(ValueError, 'Invalid frozen Candidate preflight'):
+            audit(self.root)
+
+    def test_canonical_identifiers_must_match_frozen_candidate(self) -> None:
+        self.object['external_identifiers'] = [{'namespace': 'fixture', 'value': 'unrelated'}]
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'external identifiers do not agree'):
+            audit(self.root)
+
+    def test_candidate_executor_cannot_be_relabelled(self) -> None:
+        self.object['intake_provenance']['candidate_executor'] = 'Invented independent author'
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'executor differs from frozen source'):
+            audit(self.root)
+
+    def test_event_backlink_is_required_outside_initial_batch(self) -> None:
+        (self.root / BATCH_EVENTS).unlink()
+        self.write(EXTRA_EVENTS, self.event)
+        self.object['intake_provenance']['acceptance_event_id'] = 'wrong-event'
+        self.write(OBJECTS, self.object)
+        with self.assertRaisesRegex(ValueError, 'Object/event linkage missing'):
+            audit(self.root)
 
 
 if __name__ == '__main__':
