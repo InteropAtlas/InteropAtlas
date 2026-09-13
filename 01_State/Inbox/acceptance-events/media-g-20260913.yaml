@@ -1,0 +1,47 @@
+contract_version: acceptance-event-v1
+event_id: defer-20260913-media-xiph_flac
+candidate_id: xiph_flac
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T16:09:04+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer对冻结包f724ab8中的身份诊断明确支持deferred / identity_risk，未批准删除标识、合并、拆分或创建正式对象。
+  - 审核仅为对所提供有限一手材料的独立解释，不证明网络取证真实性或规范全文。
+  - 同一external_identifiers数组并列具体RFC9639与工作级xiph:flac，尚未明确主体是格式、规范文档还是项目。来源说明有关联不足以证明两标识可无条件合并为单一文档身份。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/425#discussion_r4000104377
+- https://github.com/InteropAtlas/InteropAtlas/blob/f724ab88218a8bf416cd204143eb1b6f8e464910/01_State/Inbox/review-packets/media-recovery-20260913.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/805a7ec9002107b003bbdd2980d4bcae5fc7fcab
+- https://www.rfc-editor.org/info/rfc9639/
+decided_at: '2026-09-13T16:12:26+00:00'
+notes:
+- machine_route为本轮明确身份风险后的待身份审查路由，不冒充原始new候选当时的机械预检结论。
+- 形成明确的工作/文档标识角色方案再走身份审查；不自动删除任何旧标识，不新建或拆分正式主体。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260913-media-matroska
+candidate_id: matroska
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T16:09:04+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer对冻结包f724ab8中的身份诊断明确支持deferred / identity_risk，未批准删除标识、合并、拆分或创建正式对象。
+  - 审核仅为对所提供有限一手材料的独立解释，不证明网络取证真实性或规范全文。
+  - 同一external_identifiers数组并列具体RFC9559与工作级matroska:matroska，候选混用了容器格式和固定文档范围。需要标识角色与版本边界，不能直接当作可合并同义标识。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/425#discussion_r4000104377
+- https://github.com/InteropAtlas/InteropAtlas/blob/f724ab88218a8bf416cd204143eb1b6f8e464910/01_State/Inbox/review-packets/media-recovery-20260913.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/b9aefc4ba8f6741a5e49f1f414b082ebee426a38
+- https://datatracker.ietf.org/doc/rfc9559/
+decided_at: '2026-09-13T16:12:26+00:00'
+notes:
+- machine_route为本轮明确身份风险后的待身份审查路由，不冒充原始new候选当时的机械预检结论。
+- 保持原标识与候选ID，先完成工作/文档身份界定；不在普通路径自动合并、拆分或取代RFC文档。
