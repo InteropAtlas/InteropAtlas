@@ -1,0 +1,121 @@
+packet_id: audio_file_intake_20260914
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: f798fa1d7e5bb75264d9b8e6b5206ca55d579aa6
+executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+reviewer: null
+review_scope_zh:
+- 连续处理四个既有候选：EBU BWF、EBU RF64、ITU-R BS.1770、EBU-TT-D；不扩候选池。
+- 四项均先按固定出版物/版次提出普通接纳；Reviewer必须核对完整Canonical、原候选blob、名称和外部标识，再决定是否可原样物化。
+- RF64必须保留历史状态：EBU明确说明ITU-R BS.2088已实质取代Tech 3306，最终v2.0是指向ITU规范的pointer document，EBU不再继续发展Tech 3306。接纳RF64不表示推荐新系统采用它。
+- 作者已读取EBU和ITU官方一手页面。Reviewer仅对本包有限材料作独立解释，未独立验证网络抓取真实性或全文；CI通过不能替代语义审核。
+source_evidence:
+- evidence_id: bwf_v2
+  url: https://tech.ebu.ch/publications/tech3285
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: publication title, date and version summary
+  observation_zh: EBU官方页面标明Tech 3285于2011-05-20发布，当前页面为Broadcast Wave Format规范Version 2，加入符合EBU R 128的响度元数据并整合既有补充资料。
+- evidence_id: rf64_v2
+  url: https://tech.ebu.ch/publications/tech3306
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: publication summary and All versions
+  observation_zh: EBU官方页面标明Tech 3306 Version 2.0发布于2018-06；ITU-R BS.2088已实质取代EBU Tech 3306，最终v2是指向ITU规范的pointer document，EBU将不再继续发展Tech 3306。
+- evidence_id: bs1770_5
+  url: https://www.itu.int/rec/R-REC-BS.1770
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: Main and previous versions table
+  observation_zh: ITU官方索引显示BS.1770-5于2023-11批准并为In force (Main)，此前BS.1770-0至-4均为Superseded；标题为Algorithms to measure audio programme loudness and true-peak audio level。
+- evidence_id: ebu_tt_d_101
+  url: https://tech.ebu.ch/publications/tech3380
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: publication summary and All versions
+  observation_zh: EBU官方页面标明Tech 3380为基于XML、用于IP网络字幕分发的EBU-TT-D；Version 1.0.1发布于2018-05，加入IMSC 1.0.1的两个特性并改善与其他TTML profiles的兼容性。
+objects:
+- round_id: L
+  candidate_id: ebu_bwf
+  candidate_path: 01_State/Inbox/candidates/ebu_bwf.yaml
+  candidate_blob: 911cbdab548ef6a78f22fd1d80efb8c4b9313420
+  evidence_ids: [bwf_v2]
+  proposed_record:
+    id: ebu_bwf
+    type: artifact
+    kind: format
+    name_zh: EBU广播波形格式（BWF）规范
+    name_en: EBU Tech 3285 — Broadcast Wave Format (BWF)
+    description_zh: 规定面向广播交换与归档的Broadcast Wave Format；Version 2在既有BWF基础上加入符合EBU R 128的响度元数据。
+    description_en: Specifies the Broadcast Wave Format for broadcast audio exchange and archiving; Version 2 adds loudness metadata aligned with EBU R 128.
+    version: '2.0'
+    external_identifiers: [{namespace: ebu, value: tech.3285}]
+    official_url: https://tech.ebu.ch/publications/tech3285
+    versions: [{version: '2.0', status: published_specification, url: 'https://tech.ebu.ch/publications/tech3285'}]
+    scope_notes_zh: 当前记录固定EBU Tech 3285 Version 2.0；不把所有WAVE文件、实现或相关补充文件自动并入同一主体。
+    scope_notes_en: This record pins EBU Tech 3285 Version 2.0; WAVE files, implementations and related supplements are not automatically merged into the same subject.
+    sources:
+    - {url: 'https://tech.ebu.ch/publications/tech3285', title: 'EBU Tech 3285 — BWF - A format for audio data files in broadcasting', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: ebu_rf64
+  candidate_path: 01_State/Inbox/candidates/ebu_rf64.yaml
+  candidate_blob: ceda70dd6e9e421c0e768c511066b285c5f50073
+  evidence_ids: [rf64_v2]
+  proposed_record:
+    id: ebu_rf64
+    type: artifact
+    kind: specification
+    name_zh: EBU Tech 3306 RF64扩展音频文件格式
+    name_en: EBU Tech 3306 — RF64: An Extended File Format for Audio
+    description_zh: EBU的RF64 64位音频文件格式出版物；最终Version 2.0主要指向已实质取代该EBU规范的Recommendation ITU-R BS.2088。
+    description_en: EBU publication for the RF64 64-bit audio file format; final Version 2.0 primarily points to Recommendation ITU-R BS.2088, which effectively superseded the EBU specification.
+    version: '2.0'
+    external_identifiers: [{namespace: ebu, value: tech.3306}]
+    official_url: https://tech.ebu.ch/publications/tech3306
+    versions: [{version: '2.0', status: final_pointer_superseded, url: 'https://tech.ebu.ch/publications/tech3306'}]
+    scope_notes_zh: 这是历史出版物记录，不表示新系统应采用RF64；EBU明确要求以ITU-R BS.2088作为后续规范并停止发展Tech 3306。后续应建立明确的supersession/relationship记录，而不是删除历史对象。
+    scope_notes_en: This is a historical publication record, not a recommendation for new adoption. EBU states that ITU-R BS.2088 should be used and that Tech 3306 will no longer be developed. A separate supersession relationship should be recorded rather than deleting the historical object.
+    sources:
+    - {url: 'https://tech.ebu.ch/publications/tech3306', title: 'EBU Tech 3306 — RF64: An Extended File Format for Audio', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: itur_bs1770
+  candidate_path: 01_State/Inbox/candidates/itur_bs1770.yaml
+  candidate_blob: e01b8d3f7f80a71503b51461a8b4ed509e6d068b
+  evidence_ids: [bs1770_5]
+  proposed_record:
+    id: itur_bs1770
+    type: artifact
+    kind: recommendation
+    name_zh: ITU-R BS.1770节目响度与真峰值音频电平测量算法
+    name_en: Recommendation ITU-R BS.1770 — Algorithms to measure audio programme loudness and true-peak audio level
+    description_zh: 规定音频节目响度与数字音频真峰值电平的客观测量算法；当前固定到2023年11月批准且仍有效的BS.1770-5。
+    description_en: Specifies objective algorithms for audio programme loudness and digital audio true-peak level measurement; this record pins the in-force BS.1770-5 approved in November 2023.
+    version: 'BS.1770-5 (11/2023)'
+    external_identifiers: [{namespace: itu, value: bs.1770}]
+    official_url: https://www.itu.int/rec/R-REC-BS.1770
+    versions: [{version: 'BS.1770-5 (11/2023)', status: in_force, url: 'https://www.itu.int/rec/R-REC-BS.1770-5-202311-I'}]
+    scope_notes_zh: itu:bs.1770保留为工作级标识，当前定义由BS.1770-5固定；不把已被取代的-0至-4静默等同为当前版。
+    scope_notes_en: itu:bs.1770 is retained as a work-level identifier while the current definition is pinned to BS.1770-5; superseded editions -0 through -4 are not silently treated as the current edition.
+    sources:
+    - {url: 'https://www.itu.int/rec/R-REC-BS.1770', title: 'Recommendation ITU-R BS.1770', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: ebu_tt_d
+  candidate_path: 01_State/Inbox/candidates/ebu_tt_d.yaml
+  candidate_blob: e71b32ae7b0fc8e9b154018fb0d5c3f73a9519dd
+  evidence_ids: [ebu_tt_d_101]
+  proposed_record:
+    id: ebu_tt_d
+    type: artifact
+    kind: format
+    name_zh: EBU-TT-D字幕分发格式
+    name_en: EBU Tech 3380 — EBU-TT-D Subtitling Distribution Format
+    description_zh: 规定通过IP网络分发字幕的XML格式；当前固定到Version 1.0.1，该版加入IMSC 1.0.1的两个特性并改善与其他TTML profiles的兼容性。
+    description_en: Specifies an XML format for subtitle distribution over IP networks; this record pins Version 1.0.1, which adds two IMSC 1.0.1 features and improves compatibility with other TTML profiles.
+    version: '1.0.1'
+    external_identifiers: [{namespace: ebu, value: tech.3380}]
+    official_url: https://tech.ebu.ch/publications/tech3380
+    versions: [{version: '1.0.1', status: published_specification, url: 'https://tech.ebu.ch/publications/tech3380'}]
+    scope_notes_zh: 当前对象是EBU Tech 3380 Version 1.0.1，不把TTML或IMSC规范本身并入同一主体；相关兼容/依赖关系另行建边。
+    scope_notes_en: This object is EBU Tech 3380 Version 1.0.1; TTML and IMSC specifications remain separate subjects and their compatibility/dependency relationships should be modeled separately.
+    sources:
+    - {url: 'https://tech.ebu.ch/publications/tech3380', title: 'EBU Tech 3380 — EBU-TT-D Subtitling Distribution Format', language: en, accessed: '2026-09-14'}
