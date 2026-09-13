@@ -52,6 +52,7 @@ def audit(root: Path) -> dict[str, Any]:
         failures.extend(f'{item["candidate_id"]}: {x.message}' for x in validate_candidate(item, schema, index))
         failures.extend(f'{item["candidate_id"]}: {x.message}' for x in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(item))
     accepted: dict[str, dict[str, Any]] = {}
+    accepted_targets: dict[str, str] = {}
     for event in events.values():
         failures.extend(f'{event["event_id"]}: {x.message}' for x in validate_acceptance_event(event, event_schema))
         failures.extend(f'{event["event_id"]}: {x.message}' for x in Draft202012Validator(event_schema, format_checker=FormatChecker()).iter_errors(event))
@@ -59,7 +60,16 @@ def audit(root: Path) -> dict[str, Any]:
         if cid not in candidates:
             failures.append(f'Event has missing Candidate: {cid}')
         if event['decision'] == 'accepted':
+            # An event ID identifies a decision, not a new subject. Never let a
+            # second accepted event silently replace the first for a candidate.
+            if cid in accepted:
+                failures.append(f'Repeated acceptance of Candidate: {cid}')
+                continue
             oid = event.get('accepted_canonical_id')
+            if oid in accepted_targets:
+                failures.append(f'Repeated materialization of Canonical target: {oid}')
+            elif isinstance(oid, str):
+                accepted_targets[oid] = cid
             if oid not in objects:
                 failures.append(f'Accepted object missing: {oid}')
             candidate = candidates.get(cid, {})
