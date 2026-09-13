@@ -1,0 +1,92 @@
+contract_version: acceptance-event-v1
+event_id: accept-20260914-openmedia-aom_av1
+candidate_id: aom_av1
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: aom_av1
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:22:30+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer核对基线完整Canonical、原候选blob及固定AOMedia Version 1.0.0 with Errata 1材料后，明确给出acceptable_for_ordinary_acceptance，并允许整个proposed_record原样复制。
+  - aom:av1仅按范围说明保留为既有工作级/项目内标识，不构成正式版次注册号。
+  - 本结论仅独立解释作者提供的有限材料，未独立验证网络抓取真实性或规范全文。
+authority: {mutation_impact: M1, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298710
+- https://github.com/InteropAtlas/InteropAtlas/blob/88b59bfdca214c663b0c26569bab3440eef42747/01_State/Inbox/review-packets/open-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/adcd8ef0920cabdcd6ffe9621c299f131ea94a94
+- https://aomediacodec.github.io/av1-spec/av1-spec.pdf
+decided_at: '2026-09-13T17:23:00+00:00'
+notes:
+- 正式文件只序列化获准字段并增加接纳溯源元数据；新增序列化不冒充第二次独立审核。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-openmedia-c2pa_spec
+candidate_id: c2pa_spec
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:22:30+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确支持deferred + identity_risk。
+  - 通用c2pa:c2pa-spec标识与固定2.1 locator并置，而同一系列存在多个版本；需先确定工作级系列与固定出版物身份策略。
+  - 不批准主体拆分/合并、删除标识、静默固定为2.1或自动升级到2.4。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298713
+- https://github.com/InteropAtlas/InteropAtlas/blob/88b59bfdca214c663b0c26569bab3440eef42747/01_State/Inbox/review-packets/open-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/b02b512b674975a07b04ec92fab6cc2866e19a9f
+- https://spec.c2pa.org/specifications/specifications/2.1/specs/C2PA_Specification.html
+decided_at: '2026-09-13T17:23:00+00:00'
+notes:
+- machine_route表示本轮明确身份风险后的待身份审查路由，不冒充原始new候选的历史机械路由。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-openmedia-haivision_srt
+candidate_id: haivision_srt
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:22:30+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确支持deferred + identity_risk。
+  - 原候选以协议为主体，但同时依赖开源实现仓库与Internet-Draft工作区，尚未明确协议概念、草案出版物和实现项目的身份层级。
+  - 不批准拆分、合并或删除标识，也不把Internet-Draft称为RFC。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298715
+- https://github.com/InteropAtlas/InteropAtlas/blob/88b59bfdca214c663b0c26569bab3440eef42747/01_State/Inbox/review-packets/open-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/de02b18789c51d8e2bbce6a35767483be2441350
+- https://github.com/Haivision/srt
+decided_at: '2026-09-13T17:23:00+00:00'
+notes:
+- 保留候选ID与现有标识，先定义协议概念、草案与参考实现的角色。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-openmedia-vsf_rist
+candidate_id: vsf_rist
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:22:30+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确支持deferred + identity_risk。
+  - 系列级vsf:tr-06标识与具体TR-06-2:2022 Main Profile locator并置，而官方系列包含TR-06-1/2/3/4及多个年份版本。
+  - 不批准拆分/合并、删除标识、合并不同Profile或以当前版本静默覆盖历史locator。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298717
+- https://github.com/InteropAtlas/InteropAtlas/blob/88b59bfdca214c663b0c26569bab3440eef42747/01_State/Inbox/review-packets/open-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/73b282fa9e896d5d179d77e96e222661f20f6a67
+- https://vsf.tv/technical-recommendations/
+decided_at: '2026-09-13T17:23:00+00:00'
+notes:
+- 保留原ID与标识，先明确系列、Profile和具体版次的身份层级。
