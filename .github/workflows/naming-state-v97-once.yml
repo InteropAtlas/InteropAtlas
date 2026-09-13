@@ -1,0 +1,148 @@
+name: Naming state v97 reviewer task-understanding checkpoint
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-state-v97-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: naming-state-v97-once
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      STATE: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      EXPECTED_BLOB: 036901f3e0836a040651c1e7ee5d190f56983004
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build bounded v97 proposal
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object "$STATE")" = "$EXPECTED_BLOB"
+          cp "$STATE" "$RUNNER_TEMP/previous.yaml"
+          python - <<'PY'
+          import os,pathlib,re,json
+          p=pathlib.Path(os.environ['STATE']);text=p.read_text()
+          assert text.count('  snapshot_version: 96\n')==1
+          old=re.search(r'^next_action:\n.*?(?=^stop:\n)',text,re.M|re.S)
+          assert old and 'qualify_independent_reviewer_task_understanding_before_further_inference' in old.group(0)
+          new='''next_action:
+  action: confirm_task_understanding_on_two_distinct_historical_failure_types
+  rationale: >-
+    SEM-408-TASK-GATE-001已建立确定性任务理解门槛，历史SEM-408-003六项重放为5 block / 1 review / 0 pass。
+    SEM-408-004随后只对既有C003/Linetap执行一次真实canary，在明确identity-label与产品实现边界后得到task_gate=pass；
+    这说明包装修复值得继续，但单一样本不足以证明泛化。下一步只用既有C002与C006，分别覆盖历史instruction leakage与
+    circular grounding失败类型；每项独立、无重试、无新名称，任一非pass即停止扩大。即使全部pass也只进入语义正确性研究，
+    不构成名称质量真值、方法胜负或稳定晋升。
+  requires_owner: false_for_bounded_existing_candidate_method_research_no_paid_or_ia_generation
+
+'''
+          text=text[:old.start()]+new+text[old.end():]
+          text=text.replace('  snapshot_version: 96\n','  snapshot_version: 97\n',1)
+          section='''
+# v97: task-understanding qualification is distinct from semantic-quality validity.
+semantic_task_understanding_validation:
+  id: SEM-408-TASK-QUAL-001
+  status: deterministic_gate_validated_single_real_canary_passed_confirmation_pending
+  primary_issue: 408
+  gate:
+    implementation: naming-evidence-pilot/model-aware/semantic-review-task-gate/gate.py
+    fixtures: naming-evidence-pilot/model-aware/semantic-review-task-gate/fixtures.json
+    tests: naming-evidence-pilot/model-aware/semantic-review-task-gate/test_gate.py
+    report: naming-evidence-pilot/model-aware/semantic-review-task-gate/REPORT.zh-CN.md
+    ci_run: 34744133574
+    ci_artifact: 10312508886
+    historical_sem003_replay: {block: 5, review: 1, pass: 0, semantic_evidence_eligible: 0}
+    scope: task_understanding_only_not_name_quality_or_disposition_correctness
+    same_author_rule_based_gate: true
+  canary:
+    experiment: SEM-408-004
+    candidate: {id: C003, name: Linetap, source: existing_DEV-02_only}
+    run: 34744282097
+    job: 103689175084
+    evidence_commit: 6659c3ac5b3e19affa5fe556d9362a025dd6ad1b
+    artifact: 10313663077
+    artifact_sha256: b109baee713b7b7601fa06da53877fbfdd6bfd633de486256563202f2cf6eb79
+    requests_dispatched: 1
+    retries: 0
+    task_gate: pass
+    gate_findings: []
+    semantic_evidence_eligible: true
+    semantic_quality_validated: false
+    quality_ground_truth: null
+    input_tokens: 540
+    output_tokens: 213
+    inference_seconds: 31.01624691500001
+    report: naming-evidence-pilot/model-aware/semantic-review-pilot-004/REPORT.zh-CN.md
+  interpretation:
+    - single_canary_pass_supports_continuing_task_packaging_validation_not_reviewer_quality
+    - no_qwen_gemma_quality_winner_or_method_winner_inferred
+    - association_hypotheses_remain_unverified_even_when_task_gate_passes
+  confirmation_plan:
+    candidates: [C002, C006]
+    historical_failure_types: [instruction_or_brief_leakage, circular_candidate_grounding]
+    max_requests: 2
+    retries: 0
+    stop_on_first_nonpass: true
+    new_names: 0
+    paid_api_calls: 0
+    automatic_expansion_after_pass: false
+  new_model_calls_this_revision: 1
+  new_names: 0
+  paid_api_calls: 0
+  ia_generation: false
+  stable_skill_changed: false
+  stable_promotion: false
+'''
+          assert '\nsemantic_task_understanding_validation:' not in text
+          pathlib.Path(os.environ['RUNNER_TEMP']+'/proposed.yaml').write_text(text.rstrip()+'\n'+section)
+          PY
+          python -m pip install PyYAML==6.0.2
+          python 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py state "$RUNNER_TEMP/proposed.yaml" --previous "$RUNNER_TEMP/previous.yaml" --repository . > "$RUNNER_TEMP/transition.json"
+          python - <<'PY'
+          import json,os,pathlib,yaml
+          t=pathlib.Path(os.environ['RUNNER_TEMP'])
+          report=json.loads((t/'transition.json').read_text());assert report['write_allowed'] and not report['generation_ready']
+          old=yaml.safe_load((t/'previous.yaml').read_text());new=yaml.safe_load((t/'proposed.yaml').read_text())
+          assert new['task']==dict(old['task'],snapshot_version=97)
+          assert new['constraint_registry']==old['constraint_registry'] and new['owner_preferences']==old['owner_preferences'] and new['candidates']==old['candidates']
+          assert new['process_review']['generation_paused'] and not new['audit_recovery']['generation_resume_readiness']
+          assert new['semantic_task_understanding_validation']['canary']['task_gate']=='pass'
+          assert new['semantic_task_understanding_validation']['confirmation_plan']['max_requests']==2
+          print(json.dumps({'transition':report,'next_action':new['next_action'],'snapshot':97},ensure_ascii=False))
+          PY
+      - name: Preserve proposed checkpoint artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: naming-state-v97-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/previous.yaml
+            ${{ runner.temp }}/proposed.yaml
+            ${{ runner.temp }}/transition.json
+          retention-days: 30
+      - name: Publish v97 if branch and source state are unchanged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,json,os,pathlib,urllib.request
+          repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';source=os.environ['GITHUB_SHA'];state=os.environ['STATE'];expected=os.environ['EXPECTED_BLOB']
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=(json.dumps(body).encode() if body else None),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch advanced; preserve artifact and do not overwrite'
+          existing=api('/contents/'+state+'?ref='+current);assert existing['sha']==expected
+          proposed=pathlib.Path(os.environ['RUNNER_TEMP']+'/proposed.yaml').read_text()
+          tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+current)['tree']['sha'],'tree':[{'path':state,'mode':'100644','type':'blob','content':proposed}]})['sha']
+          commit=api('/git/commits','POST',{'message':'state(#408): checkpoint reviewer qualification at snapshot97\n\nTask-understanding gate plus one existing-candidate canary; semantic quality remains unvalidated.','tree':tree,'parents':[current]})['sha']
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          print(json.dumps({'published_commit':commit,'snapshot':97,'source_commit':source}))
+          PY
