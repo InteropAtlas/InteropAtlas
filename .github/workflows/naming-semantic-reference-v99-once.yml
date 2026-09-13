@@ -1,0 +1,110 @@
+name: SEM-408-006 bounded Mistral Nemo reference packet
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-semantic-reference-v99-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: sem-408-006-reference
+  cancel-in-progress: false
+jobs:
+  reference:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+      R: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-reference-pilot-006
+      STATE: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify frozen v99 authorization and packet boundary
+        shell: bash
+        run: |
+          set -euo pipefail
+          python -m pip install PyYAML==6.0.2
+          python - <<'PY'
+          import hashlib,json,os,pathlib,yaml
+          root=pathlib.Path(os.environ['P']);state=yaml.safe_load(pathlib.Path(os.environ['STATE']).read_text())
+          packet=json.loads((root/'semantic-validation-contract/reference-packet-001.json').read_text());auth=state['semantic_validation_contract']['bounded_reference_authorization']
+          assert state['task']['snapshot_version']==99 and state['task']['skill_version']=='0.4.0'
+          assert state['next_action']['action']=='execute_bounded_reference_packet_001_with_independent_mistral_nemo_12b_cpu'
+          assert auth['experiment']=='SEM-408-006' and auth['max_requests']==4 and auth['retries']==0
+          assert auth['paid_api_calls']==0 and auth['new_names']==0 and not auth['ia_generation'] and not auth['automatic_expansion']
+          assert auth['expected_file_sha256']=='7c1a10d202d8788dbe5628dc962254d10654c853cae6aaeca0618f05490d4a46'
+          assert packet['id']=='SEM-408-REF-PACKET-001' and len(packet['cases'])==4 and packet['source']['new_names']==0
+          assert not packet['reference_status']['independent_reference_obtained']
+          print(json.dumps({'authorization':'ok','snapshot':99,'packet_sha256':hashlib.sha256((root/'semantic-validation-contract/reference-packet-001.json').read_bytes()).hexdigest(),'cases':packet['cases'],'max_requests':4,'retries':0,'new_names':0,'paid_api_calls':0},ensure_ascii=False))
+          PY
+          python -m py_compile "$R/run.py"
+      - name: Compile pinned llama.cpp and prepare 12B model
+        shell: bash
+        run: |
+          set -euo pipefail
+          RT="$RUNNER_TEMP/sem408-runtime"; OUT="$RUNNER_TEMP/sem408-reference"; mkdir -p "$RT"
+          curl --fail --location --max-time 120 "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/$LLAMA_REV" -o "$RT/llama.tar.gz"
+          tar -xzf "$RT/llama.tar.gz" -C "$RT"
+          cmake -S "$RT/llama.cpp-$LLAMA_REV" -B "$RT/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DBUILD_SHARED_LIBS=OFF
+          cmake --build "$RT/build" --target llama-server -j 4
+          python "$R/run.py" prepare --output "$OUT/model" --runtime "$RT"
+      - name: Execute exactly four frozen reference cases
+        shell: bash
+        run: |
+          set -euo pipefail
+          RT="$RUNNER_TEMP/sem408-runtime"; OUT="$RUNNER_TEMP/sem408-reference"
+          "$RT/build/bin/llama-server" -m "$RT/model.gguf" --host 127.0.0.1 --port 8087 -c 8192 -t 4 -tb 4 -np 1 -b 512 -ub 128 --alias SEM-408-006-MistralNemo12B > "$OUT/model/server.log" 2>&1 &
+          PID=$!; trap 'kill "$PID" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import urllib.request,time
+          for _ in range(120):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8087/health',timeout=2) as r:
+                      if r.status==200:break
+              except Exception:time.sleep(1)
+          else:raise RuntimeError('reference_server_not_ready')
+          PY
+          python -u "$R/run.py" execute --output "$OUT/model"
+          python - <<'PY'
+          import json,os,pathlib
+          s=json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-reference/model/summary.json').read_text())
+          assert s['id']=='SEM-408-006' and s['requests_dispatched']==4 and s['requests_max']==4 and s['retries']==0
+          assert s['new_names']==0 and s['paid_api_calls']==0 and not s['ia_generation'] and not s['automatic_expansion']
+          assert s['quality_ground_truth'] is None and s['method_winner'] is None
+          print(json.dumps({'requests_dispatched':4,'statuses':[v['status'] for v in s['results']],'new_names':0,'paid_api_calls':0,'quality_ground_truth':None},ensure_ascii=False))
+          PY
+      - name: Preserve evidence artifact before branch publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sem408006-reference-${{ github.run_id }}
+          path: ${{ runner.temp }}/sem408-reference/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish exact evidence only if branch is unchanged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-reference/model';repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';source=os.environ['GITHUB_SHA']
+          home='03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-reference-pilot-006/results'
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=(json.dumps(body,ensure_ascii=False).encode() if body is not None else None),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch changed after artifact preservation; do not overwrite'
+          files=[];total=0
+          for path in sorted(root.rglob('*')):
+              if not path.is_file():continue
+              raw=path.read_bytes();total+=len(raw);assert total<8_000_000
+              files.append({'path':home+'/'+str(path.relative_to(root)),'mode':'100644','type':'blob','content':raw.decode('utf-8')})
+          tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+current)['tree']['sha'],'tree':files})['sha']
+          commit=api('/git/commits','POST',{'message':'evidence(#408): preserve SEM-408-006 Mistral Nemo reference opinions\n\nFour frozen existing candidates only; reference opinions are not ground truth, adoption, reality clearance, or method winner.','tree':tree,'parents':[current]})['sha']
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          print(json.dumps({'published_commit':commit,'source_commit':source,'files':len(files),'bytes':total,'new_names':0,'paid_api_calls':0}))
+          PY
