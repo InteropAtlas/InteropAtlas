@@ -6,7 +6,7 @@ task:
   branch: feat/adaptive-naming-skill-v0.1
   mode: Adaptive Naming Fit Test
   status: process_review
-  snapshot_version: 95
+  snapshot_version: 96
   skill_version: 0.4.0
 
 lineage:
@@ -101,10 +101,12 @@ current_state:
   owner_review_needed_now: false
 
 next_action:
-  action: design_independent_semantic_validation_on_existing_candidates
+  action: qualify_independent_reviewer_task_understanding_before_further_inference
   rationale: >-
-    SELECT-408-002在同seed仅改变候选顺序时4/6改判，v95已用正序/反序一致性做保守资源分流。
-    当前主要未知转为语义判断是否正确，而非继续增加生成或selector规则；下一步只使用既有候选建立独立语义验证。
+    SEM-408-003已经执行六次，但归档因分支推进失败；现仅恢复Actions日志，不是完整原始响应。
+    事后审计发现把名称当产品、把说明词当名称和循环论证；不能把六项hold当质量结论。
+    先在既有材料上定义最小任务理解对照及停止条件，确认能区分命名对象与产品能力，
+    再决定是否进行一个有界真实canary；不直接重跑六项，不改selector、不新增名称。
   requires_owner: false_for_bounded_method_research_no_paid_or_ia_generation
 
 stop:
@@ -891,4 +893,31 @@ selection_stability_revision:
     "quality_ground_truth": null,
     "ia_generation": false,
     "stable_promotion": false
+  }
+
+# v96: execution, capture and semantic validity are separate.
+semantic_review_recovery:
+  {
+    "id": "SEM-408-003-RECOVERY-01",
+    "primary_issue": 408,
+    "status": "executed_log_recovered_semantic_validity_not_established",
+    "source_run": 34737301186,
+    "source_job": 103670853467,
+    "source_commit": "3b2144413d938bde7cfe1772ec60efd635365e2d",
+    "record": "naming-evidence-pilot/model-aware/semantic-review-pilot-003/results/recovery-run-34737301186/recovery.json",
+    "report": "naming-evidence-pilot/model-aware/semantic-review-pilot-003/REPORT.zh-CN.md",
+    "logged_completed_review_calls": 6,
+    "new_model_calls_this_recovery": 0,
+    "capture_class": "retained_actions_log_not_original_http_workspace",
+    "original_workspace_recovered": false,
+    "independent_reviewer_execution": "cross_family_single_candidate_code_and_log_evidence",
+    "independent_semantic_validation_passed": false,
+    "posthoc_audit": "controller_assessment_not_new_independent_review",
+    "cross_model_quality_comparison": "withheld",
+    "quality_ground_truth": null,
+    "new_names": 0,
+    "paid_api_calls": 0,
+    "ia_generation": false,
+    "stable_promotion": false,
+    "historical_counts_scope_unchanged": true
   }
