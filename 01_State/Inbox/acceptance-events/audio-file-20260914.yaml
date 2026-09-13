@@ -33,3 +33,23 @@ authority: {mutation_impact: M1, ordinary_path: true, approver: null}
 evidence_basis: ['https://github.com/InteropAtlas/InteropAtlas/pull/430#discussion_r4000341937', 'https://github.com/InteropAtlas/InteropAtlas/blob/139126ef041502d85ce838e5d43b9615c1d6bab8/01_State/Inbox/review-packets/audio-file-intake-20260914.yaml', 'https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e71b32ae7b0fc8e9b154018fb0d5c3f73a9519dd']
 decided_at: '2026-09-13T17:44:00+00:00'
 notes: [正式记录仅序列化获准字段并补接纳溯源。]
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-audiofile-itur_bs1770
+candidate_id: itur_bs1770
+decision: deferred
+machine_route: review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:41:05+00:00'
+  independent_from_executor: true
+  notes:
+  - Reviewer核对完整Canonical、冻结候选和有限官方材料后，唯一阻塞为proposed_record使用了未注册的kind recommendation。
+  - 内容身份与版本问题未被判为冲突；后续应将仓库分类映射到受控kind后重新复核，不自动物化。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/430#discussion_r4000341937
+- https://github.com/InteropAtlas/InteropAtlas/blob/139126ef041502d85ce838e5d43b9615c1d6bab8/01_State/Inbox/review-packets/audio-file-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e01b8d3f7f80a71503b51461a8b4ed509e6d068b
+decided_at: '2026-09-13T17:47:00+00:00'
+notes: [本次deferred不表示身份风险或内容拒绝；仅记录受控kind阻塞。]
