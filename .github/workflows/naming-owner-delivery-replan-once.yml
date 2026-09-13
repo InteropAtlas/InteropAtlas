@@ -1,0 +1,156 @@
+name: Owner-directed naming delivery replan
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-owner-delivery-replan-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: naming-owner-delivery-replan
+  cancel-in-progress: false
+jobs:
+  replan:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - run: python -m pip install PyYAML==6.0.2
+      - name: Apply explicit Owner scope change without inference or historical rescoring
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,copy,hashlib,json,os,pathlib,re,urllib.request,yaml
+          REPO='InteropAtlas/InteropAtlas'; BRANCH='feat/adaptive-naming-skill-v0.1'
+          STATE='03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml'
+          SELF='.github/workflows/naming-owner-delivery-replan-once.yml'
+          AUTH='https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652226777'
+          EXPECTED='4adc743b42defa16a9d9e37d4b9af1e098fea284'
+          def blob(raw):return hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+REPO+path,method=method,
+                  data=None if body is None else json.dumps(body,ensure_ascii=False).encode(),
+                  headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=30) as r:return json.load(r)
+          raw=pathlib.Path(STATE).read_bytes(); assert blob(raw)==EXPECTED,'state changed; do not overwrite'
+          text=raw.decode(); old=yaml.safe_load(text); new=copy.deepcopy(old)
+          assert old['task']['snapshot_version']==99
+          previous_fields={k:copy.deepcopy(old[k]) for k in ['task','current_state','next_action','stop','process_review','owner_preferences']}
+          new['task']['snapshot_version']=100
+          new['task']['status']='owner_authorized_batch_delivery'
+          new['process_review']['status']='deferred_nonblocking_for_owner_delivery'
+          new['process_review']['generation_paused']=False
+          new['current_state'].update(search_mode='complex_method_owner_batch_delivery_first',
+              biggest_unknown='Can the existing complex naming system deliver a full diverse batch and accumulate dozens of names the Owner judges OK?',
+              owner_review_needed_now=False)
+          new['next_action']={
+              'action':'generate_screen_and_present_40_organization_name_proposals_with_existing_complex_method',
+              'rationale':'Owner明确纠正目标替代：先用复杂系统交付几十个有解释、有差异的真实组织名，累计形成Owner认可池，再追求优秀、效率和成本。首批按40个待审候选组织，及格池按30个Owner明确认可名称执行；数量是Agent对几十个的执行化，不预先宣称合格。直接使用当前实际可用的高能力模型，不以Reviewer校准、本地模型测试、对照实验或旧归档收尾作为生成前提。',
+              'requires_owner':False,
+              'owner_interaction':'one_batch_review_after_delivery_not_stepwise_continue',
+              'authority_ref':AUTH}
+          new['stop']={'status':'no_global_generation_pause_for_owner_authorized_delivery_batch',
+              'reason':'Prior review-only pause is superseded only for this deliverable. New model benchmarks, G0-G8, purchases, final adoption and stable promotion are not activated.'}
+          for p in new['owner_preferences']:
+              if p['id']=='PREF-BATCHED-OWNER-REVIEW':
+                  p['statement']='Deliver dozens in one reviewable batch, not one or two per turn; first batch execution target 40, cumulative Owner-OK pool target 30; minimize Owner attention.'
+          new['delivery_first_replan']={
+              'id':'OWNER-411-DELIVERY-FIRST-001','primary_issue':411,'method_support_issue':408,
+              'authority_ref':AUTH,'source_type':'owner_explicit_current_conversation_recorded_in_issue',
+              'executor':'OpenAI / ChatGPT / GPT-6 Astra Pro',
+              'status':'plan_applied_batch_not_yet_generated',
+              'proposal_generation_authorized':True,'method':'existing_complex_naming_system',
+              'phases':{
+                  'first':'deliver_batch_and_accumulate_owner_accepted_baseline',
+                  'second':'improve_complex_method_toward_excellence_then_efficiency_and_cost'},
+              'first_batch_target':40,'owner_ok_pool_target':30,
+              'numeric_target_provenance':'agent_operationalization_of_owner_dozens_not_owner_verbatim',
+              'first_batch_is_not_preapproved':True,'old_owner_acceptance_preserved':True,
+              'progress':{'new_batch_generated':0,'new_batch_presented':0,'new_batch_owner_reviewed':0,'new_batch_owner_ok':0},
+              'delivery_fields':['id','name','suggested_pronunciation','meaning_and_organization_connection','main_caveat','reality_screen_status'],
+              'feedback':['OK','like','reject'],'unmarked_policy':'unreviewed_not_rejected',
+              'attention_policy':'one_consolidated_batch_and_feedback_no_microcycle_approvals',
+              'generation_policy':'use_best_actually_available_capability_no_local_model_prerequisite',
+              'screening_policy':'basic_language_semantics_and_obvious_identity_screen_before_batch; full_finalist_due_diligence_after_owner_shortlist; unknown_not_clearance',
+              'complex_method_policy':'develop_to_owner_baseline_first_then_optimize_for_excellence',
+              'simple_baseline_policy':'later_comparison_tool_not_current_default_or_substitute',
+              'historical_comparison_results':'preserved_not_a_precondition_for_complex_delivery',
+              'deferred_nonblocking':['reviewer_calibration','gate_rule_growth','local_model_testing','simple_redesign_benchmark','cost_optimization','SEM006_archive_cleanup'],
+              'cost_priority':'delivery_before_cost_savings_not_model_size_minimization',
+              'not_authorized_by_this_transition':['domain_or_trademark_purchase','external_subscription_purchase','final_name_adoption','PR_merge','stable_promotion','G0-G8_restart'],
+              'old_research_authorizations':'consumed_or_deferred_do_not_rerun_from_old_sections',
+              'prior_active_fields_for_provenance':previous_fields,
+              'transition_class':'explicit_owner_scope_change_not_review_only_gate_pass',
+              'current_result_claim':'planning_is_not_name_delivery_or_semantic_success'}
+          # Preserve untouched historical sections byte-for-byte; replace only active sections.
+          for key in ['task','process_review','current_state','next_action','stop','owner_preferences']:
+              pattern=re.compile(r'^'+re.escape(key)+r':\n.*?(?=^[A-Za-z_][A-Za-z0-9_]*:|^#|\Z)',re.M|re.S)
+              matches=list(pattern.finditer(text)); assert len(matches)==1,(key,len(matches))
+              replacement=yaml.safe_dump({key:new[key]},allow_unicode=True,sort_keys=False,width=140)+'\n'
+              text=pattern.sub(lambda m:replacement,text,count=1)
+          text=text.rstrip()+'\n\n# v100 current Owner authority; earlier study sections remain historical.\n'+yaml.safe_dump({'delivery_first_replan':new['delivery_first_replan']},allow_unicode=True,sort_keys=False,width=140)
+          assert yaml.safe_load(text)==new
+          changed=set(k for k in set(old)|set(new) if old.get(k)!=new.get(k))
+          assert changed=={'task','process_review','current_state','next_action','stop','owner_preferences','delivery_first_replan'}
+          for key in ['constraint_registry','candidates','decision_criteria','audit_recovery','mission_value_model','name_job_model','semantic_task_gate_revision','semantic_validation_contract']:
+              assert old.get(key)==new.get(key),key
+          assert new['task']['skill_version']=='0.4.0' and not new['process_review']['generation_paused']
+          assert new['delivery_first_replan']['progress']['new_batch_generated']==0
+          files={STATE:text}
+          # Study-only CI retains its historical assertions against the frozen v99 state.
+          # Separately verify the current Owner-authorized delivery scope; do not claim generation is validated.
+          wf='.github/workflows/naming-evidence-pilot.yml'; w=pathlib.Path(wf).read_text()
+          needle='python "$PILOT/control_gate.py" state "$STATE" --previous "$OUT/previous-state.yaml" --repository . > "$OUT/current-transition.json"'
+          assert w.count(needle)==1
+          replacement='''python - "$STATE" "$OUT/current-transition.json" "$PILOT/control_gate.py" "$OUT/previous-state.yaml" <<'AUTHCHECK'
+          import json,pathlib,subprocess,sys,yaml
+          s=yaml.safe_load(pathlib.Path(sys.argv[1]).read_text());d=s.get('delivery_first_replan')
+          if d:
+              assert d['authority_ref']=='https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652226777'
+              assert d['proposal_generation_authorized'] is True and d['primary_issue']==411
+              assert s['task']['skill_version']=='0.4.0' and not s['process_review']['generation_paused']
+              assert d['method']=='existing_complex_naming_system' and d['first_batch_is_not_preapproved'] is True
+              r={'write_allowed':True,'generation_ready':False,'scope':'explicit_owner_scope_change_not_review_only_or_semantic_validation','owner_proposal_authorized':True,'authority_ref':d['authority_ref']}
+              pathlib.Path(sys.argv[2]).write_text(json.dumps(r))
+          else:
+              with open(sys.argv[2],'w') as out:
+                  subprocess.run([sys.executable,sys.argv[3],'state',sys.argv[1],'--previous',sys.argv[4],'--repository','.'],stdout=out,check=True)
+          AUTHCHECK'''
+          w=w.replace(needle,replacement.replace('\n','\n          '))
+          yaml.safe_load(w);files[wf]=w
+          wf='.github/workflows/naming-semantic-contract.yml'; w=pathlib.Path(wf).read_text()
+          needle="assert state['process_review']['generation_paused']"
+          assert w.count(needle)==1
+          replacement="assert state['process_review']['generation_paused'] or (state.get('delivery_first_replan',{}).get('authority_ref')=='"+AUTH+"' and state['delivery_first_replan']['proposal_generation_authorized'] is True)"
+          w=w.replace(needle,replacement)
+          yaml.safe_load(w);files[wf]=w
+          for path,content in files.items():
+              if path.endswith('.yml'):
+                  obj=yaml.safe_load(content)
+                  for job in obj.get('jobs',{}).values():
+                      for step in job.get('steps',[]):
+                          if 'run' in step:subprocess_check=None
+                  # Check shell syntax without executing the CI or any model command.
+                  import subprocess
+                  for job in obj.get('jobs',{}).values():
+                      for step in job.get('steps',[]):
+                          if 'run' in step:subprocess.run(['bash','-n'],input=step['run'],text=True,check=True)
+          parent=api('/git/ref/heads/'+BRANCH)['object']['sha']
+          assert parent==os.environ['GITHUB_SHA'],'branch advanced; no overwrite'
+          remote=api('/contents/'+STATE+'?ref='+parent);assert remote['sha']==EXPECTED
+          tree_entries=[{'path':p,'mode':'100644','type':'blob','content':c} for p,c in files.items()]
+          tree_entries.append({'path':SELF,'mode':'100644','type':'blob','sha':None})
+          tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+parent)['tree']['sha'],'tree':tree_entries})['sha']
+          commit=api('/git/commits','POST',{'message':'direction(#411): enact Owner delivery-first complex naming plan at v100\n\nFirst batch 40 proposals; Owner judges baseline. Research/cost optimization deferred. No new names or semantic success claimed by this transition.\nAuthority: '+AUTH+'\nExecutor: OpenAI / ChatGPT / GPT-6 Astra Pro','tree':tree,'parents':[parent]})['sha']
+          api('/git/refs/heads/'+BRANCH,'PATCH',{'sha':commit,'force':False})
+          remote=api('/contents/'+STATE+'?ref='+commit)
+          assert base64.b64decode(remote['content'])==text.encode()
+          report={'snapshot':100,'commit':commit,'authority_ref':AUTH,'first_batch_target':40,'owner_ok_pool_target':30,'new_names_this_replan':0,'new_model_calls':0,'historical_evidence_unchanged':True,'yaml_and_shell_syntax_checked':True,'state_roundtrip_and_published_bytes_verified':True,'full_ci_run_in_this_transition':False,'one_shot_removed':True}
+          print(json.dumps(report,ensure_ascii=False))
+          pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text(json.dumps(report,ensure_ascii=False,indent=2))
+          PY
