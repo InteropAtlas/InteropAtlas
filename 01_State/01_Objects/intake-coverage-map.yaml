@@ -1,0 +1,32 @@
+id: intake_coverage_map
+type: map
+map_kind: research
+name_zh: 收录覆盖与候选关系视图
+name_en: Intake Coverage and Candidate Relation View
+description_zh: 正式对象的导航入口；候选类别及待审关系由独立 Inbox 计划引用，不混入 Canonical 事实图。
+description_en: Navigation over canonical objects, with a separate Inbox plan for candidate categories and proposed relations.
+roots:
+- {type: reference_project, id: interopatlas}
+traversal:
+  relation_types: [uses, depends_on, describes, secures]
+  direction: both
+  max_depth: 3
+  include_object_types: [standard, reference_project]
+pinned:
+- {type: standard, id: http3_rfc9114}
+- {type: standard, id: rtp_rfc3550}
+- {type: standard, id: rtsp_rfc7826}
+- {type: standard, id: sdp_rfc8866}
+- {type: standard, id: opus_rfc6716}
+- {type: standard, id: ffv1_rfc9043}
+groups:
+- id: reviewed_rfc_intake
+  name_zh: 本轮复核的 RFC 条目
+  name_en: RFC records reviewed in this batch
+  object_ids: [http3_rfc9114, rtp_rfc3550, rtsp_rfc7826, sdp_rfc8866, opus_rfc6716, ffv1_rfc9043]
+inbox_plan: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+notes_zh: pinned 只表示导航，不表示 IA 采用。当前通用 Map 渲染器不负责消费 Inbox 叠加层；候选覆盖请运行 intake_coverage_audit.py，不宣称已有交互式全景地图。
+notes_en: Pinning does not imply adoption. The generic Map renderer does not consume the Inbox overlay; use intake_coverage_audit.py for candidate coverage. No interactive landscape is claimed.
+record_created_at: '2026-09-13T09:59:39+00:00'
+record_updated_at: '2026-09-13T09:59:39+00:00'
+latest_substantive_contribution: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: pending independent PR review, github_actor: ff6962757}

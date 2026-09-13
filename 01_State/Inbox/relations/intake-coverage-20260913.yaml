@@ -1,0 +1,167 @@
+plan_id: intake_coverage_20260913
+status: draft
+created_at: '2026-09-13T09:59:39+00:00'
+source_issue: 146
+semantics: editorial_navigation_only
+canonical_acceptance: false
+notes_zh: [本分类是 IA 本轮收录视角，可重叠、可扩充，不是公认的世界知识分类或互斥目录。, 没有收录不等于现实中没有标准；这里的空缺只表示 IA 的发现/收录工作未覆盖。, 只存类别定义和对象引用；候选、验收和正式记录的状态由现有载体读取，不复制状态。, 类别成员关系只用于导航；技术关系 proposals 仍待独立审查，不进入正式关系索引。, 范围是本轮种子，不是全库所有对象的分类完成证明，也不提供没有分母的全球覆盖率。]
+categories:
+- {id: physical, name_zh: 物理接口与链路, name_en: Physical interfaces and links, priority: P1, rationale_zh: 补足数字系统的物理基础。}
+- {id: measurement, name_zh: 测量、单位与时间, name_en: 'Measurement, units and time', priority: P1, rationale_zh: 避免跨设备、跨学科的数值失配。}
+- {id: transport, name_zh: 网络与传输, name_en: Networking and transport, priority: P0, rationale_zh: 提高跨域复用并连接媒体与 Web。}
+- {id: trust, name_zh: 安全、授权与凭证, name_en: 'Security, authorization and credentials', priority: P0, rationale_zh: 将技术连接与信任边界分别建模。}
+- {id: syntax, name_zh: 数据表示与序列化, name_en: Data representation and serialization, priority: P0, rationale_zh: 连接文本、二进制与消息表示。}
+- {id: semantics, name_zh: 知识表示、本体与查询, name_en: 'Knowledge representation, ontologies and query', priority: P0, rationale_zh: 让 IA 的对象关系可解释、可检索。}
+- {id: services, name_zh: 服务接口与事件, name_en: Service interfaces and events, priority: P0, rationale_zh: 描述服务合同、失败语义和事件交换。}
+- {id: agents, name_zh: Agent 与工具互操作, name_en: Agent and tool interoperability, priority: P0, rationale_zh: 区分工具连接、任务协作与身份权限。}
+- {id: industrial, name_zh: 设备、工业与物联网, name_en: 'Devices, industry and IoT', priority: P1, rationale_zh: 建立物理设备到信息模型和服务的桥接入口。}
+- {id: media_network, name_zh: 媒体网络与设备控制, name_en: Media networking and device control, priority: P0, rationale_zh: 落实已有影视候选而不是持续堆积。}
+- {id: image_color, name_zh: 图像、色彩与编码, name_en: 'Image, color and coding', priority: P1, rationale_zh: 区分格式、色彩系统、组件和实现。}
+- {id: editing, name_zh: 制作、编辑与交付, name_en: 'Production, editorial and delivery', priority: P1, rationale_zh: 围绕实际生产流程建立可组合能力。}
+- {id: metadata, name_zh: 元数据、来源与复用, name_en: 'Metadata, provenance and reuse', priority: P1, rationale_zh: 追踪知识和数据能否被理解与复用。}
+- {id: observability, name_zh: 可观测性与运行诊断, name_en: Observability and diagnostics, priority: P1, rationale_zh: 补充系统运行后的跨服务诊断关系。}
+- {id: research, name_zh: 研究方法与可复现性, name_en: Research methods and reproducibility, priority: P1, rationale_zh: 方法有适用条件和证据边界，不能只收名称。}
+- {id: design, name_zh: 设计方法与人因, name_en: Design methods and human factors, priority: P1, rationale_zh: 把人类问题理解纳入系统设计。}
+- {id: collaboration, name_zh: 组织协作与改进, name_en: Organizational collaboration and improvement, priority: P1, rationale_zh: 扩展到社会层协调方法。}
+- {id: geospatial, name_zh: 地理空间与环境数据, name_en: Geospatial and environmental data, priority: P1, rationale_zh: 用空间要素交换打开地理域。}
+- {id: health, name_zh: 健康医疗数据交换, name_en: Healthcare data exchange, priority: P1, rationale_zh: 以明确版本和资源成熟度进入医疗域。}
+- {id: commerce, name_zh: 商业单据与组织交换, name_en: Business documents and organizational exchange, priority: P1, rationale_zh: 补充跨组织结构化业务信息。}
+memberships:
+- category_id: physical
+  ref: {surface: candidate, id: ieee_802_3_family}
+- category_id: measurement
+  ref: {surface: candidate, id: si_brochure_9}
+- category_id: transport
+  ref: {surface: candidate, id: quic_rfc9000}
+- category_id: transport
+  ref: {surface: candidate, id: quic_tls_rfc9001}
+- category_id: trust
+  ref: {surface: candidate, id: tls13_rfc8446}
+- category_id: trust
+  ref: {surface: candidate, id: oauth2_rfc6749}
+- category_id: trust
+  ref: {surface: candidate, id: oauth_security_rfc9700}
+- category_id: trust
+  ref: {surface: candidate, id: vc_data_model_2.0}
+- category_id: syntax
+  ref: {surface: candidate, id: cbor_rfc8949}
+- category_id: syntax
+  ref: {surface: candidate, id: json_rpc_2.0}
+- category_id: semantics
+  ref: {surface: candidate, id: sparql11_query_2013}
+- category_id: semantics
+  ref: {surface: candidate, id: owl2_overview_2012}
+- category_id: services
+  ref: {surface: candidate, id: openapi_3.1.1}
+- category_id: services
+  ref: {surface: candidate, id: cloudevents_1.0.2}
+- category_id: services
+  ref: {surface: candidate, id: problem_details_rfc9457}
+- category_id: agents
+  ref: {surface: candidate, id: mcp_2025_11_25}
+- category_id: agents
+  ref: {surface: candidate, id: json_rpc_2.0}
+- category_id: industrial
+  ref: {surface: candidate, id: mqtt_5.0}
+- category_id: industrial
+  ref: {surface: candidate, id: opc_ua_family}
+- category_id: industrial
+  ref: {surface: candidate, id: wot_td_1.1}
+- category_id: media_network
+  ref: {surface: candidate, id: amwa_nmos_is04}
+- category_id: media_network
+  ref: {surface: candidate, id: amwa_nmos_is05}
+- category_id: image_color
+  ref: {surface: candidate, id: aswf_openexr}
+- category_id: image_color
+  ref: {surface: candidate, id: aces}
+- category_id: image_color
+  ref: {surface: candidate, id: opus_updates_rfc8251}
+- category_id: editing
+  ref: {surface: candidate, id: aswf_otio}
+- category_id: metadata
+  ref: {surface: candidate, id: fair_principles_2016}
+- category_id: observability
+  ref: {surface: candidate, id: trace_context_1.0}
+- category_id: research
+  ref: {surface: candidate, id: fair_principles_2016}
+- category_id: design
+  ref: {surface: candidate, id: double_diamond}
+- category_id: collaboration
+  ref: {surface: candidate, id: scrum_guide_2020}
+- category_id: geospatial
+  ref: {surface: candidate, id: ogc_api_features_17_069r4}
+- category_id: health
+  ref: {surface: candidate, id: fhir_r4_4.0.1}
+- category_id: commerce
+  ref: {surface: candidate, id: ubl_2.3}
+- category_id: transport
+  ref: {surface: canonical, id: http3_rfc9114}
+- category_id: transport
+  ref: {surface: canonical, id: rtp_rfc3550}
+- category_id: media_network
+  ref: {surface: canonical, id: rtp_rfc3550}
+- category_id: media_network
+  ref: {surface: canonical, id: rtsp_rfc7826}
+- category_id: media_network
+  ref: {surface: canonical, id: sdp_rfc8866}
+- category_id: image_color
+  ref: {surface: canonical, id: opus_rfc6716}
+- category_id: image_color
+  ref: {surface: canonical, id: ffv1_rfc9043}
+- category_id: syntax
+  ref: {surface: canonical, id: json_rfc8259}
+- category_id: semantics
+  ref: {surface: canonical, id: skos_reference}
+- category_id: semantics
+  ref: {surface: canonical, id: json_ld_1.1}
+proposals:
+- id: http3_http_semantics
+  source: {surface: canonical, id: http3_rfc9114}
+  proposed_relation: uses
+  target: {surface: canonical, id: http_rfc9110}
+  status: review_required
+  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-1']
+  conditions_zh: HTTP/3 沿用 HTTP 语义；不能表述为替代 RFC 9110。
+- id: http3_quic
+  source: {surface: canonical, id: http3_rfc9114}
+  proposed_relation: depends_on
+  target: {surface: candidate, id: quic_rfc9000}
+  status: review_required
+  evidence: ['https://www.rfc-editor.org/rfc/rfc9114.html#section-2']
+  conditions_zh: 此边只涉及 RFC 9114 的 QUIC 映射，不推断所有未来 HTTP/QUIC 版本。
+- id: quic_tls_security
+  source: {surface: candidate, id: quic_tls_rfc9001}
+  proposed_relation: secures
+  target: {surface: candidate, id: quic_rfc9000}
+  status: review_required
+  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
+  conditions_zh: 使用 TLS 为 QUIC 提供安全，不把两份规范合并。
+- id: quic_tls_version
+  source: {surface: candidate, id: quic_tls_rfc9001}
+  proposed_relation: uses
+  target: {surface: candidate, id: tls13_rfc8446}
+  status: review_required
+  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
+  conditions_zh: 须保留 QUIC 对 TLS 集成方式的限制。
+- id: mcp_jsonrpc
+  source: {surface: candidate, id: mcp_2025_11_25}
+  proposed_relation: uses
+  target: {surface: candidate, id: json_rpc_2.0}
+  status: review_required
+  evidence: ['https://modelcontextprotocol.io/specification/2025-11-25/basic']
+  conditions_zh: 固定 MCP 日期版本的消息层要求，不等同于其全部生命周期和授权要求。
+- id: is05_is04
+  source: {surface: candidate, id: amwa_nmos_is05}
+  proposed_relation: recommended_with
+  target: {surface: candidate, id: amwa_nmos_is04}
+  status: review_required
+  evidence: ['https://specs.amwa.tv/is-05/']
+  conditions_zh: 按 IS-05 的 IS-04 互操作章节逐版审查；不是无条件兼容或必须共同部署的声明。
+- id: opus_update
+  source: {surface: candidate, id: opus_updates_rfc8251}
+  proposed_relation: updates
+  target: {surface: canonical, id: opus_rfc6716}
+  status: review_required
+  evidence: ['https://www.rfc-editor.org/info/rfc8251/']
+  conditions_zh: updates 为 RFC 文档关系候选；现有正式关系词表没有该词，不擅自增加词表或替换成 supersedes。
