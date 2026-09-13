@@ -1,0 +1,36 @@
+packet_id: open_media_intake_20260914
+status: reviewed_and_materialized
+source_issue: 146
+baseline_commit: fd80c25a003312d837c2c8014a17fb5e8b4dede7
+reviewed_packet_commit: 88b59bfdca214c663b0c26569bab3440eef42747
+executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+review_outcomes:
+- candidate_id: aom_av1
+  decision: accepted
+  canonical_id: aom_av1
+  event_id: accept-20260914-openmedia-aom_av1
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298710
+  note_zh: 独立Reviewer明确允许整个proposed_record原样复制；正式对象只增加溯源元数据。
+- candidate_id: c2pa_spec
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-c2pa_spec
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298713
+  note_zh: 通用工作级标识与固定2.1出版物边界未厘清；不自动升级、拆分或删除标识。
+- candidate_id: haivision_srt
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-haivision_srt
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298715
+  note_zh: 协议概念、Internet-Draft与开源实现身份未厘清；不把draft称作RFC。
+- candidate_id: vsf_rist
+  decision: deferred
+  state: identity_risk
+  event_id: defer-20260914-openmedia-vsf_rist
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/428#discussion_r4000298717
+  note_zh: TR-06系列、Profile及具体年份版次边界未厘清；不静默覆盖历史版本。
+boundaries:
+- 完整送审原稿、来源摘录与proposed_record固定保存在Git提交88b59bfdca214c663b0c26569bab3440eef42747，不在活跃树复制第二份事实源。
+- Reviewer仅独立解释作者提供的有限一手材料，未独立验证网络抓取真实性或全文。
+- CI成功、代码无发现或点赞均不构成语义接受；本回执只记录明确的独立语义结论。
