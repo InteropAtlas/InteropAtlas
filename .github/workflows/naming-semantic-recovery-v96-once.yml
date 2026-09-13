@@ -1,0 +1,110 @@
+name: SEM-408-003 zero-inference log recovery
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-semantic-recovery-v96-once.yml]
+permissions:
+  contents: write
+  actions: read
+concurrency:
+  group: sem-408-003-log-recovery
+  cancel-in-progress: false
+jobs:
+  recover-only:
+    if: github.repository == 'InteropAtlas/InteropAtlas' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      H: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-review-pilot-003
+      S: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify recovery boundaries without model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$H/recover.py" test 2>&1 | tee "$RUNNER_TEMP/recovery-unit-tests.log"
+          python -m py_compile "$H/recover.py"
+          python -m pip install PyYAML==6.0.2
+          cp "$S" "$RUNNER_TEMP/recovery-previous-state.yaml"
+      - name: Recover retained log and source metadata only
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$H/recover.py" collect --output "$RUNNER_TEMP/sem408-recovery"
+          cp "$RUNNER_TEMP/recovery-unit-tests.log" "$RUNNER_TEMP/sem408-recovery/unit-tests.log"
+      - name: Validate bounded proposed snapshot before publication
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util,json,os,pathlib,yaml
+          h=pathlib.Path(os.environ['H']);tmp=pathlib.Path(os.environ['RUNNER_TEMP'])
+          spec=importlib.util.spec_from_file_location('sem_recovery',h/'recover.py')
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          old=(tmp/'recovery-previous-state.yaml').read_text()
+          recovery=json.loads((tmp/'sem408-recovery/recovery.json').read_text())
+          proposed=m.patch_state(old,recovery)
+          previous=yaml.safe_load(old);current=yaml.safe_load(proposed)
+          assert current['task']['snapshot_version']==96
+          assert current['next_action']['action']==m.NEXT
+          without_new=dict(current);without_new.pop('semantic_review_recovery')
+          without_new['task']=dict(without_new['task'],snapshot_version=95)
+          without_new['next_action']=previous['next_action']
+          assert without_new==previous,'unexpected_change_outside_bounded_recovery'
+          assert current['process_review']['generation_paused']
+          assert current['semantic_review_recovery']['new_model_calls_this_recovery']==0
+          (tmp/'recovery-proposed-state.yaml').write_text(proposed)
+          PY
+          python 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py state "$RUNNER_TEMP/recovery-proposed-state.yaml" --previous "$RUNNER_TEMP/recovery-previous-state.yaml" --repository . > "$RUNNER_TEMP/sem408-recovery/state-transition.json"
+          python - <<'PY'
+          import json,os,pathlib
+          v=json.loads((pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-recovery/state-transition.json').read_text())
+          assert v['write_allowed'] and not v['generation_ready']
+          print(json.dumps(v,ensure_ascii=False))
+          PY
+      - name: Preserve evidence independently of branch publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sem408003-log-recovery-${{ github.run_id }}
+          path: ${{ runner.temp }}/sem408-recovery/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish on current parent without overwriting newer state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python "$H/recover.py" publish --output "$RUNNER_TEMP/sem408-recovery" | tee "$RUNNER_TEMP/recovery-publication.json"
+      - name: Verify committed state and exact log bytes
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,hashlib,importlib.util,json,os,pathlib
+          h=pathlib.Path(os.environ['H']);tmp=pathlib.Path(os.environ['RUNNER_TEMP'])
+          spec=importlib.util.spec_from_file_location('sem_recovery',h/'recover.py')
+          m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          published=json.loads((tmp/'recovery-publication.json').read_text())
+          ref=published['published_commit']
+          state=m.api('/contents/'+m.STATE+'?ref='+ref)
+          assert base64.b64decode(state['content'])==(tmp/'recovery-proposed-state.yaml').read_bytes()
+          log=m.api('/contents/'+m.RESULT+'/job.log?ref='+ref)
+          assert base64.b64decode(log['content'])==(tmp/'sem408-recovery/job.log').read_bytes()
+          report=m.api('/contents/'+m.HOME+'/REPORT.zh-CN.md?ref='+ref)
+          assert base64.b64decode(report['content']).decode()==m.REPORT
+          summary=dict(published,verification='exact_published_state_log_report_verified',unit_tests_passed=12,
+                       original_workspace_recovered=False,semantic_validation_passed=False,
+                       state_transition_write_allowed=True,generation_ready=False)
+          pathlib.Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('# Zero-inference recovery\n\n```json\n'+json.dumps(summary,ensure_ascii=False,indent=2)+'\n```\n')
+          print(json.dumps(summary,ensure_ascii=False))
+          PY
