@@ -102,15 +102,47 @@ Screening：`organization-naming-411-rescue-001-screening.json`
 
 Rescue 001 说明：Transformation Rescue 能提高命名空间存活率，但不是万能。原11项 direct `.com` 为0/11；第一支 rescue 变体为3/12 direct available，最终1项在轻量 follow-up 后内部保留。真正的收益是保存高质量原型价值，而不是重新从简单词开始。
 
-## 8. 当前下一动作
+## 8. 当前状态与下一动作
 
-不扩大到100级别 generation，也不展示 Recenvia 给 Owner。
+### RESCUE-411-002：低收益，未复现干净 survivor
 
-下一步：
+第二支 bounded Transformation Rescue 已使用不同 strong seeds 完成：
 
-1. 再开**一个**不同 strong-seed 的 bounded Transformation Rescue，小规模验证 rescue 是否可复现，而不是偶然；
-2. 若第二支 rescue 仍能产生若干干净 internal survivors，则把 v0.4.1 当前 production cadence 固定为 `strong prototype → bounded transformation → cheap namespace triage`；
-3. 若第二支 rescue 低收益，则回到 Generation Contract 调整 territory/material/operator，不用更严格筛选硬救。
+- Raw：`organization-naming-411-rescue-002.json`
+- Screening：`organization-naming-411-rescue-002-screening.json`
+- 提交：`d4b218be68275d09e8079ec37d718c9ff9693e81`、`4bfdb0b04507126afb9730aecc6f974f06ef5d4c`
+
+8项全部完成 Verisign `.com` authoritative RDAP 观察：7项 registered，1项 authoritative 404 object-not-found。唯一 direct-available 变体在 Level-2 近似身份 / 恢复性检查中被 `Praxis` 高邻接身份簇与 `per axis` 分词风险击中，最终0项 internal survivor。
+
+结论：第一支 rescue 的1个 preliminary survivor 没有在第二支复现。Generation integrity 通过，因此不是 scheduler bypass；诊断为 `rescue_low_yield / mature_semantic_surface_namespace_crowding / near_identity_recoverability_failure`。同类 RESCUE-003 已停止。
+
+### Territory Reset 001 + DELIVERY-411-009
+
+没有加严末端筛选，而是按 v0.4.1 条件分支切换 territory/material/operator：
+
+- Territory Research：`organization-naming-411-territory-reset-001.md`
+- Raw + intrinsic review：`organization-naming-411-delivery-009.json`
+- Screening：`organization-naming-411-delivery-009-screening.json`
+- 提交：`a6e5e2d1f1b1e1eb5167ec22945125ae405a7f8b`、`61da85f503ccbd2ff1b304864bbd9ad1ed4cc3a7`、`f6094266e92cb3bfa5a8f0158aebc697e48d85b8`
+
+新材料来自生态交界、河道分合、commonplace / marginalia 与 spolia。9项中7项通过 generation-side intrinsic advance，说明 concrete structural material 改善了本体产出；但7项 `.com` 仍只有1项 direct available，且因明显个人姓名分词被 set aside。其余强项中：
+
+- 一个透明 aftermarket `.com` 报价为 USD 2,888（最低 offer USD 1,888），但存在历史相邻 B2B technology exact identity 与高度拥挤 near identity，未推进；
+- 一项发现 exact pharmaceutical company identity，停止；
+- 其他 registered 项未因域名存在就反向提高质量或盲查 aftermarket。
+
+当前仍为0 Owner-visible 新候选；既有 preliminary internal survivor 继续只内部保留，不展示。
+
+### 当前 next_action
+
+下一步不恢复 G0–G8，不扩大量，不重开同 seed rescue：
+
+1. 开一个 **6–9项 morpheme-grounded / more-opaque proper-name micro-probe**，回答能否在保持真实 semantic lineage 的同时摆脱成熟 lexical surface 拥挤；
+2. Generation Contract 必须使用改变后的 consonant / stress portfolio，并显式设置 personal-name、fantasy、biotech、generic-tech post-filter；先 intrinsic，后 reality；
+3. reality 中把 `direct registration` 与 `transparent realistic aftermarket` 分成两条 feasibility channel；只有本体真正强且 identity 先通过的 registered 名称才允许查价格；
+4. 若该 micro-probe 仍为0个 realistically feasible survivor，停止静默生成，并把“名称质量 ↔ exact .com aftermarket budget”作为实质预算边界交给 Owner 判断。
+
+当前 biggest unknown：**更隐性的、morpheme-grounded proper-name construction 能否同时提高名称完整性、非个人读感和现实命名空间存活率；若不能，是否需要为更强名称接受明确的二级市场预算。**
 
 ## 9. 接管规则
 
