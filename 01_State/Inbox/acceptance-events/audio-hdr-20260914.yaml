@@ -48,18 +48,19 @@ machine_route: review_required
 accepted_canonical_id: ebu_r128
 review:
   reviewer: Agent — OpenAI / Codex GitHub Reviewer
-  reviewed_at: '2026-09-13T17:37:48+00:00'
+  reviewed_at: '2026-09-13T17:44:18+00:00'
   independent_from_executor: true
   notes:
-  - 独立Reviewer核对完整Canonical、原候选blob和EBU官方有限材料后，明确给出acceptable_for_ordinary_acceptance。
-  - Reviewer允许将R128 v5.0 proposed_record原样复制；不接纳未列出的技术关系或部署结论。
+  - 独立Reviewer先确认R128 v5.0身份、版本、标题、描述及来源可普通接纳。
+  - 机器检查随后发现recommendation不是受控kind；Reviewer再次明确确认改回原候选受控kind standard仍acceptable_for_ordinary_acceptance，其他语义字段不变。
 authority: {mutation_impact: M1, ordinary_path: true, approver: null}
 evidence_basis:
 - https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334445
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000348887
 - https://github.com/InteropAtlas/InteropAtlas/blob/3843ca1baa87f31b3cda718fef3596f8f4315fdd/01_State/Inbox/review-packets/audio-hdr-intake-20260914.yaml
 - https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/60910adbf143dba9ae0d9d3802e1d32aaaed0602
-decided_at: '2026-09-13T17:40:00+00:00'
-notes: [正式记录仅序列化获准字段并补充接纳溯源元数据。]
+decided_at: '2026-09-13T17:45:00+00:00'
+notes: [正式记录使用受控kind standard；versions状态仍为recommendation表达出版物正式状态。]
 ---
 contract_version: acceptance-event-v1
 event_id: defer-20260914-audiohdr-aes3
