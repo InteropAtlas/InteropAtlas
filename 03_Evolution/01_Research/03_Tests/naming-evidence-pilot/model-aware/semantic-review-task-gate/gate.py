@@ -5,11 +5,17 @@ with another reviewer, or whether advance/hold/stop is correct. It only detects
 whether the response demonstrates enough task-level understanding to be eligible
 for later semantic evidence use.
 
+Gate v2 adds optional task-local provenance context. This is required when the
+experiment contains metadata words that must not become candidate semantics, or
+when instruction echo must be detected structurally. Historical v1 outputs are
+never rewritten; callers may replay them under v2 and record the new assessment
+separately.
+
 Outcomes:
 - pass: no task-understanding stop condition observed.
 - review: no decisive task-layer failure, but a weak/over-literal pattern remains.
-- block: explicit task/object confusion, instruction leakage into candidate evidence,
-  circular candidate grounding, or missing candidate grounding.
+- block: explicit task/object confusion, instruction/context leakage into candidate
+  evidence or judgment, circular candidate grounding, or missing candidate grounding.
 """
 from __future__ import annotations
 
@@ -21,6 +27,7 @@ from pathlib import Path
 BLOCK = "block"
 REVIEW = "review"
 PASS = "pass"
+GATE_VERSION = "2.0-experimental"
 
 INSTRUCTION_LEAK = re.compile(
     r"\b(frozen brief|output[_ -]?contract|review dimensions?|task instructions?|candidate id|"
@@ -59,16 +66,34 @@ def _strings(review: dict) -> dict[str, list[str]]:
 
 
 def _normalized(value: str) -> str:
-    return re.sub(r"\s+", " ", re.sub(r"[^a-z0-9]+", " ", value.casefold())).strip()
+    return re.sub(r"\s+", " ", re.sub(r"[^\w]+", " ", value.casefold(), flags=re.UNICODE)).strip()
 
 
-def evaluate(candidate_name: str, review: dict) -> dict:
+def _ngrams(value: str, width: int = 6) -> set[str]:
+    words=_normalized(value).split()
+    return {" ".join(words[i:i+width]) for i in range(max(0,len(words)-width+1))}
+
+
+def _task_context(context: dict | None) -> tuple[list[str], list[str]]:
+    if not context:
+        return [], []
+    instructions=context.get("instruction_texts", [])
+    terms=context.get("context_only_terms", [])
+    if not isinstance(instructions,list) or not all(isinstance(v,str) for v in instructions):
+        raise ValueError("instruction_texts_must_be_string_list")
+    if not isinstance(terms,list) or not all(isinstance(v,str) and v.strip() for v in terms):
+        raise ValueError("context_only_terms_must_be_nonempty_string_list")
+    return instructions,terms
+
+
+def evaluate(candidate_name: str, review: dict, task_context: dict | None = None) -> dict:
     """Return task-understanding disposition with explicit machine reasons."""
     sections = _strings(review)
     findings: list[dict] = []
+    instructions,context_only_terms=_task_context(task_context)
 
     observable_text = "\n".join(sections["observable_form"])
-    evidence_text = "\n".join(sections["observable_form"] + sections["associations"])
+    all_output = "\n".join(sum(sections.values(), []))
     judgment_text = "\n".join(sections["brief_fit"] + sections["reason"])
 
     if candidate_name.casefold() not in observable_text.casefold():
@@ -80,13 +105,33 @@ def evaluate(candidate_name: str, review: dict) -> dict:
             findings.append({"severity": BLOCK, "code": "instruction_or_brief_treated_as_candidate_evidence", "excerpt": match.group(0)})
             break
 
+    # Task-local metadata (for example a synthetic-task marker) may appear in the
+    # brief but must not become a property or association of the candidate. The
+    # task author supplies these terms explicitly rather than hard-coding one task.
+    normalized_output=_normalized(all_output)
+    for term in context_only_terms:
+        normalized_term=_normalized(term)
+        if normalized_term and normalized_term in normalized_output:
+            findings.append({"severity": BLOCK, "code": "context_only_metadata_leaked_into_review", "excerpt": term})
+            break
+
+    # Detect substantial instruction copying anywhere in the review. Six-token
+    # overlap avoids blocking short legitimate phrases such as "against the brief".
+    output_ngrams=_ngrams(all_output,6)
+    instruction_overlap=[]
+    for instruction in instructions:
+        shared=sorted(output_ngrams & _ngrams(instruction,6))
+        if shared:
+            instruction_overlap.extend(shared[:3])
+    if instruction_overlap:
+        findings.append({"severity": BLOCK, "code": "instruction_echo_in_review", "excerpt": instruction_overlap[0]})
+
     for pattern in PRODUCT_BURDEN:
         match = pattern.search(judgment_text)
         if match:
             findings.append({"severity": BLOCK, "code": "name_burdened_with_product_function", "excerpt": match.group(0)})
             break
 
-    circular = None
     for pattern in CIRCULAR:
         circular = pattern.search("\n".join(sections["observable_form"] + sections["reason"]))
         if circular:
@@ -107,8 +152,6 @@ def evaluate(candidate_name: str, review: dict) -> dict:
             findings.append({"severity": REVIEW, "code": "possible_literal_function_encoding_assumption", "excerpt": match.group(0)})
             break
 
-    # Generic value claims are not decisive task misunderstanding, but they are not
-    # enough to qualify a reviewer by themselves.
     generic_claims = re.compile(r"\b(memorable|brand recognition|clear purpose|good fit|bad fit)\b", re.I)
     if generic_claims.search("\n".join(sections["reason"])) and not findings:
         findings.append({"severity": REVIEW, "code": "generic_unanchored_final_rationale"})
@@ -120,6 +163,7 @@ def evaluate(candidate_name: str, review: dict) -> dict:
         severity = REVIEW
 
     return {
+        "gate_version": GATE_VERSION,
         "candidate": candidate_name,
         "task_understanding": severity,
         "eligible_for_semantic_evidence": severity == PASS,
@@ -136,7 +180,7 @@ def main() -> int:
     candidate = data.get("candidate") or data.get("name")
     if not isinstance(candidate, str) or not isinstance(data.get("review"), dict):
         raise SystemExit("input must contain candidate/name and review object")
-    print(json.dumps(evaluate(candidate, data["review"]), ensure_ascii=False, indent=2))
+    print(json.dumps(evaluate(candidate, data["review"], data.get("task_context")), ensure_ascii=False, indent=2))
     return 0
 
 
