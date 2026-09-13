@@ -1,0 +1,92 @@
+contract_version: acceptance-event-v1
+event_id: accept-20260914-webmedia-w3c_webrtc
+candidate_id: w3c_webrtc
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: w3c_webrtc
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:11:43+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer对冻结提交ce67d8a中的WebRTC proposed_record明确给出acceptable_for_ordinary_acceptance，并允许整个记录原样复制。
+  - Reviewer核对完整Canonical及原候选blob，未发现ID、名称或外部标识冲突。
+  - 审核仅独立解释作者提供的有限一手材料，未独立验证网络抓取真实性或规范全文；不批准包外关系、实现兼容性或最新版泛化。
+authority: {mutation_impact: M1, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267948
+- https://github.com/InteropAtlas/InteropAtlas/blob/ce67d8ae225c4e8d5d63a54bb6e7403e08dfa117/01_State/Inbox/review-packets/web-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/b2c74f14197428dffa5981cca2c3c029d0f571e3
+- https://www.w3.org/TR/2025/REC-webrtc-20250313/
+decided_at: '2026-09-13T17:14:00+00:00'
+notes:
+- 正式文件仅序列化获准字段并增加接纳溯源元数据；新增序列化未冒充第二次独立语义审核。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-webmedia-w3c_webvtt
+candidate_id: w3c_webvtt
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:11:43+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer确认日期、Candidate Recommendation Draft状态、名称、描述和范围说明有材料支持，但拒绝整个proposed_record原样入库。
+  - 阻塞字段是现有w3c:webvtt外部标识：当前材料未证明其为W3C官方标识，也没有明确限定其为遗留非官方工作级标识。
+  - 本轮不通过静默删除或替换标识绕过身份审查，也不进行主体拆分。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267951
+- https://github.com/InteropAtlas/InteropAtlas/blob/ce67d8ae225c4e8d5d63a54bb6e7403e08dfa117/01_State/Inbox/review-packets/web-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0b1bb08022cf0f4c7346d6081f209175f49fde7f
+- https://www.w3.org/TR/2026/CRD-webvtt1-20260520/
+decided_at: '2026-09-13T17:14:00+00:00'
+notes:
+- machine_route表示本轮明确身份风险后的待身份审查路由，不冒充原始new候选的历史机械路由。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-webmedia-w3c_mse
+candidate_id: w3c_mse
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:11:43+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确支持deferred + identity_risk，未批准拆分、合并或删除标识。
+  - 工作级/TR/media-source/与通用w3c:media-source标识被旧候选绑定到单一Candidate Recommendation标签，而有限材料同时存在2016 Standard与2026 Draft Standard。
+  - 应先明确work-level与publication-level身份策略，再决定普通接纳方式。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267954
+- https://github.com/InteropAtlas/InteropAtlas/blob/ce67d8ae225c4e8d5d63a54bb6e7403e08dfa117/01_State/Inbox/review-packets/web-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/550bd8be08b1a574df717e2cfcdea640e2eaaac9
+- https://www.w3.org/TR/
+decided_at: '2026-09-13T17:14:00+00:00'
+notes:
+- machine_route为本轮身份诊断后的路由；保留候选ID与现有标识，不自动合并不同出版物。
+---
+contract_version: acceptance-event-v1
+event_id: defer-20260914-webmedia-w3c_eme
+candidate_id: w3c_eme
+decision: deferred
+machine_route: identity_review_required
+review:
+  reviewer: Agent — OpenAI / Codex GitHub Reviewer
+  reviewed_at: '2026-09-13T17:11:43+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立Reviewer明确支持deferred + identity_risk，未批准拆分、合并或删除标识。
+  - 工作级/TR/encrypted-media/及通用w3c:encrypted-media标识被旧候选绑定到单一Recommendation标签，而系列同时存在2017 Recommendation与2026 Working Draft。
+  - EME是与内容保护系统交互的API，不等同于DRM系统本身；应先明确工作级与固定出版物身份。
+authority: {mutation_impact: M0, ordinary_path: true, approver: null}
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267956
+- https://github.com/InteropAtlas/InteropAtlas/blob/ce67d8ae225c4e8d5d63a54bb6e7403e08dfa117/01_State/Inbox/review-packets/web-media-intake-20260914.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/3128b6aa427d148acf1c88832f36687b806ea3bd
+- https://www.w3.org/TR/encrypted-media/all/
+decided_at: '2026-09-13T17:14:00+00:00'
+notes:
+- machine_route为本轮身份诊断后的路由；保留候选ID与现有标识，不自动合并不同出版物，也不把EME建模成具体DRM系统。
