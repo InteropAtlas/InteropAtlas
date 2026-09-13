@@ -1,117 +1,29 @@
 packet_id: continuous_b_20260913
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+delivery_pr: 424
 baseline_commit: caa1c8b6690c955208414a513eb2a50418ce26c0
-candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
+frozen_packet_commit: b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe
+frozen_packet_blob: f1e2567d952baac20af16833f8976f8875b3e3c4
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe/01_State/Inbox/review-packets/continuous-b-20260913.yaml
 candidate_blob: e72ccdb55e0d9808c4c0ea8704ebfca7107e9bf5
 executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-reviewer: null
-review_scope_zh:
-- 连续批次B，四项现有W3C文档；逐项审核proposed_record并核对完整基线及当前正式库是否重复。
-- source_evidence为作者实际通过web读取的官方固定版页面的有限摘录与定位；Reviewer独立解释提供材料，不得冒充独立网络取证或全文验证。
-- OWL2 Overview虽是Recommendation，但原文明示informative only，拟由specification改为guidance_document，保持原文档身份；必须明确审查该分类纠正。
-- 每项明确acceptable_for_ordinary_acceptance、deferred或rejected及允许字段；不得用CI、点赞或没有代码问题代替接纳。
-- 固定版文档不声称当前最新；专利、认证、具体签名机制、法规效力和实现互通不在本包范围。
-source_evidence:
-- evidence_id: owl
-  url: https://www.w3.org/TR/2012/REC-owl2-overview-20121211/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Heading; Abstract; Status/Patents; Section 1 Introduction
-  excerpt: This document is informative only.
-  additional_excerpt: serves as a roadmap for the documents that define and describe OWL 2
-  observation_zh: 页首列第二版、W3C Recommendation、2012-12-11；Introduction为非规范性总览。保留文档而不是OWL语言全套规范的身份。
-- evidence_id: trace
-  url: https://www.w3.org/TR/2021/REC-trace-context-1-20211123/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Heading and Abstract
-  excerpt: defines standard HTTP headers and a value format to propagate context information
-  observation_zh: 页首Recommendation日期2021-11-23；摘要说明跨服务传播追踪上下文。本包不推定完整可观测性系统或特定厂商实现。
-- evidence_id: wot
-  url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Heading and Abstract
-  excerpt: A Thing Description describes the metadata and interfaces of Things
-  observation_zh: 页首为Thing Description1.1、Recommendation、2023-12-05。摘要定义形式信息模型和共同表示，Thing可为物理或虚拟实体。
-- evidence_id: vc
-  url: https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Heading and Abstract
-  excerpt: This specification describes the extensible data model for verifiable credentials
-  observation_zh: 页首v2.0、Recommendation、2025-05-15；摘要描述发行者、持有者、验证者组成的交换生态。本包不据此宣称凭证法律效力或发行者可信。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/424#discussion_r3999971998
 objects:
 - candidate_id: owl2_overview_2012
-  evidence_ids: [owl]
-  proposed_record:
-    id: owl2_overview_2012
-    type: artifact
-    kind: guidance_document
-    name_zh: OWL 2 文档总览（第二版）
-    name_en: OWL 2 Web Ontology Language Document Overview (Second Edition)
-    description_zh: 为OWL 2及其相关文档提供非规范性的总览和阅读导航。
-    description_en: Provides a non-normative overview of OWL 2 and navigation across its supporting documents.
-    version: '2012-12-11'
-    external_identifiers: [{namespace: w3c, value: REC-owl2-overview-20121211}]
-    official_url: https://www.w3.org/TR/2012/REC-owl2-overview-20121211/
-    versions: [{version: '2012-12-11', status: recommendation, url: 'https://www.w3.org/TR/2012/REC-owl2-overview-20121211/'}]
-    scope_notes_zh: Recommendation是出版状态；本总览的信息性内容不因此变成规范性语法、语义或整套OWL规范。
-    scope_notes_en: Recommendation denotes publication status; this informative overview is not the normative syntax, semantics or complete OWL specification suite.
-    sources:
-    - {url: 'https://www.w3.org/TR/2012/REC-owl2-overview-20121211/', title: OWL 2 Overview Second Edition, language: en, accessed: '2026-09-13'}
+  canonical_id: owl2_overview_2012
+  acceptance_event_id: accept-20260913-continuous-b-owl2_overview_2012
 - candidate_id: trace_context_1.0
-  evidence_ids: [trace]
-  proposed_record:
-    id: trace_context_1.0
-    type: artifact
-    kind: specification
-    name_zh: 追踪上下文规范（2021-11-23推荐版）
-    name_en: Trace Context (Recommendation 2021-11-23)
-    description_zh: 规定用于跨服务传播分布式追踪上下文的HTTP头部及值格式。
-    description_en: Specifies HTTP headers and value formats for propagating distributed-tracing context between services.
-    version: '2021-11-23'
-    external_identifiers: [{namespace: w3c, value: REC-trace-context-1-20211123}]
-    official_url: https://www.w3.org/TR/2021/REC-trace-context-1-20211123/
-    versions: [{version: '2021-11-23', status: recommendation, url: 'https://www.w3.org/TR/2021/REC-trace-context-1-20211123/'}]
-    scope_notes_zh: 收录该固定文档，不代表完整的日志、指标或可观测性平台。
-    scope_notes_en: This fixed document does not represent a complete logging, metrics or observability platform.
-    sources:
-    - {url: 'https://www.w3.org/TR/2021/REC-trace-context-1-20211123/', title: Trace Context Recommendation, language: en, accessed: '2026-09-13'}
+  canonical_id: trace_context_1.0
+  acceptance_event_id: accept-20260913-continuous-b-trace_context_1.0
 - candidate_id: wot_td_1.1
-  evidence_ids: [wot]
-  proposed_record:
-    id: wot_td_1.1
-    type: artifact
-    kind: specification
-    name_zh: 万维物联网事物描述 1.1
-    name_en: Web of Things (WoT) Thing Description 1.1
-    description_zh: 定义描述物理或虚拟事物元数据及接口的信息模型与共同表示。
-    description_en: Defines an information model and common representation of metadata and interfaces for physical or virtual Things.
-    version: '1.1'
-    external_identifiers: [{namespace: w3c, value: REC-wot-thing-description11-20231205}]
-    official_url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
-    versions: [{version: '1.1', status: recommendation, url: 'https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/'}]
-    scope_notes_zh: 这是描述规范，不保证被描述设备具备某能力或任意协议实现间能够互通。
-    scope_notes_en: This description specification does not certify device capabilities or interoperability between arbitrary protocol implementations.
-    sources:
-    - {url: 'https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/', title: WoT Thing Description 1.1, language: en, accessed: '2026-09-13'}
+  canonical_id: wot_td_1.1
+  acceptance_event_id: accept-20260913-continuous-b-wot_td_1.1
 - candidate_id: vc_data_model_2.0
-  evidence_ids: [vc]
-  proposed_record:
-    id: vc_data_model_2.0
-    type: artifact
-    kind: specification
-    name_zh: 可验证凭证数据模型 2.0
-    name_en: Verifiable Credentials Data Model v2.0
-    description_zh: 描述可验证凭证的可扩展数据模型及发行者、持有者、验证者之间的交换生态。
-    description_en: Describes an extensible model for verifiable credentials and their exchange among issuers, holders and verifiers.
-    version: '2.0'
-    external_identifiers: [{namespace: w3c, value: REC-vc-data-model-2.0-20250515}]
-    official_url: https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/
-    versions: [{version: '2.0', status: recommendation, url: 'https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/'}]
-    scope_notes_zh: 数据模型收录不等于某一签名套件、发行者可信度或凭证法律效力已获认可。
-    scope_notes_en: Inclusion of the model does not endorse a signature suite, issuer trustworthiness or legal validity of credentials.
-    sources:
-    - {url: 'https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/', title: VC Data Model 2.0 Recommendation, language: en, accessed: '2026-09-13'}
+  canonical_id: vc_data_model_2.0
+  acceptance_event_id: accept-20260913-continuous-b-vc_data_model_2.0
+notes_zh:
+- 本回执只保存引用，已审最小字段在正式对象中维护；完整被审原稿保留于固定Git提交。
+- 独立Reviewer逐项允许原样复制proposed_record，包括范围说明；未独立验证网络抓取真实性或全文。
+- 作者序列化及新增溯源元数据未冒充再次独立复核；未扩大到包外技术关系、专利、合规或实现互通保证。

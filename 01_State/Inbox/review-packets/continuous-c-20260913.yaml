@@ -1,115 +1,29 @@
 packet_id: continuous_c_20260913
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+delivery_pr: 424
 baseline_commit: caa1c8b6690c955208414a513eb2a50418ce26c0
-candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
+frozen_packet_commit: b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe
+frozen_packet_blob: 2879a7d71383b6219d65b00f76fe61be35bd1da3
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe/01_State/Inbox/review-packets/continuous-c-20260913.yaml
 candidate_blob: e72ccdb55e0d9808c4c0ea8704ebfca7107e9bf5
 executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-reviewer: null
-review_scope_zh:
-- 连续批次C，四项既有行业数据/媒体文档；只审核proposed_record字段，不扩充候选身份。
-- 下列有限短摘录及定位来自本轮作者实际web读取的一手页面。Reviewer可离线独立解释材料，但不得宣称自己直连官网、全文核验或独立验证抓取真实性。
-- 按完整底库检查ID、名称、外部标识重复；逐项明确acceptable_for_ordinary_acceptance、deferred或rejected及允许字段，不以CI或代码无发现代替。
-- FHIR保持4.0.1固定版且承认混合成熟度；OGC固定17-069r4/1.0.1/Core；UBL仅2.3；RFC8251不与6716合并，不擅自新增updates关系词表。
-- 新版本可另行发现但不覆盖旧身份。专利、法律合规、行业部署兼容性、资源级符合性、完整编码/解码正确性均不在本轮范围。
-source_evidence:
-- evidence_id: fhir
-  url: https://hl7.org/fhir/R4/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Version banner and Welcome to FHIR
-  excerpt: FHIR is a standard for health care data exchange
-  observation_zh: 顶部明确v4.0.1、R4、Mixed Normative and STU；页面说明发布者HL7及永久版本入口。不是全部资源都达到规范性状态。
-- evidence_id: ogc
-  url: https://docs.ogc.org/is/17-069r4/17-069r4.html
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Heading and Section 1 Scope
-  excerpt: This standard specifies discovery and query operations that are implemented using the HTTP GET method.
-  observation_zh: 页首明确17-069r4、1.0.1、OGC Implementation Standard、Approved Corrigendum；Scope限定Core读取能力，不把整套Features的写入扩展算入本篇。
-- evidence_id: ubl
-  url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Abstract and Citation format
-  excerpt: This specification defines the Universal Business Language, version
-  observation_zh: 摘要及引用格式明确2.3、2021-06-15、OASIS Standard。本包只接纳该文档定义UBL2.3这一最小范围，不扩展为特定地区电子发票实施规则。
-- evidence_id: opus_update
-  url: https://www.rfc-editor.org/info/rfc8251/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Title, current status and Abstract
-  excerpt: It updates the normative decoder implementation included in Appendix A of RFC 6716.
-  observation_zh: 标题为Updates to the Opus Audio Codec，当前等级Proposed Standard，摘要支持对RFC6716附录A规范性解码器的更新。文档身份独立；关系词表尚不支持updates，不用supersedes替代。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/424#discussion_r3999971998
 objects:
 - candidate_id: fhir_r4_4.0.1
-  evidence_ids: [fhir]
-  proposed_record:
-    id: fhir_r4_4.0.1
-    type: artifact
-    kind: specification
-    name_zh: HL7 FHIR R4 医疗数据交换规范（4.0.1）
-    name_en: HL7 FHIR R4 Specification (4.0.1)
-    description_zh: HL7发布的医疗数据交换规范R4固定版，包含规范性和试用阶段内容。
-    description_en: The fixed R4 healthcare data-exchange specification published by HL7, containing both normative and trial-use content.
-    version: '4.0.1'
-    external_identifiers: [{namespace: hl7, value: fhir-r4-4.0.1}]
-    official_url: https://hl7.org/fhir/R4/
-    scope_notes_zh: 不把所有资源标为规范性，也不宣称本版为最新；未核验任何医疗系统的资源级符合性或监管合规。
-    scope_notes_en: Not all resources are normative and this is not asserted to be the latest release; system conformance and regulatory compliance are not assessed.
-    sources:
-    - {url: 'https://hl7.org/fhir/R4/', title: FHIR R4 permanent specification entry, language: en, accessed: '2026-09-13'}
+  canonical_id: fhir_r4_4.0.1
+  acceptance_event_id: accept-20260913-continuous-c-fhir_r4_4.0.1
 - candidate_id: ogc_api_features_17_069r4
-  evidence_ids: [ogc]
-  proposed_record:
-    id: ogc_api_features_17_069r4
-    type: artifact
-    kind: specification
-    name_zh: OGC API Features 第1部分核心勘误版（17-069r4）
-    name_en: 'OGC API - Features - Part 1: Core corrigendum (17-069r4)'
-    description_zh: 定义以HTTP GET进行要素发现和查询的核心接口规范。
-    description_en: Specifies core feature-discovery and query operations using HTTP GET.
-    version: '1.0.1'
-    external_identifiers: [{namespace: ogc, value: 17-069r4}]
-    official_url: https://docs.ogc.org/is/17-069r4/17-069r4.html
-    versions: [{version: '1.0.1', status: ogc_implementation_standard, url: 'https://docs.ogc.org/is/17-069r4/17-069r4.html'}]
-    scope_notes_zh: 固定Core勘误文档；不包括整套Features的创建、修改或删除扩展，也不代表全部可选符合性类别已实现。
-    scope_notes_en: The fixed Core corrigendum excludes create, modify and delete extensions and does not establish implementation of every optional conformance class.
-    sources:
-    - {url: 'https://docs.ogc.org/is/17-069r4/17-069r4.html', title: OGC 17-069r4 Core corrigendum, language: en, accessed: '2026-09-13'}
+  canonical_id: ogc_api_features_17_069r4
+  acceptance_event_id: accept-20260913-continuous-c-ogc_api_features_17_069r4
 - candidate_id: ubl_2.3
-  evidence_ids: [ubl]
-  proposed_record:
-    id: ubl_2.3
-    type: artifact
-    kind: specification
-    name_zh: 通用商业语言规范 2.3
-    name_en: Universal Business Language Version 2.3
-    description_zh: 定义通用商业语言UBL 2.3的OASIS规范。
-    description_en: The OASIS specification defining Universal Business Language 2.3.
-    version: '2.3'
-    external_identifiers: [{namespace: oasis, value: ubl-2.3-os}]
-    official_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
-    versions: [{version: '2.3', status: oasis_standard, url: 'https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html'}]
-    scope_notes_zh: 固定基础规范，不是特定地区的发票、税务或业务规则实施文件；未声称为最新版本。
-    scope_notes_en: A fixed base specification rather than a jurisdiction-specific invoicing, taxation or business-rule implementation profile; no latest-version claim is made.
-    sources:
-    - {url: 'https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html', title: UBL 2.3 OASIS Standard, language: en, accessed: '2026-09-13'}
+  canonical_id: ubl_2.3
+  acceptance_event_id: accept-20260913-continuous-c-ubl_2.3
 - candidate_id: opus_updates_rfc8251
-  evidence_ids: [opus_update]
-  proposed_record:
-    id: opus_updates_rfc8251
-    type: artifact
-    kind: specification
-    name_zh: Opus 音频编解码器更新（RFC 8251）
-    name_en: Updates to the Opus Audio Codec (RFC 8251)
-    description_zh: 更新RFC 6716附录A中的规范性Opus解码器实现。
-    description_en: Updates the normative Opus decoder implementation in Appendix A of RFC 6716.
-    version: RFC 8251
-    external_identifiers: [{namespace: rfc, value: '8251'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc8251.html
-    versions: [{version: RFC 8251, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc8251.html'}]
-    scope_notes_zh: RFC8251与RFC6716是独立文档；这里不推定替代关系，也不声称完整解码器正确性或实现安全性已验证。
-    scope_notes_en: RFC 8251 and RFC 6716 remain distinct documents; replacement, complete decoder correctness and implementation security are not asserted.
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc8251/', title: RFC 8251 identity status and abstract, language: en, accessed: '2026-09-13'}
+  canonical_id: opus_updates_rfc8251
+  acceptance_event_id: accept-20260913-continuous-c-opus_updates_rfc8251
+notes_zh:
+- 本回执只保存引用，已审最小字段在正式对象中维护；完整被审原稿保留于固定Git提交。
+- 独立Reviewer逐项允许原样复制proposed_record，包括范围说明；未独立验证网络抓取真实性或全文。
+- 作者序列化及新增溯源元数据未冒充再次独立复核；未扩大到包外技术关系、专利、合规或实现互通保证。

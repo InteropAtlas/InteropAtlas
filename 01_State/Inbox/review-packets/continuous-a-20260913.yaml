@@ -1,116 +1,29 @@
 packet_id: continuous_a_20260913
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+delivery_pr: 424
 baseline_commit: caa1c8b6690c955208414a513eb2a50418ce26c0
-candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
+frozen_packet_commit: b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe
+frozen_packet_blob: 15dbde9ff40ca3c15c8f652bcbcb36e58fe29552
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/b92a4403d86a3ca6a5e3d70b51f8affdfa50ebfe/01_State/Inbox/review-packets/continuous-a-20260913.yaml
 candidate_blob: e72ccdb55e0d9808c4c0ea8704ebfca7107e9bf5
 executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-reviewer: null
-review_scope_zh:
-- 连续批次A，四项既有候选；只审核proposed_record字段，不新建候选身份。
-- 作者实际通过web读取下列官方页面，提供有限短摘录及定位。独立Reviewer可直接读取本包，不要求无权限的外网或artifact下载；须如实限定为独立解释所提供材料，未独立验证抓取真实性或全文。
-- 先在完整基线及当前库核对ID、外部标识和名称；同名不能直接合并。MCP须检查已有工作级及版本对象，不因名字不同就认定新主体。
-- RFC9700指向具体BCP文档，原artifact/guideline搭配不在受控kind表，拟改artifact/guidance_document；请判断为保持文档主体的分类纠正还是应暂缓。
-- 逐项明确acceptable_for_ordinary_acceptance、deferred或rejected；指出获准的proposed_record字段，不以CI或代码无发现代替语义审核。未知专利、认证、合规、实现兼容性、当前最新版本均不在本包断言范围。
-source_evidence:
-- evidence_id: mcp
-  url: https://modelcontextprotocol.io/specification/2025-11-25
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Specification opening paragraph and Overview
-  excerpt: integration between LLM applications and external data sources and tools
-  additional_excerpt: The protocol uses JSON-RPC
-  observation_zh: 固定日期规范路径；开头定义应用与外部数据和工具的集成，Overview明确消息为JSON-RPC 2.0。本包不据此宣称所有安全措施由协议强制保障。
-- evidence_id: oauth2
-  url: https://www.rfc-editor.org/info/rfc6749/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Title, current status and Abstract
-  excerpt: enables a third-party application to obtain limited access to an HTTP service
-  observation_zh: 标题为The OAuth 2.0 Authorization Framework；当前等级Proposed Standard；页面显示RFC9700等更新。收录确切RFC6749，不当作完整认证系统或现行最佳安全配置。
-- evidence_id: oauth_security
-  url: https://www.rfc-editor.org/info/rfc9700/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Title, Abstract and Status of This Memo
-  excerpt: This document describes best current security practice for OAuth 2.0.
-  observation_zh: 标题明确安全最佳实践；当前等级Best Current Practice，BCP240。摘要说明扩展威胁模型和安全建议；本包仅收文档身份、用途及等级，不把BCP冒充名为OAuth2.1的新协议版本。
-- evidence_id: mqtt
-  url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  locator: Document heading and Abstract
-  excerpt: MQTT is a Client Server publish/subscribe messaging transport protocol.
-  observation_zh: 页首为MQTT Version5.0、OASIS Standard、2019-03-07；摘要支持客户端/服务器发布订阅消息协议。未声称所有部署符合规范或安全配置充分。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/424#discussion_r3999971998
 objects:
 - candidate_id: mcp_2025_11_25
-  evidence_ids: [mcp]
-  proposed_record:
-    id: mcp_2025_11_25
-    type: artifact
-    kind: protocol
-    name_zh: 模型上下文协议规范（2025-11-25版）
-    name_en: Model Context Protocol Specification (2025-11-25)
-    description_zh: 定义语言模型应用与外部数据源及工具的集成协议，使用JSON-RPC 2.0消息通信。
-    description_en: Specifies integration between language-model applications, external data sources and tools, using JSON-RPC 2.0 messages.
-    version: '2025-11-25'
-    external_identifiers: [{namespace: mcp, value: '2025-11-25'}]
-    official_url: https://modelcontextprotocol.io/specification/2025-11-25
-    scope_notes_zh: 固定日期版文档，不代表所有MCP版本或具体实现；未评估部署授权、安全性或实现互通。
-    scope_notes_en: A dated specification, not all MCP versions or an implementation; deployment authorization, security and implementation interoperability are not assessed.
-    sources:
-    - {url: 'https://modelcontextprotocol.io/specification/2025-11-25', title: MCP dated specification, language: en, accessed: '2026-09-13'}
+  canonical_id: mcp_2025_11_25
+  acceptance_event_id: accept-20260913-continuous-a-mcp_2025_11_25
 - candidate_id: oauth2_rfc6749
-  evidence_ids: [oauth2]
-  proposed_record:
-    id: oauth2_rfc6749
-    type: artifact
-    kind: protocol
-    name_zh: OAuth 2.0 授权框架（RFC 6749）
-    name_en: The OAuth 2.0 Authorization Framework (RFC 6749)
-    description_zh: 定义使第三方应用获得HTTP服务有限访问权限的授权框架。
-    description_en: Defines an authorization framework through which third-party applications obtain limited access to HTTP services.
-    version: RFC 6749
-    external_identifiers: [{namespace: rfc, value: '6749'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc6749.html
-    versions: [{version: RFC 6749, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc6749.html'}]
-    scope_notes_zh: 固定基础文档；安全建议有后续更新。收录不表示仅按原文部署即安全，也不是完整身份认证系统。
-    scope_notes_en: A fixed foundational document with subsequent security updates; inclusion neither certifies deployment security nor defines a complete authentication system.
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc6749/', title: RFC 6749 identity status and abstract, language: en, accessed: '2026-09-13'}
+  canonical_id: oauth2_rfc6749
+  acceptance_event_id: accept-20260913-continuous-a-oauth2_rfc6749
 - candidate_id: oauth_security_rfc9700
-  evidence_ids: [oauth_security]
-  proposed_record:
-    id: oauth_security_rfc9700
-    type: artifact
-    kind: guidance_document
-    name_zh: OAuth 2.0 安全最佳实践（RFC 9700）
-    name_en: Best Current Practice for OAuth 2.0 Security (RFC 9700)
-    description_zh: 提供OAuth 2.0安全最佳实践的文档，扩展其威胁模型与安全建议。
-    description_en: A document presenting OAuth 2.0 security best practices and extending its threat model and security advice.
-    version: RFC 9700
-    external_identifiers: [{namespace: rfc, value: '9700'}]
-    official_url: https://www.rfc-editor.org/rfc/rfc9700.html
-    versions: [{version: RFC 9700, status: best_current_practice, url: 'https://www.rfc-editor.org/rfc/rfc9700.html'}]
-    scope_notes_zh: 这是BCP文档身份，不是新的协议版本；不表示已验证某个实现符合其中全部要求。
-    scope_notes_en: This identifies a BCP document, not a new protocol version, and does not establish implementation conformance.
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc9700/', title: RFC 9700 identity status and abstract, language: en, accessed: '2026-09-13'}
+  canonical_id: oauth_security_rfc9700
+  acceptance_event_id: accept-20260913-continuous-a-oauth_security_rfc9700
 - candidate_id: mqtt_5.0
-  evidence_ids: [mqtt]
-  proposed_record:
-    id: mqtt_5.0
-    type: artifact
-    kind: protocol
-    name_zh: MQTT 5.0 发布订阅消息协议
-    name_en: MQTT Version 5.0
-    description_zh: 定义客户端与服务器之间采用发布订阅模式的消息协议。
-    description_en: Defines a client-server messaging protocol using the publish/subscribe pattern.
-    version: '5.0'
-    external_identifiers: [{namespace: oasis, value: mqtt-v5.0-os}]
-    official_url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
-    versions: [{version: '5.0', status: oasis_standard, url: 'https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html'}]
-    scope_notes_zh: 固定OASIS 5.0规范；未逐条审核服务质量、安全配置或实现兼容性。
-    scope_notes_en: The fixed OASIS 5.0 specification; QoS details, security configurations and implementation compatibility are outside this review.
-    sources:
-    - {url: 'https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html', title: MQTT 5.0 OASIS Standard, language: en, accessed: '2026-09-13'}
+  canonical_id: mqtt_5.0
+  acceptance_event_id: accept-20260913-continuous-a-mqtt_5.0
+notes_zh:
+- 本回执只保存引用，已审最小字段在正式对象中维护；完整被审原稿保留于固定Git提交。
+- 独立Reviewer逐项允许原样复制proposed_record，包括范围说明；未独立验证网络抓取真实性或全文。
+- 作者序列化及新增溯源元数据未冒充再次独立复核；未扩大到包外技术关系、专利、合规或实现互通保证。
