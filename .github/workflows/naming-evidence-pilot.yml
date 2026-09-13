@@ -48,7 +48,7 @@ jobs:
           set -e
           test "$CAPTURE_EXIT" -eq 2
           python -m py_compile "$PILOT/control_gate.py" "$PILOT/test_controls.py"
-          git diff --check "$CHANGE^" "$CHANGE"
+          git diff --check "$CHANGE^" "$CHANGE" -- "$STATE"
           export OUT CHANGE STATE
           python - <<'PY'
           import hashlib,json,os,pathlib
