@@ -1,6 +1,6 @@
-# Generation Capability Recovery Contract v0.1
+# Generation Capability Recovery Contract v0.2
 
-状态：provisional control fix，来自 #411 真实 Fit Test 的可复现生成端故障；需经 regression 后再决定是否正式吸收到 Adaptive Naming Skill 稳定入口。
+状态：provisional control fix，来自 #411 真实 Fit Test 的可复现生成端故障；REG-411-GEN-001 已对控制机制做第一轮回归，证明 Scheduler 恢复后可显著减少简单词矩阵，但尚未形成跨任务稳定规则。
 
 ## 1. 解决的问题
 
@@ -42,7 +42,9 @@ generation_contract:
       purpose: ...
       budget: ...
   territory_material: ...
+  prototype_stage: enabled | disabled_with_reason
   transformation_use: exploration | rescue | both | none_with_reason
+  phonetic_character_brief: ...
   cadence: micro_probe | portfolio_batch | divergence_burst | focused_exploitation
   runtime_isolation: ...
   anti_collapse_checks: [...]
@@ -62,6 +64,21 @@ generation_contract:
 - Owner-positive 名称只能抽象潜在品质，禁止作为词根、音节、后缀或表面模板直接送入 Generator。
 
 允许 focused exploitation 只使用 1–2 个 operator，但必须说明 seed / hypothesis / attempt budget / exit condition。
+
+### 3.2 Prototype → Transformation 两阶段
+
+REG-411-GEN-001 显示：Transformation Operator 本身不能保证质量；弱 seed 只会得到更精致的弱名字。
+
+因此当使用 transformation 时，默认拆成两步：
+
+1. **Prototype discovery**：先找 intrinsically strong 的概念 / 声音 / 词形原型；不要求现实可用；
+2. **Bounded transformation**：只对少数强原型选择适配 operator，记录保留什么、改变什么、为什么。
+
+禁止：
+
+> 从任意普通词开始批量做字母变体，只因为“变形方法还没用过”。
+
+Transformation budget 由 seed quality 控制，不由方法清单完整性控制。
 
 ## 4. Transformation Operators 的位置
 
@@ -105,9 +122,35 @@ Controller 必须记录候选 lineage：它来自哪个 material / prototype、�
 
 应优先：
 
-> 改善 territory material + construction portfolio + transformation lineage → 先用小样本验证生成质量 → 再恢复现实筛查。
+> 改善 territory material + prototype quality + construction portfolio + transformation lineage → 先用小样本验证生成质量 → 再恢复现实筛查。
 
-## 6. Mode-collapse / Method-underuse 检查
+### 5.1 简单复合词不是默认主力
+
+Natural compound 仍保留在工具箱，但在当前 #411 任务中已出现明显低质量证据：简单普通词直接相加容易得到“能解释，但不像成熟名称”的结果。
+
+因此当前任务默认：
+
+- natural compound 可做少量对照，不承担主预算；
+- 若使用 compound，至少一侧应来自有辨识度的 territory material，而不是最基础英语词；
+- 一眼可还原为“普通词A + 普通词B”的名称不因为 `.com` 可用就升级为强候选。
+
+这是 #411 task-local 调度结论，不自动成为所有 Naming Job 的永久禁令。
+
+## 6. Sound-led 路线必须先有 Phonetic Character Brief
+
+REG-411-GEN-001 显示 sound-led / opaque 路线若只有“像品牌名”目标，容易滑向 fantasy-name 或廉价科技词。
+
+因此启用 sound-led 时，至少明确：
+
+- syllable / stress character；
+- consonant / vowel feel；
+- desired maturity / institutional scale；
+- personal-name / fantasy / consumer-app 等需避免的读感；
+- recoverability target。
+
+禁止只给“生成几个好听的自造词”。
+
+## 7. Mode-collapse / Method-underuse 检查
 
 Generation 后、现实查询前，Controller 必须检查：
 
@@ -116,25 +159,39 @@ Generation 后、现实查询前，Controller 必须检查：
 3. 是否真正出现合同中计划的不同 operator family；
 4. Transformation operator 是否被实际使用，而不是只在文档中存在；
 5. 是否把现实幸存形态回灌成“多生成这种结构”；
-6. 是否出现 Owner-positive 表面形态复制。
+6. 是否出现 Owner-positive 表面形态复制；
+7. 是否出现 classical/root-derived 单一路线接管整个批次；
+8. sound-led 是否退化为 personal/fantasy/generic-tech shell。
 
-若失败，标记 `method_underuse` / `construction_mode_collapse` / `scheduler_bypass`，**停止现实筛查**，先修生成。
+若失败，标记 `method_underuse` / `construction_mode_collapse` / `scheduler_bypass` / `prototype_quality_failure`，**停止现实筛查**，先修生成。
 
-## 7. 回归策略
+## 8. 回归策略
 
-本次 #411 修复先跑 15–20 个内部候选：
+### REG-411-GEN-001
 
-- 不查域名；
-- 不查商标；
-- 不做现实撞名筛查；
-- 不展示给 Owner 作为正式候选；
-- 只验证：是否恢复多种真实 construction mechanism、是否减少简单拼词感、是否整体更像成熟 proper name。
+18 个内部候选；不查域名 / 商标 / reality，不展示给 Owner。
 
-回归失败：继续修生成，不进入大规模筛选。
+结果：
 
-回归成功：再决定是否把本合同吸收到稳定 Skill / regression cases，并恢复批量 generation + practical screening。
+- 多 construction family 与 Transformation lineage 恢复：provisional pass；
+- 简单普通词矩阵显著减少；
+- 暴露新问题：root-derived 可能过度学术化，sound-led 可能 fantasy 化，弱 seed transformation 仍弱。
 
-## 8. 恢复规则
+证据：
+
+`03_Evolution/01_Research/03_Tests/organization-naming-411-generation-regression-001.md`
+
+### 下一回归
+
+下一轮仍只做小样本，不恢复现实筛查。重点验证：
+
+1. Prototype → Transformation 两阶段是否提高变形自然度；
+2. Phonetic Character Brief 是否降低 fantasy / generic-tech 感；
+3. construction portfolio 是否在不回到简单 compound 的同时避免 classical-root 过度集中。
+
+连续内部通过前，不恢复大规模 reality / domain / trademark 成本。
+
+## 9. 恢复规则
 
 后继 Agent 若准备生成名称，必须同时恢复：
 
