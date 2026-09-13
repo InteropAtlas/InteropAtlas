@@ -42,7 +42,7 @@ class TaskUnderstandingGateTests(unittest.TestCase):
         cls.recovery = json.loads(RECOVERY.read_text())
 
     def test_anonymous_fixtures(self):
-        for case in self.fixtures["cases"]:
+        for case in self.fixtures["cases"] + self.fixtures.get("context_cases", []):
             with self.subTest(case=case["id"]):
                 result = GATE.evaluate(case["candidate"], case["review"], case.get("task_context"))
                 self.assertEqual(result["task_understanding"], case["expected"])
