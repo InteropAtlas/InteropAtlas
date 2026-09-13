@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "purpose": "Anonymous synthetic fixtures for reviewer task-understanding only; these tokens are not naming candidates.",
+  "cases": [
+    {
+      "id": "PASS-ANON-01",
+      "candidate": "TOKEN_A",
+      "expected": "pass",
+      "review": {
+        "id": "ANON",
+        "observable_form": [
+          "TOKEN_A is written as one uninterrupted token and visibly ends in the character A."
+        ],
+        "pronunciation_uncertainty": {
+          "level": "medium",
+          "reason": "The visible token does not provide enough ordinary-language spelling evidence to assume one pronunciation."
+        },
+        "brief_fit": {
+          "level": "mixed",
+          "reason": "The compact written form could support a concise identity, while semantic fit cannot be established from the token alone; the name does not need to encode every product function."
+        },
+        "association_hypotheses": [],
+        "disposition": "hold",
+        "reason": "The visible form provides a concrete compactness signal, but semantic interpretation remains uncertain and requires separate evidence."
+      }
+    },
+    {
+      "id": "BLOCK-PRODUCT-BURDEN-01",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "name_burdened_with_product_function",
+      "review": {
+        "id": "ANON",
+        "observable_form": ["TOKEN_A is one uninterrupted token."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The token permits more than one reading."},
+        "brief_fit": {"level": "weak", "reason": "TOKEN_A lacks inherent product features required by the tool."},
+        "association_hypotheses": [],
+        "disposition": "stop",
+        "reason": "It is a name, not a tool."
+      }
+    },
+    {
+      "id": "BLOCK-INSTRUCTION-LEAK-01",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "instruction_or_brief_treated_as_candidate_evidence",
+      "review": {
+        "id": "ANON",
+        "observable_form": ["TOKEN_A is one uninterrupted token.", "The frozen brief is highly detailed."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The token permits more than one reading."},
+        "brief_fit": {"level": "mixed", "reason": "The visible form is compact but semantic fit remains uncertain."},
+        "association_hypotheses": ["The validation procedure could suggest verification."],
+        "disposition": "hold",
+        "reason": "More candidate-specific semantic evidence is needed."
+      }
+    },
+    {
+      "id": "BLOCK-CIRCULAR-01",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "circular_candidate_grounding",
+      "review": {
+        "id": "ANON",
+        "observable_form": ["The name TOKEN_A contains the word TOKEN_A."],
+        "pronunciation_uncertainty": {"level": "low", "reason": "The name is straightforward to pronounce."},
+        "brief_fit": {"level": "weak", "reason": "The fit is weak."},
+        "association_hypotheses": [],
+        "disposition": "hold",
+        "reason": "The name TOKEN_A contains the word TOKEN_A."
+      }
+    },
+    {
+      "id": "REVIEW-OVERLITERAL-01",
+      "candidate": "TOKEN_A",
+      "expected": "review",
+      "expected_code": "possible_literal_function_encoding_assumption",
+      "review": {
+        "id": "ANON",
+        "observable_form": ["TOKEN_A is written as one uninterrupted token."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The token permits more than one reading."},
+        "brief_fit": {"level": "weak", "reason": "The candidate does not directly describe the comparison workflow."},
+        "association_hypotheses": [],
+        "disposition": "hold",
+        "reason": "The literal connection to the product task is not obvious."
+      }
+    },
+    {
+      "id": "BLOCK-NO-GROUNDING-01",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "candidate_not_grounded_in_observable",
+      "review": {
+        "id": "ANON",
+        "observable_form": ["It is concise and visually simple."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The visible spelling could allow multiple readings."},
+        "brief_fit": {"level": "mixed", "reason": "The form may support a compact identity."},
+        "association_hypotheses": [],
+        "disposition": "hold",
+        "reason": "The visible spelling needs additional semantic evidence."
+      }
+    }
+  ]
+}
