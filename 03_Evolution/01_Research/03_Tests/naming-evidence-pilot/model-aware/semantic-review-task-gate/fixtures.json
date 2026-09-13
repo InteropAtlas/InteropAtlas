@@ -1,5 +1,5 @@
 {
-  "schema_version": 1,
+  "schema_version": 2,
   "purpose": "Anonymous synthetic fixtures for reviewer task-understanding only; these tokens are not naming candidates.",
   "cases": [
     {
@@ -8,17 +8,9 @@
       "expected": "pass",
       "review": {
         "id": "ANON",
-        "observable_form": [
-          "TOKEN_A is written as one uninterrupted token and visibly ends in the character A."
-        ],
-        "pronunciation_uncertainty": {
-          "level": "medium",
-          "reason": "The visible token does not provide enough ordinary-language spelling evidence to assume one pronunciation."
-        },
-        "brief_fit": {
-          "level": "mixed",
-          "reason": "The compact written form could support a concise identity, while semantic fit cannot be established from the token alone; the name does not need to encode every product function."
-        },
+        "observable_form": ["TOKEN_A is written as one uninterrupted token and visibly ends in the character A."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The visible token does not provide enough ordinary-language spelling evidence to assume one pronunciation."},
+        "brief_fit": {"level": "mixed", "reason": "The compact written form could support a concise identity, while semantic fit cannot be established from the token alone; the name does not need to encode every product function."},
         "association_hypotheses": [],
         "disposition": "hold",
         "reason": "The visible form provides a concrete compactness signal, but semantic interpretation remains uncertain and requires separate evidence."
@@ -97,6 +89,41 @@
         "association_hypotheses": [],
         "disposition": "hold",
         "reason": "The visible spelling needs additional semantic evidence."
+      }
+    },
+    {
+      "id": "BLOCK-CONTEXT-META-LEAK-02",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "context_only_metadata_leaked_into_review",
+      "task_context": {"context_only_terms": ["SYNTHETIC-MARKER"], "instruction_texts": []},
+      "review": {
+        "id": "ANON",
+        "observable_form": ["TOKEN_A is one uninterrupted token."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The token permits more than one reading."},
+        "brief_fit": {"level": "mixed", "reason": "The visible form may work as an identity label."},
+        "association_hypotheses": ["SYNTHETIC-MARKER suggests a simulated environment."],
+        "disposition": "hold",
+        "reason": "The visible form has some candidate-level evidence but remains uncertain."
+      }
+    },
+    {
+      "id": "BLOCK-INSTRUCTION-ECHO-02",
+      "candidate": "TOKEN_A",
+      "expected": "block",
+      "expected_code": "instruction_echo_in_review",
+      "task_context": {
+        "context_only_terms": [],
+        "instruction_texts": ["The candidate is an identity label for the product, not the product implementation itself. Do not require the label itself to perform or enumerate product functions."]
+      },
+      "review": {
+        "id": "ANON",
+        "observable_form": ["TOKEN_A is one uninterrupted token."],
+        "pronunciation_uncertainty": {"level": "medium", "reason": "The token permits more than one reading."},
+        "brief_fit": {"level": "mixed", "reason": "The visible form may work as an identity label."},
+        "association_hypotheses": [],
+        "disposition": "hold",
+        "reason": "The candidate is an identity label for the product, not the product implementation itself. Do not require the label itself to perform or enumerate product functions."
       }
     }
   ]
