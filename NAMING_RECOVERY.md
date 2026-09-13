@@ -18,15 +18,23 @@ InteropAtlas Naming Workstream 的稳定单一恢复入口。更换对话或执�
 
 ## 2. 当前断点与最小读取范围
 
-遵守 [AGENTS.md](AGENTS.md) 与 [PROJECT_STATE.md](PROJECT_STATE.md)。随后读取最新#411 checkpoint及[个人偏好摘要](03_Evolution/01_Research/03_Tests/organization-naming-411-owner-preferences.zh-CN.md)第1节。只按当前单元需要展开[结构化state](03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml)、使命、既有Skill和历史来源。#411为交付主入口，#408支持方法研究；#416保持实际PR状态。
+遵守 [AGENTS.md](AGENTS.md) 与 [PROJECT_STATE.md](PROJECT_STATE.md)。随后读取 [#411 最新交付断点 DELIVERY-411-001/S02](https://github.com/InteropAtlas/InteropAtlas/issues/411#issuecomment-5652507093) 及 [个人偏好摘要](03_Evolution/01_Research/03_Tests/organization-naming-411-owner-preferences.zh-CN.md)第1节。只按当前单元需要展开[结构化state](03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml)、使命、既有Skill和历史来源。#411为交付主入口，#408支持方法研究；#416保持实际PR状态。
 
-最新完成：PREF-411-001偏好证据首轮定向整理，已记录两项当前直接偏好和十个历史主题的证据等级。音节紧凑是帮助记忆的软偏好，没有2–3音节上限；“字形轮廓节奏”偏好少量、有秩序的高低起伏，不要求全平。旧转述与Agent原因推断分开，未声称已收齐全部历史原话。具体旧候选只供Controller对照，不给Generator作词根模板。
+最新实际进展：已用既有复杂系统生成48个真实组织名，并完成48项初步内在/契合审查、30项bare-exact现实查询、19项注册商.com检查，随后对九项补充近似身份、辖区商标方向公开查询及语言/双字体视觉观察。当前六项仍在内部保留，**全筛通过0、正式Owner审美名单展示0、Owner新认可0**；不能把六项当作已清查交付。每阶段淘汰、暂缓和证据限制见S02。
 
-本单元没有新名称生成、全筛、展示或Owner新认可，没有候选视觉测试或外部模型试验；资料整理不计为命名交付。当前无需要Owner决策的偏好冲突。
+最小资料路径：
 
-**下一动作：`generate_fully_screen_and_present_40_organization_names_with_existing_complex_method`。** 内部按小单元生成、筛选、补充并即时写入；名字仍在全部既定筛选后集中展示。不得把完整历史偏好审计、问卷、模型测试、Reviewer校准、gate扩写、对照实验或降本研究排在交付前。
+- [原始48项及生成前简报](03_Evolution/01_Research/03_Tests/organization-naming-411-delivery-001.json)，冻结提交 `5915fa99cb9f1895d034cd491090d108f1323c94`，不得事后改写。
+- [S01：身份查询与注册商回执](03_Evolution/01_Research/03_Tests/organization-naming-411-delivery-001-screening.json)，提交 `61ed6b921f2de5edfebfdbbf25895a1ec78c1ee0`。
+- [S02：当前六项、近似风险与商标查询限制](03_Evolution/01_Research/03_Tests/organization-naming-411-delivery-001-screening-stage2.json)，提交 `289f2dc3ce83b2a15f5671490f2cb899a8db3f8f`。只需先读counts、internally_retained_ids、blocker和next_action；逐项来源按需展开。
 
-历史同步限制：结构化state此前仍为v99研究断点，迁移曾投递失败；本页不宣称该迁移已完成。最新Owner指令已在批量交付范围内取代旧研究next_action与一般生成暂停，不能据过时state重跑SEM-408-006。旧证据及未知项保留，普通同步维护不阻塞交付。
+**当前具体阻塞：未取得可靠的候选级商标数据库结果。** USPTO/TMview页面为JS壳，WIPO人机验证、CNIPA入口403；公开索引未命中不等于完成负面筛查。既定任务是四辖区/业务范围的初步商标风险筛选，不凭空增加注册保证门槛，也不把无关搜索回退结果算已通过。已展示一次TinyFish交互浏览器接入建议；连接尚未确认，未执行其浏览器，不保证能解决全部网站登录/验证。按影响完成率升级，不要求Owner逐名查询或先挑。
+
+宏观交付动作保持：`generate_fully_screen_and_present_40_organization_names_with_existing_complex_method`。**当前微动作：`verify_interactive_trademark_search_access_then_complete_retained_candidate_screening`。** 接入确认后，先验证一个具体候选/必要网站的查询能力，再逐项补足；遵守网站访问限制，不绕过验证，不作无边界批量爬取。不要重复跑已完成的36项公开辖区搜索制造进度。不能确认连接时，其他独立生成和语言/身份筛选工作仍可执行，不宣称整体只能停住。
+
+下一补池应增加实质不同的紧凑专名等形式：当前六项都是短语，是筛选结果，不是Owner偏好短语的新证据。不得复制六项词根或强迫多样性分数。音节紧凑与有秩序的字形轮廓仍是软偏好；历史转述与原因推断分开，已有正向名不作Generator模板。所有名称仍须全筛后集中展示，不让Owner审核原料。
+
+历史同步限制：结构化state此前仍为v99研究断点，迁移曾投递失败；本页不宣称该迁移已完成。最新Owner指令已在批量交付范围内取代旧研究next_action与一般生成暂停，不能据过时state重跑SEM-408-006。旧证据及未知项保留，普通同步维护不阻塞交付。当前无新模型benchmark、外部付费推理、注册购买、合并或稳定晋升。
 
 ## 3. 小步执行、请示及接管
 
