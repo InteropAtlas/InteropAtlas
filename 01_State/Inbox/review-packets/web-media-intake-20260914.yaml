@@ -1,100 +1,40 @@
 packet_id: web_media_intake_20260914
-status: pending_independent_semantic_review
+status: reviewed_and_materialized_with_deferrals
 source_issue: 146
 baseline_commit: abde0aabe2eeb228024ef18463a7c71db505a20f
+reviewed_packet_commit: ce67d8ae225c4e8d5d63a54bb6e7403e08dfa117
 executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-reviewer: null
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
 review_scope_zh:
-- 连续处理四个既有 Web 媒体候选：MSE、EME、WebRTC、WebVTT；不新建候选身份。
-- 先核对完整 Canonical 的 ID、名称和外部标识。作者已读取 W3C 官方当前页面/出版历史；Reviewer 只独立解释本包有限材料，不冒充独立网络抓取或全文核验。
-- MSE 与 EME 的旧候选标签把工作级 /TR/ 入口和某一历史出版状态混在一起；本轮先做身份诊断，不自动把 2016/2017 Recommendation 或 2026 Draft 当作同一固定文档。
-- WebRTC 的当前 /TR/webrtc/ 明确为 2025-03-13 Recommendation；WebVTT 当前 /TR/webvtt1/ 为 2026-05-20 Candidate Recommendation Draft。两项拟以工作级文档入口 + 固定举证版本进行普通接纳。
-- 对 WebRTC、WebVTT 分别给出 acceptable_for_ordinary_acceptance / deferred / rejected，并说明 proposed_record 是否可原样复制。对 MSE、EME 分别判断 proposed_decision=deferred、proposed_state=identity_risk 是否合理。
-- 不用 CI、代码无发现或点赞代替语义结论；不批准包外关系、实现兼容、DRM 法律/许可结论、浏览器覆盖率或“最新版本”泛化。
-source_evidence:
-- evidence_id: mse_series
-  url: https://www.w3.org/TR/
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: W3C standards index / MSE
-  observation_zh: W3C 当前索引同时列出 Media Source Extensions 的 2026-08-07 Draft Standard 与 2016-11-17 Standard；旧候选只有通用 w3c:media-source 和 /TR/media-source/，却把主体直接标成 Candidate Recommendation，无法明确对应固定出版物。
-- evidence_id: eme_series
-  url: https://www.w3.org/TR/encrypted-media/all/
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: encrypted-media cover page
-  observation_zh: 同一系列同时存在 2017-09-18 Recommendation 与 2026-07-07 Working Draft；当前工作级入口的草案还明确说明它不定义 DRM 系统本身，而是提供与内容保护系统交互的共同 API。旧候选仅用通用 w3c:encrypted-media 标识并称 Recommendation，固定文档边界不清。
-- evidence_id: webrtc_rec
-  url: https://www.w3.org/TR/2025/REC-webrtc-20250313/
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: Heading, Abstract, Status of This Document
-  observation_zh: 2025-03-13 W3C Recommendation；定义 WebIDL/ECMAScript API，使媒体和通用应用数据可在实现相应实时协议的浏览器或设备之间发送与接收，并与 IETF RTCWEB 协议规范协同。
-- evidence_id: webvtt_crd
-  url: https://www.w3.org/TR/2026/CRD-webvtt1-20260520/
-  accessed: '2026-09-14'
-  observed_via: author_web_retrieval
-  locator: Heading and Abstract
-  observation_zh: 2026-05-20 W3C Candidate Recommendation Draft；定义 Web Video Text Tracks 格式，用于与 HTML 媒体关联的外部文本轨，可表达字幕、说明、章节及与音视频时间对齐的元数据。
-objects:
-- round_id: H
-  candidate_id: w3c_webrtc
-  candidate_path: 01_State/Inbox/candidates/w3c_webrtc.yaml
-  candidate_blob: b2c74f14197428dffa5981cca2c3c029d0f571e3
-  evidence_ids: [webrtc_rec]
-  proposed_record:
-    id: w3c_webrtc
-    type: artifact
-    kind: specification
-    name_zh: WebRTC 浏览器实时通信规范
-    name_en: 'WebRTC: Real-Time Communication in Browsers'
-    description_zh: 定义一组基于 WebIDL 的 ECMAScript API，使媒体与通用应用数据可在实现相应实时协议的浏览器或设备之间发送与接收。
-    description_en: Defines WebIDL-based ECMAScript APIs for sending and receiving media and generic application data between browsers or devices implementing the appropriate real-time protocols.
-    version: '2025-03-13'
-    external_identifiers: [{namespace: w3c, value: webrtc}]
-    official_url: https://www.w3.org/TR/webrtc/
-    versions: [{version: '2025-03-13', status: recommendation, url: 'https://www.w3.org/TR/2025/REC-webrtc-20250313/'}]
-    scope_notes_zh: 保留工作级 /TR/webrtc/ 入口，以 2025-03-13 Recommendation 支持当前最小定义；不把 IETF RTCWEB 协议族、媒体采集 API 或任意浏览器实现合并为同一主体。
-    scope_notes_en: Retains the work-level /TR/webrtc/ entry and uses the 2025-03-13 Recommendation for the current minimum definition; IETF RTCWEB protocols, media-capture APIs and browser implementations remain distinct subjects.
-    sources:
-    - {url: 'https://www.w3.org/TR/2025/REC-webrtc-20250313/', title: WebRTC Recommendation 2025-03-13, language: en, accessed: '2026-09-14'}
-- round_id: H
-  candidate_id: w3c_webvtt
-  candidate_path: 01_State/Inbox/candidates/w3c_webvtt.yaml
-  candidate_blob: 0b1bb08022cf0f4c7346d6081f209175f49fde7f
-  evidence_ids: [webvtt_crd]
-  proposed_record:
-    id: w3c_webvtt
-    type: artifact
-    kind: format
-    name_zh: WebVTT 网页视频文本轨格式
-    name_en: 'WebVTT: The Web Video Text Tracks Format'
-    description_zh: 定义与网页媒体关联的外部文本轨格式，可表达字幕、说明、章节以及与音视频时间对齐的元数据。
-    description_en: Defines an external text-track format for Web media, including captions, subtitles, descriptions, chapters and other time-aligned metadata.
-    version: '2026-05-20'
-    external_identifiers: [{namespace: w3c, value: webvtt}]
-    official_url: https://www.w3.org/TR/webvtt1/
-    versions: [{version: '2026-05-20', status: candidate_recommendation_draft, url: 'https://www.w3.org/TR/2026/CRD-webvtt1-20260520/'}]
-    scope_notes_zh: 当前举证文本是 Candidate Recommendation Draft，不声称已成为 Recommendation；保留工作级入口，不把过去/未来快照视作字节相同的固定文档。
-    scope_notes_en: The evidenced publication is a Candidate Recommendation Draft, not a Recommendation; the work-level entry is retained without treating past or future snapshots as byte-identical documents.
-    sources:
-    - {url: 'https://www.w3.org/TR/2026/CRD-webvtt1-20260520/', title: WebVTT Candidate Recommendation Draft 2026-05-20, language: en, accessed: '2026-09-14'}
-identity_diagnoses:
-- round_id: I
-  candidate_id: w3c_mse
-  candidate_path: 01_State/Inbox/candidates/w3c_mse.yaml
-  candidate_blob: 550bd8be08b1a574df717e2cfcdea640e2eaaac9
-  evidence_ids: [mse_series]
-  proposed_decision: deferred
-  proposed_state: identity_risk
-  reason_zh: 原候选以通用 w3c:media-source 与工作级 /TR/media-source/ 表示主体，却把发布状态直接写成 Candidate Recommendation；当前系列同时包含2016 Standard与2026 Draft Standard，需先确定是工作级系列对象还是固定出版物对象。
-  next_action_zh: 保留候选ID与原标识，明确 work-level 与 publication-level 的身份策略后再接纳；不自动把2016 Recommendation、2026 Draft或未来出版物合并为一个固定文档。
-- round_id: I
-  candidate_id: w3c_eme
-  candidate_path: 01_State/Inbox/candidates/w3c_eme.yaml
-  candidate_blob: 3128b6aa427d148acf1c88832f36687b806ea3bd
-  evidence_ids: [eme_series]
-  proposed_decision: deferred
-  proposed_state: identity_risk
-  reason_zh: 原候选以通用 w3c:encrypted-media 与 /TR/encrypted-media/ 表示工作级主体，但标签称 W3C Recommendation；该系列同时有2017 Recommendation及2026 Working Draft，固定出版物边界不清。
-  next_action_zh: 保留候选ID与原标识，先定义工作级与固定出版物的标识角色；不自动把2017 Recommendation和2026 Draft合并为同一固定文档，也不把EME表述成DRM系统本身。
+- 完整送审原稿、来源摘录和 proposed_record 固定保存在 reviewed_packet_commit，不在当前文件复制第二份活跃事实源。
+- Reviewer逐项核对完整Canonical和原候选blob；审核仅为独立解释作者提供的有限一手材料，未独立验证网络抓取真实性或全文。
+decisions:
+- candidate_id: w3c_webrtc
+  verdict: acceptable_for_ordinary_acceptance
+  result: accepted
+  canonical_id: w3c_webrtc
+  acceptance_event_id: accept-20260914-webmedia-w3c_webrtc
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267948
+  notes_zh: 整个proposed_record获准原样复制；新增接纳/贡献元数据不是第二次独立语义审核。
+- candidate_id: w3c_webvtt
+  verdict: deferred
+  result: identity_risk
+  disposition_event_id: defer-20260914-webmedia-w3c_webvtt
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267951
+  notes_zh: 内容字段大体有证据，但w3c:webvtt外部标识角色未被证明或限定；保留标识并进入身份审查，不静默删除。
+- candidate_id: w3c_mse
+  verdict: deferred
+  result: identity_risk
+  disposition_event_id: defer-20260914-webmedia-w3c_mse
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267954
+  notes_zh: 工作级系列与固定出版物边界未明确；2016 Standard与2026 Draft Standard不能被单一旧状态标签吞并。
+- candidate_id: w3c_eme
+  verdict: deferred
+  result: identity_risk
+  disposition_event_id: defer-20260914-webmedia-w3c_eme
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/426#discussion_r4000267956
+  notes_zh: 工作级系列与固定出版物边界未明确；EME是内容保护交互API，不等同具体DRM系统。
+boundaries_zh:
+- 本轮没有主体拆分、合并、标识删除、Schema或治理变更。
+- WebVTT、MSE、EME的暂缓是明确处置，不是假报为已正式收录。
+- WebRTC正式记录只复制独立Reviewer已批准的语义字段，保留原候选和冻结底库溯源。
