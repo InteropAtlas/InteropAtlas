@@ -1,184 +1,42 @@
 packet_id: service_methods_review_20260913
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+delivery_pr: 423
 baseline_commit: dc9e1b77b1e953747b61491ce208dbd9775da25f
-candidate_file: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
+frozen_packet_commit: 92a06174a3434869ea3704f4a641a74ffca8efea
+frozen_packet_blob: c37e2acfe36e7e195d081c278069074fd8536365
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/92a06174a3434869ea3704f4a641a74ffca8efea/01_State/Inbox/review-packets/service-methods-review-20260913.yaml
 candidate_blob: 03082637803d5c19a806f43c8ce21a5802435297
 executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-reviewer: null
-review_scope_zh:
-- 六个既有候选的确切身份、双语名称、最小摘要、kind及明确文档版本。不是新建六个候选。
-- 拟入库字段只限各项 proposed_record；classification_rationale 与 excluded_claims 是审查说明，不作为外部事实自动入库。
-- 原候选 family/kind 是未审标签。FAIR按原DOI识别论文，Scrum按原2020-11标识识别指南，Double Diamond按原工作级标识识别框架概念；须明确判断这是否为身份保持的分类纠正。若不能确认，暂缓该项，不自动拆分或合并。
-- 本包提供作者取得的有限来源摘录。FAIR是发布者索引文本的选段转录，详见固定Git证据文件；不是成功打开DOI或发布者HTTP页面。Reviewer不得声称自己直连官网、检查全文或证明抓取真实性。
-- 逐项给出 acceptable_for_ordinary_acceptance / deferred / rejected，并指出具体支持或不足的字段。CI成功、无代码问题或点赞不是接纳判断。
-- 先检查基线与当前库的标识和名称重复；仅同名不自动合并。检查当前受控类型表，不发明kind或更改Schema。
-- 本轮不提交技术关系或可视化地图；类别归属沿用已存在的引用。
-source_evidence:
-- evidence_id: jsonrpc
-  url: https://www.jsonrpc.org/specification
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  source_identity: JSON-RPC 2.0 Specification
-  excerpt: stateless, light-weight remote procedure call (RPC) protocol
-  additional_excerpt: transport agnostic
-  locator: 'Section 1 Overview; page heading'
-  observation_zh: 规范标题明确为2.0；概要说明远程过程调用协议及不绑定传输。这里只支持版本和最小功能定义。
-- evidence_id: cloudevents
-  url: https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/spec.md
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  source_identity: CloudEvents - Version 1.0.2
-  excerpt: CloudEvents is a vendor-neutral specification for defining the format of event data.
-  locator: 'Document heading and Abstract, lines 1-6 of raw Markdown'
-  observation_zh: 固定v1.0.2标签下的核心文档，不是整个项目、SDK或某个传输绑定，也不宣称为最新版本。
-- evidence_id: problem_details
-  url: https://www.rfc-editor.org/info/rfc9457/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  source_identity: RFC 9457 — Problem Details for HTTP APIs
-  excerpt: machine-readable details of errors in HTTP response content
-  status_excerpt: Proposed Standard
-  locator: 'Title, current status and Abstract'
-  observation_zh: 摘要支持HTTP响应中的机器可读错误详情；本包不由此推断所有API必须采用该格式。
-- evidence_id: fair_paper
-  url: https://github.com/InteropAtlas/InteropAtlas/blob/e0230864097e3e0f3cd4e4b30e074be71996a009/01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml
-  publisher_page_url: https://www.nature.com/articles/sdata201618
-  observed_on: '2026-09-13'
-  observed_via: author_transcription_of_search_indexed_publisher_text
-  source_identity: The FAIR Guiding Principles for scientific data management and stewardship
-  excerpt: four foundational principles—Findability, Accessibility, Interoperability, and Reusability
-  locator: 'Captured publisher metadata and selected_excerpt in the referenced immutable Git file'
-  observation_zh: 实际使用的检索query、返回来源URL、论文元数据与有限短摘录已保存在引用文件。直接DOI及出版者页面读取均失败，不再以accessed字段宣称直接访问成功。这是可复核的作者转录，不独立证明索引抓取真实性；若Reviewer认为此证据不足，FAIR应单独暂缓。
-- evidence_id: scrum_guide
-  url: https://scrumguides.org/scrum-guide.html
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  source_identity: The 2020 Scrum Guide
-  excerpt: The Scrum Guide contains the definition of Scrum.
-  version_excerpt: November 2020
-  locator: 'HTML heading, introductory version note and Purpose of the Scrum Guide'
-  observation_zh: 页面说明HTML来自2020年11月版。此项只接纳指南文档身份及其定义Scrum的作用，不把指南文档当作框架概念本身。
-- evidence_id: double_diamond
-  url: https://www.designcouncil.org.uk/resources/the-double-diamond/
-  accessed: '2026-09-13'
-  observed_via: author_web_retrieval
-  source_identity: The Double Diamond
-  excerpt: visual representation of the design and innovation process
-  headings_excerpt: Discover; Define; Develop; Deliver
-  locator: 'From humble beginnings; How to use the Double Diamond'
-  observation_zh: Design Council的工作级说明页。框架概念不是具体网页字节，也不是软件实现；不从网页修订时间推导方法的版本。
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
 objects:
 - candidate_id: json_rpc_2.0
-  evidence_ids: [jsonrpc]
-  classification_rationale_zh: 保持原2.0协议规范身份；不把它等同于传输或实现。
-  excluded_claims: [认证机制, 具体传输绑定, JSON-RPC1.0兼容性, 项目实际采用]
-  proposed_record:
-    id: json_rpc_2.0
-    type: artifact
-    kind: protocol
-    name_zh: JSON-RPC 2.0 远程过程调用协议规范
-    name_en: JSON-RPC 2.0 Specification
-    description_zh: 定义不绑定具体传输的远程过程调用协议。
-    description_en: Defines a transport-independent remote procedure call protocol.
-    version: '2.0'
-    external_identifiers:
-    - {namespace: jsonrpc, value: '2.0'}
-    official_url: https://www.jsonrpc.org/specification
-    sources:
-    - {url: 'https://www.jsonrpc.org/specification', title: JSON-RPC 2.0 Specification, language: en, accessed: '2026-09-13'}
+  canonical_id: json_rpc_2.0
+  acceptance_event_id: accept-20260913-service-methods-json_rpc_2.0
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788376
 - candidate_id: cloudevents_1.0.2
-  evidence_ids: [cloudevents]
-  classification_rationale_zh: 固定核心规范1.0.2，不是CloudEvents项目或SDK主体。
-  excluded_claims: [所有传输绑定, 实现兼容性, 最新版本, specversion字段取值]
-  proposed_record:
-    id: cloudevents_1.0.2
-    type: artifact
-    kind: specification
-    name_zh: CloudEvents 核心规范 1.0.2
-    name_en: CloudEvents Core Specification 1.0.2
-    description_zh: 定义事件数据格式的厂商中立规范。
-    description_en: A vendor-neutral specification defining the format of event data.
-    version: '1.0.2'
-    external_identifiers:
-    - {namespace: cloudevents, value: core-1.0.2}
-    official_url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md
-    sources:
-    - {url: 'https://raw.githubusercontent.com/cloudevents/spec/v1.0.2/cloudevents/spec.md', title: CloudEvents 1.0.2 core specification, language: en, accessed: '2026-09-13'}
+  canonical_id: cloudevents_1.0.2
+  acceptance_event_id: accept-20260913-service-methods-cloudevents_1.0.2
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788379
 - candidate_id: problem_details_rfc9457
-  evidence_ids: [problem_details]
-  classification_rationale_zh: 确切RFC9457文档，发布状态不从RFC编号或Standards Track字样推测。
-  excluded_claims: [适用于所有API的强制性, 安全保证, 完整错误注册表, 具体JSON或XML成员规则]
-  proposed_record:
-    id: problem_details_rfc9457
-    type: artifact
-    kind: specification
-    name_zh: HTTP API 问题详情（RFC 9457）
-    name_en: Problem Details for HTTP APIs (RFC 9457)
-    description_zh: 定义在HTTP响应内容中承载机器可读错误详情的机制。
-    description_en: Defines a mechanism for conveying machine-readable error details in HTTP response content.
-    version: RFC 9457
-    external_identifiers:
-    - {namespace: rfc, value: '9457'}
-    official_url: https://www.rfc-editor.org/rfc/rfc9457.html
-    versions:
-    - {version: RFC 9457, status: proposed_standard, url: 'https://www.rfc-editor.org/rfc/rfc9457.html'}
-    sources:
-    - {url: 'https://www.rfc-editor.org/info/rfc9457/', title: RFC 9457 status and abstract, language: en, accessed: '2026-09-13'}
+  canonical_id: problem_details_rfc9457
+  acceptance_event_id: accept-20260913-service-methods-problem_details_rfc9457
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788386
 - candidate_id: fair_principles_2016
-  evidence_ids: [fair_paper]
-  classification_rationale_zh: 原候选的DOI指向论文，采用artifact/publication，保留该文献身份；不把论文DOI冒充独立方法概念的标识，不新增原则概念主体。
-  excluded_claims: [所有数据必须公开, 技术标准身份, 单一实现方案, 自动符合性认证, 方法有效性实证结论]
-  proposed_record:
-    id: fair_principles_2016
-    type: artifact
-    kind: publication
-    name_zh: 科学数据管理与管护的 FAIR 指导原则（2016年论文）
-    name_en: The FAIR Guiding Principles for scientific data management and stewardship
-    description_zh: 介绍可发现性、可访问性、互操作性和可复用性四项数据治理原则的论文。
-    description_en: A paper presenting four data-stewardship principles concerning discovery, access, interoperability and reuse.
-    external_identifiers:
-    - {namespace: doi, value: 10.1038/sdata.2016.18}
-    official_url: https://doi.org/10.1038/sdata.2016.18
-    sources:
-    - url: https://www.nature.com/articles/sdata201618
-      title: FAIR principles paper (2016) — indexed publisher text
-      language: en
-      retrieval_method: search_indexed_publisher_text
-      direct_access_verified: false
-      evidence_capture: https://github.com/InteropAtlas/InteropAtlas/blob/e0230864097e3e0f3cd4e4b30e074be71996a009/01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml
+  canonical_id: fair_principles_2016
+  acceptance_event_id: accept-20260913-service-methods-fair_principles_2016
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788389
 - candidate_id: scrum_guide_2020
-  evidence_ids: [scrum_guide]
-  classification_rationale_zh: 原2020-11标识和名称均指向指南文档；采用artifact/guidance_document，不把Guide文档与Scrum框架概念合并。
-  excluded_claims: [所有组织均适用, 方法有效性量化, 独立Scrum概念主体, 逐条完整操作方法]
-  proposed_record:
-    id: scrum_guide_2020
-    type: artifact
-    kind: guidance_document
-    name_zh: Scrum 指南（2020年11月版）
-    name_en: The Scrum Guide (November 2020)
-    description_zh: 给出Scrum定义的2020年11月版指导文档。
-    description_en: The November 2020 guide containing the definition of Scrum.
-    version: '2020-11'
-    external_identifiers:
-    - {namespace: scrumguides, value: scrum-guide-2020-11}
-    official_url: https://scrumguides.org/scrum-guide.html
-    sources:
-    - {url: 'https://scrumguides.org/scrum-guide.html', title: Scrum Guide 2020 HTML edition, language: en, accessed: '2026-09-13'}
+  canonical_id: scrum_guide_2020
+  acceptance_event_id: accept-20260913-service-methods-scrum_guide_2020
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788395
 - candidate_id: double_diamond
-  evidence_ids: [double_diamond]
-  classification_rationale_zh: 原名称明确为Design Council框架，原kind也是framework，但family误填artifact；采用concept/framework保持工作级方法身份，不把一个网页或一张图当作该主体，也不指定不存在的发行版。
-  excluded_claims: [普遍有效性, 唯一正确设计流程, 正式技术标准, 固定线性执行要求, 框架最新版本]
-  proposed_record:
-    id: double_diamond
-    type: concept
-    kind: framework
-    name_zh: 双钻设计框架
-    name_en: Double Diamond
-    description_zh: 表达设计与创新过程的框架，包括发现、定义、发展和交付四个阶段。
-    description_en: A design-process framework organized around discovery, definition, development and delivery.
-    external_identifiers:
-    - {namespace: design_council, value: double-diamond}
-    official_url: https://www.designcouncil.org.uk/resources/the-double-diamond/
-    sources:
-    - {url: 'https://www.designcouncil.org.uk/resources/the-double-diamond/', title: Design Council Double Diamond, language: en, accessed: '2026-09-13'}
+  canonical_id: double_diamond
+  acceptance_event_id: accept-20260913-service-methods-double_diamond
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/423#discussion_r3999788402
+deferred_candidate_refs: []
+notes_zh:
+- 此文件是引用式交付回执，不维护第二份活跃正式语义字段；完整原稿与有限证据保留于固定Git提交。
+- FAIR取证为发布者索引文本的作者转录，不是成功直连DOI；其来源字段明确保留该限制。
+- 方法文献与框架概念分别按现有词表建模，不新增候选身份、不合并/拆分、不扩展Schema。
+- 本轮未新增技术关系，既有类别归属通过同一稳定ID读取当前状态。
