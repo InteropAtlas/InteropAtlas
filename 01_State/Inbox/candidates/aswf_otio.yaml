@@ -1,26 +1,17 @@
 contract_version: candidate-object-v1
 candidate_id: aswf_otio
-label: OpenTimelineIO (OTIO) — Editorial interchange format and API
-publisher: Academy Software Foundation (ASWF)
+label: OpenTimelineIO — editorial interchange / API / project boundary review
+publisher: Academy Software Foundation / OpenTimelineIO project
 family: artifact
 kind: specification
 external_identifiers:
-  - namespace: aswf
-    value: otio
+- {namespace: aswf, value: otio}
 locators:
-  - url: https://opentimelineio.readthedocs.io/
-    role: official
-  - url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO
-    role: official
+- {url: 'https://opentimelineio.readthedocs.io/en/latest/', role: official}
 identity_resolution:
-  state: new
+  state: identity_risk
   matched_canonical_ids: []
-  reasons:
-    - OpenTimelineIO is an open API and interchange format for timelines/editing data between editing, VFX and review tools.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  reasons: [OTIO 的编辑交换数据、API、适配器和软件项目必须分清；当前 latest 页标示 0.19.0.dev1，不能当作稳定发行版。]
   merge_authorized: false
-unknowns: []
-provenance:
-  initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+unknowns: [选择稳定发行版和明确数据模型/序列化/API 的收录边界；不自动合并或拆分原身份。, 说明外部媒体引用和适配器转换限制；不得推定所有格式无损互转。, 本轮修订日期 2026-09-13；修订内容仍需独立 Reviewer，原始作者及材料见基线 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa 同路径。]
+provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}

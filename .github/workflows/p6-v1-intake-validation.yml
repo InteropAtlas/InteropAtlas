@@ -52,6 +52,12 @@ jobs:
           01_State/02_Relations/engine-v0.1-versioning.yaml
           01_State/01_Objects/apple-human-interface-guidelines.yaml
 
+      - name: Inbox coverage and acceptance validation
+        run: >-
+          python 02_Runtime/01_Engine/intake_coverage_audit.py --root .
+          --json build/intake-coverage.json
+          --markdown build/intake-coverage.md
+
       - name: Machine Review
         run: python 02_Runtime/01_Engine/machine_review.py
 
@@ -60,3 +66,13 @@ jobs:
 
       - name: Bootstrap compatibility query
         run: python 02_Runtime/01_Engine/bootstrap_query.py --capability automated_build_deployment
+
+      - name: Upload intake coverage evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: intake-coverage-evidence
+          path: |
+            build/intake-coverage.json
+            build/intake-coverage.md
+          if-no-files-found: warn
