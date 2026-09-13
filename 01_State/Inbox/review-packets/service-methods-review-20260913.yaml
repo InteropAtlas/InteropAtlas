@@ -10,7 +10,7 @@ review_scope_zh:
 - 六个既有候选的确切身份、双语名称、最小摘要、kind及明确文档版本。不是新建六个候选。
 - 拟入库字段只限各项 proposed_record；classification_rationale 与 excluded_claims 是审查说明，不作为外部事实自动入库。
 - 原候选 family/kind 是未审标签。FAIR按原DOI识别论文，Scrum按原2020-11标识识别指南，Double Diamond按原工作级标识识别框架概念；须明确判断这是否为身份保持的分类纠正。若不能确认，暂缓该项，不自动拆分或合并。
-- 本包保存作者从一手页面读取的有限短摘录与事实观察。Reviewer可离线评估这些证据，不得声称自己直连官网或检查全文、抓取真实性。
+- 本包提供作者取得的有限来源摘录。FAIR是发布者索引文本的选段转录，详见固定Git证据文件；不是成功打开DOI或发布者HTTP页面。Reviewer不得声称自己直连官网、检查全文或证明抓取真实性。
 - 逐项给出 acceptable_for_ordinary_acceptance / deferred / rejected，并指出具体支持或不足的字段。CI成功、无代码问题或点赞不是接纳判断。
 - 先检查基线与当前库的标识和名称重复；仅同名不自动合并。检查当前受控类型表，不发明kind或更改Schema。
 - 本轮不提交技术关系或可视化地图；类别归属沿用已存在的引用。
@@ -42,13 +42,14 @@ source_evidence:
   locator: 'Title, current status and Abstract'
   observation_zh: 摘要支持HTTP响应中的机器可读错误详情；本包不由此推断所有API必须采用该格式。
 - evidence_id: fair_paper
-  url: https://doi.org/10.1038/sdata.2016.18
-  accessed: '2026-09-13'
-  observed_via: author_web_search_primary_publisher_index
+  url: https://github.com/InteropAtlas/InteropAtlas/blob/e0230864097e3e0f3cd4e4b30e074be71996a009/01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml
+  publisher_page_url: https://www.nature.com/articles/sdata201618
+  observed_on: '2026-09-13'
+  observed_via: author_transcription_of_search_indexed_publisher_text
   source_identity: The FAIR Guiding Principles for scientific data management and stewardship
   excerpt: four foundational principles—Findability, Accessibility, Interoperability, and Reusability
-  locator: 'Scientific Data, 15 March 2016; Supporting discovery through good data management'
-  observation_zh: DOI对应Scientific Data在2016年发表的论文。发布者正文索引提供标题、日期及四项原则。直接打开nature页面返回错误，本包不冒充直接HTTP全文抓取。
+  locator: 'Captured publisher metadata and selected_excerpt in the referenced immutable Git file'
+  observation_zh: 实际使用的检索query、返回来源URL、论文元数据与有限短摘录已保存在引用文件。直接DOI及出版者页面读取均失败，不再以accessed字段宣称直接访问成功。这是可复核的作者转录，不独立证明索引抓取真实性；若Reviewer认为此证据不足，FAIR应单独暂缓。
 - evidence_id: scrum_guide
   url: https://scrumguides.org/scrum-guide.html
   accessed: '2026-09-13'
@@ -140,7 +141,12 @@ objects:
     - {namespace: doi, value: 10.1038/sdata.2016.18}
     official_url: https://doi.org/10.1038/sdata.2016.18
     sources:
-    - {url: 'https://doi.org/10.1038/sdata.2016.18', title: FAIR principles paper (2016), language: en, accessed: '2026-09-13'}
+    - url: https://www.nature.com/articles/sdata201618
+      title: FAIR principles paper (2016) — indexed publisher text
+      language: en
+      retrieval_method: search_indexed_publisher_text
+      direct_access_verified: false
+      evidence_capture: https://github.com/InteropAtlas/InteropAtlas/blob/e0230864097e3e0f3cd4e4b30e074be71996a009/01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml
 - candidate_id: scrum_guide_2020
   evidence_ids: [scrum_guide]
   classification_rationale_zh: 原2020-11标识和名称均指向指南文档；采用artifact/guidance_document，不把Guide文档与Scrum框架概念合并。
