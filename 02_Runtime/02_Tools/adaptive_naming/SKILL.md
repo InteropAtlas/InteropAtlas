@@ -1,10 +1,10 @@
 ---
 name: adaptive-naming
 description: 自适应品牌、组织、项目与产品命名。先建立目标、价值模型、名称职责与真实边界，再由 Controller 按当前最大未知动态调度工作流、研究、生成、评价、现实验证与救援；跨任务经验经证据与回归后可受控进化方法本身。
-version: 0.4.0
+version: 0.4.1
 ---
 
-# Adaptive Naming Skill v0.4.0
+# Adaptive Naming Skill v0.4.1
 
 ## 1. 定位：Adaptive Naming System，而不是固定流水线
 
@@ -25,6 +25,10 @@ v0.3.3 已通过真实 #411 Fit Test 的 job-level Controller 行为继续作为
 - adaptive search cadence；
 - Runtime Adapter；
 - cross-task Method Evolution Outer Loop。
+
+v0.4.1 增加一个控制层硬化：**Generation Capability Recovery Gate**。它解决“任务状态恢复了，但真正生成时方法工具箱没有恢复”的故障；任何新的 `generate` 前必须先恢复当前 Workflow / Construction 能力并留下 Generation Contract。详细合同：
+
+[`references/generation-capability-recovery-contract.md`](references/generation-capability-recovery-contract.md)
 
 详细系统架构：
 
@@ -76,6 +80,7 @@ v0.3.3 已通过真实 #411 Fit Test 的 job-level Controller 行为继续作为
 20. Search Landscape 中的 reality crowding 与 intrinsic quality 分开；拥挤不等于语义/创意区域低质量。
 21. Task experience 不能直接成为全局规则；跨任务演化走 Experience Registry + promotion contract。
 22. 稳定方法变更必须有 regression，且保留 rollback / supersede 路径。
+23. **State Recovery ≠ Generation Capability Recovery。** 任何 `generate` 前必须恢复当前 workflow / operator capability 并留下 Generation Contract；不得从“补一批名字 / generate N”直接绕过 Scheduler。
 
 ---
 
@@ -93,6 +98,7 @@ v0.3.3 已通过真实 #411 Fit Test 的 job-level Controller 行为继续作为
 - Search Landscape；
 - Workflow Pattern Scheduler；
 - Construction / Method Scheduler；
+- generation capability recovery / current Generation Contract；
 - search cadence；
 - runtime capability / actual isolation；
 - reality requirements；
@@ -225,6 +231,30 @@ v0.4 恢复 G3 + G8 的核心组合：
 - mode collapse / low information gain：降权、cooldown、换 region / pattern；
 - 降权不等于永久删除。
 
+### 7.4 Generation Capability Recovery Gate
+
+开始任何新的候选生成前，Controller 必须读取当前任务状态之外的**生成能力包**，并创建本轮 Generation Contract。
+
+详细规则：
+
+[`references/generation-capability-recovery-contract.md`](references/generation-capability-recovery-contract.md)
+
+最小要求：
+
+- 当前 biggest unknown / Name Job focus；
+- 选定的 workflow pattern；
+- construction operator portfolio 与预算；
+- territory material / prototype strategy；
+- Transformation Operators 是否用于 exploration / rescue；
+- cadence / runtime isolation；
+- anti-collapse checks / stop condition。
+
+缺少 `workflow_patterns` 或 `construction_portfolio` 时，`generate` 不得执行。
+
+当目标是扩展搜索空间时，默认至少使用 3 个真正不同的 construction family；换前缀、换后缀、换第二普通词不算不同 family。Transformation Operators 可用于普通 exploration，也可用于 rescue；若使用 transformation，优先 `strong prototype → bounded transformation`，不从弱 seed 做机械字母变体。
+
+Generation 后、Reality 前先做 integrity check；若出现 `scheduler_bypass / method_underuse / construction_mode_collapse / generation_capability_recovery_failure`，停止现实筛查并先修生成。
+
 ---
 
 ## 8. Search Cadence 也是可调变量
@@ -305,6 +335,8 @@ Isolation level：
 
 Rescue 必须记录 seed、trigger、allowed operators、attempt budget、exit conditions；每个变形结果作为新候选重新评价。Seed 不进入 general exploration brief。
 
+Transformation Operators 本身不只属于 rescue；在普通 exploration 中也可由 Construction Scheduler 调用，但必须保持 lineage，并遵守 Generation Contract 与 anti-collapse 规则。
+
 ---
 
 ## 13. 三层评价 + 决策卫生
@@ -358,6 +390,8 @@ Domain 使用 IA 既有验证方法；`unknown / error` 永远不能变成 `avai
 - `territory_research`
 - `schedule_workflow`
 - `schedule_methods`
+- `recover_generation_capability`
+- `write_generation_contract`
 - `set_search_cadence`
 - `adapt_runtime`
 - `generate`
@@ -389,6 +423,8 @@ Mission / Value + Constraint + Name Job / Criteria
 Search Landscape + Biggest Unknown
   ↓
 Workflow Pattern Scheduler + Search Cadence
+  ↓
+Generation Capability Recovery + Generation Contract
   ↓
 Runtime Adapter
   ↓
@@ -435,9 +471,12 @@ Promote / Revise / Reject / Supersede
 - `naming_scope_error`
 - `semantic / morphological / construction_mode_collapse`
 - `scheduler_monoculture`
+- `scheduler_bypass`
 - `workflow_monoculture`
 - `workflow_operator_confusion`
 - `method_underuse`
+- `generation_capability_recovery_failure`
+- `prototype_quality_failure`
 - `incumbent_anchoring`
 - `rescue_overfit`
 - `survivorship_feedback`
@@ -501,8 +540,11 @@ Registry 属于 Controller / evolution context，不进入 Generator context。
 
 - [`evals/README.md`](evals/README.md)
 - [`evals/regression-cases.yaml`](evals/regression-cases.yaml)
+- [`evals/generation-capability-recovery-regression.yaml`](evals/generation-capability-recovery-regression.yaml)
 
 Regression Evals 验证控制行为与方法完整性，不固定“正确名字”，也不恢复 G0–G8 benchmark。
+
+v0.4.1 的 Generation Capability Recovery 属于严重 control-layer defect 的 provisional fix：来源是 #411 可复现 scheduler bypass，已有两轮 task-local generation regression 与 focused control regression；仍需跨任务证据决定未来是否保留 / 调整 / supersede。
 
 版本原则：
 
