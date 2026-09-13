@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "id": "SEM-408-ROLE-CONTRACT-001",
+  "status": "experimental_evidence_scoped_not_stable_skill",
+  "evidence_scope": {
+    "tested_small_models": [
+      "Qwen3-4B-Instruct-2507 / Unsloth Q4_K_M",
+      "Gemma-3-4B-IT / Q4_K_M"
+    ],
+    "not_validated_for": [
+      "Owner qwen3.6-30b-a3b or other 30B/MoE local deployment",
+      "all small models",
+      "organization naming quality",
+      "final adoption"
+    ]
+  },
+  "semantic_validation_levels": {
+    "L0_task_understanding": "Reviewer distinguishes name/identity label from product implementation and does not leak instructions or provenance metadata into candidate evidence.",
+    "L1_candidate_grounding": "Observable claims are grounded in visible spelling or explicitly supplied candidate facts; unsupported etymology/meaning is not treated as fact.",
+    "L2_claim_calibration": "Associations, pronunciation, derivation and semantic-fit claims are separated into observed, hypothesis, externally supported, or unknown.",
+    "L3_comparative_reliability": "Priority/drop decisions survive controlled order/context perturbation or are downgraded to hold when unstable.",
+    "L4_human_external_validity": "Claims about user interpretation, Owner preference, cross-language recovery, trademark/domain/reality, or final adoption use the appropriate human/authoritative evidence."
+  },
+  "roles": {
+    "candidate_generation": {
+      "status": "conditional_allowed",
+      "purpose": "produce exploratory candidates and stated creative intent",
+      "required_levels": ["L0_task_understanding"],
+      "may_output": ["candidate proposals", "creator intent labelled not truth", "uncertainty"],
+      "must_not_output_as_truth": ["user interpretation", "etymology", "reality clearance", "Owner preference"],
+      "evidence_basis": "REAL-408-003 produced usable exploratory material but no stable method winner"
+    },
+    "surface_observation": {
+      "status": "conditional_allowed",
+      "purpose": "propose spelling/readability/pronunciation observations",
+      "required_levels": ["L0_task_understanding", "L1_candidate_grounding", "L2_claim_calibration"],
+      "must_remain_hypothesis_when_unverified": ["pronunciation certainty", "cross-language recovery", "association"]
+    },
+    "semantic_association": {
+      "status": "hypothesis_only",
+      "purpose": "surface possible meanings or user associations for later validation",
+      "required_levels": ["L0_task_understanding", "L1_candidate_grounding", "L2_claim_calibration"],
+      "automatic_quality_effect": "none"
+    },
+    "resource_triage": {
+      "status": "conditional_allowed",
+      "purpose": "conservative priority/hold routing, not quality truth",
+      "required_levels": ["L0_task_understanding", "L1_candidate_grounding", "L2_claim_calibration", "L3_comparative_reliability"],
+      "unstable_decision_policy": "route_to_hold",
+      "automatic_drop_allowed": false
+    },
+    "final_quality_selector": {
+      "status": "not_validated_for_autonomous_use",
+      "purpose": "choose which name is intrinsically better",
+      "blocking_evidence": [
+        "SELECT-408-001 unsupported associations and contradictory same-name judgments",
+        "SELECT-408-002 same-seed order sensitivity on 4 of 6 candidates",
+        "SEM-408-003 task-level failures",
+        "SEM-408-005 gate-v1 false negatives"
+      ],
+      "minimum_future_requirement": ["L0_task_understanding", "L1_candidate_grounding", "L2_claim_calibration", "L3_comparative_reliability", "independent reference evidence"]
+    },
+    "reality_legal_domain_clearance": {
+      "status": "not_delegated_without_authoritative_tools",
+      "purpose": "identity, trademark, domain or legal clearance",
+      "required_levels": ["L4_human_external_validity"],
+      "language_model_role": "summarize supplied evidence only"
+    },
+    "owner_preference_inference": {
+      "status": "not_allowed_as_fact",
+      "purpose": "infer what Owner likes",
+      "required_levels": ["L4_human_external_validity"],
+      "allowed_source": "explicit Owner feedback or clearly labelled reversible hypothesis"
+    },
+    "final_adoption": {
+      "status": "owner_only",
+      "required_levels": ["L4_human_external_validity"],
+      "automatic_model_decision": false
+    }
+  },
+  "method_comparison": {
+    "simple_vs_redesign_winner": "not_established",
+    "default_engineering_choice": "simple",
+    "redesign_role": "optional exploration expansion",
+    "reason": "complex path has higher generation cost and only weak quality signal; current selectors are not valid enough to establish a winner"
+  },
+  "global_rules": {
+    "task_gate_pass_is_semantic_truth": false,
+    "semantic_quality_ground_truth_exists": false,
+    "new_reviewer_inference_authorized": false,
+    "ia_generation_authorized": false,
+    "paid_calls_authorized": false,
+    "stable_skill_promotion_authorized": false,
+    "new_names": 0
+  }
+}
