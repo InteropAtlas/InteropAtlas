@@ -45,7 +45,7 @@ PROFILE_SCHEMAS = {
     "organization": "organization-profile.v0.schema.json",
 }
 
-CANDIDATE_STORAGE_PATH = Path("01_State/03_Candidates")
+CANDIDATE_STORAGE_PATH = Path("01_State/Inbox/candidates")
 CANDIDATE_SCHEMA = "candidate-object.v1.schema.json"
 
 
