@@ -1,0 +1,75 @@
+name: P0 Source Evidence
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/p0-source-evidence.yml'
+permissions:
+  contents: read
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Capture fixed primary sources without changing repository data
+        shell: python
+        run: |
+          import datetime, hashlib, json, os
+          from concurrent.futures import ThreadPoolExecutor
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          from urllib.parse import urlparse
+          sources = {
+              'rfc9000': 'https://www.rfc-editor.org/rfc/rfc9000.html',
+              'rfc9000-status': 'https://datatracker.ietf.org/doc/rfc9000/',
+              'rfc9001': 'https://www.rfc-editor.org/info/rfc9001/',
+              'rfc8446': 'https://www.rfc-editor.org/info/rfc8446/',
+              'rfc8446-status': 'https://datatracker.ietf.org/doc/rfc8446/',
+              'rfc8949': 'https://www.rfc-editor.org/info/rfc8949/',
+              'openapi311': 'https://spec.openapis.org/oas/v3.1.1.html',
+              'sparql11': 'https://www.w3.org/TR/2013/REC-sparql11-query-20130321/',
+              'rfc9114': 'https://www.rfc-editor.org/rfc/rfc9114.html',
+          }
+          hosts = {urlparse(url).hostname for url in sources.values()}
+          output = Path('source-evidence'); output.mkdir()
+          def capture(pair):
+              name, url = pair
+              record = {'id': name, 'requested_url': url,
+                  'attempted_at': datetime.datetime.now(datetime.timezone.utc).isoformat()}
+              try:
+                  request = Request(url, headers={'User-Agent': 'InteropAtlas-source-check/1.0', 'Accept': 'text/html'})
+                  with urlopen(request, timeout=40) as response:
+                      final_url = response.geturl()
+                      if urlparse(final_url).scheme != 'https' or urlparse(final_url).hostname not in hosts:
+                          raise ValueError('Unexpected redirect destination')
+                      raw = response.read(5000001)
+                      if len(raw) > 5000000:
+                          raise ValueError('Source exceeds bounded download size')
+                      record.update(status=response.status, final_url=final_url,
+                          content_type=response.headers.get('Content-Type'),
+                          sha256=hashlib.sha256(raw).hexdigest(), size_bytes=len(raw))
+                  # Raw bytes retain the original source and copyright notices.
+                  # They are evidence, never relabelled as CC0 Canonical data.
+                  filename = name + '.html'
+                  (output / filename).write_bytes(raw)
+                  record.update(outcome='captured', filename=filename)
+              except Exception as exc:
+                  record.update(outcome='unavailable', error=type(exc).__name__ + ': ' + str(exc))
+              return record
+          with ThreadPoolExecutor(max_workers=3) as pool:
+              results = list(pool.map(capture, sources.items()))
+          manifest = {'purpose': 'Primary-source transport for independent review; not acceptance',
+              'repository': os.environ['GITHUB_REPOSITORY'], 'run_id': os.environ['GITHUB_RUN_ID'],
+              'tested_commit': os.environ['GITHUB_SHA'], 'sources': results}
+          (output / 'manifest.json').write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding='utf-8')
+          print(json.dumps(manifest, ensure_ascii=False, indent=2))
+          if any(item['outcome'] != 'captured' for item in results):
+              raise SystemExit('One or more sources unavailable; manifest preserves partial evidence')
+      - name: Upload primary-source evidence (original bytes)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: p0-primary-source-evidence
+          path: source-evidence/
+          retention-days: 30
+          if-no-files-found: error

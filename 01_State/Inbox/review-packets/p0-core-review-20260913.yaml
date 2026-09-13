@@ -1,0 +1,36 @@
+packet_id: p0_core_review_20260913
+status: materialized_with_deferred_relation
+source_issue: 146
+delivery_pr: 422
+frozen_packet_commit: 232583f26d4613f725f71eb865afc2704a23f355
+frozen_packet_blob: c508ecb07eb7e83ca52e70d6d419e68f46a156da
+frozen_packet_url: https://github.com/InteropAtlas/InteropAtlas/blob/232583f26d4613f725f71eb865afc2704a23f355/01_State/Inbox/review-packets/p0-core-review-20260913.yaml
+baseline_commit: 08e4365ae5d7cd510d48f3e9d235272ce554a7fa
+candidate_blob: f6866b7ebbb7a539b7df10654883013f9163779f
+executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+objects:
+- {candidate_id: quic_rfc9000, canonical_id: quic_rfc9000, acceptance_event_id: accept-20260913-p0-quic_rfc9000, review_comment_id: 3999644662}
+- {candidate_id: quic_tls_rfc9001, canonical_id: quic_tls_rfc9001, acceptance_event_id: accept-20260913-p0-quic_tls_rfc9001, review_comment_id: 3999644665}
+- {candidate_id: tls13_rfc8446, canonical_id: tls13_rfc8446, acceptance_event_id: accept-20260913-p0-tls13_rfc8446, review_comment_id: 3999644668}
+- {candidate_id: cbor_rfc8949, canonical_id: cbor_rfc8949, acceptance_event_id: accept-20260913-p0-cbor_rfc8949, review_comment_id: 3999644669}
+- {candidate_id: openapi_3.1.1, canonical_id: openapi_3.1.1, acceptance_event_id: accept-20260913-p0-openapi_3.1.1, review_comment_id: 3999644672}
+- {candidate_id: sparql11_query_2013, canonical_id: sparql11_query_2013, acceptance_event_id: accept-20260913-p0-sparql11_query_2013, review_comment_id: 3999644675}
+canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
+relation_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
+deferred_relation_refs: [quic_tls_version]
+source_capture:
+  workflow_run: 34756528326
+  artifact_id: 10317452877
+  archive_sha256: 745a4685cb4d730709f6392fdbae671b75559d91e9164f929576dfb605039e62
+  captured_sources: 9
+  retention_days: 30
+  excerpts_path: 01_State/Inbox/review-packets/p0-primary-excerpts-20260913.yaml
+notes_zh:
+- 这是交付回执，不是第二份正式对象库。完整被审原稿保存在不可变Git提交/原blob中，正式字段只维护在Canonical文件。
+- 第四轮独立Reviewer对六项最小字段分别明确可接纳；三条关系第三轮已通过，第四轮保留结论。
+- Reviewer实际读取的是作者提供的一手短摘录，不是直连官网或全文复核，也未独立验证传输真实性。
+- 作者机械序列化已审字段并补充溯源元数据；未声称这一步另外取得独立审核，相关贡献字段明确pending。
+- 已删减的详细技术解释、专利、认证、实现兼容性仍在本批接纳范围之外；后续扩充需要对应证据与复核。
+- quic_tls_version 暂缓，不能从最低TLS版本约束推导特定RFC文档的规范性引用。
+- RFC9846及OpenAPI后续版本是明确的后续收录事项，不覆盖旧版本身份，不重复新建本批六项候选。
