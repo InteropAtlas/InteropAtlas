@@ -1,13 +1,22 @@
 packet_id: audio_hdr_intake_20260914
-status: pending_independent_semantic_review
+status: reviewed_and_materialized
 source_issue: 146
 baseline_commit: fd80c25a003312d837c2c8014a17fb5e8b4dede7
 executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-reviewer: null
+reviewer: Agent — OpenAI / Codex GitHub Reviewer
+review_summary_zh:
+- AES67：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
+- ARIB STD-B67：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
+- EBU R 128：acceptable_for_ordinary_acceptance；proposed_record获准原样物化。
+- AES3：deferred + identity_risk；不批准拆分、合并、删除或改写候选ID/标识。
+review_urls:
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334438
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334441
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334445
+- https://github.com/InteropAtlas/InteropAtlas/pull/429#discussion_r4000334450
 review_scope_zh:
-- 连续处理四个既有候选：AES67、ARIB STD-B67、EBU R 128、AES3；不新增候选身份。
-- AES67、ARIB STD-B67、EBU R 128拟按固定当前举证版本普通接纳；AES3先做identity_risk诊断，因为候选把AES3工作级总称与多部分文档/不同再确认年份混在一起。
-- Reviewer须核对完整Canonical、原候选blob和包内一手官方来源；CI、代码无发现或名称相似不能代替语义审核。
+- 本包处理四个既有候选：AES67、ARIB STD-B67、EBU R 128、AES3；未新增候选身份。
+- Reviewer核对完整Canonical、原候选blob和包内一手官方来源；审核仅独立解释这些有限材料，未独立验证网络抓取真实性或全文。
 source_evidence:
 - evidence_id: aes67_2023
   url: https://aes.org/publications/standards-store/
