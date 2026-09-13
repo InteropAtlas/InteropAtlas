@@ -111,6 +111,36 @@ jobs:
               assert 0<=intents<=4 and revision['new_names']==0 and not revision['stable_promotion']
           print('Historical actual calls reconciled; no new model calls or efficacy claim in CI.')
           PY
+      - name: Verify semantic reviewer task-understanding gate; no model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          P="03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware"
+          G="$P/semantic-review-task-gate"
+          OUT="$RUNNER_TEMP/naming-control-evidence/model-aware"
+          python "$G/test_gate.py" 2>&1 | tee "$OUT/semantic-task-gate-tests.txt"
+          python -m py_compile "$G/gate.py" "$G/test_gate.py"
+          export P G OUT
+          python - <<'PY'
+          import importlib.util,json,os,pathlib
+          g=pathlib.Path(os.environ['G']);p=pathlib.Path(os.environ['P']);out=pathlib.Path(os.environ['OUT'])
+          spec=importlib.util.spec_from_file_location('task_gate',g/'gate.py');m=importlib.util.module_from_spec(spec);spec.loader.exec_module(m)
+          fixtures=json.loads((g/'fixtures.json').read_text())
+          recovery=json.loads((p/'semantic-review-pilot-003/results/recovery-run-34737301186/recovery.json').read_text())
+          synthetic=[]
+          for case in fixtures['cases']:
+              result=m.evaluate(case['candidate'],case['review']);synthetic.append({'id':case['id'],'expected':case['expected'],'actual':result['task_understanding'],'findings':result['findings']})
+              assert result['task_understanding']==case['expected']
+          historical=[]
+          for wrapped in recovery['records']:
+              record=wrapped['record'];result=m.evaluate(record['name'],record['review'])
+              historical.append({'id':record['id'],'task_understanding':result['task_understanding'],'eligible_for_semantic_evidence':result['eligible_for_semantic_evidence'],'findings':result['findings']})
+          assert [v['task_understanding'] for v in historical]==['block','block','block','block','review','block']
+          assert not any(v['eligible_for_semantic_evidence'] for v in historical)
+          summary={'id':'SEM-408-TASK-GATE-001','kind':'deterministic_task_understanding_gate_not_semantic_quality_judge','synthetic_cases':synthetic,'historical_sem003':historical,'historical_eligible_count':0,'new_model_calls':0,'new_names':0,'quality_ground_truth':None,'limitations':['same-author deterministic rules and fixtures','pass means task-understanding eligibility only','does not establish candidate quality, reviewer semantic accuracy, or cross-model superiority']}
+          (out/'semantic-task-gate-results.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2)+'\n')
+          print(json.dumps(summary,ensure_ascii=False,indent=2))
+          PY
       - name: Verify local transport with explicit mock server; no LLM calls
         shell: bash
         run: |
