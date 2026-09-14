@@ -1,0 +1,122 @@
+packet_id: sdi_core_intake_20260914
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 83ebeb3417f7cc533f5991a631a86d5494b1d9bf
+executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
+reviewer: null
+review_scope_zh:
+- 连续处理四个既有专业媒体候选：SMPTE ST 292-1、ST 424、ST 2082-1、ST 2022-6；不新建候选身份。
+- 四项均固定为各自独立标准文档，不把 SDI 家族、映射标准、ST 2110 或实现产品合并为同一主体。
+- 作者仅使用 SMPTE 官方公开出版元数据/可公开读取文本核对标题、版次和最小范围；不复制受版权保护正文。
+- Reviewer 需核对完整 Canonical、原候选 blob 和本包有限一手材料，对每项给出 acceptable_for_ordinary_acceptance / deferred / rejected，并明确整个 proposed_record 是否允许原样复制。
+- CI、代码无发现或点赞不构成语义接纳；关系、实现兼容性、行业普及度、替代/取代关系均不在本轮授权范围。
+source_evidence:
+- evidence_id: st292_1_2018
+  url: https://pub.smpte.org/pub/st292-1/st292-1-2018.pdf
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: title and interface data format
+  observation_zh: SMPTE 官方公开出版物标识为 SMPTE ST 292-1:2018；文本定义 1.5 Gb/s 级串行数字接口的数据格式与接口要求。本轮只据此建立固定标准对象，不外推具体应用覆盖率。
+- evidence_id: st424_2012
+  url: https://pub.smpte.org/pub/st424/st0424-2012.pdf
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: title and Scope
+  observation_zh: SMPTE ST 424:2012 的 Scope 明确规定总有效载荷 2.970 Gb/s 或 2.970/1.001 Gb/s 的比特串行数据结构及同轴电缆接口，并规定接口电气/物理特性。
+- evidence_id: st2082_1_2023
+  url: https://pub.smpte.org/latest/st2082-1/st2082-1-2023.pdf
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: title and publication identity
+  observation_zh: SMPTE 官方当前公开出版物为 SMPTE ST 2082-1:2023，标题明确为 12 Gb/s Signal/Data Serial Interface — Electrical；本轮不把 ST 2082 其他分册合并进来。
+- evidence_id: st2022_6_2012
+  url: https://pub.smpte.org/latest/st2022-6/st2022-6-2012.pdf
+  accessed: '2026-09-14'
+  observed_via: author_web_retrieval
+  locator: title and normative transport sections
+  observation_zh: SMPTE 官方公开出版物为 ST 2022-6:2012，定义高比特率媒体信号经 IP 网络传输的标准机制；本轮不声称其已被 ST 2110 取代或等价。
+objects:
+- round_id: L
+  candidate_id: smpte_st292
+  candidate_path: 01_State/Inbox/candidates/smpte_st292.yaml
+  candidate_blob: ce2e4690b1975bf9b66954ab69aeb314c95e5419
+  evidence_ids: [st292_1_2018]
+  proposed_record:
+    id: smpte_st292
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 292-1 1.5 Gb/s 串行数字接口
+    name_en: SMPTE ST 292-1 — 1.5 Gb/s Signal/Data Serial Interface
+    description_zh: 定义 1.5 Gb/s 级信号/数据串行数字接口的数据格式及接口要求。
+    description_en: Defines data formatting and interface requirements for the 1.5 Gb/s signal/data serial digital interface.
+    version: '2018'
+    external_identifiers: [{namespace: smpte, value: st.292-1}]
+    official_url: https://pub.smpte.org/latest/st292-1/
+    versions: [{version: '2018', status: standard, url: 'https://pub.smpte.org/pub/st292-1/st292-1-2018.pdf'}]
+    scope_notes_zh: 仅表示 ST 292-1 固定标准主体；不把其他 SDI 速率标准、源映射标准或具体设备实现合并为同一对象。
+    scope_notes_en: Represents the ST 292-1 standard only; other SDI-rate standards, source-mapping standards and device implementations remain distinct subjects.
+    sources:
+    - {url: 'https://pub.smpte.org/pub/st292-1/st292-1-2018.pdf', title: 'SMPTE ST 292-1:2018', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: smpte_st424
+  candidate_path: 01_State/Inbox/candidates/smpte_st424.yaml
+  candidate_blob: 43405cdedb8329bd41f2061f09af3c9f5849d8a2
+  evidence_ids: [st424_2012]
+  proposed_record:
+    id: smpte_st424
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 424 3 Gb/s 串行数字接口
+    name_en: SMPTE ST 424 — 3 Gb/s Signal/Data Serial Interface
+    description_zh: 定义总有效载荷 2.970 Gb/s 或 2.970/1.001 Gb/s 的比特串行数据结构和同轴电缆接口及其电气、物理特性。
+    description_en: Defines the bit-serial data structure and coaxial interface for signals with a total payload of 2.970 Gb/s or 2.970/1.001 Gb/s, including electrical and physical characteristics.
+    version: '2012'
+    external_identifiers: [{namespace: smpte, value: st.424}]
+    official_url: https://pub.smpte.org/latest/st424/
+    versions: [{version: '2012', status: standard, url: 'https://pub.smpte.org/pub/st424/st0424-2012.pdf'}]
+    scope_notes_zh: 仅表示 ST 424 标准主体；不把 ST 425 映射标准、其他 SDI 速率标准或实现合并进来。
+    scope_notes_en: Represents ST 424 only; ST 425 mapping standards, other SDI-rate standards and implementations remain distinct subjects.
+    sources:
+    - {url: 'https://pub.smpte.org/pub/st424/st0424-2012.pdf', title: 'SMPTE ST 424:2012', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: smpte_st2082
+  candidate_path: 01_State/Inbox/candidates/smpte_st2082.yaml
+  candidate_blob: dac6f7017896913271cd9ce1640e8652185fb270
+  evidence_ids: [st2082_1_2023]
+  proposed_record:
+    id: smpte_st2082
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 2082-1 12 Gb/s 串行数字接口电气规范
+    name_en: SMPTE ST 2082-1 — 12 Gb/s Signal/Data Serial Interface — Electrical
+    description_zh: 定义 12G-SDI 同轴电缆接口的电气与物理特性。
+    description_en: Defines electrical and physical characteristics of the 12G-SDI coaxial cable interface.
+    version: '2023'
+    external_identifiers: [{namespace: smpte, value: st.2082-1}]
+    official_url: https://pub.smpte.org/latest/st2082-1/
+    versions: [{version: '2023', status: standard, url: 'https://pub.smpte.org/latest/st2082-1/st2082-1-2023.pdf'}]
+    scope_notes_zh: 仅表示 ST 2082-1；ST 2082 其他分册、源图像映射规范及设备实现保持独立。
+    scope_notes_en: Represents ST 2082-1 only; other ST 2082 parts, source-image mapping specifications and device implementations remain distinct.
+    sources:
+    - {url: 'https://pub.smpte.org/latest/st2082-1/st2082-1-2023.pdf', title: 'SMPTE ST 2082-1:2023', language: en, accessed: '2026-09-14'}
+- round_id: L
+  candidate_id: smpte_st2022_6
+  candidate_path: 01_State/Inbox/candidates/smpte_st2022_6.yaml
+  candidate_blob: d7fe3d28af5a97219b9f0e1ebc440078537641e9
+  evidence_ids: [st2022_6_2012]
+  proposed_record:
+    id: smpte_st2022_6
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 2022-6 高比特率媒体信号 IP 网络传输
+    name_en: SMPTE ST 2022-6 — Transport of High Bit Rate Media Signals over IP Networks
+    description_zh: 定义高比特率媒体信号通过 IP 网络传输的封装与传输机制。
+    description_en: Defines mechanisms for transporting high-bit-rate media signals over IP networks.
+    version: '2012'
+    external_identifiers: [{namespace: smpte, value: st.2022-6}]
+    official_url: https://pub.smpte.org/latest/st2022-6/
+    versions: [{version: '2012', status: standard, url: 'https://pub.smpte.org/latest/st2022-6/st2022-6-2012.pdf'}]
+    scope_notes_zh: 仅表示 ST 2022-6 固定标准；不在本轮断言其与 ST 2110 的替代、等价或部署关系。
+    scope_notes_en: Represents the fixed ST 2022-6 standard only; no replacement, equivalence or deployment relationship with ST 2110 is asserted here.
+    sources:
+    - {url: 'https://pub.smpte.org/latest/st2022-6/st2022-6-2012.pdf', title: 'SMPTE ST 2022-6:2012', language: en, accessed: '2026-09-14'}
