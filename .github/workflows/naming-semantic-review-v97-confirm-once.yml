@@ -1,0 +1,110 @@
+name: SEM-408-005 two-case reviewer task-understanding confirmation
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-semantic-review-v97-confirm-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: sem-408-005-two-case-confirmation
+  cancel-in-progress: false
+jobs:
+  semantic-confirmation:
+    if: github.repository == 'InteropAtlas/InteropAtlas' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+      LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify frozen two-case boundary before inference
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util,pathlib,json
+          p=pathlib.Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware')
+          def load(n,path):
+              s=importlib.util.spec_from_file_location(n,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+          four=load('four',p/'semantic-review-pilot-004/run.py');five=load('five',p/'semantic-review-pilot-005/run.py')
+          brief,rows,h=five.source_material()
+          assert rows==[{'id':'C002','name':'Diffly'},{'id':'C006','name':'Sublyte'}]
+          assert five.SYSTEM==four.SYSTEM
+          for row in rows:assert five.four.task_text(brief,row)==four.task_text(brief,row)
+          assert five.base.MODEL_REPO==four.base.MODEL_REPO and five.base.MODEL_FILE==four.base.MODEL_FILE
+          assert five.base.SEED==four.base.SEED and five.base.MAX_OUTPUT==four.base.MAX_OUTPUT
+          print(json.dumps({'boundary':'ok','candidates':rows,'source_sha256':h,'max_requests':2,'stop_on_first_nonpass':True,'new_names':0,'paid_api_calls':0}))
+          PY
+      - name: Compile pinned runtime and prepare same Gemma reviewer
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"; mkdir -p "$R"
+          curl --fail --location --max-time 120 "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/$LLAMA_REV" -o "$R/llama.tar.gz"
+          tar -xzf "$R/llama.tar.gz" -C "$R"
+          cmake -S "$R/llama.cpp-$LLAMA_REV" -B "$R/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DBUILD_SHARED_LIBS=OFF
+          cmake --build "$R/build" --target llama-server -j 4
+          python "$P/semantic-review-pilot-005/run.py" prepare --output "$O/model" --runtime "$R"
+      - name: Execute independent reviews with stop-on-first-nonpass
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"
+          "$R/build/bin/llama-server" -m "$R/model.gguf" --host 127.0.0.1 --port 8086 -c 8192 -t 4 -tb 4 -np 1 -b 512 -ub 128 --alias SEM-408-005-Gemma4B > "$O/model/server.log" 2>&1 &
+          PID=$!; trap 'kill "$PID" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import urllib.request,time
+          for _ in range(90):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8086/health',timeout=2) as r:
+                      if r.status==200:break
+              except Exception:time.sleep(1)
+          else:raise RuntimeError('model_server_not_ready')
+          PY
+          python -u "$P/semantic-review-pilot-005/run.py" execute --output "$O/model"
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-evidence/model';s=json.loads((root/'summary.json').read_text())
+          assert s['id']=='SEM-408-005' and 1<=s['requests_dispatched']<=2
+          assert s['new_names']==0 and s['paid_api_calls']==0 and not s['automatic_expansion'] and not s['semantic_quality_validated']
+          if s['requests_dispatched']==2:assert all(v.get('task_gate',{}).get('task_understanding')=='pass' for v in s['results']) and not s['stopped_early']
+          if s['requests_dispatched']==1:assert s['stopped_early'] and s['results'][0].get('task_gate',{}).get('task_understanding')!='pass'
+          print(json.dumps({'requests_dispatched':s['requests_dispatched'],'stopped_early':s['stopped_early'],'task_gates':[v.get('task_gate') for v in s['results']]},ensure_ascii=False))
+          PY
+      - name: Preserve confirmation evidence artifact before branch publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sem408005-two-case-confirmation-${{ github.run_id }}
+          path: ${{ runner.temp }}/sem408-evidence/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish exact bounded evidence if branch is unchanged
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-evidence/model';repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';source=os.environ['GITHUB_SHA']
+          home='03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-review-pilot-005/results'
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=(json.dumps(body,ensure_ascii=False).encode() if body is not None else None),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch changed after artifact preservation; do not overwrite'
+          files=[];total=0
+          for path in sorted(root.rglob('*')):
+              if not path.is_file():continue
+              raw=path.read_bytes();total+=len(raw);assert total<5_000_000
+              files.append({'path':home+'/'+str(path.relative_to(root)),'mode':'100644','type':'blob','content':raw.decode('utf-8')})
+          tree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+current)['tree']['sha'],'tree':files})['sha']
+          commit=api('/git/commits','POST',{'message':'evidence(#408): preserve SEM-408-005 task-understanding confirmation\n\nExisting candidates only; stop on first nonpass; no new names, paid inference, semantic-truth or promotion claim.','tree':tree,'parents':[current]})['sha']
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          print(json.dumps({'published_commit':commit,'source_commit':source,'files':len(files),'bytes':total,'new_names':0,'paid_api_calls':0}))
+          PY
