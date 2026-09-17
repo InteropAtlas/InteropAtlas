@@ -1,0 +1,49 @@
+name: Naming semantic validation contract
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths:
+      - 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-validation-contract/**
+      - 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      - .github/workflows/naming-semantic-contract.yml
+  pull_request:
+    paths:
+      - 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-validation-contract/**
+      - 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - name: Validate role boundary and frozen packet without model calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          P=03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-validation-contract
+          STATE=03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+          python "$P/test_validate.py"
+          python "$P/test_packet.py"
+          python "$P/validate.py" "$P/role-boundary.json" --output "$RUNNER_TEMP/semantic-role-contract.json"
+          python -m py_compile "$P/validate.py" "$P/test_validate.py" "$P/test_packet.py"
+          python -m pip install PyYAML==6.0.2
+          export P STATE
+          python - <<'PY'
+          import json,os,pathlib,yaml
+          p=pathlib.Path(os.environ['P']);state=yaml.safe_load(pathlib.Path(os.environ['STATE']).read_text());contract=json.loads((p/'role-boundary.json').read_text());packet=json.loads((p/'reference-packet-001.json').read_text())
+          assert state['task']['snapshot_version']>=98 and state['task']['skill_version']=='0.4.0'
+          assert state['process_review']['generation_paused']
+          rev=state['semantic_task_gate_revision'];assert rev['current_inference_policy']['new_reviewer_calls']=='paused_pending_semantic_validation_contract'
+          assert rev['method_comparison_effect']['simple_vs_redesign_winner']=='not_established'
+          stable=state['selection_stability_revision'];assert len(stable['same_seed_order_changed_ids'])==4 and stable['quality_ground_truth'] is None
+          assert contract['roles']['final_quality_selector']['status']=='not_validated_for_autonomous_use'
+          assert contract['roles']['resource_triage']['unstable_decision_policy']=='route_to_hold'
+          assert contract['global_rules']['new_reviewer_inference_authorized'] is False
+          assert contract['global_rules']['ia_generation_authorized'] is False and contract['global_rules']['paid_calls_authorized'] is False
+          assert contract['method_comparison']['simple_vs_redesign_winner']=='not_established'
+          assert packet['status']=='frozen_input_no_reference_judgments_yet' and packet['source']['new_names']==0
+          assert packet['reference_status']['model_calls_in_packet_creation']==0 and not packet['reference_status']['independent_reference_obtained']
+          print(json.dumps({'kind':'semantic_contract_boundary_not_quality_proof','snapshot':state['task']['snapshot_version'],'role_count':len(contract['roles']),'levels':list(contract['semantic_validation_levels']),'packet_cases':len(packet['cases']),'new_model_calls':0,'new_names':0,'winner':'not_established'},ensure_ascii=False))
+          PY

@@ -1,0 +1,525 @@
+﻿2026-09-13T06:20:37.3780096Z Current runner version: '2.337.0'
+2026-09-13T06:20:37.3804874Z ##[group]Runner Image Provisioner
+2026-09-13T06:20:37.3805763Z Hosted Compute Agent
+2026-09-13T06:20:37.3806367Z Version: 20260828.587
+2026-09-13T06:20:37.3807114Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-13T06:20:37.3807874Z Build Date: 2026-08-28T16:44:25Z
+2026-09-13T06:20:37.3808590Z Worker ID: {d58c84b7-570d-48a5-a4bc-8e6e76193894}
+2026-09-13T06:20:37.3809338Z Azure Region: westus2
+2026-09-13T06:20:37.3809913Z ##[endgroup]
+2026-09-13T06:20:37.3811537Z ##[group]Operating System
+2026-09-13T06:20:37.3812444Z Ubuntu
+2026-09-13T06:20:37.3813350Z 24.04.5
+2026-09-13T06:20:37.3813980Z LTS
+2026-09-13T06:20:37.3814499Z ##[endgroup]
+2026-09-13T06:20:37.3815133Z ##[group]Runner Image
+2026-09-13T06:20:37.3815780Z Image: ubuntu-24.04
+2026-09-13T06:20:37.3816328Z Version: 20260907.300.1
+2026-09-13T06:20:37.3817639Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-13T06:20:37.3819290Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-13T06:20:37.3820317Z ##[endgroup]
+2026-09-13T06:20:37.3821434Z ##[group]GITHUB_TOKEN Permissions
+2026-09-13T06:20:37.3823795Z Contents: write
+2026-09-13T06:20:37.3824409Z Metadata: read
+2026-09-13T06:20:37.3825108Z ##[endgroup]
+2026-09-13T06:20:37.3827146Z Secret source: Actions
+2026-09-13T06:20:37.3828196Z Cache mode: write
+2026-09-13T06:20:37.3828946Z Prepare workflow directory
+2026-09-13T06:20:37.4248397Z Prepare all required actions
+2026-09-13T06:20:37.4321286Z Getting action download info
+2026-09-13T06:20:37.7916481Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-13T06:20:38.0055612Z Complete job name: semantic-review
+2026-09-13T06:20:38.0834186Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T06:20:38.0843399Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-13T06:20:38.0844331Z with:
+2026-09-13T06:20:38.0844813Z   fetch-depth: 0
+2026-09-13T06:20:38.0845285Z   persist-credentials: false
+2026-09-13T06:20:38.0845829Z   repository: InteropAtlas/InteropAtlas
+2026-09-13T06:20:38.0849593Z   token: ***
+2026-09-13T06:20:38.0850028Z   ssh-strict: true
+2026-09-13T06:20:38.0850468Z   ssh-user: git
+2026-09-13T06:20:38.0850892Z   clean: true
+2026-09-13T06:20:38.0851337Z   sparse-checkout-cone-mode: true
+2026-09-13T06:20:38.0851867Z   fetch-tags: false
+2026-09-13T06:20:38.0852481Z   show-progress: true
+2026-09-13T06:20:38.0853077Z   lfs: false
+2026-09-13T06:20:38.0853494Z   submodules: false
+2026-09-13T06:20:38.0853948Z   set-safe-directory: true
+2026-09-13T06:20:38.0854455Z   allow-unsafe-pr-checkout: false
+2026-09-13T06:20:38.0855260Z env:
+2026-09-13T06:20:38.0855863Z   P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+2026-09-13T06:20:38.0856653Z   LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+2026-09-13T06:20:38.0857252Z ##[endgroup]
+2026-09-13T06:20:38.1871857Z Syncing repository: InteropAtlas/InteropAtlas
+2026-09-13T06:20:38.1875076Z ##[group]Getting Git version info
+2026-09-13T06:20:38.1876406Z Working directory is '/home/runner/work/InteropAtlas/InteropAtlas'
+2026-09-13T06:20:38.1878126Z [command]/usr/bin/git version
+2026-09-13T06:20:38.1960765Z git version 2.55.0
+2026-09-13T06:20:38.1995054Z ##[endgroup]
+2026-09-13T06:20:38.2009574Z Temporarily overriding HOME='/home/runner/work/_temp/4abdf270-7f37-4849-a5cd-d30cf81d6ccc' before making global git config changes
+2026-09-13T06:20:38.2013950Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-13T06:20:38.2016286Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/InteropAtlas/InteropAtlas
+2026-09-13T06:20:38.2068301Z Deleting the contents of '/home/runner/work/InteropAtlas/InteropAtlas'
+2026-09-13T06:20:38.2072994Z ##[group]Initializing the repository
+2026-09-13T06:20:38.2077005Z [command]/usr/bin/git init /home/runner/work/InteropAtlas/InteropAtlas
+2026-09-13T06:20:38.2215590Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-13T06:20:38.2217575Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-13T06:20:38.2219319Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-13T06:20:38.2221318Z hint: call:
+2026-09-13T06:20:38.2222529Z hint:
+2026-09-13T06:20:38.2223690Z hint: 	git config --global init.defaultBranch <name>
+2026-09-13T06:20:38.2224992Z hint:
+2026-09-13T06:20:38.2226152Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-13T06:20:38.2227837Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-13T06:20:38.2229143Z hint:
+2026-09-13T06:20:38.2229854Z hint: 	git branch -m <name>
+2026-09-13T06:20:38.2230735Z hint:
+2026-09-13T06:20:38.2231908Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-13T06:20:38.2234187Z Initialized empty Git repository in /home/runner/work/InteropAtlas/InteropAtlas/.git/
+2026-09-13T06:20:38.2238171Z [command]/usr/bin/git remote add origin https://github.com/InteropAtlas/InteropAtlas
+2026-09-13T06:20:38.2291543Z ##[endgroup]
+2026-09-13T06:20:38.2293169Z ##[group]Disabling automatic garbage collection
+2026-09-13T06:20:38.2296945Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-13T06:20:38.2330062Z ##[endgroup]
+2026-09-13T06:20:38.2331714Z ##[group]Setting up auth
+2026-09-13T06:20:38.2339875Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-13T06:20:38.2378071Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-13T06:20:38.2809580Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-13T06:20:38.2849006Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-13T06:20:38.3074229Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-13T06:20:38.3110186Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-13T06:20:38.3336440Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-13T06:20:38.3375654Z ##[endgroup]
+2026-09-13T06:20:38.3376644Z ##[group]Fetching the repository
+2026-09-13T06:20:38.3385681Z [command]/usr/bin/git -c protocol.version=2 fetch --prune --no-recurse-submodules origin +refs/heads/*:refs/remotes/origin/* +refs/tags/*:refs/tags/*
+2026-09-13T06:20:39.0656914Z From https://github.com/InteropAtlas/InteropAtlas
+2026-09-13T06:20:39.0659312Z  * [new branch]      feat/adaptive-naming-skill-v0.1 -> origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.0661204Z  * [new branch]      main       -> origin/main
+2026-09-13T06:20:39.0663122Z  * [new tag]         archive/maintenance-287-2026-09-11 -> archive/maintenance-287-2026-09-11
+2026-09-13T06:20:39.0665362Z  * [new tag]         archive/maintenance-287-2026-09-11-result -> archive/maintenance-287-2026-09-11-result
+2026-09-13T06:20:39.0673336Z [command]/usr/bin/git branch --list --remote origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.0702741Z   origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.0711979Z [command]/usr/bin/git rev-parse refs/remotes/origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.0737820Z 00cab2cc269c8398a3c692b8fc0393095b638ec7
+2026-09-13T06:20:39.0749799Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules origin +3b2144413d938bde7cfe1772ec60efd635365e2d:refs/remotes/origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.0817597Z From https://github.com/InteropAtlas/InteropAtlas
+2026-09-13T06:20:39.0819404Z  + 00cab2c...3b21444 3b2144413d938bde7cfe1772ec60efd635365e2d -> origin/feat/adaptive-naming-skill-v0.1  (forced update)
+2026-09-13T06:20:39.0823105Z ##[endgroup]
+2026-09-13T06:20:39.0824120Z ##[group]Determining the checkout info
+2026-09-13T06:20:39.0825388Z ##[endgroup]
+2026-09-13T06:20:39.0828932Z [command]/usr/bin/git sparse-checkout disable
+2026-09-13T06:20:39.0879622Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-13T06:20:39.0909290Z ##[group]Checking out the ref
+2026-09-13T06:20:39.0914111Z [command]/usr/bin/git checkout --progress --force -B feat/adaptive-naming-skill-v0.1 refs/remotes/origin/feat/adaptive-naming-skill-v0.1
+2026-09-13T06:20:39.1496297Z Switched to a new branch 'feat/adaptive-naming-skill-v0.1'
+2026-09-13T06:20:39.1503043Z branch 'feat/adaptive-naming-skill-v0.1' set up to track 'origin/feat/adaptive-naming-skill-v0.1'.
+2026-09-13T06:20:39.1510839Z ##[endgroup]
+2026-09-13T06:20:39.1558131Z [command]/usr/bin/git log -1 --format=%H
+2026-09-13T06:20:39.1586403Z 3b2144413d938bde7cfe1772ec60efd635365e2d
+2026-09-13T06:20:39.1596187Z ##[group]Removing auth
+2026-09-13T06:20:39.1599638Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-13T06:20:39.1633140Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-13T06:20:39.1860888Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-13T06:20:39.1893321Z http.https://github.com/.extraheader
+2026-09-13T06:20:39.1903189Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-13T06:20:39.1942545Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-13T06:20:39.2188445Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-13T06:20:39.2225023Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-13T06:20:39.2442970Z ##[endgroup]
+2026-09-13T06:20:39.2683138Z ##[group]Run set -euo pipefail
+2026-09-13T06:20:39.2684614Z [36;1mset -euo pipefail[0m
+2026-09-13T06:20:39.2685836Z [36;1mpython - <<'PY'[0m
+2026-09-13T06:20:39.2687086Z [36;1mimport importlib.util,pathlib,json[0m
+2026-09-13T06:20:39.2689278Z [36;1mp=pathlib.Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware')[0m
+2026-09-13T06:20:39.2691414Z [36;1mdef load(n,path):[0m
+2026-09-13T06:20:39.2694249Z [36;1m    s=importlib.util.spec_from_file_location(n,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m[0m
+2026-09-13T06:20:39.2698733Z [36;1mone=load('one',p/'semantic-review-pilot/run.py');two=load('two',p/'semantic-review-pilot-002/run.py');three=load('three',p/'semantic-review-pilot-003/run.py')[0m
+2026-09-13T06:20:39.2701919Z [36;1mbrief,rows,h=one.source_material()[0m
+2026-09-13T06:20:39.2703910Z [36;1massert len(rows)==6 and rows[0]=={'id':'C001','name':'Scribble'}[0m
+2026-09-13T06:20:39.2705734Z [36;1massert three.iface.SCHEMA==two.SCHEMA[0m
+2026-09-13T06:20:39.2708260Z [36;1massert three.base.MODEL_REPO==one.MODEL_REPO and three.base.SEED==one.SEED and three.base.MAX_OUTPUT==one.MAX_OUTPUT[0m
+2026-09-13T06:20:39.2710999Z [36;1mprompt=three.task_text(brief,rows[0])[0m
+2026-09-13T06:20:39.2713974Z [36;1mfor forbidden in ('grounded reason','3 concise observations','output_contract','Qwen','priority_ids','creator_intent'):[0m
+2026-09-13T06:20:39.2716806Z [36;1m    assert forbidden not in prompt[0m
+2026-09-13T06:20:39.2718175Z [36;1massert rows[0]['name'] in prompt[0m
+2026-09-13T06:20:39.2720029Z [36;1mprint(json.dumps({'boundary':'ok','candidates':len(rows),'source_sha256':h}))[0m
+2026-09-13T06:20:39.2721861Z [36;1mPY[0m
+2026-09-13T06:20:39.2764822Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-13T06:20:39.2766373Z env:
+2026-09-13T06:20:39.2767684Z   P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+2026-09-13T06:20:39.2769556Z   LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+2026-09-13T06:20:39.2770953Z ##[endgroup]
+2026-09-13T06:20:39.3502089Z {"boundary": "ok", "candidates": 6, "source_sha256": "5ce04a228551fb3a3586e07dcad610e25ed0ae20e776a18fe9d1ddf6d5be1d75"}
+2026-09-13T06:20:39.3655341Z ##[group]Run set -euo pipefail
+2026-09-13T06:20:39.3656559Z [36;1mset -euo pipefail[0m
+2026-09-13T06:20:39.3658240Z [36;1mR="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"; mkdir -p "$R"[0m
+2026-09-13T06:20:39.3661516Z [36;1mcurl --fail --location --max-time 120 "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/$LLAMA_REV" -o "$R/llama.tar.gz"[0m
+2026-09-13T06:20:39.3664568Z [36;1mtar -xzf "$R/llama.tar.gz" -C "$R"[0m
+2026-09-13T06:20:39.3667374Z [36;1mcmake -S "$R/llama.cpp-$LLAMA_REV" -B "$R/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DBUILD_SHARED_LIBS=OFF[0m
+2026-09-13T06:20:39.3670374Z [36;1mcmake --build "$R/build" --target llama-server -j 4[0m
+2026-09-13T06:20:39.3672821Z [36;1mpython "$P/semantic-review-pilot-003/run.py" prepare --output "$O/model" --runtime "$R"[0m
+2026-09-13T06:20:39.3711876Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-13T06:20:39.3713542Z env:
+2026-09-13T06:20:39.3714824Z   P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+2026-09-13T06:20:39.3716596Z   LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+2026-09-13T06:20:39.3717902Z ##[endgroup]
+2026-09-13T06:20:39.3877997Z   % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+2026-09-13T06:20:39.3880537Z                                  Dload  Upload   Total   Spent    Left  Speed
+2026-09-13T06:20:39.3881617Z 
+2026-09-13T06:20:39.5918148Z   0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0
+2026-09-13T06:20:40.5460431Z 100 13105    0 13105    0     0  64214      0 --:--:-- --:--:-- --:--:-- 64240
+2026-09-13T06:20:41.5506013Z 100 6165k    0 6165k    0     0  5322k      0 --:--:--  0:00:01 --:--:-- 5319k
+2026-09-13T06:20:42.5722592Z 100 13.7M    0 13.7M    0     0  6510k      0 --:--:--  0:00:02 --:--:-- 6509k
+2026-09-13T06:20:43.5727591Z 100 21.7M    0 21.7M    0     0  6994k      0 --:--:--  0:00:03 --:--:-- 6992k
+2026-09-13T06:20:44.2716708Z 100 28.7M    0 28.7M    0     0  7035k      0 --:--:--  0:00:04 --:--:-- 7034k
+2026-09-13T06:20:44.2717706Z 100 35.7M    0 35.7M    0     0  7485k      0 --:--:--  0:00:04 --:--:-- 7810k
+2026-09-13T06:20:45.4798078Z -- The C compiler identification is GNU 13.3.0
+2026-09-13T06:20:45.6798756Z -- The CXX compiler identification is GNU 13.3.0
+2026-09-13T06:20:45.6967894Z -- Detecting C compiler ABI info
+2026-09-13T06:20:45.7837731Z -- Detecting C compiler ABI info - done
+2026-09-13T06:20:45.8010300Z -- Check for working C compiler: /usr/bin/cc - skipped
+2026-09-13T06:20:45.8017661Z -- Detecting C compile features
+2026-09-13T06:20:45.8025944Z -- Detecting C compile features - done
+2026-09-13T06:20:45.8153176Z -- Detecting CXX compiler ABI info
+2026-09-13T06:20:45.8776594Z -- Detecting CXX compiler ABI info - done
+2026-09-13T06:20:45.8980384Z -- Check for working CXX compiler: /usr/bin/c++ - skipped
+2026-09-13T06:20:45.8985008Z -- Detecting CXX compile features
+2026-09-13T06:20:45.8995452Z -- Detecting CXX compile features - done
+2026-09-13T06:20:45.9055781Z CMAKE_BUILD_TYPE=Release
+2026-09-13T06:20:45.9056272Z -- llama.cpp version: 0.4.0-dev
+2026-09-13T06:20:45.9093619Z -- Found Git: /usr/bin/git (found version "2.55.0")
+2026-09-13T06:20:45.9163191Z fatal: not a git repository (or any of the parent directories): .git
+2026-09-13T06:20:45.9178102Z fatal: not a git repository (or any of the parent directories): .git
+2026-09-13T06:20:45.9257331Z -- The ASM compiler identification is GNU
+2026-09-13T06:20:45.9277630Z -- Found assembler: /usr/bin/cc
+2026-09-13T06:20:46.0176284Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+2026-09-13T06:20:46.0978992Z -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+2026-09-13T06:20:46.0989619Z -- Found Threads: TRUE
+2026-09-13T06:20:46.1078594Z -- Warning: ccache not found - consider installing it for faster compilation or disable this warning with GGML_CCACHE=OFF
+2026-09-13T06:20:46.1244225Z -- CMAKE_SYSTEM_PROCESSOR: x86_64
+2026-09-13T06:20:46.1244921Z -- GGML_SYSTEM_ARCH: x86
+2026-09-13T06:20:46.3404259Z -- Found OpenMP_C: -fopenmp (found version "4.5")
+2026-09-13T06:20:46.4138531Z -- Found OpenMP_CXX: -fopenmp (found version "4.5")
+2026-09-13T06:20:46.4142863Z -- Found OpenMP: TRUE (found version "4.5")
+2026-09-13T06:20:46.4166483Z -- Including CPU backend
+2026-09-13T06:20:46.4170201Z -- x86 detected
+2026-09-13T06:20:46.4170923Z -- Adding CPU backend variant ggml-cpu: -march=native 
+2026-09-13T06:20:46.4236531Z -- ggml version: 0.23.0
+2026-09-13T06:20:46.4236997Z -- ggml commit:  unknown
+2026-09-13T06:20:46.4832827Z -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.13")
+2026-09-13T06:20:46.4837695Z -- Performing Test OPENSSL_VERSION_SUPPORTED
+2026-09-13T06:20:46.5400468Z -- Performing Test OPENSSL_VERSION_SUPPORTED - Success
+2026-09-13T06:20:46.5401270Z -- OpenSSL found: 3.0.13
+2026-09-13T06:20:46.5428195Z CMake Warning at common/CMakeLists.txt:33 (message):
+2026-09-13T06:20:46.5429001Z   Git repository not found; to enable automatic generation of build info,
+2026-09-13T06:20:46.5429585Z   make sure Git is installed and the project is a Git repository.
+2026-09-13T06:20:46.5429872Z 
+2026-09-13T06:20:46.5429876Z 
+2026-09-13T06:20:46.5990999Z -- Generating embedded license file for target: llama-app
+2026-09-13T06:20:46.6069743Z -- Configuring done (1.4s)
+2026-09-13T06:20:46.9531408Z -- Generating done (0.3s)
+2026-09-13T06:20:46.9537833Z -- Build files have been written to: /home/runner/work/_temp/sem408-runtime/build
+2026-09-13T06:20:47.0089763Z [  2%] Building CXX object vendor/hash/CMakeFiles/vendor-hash.dir/hash.cpp.o
+2026-09-13T06:20:47.0096820Z [  2%] Building CXX object vendor/cpp-httplib/CMakeFiles/cpp-httplib.dir/httplib.cpp.o
+2026-09-13T06:20:47.0098272Z [  2%] Building CXX object common/CMakeFiles/llama-common-base.dir/build-info.cpp.o
+2026-09-13T06:20:47.0136965Z [  2%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml.c.o
+2026-09-13T06:20:47.3944994Z [  2%] Building C object vendor/hash/CMakeFiles/vendor-hash.dir/xxhash/xxhash.c.o
+2026-09-13T06:20:47.4284883Z [  2%] Linking CXX static library libllama-common-base.a
+2026-09-13T06:20:48.2736271Z [  2%] Built target llama-common-base
+2026-09-13T06:20:48.2874769Z [  2%] Provisioning UI assets
+2026-09-13T06:20:48.2935059Z -- UI: downloading from b0: https://huggingface.co/buckets/ggml-org/llama-ui/resolve/b0/dist.tar.gz
+2026-09-13T06:20:48.4405382Z [  2%] Building CXX object vendor/hash/CMakeFiles/vendor-hash.dir/sha1/sha1.c.o
+2026-09-13T06:20:48.4583459Z -- UI: download dist.tar.gz from b0 failed: "HTTP response code said error"
+2026-09-13T06:20:48.4592682Z -- UI: downloading from latest: https://huggingface.co/buckets/ggml-org/llama-ui/resolve/latest/dist.tar.gz
+2026-09-13T06:20:48.6199105Z [  2%] Building C object vendor/hash/CMakeFiles/vendor-hash.dir/sha256/sha256.c.o
+2026-09-13T06:20:48.7731013Z [  4%] Linking CXX static library libvendor-hash.a
+2026-09-13T06:20:48.8572094Z [  4%] Built target vendor-hash
+2026-09-13T06:20:48.8598346Z [  4%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml.cpp.o
+2026-09-13T06:20:49.1062973Z [  4%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-alloc.c.o
+2026-09-13T06:20:49.4093383Z -- UI: archive verified and extracted
+2026-09-13T06:20:49.4104932Z -- UI: HF download succeeded, stamp updated (latest)
+2026-09-13T06:20:49.5639724Z [  6%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend.cpp.o
+2026-09-13T06:20:49.9183845Z -- UI: gzip compression applied (/home/runner/work/_temp/sem408-runtime/build/tools/ui/ui-gzip/_gzip)
+2026-09-13T06:20:50.4813746Z [  6%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-backend-meta.cpp.o
+2026-09-13T06:20:51.9002000Z [  6%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-opt.cpp.o
+2026-09-13T06:20:53.5763481Z [  6%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/ggml-threading.cpp.o
+2026-09-13T06:20:53.7443348Z [  8%] Building C object ggml/src/CMakeFiles/ggml-base.dir/ggml-quants.c.o
+2026-09-13T06:20:56.0334232Z [  8%] Building CXX object ggml/src/CMakeFiles/ggml-base.dir/gguf.cpp.o
+2026-09-13T06:20:58.3463212Z -- UI: embedded 70 assets
+2026-09-13T06:20:58.3523204Z [  8%] Built target llama-ui-assets
+2026-09-13T06:20:58.3613128Z [  8%] Building CXX object tools/ui/CMakeFiles/llama-ui.dir/ui.cpp.o
+2026-09-13T06:21:03.1244563Z [  8%] Linking CXX static library libggml-base.a
+2026-09-13T06:21:03.2169261Z [  8%] Built target ggml-base
+2026-09-13T06:21:03.2258016Z [  8%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/cmake_pch.hxx.gch
+2026-09-13T06:21:03.2260592Z [  8%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/cmake_pch.h.gch
+2026-09-13T06:21:03.3973912Z [ 10%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.c.o
+2026-09-13T06:21:03.8930167Z [ 10%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/quants.c.o
+2026-09-13T06:21:04.8053335Z [ 12%] Linking CXX static library libllama-ui.a
+2026-09-13T06:21:04.9362156Z [ 12%] Built target llama-ui
+2026-09-13T06:21:04.9399102Z [ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/traits.cpp.o
+2026-09-13T06:21:05.0520811Z [ 12%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/amx.cpp.o
+2026-09-13T06:21:05.7522761Z [ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/amx/mmq.cpp.o
+2026-09-13T06:21:05.9733616Z [ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/binary-ops.cpp.o
+2026-09-13T06:21:06.0215245Z [ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/unary-ops.cpp.o
+2026-09-13T06:21:06.6463578Z [ 14%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/vec.cpp.o
+2026-09-13T06:21:07.5734786Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ops.cpp.o
+2026-09-13T06:21:08.7373505Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/llamafile/sgemm.cpp.o
+2026-09-13T06:21:10.0146178Z [ 16%] Building C object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/quants.c.o
+2026-09-13T06:21:11.5757451Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/arch/x86/repack.cpp.o
+2026-09-13T06:21:13.2733395Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/ggml-cpu.cpp.o
+2026-09-13T06:21:14.5753571Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/repack.cpp.o
+2026-09-13T06:21:15.7853267Z [ 16%] Linking CXX static library libcpp-httplib.a
+2026-09-13T06:21:15.9113206Z [ 16%] Built target cpp-httplib
+2026-09-13T06:21:15.9143200Z [ 16%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/iqp.cpp.o
+2026-09-13T06:21:16.2924035Z [ 18%] Building CXX object ggml/src/CMakeFiles/ggml-cpu.dir/ggml-cpu/hbm.cpp.o
+2026-09-13T06:21:20.9677320Z [ 18%] Linking CXX static library libggml-cpu.a
+2026-09-13T06:21:21.0631474Z [ 18%] Built target ggml-cpu
+2026-09-13T06:21:21.0699764Z [ 18%] Building CXX object ggml/src/CMakeFiles/ggml.dir/ggml-backend-dl.cpp.o
+2026-09-13T06:21:21.0702073Z [ 18%] Building CXX object ggml/src/CMakeFiles/ggml.dir/ggml-backend-reg.cpp.o
+2026-09-13T06:21:22.2639797Z [ 20%] Linking CXX static library libggml.a
+2026-09-13T06:21:22.3441276Z [ 20%] Built target ggml
+2026-09-13T06:21:22.3531936Z [ 20%] Building CXX object src/CMakeFiles/llama.dir/cmake_pch.hxx.gch
+2026-09-13T06:21:24.3267569Z [ 20%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_9_cxx.cxx.o
+2026-09-13T06:21:24.3269089Z [ 22%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_8_cxx.cxx.o
+2026-09-13T06:21:24.3270195Z [ 22%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_7_cxx.cxx.o
+2026-09-13T06:21:24.3271274Z [ 22%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_6_cxx.cxx.o
+2026-09-13T06:21:26.3041334Z [ 22%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_5_cxx.cxx.o
+2026-09-13T06:21:26.7843530Z [ 25%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_4_cxx.cxx.o
+2026-09-13T06:21:27.5293387Z [ 25%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_3_cxx.cxx.o
+2026-09-13T06:21:28.1923544Z [ 25%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_2_cxx.cxx.o
+2026-09-13T06:21:29.9850312Z [ 25%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_1_cxx.cxx.o
+2026-09-13T06:21:30.2773571Z [ 27%] Building CXX object src/CMakeFiles/llama.dir/Unity/unity_0_cxx.cxx.o
+2026-09-13T06:21:31.3023588Z [ 27%] Building CXX object src/CMakeFiles/llama.dir/llama.cpp.o
+2026-09-13T06:21:31.9123604Z [ 27%] Building CXX object src/CMakeFiles/llama.dir/llama-adapter.cpp.o
+2026-09-13T06:21:32.6523671Z [ 27%] Building CXX object src/CMakeFiles/llama.dir/llama-arch.cpp.o
+2026-09-13T06:21:33.3613391Z [ 27%] Building CXX object src/CMakeFiles/llama.dir/llama-batch.cpp.o
+2026-09-13T06:21:33.8293601Z [ 29%] Building CXX object src/CMakeFiles/llama.dir/llama-chat.cpp.o
+2026-09-13T06:21:35.3261815Z [ 29%] Building CXX object src/CMakeFiles/llama.dir/llama-context.cpp.o
+2026-09-13T06:21:35.5923575Z [ 29%] Building CXX object src/CMakeFiles/llama.dir/llama-cparams.cpp.o
+2026-09-13T06:21:35.6353675Z [ 29%] Building CXX object src/CMakeFiles/llama.dir/llama-grammar.cpp.o
+2026-09-13T06:21:35.8073603Z [ 31%] Building CXX object src/CMakeFiles/llama.dir/llama-graph.cpp.o
+2026-09-13T06:21:36.4943588Z [ 31%] Building CXX object src/CMakeFiles/llama.dir/llama-hparams.cpp.o
+2026-09-13T06:21:36.9663493Z [ 31%] Building CXX object src/CMakeFiles/llama.dir/llama-impl.cpp.o
+2026-09-13T06:21:37.7963415Z [ 31%] Building CXX object src/CMakeFiles/llama.dir/llama-io.cpp.o
+2026-09-13T06:21:38.0583511Z [ 33%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache.cpp.o
+2026-09-13T06:21:41.0713428Z [ 33%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-iswa.cpp.o
+2026-09-13T06:21:41.3563637Z [ 33%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-dsa.cpp.o
+2026-09-13T06:21:42.6486761Z [ 33%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-dsa-iswa.cpp.o
+2026-09-13T06:21:42.7763627Z [ 35%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-msa.cpp.o
+2026-09-13T06:21:43.8333423Z [ 35%] Building CXX object src/CMakeFiles/llama.dir/llama-kv-cache-dsv4.cpp.o
+2026-09-13T06:21:44.4393648Z [ 35%] Building CXX object src/CMakeFiles/llama.dir/llama-memory.cpp.o
+2026-09-13T06:21:44.5674069Z [ 35%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-hybrid.cpp.o
+2026-09-13T06:21:44.6433472Z [ 35%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-hybrid-iswa.cpp.o
+2026-09-13T06:21:46.1703598Z [ 37%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-hybrid-idx.cpp.o
+2026-09-13T06:21:46.3923577Z [ 37%] Building CXX object src/CMakeFiles/llama.dir/llama-memory-recurrent.cpp.o
+2026-09-13T06:21:46.4493590Z [ 37%] Building CXX object src/CMakeFiles/llama.dir/llama-mmap.cpp.o
+2026-09-13T06:21:47.4084460Z [ 37%] Building CXX object src/CMakeFiles/llama.dir/llama-model-loader.cpp.o
+2026-09-13T06:21:48.5083611Z [ 39%] Building CXX object src/CMakeFiles/llama.dir/llama-model-saver.cpp.o
+2026-09-13T06:21:48.7293511Z [ 39%] Building CXX object src/CMakeFiles/llama.dir/llama-model.cpp.o
+2026-09-13T06:21:49.5521781Z [ 39%] Building CXX object src/CMakeFiles/llama.dir/llama-quant.cpp.o
+2026-09-13T06:21:49.5903591Z [ 39%] Building CXX object src/CMakeFiles/llama.dir/llama-sampler.cpp.o
+2026-09-13T06:21:56.9860864Z [ 41%] Building CXX object src/CMakeFiles/llama.dir/llama-vocab.cpp.o
+2026-09-13T06:21:57.5773658Z [ 41%] Building CXX object src/CMakeFiles/llama.dir/unicode-data.cpp.o
+2026-09-13T06:21:58.7053481Z [ 41%] Building CXX object src/CMakeFiles/llama.dir/unicode.cpp.o
+2026-09-13T06:22:05.9142470Z [ 41%] Linking CXX static library libllama.a
+2026-09-13T06:22:06.0659911Z [ 41%] Built target llama
+2026-09-13T06:22:06.0762741Z [ 43%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/cmake_pch.hxx.gch
+2026-09-13T06:22:06.0768493Z [ 45%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/mtmd-helper.cpp.o
+2026-09-13T06:22:06.0769721Z [ 45%] Building CXX object common/CMakeFiles/llama-common.dir/cmake_pch.hxx.gch
+2026-09-13T06:22:06.0773529Z [ 45%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/mtmd-helper-gen.cpp.o
+2026-09-13T06:22:08.7853525Z [ 45%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/mtmd.cpp.o
+2026-09-13T06:22:09.8704226Z [ 45%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/mtmd-audio.cpp.o
+2026-09-13T06:22:10.1032689Z [ 45%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/parsers.cpp.o
+2026-09-13T06:22:11.3573623Z [ 47%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/cohere2moe.cpp.o
+2026-09-13T06:22:13.0707623Z [ 47%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/deepseek.cpp.o
+2026-09-13T06:22:13.8353727Z [ 47%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/functionary-v3-2.cpp.o
+2026-09-13T06:22:13.9533643Z [ 47%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/mtmd-image.cpp.o
+2026-09-13T06:22:16.2373476Z [ 47%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/clip.cpp.o
+2026-09-13T06:22:16.6412460Z [ 47%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/gemma4.cpp.o
+2026-09-13T06:22:18.0353693Z [ 50%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/gigachat-v3.cpp.o
+2026-09-13T06:22:19.6182702Z [ 50%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/cogvlm.cpp.o
+2026-09-13T06:22:20.1033451Z [ 50%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/gpt-oss.cpp.o
+2026-09-13T06:22:20.4013402Z [ 50%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/kimi-k2.cpp.o
+2026-09-13T06:22:22.7583594Z [ 50%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/kimi-k3.cpp.o
+2026-09-13T06:22:22.8833777Z [ 50%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/conformer.cpp.o
+2026-09-13T06:22:23.4293554Z [ 52%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/lfm2.cpp.o
+2026-09-13T06:22:25.4083474Z [ 52%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/minicpm5.cpp.o
+2026-09-13T06:22:25.6073621Z [ 54%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/deepseek4v.cpp.o
+2026-09-13T06:22:25.7743945Z [ 54%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/dots3note.cpp.o
+2026-09-13T06:22:26.1580822Z [ 54%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/minimax-m3.cpp.o
+2026-09-13T06:22:26.3313680Z [ 54%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/dotsocr.cpp.o
+2026-09-13T06:22:26.8623605Z [ 54%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/ministral3.cpp.o
+2026-09-13T06:22:28.2297491Z [ 54%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/exaone4_5.cpp.o
+2026-09-13T06:22:28.8113791Z [ 54%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/muse-glimmer.cpp.o
+2026-09-13T06:22:29.2271314Z [ 56%] Building CXX object common/CMakeFiles/llama-common.dir/parsers/qwen3-coder.cpp.o
+2026-09-13T06:22:29.5383547Z [ 56%] Building CXX object common/CMakeFiles/llama-common.dir/arg.cpp.o
+2026-09-13T06:22:31.3643639Z [ 58%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/gemma4a.cpp.o
+2026-09-13T06:22:31.7299109Z [ 58%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/gemma4v.cpp.o
+2026-09-13T06:22:31.9383860Z [ 58%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/gemma4ua.cpp.o
+2026-09-13T06:22:32.0058120Z [ 58%] Building CXX object common/CMakeFiles/llama-common.dir/chat-auto-parser-generator.cpp.o
+2026-09-13T06:22:32.2809231Z [ 58%] Building CXX object common/CMakeFiles/llama-common.dir/chat-auto-parser-helpers.cpp.o
+2026-09-13T06:22:32.4183533Z [ 58%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/gemma4uv.cpp.o
+2026-09-13T06:22:32.9013465Z [ 60%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/glm4v.cpp.o
+2026-09-13T06:22:33.4943584Z [ 60%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/granite-speech.cpp.o
+2026-09-13T06:22:34.1537977Z [ 60%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/granite4-vision.cpp.o
+2026-09-13T06:22:34.4753760Z [ 60%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/hunyuanvl.cpp.o
+2026-09-13T06:22:34.9543695Z [ 62%] Building CXX object common/CMakeFiles/llama-common.dir/chat-diff-analyzer.cpp.o
+2026-09-13T06:22:35.1425042Z [ 64%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/internvl.cpp.o
+2026-09-13T06:22:35.3927606Z [ 64%] Building CXX object common/CMakeFiles/llama-common.dir/chat-peg-parser.cpp.o
+2026-09-13T06:22:35.6487709Z [ 64%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/kimivl.cpp.o
+2026-09-13T06:22:36.1756348Z [ 64%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/kimik25.cpp.o
+2026-09-13T06:22:36.7124715Z [ 64%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/nemotron-v2-vl.cpp.o
+2026-09-13T06:22:37.2373692Z [ 64%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/muse-glimmer.cpp.o
+2026-09-13T06:22:37.7943677Z [ 66%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/llama4.cpp.o
+2026-09-13T06:22:38.3223397Z [ 66%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/llava.cpp.o
+2026-09-13T06:22:39.0152561Z [ 66%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/minicpmv.cpp.o
+2026-09-13T06:22:39.6049794Z [ 66%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/paddleocr.cpp.o
+2026-09-13T06:22:40.1002633Z [ 68%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/pixtral.cpp.o
+2026-09-13T06:22:40.1583630Z [ 68%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/qwen2vl.cpp.o
+2026-09-13T06:22:40.6180716Z [ 68%] Building CXX object common/CMakeFiles/llama-common.dir/chat.cpp.o
+2026-09-13T06:22:40.7093111Z [ 68%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/minimax-m3.cpp.o
+2026-09-13T06:22:41.2653444Z [ 68%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/qwen3vl.cpp.o
+2026-09-13T06:22:41.8073766Z [ 70%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/mimovl.cpp.o
+2026-09-13T06:22:42.3073742Z [ 70%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/qwen3a.cpp.o
+2026-09-13T06:22:42.3793747Z [ 70%] Building CXX object common/CMakeFiles/llama-common.dir/common.cpp.o
+2026-09-13T06:22:42.7639481Z [ 70%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/mimo-audio.cpp.o
+2026-09-13T06:22:43.3843693Z [ 70%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/qwen3tts-spkenc.cpp.o
+2026-09-13T06:22:44.0073652Z [ 72%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/qwen3tts-gen.cpp.o
+2026-09-13T06:22:45.9753515Z [ 72%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/pockettts-seanet.cpp.o
+2026-09-13T06:22:46.6993222Z [ 72%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/pockettts-spkenc.cpp.o
+2026-09-13T06:22:47.2483335Z [ 72%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/pockettts-gen.cpp.o
+2026-09-13T06:22:47.9023548Z [ 72%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/step3vl.cpp.o
+2026-09-13T06:22:48.4283497Z [ 75%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/siglip.cpp.o
+2026-09-13T06:22:48.6353470Z [ 77%] Building CXX object common/CMakeFiles/llama-common.dir/console.cpp.o
+2026-09-13T06:22:48.9490225Z [ 77%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/whisper-enc.cpp.o
+2026-09-13T06:22:49.4942090Z [ 77%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/deepseekocr.cpp.o
+2026-09-13T06:22:50.1706624Z [ 77%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/deepseekocr2.cpp.o
+2026-09-13T06:22:50.5223601Z [ 79%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/mobilenetv5.cpp.o
+2026-09-13T06:22:50.6773537Z [ 79%] Building CXX object common/CMakeFiles/llama-common.dir/debug.cpp.o
+2026-09-13T06:22:51.1783421Z [ 79%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/youtuvl.cpp.o
+2026-09-13T06:22:51.3003416Z [ 79%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/yasa2.cpp.o
+2026-09-13T06:22:51.5313655Z [ 79%] Building CXX object tools/mtmd/CMakeFiles/mtmd.dir/models/parakeet.cpp.o
+2026-09-13T06:22:51.7413376Z [ 79%] Building CXX object common/CMakeFiles/llama-common.dir/download.cpp.o
+2026-09-13T06:22:51.8403381Z [ 79%] Building CXX object common/CMakeFiles/llama-common.dir/fit.cpp.o
+2026-09-13T06:22:52.2050024Z [ 81%] Linking CXX static library libmtmd.a
+2026-09-13T06:22:52.4083635Z [ 81%] Built target mtmd
+2026-09-13T06:22:52.4113224Z [ 83%] Building CXX object common/CMakeFiles/llama-common.dir/hf-cache.cpp.o
+2026-09-13T06:22:56.0583729Z [ 83%] Building CXX object common/CMakeFiles/llama-common.dir/imatrix-loader.cpp.o
+2026-09-13T06:22:56.5663641Z [ 83%] Building CXX object common/CMakeFiles/llama-common.dir/json-schema-to-grammar.cpp.o
+2026-09-13T06:22:57.1973636Z [ 83%] Building CXX object common/CMakeFiles/llama-common.dir/json.cpp.o
+2026-09-13T06:22:57.6383690Z [ 83%] Building CXX object common/CMakeFiles/llama-common.dir/llguidance.cpp.o
+2026-09-13T06:22:58.4563366Z [ 85%] Building CXX object common/CMakeFiles/llama-common.dir/log.cpp.o
+2026-09-13T06:23:00.2156666Z [ 85%] Building CXX object common/CMakeFiles/llama-common.dir/ngram-cache.cpp.o
+2026-09-13T06:23:01.9053736Z [ 85%] Building CXX object common/CMakeFiles/llama-common.dir/ngram-map.cpp.o
+2026-09-13T06:23:01.9744192Z [ 85%] Building CXX object common/CMakeFiles/llama-common.dir/ngram-mod.cpp.o
+2026-09-13T06:23:02.8923700Z [ 87%] Building CXX object common/CMakeFiles/llama-common.dir/peg-parser.cpp.o
+2026-09-13T06:23:03.2033610Z [ 87%] Building CXX object common/CMakeFiles/llama-common.dir/preset.cpp.o
+2026-09-13T06:23:06.2023708Z [ 87%] Building CXX object common/CMakeFiles/llama-common.dir/reasoning-budget.cpp.o
+2026-09-13T06:23:07.2726087Z [ 87%] Building CXX object common/CMakeFiles/llama-common.dir/sampling.cpp.o
+2026-09-13T06:23:07.7530660Z [ 89%] Building CXX object common/CMakeFiles/llama-common.dir/speculative.cpp.o
+2026-09-13T06:23:10.6413572Z [ 89%] Building CXX object common/CMakeFiles/llama-common.dir/subproc.cpp.o
+2026-09-13T06:23:11.7263580Z [ 89%] Building CXX object common/CMakeFiles/llama-common.dir/trie.cpp.o
+2026-09-13T06:23:12.3803485Z [ 89%] Building CXX object common/CMakeFiles/llama-common.dir/unicode.cpp.o
+2026-09-13T06:23:13.2075195Z [ 91%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/lexer.cpp.o
+2026-09-13T06:23:13.2763692Z [ 91%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/parser.cpp.o
+2026-09-13T06:23:14.8534060Z [ 91%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/runtime.cpp.o
+2026-09-13T06:23:15.4644693Z [ 91%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/value.cpp.o
+2026-09-13T06:23:15.6363667Z [ 91%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/string.cpp.o
+2026-09-13T06:23:17.0331558Z [ 93%] Building CXX object common/CMakeFiles/llama-common.dir/jinja/caps.cpp.o
+2026-09-13T06:23:22.5215475Z [ 93%] Linking CXX static library libllama-common.a
+2026-09-13T06:23:22.6998647Z [ 93%] Built target llama-common
+2026-09-13T06:23:22.7071864Z [ 93%] Building CXX object tools/server/CMakeFiles/server-context.dir/cmake_pch.hxx.gch
+2026-09-13T06:23:23.9182099Z [ 93%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-chat.cpp.o
+2026-09-13T06:23:23.9183844Z [ 93%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-task.cpp.o
+2026-09-13T06:23:23.9185478Z [ 95%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-queue.cpp.o
+2026-09-13T06:23:23.9186807Z [ 95%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-common.cpp.o
+2026-09-13T06:23:28.4686600Z [ 95%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-context.cpp.o
+2026-09-13T06:23:29.6273856Z [ 95%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-stream.cpp.o
+2026-09-13T06:23:31.9823806Z [ 95%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-tools.cpp.o
+2026-09-13T06:23:34.2013500Z [ 97%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-mcp.cpp.o
+2026-09-13T06:23:34.3318367Z [ 97%] Building CXX object tools/server/CMakeFiles/server-context.dir/server-schema.cpp.o
+2026-09-13T06:23:44.3656491Z [ 97%] Linking CXX static library libserver-context.a
+2026-09-13T06:23:44.4736290Z [ 97%] Built target server-context
+2026-09-13T06:23:44.4806498Z [ 97%] Building CXX object tools/server/CMakeFiles/llama-server-impl.dir/cmake_pch.hxx.gch
+2026-09-13T06:23:45.7289740Z [100%] Building CXX object tools/server/CMakeFiles/llama-server-impl.dir/server.cpp.o
+2026-09-13T06:23:45.7291100Z [100%] Building CXX object tools/server/CMakeFiles/llama-server-impl.dir/server-http.cpp.o
+2026-09-13T06:23:45.7293324Z [100%] Building CXX object tools/server/CMakeFiles/llama-server-impl.dir/server-models.cpp.o
+2026-09-13T06:23:55.3872495Z [100%] Linking CXX static library libllama-server-impl.a
+2026-09-13T06:23:55.4750693Z [100%] Built target llama-server-impl
+2026-09-13T06:23:55.4819676Z [100%] Building CXX object tools/server/CMakeFiles/llama-server.dir/main.cpp.o
+2026-09-13T06:23:55.4982452Z [100%] Linking CXX executable ../../bin/llama-server
+2026-09-13T06:23:55.8374851Z [100%] Built target llama-server
+2026-09-13T06:24:13.6248944Z ##[group]Run set -euo pipefail
+2026-09-13T06:24:13.6249282Z [36;1mset -euo pipefail[0m
+2026-09-13T06:24:13.6249645Z [36;1mR="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"[0m
+2026-09-13T06:24:13.6250482Z [36;1m"$R/build/bin/llama-server" -m "$R/model.gguf" --host 127.0.0.1 --port 8084 -c 8192 -t 4 -tb 4 -np 1 -b 512 -ub 128 --alias SEM-408-003-Gemma4B > "$O/model/server.log" 2>&1 &[0m
+2026-09-13T06:24:13.6251243Z [36;1mPID=$!; trap 'kill "$PID" 2>/dev/null || true' EXIT[0m
+2026-09-13T06:24:13.6251579Z [36;1mpython - <<'PY'[0m
+2026-09-13T06:24:13.6251819Z [36;1mimport urllib.request,time[0m
+2026-09-13T06:24:13.6252078Z [36;1mfor _ in range(90):[0m
+2026-09-13T06:24:13.6252614Z [36;1m    try:[0m
+2026-09-13T06:24:13.6252991Z [36;1m        with urllib.request.urlopen('http://127.0.0.1:8084/health',timeout=2) as r:[0m
+2026-09-13T06:24:13.6253431Z [36;1m            if r.status==200:break[0m
+2026-09-13T06:24:13.6253759Z [36;1m    except Exception:time.sleep(1)[0m
+2026-09-13T06:24:13.6254115Z [36;1melse:raise RuntimeError('model_server_not_ready')[0m
+2026-09-13T06:24:13.6254427Z [36;1mPY[0m
+2026-09-13T06:24:13.6254766Z [36;1mpython -u "$P/semantic-review-pilot-003/run.py" execute --output "$O/model"[0m
+2026-09-13T06:24:13.6292691Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-13T06:24:13.6293027Z env:
+2026-09-13T06:24:13.6293328Z   P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+2026-09-13T06:24:13.6293752Z   LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+2026-09-13T06:24:13.6294046Z ##[endgroup]
+2026-09-13T06:24:49.5057189Z {"id": "C001", "name": "Scribble", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["Scribble – a reference to the act of writing/drawing.", "The name evokes a sense of quietude or introspection.", "‘Scribble’ could be associated with a chaotic, yet creative process."], "brief_fit": {"level": "weak", "reason": "The frozen brief focuses on a comparative analysis of modified content, whereas the candidate name offers no inherent analytical value."}, "disposition": "hold", "id": "C001", "observable_form": ["The name ‘Scribble’ is visually presented as a single word."], "pronunciation_uncertainty": {"level": "low", "reason": "The pronunciation of ‘Scribble’ is relatively straightforward and unambiguous."}, "reason": "The name offers no inherent analytical value, presenting only a single word visually and with a relatively straightforward pronunciation."}, "input_tokens": 436, "output_tokens": 186, "seconds": 32.68922206000002}
+2026-09-13T06:25:26.0576930Z {"id": "C002", "name": "Diffly", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["The name 'Diffly' might be associated with a process of divergence.", "The term 'frozen brief' could relate to a state of immobility.", "The concept of 'validation' might be linked to verification procedures."], "brief_fit": {"level": "weak", "reason": "The frozen brief focuses on a tool for comparison and revision, while the candidate name and associated terms represent a fragmented and isolated system."}, "disposition": "hold", "id": "C002", "observable_form": ["The name 'Diffly' is a single, distinct term.", "The term 'frozen brief' suggests a state of immobility.", "The phrase 'validation' implies a process of verification."], "pronunciation_uncertainty": {"level": "low", "reason": "The spelling provides sufficient clues for pronunciation."}, "reason": "The candidate's fragmented nature and isolated terms create a system lacking a clear purpose or function."}, "input_tokens": 435, "output_tokens": 229, "seconds": 36.50687358900001}
+2026-09-13T06:25:58.9397281Z {"id": "C003", "name": "Linetap", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["Linetap could be associated with video editing software.", "The name suggests a focus on subtitle clarity.", "It might be linked to online content creation."], "brief_fit": {"level": "weak", "reason": "The frozen brief emphasizes a practical tool, whereas the candidate name is descriptive and lacks a defined function."}, "disposition": "hold", "id": "C003", "observable_form": ["The name ‘Linetap’ contains the exact candidate name.", "The spelling is straightforward and easily readable.", "The name suggests a connection to visual media."], "pronunciation_uncertainty": {"level": "low", "reason": "The spelling is common and easily pronounced."}, "reason": "The candidate name is descriptive and lacks a defined function. It’s a name, not a tool."}, "input_tokens": 437, "output_tokens": 186, "seconds": 32.839851428999964}
+2026-09-13T06:26:34.7406619Z {"id": "C004", "name": "SideBy", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["SideBy – potentially referencing ‘beside’”, “The use of ‘SideBy’ may evoke a sense of duality or contrast”, “‘SideBy’ could be associated with a collaborative or paired action”], "], "brief_fit": {"level": "weak", "reason": "The frozen brief is highly detailed and prescriptive, whereas the name ‘SideBy’ is simple and lacks inherent product features."}, "disposition": "hold", "id": "C004", "observable_form": ["The name ‘SideBy’ is simple and direct.", "The spelling ‘SideBy’ is easily readable and pronounceable.", "The name ‘SideBy’ is memorable due to its brevity."], "pronunciation_uncertainty": {"level": "low", "reason": "The name ‘SideBy’ is easily pronounced and does not have any ambiguous sounds."}, "reason": "The name ‘SideBy’ is memorable due to its brevity."}, "input_tokens": 435, "output_tokens": 223, "seconds": 35.755730653}
+2026-09-13T06:27:10.6612970Z {"id": "C005", "name": "Textal", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["Textal could be associated with textile production.", "The name might reference a specific type ofal.", "The brand could be linked to a data visualization tool."], "brief_fit": {"level": "weak", "reason": "The frozen brief focuses on a comparative analysis of modified subtitles, while the candidate name and associated hypotheses do not directly address this."}, "disposition": "hold", "id": "C005", "observable_form": ["The name 'Textal' is easily distinguishable.", "The spelling is consistent and straightforward.", "The name is memorable."], "pronunciation_uncertainty": {"level": "low", "reason": "The name has a clear and predictable pronunciation."}, "reason": "The candidate name is simple and memorable, facilitating communication and brand recognition. The hypotheses are plausible user associations, requiring validation. The disposition is to hold, prioritizing intrinsic semantic research. No trademark, domain, collision, registration, market presence, legal status, or other reality facts are claimed."}, "input_tokens": 435, "output_tokens": 220, "seconds": 35.88050757100001}
+2026-09-13T06:27:39.9974323Z {"id": "C006", "name": "Sublyte", "status": "review_complete_not_truth", "review": {"association_hypotheses": ["Sublyte could be a portmanteau of 'sub' and 'lyte'"], "brief_fit": {"level": "weak", "reason": "The frozen brief focuses on a comparative tool, while this brief is descriptive."}, "disposition": "hold", "id": "C006", "observable_form": ["The name 'Sublyte' contains the word 'Sublyte'"], "pronunciation_uncertainty": {"level": "low", "reason": "The name is relatively straightforward to pronounce."}, "reason": "The name 'Sublyte' contains the word 'Sublyte'"}, "input_tokens": 437, "output_tokens": 148, "seconds": 29.293238858999985}
+2026-09-13T06:27:40.0148003Z ##[group]Run python - <<'PY'
+2026-09-13T06:27:40.0148526Z [36;1mpython - <<'PY'[0m
+2026-09-13T06:27:40.0149120Z [36;1mimport hashlib,json,os,pathlib,urllib.request,urllib.error[0m
+2026-09-13T06:27:40.0150664Z [36;1mroot=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-evidence'; repo='InteropAtlas/InteropAtlas'; branch='feat/adaptive-naming-skill-v0.1'; source=os.environ['GITHUB_SHA'][0m
+2026-09-13T06:27:40.0152053Z [36;1mdef api(path,method='GET',body=None):[0m
+2026-09-13T06:27:40.0154783Z [36;1m    q=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=json.dumps(body,ensure_ascii=False).encode() if body is not None else None,headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})[0m
+2026-09-13T06:27:40.0157058Z [36;1m    with urllib.request.urlopen(q,timeout=60) as r:return json.load(r)[0m
+2026-09-13T06:27:40.0157738Z [36;1mfiles={};total=0[0m
+2026-09-13T06:27:40.0158346Z [36;1mfor path in sorted(root.rglob('*')) if root.exists() else []:[0m
+2026-09-13T06:27:40.0159002Z [36;1m    if not path.is_file():continue[0m
+2026-09-13T06:27:40.0159634Z [36;1m    raw=path.read_bytes();total+=len(raw);assert total<5_000_000[0m
+2026-09-13T06:27:40.0160688Z [36;1m    files[str(path.relative_to(root))]={'sha256':hashlib.sha256(raw).hexdigest(),'content':raw.decode('utf-8')}[0m
+2026-09-13T06:27:40.0162016Z [36;1msummary=json.loads((root/'model/summary.json').read_text()) if (root/'model/summary.json').exists() else None[0m
+2026-09-13T06:27:40.0163631Z [36;1mhome='03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-review-pilot-003/results'[0m
+2026-09-13T06:27:40.0165208Z [36;1mevidence={'run_id':os.environ['GITHUB_RUN_ID'],'source_commit':source,'new_names':0,'paid_api_calls':0,'quality_ground_truth':None,'files':files}[0m
+2026-09-13T06:27:40.0166870Z [36;1mentries=[{'path':home+'/evidence.json','mode':'100644','type':'blob','content':json.dumps(evidence,ensure_ascii=False,indent=2)+'\n'}][0m
+2026-09-13T06:27:40.0168539Z [36;1mif summary:entries.append({'path':home+'/summary.json','mode':'100644','type':'blob','content':json.dumps(summary,ensure_ascii=False,indent=2)+'\n'})[0m
+2026-09-13T06:27:40.0170088Z [36;1mcurrent=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch changed during frozen run'[0m
+2026-09-13T06:27:40.0171389Z [36;1mtree=api('/git/trees','POST',{'base_tree':api('/git/commits/'+current)['tree']['sha'],'tree':entries})['sha'][0m
+2026-09-13T06:27:40.0173727Z [36;1mcommit=api('/git/commits','POST',{'message':'evidence(#408): preserve SEM-408-003 reviewer packaging trial\n\nNo new names, prior rescore, semantic-truth claim, paid inference, IA generation or method promotion.','tree':tree,'parents':[current]})['sha'][0m
+2026-09-13T06:27:40.0175698Z [36;1mapi('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})[0m
+2026-09-13T06:27:40.0176802Z [36;1mprint(json.dumps({'commit':commit,'files':len(files),'bytes':total,'summary':summary},ensure_ascii=False))[0m
+2026-09-13T06:27:40.0202926Z [36;1mPY[0m
+2026-09-13T06:27:40.0241638Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+2026-09-13T06:27:40.0241994Z env:
+2026-09-13T06:27:40.0242549Z   P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+2026-09-13T06:27:40.0242993Z   LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+2026-09-13T06:27:40.0245638Z   GH_TOKEN: ***
+2026-09-13T06:27:40.0245861Z ##[endgroup]
+2026-09-13T06:27:40.4705744Z Traceback (most recent call last):
+2026-09-13T06:27:40.4706269Z   File "<stdin>", line 16, in <module>
+2026-09-13T06:27:40.4706744Z AssertionError: branch changed during frozen run
+2026-09-13T06:27:40.4866826Z ##[error]Process completed with exit code 1.
+2026-09-13T06:27:40.4996192Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-13T06:27:40.4997725Z Post job cleanup.
+2026-09-13T06:27:40.5862125Z [command]/usr/bin/git version
+2026-09-13T06:27:40.5905923Z git version 2.55.0
+2026-09-13T06:27:40.5945688Z Temporarily overriding HOME='/home/runner/work/_temp/ef670d4a-d109-49a9-b07f-31822ee3806b' before making global git config changes
+2026-09-13T06:27:40.5947313Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-13T06:27:40.5951187Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/InteropAtlas/InteropAtlas
+2026-09-13T06:27:40.5989802Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-13T06:27:40.6025555Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-13T06:27:40.6277254Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-13T06:27:40.6312867Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-13T06:27:40.6586218Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-13T06:27:40.6665371Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-13T06:27:40.7106188Z Cleaning up orphan processes
+2026-09-13T06:27:40.7471424Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
