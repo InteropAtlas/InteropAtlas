@@ -1334,3 +1334,62 @@ A fresh Agent can continue from this file alone: (1) re-run `is:issue is:open` s
 ## Next action
 
 Classification pass is complete. Next phase, only after Owner instruction: review Low/Medium-confidence drift items, then decide whether to add labels/status metadata, close completed/superseded issues, merge duplicates, or otherwise perform repository hygiene. Do not perform those mutations from this audit alone.
+
+
+## Final audit report
+
+### Summary
+
+- Total: **213**
+- Research: **7**
+- Active Work: **4**
+- Backlog: **202**
+- Low Confidence / manual review: **10**
+
+### Clearly stale or state-drifted
+
+- **#23, #24, #86, #183, #184, #185, #187, #188, #189, #195** still carry historical Ready/Review-style metadata but are not named as current active work in PROJECT_STATE. They are the primary manual-review queue.
+- **#125** says Ready while current navigation treats Candidate Pool as a live intake substrate.
+- **#129** says In Progress but is an umbrella containing a very large future/blocked surface; its status must not activate children implicitly.
+- **#146** is still active by PROJECT_STATE, but the lease timestamps in its body are stale and should be refreshed or explicitly marked non-authoritative.
+- **#412** is correctly marked Deferred; its Research wording must not be mistaken for current execution.
+
+### Obvious overlap / merge-or-supersession candidates
+
+These are not automatically duplicates; they are pairs/groups that should be reviewed together before any closure:
+
+- **#1 / #8** — Reference Resolver / backlink capability overlaps heavily; #8 is the broader implementation slice.
+- **#3 / #215** — standard explanation layer; #215 explicitly carries the V1 continuation of #3.
+- **#4 / #214 / #257** — compare/alternative semantics split across old product need, V1 compare contract, and relation-semantics revalidation.
+- **#5 / #234** — short-name/domain task and explicit P6 revisit.
+- **#11 / #233** — project-generated specification lifecycle and explicit P6 revisit.
+- **#86 / #290** — Agent takeover/context continuity versus future cross-Agent handoff profile.
+- **#195 / #287** — historical cleanup plan versus the current repository-maintenance implementation; #287 is the current maintenance home.
+
+### Title/status vs real-content mismatches
+
+- **#125**: title/body metadata says Ready, but current repository navigation treats it as an operating intake pool.
+- **#129**: In Progress is true at umbrella level, but most listed P6 descendants are Draft/Future/Blocked; readers can easily over-read the umbrella as execution authority.
+- **#23/#24/#86/#183/#184/#185/#187/#188/#189/#195**: old Ready/Review wording conflicts with the newer rule that historical open work is backlog unless explicitly reactivated.
+- **#411**: title says Research, while the body also contains a concrete finalist completion condition; classified Research because its current primary role is Fit Test / evidence generation, but this deserves lifecycle clarification when naming resumes.
+
+### Active Work priority set
+
+Only **4 Issues** satisfy the audit's current Active Work definition, so this report does not fabricate a 10–20 item ranking from Backlog:
+
+1. **#287** — repository maintenance / issue hygiene; this audit directly advances its acceptance criteria.
+2. **#146** — continuous intake operating line.
+3. **#125** — Candidate Pool that feeds #146.
+4. **#129** — P6 umbrella/navigation; prioritize narrowing and keeping its child activation semantics accurate rather than treating it as a monolithic execution task.
+
+#433 is a current active **Research** line, not Active Work, and therefore remains in the Research class rather than being promoted merely to fill the list.
+
+### Repository hygiene recommendations
+
+1. Make the three-way lifecycle visible in Issue metadata: **Research / Active Work / Backlog**, while keeping execution status (Ready/In Progress/Blocked/etc.) as a separate dimension.
+2. Calibrate the 10 Low Confidence historical Ready/Review Issues first; do not mass-close before reading completion/supersession evidence.
+3. Treat **Draft/Future/Conditional Future/Deferred** as non-active by default and require an explicit activation event before execution.
+4. For umbrellas such as #129, state explicitly which children are active; parent In Progress must never transitively activate descendants.
+5. Consolidate the overlap groups above by linking successor/superseded relationships before considering closure; preserve useful history.
+6. Add a lightweight periodic hygiene check for stale leases, stale Ready/In Progress states, completed parent/child mismatches, and PR-merged-but-Issue-open cases. Machine checks should flag; semantic closure remains Human/Agent review.
+7. Keep PROJECT_STATE as the current navigation entry and the audit file as a recoverable maintenance checkpoint, not as a competing task source of truth.
