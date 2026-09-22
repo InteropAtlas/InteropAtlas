@@ -76,17 +76,17 @@ Agent structured access + Candidate Write 等高影响能力仍需 Human Owner �
 | **审核 Candidate，判断能否进入 Canonical** | 从 [`Inbox`](01_State/Inbox/) 查看待处理材料，并按 [`知识系统规范`](docs/02_System/01_Knowledge/) 审查 |
 | **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再确认是否存在当前激活 Work Item |
 | **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 与 [`System`](docs/02_System/) 进入；高影响能力仍遵守 Owner Gate |
-| **研究项目大方向、提出新的能力或路线** | 当前 GitHub Discussions 未启用；先使用 Research 类 Issue 或组织级演化记录承载，形成明确执行边界后再转为 Work Item |
+| **研究项目大方向、提出新的能力或路线** | 使用 GitHub Discussions 承载尚未收敛的问题与方案讨论；形成明确交付边界后再转为 Issue / Work Item |
 | **领取明确任务** | 从明确标记为当前激活的 Issue / PR 进入，不从完整 backlog 随机挑选 |
 | **查看长期候选与历史规划** | GitHub Issues / Projects；它们是候选与组织视图，不等于当前执行队列 |
 
 ### 如果我的想法还不是一个任务
 
-当前 GitHub Discussions 未启用，因此暂时使用：
+优先按以下方式分流：
 
 ```text
 尚未收敛的问题 / 方向 / 方案讨论
-→ Research 类 Issue / Organization Evolution
+→ Discussion
 
 已经明确、有完成边界的工作
 → Issue / PR
