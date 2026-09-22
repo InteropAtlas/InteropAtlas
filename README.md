@@ -112,7 +112,7 @@ InteropAtlas 优先把可验证、可追溯、可复用的互操作知识沉淀�
 2. 我们现在在建设什么；
 3. 我可以从哪里参与。
 
-从那里可以继续进入当前适用的 Discussion、Issue、Project、Candidate Pool、Human / Machine 路线或深入文档。你不需要为了参与项目先通读 Master Design、Roadmap、全部 `docs/` 或完整 Issue backlog。
+从那里可以继续进入当前适用的 Issue、PR、Project、Candidate Pool、Human / Machine 路线或深入文档。当前 GitHub Discussions 未启用，尚未收敛的研究问题暂由 Research 类 Issue 或组织级 Evolution 记录承载。你不需要为了参与项目先通读 Master Design、Roadmap、全部 `docs/` 或完整 Issue backlog。
 
 如果你是 Agent，仓库级执行约束另见 [`AGENTS.md`](AGENTS.md)；具体贡献规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
