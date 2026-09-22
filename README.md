@@ -21,6 +21,21 @@ Latest Substantive Contribution:
 
 **InteropAtlas 把这些知识连接起来，逐步映射完整的互操作方案空间（Interoperability Solution Space）。**
 
+## 三句话认识 InteropAtlas
+
+### 我们做什么
+**研究互操作，并映射人类已经形成的互操作方案空间。**
+
+### 我们怎么做
+**持续连接、整理和验证分散在不同领域中的互操作知识，并在 IA 自身上实践互操作。**
+
+标准、协议、方法、实现、案例、关系与证据会被连接到同一张知识地图中；同时，IA 自身也可以用于探索不同视图、表达形式、Human / Agent 接口和机器可读形式之间的转换与协同。
+
+### 这些成果最后去哪
+**形成开放、机器可读、持续演化的互操作公共知识基础设施。**
+
+让这些知识能够被 Human 与 Agent 获取、验证、复用、组合和继续扩展。
+
 如果你只是来查知识，不需要先理解这个仓库如何建设。可以把这里理解成一张仍在成长中的“互操作知识地图”。
 
 ## 什么叫“互操作”？
@@ -69,20 +84,11 @@ InteropAtlas 关注的不是某一个行业，而是一个跨领域问题：**�
 
 > **这个互操作问题，人类已经有哪些可用方案？它们之间是什么关系？依据是什么？我应该从哪里继续探索？**
 
-## 产品哲学
+## 建设原则
 
-> **知识属于公共共同体。视角属于个人。**  
-> *Knowledge belongs to the commons. Perspective belongs to the individual.*
->
-> **知识流动，创造不息。**  
-> *Knowledge travels. Creation continues.*
+InteropAtlas 优先把可验证、可追溯、可复用的互操作知识沉淀为公共知识基础设施。个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则。
 
-公共知识跨越边界进入个人视角与具体情境，推动新的创造；新的创造又可以进入公共共同体，成为下一轮流动的基础。
-
-> **保存知识不是终点。知识最终应该帮助新的创造发生。**  
-> *Preservation is not the endpoint; knowledge should ultimately enable new creation.*
-
-个性化透明 / 可控 / 可逆、地图优先（Atlas-first）、先有证据再有断言（Evidence before assertion）、先选择再呈现（Selection before presentation）、真实使用塑造本体模型（Real use shapes the ontology）、**采用（Adopt）→ 配置（Profile）→ 扩展（Extend）→ 发明（Invent）**等属于产品与建设原则。
+“知识属于公共共同体，视角属于个人”等知识态度不再作为 IA 的核心项目定义；相关讨论可以继续保留在深入文档中，但 README 优先回答 IA 做什么、怎么做、成果最终形成什么。
 
 完整结构见 [`知识哲学与原则`](docs/01_Foundation/02_Principles/knowledge-philosophy-and-principles.zh-CN.md)；长期架构见 [`总体设计（Master Design）`](docs/01_Foundation/01_Definition/interopatlas-master-design.zh-CN.md)。
 
