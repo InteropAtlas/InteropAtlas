@@ -1,0 +1,88 @@
+name: Project Temp Index Test
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-temp-index-test.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      REPOSITORY_ID: R_kgDOUIreng
+      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
+      TEST_TITLE: IA TEMP Project Index Test
+
+    steps:
+      - name: Create temporary project
+        run: |
+          set -euo pipefail
+          CREATED="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) {
+            createProjectV2(input:{ownerId:$owner, repositoryId:$repo, title:$title}) {
+              projectV2 { id number title }
+            }
+          }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$TEST_TITLE")"
+          echo "$CREATED"
+          PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATED")"
+          PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
+          test -n "$PROJECT_ID"
+          test -n "$PROJECT_NUMBER"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+          echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
+
+      - name: Add target issue
+        run: |
+          set -euo pipefail
+          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+            addProjectV2ItemById(input:{projectId:$project, contentId:$content}) {
+              item { id }
+            }
+          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+          echo "$ADD"
+          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+          test -n "$ITEM_ID"
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
+          sleep 5
+
+      - name: Verify forward index
+        run: |
+          set -euo pipefail
+          PAGE="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                items(first:100) {
+                  totalCount
+                  nodes {
+                    id
+                    content { ... on Issue { number title state } }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+          echo "$PAGE"
+          TOTAL="$(jq -r '.data.node.items.totalCount' <<<"$PAGE")"
+          FOUND="$(jq -r '[.data.node.items.nodes[]? | select(.content.number==435)] | length' <<<"$PAGE")"
+          echo "TOTAL=$TOTAL FOUND=$FOUND"
+          test "$FOUND" = "1"
+
+      - name: Verify direct item node
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='query($item: ID!) {
+            node(id:$item) {
+              ... on ProjectV2Item {
+                id
+                isArchived
+                project { id number title }
+                content { ... on Issue { number title state } }
+              }
+            }
+          }' -F item="$ITEM_ID"
