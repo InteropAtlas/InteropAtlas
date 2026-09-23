@@ -14,47 +14,36 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
-      PROJECT_OWNER_ID: O_kgDOEzyTWQ
-      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
+      ITEM_ID: PVTI_lADOEzyTWc4BkX__zg8UiGs
 
     steps:
-      - name: Find Issue Portfolio
+      - name: Inspect target item and fields
         run: |
           set -euo pipefail
-          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
-            node(id: $owner) {
-              ... on Organization {
-                projectsV2(first: 100) { nodes { id number title } }
-              }
-            }
-          }' -F owner="$PROJECT_OWNER_ID")"
-          PROJECT_ID="$(jq -r '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .id' <<<"$PROJECTS" | head -n1)"
-          test -n "$PROJECT_ID"
-          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
-
-      - name: Add target Issue and inspect returned item
-        run: |
-          set -euo pipefail
-          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
-            addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
-              item { id }
-            }
-          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
-          echo "$ADD"
-          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
-          test -n "$ITEM_ID"
-          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
-
-          sleep 5
-
           gh api graphql -f query='query($item: ID!) {
             node(id: $item) {
               ... on ProjectV2Item {
                 id
                 isArchived
-                project { id number title }
                 content {
-                  ... on Issue { id number title state labels(first:20){nodes{name}} }
+                  ... on Issue {
+                    number
+                    title
+                    state
+                    labels(first:20){nodes{name}}
+                  }
+                }
+                fieldValues(first: 50) {
+                  nodes {
+                    ... on ProjectV2ItemFieldSingleSelectValue {
+                      name
+                      field { ... on ProjectV2SingleSelectField { name } }
+                    }
+                    ... on ProjectV2ItemFieldTextValue {
+                      text
+                      field { ... on ProjectV2Field { name } }
+                    }
+                  }
                 }
               }
             }
