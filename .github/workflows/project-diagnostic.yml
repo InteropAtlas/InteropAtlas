@@ -16,7 +16,6 @@ jobs:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
-      ISSUE_NUMBER: "435"
 
     steps:
       - name: Find Issue Portfolio
@@ -33,61 +32,30 @@ jobs:
           test -n "$PROJECT_ID"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
 
-      - name: Add target Issue
+      - name: Add target Issue and inspect returned item
         run: |
           set -euo pipefail
-          gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
             addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
               item { id }
             }
-          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID"
+          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+          echo "$ADD"
+          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+          test -n "$ITEM_ID"
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
 
-      - name: Verify target membership
-        run: |
-          set -euo pipefail
-          CURSOR=""
-          FOUND="false"
-          while :; do
-            if [ -z "$CURSOR" ]; then
-              PAGE="$(gh api graphql -f query='query($project: ID!) {
-                node(id: $project) {
-                  ... on ProjectV2 {
-                    items(first: 100) {
-                      pageInfo { hasNextPage endCursor }
-                      nodes {
-                        id
-                        content { ... on Issue { number title state labels(first:20){nodes{name}} } }
-                      }
-                    }
-                  }
+          sleep 5
+
+          gh api graphql -f query='query($item: ID!) {
+            node(id: $item) {
+              ... on ProjectV2Item {
+                id
+                isArchived
+                project { id number title }
+                content {
+                  ... on Issue { id number title state labels(first:20){nodes{name}} }
                 }
-              }' -F project="$PROJECT_ID")"
-            else
-              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                node(id: $project) {
-                  ... on ProjectV2 {
-                    items(first: 100, after: $after) {
-                      pageInfo { hasNextPage endCursor }
-                      nodes {
-                        id
-                        content { ... on Issue { number title state labels(first:20){nodes{name}} } }
-                      }
-                    }
-                  }
-                }
-              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
-            fi
-
-            if jq -e --argjson n "$ISSUE_NUMBER" '.data.node.items.nodes[]? | select(.content.number==$n)' <<<"$PAGE" >/dev/null; then
-              FOUND="true"
-              jq -c --argjson n "$ISSUE_NUMBER" '.data.node.items.nodes[] | select(.content.number==$n) | {item_id:.id,number:.content.number,title:.content.title,state:.content.state,labels:[.content.labels.nodes[].name]}' <<<"$PAGE"
-              break
-            fi
-
-            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
-            [ "$HAS" = "true" ] || break
-            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
-          done
-
-          echo "CONTAINS_TARGET=$FOUND"
-          test "$FOUND" = "true"
+              }
+            }
+          }' -F item="$ITEM_ID"
