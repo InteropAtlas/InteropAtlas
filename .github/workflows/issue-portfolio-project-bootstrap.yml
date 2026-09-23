@@ -1,0 +1,74 @@
+name: Issue Portfolio Project Bootstrap
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/issue-portfolio-project-bootstrap.yml'
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      REPOSITORY_ID: R_kgDOUIreng
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+    steps:
+      - name: Verify Projects token
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+          gh api user --jq '.login' >/dev/null
+
+      - name: Find or create Project
+        run: |
+          set -euo pipefail
+          JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id number title } } } } }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$JSON" | head -n1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .number' <<<"$JSON" | head -n1)"
+          if [ -z "$PROJECT_ID" ]; then
+            CREATED="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) { createProjectV2(input: {ownerId: $owner, repositoryId: $repo, title: $title}) { projectV2 { id number title } } }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$PROJECT_TITLE")"
+            PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATED")"
+            PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
+          fi
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+          echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
+
+      - name: Ensure metadata fields
+        run: |
+          set -euo pipefail
+          FIELDS="$(gh api graphql -f query='query($project: ID!) { node(id: $project) { ... on ProjectV2 { fields(first: 100) { nodes { ... on ProjectV2Field { id name } ... on ProjectV2SingleSelectField { id name } } } } } }' -F project="$PROJECT_ID")"
+          create_field() {
+            local name="$1"; local options="$2"
+            if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then return 0; fi
+            jq -n --arg query 'mutation($project: ID!, $name: String!, $options: [ProjectV2SingleSelectFieldOptionInput!]!) { createProjectV2Field(input: {projectId: $project, dataType: SINGLE_SELECT, name: $name, singleSelectOptions: $options}) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } } }' --arg project "$PROJECT_ID" --arg name "$name" --argjson options "$options" '{query:$query,variables:{project:$project,name:$name,options:$options}}' | gh api graphql --input - >/dev/null
+          }
+          create_field 'Lifecycle' '[{"name":"Research","color":"PURPLE","description":"Open research"},{"name":"Active","color":"BLUE","description":"Activated bounded work"},{"name":"Backlog","color":"GRAY","description":"Not currently activated"}]'
+          create_field 'Area' '[{"name":"Knowledge","color":"GREEN","description":"Knowledge system"},{"name":"Interface","color":"YELLOW","description":"Human/Agent interface and interoperability"},{"name":"Operations","color":"PURPLE","description":"Operations and evolution"}]'
+          create_field 'Priority' '[{"name":"Now","color":"RED","description":"Current attention"},{"name":"Soon","color":"ORANGE","description":"Near-term"},{"name":"Long-term","color":"YELLOW","description":"Important long-term"},{"name":"Someday","color":"GRAY","description":"Indefinitely deferrable"}]'
+          create_field 'Waiting on' '[{"name":"None","color":"GREEN","description":"No known blocker"},{"name":"Prerequisite","color":"YELLOW","description":"Waiting on prerequisite"},{"name":"Evidence","color":"YELLOW","description":"Waiting on evidence"},{"name":"Scale","color":"YELLOW","description":"Waiting on scale/usage"},{"name":"Owner","color":"RED","description":"Waiting on owner decision"}]'
+
+      - name: Add all open Issues
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
+          ADDED=0
+          while read -r ISSUE_ID; do
+            [ -n "$ISSUE_ID" ] || continue
+            if gh api graphql -f query='mutation($project: ID!, $content: ID!) { addProjectV2ItemById(input: {projectId: $project, contentId: $content}) { item { id } } }' -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null 2>&1; then ADDED=$((ADDED+1)); fi
+          done < /tmp/issues.txt
+          echo "Processed open Issues; newly added or accepted mutations: $ADDED"
+
+      - name: Summary
+        run: |
+          echo "Issue Portfolio Project: #$PROJECT_NUMBER"
+          echo "Fields: Lifecycle / Area / Priority / Waiting on"
+          echo "Saved views are intentionally not created here because GitHub Projects API does not expose saved-view creation in this automation."
+          echo "Recommended views: Current, Research, Near-term, Waiting, Knowledge, Interface, Operations."
