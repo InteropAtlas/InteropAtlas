@@ -9,13 +9,17 @@ permissions:
   contents: read
   issues: read
 
+concurrency:
+  group: issue-project-sync-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
   sync:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
-      PROJECT_OWNER: InteropAtlas
-      PROJECT_NUMBER: "2"
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
 
     steps:
       - name: Verify token
@@ -24,56 +28,77 @@ jobs:
           test -n "$GH_TOKEN"
           gh api user --jq '.login' >/dev/null
 
+      - name: Find Project
+        run: |
+          set -euo pipefail
+          JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id number title } } } } }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$JSON" | head -n1)"
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+
       - name: Sync current Issue
         if: ${{ github.event_name == 'issues' }}
         env:
-          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           set -euo pipefail
 
-          gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" >/dev/null 2>&1 || true
+          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+            addProjectV2ItemById(input: {projectId: $project, contentId: $content}) { item { id } }
+          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+          test -n "$ITEM_ID"
 
           ISSUE="$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER")"
           LABELS="$(jq -r '[.labels[].name] | join("|")' <<<"$ISSUE")"
 
-          case "|$LABELS|" in
-            *"|lifecycle:research|"*) LIFECYCLE="Research" ;;
-            *"|lifecycle:active|"*) LIFECYCLE="Active" ;;
-            *"|lifecycle:backlog|"*) LIFECYCLE="Backlog" ;;
-            *) LIFECYCLE="" ;;
-          esac
+          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+            node(id: $project) {
+              ... on ProjectV2 {
+                fields(first: 100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField {
+                      id name options { id name }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
 
-          case "|$LABELS|" in
-            *"|area:knowledge|"*) AREA="Knowledge" ;;
-            *"|area:interface|"*) AREA="Interface" ;;
-            *"|area:operations|"*) AREA="Operations" ;;
-            *) AREA="" ;;
-          esac
+          field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
+          option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          case "|$LABELS|" in
-            *"|priority:now|"*) PRIORITY="Now" ;;
-            *"|priority:soon|"*) PRIORITY="Soon" ;;
-            *"|priority:long-term|"*) PRIORITY="Long-term" ;;
-            *"|priority:someday|"*) PRIORITY="Someday" ;;
-            *) PRIORITY="" ;;
-          esac
+          LF="$(field_id Lifecycle)"; AF="$(field_id Area)"; PF="$(field_id Priority)"
+          test -n "$LF"; test -n "$AF"; test -n "$PF"
 
-          sync_field() {
-            local field="$1"
-            local value="$2"
-            if [ -n "$value" ]; then
-              gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "$field" --value "$value" >/dev/null
-            else
-              gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "$field" --clear >/dev/null 2>&1 || true
-            fi
+          L=""; A=""; P=""
+          case "|$LABELS|" in *"|lifecycle:research|"*) L="Research";; *"|lifecycle:active|"*) L="Active";; *"|lifecycle:backlog|"*) L="Backlog";; esac
+          case "|$LABELS|" in *"|area:knowledge|"*) A="Knowledge";; *"|area:interface|"*) A="Interface";; *"|area:operations|"*) A="Operations";; esac
+          case "|$LABELS|" in *"|priority:now|"*) P="Now";; *"|priority:soon|"*) P="Soon";; *"|priority:long-term|"*) P="Long-term";; *"|priority:someday|"*) P="Someday";; esac
+
+          set_value() {
+            local field_name="$1" field_id="$2" option_name="$3"
+            [ -n "$option_name" ] || return 0
+            local option
+            option="$(option_id "$field_name" "$option_name")"
+            test -n "$option"
+            gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $project,
+                itemId: $item,
+                fieldId: $field,
+                value: {singleSelectOptionId: $option}
+              }) { projectV2Item { id } }
+            }' -F project="$PROJECT_ID" -F item="$ITEM_ID" -F field="$field_id" -f option="$option" >/dev/null
           }
 
-          sync_field "Lifecycle" "$LIFECYCLE"
-          sync_field "Area" "$AREA"
-          sync_field "Priority" "$PRIORITY"
+          set_value Lifecycle "$LF" "$L"
+          set_value Area "$AF" "$A"
+          set_value Priority "$PF" "$P"
 
       - name: Manual full-sync guidance
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          echo "For a full resync, run 'Issue Portfolio Project Bootstrap'."
+          echo "Run 'Issue Portfolio Project Bootstrap' for a full resync."
