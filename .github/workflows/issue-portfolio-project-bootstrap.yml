@@ -71,7 +71,6 @@ jobs:
 
           ensure_field() {
             local name="$1"
-            local options="$2"
             local FIELDS
             FIELDS="$(fields_json)"
             if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then
