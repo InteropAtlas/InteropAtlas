@@ -76,19 +76,31 @@ jobs:
           echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '90 days ago' +%Y-%m-%dT%H:%M:%SZ)" '.[] | select(.updatedAt < $cutoff) | "- #\(.number) \(.title) (\(.updatedAt))"' >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
-          echo "### 6. Enrichment coverage (informational)" >> "$GITHUB_STEP_SUMMARY"
+          echo "### 6. Core metadata completeness" >> "$GITHUB_STEP_SUMMARY"
           for PREFIX in area: priority:; do
-            COUNT=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length == 0)] | length')
-            echo "- Missing $PREFIX $COUNT" >> "$GITHUB_STEP_SUMMARY"
+            MISSING=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length == 0)] | length')
+            CONFLICT=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length > 1)] | length')
+            echo "- Missing $PREFIX $MISSING" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Conflicting $PREFIX $CONFLICT" >> "$GITHUB_STEP_SUMMARY"
+            if [ "$MISSING" -gt 0 ]; then
+              echo "$ISSUES" | jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length == 0) | "- #\(.number) \(.title) — missing "+$p' >> "$GITHUB_STEP_SUMMARY"
+            fi
+            if [ "$CONFLICT" -gt 0 ]; then
+              echo "$ISSUES" | jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length > 1) | "- #\(.number) \(.title) — conflicting "+$p' >> "$GITHUB_STEP_SUMMARY"
+            fi
+            VIOLATIONS=$((VIOLATIONS + MISSING + CONFLICT))
           done
+          WAITING_CONFLICT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 1)] | length')
           WAITING_COUNT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 0)] | length')
           echo "- Issues with optional waiting condition: $WAITING_COUNT" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Conflicting optional waiting labels: $WAITING_CONFLICT" >> "$GITHUB_STEP_SUMMARY"
+          VIOLATIONS=$((VIOLATIONS + WAITING_CONFLICT))
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           echo "---" >> "$GITHUB_STEP_SUMMARY"
-          echo "**Actionable lifecycle violations: $VIOLATIONS**" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Actionable metadata violations: $VIOLATIONS**" >> "$GITHUB_STEP_SUMMARY"
           echo "> This workflow reports only. Semantic activation, closure, and reprioritization remain Human/Agent review decisions." >> "$GITHUB_STEP_SUMMARY"
 
           if [ "$VIOLATIONS" -gt 0 ]; then
-            echo "::warning::$VIOLATIONS lifecycle hygiene violations found."
+            echo "::warning::$VIOLATIONS metadata hygiene violations found."
           fi
