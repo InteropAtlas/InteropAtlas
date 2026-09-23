@@ -15,27 +15,69 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
-      ISSUE_NODE_ID: I_kwDOUIrens7yO1pp
     steps:
       - name: Diagnose Issue Portfolio membership
         run: |
           set -euo pipefail
-          gh api graphql -f query='query($owner: ID!, $issue: ID!) {
+
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
             node(id: $owner) {
               ... on Organization {
-                projectsV2(first: 100) {
-                  nodes {
-                    id number title
-                    items(first: 100) {
-                      nodes {
-                        id
-                        content {
-                          ... on Issue { id number title }
+                projectsV2(first: 100) { nodes { id number title } }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+
+          jq -c '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio")' <<<"$PROJECTS" |
+          while read -r P; do
+            PID="$(jq -r '.id' <<<"$P")"
+            PNUM="$(jq -r '.number' <<<"$P")"
+            echo "PROJECT number=$PNUM id=$PID"
+
+            CURSOR=""
+            FOUND="false"
+            TOTAL=0
+            while :; do
+              if [ -z "$CURSOR" ]; then
+                PAGE="$(gh api graphql -f query='query($project: ID!) {
+                  node(id: $project) {
+                    ... on ProjectV2 {
+                      items(first: 100) {
+                        pageInfo { hasNextPage endCursor }
+                        nodes {
+                          id
+                          content { ... on Issue { number title state labels(first:20){nodes{name}} } }
                         }
                       }
                     }
                   }
-                }
-              }
-            }
-          }' -F owner="$PROJECT_OWNER_ID" -F issue="$ISSUE_NODE_ID"           --jq '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | {id,number,title,contains435: ([.items.nodes[].content.number] | index(435) != null), first100_count:(.items.nodes|length)}'
+                }' -F project="$PID")"
+              else
+                PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                  node(id: $project) {
+                    ... on ProjectV2 {
+                      items(first: 100, after: $after) {
+                        pageInfo { hasNextPage endCursor }
+                        nodes {
+                          id
+                          content { ... on Issue { number title state labels(first:20){nodes{name}} } }
+                        }
+                      }
+                    }
+                  }
+                }' -F project="$PID" -f after="$CURSOR")"
+              fi
+
+              COUNT="$(jq '.data.node.items.nodes|length' <<<"$PAGE")"
+              TOTAL=$((TOTAL+COUNT))
+              if jq -e '.data.node.items.nodes[]? | select(.content.number==435)' <<<"$PAGE" >/dev/null; then
+                FOUND="true"
+                jq -c '.data.node.items.nodes[] | select(.content.number==435) | {item_id:.id,number:.content.number,title:.content.title,state:.content.state,labels:[.content.labels.nodes[].name]}' <<<"$PAGE"
+              fi
+
+              HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+              [ "$HAS" = "true" ] || break
+              CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+            done
+            echo "TOTAL=$TOTAL CONTAINS_435=$FOUND"
+          done
