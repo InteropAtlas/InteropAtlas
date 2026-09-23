@@ -15,11 +15,13 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
+      ISSUE_NUMBER: "435"
+
     steps:
-      - name: Diagnose Issue Portfolio membership
+      - name: Find Issue Portfolio
         run: |
           set -euo pipefail
-
           PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
             node(id: $owner) {
               ... on Organization {
@@ -27,57 +29,65 @@ jobs:
               }
             }
           }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .id' <<<"$PROJECTS" | head -n1)"
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
 
-          jq -c '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio")' <<<"$PROJECTS" |
-          while read -r P; do
-            PID="$(jq -r '.id' <<<"$P")"
-            PNUM="$(jq -r '.number' <<<"$P")"
-            echo "PROJECT number=$PNUM id=$PID"
+      - name: Add target Issue
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+            addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+              item { id }
+            }
+          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID"
 
-            CURSOR=""
-            FOUND="false"
-            TOTAL=0
-            while :; do
-              if [ -z "$CURSOR" ]; then
-                PAGE="$(gh api graphql -f query='query($project: ID!) {
-                  node(id: $project) {
-                    ... on ProjectV2 {
-                      items(first: 100) {
-                        pageInfo { hasNextPage endCursor }
-                        nodes {
-                          id
-                          content { ... on Issue { number title state labels(first:20){nodes{name}} } }
-                        }
+      - name: Verify target membership
+        run: |
+          set -euo pipefail
+          CURSOR=""
+          FOUND="false"
+          while :; do
+            if [ -z "$CURSOR" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id: $project) {
+                  ... on ProjectV2 {
+                    items(first: 100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content { ... on Issue { number title state labels(first:20){nodes{name}} } }
                       }
                     }
                   }
-                }' -F project="$PID")"
-              else
-                PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                  node(id: $project) {
-                    ... on ProjectV2 {
-                      items(first: 100, after: $after) {
-                        pageInfo { hasNextPage endCursor }
-                        nodes {
-                          id
-                          content { ... on Issue { number title state labels(first:20){nodes{name}} } }
-                        }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                node(id: $project) {
+                  ... on ProjectV2 {
+                    items(first: 100, after: $after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content { ... on Issue { number title state labels(first:20){nodes{name}} } }
                       }
                     }
                   }
-                }' -F project="$PID" -f after="$CURSOR")"
-              fi
+                }
+              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
+            fi
 
-              COUNT="$(jq '.data.node.items.nodes|length' <<<"$PAGE")"
-              TOTAL=$((TOTAL+COUNT))
-              if jq -e '.data.node.items.nodes[]? | select(.content.number==435)' <<<"$PAGE" >/dev/null; then
-                FOUND="true"
-                jq -c '.data.node.items.nodes[] | select(.content.number==435) | {item_id:.id,number:.content.number,title:.content.title,state:.content.state,labels:[.content.labels.nodes[].name]}' <<<"$PAGE"
-              fi
+            if jq -e --argjson n "$ISSUE_NUMBER" '.data.node.items.nodes[]? | select(.content.number==$n)' <<<"$PAGE" >/dev/null; then
+              FOUND="true"
+              jq -c --argjson n "$ISSUE_NUMBER" '.data.node.items.nodes[] | select(.content.number==$n) | {item_id:.id,number:.content.number,title:.content.title,state:.content.state,labels:[.content.labels.nodes[].name]}' <<<"$PAGE"
+              break
+            fi
 
-              HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
-              [ "$HAS" = "true" ] || break
-              CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
-            done
-            echo "TOTAL=$TOTAL CONTAINS_435=$FOUND"
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
           done
+
+          echo "CONTAINS_TARGET=$FOUND"
+          test "$FOUND" = "true"
