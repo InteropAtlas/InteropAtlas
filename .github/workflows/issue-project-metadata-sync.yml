@@ -31,26 +31,25 @@ jobs:
       - name: Find Project
         run: |
           set -euo pipefail
-          JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id number title } } } } }' -F owner="$PROJECT_OWNER_ID")"
-          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$JSON" | head -n1)"
+          JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id title } } } } }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
           test -n "$PROJECT_ID"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
 
-      - name: Remove closed Issue from Project
-        if: ${{ github.event_name == 'issues' && github.event.action == 'closed' }}
+      - name: Resolve existing Project item
+        if: ${{ github.event_name == 'issues' }}
         env:
           ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
         run: |
           set -euo pipefail
-
           CURSOR=""
           ITEM_ID=""
           while :; do
             if [ -z "$CURSOR" ]; then
               PAGE="$(gh api graphql -f query='query($project: ID!) {
-                node(id: $project) {
+                node(id:$project) {
                   ... on ProjectV2 {
-                    items(first: 100) {
+                    items(first:100) {
                       pageInfo { hasNextPage endCursor }
                       nodes { id content { ... on Issue { id } } }
                     }
@@ -58,10 +57,10 @@ jobs:
                 }
               }' -F project="$PROJECT_ID")"
             else
-              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                node(id: $project) {
+              PAGE="$(gh api graphql -f query='query($project: ID!,$after:String!) {
+                node(id:$project) {
                   ... on ProjectV2 {
-                    items(first: 100, after: $after) {
+                    items(first:100,after:$after) {
                       pageInfo { hasNextPage endCursor }
                       nodes { id content { ... on Issue { id } } }
                     }
@@ -78,37 +77,37 @@ jobs:
             CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
           done
 
-          if [ -n "$ITEM_ID" ]; then
-            gh api graphql -f query='mutation($project: ID!, $item: ID!) {
-              deleteProjectV2Item(input: {projectId: $project, itemId: $item}) { deletedItemId }
-            }' -F project="$PROJECT_ID" -F item="$ITEM_ID" >/dev/null
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
+
+          if [ -z "$ITEM_ID" ]; then
+            echo "Issue is not present in Project forward index."
+            echo "Automatic add is intentionally paused due to confirmed GitHub Projects V2 indexing bug."
           fi
 
-      - name: Sync current Issue
-        if: ${{ github.event_name == 'issues' && github.event.action != 'closed' }}
+      - name: Remove closed Issue from Project
+        if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && env.ITEM_ID != '' }}
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='mutation($project: ID!, $item: ID!) {
+            deleteProjectV2Item(input:{projectId:$project,itemId:$item}) { deletedItemId }
+          }' -F project="$PROJECT_ID" -F item="$ITEM_ID" >/dev/null
+
+      - name: Sync Labels to existing Project item
+        if: ${{ github.event_name == 'issues' && github.event.action != 'closed' && env.ITEM_ID != '' }}
         env:
-          ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           set -euo pipefail
-
-          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
-            addProjectV2ItemById(input: {projectId: $project, contentId: $content}) { item { id } }
-          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
-          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
-          test -n "$ITEM_ID"
 
           ISSUE="$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER")"
           LABELS="$(jq -r '[.labels[].name] | join("|")' <<<"$ISSUE")"
 
           FIELDS="$(gh api graphql -f query='query($project: ID!) {
-            node(id: $project) {
+            node(id:$project) {
               ... on ProjectV2 {
-                fields(first: 100) {
+                fields(first:100) {
                   nodes {
-                    ... on ProjectV2SingleSelectField {
-                      id name options { id name }
-                    }
+                    ... on ProjectV2SingleSelectField { id name options { id name } }
                   }
                 }
               }
@@ -133,11 +132,9 @@ jobs:
             option="$(option_id "$field_name" "$option_name")"
             test -n "$option"
             gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: $project,
-                itemId: $item,
-                fieldId: $field,
-                value: {singleSelectOptionId: $option}
+              updateProjectV2ItemFieldValue(input:{
+                projectId:$project,itemId:$item,fieldId:$field,
+                value:{singleSelectOptionId:$option}
               }) { projectV2Item { id } }
             }' -F project="$PROJECT_ID" -F item="$ITEM_ID" -F field="$field_id" -f option="$option" >/dev/null
           }
@@ -146,7 +143,8 @@ jobs:
           set_value Area "$AF" "$A"
           set_value Priority "$PF" "$P"
 
-      - name: Manual full-sync guidance
+      - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          echo "Run 'Issue Portfolio Project Bootstrap' for a full resync."
+          echo "Automatic add of new Issues is paused due to GitHub Projects V2 indexing bug."
+          echo "Existing Project items continue to sync normally."
