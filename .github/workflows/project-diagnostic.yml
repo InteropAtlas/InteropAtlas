@@ -1,4 +1,4 @@
-name: Project REST Repair
+name: Project REST Inspect
 
 on:
   push:
@@ -10,17 +10,12 @@ permissions:
   contents: read
 
 jobs:
-  repair:
+  inspect:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
     steps:
-      - name: Add target issue via REST
+      - name: Inspect target via REST list
         run: |
           set -euo pipefail
-          gh api             --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items"             -f type=Issue             -F id=5553143177
-
-      - name: Verify target via REST query
-        run: |
-          set -euo pipefail
-          gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items?per_page=100&q=Issue%20Portfolio%20%E7%9C%8B%E6%9D%BF"             --jq '(.value // .)[]? | select(.content.number == 435) | {node_id, content_type, title: .content.title, number: .content.number}'
+          gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items?per_page=100&q=435"
