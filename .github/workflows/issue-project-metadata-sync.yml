@@ -1,0 +1,79 @@
+name: Issue Project Metadata Sync
+
+on:
+  issues:
+    types: [opened, reopened, labeled, unlabeled]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER: InteropAtlas
+      PROJECT_NUMBER: "2"
+
+    steps:
+      - name: Verify token
+        run: |
+          set -euo pipefail
+          test -n "$GH_TOKEN"
+          gh api user --jq '.login' >/dev/null
+
+      - name: Sync current Issue
+        if: ${{ github.event_name == 'issues' }}
+        env:
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+        run: |
+          set -euo pipefail
+
+          gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" >/dev/null 2>&1 || true
+
+          ISSUE="$(gh api "repos/$GITHUB_REPOSITORY/issues/$ISSUE_NUMBER")"
+          LABELS="$(jq -r '[.labels[].name] | join("|")' <<<"$ISSUE")"
+
+          case "|$LABELS|" in
+            *"|lifecycle:research|"*) LIFECYCLE="Research" ;;
+            *"|lifecycle:active|"*) LIFECYCLE="Active" ;;
+            *"|lifecycle:backlog|"*) LIFECYCLE="Backlog" ;;
+            *) LIFECYCLE="" ;;
+          esac
+
+          case "|$LABELS|" in
+            *"|area:knowledge|"*) AREA="Knowledge" ;;
+            *"|area:interface|"*) AREA="Interface" ;;
+            *"|area:operations|"*) AREA="Operations" ;;
+            *) AREA="" ;;
+          esac
+
+          case "|$LABELS|" in
+            *"|priority:now|"*) PRIORITY="Now" ;;
+            *"|priority:soon|"*) PRIORITY="Soon" ;;
+            *"|priority:long-term|"*) PRIORITY="Long-term" ;;
+            *"|priority:someday|"*) PRIORITY="Someday" ;;
+            *) PRIORITY="" ;;
+          esac
+
+          sync_field() {
+            local field="$1"
+            local value="$2"
+            if [ -n "$value" ]; then
+              gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "$field" --value "$value" >/dev/null
+            else
+              gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "$field" --clear >/dev/null 2>&1 || true
+            fi
+          }
+
+          sync_field "Lifecycle" "$LIFECYCLE"
+          sync_field "Area" "$AREA"
+          sync_field "Priority" "$PRIORITY"
+
+      - name: Manual full-sync guidance
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "For a full resync, run 'Issue Portfolio Project Bootstrap'."
