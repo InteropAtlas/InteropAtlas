@@ -1,0 +1,41 @@
+name: Project Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-diagnostic.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      ISSUE_NODE_ID: I_kwDOUIrens7yO1pp
+    steps:
+      - name: Diagnose Issue Portfolio membership
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='query($owner: ID!, $issue: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) {
+                  nodes {
+                    id number title
+                    items(first: 100) {
+                      nodes {
+                        id
+                        content {
+                          ... on Issue { id number title }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID" -F issue="$ISSUE_NODE_ID"           --jq '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | {id,number,title,contains435: ([.items.nodes[].content.number] | index(435) != null), first100_count:(.items.nodes|length)}'
