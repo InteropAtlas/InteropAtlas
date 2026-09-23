@@ -1,4 +1,4 @@
-name: Project Diagnostic
+name: Project REST Repair
 
 on:
   push:
@@ -14,84 +14,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
-      ORG: InteropAtlas
-      PROJECT_NUMBER: "2"
-      ISSUE_DATABASE_ID: "5553143177"
-      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
-
     steps:
-      - name: Remove any stale GraphQL item
+      - name: Add target issue via REST
         run: |
           set -euo pipefail
-          PROJECT_ID="$(gh api graphql -f query='query($owner:String!,$number:Int!){
-            organization(login:$owner){projectV2(number:$number){id items(first:100){nodes{id content{... on Issue{id}}}}}}
-          }' -f owner="$ORG" -F number="$PROJECT_NUMBER" --jq '.data.organization.projectV2.id')"
-          test -n "$PROJECT_ID"
+          gh api             --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items"             -f type=Issue             -F id=5553143177
 
-          CURSOR=""
-          ITEM_ID=""
-          while :; do
-            if [ -z "$CURSOR" ]; then
-              PAGE="$(gh api graphql -f query='query($owner:String!,$number:Int!){
-                organization(login:$owner){projectV2(number:$number){
-                  items(first:100){pageInfo{hasNextPage endCursor} nodes{id content{... on Issue{id}}}}
-                }}
-              }' -f owner="$ORG" -F number="$PROJECT_NUMBER")"
-            else
-              PAGE="$(gh api graphql -f query='query($owner:String!,$number:Int!,$after:String!){
-                organization(login:$owner){projectV2(number:$number){
-                  items(first:100,after:$after){pageInfo{hasNextPage endCursor} nodes{id content{... on Issue{id}}}}
-                }}
-              }' -f owner="$ORG" -F number="$PROJECT_NUMBER" -f after="$CURSOR")"
-            fi
-            ITEM_ID="$(jq -r --arg issue "$ISSUE_NODE_ID" '.data.organization.projectV2.items.nodes[]? | select(.content.id==$issue) | .id' <<<"$PAGE" | head -n1)"
-            [ -z "$ITEM_ID" ] || break
-            HAS="$(jq -r '.data.organization.projectV2.items.pageInfo.hasNextPage' <<<"$PAGE")"
-            [ "$HAS" = "true" ] || break
-            CURSOR="$(jq -r '.data.organization.projectV2.items.pageInfo.endCursor' <<<"$PAGE")"
-          done
-
-          if [ -n "$ITEM_ID" ]; then
-            gh api graphql -f query='mutation($project:ID!,$item:ID!){
-              deleteProjectV2Item(input:{projectId:$project,itemId:$item}){deletedItemId}
-            }' -F project="$PROJECT_ID" -F item="$ITEM_ID"
-            sleep 3
-          fi
-
-      - name: Add target Issue via REST Projects endpoint
+      - name: Verify target via REST query
         run: |
           set -euo pipefail
-          gh api             --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/items"             -f type=Issue             -F id="$ISSUE_DATABASE_ID"
-
-      - name: Verify via REST list
-        run: |
-          set -euo pipefail
-          FOUND="false"
-          URL="/orgs/$ORG/projectsV2/$PROJECT_NUMBER/items?per_page=100"
-          while [ -n "$URL" ]; do
-            TMP_H="$(mktemp)"
-            TMP_B="$(mktemp)"
-            gh api -i               -H "Accept: application/vnd.github+json"               -H "X-GitHub-Api-Version: 2026-03-10"               "$URL" > /tmp/resp.txt
-
-            python3 - <<'PY'
-from pathlib import Path
-raw=Path('/tmp/resp.txt').read_text()
-parts=raw.split('\r\n\r\n',1)
-if len(parts)==1:
-    parts=raw.split('\n\n',1)
-headers,body=parts if len(parts)==2 else ("",raw)
-Path('/tmp/headers.txt').write_text(headers)
-Path('/tmp/body.json').write_text(body)
-PY
-
-            if jq -e '(.value // .)[]? | select(.content.number==435)' /tmp/body.json >/dev/null; then
-              jq -c '(.value // .)[]? | select(.content.number==435)' /tmp/body.json
-              FOUND="true"
-              break
-            fi
-
-            NEXT="$(grep -i '^link:' /tmp/headers.txt | sed -n 's/.*<https:\/\/api.github.com\([^>]*\)>; rel="next".*/\1/p' | tr -d '\r' | head -n1)"
-            URL="$NEXT"
-          done
-          echo "FOUND=$FOUND"
-          test "$FOUND" = "true"
+          gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items?per_page=100&q=Issue%20Portfolio%20%E7%9C%8B%E6%9D%BF"             --jq '(.value // .)[]? | select(.content.number == 435) | {node_id, content_type, title: .content.title, number: .content.number}'
