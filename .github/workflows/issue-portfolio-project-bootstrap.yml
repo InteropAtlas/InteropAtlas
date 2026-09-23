@@ -19,7 +19,6 @@ jobs:
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       REPOSITORY_ID: R_kgDOUIreng
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
-      PROJECT_OWNER: InteropAtlas
 
     steps:
       - name: Verify Projects token
@@ -28,17 +27,12 @@ jobs:
           test -n "$GH_TOKEN"
           gh api user --jq '.login' >/dev/null
 
-      - name: Find or create Project
+      - name: Find Project
         run: |
           set -euo pipefail
           JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id number title } } } } }' -F owner="$PROJECT_OWNER_ID")"
           PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$JSON" | head -n1)"
           PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .number' <<<"$JSON" | head -n1)"
-          if [ -z "$PROJECT_ID" ]; then
-            CREATED="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) { createProjectV2(input: {ownerId: $owner, repositoryId: $repo, title: $title}) { projectV2 { id number title } } }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$PROJECT_TITLE")"
-            PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATED")"
-            PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
-          fi
           test -n "$PROJECT_ID"
           test -n "$PROJECT_NUMBER"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
@@ -47,71 +41,198 @@ jobs:
       - name: Add all open Issues
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .html_url' > /tmp/issues.txt
-          while read -r ISSUE_URL; do
-            [ -n "$ISSUE_URL" ] || continue
-            gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" >/dev/null 2>&1 || true
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
+          while read -r ISSUE_ID; do
+            [ -n "$ISSUE_ID" ] || continue
+            gh api graphql               -f query='mutation($project: ID!, $content: ID!) { addProjectV2ItemById(input: {projectId: $project, contentId: $content}) { item { id } } }'               -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null 2>&1 || true
           done < /tmp/issues.txt
 
-      - name: Ensure mirror fields for Board views
+      - name: Ensure mirror fields
         run: |
           set -euo pipefail
-          FIELDS="$(gh project field-list "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --format json)"
+
+          fields_json() {
+            gh api graphql -f query='query($project: ID!) {
+              node(id: $project) {
+                ... on ProjectV2 {
+                  fields(first: 100) {
+                    nodes {
+                      ... on ProjectV2SingleSelectField {
+                        id
+                        name
+                        options { id name }
+                      }
+                    }
+                  }
+                }
+              }
+            }' -F project="$PROJECT_ID"
+          }
 
           ensure_field() {
             local name="$1"
             local options="$2"
-            if jq -e --arg name "$name" '.fields[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then
+            local FIELDS
+            FIELDS="$(fields_json)"
+            if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then
               echo "Field exists: $name"
-            else
-              gh project field-create "$PROJECT_NUMBER" --owner "$PROJECT_OWNER"                 --name "$name" --data-type SINGLE_SELECT --single-select-options "$options" >/dev/null
-              echo "Created field: $name"
+              return 0
             fi
+
+            case "$name" in
+              Lifecycle)
+                gh api graphql -f query='mutation($project: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $project,
+                    dataType: SINGLE_SELECT,
+                    name: "Lifecycle",
+                    singleSelectOptions: [
+                      {name:"Research", color:PURPLE, description:"Open research question"},
+                      {name:"Active", color:BLUE, description:"Currently activated bounded work"},
+                      {name:"Backlog", color:GRAY, description:"Not currently activated"}
+                    ]
+                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
+                }' -F project="$PROJECT_ID" >/dev/null
+                ;;
+              Area)
+                gh api graphql -f query='mutation($project: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $project,
+                    dataType: SINGLE_SELECT,
+                    name: "Area",
+                    singleSelectOptions: [
+                      {name:"Knowledge", color:GREEN, description:"Knowledge/model/evidence"},
+                      {name:"Interface", color:YELLOW, description:"Human/Agent access and interfaces"},
+                      {name:"Operations", color:ORANGE, description:"Operations/governance/maintenance"}
+                    ]
+                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
+                }' -F project="$PROJECT_ID" >/dev/null
+                ;;
+              Priority)
+                gh api graphql -f query='mutation($project: ID!) {
+                  createProjectV2Field(input: {
+                    projectId: $project,
+                    dataType: SINGLE_SELECT,
+                    name: "Priority",
+                    singleSelectOptions: [
+                      {name:"Now", color:RED, description:"Needs attention now"},
+                      {name:"Soon", color:ORANGE, description:"Near-term attention"},
+                      {name:"Long-term", color:YELLOW, description:"Long-term attention"},
+                      {name:"Someday", color:GRAY, description:"Someday / low-attention"}
+                    ]
+                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
+                }' -F project="$PROJECT_ID" >/dev/null
+                ;;
+            esac
+            echo "Created field: $name"
           }
 
-          ensure_field "Lifecycle" "Research,Active,Backlog"
-          ensure_field "Area" "Knowledge,Interface,Operations"
-          ensure_field "Priority" "Now,Soon,Long-term,Someday"
+          ensure_field Lifecycle
+          ensure_field Area
+          ensure_field Priority
 
-      - name: Sync Labels to Project mirror fields
+      - name: Sync Labels to mirror fields
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100"             --jq '.[] | select(.pull_request == null) | [.html_url, ([.labels[].name] | join("|"))] | @tsv' > /tmp/issues.tsv
 
-          while IFS=$'\t' read -r ISSUE_URL LABELS; do
-            [ -n "$ISSUE_URL" ] || continue
+          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+            node(id: $project) {
+              ... on ProjectV2 {
+                fields(first: 100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField {
+                      id name options { id name }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
 
-            case "|$LABELS|" in
-              *"|lifecycle:research|"*) LIFECYCLE="Research" ;;
-              *"|lifecycle:active|"*) LIFECYCLE="Active" ;;
-              *"|lifecycle:backlog|"*) LIFECYCLE="Backlog" ;;
-              *) LIFECYCLE="" ;;
-            esac
+          field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
+          option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-            case "|$LABELS|" in
-              *"|area:knowledge|"*) AREA="Knowledge" ;;
-              *"|area:interface|"*) AREA="Interface" ;;
-              *"|area:operations|"*) AREA="Operations" ;;
-              *) AREA="" ;;
-            esac
+          LF="$(field_id Lifecycle)"; AF="$(field_id Area)"; PF="$(field_id Priority)"
+          test -n "$LF"; test -n "$AF"; test -n "$PF"
 
-            case "|$LABELS|" in
-              *"|priority:now|"*) PRIORITY="Now" ;;
-              *"|priority:soon|"*) PRIORITY="Soon" ;;
-              *"|priority:long-term|"*) PRIORITY="Long-term" ;;
-              *"|priority:someday|"*) PRIORITY="Someday" ;;
-              *) PRIORITY="" ;;
-            esac
+          set_value() {
+            local item="$1" field="$2" option="$3"
+            [ -n "$option" ] || return 0
+            gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+              updateProjectV2ItemFieldValue(input: {
+                projectId: $project,
+                itemId: $item,
+                fieldId: $field,
+                value: {singleSelectOptionId: $option}
+              }) { projectV2Item { id } }
+            }' -F project="$PROJECT_ID" -F item="$item" -F field="$field" -f option="$option" >/dev/null
+          }
 
-            [ -z "$LIFECYCLE" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Lifecycle" --value "$LIFECYCLE" >/dev/null
-            [ -z "$AREA" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Area" --value "$AREA" >/dev/null
-            [ -z "$PRIORITY" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Priority" --value "$PRIORITY" >/dev/null
-          done < /tmp/issues.tsv
+          cursor=""
+          while :; do
+            if [ -z "$cursor" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id: $project) {
+                  ... on ProjectV2 {
+                    items(first: 100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            state
+                            labels(first: 20) { nodes { name } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                node(id: $project) {
+                  ... on ProjectV2 {
+                    items(first: 100, after: $after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            state
+                            labels(first: 20) { nodes { name } }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$cursor")"
+            fi
+
+            jq -c '.data.node.items.nodes[]? | select(.content.state=="OPEN")' <<<"$PAGE" |
+            while read -r ROW; do
+              ITEM="$(jq -r '.id' <<<"$ROW")"
+              LABELS="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
+
+              L=""; A=""; P=""
+              case "|$LABELS|" in *"|lifecycle:research|"*) L="Research";; *"|lifecycle:active|"*) L="Active";; *"|lifecycle:backlog|"*) L="Backlog";; esac
+              case "|$LABELS|" in *"|area:knowledge|"*) A="Knowledge";; *"|area:interface|"*) A="Interface";; *"|area:operations|"*) A="Operations";; esac
+              case "|$LABELS|" in *"|priority:now|"*) P="Now";; *"|priority:soon|"*) P="Soon";; *"|priority:long-term|"*) P="Long-term";; *"|priority:someday|"*) P="Someday";; esac
+
+              [ -z "$L" ] || set_value "$ITEM" "$LF" "$(option_id Lifecycle "$L")"
+              [ -z "$A" ] || set_value "$ITEM" "$AF" "$(option_id Area "$A")"
+              [ -z "$P" ] || set_value "$ITEM" "$PF" "$(option_id Priority "$P")"
+            done
+
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            cursor="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
 
       - name: Summary
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
-          echo "Source of truth: Issue Labels."
+          echo "Issue Labels remain the source of truth."
           echo "Mirror fields: Lifecycle / Area / Priority."
           echo "Sync direction: Issue Labels -> Project fields."
-          echo "Board views can now use these fields for columns/grouping/slicing."
