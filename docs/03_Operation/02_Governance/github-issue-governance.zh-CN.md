@@ -25,7 +25,7 @@ Kubernetes 的 triage 将“是否有效 / 是否需要更多信息”“优先�
 - https://kubernetes.io/docs/contribute/review/for-approvers/
 - https://kubernetes.io/docs/contribute/participate/issue-wrangler/
 
-对 IA 的启发：**一个 Issue 是否成立、是否当前执行、何时执行、为什么等待，是不同维度。**
+对 IA 的启发：**一个 Issue 当前处于什么工作形态、主要属于哪个能力域、何时值得投入注意力，是三个核心维度；等待原因只在确实存在时附加。**
 
 ### Rust
 
@@ -63,13 +63,18 @@ Open Issue 不等于 Active Work。
 
 Priority 与 Lifecycle 正交。
 
-### 4. Waiting on
+### Waiting Condition（可选）
 
-- `waiting:none`
+Waiting 不是第四个必填维度，而是只在 Issue 当前确实存在明确等待条件时附加：
+
 - `waiting:prerequisite`
 - `waiting:evidence`
 - `waiting:scale`
 - `waiting:owner`
+
+没有明确等待条件时，不添加任何 `waiting:*` 标签；`waiting:none` 不再使用。
+
+因此 IA 的最小模型是：**Lifecycle × Area × Priority + 可选 Waiting Condition**。
 
 ## 生命周期
 
@@ -88,12 +93,12 @@ Project = 对 Issue / PR 的组织与投影，不是第二事实源。
 - Current — Lifecycle = Active
 - Research — Lifecycle = Research
 - Near-term — Priority = Now / Soon
-- Waiting — Waiting on != None
+- Waiting — 存在任意 `waiting:*` 标签
 - Knowledge — Area = Knowledge
 - Interface — Area = Interface
 - Operations — Area = Operations
 
-如果 GitHub API 暂不支持自动创建保存视图，字段与数据仍应先自动维护；视图只是投影，不影响事实源。
+Issue Labels 是 Metadata 的唯一事实源；Project 只基于 Labels 做过滤、分组和展示，不维护重复的 Metadata 真值。
 
 ## 自动化边界
 
