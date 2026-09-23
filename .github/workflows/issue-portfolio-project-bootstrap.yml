@@ -19,6 +19,8 @@ jobs:
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       REPOSITORY_ID: R_kgDOUIreng
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
+      PROJECT_OWNER: InteropAtlas
+
     steps:
       - name: Verify Projects token
         run: |
@@ -38,63 +40,78 @@ jobs:
             PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
           fi
           test -n "$PROJECT_ID"
+          test -n "$PROJECT_NUMBER"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
-
-      - name: Ensure metadata fields (legacy; no-op)
-        run: |
-          set -euo pipefail
-          echo 'Legacy Project metadata fields are no longer created; Issue Labels are the source of truth.'
 
       - name: Add all open Issues
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
-          ADDED=0
-          while read -r ISSUE_ID; do
-            [ -n "$ISSUE_ID" ] || continue
-            if gh api graphql -f query='mutation($project: ID!, $content: ID!) { addProjectV2ItemById(input: {projectId: $project, contentId: $content}) { item { id } } }' -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null 2>&1; then ADDED=$((ADDED+1)); fi
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .html_url' > /tmp/issues.txt
+          while read -r ISSUE_URL; do
+            [ -n "$ISSUE_URL" ] || continue
+            gh project item-add "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" >/dev/null 2>&1 || true
           done < /tmp/issues.txt
-          echo "Processed open Issues; newly added or accepted mutations: $ADDED"
 
-      - name: Remove duplicate Project metadata fields
+      - name: Ensure mirror fields for Board views
         run: |
           set -euo pipefail
-          FIELDS="$(gh api graphql -f query='query($project: ID!) { node(id: $project) { ... on ProjectV2 { fields(first: 100) { nodes { ... on ProjectV2Field { id name } ... on ProjectV2SingleSelectField { id name } } } } } }' -F project="$PROJECT_ID")"
-          for NAME in "Lifecycle" "Area" "Priority" "Waiting on"; do
-            ID="$(jq -r --arg name "$NAME" '.data.node.fields.nodes[]? | select(.name == $name) | .id' <<<"$FIELDS" | head -n1)"
-            if [ -n "$ID" ]; then
-              gh api graphql -f query='mutation($field: ID!) { deleteProjectV2Field(input: {fieldId: $field}) { projectV2Field { ... on ProjectV2Field { id } ... on ProjectV2SingleSelectField { id } } } }' -F field="$ID" >/dev/null
-            fi
-          done
+          FIELDS="$(gh project field-list "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --format json)"
 
-      - name: Ensure label-filtered Saved Views
-        env:
-          API_VERSION: 2026-03-10
-          ORG: InteropAtlas
-        run: |
-          set -euo pipefail
-          BASE="/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views"
-          EXISTING="$(gh api -H "X-GitHub-Api-Version: $API_VERSION" "$BASE?per_page=100")"
-          ensure_view() {
-            local name="$1"; local filter="$2"
-            if jq -e --arg name "$name" '(.value // .)[]? | select(.name == $name)' <<<"$EXISTING" >/dev/null; then
-              echo "View exists: $name"; return 0
+          ensure_field() {
+            local name="$1"
+            local options="$2"
+            if jq -e --arg name "$name" '.fields[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then
+              echo "Field exists: $name"
+            else
+              gh project field-create "$PROJECT_NUMBER" --owner "$PROJECT_OWNER"                 --name "$name" --data-type SINGLE_SELECT --single-select-options "$options" >/dev/null
+              echo "Created field: $name"
             fi
-            jq -n --arg name "$name" --arg filter "$filter" '{name:$name,layout:"table",filter:$filter}' |
-              gh api --method POST -H "X-GitHub-Api-Version: $API_VERSION" "$BASE" --input - >/dev/null
           }
-          ensure_view "Current" 'is:issue is:open label:"lifecycle:active"'
-          ensure_view "Research" 'is:issue is:open label:"lifecycle:research"'
-          ensure_view "Near-term" 'is:issue is:open label:"priority:now","priority:soon"'
-          ensure_view "Waiting" 'is:issue is:open label:"waiting:prerequisite","waiting:evidence","waiting:scale","waiting:owner"'
-          ensure_view "Knowledge" 'is:issue is:open label:"area:knowledge"'
-          ensure_view "Interface" 'is:issue is:open label:"area:interface"'
-          ensure_view "Operations" 'is:issue is:open label:"area:operations"'
+
+          ensure_field "Lifecycle" "Research,Active,Backlog"
+          ensure_field "Area" "Knowledge,Interface,Operations"
+          ensure_field "Priority" "Now,Soon,Long-term,Someday"
+
+      - name: Sync Labels to Project mirror fields
+        run: |
+          set -euo pipefail
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100"             --jq '.[] | select(.pull_request == null) | [.html_url, ([.labels[].name] | join("|"))] | @tsv' > /tmp/issues.tsv
+
+          while IFS=$'\t' read -r ISSUE_URL LABELS; do
+            [ -n "$ISSUE_URL" ] || continue
+
+            case "|$LABELS|" in
+              *"|lifecycle:research|"*) LIFECYCLE="Research" ;;
+              *"|lifecycle:active|"*) LIFECYCLE="Active" ;;
+              *"|lifecycle:backlog|"*) LIFECYCLE="Backlog" ;;
+              *) LIFECYCLE="" ;;
+            esac
+
+            case "|$LABELS|" in
+              *"|area:knowledge|"*) AREA="Knowledge" ;;
+              *"|area:interface|"*) AREA="Interface" ;;
+              *"|area:operations|"*) AREA="Operations" ;;
+              *) AREA="" ;;
+            esac
+
+            case "|$LABELS|" in
+              *"|priority:now|"*) PRIORITY="Now" ;;
+              *"|priority:soon|"*) PRIORITY="Soon" ;;
+              *"|priority:long-term|"*) PRIORITY="Long-term" ;;
+              *"|priority:someday|"*) PRIORITY="Someday" ;;
+              *) PRIORITY="" ;;
+            esac
+
+            [ -z "$LIFECYCLE" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Lifecycle" --value "$LIFECYCLE" >/dev/null
+            [ -z "$AREA" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Area" --value "$AREA" >/dev/null
+            [ -z "$PRIORITY" ] || gh project item-edit "$PROJECT_NUMBER" --owner "$PROJECT_OWNER" --url "$ISSUE_URL" --field "Priority" --value "$PRIORITY" >/dev/null
+          done < /tmp/issues.tsv
 
       - name: Summary
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
-          echo "Issue Labels are the metadata source of truth."
-          echo "Project custom metadata fields are removed."
-          echo "Saved views: Current / Research / Near-term / Waiting / Knowledge / Interface / Operations."
+          echo "Source of truth: Issue Labels."
+          echo "Mirror fields: Lifecycle / Area / Priority."
+          echo "Sync direction: Issue Labels -> Project fields."
+          echo "Board views can now use these fields for columns/grouping/slicing."
