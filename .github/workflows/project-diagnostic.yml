@@ -10,63 +10,104 @@ permissions:
   contents: read
 
 jobs:
-  diagnose:
+  repair:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
+      OLD_ITEM_ID: PVTI_lADOEzyTWc4BkX__zg8UiGs
 
     steps:
-      - name: Verify project list membership for target
+      - name: Find Project
         run: |
           set -euo pipefail
-          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
+          P="$(gh api graphql -f query='query($owner: ID!) {
             node(id: $owner) {
               ... on Organization {
-                projectsV2(first: 100) { nodes { id number title } }
+                projectsV2(first: 100) { nodes { id title } }
               }
             }
           }' -F owner="$PROJECT_OWNER_ID")"
-          PROJECT_ID="$(jq -r '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .id' <<<"$PROJECTS" | head -n1)"
+          PROJECT_ID="$(jq -r '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .id' <<<"$P" | head -n1)"
           test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
 
-          CURSOR=""
-          TOTAL=0
-          FOUND="false"
-          while :; do
-            if [ -z "$CURSOR" ]; then
-              PAGE="$(gh api graphql -f query='query($project: ID!) {
-                node(id: $project) {
-                  ... on ProjectV2 {
-                    items(first: 100) {
-                      totalCount
-                      pageInfo { hasNextPage endCursor }
-                      nodes { id content { ... on Issue { number title state } } }
+      - name: Remove stale target item
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='mutation($project: ID!, $item: ID!) {
+            deleteProjectV2Item(input: {projectId: $project, itemId: $item}) {
+              deletedItemId
+            }
+          }' -F project="$PROJECT_ID" -F item="$OLD_ITEM_ID" || true
+          sleep 3
+
+      - name: Re-add target Issue
+        run: |
+          set -euo pipefail
+          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+            addProjectV2ItemById(input: {projectId: $project, contentId: $content}) {
+              item { id }
+            }
+          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+          echo "$ADD"
+          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+          test -n "$ITEM_ID"
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
+          sleep 8
+
+      - name: Set mirror fields
+        run: |
+          set -euo pipefail
+          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+            node(id: $project) {
+              ... on ProjectV2 {
+                fields(first:100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField {
+                      id name options { id name }
                     }
                   }
                 }
-              }' -F project="$PROJECT_ID")"
-            else
-              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                node(id: $project) {
-                  ... on ProjectV2 {
-                    items(first: 100, after: $after) {
-                      totalCount
-                      pageInfo { hasNextPage endCursor }
-                      nodes { id content { ... on Issue { number title state } } }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          set_field() {
+            local fname="$1" oname="$2"
+            local fid oid
+            fid="$(jq -r --arg f "$fname" '.data.node.fields.nodes[]? | select(.name==$f) | .id' <<<"$FIELDS" | head -n1)"
+            oid="$(jq -r --arg f "$fname" --arg o "$oname" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1)"
+            test -n "$fid"; test -n "$oid"
+            gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+              updateProjectV2ItemFieldValue(input:{
+                projectId:$project,itemId:$item,fieldId:$field,
+                value:{singleSelectOptionId:$option}
+              }) { projectV2Item { id } }
+            }' -F project="$PROJECT_ID" -F item="$ITEM_ID" -F field="$fid" -f option="$oid" >/dev/null
+          }
+
+          set_field Lifecycle Active
+          set_field Area Operations
+          set_field Priority Now
+
+      - name: Verify direct item
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='query($item: ID!) {
+            node(id:$item) {
+              ... on ProjectV2Item {
+                id isArchived
+                content { ... on Issue { number title state } }
+                fieldValues(first:20) {
+                  nodes {
+                    ... on ProjectV2ItemFieldSingleSelectValue {
+                      name
+                      field { ... on ProjectV2SingleSelectField { name } }
                     }
                   }
                 }
-              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
-            fi
-            TOTAL="$(jq -r '.data.node.items.totalCount' <<<"$PAGE")"
-            if jq -e '.data.node.items.nodes[]? | select(.content.number==435)' <<<"$PAGE" >/dev/null; then
-              FOUND="true"
-              jq -c '.data.node.items.nodes[] | select(.content.number==435)' <<<"$PAGE"
-            fi
-            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
-            [ "$HAS" = "true" ] || break
-            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
-          done
-          echo "TOTAL=$TOTAL FOUND=$FOUND"
-          test "$FOUND" = "true"
+              }
+            }
+          }' -F item="$ITEM_ID"
