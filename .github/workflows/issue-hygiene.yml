@@ -77,10 +77,12 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           echo "### 6. Enrichment coverage (informational)" >> "$GITHUB_STEP_SUMMARY"
-          for PREFIX in area: priority: waiting:; do
+          for PREFIX in area: priority:; do
             COUNT=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length == 0)] | length')
             echo "- Missing $PREFIX $COUNT" >> "$GITHUB_STEP_SUMMARY"
           done
+          WAITING_COUNT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 0)] | length')
+          echo "- Issues with optional waiting condition: $WAITING_COUNT" >> "$GITHUB_STEP_SUMMARY"
           echo "" >> "$GITHUB_STEP_SUMMARY"
 
           echo "---" >> "$GITHUB_STEP_SUMMARY"
