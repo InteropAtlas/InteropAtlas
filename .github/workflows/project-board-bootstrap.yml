@@ -23,14 +23,24 @@ jobs:
         run: |
           set -euo pipefail
           gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/fields?per_page=100" > /tmp/fields.json
-          cat /tmp/fields.json
-          PRIORITY_ID="$(jq -r '(.value // .)[]? | select(.name=="Priority") | .id' /tmp/fields.json | head -n1)"
+
+          PRIORITY_ID="$(jq -r '.[]? | select(.name=="Priority") | .id' /tmp/fields.json | head -n1)"
           test -n "$PRIORITY_ID"
           echo "PRIORITY_ID=$PRIORITY_ID" >> "$GITHUB_ENV"
 
       - name: Create attention board
         run: |
           set -euo pipefail
+
+          VIEWS="$(gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views?per_page=100")"
+
+          EXISTING="$(jq -r '.[]? | select(.name=="Attention") | .number' <<<"$VIEWS" | head -n1)"
+          if [ -n "$EXISTING" ]; then
+            echo "VIEW_NUMBER=$EXISTING" >> "$GITHUB_ENV"
+            echo "Attention view already exists: $EXISTING"
+            exit 0
+          fi
+
           jq -n             --arg name "Attention"             --arg filter "is:issue is:open"             --argjson priority "$PRIORITY_ID"             '{name:$name,layout:"board",filter:$filter,vertical_group_by:[$priority]}' > /tmp/view.json
 
           gh api             --method POST             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views"             --input /tmp/view.json > /tmp/created.json
@@ -40,12 +50,22 @@ jobs:
           test -n "$VIEW_NUMBER"
           echo "VIEW_NUMBER=$VIEW_NUMBER" >> "$GITHUB_ENV"
 
-      - name: Verify closed issue excluded
+      - name: Verify attention board
         run: |
           set -euo pipefail
-          gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views/$VIEW_NUMBER/items?per_page=100" > /tmp/items.json
-          if jq -e '(.value // .)[]? | select(.content.number==129)' /tmp/items.json >/dev/null; then
-            echo "ERROR: closed issue 129 is still visible"
+
+          VIEWS="$(gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views?per_page=100")"
+
+          jq -c --argjson n "$VIEW_NUMBER" '.[]? | select(.number==$n) | {number,name,layout,filter,vertical_group_by}' <<<"$VIEWS"
+
+          FILTER="$(jq -r --argjson n "$VIEW_NUMBER" '.[]? | select(.number==$n) | .filter' <<<"$VIEWS")"
+          test "$FILTER" = "is:issue is:open"
+
+          ITEMS="$(gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views/$VIEW_NUMBER/items?per_page=100")"
+
+          if jq -e '.[]? | select(.content.number==129)' <<<"$ITEMS" >/dev/null; then
+            echo "ERROR: closed issue 129 is still visible in Attention"
             exit 1
           fi
-          echo "Verified: closed issue 129 is excluded from Attention board."
+
+          echo "Verified: Attention is filtered to open issues and excludes #129."
