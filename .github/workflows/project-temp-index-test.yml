@@ -1,88 +1,62 @@
-name: Project Temp Index Test
+name: Project Temp Cleanup
 
 on:
   push:
     branches: [main]
     paths:
       - '.github/workflows/project-temp-index-test.yml'
-  workflow_dispatch:
 
 permissions:
   contents: read
 
 jobs:
-  test:
+  cleanup:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
-      REPOSITORY_ID: R_kgDOUIreng
-      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
       TEST_TITLE: IA TEMP Project Index Test
 
     steps:
-      - name: Create temporary project
+      - name: Find temporary project
         run: |
           set -euo pipefail
-          CREATED="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) {
-            createProjectV2(input:{ownerId:$owner, repositoryId:$repo, title:$title}) {
-              projectV2 { id number title }
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) { nodes { id number title } }
+              }
             }
-          }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$TEST_TITLE")"
-          echo "$CREATED"
-          PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATED")"
-          PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
+          }' -F owner="$PROJECT_OWNER_ID")"
+
+          PROJECT_ID="$(jq -r --arg title "$TEST_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$TEST_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .number' <<<"$JSON" | head -n1)"
           test -n "$PROJECT_ID"
-          test -n "$PROJECT_NUMBER"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
 
-      - name: Add target issue
+      - name: Delete temporary project
         run: |
           set -euo pipefail
-          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
-            addProjectV2ItemById(input:{projectId:$project, contentId:$content}) {
-              item { id }
+          gh api graphql -f query='mutation($project: ID!) {
+            deleteProjectV2(input:{projectId:$project}) {
+              projectV2 { id }
             }
-          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
-          echo "$ADD"
-          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
-          test -n "$ITEM_ID"
-          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
-          sleep 5
+          }' -F project="$PROJECT_ID" >/dev/null
 
-      - name: Verify forward index
+      - name: Verify temporary project removed
         run: |
           set -euo pipefail
-          PAGE="$(gh api graphql -f query='query($project: ID!) {
-            node(id:$project) {
-              ... on ProjectV2 {
-                items(first:100) {
-                  totalCount
-                  nodes {
-                    id
-                    content { ... on Issue { number title state } }
-                  }
-                }
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) { nodes { id number title } }
               }
             }
-          }' -F project="$PROJECT_ID")"
-          echo "$PAGE"
-          TOTAL="$(jq -r '.data.node.items.totalCount' <<<"$PAGE")"
-          FOUND="$(jq -r '[.data.node.items.nodes[]? | select(.content.number==435)] | length' <<<"$PAGE")"
-          echo "TOTAL=$TOTAL FOUND=$FOUND"
-          test "$FOUND" = "1"
+          }' -F owner="$PROJECT_OWNER_ID")"
 
-      - name: Verify direct item node
-        run: |
-          set -euo pipefail
-          gh api graphql -f query='query($item: ID!) {
-            node(id:$item) {
-              ... on ProjectV2Item {
-                id
-                isArchived
-                project { id number title }
-                content { ... on Issue { number title state } }
-              }
-            }
-          }' -F item="$ITEM_ID"
+          if jq -e --arg title "$TEST_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title)' <<<"$JSON" >/dev/null; then
+            echo "ERROR: temporary project still exists"
+            exit 1
+          fi
+          echo "Temporary project removed."
