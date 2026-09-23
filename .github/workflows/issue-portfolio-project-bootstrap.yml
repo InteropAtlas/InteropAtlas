@@ -41,19 +41,10 @@ jobs:
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
 
-      - name: Ensure metadata fields
+      - name: Ensure metadata fields (legacy; no-op)
         run: |
           set -euo pipefail
-          FIELDS="$(gh api graphql -f query='query($project: ID!) { node(id: $project) { ... on ProjectV2 { fields(first: 100) { nodes { ... on ProjectV2Field { id name } ... on ProjectV2SingleSelectField { id name } } } } } }' -F project="$PROJECT_ID")"
-          create_field() {
-            local name="$1"; local options="$2"
-            if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then return 0; fi
-            jq -n --arg query 'mutation($project: ID!, $name: String!, $options: [ProjectV2SingleSelectFieldOptionInput!]!) { createProjectV2Field(input: {projectId: $project, dataType: SINGLE_SELECT, name: $name, singleSelectOptions: $options}) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } } }' --arg project "$PROJECT_ID" --arg name "$name" --argjson options "$options" '{query:$query,variables:{project:$project,name:$name,options:$options}}' | gh api graphql --input - >/dev/null
-          }
-          create_field 'Lifecycle' '[{"name":"Research","color":"PURPLE","description":"Open research"},{"name":"Active","color":"BLUE","description":"Activated bounded work"},{"name":"Backlog","color":"GRAY","description":"Not currently activated"}]'
-          create_field 'Area' '[{"name":"Knowledge","color":"GREEN","description":"Knowledge system"},{"name":"Interface","color":"YELLOW","description":"Human/Agent interface and interoperability"},{"name":"Operations","color":"PURPLE","description":"Operations and evolution"}]'
-          create_field 'Priority' '[{"name":"Now","color":"RED","description":"Current attention"},{"name":"Soon","color":"ORANGE","description":"Near-term"},{"name":"Long-term","color":"YELLOW","description":"Important long-term"},{"name":"Someday","color":"GRAY","description":"Indefinitely deferrable"}]'
-          create_field 'Waiting on' '[{"name":"None","color":"GREEN","description":"No known blocker"},{"name":"Prerequisite","color":"YELLOW","description":"Waiting on prerequisite"},{"name":"Evidence","color":"YELLOW","description":"Waiting on evidence"},{"name":"Scale","color":"YELLOW","description":"Waiting on scale/usage"},{"name":"Owner","color":"RED","description":"Waiting on owner decision"}]'
+          echo 'Legacy Project metadata fields are no longer created; Issue Labels are the source of truth.'
 
       - name: Add all open Issues
         run: |
@@ -66,9 +57,44 @@ jobs:
           done < /tmp/issues.txt
           echo "Processed open Issues; newly added or accepted mutations: $ADDED"
 
+      - name: Remove duplicate Project metadata fields
+        run: |
+          set -euo pipefail
+          FIELDS="$(gh api graphql -f query='query($project: ID!) { node(id: $project) { ... on ProjectV2 { fields(first: 100) { nodes { ... on ProjectV2Field { id name } ... on ProjectV2SingleSelectField { id name } } } } } }' -F project="$PROJECT_ID")"
+          for NAME in "Lifecycle" "Area" "Priority" "Waiting on"; do
+            ID="$(jq -r --arg name "$NAME" '.data.node.fields.nodes[]? | select(.name == $name) | .id' <<<"$FIELDS" | head -n1)"
+            if [ -n "$ID" ]; then
+              gh api graphql -f query='mutation($field: ID!) { deleteProjectV2Field(input: {fieldId: $field}) { projectV2Field { ... on ProjectV2Field { id } ... on ProjectV2SingleSelectField { id } } } }' -F field="$ID" >/dev/null
+            fi
+          done
+
+      - name: Ensure label-filtered Saved Views
+        env:
+          API_VERSION: 2026-03-10
+          ORG: InteropAtlas
+        run: |
+          set -euo pipefail
+          BASE="/orgs/$ORG/projectsV2/$PROJECT_NUMBER/views"
+          EXISTING="$(gh api -H "X-GitHub-Api-Version: $API_VERSION" "$BASE?per_page=100")"
+          ensure_view() {
+            local name="$1"; local filter="$2"
+            if jq -e --arg name "$name" '(.value // .)[]? | select(.name == $name)' <<<"$EXISTING" >/dev/null; then
+              echo "View exists: $name"; return 0
+            fi
+            jq -n --arg name "$name" --arg filter "$filter" '{name:$name,layout:"table",filter:$filter}' |
+              gh api --method POST -H "X-GitHub-Api-Version: $API_VERSION" "$BASE" --input - >/dev/null
+          }
+          ensure_view "Current" 'is:issue is:open label:"lifecycle:active"'
+          ensure_view "Research" 'is:issue is:open label:"lifecycle:research"'
+          ensure_view "Near-term" 'is:issue is:open label:"priority:now","priority:soon"'
+          ensure_view "Waiting" 'is:issue is:open label:"waiting:prerequisite","waiting:evidence","waiting:scale","waiting:owner"'
+          ensure_view "Knowledge" 'is:issue is:open label:"area:knowledge"'
+          ensure_view "Interface" 'is:issue is:open label:"area:interface"'
+          ensure_view "Operations" 'is:issue is:open label:"area:operations"'
+
       - name: Summary
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
-          echo "Fields: Lifecycle / Area / Priority / Waiting on"
-          echo "Saved views are intentionally not created here because GitHub Projects API does not expose saved-view creation in this automation."
-          echo "Recommended views: Current, Research, Near-term, Waiting, Knowledge, Interface, Operations."
+          echo "Issue Labels are the metadata source of truth."
+          echo "Project custom metadata fields are removed."
+          echo "Saved views: Current / Research / Near-term / Waiting / Knowledge / Interface / Operations."
