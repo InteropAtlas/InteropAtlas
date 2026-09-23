@@ -1,4 +1,4 @@
-name: Project REST Inspect
+name: Project View Inspect
 
 on:
   push:
@@ -14,8 +14,29 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+
     steps:
-      - name: Inspect target via REST list
+      - name: Inspect saved views
         run: |
           set -euo pipefail
-          gh api             -H "Accept: application/vnd.github+json"             -H "X-GitHub-Api-Version: 2026-03-10"             "/orgs/InteropAtlas/projectsV2/2/items?per_page=100&q=435"
+          gh api graphql -f query='query($owner: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) {
+                  nodes {
+                    title
+                    views(first: 100) {
+                      nodes {
+                        id
+                        name
+                        filter
+                        layout
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID"           --jq '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .views.nodes[] | {id,name,filter,layout}'
