@@ -1,0 +1,81 @@
+name: Project Current View Update
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-current-view-update.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+
+    steps:
+      - name: Find Current view
+        run: |
+          set -euo pipefail
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id: $owner) {
+              ... on Organization {
+                projectsV2(first: 100) {
+                  nodes {
+                    id
+                    number
+                    title
+                    views(first: 100) {
+                      nodes {
+                        id
+                        name
+                        filter
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+          VIEW_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .views.nodes[]? | select(.name=="Current") | .id' <<<"$JSON" | head -n1)"
+
+          test -n "$PROJECT_ID"
+          test -n "$VIEW_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+          echo "VIEW_ID=$VIEW_ID" >> "$GITHUB_ENV"
+
+      - name: Update Current filter
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='mutation($view: ID!, $filter: String!) {
+            updateProjectV2View(input: {
+              viewId: $view,
+              filter: $filter
+            }) {
+              projectV2View {
+                id
+                name
+                filter
+              }
+            }
+          }' -F view="$VIEW_ID" -f filter='Lifecycle:Active'           --jq '.data.updateProjectV2View.projectV2View'
+
+      - name: Verify Current filter
+        run: |
+          set -euo pipefail
+          gh api graphql -f query='query($view: ID!) {
+            node(id: $view) {
+              ... on ProjectV2View {
+                id
+                name
+                filter
+              }
+            }
+          }' -F view="$VIEW_ID"           --jq '.data.node'
