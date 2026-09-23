@@ -1,4 +1,4 @@
-name: Project Current View Update
+name: Project Board View Update
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
 
     steps:
-      - name: Find Current view
+      - name: Find board view
         run: |
           set -euo pipefail
           JSON="$(gh api graphql -f query='query($owner: ID!) {
@@ -28,14 +28,9 @@ jobs:
                 projectsV2(first: 100) {
                   nodes {
                     id
-                    number
                     title
                     views(first: 100) {
-                      nodes {
-                        id
-                        name
-                        filter
-                      }
+                      nodes { id name filter layout }
                     }
                   }
                 }
@@ -43,39 +38,24 @@ jobs:
             }
           }' -F owner="$PROJECT_OWNER_ID")"
 
-          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
-          VIEW_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .views.nodes[]? | select(.name=="Current") | .id' <<<"$JSON" | head -n1)"
-
-          test -n "$PROJECT_ID"
+          VIEW_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .views.nodes[]? | select(.name=="View 10") | .id' <<<"$JSON" | head -n1)"
           test -n "$VIEW_ID"
-          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "VIEW_ID=$VIEW_ID" >> "$GITHUB_ENV"
 
-      - name: Update Current filter
+      - name: Hide closed issues from attention board
         run: |
           set -euo pipefail
           gh api graphql -f query='mutation($view: ID!, $filter: String!) {
-            updateProjectV2View(input: {
-              viewId: $view,
-              filter: $filter
-            }) {
-              projectV2View {
-                id
-                name
-                filter
-              }
+            updateProjectV2View(input: {viewId: $view, filter: $filter}) {
+              projectV2View { id name filter }
             }
-          }' -F view="$VIEW_ID" -f filter='Lifecycle:Active'           --jq '.data.updateProjectV2View.projectV2View'
+          }' -F view="$VIEW_ID" -f filter='is:issue is:open'           --jq '.data.updateProjectV2View.projectV2View'
 
-      - name: Verify Current filter
+      - name: Verify board filter
         run: |
           set -euo pipefail
           gh api graphql -f query='query($view: ID!) {
             node(id: $view) {
-              ... on ProjectV2View {
-                id
-                name
-                filter
-              }
+              ... on ProjectV2View { id name filter }
             }
-          }' -F view="$VIEW_ID"           --jq '.data.node'
+          }' -F view="$VIEW_ID" --jq '.data.node'
