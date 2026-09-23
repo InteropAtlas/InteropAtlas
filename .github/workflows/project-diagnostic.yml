@@ -1,4 +1,4 @@
-name: Project View Inspect
+name: Project Closed Item Cleanup
 
 on:
   push:
@@ -10,33 +10,107 @@ permissions:
   contents: read
 
 jobs:
-  inspect:
+  cleanup:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
+      TARGET_ISSUE: "129"
 
     steps:
-      - name: Inspect saved views
+      - name: Find project
         run: |
           set -euo pipefail
-          gh api graphql -f query='query($owner: ID!) {
+          P="$(gh api graphql -f query='query($owner: ID!) {
             node(id: $owner) {
               ... on Organization {
-                projectsV2(first: 100) {
-                  nodes {
-                    title
-                    views(first: 100) {
-                      nodes {
-                        id
-                        name
-                        filter
-                        layout
-                      }
+                projectsV2(first:100){nodes{id title}}
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$P" | head -n1)"
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+
+      - name: Remove closed issue from project
+        run: |
+          set -euo pipefail
+          CURSOR=""
+          ITEM_ID=""
+          while :; do
+            if [ -z "$CURSOR" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo{hasNextPage endCursor}
+                      nodes{id content{... on Issue{number state}}}
                     }
                   }
                 }
-              }
-            }
-          }' -F owner="$PROJECT_OWNER_ID"           --jq '.data.node.projectsV2.nodes[] | select(.title=="InteropAtlas — Issue Portfolio") | .views.nodes[] | {id,name,filter,layout}'
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!,$after:String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100,after:$after) {
+                      pageInfo{hasNextPage endCursor}
+                      nodes{id content{... on Issue{number state}}}
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
+            fi
+
+            ITEM_ID="$(jq -r --argjson n "$TARGET_ISSUE" '.data.node.items.nodes[]? | select(.content.number==$n) | .id' <<<"$PAGE" | head -n1)"
+            [ -z "$ITEM_ID" ] || break
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+
+          test -n "$ITEM_ID"
+          gh api graphql -f query='mutation($project:ID!,$item:ID!){
+            deleteProjectV2Item(input:{projectId:$project,itemId:$item}){deletedItemId}
+          }' -F project="$PROJECT_ID" -F item="$ITEM_ID" >/dev/null
+
+      - name: Verify removed
+        run: |
+          set -euo pipefail
+          CURSOR=""
+          FOUND="false"
+          while :; do
+            if [ -z "$CURSOR" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo{hasNextPage endCursor}
+                      nodes{content{... on Issue{number}}}
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!,$after:String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100,after:$after) {
+                      pageInfo{hasNextPage endCursor}
+                      nodes{content{... on Issue{number}}}
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
+            fi
+            if jq -e --argjson n "$TARGET_ISSUE" '.data.node.items.nodes[]? | select(.content.number==$n)' <<<"$PAGE" >/dev/null; then
+              FOUND="true"
+              break
+            fi
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+          echo "FOUND=$FOUND"
+          test "$FOUND" = "false"
