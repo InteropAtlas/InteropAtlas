@@ -112,7 +112,7 @@ Issue 应承载一个能够被理解、推进和结束的具体任务。
 
 Issue Labels 是任务 Metadata 的唯一事实源。
 
-GitHub Project 只负责组织与展示，不建立第二套真值。
+GitHub Project 只负责组织与展示，不建立第二套真值。由于 GitHub Projects 将 `Type` 作为保留名称，Project 中对应的镜像字段使用 **Task Type**；它仍然只是 `type:*` Labels 的展示副本。
 
 最重要的 Owner 视图是：
 
