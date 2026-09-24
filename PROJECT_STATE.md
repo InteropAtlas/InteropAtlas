@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-24T23:55:00+08:00
+Document Updated At: 2026-09-24T23:59:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -65,19 +65,26 @@ InteropAtlas 研究互操作，并持续连接、整理和验证人类已经形�
 
 Agent structured access、Candidate Write 等高影响能力仍需 Human Owner 明确授权后才能进入施工。
 
-## 3. 当前工作与长期候选如何区分
+## 3. 当前任务如何进入注意力
 
-仓库当前存在较大的历史 backlog。**开放 Issue 不等于当前优先任务。**
+仓库可以存在大量 Open Issues，但 **Open 不等于当前要做**。
 
-当前优先关注的是：
+当前只使用两个注意力状态：
 
-1. **正在运行的 intake / coverage 工作**：例如 Candidate Pool、#146 及其仍在推进的具体收录 PR；
-2. **当前仍有真实活动的研究线**：例如 #433 多 Agent / 多模型互操作研究；
-3. **需要明确收口的进行中工作**：例如仍开放的 PR #431、#432，以及单独管理的 Naming PR #416。
+- **Focus**：当前真正推进、需要占用注意力的任务，原则上不超过 3 个；
+- **Inbox**：其余所有仍值得保留、但当前不占用注意力的任务。
 
-其余大量 P6 长期 Issue、长期循环、未来能力和研究命题，当前统一视为 **长期候选 / backlog**。只有在被明确重新激活、获得具体 Work Unit 和完成边界后，才视为当前工作。
+任务在需要时从 Inbox 提取到 Focus；完成后关闭。Focus 任务也可以在暂时不值得继续投入时退回 Inbox。
 
-> **规则：不要因为 Issue 是 open 就自动执行。先确认它是否属于当前激活工作。**
+Issue 的任务类型直接对应上面的三条运行方向：
+
+- **知识积累**
+- **知识视角与访问建设**
+- **系统运维与自我进化**
+
+Waiting 只在任务确实存在等待条件时附加，不形成新的任务空间。
+
+详细规则见 [`GitHub Issue 运行治理`](docs/03_Operation/02_Governance/github-issue-governance.zh-CN.md)。
 
 ## 4. 我可以从哪里参与
 
@@ -87,32 +94,20 @@ Agent structured access、Candidate Write 等高影响能力仍需 Human Owner �
 | **审核 Candidate，判断能否进入 Canonical** | 从 [`Inbox`](01_State/Inbox/) 查看待处理材料，并按 [`知识系统规范`](docs/02_System/01_Knowledge/) 审查 |
 | **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再确认是否存在当前激活 Work Item |
 | **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 与 [`System`](docs/02_System/) 进入；高影响能力仍遵守 Owner Gate |
-| **研究项目大方向、提出新的能力或路线** | 使用 Research Issue 承载尚未收敛的问题与方案探索；形成明确交付边界后，再拆出或转成具体 Work Issue |
-| **领取明确任务** | 从明确标记为当前激活的 Issue / PR 进入，不从完整 backlog 随机挑选 |
-| **查看长期候选与历史规划** | GitHub Issues / Projects；它们是候选与组织视图，不等于当前执行队列 |
+| **研究项目大方向、提出新的能力或路线** | 先形成一个可继续推进的具体任务，再创建 Issue；研究可以发生在任何任务中 |
+| **领取当前任务** | 从 Focus 中进入，Focus 原则上不超过 3 个 |
+| **查看其余待办** | 从 Inbox 中选择；需要时再提取到 Focus |
 
 ### 如果我的想法还不是一个任务
 
-当前优先按以下方式分流：
+还没有形成可推进任务的想法、方向或材料，不要求机械创建 Issue。可以先进入合适的仓库文档、Candidate / Inbox 或其他持久位置；当它形成明确任务后，再创建 Issue。
 
-```text
-尚未收敛的问题 / 方向 / 方案讨论
-→ Research Issue
+多个 Work Item 的组织使用 GitHub Project；稳定、长期有效的规则 / 设计 / 知识进入 Repository。
 
-已经明确、有完成边界的工作
-→ Issue / PR
-
-多个 Work Item 的长期组织与进度
-→ Project
-
-已经稳定、长期有效的规则 / 设计 / 知识
-→ Repository
-```
-
-私人聊天不是项目状态源。如果 Human / Agent 对话产生会影响后续工作的稳定结论，应在结束前进入上述公共持久位置。
+私人聊天不是项目状态源。如果 Human / Agent 对话产生会影响后续工作的稳定结论，应在结束前进入公共持久位置。
 
 ---
 
-**最短参与路径：** `README → PROJECT_STATE → Research Issue / Work Issue → Repository`；Project 负责组织多个事项，不作为第二事实源。
+**最短参与路径：** `README → PROJECT_STATE → Focus / Inbox Issue → Repository`；Project 负责组织多个事项，不作为第二事实源。
 
 本文件只在项目方向、当前运行边界、稳定参与入口或重大授权边界发生变化时更新；普通任务进度不要求同步修改本文件。
