@@ -166,7 +166,7 @@ jobs:
               continue
             fi
 
-            if gh api --method POST               -H "X-GitHub-Api-Version: 2022-11-28"               "repos/$REPO/issues/$parent/sub_issues"               -f sub_issue_id="$child_id" >/tmp/add.json 2>/tmp/add.err; then
+            if gh api --method POST               -H "X-GitHub-Api-Version: 2022-11-28"               "repos/$REPO/issues/$parent/sub_issues"               -F sub_issue_id="$child_id" >/tmp/add.json 2>/tmp/add.err; then
               verify="$(gh api --paginate "repos/$REPO/issues/$parent/sub_issues?per_page=100" --jq '.[].number' 2>/dev/null || true)"
               if grep -qx "$child" <<<"$verify"; then
                 echo "MIGRATED parent=#$parent child=#$child"
