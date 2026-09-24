@@ -71,7 +71,7 @@ Agent structured access、Candidate Write 等高影响能力仍需 Human Owner �
 
 当前只使用两个注意力状态：
 
-- **Focus**：当前真正推进、需要占用注意力的任务，原则上不超过 3 个；
+- **Focus**：当前真正推进、需要占用注意力的任务；
 - **Inbox**：其余所有仍值得保留、但当前不占用注意力的任务。
 
 任务在需要时从 Inbox 提取到 Focus；完成后关闭。Focus 任务也可以在暂时不值得继续投入时退回 Inbox。
@@ -95,7 +95,7 @@ Waiting 只在任务确实存在等待条件时附加，不形成新的任务空
 | **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再确认是否存在当前激活 Work Item |
 | **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 与 [`System`](docs/02_System/) 进入；高影响能力仍遵守 Owner Gate |
 | **研究项目大方向、提出新的能力或路线** | 先形成一个可继续推进的具体任务，再创建 Issue；研究可以发生在任何任务中 |
-| **领取当前任务** | 从 Focus 中进入，Focus 原则上不超过 3 个 |
+| **领取当前任务** | 从 Focus 中进入 |
 | **查看其余待办** | 从 Inbox 中选择；需要时再提取到 Focus |
 
 ### 如果我的想法还不是一个任务
