@@ -1,0 +1,42 @@
+name: Backfill Closed Issue Task Types
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/backfill-closed-issue-task-types.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Apply semantic Type labels to historical closed Issues
+        run: |
+          set -euo pipefail
+
+          knowledge=(410 409 200 199 198 196 166 165 164 163 162 161 160 144 143 142 141 140 131 124 92 91)
+          perspective=(179 155 148 120 118 116 114 112 110 107 105 103 101 99 96 94 84 80 78 40 14 13)
+          evolution=(420 419 418 415 414 413 404 379 378 377 364 362 361 357 356 355 354 292 218 210 209 208 207 197 194 193 192 191 190 186 182 180 171 170 169 168 159 158 157 156 154 153 147 145 139 138 137 136 135 134 133 132 130 129 128 127 126 93 90 89 87 75 61 58 55 53 52 50 48 46 44 43 31 25 22 21 19)
+
+          apply_label() {
+            local type="$1"; shift
+            for n in "$@"; do
+              gh api --method POST "repos/$GITHUB_REPOSITORY/issues/$n/labels" -f "labels[]=type:$type" >/dev/null
+              echo "LABELED #$n type:$type"
+            done
+          }
+
+          apply_label knowledge "${knowledge[@]}"
+          apply_label perspective "${perspective[@]}"
+          apply_label evolution "${evolution[@]}"
+
+          echo "BACKFILL_TOTAL=$((${#knowledge[@]}+${#perspective[@]}+${#evolution[@]}))"
+          echo "KNOWLEDGE_TOTAL=${#knowledge[@]}"
+          echo "PERSPECTIVE_TOTAL=${#perspective[@]}"
+          echo "EVOLUTION_TOTAL=${#evolution[@]}"
