@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-22T23:19:00+08:00
+Document Updated At: 2026-09-24T20:45:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -30,29 +30,41 @@ InteropAtlas 研究互操作，并持续连接、整理和验证人类已经形�
 
 ## 2. 当前运行方向
 
-当前建设保持三条长期并行方向：
+当前建设保持三条长期并行方向，并与仓库的 `01_State / 02_Runtime / 03_Evolution` 三块形成直接对应：
 
 ```text
-知识地图持续成长
-        +
-可运行的知识基础设施
-        +
-Human / Agent 真实使用与反馈
+知识积累
+  +
+知识视角建设
+  +
+系统运维与自我进化
 ```
 
-### 知识地图持续成长
+### 知识积累
 
-持续发现标准、协议、方法、实现、组织、能力、场景、关系、证据与开放缺口；让 Candidate 经过 identity / dedup、验证、语义审查与明确接受边界后进入 Canonical Knowledge。
+持续发现、收录、验证和连接标准、协议、方法、实现、组织、能力、场景、关系、证据与开放缺口，让 IA 的知识地图不断增长并保持可追溯、可验证。
 
-### 可运行的知识基础设施
+仓库中的 `01_State` 主要承载这一方向形成的当前知识状态，包括对象、关系与待处理的 Inbox / Candidate。
 
-持续完善知识模型、Relation、Evidence、Provenance、Lifecycle、查询、验证、迁移、Coverage / Freshness / Revalidation 等能力。真实数据和真实使用负责暴露模型缺口，再决定底层怎样演化。
+### 知识视角建设
 
-### Human / Agent 真实使用与反馈
+建设不同主体调用和呈现同一知识世界的方式。
 
-Human 侧持续改善浏览、理解、比较、证据检查与 Workspace；Machine / Agent 侧持续改善结构化读取、查询、遍历、验证和自动化。两条使用路线共享同一个 Canonical knowledge world，不各自建立事实源。
+当前重点包括：
 
-Agent structured access + Candidate Write 等高影响能力仍需 Human Owner 明确授权后才能进入施工。
+- **类人化视角**：让 Human 以自然方式浏览、理解、比较和使用知识；Wiki 是最基础的视角，后续可继续增加时间线、关系图、比较、地图等不同表达。
+- **Agent 视角**：建设适合 Agent 的结构化读取、查询、遍历、验证和操作能力。
+- **公共 / 个人视角**：当前主要建设公共视角与公共共识；个人视角属于后续方向，在真实需求明确前不提前展开。
+
+不同视角共享同一个 Canonical knowledge world，不各自建立事实源。仓库中的 `02_Runtime` 主要承载让这些视角真正运行起来的 Engine、Tools 与 Outputs。
+
+### 系统运维与自我进化
+
+负责 IA 自身的持续运行、维护、治理、质量控制和演化，包括仓库与自动化维护、数据质量、Freshness / Revalidation、规则修正、研究、实验与决策沉淀。
+
+这一方向不仅保证系统能够长期运行，也负责通过真实问题、失败和反馈不断发现并修正 IA 自身。仓库中的 `03_Evolution` 主要承载 Research、Experiments 与 Decisions。
+
+Agent structured access、Candidate Write 等高影响能力仍需 Human Owner 明确授权后才能进入施工。
 
 ## 3. 当前工作与长期候选如何区分
 
