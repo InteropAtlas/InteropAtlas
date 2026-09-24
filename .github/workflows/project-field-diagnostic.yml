@@ -1,0 +1,51 @@
+name: Project Field Diagnostic
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-field-diagnostic.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+    steps:
+      - name: Inspect ProjectV2 fields
+        run: |
+          set -euo pipefail
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization {
+                projectsV2(first:100) {
+                  nodes { id number title }
+                }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          echo "$JSON"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID"
+
+          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) {
+                  nodes {
+                    __typename
+                    ... on ProjectV2FieldCommon { id name dataType }
+                    ... on ProjectV2SingleSelectField { options { id name } }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+          echo "$FIELDS"
