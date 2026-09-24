@@ -110,3 +110,19 @@ The previous Lifecycle / Area / Priority model is legacy and should not be used 
 - #195 historical Issue Cleanup Plan was closed as completed because its bounded cleanup responsibility is now covered by #287 and the executed migration.
 
 No Parent/Blocked By text was mechanically converted into native relations.
+
+
+## Final migration verification — 2026-09-25
+
+- Project #2 saved views now use only current governance semantics:
+  - Focus / Inbox
+  - Waiting
+  - Knowledge / Perspective / Evolution
+  - Attention Board grouped by the `Attention` field.
+- Legacy Near-term and unnamed legacy Board views were removed.
+- Incremental label → Project sync was re-tested on #435 and completed successfully.
+- #435 was closed as completed after field, item, view, full-projection, and incremental-sync verification.
+- Additional project-level V1 roadmap wording was removed from titles #263, #272, #273, #275, #276 and #342.
+- Technical artifact versioning remains where it identifies an artifact/version, including #239, #240 and #329.
+- P4/P5 phase-only title noise was removed from #366 and #367.
+- #288 no longer describes legacy Parent/Blocked By text as current metadata; it now refers to GitHub-native relations.
