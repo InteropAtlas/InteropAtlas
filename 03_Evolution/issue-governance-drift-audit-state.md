@@ -1,7 +1,7 @@
 # Issue Governance Drift Audit State
 
 Audit date: 2026-09-24
-Status: remediation in progress — Metadata + Project migration complete; relationship/title cleanup in progress
+Status: remediation complete — first-pass Issue governance migration and cleanup closed
 
 ## Scope
 
@@ -126,3 +126,17 @@ No Parent/Blocked By text was mechanically converted into native relations.
 - Technical artifact versioning remains where it identifies an artifact/version, including #239, #240 and #329.
 - P4/P5 phase-only title noise was removed from #366 and #367.
 - #288 no longer describes legacy Parent/Blocked By text as current metadata; it now refers to GitHub-native relations.
+
+
+## Final closeout — 2026-09-25
+
+The first-pass Issue governance migration is complete.
+
+- Open Issues missing Attention: 0.
+- Open Issues missing Type: 0.
+- Open Issues carrying retired Lifecycle labels: 0.
+- Open Issues carrying retired Area labels: 0.
+- Open Issues carrying retired Priority labels: 0.
+- Historical completed/superseded/stale candidates received a final semantic review; only high-confidence items were closed.
+- Remaining older Issues are retained only where they still represent a bounded, meaningful task (for example #86).
+- Ongoing repository maintenance is not represented by a permanent umbrella Issue; future maintenance work should be opened as bounded Work Items when concrete friction exists.
