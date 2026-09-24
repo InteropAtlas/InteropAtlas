@@ -54,7 +54,20 @@ jobs:
             node(id:$project) {
               ... on ProjectV2 {
                 views(first:20) {
-                  nodes { id name layout }
+                  nodes {
+                    id
+                    number
+                    name
+                    layout
+                    filter
+                    configuration {
+                      visibleFields(first:50) {
+                        nodes {
+                          ... on ProjectV2FieldCommon { id name dataType }
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
