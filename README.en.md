@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
-Document Updated At: 2026-09-24T23:45:00+08:00
+Document Updated At: 2026-09-24T23:55:00+08:00
 Translation Source: README.md
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -52,7 +52,7 @@ InteropAtlas aims to let both Humans and Agents operate over the same knowledge 
 
 **Find → Browse → Understand → Trace relations → Compare solutions → Inspect evidence → Discover gaps.**
 
-The project currently advances along three parallel directions: **knowledge accumulation, knowledge perspective building, and system operations & self-evolution**. Human-oriented and Agent-oriented perspectives share the same Canonical knowledge world. Over time, the same knowledge base can support Wiki / Browse, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent access.
+The project currently advances along three parallel directions: **knowledge accumulation, knowledge perspectives & access, and system operations & self-evolution**. Human-oriented representation and machine-readable access share the same Canonical knowledge world. Over time, the same knowledge base can support Wiki / Browse, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent access.
 
 These are not separate databases. They are different representations of the same Atlas for different cognitive tasks.
 
@@ -96,7 +96,7 @@ Repository structure, historical P1–P6 material, Migration, Intake, Governance
 
 ## Current status
 
-InteropAtlas is still at an early stage, but it has moved from pure design into real operation. **Knowledge accumulation, knowledge perspective building, and system operations & self-evolution** are advancing in parallel.
+InteropAtlas is still at an early stage, but it has moved from pure design into real operation. **Knowledge accumulation, knowledge perspectives & access, and system operations & self-evolution** are advancing in parallel.
 
 For the live project checkpoint and next work, see [`PROJECT_STATE.md`](PROJECT_STATE.md).
 
