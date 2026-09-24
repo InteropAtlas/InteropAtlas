@@ -34,7 +34,6 @@ jobs:
           test -n "$PROJECT_ID"
           test -n "$PROJECT_NUMBER"
 
-          REST_VIEWS="$(gh api -H "X-GitHub-Api-Version: 2026-03-10" "orgs/$PROJECT_ORG/projectsV2/$PROJECT_NUMBER/views?per_page=100")"
           GRAPH_VIEWS="$(gh api graphql -f query='query($project: ID!) {
             node(id:$project) {
               ... on ProjectV2 {
@@ -51,5 +50,4 @@ jobs:
           }' -F project="$PROJECT_ID")"
 
           echo "PROJECT_NUMBER=$PROJECT_NUMBER"
-          echo "REST_VIEWS=$REST_VIEWS"
           echo "GRAPH_VIEWS=$GRAPH_VIEWS"
