@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-09T10:34:00+08:00
+Document Updated At: 2026-09-24T23:45:00+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -81,7 +81,7 @@ InteropAtlas 的目标是让人（Human）与智能体（Agent）都能从同一
 
 **查找 → 浏览 → 理解 → 追踪关系 → 比较方案 → 检查证据 → 发现缺口。**
 
-项目正在把 Canonical Knowledge、持续收录（Intake）、Human / Agent Access 与真实数据使用变成可靠的长期运行能力。不同形式不是不同数据库，而是同一张知识地图面向不同认知任务的不同表达。
+项目当前沿三条方向持续建设：**知识积累、知识视角建设、系统运维与自我进化**。适人化与适 Agent 化视角都建立在同一个 Canonical knowledge world 上；不同呈现与调用方式不是不同数据库，而是同一知识底座的不同视角。
 
 > **知识相对稳定，表达可以流动。**  
 > *Knowledge is stable; representations are fluid.*
@@ -118,7 +118,7 @@ InteropAtlas 优先把可验证、可追溯、可复用的互操作知识沉淀�
 
 ## 当前状态
 
-InteropAtlas 仍处于早期建设阶段，但已经从纯设计转向真实运行：知识地图持续成长、可运行知识基础设施、Human / Agent 真实使用与反馈正在并行演化。
+InteropAtlas 仍处于早期建设阶段，但已经从纯设计转向真实运行：**知识积累、知识视角建设、系统运维与自我进化**正在并行推进。
 
 **实时方向、参与路径与下一步入口统一从 [`PROJECT_STATE.md`](PROJECT_STATE.md) 进入。**
 
