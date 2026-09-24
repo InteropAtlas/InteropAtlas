@@ -17,23 +17,24 @@ jobs:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
+
     steps:
-      - name: Inspect ProjectV2 fields
+      - name: Verify Project fields and label projection
         run: |
           set -euo pipefail
-          JSON="$(gh api graphql -f query='query($owner: ID!) {
+
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
             node(id:$owner) {
               ... on Organization {
-                projectsV2(first:100) {
-                  nodes { id number title }
-                }
+                projectsV2(first:100) { nodes { id number title } }
               }
             }
           }' -F owner="$PROJECT_OWNER_ID")"
-          echo "$JSON"
-          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .number' <<<"$PROJECTS" | head -n1)"
           test -n "$PROJECT_ID"
-          echo "PROJECT_ID=$PROJECT_ID"
+          test -n "$PROJECT_NUMBER"
 
           FIELDS="$(gh api graphql -f query='query($project: ID!) {
             node(id:$project) {
@@ -48,4 +49,125 @@ jobs:
               }
             }
           }' -F project="$PROJECT_ID")"
-          echo "$FIELDS"
+
+          echo "PROJECT_NUMBER=$PROJECT_NUMBER"
+          echo "PROJECT_ID=$PROJECT_ID"
+          echo "FIELDS_JSON=$FIELDS"
+
+          attention_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Attention") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
+          task_type_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Task Type") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
+          old_fields="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Lifecycle" or .name=="Area" or .name=="Priority") | .name] | sort | join("|")' <<<"$FIELDS")"
+
+          echo "ATTENTION_OPTIONS=$attention_options"
+          echo "TASK_TYPE_OPTIONS=$task_type_options"
+          echo "LEGACY_FIELDS=$old_fields"
+
+          test "$attention_options" = "Focus|Inbox"
+          test "$task_type_options" = "Evolution|Knowledge|Perspective"
+
+          total=0
+          attention_mismatch=0
+          type_mismatch=0
+          cursor=""
+
+          while :; do
+            if [ -z "$cursor" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number
+                            state
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100, after:$after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number
+                            state
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$cursor")"
+            fi
+
+            while IFS= read -r ROW; do
+              [ -n "$ROW" ] || continue
+              total=$((total + 1))
+
+              number="$(jq -r '.content.number' <<<"$ROW")"
+              labels="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
+              actual_attention="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Attention") | .name][0] // ""' <<<"$ROW")"
+              actual_type="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Task Type") | .name][0] // ""' <<<"$ROW")"
+
+              expected_attention=""
+              expected_type=""
+              case "|$labels|" in
+                *"|attention:focus|"*) expected_attention="Focus" ;;
+                *"|attention:inbox|"*) expected_attention="Inbox" ;;
+              esac
+              case "|$labels|" in
+                *"|type:knowledge|"*) expected_type="Knowledge" ;;
+                *"|type:perspective|"*) expected_type="Perspective" ;;
+                *"|type:evolution|"*) expected_type="Evolution" ;;
+              esac
+
+              if [ "$actual_attention" != "$expected_attention" ]; then
+                attention_mismatch=$((attention_mismatch + 1))
+                echo "ATTENTION_MISMATCH issue=#$number expected=$expected_attention actual=$actual_attention"
+              fi
+              if [ "$actual_type" != "$expected_type" ]; then
+                type_mismatch=$((type_mismatch + 1))
+                echo "TYPE_MISMATCH issue=#$number expected=$expected_type actual=$actual_type"
+              fi
+            done < <(jq -c '.data.node.items.nodes[]? | select(.content.state=="OPEN")' <<<"$PAGE")
+
+            has_next="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$has_next" = "true" ] || break
+            cursor="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+
+          echo "OPEN_PROJECT_ITEMS=$total"
+          echo "ATTENTION_MISMATCHES=$attention_mismatch"
+          echo "TASK_TYPE_MISMATCHES=$type_mismatch"
+
+          test "$attention_mismatch" -eq 0
+          test "$type_mismatch" -eq 0
