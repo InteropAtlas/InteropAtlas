@@ -18,8 +18,6 @@ jobs:
   hygiene-check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
       - name: Run Issue Hygiene Checks
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -27,79 +25,40 @@ jobs:
           TARGET_ISSUE: ${{ inputs.issue_number }}
         run: |
           set -euo pipefail
-          echo "## Issue Hygiene Report" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-          echo "Generated at: $(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
 
-          if [ -n "$TARGET_ISSUE" ]; then
-            ISSUES=$(gh issue view "$TARGET_ISSUE" --repo "$REPO" --json number,title,labels,body,updatedAt,state --jq '[.]')
+          if [ -n "${TARGET_ISSUE:-}" ]; then
+            ISSUES="$(gh issue view "$TARGET_ISSUE" --repo "$REPO" --json number,title,labels,updatedAt,state --jq '[.]')"
           else
-            ISSUES=$(gh issue list --repo "$REPO" --state open --limit 500 --json number,title,labels,body,updatedAt)
+            ISSUES="$(gh issue list --repo "$REPO" --state open --limit 500 --json number,title,labels,updatedAt)"
           fi
 
-          TOTAL=$(echo "$ISSUES" | jq 'length')
-          echo "**Total open issues checked: $TOTAL**" >> "$GITHUB_STEP_SUMMARY"
+          echo "## Issue Hygiene Report" >> "$GITHUB_STEP_SUMMARY"
+          echo "" >> "$GITHUB_STEP_SUMMARY"
+          echo "**Total open issues checked: $(jq 'length' <<<"$ISSUES")**" >> "$GITHUB_STEP_SUMMARY"
+
           VIOLATIONS=0
-
-          echo "### 1. Missing Lifecycle" >> "$GITHUB_STEP_SUMMARY"
-          MISSING=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("lifecycle:"))] | length == 0)] | length')
-          echo "Found: $MISSING" >> "$GITHUB_STEP_SUMMARY"
-          echo "$ISSUES" | jq -r '.[] | select([.labels[].name | select(startswith("lifecycle:"))] | length == 0) | "- #\(.number) \(.title)"' >> "$GITHUB_STEP_SUMMARY"
-          VIOLATIONS=$((VIOLATIONS + MISSING))
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "### 2. Conflicting Lifecycle labels" >> "$GITHUB_STEP_SUMMARY"
-          CONFLICT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("lifecycle:"))] | length > 1)] | length')
-          echo "Found: $CONFLICT" >> "$GITHUB_STEP_SUMMARY"
-          echo "$ISSUES" | jq -r '.[] | select([.labels[].name | select(startswith("lifecycle:"))] | length > 1) | "- #\(.number) \(.title)"' >> "$GITHUB_STEP_SUMMARY"
-          VIOLATIONS=$((VIOLATIONS + CONFLICT))
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "### 3. Active > 14 days without update" >> "$GITHUB_STEP_SUMMARY"
-          STALE_ACTIVE=$(echo "$ISSUES" | jq --arg cutoff "$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)" '[.[] | select(.labels | map(.name) | any(. == "lifecycle:active")) | select(.updatedAt < $cutoff)] | length')
-          echo "Found: $STALE_ACTIVE" >> "$GITHUB_STEP_SUMMARY"
-          echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '14 days ago' +%Y-%m-%dT%H:%M:%SZ)" '.[] | select(.labels | map(.name) | any(. == "lifecycle:active")) | select(.updatedAt < $cutoff) | "- #\(.number) \(.title) (\(.updatedAt))"' >> "$GITHUB_STEP_SUMMARY"
-          VIOLATIONS=$((VIOLATIONS + STALE_ACTIVE))
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "### 4. Blocked metadata without explicit reason" >> "$GITHUB_STEP_SUMMARY"
-          BLOCKED_NO_REASON=$(echo "$ISSUES" | jq '[.[] | select((.body // "") | test("Status:\\s*Blocked"; "i")) | select((.body // "") | test("Blocked By:\\s*(—|-|$)"; "i"))] | length')
-          echo "Found: $BLOCKED_NO_REASON" >> "$GITHUB_STEP_SUMMARY"
-          echo "$ISSUES" | jq -r '.[] | select((.body // "") | test("Status:\\s*Blocked"; "i")) | select((.body // "") | test("Blocked By:\\s*(—|-|$)"; "i")) | "- #\(.number) \(.title)"' >> "$GITHUB_STEP_SUMMARY"
-          VIOLATIONS=$((VIOLATIONS + BLOCKED_NO_REASON))
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "### 5. Long-stale open Issues (>90 days)" >> "$GITHUB_STEP_SUMMARY"
-          STALE=$(echo "$ISSUES" | jq --arg cutoff "$(date -u -d '90 days ago' +%Y-%m-%dT%H:%M:%SZ)" '[.[] | select(.updatedAt < $cutoff)] | length')
-          echo "Found: $STALE" >> "$GITHUB_STEP_SUMMARY"
-          echo "$ISSUES" | jq -r --arg cutoff "$(date -u -d '90 days ago' +%Y-%m-%dT%H:%M:%SZ)" '.[] | select(.updatedAt < $cutoff) | "- #\(.number) \(.title) (\(.updatedAt))"' >> "$GITHUB_STEP_SUMMARY"
-          echo "" >> "$GITHUB_STEP_SUMMARY"
-
-          echo "### 6. Core metadata completeness" >> "$GITHUB_STEP_SUMMARY"
-          for PREFIX in area: priority:; do
-            MISSING=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length == 0)] | length')
-            CONFLICT=$(echo "$ISSUES" | jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length > 1)] | length')
-            echo "- Missing $PREFIX $MISSING" >> "$GITHUB_STEP_SUMMARY"
-            echo "- Conflicting $PREFIX $CONFLICT" >> "$GITHUB_STEP_SUMMARY"
-            if [ "$MISSING" -gt 0 ]; then
-              echo "$ISSUES" | jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length == 0) | "- #\(.number) \(.title) — missing "+$p' >> "$GITHUB_STEP_SUMMARY"
-            fi
-            if [ "$CONFLICT" -gt 0 ]; then
-              echo "$ISSUES" | jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length > 1) | "- #\(.number) \(.title) — conflicting "+$p' >> "$GITHUB_STEP_SUMMARY"
-            fi
+          for PREFIX in attention: type:; do
+            MISSING="$(jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length == 0)] | length' <<<"$ISSUES")"
+            CONFLICT="$(jq --arg p "$PREFIX" '[.[] | select([.labels[].name | select(startswith($p))] | length > 1)] | length' <<<"$ISSUES")"
+            echo "### $PREFIX" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Missing: $MISSING" >> "$GITHUB_STEP_SUMMARY"
+            echo "- Conflicting: $CONFLICT" >> "$GITHUB_STEP_SUMMARY"
+            jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length == 0) | "- #\(.number) \(.title) — missing "+$p' <<<"$ISSUES" >> "$GITHUB_STEP_SUMMARY"
+            jq -r --arg p "$PREFIX" '.[] | select([.labels[].name | select(startswith($p))] | length > 1) | "- #\(.number) \(.title) — conflicting "+$p' <<<"$ISSUES" >> "$GITHUB_STEP_SUMMARY"
             VIOLATIONS=$((VIOLATIONS + MISSING + CONFLICT))
+            echo "" >> "$GITHUB_STEP_SUMMARY"
           done
-          WAITING_CONFLICT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 1)] | length')
-          WAITING_COUNT=$(echo "$ISSUES" | jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 0)] | length')
-          echo "- Issues with optional waiting condition: $WAITING_COUNT" >> "$GITHUB_STEP_SUMMARY"
-          echo "- Conflicting optional waiting labels: $WAITING_CONFLICT" >> "$GITHUB_STEP_SUMMARY"
-          VIOLATIONS=$((VIOLATIONS + WAITING_CONFLICT))
-          echo "" >> "$GITHUB_STEP_SUMMARY"
 
-          echo "---" >> "$GITHUB_STEP_SUMMARY"
+          WAITING_CONFLICT="$(jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 1)] | length' <<<"$ISSUES")"
+          WAITING_COUNT="$(jq '[.[] | select([.labels[].name | select(startswith("waiting:"))] | length > 0)] | length' <<<"$ISSUES")"
+          echo "### Optional Waiting" >> "$GITHUB_STEP_SUMMARY"
+          echo "- With waiting condition: $WAITING_COUNT" >> "$GITHUB_STEP_SUMMARY"
+          echo "- Conflicting waiting labels: $WAITING_CONFLICT" >> "$GITHUB_STEP_SUMMARY"
+          VIOLATIONS=$((VIOLATIONS + WAITING_CONFLICT))
+
+          echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "**Actionable metadata violations: $VIOLATIONS**" >> "$GITHUB_STEP_SUMMARY"
-          echo "> This workflow reports only. Semantic activation, closure, and reprioritization remain Human/Agent review decisions." >> "$GITHUB_STEP_SUMMARY"
+          echo "> Attention / Type are the core metadata. Waiting is optional." >> "$GITHUB_STEP_SUMMARY"
 
           if [ "$VIOLATIONS" -gt 0 ]; then
             echo "::warning::$VIOLATIONS metadata hygiene violations found."
