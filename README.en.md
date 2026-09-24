@@ -4,7 +4,7 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active English parallel
-Document Updated At: 2026-09-09T10:34:00+08:00
+Document Updated At: 2026-09-24T23:45:00+08:00
 Translation Source: README.md
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
@@ -52,7 +52,7 @@ InteropAtlas aims to let both Humans and Agents operate over the same knowledge 
 
 **Find → Browse → Understand → Trace relations → Compare solutions → Inspect evidence → Discover gaps.**
 
-The project is still building its V1 foundation. Over time, the same knowledge base can support Wiki / Browse, Single Object / Article, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent / API access.
+The project currently advances along three parallel directions: **knowledge accumulation, knowledge perspective building, and system operations & self-evolution**. Human-oriented and Agent-oriented perspectives share the same Canonical knowledge world. Over time, the same knowledge base can support Wiki / Browse, Timeline, Graph / Ecosystem, Compare, Evidence / Verification, and structured Agent access.
 
 These are not separate databases. They are different representations of the same Atlas for different cognitive tasks.
 
@@ -92,11 +92,11 @@ See [`Knowledge Philosophy & Principles`](docs/01_Foundation/02_Principles/knowl
 | Find specifications, profiles, architecture, and policies | [`docs/README.md`](docs/README.md) |
 | Review research, experiments, and change history | [`03_Evolution/`](03_Evolution/) |
 
-Repository structure, P1–P6, the current P6 implementation route, Migration, Intake, Governance, and similar project-maintenance material belong to the second layer of context and are intentionally not expanded on the homepage.
+Repository structure, historical P1–P6 material, Migration, Intake, Governance, and similar project-maintenance material belong to the second layer of context and are intentionally not expanded on the homepage.
 
 ## Current status
 
-InteropAtlas is still at an early stage. The current priority is to establish a reliable foundation for V1 Canonical Knowledge, continuous Intake, Human / Agent Access, and real-data use—not to claim complete coverage of the interoperability world.
+InteropAtlas is still at an early stage, but it has moved from pure design into real operation. **Knowledge accumulation, knowledge perspective building, and system operations & self-evolution** are advancing in parallel.
 
 For the live project checkpoint and next work, see [`PROJECT_STATE.md`](PROJECT_STATE.md).
 
