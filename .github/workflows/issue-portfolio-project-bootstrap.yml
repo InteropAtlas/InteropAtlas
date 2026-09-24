@@ -38,10 +38,10 @@ jobs:
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
 
-      - name: Add all open Issues
+      - name: Add all Issues
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
           while read -r ISSUE_ID; do
             [ -n "$ISSUE_ID" ] || continue
             gh api graphql -f query='mutation($project: ID!, $content: ID!) {
@@ -194,7 +194,7 @@ jobs:
               }' -F project="$PROJECT_ID" -f after="$cursor")"
             fi
 
-            jq -c '.data.node.items.nodes[]? | select(.content.state=="OPEN")' <<<"$PAGE" |
+            jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE" |
             while read -r ROW; do
               ITEM="$(jq -r '.id' <<<"$ROW")"
               LABELS="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
