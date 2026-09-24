@@ -121,13 +121,12 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          LF="$(field_id Lifecycle)"; AF="$(field_id Area)"; PF="$(field_id Priority)"
-          test -n "$LF"; test -n "$AF"; test -n "$PF"
+          ATF="$(field_id Attention)"; TF="$(field_id Type)"
+          test -n "$ATF"; test -n "$TF"
 
-          L=""; A=""; P=""
-          case "|$LABELS|" in *"|lifecycle:research|"*) L="Research";; *"|lifecycle:active|"*) L="Active";; *"|lifecycle:backlog|"*) L="Backlog";; esac
-          case "|$LABELS|" in *"|area:knowledge|"*) A="Knowledge";; *"|area:interface|"*) A="Interface";; *"|area:operations|"*) A="Operations";; esac
-          case "|$LABELS|" in *"|priority:now|"*) P="Now";; *"|priority:soon|"*) P="Soon";; *"|priority:long-term|"*) P="Long-term";; *"|priority:someday|"*) P="Someday";; esac
+          AT=""; T=""
+          case "|$LABELS|" in *"|attention:focus|"*) AT="Focus";; *"|attention:inbox|"*) AT="Inbox";; esac
+          case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
 
           set_value() {
             local field_name="$1" field_id="$2" option_name="$3"
@@ -143,9 +142,8 @@ jobs:
             }' -F project="$PROJECT_ID" -F item="$ITEM_ID" -F field="$field_id" -f option="$option" >/dev/null
           }
 
-          set_value Lifecycle "$LF" "$L"
-          set_value Area "$AF" "$A"
-          set_value Priority "$PF" "$P"
+          set_value Attention "$ATF" "$AT"
+          set_value Type "$TF" "$T"
 
       - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
