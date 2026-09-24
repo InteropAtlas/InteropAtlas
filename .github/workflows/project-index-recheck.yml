@@ -1,4 +1,4 @@
-name: Project Index Recheck
+name: Project Index Main Verify
 
 on:
   push:
@@ -10,80 +10,65 @@ permissions:
   contents: read
 
 jobs:
-  test:
+  verify:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
-      REPOSITORY_ID: R_kgDOUIreng
-      ISSUE_NODE_ID: I_kwDOUIrens8AAAABSv49iQ
-      TEST_TITLE: IA TEMP Project Index Recheck
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
 
     steps:
-      - name: Create temporary project
+      - name: Verify target appears in main project
         run: |
           set -euo pipefail
-          CREATED="$(gh api graphql -f query='mutation($owner: ID!, $repo: ID!, $title: String!) {
-            createProjectV2(input:{ownerId:$owner, repositoryId:$repo, title:$title}) {
-              projectV2 { id number title }
-            }
-          }' -F owner="$PROJECT_OWNER_ID" -F repo="$REPOSITORY_ID" -f title="$TEST_TITLE")"
-          PROJECT_ID="$(jq -r '.data.createProjectV2.projectV2.id // empty' <<<"$CREATED")"
-          PROJECT_NUMBER="$(jq -r '.data.createProjectV2.projectV2.number // empty' <<<"$CREATED")"
-          test -n "$PROJECT_ID"
-          test -n "$PROJECT_NUMBER"
-          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
-          echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
-          echo "Created project #$PROJECT_NUMBER"
-
-      - name: Add target issue
-        run: |
-          set -euo pipefail
-          ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
-            addProjectV2ItemById(input:{projectId:$project, contentId:$content}) {
-              item { id }
-            }
-          }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
-          ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
-          test -n "$ITEM_ID"
-          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
-          echo "Item=$ITEM_ID"
-          sleep 8
-
-      - name: Verify forward index
-        id: verify
-        run: |
-          set -euo pipefail
-          PAGE="$(gh api graphql -f query='query($project: ID!) {
-            node(id:$project) {
-              ... on ProjectV2 {
-                items(first:100) {
-                  totalCount
-                  nodes {
-                    id
-                    content { ... on Issue { number title state } }
-                  }
-                }
+          P="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization {
+                projectsV2(first:100) { nodes { id title } }
               }
             }
-          }' -F project="$PROJECT_ID")"
-          echo "$PAGE"
-          TOTAL="$(jq -r '.data.node.items.totalCount' <<<"$PAGE")"
-          FOUND="$(jq -r '[.data.node.items.nodes[]? | select(.content.number==435)] | length' <<<"$PAGE")"
-          echo "TOTAL=$TOTAL FOUND=$FOUND"
-          if [ "$FOUND" = "1" ]; then
-            echo "BUG_FIXED=true" >> "$GITHUB_ENV"
-          else
-            echo "BUG_FIXED=false" >> "$GITHUB_ENV"
-          fi
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$P" | head -n1)"
+          test -n "$PROJECT_ID"
 
-      - name: Cleanup temporary project
-        if: always()
-        run: |
-          set -euo pipefail
-          if [ -n "${PROJECT_ID:-}" ]; then
-            gh api graphql -f query='mutation($project: ID!) {
-              deleteProjectV2(input:{projectId:$project}) { projectV2 { id } }
-            }' -F project="$PROJECT_ID" >/dev/null || true
-          fi
-          echo "BUG_FIXED=${BUG_FIXED:-unknown}"
+          CURSOR=""
+          FOUND="false"
+          TOTAL=0
+          while :; do
+            if [ -z "$CURSOR" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      totalCount
+                      pageInfo { hasNextPage endCursor }
+                      nodes { id content { ... on Issue { number title state } } }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!,$after:String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100,after:$after) {
+                      totalCount
+                      pageInfo { hasNextPage endCursor }
+                      nodes { id content { ... on Issue { number title state } } }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
+            fi
+            TOTAL="$(jq -r '.data.node.items.totalCount' <<<"$PAGE")"
+            if jq -e '.data.node.items.nodes[]? | select(.content.number==435)' <<<"$PAGE" >/dev/null; then
+              FOUND="true"
+              jq -c '.data.node.items.nodes[] | select(.content.number==435)' <<<"$PAGE"
+              break
+            fi
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+          echo "TOTAL=$TOTAL FOUND=$FOUND"
+          test "$FOUND" = "true"
