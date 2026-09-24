@@ -1,0 +1,112 @@
+name: Project Missing Task Type Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-missing-task-type-audit.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+
+    steps:
+      - name: Audit Project items without Task Type
+        run: |
+          set -euo pipefail
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization {
+                projectsV2(first:100) { nodes { id title } }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
+          test -n "$PROJECT_ID"
+
+          cursor=""
+          total=0
+          while :; do
+            if [ -z "$cursor" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number title state body
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100, after:$after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number title state body
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$cursor")"
+            fi
+
+            while IFS= read -r ROW; do
+              [ -n "$ROW" ] || continue
+              task_type="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Task Type") | .name][0] // ""' <<<"$ROW")"
+              if [ -z "$task_type" ]; then
+                total=$((total + 1))
+                jq -c '{
+                  number:.content.number,
+                  title:.content.title,
+                  state:.content.state,
+                  labels:[.content.labels.nodes[].name],
+                  body:(.content.body // "")
+                }' <<<"$ROW"
+              fi
+            done < <(jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE")
+
+            has_next="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$has_next" = "true" ] || break
+            cursor="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+          echo "MISSING_TASK_TYPE_TOTAL=$total"
