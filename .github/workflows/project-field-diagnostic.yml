@@ -100,7 +100,117 @@ jobs:
           grep -F $'Knowledge\tTABLE_LAYOUT\tlabel:"type:knowledge"' <<<"$view_spec"
           grep -F $'Perspective\tTABLE_LAYOUT\tlabel:"type:perspective"' <<<"$view_spec"
           grep -F $'Evolution\tTABLE_LAYOUT\tlabel:"type:evolution"' <<<"$view_spec"
-          grep -F $'Attention Board\tBOARD_LAYOUT\tis:issue is:open' <<<"$view_spec"
+          grep -F 
+
+          board_attention="$(jq -r '[.data.node.views.nodes[]? | select(.name=="Attention Board") | .verticalGroupByFields.nodes[].name] | join("|")' <<<"$VIEWS")"
+          echo "BOARD_VERTICAL_GROUP=$board_attention"
+          test "$board_attention" = "Attention"
+
+          total=0
+          attention_mismatch=0
+          type_mismatch=0
+          cursor=""
+
+          while :; do
+            if [ -z "$cursor" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number
+                            state
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100, after:$after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes {
+                        id
+                        content {
+                          ... on Issue {
+                            number
+                            state
+                            labels(first:50) { nodes { name } }
+                          }
+                        }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name
+                              field { ... on ProjectV2FieldCommon { name } }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$cursor")"
+            fi
+
+            while IFS= read -r ROW; do
+              [ -n "$ROW" ] || continue
+              total=$((total + 1))
+              number="$(jq -r '.content.number' <<<"$ROW")"
+              labels="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
+              actual_attention="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Attention") | .name][0] // ""' <<<"$ROW")"
+              actual_type="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Task Type") | .name][0] // ""' <<<"$ROW")"
+
+              expected_attention=""
+              expected_type=""
+              case "|$labels|" in
+                *"|attention:focus|"*) expected_attention="Focus" ;;
+                *"|attention:inbox|"*) expected_attention="Inbox" ;;
+              esac
+              case "|$labels|" in
+                *"|type:knowledge|"*) expected_type="Knowledge" ;;
+                *"|type:perspective|"*) expected_type="Perspective" ;;
+                *"|type:evolution|"*) expected_type="Evolution" ;;
+              esac
+
+              if [ "$actual_attention" != "$expected_attention" ]; then
+                attention_mismatch=$((attention_mismatch + 1))
+                echo "ATTENTION_MISMATCH issue=#$number expected=$expected_attention actual=$actual_attention"
+              fi
+              if [ "$actual_type" != "$expected_type" ]; then
+                type_mismatch=$((type_mismatch + 1))
+                echo "TYPE_MISMATCH issue=#$number expected=$expected_type actual=$actual_type"
+              fi
+            done < <(jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE")
+
+            has_next="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$has_next" = "true" ] || break
+            cursor="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+
+          echo "PROJECT_ISSUE_ITEMS=$total"
+          echo "ATTENTION_MISMATCHES=$attention_mismatch"
+          echo "TASK_TYPE_MISMATCHES=$type_mismatch"
+          test "$attention_mismatch" -eq 0
+          test "$type_mismatch" -eq 0
+Attention Board\tBOARD_LAYOUT\tis:issue' <<<"$view_spec"
 
           board_attention="$(jq -r '[.data.node.views.nodes[]? | select(.name=="Attention Board") | .verticalGroupByFields.nodes[].name] | join("|")' <<<"$VIEWS")"
           echo "BOARD_VERTICAL_GROUP=$board_attention"
