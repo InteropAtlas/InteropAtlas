@@ -1,4 +1,4 @@
-name: Issue Lifecycle Metadata Bootstrap
+name: Issue Metadata Bootstrap
 
 on:
   workflow_dispatch:
@@ -6,60 +6,34 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/issue-lifecycle-metadata.yml'
-      - '03_Evolution/issue-classification-audit-state.md'
 
 permissions:
   issues: write
   contents: read
 
 jobs:
-  sync-lifecycle:
+  ensure-labels:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Ensure IA issue metadata labels
+      - name: Ensure current IA issue metadata labels
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
         run: |
           set -euo pipefail
           ensure_label() { gh label create "$1" --repo "$REPO" --color "$2" --description "$3" --force; }
-          ensure_label 'lifecycle:research' '8250DF' 'Open research / hypothesis / method exploration'
-          ensure_label 'lifecycle:active' '1D76DB' 'Currently activated bounded work'
-          ensure_label 'lifecycle:backlog' 'D4C5F9' 'Valuable but not currently activated'
-          ensure_label 'area:knowledge' '0E8A16' 'Knowledge model, canonical data, evidence, schema, validation'
-          ensure_label 'area:interface' 'FBCA04' 'Human/Agent access, representation, workspace, API, projection'
-          ensure_label 'area:operations' '5319E7' 'Operations, governance, continuity, automation, maintenance'
-          ensure_label 'priority:now' 'B60205' 'Needs attention now'
-          ensure_label 'priority:soon' 'D93F0B' 'Near-term candidate'
-          ensure_label 'priority:long-term' 'FBCA04' 'Important but long-term'
-          ensure_label 'priority:someday' 'C2E0C6' 'Indefinitely deferrable'
+
+          ensure_label 'attention:focus' 'B60205' 'Currently in project focus'
+          ensure_label 'attention:inbox' 'D4C5F9' 'Open task retained outside current focus'
+
+          ensure_label 'type:knowledge' '0E8A16' 'Knowledge accumulation / 01_State'
+          ensure_label 'type:perspective' 'FBCA04' 'Knowledge perspectives and access / 02_Runtime'
+          ensure_label 'type:evolution' '5319E7' 'System operations and self-evolution / 03_Evolution'
+
           ensure_label 'waiting:prerequisite' 'F9D0C4' 'Waiting on prerequisite work'
           ensure_label 'waiting:evidence' 'F9D0C4' 'Waiting on evidence or validation'
           ensure_label 'waiting:scale' 'F9D0C4' 'Waiting until scale/usage justifies work'
           ensure_label 'waiting:owner' 'F9D0C4' 'Waiting on owner decision or authorization'
 
-      - name: Sync audited Lifecycle classifications
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-        run: |
-          set -euo pipefail
-          python - <<'PY'
-          import os, re, subprocess
-          from pathlib import Path
-          text = Path('03_Evolution/issue-classification-audit-state.md').read_text()
-          pattern = re.compile(r'^### #(\d+) — .*?\n- Classification: \*\*(Research|Active Work|Backlog)\*\*', re.M)
-          mapping = {'Research':'lifecycle:research','Active Work':'lifecycle:active','Backlog':'lifecycle:backlog'}
-          lifecycle = set(mapping.values())
-          repo = os.environ['REPO']
-          for number, classification in pattern.findall(text):
-              target = mapping[classification]
-              current = subprocess.check_output(['gh','issue','view',number,'--repo',repo,'--json','labels','--jq','.labels[].name'], text=True).splitlines()
-              for label in lifecycle.intersection(current):
-                  if label != target:
-                      subprocess.run(['gh','issue','edit',number,'--repo',repo,'--remove-label',label], check=True)
-              if target not in current:
-                  subprocess.run(['gh','issue','edit',number,'--repo',repo,'--add-label',target], check=True)
-          PY
+          echo "Current model: Attention + Type + optional Waiting."
+          echo "Legacy Lifecycle / Area / Priority labels are not deleted by this bootstrap."
