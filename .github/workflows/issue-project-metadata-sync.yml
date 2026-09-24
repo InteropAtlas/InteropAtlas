@@ -77,12 +77,16 @@ jobs:
             CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
           done
 
-          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
-
-          if [ -z "$ITEM_ID" ]; then
-            echo "Issue is not present in Project forward index."
-            echo "Automatic add is intentionally paused due to confirmed GitHub Projects V2 indexing bug."
+          if [ -z "$ITEM_ID" ] && [ "${{ github.event.action }}" != "closed" ]; then
+            ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+              addProjectV2ItemById(input:{projectId:$project, contentId:$content}) { item { id } }
+            }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+            ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+            test -n "$ITEM_ID"
+            sleep 3
           fi
+
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
 
       - name: Remove closed Issue from Project
         if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && env.ITEM_ID != '' }}
@@ -146,5 +150,5 @@ jobs:
       - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          echo "Automatic add of new Issues is paused due to GitHub Projects V2 indexing bug."
+          echo "New Issues are automatically added to Issue Portfolio."
           echo "Existing Project items continue to sync normally."
