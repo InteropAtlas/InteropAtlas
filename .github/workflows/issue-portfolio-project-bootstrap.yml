@@ -94,12 +94,12 @@ jobs:
                   }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
                 }' -F project="$PROJECT_ID" >/dev/null
                 ;;
-              Type)
+              "Task Type")
                 gh api graphql -f query='mutation($project: ID!) {
                   createProjectV2Field(input: {
                     projectId: $project,
                     dataType: SINGLE_SELECT,
-                    name: "Type",
+                    name: "Task Type",
                     singleSelectOptions: [
                       {name:"Knowledge", color:GREEN, description:"Knowledge accumulation"},
                       {name:"Perspective", color:YELLOW, description:"Knowledge perspectives and access"},
@@ -113,7 +113,7 @@ jobs:
           }
 
           ensure_field Attention
-          ensure_field Type
+          ensure_field "Task Type"
 
       - name: Sync Labels to mirror fields
         run: |
@@ -136,7 +136,7 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          ATF="$(field_id Attention)"; TF="$(field_id Type)"
+          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"
           test -n "$ATF"; test -n "$TF"
 
           set_value() {
@@ -204,7 +204,7 @@ jobs:
               case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
 
               [ -z "$AT" ] || set_value "$ITEM" "$ATF" "$(option_id Attention "$AT")"
-              [ -z "$T" ] || set_value "$ITEM" "$TF" "$(option_id Type "$T")"
+              [ -z "$T" ] || set_value "$ITEM" "$TF" "$(option_id "Task Type" "$T")"
             done
 
             HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
@@ -216,5 +216,5 @@ jobs:
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
           echo "Issue Labels remain the source of truth."
-          echo "Mirror fields: Attention / Type."
+          echo "Mirror fields: Attention / Task Type."
           echo "Sync direction: Issue Labels -> Project fields."
