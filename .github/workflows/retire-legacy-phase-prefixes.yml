@@ -1,0 +1,54 @@
+name: Retire Legacy Phase Title Prefixes
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/retire-legacy-phase-prefixes.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Remove legacy P0-P6 planning prefixes from open Issue titles
+        run: |
+          set -euo pipefail
+          gh api --paginate --slurp "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" > /tmp/pages.json
+
+          python - <<'PY'
+          import json, os, re, subprocess
+
+          repo = os.environ["GITHUB_REPOSITORY"]
+          pages = json.load(open("/tmp/pages.json"))
+          issues = [x for page in pages for x in page if "pull_request" not in x]
+          changed = 0
+
+          for issue in issues:
+              number = issue["number"]
+              title = issue["title"]
+              new = title
+
+              new = re.sub(r"^P6\s+", "", new)
+              new = re.sub(r"^P1（Foundation Gate 后继续）：\s*", "", new)
+
+              if new == title:
+                  continue
+
+              payload = json.dumps({"title": new}, ensure_ascii=False).encode()
+              subprocess.run(
+                  ["gh","api","--method","PATCH",f"repos/{repo}/issues/{number}","--input","-"],
+                  input=payload, check=True, stdout=subprocess.DEVNULL
+              )
+              print(f"RENAMED #{number}: {title} -> {new}")
+              changed += 1
+
+          print(f"SUMMARY open_issues={len(issues)} renamed={changed}")
+          PY
