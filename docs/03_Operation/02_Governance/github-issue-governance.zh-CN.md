@@ -114,11 +114,14 @@ Issue Labels 是任务 Metadata 的唯一事实源。
 
 GitHub Project 只负责组织与展示，不建立第二套真值。由于 GitHub Projects 将 `Type` 作为保留名称，Project 中对应的镜像字段使用 **Task Type**；它仍然只是 `type:*` Labels 的展示副本。
 
+Project **保留 Open 与 Closed Issues**。关闭 Issue 表示任务完成或终止，但不从 Project 删除，以便回顾完成量、发现误关闭并保留工作历史。GitHub 原生 Issue State 负责表示 Open / Closed；Project 不另造一套完成状态事实源。
+
 最重要的 Owner 视图是：
 
-- **Focus**：只显示 `attention:focus`；
-- **Inbox**：显示 `attention:inbox`；
-- 可按 Type 过滤或分组，但 Type 不增加 Owner 的日常注意力空间。
+- **Attention Board**：主要 Owner 入口，可同时查看当前与已完成事项；列按 Attention 展示；
+- **Focus**：用于查看 `attention:focus`；
+- **Inbox**：用于查看 `attention:inbox`；
+- 可按 Task Type 过滤或分组，但 Task Type 不增加 Owner 的日常注意力空间。
 
 ## 8. 自动化边界
 
