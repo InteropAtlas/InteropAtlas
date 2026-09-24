@@ -1,7 +1,7 @@
 # Issue Governance Drift Audit State
 
 Audit date: 2026-09-24
-Status: completed read-only audit; remediation pending
+Status: remediation in progress — Metadata + Project migration complete; relationship/title cleanup in progress
 
 ## Scope
 
@@ -71,3 +71,30 @@ The previous Lifecycle / Area / Priority model is legacy and should not be used 
 - `docs/03_Operation/02_Governance/github-issue-governance.zh-CN.md`
 - `PROJECT_STATE.md`
 - repository-maintenance Issue
+
+
+## Remediation checkpoint — 2026-09-25
+
+### Completed
+
+1. All 213 Open Issues migrated to:
+   - exactly one Attention label;
+   - exactly one Type label;
+   - optional Waiting only where applicable.
+2. Open Issues no longer carry legacy `lifecycle:*`, `area:*`, or `priority:*` labels.
+3. Issue Portfolio #2 now mirrors:
+   - `attention:*` → `Attention`;
+   - `type:*` → `Task Type`.
+4. Project verification over all 213 Open Project Items reports:
+   - Attention mismatches: 0;
+   - Task Type mismatches: 0.
+5. Retired Project fields `Lifecycle`, `Area`, and `Priority` were removed.
+6. All 46 Open Issues that still declared `Parent: #129` had that retired umbrella declaration removed after confirming #129 is closed/retired. No replacement native relation was created mechanically.
+
+### Remaining
+
+- Reinterpret remaining historical `Parent:` and `Blocked By:` statements semantically.
+- Establish only high-confidence native relations where tooling and semantics support them.
+- Remove obsolete P0–P6 title prefixes.
+- Review V1/V2 references contextually, preserving real technical versions.
+- Reassess remaining long-running Umbrella / Loop Issues against the bounded Work Item rule.
