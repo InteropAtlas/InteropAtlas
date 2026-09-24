@@ -77,7 +77,7 @@ jobs:
             CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
           done
 
-          if [ -z "$ITEM_ID" ] && [ "${{ github.event.action }}" != "closed" ]; then
+          if [ -z "$ITEM_ID" ]; then
             ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
               addProjectV2ItemById(input:{projectId:$project, contentId:$content}) { item { id } }
             }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
@@ -88,16 +88,9 @@ jobs:
 
           echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
 
-      - name: Remove closed Issue from Project
-        if: ${{ github.event_name == 'issues' && github.event.action == 'closed' && env.ITEM_ID != '' }}
-        run: |
-          set -euo pipefail
-          gh api graphql -f query='mutation($project: ID!, $item: ID!) {
-            deleteProjectV2Item(input:{projectId:$project,itemId:$item}) { deletedItemId }
-          }' -F project="$PROJECT_ID" -F item="$ITEM_ID" >/dev/null
 
       - name: Sync Labels to existing Project item
-        if: ${{ github.event_name == 'issues' && github.event.action != 'closed' && env.ITEM_ID != '' }}
+        if: ${{ github.event_name == 'issues' && env.ITEM_ID != '' }}
         env:
           ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
@@ -148,5 +141,5 @@ jobs:
       - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
-          echo "New Issues are automatically added to Issue Portfolio."
+          echo "Open and closed Issues remain in Issue Portfolio."
           echo "Existing Project items continue to sync normally."
