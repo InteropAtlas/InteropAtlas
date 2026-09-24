@@ -1,115 +1,146 @@
-# GitHub Issue 运行治理：先例与 IA 采用方案
+# GitHub Issue 运行治理：IA 当前模型
 
-Updated: 2026-09-23
+Updated: 2026-09-24
 
 ## 目的
 
-InteropAtlas 的 Open Issue 已经达到数百规模。目标不是消灭 Issue，而是降低认知负担：让 Human / Agent 能快速区分“正在研究什么、正在执行什么、未来储备什么、为什么现在不能做”。
+InteropAtlas 的 Issue 用来承载具体、可继续推进的任务。Issue 数量可以很多，但 Human Owner 的当前注意力必须保持很小。
 
-## 外部先例
+当前治理只保留两个核心维度：
 
-### GitHub 官方
+1. **Attention** — 这个任务现在是否占用注意力；
+2. **Type** — 这个任务主要属于 IA 的哪条运行方向。
 
-GitHub 将 Issue 用于计划、讨论和跟踪工作；Projects 用于把 Issue / PR 投影为 table、board、roadmap，并通过自定义字段、过滤、排序、分组和自动化管理 backlog 与 roadmap。
+Waiting 只作为可选条件，不形成第三个任务空间。
 
-参考：
-- https://docs.github.com/en/issues
-- https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/about-projects
-- https://docs.github.com/en/issues/planning-and-tracking-with-projects/learning-about-projects/quickstart-for-projects
+## 1. Attention
 
-### Kubernetes
+### `attention:focus`
 
-Kubernetes 的 triage 将“是否有效 / 是否需要更多信息”“优先级”“生命周期”分开管理。其优先级包括 critical-urgent、important-soon、important-longterm、backlog、awaiting-more-evidence，并使用 stale / frozen 等生命周期机制。
+当前正在推进、需要占用 Owner / Agent 注意力的任务。
 
-参考：
-- https://kubernetes.io/docs/contribute/review/for-approvers/
-- https://kubernetes.io/docs/contribute/participate/issue-wrangler/
+- Focus 总量原则上 **不超过 3 个**；
+- 大任务可以包含多个 Sub-issues，但不要求所有子任务同时进入 Focus；
+- 一个任务只有被明确提取出来推进时，才进入 Focus。
 
-对 IA 的启发：**一个 Issue 当前处于什么工作形态、主要属于哪个能力域、何时值得投入注意力，是三个核心维度；等待原因只在确实存在时附加。**
+### `attention:inbox`
 
-### Rust
+已经知道、值得保留，但当前不占用注意力的任务。
 
-Rust triage 明确区分 waiting-on-review、waiting-on-author、blocked，并周期性检查长期等待项。
+Inbox 可以很大。任务在需要时从 Inbox 提取到 Focus；也可以在推进某个更大任务时，被吸收到该任务的 Sub-issues / Dependencies 中。
 
-参考：
-- https://forge.rust-lang.org/release/triage-procedure.html
+完成的任务直接关闭 Issue。
 
-对 IA 的启发：**“没有在做”不等于“不重要”；应明确它在等什么。**
+```text
+Inbox → Focus → Closed
+          ↓
+        Inbox
+```
 
-## IA 当前采用的最小模型
+Focus 可以退回 Inbox；Open 不等于 Focus。
 
-### 1. Lifecycle
+## 2. Type
 
-- `lifecycle:research` — 问题仍在探索、比较、形成假设或方法。
-- `lifecycle:active` — 已有明确 Work Unit / deliverable / acceptance boundary，当前激活。
-- `lifecycle:backlog` — 有价值但当前未激活；包括 Future / Draft / Deferred / Blocked 等储备。
+Type 表示任务主要属于 IA 的哪条当前运行方向。
 
-Open Issue 不等于 Active Work。
+### `type:knowledge` — 知识积累
 
-### 2. Area
+持续发现、收录、验证、连接和维护 IA 的知识，包括对象、关系、证据、Candidate、Canonical Knowledge 与覆盖。
 
-- `area:knowledge` — Canonical knowledge、identity、relation、evidence、provenance、schema、validation、coverage 等。
-- `area:interface` — Human / Agent access、search、compare、workspace、projection、API、representation、interchange 等。
-- `area:operations` — intake、review、governance、continuity、automation、security、maintenance、quality loop、adaptation 等。
+主要对应仓库 `01_State`。
 
-跨域 Issue 先选择 Primary Area，必要时再记录 Secondary。
+### `type:perspective` — 知识视角与访问建设
 
-### 3. Priority
+建设同一知识世界的不同呈现方式与访问方式，包括适人化呈现，以及机器可读的读取、查询、遍历、验证和操作能力。
 
-- `priority:now`
-- `priority:soon`
-- `priority:long-term`
-- `priority:someday`
+主要对应仓库 `02_Runtime`。
 
-Priority 与 Lifecycle 正交。
+### `type:evolution` — 系统运维与自我进化
 
-### Waiting Condition（可选）
+负责 IA 自身的运行、维护、治理、质量控制、研究、实验、决策沉淀与持续修正。
 
-Waiting 不是第四个必填维度，而是只在 Issue 当前确实存在明确等待条件时附加：
+主要对应仓库 `03_Evolution`。
+
+跨类型 Issue 选择一个 Primary Type。只有确有必要时，正文再说明次要影响范围；不要为了“完整”添加多个 Type。
+
+## 3. Waiting Condition（可选）
+
+Waiting 只表示“为什么当前不能继续”，不是核心分类维度：
 
 - `waiting:prerequisite`
 - `waiting:evidence`
 - `waiting:scale`
 - `waiting:owner`
 
-没有明确等待条件时，不添加任何 `waiting:*` 标签；`waiting:none` 不再使用。
+没有明确等待条件时，不添加任何 `waiting:*` 标签。
 
-因此 IA 的最小模型是：**Lifecycle × Area × Priority + 可选 Waiting Condition**。
+## 4. 不再使用的核心分类
 
-## 生命周期
+以下分类不再作为当前 Issue 核心 Metadata：
 
-```text
-Research Issue
-   ↓ 形成明确交付边界
-Work / Active Issue
-   ↓ 形成稳定成果
-Repository
+- `lifecycle:research / active / backlog`
+- `area:knowledge / interface / operations`
+- `priority:now / soon / long-term / someday`
 
-Project = 对 Issue / PR 的组织与投影，不是第二事实源。
-```
+原因：
 
-## Project 建议视图
+- Research / Work 不是互斥状态，同一任务可以边研究边执行；
+- Active 与 Now 高度重叠；
+- Area 与当前三条运行方向并不完全一致；
+- 三套维度组合造成不必要的认知负担。
 
-- Current — Lifecycle = Active
-- Research — Lifecycle = Research
-- Near-term — Priority = Now / Soon
-- Waiting — 存在任意 `waiting:*` 标签
-- Knowledge — Area = Knowledge
-- Interface — Area = Interface
-- Operations — Area = Operations
+历史标签可以在迁移完成前暂时存在，但不再作为当前治理模型的事实定义。
 
-Issue Labels 是 Metadata 的唯一事实源；Project 只基于 Labels 做过滤、分组和展示，不维护重复的 Metadata 真值。
+## 5. Issue 的边界
 
-## 自动化边界
+Issue 应承载一个能够被理解、推进和结束的具体任务。
 
-机器适合：检查缺失 / 冲突 metadata、Active 长期无更新、stale lease / Blocked 条件，并根据已审核的审计文件同步 Lifecycle。
+- 研究可以发生在任何 Issue 中，不需要单独的 “Research Issue” 类型；
+- 尚未形成任务的想法、方向或材料，不应为了形式完整机械创建 Issue；
+- 长期方向由 `PROJECT_STATE.md` 表达；
+- 多个 Work Item 的组织由 GitHub Project 和 GitHub-native relations 承担；
+- 长期 Umbrella Issue 不作为永久项目结构。
 
-机器不应：仅因长时间无更新就判断 Issue 没价值、自动把 Backlog 激活、自动把 Research 判定为已收敛、自动关闭需要语义判断的 Issue。
+## 6. GitHub-native 关系
+
+- **Sub-issue**：组成关系——“它是不是这个任务的一部分？”
+- **Dependency**：前置 / 阻塞关系——“另一个任务是否必须先完成？”
+- **Relates to**：普通关联。
+
+旧正文中的 `Parent:` / `Blocked By:` 只能视为历史声明，不能机械迁移为原生关系。
+
+## 7. Project 的角色
+
+Issue Labels 是任务 Metadata 的唯一事实源。
+
+GitHub Project 只负责组织与展示，不建立第二套真值。
+
+最重要的 Owner 视图是：
+
+- **Focus**：只显示 `attention:focus`，原则上 ≤ 3；
+- **Inbox**：显示 `attention:inbox`；
+- 可按 Type 过滤或分组，但 Type 不增加 Owner 的日常注意力空间。
+
+## 8. 自动化边界
+
+机器适合：
+
+- 检查 Focus 是否超过 3；
+- 检查 Attention / Type 是否缺失或冲突；
+- 检查 Waiting 条件是否仍成立；
+- 镜像 Labels 到 Project 展示字段。
+
+机器不应：
+
+- 自动决定哪个 Inbox 应进入 Focus；
+- 因为长期未更新就自动关闭 Issue；
+- 根据旧 `Parent:` / `Blocked By:` 文本自动建立关系；
+- 自动把历史 P0–P6 / V1/V2 语义改写成当前结构。
 
 ## 当前事实源
 
-- Issue：具体研究 / 工作上下文。
-- PROJECT_STATE.md：当前项目导航和激活边界。
-- GitHub Project：多 Issue 投影视图。
-- Repository：稳定成果。
-- `03_Evolution/issue-classification-audit-state.md`：2026-09-23 首轮全量分类审计及可恢复维护记录。
+- Issue：具体任务上下文；
+- Issue Labels：Attention / Type / Waiting Metadata；
+- `PROJECT_STATE.md`：当前三条运行方向与项目级导航；
+- GitHub Project：多 Issue 的组织与投影；
+- Repository：稳定成果、规则与长期知识。
