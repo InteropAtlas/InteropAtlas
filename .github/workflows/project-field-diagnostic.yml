@@ -50,9 +50,23 @@ jobs:
             }
           }' -F project="$PROJECT_ID")"
 
+          VIEWS="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                views(first:20) {
+                  nodes { id name layout }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
           echo "PROJECT_NUMBER=$PROJECT_NUMBER"
           echo "PROJECT_ID=$PROJECT_ID"
           echo "FIELDS_JSON=$FIELDS"
+          echo "VIEWS_JSON=$VIEWS"
+          VIEW_COUNT="$(jq -r '.data.node.views.nodes | length' <<<"$VIEWS")"
+          echo "VIEW_COUNT=$VIEW_COUNT"
+          test "$VIEW_COUNT" -gt 0
 
           attention_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Attention") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
           task_type_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Task Type") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
