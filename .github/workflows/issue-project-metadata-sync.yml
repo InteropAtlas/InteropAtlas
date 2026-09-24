@@ -121,7 +121,7 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          ATF="$(field_id Attention)"; TF="$(field_id Type)"
+          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"
           test -n "$ATF"; test -n "$TF"
 
           AT=""; T=""
@@ -143,7 +143,7 @@ jobs:
           }
 
           set_value Attention "$ATF" "$AT"
-          set_value Type "$TF" "$T"
+          set_value "Task Type" "$TF" "$T"
 
       - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
