@@ -81,45 +81,29 @@ jobs:
             fi
 
             case "$name" in
-              Lifecycle)
+              Attention)
                 gh api graphql -f query='mutation($project: ID!) {
                   createProjectV2Field(input: {
                     projectId: $project,
                     dataType: SINGLE_SELECT,
-                    name: "Lifecycle",
+                    name: "Attention",
                     singleSelectOptions: [
-                      {name:"Research", color:PURPLE, description:"Open research question"},
-                      {name:"Active", color:BLUE, description:"Currently activated bounded work"},
-                      {name:"Backlog", color:GRAY, description:"Not currently activated"}
+                      {name:"Focus", color:RED, description:"Current project focus"},
+                      {name:"Inbox", color:GRAY, description:"Retained outside current focus"}
                     ]
                   }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
                 }' -F project="$PROJECT_ID" >/dev/null
                 ;;
-              Area)
+              Type)
                 gh api graphql -f query='mutation($project: ID!) {
                   createProjectV2Field(input: {
                     projectId: $project,
                     dataType: SINGLE_SELECT,
-                    name: "Area",
+                    name: "Type",
                     singleSelectOptions: [
-                      {name:"Knowledge", color:GREEN, description:"Knowledge/model/evidence"},
-                      {name:"Interface", color:YELLOW, description:"Human/Agent access and interfaces"},
-                      {name:"Operations", color:ORANGE, description:"Operations/governance/maintenance"}
-                    ]
-                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
-                }' -F project="$PROJECT_ID" >/dev/null
-                ;;
-              Priority)
-                gh api graphql -f query='mutation($project: ID!) {
-                  createProjectV2Field(input: {
-                    projectId: $project,
-                    dataType: SINGLE_SELECT,
-                    name: "Priority",
-                    singleSelectOptions: [
-                      {name:"Now", color:RED, description:"Needs attention now"},
-                      {name:"Soon", color:ORANGE, description:"Near-term attention"},
-                      {name:"Long-term", color:YELLOW, description:"Long-term attention"},
-                      {name:"Someday", color:GRAY, description:"Someday / low-attention"}
+                      {name:"Knowledge", color:GREEN, description:"Knowledge accumulation"},
+                      {name:"Perspective", color:YELLOW, description:"Knowledge perspectives and access"},
+                      {name:"Evolution", color:PURPLE, description:"System operations and self-evolution"}
                     ]
                   }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
                 }' -F project="$PROJECT_ID" >/dev/null
@@ -128,9 +112,8 @@ jobs:
             echo "Created field: $name"
           }
 
-          ensure_field Lifecycle
-          ensure_field Area
-          ensure_field Priority
+          ensure_field Attention
+          ensure_field Type
 
       - name: Sync Labels to mirror fields
         run: |
@@ -153,8 +136,8 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          LF="$(field_id Lifecycle)"; AF="$(field_id Area)"; PF="$(field_id Priority)"
-          test -n "$LF"; test -n "$AF"; test -n "$PF"
+          ATF="$(field_id Attention)"; TF="$(field_id Type)"
+          test -n "$ATF"; test -n "$TF"
 
           set_value() {
             local item="$1" field="$2" option="$3"
@@ -216,14 +199,12 @@ jobs:
               ITEM="$(jq -r '.id' <<<"$ROW")"
               LABELS="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
 
-              L=""; A=""; P=""
-              case "|$LABELS|" in *"|lifecycle:research|"*) L="Research";; *"|lifecycle:active|"*) L="Active";; *"|lifecycle:backlog|"*) L="Backlog";; esac
-              case "|$LABELS|" in *"|area:knowledge|"*) A="Knowledge";; *"|area:interface|"*) A="Interface";; *"|area:operations|"*) A="Operations";; esac
-              case "|$LABELS|" in *"|priority:now|"*) P="Now";; *"|priority:soon|"*) P="Soon";; *"|priority:long-term|"*) P="Long-term";; *"|priority:someday|"*) P="Someday";; esac
+              AT=""; T=""
+              case "|$LABELS|" in *"|attention:focus|"*) AT="Focus";; *"|attention:inbox|"*) AT="Inbox";; esac
+              case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
 
-              [ -z "$L" ] || set_value "$ITEM" "$LF" "$(option_id Lifecycle "$L")"
-              [ -z "$A" ] || set_value "$ITEM" "$AF" "$(option_id Area "$A")"
-              [ -z "$P" ] || set_value "$ITEM" "$PF" "$(option_id Priority "$P")"
+              [ -z "$AT" ] || set_value "$ITEM" "$ATF" "$(option_id Attention "$AT")"
+              [ -z "$T" ] || set_value "$ITEM" "$TF" "$(option_id Type "$T")"
             done
 
             HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
@@ -235,5 +216,5 @@ jobs:
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
           echo "Issue Labels remain the source of truth."
-          echo "Mirror fields: Lifecycle / Area / Priority."
+          echo "Mirror fields: Attention / Type."
           echo "Sync direction: Issue Labels -> Project fields."
