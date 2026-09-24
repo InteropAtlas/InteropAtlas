@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-24T20:45:00+08:00
+Document Updated At: 2026-09-24T23:39:00+08:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -52,11 +52,10 @@ InteropAtlas 研究互操作，并持续连接、整理和验证人类已经形�
 
 当前重点包括：
 
-- **类人化视角**：让 Human 以自然方式浏览、理解、比较和使用知识；Wiki 是最基础的视角，后续可继续增加时间线、关系图、比较、地图等不同表达。
-- **Agent 视角**：建设适合 Agent 的结构化读取、查询、遍历、验证和操作能力。
-- **公共 / 个人视角**：当前主要建设公共视角与公共共识；个人视角属于后续方向，在真实需求明确前不提前展开。
+- **适人化视角**：建设适合人类阅读、理解、比较和使用知识的呈现方式；Wiki 是最基础的视角，后续可继续增加时间线、关系图、比较、地图等不同表达。
+- **适 Agent 化视角**：建设适合 Agent 使用的结构化读取、查询、遍历、验证和操作能力。
 
-不同视角共享同一个 Canonical knowledge world，不各自建立事实源。仓库中的 `02_Runtime` 主要承载让这些视角真正运行起来的 Engine、Tools 与 Outputs。
+两类视角共享同一个 Canonical knowledge world，不各自建立事实源。仓库中的 `02_Runtime` 主要承载让这些视角真正运行起来的 Engine、Tools 与 Outputs。
 
 ### 系统运维与自我进化
 
