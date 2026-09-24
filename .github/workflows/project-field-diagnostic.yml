@@ -60,12 +60,11 @@ jobs:
                     name
                     layout
                     filter
-                    configuration {
-                      visibleFields(first:50) {
-                        nodes {
-                          ... on ProjectV2FieldCommon { id name dataType }
-                        }
-                      }
+                    groupByFields(first:10) {
+                      nodes { ... on ProjectV2FieldCommon { id name dataType } }
+                    }
+                    verticalGroupByFields(first:10) {
+                      nodes { ... on ProjectV2FieldCommon { id name dataType } }
                     }
                   }
                 }
