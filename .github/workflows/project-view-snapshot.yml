@@ -1,0 +1,55 @@
+name: Project View Snapshot
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/project-view-snapshot.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+      PROJECT_ORG: InteropAtlas
+
+    steps:
+      - name: Snapshot current Project views
+        run: |
+          set -euo pipefail
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization {
+                projectsV2(first:100) { nodes { id number title } }
+              }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .number' <<<"$PROJECTS" | head -n1)"
+          test -n "$PROJECT_ID"
+          test -n "$PROJECT_NUMBER"
+
+          REST_VIEWS="$(gh api -H "X-GitHub-Api-Version: 2026-03-10" "orgs/$PROJECT_ORG/projectsV2/$PROJECT_NUMBER/views?per_page=100")"
+          GRAPH_VIEWS="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                views(first:100, orderBy:{field:POSITION,direction:ASC}) {
+                  nodes {
+                    id number name layout filter
+                    groupByFields(first:10) { nodes { ... on ProjectV2FieldCommon { id name dataType } } }
+                    verticalGroupByFields(first:10) { nodes { ... on ProjectV2FieldCommon { id name dataType } } }
+                    sortByFields(first:10) { nodes { ... on ProjectV2FieldCommon { id name dataType } } }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          echo "PROJECT_NUMBER=$PROJECT_NUMBER"
+          echo "REST_VIEWS=$REST_VIEWS"
+          echo "GRAPH_VIEWS=$GRAPH_VIEWS"
