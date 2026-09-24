@@ -4,7 +4,7 @@ Updated: 2026-09-24
 
 ## 目的
 
-InteropAtlas 的 Issue 用来承载具体、可继续推进的任务。Issue 数量可以很多，但 Human Owner 的当前注意力必须保持很小。
+InteropAtlas 的 Issue 用来承载具体、可继续推进的任务。Issue 数量可以很多，但项目本身只区分当前是否进入 Focus。
 
 当前治理只保留两个核心维度：
 
@@ -19,7 +19,6 @@ Waiting 只作为可选条件，不形成第三个任务空间。
 
 当前正在推进、需要占用 Owner / Agent 注意力的任务。
 
-- Focus 总量原则上 **不超过 3 个**；
 - 大任务可以包含多个 Sub-issues，但不要求所有子任务同时进入 Focus；
 - 一个任务只有被明确提取出来推进时，才进入 Focus。
 
@@ -117,7 +116,7 @@ GitHub Project 只负责组织与展示，不建立第二套真值。
 
 最重要的 Owner 视图是：
 
-- **Focus**：只显示 `attention:focus`，原则上 ≤ 3；
+- **Focus**：只显示 `attention:focus`；
 - **Inbox**：显示 `attention:inbox`；
 - 可按 Type 过滤或分组，但 Type 不增加 Owner 的日常注意力空间。
 
@@ -125,7 +124,6 @@ GitHub Project 只负责组织与展示，不建立第二套真值。
 
 机器适合：
 
-- 检查 Focus 是否超过 3；
 - 检查 Attention / Type 是否缺失或冲突；
 - 检查 Waiting 条件是否仍成立；
 - 镜像 Labels 到 Project 展示字段。
