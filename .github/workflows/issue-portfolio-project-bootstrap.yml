@@ -38,11 +38,16 @@ jobs:
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
 
-      - name: New Issue add is paused
+      - name: Add all open Issues
         run: |
-          echo "Automatic addition of new Issues is paused."
-          echo "Reason: confirmed GitHub Projects V2 forward-index inconsistency."
-          echo "Existing Project items are left untouched."
+          set -euo pipefail
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=open&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
+          while read -r ISSUE_ID; do
+            [ -n "$ISSUE_ID" ] || continue
+            gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+              addProjectV2ItemById(input:{projectId:$project, contentId:$content}) { item { id } }
+            }' -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null 2>&1 || true
+          done < /tmp/issues.txt
 
       - name: Ensure mirror fields
         run: |
