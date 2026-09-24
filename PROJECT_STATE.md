@@ -65,6 +65,8 @@ InteropAtlas 研究互操作，并持续连接、整理和验证人类已经形�
 
 Agent structured access、Candidate Write 等高影响能力仍需 Human Owner 明确授权后才能进入施工。
 
+Open Ecosystem & Federation 可以继续作为长期能力概念保留，但 **当前不进入施工，也不进入当前注意力队列**。
+
 ## 3. 当前任务如何进入注意力
 
 仓库可以存在大量 Open Issues，但 **Open 不等于当前要做**。
