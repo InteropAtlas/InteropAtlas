@@ -107,6 +107,8 @@ jobs:
           test "$board_attention" = "Attention"
 
           total=0
+          open_total=0
+          closed_total=0
           attention_mismatch=0
           type_mismatch=0
           cursor=""
@@ -173,6 +175,12 @@ jobs:
             while IFS= read -r ROW; do
               [ -n "$ROW" ] || continue
               total=$((total + 1))
+              state="$(jq -r '.content.state' <<<"$ROW")"
+              if [ "$state" = "OPEN" ]; then
+                open_total=$((open_total + 1))
+              elif [ "$state" = "CLOSED" ]; then
+                closed_total=$((closed_total + 1))
+              fi
               number="$(jq -r '.content.number' <<<"$ROW")"
               labels="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
               actual_attention="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Attention") | .name][0] // ""' <<<"$ROW")"
@@ -206,6 +214,8 @@ jobs:
           done
 
           echo "PROJECT_ISSUE_ITEMS=$total"
+          echo "OPEN_PROJECT_ITEMS=$open_total"
+          echo "CLOSED_PROJECT_ITEMS=$closed_total"
           echo "ATTENTION_MISMATCHES=$attention_mismatch"
           echo "TASK_TYPE_MISMATCHES=$type_mismatch"
           test "$attention_mismatch" -eq 0
