@@ -98,3 +98,15 @@ The previous Lifecycle / Area / Priority model is legacy and should not be used 
 - Remove obsolete P0–P6 title prefixes.
 - Review V1/V2 references contextually, preserving real technical versions.
 - Reassess remaining long-running Umbrella / Loop Issues against the bounded Work Item rule.
+
+
+## Remediation checkpoint — 2026-09-25 (relationship/title pass)
+
+- Historical `Parent: #129` current-state declarations remaining on Open Issues: **0**.
+- Historical `Parent:` current-state headers remaining on Open Issues: **0**.
+- Historical `Blocked By:` current-state headers remaining on Open Issues: **0**; current waiting conditions are expressed through `waiting:*` Labels and, where useful, prose `Waiting Condition` context.
+- P0–P6 / P5-P6 title prefixes remaining on Open Issues: **0**.
+- Remaining V1/V2-like title tokens were reviewed contextually. Project-level roadmap semantics were removed from #177, #178, #181, #216, #217, #221, #232 and #235. Technical artifact versions were preserved in #239 (`Family/Kind Registry v1`) and #240 (`Relation Type / Role Registry v1`).
+- #195 historical Issue Cleanup Plan was closed as completed because its bounded cleanup responsibility is now covered by #287 and the executed migration.
+
+No Parent/Blocked By text was mechanically converted into native relations.
