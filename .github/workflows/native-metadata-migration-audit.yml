@@ -1,0 +1,75 @@
+name: Native Metadata Migration Audit
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/native-metadata-migration-audit.yml'
+
+permissions:
+  contents: read
+  issues: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Audit all issues before native-field migration
+        run: |
+          set -euo pipefail
+
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100"             --jq '.[] | select(.pull_request == null)' > /tmp/issues.jsonl
+
+          total=0
+          typed=0
+          type_missing=0
+          type_conflict=0
+          wait_evidence=0
+          wait_scale=0
+          wait_owner=0
+          wait_prereq=0
+          wait_nonprereq_conflict=0
+
+          while IFS= read -r ISSUE; do
+            [ -n "$ISSUE" ] || continue
+            total=$((total+1))
+            n="$(jq -r '.number' <<<"$ISSUE")"
+            title="$(jq -r '.title' <<<"$ISSUE")"
+            labels="$(jq -r '[.labels[].name] | join("|")' <<<"$ISSUE")"
+
+            tc=0
+            for x in type:knowledge type:perspective type:evolution; do
+              [[ "|$labels|" == *"|$x|"* ]] && tc=$((tc+1))
+            done
+            if [ "$tc" -eq 0 ]; then
+              type_missing=$((type_missing+1))
+              echo "TYPE_MISSING #$n $title"
+            elif [ "$tc" -gt 1 ]; then
+              type_conflict=$((type_conflict+1))
+              echo "TYPE_CONFLICT #$n labels=$labels title=$title"
+            else
+              typed=$((typed+1))
+            fi
+
+            wc=0
+            if [[ "|$labels|" == *"|waiting:evidence|"* ]]; then wait_evidence=$((wait_evidence+1)); wc=$((wc+1)); fi
+            if [[ "|$labels|" == *"|waiting:scale|"* ]]; then wait_scale=$((wait_scale+1)); wc=$((wc+1)); fi
+            if [[ "|$labels|" == *"|waiting:owner|"* ]]; then wait_owner=$((wait_owner+1)); wc=$((wc+1)); fi
+            if [[ "|$labels|" == *"|waiting:prerequisite|"* ]]; then wait_prereq=$((wait_prereq+1)); fi
+            if [ "$wc" -gt 1 ]; then
+              wait_nonprereq_conflict=$((wait_nonprereq_conflict+1))
+              echo "WAIT_NONPREREQ_CONFLICT #$n labels=$labels title=$title"
+            fi
+          done < /tmp/issues.jsonl
+
+          echo "TOTAL=$total"
+          echo "TYPED=$typed"
+          echo "TYPE_MISSING=$type_missing"
+          echo "TYPE_CONFLICT=$type_conflict"
+          echo "WAIT_EVIDENCE=$wait_evidence"
+          echo "WAIT_SCALE=$wait_scale"
+          echo "WAIT_OWNER=$wait_owner"
+          echo "WAIT_PREREQ=$wait_prereq"
+          echo "WAIT_NONPREREQ_CONFLICT=$wait_nonprereq_conflict"
