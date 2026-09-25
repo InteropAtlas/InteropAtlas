@@ -1,0 +1,25 @@
+name: Inspect Projects Token Permissions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/inspect-projects-token-permissions.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Inspect safe auth metadata
+        run: |
+          set -euo pipefail
+          curl -sSI \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/user \
+            | grep -Ei '^(x-oauth-scopes|x-accepted-oauth-scopes|github-authentication-token-expiration):' || true
