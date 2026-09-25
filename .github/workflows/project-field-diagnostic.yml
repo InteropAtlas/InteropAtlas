@@ -69,8 +69,17 @@ jobs:
           echo "CURRENT_VIEWS=$(jq -c '.data.node.views.nodes' <<<"$DATA")"
 
           STATUS_OPTIONS="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Status") | .options[].name] | sort | join("|")' <<<"$DATA")"
+          WORK_TYPE_PROJECT_COUNT="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Work Type")] | length' <<<"$DATA")"
+          WAITING_FOR_PROJECT_COUNT="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Waiting For")] | length' <<<"$DATA")"
+          ATTENTION_PROJECT_COUNT="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Attention")] | length' <<<"$DATA")"
           echo "STATUS_OPTIONS=$STATUS_OPTIONS"
+          echo "WORK_TYPE_PROJECT_COUNT=$WORK_TYPE_PROJECT_COUNT"
+          echo "WAITING_FOR_PROJECT_COUNT=$WAITING_FOR_PROJECT_COUNT"
+          echo "ATTENTION_PROJECT_COUNT=$ATTENTION_PROJECT_COUNT"
           test "$STATUS_OPTIONS" = "Done|In Progress|Todo"
+          test "$WORK_TYPE_PROJECT_COUNT" -eq 1
+          test "$WAITING_FOR_PROJECT_COUNT" -eq 1
+          test "$ATTENTION_PROJECT_COUNT" -eq 0
 
           BOARD="$(jq -c '.data.node.views.nodes[]? | select(.name=="Attention Board")' <<<"$DATA")"
           echo "MAIN_BOARD=$BOARD"
@@ -79,6 +88,7 @@ jobs:
           echo "BOARD_VERTICAL_GROUP=$BOARD_VERTICAL"
           echo "BOARD_GROUP=$BOARD_GROUP"
           test "$BOARD_VERTICAL" = "Status"
+          test "$BOARD_GROUP" = "Task Type" -o "$BOARD_GROUP" = "Work Type"
 
           total=0
           missing_work_type=0
