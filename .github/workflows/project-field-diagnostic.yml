@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: read
+  issues: read
 
 jobs:
   inspect:
@@ -17,26 +18,32 @@ jobs:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
+      ORG: InteropAtlas
 
     steps:
-      - name: Verify Project fields and label projection
+      - name: Verify native Issue fields and Project Status
         run: |
           set -euo pipefail
 
+          ORG_FIELDS="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' "orgs/$ORG/issue-fields")"
+          WORK_TYPE="$(jq -c '.[]? | select(.name=="Work Type")' <<<"$ORG_FIELDS")"
+          WAITING_FOR="$(jq -c '.[]? | select(.name=="Waiting For")' <<<"$ORG_FIELDS")"
+
+          test -n "$WORK_TYPE"
+          test -n "$WAITING_FOR"
+          test "$(jq -r '[.options[].name] | sort | join("|")' <<<"$WORK_TYPE")" = "Evolution|Knowledge|Perspective"
+          test "$(jq -r '[.options[].name] | sort | join("|")' <<<"$WAITING_FOR")" = "Evidence|Owner|Scale"
+
           PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
             node(id:$owner) {
-              ... on Organization {
-                projectsV2(first:100) { nodes { id number title } }
-              }
+              ... on Organization { projectsV2(first:100) { nodes { id number title } } }
             }
           }' -F owner="$PROJECT_OWNER_ID")"
-
           PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
           PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .number' <<<"$PROJECTS" | head -n1)"
-          test -n "$PROJECT_ID"
-          test -n "$PROJECT_NUMBER"
+          test -n "$PROJECT_ID"; test -n "$PROJECT_NUMBER"
 
-          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+          DATA="$(gh api graphql -f query='query($project: ID!) {
             node(id:$project) {
               ... on ProjectV2 {
                 fields(first:100) {
@@ -49,143 +56,54 @@ jobs:
                 views(first:100, orderBy:{field:POSITION,direction:ASC}) {
                   nodes {
                     id number name layout filter
-                    groupByFields(first:10) { nodes { ... on ProjectV2FieldCommon { name } } }
-                    verticalGroupByFields(first:10) { nodes { ... on ProjectV2FieldCommon { name } } }
+                    groupByFields(first:10){nodes{... on ProjectV2FieldCommon{id name dataType}}}
+                    verticalGroupByFields(first:10){nodes{... on ProjectV2FieldCommon{id name dataType}}}
                   }
                 }
               }
             }
           }' -F project="$PROJECT_ID")"
 
-          attention_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Attention") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
-          task_type_options="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Task Type") | .options[].name] | sort | join("|")' <<<"$FIELDS")"
-          old_fields="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Lifecycle" or .name=="Area" or .name=="Priority") | .name] | sort | join("|")' <<<"$FIELDS")"
-
           echo "PROJECT_NUMBER=$PROJECT_NUMBER"
-          echo "ATTENTION_OPTIONS=$attention_options"
-          echo "TASK_TYPE_OPTIONS=$task_type_options"
-          echo "LEGACY_FIELDS=$old_fields"
-          echo "CURRENT_VIEWS=$(jq -c '.data.node.views.nodes' <<<"$FIELDS")"
+          echo "PROJECT_FIELDS=$(jq -c '.data.node.fields.nodes' <<<"$DATA")"
+          echo "CURRENT_VIEWS=$(jq -c '.data.node.views.nodes' <<<"$DATA")"
 
-          test -z "$old_fields"
-          test "$attention_options" = "Focus|Inbox"
-          test "$task_type_options" = "Evolution|Knowledge|Perspective"
+          STATUS_OPTIONS="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Status") | .options[].name] | sort | join("|")' <<<"$DATA")"
+          echo "STATUS_OPTIONS=$STATUS_OPTIONS"
+          test "$STATUS_OPTIONS" = "Done|In Progress|Todo"
 
-          board_filter="$(jq -r '.data.node.views.nodes[]? | select(.name=="Attention Board") | .filter' <<<"$FIELDS" | head -n1)"
-          echo "ATTENTION_BOARD_FILTER=$board_filter"
-          test "$board_filter" = "is:issue"
+          BOARD="$(jq -c '.data.node.views.nodes[]? | select(.name=="Attention Board")' <<<"$DATA")"
+          echo "MAIN_BOARD=$BOARD"
+          BOARD_VERTICAL="$(jq -r '[.verticalGroupByFields.nodes[].name] | join("|")' <<<"$BOARD")"
+          BOARD_GROUP="$(jq -r '[.groupByFields.nodes[].name] | join("|")' <<<"$BOARD")"
+          echo "BOARD_VERTICAL_GROUP=$BOARD_VERTICAL"
+          echo "BOARD_GROUP=$BOARD_GROUP"
+          test "$BOARD_VERTICAL" = "Status"
 
           total=0
-          open_total=0
-          closed_total=0
-          attention_mismatch=0
-          type_mismatch=0
-          cursor=""
+          missing_work_type=0
+          invalid_waiting=0
 
-          while :; do
-            if [ -z "$cursor" ]; then
-              PAGE="$(gh api graphql -f query='query($project: ID!) {
-                node(id:$project) {
-                  ... on ProjectV2 {
-                    items(first:100) {
-                      pageInfo { hasNextPage endCursor }
-                      nodes {
-                        id
-                        content {
-                          ... on Issue {
-                            number state
-                            labels(first:50) { nodes { name } }
-                          }
-                        }
-                        fieldValues(first:50) {
-                          nodes {
-                            ... on ProjectV2ItemFieldSingleSelectValue {
-                              name
-                              field { ... on ProjectV2FieldCommon { name } }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }' -F project="$PROJECT_ID")"
-            else
-              PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                node(id:$project) {
-                  ... on ProjectV2 {
-                    items(first:100, after:$after) {
-                      pageInfo { hasNextPage endCursor }
-                      nodes {
-                        id
-                        content {
-                          ... on Issue {
-                            number state
-                            labels(first:50) { nodes { name } }
-                          }
-                        }
-                        fieldValues(first:50) {
-                          nodes {
-                            ... on ProjectV2ItemFieldSingleSelectValue {
-                              name
-                              field { ... on ProjectV2FieldCommon { name } }
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }' -F project="$PROJECT_ID" -f after="$cursor")"
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100"             --jq '.[] | select(.pull_request == null) | .number' > /tmp/numbers.txt
+
+          while read -r n; do
+            [ -n "$n" ] || continue
+            total=$((total+1))
+            VALUES="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' "repos/$GITHUB_REPOSITORY/issues/$n/issue-field-values")"
+            WT="$(jq -r '.[]? | select(.issue_field_name=="Work Type") | .single_select_option.name' <<<"$VALUES" | head -n1)"
+            WF="$(jq -r '.[]? | select(.issue_field_name=="Waiting For") | .single_select_option.name' <<<"$VALUES" | head -n1)"
+            if [ -z "$WT" ]; then
+              missing_work_type=$((missing_work_type+1))
+              echo "MISSING_WORK_TYPE #$n"
             fi
+            if [ -n "$WF" ] && [ "$WF" != "Evidence" ] && [ "$WF" != "Scale" ] && [ "$WF" != "Owner" ]; then
+              invalid_waiting=$((invalid_waiting+1))
+              echo "INVALID_WAITING_FOR #$n value=$WF"
+            fi
+          done < /tmp/numbers.txt
 
-            while IFS= read -r ROW; do
-              [ -n "$ROW" ] || continue
-              total=$((total + 1))
-              state="$(jq -r '.content.state' <<<"$ROW")"
-              if [ "$state" = "OPEN" ]; then
-                open_total=$((open_total + 1))
-              elif [ "$state" = "CLOSED" ]; then
-                closed_total=$((closed_total + 1))
-              fi
-
-              number="$(jq -r '.content.number' <<<"$ROW")"
-              labels="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
-              actual_attention="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Attention") | .name][0] // ""' <<<"$ROW")"
-              actual_type="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Task Type") | .name][0] // ""' <<<"$ROW")"
-
-              expected_attention=""
-              expected_type=""
-              case "|$labels|" in
-                *"|attention:focus|"*) expected_attention="Focus" ;;
-                *"|attention:inbox|"*) expected_attention="Inbox" ;;
-              esac
-              case "|$labels|" in
-                *"|type:knowledge|"*) expected_type="Knowledge" ;;
-                *"|type:perspective|"*) expected_type="Perspective" ;;
-                *"|type:evolution|"*) expected_type="Evolution" ;;
-              esac
-
-              if [ "$actual_attention" != "$expected_attention" ]; then
-                attention_mismatch=$((attention_mismatch + 1))
-                echo "ATTENTION_MISMATCH issue=#$number state=$state expected=$expected_attention actual=$actual_attention"
-              fi
-              if [ "$actual_type" != "$expected_type" ]; then
-                type_mismatch=$((type_mismatch + 1))
-                echo "TYPE_MISMATCH issue=#$number state=$state expected=$expected_type actual=$actual_type"
-              fi
-            done < <(jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE")
-
-            has_next="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
-            [ "$has_next" = "true" ] || break
-            cursor="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
-          done
-
-          echo "PROJECT_ISSUE_ITEMS=$total"
-          echo "OPEN_PROJECT_ITEMS=$open_total"
-          echo "CLOSED_PROJECT_ITEMS=$closed_total"
-          echo "ATTENTION_MISMATCHES=$attention_mismatch"
-          echo "TASK_TYPE_MISMATCHES=$type_mismatch"
-
-          test "$attention_mismatch" -eq 0
-          test "$type_mismatch" -eq 0
+          echo "TOTAL_ISSUES=$total"
+          echo "MISSING_WORK_TYPE=$missing_work_type"
+          echo "INVALID_WAITING_FOR=$invalid_waiting"
+          test "$missing_work_type" -eq 0
+          test "$invalid_waiting" -eq 0
