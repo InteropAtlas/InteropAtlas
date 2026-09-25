@@ -1,0 +1,47 @@
+name: Delete Retired Metadata Labels
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/delete-retired-metadata-labels.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Delete retired label definitions
+        run: |
+          set -euo pipefail
+          labels=(
+            "attention:focus"
+            "attention:inbox"
+            "type:knowledge"
+            "type:perspective"
+            "type:evolution"
+            "waiting:evidence"
+            "waiting:scale"
+            "waiting:owner"
+          )
+
+          for label in "${labels[@]}"; do
+            encoded="$(printf '%s' "$label" | jq -sRr @uri)"
+            gh api --method DELETE "repos/$GITHUB_REPOSITORY/labels/$encoded" >/dev/null 2>&1 || true
+          done
+
+          ALL="$(gh api --paginate "repos/$GITHUB_REPOSITORY/labels?per_page=100")"
+          remaining=0
+          for label in "${labels[@]}"; do
+            if jq -e --arg n "$label" '.[]? | select(.name==$n)' <<<"$ALL" >/dev/null; then
+              remaining=$((remaining+1))
+              echo "LABEL_REMAINS=$label"
+            fi
+          done
+          echo "RETIRED_LABEL_DEFINITIONS_REMAINING=$remaining"
+          test "$remaining" -eq 0
