@@ -1,0 +1,37 @@
+name: Attach Native Issue Fields to Project
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/attach-native-issue-fields-to-project.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  attach:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      ORG: InteropAtlas
+      PROJECT_NUMBER: 2
+    steps:
+      - name: Attach fields
+        run: |
+          set -euo pipefail
+
+          attach() {
+            local id="$1"
+            gh api --method POST               -H 'X-GitHub-Api-Version: 2026-03-10'               "orgs/$ORG/projectsV2/$PROJECT_NUMBER/fields"               -F issue_field_id="$id" >/dev/null 2>&1 || true
+          }
+
+          attach 47375155
+          attach 47375196
+
+          FIELDS="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' "orgs/$ORG/projectsV2/$PROJECT_NUMBER/fields")"
+          echo "WORK_TYPE=$(jq -c '.[]? | select(.name=="Work Type")' <<<"$FIELDS")"
+          echo "WAITING_FOR=$(jq -c '.[]? | select(.name=="Waiting For")' <<<"$FIELDS")"
+
+          test -n "$(jq -r '.[]? | select(.name=="Work Type") | .id' <<<"$FIELDS" | head -n1)"
+          test -n "$(jq -r '.[]? | select(.name=="Waiting For") | .id' <<<"$FIELDS" | head -n1)"
