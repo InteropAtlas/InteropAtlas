@@ -1,181 +1,157 @@
 # GitHub Issue 运行治理：IA 当前模型
 
-Updated: 2026-09-24
+Updated: 2026-09-25
 
 ## 目的
 
-InteropAtlas 的 Issue 用来承载具体、可继续推进的任务。Issue 数量可以很多，但项目本身只区分当前是否进入 Focus。
+InteropAtlas 的 Issue 承载有边界、可理解、可推进、可结束的具体 Work Item。
 
-当前治理只保留两个核心维度：
+当前优先使用 GitHub 原生能力和 Organization Issue Fields，避免为同一语义维护第二套 Labels / Project 镜像字段。
 
-1. **Attention** — 这个任务现在是否占用注意力；
-2. **Type** — 这个任务主要属于 IA 的哪条运行方向。
+## 1. Status — 当前工作状态
 
-Waiting 只作为可选条件，不形成第三个任务空间。
+Issue Portfolio 使用 GitHub Project 原生 `Status`：
 
-## 1. Attention
+- `Todo` — 已保留、尚未进入当前执行；
+- `In Progress` — 当前正在推进；
+- `Done` — 已完成或已结束。
 
-### `attention:focus`
+Owner 可以直接在 Project Board 中拖动卡片改变 Status。
 
-当前正在推进、需要占用 Owner / Agent 注意力的任务。
+GitHub Issue 自身的 `Open / Closed` 仍然保留：
+- Closed Issue 继续留在 Project，用于回顾完成量和发现误关闭；
+- 关闭 Issue 时自动把 Project Status 设为 `Done`；
+- 新建 / Reopen Issue 默认进入 `Todo`；
+- Project 中的日常 Todo / In Progress 调整不需要再通过 Attention Labels 镜像。
 
-- 大任务可以包含多个 Sub-issues，但不要求所有子任务同时进入 Focus；
-- 一个任务只有被明确提取出来推进时，才进入 Focus。
+历史 `attention:focus / attention:inbox` 已退役。
 
-### `attention:inbox`
+## 2. Work Type — IA 工作方向
 
-已经知道、值得保留，但当前不占用注意力的任务。
+Organization Issue Field：`Work Type`。
 
-Inbox 可以很大。任务在需要时从 Inbox 提取到 Focus；也可以在推进某个更大任务时，被吸收到该任务的 Sub-issues / Dependencies 中。
+每个 Issue 必须且只应有一个 Primary Work Type：
 
-完成的任务直接关闭 Issue。
+### Knowledge — 知识积累
 
-```text
-Inbox → Focus → Closed
-          ↓
-        Inbox
-```
+持续发现、收录、验证、连接和维护 IA 的知识，包括 Candidate、Canonical Knowledge、对象、关系、证据与覆盖。
 
-Focus 可以退回 Inbox；Open 不等于 Focus。
+主要对应 `01_State`。
 
-## 2. Type
+### Perspective — 知识视角与访问建设
 
-Type 表示任务主要属于 IA 的哪条当前运行方向。
+建设同一知识世界的不同呈现与访问方式，包括 Human Workspace，以及机器读取、查询、遍历、验证和操作能力。
 
-### `type:knowledge` — 知识积累
+主要对应 `02_Runtime`。
 
-持续发现、收录、验证、连接和维护 IA 的知识，包括对象、关系、证据、Candidate、Canonical Knowledge 与覆盖。
+### Evolution — 系统运维与自我进化
 
-主要对应仓库 `01_State`。
+负责 IA 自身的运行、治理、质量控制、研究、实验、决策、工具、维护和持续修正。
 
-### `type:perspective` — 知识视角与访问建设
+主要对应 `03_Evolution`。
 
-建设同一知识世界的不同呈现方式与访问方式，包括适人化呈现，以及机器可读的读取、查询、遍历、验证和操作能力。
+历史 `type:knowledge / type:perspective / type:evolution` Labels 已完成迁移并退役。
 
-主要对应仓库 `02_Runtime`。
+GitHub 原生 Issue `Type`（例如 Task / Bug / Feature）属于组织通用分类，与 IA 的 Work Type 是不同维度，不用来替代 Work Type。
 
-### `type:evolution` — 系统运维与自我进化
+## 3. Waiting For — 可选等待条件
 
-负责 IA 自身的运行、维护、治理、质量控制、研究、实验、决策沉淀与持续修正。
+Organization Issue Field：`Waiting For`。
 
-主要对应仓库 `03_Evolution`。
+只有确实存在对应等待条件时才设置：
 
-跨类型 Issue 选择一个 Primary Type。只有确有必要时，正文再说明次要影响范围；不要为了“完整”添加多个 Type。
+- `Evidence` — 等待证据、验证结果或足够依据；
+- `Scale` — 当前规模尚不足，等数据量、使用量、贡献量、性能压力等达到值得投入的程度；
+- `Owner` — 等待 Owner 决策、授权或确认。
 
-## 3. Waiting Condition（可选）
+没有这些条件时留空。
 
-Waiting 只表示“为什么当前不能继续”，不是核心分类维度：
+历史 `waiting:evidence / waiting:scale / waiting:owner` Labels 已完成迁移并退役。
 
-- `waiting:prerequisite`
-- `waiting:evidence`
-- `waiting:scale`
-- `waiting:owner`
+## 4. Prerequisite 与 Dependency
 
-没有明确等待条件时，不添加任何 `waiting:*` 标签。
+如果一个 Issue 明确必须等待另一个具体 Issue：
 
-## 4. 不再使用的核心分类
+> 使用 GitHub 原生 Dependency / Blocked by。
 
-以下分类不再作为当前 Issue 核心 Metadata：
+不要用文本 `Blocked By:`、Project 自定义字段或普通 Label 重复表达。
 
-- `lifecycle:research / active / backlog`
-- `area:knowledge / interface / operations`
-- `priority:now / soon / long-term / someday`
+历史 `waiting:prerequisite` 只作为迁移期残留：
+- 有明确 blocking Issue 时，迁为原生 Dependency；
+- 没有明确 Issue 对象时，不机械伪造 Dependency；
+- 后续逐项语义复核，最终退出该 Label。
 
-原因：
+## 5. Parent / Sub-issue
 
-- Research / Work 不是互斥状态，同一任务可以边研究边执行；
-- Active 与 Now 高度重叠；
-- Area 与当前三条运行方向并不完全一致；
-- 三套维度组合造成不必要的认知负担。
+- **Sub-issue**：真正的组成关系——“这个任务是不是另一个任务的一部分？”
+- **Dependency**：真正的前置关系——“另一个任务是不是必须先完成？”
+- 普通相关性保留正文链接 / Related context，不强行变成父子或依赖。
 
-历史标签可以在迁移完成前暂时存在，但不再作为当前治理模型的事实定义。
+长期方向不使用永久 Umbrella Issue 承载，由 `PROJECT_STATE.md` 与 Project 组织。
 
-## 5. Issue 的边界
+## 6. Project 的角色
 
-Issue 应承载一个能够被理解、推进和结束的具体任务。
+Issue Portfolio 是 Owner 的主要任务操作界面。
 
-- 研究可以发生在任何 Issue 中，不需要单独的 “Research Issue” 类型；
-- 尚未形成任务的想法、方向或材料，不应为了形式完整机械创建 Issue；
-- 长期方向由 `PROJECT_STATE.md` 表达；
-- 多个 Work Item 的组织由 GitHub Project 和 GitHub-native relations 承担；
-- 长期 Umbrella Issue 不作为永久项目结构。
+当前主 Board：
 
-## 6. GitHub-native 关系
+- 纵向分组：`Status`
+- 横向分组：`Work Type`
+- 同时保留 Open / Closed Issues。
 
-- **Sub-issue**：组成关系——“它是不是这个任务的一部分？”
-- **Dependency**：前置 / 阻塞关系——“另一个任务是否必须先完成？”
-- **Relates to**：普通关联。
+Organization Issue Fields 的值属于 Issue 自身，因此从 Project 中修改 `Work Type / Waiting For` 会直接修改 Issue 的同一个字段，不需要 Label 双向同步。
 
-旧正文中的 `Parent:` / `Blocked By:` 只能视为历史声明，不能机械迁移为原生关系。
+Project 自定义镜像字段应逐步退出：
+- `Attention` 已退役并删除；
+- `Task Type` 仅在仍有旧 View 依赖时临时保留，旧 View 完成迁移后删除。
 
-## 7. Project 的角色
+## 7. Metadata 事实源
 
-Issue Labels 是任务 Metadata 的唯一事实源。
+当前结构：
 
-GitHub Project 只负责组织与展示，不建立第二套真值。由于 GitHub Projects 将 `Type` 作为保留名称，Project 中对应的镜像字段使用 **Task Type**；它仍然只是 `type:*` Labels 的展示副本。
+- 工作进度：Project 原生 `Status`
+- IA 工作方向：Issue Field `Work Type`
+- 非依赖等待条件：Issue Field `Waiting For`
+- Issue-to-Issue 前置：GitHub native Dependency
+- 组成关系：GitHub native Parent / Sub-issue
+- 完成历史：Issue `Open / Closed` + Project 保留历史
+- 项目级方向：`PROJECT_STATE.md`
 
-Project **保留 Open 与 Closed Issues**。关闭 Issue 表示任务完成或终止，但不从 Project 删除，以便回顾完成量、发现误关闭并保留工作历史。GitHub 原生 Issue State 负责表示 Open / Closed；Project 不另造一套完成状态事实源。
-
-最重要的 Owner 视图是：
-
-- **Attention Board**：主要 Owner 入口，可同时查看当前与已完成事项；列按 Attention 展示；
-- **Focus**：用于查看 `attention:focus`；
-- **Inbox**：用于查看 `attention:inbox`；
-- 可按 Task Type 过滤或分组，但 Task Type 不增加 Owner 的日常注意力空间。
+不再把 Labels 作为上述 Metadata 的事实源。
 
 ## 8. 自动化边界
 
 机器适合：
 
-- 检查 Attention / Type 是否缺失或冲突；
-- 检查 Waiting 条件是否仍成立；
-- 镜像 Labels 到 Project 展示字段。
+- 新 Issue 自动加入 Issue Portfolio；
+- Issue Close → Project Status Done；
+- Issue Open / Reopen → 缺省 Status Todo；
+- 检查 Work Type 是否缺失；
+- 检查 Waiting For 值是否合法；
+- 检查退役 Metadata Labels 是否重新出现；
+- 检查 Project 原生字段与核心 View 是否仍存在。
 
 机器不应：
 
-- 自动决定哪个 Inbox 应进入 Focus；
-- 因为长期未更新就自动关闭 Issue；
-- 根据旧 `Parent:` / `Blocked By:` 文本自动建立关系；
-- 自动把历史 P0–P6 / V1/V2 语义改写成当前结构。
+- 自动决定 Todo 何时进入 In Progress；
+- 因长期未更新自动关闭 Issue；
+- 根据历史正文机械创建 Parent / Dependency；
+- 自动覆盖 Owner 手工调整的 Project View 布局、排序或分组。
 
-## 当前事实源
+## 9. 已退役模型
 
-- Issue：具体任务上下文；
-- Issue Labels：Attention / Type / Waiting Metadata；
-- `PROJECT_STATE.md`：当前三条运行方向与项目级导航；
-- GitHub Project：多 Issue 的组织与投影；
-- Repository：稳定成果、规则与长期知识。
+以下均不是当前治理目标：
 
+- `attention:focus / attention:inbox`
+- `type:knowledge / type:perspective / type:evolution`
+- `waiting:evidence / waiting:scale / waiting:owner`
+- `lifecycle:*`
+- `area:*`
+- `priority:*`
+- Project `Attention` 镜像字段
+- Labels → Project `Task Type` 单向镜像机制
 
-## 9. 原生化迁移目标（2026-09-25）
-
-当前 `type:*`、`waiting:*` 与 Project `Task Type` 仍继续有效，直到新的 Organization Issue Fields 真实创建并完成迁移验收。
-
-目标结构：
-
-- GitHub 原生 Issue `Type`：继续保留组织通用的 Task / Bug / Feature 等用途；
-- Organization Issue Field `Work Type`：
-  - Knowledge
-  - Perspective
-  - Evolution
-- Organization Issue Field `Waiting For`：
-  - Evidence
-  - Scale
-  - Owner
-- GitHub 原生 Dependency：
-  - 只承载明确的 Issue → Issue 前置依赖；
-  - `waiting:prerequisite` 不能仅凭 Label 自动转换为 Dependency。
-
-迁移原则：
-
-1. 新字段建立前，不删除现有 Labels 或 Project `Task Type`；
-2. `type:*` → `Work Type` 可做确定性一对一迁移；
-3. `waiting:evidence / scale / owner` → `Waiting For` 可做确定性一对一迁移；
-4. `waiting:prerequisite` 必须逐 Issue 语义复核：
-   - 有明确 blocking Issue → 建立原生 Dependency；
-   - 只是泛化“等待某前置条件” → 不伪造 Dependency；
-5. 只有在全量比对 0 mismatch 后，才退役旧 Labels、Project `Task Type` 与对应同步逻辑。
-
-机器可读迁移合同：
+迁移与恢复证据：
 
 - `03_Evolution/issue-native-metadata-migration-map.yaml`
+- Issue #436
