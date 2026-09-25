@@ -145,3 +145,37 @@ Project **保留 Open 与 Closed Issues**。关闭 Issue 表示任务完成或�
 - `PROJECT_STATE.md`：当前三条运行方向与项目级导航；
 - GitHub Project：多 Issue 的组织与投影；
 - Repository：稳定成果、规则与长期知识。
+
+
+## 9. 原生化迁移目标（2026-09-25）
+
+当前 `type:*`、`waiting:*` 与 Project `Task Type` 仍继续有效，直到新的 Organization Issue Fields 真实创建并完成迁移验收。
+
+目标结构：
+
+- GitHub 原生 Issue `Type`：继续保留组织通用的 Task / Bug / Feature 等用途；
+- Organization Issue Field `Work Type`：
+  - Knowledge
+  - Perspective
+  - Evolution
+- Organization Issue Field `Waiting For`：
+  - Evidence
+  - Scale
+  - Owner
+- GitHub 原生 Dependency：
+  - 只承载明确的 Issue → Issue 前置依赖；
+  - `waiting:prerequisite` 不能仅凭 Label 自动转换为 Dependency。
+
+迁移原则：
+
+1. 新字段建立前，不删除现有 Labels 或 Project `Task Type`；
+2. `type:*` → `Work Type` 可做确定性一对一迁移；
+3. `waiting:evidence / scale / owner` → `Waiting For` 可做确定性一对一迁移；
+4. `waiting:prerequisite` 必须逐 Issue 语义复核：
+   - 有明确 blocking Issue → 建立原生 Dependency；
+   - 只是泛化“等待某前置条件” → 不伪造 Dependency；
+5. 只有在全量比对 0 mismatch 后，才退役旧 Labels、Project `Task Type` 与对应同步逻辑。
+
+机器可读迁移合同：
+
+- `03_Evolution/issue-native-metadata-migration-map.yaml`
