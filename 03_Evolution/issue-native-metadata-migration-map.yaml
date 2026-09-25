@@ -64,3 +64,36 @@ cutover_gates:
 
 rollback:
   principle: legacy labels remain intact until cutover verification succeeds
+
+
+execution_checkpoint:
+  date: 2026-09-25
+  organization_fields_access: verified
+  work_type_field: verified_read_write
+  waiting_for_field: verified_read
+  native_status:
+    migrated: true
+    total_items: 335
+    todo: 171
+    in_progress: 5
+    done: 159
+    mismatches: 0
+  native_dependencies_verified:
+    - blocked: 225
+      by: 152
+    - blocked: 230
+      by: 229
+    - blocked: 249
+      by: 228
+  preflight:
+    total_issues: 335
+    type_missing: 0
+    type_conflict: 0
+    waiting_evidence: 51
+    waiting_scale: 39
+    waiting_owner: 4
+    waiting_prerequisite: 78
+    waiting_nonprerequisite_conflict: 0
+  current_step: migrate_all_work_type_and_waiting_for_values
+  workflow: .github/workflows/native-metadata-migration.yml
+  cutover_guard: do_not_remove_legacy_labels_or_task_type_until_zero_mismatch
