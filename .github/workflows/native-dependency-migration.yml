@@ -8,21 +8,17 @@ on:
 
 permissions:
   contents: read
-  issues: write
+  issues: read
 
 jobs:
-  migrate:
+  verify:
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
     steps:
-      - name: Add high-confidence native dependencies
+      - name: Verify high-confidence native dependencies
         run: |
           set -euo pipefail
-          gh issue edit 225 --repo "$GITHUB_REPOSITORY" --add-blocked-by 152
-          gh issue edit 230 --repo "$GITHUB_REPOSITORY" --add-blocked-by 229
-          gh issue edit 249 --repo "$GITHUB_REPOSITORY" --add-blocked-by 228
-
           echo "REST_225=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/225/dependencies/blocked_by --jq 'map(.number)')"
           echo "REST_230=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/230/dependencies/blocked_by --jq 'map(.number)')"
           echo "REST_249=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/249/dependencies/blocked_by --jq 'map(.number)')"
