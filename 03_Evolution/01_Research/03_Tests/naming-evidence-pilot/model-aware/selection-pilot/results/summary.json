@@ -1,0 +1,268 @@
+{
+  "causal_method_winner": "not_established",
+  "id": "SELECT-408-001",
+  "independent_quality_review": false,
+  "new_names": 0,
+  "paid_api_calls": 0,
+  "requests_dispatched": 4,
+  "results": [
+    {
+      "arm": "old",
+      "generator_risk_in_model_input": true,
+      "input_tokens": 989,
+      "output_tokens": 477,
+      "queues": {
+        "audit_disagreement_ids": [],
+        "hold_ids": [
+          "C001",
+          "C003",
+          "C004",
+          "C006"
+        ],
+        "hold_semantics": "preserved_but_not_automatically_scheduled_or_exposed_as_passed",
+        "not_pursued_ids": [
+          "C002",
+          "C005"
+        ],
+        "priority_ids": [],
+        "priority_semantics": "relative_research_investment_not_quality_proof_or_clearance",
+        "reality_clearance": "not_assessed",
+        "screening_queue_ids": [],
+        "semantic_truth": "not_programmatically_verified"
+      },
+      "request": 1,
+      "reviews": [
+        {
+          "decision": "hold",
+          "id": "C001",
+          "reason": "名称'Scribble'源自草稿、快速笔记，与正式字幕修改场景关联弱；虽可表达注解功能，但‘非正式’属性可能削弱专业感，不符合剪辑团队对工具专业性的期待。"
+        },
+        {
+          "decision": "drop",
+          "id": "C002",
+          "reason": "名称'Diffly'虽体现‘快速差异’，但‘diff’在技术领域常暗示实时或云端比对功能，可能误导用户认为需联网或具备云同步能力，与‘离线使用’核心需求冲突。"
+        },
+        {
+          "decision": "hold",
+          "id": "C003",
+          "reason": "名称'Linetap'强调‘逐行查看’，功能描述明确，但‘uncommon’且对非技术用户而言缺乏直观性，难以在口头交流中被快速理解与记忆，影响团队协作效率。"
+        },
+        {
+          "decision": "hold",
+          "id": "C004",
+          "reason": "名称'SideBy'直接体现‘并列对比’功能，语义清晰，但‘side-by-side’在设计类工具中过于常见，缺乏独特性，难以在团队中形成记忆点，且易被误认为是图像类工具。"
+        },
+        {
+          "decision": "drop",
+          "id": "C005",
+          "reason": "名称'Textal'泛化为文本分析工具，范围过广，易与通用文本分析产品混淆，无法精准传达‘字幕修改对比’这一特定功能，缺乏针对性。"
+        },
+        {
+          "decision": "hold",
+          "id": "C006",
+          "reason": "名称'Sublyte'虽表达‘轻量、离线’意图，但存在与现有‘sublite’等工具混淆风险，且未明确突出‘对比’功能，口头交流中易被误解为‘子集’或‘轻量版本’，专业性与辨识度不足。"
+        }
+      ],
+      "seconds": 95.20038425799999,
+      "seed": 411921,
+      "source_cell": "cell-2-simple-411921",
+      "status": "selection_complete_not_clearance"
+    },
+    {
+      "arm": "new",
+      "generator_risk_in_model_input": false,
+      "input_tokens": 1285,
+      "output_tokens": 827,
+      "queues": {
+        "audit_disagreement_ids": [],
+        "hold_ids": [
+          "C002",
+          "C005"
+        ],
+        "hold_semantics": "preserved_but_not_automatically_scheduled_or_exposed_as_passed",
+        "not_pursued_ids": [
+          "C004"
+        ],
+        "priority_ids": [
+          "C001",
+          "C003",
+          "C006"
+        ],
+        "priority_semantics": "relative_research_investment_not_quality_proof_or_clearance",
+        "reality_clearance": "not_assessed",
+        "screening_queue_ids": [
+          "C001",
+          "C003",
+          "C006"
+        ],
+        "semantic_truth": "not_programmatically_verified"
+      },
+      "request": 2,
+      "reviews": [
+        {
+          "decision": "keep",
+          "id": "C001",
+          "reason": "名称'Scribble'读写清晰，发音为'skrib-bel'，易于口头交流。虽源自'drafts'，但未直接表达功能，仍符合简报要求：易辨认、专业、不暗示联网或上传。'scribble'在口语中常用于草稿，与字幕修改中的草稿性质形成合理联想，不夸大能力，符合离线工具定位。无语言歧义或现实冲突风险，可作为团队讨论中的可选名称。"
+        },
+        {
+          "decision": "hold",
+          "id": "C002",
+          "reason": "名称'Diffly'由'difference'+'fly'构成，意为快速查看差异，符合'快、直观'的诉求。发音'dif-ly'简洁，口头交流便利。但'fly'可能在非技术语境下被误解为轻率或不严谨，有潜在误导风险；且'fly'本身无明确与'比较'或'字幕'的强关联，需验证团队是否理解其意涵。当前尚存模糊性，保留以待实际使用反馈。"
+        },
+        {
+          "decision": "keep",
+          "id": "C003",
+          "reason": "名称'Linetap'由'line'+'tap'构成，明确指向'逐行检查'，与剪辑团队对'逐行字幕修改'的流程高度契合。发音'line-tap'自然流畅，易记易说，符合'便于口头交流'要求。虽未直接提及'比较'，但'line'与'tap'在字幕编辑语境中可形成合理联想，不夸大功能，符合离线使用场景。无明显误导或歧义。"
+        },
+        {
+          "decision": "drop",
+          "id": "C004",
+          "reason": "名称'SideBy'源自'side-by-side'，虽准确表达比较方式，但'By'作为后缀易被误读为'by'（如'by someone'）或'by the side'，在口语中易产生歧义或不自然发音。'SideBy'读作'side-by'，缺乏节奏感，且在团队交流中可能被误解为'by side'，不符合'易辨认、便于口头交流'的要求。尽管语义清晰，但实际可读性与记忆度较低，不推荐。"
+        },
+        {
+          "decision": "hold",
+          "id": "C005",
+          "reason": "名称'Textal'由'text'+'anal'构成，表达'文本分析'，在技术语境中可被理解，但'anal'在口语中常被误解为'anal'（肛门），可能引发负面联想或尴尬。尽管功能相关，但存在严重语义风险，尤其在非技术团队中。虽符合功能描述，但潜在的负面联想使其在团队协作中不可靠，需谨慎评估是否接受。"
+        },
+        {
+          "decision": "keep",
+          "id": "C006",
+          "reason": "名称'Sublyte'由'subtitle'+'lite'构成，明确传达'轻量'与'字幕'属性，发音'sub-lyt'自然，符合'轻量、离线'的设定。'lite'暗示轻便，与'offline'场景契合，且无负面联想。虽未直接表达'比较'，但整体命名逻辑清晰、专业，团队可理解其为'轻量字幕工具'，在功能扩展中可灵活使用。符合简报中关于易辨认、口语化、不误导的全部要求。"
+        }
+      ],
+      "seconds": 154.56168030999999,
+      "seed": 411921,
+      "source_cell": "cell-2-simple-411921",
+      "status": "selection_complete_not_clearance"
+    },
+    {
+      "arm": "new",
+      "generator_risk_in_model_input": false,
+      "input_tokens": 1254,
+      "output_tokens": 676,
+      "queues": {
+        "audit_disagreement_ids": [],
+        "hold_ids": [
+          "C002",
+          "C005"
+        ],
+        "hold_semantics": "preserved_but_not_automatically_scheduled_or_exposed_as_passed",
+        "not_pursued_ids": [
+          "C003"
+        ],
+        "priority_ids": [
+          "C001",
+          "C004",
+          "C006"
+        ],
+        "priority_semantics": "relative_research_investment_not_quality_proof_or_clearance",
+        "reality_clearance": "not_assessed",
+        "screening_queue_ids": [
+          "C001",
+          "C004",
+          "C006"
+        ],
+        "semantic_truth": "not_programmatically_verified"
+      },
+      "request": 3,
+      "reviews": [
+        {
+          "decision": "keep",
+          "id": "C001",
+          "reason": "名称'SideBy'简洁、易读，符合口头交流需求；'side by side'是常见比较方式，与简报中'清晰、专业'要求一致。虽为缩写形式，但不误导用户需上传文件，且在无网络环境下仍可复核修改内容。读音'side-by'自然，与'compare'功能联想合理，未违反任何约束。"
+        },
+        {
+          "decision": "hold",
+          "id": "C002",
+          "reason": "名称'EditVerse'语义抽象，'verse'可能引发对诗歌或版本空间的误解，虽表达'版本对比'意图，但缺乏直观性和易识别性。在团队口头交流中可能被误读或产生歧义，且'edit'与'verse'组合未直接体现'字幕比较'核心功能。未明确违反约束，但需进一步验证团队接受度。"
+        },
+        {
+          "decision": "drop",
+          "id": "C003",
+          "reason": "名称'Sublyte'基于'light'意象，但'light'在字幕语境中易被误解为'照明'或'显示'，与'比较差异'功能关联较弱。'sublyte'发音生硬，不自然，且在团队口头交流中可能被误读为'sub-lyt'，缺乏清晰表达。未体现'对比'本质，且与'离线复核'场景脱节，不符合'清晰、专业'要求。"
+        },
+        {
+          "decision": "keep",
+          "id": "C004",
+          "reason": "名称'TextCompare'直接、透明，明确表达'文本比较'功能，符合简报要求。在无网络环境中，团队成员可快速理解其用途，便于口头交流。虽略显直白，但符合'不夸大智能能力'原则，且未暗示联网或上传需求。读音清晰，易读易记。"
+        },
+        {
+          "decision": "hold",
+          "id": "C005",
+          "reason": "名称'SubSync'强调'同步'，但原使命是'字幕修改版本的比较'，而非'时间对齐'。'sync'可能误导用户以为重点是时间对齐，而非文本内容差异。虽然在技术上可能涉及同步，但与核心任务'比较修改版本'存在偏差。需确认团队是否将时间对齐作为主要需求。"
+        },
+        {
+          "decision": "keep",
+          "id": "C006",
+          "reason": "名称'DiffSub'直接表达'差异'与'字幕'的结合，精准反映功能本质。'diff'是技术领域常用词，团队成员熟悉，易于理解。虽为缩写，但符合'简洁、专业'要求，且不暗示联网或文件上传。在无网络环境下仍可复核，符合离线使用场景。"
+        }
+      ],
+      "seconds": 133.73437714199997,
+      "seed": 411922,
+      "source_cell": "cell-3-simple-411922",
+      "status": "selection_complete_not_clearance"
+    },
+    {
+      "arm": "old",
+      "generator_risk_in_model_input": true,
+      "input_tokens": 986,
+      "output_tokens": 455,
+      "queues": {
+        "audit_disagreement_ids": [],
+        "hold_ids": [
+          "C001",
+          "C002",
+          "C003",
+          "C004",
+          "C006"
+        ],
+        "hold_semantics": "preserved_but_not_automatically_scheduled_or_exposed_as_passed",
+        "not_pursued_ids": [
+          "C005"
+        ],
+        "priority_ids": [],
+        "priority_semantics": "relative_research_investment_not_quality_proof_or_clearance",
+        "reality_clearance": "not_assessed",
+        "screening_queue_ids": [],
+        "semantic_truth": "not_programmatically_verified"
+      },
+      "request": 4,
+      "reviews": [
+        {
+          "decision": "hold",
+          "id": "C001",
+          "reason": "名称'SideBy'读写清晰，但'by'作为后缀缺乏具体语义指向，未能明确传达'并列比较'的编辑意图；在口头交流中易被误解为'by'的动词用法，存在歧义"
+        },
+        {
+          "decision": "hold",
+          "id": "C002",
+          "reason": "名称'EditVerse'过于抽象，'verse'在语义上与字幕或编辑无关，难以建立与字幕修改场景的直接联系；在团队口头交流中缺乏辨识度，易被误读或忽略"
+        },
+        {
+          "decision": "hold",
+          "id": "C003",
+          "reason": "名称'Sublyte'存在术语混淆风险，与'sublight'等现有词汇可能重合；'light'意象虽具视觉联想，但未体现'比较'或'编辑'核心功能，无法准确传达工具用途"
+        },
+        {
+          "decision": "hold",
+          "id": "C004",
+          "reason": "名称'TextCompare'功能描述明确，但过于直白，缺乏记忆点；在非技术团队中口头传递时易被简化或遗忘，不符合团队高效沟通的需要"
+        },
+        {
+          "decision": "drop",
+          "id": "C005",
+          "reason": "名称'SubSync'强调时间同步，与题设中'文本内容比较'的核心目标不符，可能误导剪辑团队认为工具仅关注时序对齐，偏离了字幕文本修改的比较本质"
+        },
+        {
+          "decision": "hold",
+          "id": "C006",
+          "reason": "名称'DiffSub'虽直接表达'差异对比'，但过于技术化，缺乏亲和力；在非技术背景的团队口头交流中可能被误认为是代码或差异报告工具，难以形成共识"
+        }
+      ],
+      "seconds": 91.44483127800004,
+      "seed": 411922,
+      "source_cell": "cell-3-simple-411922",
+      "status": "selection_complete_not_clearance"
+    }
+  ]
+}
