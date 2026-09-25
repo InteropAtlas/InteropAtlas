@@ -1,0 +1,71 @@
+name: Retire Project Attention Field
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/retire-project-attention-field.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  retire:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+    steps:
+      - name: Delete unused Attention project field
+        run: |
+          set -euo pipefail
+
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization { projectsV2(first:100) { nodes { id title } } }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
+          test -n "$PROJECT_ID"
+
+          DATA="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) {
+                  nodes { ... on ProjectV2FieldCommon { id name } }
+                }
+                views(first:100) {
+                  nodes {
+                    name
+                    groupByFields(first:10){nodes{... on ProjectV2FieldCommon{name}}}
+                    verticalGroupByFields(first:10){nodes{... on ProjectV2FieldCommon{name}}}
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          usage="$(jq -r '[.data.node.views.nodes[] |
+            select(( [.groupByFields.nodes[].name] + [.verticalGroupByFields.nodes[].name]) | index("Attention"))
+          ] | length' <<<"$DATA")"
+          echo "ATTENTION_VIEW_USAGE=$usage"
+          test "$usage" -eq 0
+
+          FIELD_ID="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Attention") | .id' <<<"$DATA" | head -n1)"
+          if [ -n "$FIELD_ID" ]; then
+            gh api graphql -f query='mutation($field: ID!) {
+              deleteProjectV2Field(input:{fieldId:$field}) { deletedFieldId }
+            }' -F field="$FIELD_ID" >/dev/null
+          fi
+
+          AFTER="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) { nodes { ... on ProjectV2FieldCommon { name } } }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+          remaining="$(jq -r '[.data.node.fields.nodes[]? | select(.name=="Attention")] | length' <<<"$AFTER")"
+          echo "ATTENTION_FIELDS_REMAINING=$remaining"
+          test "$remaining" -eq 0
