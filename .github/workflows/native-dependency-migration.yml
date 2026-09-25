@@ -1,0 +1,28 @@
+name: Native Dependency Migration
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/native-dependency-migration.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Add high-confidence native dependencies
+        run: |
+          set -euo pipefail
+          gh issue edit 225 --repo "$GITHUB_REPOSITORY" --add-blocked-by 152
+          gh issue edit 230 --repo "$GITHUB_REPOSITORY" --add-blocked-by 229
+          gh issue edit 249 --repo "$GITHUB_REPOSITORY" --add-blocked-by 228
+
+          echo "ISSUE_225=$(gh issue view 225 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
+          echo "ISSUE_230=$(gh issue view 230 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
+          echo "ISSUE_249=$(gh issue view 249 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
