@@ -1,0 +1,66 @@
+version: 1
+status: prepared
+target:
+  work_type:
+    carrier: organization_issue_field
+    field_name: Work Type
+    options:
+      Knowledge:
+        from_label: type:knowledge
+      Perspective:
+        from_label: type:perspective
+      Evolution:
+        from_label: type:evolution
+
+  waiting_for:
+    carrier: organization_issue_field
+    field_name: Waiting For
+    optional: true
+    options:
+      Evidence:
+        from_label: waiting:evidence
+      Scale:
+        from_label: waiting:scale
+      Owner:
+        from_label: waiting:owner
+
+  prerequisite:
+    carrier: github_issue_dependency
+    from_label: waiting:prerequisite
+    migration: semantic_only
+    rules:
+      - create_dependency_only_when_a_specific_blocking_issue_is_identified
+      - do_not_infer_dependency_from_waiting_label_alone
+      - remove_waiting_prerequisite_only_after_native_dependency_or_explicit_non_dependency_waiting_state_is_verified
+
+transitional:
+  keep_until_target_verified:
+    - type:knowledge
+    - type:perspective
+    - type:evolution
+    - waiting:evidence
+    - waiting:scale
+    - waiting:owner
+    - waiting:prerequisite
+    - project_field:Task Type
+  project_sync:
+    current: labels_to_project_task_type
+    target: direct_issue_field_usage
+  attention:
+    status: unchanged_in_this_migration
+    current:
+      - attention:focus
+      - attention:inbox
+
+cutover_gates:
+  - Work Type exists with exactly Knowledge, Perspective, Evolution
+  - Waiting For exists with exactly Evidence, Scale, Owner
+  - every Issue carrying type:* has a matching Work Type value
+  - every Issue carrying waiting:evidence|scale|owner has a matching Waiting For value
+  - every waiting:prerequisite Issue has been semantically reviewed
+  - Project views can read the native Issue fields
+  - no metadata mismatch remains
+  - only then retire legacy labels and Task Type mirror
+
+rollback:
+  principle: legacy labels remain intact until cutover verification succeeds
