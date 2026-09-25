@@ -23,6 +23,6 @@ jobs:
           gh issue edit 230 --repo "$GITHUB_REPOSITORY" --add-blocked-by 229
           gh issue edit 249 --repo "$GITHUB_REPOSITORY" --add-blocked-by 228
 
-          echo "ISSUE_225=$(gh issue view 225 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
-          echo "ISSUE_230=$(gh issue view 230 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
-          echo "ISSUE_249=$(gh issue view 249 --repo "$GITHUB_REPOSITORY" --json blockedBy --jq '.blockedBy | map(.number)')"
+          echo "REST_225=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/225/dependencies/blocked_by --jq 'map(.number)')"
+          echo "REST_230=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/230/dependencies/blocked_by --jq 'map(.number)')"
+          echo "REST_249=$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/249/dependencies/blocked_by --jq 'map(.number)')"
