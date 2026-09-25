@@ -138,8 +138,8 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"
-          test -n "$ATF"; test -n "$TF"
+          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"; SF="$(field_id Status)"
+          test -n "$ATF"; test -n "$TF"; test -n "$SF"
 
           set_value() {
             local item="$1" field="$2" option="$3"
@@ -201,12 +201,15 @@ jobs:
               ITEM="$(jq -r '.id' <<<"$ROW")"
               LABELS="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
 
-              AT=""; T=""
+              AT=""; T=""; S=""
+              STATE="$(jq -r '.content.state' <<<"$ROW")"
               case "|$LABELS|" in *"|attention:focus|"*) AT="Focus";; *"|attention:inbox|"*) AT="Inbox";; esac
+              if [ "$STATE" = "CLOSED" ]; then S="Done"; elif [ "$AT" = "Focus" ]; then S="In Progress"; elif [ "$AT" = "Inbox" ]; then S="Todo"; fi
               case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
 
               [ -z "$AT" ] || set_value "$ITEM" "$ATF" "$(option_id Attention "$AT")"
               [ -z "$T" ] || set_value "$ITEM" "$TF" "$(option_id "Task Type" "$T")"
+              [ -z "$S" ] || set_value "$ITEM" "$SF" "$(option_id Status "$S")"
             done
 
             HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
@@ -218,5 +221,5 @@ jobs:
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
           echo "Issue Labels remain the source of truth."
-          echo "Mirror fields: Attention / Task Type."
+          echo "Mirror fields: Attention / Task Type; native Status is also maintained during transition."
           echo "Sync direction: Issue Labels -> Project fields."
