@@ -1,6 +1,7 @@
 name: Issue Portfolio Project Bootstrap
 
-# Closed Issues are retained in Project history.
+# Closed Issues remain in Project history.
+# Work Type / Waiting For are Organization Issue Fields on Issues.
 
 on:
   workflow_dispatch:
@@ -19,155 +20,78 @@ jobs:
     env:
       GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
       PROJECT_OWNER_ID: O_kgDOEzyTWQ
-      REPOSITORY_ID: R_kgDOUIreng
       PROJECT_TITLE: InteropAtlas — Issue Portfolio
 
     steps:
-      - name: Verify Projects token
-        run: |
-          set -euo pipefail
-          test -n "$GH_TOKEN"
-          gh api user --jq '.login' >/dev/null
-
       - name: Find Project
         run: |
           set -euo pipefail
-          JSON="$(gh api graphql -f query='query($owner: ID!) { node(id: $owner) { ... on Organization { projectsV2(first: 100) { nodes { id number title } } } } }' -F owner="$PROJECT_OWNER_ID")"
-          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .id' <<<"$JSON" | head -n1)"
-          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title == $title) | .number' <<<"$JSON" | head -n1)"
-          test -n "$PROJECT_ID"
-          test -n "$PROJECT_NUMBER"
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization { projectsV2(first:100) { nodes { id number title } } }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+          PROJECT_NUMBER="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .number' <<<"$JSON" | head -n1)"
+          test -n "$PROJECT_ID"; test -n "$PROJECT_NUMBER"
           echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
           echo "PROJECT_NUMBER=$PROJECT_NUMBER" >> "$GITHUB_ENV"
 
       - name: Add all Issues
         run: |
           set -euo pipefail
-          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100" --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
+          gh api --paginate "repos/$GITHUB_REPOSITORY/issues?state=all&per_page=100"             --jq '.[] | select(.pull_request == null) | .node_id' > /tmp/issues.txt
           while read -r ISSUE_ID; do
             [ -n "$ISSUE_ID" ] || continue
             gh api graphql -f query='mutation($project: ID!, $content: ID!) {
-              addProjectV2ItemById(input:{projectId:$project, contentId:$content}) { item { id } }
+              addProjectV2ItemById(input:{projectId:$project,contentId:$content}) { item { id } }
             }' -F project="$PROJECT_ID" -F content="$ISSUE_ID" >/dev/null 2>&1 || true
           done < /tmp/issues.txt
 
-      - name: Ensure mirror fields
+      - name: Fill only missing native Status values
         run: |
           set -euo pipefail
-
-          fields_json() {
-            gh api graphql -f query='query($project: ID!) {
-              node(id: $project) {
-                ... on ProjectV2 {
-                  fields(first: 100) {
-                    nodes {
-                      ... on ProjectV2SingleSelectField {
-                        id
-                        name
-                        options { id name }
-                      }
-                    }
-                  }
-                }
-              }
-            }' -F project="$PROJECT_ID"
-          }
-
-          ensure_field() {
-            local name="$1"
-            local FIELDS
-            FIELDS="$(fields_json)"
-            if jq -e --arg name "$name" '.data.node.fields.nodes[]? | select(.name == $name)' <<<"$FIELDS" >/dev/null; then
-              echo "Field exists: $name"
-              return 0
-            fi
-
-            case "$name" in
-              Attention)
-                gh api graphql -f query='mutation($project: ID!) {
-                  createProjectV2Field(input: {
-                    projectId: $project,
-                    dataType: SINGLE_SELECT,
-                    name: "Attention",
-                    singleSelectOptions: [
-                      {name:"Focus", color:RED, description:"Current project focus"},
-                      {name:"Inbox", color:GRAY, description:"Retained outside current focus"}
-                    ]
-                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
-                }' -F project="$PROJECT_ID" >/dev/null
-                ;;
-              "Task Type")
-                gh api graphql -f query='mutation($project: ID!) {
-                  createProjectV2Field(input: {
-                    projectId: $project,
-                    dataType: SINGLE_SELECT,
-                    name: "Task Type",
-                    singleSelectOptions: [
-                      {name:"Knowledge", color:GREEN, description:"Knowledge accumulation"},
-                      {name:"Perspective", color:YELLOW, description:"Knowledge perspectives and access"},
-                      {name:"Evolution", color:PURPLE, description:"System operations and self-evolution"}
-                    ]
-                  }) { projectV2Field { ... on ProjectV2SingleSelectField { id name } } }
-                }' -F project="$PROJECT_ID" >/dev/null
-                ;;
-            esac
-            echo "Created field: $name"
-          }
-
-          ensure_field Attention
-          ensure_field "Task Type"
-
-      - name: Sync Labels to mirror fields
-        run: |
-          set -euo pipefail
-
           FIELDS="$(gh api graphql -f query='query($project: ID!) {
-            node(id: $project) {
+            node(id:$project) {
               ... on ProjectV2 {
-                fields(first: 100) {
+                fields(first:100) {
                   nodes {
-                    ... on ProjectV2SingleSelectField {
-                      id name options { id name }
-                    }
+                    ... on ProjectV2SingleSelectField { id name options { id name } }
                   }
                 }
               }
             }
           }' -F project="$PROJECT_ID")"
-
-          field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
-          option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
-
-          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"; SF="$(field_id Status)"
-          test -n "$ATF"; test -n "$TF"; test -n "$SF"
+          SF="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Status") | .id' <<<"$FIELDS" | head -n1)"
+          TODO="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Status") | .options[]? | select(.name=="Todo") | .id' <<<"$FIELDS" | head -n1)"
+          DONE="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Status") | .options[]? | select(.name=="Done") | .id' <<<"$FIELDS" | head -n1)"
+          test -n "$SF"; test -n "$TODO"; test -n "$DONE"
 
           set_value() {
-            local item="$1" field="$2" option="$3"
-            [ -n "$option" ] || return 0
             gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
-              updateProjectV2ItemFieldValue(input: {
-                projectId: $project,
-                itemId: $item,
-                fieldId: $field,
-                value: {singleSelectOptionId: $option}
+              updateProjectV2ItemFieldValue(input:{
+                projectId:$project,itemId:$item,fieldId:$field,
+                value:{singleSelectOptionId:$option}
               }) { projectV2Item { id } }
-            }' -F project="$PROJECT_ID" -F item="$item" -F field="$field" -f option="$option" >/dev/null
+            }' -F project="$PROJECT_ID" -F item="$1" -F field="$SF" -f option="$2" >/dev/null
           }
 
           cursor=""
           while :; do
             if [ -z "$cursor" ]; then
               PAGE="$(gh api graphql -f query='query($project: ID!) {
-                node(id: $project) {
+                node(id:$project) {
                   ... on ProjectV2 {
-                    items(first: 100) {
+                    items(first:100) {
                       pageInfo { hasNextPage endCursor }
                       nodes {
                         id
-                        content {
-                          ... on Issue {
-                            state
-                            labels(first: 20) { nodes { name } }
+                        content { ... on Issue { state } }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name field { ... on ProjectV2FieldCommon { name } }
+                            }
                           }
                         }
                       }
@@ -177,16 +101,18 @@ jobs:
               }' -F project="$PROJECT_ID")"
             else
               PAGE="$(gh api graphql -f query='query($project: ID!, $after: String!) {
-                node(id: $project) {
+                node(id:$project) {
                   ... on ProjectV2 {
-                    items(first: 100, after: $after) {
+                    items(first:100,after:$after) {
                       pageInfo { hasNextPage endCursor }
                       nodes {
                         id
-                        content {
-                          ... on Issue {
-                            state
-                            labels(first: 20) { nodes { name } }
+                        content { ... on Issue { state } }
+                        fieldValues(first:50) {
+                          nodes {
+                            ... on ProjectV2ItemFieldSingleSelectValue {
+                              name field { ... on ProjectV2FieldCommon { name } }
+                            }
                           }
                         }
                       }
@@ -196,21 +122,14 @@ jobs:
               }' -F project="$PROJECT_ID" -f after="$cursor")"
             fi
 
-            jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE" |
-            while read -r ROW; do
+            while IFS= read -r ROW; do
+              [ -n "$ROW" ] || continue
+              CURRENT="$(jq -r '[.fieldValues.nodes[]? | select(.field.name=="Status") | .name][0] // ""' <<<"$ROW")"
+              [ -z "$CURRENT" ] || continue
               ITEM="$(jq -r '.id' <<<"$ROW")"
-              LABELS="$(jq -r '[.content.labels.nodes[].name] | join("|")' <<<"$ROW")"
-
-              AT=""; T=""; S=""
               STATE="$(jq -r '.content.state' <<<"$ROW")"
-              case "|$LABELS|" in *"|attention:focus|"*) AT="Focus";; *"|attention:inbox|"*) AT="Inbox";; esac
-              if [ "$STATE" = "CLOSED" ]; then S="Done"; elif [ "$AT" = "Focus" ]; then S="In Progress"; elif [ "$AT" = "Inbox" ]; then S="Todo"; fi
-              case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
-
-              [ -z "$AT" ] || set_value "$ITEM" "$ATF" "$(option_id Attention "$AT")"
-              [ -z "$T" ] || set_value "$ITEM" "$TF" "$(option_id "Task Type" "$T")"
-              [ -z "$S" ] || set_value "$ITEM" "$SF" "$(option_id Status "$S")"
-            done
+              if [ "$STATE" = "CLOSED" ]; then set_value "$ITEM" "$DONE"; else set_value "$ITEM" "$TODO"; fi
+            done < <(jq -c '.data.node.items.nodes[]? | select(.content != null)' <<<"$PAGE")
 
             HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
             [ "$HAS" = "true" ] || break
@@ -220,6 +139,5 @@ jobs:
       - name: Summary
         run: |
           echo "Issue Portfolio Project: #$PROJECT_NUMBER"
-          echo "Issue Labels remain the source of truth."
-          echo "Mirror fields: Attention / Task Type; native Status is also maintained during transition."
-          echo "Sync direction: Issue Labels -> Project fields."
+          echo "Native Status is preserved; only missing Status values are initialized."
+          echo "Work Type / Waiting For are Organization Issue Fields."
