@@ -114,11 +114,13 @@ jobs:
           field_id() { jq -r --arg n "$1" '.data.node.fields.nodes[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1; }
           option_id() { jq -r --arg f "$1" --arg o "$2" '.data.node.fields.nodes[]? | select(.name==$f) | .options[]? | select(.name==$o) | .id' <<<"$FIELDS" | head -n1; }
 
-          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"
-          test -n "$ATF"; test -n "$TF"
+          ATF="$(field_id Attention)"; TF="$(field_id "Task Type")"; SF="$(field_id Status)"
+          test -n "$ATF"; test -n "$TF"; test -n "$SF"
 
-          AT=""; T=""
+          AT=""; T=""; S=""
+          STATE="$(jq -r '.state' <<<"$ISSUE")"
           case "|$LABELS|" in *"|attention:focus|"*) AT="Focus";; *"|attention:inbox|"*) AT="Inbox";; esac
+          if [ "$STATE" = "closed" ]; then S="Done"; elif [ "$AT" = "Focus" ]; then S="In Progress"; elif [ "$AT" = "Inbox" ]; then S="Todo"; fi
           case "|$LABELS|" in *"|type:knowledge|"*) T="Knowledge";; *"|type:perspective|"*) T="Perspective";; *"|type:evolution|"*) T="Evolution";; esac
 
           set_value() {
@@ -137,9 +139,11 @@ jobs:
 
           set_value Attention "$ATF" "$AT"
           set_value "Task Type" "$TF" "$T"
+          set_value Status "$SF" "$S"
 
       - name: Manual note
         if: ${{ github.event_name == 'workflow_dispatch' }}
         run: |
           echo "Open and closed Issues remain in Issue Portfolio."
           echo "Existing Project items continue to sync normally."
+          echo "Native Status mapping: Inbox -> Todo, Focus -> In Progress, Closed -> Done."
