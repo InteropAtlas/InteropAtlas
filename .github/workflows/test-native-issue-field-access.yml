@@ -1,0 +1,42 @@
+name: Test Native Issue Field Access
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/test-native-issue-field-access.yml'
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Read and write Issue Field on 436
+        run: |
+          set -euo pipefail
+          BEFORE="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/436/issue-field-values)"
+          echo "BEFORE=$BEFORE"
+
+          WORK_TYPE_ID="$(jq -r '.[]? | select(.issue_field_name=="Work Type") | .issue_field_id' <<<"$BEFORE" | head -n1)"
+          WAITING_FOR_ID="$(jq -r '.[]? | select(.issue_field_name=="Waiting For") | .issue_field_id' <<<"$BEFORE" | head -n1)"
+          echo "WORK_TYPE_ID=$WORK_TYPE_ID"
+          echo "WAITING_FOR_ID=$WAITING_FOR_ID"
+          test -n "$WORK_TYPE_ID"
+          test -n "$WAITING_FOR_ID"
+
+          gh api --method PATCH             -H 'X-GitHub-Api-Version: 2026-03-10'             repos/$GITHUB_REPOSITORY/issues/436             --input - <<JSON
+          {
+            "issue_field_values": [
+              {"field_id": $WORK_TYPE_ID, "value": "Evolution"}
+            ]
+          }
+          JSON
+
+          AFTER="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' repos/$GITHUB_REPOSITORY/issues/436/issue-field-values)"
+          echo "AFTER=$AFTER"
+          test "$(jq -r '.[]? | select(.issue_field_name=="Work Type") | .single_select_option.name' <<<"$AFTER")" = "Evolution"
