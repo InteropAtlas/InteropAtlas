@@ -55,7 +55,7 @@ jobs:
           FIELD_ID="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Attention") | .id' <<<"$DATA" | head -n1)"
           if [ -n "$FIELD_ID" ]; then
             gh api graphql -f query='mutation($field: ID!) {
-              deleteProjectV2Field(input:{fieldId:$field}) { deletedFieldId }
+              deleteProjectV2Field(input:{fieldId:$field}) { clientMutationId }
             }' -F field="$FIELD_ID" >/dev/null
           fi
 
