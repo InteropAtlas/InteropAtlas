@@ -27,8 +27,7 @@ jobs:
           set -euo pipefail
 
           if [ -n "${TARGET_ISSUE:-}" ]; then
-            printf '%s
-' "$TARGET_ISSUE" > /tmp/numbers.txt
+            printf '%s\n' "$TARGET_ISSUE" > /tmp/numbers.txt
           else
             gh api --paginate "repos/$REPO/issues?state=open&per_page=100"               --jq '.[] | select(.pull_request == null) | .number' > /tmp/numbers.txt
           fi
