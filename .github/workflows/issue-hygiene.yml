@@ -85,6 +85,9 @@ jobs:
           echo "" >> "$GITHUB_STEP_SUMMARY"
           echo "> Work Type is required. Waiting For is optional. Specific Issue prerequisites should use native Dependencies." >> "$GITHUB_STEP_SUMMARY"
 
+          printf 'Open issues checked: %s\nMissing Work Type: %s\nInvalid Waiting For: %s\nDeprecated metadata label assignments: %s\nRemaining generic waiting:prerequisite assignments: %s\n' \
+            "$total" "$missing_work_type" "$invalid_waiting" "$deprecated_labels" "$prerequisite_waiting"
+
           violations=$((missing_work_type + invalid_waiting + deprecated_labels))
           if [ "$violations" -gt 0 ]; then
             echo "::warning::$violations native metadata hygiene violations found."
