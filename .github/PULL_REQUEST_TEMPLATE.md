@@ -3,15 +3,15 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: active_template
 Document Created At: 2026-09-01T12:43:49+08:00
-Document Updated At: 2026-09-02T10:43:23+08:00
+Document Updated At: 2026-10-12T04:22:00+00:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
-Metadata Provenance: reconstructed_from_git
-Lifecycle Time Provenance: reconstructed_from_git
+Metadata Provenance: mixed
+Lifecycle Time Provenance: mixed
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human — ff6962757
+  Executor: Agent — OpenAI / dot
+  Reviewer: pending independent review
   GitHub Actor: ff6962757
 -->
 
@@ -25,7 +25,7 @@ Closes / relates to: #
 
 ## Contribution Identity
 
-Record the three core contribution roles separately from the GitHub account / App that performs repository actions. See `docs/agent-attribution-contribution-identity-profile-v0.1.zh-CN.md`.
+Record the three core contribution roles separately from the GitHub account / App that performs repository actions. See [Contribution Identity Profile](https://github.com/InteropAtlas/InteropAtlas/blob/main/docs/03_Operation/01_Collaboration/agent-attribution-contribution-identity-profile.zh-CN.md).
 
 Initiator（发起人）:
 - Human / Agent identity:
