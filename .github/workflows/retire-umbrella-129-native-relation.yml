@@ -1,0 +1,38 @@
+name: Retire Umbrella 129 Native Relation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/retire-umbrella-129-native-relation.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+
+    steps:
+      - name: Verify and remove retired #129 native child relation
+        run: |
+          set -euo pipefail
+          REPO="$GITHUB_REPOSITORY"
+          BEFORE="$(gh api --paginate "repos/$REPO/issues/129/sub_issues?per_page=100" --jq '.[].number' || true)"
+          echo "BEFORE_SUBISSUES=$BEFORE"
+
+          if grep -qx "146" <<<"$BEFORE"; then
+            CHILD_ID="$(gh api "repos/$REPO/issues/146" --jq '.id')"
+            gh api --method DELETE               -H "X-GitHub-Api-Version: 2026-03-10"               "repos/$REPO/issues/129/sub_issue"               -F sub_issue_id="$CHILD_ID" >/tmp/remove.json
+            echo "REMOVED_129_146=1"
+          else
+            echo "REMOVED_129_146=0"
+          fi
+
+          AFTER="$(gh api --paginate "repos/$REPO/issues/129/sub_issues?per_page=100" --jq '.[].number' || true)"
+          echo "AFTER_SUBISSUES=$AFTER"
+          ! grep -qx "146" <<<"$AFTER"

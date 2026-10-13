@@ -1,0 +1,54 @@
+name: Remove Legacy Task Type Field
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/remove-legacy-task-type-field.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+    steps:
+      - name: Delete legacy Task Type project field
+        run: |
+          set -euo pipefail
+          PROJECTS="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization { projectsV2(first:100) { nodes { id title } } }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$PROJECTS" | head -n1)"
+          test -n "$PROJECT_ID"
+
+          DATA="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) { nodes { ... on ProjectV2FieldCommon { id name } } }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          FIELD_ID="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Task Type") | .id' <<<"$DATA" | head -n1)"
+          if [ -n "$FIELD_ID" ]; then
+            gh api graphql -f query='mutation($project: ID!, $field: ID!) {
+              deleteProjectV2Field(input:{projectId:$project,fieldId:$field}) { deletedFieldId }
+            }' -F project="$PROJECT_ID" -F field="$FIELD_ID" >/dev/null
+          fi
+
+          AFTER="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) { nodes { ... on ProjectV2FieldCommon { name } } }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+          test -z "$(jq -r '.data.node.fields.nodes[]? | select(.name=="Task Type") | .name' <<<"$AFTER" | head -n1)"
+          echo "TASK_TYPE_FIELD_REMAINING=0"

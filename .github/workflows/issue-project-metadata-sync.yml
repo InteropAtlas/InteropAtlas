@@ -1,0 +1,118 @@
+name: Issue Project Status Sync
+
+on:
+  issues:
+    types: [opened, reopened, closed]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: read
+
+concurrency:
+  group: issue-project-status-${{ github.event.issue.number || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+      PROJECT_OWNER_ID: O_kgDOEzyTWQ
+      PROJECT_TITLE: InteropAtlas — Issue Portfolio
+
+    steps:
+      - name: Find Project
+        run: |
+          set -euo pipefail
+          JSON="$(gh api graphql -f query='query($owner: ID!) {
+            node(id:$owner) {
+              ... on Organization { projectsV2(first:100) { nodes { id title } } }
+            }
+          }' -F owner="$PROJECT_OWNER_ID")"
+          PROJECT_ID="$(jq -r --arg title "$PROJECT_TITLE" '.data.node.projectsV2.nodes[]? | select(.title==$title) | .id' <<<"$JSON" | head -n1)"
+          test -n "$PROJECT_ID"
+          echo "PROJECT_ID=$PROJECT_ID" >> "$GITHUB_ENV"
+
+      - name: Resolve or add Project item
+        if: ${{ github.event_name == 'issues' }}
+        env:
+          ISSUE_NODE_ID: ${{ github.event.issue.node_id }}
+        run: |
+          set -euo pipefail
+          CURSOR=""
+          ITEM_ID=""
+          while :; do
+            if [ -z "$CURSOR" ]; then
+              PAGE="$(gh api graphql -f query='query($project: ID!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes { id content { ... on Issue { id } } }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID")"
+            else
+              PAGE="$(gh api graphql -f query='query($project: ID!,$after:String!) {
+                node(id:$project) {
+                  ... on ProjectV2 {
+                    items(first:100,after:$after) {
+                      pageInfo { hasNextPage endCursor }
+                      nodes { id content { ... on Issue { id } } }
+                    }
+                  }
+                }
+              }' -F project="$PROJECT_ID" -f after="$CURSOR")"
+            fi
+            ITEM_ID="$(jq -r --arg issue "$ISSUE_NODE_ID" '.data.node.items.nodes[]? | select(.content.id==$issue) | .id' <<<"$PAGE" | head -n1)"
+            [ -z "$ITEM_ID" ] || break
+            HAS="$(jq -r '.data.node.items.pageInfo.hasNextPage' <<<"$PAGE")"
+            [ "$HAS" = "true" ] || break
+            CURSOR="$(jq -r '.data.node.items.pageInfo.endCursor' <<<"$PAGE")"
+          done
+
+          if [ -z "$ITEM_ID" ]; then
+            ADD="$(gh api graphql -f query='mutation($project: ID!, $content: ID!) {
+              addProjectV2ItemById(input:{projectId:$project,contentId:$content}) { item { id } }
+            }' -F project="$PROJECT_ID" -F content="$ISSUE_NODE_ID")"
+            ITEM_ID="$(jq -r '.data.addProjectV2ItemById.item.id // empty' <<<"$ADD")"
+            test -n "$ITEM_ID"
+          fi
+          echo "ITEM_ID=$ITEM_ID" >> "$GITHUB_ENV"
+
+      - name: Sync Issue state to Project Status
+        if: ${{ github.event_name == 'issues' && env.ITEM_ID != '' }}
+        run: |
+          set -euo pipefail
+          FIELDS="$(gh api graphql -f query='query($project: ID!) {
+            node(id:$project) {
+              ... on ProjectV2 {
+                fields(first:100) {
+                  nodes {
+                    ... on ProjectV2SingleSelectField { id name options { id name } }
+                  }
+                }
+              }
+            }
+          }' -F project="$PROJECT_ID")"
+
+          STATUS_FIELD="$(jq -r '.data.node.fields.nodes[]? | select(.name=="Status") | .id' <<<"$FIELDS" | head -n1)"
+          ACTION="${{ github.event.action }}"
+          if [ "$ACTION" = "closed" ]; then STATUS_NAME="Done"; else STATUS_NAME="Todo"; fi
+          STATUS_OPTION="$(jq -r --arg n "$STATUS_NAME" '.data.node.fields.nodes[]? | select(.name=="Status") | .options[]? | select(.name==$n) | .id' <<<"$FIELDS" | head -n1)"
+          test -n "$STATUS_FIELD"; test -n "$STATUS_OPTION"
+
+          gh api graphql -f query='mutation($project: ID!, $item: ID!, $field: ID!, $option: String!) {
+            updateProjectV2ItemFieldValue(input:{
+              projectId:$project,itemId:$item,fieldId:$field,
+              value:{singleSelectOptionId:$option}
+            }) { projectV2Item { id } }
+          }' -F project="$PROJECT_ID" -F item="$ITEM_ID" -F field="$STATUS_FIELD" -f option="$STATUS_OPTION" >/dev/null
+
+      - name: Manual note
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        run: |
+          echo "Project uses native Status."
+          echo "Work Type / Waiting For live directly on Issues."
