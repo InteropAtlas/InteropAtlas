@@ -82,3 +82,10 @@ def test_compare_excludes_non_selected_object_and_never_computes_winner():
     assert projection["semantic_boundaries"]["winner"] == "not_computed"
     assert projection["semantic_boundaries"]["overall_score"] == "not_computed"
     assert projection["semantic_boundaries"]["projection_is_canonical_write"] is False
+
+
+if __name__ == "__main__":
+    tests = [value for name, value in globals().items() if name.startswith("test_") and callable(value)]
+    for test in tests:
+        test()
+    print(f"workspace projection checks: PASS ({len(tests)} tests)")
