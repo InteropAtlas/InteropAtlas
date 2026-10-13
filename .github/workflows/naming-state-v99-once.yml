@@ -1,0 +1,72 @@
+name: Naming state v99 reference calibration checkpoint
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-state-v99-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: naming-state-v99-once
+  cancel-in-progress: false
+jobs:
+  reconcile:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      STATE: 03_Evolution/01_Research/03_Tests/organization-naming-411-state.yaml
+      UPDATER: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-validation-contract/state_v99.py
+      EXPECTED_BLOB: 05b43184767f7d39a74b253512dd2b7a4ca157d4
+      BRANCH: feat/adaptive-naming-skill-v0.1
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Build and validate bounded v99 proposal
+        shell: bash
+        run: |
+          set -euo pipefail
+          test "$(git hash-object "$STATE")" = "$EXPECTED_BLOB"
+          cp "$STATE" "$RUNNER_TEMP/previous.yaml"
+          python "$UPDATER" "$STATE" "$RUNNER_TEMP/proposed.yaml"
+          python -m pip install PyYAML==6.0.2
+          python 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/control_gate.py state "$RUNNER_TEMP/proposed.yaml" --previous "$RUNNER_TEMP/previous.yaml" --repository . > "$RUNNER_TEMP/transition.json"
+          python - <<'PY'
+          import json,os,pathlib,yaml
+          t=pathlib.Path(os.environ['RUNNER_TEMP']);old=yaml.safe_load((t/'previous.yaml').read_text());new=yaml.safe_load((t/'proposed.yaml').read_text());r=json.loads((t/'transition.json').read_text())
+          assert r['write_allowed'] and not r['generation_ready']
+          assert old['task']['snapshot_version']==98 and new['task']['snapshot_version']==99 and new['task']['skill_version']=='0.4.0'
+          assert new['next_action']['action']=='execute_bounded_reference_packet_001_with_independent_mistral_nemo_12b_cpu'
+          c=new['semantic_validation_contract'];a=c['bounded_reference_authorization']
+          assert a['max_requests']==4 and a['retries']==0 and a['paid_api_calls']==0 and a['new_names']==0 and not a['ia_generation'] and not a['automatic_expansion']
+          assert c['current_method_comparison']['winner']=='not_established' and not c['stable_skill_changed'] and not c['stable_promotion']
+          assert new['constraint_registry']==old['constraint_registry'] and new['owner_preferences']==old['owner_preferences'] and new['candidates']==old['candidates']
+          print(json.dumps({'snapshot':99,'write_allowed':True,'generation_ready':False,'reference_max_requests':4,'new_names':0,'paid_api_calls':0},ensure_ascii=False))
+          PY
+      - name: Preserve proposed state before publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        with:
+          name: naming-state-v99-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/previous.yaml
+            ${{ runner.temp }}/proposed.yaml
+            ${{ runner.temp }}/transition.json
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish only if branch and state are unchanged
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import base64,json,os,pathlib,urllib.request
+          repo='InteropAtlas/InteropAtlas';branch=os.environ['BRANCH'];state=os.environ['STATE'];expected=os.environ['EXPECTED_BLOB'];source=os.environ['GITHUB_SHA'];proposed=(pathlib.Path(os.environ['RUNNER_TEMP'])/'proposed.yaml').read_text()
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,data=(json.dumps(body).encode() if body is not None else None),headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha'];assert current==source,'branch changed; keep artifact and stop'
+          existing=api('/contents/'+state+'?ref='+current);assert existing['sha']==expected,'state changed; keep artifact and stop'
+          result=api('/contents/'+state,'PUT',{'message':'state(#408): freeze semantic contract and authorize bounded reference calibration at v99','content':base64.b64encode(proposed.encode()).decode(),'sha':expected,'branch':branch})
+          print(json.dumps({'published_commit':result['commit']['sha'],'snapshot':99,'new_names':0,'paid_api_calls':0,'reference_calls_executed':0}))
+          PY

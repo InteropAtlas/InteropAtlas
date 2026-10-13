@@ -1,0 +1,1228 @@
+{
+  "cells": [
+    {
+      "audit_disagreement_ids": [],
+      "audit_disagreements": 0,
+      "call_costs": [
+        {
+          "input_tokens": 1032,
+          "outcome": "completed",
+          "output_tokens": 527,
+          "seconds": 122.32147909600008,
+          "step": "r1explained"
+        },
+        {
+          "input_tokens": 487,
+          "outcome": "completed",
+          "output_tokens": 241,
+          "seconds": 46.82320507500003,
+          "step": "r1g1"
+        },
+        {
+          "input_tokens": 480,
+          "outcome": "completed",
+          "output_tokens": 193,
+          "seconds": 39.866248367000026,
+          "step": "r1g2"
+        },
+        {
+          "input_tokens": 484,
+          "outcome": "completed",
+          "output_tokens": 226,
+          "seconds": 44.148610416,
+          "step": "r1g3"
+        },
+        {
+          "input_tokens": 553,
+          "outcome": "completed",
+          "output_tokens": 474,
+          "seconds": 82.93692925699997,
+          "step": "r1surface"
+        }
+      ],
+      "calls": 5,
+      "candidate_count": 5,
+      "cell": "cell-1-redesign-411921",
+      "duplicates": 1,
+      "error": null,
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 3,
+        "input_tokens": 1451,
+        "output_tokens": 660,
+        "seconds": 130.83806385800006
+      },
+      "inference_seconds": 336.0964722110001,
+      "input_tokens": 3036,
+      "method": "redesign",
+      "output_tokens": 1661,
+      "pool": [
+        {
+          "derivation": "from 'diff' (as in file difference) + 'ly' (a suffix denoting action or process), implying a tool that performs side-by-side comparison of subtitle versions",
+          "explanation_id": "X-cf0125e2",
+          "id": "C001",
+          "meaning": "a lightweight, offline tool for comparing and reviewing modified subtitle versions through visual difference detection",
+          "name": "Diffly",
+          "name_id": "N-4936b269",
+          "pronunciation": "dif-lee",
+          "risk": "no trademark conflicts or legal claims assessed; name is not claimed as registered or available"
+        },
+        {
+          "derivation": "from 'edit' and 'rune' (as in 'a mark or symbol of change'), implying each textual alteration is a visible, traceable change",
+          "explanation_id": "X-45ca76ca",
+          "id": "C002",
+          "meaning": "a name suggesting a system where every subtitle edit is a distinct, identifiable mark, aiding team comparison without network",
+          "name": "Editrune",
+          "name_id": "N-c0102a73",
+          "pronunciation": "ed-itrune",
+          "risk": "abstract and less intuitive; possible misinterpretation as a 'rune-based' system; no known trademark conflicts in fictional context"
+        },
+        {
+          "derivation": "from 'subtitle' + 'light' (as in 'highlight' or 'visible'), suggesting clarity and visibility of changes in subtitles without network dependency",
+          "explanation_id": "X-9e33c6c9",
+          "id": "C003",
+          "meaning": "a tool for highlighting and comparing subtitle edits in offline environments, emphasizing clear, visible textual differences",
+          "name": "Sublyte",
+          "name_id": "N-c6ca803d",
+          "pronunciation": "sub-lee-t",
+          "risk": "no trademark conflicts or legal claims assessed; name is not claimed as registered or available"
+        },
+        {
+          "derivation": "combines 'clip' (referring to video clips or segments) with 'check' (to verify or compare)",
+          "explanation_id": "X-2b4e5838",
+          "id": "C004",
+          "meaning": "a tool for verifying textual changes in subtitles during offline editing workflows",
+          "name": "ClipCheck",
+          "name_id": "N-a8610950",
+          "pronunciation": "clip-check",
+          "risk": "low; clearly indicates a local, verification-focused function without suggesting external connectivity or ownership"
+        },
+        {
+          "derivation": "short for 'subtitle difference', combining 'sub' (subtitle) and 'diff' (difference)",
+          "explanation_id": "X-13bc1f0f",
+          "id": "C005",
+          "meaning": "a tool for comparing and highlighting changes between subtitle versions in offline editing",
+          "name": "SubDiff",
+          "name_id": "N-48e5de32",
+          "pronunciation": "sub-diff",
+          "risk": "minimal; does not imply file upload or cloud dependency, and avoids implying legal or domain ownership"
+        }
+      ],
+      "retained_after_audit_ids": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005"
+      ],
+      "seed": 411921,
+      "shortlisted": 5,
+      "stages": {
+        "r1explained": {
+          "answer_path": "model/cell-1-redesign-411921/steps/r1explained/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005"
+          ],
+          "input_path": "model/cell-1-redesign-411921/steps/r1explained/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005"
+          ],
+          "reviews": [
+            {
+              "decision": "keep",
+              "id": "C001",
+              "name_id": "N-4936b269",
+              "reason": "名称'Diffly'读写清晰，发音简单（dif-lee），易于团队口头交流；其词源基于'diff'与'ly'，明确指向差异对比功能，符合离线字幕修改对照工具的使命；无误导性暗示网络依赖，且不涉及文件上传或所有权暗示；风险声明明确说明未涉及法律或域名冲突，符合虚构设定。"
+            },
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-c0102a73",
+              "reason": "名称'Editrune'虽有创意，但'rune'易被误解为‘神秘符号’或‘基于符文的系统’，可能引发团队对功能的误读或认知偏差；词义抽象，与‘字幕修改’的直观需求脱节，不利于快速理解与口头沟通；虽无明确商标冲突，但整体可读性与实用性较弱，存在认知模糊风险。"
+            },
+            {
+              "decision": "keep",
+              "id": "C003",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'由'subtitle'与'light'组合，强调可见性与清晰度，契合‘突出文字变化’的使用场景；发音（sub-lee-t）自然流畅，易于记忆和口头传播；功能描述与名称逻辑一致，且明确无网络依赖提示，符合离线使用场景。"
+            },
+            {
+              "decision": "keep",
+              "id": "C004",
+              "name_id": "N-a8610950",
+              "reason": "名称'ClipCheck'直接表达‘验证’功能，语义明确，团队可快速理解其用途；'clip'与'check'组合贴合视频剪辑流程，且‘check’体现审查动作，符合字幕修改复核需求；虽为常见词组合，但无误导性，不暗示上传或云端服务，符合离线使用前提。"
+            },
+            {
+              "decision": "keep",
+              "id": "C005",
+              "name_id": "N-48e5de32",
+              "reason": "名称'SubDiff'简洁直接，源自'subtitle'与'diff'，准确反映核心功能——对比差异；发音（sub-diff）简单易记，团队可快速掌握；不涉及网络或所有权暗示，且在功能表达上最贴切，是功能与命名的精准匹配。"
+            }
+          ],
+          "unexpected_ids": []
+        },
+        "r1surface": {
+          "answer_path": "model/cell-1-redesign-411921/steps/r1surface/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005"
+          ],
+          "input_path": "model/cell-1-redesign-411921/steps/r1surface/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005"
+          ],
+          "reviews": [
+            {
+              "decision": "keep",
+              "id": "C001",
+              "name_id": "N-4936b269",
+              "reason": "名称'Diffly'发音清晰，易于口头交流，'diff'与'ly'组合在技术语境中常见，暗示差异检测功能，读写无歧义，符合离线字幕修改工具的定位。"
+            },
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-c0102a73",
+              "reason": "名称'Editrune'由'edit'与'rune'构成，'rune'意象模糊，可能被误解为‘runes’（古文字）或‘rune’（魔法），在无上下文时易引起歧义，读写不直观，缺乏明确的字幕或剪辑相关语义指向。"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'由'sub'（字幕）与'lyte'（light的变形）构成，'lyte'无明确语义关联，可能被误读为'light'，但缺乏对'修改'或'差异'的直接表达，整体组合生硬，不便于团队口头交流，存在歧义风险。"
+            },
+            {
+              "decision": "hold",
+              "id": "C004",
+              "name_id": "N-a8610950",
+              "reason": "名称'ClipCheck'虽包含'clip'（剪辑）和'check'（检查），但'check'暗示的是完整性验证，而非字幕内容的差异比较，语义偏重于合规或完整性检查，与'字幕修改对照'的核心功能不完全匹配，易被误解为文件校对工具。"
+            },
+            {
+              "decision": "keep",
+              "id": "C005",
+              "name_id": "N-48e5de32",
+              "reason": "名称'SubDiff'直接使用'sub'（字幕）和'diff'（差异）组合，语义明确、精准，直指核心功能，易于理解，符合离线字幕修改对照场景，读写清晰，团队可快速掌握其用途，是功能导向的强命名。"
+            }
+          ],
+          "unexpected_ids": []
+        }
+      },
+      "status": "awaiting_screening_evidence",
+      "unknown_token_receipts": 0,
+      "within_cell_duplicates": 1
+    },
+    {
+      "audit_disagreement_ids": [
+        "C002",
+        "C005"
+      ],
+      "audit_disagreements": 2,
+      "call_costs": [
+        {
+          "input_tokens": 607,
+          "outcome": "completed",
+          "output_tokens": 275,
+          "seconds": 57.219025413000054,
+          "step": "r1audit"
+        },
+        {
+          "input_tokens": 989,
+          "outcome": "completed",
+          "output_tokens": 499,
+          "seconds": 115.13164083200013,
+          "step": "r1explained"
+        },
+        {
+          "input_tokens": 456,
+          "outcome": "completed",
+          "output_tokens": 458,
+          "seconds": 75.89303211100014,
+          "step": "r1g1"
+        },
+        {
+          "input_tokens": 581,
+          "outcome": "completed",
+          "output_tokens": 573,
+          "seconds": 101.1640263239999,
+          "step": "r1surface"
+        }
+      ],
+      "calls": 4,
+      "candidate_count": 6,
+      "cell": "cell-2-simple-411921",
+      "duplicates": 0,
+      "error": null,
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 1,
+        "input_tokens": 456,
+        "output_tokens": 458,
+        "seconds": 75.89303211100014
+      },
+      "inference_seconds": 349.40772468000023,
+      "input_tokens": 2633,
+      "method": "simple",
+      "output_tokens": 1805,
+      "pool": [
+        {
+          "derivation": "from 'scribble' (drafts, quick notes)",
+          "explanation_id": "X-acec4378",
+          "id": "C001",
+          "meaning": "a tool for annotating and comparing subtitle drafts",
+          "name": "Scribble",
+          "name_id": "N-27bdbd4a",
+          "pronunciation": "skrib-bel",
+          "risk": "associated with informal writing; may seem unprofessional"
+        },
+        {
+          "derivation": "from 'difference' + 'fly' (quick, fast)",
+          "explanation_id": "X-abb4a418",
+          "id": "C002",
+          "meaning": "a fast, intuitive way to see differences in subtitle text",
+          "name": "Diffly",
+          "name_id": "N-4936b269",
+          "pronunciation": "dif-ly",
+          "risk": "common in tech naming; may imply a real-time or cloud feature"
+        },
+        {
+          "derivation": "from 'line' (subtitle line) + 'tap' (quick inspection)",
+          "explanation_id": "X-0d755e9f",
+          "id": "C003",
+          "meaning": "quickly tap to view line-by-line differences in subtitles",
+          "name": "Linetap",
+          "name_id": "N-19c7668b",
+          "pronunciation": "line-tap",
+          "risk": "uncommon; may not convey function clearly to non-technical users"
+        },
+        {
+          "derivation": "from 'side-by-side' comparison",
+          "explanation_id": "X-facade73",
+          "id": "C004",
+          "meaning": "clearly shows side-by-side changes between subtitle versions",
+          "name": "SideBy",
+          "name_id": "N-3bdbffcf",
+          "pronunciation": "side-by",
+          "risk": "commonly used in design or image tools; may not stand out"
+        },
+        {
+          "derivation": "from 'text' + 'anal' (analysis)",
+          "explanation_id": "X-39c12f35",
+          "id": "C005",
+          "meaning": "a tool for text analysis and comparison in subtitle editing",
+          "name": "Textal",
+          "name_id": "N-71ab9552",
+          "pronunciation": "text-al",
+          "risk": "generic; may be associated with broader text analytics tools"
+        },
+        {
+          "derivation": "from 'subtitle' + 'lite' (light, minimal)",
+          "explanation_id": "X-21ebd6d5",
+          "id": "C006",
+          "meaning": "a lightweight tool for comparing subtitle edits offline",
+          "name": "Sublyte",
+          "name_id": "N-c6ca803d",
+          "pronunciation": "sub-lyt",
+          "risk": "could be confused with 'sublite' or existing subtitle tools; not legally protected"
+        }
+      ],
+      "retained_after_audit_ids": [
+        "C001",
+        "C002",
+        "C003",
+        "C004",
+        "C005",
+        "C006"
+      ],
+      "seed": 411921,
+      "shortlisted": 6,
+      "stages": {
+        "r1audit": {
+          "answer_path": "model/cell-2-simple-411921/steps/r1audit/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C002",
+            "C005"
+          ],
+          "input_path": "model/cell-2-simple-411921/steps/r1audit/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C002",
+            "C005"
+          ],
+          "reviews": [
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-4936b269",
+              "reason": "名称'Diffly'虽简洁易读，发音为'dif-ly'，符合口头交流需求，但其命名源自'difference'+'fly'，可能被误解为强调实时或云端操作（如'fly'暗示快速响应或云功能），与‘离线使用’的使命不符。虽无明确法律或域名冲突，但存在潜在误导性，不符合‘不夸大智能能力’和‘离线场景’的设定要求。"
+            },
+            {
+              "decision": "hold",
+              "id": "C005",
+              "name_id": "N-71ab9552",
+              "reason": "名称'Textal'由'text'+'anal'构成，语义明确指向文本分析，但‘anal’在技术命名中常关联通用文本分析工具（如NLP、文本挖掘），易被用户理解为具备复杂算法或云处理能力，与‘离线字幕修改对照’的简单、直接功能定位不一致。虽发音清晰（'text-al'），但风险在于泛化，可能引发用户对功能范围的误解，不符合‘仅用于开发任务’和‘避免夸大智能能力’的约束。"
+            }
+          ],
+          "unexpected_ids": []
+        },
+        "r1explained": {
+          "answer_path": "model/cell-2-simple-411921/steps/r1explained/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-2-simple-411921/steps/r1explained/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "reviews": [
+            {
+              "decision": "hold",
+              "id": "C001",
+              "name_id": "N-27bdbd4a",
+              "reason": "名称'Scribble'源自草稿、快速笔记，暗示非正式写作，与专业剪辑团队对工具的正式性要求存在冲突；虽可表达注解功能，但可能被误解为轻量或临时性工具，不符合专业场景下的语感与可信度。"
+            },
+            {
+              "decision": "drop",
+              "id": "C002",
+              "name_id": "N-4936b269",
+              "reason": "名称'Diffly'虽体现快速差异对比，但'fly'在技术命名中常与实时、云服务或动态更新关联，可能误导用户认为该工具需联网或具备实时同步功能，违背‘离线使用’的核心使命。"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-19c7668b",
+              "reason": "名称'Linetap'表达‘逐行查看差异’的意图明确，但‘tap’为动作词，对非技术用户理解门槛较高，且在语义上偏动作导向而非功能描述，可能降低可读性与传播性。"
+            },
+            {
+              "decision": "hold",
+              "id": "C004",
+              "name_id": "N-3bdbffcf",
+              "reason": "名称'SideBy'直接反映‘并列对比’功能，逻辑清晰，但‘side-by’为常见设计工具命名模式，缺乏独特性，易被误认为是通用视觉工具，无法在剪辑团队中形成记忆点。"
+            },
+            {
+              "decision": "drop",
+              "id": "C005",
+              "name_id": "N-71ab9552",
+              "reason": "名称'Textal'过于泛化，与‘文本分析’等通用工具高度重合，无法明确指向‘字幕修改对比’的特定场景，易被理解为数据处理工具而非编辑辅助工具。"
+            },
+            {
+              "decision": "hold",
+              "id": "C006",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'虽表达‘轻量字幕工具’，但存在与现有工具（如Sublite）名称相似的风险，且‘lite’在语义上可能被理解为功能简化而非功能明确，存在混淆风险，且未被法律保护，不符合命名安全边界。"
+            }
+          ],
+          "unexpected_ids": []
+        },
+        "r1surface": {
+          "answer_path": "model/cell-2-simple-411921/steps/r1surface/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-2-simple-411921/steps/r1surface/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "reviews": [
+            {
+              "decision": "hold",
+              "id": "C001",
+              "name_id": "N-27bdbd4a",
+              "reason": "名称'Scribble'易与手写或草稿关联，可能误导用户以为是自由手写输入工具，与字幕修改对照的精准性、对比性不匹配；读写上虽简单，但缺乏专业感和对比意图的明确表达。"
+            },
+            {
+              "decision": "keep",
+              "id": "C002",
+              "name_id": "N-4936b269",
+              "reason": "名称'Diffly'源自'difference'与'friendly'的组合，直接呼应字幕修改中'差异对比'的核心功能，发音清晰，易于口头交流，且在无网络环境下强调对比行为的直观性。符合任务要求。"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-19c7668b",
+              "reason": "名称'Linetap'易被理解为对'line'（行）的简单截取或拦截，缺乏对'字幕对比'或'差异识别'的明确语义，可能被误解为行级处理工具，而非对照工具。读写上无问题，但语义模糊，不清晰传达核心功能。"
+            },
+            {
+              "decision": "hold",
+              "id": "C004",
+              "name_id": "N-3bdbffcf",
+              "reason": "名称'SideBy'结构上类似'Side by Side'，表面有对比意涵，但不完整、不自然，且作为独立名称缺乏可读性与专业感；在口头交流中易产生歧义或被误读为'by side'等不相关表达。"
+            },
+            {
+              "decision": "hold",
+              "id": "C005",
+              "name_id": "N-71ab9552",
+              "reason": "名称'Textal'结构抽象，无明确语义指向，易与'lexical'或'extant'等术语混淆，缺乏与'字幕'或'对比'的直接关联，用户难以快速理解其用途，不符合易辨认性要求。"
+            },
+            {
+              "decision": "hold",
+              "id": "C006",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'由'subtitle'与'lyte'(light)组合，虽有字幕基础，但'lyte'部分缺乏语义支持，整体发音生硬，语义不连贯，且未突出'对比'功能，易被误解为轻量级字幕工具，而非修改对照工具。"
+            }
+          ],
+          "unexpected_ids": []
+        }
+      },
+      "status": "awaiting_screening_evidence",
+      "unknown_token_receipts": 0,
+      "within_cell_duplicates": 0
+    },
+    {
+      "call_costs": [
+        {
+          "input_tokens": 510,
+          "outcome": "completed",
+          "output_tokens": 195,
+          "seconds": 41.113841587000024,
+          "step": "r1audit"
+        },
+        {
+          "input_tokens": 986,
+          "outcome": "completed",
+          "output_tokens": 405,
+          "seconds": 98.23047935900013,
+          "step": "r1explained"
+        },
+        {
+          "input_tokens": 456,
+          "outcome": "completed",
+          "output_tokens": 456,
+          "seconds": 75.97965446600006,
+          "step": "r1g1"
+        },
+        {
+          "input_tokens": 579,
+          "outcome": "completed",
+          "output_tokens": 566,
+          "seconds": 99.76111697199985,
+          "step": "r1surface"
+        }
+      ],
+      "calls": 4,
+      "cell": "cell-3-simple-411922",
+      "error": "ValueError('review_coverage_incomplete')",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 1,
+        "input_tokens": 456,
+        "output_tokens": 456,
+        "seconds": 75.97965446600006
+      },
+      "inference_seconds": 315.08509238400006,
+      "input_tokens": 2531,
+      "method": "simple",
+      "output_tokens": 1622,
+      "pool": [
+        {
+          "derivation": "side by side + by",
+          "explanation_id": "X-ea584bed",
+          "id": "C001",
+          "meaning": "A tool enabling side-by-side comparison of subtitle versions",
+          "name": "SideBy",
+          "name_id": "N-3bdbffcf",
+          "pronunciation": "side-by",
+          "risk": "Lacks specificity; 'by' is vague and may not convey the editing intent"
+        },
+        {
+          "derivation": "edit + verse (as in 'a version')",
+          "explanation_id": "X-b01c8177",
+          "id": "C002",
+          "meaning": "A version space where subtitle edits are compared and viewed",
+          "name": "EditVerse",
+          "name_id": "N-6557622f",
+          "pronunciation": "ed-its verse",
+          "risk": "Too abstract; 'verse' may not clearly signal subtitle or editing context"
+        },
+        {
+          "derivation": "sub + light (as in 'lighting' or 'illumination')",
+          "explanation_id": "X-03c8af25",
+          "id": "C003",
+          "meaning": "A tool for lighting up or making visible the differences in subtitles",
+          "name": "Sublyte",
+          "name_id": "N-c6ca803d",
+          "pronunciation": "sub-lyt",
+          "risk": "May be confused with 'sublight' or 'sublighting' as existing terms; not a strong association with 'edit' or 'comparison'"
+        },
+        {
+          "derivation": "text + compare",
+          "explanation_id": "X-54da39ce",
+          "id": "C004",
+          "meaning": "A straightforward name indicating a tool for comparing text versions",
+          "name": "TextCompare",
+          "name_id": "N-4421f327",
+          "pronunciation": "text-com-pare",
+          "risk": "Overly descriptive; may not be memorable or catchy in oral team communication"
+        },
+        {
+          "derivation": "subtitle + sync (as in synchronization)",
+          "explanation_id": "X-c956266c",
+          "id": "C005",
+          "meaning": "A tool to compare subtitle timing and text alignment",
+          "name": "SubSync",
+          "name_id": "N-6ff0f43f",
+          "pronunciation": "sub-sink",
+          "risk": "Implies timing focus, not text-level comparison; may misrepresent scope"
+        },
+        {
+          "derivation": "difference + subtitle",
+          "explanation_id": "X-40541247",
+          "id": "C006",
+          "meaning": "A tool that shows differences between subtitle versions",
+          "name": "DiffSub",
+          "name_id": "N-2c7d3ba1",
+          "pronunciation": "dif-fsub",
+          "risk": "Simple and literal; may sound too technical or generic for casual team use"
+        }
+      ],
+      "seed": 411922,
+      "stages": {
+        "r1audit": {
+          "answer_path": "model/cell-3-simple-411922/steps/r1audit/answer.raw",
+          "coverage_valid": false,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C005"
+          ],
+          "input_path": "model/cell-3-simple-411922/steps/r1audit/input.json",
+          "missing_ids": [
+            "C005"
+          ],
+          "returned_ids": [],
+          "reviews": [],
+          "unexpected_ids": []
+        },
+        "r1explained": {
+          "answer_path": "model/cell-3-simple-411922/steps/r1explained/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-3-simple-411922/steps/r1explained/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "reviews": [
+            {
+              "decision": "hold",
+              "id": "C001",
+              "name_id": "N-3bdbffcf",
+              "reason": "名称'SideBy'读写清晰，但'by'作为连接词模糊，缺乏对'comparison'或'editing'意图的明确传达，且在口头交流中易被误解为其他含义（如'by'表示作者）"
+            },
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-6557622f",
+              "reason": "名称'EditVerse'抽象程度高，'verse'与字幕或编辑无直接关联，团队在非正式交流中难以快速理解其含义，存在理解门槛"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'可能与现有术语'sublight'或'lighting'混淆，语义上偏向照明而非编辑对比，且未体现核心功能为'比较文本版本'"
+            },
+            {
+              "decision": "hold",
+              "id": "C004",
+              "name_id": "N-4421f327",
+              "reason": "名称'TextCompare'功能描述明确，但过于直白，在口头交流中缺乏记忆点，团队成员可能无法快速记住或传播"
+            },
+            {
+              "decision": "drop",
+              "id": "C005",
+              "name_id": "N-6ff0f43f",
+              "reason": "名称'SubSync'强调时间同步，误导向时间对齐功能，而任务核心是文本内容对比，易引起功能误解，不符合字幕修改对照需求"
+            },
+            {
+              "decision": "hold",
+              "id": "C006",
+              "name_id": "N-2c7d3ba1",
+              "reason": "名称'DiffSub'虽然直接表达差异和字幕，但过于技术化，缺乏在团队日常对话中的可传播性，可能被误读为代码或差异工具而非字幕编辑工具"
+            }
+          ],
+          "unexpected_ids": []
+        },
+        "r1surface": {
+          "answer_path": "model/cell-3-simple-411922/steps/r1surface/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-3-simple-411922/steps/r1surface/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "reviews": [
+            {
+              "decision": "hold",
+              "id": "C001",
+              "name_id": "N-3bdbffcf",
+              "reason": "名称'SideBy'读写清晰，但'By'在字幕对比场景中语义模糊，易被误解为'by'（归属），可能引发团队误读为'谁的版本'，而非'对比版本'。缺乏明确的'对比'或'差异'语义指向，存在歧义。"
+            },
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-6557622f",
+              "reason": "名称'EditVerse'带有较强创意色彩，'Verse'意为'章节'或'世界'，在离线字幕场景中语义不直接，团队口头交流时可能难以快速理解其功能，缺乏明确的字幕或修改对比语义。"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-c6ca803d",
+              "reason": "名称'Sublyte'发音接近'Sublite'，但无明显字幕或对比语义，'lyte'为音似词，无清晰可识别的含义，易被误读或误记，且在团队口头交流中可能造成混淆。"
+            },
+            {
+              "decision": "keep",
+              "id": "C004",
+              "name_id": "N-4421f327",
+              "reason": "名称'TextCompare'直接、明确表达'文本对比'功能，符合任务目标——让团队清楚识别字幕修改差异。虽略显直白，但其可读性、可理解性高，适合在离线环境下快速复核。在无网络时，团队成员能迅速理解其用途，符合'便于口头交流'要求。"
+            },
+            {
+              "decision": "hold",
+              "id": "C005",
+              "name_id": "N-6ff0f43f",
+              "reason": "名称'SubSync'强调'同步'，但字幕修改核心是'内容差异'，而非时间轴同步。在修改对比场景中，'sync'可能误导用户认为是时间对齐，而非文本内容对比，语义偏离任务核心。"
+            },
+            {
+              "decision": "keep",
+              "id": "C006",
+              "name_id": "N-2c7d3ba1",
+              "reason": "名称'DiffSub'中'Diff'为'差异'的标准术语，'Sub'明确指向'字幕'，组合后直接表达'字幕差异'，语义精准、专业，且在团队口头交流中可快速理解。符合'易辨认'、'专业'、'不夸大智能能力'的设定。"
+            }
+          ],
+          "unexpected_ids": []
+        }
+      },
+      "status": "blocked",
+      "unknown_token_receipts": 0,
+      "within_cell_duplicates": 0
+    },
+    {
+      "call_costs": [
+        {
+          "input_tokens": 487,
+          "outcome": "completed",
+          "output_tokens": 199,
+          "seconds": 40.60816303799993,
+          "step": "r1g1"
+        },
+        {
+          "input_tokens": 480,
+          "outcome": "completed",
+          "output_tokens": 174,
+          "seconds": 37.021500596999886,
+          "step": "r1g2"
+        },
+        {
+          "input_tokens": 484,
+          "outcome": "completed",
+          "output_tokens": 225,
+          "seconds": 44.01690910299999,
+          "step": "r1g3"
+        },
+        {
+          "input_tokens": 579,
+          "outcome": "completed",
+          "output_tokens": 459,
+          "seconds": 82.18038428599993,
+          "step": "r1surface"
+        }
+      ],
+      "calls": 4,
+      "cell": "cell-4-redesign-411922",
+      "error": "ValueError('global_time_cap')",
+      "generated_occurrences": 6,
+      "generation_cost": {
+        "calls": 3,
+        "input_tokens": 1451,
+        "output_tokens": 598,
+        "seconds": 121.6465727379998
+      },
+      "inference_seconds": 203.82695702399974,
+      "input_tokens": 2030,
+      "method": "redesign",
+      "output_tokens": 1057,
+      "pool": [
+        {
+          "derivation": "sub (short for subtitle) + diff (difference)",
+          "explanation_id": "X-ca529be6",
+          "id": "C001",
+          "meaning": "a tool for comparing subtitle versions to show textual differences",
+          "name": "SubDiff",
+          "name_id": "N-48e5de32",
+          "pronunciation": "sub diff",
+          "risk": "minimal; uses common English roots; no trademark conflict assumed; does not imply file upload or cloud dependency"
+        },
+        {
+          "derivation": "derived from 'subtitle' and 'synchronize'; conveys alignment of subtitles across versions without implying file upload or network dependency",
+          "explanation_id": "X-a005fd0d",
+          "id": "C002",
+          "meaning": "a tool for offline comparison of subtitle versions by highlighting textual changes, enabling clear visual alignment of edits",
+          "name": "SubSync",
+          "name_id": "N-6ff0f43f",
+          "pronunciation": "sub synk",
+          "risk": "could be confused with existing subtitle sync tools; however, the context of offline revision makes this distinction valid and non-misleading"
+        },
+        {
+          "derivation": "derived from 'subtitle' and 'check', emphasizing verification of subtitle edits in an offline context",
+          "explanation_id": "X-41ca02f8",
+          "id": "C003",
+          "meaning": "a tool for offline comparison and verification of subtitle edits between versions",
+          "name": "SubsCheck",
+          "name_id": "N-a9b13b97",
+          "pronunciation": "subz check",
+          "risk": "common in software naming; may be confused with existing tools, but no legal or domain conflict is claimed"
+        },
+        {
+          "derivation": "short form of 'difference' and 'subtitle'; directly communicates the core function of identifying textual differences in subtitles",
+          "explanation_id": "X-a9cf475e",
+          "id": "C004",
+          "meaning": "a lightweight, offline tool designed to compare two subtitle versions side-by-side, clearly marking modified text for editorial review",
+          "name": "DiffSub",
+          "name_id": "N-2c7d3ba1",
+          "pronunciation": "diff sub",
+          "risk": "slightly generic; may not stand out in team communication, but is precise and easy to recall in verbal exchanges"
+        },
+        {
+          "derivation": "edit (modification) + gap (the difference or space between versions)",
+          "explanation_id": "X-6a77efcc",
+          "id": "C005",
+          "meaning": "a tool that highlights the gaps or changes between edited subtitle versions",
+          "name": "EditGap",
+          "name_id": "N-e2d14018",
+          "pronunciation": "edit gap",
+          "risk": "minimal; descriptive and neutral; avoids implying file sharing or internet access; no known conflicts"
+        },
+        {
+          "derivation": "from 'diff' (difference) and 'sync' (synchronization), highlighting the comparison of text changes between versions without network dependency",
+          "explanation_id": "X-66227919",
+          "id": "C006",
+          "meaning": "a tool that enables local comparison of subtitle versions to identify textual differences",
+          "name": "DiffSync",
+          "name_id": "N-f1db31c4",
+          "pronunciation": "diff sync",
+          "risk": "basic and generic naming; may lack specificity, but does not imply file upload or external connectivity"
+        }
+      ],
+      "seed": 411922,
+      "stages": {
+        "r1explained": {
+          "answer_path": null,
+          "coverage_valid": false,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-4-redesign-411922/steps/r1explained/input.json",
+          "missing_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "returned_ids": [],
+          "reviews": [],
+          "unexpected_ids": []
+        },
+        "r1surface": {
+          "answer_path": "model/cell-4-redesign-411922/steps/r1surface/answer.raw",
+          "coverage_valid": true,
+          "duplicate_ids": [],
+          "expected_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "input_path": "model/cell-4-redesign-411922/steps/r1surface/input.json",
+          "missing_ids": [],
+          "returned_ids": [
+            "C001",
+            "C002",
+            "C003",
+            "C004",
+            "C005",
+            "C006"
+          ],
+          "reviews": [
+            {
+              "decision": "keep",
+              "id": "C001",
+              "name_id": "N-48e5de32",
+              "reason": "名称简洁，'Sub'明确指向字幕，'Diff'直接表达差异比较，易读且专业，符合离线字幕修改对照工具的功能定位，无误导性，便于口头交流。"
+            },
+            {
+              "decision": "hold",
+              "id": "C002",
+              "name_id": "N-6ff0f43f",
+              "reason": "名称中'SubSync'暗示同步功能，可能被误解为时间轴对齐或视频同步，而非字幕文本差异比较，存在歧义，不符合‘仅比较字幕修改’的使命核心。"
+            },
+            {
+              "decision": "hold",
+              "id": "C003",
+              "name_id": "N-a9b13b97",
+              "reason": "名称中'Check'偏向检查或验证，语义模糊，未明确表达‘差异’或‘对比’，可能被理解为语法或格式检查，而非文本修改的对比，功能指向不够精准。"
+            },
+            {
+              "decision": "keep",
+              "id": "C004",
+              "name_id": "N-2c7d3ba1",
+              "reason": "名称'DiffSub'结构清晰，'Diff'明确表示差异，'Sub'明确指向字幕，简洁直接，与'SubDiff'类似，但语序不同，读写上稍弱于前者，仍属有效选项，但无明显优势。"
+            },
+            {
+              "decision": "drop",
+              "id": "C005",
+              "name_id": "N-e2d14018",
+              "reason": "名称'EditGap'语义模糊，'Edit'可能指编辑动作，'Gap'可能指时间或内容空白，与字幕修改对比无关，无法明确传达工具功能，不匹配任务目标。"
+            },
+            {
+              "decision": "hold",
+              "id": "C006",
+              "name_id": "N-f1db31c4",
+              "reason": "名称'DiffSync'中'Sync'暗示同步，与字幕文本差异无直接关联，可能被误解为时间对齐，偏离‘比较字幕修改’的核心任务，存在功能混淆风险。"
+            }
+          ],
+          "unexpected_ids": []
+        }
+      },
+      "status": "blocked",
+      "unknown_token_receipts": 0,
+      "within_cell_duplicates": 0
+    }
+  ],
+  "limits": "One fictional task, two seeds, one quantized model. No significance or adoption inference. Do not score censored cells as naming failures.",
+  "model_calls_during_extraction": 0,
+  "occurrences": 24,
+  "origins": [
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-d1c21633",
+      "name_id": "N-c6ca803d",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-45ca76ca",
+      "name_id": "N-c0102a73",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-13bc1f0f",
+      "name_id": "N-48e5de32",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g2/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g2/answer.raw"
+    },
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-2b4e5838",
+      "name_id": "N-a8610950",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g2/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g2/answer.raw"
+    },
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-9e33c6c9",
+      "name_id": "N-c6ca803d",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g3/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g3/answer.raw"
+    },
+    {
+      "cell": "cell-1-redesign-411921",
+      "explanation_id": "X-cf0125e2",
+      "name_id": "N-4936b269",
+      "raw_model_path": "model/cell-1-redesign-411921/calls/r1g3/output.txt",
+      "source_path": "model/cell-1-redesign-411921/steps/r1g3/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-21ebd6d5",
+      "name_id": "N-c6ca803d",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-abb4a418",
+      "name_id": "N-4936b269",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-39c12f35",
+      "name_id": "N-71ab9552",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-facade73",
+      "name_id": "N-3bdbffcf",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-0d755e9f",
+      "name_id": "N-19c7668b",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-2-simple-411921",
+      "explanation_id": "X-acec4378",
+      "name_id": "N-27bdbd4a",
+      "raw_model_path": "model/cell-2-simple-411921/calls/r1g1/output.txt",
+      "source_path": "model/cell-2-simple-411921/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-03c8af25",
+      "name_id": "N-c6ca803d",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-40541247",
+      "name_id": "N-2c7d3ba1",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-ea584bed",
+      "name_id": "N-3bdbffcf",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-c956266c",
+      "name_id": "N-6ff0f43f",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-b01c8177",
+      "name_id": "N-6557622f",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-3-simple-411922",
+      "explanation_id": "X-54da39ce",
+      "name_id": "N-4421f327",
+      "raw_model_path": "model/cell-3-simple-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-3-simple-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-41ca02f8",
+      "name_id": "N-a9b13b97",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-66227919",
+      "name_id": "N-f1db31c4",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g1/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g1/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-ca529be6",
+      "name_id": "N-48e5de32",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g2/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g2/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-6a77efcc",
+      "name_id": "N-e2d14018",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g2/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g2/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-a005fd0d",
+      "name_id": "N-6ff0f43f",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g3/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g3/answer.raw"
+    },
+    {
+      "cell": "cell-4-redesign-411922",
+      "explanation_id": "X-a9cf475e",
+      "name_id": "N-2c7d3ba1",
+      "raw_model_path": "model/cell-4-redesign-411922/calls/r1g3/output.txt",
+      "source_path": "model/cell-4-redesign-411922/steps/r1g3/answer.raw"
+    }
+  ],
+  "prior_model_calls": 17,
+  "reviewer_blindness": "not_established_current_author_preexposed",
+  "source_blob": "67a46c1f84f368c7f924f893f3c700e9290184bb",
+  "source_commit": "edde49b36c4fc39df0fa64c6959f9a01b75b2f09",
+  "source_sha256": "5ce04a228551fb3a3586e07dcad610e25ed0ae20e776a18fe9d1ddf6d5be1d75",
+  "summary": {
+    "adoption": "not_assessed",
+    "causal_effectiveness": "not_established",
+    "cells": [
+      {
+        "audit_disagreements": 0,
+        "calls": 5,
+        "candidate_count": 5,
+        "cell": "cell-1-redesign-411921",
+        "duplicates": 1,
+        "error": null,
+        "inference_seconds": 336.0964722110001,
+        "input_tokens": 3036,
+        "method": "redesign",
+        "output_tokens": 1661,
+        "seed": 411921,
+        "shortlisted": 5,
+        "status": "awaiting_screening_evidence",
+        "unknown_token_receipts": 0
+      },
+      {
+        "audit_disagreements": 2,
+        "calls": 4,
+        "candidate_count": 6,
+        "cell": "cell-2-simple-411921",
+        "duplicates": 0,
+        "error": null,
+        "inference_seconds": 349.40772468000023,
+        "input_tokens": 2633,
+        "method": "simple",
+        "output_tokens": 1805,
+        "seed": 411921,
+        "shortlisted": 6,
+        "status": "awaiting_screening_evidence",
+        "unknown_token_receipts": 0
+      },
+      {
+        "calls": 4,
+        "cell": "cell-3-simple-411922",
+        "error": "ValueError('review_coverage_incomplete')",
+        "inference_seconds": 315.08509238400006,
+        "input_tokens": 2531,
+        "method": "simple",
+        "output_tokens": 1622,
+        "seed": 411922,
+        "status": "blocked",
+        "unknown_token_receipts": 0
+      },
+      {
+        "calls": 4,
+        "cell": "cell-4-redesign-411922",
+        "error": "ValueError('global_time_cap')",
+        "inference_seconds": 203.82695702399974,
+        "input_tokens": 2030,
+        "method": "redesign",
+        "output_tokens": 1057,
+        "seed": 411922,
+        "status": "blocked",
+        "unknown_token_receipts": 0
+      }
+    ],
+    "comparison_to_REAL_408_001": "new_run_only_no_retroactive_rescore",
+    "comparison_to_REAL_408_002": "new_calls_only_same_method_conditions_not_rescore",
+    "created_at": "2026-09-12T15:17:40.316745+00:00",
+    "execution_change_only": "evidence_persistence_strategy",
+    "experiment_id": "REAL-408-003",
+    "independent_semantic_review": "not_performed",
+    "model_execution": "real",
+    "normalization_layer": "format_adapter.py representation_only",
+    "paid_inference_api_calls": 0,
+    "real_inference_attempts": 17,
+    "task_kind": "synthetic",
+    "user_model_validation": "not_performed"
+  },
+  "unique_explanations": 24,
+  "unique_names": 16,
+  "verified_embedded_files": 252
+}
