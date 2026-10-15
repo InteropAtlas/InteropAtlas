@@ -7,6 +7,8 @@ import json
 import unittest
 from pathlib import Path
 
+import yaml
+
 from candidate_identity_validator import canonical_identifier_index, identity_route, validate_candidate
 from legacy_identity_adapter import evidence_backed_legacy_identifiers
 
@@ -50,6 +52,28 @@ class CandidateIdentitySafetyTests(unittest.TestCase):
         findings = validate_candidate(record, self.schema, {})
         self.assertEqual([], [item for item in findings if item.severity == "error"])
         self.assertEqual("review_required", identity_route(record, {}))
+
+    def test_identifier_namespace_rejects_hyphen_and_accepts_underscore(self) -> None:
+        for namespace, valid in [("agntcy-oasf", False), ("agntcy_oasf", True)]:
+            with self.subTest(namespace=namespace):
+                record = candidate("new", [{"namespace": namespace, "value": "1.0.0"}])
+                errors = [item for item in validate_candidate(record, self.schema, {}) if item.severity == "error"]
+                if valid:
+                    self.assertEqual([], errors)
+                else:
+                    self.assertTrue(any(item.code == "IA-ID-001" and "external_identifiers.0.namespace" in item.message for item in errors))
+
+    def test_yaml_date_identifier_rejects_implicit_date_and_accepts_string(self) -> None:
+        for value_yaml, valid in [("2026-07-28", False), ('"2026-07-28"', True)]:
+            with self.subTest(value_yaml=value_yaml):
+                identifiers = yaml.safe_load(f"- namespace: mcp\n  value: {value_yaml}\n")
+                self.assertEqual(valid, isinstance(identifiers[0]["value"], str))
+                record = candidate("new", identifiers)
+                errors = [item for item in validate_candidate(record, self.schema, {}) if item.severity == "error"]
+                if valid:
+                    self.assertEqual([], errors)
+                else:
+                    self.assertTrue(any(item.code == "IA-ID-001" and "external_identifiers.0.value" in item.message for item in errors))
 
     def test_known_duplicate_routes_to_existing_without_merge(self) -> None:
         canonical = [{"id": "bcp47_rfc5646", "official_url": "https://www.rfc-editor.org/rfc/rfc5646.html"}]

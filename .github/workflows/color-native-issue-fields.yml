@@ -1,0 +1,54 @@
+name: Color Native Issue Fields
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/color-native-issue-fields.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  color:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.IA_PROJECTS_TOKEN }}
+    steps:
+      - name: Update Work Type colors
+        run: |
+          gh api --method PATCH             -H 'X-GitHub-Api-Version: 2026-03-10'             orgs/InteropAtlas/issue-fields/47375155             --input - <<'JSON'
+          {
+            "name": "Work Type",
+            "description": "",
+            "visibility": "all",
+            "options": [
+              {"id":82931595,"name":"Knowledge","description":null,"color":"green","priority":1},
+              {"id":82931596,"name":"Perspective","description":null,"color":"yellow","priority":2},
+              {"id":82931597,"name":"Evolution","description":null,"color":"purple","priority":3}
+            ]
+          }
+          JSON
+
+      - name: Update Waiting For colors
+        run: |
+          gh api --method PATCH             -H 'X-GitHub-Api-Version: 2026-03-10'             orgs/InteropAtlas/issue-fields/47375196             --input - <<'JSON'
+          {
+            "name": "Waiting For",
+            "description": "",
+            "visibility": "all",
+            "options": [
+              {"id":82931668,"name":"Evidence","description":null,"color":"blue","priority":0},
+              {"id":82931669,"name":"Scale","description":null,"color":"orange","priority":1},
+              {"id":82931670,"name":"Owner","description":null,"color":"red","priority":2}
+            ]
+          }
+          JSON
+
+      - name: Verify colors
+        run: |
+          FIELDS="$(gh api -H 'X-GitHub-Api-Version: 2026-03-10' orgs/InteropAtlas/issue-fields)"
+          echo "WORK_TYPE=$(jq -c '.[] | select(.name=="Work Type") | [.options[] | {name,color}]' <<<"$FIELDS")"
+          echo "WAITING_FOR=$(jq -c '.[] | select(.name=="Waiting For") | [.options[] | {name,color}]' <<<"$FIELDS")"
+          test "$(jq -r '.[] | select(.name=="Work Type") | [.options[] | [.name,.color]|join("=")] | sort | join("|")' <<<"$FIELDS")" = "Evolution=purple|Knowledge=green|Perspective=yellow"
+          test "$(jq -r '.[] | select(.name=="Waiting For") | [.options[] | [.name,.color]|join("=")] | sort | join("|")' <<<"$FIELDS")" = "Evidence=blue|Owner=red|Scale=orange"
