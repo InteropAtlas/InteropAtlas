@@ -1,0 +1,83 @@
+packet_id: adm_intake_20261019
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 2c7f6392560aae1dd5472dbc4a7f226985237374
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- '仅处理 #146 的既有候选 itur_bs2076_adm；保留原 candidate_id、itu:bs.2076 标识和 Doubao 贡献，不扩候选池、词表、模型或规范。'
+- '采用既有 artifact/standard 分类记录 ITU-R BS.2076 建议书；itu:bs.2076 是工作级标识，当前定义固定到 BS.2076-3 (02/2025)，不另建抽象模型主体或版次主体。'
+- ADM 是描述音频的元数据模型，与 BS.2088 所规定的 BW64 音频文件格式保持独立；不新增关系，不接纳原候选中未经本次举证的 Dolby Atmos 交付采用或 profile 断言。
+- Reviewer 须独立核对完整 Canonical、冻结候选、名称、外部标识、现行版与拟入库字段，明确是否 acceptable_for_ordinary_acceptance 及能否整条原样物化。
+- 作者实际读取 ITU 官方索引、版次页和英文 PDF 的 Scope、Annex 1 第1至2.2节；网页 PDF 解析超时后，从同一官方直链下载并提取正文，另视觉核对 printed page 1。这是最小身份及定义核验，不是全文技术审计、实现符合性测试或关系验收。真实独立结论须留在关联 PR，机器检查不能替代语义审核。
+preflight:
+  canonical_records: 184
+  candidate_records: 193
+  acceptance_events: 62
+  machine_route: review_required
+  normalized_identifier_collisions: []
+  validation_errors: []
+  notes_zh:
+  - 对当前184个正式对象全量建立结构化及有证据的遗留标识索引；itu:bs.2076无碰撞，目标id尚不存在，原候选只有一份。
+  - 正式对象中 BW64 对 ADM 的文字提及不构成同一主体；其标识为itu:bs.2088，描述的是音频承载文件格式。
+source_evidence:
+- evidence_id: bs2076_index_20261019
+  url: https://www.itu.int/rec/R-REC-BS.2076
+  accessed: '2026-10-19'
+  observed_via: author_web_retrieval
+  locator: Main and previous versions table
+  observation_zh: 官方索引显示 BS.2076-3 (02/2025) 为 In force (Main)，-2 (10/2019)、-1 (06/2017) 与 -0 (06/2015) 均为 Superseded。
+- evidence_id: bs2076_3_edition_20261019
+  url: https://www.itu.int/rec/R-REC-BS.2076-3-202502-I/en
+  accessed: '2026-10-19'
+  observed_via: author_web_retrieval
+  locator: Recommendation identity, approval date, status and English PDF listing
+  observation_zh: 官方版次页确认标题为 Audio Definition Model，BS.2076-3 于2025-02-04批准，状态为 In force (Main)；英文PDF于2025-03-04发布，大小为4600607字节。
+- evidence_id: bs2076_3_scope_20261019
+  url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2076-3-202502-I!!PDF-E.pdf
+  accessed: '2026-10-19'
+  observed_via: author_official_pdf_download_and_text_extraction
+  locator: 'Printed pages 1, 4–5: Scope; Annex 1 sections 1, 2, 2.1 and 2.2 (PDF pages 3, 6–7)'
+  downloaded_bytes: 4600607
+  downloaded_sha256: 337e78d026331dd8a5cc89f2e87e32b1ef31ac2443a6d21d3b849e847a0c79a1
+  observation_zh: Scope支持用XML元数据描述音频文件的格式、内容及音轨。Annex 1区分音频描述模型与承载音频的格式，并说明该模型使用XML；与BW64文件一同使用时，XML可嵌入特定chunk。此次不从这些说明扩展为格式等价、全面兼容或产品采用结论。
+objects:
+- candidate_id: itur_bs2076_adm
+  candidate_path: 01_State/Inbox/candidates/itur_bs2076_adm.yaml
+  candidate_blob: 343b0c6a0d6cf61e959e78c0bd5af166f299bec5
+  evidence_ids:
+  - bs2076_index_20261019
+  - bs2076_3_edition_20261019
+  - bs2076_3_scope_20261019
+  proposed_record:
+    id: itur_bs2076_adm
+    type: artifact
+    kind: standard
+    name_zh: ITU-R BS.2076音频定义模型
+    name_en: Recommendation ITU-R BS.2076 — Audio definition model
+    description_zh: 规定音频定义模型（ADM）的元数据结构，以XML描述音频文件的格式、内容及音轨；本记录固定到BS.2076-3（02/2025）。
+    description_en: Specifies the Audio Definition Model (ADM), a metadata structure using XML to describe audio-file formats, content and tracks; this record is pinned to BS.2076-3 (02/2025).
+    version: BS.2076-3 (02/2025)
+    external_identifiers:
+    - namespace: itu
+      value: bs.2076
+    official_url: https://www.itu.int/rec/R-REC-BS.2076
+    versions:
+    - version: BS.2076-3 (02/2025)
+      status: in_force
+      url: https://www.itu.int/rec/R-REC-BS.2076-3-202502-I/en
+    scope_notes_zh: itu:bs.2076保留为建议书的工作级标识，当前定义固定到2025-02-04批准的BS.2076-3；不将已被取代的版次等同为当前版。ADM描述音频而不承载音频，与BS.2088规定的BW64音频文件格式保持独立。本记录不包含特定产品的采用、交付profile或实现符合性结论。
+    scope_notes_en: itu:bs.2076 remains a work-level Recommendation identifier; the definition is pinned to BS.2076-3, approved on 2025-02-04. Superseded editions are not treated as the current edition. ADM describes audio rather than carrying it, and stays distinct from the BW64 audio file format specified by BS.2088. This record makes no product-adoption, delivery-profile or implementation-conformance claims.
+    sources:
+    - url: https://www.itu.int/rec/R-REC-BS.2076
+      title: Recommendation ITU-R BS.2076
+      language: en
+      accessed: '2026-10-19'
+    - url: https://www.itu.int/rec/R-REC-BS.2076-3-202502-I/en
+      title: Recommendation ITU-R BS.2076-3 (02/2025)
+      language: en
+      accessed: '2026-10-19'
+    - url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2076-3-202502-I!!PDF-E.pdf
+      title: Recommendation ITU-R BS.2076-3 — Scope and Annex 1
+      language: en
+      accessed: '2026-10-19'
