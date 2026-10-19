@@ -83,6 +83,95 @@ class HumanRouteSearchBrowserTests(unittest.TestCase):
         finally:
             context.close()
 
+    def test_failed_index_remains_distinct_from_no_matches_after_submit_and_history(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.route('**/search-index.json', lambda route: route.fulfill(status=503, body='Unavailable'))
+            page.goto(urljoin(BASE_URL, 'search.html?q=Forgejo'))
+            search = page.get_by_role('searchbox', name='搜索词')
+            status = page.locator('#atlas-search-status')
+            expect(search).to_have_value('Forgejo')
+            expect(status).to_contain_text('搜索索引载入失败')
+
+            for query in ('YAML', ''):
+                search.fill(query)
+                search.press('Enter')
+                self.assertEqual(parse_qs(urlparse(page.url).query).get('q', ['']), [query])
+                expect(status).to_contain_text('搜索索引载入失败')
+                expect(page.locator('.search-result')).to_have_count(0)
+
+            for navigate, query in ((page.go_back, 'YAML'), (page.go_back, 'Forgejo'), (page.go_forward, 'YAML')):
+                navigate()
+                expect(search).to_have_value(query)
+                expect(status).to_contain_text('搜索索引载入失败')
+                expect(page.locator('.search-result')).to_have_count(0)
+
+            home = page.get_by_role('link', name='InteropAtlas').first
+            home.click()
+            self.assertEqual(urlparse(page.url).path, urlparse(urljoin(BASE_URL, 'index.html')).path)
+        finally:
+            context.close()
+
+    def test_pending_index_preserves_query_and_searches_latest_submission_when_loaded(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.add_init_script("""
+                const realFetch = window.fetch.bind(window);
+                window.fetch = (...args) => {
+                    if (args[0] !== 'search-index.json') return realFetch(...args);
+                    return new Promise((resolve, reject) => {
+                        window.__iaLoadSearchIndex = () => realFetch(...args).then(resolve, reject);
+                    });
+                };
+            """)
+            page.goto(urljoin(BASE_URL, 'search.html?q=Forgejo'))
+            search = page.get_by_role('searchbox', name='搜索词')
+            status = page.locator('#atlas-search-status')
+            expect(search).to_have_value('Forgejo')
+            expect(status).to_have_text('正在载入搜索索引…')
+
+            search.fill('YAML')
+            search.press('Enter')
+            expect(status).to_have_text('正在载入搜索索引…')
+            expect(page.locator('.search-result')).to_have_count(0)
+            self.assertEqual(parse_qs(urlparse(page.url).query).get('q'), ['YAML'])
+
+            page.evaluate('() => window.__iaLoadSearchIndex()')
+            expect(page.locator('.search-result a[href="objects/yaml_1.2.2.html"]')).to_be_visible()
+            expect(search).to_have_value('YAML')
+            expect(status).to_contain_text('找到')
+        finally:
+            context.close()
+
+    def test_loaded_index_distinguishes_empty_query_no_matches_and_hits(self) -> None:
+        context = self.browser.new_context()
+        page = context.new_page()
+        try:
+            page.goto(urljoin(BASE_URL, 'search.html'))
+            search = page.get_by_role('searchbox', name='搜索词')
+            status = page.locator('#atlas-search-status')
+            expect(status).to_have_text('输入名称、关键词或稳定 ID 开始搜索。')
+            expect(page.locator('.search-result')).to_have_count(0)
+
+            search.fill('interopatlas-no-such-object-915c8a6f')
+            search.press('Enter')
+            expect(status).to_have_text('没有找到结果。')
+            expect(page.locator('.search-result')).to_have_count(0)
+
+            search.fill('Forgejo')
+            search.press('Enter')
+            expect(page.get_by_role('link', name='Forgejo Actions')).to_be_visible()
+            expect(status).to_contain_text('找到')
+
+            search.fill('')
+            search.press('Enter')
+            expect(status).to_have_text('输入名称、关键词或稳定 ID 开始搜索。')
+            expect(page.locator('.search-result')).to_have_count(0)
+        finally:
+            context.close()
+
     def test_js_disabled_keeps_search_explanation_and_home_navigation(self) -> None:
         context = self.browser.new_context(java_script_enabled=False)
         page = context.new_page()
