@@ -1,71 +1,17 @@
 packet_id: bw64_intake_20261019
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+reviewed_packet_commit: 379e0c95b7f53314204666dd60915737c2971dc7
+reviewed_packet_blob: aa9c2154c278f1188238196ceb29b6e5ca1a0b67
+reviewed_packet_path: 01_State/Inbox/review-packets/bw64-intake-20261019.yaml
 baseline_commit: d5ae8f897fae09377db472beee996af4848d2491
 executor: Agent — OpenAI / dot
-reviewer: null
-review_scope_zh:
-- '仅处理 #146 的既有候选 itur_bs2088_bw64；保留原 candidate_id、itu:bs.2088 标识和 Doubao 贡献，不扩候选池、词表、模型或规范。'
-- '采用既有 artifact/standard 分类记录 ITU-R BS.2088 建议书；itu:bs.2088 是工作级标识，当前定义固定到 BS.2088-2 (11/2025)，不另建抽象格式主体或版次主体。'
-- 不与既有 EBU Tech 3306 RF64、Tech 3285 BWF 出版物合并，不新增替代、兼容或其他关系，不作所有旧应用均可兼容的断言。
-- Reviewer 须独立核对完整 Canonical、冻结候选、名称、外部标识、现行版与拟入库字段，明确是否 acceptable_for_ordinary_acceptance 及能否整条原样物化。
-- 作者本次读取 ITU 官方索引、版次页和英文 PDF 的 Scope、recommends、Annex 1 Introduction；这不是全文技术审计、实现符合性测试或关系验收。真实独立结论须留在关联 PR，机器检查不能替代语义审核。
-source_evidence:
-- evidence_id: bs2088_index_20261019
-  url: https://www.itu.int/rec/R-REC-BS.2088
-  accessed: '2026-10-19'
-  observed_via: author_web_retrieval
-  locator: Main and previous versions table
-  observation_zh: 官方索引显示 BS.2088-2 (11/2025) 为 In force (Main)，-1 (10/2019) 与 -0 (10/2015) 均为 Superseded。
-- evidence_id: bs2088_2_edition_20261019
-  url: https://www.itu.int/rec/R-REC-BS.2088-2-202511-I/en
-  accessed: '2026-10-19'
-  observed_via: author_web_retrieval
-  locator: Recommendation identity, approval date, status and English PDF listing
-  observation_zh: 官方版次页确认 BS.2088-2 于 2025-11-25 批准，状态为 In force (Main)；英文 PDF posted 日期为 2026-04-13，不替代批准日期。
-- evidence_id: bs2088_2_scope_20261019
-  url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2088-2-202511-I!!PDF-E.pdf
-  accessed: '2026-10-19'
-  observed_via: author_web_retrieval
-  locator: 'Printed pages 1–3: Scope, recommends, Annex 1 Introduction; printed page 1 editorial footnote (PDF pages 3–5)'
-  observation_zh: Scope 明确规范 BW64 音频文件格式，用于大型多声道文件及包括 ADM 在内的元数据；Annex 1 说明其基于 WAVE/RIFF，采用 EBU Tech 3306 的核心元素，但只力求尽可能兼容 BS.1352。脚注注明 2026 年进行了编辑修订，不是新增版次或批准日期。
+acceptance_events: 01_State/Inbox/acceptance-events/bw64-20261019.yaml
 objects:
 - candidate_id: itur_bs2088_bw64
-  candidate_path: 01_State/Inbox/candidates/itur_bs2088_bw64.yaml
-  candidate_blob: ede5655b1c396988105188d642ae11dc68b79242
-  evidence_ids:
-  - bs2088_index_20261019
-  - bs2088_2_edition_20261019
-  - bs2088_2_scope_20261019
-  proposed_record:
-    id: itur_bs2088_bw64
-    type: artifact
-    kind: standard
-    name_zh: ITU-R BS.2088 BW64音频文件格式
-    name_en: Recommendation ITU-R BS.2088 — Long-form file format for the international exchange of audio programme materials with metadata
-    description_zh: 规定广播波形64位（BW64）音频文件格式，用于携带大型多声道音频及包括音频定义模型（ADM）在内的元数据；本记录固定到BS.2088-2（11/2025）。
-    description_en: Specifies the Broadcast Wave 64Bit (BW64) audio file format for large multichannel audio files and associated metadata, including the Audio Definition Model (ADM); this record is pinned to BS.2088-2 (11/2025).
-    version: BS.2088-2 (11/2025)
-    external_identifiers:
-    - namespace: itu
-      value: bs.2088
-    official_url: https://www.itu.int/rec/R-REC-BS.2088
-    versions:
-    - version: BS.2088-2 (11/2025)
-      status: in_force
-      url: https://www.itu.int/rec/R-REC-BS.2088-2-202511-I/en
-    scope_notes_zh: itu:bs.2088保留为建议书的工作级标识，当前定义固定到2025-11-25批准的BS.2088-2。现行PDF注明2026年编辑修订，不能将其当作新批准日期或新版。本记录与EBU Tech 3306（RF64）、Tech 3285（BWF）出版物保持独立，不据此推断完全向后兼容或主体等价。
-    scope_notes_en: itu:bs.2088 remains a work-level Recommendation identifier; the definition is pinned to BS.2088-2, approved on 2025-11-25. The current PDF notes editorial amendments in 2026, not a new approval date or edition. This record stays distinct from the EBU Tech 3306 (RF64) and Tech 3285 (BWF) publications; universal backward compatibility or subject equivalence is not inferred.
-    sources:
-    - url: https://www.itu.int/rec/R-REC-BS.2088
-      title: Recommendation ITU-R BS.2088
-      language: en
-      accessed: '2026-10-19'
-    - url: https://www.itu.int/rec/R-REC-BS.2088-2-202511-I/en
-      title: Recommendation ITU-R BS.2088-2 (11/2025)
-      language: en
-      accessed: '2026-10-19'
-    - url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2088-2-202511-I!!PDF-E.pdf
-      title: Recommendation ITU-R BS.2088-2 — Scope and Annex 1
-      language: en
-      accessed: '2026-10-19'
+  canonical_id: itur_bs2088_bw64
+  acceptance_event_id: accept-20261019-bw64-itur_bs2088_bw64
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/448
+notes_zh:
+- 本文件仅为引用式交付回执；完整被审 proposed_record 保留于固定 Git commit/blob，不维护第二份正式字段。
+- 独立语义结论与后续序列化复核相互独立，CI 不替代语义审核。
