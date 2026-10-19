@@ -19,6 +19,7 @@ SEARCH_SCRIPT = """
   if(!input||!form||!status||!results)return;
 
   let index=[];
+  let indexState='loading';
   const normalize=value=>(value||'').toLocaleLowerCase();
   const escapeHtml=value=>String(value).replace(/[&<>\"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[ch]));
 
@@ -33,6 +34,8 @@ SEARCH_SCRIPT = """
     const trimmed=query.trim();
     input.value=trimmed;
     results.innerHTML='';
+    if(indexState==='loading'){status.textContent='正在载入搜索索引…';return;}
+    if(indexState==='failed'){status.textContent='搜索索引载入失败；稳定对象页面仍可通过首页和已有链接访问。';return;}
     if(!trimmed){status.textContent='输入名称、关键词或稳定 ID 开始搜索。';return;}
     const q=normalize(trimmed);
     const matches=index
@@ -60,10 +63,11 @@ SEARCH_SCRIPT = """
   form.addEventListener('submit',event=>{event.preventDefault();setQuery(input.value,true);});
   addEventListener('popstate',()=>render(currentQuery()));
 
+  render(currentQuery());
   fetch('search-index.json',{credentials:'same-origin'})
     .then(response=>{if(!response.ok)throw new Error('HTTP '+response.status);return response.json();})
-    .then(data=>{index=Array.isArray(data)?data:[];render(currentQuery());})
-    .catch(()=>{status.textContent='搜索索引载入失败；稳定对象页面仍可通过首页和已有链接访问。';});
+    .then(data=>{index=Array.isArray(data)?data:[];indexState='loaded';render(currentQuery());})
+    .catch(()=>{indexState='failed';render(currentQuery());});
 })();
 </script>
 """
