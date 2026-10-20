@@ -1,0 +1,41 @@
+packet_id: r128_bs1770_relation_20261020
+status: pending_independent_semantic_review
+baseline_commit: a5bb6d92b66ae6efe031ff2f73473288928ef31f
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅新增两个已有正式对象间的uses关系；不更改对象、模型、治理或页面。
+- 独立复核关系方向、版次边界、一手证据及现有关系合同。
+source_evidence:
+- evidence_id: r128_measurement
+  url: https://tech.ebu.ch/files/live/sites/tech/files/shared/r/r128.pdf
+  accessed: '2026-10-20'
+  observed_via: author_web_retrieval
+  locator: 'EBU R 128-2023, printed pages 3–5: considering e/f, recommends k/m, reference [3]'
+  observation_zh: R128 V5要求节目响度与真峰值使用符合BS.1770的仪表测量，并引用其门限算法；参考文献[3]未指定BS.1770版次。
+relations:
+- proposal_id: ebu_r128_uses_itur_bs1770
+  evidence_ids:
+  - r128_measurement
+  proposed_record:
+    id: ebu_r128_uses_itur_bs1770
+    type: relation
+    name_zh: EBU R 128使用ITU-R BS.1770测量算法
+    name_en: EBU R 128 uses ITU-R BS.1770 measurement algorithms
+    source: ebu_r128
+    relation: uses
+    target: itur_bs1770
+    context:
+      version_context:
+        source: EBU R 128 Version 5.0 (11/2023)
+        target: ITU-R BS.1770 (undated reference; work-level)
+      conditions_zh: 仅表述R128 V5在节目响度与真峰值测量中使用BS.1770算法。原文未指定BS.1770版次；目标对象当前固定到BS.1770-5不代表R128专门引用该版，也不表示两项标准等价或BS.1770规定R128的-23
+        LUFS目标。
+      conditions_en: Limited to use of BS.1770 algorithms for programme loudness and true-peak measurement in R128
+        V5. Its reference is undated; the target record currently pinned to BS.1770-5 does not establish an edition-specific
+        citation, equivalence between the standards, or attribution of the R128 -23 LUFS target to BS.1770.
+    evidence:
+    - url: https://tech.ebu.ch/files/live/sites/tech/files/shared/r/r128.pdf
+      title: EBU R 128-2023 — recommendations k/m and reference [3], pages 4–5
+      language: en
+      accessed: '2026-10-20'
