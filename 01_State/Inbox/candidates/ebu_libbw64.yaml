@@ -13,13 +13,14 @@ locators:
 - url: https://github.com/ebu/libbw64/tree/3a43f909f7e8f6bef93403816e9b73b8bfa5a133
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - ebu_libbw64
   reasons:
-  - 以官方仓库标识软件库主体，发行版仅限定本次证据快照；不把库等同于对应ITU-R标准或维护组织。
+  - 经独立语义复核后由事件accept-20261020-audio-library-ebu_libbw64接纳；指向正式软件库对象，防止再次创建。原始new状态见冻结候选commit/blob。
   merge_authorized: false
 unknowns: []
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_audio_library_semantics
