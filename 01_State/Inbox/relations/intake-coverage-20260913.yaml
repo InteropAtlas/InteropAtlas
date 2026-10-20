@@ -115,6 +115,108 @@ memberships:
   ref: {surface: canonical, id: skos_reference}
 - category_id: semantics
   ref: {surface: canonical, id: json_ld_1.1}
+# 2026-10-20：补充已收录媒体对象的有限导航入口，复用上方既有类别，不改变类别定义或优先级。
+# 归属是 IA 编者依据已记录范围作出的导航判断，不是来源机构的领域分类或 Canonical 技术关系。
+# 依据基线 ddfaae20dc34a09516367bc2ec08f1aa6cb4b276 下各对象的 description、scope_notes 与 sources。
+# 以下文件名均相对于 01_State/01_Objects/；版本、历史状态和实现限制以对应对象为准。
+# 本补充不声称穷尽媒体领域、所有可归属类别或现实方案；未列对象不表示没有相应能力。
+# 不更新 03_Evolution 中的冻结覆盖快照，也不把本 draft 计划晋升为全库分类合同。
+# smpte_st292.yaml：串行数字接口的数据格式与接口要求；只指 ST 292-1，不合并其他 SDI 标准。
+- category_id: physical
+  ref: {surface: canonical, id: smpte_st292}
+# smpte_st424.yaml：3 Gb/s 同轴接口的电气与物理特性。
+- category_id: physical
+  ref: {surface: canonical, id: smpte_st424}
+# smpte_st2082.yaml：12G-SDI 同轴接口的电气与物理特性；只指 ST 2082-1。
+- category_id: physical
+  ref: {surface: canonical, id: smpte_st2082}
+# itur_bs1770.yaml：节目响度与数字音频真峰值电平的客观测量算法。
+- category_id: measurement
+  ref: {surface: canonical, id: itur_bs1770}
+# smpte_st2022_6.yaml：高比特率媒体信号的 IP 封装与网络传输；不推断与 ST 2110 的关系。
+- category_id: transport
+  ref: {surface: canonical, id: smpte_st2022_6}
+# aes67.yaml：专业网络音频互操作，涵盖同步、传输、会话描述和连接管理。
+- category_id: media_network
+  ref: {surface: canonical, id: aes67}
+# smpte_st2022_6.yaml：高比特率媒体信号的 IP 网络传输；与 transport 中的引用是同一对象。
+- category_id: media_network
+  ref: {surface: canonical, id: smpte_st2022_6}
+# hls_rfc8216.yaml：多媒体流传输的服务器/客户端协议；保留 RFC 8216 的固定版本范围。
+- category_id: media_network
+  ref: {surface: canonical, id: hls_rfc8216}
+# w3c_webrtc.yaml：浏览器或设备之间发送/接收媒体的实时通信 API，不把 API 当作传输协议。
+- category_id: media_network
+  ref: {surface: canonical, id: w3c_webrtc}
+# aom_av1.yaml：AV1 视频比特流格式与解码过程。
+- category_id: image_color
+  ref: {surface: canonical, id: aom_av1}
+# arib_std_b67.yaml：HLG HDR-TV 的图像特性、色度学、信号格式与数字表示。
+- category_id: image_color
+  ref: {surface: canonical, id: arib_std_b67}
+# itur_bt601.yaml：525/625 行数字电视的演播室编码与采样参数。
+- category_id: image_color
+  ref: {surface: canonical, id: itur_bt601}
+# itur_bt709.yaml：HDTV 制作与节目交换的图像参数。
+- category_id: image_color
+  ref: {surface: canonical, id: itur_bt709}
+# itur_bt1886.yaml：HDTV 演播室平板显示的参考电光转换函数，不扩大到通用 HDR。
+- category_id: image_color
+  ref: {surface: canonical, id: itur_bt1886}
+# itur_bt2020.yaml：UHDTV 制作与节目交换的系统图像参数。
+- category_id: image_color
+  ref: {surface: canonical, id: itur_bt2020}
+# itur_bt2100.yaml：HDR 电视制作与节目交换的图像参数。
+- category_id: image_color
+  ref: {surface: canonical, id: itur_bt2100}
+# ebu_bwf.yaml：用于广播音频交换与归档的 BWF 格式。
+- category_id: editing
+  ref: {surface: canonical, id: ebu_bwf}
+# ebu_rf64.yaml：RF64 音频文件格式的历史出版物入口；保留已被取代的状态，不推荐新采用。
+- category_id: editing
+  ref: {surface: canonical, id: ebu_rf64}
+# itur_bs2088_bw64.yaml：用于大型多声道音频及元数据的节目材料交换格式。
+- category_id: editing
+  ref: {surface: canonical, id: itur_bs2088_bw64}
+# ebu_libbw64.yaml：BW64 音频文件读写的实现入口；不宣称完整 ADM 处理或符合后出的 BS.2088-2。
+- category_id: editing
+  ref: {surface: canonical, id: ebu_libbw64}
+# ebu_r128.yaml：节目音频响度归一化与电平管理建议。
+- category_id: editing
+  ref: {surface: canonical, id: ebu_r128}
+# w3c_ttml2.yaml：创作系统之间交换带时间信息的文本内容。
+- category_id: editing
+  ref: {surface: canonical, id: w3c_ttml2}
+# w3c_imsc.yaml：TTML2 的字幕与说明字幕交付配置。
+- category_id: editing
+  ref: {surface: canonical, id: w3c_imsc}
+# ebu_tt_d.yaml：通过 IP 网络分发字幕的 XML 格式。
+- category_id: editing
+  ref: {surface: canonical, id: ebu_tt_d}
+# etsi_en300743.yaml：在 DVB 码流中编码和传送字幕及图形；保留 V1.6.1 范围。
+- category_id: editing
+  ref: {surface: canonical, id: etsi_en300743}
+# itur_bt2390.yaml：HDR 制作与节目交换的系统背景报告，不将 report 升格为 standard。
+- category_id: editing
+  ref: {surface: canonical, id: itur_bt2390}
+# itur_bt2408.yaml：HDR 制作的参考电平、监看、SDR/HDR 整合与 PQ/HLG 转换实践报告。
+- category_id: editing
+  ref: {surface: canonical, id: itur_bt2408}
+# ebu_ebucore.yaml：视听内容的描述性及技术/结构元数据；保留 v1.10 历史记录范围。
+- category_id: metadata
+  ref: {surface: canonical, id: ebu_ebucore}
+# itur_bs2076_adm.yaml：以 XML 描述音频文件格式、内容和音轨的 ADM 元数据结构。
+- category_id: metadata
+  ref: {surface: canonical, id: itur_bs2076_adm}
+# ebu_libadm.yaml：ADM XML 的解析、修改、创建和写入实现；不宣称完整符合性或 S-ADM 支持。
+- category_id: metadata
+  ref: {surface: canonical, id: ebu_libadm}
+# ebu_bwf.yaml：BWF Version 2 加入响度元数据；与 editing 中的引用是同一对象。
+- category_id: metadata
+  ref: {surface: canonical, id: ebu_bwf}
+# itur_bs2088_bw64.yaml：BW64 携带包括 ADM 在内的关联元数据；与 editing 中的引用是同一对象。
+- category_id: metadata
+  ref: {surface: canonical, id: itur_bs2088_bw64}
 canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
 proposals:
 - id: quic_tls_version
