@@ -1,0 +1,131 @@
+packet_id: audio_library_implementations_20261020
+status: pending_independent_semantic_review
+baseline_commit: 78b2d73e3a806258e5fdbf996c09ecda8b0a5d6b
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 新增两个独立的软件库实现对象和一条有文档依据的推荐配合关系；使用已有system/library与recommended_with词汇。
+- 不把旧发行版的功能说明推断为符合2025年标准，不新增implements、uses或兼容性关系。
+- Reviewer须独立核验候选身份、全部proposed_record及关系，特别检查版本限定与软件库/标准边界。
+- 不改页面、Schema、治理或长期设计，不重开#146或处理#439/#416。
+source_evidence:
+- url: https://github.com/ebu/libadm/tree/1f3e87dc37736ed42104969f00b6c4cbd43221e6
+  locator: release 0.14.0 README.md and CHANGELOG.md
+  observation_zh: 官方tag解析到此commit，发行版源码已读取；只用固定快照支持声明。
+- url: https://github.com/ebu/libbw64/tree/3a43f909f7e8f6bef93403816e9b73b8bfa5a133
+  locator: release 0.10.0 README.md and CHANGELOG.md
+  observation_zh: 官方tag解析到此commit，发行版源码已读取；只用固定快照支持声明。
+objects:
+- candidate_id: ebu_libadm
+  candidate_path: 01_State/Inbox/candidates/ebu_libadm.yaml
+  candidate_blob: bf638955bec57ed73109b00085feed58bed879e8
+  preflight:
+    canonical_records: 190
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+  proposed_record:
+    id: ebu_libadm
+    type: system
+    kind: library
+    name_zh: libadm音频定义模型处理库
+    name_en: libadm Audio Definition Model handling library
+    description_zh: 用于解析、修改、创建和写入音频定义模型（ADM）XML的C++库；本记录固定到0.14.0发行版。
+    description_en: A C++ library for parsing, modifying, creating and writing Audio Definition Model (ADM) XML;
+      this record is pinned to release 0.14.0.
+    version: 0.14.0
+    external_identifiers:
+    - namespace: github
+      value: ebu/libadm
+    official_url: https://github.com/ebu/libadm
+    versions:
+    - version: 0.14.0
+      status: released
+      url: https://github.com/ebu/libadm/releases/tag/0.14.0
+    scope_notes_zh: 主体是软件库，而非BS.2076标准或EBU组织。0.14.0变更日志记录了若干BS.2076-2功能；README说明标准修订可能滞后、部分子元素缺失且不支持S-ADM。此处不宣称完整符合BS.2076-2或BS.2076-3，不把发行版固定解释为最新版本声明。
+    scope_notes_en: The subject is the software library, not the BS.2076 standard or EBU organization. The 0.14.0
+      changelog records selected BS.2076-2 features; the README warns of delayed revision support, missing sub-elements
+      and no S-ADM support. No full conformance to BS.2076-2 or BS.2076-3, or latest-release status, is asserted.
+    sources:
+    - url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/README.md
+      title: libadm 0.14.0 — Introduction, features and scope
+      language: en
+      accessed: '2026-10-20'
+    - url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/CHANGELOG.md
+      title: libadm 0.14.0 — Release changelog
+      language: en
+      accessed: '2026-10-20'
+- candidate_id: ebu_libbw64
+  candidate_path: 01_State/Inbox/candidates/ebu_libbw64.yaml
+  candidate_blob: 3db64c16b78b52e78d1a5e04573d472723ef373d
+  preflight:
+    canonical_records: 190
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+  proposed_record:
+    id: ebu_libbw64
+    type: system
+    kind: library
+    name_zh: libbw64音频文件读写库
+    name_en: libbw64 Broadcast Wave 64 file library
+    description_zh: 用于读写BW64音频文件的仅头文件C++库，支持大于4GB的文件以及axml和chna块；本记录固定到0.10.0发行版。
+    description_en: A header-only C++ library for reading and writing BW64 audio files, including files larger than
+      4 GB and axml/chna chunks; pinned to release 0.10.0.
+    version: 0.10.0
+    external_identifiers:
+    - namespace: github
+      value: ebu/libbw64
+    official_url: https://github.com/ebu/libbw64
+    versions:
+    - version: 0.10.0
+      status: released
+      url: https://github.com/ebu/libbw64/releases/tag/0.10.0
+    scope_notes_zh: 主体是软件库，而非BS.2088标准、BW64格式或EBU组织。README将ADM XML内容处理交给可配合使用的libadm；本记录不把块读写当作完整ADM语义处理，不宣称0.10.0符合后来发布的BS.2088-2，也不宣称其为最新发行版。
+    scope_notes_en: The subject is the software library, not the BS.2088 standard, BW64 format or EBU organization.
+      The README points to libadm for ADM XML processing. Chunk I/O is not treated as full ADM semantic processing;
+      no conformance of 0.10.0 to the later BS.2088-2, or latest-release status, is asserted.
+    sources:
+    - url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/README.md
+      title: libbw64 0.10.0 — Introduction, features and scope
+      language: en
+      accessed: '2026-10-20'
+    - url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/CHANGELOG.md
+      title: libbw64 0.10.0 — Release changelog
+      language: en
+      accessed: '2026-10-20'
+relations:
+- proposal_id: libbw64_recommended_with_libadm
+  proposed_record:
+    id: libbw64_recommended_with_libadm
+    type: relation
+    name_zh: libbw64文档推荐配合libadm处理ADM元数据
+    name_en: libbw64 documentation recommends libadm for ADM metadata processing
+    source: ebu_libbw64
+    relation: recommended_with
+    target: ebu_libadm
+    context:
+      version_context:
+        source: libbw64 0.10.0
+        target: libadm (undated library reference; work-level)
+      conditions_zh: 仅表示libbw64 0.10.0 README建议使用libadm解析、创建、修改及写入axml块内的ADM XML。该建议未指定libadm版次；目标记录固定到0.14.0不代表经过验证的版本配对、强制依赖、兼容性认证或部署采用。
+      conditions_en: Limited to the libbw64 0.10.0 README suggestion to use libadm to parse, create, modify and
+        write ADM XML in the axml chunk. It names no libadm release; the target record pinned to 0.14.0 does not
+        establish a tested version pair, mandatory dependency, compatibility certification or deployment adoption.
+    evidence:
+    - url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/README.md
+      title: 'libbw64 0.10.0 — Introduction: libadm recommendation'
+      language: en
+      accessed: '2026-10-20'
+    - url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/README.md
+      title: 'libadm 0.14.0 — Introduction: use alongside libbw64'
+      language: en
+      accessed: '2026-10-20'
