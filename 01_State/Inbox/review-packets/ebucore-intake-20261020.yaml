@@ -1,85 +1,17 @@
 packet_id: ebucore_intake_20261020
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+reviewed_packet_commit: 1a434c3355562b11881d8732887482c4a1dfac3e
+reviewed_packet_blob: 5056d37fadf2b377fdcb8ad64b926bcf15058360
+reviewed_packet_path: 01_State/Inbox/review-packets/ebucore-intake-20261020.yaml
 baseline_commit: 2eb4a5b0a1a6007ff3af1414c3ebed0775096d94
 executor: Agent — OpenAI / dot
-reviewer: null
-review_scope_zh:
-- '仅处理 #146 的既有候选 ebu_ebucore；保留原 candidate_id、ebu:tech.3293 标识及 Doubao 贡献，不扩候选池、词表、模型或规范。'
-- 采用既有 artifact/specification 分类记录 EBU Tech 3293；定义固定到 v1.10（2020年4月），保留为已被取代的历史出版物，不将其标为当前 EBU 元数据规范。
-- EBUCorePlus 是 Tech 3397 的独立身份。本轮只用其官方替代声明核定 Tech 3293 的历史状态，不建立 EBUCorePlus 对象、版次主体或关系，不推断兼容、迁移或实现符合性。
-- Reviewer 须独立核对完整 Canonical、冻结候选、名称、外部标识、版次、被取代状态及拟入库字段，明确是否 acceptable_for_ordinary_acceptance 及能否整条原样物化。
-- 作者读取 EBU 两份官方出版页，下载官方 Tech 3293 与 Tech 3397 PDF，核对 Tech 3293 封面、Introduction、第1节及第2.1节，以及 Tech 3397 封面和 Scope；另视觉核对 Tech 3293 第7页和 Tech 3397 第iii页。这是最小身份、定义及历史状态核验，不是全文技术审计。真实独立结论须留在关联 PR，机器检查不能替代语义审核。
-preflight:
-  canonical_records: 185
-  candidate_records: 193
-  acceptance_events: 63
-  machine_route: review_required
-  normalized_identifier_collisions: []
-  validation_errors: []
-  notes_zh:
-  - 对当前185个正式对象全量建立结构化及有证据的遗留标识索引；ebu:tech.3293无碰撞，目标id尚不存在，原候选只有一份。
-  - 对正式对象补充检索 EBUCore、Tech 3293 与 Tech 3397 的名称及标识变体，未发现已存在的主体；不把旧候选自身当作正式对象。
-source_evidence:
-- evidence_id: tech3293_publication_20261020
-  url: https://tech.ebu.ch/publications/tech3293
-  accessed: '2026-10-20'
-  observed_via: author_web_retrieval
-  locator: Publication title, identifier, date and introductory paragraphs
-  observation_zh: EBU官方页面将出版物标为 EBU Core Metadata Set v.1.10、EBU Tech 3293，日期为2020-04-16，并提供该规范及相关模式的入口。
-- evidence_id: tech3293_scope_20261020
-  url: https://tech.ebu.ch/files/live/sites/tech/files/shared/tech/tech3293.pdf
-  accessed: '2026-10-20'
-  observed_via: author_official_pdf_download_and_text_extraction
-  locator: 'Cover; printed page 3 Introduction; printed pages 7–8, sections 1 and 2.1 (PDF pages 1, 3, 7–8)'
-  downloaded_bytes: 1812136
-  downloaded_sha256: 206b123e816c7e8fe2937c0a04931a90f20710897226d85a1ef950d4300d67ed
-  observation_zh: 封面确认 Tech 3293 v1.10 于2020年4月出版。Introduction及第1、2.1节支持其基于Dublin Core、用描述性及技术/结构元数据描述视听内容，并用于广播资源的管理、交换及保存。不把该2020文本中的持续维护表述当作2026年的现行状态证据。
-- evidence_id: tech3397_supersession_20261020
-  url: https://tech.ebu.ch/files/live/sites/tech/files/shared/tech/tech3397.pdf
-  accessed: '2026-10-20'
-  observed_via: author_official_pdf_download_and_text_extraction
-  locator: 'Cover and printed page iii, Scope (PDF pages 1 and 3); corroborated by https://tech.ebu.ch/publications/tech3397'
-  downloaded_bytes: 2039524
-  downloaded_sha256: 7a3b1c5ca7c03d38e5c79adf89b8e60326975dade6baa5465f31a92a1442e3bb
-  observation_zh: 2025年4月的 Tech 3397 v2 Scope 明确说明 EBUCorePlus 取代 Tech 3293 和 Tech 3351，并且该版本不向后兼容；官方出版页作出相同说明。因此本条拟将 Tech 3293 记为 superseded，保留其历史身份，不与 EBUCorePlus 合并。
+acceptance_events: 01_State/Inbox/acceptance-events/ebucore-20261020.yaml
 objects:
 - candidate_id: ebu_ebucore
-  candidate_path: 01_State/Inbox/candidates/ebu_ebucore.yaml
-  candidate_blob: 9158602cde93938b2d70aa9b83a41e221b13a1f3
-  evidence_ids:
-  - tech3293_publication_20261020
-  - tech3293_scope_20261020
-  - tech3397_supersession_20261020
-  proposed_record:
-    id: ebu_ebucore
-    type: artifact
-    kind: specification
-    name_zh: EBU Tech 3293 EBU核心元数据集（EBUCore）
-    name_en: EBU Tech 3293 — EBU Core Metadata Set (EBUCore)
-    description_zh: EBU发布的视听内容元数据规范，基于Dublin Core提供描述性及技术/结构元数据，用于广播资源的管理、交换和保存；本历史记录固定到v1.10（2020年4月）。
-    description_en: EBU metadata specification extending Dublin Core with descriptive and technical/structural metadata for audiovisual content, supporting the management, exchange and preservation of broadcasting resources; this historical record is pinned to v1.10 (April 2020).
-    version: '1.10'
-    external_identifiers:
-    - namespace: ebu
-      value: tech.3293
-    official_url: https://tech.ebu.ch/publications/tech3293
-    versions:
-    - version: '1.10'
-      status: superseded
-      url: https://tech.ebu.ch/publications/tech3293
-    scope_notes_zh: ebu:tech.3293保留为Tech 3293出版物的标识，本记录固定到v1.10。EBU Tech 3397 v2（2025年4月）的Scope明确取代Tech 3293，并声明该版本不向后兼容。EBUCore与EBUCorePlus保持独立身份；本记录不表示Tech 3293仍是现行规范，不包含实现符合性或迁移结论。
-    scope_notes_en: ebu:tech.3293 remains the identifier for the Tech 3293 publication, pinned here to v1.10. The Scope of EBU Tech 3397 v2 (April 2025) explicitly replaces Tech 3293 and states that the new version is not backward compatible. EBUCore and EBUCorePlus retain distinct identities; this record does not present Tech 3293 as current or assert implementation conformance or migration conclusions.
-    sources:
-    - url: https://tech.ebu.ch/publications/tech3293
-      title: EBU Core Metadata Set v.1.10 — EBU Tech 3293
-      language: en
-      accessed: '2026-10-20'
-    - url: https://tech.ebu.ch/files/live/sites/tech/files/shared/tech/tech3293.pdf
-      title: EBU Tech 3293 v1.10 — Introduction and Scope
-      language: en
-      accessed: '2026-10-20'
-    - url: https://tech.ebu.ch/files/live/sites/tech/files/shared/tech/tech3397.pdf
-      title: EBU Tech 3397 v2 — Scope
-      language: en
-      accessed: '2026-10-20'
+  canonical_id: ebu_ebucore
+  acceptance_event_id: accept-20261020-ebucore-ebu_ebucore
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/450
+notes_zh:
+- 本文件仅为引用式交付回执；完整被审 proposed_record 保留于固定 Git commit/blob，不维护第二份正式字段。
+- 独立语义结论与后续序列化复核相互独立，CI 不替代语义审核。
