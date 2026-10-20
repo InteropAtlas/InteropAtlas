@@ -1,0 +1,112 @@
+packet_id: media_library_intake_20261020
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 07c882d8e90c5fdfb66d445a2676e77ea8a9cb7e
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 既有两个new候选的小批普通接纳；不改关系、页面、Schema、治理或项目设计。
+- 保持原始候选标识与贡献；分别按report和standard分类，工作级标识不冒充版次标识。
+- Reviewer须独立复核原候选、全库身份预检、官方来源及全部proposed_record，明确是否可原样物化。
+- '#146已关闭，仅引用流程来源，不重开或更改其状态。'
+source_evidence:
+- url: https://www.itu.int/pub/R-REP-BT.2408-9-2026
+  locator: Heading, approved month, status, Posted
+  observation_zh: BT.2408-9 (03/2026)；2026-03批准；In force (Main)；2026-05-25文件上传。
+- url: https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-BT.2408-9-2026-TOC-HTM-E.htm
+  locator: Sections 2, 3, 5, 6
+  observation_zh: 目录支持参考电平、监看、SDR/HDR整合、PQ/HLG转换的主题概述。
+- url: https://www.etsi.org/deliver/etsi_en/300700_300799/300743/01.06.01_60/en_300743v010601p.pdf
+  locator: Cover, foreword and clause 1 (printed page 8)
+  observation_zh: 已发布欧洲标准，V1.6.1 (2018-10)；范围包含DVB字幕/图形编码传送、CLUT和MPEG-2 TS承载。
+- url: https://portal.etsi.org/webapp/workprogram/Report_WorkItem.asp?WKI_ID=54065
+  locator: Current Status / Latest Version
+  observation_zh: Publication (2018-10-30)，1.6.1；不据此推断所有后续工作的状态。
+objects:
+- candidate_id: itur_bt2408
+  candidate_path: 01_State/Inbox/candidates/itur_bt2408.yaml
+  candidate_blob: 4c0c4383f04faa46f657e57481dc97380a3e7187
+  preflight:
+    canonical_records: 188
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+  proposed_record:
+    id: itur_bt2408
+    type: artifact
+    kind: report
+    name_zh: ITU-R BT.2408 高动态范围电视制作操作实践指南报告
+    name_en: Report ITU-R BT.2408 — Guidelines for operational practices in high dynamic range television production
+    description_zh: 讨论HDR电视制作中的参考电平、监看、SDR与HDR制作整合以及PQ/HLG转换；本记录固定到 BT.2408-9（03/2026）报告。
+    description_en: Discusses reference levels, monitoring, integration of SDR and HDR production, and PQ/HLG conversion
+      in HDR television production; pinned to Report BT.2408-9 (03/2026).
+    version: BT.2408-9 (03/2026)
+    external_identifiers:
+    - namespace: itu
+      value: bt.2408
+    official_url: https://www.itu.int/pub/R-REP-BT.2408-9-2026
+    versions:
+    - version: BT.2408-9 (03/2026)
+      status: in_force
+      url: https://www.itu.int/pub/R-REP-BT.2408-9-2026
+    scope_notes_zh: 保留 itu:bt.2408 工作级标识，定义固定到2026年3月批准的第9版报告。2026-05-25是英文文件上传日期。此为实践指导报告，不是规范性推荐书、实现案例记录或设备符合性声明；范围仅据官方目录概述。
+    scope_notes_en: Retains itu:bt.2408 as the work-level identifier, pinned to revision 9 approved in March 2026.
+      The English file was posted on 2026-05-25. This is operational guidance, not a normative Recommendation, an
+      implementation-case record, or a device-conformance assertion; scope is summarized from the official contents.
+    sources:
+    - url: https://www.itu.int/pub/R-REP-BT.2408-9-2026
+      title: Report ITU-R BT.2408-9 — Edition and status
+      language: en
+      accessed: '2026-10-20'
+    - url: https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-BT.2408-9-2026-TOC-HTM-E.htm
+      title: Report ITU-R BT.2408-9 — Official table of contents
+      language: en
+      accessed: '2026-10-20'
+- candidate_id: etsi_en300743
+  candidate_path: 01_State/Inbox/candidates/etsi_en300743.yaml
+  candidate_blob: adf82be04299861a0d7c804f0e603f0771d4ff94
+  preflight:
+    canonical_records: 188
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+  proposed_record:
+    id: etsi_en300743
+    type: artifact
+    kind: standard
+    name_zh: ETSI EN 300 743 数字视频广播字幕系统
+    name_en: ETSI EN 300 743 — Digital Video Broadcasting (DVB); Subtitling systems
+    description_zh: 规定在DVB码流中编码和传送字幕、标志及其他图形元素的方法，使用颜色查找表并以MPEG-2传输流承载；本记录固定到 V1.6.1（2018-10）。
+    description_en: Specifies how subtitles, logos and other graphics are encoded and carried in DVB bitstreams,
+      using colour lookup tables and MPEG-2 Transport Stream carriage; pinned to V1.6.1 (2018-10).
+    version: V1.6.1 (2018-10)
+    external_identifiers:
+    - namespace: etsi
+      value: en.300.743
+    official_url: https://www.etsi.org/deliver/etsi_en/300700_300799/300743/01.06.01_60/en_300743v010601p.pdf
+    versions:
+    - version: V1.6.1 (2018-10)
+      status: published
+      url: https://www.etsi.org/deliver/etsi_en/300700_300799/300743/01.06.01_60/en_300743v010601p.pdf
+    scope_notes_zh: 保留 etsi:en.300.743 工作级标识，定义固定到已发布的V1.6.1。采用发布版PDF（_60/p），不把原候选草案locator（_20/a）当作发布版。此为欧洲标准；不等同于DVB
+      TTML字幕规范，不宣称具体接收机兼容性或实现符合性。
+    scope_notes_en: Retains etsi:en.300.743 as the work-level identifier, pinned to published V1.6.1. Uses the published
+      PDF (_60/p), not the original candidate draft locator (_20/a). This is a European Standard, not the DVB TTML
+      subtitling specification; no receiver compatibility or implementation conformance is asserted.
+    sources:
+    - url: https://www.etsi.org/deliver/etsi_en/300700_300799/300743/01.06.01_60/en_300743v010601p.pdf
+      title: ETSI EN 300 743 V1.6.1 — Published standard, cover and clause 1
+      language: en
+      accessed: '2026-10-20'
+    - url: https://portal.etsi.org/webapp/workprogram/Report_WorkItem.asp?WKI_ID=54065
+      title: ETSI REN/JTC-DVB-378 — Publication status
+      language: en
+      accessed: '2026-10-20'
