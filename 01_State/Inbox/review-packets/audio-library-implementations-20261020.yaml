@@ -1,0 +1,25 @@
+packet_id: audio_library_implementations_20261020
+status: materialized
+reviewed_packet_commit: 5b4df08a8c88f67bbd075efd966f43752388151b
+reviewed_packet_blob: fc9ea45492af9c273bf017b18d28cc56fa0bd564
+reviewed_packet_path: 01_State/Inbox/review-packets/audio-library-implementations-20261020.yaml
+baseline_commit: 78b2d73e3a806258e5fdbf996c09ecda8b0a5d6b
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/audio-library-implementations-20261020.yaml
+objects:
+- candidate_id: ebu_libadm
+  canonical_id: ebu_libadm
+  acceptance_event_id: accept-20261020-audio-library-ebu_libadm
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150
+- candidate_id: ebu_libbw64
+  canonical_id: ebu_libbw64
+  acceptance_event_id: accept-20261020-audio-library-ebu_libbw64
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150
+relations:
+- relation_id: libbw64_recommended_with_libadm
+  canonical_path: 01_State/02_Relations/audio-library-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150
+notes_zh:
+- 引用式回执；完整proposed_record保留于固定Git commit/blob，不维护第二份正式字段。
+- 新候选在冻结审核提交中进入new状态，故reviewed_against_commit引用该提交；其190条正式对象与原main基线相同。
+- 独立语义审核与序列化复核分离，CI不替代独立审核。
