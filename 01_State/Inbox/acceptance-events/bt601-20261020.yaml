@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261020-bt601-itur_bt601
+candidate_id: itur_bt601
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: itur_bt601
+review:
+  reviewer: Independent Agent — OpenAI / dot / inspect_ia_maintenance
+  reviewed_at: '2026-10-20T04:02:14Z'
+  independent_from_executor: true
+  notes:
+  - 独立 Reviewer 明确给出 acceptable_for_ordinary_acceptance，并允许全部14个 proposed_record 字段及嵌套值原样物化；仅追加必要的生命周期、贡献及接纳溯源。
+  - 独立核对 ITU 官方版次页及 PDF 的封面、出版说明、印刷页1 Scope 和编辑修订脚注，并独立下载 PDF（HTTP 200，1579955字节），SHA-256 与冻结送审材料一致；同时复算全量身份与
+    Schema 预检。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/451
+- https://github.com/InteropAtlas/InteropAtlas/blob/96a15e2d6d5ba4a7aacaccca9903794240e6a5cb/01_State/Inbox/review-packets/bt601-intake-20261020.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/f9d74e778ecf90d4a480e1f5dbad014315fefb3c
+decided_at: '2026-10-20T04:04:00Z'
+notes:
+- 保留 itu:bt.601 工作级标识，定义固定到有效的 BT.601-7（03/2011）；编辑修订、电子出版及文件上传日期不替代推荐书版次。
+- 本事件不接纳包外对象或关系，不宣称全文技术审计、数值实现验证、设备兼容性或实现符合性。
