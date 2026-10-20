@@ -493,6 +493,105 @@ memberships:
 # diataxis.yaml：lessons 按用户需要区分教学、操作、查阅与解释的文档设计方法；不要求重构现有 docs。
 - category_id: design
   ref: {surface: canonical, id: diataxis}
+# 以下成员引用既有能力定义和组织自身明确记录的职责，仍是非互斥导航，不是分类模型扩展。
+# 能力或场景不等于已具备的实现或合规承诺；无外部 sources 的定义只以本库原始 Canonical 描述为依据。
+# 组织入口只覆盖原记录明确的相关职责，不从单个产品或自由 domains 标签推断整个组织的领域范围。
+# data_serialization.yaml：description 明确把结构化数据表示为可存储、交换、重新解析的格式；仅导航到能力定义。
+- category_id: syntax
+  ref: {surface: canonical, id: data_serialization}
+# human_editable_structured_data.yaml：description 明确人工读写结构化事实并保持机器解析能力；不改变事实源维护方式。
+- category_id: syntax
+  ref: {surface: canonical, id: human_editable_structured_data}
+# document_representation.yaml：description 明确用结构化标记表达文档内容、层次和可导航元素。
+- category_id: syntax
+  ref: {surface: canonical, id: document_representation}
+# text_encoding.yaml：description 明确用统一字符编码表示、存储和交换文本字符。
+- category_id: syntax
+  ref: {surface: canonical, id: text_encoding}
+# schema_validation.yaml：description 明确根据机器可读规则检查结构化数据的结构与约束；不是具体规范符合性认证。
+- category_id: syntax
+  ref: {surface: canonical, id: schema_validation}
+# design_token_exchange.yaml：description 明确跨工具交换颜色、尺寸和排版等设计值的结构表达；不要求采用特定设计系统。
+- category_id: syntax
+  ref: {surface: canonical, id: design_token_exchange}
+# version_expression.yaml：summary 明确表达软件/接口版本及兼容性变化语义；不声称版本号本身证明兼容。
+- category_id: syntax
+  ref: {surface: canonical, id: version_expression}
+# linked_data_serialization.yaml：description 明确把全局标识及语义关系数据表示为可交换、可解析的结构化格式。
+- category_id: syntax
+  ref: {surface: canonical, id: linked_data_serialization}
+# linked_data_serialization.yaml：description 明确全局可标识实体与显式语义关系；不表示已部署关联数据服务。
+- category_id: semantics
+  ref: {surface: canonical, id: linked_data_serialization}
+# graph_representation.yaml：description 明确用节点、边表达实体关系并支持查询、遍历、转换。
+- category_id: semantics
+  ref: {surface: canonical, id: graph_representation}
+# knowledge_organization.yaml：description 明确用概念、分类、关联和作用域组织可导航、映射和复用的知识。
+- category_id: semantics
+  ref: {surface: canonical, id: knowledge_organization}
+# date_time_representation.yaml：summary 明确表达日期、时间、时区偏移和时间戳；不等同于时钟同步或测量精度保证。
+- category_id: measurement
+  ref: {surface: canonical, id: date_time_representation}
+# language_identification.yaml：description 明确用标准化语言标签标识内容语言及变体。
+- category_id: metadata
+  ref: {surface: canonical, id: language_identification}
+# license_expression.yaml：summary 明确以机器可解析标识符和表达式描述许可条件；不提供法律适用性判断。
+- category_id: syntax
+  ref: {surface: canonical, id: license_expression}
+# license_expression.yaml：summary 明确描述软件、数据和文档等工件的许可条件；只为复用信息导航，不推断授权有效性。
+- category_id: metadata
+  ref: {surface: canonical, id: license_expression}
+# web_resource_transfer.yaml：description 明确分布式系统间请求、传输和操作 Web 资源表示。
+- category_id: transport
+  ref: {surface: canonical, id: web_resource_transfer}
+# resource_identification.yaml：description 明确用稳定标识符标识和引用资源；仅为资源身份信息导航，不推断标识符解析或唯一性保证。
+- category_id: metadata
+  ref: {surface: canonical, id: resource_identification}
+# interopatlas-fact-source.yaml：description 明确场景目标是选择可供人工贡献及 Schema/Engine 解析的事实源表示；不决定新的维护方式。
+- category_id: syntax
+  ref: {surface: canonical, id: interopatlas_fact_source}
+# human_centered_design.yaml：description 明确基于用户、任务、情境和评价开展交互系统生命周期设计。
+- category_id: design
+  ref: {surface: canonical, id: human_centered_design}
+# human_system_interaction.yaml：description 明确设计和评价人的操作、反馈、控制与任务完成。
+- category_id: design
+  ref: {surface: canonical, id: human_system_interaction}
+# information_presentation.yaml：description 明确信息呈现需支持人的察觉、区分、理解和任务使用。
+- category_id: design
+  ref: {surface: canonical, id: information_presentation}
+# visual_information_presentation.yaml：description 明确视觉布局、分组、编码和层级须考虑人的感知与记忆。
+- category_id: design
+  ref: {surface: canonical, id: visual_information_presentation}
+# web_accessibility.yaml：description 明确不同身体、感官、认知能力及辅助技术的 Web 感知、操作和理解需求。
+- category_id: design
+  ref: {surface: canonical, id: web_accessibility}
+# accessibility_conformance_testing.yaml：description 明确通过可共享规则开展自动、半自动或人工无障碍测试；不宣称本库已符合要求。
+- category_id: design
+  ref: {surface: canonical, id: accessibility_conformance_testing}
+# human_machine_teaming.yaml：description 明确人机协调、角色分配、共享上下文和监督；原来源仍是 ISO/IEC CD 25589 草案。
+- category_id: collaboration
+  ref: {surface: canonical, id: human_machine_teaming}
+# ai_application_lifecycle_governance.yaml：description 明确 AI 生命周期的利益相关方沟通、责任分配和管理；不新增治理义务。
+- category_id: collaboration
+  ref: {surface: canonical, id: ai_application_lifecycle_governance}
+# ietf-json-schema.yaml：description 明确开发维护 JSON Schema 规范、元 Schema 和词汇的项目职责；组织与规范分别保留。
+- category_id: syntax
+  ref: {surface: canonical, id: json_schema_project}
+# unicode-consortium.yaml：description 明确维护 Unicode 及国际化规范、数据的组织职责；不把组织本身当成编码规范。
+- category_id: syntax
+  ref: {surface: canonical, id: unicode_consortium}
+# whatwg.yaml：governance_notes 明确持续维护 HTML 等 Web 平台规范；入口仅指该记录的标记规范职责。
+- category_id: syntax
+  ref: {surface: canonical, id: whatwg}
+# ietf.yaml：description 明确互联网协议标准化职责；仅为网络相关组织入口，不声明其工作仅限传输。
+- category_id: transport
+  ref: {surface: canonical, id: ietf}
+# nist.yaml：governance_notes 明确发布测量相关技术资源；仅为这一记录职责导航，不将跨域机构缩为单一领域。
+- category_id: measurement
+  ref: {surface: canonical, id: nist}
+# agentic-ai-foundation.yaml：governance_notes 明确 Agentic AI 开放项目治理职责与 MCP/goose/AGENTS.md 创始贡献；不等同项目采用。
+- category_id: agents
+  ref: {surface: canonical, id: agentic_ai_foundation}
 canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
 proposals:
 - id: quic_tls_version
