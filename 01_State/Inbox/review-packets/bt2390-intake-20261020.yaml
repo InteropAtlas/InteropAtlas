@@ -1,79 +1,17 @@
 packet_id: bt2390_intake_20261020
-status: pending_independent_semantic_review
+status: materialized
 source_issue: 146
+reviewed_packet_commit: ecff61df1661854a335aff841939a35a849884df
+reviewed_packet_blob: 86c3a21ab8d096e4840407d85b54121c63882390
+reviewed_packet_path: 01_State/Inbox/review-packets/bt2390-intake-20261020.yaml
 baseline_commit: 4a77528a8f366d3336d400aab5e82f2573c7b1e5
 executor: Agent — OpenAI / dot
-reviewer: null
-review_scope_zh:
-- 仅处理既有候选 itur_bt2390；保留原 candidate_id、itu:bt.2390 标识及 Doubao 贡献，不扩候选池、词表、模型或规范。
-- 使用现有 artifact/report 分类，不套用 normative_artifact profile，也不将报告改称推荐书或标准。
-- 最小目录级范围只表达报告讨论的主题；不建立关系边，不作数值实现、设备兼容性或技术正确性结论。
-- Reviewer 须独立核对完整 Canonical、冻结候选、工作级身份、名称、版次、有效状态及全部拟入库字段，明确是否 acceptable_for_ordinary_acceptance 及能否整条原样物化。
-- '源 Issue #146 在本次开始前已关闭；保留其流程来源，不自动重开。用户持续普通维护授权与既有 Candidate Pool 适用；本次不改变项目状态或治理。'
-preflight:
-  baseline_commit: 4a77528a8f366d3336d400aab5e82f2573c7b1e5
-  candidate_blob: 4da859be4cbe1010060a6c2e46103eb7cfc59089
-  canonical_records: 187
-  candidate_records: 193
-  acceptance_events: 65
-  matching_candidates: 1
-  canonical_id_exists: false
-  machine_route: review_required
-  normalized_identifier_collisions: []
-  validation_errors: []
-  identity_text_hits: []
-source_evidence:
-- evidence_id: bt2390_edition_status_20261020
-  url: https://www.itu.int/pub/R-REP-BT.2390-12-2025
-  accessed: '2026-10-20'
-  observed_via: author_web_retrieval
-  locator: Report heading; approval month; status; English-file Posted column
-  observation_zh: ITU版次页标为 Report BT.2390-12（03/2025），2025-03批准，In force (Main)；2025-05-15为文件上传日期。
-- evidence_id: bt2390_toc_20261020
-  url: https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-BT.2390-12-2025-TOC-HTM-E.htm
-  accessed: '2026-10-20'
-  observed_via: author_web_retrieval
-  locator: Sections 1–7, especially 5, 5.4, 6 and 7
-  observation_zh: 官方目录列出HDR介绍与设计目标、系统架构、PQ HDR-TV、显示映射、HLG HDR-TV以及色度抽样的颜色表示。仅支持主题范围概述，不据此推断具体实现行为。
+acceptance_events: 01_State/Inbox/acceptance-events/bt2390-20261020.yaml
 objects:
 - candidate_id: itur_bt2390
-  candidate_path: 01_State/Inbox/candidates/itur_bt2390.yaml
-  candidate_blob: 4da859be4cbe1010060a6c2e46103eb7cfc59089
-  evidence_ids:
-  - bt2390_edition_status_20261020
-  - bt2390_toc_20261020
-  proposed_record:
-    id: itur_bt2390
-    type: artifact
-    kind: report
-    name_zh: ITU-R BT.2390 高动态范围电视制作与国际节目交换报告
-    name_en: Report ITU-R BT.2390 — High dynamic range television for production and international programme
-      exchange
-    description_zh: 介绍高动态范围电视制作与国际节目交换的系统背景，涵盖PQ与HLG系统、显示映射及色度抽样的颜色表示；本记录固定到有效的 BT.2390-12（03/2025）报告。
-    description_en: Discusses system background for HDR television production and international programme
-      exchange, including PQ and HLG systems, display mapping, and colour representation for chroma subsampling;
-      pinned to the in-force Report BT.2390-12 (03/2025).
-    version: BT.2390-12 (03/2025)
-    external_identifiers:
-    - namespace: itu
-      value: bt.2390
-    official_url: https://www.itu.int/pub/R-REP-BT.2390-12-2025
-    versions:
-    - version: BT.2390-12 (03/2025)
-      status: in_force
-      url: https://www.itu.int/pub/R-REP-BT.2390-12-2025
-    scope_notes_zh: 保留 itu:bt.2390 工作级标识，本记录定义固定到2025年3月批准的第12版报告。2025-05-15是英文文件上传日期，不替代版次日期。这是 ITU-R
-      报告，不是推荐书或设备符合性声明；最小范围依据官方目录，不表示完成全文技术审计。
-    scope_notes_en: Retains itu:bt.2390 as the work-level identifier, with this record pinned to revision
-      12 approved in March 2025. The English-file posting date of 2025-05-15 is not the edition date.
-      This is an ITU-R Report, not a Recommendation or a device-conformance assertion; the minimal scope
-      is based on the official table of contents, not a full technical audit.
-    sources:
-    - url: https://www.itu.int/pub/R-REP-BT.2390-12-2025
-      title: Report ITU-R BT.2390-12 (03/2025) — Edition and status
-      language: en
-      accessed: '2026-10-20'
-    - url: https://www.itu.int/dms_pub/itu-r/opb/rep/R-REP-BT.2390-12-2025-TOC-HTM-E.htm
-      title: Report ITU-R BT.2390-12 — Official table of contents
-      language: en
-      accessed: '2026-10-20'
+  canonical_id: itur_bt2390
+  acceptance_event_id: accept-20261020-bt2390-itur_bt2390
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/452
+notes_zh:
+- 本文件仅为引用式交付回执；完整被审 proposed_record 保留于固定 Git commit/blob，不维护第二份正式字段。
+- 独立语义结论与后续序列化复核相互独立，CI 不替代语义审核。
