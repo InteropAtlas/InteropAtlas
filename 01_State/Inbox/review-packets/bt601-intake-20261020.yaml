@@ -1,0 +1,72 @@
+packet_id: bt601_intake_20261020
+status: pending_independent_semantic_review
+source_issue: 146
+baseline_commit: 9ad441f77d18ca052c54eb5d8fc8e41a3a8c0eb3
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- '仅处理 #146 的既有候选 itur_bt601；保留原 candidate_id、itu:bt.601 标识及 Doubao 贡献，不扩候选池、词表、模型或规范。'
+- 采用既有 artifact/standard 分类，保留工作级标识，拟入库定义明确固定到 BT.601-7（03/2011）。2014年11月及2017年3月的编辑性修订、2017年电子出版与2022年文件上传均不另算推荐书版次。
+- 最小技术范围只覆盖525/625行隔行数字电视的演播室编码参数、4:3及16:9画幅，以及 Scope 明示的13.5 MHz采样率；不建立关系边，不扩展颜色矩阵、传输接口或设备兼容性结论。
+- Reviewer 须独立核对完整 Canonical、冻结候选、工作级身份、名称、版次、有效状态及全部拟入库字段，明确是否 acceptable_for_ordinary_acceptance 及能否整条原样物化。
+- 作者读取 ITU 官方版次页，并下载官方英文 PDF，核对封面、版权页、印刷页1的 Scope 及编辑修订脚注，另视觉核对印刷页1。这是最小身份与范围核验，不是全文技术审计。真实独立结论须留在关联 PR，机器检查不能替代语义审核。
+preflight:
+  canonical_records: 186
+  candidate_records: 193
+  acceptance_events: 64
+  machine_route: review_required
+  normalized_identifier_collisions: []
+  validation_errors: []
+  notes_zh:
+  - 对当前186个正式对象全量建立结构化及有证据的遗留标识索引；itu:bt.601无碰撞，目标id尚不存在，原候选只有一份。
+  - 对正式对象补充检索 BT.601、BT601、BT 601、CCIR 601 及 Rec. 601 等名称和标识变体，未发现已存在的主体；不把旧候选自身当作正式对象。
+source_evidence:
+- evidence_id: bt601_edition_status_20261020
+  url: https://www.itu.int/rec/R-REC-BT.601-7-201103-I/en
+  accessed: '2026-10-20'
+  observed_via: author_web_retrieval
+  locator: Recommendation heading, approval date, status and English PDF Posted column
+  observation_zh: ITU 官方版次页标为 BT.601-7（03/2011），批准日为2011-03-08，状态为 In force (Main)；英文 PDF 的2022-03-16是上传日期，不是版次日期。
+- evidence_id: bt601_scope_20261020
+  url: https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.601-7-201103-I!!PDF-E.pdf
+  accessed: '2026-10-20'
+  observed_via: author_official_pdf_download_and_text_extraction
+  locator: Cover; printed page ii publication notice; printed page 1 Scope and editorial-amendment footnote (PDF pages 1–3)
+  downloaded_bytes: 1579955
+  downloaded_sha256: d0c31625983a7f5ad6bef46b10034b1cc16b4bd1c3fd3c2f223fd4bf870945ce
+  observation_zh: 封面固定为 BT.601-7（03/2011）。Scope 支持525/625行隔行数字电视图像及4:3、16:9画幅的13.5 MHz采样。印刷页1脚注将2014年11月及2017年3月的修改列为编辑性修订；印刷页ii的2017年为电子出版年份。
+objects:
+- candidate_id: itur_bt601
+  candidate_path: 01_State/Inbox/candidates/itur_bt601.yaml
+  candidate_blob: f9d74e778ecf90d4a480e1f5dbad014315fefb3c
+  evidence_ids:
+  - bt601_edition_status_20261020
+  - bt601_scope_20261020
+  proposed_record:
+    id: itur_bt601
+    type: artifact
+    kind: standard
+    name_zh: ITU-R BT.601 标准4:3及宽屏16:9画幅数字电视演播室编码参数
+    name_en: Recommendation ITU-R BT.601 — Studio encoding parameters of digital television for standard 4:3 and wide-screen 16:9 aspect ratios
+    description_zh: 规定525/625行隔行数字电视的演播室编码参数，包括4:3及16:9画幅的13.5 MHz采样；本记录固定到有效的 BT.601-7（03/2011）。
+    description_en: Defines digital studio coding parameters for 525/625-line interlaced television, including 13.5 MHz sampling for 4:3 and 16:9 images; this record is pinned to the in-force BT.601-7 (03/2011).
+    version: BT.601-7 (03/2011)
+    external_identifiers:
+    - namespace: itu
+      value: bt.601
+    official_url: https://www.itu.int/rec/R-REC-BT.601-7-201103-I/en
+    versions:
+    - version: BT.601-7 (03/2011)
+      status: in_force
+      url: https://www.itu.int/rec/R-REC-BT.601-7-201103-I/en
+    scope_notes_zh: itu:bt.601保留为工作级标识，定义固定到2011-03-08批准的 BT.601-7。2014年11月及2017年3月为编辑性修订，2017年为电子出版年份，2022-03-16为英文文件上传日期，均不替代03/2011版次。本记录不表示设备兼容性或实现符合性。
+    scope_notes_en: itu:bt.601 remains a work-level identifier, with this definition pinned to BT.601-7, approved on 2011-03-08. Editorial amendments in November 2014 and March 2017, electronic publication in 2017, and English-file posting on 2022-03-16 do not replace the 03/2011 edition date. No device compatibility or implementation conformance is asserted.
+    sources:
+    - url: https://www.itu.int/rec/R-REC-BT.601-7-201103-I/en
+      title: Recommendation ITU-R BT.601-7 (03/2011) — Edition and status
+      language: en
+      accessed: '2026-10-20'
+    - url: https://www.itu.int/dms_pubrec/itu-r/rec/bt/R-REC-BT.601-7-201103-I!!PDF-E.pdf
+      title: Recommendation ITU-R BT.601-7 — Scope and editorial-amendment note
+      language: en
+      accessed: '2026-10-20'
