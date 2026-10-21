@@ -17,11 +17,11 @@ locators:
 - url: https://pypi.org/project/httpx/0.28.1/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - httpx
   reasons:
-  - 主体为 Encode 的 Python HTTPX HTTP 客户端库及对应 PyPI 包，不与同名工具、HTTP/HTTP2/HTTP3 规范、httpcore 或 h11/h2 依赖合并；0.28.1 是本轮核查版本。
-  - 沿用既有 github 与开放 pypi 标识机制；本次全量正式对象/候选归一化检查和文本检索未见同主体碰撞，不修改标识机制。
+  - 经独立语义审核，由 accept-20261021-httpx-httpx 接纳为正式客户端库；原始 new 状态保留于冻结候选 commit/blob，当前回指防止重复创建。
   merge_authorized: false
 unknowns:
 - 官方固定版本声明 HTTP/1.1 与 HTTP/2 支持，不据此添加精确 RFC9110 或 HTTP/3 implements；本批关系为空。
@@ -29,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
