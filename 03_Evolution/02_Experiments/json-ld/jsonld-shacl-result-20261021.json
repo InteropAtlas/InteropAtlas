@@ -1,0 +1,143 @@
+{
+  "started_at": "2026-10-21T05:40:13.046981+00:00",
+  "completed_at": "2026-10-21T05:40:13.132389+00:00",
+  "versions": {
+    "pyshacl": "0.40.1",
+    "rdflib": "7.6.0",
+    "owlrl": "7.6.2",
+    "pyparsing": "3.3.3",
+    "packaging": "26.3",
+    "prettytable": "3.18.0",
+    "html5rdf": "1.2.1",
+    "wcwidth": "0.9.3"
+  },
+  "cases": [
+    {
+      "fixture": "valid",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": true,
+      "reported_results": 0,
+      "PASS": true
+    },
+    {
+      "fixture": "wrong_type",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": false,
+      "reported_results": 1,
+      "PASS": true
+    },
+    {
+      "fixture": "missing_required",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 1,
+      "target_class_nodes": 1,
+      "conforms": false,
+      "reported_results": 1,
+      "PASS": true
+    },
+    {
+      "fixture": "unmapped_extra",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": true,
+      "reported_results": 0,
+      "PASS": true
+    },
+    {
+      "fixture": "language_value",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": false,
+      "reported_results": 1,
+      "PASS": true
+    },
+    {
+      "fixture": "mixed_graphs",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": true,
+      "reported_results": 0,
+      "PASS": true
+    },
+    {
+      "fixture": "mixed_graphs",
+      "graph_policy": "union",
+      "target": "class",
+      "data_triples": 3,
+      "target_class_nodes": 1,
+      "conforms": false,
+      "reported_results": 2,
+      "PASS": true
+    },
+    {
+      "fixture": "named_only",
+      "graph_policy": "default",
+      "target": "class",
+      "data_triples": 0,
+      "target_class_nodes": 0,
+      "conforms": true,
+      "reported_results": 0,
+      "PASS": true
+    },
+    {
+      "fixture": "named_only",
+      "graph_policy": "default",
+      "target": "node",
+      "data_triples": 0,
+      "target_class_nodes": 0,
+      "conforms": false,
+      "reported_results": 1,
+      "PASS": true
+    },
+    {
+      "fixture": "named_only",
+      "graph_policy": "union",
+      "target": "class",
+      "data_triples": 2,
+      "target_class_nodes": 1,
+      "conforms": false,
+      "reported_results": 1,
+      "PASS": true
+    },
+    {
+      "fixture": "valid",
+      "graph_policy": "default",
+      "case": "forbidden SPARQL VALUES",
+      "outcome": "returned ValidationFailure, not ordinary validation-results graph",
+      "returned_type": "ValidationFailure",
+      "conforms": false,
+      "message": "A SPARQL Constraint must not contain a VALUES clause.",
+      "PASS": true
+    },
+    {
+      "fixture": "valid",
+      "graph_policy": "default",
+      "case": "invalid shape with meta_shacl=True",
+      "outcome": "raised exception, no ordinary conforms result",
+      "exception_type": "ReportableRuntimeError",
+      "message": "SHACL File does not validate against the SHACL Shapes SHACL (MetaSHACL) file.\nValidation Report\nConforms: False\nResults (1):\nConstraint Violation in DatatypeConstraintComponent (http://www.w3.org/ns/shacl#DatatypeConstraintComponent):\n\tSeverity: sh:Violation\n\tSource Shape: [ sh:datatype xsd:integer ; sh:maxCount Literal(\"1\", datatype=xsd:integer) ; sh:path sh:minCount ]\n\tFocus Node: [ sh:minCount Literal(\"bad\") ; sh:path ex:name ]\n\tValue Node: Literal(\"bad\")\n\tResult Path: sh:minCount\n\tMessage: Value is not Literal with datatype xsd:integer\n",
+      "PASS": true
+    }
+  ],
+  "count": 12,
+  "all_pass": true,
+  "limits": [
+    "Only the listed trusted fixtures with these installed versions and flags. No generalized compatibility edge or complete pipeline established.",
+    "An unmapped input property is lost before graph validation; SHACL conformance is not validation of every original JSON field.",
+    "Default-only vs explicit union changes validation; named-only data with no targetClass focus nodes can conform vacuously, whereas targetNode still imposes constraints.",
+    "No remote documents/imports, security assessment, full conformance certification, RDF1.2, production recommendation or IA adoption."
+  ]
+}
