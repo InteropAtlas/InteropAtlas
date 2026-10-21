@@ -17,11 +17,11 @@ locators:
 - url: https://pypi.org/project/langcodes/3.5.1/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_langcodes
   reasons:
-  - 主体为官方 PyPI langcodes 包及该固定版本元数据指向的 georgkrause/langcodes 库。README 中历史 rspeer/LuminosoInsight 项目引用不被拆成多个包，也不据此执行身份合并。
-  - 不与 BCP47/RFC5646 规范、Unicode CLDR、可选 language_data 数据包或语言检测服务混同；沿用现有 github/pypi 身份机制。
+  - 经独立语义审核由 accept-20261021-python-langcodes-python-langcodes 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 固定3.5.1的标签解析/对象表示/格式化/局部validity，不是严格原输入RFC5646语法判定器、完整注册表或扩展语义验证器。
@@ -29,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
