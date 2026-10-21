@@ -330,15 +330,15 @@ last_verified_by: Agent — OpenAI / dot，HTTP and URI relation evidence execut
 ---
 id: unicode_provides_text_encoding
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:09:22.264759+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Unicode 提供统一文本字符编码基础
@@ -347,6 +347,38 @@ source: {type: standard, id: unicode_17.0}
 relation: provides
 target: {type: capability, id: text_encoding}
 confidence: 1.0
+context:
+  version_context:
+    source: The Unicode Standard, Version 17.0.0, fixed Core Specification chapter 3
+    target: Existing IA capability text_encoding
+  conditions_zh: 限定为 Unicode 标量值与 UTF-8、UTF-16、UTF-32 码元序列之间的编码基础；代理码点不属于 Unicode 标量值。实际字节交换还依赖所选编码方案，以及该方案适用的字节序和字节顺序标记规则。解释声称采用
+    Unicode 编码形式的序列时，不良构码元序列应作为错误条件，不能直接解释为字符；这不要求所有实现都以抛异常方式处理。此边不证明字形显示、文本归一化、具体实现符合性或 IA 对 Unicode 17.0
+    的实际支持，原对象的 IA 自用说明未重新核验。
+  conditions_en: Limited to the encoding basis mapping Unicode scalar values to UTF-8, UTF-16 and UTF-32 code-unit
+    sequences; surrogate code points are not Unicode scalar values. Byte interchange also depends on the selected
+    encoding scheme and its applicable byte-order and byte-order-mark rules. When interpreting sequences purporting
+    to use a Unicode encoding form, ill-formed code-unit sequences are error conditions, not characters; this
+    does not require every implementation to throw exceptions. This edge does not verify glyph display, normalization,
+    implementation conformance or IA support for Unicode 17.0; the existing IA-use statement was not reverified.
+evidence:
+- url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/#G7404
+  title: 'Unicode 17.0.0 — section 3.9: Unicode scalar values and three encoding forms'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/#G28070
+  title: 'Unicode 17.0.0 — section 3.10: byte serialization through encoding schemes'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/#G54355
+  title: 'Unicode 17.0.0 — section 3.2.4, C8–C10: interpretation, generation and ill-formed sequences'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/#G23683
+  title: 'Unicode 17.0.0 — section 3.2.5, C11: scheme-specific byte order and BOM rules'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:06:47.655585+00:00'
+last_verified_by: Agent — OpenAI / dot, existing text/design capability-edge evidence executor
 ---
 id: bcp47_provides_language_identification
 record_created_at: "2026-09-01T16:44:53+08:00"
