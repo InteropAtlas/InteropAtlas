@@ -1,0 +1,67 @@
+id: openapi_3_1_1_uses_json_schema_2020_12
+type: relation
+name_zh: OpenAPI 3.1.1 Schema Object 使用 JSON Schema 2020-12
+name_en: OpenAPI 3.1.1 Schema Object uses JSON Schema 2020-12
+source: openapi_3.1.1
+relation: uses
+target: json_schema_2020_12
+context:
+  version_context:
+    source: OpenAPI Specification 3.1.1 (24 October 2024)
+    target: JSON Schema Draft 2020-12
+  conditions_zh: 仅表述固定 OAS 3.1.1 Schema Object 的默认方言基础：2020-12 词汇加 OAS base vocabulary，不等同于整个 OpenAPI 文档或线上载荷都是
+    JSON Schema。根 Schema Object 的 $schema 覆盖 jsonSchemaDialect 默认值；工具必须支持 OAS 方言，但其他方言支持是可选。普通 JSON Schema 实现可把
+    OAS base vocabulary 关键词视为未知关键词；通用校验通过不证明完整 OAS 语义、工具支持或 HTTP API 互通。
+  conditions_en: 'Limited to the default dialect foundation of the fixed OAS 3.1.1 Schema Object: Draft 2020-12
+    vocabularies plus the OAS base vocabulary, not the entire OpenAPI document or every wire payload. A root Schema
+    Object’s $schema overrides the jsonSchemaDialect default. Tooling must support the OAS dialect; other dialect
+    support is optional. General JSON Schema implementations may treat OAS base-vocabulary keywords as unknown.
+    Generic validation does not establish full OAS semantics, tool support or HTTP API interoperability.'
+evidence:
+- url: https://spec.openapis.org/oas/v3.1.1.html
+  title: OpenAPI 3.1.1 — §4.8.1.1 jsonSchemaDialect; §4.8.24, §4.8.24.1 and §4.8.24.5 Schema Object dialects
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:19:55.299499+00:00'
+last_verified_by: Agent — OpenAI / dot，service representation evidence executor
+record_created_at: '2026-10-21T04:19:55.299499+00:00'
+record_updated_at: '2026-10-21T04:21:33.715501+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: problem_details_rfc9457_uses_json_rfc8259
+type: relation
+name_zh: RFC 9457 问题详情的 JSON 模型与表示使用 RFC 8259
+name_en: RFC 9457 problem-details JSON model and representation use RFC 8259
+source: problem_details_rfc9457
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: RFC 9457 (July 2023)
+    target: STD 90 / RFC 8259 (December 2017)
+  conditions_zh: 固定 RFC 9457 的问题详情模型是 JSON 对象；序列化为 JSON 时使用 application/problem+json。XML 等表示仍可用，不要求所有 HTTP API 错误采用此格式，也不把任意
+    JSON 视为合法问题详情。status 成员若存在，仅供参考，生成者仍须在实际 HTTP 响应使用同一状态码，不重定义 HTTP 语义。附录 A 的 JSON Schema 是非规范性辅助；JSON 解析或通用校验不证明完整问题类型语义、服务符合性或实际互通。
+  conditions_en: The fixed RFC 9457 problem-details model is a JSON object; JSON serialization uses application/problem+json.
+    XML and other representations remain possible. Not every HTTP API error must use this format, and arbitrary
+    JSON is not necessarily valid problem details. The status member, if present, is advisory; generators must still
+    use the same status code in the actual HTTP response, without redefining HTTP semantics. Appendix A’s JSON Schema
+    is non-normative assistance. JSON parsing or generic validation does not prove complete problem-type semantics,
+    service conformance or actual interoperability.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9457.txt
+  title: RFC 9457 — §1, §3, §3.1.2 and §7.1 JSON reference; appendices A, B and C
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:19:55.299499+00:00'
+last_verified_by: Agent — OpenAI / dot，service representation evidence executor
+record_created_at: '2026-10-21T04:19:55.299499+00:00'
+record_updated_at: '2026-10-21T04:21:33.715501+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
