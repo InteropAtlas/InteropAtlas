@@ -308,15 +308,15 @@ confidence: 1.0
 ---
 id: bcp47_provides_language_identification
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T08:34:37.160418+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: BCP 47 提供语言标识能力
@@ -325,6 +325,36 @@ source: {type: standard, id: bcp47_rfc5646}
 relation: provides
 target: {type: capability, id: language_identification}
 confidence: 1.0
+context:
+  version_context:
+    source: RFC 5646, September 2009; language-tag part of BCP 47
+    target: Existing IA capability language_identification
+  conditions_zh: 限定为用 RFC 5646 语言标签标识内容语言及相关变体，不是自动检测内容语言或证明所选标签正确。语法良构不等于标签有效；有效性依赖所用日期的 IANA 子标签注册表，扩展还需符合相应扩展规则，私用子标签仅有私下约定含义。本次不审核现行注册表或
+    IA 实际数据的符合性，也不证明实现或应用互通；RFC 4647 的匹配过程不在此边范围内。
+  conditions_en: Limited to RFC 5646 language tags identifying content languages and variants, not automatic
+    language detection or proof that a chosen tag is correct. Well-formed syntax is not tag validity; validity
+    depends on the dated IANA subtag registry, extensions have their own rules, and private-use meanings require
+    private agreement. This review does not audit the current registry or IA data conformance, prove implementations
+    or application interoperability, or cover RFC 4647 matching.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc5646.html#section-1
+  title: 'RFC 5646 — section 1: language-tag identification mechanism; RFC 4647 is the other BCP 47 component'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc5646.html#section-2.2.9
+  title: 'RFC 5646 — section 2.2.9: well-formedness, validity, dated registry and extension validity'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc5646.html#section-2.2.7
+  title: 'RFC 5646 — section 2.2.7: private-use subtags and private agreement'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc5646.html#section-4.1
+  title: 'RFC 5646 — section 4.1: language-tag choice depends on content and application judgment'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T08:19:07.662872+00:00'
+last_verified_by: Agent — OpenAI / dot, language-tag capability evidence executor
 ---
 id: git_protocol_provides_version_control_transport
 record_created_at: "2026-09-01T16:44:53+08:00"
