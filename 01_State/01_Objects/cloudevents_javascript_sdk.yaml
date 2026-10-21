@@ -1,0 +1,83 @@
+id: cloudevents_javascript_sdk
+type: system
+kind: library
+name_zh: CloudEvents JavaScript 事件处理开发库
+name_en: CloudEvents JavaScript SDK
+description_zh: 用于构造、序列化和解析 CloudEvents 事件的 JavaScript/TypeScript 开发库，含 HTTP binary/structured 消息表示转换；本记录固定到 10.0.0。
+description_en: A JavaScript/TypeScript SDK for constructing, serializing and parsing CloudEvents, including HTTP
+  binary/structured message representation conversion; pinned here to 10.0.0.
+version: 10.0.0
+external_identifiers:
+- namespace: github
+  value: cloudevents/sdk-javascript
+official_url: https://github.com/cloudevents/sdk-javascript
+versions:
+- version: 10.0.0
+  status: released
+  url: https://github.com/cloudevents/sdk-javascript/releases/tag/v10.0.0
+open_source: true
+license_expression: Apache-2.0
+scope_notes_zh: 主体为软件库，不是事件规范或部署服务。固定 README 明示支持 CloudEvents 1.0，HTTP 消息源码引用 1.0.1；不将其改述为发布者认证 1.0.2。wire specversion
+  仍为 1.0 本身不能证明 patch 符合性，本轮不记录到既有 cloudevents_1.0.2 的 implements 关系。CloudEvent 默认补 id/time/specversion，自动 time
+  不证明实际发生时间；strict=false 可跳过部分检查。validateCloudEvent 对 1.0 之外版本返回 false，构造器成功不等于有效版次或完整符合性。默认 JSON 数字解析有 JavaScript
+  精度限制，可选 CE_USE_BIG_INT=true 切换大整数解析路径。该解析路径会重新赋值运行环境的 JSON 绑定；对宿主其他代码的影响未在本切片评估。二进制 data 可映射 data_base64；JSON
+  数据不等于全部事件载荷。本切片不验证所有格式/绑定、网络收发、宿主进程副作用、安全性或跨实现互通；不是最新发行版或生产推荐，未推断 self_hostable 或新增 capability。
+scope_notes_en: The subject is the library, not the event specification or a deployed service. The fixed README
+  explicitly states CloudEvents 1.0 support; HTTP message source references 1.0.1. This is not restated as publisher
+  certification of 1.0.2. An unchanged wire specversion of 1.0 is not patch-conformance evidence, so this slice
+  adds no implements edge to cloudevents_1.0.2. CloudEvent supplies default id/time/specversion; an automatic timestamp
+  does not prove occurrence time. strict=false skips some checks. validateCloudEvent returns false for versions
+  other than 1.0; constructor success alone does not prove a valid version or full conformance. Default JSON number
+  parsing has JavaScript precision limits; CE_USE_BIG_INT=true selects the optional big-integer path. That parsing
+  path reassigns the runtime JSON binding; effects on other host code are not assessed in this slice. Binary data
+  can map to data_base64, while JSON data is not all possible event payloads. All formats/bindings, actual network
+  delivery, host-process side effects, security and cross-implementation interoperability are unverified. No latest-release
+  or production recommendation, self_hostable inference or invented capability is made.
+sources:
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/README.md
+  title: CloudEvents JavaScript SDK 10.0.0 — SDK identity, explicit 1.0 support, feature matrix and big-integer
+    option
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/event/cloudevent.ts
+  title: CloudEvents JavaScript SDK 10.0.0 — event construction/defaults, strict parameter and binary data representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/event/spec.ts
+  title: CloudEvents JavaScript SDK 10.0.0 — validation performs the 1.0 path and otherwise returns false
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/message/http/index.ts
+  title: CloudEvents JavaScript SDK 10.0.0 — binary/structured message conversion with 1.0.1 references
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/parsers.ts
+  title: CloudEvents JavaScript SDK 10.0.0 — default and opt-in JSON number parsing
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/package.json
+  title: CloudEvents JavaScript SDK 10.0.0 — fixed published package version and license declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/LICENSE
+  title: CloudEvents JavaScript SDK 10.0.0 — Apache-2.0 license notice
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T02:03:44.026877+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version event SDK evidence executor
+record_created_at: '2026-10-21T02:11:23.027976+00:00'
+record_updated_at: '2026-10-21T02:11:23.027976+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: cloudevents_javascript_sdk
+  acceptance_event_id: accept-20261021-cloudevents-js-cloudevents_javascript_sdk
+  reviewed_candidate_blob: 01d5a5616eb684726b7f9d64b5dd231d5487378f
+  reviewed_against_commit: 640c41f7d0e2cadff1c9e6f2d7c156a85214b7ab
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 640c41f7d0e2cadff1c9e6f2d7c156a85214b7ab
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/473
