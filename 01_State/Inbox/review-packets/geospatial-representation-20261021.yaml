@@ -1,0 +1,176 @@
+packet_id: geospatial_representation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 9cb144c3a553ee9dbd4139d570b451aa1cbdfebf
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- '接续 #276 覆盖缺口：已有 OGC Core 是地理种子导航中唯一对象且无显式关系，限定补齐其日期时间与要素编码证据链。'
+- 最多一个固定规范对象与两条既有 uses 关系。OGC→RFC3339 可独立审核；GeoJSON 端点未接纳前，其边不得物化。
+- 不激活 Draft/Future 治理议题，不改变分类、词表、页面、算法或维护制度；不触及 24 个暂缓导航对象。
+- 当前只是本地待审材料，没有 acceptance event 或 Canonical mutation。
+source_evidence:
+- path: rfc7946.txt
+  url: https://www.rfc-editor.org/rfc/rfc7946.txt
+  sha256: cb52f07b9cc6c841750d75850988fe8f32c7b7f0e1f7420f2069d5b5ded124f8
+  bytes: 49143
+  retrieved_at: '2026-10-21T03:45:26.685773+00:00'
+- path: rfc7946-info.html
+  url: https://www.rfc-editor.org/info/rfc7946/
+  sha256: 001a6e6642ee221a5272aaae00ebf8b323524c6370a4e8c124a41ea076b7dcbe
+  bytes: 330118
+  retrieved_at: '2026-10-21T03:45:44.532841+00:00'
+- path: rfc7946-errata.html
+  url: https://www.rfc-editor.org/errata/rfc7946
+  sha256: 951e50d92a2ea4f04a678da0e2d61bb8d0363e0ec46bb854d8b6d4458f0b2b45
+  bytes: 32048
+  retrieved_at: '2026-10-21T03:45:50.218108+00:00'
+- path: ogc-17-069r4.html
+  url: https://docs.ogc.org/is/17-069r4/17-069r4.html
+  sha256: 6a88db75970a327e6dcfbf823d6c56b6edcec0d8347425385b08534546b4c310
+  bytes: 489716
+  retrieved_at: '2026-10-21T03:45:31.404982+00:00'
+- path: rfc3339.txt
+  url: https://www.rfc-editor.org/rfc/rfc3339.txt
+  sha256: 9ab2b8864a85dca73a88f49b0927bc7bc85f596926e4fd1890905777924e700a
+  bytes: 35064
+  retrieved_at: '2026-10-21T03:45:54.113709+00:00'
+existing_endpoints:
+- id: ogc_api_features_17_069r4
+  path: 01_State/01_Objects/ogc_api_features_17_069r4.yaml
+  git_blob: 98696fe1616287e3b4f1084437343b7fd498e42a
+  unchanged: true
+- id: rfc3339
+  path: 01_State/01_Objects/rfc3339.yaml
+  git_blob: 1924afed24ea71b399c47d4eb144549d46ac901b
+  unchanged: true
+objects:
+- candidate_id: geojson_rfc7946
+  candidate_path: 01_State/Inbox/candidates/geojson_rfc7946.yaml
+  candidate_blob: db05f375a8b0ce6fb773e455317f7511a10b2db8
+  preflight:
+    canonical_records: 198
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_record:
+    id: geojson_rfc7946
+    type: artifact
+    kind: format
+    name_zh: GeoJSON 地理空间数据交换格式（RFC 7946）
+    name_en: The GeoJSON Format (RFC 7946)
+    description_zh: 2016 年 8 月发布的 IETF 标准轨文档，定义基于 JSON 的地理几何、要素与要素集合表示及其空间范围。
+    description_en: An IETF Standards Track document published in August 2016 defining JSON-based representations
+      of geographic geometries, features, feature collections and their spatial extents.
+    version: RFC 7946
+    external_identifiers:
+    - namespace: rfc
+      value: '7946'
+    official_url: https://www.rfc-editor.org/rfc/rfc7946.txt
+    versions:
+    - version: RFC 7946
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc7946/
+    scope_notes_zh: 仅固定 RFC 7946，不与 2008 年 GeoJSON 说明或任意 JSON 格式等同。第 4 节使用 WGS 84 经度/纬度与十进制度；可选第三坐标为相对 WGS 84 椭球的米制高度。第
+      6/7 节允许不改变既定 GeoJSON 语义的外来成员，不允许借扩展重新定义既有类型。第 8 节将其用于地理数据交换，不把它当作完整 GIS、任意坐标系容器或实现符合性证明。核验时五项勘误均为 Reported，未把所提修正写入本版事实。
+    scope_notes_en: Fixed RFC 7946, not the 2008 GeoJSON specification or arbitrary JSON. Section 4 uses WGS 84
+      longitude/latitude in decimal degrees; an optional third coordinate is height in metres relative to the WGS
+      84 ellipsoid. Sections 6/7 permit foreign members without changing defined GeoJSON semantics, not redefinition
+      of existing types. Section 8 concerns geographic data interchange; this is not a complete GIS, arbitrary-CRS
+      container or implementation-conformance assertion. The five errata observed were Reported, and their proposed
+      corrections are not incorporated as accepted facts.
+    sources:
+    - &id002
+      url: https://www.rfc-editor.org/rfc/rfc7946.txt
+      title: RFC 7946 (August 2016) — sections 1, 3, 4, 6, 7 and 8
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.rfc-editor.org/info/rfc7946/
+      title: RFC Editor — RFC 7946 identity and Proposed Standard status
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.rfc-editor.org/errata/rfc7946
+      title: RFC 7946 errata — five Reported entries observed; not accepted corrections
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T03:47:58.097665+00:00'
+    last_verified_by: Agent — OpenAI / dot，geospatial evidence executor
+relations:
+- proposal_id: ogc_features_core_1_0_1_uses_rfc3339
+  proposed_record:
+    id: ogc_features_core_1_0_1_uses_rfc3339
+    type: relation
+    name_zh: OGC API Features Core 1.0.1 使用 RFC 3339 日期时间语法
+    name_en: OGC API Features Core 1.0.1 uses RFC 3339 date/time syntax
+    source: ogc_api_features_17_069r4
+    relation: uses
+    target: rfc3339
+    context:
+      version_context:
+        source: 'OGC API - Features - Part 1: Core corrigendum, 17-069r4 / 1.0.1'
+        target: RFC 3339 (July 2002)
+      conditions_zh: 仅表述固定 Core 文档中日期/时间戳及 datetime 查询参数的 date-time 语法：第 7.1 节列出依赖，第 7.11 节限定文档所述日期与时间戳，第 7.15.4
+        节的 /req/core/fc-time-response E 指向 RFC 3339 §5.6。区间组合、斜杠与开放端点由 OGC 自身规则补充，不声称 RFC 3339 定义整个区间语法；要素属性仍可使用其他格式或时间参考系，不把推荐升级为普遍强制，也不证明实现互通。
+      conditions_en: 'Limited to dates/timestamps and the date-time component of the datetime query parameter in
+        the fixed Core document: section 7.1 lists the dependency, section 7.11 addresses dates/timestamps discussed
+        by the document, and section 7.15.4 /req/core/fc-time-response E cites RFC 3339 section 5.6. OGC supplies
+        interval composition, slash and open-endpoint rules; RFC 3339 does not define the whole interval syntax.
+        Feature properties may use other formats or temporal reference systems. This does not turn a recommendation
+        into a universal mandate or prove implementation interoperability.'
+    evidence:
+    - &id001
+      url: https://docs.ogc.org/is/17-069r4/17-069r4.html
+      title: OGC 17-069r4 (1.0.1) — sections 7.1, 7.11, 7.15.4, 8.1 and 8.3
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.rfc-editor.org/rfc/rfc3339.txt
+      title: RFC 3339 — section 5.6 Internet date/time syntax
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T03:47:58.097665+00:00'
+    last_verified_by: Agent — OpenAI / dot，geospatial evidence executor
+- proposal_id: ogc_features_core_1_0_1_uses_geojson_rfc7946
+  proposed_record:
+    id: ogc_features_core_1_0_1_uses_geojson_rfc7946
+    type: relation
+    name_zh: OGC API Features 1.0.1 的 GeoJSON 编码类使用 RFC 7946
+    name_en: OGC API Features 1.0.1 GeoJSON encoding class uses RFC 7946
+    source: ogc_api_features_17_069r4
+    relation: uses
+    target: geojson_rfc7946
+    context:
+      version_context:
+        source: 'OGC API - Features - Part 1: Core corrigendum, 17-069r4 / 1.0.1'
+        target: RFC 7946 (August 2016)
+      conditions_zh: 仅限采用第 8.3 节 GeoJSON requirements class 的情形：依赖 RFC 7946；/req/geojson/definition 要求服务器的 200 响应对要素内容支持
+        application/geo+json，对其他资源支持 application/json。当 200 响应的媒体类型实际为 application/geo+json 时，/req/geojson/content
+        要求按资源返回 FeatureCollection 或 Feature。这不排除同时支持其他编码或通过内容协商返回其他表示。第 8.1 节明确这些编码类均非 Core 强制，Core 实现可采用其他编码；不声明所有
+        Core 实现使用 GeoJSON、不认证具体实现，也不把可选类扩成整套 Features 的要求。
+      conditions_en: 'Only when the section 8.3 GeoJSON requirements class is adopted: it depends on RFC 7946; /req/geojson/definition
+        requires the server''s 200 responses to support application/geo+json for feature-content resources and application/json
+        for other resources. When a 200 response actually has media type application/geo+json, /req/geojson/content
+        requires a FeatureCollection or Feature according to the resource. This does not exclude supporting other
+        encodings simultaneously or returning other representations through content negotiation. Section 8.1 explicitly
+        makes these encoding classes non-mandatory for Core, which may use other encodings. This neither says all
+        Core implementations use GeoJSON nor certifies an implementation or extends the optional class to all Features
+        parts.'
+    evidence:
+    - *id001
+    - *id002
+    last_verified_at: '2026-10-21T03:47:58.097665+00:00'
+    last_verified_by: Agent — OpenAI / dot，geospatial evidence executor
+membership_proposals:
+- category_id: geospatial
+  ref:
+    surface: canonical
+    id: geojson_rfc7946
+  rationale_zh: 地理要素数据交换格式，正式接纳后补入既有非互斥编辑导航；不是新分类或强制领域继承。
+unknowns_zh:
+- 五项 Reported 勘误未判为已接受修正；本轮不裁决其正确性。
+- 不建立 OGC→OpenAPI 3.1.1 边：原文的 OpenAPI 3.0 不能替换为仓库已有 3.1.1。
+- 不增加 GeoJSON→RFC8259 边；本轮不推断传递性、历史引用升级或实现符合性。
