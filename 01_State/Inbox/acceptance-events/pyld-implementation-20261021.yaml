@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-pyld-pyld
+candidate_id: pyld
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: pyld
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T05:18:05+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者实际读完整 proposal、固定 conformance、loader/options 源码及测试，独立重算 17 个官方文件 SHA256 / Git blob，亲自重跑 18 个可信内存例全部通过。
+  - 接受软件主体、两个既有表示能力及有限 JSON-LD 1.1 implements；审核纠正 from_rdf 不使用拒绝 loader 的绝对表述，最终两 hash 已独立核对。保留官方 aims、Beta、跳过/待支持项和非全符合性边界。
+  - 冻结 proposed_record 全字段原样物化，仅追加生命周期、贡献和接纳溯源；精确序列化复核与先前语义审核分开，CI 不替代独立审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/481
+- https://github.com/InteropAtlas/InteropAtlas/blob/0a5f5e923ccd5b3b4e50b157f8bc3730ec9cb98c/01_State/Inbox/review-packets/pyld-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/7f8d66811e7b0cea0143474b6422759d8e76b233
+decided_at: '2026-10-21T05:20:13.051116+00:00'
+notes:
+- 接纳独立 PyLD 软件库，不与规范、Digital Bazaar 组织、RDFLib 或 pySHACL 合并。
+- domains 为已有标签按官方软件范围人工选择，不由 implements 自动继承；不推断 SHACL 管道、RDF 1.2、远程安全、生产推荐、全 W3C 认证或 IA 采用。
