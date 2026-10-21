@@ -1,0 +1,302 @@
+packet_id: utf8proc_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: a745cd8f843d921dcf559232aec1c48190755cbb
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 承接 text_encoding 现有 CLI 空实现记录的具体路径，不将库内未记录等同世界无实现。
+- 仅普通 system/library、现有 text_encoding 能力与 syntax 导航；relations 为空，保留 Unicode 18.0 / 17.0 版本边界。
+- text 与 internationalization 是已有自由标签，按该库自身公开范围人工选择，不自动继承规范标签。
+- 可选 license_expression 留空；按官方全文分别记录代码和数据许可事实，不新增 LicenseRef 或法律合规结论。
+work_item_preflight:
+  baseline: a745cd8f843d921dcf559232aec1c48190755cbb
+  searched_at: '2026-10-21T11:48:02.521706+00:00'
+  searched_yaml_files: 399
+  terms:
+  - utf8proc
+  - JuliaStrings/utf8proc
+  - utfcpp
+  hits: []
+  github_issue_search: 'repo:InteropAtlas/InteropAtlas utf8proc: no results, read 2026-10-21T11:46Z'
+  github_pr_search: 'utf8proc within InteropAtlas/InteropAtlas, all states: no results, read 2026-10-21T11:46Z'
+  limit_zh: 本次有限检索未发现同一 intake 并行项；不是全知证明，也不替代规范化身份检查。
+official_source_hashes:
+- path: README.md
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/README.md
+  local_path: official/README.md
+  sha256: 105b8cf218f3e1493e14067b4c73b857c1c978c652d98fcfc070371b29c54576
+  git_blob: 5f7cd585830dd4c3b99e5b49399d21685edd5e2a
+  fetched_at: '2026-10-21T11:17:58.478693+00:00'
+- path: LICENSE.md
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/LICENSE.md
+  local_path: official/LICENSE.md
+  sha256: 3b510150d34f248a221bb88e1d811238d6c6c18b51231822c42974c39bb07256
+  git_blob: f18b1f3abdcb55e82ecdd84f476e7f366b00183b
+  fetched_at: '2026-10-21T11:18:00.948562+00:00'
+- path: utf8proc.h
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.h
+  local_path: official/utf8proc.h
+  sha256: 08da85e820efaa3613500946c26b2dc427a07f76001ed7c16bc90f298b814c35
+  git_blob: d842f6bcdf3a2e4a70de82fda94371851cfd5567
+  fetched_at: '2026-10-21T11:18:03.098545+00:00'
+- path: utf8proc.c
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.c
+  local_path: official/utf8proc.c
+  sha256: f38438eb986ba7eedad0f2e820a70fae1aaf05197364ba0381a5e84775099ef8
+  git_blob: 0e277e0c27ed0d9cc3d1b254b24d6a4bfc8c9019
+  fetched_at: '2026-10-21T11:18:05.488848+00:00'
+- path: utf8proc_data.c
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc_data.c
+  local_path: official/utf8proc_data.c
+  sha256: b4911d4162d216afa612317a9b981851e15d672f4d93b25f3a1eb986f8c0aedb
+  git_blob: 5d6bcc2fd81c335f4dabcca5f3242f29d440cdd8
+  fetched_at: '2026-10-21T11:41:06.395639+00:00'
+- path: Makefile
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/Makefile
+  local_path: official/Makefile
+  sha256: 74c8314ff6784c784f0032f904b923f23e7721f0d1d20c7781f7bb2174a457b8
+  git_blob: 76a11e4897557fc43123925f94925324ba7b465c
+  fetched_at: '2026-10-21T11:41:08.984907+00:00'
+- path: CMakeLists.txt
+  url: https://raw.githubusercontent.com/JuliaStrings/utf8proc/79cdd5ab40c79afa559f689ffc13b76812dee1ac/CMakeLists.txt
+  local_path: official/CMakeLists.txt
+  sha256: 6058b0450cabbbd543cf6e55da67f64c1e492071d7da27879b0c2dc4e5116f88
+  git_blob: f9f1542180c1d66bb6ed29900d6dadb7278a92b5
+  fetched_at: '2026-10-21T11:41:11.423204+00:00'
+existing_endpoint_blobs:
+  text_encoding:
+    path: 01_State/01_Objects/text_encoding.yaml
+    git_blob: c7b3e86785f898e713f130e0d610f70f17c8f7a5
+  unicode_17.0:
+    path: 01_State/01_Objects/unicode-17.0.yaml
+    git_blob: 643760c58119025e72a5d7bf9878d99ace06f83c
+objects:
+- candidate_id: utf8proc
+  candidate_path: 01_State/Inbox/candidates/utf8proc.yaml
+  candidate_blob: ac69c50c18b7b66759c9eff1712361da1d7ea8bf
+  preflight:
+    canonical_records: 211
+    existing_candidate_records: 214
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: utf8proc
+    type: system
+    kind: library
+    name_zh: utf8proc C Unicode / UTF-8 库
+    name_en: utf8proc C Unicode / UTF-8 library
+    description_zh: 开源 C Unicode / UTF-8 处理库；固定 2.12.0，记录有界单码点编解码及调用方验证前置条件，不将其 Unicode 18.0 声明等同现有 Unicode 17.0
+      端点。
+    description_en: An open-source C Unicode / UTF-8 processing library, pinned to 2.12.0; records bounded single-codepoint
+      encoding/decoding and caller-validation prerequisites without equating its Unicode 18.0 claim with the existing
+      Unicode 17.0 endpoint.
+    version: 2.12.0
+    external_identifiers:
+    - namespace: github
+      value: JuliaStrings/utf8proc
+    official_url: https://github.com/JuliaStrings/utf8proc
+    versions:
+    - version: 2.12.0
+      status: released
+      url: https://github.com/JuliaStrings/utf8proc/releases/tag/v2.12.0
+    domains:
+    - text
+    - internationalization
+    capabilities:
+    - text_encoding
+    open_source: true
+    scope_notes_zh: 固定官方 v2.12.0 / commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac 的 C 库；README 和运行时报告 Unicode 18.0.0，API
+      版本为 2.12.0，不能与共享库 ABI 版本或现有 Unicode 17.0 规范端点等同。本切片核查 UTF-8 单码点读取、输出与码点范围检查；库还公开规范化、大小写折叠和字素分割接口，但本切片未验证这些功能的完整行为。utf8proc_iterate
+      读取一个码点而非验证整个输入缓冲区；本例只用非负显式长度且不超过已分配数据，成功返回消费的字节数，非法或截断序列返回错误并将输出置为 -1，零长度返回 0。utf8proc_codepoint_valid 检查
+      U+0000..U+10FFFF 范围并排除 surrogate，不判断字符是否已分配或适合具体应用；非字符码点也可能返回真。utf8proc_encode_char 明确不验证 Unicode 码点有效性，为 API 兼容会将
+      surrogate 编成非法 UTF-8 字节；调用方若要求有效 UTF-8，应先做码点有效性检查并提供至少四字节输出空间，不能把编码返回成功当作合法性证明。固定源码在独立本地目录以 C99 编译，无系统安装或源码改动；22
+      项可信合成内存例只补充有限证据，未测试负长度/不可信缓冲区、资源耗尽、全字符串验证、完整 Unicode 符合性、安全认证、第三方互通或 IA 采用。库代码按 MIT 许可，utf8proc_data.c 另列
+      Unicode 数据许可，包括复制、文档及修改告知条件；不把裸 MIT 扩大为所有数据许可，也不在未严格映射时填组合 SPDX 表达式。未建立到 Unicode 17.0 的 implements，不因文本编码能力推断语言标签识别。
+    scope_notes_en: 'Pinned to the official C library v2.12.0 at commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac.
+      The README and runtime report Unicode 18.0.0; API version 2.12.0 is not equated with the shared-library ABI
+      version or the existing Unicode 17.0 standard endpoint. This slice checks single-codepoint UTF-8 reading,
+      output and codepoint-range validation. The library also exposes normalization, case-folding and grapheme-boundary
+      APIs, whose full behavior was not verified here. utf8proc_iterate reads one codepoint rather than validating
+      an entire buffer. The examples use only nonnegative explicit lengths no larger than allocated data: success
+      returns bytes consumed, invalid or truncated input returns an error and sets the output to -1, and zero length
+      returns 0. utf8proc_codepoint_valid checks the U+0000..U+10FFFF range excluding surrogates, not character assignment
+      or application suitability; noncharacters can pass. utf8proc_encode_char explicitly does not validate Unicode
+      codepoints and can encode surrogates as invalid UTF-8 for API compatibility. A caller requiring valid UTF-8
+      must first validate the codepoint and provide at least four output bytes; encoding success is not proof of
+      validity. Fixed sources were compiled as C99 in a dedicated local directory, without system installation or
+      source modification. Twenty-two trusted synthetic-memory examples are supplementary only: negative-length/untrusted
+      buffers, resource exhaustion, whole-string validation, full Unicode conformance, security certification, third-party
+      interoperability and IA adoption were not tested. Library code is under MIT, while utf8proc_data.c has a separately
+      reproduced Unicode data license with copying, documentation and modification-notice conditions. Bare MIT is
+      not extended to all data, and no composite SPDX expression is assigned without a strict mapping. No implements
+      link to Unicode 17.0 is proposed; text-encoding capability does not imply language-tag identification.'
+    sources:
+    - url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/README.md
+      title: utf8proc v2.12.0 — library purpose, Unicode version and licensing overview
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.h
+      title: utf8proc v2.12.0 — bounded decode, codepoint validity and encode API contracts
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.c
+      title: utf8proc v2.12.0 — actual decode rejection, validity and surrogate-encoding behavior
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/LICENSE.md
+      title: utf8proc v2.12.0 — MIT library code and separately stated Unicode data license
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/Makefile
+      title: utf8proc v2.12.0 — official build flags and API versus shared-library version
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T11:48:02.521706+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed UTF-8 implementation evidence executor
+relations: []
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: utf8proc
+  rationale_zh: UTF-8 字节与码点表示转换的实现先例；不强接 Unicode 17.0，不等同全 Unicode 符合性或完整文本处理。
+supplementary_verification:
+  source_commit: 79cdd5ab40c79afa559f689ffc13b76812dee1ac
+  observed_at: '2026-10-21T11:42:38.557687+00:00'
+  versions:
+    python: 3.12.14
+    compiler: cc (Debian 14.2.0-19) 14.2.0
+    utf8proc_api: 2.12.0
+    utf8proc_unicode: 18.0.0
+  source_files_verified:
+  - README.md
+  - LICENSE.md
+  - utf8proc.h
+  - utf8proc.c
+  - utf8proc_data.c
+  - Makefile
+  - CMakeLists.txt
+  binary_sha256: 2dd27d77d170773debf5d5ab26ab3d7500f2fed5694d433921f3e4f54a092056
+  local_examples_passed: 22
+  network_attempts: []
+  cases:
+  - name: reported_api_version
+    result: 2.12.0
+  - name: reported_unicode_data_version
+    result: 18.0.0
+  - name: nul_bounded_decode_and_encode
+    result:
+    - - 1
+      - 0
+    - - 1
+      - '00'
+  - name: ascii_bounded_decode_and_encode
+    result:
+    - - 1
+      - 65
+    - - 1
+      - '41'
+  - name: two_byte_bounded_decode_and_encode
+    result:
+    - - 2
+      - 233
+    - - 2
+      - c3a9
+  - name: three_byte_bounded_decode_and_encode
+    result:
+    - - 3
+      - 20013
+    - - 3
+      - e4b8ad
+  - name: four_byte_bounded_decode_and_encode
+    result:
+    - - 4
+      - 128512
+    - - 4
+      - f09f9880
+  - name: single_codepoint_not_whole_buffer
+    result:
+    - 1
+    - 65
+  - name: empty_input
+    result:
+    - 0
+    - -1
+  - name: explicit_length_limits_read
+    result:
+    - -3
+    - -1
+  - name: overlong_two_byte_decode_rejected
+    result:
+    - -3
+    - -1
+  - name: isolated_continuation_decode_rejected
+    result:
+    - -3
+    - -1
+  - name: surrogate_bytes_decode_rejected
+    result:
+    - -3
+    - -1
+  - name: above_unicode_range_decode_rejected
+    result:
+    - -3
+    - -1
+  - name: truncated_four_byte_decode_rejected
+    result:
+    - -3
+    - -1
+  - name: surrogate_codepoint_invalid
+    result: false
+  - name: surrogate_encoder_does_not_validate
+    result:
+    - 3
+    - eda080
+  - name: caller_validity_gate_rejects_surrogate
+    result: rejected by caller validity check
+  - name: upper_scalar_noncharacter_is_valid_codepoint
+    result:
+    - true
+    - - 4
+      - f48fbfbf
+    - - 4
+      - 1114111
+  - name: negative_codepoint_rejected
+    result:
+    - false
+    - - 0
+      - ''
+  - name: outside_codepoint_range_rejected
+    result:
+    - false
+    - - 0
+      - ''
+  - name: invalid_utf8_error_message
+    result: Invalid UTF-8 string
+  build:
+    observed_at: '2026-10-21T11:41:54.803593+00:00'
+    compiler: cc (Debian 14.2.0-19) 14.2.0
+    platform: Linux-6.18.55-x86_64-with-glibc2.41
+    equivalent_relative_command:
+    - cc
+    - -O2
+    - -fPIC
+    - -std=c99
+    - -Wall
+    - -Wextra
+    - -DUTF8PROC_EXPORTS
+    - -shared
+    - official/utf8proc.c
+    - -o
+    - libutf8proc-probe.so
+    command_note_zh: 与实际独立工作目录编译参数相同，此处仅将输入/输出绝对路径改为相对采集文件名；不是可移植二进制一致性声明。
+    returncode: 0
+    stdout: ''
+    stderr: ''
+  boundary_zh: 仅可信合成内存数据、非负有界读取和至少四字节输出；Python socket guard 记录无尝试，不等同操作系统隔离证明。无系统安装、负长度/不可信缓冲区、资源耗尽或全 Unicode 操作验证。
