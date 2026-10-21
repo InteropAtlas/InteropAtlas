@@ -1,0 +1,101 @@
+id: python_xmlschema
+type: system
+kind: library
+name_zh: xmlschema Python XSD 库
+name_en: xmlschema Python XSD library
+description_zh: 用于 XML Schema 验证及 XML 数据编解码的开源 Python 库；本记录固定到4.3.2，保留验证模式、资源策略和版次证据边界。
+description_en: An open-source Python library for XML Schema validation and XML data encoding/decoding, pinned here
+  to 4.3.2 with validation-mode, resource-policy and edition-evidence boundaries.
+version: 4.3.2
+external_identifiers:
+- namespace: github
+  value: sissaschool/xmlschema
+- namespace: pypi
+  value: xmlschema
+official_url: https://github.com/sissaschool/xmlschema
+versions:
+- version: 4.3.2
+  status: released
+  url: https://github.com/sissaschool/xmlschema/releases/tag/v4.3.2
+domains:
+- schema
+- validation
+- structured_data
+capabilities:
+- schema_validation
+open_source: true
+license_expression: MIT
+scope_notes_zh: 固定 4.3.2 的 Python XSD 验证/编解码库，依赖 elementpath 和 Python XML 处理设施；官方声明 XSD 1.0/1.1，默认 XMLSchema 指向
+  XMLSchema10，XMLSchema11 需显式选择。默认 strict；lax 保留错误并可能将不可解码值置 None，skip 顶层解码可保留非法词法文本而不报告错误，不等于验证通过。资源默认 allow=all、defuse=remote，不是默认离线或所有输入均禁实体；本轮可信内存输入显式
+  allow=none、defuse=always，正常读取随包可信元模式，未测实体攻击或外部资源。默认忽略实例 schemaLocation；path 空选择默认可空泛通过，allow_empty=False 可要求报错。25例观察区分实例不符合、XML解析异常和模式构造异常；Decimal
+  示例保持该值，但将编码后的 Element 再解码会改变命名空间键和字典形状，不作通用无损往返保证。随包 XSD_1.0/XMLSchema.xsd 自述非规范且文档指向2004-03 PER，不能仅凭元模式复制或总体支持声明推出2004-10精确规范全符合；本批不建
+  implements。未跑 XSD1.1、W3C全套测试、UBL实例/业务规则、第三方互通或生产安全评估，不表示IA采用。
+scope_notes_en: Fixed to the 4.3.2 Python XSD validation/encoding/decoding library, using elementpath and Python
+  XML facilities. Upstream declares XSD 1.0/1.1; XMLSchema defaults to XMLSchema10, while XMLSchema11 requires explicit
+  selection. Strict is default; lax retains errors and may substitute None, while top-level skip decoding can retain
+  invalid lexical text without reporting errors, not successful validation. Resource defaults are allow=all and
+  defuse=remote, not offline operation or entity prevention for every input. Trusted-memory tests explicitly use
+  allow=none and defuse=always; bundled trusted meta-schemas are read normally, with no external-resource or entity-attack
+  assessment. Instance schemaLocation hints are ignored by default; an empty path selection can pass vacuously unless
+  allow_empty=False is requested. Twenty-five observations distinguish instance violations, XML parse exceptions
+  and schema-construction exceptions. A Decimal value survives the tested conversion, but decoding the encoded Element
+  changes namespace keys and dictionary shape, not a general lossless round trip. Bundled XSD_1.0/XMLSchema.xsd
+  labels itself non-normative and points to a March 2004 PER; neither that copy nor the general support claim alone
+  proves full conformance to the precise October 2004 documents, so no implements edge is added. XSD 1.1 execution,
+  a full W3C suite, UBL/business rules, third-party interoperability, production security and IA adoption are not
+  established.
+sources:
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/README.rst
+  title: xmlschema 4.3.2 — library identity, XSD support and default class
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/pyproject.toml
+  title: xmlschema 4.3.2 — 4.3.2 identity, Python and elementpath dependency
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/LICENSE
+  title: xmlschema 4.3.2 — MIT license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/features.rst
+  title: xmlschema 4.3.2 — strict/lax/skip modes and default loading policies
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/usage.rst
+  title: xmlschema 4.3.2 — schema validation and decoding APIs
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/settings.py
+  title: xmlschema 4.3.2 — resource and schema defaults
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/schemas.py
+  title: xmlschema 4.3.2 — default XSD class, validation selection and schema-location hints
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/resources/parsers.py
+  title: xmlschema 4.3.2 — parse errors distinct from validation errors
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  title: xmlschema 4.3.2 — bundled non-normative meta-schema and March 2004 PER documentation pointer
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:48:45.103038+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed XSD library evidence executor
+record_created_at: '2026-10-21T06:54:25.169946+00:00'
+record_updated_at: '2026-10-21T06:54:25.169946+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_xmlschema
+  acceptance_event_id: accept-20261021-python-xmlschema-python-xmlschema
+  reviewed_candidate_blob: ecc47180f667b3c6d79608ac7dce40601dcd0636
+  reviewed_against_commit: fd8c3c1358533804a3d5c9f5e1fdd7fe71ce3c68
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: fd8c3c1358533804a3d5c9f5e1fdd7fe71ce3c68
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/487
