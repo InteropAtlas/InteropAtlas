@@ -432,15 +432,15 @@ last_verified_by: Agent — OpenAI / dot, language-tag capability evidence execu
 ---
 id: git_protocol_provides_version_control_transport
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:26:26.111734+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Git 传输协议支持分布式版本控制
@@ -451,6 +451,41 @@ target: {type: capability, id: version_control}
 conditions_zh: 这里描述的是 Git 技术体系中的网络传输部分，不代表该协议单独实现完整版本控制。
 conditions_en: This describes the network transport portion of Git and does not imply that the wire protocol alone implements complete version control.
 confidence: 0.9
+context:
+  version_context:
+    source: Git wire protocol v2 as documented in Git v2.51.0, fixed commit c44beea485f0f2feaf460e2ac87fdd5608d63cf0;
+      not a claim about the latest Git release
+    target: Existing IA capability version_control
+  conditions_zh: 仅支持 Git 版本控制体系的仓库数据交换部分，不单独实现记录、比较、分支或合并。客户端请求 version=2 后仍须依据服务端的版本响应与能力通告选择命令；ls-refs 请求引用信息，fetch
+    取回 packfile，可选特性须按其通告使用。agent 字符串只作统计和调试，不能用来推断功能支持。本次不核验 IA 的实际协议协商、传输安全或任意客户端与服务端互通。
+  conditions_en: Only the repository-data exchange part of Git version control, not recording, comparing, branching
+    or merging by itself. After requesting version=2, clients still depend on the server version response and
+    advertised capabilities. ls-refs requests references; fetch retrieves packfiles, with optional features
+    used as advertised. Agent strings are informational, not proof of feature support. IA protocol negotiation,
+    transport security and arbitrary client/server interoperability are not verified.
+evidence:
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L15-L34
+  title: 'Git v2.51.0 protocol-v2 — description: command-oriented repository exchange'
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L49-L58
+  title: Git v2.51.0 protocol-v2 — initial client version request
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L106-L163
+  title: Git v2.51.0 protocol-v2 — capability advertisement and command selection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L182-L231
+  title: Git v2.51.0 protocol-v2 — informational agent string and ls-refs
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L241-L253
+  title: Git v2.51.0 protocol-v2 — fetch packfiles and advertised extensions
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:25:00.925357+00:00'
+last_verified_by: Agent — OpenAI / dot, existing repository-exchange and knowledge-organization evidence executor
 ---
 id: interopatlas_inspired_by_i40kg
 record_created_at: "2026-09-01T16:44:53+08:00"
