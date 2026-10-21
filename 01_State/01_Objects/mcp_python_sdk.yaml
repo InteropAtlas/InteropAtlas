@@ -1,0 +1,82 @@
+id: mcp_python_sdk
+type: system
+kind: library
+name_zh: MCP Python 客户端与服务端开发库
+name_en: MCP Python client and server SDK
+description_zh: 用于构建模型上下文协议客户端与服务端的 Python SDK，提供资源、工具、提示和会话接口；本记录固定到 1.26.0。
+description_en: A Python SDK for building Model Context Protocol clients and servers, with resource, tool, prompt
+  and session interfaces; pinned here to release 1.26.0.
+version: 1.26.0
+external_identifiers:
+- namespace: github
+  value: modelcontextprotocol/python-sdk
+official_url: https://github.com/modelcontextprotocol/python-sdk
+versions:
+- version: 1.26.0
+  status: released
+  url: https://github.com/modelcontextprotocol/python-sdk/releases/tag/v1.26.0
+open_source: true
+license_expression: MIT
+scope_notes_zh: 主体是软件库，不是协议规范或已部署 Agent 产品。固定源码的最新协议常量为 2025-11-25，支持列表另含 2024-11-05、2025-03-26、2025-06-18；连接仍需初始化版本与能力协商。README
+  描述 stdio、SSE 与 Streamable HTTP 接口，这不是本轮对全部传输的互通验证。Tasks 在该版文档中明确为实验功能，跟踪草案，API 可不经通知变化；不把它提升为稳定承诺。包元数据要求 Python
+  >=3.10。本轮只核客户端/服务端会话及工具、资源、提示实现证据；不证明所有可选能力、授权部署、安全性、完整符合性、跨实现互通或最新发行版地位，不据此推荐生产部署。未推断 self_hostable，也不新增或强配能力概念。
+scope_notes_en: The subject is a software library, not the protocol specification or a deployed Agent product. The
+  fixed source sets its latest protocol constant to 2025-11-25 and also lists 2024-11-05, 2025-03-26 and 2025-06-18;
+  connections still require initialization and version/capability negotiation. README documents stdio, SSE and Streamable
+  HTTP interfaces, which is not a verification of all transports in this slice. Its Tasks documentation explicitly
+  labels the feature experimental, tracking the draft specification, with APIs subject to change without notice;
+  no stable commitment is inferred. Package metadata requires Python >=3.10. This slice verifies evidence for client/server
+  sessions and tools, resources and prompts, not every optional capability, authorized deployment, security, full
+  conformance, cross-implementation interoperability or latest-release status. It is not a production recommendation.
+  self_hostable is not inferred, and no capability concept is invented or forced onto the library.
+sources:
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/README.md
+  title: MCP Python SDK 1.26.0 — client/server SDK identity, resources, tools, prompts and documented transports
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/types.py
+  title: MCP Python SDK 1.26.0 — LATEST_PROTOCOL_VERSION = 2025-11-25 and message types
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/shared/version.py
+  title: MCP Python SDK 1.26.0 — supported dated protocol versions
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/client/session.py
+  title: MCP Python SDK 1.26.0 — initialization, capability negotiation and protocol-version check
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/server/session.py
+  title: MCP Python SDK 1.26.0 — server initialization version selection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/docs/experimental/tasks.md
+  title: MCP Python SDK 1.26.0 — Tasks are experimental and APIs may change without notice
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/pyproject.toml
+  title: MCP Python SDK 1.26.0 — Python >=3.10 package metadata and MIT declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/LICENSE
+  title: MCP Python SDK 1.26.0 — MIT license notice
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:37:53.060395+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version MCP SDK evidence executor
+record_created_at: '2026-10-21T01:41:23.011171+00:00'
+record_updated_at: '2026-10-21T01:41:23.011171+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: mcp_python_sdk
+  acceptance_event_id: accept-20261021-mcp-python-sdk-mcp_python_sdk
+  reviewed_candidate_blob: 54cf36fadafa6856981dfff0e896a11353c2fc78
+  reviewed_against_commit: af265ff5fad43332bdcea22483b9486d45cb68b3
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: af265ff5fad43332bdcea22483b9486d45cb68b3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/471
