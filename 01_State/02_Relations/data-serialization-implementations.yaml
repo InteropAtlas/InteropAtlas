@@ -97,3 +97,63 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: python_geojson_implements_geojson_rfc7946
+type: relation
+name_zh: geojson 3.3.0 有界实现GeoJSON对象编解码
+name_en: geojson 3.3.0 provides bounded GeoJSON object encoding/decoding
+source: python_geojson
+relation: implements
+target: geojson_rfc7946
+context:
+  capabilities:
+  - data_serialization
+  version_context:
+    source: jazzband/geojson 3.3.0, upstream commit f14b85252bd93eb336f9918a3cf8c601b6094714
+    target: GeoJSON, RFC 7946 (August 2016)
+  conditions_zh: 仅限固定README明确指向RFC7946的GeoJSON对象模型与编解码路径，使用相应几何/Feature/FeatureCollection输入；不是完整规范验证器或所有可构造数据均符合的保证。默认几何构造不验证，坐标6位舍入及loads中的舍入、null
+    properties归一化、未知type非严格返回dict适用；不保证无损往返。is_valid的Point/Polygon/Feature检查有限，不能代替完整位置/环方向/属性/bbox或地理语义验证。默认非有限数拒绝可被调用方参数覆盖；这些扩展输出不当作RFC语法。RFC对超3元素及环方向解析兼容性的SHOULD限定保留。本关系不证明坐标系转换、完整GIS、OGC
+    API Features服务器、认证、安全或第三方互通。
+  conditions_en: Limited to the GeoJSON object model and encoding/decoding paths that the fixed README explicitly
+    links to RFC 7946, using the respective geometry/Feature/FeatureCollection inputs. This is not a full specification
+    validator or a guarantee that every constructible value conforms. Default construction skips geometry validation;
+    six-place coordinate rounding, rounding during loads, null-properties normalization and non-strict unknown-type
+    dict returns apply, with no lossless round-trip guarantee. Point/Polygon/Feature is_valid checks do not replace
+    complete position/winding/property/bbox or geographic-semantic validation. Callers can override default nonfinite-number
+    rejection; such extended output is not treated as RFC syntax. The RFC SHOULD qualifications for positions beyond
+    three elements and winding-order parser compatibility are retained. This does not establish CRS conversion,
+    full GIS functionality, an OGC API Features server, certification, security or third-party interoperability.
+evidence:
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/README.rst
+  title: geojson 3.3.0 — identity, explicit RFC 7946 object classes, precision and simple validation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/geometry.py
+  title: geojson 3.3.0 — coordinate rounding and geometry checks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/codec.py
+  title: geojson 3.3.0 — default JSON number policies and load hooks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/base.py
+  title: geojson 3.3.0 — non-strict type conversion and is_valid delegation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/feature.py
+  title: geojson 3.3.0 — Feature properties/geometry normalization and checks
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc7946.txt
+  title: RFC 7946 — sections 3.1, 3.1.1, 3.1.6, 3.2 and 3.3; object and geometry conditions
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T07:34:27.995529+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed GeoJSON library evidence executor
+record_created_at: '2026-10-21T07:43:15.262148+00:00'
+record_updated_at: '2026-10-21T07:43:15.262148+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
