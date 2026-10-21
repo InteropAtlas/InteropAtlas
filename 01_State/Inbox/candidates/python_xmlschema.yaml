@@ -17,12 +17,11 @@ locators:
 - url: https://pypi.org/project/xmlschema/4.3.2/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_xmlschema
   reasons:
-  - 主体为 sissaschool/xmlschema Python 库与对应 PyPI 包，不与 XML Schema 规范、python_jsonschema JSON 库或 elementpath 依赖合并。4.3.2
-    是本轮固定核查版本。
-  - 既有 github/pypi 标识归一化、全量对象/候选预检未发现碰撞，不变更标识机制或注册表。
+  - 经独立语义审核由 accept-20261021-python-xmlschema-python-xmlschema 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 官方声明 XSD 1.0/1.1，默认 XMLSchema 是 XMLSchema10；随包元模式注释为非规范并指向2004-03 PER，不单凭此声明完整符合2004-10精确文档。本批 relations 为空。
@@ -30,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
