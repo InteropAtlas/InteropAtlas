@@ -1,0 +1,89 @@
+id: pyld
+type: system
+kind: library
+name_zh: PyLD Python JSON-LD 处理库
+name_en: PyLD Python JSON-LD processor
+description_zh: Python 的开源 JSON-LD 处理器；本记录固定到3.3.0，记录链接数据的JSON表示处理及图/数据集与RDF表示转换先例。
+description_en: An open-source Python JSON-LD processor, pinned here to 3.3.0 as a precedent for processing JSON
+  Linked Data and converting graph/dataset representations to and from RDF.
+version: 3.3.0
+external_identifiers:
+- namespace: github
+  value: digitalbazaar/pyld
+- namespace: pypi
+  value: PyLD
+official_url: https://github.com/digitalbazaar/pyld
+versions:
+- version: 3.3.0
+  status: released
+  url: https://github.com/digitalbazaar/pyld/releases/tag/v3.3.0
+domains:
+- linked_data
+- knowledge_graph
+capabilities:
+- linked_data_serialization
+- graph_representation
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: 固定 3.3.0 的 Python JSON-LD 处理器；本切片核对可信内存文档的展开、压缩、扁平化及 RDF/N-Quads 转换。官方为 aims to conform，setup 保留
+  Beta 分类，测试运行器有跳过项及 ToRDF 待支持项；不宣称全套认证。默认处理模式为 json-ld-1.1，可显式选择1.0；未映射属性可能被忽略，RDF转换的方向信息取决于rdfDirection选项，故不保证原始JSON无损往返。默认加载器可依环境使用requests或aiohttp，否则为报错占位；set_document_loader改变进程默认加载器，本轮不调用它；可能加载外部文档的处理调用显式传入拒绝外部加载的loader，from_rdf仅解析内存N-Quads。18例不覆盖真实网络/远程上下文、CLI、framing/canonicalization、第三方互通、安全或生产推荐；不推断SHACL管道、RDF1.2支持或IA采用。
+scope_notes_en: The fixed 3.3.0 Python JSON-LD processor; this slice checks trusted in-memory expansion, compaction,
+  flattening and RDF/N-Quads conversion. Upstream aims to conform, retains a Beta classifier, test skips and pending
+  ToRDF cases; no full certification is claimed. Processing defaults to json-ld-1.1 with explicit 1.0 available.
+  Unmapped properties may be ignored; RDF direction handling depends on rdfDirection, so arbitrary JSON round trips
+  are not lossless. The default loader can use requests or aiohttp if available, otherwise a failing placeholder;
+  set_document_loader changes the process default. This slice does not call it. Processing calls that can load external
+  documents receive an explicit rejecting loader; from_rdf only parses in-memory N-Quads. Eighteen examples do not
+  cover real network/remote contexts, CLI, framing/canonicalization, third-party interoperability, security or production
+  fitness, a SHACL pipeline, RDF 1.2 support or IA adoption.
+sources:
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/README.md
+  title: PyLD 3.3.0 — JSON-LD processor, conformance aims, document loading and ignored properties
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/setup.py
+  title: PyLD 3.3.0 — package identity, dependencies and Beta classifier
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/__about__.py
+  title: PyLD — fixed version 3.3.0 and license declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/LICENSE
+  title: PyLD — BSD-3-Clause license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py
+  title: PyLD 3.3.0 — expand/compact/flatten and RDF conversion defaults
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/options.py
+  title: PyLD 3.3.0 — processing mode, document loader and RDF direction options
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/docs/conformance.md
+  title: PyLD 3.3.0 — conformance aims and skipped/pending tests
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/tests/runtests.py
+  title: PyLD 3.3.0 — skip rules and pending ToRDF cases
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:15:36.943122+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed JSON-LD processor evidence executor
+record_created_at: '2026-10-21T05:20:13.051116+00:00'
+record_updated_at: '2026-10-21T05:20:13.051116+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: pyld
+  acceptance_event_id: accept-20261021-pyld-pyld
+  reviewed_candidate_blob: 7f8d66811e7b0cea0143474b6422759d8e76b233
+  reviewed_against_commit: 0a5f5e923ccd5b3b4e50b157f8bc3730ec9cb98c
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 0a5f5e923ccd5b3b4e50b157f8bc3730ec9cb98c
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/481
