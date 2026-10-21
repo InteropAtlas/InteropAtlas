@@ -1,0 +1,76 @@
+id: nlohmann_json
+type: system
+kind: library
+name_zh: JSON for Modern C++ 数据表示库
+name_en: JSON for Modern C++ library
+description_zh: 以 nlohmann/json 发布的仅头文件 C++11 库，提供 JSON 值、parse 解析与 dump 序列化；本记录固定到 3.12.0。
+description_en: The header-only C++11 library published as nlohmann/json, providing JSON values, parse and dump
+  operations; pinned here to release 3.12.0.
+version: 3.12.0
+external_identifiers:
+- namespace: github
+  value: nlohmann/json
+official_url: https://github.com/nlohmann/json
+versions:
+- version: 3.12.0
+  status: released
+  url: https://github.com/nlohmann/json/releases/tag/v3.12.0
+capabilities:
+- data_serialization
+open_source: true
+license_expression: MIT
+scope_notes_zh: 主体为软件库而非 RFC 8259 或 JSON Schema 验证实现。本轮仅记录 JSON 文本解析/序列化，不把其他二进制格式或应用协议支持一并接纳。默认 parse 拒绝注释，显式 ignore_comments
+  是扩展；解析错误默认抛异常，也可返回 discarded。单字节输入/存储字符串采用 UTF-8；特定宽字符迭代器可解析 UTF-16/32，dump 默认严格检查 UTF-8。默认数字使用 64 位有/无符号整数或 double，可能舍入或拒绝超范围数；赋值的
+  NaN 序列化为 null。默认对象键排序，不保证原始文本、数值拼写或键顺序无损保留；不是规范化/签名方案。无完整符合性、安全认证、宿主协议实现、互通、生产推荐或最新发行版结论。
+scope_notes_en: The subject is the library, not RFC 8259 or a JSON Schema validator. This slice records JSON text
+  parsing/serialization, not its other binary-format or application-protocol support. Default parse rejects comments;
+  explicit ignore_comments is an extension. Parse errors throw by default or can return discarded. Single-byte input
+  and stored strings use UTF-8; specific wide-character iterators allow UTF-16/32 input, and dump checks UTF-8 strictly
+  by default. Default numbers use signed/unsigned 64-bit integers or double and may round or reject out-of-range
+  values; assigned NaN serializes as null. Default object keys are sorted, so original text, numeric spelling and
+  key order are not preserved losslessly; this is not a canonicalization/signature scheme. No full-conformance,
+  security certification, host-protocol implementation, interoperability, production-recommendation or latest-release
+  claim.
+sources:
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/README.md
+  title: JSON for Modern C++ 3.12.0 — library identity, C++11 integration, serialization and encoding
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/parse.md
+  title: JSON for Modern C++ 3.12.0 — parse parameters, encoding, errors and comment extension
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/dump.md
+  title: JSON for Modern C++ 3.12.0 — JSON serialization and strict UTF-8 error handling
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/types/number_handling.md
+  title: JSON for Modern C++ 3.12.0 — RFC 8259 number handling and finite-precision boundaries
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/object_order.md
+  title: JSON for Modern C++ 3.12.0 — default sorted object keys
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/LICENSE.MIT
+  title: JSON for Modern C++ 3.12.0 — MIT license notice
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:10:32.968715+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version JSON serialization evidence executor
+record_created_at: '2026-10-21T01:14:39.614560+00:00'
+record_updated_at: '2026-10-21T01:14:39.614560+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: nlohmann_json
+  acceptance_event_id: accept-20261021-json-serialization-nlohmann_json
+  reviewed_candidate_blob: 13b3cc2d778f9735081ecec7333dd496653529ae
+  reviewed_against_commit: 687063ee413ea57854fb3e40843df2a033fdabda
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 687063ee413ea57854fb3e40843df2a033fdabda
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/469
