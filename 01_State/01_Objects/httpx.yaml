@@ -27,7 +27,10 @@ license_expression: BSD-3-Clause
 scope_notes_zh: 固定 0.28.1 的 Python HTTP 客户端库，记录同步/异步请求及响应表示处理先例；网络传输委托 httpcore，不把依赖实现归为独立 HTTPX 线协议认证。官方声明 HTTP/1.1
   与 HTTP/2 支持；HTTP/2 默认关闭，须可选 h2 依赖、显式启用及对端支持，不能保证实际使用HTTP/2。默认不自动跟随重定向，TLS验证默认开启，trust_env默认开启。固定 _config.py 在
   verify=True 且 trust_env=True 时会读取 SSL_CERT_FILE/SSL_CERT_DIR；同tag SSL文档对此有不同表述，本记录按源码限定，未测试真实TLS或环境证书效果。17项仅使用可信内存MockTransport、显式trust_env=False及默认值/缺依赖检查，无DNS或socket连接；不证明真实传输、代理、HTTP3、CLI、全RFC符合性、跨实现互通、安全或生产适用。保留Beta分类，不据普通功能记录作IA采用或推荐；本批不新增implements边。
-scope_notes_en: The fixed 0.28.1 Python HTTP client library, recorded as a sync/async request and response-representation
+  补充响应文本边界：未显式指定 response.encoding 时，Response.text 使用可识别的 HTTP Content-Type charset，否则使用 default_encoding（默认 UTF-8，可另配字符串或回调），不默认执行
+  HTML meta/BOM 编码嗅探。TextDecoder 以 errors='replace' 解码；先取 .text 得到的字符串可能已含替换字符，后续解析器不能仅凭该字符串还原已替换的字节信息。传递 .content
+  字节与实际头部 charset 是不同的调用选择，不构成通用互通保证。本次仅核此解码切片，旧网络、许可和采用边界未重新核验。
+scope_notes_en: 'The fixed 0.28.1 Python HTTP client library, recorded as a sync/async request and response-representation
   precedent. Network transport is delegated to httpcore, not independently certified as HTTPX wire-protocol conformance.
   Upstream declares HTTP/1.1 and HTTP/2 support; HTTP/2 is off by default and requires optional h2, explicit enabling
   and peer support, so actual HTTP/2 use is not guaranteed. Redirects are not automatically followed; TLS verification
@@ -36,7 +39,13 @@ scope_notes_en: The fixed 0.28.1 Python HTTP client library, recorded as a sync/
   TLS or certificate-environment effects. Seventeen checks use trusted in-memory MockTransport with trust_env=False
   plus defaults/missing-dependency checks and no DNS/socket connections. They do not prove real transport, proxies,
   HTTP/3, CLI, full RFC conformance, cross-implementation interoperability, security or production fitness. The
-  Beta classifier is retained; no IA adoption, recommendation or implements edge is asserted.
+  Beta classifier is retained; no IA adoption, recommendation or implements edge is asserted. Additional response-text
+  boundary: unless response.encoding is explicitly set, Response.text uses a recognized HTTP Content-Type charset,
+  otherwise default_encoding (UTF-8 by default; configurable as a string or callable), without built-in HTML meta/BOM
+  encoding sniffing. TextDecoder uses errors=''replace''; taking .text first can yield replacement characters, and
+  a later parser cannot recover the replaced byte information from that string alone. Passing .content bytes and
+  the actual header charset is a distinct application choice, not a general interoperability guarantee. This update
+  verifies only that decoding slice; prior network, license and adoption boundaries were not reverified.'
 sources:
 - url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/README.md
   title: HTTPX 0.28.1 — Python client, sync/async, HTTP/1.1 and HTTP/2 declaration
@@ -82,14 +91,27 @@ sources:
   title: HTTPX 0.28.1 — SSL documentation; certificate-variable text differs from fixed code
   language: en
   accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/text-encodings.md
+  title: HTTPX 0.28.1 — response text charset, UTF-8 default and configurable detection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_models.py
+  title: HTTPX 0.28.1 — Response.text, encoding selection and actual header charset
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_decoders.py
+  title: HTTPX 0.28.1 — incremental TextDecoder with replacement errors
+  language: en
+  accessed: '2026-10-21'
 last_verified_at: '2026-10-21T06:07:22.346851+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed HTTP client evidence executor
 record_created_at: '2026-10-21T06:15:01.172077+00:00'
-record_updated_at: '2026-10-21T06:15:01.172077+00:00'
+record_updated_at: '2026-10-21T20:44:36.915013+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewer: Independent Agent — OpenAI / dot main-session semantic review, response text decoding slice; review
+    confirmation recorded 2026-10-21T20:44:18Z
   github_actor: ff6962757
 intake_provenance:
   candidate_id: httpx
