@@ -46,15 +46,15 @@ last_verified_by: Agent — OpenAI / dot，JSON foundation relation evidence exe
 ---
 id: json_provides_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T02:21:58.310314+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON 提供数据序列化能力
@@ -63,6 +63,23 @@ source: {type: standard, id: json_rfc8259}
 relation: provides
 target: {type: capability, id: data_serialization}
 confidence: 1.0
+context:
+  version_context:
+    source: RFC 8259, December 2017
+    target: Existing IA capability data_serialization
+  conditions_zh: 限定为 RFC 8259 中结构化值的 JSON 文本表示，可用于存储、交换与重新解析；这是语法层序列化能力，不包含数据结构规则或业务语义验证。对象成员名称宜唯一；数字范围和精度可受实现限制；非封闭生态系统间交换须使用
+    UTF-8。不保证任意宿主类型无损往返、唯一字节表示或宿主协议互通。
+  conditions_en: Limited to RFC 8259 JSON text representation of structured values for storage, exchange and parsing,
+    not schema or application-semantic validation. Object names should be unique, number range/precision can be
+    implementation-limited, and exchange outside closed ecosystems requires UTF-8. This does not guarantee lossless
+    round trips for arbitrary host types, a unique byte representation, or host-protocol interoperability.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc8259.html
+  title: RFC 8259 — sections 1–2 serialization, 4 object names, 6 numeric limits and 8.1 encoding
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T02:19:06.271812+00:00'
+last_verified_by: Agent — OpenAI / dot，existing capability-edge evidence executor
 ---
 id: yaml_provides_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -86,15 +103,15 @@ confidence: 1.0
 ---
 id: json_schema_provides_validation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T02:21:58.310314+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON Schema 提供数据结构验证能力
@@ -103,6 +120,25 @@ source: {type: standard, id: json_schema_2020_12}
 relation: provides
 target: {type: capability, id: schema_validation}
 confidence: 1.0
+context:
+  version_context:
+    source: JSON Schema Draft 2020-12 Validation, draft-bhutton-json-schema-validation-01, 2022-06-16
+    target: Existing IA capability schema_validation
+  conditions_zh: 限定为 Draft 2020-12 Validation 的断言关键词按 Schema 检查实例结构与约束；通过验证只表示满足所声明约束，不证明数据真实、业务正确或宿主协议完整符合。format
+    的断言行为取决于词汇表与配置：Format-Annotation 下的可选断言默认关闭，Format-Assertion 支持本身可选，要求该词汇表时有更强验证义务。保留引用文档的 Internet-Draft 身份，不将其改称已发布
+    RFC。
+  conditions_en: 'Limited to Draft 2020-12 Validation assertion keywords checking instance structure and constraints
+    against a schema. Passing does not prove data truth, application correctness or full host-protocol conformance.
+    Format assertion depends on vocabulary/configuration: optional assertion under Format-Annotation is disabled
+    by default; Format-Assertion support is optional, with stronger obligations when required. The cited document
+    retains its Internet-Draft status, not a published RFC.'
+evidence:
+- url: https://json-schema.org/draft/2020-12/json-schema-validation
+  title: JSON Schema 2020-12 Validation, 2022-06-16 — sections 1, 3, 6 and 7.1–7.2
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T02:19:06.271812+00:00'
+last_verified_by: Agent — OpenAI / dot，existing capability-edge evidence executor
 ---
 id: http_uses_uri
 record_created_at: "2026-09-01T16:44:53+08:00"
