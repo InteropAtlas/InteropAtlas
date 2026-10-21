@@ -1,0 +1,511 @@
+packet_id: style_dictionary_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 52d8b62552de3cb98ec8039754e0ca79e4401421
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 承接现有design_token_exchange实际空实现记录；空列表只表库内覆盖，不表世界空白。
+- 一个system/software+既有能力/syntax导航，relations为空；不改页面、视觉系统、分类、规范或未来维护规则。
+- design_system/data_format为已有自由标签，按工具公开范围人工选择，不因与DTCG同能力而自动继承或建立实现关系。
+work_item_preflight:
+  baseline: 52d8b62552de3cb98ec8039754e0ca79e4401421
+  searched_at: '2026-10-21T12:18:22.139491+00:00'
+  searched_yaml_files: 401
+  terms:
+  - style dictionary
+  - style-dictionary
+  - amzn/style-dictionary
+  hits: []
+  github_issue_search: 'repo:InteropAtlas/InteropAtlas "Style Dictionary": no results, read 2026-10-21T12:16Z'
+  github_pr_search: '"Style Dictionary" within InteropAtlas/InteropAtlas, all states: no results, read 2026-10-21T12:16Z'
+  limit_zh: 本次有限检索未发现同一 intake 并行项；不是全知证明，另做全量规范化身份检查。
+official_source_hashes:
+- path: README.md
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/README.md
+  local_path: official/README.md
+  sha256: 79bf235dacfe00e9cd71624ae898200a0fd6a6d13d0b5b1125ba331566ac1cf9
+  git_blob: 972d9a656bc017a3912a3309064a9ff82f68b3a7
+  fetched_at: '2026-10-21T11:53:37.940171+00:00'
+- path: package.json
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/package.json
+  local_path: official/package.json
+  sha256: 17a15112f4d64822911d669887e35f02be218be112b684b3d64866b61eb6ab73
+  git_blob: e12c971344fa6232265166b1912abae168234610
+  fetched_at: '2026-10-21T11:53:40.461845+00:00'
+- path: LICENSE
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/LICENSE
+  local_path: official/LICENSE
+  sha256: 46ae5f0dc2e06a18cde8b06bdb45abea0b6e28d169e6eff2069536780304cf6e
+  git_blob: 8318dc07bdb6dccef3b6a99256022e658ef241ae
+  fetched_at: '2026-10-21T11:53:43.006803+00:00'
+- path: docs/src/content/docs/info/DTCG.mdx
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/docs/src/content/docs/info/DTCG.mdx
+  local_path: official/docs/src/content/docs/info/DTCG.mdx
+  sha256: ccd73ad4748380556cacf147a483caa7ff90d53f6a4f61bb0b738131fd47ebfb
+  git_blob: 351c1c9497f2bd5dc55752a5315ec0a17b6c15cc
+  fetched_at: '2026-10-21T11:53:52.935320+00:00'
+- path: lib/utils/detectDtcgSyntax.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/detectDtcgSyntax.js
+  local_path: official/lib/utils/detectDtcgSyntax.js
+  sha256: c8369c0c5b8d17f7abf1d227eb76af4594aec18714df8bd879dddc5e91b01cd8
+  git_blob: 84e0ee9170c970825d78a3a971a5fb20d2eb57a0
+  fetched_at: '2026-10-21T11:53:55.634504+00:00'
+- path: lib/utils/convertToDTCG.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/convertToDTCG.js
+  local_path: official/lib/utils/convertToDTCG.js
+  sha256: 1aa012c18055ad692b2e26822095d1f318bb242677896c62579559456dc0818f
+  git_blob: 6ce55206d0dfb8ef9c2f657a15af78c2ac1a2d6f
+  fetched_at: '2026-10-21T11:53:58.076484+00:00'
+- path: lib/StyleDictionary.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/StyleDictionary.js
+  local_path: official/lib/StyleDictionary.js
+  sha256: 85a4280976d9473c047c8076965503ce0658ecd240adee23434cece754326a61
+  git_blob: a96ac6d52f218b083ca16f8a9a860e7b68c5a0f2
+  fetched_at: '2026-10-21T12:13:01.599755+00:00'
+- path: lib/common/transforms.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/transforms.js
+  local_path: official/lib/common/transforms.js
+  sha256: 8c318eba5e3ca01936ea871368d5b9e68cd0543c443d657c3877dba47bb9fe39
+  git_blob: 564c41a756ea3c98e8ea265048b5c136a31fbe6c
+  fetched_at: '2026-10-21T12:13:04.919562+00:00'
+- path: lib/common/formats.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/formats.js
+  local_path: official/lib/common/formats.js
+  sha256: 4bc711088b1db18804fff2250798ea20c4c2e3c6403d16bf6dd83d93a09af313
+  git_blob: e1400293362b8f8bbb0486d250d3ba17ec26db1b
+  fetched_at: '2026-10-21T12:13:09.684171+00:00'
+- path: lib/transform/token.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/transform/token.js
+  local_path: official/lib/transform/token.js
+  sha256: eaeb31c4a1032acc2f01270920cba1a63aa804dc922d730a3a9c29f2c553324b
+  git_blob: b34f61ef72e1ab0ed69c598e8a54ddcdb63ed567
+  fetched_at: '2026-10-21T12:13:12.348825+00:00'
+- path: lib/utils/flattenTokens.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/flattenTokens.js
+  local_path: official/lib/utils/flattenTokens.js
+  sha256: dc675c138640cb3609e840e99abf8dbd08cd8d33c8558969e03e05037794e7b8
+  git_blob: 60926688ea0891556ba4fa42bb412d0abf90246e
+  fetched_at: '2026-10-21T12:13:15.245831+00:00'
+- path: lib/utils/typeDtcgDelegate.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/typeDtcgDelegate.js
+  local_path: official/lib/utils/typeDtcgDelegate.js
+  sha256: fcc1a5a61e9c38f52ee7423b42b42100870181b310b92d8ed874930d2d8c4675
+  git_blob: bfff4fc173ead44301adc6b2168f9196aa6e057a
+  fetched_at: '2026-10-21T12:13:18.745031+00:00'
+- path: lib/utils/references/resolveReferences.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/references/resolveReferences.js
+  local_path: official/lib/utils/references/resolveReferences.js
+  sha256: 0aae119ece9b29b3d7edced9aed0583b423f4f6d26696b112ddb9137b629508b
+  git_blob: 38d02a447225603be6f902875a3d7d63df4f73bf
+  fetched_at: '2026-10-21T12:13:21.522387+00:00'
+- path: lib/utils/resolveObject.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/resolveObject.js
+  local_path: official/lib/utils/resolveObject.js
+  sha256: 6e1f800065d5af2592b151932c42d8a62991f57b35a9f78f376c61deae8f7964
+  git_blob: a390425c9f5962c36afc9ef5b4218adc477f963c
+  fetched_at: '2026-10-21T12:13:24.359940+00:00'
+- path: docs/src/content/docs/reference/Hooks/Formats/index.md
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/docs/src/content/docs/reference/Hooks/Formats/index.md
+  local_path: official/docs/src/content/docs/reference/Hooks/Formats/index.md
+  sha256: b1200c80c0438d6c95254268b61c34cfb9bddfa046196a30ba1b521c7b7431de
+  git_blob: 2b631c549a30de2c236151bdde5e823d9390f49e
+  fetched_at: '2026-10-21T12:13:27.166679+00:00'
+- path: scripts/inject-version.js
+  url: https://raw.githubusercontent.com/style-dictionary/style-dictionary/745264a62d01037581c6654fb4ac66bb3d245f07/scripts/inject-version.js
+  local_path: official/scripts/inject-version.js
+  sha256: c6d69061bed5f0540078c7b7521ff0b1e832172a2feacb71105849020194966d
+  git_blob: e941580a1c6e6ab5725a2af51418076a2943d2ef
+  fetched_at: '2026-10-21T12:14:35.131614+00:00'
+existing_endpoint_blobs:
+  design_token_exchange:
+    path: 01_State/01_Objects/design_token_exchange.yaml
+    git_blob: 555a539da87482494a2c8885e1e0a2b8a73b189d
+  design_tokens_format_2025.10:
+    path: 01_State/01_Objects/design-tokens-format-2025.10.yaml
+    git_blob: fe678b3aa608d5d3daa52e61bf5dbb2e81f1f118
+package_registry_identity:
+  metadata:
+    url: https://registry.npmjs.org/style-dictionary/5.7.0
+    sha256: 078bfc69f881a3a2e124081dc907e1e044b326c968a1dca48e6376d321393863
+    captured_at: '2026-10-21T12:12:30.716907+00:00'
+  name: style-dictionary
+  version: 5.7.0
+  repository:
+    url: git://github.com/style-dictionary/style-dictionary.git
+    type: git
+  engines:
+    node: '>=22.0.0'
+  tarball:
+    url: https://registry.npmjs.org/style-dictionary/-/style-dictionary-5.7.0.tgz
+    sha256: 7cac53dc9a08f77888e4d6f80dc794ff83463d1de0e834def620cb92e21a6657
+    sha1: b537fe6d68b078d6fbc73cfcd4e4d895e60a1b5a
+    integrity: sha512-imy4PuzqWTCpPE9YMcDSlqtb9zV4wj8I06hRDpt+/HTJVH88KKuMx0X++/PMDjQAGptSxqIkYiulOSwSL5r6Kw==
+    bytes: 2337984
+    captured_at: '2026-10-21T12:13:30.875640+00:00'
+    limit: Matches registry-distributed tarball hashes; signatures/attestations and entire dependency supply chain
+      were not audited.
+objects:
+- candidate_id: style_dictionary
+  candidate_path: 01_State/Inbox/candidates/style_dictionary.yaml
+  candidate_blob: a695d694850f25ecef38a2e859ca82d5cdc1bee6
+  preflight:
+    canonical_records: 212
+    existing_candidate_records: 215
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: style_dictionary
+    type: system
+    kind: software
+    name_zh: Style Dictionary 设计令牌构建工具
+    name_en: Style Dictionary design-token build tool
+    description_zh: 面向设计令牌转换与多平台样式输出的开源构建工具；固定5.7.0，仅记录有界内置转换/CSS输出先例及格式支持、类型验证和引用处理限制。
+    description_en: An open-source build tool for design-token transformations and cross-platform style output,
+      pinned to 5.7.0; records bounded built-in processing/CSS-output precedents and format-support, type-validation
+      and reference-handling limits.
+    version: 5.7.0
+    external_identifiers:
+    - namespace: github
+      value: style-dictionary/style-dictionary
+    official_url: https://github.com/style-dictionary/style-dictionary
+    versions:
+    - version: 5.7.0
+      status: released
+      url: https://github.com/style-dictionary/style-dictionary/releases/tag/v5.7.0
+    domains:
+    - design_system
+    - data_format
+    capabilities:
+    - design_token_exchange
+    open_source: true
+    license_expression: Apache-2.0
+    scope_notes_zh: 固定 npm style-dictionary 5.7.0，官方 tag v5.7.0 指向745264a62d01037581c6654fb4ac66bb3d245f07；Node.js要求>=22，提供CLI与程序API的设计令牌构建工具，沿用system/software，不新增工具类型。固定文档明示DTCG2025.10尚未完整支持，本切片只记录现有设计令牌交换能力和处理先例，不建立implements。detectDtcgSyntax只寻找$value/$type键，不验证令牌结构或值；convertToDTCG克隆输入并转换value/type/description键，默认可将共同$type提升到组，applyTypesToGroup=false可保留逐token类型；它不把size等旧类型名称改成DTCG类型，也不构成完整格式迁移/验证。运行时可将组类型下放到token并保留子组覆盖；在本例的混合legacy与DTCG输入里自动选择DTCG，legacy
+      value token未出现在输出，不能承诺混合格式保留。number类型配非数字字符串也可继续处理，成功不证明类型符合。固定内置转换支持本例的duration毫秒/秒转换和$root命名；CSS默认输出解析后的值，outputReferences=true可保留CSS变量引用，不保证任意输出格式无损往返。缺失/循环引用在本例明确brokenReferences=throw时抛错，当前源码默认亦为throw；值转换异常由wrapper保留转换前的值并汇总错误，warnings=error才将该类汇总变为异常，日志设置/输出成功不能替代输入验证。19项可信合成例仅使用内存token、显式普通对象配置、空source/include与内置转换/格式化，一个CSS文件写入新临时目录；未加载用户配置或外部扩展，未测ZIP、全部平台输出、真实视觉/UI、任意输入安全、全DTCG符合性、第三方互通或IA采用。16份固定源指纹、12份安装文件逐字一致，以及仅VERSION占位符按官方发布脚本替换的一个文件分别留痕；npm
+      tarball integrity核对不等于签名/证明或完整依赖供应链审计。Apache-2.0按官方包元数据与LICENSE记录，不作为法律适用性意见。
+    scope_notes_en: Pinned to npm style-dictionary 5.7.0 and official tag v5.7.0 at commit 745264a62d01037581c6654fb4ac66bb3d245f07.
+      This design-token build tool requires Node.js >=22 and offers a CLI and programmatic API; it uses the existing
+      system/software identity, not a new tool kind. Fixed documentation explicitly says DTCG2025.10 is not fully
+      supported. This slice records the existing design_token_exchange capability and processing precedent without
+      an implements relation. detectDtcgSyntax only looks for $value/$type keys, not valid structure or values.
+      convertToDTCG clones input and renames value/type/description keys, optionally hoisting a common $type to
+      groups by default; applyTypesToGroup=false keeps per-token types. It does not translate legacy type names
+      such as size into DTCG types or provide complete migration/validation. Runtime group types can be delegated
+      to tokens with child overrides. In the tested mixed legacy/DTCG input, automatic DTCG selection left legacy
+      value tokens out of the output; mixed-format preservation is not promised. A number token with a nonnumeric
+      string can also continue processing, so success does not prove type validity. Built-in transforms handle the
+      tested duration milliseconds/seconds and $root names. CSS defaults to resolved values, while outputReferences=true
+      can preserve CSS variable references; arbitrary-format lossless round trips are not established. Missing/circular
+      references throw with the probe’s explicit brokenReferences=throw setting, also the current source default.
+      On a value-transform exception, the wrapper preserves the prior value and collects diagnostics; warnings=error
+      makes that class of collected error throw. Logging/output success is not input validation. Nineteen trusted
+      synthetic examples use only inline tokens, explicit plain-object config, empty source/include and built-in
+      transforms/formats, writing one CSS file to a fresh temporary directory. User config, external extensions,
+      ZIP, every platform output, actual visual/UI behavior, arbitrary-input safety, full DTCG conformance, third-party
+      interoperability and IA adoption were not tested. Sixteen fixed source fingerprints, twelve byte-identical
+      installed files and one documented release-script VERSION substitution are recorded separately. npm tarball
+      integrity matching is not a signature/attestation or whole-dependency supply-chain audit. Apache-2.0 is recorded
+      from official package metadata and LICENSE, not as a legal-suitability opinion.
+    sources:
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/README.md
+      title: Style Dictionary 5.7.0 — design-token build tool, CLI and Node API
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/package.json
+      title: Style Dictionary 5.7.0 — fixed package identity, Node engine and Apache-2.0 declaration
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/LICENSE
+      title: Style Dictionary 5.7.0 — Apache License 2.0
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/docs/src/content/docs/info/DTCG.mdx
+      title: Style Dictionary 5.7.0 — explicit incomplete support for DTCG2025.10
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/StyleDictionary.js
+      title: Style Dictionary 5.7.0 — initialization, dialect selection, platform processing and configurable errors
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/convertToDTCG.js
+      title: Style Dictionary 5.7.0 — partial key conversion and optional common-type hoisting
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/detectDtcgSyntax.js
+      title: Style Dictionary 5.7.0 — syntax detection is key-based
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/transforms.js
+      title: Style Dictionary 5.7.0 — built-in name and duration transforms
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/formats.js
+      title: Style Dictionary 5.7.0 — built-in output formats
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/transform/token.js
+      title: Style Dictionary 5.7.0 — transform error fallback behavior
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T12:18:22.139491+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed design-token implementation evidence executor
+relations: []
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: style_dictionary
+  rationale_zh: 设计令牌结构表示、引用处理和格式输出的工具先例；不是界面设计实施、视觉质量认证或任意DTCG工具互通。
+supplementary_verification:
+  source_commit: 745264a62d01037581c6654fb4ac66bb3d245f07
+  observed_at: '2026-10-21T12:15:33.051Z'
+  versions:
+    node: v24.19.0
+    style_dictionary: 5.7.0
+  local_examples_passed: 19
+  source_files_verified:
+  - README.md
+  - package.json
+  - LICENSE
+  - docs/src/content/docs/info/DTCG.mdx
+  - lib/utils/detectDtcgSyntax.js
+  - lib/utils/convertToDTCG.js
+  - lib/StyleDictionary.js
+  - lib/common/transforms.js
+  - lib/common/formats.js
+  - lib/transform/token.js
+  - lib/utils/flattenTokens.js
+  - lib/utils/typeDtcgDelegate.js
+  - lib/utils/references/resolveReferences.js
+  - lib/utils/resolveObject.js
+  - docs/src/content/docs/reference/Hooks/Formats/index.md
+  - scripts/inject-version.js
+  installed_source_matches:
+  - README.md
+  - package.json
+  - LICENSE
+  - lib/utils/detectDtcgSyntax.js
+  - lib/utils/convertToDTCG.js
+  - lib/common/transforms.js
+  - lib/common/formats.js
+  - lib/transform/token.js
+  - lib/utils/flattenTokens.js
+  - lib/utils/typeDtcgDelegate.js
+  - lib/utils/references/resolveReferences.js
+  - lib/utils/resolveObject.js
+  documented_build_transformations:
+  - path: lib/StyleDictionary.js
+    change: Only the documented prepublish VERSION placeholder replacement with 5.7.0
+    installed_sha256: 21104f6f4155877964ef14906691e4220fbaf3bd73354557b1f76bdcc7a69bae
+    source_sha256: 85a4280976d9473c047c8076965503ce0658ecd240adee23434cece754326a61
+  dependency_versions:
+    node_modules/@bundled-es-modules/deepmerge: 4.3.2
+    node_modules/@bundled-es-modules/glob: 13.0.6
+    node_modules/@bundled-es-modules/memfs: 4.17.0
+    node_modules/@jsonjoy.com/base64: 1.1.2
+    node_modules/@jsonjoy.com/buffers: 17.67.0
+    node_modules/@jsonjoy.com/codegen: 1.0.0
+    node_modules/@jsonjoy.com/fs-core: 4.80.0
+    node_modules/@jsonjoy.com/fs-fsa: 4.80.0
+    node_modules/@jsonjoy.com/fs-node: 4.80.0
+    node_modules/@jsonjoy.com/fs-node-builtins: 4.80.0
+    node_modules/@jsonjoy.com/fs-node-to-fsa: 4.80.0
+    node_modules/@jsonjoy.com/fs-node-utils: 4.80.0
+    node_modules/@jsonjoy.com/fs-print: 4.80.0
+    node_modules/@jsonjoy.com/fs-snapshot: 4.80.0
+    node_modules/@jsonjoy.com/fs-snapshot/node_modules/@jsonjoy.com/base64: 17.67.0
+    node_modules/@jsonjoy.com/fs-snapshot/node_modules/@jsonjoy.com/codegen: 17.67.0
+    node_modules/@jsonjoy.com/fs-snapshot/node_modules/@jsonjoy.com/json-pack: 17.67.0
+    node_modules/@jsonjoy.com/fs-snapshot/node_modules/@jsonjoy.com/json-pointer: 17.67.0
+    node_modules/@jsonjoy.com/fs-snapshot/node_modules/@jsonjoy.com/util: 17.67.0
+    node_modules/@jsonjoy.com/json-pack: 1.21.0
+    node_modules/@jsonjoy.com/json-pack/node_modules/@jsonjoy.com/buffers: 1.2.1
+    node_modules/@jsonjoy.com/json-pointer: 1.0.2
+    node_modules/@jsonjoy.com/util: 1.9.0
+    node_modules/@jsonjoy.com/util/node_modules/@jsonjoy.com/buffers: 1.2.1
+    node_modules/@zip.js/zip.js: 2.24.0
+    node_modules/assert: 2.1.0
+    node_modules/available-typed-arrays: 1.0.7
+    node_modules/balanced-match: 4.0.4
+    node_modules/base64-js: 1.5.1
+    node_modules/brace-expansion: 5.0.12
+    node_modules/buffer: 6.0.3
+    node_modules/call-bind: 1.0.9
+    node_modules/call-bind-apply-helpers: 1.0.2
+    node_modules/call-bound: 1.0.4
+    node_modules/chalk: 5.6.2
+    node_modules/change-case: 5.4.4
+    node_modules/colorjs.io: 0.5.2
+    node_modules/commander: 12.1.0
+    node_modules/component-emitter: 2.0.0
+    node_modules/deepmerge: 4.3.1
+    node_modules/define-data-property: 1.1.4
+    node_modules/define-properties: 1.2.1
+    node_modules/dunder-proto: 1.0.1
+    node_modules/es-define-property: 1.0.1
+    node_modules/es-errors: 1.3.0
+    node_modules/es-object-atoms: 1.1.2
+    node_modules/events: 3.3.0
+    node_modules/for-each: 0.3.5
+    node_modules/function-bind: 1.1.2
+    node_modules/generator-function: 2.0.1
+    node_modules/get-intrinsic: 1.3.0
+    node_modules/get-proto: 1.0.1
+    node_modules/glob: 13.0.6
+    node_modules/glob-to-regex.js: 1.3.1
+    node_modules/gopd: 1.2.0
+    node_modules/has-property-descriptors: 1.0.2
+    node_modules/has-symbols: 1.1.0
+    node_modules/has-tostringtag: 1.0.2
+    node_modules/hasown: 2.0.4
+    node_modules/hyperdyperid: 1.2.0
+    node_modules/ieee754: 1.2.1
+    node_modules/inherits: 2.0.4
+    node_modules/is-arguments: 1.2.0
+    node_modules/is-callable: 1.2.7
+    node_modules/is-generator-function: 1.1.2
+    node_modules/is-nan: 1.3.2
+    node_modules/is-plain-obj: 4.1.0
+    node_modules/is-regex: 1.2.1
+    node_modules/is-typed-array: 1.1.15
+    node_modules/json5: 2.2.3
+    node_modules/lru-cache: 11.5.3
+    node_modules/math-intrinsics: 1.1.0
+    node_modules/memfs: 4.80.0
+    node_modules/minimatch: 10.2.6
+    node_modules/minipass: 7.1.3
+    node_modules/object-inspect: 1.13.4
+    node_modules/object-is: 1.1.6
+    node_modules/object-keys: 1.1.1
+    node_modules/object.assign: 4.1.7
+    node_modules/path: 0.12.7
+    node_modules/path-scurry: 2.0.2
+    node_modules/path-unified: 0.2.0
+    node_modules/path/node_modules/inherits: 2.0.3
+    node_modules/path/node_modules/util: 0.10.4
+    node_modules/possible-typed-array-names: 1.1.0
+    node_modules/prettier: 3.9.10
+    node_modules/process: 0.11.10
+    node_modules/punycode: 1.4.1
+    node_modules/qs: 6.16.1
+    node_modules/safe-buffer: 5.2.1
+    node_modules/safe-regex-test: 1.1.0
+    node_modules/set-function-length: 1.2.2
+    node_modules/side-channel: 1.1.1
+    node_modules/side-channel-list: 1.0.1
+    node_modules/side-channel-map: 1.0.1
+    node_modules/side-channel-weakmap: 1.0.2
+    node_modules/stream: 0.0.3
+    node_modules/string_decoder: 1.3.0
+    node_modules/style-dictionary: 5.7.0
+    node_modules/thingies: 2.6.1
+    node_modules/tinycolor2: 1.6.0
+    node_modules/tree-dump: 1.1.0
+    node_modules/tslib: 2.8.1
+    node_modules/url: 0.11.4
+    node_modules/util: 0.12.5
+    node_modules/which-typed-array: 1.1.24
+  network_attempts: []
+  cases:
+  - name: package_version
+    result: 5.7.0
+  - name: syntax_detection_is_not_validation
+    result: true
+  - name: legacy_syntax_detection
+    result: false
+  - name: key_conversion_type_unchanged_and_input_preserved
+    result:
+      $type: size
+      group:
+        a:
+          $value: 1
+          $description: synthetic
+        b:
+          $value: 2
+  - name: optional_no_common_type_hoist
+    result:
+      group:
+        a:
+          $value: 1
+          $type: size
+          $description: synthetic
+        b:
+          $value: 2
+          $type: size
+  - name: inherited_type_delegation_with_child_override
+    result:
+      a:
+        $value: 1
+        $type: number
+      sub:
+        b:
+          $value: synthetic
+          $type: string
+  - name: inline_dtcg_detected
+    result: true
+  - name: reference_resolves_to_native_value
+    result:
+      base: 4
+      alias: 4
+  - name: duration_ms_and_seconds_transforms
+    result:
+      fast: 0.001s
+      steady: 0.36s
+  - name: root_name_transform_omits_root_segment
+    result:
+      path:
+      - root
+      - $root
+      name: root
+      value: 7
+  - name: built_in_css_format_returns_string
+    result: ":root {\n  --base: 4;\n  --alias: 4;\n  --fast: 0.001s;\n  --steady: 0.36s;\n  --root: 7;\n}\n"
+  - name: explicit_temporary_output_matches_memory_format
+    result:
+      file: generated/tokens.css
+      sha256: ec751ab37788802a7c544a49c4b89f49316a610c2a36e5000abe4d64a62c8567
+  - name: optional_output_references_preserves_css_alias
+    result: ":root {\n  --base: 4;\n  --fast: 0.001s;\n  --steady: 0.36s;\n  --root: 7;\n  --alias: var(--base);\n\
+      }\n"
+  - name: mixed_input_selects_dtcg_and_legacy_token_not_emitted
+    result:
+    - modern
+  - name: token_type_not_complete_schema_validation
+    result: synthetic-not-a-number
+  - name: legacy_time_conversion_preserved
+    result: 0.5s
+  - name: missing_reference_throws
+    result: '
+
+      Reference Errors:
+
+      Some token references (1) could not be found.
+
+      Use log.verbosity "verbose" or use CLI option --verbose for more details.
+
+      Refer to: https://styledictionary.com/reference/logging/
+
+      '
+  - name: circular_reference_throws
+    result: '
+
+      Reference Errors:
+
+      Some token references (1) could not be found.
+
+      Use log.verbosity "verbose" or use CLI option --verbose for more details.
+
+      Refer to: https://styledictionary.com/reference/logging/
+
+      '
+  - name: unknown_platform_throws
+    result: Please supply a valid platform, "not-configured" does not exist
+  boundary_zh: 可信合成内存token，显式对象配置、空source/include、无用户配置或外部扩展；只用内置转换/格式化，临时目录一个CSS文件。网络guard无尝试只是观察，不是OS隔离证明；不测ZIP、视觉UI、全部输出、全规范符合性、认证或IA采用。
+  setup_notes_zh:
+  - 独立云端任务目录npm安装使用ignore-scripts、no-audit、no-fund；未安装到用户环境或全局。
+  - 初次npm默认缓存目录不存在报ENOENT，未完成安装；改为本任务目录显式cache后成功，原失败日志保留。不是平台权限拒绝或依赖安全审计。
