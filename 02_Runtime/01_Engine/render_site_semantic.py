@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
+import maintenance_dashboard
 import human_route_compare as human_compare
 import human_route_evidence as human_evidence
 import human_route_runtime as human_route
@@ -109,6 +110,7 @@ def build_homepage(objects: list[dict], relations: list[dict], rendered: list[tu
     return "".join(
         [
             "<h1>InteropAtlas</h1>",
+            '<p><a href="maintenance.html">维护指挥台：查看近期交付与公开等待事项 →</a></p>',
             "<p>开放的互操作知识地图。当前首页只提供搜索与地图状态预览；更完整的导航方式仍在探索中。</p>",
             '<section class="homepage-search" aria-labelledby="homepage-search-heading">',
             '<h2 id="homepage-search-heading">搜索 InteropAtlas</h2>',
@@ -175,6 +177,7 @@ def build(root: Path, output: Path) -> dict[str, int]:
         lambda obj: human_route.human_object_type_label(obj, semantic_site_view_type),
     )
     human_compare.build_compare_artifact(output, index, relations, page_shell)
+    maintenance_dashboard.build(output)
     (output / ".nojekyll").write_text("", encoding="utf-8")
     return {
         "objects_loaded": len(objects), "pages_rendered": len(rendered),
