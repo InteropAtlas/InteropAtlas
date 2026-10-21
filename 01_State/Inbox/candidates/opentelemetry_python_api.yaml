@@ -1,0 +1,30 @@
+contract_version: candidate-object-v1
+candidate_id: opentelemetry_python_api
+label: OpenTelemetry Python API — opentelemetry-api package (1.45.1)
+publisher: OpenTelemetry Authors
+family: system
+kind: library
+external_identifiers:
+- namespace: pypi
+  value: opentelemetry-api
+locators:
+- url: https://pypi.org/project/opentelemetry-api/
+  role: official
+- url: https://pypi.org/project/opentelemetry-api/1.45.1/
+  role: dated
+- url: https://github.com/open-telemetry/opentelemetry-python/tree/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - opentelemetry_python_api
+  reasons:
+  - 经独立语义审核，由 accept-20261021-opentelemetry-api-opentelemetry-python-api 接纳为正式软件库包对象；原始 new 状态保留于冻结候选 commit/blob，当前回指防止再次创建。
+  merge_authorized: false
+unknowns:
+- 固定源码 TraceFlags 明确链接 Trace Context 2 并支持 0x02；本轮不把泛 W3C TraceContext 支持等同既有 2021 固定标准端点，不生成 implements。
+- 未进行 SDK、Exporter、Collector、真实 HTTP 适配、跨实现互通或完整 W3C 套件测试；不声明生产、安全或 IA 采用，不填写 self_hostable。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review

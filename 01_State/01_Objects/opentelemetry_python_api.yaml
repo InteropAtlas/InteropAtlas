@@ -1,0 +1,76 @@
+id: opentelemetry_python_api
+type: system
+kind: library
+name_zh: OpenTelemetry Python API 上下文传播库包
+name_en: OpenTelemetry Python API context propagation package
+description_zh: Python 的 opentelemetry-api 发行包；本记录固定到 1.45.1，聚焦其 TraceContextTextMapPropagator 从文本载体提取与注入追踪上下文的实现。
+description_en: The Python opentelemetry-api distribution, pinned here to 1.45.1; this record focuses on its TraceContextTextMapPropagator
+  implementation for extracting and injecting tracing context in text carriers.
+version: 1.45.1
+external_identifiers:
+- namespace: pypi
+  value: opentelemetry-api
+official_url: https://pypi.org/project/opentelemetry-api/
+versions:
+- version: 1.45.1
+  status: released
+  url: https://pypi.org/project/opentelemetry-api/1.45.1/
+open_source: true
+license_expression: Apache-2.0
+scope_notes_zh: 主体为 PyPI opentelemetry-api 包，不是整个 monorepo、SDK、Exporter 或 Collector。包包含抽象 API 和 no-op 默认实现；本切片只核对实际可执行的
+  TraceContextTextMapPropagator 及相关上下文类型，不把 API 存在等同遥测采集或导出。默认 dict getter 按键直接取值，HTTP 大小写等适配须由相应 carrier/getter
+  提供。缺失或无效 traceparent 的 extract 会保留传入 context；inject 原地写 carrier，不保证清除旧头部，也不是任意手工 SpanContext 的全面有效性检查器。TraceFlags
+  文档链接 Trace Context 2 并支持 random-trace-id 位 0x02，因此本轮不接纳对库内 2021 Trace Context 固定端点的 implements 关系。22 个内存载体示例不证明完整
+  W3C 符合性、真实 HTTP/跨实现互通、安全、生产推荐或 IA 采用。
+scope_notes_en: The subject is the PyPI opentelemetry-api package, not the whole monorepo, SDK, exporters or Collector.
+  It contains abstract APIs and default no-op implementations; this slice checks the executable TraceContextTextMapPropagator
+  and related context types, not telemetry collection or export. The default dict getter accesses keys directly;
+  HTTP casing and other adaptations need an appropriate carrier/getter. Extraction with missing or invalid traceparent
+  preserves the supplied context. Injection mutates the carrier, does not guarantee removal of old headers and is
+  not comprehensive validation of arbitrary manually constructed SpanContext values. TraceFlags links to Trace Context
+  2 and supports random-trace-id bit 0x02, so no implements relation to the recorded 2021 Trace Context endpoint
+  is accepted here. Twenty-two in-memory carrier examples do not establish full W3C conformance, real HTTP/cross-implementation
+  interoperability, security, production suitability or IA adoption.
+sources:
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/README.md
+  title: OpenTelemetry Python 1.45.1 — API package versus SDK and exporters
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/pyproject.toml
+  title: opentelemetry-api — package identity, propagator entry point and Apache-2.0 declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/version/__init__.py
+  title: opentelemetry-api — fixed 1.45.1 version
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/tracecontext.py
+  title: opentelemetry-api 1.45.1 — text carrier extraction and injection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py
+  title: opentelemetry-api 1.45.1 — SpanContext, TraceState and Trace Context 2 flags
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/propagators/textmap.py
+  title: opentelemetry-api 1.45.1 — carrier adapter requirements and default mapping access
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:53:15.484263+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed API-package propagation evidence executor
+record_created_at: '2026-10-21T04:59:12.112951+00:00'
+record_updated_at: '2026-10-21T04:59:12.112951+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: opentelemetry_python_api
+  acceptance_event_id: accept-20261021-opentelemetry-api-opentelemetry-python-api
+  reviewed_candidate_blob: 8a9a7e59f1ee17ca5b8ef24d207e93adc25242d5
+  reviewed_against_commit: d453849f9510a2c575642a33ec50b77bf031f36d
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: d453849f9510a2c575642a33ec50b77bf031f36d
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/479
