@@ -15,10 +15,11 @@ locators:
 - url: https://github.com/eclipse-thingweb/node-wot/releases/tag/v0.9.2
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - node_wot
   reasons:
-  - 主体为 node-wot 软件框架（含 core、协议 binding、CLI 等包），不是 TD 规范、Eclipse Thingweb 组织或物理设备。固定 0.9.2，不为版本或本轮测试的 core 包另造同一框架身份；全量既有对象/候选未发现确定性碰撞。
+  - 经独立语义审核，由 accept-20261021-node-wot-node_wot 接纳为正式软件对象；原始 new 状态保留于冻结候选 commit/blob，当前引用防止再次创建。
   merge_authorized: false
 unknowns:
 - 未测试所有 bindings、联网设备、安全配置、完整 TD/JSON-LD 符合性或第三方互通；不宣称最新发行版或生产推荐。
@@ -26,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
