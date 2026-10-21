@@ -157,3 +157,68 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: python_fhirclient_implements_fhir_r4_models
+type: relation
+name_zh: fhirclient 4.4.0 有界实现FHIR R4模型表示
+name_en: fhirclient 4.4.0 provides bounded FHIR R4 model representation
+source: python_fhirclient
+relation: implements
+target: fhir_r4_4.0.1
+context:
+  capabilities:
+  - data_serialization
+  version_context:
+    source: smart-on-fhir/client-py 4.4.0, upstream commit 0989e0f166e18037406763cb4ab9e509f9dfddbf
+    target: HL7 FHIR R4 4.0.1; generated model headers 4.0.1-9346c8cc45
+  conditions_zh: 仅固定生成模型的Python对象/JSON字典映射实现先例，不是FHIR整套协议、所有资源/Profile/不变量或完整验证器的符合性声明。默认strict仅局部检查；lenient构造可记warning并保留部分数据，后续序列化仍可失败。可选null/空列表省略、primitive元数据丢失、日期Python视图补齐及数值类型限制适用，不保证原始JSON或临床信息无损。术语代码、choice排他性与后续primitive列表项等须另行验证；本边不把库接受/输出的数据都视为FHIR合法。未测服务器、SMART/OAuth、真实健康数据、临床工作流、安全/隐私合规、认证或第三方互通，不从本关系推断JSON语法库也实现FHIR。
+  conditions_en: Limited to the fixed generated-model Python-object/JSON-dictionary mapping precedent, not conformance
+    to the full FHIR protocol, every resource/profile/invariant or a complete validator. Default strict checks are
+    local; lenient construction can warn and retain partial data, and later serialization can still fail. Optional-null/empty-list
+    omission, primitive-metadata loss, completed Python date views and numeric-type limits apply; original JSON
+    or clinical information is not guaranteed lossless. Terminology codes, choice exclusivity and later primitive-list
+    elements require separate validation. Library acceptance/output is not equated with valid FHIR data. Servers,
+    SMART/OAuth, real health data, clinical workflows, security/privacy compliance, certification and third-party
+    interoperability were not tested; this edge does not imply that a JSON syntax library implements FHIR.
+evidence:
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/README.md
+  title: fhirclient 4.4.0 — client identity, version table and partial data-model validation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/patient.py
+  title: fhirclient 4.4.0 — generated FHIR 4.0.1 Patient model
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/observation.py
+  title: fhirclient 4.4.0 — generated FHIR 4.0.1 Observation model
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractbase.py
+  title: fhirclient 4.4.0 — strict/lenient initialization, local checks and JSON mapping
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractresource.py
+  title: fhirclient 4.4.0 — resource type checks and as_json output
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirdate.py
+  title: fhirclient 4.4.0 — original date string versus Python representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/quantity.py
+  title: fhirclient 4.4.0 — float-valued Quantity model
+  language: en
+  accessed: '2026-10-21'
+- url: https://hl7.org/fhir/R4/json.html
+  title: FHIR R4 4.0.1 — JSON representation, primitive metadata, arrays and decimal precision
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T07:55:48.789787+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed FHIR model-library evidence executor
+record_created_at: '2026-10-21T08:01:03.644755+00:00'
+record_updated_at: '2026-10-21T08:01:03.644755+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
