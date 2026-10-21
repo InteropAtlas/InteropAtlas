@@ -2,15 +2,15 @@
 ---
 id: wai_aria_provides_web_accessibility
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 提供 Web 无障碍语义能力
@@ -25,18 +25,48 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation, 2023-06-06
+    target: Existing IA capability web_accessibility
+  conditions_zh: 限定为用角色、状态和属性向辅助技术表达界面结构与行为语义。用户代理处理 ARIA 不得干扰宿主语言内建功能；可以改变无障碍 API 映射，但不得为重映射 ARIA 而改变 DOM。此语义基础不保证页面已正确实现交互、完整符合
+    WCAG，或具体浏览器与辅助技术组合互通；本次不核验 IA 页面或采用声明。
+  conditions_en: Limited to roles, states and properties conveying interface structure and behavior semantics
+    to assistive technologies. ARIA processing must not interfere with built-in host-language features; accessibility
+    API mappings may change, but not the DOM to remap ARIA. This semantic basis does not establish implemented
+    interaction, complete WCAG conformance or browser/assistive-technology interoperability; IA pages and adoption
+    are not assessed.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: 'WAI-ARIA 1.2 — abstract: roles, states and properties conveying accessibility semantics'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x3-1-non-interference-with-the-host-language
+  title: 'WAI-ARIA 1.2 — section 3.1: host-language non-interference and accessibility API mapping'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#introroles
+  title: 'WAI-ARIA 1.2 — section 4.1: role semantics'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#introstates
+  title: 'WAI-ARIA 1.2 — section 4.2: state/property information'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:18:33.592829+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: wai_aria_supports_human_system_interaction
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 为可访问人机交互提供界面语义
@@ -46,6 +76,33 @@ relation: provides
 target: {type: capability, id: human_system_interaction}
 capability_context: [human_system_interaction, web_accessibility]
 confidence: 0.95
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation, 2023-06-06
+    target: Existing IA capability human_system_interaction
+  conditions_zh: 限定为可访问交互的界面语义与焦点信息，不是完整交互实现。规范列出的复合容器角色要求作者管理焦点；aria-activedescendant 将活动后代的焦点信息传给辅助技术时，实际
+    DOM 焦点仍可在容器或控制输入上。aria-keyshortcuts 仅公开快捷键信息，不得使用户代理自动改变键盘行为，脚本键盘事件须由作者处理。不证明可用性评价或具体页面符合性。
+  conditions_en: Limited to semantics and focus information for accessible interaction, not a complete interaction
+    implementation. Authors must manage focus for the listed composite-container roles. With aria-activedescendant,
+    assistive technology receives active-descendant focus information while DOM focus can remain on the container
+    or controlling input. aria-keyshortcuts exposes shortcuts without automatically changing user-agent keyboard
+    behavior; authors must handle scripted keyboard events. This does not establish usability evaluation or
+    page conformance.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#managingfocus
+  title: 'WAI-ARIA 1.2 — section 4.3: DOM focus and active-descendant communication'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#managingfocus_authors
+  title: 'WAI-ARIA 1.2 — section 4.3.1: author responsibility for composite-widget focus'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-keyshortcuts
+  title: 'WAI-ARIA 1.2 — aria-keyshortcuts: exposure does not implement keyboard behavior'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:18:33.592829+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: wai_aria_recommended_with_html
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -129,15 +186,15 @@ sources:
 ---
 id: act_rules_format_provides_accessibility_conformance_testing
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: ACT Rules Format 提供无障碍符合性测试规则表达能力
@@ -152,6 +209,43 @@ sources:
     title: ACT Rules Format 1.1
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: ACT Rules Format 1.1, fixed W3C Recommendation, 2026-02-05
+    target: Existing IA capability accessibility_conformance_testing
+  conditions_zh: 限定为表达人工或自动无障碍测试规则的格式，包括适用性、预期和要求映射，不是测试引擎或全站认证。Conformance 映射下 passed 或 inapplicable 仍可能需要进一步测试；该映射中的
+    satisfying test 只有在该测试对象的全部结果均为 passed 时，才能据此判定相应要求得到满足。Secondary 须按具体映射解释，不能一概等同于直接符合性判定。示例一致性不保证不会产生误判；不据此断言
+    IA 网站符合性或规范采用。
+  conditions_en: Limited to representing manual or automated accessibility test rules, including applicability,
+    expectations and requirement mappings, not a test engine or whole-site certification. For conformance mappings,
+    passed or inapplicable outcomes can still need further testing; a satisfying test in this mapping establishes
+    the mapped requirement only when all outcomes for that test subject are passed. Secondary results must
+    be interpreted according to their specific mapping, not categorically equated with direct conformance judgments.
+    Consistency with examples does not guarantee error-free results; no IA-site conformance or adoption claim
+    is assessed.
+evidence:
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#intro
+  title: 'ACT Rules Format 1.1 — section 1: manual and automated test-rule descriptions'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#scope
+  title: 'ACT Rules Format 1.1 — section 2: scope and applicability to accessibility requirements'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#conformance-requirements
+  title: 'ACT Rules Format 1.1 — section 4.4.1.1: outcome mapping and satisfying tests'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#secondary-requirements
+  title: 'ACT Rules Format 1.1 — section 4.4.1.2: secondary mappings and further testing'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#rule-accuracy
+  title: 'ACT Rules Format 1.1 — section 5 (non-normative): limitations of example-based accuracy'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:19:59.363617+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: act_rules_format_recommended_with_wcag
 record_created_at: "2026-09-01T16:44:53+08:00"
