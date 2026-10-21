@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-httpx-httpx
+candidate_id: httpx
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: httpx
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T06:13:06.498262+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者读取完整 proposal、固定源码与同 tag SSL 文档，重算14文件SHA256/Git blob并亲自重跑17项可信内存/默认值/缺依赖检查PASS；本字段时间为执行方记录已收到最终审核结论的时点，不用于计算审核用时。
+  - 要求将证书环境变量分支限定为 verify=True 且 trust_env=True 后，独立核最终小差分和精确两hash通过；接受独立Python库主体、既有能力/transport导航，relations为空。
+  - 冻结 proposed_record 全字段原样物化，仅追加生命周期、贡献和接纳溯源；后续精确序列化核对不冒充新的独立语义审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/485
+- https://github.com/InteropAtlas/InteropAtlas/blob/bc48ec57cb6fcfd8ad0059fa809d8b088dad2559/01_State/Inbox/review-packets/httpx-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/1eabf08e51c3b39c388c404695ee0bf3aba87ab8
+decided_at: '2026-10-21T06:15:01.172077+00:00'
+notes:
+- 接纳固定0.28.1核查范围的Encode HTTPX客户端库，不合并规范、httpcore或其他同名工具。
+- 17项MockTransport/默认值观察不等于真实HTTP传输/TLS/HTTP2协商、全RFC符合性或第三方互通；不作HTTP3关系、IA采用或生产推荐。

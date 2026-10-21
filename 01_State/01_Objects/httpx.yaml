@@ -1,0 +1,102 @@
+id: httpx
+type: system
+kind: library
+name_zh: HTTPX Python HTTP 客户端库
+name_en: HTTPX Python HTTP client library
+description_zh: 开源 Python HTTP 客户端库；本记录固定到0.28.1，作为同步/异步请求、响应和资源表示处理的实现先例，保留网络与版本支持边界。
+description_en: An open-source Python HTTP client library, pinned here to 0.28.1 as a sync/async request, response
+  and resource-representation handling precedent with explicit transport and version boundaries.
+version: 0.28.1
+external_identifiers:
+- namespace: github
+  value: encode/httpx
+- namespace: pypi
+  value: httpx
+official_url: https://github.com/encode/httpx
+versions:
+- version: 0.28.1
+  status: released
+  url: https://github.com/encode/httpx/releases/tag/0.28.1
+domains:
+- networking
+- web
+capabilities:
+- web_resource_transfer
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: 固定 0.28.1 的 Python HTTP 客户端库，记录同步/异步请求及响应表示处理先例；网络传输委托 httpcore，不把依赖实现归为独立 HTTPX 线协议认证。官方声明 HTTP/1.1
+  与 HTTP/2 支持；HTTP/2 默认关闭，须可选 h2 依赖、显式启用及对端支持，不能保证实际使用HTTP/2。默认不自动跟随重定向，TLS验证默认开启，trust_env默认开启。固定 _config.py 在
+  verify=True 且 trust_env=True 时会读取 SSL_CERT_FILE/SSL_CERT_DIR；同tag SSL文档对此有不同表述，本记录按源码限定，未测试真实TLS或环境证书效果。17项仅使用可信内存MockTransport、显式trust_env=False及默认值/缺依赖检查，无DNS或socket连接；不证明真实传输、代理、HTTP3、CLI、全RFC符合性、跨实现互通、安全或生产适用。保留Beta分类，不据普通功能记录作IA采用或推荐；本批不新增implements边。
+scope_notes_en: The fixed 0.28.1 Python HTTP client library, recorded as a sync/async request and response-representation
+  precedent. Network transport is delegated to httpcore, not independently certified as HTTPX wire-protocol conformance.
+  Upstream declares HTTP/1.1 and HTTP/2 support; HTTP/2 is off by default and requires optional h2, explicit enabling
+  and peer support, so actual HTTP/2 use is not guaranteed. Redirects are not automatically followed; TLS verification
+  and trust_env default to enabled. Fixed _config.py reads SSL_CERT_FILE/SSL_CERT_DIR when verify is True and trust_env
+  is True, unlike wording in the same-tag SSL documentation; this record follows the code without testing actual
+  TLS or certificate-environment effects. Seventeen checks use trusted in-memory MockTransport with trust_env=False
+  plus defaults/missing-dependency checks and no DNS/socket connections. They do not prove real transport, proxies,
+  HTTP/3, CLI, full RFC conformance, cross-implementation interoperability, security or production fitness. The
+  Beta classifier is retained; no IA adoption, recommendation or implements edge is asserted.
+sources:
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/README.md
+  title: HTTPX 0.28.1 — Python client, sync/async, HTTP/1.1 and HTTP/2 declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/pyproject.toml
+  title: HTTPX — package identity, dependencies, extras and Beta classifier
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/__version__.py
+  title: HTTPX — fixed 0.28.1 version
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/LICENSE.md
+  title: HTTPX — BSD-3-Clause license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_client.py
+  title: HTTPX 0.28.1 — client defaults, redirects and optional HTTP2 dependency
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_transports/default.py
+  title: HTTPX 0.28.1 — delegates network transports to httpcore
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_transports/mock.py
+  title: HTTPX 0.28.1 — synthetic request/response handler, not network transport
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/httpx/_config.py
+  title: HTTPX 0.28.1 — SSL context and trust_env certificate-variable behavior
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/http2.md
+  title: HTTPX 0.28.1 — HTTP2 is opt-in with dependencies and peer support
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/environment_variables.md
+  title: HTTPX 0.28.1 — environment proxy configuration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/docs/advanced/ssl.md
+  title: HTTPX 0.28.1 — SSL documentation; certificate-variable text differs from fixed code
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:07:22.346851+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed HTTP client evidence executor
+record_created_at: '2026-10-21T06:15:01.172077+00:00'
+record_updated_at: '2026-10-21T06:15:01.172077+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: httpx
+  acceptance_event_id: accept-20261021-httpx-httpx
+  reviewed_candidate_blob: 1eabf08e51c3b39c388c404695ee0bf3aba87ab8
+  reviewed_against_commit: bc48ec57cb6fcfd8ad0059fa809d8b088dad2559
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: bc48ec57cb6fcfd8ad0059fa809d8b088dad2559
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/485

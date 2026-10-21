@@ -1,0 +1,32 @@
+contract_version: candidate-object-v1
+candidate_id: httpx
+label: HTTPX Python HTTP client library (0.28.1)
+publisher: Encode
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: encode/httpx
+- namespace: pypi
+  value: httpx
+locators:
+- url: https://github.com/encode/httpx
+  role: official
+- url: https://github.com/encode/httpx/tree/26d48e0634e6ee9cdc0533996db289ce4b430177
+  role: dated
+- url: https://pypi.org/project/httpx/0.28.1/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - httpx
+  reasons:
+  - 经独立语义审核，由 accept-20261021-httpx-httpx 接纳为正式客户端库；原始 new 状态保留于冻结候选 commit/blob，当前回指防止重复创建。
+  merge_authorized: false
+unknowns:
+- 官方固定版本声明 HTTP/1.1 与 HTTP/2 支持，不据此添加精确 RFC9110 或 HTTP/3 implements；本批关系为空。
+- 17项仅可信内存 MockTransport/默认值检查；没有真实网络、TLS、代理、HTTP2协商、CLI、全规范符合性、第三方互通、安全/生产适用或IA采用结论。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
