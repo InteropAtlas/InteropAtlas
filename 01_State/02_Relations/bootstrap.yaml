@@ -142,15 +142,15 @@ last_verified_by: Agent — OpenAI / dot，existing capability-edge evidence exe
 ---
 id: http_uses_uri
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T06:02:42.288305+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTTP 使用 URI 标识资源
@@ -165,18 +165,47 @@ sources:
     title: RFC 9110 - HTTP Semantics
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: RFC 9110 / STD 97, June 2022
+    target: RFC 3986 / STD 66, January 2005
+  conditions_zh: 限定为 RFC 9110 采用 RFC 3986 的 URI 通用语法标识目标资源、重定向与资源关系；具体协议元素允许的引用形式由其语法约束。资源标识与请求方法语义分离，拥有 http/https
+    URI 不保证源站或资源可访问。本关系不把 URI 语法当作网络传输实现或部署安全证明。
+  conditions_en: Limited to RFC 9110 use of RFC 3986 generic URI syntax for targets, redirects and relationships;
+    allowed reference forms depend on each protocol element. Identification is separate from method semantics.
+    An http/https URI does not guarantee an available server or resource. URI syntax is not a transport implementation
+    or deployment-security proof.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-3.1
+  title: RFC 9110 — resource identification and request semantics
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-4.1
+  title: RFC 9110 — URI reference forms adopted from RFC 3986
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-4.2
+  title: RFC 9110 — HTTP-related URIs do not guarantee a listening server
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#URI
+  title: RFC 9110 — normative URI reference explicitly identifies RFC 3986
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:00:12.592274+00:00'
+last_verified_by: Agent — OpenAI / dot，HTTP and URI relation evidence executor
 ---
 id: uri_provides_resource_identification
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T06:02:42.288305+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: URI 提供资源标识能力
@@ -185,18 +214,40 @@ source: {type: standard, id: uri_rfc3986}
 relation: provides
 target: {type: capability, id: resource_identification}
 confidence: 1.0
+context:
+  version_context:
+    source: RFC 3986 / STD 66, January 2005
+    target: Existing IA capability resource_identification
+  conditions_zh: 限定为 RFC 3986 通用语法配合各方案规范以统一标识和引用资源的基础；资源不必能通过网络访问。标识本身既不保证访问，也不定义访问操作；RFC 3986 不要求同一 URI 永久标识同一资源。因此这里不把既有能力描述中的稳定标识理解为所有
+    URI 都获永久性保证，也不证明应用的身份管理或访问控制。
+  conditions_en: Limited to RFC 3986 generic syntax with scheme specifications as a basis for uniform identification
+    and reference, including resources not accessible on a network. Identification neither guarantees access
+    nor defines access operations. RFC 3986 does not require a URI to keep identifying the same resource over
+    time. The existing capability wording is not a permanence guarantee for every URI or proof of application
+    identity management or access control.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-1.1
+  title: RFC 3986 — uniform resource identification, schemes and persistence limits
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-1.2.2
+  title: RFC 3986 — identification is separate from interaction and access
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:00:12.592274+00:00'
+last_verified_by: Agent — OpenAI / dot，HTTP and URI relation evidence executor
 ---
 id: http_provides_web_resource_transfer
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T06:02:42.288305+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTTP 提供 Web 资源传输能力
@@ -205,6 +256,35 @@ source: {type: standard, id: http_rfc9110}
 relation: provides
 target: {type: capability, id: web_resource_transfer}
 confidence: 1.0
+context:
+  version_context:
+    source: RFC 9110 / STD 97, June 2022
+    target: Existing IA capability web_resource_transfer
+  conditions_zh: 限定为 RFC 9110 的请求/响应语义，通过消息交互请求、传输或操作资源表示；传输的是表示，不是资源本身。GET 请求目标资源当前选定表示的传输，并不保证每次请求成功。这里只记录共享
+    HTTP 语义层的能力，不替代各版本线格式与传输规范，也不证明具体客户端/服务器、完整符合性或实际互操作。
+  conditions_en: Limited to RFC 9110 request/response semantics for requesting, transferring or acting on resource
+    representations, not transferring resources themselves. GET requests a current selected representation;
+    success is not guaranteed. This is shared HTTP semantics, not a substitute for version-specific wire formats
+    or transport specifications, or proof of implementations, full conformance or interoperability.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-1.1
+  title: RFC 9110 — HTTP request/response purpose and interface
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-3.2
+  title: RFC 9110 — transferable representations rather than resources themselves
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-3.4
+  title: RFC 9110 — request and response messages
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc9110.html#section-9.3.1
+  title: RFC 9110 — GET requests transfer of a selected representation
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:00:12.592274+00:00'
+last_verified_by: Agent — OpenAI / dot，HTTP and URI relation evidence executor
 ---
 id: unicode_provides_text_encoding
 record_created_at: "2026-09-01T16:44:53+08:00"
