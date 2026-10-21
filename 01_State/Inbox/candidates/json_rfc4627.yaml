@@ -13,14 +13,15 @@ locators:
 - url: https://www.rfc-editor.org/rfc/rfc4627.txt
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - json_rfc4627
   reasons:
-  - 主体为编号 RFC 4627 的历史 Informational 文档，不是无版本 JSON 家族、RFC 8259 或 JSON-RPC。全量 Canonical 与候选身份检查未发现该 RFC 编号碰撞；不合并或改写已有主体。
+  - 经独立语义审核，由 accept-20261021-json-rfc4627-json_rfc4627 接纳为正式历史规范文档；原始 new 状态保留于冻结候选 commit/blob，当前引用防止再次创建。
   merge_authorized: false
 unknowns:
 - 本轮不建立 RFC 替代/更新关系链，不评估实现的旧版兼容性，也不推荐按旧版开发。
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
