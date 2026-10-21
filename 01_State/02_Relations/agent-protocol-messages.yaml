@@ -1,0 +1,39 @@
+id: mcp_jsonrpc
+type: relation
+name_zh: MCP 2025-11-25 使用 JSON-RPC 2.0 消息
+name_en: MCP 2025-11-25 uses JSON-RPC 2.0 messages
+source: mcp_2025_11_25
+relation: uses
+target: json_rpc_2.0
+context:
+  version_context:
+    source: MCP 2025-11-25
+    target: JSON-RPC 2.0
+  conditions_zh: 仅表述 MCP 2025-11-25 客户端与服务端消息遵循 JSON-RPC 2.0 的要求；MCP 仍增加请求 ID 不得为 null、同一请求发起方在同一会话中不得重用请求 ID 等约束。该消息层使用关系不涵盖
+    MCP 全部生命周期、传输或授权要求，不表示任意 JSON-RPC 实现即可互通 MCP，也不推定其他 MCP 日期版本。
+  conditions_en: Limited to the MCP 2025-11-25 requirement for client-server messages to follow JSON-RPC 2.0. MCP additionally
+    forbids null request IDs and reuse by the same requestor within a session. This message-layer use does not cover all MCP
+    lifecycle, transport or authorization requirements, imply generic JSON-RPC implementations interoperate with MCP, or generalize
+    to other dated MCP versions.
+evidence:
+- url: https://modelcontextprotocol.io/specification/2025-11-25/basic#messages
+  title: MCP 2025-11-25 Base Protocol — Messages and request ID constraints
+  language: en
+  accessed: '2026-10-20'
+- url: https://www.jsonrpc.org/specification
+  title: JSON-RPC 2.0 Specification — protocol identity and transport-independent scope
+  language: en
+  accessed: '2026-10-20'
+record_created_at: '2026-10-20T23:56:39.179833+00:00'
+record_updated_at: '2026-10-21T00:00:36.051058+00:00'
+last_verified_at: '2026-10-20T23:56:39.179833+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  review_url: https://github.com/InteropAtlas/InteropAtlas/issues/276#issuecomment-6304539206
+  scope_zh: 独立核验 MCP 2025-11-25 Messages 与 JSON-RPC 2.0，只接纳消息层 uses 范围；请求 ID 不重用限于同一请求发起方、同一会话，最终序列化结论见公开审查记录。
