@@ -1,0 +1,103 @@
+id: python_rfc3986
+type: system
+kind: library
+name_zh: rfc3986 Python URI引用处理库
+name_en: rfc3986 Python URI-reference library
+description_zh: 表示和处理URI引用的Python库；固定2.0.0，记录组件表示、相对引用解析及显式验证配置的有界资源标识先例。
+description_en: A Python library for representing and processing URI references; pinned to 2.0.0 as a bounded resource-identification
+  precedent with component representation, relative resolution and explicit validation configuration.
+version: 2.0.0
+external_identifiers:
+- namespace: github
+  value: python-hyper/rfc3986
+- namespace: pypi
+  value: rfc3986
+official_url: https://github.com/python-hyper/rfc3986
+versions:
+- version: 2.0.0
+  status: released
+  url: https://pypi.org/project/rfc3986/2.0.0/
+domains:
+- web
+- identifiers
+capabilities:
+- resource_identification
+open_source: true
+license_expression: Apache-2.0
+scope_notes_zh: 固定 Python rfc3986 2.0.0，官方 tag 2.0.0 commit 7a64092490c1b3c4f354b9b14d060fa758d66848，PyPI 此版发布于2022年1月10日，不宣称最新。库提供
+  URI 引用的组件表示、相对引用解析、部分规范化及可配置检查；本切片的 resource_identification 仅指处理资源标识字符串，不保证永久标识、可访问性、资源所有权或身份管理。URIReference.from_string
+  对 path/query/fragment 做百分号编码，包括空格、UTF-8文本和本例的无效百分号文本；解析后字符串不是原输入逐字保留，后续检查通过也不能证明原输入严格符合 RFC ABNF。Validator 默认不要求组件存在、不启用组件有效性检查；allowlist本身不要求组件存在，需显式
+  require_presence_of。允许值会规范化，但 validate 不自动规范化传入 URIReference；本例大写 scheme/host 与小写allowlist不匹配，调用者可先显式 normalize。check_validity_of
+  的 port 检查还有0至65535的库级界限，不等同 RFC3986 §3.2.3 的通用 *DIGIT 语法。resolve_with 要求有scheme的有效base，先规范化base；默认 strict=False
+  可将与base同scheme的引用当相对引用，strict=True 保留该scheme。这里只核字符串处理，不进行网络解析或获取；内部沿用 is_valid 并出现弃用警告。normalize 可将scheme/host转小写、百分号十六进制转大写并移除点段，保留路径大小写；本例不解码unreserved百分号字节，也不移除http显式默认端口，不是完整的规范化或所有方案语义等价判定。24项可信合成内存例在
+  python -S 和独立目标目录运行，无可选idna；未测试IRI/IDNA转换、其他扩展、全部RFC规则、WHATWG浏览器URL行为、实际网络/DNS、生产适用性、第三方互通、安全认证或IA采用。18份固定官方源指纹、13份安装源码逐字一致及官方wheel
+  SHA256分别留痕；不是完整依赖安全审计。Apache-2.0仅据固定LICENSE记录，不作法律适用性判断。
+scope_notes_en: Pinned to Python rfc3986 2.0.0, official tag 2.0.0 at commit 7a64092490c1b3c4f354b9b14d060fa758d66848;
+  this PyPI release was published on 10 January 2022 and is not described as the latest. The library provides URI-reference
+  component representation, relative-reference resolution, selected normalization and configurable checks. resource_identification
+  here means handling resource-identifier strings, not permanence, availability, ownership or identity management.
+  URIReference.from_string percent-encodes path/query/fragment, including spaces, UTF-8 text and the tested malformed
+  percent text. The result is not lexical preservation of input; passing later checks does not establish strict
+  RFC ABNF validity of the original input. Validator enables neither presence requirements nor component-validity
+  checks by default. An allowlist alone does not require a component; require_presence_of must be configured explicitly.
+  Allowed values are normalized, but validate does not automatically normalize its supplied URIReference. Uppercase
+  scheme/host fail the lowercase allowlist in the example; callers can explicitly normalize first. check_validity_of
+  applies a package-specific port range of 0 through 65535, not merely the generic *DIGIT syntax of RFC3986 section
+  3.2.3. resolve_with requires a valid base with a scheme and normalizes that base. Default strict=False can treat
+  a same-scheme reference as relative; strict=True retains that scheme. These are string operations, not network
+  resolution or retrieval; the implementation internally invokes deprecated is_valid and emits its warning. normalize
+  lowercases scheme/host, uppercases percent-escape hex and removes dot segments while preserving path case. The
+  examples retain escaped unreserved characters and an explicit default HTTP port; this is not complete normalization
+  or scheme-specific semantic equivalence. Twenty-four trusted synthetic in-memory examples run under python -S
+  in a separate target directory without optional idna. IRI/IDNA conversion, other extensions, all RFC requirements,
+  WHATWG browser URL behavior, actual networking/DNS, production suitability, third-party interoperability, security
+  certification and IA adoption were not tested. Eighteen fixed official source fingerprints, thirteen byte-identical
+  installed source files and the official wheel SHA256 are separate observations, not a full dependency security
+  audit. Apache-2.0 is recorded from the fixed LICENSE, not as a legal-suitability opinion.
+sources:
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/README.rst
+  title: rfc3986 2.0.0 — RFC3986 implementation identity and URI-reference purpose
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/setup.cfg
+  title: rfc3986 2.0.0 — package identity, Python requirement and optional IDNA extra
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/LICENSE
+  title: rfc3986 2.0.0 — Apache License 2.0 text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/uri.py
+  title: rfc3986 2.0.0 — URIReference components, input encoding and normalization
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/_mixin.py
+  title: rfc3986 2.0.0 — relative-reference resolution, strict option and representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/validators.py
+  title: rfc3986 2.0.0 — explicit validator configuration, presence and component limits
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/normalizers.py
+  title: rfc3986 2.0.0 — selected case, escape and dot-segment operations
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T13:53:57.073782+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed URI-reference library evidence executor
+record_created_at: '2026-10-21T14:09:11.620196+00:00'
+record_updated_at: '2026-10-21T14:09:11.620196+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_rfc3986
+  acceptance_event_id: accept-20261021-rfc3986-python-rfc3986
+  reviewed_candidate_blob: 96ac50e4ab45723a70b67c0b7997de8a9d625bad
+  reviewed_against_commit: 1cd8583ca53ed380a621ea9564240979a83cd444
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 1cd8583ca53ed380a621ea9564240979a83cd444
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/505
