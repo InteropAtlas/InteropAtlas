@@ -1,0 +1,88 @@
+id: utf8proc
+type: system
+kind: library
+name_zh: utf8proc C Unicode / UTF-8 库
+name_en: utf8proc C Unicode / UTF-8 library
+description_zh: 开源 C Unicode / UTF-8 处理库；固定 2.12.0，记录有界单码点编解码及调用方验证前置条件，不将其 Unicode 18.0 声明等同现有 Unicode 17.0 端点。
+description_en: An open-source C Unicode / UTF-8 processing library, pinned to 2.12.0; records bounded single-codepoint
+  encoding/decoding and caller-validation prerequisites without equating its Unicode 18.0 claim with the existing
+  Unicode 17.0 endpoint.
+version: 2.12.0
+external_identifiers:
+- namespace: github
+  value: JuliaStrings/utf8proc
+official_url: https://github.com/JuliaStrings/utf8proc
+versions:
+- version: 2.12.0
+  status: released
+  url: https://github.com/JuliaStrings/utf8proc/releases/tag/v2.12.0
+domains:
+- text
+- internationalization
+capabilities:
+- text_encoding
+open_source: true
+scope_notes_zh: 固定官方 v2.12.0 / commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac 的 C 库；README 和运行时报告 Unicode 18.0.0，API
+  版本为 2.12.0，不能与共享库 ABI 版本或现有 Unicode 17.0 规范端点等同。本切片核查 UTF-8 单码点读取、输出与码点范围检查；库还公开规范化、大小写折叠和字素分割接口，但本切片未验证这些功能的完整行为。utf8proc_iterate
+  读取一个码点而非验证整个输入缓冲区；本例只用非负显式长度且不超过已分配数据，成功返回消费的字节数，非法或截断序列返回错误并将输出置为 -1，零长度返回 0。utf8proc_codepoint_valid 检查 U+0000..U+10FFFF
+  范围并排除 surrogate，不判断字符是否已分配或适合具体应用；非字符码点也可能返回真。utf8proc_encode_char 明确不验证 Unicode 码点有效性，为 API 兼容会将 surrogate 编成非法
+  UTF-8 字节；调用方若要求有效 UTF-8，应先做码点有效性检查并提供至少四字节输出空间，不能把编码返回成功当作合法性证明。固定源码在独立本地目录以 C99 编译，无系统安装或源码改动；22 项可信合成内存例只补充有限证据，未测试负长度/不可信缓冲区、资源耗尽、全字符串验证、完整
+  Unicode 符合性、安全认证、第三方互通或 IA 采用。库代码按 MIT 许可，utf8proc_data.c 另列 Unicode 数据许可，包括复制、文档及修改告知条件；不把裸 MIT 扩大为所有数据许可，也不在未严格映射时填组合
+  SPDX 表达式。未建立到 Unicode 17.0 的 implements，不因文本编码能力推断语言标签识别。
+scope_notes_en: 'Pinned to the official C library v2.12.0 at commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac. The
+  README and runtime report Unicode 18.0.0; API version 2.12.0 is not equated with the shared-library ABI version
+  or the existing Unicode 17.0 standard endpoint. This slice checks single-codepoint UTF-8 reading, output and codepoint-range
+  validation. The library also exposes normalization, case-folding and grapheme-boundary APIs, whose full behavior
+  was not verified here. utf8proc_iterate reads one codepoint rather than validating an entire buffer. The examples
+  use only nonnegative explicit lengths no larger than allocated data: success returns bytes consumed, invalid or
+  truncated input returns an error and sets the output to -1, and zero length returns 0. utf8proc_codepoint_valid
+  checks the U+0000..U+10FFFF range excluding surrogates, not character assignment or application suitability; noncharacters
+  can pass. utf8proc_encode_char explicitly does not validate Unicode codepoints and can encode surrogates as invalid
+  UTF-8 for API compatibility. A caller requiring valid UTF-8 must first validate the codepoint and provide at least
+  four output bytes; encoding success is not proof of validity. Fixed sources were compiled as C99 in a dedicated
+  local directory, without system installation or source modification. Twenty-two trusted synthetic-memory examples
+  are supplementary only: negative-length/untrusted buffers, resource exhaustion, whole-string validation, full
+  Unicode conformance, security certification, third-party interoperability and IA adoption were not tested. Library
+  code is under MIT, while utf8proc_data.c has a separately reproduced Unicode data license with copying, documentation
+  and modification-notice conditions. Bare MIT is not extended to all data, and no composite SPDX expression is
+  assigned without a strict mapping. No implements link to Unicode 17.0 is proposed; text-encoding capability does
+  not imply language-tag identification.'
+sources:
+- url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/README.md
+  title: utf8proc v2.12.0 — library purpose, Unicode version and licensing overview
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.h
+  title: utf8proc v2.12.0 — bounded decode, codepoint validity and encode API contracts
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/utf8proc.c
+  title: utf8proc v2.12.0 — actual decode rejection, validity and surrogate-encoding behavior
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/LICENSE.md
+  title: utf8proc v2.12.0 — MIT library code and separately stated Unicode data license
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/JuliaStrings/utf8proc/blob/79cdd5ab40c79afa559f689ffc13b76812dee1ac/Makefile
+  title: utf8proc v2.12.0 — official build flags and API versus shared-library version
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T11:48:02.521706+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed UTF-8 implementation evidence executor
+record_created_at: '2026-10-21T11:52:48.218274+00:00'
+record_updated_at: '2026-10-21T11:52:48.218274+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: utf8proc
+  acceptance_event_id: accept-20261021-utf8proc-utf8proc
+  reviewed_candidate_blob: ac69c50c18b7b66759c9eff1712361da1d7ea8bf
+  reviewed_against_commit: df326520011ccef4fa3cb7f4a33722dd48fe9779
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: df326520011ccef4fa3cb7f4a33722dd48fe9779
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/502
