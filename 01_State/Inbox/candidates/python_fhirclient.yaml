@@ -1,0 +1,32 @@
+contract_version: candidate-object-v1
+candidate_id: python_fhirclient
+label: SMART fhirclient Python library (4.4.0)
+publisher: SMART Health IT / SMART Platforms Team and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: smart-on-fhir/client-py
+- namespace: pypi
+  value: fhirclient
+locators:
+- url: https://github.com/smart-on-fhir/client-py
+  role: official
+- url: https://github.com/smart-on-fhir/client-py/tree/0989e0f166e18037406763cb4ab9e509f9dfddbf
+  role: dated
+- url: https://pypi.org/project/fhirclient/4.4.0/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_fhirclient
+  reasons:
+  - 经独立语义审核由 accept-20261021-python-fhirclient-python-fhirclient 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
+  merge_authorized: false
+unknowns:
+- 本切片仅核生成模型的 Python/JSON 映射与局部检查；strict=True 不是完整FHIR验证，原始数据往返可能丢失，具体限制保留。
+- 未测试网络服务器、OAuth/SMART授权、远程引用、术语服务、全资源/Profile/不变量、临床适用性、安全/隐私合规或第三方互通；仅合成数据，不表示IA采用。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
