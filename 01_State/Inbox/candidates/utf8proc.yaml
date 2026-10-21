@@ -1,0 +1,31 @@
+contract_version: candidate-object-v1
+candidate_id: utf8proc
+label: utf8proc C Unicode / UTF-8 library (2.12.0)
+publisher: utf8proc project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: JuliaStrings/utf8proc
+locators:
+- url: https://github.com/JuliaStrings/utf8proc
+  role: official
+- url: https://github.com/JuliaStrings/utf8proc/tree/79cdd5ab40c79afa559f689ffc13b76812dee1ac
+  role: dated
+- url: https://github.com/JuliaStrings/utf8proc/releases/tag/v2.12.0
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为 JuliaStrings/utf8proc 的 C 库，固定官方 v2.12.0；不与 Unicode 标准、Julia 语言、绑定包或其他 UTF-8 库合并。
+  - README 的历史 Public Software Group 来源说明不被拆成另一实现，也不触发身份合并；沿用现有 github 标识机制。
+  merge_authorized: false
+unknowns:
+- 固定库报告 Unicode 18.0.0，而库内现有规范端点为 Unicode 17.0；本切片不建立 implements。
+- 仅可信内存 UTF-8 单码点编解码和码点范围检查先例，不是全 Unicode 操作、任意缓冲区安全或第三方互通证明。
+- 库代码 MIT 与另列的 Unicode 数据许可分开记录，不猜组合 SPDX 表达式或作法律合规判断。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
