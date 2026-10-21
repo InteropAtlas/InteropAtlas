@@ -102,3 +102,155 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_uri
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 3986 URI 引用
+name_en: CloudEvents 1.0.2 uses RFC 3986 URI references
+source: cloudevents_1.0.2
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: CloudEvents Core Specification 1.0.2
+    target: RFC 3986
+  conditions_zh: 仅表述固定核心规范的 URI/URI-reference 类型及 source 属性使用 RFC 3986 语法：source 必填且为非空 URI-reference，绝对 URI 是建议而非强制。生产者定义标识内容的具体语义；本关系不表示该标识必须是可抓取
+    URL，也不证明生产者身份可信。
+  conditions_en: Limited to the fixed core URI/URI-reference types and source attribute using RFC 3986 syntax. Source is required
+    and nonempty; an absolute URI is recommended, not mandatory. Producer-defined identifier semantics do not imply dereferenceability
+    or trusted producer identity.
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type-system
+  title: CloudEvents 1.0.2 — Type System, RFC3986 URI and URI-reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source
+  title: CloudEvents 1.0.2 — required source attribute
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-4.1
+  title: RFC 3986 — URI Reference
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_rfc3339
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 3339 时间戳表达
+name_en: CloudEvents 1.0.2 uses RFC 3339 timestamp expressions
+source: cloudevents_1.0.2
+relation: uses
+target: rfc3339
+context:
+  version_context:
+    source: CloudEvents Core Specification 1.0.2
+    target: RFC 3339
+  conditions_zh: 仅表述 Timestamp 类型的规范字符串编码及可选 time 属性：time 存在时须符合 RFC 3339；绑定和运行时也可使用可转换的原生类型，不要求每次传输都使用字符串。time 仍可省略；关系不保证时钟同步、时间精度或所填值必然是真实发生时刻，也不自动接纳
+    RFC 9557 扩展。
+  conditions_en: Limited to canonical Timestamp string encoding and the optional time attribute, which follows RFC 3339 when
+    present. Convertible native representations remain possible. Time can be omitted; this does not guarantee clock synchronization,
+    accuracy or actual occurrence time, or automatically include RFC 9557 extensions.
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type-system
+  title: CloudEvents 1.0.2 — Timestamp encoding and native-type conversion
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#time
+  title: CloudEvents 1.0.2 — optional time attribute and occurrence-time limitation
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html
+  title: RFC 3339 — Internet timestamp profile
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_json
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 8259 JSON 事件格式
+name_en: CloudEvents 1.0.2 uses the RFC 8259 JSON event format
+source: cloudevents_1.0.2
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: CloudEvents Core and JSON Event Format 1.0.2
+    target: RFC 8259
+  conditions_zh: 仅表述核心规范要求实现支持的 1.0.2 JSON 事件格式使用 RFC 8259 表示事件。不是每次传输或 data 载荷都必须为 JSON；该格式允许二进制 data 通过 data_base64 封装，其他事件格式和协议绑定仍各自适用。不把核心类型系统中的历史
+    RFC 7159 引用重写为 RFC 8259。
+  conditions_en: 'Limited to the JSON Event Format 1.0.2 that core implementations must support, using RFC 8259 to represent
+    events. Not every transfer or data payload must be JSON: binary data can use data_base64, and other formats/bindings remain
+    separate. This does not rewrite the core type system historical RFC 7159 reference.'
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#overview
+  title: CloudEvents Core 1.0.2 — required JSON event-format support
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md#1-introduction
+  title: JSON Event Format 1.0.2 — explicit RFC8259 representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md#31-handling-of-data
+  title: JSON Event Format 1.0.2 — binary and non-JSON payload handling
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: vc_data_model_2.0_uses_json_ld
+type: relation
+name_zh: 可验证凭证数据模型 2.0 使用 JSON-LD 1.1 序列化
+name_en: Verifiable Credentials Data Model 2.0 uses JSON-LD 1.1 serialization
+source: vc_data_model_2.0
+relation: uses
+target: json_ld_1.1
+context:
+  version_context:
+    source: VC Data Model 2.0, W3C Recommendation 2025-05-15
+    target: JSON-LD 1.1, W3C Recommendation 2020-07-16
+  conditions_zh: 仅表述固定凭证数据模型 2.0 的 JSON-LD 1.1 序列化；application/vc 与 application/vp 表示须使用 compacted document form。第 6.3 节的资料性说明允许符合文档条件的类型特定处理，不要求每个消费者使用通用
+    JSON-LD 库；上下文与文档符合性要求仍保留。不推定某签名套件、发行者可信度、法律效力或 IA 采用。
+  conditions_en: Limited to the fixed VC2.0 JSON-LD1.1 serialization, using compacted document form for application/vc and
+    application/vp. Informative section6.3 describes type-specific processing of conforming documents without a general JSON-LD
+    library; context and conformance requirements remain. No signing-suite, issuer-trust, legal-validity or IA-adoption claim.
+evidence:
+- url: https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/
+  title: VC Data Model 2.0 — Section 6.1 JSON-LD, Section 6.3 informative processing guidance and normative JSON-LD11 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
+  title: JSON-LD 1.1 — fixed Recommendation identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
