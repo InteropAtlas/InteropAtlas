@@ -1,0 +1,142 @@
+packet_id: json_serialization_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 444349856aacd9ee334047937455714c56ddbb82
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 现有 schema_validation 断点补齐后，同一表示链的 data_serialization CLI 仍无已记录实现；本切片为独立软件库、一个有条件 implements 关系及既有 syntax 导航，不按引用数堆边。
+- 仅用既有 system/library、data_serialization、implements 和候选/接纳机制；不新增分类、词表、页面、规则或维护方式。
+- 独立审核须核固定来源与全部对象/关系条件；本地示例仅为补充验证，其数量不是覆盖度或完整符合性分母。
+source_evidence:
+- url: https://api.github.com/repos/nlohmann/json/git/tags/65ee68451d8eb2b5f3a30b410476ab83deb3289b
+  locator: v3.12.0 annotated tag → commit 55f93686c01528224f448c19128836e7df245f72
+  observation_zh: 正式发行日期 2025-04-11；源码与六个文档/许可文件逐项 Git blob 哈希核验。单头文件 SHA256 与该发行说明公开值一致。
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/types/number_handling.md
+  locator: RFC 8259 number syntax/interoperability; Library implementation
+  observation_zh: 区分规范可设数值限制与具体 int64/uint64/double 实现；不推断任意精度、文本无损或协议互通。
+objects:
+- candidate_id: nlohmann_json
+  candidate_path: 01_State/Inbox/candidates/nlohmann_json.yaml
+  candidate_blob: 13b3cc2d778f9735081ecec7333dd496653529ae
+  preflight:
+    canonical_records: 193
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: nlohmann_json
+    type: system
+    kind: library
+    name_zh: JSON for Modern C++ 数据表示库
+    name_en: JSON for Modern C++ library
+    description_zh: 以 nlohmann/json 发布的仅头文件 C++11 库，提供 JSON 值、parse 解析与 dump 序列化；本记录固定到 3.12.0。
+    description_en: The header-only C++11 library published as nlohmann/json, providing JSON values, parse and dump
+      operations; pinned here to release 3.12.0.
+    version: 3.12.0
+    external_identifiers:
+    - namespace: github
+      value: nlohmann/json
+    official_url: https://github.com/nlohmann/json
+    versions:
+    - version: 3.12.0
+      status: released
+      url: https://github.com/nlohmann/json/releases/tag/v3.12.0
+    capabilities:
+    - data_serialization
+    open_source: true
+    license_expression: MIT
+    scope_notes_zh: 主体为软件库而非 RFC 8259 或 JSON Schema 验证实现。本轮仅记录 JSON 文本解析/序列化，不把其他二进制格式或应用协议支持一并接纳。默认 parse 拒绝注释，显式
+      ignore_comments 是扩展；解析错误默认抛异常，也可返回 discarded。单字节输入/存储字符串采用 UTF-8；特定宽字符迭代器可解析 UTF-16/32，dump 默认严格检查 UTF-8。默认数字使用
+      64 位有/无符号整数或 double，可能舍入或拒绝超范围数；赋值的 NaN 序列化为 null。默认对象键排序，不保证原始文本、数值拼写或键顺序无损保留；不是规范化/签名方案。无完整符合性、安全认证、宿主协议实现、互通、生产推荐或最新发行版结论。
+    scope_notes_en: The subject is the library, not RFC 8259 or a JSON Schema validator. This slice records JSON
+      text parsing/serialization, not its other binary-format or application-protocol support. Default parse rejects
+      comments; explicit ignore_comments is an extension. Parse errors throw by default or can return discarded.
+      Single-byte input and stored strings use UTF-8; specific wide-character iterators allow UTF-16/32 input, and
+      dump checks UTF-8 strictly by default. Default numbers use signed/unsigned 64-bit integers or double and may
+      round or reject out-of-range values; assigned NaN serializes as null. Default object keys are sorted, so original
+      text, numeric spelling and key order are not preserved losslessly; this is not a canonicalization/signature
+      scheme. No full-conformance, security certification, host-protocol implementation, interoperability, production-recommendation
+      or latest-release claim.
+    sources:
+    - &id001
+      url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/README.md
+      title: JSON for Modern C++ 3.12.0 — library identity, C++11 integration, serialization and encoding
+      language: en
+      accessed: '2026-10-21'
+    - &id002
+      url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/parse.md
+      title: JSON for Modern C++ 3.12.0 — parse parameters, encoding, errors and comment extension
+      language: en
+      accessed: '2026-10-21'
+    - &id003
+      url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/dump.md
+      title: JSON for Modern C++ 3.12.0 — JSON serialization and strict UTF-8 error handling
+      language: en
+      accessed: '2026-10-21'
+    - &id004
+      url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/types/number_handling.md
+      title: JSON for Modern C++ 3.12.0 — RFC 8259 number handling and finite-precision boundaries
+      language: en
+      accessed: '2026-10-21'
+    - &id005
+      url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/object_order.md
+      title: JSON for Modern C++ 3.12.0 — default sorted object keys
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/LICENSE.MIT
+      title: JSON for Modern C++ 3.12.0 — MIT license notice
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T01:10:32.968715+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version JSON serialization evidence executor
+relations:
+- proposal_id: nlohmann_json_implements_json_rfc8259
+  proposed_record:
+    id: nlohmann_json_implements_json_rfc8259
+    type: relation
+    name_zh: nlohmann/json 3.12.0 实现 JSON 文本解析与序列化
+    name_en: nlohmann/json 3.12.0 implements JSON text parsing and serialization
+    source: nlohmann_json
+    relation: implements
+    target: json_rfc8259
+    context:
+      capabilities:
+      - data_serialization
+      version_context:
+        source: JSON for Modern C++ 3.12.0, upstream commit 55f93686c01528224f448c19128836e7df245f72
+        target: JSON, RFC 8259 (2017)
+      conditions_zh: 限定为固定版本文档明确按 RFC 8259 描述的 JSON 文本数据处理。默认 JSON 路径不启用注释扩展，字符串和错误行为按 parse/dump 参数；不将库内二进制值或可选扩展当作
+        RFC 8259 语法。默认 int64/uint64/double 数值限制、浮点舍入与对象键排序适用，不保证任意精度或词法无损往返，NaN 赋值序列化为 null。本关系不证明完整符合性认证、JSON Schema
+        验证、MCP/WoT/CloudEvents 整体实现、规范化签名或跨应用互通。
+      conditions_en: Limited to the fixed-release JSON text operations documented with RFC 8259. The default JSON
+        path does not enable comment extensions; string/error behavior follows parse/dump parameters. Internal binary
+        values or optional extensions are not treated as RFC 8259 syntax. Default int64/uint64/double range limits,
+        floating-point rounding and sorted object keys apply; arbitrary precision or lexical-lossless round trips
+        are not guaranteed, and assigned NaN serializes as null. This does not certify full conformance, JSON Schema
+        validation, full MCP/WoT/CloudEvents implementation, canonical signatures or cross-application interoperability.
+    evidence:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    last_verified_at: '2026-10-21T01:10:32.968715+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version JSON serialization evidence executor
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: nlohmann_json
+  rationale_zh: JSON 表示的解析/序列化库，沿用 RFC 8259 与 data_serialization 已有编辑导航；正式接纳后物化。
+supplementary_verification:
+  library_version: 3.12.0
+  compiler: g++ (Debian 14.2.0-19) 14.2.0
+  language_mode: C++11
+  local_examples_passed: 16
+  boundary_zh: 单头文件由固定官方 commit 取得，16 个本地示例包括结构化往返、默认/可选注释、discarded、UTF-8/UTF-16、数字边界、NaN、键顺序及尾随内容；非完整上游符合性、安全或性能测试。
