@@ -1,0 +1,32 @@
+contract_version: candidate-object-v1
+candidate_id: python_langcodes
+label: Langcodes Python language-tag library (3.5.1)
+publisher: Langcodes project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: georgkrause/langcodes
+- namespace: pypi
+  value: langcodes
+locators:
+- url: https://github.com/georgkrause/langcodes
+  role: official
+- url: https://github.com/georgkrause/langcodes/tree/4701cd34cc607c4ffcd2ed675f03b1d6529398da
+  role: dated
+- url: https://pypi.org/project/langcodes/3.5.1/
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为官方 PyPI langcodes 包及该固定版本元数据指向的 georgkrause/langcodes 库。README 中历史 rspeer/LuminosoInsight 项目引用不被拆成多个包，也不据此执行身份合并。
+  - 不与 BCP47/RFC5646 规范、Unicode CLDR、可选 language_data 数据包或语言检测服务混同；沿用现有 github/pypi 身份机制。
+  merge_authorized: false
+unknowns:
+- 固定3.5.1的标签解析/对象表示/格式化/局部validity，不是严格原输入RFC5646语法判定器、完整注册表或扩展语义验证器。
+- 未测试可选language_data环境、自动文本语言检测、RFC4647匹配、当前完整IANA资料、全符合性、第三方互通或IA采用。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
