@@ -50,3 +50,50 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: pyld_implements_json_ld_1_1
+type: relation
+name_zh: PyLD 支持 JSON-LD 1.1 表示处理
+name_en: PyLD implements JSON-LD 1.1 representation processing
+source: pyld
+relation: implements
+target: json_ld_1.1
+context:
+  capabilities:
+  - linked_data_serialization
+  - graph_representation
+  version_context:
+    source: PyLD 3.3.0, fixed upstream 3ac1987d9be3648c09b7c7e34865ce82d637e742
+    target: JSON-LD 1.1, W3C Recommendation 2020-07-16
+  conditions_zh: 限固定版本的JSON-LD 1.1展开、压缩、扁平化及RDF转换实现先例；官方目标声明不是全符合性认证。处理模式、上下文/加载器及RDF方向选项影响结果，未映射字段可被丢弃。此关系不把独立API/Framing/Canonicalization规范全套纳入本端点，不证明任意JSON无损转换、远程加载安全、SHACL管道、RDF1.2或跨实现互通。
+  conditions_en: Limited to the fixed version as a JSON-LD 1.1 expansion, compaction, flattening and RDF-conversion
+    implementation precedent, not certification from an upstream conformance aim. Processing mode, contexts/loaders
+    and RDF direction options affect results; unmapped fields can be dropped. This edge does not fold the separate
+    API, Framing or Canonicalization specifications into this endpoint or prove arbitrary lossless JSON conversion,
+    remote-loading security, a SHACL pipeline, RDF 1.2 or cross-implementation interoperability.
+evidence:
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/README.md
+  title: PyLD 3.3.0 — Features & conformance aims and processing examples
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py
+  title: PyLD 3.3.0 — processing entry points, mode defaults and RDF conversion options
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/tests/runtests.py
+  title: PyLD 3.3.0 — test runner skips; not a complete test result
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#data-model
+  title: JSON-LD 1.1 — fixed 2020 Recommendation data model and representation scope
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:15:36.943122+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed JSON-LD processor evidence executor
+record_created_at: '2026-10-21T05:20:13.051116+00:00'
+record_updated_at: '2026-10-21T05:20:13.051116+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
