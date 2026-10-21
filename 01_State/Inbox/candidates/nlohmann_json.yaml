@@ -15,10 +15,11 @@ locators:
 - url: https://github.com/nlohmann/json/releases/tag/v3.12.0
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - nlohmann_json
   reasons:
-  - 主体为 C++ 软件库，不是 JSON 格式规范、JSON Schema 验证库或发布者个人。固定 3.12.0 资料，不为版本创建新软件主体；全量既有 Canonical 与候选身份检查未发现确定性碰撞。
+  - 经独立语义审核，由 accept-20261021-json-serialization-nlohmann_json 接纳为正式软件库对象；原始 new 状态保留于冻结候选 commit/blob，当前引用防止再次创建。
   merge_authorized: false
 unknowns:
 - 未运行完整上游套件、模糊测试、安全审计、性能比较或跨应用互通测试；不宣称最新发行版或生产适用性。
@@ -26,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
