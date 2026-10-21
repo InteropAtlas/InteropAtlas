@@ -1,0 +1,332 @@
+packet_id: python_geojson_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 9d8a5f444f053dfc9d54aa96bfe944c2c0db88e0
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 接续现有geospatial导航中OGC可选GeoJSON表示路径的实现先例缺口；不是为条目数新增任意库。
+- 仅现有system/library、data_serialization、bounded implements与geospatial导航；不将简单is_valid强配为schema_validation，不改词表、模型或维护规则。
+- data_format/structured_data为已有自由标签，按软件实际编解码范围人工选择；geospatial编辑导航不是自动继承或新标签体系。
+work_item_preflight:
+  repository_text_matches: []
+  search_scope_zh: 本次全量正式对象/候选身份检索及GitHub geojson Issue/PR检索仅见既有规范PR475，未发现同库并行intake；未命中不是全知保证。
+official_source_hashes:
+- path: README.rst
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/README.rst
+  local_path: official/README.rst
+  sha256: 269be0682f2ca2e74ee99bf479aed1ff5b42f7d0feb0b439887e8c4014d23fb9
+  git_blob: 1c52ca5a9cf11e56bb2934d6f24c756fb016c792
+  fetched_at: '2026-10-21T07:27:58.544380+00:00'
+- path: LICENSE.rst
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/LICENSE.rst
+  local_path: official/LICENSE.rst
+  sha256: b42d911e016ab093fc502baa42ecc01418fa5e37d594b736c76f1b91e6179486
+  git_blob: 84a1ff66a666d1b81e37b8c3d78743761c335de5
+  fetched_at: '2026-10-21T07:28:02.684791+00:00'
+- path: setup.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/setup.py
+  local_path: official/setup.py
+  sha256: ad258fe8a131399a8b37918932fa799d45a05410a560b9f08332f3a10387c8e8
+  git_blob: 05ce9cdf179c521c62d89a93bc797aa8fb6339e9
+  fetched_at: '2026-10-21T07:28:05.510957+00:00'
+- path: CHANGELOG.rst
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/CHANGELOG.rst
+  local_path: official/CHANGELOG.rst
+  sha256: 7e682d52ea17fd0a78bf1a6d70edf7992dafeaed4b51b0d528ab12d8281a5fa3
+  git_blob: c4578fd84c0c9fde42ec5d6426360415843de49f
+  fetched_at: '2026-10-21T07:28:08.282311+00:00'
+- path: geojson/__init__.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/__init__.py
+  local_path: official/geojson/__init__.py
+  sha256: 5c821d7bc533378264804e96ae817cf9824f57ca3bc340f235e5bbde653f67b0
+  git_blob: d0cc47b94eeb62a456c8bbc7ca9367b5ad20aad4
+  fetched_at: '2026-10-21T07:28:11.309587+00:00'
+- path: geojson/_version.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/_version.py
+  local_path: official/geojson/_version.py
+  sha256: c11b4b2d17808af8964ed2b3cd41588a138653de3d5482c53c6ba6fc921c0393
+  git_blob: 54c6d8e7179d2d4902b94bafde2f6f90f6848c73
+  fetched_at: '2026-10-21T07:28:14.432660+00:00'
+- path: geojson/base.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/base.py
+  local_path: official/geojson/base.py
+  sha256: 22cfed9f235024915a66f6818e72104c9ba34083e6c05bc2fceaf13972f2067f
+  git_blob: 380f4a2e222c5a4d292f804af21fcf79933196c3
+  fetched_at: '2026-10-21T07:28:18.496302+00:00'
+- path: geojson/codec.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/codec.py
+  local_path: official/geojson/codec.py
+  sha256: 548bfc1c4a0bec1017a13e0bb5bc8d9908c9a23c1014271ad611dd2963bb44c2
+  git_blob: d6cef8ee8a259f25f66c97511fed298ccb27be65
+  fetched_at: '2026-10-21T07:28:21.779349+00:00'
+- path: geojson/factory.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/factory.py
+  local_path: official/geojson/factory.py
+  sha256: 7b1aacb18720dc3af57be96e5e70c315edeb65ccd053c6b78cecba0d2dba68a6
+  git_blob: ee8dffcfa9568d457cecc429970ee00cfb151b10
+  fetched_at: '2026-10-21T07:28:24.924335+00:00'
+- path: geojson/feature.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/feature.py
+  local_path: official/geojson/feature.py
+  sha256: 19f94a904ba2386444a37df8457987d767407eca93cafb01808d092d66a54072
+  git_blob: e262438389c44f9f7982ac5faf3fba2225c1f8d9
+  fetched_at: '2026-10-21T07:28:28.014669+00:00'
+- path: geojson/geometry.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/geometry.py
+  local_path: official/geojson/geometry.py
+  sha256: 7a71f1cb515f5245cea27fb95543e459f6c09eb8ec1b7879f757cec4f26a0d18
+  git_blob: 19fc4a7224905171e6702b2279f491a27b22d341
+  fetched_at: '2026-10-21T07:28:31.296803+00:00'
+- path: geojson/mapping.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/mapping.py
+  local_path: official/geojson/mapping.py
+  sha256: 47c8bb9ffa5188b05be126c8696f0d085aa3668ab05e6e13616a27db9a57216b
+  git_blob: 1ceffbc127a62c7cd768138dc059b4488b869085
+  fetched_at: '2026-10-21T07:28:34.714121+00:00'
+- path: geojson/utils.py
+  url: https://raw.githubusercontent.com/jazzband/geojson/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/utils.py
+  local_path: official/geojson/utils.py
+  sha256: b8e68f15e88d9dece6abf2402b87159baab5168aeaa4c9504b8ab225c860d12a
+  git_blob: 61c55d6c1d2d11d394b4dd189221a3582d8f1046
+  fetched_at: '2026-10-21T07:28:37.786733+00:00'
+rfc_source_hash:
+  url: https://www.rfc-editor.org/rfc/rfc7946.txt
+  local_path: rfc7946.txt
+  sha256: cb52f07b9cc6c841750d75850988fe8f32c7b7f0e1f7420f2069d5b5ded124f8
+  git_blob: 109adb88c919cb125a85c0fd520ce2a1623af462
+  fetched_at: '2026-10-21T07:32:38.585841+00:00'
+existing_endpoint_blobs:
+  geojson_rfc7946:
+    path: 01_State/01_Objects/geojson_rfc7946.yaml
+    git_blob: 0b3a49ba3465d5ee8af134f0d2d9bb3aa1e17391
+  data_serialization:
+    path: 01_State/01_Objects/data_serialization.yaml
+    git_blob: 1981b576ca8d9cfad8bf0a5159d4ae43dca69d6e
+package_registry_identity:
+  url: https://pypi.org/pypi/geojson/3.3.0/json
+  sha256: 4eb4ba717cdad68c9a1bfe51d1283fd81b6aa2add2f9343b33d2dcfbf4d6cbff
+  name: geojson
+  version: 3.3.0
+  project_urls:
+    Homepage: https://github.com/jazzband/geojson
+  requires_dist: null
+  files:
+  - filename: geojson-3.3.0-py3-none-any.whl
+    sha256: a2d885187eeaa8b357600b3fcc9d963cb4300d1694196636dbd7eddc82fd0825
+  - filename: geojson-3.3.0.tar.gz
+    sha256: 92e83b9cb378a450b42f1207bb9b2a031f9fc89185f335153c44369b8b8b71fd
+  boundary_zh: 版本/分发元数据用于身份核对，9个安装源码文件另与固定Git字节比较；不是完整wheel供应链或所有环境审计。
+objects:
+- candidate_id: python_geojson
+  candidate_path: 01_State/Inbox/candidates/python_geojson.yaml
+  candidate_blob: fa9ce570e88f2bf1f92d63dec6fa1f737d9bd69d
+  preflight:
+    canonical_records: 208
+    existing_candidate_records: 211
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: python_geojson
+    type: system
+    kind: library
+    name_zh: geojson Python 地理数据编解码库
+    name_en: geojson Python geospatial encoding/decoding library
+    description_zh: 面向GeoJSON几何、要素与要素集合的开源Python对象和编解码库；本记录固定3.3.0，并保留精度、局部检查及归一化边界。
+    description_en: An open-source Python object and encoding/decoding library for GeoJSON geometries, features
+      and feature collections, pinned to 3.3.0 with precision, partial-check and normalization boundaries.
+    version: 3.3.0
+    external_identifiers:
+    - namespace: github
+      value: jazzband/geojson
+    - namespace: pypi
+      value: geojson
+    official_url: https://github.com/jazzband/geojson
+    versions:
+    - version: 3.3.0
+      status: released
+      url: https://pypi.org/project/geojson/3.3.0/
+    domains:
+    - data_format
+    - structured_data
+    capabilities:
+    - data_serialization
+    open_source: true
+    license_expression: BSD-3-Clause
+    scope_notes_zh: 固定3.3.0，提供官方README指向RFC7946的七种几何类型及Feature/FeatureCollection对象、编解码和Python __geo_interface__
+      适配。不是完整GIS或OGC API服务。几何构造默认不执行validate检查，坐标默认舍入到6位小数，loads创建几何对象时也会舍入；显式precision可改变精度，不作无损或任意精度保证。is_valid仅汇总局部errors：Point检查2/3个数值，Polygon检查环长度/闭合但不完整检查每个位置维数，也不重排环方向；Feature检查委托给geometry，不验证properties类型。不能把is_valid=True当完整RFC符合性；RFC对超3坐标使用SHOULD
+      NOT，且兼容性上不建议解析器拒绝非右手规则Polygon，不能把库行为改写成更强规范要求。Feature的null properties归一化为{}，null geometry保留；未知type默认解码成普通dict，strict
+      coercion可拒绝。默认dumps拒绝非有限数，默认loads拒绝NaN/Infinity常量；调用方可覆盖这些默认设置，且Point的简单检查本身可接受NaN。21项可信内存观察覆盖9类对象小样本与这些边界；当前没有可选simplejson，其存在时mapping的某些回退路径可不同。未建立CRS转换、地理范围/拓扑、反经线、bbox、完整符合性、安全、第三方互通或IA采用结论。
+    scope_notes_en: 'Fixed to 3.3.0, providing seven geometry types plus Feature/FeatureCollection, encoding/decoding
+      and Python __geo_interface__ adaptation, with upstream README links to RFC 7946. Not a full GIS or an OGC
+      API service. Geometry construction does not validate by default; coordinates round to six decimal places,
+      including when loads constructs geometry objects. Explicit precision changes rounding, not a lossless or arbitrary-precision
+      guarantee. is_valid aggregates local errors: Point checks two/three numeric values; Polygon checks ring length/closure
+      but not every position dimension and does not rewrite winding; Feature delegates to geometry without validating
+      properties type. is_valid=True is not full RFC conformance. The RFC uses SHOULD NOT for positions beyond three
+      elements and advises parsers not to reject non-right-hand-rule Polygons for compatibility; library behavior
+      must not be elevated into stricter normative requirements. Null Feature properties normalize to {}, while
+      null geometry remains null. Unknown types decode to plain dict by default; strict coercion can reject them.
+      Default dumps rejects nonfinite numbers and default loads rejects NaN/Infinity constants, but callers can
+      override these policies, and the simple Point check itself can accept NaN. Twenty-one trusted-memory observations
+      cover nine object classes and these boundaries. Optional simplejson was absent; its presence can change some
+      mapping fallback paths. CRS transformation, geographic range/topology, antimeridian handling, bbox, full conformance,
+      security, third-party interoperability and IA adoption are not established.'
+    sources:
+    - &id001
+      url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/README.rst
+      title: geojson 3.3.0 — identity, explicit RFC 7946 object classes, precision and simple validation
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/setup.py
+      title: geojson 3.3.0 — package identity and Python range
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/LICENSE.rst
+      title: geojson 3.3.0 — BSD three-clause license text
+      language: en
+      accessed: '2026-10-21'
+    - &id002
+      url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/geometry.py
+      title: geojson 3.3.0 — coordinate rounding and geometry checks
+      language: en
+      accessed: '2026-10-21'
+    - &id003
+      url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/codec.py
+      title: geojson 3.3.0 — default JSON number policies and load hooks
+      language: en
+      accessed: '2026-10-21'
+    - &id004
+      url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/base.py
+      title: geojson 3.3.0 — non-strict type conversion and is_valid delegation
+      language: en
+      accessed: '2026-10-21'
+    - &id005
+      url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/feature.py
+      title: geojson 3.3.0 — Feature properties/geometry normalization and checks
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/mapping.py
+      title: geojson 3.3.0 — geo interface mapping and optional simplejson fallback
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T07:34:27.995529+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed GeoJSON library evidence executor
+relations:
+- proposed_record:
+    id: python_geojson_implements_geojson_rfc7946
+    type: relation
+    name_zh: geojson 3.3.0 有界实现GeoJSON对象编解码
+    name_en: geojson 3.3.0 provides bounded GeoJSON object encoding/decoding
+    source: python_geojson
+    relation: implements
+    target: geojson_rfc7946
+    context:
+      capabilities:
+      - data_serialization
+      version_context:
+        source: jazzband/geojson 3.3.0, upstream commit f14b85252bd93eb336f9918a3cf8c601b6094714
+        target: GeoJSON, RFC 7946 (August 2016)
+      conditions_zh: 仅限固定README明确指向RFC7946的GeoJSON对象模型与编解码路径，使用相应几何/Feature/FeatureCollection输入；不是完整规范验证器或所有可构造数据均符合的保证。默认几何构造不验证，坐标6位舍入及loads中的舍入、null
+        properties归一化、未知type非严格返回dict适用；不保证无损往返。is_valid的Point/Polygon/Feature检查有限，不能代替完整位置/环方向/属性/bbox或地理语义验证。默认非有限数拒绝可被调用方参数覆盖；这些扩展输出不当作RFC语法。RFC对超3元素及环方向解析兼容性的SHOULD限定保留。本关系不证明坐标系转换、完整GIS、OGC
+        API Features服务器、认证、安全或第三方互通。
+      conditions_en: Limited to the GeoJSON object model and encoding/decoding paths that the fixed README explicitly
+        links to RFC 7946, using the respective geometry/Feature/FeatureCollection inputs. This is not a full specification
+        validator or a guarantee that every constructible value conforms. Default construction skips geometry validation;
+        six-place coordinate rounding, rounding during loads, null-properties normalization and non-strict unknown-type
+        dict returns apply, with no lossless round-trip guarantee. Point/Polygon/Feature is_valid checks do not
+        replace complete position/winding/property/bbox or geographic-semantic validation. Callers can override
+        default nonfinite-number rejection; such extended output is not treated as RFC syntax. The RFC SHOULD qualifications
+        for positions beyond three elements and winding-order parser compatibility are retained. This does not establish
+        CRS conversion, full GIS functionality, an OGC API Features server, certification, security or third-party
+        interoperability.
+    evidence:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    - url: https://www.rfc-editor.org/rfc/rfc7946.txt
+      title: RFC 7946 — sections 3.1, 3.1.1, 3.1.6, 3.2 and 3.3; object and geometry conditions
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T07:34:27.995529+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed GeoJSON library evidence executor
+membership_proposals:
+- category_id: geospatial
+  ref:
+    surface: canonical
+    id: python_geojson
+  rationale_zh: GeoJSON几何/要素表示与编解码实现先例，不等于完整GIS或OGC服务。
+supplementary_verification:
+  source_commit: f14b85252bd93eb336f9918a3cf8c601b6094714
+  observed_at: '2026-10-21T07:30:35.564164+00:00'
+  versions:
+    python: 3.12.14
+    geojson: 3.3.0
+  optional_simplejson_present: false
+  local_examples_passed: 21
+  installed_source_matches:
+  - geojson/__init__.py
+  - geojson/_version.py
+  - geojson/base.py
+  - geojson/codec.py
+  - geojson/factory.py
+  - geojson/feature.py
+  - geojson/geometry.py
+  - geojson/mapping.py
+  - geojson/utils.py
+  network_attempts: []
+  cases:
+  - case: fixed_version
+    result: true
+  - case: nine_documented_object_classes_round_trip_simple_values
+    result: true
+  - case: default_output_preserves_unicode_text
+    result: true
+  - case: default_coordinate_precision_rounds_six_places
+    result: true
+  - case: explicit_precision_nine_places
+    result: true
+  - case: loads_also_rounds_coordinates
+    result: true
+  - case: construction_not_automatic_geometry_validation
+    result: true
+  - case: explicit_validate_rejects_bad_dimension
+    result:
+      exception: ValueError
+  - case: polygon_simple_check_does_not_validate_position_arity
+    result: true
+  - case: polygon_winding_not_rewritten
+    result: true
+  - case: feature_simple_check_does_not_validate_properties_type
+    result: true
+  - case: null_properties_normalized_to_empty_object
+    result: true
+  - case: null_geometry_preserved
+    result: true
+  - case: unknown_type_loads_as_plain_mapping_by_default
+    result: true
+  - case: strict_coercion_rejects_unknown_type
+    result:
+      exception: ValueError
+  - case: simple_point_check_does_not_reject_nonfinite_number
+    result: true
+  - case: default_dumps_rejects_nonfinite_number
+    result:
+      exception: ValueError
+  - case: default_loads_rejects_nan_constant
+    result:
+      exception: ValueError
+  - case: caller_can_override_nan_output_default
+    result: true
+  - case: trusted_geo_interface_adapter
+    result: true
+  - case: no_network_attempts
+    result: true
+  boundary_zh: 仅可信合成内存数据，无网络尝试；21项观察不是全套RFC测试、GIS分析、OGC服务或实际互通，不把局部is_valid当全面验证。
