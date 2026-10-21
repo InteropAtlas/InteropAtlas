@@ -37,3 +37,45 @@ semantic_review:
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   review_url: https://github.com/InteropAtlas/InteropAtlas/issues/276#issuecomment-6304539206
   scope_zh: 独立核验 MCP 2025-11-25 Messages 与 JSON-RPC 2.0，只接纳消息层 uses 范围；请求 ID 不重用限于同一请求发起方、同一会话，最终序列化结论见公开审查记录。
+---
+id: jsonrpc_2_0_uses_json_rfc4627
+type: relation
+name_zh: JSON-RPC 2.0 明确引用 RFC 4627 JSON 格式
+name_en: JSON-RPC 2.0 explicitly uses the RFC 4627 JSON format
+source: json_rpc_2.0
+relation: uses
+target: json_rfc4627
+context:
+  version_context:
+    source: JSON-RPC 2.0, official specification last updated 2013-01-04
+    target: RFC 4627, July 2006 (Informational; obsoleted by RFC 7159)
+  conditions_zh: 仅记录 JSON-RPC 2.0 官方规范第 1/2 节对 RFC 4627 数据格式和类型系统的明确引用；不把该引用升级为 RFC 8259，也不据此断言 MCP 消息直接以 RFC 8259
+    为版本目标。RFC 4627 顶层对象/数组、编码及解析/生成规则按历史版本保留，JSON-RPC 请求、响应、通知与批处理另有协议约束。uses 不作传递性或实际实现符合性证明；JSON-RPC 可有批处理不等于其宿主协议允许批处理。
+  conditions_en: Records only the explicit RFC 4627 data-format and type-system reference in sections 1/2 of the
+    official JSON-RPC 2.0 specification. It does not upgrade that reference to RFC 8259 or establish a direct RFC
+    8259 version requirement for MCP messages. The historical RFC 4627 top-level object/array, encoding and parsing/generation
+    rules are preserved; JSON-RPC requests, responses, notifications and batches have additional protocol constraints.
+    uses is not treated as transitive or as implementation-conformance proof; JSON-RPC batch support does not imply
+    that a host protocol allows batches.
+evidence:
+- url: https://www.jsonrpc.org/specification
+  title: JSON-RPC 2.0 Specification — sections 1 Overview and 2 Conventions; updated 2013-01-04
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc4627.txt
+  title: RFC 4627 (July 2006) — Informational status; sections 1–6
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/info/rfc4627/
+  title: RFC Editor information page — RFC 4627, obsoleted by RFC 7159
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:21:15.109663+00:00'
+last_verified_by: Agent — OpenAI / dot，historical JSON reference evidence executor
+record_created_at: '2026-10-21T01:24:10.359241+00:00'
+record_updated_at: '2026-10-21T01:24:10.359241+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
