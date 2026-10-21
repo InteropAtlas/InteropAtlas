@@ -1,127 +1,20 @@
 packet_id: json_rfc4627_reference_20261021
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: 2e3329b1405a19ccbf0bbf0f6a5cbfa47452caf7
+reviewed_packet_blob: 1b243aba73e3d472531c1034074fe4931a0cb706
+reviewed_packet_path: 01_State/Inbox/review-packets/json-rfc4627-reference-20261021.yaml
 baseline_commit: f0a726d1900f5a1e341d8ab59c1ca6abd8034f31
 executor: Agent — OpenAI / dot
-reviewer: null
-review_scope_zh:
-- 由本轮共同表示问题中 JSON-RPC 消息分支缺少精确历史 JSON 目标选取；补一个历史规范文档、一条已有 uses 关系及 syntax 导航，而不是强迫所有分支汇合到 RFC 8259。
-- 沿既有 artifact/specification 身份、候选/接纳机制；Informational 和 obsolete 身份明确，规范性制品分类不表示标准轨地位。不改变关系词表、分类、页面或既有对象。
-- 独立审核须核 RFC 4627 原文/当前状态、JSON-RPC 明确引用和全部条件；机器检查不替代语义审核。
-source_evidence:
-- path: rfc4627.txt
-  url: https://www.rfc-editor.org/rfc/rfc4627.txt
-  sha256: a31e840012e96413836c40f31d0506d355f3d9c4853e80d77240b59fff96518d
-  bytes: 16319
-  retrieved_at: '2026-10-21T01:19:09.511933+00:00'
-- path: rfc4627-info.html
-  url: https://www.rfc-editor.org/info/rfc4627/
-  sha256: b22fadb81dde2ac1d55b8ba17166d38f1a919a917cca9b5ac041a32aa16dc917
-  bytes: 155784
-  retrieved_at: '2026-10-21T01:19:14.448431+00:00'
-- path: jsonrpc-specification.html
-  url: https://www.jsonrpc.org/specification
-  sha256: 8fe1edfdca511d309e712e47447457ea5159b728ec02071a84593aed692aefeb
-  bytes: 24512
-  retrieved_at: '2026-10-21T01:19:18.462123+00:00'
-existing_endpoint:
-  id: json_rpc_2.0
-  path: 01_State/01_Objects/json_rpc_2.0.yaml
-  git_blob: 18e2fec0f45cfc32925cfa52d0683b615c751921
-  unchanged: true
+acceptance_events: 01_State/Inbox/acceptance-events/json-rfc4627-reference-20261021.yaml
 objects:
 - candidate_id: json_rfc4627
-  candidate_path: 01_State/Inbox/candidates/json_rfc4627.yaml
-  candidate_blob: 98053fc061916faa758deac8d6c6ea4fe640f4f6
-  preflight:
-    canonical_records: 194
-    canonical_id_exists: false
-    machine_route: review_required
-    normalized_identifier_collisions: []
-    other_candidate_collisions: []
-    validation_errors: []
-    schema_errors:
-      base-object.schema.json: []
-      identity-object.v0.schema.json: []
-      normative-artifact-profile.v0.schema.json: []
-  proposed_record:
-    id: json_rfc4627
-    type: artifact
-    kind: specification
-    name_zh: RFC 4627 JSON 历史格式说明
-    name_en: Historical JSON format description (RFC 4627)
-    official_name: The application/json Media Type for JavaScript Object Notation (JSON)
-    description_zh: 2006 年 7 月发布的 Informational RFC，描述 JSON 数据格式与 application/json 媒体类型；本记录保留 JSON-RPC 2.0 明确引用的历史文档身份。
-    description_en: An Informational RFC published in July 2006, describing JSON and the application/json media
-      type; this record preserves the historical document explicitly cited by JSON-RPC 2.0.
-    version: RFC 4627
-    external_identifiers:
-    - namespace: rfc
-      value: '4627'
-    official_url: https://www.rfc-editor.org/rfc/rfc4627.txt
-    versions:
-    - version: RFC 4627
-      status: obsoleted
-      url: https://www.rfc-editor.org/info/rfc4627/
-    capabilities:
-    - data_serialization
-    scope_notes_zh: 这是历史 Informational 文档，不是 IETF 标准轨或现行 JSON 定义；RFC Editor 标为已被 RFC 7159 废止。第 2 节 JSON text 顶层限对象或数组，不把后来允许任意
-      JSON 值作顶层的规则写回本版。第 3/6 节描述 Unicode 编码、UTF-8 默认及 UTF-16/32；第 4 节允许解析器扩展与实现限制，第 5 节要求生成文本严格遵循语法。保留历史引用不代表推荐旧版、接受旧安全建议、与
-      RFC 8259 完全等价或实现互通；本轮不建立替代/更新语义边。
-    scope_notes_en: A historical Informational document, not an IETF Standards Track RFC or the current JSON definition;
-      RFC Editor lists it as obsoleted by RFC 7159. Section 2 restricts a top-level JSON text to an object or array;
-      later allowance for any JSON value is not backported here. Sections 3/6 describe Unicode encoding, UTF-8 by
-      default and UTF-16/32; section 4 allows parser extensions and implementation limits, while section 5 requires
-      generated text to follow the grammar strictly. Preserving a historical citation does not recommend the old
-      version or its security advice, assert full equivalence to RFC 8259 or implementation interoperability. No
-      update/obsolescence relation is introduced in this slice.
-    sources:
-    - &id001
-      url: https://www.rfc-editor.org/rfc/rfc4627.txt
-      title: RFC 4627 (July 2006) — Informational status; sections 1–6
-      language: en
-      accessed: '2026-10-21'
-    - &id002
-      url: https://www.rfc-editor.org/info/rfc4627/
-      title: RFC Editor information page — RFC 4627, obsoleted by RFC 7159
-      language: en
-      accessed: '2026-10-21'
-    last_verified_at: '2026-10-21T01:21:15.109663+00:00'
-    last_verified_by: Agent — OpenAI / dot，historical JSON reference evidence executor
+  canonical_id: json_rfc4627
+  acceptance_event_id: accept-20261021-json-rfc4627-json_rfc4627
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/470
 relations:
 - proposal_id: jsonrpc_2_0_uses_json_rfc4627
-  proposed_record:
-    id: jsonrpc_2_0_uses_json_rfc4627
-    type: relation
-    name_zh: JSON-RPC 2.0 明确引用 RFC 4627 JSON 格式
-    name_en: JSON-RPC 2.0 explicitly uses the RFC 4627 JSON format
-    source: json_rpc_2.0
-    relation: uses
-    target: json_rfc4627
-    context:
-      version_context:
-        source: JSON-RPC 2.0, official specification last updated 2013-01-04
-        target: RFC 4627, July 2006 (Informational; obsoleted by RFC 7159)
-      conditions_zh: 仅记录 JSON-RPC 2.0 官方规范第 1/2 节对 RFC 4627 数据格式和类型系统的明确引用；不把该引用升级为 RFC 8259，也不据此断言 MCP 消息直接以 RFC
-        8259 为版本目标。RFC 4627 顶层对象/数组、编码及解析/生成规则按历史版本保留，JSON-RPC 请求、响应、通知与批处理另有协议约束。uses 不作传递性或实际实现符合性证明；JSON-RPC
-        可有批处理不等于其宿主协议允许批处理。
-      conditions_en: Records only the explicit RFC 4627 data-format and type-system reference in sections 1/2 of
-        the official JSON-RPC 2.0 specification. It does not upgrade that reference to RFC 8259 or establish a direct
-        RFC 8259 version requirement for MCP messages. The historical RFC 4627 top-level object/array, encoding
-        and parsing/generation rules are preserved; JSON-RPC requests, responses, notifications and batches have
-        additional protocol constraints. uses is not treated as transitive or as implementation-conformance proof;
-        JSON-RPC batch support does not imply that a host protocol allows batches.
-    evidence:
-    - url: https://www.jsonrpc.org/specification
-      title: JSON-RPC 2.0 Specification — sections 1 Overview and 2 Conventions; updated 2013-01-04
-      language: en
-      accessed: '2026-10-21'
-    - *id001
-    - *id002
-    last_verified_at: '2026-10-21T01:21:15.109663+00:00'
-    last_verified_by: Agent — OpenAI / dot，historical JSON reference evidence executor
-membership_proposals:
-- category_id: syntax
-  ref:
-    surface: canonical
-    id: json_rfc4627
-  rationale_zh: 历史 JSON 格式说明，支持精确理解旧版协议引用；不表示推荐或现行性，正式接纳后物化。
+  canonical_relation_id: jsonrpc_2_0_uses_json_rfc4627
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/470
+notes_zh:
+- 本文件仅为引用式交付回执；完整被审对象、关系、导航提议与补充测试边界保留于固定 Git commit/blob，不维护第二份正式字段。
+- 独立语义审核与后续精确序列化检查分开，CI 不替代语义审核。
