@@ -1,0 +1,41 @@
+id: fhir_r4_4_0_1_uses_json_rfc8259
+type: relation
+name_zh: FHIR R4 4.0.1 的 JSON 资源表示使用 RFC 8259
+name_en: FHIR R4 4.0.1 JSON resource representation uses RFC 8259
+source: fhir_r4_4.0.1
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: 'HL7 FHIR R4, Technical Correction #1 / 4.0.1'
+    target: STD 90 / RFC 8259 (December 2017)
+  conditions_zh: 仅限固定 R4 的 JSON 资源表示，不是唯一交换格式；客户端和服务器可选择语法，服务器同时支持 XML 与 JSON 是 SHOULD。JSON 页面明确采用 RFC 8259；FHIR
+    表示章节同时描述以下约束：属性名唯一、UTF-8、实例不得含示例注释，重复 primitive 的双数组允许 null 对齐占位，decimal 精度含尾零须保留。JSON 解析成功或通用库支持不证明 FHIR 资源、术语、profile、系统符合性、临床互操作或监管合规。
+  conditions_en: 'Limited to the fixed R4 JSON resource representation, not the only exchange format. Clients and
+    servers may select syntaxes; supporting both XML and JSON is a server SHOULD. The JSON page cites RFC 8259 and
+    the FHIR representation section also describes these constraints: unique property names, UTF-8, no example comments
+    in instances, null alignment placeholders in repeating-primitive paired arrays, and preservation of decimal
+    precision including trailing zeros. Successful JSON parsing or generic library support does not establish FHIR
+    resource, terminology, profile or system conformance, clinical interoperability, or regulatory compliance.'
+evidence:
+- url: https://hl7.org/fhir/R4/json.html
+  title: FHIR R4 4.0.1 — §2.6.2 JSON representation; §2.6.2.1 and §2.6.2.3 FHIR representation constraints
+  language: en
+  accessed: '2026-10-21'
+- url: https://hl7.org/fhir/R4/formats.html
+  title: FHIR R4 4.0.1 — §2.6.0 and §2.6.0.1.4 resource formats and format support
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc8259.txt
+  title: RFC 8259 (December 2017) — JSON syntax, objects, numbers and character encoding
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:08:30.805543+00:00'
+last_verified_by: Agent — OpenAI / dot，FHIR representation evidence executor
+record_created_at: '2026-10-21T04:08:30.805543+00:00'
+record_updated_at: '2026-10-21T04:11:32.531999+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
