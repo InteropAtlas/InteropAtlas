@@ -1,0 +1,33 @@
+contract_version: candidate-object-v1
+candidate_id: python_xmlschema
+label: xmlschema Python XSD library (4.3.2)
+publisher: SISSA / Davide Brunato
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: sissaschool/xmlschema
+- namespace: pypi
+  value: xmlschema
+locators:
+- url: https://github.com/sissaschool/xmlschema
+  role: official
+- url: https://github.com/sissaschool/xmlschema/tree/627c179541ec2e79c0b42c1d493074f7450324c1
+  role: dated
+- url: https://pypi.org/project/xmlschema/4.3.2/
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为 sissaschool/xmlschema Python 库与对应 PyPI 包，不与 XML Schema 规范、python_jsonschema JSON 库或 elementpath 依赖合并。4.3.2
+    是本轮固定核查版本。
+  - 既有 github/pypi 标识归一化、全量对象/候选预检未发现碰撞，不变更标识机制或注册表。
+  merge_authorized: false
+unknowns:
+- 官方声明 XSD 1.0/1.1，默认 XMLSchema 是 XMLSchema10；随包元模式注释为非规范并指向2004-03 PER，不单凭此声明完整符合2004-10精确文档。本批 relations 为空。
+- 25例仅可信合成内存数据与固定默认值边界；未测 UBL、XSD1.1、外部实体或远程资源、安全、全符合性、真实互通或IA采用。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
