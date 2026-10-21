@@ -1,0 +1,118 @@
+packet_id: jsonschema_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 66a32a15596b9447d17de6ad29226fb2a0b38a7d
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 由真实 schema_validation 查询无已收录实现的结果选取本切片；一个软件库、一条有条件 implements 关系和既有 syntax 编辑导航。
+- 仅用已有 system/library、schema_validation、implements 与既有候选/接纳机制；不改规范、词表、页面、运行器或未来维护方式。
+- 独立审核须读取固定版本全部所提字段及功能限制；候选 review_required 不是自动接纳。
+source_evidence:
+- url: https://api.github.com/repos/python-jsonschema/jsonschema/git/tags/fd347f5afe42be3918569525ddc8cf76888823a1
+  locator: v4.25.1 annotated tag → commit 331c38425519b69118d22ebe467ad230fb83a010
+  observation_zh: 固定 tag 及四个官方源码文件均已核对 Git blob；不依赖 README 中浮动 latest 链接。
+- url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst
+  locator: Versioned Validators; Validating Formats; Format-Specific Notes
+  observation_zh: 明确 2020-12 类、format 显式启用/可选依赖与 Python 正则边界。
+objects:
+- candidate_id: python_jsonschema
+  candidate_path: 01_State/Inbox/candidates/python_jsonschema.yaml
+  candidate_blob: 4c1713e334a1eaa6900cf0ad0c67b4ccd54f3648
+  preflight:
+    canonical_records: 192
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: python_jsonschema
+    type: system
+    kind: library
+    name_zh: jsonschema Python 数据结构验证库
+    name_en: jsonschema Python JSON Schema validation library
+    description_zh: Python 的 JSON Schema 验证库；本记录固定到 4.25.1，提供 Draft202012Validator 及其他版本验证器。
+    description_en: A Python JSON Schema validation library, pinned here to release 4.25.1, with Draft202012Validator
+      and other versioned validators.
+    version: 4.25.1
+    external_identifiers:
+    - namespace: github
+      value: python-jsonschema/jsonschema
+    official_url: https://github.com/python-jsonschema/jsonschema
+    versions:
+    - version: 4.25.1
+      status: released
+      url: https://github.com/python-jsonschema/jsonschema/releases/tag/v4.25.1
+    capabilities:
+    - schema_validation
+    open_source: true
+    license_expression: MIT
+    scope_notes_zh: 主体为软件库，不是 JSON Schema 规范或 JSON Schema Project。format 校验默认不启用，需显式 FormatChecker，部分格式还依赖额外组件；regex/pattern
+      使用 Python 正则而非 ECMA 262 方言。不把发布者支持说明或有限本地示例当作完整符合性、宿主协议互通、性能优势、最新发行版或 IA 采用该精确版本的证明。 若某格式所需可选依赖缺失，即使传入检查器，该格式的验证也可能不报错通过。
+    scope_notes_en: The subject is the library, not the JSON Schema specification or JSON Schema Project. Format
+      checks require an explicit FormatChecker and some need optional dependencies; regex/pattern use Python regular
+      expressions rather than ECMA 262. Publisher support statements and limited local examples do not certify complete
+      conformance, host-protocol interoperability, superior performance, latest-release status or IA adoption of
+      this exact version. A format with missing required optional dependencies can pass without an error even when
+      a checker is supplied.
+    sources:
+    - &id001
+      url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/README.rst
+      title: jsonschema 4.25.1 — Python implementation identity and supported drafts
+      language: en
+      accessed: '2026-10-21'
+    - &id002
+      url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst
+      title: jsonschema 4.25.1 — versioned validators, opt-in formats and regex limitations
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/pyproject.toml
+      title: jsonschema 4.25.1 — package metadata, Python requirement and MIT license declaration
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T00:51:42.497448+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version implementation evidence executor
+relations:
+- proposal_id: python_jsonschema_implements_json_schema_2020_12
+  proposed_record:
+    id: python_jsonschema_implements_json_schema_2020_12
+    type: relation
+    name_zh: jsonschema 4.25.1 实现 JSON Schema 2020-12 验证
+    name_en: jsonschema 4.25.1 implements JSON Schema 2020-12 validation
+    source: python_jsonschema
+    relation: implements
+    target: json_schema_2020_12
+    context:
+      capabilities:
+      - schema_validation
+      version_context:
+        source: jsonschema 4.25.1, upstream commit 331c38425519b69118d22ebe467ad230fb83a010
+        target: JSON Schema Draft 2020-12
+      conditions_zh: 依据固定发行版文档的 Draft202012Validator 支持，限定为结构化实例验证。format 检查须显式启用且某些格式需要可选依赖；正则表达式采用 Python 方言。本关系不宣称完整符合性认证、任意词汇表扩展支持、MCP/WoT/CloudEvents
+        整体协议实现或应用间互通。 某格式缺少所需可选依赖时可能不报错通过，不把这一结果当作格式有效的保证。
+      conditions_en: Based on the fixed release documented Draft202012Validator support, limited to structured-instance
+        validation. Format checks are opt-in and some require optional dependencies; regular expressions use the
+        Python dialect. This is not a complete conformance certification, arbitrary-vocabulary support claim, full
+        MCP/WoT/CloudEvents implementation or application-interoperability assertion. A format with missing required
+        optional dependencies can pass without an error; that result is not a format-validity guarantee.
+    evidence:
+    - *id001
+    - *id002
+    last_verified_at: '2026-10-21T00:51:42.497448+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version implementation evidence executor
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: python_jsonschema
+  rationale_zh: 验证结构化 JSON 实例的实现库，沿用 JSON Schema 与 schema_validation 已有导航；仅在正式接纳后物化。
+supplementary_verification:
+  library_version: 4.25.1
+  python_version: 3.12.14
+  local_examples_passed: 13
+  boundary_zh: 独立隔离安装的 13 个本地示例：类型、required、布尔 Schema、prefixItems、unevaluatedProperties、format 默认/启用及本地 Registry
+    引用。没有远程引用访问或完整上游套件，不作为完整符合性证明。
