@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-python-fhirclient-python-fhirclient
+candidate_id: python_fhirclient
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_fhirclient
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T07:58:11.117566+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者已读全部 proposed 对象和关系，GitHub直读固定Patient模型4.0.1生成头，并读fhirabstractbase/resource/date源码和测试。
+  - 独立重跑21项可信模型观察，含22个官方源码SHA/blob及18个安装文件字节核对；认可独立库、既有data_serialization、有限模型implements及health导航。
+  - primitive元数据丢失、strict/lenient局部检查、choice/后续列表项、部分日期Python视图和float限制均保留，不提升为完整FHIR协议、验证器或临床适用性。
+  - 本时间为执行方记录收到审核结论的时点，不推测审核用时；后续精确序列化复核不是新的语义审核，CI不替代独立审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/490
+- https://github.com/InteropAtlas/InteropAtlas/blob/052ab4645caa7210d1524c27799730a127f0c632/01_State/Inbox/review-packets/python-fhirclient-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9d9e1ea50e58e6af433ceefb064e05cff1a22fbd
+decided_at: '2026-10-21T08:01:03.644755+00:00'
+notes:
+- 固定4.4.0独立库及明确FHIR4.0.1生成版次，不与规范、SMART协议或其他库合并；当前候选回指仅防止重复创建。
+- 有限模型表示关系不保证每个被接受/输出值均合法，不推断服务器、OAuth、全资源/Profile、临床适用、安全/隐私合规或第三方互通。
