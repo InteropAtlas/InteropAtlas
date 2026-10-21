@@ -36,3 +36,54 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: pyshacl_implements_shacl_2017
+type: relation
+name_zh: pySHACL 0.40.1 实现 SHACL 2017 RDF 图验证
+name_en: pySHACL 0.40.1 implements SHACL 2017 RDF graph validation
+source: pyshacl
+relation: implements
+target: shacl_2017
+context:
+  capabilities:
+  - schema_validation
+  version_context:
+    source: pySHACL 0.40.1, upstream commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75
+    target: W3C SHACL Recommendation, 20 July 2017
+  conditions_zh: 依据固定源码和文档所述 2017 Recommendation 目标，限定 RDF 图的 Core/SPARQL 约束检查和验证报告。推理/附加特性、focus/shape 选择及 severity
+    容许选项会影响结果；ValidationFailure 或异常不是普通不符合报告。19 个本地可信图示例仅为补充，不是完整符合性认证，不延伸到 SHACL 1.2/全部扩展、任意宿主协议或跨实现互通，也不是 IA 采用该标准或库的决定。
+  conditions_en: Based on the fixed source and documented 2017 Recommendation target, limited to RDF graph Core/SPARQL
+    constraint checks and validation reports. Inference/additional features, focus/shape selection and severity
+    allowances affect results; ValidationFailure or exceptions differ from ordinary non-conformance reports. Nineteen
+    local trusted-graph examples supplement review, not full certification. No SHACL 1.2/all-extension support,
+    arbitrary host protocol or cross-implementation interoperability, or IA adoption decision follows.
+evidence:
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/README.md
+  title: pySHACL 0.40.1 — RDF graph validation, SHACL 2017 target, modes and limits
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/entrypoints.py
+  title: pySHACL 0.40.1 — validation options, errors and graph loading
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/validator.py
+  title: pySHACL 0.40.1 — defaults, optional features and validation reports
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/core/cardinality_constraints.py
+  title: pySHACL 0.40.1 — minCount/maxCount checks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/sparql/sparql_based_constraints.py
+  title: pySHACL 0.40.1 — SPARQL-based constraints
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:35:19.773595+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
+record_created_at: '2026-10-21T04:39:44.884351+00:00'
+record_updated_at: '2026-10-21T04:39:44.884351+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757

@@ -1,0 +1,77 @@
+id: pyshacl
+type: system
+kind: library
+name_zh: pySHACL Python RDF 图约束验证库
+name_en: pySHACL Python RDF graph validation library
+description_zh: Python 的 SHACL 验证库；本记录固定到 0.40.1，通过 validate 接口按 shapes 图检查 RDF 数据图并返回符合性结果与报告。
+description_en: A Python SHACL validation library, pinned here to 0.40.1; its validate interface checks RDF data
+  graphs against shapes graphs and returns a conformance result and report.
+version: 0.40.1
+external_identifiers:
+- namespace: github
+  value: RDFLib/pySHACL
+official_url: https://github.com/RDFLib/pySHACL
+versions:
+- version: 0.40.1
+  status: released
+  url: https://github.com/RDFLib/pySHACL/releases/tag/v0.40.1
+capabilities:
+- schema_validation
+open_source: true
+license_expression: Apache-2.0
+scope_notes_zh: 主体为 Python 软件库，不是 W3C SHACL 规范或 RDFLib 库。固定版以 2017 Recommendation 为实现目标；本切片仅记录 RDF 图的 Core 约束、SPARQL
+  约束验证和结果报告。预推理、meta-SHACL、Advanced Features、JS 等需选项启用，其中 JS 另需可选依赖；focus/shape 过滤以及 allow_infos/allow_warnings
+  会改变检查范围或 conforms 判定。必须区别普通不符合报告、ValidationFailure 与抛出的加载/运行异常。加载 shapes 的路径会修改 RDFLib 全局字面量归一化与布尔映射，代码有撤销步骤，但宿主自定义状态、异常路径及并发影响未在本切片评估。不声明完整符合性认证、SHACL
+  1.2/全部扩展、远程端点/HTTP 服务/Oxigraph 支持的实测、宿主协议互通、安全或生产推荐；不改变 IA 的模型或采用方式。
+scope_notes_en: The subject is the Python library, not the W3C SHACL specification or RDFLib library. The fixed
+  release targets the 2017 Recommendation; this slice records RDF graph Core constraints, SPARQL constraint validation
+  and reports. Pre-inference, meta-SHACL, Advanced Features and JS require options; JS also requires optional dependencies.
+  Focus/shape filtering and allow_infos/allow_warnings affect validation scope or the conforms decision. Ordinary
+  non-conformance reports, ValidationFailure and raised loading/runtime exceptions must be distinguished. The shapes-loading
+  path changes RDFLib global literal normalization and Boolean mappings and has an undo step; effects on host-customized
+  state, exceptional paths and concurrency were not assessed here. No complete certification, SHACL 1.2/all-extension
+  support, tested remote endpoint/HTTP service/Oxigraph coverage, host-protocol interoperability, security or production
+  recommendation is claimed. This does not change IA models or adoption.
+sources:
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/README.md
+  title: pySHACL 0.40.1 — RDF graph validation, SHACL 2017 target, modes and limits
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyproject.toml
+  title: pySHACL 0.40.1 — fixed package version, dependencies and license metadata
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/LICENSE.txt
+  title: pySHACL fixed source license — Apache-2.0
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/entrypoints.py
+  title: pySHACL 0.40.1 — validation options, errors and graph loading
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/validator.py
+  title: pySHACL 0.40.1 — defaults, optional features and validation reports
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/monkey/__init__.py
+  title: pySHACL 0.40.1 — RDFLib literal and Boolean mapping changes
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T04:35:19.773595+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
+record_created_at: '2026-10-21T04:39:44.884351+00:00'
+record_updated_at: '2026-10-21T04:39:44.884351+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: pyshacl
+  acceptance_event_id: accept-20261021-pyshacl-pyshacl
+  reviewed_candidate_blob: ca0c1f30e60471ead785122bc45eefac76abbe82
+  reviewed_against_commit: 7d92e6c9358a7e6f4a08648f3d8573e9a865ff08
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 7d92e6c9358a7e6f4a08648f3d8573e9a865ff08
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/478
