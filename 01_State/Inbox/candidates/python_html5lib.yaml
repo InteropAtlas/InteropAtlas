@@ -15,11 +15,11 @@ locators:
 - url: https://pypi.org/project/html5lib/1.1/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_html5lib
   reasons:
-  - 主体为官方 html5lib Python 库及其仓库，固定1.1分发包；沿用system/library与github身份。
-  - 不与HTML Living Standard、浏览器、独立html5lib-tests语料库或其他语言实现合并；当前无需身份合并。
+  - 经独立语义审核由 accept-20261021-html5lib-python-html5lib 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 旧版本README表达面向WHATWG HTML的设计目标，不能据此证明对应当前动态规范的精确完整实现；本切片relations为空。
@@ -27,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
