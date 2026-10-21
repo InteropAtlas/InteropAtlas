@@ -1,0 +1,425 @@
+packet_id: python_fhirclient_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 4159dd20e219b339b7d2a1651d1ce2e7723ef7f6
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 接续现有health导航中的FHIR4.0.1→JSON表示路径，其现有图中无实现先例；仅准备模型表示切片，不进入临床或真实健康数据。
+- 仅现有system/library、data_serialization、bounded implements与health导航；局部模型检查不强配schema_validation，不改词表、模型或维护规则。
+- data_representation/structured_data为已有自由标签，按固定源码实际模型表示范围人工选择，不由implements继承。
+work_item_preflight:
+  repository_text_matches: []
+  search_scope_zh: 本次全量正式对象/候选身份预检及GitHub fhirclient Issue/PR检索未发现同库并行intake；未命中不是全知保证。
+official_source_hashes:
+- path: README.md
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/README.md
+  local_path: official/README.md
+  sha256: 44b827ecb329c86f13cbe1b8d2c92bf24b2201c136c8fb595378ac371f2a9975
+  git_blob: 7a55231dc87daf5b6f4a94f3b4de922041e5ea02
+  fetched_at: '2026-10-21T07:46:43.782973+00:00'
+- path: LICENSE
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/LICENSE
+  local_path: official/LICENSE
+  sha256: 465cc184a5cb151932850734f91dec5acc7f4fe177783328be3eec0aa9504152
+  git_blob: 2169c47be466f0c004c11d729f3a7ccce0df37c7
+  fetched_at: '2026-10-21T07:46:43.759065+00:00'
+- path: pyproject.toml
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/pyproject.toml
+  local_path: official/pyproject.toml
+  sha256: ed646547afa1b4d53b373afd8c08b90c21047b8f115da943ea0d69beb0a01156
+  git_blob: 04b6d52da9fb0c8e5b42e9350ecf0e1b38e332e8
+  fetched_at: '2026-10-21T07:46:43.755638+00:00'
+- path: generate_models.sh
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/generate_models.sh
+  local_path: official/generate_models.sh
+  sha256: c4885420032c6e15250335a2ddaa43c835f2174b8b595b34b76b56c0b85489cd
+  git_blob: 9a162da624dba9d58acd9ee798578cc1641290db
+  fetched_at: '2026-10-21T07:46:43.753062+00:00'
+- path: fhirclient/__init__.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/__init__.py
+  local_path: official/fhirclient/__init__.py
+  sha256: 6ef79a5d26d89f592e44ebe34d5ccf706731dce6654686962470e713bf9fafb2
+  git_blob: 9eed3b1577ccaf45f48f57afa24d74cf35042a06
+  fetched_at: '2026-10-21T07:46:48.242003+00:00'
+- path: fhirclient/client.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/client.py
+  local_path: official/fhirclient/client.py
+  sha256: 197400d0f6f36c47c4170dc3240e2fd8bd10c0fa022349d4b8f830e00ddcd301
+  git_blob: 48f4e7e3b9800b437bbf870e2b1563e3d89934b3
+  fetched_at: '2026-10-21T07:46:48.274865+00:00'
+- path: fhirclient/models/fhirabstractbase.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractbase.py
+  local_path: official/fhirclient/models/fhirabstractbase.py
+  sha256: 0418f30ae589e0478aac7e3de10dade744c8d365b70be072e87efbb4dbf7f24f
+  git_blob: 27ce44f289ce67f5413e1938ede15a29a44d1f7b
+  fetched_at: '2026-10-21T07:46:48.421016+00:00'
+- path: fhirclient/models/fhirabstractresource.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractresource.py
+  local_path: official/fhirclient/models/fhirabstractresource.py
+  sha256: 2aef1aa64a7a28521d54d6b45f26ffef069bc450a107eaaa6ceab797796e7c19
+  git_blob: 343bdb655f74ad012acc7f12f4d356dba9ed1591
+  fetched_at: '2026-10-21T07:46:48.284815+00:00'
+- path: fhirclient/models/patient.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/patient.py
+  local_path: official/fhirclient/models/patient.py
+  sha256: 34202c4fa3f660d722a1b7b7de78446ccad2397a52be8f5f898e5ec37abbeed0
+  git_blob: 6686ba069f3122d744493020e1a35e9e2dd50968
+  fetched_at: '2026-10-21T07:46:54.402112+00:00'
+- path: fhirclient/models/observation.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/observation.py
+  local_path: official/fhirclient/models/observation.py
+  sha256: f0495d728c43c142cb34503ff7b209936a48c8adbefa9e4686df60e3aca066ce
+  git_blob: b520e34db7f99629a243a541ffdb8ef39fe7384a
+  fetched_at: '2026-10-21T07:46:54.374773+00:00'
+- path: fhirclient/models/quantity.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/quantity.py
+  local_path: official/fhirclient/models/quantity.py
+  sha256: c4cd0109fcdf3429a9e114d3007a6b92011703faf2cac964aed6f58acefd349e
+  git_blob: 2ea786f1f7185b9fda968ba170ba3cc0cd36bce4
+  fetched_at: '2026-10-21T07:46:54.303755+00:00'
+- path: fhirclient/models/fhirdate.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirdate.py
+  local_path: official/fhirclient/models/fhirdate.py
+  sha256: 783e2c548b171d531b7978c6469925e22e2d1bb9dc7088e294f59f3939590570
+  git_blob: d4faca621e158cc4f152a08e5ebddf14897e0e65
+  fetched_at: '2026-10-21T07:46:54.357360+00:00'
+- path: fhirclient/models/fhirdatetime.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirdatetime.py
+  local_path: official/fhirclient/models/fhirdatetime.py
+  sha256: f0684712c646b84e580c5045b17ac2cb3326660362321038be52c35253b53798
+  git_blob: ea3ef1aec8468b15da492256e4ccca58da695c3b
+  fetched_at: '2026-10-21T07:46:59.510939+00:00'
+- path: fhirclient/models/fhirinstant.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirinstant.py
+  local_path: official/fhirclient/models/fhirinstant.py
+  sha256: 116c4f9100ca1a3e3cb157597a11c2620ae0f9acc498be6bd72d016b714e32be
+  git_blob: 0896d4520226882ea9913473ec99fb4ff6b959c7
+  fetched_at: '2026-10-21T07:46:59.531793+00:00'
+- path: fhirclient/models/fhirtime.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirtime.py
+  local_path: official/fhirclient/models/fhirtime.py
+  sha256: c82119a45d1549c3af3c7a9e7a2218801149983ced90178708fdaa9ff5959822
+  git_blob: bf93f0e2b98e25260c3cc3da4a56f33340030c99
+  fetched_at: '2026-10-21T07:46:59.622935+00:00'
+- path: fhirclient/models/fhirreference.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirreference.py
+  local_path: official/fhirclient/models/fhirreference.py
+  sha256: 5e1d7bbdd3a810dff069531847969c465ca87a66ca12d54db40751a0270d9a50
+  git_blob: 9740f6a2a4e6a304ae185a5de1a91564fdd5b4e5
+  fetched_at: '2026-10-21T07:46:59.642934+00:00'
+- path: fhirclient/models/element.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/element.py
+  local_path: official/fhirclient/models/element.py
+  sha256: 84fd971ffe2d4cde68de35aa8b2d4e1e123e8c35852c3813a0053c6a75d2e21f
+  git_blob: aa081da8a6bff3a956230b8ba610de578a7534bd
+  fetched_at: '2026-10-21T07:47:01.809171+00:00'
+- path: fhirclient/models/domainresource.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/domainresource.py
+  local_path: official/fhirclient/models/domainresource.py
+  sha256: d62985cc810b55b27eaad59cd14b67fd340ff4cc58f63a32a7a40be4ee481487
+  git_blob: dff256d83de92369ed9fe1eb90d9c5a56f60127d
+  fetched_at: '2026-10-21T07:47:01.821009+00:00'
+- path: fhirclient/models/resource.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/resource.py
+  local_path: official/fhirclient/models/resource.py
+  sha256: fe1268fac5aef5a07552d66f79feea2fe3195812a20e75caed77fe634a7c3a3c
+  git_blob: 00f193102513b5d86d244d58f6a62e2d2f406e6e
+  fetched_at: '2026-10-21T07:47:01.851520+00:00'
+- path: fhirclient/models/humanname.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/humanname.py
+  local_path: official/fhirclient/models/humanname.py
+  sha256: 3e5b6b111415960bb6c2aa5266bb781484c62c14454c9d294f10ca2e6e8086f0
+  git_blob: c01dc3b921a52dddb4e26a733e4c064f7605e5c2
+  fetched_at: '2026-10-21T07:48:16.707216+00:00'
+- path: fhirclient/models/codeableconcept.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/codeableconcept.py
+  local_path: official/fhirclient/models/codeableconcept.py
+  sha256: b9bd6143fecd81038c57fbeb6195b9c8f61c337411848483ad3827abbcc28fb8
+  git_blob: f13da99617f844d0c737ce808f1eecf9fe3631d6
+  fetched_at: '2026-10-21T07:48:20.188720+00:00'
+- path: fhirclient/models/fhirelementfactory.py
+  url: https://raw.githubusercontent.com/smart-on-fhir/client-py/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirelementfactory.py
+  local_path: official/fhirclient/models/fhirelementfactory.py
+  sha256: 99099b569baa034700ce5269eff6ff892a17701362f133b65ff8126f5cc3970f
+  git_blob: 63919fc746c7c816e3deefca07a6d4da3089ccb9
+  fetched_at: '2026-10-21T07:48:22.969134+00:00'
+fhir_source_hashes:
+- url: https://hl7.org/fhir/R4/json.html
+  local_path: fhir-r4-json.html
+  sha256: 29f37b0f90451ab55318ab371f35dd3176c5b24c1d5f4406cb855a1dbf1bc56e
+  git_blob: 98c281d08068324d8777ce75652386bd2c01a49e
+  fetched_at: '2026-10-21T07:52:48.672174+00:00'
+- url: https://hl7.org/fhir/R4/formats.html
+  local_path: fhir-r4-formats.html
+  sha256: 669b4ee048cfda7efa8b96275914fa64b281c060c0d5fb5720bb7d6d228cc713
+  git_blob: acee1382ecf723eaa344cb348e6091afca1c8cf4
+  fetched_at: '2026-10-21T07:52:51.408242+00:00'
+existing_endpoint_blobs:
+  fhir_r4_4.0.1:
+    path: 01_State/01_Objects/fhir_r4_4.0.1.yaml
+    git_blob: 1785ef95dea380b570e5ef634a303192269b5da9
+  data_serialization:
+    path: 01_State/01_Objects/data_serialization.yaml
+    git_blob: 1981b576ca8d9cfad8bf0a5159d4ae43dca69d6e
+package_registry_identity:
+  url: https://pypi.org/pypi/fhirclient/4.4.0/json
+  sha256: c11e6913761b7d7f04ceb2b3bd9bf4afe3b57ea985ca6963b72968c51dd702dd
+  name: fhirclient
+  version: 4.4.0
+  project_urls:
+    Documentation: https://docs.smarthealthit.org/client-py/
+    Homepage: https://github.com/smart-on-fhir/client-py
+  requires_dist:
+  - requests>=2.4
+  - pytest>=2.5; extra == "tests"
+  - pytest-cov; extra == "tests"
+  - responses; extra == "tests"
+  files:
+  - filename: fhirclient-4.4.0-py3-none-any.whl
+    sha256: 85f25b11b2303ded7780708edc85aaf21be60fbd6439409b44085bcc1a991589
+  - filename: fhirclient-4.4.0.tar.gz
+    sha256: 922d6110f941741a67fdb8dc3afdeba21b8d1f30beafde7d2fbe523cf9192188
+  boundary_zh: 分发元数据用于身份核对，18个安装源码文件另与固定Git字节比较；不是完整wheel供应链、依赖审计或所有环境验证。
+objects:
+- candidate_id: python_fhirclient
+  candidate_path: 01_State/Inbox/candidates/python_fhirclient.yaml
+  candidate_blob: 9d9e1ea50e58e6af433ceefb064e05cff1a22fbd
+  preflight:
+    canonical_records: 209
+    existing_candidate_records: 212
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: python_fhirclient
+    type: system
+    kind: library
+    name_zh: fhirclient Python FHIR模型与客户端库
+    name_en: fhirclient Python FHIR model and client library
+    description_zh: 含FHIR生成模型和SMART/FHIR客户端的开源Python库；本记录固定4.4.0，仅验证与FHIR4.0.1对应的有限模型表示路径并保留局部校验和有损映射限制。
+    description_en: An open-source Python library with generated FHIR models and a SMART/FHIR client, pinned to
+      4.4.0; this record verifies only a bounded FHIR 4.0.1 model-representation path and retains partial-validation
+      and lossy-mapping limits.
+    version: 4.4.0
+    external_identifiers:
+    - namespace: github
+      value: smart-on-fhir/client-py
+    - namespace: pypi
+      value: fhirclient
+    official_url: https://github.com/smart-on-fhir/client-py
+    versions:
+    - version: 4.4.0
+      status: released
+      url: https://pypi.org/project/fhirclient/4.4.0/
+    domains:
+    - data_representation
+    - structured_data
+    capabilities:
+    - data_serialization
+    open_source: true
+    license_expression: Apache-2.0
+    scope_notes_zh: 固定4.4.0。上游是含SMART/FHIR网络客户端与生成数据模型的Python库；本切片只核模型的Python对象/JSON字典映射，不执行网络或鉴权。README版本表列出4.2.0对应FHIR4.0.1，当前固定Patient/Observation等源码标头明确生成自FHIR
+      4.0.1-9346c8cc45，不能仅由客户端4.x推断FHIR版次。模型构造默认strict=True；局部类型、声明必填字段和未知键检查可抛FHIRValidationError，strict=False构造捕获该类错误、记warning并可留下部分已赋值数据，但不吞掉前置resourceType不匹配异常，后续as_json仍可能报错。省略resourceType可由输出补入，null可选字段和空可选列表会被省略。不是完整FHIR验证：术语代码、choice排他性和后续primitive列表项类型等不被全面检查；_birthDate这类primitive元数据虽被识别却不保留于输出，不能无损往返。FHIRDate.as_json保持未修改的原始部分日期字符串，而date/isostring转为补齐后的Python视图；修改date会清除原词法值。Quantity.value模型使用float并接受int，不接受Decimal对象，不保证任意精度或小数词法精度保留。21项可信合成内存观察仅覆盖有限模型与上述行为；未测全资源/Profile/不变量、术语服务、远程引用、SMART/OAuth、FHIR服务器、临床适用性、安全/隐私合规、第三方互通或IA采用。
+    scope_notes_en: 'Fixed to 4.4.0. Upstream combines a SMART/FHIR network client and generated Python data models;
+      this slice checks only Python-object/JSON-dictionary mapping, without network or authorization operations.
+      The README version table maps client 4.2.0 to FHIR 4.0.1, while the fixed Patient/Observation and related
+      source headers explicitly identify generation from FHIR 4.0.1-9346c8cc45; client 4.x alone is not version
+      evidence. Constructors default to strict=True. Local type, declared-required-field and unknown-key checks
+      can raise FHIRValidationError. A strict=False constructor catches that error class, warns and can retain partially
+      assigned data, but does not swallow the preceding resourceType-mismatch exception; later as_json can still
+      fail. Output can fill an omitted resourceType and omit null optional fields or empty optional lists. This
+      is not complete FHIR validation: terminology codes, choice exclusivity and later primitive-list element types
+      are not comprehensively checked. Primitive metadata such as _birthDate is recognized but not retained in output,
+      so round trips are not lossless. FHIRDate.as_json preserves the unmodified original partial-date string, while
+      date/isostring expose a completed Python view; assigning date clears the original lexical value. Quantity.value
+      is modeled as float and also accepts int, not Decimal objects; arbitrary precision and lexical decimal scale
+      are not guaranteed. Twenty-one trusted synthetic-memory observations cover only selected models and these
+      behaviors. Full resources/profiles/invariants, terminology services, remote references, SMART/OAuth, FHIR
+      servers, clinical suitability, security/privacy compliance, third-party interoperability and IA adoption were
+      not established.'
+    sources:
+    - &id001
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/README.md
+      title: fhirclient 4.4.0 — client identity, version table and partial data-model validation
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/pyproject.toml
+      title: fhirclient 4.4.0 — package identity, Python range and requests dependency
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/LICENSE
+      title: fhirclient 4.4.0 — Apache 2.0 license text
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/client.py
+      title: fhirclient 4.4.0 — fixed package version and client scope
+      language: en
+      accessed: '2026-10-21'
+    - &id002
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/patient.py
+      title: fhirclient 4.4.0 — generated FHIR 4.0.1 Patient model
+      language: en
+      accessed: '2026-10-21'
+    - &id003
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/observation.py
+      title: fhirclient 4.4.0 — generated FHIR 4.0.1 Observation model
+      language: en
+      accessed: '2026-10-21'
+    - &id004
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractbase.py
+      title: fhirclient 4.4.0 — strict/lenient initialization, local checks and JSON mapping
+      language: en
+      accessed: '2026-10-21'
+    - &id005
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirabstractresource.py
+      title: fhirclient 4.4.0 — resource type checks and as_json output
+      language: en
+      accessed: '2026-10-21'
+    - &id006
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/fhirdate.py
+      title: fhirclient 4.4.0 — original date string versus Python representation
+      language: en
+      accessed: '2026-10-21'
+    - &id007
+      url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/quantity.py
+      title: fhirclient 4.4.0 — float-valued Quantity model
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/smart-on-fhir/client-py/blob/0989e0f166e18037406763cb4ab9e509f9dfddbf/fhirclient/models/humanname.py
+      title: fhirclient 4.4.0 — primitive list representation
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T07:55:48.789787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed FHIR model-library evidence executor
+relations:
+- proposed_record:
+    id: python_fhirclient_implements_fhir_r4_models
+    type: relation
+    name_zh: fhirclient 4.4.0 有界实现FHIR R4模型表示
+    name_en: fhirclient 4.4.0 provides bounded FHIR R4 model representation
+    source: python_fhirclient
+    relation: implements
+    target: fhir_r4_4.0.1
+    context:
+      capabilities:
+      - data_serialization
+      version_context:
+        source: smart-on-fhir/client-py 4.4.0, upstream commit 0989e0f166e18037406763cb4ab9e509f9dfddbf
+        target: HL7 FHIR R4 4.0.1; generated model headers 4.0.1-9346c8cc45
+      conditions_zh: 仅固定生成模型的Python对象/JSON字典映射实现先例，不是FHIR整套协议、所有资源/Profile/不变量或完整验证器的符合性声明。默认strict仅局部检查；lenient构造可记warning并保留部分数据，后续序列化仍可失败。可选null/空列表省略、primitive元数据丢失、日期Python视图补齐及数值类型限制适用，不保证原始JSON或临床信息无损。术语代码、choice排他性与后续primitive列表项等须另行验证；本边不把库接受/输出的数据都视为FHIR合法。未测服务器、SMART/OAuth、真实健康数据、临床工作流、安全/隐私合规、认证或第三方互通，不从本关系推断JSON语法库也实现FHIR。
+      conditions_en: Limited to the fixed generated-model Python-object/JSON-dictionary mapping precedent, not conformance
+        to the full FHIR protocol, every resource/profile/invariant or a complete validator. Default strict checks
+        are local; lenient construction can warn and retain partial data, and later serialization can still fail.
+        Optional-null/empty-list omission, primitive-metadata loss, completed Python date views and numeric-type
+        limits apply; original JSON or clinical information is not guaranteed lossless. Terminology codes, choice
+        exclusivity and later primitive-list elements require separate validation. Library acceptance/output is
+        not equated with valid FHIR data. Servers, SMART/OAuth, real health data, clinical workflows, security/privacy
+        compliance, certification and third-party interoperability were not tested; this edge does not imply that
+        a JSON syntax library implements FHIR.
+    evidence:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - url: https://hl7.org/fhir/R4/json.html
+      title: FHIR R4 4.0.1 — JSON representation, primitive metadata, arrays and decimal precision
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T07:55:48.789787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed FHIR model-library evidence executor
+membership_proposals:
+- category_id: health
+  ref:
+    surface: canonical
+    id: python_fhirclient
+  rationale_zh: FHIR健康数据模型表示实现先例，不是临床适用性、真实医疗系统互通或合规认证。
+supplementary_verification:
+  source_commit: 0989e0f166e18037406763cb4ab9e509f9dfddbf
+  observed_at: '2026-10-21T07:49:06.614806+00:00'
+  versions:
+    python: 3.12.14
+    fhirclient: 4.4.0
+    requests: 2.34.2
+    urllib3: 2.8.0
+    idna: '3.20'
+    charset-normalizer: 3.5.2
+    certifi: 2026.10.19
+  local_examples_passed: 21
+  installed_source_matches:
+  - fhirclient/__init__.py
+  - fhirclient/client.py
+  - fhirclient/models/fhirabstractbase.py
+  - fhirclient/models/fhirabstractresource.py
+  - fhirclient/models/patient.py
+  - fhirclient/models/observation.py
+  - fhirclient/models/quantity.py
+  - fhirclient/models/fhirdate.py
+  - fhirclient/models/fhirdatetime.py
+  - fhirclient/models/fhirinstant.py
+  - fhirclient/models/fhirtime.py
+  - fhirclient/models/fhirreference.py
+  - fhirclient/models/element.py
+  - fhirclient/models/domainresource.py
+  - fhirclient/models/resource.py
+  - fhirclient/models/humanname.py
+  - fhirclient/models/codeableconcept.py
+  - fhirclient/models/fhirelementfactory.py
+  network_attempts: []
+  cases:
+  - case: fixed_version
+    result: true
+  - case: synthetic_patient_round_trip
+    result: true
+  - case: synthetic_observation_round_trip
+    result: true
+  - case: required_observation_fields_checked
+    result:
+      exception: FHIRValidationError
+  - case: strict_wrong_scalar_type_rejected
+    result:
+      exception: FHIRValidationError
+  - case: strict_unknown_property_rejected
+    result:
+      exception: FHIRValidationError
+  - case: lenient_constructor_warns_and_keeps_partial_known_data
+    result: true
+  - case: mismatched_resource_type_not_lenient
+    result:
+      exception: Exception
+  - case: missing_resource_type_filled_on_output
+    result: true
+  - case: null_optional_property_omitted
+    result: true
+  - case: primitive_extension_accepted_but_not_retained
+    result: true
+  - case: partial_date_as_json_preserves_original
+    result: true
+  - case: partial_date_python_view_expands
+    result: true
+  - case: date_assignment_replaces_original_lexical_value
+    result: true
+  - case: invalid_calendar_date_rejected
+    result:
+      exception: ValueError
+  - case: coded_value_not_terminology_validated
+    result: true
+  - case: choice_exclusivity_not_enforced
+    result: true
+  - case: later_primitive_list_element_not_type_checked
+    result: true
+  - case: empty_optional_list_omitted
+    result: true
+  - case: decimal_object_not_supported_in_float_field
+    result:
+      exception: FHIRValidationError
+  - case: no_network_attempts
+    result: true
+  boundary_zh: 仅人工合成可信内存模型，无网络尝试、服务连接或真实健康/身份数据；21例不是完整FHIR/Profile/术语/SMART认证，缺失行为照实保留。
