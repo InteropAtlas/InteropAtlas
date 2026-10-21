@@ -268,15 +268,15 @@ sources:
 ---
 id: skos_provides_knowledge_organization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:26:26.111734+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: SKOS 提供知识组织能力
@@ -285,6 +285,39 @@ source: {type: standard, id: skos_reference}
 relation: provides
 target: {type: capability, id: knowledge_organization}
 confidence: 1.0
+context:
+  version_context:
+    source: SKOS Reference, fixed W3C Recommendation, 2009-08-18
+    target: Existing IA capability knowledge_organization
+  conditions_zh: 限定为用 RDF 表达概念、概念方案、标签、层级与关联等知识组织结构。SKOS 不把概念方案边界封闭为一份完整清单；未列出成员不能据此认定不存在。broader、narrower
+    和 related 本身不声明传递性，层级传递推理使用对应 Transitive 属性。此边不证明具体分类内容正确或完整、实现互通或 IA 已采用 SKOS；不据此修改 IA 分类、谓词或推理规则，旧 RDF
+    1.2 映射亦未重新核验。
+  conditions_en: Limited to representing concepts, schemes, labels and hierarchical/associative knowledge structures
+    in RDF. SKOS does not close a concept scheme into an exhaustive member list; absent members cannot thereby
+    be declared nonexistent. broader, narrower and related are not declared transitive; hierarchical closure
+    uses the corresponding Transitive properties. This does not establish classification correctness/completeness,
+    implementation interoperability or IA adoption, and does not change IA categories, predicates or inference.
+    Legacy RDF 1.2 mappings are not reverified.
+evidence:
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#intro
+  title: 'SKOS Reference — section 1.2: RDF representation of knowledge organization systems'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#schemes
+  title: 'SKOS Reference — section 4, especially 4.6.1: concept schemes are not closed member lists'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#labels
+  title: 'SKOS Reference — section 5: lexical labels'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#semantic-relations
+  title: 'SKOS Reference — section 8, especially 8.6.4 and 8.6.6: direct relations and transitive hierarchy
+    properties'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:25:00.925357+00:00'
+last_verified_by: Agent — OpenAI / dot, existing repository-exchange and knowledge-organization evidence executor
 ---
 id: topic_maps_provides_knowledge_organization
 record_created_at: "2026-09-01T16:44:53+08:00"
