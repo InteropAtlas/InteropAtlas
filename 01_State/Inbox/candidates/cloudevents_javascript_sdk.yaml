@@ -1,0 +1,29 @@
+contract_version: candidate-object-v1
+candidate_id: cloudevents_javascript_sdk
+label: CloudEvents JavaScript SDK (10.0.0)
+publisher: The CloudEvents Authors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: cloudevents/sdk-javascript
+locators:
+- url: https://github.com/cloudevents/sdk-javascript
+  role: official
+- url: https://github.com/cloudevents/sdk-javascript/tree/c23895145a2f055e8e90714401fc67252a0edf21
+  role: dated
+- url: https://github.com/cloudevents/sdk-javascript/releases/tag/v10.0.0
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为 JavaScript 软件库，不是 CloudEvents 核心规范、其他语言 SDK 或组织。固定 10.0.0，不为版本创建新软件主体；全量 Canonical 和候选检查未发现确定性碰撞。
+  merge_authorized: false
+unknowns:
+- 官方固定 README 明示支持 1.0，HTTP 源码引用 1.0.1；未获得足以认定既有 1.0.2 端点全部 patch 要求的证据，本轮不提出 implements 技术关系。
+- 未运行完整上游套件、网络传输、跨实现互通或安全审计；不宣称最新版本、生产推荐或 self_hostable，也不强配 capability。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
