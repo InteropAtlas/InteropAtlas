@@ -17,11 +17,11 @@ locators:
 - url: https://pypi.org/project/fhirclient/4.4.0/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_fhirclient
   reasons:
-  - 主体为 smart-on-fhir/client-py 与 PyPI fhirclient 库；不与 FHIR 规范、SMART 协议、项目组织或其他 FHIR 库合并。4.4.0 为固定核查版本。
-  - 本次正式对象与候选全量身份预检未见归一化碰撞，沿用现有 github/pypi 机制，不新增身份规则。
+  - 经独立语义审核由 accept-20261021-python-fhirclient-python-fhirclient 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 本切片仅核生成模型的 Python/JSON 映射与局部检查；strict=True 不是完整FHIR验证，原始数据往返可能丢失，具体限制保留。
@@ -29,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
