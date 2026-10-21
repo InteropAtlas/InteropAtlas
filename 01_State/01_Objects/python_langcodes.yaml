@@ -1,0 +1,95 @@
+id: python_langcodes
+type: system
+kind: library
+name_zh: Langcodes Python语言标签库
+name_en: Langcodes Python language-tag library
+description_zh: 处理IETF语言标签的开源Python库；固定3.5.1，记录标签对象表示、归一化和局部validity先例及非严格输入语法、旧数据与可选依赖限制。
+description_en: An open-source Python library for IETF language tags, pinned to 3.5.1; records tag-object representation,
+  normalization and local-validity precedents with non-strict input grammar, dated-data and optional-dependency
+  limits.
+version: 3.5.1
+external_identifiers:
+- namespace: github
+  value: georgkrause/langcodes
+- namespace: pypi
+  value: langcodes
+official_url: https://github.com/georgkrause/langcodes
+versions:
+- version: 3.5.1
+  status: released
+  url: https://pypi.org/project/langcodes/3.5.1/
+domains:
+- internationalization
+- metadata
+capabilities:
+- language_identification
+open_source: true
+license_expression: MIT
+scope_notes_zh: 固定 PyPI langcodes 3.5.1，官方仓库 tag v3.5.1 指向4701cd34cc607c4ffcd2ed675f03b1d6529398da。Python语言标签库，按RFC5646标签结构解析为Language对象并输出标签字符串，含格式化、旧代码替换及局部validity检查。本切片不是自动检测文本语言，也不测试语言匹配。BCP47还包括RFC4647；不把上游README的简称扩成完整BCP47实现结论。默认Language.get归一化会替换部分旧代码；normalize=False保留这些代码，但解析器仍接受下划线作为分隔符并重新格式化，不保证原输入逐字往返。standardize_tag还使用CLDR替换，例如sh→sr-Latn与可选macro归并，不等同纯RFC5646规范化或有效性证明。解析器拒绝非ASCII、部分错误子标签顺序与5–8字母主语言子标签；后者比RFC5646
+  ABNF窄，不是完整原始语法识别器。is_valid只局部检查language/script/territory/variant以及重复variant/extension和extlang数量，不核验每个extlang登记/前缀或扩展内容语义；tag_is_valid先默认归一化，所以en_US也可返回True，不代表原串符合RFC语法。私用标签局部valid不赋予公开或跨系统一致含义。固定源码的validity文档称CLDR40，随包IANA文本File-Date为2021-08-06，不声称注册表当前完整。language_data为可选依赖；本测试环境未安装，核心路径可运行，display_name名称查询抛ModuleNotFoundError；安装该依赖后的名称/人口数据行为未测。24项可信合成内存例及10个安装源码字节比对仅补充有限证据，不证明完整RFC符合性、扩展验证、RFC4647匹配、任意输入资源安全、第三方互通或IA采用。
+scope_notes_en: 'Pinned to PyPI langcodes 3.5.1 and official tag v3.5.1 at commit 4701cd34cc607c4ffcd2ed675f03b1d6529398da.
+  This Python library parses RFC5646-oriented language tags into Language objects and emits tag strings, with formatting,
+  legacy-code replacements and local validity checks. This slice does not detect the language of text or test language
+  matching. BCP47 also includes RFC4647; the upstream README shorthand is not adopted as a full-BCP47 implementation
+  conclusion. Language.get normalizes selected legacy codes by default; normalize=False preserves those codes but
+  still accepts underscores as separators and reformats tags, so original lexical round trips are not guaranteed.
+  standardize_tag also uses CLDR replacements, including sh→sr-Latn and optional macrolanguage folding; this is
+  not equated with pure RFC5646 canonicalization or proof of validity. The parser rejects non-ASCII input, some
+  out-of-order subtags and five-to-eight-letter primary language subtags; the last restriction is narrower than
+  the RFC5646 ABNF, so it is not a complete recognizer of original-input syntax. is_valid checks selected language/script/territory/variant
+  data, duplicate variants/extensions and extlang counts, not every extlang registration/prefix or extension-content
+  semantics. tag_is_valid first normalizes by default: en_US can return True without its original spelling satisfying
+  the RFC grammar. Private-use local validity does not assign public or cross-system agreed meaning. The fixed validity
+  docstring names CLDR40, and the bundled IANA text has File-Date 2021-08-06; neither is a current-complete-registry
+  claim. language_data is optional and absent from this test environment: core operations run, while display_name
+  raises ModuleNotFoundError; name/population behavior with that dependency installed was not tested. Twenty-four
+  trusted synthetic-memory examples and byte comparisons of ten installed source files are supplementary evidence
+  only, not complete RFC conformance, extension validation, RFC4647 matching, arbitrary-input resource safety, third-party
+  interoperability or IA adoption.'
+sources:
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/README.md
+  title: Langcodes 3.5.1 — package purpose, RFC5646 claim, normalization and optional language data
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/pyproject.toml
+  title: Langcodes 3.5.1 — package identity, Python range and optional data extra
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/LICENSE.txt
+  title: Langcodes 3.5.1 — MIT license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/tag_parser.py
+  title: Langcodes 3.5.1 — RFC5646-oriented tag parser and its accepted syntax
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/__init__.py
+  title: Langcodes 3.5.1 — Language, normalization, local validity and optional name lookup
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/data_dicts.py
+  title: Langcodes 3.5.1 — fixed generated language replacement and validity tables
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/data/language-subtag-registry.txt
+  title: Langcodes 3.5.1 — bundled registry File-Date 2021-08-06
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T11:08:05.782976+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed language-tag implementation evidence executor
+record_created_at: '2026-10-21T11:19:39.179639+00:00'
+record_updated_at: '2026-10-21T11:19:39.179639+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_langcodes
+  acceptance_event_id: accept-20261021-python-langcodes-python-langcodes
+  reviewed_candidate_blob: 57add87024396bab4cd75f6fba5a36e816b9a58b
+  reviewed_against_commit: 2eca5491a788e9884941c814d730e76292f9f86a
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 2eca5491a788e9884941c814d730e76292f9f86a
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/501
