@@ -156,15 +156,15 @@ last_verified_by: Agent — OpenAI / dot，bounded semantic capability evidence 
 ---
 id: rdf_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 提供图关系表示能力
@@ -173,6 +173,35 @@ source: {type: standard, id: rdf_1.2_concepts}
 relation: provides
 target: {type: capability, id: graph_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: RDF 1.2 Concepts and Abstract Data Model, W3C Candidate Recommendation Snapshot 2026-04-07; not
+      a W3C Recommendation
+    target: Existing IA capability graph_representation
+  conditions_zh: 限定为该候选推荐快照的抽象图数据模型：RDF 图是三元组的集合，主语为 IRI 或空白节点，谓语为 IRI，宾语还可为字面量或 triple term。出现 triple term
+    不自动断言其中命题为真。规范定义供具体语法、API 和查询语言引用的模型，明确实现不能直接符合本概念文档；本边不证明存储、查询或软件互通，也不重新核验旧 IA 采用/导出设想及其它 RDF 1.1/1.2
+    映射。
+  conditions_en: 'Limited to the abstract graph data model in this Candidate Recommendation Snapshot: an RDF
+    graph is a set of triples, with an IRI or blank-node subject, an IRI predicate, and an object that may
+    also be a literal or triple term. Occurrence of a triple term does not itself assert its proposition. The
+    specification supplies a model for concrete syntaxes, APIs and query languages and explicitly states that
+    implementations cannot conform directly to this Concepts document. Storage, query execution, software interoperability,
+    legacy IA adoption/export plans and other RDF 1.1/1.2 mappings are not verified.'
+evidence:
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#section-rdf-graph
+  title: RDF 1.2 Concepts 2026-04-07 §3–3.2 — graphs, triples and RDF terms
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#conformance
+  title: RDF 1.2 Concepts 2026-04-07 §2 — abstract-model conformance boundary
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#section-triple-terms-reification
+  title: RDF 1.2 Concepts 2026-04-07 §1.5 — triple terms and assertion distinction
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: rdf_turtle_implements_rdf_model
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -202,15 +231,15 @@ sources:
 ---
 id: rdf_turtle_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 1.2 Turtle 提供 RDF 图的文本表示
@@ -219,18 +248,46 @@ source: {type: standard, id: rdf_1.2_turtle}
 relation: provides
 target: {type: capability, id: graph_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: RDF 1.2 Turtle, W3C Working Draft 2026-07-23, matching the existing object edition; not a W3C Recommendation
+    target: Existing IA capability graph_representation
+  conditions_zh: 限定为现有对象所记 2026-07-23 工作草案的 RDF 图文本表示。符合文法及附加约束的 Turtle 文档序列化一个 RDF 图；triple term、reifying
+    triple 与同时断言三元组的 annotation syntax 须区分。具体解析器需按解析规则向应用提供该图，这不是任意软件已实现、全版本兼容或原始文本逐字往返的保证。本次不核验旧 IA 关系元数据映射实验或其它
+    implements/maps_to 边。
+  conditions_en: Limited to textual RDF graph representation in the 2026-07-23 Working Draft recorded by the
+    existing object. A Turtle document satisfying its grammar and additional constraints serializes an RDF
+    graph; triple terms, reifying triples and annotation syntax that also asserts the triple must be distinguished.
+    A conforming parser exposes the graph according to the parsing rules, not a guarantee that arbitrary software
+    implements them, supports every version or preserves original bytes on round trips. Legacy IA relationship-metadata
+    experiments and other implements/maps_to edges are not verified.
+evidence:
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#conformance
+  title: RDF 1.2 Turtle 2026-07-23 §5 — document and parser conformance
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#triple-terms
+  title: RDF 1.2 Turtle 2026-07-23 §2.10–2.11 — triple terms, reifying triples and annotations
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-parsing
+  title: RDF 1.2 Turtle 2026-07-23 §7 — parsing to an RDF graph
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: rdf_turtle_provides_linked_data_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 1.2 Turtle 提供链接数据序列化能力
@@ -239,6 +296,29 @@ source: {type: standard, id: rdf_1.2_turtle}
 relation: provides
 target: {type: capability, id: linked_data_serialization}
 confidence: 1.0
+context:
+  version_context:
+    source: RDF 1.2 Turtle, W3C Working Draft 2026-07-23, matching the existing object edition; not a W3C Recommendation
+    target: Existing IA capability linked_data_serialization
+  conditions_zh: 限定为将 RDF 图编码成可交换、可解析的 Turtle 文本：媒体类型为 text/turtle，编码为 UTF-8，文档须满足文法及附加约束。版本指令和可选媒体类型版本参数是版本提示，不要求解析器拒绝声明版本之外的特性；带
+    1.1 版本指令的文档仍可能使 Turtle 1.1 解析器失败。草案未定义不符合文法输入的解析器处理方式。本边不证明真实网络交换、任意工具互通、逐字往返或 IA 已采用该格式。
+  conditions_en: 'Limited to encoding an RDF graph as exchangeable, parseable Turtle text: media type text/turtle,
+    UTF-8 encoding, and the grammar plus additional document constraints. Version directives and the optional
+    media-type version parameter are hints, not a requirement that parsers reject features outside the announced
+    version; a 1.1 version directive can still cause Turtle 1.1 parsers to fail. The draft does not define
+    parser handling of non-conforming input. Actual network exchange, arbitrary-tool interoperability, byte-preserving
+    round trips and IA adoption are not established.'
+evidence:
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-mime
+  title: RDF 1.2 Turtle 2026-07-23 §5–6 — conformance, text/turtle and UTF-8
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-version
+  title: RDF 1.2 Turtle 2026-07-23 §2.4 — version announcements are hints
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: skos_uses_rdf
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -321,15 +401,15 @@ last_verified_by: Agent — OpenAI / dot, existing repository-exchange and knowl
 ---
 id: topic_maps_provides_knowledge_organization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Topic Maps 提供知识组织能力
@@ -338,6 +418,26 @@ source: {type: standard, id: topic_maps_iso_13250}
 relation: provides
 target: {type: capability, id: knowledge_organization}
 confidence: 1.0
+context:
+  version_context:
+    source: ISO/IEC 13250 family endpoint, limited here to ISO/IEC 13250-2:2006 public official catalogue abstract;
+      paid full text not read
+    target: Existing IA capability knowledge_organization
+  conditions_zh: 仅据 ISO/IEC 13250-2:2006 官方公开目录摘要，限定为 Topic Maps 模型的抽象结构与解释、合并规则和基本主题标识所提供的知识组织基础。目录将该模型定位为交换语法解释及后续规范的基础，不等于已经具备查询引擎或约束验证实现。本次未读取付费标准全文，未核验
+    Part 5、标准族全部部分、详尽图模型或旧 IA 采用陈述；单独的图表示能力边保持原样而未补证。
+  conditions_en: Based only on the public official catalogue abstract for ISO/IEC 13250-2:2006, limited to
+    the knowledge-organization foundation supplied by the model’s abstract structure/interpretation, merging
+    rules and basic subject identifiers. Its role as a basis for interchange interpretation and supporting
+    specifications does not establish a query engine or constraint-validation implementation. The paid full
+    text, Part 5, the entire standards family, detailed graph model and legacy IA-adoption statements were
+    not verified; the separate graph-representation edge remains unchanged and without added evidence.
+evidence:
+- url: https://www.iso.org/standard/40017.html
+  title: ISO/IEC 13250-2:2006 official catalogue — public abstract only
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: topic_maps_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
