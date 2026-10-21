@@ -4,11 +4,13 @@
 from __future__ import annotations
 
 import unittest
+from xml.etree import ElementTree
 from pathlib import Path
 
 from bootstrap_query import index_objects, load_atlas
 from render_markdown import render_object, semantic_view_type
 from workspace_projection import project_field
+from render_site import markdown_to_html
 
 
 class SemanticRenderingTests(unittest.TestCase):
@@ -123,6 +125,73 @@ class SemanticRenderingTests(unittest.TestCase):
                 for version in record.get("versions", []):
                     self.assertIn("## 版本\n", rendered)
                     self.assertIn(str(version["version"]), rendered)
+
+
+class MarkdownLinkRenderingTests(unittest.TestCase):
+    def render_fragment(self, text):
+        return ElementTree.fromstring("<div>" + markdown_to_html(text) + "</div>")
+
+    def test_external_markdown_targets_are_preserved(self):
+        targets = (
+            "https://github.com/encode/httpx/blob/26d48e0634e6ee9cdc0533996db289ce4b430177/README.md",
+            "http://example.org/README.md",
+            "//example.org/README.md",
+            "https://example.org/README.md?download=1#section.md",
+            "https://example.org/?file=README.md",
+            "custom:README.md",
+        )
+        for target in targets:
+            with self.subTest(target=target):
+                anchor = self.render_fragment(f'[source]({target} "source.md)")').find(".//a")
+                self.assertEqual(anchor.get("href"), target)
+                self.assertEqual(anchor.get("title"), "source.md)")
+
+    def test_relative_markdown_targets_keep_site_mapping(self):
+        for target, expected in (
+            ("target.md", "target.html"),
+            ("../objects/target.md", "../objects/target.html"),
+            ("./target.md?file=other.md#part.md", "./target.html?file=other.md#part.md"),
+            ("target.md?#", "target.html?#"),
+            ("#part.md", "#part.md"),
+            ("?file=target.md", "?file=target.md"),
+            ("target.html?file=other.md", "target.html?file=other.md"),
+        ):
+            with self.subTest(target=target):
+                anchor = self.render_fragment(f'[target]({target} "title.md)")').find(".//a")
+                self.assertEqual(anchor.get("href"), expected)
+                self.assertEqual(anchor.get("title"), "title.md)")
+
+    def test_reference_links_follow_the_same_target_boundary(self):
+        root = self.render_fragment(
+            "[local][1] [source][2]\n\n"
+            "[1]: ../objects/target.md \"local title\"\n"
+            "[2]: https://example.org/source.md \"source title\""
+        )
+        self.assertEqual([a.get("href") for a in root.iter("a")],
+                         ["../objects/target.html", "https://example.org/source.md"])
+
+    def test_code_text_images_and_raw_html_are_not_rewritten(self):
+        root = self.render_fragment(
+            "Literal README.md) and `[source](README.md)`\n\n"
+            "```text\n[source](README.md)\n```\n\n"
+            "![image](image.md)\n\n"
+            '<a href="raw.md">raw</a>'
+        )
+        self.assertIn("Literal README.md)", "".join(root.itertext()))
+        self.assertEqual([code.text for code in root.iter("code")],
+                         ["[source](README.md)", "[source](README.md)\n"])
+        self.assertEqual(root.find(".//img").get("src"), "image.md")
+        self.assertEqual(root.find(".//a").get("href"), "raw.md")
+
+    def test_canonical_httpx_source_survives_object_rendering(self):
+        root = Path(__file__).resolve().parents[2]
+        objects, _ = load_atlas(root)
+        index = index_objects(objects)
+        record = index["httpx"]
+        rendered = self.render_fragment(render_object(record, index))
+        hrefs = [anchor.get("href") for anchor in rendered.iter("a")]
+        for source in record["sources"]:
+            self.assertIn(source["url"], hrefs)
 
 
 if __name__ == "__main__":
