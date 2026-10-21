@@ -1,0 +1,253 @@
+{
+  "started_at": "2026-10-21T05:40:12.529001+00:00",
+  "completed_at": "2026-10-21T05:40:12.531970+00:00",
+  "versions": {
+    "PyLD": "3.3.0",
+    "cachetools": "7.2.4",
+    "frozendict": "2.4.7",
+    "lxml": "6.1.3"
+  },
+  "cases": [
+    {
+      "name": "valid",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:a",
+        "@type": "Person",
+        "name": "Alice"
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ],
+          "https://example.test/name": [
+            {
+              "@value": "Alice"
+            }
+          ]
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n<https://example.test/a> <https://example.test/name> \"Alice\" .\n",
+      "dropped_properties": []
+    },
+    {
+      "name": "wrong_type",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:a",
+        "@type": "Person",
+        "name": 42
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ],
+          "https://example.test/name": [
+            {
+              "@value": 42
+            }
+          ]
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n<https://example.test/a> <https://example.test/name> \"42\"^^<http://www.w3.org/2001/XMLSchema#integer> .\n",
+      "dropped_properties": []
+    },
+    {
+      "name": "missing_required",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:a",
+        "@type": "Person"
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ]
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n",
+      "dropped_properties": []
+    },
+    {
+      "name": "unmapped_extra",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:a",
+        "@type": "Person",
+        "name": "Alice",
+        "unmapped": "not validated as a property"
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ],
+          "https://example.test/name": [
+            {
+              "@value": "Alice"
+            }
+          ]
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n<https://example.test/a> <https://example.test/name> \"Alice\" .\n",
+      "dropped_properties": [
+        "unmapped"
+      ]
+    },
+    {
+      "name": "language_value",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:a",
+        "@type": "Person",
+        "name": {
+          "@value": "Alice",
+          "@language": "en"
+        }
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ],
+          "https://example.test/name": [
+            {
+              "@language": "en",
+              "@value": "Alice"
+            }
+          ]
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n<https://example.test/a> <https://example.test/name> \"Alice\"@en .\n",
+      "dropped_properties": []
+    },
+    {
+      "name": "mixed_graphs",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@graph": [
+          {
+            "@id": "ex:a",
+            "@type": "Person",
+            "name": "Alice"
+          },
+          {
+            "@id": "ex:g",
+            "@graph": [
+              {
+                "@id": "ex:a",
+                "@type": "Person",
+                "name": 42
+              }
+            ]
+          }
+        ]
+      },
+      "expanded": [
+        {
+          "@id": "https://example.test/a",
+          "@type": [
+            "https://example.test/Person"
+          ],
+          "https://example.test/name": [
+            {
+              "@value": "Alice"
+            }
+          ]
+        },
+        {
+          "@graph": [
+            {
+              "@id": "https://example.test/a",
+              "@type": [
+                "https://example.test/Person"
+              ],
+              "https://example.test/name": [
+                {
+                  "@value": 42
+                }
+              ]
+            }
+          ],
+          "@id": "https://example.test/g"
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> .\n<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> <https://example.test/g> .\n<https://example.test/a> <https://example.test/name> \"42\"^^<http://www.w3.org/2001/XMLSchema#integer> <https://example.test/g> .\n<https://example.test/a> <https://example.test/name> \"Alice\" .\n",
+      "dropped_properties": []
+    },
+    {
+      "name": "named_only",
+      "input": {
+        "@context": {
+          "ex": "https://example.test/",
+          "Person": "ex:Person",
+          "name": "ex:name"
+        },
+        "@id": "ex:g",
+        "@graph": [
+          {
+            "@id": "ex:a",
+            "@type": "Person",
+            "name": 42
+          }
+        ]
+      },
+      "expanded": [
+        {
+          "@graph": [
+            {
+              "@id": "https://example.test/a",
+              "@type": [
+                "https://example.test/Person"
+              ],
+              "https://example.test/name": [
+                {
+                  "@value": 42
+                }
+              ]
+            }
+          ],
+          "@id": "https://example.test/g"
+        }
+      ],
+      "nquads": "<https://example.test/a> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://example.test/Person> <https://example.test/g> .\n<https://example.test/a> <https://example.test/name> \"42\"^^<http://www.w3.org/2001/XMLSchema#integer> <https://example.test/g> .\n",
+      "dropped_properties": []
+    }
+  ],
+  "rejected_remote_contexts": [
+    "https://example.test/blocked"
+  ],
+  "limits": "Trusted inline inputs. Rejecting loader passed to expansion and RDF conversion. No network request, no loader setter, no framing/canonicalization or arbitrary-data guarantee."
+}
