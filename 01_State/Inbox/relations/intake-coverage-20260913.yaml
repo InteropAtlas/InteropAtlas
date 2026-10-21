@@ -628,6 +628,13 @@ memberships:
 # httpx.yaml：固定0.28.1的HTTP客户端先例；MockTransport观察不是实际网络或精确RFC/HTTP3符合性，不添加implements。
 - category_id: transport
   ref: {surface: canonical, id: httpx}
+# XML/XSD：UBL 2.3 所引用的固定表示/结构约束文档；通用 syntax 导航，不自动继承 commerce 或表示业务符合性。
+- category_id: syntax
+  ref: {surface: canonical, id: xml_1.0_second_edition}
+- category_id: syntax
+  ref: {surface: canonical, id: xml_schema_structures_2004}
+- category_id: syntax
+  ref: {surface: canonical, id: xml_schema_datatypes_2004}
 canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security, quic_tls_version, mcp_jsonrpc]
 proposals:
 - id: is05_is04
