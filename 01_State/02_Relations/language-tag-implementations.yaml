@@ -1,0 +1,55 @@
+id: python_langcodes_implements_rfc5646_tag_processing
+type: relation
+name_zh: Langcodes 3.5.1 有界实现RFC5646语言标签处理
+name_en: Langcodes 3.5.1 implements bounded RFC5646 language-tag processing
+source: python_langcodes
+relation: implements
+target: bcp47_rfc5646
+context:
+  capabilities:
+  - language_identification
+  version_context:
+    source: PyPI langcodes 3.5.1; official tag v3.5.1 commit 4701cd34cc607c4ffcd2ed675f03b1d6529398da
+    target: RFC5646 (September 2009), language-tag part of BCP47; not RFC4647 matching
+  conditions_zh: 仅固定库中RFC5646导向的标签解析、Language对象表示和字符串输出先例，不是全部BCP47或严格语法/完整validity/规范化符合性声明。下划线兼容输入和5–8字母主语言拒绝意味着接受集不等同RFC
+    ABNF；normalize=False也不保证逐字往返。默认及standardize_tag归一化含CLDR扩展替换；标准化成功或tag_is_valid=True都不证明原始输入符合RFC。extlang登记/前缀、扩展语义与当前完整注册表未验证；私用标签含义依赖使用方约定。CLDR40文档及随包2021-08-06注册表时点限制保留。本地例在无language_data的环境只用合成标签；不推断安装可选数据后的行为、自动语言检测、语言匹配、生产适用性、安全认证、第三方互通或IA采用。
+  conditions_en: Only the fixed library’s RFC5646-oriented parsing, Language-object representation and tag-string
+    output precedent, not conformance to all BCP47 or a strict grammar/full-validity/canonicalization implementation.
+    Underscore-compatible input and rejection of five-to-eight-letter primary languages mean its accepted set is
+    not the RFC ABNF; normalize=False is not lexical-round-trip preservation. Default/standardize_tag normalization
+    includes CLDR-specific replacements; success or tag_is_valid=True does not establish RFC conformance of the
+    original input. Extlang registration/prefixes, extension semantics and the current complete registry are not
+    verified; private-use meaning requires agreement among users. The documented CLDR40 and bundled 2021-08-06 registry
+    limits remain. Local examples use synthetic tags without language_data; optional-data behavior, automatic language
+    detection, language matching, production suitability, security certification, third-party interoperability and
+    IA adoption are not established.
+evidence:
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/README.md
+  title: Langcodes 3.5.1 — package purpose, RFC5646 claim, normalization and optional language data
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/tag_parser.py
+  title: Langcodes 3.5.1 — RFC5646-oriented tag parser and its accepted syntax
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/__init__.py
+  title: Langcodes 3.5.1 — Language, normalization, local validity and optional name lookup
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/georgkrause/langcodes/blob/4701cd34cc607c4ffcd2ed675f03b1d6529398da/langcodes/data/language-subtag-registry.txt
+  title: Langcodes 3.5.1 — bundled registry File-Date 2021-08-06
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc5646.html#section-2.2.9
+  title: RFC5646 §2.1, §2.2.9 and §4.5 — syntax, registry-relative validity and canonicalization
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T11:08:05.782976+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed language-tag implementation evidence executor
+record_created_at: '2026-10-21T11:19:39.179639+00:00'
+record_updated_at: '2026-10-21T11:19:39.179639+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
