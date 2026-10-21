@@ -1,0 +1,231 @@
+packet_id: pyshacl_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: c769d9300bb52cd81641e55f998f17a7f2679f9e
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 从现有 semantics 导航的 shacl_2017 与 schema_validation 查询发现 RDF 图验证实现未记录；当前 CLI 只返回 JSON Schema 库，不能等同 SHACL 实现。
+- 仅一个 system/library、一条有条件 implements 和已有 semantics 导航；不改变分类、能力含义、Schema、页面、运行器或 IA 的采用/维护方式。
+- 本候选需真实独立语义审核，review_required 与有限运行示例均不等于自动接纳。
+source_evidence:
+- url: https://github.com/RDFLib/pySHACL/releases/tag/v0.40.1
+  locator: v0.40.1 → 469cca7a22a078b36c167c1e8dadecf5e5ec6c75
+  observation_zh: 官方 tag 直接指向固定 commit；10 个官方文件均与 Git blob 相等。版本取 pyproject 和 __init__，不以 README 遗留 0.27.0 CLI 文本或
+    Python3.8 说明替代本版 metadata。
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/README.md
+  locator: Introduction; Python Module Use; Errors; Focus Node Filtering; Remote Graph Mode
+  observation_zh: 明确软件主体、2017 Recommendation、参数默认值、范围过滤、三种结果/错误类别与可选功能限制。
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/monkey/__init__.py
+  locator: rdflib_bool_patch / rdflib_bool_unpatch; entrypoints shapes loading
+  observation_zh: 直接记录全局 RDFLib 归一化/布尔映射修改；不推断具体安全漏洞，也不宣称宿主进程无副作用。
+official_source_hashes:
+- path: README.md
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/README.md
+  sha256: e4b7290ef94fe7088a565ee837cb394c00b633662ce7e6fd0927a5ee59a56642
+  git_blob: ea75fe2cdb67bf6f437450d15343139103d3811f
+  bytes: 22296
+  status: 200
+  retrieved_at: '2026-10-21T04:30:18.551433+00:00'
+- path: LICENSE.txt
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/LICENSE.txt
+  sha256: cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30
+  git_blob: d645695673349e3947e8e5ae42332d0ac3164cd7
+  bytes: 11358
+  status: 200
+  retrieved_at: '2026-10-21T04:30:21.094948+00:00'
+- path: pyproject.toml
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyproject.toml
+  sha256: 19468902333555668d66e03de47f637ce57d6df85129943f354b16f221e41b68
+  git_blob: 8b52fa542e7aa1c5df6c001847778027878d1563
+  bytes: 6926
+  status: 200
+  retrieved_at: '2026-10-21T04:30:23.622958+00:00'
+- path: pyshacl/__init__.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/__init__.py
+  sha256: b62ab3242942159d2c0c9acc4994212676826355f44d2b44db1ae734f04e635f
+  git_blob: 6233f818bcd4a6726fecab14f81b767171707cd1
+  bytes: 601
+  status: 200
+  retrieved_at: '2026-10-21T04:30:25.919202+00:00'
+- path: pyshacl/entrypoints.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/entrypoints.py
+  sha256: d5c44309a4eaf65a471cdd2432b1595f72c469159a7f5014b3877fac122cd460
+  git_blob: 558cf138fb8666e22f6e45cf2f70fd671a23f64d
+  bytes: 20265
+  status: 200
+  retrieved_at: '2026-10-21T04:30:28.365081+00:00'
+- path: pyshacl/validator.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/validator.py
+  sha256: 4bbd38e41ec156fa8c338be049f774fcfe601e92eb4cd2ea260502141ab2e5a7
+  git_blob: 3b561da837afffd81990c46b96bad2805c97494a
+  bytes: 16917
+  status: 200
+  retrieved_at: '2026-10-21T04:30:31.667799+00:00'
+- path: pyshacl/constraints/core/cardinality_constraints.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/core/cardinality_constraints.py
+  sha256: 254ad0a23a3ee76f5e43cf353edacc15cbb48581c7db42397fe67b8a073e38a7
+  git_blob: 7cac2eec64aef5ecd976f8cf424ce250d8397184
+  bytes: 8178
+  status: 200
+  retrieved_at: '2026-10-21T04:30:33.921677+00:00'
+- path: pyshacl/constraints/core/value_constraints.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/core/value_constraints.py
+  sha256: 22ada6f7b2147b1ff7d10696b9c9dd42513498e93fabbb3fc8ab127df2fd66a1
+  git_blob: 8d364b837a4283fe976606bcbcd2e17f4f8effb7
+  bytes: 14386
+  status: 200
+  retrieved_at: '2026-10-21T04:30:37.568271+00:00'
+- path: pyshacl/constraints/sparql/sparql_based_constraints.py
+  url: https://raw.githubusercontent.com/RDFLib/pySHACL/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/sparql/sparql_based_constraints.py
+  sha256: 0f531424307263494d9dc00cfa8d4d843a954d3300a6811346069bf4110872fe
+  git_blob: af0bd975f4b4e7a10cfd42b18ea8129edcde13d6
+  bytes: 8515
+  status: 200
+  retrieved_at: '2026-10-21T04:30:40.611255+00:00'
+- path: pyshacl/monkey/__init__.py
+  url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/monkey/__init__.py
+  sha256: bf1c7af719af1c17b9361be1ce083770dcc8cf93289906d21cbd1f758c834471
+  git_blob: 64e2e988fa2d4a1c88cf631eabb66e82142ce04c
+  bytes: 1955
+  status: 200
+  retrieved_at: '2026-10-21T04:32:02.413788+00:00'
+objects:
+- candidate_id: pyshacl
+  candidate_path: 01_State/Inbox/candidates/pyshacl.yaml
+  candidate_blob: ca0c1f30e60471ead785122bc45eefac76abbe82
+  preflight:
+    canonical_records: 199
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: pyshacl
+    type: system
+    kind: library
+    name_zh: pySHACL Python RDF 图约束验证库
+    name_en: pySHACL Python RDF graph validation library
+    description_zh: Python 的 SHACL 验证库；本记录固定到 0.40.1，通过 validate 接口按 shapes 图检查 RDF 数据图并返回符合性结果与报告。
+    description_en: A Python SHACL validation library, pinned here to 0.40.1; its validate interface checks RDF
+      data graphs against shapes graphs and returns a conformance result and report.
+    version: 0.40.1
+    external_identifiers:
+    - namespace: github
+      value: RDFLib/pySHACL
+    official_url: https://github.com/RDFLib/pySHACL
+    versions:
+    - version: 0.40.1
+      status: released
+      url: https://github.com/RDFLib/pySHACL/releases/tag/v0.40.1
+    capabilities:
+    - schema_validation
+    open_source: true
+    license_expression: Apache-2.0
+    scope_notes_zh: 主体为 Python 软件库，不是 W3C SHACL 规范或 RDFLib 库。固定版以 2017 Recommendation 为实现目标；本切片仅记录 RDF 图的 Core 约束、SPARQL
+      约束验证和结果报告。预推理、meta-SHACL、Advanced Features、JS 等需选项启用，其中 JS 另需可选依赖；focus/shape 过滤以及 allow_infos/allow_warnings
+      会改变检查范围或 conforms 判定。必须区别普通不符合报告、ValidationFailure 与抛出的加载/运行异常。加载 shapes 的路径会修改 RDFLib 全局字面量归一化与布尔映射，代码有撤销步骤，但宿主自定义状态、异常路径及并发影响未在本切片评估。不声明完整符合性认证、SHACL
+      1.2/全部扩展、远程端点/HTTP 服务/Oxigraph 支持的实测、宿主协议互通、安全或生产推荐；不改变 IA 的模型或采用方式。
+    scope_notes_en: The subject is the Python library, not the W3C SHACL specification or RDFLib library. The fixed
+      release targets the 2017 Recommendation; this slice records RDF graph Core constraints, SPARQL constraint
+      validation and reports. Pre-inference, meta-SHACL, Advanced Features and JS require options; JS also requires
+      optional dependencies. Focus/shape filtering and allow_infos/allow_warnings affect validation scope or the
+      conforms decision. Ordinary non-conformance reports, ValidationFailure and raised loading/runtime exceptions
+      must be distinguished. The shapes-loading path changes RDFLib global literal normalization and Boolean mappings
+      and has an undo step; effects on host-customized state, exceptional paths and concurrency were not assessed
+      here. No complete certification, SHACL 1.2/all-extension support, tested remote endpoint/HTTP service/Oxigraph
+      coverage, host-protocol interoperability, security or production recommendation is claimed. This does not
+      change IA models or adoption.
+    sources:
+    - &id001
+      url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/README.md
+      title: pySHACL 0.40.1 — RDF graph validation, SHACL 2017 target, modes and limits
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyproject.toml
+      title: pySHACL 0.40.1 — fixed package version, dependencies and license metadata
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/LICENSE.txt
+      title: pySHACL fixed source license — Apache-2.0
+      language: en
+      accessed: '2026-10-21'
+    - &id002
+      url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/entrypoints.py
+      title: pySHACL 0.40.1 — validation options, errors and graph loading
+      language: en
+      accessed: '2026-10-21'
+    - &id003
+      url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/validator.py
+      title: pySHACL 0.40.1 — defaults, optional features and validation reports
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/monkey/__init__.py
+      title: pySHACL 0.40.1 — RDFLib literal and Boolean mapping changes
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T04:35:19.773595+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
+relations:
+- proposal_id: pyshacl_implements_shacl_2017
+  proposed_record:
+    id: pyshacl_implements_shacl_2017
+    type: relation
+    name_zh: pySHACL 0.40.1 实现 SHACL 2017 RDF 图验证
+    name_en: pySHACL 0.40.1 implements SHACL 2017 RDF graph validation
+    source: pyshacl
+    relation: implements
+    target: shacl_2017
+    context:
+      capabilities:
+      - schema_validation
+      version_context:
+        source: pySHACL 0.40.1, upstream commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75
+        target: W3C SHACL Recommendation, 20 July 2017
+      conditions_zh: 依据固定源码和文档所述 2017 Recommendation 目标，限定 RDF 图的 Core/SPARQL 约束检查和验证报告。推理/附加特性、focus/shape 选择及
+        severity 容许选项会影响结果；ValidationFailure 或异常不是普通不符合报告。19 个本地可信图示例仅为补充，不是完整符合性认证，不延伸到 SHACL 1.2/全部扩展、任意宿主协议或跨实现互通，也不是
+        IA 采用该标准或库的决定。
+      conditions_en: Based on the fixed source and documented 2017 Recommendation target, limited to RDF graph Core/SPARQL
+        constraint checks and validation reports. Inference/additional features, focus/shape selection and severity
+        allowances affect results; ValidationFailure or exceptions differ from ordinary non-conformance reports.
+        Nineteen local trusted-graph examples supplement review, not full certification. No SHACL 1.2/all-extension
+        support, arbitrary host protocol or cross-implementation interoperability, or IA adoption decision follows.
+    evidence:
+    - *id001
+    - *id002
+    - *id003
+    - url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/core/cardinality_constraints.py
+      title: pySHACL 0.40.1 — minCount/maxCount checks
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/sparql/sparql_based_constraints.py
+      title: pySHACL 0.40.1 — SPARQL-based constraints
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T04:35:19.773595+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
+membership_proposals:
+- category_id: semantics
+  ref:
+    surface: canonical
+    id: pyshacl
+  rationale_zh: RDF 图按 SHACL shapes 约束验证的库，沿用 shacl_2017 的既有语义互操作导航；只在正式接纳后物化。
+supplementary_verification:
+  library_version: 0.40.1
+  python_version: 3.12.14
+  dependency_versions:
+    pyshacl: 0.40.1
+    rdflib: 7.6.0
+    owlrl: 7.6.2
+    pyparsing: 3.3.3
+    packaging: '26.3'
+    prettytable: 3.18.0
+    html5rdf: 1.2.1
+    wcwidth: 0.9.3
+  local_examples_passed: 19
+  boundary_zh: 隔离 PyPI 安装，19 个可信内存图例：基数/类型/closed/nodeKind、Warning/Info 容许、RDFS 推理、SPARQL、focus 过滤、ValidationFailure
+    和 meta-SHACL 异常。未跑完整上游套件，未测试远程端点、imports、JS、HTTP 服务或 Oxigraph；不是第三方互通或安全认证。
