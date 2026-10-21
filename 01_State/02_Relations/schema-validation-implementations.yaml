@@ -1,0 +1,38 @@
+id: python_jsonschema_implements_json_schema_2020_12
+type: relation
+name_zh: jsonschema 4.25.1 实现 JSON Schema 2020-12 验证
+name_en: jsonschema 4.25.1 implements JSON Schema 2020-12 validation
+source: python_jsonschema
+relation: implements
+target: json_schema_2020_12
+context:
+  capabilities:
+  - schema_validation
+  version_context:
+    source: jsonschema 4.25.1, upstream commit 331c38425519b69118d22ebe467ad230fb83a010
+    target: JSON Schema Draft 2020-12
+  conditions_zh: 依据固定发行版文档的 Draft202012Validator 支持，限定为结构化实例验证。format 检查须显式启用且某些格式需要可选依赖；正则表达式采用 Python 方言。本关系不宣称完整符合性认证、任意词汇表扩展支持、MCP/WoT/CloudEvents
+    整体协议实现或应用间互通。 某格式缺少所需可选依赖时可能不报错通过，不把这一结果当作格式有效的保证。
+  conditions_en: Based on the fixed release documented Draft202012Validator support, limited to structured-instance
+    validation. Format checks are opt-in and some require optional dependencies; regular expressions use the Python
+    dialect. This is not a complete conformance certification, arbitrary-vocabulary support claim, full MCP/WoT/CloudEvents
+    implementation or application-interoperability assertion. A format with missing required optional dependencies
+    can pass without an error; that result is not a format-validity guarantee.
+evidence:
+- url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/README.rst
+  title: jsonschema 4.25.1 — Python implementation identity and supported drafts
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst
+  title: jsonschema 4.25.1 — versioned validators, opt-in formats and regex limitations
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T00:51:42.497448+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version implementation evidence executor
+record_created_at: '2026-10-21T00:58:59.584222+00:00'
+record_updated_at: '2026-10-21T00:58:59.584222+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
