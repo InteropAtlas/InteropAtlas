@@ -17,11 +17,11 @@ locators:
 - url: https://pypi.org/project/rfc3986/2.0.0/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_rfc3986
   reasons:
-  - 主体为 python-hyper/rfc3986 Python 库及官方 PyPI 分发，固定 2.0.0；沿用 system/library 与既有 github/pypi 外部身份机制。
-  - 不与 RFC3986 标准、WHATWG URL Living Standard、Python 标准库或其他 URI 库合并；当前无需身份合并。
+  - 经独立语义审核由 accept-20261021-rfc3986-python-rfc3986 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - URIReference 组件表示与相对引用解析的有界先例，不是原输入严格 ABNF/所有方案/全部规范化或完整 RFC3986 符合性证明。
@@ -29,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
