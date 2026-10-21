@@ -181,15 +181,15 @@ sources:
 ---
 id: design_tokens_format_provides_token_exchange
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:09:22.264759+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Design Tokens Format 提供设计令牌交换能力
@@ -204,6 +204,43 @@ sources:
     title: Design Tokens Format Module 2025.10
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: Design Tokens Format Module 2025.10, fixed Final Community Group Report, 2025-10-28
+    target: Existing IA capability design_token_exchange
+  conditions_zh: 限定为按该版本 JSON 结构交换设计令牌及其值、类型、分组和引用；这是 Community Group 的交换格式规范，不是 W3C Recommendation，也不在 W3C
+    标准轨道。令牌类型按规范的显式类型、引用解析或分组继承规则确定，不能仅猜测值内容；需要实际值时必须解析引用，循环引用被禁止。处理工具须保留其不理解的扩展数据，但保留数据不等于理解其语义。本次只核交换格式能力，不证明任意工具兼容、视觉结果等价、旧
+    visual_information_presentation 能力上下文或 IA 已采用。
+  conditions_en: Limited to exchanging design-token values, types, groups and references in this version's
+    JSON structure. This Community Group interchange specification is not a W3C Recommendation and is not on
+    the W3C Standards Track. Token types follow explicit-type, reference-resolution or group-inheritance rules,
+    not guesses from values; references must be resolved when actual values are needed, and cycles are forbidden.
+    Processing tools must retain unknown extension data, but retention does not mean understanding its semantics.
+    Only format-level exchange capability is reviewed, not arbitrary tool compatibility, equal visual results,
+    the legacy visual_information_presentation context, or IA adoption.
+evidence:
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#sotd
+  title: 'Design Tokens Format 2025.10 — document status: Final Community Group Report, not W3C Standards Track'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#file-format
+  title: 'Design Tokens Format 2025.10 — section 4: JSON interchange structure'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#x5-2-2-type
+  title: 'Design Tokens Format 2025.10 — section 5.2.2: unambiguous type and resolution/inheritance rules'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#extensions
+  title: 'Design Tokens Format 2025.10 — section 5.2.3: retention of unknown extension data'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#reference-resolution
+  title: 'Design Tokens Format 2025.10 — section 7.2: resolution when values are needed; no circular references'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:06:47.655585+00:00'
+last_verified_by: Agent — OpenAI / dot, existing text/design capability-edge evidence executor
 ---
 id: design_tokens_format_supports_visual_information_presentation
 record_created_at: "2026-09-01T16:44:53+08:00"
