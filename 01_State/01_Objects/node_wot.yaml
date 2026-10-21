@@ -1,0 +1,85 @@
+id: node_wot
+type: system
+kind: software
+name_zh: Eclipse Thingweb node-wot 软件框架
+name_en: Eclipse Thingweb node-wot framework
+description_zh: 用于以 Node.js/TypeScript 构建 Web of Things 客户端与服务端的软件框架，以事物描述（TD）连接应用与设备接口；本记录固定到 0.9.2。
+description_en: A Node.js/TypeScript framework for Web of Things clients and servers, using Thing Descriptions to
+  connect applications and device interfaces; pinned here to release 0.9.2.
+version: 0.9.2
+external_identifiers:
+- namespace: github
+  value: eclipse-thingweb/node-wot
+official_url: https://github.com/eclipse-thingweb/node-wot
+versions:
+- version: 0.9.2
+  status: released
+  url: https://github.com/eclipse-thingweb/node-wot/releases/tag/v0.9.2
+open_source: true
+license_expression: EPL-2.0 OR W3C-20150513
+scope_notes_zh: 主体是包含 core 与协议绑定等包的软件框架，不是 TD 规范、设备或组织；沿用既有 software kind，不新增 framework 类型。本切片限固定 core 的 TD 1.1
+  表示、解析/序列化与 consume/produce 路径。parseTD 会补默认上下文/字段并可归一化相对 form URI；它不是完整 TD 校验器。isThingDescription 复用为 ExposedThingInit
+  放宽 required 字段的 schema，不能把返回成功当完整 TD 符合性证明。serializeTD 在缺安全配置时可补 nosec 描述，这不是安全部署保证。generic discover 明确未实现，produce
+  拒绝 ThingModel 声明。通信需相应绑定；README 中各绑定的客户端/服务端支持范围不同，不推断全部网络协议互通。未验证完整 JSON-LD 处理、所有可选特性、安全性、生产适用性或最新版本，未推断 self_hostable，未新增或强配
+  capability。
+scope_notes_en: The subject is the software framework and its core/binding packages, not the TD specification, a
+  device or an organization; the existing software kind is used, with no new framework kind. This slice covers fixed-core
+  TD 1.1 representation, parsing/serialization and consume/produce paths. parseTD adds default contexts/fields and
+  may normalize relative form URIs; it is not a complete TD validator. isThingDescription reuses a schema whose
+  required fields were relaxed for ExposedThingInit, so success is not full TD-conformance proof. serializeTD can
+  supply a nosec description when security is missing; this is not a secure-deployment guarantee. Generic discover
+  is explicitly unimplemented and produce rejects ThingModel declarations. Communication requires suitable bindings;
+  documented client/server support differs by binding, not universal protocol interoperability. Full JSON-LD processing,
+  every optional feature, security, production suitability and latest-release status are not verified. self_hostable
+  is not inferred and no capability is invented or forced onto the framework.
+sources:
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/README.md
+  title: node-wot 0.9.2 — framework identity, TD 1.1 reference and binding requirements
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/thing-description.ts
+  title: node-wot 0.9.2 — TD 1.0/1.1 context constants and Thing representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/serdes.ts
+  title: node-wot 0.9.2 — TD parsing/defaults, form checks and serialization behavior
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/wot-impl.ts
+  title: node-wot 0.9.2 — consume/produce and unimplemented generic discover
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/helpers.ts
+  title: node-wot 0.9.2 — relaxed ExposedThingInit schema and ThingModel rejection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/validation.ts
+  title: node-wot 0.9.2 — isThingDescription reuses the initialization schema validator
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/package.json
+  title: node-wot 0.9.2 — fixed core release and declared license expression
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/LICENSE.md
+  title: node-wot 0.9.2 — EPL-2.0 OR W3C-20150513 license notice
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:52:13.902357+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version WoT implementation evidence executor
+record_created_at: '2026-10-21T01:55:33.848207+00:00'
+record_updated_at: '2026-10-21T01:55:33.848207+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: node_wot
+  acceptance_event_id: accept-20261021-node-wot-node_wot
+  reviewed_candidate_blob: a0520acfa819242929b1cc594101b1e5bba6b64e
+  reviewed_against_commit: 0cf0806de78ef964728b38c995dde0215dc94eae
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 0cf0806de78ef964728b38c995dde0215dc94eae
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/472
