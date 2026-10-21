@@ -57,3 +57,51 @@ semantic_review:
   verdict: acceptable_for_ordinary_acceptance
   review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999620964
   scope_zh: 独立评价仓库内有限一手摘录及此关系的方向、端点和条件；不声称核验全文或传输真实性。序列化不是新的独立审核。
+---
+id: quic_tls_version
+type: relation
+name_zh: RFC 9001 使用 RFC 8446 定义的 TLS 1.3 机制
+name_en: RFC 9001 uses TLS 1.3 mechanisms defined in RFC 8446
+source: quic_tls_rfc9001
+relation: uses
+target: tls13_rfc8446
+context:
+  version_context:
+    source: RFC 9001 (May 2021)
+    target: RFC 8446 (August 2018; explicit TLS13 normative reference)
+  conditions_zh: 仅表述固定 RFC 9001 使用其第 11.1 节 [TLS13] 明确指向 RFC 8446 的握手与密钥派生机制。QUIC 不承载 TLS 记录，而自行承担包保护和记录层职责；第 4.2 节也允许保留所需
+    TLS 1.3 功能且双方支持的更高 TLS 版本。本关系不把历史文档引用改成最新版本推荐，不推定部署安全或所有未来版本兼容。
+  conditions_en: Limited to RFC 9001 use of handshake and key-derivation mechanisms whose TLS13 normative reference in section
+    11.1 explicitly identifies RFC 8446. QUIC does not carry TLS records; it handles packet protection and record-layer responsibilities.
+    Section 4.2 permits later TLS versions only when both endpoints support the required features. This historical citation
+    is not a latest-version recommendation, deployment-security assertion or blanket future compatibility claim.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9001.html#section-3
+  title: 'RFC 9001 — Protocol Overview: TLS handshake, not TLS records'
+  language: en
+  accessed: '2026-10-20'
+- url: https://www.rfc-editor.org/rfc/rfc9001.html#section-4.2
+  title: RFC 9001 — TLS Version and conditions for later versions
+  language: en
+  accessed: '2026-10-20'
+- url: https://www.rfc-editor.org/rfc/rfc9001.html#section-5.1
+  title: 'RFC 9001 — Packet Protection Keys: TLS13 key derivation'
+  language: en
+  accessed: '2026-10-20'
+- url: https://www.rfc-editor.org/rfc/rfc9001.html#section-11.1
+  title: 'RFC 9001 — Normative References: TLS13 explicitly identifies RFC 8446'
+  language: en
+  accessed: '2026-10-20'
+record_created_at: '2026-10-20T23:56:39.179833+00:00'
+record_updated_at: '2026-10-21T00:00:36.051058+00:00'
+last_verified_at: '2026-10-20T23:56:39.179833+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  review_url: https://github.com/InteropAtlas/InteropAtlas/issues/276#issuecomment-6304539206
+  scope_zh: 独立核验 RFC 9001 第 3、4.2、5.1、11.1 节及明确 RFC 8446 端点，只接纳保留 TLS 集成和版本条件的 uses 范围；最终序列化结论见公开审查记录。
