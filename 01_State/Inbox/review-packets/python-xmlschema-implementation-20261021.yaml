@@ -1,0 +1,300 @@
+packet_id: python_xmlschema_implementation_20261021
+status: pending_independent_semantic_review
+baseline_commit: 4b5df1e00df57f1f94878da51f91ed363012ae23
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 接续已录 UBL 的 XML/XSD 路径：通用 schema_validation 查询仅有JSON/RDF库，不等于已有XSD验证实现证据。补一个固定、可核的软件先例而非随机新对象。
+- 仅既有 system/library、schema_validation 和 syntax 导航；relations 为空，不为了连通图而强加精确版次 implements，不动模型/关系含义/维护制度。
+- domains 的 schema/validation/structured_data 是已有自由标签，按本库范围人工选择，不从 UBL 自动继承 commerce。
+work_item_preflight:
+  repository_text_matches: []
+  search_scope_zh: 本次全量正式对象/候选身份检索与GitHub xmlschema Issue/PR检索未发现同主体并行intake；检索未命中不是全知保证。
+official_source_hashes:
+- path: README.rst
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/README.rst
+  local_path: official/README.rst
+  sha256: 4336f004ebaff02385ed427b115787fc347384495cf843b42e9cc5abb6292250
+  git_blob: 9640d769c9d3980f84803478cd3f2f4d20da48c1
+  fetched_at: '2026-10-21T06:39:45.537472+00:00'
+- path: LICENSE
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/LICENSE
+  local_path: official/LICENSE
+  sha256: de71695b2db6819ee4478ef39f5f202aab9f0c8750168c2986467ea8e5fa2997
+  git_blob: bbc27234e12c03566aeb1e561b90bf9b4e6379cb
+  fetched_at: '2026-10-21T06:39:48.245857+00:00'
+- path: pyproject.toml
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/pyproject.toml
+  local_path: official/pyproject.toml
+  sha256: 4c837fc23164093aa49575e6b56f46a0d40e2036c08dd8084fabc6701985dd7b
+  git_blob: f724d34ede417e4d76888cf7608520f7f75dffe0
+  fetched_at: '2026-10-21T06:39:50.410196+00:00'
+- path: xmlschema/__init__.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/__init__.py
+  local_path: official/xmlschema/__init__.py
+  sha256: 1b826695e99e96f9f661097f0a7344e373a4055ae58876c74282a50149d9758c
+  git_blob: 977a59db78a6a8592795dab3848085ed61f87eb2
+  fetched_at: '2026-10-21T06:39:52.790478+00:00'
+- path: xmlschema/settings.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/settings.py
+  local_path: official/xmlschema/settings.py
+  sha256: 6b304705912ae96ddfccfb51765d202698255cf1dbfb721330a5a1e4a1fdb1d5
+  git_blob: 8cf370bbf6fe08c05a2551e504b4e6069e901d46
+  fetched_at: '2026-10-21T06:39:55.064381+00:00'
+- path: xmlschema/validators/schemas.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/schemas.py
+  local_path: official/xmlschema/validators/schemas.py
+  sha256: f57962c63ed09718f5f28ed978a5827842818bb06cb42a1ce563984ac4472b33
+  git_blob: ad03b387854e362492dd9c01d6f517980a6f0be5
+  fetched_at: '2026-10-21T06:39:57.627618+00:00'
+- path: xmlschema/validators/simple_types.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/simple_types.py
+  local_path: official/xmlschema/validators/simple_types.py
+  sha256: 2368989f1b0e2b46a2228985c1d97c3acdd38c189879fdecd54faa2ae605daa6
+  git_blob: afcf63739f865838f7efcf6221597ef5ca6cc540
+  fetched_at: '2026-10-21T06:39:59.923383+00:00'
+- path: xmlschema/validators/complex_types.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/complex_types.py
+  local_path: official/xmlschema/validators/complex_types.py
+  sha256: 3dbd6383f0bf66c1a9047dd851618f52eb37a29cca785f3d70d719f83d812ba0
+  git_blob: 9ec0dc662fee2e3a4c3ed2dc806be08cd392e38e
+  fetched_at: '2026-10-21T06:40:02.516591+00:00'
+- path: xmlschema/resources/xml_resource.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/resources/xml_resource.py
+  local_path: official/xmlschema/resources/xml_resource.py
+  sha256: 99eadf28f2f686c6297730d83dd662477fbbe94beb1d1d9557e1cd8a84f8ab77
+  git_blob: b0eac9c0a77e7e526f23f20b55096c53e7d9349a
+  fetched_at: '2026-10-21T06:40:05.142636+00:00'
+- path: xmlschema/resources/parsers.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/resources/parsers.py
+  local_path: official/xmlschema/resources/parsers.py
+  sha256: 693369dc936b5064e9cd2d4a1ab20c071827db69273bef3dfe63940118b0095c
+  git_blob: 7d045af5a0abc826042db423ea3c11ccce56aaee
+  fetched_at: '2026-10-21T06:40:07.371807+00:00'
+- path: doc/usage.rst
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/doc/usage.rst
+  local_path: official/doc/usage.rst
+  sha256: 43dcf632474c204857f5290b192ab2c8280d2e303de166e6291e86b20464ea02
+  git_blob: df72e7f3f6c2b04105fa6630154fe7991494963b
+  fetched_at: '2026-10-21T06:40:09.741848+00:00'
+- path: doc/features.rst
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/doc/features.rst
+  local_path: official/doc/features.rst
+  sha256: 750913b4cd71abcfd7ebc7a17420cf6b369aac6c06d0c00df57715d282d2f124
+  git_blob: 3f289561e9c6a385f4cd10ff3de43f23e38eaf38
+  fetched_at: '2026-10-21T06:40:12.696246+00:00'
+- path: xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  local_path: official/xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  sha256: 4ea1bb11bdc8894ef2bca08b36910a8ab2b123c3e6dc8c1723d56ff5dfc5a9b8
+  git_blob: c75baaf5cce1dce0222f5b4571b405633e42421d
+  fetched_at: '2026-10-21T06:40:14.891896+00:00'
+- path: xmlschema/schemas/XSD_1.0/datatypes.xsd
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/schemas/XSD_1.0/datatypes.xsd
+  local_path: official/xmlschema/schemas/XSD_1.0/datatypes.xsd
+  sha256: 9b7fa77be9372687f654f5013177e3f87db0ce598e43f534d6d7c1628d513b37
+  git_blob: ffe6d4e9ffad70000182d63015a194a04ad9ab90
+  fetched_at: '2026-10-21T06:40:18.480411+00:00'
+- path: xmlschema/exceptions.py
+  url: https://raw.githubusercontent.com/sissaschool/xmlschema/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/exceptions.py
+  local_path: official/xmlschema/exceptions.py
+  sha256: cc625abaa10b96dca3b0cbcd03b125b4cf340969844d4b716529e6cfd0e2bff4
+  git_blob: b3fca07d503492a13193be4ed731ec5270fb911f
+  fetched_at: '2026-10-21T06:45:39.215223+00:00'
+package_registry_identity:
+  url: https://pypi.org/pypi/xmlschema/4.3.2/json
+  sha256: 9f777a93fb670f105615cd89290b1d12d76f7664058a8499686befd670d44e10
+  name: xmlschema
+  version: 4.3.2
+  project_urls:
+    Homepage: https://github.com/sissaschool/xmlschema
+  files:
+  - filename: xmlschema-4.3.2-py3-none-any.whl
+    sha256: cf5c970a30f6ebcb3da35260e694704cc0b6794d8ace46125bb2a95e38ed9307
+  - filename: xmlschema-4.3.2.tar.gz
+    sha256: f3b33a21a2b2cdc404ddc3fb599d8bc1dee90b155d547370672e6e684746b8d6
+  boundary_zh: PyPI版本/分发元数据用于身份核对；安装文件另与固定官方源码逐字节比较，不声称完整wheel供应链审计。
+objects:
+- candidate_id: python_xmlschema
+  candidate_path: 01_State/Inbox/candidates/python_xmlschema.yaml
+  candidate_blob: ecc47180f667b3c6d79608ac7dce40601dcd0636
+  preflight:
+    canonical_records: 207
+    existing_candidate_records: 210
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: python_xmlschema
+    type: system
+    kind: library
+    name_zh: xmlschema Python XSD 库
+    name_en: xmlschema Python XSD library
+    description_zh: 用于 XML Schema 验证及 XML 数据编解码的开源 Python 库；本记录固定到4.3.2，保留验证模式、资源策略和版次证据边界。
+    description_en: An open-source Python library for XML Schema validation and XML data encoding/decoding, pinned
+      here to 4.3.2 with validation-mode, resource-policy and edition-evidence boundaries.
+    version: 4.3.2
+    external_identifiers:
+    - namespace: github
+      value: sissaschool/xmlschema
+    - namespace: pypi
+      value: xmlschema
+    official_url: https://github.com/sissaschool/xmlschema
+    versions:
+    - version: 4.3.2
+      status: released
+      url: https://github.com/sissaschool/xmlschema/releases/tag/v4.3.2
+    domains:
+    - schema
+    - validation
+    - structured_data
+    capabilities:
+    - schema_validation
+    open_source: true
+    license_expression: MIT
+    scope_notes_zh: 固定 4.3.2 的 Python XSD 验证/编解码库，依赖 elementpath 和 Python XML 处理设施；官方声明 XSD 1.0/1.1，默认 XMLSchema
+      指向 XMLSchema10，XMLSchema11 需显式选择。默认 strict；lax 保留错误并可能将不可解码值置 None，skip 顶层解码可保留非法词法文本而不报告错误，不等于验证通过。资源默认 allow=all、defuse=remote，不是默认离线或所有输入均禁实体；本轮可信内存输入显式
+      allow=none、defuse=always，正常读取随包可信元模式，未测实体攻击或外部资源。默认忽略实例 schemaLocation；path 空选择默认可空泛通过，allow_empty=False 可要求报错。25例观察区分实例不符合、XML解析异常和模式构造异常；Decimal
+      示例保持该值，但将编码后的 Element 再解码会改变命名空间键和字典形状，不作通用无损往返保证。随包 XSD_1.0/XMLSchema.xsd 自述非规范且文档指向2004-03 PER，不能仅凭元模式复制或总体支持声明推出2004-10精确规范全符合；本批不建
+      implements。未跑 XSD1.1、W3C全套测试、UBL实例/业务规则、第三方互通或生产安全评估，不表示IA采用。
+    scope_notes_en: Fixed to the 4.3.2 Python XSD validation/encoding/decoding library, using elementpath and Python
+      XML facilities. Upstream declares XSD 1.0/1.1; XMLSchema defaults to XMLSchema10, while XMLSchema11 requires
+      explicit selection. Strict is default; lax retains errors and may substitute None, while top-level skip decoding
+      can retain invalid lexical text without reporting errors, not successful validation. Resource defaults are
+      allow=all and defuse=remote, not offline operation or entity prevention for every input. Trusted-memory tests
+      explicitly use allow=none and defuse=always; bundled trusted meta-schemas are read normally, with no external-resource
+      or entity-attack assessment. Instance schemaLocation hints are ignored by default; an empty path selection
+      can pass vacuously unless allow_empty=False is requested. Twenty-five observations distinguish instance violations,
+      XML parse exceptions and schema-construction exceptions. A Decimal value survives the tested conversion, but
+      decoding the encoded Element changes namespace keys and dictionary shape, not a general lossless round trip.
+      Bundled XSD_1.0/XMLSchema.xsd labels itself non-normative and points to a March 2004 PER; neither that copy
+      nor the general support claim alone proves full conformance to the precise October 2004 documents, so no implements
+      edge is added. XSD 1.1 execution, a full W3C suite, UBL/business rules, third-party interoperability, production
+      security and IA adoption are not established.
+    sources:
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/README.rst
+      title: xmlschema 4.3.2 — library identity, XSD support and default class
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/pyproject.toml
+      title: xmlschema 4.3.2 — 4.3.2 identity, Python and elementpath dependency
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/LICENSE
+      title: xmlschema 4.3.2 — MIT license text
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/features.rst
+      title: xmlschema 4.3.2 — strict/lax/skip modes and default loading policies
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/usage.rst
+      title: xmlschema 4.3.2 — schema validation and decoding APIs
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/settings.py
+      title: xmlschema 4.3.2 — resource and schema defaults
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/schemas.py
+      title: xmlschema 4.3.2 — default XSD class, validation selection and schema-location hints
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/resources/parsers.py
+      title: xmlschema 4.3.2 — parse errors distinct from validation errors
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+      title: xmlschema 4.3.2 — bundled non-normative meta-schema and March 2004 PER documentation pointer
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:48:45.103038+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XSD library evidence executor
+relations: []
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: python_xmlschema
+  rationale_zh: XML结构/类型验证和编解码实现先例，不等于UBL业务符合性或精确规范认证。
+supplementary_verification:
+  library_version: 4.3.2
+  source_commit: 627c179541ec2e79c0b42c1d493074f7450324c1
+  python_version: 3.12.14
+  dependency_versions:
+    xmlschema: 4.3.2
+    elementpath: 5.1.4
+  observed_at: '2026-10-21T06:46:33.094632+00:00'
+  local_examples_passed: 25
+  installed_fixed_source_matches:
+  - xmlschema/__init__.py
+  - xmlschema/settings.py
+  - xmlschema/validators/schemas.py
+  - xmlschema/validators/simple_types.py
+  - xmlschema/validators/complex_types.py
+  - xmlschema/resources/xml_resource.py
+  - xmlschema/resources/parsers.py
+  - xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  - xmlschema/schemas/XSD_1.0/datatypes.xsd
+  - xmlschema/exceptions.py
+  network_attempts: []
+  cases:
+  - case: fixed_version_and_default_class
+    result: true
+  - case: resource_defaults_are_not_offline_policy
+    result: true
+  - case: explicit_restricted_trusted_input_policy
+    result: true
+  - case: well_formed_valid_memory_instance
+    result: true
+  - case: bad_decimal_is_invalid
+    result: true
+  - case: negative_nonnegative_integer_is_invalid
+    result: true
+  - case: missing_required_attribute_is_invalid
+    result: true
+  - case: sequence_order_is_checked
+    result: true
+  - case: enumeration_is_checked
+    result: true
+  - case: namespace_mismatch_is_invalid
+    result: true
+  - case: unknown_child_is_invalid
+    result: true
+  - case: validate_raises_for_instance_violation
+    result:
+      exception: XMLSchemaDecodeError
+  - case: parse_error_distinct_from_schema_violation
+    result:
+      exception: XMLResourceParseError
+  - case: schema_construction_error_distinct
+    result:
+      exception: XMLSchemaParseError
+  - case: decimal_decode_uses_decimal
+    result: true
+  - case: schema_default_applied_when_enabled
+    result: true
+  - case: schema_default_can_be_disabled
+    result: true
+  - case: lax_decode_reports_error_and_none
+    result: true
+  - case: skip_decode_retains_invalid_text
+    result: true
+  - case: synthetic_encoded_element_is_schema_valid
+    result: true
+  - case: parsed_element_namespace_mapping_changes_dictionary_shape
+    result: true
+  - case: empty_path_default_can_vacuously_pass
+    result: true
+  - case: empty_path_rejected_when_requested
+    result: true
+  - case: instance_location_hint_ignored_by_default
+    result: true
+  - case: no_network_attempts
+    result: true
+  boundary_zh: 仅可信合成内存 XSD/XML，显式 allow=none / defuse=always，正常使用随包可信元模式；无网络尝试、无外部实体/资源测试。错误语法/异常导入的测试脚本错误已修；最初字典完全往返预期被实际命名空间键变化否定，最终如实记录变化而非隐去失败。25例不是W3C全符合性或真实UBL验证。
