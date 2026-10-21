@@ -1,0 +1,109 @@
+id: style_dictionary
+type: system
+kind: software
+name_zh: Style Dictionary 设计令牌构建工具
+name_en: Style Dictionary design-token build tool
+description_zh: 面向设计令牌转换与多平台样式输出的开源构建工具；固定5.7.0，仅记录有界内置转换/CSS输出先例及格式支持、类型验证和引用处理限制。
+description_en: An open-source build tool for design-token transformations and cross-platform style output, pinned
+  to 5.7.0; records bounded built-in processing/CSS-output precedents and format-support, type-validation and reference-handling
+  limits.
+version: 5.7.0
+external_identifiers:
+- namespace: github
+  value: style-dictionary/style-dictionary
+official_url: https://github.com/style-dictionary/style-dictionary
+versions:
+- version: 5.7.0
+  status: released
+  url: https://github.com/style-dictionary/style-dictionary/releases/tag/v5.7.0
+domains:
+- design_system
+- data_format
+capabilities:
+- design_token_exchange
+open_source: true
+license_expression: Apache-2.0
+scope_notes_zh: 固定 npm style-dictionary 5.7.0，官方 tag v5.7.0 指向745264a62d01037581c6654fb4ac66bb3d245f07；Node.js要求>=22，提供CLI与程序API的设计令牌构建工具，沿用system/software，不新增工具类型。固定文档明示DTCG2025.10尚未完整支持，本切片只记录现有设计令牌交换能力和处理先例，不建立implements。detectDtcgSyntax只寻找$value/$type键，不验证令牌结构或值；convertToDTCG克隆输入并转换value/type/description键，默认可将共同$type提升到组，applyTypesToGroup=false可保留逐token类型；它不把size等旧类型名称改成DTCG类型，也不构成完整格式迁移/验证。运行时可将组类型下放到token并保留子组覆盖；在本例的混合legacy与DTCG输入里自动选择DTCG，legacy
+  value token未出现在输出，不能承诺混合格式保留。number类型配非数字字符串也可继续处理，成功不证明类型符合。固定内置转换支持本例的duration毫秒/秒转换和$root命名；CSS默认输出解析后的值，outputReferences=true可保留CSS变量引用，不保证任意输出格式无损往返。缺失/循环引用在本例明确brokenReferences=throw时抛错，当前源码默认亦为throw；值转换异常由wrapper保留转换前的值并汇总错误，warnings=error才将该类汇总变为异常，日志设置/输出成功不能替代输入验证。19项可信合成例仅使用内存token、显式普通对象配置、空source/include与内置转换/格式化，一个CSS文件写入新临时目录；未加载用户配置或外部扩展，未测ZIP、全部平台输出、真实视觉/UI、任意输入安全、全DTCG符合性、第三方互通或IA采用。16份固定源指纹、12份安装文件逐字一致，以及仅VERSION占位符按官方发布脚本替换的一个文件分别留痕；npm
+  tarball integrity核对不等于签名/证明或完整依赖供应链审计。Apache-2.0按官方包元数据与LICENSE记录，不作为法律适用性意见。
+scope_notes_en: Pinned to npm style-dictionary 5.7.0 and official tag v5.7.0 at commit 745264a62d01037581c6654fb4ac66bb3d245f07.
+  This design-token build tool requires Node.js >=22 and offers a CLI and programmatic API; it uses the existing
+  system/software identity, not a new tool kind. Fixed documentation explicitly says DTCG2025.10 is not fully supported.
+  This slice records the existing design_token_exchange capability and processing precedent without an implements
+  relation. detectDtcgSyntax only looks for $value/$type keys, not valid structure or values. convertToDTCG clones
+  input and renames value/type/description keys, optionally hoisting a common $type to groups by default; applyTypesToGroup=false
+  keeps per-token types. It does not translate legacy type names such as size into DTCG types or provide complete
+  migration/validation. Runtime group types can be delegated to tokens with child overrides. In the tested mixed
+  legacy/DTCG input, automatic DTCG selection left legacy value tokens out of the output; mixed-format preservation
+  is not promised. A number token with a nonnumeric string can also continue processing, so success does not prove
+  type validity. Built-in transforms handle the tested duration milliseconds/seconds and $root names. CSS defaults
+  to resolved values, while outputReferences=true can preserve CSS variable references; arbitrary-format lossless
+  round trips are not established. Missing/circular references throw with the probe’s explicit brokenReferences=throw
+  setting, also the current source default. On a value-transform exception, the wrapper preserves the prior value
+  and collects diagnostics; warnings=error makes that class of collected error throw. Logging/output success is
+  not input validation. Nineteen trusted synthetic examples use only inline tokens, explicit plain-object config,
+  empty source/include and built-in transforms/formats, writing one CSS file to a fresh temporary directory. User
+  config, external extensions, ZIP, every platform output, actual visual/UI behavior, arbitrary-input safety, full
+  DTCG conformance, third-party interoperability and IA adoption were not tested. Sixteen fixed source fingerprints,
+  twelve byte-identical installed files and one documented release-script VERSION substitution are recorded separately.
+  npm tarball integrity matching is not a signature/attestation or whole-dependency supply-chain audit. Apache-2.0
+  is recorded from official package metadata and LICENSE, not as a legal-suitability opinion.
+sources:
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/README.md
+  title: Style Dictionary 5.7.0 — design-token build tool, CLI and Node API
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/package.json
+  title: Style Dictionary 5.7.0 — fixed package identity, Node engine and Apache-2.0 declaration
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/LICENSE
+  title: Style Dictionary 5.7.0 — Apache License 2.0
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/docs/src/content/docs/info/DTCG.mdx
+  title: Style Dictionary 5.7.0 — explicit incomplete support for DTCG2025.10
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/StyleDictionary.js
+  title: Style Dictionary 5.7.0 — initialization, dialect selection, platform processing and configurable errors
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/convertToDTCG.js
+  title: Style Dictionary 5.7.0 — partial key conversion and optional common-type hoisting
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/utils/detectDtcgSyntax.js
+  title: Style Dictionary 5.7.0 — syntax detection is key-based
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/transforms.js
+  title: Style Dictionary 5.7.0 — built-in name and duration transforms
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/common/formats.js
+  title: Style Dictionary 5.7.0 — built-in output formats
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/lib/transform/token.js
+  title: Style Dictionary 5.7.0 — transform error fallback behavior
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T12:18:22.139491+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed design-token implementation evidence executor
+record_created_at: '2026-10-21T12:29:45.981573+00:00'
+record_updated_at: '2026-10-21T12:29:45.981573+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: style_dictionary
+  acceptance_event_id: accept-20261021-style-dictionary-style-dictionary
+  reviewed_candidate_blob: a695d694850f25ecef38a2e859ca82d5cdc1bee6
+  reviewed_against_commit: 3cf8016bd93800c0e519be8bc737db67a3612e93
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 3cf8016bd93800c0e519be8bc737db67a3612e93
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/503
