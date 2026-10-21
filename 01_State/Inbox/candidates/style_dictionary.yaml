@@ -15,11 +15,11 @@ locators:
 - url: https://www.npmjs.com/package/style-dictionary/v/5.7.0
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - style_dictionary
   reasons:
-  - 主体为官方 style-dictionary npm 分发包和对应仓库的设计令牌构建工具，包含 CLI 与 Node.js API；沿用已有 system/software 和 github 身份。
-  - 不与 DTCG 格式、Material 指南、设计系统实例或第三方扩展合并；历史 amzn 仓库检索未见现存记录，不据此进行身份合并。
+  - 经独立语义审核由 accept-20261021-style-dictionary-style-dictionary 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 固定5.7.0的公开文档明示DTCG2025.10未完整支持；relations为空，不以语法检测、键转换或成功生成CSS作为规范符合性。
@@ -27,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
