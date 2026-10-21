@@ -1,0 +1,52 @@
+id: nlohmann_json_implements_json_rfc8259
+type: relation
+name_zh: nlohmann/json 3.12.0 实现 JSON 文本解析与序列化
+name_en: nlohmann/json 3.12.0 implements JSON text parsing and serialization
+source: nlohmann_json
+relation: implements
+target: json_rfc8259
+context:
+  capabilities:
+  - data_serialization
+  version_context:
+    source: JSON for Modern C++ 3.12.0, upstream commit 55f93686c01528224f448c19128836e7df245f72
+    target: JSON, RFC 8259 (2017)
+  conditions_zh: 限定为固定版本文档明确按 RFC 8259 描述的 JSON 文本数据处理。默认 JSON 路径不启用注释扩展，字符串和错误行为按 parse/dump 参数；不将库内二进制值或可选扩展当作
+    RFC 8259 语法。默认 int64/uint64/double 数值限制、浮点舍入与对象键排序适用，不保证任意精度或词法无损往返，NaN 赋值序列化为 null。本关系不证明完整符合性认证、JSON Schema
+    验证、MCP/WoT/CloudEvents 整体实现、规范化签名或跨应用互通。
+  conditions_en: Limited to the fixed-release JSON text operations documented with RFC 8259. The default JSON path
+    does not enable comment extensions; string/error behavior follows parse/dump parameters. Internal binary values
+    or optional extensions are not treated as RFC 8259 syntax. Default int64/uint64/double range limits, floating-point
+    rounding and sorted object keys apply; arbitrary precision or lexical-lossless round trips are not guaranteed,
+    and assigned NaN serializes as null. This does not certify full conformance, JSON Schema validation, full MCP/WoT/CloudEvents
+    implementation, canonical signatures or cross-application interoperability.
+evidence:
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/README.md
+  title: JSON for Modern C++ 3.12.0 — library identity, C++11 integration, serialization and encoding
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/parse.md
+  title: JSON for Modern C++ 3.12.0 — parse parameters, encoding, errors and comment extension
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/dump.md
+  title: JSON for Modern C++ 3.12.0 — JSON serialization and strict UTF-8 error handling
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/types/number_handling.md
+  title: JSON for Modern C++ 3.12.0 — RFC 8259 number handling and finite-precision boundaries
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/object_order.md
+  title: JSON for Modern C++ 3.12.0 — default sorted object keys
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:10:32.968715+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version JSON serialization evidence executor
+record_created_at: '2026-10-21T01:14:39.614560+00:00'
+record_updated_at: '2026-10-21T01:14:39.614560+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
