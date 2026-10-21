@@ -1,0 +1,96 @@
+id: python_geojson
+type: system
+kind: library
+name_zh: geojson Python 地理数据编解码库
+name_en: geojson Python geospatial encoding/decoding library
+description_zh: 面向GeoJSON几何、要素与要素集合的开源Python对象和编解码库；本记录固定3.3.0，并保留精度、局部检查及归一化边界。
+description_en: An open-source Python object and encoding/decoding library for GeoJSON geometries, features and
+  feature collections, pinned to 3.3.0 with precision, partial-check and normalization boundaries.
+version: 3.3.0
+external_identifiers:
+- namespace: github
+  value: jazzband/geojson
+- namespace: pypi
+  value: geojson
+official_url: https://github.com/jazzband/geojson
+versions:
+- version: 3.3.0
+  status: released
+  url: https://pypi.org/project/geojson/3.3.0/
+domains:
+- data_format
+- structured_data
+capabilities:
+- data_serialization
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: 固定3.3.0，提供官方README指向RFC7946的七种几何类型及Feature/FeatureCollection对象、编解码和Python __geo_interface__ 适配。不是完整GIS或OGC
+  API服务。几何构造默认不执行validate检查，坐标默认舍入到6位小数，loads创建几何对象时也会舍入；显式precision可改变精度，不作无损或任意精度保证。is_valid仅汇总局部errors：Point检查2/3个数值，Polygon检查环长度/闭合但不完整检查每个位置维数，也不重排环方向；Feature检查委托给geometry，不验证properties类型。不能把is_valid=True当完整RFC符合性；RFC对超3坐标使用SHOULD
+  NOT，且兼容性上不建议解析器拒绝非右手规则Polygon，不能把库行为改写成更强规范要求。Feature的null properties归一化为{}，null geometry保留；未知type默认解码成普通dict，strict
+  coercion可拒绝。默认dumps拒绝非有限数，默认loads拒绝NaN/Infinity常量；调用方可覆盖这些默认设置，且Point的简单检查本身可接受NaN。21项可信内存观察覆盖9类对象小样本与这些边界；当前没有可选simplejson，其存在时mapping的某些回退路径可不同。未建立CRS转换、地理范围/拓扑、反经线、bbox、完整符合性、安全、第三方互通或IA采用结论。
+scope_notes_en: 'Fixed to 3.3.0, providing seven geometry types plus Feature/FeatureCollection, encoding/decoding
+  and Python __geo_interface__ adaptation, with upstream README links to RFC 7946. Not a full GIS or an OGC API
+  service. Geometry construction does not validate by default; coordinates round to six decimal places, including
+  when loads constructs geometry objects. Explicit precision changes rounding, not a lossless or arbitrary-precision
+  guarantee. is_valid aggregates local errors: Point checks two/three numeric values; Polygon checks ring length/closure
+  but not every position dimension and does not rewrite winding; Feature delegates to geometry without validating
+  properties type. is_valid=True is not full RFC conformance. The RFC uses SHOULD NOT for positions beyond three
+  elements and advises parsers not to reject non-right-hand-rule Polygons for compatibility; library behavior must
+  not be elevated into stricter normative requirements. Null Feature properties normalize to {}, while null geometry
+  remains null. Unknown types decode to plain dict by default; strict coercion can reject them. Default dumps rejects
+  nonfinite numbers and default loads rejects NaN/Infinity constants, but callers can override these policies, and
+  the simple Point check itself can accept NaN. Twenty-one trusted-memory observations cover nine object classes
+  and these boundaries. Optional simplejson was absent; its presence can change some mapping fallback paths. CRS
+  transformation, geographic range/topology, antimeridian handling, bbox, full conformance, security, third-party
+  interoperability and IA adoption are not established.'
+sources:
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/README.rst
+  title: geojson 3.3.0 — identity, explicit RFC 7946 object classes, precision and simple validation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/setup.py
+  title: geojson 3.3.0 — package identity and Python range
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/LICENSE.rst
+  title: geojson 3.3.0 — BSD three-clause license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/geometry.py
+  title: geojson 3.3.0 — coordinate rounding and geometry checks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/codec.py
+  title: geojson 3.3.0 — default JSON number policies and load hooks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/base.py
+  title: geojson 3.3.0 — non-strict type conversion and is_valid delegation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/feature.py
+  title: geojson 3.3.0 — Feature properties/geometry normalization and checks
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/jazzband/geojson/blob/f14b85252bd93eb336f9918a3cf8c601b6094714/geojson/mapping.py
+  title: geojson 3.3.0 — geo interface mapping and optional simplejson fallback
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T07:34:27.995529+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed GeoJSON library evidence executor
+record_created_at: '2026-10-21T07:43:15.262148+00:00'
+record_updated_at: '2026-10-21T07:43:15.262148+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_geojson
+  acceptance_event_id: accept-20261021-python-geojson-python-geojson
+  reviewed_candidate_blob: fa9ce570e88f2bf1f92d63dec6fa1f737d9bd69d
+  reviewed_against_commit: bcc66f0f246a1a6965756038b095734b173ecaad
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: bcc66f0f246a1a6965756038b095734b173ecaad
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/489
