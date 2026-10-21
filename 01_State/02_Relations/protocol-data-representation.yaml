@@ -1,0 +1,104 @@
+id: mcp_uses_json_schema_2020_12
+type: relation
+name_zh: MCP 2025-11-25 使用 JSON Schema 2020-12 默认方言
+name_en: MCP 2025-11-25 uses JSON Schema 2020-12 as its default dialect
+source: mcp_2025_11_25
+relation: uses
+target: json_schema_2020_12
+context:
+  version_context:
+    source: MCP 2025-11-25
+    target: JSON Schema Draft 2020-12
+  conditions_zh: 仅表述 MCP 2025-11-25 中 Schema 的默认方言和最低支持要求：缺少 $schema 时按 2020-12 解释，客户端与服务端须支持此方言；显式 $schema 可指定其他方言，须依声明或默认方言验证并适当报告不支持的方言。不是所有
+    MCP Schema 都只能使用 2020-12，也不证明具体实现符合 MCP 或覆盖全部协议要求。
+  conditions_en: 'Limited to the dated MCP schema default and minimum support: absent $schema means 2020-12, which clients
+    and servers must support. An explicit $schema may select another dialect; validation follows the declared or default dialect,
+    with unsupported dialects reported appropriately. This is not an exclusive-dialect rule or implementation conformance
+    claim.'
+evidence:
+- url: https://modelcontextprotocol.io/specification/2025-11-25/basic#json-schema-usage
+  title: MCP 2025-11-25 — JSON Schema Usage, Schema Dialect and Implementation Requirements
+  language: en
+  accessed: '2026-10-21'
+- url: https://json-schema.org/draft/2020-12
+  title: JSON Schema Draft 2020-12 — target specification identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 8259 JSON 表示
+name_en: WoT Thing Description 1.1 uses RFC 8259 JSON representation
+source: wot_td_1.1
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 8259
+  conditions_zh: 仅表述固定 2023-12-05 推荐标准中事物描述（TD）实例的 JSON 序列化；第 6 节明确引用 RFC 8259 第 8.1 节的开放生态编码要求，包括 UTF-8 和不得添加 BOM。该表示关系不证明被描述设备的能力、传输绑定或任意实现之间的互通。
+  conditions_en: Limited to TD instance JSON serialization in the fixed 2023-12-05 Recommendation. Section 6 invokes RFC 8259
+    section 8.1 for open-ecosystem encoding, including UTF-8 and no added BOM. This representation relation does not certify
+    device capabilities, transport bindings or implementation interoperability.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
+  title: WoT Thing Description 1.1 — Section 6 TD Representation Format and G.1 RFC8259 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1
+  title: RFC 8259 — Character Encoding
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json_ld
+type: relation
+name_zh: WoT 事物描述 1.1 使用 JSON-LD 1.1 语法
+name_en: WoT Thing Description 1.1 uses JSON-LD 1.1 syntax
+source: wot_td_1.1
+relation: uses
+target: json_ld_1.1
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: JSON-LD 1.1, W3C Recommendation 2020-07-16
+  conditions_zh: 仅表述固定事物描述 1.1 的 JSON 表示与 JSON-LD 1.1 语法对齐，以支持上下文扩展和语义处理；第 6 节允许按原始 JSON 或用 JSON-LD 1.1 处理器处理，不要求每个实现执行 JSON-LD
+    展开或远程上下文获取。该关系不推定设备互通、安全性或 IA 已采用 JSON-LD。
+  conditions_en: Limited to the fixed TD 1.1 JSON representation using JSON-LD 1.1 syntax for context extensions and semantic
+    processing. Section 6 permits raw JSON or JSON-LD 1.1 processing; this does not require every implementation to expand
+    JSON-LD or fetch remote contexts, certify interoperability/security, or assert IA adoption.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
+  title: WoT Thing Description 1.1 — Sections 1.1 and 6; G.1 JSON-LD 1.1 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
+  title: JSON-LD 1.1 — fixed W3C Recommendation identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
