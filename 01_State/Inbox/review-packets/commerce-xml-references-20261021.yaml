@@ -1,0 +1,304 @@
+packet_id: commerce_xml_references_20261021
+status: pending_independent_semantic_review
+baseline_commit: 3c855d67a9ab6c8a3992f0fe60dca11fa889cb52
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 从现有 commerce 导航的 UBL 2.3 出发：该对象尚无关系且 XML/XSD 规范端点未录。一个连贯切片补其实际引用的三份精确文档和三条有条件 uses，不随机替换为新版。
+- 既有 artifact/specification、data_serialization/schema_validation 与 syntax 导航；data/structured_data 是已有自由标签，按各文档范围人工选择，不从
+  UBL 继承 commerce。
+- 保持原 UBL 对象、全部旧关系、分类及读取机制；本次仅文献证据，不运行 XML 解析器或验证 UBL 实例，不作软件 implements、兼容性、安全、法律适用或 IA 采用结论。
+source_evidence:
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  local_path: official/ubl-2.3.html
+  sha256: 5ed4e54d64e84871f317c972a1c56d734411f50703c686dab8b3e310ac2c4d97
+  git_blob: ee908367823b2d66951683cc1a54aabbc313d818
+  fetched_at: '2026-10-21T06:19:40.951295+00:00'
+- url: https://www.w3.org/TR/2000/REC-xml-20001006
+  local_path: official/xml-1.0-second-edition.html
+  sha256: e5350fb462ada6babfc43d72263a955bddf78605180457c6e006886f60a89b67
+  git_blob: 621927d4b2dc2e9fc42013dd08b97d55d7dc11fb
+  fetched_at: '2026-10-21T06:19:44.055502+00:00'
+- url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+  local_path: official/xmlschema-1-second-edition.html
+  sha256: 92bfd116316332b1153941436430afbdb2040e036d5fb2d21d4c8fba36a7765a
+  git_blob: ca9f81924a9dcf7c5223915f6c51cba7e3ac6bb9
+  fetched_at: '2026-10-21T06:19:46.523630+00:00'
+- url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+  local_path: official/xmlschema-2-second-edition.html
+  sha256: 980de872aa2c50013d5202176eb85eef3f183a7df635fdcb6b4aa34c1c12eb72
+  git_blob: 0af03d962477a06f891488124e1299cc82086f21
+  fetched_at: '2026-10-21T06:19:49.168604+00:00'
+existing_endpoints:
+- id: ubl_2.3
+  path: 01_State/01_Objects/ubl_2.3.yaml
+  git_blob: 7353032cf21f7ade2c654bee1e36de60c2330733
+  unchanged: true
+- id: data_serialization
+  path: 01_State/01_Objects/data_serialization.yaml
+  git_blob: 1981b576ca8d9cfad8bf0a5159d4ae43dca69d6e
+  unchanged: true
+- id: schema_validation
+  path: 01_State/01_Objects/schema_validation.yaml
+  git_blob: 73f565018cb0baff1c521ff3f90aff6c2061e147
+  unchanged: true
+objects:
+- candidate_id: xml_1.0_second_edition
+  candidate_path: 01_State/Inbox/candidates/xml_1.0_second_edition.yaml
+  candidate_blob: a4c54d4ec6e5cf7fc7b82bcefa50cff242d2f8e3
+  preflight:
+    canonical_records: 204
+    existing_candidate_records: 207
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors: []
+    canonical_id_exists: false
+  proposed_record:
+    id: xml_1.0_second_edition
+    type: artifact
+    kind: specification
+    name_zh: XML 1.0（第二版）
+    name_en: Extensible Markup Language (XML) 1.0 (Second Edition)
+    description_zh: W3C 固定 2000 推荐文档，规定 XML 1.0 标记语法、良构约束及处理器要求。
+    description_en: The fixed 2000 W3C Recommendation specifying XML 1.0 markup syntax, well-formedness constraints
+      and processor requirements.
+    version: 1.0 (Second Edition)
+    external_identifiers:
+    - namespace: w3c
+      value: REC-xml-20001006
+    official_url: https://www.w3.org/TR/2000/REC-xml-20001006
+    versions:
+    - version: 1.0 (Second Edition)
+      status: recommendation
+      date: '2000-10-06'
+      url: https://www.w3.org/TR/2000/REC-xml-20001006
+    domains:
+    - data
+    - structured_data
+    capabilities:
+    - data_serialization
+    scope_notes_zh: 版次固定为 UBL 2.3 明确引用的 2000 第二版；文档说明该版汇入勘误而非新的 XML 版本，不代表现行 XML 全族。第 2.1/2.8/5.1 节区分良构、基于 DTD 的有效性和验证/非验证处理器；这些不是
+      XSD 验证或业务符合性。第 4.3.3 节要求 XML 处理器支持 UTF-8 和 UTF-16，不意味着所有 XML 必须采用 UTF-8；未核任何处理库、外部实体加载策略或部署安全。
+    scope_notes_en: Fixed to the 2000 second edition explicitly cited by UBL 2.3; it incorporates errata rather
+      than defining a new XML version and does not represent the current XML family. Sections 2.1/2.8/5.1 distinguish
+      well-formedness, DTD validity and validating/non-validating processors, not XSD validation or business conformance.
+      Section 4.3.3 requires processor support for UTF-8 and UTF-16, not exclusive UTF-8 use. No library, external-entity
+      loading policy or deployment security is assessed.
+    sources:
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006
+      title: Extensible Markup Language (XML) 1.0 (Second Edition) — fixed W3C Recommendation 2000-10-06
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+- candidate_id: xml_schema_structures_2004
+  candidate_path: 01_State/Inbox/candidates/xml_schema_structures_2004.yaml
+  candidate_blob: 7b1730abb8c040b4fd4f1adec5b464bf5bd8f335
+  preflight:
+    canonical_records: 204
+    existing_candidate_records: 207
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors: []
+    canonical_id_exists: false
+  proposed_record:
+    id: xml_schema_structures_2004
+    type: artifact
+    kind: specification
+    name_zh: XML Schema 第 1 部分：结构（2004 第二版）
+    name_en: 'XML Schema Part 1: Structures (Second Edition, 2004)'
+    description_zh: W3C 固定 2004 推荐文档，规定 XML Schema 结构组件、模式有效性评估及验证后信息集。
+    description_en: The fixed 2004 W3C Recommendation defining XML Schema structural components, schema-validity
+      assessment and the post-schema-validation infoset.
+    version: Second Edition (2004-10-28)
+    external_identifiers:
+    - namespace: w3c
+      value: REC-xmlschema-1-20041028
+    official_url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+    versions:
+    - version: Second Edition (2004-10-28)
+      status: recommendation
+      date: '2004-10-28'
+      url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+    domains:
+    - data
+    - structured_data
+    capabilities:
+    - schema_validation
+    scope_notes_zh: 独立于第 2 部分数据类型的固定文档主体，第二版汇入更正而非新版本，不以后来版次替代。第 2.1 节的评估包含局部验证、后代结果与信息集扩充；模式构造错误与实例验证结果在第 5 节分开。既有
+      schema_validation 能力仅指这些规范化约束，不表示某个验证器、完整 UBL 符合性或具体业务规则已经通过。
+    scope_notes_en: 'A fixed document distinct from Part 2: Datatypes; the second edition incorporates corrections
+      rather than introducing a new version and is not replaced here by a later edition. Section 2.1 assessment
+      combines local validation, descendant outcomes and infoset augmentation. Section 5 distinguishes schema-construction
+      errors from instance-validation outcomes. The existing schema_validation capability refers only to these specified
+      constraints, not a tested validator, complete UBL conformance or business-rule compliance.'
+    sources:
+    - url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+      title: 'XML Schema Part 1: Structures (Second Edition, 2004) — fixed W3C Recommendation 2004-10-28'
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+- candidate_id: xml_schema_datatypes_2004
+  candidate_path: 01_State/Inbox/candidates/xml_schema_datatypes_2004.yaml
+  candidate_blob: 7babe9e284a7da7f07038ab78afb11e5a0cd8a05
+  preflight:
+    canonical_records: 204
+    existing_candidate_records: 207
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors: []
+    canonical_id_exists: false
+  proposed_record:
+    id: xml_schema_datatypes_2004
+    type: artifact
+    kind: specification
+    name_zh: XML Schema 第 2 部分：数据类型（2004 第二版）
+    name_en: 'XML Schema Part 2: Datatypes (Second Edition, 2004)'
+    description_zh: W3C 固定 2004 推荐文档，规定 XML Schema 数据类型的值空间、词法空间和约束分面。
+    description_en: The fixed 2004 W3C Recommendation defining XML Schema datatype value spaces, lexical spaces
+      and constraining facets.
+    version: Second Edition (2004-10-28)
+    external_identifiers:
+    - namespace: w3c
+      value: REC-xmlschema-2-20041028
+    official_url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+    versions:
+    - version: Second Edition (2004-10-28)
+      status: recommendation
+      date: '2004-10-28'
+      url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+    domains:
+    - data
+    - structured_data
+    capabilities:
+    - schema_validation
+    scope_notes_zh: 这是数据类型设施文档，不是第 1 部分结构验证的替身或软件；第二版汇入更正而非新版本。第 2/3/4 节区分值与词法表示、内置类型与类型派生/分面，既有 schema_validation
+      归属限数据类型约束。不能据此推出某业务代码表的当前值集、任意语言数值无损映射或完整 UBL 符合性。
+    scope_notes_en: This datatype-facility document is neither a substitute for Part 1 structural validation nor
+      software; its second edition incorporates corrections rather than introducing a new version. Sections 2/3/4
+      distinguish values from lexical representations, built-in types and datatype derivation/facets. The schema_validation
+      assignment is limited to datatype constraints; no current business code-list contents, lossless mapping to
+      arbitrary programming-language numbers or complete UBL conformance is inferred.
+    sources:
+    - url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+      title: 'XML Schema Part 2: Datatypes (Second Edition, 2004) — fixed W3C Recommendation 2004-10-28'
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+relations:
+- proposal_id: ubl_2_3_uses_xml_1_0_second_edition
+  proposed_record:
+    id: ubl_2_3_uses_xml_1_0_second_edition
+    type: relation
+    name_zh: UBL 2.3 使用 XML 1.0（第二版）
+    name_en: UBL 2.3 uses Extensible Markup Language (XML) 1.0 (Second Edition)
+    source: ubl_2.3
+    relation: uses
+    target: xml_1.0_second_edition
+    context:
+      version_context:
+        source: UBL 2.3, OASIS Standard 2021-06-15
+        target: Extensible Markup Language (XML) 1.0 (Second Edition), W3C Recommendation 2000-10-06
+      conditions_zh: UBL 2.3 规范性 XML 表示使用其 §1.4 指定的 XML 1.0 第二版。§4.3 要求编码声明，UTF-8 为 SHOULD 而非 MUST；XML 良构不等于 UBL
+        模式或业务符合性。非规范替代表示与任意扩展内容不据此扩为同一符合性主张。
+      conditions_en: The normative XML representation uses the second edition named in UBL 2.3 section 1.4. Section
+        4.3 requires an encoding declaration but only SHOULD for UTF-8. XML well-formedness is not UBL schema or
+        business conformance. No equivalent conformance claim is extended to non-normative alternative representations
+        or arbitrary extension content.
+    evidence:
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+      title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006
+      title: Extensible Markup Language (XML) 1.0 (Second Edition) — fixed W3C Recommendation
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+- proposal_id: ubl_2_3_uses_xml_schema_structures_2004
+  proposed_record:
+    id: ubl_2_3_uses_xml_schema_structures_2004
+    type: relation
+    name_zh: UBL 2.3 使用 XML Schema 第 1 部分：结构（2004 第二版）
+    name_en: 'UBL 2.3 uses XML Schema Part 1: Structures (Second Edition, 2004)'
+    source: ubl_2.3
+    relation: uses
+    target: xml_schema_structures_2004
+    context:
+      version_context:
+        source: UBL 2.3, OASIS Standard 2021-06-15
+        target: 'XML Schema Part 1: Structures (Second Edition, 2004), W3C Recommendation 2004-10-28'
+      conditions_zh: UBL 2.3 §1.4/3.1/6.1 使用固定 Structures 第二版定义其规范性 XSD 表示；§4.2 IND1 要求实例通过对应模式。§4.1/6.1 还有模式不能完全表达的文档与扩展约束，因此
+        XSD 验证不是完整 UBL 符合性，更不是交易双方业务互通证明。
+      conditions_en: UBL 2.3 sections 1.4/3.1/6.1 use the fixed Structures second edition for normative XSD representations;
+        section 4.2 IND1 requires corresponding-schema validation. Sections 4.1/6.1 retain additional document and
+        extension constraints, so XSD validation alone proves neither complete UBL conformance nor trading-partner
+        interoperability.
+    evidence:
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+      title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+      title: 'XML Schema Part 1: Structures (Second Edition, 2004) — fixed W3C Recommendation'
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+- proposal_id: ubl_2_3_uses_xml_schema_datatypes_2004
+  proposed_record:
+    id: ubl_2_3_uses_xml_schema_datatypes_2004
+    type: relation
+    name_zh: UBL 2.3 使用 XML Schema 第 2 部分：数据类型（2004 第二版）
+    name_en: 'UBL 2.3 uses XML Schema Part 2: Datatypes (Second Edition, 2004)'
+    source: ubl_2.3
+    relation: uses
+    target: xml_schema_datatypes_2004
+    context:
+      version_context:
+        source: UBL 2.3, OASIS Standard 2021-06-15
+        target: 'XML Schema Part 2: Datatypes (Second Edition, 2004), W3C Recommendation 2004-10-28'
+      conditions_zh: UBL 2.3 §1.4/3.1 明确采用固定 Datatypes 第二版作为 XSD 数据类型基础。该引用不证明业务值已获认可；§4.2 推荐另查代码表等内容规则，两阶段说明附录
+        E 为非规范性。不推出当前地区发票/税务实施规则已满足。
+      conditions_en: 'UBL 2.3 sections 1.4/3.1 explicitly use the fixed Datatypes second edition as the XSD datatype
+        basis. This does not establish business-value acceptance: section 4.2 recommends separate content-rule checks
+        such as code lists, with the two-phase account in non-normative Appendix E. No jurisdiction-specific invoicing
+        or taxation profile compliance is inferred.'
+    evidence:
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+      title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+      language: en
+      accessed: '2026-10-21'
+    - url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+      title: 'XML Schema Part 2: Datatypes (Second Edition, 2004) — fixed W3C Recommendation'
+      language: en
+      accessed: '2026-10-21'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: xml_1.0_second_edition
+  rationale_zh: 固定 XML 表示/结构约束文档，属于已有数据表示与序列化编辑导航；不表示商业领域已完备。
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: xml_schema_structures_2004
+  rationale_zh: 固定 XML 表示/结构约束文档，属于已有数据表示与序列化编辑导航；不表示商业领域已完备。
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: xml_schema_datatypes_2004
+  rationale_zh: 固定 XML 表示/结构约束文档，属于已有数据表示与序列化编辑导航；不表示商业领域已完备。
+work_item_preflight_zh: 本次检索全量 Canonical/候选未发现这些精确文档主体；GitHub XML Issue 命中均已结束，XML Schema PR 精确词未命中，当前两个开放 PR 为命名与文档链接工作。本次检索未发现相同
+  intake 并行任务，不将检索范围视为全知证明。
+unresolved_zh:
+- XML 良构、DTD 有效性、XSD 结构/类型评估、UBL 附加约束及具体业务规则是不同问题；本切片不声明任何实际实例已通过。
+- 未收录解析/验证实现，也未审后续版次、任意扩展内容或业务代码表值集；不新增替代/更新谓词，不强求所有路径汇聚到同一表示。
