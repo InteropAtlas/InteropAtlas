@@ -592,22 +592,8 @@ memberships:
 # agentic-ai-foundation.yaml：governance_notes 明确 Agentic AI 开放项目治理职责与 MCP/goose/AGENTS.md 创始贡献；不等同项目采用。
 - category_id: agents
   ref: {surface: canonical, id: agentic_ai_foundation}
-canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security]
+canonical_relation_refs: [http3_http_semantics, http3_quic, quic_tls_security, quic_tls_version, mcp_jsonrpc]
 proposals:
-- id: quic_tls_version
-  source: {surface: candidate, id: quic_tls_rfc9001}
-  proposed_relation: uses
-  target: {surface: candidate, id: tls13_rfc8446}
-  status: review_required
-  evidence: ['https://www.rfc-editor.org/rfc/rfc9001.html#section-1']
-  conditions_zh: 须保留 QUIC 对 TLS 集成方式的限制。PR422 独立审查暂缓此边；需补充 RFC9001 对 RFC8446 的特定文档规范性引用证据，不从 TLS 版本约束推导文档引用。
-- id: mcp_jsonrpc
-  source: {surface: candidate, id: mcp_2025_11_25}
-  proposed_relation: uses
-  target: {surface: candidate, id: json_rpc_2.0}
-  status: review_required
-  evidence: ['https://modelcontextprotocol.io/specification/2025-11-25/basic']
-  conditions_zh: 固定 MCP 日期版本的消息层要求，不等同于其全部生命周期和授权要求。
 - id: is05_is04
   source: {surface: candidate, id: amwa_nmos_is05}
   proposed_relation: recommended_with
