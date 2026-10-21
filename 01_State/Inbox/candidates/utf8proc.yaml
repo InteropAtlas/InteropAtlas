@@ -15,11 +15,11 @@ locators:
 - url: https://github.com/JuliaStrings/utf8proc/releases/tag/v2.12.0
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - utf8proc
   reasons:
-  - 主体为 JuliaStrings/utf8proc 的 C 库，固定官方 v2.12.0；不与 Unicode 标准、Julia 语言、绑定包或其他 UTF-8 库合并。
-  - README 的历史 Public Software Group 来源说明不被拆成另一实现，也不触发身份合并；沿用现有 github 标识机制。
+  - 经独立语义审核由 accept-20261021-utf8proc-utf8proc 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
   merge_authorized: false
 unknowns:
 - 固定库报告 Unicode 18.0.0，而库内现有规范端点为 Unicode 17.0；本切片不建立 implements。
@@ -28,4 +28,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
