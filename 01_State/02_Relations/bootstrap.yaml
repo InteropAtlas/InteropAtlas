@@ -83,15 +83,15 @@ last_verified_by: Agent — OpenAI / dot，existing capability-edge evidence exe
 ---
 id: yaml_provides_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T08:57:54.402172+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: YAML 提供数据序列化能力
@@ -100,6 +100,48 @@ source: {type: standard, id: yaml_1.2.2}
 relation: provides
 target: {type: capability, id: data_serialization}
 confidence: 1.0
+context:
+  version_context:
+    source: YAML 1.2 specification, revision 1.2.2, 2021-10-01; no normative language changes from 1.2
+    target: Existing IA capability data_serialization
+  conditions_zh: 限定为 YAML 表示图、序列化树与字符流之间的数据表示和转换。映射键顺序与锚点名称是序列化细节，注释和样式是呈现细节，不构成原生数据构造所依据的信息；这不表示样式对标签解析毫无影响：plain
+    scalar 在标签解析中需与带引号的标量区分，构造阶段则依据表示图。此边不承诺往返保留这些细节。完整加载还依赖标签解析、标签内容有效性和可用原生类型，不能据格式能力推断任意处理器或跨应用往返成功。本次未验证
+    IA 实际 YAML 处理、实现符合性或应用互通。
+  conditions_en: 'Limited to data representation and conversion among YAML representation graphs, serialization
+    trees and character streams. Mapping key order and anchor names are serialization details; comments and
+    styles are presentation details, not information used to construct native data. This does not mean styles
+    never affect tag resolution: plain scalars are distinguished from quoted scalars for that purpose; construction
+    uses the representation graph. This edge does not promise their round-trip preservation. Complete loading
+    also depends on tag resolution, tag/content validity and available native types; the format capability
+    does not prove arbitrary processor or cross-application round trips. IA YAML processing, implementation
+    conformance and application interoperability were not tested.'
+evidence:
+- url: https://yaml.org/spec/1.2.2/
+  title: 'YAML 1.2.2 — document status: revision of YAML 1.2 with no normative changes'
+  language: en
+  accessed: '2026-10-21'
+- url: https://yaml.org/spec/1.2.2/#31-processes
+  title: 'YAML 1.2.2 — section 3.1: dump/load stages and construction information'
+  language: en
+  accessed: '2026-10-21'
+- url: https://yaml.org/spec/1.2.2/#322-serialization-tree
+  title: 'YAML 1.2.2 — section 3.2.2: mapping order, anchors and aliases'
+  language: en
+  accessed: '2026-10-21'
+- url: https://yaml.org/spec/1.2.2/#323-presentation-stream
+  title: 'YAML 1.2.2 — section 3.2.3: styles and comments as presentation details'
+  language: en
+  accessed: '2026-10-21'
+- url: https://yaml.org/spec/1.2.2/#33-loading-failure-points
+  title: 'YAML 1.2.2 — section 3.3: loading failures, resolved/valid tags and available native types'
+  language: en
+  accessed: '2026-10-21'
+- url: https://yaml.org/spec/1.2.2/#73-flow-scalar-styles
+  title: 'YAML 1.2.2 — section 7.3: plain scalar distinction for tag resolution'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T08:56:17+00:00'
+last_verified_by: Agent — OpenAI / dot, existing capability-edge evidence executor
 ---
 id: json_schema_provides_validation
 record_created_at: "2026-09-01T16:44:53+08:00"
