@@ -461,15 +461,15 @@ confidence: 0.95
 ---
 id: html_provides_hypertext_navigation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:47:42.490184+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTML 提供超文本导航能力
@@ -483,18 +483,41 @@ sources:
     title: HTML Standard
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: WHATWG HTML Living Standard, official Links page captured 2026-10-21, header Last Updated 20 October
+      2026; no fixed release number asserted
+    target: Existing IA capability hypertext_navigation
+  conditions_zh: 限定为 HTML 规范定义的超链接与导航机制，不把所有资源链接都当作用户导航。a/area 元素没有 href 时不创建超链接；跟随链接仍受文档活动状态、URL 解析及目标 navigable
+    选择等处理条件约束，下载与导航须区分。本边不是任意链接可访问、安全或永久有效的保证，也不证明某浏览器实现、实际网络互通或 IA 已采用/验证其全部行为。
+  conditions_en: Limited to HTML-defined hyperlink and navigation mechanisms, not all resource links as user
+    navigation. An a/area element without href creates no hyperlink; following links remains subject to document
+    activity, URL parsing and target-navigable selection, and downloading must be distinguished from navigation.
+    This is not a guarantee that arbitrary links are reachable, safe or permanent, or proof of browser implementation,
+    actual network interoperability or IA adoption/validation of all behavior.
+evidence:
+- url: https://html.spec.whatwg.org/multipage/links.html#links-created-by-a-and-area-elements
+  title: HTML Living Standard §4.6.1–2 — link kinds and a/area hyperlinks
+  language: en
+  accessed: '2026-10-21'
+- url: https://html.spec.whatwg.org/multipage/links.html#following-hyperlinks
+  title: HTML Living Standard §4.6.5–6 — conditional navigation and downloading
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:43:06.065948+00:00'
+last_verified_by: Agent — OpenAI / dot, existing interface-expression capability evidence executor
 ---
 id: html_provides_document_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:47:42.490184+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTML 提供文档结构表示能力
@@ -503,6 +526,30 @@ source: {type: standard, id: html_living_standard}
 relation: provides
 target: {type: capability, id: document_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: WHATWG HTML Living Standard, official Introduction and DOM pages captured 2026-10-21, header Last
+      Updated 20 October 2026; no fixed release number asserted
+    target: Existing IA capability document_representation
+  conditions_zh: 限定为用具有规定语义的元素、属性及结构表达文档内容，供人类呈现和机器处理。HTML 的语义不等于特定视觉样式；语法正确不自动满足元素的语义用途。HTML 语法、XML 语法与 DOM
+    表示的处理方式和可表示内容并不完全相同，不据此保证任意相互转换无损、逐字往返、浏览器一致呈现或无障碍符合性；旧 IA 生成视图设想未在本次核验。
+  conditions_en: Limited to representing document content through elements, attributes and structure with defined
+    semantics for human presentation and machine processing. HTML semantics do not prescribe a particular visual
+    style, and syntactic correctness alone does not satisfy intended element semantics. HTML syntax, XML syntax
+    and DOM representations differ in processing and expressible content; arbitrary lossless conversion, byte-preserving
+    round trips, identical browser rendering and accessibility conformance are not established. Legacy IA generated-view
+    plans are not verified.
+evidence:
+- url: https://html.spec.whatwg.org/multipage/dom.html#semantics-2
+  title: HTML Living Standard §3.2.1 — element and attribute semantics
+  language: en
+  accessed: '2026-10-21'
+- url: https://html.spec.whatwg.org/multipage/introduction.html#html-vs-xhtml
+  title: HTML Living Standard §1.8 — HTML/XML syntax and DOM representation boundaries
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:43:06.065948+00:00'
+last_verified_by: Agent — OpenAI / dot, existing interface-expression capability evidence executor
 ---
 id: json_ld_governed_by_w3c
 record_created_at: "2026-09-01T16:44:53+08:00"
