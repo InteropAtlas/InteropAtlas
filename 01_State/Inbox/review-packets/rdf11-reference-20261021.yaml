@@ -1,163 +1,23 @@
 packet_id: rdf11_reference_20261021
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: 8b31f298710a5f415c218eccdc2a07ad3fcaa3f4
+reviewed_packet_blob: 4bf19de2817437e5ab89523cbd8fef911f23d883
+reviewed_packet_path: 01_State/Inbox/review-packets/rdf11-reference-20261021.yaml
 baseline_commit: e929ee47f561102d224731b809b30894570a16c7
 executor: Agent — OpenAI / dot
-reviewer: null
-review_scope_zh:
-- 从 PR481 的表示与验证实现问题发现精确 RDF 1.1 端点缺失；只补一个固定规范对象、两条有条件既有关系和 semantics 导航，不为凑完整管道而强连实现。
-- 既有 artifact/specification、maps_to/uses 和 graph_representation；domains 是既有自由标签按官方范围人工选择，不新建分类/词表/接口或维护规则。
-- 原 RDF 1.2 两对象、旧 json_ld_maps_to_rdf 与 SKOS 跨版边及全部已录实现不改；新版本端点不是对旧边作替代/更新或隐含否定。
-source_evidence:
-- url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
-  final_url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
-  local_path: official/rdf11-concepts.html
-  sha256: 3838c992097f72ee8784b6c96194d9879f86f2e08f53ced5a05aa4031750c5ac
-  bytes: 120924
-  retrieved_at: '2026-10-21T05:28:55.027122+00:00'
-- url: https://www.w3.org/TR/2017/REC-shacl-20170720/
-  final_url: https://www.w3.org/TR/2017/REC-shacl-20170720/
-  local_path: official/shacl-2017.html
-  sha256: ccca77caed771f42ea649c03d190b9c7ea0b82286c22c457b9edc8087c9ad0f8
-  bytes: 531275
-  retrieved_at: '2026-10-21T05:28:57.405257+00:00'
-- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
-  final_url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
-  local_path: official/jsonld-1.1.html
-  sha256: 9e2c9972d0f60bc744e975731643a9a63d410afc6b682eb8898ad2720e452866
-  bytes: 1021461
-  retrieved_at: '2026-10-21T05:28:59.391815+00:00'
-existing_endpoints:
-- id: json_ld_1.1
-  path: 01_State/01_Objects/json-ld-1.1.yaml
-  git_blob: ea983785f688a81effc149139d5fdae4dc811d91
-  unchanged: true
-- id: shacl_2017
-  path: 01_State/01_Objects/shacl-2017.yaml
-  git_blob: 657a8bfa8e7baf646bca9d18d82aaf8f21e5edce
-  unchanged: true
-- id: rdf_1.2_concepts
-  path: 01_State/01_Objects/rdf-1.2-concepts.yaml
-  git_blob: db37683c657e86d85986ed7d209ec8264df0c61d
-  unchanged: true
+acceptance_events: 01_State/Inbox/acceptance-events/rdf11-reference-20261021.yaml
 objects:
 - candidate_id: rdf_1.1_concepts
-  candidate_path: 01_State/Inbox/candidates/rdf_1.1_concepts.yaml
-  candidate_blob: 52f8b5bbfef4e452c1238d5d72c0cb6d8e6b8552
-  preflight:
-    canonical_records: 202
-    existing_candidate_records: 205
-    machine_route: review_required
-    normalized_identifier_collisions: []
-    other_candidate_collisions: []
-    schema_errors: []
-    canonical_id_exists: false
-  proposed_record:
-    id: rdf_1.1_concepts
-    type: artifact
-    kind: specification
-    name_zh: RDF 1.1 概念与抽象语法（2014 推荐版）
-    name_en: RDF 1.1 Concepts and Abstract Syntax (2014 Recommendation)
-    official_name: RDF 1.1 Concepts and Abstract Syntax
-    description_zh: W3C 固定 2014 推荐文档，定义 RDF 1.1 图、三元组、数据集和相关术语的抽象数据模型。
-    description_en: The fixed 2014 W3C Recommendation defining the RDF 1.1 abstract data model of graphs, triples,
-      datasets and associated terminology.
-    version: '1.1'
-    external_identifiers:
-    - namespace: w3c
-      value: REC-rdf11-concepts-20140225
-    official_url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
-    versions:
-    - version: '1.1'
-      status: recommendation
-      date: '2014-02-25'
-      url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
-    domains:
-    - knowledge_graph
-    - semantics
-    - linked_data
-    capabilities:
-    - graph_representation
-    scope_notes_zh: 固定版本主体，不代表现行 RDF 全族或 IA 采用。第 3/4 节定义图为三元组集合、数据集包含一个默认图及零个或多个命名图；抽象模型不是 Turtle/JSON-LD 等具体语法、处理算法或软件。本文档与
-      RDF 1.2 保持独立身份，不据此建立替代/更新边或断言具体实现互通。
-    scope_notes_en: A fixed-version subject, not the entire current RDF family or IA adoption. Sections 3/4 define
-      graphs as triple sets and datasets with one default and zero or more named graphs. This abstract model is
-      not a concrete syntax, processing algorithm or software. It remains distinct from RDF 1.2; no update/replacement
-      edge or implementation interoperability is inferred.
-    sources:
-    - &id001
-      url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
-      title: RDF 1.1 Concepts and Abstract Syntax — fixed Recommendation 2014-02-25, sections 3/4
-      language: en
-      accessed: '2026-10-21'
-    last_verified_at: '2026-10-21T05:31:07.552589+00:00'
-    last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+  canonical_id: rdf_1.1_concepts
+  acceptance_event_id: accept-20261021-rdf11-reference-rdf-1-1-concepts
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/482
 relations:
 - proposal_id: json_ld_1_1_maps_to_rdf_1_1
-  proposed_record:
-    id: json_ld_1_1_maps_to_rdf_1_1
-    type: relation
-    name_zh: JSON-LD 1.1 按限定条件映射到 RDF 1.1 数据模型
-    name_en: JSON-LD 1.1 maps conditionally to the RDF 1.1 data model
-    source: json_ld_1.1
-    relation: maps_to
-    target: rdf_1.1_concepts
-    context:
-      version_context:
-        source: JSON-LD 1.1, W3C Recommendation 2020-07-16
-        target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
-      conditions_zh: 仅固定第 8/10 节与 RDF 1.1 的对应；JSON-LD 可表达图/数据集，但广义数据集和方向信息等扩展不都能直接解释为标准 RDF 1.1。作为 graph source
-        使用时只取默认图并忽略命名图；规范转换算法另见独立 API 文档。不是无损往返、RDF 1.2 映射或库间兼容性证明。旧指向 RDF 1.2 的关系未由本次复核认可或改写。
-      conditions_en: Limited to the RDF 1.1 correspondence in fixed sections 8/10. Generalized datasets and direction
-        information prevent direct standard RDF 1.1 interpretation of every JSON-LD document. A graph-source consumer
-        uses only the default graph; normative conversion algorithms are in the separate API specification. No lossless
-        round-trip, RDF 1.2 mapping or library interoperability is established. The old RDF 1.2 edge is neither
-        verified nor rewritten here.
-    evidence:
-    - url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
-      title: JSON-LD 1.1 — sections 8/10 and RDF11-CONCEPTS reference
-      language: en
-      accessed: '2026-10-21'
-    - *id001
-    last_verified_at: '2026-10-21T05:31:07.552589+00:00'
-    last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+  canonical_relation_id: json_ld_1_1_maps_to_rdf_1_1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/482
 - proposal_id: shacl_2017_uses_rdf_1_1
-  proposed_record:
-    id: shacl_2017_uses_rdf_1_1
-    type: relation
-    name_zh: SHACL 2017 使用 RDF 1.1 图与术语
-    name_en: SHACL 2017 uses RDF 1.1 graphs and terminology
-    source: shacl_2017
-    relation: uses
-    target: rdf_1.1_concepts
-    context:
-      version_context:
-        source: SHACL, W3C Recommendation 2017-07-20
-        target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
-      conditions_zh: 限固定 SHACL 第 1.1 节明确采用的 RDF 1.1 图、三元组与术语及第 3 节数据图/形状图。此模型依赖不指定 JSON-LD 输入处理、图选择、完整转换管道或 RDF
-        1.2 支持；不由两条边推断 PyLD 与 pySHACL 兼容或实现符合性。
-      conditions_en: Limited to RDF 1.1 graphs, triples and terminology explicitly adopted in SHACL section 1.1
-        and the data/shapes graphs in section 3. This model dependency does not specify JSON-LD input handling,
-        graph selection, a complete conversion pipeline or RDF 1.2 support. These edges do not establish PyLD/pySHACL
-        compatibility or implementation conformance.
-    evidence:
-    - url: https://www.w3.org/TR/2017/REC-shacl-20170720/#terminology
-      title: SHACL 2017 — section 1.1 Basic RDF Terminology and normative RDF11-CONCEPTS reference
-      language: en
-      accessed: '2026-10-21'
-    - url: https://www.w3.org/TR/2017/REC-shacl-20170720/#validation
-      title: SHACL 2017 — section 3 validation and graphs
-      language: en
-      accessed: '2026-10-21'
-    - *id001
-    last_verified_at: '2026-10-21T05:31:07.552589+00:00'
-    last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
-membership_proposals:
-- category_id: semantics
-  ref:
-    surface: canonical
-    id: rdf_1.1_concepts
-  rationale_zh: RDF 图/数据集抽象模型属于既有语义导航；不是全领域覆盖或采用声明。
-work_item_preflight_zh: 全量 Canonical/候选无此版本身份；GitHub 精确词 RDF 1.1 搜索无 Issue，仅本轮 PR480/481，本次检索未发现同一 intake 并行任务。
-unresolved_zh:
-- 旧 RDF 1.2 跨版关系仍保留原状态，未补新审核时间。
-- 应用的图选择、转换选项、数据损失、加载策略与实际联合运行仍需具体证据；本批不做兼容边或管道声明。
+  canonical_relation_id: shacl_2017_uses_rdf_1_1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/482
+notes_zh:
+- 本文件仅为引用式回执；完整被审对象/两关系/导航、固定来源 hash 与版次限制保留于真实 Git commit/blob，不另存第二套正式字段。
+- 本次是精确版本引用内容补齐，不改旧 RDF 1.2 跨版关系，也不据此作实际实现互通或 IA 采用声明。
