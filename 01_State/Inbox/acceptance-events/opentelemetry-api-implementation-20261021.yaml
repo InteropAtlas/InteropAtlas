@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-opentelemetry-api-opentelemetry-python-api
+candidate_id: opentelemetry_python_api
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: opentelemetry_python_api
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T04:57:18+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者读取全 diff、固定 tracecontext.py / TraceFlags、PyPI 1.45.1 记录、GitHub 固定 pyproject 与 2021 规范相关段落；独立重算 12 文件 SHA256
+    / Git blob，亲自重跑 22 内存测试全部通过。
+  - 接受包级 pypi 身份与有限传播组件范围，保留 API 与 SDK / Exporter / Collector 差异；relations 与 capabilities 为空，不将 0x02 差异直接判定为完整违规。冻结
+    proposed_record 全字段原样物化，仅追加生命周期、贡献和接纳溯源；精确序列化检查与语义审核分开。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/479
+- https://github.com/InteropAtlas/InteropAtlas/blob/d453849f9510a2c575642a33ec50b77bf031f36d/01_State/Inbox/review-packets/opentelemetry-api-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/8a9a7e59f1ee17ca5b8ef24d207e93adc25242d5
+decided_at: '2026-10-21T04:59:12.112951+00:00'
+notes:
+- 接纳独立 opentelemetry-api Python 分发包，不与共享 monorepo、SDK、Exporter、Collector 或 Trace Context 规范合并。
+- 仅补可观测性导航中的软件先例；不强建到库内固定 2021 Trace Context 的 implements，不宣称完整符合性、真实 HTTP / 跨实现互通、安全或生产推荐、IA 采用。
