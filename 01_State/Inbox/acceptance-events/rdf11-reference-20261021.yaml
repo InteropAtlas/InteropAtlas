@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-rdf11-reference-rdf-1-1-concepts
+candidate_id: rdf_1.1_concepts
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: rdf_1.1_concepts
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T05:32:47+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者实际读完整 proposed 对象/关系、固定 RDF 1.1 2014 推荐文档、SHACL 2017 第 1.1 节和 JSON-LD 1.1 第 10 节，认可固定规范端点与有限 maps_to/uses。
+  - 按审核意见仅将采集文件名改为相对路径，并限定本次搜索未发现并行任务；最终候选/packet 两 hash 已独立核对，所有 proposed 字段和真实来源核查时点保持。
+  - 精确序列化复核与语义审核分开，CI 不替代独立审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/482
+- https://github.com/InteropAtlas/InteropAtlas/blob/8b31f298710a5f415c218eccdc2a07ad3fcaa3f4/01_State/Inbox/review-packets/rdf11-reference-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/52f8b5bbfef4e452c1238d5d72c0cb6d8e6b8552
+decided_at: '2026-10-21T05:35:18.111584+00:00'
+notes:
+- 固定 RDF 1.1 抽象模型文档不与 RDF 1.2、具体语法或软件合并。
+- 旧 RDF 1.2 对象及跨版关系未核未改，不由本次接纳推断 PyLD/pySHACL 完整管道、无损性、安全、IA 采用或新的维护方式。

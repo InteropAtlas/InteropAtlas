@@ -510,3 +510,80 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: json_ld_1_1_maps_to_rdf_1_1
+type: relation
+name_zh: JSON-LD 1.1 按限定条件映射到 RDF 1.1 数据模型
+name_en: JSON-LD 1.1 maps conditionally to the RDF 1.1 data model
+source: json_ld_1.1
+relation: maps_to
+target: rdf_1.1_concepts
+context:
+  version_context:
+    source: JSON-LD 1.1, W3C Recommendation 2020-07-16
+    target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
+  conditions_zh: 仅固定第 8/10 节与 RDF 1.1 的对应；JSON-LD 可表达图/数据集，但广义数据集和方向信息等扩展不都能直接解释为标准 RDF 1.1。作为 graph source 使用时只取默认图并忽略命名图；规范转换算法另见独立
+    API 文档。不是无损往返、RDF 1.2 映射或库间兼容性证明。旧指向 RDF 1.2 的关系未由本次复核认可或改写。
+  conditions_en: Limited to the RDF 1.1 correspondence in fixed sections 8/10. Generalized datasets and direction
+    information prevent direct standard RDF 1.1 interpretation of every JSON-LD document. A graph-source consumer
+    uses only the default graph; normative conversion algorithms are in the separate API specification. No lossless
+    round-trip, RDF 1.2 mapping or library interoperability is established. The old RDF 1.2 edge is neither verified
+    nor rewritten here.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
+  title: JSON-LD 1.1 — sections 8/10 and RDF11-CONCEPTS reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
+  title: RDF 1.1 Concepts and Abstract Syntax — fixed Recommendation 2014-02-25, sections 3/4
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:31:07.552589+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+record_created_at: '2026-10-21T05:35:18.111584+00:00'
+record_updated_at: '2026-10-21T05:35:18.111584+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: shacl_2017_uses_rdf_1_1
+type: relation
+name_zh: SHACL 2017 使用 RDF 1.1 图与术语
+name_en: SHACL 2017 uses RDF 1.1 graphs and terminology
+source: shacl_2017
+relation: uses
+target: rdf_1.1_concepts
+context:
+  version_context:
+    source: SHACL, W3C Recommendation 2017-07-20
+    target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
+  conditions_zh: 限固定 SHACL 第 1.1 节明确采用的 RDF 1.1 图、三元组与术语及第 3 节数据图/形状图。此模型依赖不指定 JSON-LD 输入处理、图选择、完整转换管道或 RDF 1.2
+    支持；不由两条边推断 PyLD 与 pySHACL 兼容或实现符合性。
+  conditions_en: Limited to RDF 1.1 graphs, triples and terminology explicitly adopted in SHACL section 1.1 and
+    the data/shapes graphs in section 3. This model dependency does not specify JSON-LD input handling, graph selection,
+    a complete conversion pipeline or RDF 1.2 support. These edges do not establish PyLD/pySHACL compatibility or
+    implementation conformance.
+evidence:
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#terminology
+  title: SHACL 2017 — section 1.1 Basic RDF Terminology and normative RDF11-CONCEPTS reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#validation
+  title: SHACL 2017 — section 3 validation and graphs
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
+  title: RDF 1.1 Concepts and Abstract Syntax — fixed Recommendation 2014-02-25, sections 3/4
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:31:07.552589+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+record_created_at: '2026-10-21T05:35:18.111584+00:00'
+record_updated_at: '2026-10-21T05:35:18.111584+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
