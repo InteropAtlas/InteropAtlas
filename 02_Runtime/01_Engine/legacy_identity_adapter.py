@@ -11,6 +11,10 @@ Initial supported evidence-backed adapter:
 
 Additional publishers should be added only with similarly deterministic,
 reviewed rules or explicit structured identifiers in Canonical data.
+
+For records with usable structured identifiers, bibliography sources are not
+subject-identity evidence. Official and version locators remain supplementary
+evidence; records without usable structured identifiers retain Legacy fallback.
 """
 
 from __future__ import annotations
@@ -22,6 +26,27 @@ from urllib.parse import urlparse
 
 _RFC_PATH = re.compile(r"(?:^|/)(?:rfc)?(?P<number>[1-9][0-9]*)(?:\.html)?/?$", re.IGNORECASE)
 _RFC_INFO_PATH = re.compile(r"^/info/rfc(?P<number>[1-9][0-9]*)/?$", re.IGNORECASE)
+_IDENTIFIER_NAMESPACE = re.compile(r"[a-z][a-z0-9_]*")
+
+
+def _has_usable_explicit_identifiers(record: Mapping[str, Any]) -> bool:
+    """Guard source inference, not validate or normalize a Canonical record.
+
+    Use the existing Candidate v1 identifier item shape, with nonblank values.
+    An empty or partly malformed list must not suppress Legacy evidence.
+    """
+    identifiers = record.get("external_identifiers")
+    if not isinstance(identifiers, list) or not identifiers:
+        return False
+    for item in identifiers:
+        if not isinstance(item, Mapping) or set(item) != {"namespace", "value"}:
+            return False
+        namespace, value = item["namespace"], item["value"]
+        if not isinstance(namespace, str) or not _IDENTIFIER_NAMESPACE.fullmatch(namespace):
+            return False
+        if not isinstance(value, str) or not value.strip():
+            return False
+    return True
 
 
 def _rfc_identifier_from_url(url: str) -> tuple[str, str] | None:
@@ -52,7 +77,7 @@ def evidence_backed_legacy_identifiers(record: Mapping[str, Any]) -> set[tuple[s
         urls.append(official_url)
 
     sources = record.get("sources")
-    if isinstance(sources, list):
+    if not _has_usable_explicit_identifiers(record) and isinstance(sources, list):
         for source in sources:
             if isinstance(source, Mapping) and isinstance(source.get("url"), str):
                 urls.append(source["url"])

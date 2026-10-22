@@ -9,7 +9,7 @@ from pathlib import Path
 
 import yaml
 
-from candidate_identity_validator import canonical_identifier_index, identity_route, validate_candidate
+from candidate_identity_validator import canonical_identifier_index, identity_route, load_yaml_records, validate_candidate
 from legacy_identity_adapter import evidence_backed_legacy_identifiers
 
 
@@ -125,6 +125,112 @@ class CandidateIdentitySafetyTests(unittest.TestCase):
             "official_url": "https://www.rfc-editor.org/rfc/rfc5646.html",
         }
         self.assertEqual({("rfc", "5646")}, evidence_backed_legacy_identifiers(record))
+
+    def test_library_citations_are_not_rfc_subject_identities(self) -> None:
+        library = load_yaml_records(ROOT / "01_State/01_Objects/python_pyrfc3339.yaml")[0]
+        legacy_rfc = load_yaml_records(ROOT / "01_State/01_Objects/rfc3339.yaml")[0]
+        index = canonical_identifier_index([library, legacy_rfc])
+        self.assertEqual(set(), evidence_backed_legacy_identifiers(library))
+        self.assertEqual({"python_pyrfc3339"}, index[("github", "kurtraschke/pyrfc3339")])
+        self.assertEqual({"python_pyrfc3339"}, index[("pypi", "pyrfc3339")])
+        self.assertEqual({"rfc3339"}, index[("rfc", "3339")])
+        self.assertNotIn(("rfc", "9557"), index)
+
+        record = candidate("new", [{"namespace": "rfc", "value": "9557"}])
+        self.assertEqual([], validate_candidate(record, self.schema, index))
+        self.assertEqual("review_required", identity_route(record, index))
+
+        duplicate = candidate("new", [{"namespace": "pypi", "value": "pyRFC3339"}])
+        self.assertIn("IA-ID-003", {item.code for item in validate_candidate(duplicate, self.schema, index)})
+        self.assertEqual("blocked_invalid_identity_state", identity_route(duplicate, index))
+
+    def test_structured_identifiers_retain_official_and_version_aliases(self) -> None:
+        record = {
+            "id": "subject",
+            "external_identifiers": [{"namespace": "bcp", "value": "14"}],
+            "official_url": "https://www.rfc-editor.org/rfc/rfc2119.html",
+            "versions": [{"url": "https://www.rfc-editor.org/info/rfc8174"}],
+            "sources": [{"url": "https://www.rfc-editor.org/rfc/rfc9557.html"}],
+        }
+        self.assertEqual({("rfc", "2119"), ("rfc", "8174")}, evidence_backed_legacy_identifiers(record))
+        self.assertEqual(
+            {("bcp", "14"): {"subject"}, ("rfc", "2119"): {"subject"}, ("rfc", "8174"): {"subject"}},
+            canonical_identifier_index([record]),
+        )
+
+    def test_explicit_rfc_duplicate_still_blocks_despite_unrelated_bibliography(self) -> None:
+        canonical = {
+            "id": "existing",
+            "external_identifiers": [{"namespace": "rfc", "value": "9557"}],
+            "sources": [{"url": "https://www.rfc-editor.org/rfc/rfc3339.html"}],
+        }
+        index = canonical_identifier_index([canonical])
+        record = candidate("new", [{"namespace": "rfc", "value": "9557"}])
+        self.assertIn("IA-ID-003", {item.code for item in validate_candidate(record, self.schema, index)})
+        self.assertEqual("blocked_invalid_identity_state", identity_route(record, index))
+
+    def test_unusable_explicit_identifiers_preserve_source_fallback(self) -> None:
+        malformed_fields = [
+            None, [], {}, "rfc:9557", 9557,
+            [{"namespace": "rfc"}], [{"value": "9557"}],
+            [None], ["rfc:9557"], [{}],
+            [{"namespace": "rfc", "value": 9557}],
+            [{"namespace": 9557, "value": "9557"}],
+            [{"namespace": "", "value": "9557"}],
+            [{"namespace": " ", "value": "9557"}],
+            [{"namespace": "rfc", "value": ""}],
+            [{"namespace": "rfc", "value": " \t\n"}],
+            [{"namespace": "invalid-namespace", "value": "9557"}],
+            [{"namespace": "RFC", "value": "9557"}],
+            [{"namespace": "rfc\n", "value": "9557"}],
+            [{"namespace": "rfc", "value": "9557", "extra": True}],
+        ]
+        valid = {"namespace": "pypi", "value": "pyRFC3339"}
+        # A usable item must not hide malformed neighbours in either order.
+        for field in list(malformed_fields):
+            if isinstance(field, list) and field:
+                malformed_fields.extend([[valid, *field], [*field, valid]])
+        for field in ["absent", *malformed_fields]:
+            with self.subTest(external_identifiers=field):
+                record = {
+                    "id": "legacy",
+                    "sources": [{"url": "https://www.rfc-editor.org/rfc/rfc9557.html"}],
+                }
+                if field != "absent":
+                    record["external_identifiers"] = field
+                self.assertEqual({("rfc", "9557")}, evidence_backed_legacy_identifiers(record))
+                index = canonical_identifier_index([record])
+                self.assertEqual({"legacy"}, index[("rfc", "9557")])
+                incoming = candidate("new", [{"namespace": "rfc", "value": "9557"}])
+                self.assertEqual("blocked_invalid_identity_state", identity_route(incoming, index))
+
+    def test_valid_explicit_item_shape_suppresses_only_bibliography(self) -> None:
+        for identifiers in [
+            [{"namespace": "pypi", "value": "pyRFC3339"}],
+            [{"namespace": "test_namespace1", "value": " subject "}],
+            [{"namespace": "github", "value": "owner/project"}, {"namespace": "pypi", "value": "project"}],
+        ]:
+            with self.subTest(external_identifiers=identifiers):
+                record = candidate("new", identifiers)
+                self.assertEqual([], validate_candidate(record, self.schema, {}))
+                record["sources"] = [{"url": "https://www.rfc-editor.org/rfc/rfc9557.html"}]
+                self.assertEqual(set(), evidence_backed_legacy_identifiers(record))
+
+    def test_source_only_legacy_rfc_and_version_aliases_are_unchanged(self) -> None:
+        for filename, identifiers in [
+            ("rfc3339.yaml", {("rfc", "3339")}),
+            ("json-pointer-rfc6901.yaml", {("rfc", "6901")}),
+            ("bcp14-rfc2119-rfc8174.yaml", {("rfc", "2119"), ("rfc", "8174")}),
+        ]:
+            with self.subTest(filename=filename):
+                record = load_yaml_records(ROOT / "01_State/01_Objects" / filename)[0]
+                self.assertEqual(identifiers, evidence_backed_legacy_identifiers(record))
+
+    def test_legacy_url_standard_citation_limitation_is_out_of_scope(self) -> None:
+        # This source-only record has no structured IDs. Fixing its cross-subject
+        # citation requires separate work; do not silently remove Legacy evidence.
+        record = load_yaml_records(ROOT / "01_State/01_Objects/url-living-standard.yaml")[0]
+        self.assertEqual({("rfc", "3986")}, evidence_backed_legacy_identifiers(record))
 
 
 if __name__ == "__main__":
