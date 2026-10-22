@@ -1,0 +1,31 @@
+contract_version: candidate-object-v1
+candidate_id: python_pyrfc3339
+label: pyRFC3339 Python timestamp conversion library (2.1.1)
+publisher: pyRFC3339 project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: kurtraschke/pyRFC3339
+- namespace: pypi
+  value: pyRFC3339
+locators:
+- url: https://github.com/kurtraschke/pyRFC3339
+  role: official
+- url: https://github.com/kurtraschke/pyRFC3339/tree/cc6ffe260f63c4e37c2789813894516c089e5cb6
+  role: dated
+- url: https://pypi.org/project/pyRFC3339/2.1.1/
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 全量规范化身份及候选检索未发现该库；标准RFC3339与库保持独立身份。
+  merge_authorized: false
+unknowns:
+- 仅为有界日期时间转换先例；解析器宽于RFC3339语法，闰秒、精度和偏移语义保留受限，不建立完整implements关系。
+- 未测试所有Python版本、完整RFC9557/ISO8601、网络互通、时钟同步、生产适用性、安全或IA采用。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
