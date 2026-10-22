@@ -1,0 +1,37 @@
+contract_version: candidate-object-v1
+candidate_id: cisco_libsrtp
+label: Cisco libSRTP library (2.8.1)
+publisher: Cisco libSRTP project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: cisco/libsrtp
+locators:
+- url: https://github.com/cisco/libsrtp
+  role: official
+- url: https://github.com/cisco/libsrtp/releases/tag/v2.8.1
+  role: dated
+- url: https://github.com/cisco/libsrtp/tree/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - At a8c3aa7d4a5afd8152ed7e57ec42ebf0a14ae563, no canonical or candidate ID/external-identifier collision and
+    no libSRTP, cisco/libsrtp or libsrtp2 textual match in state YAML. This is the software-library subject pinned
+    for verification to release 2.8.1, not a new protocol, Cisco organization or a separate release subject.
+  merge_authorized: false
+unknowns:
+- The project documents RFC3711 mandatory-feature support. No upstream build, local runtime behavior, exhaustive
+  conformance, cryptographic audit, cross-vendor interoperability, deployed configuration or IA adoption is asserted.
+- The fixed README mentions loss of synchronization beyond 65k packet reordering, whereas the public protect/unprotect
+  header requires reordering below 32768 packets. This source discrepancy is preserved; neither boundary was tested.
+- Selected crypto backend, caller policy, key establishment/material, buffer and error handling determine actual
+  behavior. Optional-feature exclusions do not mean MKI is absent; the header provides MKI APIs.
+- No claim is made about other libSRTP releases, complete RTSP/WebRTC/ST2110 implementations or endpoint authentication
+  and deployment security.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
