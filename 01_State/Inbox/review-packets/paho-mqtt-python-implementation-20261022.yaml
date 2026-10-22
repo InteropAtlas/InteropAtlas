@@ -1,0 +1,286 @@
+packet_id: paho_mqtt_python_implementation_20261022
+status: pending_independent_semantic_review
+baseline_commit: f2d3cf7589f62d5967e116e0d7c4f22196d8ca6d
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 沿既有 industrial 导航补充一个普通 system/library 实例、一条有条件 implements MQTT 5.0 关系；当前 218 对象、150 关系中 MQTT 5.0 尚无边，node_wot
+  的既有实现关系只指向 TD 1.1。
+- 沿用 Candidate → validation → 独立 semantic review → acceptance event 机制；此 packet 不是接受事件，review_required 不等于 canonical
+  acceptance。
+- '不改变 schema、taxonomy、capability、关系语义、治理、总体设计、页面或维护方式；不触碰 OPC UA identity-risk 候选或被阻断的 #498。'
+work_item_preflight:
+  baseline_commit: f2d3cf7589f62d5967e116e0d7c4f22196d8ca6d
+  searched_at: '2026-10-22T22:10:10.441561+00:00'
+  searched_yaml_files: 541
+  terms:
+  - paho
+  - paho-mqtt
+  - paho.mqtt.python
+  hits: []
+  github_issue_search:
+    query: repo:InteropAtlas/InteropAtlas paho
+    state: all
+    hits: []
+    limit_zh: 只覆盖核验时可见、已索引的工作项标题/正文；不推测未公开或未来事项。
+  existing_relation_yaml_files: 31
+  mqtt_5_0_incident_edges: 0
+official_release:
+  tag: v2.1.0
+  commit: af64a4365c6ac5a7a4d339e7b00f44df91353b35
+  annotated_tag: a5855fb2a7e289912640d8a1cf9cb89558843ef9
+  published_at: '2024-04-29T19:54:26Z'
+  prerelease: false
+  release_url: https://github.com/eclipse-paho/paho.mqtt.python/releases/tag/v2.1.0
+  tag_ref_url: https://api.github.com/repos/eclipse-paho/paho.mqtt.python/git/ref/tags/v2.1.0
+  package_development_status: 4 - Beta
+official_source_hashes:
+- path: README.rst
+  url: https://raw.githubusercontent.com/eclipse-paho/paho.mqtt.python/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst
+  local_path: official/README.rst
+  sha256: 7da00ef07909e616e308fe0d6d17791904c42a0add7e8161c91f975192739ef5
+  git_blob: 72639cc8d75a3a924ff5af2ba13df69c33108616
+  fetched_at: '2026-10-22T22:10:10.441561+00:00'
+- path: src/paho/mqtt/client.py
+  url: https://raw.githubusercontent.com/eclipse-paho/paho.mqtt.python/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py
+  local_path: official/src/paho/mqtt/client.py
+  sha256: 5a3f0f73b344541828586a90f79a6beecb8e4396d8b81064bc2920c1a853618a
+  git_blob: 4ccc8696555d83b269d6d1d56fe4c28d0c73d91b
+  fetched_at: '2026-10-22T22:10:10.441561+00:00'
+- path: LICENSE.txt
+  url: https://raw.githubusercontent.com/eclipse-paho/paho.mqtt.python/af64a4365c6ac5a7a4d339e7b00f44df91353b35/LICENSE.txt
+  local_path: official/LICENSE.txt
+  sha256: 66408b049249c3bdb0ba1ed285f5422ce67e371d40151bebd4d806af454ffe7c
+  git_blob: 7cb8ad9e2c142b08a79907fe94f636896fee10ef
+  fetched_at: '2026-10-22T22:10:10.441561+00:00'
+- path: pyproject.toml
+  url: https://raw.githubusercontent.com/eclipse-paho/paho.mqtt.python/af64a4365c6ac5a7a4d339e7b00f44df91353b35/pyproject.toml
+  local_path: official/pyproject.toml
+  sha256: 90399c717883e249fa9ad7b690124a47d89c29fd8745abd531a5b45077aeeb0e
+  git_blob: e990812d4e018ef245863aa62c5e0d2c58100444
+  fetched_at: '2026-10-22T22:10:10.441561+00:00'
+- path: src/paho/mqtt/__init__.py
+  url: https://raw.githubusercontent.com/eclipse-paho/paho.mqtt.python/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/__init__.py
+  local_path: official/src/paho/mqtt/__init__.py
+  sha256: 0f48cf02d6996aed1d786b38f83052363ff0bc19821912ed23e014b5f0312735
+  git_blob: 377cecc7c7c9ba114486303490f183aaf3a02205
+  fetched_at: '2026-10-22T22:10:10.441561+00:00'
+mqtt_5_0_source:
+  url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+  title: MQTT Version 5.0
+  status: OASIS Standard
+  publication_date: '2019-03-07'
+  verified_at: '2026-10-22T22:10:10.441561+00:00'
+  boundary_zh: 核验固定规范身份和客户端/服务器发布订阅定义，不作逐条符合性审核。
+existing_endpoint_blobs:
+  mqtt_5.0:
+    path: 01_State/01_Objects/mqtt_5.0.yaml
+    git_blob: c42972ff82a4332e8b3b8f47ba9c68d6c549079d
+objects:
+- candidate_id: paho_mqtt_python
+  candidate_path: 01_State/Inbox/candidates/paho_mqtt_python.yaml
+  candidate_blob: 363f62950a6e5017755880c55132d940ea735129
+  preflight:
+    canonical_records: 218
+    existing_candidate_records: 221
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: paho_mqtt_python
+    type: system
+    kind: library
+    name_zh: Eclipse Paho MQTT Python 客户端库
+    name_en: Eclipse Paho MQTT Python Client library
+    official_name: Eclipse Paho MQTT Python Client
+    version: 2.1.0
+    external_identifiers:
+    - namespace: github
+      value: eclipse-paho/paho.mqtt.python
+    official_url: https://github.com/eclipse-paho/paho.mqtt.python
+    description_zh: Eclipse Paho 项目的开源 Python MQTT 客户端库，提供连接消息代理、发布消息与订阅主题的 API。本记录固定核验 2.1.0 官方源码与文档声明的 MQTT 5.0
+      客户端路径，不将实现声明等同于独立符合性认证。
+    description_en: The Eclipse Paho project’s open-source Python MQTT client library provides APIs for broker connection,
+      message publishing and topic subscription. This record verifies the official 2.1.0 sources and documented
+      MQTT 5.0 client path, not independent conformance certification.
+    open_source: true
+    license_expression: EPL-2.0 OR BSD-3-Clause
+    scope_notes_zh: '软件库主体沿用既有 system/library 模式，核验版本 2.1.0 固定为 tag v2.1.0 与 commit af64a4365c6ac5a7a4d339e7b00f44df91353b35；不是
+      Eclipse 组织、MQTT 规范、消息代理或完整物联网系统。
+
+
+      README 明确声明实现 MQTT 5.0、3.1.1、3.1。本切片只连接既有 MQTT 5.0 规范；Client 默认协议为 MQTT 3.1.1，调用方须显式选择 protocol=MQTTv5。连接消息代理后必须运行适当网络循环来处理
+      CONNACK、消息与回调，不能把 connect 或 publish 返回值当作端到端交付证明。
+
+
+      Client 的 clean_session 参数只适用于 MQTT 3.1.1/3.1，MQTT 5 使用 connect 的 clean_start 与 properties；发布 API 支持 MQTT 5
+      properties，订阅 API 支持 MQTT 5 options/properties。README 以 clean_session 描述的内存会话、重启丢失和重复投递边界不在本记录中被转写为已验证的 MQTT
+      5 特定缺陷，也不由这些说明推出恰好一次或重启持久性保证。
+
+
+      固定 pyproject.toml 声明 Python >=3.7，并将 Development Status 标为 Beta；官方 v2.1.0 是已发布且非 prerelease 的版本，但不因此称其稳定、最新或适合生产。许可证表达式依据固定包元数据和许可证声明记录为
+      EPL-2.0 OR BSD-3-Clause。
+
+
+      本批未安装、构建或运行上游库，也未连接代理或执行互通测试。不声称穷尽 MQTT 5 特性、所有 QoS/会话语义、任意代理互通、真实部署安全、消息代理实现或 IA 实际采用；未新增或强配 capability。'
+    scope_notes_en: 'The software-library subject follows the existing system/library pattern, verified at 2.1.0,
+      tag v2.1.0, commit af64a4365c6ac5a7a4d339e7b00f44df91353b35; it is not the Eclipse organization, MQTT specification,
+      a broker or a complete IoT system.
+
+
+      The README explicitly claims MQTT 5.0, 3.1.1 and 3.1 support. This slice links only the existing MQTT 5.0
+      specification. Client defaults to MQTT 3.1.1, so the caller must explicitly select protocol=MQTTv5. A suitable
+      network loop must run after broker connection to process CONNACK, messages and callbacks; a connect or publish
+      return value is not end-to-end delivery proof.
+
+
+      Client clean_session applies only to MQTT 3.1.1/3.1; MQTT 5 uses connect clean_start and properties. The publish
+      API accepts MQTT 5 properties, and subscribe accepts MQTT 5 options/properties. README limitations phrased
+      in terms of clean_session, including in-memory session, restart-loss and duplicate-delivery boundaries, are
+      not restated here as verified MQTT 5-specific defects and do not establish exactly-once or restart-durability
+      guarantees.
+
+
+      The fixed pyproject.toml declares Python >=3.7 and a Beta development-status classifier. Official v2.1.0 is
+      published and marked non-prerelease, but is not therefore called stable, latest or production-ready. The fixed
+      package metadata and license notice support EPL-2.0 OR BSD-3-Clause.
+
+
+      No upstream installation, build, runtime, broker connection or interoperability test was performed for this
+      intake. Exhaustive MQTT 5 feature coverage, all QoS/session semantics, arbitrary-broker interoperability,
+      deployment security, broker implementation and IA adoption are not asserted. No capability is invented or
+      forced onto the library.'
+    sources:
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L1-L16
+      title: Paho Python README — client-library identity and explicit MQTT 5.0 support claim
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L662-L681
+      title: Client constructor documentation — default MQTT 3.1.1, explicit MQTTv5 and clean_session scope
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1393-L1434
+      title: Client connect — MQTT 5 clean_start/properties and required network-loop processing
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1709-L1753
+      title: Client publish — MQTT 5 properties, QoS parameter and result handling
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1894-L1979
+      title: Client subscribe — MQTT 5 options/properties and result handling
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L154-L178
+      title: Paho client usage — broker connection and network-loop requirement
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L78-L107
+      title: README known limitations — clean_session wording; not a tested MQTT 5 defect claim
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/pyproject.toml#L5-L22
+      title: Paho package metadata — Python 3.7+, EPL-2.0 OR BSD-3-Clause and Beta classifier
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/LICENSE.txt
+      title: Paho license notice — EPL 2.0 or Eclipse Distribution License 1.0
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/__init__.py#L1
+      title: Paho fixed source version — 2.1.0
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/releases/tag/v2.1.0
+      title: Official Paho Python v2.1.0 release, published 2024-04-29
+      language: en
+      accessed: '2026-10-22'
+    last_verified_at: '2026-10-22T22:10:10.441561+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Paho Python evidence executor
+relations:
+- proposed_record:
+    id: paho_mqtt_python_implements_mqtt_5.0
+    type: relation
+    name_zh: Paho Python 2.1.0 有界实现 MQTT 5.0 客户端
+    name_en: Paho Python 2.1.0 implements a bounded MQTT 5.0 client
+    source: paho_mqtt_python
+    relation: implements
+    target: mqtt_5.0
+    context:
+      version_context:
+        source: Paho MQTT Python Client 2.1.0; tag v2.1.0, commit af64a4365c6ac5a7a4d339e7b00f44df91353b35
+        target: MQTT Version 5.0, OASIS Standard, 07 March 2019
+      conditions_zh: 依据固定 README 的 MQTT 5.0 实现声明及 Client 的 connect/publish/subscribe API，仅记录显式选择 protocol=MQTTv5、连接消息代理并运行网络循环时的客户端发布订阅路径。默认
+        MQTT 3.1.1 不自动建立此路径；MQTT 5 的 clean_start/properties 不等同于 MQTT 3.x 的 clean_session。调用方须处理协议结果、回调与会话配置；README
+        的 clean_session 限制不转写为已验证的 MQTT 5 缺陷。上游库及代理互通未运行测试；不声称穷尽符合性、所有 QoS/会话语义、恰好一次、重启持久性、代理实现、部署安全、任意代理互通或 IA
+        采用。
+      conditions_en: Based on the fixed README’s MQTT 5.0 implementation claim and Client connect/publish/subscribe
+        APIs, limited to the client publish/subscribe path with explicit protocol=MQTTv5, a broker connection and
+        a running network loop. Default MQTT 3.1.1 does not automatically establish that path; MQTT 5 clean_start/properties
+        are not MQTT 3.x clean_session. Callers handle protocol results, callbacks and session configuration. README
+        clean_session limitations are not restated as verified MQTT 5 defects. No upstream runtime or broker-interoperability
+        test was performed. This is not exhaustive conformance, all-QoS/session-semantics, exactly-once, restart-durability,
+        broker-implementation, deployment-security, arbitrary-broker-interoperability or IA-adoption evidence.
+    evidence:
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L1-L16
+      title: Paho Python README — client-library identity and explicit MQTT 5.0 support claim
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L662-L681
+      title: Client constructor documentation — default MQTT 3.1.1, explicit MQTTv5 and clean_session scope
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1393-L1434
+      title: Client connect — MQTT 5 clean_start/properties and required network-loop processing
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1709-L1753
+      title: Client publish — MQTT 5 properties, QoS parameter and result handling
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1894-L1979
+      title: Client subscribe — MQTT 5 options/properties and result handling
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L154-L178
+      title: Paho client usage — broker connection and network-loop requirement
+      language: en
+      accessed: '2026-10-22'
+    - url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/README.rst#L78-L107
+      title: README known limitations — clean_session wording; not a tested MQTT 5 defect claim
+      language: en
+      accessed: '2026-10-22'
+    - url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+      title: MQTT Version 5.0 — OASIS Standard, 07 March 2019; client-server publish/subscribe protocol
+      language: en
+      accessed: '2026-10-22'
+    last_verified_at: '2026-10-22T22:10:10.441561+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Paho Python evidence executor
+membership_proposals:
+- category_id: industrial
+  ref:
+    surface: canonical
+    id: paho_mqtt_python
+  rationale_zh: 沿既有工业/设备/物联网编辑导航连接 MQTT 客户端库与已收录规范；这不是工业部署、capability、认证或互通保证。
+supplementary_verification:
+  observed_at: '2026-10-22T22:10:10.441561+00:00'
+  source_files_verified:
+  - README.rst
+  - src/paho/mqtt/client.py
+  - LICENSE.txt
+  - pyproject.toml
+  - src/paho/mqtt/__init__.py
+  source_git_blobs_matched: true
+  release_tag_and_version_matched: true
+  upstream_installation_performed: false
+  upstream_build_performed: false
+  upstream_runtime_tests_performed: false
+  broker_integration_test_performed: false
+  boundary_zh: 仅核验固定官方源码与文档，并对 IA 提案做结构/引用投影；不以静态源码审阅冒充 MQTT 功能测试或独立规范符合性认证。
+materialization_boundary_zh: 本地候选与完整提案待独立语义复核，尚未发布或接受。通过后才能将两文件冻结为正常 Git 祖先提交，核验实际远端 commit/blob，再记录 acceptance
+  与 intake_provenance；后续 packet 为 reference-only receipt，最终精确物化另作复核。不得编造接受、提交哈希或 squash 掉已审祖先。

@@ -1,0 +1,37 @@
+contract_version: candidate-object-v1
+candidate_id: paho_mqtt_python
+label: Eclipse Paho MQTT Python Client library (2.1.0)
+publisher: Eclipse Paho MQTT Python Client project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: eclipse-paho/paho.mqtt.python
+locators:
+- url: https://github.com/eclipse-paho/paho.mqtt.python
+  role: official
+- url: https://github.com/eclipse-paho/paho.mqtt.python/releases/tag/v2.1.0
+  role: dated
+- url: https://github.com/eclipse-paho/paho.mqtt.python/tree/af64a4365c6ac5a7a4d339e7b00f44df91353b35
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - At f2d3cf7589f62d5967e116e0d7c4f22196d8ca6d, no canonical or candidate ID/external-identifier collision and
+    no Paho textual match in state YAML. The subject is the Python client library, verified at 2.1.0, not the Eclipse
+    organization, a broker, the MQTT standard or a separate release identity.
+  merge_authorized: false
+unknowns:
+- The fixed README explicitly claims MQTT 5.0 client support. No upstream build, runtime/broker integration test,
+  exhaustive conformance or independent certification was performed for this intake.
+- MQTT 3.1.1 is the Client default; MQTTv5 must be selected explicitly. clean_session applies to MQTT 3.x, while
+  MQTT 5 uses clean_start and properties. README clean_session limitations are not asserted as tested MQTT 5 defects.
+- The fixed package metadata marks Development Status as Beta. A published non-prerelease release does not establish
+  stability or production suitability.
+- No exactly-once, restart durability, broker implementation, arbitrary broker interoperability, deployment security,
+  other-release behavior or IA-adoption guarantee is asserted.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
