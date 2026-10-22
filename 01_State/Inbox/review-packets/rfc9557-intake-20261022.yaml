@@ -1,0 +1,206 @@
+packet_id: rfc9557_intake_20261022
+status: pending_independent_semantic_review
+baseline_commit: 91c7c95e9e41caa9828e1f4fbb118b9ebf33bfab
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 承接 date_time_representation 的既有时间戳分支，补充缺失的 RFC 9557 / IXDTF 规范对象；已存在文字提及，不称全球知识空白。
+- 仅一个 artifact/specification、一条现有 extends 词表的有界关系、既有能力引用和 measurement 导航提议；不改既有 RFC 3339、ISO 8601 边界、分类、规范、治理、页面或维护方式。
+- '独立审核须核固定原文、发布身份、Z 的语义变化、关键注释错误处理及关系条件；本稿尚未冻结或接纳，PR #511 修复后重新预检已无身份碰撞，机器检查不替代语义审核。'
+source_evidence:
+- path: rfc9557.txt
+  url: https://www.rfc-editor.org/rfc/rfc9557.txt
+  resolved_url: https://www.rfc-editor.org/rfc/rfc9557.txt
+  sha256: 87fa632cd75d13aa441859da635ed6618f66d203fe71a30fa85afedbeb149e85
+  bytes: 39113
+  retrieved_at: '2026-10-22T03:35:20.358838+00:00'
+- path: rfc9557.html
+  url: https://www.rfc-editor.org/rfc/rfc9557.html
+  resolved_url: https://www.rfc-editor.org/rfc/rfc9557.html
+  sha256: d7cc2c033d8e4f4e3f7149003023567374997129c553dca1c68cf914bc2cd827
+  bytes: 109831
+  retrieved_at: '2026-10-22T03:35:23.266829+00:00'
+- path: rfc9557.xml
+  url: https://www.rfc-editor.org/rfc/rfc9557.xml
+  resolved_url: https://www.rfc-editor.org/rfc/rfc9557.xml
+  sha256: a7254494aa50671cde4746ac94b7db6b99a88145b7f5c331357dff6941a92391
+  bytes: 89379
+  retrieved_at: '2026-10-22T03:35:26.294830+00:00'
+- path: rfc9557-info.html
+  url: https://www.rfc-editor.org/info/rfc9557/
+  resolved_url: https://www.rfc-editor.org/info/rfc9557/
+  sha256: c585df7162898aa21dde9a7856da61aef1e25c7ff153f6f42b8293d7d9558fe9
+  bytes: 468497
+  retrieved_at: '2026-10-22T03:35:28.807141+00:00'
+- path: rfc9557-errata-search.html
+  url: https://www.rfc-editor.org/errata_search.php?rfc=9557
+  resolved_url: https://errata.rfc-editor.org/search/?rfc_number=9557
+  sha256: 82d59888aa35231adf2984c57749ebd711012b92c5353a1d887e3215cb5d666e
+  bytes: 14923
+  retrieved_at: '2026-10-22T03:35:38.110669+00:00'
+- path: rfc9557-erratum-8192.html
+  url: https://www.rfc-editor.org/errata/eid8192
+  resolved_url: https://errata.rfc-editor.org/eid8192/
+  sha256: 9cc8cb8abb5951bd66ee37b45058de7e9e9cfb1f7aeb0dc750d5e64a16c3e832
+  bytes: 9631
+  retrieved_at: '2026-10-22T03:35:46.378771+00:00'
+- path: rfc3339.txt
+  url: https://www.rfc-editor.org/rfc/rfc3339.txt
+  resolved_url: https://www.rfc-editor.org/rfc/rfc3339.txt
+  sha256: 9ab2b8864a85dca73a88f49b0927bc7bc85f596926e4fd1890905777924e700a
+  bytes: 35064
+  retrieved_at: '2026-10-22T03:35:50.074740+00:00'
+publication_identity:
+  official_title: 'Date and Time on the Internet: Timestamps with Additional Information'
+  rfc_number: '9557'
+  stream: IETF
+  current_status: Proposed Standard
+  published_month: 2024-04
+  doi: 10.17487/RFC9557
+  updates_rfc:
+  - '3339'
+  obsoletes_rfc: []
+  date_precision_note_zh: 官方 XML front/date 只有 month=04、year=2024；prepTime 不是发布日期，未补造日。
+  errata_checked_at: '2026-10-22T03:38:53.228786+00:00'
+  errata_reports:
+  - id: 8192
+    status: Rejected
+    type: Editorial
+    section: '3.4'
+    disposition_zh: 不应用所提修订，不改变规范性要求。
+existing_endpoint:
+  id: rfc3339
+  path: 01_State/01_Objects/rfc3339.yaml
+  git_blob: 1924afed24ea71b399c47d4eb144549d46ac901b
+  unchanged: true
+objects:
+- candidate_id: rfc9557
+  candidate_path: 01_State/Inbox/candidates/rfc9557.yaml
+  candidate_blob: 2d1cafb18af5946b9136d361073459c072177468
+  preflight:
+    checked_at: '2026-10-22T10:49:13.445026+00:00'
+    canonical_records: 216
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_record:
+    id: rfc9557
+    type: artifact
+    kind: specification
+    name_zh: RFC 9557 带附加信息的互联网时间戳
+    name_en: RFC 9557 Internet Timestamps with Additional Information
+    official_name: 'Date and Time on the Internet: Timestamps with Additional Information'
+    description_zh: 2024 年 4 月发布的 IETF Proposed Standard，定义互联网扩展日期时间格式（IXDTF），以可选后缀携带时区等附加信息，并更新 RFC 3339 中 Z 的语义。
+    description_en: An IETF Proposed Standard from April 2024 defining IXDTF, with optional timezone and other annotations,
+      and updating the meaning of Z in RFC 3339.
+    version: RFC 9557
+    external_identifiers:
+    - namespace: rfc
+      value: '9557'
+    official_url: https://www.rfc-editor.org/rfc/rfc9557.html
+    versions:
+    - version: RFC 9557
+      status: published
+      url: https://www.rfc-editor.org/info/rfc9557/
+    domains:
+    - time
+    - internet
+    capabilities:
+    - date_time_representation
+    scope_notes_zh: 固定 2024 年 4 月规范文档，不补造发布日期。第 1.1 节限定以 UTC 为参考的固定瞬时值，不覆盖浮动时间、其他时间尺度或因时区规则改变而改变瞬时值的未来本地时间。第 2.2–2.3
+      节把 Z 解释为 UTC 时间已知但本地偏移未知；+00:00 仍表示首选 UTC，-00:00 未被正式弃用。第 3.3–3.4 节允许忽略非关键注释；遇到标为关键但不识别或不一致的注释，必须拒绝或进行其他错误处理，不得默默照常使用。时区名不固定时区数据库版本，双方所用规则可能不同。第
+      5 节 u-ca 表示首选展示历法，第 4.2 节示例不改变瞬时值。后缀可选使原有 RFC 3339 字符串可进入 IXDTF 格式，不意味着旧解析器接受扩展字符串；§2 的语义更新须另行注意。此处是文献级记录，不是实现符合性、普遍互通、时钟同步、测量精度或
+      IA 采用证明。核验时勘误查询仅有已拒绝的编辑性报告 8192，不应用其建议改文。
+    scope_notes_en: Fixed April 2024 publication; no publication day is invented. Section 1.1 covers fixed UTC-referenced
+      instants, excluding floating time, other timescales and future local time whose instant changes with timezone
+      rules. Sections 2.2–2.3 make Z mean known UTC time with unknown local offset; +00:00 retains preferred-UTC
+      meaning and -00:00 is not formally deprecated. Sections 3.3–3.4 permit ignoring elective annotations but require
+      rejection or other error handling for unrecognized or inconsistent critical annotations. A timezone name does
+      not pin a timezone-database revision. Section 5 u-ca selects preferred calendar presentation; section 4.2
+      preserves the instant. Optional suffixes admit existing RFC 3339 strings, not acceptance of extended strings
+      by old parsers; the section 2 semantic update still matters. This is publication-level evidence, not implementation
+      conformance, universal interoperability, synchronization, measurement accuracy or IA adoption. The errata
+      search at verification returned only rejected editorial report 8192; its proposed edit is not applied.
+    sources:
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html
+      title: RFC 9557 (April 2024) — sections 1.1, 2.2–2.3, 3.3–3.4, 4.1–4.2 and 5
+      language: en
+      accessed: '2026-10-22'
+    - url: https://www.rfc-editor.org/info/rfc9557/
+      title: RFC Editor information — RFC 9557, Proposed Standard, April 2024; DOI 10.17487/RFC9557
+      language: en
+      accessed: '2026-10-22'
+    - url: https://errata.rfc-editor.org/search/?rfc_number=9557
+      title: RFC Editor errata search — RFC 9557; one rejected editorial report (8192) at verification
+      language: en
+      accessed: '2026-10-22'
+    last_verified_at: '2026-10-22T03:38:53.228786+00:00'
+    last_verified_by: Agent — OpenAI / dot，RFC 9557 normative-source evidence executor
+relations:
+- proposal_id: rfc9557_extends_rfc3339
+  evidence_level: normative publication text; no implementation probe
+  evidence_path:
+  - RFC 9557 §4.1 → RFC 3339 §5.6 grammar imports and optional suffix
+  - RFC 9557 §§1.1, 2.2–2.3 → compatibility and semantic-change boundaries
+  schema_errors:
+    relation.v0.schema.json: []
+  proposed_record:
+    id: rfc9557_extends_rfc3339
+    type: relation
+    name_zh: RFC 9557 以可选后缀扩展 RFC 3339 时间戳语法
+    name_en: RFC 9557 extends RFC 3339 timestamp syntax with optional suffixes
+    source: rfc9557
+    relation: extends
+    target: rfc3339
+    context:
+      capabilities:
+      - date_time_representation
+      version_context:
+        source: RFC 9557, April 2024 (IETF Proposed Standard)
+        target: RFC 3339, July 2002; section 5.6 grammar, with section 4.3 semantics updated by RFC 9557 section
+          2
+      conditions_zh: 仅表述 RFC 9557 §4.1 导入 RFC 3339 §5.6 的 date-time 与 time-numoffset，并以可选后缀定义 date-time-ext 的文献级语法扩展；直接依据正文，不把
+        RFC 元数据 Updates 自动映射为 extends。§1.1 的原有字符串兼容性不代表旧解析器接受扩展输入，也不抹去 §2 对 Z 的语义更新。此边不表示废止、替换、等价、双向兼容、关系传递性、普遍采用或任何实现（包括
+        pyRFC3339）符合 IXDTF；不扩展既有 RFC 3339 与 ISO 8601 的关系边界。
+      conditions_en: Limited to the publication-level grammar extension in RFC 9557 section 4.1, importing date-time
+        and time-numoffset from RFC 3339 section 5.6 and adding optional suffixes through date-time-ext. The body
+        text, not automatic translation of RFC Updates metadata, supports extends. Section 1.1 compatibility for
+        existing strings neither makes old parsers accept extended inputs nor erases section 2 changes to Z semantics.
+        No obsolescence, replacement, equivalence, bidirectional compatibility, transitivity, universal adoption
+        or implementation conformance (including pyRFC3339) is asserted; the existing RFC 3339/ISO 8601 boundary
+        remains unchanged.
+    evidence:
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+      title: RFC 9557 — section 4.1 ABNF imports and optional-suffix extension; read with sections 1.1 and 2
+      language: en
+      accessed: '2026-10-22'
+    - url: https://www.rfc-editor.org/rfc/rfc3339.txt
+      title: RFC 3339 (July 2002) — section 5.6 date-time and time-numoffset grammar
+      language: en
+      accessed: '2026-10-22'
+    last_verified_at: '2026-10-22T03:38:53.228786+00:00'
+    last_verified_by: Agent — OpenAI / dot，RFC 9557 normative-source evidence executor
+membership_proposals:
+- category_id: measurement
+  ref:
+    surface: canonical
+    id: rfc9557
+  rationale_zh: 沿既有测量、单位与时间导航补充固定瞬时值的附加信息表达；仅编辑导航，不声称时钟同步、测量精度或全局覆盖。正式接纳后才物化。
+verification_boundary_zh: 本轮针对规范文献身份、来源与有界关系做核验；没有运行实现探针，不把语法阅读或机器检查称为完整符合性测试。
+identity_preflight_history:
+  initial_baseline_commit: 8ee2f37b5fd8f9baeea2834d290aeb4e3da763f4
+  initial_route: identity_review_required
+  initial_collision: python_pyrfc3339
+  cause_zh: 旧适配器把已具完整显式身份的 pyRFC3339 库所引用的 RFC 9557 文献误纳为库身份；旧阻塞草稿未提交、未冻结、未接纳。
+  source_url: https://www.rfc-editor.org/rfc/rfc9557.html#section-2
+  repair_pr: https://github.com/InteropAtlas/InteropAtlas/pull/511
+  repair_main_commit: 91c7c95e9e41caa9828e1f4fbb118b9ebf33bfab
+  rechecked_at: '2026-10-22T10:49:13.445026+00:00'
+  current_route: review_required
+  resolution_zh: 在已合并修复后的完整底库重新运行原有标识归一化、候选与接纳检查；rfc:9557 无碰撞。没有删除来源、改换标识、裁剪基线或豁免身份审核门槛。仍须实际冻结并完成独立语义审核后才能接纳。
