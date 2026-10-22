@@ -1,0 +1,28 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261022-rfc9557
+candidate_id: rfc9557
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: rfc9557
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-22T10:50:40+00:00'
+  independent_from_executor: true
+  notes:
+  - '独立审核者对修复身份误判后的候选、完整中英拟入库对象、有界 extends 关系与 measurement 导航进行新一轮语义复核；明确接纳结论记录于 PR #512。'
+  - 认可 IETF Proposed Standard、2024 年 4 月与固定 RFC 9557 身份，保留 UTC 固定瞬时值、Z/+00:00/-00:00 区别、关键注释错误处理、时区数据库版本与 u-ca 展示边界；拒绝的编辑性勘误
+    8192 不应用。
+  - extends 仅来自 §4.1 对 RFC 3339 §5.6 语法的导入与可选后缀扩展，不从 Updates 元数据自动推出；不声称旧解析器兼容、规范替代、实现符合性、时钟同步或 IA 采用。
+  - 独立语义结论报告时间为 2026-10-22 10:50 UTC（分钟精度）；reviewed_at 记录实际收到该结论的时点 10:50:40 UTC，不冒称逐秒观察到的审核完成时间。执行者负责序列化；精确物化复核与机器检查不替代独立语义审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/227325c7cdc0f2430aa1dc0422706b75de9e45e6/01_State/Inbox/review-packets/rfc9557-intake-20261022.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/2d1cafb18af5946b9136d361073459c072177468
+- https://github.com/InteropAtlas/InteropAtlas/pull/512
+decided_at: '2026-10-22T10:55:15.800329+00:00'
+notes:
+- '候选、对象与接纳事件使用同一 rfc:9557 身份，并绑定实际已发布的冻结祖先；PR #511 仅修复误判，未豁免原有身份和接纳门槛。'
+- 本轮仅物化一份规范、一条有界 extends 关系及既有 measurement 导航；不改 RFC 3339、ISO 8601 边界或其他既有知识字段。

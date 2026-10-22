@@ -1,0 +1,68 @@
+id: rfc9557
+type: artifact
+kind: specification
+name_zh: RFC 9557 带附加信息的互联网时间戳
+name_en: RFC 9557 Internet Timestamps with Additional Information
+official_name: 'Date and Time on the Internet: Timestamps with Additional Information'
+description_zh: 2024 年 4 月发布的 IETF Proposed Standard，定义互联网扩展日期时间格式（IXDTF），以可选后缀携带时区等附加信息，并更新 RFC 3339 中 Z 的语义。
+description_en: An IETF Proposed Standard from April 2024 defining IXDTF, with optional timezone and other annotations,
+  and updating the meaning of Z in RFC 3339.
+version: RFC 9557
+external_identifiers:
+- namespace: rfc
+  value: '9557'
+official_url: https://www.rfc-editor.org/rfc/rfc9557.html
+versions:
+- version: RFC 9557
+  status: published
+  url: https://www.rfc-editor.org/info/rfc9557/
+domains:
+- time
+- internet
+capabilities:
+- date_time_representation
+scope_notes_zh: 固定 2024 年 4 月规范文档，不补造发布日期。第 1.1 节限定以 UTC 为参考的固定瞬时值，不覆盖浮动时间、其他时间尺度或因时区规则改变而改变瞬时值的未来本地时间。第 2.2–2.3
+  节把 Z 解释为 UTC 时间已知但本地偏移未知；+00:00 仍表示首选 UTC，-00:00 未被正式弃用。第 3.3–3.4 节允许忽略非关键注释；遇到标为关键但不识别或不一致的注释，必须拒绝或进行其他错误处理，不得默默照常使用。时区名不固定时区数据库版本，双方所用规则可能不同。第
+  5 节 u-ca 表示首选展示历法，第 4.2 节示例不改变瞬时值。后缀可选使原有 RFC 3339 字符串可进入 IXDTF 格式，不意味着旧解析器接受扩展字符串；§2 的语义更新须另行注意。此处是文献级记录，不是实现符合性、普遍互通、时钟同步、测量精度或
+  IA 采用证明。核验时勘误查询仅有已拒绝的编辑性报告 8192，不应用其建议改文。
+scope_notes_en: Fixed April 2024 publication; no publication day is invented. Section 1.1 covers fixed UTC-referenced
+  instants, excluding floating time, other timescales and future local time whose instant changes with timezone
+  rules. Sections 2.2–2.3 make Z mean known UTC time with unknown local offset; +00:00 retains preferred-UTC meaning
+  and -00:00 is not formally deprecated. Sections 3.3–3.4 permit ignoring elective annotations but require rejection
+  or other error handling for unrecognized or inconsistent critical annotations. A timezone name does not pin a
+  timezone-database revision. Section 5 u-ca selects preferred calendar presentation; section 4.2 preserves the
+  instant. Optional suffixes admit existing RFC 3339 strings, not acceptance of extended strings by old parsers;
+  the section 2 semantic update still matters. This is publication-level evidence, not implementation conformance,
+  universal interoperability, synchronization, measurement accuracy or IA adoption. The errata search at verification
+  returned only rejected editorial report 8192; its proposed edit is not applied.
+sources:
+- url: https://www.rfc-editor.org/rfc/rfc9557.html
+  title: RFC 9557 (April 2024) — sections 1.1, 2.2–2.3, 3.3–3.4, 4.1–4.2 and 5
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/info/rfc9557/
+  title: RFC Editor information — RFC 9557, Proposed Standard, April 2024; DOI 10.17487/RFC9557
+  language: en
+  accessed: '2026-10-22'
+- url: https://errata.rfc-editor.org/search/?rfc_number=9557
+  title: RFC Editor errata search — RFC 9557; one rejected editorial report (8192) at verification
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T03:38:53.228786+00:00'
+last_verified_by: Agent — OpenAI / dot，RFC 9557 normative-source evidence executor
+record_created_at: '2026-10-22T10:55:15.800329+00:00'
+record_updated_at: '2026-10-22T10:55:15.800329+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: rfc9557
+  acceptance_event_id: accept-20261022-rfc9557
+  reviewed_candidate_blob: 2d1cafb18af5946b9136d361073459c072177468
+  reviewed_against_commit: 227325c7cdc0f2430aa1dc0422706b75de9e45e6
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 227325c7cdc0f2430aa1dc0422706b75de9e45e6
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/512
