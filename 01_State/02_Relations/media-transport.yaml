@@ -1,0 +1,126 @@
+id: srtp_rfc3711_secures_rtp_rfc3550
+type: relation
+name_zh: RFC 3711 为 RFC 3550 的 RTP 与 RTCP 定义安全机制
+name_en: RFC 3711 defines security mechanisms for RFC 3550 RTP and RTCP
+source: srtp_rfc3711
+relation: secures
+target: rtp_rfc3550
+context:
+  version_context:
+    source: RFC 3711 (March 2004)
+    target: RFC 3550 (July 2003)
+  conditions_zh: >-
+    仅表述固定规范的安全机制关系：SRTP/SRTCP 为 RTP/RTCP 提供载荷保密、包完整性及重放防护机制。
+    这些服务可选且相互独立，但 SRTCP 完整性保护是强制要求；主密钥及其他密码上下文参数由 SRTP 外部的密钥管理机制提供。
+    不推定所有流量均已加密，不证明具体实现、配置或部署安全，也不概括后续版本。
+  conditions_en: >-
+    Specification-level protection of RTP/RTCP through SRTP/SRTCP payload confidentiality, packet integrity and replay protection.
+    These services are optional and independent except for mandatory SRTCP integrity protection. Master keys and other cryptographic-context
+    parameters come from key management external to SRTP. This does not imply universal encryption, implementation or deployment security,
+    or coverage of later versions.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc3711.html#section-2
+  title: RFC 3711 — Goals and Features; optional services and mandatory SRTCP integrity
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3711.html#section-3
+  title: RFC 3711 — SRTP Framework; explicit RFC 3550 endpoint and RTP/RTCP protection
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3711.html#section-3.2
+  title: RFC 3711 — SRTP Cryptographic Contexts; external key management
+  language: en
+  accessed: '2026-10-22'
+record_created_at: '2026-10-22T16:07:06+00:00'
+record_updated_at: '2026-10-22T16:07:06+00:00'
+last_verified_at: '2026-10-22T16:07:06+00:00'
+last_verified_by: Agent — OpenAI / dot, media transport relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: rtsp_rfc7826_uses_rtp_rfc3550
+type: relation
+name_zh: RTSP 2.0 选择 RTP 媒体传输时使用 RFC 3550
+name_en: RTSP 2.0 uses RFC 3550 when RTP media transport is selected
+source: rtsp_rfc7826
+relation: uses
+target: rtp_rfc3550
+context:
+  version_context:
+    source: RFC 7826 (December 2016)
+    target: RFC 3550 (July 2003)
+  conditions_zh: >-
+    仅限 RFC 7826 中选择 RTP 媒体传输的会话：RTSP 负责建立和控制，RTP 负责媒体传输；处理 RTP 的 RTSP 实体（RTSP agent）须支持 RTCP。
+    本关系不是所有 RTSP 会话都依赖 RTP 的断言，不等同于 RTSP 控制消息使用 RTP 传送，也不证明实际互通或服务质量。
+  conditions_en: >-
+    Limited to RFC 7826 sessions selecting RTP media transport. RTSP establishes and controls delivery; RTP carries media.
+    An RTSP agent handling RTP must support RTCP. This is not a universal RTP dependency for every RTSP session, does not
+    mean RTSP control messages travel over RTP, and does not establish actual interoperability or quality of service.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#section-1
+  title: RFC 7826 — Introduction; media delivery control
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#section-22.13.1
+  title: RFC 7826 — Transport Protocol Identifier; registered RTP media transports
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#appendix-C.1
+  title: RFC 7826 — RTP interaction and media-transport signaling
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#appendix-C.1.6
+  title: RFC 7826 — RTCP Usage with RTSP
+  language: en
+  accessed: '2026-10-22'
+record_created_at: '2026-10-22T16:07:06+00:00'
+record_updated_at: '2026-10-22T16:07:06+00:00'
+last_verified_at: '2026-10-22T16:07:06+00:00'
+last_verified_by: Agent — OpenAI / dot, media transport relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: rtsp_rfc7826_uses_srtp_rfc3711
+type: relation
+name_zh: RTSP 2.0 选择 RTP/SAVP/UDP 媒体传输时使用 RFC 3711
+name_en: RTSP 2.0 uses RFC 3711 when RTP/SAVP/UDP media transport is selected
+source: rtsp_rfc7826
+relation: uses
+target: srtp_rfc3711
+context:
+  version_context:
+    source: RFC 7826 (December 2016)
+    target: RFC 3711 (March 2004)
+  conditions_zh: >-
+    仅限 RFC 7826 第 22.13.1 节与附录 C.1.4 定义的 RTP/SAVP（等同 RTP/SAVP/UDP）媒体传输选择。
+    SAVP 在使用 RTP 的 RTSP 会话中是可选项；使用时须建立安全上下文，除非另行信令指定，默认采用 MIKEY RSA-R 密钥管理。
+    不表示所有 RTSP 会话都启用 SRTP，不把媒体保护等同于 RTSP 控制通道保护，也不证明部署安全。
+  conditions_en: >-
+    Limited to the RTP/SAVP (equivalently RTP/SAVP/UDP) media-transport choice in RFC 7826 section 22.13.1 and Appendix C.1.4.
+    SAVP is optional in RTP-based RTSP sessions. Its use requires a security context, with MIKEY RSA-R key management by default
+    unless otherwise signaled. This neither requires SRTP for every RTSP session nor equates media protection with RTSP control-channel
+    protection or proven deployment security.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#section-22.13.1
+  title: RFC 7826 — Transport Protocol Identifier; RTP/SAVP explicitly references RFC 3711
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc7826.html#appendix-C.1.4
+  title: RFC 7826 — SAVP/UDP; optional SRTP profile and security-context establishment
+  language: en
+  accessed: '2026-10-22'
+record_created_at: '2026-10-22T16:07:06+00:00'
+record_updated_at: '2026-10-22T16:07:06+00:00'
+last_verified_at: '2026-10-22T16:07:06+00:00'
+last_verified_by: Agent — OpenAI / dot, media transport relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
