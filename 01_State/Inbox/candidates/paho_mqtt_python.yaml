@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/eclipse-paho/paho.mqtt.python/tree/af64a4365c6ac5a7a4d339e7b00f44df91353b35
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - paho_mqtt_python
   reasons:
-  - At f2d3cf7589f62d5967e116e0d7c4f22196d8ca6d, no canonical or candidate ID/external-identifier collision and
-    no Paho textual match in state YAML. The subject is the Python client library, verified at 2.1.0, not the Eclipse
-    organization, a broker, the MQTT standard or a separate release identity.
+  - Accepted as canonical paho_mqtt_python by accept-20261022-paho-mqtt-python. Frozen new-state Candidate 363f62950a6e5017755880c55132d940ea735129
+    and its review_required route are replayed against actual ancestor e146680ea8f1266222a202a63ec28e53a181b7da;
+    this back-reference prevents duplicate creation and does not merge identities.
   merge_authorized: false
 unknowns:
 - The fixed README explicitly claims MQTT 5.0 client support. No upstream build, runtime/broker integration test,
@@ -34,4 +35,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / MQTT client semantic review

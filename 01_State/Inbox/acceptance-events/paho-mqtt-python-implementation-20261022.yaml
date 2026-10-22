@@ -1,0 +1,29 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261022-paho-mqtt-python
+candidate_id: paho_mqtt_python
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: paho_mqtt_python
+review:
+  reviewer: Independent Agent — OpenAI / dot / MQTT client semantic review
+  reviewed_at: '2026-10-22T22:17:20.667330+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate 363f62950a6e5017755880c55132d940ea735129 与 packet f8308bed8fdd630c75e1034d6ac3b4535963c8bd；核验固定版本/tag/commit、5份官方源指纹、主体身份、无碰撞预检和既有
+    MQTT 5.0 端点。
+  - 保留显式 MQTTv5 选择、默认 MQTT 3.1.1、网络循环与代理依赖、clean_session/clean_start 区别及 Beta 元数据；不将 README 的 clean_session 限制转写为已测试
+    MQTT 5 缺陷，不声称恰好一次、重启持久性、穷尽符合性或真实部署安全。
+  - 独立语义复核先于远端冻结；发布后重新读取两个已审文件并核验内容与 blob 完全相同。reviewed_at 记录本次接受序列化时点，最终精确物化另作独立结构复核；CI 不替代独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/e146680ea8f1266222a202a63ec28e53a181b7da/01_State/Inbox/review-packets/paho-mqtt-python-implementation-20261022.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/363f62950a6e5017755880c55132d940ea735129
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/f8308bed8fdd630c75e1034d6ac3b4535963c8bd
+decided_at: '2026-10-22T22:17:20.667330+00:00'
+notes:
+- 仅接受一个普通 Python 客户端库主体、一条有条件 implements MQTT 5.0 关系及既有 industrial 编辑导航；不改变 schema、taxonomy、capability、治理、设计或维护方式，不触碰
+  OPC UA identity-risk。
+- 正常 Git 祖先保留完整已审候选和 packet，当前 packet 仅为引用式回执，不复制 Canonical 事实。
