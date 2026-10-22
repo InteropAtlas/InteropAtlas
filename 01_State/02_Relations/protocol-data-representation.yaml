@@ -359,3 +359,50 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: rfc9557_extends_rfc3339
+type: relation
+name_zh: RFC 9557 以可选后缀扩展 RFC 3339 时间戳语法
+name_en: RFC 9557 extends RFC 3339 timestamp syntax with optional suffixes
+source: rfc9557
+relation: extends
+target: rfc3339
+context:
+  capabilities:
+  - date_time_representation
+  version_context:
+    source: RFC 9557, April 2024 (IETF Proposed Standard)
+    target: RFC 3339, July 2002; section 5.6 grammar, with section 4.3 semantics updated by RFC 9557 section 2
+  conditions_zh: 仅表述 RFC 9557 §4.1 导入 RFC 3339 §5.6 的 date-time 与 time-numoffset，并以可选后缀定义 date-time-ext 的文献级语法扩展；直接依据正文，不把
+    RFC 元数据 Updates 自动映射为 extends。§1.1 的原有字符串兼容性不代表旧解析器接受扩展输入，也不抹去 §2 对 Z 的语义更新。此边不表示废止、替换、等价、双向兼容、关系传递性、普遍采用或任何实现（包括
+    pyRFC3339）符合 IXDTF；不扩展既有 RFC 3339 与 ISO 8601 的关系边界。
+  conditions_en: Limited to the publication-level grammar extension in RFC 9557 section 4.1, importing date-time
+    and time-numoffset from RFC 3339 section 5.6 and adding optional suffixes through date-time-ext. The body text,
+    not automatic translation of RFC Updates metadata, supports extends. Section 1.1 compatibility for existing
+    strings neither makes old parsers accept extended inputs nor erases section 2 changes to Z semantics. No obsolescence,
+    replacement, equivalence, bidirectional compatibility, transitivity, universal adoption or implementation conformance
+    (including pyRFC3339) is asserted; the existing RFC 3339/ISO 8601 boundary remains unchanged.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+  title: RFC 9557 — section 4.1 ABNF imports and optional-suffix extension; read with sections 1.1 and 2
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3339.txt
+  title: RFC 3339 (July 2002) — section 5.6 date-time and time-numoffset grammar
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T03:38:53.228786+00:00'
+last_verified_by: Agent — OpenAI / dot，RFC 9557 normative-source evidence executor
+record_created_at: '2026-10-22T10:55:15.800329+00:00'
+record_updated_at: '2026-10-22T10:55:15.800329+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_packet_commit: 227325c7cdc0f2430aa1dc0422706b75de9e45e6
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/512
+  scope_zh: 仅接纳 RFC 9557 §4.1 导入 RFC 3339 §5.6 并增加可选后缀的 extends 关系；保留 §2 对 Z 的语义更新，不把 Updates 元数据泛化为关系词义，不推旧解析器兼容、替代、等价或实现符合性。

@@ -13,14 +13,16 @@ locators:
 - url: https://www.rfc-editor.org/rfc/rfc9557.html
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - rfc9557
   reasons:
-  - '固定 RFC 9557 规范与 pyRFC3339 库是不同主体。PR #511 修复参考文献来源误作显式身份后的当前底库预检：216 个正式对象中无 rfc:9557 碰撞，无同标识其他候选；可进入独立语义审核，但未获正式接纳，亦不授权身份合并。'
+  - 经独立语义审核由 accept-20261022-rfc9557 接纳为 RFC 9557 规范对象；原始 new/review_required 候选保留于真实冻结 commit/blob，当前回指仅防止重复创建，不与
+    pyRFC3339 库合并。
   merge_authorized: false
 unknowns:
 - 本轮只收录规范文献及有界语法扩展关系，不评估实现、完整符合性、普遍采用或生产适用性。
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
