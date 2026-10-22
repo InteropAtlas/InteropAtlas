@@ -124,3 +124,84 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: pending independent review
   github_actor: ff6962757
+---
+id: smpte_st2022_6_uses_rtp_rfc3550
+type: relation
+name_zh: SMPTE ST 2022-6:2012 的传输封装使用 RFC 3550 RTP 包头
+name_en: SMPTE ST 2022-6:2012 transport encapsulation uses RFC 3550 RTP headers
+source: smpte_st2022_6
+relation: uses
+target: rtp_rfc3550
+context:
+  version_context:
+    source: SMPTE ST 2022-6:2012
+    target: RFC 3550 (July 2003)
+  conditions_zh: >-
+    仅限固定 2012 版第 6.3 节的传输封装与包头要求：使用 IP/UDP/RTP 以及 RFC 3550 RTP 包头。
+    资料性引言说明，设备无需支持 RTCP 或 SDP，是否采用由实现者决定。
+    不据此断言完整 RFC 3550 符合性、强制 RTCP、与 ST 2110 等价或替代，也不证明具体设备互通或部署表现。
+  conditions_en: >-
+    Limited to the transport encapsulation and header requirements of section 6.3 in the fixed 2012 edition:
+    IP/UDP/RTP and the RFC 3550 RTP header are required. The informative introduction leaves RTCP and SDP support
+    to implementers rather than requiring them. This does not establish full RFC 3550 conformance, mandatory RTCP,
+    equivalence to or replacement of ST 2110, device interoperability, or deployment performance.
+evidence:
+- url: https://pub.smpte.org/latest/st2022-6/st2022-6-2012.pdf#page=6
+  title: SMPTE ST 2022-6:2012 — section 6.3, page 6; required IP/UDP/RTP and RFC 3550 header
+  language: en
+  accessed: '2026-10-22'
+- url: https://pub.smpte.org/latest/st2022-6/st2022-6-2012.pdf#page=2
+  title: SMPTE ST 2022-6:2012 — informative Introduction, page 2; optional RTCP and SDP support
+  language: en
+  accessed: '2026-10-22'
+record_created_at: '2026-10-22T16:59:30+00:00'
+record_updated_at: '2026-10-22T16:59:30+00:00'
+last_verified_at: '2026-10-22T16:59:30+00:00'
+last_verified_by: Agent — OpenAI / dot, media transport relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: w3c_webrtc_uses_rtp_rfc3550
+type: relation
+name_zh: WebRTC 指定的 RTP/RTCP 媒体 API 行为使用 RFC 3550
+name_en: Specified WebRTC RTP/RTCP media API behavior uses RFC 3550
+source: w3c_webrtc
+relation: uses
+target: rtp_rfc3550
+context:
+  version_context:
+    source: W3C WebRTC Recommendation (13 March 2025)
+    target: RFC 3550 (July 2003)
+  conditions_zh: >-
+    仅限固定 Recommendation 明确规定的媒体 API 行为：只读参数 RTCRtcpParameters.reducedSize 为 false 时，
+    表示配置了 RFC 3550 复合 RTCP；为 true 时表示 RFC 5506 精简 RTCP，而非所有会话都采用复合 RTCP。
+    RTCRtpTransceiver 停止发送与接收算法的第 3 步要求停止媒体发送，并按 RFC 3550 为此前发送的各 RTP 流发送 RTCP BYE。
+    不扩展为数据通道使用 RTP，不把整个 IETF RTCWEB 协议族视为该 W3C API 规范，也不推定明文媒体传输、浏览器符合性或实际互通。
+  conditions_en: >-
+    Limited to media API behavior explicitly specified by the fixed Recommendation. The read-only
+    RTCRtcpParameters.reducedSize parameter indicates RFC 3550 compound RTCP when false and RFC 5506 reduced-size
+    RTCP when true; compound RTCP is not asserted for every session. Step 3 of the RTCRtpTransceiver stop-sending-and-receiving
+    algorithm stops media sending and sends an RFC 3550 RTCP BYE for each RTP stream that the sender was sending.
+    This does not extend RTP use to data channels, equate the IETF RTCWEB protocol suite with this W3C API specification,
+    or imply plaintext media transport, browser conformance, or actual interoperability.
+evidence:
+- url: https://www.w3.org/TR/2025/REC-webrtc-20250313/#dom-rtcrtcpparameters-reducedsize
+  title: WebRTC Recommendation 2025-03-13 — section 5.2.6; read-only reducedSize and RFC 3550 compound RTCP
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.w3.org/TR/2025/REC-webrtc-20250313/#dfn-stop-sending-and-receiving
+  title: WebRTC Recommendation 2025-03-13 — section 5.4; stop sending and receiving, step 3, RFC 3550 RTCP BYE
+  language: en
+  accessed: '2026-10-22'
+record_created_at: '2026-10-22T16:59:30+00:00'
+record_updated_at: '2026-10-22T16:59:30+00:00'
+last_verified_at: '2026-10-22T16:59:30+00:00'
+last_verified_by: Agent — OpenAI / dot, media transport relation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
