@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/cisco/libsrtp/tree/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - cisco_libsrtp
   reasons:
-  - At a8c3aa7d4a5afd8152ed7e57ec42ebf0a14ae563, no canonical or candidate ID/external-identifier collision and
-    no libSRTP, cisco/libsrtp or libsrtp2 textual match in state YAML. This is the software-library subject pinned
-    for verification to release 2.8.1, not a new protocol, Cisco organization or a separate release subject.
+  - Accepted as canonical cisco_libsrtp by accept-20261022-libsrtp-cisco-libsrtp. Frozen new-state Candidate 4db9d776805e04d3f3c55e6ee6d84b224d2974cb
+    and its review_required route are replayed against actual ancestor f903230091bbffeb57b2411208f7f80cd9ff8d05;
+    this back-reference prevents duplicate creation and does not merge identities.
   merge_authorized: false
 unknowns:
 - The project documents RFC3711 mandatory-feature support. No upstream build, local runtime behavior, exhaustive
@@ -34,4 +35,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review

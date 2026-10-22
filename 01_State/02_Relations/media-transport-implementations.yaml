@@ -1,0 +1,64 @@
+id: cisco_libsrtp_implements_srtp_rfc3711
+type: relation
+name_zh: libSRTP 2.8.1 有界实现 SRTP
+name_en: libSRTP 2.8.1 implements bounded SRTP packet processing
+source: cisco_libsrtp
+relation: implements
+target: srtp_rfc3711
+context:
+  version_context:
+    source: libSRTP 2.8.1; official tag v2.8.1, commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa
+    target: RFC3711, March 2004
+  conditions_zh: 依据固定 2.8.1 README 的 RFC3711 mandatory-to-implement 特性声明和公共 SRTP/SRTCP 保护/验证 API，仅记录配置策略下的包处理实现。非零密钥派生率、AES-f8、按包索引选择主密钥不受支持；这不等于缺少
+    MKI API。可选加密后端、调用方策略/密钥材料、初始化、缓冲区对齐与尾部容量、错误处理等条件均适用。README 的 >65k 乱序说法与头文件 <32768 契约存在未测试差异，不保证某个乱序阈值。未运行上游库，不声称穷尽符合性、部署安全、密钥建立、端点认证、第三方互通或
+    IA 采用，也不传递为 RTP、RTSP、WebRTC 或 ST2110 的完整实现。
+  conditions_en: Based on the fixed 2.8.1 README’s RFC3711 mandatory-to-implement feature claim and public SRTP/SRTCP
+    protection/verification API, limited to packet processing under configured policies. Nonzero key-derivation
+    rates, AES-f8 and packet-index-based master-key selection are unsupported; this does not mean MKI APIs are absent.
+    Optional crypto backend, caller policy/key material, initialization, buffer alignment/trailer capacity and error
+    handling apply. The README’s >65k reordering wording and header’s <32768 contract differ and were not tested;
+    no reordering threshold is guaranteed. The upstream library was not run. This is not exhaustive conformance,
+    deployment-security, key-establishment, endpoint-authentication, third-party-interoperability or IA-adoption
+    evidence, and does not transitively establish complete RTP, RTSP, WebRTC or ST2110 implementations.
+evidence:
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L105-L154
+  title: libSRTP overview — SRTP/SRTCP protection APIs and caller policies
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L197-L223
+  title: libSRTP supported features — mandatory-feature claim and optional exclusions
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L230-L255
+  title: libSRTP implementation notes — backend requirements, caller storage and reordering wording
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L329-L426
+  title: libSRTP public policy and sender API — caller key material, initialization, buffer contract and error boundary
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L483-L522
+  title: libSRTP receiver API — verification, authentication/replay failures and stricter reordering contract
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L1274-L1427
+  title: libSRTP public RTCP protection and verification APIs
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/CMakeLists.txt#L84-L118
+  title: libSRTP CMake — optional mutually exclusive OpenSSL, MbedTLS or NSS backend
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3711.html#section-5
+  title: RFC3711 section 5 — mandatory implementation, optional transforms and default parameters
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T16:22:18.927416+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed libSRTP evidence executor
+record_created_at: '2026-10-22T16:31:08.562725+00:00'
+record_updated_at: '2026-10-22T16:31:08.562725+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
+  github_actor: ff6962757
