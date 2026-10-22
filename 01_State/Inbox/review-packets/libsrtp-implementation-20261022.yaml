@@ -106,38 +106,56 @@ objects:
     domains:
     - media
     - networking
-    scope_notes_zh:
-    - 软件库主体按既有 system/library 模式记录，核验版本 2.8.1 对应官方 tag v2.8.1 与 commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa；不是
+    scope_notes_zh: '软件库主体按既有 system/library 模式记录，核验版本 2.8.1 对应官方 tag v2.8.1 与 commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa；不是
       Cisco 组织、SRTP 规范或完整会议应用。
-    - README 声称支持 RFC3711 全部 mandatory-to-implement 特性，部分由 srtp_policy_t 选择。明确不支持非零密钥派生率、AES-f8 与按包索引选择主密钥。这些是可选项边界，不是独立穷尽符合性证明；不得把主密钥选择限制误写为无
+
+
+      README 声称支持 RFC3711 全部 mandatory-to-implement 特性，部分由 srtp_policy_t 选择。明确不支持非零密钥派生率、AES-f8 与按包索引选择主密钥。这些是可选项边界，不是独立穷尽符合性证明；不得把主密钥选择限制误写为无
       MKI 支持，公共头文件另有 MKI API。
-    - CMake 中 OpenSSL、MbedTLS、NSS 后端均为可选且互斥，默认关闭。内部加密实现提供 AES-128/AES-256 与 SHA1；AES-192/AES-GCM 需要外部后端。不是每个构建都依赖全部后端，也不由额外
+
+
+      CMake 中 OpenSSL、MbedTLS、NSS 后端均为可选且互斥，默认关闭。内部加密实现提供 AES-128/AES-256 与 SHA1；AES-192/AES-GCM 需要外部后端。不是每个构建都依赖全部后端，也不由额外
       AES-GCM 支持推导 RFC7714 关系。
-    - 调用方负责初始化、SRTP/SRTCP 策略与主密钥材料、包缓冲区对齐和足够可写尾部空间，并区分成功、认证失败、重放拒绝及其他错误；失败后不得假定包或长度有效。允许重复发送时必须保持 RTP 载荷不变。此库记录不证明安全密钥建立或端点认证。
-    - 固定 README 提到超过 65k 包乱序将失步，而公共 protect/unprotect 头文件要求乱序少于 32768 包；保留这项源码文档不一致，不声称已测试任一阈值或替上游解决差异。
-    - 本批未构建或运行 libSRTP，不声称完整规范符合性、加密审计、所有平台/后端适用性、真实第三方互通、部署安全、RTSP/WebRTC/ST2110 完整实现或 IA 实际采用。许可证字段针对固定库源码，不覆盖可选外部后端。
-    scope_notes_en:
-    - The software-library subject follows the existing system/library pattern and is verified at 2.8.1, official
-      tag v2.8.1, commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa; it is not Cisco as an organization, the SRTP
-      specification, or a complete conferencing application.
-    - The README claims all RFC3711 mandatory-to-implement features, some selectable through srtp_policy_t. It excludes
+
+
+      调用方负责初始化、SRTP/SRTCP 策略与主密钥材料、包缓冲区对齐和足够可写尾部空间，并区分成功、认证失败、重放拒绝及其他错误；失败后不得假定包或长度有效。允许重复发送时必须保持 RTP 载荷不变。此库记录不证明安全密钥建立或端点认证。
+
+
+      固定 README 提到超过 65k 包乱序将失步，而公共 protect/unprotect 头文件要求乱序少于 32768 包；保留这项源码文档不一致，不声称已测试任一阈值或替上游解决差异。
+
+
+      本批未构建或运行 libSRTP，不声称完整规范符合性、加密审计、所有平台/后端适用性、真实第三方互通、部署安全、RTSP/WebRTC/ST2110 完整实现或 IA 实际采用。许可证字段针对固定库源码，不覆盖可选外部后端。'
+    scope_notes_en: 'The software-library subject follows the existing system/library pattern and is verified at
+      2.8.1, official tag v2.8.1, commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa; it is not Cisco as an organization,
+      the SRTP specification, or a complete conferencing application.
+
+
+      The README claims all RFC3711 mandatory-to-implement features, some selectable through srtp_policy_t. It excludes
       nonzero key-derivation rates, AES-f8 and packet-index-based master-key selection. This is an upstream claim
       with optional-feature limits, not independently established exhaustive conformance. The last exclusion does
       not mean absence of MKI; the public header exposes MKI APIs.
-    - CMake makes OpenSSL, MbedTLS and NSS optional mutually exclusive backends, defaulting OFF. Internal crypto
+
+
+      CMake makes OpenSSL, MbedTLS and NSS optional mutually exclusive backends, defaulting OFF. Internal crypto
       supplies AES-128/AES-256 and SHA1; AES-192/AES-GCM need an external backend. Not every build depends on all
       backends, and additional AES-GCM support does not create an RFC7714 relation in this slice.
-    - Callers supply initialization, SRTP/SRTCP policy and master-key material, aligned packet buffers and adequate
+
+
+      Callers supply initialization, SRTP/SRTCP policy and master-key material, aligned packet buffers and adequate
       writable trailer capacity, and must distinguish success, authentication failure, replay rejection and other
       errors. Failed calls leave no usable packet/length assumption. Permitted repeated transmission requires an
       unchanged RTP payload. This record does not establish safe key exchange or endpoint authentication.
-    - The fixed README mentions loss of synchronization beyond 65k reordered packets, while the public protect/unprotect
+
+
+      The fixed README mentions loss of synchronization beyond 65k reordered packets, while the public protect/unprotect
       header requires reordering below 32768 packets. This source-documentation discrepancy is retained without
       testing either boundary or resolving it on behalf of upstream.
-    - No libSRTP build or runtime test was performed for this intake. No exhaustive conformance, cryptographic audit,
+
+
+      No libSRTP build or runtime test was performed for this intake. No exhaustive conformance, cryptographic audit,
       every-platform/backend applicability, actual third-party interoperability, deployment security, complete RTSP/WebRTC/ST2110
       implementation or IA adoption is asserted. The license field covers fixed library sources, not optional external
-      backends.
+      backends.'
     sources:
     - url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L7-L23
       title: libSRTP introduction — software-library identity and explicit RFC3711 implementation claim
