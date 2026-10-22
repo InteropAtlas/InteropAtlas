@@ -1,0 +1,133 @@
+id: cisco_libsrtp
+type: system
+kind: library
+name_zh: libSRTP 安全实时传输库
+name_en: libSRTP Secure Real-time Transport Library
+official_name: libSRTP
+version: 2.8.1
+external_identifiers:
+- namespace: github
+  value: cisco/libsrtp
+description_zh: Cisco libSRTP 项目的开源 C 库，提供按调用方策略与密钥材料执行 SRTP/SRTCP 包保护和验证的 API。本记录固定核验 2.8.1 的官方源码与文档，不将项目的 RFC3711
+  实现声明等同于独立符合性或部署安全认证。
+description_en: The Cisco libSRTP project’s open-source C library exposes policy- and key-configured SRTP/SRTCP
+  packet-protection and verification APIs. This record verifies the official 2.8.1 sources and documentation, not
+  independent conformance or deployment-security certification.
+open_source: true
+license_expression: BSD-3-Clause
+domains:
+- media
+- networking
+scope_notes_zh: '软件库主体按既有 system/library 模式记录，核验版本 2.8.1 对应官方 tag v2.8.1 与 commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa；不是
+  Cisco 组织、SRTP 规范或完整会议应用。
+
+
+  README 声称支持 RFC3711 全部 mandatory-to-implement 特性，部分由 srtp_policy_t 选择。明确不支持非零密钥派生率、AES-f8 与按包索引选择主密钥。这些是可选项边界，不是独立穷尽符合性证明；不得把主密钥选择限制误写为无
+  MKI 支持，公共头文件另有 MKI API。
+
+
+  CMake 中 OpenSSL、MbedTLS、NSS 后端均为可选且互斥，默认关闭。内部加密实现提供 AES-128/AES-256 与 SHA1；AES-192/AES-GCM 需要外部后端。不是每个构建都依赖全部后端，也不由额外
+  AES-GCM 支持推导 RFC7714 关系。
+
+
+  调用方负责初始化、SRTP/SRTCP 策略与主密钥材料、包缓冲区对齐和足够可写尾部空间，并区分成功、认证失败、重放拒绝及其他错误；失败后不得假定包或长度有效。允许重复发送时必须保持 RTP 载荷不变。此库记录不证明安全密钥建立或端点认证。
+
+
+  固定 README 提到超过 65k 包乱序将失步，而公共 protect/unprotect 头文件要求乱序少于 32768 包；保留这项源码文档不一致，不声称已测试任一阈值或替上游解决差异。
+
+
+  本批未构建或运行 libSRTP，不声称完整规范符合性、加密审计、所有平台/后端适用性、真实第三方互通、部署安全、RTSP/WebRTC/ST2110 完整实现或 IA 实际采用。许可证字段针对固定库源码，不覆盖可选外部后端。'
+scope_notes_en: 'The software-library subject follows the existing system/library pattern and is verified at 2.8.1,
+  official tag v2.8.1, commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa; it is not Cisco as an organization, the
+  SRTP specification, or a complete conferencing application.
+
+
+  The README claims all RFC3711 mandatory-to-implement features, some selectable through srtp_policy_t. It excludes
+  nonzero key-derivation rates, AES-f8 and packet-index-based master-key selection. This is an upstream claim with
+  optional-feature limits, not independently established exhaustive conformance. The last exclusion does not mean
+  absence of MKI; the public header exposes MKI APIs.
+
+
+  CMake makes OpenSSL, MbedTLS and NSS optional mutually exclusive backends, defaulting OFF. Internal crypto supplies
+  AES-128/AES-256 and SHA1; AES-192/AES-GCM need an external backend. Not every build depends on all backends, and
+  additional AES-GCM support does not create an RFC7714 relation in this slice.
+
+
+  Callers supply initialization, SRTP/SRTCP policy and master-key material, aligned packet buffers and adequate
+  writable trailer capacity, and must distinguish success, authentication failure, replay rejection and other errors.
+  Failed calls leave no usable packet/length assumption. Permitted repeated transmission requires an unchanged RTP
+  payload. This record does not establish safe key exchange or endpoint authentication.
+
+
+  The fixed README mentions loss of synchronization beyond 65k reordered packets, while the public protect/unprotect
+  header requires reordering below 32768 packets. This source-documentation discrepancy is retained without testing
+  either boundary or resolving it on behalf of upstream.
+
+
+  No libSRTP build or runtime test was performed for this intake. No exhaustive conformance, cryptographic audit,
+  every-platform/backend applicability, actual third-party interoperability, deployment security, complete RTSP/WebRTC/ST2110
+  implementation or IA adoption is asserted. The license field covers fixed library sources, not optional external
+  backends.'
+sources:
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L7-L23
+  title: libSRTP introduction — software-library identity and explicit RFC3711 implementation claim
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L105-L154
+  title: libSRTP overview — SRTP/SRTCP protection APIs and caller policies
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L197-L223
+  title: libSRTP supported features — mandatory-feature claim and optional exclusions
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L230-L255
+  title: libSRTP implementation notes — backend requirements, caller storage and reordering wording
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L329-L426
+  title: libSRTP public policy and sender API — caller key material, initialization, buffer contract and error boundary
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L483-L522
+  title: libSRTP receiver API — verification, authentication/replay failures and stricter reordering contract
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L1274-L1427
+  title: libSRTP public RTCP protection and verification APIs
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/CMakeLists.txt#L84-L118
+  title: libSRTP CMake — optional mutually exclusive OpenSSL, MbedTLS or NSS backend
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/LICENSE
+  title: libSRTP fixed source license — BSD-3-Clause
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/CMakeLists.txt#L1-L7
+  title: libSRTP CMake — release version 2.8.1
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/releases/tag/v2.8.1
+  title: Official libSRTP v2.8.1 release, published 2026-09-21
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T16:22:18.927416+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed libSRTP evidence executor
+record_created_at: '2026-10-22T16:31:08.562725+00:00'
+record_updated_at: '2026-10-22T16:31:08.562725+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: cisco_libsrtp
+  acceptance_event_id: accept-20261022-libsrtp-cisco-libsrtp
+  reviewed_candidate_blob: 4db9d776805e04d3f3c55e6ee6d84b224d2974cb
+  reviewed_against_commit: f903230091bbffeb57b2411208f7f80cd9ff8d05
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: f903230091bbffeb57b2411208f7f80cd9ff8d05
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/f903230091bbffeb57b2411208f7f80cd9ff8d05/01_State/Inbox/review-packets/libsrtp-implementation-20261022.yaml
