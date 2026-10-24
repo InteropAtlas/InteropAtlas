@@ -1,0 +1,23 @@
+packet_id: broadcast_loudness_annex1_20261024
+status: materialized
+reviewed_packet_commit: 89ce9bd64a102ae7e457877403c475c501ce3693
+reviewed_packet_blob: 1febac4f4ade8f118a8f2b02cf39169eac340ae1
+reviewed_packet_path: 01_State/Inbox/review-packets/broadcast-loudness-annex1-20261024.yaml
+baseline_commit: cd6d7d18f7f3f5fdc83022f283aecc3eb2d0e9a7
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/broadcast-loudness-annex1-20261024.yaml
+objects:
+- candidate_id: broadcast_loudness
+  canonical_id: broadcast_loudness
+  acceptance_event_id: accept-20261024-broadcast-loudness-annex1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/89ce9bd64a102ae7e457877403c475c501ce3693/01_State/Inbox/review-packets/broadcast-loudness-annex1-20261024.yaml
+relations:
+- proposal_id: broadcast_loudness_implements_bs1770_5_annex1
+  canonical_relation_id: broadcast_loudness_implements_bs1770_5_annex1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/89ce9bd64a102ae7e457877403c475c501ce3693/01_State/Inbox/review-packets/broadcast-loudness-annex1-20261024.yaml
+notes_zh:
+- 仅为引用式回执；完整被审主体、关系、固定来源指纹和导航提案保留在真实 Git 祖先 commit/blob。
+- 仅覆盖 broadcast-loudness 0.5.0 的调用方归一化有限 planar Stereo 48 kHz 输入、成功 push 后 finish 再 integrated_lufs 的 BS.1770-5
+  Annex 1 静态路径。
+- 保留失败批次非原子/无回滚保证、末尾部分块丢弃、负无穷条件、历史增长、系数及 log/pow 数值边界；不扩为其他率/布局/指标、完整符合性、R128 V5、安全或认证。
+- 19 个非生成归档成员匹配固定 Git 树；许可证文本缺包、测试工作区 dev dependency 缺失均为静态打包观察。未执行 Rust/音频/构建/测试，未重新下载或重试既有 API 403。

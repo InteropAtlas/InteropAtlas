@@ -1,0 +1,82 @@
+id: broadcast_loudness_implements_bs1770_5_annex1
+type: relation
+name_zh: broadcast-loudness 0.5.0 有界实现 BS.1770-5 Annex 1 立体声集成响度路径
+name_en: broadcast-loudness 0.5.0 implements bounded BS.1770-5 Annex 1 stereo integrated loudness
+source: broadcast_loudness
+relation: implements
+target: itur_bs1770
+context:
+  version_context:
+    source: broadcast-loudness crate 0.5.0; commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce, subdirectory broadcast-loudness
+    target: ITU-R BS.1770-5 (11/2023), Annex 1 only; existing work-level itur_bs1770 record is pinned to this edition
+  conditions_zh: 仅静态源码映射至 BS.1770-5 (11/2023) Annex 1：LoudnessMeter::new(48000, ChannelLayout::Stereo)，等长左右 planar
+    f32 PCM、全部样本有限且由调用方按标称满刻度缩放并限于 [-1,1]，所有 push_stereo_planar_f32 调用成功，随后 finish() 再 integrated_lufs()。库不强制该幅度范围，不是音频归一化。涵盖两级
+    K 加权、左右单位权重、完整 400 ms 块/100 ms 步长、严格大于 -70 的绝对门和绝对门后能量均值低 10 的相对门；只比对公式与实现路径，不给数值容差、比特精确或阈值边缘保证。最后不完整子块被丢弃；少于
+    19,200 帧、静音或无合格块可返回负无穷，finish 前缓存也为负无穷，完整块不保证有限结果。错误批次非原子，有效前缀可先改变状态，frame_count 却仅整批成功后增加；不保证回滚、安全重试或错误后继续。系数推导和
+    log/pow 往返未实测，门限/短期历史随时长增长。排除其他采样率、布局和输入重载、真峰值/Annex 2 及其余附录、LRA/瞬时/短期精度、EBU R128 V5 符合性或目标、完整 Recommendation
+    符合性、认证、安全、第三方互通和 IA 采用。未编译或运行 Rust 库、音频、示例或上游测试；测试定义及独立标量算术不是库运行结果。
+  conditions_en: 'Static correspondence only to BS.1770-5 (11/2023) Annex 1: LoudnessMeter::new(48000, ChannelLayout::Stereo),
+    equal-length planar left/right f32 PCM with every sample finite and caller-scaled to nominal full scale within
+    [-1,1], all push_stereo_planar_f32 calls successful, then finish(), then integrated_lufs(). The library does
+    not enforce that amplitude range or normalize audio. Covers two-stage K weighting, unit stereo weights, complete
+    400 ms blocks at 100 ms steps, a strict above -70 absolute gate and a relative gate 10 below the energy mean
+    after absolute gating. Formula/source-path comparison provides no numerical tolerance, bit-exact or threshold-edge
+    guarantee. Incomplete final sub-blocks are discarded; fewer than 19,200 frames, silence or no eligible blocks
+    can produce negative infinity, as does the initialized cache before finish; complete blocks alone do not guarantee
+    a finite answer. Failed batches are non-atomic: a valid prefix can change state while frame_count advances only
+    after whole-batch success; no rollback, safe retry or continuation guarantee. Derived coefficients and log/pow
+    round trips were not runtime-tested; gating/short-term histories grow with duration. Excludes other rates/layouts/input
+    overloads, true peak/Annex 2 and remaining annexes, LRA/momentary/short-term accuracy, EBU R128 V5 targets/conformance,
+    complete Recommendation conformance, certification, security, third-party interoperability and IA adoption.
+    No Rust-library, audio, example or upstream-test compilation/execution occurred; test definitions and independent
+    scalar arithmetic are not library runtime results.'
+evidence:
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/README.md#L34-L41
+  title: Exact BS.1770-5 (11/2023) edition anchor, not adoption of broad upstream conformance claims
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/filter.rs#L74-L152
+  title: K-weighting recurrence and derived two-stage coefficients — Annex 1 Tables 1–2
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/channel_layout.rs#L58-L63
+  title: Stereo left/right unit weights — Annex 1 Table 3
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L65-L85
+  title: Energy/loudness conversion, not a measured numerical tolerance
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L300-L328
+  title: Constructor, 48 kHz sub-block sizing and initialized integrated cache
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L364-L415
+  title: Complete sub-block accumulation, 400 ms windows and growing histories
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L512-L563
+  title: Planar stereo f32 path and non-atomic error boundary
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L571-L639
+  title: Discarded partial tail, strict two-stage gates and integrated_lufs accessor
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L682-L689
+  title: Energy-domain averaging via log/pow conversions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.1770-5-202311-I%21%21PDF-E.pdf#page=6
+  title: Official BS.1770-5 Annex 1 printed pages 4–7/PDF pages 6–9 — filters, weighting and gating equations
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T16:22:56.596196+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded Annex 1 static-mapping executor
+record_created_at: '2026-10-24T16:35:21.055813+00:00'
+record_updated_at: '2026-10-24T16:35:21.055813+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_loudness_annex1_intake
+  github_actor: ff6962757
