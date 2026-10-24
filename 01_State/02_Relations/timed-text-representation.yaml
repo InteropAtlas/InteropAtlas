@@ -71,3 +71,40 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / timed-text semantic review
   github_actor: ff6962757
+---
+id: w3c_imsc_uses_ebu_tt_d_text_styling
+type: relation
+name_zh: IMSC 1.2 文本配置复用 EBU-TT-D 的两项文本样式属性
+name_en: IMSC 1.2 Text Profile reuses two EBU-TT-D text styling attributes
+source: w3c_imsc
+relation: uses
+target: ebu_tt_d
+context:
+  version_context:
+    source: IMSC 1.2, W3C Recommendation 2020-08-04, Text Profile
+    target: EBU Tech 3380 Version 1.0.1, May 2018
+  conditions_zh: 仅限 F.6–F.7 及 9.5.14–9.5.15 对 ebutts:linePadding 和 ebutts:multiRowAlign 的复用。IMSC 允许属性置于 style、region、body、div、p、initial，EBU-TT-D
+    仅允许置于 style；IMSC 将两者视为可继承且仅作用于 p。文档不必显式包含这些属性；linePadding 仅用 c 单位。不主张 Image Profile 行为、整体格式兼容、无损转换、渲染一致或实现符合性。
+  conditions_en: Limited to Text Profile reuse of ebutts:linePadding and ebutts:multiRowAlign under F.6–F.7 and
+    9.5.14–9.5.15. IMSC permits placement on style, region, body, div, p and initial; EBU-TT-D restricts placement
+    to style. IMSC treats both as inheritable, applying only to p. Documents need not explicitly include these attributes;
+    linePadding uses c units only. No Image Profile behavior, whole-format compatibility, lossless conversion, identical
+    rendering or implementation conformance is asserted.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-ttml-imsc1.2-20200804/#feature-linePadding
+  title: IMSC 1.2 — F.6–F.7, 9.5.14–9.5.15 and M.1 normative EBU-TT-D 1.0.1 reference
+  language: en
+  accessed: '2026-10-24'
+- url: https://tech.ebu.ch/docs/tech/tech3380v1_0_1.pdf
+  title: EBU Tech 3380 v1.0.1 — 3.1.2.1 (pages 20–21), Annexes C–D
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T10:27:13.476970+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed IMSC–EBU styling evidence executor
+record_created_at: '2026-10-24T10:27:13.476970+00:00'
+record_updated_at: '2026-10-24T10:27:13.476970+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / IMSC–EBU styling review
+  github_actor: ff6962757
