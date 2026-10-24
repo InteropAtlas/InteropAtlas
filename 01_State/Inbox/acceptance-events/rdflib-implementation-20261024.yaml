@@ -1,0 +1,29 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-rdflib
+candidate_id: rdflib
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: rdflib
+review:
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  reviewed_at: '2026-10-24T09:29:18.384268+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate d2e619bd3ce99e41c74e612d9ddc71ca53372398 与 packet 4c4adaf0febb2eac9b6a13f546f9ac62ab0369ed；核验
+    release/tag/commit/version、GitHub/PyPI 库身份、固定来源指纹、既有 SPARQL Query 与 pySHACL 端点、范围/锁定依赖和无碰撞预检。
+  - 保留内置 SPARQLProcessor、可信预加载本地图、use_store_provided=False 非沙箱、SERVICE/FROM/插件风险、DESCRIBE CBD、W3C harness xfail/skip
+    边界。pySHACL 的必需范围、锁定版本、实际安装分开，其调用未强制内置路径，不传递完整符合性或安全保证；不宣称 IA 采用。
+  - 独立语义复核先于远端冻结；正常 Git fetch 后复验完整冻结字节与 blob。reviewed_at 是接受序列化时点，最终六文件另须独立结构复核。静态源码/测试定义审阅不是上游执行结果；现有 implementation
+    renderer 不呈现完整 scope_notes，不借此改动页面引擎。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/eea44d30f284d9aa007baa48f43fe01ef22206f8/01_State/Inbox/review-packets/rdflib-implementation-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/d2e619bd3ce99e41c74e612d9ddc71ca53372398
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/4c4adaf0febb2eac9b6a13f546f9ac62ab0369ed
+decided_at: '2026-10-24T09:29:18.384268+00:00'
+notes:
+- 仅接受一个固定 Python system/library、一条有界 implements 与一条 depends_on 关系和一个既有 semantics 导航成员；不新增 capability/schema/taxonomy/治理/页面/维护模型或其他标准扩展关系。
+- 正常祖先保留完整被审原稿；当前 packet 仅引用式回执，不复制 Canonical 事实。

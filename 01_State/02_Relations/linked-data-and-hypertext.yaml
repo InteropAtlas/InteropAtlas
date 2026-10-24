@@ -767,3 +767,157 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: rdflib_implements_sparql11_query_2013
+type: relation
+name_zh: RDFLib 7.6.0 有界实现 SPARQL 1.1 查询语言
+name_en: RDFLib 7.6.0 implements bounded SPARQL 1.1 Query Language paths
+source: rdflib
+relation: implements
+target: sparql11_query_2013
+context:
+  version_context:
+    source: RDFLib 7.6.0; tag 7.6.0, commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd
+    target: W3C SPARQL 1.1 Query Language, Recommendation 2013-03-21
+  conditions_zh: 限内置 SPARQLProcessor、可信查询及预加载本地图；Graph.query 使用 use_store_provided=False 绕过 store.query，且不覆盖处理器注册/evaluator/函数。覆盖
+    SELECT、ASK、CONSTRUCT、DESCRIBE、基本图模式及源码/测试支持的部分聚合和子查询；DESCRIBE 采用 CBD，输出范围由处理器决定。此参数不是离线或沙箱开关，SERVICE、FROM/FROM
+    NAMED、插件及间接加载可能访问网络/文件，本边排除这些外部路径和不可信输入。固定 W3C harness 存在 AVG、聚合/分组、pp37 与语法负例 xfail 及 SERVICE skip，不声称完整符合性、全测试通过或安全。上游测试仅审阅未执行；不扩展至
+    Update、Protocol、结果格式、Federated Query、entailment、RDF 1.2 或 IA 采用。
+  conditions_en: 'Limited to built-in SPARQLProcessor, trusted queries and preloaded local graph data; Graph.query
+    uses use_store_provided=False to bypass store.query, without processor-registration/evaluator/function overrides.
+    Covers SELECT, ASK, CONSTRUCT, DESCRIBE, basic graph patterns and only source/test-supported aggregate and subquery
+    paths. DESCRIBE uses CBD with processor-determined scope. The option is not an offline/sandbox switch: SERVICE,
+    FROM/FROM NAMED, plugins and indirect loading can access network/files; these external paths and untrusted input
+    are excluded. The fixed W3C harness has AVG, aggregate/grouping, pp37 and negative-syntax xfails plus SERVICE
+    skips; no full conformance, all-tests-pass or security claim. Upstream tests were inspected, not run. Update,
+    Protocol, result formats, Federated Query, entailment, RDF 1.2 and IA adoption are outside scope.'
+evidence:
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/intro_to_sparql.md#L1-L9
+  title: RDFLib query documentation distinguishes Query from Update and lists four query forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/graph.py#L1675-L1742
+  title: Graph.query — use_store_provided=False bypasses store dispatch, not a network/file sandbox
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugin.py#L503-L520
+  title: RDFLib built-in SPARQLProcessor registration, separate from UpdateProcessor
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/processor.py#L108-L146
+  title: SPARQLProcessor query parse, translate and evaluate path
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L77-L104
+  title: Built-in basic graph pattern evaluation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L276-L340
+  title: Built-in evaluation dispatch and custom evaluator priority
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L576-L650
+  title: SELECT, ASK, CONSTRUCT and DESCRIBE; DESCRIBE uses CBD
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_agg_distinct.py
+  title: Local aggregate-query test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_subselect.py
+  title: Local subquery test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_construct_bindings.py
+  title: CONSTRUCT and initial-binding test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_sparql.py#L888-L977
+  title: DESCRIBE test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_w3c_spec/test_sparql11_w3c.py#L28-L222
+  title: W3C harness declares xfail query cases and SERVICE skips; not a full-conformance result
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/security_considerations.md#L1-L18
+  title: RDFLib documents arbitrary and indirect network/file access; input trust and external restrictions matter
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L343-L376
+  title: Built-in SERVICE evaluation can call urlopen
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/__init__.py#L9-L52
+  title: SPARQL_LOAD_GRAPHS=True and custom evaluator entry points
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/sparql.py#L264-L384
+  title: Dataset clauses can load graphs through QueryContext and Graph.parse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#QueryForms
+  title: W3C SPARQL 1.1 Query Language — query forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#describe
+  title: W3C section 16.4 — DESCRIBE description determined by the query processor
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T09:22:25.554473+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed RDFLib query source evidence executor
+record_created_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  github_actor: ff6962757
+---
+id: pyshacl_depends_on_rdflib
+type: relation
+name_zh: pySHACL 0.40.1 声明 RDFLib 必需依赖
+name_en: pySHACL 0.40.1 declares a mandatory RDFLib dependency
+source: pyshacl
+relation: depends_on
+target: rdflib
+context:
+  version_context:
+    source: pySHACL 0.40.1, commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75
+    target: RDFLib declared range >=7.3.0,<8.0 with html extra; lock pins 7.6.0, object evidence commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd
+  conditions_zh: 仅陈述固定 pyproject 的必需包依赖 rdflib[html]>=7.3.0,<8.0，以及同一源码 poetry.lock 中 main 组、optional=false 的 7.6.0
+    锁定事实；html extra 是该声明的一部分，不称为纯 RDFLib 普通查询的通用必需项。SPARQL 约束路径调用 target_graph.query，但未强制 use_store_provided=False，不能保证始终使用本地内置处理器。声明范围、仓库锁定和实际安装是不同事实；不声称实机已安装
+    7.6.0、所有范围版本兼容或测试通过，不传递为 pySHACL 的完整 SPARQL/SHACL 符合性、离线或安全保证。
+  conditions_en: States only the fixed pyproject mandatory rdflib[html]>=7.3.0,<8.0 dependency and the same source
+    tree poetry.lock entry for 7.6.0, main group, optional=false. The html extra belongs to this declaration, not
+    to a universal prerequisite for plain RDFLib queries. The SPARQL-constraint path calls target_graph.query without
+    forcing use_store_provided=False, so built-in local processing is not guaranteed. Declared range, repository
+    lock and actual installation are distinct. No actual installation of 7.6.0, compatibility across the full range
+    or executed-test success is asserted, and no full SPARQL/SHACL conformance, offline or security guarantee is
+    inherited.
+evidence:
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyproject.toml#L46-L47
+  title: pySHACL 0.40.1 mandatory rdflib[html]>=7.3.0,<8.0 dependency
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/poetry.lock#L1156-L1178
+  title: pySHACL fixed lock — RDFLib 7.6.0 main-group, non-optional package
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/sparql/sparql_based_constraints.py#L169-L170
+  title: pySHACL constraint path calls Graph.query without forcing built-in-store bypass
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/pyproject.toml#L1-L53
+  title: RDFLib 7.6.0 package identity, BSD-3-Clause, Python and conditional/optional dependency metadata
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T09:22:25.554473+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed pySHACL dependency evidence executor
+record_created_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  github_actor: ff6962757

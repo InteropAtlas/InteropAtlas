@@ -19,13 +19,13 @@ locators:
 - url: https://pypi.org/project/rdflib/7.6.0/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - rdflib
   reasons:
-  - At 296a505b6fd3ef280664d5c3085140f5626eaa5f, no canonical/candidate ID or normalized GitHub/PyPI collision.
-    Existing RDFLib mentions concern pySHACL dependency/context, not a separate RDFLib object. The subject is the
-    RDFLib software library verified at 7.6.0, not pySHACL, the RDFLib organization, RDF/SPARQL specifications or
-    a separate release subject.
+  - Accepted as canonical rdflib by accept-20261024-rdflib. Frozen new-state Candidate d2e619bd3ce99e41c74e612d9ddc71ca53372398
+    and review_required route are replayed against actual ancestor eea44d30f284d9aa007baa48f43fe01ef22206f8; this
+    back-reference prevents duplicate creation and does not merge identities.
   merge_authorized: false
 unknowns:
 - Only a bounded SPARQL 1.1 Query Language implementation edge and the existing pySHACL 0.40.1 package dependency
@@ -50,4 +50,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
