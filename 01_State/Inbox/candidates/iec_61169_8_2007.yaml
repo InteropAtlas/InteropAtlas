@@ -13,11 +13,13 @@ locators:
 - url: https://webstore.iec.ch/en/iec_catalog/product/preview/?id=L3B1Yi9wZGYvcHJldmlldy9pbmZvX2llYzYxMTY5LTh7ZWQxLjB9ZW4ucGRm
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - iec_61169_8_2007
   reasons:
-  - 固定为 IEC 61169-8:2007 第一版（Edition 1.0，2007-02-16 发布）；完整分规范与其规范性附录 A 属同一主体，不是 IEC 61169 系列、IEC 60169-8 或某厂商连接器。标题的
-    50 Ω 与附录 A 的 75 Ω 接口维度必须区分。
+  - Accepted as canonical iec_61169_8_2007 by accept-20261024-iec-61169-8-2007. Frozen new-state Candidate b8c561c4b37a82e337c604da37399ba0f3d77e4c
+    and review_required route are replayed against actual ancestor a53131ae93656e9086c6c0e21a5d1b42e9409d08; the
+    back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 仅取得官方目录及公开预览，未取得付费全文中的尺寸表；不提供未经读取的尺寸数值或设计符合性判定。
@@ -25,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / independent SDI BNC semantic reviewer
