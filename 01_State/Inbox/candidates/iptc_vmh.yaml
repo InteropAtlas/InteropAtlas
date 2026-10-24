@@ -13,12 +13,13 @@ locators:
 - url: https://iptc.org/std/videometadatahub/recommendation/IPTC-VideoMetadataHub-props-Rec_1.7.html
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - iptc_vmh
   reasons:
-  - 保留既有 iptc_vmh 与工作级标识 iptc:video-metadata-hub；后者是 IA 由官方 locator 派生的标识，不是 IPTC 正式文档编号，不新建 properties-only 或另版主体。
-  - 以 Recommendation 1.7 官方属性文档核实已发布规范的身份与视频元数据属性定义；保留既有 artifact/specification 分类，不把映射正确性或机器模式有效性作为已成立事实。
-  - 当前236个 Canonical 对象无相同主体或规范化标识碰撞；仅提议一个文档层面的有界对象、零条技术关系及一个既有 metadata 导航成员，仍须独立语义复核。
+  - Accepted as canonical iptc_vmh by accept-20261024-iptc-vmh-property-document. Frozen new-state Candidate f069902d454d6d973c871c22de4e4e287b3a3034
+    and review_required route replay against actual ancestor bfd0465a0c8fa76ce884a63e32d2423ec0512dae; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
 unknowns:
 - Linked Encoded Rights Expression Structure 的 Encoding type 在 Basic Type/Cardinality 列为 Text (0..1)，PVMD 列为 string//-MANDATORY；可选/必需冲突尚未解决，不替出版者选择优先列。
@@ -30,4 +31,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / IPTC VMH document intake review

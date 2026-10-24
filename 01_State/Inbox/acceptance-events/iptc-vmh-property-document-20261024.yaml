@@ -1,0 +1,43 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-iptc-vmh-property-document
+candidate_id: iptc_vmh
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: iptc_vmh
+review:
+  reviewer: Independent Agent — OpenAI / dot / IPTC VMH document intake review
+  reviewed_at: '2026-10-24T20:22:10.633799+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 PASS 精确 Candidate f069902d454d6d973c871c22de4e4e287b3a3034 与 packet bc72e795003bb75a441ec74f1aab6a985561534f。保留
+    iptc_vmh / iptc:video-metadata-hub 工作级身份；标识是 IA locator-derived，不是 IPTC 正式文档编号。Recommendation 1.7 是审阅上下文，不新建
+    properties-only 主体或另版身份。
+  - 独立报告 SHA-256 485cb8d927e3a8dbef1165ca15b570447af273612f3b872ecfe23659ac1524f4，完成时间即 reviewed_at；作者重算全部 173 个封存证据。semantic_review_url
+    指向保持 pending 状态的真实冻结被审原稿，不是结论本身；交付 PR 另载独立身份、结果、精确绑定与适用检查摘要。
+  - 独立 Reviewer 明确批准有界的 artifact/specification 文档身份及属性定义范围，不认可所有属性约束、映射或机器模式正确。属性批准及文档修订日为 2025-10-16；公告日为 2025-11-10。版本化来源
+    URL 未证明不可变，以原始捕获哈希限定证据，不声称最新版。
+  - '保留三项源问题：Linked Encoded Rights Expression Structure 的 Encoding type 为 Text (0..1) 而 PVMD 列为 string//-MANDATORY；mapping
+    标头与 AI Prompt Information/Date Created 原始单元格出现列对齐异常；draft-04 JSON Schema 的 type: NA 未通过本地元模式检查。不得选择优先列、修补源文或推断出版者勘误。'
+  - 作者及 Reviewer 独立重算五份官方捕获指纹，独立解析原始 HTML/JSON，均发现13个尾随 LF 属性名和28个普通 ref 成员；使用已安装 jsonschema 4.26.0 Draft4Validator.check_schema，仅检查所捕获模式，未解析
+    IPTC 远程引用、验证实例或执行上游工具/转换器，不推断转换器失败或所有实现不可用。
+  - 零条技术关系，仅既有 metadata 导航成员；不从 JSON、XMP、EBUcore、MXF、DCMI、timecode 或辅助功能名称推断标准依赖，不接纳实现、完整符合性、无损互换、认证、安全、部署或 IA 采用断言。AI
+    prompt 不是可复现生成证明，权利/辅助功能字段不构成法律或可访问性符合性。
+  - 候选/packet 原稿阶段：作者及独立134 unittest 加12 custom 检查、全部114个旧事件（104 accepted 冻结回放、10 deferred）及 schema/identity/graph
+    通过；20个 standalone 程序与上述测试重叠，不另累计。954个其他跟踪文件及203个语义生成文件与基线逐字相同。
+  - 作者历史可选 V1 fixture 的3/17失败与基线等价，P5 fixture 通过；独立 Reviewer 未运行这两套可选 harness，双方未运行旧全站 renderer，不伪称 PASS、不作无关修复。本地浏览器
+    NOT RUN、未绕过；后续远端 Atlas E2E 不等同 IPTC 模式、实例或转换器符合性。
+  - 独立 Reviewer 初次 bare-Python 缺 Markdown 的失败日志保留，改用既有依赖完整解释器重跑通过；首次 IA 对象模式检查遗漏本地 registry，尝试 IA base-schema URL
+    得到503且未加载模式，随后停止网络路径并采用拒绝额外检索的本地 registry。该失败未重试，且不涉及 IPTC 远程引用。
+  - 真实远端两文件冻结经正常完整 Git clone 获取，祖先与 blob 核对通过；五文件物化另需独立结构复核和精确 head 的适用 CI/E2E。全部旧事实、关系、事件与历史快照保持不变。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/bfd0465a0c8fa76ce884a63e32d2423ec0512dae/01_State/Inbox/review-packets/iptc-vmh-property-document-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/f069902d454d6d973c871c22de4e4e287b3a3034
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/bc72e795003bb75a441ec74f1aab6a985561534f
+decided_at: '2026-10-24T20:24:31.712580+00:00'
+notes:
+- 仅一个有界规范对象、零条技术关系和一个既有 metadata 导航成员。
+- 完整待审原稿保留在真实正常祖先；当前 packet 仅引用回执。全部236旧对象、181旧关系、114旧事件、历史快照及 PR498/439/416 不变。
