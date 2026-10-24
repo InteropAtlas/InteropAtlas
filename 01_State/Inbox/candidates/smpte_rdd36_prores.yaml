@@ -1,7 +1,7 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_rdd36_prores
 label: SMPTE RDD 36 — Apple ProRes Bitstream Syntax and Decoding Process
-publisher: Apple Inc. (standardized by SMPTE as RDD 36)
+publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: specification
 external_identifiers:
@@ -10,15 +10,20 @@ external_identifiers:
 locators:
   - url: https://pub.smpte.org/latest/rdd36/
     role: official
+  - url: https://pub.smpte.org/doc/rdd36/20220909-pub/rdd36-2022.pdf
+    role: official
 identity_resolution:
   state: new
   matched_canonical_ids: []
   reasons:
-    - Apple ProRes is a professional intraframe codec whose bitstream syntax and decoding process are publicly documented in SMPTE RDD 36:2022.
-    - Proprietary format owned by Apple but published as an open SMPTE Registered Disclosure Document; kept as a candidate with publisher note.
+    - The inspected RDD 36:2022 is a SMPTE-published Registered Disclosure Document, with the Apple ProRes Program Office identified as sponsor/proponent; its cover explicitly states that it is not a Standard, Recommended Practice or Engineering Guideline.
+    - Its scope documents Apple ProRes bitstream syntax, bitstream element semantics and the decoding process, and excludes the QuickTime file format and details of storing ProRes bitstreams in QuickTime files; this is document-scope evidence, not a claim about every ProRes codec or implementation.
+    - The fixed 2022 document supports this publication-fact correction without changing the existing work-level identity; its cover approval on 2022-09-09 and the publisher catalog's availability date of 2022-12-29 are distinct events, not a latest-edition claim.
     - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
   merge_authorized: false
-unknowns: []
+unknowns:
+  - The current/latest edition has not been exhaustively verified; the retained latest-directory locator is a discovery entry, not evidence of a fixed or current edition.
+  - The companion reference implementation and sample assets, applicable licensing and conformance claims have not been verified; public document access does not establish an open license, royalty-free implementation or legal ownership.
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
