@@ -3,25 +3,31 @@ candidate_id: agntcy_oasf_1_0_0
 label: AGNTCY Open Agentic Schema Framework (OASF) 1.0.0
 publisher: AGNTCY
 family: artifact
-kind: standard
+kind: specification
 external_identifiers:
-  - namespace: agntcy_oasf
-    value: 1.0.0
+- namespace: agntcy_oasf
+  value: 1.0.0
 locators:
-  - url: https://docs.agntcy.org/oasf/
-    role: official
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/objects/record.json
+  role: dated
+- url: https://docs.agntcy.org/oasf/
+  role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - agntcy_oasf_1_0_0
   reasons:
-    - OASF provides an extensible schema for describing agent records, including domains, skills, modules, locators and dependencies.
-    - AGNTCY documentation explicitly positions OASF as usable across A2A, MCP and other agent protocols, making it relevant to cross-framework capability discovery.
-    - The current record guide demonstrates schema_version 1.0.0 during this intake.
+  - Accepted as canonical agntcy_oasf_1_0_0 by accept-20261024-oasf-record-timestamp. Frozen new-state Candidate
+    45fa34a4e743b8eb5fbf95548661847843cc6ee4 and review_required route replay against actual ancestor d4b63b2424c3ce87bb65dbc5f1dee35090c60f2f;
+    this back-reference prevents duplicate creation without merging subjects or adjudicating A2A overlap.
   merge_authorized: false
 unknowns:
-  - Whether OASF should be modeled as a standard, schema framework, or profile family should be confirmed in independent review.
-  - Relationship to A2A Agent Card semantics should be represented as complement/overlap, not identity merge, unless future evidence shows otherwise.
+- Relationship to A2A Agent Card semantics should be represented as complement/overlap, not identity merge, unless
+  future evidence shows otherwise.
+- 发布页 immutable 为 false，README 允许同一 schema 版本内的非破坏性修正；本次只评估固定 commit，不外推到所有 schema_version 1.0.0 内容或最新版。
+- datetime_t 正则允许省略时区后缀且不能证明日历/数值范围有效；T/t 分隔符与空格示例存在差异，但 RFC3339 §5.6 允许应用选择空格。只记录规范要求，不修补来源或断言完整 validator 符合性。
+- artifact/specification 分类仅对有要求等级的 record/schema 规范范围成立，须独立复核；不接纳服务器/SDK、模块实现、A2A/MCP 关系或安全/认证/IA 采用主张。
 provenance:
   initiator: Human — ff6962757
-  executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  reviewer: null
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OASF record-schema intake review

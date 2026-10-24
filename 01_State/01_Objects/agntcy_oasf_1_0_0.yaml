@@ -1,0 +1,93 @@
+id: agntcy_oasf_1_0_0
+type: artifact
+kind: specification
+name_zh: AGNTCY OASF 1.0.0 Agent 记录与模式规范
+name_en: AGNTCY OASF 1.0.0 Record and Schema Specification
+description_zh: 固定 v1.0.0 commit 的 OASF 记录与模式规范，规定 agentic 工作负载元数据的字段及要求等级；不代表配套服务器、SDK 或完整生态，也不证明实现的验证或发现行为。
+description_en: The OASF record/schema specification at the fixed v1.0.0 commit, defining fields and requirement
+  levels for agentic workload metadata; not the bundled server, SDKs or whole ecosystem, nor proof of implementation
+  validation or discovery behavior.
+version: 1.0.0
+external_identifiers:
+- namespace: agntcy_oasf
+  value: 1.0.0
+official_url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/README.md
+versions:
+- version: 1.0.0
+  status: published
+  url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/objects/record.json
+scope_notes_zh: 保留既有版本标识 agntcy_oasf:1.0.0，仅描述 v1.0.0 所指 commit 1d2eed1089e39a37678c4a1d9773ff618279d897 的 OASF
+  record/schema 规范。带注释标签 40d58023331953055271a3a4a17fa2cad96e5ce1 指向该 commit；发布页于 2026-02-12 发布，非 draft、非 prerelease，但
+  immutable 为 false。README 允许已发布 schema 版本的非破坏性修正，因此固定版本字符串不是所有未来同名内容的不可变证明，也不声称最新版。record 是 agentic 工作负载信息/元数据的描述结构；name、version、schema_version、description、authors、created_at、skills
+  为 required，domains 与 modules 为 recommended，locators 与 annotations 为 optional。该要求等级支持既有 artifact/specification
+  分类，而不是新造概念类 framework，也不把规范等同 server/、SDK、Directory 或整个 AGNTCY 生态。仅收录描述结构及上述要求等级，不评估单项技能/领域分类或模块符合性。record.created_at
+  的规范文字要求 RFC3339 时间戳；字典将其映射到 datetime_t，但其正则允许省略时区后缀，不能证明日历/数值范围有效，且只列 T/t 分隔符而示例包含空格。RFC3339 §5.6 允许应用选择空格，故不把空格本身判为必然违反
+  RFC。保留文字、正则与示例的差异，不修补来源，不推断服务器完整验证行为、时间准确性或时钟同步。record.version 仅说 MAY 采用某种版本方案，不推出强制 SemVer。通用 URL 与 locator 的引用不同、元模式与服务器生成模式的方言角色不同，均不外推为本对象的额外标准依赖。A2A/MCP
+  相关提及不证明身份等同、实现或兼容关系。本次仅静态来源检视，无安装、执行、运行时验证、网络发现或部署；不声称安全、身份认证、权限、可靠发现、互通、认证或 IA 采用。
+scope_notes_en: 'Preserves the existing agntcy_oasf:1.0.0 identity and describes only the OASF record/schema specification
+  at v1.0.0 commit 1d2eed1089e39a37678c4a1d9773ff618279d897. Annotated tag 40d58023331953055271a3a4a17fa2cad96e5ce1
+  points to that commit. The release was published on 2026-02-12, is neither draft nor prerelease, and reports immutable:false.
+  The README permits nonbreaking fixes to a released schema version, so the version string does not prove that all
+  future same-version content is immutable; no latest-version claim is made. The record describes agentic workload
+  information/metadata. Its required attributes are name, version, schema_version, description, authors, created_at
+  and skills; domains and modules are recommended, while locators and annotations are optional. These requirement
+  levels support the existing artifact/specification classification, not a new concept/framework type or an identity
+  covering server/, SDKs, Directory or the entire AGNTCY ecosystem. Individual skill/domain taxonomies and module
+  conformance are not evaluated. The normative created_at text requires an RFC3339 timestamp. Its dictionary mapping
+  uses datetime_t, whose regex permits an absent timezone suffix, does not establish calendar/range validity, and
+  allows only T/t while examples include a space. RFC3339 section5.6 permits applications to choose a space, so
+  a space is not categorically a violation. The text/regex/example differences are retained without source repair
+  or a server-validation, timestamp-accuracy or clock-synchronization claim. record.version only MAY follow a versioning
+  scheme, not mandatory SemVer. Differing generic-URL/locator references and the different roles of metaschema versus
+  server-generated schema dialects do not establish additional standard dependencies here. A2A/MCP mentions do not
+  prove identity, implementation or compatibility. Static source inspection only: no installation, execution, runtime
+  validation, network discovery or deployment, and no security, authentication, permission, reliable-discovery,
+  interoperability, certification or IA-adoption assertion.'
+sources:
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/README.md
+  title: 'OASF fixed README: record core, schema fixes and separate server scope'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/objects/record.json
+  title: 'OASF fixed record definition: field semantics and requirement levels'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/dictionary.json#L807-L814
+  title: 'OASF datetime_t: stated RFC3339 reference and limited regex, not validator conformance'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/version.json
+  title: OASF fixed schema version 1.0.0
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/releases/tag/v1.0.0
+  title: 'OASF v1.0.0 release: dated but mutable; exact commit governs inspected content'
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/agntcy/oasf/git/tags/40d58023331953055271a3a4a17fa2cad96e5ce1
+  title: Annotated v1.0.0 tag object binds the inspected commit
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6
+  title: 'RFC3339 sections5.6–5.7: timestamp syntax, offset and restrictions; application separator choice'
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T19:47:48.366121+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OASF record/schema evidence executor
+record_created_at: '2026-10-24T19:54:22.384718+00:00'
+record_updated_at: '2026-10-24T19:54:22.384718+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OASF record-schema intake review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: agntcy_oasf_1_0_0
+  acceptance_event_id: accept-20261024-oasf-record-timestamp
+  reviewed_candidate_blob: 45fa34a4e743b8eb5fbf95548661847843cc6ee4
+  reviewed_against_commit: d4b63b2424c3ce87bb65dbc5f1dee35090c60f2f
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: d4b63b2424c3ce87bb65dbc5f1dee35090c60f2f
+  reviewed_packet_blob: b4aef8ccd3985a0d94956f0196e887877337108f
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/d4b63b2424c3ce87bb65dbc5f1dee35090c60f2f/01_State/Inbox/review-packets/oasf-record-timestamp-20261024.yaml
