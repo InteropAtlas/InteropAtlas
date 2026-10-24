@@ -1,0 +1,69 @@
+id: smpte_mxf_uses_smpte_umid
+type: relation
+name_zh: MXF 包标识使用 Basic UMID，并保留引用链终止例外
+name_en: MXF package identifiers use Basic UMID with a reference-chain termination exception
+source: smpte_mxf
+relation: uses
+target: smpte_umid
+context:
+  version_context:
+    source: SMPTE ST 377-1:2019, approved 2019-11-28; existing work-level smpte:st.377-1 identity
+    target: SMPTE ST 330:2011, approved 2011-08-23; exact dated normative reference within existing work-level smpte:st.330
+      identity, not 2022
+  conditions_zh: 固定源端 ST 377-1:2019、目标端 ST 330:2011，均保持既有工作级身份；MXF §3 第 8 页明确该日期版本，而不是以 2022 修订代替。§4.2 第 18 页要求
+    UMID 用作 Package ID 时仅使用 32 字节 Basic UMID。规范性 Annex B.1 第 118 页将 Generic Package 定义为抽象类，其 Package UID 是必需的 32
+    字节 PackageID，表示不可变的包标识 UMID。Annex B.10 第 123 页在 Source Clip 存在时要求其 32 字节 SourcePackageID（PackageRef）标识所引用包；终止
+    source-reference chain 时明确使用 32 个零字节。这是上下文中的终止哨兵，不是普通生成的唯一 UMID，也不表示每个 MXF 文件必有 Source Clip。64 字节 Extended UMID
+    不允许用于这里的 Package ID；第 18 页关于其他 MXF 规范可能使用 Extended 的注释不放宽此规则。原始官方 MXF 第 8 页 Scope 的 StrikeOut 批注权威/含义未知；未删除批注或将划线
+    Scope 当作干净规范依据。下方 ST 330:2011 引用不受批注覆盖，第 18/118/123 页无批注；不声称第 8 页整体无批注。本关系只表示这些规范性包身份条款的 uses，保持既有 MXF/KLV 对象、描述和完整记录验证时间不变；不是两标准等同、一般兼容性、生成器唯一性/真实性、版权/权利/可信来源保证、完整文件或软件符合性、跨实现互通、安全认证或
+    IA 采用。
+  conditions_en: Fixed source ST 377-1:2019 and target ST 330:2011 retain their work-level identities. MXF section
+    3 on page 8 names that exact edition, not the later 2022 revision. Section 4.2 on page 18 requires only the
+    32-byte Basic UMID when UMID is used as Package ID. Normative Annex B.1 on page 118 defines Generic Package
+    as an abstract class with a required 32-byte Package UID of type PackageID, representing the immutable package
+    identifier as a UMID. Annex B.10 on page 123 requires a 32-byte SourcePackageID of type PackageRef when a Source
+    Clip is present; it identifies the referenced package, with 32 zero-valued bytes explicitly terminating the
+    source-reference chain. This is a contextual termination sentinel, not an ordinary generated unique UMID, and
+    does not mean every MXF file contains a Source Clip. The 64-byte Extended UMID is excluded from this Package
+    ID use; the note about other MXF specifications possibly using Extended UMID does not relax that rule. The original
+    official MXF page 8 Scope StrikeOut annotation has unknown authority/meaning. No annotation was removed and
+    no struck-through Scope prose is treated as clean normative evidence. The lower-page ST 330:2011 reference is
+    outside the annotation; pages 18, 118 and 123 have no annotations. Page 8 is not claimed wholly annotation-free.
+    This uses relation is limited to these normative package-identity provisions, preserving existing MXF/KLV objects,
+    descriptions and full-record verification timestamps. It does not establish equivalence, general compatibility,
+    generator uniqueness/authenticity, copyright/rights/trustworthy provenance, complete file or software compliance,
+    cross-implementation interoperability, security certification or IA adoption.
+evidence:
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=8
+  title: ST 377-1:2019 §3 — exact ST 330:2011 reference below, outside Scope StrikeOut
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=18
+  title: ST 377-1:2019 §4.2 — Basic-only Package ID and zero-byte terminator definition
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=118
+  title: ST 377-1:2019 normative Annex B.1 — required immutable 32-byte Package UID
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=123
+  title: ST 377-1:2019 normative Annex B.10 — SourcePackageID and zero-valued termination sentinel
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=5
+  title: ST 330:2011 §5 — distinct 32-byte Basic and 64-byte Extended UMID forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=6
+  title: ST 330:2011 §6.1.1 — normative Basic UMID structure
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T21:38:00.917872+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded MXF/UMID package-identity evidence executor
+record_created_at: '2026-10-24T21:44:35.208274+00:00'
+record_updated_at: '2026-10-24T21:44:35.208274+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_umid_package_identity)
+  github_actor: ff6962757

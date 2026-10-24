@@ -1,0 +1,42 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-umid-mxf-package-identity
+candidate_id: smpte_umid
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: smpte_umid
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_umid_package_identity)
+  reviewed_at: '2026-10-24T21:42:17.351556+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 APPROVE_BOUNDED_EXACT_PACKET：精确 Candidate 529ddd43862d666e097891d98e1f309b889d3064 与 packet d8744538a0d6dc1041145b564e71fb692dc5de96；保持
+    smpte_umid / smpte:st.330 工作级标准身份，固定 2011-08-23 批准的 ST 330:2011。2022 只是后续修订证据，不是此端点版次、最新版或等同结论。
+  - 独立报告 SHA256 70897fba36ce48bb0512d176a96f70fd2c5e58b6aded2fa638842e40c16849a7，封存 manifest SHA256 47c49d5b32c1362028ab5e74cc38eb026399547ed5b8c33d756a0d4f75246fb0；reviewed_at
+    为实际完成时间。作者重算全部 17 项封存主证据。semantic_review_url 指向保留 pending 状态的真实冻结原稿，不把原稿自身当作批准；交付 PR 另载 Reviewer 身份、结果、精确绑定与适用检查。
+  - 素材实例标识不等于作品、节目内容、版权/权利、身份认证或可信来源。区分 32 字节 Basic 与 64 字节 Extended；只审阅标准身份、目的与基本结构，不声称所有生成方法、实际无碰撞或完整符合性。原候选 initiator/executor
+    provenance 保留，本次修订另由 packet.executor 归属。
+  - 仅新增 smpte_mxf uses smpte_umid：固定 ST 377-1:2019 → ST 330:2011。§4.2 第 18 页规定 Package ID 仅用 32 字节 Basic。规范性 Annex
+    B.1 第 118 页为抽象 Generic Package 的必需不可变 Package UID；Annex B.10 第 123 页只在 Source Clip 存在时要求 SourcePackageID。
+  - 保留 SourcePackageID 的 32 个零字节终止引用链例外；该哨兵不是普通生成的唯一 UMID，不声称每个 MXF 文件有 Source Clip，也不允许 Extended 用于该 Package ID。
+  - Reviewer 明确批准有限来源选择：原始 MXF 页 8 Scope 的 StrikeOut 权威/含义未知且未移除；下方 ST 330:2011 日期引用位于批注范围之外，第 18/118/123 页无批注。未把划线
+    Scope 当干净规范依据、声称整个第 8 页无批注或臆造勘误；既有 MXF/KLV 描述与验证时间不变。
+  - 不从 ST 330:2011 的 ST 336:2007 引用连接到已接纳的 2017 KLV；无 UUID、时间码、国家码、地理编码、其他规范或软件依赖扩张。仅一个既有 metadata 导航成员。
+  - 作者与独立 Reviewer 完整 116 旧事件审计通过，106 accepted 冻结历史回放和 10 deferred，baseline/proposal JSON 一致。双方 134 unittest 与全部
+    20 standalone 程序通过（覆盖重叠，不额外计总数）；作者另有 12 custom 与 9 docs/Markdown 检查。238 对象 identity、schema、machine/graph/bootstrap/migration、语义渲染和
+    diff 检查通过，960 其他基线文件与 205 生成文件不变。
+  - 双方可选 V1 fixture 的 3/17 失败与基线一致，不记为 aggregate PASS；P5 1/1 通过。独立默认解释器最初缺 Markdown，使用已有依赖后通过。作者 PDF 文本提取断字引发的初始字面匹配问题已以不改源的空白无关校验解决。本地
+    browser 与上游软件/媒体执行均 NOT RUN，无绕过。
+  - 三份原始官方捕获与既有 MXF PDF 独立重算 hash 并保留；未重新抓取、复制标准全文入库、执行生成器/解析器、处理媒体、重试已停止的 DOI/目录操作。正常完整 clone 取得实际远端两文件冻结并核对父提交、blob/SHA256；六文件物化另需独立结构复核与实际
+    head CI/E2E。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/482240f94bed85fccbcb7235b819425e893bc82e/01_State/Inbox/review-packets/umid-mxf-package-identity-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/529ddd43862d666e097891d98e1f309b889d3064
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/d8744538a0d6dc1041145b564e71fb692dc5de96
+decided_at: '2026-10-24T21:44:35.208274+00:00'
+notes:
+- 仅一有界标准对象、一既有 MXF 源端关系、一个 metadata 成员；无其他对象/关系或身份裁决。
+- 真实正常祖先保留完整原稿；当前 packet 为引用式回执。全部 238 旧对象、181 旧关系、116 旧事件、历史快照和 held 身份不变。
