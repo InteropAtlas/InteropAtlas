@@ -1,0 +1,351 @@
+packet_id: python_rfc9457_implementation_20261024
+status: pending_independent_semantic_review
+baseline_commit: 016e0d0f5715d4c7b322e6769f4c654fbc75ea95
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 沿既有 services P0 导航补充一个普通 system/library 实例及一条有界 implements RFC 9457 关系；仅限异常问题对象与 Python 字典构造，不改变 HTTP 或 RFC 语义。
+- 采用既有 Candidate → validation → 独立 semantic review → acceptance event 机制；本 packet 不构成接受，review_required 不能当作 canonical
+  acceptance。
+- 不新增 capability、谓词、taxonomy、schema、治理、页面或维护机制，不扩展至框架集成/OpenAPI helper；不触碰其他待批事项。
+work_item_preflight:
+  baseline_commit: 016e0d0f5715d4c7b322e6769f4c654fbc75ea95
+  searched_at: '2026-10-24T08:26:38.503365+00:00'
+  searched_yaml_files: 546
+  terms:
+  - nrwldev/rfc9457
+  - python_rfc9457
+  - rfc9457-python
+  hits: []
+  github_searches:
+  - query: repo:InteropAtlas/InteropAtlas "NRWLDev/rfc9457" is:issue
+    total_count: 0
+    items: []
+  - query: repo:InteropAtlas/InteropAtlas "NRWLDev/rfc9457" is:pull-request
+    total_count: 0
+    items: []
+  - query: repo:InteropAtlas/InteropAtlas "python_rfc9457" is:issue
+    total_count: 0
+    items: []
+  - query: repo:InteropAtlas/InteropAtlas "python_rfc9457" is:pull-request
+    total_count: 0
+    items: []
+  search_boundary_zh: 仅覆盖当前可见、已索引的 Issue/PR 标题与正文，不推测未来或未公开工作项。
+  existing_relation_yaml_files: 32
+  rfc9457_implements_edges: 0
+official_release:
+  tag: v0.4.1
+  commit: b7bd8868f714ccc808343331c2dd08c8369c753f
+  tag_type: commit
+  published_at: '2026-02-10T08:39:32Z'
+  draft: false
+  prerelease: false
+  release_url: https://github.com/NRWLDev/rfc9457/releases/tag/v0.4.1
+  tag_ref_url: https://api.github.com/repos/NRWLDev/rfc9457/git/ref/tags/v0.4.1
+  package_development_status: 4 - Beta
+  python_requirement: '>=3.10'
+  runtime_dependencies:
+  - multidict >= 6.0.5
+  license_expression: Apache-2.0
+official_source_hashes:
+- path: README.md
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/README.md
+  git_blob: 5e3e9488a5efb2b6c3f42f4bb8216c737d333438
+  sha256: 0542cbb86e57b67f479c077d6c83e07a3f6a6b38761ce1224c67852b3572d2cb
+  bytes: 1881
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/README.md
+  fetched_at: '2026-10-24T08:22:30.660034+00:00'
+- path: pyproject.toml
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/pyproject.toml
+  git_blob: 78a293c123aca8d1c9ccd8a617a3aa882bf25673
+  sha256: 6d98d107fe51da21cb3cb9e6a9c40679a7051d3ac1b3aef7a9c936d51551743b
+  bytes: 2950
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/pyproject.toml
+  fetched_at: '2026-10-24T08:22:33.219079+00:00'
+- path: LICENSE
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/LICENSE
+  git_blob: 021ccb7da57276b8ec619cca01abe863f13b2a79
+  sha256: 757ea589dc5b213a55e2b8299d9fdd8f5e4f3a16f9b87961e2bf608fc6319302
+  bytes: 11307
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/LICENSE
+  fetched_at: '2026-10-24T08:22:36.289276+00:00'
+- path: src/rfc9457/__init__.py
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py
+  git_blob: f40b6ab8093ce0c381dfed43715a1ab78682ab87
+  sha256: 3efe790c1f3c08f63f3398a3e9d9d20035af0c386d176f4421c598178cc8445a
+  bytes: 4533
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py
+  fetched_at: '2026-10-24T08:22:39.261815+00:00'
+- path: src/rfc9457/openapi.py
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/openapi.py
+  git_blob: d0ee822306da71cd874a5f0cfc5a35195c502404
+  sha256: 760bc24d20f87eadabaeb13daffe39369802a00550215de9168179e819e6d878
+  bytes: 1977
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/openapi.py
+  fetched_at: '2026-10-24T08:22:42.120264+00:00'
+- path: tests/test_rfc9457.py
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_rfc9457.py
+  git_blob: 67f599186ae14d8ec3399fe16e59de2e1e2cdb3a
+  sha256: 72c0c076fd38257aa00dd57b004f6b13bab44f10ed42918259dd35685a799a77
+  bytes: 3835
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_rfc9457.py
+  fetched_at: '2026-10-24T08:22:45.259371+00:00'
+- path: tests/test_openapi.py
+  url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_openapi.py
+  git_blob: 8d488b8184fb437d34b2430bc7922d19181cde5a
+  sha256: 0f79594d2ffc5a59d54c34c2609a927cb4fd55295be5bd3b49c4b42586397528
+  bytes: 4574
+  status: 200
+  final_url: https://raw.githubusercontent.com/NRWLDev/rfc9457/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_openapi.py
+  fetched_at: '2026-10-24T08:22:48.642471+00:00'
+registry_corroboration:
+  url: https://pypi.org/pypi/rfc9457/0.4.1/json
+  status: 200
+  bytes: 5307
+  sha256: 9bc4673091a41ad3dd24b1a47f01c4c56655c5d168485a256ffde91c90749413
+  fetched_at: '2026-10-24T08:23:42.212730+00:00'
+rfc9457_source:
+  file: rfc9457.txt
+  url: https://www.rfc-editor.org/rfc/rfc9457.txt
+  final_url: https://www.rfc-editor.org/rfc/rfc9457.txt
+  status: 200
+  bytes: 34106
+  sha256: f2b3db92fb0bf3489cb3841a0da0c0d88dff40797b64d40b6123085183886c7b
+  fetched_at: '2026-10-24T08:06:37.944896+00:00'
+existing_endpoint_blobs:
+  problem_details_rfc9457:
+    path: 01_State/01_Objects/problem_details_rfc9457.yaml
+    git_blob: 3c21ac8c13ebca56ef7af15dbd1754f078b72175
+relation_carrier_baseline:
+  path: 01_State/02_Relations/service-representation.yaml
+  git_blob: fbea47b2417a80aab5e6e1220b15ed6107ef9033
+  sha256: c80e4e04b93d69b609d53ec7ace0547828278a3060679d6847314ac00e05eaf7
+  bytes: 12256
+  records: 5
+  preservation: append only; all original bytes/records must remain unchanged
+objects:
+- candidate_id: python_rfc9457
+  candidate_path: 01_State/Inbox/candidates/python_rfc9457.yaml
+  candidate_blob: cfc64bec25446a310c71e2ccf5670d51ea6be9ea
+  preflight:
+    canonical_records: 219
+    existing_candidate_records: 222
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: python_rfc9457
+    type: system
+    kind: library
+    name_zh: Python rfc9457 问题详情库
+    name_en: rfc9457 Python problem-details library
+    official_name: rfc9457
+    version: 0.4.1
+    external_identifiers:
+    - namespace: github
+      value: NRWLDev/rfc9457
+    - namespace: pypi
+      value: rfc9457
+    official_url: https://github.com/NRWLDev/rfc9457
+    description_zh: 用于构造异常形式问题对象及 Python 字典表示的开源库。本记录固定核验 0.4.1 的 Problem 与 marshal() 路径，不把字典构造称为 JSON 字节序列化或 HTTP
+      响应处理。
+    description_en: An open-source Python library for exception-backed problem objects and dictionary representations.
+      This record verifies the 0.4.1 Problem and marshal() path, not JSON byte serialization or HTTP response handling.
+    open_source: true
+    license_expression: Apache-2.0
+    scope_notes_zh: '软件库主体按既有 system/library 模式收录，固定版本 0.4.1、tag v0.4.1、commit b7bd8868f714ccc808343331c2dd08c8369c753f；包与导入名为
+      rfc9457。它不是 RFC 文献、组织、Web 框架或新的发行版主体。核心模块首行 RFC9547 是笔误；同一模块链接、README 与包元数据指向 RFC 9457，不据此创建其他标准身份。
+
+
+      Problem 继承 Exception，接收 title、type_、detail、默认 500 的 status、headers 和扩展关键字。marshal() 返回含 type/title/status、真值
+      detail 及扩展的 Python dict，而非 JSON 文本/字节；instance 可以作为扩展传入但未验证。headers 单独保存，不写入该字典。输入成员类型、状态码范围、扩展语义及 JSON 可序列化性由调用方负责。
+
+
+      未提供真值 type_ 时，默认 type 从异常类名派生；未提供真值 uri 时，非 strict 模式用 {type}。uri 参数通过 Python str.format 代入 type/status/title/扩展，不是
+      URI 解析、相对解析、编码、解引用或 RFC 6570 引擎。strict=True 首先要求真值 uri，仍先进行格式替换，随后若显式 type_ 为假值才把结果改为 about:blank；格式错误仍可抛出异常。该开关不是完整
+      RFC 校验器，也不会自动把 title 改成相应 HTTP reason phrase。
+
+
+      构造时只拒绝名为 type 或空白的扩展键；不能将其称为全面保留字段保护。extras 可变，之后注入 type/title/status 等键可能造成重复格式参数错误；不据此保证任意输入有效或安全。状态、header、redirect
+      辅助类及 openapi.py 中的描述字典不扩大本切片的实现关系。README 的 Starlette/FastAPI 使用说法未独立核验，不当作集成、采用或符合性证据。
+
+
+      固定 pyproject.toml 声明 Python >=3.10、唯一运行时依赖 multidict >=6.0.5、Apache-2.0 和 Development Status 4 - Beta；开发 extras
+      与构建工具不混为运行时依赖。官方发布非 prerelease 版本不等于稳定、最新或生产适用。
+
+
+      仅做固定官方源码、测试源码和元数据审阅及 IA 提案投影，未安装、构建或运行上游代码，未起 HTTP 服务或执行网络/框架互通测试。实际 HTTP 响应的状态一致性、内容类型、JSON 编码、协商与传输由调用方/框架负责；不声称完整
+      RFC 9457 符合性、OpenAPI 符合性、部署安全或 IA 实际采用，不添加 capability。'
+    scope_notes_en: 'The library follows the existing system/library pattern, fixed at version 0.4.1, tag v0.4.1,
+      commit b7bd8868f714ccc808343331c2dd08c8369c753f; package/import name rfc9457. It is not an RFC publication,
+      organization, web framework or separate release subject. The core docstring typo RFC9547 does not override
+      its RFC 9457 link, README and package identity.
+
+
+      Problem subclasses Exception and accepts title, type_, detail, status defaulting to 500, headers and extension
+      keywords. marshal() returns a Python dict with type/title/status, truthy detail and extensions, not JSON text/bytes.
+      instance can be supplied as an unvalidated extension. Headers are stored separately, outside that dict. Callers
+      remain responsible for member types, status range, extension semantics and JSON-serializable values.
+
+
+      With no truthy type_, the default type is derived from the exception class name; non-strict mode uses {type}
+      when uri is falsey. The uri argument uses Python str.format with type/status/title/extensions, not URI parsing,
+      relative resolution, encoding, dereferencing or an RFC 6570 engine. strict=True first requires a truthy uri
+      and still performs interpolation before replacing the result with about:blank when explicit type_ is falsey.
+      Formatting can fail. This switch is not a complete RFC validator and does not automatically choose the HTTP
+      reason-phrase title.
+
+
+      Construction rejects only extension key type and blank/whitespace keys, not all reserved-member risks. extras
+      is mutable; later type/title/status mutations can produce duplicate format-keyword errors. No arbitrary-input
+      validity or safety is promised. Status/header/redirect helpers and openapi.py description dictionaries do
+      not extend this accepted claim. README Starlette/FastAPI use statements were not independently verified as
+      integration, adoption or conformance evidence.
+
+
+      Fixed metadata declares Python >=3.10, the sole runtime dependency multidict >=6.0.5, Apache-2.0 and Development
+      Status 4 - Beta. Development extras and build tools are not runtime dependencies. A published non-prerelease
+      version is not therefore stable, latest or production-ready.
+
+
+      Only fixed official source, test-source and metadata review plus IA proposal projection were performed; upstream
+      code was not installed, built or executed and no HTTP server, network or framework interoperability test ran.
+      Actual response-status consistency, media type, JSON encoding, negotiation and transport remain caller/framework
+      responsibilities. Complete RFC 9457 conformance, OpenAPI conformance, deployment security and IA adoption
+      are not asserted; no capability is added.'
+    sources:
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/README.md#L11-L21
+      title: rfc9457 README — problem-exception identity and RFC 9457 reference; framework-use claims not adopted
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L19-L62
+      title: rfc9457 0.4.1 — Problem constructor, class-derived type and limited extension-key checks
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L64-L101
+      title: rfc9457 0.4.1 — marshal returns a dict, str.format and strict/about:blank order
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_rfc9457.py#L23-L123
+      title: rfc9457 tests — inspected type/strict/template/extension expectations, not executed
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L104-L145
+      title: rfc9457 helpers — separately stored headers, not an HTTP response implementation
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/openapi.py#L6-L80
+      title: rfc9457 OpenAPI helper dictionaries — outside the accepted implementation claim
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/pyproject.toml#L1-L45
+      title: rfc9457 package metadata — version, Python requirement, Beta, Apache-2.0 and runtime/dev dependencies
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/LICENSE
+      title: rfc9457 fixed Apache License 2.0 text
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/releases/tag/v0.4.1
+      title: Official rfc9457 v0.4.1 release, published 2026-02-10
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pypi.org/project/rfc9457/0.4.1/
+      title: PyPI rfc9457 0.4.1 — package/version and upstream identity corroboration
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T08:26:38.503365+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Python RFC 9457 source evidence executor
+relations:
+- proposed_record:
+    id: python_rfc9457_implements_problem_details_rfc9457
+    type: relation
+    name_zh: Python rfc9457 0.4.1 有界实现问题对象与字典表示
+    name_en: Python rfc9457 0.4.1 implements bounded problem objects and dictionary representations
+    source: python_rfc9457
+    relation: implements
+    target: problem_details_rfc9457
+    context:
+      version_context:
+        source: rfc9457 Python library 0.4.1; tag v0.4.1, commit b7bd8868f714ccc808343331c2dd08c8369c753f
+        target: RFC 9457, Problem Details for HTTP APIs (July 2023)
+      conditions_zh: 仅记录 Problem 异常及 marshal() 的 Python 字典构造路径；调用方须提供符合 RFC 成员语义、可 JSON 序列化的值。字典包含 type/title/status、真值
+        detail 和未验证扩展（含可选 instance）；headers 单独保存。默认 type 可由类名派生；strict=True 要求真值 uri，先做 str.format，再在显式 type_ 为假值时改为
+        about:blank，不自动修正 title。strict 不是 URI、状态码、成员类型或 JSON 可序列化性校验；扩展键检查也不构成全面保护。不声称 JSON 字节序列化、HTTP 响应/状态一致性、框架集成、传输、安全或完整
+        RFC 符合性；上游代码未运行，测试源码审阅不是执行结果。
+      conditions_en: Limited to Problem exceptions and marshal() constructing Python dictionaries; callers supply
+        values satisfying RFC member semantics and JSON serializability. Output contains type/title/status, truthy
+        detail and unvalidated extensions, including optional instance; headers remain separate. Type can default
+        from a class name. strict=True requires truthy uri, interpolates with str.format, then selects about:blank
+        for falsey explicit type_ without correcting title. It validates neither URI syntax, status range, member
+        types nor JSON serializability; extension-key checks are not comprehensive protection. No JSON-byte serialization,
+        HTTP response/status consistency, framework integration, transport, security or complete RFC conformance
+        is asserted. Upstream code was not run; inspected test source is not an execution result.
+    evidence:
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/README.md#L11-L21
+      title: rfc9457 README — problem-exception identity and RFC 9457 reference; framework-use claims not adopted
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L19-L62
+      title: rfc9457 0.4.1 — Problem constructor, class-derived type and limited extension-key checks
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L64-L101
+      title: rfc9457 0.4.1 — marshal returns a dict, str.format and strict/about:blank order
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_rfc9457.py#L23-L123
+      title: rfc9457 tests — inspected type/strict/template/extension expectations, not executed
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L104-L145
+      title: rfc9457 helpers — separately stored headers, not an HTTP response implementation
+      language: en
+      accessed: '2026-10-24'
+    - url: https://www.rfc-editor.org/rfc/rfc9457.html#section-3
+      title: RFC 9457 — sections 3, 3.1 and 3.2 problem representation, member semantics and extensions
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T08:26:38.503365+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Python RFC 9457 source evidence executor
+membership_proposals:
+- category_id: services
+  ref:
+    surface: canonical
+    id: python_rfc9457
+  rationale_zh: 沿既有服务接口与事件导航补充问题表示的库实例；属于编辑导航，不表示框架集成、完整服务能力、互通认证或整个 services 类别已完成。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  git_blob: 6df7605cc40564338d0b770636ae4c844e28eb33
+  preservation: parse the entire baseline; add exactly one services membership without modifying proposals or other
+    content
+supplementary_verification:
+  observed_at: '2026-10-24T08:26:38.503365+00:00'
+  source_files_verified:
+  - README.md
+  - pyproject.toml
+  - LICENSE
+  - src/rfc9457/__init__.py
+  - src/rfc9457/openapi.py
+  - tests/test_rfc9457.py
+  - tests/test_openapi.py
+  source_git_blobs_matched: true
+  release_tag_package_and_version_matched: true
+  upstream_installation_performed: false
+  upstream_build_performed: false
+  upstream_runtime_tests_performed: false
+  http_or_framework_test_performed: false
+  boundary_zh: 仅审阅固定官方源码及测试定义，并做静态 AST/结构投影；不以未执行测试定义冒充运行成功或规范认证。
+materialization_boundary_zh: 候选与完整提案先接受独立语义复核；尚未发布或接受。通过后把两文件冻结为正常 Git 祖先提交，核验实际远端 SHA/blob，再追加 acceptance 与 intake_provenance。物化必须保持被审字段不变，仅增加生命周期/贡献/溯源元数据；当前
+  packet 改为 reference-only receipt，最终六文件另作独立结构复核。不得使用猜测的本地 SHA 或 squash 掉已审祖先。
