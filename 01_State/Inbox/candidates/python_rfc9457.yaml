@@ -19,12 +19,13 @@ locators:
 - url: https://pypi.org/project/rfc9457/0.4.1/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_rfc9457
   reasons:
-  - At 016e0d0f5715d4c7b322e6769f4c654fbc75ea95, no canonical/candidate ID or normalized GitHub/PyPI identifier
-    collision and no library-identity textual match in state YAML. The subject is the Python library/package rfc9457,
-    verified at 0.4.1, not RFC 9457 itself, an organization, a web framework or a separate release identity.
+  - Accepted as canonical python_rfc9457 by accept-20261024-python-rfc9457. Frozen new-state Candidate cfc64bec25446a310c71e2ccf5670d51ea6be9ea
+    and review_required route are replayed against actual ancestor 793557e42834df7f8ea2f9c43ee770a4f343fd0b; this
+    back-reference prevents duplicate creation and does not merge identities.
   merge_authorized: false
 unknowns:
 - The bounded claim is exception-backed problem construction and marshal() returning a Python dict. No JSON bytes,
@@ -47,4 +48,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / Python RFC 9457 semantic review
