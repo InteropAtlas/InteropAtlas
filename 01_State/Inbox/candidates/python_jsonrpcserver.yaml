@@ -1,0 +1,30 @@
+contract_version: candidate-object-v1
+candidate_id: python_jsonrpcserver
+label: jsonrpcserver Python library — fixed 5.0.9, bounded synchronous single-request dispatch
+publisher: Beau Barker (5.0.9 package metadata)
+family: system
+kind: library
+external_identifiers:
+- namespace: pypi
+  value: jsonrpcserver
+locators:
+- url: https://pypi.org/project/jsonrpcserver/5.0.9/
+  role: dated
+- url: https://github.com/bensynapse/jsonrpcserver/tree/2c0567515d67c6b1bd85db8e7985cada472489e3
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体是 PyPI jsonrpcserver Python 库，稳定标识 pypi:jsonrpcserver，版本另记 5.0.9；不是 JSON-RPC 规范、仓库组织、网络服务、客户端或异步实现。
+  - 发布 sdist 的 16 个运行时包成员均与固定 Git commit 2c0567515d67c6b1bd85db8e7985cada472489e3 的对应 blob 匹配；仓库历史路径重定向及相同 repository
+    ID 不证明更广泛的所有权或维护连续性。
+  merge_authorized: false
+unknowns:
+- 只检视已获取的公开分发归档、固定源码、上游测试定义和规范；没有安装、导入、构建、执行上游库或测试，也没有网络部署、互通或安全测试。
+- 仅覆盖默认同步、进程内、单请求路径；批处理已知反例、内部故障下通知响应、序列化异常外逸、语义参数类型及 rpc. 保留名称检查缺口均明确保留。
+- PyPI 无 Requires-Python 声明；3.8/3.9/3.10 是 classifiers，不是实测支持范围；依赖仅范围约束，无锁定环境、签名或可复现构建结论。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
