@@ -1,0 +1,40 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-fcpxml-document-format
+candidate_id: apple_fcpxml
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: apple_fcpxml
+review:
+  reviewer: Agent — OpenAI / dot / Independent FCPXML document-intake reviewer
+  reviewed_at: '2026-10-24T21:11:37.192269+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 APPROVE 精确 Candidate ca7b3445346d439727010382d949b9c2cc944b0c 与最终 packet 74df366f6565985a0e14688d89c6db9b4eddc1ac。保留
+    apple_fcpxml / apple:fcpxml 工作级格式身份；标识是 IA locator-derived，不是 Apple 正式文档编号。1.10只表示审阅的 DTD 上下文，不另建 DTD 版次、应用、SDK、codec或bundle主体。
+  - 独立报告 SHA-256 057cca81c67c5034487fc71f2cffd036c846445bb1673c024e10f4a85121a2e3，完成时间即 reviewed_at；作者重算全部 56 个封存证据。semantic_review_url
+    指向保持 pending 状态的真实冻结被审原稿，不是结论本身；交付 PR 另载独立身份、结果、精确绑定和适用检查。
+  - 独立 Reviewer 明确接受有界 artifact/format 表示范围：媒体资产、片段、项目序列、时间线剪辑决策与关联元数据；官方1.10 DTD可核查 project/sequence、resources、asset/media-rep、spine、asset-clip。保留原始候选全部
+    provenance，由 packet.executor 记录此次修订，不覆盖历史 Doubao 发现归属。
+  - 五份官方 Markdown 捕获及内联 DTD 精确提取均独立重算 hash；40,206字节提取物是源文代码块数据，不是独立下载、签名或不可变发布包。官方 URL 可变，不声称最新版、所有版本或由版权/页脚/捕获日期推定发布日期。
+  - 'root prose称 resources 是唯一必需子元素，捕获1.10 DTD却声明 resources?；保留不一致，不裁定优先级或修复。version的 #FIXED 不是 #REQUIRED。通用参考的
+    Final Cut Pro10.4.9/部分项目说明明确针对1.9，不外推1.10兼容性。'
+  - DTD匹配不保证导入成功；媒体可访问性、用户读权限及应用特定数据/语义未测试。64/32位有理数时间说明是 CDATA 旁注释，不是 DTD数值验证；ISO/IEC230001-8颜色注释不静默纠正或生成依赖。bundle说明只区分
+    .fcpxmld/Info.fcpxml 包装与文档身份。
+  - 零技术关系，仅既有 editing 导航成员。不从 XML、Unicode、URI、ISO、所有权或关联格式名称推断依赖；不声称完整符合性、无损往返、互通、安全、认证、部署、推荐、实施采用、IA采用或许可法律结论。不运行应用、DTD实例、转换器或导入导出测试。
+  - 原稿阶段作者134 unittest加12 custom检查、全部20 standalone程序通过（测试有重叠，不另累计）；独立Reviewer自执行30命令含全部20 Engine程序。双方完整115旧事件审计通过，其中105
+    accepted冻结回放、10 deferred；schema、237对象identity、graph、semantic render通过。957其他跟踪文件和204语义生成文件与基线相同。
+  - 作者可选历史V1 fixture 3/17失败与干净基线一致，P5 1/1通过；独立Reviewer未重跑可选V1/P5及legacy renderer，作者亦未跑legacy renderer，不计作PASS或作无关修复。本地browser
+    NOT RUN，未绕过限制；后续远端Atlas浏览器检查不等同FCPXML应用/DTD符合性。
+  - 真实远端两文件冻结通过正常完整 Git clone获取，父提交、blob及SHA256已核对；五文件物化另需独立结构复核与实际head适用CI/E2E。全部既有事实、关系、事件、历史快照及持有身份不变。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/4d6fc5c3c2e784f8c10c4fb99685a01fbac6add4/01_State/Inbox/review-packets/fcpxml-document-format-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ca7b3445346d439727010382d949b9c2cc944b0c
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/74df366f6565985a0e14688d89c6db9b4eddc1ac
+decided_at: '2026-10-24T21:13:45.523063+00:00'
+notes:
+- 仅一个有界格式对象、零技术关系和一个既有 editing 导航成员。
+- 完整待审原稿保留在真实正常祖先；当前packet仅引用回执。全部237旧对象、181旧关系、115旧事件、历史快照及PR498/439/416不变。
