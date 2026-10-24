@@ -1,0 +1,83 @@
+id: axe_core_provides_accessibility_conformance_testing
+type: relation
+name_zh: axe-core 4.14.0 提供有界自动无障碍测试能力
+name_en: axe-core 4.14.0 provides bounded automated accessibility testing
+source: axe_core
+relation: provides
+target: accessibility_conformance_testing
+context:
+  version_context:
+    source: axe-core 4.14.0; fixed commit e797173108eadfa4355fe06af331791734e1757f
+    target: 'Existing IA capability accessibility_conformance_testing: automated, semi-automated or manual testing,
+      not a certification status'
+  conditions_zh: 限定为选定呈现状态、上下文和启用规则的自动检查及规则级结果；不表示完成全部无障碍符合性测试。标准 API 结果须区分 passes、violations、incomplete（需人工复核）和
+    inapplicable（无匹配内容），无违规不等于页面或网站符合性。呈现但视觉隐藏的内容并非一概排除；未激活/未呈现交互区域须激活后另测。include/exclude、runOnly rule/tag、规则配置和报告器改变检查或结果范围；page-level
+    规则在非页面上下文不运行。被测 iframe 需加载引擎，配置须逐 frame 处理；JSDOM color-contrast 不可用。WCAG 2.2、AAA、experimental、deprecated 规则并非默认全运行；target-size
+    的 wcag22aa/wcag258 标签与 enabled=false 同时存在，显式选择可改变默认行为。WCAG 2.2 §5.2 的全页面、完整流程、无障碍支持方式及不干扰条件不能由局部规则结果一并证明；标签或
+    ACT IDs 不是实现 WCAG、WAI-ARIA、ACT Rules Format 的充分证据。包 Node>=4 声明与源码 Node24+ 构建要求分开，不是已测兼容性。仅公开源码检视，npm 分发字节、上游执行、网站审计、IA
+    CI 集成、完整符合性、检出率、零误报、法律/安全/辅助技术互通/IA采用均未验证。
+  conditions_en: 'Limited to automated checks and rule-level results for selected rendered states, contexts and
+    enabled rules, not completion of every accessibility conformance test. Standard API results distinguish passes,
+    violations, incomplete (manual review needed) and inapplicable (no matching content); no violations does not
+    establish page/site conformance. Visually hidden rendered content is not categorically excluded; inactive/non-rendered
+    interaction regions need activation and separate checks. include/exclude, runOnly rule/tag selection, rule configuration
+    and reporters affect checking or reporting scope; page-level rules do not run for non-page contexts. Tested
+    iframes need the engine and per-frame configuration; JSDOM color-contrast checking is unavailable. WCAG 2.2,
+    AAA, experimental and deprecated rules do not all run by default: target-size carries wcag22aa/wcag258 tags
+    alongside enabled=false, and explicit selections can change defaults. Scoped results do not collectively prove
+    WCAG 2.2 section5.2 requirements for full pages, complete processes, accessibility-supported usage and noninterference.
+    Tags/ACT IDs do not establish implementation of WCAG, WAI-ARIA or ACT Rules Format. The package Node>=4 declaration
+    is distinct from the source Node24+ build requirement, not tested compatibility. Public source inspection only;
+    npm distribution bytes, upstream execution, website audits, IA CI integration, complete conformance, detection
+    rates, zero false positives, legal compliance, security, assistive-technology interoperability and IA adoption
+    are not verified.'
+evidence:
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/doc/API.md#L37-L73
+  title: Rendered content, inactive states and frame engine scope
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/doc/API.md#L326-L435
+  title: axe.run context and options constrain execution
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/doc/API.md#L665-L673
+  title: Four standard rule-result groups and manual review
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/doc/rule-descriptions.md#L88-L155
+  title: Fixed catalog default-disabled WCAG2.2, AAA, experimental and deprecated groups
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/lib/rules/target-size.json
+  title: WCAG2.2-tagged target-size is default-disabled
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/lib/rules/color-contrast-enhanced.json
+  title: Enhanced AAA contrast is default-disabled
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/lib/core/utils/rule-should-run.js
+  title: Page-context gate and explicit rule/tag/default selection
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/lib/rules/image-alt.json
+  title: Concrete rule/check and ACT-ID metadata, not blanket standards conformance
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/README.md#L77-L91
+  title: Publisher environment statement and JSDOM color-contrast limitation
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-WCAG22-20241212/#conformance-reqs
+  title: WCAG2.2 dated Recommendation section5.2, broader conformance requirements
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T13:22:02.682553+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed axe-core source evidence executor
+record_created_at: '2026-10-24T13:31:13.025037+00:00'
+record_updated_at: '2026-10-24T13:31:13.025037+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / axe-core capability intake semantic reviewer
+  github_actor: ff6962757

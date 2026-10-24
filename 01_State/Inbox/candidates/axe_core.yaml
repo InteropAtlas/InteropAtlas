@@ -17,11 +17,13 @@ locators:
 - url: https://github.com/dequelabs/axe-core/releases/tag/v4.14.0
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - axe_core
   reasons:
-  - 主体是 axe-core JavaScript 测试引擎/库，版本另记 4.14.0，固定 commit e797173108eadfa4355fe06af331791734e1757f；不是 Deque 组织、浏览器扩展、商业平台、WCAG/ARIA/ACT
-    规范或网站认证服务。
+  - Accepted as canonical axe_core by accept-20261024-axe-core-accessibility. Frozen new-state Candidate 8986cc786edf4b43b7af4c1dc66f80567074dba4
+    and review_required route are replayed against actual ancestor 58179e90bc708335ac94ad0b45719311a7c37331; this
+    back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 只检视固定公开源码和发布元数据；未安装、构建或执行 axe-core/npm 包，未审计任何网站，也未集成 IA CI。
@@ -30,4 +32,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / axe-core capability intake semantic reviewer
