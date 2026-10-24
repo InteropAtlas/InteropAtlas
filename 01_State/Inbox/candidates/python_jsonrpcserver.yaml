@@ -13,12 +13,14 @@ locators:
 - url: https://github.com/bensynapse/jsonrpcserver/tree/2c0567515d67c6b1bd85db8e7985cada472489e3
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_jsonrpcserver
   reasons:
-  - 主体是 PyPI jsonrpcserver Python 库，稳定标识 pypi:jsonrpcserver，版本另记 5.0.9；不是 JSON-RPC 规范、仓库组织、网络服务、客户端或异步实现。
-  - 发布 sdist 的 16 个运行时包成员均与固定 Git commit 2c0567515d67c6b1bd85db8e7985cada472489e3 的对应 blob 匹配；仓库历史路径重定向及相同 repository
-    ID 不证明更广泛的所有权或维护连续性。
+  - Accepted as canonical python_jsonrpcserver by accept-20261024-jsonrpcserver-single-dispatch. Frozen new-state
+    Candidate 2901044cf31a90ce6fdaa8826adc6face512b685 and review_required route are replayed against actual ancestor
+    4b30bc35aa9e37189a88dc7f233ad87874ecf9d4; this back-reference prevents duplicate creation and does not merge
+    subjects.
   merge_authorized: false
 unknowns:
 - 只检视已获取的公开分发归档、固定源码、上游测试定义和规范；没有安装、导入、构建、执行上游库或测试，也没有网络部署、互通或安全测试。
@@ -27,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / jsonrpcserver synchronous single-dispatch intake review

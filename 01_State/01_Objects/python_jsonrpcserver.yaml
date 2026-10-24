@@ -1,0 +1,118 @@
+id: python_jsonrpcserver
+type: system
+kind: library
+name_zh: jsonrpcserver Python 请求分派库
+name_en: jsonrpcserver Python request-dispatch library
+description_zh: 固定 5.0.9 的 Python 库；本记录仅核实 JSON-RPC 2.0 默认同步、进程内、单请求分派与有限响应机制，不声称完整协议符合性或网络服务。
+description_en: A Python library pinned to 5.0.9; this record verifies only bounded JSON-RPC 2.0 default synchronous
+  in-process single-request dispatch and responses, not complete protocol conformance or a network service.
+version: 5.0.9
+external_identifiers:
+- namespace: pypi
+  value: jsonrpcserver
+official_url: https://pypi.org/project/jsonrpcserver/5.0.9/
+versions:
+- version: 5.0.9
+  status: released
+  url: https://pypi.org/project/jsonrpcserver/5.0.9/
+open_source: true
+license_expression: MIT
+scope_notes_zh: 主体是 jsonrpcserver Python 库，稳定身份 pypi:jsonrpcserver；固定版本 5.0.9，源码 commit 2c0567515d67c6b1bd85db8e7985cada472489e3。PyPI
+  发布 sdist 为 14506 字节，独立复算 SHA-256 a71fb2cfa18541c80935f60987f92755d94d74141248c7438847b96eee5c4482 与发布元数据一致；全部
+  16 个运行时包成员及共 21 个有 Git 对应项的文件逐字匹配，另 8 个打包生成文件不冒充 Git 源码。历史 explodinglabs/jsonrpcserver 路径现重定向到 bensynapse/jsonrpcserver
+  且观察到相同 repository ID 45362585，只证明该观察，不推断所有权、治理或维护连续性。上游还包含异步和批处理路径，本切片仅核默认 dispatch（dispatch_to_json）同步、进程内、单请求的有限处理。默认
+  json.loads、随包 schema 验证、无自定义 context/post_process、json.dumps；方法由 @method 全局注册表或明确 methods 字典提供，使用非 rpc. 保留名称、规范定义的请求成员及有限
+  JSON 可表示输入/结果。按位置数组或按名称对象绑定 Python 调用签名；这不是参数值或语义类型验证。普通方法返回库的 Success/Error Result（或抛出 JsonRpcError），错误 code/message/data
+  的类型和可序列化性由调用方保证，不把任意 Python 返回值当作成功结果。成功与普通方法错误响应复制请求 id，生成 jsonrpc=2.0 和 result/error；解析或 schema 失败产生 null id
+  的错误。普通有效通知以缺少 id 判别，方法处理后不返回响应，dispatch 返回空字符串而非 JSON null；显式 null id 不等于缺失 id。此非无条件静默保证：内部调度故障可返回 -32000/null
+  id，固定上游测试明确覆盖通知也返回该错误的情形。json.dumps 在调度异常处理之外，结果不可序列化或序列化器失败可能以 Python 异常外逸。schema 不拒绝 rpc. 保留前缀，签名绑定不做语义参数类型检查，Python
+  默认 JSON 行为不证明所有 JSON 边界严格符合。上游测试明确记录批处理中无效成员可使整批失败而非逐成员处理；批处理全部排除。方法名、参数绑定信息和异常文字可能进入 error.data 或日志，不作安全披露保证。MIT
+  为固定 LICENSE 与元数据声明，不是法律审计；依赖 jsonschema<5、oslash<1 无下界或锁文件，examples extras 不计为此路径必需依赖。无 Requires-Python，3.8/3.9/3.10
+  classifiers 不是实测兼容性。只作归档哈希、源码与测试定义检视，没有安装/导入/执行库或上游测试，也不声称异步、客户端、网络传输、认证、安全、完整符合性、第三方互通、MCP 集成、最新/持续维护或 IA 采用。
+scope_notes_en: 'The identity is the jsonrpcserver Python library, pypi:jsonrpcserver, fixed 5.0.9 and source commit
+  2c0567515d67c6b1bd85db8e7985cada472489e3. The published sdist is 14,506 bytes; independently recomputed SHA-256
+  a71fb2cfa18541c80935f60987f92755d94d74141248c7438847b96eee5c4482 matches publisher metadata. All 16 runtime package
+  members and 21 files with Git counterparts match byte-for-byte; eight packaging-generated files are not claimed
+  as Git source. The historical explodinglabs/jsonrpcserver path redirects to bensynapse/jsonrpcserver with observed
+  repository ID 45362585; this is not ownership, governance or maintenance continuity. Upstream also has async and
+  batch paths, but this slice covers only bounded synchronous in-process single-request dispatch through default
+  dispatch/dispatch_to_json: json.loads, shipped schema validation, default context/post-processing and json.dumps.
+  Methods come from the @method global registry or an explicit methods dictionary, with non-reserved names, defined
+  request members and finite JSON-compatible inputs/results. Positional arrays or named objects are bound to Python
+  call signatures, not validated for semantic argument values/types. Ordinary methods return library Success/Error
+  Results or raise JsonRpcError; callers ensure error code/message/data types and serializability, and arbitrary
+  Python returns are not success values. Success and ordinary method-error responses copy the request id and emit
+  jsonrpc=2.0 plus result/error; parse/schema failures have null error ids. Ordinary valid notifications omit id,
+  are filtered after method handling and yield an empty dispatch string rather than JSON null; explicit null id
+  is not omission. Silence is not universal: internal dispatcher failure may return -32000 with null id even for
+  a notification, as an inspected upstream test explicitly expects. json.dumps runs outside dispatcher exception
+  handling; non-serializable results or serializer failure can escape as Python exceptions. The schema does not
+  enforce the rpc. reserved prefix, binding is not semantic type validation, and Python default JSON behavior does
+  not establish strict handling of every JSON edge case. Upstream tests explicitly record invalid batch members
+  invalidating the whole batch instead of per-member handling; batch is excluded entirely. Method names, binding
+  diagnostics and exception text may reach error.data or logs; safe disclosure is not claimed. MIT is the fixed
+  license/metadata declaration, not legal audit. Dependencies jsonschema<5 and oslash<1 have no lower bounds or
+  lock; examples extras are not mandatory for this slice. No Requires-Python is declared; Python 3.8/3.9/3.10 classifiers
+  are not tested compatibility. Archive hashing and source/test-definition inspection only, without installing/importing/executing
+  the library or upstream tests. No async, client, network transport, authentication, security, complete conformance,
+  third-party interoperability, MCP integration, latest/maintained status or IA adoption claim.'
+sources:
+- url: https://pypi.org/project/jsonrpcserver/5.0.9/
+  title: Fixed PyPI 5.0.9 distribution identity and metadata
+  language: en
+  accessed: '2026-10-24'
+- url: https://pypi.org/pypi/jsonrpcserver/5.0.9/json
+  title: Published sdist digest matched by independent archive hashing; no Requires-Python
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/setup.py
+  title: Fixed package version, historical author/repository, MIT declaration and dependency ranges
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/LICENSE
+  title: Fixed MIT license text, not legal audit
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/main.py#L24-L115
+  title: Default parser/schema/serializer and synchronous public dispatch; serialization boundary
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/methods.py#L18-L43
+  title: Ordinary method registration
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/dispatcher.py#L69-L284
+  title: Bounded request dispatch, signature binding, response id and ordinary error/notification paths
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/request-schema.json
+  title: Default structural schema, not semantic type or reserved-prefix enforcement
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/tests/test_dispatcher.py#L632-L647
+  title: Inspected notification internal-server-error counterexample; not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/tests/test_dispatcher.py#L824-L879
+  title: Inspected invalid-batch limitations; all batch behavior excluded
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T18:27:57.890699+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed archive and source evidence executor
+record_created_at: '2026-10-24T18:37:07.298272+00:00'
+record_updated_at: '2026-10-24T18:37:07.298272+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / jsonrpcserver synchronous single-dispatch intake review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_jsonrpcserver
+  acceptance_event_id: accept-20261024-jsonrpcserver-single-dispatch
+  reviewed_candidate_blob: 2901044cf31a90ce6fdaa8826adc6face512b685
+  reviewed_against_commit: 4b30bc35aa9e37189a88dc7f233ad87874ecf9d4
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 4b30bc35aa9e37189a88dc7f233ad87874ecf9d4
+  reviewed_packet_blob: 71ab3fd0ac093f8e74eb7851f040cc98006c2366
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/4b30bc35aa9e37189a88dc7f233ad87874ecf9d4/01_State/Inbox/review-packets/jsonrpcserver-single-dispatch-20261024.yaml

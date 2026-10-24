@@ -1,0 +1,107 @@
+id: python_jsonrpcserver_implements_json_rpc_2_0
+type: relation
+name_zh: jsonrpcserver 5.0.9 实现有限 JSON-RPC 2.0 同步单请求分派
+name_en: jsonrpcserver 5.0.9 implements bounded JSON-RPC 2.0 synchronous single-request dispatch
+source: python_jsonrpcserver
+relation: implements
+target: json_rpc_2.0
+description_zh: 固定 jsonrpcserver 5.0.9 提供默认同步、进程内、单请求的有限 JSON-RPC 2.0 分派、参数绑定及响应/通知处理，不是完整符合性声明。
+description_en: Fixed jsonrpcserver 5.0.9 provides bounded default synchronous in-process JSON-RPC 2.0 single-request
+  dispatch, argument binding and response/notification handling, not complete conformance.
+context:
+  version_context:
+    source: jsonrpcserver 5.0.9 / commit 2c0567515d67c6b1bd85db8e7985cada472489e3 / independently hashed published
+      sdist
+    target: Existing JSON-RPC 2.0 specification; official page updated 2013-01-04, captured 2026-10-24
+  scope:
+    source_profile: Default synchronous dispatch/dispatch_to_json, one request object and ordinary registered methods
+    target_sections:
+    - 1 transport-agnostic, including in-process use
+    - 4 request members and id
+    - 4.1 ordinary notifications
+    - 4.2 positional and named parameters
+    - 5 response members
+    - 5.1 ordinary error paths
+    excluded: All batch and async paths, client/network transport, universal notification silence, escaping serialization/internal
+      failures, full conformance, security and MCP interoperability
+  conditions_zh: 范围限固定 5.0.9 / 默认同步 dispatch 的进程内单请求：json.loads、随包 schema、默认 context/post_process、json.dumps；注册的普通方法采用非
+    rpc. 保留名称、规范定义的请求成员及有限 JSON 可表示输入/结果。按位置数组/按名称对象转换为 Python 参数并检查签名绑定，不验证语义参数类型或业务值。方法返回 Success/Error Result
+    或抛出 JsonRpcError，调用方保证错误 code/message/data 类型及可序列化性；普通成功/方法错误复制请求 id。解析错误、结构错误、方法缺失、绑定失败与普通方法异常具有对应错误路径，但不据此宣称全部错误符合性。缺少
+    id 的普通有效通知在处理后被过滤，返回空字符串；显式 null id 不等于无 id。固定测试记录内部调度异常可对通知返回 -32000/null id，故排除无条件通知静默。json.dumps 位于调度异常处理之外，序列化失败可外逸。schema
+    未执行 rpc. 前缀限制；Python 默认 JSON 行为与参数绑定不构成严格 JSON/语义类型验证。已知无效批成员可导致整批失败，所有 batch 路径排除。错误 data/日志可能含方法名或异常文字，不承诺安全披露。异步、客户端、网络传输、HTTP、认证、MCP
+    互通、完整协议符合性、安全认证及 IA 采用均不在本边；版本元数据和依赖范围不是实测环境。依据为已验证分发字节与固定源码/测试定义静态检视，没有运行库、上游测试或部署。
+  conditions_en: 'Limited to fixed 5.0.9 default synchronous in-process single-request dispatch: json.loads, shipped
+    schema, default context/post_process and json.dumps, with registered ordinary methods, non-reserved names, defined
+    request members and finite JSON-compatible inputs/results. Positional arrays/named objects become Python arguments
+    with signature binding, not semantic argument-type or business-value validation. Methods return Success/Error
+    Results or raise JsonRpcError; callers ensure error code/message/data types and serializability. Ordinary success/method-error
+    responses copy the request id. Parse/structural failures, missing methods, binding failures and ordinary method
+    exceptions have corresponding error paths, not complete error-conformance guarantees. Ordinary valid notifications
+    omit id, are filtered after handling and return an empty string; explicit null id is distinct. A fixed test
+    expects internal dispatcher failure to return -32000/null id even for a notification, so unconditional silence
+    is excluded. json.dumps is outside dispatcher exception handling and serialization failures can escape. The
+    schema does not enforce the rpc. prefix restriction; default Python JSON behavior and signature binding are
+    not strict universal JSON/semantic-type validation. Known invalid batch members can invalidate the whole batch;
+    all batch paths are excluded. Error data/logs may contain method names or exception text, without safe-disclosure
+    assurance. Async, client, network/HTTP transport, authentication, MCP interoperability, complete protocol conformance,
+    security certification and IA adoption are outside this edge; version metadata and dependency ranges are not
+    tested environments. Evidence is verified distribution bytes and fixed source/test definitions inspected statically,
+    without library/upstream-test execution or deployment.'
+evidence:
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/main.py#L24-L76
+  title: Default parsing/schema and registered-method dispatch
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/main.py#L90-L115
+  title: Serialization outside dispatcher catch and empty-string notification result
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/methods.py#L18-L43
+  title: Global @method registry or explicit method dictionary
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/dispatcher.py#L69-L182
+  title: Correlated ids, positional/named argument extraction, signature binding and ordinary Result/error dispatch
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/dispatcher.py#L185-L284
+  title: Omitted-id filtering, parse/schema errors and general internal-server-error boundary
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/response.py#L46-L94
+  title: Null parse/schema error ids and result/error response construction
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/jsonrpcserver/request-schema.json
+  title: Default request-shape validation; rpc. restriction not enforced
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/tests/test_main.py#L12-L40
+  title: Single-call and ordinary notification empty-string assertions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/tests/test_dispatcher.py#L632-L647
+  title: Internal-server-error notification counterexample, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/bensynapse/jsonrpcserver/blob/2c0567515d67c6b1bd85db8e7985cada472489e3/tests/test_dispatcher.py#L824-L879
+  title: Invalid-batch counterexamples, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.jsonrpc.org/specification#request_object
+  title: JSON-RPC 2.0 request/notification/parameter requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.jsonrpc.org/specification#response_object
+  title: JSON-RPC 2.0 response/error requirements
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T18:27:57.890699+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed archive and source evidence executor
+record_created_at: '2026-10-24T18:37:07.298272+00:00'
+record_updated_at: '2026-10-24T18:37:07.298272+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / jsonrpcserver synchronous single-dispatch intake review
+  github_actor: ff6962757
