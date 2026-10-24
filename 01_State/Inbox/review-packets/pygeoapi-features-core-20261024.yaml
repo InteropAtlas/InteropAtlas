@@ -1,0 +1,602 @@
+packet_id: pygeoapi_features_core_20261024
+status: pending_independent_semantic_review
+baseline_commit: 2c4415d4cc26fb9258f4dc5be313edb5e4701e4b
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅一个 pygeoapi system/software、一个有界 implements 到既有固定 ogc_api_features_17_069r4、一个既有 geospatial 导航成员。
+- 本地仅 Candidate 和 packet 两文件，不修改 Canonical、导航、事件、Schema、Runtime、页面或历史；独立语义复核和全量适用检查后待主协调者发布门槛。
+- 保留全部229旧对象、175旧关系、107旧事件、GeoJSON关系与历史快照、PR498/439/416；不扩为其他标准、provider、能力或事务扩展。
+work_item_preflight:
+  main: 2c4415d4cc26fb9258f4dc5be313edb5e4701e4b
+  queries:
+  - query: pygeoapi issues
+    total_count: 0
+    incomplete_results: false
+    items: []
+    search_type: lexical
+  - query: pygeoapi pull requests
+    total_count: 0
+    incomplete_results: false
+    items: []
+    search_type: lexical
+source_evidence:
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/LICENSE.md
+  bytes: 1109
+  sha256: 44bbc1563995cffba21344f3f9bf3f2b3c159ec66262ae6a0cfd6be9dfab7058
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: LICENSE.md
+  git_blob: 4549edbe03bfad29e5c3ccb256024d44ba02baa9
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/README.md
+  bytes: 1181
+  sha256: 7da7cb7125a740b7aaff4b71be8e2e6a7a5abe2b73e4b9cc55d3568a80a837cb
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: README.md
+  git_blob: d0d8c8a50628645aab3fb798ec442938296fdf66
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/configuration.rst
+  bytes: 32119
+  sha256: 006fc14fdccdb42231fc796d07aa058f3910a75ac4b343a86aedff109680cb47
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: docs/source/configuration.rst
+  git_blob: cc3798c0943dee9f852ebbea1e536b2747feb092
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/installation.rst
+  bytes: 4478
+  sha256: 38643616a88c3619ca92ead1df4520283c9e19a672549a18c7ffb0b4bee36000
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: docs/source/installation.rst
+  git_blob: 67f98206921af5b474299fd0ed7527664ee2f056
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/ogc-compliance.rst
+  bytes: 755
+  sha256: ccbb213f8d7085d90cc32156e80cb63dbac93f923f640acf293c0345f7a1137c
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: docs/source/ogc-compliance.rst
+  git_blob: 33cf6b5b79f0b081dfde11a8c6991b45798ddf43
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/openapi.rst
+  bytes: 2825
+  sha256: cbd187b7c4530a29bb5cc3b65efc726b5e98f53f31db81742463835be7158a9c
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: docs/source/openapi.rst
+  git_blob: 71383c61caab3d71eb205227905208933ac0d600
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/publishing/ogcapi-features.rst
+  bytes: 38390
+  sha256: e12e1ba27f2a18e604d22d5c8ed61316255c73ee4f13299832c9e3e6f0767d6c
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: docs/source/publishing/ogcapi-features.rst
+  git_blob: cd264fb68b617cbc75fc64de52de4e4fe1f5ece2
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/__init__.py
+  bytes: 3943
+  sha256: fa1288e8e5de55fb5d804782472ff96b4f7eaa114e1a28bd873df64f2a5fcf9f
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/__init__.py
+  git_blob: 015fa5ff6a4b04905b3af8ad1bfe282fa60295a2
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/__init__.py
+  bytes: 47946
+  sha256: e7c16aa087a760b146dcf7a8cb873a62dd0770f35f3b5a924d4dc3e3177d5582
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/api/__init__.py
+  git_blob: e54b90e6a97fbe81ecd50fac900fae26ed6fece7
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/collection.py
+  bytes: 18228
+  sha256: db9fd3e67593d19d9dedb6fa5a15f91760df6bfcb0bf93ceb0f9240836636221
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/api/collection.py
+  git_blob: 2cd8b3ea62d737848f68ad5dd135bc44c25592dd
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/flask_app.py
+  bytes: 21365
+  sha256: c952b7bef53235ebe00a4120243793695ea84ba4564f880e1c9dd7f23f41a864
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/flask_app.py
+  git_blob: 6a272e4d25bddd09aae61e692da853551f231889
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/openapi.py
+  bytes: 41963
+  sha256: 5019a851d3b9094538142457bc199aa5f932ac640b96b8d301db02cd36c41f4e
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/openapi.py
+  git_blob: 5c2f4ffc47c715d064c28806106922e08541ee70
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/plugin.py
+  bytes: 5953
+  sha256: e740aec75d613ea32551146f3ecc51b0276095223e20e0f80f344d4cb65e8c44
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/plugin.py
+  git_blob: 32292c895234a0e8ce10abef11c36cd2fde5172f
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/base.py
+  bytes: 11740
+  sha256: d901d8af0168953e3753ccbc502153dd79e0bb9a3611c5af828b6cfa474634fe
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/provider/base.py
+  git_blob: 00729c8082488f8880f7f2728a6ccbb4ab0f4c43
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/csv_.py
+  bytes: 10134
+  sha256: 8d797515b162ce6aa66b589f7f81781acec4d5afb323ff8134d906a52b1854d1
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/provider/csv_.py
+  git_blob: d66d6fd1b58709c1cc09947145b90f6cf92a780c
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/geojson.py
+  bytes: 9903
+  sha256: 578aa1f3a7ea2afb7a84d67c074df12bf8dc453a5bfb72e0d6fa6299cb78e0b5
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pygeoapi/provider/geojson.py
+  git_blob: 5062182fe6b248f8be294c1bb2ef042d2eb8c913
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pyproject.toml
+  bytes: 96
+  sha256: 6ee0d02bf669b02b56572cf9adeaaf737fcb7ee5e6a571f1024210a3d31b7b75
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: pyproject.toml
+  git_blob: 205a289ecaa73209ff24837f9b759d2b51f02acd
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/requirements-django.txt
+  bytes: 36
+  sha256: 9ea623d8fd8fca06ce63f2ba75b19f6b05ba24ff4eba9e47660be5c9226c09b7
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: requirements-django.txt
+  git_blob: 92d78d376b04d09b493b8fb0d9b0b3bfefc180e7
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/requirements-provider.txt
+  bytes: 312
+  sha256: 062dbc5591765a9fca4608c330299b79406059b9983c880c4b59bcada949af00
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: requirements-provider.txt
+  git_blob: c22fc5fd1e21839d6b4ce69c6d2627c0568a3d36
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/requirements-starlette.txt
+  bytes: 37
+  sha256: 0cfa026cad1dbf3aa7bacdea398572a08f07f8c70d0ea91453c71bc35cf1ba90
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: requirements-starlette.txt
+  git_blob: 35e6425218cfd0c3e2cd39215b86eaa9d3e9618e
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/requirements.txt
+  bytes: 153
+  sha256: 84ec89a42ba0d70641f587bb39fd25f9201d8d5a9d1d961aeeb30116235b00c2
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: requirements.txt
+  git_blob: 82244eb4b2b53e8576ecca6fbfc8320183d653ac
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/setup.py
+  bytes: 4574
+  sha256: fbbf3d8e170678abbcb937e8e19d8d701dff85cd9b7a7878bffc567b71c603de
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: setup.py
+  git_blob: efd7dd99c60e71824853036ac17204414b67a4a9
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/tests/api/test_api.py
+  bytes: 40693
+  sha256: cb62a21f5990b4802b8d4e3bb32437ce394db226863159df509ae9ba6e78be67
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: tests/api/test_api.py
+  git_blob: e0dc1e547aee1a86b82c9181d32ac5e507f68d79
+- url: https://raw.githubusercontent.com/geopython/pygeoapi/f765a64fa65350dc93d9df0a1b38755bef6c31b0/tests/cite/README.md
+  bytes: 1002
+  sha256: 655e8ef59184a3044842a221f711d6b743b0c20ddf7ca9340f5de3ddee559068
+  status: 200
+  capture_kind: raw HTTP content
+  git_path: tests/cite/README.md
+  git_blob: e81afe17f4ca4f9073937cbb8cd96a517c8e1215
+- url: https://api.github.com/repos/geopython/pygeoapi/releases/tags/0.24.0
+  bytes: 4889
+  sha256: 72291783f1effe515619e124f1c4d1aab14cac7226ec541515737bc762d209e5
+  capture_kind: Previously obtained GitHub connector JSON content, then locally persisted with trailing newline;
+    not raw HTTP response-byte hash
+  direct_shell_attempt_status: 403
+  direct_shell_retry: false
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html
+  bytes: 489716
+  sha256: 6a88db75970a327e6dcfbf823d6c56b6edcec0d8347425385b08534546b4c310
+  status: 200
+  capture_kind: raw HTTP content
+- url: https://api.github.com/repos/geopython/pygeoapi/git/tags/29c7d12894bdb85fc93f75e2320ef54ab314e428
+  bytes: 664
+  sha256: 6a4c64150858e1eb760895498c57192b8f2e4bfa82642a0ebfeea2416761d190
+  capture_kind: Previously obtained GitHub connector JSON content, then locally persisted with trailing newline;
+    not raw HTTP response-byte hash
+  direct_shell_retry: false
+  direct_shell_outcome: No successful capture; individual HTTP outcome not logged because the parallel collector
+    propagated the earlier release-metadata HTTP403.
+- url: https://api.github.com/repos/geopython/pygeoapi/git/ref/tags/0.24.0
+  bytes: 340
+  sha256: 793a2e70db00de0bf19f958f0a8421b2e826c542270df80f614ab39e42630a01
+  capture_kind: Previously obtained GitHub connector JSON content, then locally persisted with trailing newline;
+    not raw HTTP response-byte hash
+  direct_shell_retry: false
+  direct_shell_outcome: No successful capture; individual HTTP outcome not logged because the parallel collector
+    propagated the earlier release-metadata HTTP403.
+release_identity:
+  repository: geopython/pygeoapi
+  pypi_distribution_identifier: pygeoapi
+  version: 0.24.0
+  tag: 0.24.0
+  tag_type: annotated
+  tag_object: 29c7d12894bdb85fc93f75e2320ef54ab314e428
+  commit: f765a64fa65350dc93d9df0a1b38755bef6c31b0
+  release_published_at: '2026-07-28T12:19:46Z'
+  draft: false
+  prerelease: false
+  release_immutable: false
+  tag_verification: unsigned
+  evidence_pin: fixed source commit and verified Git blob identities, not mutable release/tag alone
+  package_archives_downloaded: false
+  package_digests_recomputed: false
+  upstream_code_executed: false
+package_metadata_observations:
+  python_requires: '>=3.12'
+  license_declaration: MIT
+  maturity_classifier: 'Development Status :: 5 - Production/Stable; upstream classification only, not an audit
+    finding'
+  base_runtime_dependencies:
+  - Babel
+  - click
+  - filelock
+  - Flask
+  - jinja2
+  - jsonschema
+  - pydantic
+  - pygeofilter
+  - pygeoif
+  - pyproj
+  - python-dateutil
+  - pytz
+  - PyYAML
+  - rasterio
+  - requests
+  - shapely
+  - SQLAlchemy
+  - tinydb
+  build_requirements:
+  - setuptools>=46.4
+  - wheel
+  optional_dependency_boundary: Separate requirements-provider.txt, requirements-django.txt and requirements-starlette.txt
+    do not make every provider/framework dependency mandatory for every deployment. No environment compatibility
+    or package archive validation occurred.
+semantic_correspondence:
+- standard: 17-069r4 §§7.2–7.4
+  implementation: Root discovery links, linked API description and configured conformance URI declarations; not
+    validation or certification.
+- standard: 17-069r4 §§7.13–7.14
+  implementation: Configured collection list/detail metadata and links.
+- standard: 17-069r4 feature collection/items and individual feature reads
+  implementation: Flask GET dispatch to feature list/item handlers, with inspected CSV/GeoJSON query/get examples;
+    no exhaustive handler or provider conformance assessment.
+- standard: Exact 17-069r4 edition bridge
+  implementation: Two comments at tests/api/test_api.py:290,327 cite the fixed document for landing-page trailing-slash
+    behavior only; source inspected, tests not run.
+inspection_boundary: Public fixed source and test definitions inspected as text only. No installation/import/build/upstream
+  execution, deployment, CITE or upstream test run. Direct raw source and OGC HTML bytes were hashed; three metadata
+  captures are previously obtained connector JSON locally persisted, not raw HTTP-byte hashes. No PyPI archive or
+  deployment verified. Feature claim remains narrow routing, not exhaustive handler behavior. Repository checks
+  are separate. Known local browser pre-test process restriction remains NOT RUN, without retry/bypass; later Atlas
+  E2E would not test pygeoapi.
+existing_endpoint:
+  path: 01_State/01_Objects/ogc_api_features_17_069r4.yaml
+  git_blob: 98696fe1616287e3b4f1084437343b7fd498e42a
+  sha256: 3f12176f3ee82193c3192297c9f2d635b9796b370c027bebed49e0c9534e19f9
+  id: ogc_api_features_17_069r4
+  unchanged: true
+  identity: Fixed OGC 17-069r4 /1.0.1 artifact/specification, not work-level or another edition.
+type_and_relation_convention:
+  classification: Existing system/software for complete server software, not library/provider or hosted service
+    instance.
+  predicate: Existing context-qualified implements represents source-evidenced discovery and feature-read routing,
+    not every conformance requirement.
+  precedent:
+    path: 01_State/02_Relations/ffv1-implementations.yaml
+    git_blob: d07d33066b70bdc916d0ebc934ff2f963f438a9a
+    sha256: 7ecdd1a1af1957b66550343360dd59380944e9e7767a30ec98178f2a78873c62
+  no_capabilities_or_forced_domains: true
+objects:
+- candidate_id: pygeoapi
+  candidate_path: 01_State/Inbox/candidates/pygeoapi.yaml
+  candidate_blob: eddcda9f8961221048126081f74941a449c5abd1
+  preflight:
+    canonical_records: 229
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: pygeoapi
+    type: system
+    kind: software
+    name_zh: pygeoapi 地理空间 API 服务端软件
+    name_en: pygeoapi geospatial API server software
+    description_zh: 固定 0.24.0 的 Python 地理空间 API 服务端软件；本记录只核实 OGC API Features Core 的配置依赖发现与要素 GET 读取路由，不表示完整符合性或认证。
+    description_en: Python geospatial API server software pinned to 0.24.0; this record covers only configuration-dependent
+      OGC API Features Core discovery and feature GET routing, not full conformance or certification.
+    version: 0.24.0
+    external_identifiers:
+    - namespace: github
+      value: geopython/pygeoapi
+    - namespace: pypi
+      value: pygeoapi
+    official_url: https://github.com/geopython/pygeoapi/tree/f765a64fa65350dc93d9df0a1b38755bef6c31b0
+    versions:
+    - version: 0.24.0
+      status: released
+      url: https://github.com/geopython/pygeoapi/releases/tag/0.24.0
+    open_source: true
+    license_expression: MIT
+    scope_notes_zh: 主体是完整 pygeoapi 服务端软件，不是标准、组织、托管端点、单一 provider 或 GeoJSON 库。固定 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0；注释标签
+      0.24.0（tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428）指向该 commit，标签未签名；GitHub 发布非 draft/非 prerelease
+      但 immutable=false，不声称最新版本或签名认证。仅静态核实 Flask 的 GET 路由、核心发现响应、配置集合元数据，以及 CSV/GeoJSON provider 的有限读取实现。发现包括根入口及
+      service-desc/service-doc、conformance、data 链接，软件选择的 /openapi 描述路径，/conformance 类别声明，/collections 与 /collections/{collectionId}；要素读取路由为
+      /collections/{collectionId}/items 和 /collections/{collectionId}/items/{featureId}。这些路径可受 URL 前缀/规则影响，不等于已经部署运行。固定测试源码两处明确引用
+      17-069r4 的根入口/尾斜杠语义，只提供精确文档版本的有限桥接，不证明该勘误全部要求已满足。/conformance 按配置的资源/provider 类型组合静态类别 URI，不验证底层数据或实现行为；不能从返回
+      URI 推断认证或完整符合性。标准 Core 不强制某一编码，也不强制 OpenAPI 3.0；/openapi 是软件路径选择，不是 Core 规定的固定字面路径。集合、链接、可见性、限额、数据/标识字段、provider
+      和依赖需正确配置；隐藏集合可从列表省略，失败集合可能被跳过。CSV/GeoJSON 文档矩阵明确不支持 datetime 与 sortby，所检 query 实现没有应用这两个参数；存在查询参数名不代表所有 provider
+      都实现它。已有 bbox/CRS 相关辅助代码不构成任意 CRS 转换、六维 bbox、三维几何或跨反经线正确性保证。完整软件另有其他 OGC API 和 POST/PUT/DELETE 等操作；本关系只记录 Features
+      Part 1 Core 的发现/GET 读取切片，不称整个软件只读，也不接纳事务扩展。setup.py 声明 Python>=3.12、MIT 和 Production/Stable 分类；requirements.txt
+      的十八个基础运行依赖与可选 provider/框架依赖分开，构建需要 setuptools>=46.4 和 wheel。元数据不是实测兼容性、生产就绪或许可证法律审计，未检查 PyPI 发行归档。未安装、导入、构建、执行或部署上游，未运行上游/CITE
+      测试；不声称完整标准符合性、认证、安全性、性能、第三方互通或 IA 采用。
+    scope_notes_en: The subject is the whole pygeoapi server software, not the standard, organization, a hosted
+      deployment, one provider or a GeoJSON library. Fixed 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0;
+      annotated tag 0.24.0 (tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428) points to that commit and is unsigned.
+      The GitHub release is non-draft/non-prerelease but mutable (immutable=false); no latest-version or signature-authentication
+      claim is made. Static inspection covers Flask GET routing, core discovery responses, configured collection
+      metadata and limited CSV/GeoJSON provider reads. Discovery includes the root and service-desc/service-doc,
+      conformance and data links; software-selected /openapi; /conformance declarations; /collections and /collections/{collectionId}.
+      Feature GET routing covers /collections/{collectionId}/items and /collections/{collectionId}/items/{featureId}.
+      URL prefixes/rules can affect these paths, and no deployment was verified. Two fixed upstream-test comments
+      explicitly reference 17-069r4 for root/trailing-slash behavior, a narrow exact-edition bridge rather than
+      evidence of every corrigendum requirement. /conformance combines static class URIs according to configured
+      resource/provider types; it does not validate underlying data or behavior. Declared URIs are not certification
+      or complete conformance. Core mandates neither a particular encoding nor OpenAPI 3.0; /openapi is a software
+      path choice, not a required literal Core path. Collections, links, visibility, limits, data/identifier fields,
+      providers and dependencies require suitable configuration; hidden collections may be omitted from listings
+      and failed collections can be skipped. The fixed provider matrix marks datetime and sortby unsupported for
+      CSV/GeoJSON, and their inspected query implementations do not apply those arguments. Parameter names do not
+      establish support across providers. Existing bbox/CRS helpers do not prove arbitrary CRS conversion, six-value
+      bbox, three-dimensional geometry or antimeridian correctness. The whole software also supports other OGC APIs
+      and POST/PUT/DELETE operations; this relation records only the Features Part 1 Core discovery/GET-read slice,
+      not a read-only claim about the whole product or transaction-extension acceptance. setup.py declares Python>=3.12,
+      MIT and a Production/Stable classifier; eighteen base runtime requirements are separate from optional provider/framework
+      dependencies, and build requirements are setuptools>=46.4 and wheel. These are declarations, not tested compatibility,
+      production readiness or a legal audit; PyPI distribution archives were not inspected. No upstream installation,
+      import, build, execution, deployment or upstream/CITE testing occurred. Complete standard conformance, certification,
+      security, performance, third-party interoperability and IA adoption are not established.
+    sources:
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/README.md
+      title: Fixed pygeoapi server-software identity
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/__init__.py#L33
+      title: Fixed package version 0.24.0
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/releases/tag/0.24.0
+      title: Official release metadata, anchored to fixed annotated tag and commit
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/setup.py#L120-L155
+      title: Fixed Python>=3.12, MIT and runtime requirement declaration
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/requirements.txt
+      title: Eighteen base runtime dependencies; not an execution result
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pyproject.toml
+      title: Build requirements distinct from runtime dependencies
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/LICENSE.md
+      title: Project MIT license text, not legal audit
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/flask_app.py#L164-L326
+      title: Flask discovery/collection/feature GET routing and separate mutation branches
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/__init__.py#L631-L1015
+      title: Core discovery links, declaration-only conformance and configured collection responses
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/publishing/ogcapi-features.rst#L11-L35
+      title: Fixed provider-specific feature query support matrix
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/tests/api/test_api.py#L266-L338
+      title: Explicit 17-069r4 landing-page/trailing-slash references; tests not executed
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T15:21:43.509806+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public pygeoapi source evidence executor
+relations:
+- proposal_id: pygeoapi_implements_ogc_api_features_core
+  proposed_path: 01_State/02_Relations/ogc-api-features-implementations.yaml
+  proposed_record:
+    id: pygeoapi_implements_ogc_api_features_core
+    type: relation
+    source: pygeoapi
+    relation: implements
+    target: ogc_api_features_17_069r4
+    name_zh: pygeoapi 实现有界 OGC API Features Core 发现与要素读取路由
+    name_en: pygeoapi implements bounded OGC API Features Core discovery and feature-read routing
+    context:
+      version_context:
+        source: pygeoapi 0.24.0; fixed commit f765a64fa65350dc93d9df0a1b38755bef6c31b0; annotated tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428
+        target: 'OGC API - Features - Part 1: Core corrigendum, 17-069r4, version 1.0.1; not another edition or
+          the whole Features series'
+      scope:
+        http_method: GET discovery and feature-read routing only
+        discovery:
+        - root landing page and discovery links
+        - linked API description at software-selected /openapi
+        - /conformance declarations
+        - /collections
+        - /collections/{collectionId}
+        feature_read_routes:
+        - /collections/{collectionId}/items
+        - /collections/{collectionId}/items/{featureId}
+        edition_bridge: Fixed upstream test comments explicitly cite 17-069r4 only for landing-page trailing-slash
+          behavior; no exhaustive corrigendum coverage is inferred.
+        excluded: Transaction extensions, every Core/optional-class requirement, every provider, arbitrary CRS/3D
+          bbox/antimeridian correctness, certification, security and deployment/adoption claims
+      conditions_zh: 主体是完整 pygeoapi 服务端软件，不是标准、组织、托管端点、单一 provider 或 GeoJSON 库。固定 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0；注释标签
+        0.24.0（tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428）指向该 commit，标签未签名；GitHub 发布非 draft/非 prerelease
+        但 immutable=false，不声称最新版本或签名认证。仅静态核实 Flask 的 GET 路由、核心发现响应、配置集合元数据，以及 CSV/GeoJSON provider 的有限读取实现。发现包括根入口及
+        service-desc/service-doc、conformance、data 链接，软件选择的 /openapi 描述路径，/conformance 类别声明，/collections 与 /collections/{collectionId}；要素读取路由为
+        /collections/{collectionId}/items 和 /collections/{collectionId}/items/{featureId}。这些路径可受 URL 前缀/规则影响，不等于已经部署运行。固定测试源码两处明确引用
+        17-069r4 的根入口/尾斜杠语义，只提供精确文档版本的有限桥接，不证明该勘误全部要求已满足。/conformance 按配置的资源/provider 类型组合静态类别 URI，不验证底层数据或实现行为；不能从返回
+        URI 推断认证或完整符合性。标准 Core 不强制某一编码，也不强制 OpenAPI 3.0；/openapi 是软件路径选择，不是 Core 规定的固定字面路径。集合、链接、可见性、限额、数据/标识字段、provider
+        和依赖需正确配置；隐藏集合可从列表省略，失败集合可能被跳过。CSV/GeoJSON 文档矩阵明确不支持 datetime 与 sortby，所检 query 实现没有应用这两个参数；存在查询参数名不代表所有
+        provider 都实现它。已有 bbox/CRS 相关辅助代码不构成任意 CRS 转换、六维 bbox、三维几何或跨反经线正确性保证。完整软件另有其他 OGC API 和 POST/PUT/DELETE 等操作；本关系只记录
+        Features Part 1 Core 的发现/GET 读取切片，不称整个软件只读，也不接纳事务扩展。setup.py 声明 Python>=3.12、MIT 和 Production/Stable 分类；requirements.txt
+        的十八个基础运行依赖与可选 provider/框架依赖分开，构建需要 setuptools>=46.4 和 wheel。元数据不是实测兼容性、生产就绪或许可证法律审计，未检查 PyPI 发行归档。未安装、导入、构建、执行或部署上游，未运行上游/CITE
+        测试；不声称完整标准符合性、认证、安全性、性能、第三方互通或 IA 采用。
+      conditions_en: The subject is the whole pygeoapi server software, not the standard, organization, a hosted
+        deployment, one provider or a GeoJSON library. Fixed 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0;
+        annotated tag 0.24.0 (tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428) points to that commit and is
+        unsigned. The GitHub release is non-draft/non-prerelease but mutable (immutable=false); no latest-version
+        or signature-authentication claim is made. Static inspection covers Flask GET routing, core discovery responses,
+        configured collection metadata and limited CSV/GeoJSON provider reads. Discovery includes the root and service-desc/service-doc,
+        conformance and data links; software-selected /openapi; /conformance declarations; /collections and /collections/{collectionId}.
+        Feature GET routing covers /collections/{collectionId}/items and /collections/{collectionId}/items/{featureId}.
+        URL prefixes/rules can affect these paths, and no deployment was verified. Two fixed upstream-test comments
+        explicitly reference 17-069r4 for root/trailing-slash behavior, a narrow exact-edition bridge rather than
+        evidence of every corrigendum requirement. /conformance combines static class URIs according to configured
+        resource/provider types; it does not validate underlying data or behavior. Declared URIs are not certification
+        or complete conformance. Core mandates neither a particular encoding nor OpenAPI 3.0; /openapi is a software
+        path choice, not a required literal Core path. Collections, links, visibility, limits, data/identifier fields,
+        providers and dependencies require suitable configuration; hidden collections may be omitted from listings
+        and failed collections can be skipped. The fixed provider matrix marks datetime and sortby unsupported for
+        CSV/GeoJSON, and their inspected query implementations do not apply those arguments. Parameter names do
+        not establish support across providers. Existing bbox/CRS helpers do not prove arbitrary CRS conversion,
+        six-value bbox, three-dimensional geometry or antimeridian correctness. The whole software also supports
+        other OGC APIs and POST/PUT/DELETE operations; this relation records only the Features Part 1 Core discovery/GET-read
+        slice, not a read-only claim about the whole product or transaction-extension acceptance. setup.py declares
+        Python>=3.12, MIT and a Production/Stable classifier; eighteen base runtime requirements are separate from
+        optional provider/framework dependencies, and build requirements are setuptools>=46.4 and wheel. These are
+        declarations, not tested compatibility, production readiness or a legal audit; PyPI distribution archives
+        were not inspected. No upstream installation, import, build, execution, deployment or upstream/CITE testing
+        occurred. Complete standard conformance, certification, security, performance, third-party interoperability
+        and IA adoption are not established.
+    evidence:
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_scope
+      title: 'Fixed 17-069r4 /1.0.1 Core scope: feature fetching, not transactions'
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_conformance
+      title: Separate Core and optional encoding/OpenAPI conformance classes
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_landing_page
+      title: Core root discovery links and landing-page behavior
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2
+      title: Linked API definition; no prescribed literal /openapi path
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_declaration_of_conformance_classes
+      title: Conformance declaration resource, distinct from independent validation
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_collections_
+      title: Core feature collection discovery
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_items_
+      title: Core feature-list GET resource
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_feature_
+      title: Core individual-feature GET resource
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/tests/api/test_api.py#L266-L338
+      title: Exact 17-069r4 references limited to landing-page/trailing-slash behavior
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/flask_app.py#L164-L326
+      title: Inspected GET routing for discovery, collection and item reads; mutations separately dispatched
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/__init__.py#L631-L1015
+      title: Inspected landing-page links, API definition, static conformance list and configured collection metadata
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/collection.py#L62-L220
+      title: Collection metadata and links derived from configuration
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/csv_.py#L233-L276
+      title: CSV query/get implementation; datetime and sortby are not applied
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/geojson.py#L166-L220
+      title: GeoJSON query/get implementation; provider-specific filtering and pagination
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/publishing/ogcapi-features.rst#L11-L35
+      title: Provider matrix explicitly excludes CSV/GeoJSON datetime/sortby support
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T15:21:43.509806+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public pygeoapi source evidence executor
+relation_preflight:
+  existing_id_or_endpoint_predicate_collisions: []
+  schema_errors: []
+  all_endpoints_resolve_after_proposed_object: true
+membership_proposals:
+- category_id: geospatial
+  ref:
+    surface: canonical
+    id: pygeoapi
+  rationale_zh: 连接既有固定 Features Core 规范与有限服务端发现/读取路由，只作既有 geospatial 导航，不证明完整符合性或 IA 采用。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  git_blob: a5930aac6557be0dff65449ec099be5004dfee75
+  sha256: 41acfd339517c55f4c7727fb8fd7ec887eae7371de75ec4029bb00b60c8ef8d3
+  preservation: Preserve all original bytes and held proposals; append only one geospatial member after authorized
+    acceptance.
+protected_existing_assets:
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+- path: 01_State/02_Relations/apple-google-human-interface.yaml
+  git_blob: 82d8b76e99c4f5090ef597a122eaa29fb4ff0a7c
+  sha256: c3d6ea5bc181d7782adc2124568682d2d33ff7bf9bcb071dc2fe7f9b188dbad6
+- path: 01_State/Inbox/candidates/c2pa_spec.yaml
+  git_blob: fbfa58837fcc243dc1233892a60f9150b48be862
+  sha256: 745fb42ba633214871c967cfc9798502edc0522dcfb7957a05eb88a786dd918a
+- path: 01_State/01_Objects/python_geojson.yaml
+  git_blob: 0e975551419d881f88d2fdc55f155e481e8711ab
+  sha256: 51a893c36fce1ecc2290d7eab1703250a1ac7bcbfefbc6ec3163d7b2b183f35d
+- path: 01_State/01_Objects/geojson_rfc7946.yaml
+  git_blob: 0b3a49ba3465d5ee8af134f0d2d9bb3aa1e17391
+  sha256: 144288ca04eaf4d83e2f13e8937e295a9afd31210590ad2ba26e816eb788cf23
+- path: 01_State/02_Relations/data-serialization-implementations.yaml
+  git_blob: 66a2484883702cca5a6b374a2d3dcb9d6d49143d
+  sha256: 06a9f4b7b597fac97d1396e66f0251e10e7e6841d0864ee7bbaa6dc97f0741cd
+- path: 01_State/02_Relations/geospatial-representation.yaml
+  git_blob: baae01689b598297b62c3b5484cdb9b094eda125
+  sha256: d8f2e93d6348be0844c4caee1cff803f64a48290a4b54551b51d753cd3183119
+materialization_boundary_zh: 先独立审核两文件；另获发布门槛后以真实远端正常祖先 commit/blob 冻结并正常 fetch，再按既有事件合同物化相同 payload 与引用式回执。不猜 SHA、不
+  squash 冻结祖先、不改旧记录/事件/快照。
