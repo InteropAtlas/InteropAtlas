@@ -1,0 +1,53 @@
+contract_version: candidate-object-v1
+candidate_id: rdflib
+label: RDFLib Python RDF library (7.6.0)
+publisher: RDFLib project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: RDFLib/rdflib
+- namespace: pypi
+  value: rdflib
+locators:
+- url: https://github.com/RDFLib/rdflib
+  role: official
+- url: https://github.com/RDFLib/rdflib/releases/tag/7.6.0
+  role: dated
+- url: https://github.com/RDFLib/rdflib/tree/8b32146a0f9cb748c2068662e50d02b42fc86dfd
+  role: dated
+- url: https://pypi.org/project/rdflib/7.6.0/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - rdflib
+  reasons:
+  - Accepted as canonical rdflib by accept-20261024-rdflib. Frozen new-state Candidate d2e619bd3ce99e41c74e612d9ddc71ca53372398
+    and review_required route are replayed against actual ancestor eea44d30f284d9aa007baa48f43fe01ef22206f8; this
+    back-reference prevents duplicate creation and does not merge identities.
+  merge_authorized: false
+unknowns:
+- Only a bounded SPARQL 1.1 Query Language implementation edge and the existing pySHACL 0.40.1 package dependency
+  edge are proposed. No Update, Protocol, result-format, Federated Query, entailment or RDF 1.2 edge is added.
+- 'The implementation scope uses the built-in SPARQLProcessor over trusted, preloaded local graph data with use_store_provided=False
+  and no custom evaluator/plugin/function override. This bypasses store.query dispatch but is not an offline or
+  security sandbox: SERVICE, FROM/FROM NAMED and indirect loading can access network/files.'
+- SELECT, ASK, CONSTRUCT, DESCRIBE, basic graph patterns and only the documented/source-test-supported aggregate
+  and subquery paths are covered. DESCRIBE uses the RDFLib CBD strategy, not a cross-implementation identical-description
+  guarantee.
+- The fixed W3C test harness contains xfail declarations for AVG error handling, invalid aggregates/grouping, property-path
+  pp37 and negative syntax tests, and skips SERVICE cases. Test metadata was inspected, not executed; no all-tests-pass
+  or full conformance claim follows.
+- pySHACL declares mandatory rdflib[html]>=7.3.0,<8.0; its fixed lock records 7.6.0 in the main group. A declared
+  range, repository lock and actual installation are distinct. Its Graph.query call does not force use_store_provided=False,
+  so no transitive conformance or guaranteed built-in local execution is inferred.
+- Fixed metadata declares BSD-3-Clause and Python >=3.8.1, ordinary pyparsing >=2.1.0,<4 and isodate >=0.7.2,<1.0.0
+  only on Python <3.11. Extras are optional for RDFLib; no Development Status classifier is present. The frozen
+  README stale 7.1.3 current-stable text is not release identity evidence.
+- No upstream package was installed, built or executed, and no upstream suite or remote query endpoint was exercised.
+  This does not add RDFLib to IA runtime or claim adoption, deployment security, production suitability or certification.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review

@@ -1,0 +1,206 @@
+id: rdflib
+type: system
+kind: library
+name_zh: RDFLib Python RDF 库
+name_en: RDFLib Python RDF library
+official_name: RDFLib
+version: 7.6.0
+external_identifiers:
+- namespace: github
+  value: RDFLib/rdflib
+- namespace: pypi
+  value: rdflib
+official_url: https://github.com/RDFLib/rdflib
+versions:
+- version: 7.6.0
+  date: '2026-02-13'
+  status: released
+  url: https://github.com/RDFLib/rdflib/releases/tag/7.6.0
+description_zh: 用于处理 RDF 图的 Python 软件库；本记录固定 7.6.0，限定其内置 SPARQL 1.1 查询处理器对可信、预加载本地图的有界查询路径，不表示完整符合性或离线沙箱。
+description_en: A Python library for working with RDF graphs. This record fixes 7.6.0 and bounds its built-in SPARQL
+  1.1 query processor to trusted, preloaded local-graph query paths; it does not imply complete conformance or an
+  offline sandbox.
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: '沿既有 system/library 模式收录 RDFLib 软件库，固定版本 7.6.0、tag 7.6.0、commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd，GitHub
+  RDFLib/rdflib，包与导入名 rdflib。官方 release 于 2026-02-13 发布，非 draft/prerelease，tag 在核验时指向该 commit；不将可移动 tag/release
+  说成永久不可变，不宣称最新。冻结 README 仍有 7.1.3 current stable 的陈旧文字，版本身份依据固定 pyproject、release 与 PyPI，而非该列表。主体不是 pySHACL、RDFLib
+  组织、RDF/SPARQL 标准或另一个发行版对象。
+
+
+  唯一实现关系限于 SPARQL 1.1 Query Language 的内置 SPARQLProcessor 路径：可信查询在预加载本地图上执行，Graph.query 设 use_store_provided=False
+  以绕过 store.query，且不替换标准处理器注册或启用自定义 evaluator/函数覆盖。仅覆盖 SELECT、ASK、CONSTRUCT、DESCRIBE、基本图模式及固定源码/测试直接支持的部分聚合、子查询；不泛化为所有语言角落或第三方
+  store 实现。
+
+
+  use_store_provided=False 仅改变分派，不是离线开关或安全沙箱。内置 SERVICE 可调用 urlopen，默认 SPARQL_LOAD_GRAPHS=True，FROM/FROM NAMED 可经
+  QueryContext.load 进入 Graph.parse；插件、间接资源与自定义 evaluator 也可改变行为。本地范围明确排除 SERVICE、外部数据集加载及不可信输入，不声称库自动阻断网络/文件，未调整任何宿主安全设置。
+
+
+  DESCRIBE 使用 RDFLib 的简明有界描述（CBD）策略；W3C Query Language §16.4 将具体描述交给处理器决定，因此不保证不同实现产生相同描述图。固定 W3C harness 对 AVG
+  错误处理、无效聚合/分组、property-path pp37 和若干语法负例标记 xfail，并跳过 SERVICE 用例；这些是源码中的测试标注，不是本次执行结果，不声称全套 W3C 测试通过或完整认证。
+
+
+  BSD-3-Clause，Python >=3.8.1；普通运行依赖为 pyparsing >=2.1.0,<4，以及仅 Python <3.11 时的 isodate >=0.7.2,<1.0.0。berkeleydb、networkx、html5rdf、lxml、orjson、httpx
+  是可选依赖，不写成普通查询必需项。固定 pyproject 与 PyPI 未给出 Development Status classifier，不推断 Beta、Stable 或生产成熟度。
+
+
+  既有 pySHACL 0.40.1 的单独 depends_on 边仅陈述 rdflib[html]>=7.3.0,<8.0 必需包依赖及固定 poetry.lock 锁定 7.6.0。声明范围、仓库锁定、实际安装与兼容性验证不是同一事实；其
+  target_graph.query 调用未强制 use_store_provided=False，因此不把本地内置路径或 RDFLib 的有界实现声明传递成 pySHACL 全面 SPARQL 符合性。
+
+
+  仅核验官方固定源码、测试定义、release/tag/PyPI 与 IA 提案投影；未安装、构建、执行 RDFLib/pySHACL 或上游测试，未查询远程端点。不向 IA 引擎加入依赖或改变查询机制，不声明 IA 采用、部署安全、生产适用性或认证。不新增
+  capability，也不增加 Update、Protocol、结果格式、Federated Query、entailment 或 RDF 1.2 关系。'
+scope_notes_en: 'The RDFLib software library follows the existing system/library pattern, fixed at version/tag 7.6.0
+  and commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd; GitHub RDFLib/rdflib, package/import rdflib. The official
+  non-draft, non-prerelease release was published on 2026-02-13 and the tag resolved to this commit when checked.
+  Movable tags/releases are not described as permanently immutable or latest. The frozen README still labels 7.1.3
+  current stable; identity instead uses the fixed pyproject, release and PyPI. The subject is not pySHACL, the RDFLib
+  organization, an RDF/SPARQL specification or a separate release object.
+
+
+  The sole implementation edge is limited to the built-in SPARQLProcessor path for SPARQL 1.1 Query Language: trusted
+  queries over preloaded local graph data, Graph.query with use_store_provided=False to bypass store.query, and
+  no replacement processor registration or custom evaluator/function override. Coverage is SELECT, ASK, CONSTRUCT,
+  DESCRIBE, basic graph patterns and only the aggregate/subquery paths directly supported by fixed source and test
+  definitions, not every language corner case or third-party store implementation.
+
+
+  use_store_provided=False only changes dispatch; it is neither an offline switch nor a security sandbox. Built-in
+  SERVICE can call urlopen, SPARQL_LOAD_GRAPHS defaults to True, and FROM/FROM NAMED can reach Graph.parse via QueryContext.load.
+  Plugins, indirect resources and custom evaluators can also alter behavior. This local scope excludes SERVICE,
+  external dataset loading and untrusted input; it does not claim automatic network/file isolation, and no host
+  security settings were changed.
+
+
+  DESCRIBE uses the RDFLib concise bounded description (CBD) strategy. W3C Query Language section 16.4 leaves the
+  particular description to the processor, so identical cross-implementation output graphs are not guaranteed. The
+  fixed W3C harness marks AVG error handling, invalid aggregates/grouping, property-path pp37 and several negative
+  syntax cases xfail, and skips SERVICE cases. These are inspected test annotations, not execution results; no all-W3C-tests-pass
+  or full certification claim is made.
+
+
+  BSD-3-Clause and Python >=3.8.1. Ordinary runtime requirements are pyparsing >=2.1.0,<4 and isodate >=0.7.2,<1.0.0
+  only on Python <3.11. berkeleydb, networkx, html5rdf, lxml, orjson and httpx are optional, not general query prerequisites.
+  Fixed pyproject/PyPI metadata has no Development Status classifier; Beta, Stable and production maturity are not
+  inferred.
+
+
+  The separate dependency edge from existing pySHACL 0.40.1 states only its mandatory rdflib[html]>=7.3.0,<8.0 declaration
+  and fixed poetry.lock pin to 7.6.0. A declared range, repository lock, actual installation and compatibility validation
+  are distinct facts. Its target_graph.query call does not force use_store_provided=False; neither the built-in
+  local path nor this bounded implementation claim is propagated into full pySHACL SPARQL conformance.
+
+
+  Only official fixed source, test definitions, release/tag/PyPI metadata and IA proposal projections were checked.
+  RDFLib/pySHACL were not installed, built or executed, upstream tests were not run, and no remote endpoint was
+  queried. No IA runtime dependency/query mechanism, adoption, deployment-security assurance, production recommendation
+  or certification is introduced. No capability or Update, Protocol, result-format, Federated Query, entailment
+  or RDF 1.2 relationship is added.'
+sources:
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/pyproject.toml#L1-L53
+  title: RDFLib 7.6.0 package identity, BSD-3-Clause, Python and conditional/optional dependency metadata
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/LICENSE
+  title: RDFLib fixed BSD three-clause license
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/intro_to_sparql.md#L1-L9
+  title: RDFLib query documentation distinguishes Query from Update and lists four query forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/graph.py#L1675-L1742
+  title: Graph.query — use_store_provided=False bypasses store dispatch, not a network/file sandbox
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugin.py#L503-L520
+  title: RDFLib built-in SPARQLProcessor registration, separate from UpdateProcessor
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/processor.py#L108-L146
+  title: SPARQLProcessor query parse, translate and evaluate path
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L77-L104
+  title: Built-in basic graph pattern evaluation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L276-L340
+  title: Built-in evaluation dispatch and custom evaluator priority
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L576-L650
+  title: SELECT, ASK, CONSTRUCT and DESCRIBE; DESCRIBE uses CBD
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_agg_distinct.py
+  title: Local aggregate-query test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_subselect.py
+  title: Local subquery test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_construct_bindings.py
+  title: CONSTRUCT and initial-binding test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_sparql.py#L888-L977
+  title: DESCRIBE test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_w3c_spec/test_sparql11_w3c.py#L28-L222
+  title: W3C harness declares xfail query cases and SERVICE skips; not a full-conformance result
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/security_considerations.md#L1-L18
+  title: RDFLib documents arbitrary and indirect network/file access; input trust and external restrictions matter
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L343-L376
+  title: Built-in SERVICE evaluation can call urlopen
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/__init__.py#L9-L52
+  title: SPARQL_LOAD_GRAPHS=True and custom evaluator entry points
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/sparql.py#L264-L384
+  title: Dataset clauses can load graphs through QueryContext and Graph.parse
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/README.md#L49-L56
+  title: Frozen README stale 7.1.3 current-stable text is not used to identify 7.6.0
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/releases/tag/7.6.0
+  title: Official RDFLib 7.6.0 release, published 2026-02-13
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/RDFLib/rdflib/git/ref/tags/7.6.0
+  title: RDFLib 7.6.0 tag resolves to the fixed commit at verification time
+  language: en
+  accessed: '2026-10-24'
+- url: https://pypi.org/project/rdflib/7.6.0/
+  title: PyPI RDFLib 7.6.0 corroborates fixed package metadata
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T09:22:25.554473+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed RDFLib and pySHACL source evidence executor
+record_created_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: rdflib
+  acceptance_event_id: accept-20261024-rdflib
+  reviewed_candidate_blob: d2e619bd3ce99e41c74e612d9ddc71ca53372398
+  reviewed_against_commit: eea44d30f284d9aa007baa48f43fe01ef22206f8
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: eea44d30f284d9aa007baa48f43fe01ef22206f8
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/eea44d30f284d9aa007baa48f43fe01ef22206f8/01_State/Inbox/review-packets/rdflib-implementation-20261024.yaml
