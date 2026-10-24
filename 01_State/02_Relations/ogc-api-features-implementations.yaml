@@ -1,0 +1,134 @@
+id: pygeoapi_implements_ogc_api_features_core
+type: relation
+source: pygeoapi
+relation: implements
+target: ogc_api_features_17_069r4
+name_zh: pygeoapi 实现有界 OGC API Features Core 发现与要素读取路由
+name_en: pygeoapi implements bounded OGC API Features Core discovery and feature-read routing
+context:
+  version_context:
+    source: pygeoapi 0.24.0; fixed commit f765a64fa65350dc93d9df0a1b38755bef6c31b0; annotated tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428
+    target: 'OGC API - Features - Part 1: Core corrigendum, 17-069r4, version 1.0.1; not another edition or the
+      whole Features series'
+  scope:
+    http_method: GET discovery and feature-read routing only
+    discovery:
+    - root landing page and discovery links
+    - linked API description at software-selected /openapi
+    - /conformance declarations
+    - /collections
+    - /collections/{collectionId}
+    feature_read_routes:
+    - /collections/{collectionId}/items
+    - /collections/{collectionId}/items/{featureId}
+    edition_bridge: Fixed upstream test comments explicitly cite 17-069r4 only for landing-page trailing-slash behavior;
+      no exhaustive corrigendum coverage is inferred.
+    excluded: Transaction extensions, every Core/optional-class requirement, every provider, arbitrary CRS/3D bbox/antimeridian
+      correctness, certification, security and deployment/adoption claims
+  conditions_zh: 主体是完整 pygeoapi 服务端软件，不是标准、组织、托管端点、单一 provider 或 GeoJSON 库。固定 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0；注释标签
+    0.24.0（tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428）指向该 commit，标签未签名；GitHub 发布非 draft/非 prerelease 但
+    immutable=false，不声称最新版本或签名认证。仅静态核实 Flask 的 GET 路由、核心发现响应、配置集合元数据，以及 CSV/GeoJSON provider 的有限读取实现。发现包括根入口及 service-desc/service-doc、conformance、data
+    链接，软件选择的 /openapi 描述路径，/conformance 类别声明，/collections 与 /collections/{collectionId}；要素读取路由为 /collections/{collectionId}/items
+    和 /collections/{collectionId}/items/{featureId}。这些路径可受 URL 前缀/规则影响，不等于已经部署运行。固定测试源码两处明确引用 17-069r4 的根入口/尾斜杠语义，只提供精确文档版本的有限桥接，不证明该勘误全部要求已满足。/conformance
+    按配置的资源/provider 类型组合静态类别 URI，不验证底层数据或实现行为；不能从返回 URI 推断认证或完整符合性。标准 Core 不强制某一编码，也不强制 OpenAPI 3.0；/openapi 是软件路径选择，不是
+    Core 规定的固定字面路径。集合、链接、可见性、限额、数据/标识字段、provider 和依赖需正确配置；隐藏集合可从列表省略，失败集合可能被跳过。CSV/GeoJSON 文档矩阵明确不支持 datetime 与
+    sortby，所检 query 实现没有应用这两个参数；存在查询参数名不代表所有 provider 都实现它。已有 bbox/CRS 相关辅助代码不构成任意 CRS 转换、六维 bbox、三维几何或跨反经线正确性保证。完整软件另有其他
+    OGC API 和 POST/PUT/DELETE 等操作；本关系只记录 Features Part 1 Core 的发现/GET 读取切片，不称整个软件只读，也不接纳事务扩展。setup.py 声明 Python>=3.12、MIT
+    和 Production/Stable 分类；requirements.txt 的十八个基础运行依赖与可选 provider/框架依赖分开，构建需要 setuptools>=46.4 和 wheel。元数据不是实测兼容性、生产就绪或许可证法律审计，未检查
+    PyPI 发行归档。未安装、导入、构建、执行或部署上游，未运行上游/CITE 测试；不声称完整标准符合性、认证、安全性、性能、第三方互通或 IA 采用。
+  conditions_en: The subject is the whole pygeoapi server software, not the standard, organization, a hosted deployment,
+    one provider or a GeoJSON library. Fixed 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0; annotated
+    tag 0.24.0 (tag object 29c7d12894bdb85fc93f75e2320ef54ab314e428) points to that commit and is unsigned. The
+    GitHub release is non-draft/non-prerelease but mutable (immutable=false); no latest-version or signature-authentication
+    claim is made. Static inspection covers Flask GET routing, core discovery responses, configured collection metadata
+    and limited CSV/GeoJSON provider reads. Discovery includes the root and service-desc/service-doc, conformance
+    and data links; software-selected /openapi; /conformance declarations; /collections and /collections/{collectionId}.
+    Feature GET routing covers /collections/{collectionId}/items and /collections/{collectionId}/items/{featureId}.
+    URL prefixes/rules can affect these paths, and no deployment was verified. Two fixed upstream-test comments
+    explicitly reference 17-069r4 for root/trailing-slash behavior, a narrow exact-edition bridge rather than evidence
+    of every corrigendum requirement. /conformance combines static class URIs according to configured resource/provider
+    types; it does not validate underlying data or behavior. Declared URIs are not certification or complete conformance.
+    Core mandates neither a particular encoding nor OpenAPI 3.0; /openapi is a software path choice, not a required
+    literal Core path. Collections, links, visibility, limits, data/identifier fields, providers and dependencies
+    require suitable configuration; hidden collections may be omitted from listings and failed collections can be
+    skipped. The fixed provider matrix marks datetime and sortby unsupported for CSV/GeoJSON, and their inspected
+    query implementations do not apply those arguments. Parameter names do not establish support across providers.
+    Existing bbox/CRS helpers do not prove arbitrary CRS conversion, six-value bbox, three-dimensional geometry
+    or antimeridian correctness. The whole software also supports other OGC APIs and POST/PUT/DELETE operations;
+    this relation records only the Features Part 1 Core discovery/GET-read slice, not a read-only claim about the
+    whole product or transaction-extension acceptance. setup.py declares Python>=3.12, MIT and a Production/Stable
+    classifier; eighteen base runtime requirements are separate from optional provider/framework dependencies, and
+    build requirements are setuptools>=46.4 and wheel. These are declarations, not tested compatibility, production
+    readiness or a legal audit; PyPI distribution archives were not inspected. No upstream installation, import,
+    build, execution, deployment or upstream/CITE testing occurred. Complete standard conformance, certification,
+    security, performance, third-party interoperability and IA adoption are not established.
+evidence:
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_scope
+  title: 'Fixed 17-069r4 /1.0.1 Core scope: feature fetching, not transactions'
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_conformance
+  title: Separate Core and optional encoding/OpenAPI conformance classes
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_landing_page
+  title: Core root discovery links and landing-page behavior
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_api_definition_2
+  title: Linked API definition; no prescribed literal /openapi path
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_declaration_of_conformance_classes
+  title: Conformance declaration resource, distinct from independent validation
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_collections_
+  title: Core feature collection discovery
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_items_
+  title: Core feature-list GET resource
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html#_feature_
+  title: Core individual-feature GET resource
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/tests/api/test_api.py#L266-L338
+  title: Exact 17-069r4 references limited to landing-page/trailing-slash behavior
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/flask_app.py#L164-L326
+  title: Inspected GET routing for discovery, collection and item reads; mutations separately dispatched
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/__init__.py#L631-L1015
+  title: Inspected landing-page links, API definition, static conformance list and configured collection metadata
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/api/collection.py#L62-L220
+  title: Collection metadata and links derived from configuration
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/csv_.py#L233-L276
+  title: CSV query/get implementation; datetime and sortby are not applied
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/pygeoapi/provider/geojson.py#L166-L220
+  title: GeoJSON query/get implementation; provider-specific filtering and pagination
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/geopython/pygeoapi/blob/f765a64fa65350dc93d9df0a1b38755bef6c31b0/docs/source/publishing/ogcapi-features.rst#L11-L35
+  title: Provider matrix explicitly excludes CSV/GeoJSON datetime/sortby support
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T15:21:43.509806+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public pygeoapi source evidence executor
+record_created_at: '2026-10-24T15:30:43.470282+00:00'
+record_updated_at: '2026-10-24T15:30:43.470282+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_pygeoapi_features_intake
+  github_actor: ff6962757

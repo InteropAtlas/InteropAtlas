@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/geopython/pygeoapi/releases/tag/0.24.0
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - pygeoapi
   reasons:
-  - 主体是 pygeoapi Python 地理空间 API 服务端软件；固定版本 0.24.0 与 commit f765a64fa65350dc93d9df0a1b38755bef6c31b0，不是 OGC 组织/标准、某个已部署服务实例、单一
-    provider 或 GeoJSON 编解码库。
+  - Accepted as canonical pygeoapi by accept-20261024-pygeoapi-features-core. Frozen new-state Candidate eddcda9f8961221048126081f74941a449c5abd1
+    and review_required route are replayed against actual ancestor 692b96f2079bc4e3e3f0898afcc6ba12eabeb608; this
+    back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 仅公开固定源码、上游测试定义和规范文本的静态检视；未安装、导入、构建、运行或部署 pygeoapi，未运行上游或 CITE 测试。
@@ -28,4 +30,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_pygeoapi_features_intake
