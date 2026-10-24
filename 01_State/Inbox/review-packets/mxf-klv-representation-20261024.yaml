@@ -1,0 +1,420 @@
+packet_id: mxf_klv_representation_20261024
+status: pending_independent_semantic_review
+baseline_commit: f150cd5b9ca673b8ef889d7bcbe2b6fa2fdf7859
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 只修改既有 smpte_mxf、smpte_klv 两候选并新增本 packet，提议两个 artifact/standard、一个有界 uses 与既有 editing/syntax 各一个 canonical 成员。
+- 保持 work-level IDs/标识符，固定评估 ST 377-1:2019 与 ST 336:2017；不新造 edition 分类或合并主体。
+- 独立语义复核必须明确批准 MXF 的有批注来源下的有限证据选择；不批准则暂停 MXF 及关系，独立 KLV 可继续，不削弱或隐藏风险。
+work_item_preflight:
+  baseline: f150cd5b9ca673b8ef889d7bcbe2b6fa2fdf7859
+  current_counts:
+    objects: 231
+    relations: 178
+    graph_edges: 264
+    candidates: 234
+    acceptance_events: 109
+  proposed_counts_only:
+    objects: 233
+    relations: 179
+    graph_edges: 265
+    candidates: 234
+    acceptance_events: 111
+  existing_candidates_reused: true
+  duplicate_canonical_subject_or_edge_found: false
+  historical_candidate_discovery_is_not_acceptance: true
+  unrelated_open_prs:
+  - 498
+  - 439
+  - 416
+  publication_authorized: false
+candidate_baselines:
+- path: 01_State/Inbox/candidates/smpte_mxf.yaml
+  bytes: 916
+  git_blob: 737c54a850d82a5398da3653fdf7d59f96acc87b
+  sha256: 6a264f662f17df4337d7128504517183666ee101b5a442b53ec057c229574534
+  original_provenance:
+    initiator: Human — ff6962757
+    executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+    reviewer: null
+- path: 01_State/Inbox/candidates/smpte_klv.yaml
+  bytes: 866
+  git_blob: 43da502c1a92413a6a79203835a204d0949b12e5
+  sha256: 02b9863527953c3ad7ddef2340a4702de8a4a5b71ed86aa9dde7cbab5018e1ac
+  original_provenance:
+    initiator: Human — ff6962757
+    executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+    reviewer: null
+candidate_revision_attribution_zh: 保留原始 Human initiator 与 work-level 身份；此次补齐证据/限定的 executor 如实更新为 dot，原始 Doubao
+  发现归属和全部旧字段可在 baseline Git blob 恢复，不冒充新发现或旧作者工作。
+source_evidence:
+  captured_original_pdfs:
+  - candidate_id: smpte_mxf
+    external_identifier: smpte:st.377-1
+    title: SMPTE ST 377-1:2019 - Material Exchange Format (MXF) - File Format Specification
+    version: '2019'
+    approval_date: '2019-11-28'
+    url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+    pages: 187
+    effective_url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+    http_status: 200
+    content_type: application/pdf
+    bytes: 2746628
+    sha256: e46a68ad68b212593c3a53afdb602b7e8b69ba9c2b5698c1edc5bbf8054b5d98
+    capture_status: downloaded; SHA256 computed; text extracted; selected original-page renders visually inspected
+    accessed: '2026-10-24'
+  - candidate_id: smpte_klv
+    external_identifier: smpte:st.336
+    title: SMPTE ST 336:2017 - Data Encoding Protocol Using Key-Length-Value
+    version: '2017'
+    approval_date: '2017-07-21'
+    url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+    pages: 36
+    effective_url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+    http_status: 200
+    content_type: application/pdf
+    bytes: 457808
+    sha256: d6658f63b28154a92c93d1693ad16a86651529ba3beb6523d3697c41f37dc294
+    capture_status: downloaded; SHA256 computed; text extracted; selected original-page renders visually inspected
+    accessed: '2026-10-24'
+  capture_method: Public HTTPS GET via curl of the two already-verified exact URLs; no PDF byte editing. pdftotext
+    -layout 25.03.0; pdftoppm 26.05.0 -scale-to 1600. Printed and one-based PDF page numbers coincide.
+  author_method: Reused captured primary bytes; rehashed all 23 listed artifacts, read text, inspected eleven supplied
+    original annotation-visible page renders and selected annotation objects, plus an independent render of ST 336
+    page23. No source refetch or PDF editing.
+  pdfs_or_fulltext_or_renders_in_repository: false
+  mxf_selected_pages:
+  - 1
+  - 8
+  - 9
+  - 30
+  - 32
+  - 33
+  klv_selected_pages:
+  - 1
+  - 2
+  - 3
+  - 6
+  - 12
+  - 23
+  source_quality:
+    mxf_scope_page8: One /StrikeOut and associated /Popup over Scope, metadata dated 2020-01-28; authority and meaning
+      unknown. Original bytes/render retained. No clean-Scope quotation, removal, erratum, withdrawal or harmless-markup
+      inference.
+    mxf_identity_cover: Only link annotations; title/edition/approval date visually verified.
+    mxf_operational_pages: Pages 9,30,32,33 have no annotations; exact reference and operative clauses visually
+      verified.
+    klv_selected_pages: Only link annotations in the selected pages; no markup annotation there.
+    annotation_hidden_diagnostic: Exists only as separately named research diagnostic; not used as clean normative
+      authority.
+    independent_review_required: Explicitly assess and approve this bounded evidence basis; otherwise hold MXF and
+      the edge while continuing independent KLV.
+  acquisition_limits: Research captured both exact PDFs with HTTP200. Directory/guessed URL failures are not evidence;
+    earlier web screenshot technical failures were followed by successful local Poppler rendering. This author made
+    no new source request and no denied operation retry.
+normative_mapping:
+- source: ST 377-1:2019 §3 p9
+  meaning: Dated normative ST 336:2017 reference, not later/earlier edition substitution.
+- source: ST 377-1 §§6.3–6.3.1 p30
+  meaning: Data items and sets/packs use ST 336 KLV; contiguous data except optional Run-In.
+- source: ST 377-1 §§6.3.4–6.3.7 pp32–33
+  meaning: BER length constraints; mandatory listed decoder syntax versus SHOULD all forms; defined-length packs
+    not constant-total-length promise.
+- source: ST 377-1 §§6.3.8–6.3.9 p33
+  meaning: Sixteen-byte full Keys/ULs; explicit recursion restrictions/exceptions, no tag/key conflation.
+- source: ST 336:2017 §§1,5.1,5.3–5.5 pp2–3/6/12
+  meaning: Byte-level structure, distinct groups, variable/application-limited lengths and transport contiguity
+    boundary.
+type_and_relation_convention:
+  classification: Existing artifact/standard for both normative works, not software or transport implementation.
+  predicate: Existing context-qualified uses supported by operative requirements; not implements, equivalence, a
+    new profiles predicate or bibliography-only assertion.
+  work_level_precedents:
+  - path: 01_State/01_Objects/smpte_st292.yaml
+    bytes: 1955
+    git_blob: 999f5ecd6688a06b7f9ad8b772f2ca8b0f62d92b
+    sha256: ca5a5b9f035ba2e2e00fcb143f889e9d5bf283d52149080bb6a385c5010897de
+  - path: 01_State/01_Objects/smpte_st424.yaml
+    bytes: 1976
+    git_blob: 4861948328907b8b5cdb59326cf8249fbc1ffba5
+    sha256: 803f5b31e3ac537e943ef39415fb846b6362d0c14ec1ed077280d78346310e6b
+  no_new_taxonomy_capabilities_or_forced_domains: true
+objects:
+- candidate_id: smpte_mxf
+  candidate_path: 01_State/Inbox/candidates/smpte_mxf.yaml
+  candidate_blob: 12428c0451024bc6729accee35ef200051ff706b
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_record:
+    id: smpte_mxf
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 377-1 素材交换格式（MXF）文件格式规范
+    name_en: SMPTE ST 377-1 — Material Exchange Format (MXF) — File Format Specification
+    description_zh: MXF 文件格式标准；本记录固定 ST 377-1:2019，仅据已核验的未受 Scope 批注覆盖的条款描述其 KLV 编码依赖。
+    description_en: The MXF file-format standard, reviewed at ST 377-1:2019; only verified provisions unaffected
+      by the Scope annotation support the bounded KLV dependency described here.
+    version: '2019'
+    external_identifiers:
+    - namespace: smpte
+      value: st.377-1
+    official_url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+    versions:
+    - version: '2019'
+      status: standard
+      url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+    scope_notes_zh: 保留 ST 377-1 的既有 work-level 标识，本文固定 2019 版（2019-11-28 批准）。描述依据封面身份和 §§6.3–6.3.9 的已核验 KLV 条款，不把其他
+      MXF 规范、操作模式、素材容器映射、编码器或解码器当作同一主体。官方 187 页 PDF 的第 8 页 Scope 存在 /StrikeOut 批注（元数据日期 2020-01-28），其权威性及含义未知；不将被划线文字重现为干净规范内容，不推断勘误、撤销或批注无害。原始
+      PDF 字节/批注保留，封面只有链接批注，引用页 9 和操作页 30/32/33 没有批注。仅据这些未受该批注覆盖的证据记录文件中的 KLV 依赖：可选 Run-In 除外，数据连续按 KLV 编码；ST 336
+      的一般能力须受 MXF 的长度、键、集合/包及递归限制约束。独立复核必须明确接受此有限证据选择。没有实施文件解析、编解码或符合性测试，不保证完整标准符合性、任意 KLV/MXF 兼容、codec/profile/软件支持、安全、认证或
+      IA 采用。
+    scope_notes_en: 'Preserves the existing ST 377-1 work-level identifier while fixing this review to the 2019
+      edition, approved 2019-11-28. The description rests on cover identity and verified KLV provisions in §§6.3–6.3.9,
+      not on other MXF specifications, operational patterns, essence-container mappings or implementations. The
+      official 187-page PDF contains a /StrikeOut annotation over page 8 Scope, with metadata dated 2020-01-28;
+      its authority and meaning are unknown. Struck-through text is not presented as clean normative content, nor
+      is an erratum, withdrawal or harmless markup inferred. Original bytes and annotations are preserved. The cover
+      has link annotations only; reference page 9 and operative pages 30/32/33 have no annotations. Only this unaffected
+      evidence supports the bounded KLV dependency: contiguous KLV data except optional Run-In, subject to MXF-specific
+      length, key, set/pack and recursion constraints. Independent review must explicitly accept this evidence choice.
+      No file parsing, codec or conformance testing; no full-standard conformance, arbitrary KLV/MXF compatibility,
+      codec/profile/software support, security, certification or IA-adoption claim.'
+    sources:
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=1
+      title: ST 377-1:2019 cover — title, edition and approval date
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=8
+      title: 'Source-quality caveat: original Scope StrikeOut annotation, authority and meaning unverified'
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=9
+      title: Normative reference explicitly names ST 336:2017
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=30
+      title: §§6.3–6.3.1 — KLV items/groups and contiguous sequence except optional Run-In
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=32
+      title: §§6.3.4–6.3.7 — MXF length restrictions and required versus recommended set/pack decoding
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=33
+      title: §§6.3.7–6.3.9 — defined-length packs, sixteen-byte keys/ULs and recursion constraints
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T17:06:39.157450+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public SMPTE PDF evidence executor
+- candidate_id: smpte_klv
+  candidate_path: 01_State/Inbox/candidates/smpte_klv.yaml
+  candidate_blob: 9d1ec02d4dd9173bf06647530e8af24904794b0a
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_record:
+    id: smpte_klv
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 336 键-长度-值（KLV）数据编码规范
+    name_en: SMPTE ST 336 — Data Encoding Protocol Using Key-Length-Value
+    description_zh: 定义数据项与数据组的字节级 KLV 表示以及集合/包编码的标准；本记录固定 ST 336:2017，不代表具体实现。
+    description_en: A standard for byte-level KLV representation of data items and groups, including sets and packs;
+      reviewed at ST 336:2017, not an implementation.
+    version: '2017'
+    external_identifiers:
+    - namespace: smpte
+      value: st.336
+    official_url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+    versions:
+    - version: '2017'
+      status: standard
+      url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+    scope_notes_zh: 保留 ST 336 的既有 work-level 标识，本记录固定 2017-07-21 批准的 2017 版。§1 将数据项/数据组的字节级编码结构与应用、运输方式分开；不意味着任意应用自动互通。§5.1
+      描述完整 UL Key、长度及数据 Value，完整 Key 为 16 字节；组内局部 Tag 及各类组编码不应混同这一完整键形式。§5.3 的普通 KLV 长度使用 BER 短式/长式；组内成员长度可按组定义采用其他方法，应用标准可限制字段字节数或值域。无法预知长度时的
+      0x80 只有在允许它的应用定义替代终止定位方式等前提下使用，不推出 MXF 允许该值。标准分别定义 Universal/Global/Local Sets、Variable-Length/Defined-Length
+      Packs；Defined-Length 并不等于所有包固定常数长度。§5.5 不规定包间连续性/空隙，由相应承载规范处理。只记录标准结构与应用约束边界，不将其当作具体软件、网络运输、素材编解码或全面实现符合性证明；无实现执行、互通/安全认证或
+      IA 采用判断。
+    scope_notes_en: Preserves the existing ST 336 work-level identifier, reviewed at the 2017 edition approved 2017-07-21.
+      §1 separates byte-level data-item/group representation from application and transport, not a guarantee of
+      arbitrary application interoperability. §5.1 describes the full UL Key, Length and data Value; the full key
+      is 16 bytes, distinct from local tags and group-specific item encodings. Ordinary KLV lengths use BER short/long
+      forms under §5.3, while group-member lengths can use group-defined methods and application standards can limit
+      field sizes or ranges. The 0x80 unknown-length case requires an allowing application to define an alternative
+      way to locate the Value end; it does not mean MXF permits that value. Universal/Global/Local Sets and Variable-Length/Defined-Length
+      Packs are distinct constructs; Defined-Length does not mean every pack has a constant total length. Packet
+      contiguity/gaps are outside §5.5 and belong to the relevant transport specification. This is a standard and
+      its bounded structural description, not software, network transport, a codec or proof of complete implementation
+      conformance. No implementation execution, interoperability/security certification or IA-adoption assessment.
+    sources:
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=1
+      title: ST 336:2017 cover — title, edition and approval date
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=2
+      title: §1 Scope — byte-level data items/groups, independent of application or transport
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=3
+      title: §1 continued and §2 — distinct group constructs and normative keyword distinctions
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=6
+      title: §5.1 — full UL Key/Length/Value structure, data representation not further coded by KLV
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=12
+      title: §§5.3–5.5 — lengths, application restrictions, unknown-length prerequisite and contiguity boundary
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=23
+      title: §7.6 — Defined-Length Packs may have variable overall length; no per-item Length fields
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T17:06:39.157450+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public SMPTE PDF evidence executor
+relations:
+- proposal_id: smpte_mxf_uses_smpte_klv
+  proposed_path: 01_State/02_Relations/mxf-klv-representation.yaml
+  proposed_record:
+    id: smpte_mxf_uses_smpte_klv
+    type: relation
+    name_zh: MXF 文件规范在特定约束下使用 KLV 编码
+    name_en: MXF file specification uses KLV coding under file-specific constraints
+    source: smpte_mxf
+    relation: uses
+    target: smpte_klv
+    context:
+      version_context:
+        source: SMPTE ST 377-1:2019, approved 2019-11-28; existing work-level smpte:st.377-1 identity
+        target: SMPTE ST 336:2017, approved 2017-07-21; exact dated reference, existing work-level smpte:st.336
+          identity
+      conditions_zh: 固定 ST 377-1:2019 → ST 336:2017；§3 页 9 明确该版本引用，§§6.3–6.3.9 页 30/32/33 给出实际编码要求，不只是书目关联。MXF 数据项、集合与包采用
+        ST 336 KLV，除可选 Run-In 外数据连续编码、无间隙。MXF KLV Keys 和 ULs 必须 16 字节；这不把组内 Local Tags 误称为完整键。MXF 编码器可选 BER 短式或长式长度，长式总编码长度不得超过
+        9 字节，数值小于 128 也可用长式；0x80 未定长度禁止。解码器须处理短/长式且不得假定长度字段固定字节数。Local Sets 至少须解码 2 字节 Tag 配 2 字节长度或 BER 长度的语法；Variable-Length
+        Packs 至少须解码 2 字节长度或 BER 长度的语法；这两类的全部 ST 336 形式仅为 SHOULD，不升级为全部强制。Defined-Length Packs 按 ST 336 解码，不等同固定常数总长度；上述三类编码器使用符合
+        ST 336 的 Keys。其他 MXF 规范可加长度约束。递归分组一般不允许，除非相关 Application-Specific Metadata、Descriptive Metadata 或 Essence
+        Container 规范另定；MXF Structural 和 MXF Descriptive Metadata Sets 仍禁止递归组结构。官方 MXF 页 8 Scope 的 /StrikeOut 批注权威/含义未知，未用被划线文字作干净规范依据；这里的固定引用和操作页没有批注。仅表示这些标准条款之间受约束的
+        uses，不是两格式等同、任意 KLV 接受、所有解码器实际能力、完整符合性、codec/profile/素材容器支持、第三方互通、安全认证或 IA 采用。
+      conditions_en: 'Fixed ST 377-1:2019 → ST 336:2017: the dated normative reference is on page 9 and operative
+        §§6.3–6.3.9 are on pages 30/32/33, not merely a bibliography association. MXF data items, sets and packs
+        use ST 336 KLV, with contiguous coding and no gaps except optional Run-In. MXF KLV Keys and ULs must be
+        16 bytes; group-local tags are not misidentified as full keys. Encoders may use BER short or long length
+        forms, with long-form encoding limited to nine bytes total, even for values below 128; 0x80 unspecified
+        length is forbidden. Decoders must handle both forms without assuming fixed length-field size. Required
+        Local Set syntax support covers two-byte tags with two-byte or BER lengths; required Variable-Length Pack
+        support covers two-byte or BER lengths. Support for all ST 336 forms of these two constructs is only SHOULD,
+        not universally mandatory. Defined-Length Packs are decoded as specified by ST 336, not assumed to have
+        constant total length; encoders use ST 336-compliant keys for all three constructs. Other MXF specifications
+        may add length constraints. Recursive grouping is generally prohibited unless specified by an Application-Specific
+        Metadata, Descriptive Metadata or Essence Container specification; recursive structures remain prohibited
+        in MXF Structural and MXF Descriptive Metadata Sets. The official MXF page 8 Scope StrikeOut annotation
+        has unknown authority/meaning and its struck-through text is not used as clean normative evidence; the cited
+        reference and operative pages have no annotations. This bounded standards-level uses assertion does not
+        establish format equivalence, arbitrary KLV acceptance, actual decoder capabilities, full conformance, codec/profile/essence-container
+        support, third-party interoperability, security certification or IA adoption.'
+    evidence:
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=9
+      title: ST 377-1 §3 — exact ST 336:2017 normative reference
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=30
+      title: ST 377-1 §§6.3–6.3.1 — operative KLV reliance, optional Run-In exception
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=32
+      title: ST 377-1 §§6.3.4–6.3.7 — narrower length/set/pack rules and SHOULD distinction
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=33
+      title: ST 377-1 §§6.3.7–6.3.9 — defined-length packs, key size and recursion constraints
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=6
+      title: ST 336 §5.1 — KLV structure
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=12
+      title: ST 336 §5.3 — general length rules allow narrower application restrictions
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T17:06:39.157450+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded MXF/KLV normative dependency executor
+relation_preflight:
+  schema_errors: []
+  existing_id_or_endpoint_predicate_collisions: []
+  all_endpoints_resolve_after_two_proposed_objects: true
+membership_proposals:
+- category_id: editing
+  ref:
+    surface: canonical
+    id: smpte_mxf
+  rationale_zh: MXF 文件交换规范连接制作、编辑与交付；不推导实现或 workflow 保证。
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: smpte_klv
+  rationale_zh: KLV 是数据项/组的字节级表示，与具体运输方式或实现分离。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 48301
+  git_blob: e981e8743de72e1424cf0d6b6a53b656210b1147
+  sha256: 665c76309ef6e142419a9f2dc9c6d86037c9042947e3ae0ea12385d72286928a
+  preservation: Preserve original bytes/categories/held proposals; after authorized acceptance add only one editing
+    and one syntax membership.
+protected_existing_assets:
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+- path: 01_State/Inbox/candidates/amwa_aaf.yaml
+  bytes: 1378
+  git_blob: e3287583f456ec555b13ac731ff6c92864b96440
+  sha256: 584c22917399bcbc2179315e4dad44db1fd667254a84786eb9b9c3f1c2a967df
+- path: 01_State/01_Objects/ffmpeg.yaml
+  bytes: 8070
+  git_blob: 81690d52414edb1a9f37b4c1422b0d25e2e2251a
+  sha256: 0ccd9e87fbbc9f91a637574f13634d0dfc6e743a8fc705fae6d5feea9c56b4d1
+- path: 01_State/01_Objects/broadcast_loudness.yaml
+  bytes: 11161
+  git_blob: f05f882c9ef004754ad76b38d6047b89b92e02b1
+  sha256: 3ce56fad78f449540588ecc584363d8d549f057e058293659117d1920c9a2e57
+- path: 01_State/02_Relations/media-transport-implementations.yaml
+  bytes: 11769
+  git_blob: 244f9e0f88c28f0aaa40ef86d65117f5dadf47e5
+  sha256: 360c5e04142a09fd8f12775ff7b1ddc2d2e05490e8c1d832ac19d3a3a8cd3b0d
+- path: 01_State/02_Relations/loudness-measurement-implementations.yaml
+  bytes: 6723
+  git_blob: d0869fa1d89e33555166bf9e36746b2e9c7cfda6
+  sha256: 16724318ff00e80ac3f7e5a409f6826263c0009a539099553a8dcab4aa475697
+excluded_scope:
+- AAF candidate correction or acceptance
+- FFmpeg, IMF, ST 2110, codecs, profiles, operational patterns or additional normative-reference edges
+- Whole-format or implementation conformance, arbitrary KLV/MXF compatibility, security/certification or IA adoption
+- Governance, identity model, schema, runtime, pages, historical snapshot or other held PR changes
+materialization_boundary_zh: 仅三份本地文件；独立语义复核及适用全检查后等待 root 发布门槛。后续如获准，以真实远端正常祖先冻结并正常 fetch，不猜 SHA、不 squash；按既有事件合同分别接纳两对象和引用式回执，精确物化本
+  packet payload 与两导航成员。
