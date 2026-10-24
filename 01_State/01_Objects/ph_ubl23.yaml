@@ -1,0 +1,95 @@
+id: ph_ubl23
+type: system
+kind: library
+name_zh: ph-ubl23 UBL 2.3 Java 绑定库
+name_en: ph-ubl23 UBL 2.3 Java binding library
+description_zh: 独立发布的 Java/JAXB 模块，提供 UBL 2.3 文档类型模型、XML 读写及可配置的 XSD 支持；本记录固定 Maven 10.2.1，不表示完整业务文档符合性。
+description_en: A separately published Java/JAXB module providing UBL 2.3 document models, XML reading/writing and
+  configurable XSD support; pinned to Maven 10.2.1, not a complete business-document conformance claim.
+version: 10.2.1
+external_identifiers:
+- namespace: maven
+  value: com.helger.ubl:ph-ubl23
+official_url: https://github.com/phax/ph-ubl/tree/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23
+versions:
+- version: 10.2.1
+  status: released
+  url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+open_source: true
+scope_notes_zh: 主体是 com.helger.ubl:ph-ubl23 JAR 模块，不是整个 ph-ubl 套件、父 BOM、可选 ph-ubl23-codelists 或电子发票服务。注释标签 ph-ubl-parent-pom-10.2.1（28b05da0e375bdd91436b4b994776e09b2a6b556）指向固定
+  commit a1e8996af1cf56304048f13b4fc819680d109a7b；标签未签名，不声称签名验证或最新版本。生成的 InvoiceType 等 JAXB 源码来自发布 source JAR，不是已提交源码。要求
+  Java 17+，直接依赖 ph-jaxb 12.3.5 和四个 ph-xsds 4.1.0 模块；调用应用须提供相容的 JAXB provider，不能把单个JAR当作独立可执行或自包含验证器。schema使用初始默认true，但全局默认和实例设置均可改变；对象构造、成功序列化或无schema的validate调用都不证明有效。已比较的Invoice、Order、Catalogue和六个common
+  XSD与官方OS运行模式逐字相同，另三个common XSD移除CCTS/XAdES/XMLDSig外部import位置，由catalog、依赖资源和marshaller组装处理；不称整个100模式bundle未经修改或每项均比较。POM声明Apache
+  2许可，随包模式保留OASIS版权通知，不是法律审计。未执行Java、Maven、上游测试或PR488实验；测试源包含旧版UBL样例，不是UBL 2.3全覆盖。只记录有界模型与XML路径，不声称UBL §6.1所含§3.5扩展及§4约束（含IND5）、码表/业务规则、Peppol/EN
+  16931、税务、签名验证、对抗XML安全、生产互通或IA采用已获验证。
+scope_notes_en: 'The subject is the separately published com.helger.ubl:ph-ubl23 JAR, not the whole suite, parent
+  BOM, optional codelist module or e-invoicing service. Annotated tag ph-ubl-parent-pom-10.2.1 (28b05da0e375bdd91436b4b994776e09b2a6b556)
+  points to commit a1e8996af1cf56304048f13b4fc819680d109a7b; it is unsigned, with no signature-verification or latest-version
+  claim. Generated JAXB source such as InvoiceType was inspected in the published source JAR, not committed source.
+  Java 17+ and a compatible application-supplied JAXB provider are required; direct dependencies include ph-jaxb
+  12.3.5 and four ph-xsds 4.1.0 modules. The JAR is not a standalone executable or self-contained validator. Initial
+  schema-use default is true, but global and instance settings can disable it; construction, serialization or a
+  no-schema validate call does not establish validity. Only Invoice, Order, Catalogue and nine common schemas were
+  compared: nine match official OS runtime bytes; three common schemas adapt external CCTS/XAdES/XMLDSig import
+  locations, using catalog mappings, dependency resources and marshaller assembly. No untouched-bundle or all 100-files
+  comparison claim. The POM declares Apache 2; schemas retain OASIS notices, not a licensing audit. No Java/Maven/build/upstream-test
+  or PR488 execution occurred. Inspected tests include older UBL examples, not exhaustive 2.3 coverage. This bounded
+  model/XML path does not establish all UBL §6.1 conditions, §3.5 extensions or §4 constraints including IND5, code-list/business-rule
+  validation, Peppol/EN 16931, tax compliance, signature verification, adversarial XML safety, production interoperability
+  or IA adoption.'
+sources:
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+  title: Fixed ph-ubl23 POM — separate Maven JAR identity, generation, dependencies and Apache 2 declaration
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/README.md#L10-L44
+  title: Fixed ph-ubl README — module separation, Java 17 and generated-source provenance
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/releases/tag/ph-ubl-parent-pom-10.2.1
+  title: Official ph-ubl release 10.2.1
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/phax/ph-ubl/git/tags/28b05da0e375bdd91436b4b994776e09b2a6b556
+  title: Unsigned annotated release tag and fixed commit
+  language: en
+  accessed: '2026-10-24'
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+  title: Published Maven module POM, matching fixed and binary-embedded POM
+  language: en
+  accessed: '2026-10-24'
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+  title: Published source JAR — generated InvoiceType inspected as text, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/pom.xml#L65-L92
+  title: Fixed release parent POM — dependency BOM versions
+  language: en
+  accessed: '2026-10-24'
+- url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-jaxb/12.3.5/ph-jaxb-12.3.5.pom
+  title: ph-jaxb 12.3.5 POM — optional JAXB runtime dependency
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/resources/external/schemas/ubl23/maindoc/UBL-Invoice-2.3.xsd
+  title: Bundled UBL 2.3 OS Invoice runtime schema with OASIS notice
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:40:50.352537+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public ph-ubl23 module evidence executor
+record_created_at: '2026-10-24T12:48:40.498027+00:00'
+record_updated_at: '2026-10-24T12:48:40.498027+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: ph_ubl23
+  acceptance_event_id: accept-20261024-ph-ubl23-implementation
+  reviewed_candidate_blob: 5429b884de10944567584d514fe126344294c815
+  reviewed_against_commit: ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa
+  reviewed_packet_blob: c1f21ef5eb4deb95f295e54650cd44ae5d122d43
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa/01_State/Inbox/review-packets/ph-ubl23-implementation-20261024.yaml

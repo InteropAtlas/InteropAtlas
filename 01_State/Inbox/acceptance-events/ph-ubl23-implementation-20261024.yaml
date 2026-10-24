@@ -1,0 +1,31 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-ph-ubl23-implementation
+candidate_id: ph_ubl23
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: ph_ubl23
+review:
+  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer
+  reviewed_at: '2026-10-24T12:46:13Z'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate 5429b884de10944567584d514fe126344294c815 与 packet c1f21ef5eb4deb95f295e54650cd44ae5d122d43；主体为固定
+    Maven com.helger.ubl:ph-ubl23:10.2.1 模块，不是整个套件、父 BOM、码表模块或业务服务。
+  - 独立核对固定 release/tag/commit、模块 POM 和两份发布 JAR 身份，检查 22 份来源指纹；生成 InvoiceType 来自发布 source JAR，而非已提交源码。注释标签未签名，不声称签名或可复现构建验证。
+  - 保留 Java 17+、相容 JAXB provider、ph-jaxb 12.3.5 与四个 ph-xsds 4.1.0 依赖，以及可改变的全局/实例 schema 设置；无 schema 的 validate 或成功序列化不证明有效。
+  - 仅比较 Invoice、Order、Catalogue 与九个 common XSD：九项逐字匹配官方 OS，三个 common 文件适配四个外部 import 位置。不称完整官方 bundle 未修改或所有文档路径运行成功。
+  - 只检视公开源码、元数据、ZIP 条目和 schema 字节，未执行 Java、Maven、上游测试、XML 实例验证或 PR488 实验。XSD 支持不等于完整 UBL §6.1、§3.5、§4/IND5、码表、业务规则、税务或特定电子发票
+    profile 符合性；无安全、签名、生产互通、无损往返或 IA 采用结论。
+  - 独立复核运行全部 27 项适用非浏览器仓库命令，零错误，103 个既有验收事件通过。语义复核先于真实远端冻结；正常 Git fetch 证明实际祖先与被审完整字节一致。六文件物化另需通过独立结构复核与适用远端 CI（含浏览器）门槛。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa/01_State/Inbox/review-packets/ph-ubl23-implementation-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/5429b884de10944567584d514fe126344294c815
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/c1f21ef5eb4deb95f295e54650cd44ae5d122d43
+decided_at: '2026-10-24T12:48:40.498027+00:00'
+notes:
+- 仅接纳一个库模块、一个有界 implements 关系与一个现有 commerce 导航成员；不改既有对象/关系、分类、谓词、schema、runtime、治理或维护方式。
+- 当前 packet 仅为引用式回执，完整原稿保留在正常被审祖先。PR488 五份实验资产、PR529 历史 20ce 底图三文件、PR498 和其他工作保持不变；不扩展其他 UBL 版次、码表模块或业务 profiles。

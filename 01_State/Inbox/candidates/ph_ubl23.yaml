@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/phax/ph-ubl/releases/tag/ph-ubl-parent-pom-10.2.1
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - ph_ubl23
   reasons:
-  - 主体是独立发布的 Maven JAR 模块 com.helger.ubl:ph-ubl23，版本另记10.2.1，固定源码 commit a1e8996af1cf56304048f13b4fc819680d109a7b；不是整个
-    ph-ubl 多模块套件、parent BOM、可选 codelists、UBL 标准或税务服务。
+  - Accepted as canonical ph_ubl23 by accept-20261024-ph-ubl23-implementation. Frozen new-state Candidate 5429b884de10944567584d514fe126344294c815
+    and review_required route are replayed against actual ancestor ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa; this
+    back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 只检视固定公开源码、POM、JAR内目录与源文本；未安装或运行Java/Maven、构建库、执行上游测试或重跑PR488的IND5实验。
@@ -28,4 +30,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer
