@@ -5,19 +5,31 @@ publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.330
+- namespace: smpte
+  value: st.330
 locators:
-  - url: https://pub.smpte.org/latest/st330/
-    role: official
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+  role: official
+- url: https://smpte-ra.org/umid-information
+  role: official
+- url: https://pub.smpte.org/pub/st330/st330-2022.pdf
+  role: official
 identity_resolution:
   state: new
   matched_canonical_ids: []
   reasons:
-    - SMPTE ST 330 specifies the Unique Material Identifier (UMID) for identifying media essence in files and streams.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - 保留既有 smpte_umid 与 smpte:st.330 工作级标准身份；本次固定审阅 2011-08-23 批准的 ST 330:2011，不把后来的 2022 修订替换为同一受审版次。
+  - 官方标准定义视听素材实例的 UMID 标识结构及其元数据关联用途；不是作品、版权或权利所有权标识，也不是身份认证、可信来源或软件实现。
+  - 当前 238 个 Canonical 对象无相同主体或规范化标识碰撞。拟收录一个 artifact/standard、一个 ST 377-1:2019 使用 ST 330:2011 Basic UMID 的有界关系及一个既有
+    metadata 导航成员，仍须独立语义复核。
   merge_authorized: false
-unknowns: []
+unknowns:
+- ST 330:2022 是已证实的后续修订；本次不声称 2011 为最新版、所有版本等同或已完成 2022 条文复核，不另建版次对象。
+- 标准的全局唯一性目标不证明任意生成器的实际唯一性、身份认证、权利归属或可信来源；未运行生成器、解析器、媒体软件或符合性/互通测试。
+- MXF 关系仅限 ST 377-1:2019 的 32 字节 Basic UMID Package ID。Source Clip 存在时其 SourcePackageID 有 32 个零字节终止引用链的明确例外，不把它当作普通生成的
+  UMID；Extended UMID 不在该 Package ID 关系内。
+- 原始 MXF PDF 第 8 页 Scope 的 StrikeOut 批注权威和含义未知；保留批注，只使用未受覆盖的下方固定引用及无批注的操作页，不臆造勘误或全面重验既有 MXF 对象。
+- 不从 ST 330:2011 对 ST 336:2007 的引用连接到既有 2017 KLV 对象；其他 UUID、时间码、地理/国家代码及生成方法依赖不在此批。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)

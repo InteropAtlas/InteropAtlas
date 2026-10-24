@@ -1,0 +1,419 @@
+packet_id: umid_mxf_package_identity_20261024
+status: pending_independent_semantic_review
+baseline_commit: 9fef55fe423bb7c21466984ddde441ce2c35185d
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 复用既有 smpte_umid 工作级候选，固定 ST 330:2011；一个 artifact/standard、一个已有 MXF 源端的有界 uses 关系、一个既有 metadata 导航成员。
+- 独立复核须明确批准或拒绝页 8 Scope 批注不确定性下，未受覆盖的日期引用与其他无批注操作页足以支持所述有限关系；研究报告本身不是 packet 接纳。
+- 只准备候选和 packet 两份本地文件；保持全部 238 旧对象、181 旧关系、116 旧事件、历史快照和 held 身份不变。
+work_item_preflight:
+  baseline: 9fef55fe423bb7c21466984ddde441ce2c35185d
+  historical_candidate_origin: https://github.com/InteropAtlas/InteropAtlas/pull/380
+  candidate_origin_commit: 9ab80a7798296e82a62786896d28f0cf654081f7
+  candidate_inbox_move_commit: c347b935ed99638546875fc5ba898441280a58a3
+  historical_issue_scope: https://github.com/InteropAtlas/InteropAtlas/issues/146
+  authority_boundary: Issue146/PR380 establish historical metadata/identifier discovery, not automatic Canonical
+    acceptance. Current bounded routine intake authority applies; no project-policy or model change.
+  search_observation: All238 Canonical objects and structured/legacy identifier index show no UMID match/collision.
+    No parallel UMID PR or specific historical hold found. PR380 suite/part referral does not turn this existing
+    single-document work ID into a suite. Held PR498/439/416 remain unchanged.
+  current_counts:
+    objects: 238
+    relations: 181
+    graph_edges: 267
+    candidates: 235
+    acceptance_events: 116
+  proposed_counts_only:
+    objects: 239
+    relations: 182
+    graph_edges: 268
+    candidates: 235
+    acceptance_events: 117
+  publication_authorized: false
+candidate_baseline:
+  path: 01_State/Inbox/candidates/smpte_umid.yaml
+  bytes: 831
+  git_blob: bf2f77a3f03e87da68609ff881f9d46b95ae6fe5
+  sha256: 6c0ebdd5547b7b22b6b033557feed9df2b6dcc38666d29189d77f6fbb09c7561
+  original_provenance:
+    initiator: Human — ff6962757
+    executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+    reviewer: null
+candidate_revision_attribution_zh: 保留既有 ID、label、publisher、family/kind、外部标识及全部原始 provenance；这些记录原 Doubao 发现归属。本次证据修订由
+  packet.executor 标识，原字节可由 baseline 恢复。
+source_evidence:
+  captures:
+  - requested_url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+    final_url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+    status: 200
+    content_type: application/pdf
+    bytes: 274701
+    sha256: a80861a0e69e90b0415f02a86206dd98fe5ec8d3711302e7de3874595aee341f
+    captured_at_utc: '2026-10-24T21:31:06.096532+00:00'
+    file: st330-2011.pdf
+    pages: 26
+    selected_page_annotations:
+      '1':
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      '3': []
+      '5': []
+      '6': []
+    all_annotation_subtypes:
+      /Link: 29
+  - requested_url: https://pub.smpte.org/pub/st330/st330-2022.pdf
+    final_url: https://pub.smpte.org/pub/st330/st330-2022.pdf
+    status: 200
+    content_type: application/pdf
+    bytes: 666906
+    sha256: 2dbd9a2004f1ea96a4760ba8ca36a30f75cde5edf587308f98d3afd08e7b0d71
+    captured_at_utc: '2026-10-24T21:31:08.936990+00:00'
+    file: st330-2022.pdf
+    pages: 38
+    selected_page_annotations:
+      '1':
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+      - /Link
+  - requested_url: https://smpte-ra.org/umid-information
+    final_url: https://smpte-ra.org/umid-information
+    status: 200
+    content_type: text/html; charset=utf-8
+    bytes: 12239
+    sha256: 037e267b075b3c537c2a504372d905f3aa67d68a102de2a3a17dd39f48831499
+    captured_at_utc: '2026-10-24T21:31:14.116681+00:00'
+    file: umid-information.html
+  - existing_source_url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+    bytes: 2746628
+    sha256: e46a68ad68b212593c3a53afdb602b7e8b69ba9c2b5698c1edc5bbf8054b5d98
+    pages: 187
+    source_quality: The page8 Scope StrikeOut does not overlap the lower-page section3 reference to ST330:2011.
+      Its authority/meaning remains unknown. Do not erase it or assert the whole page is annotation-free. Pages18,118,123
+      have no annotations. All four original-page renders visually inspected; no PDF content changed.
+    file: st377-1-2019.pdf
+    selected_page_annotations:
+      '8':
+      - /StrikeOut
+      - /Popup
+      '18': []
+      '118': []
+      '123': []
+  inspection_method: Independently rehashed all original three publisher captures and reused MXF PDF; independently
+    inspected PDF annotation dictionaries and visually viewed ST330:2011 pages1/3/5/6,2022 cover and MXF pages8/18/118/123.
+    No source refetch, PDF edit, annotation removal, implementation/media execution or paid retrieval.
+  source_uncertainty: MXF page8 Scope StrikeOut authority/meaning unknown; its lower ST330:2011 reference is visibly
+    outside the marked Scope. Pages18/118/123 have no annotation objects. The source PDF and all original captures
+    remain unchanged.
+  source_access: Earlier research DOI safe-open redirect failure and directory parser failures are not retried.
+    No current source capture is missing; no bypass.
+  source_files_redistributed_in_repository: false
+  later_revision_boundary: 2022 cover establishes a later revision, not accepted2022 endpoint, latestness or cross-edition
+    equivalence.
+  all_original_captures_preserved: true
+normative_mapping:
+- source: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=1
+  meaning: Fixed ST330:2011 standard identity and2011-08-23 approval.
+- source: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=3
+  meaning: Material instances and metadata association; excludes works/copyright/rights identity.
+- source: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=5
+  meaning: Distinct Basic32-byte and Extended64-byte structures, not interchangeable.
+- source: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=6
+  meaning: Normative Basic component order/structure.
+- source: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=8
+  meaning: Exact2011 reference below unaffected by Scope annotation, not whole-page clean-source claim.
+- source: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=18
+  meaning: Basic-only Package ID; explicit32-zero-byte termination definition.
+- source: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=118
+  meaning: Normative Generic Package abstract class; Package UID required/immutable/length32.
+- source: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=123
+  meaning: Source Clip condition, required SourcePackageID and context-specific zero termination value.
+type_convention:
+  classification: Existing artifact/standard with normative_artifact profile, supported by SMPTE Standard cover
+    and normative requirements; not software, a generator or an adopted implementation.
+  classification_specification: docs/02_System/01_Knowledge/01_Model/knowledge-object-classification-specification.zh-CN.md
+  precedent:
+    path: 01_State/01_Objects/smpte_klv.yaml
+    bytes: 5378
+    git_blob: 0e351a2597656e9f4600ee22ce63419fc091ca70
+    sha256: e0b468dbd0d014223552b22686571a37241a79a9f9b362065e1b932974214ff5
+  relation_precedent:
+    path: 01_State/02_Relations/mxf-klv-representation.yaml
+    bytes: 5548
+    git_blob: 1d633dbd7703ecd2cb15a9369d40a58a5e1e4a76
+    sha256: 5ca53965b4817d555347aed916813e745fefbda4865225130b564590c7203ae9
+  identifier_boundary: Preserved single-document work-level smpte:st.330;2011 is explicit reviewed version context,
+    not new edition identity.
+  no_new_model_domains_or_capabilities: true
+objects:
+- candidate_id: smpte_umid
+  candidate_path: 01_State/Inbox/candidates/smpte_umid.yaml
+  candidate_blob: 529ddd43862d666e097891d98e1f309b889d3064
+  preflight:
+    canonical_records: 238
+    machine_route: review_required
+    canonical_id_exists: false
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_record:
+    id: smpte_umid
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 330 唯一素材标识符（UMID）
+    name_en: SMPTE ST 330 — Unique Material Identifier (UMID)
+    description_zh: 规定视听素材实例 UMID 标识结构的标准；本次固定 ST 330:2011，区分 Basic 与 Extended 形式，不把素材标识等同于作品、权利或可信来源证明。
+    description_en: A standard defining UMID structures for audiovisual-material instances; reviewed at ST 330:2011,
+      distinguishing Basic and Extended forms without treating material identity as proof of works, rights or trustworthy
+      provenance.
+    version: '2011'
+    external_identifiers:
+    - namespace: smpte
+      value: st.330
+    official_url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+    versions:
+    - version: '2011'
+      status: standard
+      url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+    scope_notes_zh: 保留既有 smpte_umid / smpte:st.330 工作级标准身份，审阅上下文固定为 2011-08-23 批准的 SMPTE ST 330:2011；不新建 2011 版次主体。官方
+      2022 版封面明确其修订 2011 版，因此本记录不声称 2011 最新、所有版次等同或 2022 已完整审阅。§1 将 UMID 用于视听素材实例的标识及关联元数据，不用于识别作品、节目内容、版权或权利所有权。§5
+      与 §6.1.1 定义 32 字节 Basic UMID：按顺序包含 12 字节通用标签、1 字节长度、3 字节实例号和 16 字节素材号；64 字节 Extended UMID 在 Basic 后附加 32 字节
+      source pack，二者不能互换。此处只记录标准身份、标识目的和基本结构，不详尽复核所有生成方法或 source pack 字段语义。标准的全局唯一性目标及所定义的生成方法不等于任意实现实际无碰撞，更不是实体认证、版权/权利管理、可信来源、完整素材历史或安全保证。未执行
+      UMID 生成器、文件解析器、媒体应用、符合性或互通测试。与 MXF 的具体用途由另一个有版次上下文的关系单独限定：ST 377-1:2019 Package ID 仅允许 32 字节 Basic UMID，并保留终止
+      source-reference chain 的全零特殊值；不将该值当作普通生成的唯一素材标识。该关系不扩大为任意 MXF/Extended UMID 用途或软件符合性。本次不从 ST 330:2011 对 ST
+      336:2007 的引用推断对既有 ST 336:2017 对象的依赖；不增加 UUID、时间码、国家码或地理编码等其他关系。不声称完整符合性、第三方互通、认证、部署、推荐、实现采用或 IA 采用。
+    scope_notes_en: Preserves the existing work-level standard identity smpte_umid / smpte:st.330, reviewed specifically
+      at SMPTE ST 330:2011 approved 2011-08-23, without creating a separate 2011-edition subject. The official 2022
+      cover expressly identifies a revision of the 2011 edition; this record does not call 2011 latest, equate editions
+      or claim a full 2022 review. Section 1 concerns identifying instances of audiovisual material and associating
+      metadata, not identifying works, program content, copyright or ownership of rights. Sections 5 and 6.1.1 define
+      a 32-byte Basic UMID containing, in order, a 12-byte universal label, one-byte length, three-byte instance
+      number and 16-byte material number. A 64-byte Extended UMID appends a 32-byte source pack to the Basic form;
+      the forms are not interchangeable. This is a bounded account of standard identity, identification purpose
+      and basic structure, not an exhaustive review of every generation method or source-pack field. The standard's
+      global-uniqueness objective and specified generation methods do not prove collision-free behavior in arbitrary
+      implementations, entity authentication, copyright/rights management, trustworthy provenance, complete material
+      history or security. No UMID generator, file parser, media application, conformance or interoperability test
+      was executed. The separately qualified MXF relation records the ST 377-1:2019 Package ID use of 32-byte Basic
+      UMID and the all-zero source-reference-chain termination sentinel; that sentinel is not an ordinary generated
+      unique material identifier. It does not expand to arbitrary MXF/Extended UMID uses or actual software compliance.
+      The ST 330:2011 reference to ST 336:2007 is not turned into a dependency on the accepted ST 336:2017 object.
+      UUID, timecode, country-code and geospatial references are outside this slice. No full conformance, third-party
+      interoperability, certification, deployment, recommendation, implementation adoption or IA adoption is established.
+    sources:
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=1
+      title: ST 330:2011 cover — standard identity, edition and approval date
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=3
+      title: ST 330:2011 §1 — audiovisual-material instances and explicit works/rights exclusions
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=5
+      title: ST 330:2011 §5 and Figure 1 — Basic and Extended structures
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=6
+      title: ST 330:2011 §6.1.1 — ordered 32-byte Basic UMID structure
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/pub/st330/st330-2022.pdf#page=1
+      title: ST 330:2022 cover — later revision exists; not the reviewed endpoint edition
+      language: en
+      accessed: '2026-10-24'
+    - url: https://smpte-ra.org/umid-information
+      title: SMPTE Registration Authority UMID information — supplemental standard identity
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T21:38:00.917872+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded ST 330:2011 public-source evidence executor
+relations:
+- proposal_id: smpte_mxf_uses_smpte_umid
+  proposed_path: 01_State/02_Relations/mxf-package-identification.yaml
+  proposed_record:
+    id: smpte_mxf_uses_smpte_umid
+    type: relation
+    name_zh: MXF 包标识使用 Basic UMID，并保留引用链终止例外
+    name_en: MXF package identifiers use Basic UMID with a reference-chain termination exception
+    source: smpte_mxf
+    relation: uses
+    target: smpte_umid
+    context:
+      version_context:
+        source: SMPTE ST 377-1:2019, approved 2019-11-28; existing work-level smpte:st.377-1 identity
+        target: SMPTE ST 330:2011, approved 2011-08-23; exact dated normative reference within existing work-level
+          smpte:st.330 identity, not 2022
+      conditions_zh: 固定源端 ST 377-1:2019、目标端 ST 330:2011，均保持既有工作级身份；MXF §3 第 8 页明确该日期版本，而不是以 2022 修订代替。§4.2 第 18
+        页要求 UMID 用作 Package ID 时仅使用 32 字节 Basic UMID。规范性 Annex B.1 第 118 页将 Generic Package 定义为抽象类，其 Package UID
+        是必需的 32 字节 PackageID，表示不可变的包标识 UMID。Annex B.10 第 123 页在 Source Clip 存在时要求其 32 字节 SourcePackageID（PackageRef）标识所引用包；终止
+        source-reference chain 时明确使用 32 个零字节。这是上下文中的终止哨兵，不是普通生成的唯一 UMID，也不表示每个 MXF 文件必有 Source Clip。64 字节 Extended
+        UMID 不允许用于这里的 Package ID；第 18 页关于其他 MXF 规范可能使用 Extended 的注释不放宽此规则。原始官方 MXF 第 8 页 Scope 的 StrikeOut 批注权威/含义未知；未删除批注或将划线
+        Scope 当作干净规范依据。下方 ST 330:2011 引用不受批注覆盖，第 18/118/123 页无批注；不声称第 8 页整体无批注。本关系只表示这些规范性包身份条款的 uses，保持既有 MXF/KLV
+        对象、描述和完整记录验证时间不变；不是两标准等同、一般兼容性、生成器唯一性/真实性、版权/权利/可信来源保证、完整文件或软件符合性、跨实现互通、安全认证或 IA 采用。
+      conditions_en: Fixed source ST 377-1:2019 and target ST 330:2011 retain their work-level identities. MXF section
+        3 on page 8 names that exact edition, not the later 2022 revision. Section 4.2 on page 18 requires only
+        the 32-byte Basic UMID when UMID is used as Package ID. Normative Annex B.1 on page 118 defines Generic
+        Package as an abstract class with a required 32-byte Package UID of type PackageID, representing the immutable
+        package identifier as a UMID. Annex B.10 on page 123 requires a 32-byte SourcePackageID of type PackageRef
+        when a Source Clip is present; it identifies the referenced package, with 32 zero-valued bytes explicitly
+        terminating the source-reference chain. This is a contextual termination sentinel, not an ordinary generated
+        unique UMID, and does not mean every MXF file contains a Source Clip. The 64-byte Extended UMID is excluded
+        from this Package ID use; the note about other MXF specifications possibly using Extended UMID does not
+        relax that rule. The original official MXF page 8 Scope StrikeOut annotation has unknown authority/meaning.
+        No annotation was removed and no struck-through Scope prose is treated as clean normative evidence. The
+        lower-page ST 330:2011 reference is outside the annotation; pages 18, 118 and 123 have no annotations. Page
+        8 is not claimed wholly annotation-free. This uses relation is limited to these normative package-identity
+        provisions, preserving existing MXF/KLV objects, descriptions and full-record verification timestamps. It
+        does not establish equivalence, general compatibility, generator uniqueness/authenticity, copyright/rights/trustworthy
+        provenance, complete file or software compliance, cross-implementation interoperability, security certification
+        or IA adoption.
+    evidence:
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=8
+      title: ST 377-1:2019 §3 — exact ST 330:2011 reference below, outside Scope StrikeOut
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=18
+      title: ST 377-1:2019 §4.2 — Basic-only Package ID and zero-byte terminator definition
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=118
+      title: ST 377-1:2019 normative Annex B.1 — required immutable 32-byte Package UID
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=123
+      title: ST 377-1:2019 normative Annex B.10 — SourcePackageID and zero-valued termination sentinel
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=5
+      title: ST 330:2011 §5 — distinct 32-byte Basic and 64-byte Extended UMID forms
+      language: en
+      accessed: '2026-10-24'
+    - url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=6
+      title: ST 330:2011 §6.1.1 — normative Basic UMID structure
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T21:38:00.917872+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded MXF/UMID package-identity evidence executor
+  schema_errors: []
+membership_proposals:
+- category_id: metadata
+  ref:
+    surface: canonical
+    id: smpte_umid
+  rationale_zh: 视听素材实例标识及其元数据关联属于既有 metadata 导航；不等同于作品/权利、可信来源或实现保证。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 49430
+  git_blob: ae81f84a186d9f857a4706e513c5ce4cc48c582f
+  sha256: 8fc5d6f1f7bb07c5d8d2560b0887f6ce56d7ffe40e7d150ec44ece3a94a433ed
+  preservation: No local navigation edit; after authorized acceptance preserve every original byte and add only
+    one metadata member.
+protected_existing_assets:
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+- path: 01_State/01_Objects/smpte_mxf.yaml
+  bytes: 5349
+  git_blob: be0cc2812798d58517604bdf628e9213e01331c7
+  sha256: a9304a76f7b7d0f06c324fe7f2dad153c875d5c626a0464b4a0a8a76f8c768cd
+- path: 01_State/01_Objects/smpte_klv.yaml
+  bytes: 5378
+  git_blob: 0e351a2597656e9f4600ee22ce63419fc091ca70
+  sha256: e0b468dbd0d014223552b22686571a37241a79a9f9b362065e1b932974214ff5
+- path: 01_State/02_Relations/mxf-klv-representation.yaml
+  bytes: 5548
+  git_blob: 1d633dbd7703ecd2cb15a9369d40a58a5e1e4a76
+  sha256: 5ca53965b4817d555347aed916813e745fefbda4865225130b564590c7203ae9
+- path: 01_State/01_Objects/apple_fcpxml.yaml
+  bytes: 8966
+  git_blob: 53aec174f477efa77ca43a8b4d4b9ce7a27067d4
+  sha256: abfc6ef7b9455d6c4ff44987d0086e44754035b14b6f362270aad63ab9e65a0c
+- path: 01_State/Inbox/candidates/amwa_as11.yaml
+  bytes: 2178
+  git_blob: cfbdcc4272c336ea072d18c9f2d63de63bd8acb9
+  sha256: a298e698e54d77fc458e34e575392655d57e36f294d5d66579f38190c4b2f0c4
+- path: 01_State/Inbox/candidates/amwa_aaf.yaml
+  bytes: 2116
+  git_blob: 11d07503ddbc13cb5aaace166d4a0843d3a5ce85
+  sha256: 6227943e2e75cc5aec0083ccb20aa681c64aa0327a80005a917555b1bd7a5955
+- path: 01_State/Inbox/candidates/aswf_otio.yaml
+  bytes: 1125
+  git_blob: 2390a7b30f56e304a066eebaa48428dfa3cb5a81
+  sha256: 90a776c3782c5742edc9d7f3c3bae6269abff6acd7fca02881e5acda5104b490
+- path: 01_State/02_Relations/apple-google-human-interface.yaml
+  bytes: 8207
+  git_blob: 82d8b76e99c4f5090ef597a122eaa29fb4ff0a7c
+  sha256: c3d6ea5bc181d7782adc2124568682d2d33ff7bf9bcb071dc2fe7f9b188dbad6
+excluded_scope:
+- ST330:2022 object or equivalence/supersedes assertion
+- UMID→KLV because dated2007 reference does not match accepted2017; all other normative-reference edges
+- Extended UMID as MXF Package ID; every-file Source Clip claim; all-zero sentinel as ordinary generated unique
+  UMID
+- Rights, works, identity authentication, trustworthy provenance, guaranteed uniqueness, full conformance, interoperability/security/certification
+  or IA adoption
+- Generators, software execution, application/file conformance tests, source PDF redistribution or DOI/directory
+  retry
+- Existing MXF/KLV rewrites/full-record revalidation, AAF/OTIO/held identity adjudication, new model/policy/schema/runtime/pages
+  or historical changes
+materialization_boundary_zh: 独立语义复核与适用全检查后等待 root 发布门槛；后续如获准，以真实远端正常祖先 commit/blob 冻结并 fetch，按既有接纳事件流程精确物化一对象、一关系、候选回链、事件、packet
+  回执和一个 metadata 成员。不猜 SHA，不 squash；旧 MXF/KLV 对象与关系字节不变。
