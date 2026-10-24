@@ -1,0 +1,29 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-aioquic
+candidate_id: aioquic
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: aioquic
+review:
+  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
+  reviewed_at: '2026-10-24T09:00:38.183442+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate 0b12d5169e7ca8d1a078c4aa082ec989f5885a43 与 packet 47b3c0e11ef078fcf1fa29bedbb1bcaab033129b；核验
+    annotated tag/commit/version、GitHub/PyPI 库身份、固定来源指纹、两个既有规范端点和无碰撞预检。
+  - 保留 QUIC v1 而非 v2、Sans-I/O 的 I/O/定时器/逐数据报目的地址责任、PATH_CHALLENGE 上限的显式 RFC 偏离；HTTP/3 限 HEADERS/DATA/事件/SETTINGS，QPACK
+    依赖 pylsqpack，GOAWAY 载荷丢弃不等于完整优雅关闭。证书配置、C 扩展与元数据声明边界保留，不声称完整符合性、外部互通、安全或 IA 采用。
+  - 独立语义复核先于远端冻结；正常 Git fetch 后复验完整冻结字节与 blob。reviewed_at 是接受序列化时点，最终六文件另须独立结构复核。静态源码/测试定义审阅不是上游执行结果；现有 implementation
+    renderer 不呈现完整 scope_notes，不借此改动页面引擎。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/bcc8ff2c15f860ec283c256702596fafc97bf5dd/01_State/Inbox/review-packets/aioquic-implementation-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0b12d5169e7ca8d1a078c4aa082ec989f5885a43
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/47b3c0e11ef078fcf1fa29bedbb1bcaab033129b
+decided_at: '2026-10-24T09:00:38.183442+00:00'
+notes:
+- 仅接受一个固定 Python system/library、两条有界 implements 关系和一个既有 transport 导航成员；不新增 capability/schema/taxonomy/治理/页面/维护模型或其他标准扩展关系。
+- 正常祖先保留完整被审原稿；当前 packet 仅引用式回执，不复制 Canonical 事实。

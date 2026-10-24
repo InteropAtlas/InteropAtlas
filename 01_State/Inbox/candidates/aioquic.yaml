@@ -1,0 +1,53 @@
+contract_version: candidate-object-v1
+candidate_id: aioquic
+label: aioquic Python QUIC and HTTP/3 library (1.7.0)
+publisher: aiortc/aioquic project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: aiortc/aioquic
+- namespace: pypi
+  value: aioquic
+locators:
+- url: https://github.com/aiortc/aioquic
+  role: official
+- url: https://github.com/aiortc/aioquic/tree/1.7.0
+  role: dated
+- url: https://github.com/aiortc/aioquic/tree/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0
+  role: dated
+- url: https://pypi.org/project/aioquic/1.7.0/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - aioquic
+  reasons:
+  - Accepted as canonical aioquic by accept-20261024-aioquic. Frozen new-state Candidate 0b12d5169e7ca8d1a078c4aa082ec989f5885a43
+    and review_required route are replayed against actual ancestor bcc8ff2c15f860ec283c256702596fafc97bf5dd; this
+    back-reference prevents duplicate creation and does not merge identities.
+  merge_authorized: false
+unknowns:
+- 'Only two bounded implementation claims are proposed: RFC 9000 QUIC v1 connection/datagram/stream APIs and RFC
+  9114 HTTP/3 HEADERS/DATA/events/SETTINGS. Same-library QUIC v2, RFC 9001, QPACK as a separate standard, WebTransport,
+  WebSocket and datagram extensions are not added.'
+- The protocol cores are Sans-I/O. Callers or the asyncio adapter must drive network I/O, receive events, timers
+  and transmission. In 1.7.0 each outgoing datagram must use its returned destination, which can differ from the
+  initial connect address.
+- The QUIC source explicitly documents that limiting queued remote PATH_CHALLENGE values departs from RFC 9000.
+  No complete RFC conformance, all-optional-feature support or independent interoperability certification is claimed.
+- H3Connection uses pylsqpack for QPACK, processes QUIC events and emits stream data. Its control-stream parser
+  discards unused GOAWAY payload, so the claim excludes complete GOAWAY/graceful-shutdown handling.
+- Certificate-name validation depends on configured server_name and verification mode; asyncio client connect fills
+  an unset server_name from host, unlike bare Sans-I/O configuration. Callers still supply suitable trust/name/server-certificate
+  settings; no deployment-security guarantee is made.
+- Fixed metadata declares Python >=3.11, BSD-3-Clause and five runtime dependencies. setup.py builds the aioquic._buffer
+  C extension, so it is not an entirely pure-Python stack. The upstream Production/Stable classifier is metadata,
+  not an IA production recommendation.
+- No upstream code was installed, built or executed and no network/server/browser interoperability test ran. Test
+  definitions were inspected only. README adoption/interoperability statements are not independently verified adoption
+  or IA-use evidence.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
