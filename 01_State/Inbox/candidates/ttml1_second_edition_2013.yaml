@@ -11,14 +11,18 @@ locators:
 - url: https://www.w3.org/TR/2013/REC-ttml1-20130924/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - ttml1_second_edition_2013
   reasons:
-  - 主体固定为 2013-09-24 TTML1 第二版 Recommendation，不是全部 TTML 修订或既有 TTML2 工作级对象；不合并或重命名已有主体。
+  - Accepted as canonical ttml1_second_edition_2013 by accept-20261024-ttml1-second-edition-2013. Frozen new-state
+    Candidate 81ed4cbc53cf527a46ba40fd06c2b02d162a7a00 and review_required route are replayed against actual ancestor
+    0978b73300a69cc33abbf2b8610dbdcadb9d7a29; this back-reference prevents duplicate creation and does not merge
+    identities.
   merge_authorized: false
 unknowns:
 - 本轮不判断任意处理器符合性、跨格式转换质量或所有 TTML 版次关系；来源固定文本不含后来修订。
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / timed-text semantic review
