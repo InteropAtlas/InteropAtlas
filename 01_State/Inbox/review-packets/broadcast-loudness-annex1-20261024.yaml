@@ -1,0 +1,424 @@
+packet_id: broadcast_loudness_annex1_20261024
+status: pending_independent_semantic_review
+baseline_commit: cd6d7d18f7f3f5fdc83022f283aecc3eb2d0e9a7
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅一个独立发布 crate system/library、一个有界 implements 到现有 itur_bs1770 固定 BS.1770-5 Annex 1、一个现有 measurement 导航成员。
+- 本地仅候选和 packet；独立语义复核及全量适用检查后才进入发布门槛，不改现有标准/R128引用、230旧对象、177旧关系、108旧事件、历史快照或保留PR。
+work_item_preflight:
+  baseline: cd6d7d18f7f3f5fdc83022f283aecc3eb2d0e9a7
+  existing_identity_search: Canonical/Candidate/relation identity and identifier collision checks; module-specific
+    ph_ubl23 precedent.
+  related_research: Existing BS.1770 and R128 citation work is not this package implementation; no duplicate found
+    in completed independent research.
+  open_unrelated_prs:
+  - 498
+  - 439
+  - 416
+  publication_authorized: false
+source_evidence:
+  archive:
+    source_url: https://static.crates.io/crates/broadcast-loudness/broadcast-loudness-0.5.0.crate
+    local_file: broadcast-loudness-0.5.0.crate
+    sha256: 1185c695e6e3cd8b4d10e8d6cf28fa1b4696c135f1ee19ea9abf6936bc86d9eb
+    size: 49240
+    digest_computation: Python hashlib.sha256 over downloaded bytes, independently of registry cksum
+    retrieval_method: HTTPS GET with curl --proto =https --tlsv1.2 --location --fail
+    http_status: 200
+  registry_index:
+    source_url: https://github.com/rust-lang/crates.io-index/blob/master/br/oa/broadcast-loudness
+    blob_sha: 2b4ccce3211f06df901715454ea6fba61c350133
+    immutable_blob_api_url: https://api.github.com/repos/rust-lang/crates.io-index/git/blobs/2b4ccce3211f06df901715454ea6fba61c350133
+    archive_checksum_matches: true
+    yanked: false
+    pubtime: '2026-10-17T03:13:15Z'
+  github_pin:
+    repository: fishloa/rust-broadcast
+    tag: broadcast-loudness-v0.5.0
+    commit: 579ad2c08b675fc52dee6db4ecb16b3038bb19ce
+    module_path: broadcast-loudness
+    tree_source_url: https://api.github.com/repos/fishloa/rust-broadcast/git/trees/579ad2c08b675fc52dee6db4ecb16b3038bb19ce?recursive=1
+    tree_capture_note: Only module descendants plus root manifest and licenses retained from untruncated tree response.
+  package_member_comparison:
+    non_generated_members: 19
+    generated_members:
+    - .cargo_vcs_info.json
+    - Cargo.toml
+    - Cargo.lock
+    archive_member_count: 22
+    method: Recomputed canonical Git blob hashes matched captured fixed-commit tree entries; six source texts were
+      separately fetched by normative reviewer and match archive.
+  fixed_source_captures:
+  - path: README.md
+    sha: 7cf99439cf15c1c7ff1631ab73d0dec5239db9a7
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/README.md
+    sha256: 6f9b1f4dd0c76f04c2bc42e97d4c7aa6668b9ead85e7ab19440185a219261e38
+    bytes: 7696
+    crate_bytes_equal: true
+  - path: src/filter.rs
+    sha: 86d86dfeb33320a005d13af7f1d9051647201710
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/filter.rs
+    sha256: 2f5413c8a36e1f54bb37f80ac9d32e3c978d1c48cffe1c50f2471563da021815
+    bytes: 5313
+    crate_bytes_equal: true
+  - path: src/channel_layout.rs
+    sha: 6ea47557b2597a9c669c65d1f551c1961fd6b792
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/channel_layout.rs
+    sha256: 5bf9ec103f87f180cc00e75c9a6d904e5a182a7294489a91011f9051984e12f5
+    bytes: 3556
+    crate_bytes_equal: true
+  - path: src/loudness_meter.rs
+    sha: 02f936336c8edd3fa55896d48c3d3d4762448b26
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs
+    sha256: 3ca67698eb46e96f3ff13898b574afeb60fc8bb7a5f0d8fd0493027fbac15f36
+    bytes: 41921
+    crate_bytes_equal: true
+  - path: src/error.rs
+    sha: ff3c69a77b1d7cc4c0a8e125a4fede361e883eb2
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/error.rs
+    sha256: ec3785edbb370f33d7fada3cc433654cff21149ad27be0062d3c00c85b728179
+    bytes: 1644
+    crate_bytes_equal: true
+  - path: src/lib.rs
+    sha: 1cf123eb59ef3a8585902f797d445c84ac61861a
+    url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/lib.rs
+    sha256: 97f4d5f0cf217ca62845f47afcaef403685daf168c84ad09a68ac23977385180
+    bytes: 5735
+    crate_bytes_equal: true
+  normative:
+    url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.1770-5-202311-I%21%21PDF-E.pdf
+    bytes: 1996355
+    sha256: eefb926f72f72a96b96f251067bfee0650a0f29a26f60661d354162038b041ad
+    pages: 32
+    printed_annex1_pages: 4–7
+    pdf_pages: 6–9
+    visual_review: Research reviewer and intake author inspected supplied page renders for two filters, tables 1–3
+      and equations 1–7.
+    author_method: Reused and independently hashed research-captured primary bytes; no new transport request.
+  acquisition_limits:
+  - target: https://crates.io/api/v1/crates/broadcast-loudness/0.5.0
+    action: Read-only HTTPS GET
+    outcome: HTTP 403; curl exit 22; no body retained; not retried
+    reason: Server returned Forbidden; underlying reason not established. Public registry index read through GitHub
+      connector supplied registry record.
+release_identity:
+  package: broadcast-loudness
+  lib: broadcast_loudness
+  version: 0.5.0
+  repository_locator: fishloa/rust-broadcast/broadcast-loudness
+  external_identifier: crates_io:broadcast-loudness
+  whole_workspace_github_identifier_used: false
+  tag: broadcast-loudness-v0.5.0
+  tag_type: lightweight
+  commit: 579ad2c08b675fc52dee6db4ecb16b3038bb19ce
+  release_published_at: '2026-10-17T03:13:18Z'
+  registry_pubtime: '2026-10-17T03:13:15Z'
+  draft: false
+  prerelease: false
+  release_immutable: false
+  local_signature_verification: false
+package_metadata_observations:
+  edition: '2024'
+  rust_version: 1.95.0
+  license: MIT OR Apache-2.0
+  license_texts: Pinned root LICENSE-MIT and LICENSE-APACHE present; absent from 22-member archive. No legal audit.
+  dependencies:
+    broadcast-common: ^10.0
+    libm: ^0.2
+    thiserror: ^2
+  packaged_lock_direct_versions:
+    broadcast-common: 10.0.0
+    libm: 0.2.16
+    thiserror: 2.0.21
+  default_features: std; normal dependencies default-features=false; no_std + alloc source path, neither built.
+  packaging_test_limit: Packaged bounded_memory imports test_alloc; normalized manifest omits path-only dev dependency
+    and lock has none. Static lack of self-contained full test suite, not executed failure or library-build verdict.
+semantic_correspondence:
+- normative: Annex 1 Figure 3, Tables 1–2
+  source: filter.rs 74–86/112–152 and per-channel filter composition
+  boundary: Derived coefficients; no Rust libm run or numerical/output tolerance claim.
+- normative: Annex 1 Table 3 and equations 1–2/4–5
+  source: Stereo unit weights and filtered weighted squared energy; mean_of_lkfs averages via energy
+  boundary: Caller-normalized finite planar f32 only; log/pow rounding not bounded.
+- normative: Annex 1 equation 3 and incomplete-block exclusion
+  source: At 48 kHz, complete 4800-frame sub-blocks form 19200-frame windows every 4800 frames; finish discards partial
+    tail
+  boundary: No other sample-rate or duration-independent memory claim.
+- normative: Annex 1 equations 6–7
+  source: Strict absolute and relative selection after successful pushes then finish
+  boundary: Negative-infinity sentinel for no eligible blocks is library behavior, not normative empty-set numeric
+    definition.
+required_counterexamples:
+- 'EXTENT: whole library has other metrics; only scoped integrated result is recorded.'
+- 'NON-ATOMIC: valid prefix may alter state before NaN/Inf error; frame_count increments only at successful batch
+  end. No rollback/retry/continuation promise.'
+- 'NOT LIVE: integrated cache starts negative infinity; finish is required. Less than 19200 frames, silence or no
+  eligible blocks can stay negative infinity.'
+- 'FINAL TAIL: incomplete last sub-block is discarded for integrated calculation; not generalized to other metrics.'
+- RATE: 48002 Hz source uses 19200 rather than nearest-sample 19201 frames; excluded by the 48 kHz scope.
+- 'MEMORY: gating/short-term histories grow; no constant-duration-memory assertion.'
+- 'NUMERIC: independent scalar arithmetic was not target execution, gate-edge/tolerance/bit-exactness not asserted.'
+inspection_boundary: Static source, archive hashes and official normative PDF only. No Cargo/Rust install, build,
+  package import, tests, examples, audio measurement or remote media processing. Direct crates.io version API 403
+  was not retried; existing sufficient captures used, not routed around the denial. Local Atlas browser remains
+  NOT RUN under known pre-test launch restriction; later repository CI would not test this crate.
+existing_endpoint:
+  path: 01_State/01_Objects/itur_bs1770.yaml
+  git_blob: 5184cb49d764e18424104ae93b2ca9df62ed4659
+  sha256: bb0d5ed6a43b5b892cd8097932d79d04cf2e43014b9843e2143526bac7ca0f21
+  id: itur_bs1770
+  unchanged: true
+  identity: Existing work-level itu:bs.1770 explicitly pinned to BS.1770-5; no superseded-edition substitution.
+type_and_relation_convention:
+  classification: Existing system/library for one registry crate, not whole workspace, executable service or standard.
+  predicate: Existing context-qualified implements; bounded algorithm source correspondence, not full Recommendation
+    conformance.
+  precedent:
+    path: 01_State/01_Objects/ph_ubl23.yaml
+    git_blob: e1641e55776f1790e4e5964ba5a19ff6ea635a7f
+    sha256: 39e80ae2d4bcf90c9d100d7b972a00cb584b5cf344fdeeaad4c84b3ea2f3c697
+  no_capabilities_or_forced_domains: true
+objects:
+- candidate_id: broadcast_loudness
+  candidate_path: 01_State/Inbox/candidates/broadcast_loudness.yaml
+  candidate_blob: 9ff8476a7509725d289056564bb7680fba5074da
+  preflight:
+    canonical_records: 230
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: broadcast_loudness
+    type: system
+    kind: library
+    name_zh: broadcast-loudness Rust 节目响度测量库
+    name_en: broadcast-loudness Rust programme-loudness library
+    description_zh: 独立发布的 Rust 音频响度测量库；本记录固定 0.5.0，仅以静态证据覆盖 48 kHz、调用方归一化有限平面立体声输入的 BS.1770-5 Annex 1 集成响度路径，不表示完整符合性或运行验证。
+    description_en: A separately published Rust loudness library; pinned to 0.5.0, with static evidence limited
+      to BS.1770-5 Annex 1 integrated loudness for caller-normalized finite planar stereo PCM at 48 kHz, not full
+      conformance or runtime verification.
+    version: 0.5.0
+    external_identifiers:
+    - namespace: crates_io
+      value: broadcast-loudness
+    official_url: https://github.com/fishloa/rust-broadcast/tree/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness
+    versions:
+    - version: 0.5.0
+      status: released
+      url: https://static.crates.io/crates/broadcast-loudness/broadcast-loudness-0.5.0.crate
+    open_source: true
+    scope_notes_zh: 主体是单独发布的 broadcast-loudness Rust 库 crate 0.5.0（lib 名 broadcast_loudness），不是整个 fishloa/rust-broadcast
+      工作区或其他成员。轻量标签 broadcast-loudness-v0.5.0 直接指向 commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce；归档 .cargo_vcs_info.json
+      同时固定该 commit 和 broadcast-loudness 子目录。49,240 字节官方归档 SHA-256 为 1185c695e6e3cd8b4d10e8d6cf28fa1b4696c135f1ee19ea9abf6936bc86d9eb，与已捕获注册表索引
+      checksum 相同；19 个非生成成员的 Git blob 哈希匹配固定树，另 3 个是生成的包元数据。注册表当时未 yanked；发布非 draft/prerelease，但可变，不声称最新版、签名认证或可复现构建。元数据声明
+      Rust edition 2024、MSRV 1.95.0、MIT OR Apache-2.0；两份许可证文本位于固定仓库根而不在发布归档，不作法律审计。三个直接必需依赖范围为 broadcast-common
+      ^10.0、libm ^0.2、thiserror ^2，均关闭各自默认 features；default std 向依赖转发，源码另有 no_std + alloc 路径，但未构建任一配置。包内 bounded_memory
+      集成测试引用 test_alloc，归一化清单却省略工作区 path-only dev dependency；完整发布测试集不是自包含的，这是静态发现，不是执行失败或库目标不能编译的结论。只记录 LoudnessMeter::new(48000,
+      ChannelLayout::Stereo) 后，等长左右声道、全部有限、由调用方按标称满刻度缩放并限于 [-1,1] 的 planar f32 PCM，经成功 push_stereo_planar_f32 调用、finish()
+      后读取 integrated_lufs() 的 Annex 1 集成响度路径。库不强制该幅度范围，也不替调用方归一化。固定源码实施双级 K 加权、左右声道单位权重、完整 400 ms 门限块与 100 ms 步长以及严格大于阈值的
+      -70 绝对门和相对均值低 10 的二级门；系数由公式推导、能量经过 log/pow 往返，不保证比特精确、阈值边缘行为或数值误差界。少于 19,200 帧无完整块；静音/无合格块或 finish 前读取可为负无穷，不把该
+      API 哨兵当作规范对空集合定义的数值。finish 丢弃未满的最后子块；完整 400 ms 也不保证有限结果。失败批次并非原子：有效前缀可能已更新过滤器/累积器，后续非有限样本才报错，而 frame_count
+      仅整批成功后增加；不保证回滚、整批安全重试或错误后继续测量正确。门限块和短期历史随时长增长，不称恒定内存。整个库另有其他布局、采样率和指标，但本关系排除其他输入重载、其他布局/采样率、Annex 2 真峰值及其余附录、LRA/瞬时/短期精度、EBU
+      R128 V5 目标/符合性、音频解码/归一化、声压或听觉健康判断、平台/MSRV 实测、性能、安全认证、第三方互通和 IA 采用。未安装、编译、导入或执行库、上游测试、示例或音频处理；源码和规范映射不是运行验证。
+    scope_notes_en: 'The subject is the separately published broadcast-loudness Rust library crate 0.5.0 (lib name
+      broadcast_loudness), not the whole fishloa/rust-broadcast workspace or its other members. Lightweight tag
+      broadcast-loudness-v0.5.0 directly targets commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce; archived .cargo_vcs_info.json
+      names that commit and the broadcast-loudness subdirectory. The 49,240-byte official archive has SHA-256 1185c695e6e3cd8b4d10e8d6cf28fa1b4696c135f1ee19ea9abf6936bc86d9eb,
+      matching the captured registry-index checksum; 19 non-generated members match fixed-tree Git blobs, with three
+      generated packaging-metadata members. The registry record was not yanked when observed; the non-draft/non-prerelease
+      release is mutable. No latest-version, signature-authentication or reproducible-build claim. Metadata declares
+      Rust edition 2024, MSRV 1.95.0 and MIT OR Apache-2.0; both license texts exist at the pinned repository root
+      but not in the archive, without a legal audit. Three direct required dependency ranges are broadcast-common
+      ^10.0, libm ^0.2 and thiserror ^2, each default-features=false. Default std forwards to dependencies, and
+      source also has a no_std + alloc path; neither configuration was built. The packaged bounded_memory integration
+      test imports test_alloc although normalization omits its workspace-only path dev dependency. The full published
+      test suite is not self-contained: this is a static observation, not an executed failure or proof that the
+      library target cannot compile. The recorded Annex 1 path is LoudnessMeter::new(48000, ChannelLayout::Stereo),
+      successful push_stereo_planar_f32 calls with equal-length, entirely finite left/right f32 PCM buffers caller-scaled
+      to nominal full scale and restricted to [-1,1], then finish(), then integrated_lufs(). The library neither
+      enforces that amplitude range nor normalizes input for the caller. Fixed source implements two-stage K weighting,
+      unit stereo weights, complete 400 ms gating blocks at 100 ms steps, and strictly-above-threshold absolute
+      -70 and relative mean-minus10 gates. Coefficients are derived and energy passes through log/pow conversions;
+      bit-exact results, threshold-edge behavior and numeric error bounds are not established. Fewer than 19,200
+      frames cannot form a full block; silence/no eligible blocks or querying before finish can yield negative infinity.
+      That API sentinel is not a normative numeric definition for an empty selected set. finish discards an incomplete
+      final sub-block; a full 400 ms alone does not guarantee a finite result. Failed batches are non-atomic: a
+      valid prefix can change filters/accumulators before a later nonfinite error, while frame_count advances only
+      after complete batch success. No rollback, safe whole-batch retry or correct continuation after error is promised.
+      Gating and short-term histories grow with duration, so memory is not claimed constant. The whole library includes
+      other layouts, rates and metrics, but this relation excludes other input overloads/layouts/rates, Annex 2
+      true peak and remaining annexes, LRA/momentary/short-term accuracy, EBU R128 V5 targets/conformance, audio
+      decoding/normalization, sound-pressure or hearing-health assessment, tested platform/MSRV support, performance,
+      security certification, third-party interoperability and IA adoption. No installation, compilation, import,
+      upstream test/example execution or audio processing occurred; static source/normative correspondence is not
+      runtime verification.'
+    sources:
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/Cargo.toml
+      title: Fixed crate manifest — separate library identity, license and dependency declarations
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/Cargo.toml
+      title: Fixed workspace manifest — inherited Rust floor and package membership
+      language: en
+      accessed: '2026-10-24'
+    - url: https://static.crates.io/crates/broadcast-loudness/broadcast-loudness-0.5.0.crate
+      title: Verified 0.5.0 crate archive — normalized manifest, VCS metadata and source members
+      language: en
+      accessed: '2026-10-24'
+    - url: https://api.github.com/repos/rust-lang/crates.io-index/git/blobs/2b4ccce3211f06df901715454ea6fba61c350133
+      title: Captured official registry-index blob — 0.5.0 checksum and observed publication/yank state
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/releases/tag/broadcast-loudness-v0.5.0
+      title: Official 0.5.0 release — mutable metadata, fixed commit used for evidence
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/README.md#L34-L41
+      title: Fixed README exact BS.1770-5 edition reference; broad Full assessment is not adopted
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/LICENSE-MIT
+      title: Fixed repository MIT license text; absent from package archive
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/LICENSE-APACHE
+      title: Fixed repository Apache-2.0 license text; absent from package archive
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L512-L639
+      title: Planar input, partial-batch error semantics, finish and integrated result
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/tests/bounded_memory.rs
+      title: Packaged integration test refers to workspace-only test_alloc; static packaging limit
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T16:22:56.596196+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public package and Annex 1 source evidence executor
+relations:
+- proposal_id: broadcast_loudness_implements_bs1770_5_annex1
+  proposed_path: 01_State/02_Relations/loudness-measurement-implementations.yaml
+  proposed_record:
+    id: broadcast_loudness_implements_bs1770_5_annex1
+    type: relation
+    name_zh: broadcast-loudness 0.5.0 有界实现 BS.1770-5 Annex 1 立体声集成响度路径
+    name_en: broadcast-loudness 0.5.0 implements bounded BS.1770-5 Annex 1 stereo integrated loudness
+    source: broadcast_loudness
+    relation: implements
+    target: itur_bs1770
+    context:
+      version_context:
+        source: broadcast-loudness crate 0.5.0; commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce, subdirectory broadcast-loudness
+        target: ITU-R BS.1770-5 (11/2023), Annex 1 only; existing work-level itur_bs1770 record is pinned to this
+          edition
+      conditions_zh: 仅静态源码映射至 BS.1770-5 (11/2023) Annex 1：LoudnessMeter::new(48000, ChannelLayout::Stereo)，等长左右
+        planar f32 PCM、全部样本有限且由调用方按标称满刻度缩放并限于 [-1,1]，所有 push_stereo_planar_f32 调用成功，随后 finish() 再 integrated_lufs()。库不强制该幅度范围，不是音频归一化。涵盖两级
+        K 加权、左右单位权重、完整 400 ms 块/100 ms 步长、严格大于 -70 的绝对门和绝对门后能量均值低 10 的相对门；只比对公式与实现路径，不给数值容差、比特精确或阈值边缘保证。最后不完整子块被丢弃；少于
+        19,200 帧、静音或无合格块可返回负无穷，finish 前缓存也为负无穷，完整块不保证有限结果。错误批次非原子，有效前缀可先改变状态，frame_count 却仅整批成功后增加；不保证回滚、安全重试或错误后继续。系数推导和
+        log/pow 往返未实测，门限/短期历史随时长增长。排除其他采样率、布局和输入重载、真峰值/Annex 2 及其余附录、LRA/瞬时/短期精度、EBU R128 V5 符合性或目标、完整 Recommendation
+        符合性、认证、安全、第三方互通和 IA 采用。未编译或运行 Rust 库、音频、示例或上游测试；测试定义及独立标量算术不是库运行结果。
+      conditions_en: 'Static correspondence only to BS.1770-5 (11/2023) Annex 1: LoudnessMeter::new(48000, ChannelLayout::Stereo),
+        equal-length planar left/right f32 PCM with every sample finite and caller-scaled to nominal full scale
+        within [-1,1], all push_stereo_planar_f32 calls successful, then finish(), then integrated_lufs(). The library
+        does not enforce that amplitude range or normalize audio. Covers two-stage K weighting, unit stereo weights,
+        complete 400 ms blocks at 100 ms steps, a strict above -70 absolute gate and a relative gate 10 below the
+        energy mean after absolute gating. Formula/source-path comparison provides no numerical tolerance, bit-exact
+        or threshold-edge guarantee. Incomplete final sub-blocks are discarded; fewer than 19,200 frames, silence
+        or no eligible blocks can produce negative infinity, as does the initialized cache before finish; complete
+        blocks alone do not guarantee a finite answer. Failed batches are non-atomic: a valid prefix can change
+        state while frame_count advances only after whole-batch success; no rollback, safe retry or continuation
+        guarantee. Derived coefficients and log/pow round trips were not runtime-tested; gating/short-term histories
+        grow with duration. Excludes other rates/layouts/input overloads, true peak/Annex 2 and remaining annexes,
+        LRA/momentary/short-term accuracy, EBU R128 V5 targets/conformance, complete Recommendation conformance,
+        certification, security, third-party interoperability and IA adoption. No Rust-library, audio, example or
+        upstream-test compilation/execution occurred; test definitions and independent scalar arithmetic are not
+        library runtime results.'
+    evidence:
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/README.md#L34-L41
+      title: Exact BS.1770-5 (11/2023) edition anchor, not adoption of broad upstream conformance claims
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/filter.rs#L74-L152
+      title: K-weighting recurrence and derived two-stage coefficients — Annex 1 Tables 1–2
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/channel_layout.rs#L58-L63
+      title: Stereo left/right unit weights — Annex 1 Table 3
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L65-L85
+      title: Energy/loudness conversion, not a measured numerical tolerance
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L300-L328
+      title: Constructor, 48 kHz sub-block sizing and initialized integrated cache
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L364-L415
+      title: Complete sub-block accumulation, 400 ms windows and growing histories
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L512-L563
+      title: Planar stereo f32 path and non-atomic error boundary
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L571-L639
+      title: Discarded partial tail, strict two-stage gates and integrated_lufs accessor
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs#L682-L689
+      title: Energy-domain averaging via log/pow conversions
+      language: en
+      accessed: '2026-10-24'
+    - url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.1770-5-202311-I%21%21PDF-E.pdf#page=6
+      title: Official BS.1770-5 Annex 1 printed pages 4–7/PDF pages 6–9 — filters, weighting and gating equations
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T16:22:56.596196+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded Annex 1 static-mapping executor
+relation_preflight:
+  existing_id_or_endpoint_predicate_collisions: []
+  schema_errors: []
+  all_endpoints_resolve_after_proposed_object: true
+membership_proposals:
+- category_id: measurement
+  ref:
+    surface: canonical
+    id: broadcast_loudness
+  rationale_zh: 将现有节目响度测量算法与有界实现路径连接；不把测量转换为归一化、全符合性或 IA 采用。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  git_blob: 73ea5588b51ef559ca26f2581044680c3bafacf7
+  sha256: d40a43391dc106d1b9c3b154d9ee18d2ce2cfbb11fe59c5f74cf113182ece689
+  preservation: Preserve all original bytes and held proposals; add only one measurement member after authorized
+    acceptance.
+protected_existing_assets:
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+- path: 01_State/02_Relations/audio-loudness.yaml
+  git_blob: 3138ece17bf2ce92f5d596c6f032631d563bfb02
+  sha256: a1e74dbd8489253a938ee0a9e707236a1e2a1f21200911e2526a2d63b07b803b
+- path: 01_State/01_Objects/ebu_r128.yaml
+  git_blob: e51c7ab9e3ad0a0c42337bd66df70d87e066e631
+  sha256: f378da7fa820056c906fcb538e459a07a17b86256c28d46b7b479da7b1dbf341
+- path: 01_State/01_Objects/ffmpeg.yaml
+  git_blob: 81690d52414edb1a9f37b4c1422b0d25e2e2251a
+  sha256: 0ccd9e87fbbc9f91a637574f13634d0dfc6e743a8fc705fae6d5feea9c56b4d1
+- path: 01_State/02_Relations/media-transport-implementations.yaml
+  git_blob: 244f9e0f88c28f0aaa40ef86d65117f5dadf47e5
+  sha256: 360c5e04142a09fd8f12775ff7b1ddc2d2e05490e8c1d832ac19d3a3a8cd3b0d
+materialization_boundary_zh: 独立审核两文件后，以实际远端正常祖先提交冻结并正常 fetch，再依既有接受事件合同物化同一 payload 和引用回执。不猜 SHA、不 squash 冻结祖先、不改旧记录/事件/快照。

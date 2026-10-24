@@ -1,0 +1,31 @@
+contract_version: candidate-object-v1
+candidate_id: broadcast_loudness
+label: broadcast-loudness — fixed crate 0.5.0, bounded BS.1770-5 Annex 1 stereo integrated loudness
+publisher: broadcast-loudness maintainers / fishloa
+family: system
+kind: library
+external_identifiers:
+- namespace: crates_io
+  value: broadcast-loudness
+locators:
+- url: https://github.com/fishloa/rust-broadcast/tree/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness
+  role: dated
+- url: https://static.crates.io/crates/broadcast-loudness/broadcast-loudness-0.5.0.crate
+  role: official
+- url: https://github.com/fishloa/rust-broadcast/releases/tag/broadcast-loudness-v0.5.0
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体是独立发布的 broadcast-loudness Rust crate，lib 名为 broadcast_loudness；不是 fishloa/rust-broadcast 整个工作区、其他 crate、标准或测量服务。固定
+    0.5.0、已核验归档和 commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce。
+  merge_authorized: false
+unknowns:
+- 仅静态源码与归档/规范核验；未编译、安装、导入、运行 Rust 库、测试或音频测量，未实测数值容差。
+- 正面断言仅限 48 kHz、Stereo、等长且全部有限/调用方归一到 [-1,1] 的 planar f32 输入、成功 push 后 finish 再 integrated_lufs；不保证错误后的回滚或重试。
+- 不接纳其他采样率/布局、真峰值、R128 V5/完整标准符合性、安全认证或 IA 采用。归档缺少许可证文本，包内一个测试缺少工作区专用 dev dependency；均为静态观察，不是运行失败或法律判断。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
