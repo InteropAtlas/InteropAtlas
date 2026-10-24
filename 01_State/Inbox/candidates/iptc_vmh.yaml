@@ -5,20 +5,29 @@ publisher: International Press Telecommunications Council (IPTC)
 family: artifact
 kind: specification
 external_identifiers:
-  - namespace: iptc
-    value: video-metadata-hub
+- namespace: iptc
+  value: video-metadata-hub
 locators:
-  - url: https://iptc.org/standards/video-metadata-hub/
-    role: official
+- url: https://iptc.org/standards/video-metadata-hub/
+  role: official
+- url: https://iptc.org/std/videometadatahub/recommendation/IPTC-VideoMetadataHub-props-Rec_1.7.html
+  role: dated
 identity_resolution:
   state: new
   matched_canonical_ids: []
   reasons:
-    - IPTC Video Metadata Hub defines a recommended mapping of metadata properties (using IPTC schemes) for video content interchange between production and distribution.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - 保留既有 iptc_vmh 与工作级标识 iptc:video-metadata-hub；后者是 IA 由官方 locator 派生的标识，不是 IPTC 正式文档编号，不新建 properties-only 或另版主体。
+  - 以 Recommendation 1.7 官方属性文档核实已发布规范的身份与视频元数据属性定义；保留既有 artifact/specification 分类，不把映射正确性或机器模式有效性作为已成立事实。
+  - 当前236个 Canonical 对象无相同主体或规范化标识碰撞；仅提议一个文档层面的有界对象、零条技术关系及一个既有 metadata 导航成员，仍须独立语义复核。
   merge_authorized: false
-unknowns: []
+unknowns:
+- Linked Encoded Rights Expression Structure 的 Encoding type 在 Basic Type/Cardinality 列为 Text (0..1)，PVMD 列为 string//-MANDATORY；可选/必需冲突尚未解决，不替出版者选择优先列。
+- 官方 mapping 表的 EBUcore、XMP、IPTC PVMD JSON 标头与部分行的原始单元格顺序存在对齐异常；正确列位置及跨标准映射未核实，不据此新增关系或勘误。
+- '已捕获 draft-04 JSON Schema 的 type: NA 未通过本地 jsonschema 4.26.0 Draft4Validator.check_schema 元模式检查；13个含尾随 LF 的属性名及28个普通
+  ref 成员保持原样。未解析远程引用、验证实例或提供修复后的模式。'
+- 转换器/实现行为、全部属性约束一致性、跨表示无损互换、符合性、认证、部署和采用均未建立；本批不接纳任何技术关系。
+- Recommendation 1.7 是本次审阅上下文，不穷尽所有版本；版本化出版者 URL 未被证明不可变，以已捕获原始字节哈希限定证据，不声称最新版。
 provenance:
   initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  executor: Agent — OpenAI / dot
   reviewer: null
