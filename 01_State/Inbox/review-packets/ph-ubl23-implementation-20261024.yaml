@@ -1,0 +1,570 @@
+packet_id: ph_ubl23_implementation_20261024
+status: pending_independent_semantic_review
+baseline_commit: 3ab4358821f8837283028d50236ecd7a8faf1125
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅一个ph_ubl23 system/library模块、一个有界implements到既有ubl_2.3、一个现有commerce成员提案。
+- 本地仅Candidate与packet两文件；不改变Canonical或导航。独立语义复核和完整检查后仍待主协调者发布门槛。
+- 保持全部既有记录、103验收事件、PR488实验和已发布的历史20ce底图快照及PR498；不增加其他UBL版次、码表、业务profile、能力或模型。
+work_item_preflight:
+  searched_at: '2026-10-24T12:40:50.352537+00:00'
+  queries:
+  - query: repo:InteropAtlas/InteropAtlas ph-ubl
+    response:
+      issues: []
+  - query: repo:InteropAtlas/InteropAtlas ph_ubl23
+    response:
+      issues: []
+  - query: repo:InteropAtlas/InteropAtlas is:open UBL
+    response:
+      issues: []
+  prior_work:
+  - pr: 486
+    scope: Precise UBL XML/XSD dependencies, preserved
+  - pr: 487
+    scope: Generic Python xmlschema library, distinct from UBL typed bindings
+  - pr: 488
+    url: https://github.com/InteropAtlas/InteropAtlas/pull/488
+    scope: Existing XSD-valid/IND5-invalid counterexample; inspected context, not rerun or rewritten
+source_evidence:
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/README.md
+  retrieved_at: '2026-10-24T12:33:18.517098+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/README.md
+  bytes: 17076
+  sha256: 0bb6aa674adb4440733af2f1806470f41bdba6084b1f6546359089d6e06048ec
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/pom.xml
+  retrieved_at: '2026-10-24T12:33:18.517718+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/pom.xml
+  bytes: 7418
+  sha256: fc17e581051d8a48bcc584428e0d10613a03b5d954507f0c306b8a6e17d0321b
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+  retrieved_at: '2026-10-24T12:33:18.518179+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+  bytes: 6947
+  sha256: 31717f722736ea7dbc468217d650da583e5e209560299da7296e0a5c6cc8e03a
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/bindings23.xjb
+  retrieved_at: '2026-10-24T12:33:18.518694+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/bindings23.xjb
+  bytes: 40778
+  sha256: 08f707eb92fb7f90bd0ff2b274e7bf4633a498c496562841b3583c47f6c72763
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/catalog.txt
+  retrieved_at: '2026-10-24T12:33:18.519644+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/catalog.txt
+  bytes: 548
+  sha256: 288ca2e8a75f75b357139b3d5eadba28b77a9ae5e216ca9d3839ce845a55c0cc
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java
+  retrieved_at: '2026-10-24T12:33:22.494217+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java
+  bytes: 74978
+  sha256: d1acbe5f672e6afb9e616d4f81b689d0e8047fef6208a48a210b8133e116ee5f
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/test/java/com/helger/ubl23/UBL23FuncTest.java
+  retrieved_at: '2026-10-24T12:33:22.508572+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/test/java/com/helger/ubl23/UBL23FuncTest.java
+  bytes: 28789
+  sha256: d64531beda40bd305db68b6a6b12e955c5a0368f6e97d832e90c905c33acad95
+- url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl-testfiles/src/main/java/com/helger/ubl/testfiles/UBLTestFiles.java
+  retrieved_at: '2026-10-24T12:33:22.554849+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-ubl/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl-testfiles/src/main/java/com/helger/ubl/testfiles/UBLTestFiles.java
+  bytes: 38330
+  sha256: f16b249db5b9c37f95ddbbc40d7d5a78d318423dbf94a3dd39b7c7da8c564884
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.jar
+  retrieved_at: '2026-10-24T12:33:22.556354+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.jar
+  bytes: 4308746
+  sha256: 796b293541afd52885b650d51d533bada5f9d1ea989ec746fb3494148b6ff7c3
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+  retrieved_at: '2026-10-24T12:33:22.576592+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+  bytes: 3784552
+  sha256: 6a6c3aa379eeeaf6ab36ed96a858fc6d1d510418889e3801348bd1aeee7db979
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+  retrieved_at: '2026-10-24T12:33:25.722810+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+  bytes: 6947
+  sha256: 31717f722736ea7dbc468217d650da583e5e209560299da7296e0a5c6cc8e03a
+- url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-jaxb/12.3.5/ph-jaxb-12.3.5.pom
+  retrieved_at: '2026-10-24T12:33:25.732957+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-jaxb/12.3.5/ph-jaxb-12.3.5.pom
+  bytes: 3769
+  sha256: a7e1e831a7e251a97186e30af96a841a1610d99ffbbd54f3a41e2f12f1387135
+- url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-commons-parent-pom/12.3.5/ph-commons-parent-pom-12.3.5.pom
+  retrieved_at: '2026-10-24T12:33:25.733441+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-commons-parent-pom/12.3.5/ph-commons-parent-pom-12.3.5.pom
+  bytes: 14763
+  sha256: fb052c20f9412d374303ee1d8f6edf3012df0e970fb5d8b30a97a52f0d880228
+- url: https://repo.maven.apache.org/maven2/com/helger/xsd/ph-xsds-parent-pom/4.1.0/ph-xsds-parent-pom-4.1.0.pom
+  retrieved_at: '2026-10-24T12:33:27.797847+00:00'
+  status: 200
+  final_url: https://repo.maven.apache.org/maven2/com/helger/xsd/ph-xsds-parent-pom/4.1.0/ph-xsds-parent-pom-4.1.0.pom
+  bytes: 5954
+  sha256: 266cf8d15219b805218a321db122ed4e92ee83b2000765ce3a421c2d0632247c
+- url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/builder/JAXBBuilderDefaultSettings.java
+  retrieved_at: '2026-10-24T12:33:27.829601+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/builder/JAXBBuilderDefaultSettings.java
+  bytes: 10957
+  sha256: 2229f3482321e238a0266649be770ee9dc606dc44261464b14444ede94215859
+- url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java
+  retrieved_at: '2026-10-24T12:33:27.862100+00:00'
+  status: 200
+  final_url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java
+  bytes: 26265
+  sha256: 90ef60c9677645d93f19aece14468d57a6105e2aede44126c47756d5ff9bf418
+- url: https://api.github.com/repos/phax/ph-ubl/releases/tags/ph-ubl-parent-pom-10.2.1
+  retrieved_at: '2026-10-24T12:33:27.908652+00:00'
+  status: 200
+  final_url: https://api.github.com/repos/phax/ph-ubl/releases/tags/ph-ubl-parent-pom-10.2.1
+  bytes: 1937
+  sha256: 6adebc735c3cf5eb6a250563a843f62b5f3d98697d3768dcbce1518e6af27835
+- url: https://api.github.com/repos/phax/ph-ubl/git/tags/28b05da0e375bdd91436b4b994776e09b2a6b556
+  retrieved_at: '2026-10-24T12:33:27.965960+00:00'
+  status: 200
+  final_url: https://api.github.com/repos/phax/ph-ubl/git/tags/28b05da0e375bdd91436b4b994776e09b2a6b556
+  bytes: 724
+  sha256: b88ce09b9bb42d4b3c662765b56668293bad266e38abaf06ef9bade7824e2a70
+- url: https://api.github.com/repos/phax/ph-ubl/git/ref/tags/ph-ubl-parent-pom-10.2.1
+  retrieved_at: '2026-10-24T12:33:30.360649+00:00'
+  status: 200
+  final_url: https://api.github.com/repos/phax/ph-ubl/git/ref/tags/ph-ubl-parent-pom-10.2.1
+  bytes: 385
+  sha256: 4ca383ba8dbdf69c62fa677f3ee759c9313d808a08b8b5de8feb12f1f9eed13d
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  retrieved_at: '2026-10-24T12:33:30.396528+00:00'
+  status: 200
+  final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  bytes: 983147
+  sha256: 5ed4e54d64e84871f317c972a1c56d734411f50703c686dab8b3e310ac2c4d97
+- url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/pom.xml
+  status: 200
+  bytes: 14763
+  sha256: fb052c20f9412d374303ee1d8f6edf3012df0e970fb5d8b30a97a52f0d880228
+  retrieved_at: '2026-10-24T12:35:36.940761+00:00'
+- url: https://raw.githubusercontent.com/phax/ph-commons/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/pom.xml
+  status: 200
+  bytes: 3769
+  sha256: a7e1e831a7e251a97186e30af96a841a1610d99ffbbd54f3a41e2f12f1387135
+  retrieved_at: '2026-10-24T12:35:39.816615+00:00'
+release_identity:
+  maven_coordinate: com.helger.ubl:ph-ubl23:10.2.1
+  identity_coordinate_without_version: com.helger.ubl:ph-ubl23
+  tag: ph-ubl-parent-pom-10.2.1
+  annotated_tag_object: 28b05da0e375bdd91436b4b994776e09b2a6b556
+  peeled_commit: a1e8996af1cf56304048f13b4fc819680d109a7b
+  tagger_date: '2026-08-27T10:59:06Z'
+  release_published_at: '2026-08-27T11:23:50Z'
+  draft: false
+  prerelease: false
+  signature_boundary: GitHub tag metadata reports unsigned; no signature, artifact provenance attestation or independent
+    reproducible build claim.
+  fixed_pom_published_pom_binary_embedded_pom_byte_identical: true
+  fixed_ph_jaxb_pom_matches_published_12_3_5: true
+artifact_inspection:
+  ph-ubl23-10.2.1.jar:
+    entries: 1967
+    xsd_count: 100
+    oasis_class_count: 1732
+    schema_entries_inspected:
+    - external/schemas/ubl23/common/BDNDR-UnqualifiedDataTypes-1.1.xsd
+    - external/schemas/ubl23/common/UBL-CommonAggregateComponents-2.3.xsd
+    - external/schemas/ubl23/common/UBL-CommonBasicComponents-2.3.xsd
+    - external/schemas/ubl23/common/UBL-CommonExtensionComponents-2.3.xsd
+    - external/schemas/ubl23/common/UBL-CommonSignatureComponents-2.3.xsd
+    - external/schemas/ubl23/common/UBL-ExtensionContentDataType-2.3.xsd
+    - external/schemas/ubl23/common/UBL-QualifiedDataTypes-2.3.xsd
+    - external/schemas/ubl23/common/UBL-SignatureAggregateComponents-2.3.xsd
+    - external/schemas/ubl23/common/UBL-SignatureBasicComponents-2.3.xsd
+    - external/schemas/ubl23/maindoc/UBL-Invoice-2.3.xsd
+    - external/schemas/ubl23/maindoc/UBL-Order-2.3.xsd
+    - external/schemas/ubl23/maindoc/UBL-Catalogue-2.3.xsd
+    generated_java_source_entries: []
+    invoice_class_entries:
+    - oasis/names/specification/ubl/schema/xsd/freightinvoice_23/FreightInvoiceType.class
+    - oasis/names/specification/ubl/schema/xsd/invoice_23/InvoiceType.class
+    - oasis/names/specification/ubl/schema/xsd/selfbilledinvoice_23/SelfBilledInvoiceType.class
+  ph-ubl23-10.2.1-sources.jar:
+    entries: 1963
+    xsd_count: 100
+    oasis_class_count: 0
+    generated_invoice:
+      entry: oasis/names/specification/ubl/schema/xsd/invoice_23/InvoiceType.java
+      bytes: 154365
+      sha256: 88e055abfdbb35ded575af09de29219fa42fc64f8ebcc2d0d2397912b9bcfe62
+      provenance: Extracted as inert source text from published source JAR; not a committed repository source.
+    generated_java_source_entries:
+    - oasis/names/specification/ubl/schema/xsd/freightinvoice_23/FreightInvoiceType.java
+    - oasis/names/specification/ubl/schema/xsd/invoice_23/InvoiceType.java
+    - oasis/names/specification/ubl/schema/xsd/selfbilledinvoice_23/SelfBilledInvoiceType.java
+schema_comparison:
+  inspection_only: true
+  scope: Twelve inspected schemas, not all100; no Java/XML validation or IND5 experiment executed.
+  files:
+  - path: common/BDNDR-UnqualifiedDataTypes-1.1.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/BDNDR-UnqualifiedDataTypes-1.1.xsd
+    retrieved_at: '2026-10-24T12:34:27.049644+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/BDNDR-UnqualifiedDataTypes-1.1.xsd
+    official_bytes: 27094
+    official_sha256: 6be0887f677a21d1fa2b363b0abe2385b713a20befee85d1a8fed5ef7d76993c
+    bundled_bytes: 27041
+    bundled_sha256: 412590b6adad40354dfb4da21f97c1a7f751878903876d35a1000b745b34cd6f
+    byte_identical: false
+  - path: common/UBL-CommonAggregateComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonAggregateComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:27.049823+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonAggregateComponents-2.3.xsd
+    official_bytes: 344293
+    official_sha256: 0f27764a159a0716339aac3684c628abc4dd5c245e253f126706be72a5cacb9f
+    bundled_bytes: 344293
+    bundled_sha256: 0f27764a159a0716339aac3684c628abc4dd5c245e253f126706be72a5cacb9f
+    byte_identical: true
+  - path: common/UBL-CommonBasicComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonBasicComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:27.050333+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonBasicComponents-2.3.xsd
+    official_bytes: 282618
+    official_sha256: 9531c0246ef6367cc3c40806a25b71b5eb27807b856172fb4285f5aeae3b4e9a
+    bundled_bytes: 282618
+    bundled_sha256: 9531c0246ef6367cc3c40806a25b71b5eb27807b856172fb4285f5aeae3b4e9a
+    byte_identical: true
+  - path: common/UBL-CommonExtensionComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonExtensionComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:27.050676+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonExtensionComponents-2.3.xsd
+    official_bytes: 9521
+    official_sha256: 80dcae5d6aae596cca9d1047c753bb4323672569114a796c6979ac87d2ec530c
+    bundled_bytes: 9521
+    bundled_sha256: 80dcae5d6aae596cca9d1047c753bb4323672569114a796c6979ac87d2ec530c
+    byte_identical: true
+  - path: common/UBL-CommonSignatureComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonSignatureComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:31.797109+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-CommonSignatureComponents-2.3.xsd
+    official_bytes: 3822
+    official_sha256: 97376dfd10f095558a983b4efddcf5beddddf39bd8d9da711143f81c66f49e37
+    bundled_bytes: 3822
+    bundled_sha256: 97376dfd10f095558a983b4efddcf5beddddf39bd8d9da711143f81c66f49e37
+    byte_identical: true
+  - path: common/UBL-ExtensionContentDataType-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-ExtensionContentDataType-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:31.836772+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-ExtensionContentDataType-2.3.xsd
+    official_bytes: 4905
+    official_sha256: 559c0d50c2b5c40c7a227b7dff76cdd1b3f3aebc8f8f3b393893a466474a36c5
+    bundled_bytes: 4775
+    bundled_sha256: 880040cca218e12e95b8c9ff70244958f41b657b10402cd49d00c589753f55f8
+    byte_identical: false
+  - path: common/UBL-QualifiedDataTypes-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-QualifiedDataTypes-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:31.881365+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-QualifiedDataTypes-2.3.xsd
+    official_bytes: 6958
+    official_sha256: 9f4dec7aa410c25fba22fa1dc680f29e907c510dfe8fc0e177227c65b4b35476
+    bundled_bytes: 6958
+    bundled_sha256: 9f4dec7aa410c25fba22fa1dc680f29e907c510dfe8fc0e177227c65b4b35476
+    byte_identical: true
+  - path: common/UBL-SignatureAggregateComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-SignatureAggregateComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:32.025245+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-SignatureAggregateComponents-2.3.xsd
+    official_bytes: 4760
+    official_sha256: 5978f75fe801938a25de302f8137d687942573a33912245289130f4d13aac0a5
+    bundled_bytes: 4701
+    bundled_sha256: 253358086f534ef7f486a3687dc89926f146e062666cb3bf575681df91667ff3
+    byte_identical: false
+  - path: common/UBL-SignatureBasicComponents-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-SignatureBasicComponents-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:35.429613+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/common/UBL-SignatureBasicComponents-2.3.xsd
+    official_bytes: 4022
+    official_sha256: e1bce169e8e6f16b41a430de01d69a9fc806e93d29491b5074c4a77b183d8abd
+    bundled_bytes: 4022
+    bundled_sha256: e1bce169e8e6f16b41a430de01d69a9fc806e93d29491b5074c4a77b183d8abd
+    byte_identical: true
+  - path: maindoc/UBL-Catalogue-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Catalogue-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:35.429716+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Catalogue-2.3.xsd
+    official_bytes: 6447
+    official_sha256: 12212f8b633e0ab0db144055b891c57a4a75237b8bb19be62d297f05ae570b7a
+    bundled_bytes: 6447
+    bundled_sha256: 12212f8b633e0ab0db144055b891c57a4a75237b8bb19be62d297f05ae570b7a
+    byte_identical: true
+  - path: maindoc/UBL-Invoice-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Invoice-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:35.476828+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Invoice-2.3.xsd
+    official_bytes: 8946
+    official_sha256: e58d282e7ef6337d6482b5704d2635f623aca328279ecb8f42e1b85dfbb51401
+    bundled_bytes: 8946
+    bundled_sha256: e58d282e7ef6337d6482b5704d2635f623aca328279ecb8f42e1b85dfbb51401
+    byte_identical: true
+  - path: maindoc/UBL-Order-2.3.xsd
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Order-2.3.xsd
+    retrieved_at: '2026-10-24T12:34:35.496429+00:00'
+    status: 200
+    final_url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Order-2.3.xsd
+    official_bytes: 8139
+    official_sha256: 945fe6f79de730da08a41bff5480b4a3d606f4989ecbd820a32ba364d0cc2d3b
+    bundled_bytes: 8139
+    bundled_sha256: 945fe6f79de730da08a41bff5480b4a3d606f4989ecbd820a32ba364d0cc2d3b
+    byte_identical: true
+inspection_boundary: Public source/POM/API response inspection and ZIP-member reading only. No artifact installed
+  or executed, no Java/Maven/build/upstream test, no XML instance validation and no PR488 experiment rerun. Repository
+  tests are separate. Local browser pre-test process restriction is not retried or represented as PASS.
+existing_endpoint:
+  id: ubl_2.3
+  path: 01_State/01_Objects/ubl_2.3.yaml
+  git_blob: 7353032cf21f7ade2c654bee1e36de60c2330733
+  sha256: 6e84ad470b89dba73f53637d14c208ba08199c2f944b498dd134f21efc06f10c
+  raw_type: artifact
+  kind: specification
+  version_context:
+  - version: '2.3'
+    status: oasis_standard
+    url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  unchanged: true
+type_convention_assessment: Existing system/library, as used by python_xmlschema; module identity uses permitted
+  maven namespace and version-independent groupId:artifactId. It is neither the multi-module repository nor the
+  parent BOM; no taxonomy change.
+objects:
+- candidate_id: ph_ubl23
+  candidate_path: 01_State/Inbox/candidates/ph_ubl23.yaml
+  candidate_blob: 5429b884de10944567584d514fe126344294c815
+  preflight:
+    canonical_records: 225
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_record:
+    id: ph_ubl23
+    type: system
+    kind: library
+    name_zh: ph-ubl23 UBL 2.3 Java 绑定库
+    name_en: ph-ubl23 UBL 2.3 Java binding library
+    description_zh: 独立发布的 Java/JAXB 模块，提供 UBL 2.3 文档类型模型、XML 读写及可配置的 XSD 支持；本记录固定 Maven 10.2.1，不表示完整业务文档符合性。
+    description_en: A separately published Java/JAXB module providing UBL 2.3 document models, XML reading/writing
+      and configurable XSD support; pinned to Maven 10.2.1, not a complete business-document conformance claim.
+    version: 10.2.1
+    external_identifiers:
+    - namespace: maven
+      value: com.helger.ubl:ph-ubl23
+    official_url: https://github.com/phax/ph-ubl/tree/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23
+    versions:
+    - version: 10.2.1
+      status: released
+      url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+    open_source: true
+    scope_notes_zh: 主体是 com.helger.ubl:ph-ubl23 JAR 模块，不是整个 ph-ubl 套件、父 BOM、可选 ph-ubl23-codelists 或电子发票服务。注释标签 ph-ubl-parent-pom-10.2.1（28b05da0e375bdd91436b4b994776e09b2a6b556）指向固定
+      commit a1e8996af1cf56304048f13b4fc819680d109a7b；标签未签名，不声称签名验证或最新版本。生成的 InvoiceType 等 JAXB 源码来自发布 source JAR，不是已提交源码。要求
+      Java 17+，直接依赖 ph-jaxb 12.3.5 和四个 ph-xsds 4.1.0 模块；调用应用须提供相容的 JAXB provider，不能把单个JAR当作独立可执行或自包含验证器。schema使用初始默认true，但全局默认和实例设置均可改变；对象构造、成功序列化或无schema的validate调用都不证明有效。已比较的Invoice、Order、Catalogue和六个common
+      XSD与官方OS运行模式逐字相同，另三个common XSD移除CCTS/XAdES/XMLDSig外部import位置，由catalog、依赖资源和marshaller组装处理；不称整个100模式bundle未经修改或每项均比较。POM声明Apache
+      2许可，随包模式保留OASIS版权通知，不是法律审计。未执行Java、Maven、上游测试或PR488实验；测试源包含旧版UBL样例，不是UBL 2.3全覆盖。只记录有界模型与XML路径，不声称UBL §6.1所含§3.5扩展及§4约束（含IND5）、码表/业务规则、Peppol/EN
+      16931、税务、签名验证、对抗XML安全、生产互通或IA采用已获验证。
+    scope_notes_en: 'The subject is the separately published com.helger.ubl:ph-ubl23 JAR, not the whole suite, parent
+      BOM, optional codelist module or e-invoicing service. Annotated tag ph-ubl-parent-pom-10.2.1 (28b05da0e375bdd91436b4b994776e09b2a6b556)
+      points to commit a1e8996af1cf56304048f13b4fc819680d109a7b; it is unsigned, with no signature-verification
+      or latest-version claim. Generated JAXB source such as InvoiceType was inspected in the published source JAR,
+      not committed source. Java 17+ and a compatible application-supplied JAXB provider are required; direct dependencies
+      include ph-jaxb 12.3.5 and four ph-xsds 4.1.0 modules. The JAR is not a standalone executable or self-contained
+      validator. Initial schema-use default is true, but global and instance settings can disable it; construction,
+      serialization or a no-schema validate call does not establish validity. Only Invoice, Order, Catalogue and
+      nine common schemas were compared: nine match official OS runtime bytes; three common schemas adapt external
+      CCTS/XAdES/XMLDSig import locations, using catalog mappings, dependency resources and marshaller assembly.
+      No untouched-bundle or all 100-files comparison claim. The POM declares Apache 2; schemas retain OASIS notices,
+      not a licensing audit. No Java/Maven/build/upstream-test or PR488 execution occurred. Inspected tests include
+      older UBL examples, not exhaustive 2.3 coverage. This bounded model/XML path does not establish all UBL §6.1
+      conditions, §3.5 extensions or §4 constraints including IND5, code-list/business-rule validation, Peppol/EN
+      16931, tax compliance, signature verification, adversarial XML safety, production interoperability or IA adoption.'
+    sources:
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+      title: Fixed ph-ubl23 POM — separate Maven JAR identity, generation, dependencies and Apache 2 declaration
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/README.md#L10-L44
+      title: Fixed ph-ubl README — module separation, Java 17 and generated-source provenance
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/releases/tag/ph-ubl-parent-pom-10.2.1
+      title: Official ph-ubl release 10.2.1
+      language: en
+      accessed: '2026-10-24'
+    - url: https://api.github.com/repos/phax/ph-ubl/git/tags/28b05da0e375bdd91436b4b994776e09b2a6b556
+      title: Unsigned annotated release tag and fixed commit
+      language: en
+      accessed: '2026-10-24'
+    - url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+      title: Published Maven module POM, matching fixed and binary-embedded POM
+      language: en
+      accessed: '2026-10-24'
+    - url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+      title: Published source JAR — generated InvoiceType inspected as text, not executed
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/pom.xml#L65-L92
+      title: Fixed release parent POM — dependency BOM versions
+      language: en
+      accessed: '2026-10-24'
+    - url: https://repo.maven.apache.org/maven2/com/helger/commons/ph-jaxb/12.3.5/ph-jaxb-12.3.5.pom
+      title: ph-jaxb 12.3.5 POM — optional JAXB runtime dependency
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/resources/external/schemas/ubl23/maindoc/UBL-Invoice-2.3.xsd
+      title: Bundled UBL 2.3 OS Invoice runtime schema with OASIS notice
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T12:40:50.352537+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public ph-ubl23 module evidence executor
+relations:
+- proposal_id: ph_ubl23_implements_ubl_2_3
+  proposed_record:
+    id: ph_ubl23_implements_ubl_2_3
+    type: relation
+    name_zh: ph-ubl23 10.2.1 有界实现 UBL 2.3 的 Java 模型和 XML 路径
+    name_en: ph-ubl23 10.2.1 implements bounded UBL 2.3 Java models and XML paths
+    source: ph_ubl23
+    relation: implements
+    target: ubl_2.3
+    context:
+      version_context:
+        source: com.helger.ubl:ph-ubl23:10.2.1; fixed commit a1e8996af1cf56304048f13b4fc819680d109a7b; ph-jaxb 12.3.5
+          source commit e36574b3aafe277142d04cf864bcd911bf554987
+        target: UBL 2.3 OASIS Standard,15 June 2021, OS xsdrt runtime schemas; not later UBL editions or business
+          profiles
+      conditions_zh: 限定为生成式JAXB文档模型、XML读写和使用随包运行模式及外部依赖的可配置XSD支持，不是完整UBL文档符合性。UBL23Marshaller将模型、QName和schema资源组合；生成InvoiceType源仅在发布source
+        JAR中检视。Java 17+、ph-jaxb 12.3.5、ph-xsds-xmldsig/xades132/xades141/ccts-cct-schemamodule4.1.0及相容JAXB provider是调用条件；模块的jaxb-impl为test-scope，ph-jaxb的runtime为optional。DEFAULT_USE_SCHEMA=true仅为初始默认，全局及setUseSchema可改变；无schema时validate仅警告并序列化，不证明XSD有效。比较仅覆盖Invoice、Order、Catalogue及九个common文件：前三者加六个common逐字匹配官方OS，另三个common调整外部import的schemaLocation，由catalog、依赖资源及BASE_XSDS组装支持；不是未经修改的完整官方bundle，也未验证全部schema/文档组合。上游测试源仅检视未执行且含旧版样例，未构建或运行Java/Maven。保留PR488已证实的XSD有效但违反IND5反例，不重复或改写该实验。未验证§6.1所要求的§3.5扩展、§4约束和全部业务规则；不声称码表验证、Peppol/EN
+        16931或税务符合、签名验证、安全、生产互通、IA采用、字节/语义无损往返。Apache 2声明与OASIS模式通知并存，不作法律审计。
+      conditions_en: 'Limited to generated JAXB document models, XML read/write and configurable XSD support using
+        bundled runtime schemas plus external dependencies, not complete UBL document conformance. UBL23Marshaller
+        combines model, QName and schema resources; generated InvoiceType source was inspected only in the published
+        source JAR. Callers need Java 17+, ph-jaxb 12.3.5, four ph-xsds 4.1.0 modules (xmldsig/xades132/xades141/ccts-cct-schemamodule)
+        and a compatible JAXB provider: module jaxb-impl is test-scope and ph-jaxb runtime is optional. DEFAULT_USE_SCHEMA=true
+        is an initial default; global and setUseSchema settings can change it. With no schema, validate warns and
+        marshals, not proof of XSD validity. Comparison covered only Invoice, Order, Catalogue and nine common files:
+        nine byte matches to official OS, three common schemaLocation adaptations wired through catalog/dependency
+        resources/BASE_XSDS. No untouched full-bundle or all-schema/document-combination claim. Upstream tests include
+        older examples and were inspected, not executed; no Java/Maven build or run. PR488 already demonstrates
+        XSD-valid documents violating IND5 and is neither repeated nor rewritten. UBL §6.1 extension/§3.5 and §4
+        constraints, full business rules, code-list validation, Peppol/EN 16931, tax compliance, signature verification,
+        security, production interoperability, IA adoption and lossless byte/semantic round trips are not established.
+        Apache 2 declaration and OASIS schema notices coexist; no legal audit.'
+    evidence:
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java#L129-L213
+      title: UBL23Marshaller — model/QName/schema wrapper and external BASE_XSDS assembly
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java#L914-L929
+      title: Fixed Invoice marshaller factory
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+      title: Module generation, bindings and test-scope JAXB implementation
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/bindings23.xjb
+      title: Fixed JAXB model bindings
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/catalog.txt
+      title: Namespace catalog maps external schemas to ph-xsds artifacts
+      language: en
+      accessed: '2026-10-24'
+    - url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+      title: Generated InvoiceType source in published source JAR; inspected, not executed
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/builder/JAXBBuilderDefaultSettings.java#L47-L67
+      title: ph-jaxb 12.3.5 initial schema-use default true, globally configurable
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java#L327-L344
+      title: ph-jaxb per-instance schema-use switch
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java#L703-L729
+      title: No-schema validate warning does not establish schema validity
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/test/java/com/helger/ubl23/UBL23FuncTest.java#L224-L266
+      title: Selected Invoice read/validate/rewrite test source; not run
+      language: en
+      accessed: '2026-10-24'
+    - url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl-testfiles/src/main/java/com/helger/ubl/testfiles/UBLTestFiles.java#L84-L140
+      title: Shared test corpus includes older UBL examples; not exhaustive 2.3 coverage
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Invoice-2.3.xsd
+      title: Official UBL 2.3 OS Invoice runtime XSD — exact inspected byte match
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html#S-DOCUMENT-AND-SCHEMA-CONFORMANCE
+      title: UBL 2.3 §6.1 — schema plus extension and additional constraints
+      language: en
+      accessed: '2026-10-24'
+    - url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html#S-EMPTY-ELEMENTS
+      title: UBL 2.3 §4.4 IND5 — distinct from XSD validity
+      language: en
+      accessed: '2026-10-24'
+    last_verified_at: '2026-10-24T12:40:50.352537+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed public ph-ubl23 module evidence executor
+relation_preflight:
+  existing_id_or_endpoint_predicate_collisions: []
+  schema_errors: []
+  all_endpoints_resolve_after_proposed_object: true
+membership_proposals:
+- category_id: commerce
+  ref:
+    surface: canonical
+    id: ph_ubl23
+  rationale_zh: 连接现有UBL商业文档的typed-model/XML读写库路径；仅为既有商业单据导航，不表示税务、Peppol或业务规则全符合。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  git_blob: 5fdbf18375fadac60588c77a2d5c3111f9ebce11
+  sha256: 2d86085e5574c080f81d11265ed004e0ffb116f4d6323760a465f56248a5b2c1
+  preservation: Preserve all original bytes and held proposals; append only this member after authorized acceptance.
+prior_ind5_experiment_preservation:
+- path: 03_Evolution/02_Experiments/03_Evidence/ubl-xsd-boundary-probe-2026-10-21.zh-CN.md
+  git_blob: 76e6c7c469b8d5f593db1b11478835d580415dd5
+  sha256: 4de08676f3ce501bf150c6a80da2b94ac0bfd4527c6cd22b986591acc2ac2063
+- path: 03_Evolution/02_Experiments/03_Evidence/ubl-xsd-meta-20261021.json
+  git_blob: 776114b7030c6a2d4afb04b715e14cc7b62fbe86
+  sha256: ce431f9ad037b6dfef180f4c7f4a262fa30bbc256ef03e5fa8599cf7bd628ee1
+- path: 03_Evolution/02_Experiments/03_Evidence/ubl-xsd-probe-20261021.py
+  git_blob: 21159171851bd20eef2cb5a469a9ea311c197230
+  sha256: 537babeab6e2e7b00436d86344841cf895d4e2ebb477a9c182507d9d22026009
+- path: 03_Evolution/02_Experiments/03_Evidence/ubl-xsd-result-20261021.json
+  git_blob: 56ce8ea5dee9f7dc8ea5c7ac0a6b853b690d2f74
+  sha256: 6d1e8fec5a10c149358c3d841b2395be0ea0ce7e3e52af9e04ceecd4ea483bdb
+- path: 03_Evolution/02_Experiments/03_Evidence/ubl-xsd-sources-20261021.json
+  git_blob: 86fe704193ca8f2432cfaf9e494b79332ea49285
+  sha256: d79ebccf32b8265dfba5499c8a9a73775b4b39f45143874352c5fa7b059f87da
+materialization_boundary_zh: Candidate与packet先独立复核；另获发布门槛后按真实远端正常祖先commit/blob冻结，再以既有验收事件物化相同payload及引用式回执。不猜SHA、不squash被审祖先；保持所有原记录不变。
