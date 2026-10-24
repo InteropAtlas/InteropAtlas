@@ -14,13 +14,13 @@ locators:
 - url: https://pub.smpte.org/latest/st2084/
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st2084
   reasons:
-  - 保留既有 smpte_st2084 与工作级标识 smpte:st.2084；固定 ST 2084:2014（2014-08-16 批准、2017 再确认），再确认不另算 2017 版，也不与 BT.2100、ARIB
-    HLG 或产品/实现合并。
-  - 官方正文规定参考显示器 EOTF 与由其推导的逆 EOTF；SMPTE 公开期刊摘要支持 PQ 别称。原候选的 HDR10、Dolby Vision、HDR10+ 采用说法未经本次来源核实，不进入待审 Canonical
-    描述。
+  - Accepted as canonical smpte_st2084 by accept-20261024-st2084-reference-display. Frozen new-state Candidate 9606cc7bec607158325fd2402a522d2057e6caa3
+    and review_required route replay against actual ancestor 67b0517862c5a35180d80390663f40b278e3fb9a; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
 unknowns:
 - 原始 PDF 第 6 页末项系数定义标作 c2，第 8 页对应项标作 c3；保留这一表观标记不一致，不修补公式、不推断正式勘误，也不作数值实现或符合性结论。
@@ -29,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / ST 2084 bounded reference-display intake review
