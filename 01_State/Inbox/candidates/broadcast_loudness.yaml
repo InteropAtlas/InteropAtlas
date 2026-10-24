@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/fishloa/rust-broadcast/releases/tag/broadcast-loudness-v0.5.0
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - broadcast_loudness
   reasons:
-  - 主体是独立发布的 broadcast-loudness Rust crate，lib 名为 broadcast_loudness；不是 fishloa/rust-broadcast 整个工作区、其他 crate、标准或测量服务。固定
-    0.5.0、已核验归档和 commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce。
+  - Accepted as canonical broadcast_loudness by accept-20261024-broadcast-loudness-annex1. Frozen new-state Candidate
+    9ff8476a7509725d289056564bb7680fba5074da and review_required route are replayed against actual ancestor 89ce9bd64a102ae7e457877403c475c501ce3693;
+    this back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 仅静态源码与归档/规范核验；未编译、安装、导入、运行 Rust 库、测试或音频测量，未实测数值容差。
@@ -28,4 +30,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_loudness_annex1_intake
