@@ -895,3 +895,119 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
   github_actor: ff6962757
+---
+id: dcat_3_uses_dcmi_metadata_terms
+type: relation
+name_zh: DCAT 3 复用 DCMI Terms 的目录描述术语
+name_en: DCAT 3 reuses DCMI Terms for catalog description
+source: dcat_3
+relation: uses
+target: dcmi_metadata_terms
+context:
+  version_context:
+    source: DCAT 3, W3C Recommendation 2024-08-22
+    target: DCMI Metadata Terms, DCMI Recommendation 2020-01-20; existing work-level dcmi_metadata_terms endpoint
+  conditions_zh: 仅表述固定 DCAT 3 中 dcterms:description、dcterms:title 的复用及 dcat:resource 对 dcterms:hasPart 的子属性关系，限定
+    http://purl.org/dc/terms/，不混同 /elements/1.1/。外部术语的权威定义属于其原始规范；现有工作级端点以所列日期限定本断言，不推广至所有版本。词汇复用不表示每项属性必填、完整实现或符合性、IA
+    采用，也不推导传递依赖。
+  conditions_en: Limited to the fixed DCAT 3 reuse of dcterms:description and dcterms:title, and dcat:resource as
+    a subproperty of dcterms:hasPart. The namespace is http://purl.org/dc/terms/, not /elements/1.1/. External definitions
+    remain authoritative in their originating specification. The dated context bounds this work-level endpoint assertion,
+    not every edition. No universal mandatory-property, full implementation/conformance, IA-adoption or transitive-dependency
+    claim.
+evidence:
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_description
+  title: DCAT 3 §6.4.5 — dcterms:description
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_title
+  title: DCAT 3 §6.4.6 — dcterms:title
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:catalog_resource
+  title: DCAT 3 §6.3.3 — dcat:resource is a subproperty of dcterms:hasPart
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#bib-dcterms
+  title: DCAT 3 normative DCTERMS reference — DCMI Recommendation 2020-01-20
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#conformance
+  title: DCAT 3 §4 — conformance and profile-specific constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#dependencies
+  title: DCAT 3 §6.2.2 — originating specifications control external-term definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/2020-01-20/
+  title: DCMI Metadata Terms 2020-01-20 — Terms namespace and property identities
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:10:46.181613+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded DCAT vocabulary evidence executor
+record_created_at: '2026-10-24T12:10:46.181613+00:00'
+record_updated_at: '2026-10-24T12:10:46.181613+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / DCAT vocabulary semantic review
+  github_actor: ff6962757
+---
+id: dcat_3_uses_skos_reference
+type: relation
+name_zh: DCAT 3 在 SKOS 分类路径中复用概念与概念方案
+name_en: DCAT 3 reuses concepts and concept schemes for SKOS-based classification
+source: dcat_3
+relation: uses
+target: skos_reference
+context:
+  version_context:
+    source: DCAT 3, W3C Recommendation 2024-08-22
+    target: SKOS Reference, W3C Recommendation 2009-08-18; existing work-level skos_reference endpoint
+  conditions_zh: 限定采用 SKOS 的目录分类路径中对 skos:ConceptScheme 与 skos:Concept 的复用。目录也可使用 skos:Collection、owl:Ontology 或类似组织方式；不是所有目录都必须采用
+    SKOS。DCAT 3 的 dcat:theme 没有自动将值推断为 skos:Concept 的 range。外部术语定义以 SKOS 规范为准；所列日期限定现有工作级端点的本断言。不声称全部属性必填、完整 SKOS
+    实现或符合性、IA 分类体系采用、跨版等价或传递依赖。
+  conditions_en: Limited to reuse of skos:ConceptScheme and skos:Concept in SKOS-based catalog classification. skos:Collection,
+    owl:Ontology or similar alternatives remain available; SKOS is not mandatory for every catalog. DCAT 3 gives
+    dcat:theme no range that automatically infers skos:Concept values. SKOS controls its term definitions; the dated
+    context bounds this work-level assertion. No universal mandatory-property, full SKOS implementation/conformance,
+    IA-taxonomy adoption, cross-edition equivalence or transitive-dependency claim.
+evidence:
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Class:Concept_Scheme
+  title: DCAT 3 §6.10 — skos:ConceptScheme reuse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Class:Concept
+  title: DCAT 3 §6.11 — skos:Concept reuse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:catalog_themes
+  title: DCAT 3 §6.3.2 — classification alternatives including OWL
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_theme
+  title: DCAT 3 §6.4.12 — theme property and removed Concept range
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#bib-skos-reference
+  title: DCAT 3 normative SKOS reference — Recommendation 2009-08-18
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#dependencies
+  title: DCAT 3 §6.2.2 — originating specifications control external-term definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/
+  title: SKOS Reference — fixed Recommendation 2009-08-18
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:10:46.181613+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded DCAT vocabulary evidence executor
+record_created_at: '2026-10-24T12:10:46.181613+00:00'
+record_updated_at: '2026-10-24T12:10:46.181613+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / DCAT vocabulary semantic review
+  github_actor: ff6962757
