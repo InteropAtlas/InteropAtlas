@@ -62,3 +62,109 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
   github_actor: ff6962757
+---
+id: ffmpeg_implements_hls_rfc8216
+type: relation
+name_zh: FFmpeg 9.0.2 有界实现 HLS 播放列表读取与未加密 MPEG-TS 解复用路由
+name_en: FFmpeg 9.0.2 implements bounded HLS playlist reading and unencrypted MPEG-TS demux routing
+source: ffmpeg
+relation: implements
+target: hls_rfc8216
+context:
+  version_context:
+    source: FFmpeg 9.0.2; official-mirror n9.0.2, commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8
+    target: RFC 8216, August 2017; Informational Independent Submission, not IETF Standards Track
+  conditions_zh: 依据固定 libavformat/hls.c 对 RFC 8216 的明示引用和实际读取路径，仅记录 EXTM3U、EXTINF、TARGETDURATION、MEDIA-SEQUENCE、PLAYLIST-TYPE
+    EVENT/VOD、ENDLIST、BYTERANGE 及有限 STREAM-INF/MEDIA 处理、片段 URI 解析和受支持的未加密 MPEG-TS 片段经可用子解复用器打开的路径。不是全部标签、属性或输入的严格验证：EXT-X-VERSION
+    没有解析分支而被通用注释路径跳过，不声称完整第 7 版客户端或 RFC §7 版本兼容性验证。I-FRAME、SESSION、DATERANGE 及显式 DISCONTINUITY 标签也未在该解析器设分支；这不证明所有下游不连续性机制均不存在。动态变体/质量切换不受支持，CLOSED-CAPTIONS
+    不由该 rendition 路径支持。调用方流选择、协议/扩展名约束、IO、编译组件、HTTP/HTTPS/TLS 后端与子解复用器可用性适用；扩展名被允许不保证编解码兼容性。排除加密/DRM、复用和片段生成、fMP4/CMAF、packed-audio/WebVTT
+    细节及当前 Apple/LL-HLS 扩展；不把部分 KEY 代码当作通用解密支持。仅检视公开固定源码和测试配方，未安装、构建或运行 FFmpeg/FATE，未连接网络流；不声称完整客户端/服务器符合性、安全认证、网络或第三方互通、任意构建可用性或
+    IA 采用。
+  conditions_en: 'Based on the explicit RFC 8216 reference and operative fixed libavformat/hls.c read paths, limited
+    to EXTM3U, EXTINF, TARGETDURATION, MEDIA-SEQUENCE, PLAYLIST-TYPE EVENT/VOD, ENDLIST, BYTERANGE, bounded STREAM-INF/MEDIA
+    handling, segment URI resolution and opening supported unencrypted MPEG-TS segments through an available subdemuxer.
+    This is not strict validation of every tag, attribute or input: EXT-X-VERSION has no parser branch and is skipped
+    by generic comment handling, so no complete version-7 client or RFC §7 version-compatibility validation is claimed.
+    I-FRAME, SESSION, DATERANGE and explicit DISCONTINUITY tags also lack branches in that parser; this does not
+    prove all downstream discontinuity mechanisms absent. Dynamic variant/quality switching is unsupported; CLOSED-CAPTIONS
+    is unsupported by that rendition path. Caller stream selection, protocol/extension constraints, IO, enabled
+    components, HTTP/HTTPS/TLS backends and subdemuxer availability apply; an allowed extension does not guarantee
+    codec compatibility. Encryption/DRM, muxing and segment production, fMP4/CMAF, packed-audio/WebVTT specifics
+    and current Apple/LL-HLS extensions are excluded; partial KEY machinery is not general decryption support. Public
+    fixed source and test recipes were inspected only: no FFmpeg/FATE installation, build, execution or network-stream
+    exercise. No complete client/server conformance, security certification, network/third-party interoperability,
+    arbitrary-build availability or IA adoption is established.'
+evidence:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L24-L28
+  title: HLS demuxer source — explicit RFC 8216 reference
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L874-L1125
+  title: Playlist parser — bounded tags, skipped comments and segment URI records
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L530-L548
+  title: Rendition path — CLOSED-CAPTIONS exclusion
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L682-L813
+  title: Protocol and segment-extension constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L1850-L1855
+  title: Source limitation — dynamic variant/quality switching unsupported
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L2300-L2374
+  title: Initial/subordinate playlists and rendition association
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L2469-L2518
+  title: Segment probing, extension checks and selected subdemuxer opening
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L3078-L3089
+  title: Registered HLS demuxer callbacks
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/doc/demuxers.texi#L546-L574
+  title: HLS demuxer documentation — caller variant selection and extension constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/Makefile#L277
+  title: HLS demuxer component build gate
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L3943
+  title: HLS demuxer selected components; protocols and TLS remain separate build requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L4112-L4113
+  title: TLS backend selection is separate from HLS demuxer selection
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/tests/fate/hlsenc.mak#L1-L79
+  title: Local MPEG-TS playlist and byte-range test recipes — inspected, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-3.2
+  title: RFC 8216 §3.2 — MPEG-2 Transport Stream segment context
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-4.3
+  title: RFC 8216 §4.3 — playlist tags, including VERSION and rendition requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-7
+  title: RFC 8216 §7 — version-compatibility requirements, not a verified implementation claim
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T15:57:19.218278+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded fixed-source HLS evidence executor
+record_created_at: '2026-10-24T15:57:19.218278+00:00'
+record_updated_at: '2026-10-24T15:57:19.218278+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_hls_patch
+  github_actor: ff6962757
