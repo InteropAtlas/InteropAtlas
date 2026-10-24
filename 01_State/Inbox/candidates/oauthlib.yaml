@@ -17,11 +17,13 @@ locators:
 - url: https://github.com/oauthlib/oauthlib/releases/tag/v4.0.0
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - oauthlib
   reasons:
-  - 主体是 OAuthLib Python 库，版本另记 4.0.0，证据固定 commit 145a9a4690cb4d9de30d15fcc2984e34c49df741；不是 OAuth 规范、社区组织、HTTP
-    客户端集成、授权服务或身份认证系统。
+  - Accepted as canonical oauthlib by accept-20261024-oauthlib-authcode. Frozen new-state Candidate 9caf715bdc200e7630e420d4d33f936d498df68d
+    and review_required route are replayed against actual ancestor fefff97034ce3e678aec750133da53653607fb2e; this
+    back-reference prevents duplicate creation and does not merge subjects.
   merge_authorized: false
 unknowns:
 - 只检视固定公开源码、上游测试定义和发布元数据；没有安装、构建、导入或运行 OAuthLib，也没有实际 HTTP/授权交互、凭据或令牌操作。
@@ -30,4 +32,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review

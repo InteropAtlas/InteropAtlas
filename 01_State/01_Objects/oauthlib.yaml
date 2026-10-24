@@ -1,0 +1,122 @@
+id: oauthlib
+type: system
+kind: library
+name_zh: OAuthLib Python 授权协议库
+name_en: OAuthLib Python authorization protocol library
+description_zh: 固定 4.0.0 的 Python 库；本记录仅核实 WebApplicationClient 对 OAuth 2.0 授权码请求及响应的构造/解析机制，不执行 HTTP，也不证明完整客户端部署、身份认证或安全符合性。
+description_en: A Python library pinned to 4.0.0; this record verifies only WebApplicationClient construction/parsing
+  mechanics for OAuth 2.0 authorization-code requests and responses, not HTTP execution, a complete client deployment,
+  identity authentication or security conformance.
+version: 4.0.0
+external_identifiers:
+- namespace: github
+  value: oauthlib/oauthlib
+- namespace: pypi
+  value: oauthlib
+official_url: https://github.com/oauthlib/oauthlib/tree/145a9a4690cb4d9de30d15fcc2984e34c49df741
+versions:
+- version: 4.0.0
+  status: released
+  url: https://github.com/oauthlib/oauthlib/releases/tag/v4.0.0
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: 主体为 OAuthLib Python 库，不是 oauthlib 社区、requests-oauthlib 等 HTTP 集成、OAuth 规范或托管认证服务。固定 4.0.0 / commit
+  145a9a4690cb4d9de30d15fcc2984e34c49df741；轻量标签 v4.0.0 直接指向该 commit，release immutable=false，证据不只依赖可变标签。上游还包含 OAuth1、OAuth2
+  服务端、其他 grant 和 OpenID Connect 支持，但本切片只覆盖 WebApplicationClient 的授权码参数构造、回调 code/错误解析、令牌请求表单和令牌响应体解析。授权不等于身份认证。低层回调
+  state 仅在预期 state 为真值时比较；高层授权准备生成/保存 state，令牌准备仅在 authorization_response 为真值时解析回调。调用方须绑定并管理会话/单次事务、可信端点与回调/issuer、重定向
+  URI 一致性、客户端认证和凭据/令牌保护；client_id 不是认证凭据。方法输出字符串或 (URL, headers, body)，不发送 HTTP。URL 层 HTTPS 前缀检查可被 OAUTHLIB_INSECURE_TRANSPORT
+  放宽，既非 TLS/证书验证也非端点真实性验证；仅 body 的接口没有端点可检查。PKCE 可选，默认 challenge method 为 plain；S256 及对应 challenge/verifier 须显式配置并在同一授权事务的各阶段传递，仅构造器属性或生成
+  helper 不会自动接入请求。令牌响应解析接受 JSON 及表单编码回退；只在 OAUTHLIB_STRICT_TOKEN_TYPE 为真值时拒绝缺 token_type，OAUTHLIB_RELAX_TOKEN_SCOPE
+  可放宽 scope 变化检查；字段解析不验证令牌真实性、JWT 或用户身份。保留既有 RFC9700 安全边界：公共客户端必须使用 PKCE，机密客户端建议使用，挑战须绑定事务和用户代理；本记录不声称实现其全部要求，也不推荐其他
+  grant 或仅依赖默认值部署。固定 setup.py 和 PyPI 声明 Python>=3.9，README 的 3.8+ 文字不能替代包元数据；未实测运行环境。BSD-3-Clause 为项目声明及许可证文本，不是法律审计；rsa、signedtoken、signals
+  为可选 extras，不将其依赖误写为所有路径的必需依赖。PyPI 分发哈希仅作发布方元数据，未获取包字节。仅源码与测试定义检视，未安装/执行上游、交换凭据、进行网站/生产授权、安全评估、完整标准符合性或第三方互通测试，也不表示
+  IA 采用。
+scope_notes_en: 'The identity is the OAuthLib Python library, not its community, an HTTP integration such as requests-oauthlib,
+  an OAuth specification or a hosted authentication service. Fixed 4.0.0 / commit 145a9a4690cb4d9de30d15fcc2984e34c49df741;
+  lightweight v4.0.0 directly references that commit and the release is mutable (immutable=false). Upstream also
+  contains OAuth1, OAuth2 server/other-grant and OpenID Connect code, but this slice covers only WebApplicationClient
+  authorization-code parameter construction, callback code/error parsing, token-request form preparation and token-response-body
+  parsing. Authorization is not identity authentication. Low-level callback state comparison runs only with a truthy
+  expected state; high-level authorization preparation generates/stores state, while token preparation parses the
+  callback only with a truthy authorization_response. Integrations must bind/manage sessions and one-time transactions,
+  trusted endpoints and callback/issuer binding, redirect-URI consistency, client authentication and credential/token
+  protection; client_id is not authentication. Methods return strings or (URL, headers, body), not HTTP exchanges.
+  HTTPS-prefix URL guards can be relaxed by OAUTHLIB_INSECURE_TRANSPORT and are neither TLS/certificate verification
+  nor endpoint-authenticity checks; body-only interfaces cannot inspect an endpoint. PKCE is optional and challenge
+  method defaults to plain; callers must explicitly configure S256 and propagate its challenge/verifier across the
+  transaction. Constructor attributes or generation helpers alone do not wire PKCE into requests. Token parsing
+  accepts JSON with form-encoded fallback, rejects missing token_type only with truthy OAUTHLIB_STRICT_TOKEN_TYPE,
+  and allows scope-change relaxation through OAUTHLIB_RELAX_TOKEN_SCOPE; parsing is not token authenticity, JWT
+  or identity verification. Preserve the existing RFC9700 boundary: public clients must use PKCE, confidential clients
+  are advised to use it, and challenges must bind to the transaction/user agent; this record does not establish
+  full BCP conformance or recommend other grants/default-only deployment. Fixed setup.py and PyPI declare Python>=3.9;
+  stale README 3.8+ wording does not override package metadata and runtime compatibility was not tested. BSD-3-Clause
+  is the project declaration/license text, not a legal audit; rsa, signedtoken and signals are optional extras,
+  not universal mandatory dependencies. PyPI distribution hashes are publisher metadata only; archive bytes were
+  not acquired. Source and upstream-test definitions were inspected without installation/execution, credential exchange,
+  production authorization, security assessment, complete standards conformance, third-party interoperability testing
+  or IA adoption.'
+sources:
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/README.rst
+  title: OAuthLib library identity and transport-independent integration boundary; stale Python statement
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/setup.py
+  title: Fixed package identity, Python>=3.9, BSD-3-Clause and optional extras
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/__init__.py#L14-L15
+  title: Fixed package author and 4.0.0 version
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/releases/tag/v4.0.0
+  title: Official 4.0.0 release identity; evidence pinned to commit
+  language: en
+  accessed: '2026-10-24'
+- url: https://pypi.org/project/oauthlib/4.0.0/
+  title: PyPI fixed-version metadata; distribution digests not independently recomputed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/LICENSE
+  title: Project three-clause BSD license text, not legal audit
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/web_application.py
+  title: WebApplicationClient authorization-code request and response mechanics
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/base.py#L221-L291
+  title: High-level state, conditional callback parsing and request-tuple preparation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/parameters.py#L359-L472
+  title: Token-response parser and configurable checks
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/utils.py#L78-L82
+  title: HTTPS-prefix guard and environment override, not TLS verification
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9700.html#section-2.1.1
+  title: Existing OAuth security BCP boundary, not implementation conformance
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T14:02:51.974788+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OAuthLib source evidence executor
+record_created_at: '2026-10-24T14:12:47.220013+00:00'
+record_updated_at: '2026-10-24T14:12:47.220013+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: oauthlib
+  acceptance_event_id: accept-20261024-oauthlib-authcode
+  reviewed_candidate_blob: 9caf715bdc200e7630e420d4d33f936d498df68d
+  reviewed_against_commit: fefff97034ce3e678aec750133da53653607fb2e
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: fefff97034ce3e678aec750133da53653607fb2e
+  reviewed_packet_blob: 2075eaa57c7c9042372515dff426e4c00f055858
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/fefff97034ce3e678aec750133da53653607fb2e/01_State/Inbox/review-packets/oauthlib-authcode-20261024.yaml
