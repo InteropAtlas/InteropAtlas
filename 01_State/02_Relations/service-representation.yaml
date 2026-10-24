@@ -65,3 +65,141 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: openapi_3_1_1_uses_uri_rfc3986
+type: relation
+name_zh: OpenAPI 3.1.1 使用 RFC 3986 标识与解析描述引用
+name_en: OpenAPI 3.1.1 uses RFC 3986 for description reference identification and resolution
+source: openapi_3.1.1
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: OpenAPI Specification 3.1.1 (24 October 2024)
+    target: RFC 3986 / STD 66, January 2005
+  conditions_zh: 仅限固定 OAS 3.1.1 的描述引用：§4.8.23 Reference Object 的 $ref 使用 URI 标识目标；§4.6 在未另行规定时允许相对 URI，并要求使用引用文档的基址解析。Schema
+    Object 中的相对引用优先采用最近父模式的 $id；不存在该 $id 才使用文档基址，不能与 Reference Object 混同。API 端点 URL 另循 §4.7 的 Server Object 基址规则。本关系不保证可解引用、获取安全或实现互通，也不把描述引用当成
+    API 调用。
+  conditions_en: 'Limited to fixed OAS 3.1.1 description references: Reference Object $ref identifies a target by
+    URI (4.8.23); relative URIs are permitted unless otherwise specified and use the referring-document base (4.6).
+    Schema Object references instead use the nearest parent $id when present, otherwise the document base. API endpoint
+    URLs have separate Server Object base rules (4.7). No dereferenceability, fetch safety or implementation interoperability
+    is guaranteed; description references are not API calls.'
+evidence:
+- url: https://spec.openapis.org/oas/v3.1.1.html#reference-object
+  title: OpenAPI 3.1.1 — section 4.8.23 Reference Object URI identifiers
+  language: en
+  accessed: '2026-10-24'
+- url: https://spec.openapis.org/oas/v3.1.1.html#relative-references-in-api-description-uris
+  title: OpenAPI 3.1.1 — section 4.6 description URI resolution and Schema $id exception
+  language: en
+  accessed: '2026-10-24'
+- url: https://spec.openapis.org/oas/v3.1.1.html#relative-references-in-api-urls
+  title: OpenAPI 3.1.1 — section 4.7 separate API endpoint URL bases
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3986.txt
+  title: RFC 3986 / STD 66 — URI references and section 5 resolution
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:08:05.512985+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed HTTP API reference-source evidence executor
+record_created_at: '2026-10-24T08:08:05.512985+00:00'
+record_updated_at: '2026-10-24T08:08:05.512985+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: openapi_3_1_1_uses_json_pointer_rfc6901
+type: relation
+name_zh: OpenAPI 3.1.1 在指定描述片段与消息体选择器中使用 JSON Pointer
+name_en: OpenAPI 3.1.1 uses JSON Pointer for specified description fragments and body selectors
+source: openapi_3.1.1
+relation: uses
+target: json_pointer_rfc6901
+context:
+  version_context:
+    source: OpenAPI Specification 3.1.1 (24 October 2024)
+    target: RFC 6901, April 2013
+  conditions_zh: 仅限使用相关特性时：§4.8.20.4 为 Link/Callback 的请求或响应 body 选择器采用 RFC 6901 语法，指针部分可省略；§4.8.18.2 说明 Callback
+    的消息体定位。§4.6 对引用 JSON/YAML 文档的 URI 片段使用 JSON Pointer 是 SHOULD，不提升为 MUST。本关系不把 header/query/path 表达式也当作指针，不要求每个引用、消息体或
+    OpenAPI 文档含指针，也不证明运行时求值成功或工具符合性。
+  conditions_en: 'Feature-conditional: Link/Callback request or response body selectors adopt RFC 6901 grammar (4.8.20.4;
+    Callback context in 4.8.18.2), with the pointer portion optional. Interpreting JSON/YAML document URI fragments
+    as JSON Pointer is SHOULD, not MUST (4.6). This does not cover header/query/path expressions or require pointers
+    in every reference, payload or OpenAPI description, nor guarantee runtime evaluation or tooling conformance.'
+evidence:
+- url: https://spec.openapis.org/oas/v3.1.1.html#runtime-expressions
+  title: OpenAPI 3.1.1 — section 4.8.20.4 runtime expression body-selector grammar
+  language: en
+  accessed: '2026-10-24'
+- url: https://spec.openapis.org/oas/v3.1.1.html#key-expression
+  title: OpenAPI 3.1.1 — section 4.8.18.2 Callback body selection
+  language: en
+  accessed: '2026-10-24'
+- url: https://spec.openapis.org/oas/v3.1.1.html#relative-references-in-api-description-uris
+  title: OpenAPI 3.1.1 — section 4.6 JSON/YAML fragment interpretation is SHOULD
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc6901.txt
+  title: RFC 6901 — sections 3 and 6 JSON Pointer syntax and fragment representation
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:08:05.512985+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed HTTP API reference-source evidence executor
+record_created_at: '2026-10-24T08:08:05.512985+00:00'
+record_updated_at: '2026-10-24T08:08:05.512985+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: problem_details_rfc9457_uses_uri_rfc3986
+type: relation
+name_zh: RFC 9457 问题详情使用 RFC 3986 URI 引用标识类型与发生实例
+name_en: RFC 9457 problem details use RFC 3986 URI references for types and occurrences
+source: problem_details_rfc9457
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: RFC 9457 (July 2023)
+    target: RFC 3986 / STD 66, January 2005
+  conditions_zh: 仅表述 §3.1.1/3.1.5 的 type 与可选 instance URI 引用；相对引用按 RFC 3986 §5 以文档基址解析。解析后的 type 是问题类型主标识，省略时默认
+    about:blank。绝对 URI 只是 RECOMMENDED，非必须；不可解引用的标识仍允许。消费者 SHOULD NOT 自动解引用 type，向开发者提供信息的工具除外。这不是强制抓取、端点可用性、身份可信性、安全性或
+    API 符合性保证；不从虚构扩展示例推导 JSON Pointer 依赖。
+  conditions_en: Limited to type and optional instance URI references (3.1.1/3.1.5), resolving relative references
+    against the document base per RFC 3986 section 5. Resolved type is the primary problem-type identifier, defaulting
+    to about:blank when absent. Absolute URIs are RECOMMENDED, not required; non-dereferenceable identifiers remain
+    allowed. Consumers SHOULD NOT automatically dereference type except for developer-information tooling. No mandatory
+    fetching, availability, trusted identity, security, API conformance or example-derived JSON Pointer dependency
+    is asserted.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9457.html#section-3.1.1
+  title: RFC 9457 — type URI identity, default, relative resolution and dereferencing limits
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9457.html#section-3.1.5
+  title: RFC 9457 — optional instance occurrence URI and relative resolution
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9457.html#section-7.1
+  title: RFC 9457 — normative URI reference identifies RFC 3986
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3986.txt
+  title: RFC 3986 / STD 66 — section 4.1 URI-reference and section 5 resolution
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:08:05.512985+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed HTTP API reference-source evidence executor
+record_created_at: '2026-10-24T08:08:05.512985+00:00'
+record_updated_at: '2026-10-24T08:08:05.512985+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
