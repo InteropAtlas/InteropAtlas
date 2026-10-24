@@ -19,12 +19,13 @@ locators:
 - url: https://pypi.org/project/aioquic/1.7.0/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - aioquic
   reasons:
-  - At 263f6783df914f47d9afd41b0e9d7370a01778fd, no canonical/candidate ID or normalized GitHub/PyPI identifier
-    collision and no aioquic state-YAML textual match. The subject is the Python library aioquic, verified at 1.7.0,
-    not aiortc, an RFC document, an organization or a separate release subject.
+  - Accepted as canonical aioquic by accept-20261024-aioquic. Frozen new-state Candidate 0b12d5169e7ca8d1a078c4aa082ec989f5885a43
+    and review_required route are replayed against actual ancestor bcc8ff2c15f860ec283c256702596fafc97bf5dd; this
+    back-reference prevents duplicate creation and does not merge identities.
   merge_authorized: false
 unknowns:
 - 'Only two bounded implementation claims are proposed: RFC 9000 QUIC v1 connection/datagram/stream APIs and RFC
@@ -49,4 +50,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review

@@ -105,3 +105,158 @@ semantic_review:
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   review_url: https://github.com/InteropAtlas/InteropAtlas/issues/276#issuecomment-6304539206
   scope_zh: 独立核验 RFC 9001 第 3、4.2、5.1、11.1 节及明确 RFC 8446 端点，只接纳保留 TLS 集成和版本条件的 uses 范围；最终序列化结论见公开审查记录。
+---
+id: aioquic_implements_quic_rfc9000
+type: relation
+name_zh: aioquic 1.7.0 有界实现 QUIC v1 连接与流处理
+name_en: aioquic 1.7.0 implements bounded QUIC v1 connection and stream handling
+source: aioquic
+relation: implements
+target: quic_rfc9000
+context:
+  version_context:
+    source: aioquic 1.7.0; tag 1.7.0, commit 8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0
+    target: RFC 9000, QUIC v1 (May 2021)
+  conditions_zh: 仅记录 QUIC v1 客户端/服务器连接状态机、数据报处理及流传输 API，不将同库 v2 归入 RFC 9000。Sans-I/O 调用方或 asyncio 层须驱动网络、定时器和发送，并逐数据报使用
+    datagrams_to_send 返回的目的地址，不能始终固定为 connect 地址。源码明确承认远端 PATH_CHALLENGE 排队上限偏离 RFC 9000；证书名称/验证模式及信任配置也由集成方正确设置。不声称全条款/全可选功能符合性、外部互通认证或部署安全。上游测试定义仅审阅未运行；不增加
+    RFC 9001 或扩展关系。
+  conditions_en: Limited to QUIC v1 client/server connection state, datagram handling and stream-transfer APIs;
+    same-library v2 is not attributed to RFC 9000. Sans-I/O callers or the asyncio layer drive network I/O, timers
+    and sends, honoring every destination returned by datagrams_to_send rather than fixing it to connect. Source
+    explicitly acknowledges the remote PATH_CHALLENGE queue bound as an RFC 9000 deviation. Integrators configure
+    appropriate certificate names, verification mode and trust. No all-clause/all-option conformance, external interoperability
+    certification or deployment security is asserted. Upstream tests were inspected, not run; RFC 9001 and extension
+    relationships are not added.
+evidence:
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/README.rst#L28-L69
+  title: aioquic identity and explicit RFC 9000 QUIC v1 / RFC 9114 references; broader marketing claims not adopted
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/docs/design.rst#L4-L10
+  title: aioquic design — Sans-I/O protocol APIs leave I/O to the user
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/quic/connection.py#L244-L255
+  title: QuicConnection — API, incoming datagram and timer driving model
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/quic/connection.py#L512-L547
+  title: QUIC connection initiation, version selection and datagrams with destination addresses
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/quic/connection.py#L675-L771
+  title: QUIC timer handling, events and receive_datagram
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/quic/connection.py#L1250-L1264
+  title: QUIC send_stream_data API
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/docs/changelog.rst#L4-L19
+  title: aioquic 1.7.0 — caller must honor every outgoing datagram destination
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/quic/connection.py#L2413-L2427
+  title: QUIC remote PATH_CHALLENGE queue bound explicitly documented as an RFC 9000 deviation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/tests/test_connection.py#L2952-L2966
+  title: QUIC VERSION_1 handshake test definition, inspected but not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9000.html#section-1
+  title: RFC 9000 — QUIC v1 transport scope
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9000.html#section-2
+  title: RFC 9000 — streams
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9000.html#section-19.17
+  title: RFC 9000 — PATH_CHALLENGE response requirement, contrasted with explicit source limitation
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:55:10.170878+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed aioquic source evidence executor
+record_created_at: '2026-10-24T09:00:38.183442+00:00'
+record_updated_at: '2026-10-24T09:00:38.183442+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
+  github_actor: ff6962757
+---
+id: aioquic_implements_http3_rfc9114
+type: relation
+name_zh: aioquic 1.7.0 有界实现 HTTP/3 帧、事件与 SETTINGS
+name_en: aioquic 1.7.0 implements bounded HTTP/3 frames, events and SETTINGS
+source: aioquic
+relation: implements
+target: http3_rfc9114
+context:
+  version_context:
+    source: aioquic 1.7.0; tag 1.7.0, commit 8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0
+    target: RFC 9114, HTTP/3 (June 2022)
+  conditions_zh: 仅记录 H3Connection 基于 QUIC 的请求/响应 HEADERS、DATA、HTTP 事件及控制流 SETTINGS 处理；QPACK 编解码依赖 pylsqpack，调用方须把
+    QUIC 事件交给 HTTP/3 并驱动底层 I/O、定时器与发送。控制流解析器丢弃未使用的 GOAWAY 载荷，因此不声称完整 GOAWAY/优雅关闭。WebTransport 等扩展和独立 QPACK 标准边不在本切片。源码及内存交换测试定义审阅不等于执行结果、外部网络互通认证、安全保证或全部
+    RFC 9114 符合性。
+  conditions_en: Limited to H3Connection request/response HEADERS, DATA, HTTP events and control-stream SETTINGS
+    over QUIC. QPACK encoding/decoding depends on pylsqpack; callers feed QUIC events to HTTP/3 and drive underlying
+    I/O, timers and sends. The control parser discards unused GOAWAY payload, so complete GOAWAY/graceful shutdown
+    is not claimed. WebTransport and other extensions, and a separate QPACK-standard edge, are outside this slice.
+    Source and in-memory-exchange test definitions were inspected, not executed; this does not establish external
+    network interoperability certification, security or complete RFC 9114 conformance.
+evidence:
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/README.rst#L28-L69
+  title: aioquic identity and explicit RFC 9000 QUIC v1 / RFC 9114 references; broader marketing claims not adopted
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/docs/design.rst#L4-L10
+  title: aioquic design — Sans-I/O protocol APIs leave I/O to the user
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/h3/connection.py#L440-L481
+  title: H3Connection — low-level HTTP/3 over QUIC, pylsqpack encoder/decoder and settings
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/h3/connection.py#L509-L530
+  title: H3Connection — QUIC event handling and HTTP events
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/h3/connection.py#L605-L684
+  title: H3Connection — HEADERS and DATA stream framing
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/h3/connection.py#L782-L834
+  title: HTTP/3 control-stream frame checks and SETTINGS processing
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/src/aioquic/h3/connection.py#L1395-L1420
+  title: HTTP/3 control parser discards unused GOAWAY payload; full shutdown semantics not claimed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/aiortc/aioquic/blob/8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0/tests/test_h3.py#L1746-L1824
+  title: HTTP/3 request/response test definitions, inspected but not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9114.html#section-4.1
+  title: RFC 9114 — HTTP message framing over request streams
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9114.html#section-7.2.4
+  title: RFC 9114 — SETTINGS
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9114.html#section-5.2
+  title: RFC 9114 — connection shutdown, outside the bounded claim
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:55:10.170878+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed aioquic source evidence executor
+record_created_at: '2026-10-24T09:00:38.183442+00:00'
+record_updated_at: '2026-10-24T09:00:38.183442+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
+  github_actor: ff6962757
