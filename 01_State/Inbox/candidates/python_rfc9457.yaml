@@ -1,0 +1,51 @@
+contract_version: candidate-object-v1
+candidate_id: python_rfc9457
+label: rfc9457 Python problem-details library (0.4.1)
+publisher: NRWLDev/rfc9457 project maintainers and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: NRWLDev/rfc9457
+- namespace: pypi
+  value: rfc9457
+locators:
+- url: https://github.com/NRWLDev/rfc9457
+  role: official
+- url: https://github.com/NRWLDev/rfc9457/releases/tag/v0.4.1
+  role: dated
+- url: https://github.com/NRWLDev/rfc9457/tree/b7bd8868f714ccc808343331c2dd08c8369c753f
+  role: dated
+- url: https://pypi.org/project/rfc9457/0.4.1/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_rfc9457
+  reasons:
+  - Accepted as canonical python_rfc9457 by accept-20261024-python-rfc9457. Frozen new-state Candidate cfc64bec25446a310c71e2ccf5670d51ea6be9ea
+    and review_required route are replayed against actual ancestor 793557e42834df7f8ea2f9c43ee770a4f343fd0b; this
+    back-reference prevents duplicate creation and does not merge identities.
+  merge_authorized: false
+unknowns:
+- The bounded claim is exception-backed problem construction and marshal() returning a Python dict. No JSON bytes,
+  HTTP request/response handling, framework integration, deployment, negotiation, transport or complete RFC conformance
+  is established.
+- Problem defaults status to 500; absent/falsey type_ derives a class-name type. marshal() includes detail only
+  when truthy, accepts instance through unvalidated extensions, and keeps headers outside the returned dict. The
+  caller must supply appropriate member values and JSON-compatible extension content.
+- strict=True requires a truthy uri argument; Python str.format substitution occurs before a falsey explicit type_
+  changes the result to about:blank. This is not URI parsing/resolution/encoding, status-range/member-type or JSON-serializability
+  validation. about:blank does not automatically replace title with the HTTP reason phrase.
+- Constructor extension-key checks reject type and blank/whitespace keys only. extras remains mutable; later reserved-key
+  mutations can cause formatting errors. Do not present this as comprehensive reserved-member protection or safe
+  input validation.
+- Fixed metadata is Development Status 4 - Beta, Python >=3.10, Apache-2.0, runtime dependency multidict >=6.0.5.
+  A published non-prerelease 0.4.1 does not establish stability, latestness or production suitability.
+- No upstream installation/build/runtime tests were performed. Upstream test source was inspected only. Status/header/redirect
+  helpers, openapi.py dictionaries and README framework-use claims do not establish HTTP behavior, OpenAPI conformance,
+  independently verified adoption or IA use.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Python RFC 9457 semantic review

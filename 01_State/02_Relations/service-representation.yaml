@@ -203,3 +203,61 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: pending independent review
   github_actor: ff6962757
+---
+id: python_rfc9457_implements_problem_details_rfc9457
+type: relation
+name_zh: Python rfc9457 0.4.1 有界实现问题对象与字典表示
+name_en: Python rfc9457 0.4.1 implements bounded problem objects and dictionary representations
+source: python_rfc9457
+relation: implements
+target: problem_details_rfc9457
+context:
+  version_context:
+    source: rfc9457 Python library 0.4.1; tag v0.4.1, commit b7bd8868f714ccc808343331c2dd08c8369c753f
+    target: RFC 9457, Problem Details for HTTP APIs (July 2023)
+  conditions_zh: 仅记录 Problem 异常及 marshal() 的 Python 字典构造路径；调用方须提供符合 RFC 成员语义、可 JSON 序列化的值。字典包含 type/title/status、真值
+    detail 和未验证扩展（含可选 instance）；headers 单独保存。默认 type 可由类名派生；strict=True 要求真值 uri，先做 str.format，再在显式 type_ 为假值时改为
+    about:blank，不自动修正 title。strict 不是 URI、状态码、成员类型或 JSON 可序列化性校验；扩展键检查也不构成全面保护。不声称 JSON 字节序列化、HTTP 响应/状态一致性、框架集成、传输、安全或完整
+    RFC 符合性；上游代码未运行，测试源码审阅不是执行结果。
+  conditions_en: Limited to Problem exceptions and marshal() constructing Python dictionaries; callers supply values
+    satisfying RFC member semantics and JSON serializability. Output contains type/title/status, truthy detail and
+    unvalidated extensions, including optional instance; headers remain separate. Type can default from a class
+    name. strict=True requires truthy uri, interpolates with str.format, then selects about:blank for falsey explicit
+    type_ without correcting title. It validates neither URI syntax, status range, member types nor JSON serializability;
+    extension-key checks are not comprehensive protection. No JSON-byte serialization, HTTP response/status consistency,
+    framework integration, transport, security or complete RFC conformance is asserted. Upstream code was not run;
+    inspected test source is not an execution result.
+evidence:
+- url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/README.md#L11-L21
+  title: rfc9457 README — problem-exception identity and RFC 9457 reference; framework-use claims not adopted
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L19-L62
+  title: rfc9457 0.4.1 — Problem constructor, class-derived type and limited extension-key checks
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L64-L101
+  title: rfc9457 0.4.1 — marshal returns a dict, str.format and strict/about:blank order
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/tests/test_rfc9457.py#L23-L123
+  title: rfc9457 tests — inspected type/strict/template/extension expectations, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/NRWLDev/rfc9457/blob/b7bd8868f714ccc808343331c2dd08c8369c753f/src/rfc9457/__init__.py#L104-L145
+  title: rfc9457 helpers — separately stored headers, not an HTTP response implementation
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9457.html#section-3
+  title: RFC 9457 — sections 3, 3.1 and 3.2 problem representation, member semantics and extensions
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T08:26:38.503365+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Python RFC 9457 source evidence executor
+record_created_at: '2026-10-24T08:33:29.566912+00:00'
+record_updated_at: '2026-10-24T08:33:29.566912+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Python RFC 9457 semantic review
+  github_actor: ff6962757
