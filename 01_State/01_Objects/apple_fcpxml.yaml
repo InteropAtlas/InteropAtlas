@@ -1,0 +1,93 @@
+id: apple_fcpxml
+type: artifact
+kind: format
+name_zh: FCPXML 剪辑交换格式
+name_en: FCPXML — Final Cut Pro XML Interchange Format
+description_zh: Apple 用于描述媒体资产、片段、项目序列、剪辑决策及关联元数据的 XML 交换格式；本次限定审阅官方1.10 DTD 内容，保留 root/resources 来源不一致，不保证应用导入或完整往返。
+description_en: Apple's XML interchange format for media assets, clips, project sequences, editing decisions and
+  associated metadata; reviewed through official 1.10 DTD content, retaining the root/resources source discrepancy
+  without proving application import or complete round trips.
+version: '1.10'
+external_identifiers:
+- namespace: apple
+  value: fcpxml
+official_url: https://developer.apple.com/documentation/professional-video-applications/fcpxml-reference
+versions:
+- version: '1.10'
+  url: https://developer.apple.com/documentation/professional-video-applications/document-type-definition.md
+scope_notes_zh: '保留既有 FCPXML 工作级格式主体及 apple_fcpxml / apple:fcpxml；该外部标识是 IA 从官方 locator 派生的既有工作标识，不是 Apple 正式文档编号。本记录以
+  Apple 官方页面显式标注的 FCPXML 1.10 DTD 内容为审阅上下文，不新建独立 DTD 版次主体，也不声称最新版或所有版次均已核实。官方文档 URL 可变，采集字节哈希限定本次证据；内联 DTD 的精确提取物不是另行下载、签名或独立版本化的出版者发布包。没有从2011–2021版权头、2026页脚或采集日期推定发布日期。格式使用文档结构描述媒体资产、片段、项目序列、时间线剪辑决策及关联元数据，用于应用与
+  Final Cut Pro 之间交换；1.10 DTD 中可核查 project/sequence、resources、asset/media-rep、spine 和 asset-clip 声明。此处描述格式表示能力，不是应用程序、SDK、视频/音频编码器或已验证的转换实现。root
+  元素说明称 resources 是唯一必需子元素，但捕获的1.10 DTD 使用 resources?；保留来源不一致，不指定优先级、普遍强制该子元素或修复出版者文档。根属性 version 的 #FIXED "1.10"
+  不是 #REQUIRED 声明。Apple 明确提示符合 DTD 仍可能因数据而导入出错；本次不运行 DTD 样例验证、应用导入导出或转换器。引用媒体的可访问性、用户读权限、应用特定数据和语义以及实际导入结果仍须另行验证。通用参考中1.9要求
+  Final Cut Pro10.4.9或更高及仅表示部分项目内容的说明，不外推为1.10最低兼容版本；本记录亦不保证原生项目/资源库的完整表示或无损往返。时间属性的64/32位有理数说明是 CDATA 旁的注释，不是 DTD
+  强制数值约束；颜色注释原文 ISO/IEC230001-8 保持其不确定性，不纠正编号或建立依赖。bundle 文档描述 .fcpxmld 与根 Info.fcpxml，并把支持范围写为 DTD1.10及以后；仅用于区分文档、容器包装与应用身份，不另收录
+  bundle 或承诺包装兼容。FCP7/xmeml、原生项目/资源库、所有 Apple 媒体格式、AAF与OTIO均不自动等同于本对象。不建立完整符合性、跨实现互通、普遍无损、安全、认证、部署、推荐、实施采用或 IA 采用结论；不作开放标准或许可法律判断。本批零技术关系，不从
+  XML、Unicode、URI、有理数时间或 ISO 颜色注释推断精确版次依赖。'
+scope_notes_en: 'Preserves the existing work-level FCPXML format identity apple_fcpxml / apple:fcpxml. The external
+  identifier is IA''s existing official-locator-derived work identifier, not an Apple-issued document number. Evidence
+  is bounded to the DTD content explicitly identified by Apple as FCPXML 1.10, not a separate DTD-edition subject,
+  a latest-version claim or verification of every edition. The official documentation URLs are mutable; captured
+  byte hashes bound this inspection. The exact inline-DTD extraction is not a separately downloaded, signed or independently
+  versioned publisher archive. No publication date is inferred from the 2011–2021 copyright header, 2026 footer
+  or capture time. The format describes media assets, clips, project sequences, timeline editing decisions and associated
+  metadata for exchange between applications and Final Cut Pro; the 1.10 declarations include project/sequence,
+  resources, asset/media-rep, spine and asset-clip. These are representation definitions, not an application, SDK,
+  audio/video codec or verified converter implementation. Root-element prose calls resources the only required child,
+  while the captured 1.10 DTD declares resources?; the discrepancy remains unresolved, with no precedence chosen,
+  universally mandatory child asserted or publisher source repaired. The root version attribute uses #FIXED "1.10",
+  not #REQUIRED. Apple explicitly warns that DTD-matching documents may still encounter import errors due to data.
+  No DTD instance validation, application import/export or converter test was run. Media accessibility, user read
+  permissions, application-specific data/semantics and actual import success remain separately verifiable concerns.
+  The reference''s compatibility and partial-project note explicitly concerns 1.9 and Final Cut Pro 10.4.9 or later;
+  it is not evidence for 1.10 minimum compatibility. This record does not establish complete native-project/library
+  representation or lossless round trips. The 64/32-bit rational-time descriptions are comments alongside CDATA,
+  not DTD-enforced numeric constraints. The color-space comment literally names ISO/IEC 230001-8; its uncertainty
+  is retained without correcting the number or inferring a dependency. Bundle documentation describes .fcpxmld and
+  root Info.fcpxml, stating support from DTD 1.10 onward. It is used only to distinguish document, packaging and
+  application identities, not to accept a separate bundle or guarantee packaging compatibility. Older FCP7/xmeml,
+  native projects/libraries, all Apple media formats, AAF and OTIO are not equated with this subject. Full conformance,
+  cross-implementation interoperability, universal losslessness, security, certification, deployment, recommendation,
+  implementation adoption and IA adoption are not established; no open-standard or legal-license judgment is made.
+  This batch adds zero technical relations, with no exact-edition dependency inferred from XML, Unicode, URI, rational-time
+  or ISO color-space mentions.'
+sources:
+- url: https://developer.apple.com/documentation/professional-video-applications/fcpxml-reference.md
+  title: FCPXML work-level reference; compatibility note explicitly concerns 1.9, not 1.10
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/professional-video-applications/document-type-definition.md
+  title: Explicit FCPXML 1.10 inline DTD declarations and warning that DTD matching does not ensure import success
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/professional-video-applications/creating-fcpxml-documents.md
+  title: 'Creating FCPXML documents: clips, project sequences, edit decisions, metadata and referenced-media access'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/professional-video-applications/fcpxml.md
+  title: 'Root-element prose: resources required, conflicting with captured 1.10 DTD resources?'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/professional-video-applications/fcpxml-bundle-reference.md
+  title: 'FCPXML bundle documentation: distinguishes .fcpxmld/Info.fcpxml packaging, not separately accepted'
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T21:06:09.495320+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded FCPXML document-format evidence executor
+record_created_at: '2026-10-24T21:13:45.523063+00:00'
+record_updated_at: '2026-10-24T21:13:45.523063+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / dot / Independent FCPXML document-intake reviewer
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: apple_fcpxml
+  acceptance_event_id: accept-20261024-fcpxml-document-format
+  reviewed_candidate_blob: ca7b3445346d439727010382d949b9c2cc944b0c
+  reviewed_against_commit: 4d6fc5c3c2e784f8c10c4fb99685a01fbac6add4
+  candidate_executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 4d6fc5c3c2e784f8c10c4fb99685a01fbac6add4
+  reviewed_packet_blob: 74df366f6565985a0e14688d89c6db9b4eddc1ac
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/4d6fc5c3c2e784f8c10c4fb99685a01fbac6add4/01_State/Inbox/review-packets/fcpxml-document-format-20261024.yaml
