@@ -1,0 +1,80 @@
+id: ffmpeg
+type: system
+kind: software
+name_zh: FFmpeg 多媒体软件发行体
+name_en: FFmpeg multimedia software distribution
+description_zh: 包含用于处理音视频、字幕及相关元数据的库和工具的软件发行体；本记录固定 9.0.2，仅补充其原生软件 FFV1 编解码的有界实现证据。
+description_en: A distribution of libraries and tools for processing audio, video, subtitles and related metadata;
+  pinned to 9.0.2 here, with bounded evidence for its native software FFV1 encoder and decoder.
+version: 9.0.2
+external_identifiers:
+- namespace: github
+  value: FFmpeg/FFmpeg
+official_url: https://ffmpeg.org/
+versions:
+- version: 9.0.2
+  status: released
+  url: https://github.com/FFmpeg/FFmpeg/tree/n9.0.2
+open_source: true
+scope_notes_zh: 主体是整个软件发行体，不是社区、单一 CLI、FFV1 规范或另立的 libavcodec 对象。官方镜像的注释标签 n9.0.2（tag object ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3）指向
+  commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8，RELEASE 为 9.0.2；不声称最新版本。仅从固定公开源码检视原生 libavcodec FFV1 软件编码器和解码器，关系限定于
+  RFC 9043 的版本 0、1、3 及受支持像素格式/配置；v3 编码设置 micro-version 4，排除实验性 2/4、Vulkan 与其他硬件路径。编译选项可禁用组件，原生 FFV1 选择内部 rangecoder，不等于整个发行体无外部依赖。固定
+  LICENSE.md 说明主要为 LGPL-2.1-or-later，启用可选 GPL、version3 或外部库可能改变生成二进制的许可；不为所有构建赋予无条件统一许可，不作法律适用性意见。未安装、构建或运行 FFmpeg/FATE；上游测试配方仅作源码证据，不是执行通过。未验证全部
+  RFC 特性、安全、任意安装包、第三方互通或 IA 采用；不把 FFV1 的无损编码属性扩展成所有 FFmpeg 像素、色彩、元数据或容器转换均无损。
+scope_notes_en: The subject is the software distribution, not its community, the CLI alone, the FFV1 specification
+  or a separately created libavcodec object. Official-mirror annotated tag n9.0.2 (tag object ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3)
+  points to commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8; RELEASE states 9.0.2. No latest-release claim is made.
+  Public fixed-source inspection covers only native libavcodec FFV1 software encoding/decoding of supported RFC
+  9043 version 0/1/3 configurations; v3 encoding sets micro-version 4. Experimental versions 2/4, Vulkan and other
+  hardware paths are excluded. Build options can disable components. Native FFV1 selects the internal range coder,
+  which does not make the entire distribution dependency-free. The fixed LICENSE.md describes principally LGPL-2.1-or-later
+  licensing; optional GPL/version3 components and external libraries can change resulting binary terms. No unconditional
+  license expression for every build or legal-suitability opinion is supplied. FFmpeg and FATE were not installed,
+  built or run; upstream test recipes are source evidence, not passing execution results. No exhaustive RFC conformance,
+  security, arbitrary installed-build availability, third-party interoperability or IA adoption was verified. FFV1
+  lossless coding does not establish lossless preservation of pixels, color, metadata or containers in all FFmpeg
+  conversions.
+sources:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/README.md
+  title: FFmpeg 9.0.2 README — distribution of multimedia libraries and tools
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/RELEASE
+  title: FFmpeg fixed RELEASE —9.0.2
+  language: en
+  accessed: '2026-10-24'
+- url: https://ffmpeg.org/download.html
+  title: Official FFmpeg download page — source distribution and GitHub mirror identity
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/FFmpeg/FFmpeg/git/tags/ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3
+  title: Annotated n9.0.2 tag object — fixed commit identity
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/LICENSE.md
+  title: FFmpeg 9.0.2 LICENSE — configuration and external-library dependent terms
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/Makefile#L383-L385
+  title: Native FFV1 encoder/decoder build gates and separate Vulkan encoder
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T11:22:31.270584+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public FFmpeg source evidence executor
+record_created_at: '2026-10-24T11:30:22.636812+00:00'
+record_updated_at: '2026-10-24T11:30:22.636812+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_ffv1_intake
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: ffmpeg
+  acceptance_event_id: accept-20261024-ffmpeg-ffv1
+  reviewed_candidate_blob: e2f6b9e68ed8bcf0892568a62d5582df576dd458
+  reviewed_against_commit: 500cba4cf9a7de6c143010e6b381953bc5c588f4
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 500cba4cf9a7de6c143010e6b381953bc5c588f4
+  reviewed_packet_blob: 1902b6cb3a68f53e8c1d2026ac2a5e0e11e10bb6
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/500cba4cf9a7de6c143010e6b381953bc5c588f4/01_State/Inbox/review-packets/ffmpeg-ffv1-implementation-20261024.yaml
