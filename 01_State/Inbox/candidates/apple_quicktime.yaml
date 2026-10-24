@@ -21,13 +21,13 @@ locators:
 - url: https://developer.apple.com/documentation/quicktime-file-format/revision_history.md
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - apple_quicktime
   reasons:
-  - 保留既有 apple_quicktime 与 apple:quicktime 工作级文件格式身份；该外部标识是 IA 从既有官方 locator 派生的别名，不是 Apple 正式标准或文档编号。
-  - Apple 官方经典 QTFF 文档以 2001-03-01 为印载技术日期，说明原子结构、媒体描述、时间及样本位置与媒体样本的分离；当前官方文档仅作可变来源的身份和基本结构佐证。
-  - 现有 Apple 组织、FCPXML 格式、QuickTime Player/框架/API、编解码器及 ISO-BMFF/MP4 是不同主体，不由共同品牌或历史描述推断等同或技术关系。
-  - 当前 239 个 Canonical 对象无相同主体或规范化标识碰撞；本次只提议一个 artifact/format、零技术关系和一个既有 editing 导航成员，仍须独立语义复核。
+  - Accepted as canonical apple_quicktime by accept-20261024-quicktime-file-format. Frozen new-state Candidate 19bc4d33e7f255588e766993afb7a0c3dc404e40
+    and review_required route replay against actual ancestor 585e08f95422df1d139856e45dceeb12cd28589d; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
 unknowns:
 - 2001-03-01/March 2001 是所审经典文档印载日期，不是所有 QTFF 文件的通用版本或最新版本。PDF 的 2006-07-15 生成元数据和 2001/2002 版权文字不替代该技术日期；不宣称 URL
@@ -38,4 +38,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI, independent QuickTime intake reviewer (review_quicktime_format_intake)
