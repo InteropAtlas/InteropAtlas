@@ -1,0 +1,37 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-st2084-reference-display
+candidate_id: smpte_st2084
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: smpte_st2084
+review:
+  reviewer: Independent Agent — OpenAI / dot / ST 2084 bounded reference-display intake review
+  reviewed_at: '2026-10-24T19:11:42.558998+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 PASS 精确 Candidate 9606cc7bec607158325fd2402a522d2057e6caa3 与 packet c94a250eedb8155eb85bae487075055cb8a2d32c。保留
+    smpte_st2084 / smpte:st.2084 工作级身份，固定 ST 2084:2014（2014-08-16 批准、2017 再确认），不改称 2017 版。
+  - 独立报告 SHA-256 e67af6e3467337d018268662ec2334f019aeb9911ec110a9a74cfd985acabacf，完成时间即 reviewed_at；作者核对全部 82 个封存证据。semantic_review_url
+    指向保留 pending 状态的真实冻结被审原稿，不是结论本身；交付 PR 另载独立身份、结果、精确绑定与适用检查摘要。
+  - 独立 Reviewer 明确批准参考显示器 EOTF 及其推导逆函数的有限描述：原始 PDF 第 6 页末项系数标签 c2 与第 8 页对应项 c3 表观不一致仍保留，不修补/抄录公式、不推断正式勘误、不作数值实现或完整符合性判断。
+  - 官方固定与 latest 捕获 PDF 均为 267624 字节，SHA-256 27a5112408c117f26768430e82af1c2bd7f58d19967fac4a5ddff19821a541e2；15
+    页、仅 41 个链接批注。作者与 Reviewer 独立核对来源指纹并查看封面、Scope 及操作页。SMPTE 公开期刊摘要只支撑 PQ 别称，未访问受保护全文。
+  - 零条技术关系。BT.2100 相似数学形式不是对固定 ST 2084 的具名规范依赖；BT.2100、ARIB HLG 保持独立且原样不动。不继承候选未经核实的 HDR10、Dolby Vision、HDR10+ 采用断言；无
+    codec、完整 HDR、色调映射、相机 OETF、HLG、认证或 IA 采用结论。
+  - 候选/packet 原稿阶段：作者与独立 134 unittest 加 12 custom 检查、全部 112 个旧事件（102 accepted 真正冻结回放、10 deferred）及 schema/identity/graph
+    通过；20 个 standalone 程序与这些测试重叠，不另累计。948 个其他跟踪文件和 201 个语义生成文件与基线逐字相同。
+  - 历史可选 V1 fixture 的 3/17 失败及旧全站 renderer 的类型错误由独立 Reviewer 在基线与提案复现一致，不计 PASS、不作无关修复。本地浏览器 NOT RUN、未重试/绕过；任何后续远端
+    Atlas E2E 不等于显示器/软件/标准实现测试。
+  - 仅既有公开原始材料的静态文献检视；无 PDF 编辑、受保护文章访问、实现执行、互通或安全测试。真实远端冻结经正常 Git 获取；五文件物化另需独立结构复核和精确 head 的适用 CI/E2E。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/67b0517862c5a35180d80390663f40b278e3fb9a/01_State/Inbox/review-packets/st2084-reference-display-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9606cc7bec607158325fd2402a522d2057e6caa3
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/c94a250eedb8155eb85bae487075055cb8a2d32c
+decided_at: '2026-10-24T19:14:56.929616+00:00'
+notes:
+- 仅一个标准对象、零条技术关系和一个既有 image_color 导航成员。
+- 完整待审原稿保留在真实正常祖先；当前 packet 仅为引用回执。全部旧对象、180 条旧关系、112 个旧事件、历史快照、未定身份及 PR498/439/416 不变。

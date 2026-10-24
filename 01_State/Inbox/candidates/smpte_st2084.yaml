@@ -1,24 +1,32 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_st2084
-label: SMPTE ST 2084 — High Dynamic Range Electro-Optical Transfer Function of Mastering Reference Displays (PQ)
+label: SMPTE ST 2084 — High Dynamic Range Electro-Optical Transfer Function of Mastering Reference Displays (PQ;
+  2014 edition, reaffirmed 2017)
 publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.2084
+- namespace: smpte
+  value: st.2084
 locators:
-  - url: https://pub.smpte.org/latest/st2084/
-    role: official
+- url: https://pub.smpte.org/doc/st2084/20140816-pub/st2084-2014.pdf
+  role: dated
+- url: https://pub.smpte.org/latest/st2084/
+  role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st2084
   reasons:
-    - SMPTE ST 2084 defines the perceptual quantization (PQ) EOTF used by HDR10, Dolby Vision, HDR10+ and other HDR systems.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical smpte_st2084 by accept-20261024-st2084-reference-display. Frozen new-state Candidate 9606cc7bec607158325fd2402a522d2057e6caa3
+    and review_required route replay against actual ancestor 67b0517862c5a35180d80390663f40b278e3fb9a; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
-unknowns: []
+unknowns:
+- 原始 PDF 第 6 页末项系数定义标作 c2，第 8 页对应项标作 c3；保留这一表观标记不一致，不修补公式、不推断正式勘误，也不作数值实现或符合性结论。
+- 仅固定标准身份与参考显示器传递函数范围；不作 codec、完整 HDR 系统、色调映射、相机 OETF、HLG、产品采用、互通、安全、认证或 IA 采用断言。
+- 不因 BT.2100 的相似数学形式新增规范依赖边；所审 BT.2100-3 未提供对该固定 ST 2084 版的具名规范引用。本批提议零条技术关系。
 provenance:
   initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / ST 2084 bounded reference-display intake review
