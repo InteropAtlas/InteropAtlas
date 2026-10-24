@@ -1,0 +1,30 @@
+contract_version: candidate-object-v1
+candidate_id: ffmpeg
+label: FFmpeg multimedia software distribution — fixed release 9.0.2
+publisher: FFmpeg project
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: FFmpeg/FFmpeg
+locators:
+- url: https://ffmpeg.org/
+  role: official
+- url: https://github.com/FFmpeg/FFmpeg
+  role: official
+- url: https://github.com/FFmpeg/FFmpeg/tree/946fcce07b6dcd0331c8cc609192aeff5e1924f8
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为包含库和工具的 FFmpeg 软件发行体，本次证据固定 9.0.2 / n9.0.2 的 peeled commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8；不是社区、单独
+    ffmpeg CLI、FFV1 格式或另建 libavcodec 主体。
+  merge_authorized: false
+unknowns:
+- 未构建或执行 FFmpeg、上游 FATE 或任何第三方二进制；实际构建的组件可用性与许可取决于配置和外部库。
+- 只拟关联原生软件 FFV1 编解码的受支持版本 0、1、3 配置；不判定全 RFC 符合性、安全、第三方互通、IA 采用或任意转换无损。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
