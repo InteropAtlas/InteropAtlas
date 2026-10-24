@@ -406,3 +406,129 @@ semantic_review:
   verdict: acceptable_for_ordinary_acceptance
   review_url: https://github.com/InteropAtlas/InteropAtlas/pull/512
   scope_zh: 仅接纳 RFC 9557 §4.1 导入 RFC 3339 §5.6 并增加可选后缀的 extends 关系；保留 §2 对 Z 的语义更新，不把 Updates 元数据泛化为关系词义，不推旧解析器兼容、替代、等价或实现符合性。
+---
+id: wot_td_1.1_uses_uri_rfc3986
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 3986 URI 标识与基址解析
+name_en: WoT Thing Description 1.1 uses RFC 3986 URI identifiers and base resolution
+source: wot_td_1.1
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 3986 / STD 66, January 2005
+  conditions_zh: 仅表述固定推荐标准 §5.3.1.1 中可选 id 的 URI 标识形式，以及可选 base 按 RFC 3986 解析 TD 相对 URI 的规则。base 不影响 @context 中的
+    URI 或语义处理涉及的 Linked Data 图中的 IRI。此文献级 uses 不要求所有 TD 提供这两个成员，不保证 URI 可解引用、设备互通，也不沿 node-wot 等实现关系传递为 RFC 3986
+    符合性。
+  conditions_en: 'Limited to section 5.3.1.1: optional id uses URI identification, and optional base applies RFC
+    3986 resolution to TD relative URIs. base excludes @context URIs and Linked Data graph IRIs used in semantic
+    processing. This specification-level uses edge neither mandates those members nor guarantees dereferenceability,
+    device interoperability or transitive implementation conformance, including node-wot.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#thing
+  title: WoT TD 1.1 — section 5.3.1.1 Thing, id and base definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3986.txt
+  title: RFC 3986 / STD 66 — URI identity and section 5 reference resolution
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json_pointer_rfc6901
+type: relation
+name_zh: WoT 事物描述 1.1 在指定安全与事物模型特性中使用 JSON Pointer
+name_en: WoT Thing Description 1.1 uses JSON Pointer in specified security and Thing Model features
+source: wot_td_1.1
+relation: uses
+target: json_pointer_rfc6901
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 6901, April 2013
+  conditions_zh: 仅限使用相关特性时的规范规则：§5.3.3.1 中 body 安全信息位置的 name 是相对于每个交互输入 DataSchema 根的 JSON Pointer；§9.3.2 的 tm:ref
+    以 URI、# 与 JSON Pointer 定位模型子定义（URI 可为空以引用同一文档）；§9.3.4 的 tm:optional 指针须解析到完整交互可供性 Map。三者不可混为同一根位置；不要求所有 TD 含指针，不推出任意实现的
+    JSON Pointer 支持、完整符合性或安全保证。
+  conditions_en: 'Feature-conditional rules only: body-security name points from each interaction input DataSchema
+    root (5.3.3.1); tm:ref combines a possibly empty URI, # and JSON Pointer to locate a model subdefinition (9.3.2);
+    tm:optional pointers resolve whole interaction-affordance Maps (9.3.4). These roots are not interchangeable.
+    Not every TD needs pointers; implementation support, complete conformance and security guarantees are not inferred.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#sec-body-name-json-pointer
+  title: WoT TD 1.1 — body security name pointer relative to the input DataSchema root
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#tm-tmRef1
+  title: WoT TD 1.1 — section 9.3.2 tm:ref URI and JSON Pointer pattern
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#thing-model-td-optional
+  title: WoT TD 1.1 — section 9.3.4 tm:optional pointer and complete-affordance constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc6901.txt
+  title: RFC 6901 — JSON Pointer syntax, evaluation and fragment representation
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_bcp47_rfc5646
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 5646 语言标签标识多语言元数据
+name_en: WoT Thing Description 1.1 uses RFC 5646 language tags for multilingual metadata
+source: wot_td_1.1
+relation: uses
+target: bcp47_rfc5646
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: BCP 47 language-tag specification RFC 5646, September 2009
+  conditions_zh: 仅表述 §5.3.1.7 与 §6.3.2 中 MultiLanguage Map（如 titles、descriptions）的键须为有效语言标签、值为相应语言的文本；G.1 的规范性 BCP47
+    引用明确指向 RFC 5646。此关系不要求每份 TD 提供多语言元数据，也不涵盖 RFC 4647 的语言匹配、协商、自动翻译、内容质量或任何实现的语言支持保证。
+  conditions_en: Limited to MultiLanguage Map keys, including titles and descriptions, using valid language tags
+    with corresponding-language text values (5.3.1.7 and 6.3.2). Normative reference G.1 identifies BCP47 as RFC
+    5646. Multilingual metadata is not mandatory for every TD. RFC 4647 matching, negotiation, translation, content
+    quality and implementation language-support guarantees are outside this edge.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#multilanguage
+  title: WoT TD 1.1 — section 5.3.1.7 MultiLanguage language-tag keys
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#td-multi-languages
+  title: WoT TD 1.1 — section 6.3.2 multilingual JSON serialization
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#bib-bcp47
+  title: WoT TD 1.1 — normative BCP47 reference identifies RFC 5646
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc5646.txt
+  title: RFC 5646 — Tags for Identifying Languages, September 2009
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
