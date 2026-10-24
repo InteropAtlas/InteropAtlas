@@ -1,0 +1,92 @@
+id: iptc_vmh
+type: artifact
+kind: specification
+name_zh: IPTC Video Metadata Hub 视频元数据规范
+name_en: IPTC Video Metadata Hub
+description_zh: 定义视频管理、描述、权利及技术元数据属性与结构的 IPTC 规范；本次以 Recommendation 1.7 属性文档核实文档身份，保留源约束、映射及 JSON Schema 的未解决不一致。
+description_en: An IPTC specification defining administrative, descriptive, rights and technical video metadata
+  properties and structures; reviewed through the Recommendation1.7 property document, with unresolved constraint,
+  mapping and JSON Schema inconsistencies retained.
+version: '1.7'
+external_identifiers:
+- namespace: iptc
+  value: video-metadata-hub
+official_url: https://iptc.org/standards/video-metadata-hub/
+versions:
+- version: '1.7'
+  status: recommendation
+  url: https://iptc.org/std/videometadatahub/recommendation/IPTC-VideoMetadataHub-props-Rec_1.7.html
+scope_notes_zh: '保留 IPTC Video Metadata Hub 的既有工作级主体，以 Recommendation 1.7 的官方属性定义文档为本次审阅上下文，而非新建 properties-only
+  主体或另一个版次身份。iptc:video-metadata-hub 是 IA 根据既有官方定位地址形成的标识，不是 IPTC 正式文档编号。属性文档标注 2025-10-16 批准及修订；2025-11-10 是另行发布的新闻公告日期。版本化
+  URL 不被假定为不可变，已捕获原始字节的哈希限定此次证据，不声称最新版或所有版本均已核实。文档定义视频的管理、描述、权利及技术元数据属性、结构和语义，例如内容创建日期与数字表示创建日期的区别、以像素计的帧尺寸及 Video
+  Time 结构的格式/数值成员。这仅支持规范的文档身份及属性定义范围，不证明所有约束一致、映射正确或机器模式有效。Linked Encoded Rights Expression Structure 的 Encoding
+  type 在基本类型/基数列为 Text (0..1)，而 PVMD 列为 string//-MANDATORY；保留冲突，不选择优先列。映射文档的 EBUcore、XMP、IPTC PVMD JSON 标头与 AI Prompt
+  Information、Date Created 等行的原始单元格存在对齐异常；未确定正确映射，也不推断正式勘误。所链接 JSON Schema 声明 draft-04；静态解析发现13个含尾随 LF 的属性名和28个普通
+  ref 成员，保持原样。已安装 jsonschema 4.26.0 的 Draft4Validator.check_schema 在本地拒绝所捕获模式，其中 type: NA 不属于允许类型；仅检查源模式的元模式有效性，未解析远程引用、验证实例或执行上游工具，不能据此断言转换器失败或所有实现不可用。不提供修复后的模式，不把普通
+  ref 观察外推为完整运行行为诊断。出版者属性文档载有 CC BY 4.0 声明，此处不作法律审计或元数据权利有效性判断。AI prompt 元数据不证明可复现生成内容，辅助功能字段不证明可访问性符合性。未建立跨表示正确性或无损互换、完整符合性、实现/转换器行为、认证、安全、部署、采用或
+  IA 采用；本批零条技术关系，不从表示名称、命名空间、通用 timecode 或属性说明推断标准依赖。'
+scope_notes_en: 'Preserves the existing work-level IPTC Video Metadata Hub identity, reviewed through the official
+  Recommendation 1.7 property-definition document; this is not a new properties-only subject or a separate edition
+  identity. iptc:video-metadata-hub is the existing IA locator-derived identifier, not an official IPTC document
+  number. The properties were approved and the document revised on 2025-10-16; the separate release announcement
+  is dated 2025-11-10. Versioned publisher URLs are not assumed immutable: captured byte hashes bound the inspected
+  evidence, without claiming latestness or verification of every edition. The document defines administrative, descriptive,
+  rights and technical video metadata properties, structures and semantics, including the distinction between content
+  and digital-representation creation dates, pixel-based frame dimensions, and the format/value members of Video
+  Time. This supports document identity and property-definition scope, not consistency of all constraints, correctness
+  of mappings or machine-readable-schema validity. For Encoding type in Linked Encoded Rights Expression Structure,
+  the basic type/cardinality is Text (0..1) while the PVMD column says string//-MANDATORY; the conflict remains
+  unresolved, with no preferred column selected. In the mapping document, EBUcore, XMP and IPTC PVMD JSON headers
+  exhibit an alignment anomaly against raw cells in rows including AI Prompt Information and Date Created; correct
+  mappings and a publisher erratum are not inferred. The linked JSON Schema declares draft-04. Static parsing finds13
+  property names with trailing LF and28 plain ref members, preserved as published. The installed jsonschema4.26.0
+  Draft4Validator.check_schema locally rejects the captured schema, including type:NA outside the allowed type set.
+  This is source-schema metaschema checking only, with no remote references resolved, instances validated or upstream
+  tools executed; it does not establish converter failure or unusability of every implementation. No repaired schema
+  is supplied, and plain-ref observations are not a complete runtime diagnosis. The properties document carries
+  a CC BY4.0 notice, without a legal audit or determination of metadata rights validity. AI-prompt metadata does
+  not prove reproducible generation, and accessibility fields do not establish accessibility conformance. Cross-representation
+  correctness or losslessness, full conformance, implementation/converter behavior, certification, security, deployment,
+  adoption and IA adoption are not established. This batch adds zero technical relations; representation names,
+  namespace prefixes, generic timecode and property notes do not establish further standard dependencies.'
+sources:
+- url: https://iptc.org/standards/video-metadata-hub/
+  title: IPTC Video Metadata Hub work identity and official edition links
+  language: en
+  accessed: '2026-10-24'
+- url: https://iptc.org/std/videometadatahub/recommendation/IPTC-VideoMetadataHub-props-Rec_1.7.html
+  title: 'Recommendation1.7 Properties: approval/revision2025-10-16, property definitions and unresolved optional/mandatory
+    conflict'
+  language: en
+  accessed: '2026-10-24'
+- url: https://iptc.org/news/video-metadata-hub-v1-7-released/
+  title: 'Announcement2025-11-10: distinct from approval; AI-prompt metadata is not reproducibility proof'
+  language: en
+  accessed: '2026-10-24'
+- url: https://iptc.org/std/videometadatahub/recommendation/IPTC-VideoMetadataHub-mapping-Rec_1.7.html
+  title: 'Recommendation1.7 mapping table: observed header/cell alignment anomaly, not verified mappings'
+  language: en
+  accessed: '2026-10-24'
+- url: https://iptc.org/std/videometadatahub/recommendation/iptc-vmhub-1.7-schema.json
+  title: 'Published draft-04 schema: captured bytes fail local metaschema check; no instance or converter validation'
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T20:17:35.747650+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded VMH property-document evidence executor
+record_created_at: '2026-10-24T20:24:31.712580+00:00'
+record_updated_at: '2026-10-24T20:24:31.712580+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / IPTC VMH document intake review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: iptc_vmh
+  acceptance_event_id: accept-20261024-iptc-vmh-property-document
+  reviewed_candidate_blob: f069902d454d6d973c871c22de4e4e287b3a3034
+  reviewed_against_commit: bfd0465a0c8fa76ce884a63e32d2423ec0512dae
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: bfd0465a0c8fa76ce884a63e32d2423ec0512dae
+  reviewed_packet_blob: bc72e795003bb75a441ec74f1aab6a985561534f
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/bfd0465a0c8fa76ce884a63e32d2423ec0512dae/01_State/Inbox/review-packets/iptc-vmh-property-document-20261024.yaml
