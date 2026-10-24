@@ -1,0 +1,38 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-jsonrpcserver-single-dispatch
+candidate_id: python_jsonrpcserver
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_jsonrpcserver
+review:
+  reviewer: Independent Agent — OpenAI / dot / jsonrpcserver synchronous single-dispatch intake review
+  reviewed_at: '2026-10-24T18:35:00.338608+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 PASS 精确 Candidate 2901044cf31a90ce6fdaa8826adc6face512b685 与 packet 71ab3fd0ac093f8e74eb7851f040cc98006c2366；主体为稳定
+    pypi:jsonrpcserver Python 库固定5.0.9、commit2c0567515d67c6b1bd85db8e7985cada472489e3，不混同规范、仓库组织、网络服务、客户端或异步子系统。
+  - 独立报告 SHA-256 163cc6a083d062e0d47db4fba47cca8613a5b653ed8cca52be629570ba5510d8；报告记载完成于2026-10-24 18:33 UTC，reviewed_at
+    是协调者收到报告并核对精确字节的确认时间，不冒充更精确的独立完成时刻。semantic_review_url 指向保留pending状态的真实冻结被审原稿，不是结论本身；独立身份、结果、精确绑定与检查摘要另记录在交付PR。
+  - 仅接纳默认同步、进程内、单请求dispatch机制：注册普通方法、有限JSON可表示输入/结果、非rpc.保留名称、按位置/名称签名绑定、Success/Error Result或JsonRpcError与普通响应关联。签名绑定不是语义参数类型或业务值验证；调用方保证应用错误字段类型及可序列化性。
+  - 普通有效通知缺少id、处理后过滤并返回空字符串，显式null id不是缺失id。保留内部调度故障可向通知返回-32000/null id的固定测试反例；不声称无条件静默。json.dumps在调度异常捕获之外，序列化失败可外逸。
+  - 固定上游测试记录无效batch成员可使整批失败而非逐项响应，所有batch路径排除。rpc.前缀未由schema强制，默认Python JSON行为不证明全部边界严格符合；错误data/日志可能含方法名、绑定诊断或异常文字，不承诺安全披露。
+  - 作者与独立Reviewer重算公开sdist14506字节SHA-256 a71fb2cfa18541c80935f60987f92755d94d74141248c7438847b96eee5c4482；全部16运行时包成员及21个Git对应项匹配，8个打包生成项不冒充Git源码。19份固定捕获与原连接器内容/Git
+    blob一致；官方规范HTML指纹核对通过。
+  - MIT取自固定许可证与元数据，不作法律审计；依赖jsonschema<5/oslash<1无下界或锁定环境，examples extras不视为此路径必需依赖。无Requires-Python，3.8/3.9/3.10
+    classifiers不是实测支持；仓库重定向和同repository ID不证明所有权/维护连续性。
+  - 候选与packet原稿阶段：作者与独立134+12检查、schema/identity/graph和全部111旧事件（101 accepted真实冻结回放、10 deferred）通过；所有944旧跟踪文件及200语义站点生成文件保持不变。额外历史V1
+    fixture三项失败与旧全站renderer类型错误均基线等价，不计PASS、不作无关修复。
+  - 仅归档哈希、固定源码及测试定义静态检视，无安装/导入/构建/执行库或上游测试、网络分派/部署、认证、安全或互通测试。无async/client/MCP/完整符合性/最新维护/IA采用或依赖边。正常fetch核对真实冻结祖先；六文件物化另需独立结构复核与远端适用CI/E2E，本地浏览器NOT
+    RUN且未重试/绕过。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/4b30bc35aa9e37189a88dc7f233ad87874ecf9d4/01_State/Inbox/review-packets/jsonrpcserver-single-dispatch-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/2901044cf31a90ce6fdaa8826adc6face512b685
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/71ab3fd0ac093f8e74eb7851f040cc98006c2366
+decided_at: '2026-10-24T18:37:07.298272+00:00'
+notes:
+- 仅一个库对象、一个有界implements关系与一个既有services导航成员；不增加标准、能力、依赖、其他传输或维护机制。
+- 完整被审原稿保留在真实正常祖先，当前packet只是引用式回执。全部旧对象/关系/事件/历史底图、A2A身份转介、FIPA候选及PR498/439/416保持不变。
