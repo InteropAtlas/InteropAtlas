@@ -1,0 +1,45 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-oasf-record-timestamp
+candidate_id: agntcy_oasf_1_0_0
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: agntcy_oasf_1_0_0
+review:
+  reviewer: Independent Agent — OpenAI / dot / OASF record-schema intake review
+  reviewed_at: '2026-10-24T19:52:03.120941+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 PASS 精确 Candidate 45fa34a4e743b8eb5fbf95548661847843cc6ee4 与 packet b4aef8ccd3985a0d94956f0196e887877337108f。保留
+    agntcy_oasf_1_0_0 / agntcy_oasf:1.0.0、原 label/publisher/initiator 与 A2A overlap 边界，只接纳固定 commit 1d2eed1089e39a37678c4a1d9773ff618279d897
+    的 record/schema 规范。
+  - 独立报告 SHA-256 00ff57a6d4b48b2659baadb044430c3593feca458cf5eba9b8a7f6b2d25d3d02，完成时间即 reviewed_at；作者重算全部 82 个封存证据。semantic_review_url
+    指向保持 pending 状态的真实冻结被审原稿，不是结论本身；交付 PR 另载独立身份、结果、精确绑定与适用检查摘要。
+  - 独立 Reviewer 明确批准原候选 standard 收窄为既有 artifact/specification：固定 record.json 的字段语义与 required/recommended/optional
+    要求等级提供规范性依据，不新增 taxonomy/model，也不接纳 server/、SDK、Directory 或整个 AGNTCY 生态。
+  - 带注释 v1.0.0 标签 40d58023331953055271a3a4a17fa2cad96e5ce1 指向固定 commit；发布于 2026-02-12，非 draft/prerelease，但 immutable:false，README
+    允许已发布 schema 版本的非破坏性修正。不外推同版本未来内容或最新版，不把 GitHub 报告的签名状态当独立密码学验证。
+  - 仅一条 uses rfc3339，证据是必需 record.created_at 的明确 MUST 要求；不是实现完整验证或符合性。datetime_t 正则允许省略时区后缀，不能保证全部日历/数值范围，T/t 与空格示例有差异；RFC3339
+    §5.6 允许应用选择空格，不把空格一律判错，也不修补来源。
+  - 字段要求等级保留：name/version/schema_version/description/authors/created_at/skills 必需，domains/modules 推荐，annotations/locators
+    可选。不评估单项分类、模块符合性或可靠发现，不声称时间准确、时钟同步、安全、认证、权限、互通或 IA 采用。
+  - 不增加 SemVer、URI、JSON Schema、A2A、MCP 或 RFC9557 扩展关系；version 的 MAY 不变为强制 SemVer，locator/通用 URL 与元模式/服务器方言角色不混同，不裁决
+    held 身份。
+  - 作者与独立 Reviewer 重算九份既有固定 GitHub 捕获的字节数、SHA256 与 Git blob；独立复核还核对固定 tree。官方 RFC3339 §5.6–5.7 经 web reader 阅读，无原始
+    RFC 字节哈希或独立上游重新抓取声明。仅静态文本/JSON 检视，无安装、导入、构建、正则/上游验证执行、网络发现或部署。
+  - 候选/packet 原稿阶段：作者与独立 134 unittest 加 12 custom 检查、全部 113 个旧事件（103 accepted 真正冻结回放、10 deferred）及 schema/identity/graph
+    通过；20 个 standalone 程序与这些测试重叠，不另累计。951 个其他跟踪文件和 202 个语义生成文件与基线逐字相同。
+  - 历史可选 V1 fixture 的 3/17 失败及旧全站 renderer 的类型错误为基线等价，不计 PASS、不修复。Reviewer 初次 baseline audit 产生的未跟踪 Python cache
+    已如实披露并移出 checkout，未改 payload。本地浏览器 NOT RUN、未绕过；后续远端 Atlas E2E 不等同 OASF 实现/验证测试。
+  - 真实远端两文件冻结经正常完整 Git clone 获取，祖先与 blob 核对通过；六文件物化另需独立结构复核和精确 head 的适用 CI/E2E。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/d4b63b2424c3ce87bb65dbc5f1dee35090c60f2f/01_State/Inbox/review-packets/oasf-record-timestamp-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/45fa34a4e743b8eb5fbf95548661847843cc6ee4
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/b4aef8ccd3985a0d94956f0196e887877337108f
+decided_at: '2026-10-24T19:54:22.384718+00:00'
+notes:
+- 仅一份 record/schema 规范、一条有界 uses rfc3339 关系和一个既有 agents 导航成员。
+- 完整被审原稿保留在真实正常祖先；当前 packet 仅引用回执。全部 235 旧对象、180 旧关系、113 旧事件、历史快照及 PR498/439/416 保持不变。
