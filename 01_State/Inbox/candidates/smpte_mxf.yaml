@@ -11,12 +11,13 @@ locators:
 - url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_mxf
   reasons:
-  - 保留既有 work-level 主体 smpte_mxf 与 smpte:st.377-1；固定评估 ST 377-1:2019，不另造版本身份或把 MXF 家族、operational pattern、essence
-    container/codec、实现合并。
-  - 封面确认标题/2019-11-28 批准日；页 9 明确规范性引用 ST 336:2017，页 30/32/33 的 KLV 操作条款支持限定描述。页 8 Scope 的删除线批注不作为未限定的事实依据。
+  - Accepted as canonical smpte_mxf by accept-20261024-mxf-klv-smpte_mxf. Original new-state Candidate 12428c0451024bc6729accee35ef200051ff706b
+    and review_required route are replayed against actual frozen ancestor f3ff74edd93479a9f82d25f44c1024e0591fef30;
+    this back-reference prevents duplicate creation, not an identity merge.
   merge_authorized: false
 unknowns:
 - 官方原始 PDF 页 8 Scope 带 /StrikeOut 批注，其权威性和含义未确认；不去批注、不认定勘误/撤销/无害标记。独立语义复核须明确同意采用封面和无批注操作页的有限证据，否则暂缓 MXF 和关系。
@@ -24,4 +25,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)

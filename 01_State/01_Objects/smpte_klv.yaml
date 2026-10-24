@@ -1,0 +1,77 @@
+id: smpte_klv
+type: artifact
+kind: standard
+name_zh: SMPTE ST 336 键-长度-值（KLV）数据编码规范
+name_en: SMPTE ST 336 — Data Encoding Protocol Using Key-Length-Value
+description_zh: 定义数据项与数据组的字节级 KLV 表示以及集合/包编码的标准；本记录固定 ST 336:2017，不代表具体实现。
+description_en: A standard for byte-level KLV representation of data items and groups, including sets and packs;
+  reviewed at ST 336:2017, not an implementation.
+version: '2017'
+external_identifiers:
+- namespace: smpte
+  value: st.336
+official_url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+versions:
+- version: '2017'
+  status: standard
+  url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+scope_notes_zh: 保留 ST 336 的既有 work-level 标识，本记录固定 2017-07-21 批准的 2017 版。§1 将数据项/数据组的字节级编码结构与应用、运输方式分开；不意味着任意应用自动互通。§5.1
+  描述完整 UL Key、长度及数据 Value，完整 Key 为 16 字节；组内局部 Tag 及各类组编码不应混同这一完整键形式。§5.3 的普通 KLV 长度使用 BER 短式/长式；组内成员长度可按组定义采用其他方法，应用标准可限制字段字节数或值域。无法预知长度时的
+  0x80 只有在允许它的应用定义替代终止定位方式等前提下使用，不推出 MXF 允许该值。标准分别定义 Universal/Global/Local Sets、Variable-Length/Defined-Length
+  Packs；Defined-Length 并不等于所有包固定常数长度。§5.5 不规定包间连续性/空隙，由相应承载规范处理。只记录标准结构与应用约束边界，不将其当作具体软件、网络运输、素材编解码或全面实现符合性证明；无实现执行、互通/安全认证或
+  IA 采用判断。
+scope_notes_en: Preserves the existing ST 336 work-level identifier, reviewed at the 2017 edition approved 2017-07-21.
+  §1 separates byte-level data-item/group representation from application and transport, not a guarantee of arbitrary
+  application interoperability. §5.1 describes the full UL Key, Length and data Value; the full key is 16 bytes,
+  distinct from local tags and group-specific item encodings. Ordinary KLV lengths use BER short/long forms under
+  §5.3, while group-member lengths can use group-defined methods and application standards can limit field sizes
+  or ranges. The 0x80 unknown-length case requires an allowing application to define an alternative way to locate
+  the Value end; it does not mean MXF permits that value. Universal/Global/Local Sets and Variable-Length/Defined-Length
+  Packs are distinct constructs; Defined-Length does not mean every pack has a constant total length. Packet contiguity/gaps
+  are outside §5.5 and belong to the relevant transport specification. This is a standard and its bounded structural
+  description, not software, network transport, a codec or proof of complete implementation conformance. No implementation
+  execution, interoperability/security certification or IA-adoption assessment.
+sources:
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=1
+  title: ST 336:2017 cover — title, edition and approval date
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=2
+  title: §1 Scope — byte-level data items/groups, independent of application or transport
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=3
+  title: §1 continued and §2 — distinct group constructs and normative keyword distinctions
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=6
+  title: §5.1 — full UL Key/Length/Value structure, data representation not further coded by KLV
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=12
+  title: §§5.3–5.5 — lengths, application restrictions, unknown-length prerequisite and contiguity boundary
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=23
+  title: §7.6 — Defined-Length Packs may have variable overall length; no per-item Length fields
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T17:06:39.157450+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public SMPTE PDF evidence executor
+record_created_at: '2026-10-24T17:18:03.292066+00:00'
+record_updated_at: '2026-10-24T17:18:03.292066+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: smpte_klv
+  acceptance_event_id: accept-20261024-mxf-klv-smpte_klv
+  reviewed_candidate_blob: 9d1ec02d4dd9173bf06647530e8af24904794b0a
+  reviewed_against_commit: f3ff74edd93479a9f82d25f44c1024e0591fef30
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: f3ff74edd93479a9f82d25f44c1024e0591fef30
+  reviewed_packet_blob: c252cfd9edd9c6273bbc96f3d47c868bd120e56e
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/f3ff74edd93479a9f82d25f44c1024e0591fef30/01_State/Inbox/review-packets/mxf-klv-representation-20261024.yaml

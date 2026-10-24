@@ -11,15 +11,17 @@ locators:
 - url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_klv
   reasons:
-  - 保留既有 work-level 主体 smpte_klv 与 smpte:st.336；固定评估 ST 336:2017，不把数据编码标准混同 MXF、网络传输协议、所有 KLV 约定或实现。
-  - 官方 2017-07-21 批准版规定数据项/数据组的字节级 KLV 表示及集合/包形式；应用可以施加更窄长度/排列约束，不能从共同编码自动推出任意应用互通。
+  - Accepted as canonical smpte_klv by accept-20261024-mxf-klv-smpte_klv. Original new-state Candidate 9d1ec02d4dd9173bf06647530e8af24904794b0a
+    and review_required route are replayed against actual frozen ancestor f3ff74edd93479a9f82d25f44c1024e0591fef30;
+    this back-reference prevents duplicate creation, not an identity merge.
   merge_authorized: false
 unknowns:
 - 对固定标准身份、KLV 结构及长度/分组边界作规范文献检视；未执行编码器/解码器或符合性套件，不认证实现、codec/profile、传输或 IA 采用。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)
