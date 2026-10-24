@@ -53,3 +53,83 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: node_wot_uses_mqtt_5_0
+type: relation
+name_zh: node-wot 0.9.2 用于暴露 Thing 的 MQTT 绑定按显式配置使用 MQTT 5.0
+name_en: node-wot 0.9.2 uses MQTT 5.0 in an explicitly configured Thing-exposing binding
+source: node_wot
+relation: uses
+target: mqtt_5.0
+context:
+  version_context:
+    source: node-wot 0.9.2, upstream commit 2fd12ddf95ad9684e89d703bb916bc07e1959c79
+    target: MQTT Version 5.0, OASIS Standard
+  conditions_zh: >-
+    仅限固定版本的可选 @node-wot/binding-mqtt 中用于暴露 Thing 的 MqttBrokerServer 路径，
+    显式设置 protocolVersion 为 5、selfHost 为 false，并连接支持 MQTT 5.0 的外部 broker。
+    配置接口允许协议值 3、4、5；CLI 将选定值传入绑定，绑定将配置交给 MQTT.js connectAsync。
+    固定 lockfile 记录 MQTT.js 5.13.0，包声明的 ^5.3.2 只是依赖范围，不等于已安装版本；
+    所核验的 MQTT.js 5.13.0 源码把协议值 5 映射为 MQTT 5.0，保留显式值，而默认协议值是 4。
+    这是配置与源码层面的使用关系，不是 core、所有绑定、默认消费端或内嵌 Aedes broker 均使用 MQTT 5.0 的断言。
+    未运行 MQTT 5.0 broker 或网络测试，不证明完整 MQTT 5.0 实现、QoS 行为、安全性、部署可靠性或实际互通；也不从 TD 1.1 引用推导该关系。
+  conditions_en: >-
+    Limited to the optional @node-wot/binding-mqtt MqttBrokerServer path for exposing Things in the fixed release,
+    with protocolVersion explicitly set to 5, selfHost set to false, and an external broker supporting MQTT 5.0.
+    The interface permits protocol values 3, 4 and 5; CLI wiring forwards the selected value, and the binding passes
+    the configuration to MQTT.js connectAsync. The fixed lockfile records MQTT.js 5.13.0, whereas the declared
+    ^5.3.2 dependency range is not an installed-version claim. Reviewed MQTT.js 5.13.0 source maps protocol value 5
+    to MQTT 5.0 and preserves explicit values; its default protocol value is 4. This is configured use supported
+    by source inspection, not a claim about core, every binding, default consumers, or the embedded Aedes broker.
+    No MQTT 5.0 broker or network test was run; full protocol implementation, QoS behavior, security, deployment
+    reliability and actual interoperability are not established, nor is this relation inferred from TD 1.1 references.
+evidence:
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt.ts#L53-L63
+  title: node-wot 0.9.2 — MqttBrokerServerConfig protocolVersion 3/4/5 and selfHost configuration
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/cli/wot-servient.conf.json.md#L51-L59
+  title: node-wot 0.9.2 — CLI broker configuration and MQTT protocol-version selection
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/cli/src/cli-default-servient.ts#L125-L150
+  title: node-wot 0.9.2 — optional server-mode MQTT binding and protocolVersion forwarding
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-broker-server.ts#L361-L395
+  title: node-wot 0.9.2 — external-broker path and mqtt.connectAsync configuration forwarding
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/package.json#L16-L21
+  title: node-wot 0.9.2 — declared MQTT.js dependency range, not the locked version
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/package-lock.json#L7257-L7283
+  title: node-wot 0.9.2 — lockfile records MQTT.js 5.13.0
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L270-L273
+  title: MQTT.js 5.13.0 — explicit mapping of protocol values to MQTT versions
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L56-L63
+  title: MQTT.js 5.13.0 — default protocolVersion is 4, not 5
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L526-L538
+  title: MQTT.js 5.13.0 — explicit connection options are retained rather than replaced by defaults
+  language: en
+  accessed: '2026-10-23'
+- url: https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L850-L860
+  title: MQTT.js 5.13.0 — CONNECT packet uses the configured protocolVersion
+  language: en
+  accessed: '2026-10-23'
+record_created_at: '2026-10-23T04:07:35.225278+00:00'
+record_updated_at: '2026-10-23T04:07:35.225278+00:00'
+last_verified_at: '2026-10-23T04:07:35.225278+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed-version MQTT binding evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
