@@ -1,0 +1,34 @@
+contract_version: candidate-object-v1
+candidate_id: digitalbazaar_vc
+label: '@digitalbazaar/vc — fixed 7.3.0, bounded unsigned VC2 presentation-object construction'
+publisher: Digital Bazaar, Inc.
+family: system
+kind: library
+external_identifiers:
+- namespace: npm
+  value: '@digitalbazaar/vc'
+- namespace: github
+  value: digitalbazaar/vc
+locators:
+- url: https://github.com/digitalbazaar/vc/tree/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59
+  role: dated
+- url: https://github.com/digitalbazaar/vc/tree/v7.3.0
+  role: official
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - digitalbazaar_vc
+  reasons:
+  - Accepted as canonical digitalbazaar_vc by accept-20261025-digitalbazaar-vc-presentation. Frozen new-state Candidate
+    88a9176fdf1bdfd3f742f728792ef72d74fbaba4 and review_required route replay against actual ancestor 39522000c0e1a7ac3a0d78789aa87923b6bfcb84;
+    this back-reference prevents duplicate creation without merging subjects.
+  merge_authorized: false
+unknowns:
+- 只静态检视固定 Git 源码和已捕获规范；未下载 npm 归档，不证明 npm 分发字节与 Git 源码相同、已安装依赖版本、签名验证或可复现构建。
+- 仅 createPresentation numeric version=2.0 的未签名、加安全机制前的内存对象构造；不证明完整 VC2 验证、合规文档、发行者/验证者实现、安全性、第三方互通或 IA 采用。
+- id/holder 类型和 URL 未由构造器验证，嵌入对象的 proof/status 不认证，时间筛选可拒绝结构有效输入，引用共享；调用方仍须完成规范检查、安全机制和信任判断。
+- 未安装、导入、运行上游或其测试，未签名、验证凭证、生成密钥、访问持有者/发行者身份或状态端点。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / VC2 presentation construction intake review
