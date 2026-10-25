@@ -1,0 +1,33 @@
+contract_version: candidate-object-v1
+candidate_id: digitalbazaar_vc
+label: '@digitalbazaar/vc — fixed 7.3.0, bounded unsigned VC2 presentation-object construction'
+publisher: Digital Bazaar, Inc.
+family: system
+kind: library
+external_identifiers:
+- namespace: npm
+  value: '@digitalbazaar/vc'
+- namespace: github
+  value: digitalbazaar/vc
+locators:
+- url: https://github.com/digitalbazaar/vc/tree/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59
+  role: dated
+- url: https://github.com/digitalbazaar/vc/tree/v7.3.0
+  role: official
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - 主体为 @digitalbazaar/vc JavaScript 软件库；固定 package.json 为 7.3.0，v7.3.0 注释标签指向 commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59。不是
+    Digital Bazaar 组织、VC2 规范、credentials-context 数据包或发行者/验证者托管服务。
+  - 全量既有对象/候选身份预检未发现相同 npm/GitHub 标识或已接受主体；既有 PyLD 和 OAuthLib 是不同库。new 只表示待审候选，不是接纳或符合性结论。
+  merge_authorized: false
+unknowns:
+- 只静态检视固定 Git 源码和已捕获规范；未下载 npm 归档，不证明 npm 分发字节与 Git 源码相同、已安装依赖版本、签名验证或可复现构建。
+- 仅 createPresentation numeric version=2.0 的未签名、加安全机制前的内存对象构造；不证明完整 VC2 验证、合规文档、发行者/验证者实现、安全性、第三方互通或 IA 采用。
+- id/holder 类型和 URL 未由构造器验证，嵌入对象的 proof/status 不认证，时间筛选可拒绝结构有效输入，引用共享；调用方仍须完成规范检查、安全机制和信任判断。
+- 未安装、导入、运行上游或其测试，未签名、验证凭证、生成密钥、访问持有者/发行者身份或状态端点。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
