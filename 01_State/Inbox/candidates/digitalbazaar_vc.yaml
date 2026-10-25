@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/digitalbazaar/vc/tree/v7.3.0
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - digitalbazaar_vc
   reasons:
-  - 主体为 @digitalbazaar/vc JavaScript 软件库；固定 package.json 为 7.3.0，v7.3.0 注释标签指向 commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59。不是
-    Digital Bazaar 组织、VC2 规范、credentials-context 数据包或发行者/验证者托管服务。
-  - 全量既有对象/候选身份预检未发现相同 npm/GitHub 标识或已接受主体；既有 PyLD 和 OAuthLib 是不同库。new 只表示待审候选，不是接纳或符合性结论。
+  - Accepted as canonical digitalbazaar_vc by accept-20261025-digitalbazaar-vc-presentation. Frozen new-state Candidate
+    88a9176fdf1bdfd3f742f728792ef72d74fbaba4 and review_required route replay against actual ancestor 39522000c0e1a7ac3a0d78789aa87923b6bfcb84;
+    this back-reference prevents duplicate creation without merging subjects.
   merge_authorized: false
 unknowns:
 - 只静态检视固定 Git 源码和已捕获规范；未下载 npm 归档，不证明 npm 分发字节与 Git 源码相同、已安装依赖版本、签名验证或可复现构建。
@@ -30,4 +31,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / VC2 presentation construction intake review
