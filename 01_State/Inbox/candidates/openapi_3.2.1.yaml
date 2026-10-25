@@ -13,11 +13,13 @@ locators:
 - url: https://spec.openapis.org/oas/
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - openapi_3.2.1
   reasons:
-  - 固定 3.2.1 规范文献的官方版本链接、标题与修订记录明确标注 2026-09-10；完整 242 对象及 237 既有候选预检未发现该版身份碰撞。既有 openapi:3.1.1 是另一固定版次，不合并或覆盖。
-  - 承接 p0-core-review-20260913 明确留下的后续版本收录事项，仅选择 3.2.1 文献，不自动补齐所有 patch；身份预检 review_required 不等于语义接纳。
+  - Accepted as canonical openapi_3.2.1 by accept-20261025-openapi-3.2.1. Frozen new-state Candidate 51564d0622dba3a126f4cafdb2eccbd77cbb2b9e
+    and review_required route replay against actual ancestor d74943c585c400781ad1906a1047c0fc3a94a5e3; this back-reference
+    prevents duplicate creation without merging fixed OpenAPI editions.
   merge_authorized: false
 unknowns:
 - 未做完整规范、勘误、实现或跨版本符合性/兼容性审计；不从更高版本号推导 supersedes、extends 或旧引用自动迁移，旧 3.1.1 及其三条 uses 边保持不变。
@@ -27,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / dot, independent OpenAPI intake reviewer
