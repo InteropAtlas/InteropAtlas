@@ -11,11 +11,13 @@ locators:
 - url: https://www.rfc-editor.org/info/rfc9846/
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - tls13_rfc9846
   reasons:
-  - 固定 rfc:9846 文献身份与既有 rfc:8446 不同；完整 241 对象身份索引及 236 既有候选未发现 RFC9846 碰撞。TLS 1.3 协议版本相同不意味着两个 RFC 文献应合并。
-  - p0-core-review-20260913 已明确将 RFC9846 列为后续独立收录事项；此候选只承接该待办，不覆盖旧文献或更改 QUIC 的固定引用。
+  - Accepted as canonical tls13_rfc9846 by accept-20261025-tls13-rfc9846. Frozen new-state Candidate c003902264bce85f45e519a552bf0df3fbaa1c9d
+    and review_required route replay against actual ancestor 43167cb89f8f3de4dc8a3fdae3794245c5f5ce2b; this back-reference
+    prevents duplicate creation without merging RFC9846 and RFC8446.
   merge_authorized: false
 unknowns:
 - 未做穷尽技术变更、勘误、后续状态或实现合规审计；未执行 TLS 软件、协议测试或网络配置，不证明安全性、第三方互通、IA 采用或部署建议。
@@ -24,4 +26,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_tls_document_succession
