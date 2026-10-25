@@ -1,0 +1,264 @@
+packet_id: tls13_rfc9846_20261025
+status: pending_independent_semantic_review
+baseline_commit: 804b96e398a447611421b2c7f86657ab91d4b421
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅一个固定 RFC9846 artifact/protocol、一条既有 supersedes 到固定 RFC8446、一个 trust 导航成员。
+- 首次 Canonical 使用该已登记谓词，必须独立判断文献身份、方向、语义和实际展示，不以 schema 可解析替代语义复核；不改模型或 renderer。
+- 既有 RFC8446 仅把已过时的待单独收录句改成已另行收录，并更新实际贡献元数据；不刷新其全记录验证时间或旧来源访问日期。其余字段、全部旧关系、历史 packets/events/snapshots 不变。
+work_item_preflight:
+  main_confirmed: 804b96e398a447611421b2c7f86657ab91d4b421
+  open_pull_requests:
+  - 498
+  - 439
+  - 416
+  recorded_backlog: 01_State/Inbox/review-packets/p0-core-review-20260913.yaml#notes_zh and closed issue146 comment5653433295;
+    no issue reopening
+  backlog_url: https://github.com/InteropAtlas/InteropAtlas/issues/146#issuecomment-5653433295
+  current_counts:
+    objects: 241
+    relations: 183
+    graph_edges: 269
+    candidates: 236
+    acceptance_events: 119
+  proposed_counts_only:
+    objects: 242
+    relations: 184
+    graph_edges: 270
+    candidates: 237
+    acceptance_events: 120
+  publication_authorized: false
+source_evidence:
+  reconstruction_boundary: New capture and checkout after old workspace replacement. No lost prior local evidence
+    or virtualenv is claimed restored. Captured RFC Editor original info-page HTML rehashed locally, no source reacquisition.
+  research_report_sha256: fec131f76b0ea52a26196cef352b1ea0d5b87dd62e1f2737068029d0e49dc7dc
+  captures:
+  - file: rfc-editor-9846.html
+    url: https://www.rfc-editor.org/info/rfc9846/
+    final_url: https://www.rfc-editor.org/info/rfc9846/
+    status: 200
+    bytes: 2676196
+    sha256: 696eea7ef236d19f6c37d241fccecc465451f6c377cb6e0ed7d7277f2ae3e0da
+    captured_at: '2026-10-25T00:29:10.540871+00:00'
+    headers:
+      content-type: text/html;charset=utf-8
+      last-modified: Sun, 25 Oct 2026 00:18:56 GMT
+  - file: rfc-editor-8446.html
+    url: https://www.rfc-editor.org/info/rfc8446/
+    final_url: https://www.rfc-editor.org/info/rfc8446/
+    status: 200
+    bytes: 1435368
+    sha256: 7db11f91ad37ecefabd1e05753a50ce2e27de930cd69f010c3d1f3bafb63dde6
+    captured_at: '2026-10-25T00:29:15.694368+00:00'
+    headers:
+      content-type: text/html;charset=utf-8
+      last-modified: Sun, 25 Oct 2026 00:10:58 GMT
+  - file: datatracker-9846.html
+    url: https://datatracker.ietf.org/doc/rfc9846/
+    error: 'HTTP Error 403: Forbidden'
+    status: stopped
+    no_retry: true
+  capture_limits: Info HTML includes embedded RFC text and mutable surrounding UI. Hashes are captured HTML bytes,
+    not standalone immutable RFC XML/PDF/TXT digests. Adjacent .txt files are derived parsed text. Datatracker raw403
+    stopped without retry/alternate route; parser text is not raw capture and is not needed for these assertions.
+  source_mappings:
+  - source: rfc-editor-9846.html
+    locations: About this RFC; Abstract; section1.2
+    supports: Explicit RFC9846 number/title, July2026, IETF stream, Proposed Standard, DOI10.17487/RFC9846, Obsoletes
+      RFC8446, unchanged TLS1.3 number; not implementation conformance.
+  - source: rfc-editor-8446.html
+    locations: About this RFC / Obsoleted by
+    supports: Reciprocal documentary succession metadata, not protocol-family deprecation.
+identity_and_predicate_boundary:
+  identity_target: Numbered RFC document rfc:9846, distinct from rfc:8446 despite shared TLS1.3 protocol number
+  type_precedent: Existing srtp_rfc3711 artifact/protocol; legacy RFC8446 standard/protocol left unchanged
+  predicate: Existing supersedes in relation.v0.schema.json and renderer, with zero prior accepted instances
+  prior_defer_boundary: PR454 work-level versus edition mismatch did not reject the registered predicate itself;
+    here both endpoints are exact RFC documents
+  view_boundary: Current generic supersedes label is 取代 under 替代与兼容. New display names and descriptions explicitly
+    say specification document; conditions are retained in full machine relation, not assumed visible in every graph/UI.
+    Independent reviewer must inspect actual proposed pages and reject if misleading.
+objects:
+- candidate_id: tls13_rfc9846
+  candidate_path: 01_State/Inbox/candidates/tls13_rfc9846.yaml
+  candidate_blob: c003902264bce85f45e519a552bf0df3fbaa1c9d
+  preflight:
+    canonical_records: 241
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/tls13_rfc9846.yaml
+  proposed_record:
+    id: tls13_rfc9846
+    type: artifact
+    kind: protocol
+    name_zh: TLS 1.3 修订规范文档（RFC 9846，2026年7月）
+    name_en: TLS 1.3 Revised Specification Document (RFC 9846, July 2026)
+    official_name: The Transport Layer Security (TLS) Protocol Version 1.3
+    description_zh: 2026年7月发布的 IETF 流 TLS 1.3 修订规范文档，规定握手与记录协议；在 RFC 文献层面取代 RFC 8446，同时保留 TLS 1.3 协议版本号。不是 TLS 1.4，也不表示任何实现或部署已符合修订要求或安全。
+    description_en: The July 2026 IETF-stream revised TLS 1.3 specification document, defining handshake and record
+      protocols. It obsoletes RFC 8446 at the RFC-document level while retaining the TLS 1.3 version number. It
+      is not TLS 1.4 or evidence that implementations or deployments satisfy revised requirements or are secure.
+    version: RFC 9846
+    external_identifiers:
+    - namespace: rfc
+      value: '9846'
+    official_url: https://www.rfc-editor.org/info/rfc9846/
+    versions:
+    - version: RFC 9846
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc9846/
+    scope_notes_zh: 身份为固定 RFC9846 文献，而非 TLS 协议家族、软件或部署。Proposed Standard 是标准成熟等级，不是完成互通认证或部署安全结论；发布月为2026年7月，不由页面更新时间推造具体发布日期。第1.2节保留
+      TLS1.3 版本号并说明收紧与澄清部分要求；这里仅接纳文献及对 RFC8446 的正式取代关系，不作穷尽变更、勘误或任意实现兼容性结论。既有 RFC8446 身份、历史引用和 QUIC RFC9001→RFC8446
+      的 uses 边保持不变；不自动迁移为使用 RFC9846。未运行实现、审计配置、给出密码建议或证明 IA 采用。
+    scope_notes_en: Identity is the fixed RFC9846 document, not a TLS family, software product or deployment. Proposed
+      Standard is maturity, not interoperability certification or deployment-security evidence; publication is July2026,
+      with no exact day inferred from page updates. Section1.2 retains the TLS1.3 version number and tightens or
+      clarifies some requirements. This intake covers the document and formal succession to RFC8446 only, not an
+      exhaustive change/errata audit or arbitrary implementation compatibility. RFC8446 identity, historical references
+      and QUIC RFC9001 uses RFC8446 remain unchanged and do not automatically migrate to RFC9846. No implementation
+      execution, configuration audit, cryptographic advice or IA adoption is established.
+    sources:
+    - &id001
+      url: https://www.rfc-editor.org/info/rfc9846/
+      title: RFC 9846 — title, Proposed Standard, July 2026, IETF stream, DOI and Obsoletes metadata
+      language: en
+      accessed: '2026-10-25'
+    - &id002
+      url: https://www.rfc-editor.org/info/rfc9846/#section-1.2
+      title: RFC 9846 section 1.2 — relationship to RFC8446 and unchanged TLS1.3 version number
+      language: en
+      accessed: '2026-10-25'
+    last_verified_at: '2026-10-25T00:35:32.250651+00:00'
+    last_verified_by: Agent — OpenAI / dot, RFC Editor captured-document evidence review
+relations:
+- proposed_path: 01_State/02_Relations/p0-http-quic-relations.yaml
+  serialization: Append one YAML document only; preserve every baseline byte and old relation record.
+  baseline:
+    path: 01_State/02_Relations/p0-http-quic-relations.yaml
+    bytes: 15775
+    git_blob: c72d6c087bea5ffc61173631ff6d2e399c231622
+    sha256: 2f4479d495e21ab4d2fbba7d246e5039677d296716273af24b4907eb4bb66a37
+  proposed_record:
+    id: tls13_rfc9846_supersedes_rfc8446
+    type: relation
+    name_zh: RFC 9846 在文献层面取代 RFC 8446
+    name_en: RFC 9846 supersedes RFC 8446 at the document level
+    source: tls13_rfc9846
+    relation: supersedes
+    target: tls13_rfc8446
+    context:
+      version_context:
+        source: RFC9846, July2026, IETF stream, Proposed Standard; TLS protocol version1.3
+        target: RFC8446, August2018, original TLS1.3 RFC document; retained historical identity
+      conditions_zh: 只表示 RFC Editor 明示的 Obsoletes 文献后继关系，方向从 RFC9846 到 RFC8446；两端均为明确 RFC 编号文献，不是工作级家族或可变实现。Proposed
+        Standard 成熟等级与 superseded 生命周期不同。RFC9846 保留 TLS1.3 版本号并收紧/澄清部分要求；此边不声称任意旧实现符合新文档、双向兼容、部署安全或互通认证。既有 QUIC
+        RFC9001 对 RFC8446 的规范性引用及全部旧关系不改，不作传递 uses/implements 推导；也不新增其他被废止或更新 RFC 的边。
+      conditions_en: Only the explicit RFC Editor Obsoletes document-succession relationship, directed from RFC9846
+        to RFC8446. Both endpoints are explicit numbered RFC documents, not work-level families or mutable implementations.
+        Proposed Standard maturity differs from superseded lifecycle. RFC9846 retains TLS1.3 while tightening or
+        clarifying some requirements; this edge does not establish arbitrary old-implementation conformance, bidirectional
+        compatibility, deployment security or interoperability certification. Existing QUIC RFC9001 normative use
+        of RFC8446 and all old relations remain unchanged, with no transitive uses/implements inference and no additional
+        edges to other obsoleted or updated RFCs.
+    evidence:
+    - *id001
+    - *id002
+    - url: https://www.rfc-editor.org/info/rfc8446/
+      title: RFC 8446 — Obsoleted by RFC9846 metadata
+      language: en
+      accessed: '2026-10-25'
+    last_verified_at: '2026-10-25T00:35:32.250651+00:00'
+    last_verified_by: Agent — OpenAI / dot, explicit RFC-document succession evidence review
+relation_preflight:
+  existing_supersedes_instances: 0
+  existing_id_or_endpoint_predicate_collisions: []
+  schema_errors: []
+  all_endpoints_resolve_after_proposed_object: true
+  proposed_graph_edges: 270
+  graph_issues: []
+existing_record_updates:
+- path: 01_State/01_Objects/tls13_rfc8446.yaml
+  baseline:
+    path: 01_State/01_Objects/tls13_rfc8446.yaml
+    bytes: 2321
+    git_blob: 18a2284572885413f9d976acec2b4dd62542e762
+    sha256: 9d41ed60afa61140d7bf909e69dd3e30d4ed649484a15af135701c45079fec7c
+  exact_field_replacements:
+    scope_notes_zh:
+      before: proposed_standard 是该 RFC 的标准成熟等级；superseded 是文档生命周期，两者不同。此记录不表示 TLS 1.3 协议整体已弃用。RFC 9846 待单独收录，不覆盖或重命名
+        RFC 8446。
+      after: proposed_standard 是该 RFC 的标准成熟等级；superseded 是文档生命周期，两者不同。此记录不表示 TLS 1.3 协议整体已弃用。RFC 9846 已另行收录，不覆盖或重命名
+        RFC 8446。
+  allowed_serialization_metadata:
+  - 'record_updated_at: actual modification time'
+  - 'latest_substantive_contribution: actual initiator/executor/independent reviewer/GitHub actor'
+  preserve: All other field values and bytes outside the note and allowed contribution metadata, especially id/type/kind/names/status/versions/sources/intake_provenance/record_created_at.
+    Do not add or refresh last_verified fields for partial inspection.
+membership_proposals:
+- category_id: trust
+  ref:
+    surface: canonical
+    id: tls13_rfc9846
+  rationale_zh: 闭合已明确记录的 TLS 文献后继待办；仅沿用既有 trust 编辑导航，不证明技术部署可信或安全。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 49958
+  git_blob: b3aae927eaf1f4c3fb6decb9082070601a40f9ea
+  sha256: 48dd3081e8998b3555a4da75323f0bf903ea14d71efa57fdf59b6ce4f8e2d9ed
+protected_existing_assets:
+- path: 01_State/01_Objects/tls13_rfc8446.yaml
+  bytes: 2321
+  git_blob: 18a2284572885413f9d976acec2b4dd62542e762
+  sha256: 9d41ed60afa61140d7bf909e69dd3e30d4ed649484a15af135701c45079fec7c
+- path: 01_State/02_Relations/p0-http-quic-relations.yaml
+  bytes: 15775
+  git_blob: c72d6c087bea5ffc61173631ff6d2e399c231622
+  sha256: 2f4479d495e21ab4d2fbba7d246e5039677d296716273af24b4907eb4bb66a37
+- path: 01_State/Inbox/review-packets/p0-core-review-20260913.yaml
+  bytes: 2983
+  git_blob: 89ca772eafdf30946fbbe6c8c75ddf40e155d078
+  sha256: 0b27b0430e3203e6a73e1775920f8e51dde4f2c18a787e913d658d79d9647d67
+- path: 01_State/01_Objects/digitalbazaar_vc.yaml
+  bytes: 11030
+  git_blob: 558943f3779c9fdf67a2e064c063e7d930880e64
+  sha256: 6460458d6f2e2d43538aff9c41d908dca6e46a388b4ed7df89eb931204af8970
+- path: 01_State/01_Objects/oauthlib.yaml
+  bytes: 9793
+  git_blob: a827268ffa9ba199e3ef82c7b4f1d70619cdea63
+  sha256: 17f5d5f08c7f9f1fd6c4b6e0e23e712908576fc152970c3720c5711c619d69df
+- path: 01_State/Inbox/candidates/etsi_ts103190.yaml
+  bytes: 2481
+  git_blob: 1aff9b26ec5f3e6a5ef04dffb7fdb7cb47a8e2ef
+  sha256: e57d89de20d281853f21a7a383e6482b9ab30d17bef1fa8c33dc7231962c7786
+- path: 01_State/02_Relations/apple-google-human-interface.yaml
+  bytes: 8207
+  git_blob: 82d8b76e99c4f5090ef597a122eaa29fb4ff0a7c
+  sha256: c3d6ea5bc181d7782adc2124568682d2d33ff7bf9bcb071dc2fe7f9b188dbad6
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+excluded_scope:
+- No other obsoleted/updated RFCs, TLS libraries, compatibility/security recommendations, deployment or conformance
+  claims.
+- No QUIC relation retargeting, transitive uses/implements, identity merge/split, historical packet/event/snapshot
+  rewrite.
+- No model/schema/renderer/governance changes, no source software execution, no denied-source retry.
+materialization_boundary_zh: 本地仅候选和 packet，Canonical 不改。精确独立语义复核与全量适用检查通过后报告 root，尚不发布。获后续发布门槛才实际冻结并 fetch 真实 SHA，按已有工作流物化对象/关系/成员/事件回执与此处已审的最小8446注记修正。若
+  supersedes 文献语义或展示无法成立则停止该关系，不换语义绕过。
