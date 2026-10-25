@@ -1,0 +1,262 @@
+packet_id: openapi_3_2_1_20261025
+status: pending_independent_semantic_review
+baseline_commit: 8a54b8c8564d4ddfd024a109fa1c046eb6bdb6a6
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅一个固定 3.2.1 artifact/specification 文献、零技术/版次后继关系、一个既有 services 编辑导航成员。
+- 原 3.1.1 的旧版身份、类型、完整字节、三条 uses 边及所有历史不变；不沿用 PR422 的语义批准，不改 renderer/schema/model 或维护规则。
+- 独立复核固定文献身份、发布日期、规范与 schema/实现的区别及实际展示；不能从版本号或 Schema Iterations 文字制造 supersedes/extends。
+work_item_preflight:
+  main_confirmed: 8a54b8c8564d4ddfd024a109fa1c046eb6bdb6a6
+  open_pull_requests:
+  - 498
+  - 439
+  - 416
+  recorded_backlog: 01_State/Inbox/review-packets/p0-core-review-20260913.yaml line36; later OpenAPI editions are
+    a separate intake, not an all-patches mandate.
+  historical_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/422#discussion_r3999644672
+  historical_handoff_url: https://github.com/InteropAtlas/InteropAtlas/issues/146#issuecomment-5653433295
+  historical_issue_state: closed; no reopening
+  current_counts:
+    objects: 242
+    relations: 184
+    graph_edges: 270
+    candidates: 237
+    acceptance_events: 120
+  proposed_counts_only:
+    objects: 243
+    relations: 184
+    graph_edges: 270
+    candidates: 238
+    acceptance_events: 121
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-25T01:09:34.933500+00:00'
+  method: Rehashed all four existing raw official HTML captures and read selected sections with a standard-library
+    HTML parser; no source reacquisition or page-script execution.
+  research_report_sha256: 970335a36be7cd528f23d53946f7746c506f94d91762a3e55905a84626e32b69
+  source_manifest_sha256: 3d2769d00806b650ebede196cb7d420323146d43ea4ce2c46a0ba358927e460d
+  captures:
+  - file: oas-index.html
+    url: https://spec.openapis.org/oas/
+    final_url: https://spec.openapis.org/oas/
+    status: 200
+    bytes: 19236
+    sha256: 937c349036e2fbaf9f095892da84c987aa500eb00590a1196beb756e263b4262
+    captured_at: '2026-10-25T01:04:54.064862+00:00'
+    headers:
+      content-type: text/html; charset=utf-8
+      last-modified: Thu, 22 Oct 2026 09:20:17 GMT
+      etag: '"6ad9d551-4b24"'
+  - file: oas-v3.2.1.html
+    url: https://spec.openapis.org/oas/v3.2.1.html
+    final_url: https://spec.openapis.org/oas/v3.2.1.html
+    status: 200
+    bytes: 678358
+    sha256: 68a1729054df3707288f1907094de77c64b6f68107da1eb14dbbaa318dcc5e8b
+    captured_at: '2026-10-25T01:04:56.720830+00:00'
+    headers:
+      content-type: text/html; charset=utf-8
+      last-modified: Thu, 22 Oct 2026 09:20:16 GMT
+      etag: '"6ad9d550-a59d6"'
+  - file: oas-v3.1.2.html
+    url: https://spec.openapis.org/oas/v3.1.2.html
+    final_url: https://spec.openapis.org/oas/v3.1.2.html
+    status: 200
+    bytes: 594687
+    sha256: 841a0159f85f9eef53af691c6ef1f8714961564aefd72ed338eccb9bb145b143
+    captured_at: '2026-10-25T01:05:01.564725+00:00'
+    headers:
+      content-type: text/html; charset=utf-8
+      last-modified: Thu, 22 Oct 2026 09:20:16 GMT
+      etag: '"6ad9d550-912ff"'
+  - file: oas-v3.2.0.html
+    url: https://spec.openapis.org/oas/v3.2.0.html
+    final_url: https://spec.openapis.org/oas/v3.2.0.html
+    status: 200
+    bytes: 674364
+    sha256: c3b1e0700840af9734254884e9a4cd823868b9b5ecc1628cf48358c1052532a5
+    captured_at: '2026-10-25T01:05:04.420986+00:00'
+    headers:
+      content-type: text/html; charset=utf-8
+      last-modified: Thu, 22 Oct 2026 09:20:16 GMT
+      etag: '"6ad9d550-a4a3c"'
+  selected_capture: oas-v3.2.1.html
+  other_versions: 3.1.2 and 3.2.0 are source-comparison context only; neither proposed for intake.
+  capture_limits: Official version-designated HTML capture hashes, not permanent immutability. Derived parser text
+    is not another primary source. No new acquisition denial; prior unrelated denied routes untouched.
+  verified_section_ids:
+  - abstract
+  - sotd
+  - introduction
+  - versions-and-deprecation
+  - format
+  - openapi-object
+  - info-object
+  - objects-and-fields
+  - complete-vs-streaming-content
+  - security-schemes
+  - appendix-a-revision-history
+  index_schema_boundary: Schema Iterations obsolete statement applies to dated schema revisions within a minor release,
+    not OAS specification editions.
+identity_boundary:
+  target: Fixed OpenAPI Specification 3.2.1 document, external identifier openapi:3.2.1
+  type_precedent: Existing artifact/specification model and accepted normative specifications; legacy openapi_3.1.1
+    standard/specification remains untouched.
+  no_identity_merge_split: true
+  no_implicit_lineage_or_compatibility: true
+objects:
+- candidate_id: openapi_3.2.1
+  candidate_path: 01_State/Inbox/candidates/openapi_3.2.1.yaml
+  candidate_blob: 51564d0622dba3a126f4cafdb2eccbd77cbb2b9e
+  preflight:
+    canonical_records: 242
+    existing_candidates: 237
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    validation_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/openapi_3.2.1.yaml
+  proposed_record:
+    id: openapi_3.2.1
+    type: artifact
+    kind: specification
+    name_zh: OpenAPI 接口描述规范 3.2.1
+    name_en: OpenAPI Specification 3.2.1
+    official_name: OpenAPI Specification
+    description_zh: OpenAPI Initiative 于 2026-09-10 发布的固定 3.2.1 规范文献，为 HTTP API 定义语言无关的描述结构，包括路径、操作、参数和内容表示；不是运行中的
+      API、验证器或客户端/服务端实现。
+    description_en: The fixed OpenAPI Initiative specification document 3.2.1, published on 2026-09-10, defining
+      language-independent HTTP API description structures including paths, operations, parameters and content representations;
+      not a running API, validator or client/server implementation.
+    version: 3.2.1
+    external_identifiers:
+    - namespace: openapi
+      value: 3.2.1
+    official_url: https://spec.openapis.org/oas/v3.2.1.html
+    versions:
+    - version: 3.2.1
+      date: '2026-09-10'
+      status: published
+      url: https://spec.openapis.org/oas/v3.2.1.html
+    scope_notes_zh: 主体是固定 OpenAPI Specification 3.2.1 文献，而非 OpenAPI 家族、组织、资讯性 JSON Schema 制品或某个 API 实现。版本化官方 HTML
+      为该文献指定的权威文本；原始捕获哈希限定此次证据，不宣称 URL 永久不可变或当前最新版。发布日期来自标题和 Appendix A，不使用 HTTP Last-Modified 2026-10-22。符合规范的
+      OpenAPI 文档是可用 JSON 或 YAML 表示的 JSON 对象；这不要求被描述 API 的请求/响应内容也使用这两种格式。openapi 字段标识规范版本，与 info.version 描述的文档版本及被描述
+      API 的版本不同。资讯性 JSON Schema 若与规范正文有差异，以正文为准；本记录不证明模式验证器覆盖所有规范要求。major/minor 特征集与 patch 文本修订的区分不构成任意实现或跨版本兼容性保证，索引的
+      previous revisions obsolete 仅针对日期化 schema 迭代，不用于判定规范文献取代。本批零技术关系：不将既有 3.1.1 的三条 uses 边复制或重定向，不从版次顺序推断 supersedes/extends/compatible_with，旧文献、来源与历史保持原样。仅核实文献身份和上述描述范围，未穷尽审计功能、勘误或安全要求，未执行页面脚本、上游工具、API
+      或验证器；不证明实现符合性、认证、安全性、部署、运行时互通或 IA 采用。
+    scope_notes_en: 'The subject is the fixed OpenAPI Specification 3.2.1 document, not the OpenAPI family, organization,
+      informational JSON Schema artifact or an API implementation. The designated versioned HTML is authoritative
+      for this document; captured hashes bound this review, not permanent byte immutability or latest-version status.
+      The header and Appendix A supply the publication date, not HTTP Last-Modified 2026-10-22. A conforming OpenAPI
+      document is a JSON object representable as JSON or YAML; described API request/response content need not use
+      either format. The openapi field identifies the specification version, distinct from the document version
+      in info.version and the described API version. Specification text prevails over a differing informational
+      JSON Schema; validator coverage of all requirements is not established. Major/minor feature sets and patch
+      text revisions do not guarantee arbitrary implementation or cross-version compatibility. The index calls previous
+      date-stamped schema iterations obsolete, not specification editions. This slice adds zero technical relations:
+      no copying or retargeting the three existing 3.1.1 uses edges, and no supersedes/extends/compatible_with inference
+      from version order. Existing documents, sources and history remain unchanged. Only document identity and this
+      description scope are reviewed, not exhaustive features, errata or security requirements. No page scripts,
+      upstream tools, APIs or validators were executed; implementation conformance, certification, security, deployment,
+      runtime interoperability and IA adoption are not established.'
+    sources:
+    - url: https://spec.openapis.org/oas/v3.2.1.html
+      title: OpenAPI Specification 3.2.1 — fixed version, publication date and authoritative HTML status
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#appendix-a-revision-history
+      title: Appendix A — 3.2.1 publication date 2026-09-10
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#introduction
+      title: Section 2 — language-independent HTTP API description scope
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#format
+      title: Section 3 — JSON-object description represented as JSON or YAML; API payloads need not be either
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#openapi-object
+      title: Section 4.1 — specification-version field, not info.version or a running API
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#objects-and-fields
+      title: Section 4 — specification text authoritative over informational JSON Schema
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/v3.2.1.html#versions-and-deprecation
+      title: Section 2.1 — feature-set/patch distinction, not blanket implementation compatibility
+      language: en
+      accessed: '2026-10-25'
+    - url: https://spec.openapis.org/oas/
+      title: Official publication index — specification versions separate from date-stamped Schema Iterations
+      language: en
+      accessed: '2026-10-25'
+    last_verified_at: '2026-10-25T01:09:34.933500+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed official OpenAPI document evidence review
+relations: []
+membership_proposals:
+- category_id: services
+  ref:
+    surface: canonical
+    id: openapi_3.2.1
+  rationale_zh: 既有 services 中的 HTTP API 描述文献导航；不表示运行服务、部署采用或技术关系。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 50127
+  git_blob: 12648c1889be41a27f0dcaf56487c6d09f9b5a51
+  sha256: 11335e6e879db5fd59f28427257099f28688eba790ec4806b8d96da151d87edc
+protected_existing_assets:
+- path: 01_State/01_Objects/openapi_3.1.1.yaml
+  bytes: 1791
+  git_blob: 9b156ea189a285c86834a0b0ca4f31063c3b987a
+  sha256: 0a404bbfacd2954426b967471c547a927df14f0a9a925e5c0ffbe7d13a609662
+- path: 01_State/02_Relations/service-representation.yaml
+  bytes: 16341
+  git_blob: e856a8cd95dbc12be09cf9100d76bc3806e76e0d
+  sha256: a0e78733a9d83f3167886de025bcc6924c39bd0ab4a44b3c43607d7e63a0b192
+- path: 01_State/Inbox/candidates/cross-domain-intake-20260913.yaml
+  bytes: 23460
+  git_blob: 08d2888e213a1134cefa7e70e83fdfb68b4956ed
+  sha256: 7e4a4d4cacfede1e8c8ed95c0105745ffcfc3e0a5a5310c080a086eb1cf848d7
+- path: 01_State/Inbox/review-packets/p0-core-review-20260913.yaml
+  bytes: 2983
+  git_blob: 89ca772eafdf30946fbbe6c8c75ddf40e155d078
+  sha256: 0b27b0430e3203e6a73e1775920f8e51dde4f2c18a787e913d658d79d9647d67
+- path: 01_State/02_Relations/apple-google-human-interface.yaml
+  bytes: 8207
+  git_blob: 82d8b76e99c4f5090ef597a122eaa29fb4ff0a7c
+  sha256: c3d6ea5bc181d7782adc2124568682d2d33ff7bf9bcb071dc2fe7f9b188dbad6
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+preserve_existing_relation_ids:
+- openapi_3_1_1_uses_json_schema_2020_12
+- openapi_3_1_1_uses_uri_rfc3986
+- openapi_3_1_1_uses_json_pointer_rfc6901
+existing_record_updates: []
+excluded_scope:
+- No intermediate-patch intake, family entity, old-version rewriting, supersedes/extends/compatible_with, or cloned/retargeted
+  dependency edges.
+- No API implementation, validator/schema artifact, SDK, client/server, deployment, security/conformance/IA-adoption
+  assertion.
+- No taxonomy, schema, renderer, governance or maintenance mechanism change; no held-identity adjudication or denied-source
+  retry.
+materialization_boundary_zh: 本地仅新增候选及 packet；Canonical/关系/导航/事件不改。精确独立语义复核和适用全检查通过后给 root 实际哈希，仍不发布。后续另获发布门槛才真实冻结并普通
+  fetch 实际 SHA，沿已有流程物化一文献、零关系、一 services 成员及事件/回执，不重建冻结历史。
