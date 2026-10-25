@@ -260,3 +260,47 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
   github_actor: ff6962757
+---
+id: tls13_rfc9846_supersedes_rfc8446
+type: relation
+name_zh: RFC 9846 在文献层面取代 RFC 8446
+name_en: RFC 9846 supersedes RFC 8446 at the document level
+source: tls13_rfc9846
+relation: supersedes
+target: tls13_rfc8446
+context:
+  version_context:
+    source: RFC9846, July2026, IETF stream, Proposed Standard; TLS protocol version1.3
+    target: RFC8446, August2018, original TLS1.3 RFC document; retained historical identity
+  conditions_zh: 只表示 RFC Editor 明示的 Obsoletes 文献后继关系，方向从 RFC9846 到 RFC8446；两端均为明确 RFC 编号文献，不是工作级家族或可变实现。Proposed
+    Standard 成熟等级与 superseded 生命周期不同。RFC9846 保留 TLS1.3 版本号并收紧/澄清部分要求；此边不声称任意旧实现符合新文档、双向兼容、部署安全或互通认证。既有 QUIC RFC9001
+    对 RFC8446 的规范性引用及全部旧关系不改，不作传递 uses/implements 推导；也不新增其他被废止或更新 RFC 的边。
+  conditions_en: Only the explicit RFC Editor Obsoletes document-succession relationship, directed from RFC9846
+    to RFC8446. Both endpoints are explicit numbered RFC documents, not work-level families or mutable implementations.
+    Proposed Standard maturity differs from superseded lifecycle. RFC9846 retains TLS1.3 while tightening or clarifying
+    some requirements; this edge does not establish arbitrary old-implementation conformance, bidirectional compatibility,
+    deployment security or interoperability certification. Existing QUIC RFC9001 normative use of RFC8446 and all
+    old relations remain unchanged, with no transitive uses/implements inference and no additional edges to other
+    obsoleted or updated RFCs.
+evidence:
+- url: https://www.rfc-editor.org/info/rfc9846/
+  title: RFC 9846 — title, Proposed Standard, July 2026, IETF stream, DOI and Obsoletes metadata
+  language: en
+  accessed: '2026-10-25'
+- url: https://www.rfc-editor.org/info/rfc9846/#section-1.2
+  title: RFC 9846 section 1.2 — relationship to RFC8446 and unchanged TLS1.3 version number
+  language: en
+  accessed: '2026-10-25'
+- url: https://www.rfc-editor.org/info/rfc8446/
+  title: RFC 8446 — Obsoleted by RFC9846 metadata
+  language: en
+  accessed: '2026-10-25'
+last_verified_at: '2026-10-25T00:35:32.250651+00:00'
+last_verified_by: Agent — OpenAI / dot, explicit RFC-document succession evidence review
+record_created_at: '2026-10-25T00:44:17.597709+00:00'
+record_updated_at: '2026-10-25T00:44:17.597709+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_tls_document_succession
+  github_actor: ff6962757
