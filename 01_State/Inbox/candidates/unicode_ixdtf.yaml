@@ -1,0 +1,36 @@
+contract_version: candidate-object-v1
+candidate_id: unicode_ixdtf
+label: ixdtf Rust IXDTF parser — 0.6.7 source package in ICU4X 2.4.0
+publisher: The ICU4X Project Developers / Unicode
+family: system
+kind: library
+external_identifiers:
+- namespace: crates_io
+  value: ixdtf
+locators:
+- url: https://github.com/unicode-org/icu4x/tree/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf
+  role: official
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  merge_authorized: false
+  reasons:
+  - 固定package manifest确认独立版本ixdtf库身份，不把整个ICU4X或2.4.0版本当作本包。
+  - 全量Canonical及候选标识无碰撞，new仅进入review_required，不是独立接纳。
+  - 版本仅0.6.7官方source_snapshot；未核验发布crate归档/registry checksum/yank，403不重试或绕过。
+unknowns:
+- 主体仅为 utils/ixdtf 的独立版本 Rust package，不是整个 ICU4X/ICU/Unicode、组织、TZDB 或完整历法库。官方 icu@2.4.0 标签指向 031d9e89f6a3fd26a14491e090729d46094328fd，package
+  Cargo.toml 标为 0.6.7 与 independent=true；这里只核实该官方源快照，不把 ICU4X 2.4.0 等同于 ixdtf 版本。crates.io API 返回 403，未重试/绕过；没有核验
+  0.6.7 crate 归档、registry checksum、yank 状态或发布包与源码相等，不声称 latest/已测试发行包。Unicode-3.0 仅据固定 workspace manifest 与 LICENSE。
+  源码证据限定新建 UTF-8 IxdtfParser::from_str(...).parse() 的默认 Some handler，以及调用方显式调用 UtcOffsetRecordOrZ::resolve_rfc_9557()。正面输入子集为有效
+  RFC 式四位年 YYYY-MM-DD、T、HH:MM:SS（秒 00–59）、可选 1–9 位点分小数、Z 或 ±HH:MM；可选一个放在前面的非关键时区注释及一个非关键 u-ca，名称/值和相互一致性由调用方约束。记录返回日期/时间/偏移、时区原始名称或数值偏移、首个历法原始值；未知普通非关键
+  key 被忽略，未知普通关键 key 返回 UnrecognizedCritical。Z 保留为单独枚举，只有显式 helper 才映射为负零偏移，已有正/负数值偏移原样返回；不是自动计算瞬时值或保留原字符串的序列化保证。
+  parser 同时接受日期单独、基本/扩展年、缺偏移和其他 Temporal 形式，成功不等于严格 RFC 验证。时区 critical 标志只捕获不处理，时区名无需在数据库存在，offset/zone 一致性留给应用；历法不查询
+  CLDR/转换，u-ca 结果不保留其 critical 标志。不声明处理关键时区或关键历法的应用语义。重复历法全部排除在正面范围外：代码与首项比较，两个值不同且首项/当前项关键时会报错，但相同重复关键项不会更新首项状态，不能推广成任意重复组合的正确关键语义。下划线实验
+  key、全部注册 key、无效输入穷尽验证、其他时间精度/闰秒、自定义 handler、UTF-16、duration、写入、时区/历法解析和规则查询均未纳入。只静态阅读源码与上游测试文本，代表性输入是源路径推演而非 Rust
+  运行；未安装、构建、执行测试或互通、安全、生产适用性、时钟同步/精度、IA 采用验证。 实验下划线key在默认路径并不作RFC§3.2专门拒绝；时区.、..或slash后数字等词法外输入也不能作为严格拒绝保证。代码消费超过9位的小数，最多累计前18位且位数饱和255；正面≤9是本次证据范围，不是声称其他精度被拒绝。raw
+  from_utf8和UTF-16均不在此from_str子集中。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null

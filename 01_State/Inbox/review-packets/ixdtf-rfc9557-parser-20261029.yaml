@@ -1,0 +1,634 @@
+packet_id: ixdtf_rfc9557_parser_20261029
+status: pending_independent_semantic_review
+baseline_commit: 1896e3fc083ff693a3f9bf51fb75ec9485e12b74
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 一个新unicode_ixdtf独立Rust库候选；版本仅官方0.6.7源快照，非核验的发布crate。
+- 仅一个date_time_representation能力字段、一个有界implements→既有rfc9557及一个measurement编辑导航成员；不修改RFC/pyRFC3339。
+- 独立审阅是否静态source/细化输入与可见summary足以支持限定implementation；工具检查不能代替此判断。
+work_item_preflight:
+  main_confirmed: 1896e3fc083ff693a3f9bf51fb75ec9485e12b74
+  prior_delivered_pr: 556
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Parent-authorized ordinary instance/relation continuation after verified PR556 delivery.
+  current_counts:
+    objects: 247
+    relations: 188
+    graph_edges: 274
+    candidates: 238
+    acceptance_events: 125
+  proposed_counts_only:
+    objects: 248
+    relations: 189
+    graph_edges: 276
+    candidates: 239
+    acceptance_events: 126
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T09:48:40.903709+00:00'
+  method: Read-only fixed-source review plus complete official RFC plaintext; all15 captured source files rehashed,
+    source paths and test text read. Eight representative inputs are author control-flow traces, not Rust executions.
+    No source code/examples/tests/build or registry retry.
+  captures:
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 14804
+    num_redirects: 0
+    filename: utils__ixdtf__src__lib.rs
+    path: utils/ixdtf/src/lib.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 400fe970ce46821792fe3c6d7a384521eaab36623ac63e3b3835143f12713c9b
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__lib.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 18655
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__mod.rs
+    path: utils/ixdtf/src/parsers/mod.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 1f6409cb37ae0d0727e6b790632343cf3603f182027423af89adc7a219bb5cff
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__parsers__mod.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 11999
+    num_redirects: 0
+    filename: utils__ixdtf__src__records.rs
+    path: utils/ixdtf/src/records.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 6160ac467988055c7b433659e97922bcc33255cba09f8a4fb6f6c78b88743ef2
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__records.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/Cargo.toml
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 963
+    num_redirects: 0
+    filename: utils__ixdtf__Cargo.toml
+    path: utils/ixdtf/Cargo.toml
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/Cargo.toml
+    exit_code: 0
+    stderr: ''
+    sha256: a5a5b5a1fe2fae1d459faa6f7f54d0974b0f033c9ad7f95fe503429e5934da19
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__Cargo.toml
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/Cargo.toml
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 17854
+    num_redirects: 0
+    filename: Cargo.toml
+    path: Cargo.toml
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/Cargo.toml
+    exit_code: 0
+    stderr: ''
+    sha256: b2c0dfcd17bf4cf69696b7621a549d9386da5e26c983473b4a3cbb39b515dd62
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/Cargo.toml
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/LICENSE
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 2195
+    num_redirects: 0
+    filename: LICENSE
+    path: LICENSE
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/LICENSE
+    exit_code: 0
+    stderr: ''
+    sha256: f367c1b8e1aa262435251e442901da4607b4650e0e63a026f5044473ecfb90f2
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/LICENSE
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 5652
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__annotations.rs
+    path: utils/ixdtf/src/parsers/annotations.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs
+    exit_code: 0
+    stderr: ''
+    sha256: a9d57fccf57568feb4665c3ef0a93efa1fa8a80958f851f6cb9f7972af9e5c96
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__parsers__annotations.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 10397
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__datetime.rs
+    path: utils/ixdtf/src/parsers/datetime.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 130ce137f095676d182010bf32fccb5272f2aae97b467e7df2085d66ac7750b7
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__parsers__datetime.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 7955
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__timezone.rs
+    path: utils/ixdtf/src/parsers/timezone.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 0aa1826d6eac894e2b853439287ae1b14fa9623e32b08243534eab5429a173ad
+    local_path: /workspace/shared/ia-next-gap-assessment-20261029/utils__ixdtf__src__parsers__timezone.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 4440
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__grammar.rs
+    path: utils/ixdtf/src/parsers/grammar.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 2dd4237e84cf2c7e38082e61baa3c8bcb646bb06bf2b4be9098b61ea58ed70a6
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__parsers__grammar.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 5863
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__time.rs
+    path: utils/ixdtf/src/parsers/time.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 1b76b6a035f7c5f7a8077eecc6d0baef606b354dcd67485ca14b2ee2d201f2d8
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__parsers__time.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 2767
+    num_redirects: 0
+    filename: utils__ixdtf__src__encoding.rs
+    path: utils/ixdtf/src/encoding.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 761bf6a55ae6753b24bceab2172857046daf63c60d370c31e16a37a1a8769487
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__encoding.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 3955
+    num_redirects: 0
+    filename: utils__ixdtf__src__core.rs
+    path: utils/ixdtf/src/core.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 2deebb13ee8da6629711489ca1f3ecef14cf20028dcfa5d9609e05dbe09eba5c
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__core.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/error.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 6556
+    num_redirects: 0
+    filename: utils__ixdtf__src__error.rs
+    path: utils/ixdtf/src/error.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/error.rs
+    exit_code: 0
+    stderr: ''
+    sha256: a152f125c19b6e770099eec2abd03766a5519c1f573ed88f36521e72f6f7110e
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__error.rs
+  - url_effective: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs
+    http_code: 200
+    content_type: text/plain; charset=utf-8
+    size_download: 46196
+    num_redirects: 0
+    filename: utils__ixdtf__src__parsers__tests.rs
+    path: utils/ixdtf/src/parsers/tests.rs
+    requested_url: https://raw.githubusercontent.com/unicode-org/icu4x/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs
+    exit_code: 0
+    stderr: ''
+    sha256: 4e4a79a7051b55a909df5becb63f909a5df2a4754a76f8bdde5669b2b4b3d0af
+    local_path: /workspace/shared/ia-ixdtf-helper-research-20261029/utils__ixdtf__src__parsers__tests.rs
+  - requested_url: https://www.rfc-editor.org/rfc/rfc9557.txt
+    final_url: https://www.rfc-editor.org/rfc/rfc9557.txt
+    http_status: 200
+    started_at: '2026-10-29T09:37:27.542531+00:00'
+    completed_at: '2026-10-29T09:37:31.268526+00:00'
+    bytes: 39113
+    sha256: 87fa632cd75d13aa441859da635ed6618f66d203fe71a30fa85afedbeb149e85
+    filename: rfc9557.txt
+    headers:
+      date: Thu, 29 Oct 2026 09:37:31 GMT
+      content-type: text/plain;charset=utf-8
+      access-control-allow-origin: '*'
+      cache-control: public, max-age=86400
+      etag: W/"a3062eb5373e871bf06130d565433100"
+      link: <https://www.rfc-editor.org/info/rfc9557/>; rel="canonical"
+      cf-r2-served: '1'
+      set-cookie: __cf_bm=G29g_LdinBmjV.uZ8i.OlLQwlLoGYxDmOvvv7ZQUoYs-1793266651.1456432-1.0.1.1-kb_44QXOo5hZh5t00n6SCWk83P65IFCGz0T20HzGetY45FVYlE5hB1Br2PKPzqV7SnelA1qG6LbINJZZa_VjkJvQEzRm.1Pfqt3pwNACVXZuhFCh6p.JuGuVt.m5wXC.;
+        HttpOnly; SameSite=None; Secure; Path=/; Domain=rfc-editor.org; Expires=Thu, 29 Oct 2026 10:07:31 GMT
+      server: envoy
+      cf-ray: a52133b9aa2ee15b-ORD
+      alt-svc: h3=":443"; ma=86400
+      x-envoy-upstream-service-time: '104'
+      connection: close
+      transfer-encoding: chunked
+    method: urllib GET official complete plaintext; no scripts/source code executed
+  source_manifest:
+    path: /workspace/shared/ia-next-gap-assessment-20261029/source-manifest.json
+    bytes: 6516
+    sha256: 593f04be7f56c99c745f56a88bf5200501fa3d0c03937a40d52a4a0ef8c6d12c
+  helper_acquisition:
+    path: /workspace/shared/ia-ixdtf-helper-research-20261029/helper-acquisition.json
+    bytes: 3186
+    sha256: 64bca7dbb83b2fe70e5ea073159b5e1bb5f21878574cb954e3625bdd734e4116
+  tests_acquisition:
+    path: /workspace/shared/ia-ixdtf-helper-research-20261029/tests-acquisition.json
+    bytes: 628
+    sha256: 0ddab48bc95a17cb8259c8745351c374f50dfe3508b5eb256e22fde87298df64
+  tag_capture:
+    path: /workspace/shared/ia-next-gap-assessment-20261029/icu4x-2.4.0-tag-ref.json
+    bytes: 392
+    sha256: 947cd681489a53d4709f4afe11729b52e8300b222e377db31968f3472244cb2e
+  rfc_acquisition:
+    path: /workspace/shared/ia-ixdtf-intake-evidence-20261029/rfc9557-acquisition.json
+    bytes: 1365
+    sha256: 527e842f4a7d20d603e453d1095db7cb0c90f1f8fab3b5a06c58a46e3b57695d
+  representative_traces:
+    executed: false
+    kind: static source trace only
+    cases:
+    - input: 2026-10-29T01:02:03.123Z[Europe/London][u-ca=iso8601]
+      expected_by_source: Date2026/10/29,time01:02:03,fraction(value123,digits3),Z variant,zone raw name critical=false,calendar
+        raw iso8601; explicit helper returns negative-zero offset.
+    - input: 2026-10-29T01:02:03+01:00[demo-key=value]
+      expected_by_source: Unknown ordinary elective key ignored, date/time and numeric positive offset retained.
+    - input: 2026-10-29T01:02:03Z[!demo-key=value]
+      expected_by_source: UnrecognizedCritical on default handler; no successful record.
+    - input: '2026-10-29T01:02:03-00:00'
+      expected_by_source: Numeric negative-zero offset retained; helper leaves it unchanged.
+    - input: '2026-10-29T01:02:03+00:00'
+      expected_by_source: Numeric positive-zero offset retained distinctly; helper leaves it unchanged.
+    - input: 2026-10-29T01:02:03Z[u-ca=iso8601][!u-ca=iso8601][u-ca=other]
+      expected_by_source: 'Excluded boundary: first elective iso8601 remains stored; later same critical does not
+        update flag; final differing elective is ignored, not a universal duplicate-critical rejection guarantee.'
+    - input: 2026-10-29T01:02:03Z[_demo=value]
+      expected_by_source: 'Excluded experimental boundary: unknown elective underscore key ignored by default, not
+        RFC3.2 enforcement.'
+    - input: 2026-10-29T01:02:03Z[!Unknown/Zone]
+      expected_by_source: 'Excluded critical-zone semantics: syntactic raw name and critical flag captured without
+        database existence/consistency resolution.'
+  limits:
+  - Initial9 and helper6 researcher captures record HTTP200/finalURL/hash but no per-response UTC; author rehash
+    time is not acquisition time.
+  - RFC acquisition has actual start/endUTC and HTTP200.
+  - No crate archive checksum/yank/source equality or upstream Rust build/runtime testing.
+  - Registry403 not retried/bypassed; docs.rs0.6.6 not evidence for selected source0.6.7.
+identity_boundary:
+  new_independently_versioned_package: true
+  no_alias_merge_split_or_monorepo_identity: true
+  registry_namespace_not_archive_verification: true
+objects:
+- candidate_id: unicode_ixdtf
+  candidate_path: 01_State/Inbox/candidates/unicode_ixdtf.yaml
+  candidate_blob: c7f7f756fdde02a4bc28185501502bf5c158313d
+  baseline_candidate_blob: null
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/unicode_ixdtf.yaml
+  proposed_record:
+    id: unicode_ixdtf
+    type: system
+    kind: library
+    name_zh: ixdtf 扩展时间戳解析库（0.6.7 源快照）
+    name_en: ixdtf extended timestamp parser (0.6.7 source snapshot)
+    description_zh: ICU4X 项目中独立版本的 Rust 解析库；此处为官方 ICU4X 2.4.0 源码中的 0.6.7，限所列 UTF-8 注释解析及显式 Z 偏移助手的静态源码证据，未构建运行，不代表完整
+      RFC 9557 符合性或时区/历法语义处理。
+    description_en: An independently versioned Rust parser in ICU4X; 0.6.7 in the official ICU4X 2.4.0 source tree,
+      bounded to static evidence for the stated UTF-8 annotation parsing and explicit Z-offset helper. Not built
+      or run; not full RFC 9557 conformance or time-zone/calendar semantic processing.
+    version: 0.6.7
+    external_identifiers:
+    - namespace: crates_io
+      value: ixdtf
+    official_url: https://github.com/unicode-org/icu4x/tree/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf
+    versions:
+    - version: 0.6.7
+      status: source_snapshot
+      url: https://github.com/unicode-org/icu4x/tree/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf
+    domains:
+    - time
+    - information_interchange
+    capabilities:
+    - date_time_representation
+    open_source: true
+    license_expression: Unicode-3.0
+    scope_notes_zh: 主体仅为 utils/ixdtf 的独立版本 Rust package，不是整个 ICU4X/ICU/Unicode、组织、TZDB 或完整历法库。官方 icu@2.4.0 标签指向
+      031d9e89f6a3fd26a14491e090729d46094328fd，package Cargo.toml 标为 0.6.7 与 independent=true；这里只核实该官方源快照，不把 ICU4X
+      2.4.0 等同于 ixdtf 版本。crates.io API 返回 403，未重试/绕过；没有核验 0.6.7 crate 归档、registry checksum、yank 状态或发布包与源码相等，不声称
+      latest/已测试发行包。Unicode-3.0 仅据固定 workspace manifest 与 LICENSE。 源码证据限定新建 UTF-8 IxdtfParser::from_str(...).parse()
+      的默认 Some handler，以及调用方显式调用 UtcOffsetRecordOrZ::resolve_rfc_9557()。正面输入子集为有效 RFC 式四位年 YYYY-MM-DD、T、HH:MM:SS（秒
+      00–59）、可选 1–9 位点分小数、Z 或 ±HH:MM；可选一个放在前面的非关键时区注释及一个非关键 u-ca，名称/值和相互一致性由调用方约束。记录返回日期/时间/偏移、时区原始名称或数值偏移、首个历法原始值；未知普通非关键
+      key 被忽略，未知普通关键 key 返回 UnrecognizedCritical。Z 保留为单独枚举，只有显式 helper 才映射为负零偏移，已有正/负数值偏移原样返回；不是自动计算瞬时值或保留原字符串的序列化保证。
+      parser 同时接受日期单独、基本/扩展年、缺偏移和其他 Temporal 形式，成功不等于严格 RFC 验证。时区 critical 标志只捕获不处理，时区名无需在数据库存在，offset/zone 一致性留给应用；历法不查询
+      CLDR/转换，u-ca 结果不保留其 critical 标志。不声明处理关键时区或关键历法的应用语义。重复历法全部排除在正面范围外：代码与首项比较，两个值不同且首项/当前项关键时会报错，但相同重复关键项不会更新首项状态，不能推广成任意重复组合的正确关键语义。下划线实验
+      key、全部注册 key、无效输入穷尽验证、其他时间精度/闰秒、自定义 handler、UTF-16、duration、写入、时区/历法解析和规则查询均未纳入。只静态阅读源码与上游测试文本，代表性输入是源路径推演而非
+      Rust 运行；未安装、构建、执行测试或互通、安全、生产适用性、时钟同步/精度、IA 采用验证。 实验下划线key在默认路径并不作RFC§3.2专门拒绝；时区.、..或slash后数字等词法外输入也不能作为严格拒绝保证。代码消费超过9位的小数，最多累计前18位且位数饱和255；正面≤9是本次证据范围，不是声称其他精度被拒绝。raw
+      from_utf8和UTF-16均不在此from_str子集中。
+    scope_notes_en: 'Only the independently versioned utils/ixdtf Rust package, not the ICU4X/ICU/Unicode project
+      as a whole, an organization, TZDB or full calendar library. Official tag icu@2.4.0 points to 031d9e89f6a3fd26a14491e090729d46094328fd;
+      the package manifest declares 0.6.7 and independent=true. This is the official source snapshot, not a conflation
+      of package and ICU4X versions. The crates.io API returned403 and was not retried or bypassed. No 0.6.7 crate
+      archive, registry checksum, yank status or archive/source equality was verified; no latest/tested-distribution
+      claim. Unicode-3.0 is recorded only from the fixed workspace manifest and LICENSE. Static scope is a fresh
+      UTF-8 IxdtfParser::from_str(...).parse() using its default Some handler, plus explicit caller invocation of
+      UtcOffsetRecordOrZ::resolve_rfc_9557(). Positive input subset: valid RFC-style four-digit YYYY-MM-DD, T, HH:MM:SS
+      with seconds00–59, optional1–9 decimal fractional digits, Z or ±HH:MM; optional one leading elective time-zone
+      annotation and one elective u-ca, with names/values and consistency constrained by the caller. It returns
+      date/time/offset, raw zone name or numeric offset, and the first raw calendar value. Unknown ordinary elective
+      keys are ignored; unknown ordinary critical keys yield UnrecognizedCritical. Z remains a separate variant
+      until the explicit helper maps it to negative-zero offset; numeric offsets are returned unchanged. This is
+      not instant calculation or source-spelling preservation through serialization. The parser additionally accepts
+      date-only/basic/expanded-year/offset-optional and other Temporal forms; success is not strict RFC validation.
+      Time-zone critical flags are captured, not acted on, names need not exist in a database and offset/zone consistency
+      is application work. Calendars are not CLDR-validated or converted; the returned u-ca value loses its critical
+      flag. No application semantics for critical zone/calendar tags is claimed. Repeated calendars are entirely
+      outside the positive scope: comparisons use the first item; differing first/current values fail if either
+      item is critical, but an identical later critical item does not update the first-item state, so arbitrary
+      duplicate sequences are not certified. Experimental underscore keys, all registered keys, exhaustive invalid-input
+      rejection, other precisions/leap seconds, custom handlers, UTF-16, duration, writing, time-zone/calendar resolution
+      and rule lookup are excluded. Only fixed source and upstream test text were read; representative inputs are
+      source traces, not Rust execution. No installation/build/test execution, interoperation, security, production
+      suitability, synchronization/accuracy or IA adoption claim. Default handling does not specially reject experimental
+      underscore keys under RFC section3.2. Zone forms such as dot/dot-dot or a digit after slash are not strictly
+      rejected. Fraction parsing consumes more than9 digits, accumulating only the first18 with a digit count saturating
+      at255; the positive at-most9 restriction is review scope, not a rejection claim. Raw from_utf8 and UTF-16
+      are outside this from_str subset.'
+    sources:
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/Cargo.toml
+      title: Independent ixdtf package0.6.7 in fixed source tree
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/Cargo.toml#L110-L128
+      title: ICU4X workspace identity and inherited license metadata
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/LICENSE
+      title: Unicode License V3 at fixed source commit
+      language: en
+      accessed: '2026-10-29'
+    - url: https://api.github.com/repos/unicode-org/icu4x/git/ref/tags/icu%402.4.0
+      title: Official ICU4X2.4.0 lightweight tag ref — exact source commit, not crate archive verification
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L18-L24
+      title: ixdtf explicit RFC9557 and Z-update identification
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs#L83-L138
+      title: UTF-8 from_str and parse default Some handler into operative parser
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs#L41-L107
+      title: Date/time/offset and annotation parse path with end-of-input check
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs#L29-L122
+      title: Operative annotation fields, first-calendar comparison and unknown critical rejection
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs#L26-L145
+      title: Time-zone critical flag captured, lexical name parsing without database resolution
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L11-L24
+      title: Returned intermediate fields; calendar value only
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L203-L222
+      title: Explicit resolve_rfc_9557 helper maps Z to negative-zero; numeric offsets unchanged
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs#L95-L193
+      title: Time/fraction helpers; no actual leap-second validation and fractions wider than the positive scope
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs#L7-L34
+      title: Annotation and zone character predicates; not complete semantic validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs#L120-L127
+      title: Cursor end-of-input check
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs#L63-L85
+      title: Utf8 byte access and exact u-ca key check; raw bytes are not an independent UTF8 validator
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L283-L372
+      title: Documented application responsibility and custom-handler critical-treatment boundary
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L265-L325
+      title: Upstream annotation/critical/duplicate tests inspected as source, not executed
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L1097-L1144
+      title: Upstream Z test expects Z variant, not automatic helper conversion; not executed
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-2
+      title: RFC9557 updated Z-offset semantics
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.2
+      title: Experimental underscore keys require controlled-experiment handling; excluded
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.3
+      title: Elective/critical and repeated-key semantics; bounded comparison only
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.4
+      title: Offset/zone consistency is not performed by this parser
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+      title: Annotation syntax, with zone names and excluded dot components
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-5
+      title: u-ca calendar presentation semantics; raw parsing is not calendar resolution
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T09:48:40.903709+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded fixed-source ixdtf and RFC comparison
+relations:
+- proposed_path: 01_State/02_Relations/ixdtf-implementations.yaml
+  proposed_record:
+    id: unicode_ixdtf_implements_rfc9557
+    type: relation
+    name_zh: ixdtf 0.6.7 源快照有界实现 IXDTF 注释解析与显式 Z 偏移助手
+    name_en: ixdtf 0.6.7 source snapshot implements bounded IXDTF annotation parsing and explicit Z-offset helper
+    source: unicode_ixdtf
+    relation: implements
+    target: rfc9557
+    context:
+      version_context:
+        source: ixdtf0.6.7 in official ICU4X2.4.0 source snapshot031d9e89f6a3fd26a14491e090729d46094328fd; published
+          crate archive not verified
+        target: RFC9557, April2024; annotation syntax and bounded default-key handling, explicit Z helper only
+      conditions_zh: 只据固定源码对 RFC 9557 §§2、3.1、3.3、4.1 与 §5 所涉注释字段建立有限实现对应；不是完整规范、所有 critical 义务或严格 grammar 符合性。默认
+        UTF-8 from_str(...).parse()，新建 parser，输入子集与源对象范围一致（四位年/有秒/显式偏移，最多9位小数，至多一个elective时区和一个elective u-ca，无实验key/重复历法）。返回注释原始字段而不证明时区/历法值有效或一致；未知普通elective
+        key忽略，未知普通critical key拒绝。Z需调用方显式resolve_rfc_9557才转负零offset；其他数值offset不变。关键时区/历法应用语义、数据库查询、完整历法处理、无效输入全量拒绝、Temporal扩展、自定义handler、duration/UTF-16/写入均不在该关系中。静态源码对应及测试文本不等于实际运行、完整符合性、互通、安全、部署或IA采用；全部既有RFC对象与日期不改。
+      conditions_en: 'Limited fixed-source implementation correspondence for annotation fields in RFC9557 sections2,3.1,3.3,4.1
+        and5, not the whole specification, every critical-tag obligation or strict grammar conformance. A fresh
+        UTF-8 from_str(...).parse() uses the default handler on the source record''s input subset: four-digit year,
+        seconds, explicit offset, at most9 fractional digits, at most one elective zone and one elective u-ca, no
+        experimental keys or duplicate calendars. Returned raw fields do not prove valid or consistent zone/calendar
+        values. Unknown ordinary elective keys are ignored; unknown ordinary critical keys are rejected. Z requires
+        explicit caller use of resolve_rfc_9557 to become negative-zero offset; other numeric offsets are unchanged.
+        Critical-zone/calendar application semantics, databases, complete calendar processing, exhaustive invalid-input
+        rejection, Temporal extensions, custom handlers, duration/UTF-16/writing are excluded. Static source correspondence
+        and test text are not execution, full conformance, interoperability, security, deployment or IA adoption.
+        Existing RFC records/dates remain unchanged.'
+    evidence:
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L18-L24
+      title: ixdtf explicit RFC9557 and Z-update identification
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs#L83-L138
+      title: UTF-8 from_str and parse default Some handler into operative parser
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs#L41-L107
+      title: Date/time/offset and annotation parse path with end-of-input check
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs#L29-L122
+      title: Operative annotation fields, first-calendar comparison and unknown critical rejection
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs#L26-L145
+      title: Time-zone critical flag captured, lexical name parsing without database resolution
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L11-L24
+      title: Returned intermediate fields; calendar value only
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L203-L222
+      title: Explicit resolve_rfc_9557 helper maps Z to negative-zero; numeric offsets unchanged
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs#L95-L193
+      title: Time/fraction helpers; no actual leap-second validation and fractions wider than the positive scope
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs#L7-L34
+      title: Annotation and zone character predicates; not complete semantic validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs#L120-L127
+      title: Cursor end-of-input check
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs#L63-L85
+      title: Utf8 byte access and exact u-ca key check; raw bytes are not an independent UTF8 validator
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L283-L372
+      title: Documented application responsibility and custom-handler critical-treatment boundary
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L265-L325
+      title: Upstream annotation/critical/duplicate tests inspected as source, not executed
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L1097-L1144
+      title: Upstream Z test expects Z variant, not automatic helper conversion; not executed
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-2
+      title: RFC9557 updated Z-offset semantics
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.2
+      title: Experimental underscore keys require controlled-experiment handling; excluded
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.3
+      title: Elective/critical and repeated-key semantics; bounded comparison only
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.4
+      title: Offset/zone consistency is not performed by this parser
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+      title: Annotation syntax, with zone names and excluded dot components
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.rfc-editor.org/rfc/rfc9557.html#section-5
+      title: u-ca calendar presentation semantics; raw parsing is not calendar resolution
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T09:48:40.903709+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded annotation/Z-helper static evidence executor
+membership_proposals:
+- category_id: measurement
+  ref:
+    surface: canonical
+    id: unicode_ixdtf
+  rationale_zh: 既有测量与时间信息导航内补日期时间表示实现先例；非时钟同步或精度证明。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 50849
+  sha256: 114ed7925b0604758c39b62c50fec2f2ae4013f6dc37f904222ccf4deae9c7ed
+  git_blob: a3fab486e1256e0a2600b0f61a76af9a432789c9
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/01_Objects/rfc9557.yaml
+  bytes: 4589
+  sha256: 89be833a96cff88421d67389608d19bbb3dfda89e9423f31e3567709599f628d
+  git_blob: 6dceb0a33ae5c0da199a2cb07a919148996a7c90
+- path: 01_State/01_Objects/rfc3339.yaml
+  bytes: 1190
+  sha256: b9fe7d7b4cf4ea824655b68fb5c7584ff68ad8df64633a436b7c7d4722701000
+  git_blob: 1924afed24ea71b399c47d4eb144549d46ac901b
+- path: 01_State/01_Objects/python_pyrfc3339.yaml
+  bytes: 8198
+  sha256: 069b1c45a130284e69ddeca84d4676f25421a0e771e55a13d63b7f782aba9509
+  git_blob: a6ca0ee139bacb31c95ac4dda0bf818b43298cd1
+- path: 01_State/Inbox/candidates/avid_dnxhd_dnxhr.yaml
+  bytes: 1446
+  sha256: 5913c125dd149028704254166aec93f626576f59364c64ea8e74a88c323e3aac
+  git_blob: 8f3c78b6ac26e2574d4aecb6b0a7e78a619e19d0
+- path: 01_State/01_Objects/ffmpeg.yaml
+  bytes: 13502
+  sha256: 7d2b4ace109ad02e95e4e20638909544c48d1405bf3559531c827ce1de05a347
+  git_blob: 4825c2a5fa99495b7c4870df095367f36a16f086
+- path: 01_State/02_Relations/dpx-implementations.yaml
+  bytes: 7078
+  sha256: d4aa13ae50259246c1dc6cc3939a5136fa651bce881b0c659ca6ef4471cf2378
+  git_blob: 39000510e2651132840181d7cf3128047bfa2c46
+excluded_scope:
+- No published-crate/archive/checksum/yank/latest or execution claim.
+- No strict/fullRFC/TZDB/CLDR/critical-zone-calendar semantics, experimental keys, repeated calendars, Temporal-only
+  forms, duration/UTF16/writing/synchronization/security/adoption.
+- No identity-risk holds, schema/predicate/renderer/classification/governance/maintenance/audit changes.
+- No actual canonical record/event/nav, freeze or external write at this stage.
+renderer_boundary_zh: implementation renderer不显示scope_notes/完整relationcontext，需独立审阅实际双端页面；新名称显式source snapshot，description显式有界静态、未运行、非完整符合性/时区历法语义，详细条件留Canonical
+  YAML，不修改renderer。
+materialization_boundary_zh: candidate+packet仅提案；独立语义PASS后connector实际freeze→普通fetch；以实际freeze为父物化候选回指、canonical/event/nav；独立结构复核、确切headCI与正常merge后main/Pages/live分别验证。
