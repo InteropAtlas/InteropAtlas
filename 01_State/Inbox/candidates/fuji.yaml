@@ -13,12 +13,14 @@ locators:
 - url: https://github.com/pangaea-data-publisher/fuji/tree/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  merge_authorized: false
+  state: duplicate
+  matched_canonical_ids:
+  - fuji
   reasons:
-  - 官方F-UJI源码项目与托管部署、组织、指标及FAIR论文身份区分；不与PROV-O或其他项目合并。
-  - 当前完整Canonical及candidate标识无碰撞；new进入普通review_required，尚未接纳。
+  - Accepted as canonical fuji by accept-20261029-fuji-fair-fuji. Original new-state candidate 48b01afcd4b247d89e610b3a83200cdcac004e11
+    and ordinary review_required route replay against real frozen ancestor 92284d79fbcfe63f3ebe26fa8c97c7348af3d066;
+    this back-reference prevents duplicate creation and authorizes no identity merge.
+  merge_authorized: false
 unknowns:
 - 主体是官方 F-UJI 软件源码项目，不是 f-uji.net 实际部署、FAIRsFAIR 组织、FAIR 原则论文或指标出版物，也不是 IA 采用/背书。GitHub release v4.0.1（2026-09-24
   发布）与 tag 固定到 7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a，pyproject 版号相符；不主张最新、签名认证、发布包验证、可复现构建或部署可用性。LICENSE/manifest
@@ -41,4 +43,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer / root/review_fuji_fair_packet
