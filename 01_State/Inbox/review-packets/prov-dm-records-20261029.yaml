@@ -1,0 +1,925 @@
+packet_id: prov_dm_records_20261029
+status: pending_independent_semantic_review
+baseline_commit: a033655e6f1bec9fb98f346aa39c2422f96a6233
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 一个独立Python prov3.2.3实现候选，官方固定release/source与wheel比对。
+- 仅一个graph_representation能力字段、一个有界implements→既有w3c_prov_dm、两个既有semantics/metadata编辑导航成员。
+- 独立审阅源/API/九个运行案例是否支持选定记录与JSON交换边界；自测不能代替语义决定。
+work_item_preflight:
+  main_confirmed: a033655e6f1bec9fb98f346aa39c2422f96a6233
+  prior_delivered_pr: 557
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Parent-authorized ordinary continuation after fully verified PR557; no overall Work Item closure.
+  current_counts:
+    objects: 248
+    relations: 189
+    graph_edges: 276
+    candidates: 239
+    acceptance_events: 126
+  proposed_counts_only:
+    objects: 249
+    relations: 190
+    graph_edges: 278
+    candidates: 240
+    acceptance_events: 127
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T10:30:09.891837+00:00'
+  method: Read fixed official conformance/source and W3C target, rehash28 researcher captures; verify wheel published
+    digest/1653 RECORD entries and15 selected source/test byte comparisons. Author separately executed9 bounded
+    self-authored memory-only cases, not upstream suite.
+  capture_manifest:
+    path: /workspace/shared/ia-prov-gap-research-20261029/source-manifest.json
+    bytes: 16660
+    sha256: 324225a2b2d2b82cffa86dee4256b9ad8df23a4ac21443cd6fe9e1f47882909c
+  byte_verification:
+    path: /workspace/shared/ia-prov-intake-evidence-20261029/source-verification.json
+    bytes: 19476
+    sha256: 326c0373b0afc99f6b852a5113bff561ad53ab1ea97527bb659f72f40b72f6ad
+  captures:
+  - path: README.md
+    file: README.md
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/README.md
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/README.md
+    http_status: 200
+    bytes: 2902
+    sha256: 3254b7db9ef84dfe30c1bd1c5d60961ce986d572c499b44b64c91d1c896672a6
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/README.md
+  - path: LICENSE
+    file: LICENSE
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/LICENSE
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/LICENSE
+    http_status: 200
+    bytes: 1142
+    sha256: 79ac56d179c43466d82c13420df41dbafb6692e5ccc8aca9d0261f3eb6c49fdd
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/LICENSE
+  - path: pyproject.toml
+    file: pyproject.toml
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/pyproject.toml
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/pyproject.toml
+    http_status: 200
+    bytes: 7860
+    sha256: c82f74ca620f0138a6872635360220a6e7674de48d5e3495cad1dc81c2261b67
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/pyproject.toml
+  - path: docs/explanation/prov-dm.md
+    file: docs__explanation__prov-dm.md
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/explanation/prov-dm.md
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/explanation/prov-dm.md
+    http_status: 200
+    bytes: 12388
+    sha256: 02b7fb30eb4caf682ee92f3053a2e9d6faab0030a32eaaa3418223d008c6aacf
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/docs__explanation__prov-dm.md
+  - path: docs/reference/conformance.md
+    file: docs__reference__conformance.md
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md
+    http_status: 200
+    bytes: 18164
+    sha256: 28c2c048ee6215e078a3979b44c45d5f71956a8e4f72554a520761a954ab3c73
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/docs__reference__conformance.md
+  - path: docs/tutorial/getting-started.md
+    file: docs__tutorial__getting-started.md
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/tutorial/getting-started.md
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/tutorial/getting-started.md
+    http_status: 200
+    bytes: 5719
+    sha256: 0ef2e11aabfb249c8d01e84e35e07d637c92a2f229b149ab2a6d470da346b51c
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/docs__tutorial__getting-started.md
+  - path: src/prov/model/__init__.py
+    file: src__prov__model____init__.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/__init__.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/__init__.py
+    http_status: 200
+    bytes: 3960
+    sha256: c4a6f6994b8207a5507ffb18aa6ba39c03f8b16beb5bbad520b1ca8478fce12f
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__model____init__.py
+  - path: src/prov/model/bundle.py
+    file: src__prov__model__bundle.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py
+    http_status: 200
+    bytes: 84197
+    sha256: a8d23b7c4db39fe85ecb83d6724ebcf36366bae730ca79b2984961756c851508
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__model__bundle.py
+  - path: src/prov/model/namespaces.py
+    file: src__prov__model__namespaces.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/namespaces.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/namespaces.py
+    http_status: 200
+    bytes: 14789
+    sha256: f39838972de406113944150d9c123cc0fafb3ad42c92cbc3db4cde92a8747275
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__model__namespaces.py
+  - path: src/prov/model/records.py
+    file: src__prov__model__records.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py
+    http_status: 200
+    bytes: 73083
+    sha256: 6aa49c9424e19da3bd8871f76a6594f3c4e322f14bec979074f642cac11e8c3f
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__model__records.py
+  - path: src/prov/constants.py
+    file: src__prov__constants.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/constants.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/constants.py
+    http_status: 200
+    bytes: 8351
+    sha256: d309282a451e89678ac8808c72bc5dfc9094f8cb07808abfdfa89d11e5868117
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__constants.py
+  - path: src/prov/identifier.py
+    file: src__prov__identifier.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/identifier.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/identifier.py
+    http_status: 200
+    bytes: 21599
+    sha256: 01f216a0813d2a05302dcb246383606f3da55d990d6c00cd0cbafb975079b9eb
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__identifier.py
+  - path: src/prov/__init__.py
+    file: src__prov____init__.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/__init__.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/__init__.py
+    http_status: 200
+    bytes: 10844
+    sha256: ca5300eff44502d5a0b30d192324f9e9753d07b78dfcf5d906ff56e866779a21
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov____init__.py
+  - path: src/prov/serializers/__init__.py
+    file: src__prov__serializers____init__.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py
+    http_status: 200
+    bytes: 6822
+    sha256: 4ceaf0c2f6a9b0367c259266c4b958cc8f2ca3ff36645d109936a6ec9065b9e1
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__serializers____init__.py
+  - path: src/prov/serializers/provjson.py
+    file: src__prov__serializers__provjson.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py
+    http_status: 200
+    bytes: 44920
+    sha256: 464747e9bd1a48a97cd15ec8c6ceca76d306e09af507d61d710e43c262a863e9
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:06Z'
+    - '2026-10-29T10:10:40Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__serializers__provjson.py
+  - path: src/prov/tests/test_conformance_dm.py
+    file: src__prov__tests__test_conformance_dm.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py
+    http_status: 200
+    bytes: 6566
+    sha256: 1b294d31b373e999c555496b71dd2f52c67eadcef80e962467388b44d77db6c0
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__tests__test_conformance_dm.py
+  - path: src/prov/tests/test_model.py
+    file: src__prov__tests__test_model.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_model.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_model.py
+    http_status: 200
+    bytes: 28932
+    sha256: 01aae09f8a1965238d550f6f0fc11cca8139b02d379fcab7b8602a4c41e86dbb
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__tests__test_model.py
+  - path: src/prov/tests/test_json.py
+    file: src__prov__tests__test_json.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_json.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_json.py
+    http_status: 200
+    bytes: 35240
+    sha256: 71dd54b9810187d5a5d99f5e3c80af591e0322042644b1183bb61a95aeffa564
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__tests__test_json.py
+  - path: src/prov/tests/test_examples.py
+    file: src__prov__tests__test_examples.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_examples.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_examples.py
+    http_status: 200
+    bytes: 1268
+    sha256: 677caa2ff85aed65e89d9c62fde5326d6e64409d7e554eadba138776cd1ba0ef
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__tests__test_examples.py
+  - path: src/prov/tests/examples.py
+    file: src__prov__tests__examples.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/examples.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/examples.py
+    http_status: 200
+    bytes: 20702
+    sha256: 36436f7c7ec3c5fb7225093ec7a3e291dd862bcba509fe7716e4d7b1dfe7289b
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov__tests__examples.py
+  - path: src/prov/_warnings.py
+    file: src__prov___warnings.py
+    url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/_warnings.py
+    final_url: https://raw.githubusercontent.com/trungdong/prov/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/_warnings.py
+    http_status: 200
+    bytes: 4664
+    sha256: 9341184616f62ef6bb2c6eec12d3561fa4e5b05ae030964721fea85476d8a604
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/src__prov___warnings.py
+  - path: null
+    file: w3c-prov-dm-20130430.html
+    url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+    final_url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+    http_status: 200
+    bytes: 271572
+    sha256: 5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/w3c-prov-dm-20130430.html
+  - path: null
+    file: pypi-3.2.3.json
+    url: https://pypi.org/pypi/prov/3.2.3/json
+    final_url: https://pypi.org/pypi/prov/3.2.3/json
+    http_status: 200
+    bytes: 6975
+    sha256: 5009d1bdd8f35a802b22a302601dd0421c946b74ef2a09369a3109a060f26837
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:10:59Z'
+    - '2026-10-29T10:11:32Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/pypi-3.2.3.json
+  - file: latest-release.json
+    url: https://api.github.com/repos/trungdong/prov/releases/latest
+    final_url: https://api.github.com/repos/trungdong/prov/releases/latest
+    http_status: 200
+    bytes: 11310
+    sha256: ae0ef08ad93d0a97344b6b67b6e4d0df58ca3d6f10fe2251b6addd5a5115090e
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:09:13Z'
+    - '2026-10-29T10:09:31Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/latest-release.json
+  - file: pypi.json
+    url: https://pypi.org/pypi/prov/json
+    final_url: https://pypi.org/pypi/prov/json
+    http_status: 200
+    bytes: 53442
+    sha256: 154e9a9b94958459951817da2798c83033161c17ec748cf656267608e50911a6
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:09:13Z'
+    - '2026-10-29T10:09:31Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/pypi.json
+  - file: tag-ref.json
+    url: https://api.github.com/repos/trungdong/prov/git/ref/tags/3.2.3
+    final_url: https://api.github.com/repos/trungdong/prov/git/ref/tags/3.2.3
+    http_status: 200
+    bytes: 331
+    sha256: b8a47238ba2a38f21fc0494783d3684f0a4a643656685bbc4505f8b7a199a705
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:09:31Z'
+    - '2026-10-29T10:09:43Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/tag-ref.json
+  - file: tree.json
+    url: https://api.github.com/repos/trungdong/prov/git/trees/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf?recursive=1
+    final_url: https://api.github.com/repos/trungdong/prov/git/trees/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf?recursive=1
+    http_status: 200
+    bytes: 455142
+    sha256: 4e7a4999a8ee1e93246a724d0c06a4e200c494e157378ac112456ebb6217c6ad
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:09:43Z'
+    - '2026-10-29T10:09:55Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/tree.json
+  - url: https://files.pythonhosted.org/packages/52/77/6d4f0f83de7176cd6fe502834081224617a8ad86023cd42add06d00f4df5/prov-3.2.3-py3-none-any.whl
+    final_url: https://files.pythonhosted.org/packages/52/77/6d4f0f83de7176cd6fe502834081224617a8ad86023cd42add06d00f4df5/prov-3.2.3-py3-none-any.whl
+    http_status: 200
+    bytes: 1014147
+    sha256: bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e
+    file: prov-3.2.3-py3-none-any.whl
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:13:14Z'
+    - '2026-10-29T10:13:30Z'
+    local_path: /workspace/shared/ia-prov-gap-research-20261029/prov-3.2.3-py3-none-any.whl
+  wheel_source_comparison:
+  - path: prov/model/__init__.py
+    same_as_fixed_github: true
+    sha256: c4a6f6994b8207a5507ffb18aa6ba39c03f8b16beb5bbad520b1ca8478fce12f
+  - path: prov/model/bundle.py
+    same_as_fixed_github: true
+    sha256: a8d23b7c4db39fe85ecb83d6724ebcf36366bae730ca79b2984961756c851508
+  - path: prov/model/namespaces.py
+    same_as_fixed_github: true
+    sha256: f39838972de406113944150d9c123cc0fafb3ad42c92cbc3db4cde92a8747275
+  - path: prov/model/records.py
+    same_as_fixed_github: true
+    sha256: 6aa49c9424e19da3bd8871f76a6594f3c4e322f14bec979074f642cac11e8c3f
+  - path: prov/constants.py
+    same_as_fixed_github: true
+    sha256: d309282a451e89678ac8808c72bc5dfc9094f8cb07808abfdfa89d11e5868117
+  - path: prov/identifier.py
+    same_as_fixed_github: true
+    sha256: 01f216a0813d2a05302dcb246383606f3da55d990d6c00cd0cbafb975079b9eb
+  - path: prov/__init__.py
+    same_as_fixed_github: true
+    sha256: ca5300eff44502d5a0b30d192324f9e9753d07b78dfcf5d906ff56e866779a21
+  - path: prov/serializers/__init__.py
+    same_as_fixed_github: true
+    sha256: 4ceaf0c2f6a9b0367c259266c4b958cc8f2ca3ff36645d109936a6ec9065b9e1
+  - path: prov/serializers/provjson.py
+    same_as_fixed_github: true
+    sha256: 464747e9bd1a48a97cd15ec8c6ceca76d306e09af507d61d710e43c262a863e9
+  - path: prov/tests/test_conformance_dm.py
+    same_as_fixed_github: true
+    sha256: 1b294d31b373e999c555496b71dd2f52c67eadcef80e962467388b44d77db6c0
+  - path: prov/tests/test_model.py
+    same_as_fixed_github: true
+    sha256: 01aae09f8a1965238d550f6f0fc11cca8139b02d379fcab7b8602a4c41e86dbb
+  - path: prov/tests/test_json.py
+    same_as_fixed_github: true
+    sha256: 71dd54b9810187d5a5d99f5e3c80af591e0322042644b1183bb61a95aeffa564
+  - path: prov/tests/test_examples.py
+    same_as_fixed_github: true
+    sha256: 677caa2ff85aed65e89d9c62fde5326d6e64409d7e554eadba138776cd1ba0ef
+  - path: prov/tests/examples.py
+    same_as_fixed_github: true
+    sha256: 36436f7c7ec3c5fb7225093ec7a3e291dd862bcba509fe7716e4d7b1dfe7289b
+  - path: prov/_warnings.py
+    same_as_fixed_github: true
+    sha256: 9341184616f62ef6bb2c6eec12d3561fa4e5b05ae030964721fea85476d8a604
+  runtime_evidence:
+    script:
+      path: /workspace/shared/ia-prov-intake-evidence-20261029/prov_memory_smoke.py
+      bytes: 7327
+      sha256: efa9d6a7285ed65a791da431ce0dd2bc0ccf839f394f204723277a3a0b0297ab
+    execution:
+      path: /workspace/shared/ia-prov-intake-evidence-20261029/prov-memory-smoke-execution.json
+      bytes: 395
+      sha256: 44e746f6d50cd023d0e834950eb094f38b5c33e3b511f97758c7367a29720aaf
+    result:
+      path: /workspace/shared/ia-prov-intake-evidence-20261029/prov-memory-smoke-result.json
+      bytes: 10162
+      sha256: 9b4626c5a190ae19e6d503f98a04718a7448b7ca30fe00e3d90700cd76d5f362
+    stdout:
+      path: /workspace/shared/ia-prov-intake-evidence-20261029/prov-memory-smoke.stdout
+      bytes: 10162
+      sha256: 9b4626c5a190ae19e6d503f98a04718a7448b7ca30fe00e3d90700cd76d5f362
+    stderr:
+      path: /workspace/shared/ia-prov-intake-evidence-20261029/prov-memory-smoke.stderr
+      bytes: 0
+      sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    check_results:
+    - name: exact-wheel-import
+      result: PASS
+      details:
+        version: 3.2.3
+        origin: /workspace/shared/ia-prov-gap-research-20261029/prov-3.2.3-py3-none-any.whl/prov/__init__.py
+    - name: entity-activity-agent-and-five-relations
+      result: PASS
+      details:
+        ex:g:
+          prov:entity: ex:out
+          prov:activity: ex:transform
+        ex:u:
+          prov:activity: ex:transform
+          prov:entity: ex:in
+        ex:d:
+          prov:generatedEntity: ex:out
+          prov:usedEntity: ex:in
+          prov:activity: ex:transform
+          prov:generation: ex:g
+          prov:usage: ex:u
+        ex:at:
+          prov:entity: ex:out
+          prov:agent: ex:worker
+        ex:as:
+          prov:activity: ex:transform
+          prov:agent: ex:worker
+    - name: lookup-and-IRI
+      result: PASS
+      details:
+        records: 9
+        entities: 2
+        activities: 1
+        agents: 1
+    - name: explicit-json-dispatch-encode
+      result: PASS
+      details:
+        json_bytes: 878
+        registered_formats:
+        - json
+        - jsonld
+        - provn
+    - name: own-output-memory-roundtrip-selected-values
+      result: PASS
+      details:
+        qname_type: true
+        plain_string: true
+        integer: true
+        boolean: true
+        no_all_datatypes_claim: true
+    - name: independently-authored-json-fixture-decode
+      result: PASS
+      details:
+        records: 9
+        all_five_participant_mappings_preserved: true
+        not_cross_implementation_test: true
+    - name: missing-required-entity-accepted-characterization
+      result: PASS
+      details:
+        accepted: true
+        interpretation: Demonstrates absence of full assertion-time structural validation, not standards-conformant
+          input
+    - name: multiple-prov-value-accepted-characterization
+      result: PASS
+      details:
+        values:
+        - 1
+        - 2
+        interpretation: PROV-DM at-most-one restriction not enforced at assertion time
+    - name: duplicate-json-key-warning-last-value-characterization
+      result: PASS
+      details:
+        warnings:
+        - category: ProvFutureRejectionWarning
+          message: the key 'prov:label' is repeated in a JSON object; the last value is used. prov 3.3.0 will reject
+            this (#532)
+        value: last
+        not_strict_json_guarantee: true
+    environment:
+      python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+      isolated: 1
+      no_site: 1
+      command:
+      - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+      - -I
+      - -S
+      - /workspace/shared/ia-prov-intake-evidence-20261029/prov_memory_smoke.py
+      environment_keys:
+      - PATH
+      - LANG
+    limits:
+    - One self-authored graph and one self-authored JSON fixture plus three permissive-behavior cases, not complete
+      conformance or cross-implementation interoperability.
+    - Optional formats may be imported by ordinary registry initialization but no RDF/XML/PROV-N/JSONLD codec was
+      called; no optional dependencies installed.
+    - No automatic capture, truthfulness, full validation, security, performance or all-datatype/invalid-input guarantee.
+    guard_scope: Python audit guard only; not an OS sandbox/security audit. No network/process/file-write attempts
+      observed in exercised path.
+  limits:
+  - Capture windows are actual researcher tool observations, not instrumented per-request timestamps or filesystem
+    times. Author/reviewer rehash the same captured sources, not independent reacquisition.
+  - Only selected15 source/test files compared with wheel; not a whole-source/reproducible-build or sdist equality
+    claim.1653 RECORD digests verified, not package security.
+  - Nine self-authored cases are actual runtime evidence for exercised operations only, not a full upstream/conformance/interoperability
+    suite.
+  - Other dependency-free serializer modules imported by standard registry; only JSON codec called and no optional
+    dependencies installed.
+  - No PROV-O identity change, full structural/semantic/constraints/truth/security/automatic capture or IA-adoption
+    claim.
+identity_boundary:
+  new_independent_pypi_library: true
+  no_PROV_document_or_service_alias_merge: true
+  two_existing_PROV_O_identities_untouched: true
+objects:
+- candidate_id: python_prov
+  candidate_path: 01_State/Inbox/candidates/python_prov.yaml
+  candidate_blob: 8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78
+  baseline_candidate_blob: null
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/python_prov.yaml
+  proposed_record:
+    id: python_prov
+    type: system
+    kind: library
+    name_zh: prov Python 溯源记录库（3.2.3）
+    name_en: prov Python provenance record library (3.2.3)
+    description_zh: Python 溯源记录库；固定 3.2.3，用 Entity、Activity、Agent 及所列五种关系表达调用方断言，并提供显式 PROV-JSON 内存读写。证据为固定源码与九项有界作者
+      smoke，不是完整 PROV-DM/约束验证、断言真实性、自动采集或跨实现互通认证。
+    description_en: 'Python provenance record library pinned to 3.2.3: Entity, Activity, Agent and five specified
+      relations represent caller assertions, with explicit in-memory PROV-JSON reading/writing. Evidence is fixed
+      source and nine bounded author smoke cases, not full PROV-DM/constraint validation, assertion truth, automatic
+      capture or cross-implementation certification.'
+    version: 3.2.3
+    versions:
+    - version: 3.2.3
+      status: released
+      url: https://pypi.org/project/prov/3.2.3/
+    external_identifiers:
+    - namespace: pypi
+      value: prov
+    official_url: https://pypi.org/project/prov/3.2.3/
+    domains:
+    - provenance
+    - metadata
+    - knowledge_representation
+    capabilities:
+    - graph_representation
+    open_source: true
+    license_expression: MIT
+    scope_notes_zh: 主体是 PyPI prov 的独立 Python 库，不是 W3C PROV-DM/PROV-O 文献、整个 PROV 家族或 ProvStore 服务。官方发布 3.2.3/tag
+      指向 f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf；manifest、__version__ 与固定版 PyPI 元数据一致，MIT 仅据固定 manifest/LICENSE。核验官方
+      wheel prov-3.2.3-py3-none-any.whl（1014147 字节，SHA256 bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e）等于发布
+      digest，1653 条 RECORD digest 与十五份已捕获代码/测试文件的 wheel/source 字节一致。仅此 wheel/文件对照，不推广到 sdist、所有发布文件、其他版本或未来可用性，也不是安全审计。
+      正面范围为调用方提供角色正确的限定名、namespace 与适当属性时，以 ProvDocument/ProvBundle 工厂建立 Entity、Activity、Agent，以及 generation(entity,
+      activity)、usage(activity, entity)、derivation(generatedEntity, usedEntity, activity, generation, usage)、attribution(entity,
+      agent)、association(activity, agent) 记录；保存于文档并按类型或标识查询。额外属性与角色引用是来源断言，不证明现实事件或责任真实。仅显式 format="json" 的 PROV-JSON
+      内存字符串编解码；这是库的交换设施，不另建 JSON 或 PROV-JSON 格式符合性边。Agent 子类型须用实际 QualifiedName 的 prov:type 值，不把普通 prefixed-name
+      字符串自动当作等价 QName；Plan 独立工厂不在范围。 作者于 2026-10-29 用 Python 3.12.14 -I -S 从上述 wheel 直接 import，未安装依赖；九项内存 smoke
+      包含一个九记录图、独立手写 JSON fixture、限定 string/int/bool/QualifiedName 回读以及三个宽松行为 characterization。未执行 upstream 完整测试套件、跨实现互通、时间/所有数据类型与任意输入
+      roundtrip。默认 serializer registry 初始化会导入其他无依赖 codec 模块，但只调用 json codec；未安装或调用 RDF/XML 等可选依赖，未执行网络/写文件/子进程路径，Python
+      audit guard 未观察这些尝试，不冒充 OS 隔离或安全认证。 3.2.3 不在 assertion time 强制完整结构约束：generation(None) 仍生成记录，多个 prov:value
+      接受；不证明完整 PROV-DM 结构/语义或 PROV-CONSTRAINTS、时间先后、推理/unified()、因果有效性、权限或真实性。JSON 重复键发出未来拒绝警告并保留最后值，部分畸形/旧式输入仍接受；无严格
+      parser 或安全保证。正面范围排除非法/缺项输入、完整 datatype/时间语法、nested bundle、Bundle-as-entity、PROV-Dictionary、PROV-O/RDF/XML/JSON-LD/PROV-N、图像渲染、NetworkX、服务托管、自动工作流采集、密码验证与
+      IA 采用。既有 prov_o 与 w3c_prov_o 身份问题不处理也不连边。
+    scope_notes_en: 'The independent PyPI prov Python library, not W3C PROV-DM/PROV-O documents, the whole PROV
+      family or ProvStore. Official release/tag3.2.3 resolves to f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf; manifest,
+      __version__ and fixed-version PyPI metadata agree. MIT is recorded from fixed manifest/LICENSE. The official1014147-byte
+      wheel has SHA256 bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e matching its published digest;1653
+      RECORD digests and fifteen captured source/test files were checked byte-for-byte. This covers that wheel and
+      those files, not sdist/all distributions/other versions/future availability or security. Positive scope uses
+      correctly role-assigned qualified names, namespaces and appropriate attributes supplied by the caller: ProvDocument/ProvBundle
+      factories construct Entity, Activity, Agent, generation(entity,activity), usage(activity,entity), derivation(generatedEntity,usedEntity,activity,generation,usage),
+      attribution(entity,agent) and association(activity,agent). Records are stored in a document and looked up
+      by type or identifier. Extra attributes and participant references are provenance assertions, not proof of
+      real events or responsibility. Only explicit format="json" in-memory PROV-JSON string encoding/decoding is
+      included as a library interchange facility, not another JSON/PROV-JSON conformance edge. Agent subtypes use
+      actual QualifiedName prov:type values; ordinary strings spelling prefixed names are not automatically equivalent
+      QNames. Separate Plan factories are excluded. On2026-10-29 the author directly imported the verified wheel
+      with Python3.12.14 -I -S, without installing dependencies. Nine memory-only smoke cases cover one nine-record
+      graph, an independently authored JSON fixture, selected string/int/bool/QualifiedName roundtrip and three
+      permissive-behavior characterizations. No full upstream suite, cross-implementation test, complete time/datatype
+      coverage or arbitrary-input roundtrip guarantee. Ordinary registry initialization imports other dependency-free
+      codec modules, but only the JSON codec is called; no optional RDF/XML dependency is installed or exercised.
+      The Python audit guard observed no network/file-write/subprocess attempt; it is not OS isolation or security
+      certification. Version3.2.3 does not enforce full assertion-time structure: generation(None) still creates
+      a record and multiple prov:value values are accepted. No full PROV-DM structural/semantic validation, PROV-CONSTRAINTS,
+      chronology, inference/unified(), causal validity, authorization or truth claim. Duplicate JSON keys warn and
+      keep the last value; some malformed/legacy inputs remain accepted. This is not strict-parser or security certification.
+      Invalid/incomplete input, full datatype/time syntax, nested bundles, Bundle-as-entity, PROV-Dictionary, PROV-O/RDF/XML/JSON-LD/PROV-N,
+      graph drawing, NetworkX, hosting, automatic capture, cryptographic verification and IA adoption are excluded.
+      Existing prov_o/w3c_prov_o identity ambiguity is untouched, with no edge to either.'
+    sources:
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/pyproject.toml#L1-L83
+      title: Official prov package identity, MIT metadata and empty unconditional dependencies
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/__init__.py#L1-L14
+      title: Exact package version3.2.3
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/LICENSE
+      title: MIT license at fixed source commit
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pypi.org/pypi/prov/3.2.3/json
+      title: Fixed-version official distribution metadata and SHA256
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/releases/tag/3.2.3
+      title: Official release3.2.3; exact tag commit separately captured
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L1-L24
+      title: Version3.2.3 conformance statement and no full assertion-time structural enforcement
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L26-L71
+      title: Entity/activity/agent and selected relation factories; subtype values not separate factories
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L392-L427
+      title: Document/bundle record storage initialized
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L545-L576
+      title: Type and identifier record lookup
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L877-L921
+      title: Record construction and storage with participant attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L950-L1076
+      title: Entity/activity/generation/usage factory argument directions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1225-L1308
+      title: Agent/attribution/association factory argument directions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1381-L1427
+      title: Derivation generated/used entity and optional activity/generation/usage references
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L1784-L1923
+      title: Selected relation formal attributes and agent class
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L930-L1001
+      title: Attribute and record introspection; not full value validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L2017-L2125
+      title: Explicit format dispatch and in-memory serialization/deserialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py#L95-L174
+      title: Serializer registry imports and explicit format selection
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L74-L166
+      title: PROV-JSON codec; duplicate keys warn and last value wins
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L342-L440
+      title: Record encoding via record type, qualified name and attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L499-L691
+      title: Decoded namespaces and records go through bundle.new_record
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py#L143-L171
+      title: 'Upstream characterization source: multiple prov:value and incomplete mandatory arguments accepted;
+        full upstream suite not executed'
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-entity
+      title: PROV-DM5.1.1 Entity
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Activity
+      title: PROV-DM5.1.2 Activity
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Generation
+      title: PROV-DM5.1.3 generation participant roles and at-least-one condition
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Usage
+      title: PROV-DM5.1.4 usage participant roles and at-least-one condition
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Derivation
+      title: PROV-DM5.2.1 generated/used entity and qualified derivation references
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent
+      title: PROV-DM5.3.1 Agent
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-attribution
+      title: PROV-DM5.3.2 attribution
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Association
+      title: PROV-DM5.3.3 association
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-qualified-name
+      title: PROV-DM5.7.5 qualified names and namespaces
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T10:30:09.891837+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded source/artifact comparison and nine self-authored memory smoke
+      cases
+relations:
+- proposed_path: 01_State/02_Relations/prov-implementations.yaml
+  proposed_record:
+    id: python_prov_implements_prov_dm_records
+    type: relation
+    name_zh: prov 3.2.3 有界实现 PROV-DM 选定溯源记录
+    name_en: prov 3.2.3 implements selected bounded PROV-DM provenance records
+    source: python_prov
+    relation: implements
+    target: w3c_prov_dm
+    context:
+      version_context:
+        source: prov3.2.3 official release/tag f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf; verified PyPI wheel bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e
+        target: W3C PROV-DM Recommendation2013-04-30, sections5.1.1–5.1.4,5.2.1,5.3.1–5.3.3 and selected names/attributes
+          in5.7; existing identity unchanged
+      conditions_zh: 仅对 PROV-DM Entity/Activity/Agent、generation/usage/derivation/attribution/association 的记录构建和正式参与者引用建立实现对应；调用方提供角色正确的已声明限定名与适当属性。支持文档保存/按类型或标识查找，显式
+        PROV-JSON 内存编解码是此库的交换设施，不代表第二个格式规范关系或完整 PROV-DM 符合性。固定源码、hash-verified wheel 和九项作者 smoke 支持所列案例；测试不是独立语义批准或所有输入/数据类型
+        roundtrip 证明。3.2.3 可接纳缺必需参数和多个 prov:value，JSON 重复键 warning 后最后值保留，故不得推为完整结构/约束/时间/因果/权限/真实性验证。排除 unified()/推理、Bundle-as-entity/nested
+        bundle、PROV-Dictionary、所有未审格式和自动采集/安全/互通/IA采用；不处理两个既有 PROV-O 身份，不改旧标准对象及核验日期。
+      conditions_en: Only a representation correspondence for PROV-DM Entity/Activity/Agent and generation/usage/derivation/attribution/association
+        records with formal participant references; callers supply properly role-assigned declared qualified names
+        and appropriate attributes. Document storage/type-or-ID lookup and explicit in-memory PROV-JSON encoding/decoding
+        are library facilities, not a second format-specification edge or full PROV-DM conformance. Fixed source,
+        hash-verified wheel and nine author smoke cases support the listed examples, not independent semantic approval
+        or all-input/datatype roundtrip. Version3.2.3 accepts missing required formal arguments and multiple prov:value
+        values; duplicate JSON keys warn and retain the last value. Therefore no complete structural/constraint/temporal/causal/authorization/truth
+        validation is asserted. unified()/inference, Bundle-as-entity/nested bundles, PROV-Dictionary, other formats,
+        automatic capture, security, cross-implementation interoperation and IA adoption are excluded. Neither existing
+        PROV-O identity is resolved or linked; existing standard records/dates are unchanged.
+    evidence:
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L1-L24
+      title: Version3.2.3 conformance statement and no full assertion-time structural enforcement
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L26-L71
+      title: Entity/activity/agent and selected relation factories; subtype values not separate factories
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L392-L427
+      title: Document/bundle record storage initialized
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L545-L576
+      title: Type and identifier record lookup
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L877-L921
+      title: Record construction and storage with participant attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L950-L1076
+      title: Entity/activity/generation/usage factory argument directions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1225-L1308
+      title: Agent/attribution/association factory argument directions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1381-L1427
+      title: Derivation generated/used entity and optional activity/generation/usage references
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L1784-L1923
+      title: Selected relation formal attributes and agent class
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L930-L1001
+      title: Attribute and record introspection; not full value validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L2017-L2125
+      title: Explicit format dispatch and in-memory serialization/deserialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py#L95-L174
+      title: Serializer registry imports and explicit format selection
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L74-L166
+      title: PROV-JSON codec; duplicate keys warn and last value wins
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L342-L440
+      title: Record encoding via record type, qualified name and attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L499-L691
+      title: Decoded namespaces and records go through bundle.new_record
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py#L143-L171
+      title: 'Upstream characterization source: multiple prov:value and incomplete mandatory arguments accepted;
+        full upstream suite not executed'
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-entity
+      title: PROV-DM5.1.1 Entity
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Activity
+      title: PROV-DM5.1.2 Activity
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Generation
+      title: PROV-DM5.1.3 generation participant roles and at-least-one condition
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Usage
+      title: PROV-DM5.1.4 usage participant roles and at-least-one condition
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Derivation
+      title: PROV-DM5.2.1 generated/used entity and qualified derivation references
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent
+      title: PROV-DM5.3.1 Agent
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-attribution
+      title: PROV-DM5.3.2 attribution
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Association
+      title: PROV-DM5.3.3 association
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-qualified-name
+      title: PROV-DM5.7.5 qualified names and namespaces
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T10:30:09.891837+00:00'
+    last_verified_by: Agent — OpenAI / dot, selected PROV-DM record mapping and bounded JSON path checks
+membership_proposals:
+- category_id: semantics
+  ref:
+    surface: canonical
+    id: python_prov
+  rationale_zh: 既有语义/元数据导航补来源记录构建与交换先例；仅编辑成员，不改分类或维护规则。
+- category_id: metadata
+  ref:
+    surface: canonical
+    id: python_prov
+  rationale_zh: 既有语义/元数据导航补来源记录构建与交换先例；仅编辑成员，不改分类或维护规则。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 51025
+  sha256: d542a1a390b7fdc752fee39b8565dd4d0e3cfbb51aa3e4239142ece6eebd3265
+  git_blob: a37e694f28288fd912594f88353b9c5759acef93
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/01_Objects/w3c-prov-dm.yaml
+  bytes: 1902
+  sha256: 28a00f3f7dde4b301fc08ff9d36c4a3bd435d18521a7d4c71426895036c7e25e
+  git_blob: 7d3a98dbdd0aa213344713b3be51da98b38221b0
+- path: 01_State/01_Objects/prov-o.yaml
+  bytes: 1412
+  sha256: b1a253ba30fb07271f477b3f0a4991d004e3a159a3a9ab354b0ea8af6479f2f2
+  git_blob: 4bc3146d51a4dd294bbb148551be326a17374d6e
+- path: 01_State/01_Objects/w3c-prov-o.yaml
+  bytes: 1842
+  sha256: 63a0453efe7de2e677f6129501e9e21ba524ee47722aa9a6e717063de4a61a1c
+  git_blob: 90ddef6965114f7728c304381c10994e257c8a83
+- path: 01_State/01_Objects/w3c-prov-constraints.yaml
+  bytes: 1789
+  sha256: 886a01d2968a6e3f0c4bf38fbf108c3386d8ea86979483c2c2932517da02bcf8
+  git_blob: 47455b01a1e0187ff8dac8dda1a2f03cf32ba347
+- path: 01_State/01_Objects/graph_representation.yaml
+  bytes: 910
+  sha256: 4758db7b439223fd4f5a5d771728840b0428a45e406f2152260cb21ed397a7fb
+  git_blob: c80682b0431a759905d6918c26e7ece089a13215
+- path: 01_State/01_Objects/unicode_ixdtf.yaml
+  bytes: 13710
+  sha256: 81c6152349ea171902716424662dfaf3e70a0fee550a8fbca0df5fc85c002d30
+  git_blob: f4c7e2037d36fd9dd34391f2219de900c403fd3f
+- path: 01_State/Inbox/candidates/avid_dnxhd_dnxhr.yaml
+  bytes: 1446
+  sha256: 5913c125dd149028704254166aec93f626576f59364c64ea8e74a88c323e3aac
+  git_blob: 8f3c78b6ac26e2574d4aecb6b0a7e78a619e19d0
+excluded_scope:
+- No PROV-O identity resolution/edge, new standard or predicate, full model/constraint validation, automatic capture,
+  truth/security/interoperation/IA adoption.
+- No all-datatype/arbitrary-input roundtrip, other codecs, full upstream suite, sdist or whole-build reproduction
+  claim.
+- No identity-risk holds, schema/renderer/classification/governance/maintenance/audit changes.
+- No actual canonical/event/nav/freeze or external write at this proposal stage.
+renderer_boundary_zh: implementation renderer不显示完整scope_notes/relationcontext；可见名称标明库及3.2.3，可见description标明选定五关系/断言/九项局部smoke/非完整约束或真实性认证。实际三个端点需独立审阅，不改renderer。
+materialization_boundary_zh: candidate+packet仅提案；独立语义PASS后connector真实freeze→普通fetch→以freeze为父物化；独立结构复核、实际headCI、正常merge与main/Pages/live分别验证。
