@@ -11,12 +11,13 @@ locators:
 - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st268_dpx
   reasons:
-  - 保留既有候选 stable ID 与工作级外部标识；此次仅将审阅上下文固定到已取得原始官方 PDF 的 2014 版，不新建版次主体或执行身份合并。
-  - 全量 Canonical 与候选标识预检无碰撞；new 仅进入 review_required，不代表已完成独立语义接纳。
-  - 官方封面明确 ST 268:2014 于 2017-05-22 重编号为 ST 268-1:2014 且内容未变；保留既有 smpte:st.268 标识，不增加别名或等价关系。
+  - Accepted as canonical smpte_st268_dpx by accept-20261029-timecode-dpx-smpte_st268_dpx. Original new-state Candidate
+    c6d332bbe6c9214fa123682ea9177fb9442c01ea and review_required route replay against real frozen ancestor 11b0e4c5462e374f509363dfdd7f033d6a7c9028;
+    back-reference prevents duplicate creation, without identity merge or new edition subject.
   merge_authorized: false
 unknowns:
 - 保留既有 smpte_st268_dpx / smpte:st.268 工作级身份，固定审阅 2014-11-01 批准的 DPX 标准。所读官方 PDF 含 2015-01-15 的 Table 5B 纠正；封面说明
@@ -28,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)

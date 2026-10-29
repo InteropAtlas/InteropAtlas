@@ -11,11 +11,13 @@ locators:
 - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st12_1
   reasons:
-  - 保留既有候选 stable ID 与工作级外部标识；此次仅将审阅上下文固定到已取得原始官方 PDF 的 2014 版，不新建版次主体或执行身份合并。
-  - 全量 Canonical 与候选标识预检无碰撞；new 仅进入 review_required，不代表已完成独立语义接纳。
+  - Accepted as canonical smpte_st12_1 by accept-20261029-timecode-dpx-smpte_st12_1. Original new-state Candidate
+    a66197a37cb6cc7bc0af70fdd2fe02339886c39d and review_required route replay against real frozen ancestor 11b0e4c5462e374f509363dfdd7f033d6a7c9028;
+    back-reference prevents duplicate creation, without identity merge or new edition subject.
   merge_authorized: false
 unknowns:
 - 保留既有 smpte_st12_1 / smpte:st.12-1 工作级标准身份，审阅上下文固定为 2014-02-20 批准的 ST 12-1:2014，不新建版次主体或声称最新版。§1 定义电视及伴随音频系统的时间地址、二进制组和标志位，以及
@@ -26,4 +28,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)
