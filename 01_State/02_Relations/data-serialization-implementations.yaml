@@ -284,3 +284,97 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot / /root/resume_cbor2_intake
   reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cbor2_semantics
   github_actor: ff6962757
+---
+id: javascript_yaml_implements_yaml_1_2_2
+type: relation
+name_zh: yaml 2.9.1 实现有界 YAML 1.2 文本解析与序列化
+name_en: yaml 2.9.1 implements bounded YAML 1.2 text parsing and serialization
+source: javascript_yaml
+relation: implements
+target: yaml_1.2.2
+context:
+  capabilities:
+  - data_serialization
+  version_context:
+    source: npm yaml 2.9.1 / eemeli/yaml 1440ecd3d1bff41e4ac399f8f6839e810328bd16
+    target: YAML language 1.2, specification revision 1.2.2 (2021-10-01); existing exact target identity
+  conditions_zh: 仅限实际 YAML 1.2 文档上下文中的文本解析/输出，以及支持的 JavaScript 可表示映射、序列与标量子集。修订 1.2.2 定义同一 1.2 语言且无规范性变更；不能仅凭版本文字推断符合性。version:'1.2'
+    是默认值，不覆盖指令或继承的 1.1 流状态。默认 Number 精度、Object 字符串键碰撞、Map 身份/别名碰撞、仅部分标量 === 比较的 uniqueKeys（包括遗漏 NaN 重复键） 和带错误的部分值（即使
+    Document.toString 拒绝输出）限制该关系。所查重复输入在 parse 的 logLevel:'silent' 下以后值为准，调用者须检查错误/警告。intAsBigInt 仅处理整数；schema:'json'
+    是 YAML 的 JSON 兼容 schema，不是 JSON Schema 验证。别名循环、默认 Core 的显式 YAML 1.1 已知标签、自定义回调及可选 merge 不保证核心 JSON 或普遍互通。Document/parse-stringify
+    输出不保证词法无损或通用跨语言往返。固定源码与 47 项有限诊断加单独 3 项键补充不证明完整 1.2.2 符合性、全部 API/浏览器一致性、安全、资源上界、规范化/签名输出或 IA 采用。
+  conditions_en: Only YAML text parsing/emission in actual YAML 1.2 document contexts, with the supported JavaScript-representable
+    subset of mappings, sequences and scalar values. Revision 1.2.2 defines the same 1.2 language without normative
+    changes; version spelling alone is not conformance evidence. version:'1.2' is a default, not an override of
+    directives or inherited 1.1 stream state. Default Number precision, Object string-key collisions, Map identity/alias
+    collisions, partial scalar === uniqueKeys comparison (including missed NaN duplicates), and error-bearing
+    partial values despite Document.toString refusal bound this edge. The checked duplicate parse with logLevel:'silent'
+    returns last-wins data; callers inspect errors/warnings. intAsBigInt addresses integers only; schema:'json'
+    is YAML's JSON-compatible schema, not JSON Schema validation. Alias cycles, explicit known YAML 1.1 tags under
+    default Core, custom callbacks and optional merge are not core JSON or universal interoperability guarantees.
+    Document/parse-stringify output is not lexical losslessness or universal cross-language roundtrip. Fixed-source
+    claims and 47 finite diagnostics plus a separate three-key supplement do not establish full 1.2.2 conformance,
+    all-API/browser parity, safety, resource bounds, canonical/signature output or IA adoption.
+evidence:
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/README.md
+  title: yaml — package identity, YAML 1.1/1.2 support and API layers
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/package.json
+  title: yaml 2.9.1 — package identity and distribution/lifecycle metadata
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/docs/02_parse_stringify.md
+  title: yaml — JavaScript parse/stringify and single-document API
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/docs/03_options.md
+  title: yaml — schema, version, BigInt, keys, known tags and alias options
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/docs/05_content_nodes.md
+  title: yaml — document nodes and unstable trailing-comment association
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/src/public-api.ts
+  title: yaml — parse error clearing at explicit silent log level
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/src/doc/directives.ts
+  title: yaml — explicit version and inherited YAML 1.1 stream state
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/src/nodes/addPairToJSMap.ts
+  title: yaml — Object key coercion and Map conversion
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/src/options.ts
+  title: yaml — option defaults and semantic scope
+  language: en
+  accessed: '2026-10-29'
+- url: https://yaml.org/spec/1.2.2/
+  title: YAML 1.2.2 status — YAML 1.2 language and no normative changes
+  language: en
+  accessed: '2026-10-29'
+- url: https://registry.npmjs.org/yaml/2.9.1
+  title: npm yaml 2.9.1 — release metadata, gitHead and artifact integrity
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/releases/tag/v2.9.1
+  title: Official yaml v2.9.1 release
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/eemeli/yaml/blob/1440ecd3d1bff41e4ac399f8f6839e810328bd16/src/doc/Document.ts
+  title: yaml — toJS partial values and refusal to stringify error-bearing Documents
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T21:30:26.759+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_cmark_delivery/yaml_author; bounded YAML 1.2 implementation
+  evidence, not full conformance
+record_created_at: '2026-10-29T21:55:30.336560+00:00'
+record_updated_at: '2026-10-29T21:55:30.336560+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cmark_delivery
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cmark_delivery/yaml_independent
+  github_actor: ff6962757
