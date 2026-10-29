@@ -18,13 +18,14 @@ locators:
 - url: https://github.com/eemeli/yaml/releases/tag/v2.9.1
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - javascript_yaml
   reasons:
-  - At real baseline ee80bcacec09bdf302517bfda599de4ce8bf8fa8, javascript_yaml and exact normalized github:eemeli/yaml
-    and npm:yaml identifiers match no Canonical or candidate identity. This ordinary review_required route is
-    not global uniqueness, acceptance, merge permission or equivalence to js-yaml/PyYAML/ruamel.yaml/the YAML
-    specification.
+  - Accepted as canonical javascript_yaml by accept-20261029-javascript-yaml-1-2-2-javascript_yaml. Original new-state
+    candidate 86131f41d595ce37ef8a4bf7b5db4a6e545698fa and ordinary review_required route replay against real
+    frozen ancestor 5f4327db3aa6615f82192099bc23e251ce391882; this unique back-reference prevents duplicate creation
+    and authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - npm 的 yaml 包，来自 eemeli/yaml，固定为 2.9.1，使用 JavaScript 值解析和输出 YAML 文本。其 YAML 1.2 支持连接到规范修订 1.2.2，后者定义同一 1.2 语言且没有规范性变更；这是有界实现关系，不是完整符合性声明。version:'1.2'
@@ -95,4 +96,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/resume_cmark_delivery/yaml_author
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cmark_delivery/yaml_independent
