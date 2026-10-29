@@ -1,0 +1,102 @@
+contract_version: candidate-object-v1
+candidate_id: cmark_gfm
+label: cmark-gfm GFM C parser and renderer — 0.29.0.gfm.13
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: github/cmark-gfm
+locators:
+- url: https://github.com/github/cmark-gfm
+  role: official
+- url: https://github.com/github/cmark-gfm/tree/587a12bb54d95ac37241377e6ddc93ea0e45439b
+  role: dated
+- url: https://github.com/github/cmark-gfm/releases/tag/0.29.0.gfm.13
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - At actual B 9f6243e76c67ab092c765d4e44bfde0cf5729986, cmark_gfm and normalized github:github/cmark-gfm match
+    no Canonical or candidate identity. The official fork is a distinct implementation, not core commonmark/cmark,
+    the GFM standard, GitHub production rendering or a release-version object. Ordinary review_required is not
+    acceptance, global uniqueness or permission to merge identities.
+  merge_authorized: false
+unknowns:
+- 官方 github/cmark-gfm 的 C 库与 CLI，固定 0.29.0.gfm.13，通过显式扩展配置解析 GFM 文档并输出 AST、HTML 片段及所选 CommonMark 表示；它不是 core cmark、GFM
+  规范或 GitHub 生产渲染服务。固定 README 与规范测试头连接到 GFM 0.29（2019-04-06），但源码语料与公开规范并不相同。自定义 GCC 静态构建在 --unsafe 下对源码 670 个
+  active 示例逐字匹配；另两个 disabled 任务列表例按缺少 tasklist 的原配置单独运行且不匹配，不计为全规范通过。公开 677 例在五扩展全开时为 651 匹配、26 差异；另行按章节选择扩展的诊断为
+  661 匹配、16 差异，不是推荐解析模式。两配置共有的 16 项包括九处嵌套 strong 结构、一处超大数字实体、两处 XMPP 自动链接、两处原始 HTML 注释，以及两处复选框属性顺序/空元素闭合序列化差异；后两项仍输出
+  checked/unchecked 的 disabled 复选框，不是缺少任务列表功能。全开多出的十项是 tagfilter 与 autolink 各五处作用于核心示例的配置交互。没有规范化 HTML 来抹去差异，配置与重放计数不累加为独立覆盖。CLI
+  须显式 -e table -e strikethrough -e autolink -e tagfilter -e tasklist；测试的默认 CLI、options=0 convenience API 及仅注册扩展路径不生成
+  GFM 表格。API 需向 parser 附加扩展，HTML renderer 还需收到扩展列表；即使已附加，传 NULL 列表仍绕过 tagfilter。Footnotes 是额外 opt-in，不属于这五项；不能断言所有
+  convenience 选项都仅有核心行为。启用删除线时默认接受一或两个波浪号，可选 double-tilde 限制为两个。任务列表只是静态禁用复选框，不提供 GitHub 交互。HTML 默认省略原始 HTML 并清空所查危险
+  URL，--unsafe 放行；tagfilter 只转义九种标签开头，不是 sanitizer，所查 onclick 属性与 javascript URL 仍保留。CLI --safe 被拒绝；API 旧 SAFE
+  位无效，不能撤销 UNSAFE。所查 data:image/png 例外不仅用于图片 src，也用于链接 href。非法 UTF-8 默认可透传，--validate-utf8 替换而非拒绝；NUL 即使未启用也被替换。CommonMark
+  输出可保留原始节点并改变词法标记；六个另行往返观察保持结果 HTML，原字节只在一例保持，不是通用无损。43 项有限记录为一项版本、一项扩展清单与 41 项 CLI/API 观察，另行六例与规范语料不混为总覆盖；不主张完整
+  GFM 符合性、所有 API/输入、浏览器/动态 ABI、上游完整套件、性能、安全、供应链认证或 IA 采用。
+- The official github/cmark-gfm C library and CLI, fixed to 0.29.0.gfm.13, parses configured GFM documents into
+  AST, HTML fragments and selected CommonMark representations. It is distinct from core cmark, the GFM specification
+  and GitHub production rendering. The pinned README and corpus header connect it to GFM 0.29 (2019-04-06), but
+  source and public corpora are not identical. A custom GCC static build with --unsafe exactly matched 670 active
+  source examples; two disabled task-list cases were separately exercised in their original configuration lacking
+  tasklist and did not match, not a whole-spec pass. Of 677 public cases, globally enabling all five extensions
+  gives 651 exact matches and 26 differences; a separate section-selective diagnostic gives 661 matches and 16
+  differences, not a recommended parsing mode. The shared 16 comprise nine nested-strong structures, one oversized
+  numeric entity, two XMPP autolinks, two raw HTML comments and two checkbox attribute-order/void-element serialization
+  differences. The latter still emit checked/unchecked disabled checkboxes, not missing task-list functionality.
+  The extra ten all-five differences are five tagfilter and five autolink interactions with core examples. HTML
+  was not normalized to remove differences; profiles and replays overlap and are not accumulated as independent
+  coverage. The CLI needs explicit -e table -e strikethrough -e autolink -e tagfilter -e tasklist. The tested
+  default CLI, options=0 convenience API and registration-only paths do not produce GFM tables. API parsing requires
+  attachment, and HTML rendering also needs the extension list; passing NULL bypasses tagfilter even after attachment.
+  Footnotes are a separate opt-in, not one of these five; not every convenience-option behavior is core-only.
+  Enabled strikethrough accepts one or two tildes by default, with a double-tilde option. Task markup is static
+  and disabled, not GitHub interaction. HTML defaults omit raw HTML and empty checked dangerous URLs; --unsafe
+  allows them. Tagfilter only escapes the start of nine named tags, is not a sanitizer, and retained the checked
+  onclick attributes and javascript URLs. CLI --safe is rejected; the legacy API SAFE bit has no effect and cannot
+  revoke UNSAFE. The checked data:image/png exception applies to link href as well as image src. Invalid UTF-8
+  can pass through by default; --validate-utf8 replaces rather than rejects it, while NUL is replaced without
+  the flag too. CommonMark output can retain raw nodes and rewrite lexical form. Six separate roundtrips retained
+  resulting HTML but only one retained source bytes, not universal losslessness. The 43 finite records are one
+  version, one extension inventory and 41 CLI/API observations; six roundtrips and specification profiles remain
+  separate. No full GFM conformance, all-API/input, browser/dynamic-ABI, upstream full-suite, performance, security,
+  supply-chain or IA-adoption claim is made.
+- 主体仅 github/cmark-gfm，固定 release 0.29.0.gfm.13，发布于 2023-07-21，tag 核验时指向 587a12bb54d95ac37241377e6ddc93ea0e45439b；不把可移动
+  tag 或 release 当不可变 attestation，也不声称最新。实际 tree 19280c0fd1deb8fd05aaab1002058e845f1dfb60 有 178 条目：162 blobs、16
+  trees、无 gitlinks；官方 codeload 包中 162 个文件均与 Git blob 原字节一致，没有规范化。固定 README 明示开头以外很多内容继承自上游，故不复制 blanket 性能、符合性或
+  wrapper 宣称。规范版本桥接来自明确 GFM 来源与 0.29/2019-04-06 测试头，而不是 0.29.0.gfm.13 名字；公开 HTML 的 677 例与源码 672 例实际不同，按精确 Markdown
+  对齐为 654 个输入/输出对相同、9 个同输入输出不同、14 个无相同源码输入。公开页面是带捕获时间与 SHA256 的观察，不保证 URL 内容永久不变；/spec.txt 与 /spec.json 的 404、connector
+  tags 集合 400 以及本地 helper 正则/计数修正均保留，不是产品缺陷修复。仅 document_representation：所查表格、任务项、删除线、自动链接、层次/AST 和 HTML 片段支持结构化文档表示；不附加新的能力或其他实现边。关系追加到既有
+  CommonMark-family implementation 文件只是物理实例归档，保留既有 cmark 原字节，不改变规范身份或维护机制。CMake 不可用，按固定 CMake 清单用 GCC 14.2 自定义静态构建
+  27 core C + 7 extension C + main.c，共 35 文件；仅生成 config/version/static-export 头，使用已检入 scanner，没有改源、安装、生成器、CMake
+  或完整上游运行器。作者另行构建/重放与研究者结果相符是作者核验，不是独立接纳。不同目录构建可嵌入绝对路径；本地 binary hash 仅绑定本地字节，不证明二进制可复现、官方发行、签名、供应链或跨平台一致性。API
+  helper 是有限直接调用，不是动态 ABI/完整 API 认证；未在浏览器执行产生的 HTML，未操作 GitHub 服务或远程端点。CommonMark/XML 等输出策略不能从默认 HTML 策略外推；所选
+  CommonMark 往返不代表所有扩展、标记或输入无损。COPYING 中源码、组件、文档和测试通知范围不同，省略 license_expression/open_source，不形成统一许可法律或治理结论。
+- 'The subject is only github/cmark-gfm release 0.29.0.gfm.13, published 2023-07-21, with the observed tag resolving
+  to 587a12bb54d95ac37241377e6ddc93ea0e45439b. A movable tag/release is not immutable attestation or a latest-version
+  claim. Actual tree 19280c0fd1deb8fd05aaab1002058e845f1dfb60 has 178 entries: 162 blobs, 16 trees and no gitlinks.
+  All 162 codeload files match raw Git blob bytes without normalization. The pinned README says much of its remainder
+  is inherited upstream text, so blanket performance, conformance and wrapper statements are not transferred.
+  The edition bridge is explicit GFM provenance and the 0.29/2019-04-06 corpus header, not the release spelling.
+  Public HTML has 677 cases versus 672 source cases; exact-Markdown alignment finds 654 matching input/output
+  pairs, nine same-input/different-output cases and 14 with no exact source input. The public page is a timestamped,
+  hashed observation, not an immutable URL guarantee. Retained /spec.txt and /spec.json 404s, connector tags-collection
+  400 and local helper regex/count corrections are not product bug fixes. Only document_representation is proposed:
+  checked tables, tasks, strikethrough, links, hierarchy/AST and HTML fragments substantiate structured-document
+  representation. Appending to the existing CommonMark-family implementation file is ordinary physical storage
+  only, preserving prior cmark bytes without changing specification identity or maintenance. CMake was unavailable;
+  a custom GCC 14.2 static build follows fixed CMake lists: 27 core C files, seven extension C files and main.c,
+  35 total. Only config/version/static-export headers were generated; checked-in scanners were used without source
+  edits, installation, generators, CMake or the upstream full runner. Separate author build/replay agreeing with
+  research is author verification, not independent acceptance. Builds may embed absolute paths; local binary hashes
+  bind those bytes, not binary reproducibility, official release artifacts, signatures, supply-chain assurance
+  or cross-platform parity. The finite API helper is not full API/dynamic-ABI certification; generated HTML was
+  not executed in a browser and no GitHub service/remote endpoint was exercised. Default HTML policy does not
+  automatically govern CommonMark/XML output; selected CommonMark roundtrips do not imply all-extension/source/input
+  losslessness. COPYING scopes source, component, document and test notices differently; license_expression/open_source
+  are omitted rather than inferred into a unified legal/governance conclusion.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_yaml_delivery/gfm_author
+  reviewer: null
