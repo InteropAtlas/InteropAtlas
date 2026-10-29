@@ -13,12 +13,15 @@ locators:
 - url: https://github.com/cloudevents/sdk-kotlin/tree/27b718156fd9410a926e08f087ee67c7ba421c1a
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  merge_authorized: false
+  state: duplicate
+  matched_canonical_ids:
+  - cloudevents_kotlin_sdk
   reasons:
-  - 官方 GitHub 源码 release/tag 与32文件blob支持独立SDK项目身份；不虚构Maven包，不与规范或既有JavaScript SDK合并。
-  - 465934d3完整Canonical与candidate标识无碰撞；new只进入普通review_required，尚未接纳。
+  - Accepted as canonical cloudevents_kotlin_sdk by accept-20261029-cloudevents-kotlin-cloudevents_kotlin_sdk. Original
+    new-state candidate 56b73704a82eb61907542e676d2e03cadfe3886f and ordinary review_required route replay against
+    real frozen ancestor 7e79ce099bf8ac40644be0f09437caf874851d36; this back-reference prevents duplicate creation
+    and authorizes no identity merge.
+  merge_authorized: false
 unknowns:
 - 主体是官方 cloudevents/sdk-kotlin 源码项目及 core/JSON 模块，不是核心规范、Maven 坐标或部署中的服务。GitHub v0.2.0 源码发布/tag 固定到 27b718156fd9410a926e08f087ee67c7ba421c1a；固定
   README 明示跟踪 1.0.2 文本，测试源码明确引用该版 JSON 条款，不仅据 wire specversion="1.0" 推断 patch 版次。README 同时写明 core 尚未发布 Maven Central，故仅记录
@@ -42,4 +45,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer / review_cloudevents_kotlin_packet

@@ -1,0 +1,143 @@
+id: cloudevents_kotlin_sdk_implements_cloudevents_1_0_2
+type: relation
+name_zh: Kotlin SDK 源码发布 0.2.0 有界实现 CloudEvents 1.0.2 事件表示
+name_en: Kotlin SDK source release 0.2.0 bounded CloudEvents 1.0.2 event representation implementation
+source: cloudevents_kotlin_sdk
+relation: implements
+target: cloudevents_1.0.2
+context:
+  version_context:
+    source: GitHub sdk-kotlin source release v0.2.0, commit27b718156fd9410a926e08f087ee67c7ba421c1a; core and JSON
+      source only, no Maven/runtime verification
+    target: CloudEvents1.0.2 core and JSON event-format sections2.2/3/4, official tag commitfc1f6f31f5f011a72183f1bcea20c987cb683ade;
+      v1.0 wire values, not inferred patch certification
+  conditions_zh: 仅有界静态功能对应：调用方提供有效 v1.0 上下文、无重名的合法扩展与所述 payload 表示，使用 core 模型/构建/查询及显式 JSON 单事件/批量内存编解码。核心要求 JSON，批量为显式独立格式入口；不主张完整核心/JSON
+    符合性。JSON decode 调用已实现的 STRICT 检查，builder/encode 不自动验证；扩展核心名冲突可覆盖序列化字段。扩展 decode 只恢复 string/int32/bool，不恢复 URI/Timestamp/Binary
+    的原类型。data/data_base64 与缺省/JSON null/JSON值/文本/Base64 carrier 路径按对象 scope_notes；普通字节按 content type 路由，内部 carrier
+    不作公共工厂，不覆盖任意改 content type 或任意输入往返。仅固定源码及未运行的测试定义与规范比对；缺 settings.gradle.kts 构建输入且不绕过403，无 Maven/构建/运行或跨实现验证。排除
+    v0.3/其他格式、网络绑定/路由/投递、完整RFC/安全/唯一性/真实性/载荷schema/IA采用；旧 JavaScript SDK 版次边界保持。
+  conditions_en: 'Bounded static functional correspondence only: valid caller-supplied v1.0 context, legal non-colliding
+    extensions and the stated payload representations through the core construction/access model and explicit single-event/batch
+    in-memory JSON APIs. Core requires JSON; batch is a distinct explicit format entry point, not full core/JSON
+    certification. JSON decode runs implemented STRICT checks; builder/encode do not auto-validate, and colliding
+    extension names can overwrite serialized core members. Extension decode reconstructs only string/int32/bool,
+    not original URI/Timestamp/Binary types. data/data_base64, absence/JSON null and JSON/text/Base64 carrier routes
+    follow the object''s scope; plain bytes route by content type, internal carriers are not public factories, arbitrary
+    content-type edits/input roundtrips excluded. Fixed source and unexecuted test definitions compared with normative
+    text only. Denied settings.gradle.kts remains missing without403 bypass; no Maven/build/runtime/cross-implementation
+    verification. No v0.3/other formats, networking/routing/delivery, full RFC/security/uniqueness/truth/payload-schema
+    or IA-adoption claim; old JavaScript SDK limits preserved.'
+evidence:
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md#L23-L31
+  title: Fixed source explicitly tracks1.0.2 text; wire1.0 alone is not patch evidence
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEvent.kt#L7-L54
+  title: Separate core context/payload/extension model; construction not conformance validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt#L16-L111
+  title: Builder, DSL and copy paths; no automatic validate call
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/SpecVersion.kt#L17-L25
+  title: v1.0 required/optional fields and wire value
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/AttributeNaming.kt#L13-L35
+  title: Name checker excludes data, not every existing core name
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventAttributeValue.kt#L16-L108
+  title: Typed wrappers and string conversion; URI strings not validated at construction
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventData.kt#L12-L39
+  title: Opaque core bytes with copies; interpretation deferred to format
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt#L23-L97
+  title: Explicit STRICT/LENIENT implemented checks; not exhaustive conformance
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Formats.kt#L47-L298
+  title: Actual helper boundaries, not certified complete RFC grammar
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt#L15-L49
+  title: Explicit single-event and separate batch JSON public APIs and media-type constants
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L29-L74
+  title: Core then extension members; colliding names can overwrite core
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L77-L130
+  title: Internal carrier and plain-byte payload routes; batch encoding
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt#L29-L108
+  title: Object/array decoding and explicit STRICT validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt#L11-L40
+  title: Required/optional string fields and Instant parsing
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt#L19-L89
+  title: Null omitted; only string/int32/bool recovered; reserved incoming core fields
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt#L18-L71
+  title: data/data_base64 exclusion and null/JSON/text/Base64 routing
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt#L10-L14
+  title: Content-type suffix selection, not complete MIME validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt#L8-L77
+  title: Internal data-origin carriers, not public constructors
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/ValidationTest.kt#L8-L33
+  title: Unexecuted1.0.2 and empty-field test definitions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatConformanceTest.kt#L18-L195
+  title: Unexecuted fixed1.0.2 clause fixtures and selected edge-case definitions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#overview
+  title: 1.0.2 core requires JSON format support
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#context-attributes
+  title: 1.0.2 required/optional context and type system
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#extension-context-attributes
+  title: Distinct extension attributes and shared type system
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#22-type-system-mapping
+  title: 1.0.2 JSON primitive/string type mapping and null attributes
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#3-envelope
+  title: 1.0.2 JSON event object and payload serialization/deserialization
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#4-json-batch-format
+  title: Batch is a separate optional format with own media type
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T11:13:34.367079+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded static event-envelope correspondence only
+record_created_at: '2026-10-29T11:22:22.082338+00:00'
+record_updated_at: '2026-10-29T11:22:22.082338+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer / review_cloudevents_kotlin_packet
+  github_actor: ff6962757
