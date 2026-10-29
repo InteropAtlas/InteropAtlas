@@ -1,0 +1,210 @@
+id: python_prov
+type: system
+kind: library
+name_zh: prov Python 溯源记录库（3.2.3）
+name_en: prov Python provenance record library (3.2.3)
+description_zh: Python 溯源记录库；固定 3.2.3，用 Entity、Activity、Agent 及所列五种关系表达调用方断言，并提供显式 PROV-JSON 内存读写。证据为固定源码与九项有界作者
+  smoke，不是完整 PROV-DM/约束验证、断言真实性、自动采集或跨实现互通认证。
+description_en: 'Python provenance record library pinned to 3.2.3: Entity, Activity, Agent and five specified relations
+  represent caller assertions, with explicit in-memory PROV-JSON reading/writing. Evidence is fixed source and nine
+  bounded author smoke cases, not full PROV-DM/constraint validation, assertion truth, automatic capture or cross-implementation
+  certification.'
+version: 3.2.3
+versions:
+- version: 3.2.3
+  status: released
+  url: https://pypi.org/project/prov/3.2.3/
+external_identifiers:
+- namespace: pypi
+  value: prov
+official_url: https://pypi.org/project/prov/3.2.3/
+domains:
+- provenance
+- metadata
+- knowledge_representation
+capabilities:
+- graph_representation
+open_source: true
+license_expression: MIT
+scope_notes_zh: 主体是 PyPI prov 的独立 Python 库，不是 W3C PROV-DM/PROV-O 文献、整个 PROV 家族或 ProvStore 服务。官方发布 3.2.3/tag 指向 f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf；manifest、__version__
+  与固定版 PyPI 元数据一致，MIT 仅据固定 manifest/LICENSE。核验官方 wheel prov-3.2.3-py3-none-any.whl（1014147 字节，SHA256 bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e）等于发布
+  digest，1653 条 RECORD digest 与十五份已捕获代码/测试文件的 wheel/source 字节一致。仅此 wheel/文件对照，不推广到 sdist、所有发布文件、其他版本或未来可用性，也不是安全审计。
+  正面范围为调用方提供角色正确的限定名、namespace 与适当属性时，以 ProvDocument/ProvBundle 工厂建立 Entity、Activity、Agent，以及 generation(entity,
+  activity)、usage(activity, entity)、derivation(generatedEntity, usedEntity, activity, generation, usage)、attribution(entity,
+  agent)、association(activity, agent) 记录；保存于文档并按类型或标识查询。额外属性与角色引用是来源断言，不证明现实事件或责任真实。仅显式 format="json" 的 PROV-JSON
+  内存字符串编解码；这是库的交换设施，不另建 JSON 或 PROV-JSON 格式符合性边。Agent 子类型须用实际 QualifiedName 的 prov:type 值，不把普通 prefixed-name 字符串自动当作等价
+  QName；Plan 独立工厂不在范围。 作者于 2026-10-29 用 Python 3.12.14 -I -S 从上述 wheel 直接 import，未安装依赖；九项内存 smoke 包含一个九记录图、独立手写
+  JSON fixture、限定 string/int/bool/QualifiedName 回读以及三个宽松行为 characterization。未执行 upstream 完整测试套件、跨实现互通、时间/所有数据类型与任意输入
+  roundtrip。默认 serializer registry 初始化会导入其他无依赖 codec 模块，但只调用 json codec；未安装或调用 RDF/XML 等可选依赖，未执行网络/写文件/子进程路径，Python
+  audit guard 未观察这些尝试，不冒充 OS 隔离或安全认证。 3.2.3 不在 assertion time 强制完整结构约束：generation(None) 仍生成记录，多个 prov:value 接受；不证明完整
+  PROV-DM 结构/语义或 PROV-CONSTRAINTS、时间先后、推理/unified()、因果有效性、权限或真实性。JSON 重复键发出未来拒绝警告并保留最后值，部分畸形/旧式输入仍接受；无严格 parser
+  或安全保证。正面范围排除非法/缺项输入、完整 datatype/时间语法、nested bundle、Bundle-as-entity、PROV-Dictionary、PROV-O/RDF/XML/JSON-LD/PROV-N、图像渲染、NetworkX、服务托管、自动工作流采集、密码验证与
+  IA 采用。既有 prov_o 与 w3c_prov_o 身份问题不处理也不连边。
+scope_notes_en: 'The independent PyPI prov Python library, not W3C PROV-DM/PROV-O documents, the whole PROV family
+  or ProvStore. Official release/tag3.2.3 resolves to f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf; manifest, __version__
+  and fixed-version PyPI metadata agree. MIT is recorded from fixed manifest/LICENSE. The official1014147-byte wheel
+  has SHA256 bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e matching its published digest;1653
+  RECORD digests and fifteen captured source/test files were checked byte-for-byte. This covers that wheel and those
+  files, not sdist/all distributions/other versions/future availability or security. Positive scope uses correctly
+  role-assigned qualified names, namespaces and appropriate attributes supplied by the caller: ProvDocument/ProvBundle
+  factories construct Entity, Activity, Agent, generation(entity,activity), usage(activity,entity), derivation(generatedEntity,usedEntity,activity,generation,usage),
+  attribution(entity,agent) and association(activity,agent). Records are stored in a document and looked up by type
+  or identifier. Extra attributes and participant references are provenance assertions, not proof of real events
+  or responsibility. Only explicit format="json" in-memory PROV-JSON string encoding/decoding is included as a library
+  interchange facility, not another JSON/PROV-JSON conformance edge. Agent subtypes use actual QualifiedName prov:type
+  values; ordinary strings spelling prefixed names are not automatically equivalent QNames. Separate Plan factories
+  are excluded. On2026-10-29 the author directly imported the verified wheel with Python3.12.14 -I -S, without installing
+  dependencies. Nine memory-only smoke cases cover one nine-record graph, an independently authored JSON fixture,
+  selected string/int/bool/QualifiedName roundtrip and three permissive-behavior characterizations. No full upstream
+  suite, cross-implementation test, complete time/datatype coverage or arbitrary-input roundtrip guarantee. Ordinary
+  registry initialization imports other dependency-free codec modules, but only the JSON codec is called; no optional
+  RDF/XML dependency is installed or exercised. The Python audit guard observed no network/file-write/subprocess
+  attempt; it is not OS isolation or security certification. Version3.2.3 does not enforce full assertion-time structure:
+  generation(None) still creates a record and multiple prov:value values are accepted. No full PROV-DM structural/semantic
+  validation, PROV-CONSTRAINTS, chronology, inference/unified(), causal validity, authorization or truth claim.
+  Duplicate JSON keys warn and keep the last value; some malformed/legacy inputs remain accepted. This is not strict-parser
+  or security certification. Invalid/incomplete input, full datatype/time syntax, nested bundles, Bundle-as-entity,
+  PROV-Dictionary, PROV-O/RDF/XML/JSON-LD/PROV-N, graph drawing, NetworkX, hosting, automatic capture, cryptographic
+  verification and IA adoption are excluded. Existing prov_o/w3c_prov_o identity ambiguity is untouched, with no
+  edge to either.'
+sources:
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/pyproject.toml#L1-L83
+  title: Official prov package identity, MIT metadata and empty unconditional dependencies
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/__init__.py#L1-L14
+  title: Exact package version3.2.3
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/LICENSE
+  title: MIT license at fixed source commit
+  language: en
+  accessed: '2026-10-29'
+- url: https://pypi.org/pypi/prov/3.2.3/json
+  title: Fixed-version official distribution metadata and SHA256
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/releases/tag/3.2.3
+  title: Official release3.2.3; exact tag commit separately captured
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L1-L24
+  title: Version3.2.3 conformance statement and no full assertion-time structural enforcement
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L26-L71
+  title: Entity/activity/agent and selected relation factories; subtype values not separate factories
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L392-L427
+  title: Document/bundle record storage initialized
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L545-L576
+  title: Type and identifier record lookup
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L877-L921
+  title: Record construction and storage with participant attributes
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L950-L1076
+  title: Entity/activity/generation/usage factory argument directions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1225-L1308
+  title: Agent/attribution/association factory argument directions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1381-L1427
+  title: Derivation generated/used entity and optional activity/generation/usage references
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L1784-L1923
+  title: Selected relation formal attributes and agent class
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L930-L1001
+  title: Attribute and record introspection; not full value validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L2017-L2125
+  title: Explicit format dispatch and in-memory serialization/deserialization
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py#L95-L174
+  title: Serializer registry imports and explicit format selection
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L74-L166
+  title: PROV-JSON codec; duplicate keys warn and last value wins
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L342-L440
+  title: Record encoding via record type, qualified name and attributes
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L499-L691
+  title: Decoded namespaces and records go through bundle.new_record
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py#L143-L171
+  title: 'Upstream characterization source: multiple prov:value and incomplete mandatory arguments accepted; full
+    upstream suite not executed'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-entity
+  title: PROV-DM5.1.1 Entity
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Activity
+  title: PROV-DM5.1.2 Activity
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Generation
+  title: PROV-DM5.1.3 generation participant roles and at-least-one condition
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Usage
+  title: PROV-DM5.1.4 usage participant roles and at-least-one condition
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Derivation
+  title: PROV-DM5.2.1 generated/used entity and qualified derivation references
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent
+  title: PROV-DM5.3.1 Agent
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-attribution
+  title: PROV-DM5.3.2 attribution
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Association
+  title: PROV-DM5.3.3 association
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-qualified-name
+  title: PROV-DM5.7.5 qualified names and namespaces
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T10:30:09.891837+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded source/artifact comparison and nine self-authored memory smoke cases
+record_created_at: '2026-10-29T10:41:16.953962+00:00'
+record_updated_at: '2026-10-29T10:41:16.953962+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / /root/review_python_prov_packet
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_prov
+  acceptance_event_id: accept-20261029-prov-dm-python_prov
+  reviewed_candidate_blob: 8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78
+  reviewed_against_commit: be0d200239f8c7f5330384c5a99ab96fdfae9849
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: be0d200239f8c7f5330384c5a99ab96fdfae9849
+  reviewed_packet_blob: bc1e3b5324fd10de1dcc0b928878f351ffb64a52
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/be0d200239f8c7f5330384c5a99ab96fdfae9849/01_State/Inbox/review-packets/prov-dm-records-20261029.yaml

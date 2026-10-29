@@ -1,0 +1,38 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-prov-dm-python_prov
+candidate_id: python_prov
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_prov
+review:
+  reviewer: Agent — OpenAI / /root/review_python_prov_packet
+  reviewed_at: '2026-10-29T10:34:33.988216Z'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 python_prov，审阅候选 blob 8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78。
+  - 独立语义PASS绑定精确packet bc1e3b5324fd10de1dcc0b928878f351ffb64a52 与新候选 8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78；报告SHA256
+    cdaf00ca1f060136806b5bc428fe07147976cee030eef1f42ad5a3872ccf37f9，Reviewer决定时间2026-10-29T10:34:33.988216Z。报告另有written_at，不能代替真实decision_at。semantic_review_url引用真实冻结且保留pending状态的准备原稿，不把原稿本身当批准；身份/决定记于本事件与交付PR。
+  - 只接纳独立PyPI prov3.2.3库，pypi:prov。官方release/tag固定f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf，manifest及版本一致。官方wheel发布digest相符、1653
+    RECORD digest和15份源/测试文件字节相符；不是sdist、完整源码树/可复现构建或包安全审计。
+  - 一条graph_representation能力字段、一条有界implements至既有w3c_prov_dm、semantics/metadata两个编辑导航成员。现有两个PROV-O身份、标准记录及日期不处理，不添加别名/合并/新谓词。
+  - 仅Entity/Activity/Agent及generation(entity,activity)、usage(activity,entity)、derivation(generatedEntity,usedEntity,activity,generation,usage)、attribution(entity,agent)、association(activity,agent)记录与查询；由调用方提供角色正确的限定名和适当属性。显式PROV-JSON内存读写是库设施，不是另一格式符合性关系。
+  - 作者九项内存smoke实际运行，Python3.12.14 -I -S直接import已验证wheel，未安装依赖。一个九记录图、手写JSONfixture、限定string/int/bool/QualifiedName回读与三个宽松行为case；不是upstream全套、所有输入/数据类型、时间语法或跨实现互通测试。Registry普通初始化导入其他无依赖模块，但只调用JSONcodec。
+  - 缺必需entity、多个prov:value仍接受，JSON重复键warning且最后值保留，证据恰说明无完整结构/PROV-CONSTRAINTS/时间/因果/权限/真实性验证。排除unified()/推理、完整语义/安全、Bundle-as-entity/nested
+    bundles、PROV-Dictionary、其他格式、自动工作流采集和IA采用。
+  - 28研究捕获均HTTP200且作者/Reviewer重新hash同批源字节；获取窗口是研究者工具观测而非逐请求仪表时间或filesystem时间。作者测试的Python audit guard未观察网络/写文件/子进程尝试，不冒充OS隔离或安全认证；Reviewer静态实读源码/脚本/结果，未冒充重跑九case。
+  - 作者134unittest、12custom、20重叠standalone、10docs/Markdown加新对象Markdown通过；126旧事件含116accepted真实冻结回放与10deferred保持，新增候选只使候选总数及review_required各增1。自检不是独立复核。
+  - 可选V1 fixture基线同样3/17失败，P5 1/1通过，30旧链接问题与12兼容警告不增；本地Chromium既有拒绝不重试/绕过。实际PR/main BrowserCI、正常merge与Pages/live后续验证。
+  - 现有renderer省略完整scope_notes和relationcontext；可见库名/3.2.3/选定五关系/调用方断言/九项smoke/非完整约束、真实、采集、互通认证摘要及双端链接均由语义Reviewer实读，不把简化implements导航当完整符合性。
+  - connector真实远端freeze经普通fetch校验精确字节与唯一父基线；物化保留冻结祖先，不压平历史。#498拒绝/#439待Owner/#416暂停与所有旧候选/历史审计保持，不改schema/renderer/治理/维护。最终独立结构复核与适用远端检查另行完成。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/be0d200239f8c7f5330384c5a99ab96fdfae9849/01_State/Inbox/review-packets/prov-dm-records-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/bc1e3b5324fd10de1dcc0b928878f351ffb64a52
+decided_at: '2026-10-29T10:41:16.953962+00:00'
+notes:
+- 一新对象、一有界implements、一能力字段与两个既有编辑导航成员；仅接纳一个候选。
+- 248旧对象、189旧关系、126旧事件、239旧候选及历史覆盖快照保持；完整准备原稿在真实冻结祖先可恢复。
