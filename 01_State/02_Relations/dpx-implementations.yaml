@@ -1,0 +1,105 @@
+id: ffmpeg_implements_smpte_st268_dpx
+type: relation
+name_zh: FFmpeg 9.0.2有界实现DPX 2.0的10-bit RGB method-A软件解码
+name_en: FFmpeg 9.0.2 implements bounded DPX 2.0 10-bit RGB method-A software decoding
+source: ffmpeg
+relation: implements
+target: smpte_st268_dpx
+context:
+  version_context:
+    source: FFmpeg 9.0.2, annotated tag n9.0.2, commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8; native libavcodec
+      dpx software decoder
+    target: SMPTE ST 268-1:2014, same 2015-corrected/2017-renumbered official PDF already accepted; DPX 2.0 subset
+      only
+  conditions_zh: 固定9.0.2原生libavcodec dpx软件解码路径，与ST 268-1:2014所述DPX 2.0头布局和样本打包的有界静态对应，不是上游对2014全文符合性的声明。只限格式有效、未加密、大端SDPX/V2.0、orientation=0、一个unsigned
+    RGB元素(descriptor=50)、10-bit、packing=1(method A)、encoding=0；全局与首元素数据偏移一致且至少2048，行紧排为4×width字节且无额外行/图像padding，电影/电视帧率和电视timecode为未定义值。调用方提供完整文件AVPacket，尺寸及缓冲区通过库约束，组件已启用并选择软件AV_PIX_FMT_GBRP10路径。代码从32位字依次取RGB，写入GBR平面；不承诺颜色解释/变换或其他元数据保真。仅检视固定源码，未编译、运行或测试FFmpeg/FATE、媒体和第三方互通。不是完整/核心符合性验证器：多元素、其他方向/符号/位深/packing、RLE、加密、额外padding、色度/ADX、时间码、Vulkan、序列输入或写入均不纳入。编码器写V1.0，不能沿此证据声称DPX
+    2.0写入。
+  conditions_en: 'Bounded static correspondence of the fixed 9.0.2 native libavcodec dpx software decoder to ST
+    268-1:2014 DPX 2.0 header/sample layout, not an upstream declaration of full 2014 conformance. Only well-formed,
+    unencrypted, big-endian SDPX/V2.0, orientation 0, one unsigned RGB element (descriptor 50), 10-bit, packing
+    1 (method A), encoding 0; equal global/first-element data offsets at least 2048, tightly packed rows of 4*width
+    bytes with no additional line/image padding, and undefined film/TV frame-rate and TV timecode fields. Caller
+    supplies a complete-file AVPacket, dimensions/buffers meet library constraints, the decoder is enabled and software
+    AV_PIX_FMT_GBRP10 is selected. Code extracts RGB from each 32-bit word into GBR planes; color interpretation/transformation
+    and other metadata preservation are not claimed. Fixed-source inspection only: no FFmpeg/FATE build, media execution
+    or third-party interoperation. Not a full/core-conformance validator. Multiple elements, other orientations/signs/depths/packing,
+    RLE, encryption, extra padding, colorimetry/ADX, timecode, Vulkan, sequence input and writing are excluded.
+    The encoder emits V1.0, not evidence for DPX 2.0 writing.'
+evidence:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L300-L367
+  title: Packet, endian/version, dimension and descriptor/depth/packing/encoding parsing; nonzero encoding rejected
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L467-L470
+  title: Descriptor50 selects three RGB components
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L493-L503
+  title: 10-bit requires packing and computes one 32-bit word per RGB pixel
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L624-L644
+  title: Scanline alignment and size checks; permissive fallback is excluded
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L689-L692
+  title: 10-bit descriptor 50 selects AV_PIX_FMT_GBRP10
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L80-L93
+  title: Fixed read10in32 word extraction
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L127-L170
+  title: 10-bit method-A RGB extraction into GBR planes and row advance
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L769-L803
+  title: Image-data offset, software unpack invocation and decoded frame output
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L832-L851
+  title: Actual decoder registration with separate optional Vulkan path
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/Makefile#L344-L345
+  title: Native DPX decoder/encoder component build gates
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpxenc.c#L205-L219
+  title: Excluded writing path sets header V1.0
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L382-L433
+  title: Excluded frame-rate/timecode paths; guard uses i rather than freshly read tc
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=11
+  title: ST 268:2014 printed p10 §§5.1–5.2 — V2.0 and exact field offsets
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=15
+  title: Printed p14 Table 1 — descriptor 50 and note 2 component order
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=16
+  title: Printed p15 Tables 2/3A/3B — orientation 0, depth 10 and method A
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=17
+  title: Printed p16 Table 3C — encoding 0 and scanline word boundary
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=24
+  title: Printed p23 informative Fig C.3 — method A bit-placement corroboration, not separate normative requirement
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T09:07:38.333542+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded fixed-source DPX evidence executor
+record_created_at: '2026-10-29T09:07:38.333542+00:00'
+record_updated_at: '2026-10-29T09:07:38.333542+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_dpx_relation
+  github_actor: ff6962757
