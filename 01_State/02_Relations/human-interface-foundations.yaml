@@ -185,15 +185,15 @@ last_verified_by: Agent — OpenAI / dot / ARIA HTML scoped-use evidence executo
 ---
 id: wai_aria_recommended_with_svg
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T16:35:51.077947+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 与 SVG 2 可访问性语义配合使用
@@ -208,6 +208,57 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, W3C Recommendation 2023-06-06; its SVG2 reference is explicitly dated 2018-10-04
+      Candidate Recommendation
+    target: Existing svg_2 identity, with this relationship evidenced against the fixed SVG 2 Candidate Recommendation
+      2018-10-04; no promotion to Recommendation or object identity/version change
+    reference_boundary: SVG 2 2018 itself cites WAI-ARIA 1.1, 2017-12-14. The source WAI-ARIA 1.2 declares
+      complementarity with SVG2; this is not a claim that SVG 2 2018 normatively cites WAI-ARIA 1.2 or supports
+      every later feature.
+  conditions_zh: 限定为标准层面的 SVG 可访问性语义配合：WAI-ARIA 1.2 明确说明与 SVG2 配合，SVG2 的固定 2018 CR 提供角色、状态和属性的宿主规则。具体 role
+    须依 SVG2 §5.13：可渲染元素可指定 role，非渲染元素上的 role 被忽略；使用列表中首个已识别、非抽象且该元素类型允许的角色，并满足相关可访问名称与必需状态/属性要求。忽略某元素的 role
+    不等于其文字绝不能参与其他元素的名称/描述计算，后者还受 SVG-AAM 规则约束。aria-* 状态/属性虽可出现于 SVG 元素，并非处处有意义，也不保证除进入 DOM 外一定被处理；隐式语义、允许范围和可访问性树纳入条件须按相应规范处理。这不是全面
+    SVG2/WAI-ARIA1.2 特性兼容、自动交互或视觉效果保证，也不证明浏览器/辅助技术实测互通、完整 WCAG 符合性或 IA 已采用。SVG2 保持 Candidate Recommendation；其自身引用的
+    WAI-ARIA1.1 不自动升级为1.2。
+  conditions_en: 'Limited to standards-level SVG accessibility semantics: WAI-ARIA 1.2 explicitly describes
+    complementarity with SVG2, while the fixed SVG 2 2018 CR supplies host rules for roles, states and properties.
+    Particular role use follows SVG2 section 5.13: renderable elements may specify a role, roles on non-rendered
+    elements are ignored, and the assigned role is the first recognized, non-abstract token allowed for that
+    element type, with the relevant accessible-name and required state/property information. Ignoring an element
+    role does not mean its text can never contribute to another element name/description; that computation
+    also follows SVG-AAM. State/property attributes on SVG elements are not always meaningful and may receive
+    no processing beyond DOM inclusion. Implicit semantics, permitted uses and accessibility-tree inclusion
+    remain subject to their specifications. This is not comprehensive SVG2/WAI-ARIA1.2 feature compatibility,
+    automatic interaction or visual-output assurance, tested browser/assistive-technology interoperability,
+    complete WCAG conformance or IA adoption. SVG2 remains a Candidate Recommendation; its own WAI-ARIA1.1
+    reference is not upgraded to 1.2.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: WAI-ARIA 1.2 abstract and SVG2 bibliography entry — complementarity; SVG2 explicitly dated 4 October
+    2018 CR
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/
+  title: SVG 2 fixed 2018-10-04 Candidate Recommendation — scope and work-in-progress status
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/struct.html#RoleAttribute
+  title: SVG 2 §§5.13.2–5.13.4 — allowed non-abstract roles, names, state/property semantics and host restrictions
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/struct.html#DescriptionAndTitleElements
+  title: SVG 2 §5.8 — descriptive text and accessible-name/description boundary, including referenced non-rendered
+    elements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/refs.html#ref-wai-aria
+  title: SVG 2 bibliography — WAI-ARIA 1.1, 14 December 2017, not a historical citation of WAI-ARIA1.2
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T16:35:51.077947+00:00'
+last_verified_by: Agent — OpenAI / dot / ARIA SVG scoped-use evidence executor
 ---
 id: aria_apg_describes_wai_aria_patterns
 record_created_at: "2026-09-01T16:44:53+08:00"
