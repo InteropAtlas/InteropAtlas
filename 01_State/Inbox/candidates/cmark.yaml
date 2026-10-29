@@ -15,16 +15,14 @@ locators:
 - url: https://github.com/commonmark/cmark/releases/tag/0.31.2
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  merge_authorized: false
+  state: duplicate
+  matched_canonical_ids:
+  - cmark
   reasons:
-  - Official commonmark/cmark repository, 0.31.2 release, exact tag commit and matching versioned specification
-    body identify the C library/CLI subject. It is distinct from the CommonMark standard, commonmark.js and cmark-gfm.
-    No normalized canonical external-ID collision or existing matching candidate was found at the exact checked
-    base.
-  - Intake author rechecked exact baseline 06c95c8808658700f7dc524f6d5d0bdc6eb88d99 with current canonical legacy-ID
-    adapter and existing candidates; new routes only to review_required, not acceptance or identity merge.
+  - Accepted as canonical cmark by accept-20261029-cmark-commonmark-cmark. Original new-state candidate 0208f59d4039d61a26f18ca2ea0e485b9ea40e85
+    and ordinary review_required route replay against real frozen ancestor a6cb20481f065a7224a6f1017c2955e0d1277caf;
+    this back-reference prevents duplicate creation and authorizes no identity merge.
+  merge_authorized: false
 unknowns:
 - 官方 cmark C 解析/渲染库及命令行程序，固定 0.31.2，将 CommonMark 文档语法连接到结构化 AST 和 HTML 片段输出。本地自定义静态构建在显式 --unsafe 下逐字节通过公开的 CommonMark
   0.31.2 全部 652 个示例，并通过 35 项有限诊断（1 项 CLI 版本核对与 34 项行为观察）；这不是完整上游套件或任意输入的符合性证明。核心 CommonMark 不包含 GFM 表格、任务列表复选框、删除线或裸
@@ -65,4 +63,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/resume_cbor2_intake/finish_cbor2_author
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cmark_semantics

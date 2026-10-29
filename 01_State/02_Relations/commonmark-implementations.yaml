@@ -1,0 +1,94 @@
+id: cmark_implements_commonmark_0_31_2
+type: relation
+name_zh: cmark 0.31.2 实现有界 CommonMark 核心解析与渲染
+name_en: cmark 0.31.2 implements bounded core CommonMark parsing and rendering
+source: cmark
+relation: implements
+target: commonmark_0_31_2
+context:
+  capabilities:
+  - document_representation
+  version_context:
+    source: cmark 0.31.2, commonmark/cmark eec0eeba6d31189fd828314576494566d539b1e3
+    target: CommonMark specification 0.31.2, dated 2024-01-28; existing exact specification identity
+  conditions_zh: 固定官方 C 参考实现的核心 CommonMark 解析、AST 结构与 HTML 片段/部分 CommonMark 重渲染。自定义静态构建在 --unsafe 下逐字节通过公开的 652
+    个规范示例，加 35 项有限诊断；不等于完整上游套件或任意输入符合性。HTML 默认省略原始 HTML 并过滤部分 URL；--safe 是空操作，不能撤销 --unsafe。此输出策略不是清理器；CommonMark/XML
+    可保留原始节点。非法 UTF-8 默认可透传，显式验证替换而非拒绝；不保证源标记或字节无损。范围不含 GFM 扩展、GitHub 渲染服务、安全/供应链认证、第三方互通或 IA 采用。
+  conditions_en: Core parsing, AST structure, HTML-fragment output and selected CommonMark re-rendering of the fixed
+    official C reference implementation. A custom static build passed 652 published specification examples byte-for-byte
+    with --unsafe plus 35 finite diagnostic checks, not the full upstream suite or all-input conformance. HTML defaults
+    omit raw HTML and filter some URLs; legacy --safe is a no-op and cannot revoke --unsafe. This output policy
+    is not sanitization; CommonMark/XML may retain raw nodes. Invalid UTF-8 can pass through by default, while explicit
+    validation replaces rather than rejects it; markup/byte preservation is not promised. Excludes GFM extensions,
+    GitHub rendering service, security/supply-chain certification, third-party interoperability and IA adoption.
+evidence:
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/README.md
+  title: cmark — official C reference parser, AST and rendering-library identity
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/CMakeLists.txt
+  title: cmark 0.31.2 — fixed project version and C99 build configuration
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/CMakeLists.txt
+  title: cmark — exact library and CLI C source lists
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/test/spec.txt
+  title: cmark — fixed CommonMark 0.31.2 specification and examples
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/cmark.h
+  title: cmark — public AST/rendering API, HTML fragment and option contracts
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/main.c
+  title: cmark — CLI defaults and accumulated options
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/html.c
+  title: cmark — HTML-only raw-HTML and URL omission policy
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/blocks.c
+  title: cmark — optional UTF-8 validation and byte handling
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/commonmark.c
+  title: cmark — structural CommonMark re-rendering, not lexical source preservation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/xml.c
+  title: cmark — XML AST rendering retains escaped raw-node content
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/src/scanners.re
+  title: cmark — selected dangerous-URL scan and image-data exceptions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/blob/eec0eeba6d31189fd828314576494566d539b1e3/COPYING
+  title: cmark — distinct project, derived-component, documentation and test notices
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/commonmark/cmark/releases/tag/0.31.2
+  title: cmark 0.31.2 release — published 2026-02-14
+  language: en
+  accessed: '2026-10-29'
+- url: https://spec.commonmark.org/0.31.2/
+  title: CommonMark 0.31.2 — existing exact specification identity
+  language: en
+  accessed: '2026-10-29'
+- url: https://spec.commonmark.org/0.31.2/spec.json
+  title: CommonMark 0.31.2 — 652 published input/output examples
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T20:18:15.162495+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_cbor2_intake/finish_cbor2_author; bounded core CommonMark
+  implementation, not full upstream/all-input or security certification
+record_created_at: '2026-10-29T20:43:36.058806+00:00'
+record_updated_at: '2026-10-29T20:43:36.058806+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cmark_delivery
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cmark_semantics
+  github_actor: ff6962757
