@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Living Project Checkpoint（持续更新的项目断点）
 Document Created At: 2026-09-02T10:43:23+08:00
-Document Updated At: 2026-09-24T23:59:00+08:00
+Document Updated At: 2026-10-12T04:22:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Executor: Agent — OpenAI / dot
+  Reviewer: pending independent review
   GitHub Actor: ff6962757
 -->
 
@@ -71,22 +71,23 @@ Open Ecosystem & Federation 可以继续作为长期能力概念保留，但 **�
 
 仓库可以存在大量 Open Issues，但 **Open 不等于当前要做**。
 
-当前只使用两个注意力状态：
+当前工作进度使用 Issue Portfolio 的 GitHub Project 原生 `Status`：
 
-- **Focus**：当前真正推进、需要占用注意力的任务；
-- **Inbox**：其余所有仍值得保留、但当前不占用注意力的任务。
+- **Todo**：已保留、尚未进入当前执行；
+- **In Progress**：当前正在推进；
+- **Done**：已完成或已结束。
 
-任务在需要时从 Inbox 提取到 Focus；完成后关闭。Focus 任务也可以在暂时不值得继续投入时退回 Inbox。
+参与时优先续接 `In Progress` 的 Issue / PR；选择 `Todo` 工作前，仍需核对任务范围、前置条件和授权边界。机器不自动决定 Todo 何时进入 In Progress。
 
-Issue 的任务类型直接对应上面的三条运行方向：
+Issue 的 `Work Type` 原生字段直接对应上面的三条运行方向：
 
-- **知识积累**
-- **知识视角与访问建设**
-- **系统运维与自我进化**
+- **Knowledge**：知识积累；
+- **Perspective**：知识视角与访问建设；
+- **Evolution**：系统运维与自我进化。
 
-Waiting 只在任务确实存在等待条件时附加，不形成新的任务空间。
+真实等待原因应可读、可恢复；有明确前置 Issue 时使用 GitHub 原生 Dependency。`Waiting For` 是可选的非依赖等待字段，不形成新的任务空间。
 
-详细规则见 [`GitHub Issue 运行治理`](docs/03_Operation/02_Governance/github-issue-governance.zh-CN.md)。
+详细规则见 [`GitHub Issue 运行治理`](docs/03_Operation/02_Governance/github-issue-governance.zh-CN.md)。历史 Focus / Inbox 注意力状态及其 Labels 已退役；`01_State/Inbox/` 仍是待审知识材料入口，不是任务进度字段。
 
 ## 4. 我可以从哪里参与
 
@@ -97,8 +98,8 @@ Waiting 只在任务确实存在等待条件时附加，不形成新的任务空
 | **改善 Human 阅读、浏览、比较与 Workspace** | 从 [`Human Interface`](docs/02_System/02_Interface/) 理解现有设计，再确认是否存在当前激活 Work Item |
 | **改善机器可读、查询、验证与 Agent 能力** | 从 [`Runtime`](02_Runtime/) 与 [`System`](docs/02_System/) 进入；高影响能力仍遵守 Owner Gate |
 | **研究项目大方向、提出新的能力或路线** | 先形成一个可继续推进的具体任务，再创建 Issue；研究可以发生在任何任务中 |
-| **领取当前任务** | 从 Focus 中进入 |
-| **查看其余待办** | 从 Inbox 中选择；需要时再提取到 Focus |
+| **领取当前任务** | 从 Issue Portfolio 的 `In Progress` Issue / PR 进入 |
+| **查看其余待办** | 从 Issue Portfolio 的 `Todo` 中选择，并核对任务与授权 |
 
 ### 如果我的想法还不是一个任务
 
@@ -110,6 +111,6 @@ Waiting 只在任务确实存在等待条件时附加，不形成新的任务空
 
 ---
 
-**最短参与路径：** `README → PROJECT_STATE → Focus / Inbox Issue → Repository`；Project 负责组织多个事项，不作为第二事实源。
+**最短参与路径：** `README → PROJECT_STATE → Issue Portfolio / Issue / PR → Repository`；Project 负责组织多个事项，不作为第二事实源。
 
 本文件只在项目方向、当前运行边界、稳定参与入口或重大授权边界发生变化时更新；普通任务进度不要求同步修改本文件。
