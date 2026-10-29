@@ -11,12 +11,13 @@ locators:
 - url: https://webstore.ansi.org/standards/scte/ANSISCTE352014
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - scte35
   reasons:
-  - 保留既有 scte35 / scte:scte-35 工作级标准身份；限定2014历史版，未裁定后来35-1/35-2身份、合并或别名。
-  - 当前全量Canonical及其他候选外部标识无碰撞；new只进入review_required，不代表已独立接纳。
-  - 依据可达ANSI版次目录/公开七页preview核实有限身份与范围，完整RFC8216提供精确2014引用与有条件表示规则；完整SCTE正文未取得，须独立Reviewer显式判断有限证据是否足够。
+  - Accepted as canonical scte35 by accept-20261029-scte35-hls-scte35. Original new-state Candidate 419d8663311bdbdb9c5280778ac4ab6ac3e9882d
+    and review_required route replay against real frozen ancestor 1081594acc4cb47909b5fd105ba78a806a59384a; back-reference
+    prevents duplicate creation, without identity merge or new edition subject.
   merge_authorized: false
 unknowns:
 - 保留既有 scte35 / scte:scte-35 工作级身份，限定为 ANSI/SCTE 35 2014；RFC 8216 §11.1 的规范性参考文献明确标为 2014 年 8 月，ANSI 版次目录标记 Historical，不声称最新版或现行推荐。标准对象的身份与范围证据仅为
@@ -30,4 +31,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (/root/review_hls_scte35_evidence)
