@@ -1,6 +1,6 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_st268_dpx
-label: SMPTE ST 268 — File Format for Digital Moving-Picture Exchange (DPX)
+label: 'SMPTE ST 268-1 — File Format for Digital Moving-Picture Exchange (DPX) (review context: 2014)'
 publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
@@ -8,18 +8,25 @@ external_identifiers:
 - namespace: smpte
   value: st.268
 locators:
-- url: https://pub.smpte.org/latest/st268/
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st268_dpx
   reasons:
-  - SMPTE ST 268 defines the DPX (Digital Picture Exchange) file format, the dominant frame-sequence interchange format in film scanning and DI workflows (derived from Kodak Cineon).
-  - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical smpte_st268_dpx by accept-20261029-timecode-dpx-smpte_st268_dpx. Original new-state Candidate
+    c6d332bbe6c9214fa123682ea9177fb9442c01ea and review_required route replay against real frozen ancestor 11b0e4c5462e374f509363dfdd7f033d6a7c9028;
+    back-reference prevents duplicate creation, without identity merge or new edition subject.
   merge_authorized: false
 unknowns:
-- Edition/year of the current ST 268 revision left for review; locator points to the SMPTE latest publication page.
+- 保留既有 smpte_st268_dpx / smpte:st.268 工作级身份，固定审阅 2014-11-01 批准的 DPX 标准。所读官方 PDF 含 2015-01-15 的 Table 5B 纠正；封面说明
+  2017-05-22 将 ST 268:2014 重编号为 ST 268-1:2014 且内容未变，不能把这一说明泛化为所有版次等同。物理第 1 页的 Stable 封页表明仍有效、未弃用或撤销，但并非现行技术推荐、最新版本或不可修订。§1
+  定义 DPX 2.0 栅格图像交换文件，每个文件是一幅图像，可含最多八个图像元素；不定义输入/输出设备或显示器特性。审阅限于身份、范围及非核心电视头字段 58/59 的时间码/用户位表示，不穷尽审计像素打包、色度、ADX
+  或其他字段。未知的非核心字段值按 §4.3 填未定义值，核心读取器无须读取非核心字段；不声称每个 DPX 文件都有有效时间码或携带 LTC/VITC 信号。本批不收入 ST 268-2 扩展，也不把旧版规范引用接到现有不同版次对象。未执行图像解析器、编码器或媒体应用，不证明软件支持、完整符合性、设备认证、互通、部署或
+  IA 采用。版本指定 PDF 的捕获哈希限定此次证据，不保证 latest 路径永久指向相同字节。
+- 来源原始 PDF 已核对哈希并阅读限定章节；不是全文符合性审计或最新版调查，未运行上游媒体工具。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)

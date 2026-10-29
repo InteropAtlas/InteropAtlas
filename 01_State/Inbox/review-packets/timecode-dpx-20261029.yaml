@@ -1,0 +1,26 @@
+packet_id: timecode_dpx_20261029
+status: materialized
+reviewed_packet_commit: 11b0e4c5462e374f509363dfdd7f033d6a7c9028
+reviewed_packet_blob: dace3a1f43f9f12937eb7a5cda8206e1fd6e9ba6
+reviewed_packet_path: 01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+baseline_commit: c20e0096e01d5468714add6f0c4e5959edef01b6
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/timecode-dpx-20261029.yaml
+objects:
+- candidate_id: smpte_st12_1
+  canonical_id: smpte_st12_1
+  acceptance_event_id: accept-20261029-timecode-dpx-smpte_st12_1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/11b0e4c5462e374f509363dfdd7f033d6a7c9028/01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+- candidate_id: smpte_st268_dpx
+  canonical_id: smpte_st268_dpx
+  acceptance_event_id: accept-20261029-timecode-dpx-smpte_st268_dpx
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/11b0e4c5462e374f509363dfdd7f033d6a7c9028/01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+relations:
+- canonical_id: smpte_st268_dpx_uses_smpte_st12_1
+  canonical_path: 01_State/02_Relations/dpx-timecode-representation.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/11b0e4c5462e374f509363dfdd7f033d6a7c9028/01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+notes_zh:
+- 引用式交付回执；完整 proposed fields、来源指纹和边界保留在真实冻结祖先，不复制第二套正式字段。
+- 两个原 Candidate 的 stable ID、外部标识和发现 provenance 保留；固定 2014 版审阅，不把 DPX 重编号扩大为合并/别名/所有版本等同。
+- 一个 DPX 非核心时间码/用户位字段 58/59 的有界 uses；未知值与可不读取例外保留，不等于 LTC/VITC 信号、全文件有效时间码、完整符合性或互通。
+- 两项既有 editing / image_color 编辑导航；其他 Canonical、事件、持有事项、schema、renderer、治理和维护方式不变。
