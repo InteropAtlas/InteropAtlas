@@ -14,13 +14,14 @@ locators:
 - url: https://github.com/github/cmark-gfm/releases/tag/0.29.0.gfm.13
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - cmark_gfm
   reasons:
-  - At actual B 9f6243e76c67ab092c765d4e44bfde0cf5729986, cmark_gfm and normalized github:github/cmark-gfm match
-    no Canonical or candidate identity. The official fork is a distinct implementation, not core commonmark/cmark,
-    the GFM standard, GitHub production rendering or a release-version object. Ordinary review_required is not
-    acceptance, global uniqueness or permission to merge identities.
+  - Accepted as canonical cmark_gfm by accept-20261029-cmark-gfm-0-29-cmark_gfm. Original new-state candidate
+    c86f9e7fe3643e6a6d5ca3e56acb620d2d1e6a73 and ordinary review_required route replay against real frozen ancestor
+    75416f2ebf2ce7d321d964dd6567386a195418e0; this unique back-reference prevents duplicate creation and authorizes
+    no identity merge.
   merge_authorized: false
 unknowns:
 - 官方 github/cmark-gfm 的 C 库与 CLI，固定 0.29.0.gfm.13，通过显式扩展配置解析 GFM 文档并输出 AST、HTML 片段及所选 CommonMark 表示；它不是 core cmark、GFM
@@ -99,4 +100,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/resume_yaml_delivery/gfm_author
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / /root/resume_yaml_delivery/gfm_independent
