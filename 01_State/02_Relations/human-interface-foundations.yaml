@@ -249,15 +249,15 @@ last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge
 ---
 id: act_rules_format_recommended_with_wcag
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T15:30:57.554658+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / ACT-WCAG scoped-use semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: ACT Rules Format 可用于表达针对 WCAG 要求的测试规则
@@ -272,6 +272,49 @@ sources:
     title: ACT Rules Format 1.1
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: ACT Rules Format 1.1, W3C Recommendation 2026-02-05
+    target: WCAG 2.2, W3C Recommendation 2024-12-12; this date is explicitly identified by the source informative
+      WCAG22 reference
+  conditions_zh: 仅在编写针对 WCAG 2.2 要求的人工或自动测试规则时，记录 ACT Rules Format 1.1 与 WCAG 2.2 的配合用途：ACT 提供规则描述、适用性、预期及要求/结果映射结构，WCAG
+    提供被测试的无障碍要求。须区别 Conformance Requirement 与 Secondary 映射。对前者，任一 failed 表示该测试对象未满足所映射要求；全部 passed 或 inapplicable
+    通常仍可能需要进一步测试。只有具体 satisfying test 的全部结果均为 passed，才据该映射判定该测试对象满足对应要求；不能将这点扩大到未测要求或完整页面。Secondary 须按具体映射解释。ACT
+    规则结果不是 WCAG 成功准则自身的 passed/failed 标签，也不是完整 WCAG2.2符合性证明；页面符合性仍须满足 WCAG §5.2 的全部要求，包括完整页面、完整流程等边界。该边不是要求必须使用
+    ACT、完整测试覆盖、工具准确性/互通或 IA 页面符合性/采用声明。源文档将 WCAG22 列为资料性参考，不改成规范性依赖。
+  conditions_en: 'Limited to the existing complementary use when authoring manual or automated test rules for
+    WCAG 2.2 requirements: ACT Rules Format 1.1 structures rule descriptions, applicability, expectations and
+    requirement/outcome mappings; WCAG supplies the accessibility requirements being tested. Conformance Requirement
+    and Secondary mappings must be distinguished. For a Conformance Requirement, any failed outcome means that
+    the mapped requirement is not satisfied for that test subject; all passed or inapplicable outcomes may
+    still need further testing. Only all-passed outcomes of a specific satisfying test establish satisfaction
+    of its mapped requirement for that test subject, not untested requirements or an entire page. Secondary
+    results require their particular mapping. ACT outcomes are not WCAG success-criterion passed/failed labels
+    or proof of complete WCAG 2.2 conformance; page conformance still needs all WCAG section 5.2 requirements,
+    including full-page and complete-process boundaries. This does not require use of ACT or establish complete
+    test coverage, tool accuracy/interoperability, or IA-page conformance/adoption. The source lists WCAG22
+    as an informative reference, not a normative dependency.'
+evidence:
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#scope
+  title: ACT Rules Format 1.1 §2 and informative WCAG22 reference — WCAG-directed rule authoring; target dated
+    12 December 2024
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#accessibility-requirements-mapping
+  title: ACT Rules Format 1.1 §4.4–4.4.1.2 — requirement and outcome mappings, satisfying tests and secondary
+    requirements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#rule-accuracy
+  title: ACT Rules Format 1.1 §5, non-normative — examples do not guarantee error-free implementations
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2024/REC-WCAG22-20241212/#conformance-reqs
+  title: WCAG 2.2 2024-12-12 §5.2 — all five conformance requirements; full pages and complete processes
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T15:30:57.554658+00:00'
+last_verified_by: Agent — OpenAI / dot / ACT WCAG scoped-use evidence executor
 ---
 id: design_tokens_format_provides_token_exchange
 record_created_at: "2026-09-01T16:44:53+08:00"
