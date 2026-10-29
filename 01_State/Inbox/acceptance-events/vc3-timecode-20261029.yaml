@@ -1,0 +1,38 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-vc3-timecode-smpte_vc3
+candidate_id: smpte_vc3
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: smpte_vc3
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_vc3_timecode_packet)
+  reviewed_at: '2026-10-29T08:01:51.444053+00:00'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 smpte_vc3，审阅候选 blob e02e7a9d1bac528894a05ca1b0f1d9884f39c4b4。
+  - 新独立语义 PASS 绑定精确 packet 193269d5eb242e4f271e8e4a7ac4733ea2c607e6 和一个既有候选；固定 ST2019-1:2016 基础版、一个 TCP=1 时的有界 uses→已接纳
+    ST12-1:2014 及一个既有 image_color 导航成员。独立 Reviewer 上下文不同于作者，自检和普通代码评审不能代替。
+  - 独立报告 SHA256 ae70c09b7aaad02b0483776fefc34aa93ba161081056a8eb9ff27053f741ee46；绑定清单 SHA256 ae70c09b7aaad02b0483776fefc34aa93ba161081056a8eb9ff27053f741ee46。reviewed_at
+    使用 Reviewer 实际封存时间；semantic_review_url 指向真实冻结且仍为 pending 的原稿，该原稿本身不是批准，审核身份及结论另在本事件与交付PR中记录。
+  - VC-3 身份固定在2016-05-18批准的ST2019-1:2016；§1规定压缩数据格式和解码过程，不规定编码过程或视频帧率。另有Amendment1:2023，批准2022-09-28，扩展HD-profile
+    Alpha；只核实其存在和边界，不合并到本次固定基础版。
+  - §3明确ST12-1:2014。TCP为Time Code Present而非网络协议；§§7.2.6–7.2.7仅TCP=1要求8字节区使用ST12-1并依Table10布置，偏移0x031–0x038。
+  - 第37页资料性注释把码流内时间码标为deprecated但仍permitted，非标准整体被弃用或功能推荐。VC-3整体不受ST12-1有限帧率集合约束，TCP=0可带外指定时间码。注释所提2015 revision不推断为另一个已核实版次。
+  - 没有全码流必需时间码、完整LTC/VITC信号、运行时强制依赖、完整符合性、UTC同步、认证、性能、互通、部署或IA采用声明。Avid identity_risk候选、产品身份、MXF、BT709/BT2020和其他规范引用不触碰。
+  - 原始官方PDF指纹由作者和Reviewer复核，但使用同批捕获字节而非独立再抓取。base第36/37页各2个Link，研究HANDOFF无批注的说法不准确，manifest与原始PDF为准；未修改批注、执行上游代码或媒体工具、复制标准全文入库。捕获未记录最终URL/HTTP状态，不伪造已核实结果。
+  - 作者134单测、12自定义、20重叠standalone、10Markdown/docs检查通过；123旧事件含113accepted真实冻结回放及10deferred与基线JSON相同。全205旧搜索记录和204无关对象页保持；ST12生成页只增加反向关系，Canonical原字节不变。自检不是独立复核。
+  - 可选V1 fixture保留基线相同3/17失败、P5 1/1通过；30旧链接缺陷与12兼容警告未增加。本地Chromium此前被拒，本片不重试/绕过，不声称本地交互测试通过。
+  - 既有renderer只显示端点/谓词；VC-3 summary/scope保留固定2016、可选TCP=1、deprecated但允许、整体帧率不限及非全符合性限制。目标ST12原字节不改，逆向链接按源对象限定范围解读；不改renderer。独立Reviewer已审阅此静态呈现边界。
+  - 真实远端freeze用普通fetch核对精确字节与父提交；物化保留真实frozen SHA祖先，不重建/压平历史。最终物化仍需独立结构复核、实际headCI与正常merge后main/live验证。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/a404dc5692e94d354091e294dc451600ff0bc09a/01_State/Inbox/review-packets/vc3-timecode-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e02e7a9d1bac528894a05ca1b0f1d9884f39c4b4
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/193269d5eb242e4f271e8e4a7ac4733ea2c607e6
+decided_at: '2026-10-29T08:03:10.212848+00:00'
+notes:
+- 一个对象、一有界关系、一个既有导航成员；本事件仅接纳一个Candidate，不重复接纳。
+- 245旧对象、185旧关系、123旧事件及历史覆盖快照保持原字节；真实冻结祖先保存完整原稿。

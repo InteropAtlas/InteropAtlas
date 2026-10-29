@@ -1,0 +1,22 @@
+packet_id: vc3_timecode_20261029
+status: materialized
+reviewed_packet_commit: a404dc5692e94d354091e294dc451600ff0bc09a
+reviewed_packet_blob: 193269d5eb242e4f271e8e4a7ac4733ea2c607e6
+reviewed_packet_path: 01_State/Inbox/review-packets/vc3-timecode-20261029.yaml
+baseline_commit: 6d4a90fd14313a0f7ef26a53e5aba8f7649da687
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/vc3-timecode-20261029.yaml
+objects:
+- candidate_id: smpte_vc3
+  canonical_id: smpte_vc3
+  acceptance_event_id: accept-20261029-vc3-timecode-smpte_vc3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a404dc5692e94d354091e294dc451600ff0bc09a/01_State/Inbox/review-packets/vc3-timecode-20261029.yaml
+relations:
+- canonical_id: smpte_vc3_uses_smpte_st12_1
+  canonical_path: 01_State/02_Relations/vc3-timecode-representation.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a404dc5692e94d354091e294dc451600ff0bc09a/01_State/Inbox/review-packets/vc3-timecode-20261029.yaml
+notes_zh:
+- 引用式回执；完整proposed fields、来源指纹和条件保存在真实冻结祖先，不复制第二套正式记录。
+- 保留smpte_vc3/smpte:st.2019-1身份与发现provenance；固定2016基础版，已知2023修正不合并，Avid身份风险不处理。
+- 仅TCP=1的可选内嵌时间码uses→ST12-1:2014，deprecated但仍permitted；整体帧率不受限，非全符合性/传输/采用声明。
+- 仅一个image_color编辑导航；现有ST12、其他Canonical/事件/持有事项/schema/renderer/治理/维护不改。

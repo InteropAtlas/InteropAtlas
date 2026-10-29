@@ -1,0 +1,89 @@
+id: smpte_vc3
+type: artifact
+kind: standard
+name_zh: SMPTE ST 2019-1 VC-3 图像压缩与数据流格式（2016 基础版）
+name_en: SMPTE ST 2019-1 — VC-3 Picture Compression and Data Stream Format (2016 base text)
+version: '2016'
+external_identifiers:
+- namespace: smpte
+  value: st.2019-1
+official_url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
+description_zh: 规定 VC-3 帧内压缩数据格式与解码过程的标准；本记录固定 2016 基础文本，内嵌时间码为有条件、已不推荐但仍允许的功能。
+description_en: A standard specifying the VC-3 intra-frame compressed-data format and decoding process; this record
+  fixes the 2016 base text, whose conditional in-bitstream time code is deprecated but permitted.
+scope_notes_zh: 保留既有 smpte_vc3 / smpte:st.2019-1 工作级标准身份，固定审阅 2016-05-18 批准的 ST 2019-1:2016；不是新建版次主体或最新版声明。§1 规定帧内压缩数据格式与解码过程，支持
+  CBR/VBR，但不规定编码过程或视频帧率。本片只审阅身份、上述范围和 §§7.2.6–7.2.7 / Table 10 的内嵌时间码，不穷尽验证图像采样、压缩 ID、Alpha、位率或解码一致性。TCP 是 Time
+  Code Present 标志，不是网络传输协议；仅 TCP=1 时，偏移 0x031–0x038 的 8 字节时间码区按 Table 10 使用 §3 明确引用的 ST 12-1:2014 表示。第 37 页资料性注释指出码流内时间码已
+  deprecated 但仍 permitted；不据此宣称 VC-3 标准整体被弃用或推荐此功能。TCP=0 时可以带外指定时间码，VC-3 整体不受 ST 12-1 所支持的有限帧率集合限制；不推导所有码流必有时间码、LTC/VITC
+  信号传输、运行时强制依赖或完整符合性。已知另有 ST 2019-1:2016 Amendment 1:2023（批准 2022-09-28），其 §1 扩展 HD profile 压缩 ID 1235–1260 的 Alpha
+  支持；本记录不合并该修正或声称已审阅完整修正版，目录年份不代替封面版名。候选旧名称中的 DNxHD 不作为产品同一性证据；Avid DNxHD/DNxHR 的 identity_risk 候选保持不动，不建立产品等价、MXF
+  封装或其他规范引用关系。未运行编码器、解码器或媒体工具，不证明实现支持、性能、认证、安全性、互通、部署或 IA 采用。
+scope_notes_en: Preserves the existing work-level smpte_vc3 / smpte:st.2019-1 identity, reviewing ST 2019-1:2016
+  approved 2016-05-18, without a new edition subject or latest-version claim. Section 1 specifies intra-frame compressed
+  data and decoding with CBR/VBR support, not an encoding process or video frame rates. Review is bounded to identity,
+  this scope and in-bitstream time code in sections 7.2.6–7.2.7 / Table 10, not exhaustive sampling, compression-ID,
+  alpha, bitrate or decoder-conformance verification. TCP means Time Code Present, not the network protocol. Only
+  when TCP=1 must the eight-byte area at offsets 0x031–0x038 use the Table 10 representation of the exact ST 12-1:2014
+  reference in section 3. The page-37 informative note marks in-bitstream time code deprecated but permitted; this
+  does not deprecate VC-3 itself or recommend that feature. With TCP=0, time code may be supplied out of band; VC-3
+  as a whole is not limited to the frame-rate set supported by ST 12-1. Universal time-code presence, LTC/VITC signal
+  transport, a mandatory runtime dependency and full conformance do not follow. A separate ST 2019-1:2016 Amendment
+  1:2023, approved 2022-09-28, extends alpha support to HD-profile Compression IDs 1235–1260 in its section 1. It
+  is acknowledged but not folded into the reviewed base text; directory dates do not replace the printed amendment
+  designation. The original candidate label containing DNxHD is not evidence of product identity. The Avid DNxHD/DNxHR
+  identity-risk candidate remains untouched, with no product equivalence, MXF mapping or other-reference edges inferred.
+  No encoder, decoder or media tool ran; implementation support, performance, certification, security, interoperability,
+  deployment and IA adoption are not established.
+sources:
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=1
+  title: ST 2019-1:2016 cover — identity and approval 2016-05-18
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=6
+  title: ST 2019-1:2016 §§1–3 — scope and conformance/reference context
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=7
+  title: ST 2019-1:2016 §3 — exact ST 12-1:2014 reference
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=36
+  title: ST 2019-1:2016 §§7.2.6–7.2.7 — TCP flag and conditional eight-byte time-code area
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=37
+  title: ST 2019-1:2016 Table 10 — byte layout and informative deprecation/frame-rate/out-of-band caveats
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/doc/st2019-1/20220928-am1-pub/st2019-1-amd1-2023.pdf#page=1
+  title: Separate Amendment 1:2023 cover — approved 2022-09-28, excluded from base review
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/doc/st2019-1/20220928-am1-pub/st2019-1-amd1-2023.pdf#page=2
+  title: Separate Amendment 1:2023 §1 — HD-profile alpha extension, excluded from base review
+  language: en
+  accessed: '2026-10-29'
+versions:
+- version: '2016'
+  date: '2016-05-18'
+  status: standard
+  url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
+last_verified_at: '2026-10-29T07:54:17.810716+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded official PDF evidence review
+record_created_at: '2026-10-29T08:03:10.212848+00:00'
+record_updated_at: '2026-10-29T08:03:10.212848+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_vc3_timecode_packet)
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: smpte_vc3
+  acceptance_event_id: accept-20261029-vc3-timecode-smpte_vc3
+  reviewed_candidate_blob: e02e7a9d1bac528894a05ca1b0f1d9884f39c4b4
+  reviewed_against_commit: a404dc5692e94d354091e294dc451600ff0bc09a
+  candidate_executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: a404dc5692e94d354091e294dc451600ff0bc09a
+  reviewed_packet_blob: 193269d5eb242e4f271e8e4a7ac4733ea2c607e6
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a404dc5692e94d354091e294dc451600ff0bc09a/01_State/Inbox/review-packets/vc3-timecode-20261029.yaml
