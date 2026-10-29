@@ -1,0 +1,22 @@
+packet_id: scte35_hls_signaling_20261029
+status: materialized
+reviewed_packet_commit: 1081594acc4cb47909b5fd105ba78a806a59384a
+reviewed_packet_blob: 9393f540d4157cef80ed19047bc1c2980a9d8678
+reviewed_packet_path: 01_State/Inbox/review-packets/scte35-hls-signaling-20261029.yaml
+baseline_commit: b6df4282bed837eeaa4e5c2ce577e782249c5b01
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/scte35-hls-signaling-20261029.yaml
+objects:
+- candidate_id: scte35
+  canonical_id: scte35
+  acceptance_event_id: accept-20261029-scte35-hls-scte35
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/1081594acc4cb47909b5fd105ba78a806a59384a/01_State/Inbox/review-packets/scte35-hls-signaling-20261029.yaml
+relations:
+- canonical_id: hls_rfc8216_uses_scte35
+  canonical_path: 01_State/02_Relations/hls-scte35-signaling.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/1081594acc4cb47909b5fd105ba78a806a59384a/01_State/Inbox/review-packets/scte35-hls-signaling-20261029.yaml
+notes_zh:
+- 引用式回执；完整proposed fields、来源指纹与证据限度保存在真实冻结祖先，不复制第二套正式字段。
+- 保留scte35/scte:scte-35；限定2014历史版的公开preview身份/范围，完整标准与后来35-1/35-2等价未核实，不以preview冒充全文。
+- 仅RFC8216可选DateRange/CMD条件uses，保留MAY/SHOULD、日期前提与非全HLS/非全符合性限制。
+- 仅一个media_network编辑导航；HLS原记录/来源/日期、其他Canonical和事件、历史快照、持有事项、schema/renderer/治理/维护不改。
