@@ -45,15 +45,15 @@ last_verified_by: Agent — OpenAI / dot，JSON foundation relation evidence exe
 ---
 id: json_ld_maps_to_rdf
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T13:49:55.469486+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent semantic reviewer / review_jsonld_scope_evidence"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 可映射到 RDF 数据模型
@@ -62,8 +62,6 @@ source: {type: standard, id: json_ld_1.1}
 relation: maps_to
 target: {type: standard, id: rdf_1.2_concepts}
 capability_context: [graph_representation, linked_data_serialization]
-conditions_zh: JSON-LD 1.1 可表达 RDF 图的常规 Linked Data 模型，但并不原生覆盖 RDF 1.2 新增的 triple terms。
-conditions_en: JSON-LD 1.1 can express conventional RDF Linked Data graphs, but does not natively cover RDF 1.2 triple terms.
 confidence: 0.95
 sources:
   - url: https://www.w3.org/TR/json-ld11/
@@ -74,6 +72,40 @@ sources:
     title: RDF 1.2 Concepts and Abstract Data Model
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: JSON-LD 1.1 and JSON-LD 1.1 Processing Algorithms and API, W3C Recommendations 2020-07-16
+    target: RDF 1.2 Concepts and Abstract Data Model, W3C Candidate Recommendation Snapshot 2026-04-07
+  conditions_zh: 限定于固定 JSON-LD 1.1 及其 2020 API 按标准而非广义 RDF 解释后、符合 RDF 1.1 的图；固定 RDF 1.2 CR 第 2.1 节明确该数据可作为 1.2-basic，继而作为
+    1.2 数据。作为 graph source 使用时只取默认图并忽略命名图。不覆盖空白节点谓词的广义输出；2020 转换中的 @direction 可能丢失或通过 i18n datatype / compound-literal
+    另行编码，不能据此声称原生 RDF 1.2 directional language-tagged strings 支持。此边不声称 JSON-LD 1.1 原生表达 triple terms、覆盖 RDF 1.2
+    全部特性、完整保留原始 JSON 无损往返、处理器符合性、库间互通或 IA 已采用。RDF 1.2 证据仅绑定上述 CR 快照，不代表后续版本或 Recommendation 状态。
+  conditions_en: Limited to RDF 1.1-conforming graphs obtained by standard, non-generalized RDF interpretation under
+    the fixed JSON-LD 1.1 specification and its 2020 API. Section 2.1 of the fixed RDF 1.2 CR permits such data
+    as 1.2-basic and then 1.2 data. A graph-source consumer uses only the default graph and ignores named graphs.
+    Generalized output with blank-node predicates is excluded. In the 2020 conversion, @direction may be lost or
+    encoded through i18n datatypes or compound literals; this does not establish native RDF 1.2 directional language-tagged-string
+    support. No native JSON-LD 1.1 triple terms, full RDF 1.2 feature coverage, lossless preservation of original
+    JSON, processor conformance, library interoperability or IA adoption is asserted. The target evidence is this
+    CR snapshot, not later editions or Recommendation status.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
+  title: 'JSON-LD 1.1 — fixed Recommendation 2020-07-16, sections 8/10: RDF1.1 correspondence, generalized data
+    and graph-source limits'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#defined-version-labels
+  title: RDF 1.2 Concepts — fixed CR Snapshot 2026-04-07, section 2.1 version-label inclusion; sections 1.9/3.1/3.4
+    for syntax and term boundaries
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-api-20200716/#deserialize-json-ld-to-rdf-algorithm
+  title: 'JSON-LD 1.1 Processing Algorithms and API — fixed Recommendation 2020-07-16, sections 8.1/8.2: standard
+    output, generalized predicates and direction handling'
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T13:49:55.469486+00:00'
+last_verified_by: Agent — OpenAI / dot / JSON-LD RDF 1.2 fixed-source evidence executor
 ---
 id: json_ld_provides_linked_data_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
