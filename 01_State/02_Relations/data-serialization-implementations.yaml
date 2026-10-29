@@ -222,3 +222,65 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / main-session semantic review
   github_actor: ff6962757
+---
+id: python_cbor2_implements_cbor_rfc8949
+type: relation
+name_zh: cbor2 6.1.5 实现有界 CBOR 二进制编解码
+name_en: cbor2 6.1.5 implements bounded CBOR binary encoding and decoding
+source: python_cbor2
+relation: implements
+target: cbor_rfc8949
+context:
+  capabilities:
+  - data_serialization
+  version_context:
+    source: PyPI cbor2 6.1.5 and agronholm/cbor2 cf5b8c5cc96609f423a9ef07bde2da0f284c9169
+    target: RFC 8949, STD 94, December 2020; the existing exact document identity, not a new format version
+  conditions_zh: 限定为固定版本明确标称RFC8949的Python二进制数据项读写：常用整数、字节/文本、数组、Python可表示的映射、布尔/null与浮点。应用须选择合适的键类型、重复键/不定长策略、字符串错误处理，并自行处理尾随数据项；Python键相等不等于CBOR通用模型的键相等。canonical=True使用长度优先排序，不等于§4.2.1纯字节序；与indefinite_containers=True合用仍可生成不定长项，不能据选项名证明完整确定性profile。有限合成观察与固定源码不证明完整RFC符合性、通用无损往返、JSON转换、COSE/CWT、签名规范化、安全性、跨实现互通或IA采用。
+  conditions_en: 'Limited to the fixed release explicitly targeting RFC8949 for binary data-item encoding/decoding
+    of common integers, bytes/text, arrays, Python-representable maps, booleans/null and floats. Applications choose
+    suitable key types, duplicate/indefinite policies and string error handling and handle trailing items themselves;
+    Python key equality differs from generic CBOR key equality. canonical=True uses length-first ordering, not section
+    4.2.1 purely bytewise order, and combined indefinite_containers=True can still emit indefinite items: the option
+    name certifies no complete deterministic profile. Small synthetic observations and fixed sources do not prove
+    full RFC conformance, universal lossless round trips, JSON conversion, COSE/CWT, signature canonicalization,
+    security, cross-implementation interoperability or IA adoption.'
+evidence:
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/README.rst
+  title: cbor2 6.1.5 — explicit RFC8949 codec identity and Rust implementation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/docs/usage.rst
+  title: cbor2 — Python/CBOR type mappings, tag support and optional-reference limitations
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/lib.rs
+  title: cbor2 — public loads/dumps options, defaults and one-item decode
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/encoder.rs
+  title: cbor2 — length-first canonical key ordering, float width and independent indefinite-container option
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/decoder.rs
+  title: cbor2 — Python-key duplicate behavior, indefinite input and UTF-8 handling
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-4.2
+  title: RFC8949 §§4.2.1/4.2.3 — distinct deterministic key ordering and prohibition of indefinite items
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-5.6.1
+  title: RFC8949 §§5.3.1/5.6.1 — duplicate map keys, validity and generic key equivalence
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T19:06:35.942236+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_forgejo_delivery/prepare_cbor2_intake; bounded RFC8949 codec
+  implementation, not full conformance
+record_created_at: '2026-10-29T19:28:47.389023+00:00'
+record_updated_at: '2026-10-29T19:28:47.389023+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cbor2_intake
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cbor2_semantics
+  github_actor: ff6962757

@@ -1,0 +1,37 @@
+contract_version: candidate-object-v1
+candidate_id: python_cbor2
+label: cbor2 Python CBOR serialization library — 6.1.5
+publisher: Alex Grönholm and cbor2 contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: agronholm/cbor2
+- namespace: pypi
+  value: cbor2
+locators:
+- url: https://pypi.org/project/cbor2/6.1.5/
+  role: official
+- url: https://github.com/agronholm/cbor2/tree/cf5b8c5cc96609f423a9ef07bde2da0f284c9169
+  role: dated
+- url: https://github.com/agronholm/cbor2/releases/tag/6.1.5
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_cbor2
+  reasons:
+  - Accepted as canonical python_cbor2 by accept-20261029-python-cbor2-rfc8949-python_cbor2. Original new-state
+    candidate 0c3445480588ffd85f1513989e63989930d22290 and ordinary review_required route replay against real frozen
+    ancestor e3f6837cdb87091e689b1d771a4ccca8eb5f502e; this back-reference prevents duplicate creation and authorizes
+    no identity merge.
+  merge_authorized: false
+unknowns:
+- 主体是 PyPI cbor2 Python 发行包及 agronholm/cbor2 源码，固定 6.1.5/tag commit cf5b8c5cc96609f423a9ef07bde2da0f284c9169；底层以
+  Rust 实现，不与同名 ldclabs/cbor2 Rust crate 或 CBOR 标准合并。针对可信内存数据核验 Python dumps/loads 的整数、字节串/文本、数组、映射、布尔/null、浮点及少量标签读写。35项作者核验包括1项包版本核对与34项行为观察，不是完整RFC/上游套件。tuple默认返回list，非首选整数编码重编码会缩短，不能保证原字节或全部Python/CBOR类型无损往返。默认loads返回第一个数据项而不拒绝尾随项；流中多项需由应用显式继续解码/处理。映射默认重复键后值覆盖，allow_duplicate_keys=False可拒绝但按Python键相等判断；整数1与true这类CBOR通用模型中不同的键会在dict中合并，显式拒重模式也会将其视作重复。应用需规定可表示的键类型/相等语义，不能把该选项当完整CBOR通用键验证。默认允许不定长容器/字符串，可通过allow_indefinite=False拒绝；默认UTF-8严格，str_errors=replace会损失非法字节信息。max_depth默认400，本例只验证显式较小限值，不证明资源安全。canonical=True的map排序按编码长度再字节序，对应RFC8949
+  §4.2.3所述排序而不是§4.2.1纯字节序；与indefinite_containers=True合用仍可输出不定长项，故参数名不证明任一完整确定性profile或签名规范化。未测试所有语义标签、应用schema、JSON诊断转换、hooks、共享/循环/字符串引用、第三方互通、网络协议、安全性、性能或IA采用。wheel
+  SHA256与PyPI元数据匹配，固定源码与Git tree blob匹配；未从源码重建二进制或验证发布证明，不据此作供应链认证。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_forgejo_delivery/prepare_cbor2_intake
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cbor2_semantics

@@ -1,0 +1,40 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-python-cbor2-rfc8949-python_cbor2
+candidate_id: python_cbor2
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_cbor2
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cbor2_semantics
+  reviewed_at: '2026-10-29T19:25:48.434041+00:00'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 python_cbor2，审阅候选blob 0c3445480588ffd85f1513989e63989930d22290。
+  - 独立语义PASS绑定精确packet 20b230a066d8e44f6fbace3bee713182df4f62d6 与候选 0c3445480588ffd85f1513989e63989930d22290；报告SHA256
+    74a2e6a48039d41e7dc00ebb8d47216cfaad61ce2db43dc0d28e1303134535f8，真实reviewed_at 2026-10-29T19:25:48.434041+00:00。semantic_review_url引用真实冻结且保留pending状态的准备原稿，不把原稿本身当审批；Reviewer身份与决定记于本事件及交付PR。
+  - 主体仅PyPI cbor2 Python库6.1.5 / agronholm/cbor2，固定源码cf5b8c5cc96609f423a9ef07bde2da0f284c9169；不是同名Rust crate。沿用system/library与既有data_serialization能力。
+  - 仅一条有界implements→既有cbor_rfc8949与一个syntax编者导航成员；没有新taxonomy/predicate/schema/renderer/治理/维护方式。不是完整RFC、确定性profile、签名规范化、COSE/CWT、应用schema或安全认证。
+  - 75份封存研究文件、15份固定源码Git blob、18份HTTP200来源捕获和发布wheel SHA256均核对；哈希仅是材料身份，不是源码重建、发布attestation验证、二进制可复现或供应链认证。
+  - 35项可信小输入核验含1项版本检查及34项行为观察，作者与独立Reviewer分别复算；确实执行官方Python初始化及Rust原生扩展，不是只静态阅读。未执行上游完整套件、构建脚本、CLI、自定义hook、网络输入、模糊测试或资源安全实验。
+  - 默认重复string映射键后值覆盖；整数1与true在Python dict合并，严格拒重选项也按Python相等；不能宣称完整CBOR通用模型或全部Python类型无损转换。loads只返回首项，不自动拒绝尾随数据。
+  - 默认接受不定长array/map/text，显式选项可拒绝；UTF-8默认严格而替换模式有损；tuple默认变list；非首选整数解码后重编码不保留原字节。
+  - canonical=True按编码长度再字节序排序，与RFC8949 §4.2.3描述的顺序相符而非§4.2.1纯字节序；与indefinite_containers=True合用仍可输出不定长项，参数名不证明完整确定性符合性。
+  - 固定版本、35项边界、键合并/重复键、尾随输入、不定长、UTF-8、类型/字节损失、排序区别及未重建/attestation/供应链认证限制均在可见中文description；完整scope_notes与relation
+    context仍由既有renderer省略，不伪称全部渲染。
+  - 作者134unittest、12custom checks、20重叠standalone modules、适用Markdown/docs checks通过；129旧事件中119accepted真实冻结回放与10deferred保持。可选V1
+    fixture3/17失败、P5 1/1通过，均与基线同一；30旧链接问题与12警告不增加。
+  - 本地Chromium既有拒绝未重试或绕过，不宣称本地视觉/交互PASS。远端P6/Browser CI、normalmerge、主线复核及Pages/live后续各自验证。
+  - 真实connector freeze经普通fetch检验精确bytes与唯一父B，物化保留真实祖先而不压平。独立语义不是正式GitHub APPROVE。#498拒绝/#439待Owner/#416暂停、身份风险hold与旧历史全部不变。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/e3f6837cdb87091e689b1d771a4ccca8eb5f502e/01_State/Inbox/review-packets/python-cbor2-rfc8949-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0c3445480588ffd85f1513989e63989930d22290
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/20b230a066d8e44f6fbace3bee713182df4f62d6
+decided_at: '2026-10-29T19:28:47.389023+00:00'
+notes:
+- 作者最终报告SHA256 b571f7c895b1c64cfe02dc64da11cd84ed29e6b5646cb3cdabb3bf3e76828559
+- 一个库对象、一条有界implements、一个既有capability字段引用和一个syntax编者成员；仅接纳一个候选。
+- 251旧对象、191旧关系、129旧事件、242旧候选及历史覆盖快照保持；完整准备原稿在真实冻结祖先可恢复。
