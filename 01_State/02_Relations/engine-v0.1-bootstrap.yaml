@@ -306,15 +306,15 @@ target:
 ---
 id: svg_recommended_with_html
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T18:31:34.423767+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot / collaboration agent /root/resume_forgejo_delivery"
+  reviewer: "Agent — OpenAI / dot / collaboration agent /root/resume_forgejo_delivery/review_svg_html_semantics"
   github_actor: "ff6962757"
 source:
   type: standard
@@ -323,3 +323,49 @@ relation: recommended_with
 target:
   type: standard
   id: html_living_standard
+context:
+  version_context:
+    source: Existing svg_2 identity; this evidence slice is limited to W3C SVG 2 Candidate Recommendation 2018-10-04,
+      not promotion to Recommendation or a new edition endpoint.
+    target: Existing HTML Living Standard identity, with the host content-model rules read from official commit
+      snapshot 939677714df7379fee3667040113b41c91c851e7, discovered through the official live-page snapshot
+      link on 2026-10-29.
+    reference_boundary: The 2018 SVG document cites a living HTML specification. This paired evidence review
+      does not assert that the 2018 publication cites the later 2026 HTML snapshot, or that every behavior
+      in those documents is identical.
+  conditions_zh: 将既有配合使用评价限定为 HTML 文档结构与内联 SVG 图形的标准层面组合，而非强制采用或全面兼容断言。SVG2 明确支持 SVG 与 HTML 的集成；但 SVG 在独立文件或
+    XML 中使用 XML 语法，在 HTML 文档中使用 HTML 语法，后者未必兼容 XML。按 XML 解析时须提供使 SVG 元素归属 SVG 命名空间的声明；按 HTML 语法解析时由 HTML parser
+    自动提供 SVG 命名空间，不要求额外 xmlns。HTML 固定快照将 svg 归入 embedded、phrasing、flow 与 palpable content；foreignObject 内的
+    HTML 命名空间元素须为 flow content，HTML 文档内 SVG title 的内容模型进一步受 phrasing content 限制。不能由此推定任意 HTML/SVG 混排、同一源码跨
+    HTML/XML 解析、所有嵌入方式或浏览器功能都可互换。本边不证明实测渲染、脚本/辅助技术互通、完整符合性或 IA 已采用；本文所引 2018 SVG2 文献为 Candidate Recommendation。
+  conditions_en: Scopes the existing paired-use assessment to standards-level composition of HTML document
+    structure with inline SVG graphics, not mandatory adoption or blanket compatibility. SVG2 explicitly supports
+    integration with HTML, but standalone/XML SVG uses XML syntax while SVG within HTML uses HTML syntax, which
+    may not be XML-compatible. XML parsing requires namespace declarations that identify SVG elements; the
+    HTML parser supplies their SVG namespace automatically, without an additional xmlns requirement. The fixed
+    HTML snapshot places svg in embedded, phrasing, flow and palpable content; HTML-namespace elements in foreignObject
+    must be flow content, and SVG title content in HTML documents is further limited to phrasing content. This
+    does not make arbitrary HTML/SVG mixtures, the same source across HTML/XML parsers, embedding modes or
+    browser features interchangeable. Tested rendering, scripting/assistive-technology interoperability, complete
+    conformance and IA adoption are not established. The cited 2018 SVG2 publication is a Candidate Recommendation.
+evidence:
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/
+  title: SVG 2, fixed 2018-10-04 Candidate Recommendation — document status, not Recommendation promotion
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/intro.html#W3CCompatibility
+  title: SVG 2 §§1.1–1.2 — HTML/SVG integration and HTML-versus-XML syntax boundary
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/struct.html#Namespace
+  title: SVG 2 §§5.1.1–5.1.2 — inline document fragments and XML namespace declarations versus HTML parser
+    namespace handling
+  language: en
+  accessed: '2026-10-29'
+- url: https://html.spec.whatwg.org/commit-snapshots/939677714df7379fee3667040113b41c91c851e7/#svg-0
+  title: HTML official commit snapshot 939677714df7 §4.8.16 — svg categories, foreignObject flow content and
+    SVG title phrasing content
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T18:31:34.423767+00:00'
+last_verified_by: Agent — OpenAI / dot / SVG HTML scoped-evidence executor
