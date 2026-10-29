@@ -1,0 +1,283 @@
+packet_id: vc3_timecode_20261029
+status: pending_independent_semantic_review
+baseline_commit: 6d4a90fd14313a0f7ef26a53e5aba8f7649da687
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 一个既有 Candidate 的标准身份、2016 基础版范围与一个 TCP=1 时的有界 uses，目标为刚接纳的固定 ST 12-1:2014。
+- 一个既有 image_color 分类的编辑导航成员，不修改类别、本体、目标对象或任何持有事项。
+- 精确候选与 packet 需新独立语义复核；原 ST12/DPX 复核不替代本次判断。
+work_item_preflight:
+  main_confirmed: 6d4a90fd14313a0f7ef26a53e5aba8f7649da687
+  prior_delivered_pr: 553
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Parent-confirmed ordinary continuation after verified PR553 main/CI/live delivery on 2026-10-29.
+  current_counts:
+    objects: 245
+    relations: 185
+    graph_edges: 271
+    candidates: 238
+    acceptance_events: 123
+  proposed_counts_only:
+    objects: 246
+    relations: 186
+    graph_edges: 272
+    candidates: 238
+    acceptance_events: 124
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T07:54:17.810716+00:00'
+  method: Author independently rehashed all researcher-captured official source files, read bounded PDF text and
+    visually inspected source-page renders. No independent reacquisition, annotation removal or upstream code/media
+    execution.
+  research_handoff_sha256: 404d5f96c8b732e20ea28ddaa0f1a1667aec344e1ac2b4cb6abee394d2648b3f
+  source_manifest_sha256: cf30b609baa124d89d16950efa27e2389e71a5553ece0a7441e4cae664f8b593
+  captures:
+  - file: st2019-1-2016.pdf
+    url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
+    sha256: cf99fe4459665ac782facdfeca37f530d3f744cf3a1ff4f19f6a12ec29d59449
+    bytes: 3347934
+    pages: 108
+    transport_limit: curl -L --fail --silent --show-error REQUESTED_URL -o LOCAL_PATH, exit 0; exact final URL/status/response
+      timestamps not captured
+  - file: st2019-1-amd1-2023.pdf
+    url: https://pub.smpte.org/doc/st2019-1/20220928-am1-pub/st2019-1-amd1-2023.pdf
+    sha256: ef984802a8cad5bda1bf2a6fa75581bef26f7671a613d87a458cafae1b1cf693
+    bytes: 250795
+    pages: 5
+    transport_limit: curl -L --fail --silent --show-error REQUESTED_URL -o LOCAL_PATH, exit 0; exact final URL/status/response
+      timestamps not captured
+  - file: latest.html
+    url: https://pub.smpte.org/latest/st2019-1/
+    sha256: 1ffb4628ea66fb850ec08a617896e587bd5694edab1ef9b28dd3dbe995389eeb
+    bytes: 1195
+    pages: null
+    transport_limit: curl -L --fail --silent --show-error REQUESTED_URL -o LOCAL_PATH, exit 0; exact final URL/status/response
+      timestamps not captured
+  - file: versions.html
+    url: https://pub.smpte.org/doc/st2019-1/
+    sha256: 0ee016416d7437d21df28cb538a2ef92f3f89e6c294262a9635c14165c7605f3
+    bytes: 1958
+    pages: null
+    transport_limit: curl -L --fail --silent --show-error REQUESTED_URL -o LOCAL_PATH, exit 0; exact final URL/status/response
+      timestamps not captured
+  author_visually_inspected:
+    st2019-1-2016.pdf:
+    - 1
+    - 6
+    - 7
+    - 36
+    - 37
+    st2019-1-amd1-2023.pdf:
+    - 1
+    - 2
+  physical_page_citation: true
+  annotation_summary: 'Author pypdf recheck: base has Link annotations only; page6 has none, page7 has11, pages36/37
+    have2 each. Amendment has Links only on page1; page2 has none. Research HANDOFF no-annotation wording for base36/37
+    is inaccurate; manifest/raw-PDF facts govern, source bytes unchanged.'
+  limits: Printed/physical pages coincide. Version-designated captures do not establish permanent URLs, latest-version
+    or complete amended-standard review. Initial read-only extraction assumed form-feed separators but research
+    text used physical-page markers; corrected by bounded pdftotext, no source edits. Local source cover render
+    emitted font-cache warnings but image successfully inspected. No previously denied operation retried.
+identity_boundary:
+  preserve_existing_candidate_ids: true
+  preserve_external_identifiers: true
+  preserve_original_discovery_provenance: true
+  no_merge_split_alias_or_new_edition_subject: true
+  avid_identity_risk_untouched: true
+objects:
+- candidate_id: smpte_vc3
+  candidate_path: 01_State/Inbox/candidates/smpte_vc3.yaml
+  candidate_blob: e02e7a9d1bac528894a05ca1b0f1d9884f39c4b4
+  baseline_candidate_blob: 026f47c9ce166056d3e3bd784e5417013590a344
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/smpte_vc3.yaml
+  proposed_record:
+    id: smpte_vc3
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 2019-1 VC-3 图像压缩与数据流格式（2016 基础版）
+    name_en: SMPTE ST 2019-1 — VC-3 Picture Compression and Data Stream Format (2016 base text)
+    version: '2016'
+    external_identifiers:
+    - namespace: smpte
+      value: st.2019-1
+    official_url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
+    description_zh: 规定 VC-3 帧内压缩数据格式与解码过程的标准；本记录固定 2016 基础文本，内嵌时间码为有条件、已不推荐但仍允许的功能。
+    description_en: A standard specifying the VC-3 intra-frame compressed-data format and decoding process; this
+      record fixes the 2016 base text, whose conditional in-bitstream time code is deprecated but permitted.
+    scope_notes_zh: 保留既有 smpte_vc3 / smpte:st.2019-1 工作级标准身份，固定审阅 2016-05-18 批准的 ST 2019-1:2016；不是新建版次主体或最新版声明。§1
+      规定帧内压缩数据格式与解码过程，支持 CBR/VBR，但不规定编码过程或视频帧率。本片只审阅身份、上述范围和 §§7.2.6–7.2.7 / Table 10 的内嵌时间码，不穷尽验证图像采样、压缩 ID、Alpha、位率或解码一致性。TCP
+      是 Time Code Present 标志，不是网络传输协议；仅 TCP=1 时，偏移 0x031–0x038 的 8 字节时间码区按 Table 10 使用 §3 明确引用的 ST 12-1:2014 表示。第
+      37 页资料性注释指出码流内时间码已 deprecated 但仍 permitted；不据此宣称 VC-3 标准整体被弃用或推荐此功能。TCP=0 时可以带外指定时间码，VC-3 整体不受 ST 12-1 所支持的有限帧率集合限制；不推导所有码流必有时间码、LTC/VITC
+      信号传输、运行时强制依赖或完整符合性。已知另有 ST 2019-1:2016 Amendment 1:2023（批准 2022-09-28），其 §1 扩展 HD profile 压缩 ID 1235–1260
+      的 Alpha 支持；本记录不合并该修正或声称已审阅完整修正版，目录年份不代替封面版名。候选旧名称中的 DNxHD 不作为产品同一性证据；Avid DNxHD/DNxHR 的 identity_risk 候选保持不动，不建立产品等价、MXF
+      封装或其他规范引用关系。未运行编码器、解码器或媒体工具，不证明实现支持、性能、认证、安全性、互通、部署或 IA 采用。
+    scope_notes_en: Preserves the existing work-level smpte_vc3 / smpte:st.2019-1 identity, reviewing ST 2019-1:2016
+      approved 2016-05-18, without a new edition subject or latest-version claim. Section 1 specifies intra-frame
+      compressed data and decoding with CBR/VBR support, not an encoding process or video frame rates. Review is
+      bounded to identity, this scope and in-bitstream time code in sections 7.2.6–7.2.7 / Table 10, not exhaustive
+      sampling, compression-ID, alpha, bitrate or decoder-conformance verification. TCP means Time Code Present,
+      not the network protocol. Only when TCP=1 must the eight-byte area at offsets 0x031–0x038 use the Table 10
+      representation of the exact ST 12-1:2014 reference in section 3. The page-37 informative note marks in-bitstream
+      time code deprecated but permitted; this does not deprecate VC-3 itself or recommend that feature. With TCP=0,
+      time code may be supplied out of band; VC-3 as a whole is not limited to the frame-rate set supported by ST
+      12-1. Universal time-code presence, LTC/VITC signal transport, a mandatory runtime dependency and full conformance
+      do not follow. A separate ST 2019-1:2016 Amendment 1:2023, approved 2022-09-28, extends alpha support to HD-profile
+      Compression IDs 1235–1260 in its section 1. It is acknowledged but not folded into the reviewed base text;
+      directory dates do not replace the printed amendment designation. The original candidate label containing
+      DNxHD is not evidence of product identity. The Avid DNxHD/DNxHR identity-risk candidate remains untouched,
+      with no product equivalence, MXF mapping or other-reference edges inferred. No encoder, decoder or media tool
+      ran; implementation support, performance, certification, security, interoperability, deployment and IA adoption
+      are not established.
+    sources:
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=1
+      title: ST 2019-1:2016 cover — identity and approval 2016-05-18
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=6
+      title: ST 2019-1:2016 §§1–3 — scope and conformance/reference context
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=7
+      title: ST 2019-1:2016 §3 — exact ST 12-1:2014 reference
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=36
+      title: ST 2019-1:2016 §§7.2.6–7.2.7 — TCP flag and conditional eight-byte time-code area
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=37
+      title: ST 2019-1:2016 Table 10 — byte layout and informative deprecation/frame-rate/out-of-band caveats
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/doc/st2019-1/20220928-am1-pub/st2019-1-amd1-2023.pdf#page=1
+      title: Separate Amendment 1:2023 cover — approved 2022-09-28, excluded from base review
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/doc/st2019-1/20220928-am1-pub/st2019-1-amd1-2023.pdf#page=2
+      title: Separate Amendment 1:2023 §1 — HD-profile alpha extension, excluded from base review
+      language: en
+      accessed: '2026-10-29'
+    versions:
+    - version: '2016'
+      date: '2016-05-18'
+      status: standard
+      url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
+    last_verified_at: '2026-10-29T07:54:17.810716+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded official PDF evidence review
+relations:
+- proposed_path: 01_State/02_Relations/vc3-timecode-representation.yaml
+  proposed_record:
+    id: smpte_vc3_uses_smpte_st12_1
+    type: relation
+    name_zh: VC-3可选码流内时间码使用ST12-1表示（已不推荐但仍允许）
+    name_en: Optional VC-3 in-bitstream time code uses ST12-1 representation (deprecated but permitted)
+    source: smpte_vc3
+    relation: uses
+    target: smpte_st12_1
+    context:
+      version_context:
+        source: SMPTE ST 2019-1:2016 base text, approved 2016-05-18; known Amendment 1:2023 excluded
+        target: SMPTE ST 12-1:2014, approved 2014-02-20; exact dated normative reference, existing accepted work-level
+          smpte:st.12-1
+      conditions_zh: 仅固定 ST 2019-1:2016 基础文本的可选内嵌时间码：§3（第 7 页）明确引用 ST 12-1:2014；§7.2.6 定义偏移 0x030 的 TCP（Time Code
+        Present）标志，1 为有时间码、0 为无。§7.2.7 仅在 TCP=1 时要求 8 字节时间码区遵循 ST 12-1 并按 Table 10 布置（偏移 0x031–0x038）。第 37 页两条资料性注释分别说明码流内时间码已不推荐但仍允许，以及
+        VC-3 不受 ST 12-1 有限帧率集合约束、TCP=0 时可在带外指定时间码；注释提到 2015 revision 不被当作本次另一个已核实版次。此为有标志、字段及版次边界的 uses，不是建议采用、全码流强制依赖、网络
+        TCP、完整 LTC/VITC 传输、实现完整符合性、UTC 同步、认证、跨系统互通或 IA 采用。未把 2023 修正、Avid 产品、MXF 或其他不同版次规范引用并入此边。
+      conditions_en: 'Only the optional in-bitstream time code in the fixed ST 2019-1:2016 base text: section 3
+        on page 7 cites exactly ST 12-1:2014. Section 7.2.6 defines TCP (Time Code Present) at byte offset 0x030,
+        with 1 meaning present and 0 absent. Section 7.2.7 requires ST 12-1 time code in the eight-byte area only
+        if TCP=1, arranged by Table 10 at offsets 0x031–0x038. The two page-37 informative notes say this in-bitstream
+        feature is deprecated but permitted, VC-3 is not restricted to the limited ST 12-1 frame-rate set, and time
+        code may be out of band when TCP=0. The note mentions a 2015 revision; no separate 2015 edition is inferred
+        or reviewed here. This flag-, field- and edition-conditioned uses relation is not an adoption recommendation,
+        universal bitstream dependency, network TCP, complete LTC/VITC transport, full implementation conformance,
+        UTC synchronization, certification, cross-system interoperability or IA adoption. The 2023 amendment, Avid
+        products, MXF and other dated normative references are not folded into this edge.'
+    evidence:
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=7
+      title: ST 2019-1:2016 §3 — ST 12-1:2014 exact normative reference
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=36
+      title: ST 2019-1:2016 §§7.2.6–7.2.7 — Time Code Present flag and conditional use
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=37
+      title: ST 2019-1:2016 Table 10 and informative notes — deprecated-but-permitted, frame rates and out-of-band
+        boundary
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T07:54:17.810716+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded conditional VC-3 time-code evidence review
+membership_proposals:
+- category_id: image_color
+  ref:
+    surface: canonical
+    id: smpte_vc3
+  rationale_zh: 既有图像、色彩与编码类别的编辑导航，不是实现能力、产品身份或采用声明。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 50520
+  sha256: 826f88d16cb4c51110feac5367821903b7e428ea09d513a67a0fa7367032acba
+  git_blob: cbf24cd8db9f5bbba6da8c2a764d97562ac6664f
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/Inbox/candidates/avid_dnxhd_dnxhr.yaml
+  bytes: 1446
+  sha256: 5913c125dd149028704254166aec93f626576f59364c64ea8e74a88c323e3aac
+  git_blob: 8f3c78b6ac26e2574d4aecb6b0a7e78a619e19d0
+- path: 01_State/01_Objects/smpte_st12_1.yaml
+  bytes: 4590
+  sha256: 37a320f8b3e7d21400f0c122a3780956bb5730201f8c36e0b02f475044b62d4e
+  git_blob: 5756c8bc21b036513b40959fdc0615a7d3ef1bbc
+- path: 01_State/01_Objects/smpte_st268_dpx.yaml
+  bytes: 5790
+  sha256: 43992d0b84469acb31d27986c2e24971b785e3a3a29113a3c752b07b64f40b12
+  git_blob: df3d2c819cbc22802331430b08a1d2a0c536ce59
+- path: 01_State/02_Relations/dpx-timecode-representation.yaml
+  bytes: 4065
+  sha256: 58972a5f175cdb10998ea9aa4100b9f7b344bff70b2e3ba859039025d41842cf
+  git_blob: c38a6104ac8e57b1fae991575b1c3a3138f7231b
+- path: 01_State/01_Objects/smpte_mxf.yaml
+  bytes: 5349
+  sha256: a9304a76f7b7d0f06c324fe7f2dad153c875d5c626a0464b4a0a8a76f8c768cd
+  git_blob: be0cc2812798d58517604bdf628e9213e01331c7
+- path: 01_State/02_Relations/mxf-package-identification.yaml
+  bytes: 5472
+  sha256: 338b390fdad50a0532cd7f1c7930dad1885b943caa56594d5c890c88af8fae88
+  git_blob: 33c22021102cc8b2efc33796234521e60df8d0e2
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+excluded_scope:
+- No Avid identity decision, product alias, MXF, BT709/BT2020 or other inferred normative-reference edges.
+- No amended-2023/full-conformance, latest, network-TCP, universal mandatory timecode, frame-rate restriction, certification,
+  performance or adoption claims.
+- No schema/model/renderer/governance/maintenance mechanism changes, target-object edits, held candidates or historical
+  snapshot updates.
+- No remote write, freeze or materialization in preparation stage.
+renderer_boundary_zh: 既有 renderer 只显示端点/谓词，不完整展示 relation context。VC-3 对象 summary/scope 明示固定基础版、可选/TCP=1、已不推荐但仍允许、不限制整体帧率及非完整符合性；ST12
+  目标记录保持原字节，反向使用链接应按源对象 scope 解读。请独立 Reviewer 核对两端页面，不把简化导航当全符合性声明。
+materialization_boundary_zh: 作者根只更新一个候选并新增 packet；另一个根只做未接纳的假设投影。新独立语义 PASS 后才发布真实冻结并普通 fetch，按 frozen SHA 物化且保留祖先，随后独立结构复核与实际
+  head/merged main CI 和 live 字节验证。
