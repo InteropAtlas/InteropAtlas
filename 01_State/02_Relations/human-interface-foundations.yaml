@@ -262,15 +262,15 @@ last_verified_by: Agent — OpenAI / dot / ARIA SVG scoped-use evidence executor
 ---
 id: aria_apg_describes_wai_aria_patterns
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T17:03:56.857952+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / review_apg_aria_scope (independent semantic reviewer)"
   github_actor: "ff6962757"
 type: relation
 name_zh: ARIA APG 描述 WAI-ARIA 的常见组件实践模式
@@ -285,6 +285,69 @@ sources:
     title: ARIA Authoring Practices Guide
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: Existing rolling ARIA Authoring Practices Guide reference_project; current W3C Introduction, Read
+      Me First and Related Specifications observed 2026-10-29. No assertion of an immutable current-APG release
+      or verified repository commit.
+    target: Existing published wai_aria_1.2 identity retained. Current APG Read Me First explicitly describes
+      its purpose as illustrating ARIA 1.2; this is a scoped authoring-guidance relationship, not an audit
+      of every pattern against the 2023-06-06 Recommendation.
+    historical_boundary: 'The fixed 2021-11-29 APG Group Note is historical, not a substitute for current APG:
+      its status anticipates updates outside the formal document stream, and its WAI-ARIA-1.2 reference is
+      the 2021-03-02 CR. Current APG Related Specifications still lists the 2021-12-08 CR. Neither bibliography
+      is silently upgraded to the 2023 Recommendation.'
+  conditions_zh: 限定为 APG 对 ARIA 编写模式、键盘交互及可访问性语义的说明性指导。APG 是非规范性资源，没有自身符合性模型；模式和示例可以传达相关标准要求，但 APG 建议本身不因此成为新增规范要求，示例也不是唯一允许实现。APG
+    不提供穷尽的有效界面目录、统一 UI 设计系统或生产就绪代码。ARIA role 本身不会让浏览器自动实现键盘行为或样式，作者仍须实现相应交互。Read Me First 表明示例有意不包含针对 ARIA
+    1.2 浏览器/辅助技术支持缺口的变通代码；用于生产前应针对目标受众相关的浏览器与辅助技术组合实测。此边不证明任一示例已通过这些测试、完整符合 WCAG、全部当前模式逐项符合 WAI-ARIA 1.2 的
+    2023 REC，或 IA 已采用/符合。
+  conditions_en: Limited to informative APG guidance on ARIA authoring patterns, keyboard interaction and accessibility
+    semantics. APG has no conformance model of its own. Its patterns and examples can convey requirements from
+    relevant standards, but APG advice is not thereby a new normative requirement and examples are not the
+    only permitted implementations. APG is not an exhaustive catalog of valid interfaces, a unified UI design
+    system or production-ready code. An ARIA role does not make browsers implement keyboard behavior or styling;
+    authors must implement the corresponding interaction. Read Me First says examples intentionally omit workarounds
+    for ARIA 1.2 support gaps in browsers and assistive technologies, so production use calls for testing the
+    combinations relevant to the target audience. This edge does not establish that any example passed such
+    tests, complete WCAG conformance, an exhaustive check of current patterns against the WAI-ARIA 1.2 2023
+    REC, or IA adoption/conformance.
+evidence:
+- url: https://www.w3.org/WAI/ARIA/apg/about/introduction/#apg-is--not-normative
+  title: Current APG Introduction, observed 2026-10-29 — informative guidance without its own conformance model;
+    requirements remain in normative standards
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/about/introduction/#not-design-system
+  title: Current APG Introduction, observed 2026-10-29 — illustrative patterns, not an exhaustive catalog,
+    unified design system or production-ready code
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/#no_aria_better_bad_aria
+  title: Current APG Read Me First, observed 2026-10-29 — role semantics do not automatically implement keyboard
+    behavior or styling
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/#browser_and_AT_support
+  title: Current APG Read Me First, observed 2026-10-29 — explicit ARIA 1.2 illustration purpose; omitted support
+    workarounds and audience-specific production testing caution
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/#sotd
+  title: Historical APG Group Note 2021-11-29 — continuing updates outside the formal publication stream; not
+    current APG or the final ARIA Recommendation
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/#bib-wai-aria-1.2
+  title: Historical APG Note bibliography — WAI-ARIA 1.2 cited as 2021-03-02 Candidate Recommendation
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/about/related-specifications/#bib-wai-aria-1.2
+  title: Current APG Related Specifications, observed 2026-10-29 — still labels WAI-ARIA 1.2 as 2021-12-08
+    CR; not proof of final-edition alignment
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T17:03:56.857952+00:00'
+last_verified_by: Agent — OpenAI / dot / APG ARIA scoped-guidance evidence executor
 ---
 id: act_rules_format_provides_accessibility_conformance_testing
 record_created_at: "2026-09-01T16:44:53+08:00"
