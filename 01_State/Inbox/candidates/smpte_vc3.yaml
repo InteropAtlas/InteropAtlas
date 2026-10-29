@@ -11,12 +11,13 @@ locators:
 - url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_vc3
   reasons:
-  - 保留既有 smpte_vc3 与 smpte:st.2019-1 工作级标准身份，固定审阅官方 2016 基础版；不新建版次主体、归并产品或添加同义标识。
-  - 当前全量 Canonical 与其他候选外部标识预检无碰撞；new 只进入 review_required，尚未完成独立语义接纳。
-  - 旧候选标签中的 DNxHD 不作为 Avid 产品同一性结论；独立 avid_dnxhd_dnxhr 的 identity_risk 状态与原字节保持不动。
+  - Accepted as canonical smpte_vc3 by accept-20261029-vc3-timecode-smpte_vc3. Original new-state Candidate e02e7a9d1bac528894a05ca1b0f1d9884f39c4b4
+    and review_required route replay against real frozen ancestor a404dc5692e94d354091e294dc451600ff0bc09a; back-reference
+    prevents duplicate creation, without identity merge or new edition subject.
   merge_authorized: false
 unknowns:
 - 保留既有 smpte_vc3 / smpte:st.2019-1 工作级标准身份，固定审阅 2016-05-18 批准的 ST 2019-1:2016；不是新建版次主体或最新版声明。§1 规定帧内压缩数据格式与解码过程，支持
@@ -30,4 +31,4 @@ unknowns:
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_vc3_timecode_packet)
