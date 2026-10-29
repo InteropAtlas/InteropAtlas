@@ -1,0 +1,116 @@
+id: unicode_ixdtf_implements_rfc9557
+type: relation
+name_zh: ixdtf 0.6.7 源快照有界实现 IXDTF 注释解析与显式 Z 偏移助手
+name_en: ixdtf 0.6.7 source snapshot implements bounded IXDTF annotation parsing and explicit Z-offset helper
+source: unicode_ixdtf
+relation: implements
+target: rfc9557
+context:
+  version_context:
+    source: ixdtf0.6.7 in official ICU4X2.4.0 source snapshot031d9e89f6a3fd26a14491e090729d46094328fd; published
+      crate archive not verified
+    target: RFC9557, April2024; annotation syntax and bounded default-key handling, explicit Z helper only
+  conditions_zh: 只据固定源码对 RFC 9557 §§2、3.1、3.3、4.1 与 §5 所涉注释字段建立有限实现对应；不是完整规范、所有 critical 义务或严格 grammar 符合性。默认 UTF-8
+    from_str(...).parse()，新建 parser，输入子集与源对象范围一致（四位年/有秒/显式偏移，最多9位小数，至多一个elective时区和一个elective u-ca，无实验key/重复历法）。返回注释原始字段而不证明时区/历法值有效或一致；未知普通elective
+    key忽略，未知普通critical key拒绝。Z需调用方显式resolve_rfc_9557才转负零offset；其他数值offset不变。关键时区/历法应用语义、数据库查询、完整历法处理、无效输入全量拒绝、Temporal扩展、自定义handler、duration/UTF-16/写入均不在该关系中。静态源码对应及测试文本不等于实际运行、完整符合性、互通、安全、部署或IA采用；全部既有RFC对象与日期不改。
+  conditions_en: 'Limited fixed-source implementation correspondence for annotation fields in RFC9557 sections2,3.1,3.3,4.1
+    and5, not the whole specification, every critical-tag obligation or strict grammar conformance. A fresh UTF-8
+    from_str(...).parse() uses the default handler on the source record''s input subset: four-digit year, seconds,
+    explicit offset, at most9 fractional digits, at most one elective zone and one elective u-ca, no experimental
+    keys or duplicate calendars. Returned raw fields do not prove valid or consistent zone/calendar values. Unknown
+    ordinary elective keys are ignored; unknown ordinary critical keys are rejected. Z requires explicit caller
+    use of resolve_rfc_9557 to become negative-zero offset; other numeric offsets are unchanged. Critical-zone/calendar
+    application semantics, databases, complete calendar processing, exhaustive invalid-input rejection, Temporal
+    extensions, custom handlers, duration/UTF-16/writing are excluded. Static source correspondence and test text
+    are not execution, full conformance, interoperability, security, deployment or IA adoption. Existing RFC records/dates
+    remain unchanged.'
+evidence:
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L18-L24
+  title: ixdtf explicit RFC9557 and Z-update identification
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs#L83-L138
+  title: UTF-8 from_str and parse default Some handler into operative parser
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs#L41-L107
+  title: Date/time/offset and annotation parse path with end-of-input check
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs#L29-L122
+  title: Operative annotation fields, first-calendar comparison and unknown critical rejection
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs#L26-L145
+  title: Time-zone critical flag captured, lexical name parsing without database resolution
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L11-L24
+  title: Returned intermediate fields; calendar value only
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L203-L222
+  title: Explicit resolve_rfc_9557 helper maps Z to negative-zero; numeric offsets unchanged
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs#L95-L193
+  title: Time/fraction helpers; no actual leap-second validation and fractions wider than the positive scope
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs#L7-L34
+  title: Annotation and zone character predicates; not complete semantic validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs#L120-L127
+  title: Cursor end-of-input check
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs#L63-L85
+  title: Utf8 byte access and exact u-ca key check; raw bytes are not an independent UTF8 validator
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L283-L372
+  title: Documented application responsibility and custom-handler critical-treatment boundary
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L265-L325
+  title: Upstream annotation/critical/duplicate tests inspected as source, not executed
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L1097-L1144
+  title: Upstream Z test expects Z variant, not automatic helper conversion; not executed
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-2
+  title: RFC9557 updated Z-offset semantics
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.2
+  title: Experimental underscore keys require controlled-experiment handling; excluded
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.3
+  title: Elective/critical and repeated-key semantics; bounded comparison only
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.4
+  title: Offset/zone consistency is not performed by this parser
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+  title: Annotation syntax, with zone names and excluded dot components
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-5
+  title: u-ca calendar presentation semantics; raw parsing is not calendar resolution
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T09:48:40.903709+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded annotation/Z-helper static evidence executor
+record_created_at: '2026-10-29T10:00:11.821045+00:00'
+record_updated_at: '2026-10-29T10:00:11.821045+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ixdtf_parser_packet
+  github_actor: ff6962757

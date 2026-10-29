@@ -1,0 +1,39 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-ixdtf-rfc9557-unicode_ixdtf
+candidate_id: unicode_ixdtf
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: unicode_ixdtf
+review:
+  reviewer: Independent Agent — OpenAI / dot / review_ixdtf_parser_packet
+  reviewed_at: '2026-10-29T09:54:18Z'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 unicode_ixdtf，审阅候选 blob c7f7f756fdde02a4bc28185501502bf5c158313d。
+  - 独立语义PASS绑定精确packet aeecececa33497921163f6ef0270556d6188d55e 与新候选 c7f7f756fdde02a4bc28185501502bf5c158313d；独立报告SHA256
+    8a00462a183047fb350d672b996d3288f0ade5773961f86c207f50425423d22e，Reviewer决定时间2026-10-29T09:54:18Z。semantic_review_url指向真实冻结且保留pending状态的准备原稿，本身不是批准；身份/结论另记本事件与交付PR。
+  - 仅接纳一个独立Rust库unicode_ixdtf，crates_io:ixdtf。官方icu@2.4.0轻量tag固定031d9e89f6a3fd26a14491e090729d46094328fd的包manifest标明ixdtf0.6.7且independent=true；不是把库版本与ICU4X版本或整个项目合并。仅source_snapshot，不声称已核验发布crate/archive/checksum/yank/source
+    equality。
+  - 一条date_time_representation能力字段、一条有界implements至既有RFC9557、一个measurement编辑导航；不是同步/精度、TZDB/CLDR查询、完整RFC符合性或采用关系。全部旧RFC/pyRFC3339及既有对象不变。
+  - 正面子集为新建UTF-8 from_str(...).parse()默认handler，合法四位年日期、大写T、HH:MM:SS秒00–59、可选点号小数1–9位及Z或±HH:MM。至多一个在前elective zone和一个elective
+    u-ca；名称/值/一致性由调用方约束。返回原始日期时间offset/zone/calendar字段，不解析时间点或做历法转换。
+  - 未知普通非下划线elective key忽略、未知普通critical key拒绝；仅显式resolve_rfc_9557调用把Z映射到负零offset，parse本身保留Z枚举，既有numeric offset不变。不是全部关键注释义务认证。
+  - 排除underscore实验key、所有重复calendar组合、关键时区/历法语义、数据库存在性与一致性、raw from_utf8验证、UTF16、duration、自定义handler与写入。Parser接受Temporal扩展、comma/更宽小数、seconds60等不能据此视为RFC有效；最多9位与秒00–59是正面范围，不是声称其他输入被拒。
+  - 15份固定源文件与完整RFC9557正文分别记录真实URL/hash，作者及Reviewer实读并重hash同批捕获；不是独立再次抓取。原研究源码捕获无逐响应UTC，不把后来的核验时间冒充获取时间。上游测试文本与8个控制流trace均未执行，未构建Rust或安装crate。注册表403不重试/绕过。
+  - 作者134unittest、12custom、20重叠standalone、10docs/Markdown及新对象Markdown通过；125旧事件含115accepted真实冻结回放与10deferred保持。新增候选仅使候选总数及普通review_required各增1。作者机器检查不代替独立语义审阅。
+  - 可选V1 fixture基线同样3/17失败，P5 1/1通过；30旧静态链接问题与12兼容警告未增。本地Chromium此前被拒，不重试或绕过，不声称本地浏览器或Rust运行通过；真实head/main Browser
+    CI在后续分别验证。
+  - 现有renderer不显示完整scope_notes与relation context。新对象名称显式源快照，description显式有界静态、未构建运行、非完整RFC/时区历法语义；RFC与能力incoming导航名称显式源快照。三个实际静态HTML表面经独立语义审阅，不把简化implements导航当作完整符合性。
+  - 真实远端freeze由connector创建且普通fetch验证精确候选/packet字节和唯一父基线；物化保留freeze祖先，不重建或压平历史。schema/renderer/治理/维护/历史审计与#498拒绝/#439待Owner/#416暂停保持；最终独立结构复核及远端CI/正常merge/Pages/live验证另行完成。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/c064f98ebd0ffdf4ac982c2a10b9235bd5dc1c19/01_State/Inbox/review-packets/ixdtf-rfc9557-parser-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/c7f7f756fdde02a4bc28185501502bf5c158313d
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/aeecececa33497921163f6ef0270556d6188d55e
+decided_at: '2026-10-29T10:00:11.821045+00:00'
+notes:
+- 一新对象、一有界implements、一能力字段与一既有编辑导航成员；仅接纳一个候选。
+- 247旧对象、188旧关系、125旧事件、238旧候选及历史覆盖快照保持；完整准备原稿在真实冻结祖先可恢复。
