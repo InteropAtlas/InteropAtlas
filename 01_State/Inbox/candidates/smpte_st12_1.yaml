@@ -1,23 +1,28 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_st12_1
-label: SMPTE ST 12-1 — Time and Control Code
+label: 'SMPTE ST 12-1 — Time and Control Code (review context: 2014)'
 publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.12-1
+- namespace: smpte
+  value: st.12-1
 locators:
-  - url: https://pub.smpte.org/latest/st12-1/
-    role: official
+- url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf
+  role: official
 identity_resolution:
   state: new
   matched_canonical_ids: []
   reasons:
-    - SMPTE ST 12-1 specifies time and control code (SMPTE timecode), the standard for timing, sync and edit decisions in video production.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - 保留既有候选 stable ID 与工作级外部标识；此次仅将审阅上下文固定到已取得原始官方 PDF 的 2014 版，不新建版次主体或执行身份合并。
+  - 全量 Canonical 与候选标识预检无碰撞；new 仅进入 review_required，不代表已完成独立语义接纳。
   merge_authorized: false
-unknowns: []
+unknowns:
+- 保留既有 smpte_st12_1 / smpte:st.12-1 工作级标准身份，审阅上下文固定为 2014-02-20 批准的 ST 12-1:2014，不新建版次主体或声称最新版。§1 定义电视及伴随音频系统的时间地址、二进制组和标志位，以及
+  LTC 与 VITC 的主要传输结构。VITC 调制和位置的规定仅覆盖 525/59.94 与 625/50 模拟复合或分量系统；这不把 ST 12-2 的 ATC 封装、D-VITC 或所有数字视频传输并入本主体。此处仅核实标准身份和上述范围，并非逐项审计所有帧率、计数模式、标志位或电气要求。DPX
+  的另列 uses 关系仅涉及固定 2014 版电视信息头中的非核心时间码/用户位元数据，不等于 LTC/VITC 信号传输。未运行时间码生成器、解析器或媒体工具；不证明 UTC 同步精度、设备认证、实现符合性、部署、跨系统互通或
+  IA 采用。
+- 来源原始 PDF 已核对哈希并阅读限定章节；不是全文符合性审计或最新版调查，未运行上游媒体工具。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)

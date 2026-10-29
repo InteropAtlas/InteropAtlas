@@ -1,0 +1,322 @@
+packet_id: timecode_dpx_20261029
+status: pending_independent_semantic_review
+baseline_commit: c20e0096e01d5468714add6f0c4e5959edef01b6
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 两个既有 Candidate 的工作级身份，固定 ST 12-1:2014 与 ST 268-1:2014 审阅；不建立新版次主体、不修改外部标识或原始发现 provenance。
+- 一个 DPX uses ST 12-1 关系，只覆盖非核心电视信息头字段 58/59；两项既有类别的编辑导航，不是新的本体分类。
+- 本次不沿用先前审核；精确 Candidate/packet 需新的独立语义复核后才可冻结和物化。
+work_item_preflight:
+  main_confirmed: c20e0096e01d5468714add6f0c4e5959edef01b6
+  open_pull_requests:
+  - 498
+  - 439
+  - 416
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Existing unaccepted SMPTE candidates; parent confirmed renewed ordinary instance/relation expansion scope
+    on 2026-10-29.
+  current_counts:
+    objects: 243
+    relations: 184
+    graph_edges: 270
+    candidates: 238
+    acceptance_events: 121
+  proposed_counts_only:
+    objects: 245
+    relations: 185
+    graph_edges: 271
+    candidates: 238
+    acceptance_events: 123
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T07:01:52.390409+00:00'
+  method: Author independently rehashed researcher-captured raw official PDFs, read bounded text and visually inspected
+    source-page renders. No independent reacquisition, upstream tool/media execution, annotation removal or source-text
+    republication.
+  research_handoff_sha256: 3b1bb67a5279aacae6c05f4ed7d084e0e3883bf7b334231afc1f72d90832d79c
+  source_manifest_sha256: ede6fdb0d3a9e4a6d9a1a96b9d319c6b001c35ef540f72f583fe057a43fcd1d0
+  captures:
+  - file: st0012-1-2014.pdf
+    url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf
+    sha256: 93bf7d87d78cfbfa048fd28b55d0e24c785dcdd0476ab14cb78ab269d263c211
+    bytes: 699148
+    pages: 41
+    annotation_summary: Link annotations only; relied-upon scope page6 has none
+  - file: st0268-1-2014_stable2015.pdf
+    url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf
+    sha256: 1fb9cd24f12d476cd1b9416276df3b42bfa41d5a687d24005551273abd088138
+    bytes: 371528
+    pages: 27
+    annotation_summary: No annotations
+  physical_page_citation: true
+  author_visually_inspected:
+    st0012-1-2014.pdf:
+    - 1
+    - 6
+    st0268-1-2014_stable2015.pdf:
+    - 1
+    - 2
+    - 4
+    - 10
+    - 13
+    - 19
+  limits: Version-designated document captures, not immutable URL promises/latest-version discovery or full conformance
+    review. DPX physical pages are printed page+1 due Stable preface. No previously denied operation was retried.
+identity_boundary:
+  preserve_existing_candidate_ids: true
+  preserve_external_identifiers: true
+  preserve_original_discovery_provenance: true
+  no_merge_split_alias_or_new_edition_subject: true
+  renumbering_evidence: DPX physical page2 expressly says former ST268:2014, content unchanged; recorded as a bounded
+    source fact only
+objects:
+- candidate_id: smpte_st12_1
+  candidate_path: 01_State/Inbox/candidates/smpte_st12_1.yaml
+  candidate_blob: a66197a37cb6cc7bc0af70fdd2fe02339886c39d
+  baseline_candidate_blob: c70686c1703c93968bb95f20b19558ef29dcfdd4
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/smpte_st12_1.yaml
+  proposed_record:
+    id: smpte_st12_1
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 12-1 时间与控制码
+    name_en: SMPTE ST 12-1 — Time and Control Code
+    version: '2014'
+    external_identifiers:
+    - namespace: smpte
+      value: st.12-1
+    official_url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf
+    description_zh: 规定电视及伴随音频系统时间与控制码的标准；本次审阅固定 ST 12-1:2014 的时间地址、二进制组、标志位与 LTC/VITC 传输范围。
+    description_en: A television and accompanying-audio time-and-control-code standard; this review fixes ST 12-1:2014
+      and its time-address, binary-group, flag and LTC/VITC transport scope.
+    scope_notes_zh: 保留既有 smpte_st12_1 / smpte:st.12-1 工作级标准身份，审阅上下文固定为 2014-02-20 批准的 ST 12-1:2014，不新建版次主体或声称最新版。§1
+      定义电视及伴随音频系统的时间地址、二进制组和标志位，以及 LTC 与 VITC 的主要传输结构。VITC 调制和位置的规定仅覆盖 525/59.94 与 625/50 模拟复合或分量系统；这不把 ST 12-2
+      的 ATC 封装、D-VITC 或所有数字视频传输并入本主体。此处仅核实标准身份和上述范围，并非逐项审计所有帧率、计数模式、标志位或电气要求。DPX 的另列 uses 关系仅涉及固定 2014 版电视信息头中的非核心时间码/用户位元数据，不等于
+      LTC/VITC 信号传输。未运行时间码生成器、解析器或媒体工具；不证明 UTC 同步精度、设备认证、实现符合性、部署、跨系统互通或 IA 采用。
+    scope_notes_en: Preserves the existing work-level identity smpte_st12_1 / smpte:st.12-1, reviewed at ST 12-1:2014
+      approved 2014-02-20, without a new edition subject or latest-version claim. Section 1 defines time addresses,
+      binary groups and flags for television and accompanying audio, plus primary LTC and VITC transport structures.
+      VITC modulation/location provisions cover only 525/59.94 and 625/50 analog composite or component systems;
+      ST 12-2 ATC carriage, D-VITC and every digital-video transport are not folded into this subject. This is a
+      bounded identity/scope review, not an exhaustive audit of frame rates, counting modes, flags or electrical
+      requirements. The separate DPX uses relation concerns non-core time-code/user-bit metadata in the fixed 2014
+      television header, not LTC/VITC signal transport. No generator, parser or media tool was executed. UTC synchronization
+      accuracy, device certification, implementation conformance, deployment, cross-system interoperability and
+      IA adoption are not established.
+    sources:
+    - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=1
+      title: ST 12-1:2014 cover — identity and approval 2014-02-20
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=6
+      title: ST 12-1:2014 §1 — scope and analog VITC limits
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=7
+      title: ST 12-1:2014 §4.1–4.2 — time/control code and LTC definitions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=8
+      title: ST 12-1:2014 §4.3–4.4 — VITC and separate ATC carriage
+      language: en
+      accessed: '2026-10-29'
+    versions:
+    - version: '2014'
+      date: '2014-02-20'
+      status: standard
+      url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf
+    last_verified_at: '2026-10-29T07:01:52.390409+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded official PDF evidence review
+- candidate_id: smpte_st268_dpx
+  candidate_path: 01_State/Inbox/candidates/smpte_st268_dpx.yaml
+  candidate_blob: c6d332bbe6c9214fa123682ea9177fb9442c01ea
+  baseline_candidate_blob: 49cefb391f32edd372238bbc8f9dedc3e63ed230
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      normative-artifact-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/smpte_st268_dpx.yaml
+  proposed_record:
+    id: smpte_st268_dpx
+    type: artifact
+    kind: standard
+    name_zh: SMPTE ST 268-1 数字运动图像交换（DPX）文件格式
+    name_en: SMPTE ST 268-1 — File Format for Digital Moving-Picture Exchange (DPX)
+    version: '2014'
+    external_identifiers:
+    - namespace: smpte
+      value: st.268
+    official_url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf
+    description_zh: 定义DPX 2.0栅格图像交换文件格式；单个文件表示一幅图像。
+    description_en: Defines the DPX 2.0 raster-image interchange file format; each file represents one image.
+    scope_notes_zh: 保留既有 smpte_st268_dpx / smpte:st.268 工作级身份，固定审阅 2014-11-01 批准的 DPX 标准。所读官方 PDF 含 2015-01-15 的
+      Table 5B 纠正；封面说明 2017-05-22 将 ST 268:2014 重编号为 ST 268-1:2014 且内容未变，不能把这一说明泛化为所有版次等同。物理第 1 页的 Stable 封页表明仍有效、未弃用或撤销，但并非现行技术推荐、最新版本或不可修订。§1
+      定义 DPX 2.0 栅格图像交换文件，每个文件是一幅图像，可含最多八个图像元素；不定义输入/输出设备或显示器特性。审阅限于身份、范围及非核心电视头字段 58/59 的时间码/用户位表示，不穷尽审计像素打包、色度、ADX
+      或其他字段。未知的非核心字段值按 §4.3 填未定义值，核心读取器无须读取非核心字段；不声称每个 DPX 文件都有有效时间码或携带 LTC/VITC 信号。本批不收入 ST 268-2 扩展，也不把旧版规范引用接到现有不同版次对象。未执行图像解析器、编码器或媒体应用，不证明软件支持、完整符合性、设备认证、互通、部署或
+      IA 采用。版本指定 PDF 的捕获哈希限定此次证据，不保证 latest 路径永久指向相同字节。
+    scope_notes_en: 'Preserves the work-level smpte_st268_dpx / smpte:st.268 identity, reviewing the DPX standard
+      approved 2014-11-01. The official PDF includes the 2015-01-15 Table 5B correction; its cover records the 2017-05-22
+      renumbering of ST 268:2014 to ST 268-1:2014 with unchanged content, not equivalence of all editions. Its physical-page-1
+      Stable notice says it remains in force rather than deprecated or withdrawn, not that it represents current
+      technology, is latest, or cannot be revised. Section 1 defines DPX 2.0 raster-image exchange: each file is
+      one image with up to eight image elements, excluding input/output-device and display characteristics. Review
+      is bounded to identity, scope and non-core television-header fields 58/59 for time-code/user-bit representation,
+      not exhaustive pixel-packing, colorimetry, ADX or other-field review. Section 4.3 requires undefined values
+      for unknown non-core fields; core readers need not read those fields. Not every DPX file therefore has valid
+      time code, nor does this establish LTC/VITC signal carriage. ST 268-2 extensions and links from older references
+      to different accepted editions are excluded. No parser, encoder or media application ran; software support,
+      full conformance, certification, interoperability, deployment and IA adoption are not established. Captured
+      PDF hashes bound this evidence, not permanent bytes at the latest path.'
+    sources:
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=1
+      title: ST 268-1:2014 Stable cover — in-force status and limitations
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=2
+      title: ST 268-1:2014 cover — approval, Table 5B correction and unchanged-content renumbering
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=4
+      title: ST 268:2014 printed p3 §§1–2 — DPX scope and exact ST 12-1:2014 reference
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=10
+      title: ST 268:2014 printed p9 §§4.2–4.3 — undefined values and non-core boundaries
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=13
+      title: ST 268:2014 printed p12 §6.2 — fields 58/59
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=19
+      title: ST 268:2014 printed p18 Table 6 — time-code and user-bit representation
+      language: en
+      accessed: '2026-10-29'
+    versions:
+    - version: '2014'
+      date: '2014-11-01'
+      status: standard
+      url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf
+    last_verified_at: '2026-10-29T07:01:52.390409+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded official PDF evidence review
+relations:
+- proposed_path: 01_State/02_Relations/dpx-timecode-representation.yaml
+  proposed_record:
+    id: smpte_st268_dpx_uses_smpte_st12_1
+    type: relation
+    name_zh: DPX电视信息头使用SMPTE时间码与用户位表示
+    name_en: DPX television headers use SMPTE time-code and user-bit representation
+    source: smpte_st268_dpx
+    relation: uses
+    target: smpte_st12_1
+    context:
+      version_context:
+        source: SMPTE ST 268-1:2014 (originally ST 268:2014), approved 2014-11-01, Table 5B corrected 2015-01-15;
+          2017 renumbering has unchanged content
+        target: SMPTE ST 12-1:2014, approved 2014-02-20; exact dated normative reference, existing work-level smpte:st.12-1
+      conditions_zh: 仅固定 ST 268-1:2014（原 ST 268:2014）电视信息头的非核心字段 58/59：§2 明确引用 ST 12-1:2014；§6.2 将时间码与用户位分别设为偏移
+        1920 与 1924 的 4 字节 U32 字段，并指向 Table 6 的表示。Table 6 沿用 SMPTE 12M 标签；不是另指一个已审阅的旧版目标或完整 LTC/VITC 波形。§4.3 的核心读取器可不读这些非核心字段，正确值未知时写入方必须填
+        UNDEFINED；§4.2 对 U32 指定 FFFFFFFF hex。不能把未定义值当有效时间码，不能推导每个 DPX 文件都存在有效时间码或所有核心实现都读取它们。关系是有版次与字段条件的规范 uses，不是时间码信号运输、强制运行时依赖、所有版本兼容、图像/软件完整符合性、UTC
+        同步、认证或 IA 采用。其他 DPX 规范引用、MXF、ATC、ST 268-2 和软件实现均不增加边。
+      conditions_en: Limited to non-core fields 58/59 in the fixed ST 268-1:2014 (formerly ST 268:2014) television
+        header. Section 2 cites exactly ST 12-1:2014; section 6.2 places time code and user bits in four-byte U32
+        fields at offsets 1920 and 1924, respectively, using Table 6 representation. Table 6 retains SMPTE 12M labels;
+        this does not select a separately reviewed older endpoint or describe complete LTC/VITC waveforms. Section
+        4.3 allows core readers not to read non-core fields and requires writers to use UNDEFINED when a correct
+        non-core value is unknown; section 4.2 gives FFFFFFFF hex for U32. Undefined is not valid time code, and
+        neither valid time code in every DPX file nor consumption by every core implementation follows. This is
+        a version- and field-conditioned normative uses relation, not signal transport, a mandatory runtime dependency,
+        all-edition compatibility, complete image/software conformance, UTC synchronization, certification or IA
+        adoption. No edges for other DPX references, MXF, ATC, ST 268-2 or implementations are added.
+    evidence:
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=4
+      title: ST 268:2014 printed p3 §§1–2 — DPX scope and exact ST 12-1:2014 reference
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=10
+      title: ST 268:2014 printed p9 §§4.2–4.3 — undefined values and non-core boundaries
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=13
+      title: ST 268:2014 printed p12 §6.2 — fields 58/59
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=19
+      title: ST 268:2014 printed p18 Table 6 — time-code and user-bit representation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=6
+      title: ST 12-1:2014 §1 — time-code structure distinct from complete transport implementations
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T07:01:52.390409+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded DPX/time-code representation evidence review
+membership_proposals:
+- category_id: editing
+  ref:
+    surface: canonical
+    id: smpte_st12_1
+  rationale_zh: 时间与控制码的制作/编辑知识导航，不是能力或采用声明。
+- category_id: image_color
+  ref:
+    surface: canonical
+    id: smpte_st268_dpx
+  rationale_zh: DPX 栅格图像交换格式的既有图像类别导航。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 50292
+  sha256: f5d4e2465d9ec136365eb70e7af90fb18f4c642f8996cc237a47b067c6ee0de2
+  git_blob: 8ae8ccb010867825d0e0ee5f21e985b759600909
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/02_Relations/apple-google-human-interface.yaml
+  bytes: 8207
+  sha256: c3d6ea5bc181d7782adc2124568682d2d33ff7bf9bcb071dc2fe7f9b188dbad6
+  git_blob: 82d8b76e99c4f5090ef597a122eaa29fb4ff0a7c
+- path: 01_State/01_Objects/smpte_mxf.yaml
+  bytes: 5349
+  sha256: a9304a76f7b7d0f06c324fe7f2dad153c875d5c626a0464b4a0a8a76f8c768cd
+  git_blob: be0cc2812798d58517604bdf628e9213e01331c7
+- path: 01_State/01_Objects/smpte_umid.yaml
+  bytes: 6913
+  sha256: e6c9cfe282c2795ca6ec0ff078a9869c2a2a3ceb6742e357d3b3507f0617a10e
+  git_blob: 4c4ca4622bdcf41236e8add19b8d9ea8e748c018
+- path: 01_State/02_Relations/mxf-package-identification.yaml
+  bytes: 5472
+  sha256: 338b390fdad50a0532cd7f1c7930dad1885b943caa56594d5c890c88af8fae88
+  git_blob: 33c22021102cc8b2efc33796234521e60df8d0e2
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/README.zh-CN.md
+  bytes: 302612
+  sha256: 563d879b4375e2df9afead14fe474dc2d7c21ad049b0d19eb9782d9cd062b26e
+  git_blob: ac7e60e72be696247ef5a73980b08fb5a3affecb
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/reproduce.py
+  bytes: 22718
+  sha256: 6f219042b3f2eb8f26b40e58cdffd5f3fb05d254dff938b89dcd78917cb14645
+  git_blob: e673e25d004e2c5cff86dd1a32a71bf9476150d0
+- path: 03_Evolution/01_Research/02_Audits/domain-coverage-2026-10-24/snapshot.json
+  bytes: 1538538
+  sha256: c259b5d412fad7ddd3bed745e90da7f94ab5e747866f4e59b7b07c1797adce2c
+  git_blob: 97e99a1fec8c92bda338f05155dfd6e792fbe4fe
+excluded_scope:
+- No MXF/timecode, ST268-2, ATC, implementation or cross-edition inferred relations.
+- No current/latest, all-fields/full-conformance, UTC-sync, security/certification, deployment or IA-adoption claim.
+- No identity adjudication, schema/model/renderer/governance/maintenance change or held-candidate updates.
+- No remote write, freeze or materialization in this preparation stage.
+materialization_boundary_zh: 作者根仅更新两个候选及新增本 packet；Canonical、技术关系、导航、事件和历史快照不改。新独立语义复核通过后，父任务控制实际冻结发布与普通 fetch；保留真实
+  frozen commit/blob 祖先，再按既有流程物化并独立结构复核。
