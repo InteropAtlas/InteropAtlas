@@ -1,0 +1,68 @@
+contract_version: candidate-object-v1
+candidate_id: cmark
+label: cmark CommonMark C parser and renderer — 0.31.2
+publisher: John MacFarlane and commonmark/cmark contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: commonmark/cmark
+locators:
+- url: https://github.com/commonmark/cmark
+  role: official
+- url: https://github.com/commonmark/cmark/tree/eec0eeba6d31189fd828314576494566d539b1e3
+  role: dated
+- url: https://github.com/commonmark/cmark/releases/tag/0.31.2
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  merge_authorized: false
+  reasons:
+  - Official commonmark/cmark repository, 0.31.2 release, exact tag commit and matching versioned specification
+    body identify the C library/CLI subject. It is distinct from the CommonMark standard, commonmark.js and cmark-gfm.
+    No normalized canonical external-ID collision or existing matching candidate was found at the exact checked
+    base.
+  - Intake author rechecked exact baseline 06c95c8808658700f7dc524f6d5d0bdc6eb88d99 with current canonical legacy-ID
+    adapter and existing candidates; new routes only to review_required, not acceptance or identity merge.
+unknowns:
+- 官方 cmark C 解析/渲染库及命令行程序，固定 0.31.2，将 CommonMark 文档语法连接到结构化 AST 和 HTML 片段输出。本地自定义静态构建在显式 --unsafe 下逐字节通过公开的 CommonMark
+  0.31.2 全部 652 个示例，并通过 35 项有限诊断（1 项 CLI 版本核对与 34 项行为观察）；这不是完整上游套件或任意输入的符合性证明。核心 CommonMark 不包含 GFM 表格、任务列表复选框、删除线或裸
+  URL 自动链接。HTML 输出默认省略原始 HTML 并过滤部分 URL scheme；--unsafe 会放行，旧 --safe 是空操作，不能撤销 --unsafe。此 HTML 渲染器专用策略不是清理器或安全保证。未启用
+  --validate-utf8 时非法字节可能原样输出；该选项替换非法序列，而非拒绝输入。CommonMark 重新渲染会改变原标记形式，并可能保留原始 HTML。源码/blob 及本地二进制哈希不证明官方发行构建、可复现构建、签名/证明验证或供应链认证。
+- The official cmark C parser/rendering library and CLI, fixed to 0.31.2, connects CommonMark document syntax to
+  structural AST and HTML-fragment output. A custom local static build passed the 652 published CommonMark 0.31.2
+  examples byte-for-byte with explicit --unsafe and 35 finite diagnostic checks (one CLI version check and 34 behavior
+  observations); this is not the full upstream suite or all-input conformance. Core CommonMark is not GFM tables,
+  task-list checkboxes, strikethrough or bare-URL autolinking. HTML output omits raw HTML and filters some URL schemes
+  by default; --unsafe permits them, while legacy --safe is a no-op and cannot revoke --unsafe. This HTML-renderer-specific
+  policy is not a sanitizer or security guarantee. Without --validate-utf8 an invalid byte can pass through; that
+  option replaces invalid sequences, not rejects them. CommonMark re-rendering changes original markup and can preserve
+  raw HTML. Source/blob and local binary hashes do not establish an official distribution build, reproducible build,
+  signature/attestation verification or supply-chain certification.
+- 主体是 commonmark/cmark，不与 commonmark.js、cmark-gfm、语言封装、GitHub 生产渲染器或 CommonMark 规范本身合并。0.31.2 发布于 2026-02-14，轻量
+  tag 固定到 eec0eeba6d31189fd828314576494566d539b1e3。固定 test/spec.txt 标明 2024-01-28 的规范 0.31.2，去除元数据后的正文与公开版本逐字节一致。仅建议
+  document_representation：标题、强调、列表、链接、代码和 XML AST 观察支持结构化文档内容、层次及可导航元素。35 项诊断由 1 项版本核对和 34 项行为检查组成；652 个示例使用自写逐字节比较脚本，不是上游测试运行器。UTF-8
+  诊断保留输入、预期、实际输出十六进制；NUL 和换行符可能被规范化。URL 过滤允许部分图片 data URL，不宣称拒绝所有 data URL。HTML 默认策略不删除 CommonMark/XML 表示中的原始节点；所选
+  CommonMark 往返保留渲染后的 HTML，而非源字节。因缺少 CMake，本地编译采用不改动的固定源码、由 CMake 清单导出的 C 文件列表及本地生成的版本/导出头，不是上游 CMake 构建。未覆盖动态库
+  ABI、AST 修改 API、groff/LaTeX、模糊/病理/资源测试、浏览器执行、第三方互通、性能、安全性或 IA 采用。COPYING 区分源码组件、文档及测试通知；不填写 license_expression
+  和 open_source，避免将不同范围简化为法律判断。
+- 'The subject is commonmark/cmark, not commonmark.js, cmark-gfm, a language wrapper, GitHub production rendering,
+  or the CommonMark standard itself. Release 0.31.2 was published on 2026-02-14; its lightweight tag points to eec0eeba6d31189fd828314576494566d539b1e3.
+  The fixed test/spec.txt identifies spec 0.31.2 dated 2024-01-28, and its body after metadata is byte-identical
+  to the published versioned specification. Only document_representation is proposed: headings, emphasis, lists,
+  links, code and XML AST observations support structured document content/hierarchy/navigation. The 35 diagnostic
+  checks comprise one version check and 34 behavior checks; the corpus uses a self-authored exact-byte harness,
+  not the upstream test runner. UTF-8 diagnostics retain input/expected/observed hex. NUL and line endings can be
+  normalized. The URL filter allows selected image data URLs; no blanket prohibition is claimed. Default HTML policy
+  does not remove raw nodes from CommonMark/XML representations. The selected CommonMark roundtrip preserved resulting
+  HTML, not source bytes. The build uses unchanged fixed source and its CMake-derived C file list with locally generated
+  version/export headers because CMake was unavailable; it is not an upstream CMake build. No dynamic-library ABI
+  or AST-mutation API exercise, groff/LaTeX output, fuzz/pathological/resource testing, browser execution, third-party
+  interoperability, performance, security or IA adoption is claimed. COPYING includes separate source-component
+  and documentation/test notices; license_expression and open_source are deliberately omitted rather than reducing
+  those scopes to a legal conclusion.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cbor2_intake/finish_cbor2_author
+  reviewer: null
