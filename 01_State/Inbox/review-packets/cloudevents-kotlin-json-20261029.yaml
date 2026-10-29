@@ -1,0 +1,1138 @@
+packet_id: cloudevents_kotlin_json_20261029
+status: pending_independent_semantic_review
+baseline_commit: 465934d31e515d6b4e6b3e09707cd552ad97c966
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 一个官方Kotlin SDK源码发布0.2.0对象，32SDK文件blob+固定规范比对。
+- 一个既有data_serialization能力字段、一个有界implements→cloudevents_1.0.2与services编辑成员。
+- 独立判断未构建/未运行的实际功能源码是否支持这个有限实现范围，不冒充完整core/JSON认证；不能为凑关系扩大证据。
+work_item_preflight:
+  main_confirmed: 465934d31e515d6b4e6b3e09707cd552ad97c966
+  prior_delivered_pr: 558
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Parent-authorized ordinary continuation after fully verified PR558; no overall Work Item closure.
+  current_counts:
+    objects: 249
+    relations: 190
+    graph_edges: 278
+    candidates: 240
+    acceptance_events: 127
+  proposed_counts_only:
+    objects: 250
+    relations: 191
+    graph_edges: 280
+    candidates: 241
+    acceptance_events: 128
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T11:13:34.367079+00:00'
+  method: Author read actual fixed core/JSON code, six unexecuted tests and two1.0.2 specifications; rehash39 captured
+    bodies/headers and verify32 SDK Git blob IDs against captured official complete tree.
+  capture_manifest:
+    path: /workspace/shared/ia-services-gap-research-20261029/source-manifest.json
+    bytes: 35817
+    sha256: c0c164ac928c9920ef6bbfaca498e6e4cbe30fa7a39f5a7f95e31275c5ea8bda
+  byte_verification:
+    path: /workspace/shared/ia-cloudevents-kotlin-intake-evidence-20261029/source-verification.json
+    bytes: 51940
+    sha256: 91c9db37c851a91199ad6c4a6d4bdc58a1af67964efc6b5623fa32b07b189a95
+  captures:
+  - path: LICENSE
+    file: LICENSE
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/LICENSE
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 11357
+    sha256: c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4
+    git_blob_sha: 261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/LICENSE
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/LICENSE.headers
+    headers_sha256: 98543f99c3913c2dd113f5eb1e9b9b81faf5df66714ef4110a8d91f8c6a8a9f9
+  - path: README.md
+    file: README.md
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 15062
+    sha256: db4066e04013d6ddcaf4b28b592fa371cfbcedada0e5cdddf8d4d25684bb9690
+    git_blob_sha: 96687fb9ae03e3141f6a08a84b9477d58157356f
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/README.md
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/README.md.headers
+    headers_sha256: 38a18394a227329053c790394a8ad29db84ed334547343727edace8c78fdcc25
+  - path: build.gradle.kts
+    file: build.gradle.kts
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/build.gradle.kts
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1775
+    sha256: 648fdcd91ed15828255ccc8437386036c9c49a20ba8390a7b409e7aae53e6f8b
+    git_blob_sha: 7e18e58891c7f56c527d3f8659a0b9a284bf7135
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/build.gradle.kts
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/build.gradle.kts.headers
+    headers_sha256: fff600048a3250edb96a6f0c4dd52d0a919c64619f3c98f968af53cc5232ed31
+  - path: core/build.gradle.kts
+    file: core__build.gradle.kts
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/build.gradle.kts
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 871
+    sha256: 8f2a6f9bcf09eefaa537df7b25f565e44d6b20fd4b99f0f676b6a265cd97d983
+    git_blob_sha: 715bee810e4b734978c9aad873fd500ea96519de
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__build.gradle.kts
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__build.gradle.kts.headers
+    headers_sha256: 488c585e1c97872c8909e016db9e0e821b9cc153b204116ae9872e99903edf09
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/AttributeNaming.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__AttributeNaming.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/AttributeNaming.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1500
+    sha256: 514303b82b1b2a971c06d67b7066c7297b6937cdfff0213753d69f8c25add4eb
+    git_blob_sha: 5f5312a3e7278103f5a5ed7a85228df8ba8df974
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__AttributeNaming.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__AttributeNaming.kt.headers
+    headers_sha256: 94aa334265619237100ffc772f0d435313bfd0415f4ba5deb981c86e5efc2e8f
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEvent.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEvent.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEvent.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 4371
+    sha256: e95c4ee82b454e8d361d5bc8cc7a51a3a385a5ea54d1137d82cb9a78456f15a9
+    git_blob_sha: a7534a927d34e468c165d8fc7ec85a23e66e5088
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEvent.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEvent.kt.headers
+    headers_sha256: d367b9987524d4ca3f14ec3b7d58097029c8f83115c5cfa5329d4b68fdb2191f
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventAttributeValue.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventAttributeValue.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventAttributeValue.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 4144
+    sha256: 578223fac5cb6df84a9dd415b0c6ad1e0c664d69e5790053c31de6a1b35c87bb
+    git_blob_sha: bce6bc8182c8ac2cc686bff5822ef56e4dd8e89c
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventAttributeValue.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventAttributeValue.kt.headers
+    headers_sha256: a983f8b56579f913f9106dabce828fd6fe42b2ac786da9ce32715f73bf29e446
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventBuilder.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 4595
+    sha256: 89b83cc00fac76c5fef1990afb2509d3ea899c5281f39ee9179660800f20cfd7
+    git_blob_sha: 0502f9a5c5511e0152b88f29efbd4d5057101ca6
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventBuilder.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventBuilder.kt.headers
+    headers_sha256: 800dd3a590042850b5ffc20e3b91cea267217ba94fb94ea9f1734f9729b224f1
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventData.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventData.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventData.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1442
+    sha256: 6122111fe421a2fb976ed02bd5656ba5da611fa64b3cd16efac5852e716c19c8
+    git_blob_sha: 8914cd29d09f10a4c84d1b13945a9c60fe7f99ee
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventData.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__CloudEventData.kt.headers
+    headers_sha256: 621f1d957625304d6de659c79eba17b690a31f178d2332222cfafcafc3fe9e7b
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Formats.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Formats.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Formats.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 13173
+    sha256: 5d73e9d1f658e8cda2a851965a02dc3ceddbf1a34d36c8c68ff853685baee008
+    git_blob_sha: 6f2e120f283b60899e9103dc2f5398ac72405b82
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Formats.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Formats.kt.headers
+    headers_sha256: 656979a516a2102867daadf2b4180cd14ad3641c2b1030ebd0d5038fe0f0a496
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/MessageSpi.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__MessageSpi.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/MessageSpi.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1880
+    sha256: 08e2ab4793c82f74b0f7d3de7349656d6acfb51ef7a883068f35a805d90b4f90
+    git_blob_sha: eda64bda09b229c42d51bee9f4c32a6e76d244b2
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__MessageSpi.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__MessageSpi.kt.headers
+    headers_sha256: 257271182b29abccb3cd42d4dc8b7eefb20554285b2f65387165db6434df78ca
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/SpecVersion.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__SpecVersion.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/SpecVersion.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2078
+    sha256: 56afd292465708816bae76f8d7f4de437888905d01cd72f92f28bf45ebe1b1de
+    git_blob_sha: cd90ac610d1f58adda889e66a8a0e48fd75084cc
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__SpecVersion.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__SpecVersion.kt.headers
+    headers_sha256: 8cf9f675d6c0a13ac826938e8dc857d2cd2da8547eca41fb9ba3412f25779b23
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Validation.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 5437
+    sha256: ec914f1c12d6684e319d0f30a8a6e1a8b254893bf163c871d3b07340c5d3e36c
+    git_blob_sha: 040e35d3e284454b29f02536b7b110ee912ae2a1
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Validation.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__Validation.kt.headers
+    headers_sha256: 15fd7a6629a1718c25cb87b40c1112f00e2a89744a318e4162a2dc2500cb9075
+  - path: core/src/commonMain/kotlin/io/cloudevents/kotlin/core/ValidationMode.kt
+    file: core__src__commonMain__kotlin__io__cloudevents__kotlin__core__ValidationMode.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/ValidationMode.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 844
+    sha256: 851551787bd721ac74d724c5fed3c77d1f532f566ad5541041f0e064fdb3a193
+    git_blob_sha: 8719d9d41f52cd3f734f05337236a1b73d299d08
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__ValidationMode.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonMain__kotlin__io__cloudevents__kotlin__core__ValidationMode.kt.headers
+    headers_sha256: 82c88bc24d2f8f4cd1509a3023da0ab6a1d605628b692a97fd97da92bdbeb063
+  - path: core/src/commonTest/kotlin/io/cloudevents/kotlin/core/CloudEventBuilderTest.kt
+    file: core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventBuilderTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/CloudEventBuilderTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2888
+    sha256: 663ce7048d4d28c248d3a92057fc10c8a5afa1f43908edeffaff4610406ad2bd
+    git_blob_sha: c4d7ade5f28f5ee5c2d63bd555c366942c97d155
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventBuilderTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventBuilderTest.kt.headers
+    headers_sha256: 157bcc45f0effea881c3320192834702dadb18232a4c9ab85937a85a6ee28b4f
+  - path: core/src/commonTest/kotlin/io/cloudevents/kotlin/core/CloudEventModelTest.kt
+    file: core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventModelTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/CloudEventModelTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2170
+    sha256: f89c567750cc2decc4c8f85912f159918b91b838754cf745d286b2b793e0dcd8
+    git_blob_sha: 711b8767eec695ee8343fa19ac0e9c93952d7b97
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventModelTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__CloudEventModelTest.kt.headers
+    headers_sha256: 2339622659d90676e47e2af0fe68e7b8357632837e5d2974e87ab7129e5552f9
+  - path: core/src/commonTest/kotlin/io/cloudevents/kotlin/core/ValidationTest.kt
+    file: core__src__commonTest__kotlin__io__cloudevents__kotlin__core__ValidationTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/ValidationTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1579
+    sha256: 2d2516ec8ecb53e487261d326c00f472ac621ff76d6e44b41278daac078aed56
+    git_blob_sha: c23030db657e176935880bf47440c0be987ce16d
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__ValidationTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/core__src__commonTest__kotlin__io__cloudevents__kotlin__core__ValidationTest.kt.headers
+    headers_sha256: 380587def1d54a3e981bac0821e837ce3c1b1c0371a0eb3055ebad298ca91c79
+  - path: gradle.properties
+    file: gradle.properties
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/gradle.properties
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 161
+    sha256: 3e4320a2bd9e7e5040dfd993adeffd0b595ee3548d7df954ad37ae0b0dfb45d1
+    git_blob_sha: a77e5e256ca1742c6bf59ac1672076ca3f0bb85e
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/gradle.properties
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/gradle.properties.headers
+    headers_sha256: 3070933a50c4a5b5299c4699ee724e8f63e005b32c9b330504a9802a95a4b051
+  - path: gradle/libs.versions.toml
+    file: gradle__libs.versions.toml
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/gradle/libs.versions.toml
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2464
+    sha256: ad584dfec4431b61558cd24be34f2cf9458f4bdfb3605134b29dec2b7eb93655
+    git_blob_sha: 2b4c72c200e34eb4543c2b2efff804c3ac0c8a02
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/gradle__libs.versions.toml
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/gradle__libs.versions.toml.headers
+    headers_sha256: 9b1d34af3a177e606a748ab8fad6d961f06a32e4a8fa35419bfbae8228c333e8
+  - path: json/build.gradle.kts
+    file: json__build.gradle.kts
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/build.gradle.kts
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2081
+    sha256: b38f2c9fcf75445b7252b85a1b9f031b8a76c53fb534af49cc707717aa1bcb7a
+    git_blob_sha: 66cb06af154e107a8833796bd998a0203b9acf44
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__build.gradle.kts
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__build.gradle.kts.headers
+    headers_sha256: 96edc4614c9eb5d0c8a80591f15cdb16defad30c288bf20c80fddab9d50f397c
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDataCarrier.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 3181
+    sha256: d38b1e526e6da01acf52544bcc02496a76c528728320143a35654508c4785bdf
+    git_blob_sha: b7df6434e9d18a51faa1c2596406ca3ce5e62ed9
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDataCarrier.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDataCarrier.kt.headers
+    headers_sha256: 44257c462f9a5263ca7e7e3fb7cea85081c9d4ee5b9a72d72b436a21f24a775d
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDecoder.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 4150
+    sha256: 6e79386678c9f65111ec25383eb27f81c2300657e0233a67b0521ad57357ce8f
+    git_blob_sha: e582fda3415effd1e0921242d22dbd4a96727bd0
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDecoder.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventDecoder.kt.headers
+    headers_sha256: 1818fb37309d2621ab917543955898db9fe97cb02f786f4082c8ebb261f365b3
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventEncoder.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 5707
+    sha256: d16af750bd1d25ae5c9276666a1211e0486836471a4bf80d5dacc46ee93dc679
+    git_blob_sha: 188fd8ec4db85cab95e93495608f2d49260d39cb
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventEncoder.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__EventEncoder.kt.headers
+    headers_sha256: 84b49aa176fbf2fa1f3ca57280a0f8ae41167b444b4604ec22086342c30bccc6
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonContentType.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 558
+    sha256: dfa5e569ba01622315303399bd3a9df2472a7a731996dc449db1b0c89513726a
+    git_blob_sha: ed3e3db718d8ed2f8f8a1baf75873d82ed56b8d0
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonContentType.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonContentType.kt.headers
+    headers_sha256: 4dbd3b1c8e09fa7358fe53077676de4bc0be99cd6b1cd3cef6bd7c5438ce4e1a
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonDataReader.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 3473
+    sha256: 73f9a834af452e200d3f2882cea6977450277af456eb538aac8015d058b895a3
+    git_blob_sha: 4a2ccb9f4b446dc9d39dd5c09b1ffa41edf69ee5
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonDataReader.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonDataReader.kt.headers
+    headers_sha256: 394d070dee2cdec342a8f34fe5bbb26675044bc062c32296f05ef5ebae1133bc
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormat.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 2103
+    sha256: b2682a65772e02480d6416304442d076bf20cdbee60f17a2f083523ba9ecf389
+    git_blob_sha: ff1caddbdb649d08177aa5387b2d89cc0b78e035
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormat.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormat.kt.headers
+    headers_sha256: bca1d378c2eb23b8867b56e52e283f06110ea3d92ee9654dfbdfc1d0d3b097bc
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormatException.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormatException.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormatException.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 616
+    sha256: 98f94e8fbdde23239145ed82e8371b8e82f3772e884ae62bb364c6804c24c45f
+    git_blob_sha: b9625bf76c53009552bea2d315c8cd3defbbd202
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormatException.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonEventFormatException.kt.headers
+    headers_sha256: cf0f5dd7bf547eeb74f0858524abd9d9f68876a7ebda705a10e2b5b9311f8907
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonExtensionReader.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 3724
+    sha256: 2857e9aaee8c08795d0b954353f806d90ce2e29a034d84aa53e538ed8f3bfcca
+    git_blob_sha: 257fec51dab62446937467a325397d15a913c90b
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonExtensionReader.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonExtensionReader.kt.headers
+    headers_sha256: 1bfb2f2413943685016297f6ff82dca62e2e782045c5d75df9944f54806ac016
+  - path: json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt
+    file: json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonFieldReader.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 1633
+    sha256: 54e0c18a1d52129b110919c4295345743101fc0ffd0a1ffc349b110c1b06c5d9
+    git_blob_sha: a15b96cc95f995f75ba954bcd3dd329f287d5eb6
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonFieldReader.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonMain__kotlin__io__cloudevents__kotlin__json__JsonFieldReader.kt.headers
+    headers_sha256: 5cef9fe22e0e65d33f35f6da3a8e68a0ca01e049e500a598dc22b0dda1eb5745
+  - path: json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatConformanceTest.kt
+    file: json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatConformanceTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatConformanceTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 12435
+    sha256: f53ef1d5678a8c98677440ac5633bb98e9d1bf2adf7759b210fd123151b2060d
+    git_blob_sha: b5eef08b2b77d2659f431e7d9ee1ad694806dc55
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatConformanceTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatConformanceTest.kt.headers
+    headers_sha256: af78fd4da1e79078cff02dacca658cdef8266c2ff2cec3ee3500e18c9d5ae861
+  - path: json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatDecodeTest.kt
+    file: json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatDecodeTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatDecodeTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 5381
+    sha256: 1700bbe9da82d1c8d7f6e1815cfd0f318e9875d3576e3482fb49ac8e41b6cf30
+    git_blob_sha: 28c826124e2a3a322193ff07762345089161a726
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatDecodeTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatDecodeTest.kt.headers
+    headers_sha256: 9f4ed4be51efb821b785b75548905699ba282e75f787409161e5f3d72c2c9b84
+  - path: json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatEncodeTest.kt
+    file: json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatEncodeTest.kt
+    url: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatEncodeTest.kt
+    final_url: null
+    http_status: null
+    acquisition_result: Raw body and response headers captured successfully; individual returned status/final URL
+      not persisted after a later parallel task failed. Do not claim individually recorded transport status.
+    bytes: 6615
+    sha256: 8ab4ed9bb7782426091b8f53771de4a338b4f6541f159debe4e2a38e2a186544
+    git_blob_sha: 77b75e21388f91cf520f6289cacba10c52cd5f67
+    matches_official_tree_blob: true
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:16Z'
+    - '2026-10-29T10:44:18Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatEncodeTest.kt
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/json__src__commonTest__kotlin__io__cloudevents__kotlin__json__JsonEventFormatEncodeTest.kt.headers
+    headers_sha256: 854e1a4fad1c6a7b945f4d1cf5c69066a616f5f6db6f8ebe6ab6256a289cf54e
+  - path: cloudevents/spec.md
+    file: spec__cloudevents__spec.md
+    url: https://raw.githubusercontent.com/cloudevents/spec/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md
+    final_url: https://raw.githubusercontent.com/cloudevents/spec/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md
+    http_status: 200
+    bytes: 25542
+    sha256: e327435c858d19fd171e4ab9781a01fc22dfa949d23c4220976529ebd16a1aa3
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:45:11Z'
+    - '2026-10-29T10:45:46Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/spec__cloudevents__spec.md
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/spec__cloudevents__spec.md.headers
+    headers_sha256: ee8dc8e398f7f48ad5fc92826ed7c8a63e6c08b66449dbdb4ca47f2445379c4e
+  - path: cloudevents/formats/json-format.md
+    file: spec__cloudevents__formats__json-format.md
+    url: https://raw.githubusercontent.com/cloudevents/spec/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md
+    final_url: https://raw.githubusercontent.com/cloudevents/spec/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md
+    http_status: 200
+    bytes: 17640
+    sha256: 30778f995a2c82f3ac6c4f7cd56415d675111990151c9ab67bd0a2de1d0e1ce5
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:45:11Z'
+    - '2026-10-29T10:45:46Z'
+    local_path: /workspace/shared/ia-services-gap-research-20261029/spec__cloudevents__formats__json-format.md
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/spec__cloudevents__formats__json-format.md.headers
+    headers_sha256: d7e8c7581af33249a3d05d39955644c90ba427a8b47dfc8f1dd9676aab2017f1
+  - file: sdk-kotlin-release.json
+    url: https://api.github.com/repos/cloudevents/sdk-kotlin/releases/latest
+    final_url: null
+    http_status: 200
+    bytes: 2798
+    sha256: ff8c1b8c9331eb9ff68aca6600f2fb10baf950194654bc3a897796780fc369bf
+    role: release and tag/tree identity evidence
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:42:05Z'
+    - '2026-10-29T10:42:36Z'
+    transport_note: Successful official API capture with headers; final URL was not separately printed/retained.
+      Tree response status not separately printed, successful JSON parse and complete tree retained.
+    local_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-release.json
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-release.headers
+    headers_sha256: 516e93776ca6b50d90444961da40328ebdaf0ae24c75bd724c1412d8cf60d8fe
+  - file: sdk-kotlin-tag.json
+    url: https://api.github.com/repos/cloudevents/sdk-kotlin/git/ref/tags/v0.2.0
+    final_url: null
+    http_status: 200
+    bytes: 339
+    sha256: e502ecd4af5aedec51048ff3f1b305c0d0aadcd8029a7b3c7c81826d6d47db48
+    role: release and tag/tree identity evidence
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:42:36Z'
+    - '2026-10-29T10:43:00Z'
+    transport_note: Successful official API capture with headers; final URL was not separately printed/retained.
+      Tree response status not separately printed, successful JSON parse and complete tree retained.
+    local_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tag.json
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tag.headers
+    headers_sha256: 2c0cbe2e9be62bb78bfa633d5100c0806f3828b31c1029ccd1b8a65120df9986
+  - file: sdk-kotlin-tag-object.json
+    url: https://api.github.com/repos/cloudevents/sdk-kotlin/git/tags/a8002adf8afed56433096b6aeb01c91dad9e780a
+    final_url: null
+    http_status: 200
+    bytes: 699
+    sha256: 1239ddd716de77c09775d383fda3ec6ad31f9d40866fce62dbbd999c986d219f
+    role: release and tag/tree identity evidence
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:00Z'
+    - '2026-10-29T10:43:16Z'
+    transport_note: Successful official API capture with headers; final URL was not separately printed/retained.
+      Tree response status not separately printed, successful JSON parse and complete tree retained.
+    local_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tag-object.json
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tag-object.headers
+    headers_sha256: d3106be6116a83c451e8e2df946f816a572f95ead3b38f6fc857e66886d77391
+  - file: sdk-kotlin-tree.json
+    url: https://api.github.com/repos/cloudevents/sdk-kotlin/git/trees/27b718156fd9410a926e08f087ee67c7ba421c1a?recursive=1
+    final_url: null
+    http_status: null
+    bytes: 36704
+    sha256: 4cec62abb2391f5a9215ea5e4d8787b751a6e07ab874128023706f8623648c55
+    role: release and tag/tree identity evidence
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:43:00Z'
+    - '2026-10-29T10:43:16Z'
+    transport_note: Successful official API capture with headers; final URL was not separately printed/retained.
+      Tree response status not separately printed, successful JSON parse and complete tree retained.
+    local_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tree.json
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/sdk-kotlin-tree.headers
+    headers_sha256: f5285fb6be8e3caf6fc78f6e226c5f928674671b104b5a4501a10ca7527c79ab
+  - file: spec-tag-ref.json
+    url: https://api.github.com/repos/cloudevents/spec/git/ref/tags/v1.0.2
+    final_url: null
+    http_status: 200
+    bytes: 341
+    sha256: 23e5c0d383ab58cd3396317960b3ac2f6d4be7abd6c65b2736b63c51a4409c17
+    role: release and tag/tree identity evidence
+    observed_acquisition_window_utc:
+    - '2026-10-29T10:44:01Z'
+    - '2026-10-29T10:44:18Z'
+    transport_note: Successful official API capture with headers; final URL was not separately printed/retained.
+      Tree response status not separately printed, successful JSON parse and complete tree retained.
+    local_path: /workspace/shared/ia-services-gap-research-20261029/spec-tag-ref.json
+    headers_path: /workspace/shared/ia-services-gap-research-20261029/spec-tag-ref.headers
+    headers_sha256: c5fbbaeafd3f1fa7ec7f56aa1e019805f0e690b3b727de229a148edfb9db1cdd
+  source_release_commit: 27b718156fd9410a926e08f087ee67c7ba421c1a
+  target_spec_commit: fc1f6f31f5f011a72183f1bcea20c987cb683ade
+  build_or_runtime_executed: false
+  maven_or_binary_distribution_verified: false
+  denied_action: 'One attempted ordinary unauthenticated raw GitHub GET failed with urllib.error.URLError: <urlopen
+    error Tunnel connection failed: 403 Forbidden>. Exact missing target: https://raw.githubusercontent.com/cloudevents/sdk-kotlin/27b718156fd9410a926e08f087ee67c7ba421c1a/settings.gradle.kts
+    . Observed batch window 2026-10-29 10:43:16–10:44:18 UTC. Other 32 intended raw files were captured with response
+    headers and all match official Git tree blob IDs. The batch exception prevented retaining per-file final URL/status
+    metadata, so manifest explicitly leaves these unrecorded. No retry, alternate route, bypass, escalation, Gradle
+    execution or upstream code execution. This limits full build capture, not available core and JSON code reading.
+
+    '
+  denial_not_retried_or_bypassed: true
+  limits:
+  - Static source/specification comparison only. No SDK build, Kotlin/Gradle/upstream tests, Maven archive/checksum/binary/source
+    equality, installed runtime or platform execution.
+  - Denied exact fixed settings.gradle.kts raw GET remains absent. No retry/alternate target access, download archive
+    or build undertaken.
+  - SDK32 bodies match official tree blobs but their individual HTTP status/final URL were not persisted after acquisition
+    exception. Retained headers are hashed; no fabricated transport metadata. Two normative source requests have
+    separately retained metadata.
+  - Tag object unsigned; observed release/tag identity is not signature/security verification. Research capture
+    windows are not per-request instrumentation or local file timestamps.
+identity_boundary:
+  github_source_project_not_maven_coordinates: true
+  no_specification_or_javascript_alias_merge: true
+  existing_javascript_patch_version_limit_untouched: true
+objects:
+- candidate_id: cloudevents_kotlin_sdk
+  candidate_path: 01_State/Inbox/candidates/cloudevents_kotlin_sdk.yaml
+  candidate_blob: 56b73704a82eb61907542e676d2e03cadfe3886f
+  baseline_candidate_blob: null
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/cloudevents_kotlin_sdk.yaml
+  proposed_record:
+    id: cloudevents_kotlin_sdk
+    type: system
+    kind: library
+    name_zh: CloudEvents Kotlin 事件表示库（源码发布 0.2.0）
+    name_en: CloudEvents Kotlin event representation SDK (source release 0.2.0)
+    description_zh: Kotlin 事件表示库；固定官方源码发布 0.2.0，静态核对 v1.0 事件上下文、非冲突扩展与 JSON 单事件/批量读写。需调用方提供有效字段；构造/编码不自动验证。不是完整
+      CloudEvents 1.0.2 符合性、Maven 二进制、运行测试、网络绑定或投递保证。
+    description_en: 'Kotlin event representation SDK at official source release 0.2.0: static correspondence for
+      v1.0 context, non-colliding extensions and single-event/batch JSON codecs. Callers supply valid fields; construction/encoding
+      does not automatically validate. Not full CloudEvents 1.0.2 conformance, a verified Maven binary, runtime
+      test, network binding or delivery guarantee.'
+    version: 0.2.0
+    versions:
+    - version: 0.2.0
+      status: released
+      url: https://github.com/cloudevents/sdk-kotlin/releases/tag/v0.2.0
+    external_identifiers:
+    - namespace: github
+      value: cloudevents/sdk-kotlin
+    official_url: https://github.com/cloudevents/sdk-kotlin
+    domains:
+    - event_representation
+    - serialization
+    - services
+    capabilities:
+    - data_serialization
+    open_source: true
+    license_expression: Apache-2.0
+    scope_notes_zh: 主体是官方 cloudevents/sdk-kotlin 源码项目及 core/JSON 模块，不是核心规范、Maven 坐标或部署中的服务。GitHub v0.2.0 源码发布/tag
+      固定到 27b718156fd9410a926e08f087ee67c7ba421c1a；固定 README 明示跟踪 1.0.2 文本，测试源码明确引用该版 JSON 条款，不仅据 wire specversion="1.0"
+      推断 patch 版次。README 同时写明 core 尚未发布 Maven Central，故仅记录 GitHub 源码发布，不断言后来仍未发布，不认证二进制/安装可用性。Apache-2.0 据固定 LICENSE/SPDX；tag
+      未签名，不作安全或签名认证。 静态正面范围是调用方提供有效 v1.0 字段、无核心字段重名的合法扩展时，CloudEventBuilder/cloudEvent/copy 建立并读取 id/source/type/specversion、可选
+      datacontenttype/dataschema/subject/time、独立 payload 与扩展值。源代码有 bool/int32/string/URI/URI-reference/Instant/Binary
+      包装和字符串转换；这里不保证完整 RFC 语法或所有输入往返。source+id 唯一性、实际发生时间、事件含义、载荷 schema、权限及真实性由应用负责。 JsonEventFormat 的 encodeToString/decodeFromString
+      与 encodeBatch/decodeBatch 提供内存字符串中的 JSON 单对象/事件数组表示；分别给出 application/cloudevents+json 与 application/cloudevents-batch+json
+      常量。批量是显式独立入口，不因支持单事件便宣称批量或网络协商，也无事务/原子投递语义。固定 1.0.2 核心要求 JSON；此处只连既有核心对象的一条有界 implements，不增 JSON 规范对象/边。 JSON
+      正面路径保持有效上下文字段与顶层非冲突扩展，解码 string/int32/bool（引号数字/布尔仍为 string），null 可选属性/扩展视为 unset。URI/URI-reference/Timestamp/Binary
+      扩展编码成字符串，解码不凭字符串恢复原类型，故不保证全部类型 roundtrip。data 与 data_base64 互斥；缺 data 与 JSON 显式 null 区分。有效 JSON content type（或缺省）下
+      data 为 JSON 值，包括原样 JSON string，非 JSON content type 下 data 字符串保留为文本；data_base64 解码为字节。解码产生内部 JsonData/StringData/Base64Data/NullData
+      carrier，保留其来源表示供重编码；这些类不是独立公共构造 API。普通 core 字节 payload 无 carrier，编码按 content type：JSON/缺省时解析为 JSON 值，否则 Base64，不宣称所有
+      byte payload 都走 binary 或都为 JSON；不要改变已解码 carrier 的 content type 后假定任意转换仍符合规范。时间使用 Instant，重编码 UTC 而非保留原 offset
+      拼写；不主张字节规范化/字节相同、所有类型或任意输入往返。 validate(STRICT) 是单独步骤，会对已实现的必需非空、字符串/source URI 与版次字段检查收集违规后抛异常；LENIENT 返回违规列表。JSON
+      解码调用 STRICT；builder 和 encoder 不调用，成功构造/编码不证明有效事件。扩展命名仅拒绝 data 和非小写 ASCII 字母/数字，并未禁止 id 等核心名；encoder 在核心字段后写扩展，可覆盖其成员。有效、非冲突名称/值由调用方保证。URI
+      包装本身不验证语法，datacontenttype 只按 String 检查而非完整 RFC2046，Instant/URI helper 并非本次完整 RFC3339/3986 认证。无严格 validator、非法输入全拒绝、重复
+      JSON key、资源耗尽或安全保证。 作者只实读固定源码/六份测试定义/两份规范并核验 39 份捕获，其中 32 SDK 文件与官方 Git tree blob 相符；未运行 SDK、Kotlin/Gradle/build/upstream
+      tests 或跨实现互通。settings.gradle.kts 固定 raw GET 曾被 proxy tunnel403 拒绝，未重试/换通道；完整构建输入缺失。32 SDK 捕获的单项 status/final
+      URL 因后续并行异常未保存，原 headers/hash 保留，不伪称完整 HTTP 日志。排除 v0.3、protobuf/其他格式、HTTP/Kafka/AMQP/MQTT/NATS 绑定、发布订阅/路由/自动采集、部署兼容性、加密认证、投递保证与
+      IA 采用。保留既有 JavaScript SDK 的版次边界，不回改旧审计或推导身份等价。
+    scope_notes_en: 'The official cloudevents/sdk-kotlin source project and its core/JSON modules, not the specification,
+      hypothetical Maven coordinates or a deployed service. GitHub source release/tag v0.2.0 resolves to 27b718156fd9410a926e08f087ee67c7ba421c1a.
+      Fixed README explicitly tracks 1.0.2 text and test definitions cite its JSON clauses; the patch target is
+      not inferred merely from wire specversion="1.0". The same README says core is not yet on Maven Central: this
+      records the source release, not a claim that no later publication exists or a verified binary/installable
+      distribution. Apache-2.0 comes from fixed LICENSE/SPDX; the tag is unsigned, not security/signature certification.
+      Static positive scope assumes valid caller-supplied v1.0 fields and valid non-colliding extensions: CloudEventBuilder/cloudEvent/copy
+      construct and expose id/source/type/specversion, optional datacontenttype/dataschema/subject/time, separate
+      payload and extension values. Typed bool/int32/string/URI/URI-reference/Instant/Binary wrappers and string
+      conversions exist; complete RFC grammars and all-input roundtrip are not certified. Source+id uniqueness,
+      occurrence time, event meaning, payload schema, authorization and truth remain application responsibilities.
+      JsonEventFormat encodeToString/decodeFromString and encodeBatch/decodeBatch implement in-memory JSON object/array
+      representations, with distinct single/batch media-type constants. Batch is an explicit separate entry point,
+      not network negotiation, atomic processing or delivery. The fixed1.0.2 core requires JSON; the single bounded
+      implements edge targets that existing core object, with no new JSON specification node/edge. Valid context
+      and top-level non-colliding extensions map to JSON. Decode reconstructs string/int32/bool, preserving quoted
+      numbers/booleans as strings; null optional attributes/extensions become unset. URI/URI-reference/Timestamp/Binary
+      extensions encode as strings without inferred recovery of their original types. data and data_base64 are mutually
+      exclusive. Absent data differs from explicit JSON null. JSON-declared or implicit-JSON data is a JSON value,
+      including a literal JSON string; non-JSON content-type data strings remain text; data_base64 decodes to bytes.
+      Internal JsonData/StringData/Base64Data/NullData carriers preserve decoded origin on re-encoding, not separate
+      public construction APIs. Plain core bytes without carriers are parsed as JSON for JSON/absent content type,
+      otherwise Base64-encoded; this is not universal binary typing. Arbitrarily changing carrier content type is
+      excluded. Instant re-encodes UTC, not original offset spelling; no byte canonicalization/equality or blanket
+      type/input roundtrip. Explicit validate(STRICT) collects implemented nonempty/string/source-URI/version-field
+      violations and throws; LENIENT returns them. JSON decode invokes STRICT, but builder and encoder do not. AttributeNaming
+      excludes data and non-lowercase-ASCII-alphanumeric names, not existing core names such as id; extensions written
+      after core members can overwrite them. Callers ensure valid non-colliding names/values. URI wrappers do not
+      validate their strings, datacontenttype is checked as String rather than full RFC2046, and Instant/URI helpers
+      are not certified RFC3339/3986 validators here. No all-invalid-input rejection, duplicate-key, resource-exhaustion
+      or secure-parser claim. Author inspected fixed code, six test definitions and two specifications and rehashed39
+      captures, including32 SDK files matching official tree blobs. No SDK/Kotlin/Gradle/build/upstream tests or
+      cross-implementation execution. Exact settings.gradle.kts raw GET was denied by proxy tunnel403, without retry/alternate
+      route; full build inputs are absent. Per-file status/final URLs for32 SDK captures were not persisted after
+      a later parallel exception; original headers and hashes remain, not invented complete HTTP logs. Excluded:
+      v0.3, protobuf/other formats, HTTP/Kafka/AMQP/MQTT/NATS bindings, publish-subscribe/routing/automatic capture,
+      deployed platform compatibility, cryptographic verification, delivery guarantees and IA adoption. Existing
+      JavaScript SDK version limits/history stay unchanged; no identity equivalence inference.'
+    sources:
+    - url: https://github.com/cloudevents/sdk-kotlin/releases/tag/v0.2.0
+      title: Official GitHub source releasev0.2.0; not verified Maven binary
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md#L118-L134
+      title: Fixed README publication caveat, not claim about later registry state
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md#L38-L90
+      title: Source module/format versus network-binding boundaries
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/LICENSE
+      title: Apache-2.0 source license
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/build.gradle.kts#L1-L21
+      title: Git-tag-driven source version
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/build.gradle.kts#L22-L35
+      title: JSON module consumes core and kotlinx serialization, not standalone core JSON claim
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md#L23-L31
+      title: Fixed source explicitly tracks1.0.2 text; wire1.0 alone is not patch evidence
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEvent.kt#L7-L54
+      title: Separate core context/payload/extension model; construction not conformance validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt#L16-L111
+      title: Builder, DSL and copy paths; no automatic validate call
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/SpecVersion.kt#L17-L25
+      title: v1.0 required/optional fields and wire value
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/AttributeNaming.kt#L13-L35
+      title: Name checker excludes data, not every existing core name
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventAttributeValue.kt#L16-L108
+      title: Typed wrappers and string conversion; URI strings not validated at construction
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventData.kt#L12-L39
+      title: Opaque core bytes with copies; interpretation deferred to format
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt#L23-L97
+      title: Explicit STRICT/LENIENT implemented checks; not exhaustive conformance
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Formats.kt#L47-L298
+      title: Actual helper boundaries, not certified complete RFC grammar
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt#L15-L49
+      title: Explicit single-event and separate batch JSON public APIs and media-type constants
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L29-L74
+      title: Core then extension members; colliding names can overwrite core
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L77-L130
+      title: Internal carrier and plain-byte payload routes; batch encoding
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt#L29-L108
+      title: Object/array decoding and explicit STRICT validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt#L11-L40
+      title: Required/optional string fields and Instant parsing
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt#L19-L89
+      title: Null omitted; only string/int32/bool recovered; reserved incoming core fields
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt#L18-L71
+      title: data/data_base64 exclusion and null/JSON/text/Base64 routing
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt#L10-L14
+      title: Content-type suffix selection, not complete MIME validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt#L8-L77
+      title: Internal data-origin carriers, not public constructors
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/ValidationTest.kt#L8-L33
+      title: Unexecuted1.0.2 and empty-field test definitions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatConformanceTest.kt#L18-L195
+      title: Unexecuted fixed1.0.2 clause fixtures and selected edge-case definitions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#overview
+      title: 1.0.2 core requires JSON format support
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#context-attributes
+      title: 1.0.2 required/optional context and type system
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#extension-context-attributes
+      title: Distinct extension attributes and shared type system
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#22-type-system-mapping
+      title: 1.0.2 JSON primitive/string type mapping and null attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#3-envelope
+      title: 1.0.2 JSON event object and payload serialization/deserialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#4-json-batch-format
+      title: Batch is a separate optional format with own media type
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T11:13:34.367079+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed-source/normative comparison only; no SDK build or runtime
+relations:
+- proposed_path: 01_State/02_Relations/cloudevents-sdk-implementations.yaml
+  proposed_record:
+    id: cloudevents_kotlin_sdk_implements_cloudevents_1_0_2
+    type: relation
+    name_zh: Kotlin SDK 源码发布 0.2.0 有界实现 CloudEvents 1.0.2 事件表示
+    name_en: Kotlin SDK source release 0.2.0 bounded CloudEvents 1.0.2 event representation implementation
+    source: cloudevents_kotlin_sdk
+    relation: implements
+    target: cloudevents_1.0.2
+    context:
+      version_context:
+        source: GitHub sdk-kotlin source release v0.2.0, commit27b718156fd9410a926e08f087ee67c7ba421c1a; core and
+          JSON source only, no Maven/runtime verification
+        target: CloudEvents1.0.2 core and JSON event-format sections2.2/3/4, official tag commitfc1f6f31f5f011a72183f1bcea20c987cb683ade;
+          v1.0 wire values, not inferred patch certification
+      conditions_zh: 仅有界静态功能对应：调用方提供有效 v1.0 上下文、无重名的合法扩展与所述 payload 表示，使用 core 模型/构建/查询及显式 JSON 单事件/批量内存编解码。核心要求
+        JSON，批量为显式独立格式入口；不主张完整核心/JSON 符合性。JSON decode 调用已实现的 STRICT 检查，builder/encode 不自动验证；扩展核心名冲突可覆盖序列化字段。扩展 decode
+        只恢复 string/int32/bool，不恢复 URI/Timestamp/Binary 的原类型。data/data_base64 与缺省/JSON null/JSON值/文本/Base64 carrier
+        路径按对象 scope_notes；普通字节按 content type 路由，内部 carrier 不作公共工厂，不覆盖任意改 content type 或任意输入往返。仅固定源码及未运行的测试定义与规范比对；缺
+        settings.gradle.kts 构建输入且不绕过403，无 Maven/构建/运行或跨实现验证。排除 v0.3/其他格式、网络绑定/路由/投递、完整RFC/安全/唯一性/真实性/载荷schema/IA采用；旧
+        JavaScript SDK 版次边界保持。
+      conditions_en: 'Bounded static functional correspondence only: valid caller-supplied v1.0 context, legal non-colliding
+        extensions and the stated payload representations through the core construction/access model and explicit
+        single-event/batch in-memory JSON APIs. Core requires JSON; batch is a distinct explicit format entry point,
+        not full core/JSON certification. JSON decode runs implemented STRICT checks; builder/encode do not auto-validate,
+        and colliding extension names can overwrite serialized core members. Extension decode reconstructs only
+        string/int32/bool, not original URI/Timestamp/Binary types. data/data_base64, absence/JSON null and JSON/text/Base64
+        carrier routes follow the object''s scope; plain bytes route by content type, internal carriers are not
+        public factories, arbitrary content-type edits/input roundtrips excluded. Fixed source and unexecuted test
+        definitions compared with normative text only. Denied settings.gradle.kts remains missing without403 bypass;
+        no Maven/build/runtime/cross-implementation verification. No v0.3/other formats, networking/routing/delivery,
+        full RFC/security/uniqueness/truth/payload-schema or IA-adoption claim; old JavaScript SDK limits preserved.'
+    evidence:
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/README.md#L23-L31
+      title: Fixed source explicitly tracks1.0.2 text; wire1.0 alone is not patch evidence
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEvent.kt#L7-L54
+      title: Separate core context/payload/extension model; construction not conformance validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt#L16-L111
+      title: Builder, DSL and copy paths; no automatic validate call
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/SpecVersion.kt#L17-L25
+      title: v1.0 required/optional fields and wire value
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/AttributeNaming.kt#L13-L35
+      title: Name checker excludes data, not every existing core name
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventAttributeValue.kt#L16-L108
+      title: Typed wrappers and string conversion; URI strings not validated at construction
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventData.kt#L12-L39
+      title: Opaque core bytes with copies; interpretation deferred to format
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt#L23-L97
+      title: Explicit STRICT/LENIENT implemented checks; not exhaustive conformance
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Formats.kt#L47-L298
+      title: Actual helper boundaries, not certified complete RFC grammar
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt#L15-L49
+      title: Explicit single-event and separate batch JSON public APIs and media-type constants
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L29-L74
+      title: Core then extension members; colliding names can overwrite core
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt#L77-L130
+      title: Internal carrier and plain-byte payload routes; batch encoding
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt#L29-L108
+      title: Object/array decoding and explicit STRICT validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt#L11-L40
+      title: Required/optional string fields and Instant parsing
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt#L19-L89
+      title: Null omitted; only string/int32/bool recovered; reserved incoming core fields
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt#L18-L71
+      title: data/data_base64 exclusion and null/JSON/text/Base64 routing
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt#L10-L14
+      title: Content-type suffix selection, not complete MIME validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt#L8-L77
+      title: Internal data-origin carriers, not public constructors
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonTest/kotlin/io/cloudevents/kotlin/core/ValidationTest.kt#L8-L33
+      title: Unexecuted1.0.2 and empty-field test definitions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonTest/kotlin/io/cloudevents/kotlin/json/JsonEventFormatConformanceTest.kt#L18-L195
+      title: Unexecuted fixed1.0.2 clause fixtures and selected edge-case definitions
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#overview
+      title: 1.0.2 core requires JSON format support
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#context-attributes
+      title: 1.0.2 required/optional context and type system
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#extension-context-attributes
+      title: Distinct extension attributes and shared type system
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#22-type-system-mapping
+      title: 1.0.2 JSON primitive/string type mapping and null attributes
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#3-envelope
+      title: 1.0.2 JSON event object and payload serialization/deserialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/formats/json-format.md#4-json-batch-format
+      title: Batch is a separate optional format with own media type
+      language: en
+      accessed: '2026-10-29'
+    last_verified_at: '2026-10-29T11:13:34.367079+00:00'
+    last_verified_by: Agent — OpenAI / dot, bounded static event-envelope correspondence only
+membership_proposals:
+- category_id: services
+  ref:
+    surface: canonical
+    id: cloudevents_kotlin_sdk
+  rationale_zh: 既有services导航补跨服务事件信封表示的源码实现先例，不代表部署/投递服务，不改分类规则。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 51262
+  sha256: 3ea0dbf9ad6eb50ea4200f0d8e05628d7241001fbaac420b61ad4f825d1840f8
+  git_blob: 2d07f6b5353ab95571956b6e87bc37ab3aa63eeb
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/01_Objects/cloudevents_1.0.2.yaml
+  bytes: 1560
+  sha256: 2e8fcdc52a8cb070c59befb6345ec0d4c51882c835f14b6b142ee5af5cc54657
+  git_blob: 402f222b44ebe0a69e1994664d10644d9b50abde
+- path: 01_State/01_Objects/cloudevents_javascript_sdk.yaml
+  bytes: 5951
+  sha256: 327ff103866aded7362067504548a0848e58db95d741755fcee2177c8d15c8cc
+  git_blob: f5ec1a9c9d53cd6453a1574b707bb3e2dda21c59
+- path: 01_State/01_Objects/data_serialization.yaml
+  bytes: 818
+  sha256: 7771b3a382df8e3321e3e6c3c5393f72e02f36743421bebad678c0fb8861e696
+  git_blob: 1981b576ca8d9cfad8bf0a5159d4ae43dca69d6e
+- path: 01_State/01_Objects/python_prov.yaml
+  bytes: 14503
+  sha256: 5d54235ffad005250c2a74e6013728e195f723dd98aeffa2d7dc0c688fa8d62d
+  git_blob: ac68cce9cd5757c221c6a267c3a822203f54bd8e
+- path: 01_State/01_Objects/prov-o.yaml
+  bytes: 1412
+  sha256: b1a253ba30fb07271f477b3f0a4991d004e3a159a3a9ab354b0ea8af6479f2f2
+  git_blob: 4bc3146d51a4dd294bbb148551be326a17374d6e
+- path: 01_State/01_Objects/w3c-prov-o.yaml
+  bytes: 1842
+  sha256: 63a0453efe7de2e677f6129501e9e21ba524ee47722aa9a6e717063de4a61a1c
+  git_blob: 90ddef6965114f7728c304381c10994e257c8a83
+- path: 01_State/Inbox/candidates/avid_dnxhd_dnxhr.yaml
+  bytes: 1446
+  sha256: 5913c125dd149028704254166aec93f626576f59364c64ea8e74a88c323e3aac
+  git_blob: 8f3c78b6ac26e2574d4aecb6b0a7e78a619e19d0
+excluded_scope:
+- No fullcore/JSON/RFC validation, alltypes/inputs/bytecanonical roundtrip, payloadschema, uniqueness/truth/security
+  or delivery guarantee.
+- No Maven binary/archive verification, Kotlin/Gradle/build/upstream/runtime execution, missing settings-file retry/alternate
+  route, sourcearchive download or installed SDK.
+- No v0.3/other formats/networkbindings/deployedservice/IAadoption; oldJavaScript exactversionlimit intact.
+- No identity-risk/Owner holds, schema/renderer/classification/governance/maintenance/historicalaudit changes.
+- No actual canonical/event/nav/freeze or external write at this proposal stage.
+renderer_boundary_zh: 现有implementation renderer省略完整scope_notes/relationcontext；可见名称强调源码发布0.2.0，description强调静态/有效字段/非冲突扩展/构造编码不自动验证/非完整符合性与运行或网络保证。须独立审阅实际三个端点，不改renderer。
+materialization_boundary_zh: candidate+packet仅提案；独立语义PASS后connector真实freeze→普通fetch→以freeze为父物化；独立结构复核、实际headCI、正常merge与main/Pages/live分别验证。

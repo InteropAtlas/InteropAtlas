@@ -1,0 +1,45 @@
+contract_version: candidate-object-v1
+candidate_id: cloudevents_kotlin_sdk
+label: CloudEvents Kotlin SDK — source release v0.2.0
+publisher: CloudEvents project contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: cloudevents/sdk-kotlin
+locators:
+- url: https://github.com/cloudevents/sdk-kotlin/releases/tag/v0.2.0
+  role: official
+- url: https://github.com/cloudevents/sdk-kotlin/tree/27b718156fd9410a926e08f087ee67c7ba421c1a
+  role: official
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  merge_authorized: false
+  reasons:
+  - 官方 GitHub 源码 release/tag 与32文件blob支持独立SDK项目身份；不虚构Maven包，不与规范或既有JavaScript SDK合并。
+  - 465934d3完整Canonical与candidate标识无碰撞；new只进入普通review_required，尚未接纳。
+unknowns:
+- 主体是官方 cloudevents/sdk-kotlin 源码项目及 core/JSON 模块，不是核心规范、Maven 坐标或部署中的服务。GitHub v0.2.0 源码发布/tag 固定到 27b718156fd9410a926e08f087ee67c7ba421c1a；固定
+  README 明示跟踪 1.0.2 文本，测试源码明确引用该版 JSON 条款，不仅据 wire specversion="1.0" 推断 patch 版次。README 同时写明 core 尚未发布 Maven Central，故仅记录
+  GitHub 源码发布，不断言后来仍未发布，不认证二进制/安装可用性。Apache-2.0 据固定 LICENSE/SPDX；tag 未签名，不作安全或签名认证。 静态正面范围是调用方提供有效 v1.0 字段、无核心字段重名的合法扩展时，CloudEventBuilder/cloudEvent/copy
+  建立并读取 id/source/type/specversion、可选 datacontenttype/dataschema/subject/time、独立 payload 与扩展值。源代码有 bool/int32/string/URI/URI-reference/Instant/Binary
+  包装和字符串转换；这里不保证完整 RFC 语法或所有输入往返。source+id 唯一性、实际发生时间、事件含义、载荷 schema、权限及真实性由应用负责。 JsonEventFormat 的 encodeToString/decodeFromString
+  与 encodeBatch/decodeBatch 提供内存字符串中的 JSON 单对象/事件数组表示；分别给出 application/cloudevents+json 与 application/cloudevents-batch+json
+  常量。批量是显式独立入口，不因支持单事件便宣称批量或网络协商，也无事务/原子投递语义。固定 1.0.2 核心要求 JSON；此处只连既有核心对象的一条有界 implements，不增 JSON 规范对象/边。 JSON
+  正面路径保持有效上下文字段与顶层非冲突扩展，解码 string/int32/bool（引号数字/布尔仍为 string），null 可选属性/扩展视为 unset。URI/URI-reference/Timestamp/Binary
+  扩展编码成字符串，解码不凭字符串恢复原类型，故不保证全部类型 roundtrip。data 与 data_base64 互斥；缺 data 与 JSON 显式 null 区分。有效 JSON content type（或缺省）下
+  data 为 JSON 值，包括原样 JSON string，非 JSON content type 下 data 字符串保留为文本；data_base64 解码为字节。解码产生内部 JsonData/StringData/Base64Data/NullData
+  carrier，保留其来源表示供重编码；这些类不是独立公共构造 API。普通 core 字节 payload 无 carrier，编码按 content type：JSON/缺省时解析为 JSON 值，否则 Base64，不宣称所有
+  byte payload 都走 binary 或都为 JSON；不要改变已解码 carrier 的 content type 后假定任意转换仍符合规范。时间使用 Instant，重编码 UTC 而非保留原 offset
+  拼写；不主张字节规范化/字节相同、所有类型或任意输入往返。 validate(STRICT) 是单独步骤，会对已实现的必需非空、字符串/source URI 与版次字段检查收集违规后抛异常；LENIENT 返回违规列表。JSON
+  解码调用 STRICT；builder 和 encoder 不调用，成功构造/编码不证明有效事件。扩展命名仅拒绝 data 和非小写 ASCII 字母/数字，并未禁止 id 等核心名；encoder 在核心字段后写扩展，可覆盖其成员。有效、非冲突名称/值由调用方保证。URI
+  包装本身不验证语法，datacontenttype 只按 String 检查而非完整 RFC2046，Instant/URI helper 并非本次完整 RFC3339/3986 认证。无严格 validator、非法输入全拒绝、重复
+  JSON key、资源耗尽或安全保证。 作者只实读固定源码/六份测试定义/两份规范并核验 39 份捕获，其中 32 SDK 文件与官方 Git tree blob 相符；未运行 SDK、Kotlin/Gradle/build/upstream
+  tests 或跨实现互通。settings.gradle.kts 固定 raw GET 曾被 proxy tunnel403 拒绝，未重试/换通道；完整构建输入缺失。32 SDK 捕获的单项 status/final URL
+  因后续并行异常未保存，原 headers/hash 保留，不伪称完整 HTTP 日志。排除 v0.3、protobuf/其他格式、HTTP/Kafka/AMQP/MQTT/NATS 绑定、发布订阅/路由/自动采集、部署兼容性、加密认证、投递保证与
+  IA 采用。保留既有 JavaScript SDK 的版次边界，不回改旧审计或推导身份等价。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null
