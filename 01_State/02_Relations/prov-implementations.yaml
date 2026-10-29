@@ -1,0 +1,137 @@
+id: python_prov_implements_prov_dm_records
+type: relation
+name_zh: prov 3.2.3 有界实现 PROV-DM 选定溯源记录
+name_en: prov 3.2.3 implements selected bounded PROV-DM provenance records
+source: python_prov
+relation: implements
+target: w3c_prov_dm
+context:
+  version_context:
+    source: prov3.2.3 official release/tag f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf; verified PyPI wheel bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e
+    target: W3C PROV-DM Recommendation2013-04-30, sections5.1.1–5.1.4,5.2.1,5.3.1–5.3.3 and selected names/attributes
+      in5.7; existing identity unchanged
+  conditions_zh: 仅对 PROV-DM Entity/Activity/Agent、generation/usage/derivation/attribution/association 的记录构建和正式参与者引用建立实现对应；调用方提供角色正确的已声明限定名与适当属性。支持文档保存/按类型或标识查找，显式
+    PROV-JSON 内存编解码是此库的交换设施，不代表第二个格式规范关系或完整 PROV-DM 符合性。固定源码、hash-verified wheel 和九项作者 smoke 支持所列案例；测试不是独立语义批准或所有输入/数据类型
+    roundtrip 证明。3.2.3 可接纳缺必需参数和多个 prov:value，JSON 重复键 warning 后最后值保留，故不得推为完整结构/约束/时间/因果/权限/真实性验证。排除 unified()/推理、Bundle-as-entity/nested
+    bundle、PROV-Dictionary、所有未审格式和自动采集/安全/互通/IA采用；不处理两个既有 PROV-O 身份，不改旧标准对象及核验日期。
+  conditions_en: Only a representation correspondence for PROV-DM Entity/Activity/Agent and generation/usage/derivation/attribution/association
+    records with formal participant references; callers supply properly role-assigned declared qualified names and
+    appropriate attributes. Document storage/type-or-ID lookup and explicit in-memory PROV-JSON encoding/decoding
+    are library facilities, not a second format-specification edge or full PROV-DM conformance. Fixed source, hash-verified
+    wheel and nine author smoke cases support the listed examples, not independent semantic approval or all-input/datatype
+    roundtrip. Version3.2.3 accepts missing required formal arguments and multiple prov:value values; duplicate
+    JSON keys warn and retain the last value. Therefore no complete structural/constraint/temporal/causal/authorization/truth
+    validation is asserted. unified()/inference, Bundle-as-entity/nested bundles, PROV-Dictionary, other formats,
+    automatic capture, security, cross-implementation interoperation and IA adoption are excluded. Neither existing
+    PROV-O identity is resolved or linked; existing standard records/dates are unchanged.
+evidence:
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L1-L24
+  title: Version3.2.3 conformance statement and no full assertion-time structural enforcement
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/docs/reference/conformance.md#L26-L71
+  title: Entity/activity/agent and selected relation factories; subtype values not separate factories
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L392-L427
+  title: Document/bundle record storage initialized
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L545-L576
+  title: Type and identifier record lookup
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L877-L921
+  title: Record construction and storage with participant attributes
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L950-L1076
+  title: Entity/activity/generation/usage factory argument directions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1225-L1308
+  title: Agent/attribution/association factory argument directions
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L1381-L1427
+  title: Derivation generated/used entity and optional activity/generation/usage references
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L1784-L1923
+  title: Selected relation formal attributes and agent class
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/records.py#L930-L1001
+  title: Attribute and record introspection; not full value validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/model/bundle.py#L2017-L2125
+  title: Explicit format dispatch and in-memory serialization/deserialization
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/__init__.py#L95-L174
+  title: Serializer registry imports and explicit format selection
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L74-L166
+  title: PROV-JSON codec; duplicate keys warn and last value wins
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L342-L440
+  title: Record encoding via record type, qualified name and attributes
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/serializers/provjson.py#L499-L691
+  title: Decoded namespaces and records go through bundle.new_record
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/trungdong/prov/blob/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf/src/prov/tests/test_conformance_dm.py#L143-L171
+  title: 'Upstream characterization source: multiple prov:value and incomplete mandatory arguments accepted; full
+    upstream suite not executed'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-entity
+  title: PROV-DM5.1.1 Entity
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Activity
+  title: PROV-DM5.1.2 Activity
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Generation
+  title: PROV-DM5.1.3 generation participant roles and at-least-one condition
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Usage
+  title: PROV-DM5.1.4 usage participant roles and at-least-one condition
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Derivation
+  title: PROV-DM5.2.1 generated/used entity and qualified derivation references
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-agent
+  title: PROV-DM5.3.1 Agent
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-attribution
+  title: PROV-DM5.3.2 attribution
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-Association
+  title: PROV-DM5.3.3 association
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/#term-qualified-name
+  title: PROV-DM5.7.5 qualified names and namespaces
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T10:30:09.891837+00:00'
+last_verified_by: Agent — OpenAI / dot, selected PROV-DM record mapping and bounded JSON path checks
+record_created_at: '2026-10-29T10:41:16.953962+00:00'
+record_updated_at: '2026-10-29T10:41:16.953962+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / /root/review_python_prov_packet
+  github_actor: ff6962757

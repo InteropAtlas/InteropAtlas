@@ -13,13 +13,14 @@ locators:
 - url: https://github.com/trungdong/prov/tree/f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  merge_authorized: false
+  state: duplicate
+  matched_canonical_ids:
+  - python_prov
   reasons:
-  - 官方fixed release/tag、包metadata和wheel支持独立PyPI prov3.2.3库身份，不与PROV文献或ProvStore服务合并。
-  - 当前a033655e完整Canonical/候选标识无碰撞；new仅进入review_required，尚非接纳。
-  - 现有prov_o/w3c_prov_o身份不处理，不添加别名或合并；只连既有w3c_prov_dm。
+  - Accepted as canonical python_prov by accept-20261029-prov-dm-python_prov. Original new-state candidate 8da22f4b6b2c2e3e07dc4f12267d8ee9068bdc78
+    and ordinary review_required route replay against real frozen ancestor be0d200239f8c7f5330384c5a99ab96fdfae9849;
+    this back-reference prevents duplicate creation and authorizes no identity merge.
+  merge_authorized: false
 unknowns:
 - 主体是 PyPI prov 的独立 Python 库，不是 W3C PROV-DM/PROV-O 文献、整个 PROV 家族或 ProvStore 服务。官方发布 3.2.3/tag 指向 f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf；manifest、__version__
   与固定版 PyPI 元数据一致，MIT 仅据固定 manifest/LICENSE。核验官方 wheel prov-3.2.3-py3-none-any.whl（1014147 字节，SHA256 bc392921d2cc7e02e03312b2d00da6c7cfdaaee261f76a56f7c57d01f988164e）等于发布
@@ -38,4 +39,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: null
+  reviewer: Agent — OpenAI / /root/review_python_prov_packet
