@@ -1,0 +1,44 @@
+contract_version: candidate-object-v1
+candidate_id: fuji
+label: F-UJI research-data assessment software — source release4.0.1
+publisher: F-UJI project contributors
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: pangaea-data-publisher/fuji
+locators:
+- url: https://github.com/pangaea-data-publisher/fuji/releases/tag/v4.0.1
+  role: official
+- url: https://github.com/pangaea-data-publisher/fuji/tree/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a
+  role: official
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  merge_authorized: false
+  reasons:
+  - 官方F-UJI源码项目与托管部署、组织、指标及FAIR论文身份区分；不与PROV-O或其他项目合并。
+  - 当前完整Canonical及candidate标识无碰撞；new进入普通review_required，尚未接纳。
+unknowns:
+- 主体是官方 F-UJI 软件源码项目，不是 f-uji.net 实际部署、FAIRsFAIR 组织、FAIR 原则论文或指标出版物，也不是 IA 采用/背书。GitHub release v4.0.1（2026-09-24
+  发布）与 tag 固定到 7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a，pyproject 版号相符；不主张最新、签名认证、发布包验证、可复现构建或部署可用性。LICENSE/manifest
+  的 MIT 声明与 README 仅写至 4.0.0 的许可句存在版次边界，故不作 license_expression/open_source 法律结论。 正面功能证据是作者声明和实际架构使用 FAIR 原则作为评估框架，经
+  FAIRsFAIR 指标与测试操作化：控制器将配置/采集的元数据传给 evaluator，返回按指标的结果/score/maturity，再依指标标识聚合 F/A/I/R 与各原则。默认 metrics_v0.8.yaml
+  有 17 个配置项，其中 16 项有 fair_principle 字段，F4 仍编码在指标标识中；A2 被注释。不是所有原则/测试都已实现或验证，也不保证所有配置同样工作。2021 年作者论文把原则→指标→测试连到 2016
+  年 FAIR 论文；这是方法谱系，不是 4.0.1 运行证据。FAIR 2016 是高层指导而非标准/软件规范，故只用 uses，不宣称 implements。 自动评估依赖可访问的聚合元数据、外部注册/标识服务、领域实践和配置；rich/plural/accurate/relevant
+  等仍需人解释。仅检查选定架构和 evaluator 源码；完整服务/采集及其他 evaluator 未执行。fair_check.get_assessment_summary 对 https://www.rd-alliance.org/users/mustapha-mokrane
+  与 https://www.rd-alliance.org/users/ilona-von-stein 两个 input_id 将每指标 earned 改为 total、maturity 改为 3、status 改为 1
+  后聚合；这是汇总层源码特例，不证明原始逐指标测试通过，也未运行该汇总路径。不能将汇总分数理解为普遍客观测量或认证。 运行证据仅为固定 0.8 配置下 7 个自编离线 R1.2 来源 evaluator 例，并由 intake
+  作者在 Python 3.13.5 -I -S 复跑得到完全相同结果：无元数据 fail；creator 有值与 creator:null 均 pass，score 1/1、maturity 2；仅识别到 PROV/PAV
+  命名空间即 pass、maturity 3；两条路径同时命中仍按 alternative 机制记 1/1 而非累加；related_resources 单独出现会列入输出但未设置 availability，仍 fail；不认识的命名空间
+  fail。键/命名空间存在不能证明详细来源、图有效性或内容真实；不产生 PROV-O/本体符合性关系。 smoke 调用未修改官方 archive 的 evaluator/base/mapper/generated models，初始化会导入其他模型；使用合成
+  post-harvest context、由固定 YAML 机械转成 JSON（日期元信息为字符串）并补 helper 所需标识键的 fixture，以及固定 0.8 版本 accessor。未 stub evaluator
+  算法，但未执行完整 MetricHelper/preprocessor/harvester/controller 管线。293 个 archive 文件 blob 与官方完整 tree 相符，29 份独立 raw source
+  与 archive 相同；36 个原始请求有 headers/hash/transport 记录。官方 PyPI six 1.17.0 wheel digest/RECORD 已核，仅为离线依赖，不新增其对象。无安装/build、网络数据集评估、HTTP
+  server、浏览器/Tika/凭据/remote logging 或上游完整测试。audit hook 记录零 network/subprocess attempts，不是操作系统隔离/安全审计。 排除完整 FAIR
+  符合性/认证、元数据真实性/质量/完整性或合法性保证、自动修复、任意 identifier 运行建议、完整服务安全或部署就绪、OpenAPI 版次边、PROV-O 身份合并和 IA 采用。不新增 capability，不误标为结构
+  schema_validation。既有 FAIR 论文及历史证据不变。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: null

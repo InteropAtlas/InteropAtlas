@@ -1,0 +1,923 @@
+packet_id: fuji_fair_assessment_20261029
+status: pending_independent_semantic_review
+baseline_commit: a4fc40539225c583e6143907c903422aad3cba3f
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 一个F-UJI4.0.1软件对象，固定293文件完整源码快照及7离线组件例。
+- 仅一个uses→既有FAIR2016原则论文与一个research编辑成员，无capability/license结论。
+- 独立判断方法uses是否充分、7例及源码的证据边界是否诚实，以及可见启发式/汇总特例/非认证限制；不把FAIR改称符合性规范。
+work_item_preflight:
+  main_confirmed: a4fc40539225c583e6143907c903422aad3cba3f
+  prior_delivered_pr: 559
+  preserved_boundaries:
+    '498': denied
+    '439': pending owner action
+    '416': paused
+  source: Parent-authorized ordinary continuation after fully verified PR559; no overall Work Item closure.
+  current_counts:
+    objects: 250
+    relations: 191
+    graph_edges: 280
+    candidates: 241
+    acceptance_events: 128
+  proposed_counts_only:
+    objects: 251
+    relations: 192
+    graph_edges: 281
+    candidates: 242
+    acceptance_events: 129
+  publication_authorized: false
+source_evidence:
+  verified_at: '2026-10-29T11:58:53.092338+00:00'
+  method: Read fixed architecture/configuration/evaluator/base/mapper/models and authors2021 method paper; source/tag/release/293file
+    tree verification and seven offline synthetic evaluator cases replicated with exact results.
+  capture_manifest:
+    path: /workspace/shared/ia-fuji-gap-research-20261029/source-manifest.json
+    bytes: 24874
+    sha256: 8d6ed7eb65d346f5f85b5e668c8825bace117b92bb797ffbb571d95e59d5e7a6
+  byte_verification:
+    path: /workspace/shared/ia-fuji-intake-evidence-20261029/source-verification.json
+    bytes: 36804
+    sha256: e7e11c8b14b2c4a002f3334631196fd50ec2b3461d5d8ced562f660e2e9694e1
+  archive_verification:
+    path: /workspace/shared/ia-fuji-gap-research-20261029/archive-verification.json
+    bytes: 71242
+    sha256: 72963931bf03de9fd06bcf20dd73e208eb7f14c2ae50e9c0fdba2f9375614d79
+  captures:
+  - file: latest-release.json
+    url: https://api.github.com/repos/pangaea-data-publisher/fuji/releases/latest
+    final_url: https://api.github.com/repos/pangaea-data-publisher/fuji/releases/latest
+    http_status: 200
+    bytes: 4268
+    sha256: 5d64693e6447823605f6a8963c0de90df1c3f7e443c5b5db1e662a83db0dc448
+    headers_file: latest-release.json.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/latest-release.json
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/latest-release.json.headers
+    headers_sha256: 741037916169eb01a75bcad2f3bded1db5af874b90ac94c978183ab7380f9652
+  - file: tag-ref.json
+    url: https://api.github.com/repos/pangaea-data-publisher/fuji/git/ref/tags/v4.0.1
+    final_url: https://api.github.com/repos/pangaea-data-publisher/fuji/git/ref/tags/v4.0.1
+    http_status: 200
+    bytes: 363
+    sha256: d452c1a4447beba901f27ceb51393e3056a8e81f3da7aa33ecc8893f9a2bbe81
+    headers_file: tag-ref.json.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/tag-ref.json
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/tag-ref.json.headers
+    headers_sha256: 4732eab588982ffb15187120fa47900e131d69f03d1a654e7d7743d9d40b6e7b
+  - file: tree.json
+    url: https://api.github.com/repos/pangaea-data-publisher/fuji/git/trees/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a?recursive=1
+    final_url: https://api.github.com/repos/pangaea-data-publisher/fuji/git/trees/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a?recursive=1
+    http_status: 200
+    bytes: 85906
+    sha256: 4e4185a03ba1c164a863cd75146a86e88882456f71585526e8f93c2faf339b30
+    headers_file: tree.json.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/tree.json
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/tree.json.headers
+    headers_sha256: a94465da630b5255c978aca1c38d99e824c82bdb52807f7bb8523f4cd64852e8
+  - file: pyproject.toml
+    path: pyproject.toml
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml
+    http_status: 200
+    bytes: 4572
+    sha256: ec6150209655113c010ab720edef490d9fa49df21cd84b515208f7a522c74192
+    headers_file: pyproject.toml.headers
+    verified_git_blob_sha: b4a116d0a5a064a0e058d6292c5d9970beb0abea
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/pyproject.toml
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/pyproject.toml.headers
+    headers_sha256: 90676992a04e4e2b25e406fe48fcea1acb6af03875935519fecd280c27b5e731
+  - file: LICENSE
+    path: LICENSE
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/LICENSE
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/LICENSE
+    http_status: 200
+    bytes: 1090
+    sha256: 48c5dc0f1fe16e18f43930ebf797d556320a929a0c8ae4c6d8dac72e7b3b5a73
+    headers_file: LICENSE.headers
+    verified_git_blob_sha: 40f22c50b59b959d5e855961998d88dfa13c6279
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/LICENSE
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/LICENSE.headers
+    headers_sha256: 88bf98d8ff9c20fbb5272340d1fcd8c7378353e11e1633e1049b00db767c6fb9
+  - file: metrics_configuration.md
+    path: metrics_configuration.md
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/metrics_configuration.md
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/metrics_configuration.md
+    http_status: 200
+    bytes: 3044
+    sha256: 6aa427119d353a950966cea293f0df1790af0a048130995d6fb160abfd280ebb
+    headers_file: metrics_configuration.md.headers
+    verified_git_blob_sha: 8171e1d48980e7357aea1a99c2f4c02c0ce740a3
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/metrics_configuration.md
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/metrics_configuration.md.headers
+    headers_sha256: 6afdcf83aad0d9fcbe9f156d29bef16c48e72eff6a96faf13e7286dbed8d341e
+  - file: README.md
+    path: README.md
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md
+    http_status: 200
+    bytes: 18340
+    sha256: df5a4a8eed1dcecbf37b81018cde1f969168bd3990810f1ce5407ee297858401
+    headers_file: README.md.headers
+    verified_git_blob_sha: f9d30e2d1a61734ff08d77581692b1c798071cea
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/README.md
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/README.md.headers
+    headers_sha256: 61129dae66fe40d07e5230ae7c815aac73fd492a70eac10d02bceb53b42ceed9
+  - file: fuji_server__helper__metric_helper.py
+    path: fuji_server/helper/metric_helper.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py
+    http_status: 200
+    bytes: 5752
+    sha256: 4f36b7deb8038ed69992434d2a46a996dd944d983b68157f4ec253089711e932
+    headers_file: fuji_server__helper__metric_helper.py.headers
+    verified_git_blob_sha: a40e18f18bffaeda36459816ed66368735ef4bc6
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__metric_helper.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__metric_helper.py.headers
+    headers_sha256: 5f80a7533cda4ca0775b172094448a780c9a9e6d3c477aade1e056c3a427cc98
+  - file: fuji_server__evaluators__fair_evaluator.py
+    path: fuji_server/evaluators/fair_evaluator.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py
+    http_status: 200
+    bytes: 9158
+    sha256: 86fdff5ec4fcfc6f5f33dfc1624750fe84325754c37321f4515e824705cc701e
+    headers_file: fuji_server__evaluators__fair_evaluator.py.headers
+    verified_git_blob_sha: 9a606991e430c7193fea15feef77666d37d10277
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator.py.headers
+    headers_sha256: f2cd56e74e0afa5def944616d357a7232e6519406dff32998ec13cf067970991
+  - file: fuji_server__evaluators__fair_evaluator_license.py
+    path: fuji_server/evaluators/fair_evaluator_license.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_license.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_license.py
+    http_status: 200
+    bytes: 13371
+    sha256: 8710b8ac07140cb8f7f7c9a112cc5c25f735a0a2fc4f3a00668fb2b8063188a5
+    headers_file: fuji_server__evaluators__fair_evaluator_license.py.headers
+    verified_git_blob_sha: 2b3c5bc9f9d5425b913b7b37b7497a7d7615980b
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_license.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_license.py.headers
+    headers_sha256: 0e91ed8ad225151231f82b62b83bd4ddcbb8f08a021ddd9034c2d057a1804272
+  - file: fuji_server__controllers__fair_check.py
+    path: fuji_server/controllers/fair_check.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py
+    http_status: 200
+    bytes: 37465
+    sha256: 4639b2b76834741c8d7504702f4d134f275ca36e9aa405affb485999b8759bfc
+    headers_file: fuji_server__controllers__fair_check.py.headers
+    verified_git_blob_sha: cd0b081a4202d75cc9349aa31f9d78f8aec2dd4f
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__controllers__fair_check.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__controllers__fair_check.py.headers
+    headers_sha256: 589b1a3213875dddcfb4968b5d1a080ff4a9254ee22b31633484216eb4a41e0f
+  - file: tests__functional__test_evaluation.py
+    path: tests/functional/test_evaluation.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+    http_status: 200
+    bytes: 7186
+    sha256: c26e0b0753d10150873cd091552327c51a48901445dec4263d31c4cec13a65f6
+    headers_file: tests__functional__test_evaluation.py.headers
+    verified_git_blob_sha: be876ec5235f47d676287f724fd7a0b9b736056c
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__functional__test_evaluation.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__functional__test_evaluation.py.headers
+    headers_sha256: 1ca6207946636be72a01d3ce6716aa89451b37f3e82374181e8f70674063f3db
+  - file: tests__conftest.py
+    path: tests/conftest.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/conftest.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/conftest.py
+    http_status: 200
+    bytes: 3662
+    sha256: bad8b54446f658f19dbedd2595b72c2ea905703582c258235f475488e68be01e
+    headers_file: tests__conftest.py.headers
+    verified_git_blob_sha: ae191b7d78ee508d92d20ecea17107097880cbad
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__conftest.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__conftest.py.headers
+    headers_sha256: 578b95f0ec18a0fd5ea23de04cf9f25a95723c07d8e50d91fbeb78d414b8c1cc
+  - file: fuji_server__evaluators__fair_evaluator_test_cases.py
+    path: fuji_server/evaluators/fair_evaluator_test_cases.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_test_cases.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_test_cases.py
+    http_status: 200
+    bytes: 7100
+    sha256: 587e19d4e8eddb191ccbecb380e271d7023874c89633476460fa52e839d0c0b5
+    headers_file: fuji_server__evaluators__fair_evaluator_test_cases.py.headers
+    verified_git_blob_sha: 8be04ac49ad484f3396463614cfa15fd815820f6
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_test_cases.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_test_cases.py.headers
+    headers_sha256: 78a184d4aa56d890d3b26f4e82e8d1d13df00b67a42f2c5ed71f867aea265348
+  - file: fuji_server__yaml__metrics_v0.8.yaml
+    path: fuji_server/yaml/metrics_v0.8.yaml
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+    http_status: 200
+    bytes: 37415
+    sha256: 99c65ad9202a1f1dc8178c3457347f1a533b78329d3b53814687382874fad18a
+    headers_file: fuji_server__yaml__metrics_v0.8.yaml.headers
+    verified_git_blob_sha: c3d2385555a16cc234555580127c803e4fe0dba4
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__yaml__metrics_v0.8.yaml
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__yaml__metrics_v0.8.yaml.headers
+    headers_sha256: 0292ded44aea1308cc9f7d9ff6acbc4f566b4eca56cc36d3f0cad97be107d115
+  - file: tests__controllers__test_fair_check.py
+    path: tests/controllers/test_fair_check.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/controllers/test_fair_check.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/controllers/test_fair_check.py
+    http_status: 200
+    bytes: 1173
+    sha256: 847467812923832d4f3878814f5261063f0b2b81919b1ea5ae391e3955e53c5b
+    headers_file: tests__controllers__test_fair_check.py.headers
+    verified_git_blob_sha: de7929a1628a639003cafe2187d53f83ed29416f
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__controllers__test_fair_check.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/tests__controllers__test_fair_check.py.headers
+    headers_sha256: 29f3a75b377683cdfa505e3bd94846d8d943efd7532d3e0347116e1df1d3daab
+  - file: fuji_server__evaluators____init__.py
+    path: fuji_server/evaluators/__init__.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/__init__.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/__init__.py
+    http_status: 200
+    bytes: 98
+    sha256: 8ef1e9eb07e18281e736ea380ab082be4eac62aaae6acfb0c1f6305205c3216f
+    headers_file: fuji_server__evaluators____init__.py.headers
+    verified_git_blob_sha: 329b58cef463289a6ca1e0e32772c5d0d11aa92e
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators____init__.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators____init__.py.headers
+    headers_sha256: e62c6c153d022f2966e0da29221d70d4da8272e0d8f0a05b50c25bdef1d96a89
+  - file: CONTRIBUTING.md
+    path: CONTRIBUTING.md
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/CONTRIBUTING.md
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/CONTRIBUTING.md
+    http_status: 200
+    bytes: 3850
+    sha256: ebfbefbb3a40840f3fd9a3a3d5efcdbd9e299ff128161e7070c6407b2a4b619f
+    headers_file: CONTRIBUTING.md.headers
+    verified_git_blob_sha: c4177faaa8ee8a9bfd914857ec5809ffc1ff6d54
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/CONTRIBUTING.md
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/CONTRIBUTING.md.headers
+    headers_sha256: fe938fb829401304a19d3721ff2ac6ec8253427eb3d7b5f3991334ba2d3463cf
+  - file: fuji_server__models____init__.py
+    path: fuji_server/models/__init__.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/__init__.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/__init__.py
+    http_status: 200
+    bytes: 98
+    sha256: 8ef1e9eb07e18281e736ea380ab082be4eac62aaae6acfb0c1f6305205c3216f
+    headers_file: fuji_server__models____init__.py.headers
+    verified_git_blob_sha: 329b58cef463289a6ca1e0e32772c5d0d11aa92e
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models____init__.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models____init__.py.headers
+    headers_sha256: 6543c841af2110f59886a0223a3166df673ee47872d9e413f5f3fae51d711fb1
+  - file: fuji_server____init__.py
+    path: fuji_server/__init__.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+    http_status: 200
+    bytes: 6369
+    sha256: 15b153bb64f01128f0b4b6580026cc2d9497a7810f3741231cc17ebbf506e7ff
+    headers_file: fuji_server____init__.py.headers
+    verified_git_blob_sha: 298c7862621d126f3a9836e8381a4025f471997b
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server____init__.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server____init__.py.headers
+    headers_sha256: 33f6e6bde6431fc08e5c7e8a170a9fec13a9e7b996b09a10b7e464a9c51a49f9
+  - file: fuji_server__helper__metadata_mapper.py
+    path: fuji_server/helper/metadata_mapper.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+    http_status: 200
+    bytes: 52577
+    sha256: 1b21de0883ff83b2c1c60fa08d03d0546830ee7d24e32d969973111d15ce19f3
+    headers_file: fuji_server__helper__metadata_mapper.py.headers
+    verified_git_blob_sha: 08181020a9d6266a825a0d5f8181ea028f22565d
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__metadata_mapper.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__metadata_mapper.py.headers
+    headers_sha256: f8f4f83b075481ffe499726c4cea039f5926338b903b5d714025e7fc65649d18
+  - file: fuji_server__evaluators__fair_evaluator_data_provenance.py
+    path: fuji_server/evaluators/fair_evaluator_data_provenance.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py
+    http_status: 200
+    bytes: 11086
+    sha256: c593a52c2cbe53a7e918b35bd8a73f0f4e4638c7305468a08cf3d7d33bed40da
+    headers_file: fuji_server__evaluators__fair_evaluator_data_provenance.py.headers
+    verified_git_blob_sha: 9875845daaa72572c675c17fc0954ec61c2116ac
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_data_provenance.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__evaluators__fair_evaluator_data_provenance.py.headers
+    headers_sha256: 3c80734e225569d16c9a927507e46377f4fb5d097d394003bbcbb8b1c54402a5
+  - file: fuji_server__util.py
+    path: fuji_server/util.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/util.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/util.py
+    http_status: 200
+    bytes: 3627
+    sha256: c9eeed78bf99cd7125d81bed39705e57046635f407442e8cbc391fb816e0dce9
+    headers_file: fuji_server__util.py.headers
+    verified_git_blob_sha: 70de8ec28362ef92d17a8fb957988f6b8d66d007
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__util.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__util.py.headers
+    headers_sha256: a8aa34add3683a6d6e2176d7e20d723f9927852adc1915c304b7a0cdf1bb619d
+  - file: fuji_server__helper__preprocessor.py
+    path: fuji_server/helper/preprocessor.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/preprocessor.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/preprocessor.py
+    http_status: 200
+    bytes: 20467
+    sha256: 37ce1f49805ecd4d79e71927ac86be2a13518da8070f1c06790f1bc9ef6781db
+    headers_file: fuji_server__helper__preprocessor.py.headers
+    verified_git_blob_sha: 022075b2c5b133d8a0d30e7f8ed82c8d612f4c0a
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__preprocessor.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__helper__preprocessor.py.headers
+    headers_sha256: 586e74cc21d280bd8a8a77ab50465b64c48a8633bfe551eb5d12ff874752dac3
+  - file: fuji_server__models__data_provenance_output.py
+    path: fuji_server/models/data_provenance_output.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance_output.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance_output.py
+    http_status: 200
+    bytes: 3759
+    sha256: 464a4015ca02de358ca994282462d1971a3b96b880671c58ca56f656edf40911
+    headers_file: fuji_server__models__data_provenance_output.py.headers
+    verified_git_blob_sha: 9fc62858ef609a830bee04f45ac2a9e1e5136c49
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance_output.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance_output.py.headers
+    headers_sha256: 1c4bb497d7e78a870296bf00a9e208ce4ef97c653b442b9a5f099e27dcd1c28b
+  - file: fuji_server__models__base_model_.py
+    path: fuji_server/models/base_model_.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+    http_status: 200
+    bytes: 1920
+    sha256: f5069146126f499990140c274adaed20bea01111dc1ce06edc73356fb82391f1
+    headers_file: fuji_server__models__base_model_.py.headers
+    verified_git_blob_sha: ecffcc28320806290f92d5b13b42cd351ad4ffeb
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__base_model_.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__base_model_.py.headers
+    headers_sha256: 5d4e076d1c8f14fc748f3387fa738c17703c325ce87aaf7a13d69f101161fd35
+  - file: fuji_server__models__data_provenance_output_inner.py
+    path: fuji_server/models/data_provenance_output_inner.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance_output_inner.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance_output_inner.py
+    http_status: 200
+    bytes: 2862
+    sha256: 1f1644c8da7c1618f80d789d93c72ee71f5f0f9b14609d161921611e07137008
+    headers_file: fuji_server__models__data_provenance_output_inner.py.headers
+    verified_git_blob_sha: cc20ce957e4c16b17cb188edaf4811e824ca4204
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance_output_inner.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance_output_inner.py.headers
+    headers_sha256: 8ee3aa6595c564d165a8be30e168822ba35f89ca9d98948342ba834ca580f440
+  - file: fuji_server__models__data_provenance.py
+    path: fuji_server/models/data_provenance.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/data_provenance.py
+    http_status: 200
+    bytes: 9044
+    sha256: 22131418011900bb3551c0e8e0235941a1a4995262afb89461c89759c76b2820
+    headers_file: fuji_server__models__data_provenance.py.headers
+    verified_git_blob_sha: 25040c54452f8e09198ad5df5002dfb9ab373919
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__data_provenance.py.headers
+    headers_sha256: c577bc87240b1c77eb7da25eb7a3142d874a62e57f134e9e5cfefcc6f79fac65
+  - file: fuji_server__models__fair_result_evaluation_criterium.py
+    path: fuji_server/models/fair_result_evaluation_criterium.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_evaluation_criterium.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_evaluation_criterium.py
+    http_status: 200
+    bytes: 6635
+    sha256: 924ebbce6ad68d8e975a3c96c8b2cb4a1ba92ab412f37d79f6c67f526f170430
+    headers_file: fuji_server__models__fair_result_evaluation_criterium.py.headers
+    verified_git_blob_sha: a1e9228eb21fdcd3a29735653a4ffd5295cb6c2e
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_evaluation_criterium.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_evaluation_criterium.py.headers
+    headers_sha256: 33c480d8ef4d1feb76295b3d434a05529edee74e7f60f0f54d3b4a3d05ecb194
+  - file: fuji_server__models__fair_result_common_score.py
+    path: fuji_server/models/fair_result_common_score.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_common_score.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_common_score.py
+    http_status: 200
+    bytes: 2246
+    sha256: 594826ba09542d68d5ef48dc5aaa95a81e075ea0fb1134ae2ec9ad97037d623f
+    headers_file: fuji_server__models__fair_result_common_score.py.headers
+    verified_git_blob_sha: 3e145d291eb94407d5c124d9c60e731fee6739cb
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_common_score.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_common_score.py.headers
+    headers_sha256: e414ddf4d5ede076ac84698ec5623dd03ac187416e737432a088176f73482c88
+  - file: fuji_server__models__fair_result_common.py
+    path: fuji_server/models/fair_result_common.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_common.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/fair_result_common.py
+    http_status: 200
+    bytes: 7388
+    sha256: c4b21a3ff45885dd1f05fc9533a7bc904ddfe2629fef99416958943462aa19fa
+    headers_file: fuji_server__models__fair_result_common.py.headers
+    verified_git_blob_sha: 3ae127233e399515100822ebb3dcd2c22c343ebb
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_common.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__models__fair_result_common.py.headers
+    headers_sha256: fed5bf747e5e39d4808a5b96dba3da7ffaf208ed5aa7eeb13fbb59acfe9f7674
+  - file: fuji_server__controllers__fair_object_controller.py
+    path: fuji_server/controllers/fair_object_controller.py
+    url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py
+    final_url: https://raw.githubusercontent.com/pangaea-data-publisher/fuji/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py
+    http_status: 200
+    bytes: 12576
+    sha256: bb936eb547ba78b3b6197480a009332e22b194f098fcd32392a680e4162c3056
+    headers_file: fuji_server__controllers__fair_object_controller.py.headers
+    verified_git_blob_sha: fc01502f0472b6fecdaaf682f4bbd3c1d48705d6
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__controllers__fair_object_controller.py
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji_server__controllers__fair_object_controller.py.headers
+    headers_sha256: ac8686454015b6d01263d579b5221761d94fd8dd11ac9fc15b6d8676262072b4
+  - file: fuji-paper-2021.html
+    path: null
+    url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+    final_url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+    http_status: 200
+    bytes: 247989
+    sha256: 86ce3fec351bf62545d5b5e69a3c9dd03fd88a51ebb402f00de12a5a1fca0fd0
+    headers_file: fuji-paper-2021.html.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji-paper-2021.html
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji-paper-2021.html.headers
+    headers_sha256: 0e5cb267c13b06e39fcdf392b135d0808da4bd45d135fe2ea9b56e7402ac7c80
+  - file: fuji-7bc6552.zip
+    path: null
+    url: https://api.github.com/repos/pangaea-data-publisher/fuji/zipball/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a
+    final_url: https://codeload.github.com/pangaea-data-publisher/fuji/legacy.zip/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a
+    http_status: 200
+    bytes: 2892378
+    sha256: dd5f5f1733fe6f602ae489c7d1d55d33640599f11043c946090c808594d9d1df
+    headers_file: fuji-7bc6552.zip.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji-7bc6552.zip
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/fuji-7bc6552.zip.headers
+    headers_sha256: 9cd5e0f03a75926033f6fe2469dd63eebd646915f06f1a0595f327bf1f82a7ee
+  - file: six-1.17.0-pypi.json
+    path: null
+    url: https://pypi.org/pypi/six/1.17.0/json
+    final_url: https://pypi.org/pypi/six/1.17.0/json
+    http_status: 200
+    bytes: 3904
+    sha256: d8de39dd52b73048d81a8fd78022ee2bc72f8b568bcf0d88e5d5069c302b1208
+    headers_file: six-1.17.0-pypi.json.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/six-1.17.0-pypi.json
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/six-1.17.0-pypi.json.headers
+    headers_sha256: be71f75c4c9dbbc0b0d6b9510ff3caeba478cc33fbeaf0f6a22a185811e0af75
+  - file: six-1.17.0-py2.py3-none-any.whl
+    path: null
+    url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
+    final_url: https://files.pythonhosted.org/packages/b7/ce/149a00dd41f10bc29e5921b496af8b574d8413afcd5e30dfa0ed46c2cc5e/six-1.17.0-py2.py3-none-any.whl
+    http_status: 200
+    bytes: 11050
+    sha256: 4721f391ed90541fddacab5acf947aa0d3dc7d27b2e1e8eda2be8970586c3274
+    headers_file: six-1.17.0-py2.py3-none-any.whl.headers
+    local_path: /workspace/shared/ia-fuji-gap-research-20261029/six-1.17.0-py2.py3-none-any.whl
+    headers_path: /workspace/shared/ia-fuji-gap-research-20261029/six-1.17.0-py2.py3-none-any.whl.headers
+    headers_sha256: 894610538eec17341395be245d6ea6ade7eec35de71230c4d452304cf4e06c36
+  source_release_commit: 7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a
+  archive_files: 293
+  raw_source_matches: 29
+  normative_guidance_indexed_verification:
+    source: https://www.nature.com/articles/sdata201618
+    title: The FAIR Guiding Principles for scientific data management and stewardship
+    doi: 10.1038/sdata.2016.18
+    publication_date: '2016-03-15'
+    retrieval_method: web.search_query indexed publisher text
+    observed_utc_window: 2026-10-29T11:51:27Z/2026-10-29T11:51:47Z
+    query: site.nature.com/articles/sdata201618 R1.2 provenance; site.nature.com/articles/sdata201618 not a standard
+    selected_quotes:
+    - locator: Box 2, R1.2
+      text: (meta)data are associated with detailed provenance
+    - locator: The Principles precede implementation
+      text: the Principles are not, themselves, a standard or a specification
+    paraphrase: 'The 2016 paper presents high-level guidance for discovery, access, interoperability and reuse.
+      It separates these goals from technology choices and allows incremental combinations. R1 includes meaningful,
+      accurate metadata and R1.2 asks for detailed provenance: a creator key or recognized namespace alone cannot
+      establish that richer property. F-UJI''s own metrics, tests and scores are an operationalization, not the
+      publication itself or a certificate of satisfying every principle.'
+    limits: Selected tool-indexed publisher text, not a new direct HTTP body/archive or authenticity proof. No direct
+      Nature/DOI GET was attempted; no prior access limitation bypass. The existing canonical publication and its
+      historical evidence remain byte-identical. This supplements only the new uses relation review. No full source
+      text copied.
+  runtime_evidence:
+    report:
+      path: /workspace/shared/ia-fuji-intake-evidence-20261029/author-runtime-verification.json
+      bytes: 27924
+      sha256: 8fa232385b4d4ee99dbd4f9ac1ec604cb549cbc3b0eaedef6222f7da5eceac47
+    script:
+      path: /workspace/shared/ia-fuji-intake-evidence-20261029/runtime-check/offline-provenance-smoke.py
+      bytes: 3735
+      sha256: 8ef725e2f3706c22f6f600bef2df65bee9b3f50e162064bda97108ccf08f33d3
+    fixture:
+      path: /workspace/shared/ia-fuji-intake-evidence-20261029/runtime-check/provenance-metric-fixture.json
+      bytes: 4148
+      sha256: b4e340c8d9368bdc9cd1b2ad02a3c24fb6033434bbc10b93507c6164d1260da4
+    results:
+      path: /workspace/shared/ia-fuji-intake-evidence-20261029/runtime-check/offline-provenance-smoke-results.json
+      bytes: 25389
+      sha256: dc4cc564fcdc476b0fd8cf8703605c7bf42a829d7eea23bb6ab622533dc58342
+    cases:
+    - case: absent
+      input_metadata: {}
+      input_namespaces: []
+      expected:
+      - fail
+      - 0
+      - 0
+      observed:
+      - fail
+      - 0
+      - 0
+    - case: creator_value
+      input_metadata:
+        creator:
+        - Example researcher
+      input_namespaces: []
+      expected:
+      - pass
+      - 1
+      - 2
+      observed:
+      - pass
+      - 1
+      - 2
+    - case: creator_null_characterization
+      input_metadata:
+        creator: null
+      input_namespaces: []
+      expected:
+      - pass
+      - 1
+      - 2
+      observed:
+      - pass
+      - 1
+      - 2
+    - case: namespace_only_characterization
+      input_metadata: {}
+      input_namespaces:
+      - http://www.w3.org/ns/prov#
+      expected:
+      - pass
+      - 1
+      - 3
+      observed:
+      - pass
+      - 1
+      - 3
+    - case: related_only_characterization
+      input_metadata:
+        related_resources:
+        - relation_type: IsDerivedFrom
+          related_resource: urn:example:source
+      input_namespaces: []
+      expected:
+      - fail
+      - 0
+      - 0
+      observed:
+      - fail
+      - 0
+      - 0
+    - case: creator_and_namespace_alternative_score
+      input_metadata:
+        creator:
+        - Example researcher
+      input_namespaces:
+      - http://purl.org/pav/
+      expected:
+      - pass
+      - 1
+      - 3
+      observed:
+      - pass
+      - 1
+      - 3
+    - case: unrecognized_namespace
+      input_metadata: {}
+      input_namespaces:
+      - urn:example:not-provenance
+      expected:
+      - fail
+      - 0
+      - 0
+      observed:
+      - fail
+      - 0
+      - 0
+    python: 3.13.5 (main, Aug 10 2026, 12:06:59) [GCC 14.2.0]
+    command: python3.13 -I -S /workspace/shared/ia-fuji-intake-evidence-20261029/runtime-check/offline-provenance-smoke.py
+    observed_window: 2026-10-29T11:53:48Z/2026-10-29T11:54:08Z
+    no_network_or_subprocess_attempts: true
+  full_service_or_upstream_suite_executed: false
+  limits:
+  - Whole293-file official source snapshot bytes match tree; not build/package-distribution/signature/security certification.
+  - 36 original requests have recorded200/finalURL/headers; observed batch UTC windows are not per-request or filesystem
+    timestamps.
+  - Offline component cases use synthetic post-harvest context and fixed0.8 accessor; no complete controller/harvester/MetricHelper/preprocessor/service/deployment/upstream
+    suite execution.
+  - 'Author inspected model imports, evaluator, base, mapper, initialization, original harness and score/summary
+    limitations before limited rerun. No license conclusion: README version-limited statement differs from manifest/LICENSE.'
+  - FAIR publication is guidance, not standard/specification. Indexed publisher text supplement is not direct HTTP
+    response; old Canonical evidence untouched.
+identity_boundary:
+  source_software_not_hosted_deployment_or_organization_or_publication: true
+  no_PROV_O_or_other_identity_merge: true
+  old_FAIR_record_and_evidence_untouched: true
+objects:
+- candidate_id: fuji
+  candidate_path: 01_State/Inbox/candidates/fuji.yaml
+  candidate_blob: 48b01afcd4b247d89e610b3a83200cdcac004e11
+  baseline_candidate_blob: null
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+  proposed_path: 01_State/01_Objects/fuji.yaml
+  proposed_record:
+    id: fuji
+    type: system
+    kind: software
+    name_zh: F-UJI 研究数据 FAIR 评估软件（4.0.1）
+    name_en: F-UJI research data FAIR assessment software (4.0.1)
+    description_zh: 通过配置的 FAIRsFAIR 指标使用 FAIR 原则评估研究数据的软件；核对固定 4.0.1 源码和指标集 0.8，并执行 7 个离线来源评估组件例。观察到 creator:null
+      或仅识别命名空间可通过、仅 related_resources 仍失败，属于存在性启发式而非详细来源证明；汇总另有两个指定 URL 的分数覆盖。不是完整 FAIR 符合性、元数据真实性或认证，也未验证完整采集/服务。
+    description_en: 'Research-data assessment software using FAIR principles through configured FAIRsFAIR metrics:
+      fixed 4.0.1 source and metric set 0.8 inspected, with seven offline provenance-evaluator cases executed. Observed
+      creator:null or a recognized namespace alone can pass, while related_resources alone fails: presence heuristics,
+      not proof of detailed provenance. Summaries additionally override scores for two named URLs. Not full FAIR
+      compliance, metadata truth or certification, nor a tested complete harvesting/service pipeline.'
+    version: 4.0.1
+    versions:
+    - version: 4.0.1
+      status: released
+      url: https://github.com/pangaea-data-publisher/fuji/releases/tag/v4.0.1
+    external_identifiers:
+    - namespace: github
+      value: pangaea-data-publisher/fuji
+    official_url: https://github.com/pangaea-data-publisher/fuji
+    domains:
+    - research
+    - metadata
+    scope_notes_zh: 主体是官方 F-UJI 软件源码项目，不是 f-uji.net 实际部署、FAIRsFAIR 组织、FAIR 原则论文或指标出版物，也不是 IA 采用/背书。GitHub release
+      v4.0.1（2026-09-24 发布）与 tag 固定到 7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a，pyproject 版号相符；不主张最新、签名认证、发布包验证、可复现构建或部署可用性。LICENSE/manifest
+      的 MIT 声明与 README 仅写至 4.0.0 的许可句存在版次边界，故不作 license_expression/open_source 法律结论。 正面功能证据是作者声明和实际架构使用 FAIR 原则作为评估框架，经
+      FAIRsFAIR 指标与测试操作化：控制器将配置/采集的元数据传给 evaluator，返回按指标的结果/score/maturity，再依指标标识聚合 F/A/I/R 与各原则。默认 metrics_v0.8.yaml
+      有 17 个配置项，其中 16 项有 fair_principle 字段，F4 仍编码在指标标识中；A2 被注释。不是所有原则/测试都已实现或验证，也不保证所有配置同样工作。2021 年作者论文把原则→指标→测试连到
+      2016 年 FAIR 论文；这是方法谱系，不是 4.0.1 运行证据。FAIR 2016 是高层指导而非标准/软件规范，故只用 uses，不宣称 implements。 自动评估依赖可访问的聚合元数据、外部注册/标识服务、领域实践和配置；rich/plural/accurate/relevant
+      等仍需人解释。仅检查选定架构和 evaluator 源码；完整服务/采集及其他 evaluator 未执行。fair_check.get_assessment_summary 对 https://www.rd-alliance.org/users/mustapha-mokrane
+      与 https://www.rd-alliance.org/users/ilona-von-stein 两个 input_id 将每指标 earned 改为 total、maturity 改为 3、status
+      改为 1 后聚合；这是汇总层源码特例，不证明原始逐指标测试通过，也未运行该汇总路径。不能将汇总分数理解为普遍客观测量或认证。 运行证据仅为固定 0.8 配置下 7 个自编离线 R1.2 来源 evaluator
+      例，并由 intake 作者在 Python 3.13.5 -I -S 复跑得到完全相同结果：无元数据 fail；creator 有值与 creator:null 均 pass，score 1/1、maturity
+      2；仅识别到 PROV/PAV 命名空间即 pass、maturity 3；两条路径同时命中仍按 alternative 机制记 1/1 而非累加；related_resources 单独出现会列入输出但未设置
+      availability，仍 fail；不认识的命名空间 fail。键/命名空间存在不能证明详细来源、图有效性或内容真实；不产生 PROV-O/本体符合性关系。 smoke 调用未修改官方 archive 的 evaluator/base/mapper/generated
+      models，初始化会导入其他模型；使用合成 post-harvest context、由固定 YAML 机械转成 JSON（日期元信息为字符串）并补 helper 所需标识键的 fixture，以及固定 0.8
+      版本 accessor。未 stub evaluator 算法，但未执行完整 MetricHelper/preprocessor/harvester/controller 管线。293 个 archive 文件
+      blob 与官方完整 tree 相符，29 份独立 raw source 与 archive 相同；36 个原始请求有 headers/hash/transport 记录。官方 PyPI six 1.17.0 wheel
+      digest/RECORD 已核，仅为离线依赖，不新增其对象。无安装/build、网络数据集评估、HTTP server、浏览器/Tika/凭据/remote logging 或上游完整测试。audit hook
+      记录零 network/subprocess attempts，不是操作系统隔离/安全审计。 排除完整 FAIR 符合性/认证、元数据真实性/质量/完整性或合法性保证、自动修复、任意 identifier 运行建议、完整服务安全或部署就绪、OpenAPI
+      版次边、PROV-O 身份合并和 IA 采用。不新增 capability，不误标为结构 schema_validation。既有 FAIR 论文及历史证据不变。
+    scope_notes_en: 'The official source software, not hosted f-uji.net, FAIRsFAIR organization, FAIR paper, metrics
+      publication or IA adoption. GitHub release/tag v4.0.1 resolves to7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a,
+      agreeing with pyproject. No latest/signature/package-distribution/reproducible-build/deployment claim. LICENSE/manifest
+      MIT statements and README''s license sentence limited through4.0.0 have different version bounds; no license_expression/open_source
+      legal conclusion. Declared purpose and source architecture use FAIR as a methodological framework via FAIRsFAIR
+      metrics/tests: controller supplies configured/harvested metadata to evaluators, returns metric results/score/maturity,
+      and aggregates categories/principles from metric identifiers. Default0.8 has17 entries,16 explicit fair_principle
+      fields, F4 encoded in its identifier, A2 commented out; not every principle/test/configuration is implemented
+      or verified. Authors''2021 paper links principles-metrics-tests to2016 publication, not runtime proof for4.0.1.
+      FAIR is guidance, not a standard/software specification, hence uses not implements. Accessible aggregated
+      metadata, external registries, domain practices and configuration matter; rich/plural/accurate/relevant aspects
+      need human interpretation. Only selected architecture and evaluator sources were inspected; complete harvesting/service
+      and other evaluators were not executed. get_assessment_summary overrides earned with total, maturity with3
+      and status with1 for input IDs https://www.rd-alliance.org/users/mustapha-mokrane and https://www.rd-alliance.org/users/ilona-von-stein
+      before aggregation. This summary source special case does not establish underlying metric passes and was not
+      executed here; summaries are not universal objective measurement/certification. Seven authored offline R1.2
+      component cases, rerun by intake author on Python3.13.5 -I -S with exact equality: absent metadata fails;
+      creator value and creator:null both pass at1/1,maturity2; a recognized PROV/PAV namespace alone passes at
+      maturity3; both paths still earn1/1 under alternative scoring. Related-resource-only is listed but fails because
+      availability remains false; unrelated namespace fails. Presence is not detailed provenance, graph validity
+      or truth; no PROV-O/ontology conformance edge. Unmodified archive evaluator/base/mapper/generated models execute,
+      with other model imports during initialization. Synthetic post-harvest context, fixed-YAML JSON fixture (date
+      metadata as strings) plus helper-required identifier keys and fixed0.8 version accessor; no evaluator algorithm
+      stub, but no full MetricHelper/preprocessor/harvester/controller execution. All293 archive file blobs match
+      official tree and29 raw sources match archive;36 requests retain original transport metadata/headers/hashes.
+      Verified six1.17.0 wheel digest/RECORD is offline dependency only. No installation/build/live-dataset HTTP/server/browser/Tika/credentials/remote
+      logging/full upstream suite. Audit hook zero network/subprocess attempts is not OS sandbox/security certification.
+      No fullFAIR/certification, metadata truth/quality/completeness/legal guarantee, automated repair, arbitrary-identifier
+      run recommendation, service security/production readiness, OpenAPI edition edge, PROV-O identity merge or
+      IA adoption. No new capability/misused schema_validation; existing FAIR paper/history untouched.'
+    sources:
+    - url: https://github.com/pangaea-data-publisher/fuji/releases/tag/v4.0.1
+      title: Official GitHub source releasev4.0.1
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml
+      title: Source4.0.1 and Python3.13 declaration, not dependency installation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/metrics_configuration.md
+      title: Configurable metrics and still-unimplemented configuration options
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md#L12-L47
+      title: Declared FAIRsFAIR assessment purpose and metadata/human-interpretation limits
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+      title: Fixed17 metric entries;16 explicit principle fields, F4 in identifier; A2 commented
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L198-L208
+      title: Default0.8 metric configuration and loading
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py#L80-L116
+      title: Metric/test identifier normalization and configuration filtering
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py#L17-L250
+      title: Source-only assessment orchestration, evaluator results and summary
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L638-L731
+      title: Category/principle summaries; explicit two-input-ID score/maturity/status overrides
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py#L12-L247
+      title: Actual offline component; key/namespace presence and related-resource limitation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py#L56-L198
+      title: Metric/test setup, component evaluation and dictionary results
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+      title: Fixed provenance property mappings, not graph validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+      title: Actual generated model dictionary serialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+      title: Source version discovery and generated-model imports
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+      title: Unexecuted upstream service tests; not evidence of complete-suite pass
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+      title: 'F-UJI authors2021 paper: principles-metrics-tests method, Figure1 and reference2 to2016 FAIR; not4.0.1
+        execution'
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.nature.com/articles/sdata201618
+      title: FAIR2016 Box2 R1.2 and Principles precede implementation; selected indexed publisher text, not direct
+        HTTP
+      language: en
+      accessed: '2026-10-29'
+      retrieval_method: search_indexed_publisher_text
+      direct_access_verified: false
+    last_verified_at: '2026-10-29T11:58:53.092338+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed-source review and seven offline component cases only
+relations:
+- proposed_path: 01_State/02_Relations/fair-assessment-software.yaml
+  proposed_record:
+    id: fuji_uses_fair_principles_2016
+    type: relation
+    name_zh: F-UJI 经配置指标使用 FAIR 原则作评估框架（非认证）
+    name_en: F-UJI uses FAIR principles through configured assessment metrics (not certification)
+    source: fuji
+    relation: uses
+    target: fair_principles_2016
+    context:
+      version_context:
+        source: F-UJI4.0.1 source7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a, selected default FAIRsFAIR metric configuration0.8
+        target: FAIR Guiding Principles2016 publication, DOI10.1038/sdata.2016.18; guidance, not a software conformance
+          specification
+      conditions_zh: 软件把 FAIR 作为方法输入，经可配置 FAIRsFAIR 指标、evaluator 与按原则/类别汇总辅助研究数据评估。源码架构与作者论文共同支持实际 uses，不是把 7 个合成例泛化成全程序证明。17
+        个默认指标项不是全部原则覆盖，A2 被注释，领域/元数据/外部服务/配置影响结果。来源组件 creator:null 或识别命名空间可通过、related-only 失败，score 不证明详细来源或真实性；两个指定
+        URL 的汇总特例见对象 scope。仅 7 个离线组件例实际执行，无完整采集/服务/汇总/上游套件运行。FAIR 是原则非规范；不主张 implements、完整 FAIR/认证、客观统一度量、安全/合法性/质量、PROV-O
+        图符合性、自动修复或 IA 采用。
+      conditions_en: F-UJI takes FAIR as methodological input through configured FAIRsFAIR metrics, evaluators and
+        principle/category summaries. Source architecture and authors' paper support this use, not extrapolation
+        of seven synthetic cases to all-program correctness. Seventeen entries are not complete coverage; A2 is
+        commented out and domain/metadata/external-service/configuration affect results. creator:null or a recognized
+        namespace can pass while related-only fails, so scores do not prove detailed provenance/truth; object scope
+        records two named-URL summary overrides. Only seven offline component cases executed, not complete harvesting/service/summary/upstream
+        suite. No implements/fullFAIR/certification, universal objective measurement, security/legal/quality, PROV-O
+        graph validity, automated repair or IA-adoption claim.
+    evidence:
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md#L12-L47
+      title: Declared FAIRsFAIR assessment purpose and metadata/human-interpretation limits
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+      title: Fixed17 metric entries;16 explicit principle fields, F4 in identifier; A2 commented
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L198-L208
+      title: Default0.8 metric configuration and loading
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py#L80-L116
+      title: Metric/test identifier normalization and configuration filtering
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py#L17-L250
+      title: Source-only assessment orchestration, evaluator results and summary
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L638-L731
+      title: Category/principle summaries; explicit two-input-ID score/maturity/status overrides
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py#L12-L247
+      title: Actual offline component; key/namespace presence and related-resource limitation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py#L56-L198
+      title: Metric/test setup, component evaluation and dictionary results
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+      title: Fixed provenance property mappings, not graph validation
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+      title: Actual generated model dictionary serialization
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+      title: Source version discovery and generated-model imports
+      language: en
+      accessed: '2026-10-29'
+    - url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+      title: Unexecuted upstream service tests; not evidence of complete-suite pass
+      language: en
+      accessed: '2026-10-29'
+    - url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+      title: 'F-UJI authors2021 paper: principles-metrics-tests method, Figure1 and reference2 to2016 FAIR; not4.0.1
+        execution'
+      language: en
+      accessed: '2026-10-29'
+    - url: https://www.nature.com/articles/sdata201618
+      title: FAIR2016 Box2 R1.2 and Principles precede implementation; selected indexed publisher text, not direct
+        HTTP
+      language: en
+      accessed: '2026-10-29'
+      retrieval_method: search_indexed_publisher_text
+      direct_access_verified: false
+    last_verified_at: '2026-10-29T11:58:53.092338+00:00'
+    last_verified_by: Agent — OpenAI / dot, methodological uses and limited component characterization
+membership_proposals:
+- category_id: research
+  ref:
+    surface: canonical
+    id: fuji
+  rationale_zh: 既有研究方法/可复现性导航补具体评估软件及其方法/证据局限；编者导航不是完整FAIR认证。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 51438
+  sha256: acdc6a13890653b8471fd7eb9bd48e52703bb6d54084279cde68111a44d479ea
+  git_blob: f938bd792cd2cee57b581f8e913a8081896dc7cd
+existing_record_updates: []
+protected_existing_assets:
+- path: 01_State/01_Objects/fair_principles_2016.yaml
+  bytes: 1916
+  sha256: e81542a7c77c96efc341c70e0038511ff9d5bcba5d0c56eb38a2f2136ab2414a
+  git_blob: f3f6d2c4a0270d4466f095bc29a8e52ee9ac5de7
+- path: 01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml
+  bytes: 1739
+  sha256: b50f98557f1e4cadb77f989a398ae4efbb4f02765bc1b71a2ac1cbe744ba7a72
+  git_blob: 3c6219d8992b2c4002554f5d92f5678f1ec8cc69
+- path: 01_State/01_Objects/schema_validation.yaml
+  bytes: 817
+  sha256: 85646233fb8d2f8f23b743dd477f293805ebe6240b0bf552598b4964aa55ec15
+  git_blob: 73f565018cb0baff1c521ff3f90aff6c2061e147
+- path: 01_State/01_Objects/python_prov.yaml
+  bytes: 14503
+  sha256: 5d54235ffad005250c2a74e6013728e195f723dd98aeffa2d7dc0c688fa8d62d
+  git_blob: ac68cce9cd5757c221c6a267c3a822203f54bd8e
+- path: 01_State/01_Objects/prov-o.yaml
+  bytes: 1412
+  sha256: b1a253ba30fb07271f477b3f0a4991d004e3a159a3a9ab354b0ea8af6479f2f2
+  git_blob: 4bc3146d51a4dd294bbb148551be326a17374d6e
+- path: 01_State/01_Objects/w3c-prov-o.yaml
+  bytes: 1842
+  sha256: 63a0453efe7de2e677f6129501e9e21ba524ee47722aa9a6e717063de4a61a1c
+  git_blob: 90ddef6965114f7728c304381c10994e257c8a83
+- path: 01_State/Inbox/candidates/avid_dnxhd_dnxhr.yaml
+  bytes: 1446
+  sha256: 5913c125dd149028704254166aec93f626576f59364c64ea8e74a88c323e3aac
+  git_blob: 8f3c78b6ac26e2574d4aecb6b0a7e78a619e19d0
+excluded_scope:
+- No implements/fullFAIR/certification/truth/quality/completeness/legal/security/universal-objectivity claim.
+- No fullservice/harvester/controller/summary/runtime/deployment/upstream-suite verification; only seven actual
+  component cases.
+- No PROV-O ontology conformance/identity edge, OpenAPI edition edge, newcapability or schema_validation misuse.
+- No license conclusion or upstream repair; twoURL override/creator:null/namespace-only-pass/related-only-fail explicitly
+  retained.
+- No identity-risk/Owner holds, schema/renderer/classification/governance/maintenance/historicalaudit changes.
+- No actual canonical/event/nav/freeze or external write at proposal stage.
+renderer_boundary_zh: 既有implementation页省略完整scope/context，可见description注明配置FAIR方法、7离线组件例、creator:null/仅命名空间可通过、related-only失败的存在性启发式、两个指定URL汇总覆盖、非完整FAIR/真实性/认证及未验证完整服务。FAIR目标artifact/publication不支持独立HTML/Markdown；uses在F-UJI页仅显示准确目标名称纯文本而非坏href，无目标incoming页。独立复核实际单实现页、Canonical关系及原文source；保留基线不支持目标导出的结果，不改renderer或新造页面。
+materialization_boundary_zh: candidate+packet仅提案；独立语义PASS后connector真实freeze→普通fetch→以freeze为父物化；独立结构复核、实际headCI、正常merge与main/Pages/live分别验证。
