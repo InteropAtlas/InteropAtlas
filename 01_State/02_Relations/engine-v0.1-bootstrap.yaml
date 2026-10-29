@@ -225,15 +225,15 @@ last_verified_by: Agent — OpenAI / dot / JSON Pointer published-reference evid
 ---
 id: url_standard_alternative_context_uri
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T14:56:08.381434+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / review_url_uri_scope"
   github_actor: "ff6962757"
 source:
   type: standard
@@ -244,6 +244,45 @@ target:
   id: uri_rfc3986
 notes_zh:
   - 这里的 alternative_to 只作为需要进一步解释两套资源标识/解析模型边界的初始关系，不表示二者完全可互换。
+context:
+  capabilities:
+  - resource_identification
+  version_context:
+    source: URL Living Standard observed 2026-10-29; live page dated 2026-10-19 and linked to commit 845bafca22fb0c5a42c4bf384a9bdea525a2f10d.
+      The commit snapshot is only a reproducible historical witness, not a current implementation authority.
+    target: RFC 3986 / STD 66, January 2005, fixed publication
+  conditions_zh: 这是 IA 对两套资源标识处理路线的条件性比较：应用需要 WHATWG 所定义的 Web URL 解析、序列化与错误处理行为时，URL Standard 可作为仅按 RFC 3986 通用
+    URI 组件语法与引用解析处理的替代路线；这不局限于浏览器产品。两者不是全范围、逐输入可互换的验证器或算法。RFC 3986 的方案特定要求仍须另查；明确要求遵循 RFC 3986 的协议/数据格式不能由本关系自动改用
+    WHATWG 行为。URL validation error 不必终止解析，因此解析成功不证明原输入符合有效 URL 字符串或 RFC 3986 语法。该判断不是兼容性、无缝替代、完整等价、优先推荐、任一库符合性或
+    IA 采用承诺。WHATWG Goals 中废止 RFC 的表述是其目标，不据此宣称 RFC 3986 已在 IETF 正式废止；不改两个端点身份。
+  conditions_en: 'This is an IA conditional comparison of resource-identifier processing approaches: where an application
+    needs WHATWG-defined Web URL parsing, serialization and error handling, the URL Standard is an alternative to
+    processing based only on RFC 3986 generic URI components and reference resolution; it is not restricted to browser
+    products. The two are not interchangeable validators or algorithms over their full scopes or every input. RFC
+    3986 scheme-specific requirements still need separate consideration, and this relation does not authorize substituting
+    WHATWG behavior in a protocol or format that explicitly requires RFC 3986. A URL validation error need not terminate
+    parsing, so parse success does not establish valid-URL-string or RFC 3986 syntax. This is not compatibility,
+    a drop-in replacement, full equivalence, a preference recommendation, library conformance or IA adoption. The
+    WHATWG goal of obsoleting the RFCs is not asserted to be an IETF obsolescence action; both endpoint identities
+    remain unchanged.'
+evidence:
+- url: https://url.spec.whatwg.org/#goals
+  title: URL Living Standard — observed Goals, Writing, URL parsing and URL serializing; current source, linked
+    snapshot 845bafca
+  language: en
+  accessed: '2026-10-29'
+- url: https://url.spec.whatwg.org/commit-snapshots/845bafca22fb0c5a42c4bf384a9bdea525a2f10d/
+  title: URL snapshot 845bafca — historical reproducibility witness for the inspected sections, not current implementation
+    authority
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc3986.txt
+  title: 'RFC 3986 — sections 1.1.1, 3.3 and 5, plus Appendix A: generic syntax, reference resolution and path-character
+    boundary'
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T14:56:08.381434+00:00'
+last_verified_by: Agent — OpenAI / dot / URL URI conditional-alternative evidence executor
 ---
 id: css_recommended_with_html
 record_created_at: "2026-09-01T16:44:53+08:00"
