@@ -106,15 +106,15 @@ last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge
 ---
 id: wai_aria_recommended_with_html
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T16:02:08.557825+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent ARIA HTML semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 与 HTML 语义配合使用
@@ -131,6 +131,57 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation 2023-06-06
+    target: Existing HTML Living Standard identity; authoring constraints supported by fixed ARIA in HTML Recommendation
+      2026-08-11, whose abstract explicitly covers WAI-ARIA 1.2. Current HTML section 3.2.9 observed 2026-10-29;
+      no whole-HTML revalidation or new endpoint.
+  conditions_zh: 沿用既有原生 HTML 语义优先、必要时用 ARIA 补充的配合建议。WAI-ARIA 1.2 §8.5 的精确前提是：存在具有相同角色语义和值的宿主特性，且作者无充分理由放弃它时，作者
+    SHOULD 使用该原生特性；不把 SHOULD 升级成无例外禁令。具体 role 与 aria-* 的使用仍受 HTML 宿主的作者约束，不能假定任意组合合法或 ARIA 一概覆盖原生语义。这是角色、状态和属性所表达的无障碍语义配合，不证明定制控件交互已实现。ARIA
+    in HTML 非规范性 §2 的例子说明，给超链接设置 aria-disabled=true 不会使链接实际不可点击/操作。用户代理处理 ARIA 不得干扰宿主内建功能，也不得为了将 ARIA 重映射为宿主特性而改变
+    DOM；可访问性 API 映射则可改变。本边不证明完整 WCAG 符合性、具体浏览器/辅助技术组合互通或 IA 页面已采用、已符合。
+  conditions_en: Preserves the existing complementary-use advice to prefer native HTML semantics and add ARIA
+    where needed. The precise WAI-ARIA 1.2 section 8.5 condition is that, where a host feature with identical
+    role semantics and values exists and the author has no compelling reason to avoid it, authors SHOULD use
+    that native feature; this is not an exceptionless prohibition. Particular role and aria-* uses remain subject
+    to HTML host-language authoring constraints, not a blanket permission for every combination or for ARIA
+    to override all native semantics. This concerns accessibility semantics expressed through roles, states
+    and properties, not proof that custom-widget interaction is implemented. The non-normative ARIA in HTML
+    section 2 example states that aria-disabled=true on a hyperlink does not make it functionally unclickable
+    or inoperable. User-agent ARIA processing must not interfere with built-in host features or alter the DOM
+    to remap ARIA into host features; accessibility API mappings may change. This does not establish complete
+    WCAG conformance, interoperability of a particular browser/assistive-technology combination, or IA-page
+    adoption/conformance.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: WAI-ARIA 1.2 abstract — explicitly complements HTML; roles, states and properties convey semantics
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x8-5-conflicts-with-host-language-semantics
+  title: WAI-ARIA 1.2 §8.4–8.5 — implicit semantics, conditional SHOULD for native features and host-language
+    conflicts
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x3-1-non-interference-with-the-host-language
+  title: WAI-ARIA 1.2 §3.1 — host-feature non-interference and DOM/accessibility-mapping distinction
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-html-aria-20260811/#rules-wd
+  title: ARIA in HTML 2026-08-11 abstract and §1 — WAI-ARIA 1.2 authoring rules on HTML elements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-html-aria-20260811/#x2-aria-semantics-that-extend-and-diverge-from-html
+  title: ARIA in HTML §2, non-normative — semantics versus actual hyperlink operability
+  language: en
+  accessed: '2026-10-29'
+- url: https://html.spec.whatwg.org/multipage/dom.html#wai-aria
+  title: HTML Living Standard §3.2.9, observed 2026-10-29 — delegates conformance-checker rules and accessibility
+    API mapping
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T16:02:08.557825+00:00'
+last_verified_by: Agent — OpenAI / dot / ARIA HTML scoped-use evidence executor
 ---
 id: wai_aria_recommended_with_svg
 record_created_at: "2026-09-01T16:44:53+08:00"
