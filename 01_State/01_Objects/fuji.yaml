@@ -1,0 +1,163 @@
+id: fuji
+type: system
+kind: software
+name_zh: F-UJI 研究数据 FAIR 评估软件（4.0.1）
+name_en: F-UJI research data FAIR assessment software (4.0.1)
+description_zh: 通过配置的 FAIRsFAIR 指标使用 FAIR 原则评估研究数据的软件；核对固定 4.0.1 源码和指标集 0.8，并执行 7 个离线来源评估组件例。观察到 creator:null 或仅识别命名空间可通过、仅
+  related_resources 仍失败，属于存在性启发式而非详细来源证明；汇总另有两个指定 URL 的分数覆盖。不是完整 FAIR 符合性、元数据真实性或认证，也未验证完整采集/服务。
+description_en: 'Research-data assessment software using FAIR principles through configured FAIRsFAIR metrics: fixed
+  4.0.1 source and metric set 0.8 inspected, with seven offline provenance-evaluator cases executed. Observed creator:null
+  or a recognized namespace alone can pass, while related_resources alone fails: presence heuristics, not proof
+  of detailed provenance. Summaries additionally override scores for two named URLs. Not full FAIR compliance, metadata
+  truth or certification, nor a tested complete harvesting/service pipeline.'
+version: 4.0.1
+versions:
+- version: 4.0.1
+  status: released
+  url: https://github.com/pangaea-data-publisher/fuji/releases/tag/v4.0.1
+external_identifiers:
+- namespace: github
+  value: pangaea-data-publisher/fuji
+official_url: https://github.com/pangaea-data-publisher/fuji
+domains:
+- research
+- metadata
+scope_notes_zh: 主体是官方 F-UJI 软件源码项目，不是 f-uji.net 实际部署、FAIRsFAIR 组织、FAIR 原则论文或指标出版物，也不是 IA 采用/背书。GitHub release v4.0.1（2026-09-24
+  发布）与 tag 固定到 7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a，pyproject 版号相符；不主张最新、签名认证、发布包验证、可复现构建或部署可用性。LICENSE/manifest
+  的 MIT 声明与 README 仅写至 4.0.0 的许可句存在版次边界，故不作 license_expression/open_source 法律结论。 正面功能证据是作者声明和实际架构使用 FAIR 原则作为评估框架，经
+  FAIRsFAIR 指标与测试操作化：控制器将配置/采集的元数据传给 evaluator，返回按指标的结果/score/maturity，再依指标标识聚合 F/A/I/R 与各原则。默认 metrics_v0.8.yaml
+  有 17 个配置项，其中 16 项有 fair_principle 字段，F4 仍编码在指标标识中；A2 被注释。不是所有原则/测试都已实现或验证，也不保证所有配置同样工作。2021 年作者论文把原则→指标→测试连到 2016
+  年 FAIR 论文；这是方法谱系，不是 4.0.1 运行证据。FAIR 2016 是高层指导而非标准/软件规范，故只用 uses，不宣称 implements。 自动评估依赖可访问的聚合元数据、外部注册/标识服务、领域实践和配置；rich/plural/accurate/relevant
+  等仍需人解释。仅检查选定架构和 evaluator 源码；完整服务/采集及其他 evaluator 未执行。fair_check.get_assessment_summary 对 https://www.rd-alliance.org/users/mustapha-mokrane
+  与 https://www.rd-alliance.org/users/ilona-von-stein 两个 input_id 将每指标 earned 改为 total、maturity 改为 3、status 改为 1
+  后聚合；这是汇总层源码特例，不证明原始逐指标测试通过，也未运行该汇总路径。不能将汇总分数理解为普遍客观测量或认证。 运行证据仅为固定 0.8 配置下 7 个自编离线 R1.2 来源 evaluator 例，并由 intake
+  作者在 Python 3.13.5 -I -S 复跑得到完全相同结果：无元数据 fail；creator 有值与 creator:null 均 pass，score 1/1、maturity 2；仅识别到 PROV/PAV
+  命名空间即 pass、maturity 3；两条路径同时命中仍按 alternative 机制记 1/1 而非累加；related_resources 单独出现会列入输出但未设置 availability，仍 fail；不认识的命名空间
+  fail。键/命名空间存在不能证明详细来源、图有效性或内容真实；不产生 PROV-O/本体符合性关系。 smoke 调用未修改官方 archive 的 evaluator/base/mapper/generated models，初始化会导入其他模型；使用合成
+  post-harvest context、由固定 YAML 机械转成 JSON（日期元信息为字符串）并补 helper 所需标识键的 fixture，以及固定 0.8 版本 accessor。未 stub evaluator
+  算法，但未执行完整 MetricHelper/preprocessor/harvester/controller 管线。293 个 archive 文件 blob 与官方完整 tree 相符，29 份独立 raw source
+  与 archive 相同；36 个原始请求有 headers/hash/transport 记录。官方 PyPI six 1.17.0 wheel digest/RECORD 已核，仅为离线依赖，不新增其对象。无安装/build、网络数据集评估、HTTP
+  server、浏览器/Tika/凭据/remote logging 或上游完整测试。audit hook 记录零 network/subprocess attempts，不是操作系统隔离/安全审计。 排除完整 FAIR
+  符合性/认证、元数据真实性/质量/完整性或合法性保证、自动修复、任意 identifier 运行建议、完整服务安全或部署就绪、OpenAPI 版次边、PROV-O 身份合并和 IA 采用。不新增 capability，不误标为结构
+  schema_validation。既有 FAIR 论文及历史证据不变。
+scope_notes_en: 'The official source software, not hosted f-uji.net, FAIRsFAIR organization, FAIR paper, metrics
+  publication or IA adoption. GitHub release/tag v4.0.1 resolves to7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a, agreeing
+  with pyproject. No latest/signature/package-distribution/reproducible-build/deployment claim. LICENSE/manifest
+  MIT statements and README''s license sentence limited through4.0.0 have different version bounds; no license_expression/open_source
+  legal conclusion. Declared purpose and source architecture use FAIR as a methodological framework via FAIRsFAIR
+  metrics/tests: controller supplies configured/harvested metadata to evaluators, returns metric results/score/maturity,
+  and aggregates categories/principles from metric identifiers. Default0.8 has17 entries,16 explicit fair_principle
+  fields, F4 encoded in its identifier, A2 commented out; not every principle/test/configuration is implemented
+  or verified. Authors''2021 paper links principles-metrics-tests to2016 publication, not runtime proof for4.0.1.
+  FAIR is guidance, not a standard/software specification, hence uses not implements. Accessible aggregated metadata,
+  external registries, domain practices and configuration matter; rich/plural/accurate/relevant aspects need human
+  interpretation. Only selected architecture and evaluator sources were inspected; complete harvesting/service and
+  other evaluators were not executed. get_assessment_summary overrides earned with total, maturity with3 and status
+  with1 for input IDs https://www.rd-alliance.org/users/mustapha-mokrane and https://www.rd-alliance.org/users/ilona-von-stein
+  before aggregation. This summary source special case does not establish underlying metric passes and was not executed
+  here; summaries are not universal objective measurement/certification. Seven authored offline R1.2 component cases,
+  rerun by intake author on Python3.13.5 -I -S with exact equality: absent metadata fails; creator value and creator:null
+  both pass at1/1,maturity2; a recognized PROV/PAV namespace alone passes at maturity3; both paths still earn1/1
+  under alternative scoring. Related-resource-only is listed but fails because availability remains false; unrelated
+  namespace fails. Presence is not detailed provenance, graph validity or truth; no PROV-O/ontology conformance
+  edge. Unmodified archive evaluator/base/mapper/generated models execute, with other model imports during initialization.
+  Synthetic post-harvest context, fixed-YAML JSON fixture (date metadata as strings) plus helper-required identifier
+  keys and fixed0.8 version accessor; no evaluator algorithm stub, but no full MetricHelper/preprocessor/harvester/controller
+  execution. All293 archive file blobs match official tree and29 raw sources match archive;36 requests retain original
+  transport metadata/headers/hashes. Verified six1.17.0 wheel digest/RECORD is offline dependency only. No installation/build/live-dataset
+  HTTP/server/browser/Tika/credentials/remote logging/full upstream suite. Audit hook zero network/subprocess attempts
+  is not OS sandbox/security certification. No fullFAIR/certification, metadata truth/quality/completeness/legal
+  guarantee, automated repair, arbitrary-identifier run recommendation, service security/production readiness, OpenAPI
+  edition edge, PROV-O identity merge or IA adoption. No new capability/misused schema_validation; existing FAIR
+  paper/history untouched.'
+sources:
+- url: https://github.com/pangaea-data-publisher/fuji/releases/tag/v4.0.1
+  title: Official GitHub source releasev4.0.1
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml
+  title: Source4.0.1 and Python3.13 declaration, not dependency installation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/metrics_configuration.md
+  title: Configurable metrics and still-unimplemented configuration options
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md#L12-L47
+  title: Declared FAIRsFAIR assessment purpose and metadata/human-interpretation limits
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+  title: Fixed17 metric entries;16 explicit principle fields, F4 in identifier; A2 commented
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L198-L208
+  title: Default0.8 metric configuration and loading
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py#L80-L116
+  title: Metric/test identifier normalization and configuration filtering
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py#L17-L250
+  title: Source-only assessment orchestration, evaluator results and summary
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L638-L731
+  title: Category/principle summaries; explicit two-input-ID score/maturity/status overrides
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py#L12-L247
+  title: Actual offline component; key/namespace presence and related-resource limitation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py#L56-L198
+  title: Metric/test setup, component evaluation and dictionary results
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+  title: Fixed provenance property mappings, not graph validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+  title: Actual generated model dictionary serialization
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+  title: Source version discovery and generated-model imports
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+  title: Unexecuted upstream service tests; not evidence of complete-suite pass
+  language: en
+  accessed: '2026-10-29'
+- url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+  title: 'F-UJI authors2021 paper: principles-metrics-tests method, Figure1 and reference2 to2016 FAIR; not4.0.1
+    execution'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.nature.com/articles/sdata201618
+  title: FAIR2016 Box2 R1.2 and Principles precede implementation; selected indexed publisher text, not direct HTTP
+  language: en
+  accessed: '2026-10-29'
+  retrieval_method: search_indexed_publisher_text
+  direct_access_verified: false
+last_verified_at: '2026-10-29T11:58:53.092338+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed-source review and seven offline component cases only
+record_created_at: '2026-10-29T12:15:36.581069+00:00'
+record_updated_at: '2026-10-29T12:15:36.581069+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer / root/review_fuji_fair_packet
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: fuji
+  acceptance_event_id: accept-20261029-fuji-fair-fuji
+  reviewed_candidate_blob: 48b01afcd4b247d89e610b3a83200cdcac004e11
+  reviewed_against_commit: 92284d79fbcfe63f3ebe26fa8c97c7348af3d066
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 92284d79fbcfe63f3ebe26fa8c97c7348af3d066
+  reviewed_packet_blob: 455d563bbc99c365297bb5863af18dca5c3abcdc
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/92284d79fbcfe63f3ebe26fa8c97c7348af3d066/01_State/Inbox/review-packets/fuji-fair-assessment-20261029.yaml
