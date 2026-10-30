@@ -1,0 +1,115 @@
+contract_version: candidate-object-v1
+candidate_id: libopus
+label: libopus C audio codec library — fixed 1.6.1
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: xiph/opus
+locators:
+- url: https://opus-codec.org/
+  role: official
+- url: https://gitlab.xiph.org/xiph/opus
+  role: official
+- url: https://github.com/xiph/opus/tree/22244de5a79bd1d6d623c32e72bf1954b56235be
+  role: dated
+- url: https://opus-codec.org/release/stable/2026/01/14/libopus-1_6_1.html
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - No libopus canonical/candidate identity or xiph/opus normalized identifier collision at baseline f864f1cf2d49a12b67577eaef4708176caae208d.
+    Existing opus_rfc6716 and opus_updates_rfc8251 are specification documents, not this library; broad FFmpeg distribution
+    identity does not replace libopus. Other containers/transport/tools remain separate.
+  merge_authorized: false
+unknowns:
+- 'libopus 是在 PCM 音频与原始 Opus 包之间编码、解码的 C 库；本记录的可执行证据固定于 1.6.1（官方发布日 2026-01-14），源码为 xiph/opus 镜像 commit 22244de5a79bd1d6d623c32e72bf1954b56235be。它是独立的软件实现身份，不是
+  RFC 6716 的规范性解码器文档、RFC 8251 更新规范、Ogg .opus 文件工具、RTP 协议栈、播放器或格式识别器；Opus 的容器、传输及 opus-tools/opusfile/libopusenc
+  属于其他对象。这里仅沿既有 image_color 编辑导航，不据本地测试声明完整 RFC implements 或其他技术关系。
+
+
+  实际验证限于 Linux x86_64、GCC 14.2.0、CMake/CTest 3.31.10 的 Release 静态库：floating-point core 与 float API，scalar（OPUS_DISABLE_INTRINSICS=ON），DRED、OSCE、DEEP_PLC、custom
+  modes、programs 和 encoder FUZZING 关闭；正常 hardening 保留、additional assertions 关闭。构建使用系统 libc/libm 和既有构建工具，未另行下载外部神经模型或取得额外媒体依赖；普通编码分析路径的
+  Keras 生成权重已随 src/mlp_data.c 源码取得，src/mlp.c、src/mlp_data.c 与 src/analysis.c 实际参与编译，后者包含 dense/GRU 计算。这不是无神经网络构建或无神经计算的声明；工具版本记录不是完整供应链或二进制可复现保证。源树755文件中753个
+  checkout 原字节等于 Git blob，两个未执行的 Windows .bat 文件仅按上游 eol=crlf 规则转换。两处 silk/decode_indices.c 的 GCC -Wstringop-overflow
+  警告保留，不称零警告、误报或已确认漏洞。
+
+
+  本配置启用的五个 CTest（decode、padding、api、encode、extensions）在 SEED=12345、TEST_OPUS_NOFUZZ 未设置时通过；不是所有上游测试通过。研究者自写探针的81个命名组也被作者重放：60个
+  PCM16 组合为 8000/12000/16000/24000/48000 Hz × 单/双声道 × 2.5/5/10/20/40/60 ms，另21组是有限 API/包边界。重复执行、同库编码解码与上游测试重叠，不能相加覆盖率或称跨实现互通；同库
+  final-range 一致不证明完整符合性或原 PCM 无损还原。80/100/120 ms 未在自写矩阵覆盖；96000 Hz 拒绝仅限此构建，不否定未启用的 QEXT 配置；单流1/2声道限制不否定 multistream
+  API。
+
+
+  编码返回字节数，解码返回每声道 sample 数；双声道 PCM 为交错排列，float 正常输入范围为 ±1，24-bit API 使用 int32 承载。本例 lookahead=312 samples/channel
+  不是所有模式常数；NULL/零长度包请求20 ms PLC得到960 samples/channel 只证明计数，不证明丢包恢复质量。命名的错误采样率、声道、application、帧长、输出容量、complexity
+  与截断包例返回预期错误，不是任意错误指针、缓冲区、非有限/超范围样本均安全拒绝的结论。
+
+
+  包操作的实际边界：padding 后的包确实被解码并检查计数；unpad 后与抽出的第二帧仅检查解析时长，未直接解码。repacketizer 把同一个20 ms包添加两次，合成40 ms包并解码，随后抽取第二帧；不是两个独立音频片段、任意包均可拼接、原始字节恢复或容器语义证明。未独立验证
+  FEC、DTX、seek、音质、延迟、性能或外部时钟同步。
+
+
+  未运行 RFC 8251 官方外部向量、RFC 6716 规范向量、完整 Autotools make check、额外 CELT/projection/custom/DRED 目标、其他seed/平台、SIMD、fixed-point、可选
+  DRED/OSCE/DEEP_PLC 增强配置及另行下载的模型、sanitizer、benchmark、外部 FATE/独立编解码器、网络/生产负载或漏洞验证；五个 CTest 不替代规范符合性程序。保留探针初版编译失败及两版审计失败，最终探针只修正括号/换行，未修改上游或测试失败守卫。COPYING
+  的三条款 BSD、不同文件头的两/三条款 BSD 与贡献约定中的 Clear BSD 应分别查阅；不合成覆盖整树的许可证表达式，不保证专利可实施性、第三方权利、安全、生产适用性或 IA 采用。'
+- 'libopus is a C library for encoding and decoding between PCM audio and raw Opus packets. Executable evidence
+  here is fixed to 1.6.1 (official release date 2026-01-14), from the xiph/opus mirror at commit 22244de5a79bd1d6d623c32e72bf1954b56235be.
+  This software implementation has an identity distinct from the RFC 6716 normative-decoder document, the RFC 8251
+  update, Ogg .opus file tools, RTP stacks, players and format detectors. Containers, transport and opus-tools/opusfile/libopusenc
+  are separate objects. Existing image_color editorial navigation does not assert complete RFC implementation or
+  any technical relation.
+
+
+  Execution covers only a Linux x86_64 Release static build with GCC 14.2.0 and CMake/CTest 3.31.10: floating-point
+  core and float API, scalar (OPUS_DISABLE_INTRINSICS=ON), DRED/OSCE/DEEP_PLC/custom modes/programs/encoder FUZZING
+  off, normal hardening retained and additional assertions off. It uses system libc/libm and existing build tools;
+  no separate external neural-model download or additional media dependency acquisition was performed. The ordinary
+  encoder-analysis network has Keras-generated weights bundled in src/mlp_data.c; src/mlp.c, src/mlp_data.c and
+  src/analysis.c were compiled, and the analysis code contains dense/GRU computations. This is not a neural-free
+  build or execution claim. Tool versions are not a fully locked supply chain or binary-reproducibility claim. Of
+  755 source files, 753 checkout byte sequences equal their Git blobs; two unexecuted Windows .bat files follow
+  the upstream eol=crlf rule. Two GCC -Wstringop-overflow warnings in silk/decode_indices.c remain, without calling
+  them zero warnings, false positives or confirmed vulnerabilities.
+
+
+  The five enabled CTest binaries (decode, padding, api, encode, extensions) passed with SEED=12345 and TEST_OPUS_NOFUZZ
+  unset, not every upstream test. The author also replayed the researcher''s 81 named probe groups: 60 PCM16 combinations
+  of 8000/12000/16000/24000/48000 Hz, mono/stereo and 2.5/5/10/20/40/60 ms, plus 21 bounded API/packet groups. Repeated
+  runs, same-library encode/decode and upstream tests overlap; they are not additive coverage or cross-implementation
+  interoperability. Final-range agreement does not establish full conformance or lossless original-PCM recovery.
+  The self-authored matrix excludes 80/100/120 ms; 96000 Hz rejection is build-specific, not a claim about unenabled
+  QEXT; single-stream mono/stereo limits do not exclude the separate multistream API.
+
+
+  Encoding returns bytes; decoding returns samples per channel. Stereo PCM is interleaved, normal float input is
+  within ±1, and the 24-bit API carries samples in int32. The observed lookahead of 312 samples/channel is not universal.
+  A NULL/zero-length packet requesting 20 ms PLC returned 960 samples/channel, proving a count, not loss-recovery
+  quality. Named bad-rate/channel/application/frame-size/capacity/complexity/truncated-packet examples returned
+  expected errors; this does not establish safe rejection of arbitrary pointers, buffers or nonfinite/out-of-range
+  samples.
+
+
+  The padded packet was actually decoded and its sample count checked. The unpadded packet and extracted second
+  frame were checked only for parsed duration, not directly decoded. The repacketizer added the same 20 ms packet
+  twice, formed and decoded a 40 ms packet, then extracted the second frame. This is not two independently encoded
+  audio segments, arbitrary packet compatibility, original-byte restoration or container semantics. FEC, DTX, seeking,
+  quality, latency, performance and external-clock synchronization were not independently verified.
+
+
+  NOT RUN: official external RFC 8251 vectors, RFC 6716 normative vectors, full Autotools make check, extra CELT/projection/custom/DRED
+  targets, other seeds/platforms, SIMD, fixed-point, optional DRED/OSCE/DEEP_PLC enhancement configurations and
+  separately downloaded models, sanitizers, benchmarks, external FATE/independent codecs, network/production workloads
+  or vulnerability testing. Five CTests do not replace the normative conformance procedure. The initial probe compilation
+  and two audit failures are retained; the final probe only corrected braces/newlines, without upstream edits or
+  disabled test-failure guards. COPYING''s three-clause BSD, individual two-/three-clause BSD headers and Clear
+  BSD contribution terms need separate scope treatment. No whole-tree license expression, patent/third-party-rights
+  assurance, security claim, production suitability or IA adoption follows.'
+- Pending author proposal only. Research preflight was conditional authoring GO, not review of these exact bytes;
+  provenance.reviewer remains null and merge_authorized remains false. No acceptance event, remote freeze or publication
+  by this author.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/prepare_opus_intake
+  reviewer: null
