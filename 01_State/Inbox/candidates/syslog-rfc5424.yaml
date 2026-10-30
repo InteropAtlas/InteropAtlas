@@ -13,10 +13,13 @@ locators:
 - url: https://www.rfc-editor.org/info/rfc5424/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - syslog_rfc5424
   reasons:
-  - 固定 RFC 5424 协议文献身份；当前 Canonical 与 Candidate 未见该 RFC 身份。
+  - Accepted by accept-20261030-syslog-rfc5424; original new-state candidate 511eca0080b6003f4770e3123c4f90fd02c80dd4
+    retained at true ancestor e5346c7b7573a512205e9eb0c7a464923fbde091. Unique back-reference prevents duplicate
+    creation, with no identity merge.
   merge_authorized: false
 unknowns:
 - 固定 2009 年 3 月原始出版物；信息页列五项勘误报告，内容与处理状态未核验，不声称已整合勘误或当前完整修订语义。
@@ -24,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_syslog_standard
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / /root/add_syslog_standard/semantic_review
