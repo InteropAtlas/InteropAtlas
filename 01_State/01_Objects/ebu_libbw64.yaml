@@ -3,9 +3,105 @@ type: system
 kind: library
 name_zh: libbw64音频文件读写库
 name_en: libbw64 Broadcast Wave 64 file library
-description_zh: 用于读写BW64音频文件的仅头文件C++库，支持大于4GB的文件以及axml和chna块；本记录固定到0.10.0发行版。
-description_en: A header-only C++ library for reading and writing BW64 audio files, including files larger than
-  4 GB and axml/chna chunks; pinned to release 0.10.0.
+description_zh: '本记录固定到 libbw64 0.10.0（源码 commit 3a43f909f7e8f6bef93403816e9b73b8bfa5a133），一个提供音频文件和 axml/chna 块读写的仅头文件
+  C++ 库。上游说明支持大于 4 GB 的文件；此次执行证据仅覆盖小型输入，未验证 >4 GiB 边界。在 Linux x86_64 / GCC 14.2.0 / glibc 2.41 / CMake/CTest 3.31.10
+  环境中，默认 writeFile 的小文件在析构完成后为 RIFF/WAVE，不是所有输出都为 BW64，也不据此否定库的 BW64 写入能力。
+
+
+  writeFile 和 Bw64Writer 构造函数的 sampleRate 参数均为 uint16_t；所测调用将普通 uint32_t 值 96000 转为 30464，最终 fmt 块也记录 30464。FormatInfoChunk
+  和读取解析器使用 uint32_t；独立构造的 96000 Hz PCM16 RIFF/BW64/RF64 文件可按原采样率读取。这是本版两个写入入口的参数边界，不是文件格式或读取能力的 96 kHz 限制；更严格的调用方编译选项可拒绝窄化转换，未验证所有低层写入路径。
+
+
+  PCM32 解码在赋值给目标类型前经过 float 中间值：独立构造的相邻整数样本 16777216 与 16777217 在 `read<double>` 中均成为 0.0078125，而相邻外侧控制样本仍可区分。此例不意味着所有样本、位深、平台或版本均有相同结果。axml
+  可保留包含 NUL 的非 XML 字节；所测单声道文件的 chna trackIndex=99 也被接受。长度和声明计数等结构检查仍存在，但块字节读写不是 XML、ADM 或音轨引用语义验证，也未验证与 libadm 的组合。
+
+
+  原始默认 Release 测试构建因随附 Catch2 2.3.0 的 MINSIGSTKSZ 常量表达式失败，不能报告默认构建通过。只加入 CATCH_CONFIG_NO_POSIX_SIGNALS 后，三个启用的 CTest
+  共 36 个测试用例、222 个断言通过；此选项减少 POSIX 致命信号诊断，不修改库头文件或关闭断言，刻意失败的 REQUIRE 控制确认断言仍生效。上述四项边界另由不使用 Catch 或该宏的独立探针在 -O0/-O2
+  下复现，并用独立编码输入及最终输出原始字节检查，避免仅依赖同库往返。重复执行不相加为覆盖率。
+
+
+  这些是固定版本、限定环境和小文件路径的观察，不是完整规范符合性、跨实现互通、安全、性能、音质或生产适用性认证；未运行 >4 GiB、其他平台、完整畸形输入、模糊测试或 sanitizer 矩阵。保留既有软件/规范身份区别：不声称
+  0.10.0 符合后来发布的 BS.2088-2、是最新版本，或已验证与 libadm 0.14.0 配对；既有 recommended_with 仍仅表示 README 的无日期工作级推荐。
+
+
+  English scope and limitations:
+
+
+  This record is pinned to libbw64 0.10.0 at source commit 3a43f909f7e8f6bef93403816e9b73b8bfa5a133, a header-only
+  C++ library for audio-file and axml/chna chunk I/O. Upstream documents files larger than 4 GB; execution here
+  covers only small inputs, not the >4-GiB boundary. On Linux x86_64 / GCC 14.2.0 / glibc 2.41 / CMake/CTest 3.31.10,
+  a small default writeFile output finalizes as RIFF/WAVE after destruction. Not every output is BW64; this does
+  not deny the library''s ability to write BW64.
+
+
+  Both writeFile and the Bw64Writer constructor declare sampleRate as uint16_t. The tested calls convert an ordinary
+  uint32_t value of 96000 to 30464, also present in the final fmt chunk. FormatInfoChunk and the reader parser use
+  uint32_t; independently constructed 96000-Hz PCM16 RIFF/BW64/RF64 files are read at their original rate. This
+  is a boundary of these two writer entry points in this release, not a 96-kHz limit of the format or reader. Stricter
+  caller compiler options may reject the narrowing; not every low-level writing path was tested.
+
+
+  PCM32 decoding uses a float intermediate before assignment to the destination type: independently encoded adjacent
+  integer samples 16777216 and 16777217 both become 0.0078125 through `read<double>`, while the neighboring outer
+  controls remain distinct. This example does not establish the same result for every sample, bit depth, platform
+  or version. AXML preserves non-XML bytes including NUL; CHNA trackIndex=99 is also accepted in the tested mono
+  file. Structural checks such as lengths and declared counts remain, but chunk-byte I/O is not XML, ADM or track-reference
+  semantic validation. Integration with libadm was not tested.
+
+
+  The original default Release test build fails at bundled Catch2 2.3.0''s MINSIGSTKSZ constant expression; it is
+  not reported as passing. Adding only CATCH_CONFIG_NO_POSIX_SIGNALS allows the three enabled CTests to pass, totaling
+  36 test cases and 222 assertions. This option reduces POSIX fatal-signal diagnostics without changing library
+  headers or disabling assertions; a deliberately failing REQUIRE control confirms assertions remain active. The
+  four boundaries above were separately reproduced at -O0/-O2 by independent probes using neither Catch nor that
+  macro, with independently encoded inputs and raw-byte checks of finalized outputs rather than only same-library
+  round trips. Replays do not add coverage.
+
+
+  These are bounded observations for one release, environment and small-file paths, not complete standards-conformance,
+  cross-implementation interoperability, security, performance, audio-quality or production-suitability certification.
+  The >4-GiB, other-platform, full malformed-input, fuzzing and sanitizer matrices were not run. Existing software/standard
+  identity boundaries remain: no conformance of 0.10.0 to the later BS.2088-2, latest-release status or verified
+  pairing with libadm 0.14.0 is claimed. The unchanged recommended_with relation is only the README''s undated work-level
+  recommendation.'
+description_en: 'This record is pinned to libbw64 0.10.0 at source commit 3a43f909f7e8f6bef93403816e9b73b8bfa5a133,
+  a header-only C++ library for audio-file and axml/chna chunk I/O. Upstream documents files larger than 4 GB; execution
+  here covers only small inputs, not the >4-GiB boundary. On Linux x86_64 / GCC 14.2.0 / glibc 2.41 / CMake/CTest
+  3.31.10, a small default writeFile output finalizes as RIFF/WAVE after destruction. Not every output is BW64;
+  this does not deny the library''s ability to write BW64.
+
+
+  Both writeFile and the Bw64Writer constructor declare sampleRate as uint16_t. The tested calls convert an ordinary
+  uint32_t value of 96000 to 30464, also present in the final fmt chunk. FormatInfoChunk and the reader parser use
+  uint32_t; independently constructed 96000-Hz PCM16 RIFF/BW64/RF64 files are read at their original rate. This
+  is a boundary of these two writer entry points in this release, not a 96-kHz limit of the format or reader. Stricter
+  caller compiler options may reject the narrowing; not every low-level writing path was tested.
+
+
+  PCM32 decoding uses a float intermediate before assignment to the destination type: independently encoded adjacent
+  integer samples 16777216 and 16777217 both become 0.0078125 through `read<double>`, while the neighboring outer
+  controls remain distinct. This example does not establish the same result for every sample, bit depth, platform
+  or version. AXML preserves non-XML bytes including NUL; CHNA trackIndex=99 is also accepted in the tested mono
+  file. Structural checks such as lengths and declared counts remain, but chunk-byte I/O is not XML, ADM or track-reference
+  semantic validation. Integration with libadm was not tested.
+
+
+  The original default Release test build fails at bundled Catch2 2.3.0''s MINSIGSTKSZ constant expression; it is
+  not reported as passing. Adding only CATCH_CONFIG_NO_POSIX_SIGNALS allows the three enabled CTests to pass, totaling
+  36 test cases and 222 assertions. This option reduces POSIX fatal-signal diagnostics without changing library
+  headers or disabling assertions; a deliberately failing REQUIRE control confirms assertions remain active. The
+  four boundaries above were separately reproduced at -O0/-O2 by independent probes using neither Catch nor that
+  macro, with independently encoded inputs and raw-byte checks of finalized outputs rather than only same-library
+  round trips. Replays do not add coverage.
+
+
+  These are bounded observations for one release, environment and small-file paths, not complete standards-conformance,
+  cross-implementation interoperability, security, performance, audio-quality or production-suitability certification.
+  The >4-GiB, other-platform, full malformed-input, fuzzing and sanitizer matrices were not run. Existing software/standard
+  identity boundaries remain: no conformance of 0.10.0 to the later BS.2088-2, latest-release status or verified
+  pairing with libadm 0.14.0 is claimed. The unchanged recommended_with relation is only the README''s undated work-level
+  recommendation.'
 version: 0.10.0
 external_identifiers:
 - namespace: github
@@ -23,17 +119,64 @@ sources:
 - url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/README.md
   title: libbw64 0.10.0 — Introduction, features and scope
   language: en
-  accessed: '2026-10-20'
+  accessed: '2026-10-30'
 - url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/CHANGELOG.md
   title: libbw64 0.10.0 — Release changelog
   language: en
-  accessed: '2026-10-20'
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/bw64.hpp#L48-L62
+  title: Fixed writeFile defaults and uint16_t sample-rate signature
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/writer.hpp#L49-L89
+  title: Fixed Bw64Writer signature and destructor finalization
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/writer.hpp#L147-L223
+  title: Fixed final-size choice and RIFF/BW64 header writing; large-file execution not tested
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/chunks.hpp#L120-L153
+  title: FormatInfoChunk uses uint32_t sample rate and retains structural checks
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/parser.hpp#L39-L168
+  title: Fixed 32-bit rate parsing and AXML/CHNA structural parsing
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/utils.hpp#L78-L86
+  title: PCM32 decoding uses float division before destination assignment
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/reader.hpp#L240-L250
+  title: Templated read calls the PCM decoder
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/include/bw64/chunks.hpp#L235-L297
+  title: Opaque AXML storage and AudioId length/space handling
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/tests/CMakeLists.txt
+  title: Fixed three enabled upstream CTest targets
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/submodules/catch2/catch.hpp#L248-L250
+  title: Bundled Catch2 POSIX signal feature switch
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/submodules/catch2/catch.hpp#L7474-L7525
+  title: Bundled Catch2 fatal-signal handler and MINSIGSTKSZ constant expression
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T14:39:03.312438+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/update_libbw64_evidence; fixed-source inspection and author replay
+  of bounded research, not independent review or full conformance
 record_created_at: '2026-10-20T16:14:01.823988+00:00'
-record_updated_at: '2026-10-20T16:14:01.823988+00:00'
+record_updated_at: '2026-10-30T14:41:43.553226+00:00'
 latest_substantive_contribution:
   initiator: Human — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / review_audio_library_semantics
+  executor: Agent — OpenAI / dot / /root/update_libbw64_evidence
+  reviewer: Independent Agent — OpenAI / dot / /root/verify_libbw64_boundaries
   github_actor: ff6962757
 intake_provenance:
   candidate_id: ebu_libbw64
