@@ -16,13 +16,14 @@ locators:
 - url: https://pypi.org/project/jsonpointer/3.6/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_jsonpointer
   reasons:
-  - At actual baseline 608ab98a1839f0899a9cc9da17b4be4816c8df52, no exact canonical/candidate ID or normalized
-    github:stefankoegl/python-json-pointer / pypi:jsonpointer collision and no incoming implements edge to json_pointer_rfc6901.
-    This is the distinct library, not PyPI json_pointer, the RFC publication, JSON Patch/JSONPath or an edition
-    object. new means no known collision, not global uniqueness, acceptance or identity merge authority.
+  - Accepted as canonical python_jsonpointer by accept-20261030-jsonpointer-3-6-python_jsonpointer. Original new-state
+    candidate 6b676c16ec069af46a57142452a1880e4d1481f5 and ordinary review_required route replay against real
+    frozen ancestor c2aefe4ba0747fbd1473762588cd01ce89b7c2d3; this unique back-reference prevents duplicate creation
+    and authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'jsonpointer 是以 PyPI jsonpointer / stefankoegl/python-json-pointer 发布的 Python 库；本记录固定 3.6（2026-10-26 发布），源码
@@ -52,4 +53,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_semantic
