@@ -1,0 +1,47 @@
+contract_version: candidate-object-v1
+candidate_id: python_semver
+label: Python semver library — 3.1.0
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: python-semver/python-semver
+- namespace: pypi
+  value: semver
+locators:
+- url: https://github.com/python-semver/python-semver
+  role: official
+- url: https://github.com/python-semver/python-semver/tree/642d1bc8949d38cca7922df478d0f2c06513f99d
+  role: dated
+- url: https://pypi.org/project/semver/3.1.0/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_semver
+  reasons:
+  - Accepted as canonical python_semver by accept-20261030-python-semver-3-1-python_semver. Original new-state candidate
+    1fd753322c09e3e993a37a394374f0ae512285df and ordinary review_required route replay against genuine frozen ancestor
+    fb5bb68524de15ae68659135a00506cf176992de; this unique back-reference does not authorize identity merge.
+  merge_authorized: false
+unknowns:
+- 仅固定 Python semver 3.1.0 的默认严格解析及宿主整数限制内的有效 SemVer 字符串优先级；version_expression 不证明 API 兼容或完整发布/递增义务。可选补零、构造/replace/集合转换不是严格语法；无效构造值可相等而
+  hash 不同。有效 build 被优先级忽略，相等不是词法身份。match 是六单比较符/裸版本而非 npm range；is_valid 可传播 TypeError；is_compatible 是有方向的字段启发式。UTF-8/Python整数限制适用，超长数字先行字段可解析后比较失败。可选
+  native 自动导入只影响严格 parse，ValueError 回退；实际 backend 未运行，替代函数不是 native 试验。仅八个运行文件跨 source/wheel/sdist 相同；有限探针及上游一项
+  native skip 不证明完整符合性、真实兼容、安全、生产推荐、IA 采用或未来保证。完整中英操作边界在可见 description 保留。
+- Only default strict parsing and precedence of valid SemVer strings within host integer limits in fixed Python
+  semver 3.1.0. version_expression is not API testing or all release/increment obligations. Optional zero filling
+  and constructor/replace/collection coercion are not strict grammar; invalid constructed values can compare equal
+  with different hashes. Valid build is ignored for precedence, not lexical identity. match is six single operators/bare
+  equality, not npm ranges; is_valid can propagate TypeError; is_compatible is a directional field heuristic. UTF-8/Python
+  integer limits apply, including huge numeric prerelease parse-success/comparison-failure. Optional native autoimport
+  affects strict parse with ValueError fallback; no real backend ran, and substitutions are not native testing.
+  Only eight runtime files match source/wheel/sdist. Finite observations/upstream with one native skip do not prove
+  full conformance, real compatibility, security, production suitability, IA adoption or future guarantees. Full
+  operative Chinese/English limits remain visible in description.
+- 'Fresh recovery only: old missing local outcomes remain unknown. Conditional preflight authoring GO is not exact
+  semantic acceptance.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
