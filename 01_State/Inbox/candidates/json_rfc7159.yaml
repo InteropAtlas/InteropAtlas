@@ -13,10 +13,13 @@ locators:
 - url: https://www.rfc-editor.org/rfc/rfc7159.html
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - json_rfc7159
   reasons:
-  - 固定 RFC7159 历史文献身份；不同于已收录 RFC4627 和 RFC8259，当前底库及候选未见 rfc:7159。
+  - Accepted by accept-20261030-json-rfc7159; original new-state candidate 5cb47179847acd0a2b5cf08fac32b139fefe5061
+    retained at true ancestor fe5dcdd369940820f28d138708d3b3a5c8992dd4. Unique back-reference prevents duplicate
+    creation, with no identity merge.
   merge_authorized: false
 unknowns:
 - 仅限 2014 年 3 月原始出版物；官方信息页显示九项勘误报告，本轮未核验内容或处理状态，不声称已整合勘误、当前完整修订语义或实现符合性。
@@ -24,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / research_json_revision_gap
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / research_json_revision_gap/semantic_review
