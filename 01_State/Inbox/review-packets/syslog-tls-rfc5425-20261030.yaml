@@ -1,0 +1,129 @@
+packet_id: syslog_tls_rfc5425_20261030
+status: pending_independent_semantic_review
+baseline_commit: 7f5a48a609faaa8dbceb04e967604a6f9d87d818
+executor: Agent — OpenAI / dot / add_syslog_transport_standard
+reviewer: null
+review_scope:
+- One fixed RFC5425 artifact/protocol; one uses edge to existing syslog_rfc5424; existing observability editorial
+  membership.
+source_evidence:
+  method: Official RFC5425 and RFC9662 original publications inspected via web tool; RFC5425 info prior research
+    reread returned429 and was not retried.
+  source_mappings: &id001
+  - &id002
+    url: https://www.rfc-editor.org/rfc/rfc5425.html
+    title: RFC 5425 original March 2009 Standards Track publication — sections 3, 4.3, 6.3 and 9.1
+    language: en
+    accessed: '2026-10-30'
+  - &id003
+    url: https://www.rfc-editor.org/rfc/rfc9662.html
+    title: RFC 9662 sections 4, 6 and 8 — later update boundary, not consolidated here
+    language: en
+    accessed: '2026-10-30'
+  limitations:
+  - 固定 2009 年 3 月原始出版物；RFC 9662 后续更新未合并，不是当前完整安全或部署指南；勘误内容与状态未核验。原文标为 Standards Track；当前成熟度分类未重新核验。
+  - No current Proposed Standard assertion; original publication header only.
+  - No protocol execution, deployment/security guidance or old-suite recommendation.
+research_boundary:
+  question: Can original Syslog transport mapping and direct message import fill an existing gap without model expansion?
+  decision: Admit only if independently accepted at exact serialized scope.
+  depth: L1 bounded source verification
+  stop: Original identity, direct import and update boundary established; no deployment research.
+preflight:
+  fresh_main: 7f5a48a609faaa8dbceb04e967604a6f9d87d818
+  canonical_records: 268
+  candidate_records: 259
+  machine_route: review_required
+  collisions: []
+  github_issue_search: Research separate searches for5425 and9662 empty; bounded absence only.
+objects:
+- candidate_id: syslog_tls_rfc5425
+  candidate_path: 01_State/Inbox/candidates/syslog-tls-rfc5425.yaml
+  candidate_blob: a82d1610a1bb743a246243deb866858724830302
+  proposed_path: 01_State/01_Objects/syslog_tls_rfc5425.yaml
+  proposed_record:
+    id: syslog_tls_rfc5425
+    type: artifact
+    kind: protocol
+    name_zh: Syslog TLS 传输映射原始文献（RFC 5425）
+    name_en: Syslog TLS Transport Mapping Original Publication (RFC 5425)
+    official_name: Transport Layer Security (TLS) Transport Mapping for Syslog
+    description_zh: 'RFC 5425 原版规定 Syslog 的 TLS 传输映射；§4.3 将 RFC 5424 的 SYSLOG-MSG 纳入按字节计数的消息分帧。保护仅逐跳提供，不是端到端来源认证；已认证传输对端不一定对应消息
+      HOSTNAME。协议没有应用层确认，连接中断时发送方不能确定远端应用收到哪些消息，不保证应用送达。固定 2009 年 3 月原始出版物；RFC 9662 后续更新未合并，不是当前完整安全或部署指南；勘误内容与状态未核验。原文标为
+      Standards Track；当前成熟度分类未重新核验。 RFC 9662 更新 TLS 要求、密码套件与协商，并禁止 early data；这里不将旧套件作为推荐。仅作文献记录，不是完整日志平台或实现符合性证明，也不表示
+      IA 采用；observability 仅作编辑导航。
+
+
+      English scope and limitations:
+
+
+      Original March 2009 RFC 5425 maps Syslog over TLS; section 4.3 frames RFC 5424 SYSLOG-MSG using octet counts.
+      Protection is hop-by-hop, not end-to-end origin authentication; an authenticated transport peer need not match
+      HOSTNAME. There are no application-layer acknowledgments or remote-application receipt guarantees. Connection
+      failure can leave receipt uncertain. RFC 9662 updates TLS requirements, cipher suites and negotiation and
+      prohibits early data; these updates are not consolidated here. This original-only record is NOT current complete
+      security or deployment guidance and recommends no old suites. The original header says Standards Track; current
+      maturity classification and errata contents/status are unverified. No full logging platform, implementation
+      conformance or IA adoption is asserted. Observability is editorial navigation only.'
+    description_en: Original March 2009 RFC 5425 maps Syslog over TLS; section 4.3 frames RFC 5424 SYSLOG-MSG using
+      octet counts. Protection is hop-by-hop, not end-to-end origin authentication; an authenticated transport peer
+      need not match HOSTNAME. There are no application-layer acknowledgments or remote-application receipt guarantees.
+      Connection failure can leave receipt uncertain. RFC 9662 updates TLS requirements, cipher suites and negotiation
+      and prohibits early data; these updates are not consolidated here. This original-only record is NOT current
+      complete security or deployment guidance and recommends no old suites. The original header says Standards
+      Track; current maturity classification and errata contents/status are unverified. No full logging platform,
+      implementation conformance or IA adoption is asserted. Observability is editorial navigation only.
+    version: RFC 5425 (March 2009 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '5425'
+    official_url: https://www.rfc-editor.org/rfc/rfc5425.html
+    domains:
+    - observability
+    sources: *id001
+    last_verified_at: '2026-10-30T22:32:15.642382+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_syslog_transport_standard; original publication and RFC9662 update
+      boundary only; current maturity and errata unverified
+relations:
+- proposal_id: syslog_tls_rfc5425_uses_syslog_rfc5424
+  proposed_path: 01_State/02_Relations/syslog-tls-message.yaml
+  proposed_record:
+    id: syslog_tls_rfc5425_uses_syslog_rfc5424
+    type: relation
+    name_zh: RFC 5425 原始传输映射规范使用 RFC 5424 Syslog 消息
+    name_en: RFC 5425 original transport mapping uses RFC 5424 Syslog messages
+    source: syslog_tls_rfc5425
+    relation: uses
+    target: syslog_rfc5424
+    context:
+      version_context:
+        source: RFC 5425 (March 2009 original publication)
+        target: RFC 5424 (March 2009 original publication)
+      conditions_zh: 文献级使用：RFC 5425 §4.3 直接将 RFC 5424 的 SYSLOG-MSG 纳入按字节计数的分帧；§9.1 确定其 2009 年 3 月规范引用身份。只记录原始出版物之间的使用，不表示部署、实现符合性、安全保证或
+        IA 采用。RFC 9662 后续更新未合并；不是当前完整安全或部署指南。保护逐跳，认证对端不一定是 HOSTNAME；无应用层确认或远端应用送达保证。两端勘误内容与状态均未核验。
+      conditions_en: 'Publication-level use: RFC 5425 section 4.3 directly imports RFC 5424 SYSLOG-MSG into octet-counted
+        framing; section 9.1 identifies the March 2009 normative reference. Original publications only, not deployment,
+        implementation conformance, security assurance or IA adoption. RFC 9662 updates are not consolidated; not
+        current complete security or deployment guidance. Protection is hop-by-hop, authenticated peer need not
+        match HOSTNAME, and there are no application acknowledgments or remote-application receipt guarantees. Errata
+        contents/status for both endpoints remain unreviewed.'
+    evidence:
+    - *id002
+    - *id003
+    last_verified_at: '2026-10-30T22:32:15.642382+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_syslog_transport_standard; original framing and reference identity
+      only; errata unreviewed
+membership_proposals:
+- category_id: observability
+  ref:
+    surface: canonical
+    id: syslog_tls_rfc5425
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: 9f71d9e775bb7e4c90d8534b0b3dadf7c1a8fee5242deaf17ec5dfdcef72482f
+  git_blob: 59566873dbc56ffcc55c31ace2d4d8866dc229bc
+excluded_scope:
+- No TLS/reverse/updates edge, RFC9662 object, existing object changes, runtime, schema, capability, taxonomy, UI,
+  governance, maintenance-rule or held-work changes.
+materialization_boundary: Only candidate and packet; independent semantic acceptance before materialization; frozen
+  new-state ancestor and exact proposed fields except lifecycle/contribution/intake provenance.
