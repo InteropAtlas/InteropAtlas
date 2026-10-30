@@ -1,113 +1,17 @@
 packet_id: senml_rfc8428_20261030
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: 4fa5836be5286accfae8f4c118f39b4a4a99834a
+reviewed_packet_blob: 16fb375ce617a6c327b11ac4bb5402fecfc79a04
+reviewed_packet_path: 01_State/Inbox/review-packets/senml-rfc8428-20261030.yaml
 baseline_commit: 07d83fa6a994d700a9bb267c5046178621ae4798
 executor: Agent — OpenAI / dot / add_senml_standard
-reviewer: null
-review_scope:
-- One fixed RFC 8428 artifact/specification; existing industrial and measurement editorial memberships; zero technical
-  relations.
-source_evidence:
-  method: Official RFC Editor original publication and information page inspected using web tool.
-  source_mappings: &id001
-  - url: https://www.rfc-editor.org/rfc/rfc8428.html
-    title: RFC 8428 original August 2018 publication — sections 1–4, 5–8, 13–15
-    language: en
-    accessed: '2026-10-30'
-  - url: https://www.rfc-editor.org/info/rfc8428/
-    title: 'RFC Editor: Proposed Standard, August 2018, updated by RFC 9100'
-    language: en
-    accessed: '2026-10-30'
-  - url: https://www.rfc-editor.org/rfc/rfc9100.html
-    title: 'RFC 9100 sections 1–4: update boundary only, not consolidated into this original-publication record'
-    language: en
-    accessed: '2026-10-30'
-  limitations:
-  - 固定 2018 年 8 月原始出版物；RFC 9100 后续更新版本机制与特性，未合并到本记录；信息页显示一项勘误；内容与处理状态未核验，不声称当前完整修订语义。
-  - RFC9100 changes version interpretation to a feature bitmap; original publication is not consolidated current
-    guidance.
-  - No implementation execution, deployment audit, unit registry maintenance or technical edge.
-research_boundary:
-  question: Can portable sensor measurement and device-parameter representation fill an existing industrial/measurement
-    gap without model expansion?
-  decision: Admit one bounded fixed specification artifact only if independently accepted.
-  depth: L1 bounded source verification
-  stop: Identity, source scope, restrictions and ordinary path established; no implementation research.
-preflight:
-  fresh_main: 07d83fa6a994d700a9bb267c5046178621ae4798
-  canonical_records: 267
-  candidate_records: 258
-  machine_route: review_required
-  collisions: []
-  github_issue_search: 'senml OR RFC8428 OR RFC 8428: no matches at preflight'
-  durable_research_search: No senml/RFC8428 matches.
+acceptance_events: 01_State/Inbox/acceptance-events/senml-rfc8428-20261030.yaml
 objects:
 - candidate_id: senml_rfc8428
-  candidate_path: 01_State/Inbox/candidates/senml-rfc8428.yaml
-  candidate_blob: 3d52f4132fa9e13e1ca784c03f500065d71cdd19
-  proposed_path: 01_State/01_Objects/senml_rfc8428.yaml
-  proposed_record:
-    id: senml_rfc8428
-    type: artifact
-    kind: specification
-    name_zh: 传感器测量列表原始规范（SenML，RFC 8428）
-    name_en: Sensor Measurement Lists Original Specification (SenML, RFC 8428)
-    official_name: Sensor Measurement Lists (SenML)
-    description_zh: 'RFC 8428 原版定义简单传感器测量与设备参数的数据表示：记录包可携带名称、单位、时间和值，共享数据模型有 JSON、CBOR、XML、EXI 表达，但不要求每个实现支持全部表达。它不是传输协议或完整设备信息模型；数据保护依赖外层机制。原版
-      CBOR 规范引用为 RFC 7049，不替换为 RFC 8949。固定 2018 年 8 月原始出版物；RFC 9100 后续更新版本机制与特性，未合并到本记录；信息页显示一项勘误；内容与处理状态未核验，不声称当前完整修订语义。
-      RFC 9100 将版本号解释为特性位图，而非简单线性版本顺序。仅作文献级收录，不证明实现符合性或 IA 采用；industrial 与 measurement 为可重叠编辑导航，无技术关系。
-
-
-      English scope and limitations:
-
-
-      The August 2018 original RFC 8428 specifies simple sensor measurement and device-parameter representations.
-      Packs contain records that can carry names, units, times and values. JSON, CBOR, XML and EXI share a data
-      model; supporting every representation is not mandatory. This is not a transport protocol or complete device
-      model; protection relies on outer mechanisms. The original CBOR reference is RFC 7049, not RFC 8949. Proposed
-      Standard, later updated by RFC 9100: its feature-bitmap version mechanism is not consolidated here. The information
-      page indicates one erratum; its contents and status are unreviewed. No current consolidated semantics, implementation
-      conformance or IA adoption is claimed. Industrial and measurement memberships are overlapping editorial navigation
-      only; no technical relations.'
-    description_en: 'The August 2018 original RFC 8428 specifies simple sensor measurement and device-parameter
-      representations. Packs contain records that can carry names, units, times and values. JSON, CBOR, XML and
-      EXI share a data model; supporting every representation is not mandatory. This is not a transport protocol
-      or complete device model; protection relies on outer mechanisms. The original CBOR reference is RFC 7049,
-      not RFC 8949. Proposed Standard, later updated by RFC 9100: its feature-bitmap version mechanism is not consolidated
-      here. The information page indicates one erratum; its contents and status are unreviewed. No current consolidated
-      semantics, implementation conformance or IA adoption is claimed. Industrial and measurement memberships are
-      overlapping editorial navigation only; no technical relations.'
-    version: RFC 8428 (August 2018 original publication)
-    external_identifiers:
-    - namespace: rfc
-      value: '8428'
-    official_url: https://www.rfc-editor.org/rfc/rfc8428.html
-    versions:
-    - version: RFC 8428
-      status: proposed_standard
-      url: https://www.rfc-editor.org/info/rfc8428/
-    domains:
-    - industrial
-    - measurement
-    sources: *id001
-    last_verified_at: '2026-10-30T21:54:16.441098+00:00'
-    last_verified_by: Agent — OpenAI / dot / add_senml_standard; original publication, status and RFC9100 update
-      boundary only; errata unreviewed
+  canonical_id: senml_rfc8428
+  acceptance_event_id: accept-20261030-senml-rfc8428
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/4fa5836be5286accfae8f4c118f39b4a4a99834a/01_State/Inbox/review-packets/senml-rfc8428-20261030.yaml
 relations: []
-membership_proposals:
-- category_id: industrial
-  ref:
-    surface: canonical
-    id: senml_rfc8428
-- category_id: measurement
-  ref:
-    surface: canonical
-    id: senml_rfc8428
-navigation_baseline:
-  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
-  sha256: 1403247f76e3e252e41d5684b8cff8c0b99f4ed2d41508907233e6335201078f
-  git_blob: 4f0306968cc8db656a6a033d762472b02d4e9f20
-excluded_scope:
-- No technical relations, existing object edits, runtime experiments, schema, capability, taxonomy, renderer, governance,
-  design, maintenance process, page restoration or held-work changes.
-materialization_boundary: Only candidate and packet; independent semantic acceptance before materialization; frozen
-  new-state ancestor and exact proposed fields except lifecycle/contribution/intake provenance.
+notes_zh:
+- 引用式交付回执；完整被审原文及来源限制保留在实际冻结祖先，不复制第二套正式字段。
+- 仅限 RFC 8428 原始出版物；一项勘误内容及状态未核验，RFC9100 更新未合并，无技术关系。独立语义复核与结构检查分别记录，CI 不冒充审核。
