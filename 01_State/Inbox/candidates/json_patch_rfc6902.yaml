@@ -13,10 +13,13 @@ locators:
 - url: https://www.rfc-editor.org/rfc/rfc6902.html
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - json_patch_rfc6902
   reasons:
-  - 核查当前全库对象及候选的 RFC 编号与 ID：未见 rfc:6902。JSON Patch 文献不同于既有 RFC6901 JSON Pointer 与 python_jsonpointer 库；不合并身份。
+  - Accepted by accept-20261030-json-patch-rfc6902; original new-state candidate 23735663725ee0ff4b9415eb0b572932014122fa
+    retained at true ancestor cb49e8da261cdc8b58f19b242683b20f3bb5ac57. Unique back-reference prevents duplicate
+    creation, with no identity merge.
   merge_authorized: false
 unknowns:
 - 固定 2013 年 4 月原始出版物；官方信息页显示六项勘误报告，但本轮未核验勘误内容或处理状态，不声称已整合勘误、当前完整修订语义或实现符合性。
@@ -24,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_json_patch_standard
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / /root/add_json_patch_standard/semantic_review

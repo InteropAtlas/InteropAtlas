@@ -1,122 +1,20 @@
 packet_id: json_patch_rfc6902_20261030
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: cb49e8da261cdc8b58f19b242683b20f3bb5ac57
+reviewed_packet_blob: 8fb978793b2f25214d39bf83a19a4b336f587510
+reviewed_packet_path: 01_State/Inbox/review-packets/json-patch-rfc6902-20261030.yaml
 baseline_commit: 1c06e9726011c9b3a92152f2c9d35bebc5bcbf7a
 executor: Agent — OpenAI / dot / add_json_patch_standard
-reviewer: null
-review_scope:
-- One fixed original RFC6902 artifact/specification; one unconditional uses edge to existing RFC6901; one existing
-  syntax navigation member.
-- No implementation, capability, taxonomy, schema, renderer, governance or maintenance-rule changes.
-source_evidence:
-  method: Direct web tool reading of official original RFC sections 3–6/9.1 and official information page on 2026-10-30;
-    parsed content, not raw download or immutable-byte hash.
-  limitation: Official info page indicates six errata reports. Prior errata route returned non-retryable500 and
-    inaccessible redirect; route not retried/bypassed. Errata contents/status unreviewed; acceptance limited visibly
-    to original publication.
-  source_mappings: &id001
-  - url: https://www.rfc-editor.org/rfc/rfc6902.html
-    title: RFC 6902 original April 2013 publication — sections 3–6 and 9.1
-    language: en
-    accessed: '2026-10-30'
-  - url: https://www.rfc-editor.org/info/rfc6902/
-    title: RFC Editor information — Proposed Standard, April 2013; six errata reports indicated, contents/status
-      not inspected
-    language: en
-    accessed: '2026-10-30'
-preflight:
-  fresh_main: 1c06e9726011c9b3a92152f2c9d35bebc5bcbf7a
-  open_held_pull_requests:
-  - 498
-  - 439
-  - 416
-  canonical_records: 262
-  candidate_records: 253
-  machine_route: review_required
-  collisions: []
+acceptance_events: 01_State/Inbox/acceptance-events/json-patch-rfc6902-20261030.yaml
 objects:
 - candidate_id: json_patch_rfc6902
-  candidate_path: 01_State/Inbox/candidates/json_patch_rfc6902.yaml
-  candidate_blob: 23735663725ee0ff4b9415eb0b572932014122fa
-  proposed_path: 01_State/01_Objects/json_patch_rfc6902.yaml
-  proposed_record:
-    id: json_patch_rfc6902
-    type: artifact
-    kind: specification
-    name_zh: JSON Patch 原始规范文档（RFC 6902）
-    name_en: JSON Patch Original Specification (RFC 6902)
-    official_name: JavaScript Object Notation (JSON) Patch
-    description_zh: 'JSON Patch 的固定 RFC 6902 原始出版物（2013 年 4 月，Proposed Standard），以 JSON 数组表达依序应用的 add、remove、replace、move、copy、test
-      操作；每项 path 使用 RFC 6901 JSON Pointer，媒体类型为 application/json-patch+json。固定 2013 年 4 月原始出版物；官方信息页显示六项勘误报告，但本轮未核验勘误内容或处理状态，不声称已整合勘误、当前完整修订语义或实现符合性。
-      原版 JSON 规范引用为 RFC 4627，不替换为 RFC 8259。这里是文献级记录，不是库、HTTP 服务或 IA 采用；不从 HTTP PATCH 的原子性推断任意补丁库的回滚保证。
-
-
-      English scope and limitations:
-
-
-      The original April 2013 RFC 6902 publication (Proposed Standard) represents sequential add, remove, replace,
-      move, copy and test operations as a JSON array. Each path uses RFC 6901 JSON Pointer; the media type is application/json-patch+json.
-      The official information page indicates six errata reports; their contents and status were not reviewed. This
-      record does not incorporate errata or assert complete corrected semantics or implementation conformance. The
-      original JSON reference is RFC 4627, not RFC 8259. This is a document record, not a library, HTTP service
-      or IA adoption claim; HTTP PATCH atomicity is not generalized to rollback guarantees in arbitrary patch libraries.'
-    description_en: The original April 2013 RFC 6902 publication (Proposed Standard) represents sequential add,
-      remove, replace, move, copy and test operations as a JSON array. Each path uses RFC 6901 JSON Pointer; the
-      media type is application/json-patch+json. The official information page indicates six errata reports; their
-      contents and status were not reviewed. This record does not incorporate errata or assert complete corrected
-      semantics or implementation conformance. The original JSON reference is RFC 4627, not RFC 8259. This is a
-      document record, not a library, HTTP service or IA adoption claim; HTTP PATCH atomicity is not generalized
-      to rollback guarantees in arbitrary patch libraries.
-    version: RFC 6902 (April 2013 original publication)
-    external_identifiers:
-    - namespace: rfc
-      value: '6902'
-    official_url: https://www.rfc-editor.org/rfc/rfc6902.html
-    versions:
-    - version: RFC 6902
-      status: proposed_standard
-      url: https://www.rfc-editor.org/info/rfc6902/
-    domains:
-    - structured_data
-    sources: *id001
-    last_verified_at: '2026-10-30T19:37:04.132023+00:00'
-    last_verified_by: Agent — OpenAI / dot / add_json_patch_standard; original-publication and info-page scope only,
-      errata contents/status unreviewed
+  canonical_id: json_patch_rfc6902
+  acceptance_event_id: accept-20261030-json-patch-rfc6902
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/cb49e8da261cdc8b58f19b242683b20f3bb5ac57/01_State/Inbox/review-packets/json-patch-rfc6902-20261030.yaml
 relations:
-- proposed_path: 01_State/02_Relations/json-patch-rfc6902.yaml
-  proposed_record:
-    id: json_patch_rfc6902_uses_json_pointer_rfc6901
-    type: relation
-    name_zh: RFC 6902 JSON Patch 使用 RFC 6901 JSON Pointer
-    name_en: RFC 6902 JSON Patch uses RFC 6901 JSON Pointer
-    source: json_patch_rfc6902
-    relation: uses
-    target: json_pointer_rfc6901
-    context:
-      version_context:
-        source: RFC 6902, April 2013 original publication
-        target: RFC 6901, April 2013
-      conditions_zh: 原文第4节要求每项操作的 path 为 JSON Pointer；这是固定规范文献之间的明确使用，不表示任意实现符合性、IA 采用或勘误核验。
-      conditions_en: Section 4 requires each operation path to be a JSON Pointer. Explicit use between fixed specification
-        documents, not implementation conformance, IA adoption or errata review.
-    evidence:
-    - url: https://www.rfc-editor.org/rfc/rfc6902.html#section-4
-      title: RFC 6902 section 4 — every operation path uses RFC 6901 JSON Pointer
-      language: en
-      accessed: '2026-10-30'
-    last_verified_at: '2026-10-30T19:37:04.132023+00:00'
-    last_verified_by: Agent — OpenAI / dot / add_json_patch_standard; original section 4 documentary use only
-membership_proposals:
-- category_id: syntax
-  ref:
-    surface: canonical
-    id: json_patch_rfc6902
-navigation_baseline:
-  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
-  sha256: 185a7e866129082aebbca1dc09ce63779d8cb68e275d06e035bf1d509c12505b
-  git_blob: 1d67122df82389b60f7095ef5f4cd7bcf720d717
-excluded_scope:
-- No RFC8259 substitution or new RFC4627 edge. No python_jsonpointer claim or modifications. No generic-library
-  atomicity. No denied route retries. No historical packet/event changes or held PR work.
-materialization_boundary: Candidate and packet only until independent exact-byte review and applicable checks; preserve
-  original new-state candidate in true Git ancestor before materialization. Proposed object/edge unchanged except
-  lifecycle, actual contributor and intake provenance metadata.
+- proposal_id: json_patch_rfc6902_uses_json_pointer_rfc6901
+  canonical_relation_id: json_patch_rfc6902_uses_json_pointer_rfc6901
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/cb49e8da261cdc8b58f19b242683b20f3bb5ac57/01_State/Inbox/review-packets/json-patch-rfc6902-20261030.yaml
+notes_zh:
+- 引用式交付回执；完整被审原文及来源限制保留在实际冻结祖先，不复制第二套正式字段。
+- 仅限 RFC6902 原始出版物；官方勘误条目内容和处理状态未核验。独立语义复核与结构检查分别记录，CI 不冒充审核。
