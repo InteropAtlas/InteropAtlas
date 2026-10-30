@@ -1,0 +1,99 @@
+packet_id: json_merge_patch_rfc7396_20261030
+status: pending_independent_semantic_review
+baseline_commit: d9775293a305cb8384f13326b8bcaf30d89564a3
+executor: Agent — OpenAI / dot / add_merge_patch_standard
+reviewer: null
+review_scope:
+- One fixed original RFC7396 artifact/specification; one existing syntax navigation member; no technical relation.
+- No implementation, capability, taxonomy, schema, renderer, governance or maintenance-rule changes.
+source_evidence:
+  method: Direct web tool reading of official original publication and official info page on 2026-10-30; parsed
+    content, not immutable downloaded bytes.
+  limitation: Errata entries, counts and dispositions unreviewed. Info-page tab without count is not proof of no
+    errata. Earlier RFC6902 errata route was blocked; not retried or bypassed. This intake is restricted to original-publication
+    assertions with explicit visible limitations.
+  source_mappings: &id001
+  - url: https://www.rfc-editor.org/rfc/rfc7396.html
+    title: RFC 7396 original October 2014 publication — sections 1–4 and 6
+    language: en
+    accessed: '2026-10-30'
+  - url: https://www.rfc-editor.org/info/rfc7396/
+    title: RFC Editor information — JSON Merge Patch, Proposed Standard, October 2014
+    language: en
+    accessed: '2026-10-30'
+preflight:
+  fresh_main: d9775293a305cb8384f13326b8bcaf30d89564a3
+  open_held_pull_requests:
+  - 498
+  - 439
+  - 416
+  canonical_records: 263
+  candidate_records: 254
+  machine_route: review_required
+  collisions: []
+objects:
+- candidate_id: json_merge_patch_rfc7396
+  candidate_path: 01_State/Inbox/candidates/json_merge_patch_rfc7396.yaml
+  candidate_blob: c89794694c7ff605d234bb0288110926d709b26b
+  proposed_path: 01_State/01_Objects/json_merge_patch_rfc7396.yaml
+  proposed_record:
+    id: json_merge_patch_rfc7396
+    type: artifact
+    kind: specification
+    name_zh: JSON Merge Patch 原始规范文档（RFC 7396）
+    name_en: JSON Merge Patch Original Specification (RFC 7396)
+    official_name: JSON Merge Patch
+    description_zh: 'JSON Merge Patch 的固定 RFC 7396 原始出版物（2014 年 10 月，Proposed Standard），废止 RFC 7386。对象补丁递归合并，null
+      成员值删除目标同名成员；非对象补丁整体替换目标，数组不支持逐元素修改。操作不保证文本布局或超出目标实现能力的数值精度，重复成员名的结果未定义。媒体类型为 application/merge-patch+json。仅限
+      2014 年 10 月原始出版物；本轮未核验勘误条目、数量或处理状态，不声称无勘误、已整合勘误、当前完整修订语义或实现符合性。 原版规范引用 RFC 7159，不替换为 RFC 8259。本记录不表示实现、IA
+      采用或必须使用 HTTP；不建立 JSON Pointer、JSON Patch 或 HTTP 的无条件技术关系。
+
+
+      English scope and limitations:
+
+
+      Original October 2014 RFC 7396 (Proposed Standard), obsoleting RFC 7386. Object patches merge recursively;
+      null-valued members remove matching target members. Non-object patches replace the target; arrays are not
+      patched element by element. Preservation of text layout or precision beyond the target implementation is not
+      guaranteed; duplicate-name behavior is undefined. The media type is application/merge-patch+json. Errata entries,
+      counts and dispositions were not reviewed: no absence-of-errata, corrected-semantics or implementation-conformance
+      claim. The normative JSON reference is RFC 7159, not RFC 8259. This document record asserts neither IA adoption
+      nor mandatory HTTP use, and adds no unconditional technical relation to HTTP, JSON Pointer or JSON Patch.'
+    description_en: 'Original October 2014 RFC 7396 (Proposed Standard), obsoleting RFC 7386. Object patches merge
+      recursively; null-valued members remove matching target members. Non-object patches replace the target; arrays
+      are not patched element by element. Preservation of text layout or precision beyond the target implementation
+      is not guaranteed; duplicate-name behavior is undefined. The media type is application/merge-patch+json. Errata
+      entries, counts and dispositions were not reviewed: no absence-of-errata, corrected-semantics or implementation-conformance
+      claim. The normative JSON reference is RFC 7159, not RFC 8259. This document record asserts neither IA adoption
+      nor mandatory HTTP use, and adds no unconditional technical relation to HTTP, JSON Pointer or JSON Patch.'
+    version: RFC 7396 (October 2014 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '7396'
+    official_url: https://www.rfc-editor.org/rfc/rfc7396.html
+    versions:
+    - version: RFC 7396
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc7396/
+    domains:
+    - structured_data
+    sources: *id001
+    last_verified_at: '2026-10-30T19:55:54.981992+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_merge_patch_standard; original-publication and info-page scope
+      only; errata entries/counts/status unreviewed
+relations: []
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: json_merge_patch_rfc7396
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: c14eb81958ce45fea9c158220ea72d90b06b614b557a2a1f08d7726a0a40ea2d
+  git_blob: f702902b24de008a145972099c7de83aa10bca8a
+excluded_scope:
+- No RFC8259 substitution or incidental RFC7159/RFC7386 intake. No JSON Pointer/JSON Patch uses, unconditional HTTP,
+  or alternative_to edge. No implementation runtime claim. No historical packet/event edits or held PR work.
+materialization_boundary: Candidate and packet only until independent exact-byte review and checks; original new-state
+  candidate must remain in true Git ancestor. Proposed fields unchanged except lifecycle/contribution/intake provenance
+  metadata.
