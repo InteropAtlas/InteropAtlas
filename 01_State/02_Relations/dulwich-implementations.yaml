@@ -1,0 +1,96 @@
+id: dulwich_provides_local_version_control
+type: relation
+name_zh: Dulwich 提供本地对象、引用与历史版本控制子功能（不含合并或网络验证）
+name_en: Dulwich provides local object, reference and history version-control subfunctions, excluding merge
+  or network validation
+source: dulwich
+relation: provides
+target: version_control
+context:
+  capabilities:
+  - version_control
+  version_context:
+    source: Dulwich 1.2.15 at b84b2ad43a5754054d812fa035b5fdcc68df4c29
+    target: Existing active version_control; partial local provision, not an endpoint redefinition
+  conditions_zh: 仅 Dulwich 1.2.15 固定纯 Python 路径的本地 Git 对象、提交、引用 / 分支、比较与历史子功能；不含 merge、冲突、网络 wire、任意仓库兼容或完整
+    version_control。仅新合成 SHA-1 仓库，隔离配置、清空 hooks，禁用 auto-GC 与签名，而 remotes / filters 未配置；默认 hooks 与外部副作用仍存在，no_verify
+    不跳过 post-commit。散列 / 构造不等于验证；Tree.check 与 refs 旧名接受有明确限度。82 个非测试 runtime 文件相同不是整包等同；Rust / merge3 缺席且 SHA-256
+    未测。63 / 26 / 24 条有限检查重叠，不相加。原 402-test subset 为 FAIL，含 59 个 guard errors，未启动 hook；另一 184-test subset 有
+    2 个 native skips，非原选集修复或完整 suite。无安全、性能、生产、合规、法律、签名或 IA 采用结论。
+  conditions_en: Only local Git object, commit, reference/branch, comparison and history subfunctions of fixed
+    Dulwich 1.2.15 pure-Python paths, excluding merge/conflicts, network wire, arbitrary-repository compatibility
+    and complete version_control. Only new synthetic SHA-1 repositories were used, with isolated configuration,
+    cleared hooks and disabled auto-GC/signing and no configured remotes or filters; default hooks/external
+    effects still exist, and no_verify does not skip post-commit. Hashing/construction is not validation; Tree.check
+    and legacy-reference acceptance remain bounded. The 82 matching non-test runtime files do not establish
+    whole-package equality. Rust and merge3 were absent; SHA-256 was untested. The 63 / 26 / 24 finite cases
+    overlap and are not additive. The original 402-test subset remains FAIL with 59 guard errors and no hook
+    spawning; the different 184-test subset has 2 native skips and is not a repair or full suite. No security,
+    performance, production, compliance, legal, signature or IA-adoption conclusion.
+evidence:
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/README.rst
+  title: Fixed project identity and declared scope; not blanket no-subprocess behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/pyproject.toml
+  title: Fixed package version, dependencies and declared license expression
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/setup.py
+  title: Fixed PURE branch and optional Rust build
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/objects.py
+  title: Fixed object framing, validation separation and optional acceleration
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/refs.py
+  title: Fixed reference CAS and compatibility-name behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/repo.py
+  title: Fixed repository initialization, object store and config/hook setup
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/worktree.py
+  title: Fixed commit hooks, no_verify scope and auto-GC path
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/hooks.py
+  title: Fixed ShellHook subprocess attempt and missing-file handling
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/porcelain/__init__.py
+  title: Fixed local porcelain operations and broader untested surface
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/merge.py
+  title: Fixed optional merge3 boundary, not executed merge evidence
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/object_format.py
+  title: Fixed SHA1 and SHA256 source support; only SHA1 tested
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/docs/c-git-compatibility.txt
+  title: Upstream compatibility statements, not arbitrary-repository certification
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/COPYING
+  title: Declared notice; no new license interpretation or whole-tree legal conclusion
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/dulwich/1.2.15/
+  title: Fixed PyPI release artifacts; upload 2026-09-14, not latest or signature evidence
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T09:45:22.176023+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_candidate_author; fixed-source
+  and actual finite local evidence only
+record_created_at: '2026-10-30T10:20:13.880012+00:00'
+record_updated_at: '2026-10-30T10:20:13.880012+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_independent_preflight
+  github_actor: ff6962757

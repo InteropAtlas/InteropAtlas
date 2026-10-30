@@ -1,0 +1,350 @@
+id: dulwich
+type: system
+kind: library
+name_zh: Dulwich：本地 Git 对象、引用与历史
+name_en: 'Dulwich: local Git objects, references and history'
+description_zh: 'Dulwich 是 Python Git 库；本记录仅固定 1.2.15 的本地版本控制子范围。官方 jelmer/dulwich 的 annotated tag dulwich-1.2.15（对象
+  18bc1f8fad4faa4f4fd7a022998c7d148e687eb7）指向 commit b84b2ad43a5754054d812fa035b5fdcc68df4c29 / tree b5c516ee4e4cbba3ad4b570d72e5bf0f6952bf46；完整固定树有
+  403 个 blob、无 symlink。本次版本的 PyPI 分发物于 2026-09-14 上传，不声称最新版本或已验证签名。这里补充本地对象、提交、引用/分支、比较和历史追踪的实际实现；IA 既有 git_protocol_v2
+  描述仓库网络交换，并不是这个库的重复身份。仅沿用 collaboration 编者导航；它不是组织治理方法、IA 采用决定或网站/工作流集成。
+
+
+  capabilities 中的 version_control 与一条 provides 关系都只表达上述本地子功能，并非该能力定义中记录、比较、分支、合并、追踪各方面全部实现或验证。没有 implements
+  → git_protocol_v2、网络协议互通、与任意 Git 实现兼容或推荐关系。三方有限测试覆盖重叠，不相加成独特覆盖数。
+
+
+  官方纯 Python wheel 为 733,132 字节，SHA-256 5c863992962bab0fc5f75be132399a16f670f2a9283faf9aaeb953fd8891db83；sdist
+  为 1,371,420 字节，SHA-256 e98f775601846fb4d44a384003e93c53c42b0c9796c8fe0cc3128b8e2e0bbf88。固定 Git、wheel、sdist
+  与实际本地 PURE=1 构建 wheel 中，82 个非测试运行 Python 文件逐字节一致；这是从包内 85 个 .py 文件排除 3 个 bundled test helpers 后的集合，不能写成全部
+  .py 或整包相同。sdist 含 359 个相同原始 blob，缺少其余 44 个，并有打包元数据。研究者和作者各自从官方输入进行 no-index/no-deps/no-build-isolation 构建成功；自产
+  wheel 的归档 SHA 与官方不同，WHEEL / RECORD 成员不同，不能宣称可复现二进制或整条供应链认证。
+
+
+  实际环境为 Linux x86_64 / Python 3.12.14、urllib3 2.5.0，构建工具 setuptools 80.9.0 / wheel 0.45.1；包声明 Python >=3.10、urllib3
+  >=2.2.2，低于 Python 3.12 时另有 typing_extensions 条件依赖。这些声明不是所有环境已测。选定 source、官方纯 wheel 和自产纯 wheel 实际均无 _objects、_pack、_diff_tree
+  Rust 扩展；固定源码在可选导入成功时可替换选定低层函数，但没有运行 Rust backend、验证纯/原生等价或测性能。merge3 为可选且实际缺席；本次不测试三方合并或冲突处理，也不反推 Dulwich
+  一概不支持合并。固定 source 有 SHA-256 ObjectFormat，但本次仅测 SHA-1；对象散列相等不是碰撞抗性、安全、签名或语义正确保证。
+
+
+  研究者同一套 63 条有限断言，在固定 source、官方纯 wheel、自产纯 wheel 三配置各通过，不是 189 条独特测试。它只创建合成 SHA-1 仓库：区分未跟踪、已暂存、未暂存状态，记录新增/修改/删除的三个显式提交，读取
+  index 与旧 blob，创建/删除分支引用，验证 expected-old compare-and-swap 失败时状态不变与成功更新、线性历史及 diff。对八个原始对象，显式 /usr/local/bin/git
+  2.52.0 的 cat-file/hash-object 原字节与类型-长度-NUL 框架散列一致，并在这个有限仓库上读到同一 HEAD/历史、通过 strict fsck。Git 命令是明确列出的独立参照，不是宣称
+  Dulwich 核心运行依赖 Git，也不是任意仓库、packed objects/deltas 或完整 Git 符合性认证。
+
+
+  作者独立重取公开 Git 与五个固定分发/依赖文件，核对固定树与打包范围并实际构建；亲自重放同 63 条三配置和下述较窄上游子集。作者另写 26 条低层合成检查，三个配置各通过（不是 78 条独特覆盖）：二提交/六原始对象、引用的增改删
+  CAS、历史/tree diff、错误路径与显式 Tree.check，再由 /usr/local/bin/git 2.52.0 原字节及 fsck 读回。独立预审另有 24 条 source-direct 低层检查，使用
+  /usr/bin/git 2.47.3；其初次环境没有 urllib3，所选低层 import 成功不代表完整安装满足全部依赖。作者另行重放该明确署名的 reviewer-owned 脚本，不把作者执行冒充独立
+  review；这些检查与 63/26 大量重叠，亦非 24+24 新覆盖。
+
+
+  执行包络是重要前提而非库的默认安全保证：仅全新可丢弃合成仓库，隔离 HOME/XDG/system/global/repo 配置与显式身份/时间；有限 porcelain 探针清空新 Repo 的 hooks
+  映射，禁用 auto-GC 与签名；这些新仓库没有配置 remote 或过滤器。审计 guard 阻止网络与库发起的 subprocess，仅放行探针显式 Git oracle；没有 guard 事件不等于通用沙箱证明。库确有配置、hooks、filters
+  和 auto-GC 外部效应；WorkTree.commit 的 no_verify 只跳过 pre-commit / commit-msg，不跳 post-commit，并仍可进入自动 GC。ShellHook.execute
+  即使 hook 文件不存在也先尝试 subprocess，再通常捕获 FileNotFoundError；“永远不启动外部进程”是错误概括。工作树/index/objects/refs/reflog 写入为正常功能副作用，不能对任意或用户仓库无条件套用这里的测试条件。
+
+
+  必须保留上游测试失败与选集边界：第一次较宽的 objects/refs/repository 子集在事先排除 4 个显式 shell-hook 例后，实际执行 402 tests，341 success、2 个
+  native-absence skips、59 errors，结果 FAIL。59 errors 都由研究者禁止库 subprocess 的 guard 在创建进程前拦住 hook 路径；未启动 hook 进程，不是
+  59 个上游断言失败，也不能说该 402 子集通过。原 runner/report/log 保留，未放松 guard、未修改库；作者未重复这个已知失败选集。随后另一份明确缩小的选集，仅 tests.test_objects
+  与十个非磁盘 refs helper/in-memory 类，实际 184 tests：182 success、2 native-absence skips、0 failures/errors，作者重放同样结果。这是不同范围、与原选集重叠，不是“修复原
+  59 项”、不是额外 184 独特覆盖；上游完整 suite 未运行。
+
+
+  构造、存储、散列与验证是不同操作。Tree.add 可接受含斜线的命名条目，显式 Tree.check 才拒绝；命名测试还确认 Tree.check 允许 mode 100664（固定源码有 TODO），因此连
+  check() 也不能称普遍严格 C Git 验证器。refs 对某些双斜线旧输入会发 DeprecationWarning 后接受/规范化；同时命名的 ../ 引用会被拒绝，不应把有限拒绝例扩大为通用输入消毒或安全保证。CAS
+  成败检查只是这个单进程合成状态的观察，不证明并发、崩溃恢复、持久性或所有文件系统原子行为。没有测试网络 client/server、wire v2、任意仓库、签名、合并冲突、GC、SHA-256、原生扩展、平台矩阵、性能、生产适用性、安全或
+  IA 采用。
+
+
+  README / pyproject 的项目声明为 Apache-2.0 OR GPL-2.0-or-later；这里只转述声明。COPYING 的开头措辞与 SPDX/项目元数据的范围不由本条目作新的法律解释，不替用户选择许可证、保证整树合规或改变
+  IA 许可证。
+
+
+  English scope and limitations:
+
+
+  Dulwich is a Python Git library; this record pins only the local version-control subfunctions of 1.2.15.
+  The official jelmer/dulwich annotated tag dulwich-1.2.15 (tag object 18bc1f8fad4faa4f4fd7a022998c7d148e687eb7)
+  resolves to commit b84b2ad43a5754054d812fa035b5fdcc68df4c29 / tree b5c516ee4e4cbba3ad4b570d72e5bf0f6952bf46,
+  containing 403 blobs and no symlinks. The named PyPI artifacts were uploaded on 2026-09-14; no latest-version
+  or signature-verification claim is made. Actual local object, commit, reference/branch, comparison and history
+  evidence is distinct from IA''s existing git_protocol_v2 network-exchange record, not a duplicate identity.
+  Only existing collaboration editorial navigation is used; this is not organizational governance, IA adoption
+  or workflow/site integration.
+
+
+  The version_control field and one provides relation mean only these local subfunctions, not complete implementation
+  or testing of every recording, comparison, branching, merging and tracking dimension in that capability.
+  There is no implements edge to git_protocol_v2, network interoperability, arbitrary-Git compatibility or
+  recommendation. Overlapping finite tests by different participants are never summed as unique coverage.
+
+
+  The official pure Python wheel is 733,132 bytes, SHA-256 5c863992962bab0fc5f75be132399a16f670f2a9283faf9aaeb953fd8891db83;
+  the sdist is 1,371,420 bytes, SHA-256 e98f775601846fb4d44a384003e93c53c42b0c9796c8fe0cc3128b8e2e0bbf88. Exactly
+  82 non-test runtime Python files match fixed Git, official wheel, sdist and actual locally built PURE=1 wheels.
+  This excludes three bundled test helpers from 85 package .py files; it is neither all Python files nor whole-package
+  equality. The sdist contains 359 equal original blobs, omits 44, and adds packaging metadata. Researcher
+  and author independently built from the public sdist with no-index/no-deps/no-build-isolation; local archive
+  hashes differ from the official wheel, with WHEEL/RECORD member differences. This is not binary reproducibility
+  or full supply-chain assurance.
+
+
+  Actual execution used Linux x86_64, Python 3.12.14 and urllib3 2.5.0; build tools were setuptools 80.9.0
+  and wheel 0.45.1. Metadata requires Python >=3.10, urllib3 >=2.2.2 and conditional typing_extensions below
+  Python 3.12; declarations are not a tested platform matrix. Selected source, official pure-wheel and locally
+  built pure-wheel runtimes had no _objects, _pack or _diff_tree Rust extensions. Optional successful imports
+  can replace selected low-level functions, but no native backend, pure/native equivalence or performance was
+  tested. Optional merge3 was absent; three-way merge and conflict resolution are untested, not asserted universally
+  unsupported. Fixed source defines SHA-256 ObjectFormat too, but these checks use SHA-1 only. Matching object
+  hashes do not establish collision resistance, security, signatures or semantic validity.
+
+
+  The researcher''s same 63 finite assertions passed on fixed source, official pure wheel and locally built
+  pure wheel: not 189 unique tests. Fresh synthetic SHA-1 repositories covered untracked/staged/unstaged distinctions,
+  three explicit add/modify/delete commits, index and retained old blobs, branch-reference creation/deletion,
+  expected-old compare-and-swap failure with unchanged state and successful update, linear history and differences.
+  Eight raw objects matched explicitly invoked /usr/local/bin/git 2.52.0 cat-file/hash-object bytes and independently
+  computed type-length-NUL framing hashes; that finite repository also had matching HEAD/history and successful
+  strict fsck. Git is the explicitly listed independent oracle, not a claimed core Dulwich runtime dependency.
+  These observations do not certify arbitrary repositories, packs/deltas or complete Git conformance.
+
+
+  The author independently reacquired public Git and five fixed distribution/dependency artifacts, checked
+  tree/package boundaries and built the sdist; the author replayed the same 63 checks in all three configurations
+  and the narrower upstream subset below. An additional author-written 26-case low-level synthetic probe passed
+  each of those three configurations, not 78 unique checks: two commits/six raw objects, reference add/update/delete
+  CAS, history/tree differences, named invalid inputs and explicit Tree.check, with /usr/local/bin/git 2.52.0
+  raw-byte/fsck readback. Independent preflight separately ran 24 source-direct checks using /usr/bin/git 2.47.3.
+  Its initial low-level environment lacked urllib3; successful selected imports do not mean a complete dependency-satisfying
+  installation. The author separately replayed that attributed reviewer-owned script, without relabeling author
+  execution independent review or treating 24+24 as new coverage. The 63/26/24 sets overlap substantially.
+
+
+  The execution envelope is essential, not a default safety promise: only fresh disposable synthetic repositories,
+  isolated HOME/XDG/system/global/repository configuration and explicit identities/times. The finite porcelain
+  probe clears the new Repo hook mapping and disables auto-GC and signing; those new repositories have no configured
+  remotes or filters. An audit guard rejects networking and library-spawned subprocesses while allowing only
+  the explicit Git oracle; no guard events is not general sandbox certification. Configuration, hooks, filters
+  and auto-GC remain real external-effect surfaces. WorkTree.commit no_verify skips pre-commit/commit-msg,
+  not post-commit, and still reaches auto-GC. ShellHook.execute attempts a subprocess even for a nonexistent
+  hook, normally catching FileNotFoundError afterward; a generic never-spawns-processes statement would be
+  false. Worktree/index/object/ref/reflog writes are normal effects, and this controlled envelope must not
+  be generalized to arbitrary or user repositories.
+
+
+  The upstream failure and selection boundary remain visible. The first broader objects/refs/repository selection,
+  after excluding four explicit shell-hook cases, actually ran 402 tests: 341 success, two native-absence skips
+  and 59 errors, therefore FAIL. All 59 errors were the researcher''s strict no-library-subprocess guard rejecting
+  hook paths before process creation. No hook process started; these were not 59 upstream assertion failures
+  and do not make the 402-test selection passing. Original runner/report/log are retained, no guard was weakened
+  and no library source changed; the author did not repeat that known failing selection. A different, explicitly
+  narrower selection—tests.test_objects plus ten non-disk-ref helper/in-memory classes—ran 184 tests: 182 success,
+  two native-absence skips and zero failures/errors; author replay obtained the same outcome. It overlaps the
+  earlier run, is not a repair of its 59 errors or 184 additional unique tests, and is not the full upstream
+  suite, which was not run.
+
+
+  Construction, storage, hashing and validation are separate. Tree.add accepts a slash-containing entry name
+  until explicit Tree.check rejects it. A named check also confirms that Tree.check allows mode 100664 (a fixed-source
+  TODO), so even check() is not a universal strict C Git validator. Reference handling warns and accepts/normalizes
+  certain legacy double-slash names; named ../ references are rejected, but finite rejection examples do not
+  establish a generic sanitizer or security guarantee. CAS observations concern one single-process synthetic
+  state, not concurrency, crash recovery, durability or all-filesystem atomicity. Network clients/servers,
+  wire v2, arbitrary repositories, signatures, merge conflicts, GC, SHA-256, native extensions, broad platforms,
+  performance, production fitness, security and IA adoption remain outside the tested scope.
+
+
+  README/pyproject declare Apache-2.0 OR GPL-2.0-or-later. This is attributed project metadata only: this record
+  does not newly reconcile COPYING''s introductory wording with SPDX/project metadata, choose a license for
+  the user, guarantee whole-tree legal compliance or change IA licensing.'
+description_en: 'Dulwich is a Python Git library; this record pins only the local version-control subfunctions
+  of 1.2.15. The official jelmer/dulwich annotated tag dulwich-1.2.15 (tag object 18bc1f8fad4faa4f4fd7a022998c7d148e687eb7)
+  resolves to commit b84b2ad43a5754054d812fa035b5fdcc68df4c29 / tree b5c516ee4e4cbba3ad4b570d72e5bf0f6952bf46,
+  containing 403 blobs and no symlinks. The named PyPI artifacts were uploaded on 2026-09-14; no latest-version
+  or signature-verification claim is made. Actual local object, commit, reference/branch, comparison and history
+  evidence is distinct from IA''s existing git_protocol_v2 network-exchange record, not a duplicate identity.
+  Only existing collaboration editorial navigation is used; this is not organizational governance, IA adoption
+  or workflow/site integration.
+
+
+  The version_control field and one provides relation mean only these local subfunctions, not complete implementation
+  or testing of every recording, comparison, branching, merging and tracking dimension in that capability.
+  There is no implements edge to git_protocol_v2, network interoperability, arbitrary-Git compatibility or
+  recommendation. Overlapping finite tests by different participants are never summed as unique coverage.
+
+
+  The official pure Python wheel is 733,132 bytes, SHA-256 5c863992962bab0fc5f75be132399a16f670f2a9283faf9aaeb953fd8891db83;
+  the sdist is 1,371,420 bytes, SHA-256 e98f775601846fb4d44a384003e93c53c42b0c9796c8fe0cc3128b8e2e0bbf88. Exactly
+  82 non-test runtime Python files match fixed Git, official wheel, sdist and actual locally built PURE=1 wheels.
+  This excludes three bundled test helpers from 85 package .py files; it is neither all Python files nor whole-package
+  equality. The sdist contains 359 equal original blobs, omits 44, and adds packaging metadata. Researcher
+  and author independently built from the public sdist with no-index/no-deps/no-build-isolation; local archive
+  hashes differ from the official wheel, with WHEEL/RECORD member differences. This is not binary reproducibility
+  or full supply-chain assurance.
+
+
+  Actual execution used Linux x86_64, Python 3.12.14 and urllib3 2.5.0; build tools were setuptools 80.9.0
+  and wheel 0.45.1. Metadata requires Python >=3.10, urllib3 >=2.2.2 and conditional typing_extensions below
+  Python 3.12; declarations are not a tested platform matrix. Selected source, official pure-wheel and locally
+  built pure-wheel runtimes had no _objects, _pack or _diff_tree Rust extensions. Optional successful imports
+  can replace selected low-level functions, but no native backend, pure/native equivalence or performance was
+  tested. Optional merge3 was absent; three-way merge and conflict resolution are untested, not asserted universally
+  unsupported. Fixed source defines SHA-256 ObjectFormat too, but these checks use SHA-1 only. Matching object
+  hashes do not establish collision resistance, security, signatures or semantic validity.
+
+
+  The researcher''s same 63 finite assertions passed on fixed source, official pure wheel and locally built
+  pure wheel: not 189 unique tests. Fresh synthetic SHA-1 repositories covered untracked/staged/unstaged distinctions,
+  three explicit add/modify/delete commits, index and retained old blobs, branch-reference creation/deletion,
+  expected-old compare-and-swap failure with unchanged state and successful update, linear history and differences.
+  Eight raw objects matched explicitly invoked /usr/local/bin/git 2.52.0 cat-file/hash-object bytes and independently
+  computed type-length-NUL framing hashes; that finite repository also had matching HEAD/history and successful
+  strict fsck. Git is the explicitly listed independent oracle, not a claimed core Dulwich runtime dependency.
+  These observations do not certify arbitrary repositories, packs/deltas or complete Git conformance.
+
+
+  The author independently reacquired public Git and five fixed distribution/dependency artifacts, checked
+  tree/package boundaries and built the sdist; the author replayed the same 63 checks in all three configurations
+  and the narrower upstream subset below. An additional author-written 26-case low-level synthetic probe passed
+  each of those three configurations, not 78 unique checks: two commits/six raw objects, reference add/update/delete
+  CAS, history/tree differences, named invalid inputs and explicit Tree.check, with /usr/local/bin/git 2.52.0
+  raw-byte/fsck readback. Independent preflight separately ran 24 source-direct checks using /usr/bin/git 2.47.3.
+  Its initial low-level environment lacked urllib3; successful selected imports do not mean a complete dependency-satisfying
+  installation. The author separately replayed that attributed reviewer-owned script, without relabeling author
+  execution independent review or treating 24+24 as new coverage. The 63/26/24 sets overlap substantially.
+
+
+  The execution envelope is essential, not a default safety promise: only fresh disposable synthetic repositories,
+  isolated HOME/XDG/system/global/repository configuration and explicit identities/times. The finite porcelain
+  probe clears the new Repo hook mapping and disables auto-GC and signing; those new repositories have no configured
+  remotes or filters. An audit guard rejects networking and library-spawned subprocesses while allowing only
+  the explicit Git oracle; no guard events is not general sandbox certification. Configuration, hooks, filters
+  and auto-GC remain real external-effect surfaces. WorkTree.commit no_verify skips pre-commit/commit-msg,
+  not post-commit, and still reaches auto-GC. ShellHook.execute attempts a subprocess even for a nonexistent
+  hook, normally catching FileNotFoundError afterward; a generic never-spawns-processes statement would be
+  false. Worktree/index/object/ref/reflog writes are normal effects, and this controlled envelope must not
+  be generalized to arbitrary or user repositories.
+
+
+  The upstream failure and selection boundary remain visible. The first broader objects/refs/repository selection,
+  after excluding four explicit shell-hook cases, actually ran 402 tests: 341 success, two native-absence skips
+  and 59 errors, therefore FAIL. All 59 errors were the researcher''s strict no-library-subprocess guard rejecting
+  hook paths before process creation. No hook process started; these were not 59 upstream assertion failures
+  and do not make the 402-test selection passing. Original runner/report/log are retained, no guard was weakened
+  and no library source changed; the author did not repeat that known failing selection. A different, explicitly
+  narrower selection—tests.test_objects plus ten non-disk-ref helper/in-memory classes—ran 184 tests: 182 success,
+  two native-absence skips and zero failures/errors; author replay obtained the same outcome. It overlaps the
+  earlier run, is not a repair of its 59 errors or 184 additional unique tests, and is not the full upstream
+  suite, which was not run.
+
+
+  Construction, storage, hashing and validation are separate. Tree.add accepts a slash-containing entry name
+  until explicit Tree.check rejects it. A named check also confirms that Tree.check allows mode 100664 (a fixed-source
+  TODO), so even check() is not a universal strict C Git validator. Reference handling warns and accepts/normalizes
+  certain legacy double-slash names; named ../ references are rejected, but finite rejection examples do not
+  establish a generic sanitizer or security guarantee. CAS observations concern one single-process synthetic
+  state, not concurrency, crash recovery, durability or all-filesystem atomicity. Network clients/servers,
+  wire v2, arbitrary repositories, signatures, merge conflicts, GC, SHA-256, native extensions, broad platforms,
+  performance, production fitness, security and IA adoption remain outside the tested scope.
+
+
+  README/pyproject declare Apache-2.0 OR GPL-2.0-or-later. This is attributed project metadata only: this record
+  does not newly reconcile COPYING''s introductory wording with SPDX/project metadata, choose a license for
+  the user, guarantee whole-tree legal compliance or change IA licensing.'
+version: 1.2.15
+external_identifiers:
+- namespace: github
+  value: jelmer/dulwich
+- namespace: pypi
+  value: dulwich
+official_url: https://github.com/jelmer/dulwich
+versions:
+- version: 1.2.15
+  date: '2026-09-14'
+  status: released
+  url: https://pypi.org/project/dulwich/1.2.15/
+capabilities:
+- version_control
+domains:
+- software_engineering
+scope_notes_zh: 本记录仅本地对象、引用、记录比较与历史子功能；不覆盖merge/wire、全能力、认证或IA采用。
+scope_notes_en: Only local objects, references, recording/comparison and history; not merge/wire, complete
+  capability, certification or IA adoption.
+sources:
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/README.rst
+  title: Fixed project identity and declared scope; not blanket no-subprocess behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/pyproject.toml
+  title: Fixed package version, dependencies and declared license expression
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/setup.py
+  title: Fixed PURE branch and optional Rust build
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/objects.py
+  title: Fixed object framing, validation separation and optional acceleration
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/refs.py
+  title: Fixed reference CAS and compatibility-name behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/repo.py
+  title: Fixed repository initialization, object store and config/hook setup
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/worktree.py
+  title: Fixed commit hooks, no_verify scope and auto-GC path
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/hooks.py
+  title: Fixed ShellHook subprocess attempt and missing-file handling
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/porcelain/__init__.py
+  title: Fixed local porcelain operations and broader untested surface
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/merge.py
+  title: Fixed optional merge3 boundary, not executed merge evidence
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/dulwich/object_format.py
+  title: Fixed SHA1 and SHA256 source support; only SHA1 tested
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/docs/c-git-compatibility.txt
+  title: Upstream compatibility statements, not arbitrary-repository certification
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jelmer/dulwich/blob/b84b2ad43a5754054d812fa035b5fdcc68df4c29/COPYING
+  title: Declared notice; no new license interpretation or whole-tree legal conclusion
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/dulwich/1.2.15/
+  title: Fixed PyPI release artifacts; upload 2026-09-14, not latest or signature evidence
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T09:45:22.176023+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_candidate_author; independent
+  public acquisition and author finite replay, not independent semantic acceptance
+record_created_at: '2026-10-30T10:20:13.880012+00:00'
+record_updated_at: '2026-10-30T10:20:13.880012+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_independent_preflight
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: dulwich
+  acceptance_event_id: accept-20261030-dulwich-1-2-15-dulwich
+  reviewed_candidate_blob: f2794b8869745c9c722726ca8007d124d112074c
+  reviewed_against_commit: 8d033670fef84bd54866e3323ecf5fba4e6d79b3
+  candidate_executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_candidate_author
+  canonical_serializer: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewed_packet_commit: 8d033670fef84bd54866e3323ecf5fba4e6d79b3
+  reviewed_packet_blob: ae97347688a9f9c3ffecaefd7c7f05ea00ce64be
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/8d033670fef84bd54866e3323ecf5fba4e6d79b3/01_State/Inbox/review-packets/dulwich-1.2.15-20261030.yaml
