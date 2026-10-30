@@ -1,0 +1,2412 @@
+packet_id: python_semver_3_1_20261030
+status: pending_independent_semantic_review
+baseline_commit: 592b7e85abdd8c5faaba1728af7060d83105b020
+executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+reviewer: null
+review_scope_zh:
+- 仅一个 system/library、一个有界 implements→既有 SemVer2.0.0、version_expression 与 syntax 导航。
+- 完整中英可见严格解析/非严格构造/hash/整数/类型/match/compatibility/native/有限验证边界。
+- 预审只允许本地作者阶段；精确语义、真实 F 绑定及 pre-H 结构审核为不同后续 gate。
+work_item_preflight:
+  main_confirmed: 592b7e85abdd8c5faaba1728af7060d83105b020
+  current_counts:
+    objects: 257
+    relations: 197
+    candidates: 248
+    events: 135
+    event_decisions:
+      accepted: 125
+      deferred: 10
+  existing_target_incoming:
+  - path: 01_State/02_Relations/engine-v0.1-versioning.yaml
+    id: engine_v0_1_uses_semver
+    relation: uses
+    source: engine_v0_1_bootstrap
+  canonical_identifier_collisions:
+    github:python-semver/python-semver: []
+    pypi:semver: []
+  candidate_identifier_collisions: []
+  all_relation_endpoint_forms_checked:
+    str: 184
+    dict: 210
+  preserved_holds:
+  - 'No #276 body/comment/alternate checkpoint publication; explicitly denied, pending permission is not approval.'
+  - No local Chromium retry; no direct API403 retry.
+  - 'Held #498/#439/#416 and identity-risk entries untouched.'
+  - No schema/classification/governance/maintenance changes or external writes by this reviewer.
+  publication_authorized_for_this_executor: false
+source_evidence:
+  verified_at: '2026-10-30T05:24:52.412106+00:00'
+  fixed_source_commit: 642d1bc8949d38cca7922df478d0f2c06513f99d
+  source_tree: 6fa097bdd78d2b3e6869b6ce79866d9699364939
+  normative_source: &id002
+    repository: https://github.com/semver/semver.git
+    commit: f99d5485190a47c0863949e7da810a5553e0ed4d
+    path: semver.md
+    blob: fb25b8ecba2dcd0e494ef6336d6180e05d82642d
+    sha256: 33ebae1a97845991d0b916f3295a88b499e2ec71a6c1fe84c12429077b19ce08
+    bytes: 17474
+  release_artifacts: &id001
+  - filename: semver-3.1.0-py3-none-any.whl
+    url: https://files.pythonhosted.org/packages/be/02/bce7a1d70e9d0f6ea8623c16386138c251b5855af6cd3a11433d3fba4e66/semver-3.1.0-py3-none-any.whl
+    bytes: 18783
+    sha256: 6e4998f8b4762acdfea85f9bfd5b4032e0bb50038dc04bf82011b42d5d1145c5
+    upload_time: '2026-09-12T18:38:12.457771Z'
+  - filename: semver-3.1.0.tar.gz
+    url: https://files.pythonhosted.org/packages/92/f5/e1dfe8e1d91c54ce212fd93916eb01fd1c590f413be0a0978c39a97aa1bb/semver-3.1.0.tar.gz
+    bytes: 304162
+    sha256: 14bc073439513d7773662a338f4db9829cf16c12b74b9568e2d2689975fbd7fc
+    upload_time: '2026-09-12T18:38:14.045293Z'
+  sealed_research_manifest:
+    path: /workspace/shared/ia-semver-research-20261030-0512/research-artifact-manifest.json
+    bytes: 3875
+    sha256: d68cbbe089a002c4b705252710f28d9573d89f662d6a6f8cfb58120bc2af2beb
+    git_blob: 6adacfb928a90ac1fe20f24a9b3dcfdde407e521
+  research_summary:
+    path: /workspace/shared/ia-semver-research-20261030-0512/RESEARCH_SUMMARY.txt
+    bytes: 6786
+    sha256: d4fc0d83bae783a275d61ac86b6876b2a03af1c88192f383a5e0c3ae4cc13191
+    git_blob: e201e698b08f32659a2d8f9a47351b35f5b86e40
+  author_capture:
+    path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/capture-manifest.json
+    bytes: 31328
+    sha256: 630cef754647968afebc1098992c9dad2cab535842955c728f1cae11319da6da
+    git_blob: 26c5c8592a89e2c0853cc461b32313dea7751e34
+  preflight_report:
+    path: /workspace/shared/ia-semver-independent-preflight-20261030-0513/preflight-review.json
+    bytes: 8413
+    sha256: e1020d25f269d877ee710d13ea212ede70a61e58154dcc15717d02eff85aaf3b
+    git_blob: e301b6e8354058bac02d965a3478e8ec216e0918
+  preflight_role: CONDITIONAL GO FOR LOCAL AUTHORING ONLY
+  primary_sources: &id003
+  - url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/README.rst
+    title: Python semver 3.1.0 — Official library identity and SemVer link
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/version.py
+    title: Python semver 3.1.0 — Parser, precedence, coercion, match, compatibility and native dispatch
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/pyproject.toml
+    title: Python semver 3.1.0 — Package and Python requirement, optional native dependency
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/__about__.py
+    title: Python semver 3.1.0 — Fixed source version identity
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/.pytest.ini
+    title: Python semver 3.1.0 — Upstream tests/docs and import/coverage configuration
+    language: en
+    accessed: '2026-10-30'
+  - url: https://pypi.org/project/semver/3.1.0/
+    title: PyPI semver 3.1.0 — release artifacts and upload date
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/semver/semver/blob/f99d5485190a47c0863949e7da810a5553e0ed4d/semver.md
+    title: Semantic Versioning 2.0.0 — fixed rules 1–11 and grammar
+    language: en
+    accessed: '2026-10-30'
+  source_reading_crosswalk:
+  - path: README.rst
+    sha256: 50123391f073871e4e22758f559a24f60247ac9cc3dbc9d19be50a415edbe992
+    url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/README.rst
+  - path: src/semver/version.py
+    sha256: 8b75f6078c50de711b806185322eb909a6b50b3abd3676a32fe31840b1d12494
+    url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/version.py
+  - path: pyproject.toml
+    sha256: 372b9ca8048a9b894744e2ddd7b03dbe1d1810f1068c230ac461e0a5b2126b7e
+    url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/pyproject.toml
+  - path: src/semver/__about__.py
+    sha256: a2f09ee8f767426e5cf58dc8bc46071de1becb9ec566a3d5a211a33f79a5493e
+    url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/__about__.py
+  - path: .pytest.ini
+    sha256: 692bc2d09365462bd444f383d977b5740ec5a5d2f16bf979f886b875b6968111
+    url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/.pytest.ini
+  author_replay_report:
+    path: /workspace/shared/ia-semver-author-20261030-0514/author-replay-report.json
+    bytes: 6412
+    sha256: 093999c5a8cb96c7c35d51a6a20e5f41b3b67b94a9964ec699159751e7211bb1
+    git_blob: 7e13ed45875459e7f07058fbc3140a0fda735bc8
+  reconstructible_runtime_evidence:
+    format: python-semver-3.1.0-reconstructible-evidence-v1
+    role: Pending author self-check, not independent acceptance
+    fixed_inputs:
+      clock_observed_before_run: '2026-10-30T05:22:55Z'
+      clock_note: Caller-supplied trusted-clock boundary before this run; not exact acquisition or verification
+        completion time
+      source_repository: https://github.com/python-semver/python-semver.git
+      source_commit: 642d1bc8949d38cca7922df478d0f2c06513f99d
+      source_tree: 6fa097bdd78d2b3e6869b6ce79866d9699364939
+      source_blob_count: 114
+      source_symlink_count: 2
+      source_blobs:
+      - path: .coveragerc
+        mode: '100644'
+        blob: 4903985cdb47a0036f0a50a66f712217bec600c7
+        bytes: 229
+        sha256: 58de804a13fb49caa14adf02d14ca4b59d4661b9ddd9dd6e3d3d5b60227084a2
+      - path: .editorconfig
+        mode: '100644'
+        blob: c98add8c75156ed598e0f50dbd7885745889e420
+        bytes: 238
+        sha256: e82fe078a3847b09e6a7829c8e225c7106d796630e39dd6695931d6b421d042d
+      - path: .github/ISSUE_TEMPLATE/bug_report.yaml
+        mode: '100644'
+        blob: a5c8ac482ae9ae4c1a5d7384be3369f155ff5a69
+        bytes: 2331
+        sha256: 4a48c3a51fdcb6d8037108e344a91f6db4595205d39af1363758df2e47cbac5c
+      - path: .github/ISSUE_TEMPLATE/config.yml
+        mode: '100644'
+        blob: 640cced4cb3b1100f97316d00c482f34347323b3
+        bytes: 325
+        sha256: d623f8a4505f2b00ed8eee3ae60977bdd322ffdff51453ed92abb3b90c63eedb
+      - path: .github/ISSUE_TEMPLATE/feature_request.yaml
+        mode: '100644'
+        blob: 2ec54c11af5954aa9bd789a9f7a65a8da5a21ca5
+        bytes: 1025
+        sha256: 4d6d7c891d1ed1b54729b2891675d391bdeed055a941d330579e408b4be7759a
+      - path: .github/dependabot.yml
+        mode: '100644'
+        blob: 0c5d1c56b5de52ca2e87cde76660047b126cbe37
+        bytes: 691
+        sha256: 496b192249993a88dfd000b2f0f2d66967f7fef02e6857bd774f160a5052f3ad
+      - path: .github/workflows/codeql-analysis.yml
+        mode: '100644'
+        blob: 72a02f7fc58b739958a2707dc50e257c28fa9523
+        bytes: 2374
+        sha256: 2b0270b51c382b1446164b12801e0ba53f31a429f34b6aaa01bfb5f833b9e752
+      - path: .github/workflows/python-testing.yml
+        mode: '100644'
+        blob: 28f68e941d328f1b37b9f972af767e02e6c95501
+        bytes: 3374
+        sha256: 81f78b7b0eebe813269836db380d75f64999bd8a5a04282bb3f7cdb0b908e091
+      - path: .gitignore
+        mode: '100644'
+        blob: 256de715a6e89063cc733e8e66bd3df3f8e40ec7
+        bytes: 4586
+        sha256: 69125266ecde890646f5f2e07707b7841f2ab400c88792af21b7c22013e6090c
+      - path: .pytest.ini
+        mode: '100644'
+        blob: fd1d5f9728ea46cbf6e84e79c83583fff51d8cb4
+        bytes: 507
+        sha256: 692bc2d09365462bd444f383d977b5740ec5a5d2f16bf979f886b875b6968111
+      - path: .readthedocs.yaml
+        mode: '100644'
+        blob: 626c2a5e0a552f8627d8490e35d8dc9575a58f96
+        bytes: 658
+        sha256: f66825d395afcfb91a88e1ed96ddbd2b2f4dc36f5b5c3d1251dc1861f707f504
+      - path: .ruff.toml
+        mode: '100644'
+        blob: ddcdbb0744cf738b31769692ca889c7b5e58ab9c
+        bytes: 1167
+        sha256: 17c86c9a8700867a5aa33df1e39e5722c20275a2767a70588c70a2a76d92a4f4
+      - path: CHANGELOG.rst
+        mode: '100644'
+        blob: 10e42b8a17df809071850c67b29973a0baffec60
+        bytes: 17179
+        sha256: 1caaffc37e6d3e1ebfe0a57dc417a4a86af899fd9c7e7a4709f371a7daafd6a3
+      - path: CITATION.cff
+        mode: '100644'
+        blob: 708f4d0a5af8fb31442b8635d952d68480821d03
+        bytes: 2311
+        sha256: a5ff4428abd0c58f823fc559ed51824cb347bd3437e89344f23433a8d86a0566
+      - path: CONTRIBUTING.rst
+        mode: '100644'
+        blob: ce598e0158d3f5020983321cd4c3002e3a2f4539
+        bytes: 1891
+        sha256: 11e32b27445a41eb3e8694b0e4e39cda56620e444d16ea616c1d0e7334ce1981
+      - path: CONTRIBUTORS
+        mode: '100644'
+        blob: 2902587abbf3415b3a1cd6a9a78d1a26fda2c3d9
+        bytes: 2184
+        sha256: b83bc1a5753df4f09d3e7b89c8fc9750e9de79c12eaa4fefe5382c326acc1635
+      - path: LICENSE.txt
+        mode: '100644'
+        blob: bbb09286b958d7d33b2ee9619870ef78156547bd
+        bytes: 1499
+        sha256: cc10179de9ced8655d7765bd3a8ac46438a61e663de7cf1c48d502d2baf9f3d5
+      - path: MANIFEST.in
+        mode: '100644'
+        blob: fa2dcb200a2c71949974938c1ff3222a6bbf81b8
+        bytes: 434
+        sha256: 3fabbb216da234ebbf6f58c103be9d0848cdb5df689ca87dda627d12a0bf069b
+      - path: Makefile
+        mode: '100644'
+        blob: f1272fa81eea918c4a1242898db173cc5c060064
+        bytes: 69
+        sha256: 491a03af59f02622950f438274c0a92ed5cb2478805235ca32aeb53b9254af8e
+      - path: README.rst
+        mode: '100644'
+        blob: 66552796e3c79895782f285e5e44a5256aa1487c
+        bytes: 3585
+        sha256: 50123391f073871e4e22758f559a24f60247ac9cc3dbc9d19be50a415edbe992
+      - path: SUPPORT.md
+        mode: '100644'
+        blob: 4702eb0830a73965329d02f541390712c0ae9efa
+        bytes: 601
+        sha256: 285b405238913fa8d33c86e7ee778708bb7bde1b3d142c131e1171d388338d9c
+      - path: changelog.d/.gitignore
+        mode: '100644'
+        blob: f935021a8f8a7bd22f9d6703cafa5134bb6a57f8
+        bytes: 12
+        sha256: 902a513dd9774bf8ea61865a3ab734fb16bafa5dcaa958cd45773a8c291dffe4
+      - path: changelog.d/README.rst
+        mode: '100644'
+        blob: 6c4782040c38feca57887fcb2b80191954dcda4c
+        bytes: 2501
+        sha256: 46203d84934b33c8bed03ba967326bf10b5237db3880b50a4bb0323914b0cc28
+      - path: changelog.d/_template.rst
+        mode: '100644'
+        blob: 982ad41a4f882589d3cca82c03853999760aa167
+        bytes: 964
+        sha256: 0a846cae9e0e1e48f37a16b3f8973788fe724cdf65dedd08660763c9ee3a8b0f
+      - path: docs/Makefile
+        mode: '100644'
+        blob: a38fc5bdb2f2466ae87749924c31f6f292298ebe
+        bytes: 761
+        sha256: 143aeddb603f50e2ec0a69e93c58d730395106c5d3eaee436e0fe7b0d30aa596
+      - path: docs/_static/css/custom.css
+        mode: '100644'
+        blob: 33510db399993f1650aa0c9ecd7c2e3d614eaaac
+        bytes: 1234
+        sha256: e0b133f8776bbdab073f899eb91e085c758e4ebfd88fb6310c7fa6999ab447c9
+      - path: docs/_static/logo.svg
+        mode: '100644'
+        blob: 1be72ee6197bb3f66a077b520d1d2d80ff258c20
+        bytes: 7754
+        sha256: 8328e3239ad82b0a3e894b8933b0008e7a7bc4d5f1fda6451ae5b7666f8991dc
+      - path: docs/_templates/layout.html
+        mode: '100644'
+        blob: 1f72ac26a3e259ca127221eacd6a9bd8acaf552e
+        bytes: 162
+        sha256: 53aefb898d8839a9314a39fcd304894a2a9cd677ec6bb722bdb1bf5c4f1b7dc4
+      - path: docs/advanced/coerce.py
+        mode: '100644'
+        blob: 7da2031588f0dd131daeed253a337ee7a8407db6
+        bytes: 1208
+        sha256: cd098531d268470b2f5581a4c81647b899444f2aafabf4cf3a8b536f52aad01a
+      - path: docs/advanced/combine-pydantic-and-semver.rst
+        mode: '100644'
+        blob: 975fb4189d8c8d369942c87371f2edabc783ebc9
+        bytes: 3405
+        sha256: af95ade93046b8529d8e1e372d92a6864a19aab3580d3d6a408cc1f3012ec73f
+      - path: docs/advanced/convert-pypi-to-semver.rst
+        mode: '100644'
+        blob: 82b4f5a37f6a041430319ecd147ca78889bd2193
+        bytes: 6271
+        sha256: bed99af7266f3133968ca4e147c777f244171c4ce686275ad4e7c88751522089
+      - path: docs/advanced/create-subclasses-from-version.rst
+        mode: '100644'
+        blob: 3a5194f4ee0db90efd450266b73d6a300cf25b6a
+        bytes: 1173
+        sha256: 3936769d67b12779927b18b8658766394259eac6714e7fd34392133c73b349ac
+      - path: docs/advanced/deal-with-invalid-versions.rst
+        mode: '100644'
+        blob: 120d82a06c3ddfa786899b3a026566ba39e71923
+        bytes: 1203
+        sha256: f617c910d22cfd2727e9eff48773946916f88e58eaa2908abfed560f5a6ff482
+      - path: docs/advanced/display-deprecation-warnings.rst
+        mode: '100644'
+        blob: a2fb83428b7cc6bf0867844d31841637358a3c0f
+        bytes: 1190
+        sha256: 7d6ac8f87f2a29728c4dd04e2a5c51565f6ec56ed3dc776331a668a21842570b
+      - path: docs/advanced/index.rst
+        mode: '100644'
+        blob: 26cd5729aa1c528b14ddc824fa37989bfacf31c7
+        bytes: 320
+        sha256: b81f78ccae509db54354e3612f7769d54cd43f5265b34418e161aa5e7cb3bb66
+      - path: docs/advanced/semverwithvprefix.py
+        mode: '100644'
+        blob: 7e411d35843e12ec894ed92c873684fec856157e
+        bytes: 819
+        sha256: ae2324bbff3580d51561fc0852f5b45cf6e1aeee7f111468957d2520671b1f41
+      - path: docs/advanced/version-from-file.rst
+        mode: '100644'
+        blob: 5d484438750908ce7539ef3e0cbd41aa0ba4cd3c
+        bytes: 788
+        sha256: 9495d1fe55528040b3ddd8702610cdd911e03fec163000441cb65b98a0ae31f0
+      - path: docs/api.rst
+        mode: '100644'
+        blob: 0ce4012ce16ce11afbb54634c33f38f7405d52e5
+        bytes: 1878
+        sha256: bee0ce2c66e7d7fe1cc789794897d6d7d76539ba2951d0d9b4a7874edce62081
+      - path: docs/build-semver.rst
+        mode: '100644'
+        blob: 9c0441d87f02bdbefb890e38993ef13b08d7e396
+        bytes: 772
+        sha256: 14b1c2d56d58198d3966497da2ed3b852a66d276a200c90ce53c2308aba660cf
+      - path: docs/changelog-semver3-devel.rst
+        mode: '100644'
+        blob: 75579d0f9c14a365c65f662b572e5de7f17ceffa
+        bytes: 10562
+        sha256: a1f4db171c111895e4fbd9e0f1a505494b8ffa5864c98825287c516175dcd9e8
+      - path: docs/changelog.rst
+        mode: '100644'
+        blob: e1e273b477c4a9e1a58fad61ea090705f209d100
+        bytes: 47
+        sha256: 80b54c54eedba0a9b8b8fac202d415f83840c7f7436d8967703bcca78272ffb8
+      - path: docs/conf.py
+        mode: '100644'
+        blob: 872f943a5505c7003241086991e5d72d27210055
+        bytes: 8853
+        sha256: b5861bd20fac0dc669fa52cbb3b7064e5d55d040c910cfcacf69884cf6194453
+      - path: docs/contribute/add-changelog-entry.rst
+        mode: '100644'
+        blob: 30215c76b944b7b810e480b1ae59430e5fccf4c8
+        bytes: 225
+        sha256: 54091c92ee51af393eb0f9aa5a150b49cc004ded1c7b3deb057237f593fec6af
+      - path: docs/contribute/doc-semver.rst
+        mode: '100644'
+        blob: 217b1d2116b5da14b0b0a85e20afea1002f8518a
+        bytes: 2879
+        sha256: 46580c2db1362485e333c639d2f291ede49d067afe499862d8ca112270627a79
+      - path: docs/contribute/finish-release.rst
+        mode: '100644'
+        blob: d1fcce2cc942e980bd41532aa7dc0576e02e1a81
+        bytes: 665
+        sha256: cd987eb5b8867fd9bdad9ad2e3d804da77382bf4d427470cac5f66a233a3cd20
+      - path: docs/contribute/index.rst
+        mode: '100644'
+        blob: 30960ace0e21180124e2d3bc6a3b4b9a2b3f55f7
+        bytes: 597
+        sha256: b20f719a52adcb42d2d1db50a93dd63f6539251af1c78c8cdabf89c31dd5a149
+      - path: docs/contribute/prerequisites.rst
+        mode: '100644'
+        blob: 1084d2477a40168fcad605d476c0a93815ebf081
+        bytes: 517
+        sha256: 7d37b3807ad9bb0f0050889a6a6e57ff092b59938e8373251c2590effc4f2dbe
+      - path: docs/contribute/release-procedure.rst
+        mode: '100644'
+        blob: b18672fb20f55df87f875f8cdbd000addcabb434
+        bytes: 3319
+        sha256: dff7c3aacb60884a03d135b9ed4d1fb19e3474f438f58be1ba1b5d270fff54ad
+      - path: docs/contribute/report-bugs.rst
+        mode: '100644'
+        blob: 614098b9de64b94461f90a9e8c1ae7b33fe2bf89
+        bytes: 668
+        sha256: d82d5be865a361280449b8bba4be88ad49620ff62537748252899bfec1f1cdb3
+      - path: docs/contribute/run-test-suite.rst
+        mode: '100644'
+        blob: 22f4ebc0c99d360bd494dd3294f274675daad2d5
+        bytes: 2011
+        sha256: a77f358557951849b67a839fb412d06053693ccd690ac313c2fdda338cd1a3b6
+      - path: docs/index.rst
+        mode: '100644'
+        blob: d0b1588279b0bc70a101699fefd013681ee886ba
+        bytes: 656
+        sha256: 134ff4418773c20cb6c10ec9250410f133025f4c8317a3aba72e8109c0d5e465
+      - path: docs/install.rst
+        mode: '100644'
+        blob: 1c9d4325ef66388a5c70355cdceda5650482652a
+        bytes: 3464
+        sha256: 5cc1361a30d5613253533bbaa005c0106f36aad776ad8c93f8a28805e1d83d72
+      - path: docs/inventories/pydantic.inv
+        mode: '100644'
+        blob: 455215a74ed7255fd24b089a523144711cf13f4d
+        bytes: 4080
+        sha256: 46096663940a778cf67240ddc4a4a8cfdd0c2e83d2748849d9d1e9496759911b
+      - path: docs/inventories/python-objects.inv
+        mode: '100644'
+        blob: 90bfa0a6cfed96227e766a910ec7c51af931926e
+        bytes: 134114
+        sha256: 14c27b61146918ce02d04417a4123bae8b7f874559a05a6755c2baec09c3a6d6
+      - path: docs/make.bat
+        mode: '100644'
+        blob: dae3d085ff7e878ee87ac66aba5e572b4a1bbb18
+        bytes: 804
+        sha256: 6dcfaa539fff7aa33d1f0039c2a77de3a9caad83e43a02678f3e6e160fd45f9d
+      - path: docs/migration/index.rst
+        mode: '100644'
+        blob: 74c3d8663a2eb8e9bfa9f642ee26a3577aaa238d
+        bytes: 219
+        sha256: caf304bcff43698c83831a76af473f330347fcbc8057aa67774b1e24b50b51bb
+      - path: docs/migration/migratetosemver3.rst
+        mode: '100644'
+        blob: 2c09fb410b76a77c5f1c8e8f6e3cabf11bfcfe54
+        bytes: 1648
+        sha256: e5fb3fba7c51d96b15806f6d77aeb28d614bf74b9bf9f660c1fd4be293189f1f
+      - path: docs/migration/replace-deprecated-functions.rst
+        mode: '100644'
+        blob: df0d799af8284a809e93316b3d5e9712c47998f6
+        bytes: 4263
+        sha256: aee250751e08d1077f261d71e0f3b8bdc29babb92d4cba57cd96ab2b0c9c61cd
+      - path: docs/pysemver.rst
+        mode: '100644'
+        blob: cea32e6c2d8a31ee894448929affb8f67e5a9044
+        bytes: 3842
+        sha256: 24ddeff86ccfa531cb8b7a50125a38fd4efd8c8bff8d1973bb185093a31684b6
+      - path: docs/readme.rst
+        mode: '100644'
+        blob: 034e9ee69836f3309105db7c05e57af12983f104
+        bytes: 120
+        sha256: 6cb7bfb2bb50ed0e3fa0527340364bc694baaff5bd35f40f7432c846cc5ac959
+      - path: docs/requirements.txt
+        mode: '100644'
+        blob: 540348a52c71e95b84e0db755f4865079f29ae36
+        bytes: 147
+        sha256: b6bf4723ac1d56cf732fcfd56d3163c14ea005bf1baa66a621cade49d9ecd9dd
+      - path: docs/usage/access-parts-of-a-version.rst
+        mode: '100644'
+        blob: d8a15cb445c0ab2e28a4519b7f81858525f00177
+        bytes: 1197
+        sha256: 00b016f7c374e3e26a2f307dd8854e325d4250e5841aed4ddf26591e05a74e99
+      - path: docs/usage/access-parts-through-index.rst
+        mode: '100644'
+        blob: cc6b0c2bf2e15333cc34757e3ab5f55d834d6f79
+        bytes: 1323
+        sha256: 1ed38d64bad4be1a3e43f87d9e5a5f9484a4fc29de1ee5c42e673d804c7a75e6
+      - path: docs/usage/check-compatible-semver-version.rst
+        mode: '100644'
+        blob: 4cf4790825286c28893d40f2b9b379f0d5c0d044
+        bytes: 2304
+        sha256: aba28c81865e44803e58daf4a9a6c953e5f19dcb5f5973426b4d4c495635c461
+      - path: docs/usage/check-valid-semver-version.rst
+        mode: '100644'
+        blob: 2e016c6d6073d6e7772805146e67bd02c074ed11
+        bytes: 390
+        sha256: 2968146f2d0555610deee7e10b5bd163d541e1857e43c47e93eca18de404d99e
+      - path: docs/usage/compare-versions-through-expression.rst
+        mode: '100644'
+        blob: 5b05a123c756ed1ab86782bb7201375b46492436
+        bytes: 1209
+        sha256: 47db2537dbc2d41d198a85dbb7cb6267b55e007a4440c9a91da5a9239c8aea1d
+      - path: docs/usage/compare-versions.rst
+        mode: '100644'
+        blob: c3f219b673b4b3fbc1aa5f2ea8cfdbf7dd87fa11
+        bytes: 2902
+        sha256: 9b8956c3363fbb4830ac6e1c104f5105085906ec06139b20eef1cf9021278b2e
+      - path: docs/usage/convert-version-into-different-types.rst
+        mode: '100644'
+        blob: c75992f157dd2d69b6c2dd42fc1e8f77c36d9ef5
+        bytes: 954
+        sha256: 0bcd3041e7fa2c2b4d6a39385a14866b78648198bbe1a8a317eb530592831a89
+      - path: docs/usage/create-a-version.rst
+        mode: '100644'
+        blob: 061652351103a216575ead92009f5f6380e4dfbe
+        bytes: 3604
+        sha256: aca031fa253cf02d3fd2ebf99f11cdaa303acba67caeed22116056eadc72e2bd
+      - path: docs/usage/determine-version-equality.rst
+        mode: '100644'
+        blob: ba4125ed0d331188f50fed9c0696e1e90725ef5b
+        bytes: 707
+        sha256: 3ddc94c3c16dc596e4c9b4178e83aa3f8e81e4114c41ff9654bd0af6ac990665
+      - path: docs/usage/get-min-and-max-of-multiple-versions.rst
+        mode: '100644'
+        blob: 35ba77b454e40ec9a7c1c074bd4745a6b88f2d29
+        bytes: 1760
+        sha256: 63bf7f2136cd3d2367126a9b98131f9b38fdfe6bbe752c335c802ecad8b4c84b
+      - path: docs/usage/increase-parts-of-a-version_prereleases.rst
+        mode: '100644'
+        blob: 8b1b98b324e4a35646ca7a869e9b10565fc5bcaf
+        bytes: 786
+        sha256: c291bf871c3f708338dc2f30333f5e3e0b6768f09d3ed77a10a6c67123b86f5b
+      - path: docs/usage/index.rst
+        mode: '100644'
+        blob: 4b8e3fc972b6f8bfd7fabe34bf5d8622c7148b42
+        bytes: 519
+        sha256: c7a28d3b442237a43de2af1ce41c85ee470ed1dac42e383193b5845d1e43e87d
+      - path: docs/usage/parse-version-string.rst
+        mode: '100644'
+        blob: 0cf02650651e114b2d49fffaec8e74664ea900a9
+        bytes: 651
+        sha256: bfa5fcdbd6f5c2d3ed4efbe63f270c01ce6194c1d734df319e2d0131ded1f864
+      - path: docs/usage/raise-parts-of-a-version.rst
+        mode: '100644'
+        blob: 719d3dc469f90917f2b0098ebaa84464a2a10dd3
+        bytes: 3295
+        sha256: 25274c0806adf4cc1df9a000c15fdc76127b2c88937c1a8db75079f0fddc21ca
+      - path: docs/usage/replace-parts-of-a-version.rst
+        mode: '100644'
+        blob: 57ab65e9a5c7a4847f556790e9f33a0cda9eb52d
+        bytes: 672
+        sha256: ba7f1ae7ef999647001e4fe4494697dc7fff4767d84e76d1996d20d3100e6b35
+      - path: docs/usage/semver-version.rst
+        mode: '100644'
+        blob: c3480c416df942c947686726432fc4f480b79092
+        bytes: 167
+        sha256: 6699ca989a39da67044ab9fbd3b58a05cefa943466c6900fc8dd6e7a238d0f59
+      - path: docs/usage/semver_org-version.rst
+        mode: '100644'
+        blob: b0a1ad87fdd1637b7e6b9fc7cb0eb934c432c5c8
+        bytes: 330
+        sha256: 9438d47f9091cfe1adb53ac3b30428acc8eb535ca773dd7bf7b0d1eb6ab6eb93
+      - path: docs/version-policy.rst
+        mode: '100644'
+        blob: f0c423f8bbc7b550c2d09edcbc1d6bc6e6ab8585
+        bytes: 1687
+        sha256: 8339e5261bb8684c1e89e74cc077977922ade765d5bf2efa0e7e364a26a26d1e
+      - path: pyproject.toml
+        mode: '100644'
+        blob: 07a3618bef8df9722a514a8f8f5632ca716824f5
+        bytes: 4498
+        sha256: 372b9ca8048a9b894744e2ddd7b03dbe1d1810f1068c230ac461e0a5b2126b7e
+      - path: release-procedure.md
+        mode: '100644'
+        blob: f6c7c37795224fbf040b969305a9ce7d684f3b6c
+        bytes: 4622
+        sha256: 9388b7841e3a6044a3bce8efb5411727907bbdab8ac884e317f436946b9ec979
+      - path: setup.cfg
+        mode: '100644'
+        blob: 813d253307a2a34e1bfefcabca8ba0b390f50239
+        bytes: 296
+        sha256: 0ef61c650f7fe1a668144ad5d38973a9fc9ea10ece98b5d9636b56d801c9eea5
+      - path: src/semver/__about__.py
+        mode: '100644'
+        blob: e3eaac5cbc479b34f4737005ee5df5c58c2eed32
+        bytes: 815
+        sha256: a2f09ee8f767426e5cf58dc8bc46071de1becb9ec566a3d5a211a33f79a5493e
+      - path: src/semver/__init__.py
+        mode: '100644'
+        blob: 19c88f7854e4a3c25d8c7c9ce9c27aa5b4565578
+        bytes: 1269
+        sha256: 451063ea4bae61a098e41f602f1c04d21ee6781c2ead811b7d0667bfbb7590a3
+      - path: src/semver/__main__.py
+        mode: '100644'
+        blob: c6adb834cf3c1a754c87f8f692dc35bafb4eb0ca
+        bytes: 593
+        sha256: 9ac50bab82dbd0057c2b8aee9619b4173cc93bca0c0afe761a37131b6b7c8b0b
+      - path: src/semver/_deprecated.py
+        mode: '100644'
+        blob: df11bb022f2a52e7bbbb1bce6881eb820f1ba897
+        bytes: 11273
+        sha256: 38e5fe01e698f90a892b6810184f2974913187fd774cffbd012640920a829ade
+      - path: src/semver/_types.py
+        mode: '100644'
+        blob: 7afb6ff03702688a1472291da47c7e04e8e48f82
+        bytes: 422
+        sha256: f807dacd98279a631eed6b614b1fccfb0d410a7ab674f166cac8e6b533a6d687
+      - path: src/semver/cli.py
+        mode: '100644'
+        blob: 43e101e10a3a8173d55bcef3ddb8bcce8c1157a4
+        bytes: 5189
+        sha256: 1f0be99ea70df791b7388354e1c2e0a2e4470ad5a146cb8a8217e13d6b4639ec
+      - path: src/semver/py.typed
+        mode: '100644'
+        blob: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+        bytes: 0
+        sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      - path: src/semver/version.py
+        mode: '100644'
+        blob: b10d5a67600a2fed81ecae13d002590ec683a390
+        bytes: 26643
+        sha256: 8b75f6078c50de711b806185322eb909a6b50b3abd3676a32fe31840b1d12494
+      - path: tests/coerce.py
+        mode: '120000'
+        blob: e79106a2153bb5241b587a7fd796363e79f84b0b
+        bytes: 26
+        sha256: 53c2e690ce2767a7d1a755202ba92f84a5a9c81394c7391d7cf96fca7cbf99bb
+        symlink_target: ../docs/advanced/coerce.py
+        resolved_content_sha256: cd098531d268470b2f5581a4c81647b899444f2aafabf4cf3a8b536f52aad01a
+      - path: tests/conftest.py
+        mode: '100644'
+        blob: 9017bbbee30c8a8e20f7389b3ff093b4bb1e4886
+        bytes: 739
+        sha256: f111cc31bf8accc95fffd76c2bed5dc5d6c575d1ce1b0cfc34e7a3bc2183577f
+      - path: tests/semverwithvprefix.py
+        mode: '120000'
+        blob: d1a8d995a45497c73516661d8d5abc38da4d29f8
+        bytes: 37
+        sha256: 114c5970df81445b3b1b17b769e005a645f799bbdd9ce99b307d12bc0ed7cd78
+        symlink_target: ../docs/advanced/semverwithvprefix.py
+        resolved_content_sha256: ae2324bbff3580d51561fc0852f5b45cf6e1aeee7f111468957d2520671b1f41
+      - path: tests/test_bump.py
+        mode: '100644'
+        blob: fcbedf4c1a6e49bd42a89acfa6e5fd0e4ca959f1
+        bytes: 5212
+        sha256: ecd2c0aafc4ba3c29ea9f481a5fb715a8e6a7fc155d37f6299f15e865bde4e6d
+      - path: tests/test_bump_build_digitless.py
+        mode: '100644'
+        blob: 3abd0cf044b0dd21b55c9b4b457e95b344c31b2d
+        bytes: 3070
+        sha256: 13418375dc411af23450b76fa5be8288198ff02b062ef8aaa4cf19dc2d0dbaef
+      - path: tests/test_compare.py
+        mode: '100644'
+        blob: dffa98b8bb000ea3147715ff7d2ebdd8f30ca5f0
+        bytes: 8612
+        sha256: 13fadc86f1f8b6d8d2c4018cc4e71f633091de0334e95feb016090b218a6550f
+      - path: tests/test_compare_invalid_operands.py
+        mode: '100644'
+        blob: 3b61c51c50feb8d3f45da4c6d50d8f9c8d0c72b7
+        bytes: 2382
+        sha256: 629310773c53b2965d56b21c454b2eaacd2f47c3bad30eec6bb0f0bb780c3295
+      - path: tests/test_deprecated_functions.py
+        mode: '100644'
+        blob: 8886268995252fefcf128ff03915852350efab0b
+        bytes: 2097
+        sha256: dbbe343f0449db4490766bb0fbce3c7a66a785436d06b0636ead06fdf82c4f12
+      - path: tests/test_docstrings.py
+        mode: '100644'
+        blob: a3ff08b1a0bbe5d888c47a0a53d0233a89ee634f
+        bytes: 1062
+        sha256: b63d4fd4d9cf0c54234eaa2af1bd8c6ee10f85cc83a3558cca70837cf87783f5
+      - path: tests/test_format.py
+        mode: '100644'
+        blob: 73ff3122facb7eafa2816597b8e2d8d5fb45db37
+        bytes: 2207
+        sha256: 501e0cb1454597aee73fcabfb4280d5af17c4a8be48945d7b74c3c715f6c1e10
+      - path: tests/test_immutable.py
+        mode: '100644'
+        blob: ef6aa40e513440557ab59f9c10e6a87a9c9248b4
+        bytes: 965
+        sha256: 560baae1c1fbf771746b09ee1e59974687e563f85caf0fea44ae7fd511013772
+      - path: tests/test_index.py
+        mode: '100644'
+        blob: 79e45025a21e27b9473b3b442f25cfcfa3c5002d
+        bytes: 2988
+        sha256: ea9015e7fcbf22feb0d0649a6efd0a391359c76592d45191ac436d2b3989640e
+      - path: tests/test_match.py
+        mode: '100644'
+        blob: e2685cae1d8bbcb0e2e7de94d2e1c976dc647b21
+        bytes: 1651
+        sha256: d67e0cd8e1ca6a7810465180f48f3c3d0a81c31ba52a858a17b3f2e7713a4b1f
+      - path: tests/test_max-min.py
+        mode: '100644'
+        blob: d465fe8e793ffefe7644ce5cedb97f4fc15ce92d
+        bytes: 1356
+        sha256: 67e05dfbe2825c034e9dc8cf9a49bc7723c15a210b0071dfc2e350cd9c929e17
+      - path: tests/test_optional_native_backend.py
+        mode: '100644'
+        blob: 981f357c02d4e92aa5093a95908417a25744265c
+        bytes: 807
+        sha256: cec173c6379b95368c1c13ce2bc58566a2e90f120ea60ab8cc5ac97637e4e45d
+      - path: tests/test_parsing.py
+        mode: '100644'
+        blob: e4e78588be4528cafe4aef34db67163723688c00
+        bytes: 6076
+        sha256: 729cd9ad377371bff8253e7e113b55bffc86590c144528166f732394661e5c8a
+      - path: tests/test_pysemver-cli.py
+        mode: '100644'
+        blob: 5a0a2f827005578d088283682cbfaca89a2af865
+        bytes: 4184
+        sha256: 1ad2caf996e5eaeca1e5d6526ca5e92dbf58fe939d8dac6eee7741b6641c7d2a
+      - path: tests/test_replace.py
+        mode: '100644'
+        blob: f223eddbf52b63097a6b289064a48118a1ffb713
+        bytes: 1789
+        sha256: 3704c26eaac884e0b4f7a4e48c4188bcfbac9e35eab3196560f83ce09b56f7d9
+      - path: tests/test_semver.py
+        mode: '100644'
+        blob: 9978b9406c2f3cf3b8dd886383a84405ca0f689e
+        bytes: 3676
+        sha256: 0b7aca1e22bf93b27a9d7295c3c75cd6bffb6e2c4c3929d9fbe0a431ea2e04bb
+      - path: tests/test_strict_parsing.py
+        mode: '100644'
+        blob: b50bf5d16b848eb047aa59ce81a5d938cc02c66f
+        bytes: 988
+        sha256: 378e70adaa1576f5e8bf36f4a6a4079d9861081594eb23ac10d4cbd52ddfa8a0
+      - path: tests/test_subclass.py
+        mode: '100644'
+        blob: 0d390009dcc6f0b016ead624bf7522ddcd0e621e
+        bytes: 2307
+        sha256: dbff47a141fe117f9291d05bbe7e7a4285645495e3d87814e222ec15f36ea135
+      - path: tests/test_typeerror-274.py
+        mode: '100644'
+        blob: 326304b8fbdb6ecb7ddbb00a72ca43a6e92ff336
+        bytes: 341
+        sha256: 3e487a724502eab30e47ac2cf0d301b7e81dd5030c362f41aa485607da40e856
+      - path: tox.ini
+        mode: '100644'
+        blob: ccdda14c23e13223fea10c3091fd37222fc5a788
+        bytes: 1798
+        sha256: 7128ce26aded19556d5f73ce94791ba7e00efcf93ba5d1225258f3df180b578c
+      - path: uv.lock
+        mode: '100644'
+        blob: 203359d3a20285246f60fc4b6cba2db0630f81d3
+        bytes: 238241
+        sha256: f08fb6040c9c2943cb53de2eca849c0f08ed0c0e0b954d32c9beede3d15a0ed3
+      pypi_metadata_sha256: ff3fd2c6d7dd88a2edad51d7d828f61223a4873daa91f1fb33569002ad4abe61
+      release_artifacts: *id001
+      runtime_package_files:
+      - path: semver/__about__.py
+        bytes: 815
+        sha256: a2f09ee8f767426e5cf58dc8bc46071de1becb9ec566a3d5a211a33f79a5493e
+        source_wheel_sdist_equal: true
+      - path: semver/__init__.py
+        bytes: 1269
+        sha256: 451063ea4bae61a098e41f602f1c04d21ee6781c2ead811b7d0667bfbb7590a3
+        source_wheel_sdist_equal: true
+      - path: semver/__main__.py
+        bytes: 593
+        sha256: 9ac50bab82dbd0057c2b8aee9619b4173cc93bca0c0afe761a37131b6b7c8b0b
+        source_wheel_sdist_equal: true
+      - path: semver/_deprecated.py
+        bytes: 11273
+        sha256: 38e5fe01e698f90a892b6810184f2974913187fd774cffbd012640920a829ade
+        source_wheel_sdist_equal: true
+      - path: semver/_types.py
+        bytes: 422
+        sha256: f807dacd98279a631eed6b614b1fccfb0d410a7ab674f166cac8e6b533a6d687
+        source_wheel_sdist_equal: true
+      - path: semver/cli.py
+        bytes: 5189
+        sha256: 1f0be99ea70df791b7388354e1c2e0a2e4470ad5a146cb8a8217e13d6b4639ec
+        source_wheel_sdist_equal: true
+      - path: semver/py.typed
+        bytes: 0
+        sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+        source_wheel_sdist_equal: true
+      - path: semver/version.py
+        bytes: 26643
+        sha256: 8b75f6078c50de711b806185322eb909a6b50b3abd3676a32fe31840b1d12494
+        source_wheel_sdist_equal: true
+      package_equality_scope: Only these eight runtime package files, not whole wheel/sdist/repository equality
+        or a build reproducibility proof
+      normative_source: *id002
+    self_authored_scripts:
+    - filename: acquire_and_verify.py
+      authorship: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_fixed_research
+      bytes: 5467
+      sha256: 90798d22acecbd6a929f4ceef79b7e0ce09e3219cd40d1e0d40e69b2a819637a
+      content: "#!/usr/bin/env python3\n\"\"\"Acquire public fixed inputs, verify bytes, and write a bounded\
+        \ source manifest.\nNo full third-party source is embedded. A network-enabled environment with git\
+        \ is required.\n\"\"\"\nimport argparse,hashlib,json,os,subprocess,tarfile,urllib.request,zipfile\n\
+        from pathlib import Path\nSOURCE_URL='https://github.com/python-semver/python-semver.git'\nSOURCE_COMMIT='642d1bc8949d38cca7922df478d0f2c06513f99d'\n\
+        SOURCE_TREE='6fa097bdd78d2b3e6869b6ce79866d9699364939'\nSPEC_URL='https://github.com/semver/semver.git'\n\
+        SPEC_COMMIT='f99d5485190a47c0863949e7da810a5553e0ed4d'\nSPEC_BLOB='fb25b8ecba2dcd0e494ef6336d6180e05d82642d'\n\
+        SPEC_SHA='33ebae1a97845991d0b916f3295a88b499e2ec71a6c1fe84c12429077b19ce08'\nARTIFACTS=[\n('semver-3.1.0-py3-none-any.whl','https://files.pythonhosted.org/packages/be/02/bce7a1d70e9d0f6ea8623c16386138c251b5855af6cd3a11433d3fba4e66/semver-3.1.0-py3-none-any.whl',18783,'6e4998f8b4762acdfea85f9bfd5b4032e0bb50038dc04bf82011b42d5d1145c5'),\n\
+        ('semver-3.1.0.tar.gz','https://files.pythonhosted.org/packages/92/f5/e1dfe8e1d91c54ce212fd93916eb01fd1c590f413be0a0978c39a97aa1bb/semver-3.1.0.tar.gz',304162,'14bc073439513d7773662a338f4db9829cf16c12b74b9568e2d2689975fbd7fc')]\n\
+        def git(root,*args):return subprocess.check_output(['git','-C',str(root),*args])\ndef digest(data):return\
+        \ hashlib.sha256(data).hexdigest()\ndef get(url):return urllib.request.urlopen(url,timeout=60).read()\n\
+        def checkout(root,url,commit):\n    if not root.exists():subprocess.run(['git','clone',url,str(root)],check=True)\n\
+        \    assert git(root,'remote','get-url','origin').decode().strip()==url\n    if git(root,'status','--porcelain','--untracked-files=no').strip():raise\
+        \ RuntimeError('tracked source tree is modified')\n    subprocess.run(['git','-C',str(root),'checkout','--detach',commit],check=True)\n\
+        \    assert git(root,'rev-parse','HEAD').decode().strip()==commit\n    assert git(root,'rev-parse','--is-shallow-repository').decode().strip()=='false'\n\
+        def main():\n    p=argparse.ArgumentParser();p.add_argument('--root',required=True);p.add_argument('--clock-observed-before-run',required=True);a=p.parse_args();root=Path(a.root).resolve();root.mkdir(parents=True,exist_ok=True)\n\
+        \    source=root/'source';spec=root/'specification';checkout(source,SOURCE_URL,SOURCE_COMMIT);checkout(spec,SPEC_URL,SPEC_COMMIT)\n\
+        \    assert git(source,'rev-parse','HEAD^{tree}').decode().strip()==SOURCE_TREE\n    metadata=root/'pypi-release.json'\n\
+        \    if not metadata.exists():metadata.write_bytes(get('https://pypi.org/pypi/semver/3.1.0/json'))\n\
+        \    release=json.loads(metadata.read_bytes());assert release['info']['version']=='3.1.0'\n    artifacts=[]\n\
+        \    for name,url,size,sha in ARTIFACTS:\n        path=root/name\n        if not path.exists():path.write_bytes(get(url))\n\
+        \        data=path.read_bytes();assert len(data)==size and digest(data)==sha\n        record=next(x\
+        \ for x in release['urls'] if x['filename']==name)\n        assert record['url']==url and record['size']==size\
+        \ and record['digests']['sha256']==sha\n        artifacts.append(dict(filename=name,url=url,bytes=size,sha256=sha,upload_time=record['upload_time_iso_8601']))\n\
+        \    blobs=[]\n    for item in git(source,'ls-tree','-r','-z','HEAD').split(b'\\0'):\n        if not\
+        \ item:continue\n        pre,path=item.split(b'\\t',1);mode,kind,blob=pre.decode().split();path=path.decode();assert\
+        \ kind=='blob'\n        data=git(source,'cat-file','blob',blob);local=source/path\n        if mode=='120000':local_data=os.readlink(local).encode()\n\
+        \        else:local_data=local.read_bytes()\n        assert data==local_data\n        record=dict(path=path,mode=mode,blob=blob,bytes=len(data),sha256=digest(data))\n\
+        \        if mode=='120000':record.update(symlink_target=data.decode(),resolved_content_sha256=digest(local.read_bytes()))\n\
+        \        blobs.append(record)\n    assert len(blobs)==114 and sum(x['mode']=='120000' for x in blobs)==2\n\
+        \    package=[]\n    with zipfile.ZipFile(root/ARTIFACTS[0][0]) as whl,tarfile.open(root/ARTIFACTS[1][0])\
+        \ as sdist:\n        for path in sorted((source/'src/semver').iterdir()):\n            if not path.is_file():continue\n\
+        \            rel=path.name; data=path.read_bytes();w=whl.read('semver/'+rel);s=sdist.extractfile('semver-3.1.0/src/semver/'+rel).read();assert\
+        \ data==w==s\n            package.append(dict(path='semver/'+rel,bytes=len(data),sha256=digest(data),source_wheel_sdist_equal=True))\n\
+        \    assert len(package)==8\n    data=(spec/'semver.md').read_bytes();assert digest(data)==SPEC_SHA\
+        \ and git(spec,'rev-parse','HEAD:semver.md').decode().strip()==SPEC_BLOB\n    output=dict(clock_observed_before_run=a.clock_observed_before_run,clock_note='Caller-supplied\
+        \ trusted-clock boundary before this run; not exact acquisition or verification completion time',source_repository=SOURCE_URL,source_commit=SOURCE_COMMIT,source_tree=SOURCE_TREE,source_blob_count=len(blobs),source_symlink_count=2,source_blobs=blobs,pypi_metadata_sha256=digest(metadata.read_bytes()),release_artifacts=artifacts,runtime_package_files=package,package_equality_scope='Only\
+        \ these eight runtime package files, not whole wheel/sdist/repository equality or a build reproducibility\
+        \ proof',normative_source=dict(repository=SPEC_URL,commit=SPEC_COMMIT,path='semver.md',blob=SPEC_BLOB,sha256=SPEC_SHA,bytes=len(data)))\n\
+        \    (root/'capture-manifest.json').write_text(json.dumps(output,indent=2)+'\\n');print(json.dumps({k:output[k]\
+        \ for k in ['source_commit','source_tree','source_blob_count','source_symlink_count','normative_source']}))\n\
+        if __name__=='__main__':main()\n"
+    - filename: runtime_probes.py
+      authorship: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_fixed_research
+      bytes: 6863
+      sha256: 98a7a98653df1a59f757c1be5e1df03ad72e1113891202fb14b3c9ff38ce36c5
+      content: "#!/usr/bin/env python3\n\"\"\"Finite author probes for fixed semver 3.1.0; not a conformance\
+        \ suite.\"\"\"\nimport argparse,hashlib,importlib.util,json,platform,sys\nfrom pathlib import Path\n\
+        import semver\nfrom semver import Version as V\nfrom semver import version as module\n\ndef observe(fn):\n\
+        \    try: return {'value':fn()}\n    except Exception as e: return {'exception':type(e).__name__}\n\
+        \ndef main():\n    parser=argparse.ArgumentParser();parser.add_argument('--out',required=True);args=parser.parse_args()\n\
+        \    cases=[]\n    def case(name,fn,want,kind='finite'):\n        got=observe(fn);expected=want if\
+        \ isinstance(want,dict) else {'value':want}\n        cases.append(dict(name=name,kind=kind,expected=expected,observed=got,passed=got==expected))\n\
+        \    def err(name,fn,kind='ValueError'):case(name,fn,{'exception':kind})\n    case('release version',lambda:semver.__version__,'3.1.0')\n\
+        \    case('native absent actual import',lambda:module._native_parse_parts is None,True)\n    valid=['0.0.0','1.2.3','1.2.3-alpha','1.2.3-alpha.1','1.2.3-0','1.2.3-x-y.0','1.2.3+001','1.2.3-alpha.1+build.007']\n\
+        \    for s in valid:case('strict accepted '+s,lambda s=s:str(V.parse(s)),s)\n    invalid=['1','1.2','01.2.3','1.02.3','1.2.03','1.2.3-01','1.2.3-alpha..1','1.2.3+','1.2.3+ab_1','v1.2.3','\
+        \ 1.2.3','1.2.3\\n','1\\u0662.2.3','1.2.3-\\u0661alpha','1.2.3-']\n    for s in invalid:err('strict\
+        \ rejected '+repr(s),lambda s=s:V.parse(s))\n    case('ASCII bytes accepted',lambda:str(V.parse(b'1.2.3')),'1.2.3')\n\
+        \    err('invalid UTF8 bytes parse',lambda:V.parse(b'\\xff'),'UnicodeDecodeError')\n    case('is_valid\
+        \ invalid UTF8 is False via ValueError subclass',lambda:V.is_valid(b'\\xff'),False)\n    for x in [None,123,1.2,True,[],{}]:err('is_valid\
+        \ unsupported type '+type(x).__name__,lambda x=x:V.is_valid(x),'TypeError')\n    case('optional minor\
+        \ patch fills zero',lambda:str(V.parse('1',optional_minor_and_patch=True)),'1.0.0')\n    case('optional\
+        \ patch fills zero',lambda:str(V.parse('1.2',optional_minor_and_patch=True)),'1.2.0')\n    case('constructor\
+        \ coerces strings floats booleans',lambda:V('01',2.9,True).to_tuple(),(1,2,1,None,None))\n    case('constructor\
+        \ permits invalid prerelease',lambda:str(V(1,2,3,'01')),'1.2.3-01')\n    case('constructor permits\
+        \ invalid build',lambda:str(V(1,2,3,build='!')),'1.2.3+!')\n    case('constructor invalid output fails\
+        \ strict parser',lambda:V.is_valid(str(V(1,2,3,'01'))),False)\n    case('constructor negative fractional\
+        \ truncated to zero',lambda:V(-0.5).major,0)\n    err('constructor negative integer rejected',lambda:V(-1))\n\
+        \    a,b=V(1,2,3,'01'),V(1,2,3,'1')\n    case('invalid constructed numeric prerelease compares equal',lambda:a==b,True)\n\
+        \    case('invalid constructed equal witness differing hashes',lambda:hash(a)!=hash(b),True)\n    a2,b2=V(1,2,3,''),V(1,2,3,None)\n\
+        \    case('empty constructed prerelease compares as release',lambda:a2==b2,True)\n    case('empty constructed\
+        \ prerelease hash differs from None witness',lambda:hash(a2)!=hash(b2),True)\n    a,b=V.parse('1.2.3+one'),V.parse('1.2.3+two')\n\
+        \    case('valid build variants equal precedence',lambda:a.compare(b),0)\n    case('valid build variants\
+        \ equality',lambda:a==b,True)\n    case('valid build variants equal hash',lambda:hash(a)==hash(b),True)\n\
+        \    case('valid build variants lexical identity distinct',lambda:str(a)!=str(b),True)\n    ordered=['1.0.0-alpha','1.0.0-alpha.1','1.0.0-alpha.beta','1.0.0-beta','1.0.0-beta.2','1.0.0-beta.11','1.0.0-rc.1','1.0.0']\n\
+        \    case('SemVer precedence example chain',lambda:all(V.parse(a)<V.parse(b) for a,b in zip(ordered,ordered[1:])),True)\n\
+        \    for expr,want in [('>1.2.2',True),('<1.2.4',True),('>=1.2.3',True),('<=1.2.3',True),('==1.2.3',True),('!=1.2.4',True),('1.2.3',True),('1.2.4',False)]:case('single\
+        \ match '+expr,lambda expr=expr:V.parse('1.2.3').match(expr),want)\n    for expr in ['=1.2.3','^1.2.3','~1.2.3','1.2.x','>=1.0.0\
+        \ <2.0.0','1.0.0 || 2.0.0','*',' >=1.2.3']:err('non-supported match '+expr,lambda expr=expr:V.parse('1.2.3').match(expr))\n\
+        \    for aa,bb,want in [('1.0.9','1.1.0',True),('1.1.0','1.0.9',False),('1.2.9','1.2.0',True),('0.1.0','0.1.1',False),('0.1.0+one','0.1.0+two',True),('1.0.0-rc.1','1.0.0-rc.2',False),('1.0.0','2.0.0',False)]:case('compatibility\
+        \ fields '+aa+' -> '+bb,lambda aa=aa,bb=bb:V.parse(aa).is_compatible(V.parse(bb)),want)\n    err('compatibility\
+        \ string operand rejected',lambda:V(1).is_compatible('1.0.0'),'TypeError')\n    case('invalid comparison\
+        \ operand equals False',lambda:V(1,2,3)=={},False)\n    err('invalid comparison operand ordering TypeError',lambda:V(1,2,3)>{},'TypeError')\n\
+        \    case('valid tuple comparison coerces float',lambda:V(1,2,3)==(1.9,2,3),True)\n    limit=sys.get_int_max_str_digits()\n\
+        \    if limit:\n        huge='1'*(limit+1)\n        err('runtime decimal core conversion limit',lambda:V.parse(huge+'.0.0'))\n\
+        \        case('is_valid core conversion limit returns False',lambda:V.is_valid(huge+'.0.0'),False)\n\
+        \        case('huge numeric prerelease accepted before comparison',lambda:V.parse('1.0.0-'+huge).prerelease==huge,True)\n\
+        \        err('huge numeric prerelease comparison conversion limit',lambda:V.parse('1.0.0-'+huge).compare('1.0.0-1'))\n\
+        \    # These substitutes instrument Python dispatch only. No native backend executed.\n    original=module._native_parse_parts;calls=[]\n\
+        \    try:\n        def success(v):calls.append(v);return (9,8,7,None,None)\n        module._native_parse_parts=success\n\
+        \        case('instrumented strict parse invokes hook',lambda:str(V.parse('1.2.3')),'9.8.7','instrumented-control-flow')\n\
+        \        case('instrumented optional parse bypasses hook',lambda:str(V.parse('1',optional_minor_and_patch=True)),'1.0.0','instrumented-control-flow')\n\
+        \        case('instrumented hook call sequence',lambda:calls,['1.2.3'],'instrumented-control-flow')\n\
+        \        def fallback(v):raise ValueError('synthetic')\n        module._native_parse_parts=fallback\n\
+        \        case('instrumented ValueError falls back',lambda:str(V.parse('1.2.3')),'1.2.3','instrumented-control-flow')\n\
+        \        def no_fallback(v):raise TypeError('synthetic')\n        module._native_parse_parts=no_fallback\n\
+        \        case('instrumented TypeError propagates',lambda:V.parse('1.2.3'),{'exception':'TypeError'},'instrumented-control-flow')\n\
+        \    finally:module._native_parse_parts=original\n    out=dict(artifact='finite author runtime probes;\
+        \ not conformance proof',python=sys.version,platform=platform.platform(),semver_path=semver.__file__,native_spec_present=importlib.util.find_spec('fast_semver_rs_backend')\
+        \ is not None,int_max_str_digits=limit,cases=cases,total=len(cases),passed=sum(x['passed'] for x in\
+        \ cases),failed=sum(not x['passed'] for x in cases))\n    Path(args.out).write_text(json.dumps(out,indent=2,ensure_ascii=False)+'\\\
+        n')\n    print(json.dumps({k:out[k] for k in ['semver_path','native_spec_present','int_max_str_digits','total','passed','failed']}))\n\
+        \    raise SystemExit(bool(out['failed']))\nif __name__=='__main__':main()\n"
+    - filename: run_upstream.py
+      authorship: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_fixed_research
+      bytes: 1393
+      sha256: fa6789e628b095823b8eb2272965740d3c5f37952b62d8d4c957cfc0f6334fd6
+      content: '#!/usr/bin/env python3
+
+        """Run the unmodified fixed upstream pytest suite against source or installed wheel.
+
+        The wheel mode changes only pytest pythonpath from ''src tests'' to ''tests'', so imports
+
+        resolve the wheel. Both modes retain upstream doctests and the rest of .pytest.ini.
+
+        No test adapter, skip injection, native substitution or source patch is used here.
+
+        """
+
+        import argparse,json,os,subprocess,sys
+
+        from pathlib import Path
+
+        p=argparse.ArgumentParser();p.add_argument(''--root'',required=True);p.add_argument(''--python'',required=True);p.add_argument(''--mode'',choices=[''source'',''wheel''],required=True);a=p.parse_args()
+
+        root=Path(a.root).resolve();python=os.path.abspath(a.python);stem=root/(''upstream-''+a.mode)
+
+        command=[python,''-m'',''pytest'',''-q'',''--junitxml=''+str(stem)+''.xml'']
+
+        if a.mode==''wheel'':command += [''-o'',''pythonpath=tests'']
+
+        env=os.environ.copy();env.pop(''PYTHONPATH'',None);env[''PYTHONHASHSEED'']=''0''
+
+        result=subprocess.run(command,cwd=root/''source'',env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT,text=True)
+
+        Path(str(stem)+''.log'').write_text(result.stdout);Path(str(stem)+''.exit'').write_text(str(result.returncode)+''\n'');Path(str(stem)+''.command.json'').write_text(json.dumps({''command'':command,''cwd'':str(root/''source''),''PYTHONPATH'':''unset'',''PYTHONHASHSEED'':''0'',''adapter'':''none'',''source_modified'':False},indent=2)+''\n'')
+
+        print(result.stdout);raise SystemExit(result.returncode)
+
+        '
+    - filename: reproduce.py
+      authorship: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_fixed_research
+      bytes: 1540
+      sha256: 974f211e2b9adff27c6e4849db4e625b1dbec38993738390b8c4c8bd4269a263
+      content: "#!/usr/bin/env python3\n\"\"\"Self-authored fresh reproduction driver. Requires Git and network\
+        \ package access.\nPass a new isolated --root and a trusted-clock --clock-observed-before-run. Never\
+        \ runs browser/native\nbackend, never modifies IA, and never publishes. Package installs remain in\
+        \ that root.\n\"\"\"\nimport argparse,os,subprocess,sys,venv\nfrom pathlib import Path\np=argparse.ArgumentParser();p.add_argument('--root',required=True);p.add_argument('--clock-observed-before-run',required=True);a=p.parse_args()\n\
+        scripts=Path(__file__).absolute().parent;root=Path(a.root).absolute();root.mkdir(parents=True,exist_ok=True)\n\
+        subprocess.run([sys.executable,str(scripts/'acquire_and_verify.py'),'--root',str(root),'--clock-observed-before-run',a.clock_observed_before_run],check=True)\n\
+        envpath=root/'venv';venv.EnvBuilder(with_pip=True).create(envpath);python=str(envpath/'bin/python')\n\
+        subprocess.run([python,'-m','pip','install','--no-cache-dir','-r',str(scripts/'harness-requirements.lock.txt')],check=True)\n\
+        subprocess.run([python,'-m','pip','install','--no-deps',str(root/'semver-3.1.0-py3-none-any.whl')],check=True)\n\
+        for mode in ['source','wheel']:\n    env=os.environ.copy();env['PYTHONHASHSEED']='0';env.pop('PYTHONPATH',None)\n\
+        \    if mode=='source':env['PYTHONPATH']=str(root/'source/src')\n    subprocess.run([python,str(scripts/'runtime_probes.py'),'--out',str(root/('probes-'+mode+'.json'))],cwd=root,env=env,check=True)\n\
+        \    subprocess.run([python,str(scripts/'run_upstream.py'),'--root',str(root),'--python',python,'--mode',mode],check=True)\n"
+    - filename: author_boundary_probe.py
+      authorship: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+      bytes: 4464
+      sha256: 1333b36c7032b72f8ebeec2c5258273122bd2ed8dd43e53d6a9ffd8addbb6f6a
+      content: "#!/usr/bin/env python3\n\"\"\"Self-authored finite observations; one explicit source directory\
+        \ or wheel only.\"\"\"\nimport datetime, hashlib, importlib, json, pathlib, sys\npath = pathlib.Path(sys.argv[1]).resolve()\n\
+        sys.path.insert(0, str(path))\nimport semver\nfrom semver import Version as V\nmod = importlib.import_module('semver.version')\n\
+        records = []\ndef record(label, actual, expected):\n    assert actual == expected, (label, actual,\
+        \ expected)\n    records.append({'id':label,'actual':actual,'expected':expected,'passed':True})\ndef\
+        \ exc(fn):\n    try: return {'returned':str(fn())}\n    except Exception as e: return {'exception':type(e).__name__}\n\
+        record('release_version',semver.__version__,'3.1.0')\nrecord('actual_native_absent',mod._native_parse_parts\
+        \ is None,True)\nrecord('strict_parse_fields',V.parse('1.2.3-rc.1+build.09').to_dict(),{'major':1,'minor':2,'patch':3,'prerelease':'rc.1','build':'build.09'})\n\
+        for x in ['1','1.2','01.2.3','1.2.3-01','1.2.3-a..b','1.2.3+','1.2.3\\n','１.2.3',' 1.2.3']:\n    record('strict_reject_'+repr(x),exc(lambda\
+        \ x=x:V.parse(x)),{'exception':'ValueError'})\nrecord('optional_parse_extension',str(V.parse('1.2',optional_minor_and_patch=True)),'1.2.0')\n\
+        record('constructor_coerces_core',str(V(1.9,True,'03')),'1.1.3')\nrecord('constructor_invalid_prerelease',str(V(1,2,3,'01')),'1.2.3-01')\n\
+        record('constructed_string_strict_rejected',V.is_valid(str(V(1,2,3,'01'))),False)\na,b=V(1,2,3,'01'),V(1,2,3,'1')\n\
+        record('invalid_constructed_equal',a==b,True)\nrecords.append({'id':'invalid_constructed_hash_observation','actual':{'left_hash':hash(a),'right_hash':hash(b),'same_hash':hash(a)==hash(b),'set_size':len({a,b})},'scope':'One\
+        \ observed Python process; invalid constructed prerelease, not valid-string guarantee.'})\na,b=V.parse('1.2.3+a'),V.parse('1.2.3+b')\n\
+        record('valid_build_equal_precedence',a.compare(b),0)\nrecord('valid_build_equal_hash',hash(a)==hash(b),True)\n\
+        record('valid_build_not_lexical_identity',str(a)==str(b),False)\nchain=['1.0.0-alpha','1.0.0-alpha.1','1.0.0-alpha.beta','1.0.0-beta','1.0.0-beta.2','1.0.0-beta.11','1.0.0-rc.1','1.0.0']\n\
+        record('finite_spec_precedence_chain',all(V.parse(x)<V.parse(y) for x,y in zip(chain,chain[1:])),True)\n\
+        for expr,expected in [('1.2.3',True),('==1.2.3',True),('!=1.2.4',True),('>1.2.2',True),('>=1.2.3',True),('<1.2.4',True),('<=1.2.3',True)]:\n\
+        \    record('single_operator_'+expr,V.parse('1.2.3').match(expr),expected)\nfor x in ['=1.2.3','^1.2.3','~1.2.3','1.2.x','>=1.0.0\
+        \ <2.0.0','1.2.3 || 2.0.0']:\n    record('not_range_'+x,exc(lambda x=x:V.parse('1.2.3').match(x)),{'exception':'ValueError'})\n\
+        record('is_valid_wrong_type',exc(lambda:V.is_valid(None)),{'exception':'TypeError'})\nrecord('invalid_utf8_is_valid',V.is_valid(b'\\\
+        xff'),False)\nrecord('decode_invalid_utf8_parse',exc(lambda:V.parse(b'\\xff')),{'exception':'UnicodeDecodeError'})\n\
+        record('compatible_forward_minor',V.parse('1.2.9').is_compatible(V.parse('1.3.0')),True)\nrecord('compatible_reverse_minor',V.parse('1.3.0').is_compatible(V.parse('1.2.9')),False)\n\
+        record('compatible_majorzero_otherpatch',V.parse('0.2.1').is_compatible(V.parse('0.2.2')),False)\n\
+        record('compatible_ignores_patch',V.parse('1.2.9').is_compatible(V.parse('1.2.0')),True)\nrecord('compatible_wrong_type',exc(lambda:V.parse('1.2.3').is_compatible('1.2.3')),{'exception':'TypeError'})\n\
+        record('parse_beyond_64bit',str(V.parse(str(2**70)+'.0.0')),str(2**70)+'.0.0')\nlimit=sys.get_int_max_str_digits()\n\
+        if limit>0:\n    s='9'*(limit+1)+'.0.0'\n    record('python_integer_limit_parse',exc(lambda:V.parse(s)),{'exception':'ValueError'})\n\
+        \    record('python_integer_limit_is_valid',V.is_valid(s),False)\n    huge=V.parse('1.0.0-'+('9'*(limit+1)))\n\
+        \    record('large_numeric_prerelease_parse',huge.prerelease == '9'*(limit+1),True)\n    record('large_numeric_prerelease_compare',exc(lambda:huge.compare('1.0.0-1')),{'exception':'ValueError'})\n\
+        print(json.dumps({'executed_at':datetime.datetime.now(datetime.timezone.utc).isoformat(),'python':sys.version,'sys_path_input':str(path),'semver_file':semver.__file__,'native_backend':None,'int_max_str_digits':limit,'finite_assertions':sum(r.get('passed',False)\
+        \ for r in records),'records':records,'limitations':['Finite author observations and research/upstream\
+        \ tests overlap, not additive coverage.','No optional native backend executed, no equivalence/performance/security/conformance/API\
+        \ compatibility guarantee.','No package install/build/CLI/platform matrix or attestation test by this\
+        \ harness.']},ensure_ascii=False,indent=2))\n"
+    portable_dependency_lock:
+      filename: harness-requirements.lock.txt
+      content: 'coverage==7.17.0
+
+        iniconfig==2.3.1
+
+        packaging==26.3
+
+        pluggy==1.7.0
+
+        Pygments==2.21.0
+
+        pytest==9.1.1
+
+        pytest-cov==7.1.0
+
+        setuptools==84.2.1
+
+        setuptools-scm==10.3.4
+
+        vcs-versioning==2.6.0
+
+        '
+      sha256: 38c8c5530f5b31390de9ef5d0750b5de6178568ab494c888b08cbd9337999de2
+    instructions:
+    - Extract self_authored_scripts content to UTF-8 files named filename, and portable_dependency_lock.content
+      to harness-requirements.lock.txt in the same directory. No third-party source/test text is embedded.
+    - With Git/network access and Python 3.12.14, run python reproduce.py --root ./inputs --clock-observed-before-run
+      <actual observed UTC before invoking>. This clock is explicitly not completion time. The driver fetches
+      fixed public sources/artifacts, verifies hashes, creates isolated test venv, installs the fixed wheel
+      and pinned test dependencies without native extra, and runs source/wheel probes/upstream.
+    - No semver build. Source mode retains .pytest.ini; wheel mode changes only pytest pythonpath=tests. Use
+      the actual venv/bin/python path without resolving symlinks to the base interpreter.
+    - Run python -I -S author_boundary_probe.py <inputs/semver-3.1.0-py3-none-any.whl>, and again with <inputs/source/src>.
+      Preserve raw outputs; randomized hash values and absolute paths are not raw-byte equivalence claims.
+    - Public package SHA equality and eight-file runtime parity are not whole-package/build/signature/attestation
+      guarantees. Test dependency versions are pinned but their wheel bytes/build provenance are not authenticated
+      here.
+    recorded_author_report:
+      status: PASS author self-check only
+      author: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+      completed_at: '2026-10-30T05:24:52.412106+00:00'
+      fixed_source: 642d1bc8949d38cca7922df478d0f2c06513f99d
+      baseline: 592b7e85abdd8c5faaba1728af7060d83105b020
+      reconstruction: Portable final scripts freshly acquired fixed public Git/PyPI/spec artifacts into replay-final;
+        isolated venv; source/wheel87 and upstream416/1 personally executed.
+      results:
+        source:
+          research_probe_cases: 87
+          instrumented_control_flow: 5
+          actual_native_absent: true
+          upstream_total: 417
+          upstream_pass: 416
+          upstream_skip: 1
+          upstream_fail: 0
+          author_finite_assertions: 47
+          author_invalid_hash_observations: 1
+          upstream_command:
+            command:
+            - /workspace/shared/ia-semver-author-20261030-0514/replay-final/venv/bin/python
+            - -m
+            - pytest
+            - -q
+            - --junitxml=/workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-source.xml
+            cwd: /workspace/shared/ia-semver-author-20261030-0514/replay-final/source
+            PYTHONPATH: unset
+            PYTHONHASHSEED: '0'
+            adapter: none
+            source_modified: false
+          boundary_input: /workspace/shared/ia-semver-author-20261030-0514/replay-final/source/src
+        wheel:
+          research_probe_cases: 87
+          instrumented_control_flow: 5
+          actual_native_absent: true
+          upstream_total: 417
+          upstream_pass: 416
+          upstream_skip: 1
+          upstream_fail: 0
+          author_finite_assertions: 47
+          author_invalid_hash_observations: 1
+          upstream_command:
+            command:
+            - /workspace/shared/ia-semver-author-20261030-0514/replay-final/venv/bin/python
+            - -m
+            - pytest
+            - -q
+            - --junitxml=/workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-wheel.xml
+            - -o
+            - pythonpath=tests
+            cwd: /workspace/shared/ia-semver-author-20261030-0514/replay-final/source
+            PYTHONPATH: unset
+            PYTHONHASHSEED: '0'
+            adapter: none
+            source_modified: false
+          boundary_input: /workspace/shared/ia-semver-author-20261030-0514/replay-final/semver-3.1.0-py3-none-any.whl
+      no_tracked_upstream_changes: true
+      boundary_assertion_results_equal: true
+      raw_outputs_byte_equal_not_claimed: Paths, timestamps and randomized raw hash values vary; compared only
+        explicit assertion records, with raw hash/set observations preserved.
+      prior_errors:
+      - Earlier upstream invocation ran in research source cwd despite own clone; then reran in own clone and
+        final replay-final. Only untracked pytest cache/coverage may have changed.
+      - Initial author acquisition used old misleading pre-run verified_at label; preserved, not completion
+        evidence; final replay uses clock_observed_before_run.
+      - 05:20 build_proposal write failed transport; 05:21 readback confirmed file absent, then one fresh write.
+        No candidate/event/F/H had been created.
+      scope: Not independent review, full conformance, native implementation test, API-compatibility proof
+        or additive coverage.
+      artifacts:
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final.log
+        bytes: 9177
+        sha256: 9c7bcc68631babaece5243ca6e526d5c4780070dd4400e94f04b8c416bb0e2f7
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final.exit
+        bytes: 2
+        sha256: 9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa
+      - path: /workspace/shared/ia-semver-author-20261030-0514/author_boundary_probe.py
+        bytes: 4464
+        sha256: 1333b36c7032b72f8ebeec2c5258273122bd2ed8dd43e53d6a9ffd8addbb6f6a
+      - path: /workspace/shared/ia-semver-author-20261030-0514/author-boundary-source.json
+        bytes: 8603
+        sha256: c3ea2e4a062d45238096efa809ee13c6af77948f85b5a268e44c87a652861e43
+      - path: /workspace/shared/ia-semver-author-20261030-0514/author-boundary-wheel.json
+        bytes: 8639
+        sha256: cabae9b4eb73e25bbe19c815b61e0cf269b00bcef9eb8c9a411effe59ae3315d
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/capture-manifest.json
+        bytes: 31328
+        sha256: 630cef754647968afebc1098992c9dad2cab535842955c728f1cae11319da6da
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-source.xml
+        bytes: 51368
+        sha256: e7a60f34abf836b8f340e1a74990f1070b2cd110dac90627beb5f2c188f1188e
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-source.log
+        bytes: 1397
+        sha256: 9175ac51502331e0444c2444e13ed7e3aa0dece57f397e1c81c2ccd36182f4f0
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-source.command.json
+        bytes: 421
+        sha256: d75f7635f114ed1ff716f6bc6beed84ffbe2e2f0341af292557051cd6a5845ed
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/probes-source.json
+        bytes: 20035
+        sha256: 2035b83e4fea956be33085d0ca56b0bfb620aeeae80d79dd8a0bfd2aaca8ae00
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-wheel.xml
+        bytes: 51368
+        sha256: 33e78bcd9c89dfcd96d31ce7a80ee30eb7a83eef9d11e5d9000ca057d02acd18
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-wheel.log
+        bytes: 2409
+        sha256: 20ab9f12171188f0a9b969e9d8f56374497ff852dc641934360c0970d76222af
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/upstream-wheel.command.json
+        bytes: 454
+        sha256: a96e2c048c3c04194b96e5e464bc15da7522f05e41d2ad0054ab83588eb00ee5
+      - path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/probes-wheel.json
+        bytes: 20058
+        sha256: f452edda551b36a302bb1131fccd795a021315410d4c12ebf631ceec6b21693e
+    recorded_author_wheel_observations:
+      executed_at: '2026-10-30T05:24:52.313230+00:00'
+      python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+      sys_path_input: /workspace/shared/ia-semver-author-20261030-0514/replay-final/semver-3.1.0-py3-none-any.whl
+      semver_file: /workspace/shared/ia-semver-author-20261030-0514/replay-final/semver-3.1.0-py3-none-any.whl/semver/__init__.py
+      native_backend: null
+      int_max_str_digits: 4300
+      finite_assertions: 47
+      records:
+      - id: release_version
+        actual: 3.1.0
+        expected: 3.1.0
+        passed: true
+      - id: actual_native_absent
+        actual: true
+        expected: true
+        passed: true
+      - id: strict_parse_fields
+        actual:
+          major: 1
+          minor: 2
+          patch: 3
+          prerelease: rc.1
+          build: build.09
+        expected:
+          major: 1
+          minor: 2
+          patch: 3
+          prerelease: rc.1
+          build: build.09
+        passed: true
+      - id: strict_reject_'1'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'1.2'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'01.2.3'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'1.2.3-01'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'1.2.3-a..b'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'1.2.3+'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'1.2.3\n'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_'１.2.3'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: strict_reject_' 1.2.3'
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: optional_parse_extension
+        actual: 1.2.0
+        expected: 1.2.0
+        passed: true
+      - id: constructor_coerces_core
+        actual: 1.1.3
+        expected: 1.1.3
+        passed: true
+      - id: constructor_invalid_prerelease
+        actual: 1.2.3-01
+        expected: 1.2.3-01
+        passed: true
+      - id: constructed_string_strict_rejected
+        actual: false
+        expected: false
+        passed: true
+      - id: invalid_constructed_equal
+        actual: true
+        expected: true
+        passed: true
+      - id: invalid_constructed_hash_observation
+        actual:
+          left_hash: 2915048169716607265
+          right_hash: 7875040993693212602
+          same_hash: false
+          set_size: 2
+        scope: One observed Python process; invalid constructed prerelease, not valid-string guarantee.
+      - id: valid_build_equal_precedence
+        actual: 0
+        expected: 0
+        passed: true
+      - id: valid_build_equal_hash
+        actual: true
+        expected: true
+        passed: true
+      - id: valid_build_not_lexical_identity
+        actual: false
+        expected: false
+        passed: true
+      - id: finite_spec_precedence_chain
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_1.2.3
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_==1.2.3
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_!=1.2.4
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_>1.2.2
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_>=1.2.3
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_<1.2.4
+        actual: true
+        expected: true
+        passed: true
+      - id: single_operator_<=1.2.3
+        actual: true
+        expected: true
+        passed: true
+      - id: not_range_=1.2.3
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: not_range_^1.2.3
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: not_range_~1.2.3
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: not_range_1.2.x
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: not_range_>=1.0.0 <2.0.0
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: not_range_1.2.3 || 2.0.0
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: is_valid_wrong_type
+        actual:
+          exception: TypeError
+        expected:
+          exception: TypeError
+        passed: true
+      - id: invalid_utf8_is_valid
+        actual: false
+        expected: false
+        passed: true
+      - id: decode_invalid_utf8_parse
+        actual:
+          exception: UnicodeDecodeError
+        expected:
+          exception: UnicodeDecodeError
+        passed: true
+      - id: compatible_forward_minor
+        actual: true
+        expected: true
+        passed: true
+      - id: compatible_reverse_minor
+        actual: false
+        expected: false
+        passed: true
+      - id: compatible_majorzero_otherpatch
+        actual: false
+        expected: false
+        passed: true
+      - id: compatible_ignores_patch
+        actual: true
+        expected: true
+        passed: true
+      - id: compatible_wrong_type
+        actual:
+          exception: TypeError
+        expected:
+          exception: TypeError
+        passed: true
+      - id: parse_beyond_64bit
+        actual: 1180591620717411303424.0.0
+        expected: 1180591620717411303424.0.0
+        passed: true
+      - id: python_integer_limit_parse
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      - id: python_integer_limit_is_valid
+        actual: false
+        expected: false
+        passed: true
+      - id: large_numeric_prerelease_parse
+        actual: true
+        expected: true
+        passed: true
+      - id: large_numeric_prerelease_compare
+        actual:
+          exception: ValueError
+        expected:
+          exception: ValueError
+        passed: true
+      limitations:
+      - Finite author observations and research/upstream tests overlap, not additive coverage.
+      - No optional native backend executed, no equivalence/performance/security/conformance/API compatibility
+        guarantee.
+      - No package install/build/CLI/platform matrix or attestation test by this harness.
+    recorded_research_wheel_probes:
+      artifact: finite author runtime probes; not conformance proof
+      python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+      platform: Linux-6.18.57-x86_64-with-glibc2.41
+      semver_path: /workspace/shared/ia-semver-author-20261030-0514/replay-final/venv/lib/python3.12/site-packages/semver/__init__.py
+      native_spec_present: false
+      int_max_str_digits: 4300
+      cases:
+      - name: release version
+        kind: finite
+        expected:
+          value: 3.1.0
+        observed:
+          value: 3.1.0
+        passed: true
+      - name: native absent actual import
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: strict accepted 0.0.0
+        kind: finite
+        expected:
+          value: 0.0.0
+        observed:
+          value: 0.0.0
+        passed: true
+      - name: strict accepted 1.2.3
+        kind: finite
+        expected:
+          value: 1.2.3
+        observed:
+          value: 1.2.3
+        passed: true
+      - name: strict accepted 1.2.3-alpha
+        kind: finite
+        expected:
+          value: 1.2.3-alpha
+        observed:
+          value: 1.2.3-alpha
+        passed: true
+      - name: strict accepted 1.2.3-alpha.1
+        kind: finite
+        expected:
+          value: 1.2.3-alpha.1
+        observed:
+          value: 1.2.3-alpha.1
+        passed: true
+      - name: strict accepted 1.2.3-0
+        kind: finite
+        expected:
+          value: 1.2.3-0
+        observed:
+          value: 1.2.3-0
+        passed: true
+      - name: strict accepted 1.2.3-x-y.0
+        kind: finite
+        expected:
+          value: 1.2.3-x-y.0
+        observed:
+          value: 1.2.3-x-y.0
+        passed: true
+      - name: strict accepted 1.2.3+001
+        kind: finite
+        expected:
+          value: 1.2.3+001
+        observed:
+          value: 1.2.3+001
+        passed: true
+      - name: strict accepted 1.2.3-alpha.1+build.007
+        kind: finite
+        expected:
+          value: 1.2.3-alpha.1+build.007
+        observed:
+          value: 1.2.3-alpha.1+build.007
+        passed: true
+      - name: strict rejected '1'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '01.2.3'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.02.3'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.03'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3-01'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3-alpha..1'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3+'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3+ab_1'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected 'v1.2.3'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected ' 1.2.3'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3\n'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1٢.2.3'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3-١alpha'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: strict rejected '1.2.3-'
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: ASCII bytes accepted
+        kind: finite
+        expected:
+          value: 1.2.3
+        observed:
+          value: 1.2.3
+        passed: true
+      - name: invalid UTF8 bytes parse
+        kind: finite
+        expected:
+          exception: UnicodeDecodeError
+        observed:
+          exception: UnicodeDecodeError
+        passed: true
+      - name: is_valid invalid UTF8 is False via ValueError subclass
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: is_valid unsupported type NoneType
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: is_valid unsupported type int
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: is_valid unsupported type float
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: is_valid unsupported type bool
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: is_valid unsupported type list
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: is_valid unsupported type dict
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: optional minor patch fills zero
+        kind: finite
+        expected:
+          value: 1.0.0
+        observed:
+          value: 1.0.0
+        passed: true
+      - name: optional patch fills zero
+        kind: finite
+        expected:
+          value: 1.2.0
+        observed:
+          value: 1.2.0
+        passed: true
+      - name: constructor coerces strings floats booleans
+        kind: finite
+        expected:
+          value:
+          - 1
+          - 2
+          - 1
+          - null
+          - null
+        observed:
+          value:
+          - 1
+          - 2
+          - 1
+          - null
+          - null
+        passed: true
+      - name: constructor permits invalid prerelease
+        kind: finite
+        expected:
+          value: 1.2.3-01
+        observed:
+          value: 1.2.3-01
+        passed: true
+      - name: constructor permits invalid build
+        kind: finite
+        expected:
+          value: 1.2.3+!
+        observed:
+          value: 1.2.3+!
+        passed: true
+      - name: constructor invalid output fails strict parser
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: constructor negative fractional truncated to zero
+        kind: finite
+        expected:
+          value: 0
+        observed:
+          value: 0
+        passed: true
+      - name: constructor negative integer rejected
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: invalid constructed numeric prerelease compares equal
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: invalid constructed equal witness differing hashes
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: empty constructed prerelease compares as release
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: empty constructed prerelease hash differs from None witness
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: valid build variants equal precedence
+        kind: finite
+        expected:
+          value: 0
+        observed:
+          value: 0
+        passed: true
+      - name: valid build variants equality
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: valid build variants equal hash
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: valid build variants lexical identity distinct
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: SemVer precedence example chain
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match >1.2.2
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match <1.2.4
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match >=1.2.3
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match <=1.2.3
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match ==1.2.3
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match !=1.2.4
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match 1.2.3
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: single match 1.2.4
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: non-supported match =1.2.3
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match ^1.2.3
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match ~1.2.3
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match 1.2.x
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match >=1.0.0 <2.0.0
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match 1.0.0 || 2.0.0
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match *
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: non-supported match  >=1.2.3
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: compatibility fields 1.0.9 -> 1.1.0
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: compatibility fields 1.1.0 -> 1.0.9
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: compatibility fields 1.2.9 -> 1.2.0
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: compatibility fields 0.1.0 -> 0.1.1
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: compatibility fields 0.1.0+one -> 0.1.0+two
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: compatibility fields 1.0.0-rc.1 -> 1.0.0-rc.2
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: compatibility fields 1.0.0 -> 2.0.0
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: compatibility string operand rejected
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: invalid comparison operand equals False
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: invalid comparison operand ordering TypeError
+        kind: finite
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      - name: valid tuple comparison coerces float
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: runtime decimal core conversion limit
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: is_valid core conversion limit returns False
+        kind: finite
+        expected:
+          value: false
+        observed:
+          value: false
+        passed: true
+      - name: huge numeric prerelease accepted before comparison
+        kind: finite
+        expected:
+          value: true
+        observed:
+          value: true
+        passed: true
+      - name: huge numeric prerelease comparison conversion limit
+        kind: finite
+        expected:
+          exception: ValueError
+        observed:
+          exception: ValueError
+        passed: true
+      - name: instrumented strict parse invokes hook
+        kind: instrumented-control-flow
+        expected:
+          value: 9.8.7
+        observed:
+          value: 9.8.7
+        passed: true
+      - name: instrumented optional parse bypasses hook
+        kind: instrumented-control-flow
+        expected:
+          value: 1.0.0
+        observed:
+          value: 1.0.0
+        passed: true
+      - name: instrumented hook call sequence
+        kind: instrumented-control-flow
+        expected:
+          value:
+          - 1.2.3
+        observed:
+          value:
+          - 1.2.3
+        passed: true
+      - name: instrumented ValueError falls back
+        kind: instrumented-control-flow
+        expected:
+          value: 1.2.3
+        observed:
+          value: 1.2.3
+        passed: true
+      - name: instrumented TypeError propagates
+        kind: instrumented-control-flow
+        expected:
+          exception: TypeError
+        observed:
+          exception: TypeError
+        passed: true
+      total: 87
+      passed: 87
+      failed: 0
+    limits:
+    - No native backend execution; five synthetic-hook observations are only Python control-flow tests.
+    - Finite author/research/independent/upstream cases overlap, never additive coverage.
+    - Wrong normative repository lookup, initial venv-symlink runner error, earlier pre-run time-label error
+      and transient cloud transport failures remain disclosed; none counted as passes.
+  all_counts_overlap: true
+  roles:
+    researcher: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_fixed_research
+    candidate_author: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+    canonical_serializer: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+    preflight_reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
+    exact_semantic_reviewer: pending
+  corrections_and_recovery: 'Fresh reconstruction only. The previous Oct29-30 workspace was absent after recovery;
+    previous probe/checker/seal/preflight outcomes are UNKNOWN, not reused or declared passed.
+
+
+    Scope: Python package semver 3.1.0, repository python-semver/python-semver, fixed commit 642d1bc8949d38cca7922df478d0f2c06513f99d,
+    tree 6fa097bdd78d2b3e6869b6ce79866d9699364939. 114 Git blobs independently compared to checkout materialization,
+    including two symlink-target blobs. Capture manifest contains all hashes. Package artifacts match expected
+    released wheel/sdist SHA256 and length; only the eight src/semver runtime files were shown equal across
+    source, wheel and sdist. This is not whole-package equality, build reproducibility, signature verification,
+    provenance attestation or supply-chain proof.
+
+
+    Normative fixed source: semver/semver f99d5485190a47c0863949e7da810a5553e0ed4d, semver.md blob fb25b8ecba2dcd0e494ef6336d6180e05d82642d,
+    SHA256 33ebae1a97845991d0b916f3295a88b499e2ec71a6c1fe84c12429077b19ce08. This is SemVer 2.0.0 text, distinct
+    from Python library release 3.1.0. Initial wrong repository semver/semver.org clone succeeded but supplied
+    commit checkout failed (unable to read tree); retained normative/ is not used as evidence. Correct specification/
+    fixed bytes are verified.
+
+
+    Fresh environment: CPython 3.12.14 Linux, pytest9.1.1, pytest-cov7.1.0; complete dependency freeze and
+    portable harness-requirements.lock.txt retained. fast_semver_rs_backend absent. 87 author observations
+    pass against source and wheel separately (82 finite observations, 5 instrumented Python-hook dispatch cases;
+    these overlap each other and upstream cases, not additive coverage). No actual native execution.
+
+
+    Upstream source mode: unmodified upstream .pytest.ini, 416 passed / 1 skipped. Wheel mode: only pytest
+    pythonpath overridden from ''src tests'' to ''tests''; same unmodified tests/doctests, 416 passed / 1 skipped.
+    Wheel coverage path confirms installed wheel. Both skips are upstream optional-native availability test.
+    No custom test adapter/skip injection. Coverage displays 100% over configured measured lines; native dispatch
+    has pragma:no cover and is not covered by this figure. Not whole-platform, browser, complete standard conformance
+    or real package API compatibility proof.
+
+
+    Runner development failure: initial run_upstream.py used Path.resolve() on the venv Python symlink, wrongly
+    selecting the base interpreter and failed before pytest import (No module named pytest). Failure log/command
+    retained as runner-initial-symlink-error.*. Changed only the runner to preserve absolute venv path; subsequent
+    source/wheel runs passed. This failed attempt is not counted PASS. Initial dependency installation selected
+    pytest9.2.0; changed to upstream declared upper bound9.1.1 before test execution. No tracked upstream source/test
+    file was modified.
+
+
+    Evidence-backed bounded semantics:
+
+    - Version.parse default uses ASCII grammar and end-of-string anchor, rejects leading zeroes, incomplete
+    versions, non-ASCII digits and trailing newline. optional_minor_and_patch=True explicitly accepts incomplete
+    versions and fills zeros; that extension is not strict SemVer syntax.
+
+    - Version constructor is not that strict parser: int() coercion accepts numeric strings, floats and booleans
+    (e.g. 1.9->1); prerelease/build are str()-converted without syntax validation. Invalid constructed ''01''
+    prerelease can compare equal to ''1'' yet have different hashes; empty prerelease vs None can do the same.
+    These are finite invalid-construction witnesses, not a claim all valid parsed versions break hashing.
+
+    - Valid versions differing only in build metadata compare equal and hash equal, while str() and to_tuple
+    retain distinct build strings. SemVer precedence equality is not lexical/release-artifact identity.
+
+    - match supports six individual operators (<,>,<=,>=,==,!=) or a bare version treated as equality. Single
+    ''='' is not accepted. No npm caret/tilde/wildcard/compound range support established.
+
+    - is_valid catches ValueError only; non-string/bytes unsupported types can raise TypeError. Invalid UTF-8
+    bytes raise UnicodeDecodeError in parse, which is a ValueError subclass and becomes False in is_valid.
+
+    - is_compatible compares fields directionally, with equal major, other.minor>=self.minor and equal prerelease;
+    major-zero requires first-four-field equality, so even patch differences fail. It does not examine packages,
+    code, dependencies, interfaces or actual API compatibility. Major>0 patch downgrades may return True; build
+    variants may return True. It cannot enforce SemVer public API/release discipline or stability.
+
+    - Core/prerelease numeric conversions are subject to the actual interpreter limit. Here get_int_max_str_digits()=4300;
+    an over-limit core fails parsing, while an over-limit numeric prerelease parses then comparison raises
+    ValueError. No unconditional arbitrary-length input guarantee.
+
+    - Source auto-imports native parse_parts whenever installed/importable. Only strict parse dispatches it;
+    optional-part parsing remains Python. Only ValueError from native parse/construction falls back; TypeError
+    propagates in instrumented tests. Actual installed optional backend, semantic equivalence and performance
+    were not tested.
+
+
+    No IA canonical edits, freeze, acceptance, PR, review submission, external comment, browser or governance
+    changes performed by this research author. Held PR498/439/416 and denied #276 publication untouched.
+
+
+    Time-label correction: initial capture script called its caller-supplied pre-run clock boundary verified_at.
+    This label was too strong; changed to clock_observed_before_run and reran verification with an actually
+    observed runtime clock. Initial manifest retained separately and is not completion-time evidence. No package/source
+    bytes or probe outcome changed.
+
+
+    Fresh reproduction completed: initial full driver in new /workspace/shared/ia-semver-research-replay-20261030-0518
+    cloned both fixed repositories, downloaded both package artifacts, built an isolated venv and passed both87/87
+    probe sets and both416passed/1skip upstream sets. Final timestamp-label-only script revision was rerun
+    in that same isolated replay root and passed. All final outcomes read complete before trusted clock2026-10-30T05:20:33Z;
+    source tracked files remain unchanged. Command for a new replay: python reproduce.py --root /new/isolated/path
+    --clock-observed-before-run <actual trusted clock value>.
+
+
+    The initial final-seal command encountered executor transport disconnect and could not be confirmed. After
+    environment reappeared, read-only inspection confirmed source/results persisted and the seal append/rewrite
+    was absent. This seal was then performed with results reverified and trusted clock observed2026-10-30T05:21:41Z.
+    No cloud-process continuity claim.
+
+    '
+identity_boundary:
+  subject: github:python-semver/python-semver / pypi:semver
+  distinct_from:
+  - SemVer specification
+  - CalVer conventions
+  - npm semver range implementation
+  - PEP440
+  - actual API compatibility
+  license_governance_claims: No package-wide legal or supply-chain assurance.
+objects:
+- candidate_id: python_semver
+  candidate_path: 01_State/Inbox/candidates/python_semver.yaml
+  candidate_blob: 1fd753322c09e3e993a37a394374f0ae512285df
+  baseline_candidate_blob: null
+  preflight:
+    canonical_id_exists: false
+    identifier_collisions: []
+    machine_route: review_required
+  proposed_path: 01_State/01_Objects/python-semver.yaml
+  proposed_bytes:
+    path: /workspace/shared/ia-semver-author-20261030-0514/proposed-object.yaml
+    bytes: 18210
+    sha256: 3f12411918f9fdac866c1e4b30faab459a8bb986c3201c0fc8ec4045eece1c20
+    git_blob: 8805db10ec0bd142252b2afb0eed6d5121fd7214
+  proposed_record:
+    id: python_semver
+    type: system
+    kind: library
+    name_zh: Python semver 版本解析与比较库
+    name_en: Python semver version parsing and comparison library
+    description_zh: 'Python semver 是 python-semver/python-semver / PyPI semver 发布的 Python 库；本记录固定 3.1.0（PyPI
+      工件发布于 2026-09-12），源码 commit 642d1bc8949d38cca7922df478d0f2c06513f99d，声明 Python >=3.10。一个有界 implements
+      只覆盖默认严格解析和在宿主整数处理限制内的有效 SemVer 字符串优先级比较，连接既有 Semantic Versioning 2.0.0；version_expression 表示版本语法与顺序，不证明软件公共
+      API 的真实兼容性、发布内容不可变或版本递增决策符合规范，也不改变 SemVer / CalVer 或 IA 的版本策略。规范对 0.y.z 初始开发和先行版本兼容性的不确定性仍适用。
+
+
+      默认 Version.parse 要求 MAJOR.MINOR.PATCH、ASCII 标识符、核心数字及数字型先行标识符无多余前导零；构建标识符可有前导零。optional_minor_and_patch=True
+      是补零扩展，不是规范的完整版本语法。构造器、replace 和集合比较走 int() / str() 转换而非同一语法验证，bool、浮点数和数字字符串可被转换；任意 prerelease/build
+      可造成非 SemVer 值。实际观察 Version(1,2,3,''01'') 与 Version(1,2,3,''1'') 比较相等，却具有不同 hash，并在所测 set 中保留两个元素；这是无效构造值的反例，不是严格解析有效版本的反例。字符串形式再交给严格解析会拒绝
+      ''01''。
+
+
+      有效版本的 build 元数据被保存在表示中，但比较、相等和 hash 不使用 build：1.2.3+a 与 1.2.3+b 同优先级且同 hash，原字符串并不相同。有限规范顺序示例通过不代表任意输入可比较：在本次
+      CPython 3.12.14 默认 4300 位整数转换限制下，超限核心数字解析抛 ValueError，而超限数字型先行标识符可先解析成功、在比较转 int 时再抛 ValueError。支持超过
+      64 位的有限样例不等于无限长度支持。parse 接受 str / UTF-8 bytes；无效 UTF-8 可抛 UnicodeDecodeError。is_valid 只捕获 ValueError（含该
+      UnicodeDecodeError），错误类型的 TypeError 可传播，不能把它当作所有输入均返回布尔值的验证器。
+
+
+      match 只支持 <、>、<=、>=、==、!= 六个单比较符，以及不带运算符的完整版本相等；单个 =、caret、tilde、wildcard 和复合 npm range 不支持。它不是 PEP 440
+      处理器、依赖求解器或 npm range 兼容实现。is_compatible 是有方向的字段启发式，不执行实际 API 兼容性检查：正 major 时比较同 major、other.minor 不小于自身且
+      prerelease 字段相同，忽略 patch/build；有效 0.y.z 版本要求前四部分相同，仍忽略 build。正 major 下甚至较低 patch 可返回 true；这不证明兼容、安全升级或依赖可用。
+
+
+      可选 fast_semver_rs_backend 在已安装时可能自动导入；仅默认严格 parse 路径委派，optional_minor_and_patch 路径不委派。委派调用/构造中的 ValueError
+      回退 Python，其他异常不自动回退。本次真实 source / wheel 运行均未安装或执行该 native backend；研究脚本的五项替代函数插桩只观察 Python 委派/回退控制流，不能证明
+      Rust backend 等价、性能或安全。没有 native、跨 Python 版本或平台矩阵保证。
+
+
+      固定源码有 114 个 Git blob，其中两个 symlink 的目标文本与所指仓库内文件内容均已核对；wheel 18783 字节、sdist 304162 字节，SHA-256 与 PyPI 元数据相符。只有八个
+      runtime package 文件核对为 source / wheel / sdist 原字节相同，不声称整个包相同、可重复构建、签名或供应链认证。研究者新跑 87 项记录（82 项有限观察及 5 项替代函数控制流），作者从重建输入亲自重放，并另写
+      47 条有限断言加一个无效构造值 hash/set 观察；独立预审的 33 项观察与这些及上游测试互有重叠，不相加覆盖。固定上游 tests/docs 在 Python 3.12.14 的 source
+      模式与 wheel 模式各报告 416 pass、1 native skip；source 保持 .pytest.ini，wheel 仅将 pytest pythonpath 改为 tests 以导入安装的
+      wheel，没有测试适配器或测试源码补丁。显示的覆盖率排除了 pragma-no-cover 的 native 路径，不是完整标准符合性。测试环境使用固定 wheel 和测试依赖，未构建 semver；另有
+      -I -S 直接读取 wheel 的标准库-only 有限探针。
+
+
+      只记录上述固定实现切片，不主张完整 SemVer 符合性、生产推荐、IA 采用、实际 API 兼容、依赖解析、native 等价/性能、安全、签名证明或未来兼容。既有标准与能力、engine_v0_1_uses_semver
+      / semver_alternative_calver 不因收录此库重新核准。
+
+
+      English scope and limitations:
+
+
+      Python semver is the Python library published as python-semver/python-semver / PyPI semver, pinned here
+      to 3.1.0 (PyPI artifacts published 2026-09-12), source commit 642d1bc8949d38cca7922df478d0f2c06513f99d,
+      declaring Python >=3.10. One bounded implements edge covers default strict parsing and precedence comparison
+      of valid SemVer strings within host integer-processing limits, against the existing Semantic Versioning
+      2.0.0 object. Existing version_expression means version syntax and order, not proof of actual public-API
+      compatibility, immutable released contents or correct version-increment decisions. No SemVer/CalVer or
+      IA versioning-policy change; SemVer''s initial-development and prerelease compatibility uncertainty remains.
+
+
+      Default Version.parse requires MAJOR.MINOR.PATCH, ASCII identifiers and no extra leading zeros in core
+      numbers or numeric prerelease identifiers; build identifiers may have leading zeros. optional_minor_and_patch=True
+      is a zero-filling extension, not the complete normative version grammar. Constructor, replace and collection
+      comparisons use int()/str() conversion rather than that same grammar validation: bools, floats and numeric
+      strings may be coerced, and arbitrary prerelease/build fields may create non-SemVer values. Observed
+      Version(1,2,3,''01'') and Version(1,2,3,''1'') compare equal but have different hashes and retain two
+      elements in the tested set. This concerns invalid constructed values, not valid strictly parsed versions;
+      strict reparsing rejects the ''01'' string.
+
+
+      For valid versions, build metadata is retained in representation but ignored in precedence, equality
+      and hashing: 1.2.3+a and 1.2.3+b compare equally and hash equally without lexical identity. Passing finite
+      specification-order examples does not make every input comparable. Under this CPython 3.12.14 run''s
+      default 4300-digit integer-conversion limit, oversized core numbers fail parsing with ValueError; an
+      oversized numeric prerelease can parse successfully but fail later comparison during int conversion.
+      Finite support beyond 64 bits is not unlimited-length support. parse accepts str and UTF-8 bytes; invalid
+      UTF-8 can raise UnicodeDecodeError. is_valid catches only ValueError (including that UnicodeDecodeError),
+      while unsupported input types can propagate TypeError: it is not a total boolean validator for arbitrary
+      values.
+
+
+      match supports six single operators <, >, <=, >=, == and != plus bare complete-version equality. Single
+      =, caret, tilde, wildcard and compound npm ranges are unsupported. It is not a PEP 440 processor, dependency
+      solver or npm-range implementation. is_compatible is a directional field heuristic, not actual API testing:
+      for positive major versions it checks equal major, other.minor >= self.minor and identical prerelease
+      while ignoring patch/build; valid 0.y.z versions must have identical first four parts, still ignoring
+      build. A lower patch can therefore return true for positive-major versions without proving compatibility,
+      upgrade safety or dependency availability.
+
+
+      The optional fast_semver_rs_backend may be imported automatically when installed. Only default strict
+      parse delegates; optional_minor_and_patch parsing does not. ValueError during delegated parsing/construction
+      falls back to Python, not arbitrary exceptions. Actual source and wheel executions here did not install
+      or execute that native backend. Five replacement-function instrumentation records observe only Python
+      delegation/fallback control flow, not Rust-backend equivalence, performance or security; no native, multi-Python
+      or platform-matrix assurance.
+
+
+      The fixed source has 114 Git blobs, including two symlinks whose target text and resolved in-repository
+      file contents were checked. The 18783-byte wheel and 304162-byte sdist match PyPI-advertised SHA-256.
+      Only eight runtime package files are raw-byte-equal across source/wheel/sdist, not the whole packages,
+      a reproducible build, a signature or supply-chain authentication. Fresh researcher execution records
+      87 cases (82 finite and five substitute-function control-flow observations), personally replayed by the
+      author from reconstructed inputs; the author also wrote 47 finite assertions and one invalid-constructor
+      hash/set observation. Independent preflight''s 33 observations overlap these and upstream tests and are
+      never added as coverage. Fixed upstream tests/docs in source and wheel modes each report 416 pass and
+      one native skip on Python 3.12.14. Source mode keeps .pytest.ini; wheel mode changes only pytest pythonpath
+      to tests to import the installed wheel, without test adapter or test-source patch. Displayed coverage
+      excludes the native pragma-no-cover path and is not full standard conformance. The test environment uses
+      the fixed wheel and test dependencies without building semver; separate probes use -I -S and direct wheel
+      access with stdlib only.
+
+
+      Only this fixed implementation slice is recorded. No full SemVer conformance, production recommendation,
+      IA adoption, actual API compatibility, dependency resolution, native equivalence/performance, security,
+      signature or future-compatibility claim. Existing standard/capability records, engine_v0_1_uses_semver
+      and semver_alternative_calver are not reapproved by this addition.'
+    description_en: 'Python semver is the Python library published as python-semver/python-semver / PyPI semver,
+      pinned here to 3.1.0 (PyPI artifacts published 2026-09-12), source commit 642d1bc8949d38cca7922df478d0f2c06513f99d,
+      declaring Python >=3.10. One bounded implements edge covers default strict parsing and precedence comparison
+      of valid SemVer strings within host integer-processing limits, against the existing Semantic Versioning
+      2.0.0 object. Existing version_expression means version syntax and order, not proof of actual public-API
+      compatibility, immutable released contents or correct version-increment decisions. No SemVer/CalVer or
+      IA versioning-policy change; SemVer''s initial-development and prerelease compatibility uncertainty remains.
+
+
+      Default Version.parse requires MAJOR.MINOR.PATCH, ASCII identifiers and no extra leading zeros in core
+      numbers or numeric prerelease identifiers; build identifiers may have leading zeros. optional_minor_and_patch=True
+      is a zero-filling extension, not the complete normative version grammar. Constructor, replace and collection
+      comparisons use int()/str() conversion rather than that same grammar validation: bools, floats and numeric
+      strings may be coerced, and arbitrary prerelease/build fields may create non-SemVer values. Observed
+      Version(1,2,3,''01'') and Version(1,2,3,''1'') compare equal but have different hashes and retain two
+      elements in the tested set. This concerns invalid constructed values, not valid strictly parsed versions;
+      strict reparsing rejects the ''01'' string.
+
+
+      For valid versions, build metadata is retained in representation but ignored in precedence, equality
+      and hashing: 1.2.3+a and 1.2.3+b compare equally and hash equally without lexical identity. Passing finite
+      specification-order examples does not make every input comparable. Under this CPython 3.12.14 run''s
+      default 4300-digit integer-conversion limit, oversized core numbers fail parsing with ValueError; an
+      oversized numeric prerelease can parse successfully but fail later comparison during int conversion.
+      Finite support beyond 64 bits is not unlimited-length support. parse accepts str and UTF-8 bytes; invalid
+      UTF-8 can raise UnicodeDecodeError. is_valid catches only ValueError (including that UnicodeDecodeError),
+      while unsupported input types can propagate TypeError: it is not a total boolean validator for arbitrary
+      values.
+
+
+      match supports six single operators <, >, <=, >=, == and != plus bare complete-version equality. Single
+      =, caret, tilde, wildcard and compound npm ranges are unsupported. It is not a PEP 440 processor, dependency
+      solver or npm-range implementation. is_compatible is a directional field heuristic, not actual API testing:
+      for positive major versions it checks equal major, other.minor >= self.minor and identical prerelease
+      while ignoring patch/build; valid 0.y.z versions must have identical first four parts, still ignoring
+      build. A lower patch can therefore return true for positive-major versions without proving compatibility,
+      upgrade safety or dependency availability.
+
+
+      The optional fast_semver_rs_backend may be imported automatically when installed. Only default strict
+      parse delegates; optional_minor_and_patch parsing does not. ValueError during delegated parsing/construction
+      falls back to Python, not arbitrary exceptions. Actual source and wheel executions here did not install
+      or execute that native backend. Five replacement-function instrumentation records observe only Python
+      delegation/fallback control flow, not Rust-backend equivalence, performance or security; no native, multi-Python
+      or platform-matrix assurance.
+
+
+      The fixed source has 114 Git blobs, including two symlinks whose target text and resolved in-repository
+      file contents were checked. The 18783-byte wheel and 304162-byte sdist match PyPI-advertised SHA-256.
+      Only eight runtime package files are raw-byte-equal across source/wheel/sdist, not the whole packages,
+      a reproducible build, a signature or supply-chain authentication. Fresh researcher execution records
+      87 cases (82 finite and five substitute-function control-flow observations), personally replayed by the
+      author from reconstructed inputs; the author also wrote 47 finite assertions and one invalid-constructor
+      hash/set observation. Independent preflight''s 33 observations overlap these and upstream tests and are
+      never added as coverage. Fixed upstream tests/docs in source and wheel modes each report 416 pass and
+      one native skip on Python 3.12.14. Source mode keeps .pytest.ini; wheel mode changes only pytest pythonpath
+      to tests to import the installed wheel, without test adapter or test-source patch. Displayed coverage
+      excludes the native pragma-no-cover path and is not full standard conformance. The test environment uses
+      the fixed wheel and test dependencies without building semver; separate probes use -I -S and direct wheel
+      access with stdlib only.
+
+
+      Only this fixed implementation slice is recorded. No full SemVer conformance, production recommendation,
+      IA adoption, actual API compatibility, dependency resolution, native equivalence/performance, security,
+      signature or future-compatibility claim. Existing standard/capability records, engine_v0_1_uses_semver
+      and semver_alternative_calver are not reapproved by this addition.'
+    version: 3.1.0
+    external_identifiers:
+    - namespace: github
+      value: python-semver/python-semver
+    - namespace: pypi
+      value: semver
+    official_url: https://github.com/python-semver/python-semver
+    versions:
+    - version: 3.1.0
+      date: '2026-09-12'
+      status: released
+      url: https://pypi.org/project/semver/3.1.0/
+    domains:
+    - software_engineering
+    - versioning
+    capabilities:
+    - version_expression
+    scope_notes_zh: 完整中英文同置 description_zh，按既有 renderer 在 HTML/Markdown/search 可见；description_en 保留同样英文。隐藏字段不能代替操作边界。
+    scope_notes_en: Complete operative Chinese and English share the existing visible description_zh; description_en
+      retains the same English. Hidden fields are not substituted for limits.
+    sources: *id003
+    last_verified_at: '2026-10-30T05:24:52.412106+00:00'
+    last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; fixed
+      source/spec reading and fresh author replay, not independent acceptance
+relations:
+- proposed_path: 01_State/02_Relations/semver-implementations.yaml
+  operation: create_yaml_document
+  baseline_file: null
+  proposed_bytes:
+    path: /workspace/shared/ia-semver-author-20261030-0514/proposed-relation.yaml
+    bytes: 4479
+    sha256: 588768faa80561712506e2169c2843737d7151d315cb913ad02e7c716dad4b44
+    git_blob: b5fcda4988bd39cecf57d4ebec000da5f5a8a646
+  proposed_record:
+    id: python_semver_implements_semantic_versioning_2_0_0
+    type: relation
+    name_zh: Python semver 有界实现 SemVer 版本语法与优先级
+    name_en: Python semver implements bounded SemVer version syntax and precedence
+    source: python_semver
+    relation: implements
+    target: semantic_versioning_2_0_0
+    context:
+      capabilities:
+      - version_expression
+      version_context:
+        source: Python semver 3.1.0 at 642d1bc8949d38cca7922df478d0f2c06513f99d
+        target: Existing Semantic Versioning 2.0.0; fixed normative source f99d5485190a47c0863949e7da810a5553e0ed4d,
+          not a new edition
+      conditions_zh: 仅固定 Python semver 3.1.0 的默认严格解析及宿主整数限制内的有效 SemVer 字符串优先级；version_expression 不证明 API 兼容或完整发布/递增义务。可选补零、构造/replace/集合转换不是严格语法；无效构造值可相等而
+        hash 不同。有效 build 被优先级忽略，相等不是词法身份。match 是六单比较符/裸版本而非 npm range；is_valid 可传播 TypeError；is_compatible
+        是有方向的字段启发式。UTF-8/Python整数限制适用，超长数字先行字段可解析后比较失败。可选 native 自动导入只影响严格 parse，ValueError 回退；实际 backend 未运行，替代函数不是
+        native 试验。仅八个运行文件跨 source/wheel/sdist 相同；有限探针及上游一项 native skip 不证明完整符合性、真实兼容、安全、生产推荐、IA 采用或未来保证。完整中英操作边界在可见
+        description 保留。
+      conditions_en: Only default strict parsing and precedence of valid SemVer strings within host integer
+        limits in fixed Python semver 3.1.0. version_expression is not API testing or all release/increment
+        obligations. Optional zero filling and constructor/replace/collection coercion are not strict grammar;
+        invalid constructed values can compare equal with different hashes. Valid build is ignored for precedence,
+        not lexical identity. match is six single operators/bare equality, not npm ranges; is_valid can propagate
+        TypeError; is_compatible is a directional field heuristic. UTF-8/Python integer limits apply, including
+        huge numeric prerelease parse-success/comparison-failure. Optional native autoimport affects strict
+        parse with ValueError fallback; no real backend ran, and substitutions are not native testing. Only
+        eight runtime files match source/wheel/sdist. Finite observations/upstream with one native skip do
+        not prove full conformance, real compatibility, security, production suitability, IA adoption or future
+        guarantees. Full operative Chinese/English limits remain visible in description.
+    evidence: *id003
+    last_verified_at: '2026-10-30T05:24:52.412106+00:00'
+    last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; bounded
+      fixed implementation evidence, not full conforms_to
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: python_semver
+  rationale_zh: 沿用既有 syntax 编者导航，不证明真实 API 兼容或完整符合性。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 52580
+  sha256: 23d437b2886df5a6d966212943ed331d4229ae49f3477e0cff1d2ef9f9bcfdcd
+  git_blob: d42cad2edd10e52430c9aeda077d7b7dd8a5b107
+navigation_addition_utf8: "\n# Python semver 3.1.0：仅有界版本语法/优先级实现导航，不证明真实 API 兼容或完整 SemVer 符合性。\n- category_id:\
+  \ syntax\n  ref: {surface: canonical, id: python_semver}\n"
+navigation_insertion:
+  anchor_utf8: 'canonical_relation_refs:'
+  placement: Immediately before the sole top-level canonical_relation_refs key, after existing memberships;
+    never at EOF under proposals
+  operation: Insert one existing-category membership, preserving all prior prefix/suffix bytes and every non-membership
+    value
+existing_record_updates: []
+protected_existing_assets:
+- All 1042 baseline tracked files unchanged in pending checkout; separate hypothetical projection modifies
+  only navigation and adds object/relation.
+- All 135 prior events, 125 accepted frozen routes, 10 deferred, prior candidates and identity holds preserved.
+- Existing SemVer, version_expression, CalVer, engine_v0_1_uses_semver and semver_alternative_calver byte-identical.
+excluded_scope:
+- No schema/classification/governance/renderer/maintenance change or new standard edition.
+- 'No #276 body/comment/alternate checkpoint publication or held PR/identity change; no local Chromium/direct
+  API403 retry.'
+renderer_boundary_zh: 完整中英同置 description_zh，description_en 保留英文；HTML/Markdown/search 核对全文，不以隐藏字段代替。
+materialization_boundary_zh: 本作者仅两个 pending YAML 和独立假设 projection；不创建 F/H、接受事件、接受时间或 reviewer 批准。父级后续独立精确审查和实际
+  F 后处理。
