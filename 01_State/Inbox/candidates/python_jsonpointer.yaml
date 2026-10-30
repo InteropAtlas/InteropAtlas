@@ -1,0 +1,55 @@
+contract_version: candidate-object-v1
+candidate_id: python_jsonpointer
+label: jsonpointer Python JSON Pointer library — 3.6
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: stefankoegl/python-json-pointer
+- namespace: pypi
+  value: jsonpointer
+locators:
+- url: https://github.com/stefankoegl/python-json-pointer
+  role: official
+- url: https://github.com/stefankoegl/python-json-pointer/tree/c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+  role: dated
+- url: https://pypi.org/project/jsonpointer/3.6/
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - At actual baseline 608ab98a1839f0899a9cc9da17b4be4816c8df52, no exact canonical/candidate ID or normalized
+    github:stefankoegl/python-json-pointer / pypi:jsonpointer collision and no incoming implements edge to json_pointer_rfc6901.
+    This is the distinct library, not PyPI json_pointer, the RFC publication, JSON Patch/JSONPath or an edition
+    object. new means no known collision, not global uniqueness, acceptance or identity merge authority.
+  merge_authorized: false
+unknowns:
+- 'jsonpointer 是以 PyPI jsonpointer / stefankoegl/python-json-pointer 发布的 Python 库；本记录固定 3.6（2026-10-26 发布），源码
+  commit c8f3f8b7b87074bb5f3effabc6159fdeaa876099。官方文档明确连接 RFC 6901。本切片只记录字符串 JSON Pointer 的 token 解析、表示及在已由调用方解析的
+  Python 数据中定位现存值，沿用 resource_identification 表达文档内值标识，不是 URI/HTTP 获取、永久身份或资源所有权保证。 空字符串指向整个输入，/ 指向空名称成员；~1 先还原
+  /、~0 再还原 ~，因此 ~01 是 ~1 而不是 /；无效 ~ 转义或缺少起始 / 被拒绝。JSON 字符串的反斜线转义须调用方先解码；直接 # / #/… URI fragment 输入被拒绝，百分号序列按普通名称处理而不作
+  URI 解码。RFC 6901 的 fragment 应用仍受媒体类型声明约束，不能由 JSON 文档身份推断。对象名称按精确 Unicode 码点匹配，无 NFC/NFD 归一化；数组使用无前导零的 ASCII 十进制索引，所查符号、Unicode
+  数字、空格、尾换行、小数及越界例被拒绝，对象中的 "01" 却是普通键，Python 整数键不自动变为字符串。 API 对数组 - 返回 EndOfList sentinel，不是既存 JSON 值，显式 default
+  也不替换它；继续向下定位报错。所查 source CLI 将该 sentinel 报为定位失败并 exit 1。普通 dict 不保留原 JSON 的重复名称，调用方 json.loads 或 CLI json.load
+  已折为后值，库不能检测原文重复键；这不实现 RFC 6901 对重复名称的失败要求。默认定位失败为 JsonPointerException，显式 default 仅处理定位时的该类异常，构造时的无效指针及某些自定义异常仍传播。默认
+  verbose 的部分错误包含文档内容，关闭 VERBOSE_EXCEPTIONS 只是减少所查消息内容，不是保密保证。 库还接受 tuple、bytes 等 Python Sequence 与自定义 `__getitem__`，它们不是
+  JSON 类型验证；str 下继续索引被拒绝。set/create 是库的修改扩展，不是 RFC 6901 修改协议或 JSON Patch。默认 inplace=True、create=False；可替换已有目标或新增缺失末端对象键，但不创建缺失中间路径。默认
+  set 的 - 可追加列表，数字索引恰好为 length 则默认失败，create=True 才映射为追加；创建缺失中间段使用 dict，后续 "0" 是对象键而非自动推断数组，列表 gap 不填。有限内置 dict/list
+  的所查失败保持原件不变，但自定义 `__setitem__` 可先写再抛异常，不能泛称任意对象原子性。所查 inplace=False 的非 root 路径先深复制；root 默认不能原地替换，非原地模式返回 replacement。
+  附带 source CLI 以 UTF-8 文本模式读文件；-f 先把中间 CR/CRLF 转为 LF，再去尾 CR/LF、保留普通空格，可能无报错地选中另一合法成员。所查 a\rb/a\r\nb 指针文件均选到 a\nb，而
+  API/-p 保留原字符；末尾换行也会改变：API / -p 的 /key\n 取 key\n，-f 的同样 UTF-8 字节会取 key。不能声称输入形式可互换或任意字符指针文件无损。定位失败可继续后续文件但最终非零；待查询
+  JSON 数据文件的 JSON/文本解码错误默认中止且可能已有 stdout；--continue-on-error 仅可跳过这类数据文件解码错误后继续，但仍非零，不覆盖 -f 指针文件的 UTF-8 解码错误或缺文件等打开错误。部分
+  stdout 不代表整批成功或事务性输出。 作者在 CPython 3.12.14 以未安装的固定源重放 68 项自写 API 记录（含版本）、14 项 source CLI 记录（含版本）、另行 3 项尾部换行成员补充、6
+  项中间 CR/CRLF 转换补充、2 项指针文件与数据文件解码对照及上游 79 unittest/doctest；例集及重放重叠，不累加覆盖。包声明 Python >=3.10 不等于已验证全版本矩阵。API 模块在
+  source/wheel/sdist 中原字节相同，但整包不相同：sdist setup.cfg 有生成尾部，wheel CLI shebang 有改写；跨目录 CLI 仅 13 条 raw 记录一致，另 1 条 traceback
+  的绝对路径差异保留。未安装、构建、运行浏览器或验证 attestation；不是完整 RFC 符合性、所有 API/输入/平台、安全、跨实现互通、规范化签名、生产推荐或 IA 采用证明。既有 RFC 6901→RFC
+  4627 出版物引用不变。'
+- 边界以完整 description_zh 为准，须在 HTML、Markdown 与 search index 中可见；不依赖 renderer 未显示的 scope_notes 或 relation context
+  才成立。正向 implements 只覆盖明确字符串表示、唯一字符串对象名称及存在目标等前提下的有限定位行为；API sentinel、宿主重复名称丢失和 URI fragment 转换未实现均保留。set/create、Python
+  扩展容器及 CLI 表示/批次错误行为是实现边界，不扩大 RFC 6901。未执行安装、构建、fuzz、完整平台矩阵、网络获取、签名/attestation、安全或整个包许可适用性评估。固定来源和五份自写可重建 harness
+  随 pending packet 留痕；不嵌入第三方完整 source/RFC/tests。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
+  reviewer: null

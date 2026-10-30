@@ -1,0 +1,4030 @@
+packet_id: jsonpointer_3_6_20261030
+status: pending_independent_semantic_review
+baseline_commit: 608ab98a1839f0899a9cc9da17b4be4816c8df52
+executor: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
+reviewer: null
+review_scope_zh:
+- 仅一个 python_jsonpointer system/library、一个有界 implements→既有 json_pointer_rfc6901、既有 resource_identification 和 syntax
+  成员；不改既有 JSON 相关对象/出版物或 RFC 6901→RFC 4627 引用。
+- 重点核对输入表示/精确 Unicode/数组 sentinel/重复名称丢失/default/verbose、Python扩展容器及set/create边界、-f文本换行转换和尾部去除、CLI部分输出。 --continue-on-error
+  仅覆盖待查询 JSON 数据文件解码，不覆盖 -f 指针文件解码或文件打开错误。
+- 预审 conditional GO 不是本候选批准；只有后续 fresh 独立语义 reviewer 对精确 bytes 审核后，才由父执行者创建真实 F 冻结并进行 ordinary acceptance。
+work_item_preflight:
+  main_confirmed: 608ab98a1839f0899a9cc9da17b4be4816c8df52
+  current_counts:
+    objects: 255
+    relations: 195
+    graph_edges: 288
+    candidates: 246
+    acceptance_events: 133
+    event_decisions:
+      accepted: 123
+      deferred: 10
+  existing_target_implements: []
+  canonical_identifier_collisions: []
+  candidate_identifier_collisions: []
+  preserved_holds:
+    '276': Body/comment/alternate checkpoint publication denied; local notes only, unanswered permission request
+      is not approval.
+    '498': Denied; unchanged.
+    '439': Governance gate; unchanged.
+    '416': Paused; unchanged.
+    identity-risk: Held records and routes unchanged.
+  publication_authorized_for_this_executor: false
+source_evidence:
+  verified_at: '2026-10-30T00:17:10.489671+00:00'
+  fixed_source_commit: c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+  source_tree: 72849cb7965788645fa3104482eb6c7bd503601c
+  source_inventory:
+    entries: 28
+    blobs: 23
+    trees: 5
+    gitlinks: 0
+    all_source_archive_files_exact_git_blobs: true
+  source_archive:
+    url: https://codeload.github.com/stefankoegl/python-json-pointer/tar.gz/c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+    bytes: 22413
+    sha256: 2a1e5657c2a7613d92306500b7ad75e6ef79286da80c4ecbcab005d79d3bb3e9
+  module_sha256: 4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9
+  module_source_wheel_sdist_exact: true
+  whole_package_byte_parity: false
+  artifact_differences:
+  - sdist setup.cfg has generated egg_info tail
+  - wheel CLI shebang rewritten; remainder exact
+  research_handoff:
+    path: /workspace/shared/ia-jsonpointer-gap-research-20261029/HANDOFF-v2.md
+    bytes: 12813
+    sha256: 8927b882c3776e92c990fa904ee6afb2981bc9e738c5cef4ee29e097a3de0194
+    git_blob: baa3675823ba60522e203bd4371367be78788c23
+  research_report:
+    path: /workspace/shared/ia-jsonpointer-gap-research-20261029/research-report-v2.json
+    bytes: 4981
+    sha256: 244008e1baf1e07dc82c2ec633a2fac206dede2429d9e52df73ae015e875f788
+    git_blob: b5ff01d4251b6cebc101d0319b612c34da668936
+  research_manifest:
+    path: /workspace/shared/ia-jsonpointer-gap-research-20261029/artifact-manifest-v2.json
+    bytes: 22547
+    sha256: d9c8bce7120b8defa82261d441d6217278644709ef70b33f48b1b6d9db92dea5
+    git_blob: 618db51e10be6f630b9c367ea845d24ddc8f4c58
+  research_preflight:
+    report:
+      path: /workspace/shared/ia-jsonpointer-independent-preflight-20261030/preflight-review.json
+      bytes: 9728
+      sha256: 84b1042e5b6e81019dce3504e05ec12e0cd8bef834795e88dedbec268d61a553
+      git_blob: f522099d4420844806cafdc658649dff8d952ce6
+    role: Conditional authoring preflight only, not exact-candidate acceptance
+  primary_sources:
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/README.md
+    title: jsonpointer 3.6 — official RFC 6901 library identity
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/jsonpointer.py
+    title: jsonpointer 3.6 — token parsing, exact keys, EndOfList, default/errors and set/create extensions
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/tutorial.rst
+    title: jsonpointer 3.6 — documented resolution, mutation, copy and create interfaces
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/bin/jsonpointer
+    title: jsonpointer 3.6 — UTF-8 text-mode pointer file conversion, terminal stripping and partial-output/error
+      behavior
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/tests.py
+    title: jsonpointer 3.6 — fixed upstream unittest/doctest scope, not all-input conformance
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.py
+    title: jsonpointer 3.6 — package identity, declared Python >=3.10 and setup metadata; inspected, not executed
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/LICENSE.txt
+    title: jsonpointer 3.6 — source notice, not package-wide legal assessment
+    language: en
+    accessed: '2026-10-30'
+  - url: https://github.com/stefankoegl/python-json-pointer/releases/tag/v3.6
+    title: Official v3.6 release — observed published 2026-10-26
+    language: en
+    accessed: '2026-10-30'
+  - url: https://pypi.org/project/jsonpointer/3.6/
+    title: PyPI jsonpointer 3.6 — same official project and fixed distribution
+    language: en
+    accessed: '2026-10-30'
+  - url: https://www.rfc-editor.org/rfc/rfc6901.txt
+    title: RFC 6901 (April 2013), sections 3–7 — syntax, value resolution, representations, duplicate-name and
+      error boundaries; fixed RFC 4627 reference
+    language: en
+    accessed: '2026-10-30'
+  primary_source_bindings:
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/.coveragerc
+    local_path: source/.coveragerc
+    git_blob: 357bebd9bbdcb92f1a537206623d57b2d4fd0391
+    sha256: 17dfdd9fd6ca4e89d83605dcb9ba5b3711063e41ea41d20dba4e4691f81b8bba
+    bytes: 247
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/.github/workflows/publish.yml
+    local_path: source/.github/workflows/publish.yml
+    git_blob: 5493fbbe2a5209dc24a06af8b8d5451a251531b8
+    sha256: 72b2c795e039cfb1d5963d28e439720edffbc78820b0bba997f9e0f77fcca0a0
+    bytes: 2901
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/.github/workflows/test.yaml
+    local_path: source/.github/workflows/test.yaml
+    git_blob: 775ec16863f1323771eed5b57cda5b019b082943
+    sha256: ada94b1d5e97d727dea11acfd3dcf3d795327187cf493024d8d4470f7ea63363
+    bytes: 1872
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/.gitignore
+    local_path: source/.gitignore
+    git_blob: 4e74a2d317d54e9279c15d32c3484f3248deea08
+    sha256: 55430c5431e5a70e2d47efddef2ff0255c4a319ac0e7c6de9dce55a335f6be83
+    bytes: 84
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/.readthedocs.yaml
+    local_path: source/.readthedocs.yaml
+    git_blob: 57ba54a011acd9ce272681755dd2b986d0e456c1
+    sha256: 5b5c9335d6fa7ff57c3c847a057db901372e2083f259a801046acf5018f544a4
+    bytes: 576
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/AUTHORS
+    local_path: source/AUTHORS
+    git_blob: 8319fec44d8e4d467b2e4827738b91ff706f93d5
+    sha256: 4d58319d0f59c87bef5b07b3fe4db0f19c2d7d5545b034c6bf7b57c89bbef57f
+    bytes: 113
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/LICENSE.txt
+    local_path: source/LICENSE.txt
+    git_blob: 491196d773493c591f1287107c3d368f2f8263d3
+    sha256: d8b24f15d472885f788a2d6e985850f264627b86012a17bb242c83f310d907e5
+    bytes: 1413
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/MANIFEST.in
+    local_path: source/MANIFEST.in
+    git_blob: 0f9b9f67c6f5ce6dfdda92573503509776aecaad
+    sha256: d3c47d3def3d000bc1bec6fc5919c3f0a343a81f9bcc49ade5a704593786e426
+    bytes: 71
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/README.md
+    local_path: source/README.md
+    git_blob: 016ac01da0c360befbcc14b0c674d42873ea16b1
+    sha256: 246fadbc39105b9f7d767fd04828d575c4f7c1492fbc4eb3c2cb86b340b0886d
+    bytes: 1243
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/bin/jsonpointer
+    local_path: source/bin/jsonpointer
+    git_blob: 48afe3b45ae056984063a383d2082ae4c2727cb4
+    sha256: ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2
+    bytes: 4002
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/Makefile
+    local_path: source/doc/Makefile
+    git_blob: 3b70831aea68b70e8baf7719034ea721b59ebd12
+    sha256: e0893b995c517c88f7f5f7c6eaa93d16934120190d9839d3d120dbd2d71c1b58
+    bytes: 5616
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/_static/.empty
+    local_path: source/doc/_static/.empty
+    git_blob: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+    sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    bytes: 0
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/commandline.rst
+    local_path: source/doc/commandline.rst
+    git_blob: cbb2a24549eae81684d80665ac4785f04cf6d431
+    sha256: efdba9daccfe8ae76661f03eaea251480c1bba589ca7d3e5c03b52c4bf61ac67
+    bytes: 2503
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/conf.py
+    local_path: source/doc/conf.py
+    git_blob: f472f575f63acd43eda461a02d21f84719f32fef
+    sha256: 29948433491bf1f630becf275c954520f9af944dcc5199946efac7cd698d928a
+    bytes: 7910
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/index.rst
+    local_path: source/doc/index.rst
+    git_blob: e1e0aaefb113ce4f8436a4bf1021b6078979fa14
+    sha256: a4443e9a5731d5e3cf6f74a414a1121c148896891f7c3dc3f35d9c240d95bdf9
+    bytes: 664
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/mod-jsonpointer.rst
+    local_path: source/doc/mod-jsonpointer.rst
+    git_blob: 7929d6d9bf6dbda2f3ed2437d4d37d4b1281444a
+    sha256: 349d4172a8f0a02ce4a77688e9b85aa100526a181ec82a4c01c0f01b7123defb
+    bytes: 119
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/tutorial.rst
+    local_path: source/doc/tutorial.rst
+    git_blob: 267f05c7b5141f6b99ec85934e5610c6b1f99b54
+    sha256: d95b852843af5e96da8d8a8d541df6aa6e5b35fd467a95331ca7f02f5882afcf
+    bytes: 3371
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/jsonpointer.py
+    local_path: source/jsonpointer.py
+    git_blob: 4458937f09759a3136441ec8268e9ab81209539d
+    sha256: 4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9
+    bytes: 14476
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/makefile
+    local_path: source/makefile
+    git_blob: 3276190789a34b98b4c117da956a494c492ea1e0
+    sha256: 92ed84e8ec137ef770142e35fdb63c10248b7e73389e52f4255c6812e04d3ac9
+    bytes: 321
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/requirements-dev.txt
+    local_path: source/requirements-dev.txt
+    git_blob: 239fccaa5617f3232916f45f1453ae68a87a6e4f
+    sha256: 7272ab2b29dd3ce79746f9128e68956407cfe60543ed4b6d6ed4cb2847fa0723
+    bytes: 33
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.cfg
+    local_path: source/setup.cfg
+    git_blob: 4b36d81b7cf5e9a36ded0d00a9507fac2c2fee07
+    sha256: 18f19f57db624fcdb81f9b34d22ac6fe9f39825d1221a7797e095bf6061e3108
+    bytes: 76
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.py
+    local_path: source/setup.py
+    git_blob: 26f34eea1101cdeb00f1ba2d756861d4ef243d23
+    sha256: 718a22267b266bea2ac81135c5f6c888eb581858e3e5b2d2e2012a606d28a6a9
+    bytes: 1873
+  - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/tests.py
+    local_path: source/tests.py
+    git_blob: 23301bb7086f66261aa4cc04b577b0196b156691
+    sha256: 3e91052effd9b6d6fed375b1907c51d3560f54bee865805121d6b4ee75286ef3
+    bytes: 33668
+  - url: https://www.rfc-editor.org/rfc/rfc6901.txt
+    local_path: rfc6901.txt
+    sha256: 12f9f4fc13d686aa4fbe7d144d70166cd3fcd4ab89174c2b13bda8f4b55e49da
+  - url: https://pypi.org/pypi/jsonpointer/3.6/json
+    local_path: pypi.json
+    sha256: 4e455ab677f9b1d0bfb68b3360cdf17ef8b93deab78dd51d368a076f2d16a121
+  author_runtime_report:
+    path: /workspace/shared/ia-jsonpointer-author-runtime-20261030/author-runtime-report-v3.json
+    bytes: 15237
+    sha256: 8169de4983f642695951d24d01628b9fa7df93ea571be17e35584f5537ce9d67
+  author_runtime_manifest:
+    path: /workspace/shared/ia-jsonpointer-author-runtime-20261030/author-runtime-manifest-v3.json
+    bytes: 13803
+    sha256: dd5033ac06aa25b62363816ba76704ce25acc596334fc39a436d4fbd1355b2fe
+  reconstructible_runtime_evidence:
+    purpose: Self-authored bounded instance evidence inside existing pending review-packet pattern, not new maintenance/test
+      infrastructure.
+    environment: &id001
+      python: 3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]
+      implementation: CPython
+      int_max_str_digits: 4300
+    declared_python_support: '>=3.10; not verified matrix'
+    source_manifest_metadata:
+    - path: .coveragerc
+      bytes: 247
+      git_blob: 357bebd9bbdcb92f1a537206623d57b2d4fd0391
+      sha256: 17dfdd9fd6ca4e89d83605dcb9ba5b3711063e41ea41d20dba4e4691f81b8bba
+    - path: .github/workflows/publish.yml
+      bytes: 2901
+      git_blob: 5493fbbe2a5209dc24a06af8b8d5451a251531b8
+      sha256: 72b2c795e039cfb1d5963d28e439720edffbc78820b0bba997f9e0f77fcca0a0
+    - path: .github/workflows/test.yaml
+      bytes: 1872
+      git_blob: 775ec16863f1323771eed5b57cda5b019b082943
+      sha256: ada94b1d5e97d727dea11acfd3dcf3d795327187cf493024d8d4470f7ea63363
+    - path: .gitignore
+      bytes: 84
+      git_blob: 4e74a2d317d54e9279c15d32c3484f3248deea08
+      sha256: 55430c5431e5a70e2d47efddef2ff0255c4a319ac0e7c6de9dce55a335f6be83
+    - path: .readthedocs.yaml
+      bytes: 576
+      git_blob: 57ba54a011acd9ce272681755dd2b986d0e456c1
+      sha256: 5b5c9335d6fa7ff57c3c847a057db901372e2083f259a801046acf5018f544a4
+    - path: AUTHORS
+      bytes: 113
+      git_blob: 8319fec44d8e4d467b2e4827738b91ff706f93d5
+      sha256: 4d58319d0f59c87bef5b07b3fe4db0f19c2d7d5545b034c6bf7b57c89bbef57f
+    - path: LICENSE.txt
+      bytes: 1413
+      git_blob: 491196d773493c591f1287107c3d368f2f8263d3
+      sha256: d8b24f15d472885f788a2d6e985850f264627b86012a17bb242c83f310d907e5
+    - path: MANIFEST.in
+      bytes: 71
+      git_blob: 0f9b9f67c6f5ce6dfdda92573503509776aecaad
+      sha256: d3c47d3def3d000bc1bec6fc5919c3f0a343a81f9bcc49ade5a704593786e426
+    - path: README.md
+      bytes: 1243
+      git_blob: 016ac01da0c360befbcc14b0c674d42873ea16b1
+      sha256: 246fadbc39105b9f7d767fd04828d575c4f7c1492fbc4eb3c2cb86b340b0886d
+    - path: bin/jsonpointer
+      bytes: 4002
+      git_blob: 48afe3b45ae056984063a383d2082ae4c2727cb4
+      sha256: ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2
+    - path: doc/Makefile
+      bytes: 5616
+      git_blob: 3b70831aea68b70e8baf7719034ea721b59ebd12
+      sha256: e0893b995c517c88f7f5f7c6eaa93d16934120190d9839d3d120dbd2d71c1b58
+    - path: doc/_static/.empty
+      bytes: 0
+      git_blob: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+      sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+    - path: doc/commandline.rst
+      bytes: 2503
+      git_blob: cbb2a24549eae81684d80665ac4785f04cf6d431
+      sha256: efdba9daccfe8ae76661f03eaea251480c1bba589ca7d3e5c03b52c4bf61ac67
+    - path: doc/conf.py
+      bytes: 7910
+      git_blob: f472f575f63acd43eda461a02d21f84719f32fef
+      sha256: 29948433491bf1f630becf275c954520f9af944dcc5199946efac7cd698d928a
+    - path: doc/index.rst
+      bytes: 664
+      git_blob: e1e0aaefb113ce4f8436a4bf1021b6078979fa14
+      sha256: a4443e9a5731d5e3cf6f74a414a1121c148896891f7c3dc3f35d9c240d95bdf9
+    - path: doc/mod-jsonpointer.rst
+      bytes: 119
+      git_blob: 7929d6d9bf6dbda2f3ed2437d4d37d4b1281444a
+      sha256: 349d4172a8f0a02ce4a77688e9b85aa100526a181ec82a4c01c0f01b7123defb
+    - path: doc/tutorial.rst
+      bytes: 3371
+      git_blob: 267f05c7b5141f6b99ec85934e5610c6b1f99b54
+      sha256: d95b852843af5e96da8d8a8d541df6aa6e5b35fd467a95331ca7f02f5882afcf
+    - path: jsonpointer.py
+      bytes: 14476
+      git_blob: 4458937f09759a3136441ec8268e9ab81209539d
+      sha256: 4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9
+    - path: makefile
+      bytes: 321
+      git_blob: 3276190789a34b98b4c117da956a494c492ea1e0
+      sha256: 92ed84e8ec137ef770142e35fdb63c10248b7e73389e52f4255c6812e04d3ac9
+    - path: requirements-dev.txt
+      bytes: 33
+      git_blob: 239fccaa5617f3232916f45f1453ae68a87a6e4f
+      sha256: 7272ab2b29dd3ce79746f9128e68956407cfe60543ed4b6d6ed4cb2847fa0723
+    - path: setup.cfg
+      bytes: 76
+      git_blob: 4b36d81b7cf5e9a36ded0d00a9507fac2c2fee07
+      sha256: 18f19f57db624fcdb81f9b34d22ac6fe9f39825d1221a7797e095bf6061e3108
+    - path: setup.py
+      bytes: 1873
+      git_blob: 26f34eea1101cdeb00f1ba2d756861d4ef243d23
+      sha256: 718a22267b266bea2ac81135c5f6c888eb581858e3e5b2d2e2012a606d28a6a9
+    - path: tests.py
+      bytes: 33668
+      git_blob: 23301bb7086f66261aa4cc04b577b0196b156691
+      sha256: 3e91052effd9b6d6fed375b1907c51d3560f54bee865805121d6b4ee75286ef3
+    self_authored_files:
+    - filename: finite_probes.py
+      sha256: 3aef0e5380d54ad081b3d04b196a10c7bf3324d0b9f4d3d5cf94e862428841a1
+      text: "\"\"\"Self-authored finite behavior observations; not a normative conformance suite.\nRun: python\
+        \ -B finite_probes.py --module source/jsonpointer.py --output runtime/finite-probes.json\nRequires Python3.12\
+        \ behavior for this recorded environment. No network or installs.\nOnly this file, not third-party implementation,\
+        \ is intended for embedding in a proposal.\n\"\"\"\nfrom pathlib import Path\nimport argparse,copy,datetime,hashlib,importlib.util,json,platform,sys\n\
+        ap=argparse.ArgumentParser();ap.add_argument('--module',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);a=ap.parse_args()\n\
+        assert not a.output.exists();p=a.module.resolve();assert hashlib.sha256(p.read_bytes()).hexdigest()=='4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9'\n\
+        spec=importlib.util.spec_from_file_location('fixed_jsonpointer',p);jp=importlib.util.module_from_spec(spec);spec.loader.exec_module(jp)\n\
+        class Duck:\n def __init__(self,behavior='normal'):self.data={'leaf':7};self.behavior=behavior\n def __getitem__(self,k):\n\
+        \  if self.behavior=='value_error':raise ValueError('custom get failure')\n  return self.data[k]\n def\
+        \ __setitem__(self,k,v):\n  self.data[k]=v\n  if self.behavior=='mutate_then_fail':raise ValueError('custom\
+        \ mutation failed after write')\n def __repr__(self):return 'FiniteDuck('+repr(self.data)+')'\ndef typed(v):\n\
+        \ if isinstance(v,jp.EndOfList):return {'type':'EndOfList','list':typed(v.list_)}\n if isinstance(v,Duck):return\
+        \ {'type':'FiniteDuck','data':typed(v.data),'behavior':v.behavior}\n if isinstance(v,dict):return {'type':'dict','items':[[typed(k),typed(x)]for\
+        \ k,x in v.items()]}\n if isinstance(v,(list,tuple)):return {'type':type(v).__name__,'items':[typed(x)for\
+        \ x in v]}\n if isinstance(v,bytes):return {'type':'bytes','hex':v.hex()}\n if v is None or isinstance(v,(bool,int,float,str)):return\
+        \ {'type':type(v).__name__,'value':v}\n raise TypeError(type(v))\nrows=[]\ndef check(name,operation,doc=None,pointer=None,value=None,options=None,expected=None,note=''):\n\
+        \ options=options or {};before=typed(doc);expect=expected or {};out={'id':name,'operation':operation,'input_document':before,'pointer':pointer,'value':typed(value),'options':options,'expected':expect,'boundary':note}\n\
+        \ try:\n  if operation=='version':r=jp.__version__\n  elif operation=='resolve':r=jp.resolve_pointer(doc,pointer,**options)\n\
+        \  elif operation=='set':r=jp.set_pointer(doc,pointer,value,**options)\n  elif operation=='parts':r={'parts':jp.JsonPointer(pointer).get_parts(),'path':jp.JsonPointer(pointer).path}\n\
+        \  elif operation=='from_parts':r=jp.JsonPointer.from_parts(doc).path\n  elif operation=='json_decode_pointer':r=jp.resolve_pointer(doc,json.loads(pointer),**options)\n\
+        \  elif operation=='json_document_decode':r=jp.resolve_pointer(json.loads(doc),pointer,**options)\n  elif\
+        \ operation=='verbose':\n   old=jp.VERBOSE_EXCEPTIONS;jp.VERBOSE_EXCEPTIONS=options['verbose']\n   try:r=jp.resolve_pointer(doc,pointer)\n\
+        \   finally:jp.VERBOSE_EXCEPTIONS=old\n  else:raise ValueError(operation)\n  actual={'returned':typed(r),'document_after':typed(doc),'changed':before!=typed(doc)}\n\
+        \ except Exception as e:actual={'exception_type':type(e).__name__,'exception_message':str(e),'document_after':typed(doc),'changed':before!=typed(doc)}\n\
+        \ out['observed']=actual;tests={}\n for k,v in expect.items():\n  if k=='return':tests[k]=actual.get('returned')==typed(v)\n\
+        \  elif k=='return_type':tests[k]=actual.get('returned',{}).get('type')==v\n  elif k=='after':tests[k]=actual['document_after']==typed(v)\n\
+        \  elif k=='error':tests[k]=actual.get('exception_type')==v\n  elif k=='message_has':tests[k]=v in actual.get('exception_message','')\n\
+        \  elif k=='message_not':tests[k]=v not in actual.get('exception_message','')\n  elif k=='changed':tests[k]=actual['changed']==v\n\
+        \  else:raise ValueError(k)\n out['checks']=tests;out['passed']=bool(tests) and all(tests.values());rows.append(out)\n\
+        E=lambda s='':dict(error='JsonPointerException',**({'message_has':s}if s else {}),changed=False)\ncheck('version','version',expected={'return':'3.6'})\n\
+        check('root-object','resolve',{'top':[4]},'',expected={'return':{'top':[4]},'changed':False})\ncheck('root-scalar','resolve',7,'',expected={'return':7})\n\
+        check('empty-member','resolve',{'':8},'/',expected={'return':8})\ncheck('slash-token','resolve',{'left/right':9},'/left~1right',expected={'return':9})\n\
+        check('tilde-token','resolve',{'left~right':10},'/left~0right',expected={'return':10})\ncheck('decode-order','resolve',{'~1':'tilde-one','/':'slash'},'/~01',expected={'return':'tilde-one'})\n\
+        check('double-tilde','parts',pointer='/~00',expected={'return':{'parts':['~0'],'path':'/~00'}})\ncheck('invalid-trailing-tilde','resolve',{},'/x~',expected=E('Found\
+        \ invalid escape'))\ncheck('invalid-escape-two','resolve',{},'/~2',expected=E('Found invalid escape'))\n\
+        check('invalid-leading-prefix','resolve',{},'leaf',expected=E('Location must start'))\ncheck('fragment-root-unsupported','resolve',{},'#',expected=E('Location\
+        \ must start'))\ncheck('fragment-path-unsupported','resolve',{'leaf':1},'#/leaf',expected=E('Location\
+        \ must start'))\ncheck('percent-is-literal','resolve',{'a/b':1,'a%2Fb':2},'/a%2Fb',expected={'return':2})\n\
+        check('percent-not-decoded','resolve',{'a b':3},'/a%20b',expected=E('not found'))\ncheck('json-string-decoded-by-caller','json_decode_pointer',{'i\\\
+        \\j':4},json.dumps('/i\\\\j'),expected={'return':4},note='json.loads here is caller preprocessing, not\
+        \ library URI/JSON-string parsing')\ncheck('json-string-not-decoded-by-library','resolve',{'leaf':5},'\"\
+        /leaf\"',expected=E('Location must start'))\ncheck('unicode-composed','resolve',{'é':'composed','e\\u0301':'decomposed'},'/é',expected={'return':'composed'})\n\
+        check('unicode-decomposed','resolve',{'é':'composed','e\\u0301':'decomposed'},'/e\\u0301',expected={'return':'decomposed'})\n\
+        check('unicode-not-normalized','resolve',{'é':'only-composed'},'/e\\u0301',expected=E('not found'))\n\
+        check('nul-member','resolve',{'x\\x00y':6},'/x\\x00y',expected={'return':6})\ncheck('array-zero','resolve',['first','second'],'/0',expected={'return':'first'})\n\
+        check('array-one','resolve',['first','second'],'/1',expected={'return':'second'})\nfor name,token in [('leadingzero','01'),('negative','-1'),('plus','+0'),('arabicdigit','١'),('newline','1\\\
+        n'),('space',' 0'),('decimal','1.0')]:check('array-invalid-'+name,'resolve',['first','second'],'/'+token,expected=E('not\
+        \ a valid sequence index'))\ncheck('array-out-of-range','resolve',[1],'/1',expected=E('out of bounds'))\n\
+        check('object-numeric-string','resolve',{'01':'object-key'},'/01',expected={'return':'object-key'})\n\
+        check('object-integer-key-not-coerced','resolve',{1:'non-JSON-key'},'/1',expected=E('not found'))\ncheck('hyphen-object-key','resolve',{'-':'named-key'},'/-',expected={'return':'named-key'})\n\
+        check('hyphen-array-sentinel','resolve',[1],'/-',expected={'return_type':'EndOfList','changed':False},note='Sentinel\
+        \ is not a resolved existing RFC6901 value')\ncheck('hyphen-sentinel-not-default','resolve',[],'/-',options={'default':'fallback'},expected={'return_type':'EndOfList'})\n\
+        check('hyphen-followed-by-token','resolve',[],'/-/x',expected=E('does not support indexing'))\ncheck('missing-default','resolve',{},'/missing',options={'default':'fallback'},expected={'return':'fallback'})\n\
+        check('syntax-error-not-default','resolve',{},'/bad~2',options={'default':'fallback'},expected=E('Found\
+        \ invalid escape'))\ncheck('scalar-not-container','resolve',42,'/x',expected=E('does not support indexing'))\n\
+        check('string-not-container','resolve','abc','/0',expected=E('non-container type'))\ncheck('tuple-python-extension','resolve',('a','b'),'/1',expected={'return':'b'})\n\
+        check('bytes-python-extension','resolve',b'AZ','/1',expected={'return':90},note='Python bytes are accepted\
+        \ as a Sequence, not a JSON array-validation result')\ncheck('duck-indexing-extension','resolve',Duck(),'/leaf',expected={'return':7})\n\
+        check('duck-keyerror-default','resolve',Duck(),'/missing',options={'default':None},expected={'return':None})\n\
+        check('duck-nonkeyerror-propagates','resolve',Duck('value_error'),'/leaf',options={'default':None},expected={'error':'ValueError','message_has':'custom\
+        \ get failure','changed':False})\ncheck('duplicate-name-lost-upstream','json_document_decode','{\"same\"\
+        :1,\"same\":2}','/same',expected={'return':2},note='Caller stdlib json.loads collapses duplicates before\
+        \ pointer sees dict; not duplicate-member rejection or RFC6901 full conformance')\ncheck('verbose-default-document','verbose',{'private_marker':'finite'},'/absent',options={'verbose':True},expected={**E(),\
+        \ 'message_has':'private_marker'})\ncheck('verbose-disabled','verbose',{'private_marker':'finite'},'/absent',options={'verbose':False},expected={**E(),'message_not':'private_marker'})\n\
+        check('set-existing-default','set',{'a':1},'/a',2,expected={'return':{'a':2},'after':{'a':2},'changed':True})\n\
+        check('set-missing-final-default','set',{},'/leaf',2,expected={'return':{'leaf':2},'after':{'leaf':2},'changed':True})\n\
+        check('set-missing-intermediate-default','set',{},'/missing/leaf',2,expected=E('not found'))\ncheck('create-dict-extension','set',{},'/missing/leaf',2,{'create':True},expected={'return':{'missing':{'leaf':2}},'changed':True})\n\
+        check('create-numeric-token-is-dict-key','set',{},'/missing/0/leaf',2,{'create':True},expected={'return':{'missing':{'0':{'leaf':2}}},'changed':True})\n\
+        check('set-list-hyphen-default','set',{'a':[1]},'/a/-',2,expected={'return':{'a':[1,2]},'changed':True})\n\
+        check('set-list-length-default-rejected','set',{'a':[1]},'/a/1',2,expected=E('Invalid assignment target'))\n\
+        check('create-list-length-append','set',{'a':[1]},'/a/1',2,{'create':True},expected={'return':{'a':[1,2]},'changed':True})\n\
+        check('create-list-end-intermediate','set',{'a':[]},'/a/0/leaf',2,{'create':True},expected={'return':{'a':[{'leaf':2}]},'changed':True})\n\
+        check('create-list-hyphen-intermediate','set',{'a':[]},'/a/-/leaf',2,{'create':True},expected={'return':{'a':[{'leaf':2}]},'changed':True})\n\
+        check('create-list-gap-unchanged','set',{'a':[1]},'/a/3/leaf',2,{'create':True},expected=E('out of bounds'))\n\
+        check('create-scalar-path-unchanged','set',{'a':3},'/a/x/y',2,{'create':True},expected=E('does not support\
+        \ indexing'))\ncheck('create-immutable-tuple-unchanged','set',{'a':()},'/a/0/leaf',2,{'create':True},expected=E('Invalid\
+        \ assignment target'))\ncheck('create-invalid-escape-unchanged','set',{},'/x/~2/y',2,{'create':True},expected=E('Found\
+        \ invalid escape'))\ncheck('copy-mode-not-inplace','set',{'a':{}},'/a/b/c',2,{'create':True,'inplace':False},expected={'return':{'a':{'b':{'c':2}}},'after':{'a':{}},'changed':False})\n\
+        check('set-root-inplace-rejected','set',{'a':1},'',2,expected=E('Cannot set root in place'))\ncheck('set-root-replacement-copy-mode','set',{'a':1},'',2,{'inplace':False},expected={'return':2,'after':{'a':1},'changed':False})\n\
+        check('custom-set-can-partially-mutate','set',Duck('mutate_then_fail'),'/leaf',12,{'create':True},expected={'error':'ValueError','message_has':'after\
+        \ write','changed':True},note='Finite custom __setitem__ writes then raises. No blanket atomicity guarantee\
+        \ for arbitrary Python objects; not a failure of built-in dict/list detached construction.')\ncheck('from-parts-escape','from_parts',['left/right','~',0],expected={'return':'/left~1right/~0/0'})\n\
+        report=dict(result='PASS / FINITE SELF-AUTHORED BEHAVIOR OBSERVATIONS' if all(x['passed']for x in rows)else'FAIL',recorded_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),module_sha256=hashlib.sha256(p.read_bytes()).hexdigest(),module_git_blob='4458937f09759a3136441ec8268e9ab81209539d',version=jp.__version__,environment=dict(python=sys.version,implementation=platform.python_implementation(),int_max_str_digits=sys.get_int_max_str_digits()),records=rows,count=len(rows),passed=sum(x['passed']for\
+        \ x in rows),boundary='Typed exact observations plus explicit expected predicates for finite inputs only;\
+        \ errors/extension behavior intentionally retained. Not full conformance or blanket atomicity/security\
+        \ guarantee.')\na.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,ensure_ascii=True,indent=2)+'\\\
+        n')\nprint(json.dumps({k:v for k,v in report.items() if k!='records'},indent=2));print('FAILURES',[(x['id'],x['checks'],x['observed'])for\
+        \ x in rows if not x['passed']]);assert all(x['passed']for x in rows)\n"
+    - filename: cli_probes.py
+      sha256: 66b8d6ce1127cc303764352daeb5c3bba249daecb63f7b6940187738733b8af9
+      text: "\"\"\"Self-authored source CLI finite probes; no installs/network. All fixtures are local.\npython\
+        \ -B cli_probes.py --source source --output runtime/cli-probes.json\n\"\"\"\nfrom pathlib import Path\n\
+        import argparse,datetime,hashlib,json,os,subprocess,sys\nap=argparse.ArgumentParser();ap.add_argument('--source',type=Path,required=True);ap.add_argument('--output',type=Path,required=True);a=ap.parse_args();S=a.source.resolve();assert\
+        \ not a.output.exists()\nassert hashlib.sha256((S/'jsonpointer.py').read_bytes()).hexdigest()=='4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9'\n\
+        assert hashlib.sha256((S/'bin/jsonpointer').read_bytes()).hexdigest()=='ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2'\n\
+        W=a.output.parent/(a.output.stem+'-fixtures');assert not W.exists();W.mkdir(parents=True)\nfixtures={'good.json':b'{\"\
+        leaf\":12,\"a/b\":7,\"name \":\"kept\",\"-\":\"key\"}','array.json':b'{\"leaf\":[]}','missing.json':b'{}','bad.json':b'{\"\
+        leaf\":}','duplicate.json':b'{\"leaf\":1,\"leaf\":2}','pointer.txt':b'/name \\r\\n','unicode.json':'{\"\
+        é\":\"值\"}'.encode(),'invalid-utf8.json':b'{\"leaf\":\"\\xff\"}'}\nfor n,b in fixtures.items():(W/n).write_bytes(b)\n\
+        cases=[\n ('version',['--version'],0,b'jsonpointer 3.6\\n',[],[]),\n ('escaped-token',['/a~1b','good.json'],0,b'7\\\
+        n',[],[]),\n ('empty-root',['','good.json'],0,b'{\"leaf\": 12, \"a/b\": 7, \"name \": \"kept\", \"-\"\
+        : \"key\"}\\n',[],[]),\n ('fragment-rejected',['#/leaf','good.json'],2,b'',['invalid JSON pointer'],[]),\n\
+        \ ('array-end-error',['/leaf/-','array.json'],1,b'',['does not reference an existing array element'],['Traceback']),\n\
+        \ ('hyphen-object-key',['/-','good.json'],0,b'\"key\"\\n',[],[]),\n ('pointer-file-keeps-space',['-f','pointer.txt','good.json'],0,b'\"\
+        kept\"\\n',[],[]),\n ('utf8-file',['/é','unicode.json'],0,b'\"\\\\u503c\"\\n',[],[]),\n ('duplicates-lost-by-CLI-json-load',['/leaf','duplicate.json'],0,b'2\\\
+        n',[],[]),\n ('resolution-error-continues-without-flag',['/leaf','missing.json','good.json'],1,b'12\\\
+        n',['Could not resolve pointer'],['Traceback']),\n ('bad-json-stops-default',['/leaf','good.json','bad.json','good.json'],1,b'12\\\
+        n',['Traceback','JSONDecodeError'],[]),\n ('bad-json-continue',['--continue-on-error','/leaf','bad.json','good.json'],1,b'12\\\
+        n',['Could not parse JSON'],['Traceback']),\n ('bad-utf8-continue',['--continue-on-error','/leaf','invalid-utf8.json','good.json'],1,b'12\\\
+        n',['Could not parse JSON','decode'],['Traceback']),\n ('missing-file-not-skipped',['--continue-on-error','/leaf','good.json','absent.json','good.json'],2,b'12\\\
+        n',['absent.json'],[]),\n]\nrows=[];env=dict(os.environ,PYTHONPATH=str(S),PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1')\n\
+        for name,args,code,out,yes,no in cases:\n cmd=[sys.executable,'-B',str(S/'bin/jsonpointer')]+args;r=subprocess.run(cmd,cwd=W,env=env,capture_output=True,timeout=15)\n\
+        \ checks={'returncode':r.returncode==code,'stdout_exact':r.stdout==out,'stderr_contains':all(s.encode()in\
+        \ r.stderr for s in yes),'stderr_excludes':all(s.encode()not in r.stderr for s in no)}\n if not yes:checks['empty_stderr']=r.stderr==b''\n\
+        \ rows.append(dict(id=name,argv=args,expected=dict(exit=code,stdout_hex=out.hex(),stderr_contains=yes,stderr_excludes=no),observed=dict(exit=r.returncode,stdout_hex=r.stdout.hex(),stderr_hex=r.stderr.hex()),checks=checks,passed=all(checks.values())))\n\
+        report=dict(result='PASS / FINITE SOURCE CLI OBSERVATIONS'if all(x['passed']for x in rows)else'FAIL',recorded_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),source=str(S),command_prefix=[sys.executable,'-B',str(S/'bin/jsonpointer')],environment={k:env[k]for\
+        \ k in ['PYTHONPATH','PYTHONDONTWRITEBYTECODE','PYTHONUTF8']},fixtures=[dict(path=n,bytes_hex=b.hex(),sha256=hashlib.sha256(b).hexdigest())for\
+        \ n,b in fixtures.items()],count=len(rows),passed=sum(x['passed']for x in rows),records=rows,boundary='Source\
+        \ CLI invoked directly without installation, not a generated installed entrypoint/package-install test.\
+        \ Per-file partial stdout and nonzero aggregate status are retained; not all-input or transactional behavior.')\n\
+        a.output.write_text(json.dumps(report,ensure_ascii=True,indent=2)+'\\n');print(json.dumps({k:v for k,v\
+        \ in report.items()if k not in ['records','fixtures']},indent=2));print('FAILURES',[(x['id'],x['checks'])for\
+        \ x in rows if not x['passed']]);assert all(x['passed']for x in rows)\n"
+    - filename: pointer_file_supplement.py
+      sha256: 7274f55e035e908f37b69e995fed82ca62b2b563d5c2ae4f172d2ff86794e4b4
+      text: "\"\"\"Three finite observations prompted by independent preflight reviewer.\nNot evidence of arbitrary-character\
+        \ file-pointer preservation.\n\"\"\"\nfrom pathlib import Path\nimport datetime,hashlib,importlib.util,json,os,subprocess,sys\n\
+        O=Path(__file__).resolve().parent;S=O/'source';D=O/'runtime/pointer-file-supplement';assert not D.exists();D.mkdir()\n\
+        assert hashlib.sha256((S/'jsonpointer.py').read_bytes()).hexdigest()=='4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9'\n\
+        spec=importlib.util.spec_from_file_location('fixed_jsonpointer',S/'jsonpointer.py');jp=importlib.util.module_from_spec(spec);spec.loader.exec_module(jp)\n\
+        doc={'key\\n':1,'key':2};pointer='/key\\n';(D/'document.json').write_text(json.dumps(doc),encoding='utf-8');(D/'pointer.txt').write_bytes(pointer.encode())\n\
+        value=jp.resolve_pointer(doc,pointer);rows=[dict(id='api-retains-terminal-LF',operation='resolve_pointer',pointer=pointer,document=doc,expected=1,observed=value,passed=value==1)]\n\
+        for name,args,expected in [('explicit-argument-retains-terminal-LF',['-p',pointer,'document.json'],b'1\\\
+        n'),('pointer-file-trims-terminal-LF',['-f','pointer.txt','document.json'],b'2\\n')]:\n cmd=[sys.executable,'-B',str(S/'bin/jsonpointer')]+args;r=subprocess.run(cmd,cwd=D,env=dict(os.environ,PYTHONPATH=str(S),PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1'),capture_output=True,timeout=10);rows.append(dict(id=name,argv=args,input_document_hex=(D/'document.json').read_bytes().hex(),pointer_file_hex=(D/'pointer.txt').read_bytes().hex(),expected=dict(returncode=0,stdout_hex=expected.hex(),stderr_hex=''),observed=dict(returncode=r.returncode,stdout_hex=r.stdout.hex(),stderr_hex=r.stderr.hex()),passed=r.returncode==0\
+        \ and r.stdout==expected and not r.stderr))\nreport=dict(result='PASS / THREE FINITE CRLF FILE-FORM BOUNDARY\
+        \ OBSERVATIONS',at=datetime.datetime.now(datetime.timezone.utc).isoformat(),prompted_by='Independent preflight\
+        \ reviewer /root/resume_gfm_delivery/gfm_preview_review; own reproduction here, not independent finding\
+        \ attribution',count=3,records=rows,boundary='Source file mode strips trailing CR/LF as line endings,\
+        \ so may silently select a different member from exact API/-p input. This is not arbitrary-character pointer-file\
+        \ roundtrip fidelity; one LF case executed, CR/LF source mechanism inspected. Extra records are separate\
+        \ from68API/14CLI and overlap.')\n(D/'report.json').write_text(json.dumps(report,ensure_ascii=True,indent=2)+'\\\
+        n');assert all(x['passed']for x in rows);print(json.dumps(report,ensure_ascii=True,indent=2))\n"
+    - filename: pointer_newline_supplement.py
+      sha256: 07dcbc071aee53f92f01b491433fe49b42264b19aece7c6752fddca407b6532b
+      text: "\"\"\"Six self-authored finite author replays prompted by independent semantic review.\nText-mode\
+        \ universal-newline conversion is distinct from terminal CR/LF stripping.\nFresh directory with unchanged\
+        \ source/, then python -B pointer_newline_supplement.py.\n\"\"\"\nfrom pathlib import Path\nimport datetime,hashlib,importlib.util,json,os,subprocess,sys\n\
+        R=Path(__file__).resolve().parent;S=R/'source';O=R/'runtime/pointer-newline-supplement';assert not O.exists();O.mkdir()\n\
+        assert hashlib.sha256((S/'jsonpointer.py').read_bytes()).hexdigest()=='4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9'\n\
+        assert hashlib.sha256((S/'bin/jsonpointer').read_bytes()).hexdigest()=='ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2'\n\
+        spec=importlib.util.spec_from_file_location('fixed_jsonpointer',S/'jsonpointer.py');jp=importlib.util.module_from_spec(spec);spec.loader.exec_module(jp)\n\
+        doc={'a\\rb':1,'a\\nb':2,'a\\r\\nb':3};(O/'document.json').write_bytes(json.dumps(doc).encode());rows=[]\n\
+        for label,pointer,value in [('CR','/a\\rb',1),('CRLF','/a\\r\\nb',3)]:\n actual=jp.resolve_pointer(doc,pointer);rows.append(dict(id=label+'-API-exact',operation='resolve_pointer',document=doc,pointer=pointer,expected=value,observed=actual,passed=actual==value));(O/(label+'.txt')).write_bytes(pointer.encode())\n\
+        \ for mode,args,expected in [('explicit',['-p',pointer,'document.json'],str(value).encode()+b'\\n'),('file',['-f',label+'.txt','document.json'],b'2\\\
+        n')]:\n  r=subprocess.run([sys.executable,'-B',str(S/'bin/jsonpointer')]+args,cwd=O,env=dict(os.environ,PYTHONPATH=str(S),PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1'),capture_output=True,timeout=10)\n\
+        \  rows.append(dict(id=label+'-CLI-'+mode,argv=args,pointer_file_hex=pointer.encode().hex(),expected=dict(exit=0,stdout_hex=expected.hex(),stderr_hex=''),observed=dict(exit=r.returncode,stdout_hex=r.stdout.hex(),stderr_hex=r.stderr.hex()),passed=r.returncode==0\
+        \ and r.stdout==expected and not r.stderr))\nreport=dict(result='PASS / SIX FINITE AUTHOR NEWLINE-CONVERSION\
+        \ OBSERVATIONS',author='Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author',recorded_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),discovery_attribution='Independent\
+        \ semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic; these are author replays, not independent\
+        \ review',count=6,records=rows,boundary='UTF-8 text-mode pointer files normalize internal CR and CRLF\
+        \ to LF before terminal CR/LF stripping. API/-p preserve these literal internal characters. These six\
+        \ observations overlap prior research/preflight probes and are not added to68API/14CLI/3terminal-LF or79upstream\
+        \ counts. No arbitrary-character file-pointer fidelity or full conformance.')\nassert len(rows)==6 and\
+        \ all(x['passed'] for x in rows);(O/'report.json').write_text(json.dumps(report,ensure_ascii=True,indent=2)+'\\\
+        n');print(json.dumps(report,ensure_ascii=True,indent=2))\n"
+    - filename: pointer_decode_supplement.py
+      sha256: eac2af02e53b734ad3bb69d22749cfb25916c700ab0b11c6cb3b0c27d2e71627
+      text: "\"\"\"Two author replays prompted by independent semantic review, not new coverage.\n-f pointer-file\
+        \ text decoding happens outside the JSON-data recovery handler.\nUse fresh runtime/pointer-decode-supplement\
+        \ with unchanged fixed source/.\n\"\"\"\nfrom pathlib import Path\nimport datetime,hashlib,json,os,subprocess,sys\n\
+        R=Path(__file__).resolve().parent;S=R/'source';O=R/'runtime/pointer-decode-supplement';assert not O.exists();O.mkdir()\n\
+        assert hashlib.sha256((S/'jsonpointer.py').read_bytes()).hexdigest()=='4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9'\n\
+        assert hashlib.sha256((S/'bin/jsonpointer').read_bytes()).hexdigest()=='ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2'\n\
+        (O/'good.json').write_bytes(b'{\"value\": 7}');(O/'invalid.ptr').write_bytes(b'/\\xff');(O/'invalid.json').write_bytes(b'\\\
+        xff');rows=[]\nfor name,args,stdout,stderr_needle,traceback in [\n ('pointer-file-decode-not-recovered',['--continue-on-error','-f','invalid.ptr','good.json'],b'',b'UnicodeDecodeError',True),\n\
+        \ ('json-data-decode-recovered',['--continue-on-error','-p','/value','invalid.json','good.json'],b'7\\\
+        n',b'Could not parse JSON',False)]:\n q=subprocess.run([sys.executable,'-B',str(S/'bin/jsonpointer')]+args,cwd=O,env=dict(os.environ,PYTHONPATH=str(S),PYTHONDONTWRITEBYTECODE='1',PYTHONUTF8='1'),capture_output=True,timeout=10)\n\
+        \ predicates=dict(exit_one=q.returncode==1,expected_stdout=q.stdout==stdout,expected_stderr_marker=stderr_needle\
+        \ in q.stderr,traceback_presence=(b'Traceback' in q.stderr)==traceback)\n rows.append(dict(id=name,argv=args,fixtures={'good.json':b'{\"\
+        value\": 7}'.hex(),'invalid.ptr':b'/\\xff'.hex(),'invalid.json':b'\\xff'.hex()},expected=dict(exit=1,stdout_hex=stdout.hex(),stderr_contains=stderr_needle.decode(),traceback=traceback),observed=dict(exit=q.returncode,stdout_hex=q.stdout.hex(),stderr_hex=q.stderr.hex()),predicates=predicates,passed=all(predicates.values())))\n\
+        assert len(rows)==2 and all(x['passed']for x in rows)\nr=dict(result='PASS / TWO FINITE AUTHOR POINTER-FILE\
+        \ VERSUS DATA-FILE DECODE OBSERVATIONS',author='Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author',recorded_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),discovery_attribution='Independent\
+        \ semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic; author replays are self-check, not\
+        \ independent acceptance',count=2,records=rows,boundary='--continue-on-error catches JSON/text decoding\
+        \ of queried JSON data files, not pointer-file -f UTF-8 read and not file-open errors. Absolute traceback\
+        \ paths remain raw; no cross-directory raw identity. Two observations overlap prior research/probes, not\
+        \ added to 68/14/3/6 or upstream79; no all-CLI-path claim.')\n(O/'report.json').write_text(json.dumps(r,ensure_ascii=True,indent=2)+'\\\
+        n');print(json.dumps(r,ensure_ascii=True,indent=2))\n"
+    commands:
+    - python -B finite_probes.py --module source/jsonpointer.py --output runtime/api-source.json
+    - python -B cli_probes.py --source source --output runtime/cli-source.json
+    - python -B pointer_file_supplement.py
+    - python -B pointer_newline_supplement.py
+    - python -B pointer_decode_supplement.py
+    upstream_test_command: (cd source && PYTHONDONTWRITEBYTECODE=1 python -B -m unittest -v)
+    reproduction_zh: 在新的可写目录按固定 archive URL/hash 安全解包到 source/，逐项核 source_manifest_metadata 的23个blob；将五个 self_authored_files.text
+      原样写为 filename，创建空 runtime/。按 commands 顺序执行；输出目录不能预先存在，不运行 install/setup/build。API模块与sourceCLI各有精确SHA256
+      guard。下面保留自写有限输入、谓词、typed返回/异常/前后状态和原CLIhex；完整第三方source/RFC/tests不嵌入。upstream79需另按固定源运行，不把它混成79个RFC独立例。时间/路径不是行为相等声明，CLI
+      traceback有绝对路径差异，不做raw归一化伪装相等。
+    api_report:
+      result: PASS / FINITE SELF-AUTHORED BEHAVIOR OBSERVATIONS
+      recorded_at: '2026-10-30T00:12:17.654241+00:00'
+      module_sha256: 4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9
+      module_git_blob: 4458937f09759a3136441ec8268e9ab81209539d
+      version: '3.6'
+      environment: *id001
+      records:
+      - id: version
+        operation: version
+        input_document:
+          type: NoneType
+          value: null
+        pointer: null
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: '3.6'
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: '3.6'
+          document_after:
+            type: NoneType
+            value: null
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: root-object
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: top
+            - type: list
+              items:
+              - type: int
+                value: 4
+        pointer: ''
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return:
+            top:
+            - 4
+          changed: false
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: top
+              - type: list
+                items:
+                - type: int
+                  value: 4
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: top
+              - type: list
+                items:
+                - type: int
+                  value: 4
+          changed: false
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: root-scalar
+        operation: resolve
+        input_document:
+          type: int
+          value: 7
+        pointer: ''
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 7
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 7
+          document_after:
+            type: int
+            value: 7
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: empty-member
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: ''
+            - type: int
+              value: 8
+        pointer: /
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 8
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 8
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: ''
+              - type: int
+                value: 8
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: slash-token
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: left/right
+            - type: int
+              value: 9
+        pointer: /left~1right
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 9
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 9
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: left/right
+              - type: int
+                value: 9
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: tilde-token
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: left~right
+            - type: int
+              value: 10
+        pointer: /left~0right
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 10
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 10
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: left~right
+              - type: int
+                value: 10
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: decode-order
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: ~1
+            - type: str
+              value: tilde-one
+          - - type: str
+              value: /
+            - type: str
+              value: slash
+        pointer: /~01
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: tilde-one
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: tilde-one
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: ~1
+              - type: str
+                value: tilde-one
+            - - type: str
+                value: /
+              - type: str
+                value: slash
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: double-tilde
+        operation: parts
+        input_document:
+          type: NoneType
+          value: null
+        pointer: /~00
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return:
+            parts:
+            - ~0
+            path: /~00
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: parts
+              - type: list
+                items:
+                - type: str
+                  value: ~0
+            - - type: str
+                value: path
+              - type: str
+                value: /~00
+          document_after:
+            type: NoneType
+            value: null
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: invalid-trailing-tilde
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: /x~
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Found invalid escape
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Found invalid escape ~
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: invalid-escape-two
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: /~2
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Found invalid escape
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Found invalid escape ~2
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: invalid-leading-prefix
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: leaf
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Location must start
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Location must start with /
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: fragment-root-unsupported
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: '#'
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Location must start
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Location must start with /
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: fragment-path-unsupported
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: leaf
+            - type: int
+              value: 1
+        pointer: '#/leaf'
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Location must start
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Location must start with /
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 1
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: percent-is-literal
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a/b
+            - type: int
+              value: 1
+          - - type: str
+              value: a%2Fb
+            - type: int
+              value: 2
+        pointer: /a%2Fb
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 2
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a/b
+              - type: int
+                value: 1
+            - - type: str
+                value: a%2Fb
+              - type: int
+                value: 2
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: percent-not-decoded
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a b
+            - type: int
+              value: 3
+        pointer: /a%20b
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not found
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'member ''a%20b'' not found in {''a b'': 3}'
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a b
+              - type: int
+                value: 3
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: json-string-decoded-by-caller
+        operation: json_decode_pointer
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: i\j
+            - type: int
+              value: 4
+        pointer: '"/i\\j"'
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 4
+        boundary: json.loads here is caller preprocessing, not library URI/JSON-string parsing
+        observed:
+          returned:
+            type: int
+            value: 4
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: i\j
+              - type: int
+                value: 4
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: json-string-not-decoded-by-library
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: leaf
+            - type: int
+              value: 5
+        pointer: '"/leaf"'
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Location must start
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Location must start with /
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 5
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: unicode-composed
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: é
+            - type: str
+              value: composed
+          - - type: str
+              value: é
+            - type: str
+              value: decomposed
+        pointer: /é
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: composed
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: composed
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: é
+              - type: str
+                value: composed
+            - - type: str
+                value: é
+              - type: str
+                value: decomposed
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: unicode-decomposed
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: é
+            - type: str
+              value: composed
+          - - type: str
+              value: é
+            - type: str
+              value: decomposed
+        pointer: /é
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: decomposed
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: decomposed
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: é
+              - type: str
+                value: composed
+            - - type: str
+                value: é
+              - type: str
+                value: decomposed
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: unicode-not-normalized
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: é
+            - type: str
+              value: only-composed
+        pointer: /é
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not found
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'member ''é'' not found in {''é'': ''only-composed''}'
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: é
+              - type: str
+                value: only-composed
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: nul-member
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: "x\0y"
+            - type: int
+              value: 6
+        pointer: "/x\0y"
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 6
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 6
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: "x\0y"
+              - type: int
+                value: 6
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: array-zero
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /0
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: first
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: first
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: array-one
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: second
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: second
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: array-invalid-leadingzero
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /01
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''01'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-negative
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /-1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''-1'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-plus
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /+0
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''+0'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-arabicdigit
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /١
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''١'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-newline
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: '/1
+
+          '
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''1
+
+            '' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-space
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: / 0
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: ''' 0'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-invalid-decimal
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: first
+          - type: str
+            value: second
+        pointer: /1.0
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not a valid sequence index
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: '''1.0'' is not a valid sequence index'
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: first
+            - type: str
+              value: second
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: array-out-of-range
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: int
+            value: 1
+        pointer: /1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: out of bounds
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: index '1' is out of bounds
+          document_after:
+            type: list
+            items:
+            - type: int
+              value: 1
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: object-numeric-string
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: '01'
+            - type: str
+              value: object-key
+        pointer: /01
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: object-key
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: object-key
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: '01'
+              - type: str
+                value: object-key
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: object-integer-key-not-coerced
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: int
+              value: 1
+            - type: str
+              value: non-JSON-key
+        pointer: /1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not found
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'member ''1'' not found in {1: ''non-JSON-key''}'
+          document_after:
+            type: dict
+            items:
+            - - type: int
+                value: 1
+              - type: str
+                value: non-JSON-key
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: hyphen-object-key
+        operation: resolve
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: '-'
+            - type: str
+              value: named-key
+        pointer: /-
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: named-key
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: named-key
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: '-'
+              - type: str
+                value: named-key
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: hyphen-array-sentinel
+        operation: resolve
+        input_document:
+          type: list
+          items:
+          - type: int
+            value: 1
+        pointer: /-
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return_type: EndOfList
+          changed: false
+        boundary: Sentinel is not a resolved existing RFC6901 value
+        observed:
+          returned:
+            type: EndOfList
+            list:
+              type: list
+              items:
+              - type: int
+                value: 1
+          document_after:
+            type: list
+            items:
+            - type: int
+              value: 1
+          changed: false
+        checks:
+          return_type: true
+          changed: true
+        passed: true
+      - id: hyphen-sentinel-not-default
+        operation: resolve
+        input_document:
+          type: list
+          items: []
+        pointer: /-
+        value:
+          type: NoneType
+          value: null
+        options:
+          default: fallback
+        expected:
+          return_type: EndOfList
+        boundary: ''
+        observed:
+          returned:
+            type: EndOfList
+            list:
+              type: list
+              items: []
+          document_after:
+            type: list
+            items: []
+          changed: false
+        checks:
+          return_type: true
+        passed: true
+      - id: hyphen-followed-by-token
+        operation: resolve
+        input_document:
+          type: list
+          items: []
+        pointer: /-/x
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: does not support indexing
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Document '<class 'fixed_jsonpointer.EndOfList'>' does not support indexing, must
+            be mapping/sequence or support __getitem__
+          document_after:
+            type: list
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: missing-default
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: /missing
+        value:
+          type: NoneType
+          value: null
+        options:
+          default: fallback
+        expected:
+          return: fallback
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: fallback
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: syntax-error-not-default
+        operation: resolve
+        input_document:
+          type: dict
+          items: []
+        pointer: /bad~2
+        value:
+          type: NoneType
+          value: null
+        options:
+          default: fallback
+        expected:
+          error: JsonPointerException
+          message_has: Found invalid escape
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Found invalid escape ~2
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: scalar-not-container
+        operation: resolve
+        input_document:
+          type: int
+          value: 42
+        pointer: /x
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: does not support indexing
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Document '<class 'int'>' does not support indexing, must be mapping/sequence or support
+            __getitem__
+          document_after:
+            type: int
+            value: 42
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: string-not-container
+        operation: resolve
+        input_document:
+          type: str
+          value: abc
+        pointer: /0
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: non-container type
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Cannot apply token '0' to non-container type <class 'str'>
+          document_after:
+            type: str
+            value: abc
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: tuple-python-extension
+        operation: resolve
+        input_document:
+          type: tuple
+          items:
+          - type: str
+            value: a
+          - type: str
+            value: b
+        pointer: /1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: b
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: b
+          document_after:
+            type: tuple
+            items:
+            - type: str
+              value: a
+            - type: str
+              value: b
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: bytes-python-extension
+        operation: resolve
+        input_document:
+          type: bytes
+          hex: 415a
+        pointer: /1
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 90
+        boundary: Python bytes are accepted as a Sequence, not a JSON array-validation result
+        observed:
+          returned:
+            type: int
+            value: 90
+          document_after:
+            type: bytes
+            hex: 415a
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: duck-indexing-extension
+        operation: resolve
+        input_document:
+          type: FiniteDuck
+          data:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 7
+          behavior: normal
+        pointer: /leaf
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 7
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 7
+          document_after:
+            type: FiniteDuck
+            data:
+              type: dict
+              items:
+              - - type: str
+                  value: leaf
+                - type: int
+                  value: 7
+            behavior: normal
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: duck-keyerror-default
+        operation: resolve
+        input_document:
+          type: FiniteDuck
+          data:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 7
+          behavior: normal
+        pointer: /missing
+        value:
+          type: NoneType
+          value: null
+        options:
+          default: null
+        expected:
+          return: null
+        boundary: ''
+        observed:
+          returned:
+            type: NoneType
+            value: null
+          document_after:
+            type: FiniteDuck
+            data:
+              type: dict
+              items:
+              - - type: str
+                  value: leaf
+                - type: int
+                  value: 7
+            behavior: normal
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: duck-nonkeyerror-propagates
+        operation: resolve
+        input_document:
+          type: FiniteDuck
+          data:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 7
+          behavior: value_error
+        pointer: /leaf
+        value:
+          type: NoneType
+          value: null
+        options:
+          default: null
+        expected:
+          error: ValueError
+          message_has: custom get failure
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: ValueError
+          exception_message: custom get failure
+          document_after:
+            type: FiniteDuck
+            data:
+              type: dict
+              items:
+              - - type: str
+                  value: leaf
+                - type: int
+                  value: 7
+            behavior: value_error
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: duplicate-name-lost-upstream
+        operation: json_document_decode
+        input_document:
+          type: str
+          value: '{"same":1,"same":2}'
+        pointer: /same
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: 2
+        boundary: Caller stdlib json.loads collapses duplicates before pointer sees dict; not duplicate-member
+          rejection or RFC6901 full conformance
+        observed:
+          returned:
+            type: int
+            value: 2
+          document_after:
+            type: str
+            value: '{"same":1,"same":2}'
+          changed: false
+        checks:
+          return: true
+        passed: true
+      - id: verbose-default-document
+        operation: verbose
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: private_marker
+            - type: str
+              value: finite
+        pointer: /absent
+        value:
+          type: NoneType
+          value: null
+        options:
+          verbose: true
+        expected:
+          error: JsonPointerException
+          changed: false
+          message_has: private_marker
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'member ''absent'' not found in {''private_marker'': ''finite''}'
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: private_marker
+              - type: str
+                value: finite
+          changed: false
+        checks:
+          error: true
+          changed: true
+          message_has: true
+        passed: true
+      - id: verbose-disabled
+        operation: verbose
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: private_marker
+            - type: str
+              value: finite
+        pointer: /absent
+        value:
+          type: NoneType
+          value: null
+        options:
+          verbose: false
+        expected:
+          error: JsonPointerException
+          changed: false
+          message_not: private_marker
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: member 'absent' not found
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: private_marker
+              - type: str
+                value: finite
+          changed: false
+        checks:
+          error: true
+          changed: true
+          message_not: true
+        passed: true
+      - id: set-existing-default
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: int
+              value: 1
+        pointer: /a
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          return:
+            a: 2
+          after:
+            a: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: int
+                value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: int
+                value: 2
+          changed: true
+        checks:
+          return: true
+          after: true
+          changed: true
+        passed: true
+      - id: set-missing-final-default
+        operation: set
+        input_document:
+          type: dict
+          items: []
+        pointer: /leaf
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          return:
+            leaf: 2
+          after:
+            leaf: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 2
+          changed: true
+        checks:
+          return: true
+          after: true
+          changed: true
+        passed: true
+      - id: set-missing-intermediate-default
+        operation: set
+        input_document:
+          type: dict
+          items: []
+        pointer: /missing/leaf
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: not found
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: member 'missing' not found in {}
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: create-dict-extension
+        operation: set
+        input_document:
+          type: dict
+          items: []
+        pointer: /missing/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          return:
+            missing:
+              leaf: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: missing
+              - type: dict
+                items:
+                - - type: str
+                    value: leaf
+                  - type: int
+                    value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: missing
+              - type: dict
+                items:
+                - - type: str
+                    value: leaf
+                  - type: int
+                    value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: create-numeric-token-is-dict-key
+        operation: set
+        input_document:
+          type: dict
+          items: []
+        pointer: /missing/0/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          return:
+            missing:
+              '0':
+                leaf: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: missing
+              - type: dict
+                items:
+                - - type: str
+                    value: '0'
+                  - type: dict
+                    items:
+                    - - type: str
+                        value: leaf
+                      - type: int
+                        value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: missing
+              - type: dict
+                items:
+                - - type: str
+                    value: '0'
+                  - type: dict
+                    items:
+                    - - type: str
+                        value: leaf
+                      - type: int
+                        value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: set-list-hyphen-default
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items:
+              - type: int
+                value: 1
+        pointer: /a/-
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          return:
+            a:
+            - 1
+            - 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+                - type: int
+                  value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+                - type: int
+                  value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: set-list-length-default-rejected
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items:
+              - type: int
+                value: 1
+        pointer: /a/1
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Invalid assignment target
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'Invalid assignment target: list assignment index out of range'
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: create-list-length-append
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items:
+              - type: int
+                value: 1
+        pointer: /a/1
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          return:
+            a:
+            - 1
+            - 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+                - type: int
+                  value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+                - type: int
+                  value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: create-list-end-intermediate
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items: []
+        pointer: /a/0/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          return:
+            a:
+            - leaf: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: dict
+                  items:
+                  - - type: str
+                      value: leaf
+                    - type: int
+                      value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: dict
+                  items:
+                  - - type: str
+                      value: leaf
+                    - type: int
+                      value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: create-list-hyphen-intermediate
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items: []
+        pointer: /a/-/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          return:
+            a:
+            - leaf: 2
+          changed: true
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: dict
+                  items:
+                  - - type: str
+                      value: leaf
+                    - type: int
+                      value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: dict
+                  items:
+                  - - type: str
+                      value: leaf
+                    - type: int
+                      value: 2
+          changed: true
+        checks:
+          return: true
+          changed: true
+        passed: true
+      - id: create-list-gap-unchanged
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: list
+              items:
+              - type: int
+                value: 1
+        pointer: /a/3/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          error: JsonPointerException
+          message_has: out of bounds
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: index '3' is out of bounds
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: list
+                items:
+                - type: int
+                  value: 1
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: create-scalar-path-unchanged
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: int
+              value: 3
+        pointer: /a/x/y
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          error: JsonPointerException
+          message_has: does not support indexing
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Document '<class 'int'>' does not support indexing, must be mapping/sequence or support
+            __getitem__
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: int
+                value: 3
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: create-immutable-tuple-unchanged
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: tuple
+              items: []
+        pointer: /a/0/leaf
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          error: JsonPointerException
+          message_has: Invalid assignment target
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: 'Invalid assignment target: ''tuple'' object has no attribute ''append'''
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: tuple
+                items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: create-invalid-escape-unchanged
+        operation: set
+        input_document:
+          type: dict
+          items: []
+        pointer: /x/~2/y
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+        expected:
+          error: JsonPointerException
+          message_has: Found invalid escape
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Found invalid escape ~2
+          document_after:
+            type: dict
+            items: []
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: copy-mode-not-inplace
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: dict
+              items: []
+        pointer: /a/b/c
+        value:
+          type: int
+          value: 2
+        options:
+          create: true
+          inplace: false
+        expected:
+          return:
+            a:
+              b:
+                c: 2
+          after:
+            a: {}
+          changed: false
+        boundary: ''
+        observed:
+          returned:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: dict
+                items:
+                - - type: str
+                    value: b
+                  - type: dict
+                    items:
+                    - - type: str
+                        value: c
+                      - type: int
+                        value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: dict
+                items: []
+          changed: false
+        checks:
+          return: true
+          after: true
+          changed: true
+        passed: true
+      - id: set-root-inplace-rejected
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: int
+              value: 1
+        pointer: ''
+        value:
+          type: int
+          value: 2
+        options: {}
+        expected:
+          error: JsonPointerException
+          message_has: Cannot set root in place
+          changed: false
+        boundary: ''
+        observed:
+          exception_type: JsonPointerException
+          exception_message: Cannot set root in place
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: int
+                value: 1
+          changed: false
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: set-root-replacement-copy-mode
+        operation: set
+        input_document:
+          type: dict
+          items:
+          - - type: str
+              value: a
+            - type: int
+              value: 1
+        pointer: ''
+        value:
+          type: int
+          value: 2
+        options:
+          inplace: false
+        expected:
+          return: 2
+          after:
+            a: 1
+          changed: false
+        boundary: ''
+        observed:
+          returned:
+            type: int
+            value: 2
+          document_after:
+            type: dict
+            items:
+            - - type: str
+                value: a
+              - type: int
+                value: 1
+          changed: false
+        checks:
+          return: true
+          after: true
+          changed: true
+        passed: true
+      - id: custom-set-can-partially-mutate
+        operation: set
+        input_document:
+          type: FiniteDuck
+          data:
+            type: dict
+            items:
+            - - type: str
+                value: leaf
+              - type: int
+                value: 7
+          behavior: mutate_then_fail
+        pointer: /leaf
+        value:
+          type: int
+          value: 12
+        options:
+          create: true
+        expected:
+          error: ValueError
+          message_has: after write
+          changed: true
+        boundary: Finite custom __setitem__ writes then raises. No blanket atomicity guarantee for arbitrary Python
+          objects; not a failure of built-in dict/list detached construction.
+        observed:
+          exception_type: ValueError
+          exception_message: custom mutation failed after write
+          document_after:
+            type: FiniteDuck
+            data:
+              type: dict
+              items:
+              - - type: str
+                  value: leaf
+                - type: int
+                  value: 12
+            behavior: mutate_then_fail
+          changed: true
+        checks:
+          error: true
+          message_has: true
+          changed: true
+        passed: true
+      - id: from-parts-escape
+        operation: from_parts
+        input_document:
+          type: list
+          items:
+          - type: str
+            value: left/right
+          - type: str
+            value: '~'
+          - type: int
+            value: 0
+        pointer: null
+        value:
+          type: NoneType
+          value: null
+        options: {}
+        expected:
+          return: /left~1right/~0/0
+        boundary: ''
+        observed:
+          returned:
+            type: str
+            value: /left~1right/~0/0
+          document_after:
+            type: list
+            items:
+            - type: str
+              value: left/right
+            - type: str
+              value: '~'
+            - type: int
+              value: 0
+          changed: false
+        checks:
+          return: true
+        passed: true
+      count: 68
+      passed: 68
+      boundary: Typed exact observations plus explicit expected predicates for finite inputs only; errors/extension
+        behavior intentionally retained. Not full conformance or blanket atomicity/security guarantee.
+    cli_report:
+      result: PASS / FINITE SOURCE CLI OBSERVATIONS
+      recorded_at: '2026-10-30T00:12:18.143425+00:00'
+      source: /workspace/shared/ia-jsonpointer-author-runtime-20261030/source
+      command_prefix:
+      - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+      - -B
+      - /workspace/shared/ia-jsonpointer-author-runtime-20261030/source/bin/jsonpointer
+      environment:
+        PYTHONPATH: /workspace/shared/ia-jsonpointer-author-runtime-20261030/source
+        PYTHONDONTWRITEBYTECODE: '1'
+        PYTHONUTF8: '1'
+      fixtures:
+      - path: good.json
+        bytes_hex: 7b226c656166223a31322c22612f62223a372c226e616d6520223a226b657074222c222d223a226b6579227d
+        sha256: f9d389077f40aacb9d3b165359eb46f4b10555d136bd835b352211bc127757a4
+      - path: array.json
+        bytes_hex: 7b226c656166223a5b5d7d
+        sha256: 9f6fcd6e9ebeb6fd0d7a5f9598cc7f9f6a685b1aca77857d8c4b88ee4b14ab06
+      - path: missing.json
+        bytes_hex: 7b7d
+        sha256: 44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a
+      - path: bad.json
+        bytes_hex: 7b226c656166223a7d
+        sha256: 219b221e8d1d1c4347a7cc3b31abaa960e47f943720b377e9ccc12de1335a7f0
+      - path: duplicate.json
+        bytes_hex: 7b226c656166223a312c226c656166223a327d
+        sha256: b04c4e094bc4ab1170ee99f0e1f1117bccf6589d4cf313bd354e998f407d7566
+      - path: pointer.txt
+        bytes_hex: 2f6e616d65200d0a
+        sha256: df9007bef271028203b595e6425e2185daa5706d236b9a5cefc8bc6a777d882f
+      - path: unicode.json
+        bytes_hex: 7b22c3a9223a22e580bc227d
+        sha256: ebcf32d366c513318eeaaec80dc75d1d923e8f80c827ba3e04ad8cea59074dbc
+      - path: invalid-utf8.json
+        bytes_hex: 7b226c656166223a22ff227d
+        sha256: 348b295f94922c69cf864c812adb49c9b0d0603de29bba83ce9dfefdf3c8b60c
+      count: 14
+      passed: 14
+      records:
+      - id: version
+        argv:
+        - --version
+        expected:
+          exit: 0
+          stdout_hex: 6a736f6e706f696e74657220332e360a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 6a736f6e706f696e74657220332e360a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: escaped-token
+        argv:
+        - /a~1b
+        - good.json
+        expected:
+          exit: 0
+          stdout_hex: 370a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 370a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: empty-root
+        argv:
+        - ''
+        - good.json
+        expected:
+          exit: 0
+          stdout_hex: 7b226c656166223a2031322c2022612f62223a20372c20226e616d6520223a20226b657074222c20222d223a20226b6579227d0a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 7b226c656166223a2031322c2022612f62223a20372c20226e616d6520223a20226b657074222c20222d223a20226b6579227d0a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: fragment-rejected
+        argv:
+        - '#/leaf'
+        - good.json
+        expected:
+          exit: 2
+          stdout_hex: ''
+          stderr_contains:
+          - invalid JSON pointer
+          stderr_excludes: []
+        observed:
+          exit: 2
+          stdout_hex: ''
+          stderr_hex: 75736167653a206a736f6e706f696e746572205b2d685d205b2d6620504f494e5445525f46494c45207c202d7020504f494e5445525d205b2d2d696e64656e7420494e44454e545d0a202020202020202020202020202020202020205b2d2d636f6e74696e75652d6f6e2d6572726f725d205b2d765d0a202020202020202020202020202020202020205b504f494e5445525d2046494c45205b46494c45202e2e2e5d0a6a736f6e706f696e7465723a206572726f723a20696e76616c6964204a534f4e20706f696e7465722027232f6c656166273a204c6f636174696f6e206d7573742073746172742077697468202f0a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: array-end-error
+        argv:
+        - /leaf/-
+        - array.json
+        expected:
+          exit: 1
+          stdout_hex: ''
+          stderr_contains:
+          - does not reference an existing array element
+          stderr_excludes:
+          - Traceback
+        observed:
+          exit: 1
+          stdout_hex: ''
+          stderr_hex: 436f756c64206e6f74207265736f6c766520706f696e7465723a20272d2720646f6573206e6f74207265666572656e636520616e206578697374696e6720617272617920656c656d656e740a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: hyphen-object-key
+        argv:
+        - /-
+        - good.json
+        expected:
+          exit: 0
+          stdout_hex: 226b6579220a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 226b6579220a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: pointer-file-keeps-space
+        argv:
+        - -f
+        - pointer.txt
+        - good.json
+        expected:
+          exit: 0
+          stdout_hex: 226b657074220a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 226b657074220a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: utf8-file
+        argv:
+        - /é
+        - unicode.json
+        expected:
+          exit: 0
+          stdout_hex: 225c7535303363220a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 225c7535303363220a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: duplicates-lost-by-CLI-json-load
+        argv:
+        - /leaf
+        - duplicate.json
+        expected:
+          exit: 0
+          stdout_hex: 320a
+          stderr_contains: []
+          stderr_excludes: []
+        observed:
+          exit: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+          empty_stderr: true
+        passed: true
+      - id: resolution-error-continues-without-flag
+        argv:
+        - /leaf
+        - missing.json
+        - good.json
+        expected:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_contains:
+          - Could not resolve pointer
+          stderr_excludes:
+          - Traceback
+        observed:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 436f756c64206e6f74207265736f6c766520706f696e7465723a206d656d62657220276c65616627206e6f7420666f756e6420696e207b7d0a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: bad-json-stops-default
+        argv:
+        - /leaf
+        - good.json
+        - bad.json
+        - good.json
+        expected:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_contains:
+          - Traceback
+          - JSONDecodeError
+          stderr_excludes: []
+        observed:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 54726163656261636b20286d6f737420726563656e742063616c6c206c617374293a0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203132362c20696e203c6d6f64756c653e0a202020206d61696e28290a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652033382c20696e206d61696e0a202020206f6b203d207265736f6c76655f66696c657328290a2020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203130302c20696e207265736f6c76655f66696c65730a20202020646f63203d206a736f6e2e6c6f61642866290a202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203239332c20696e206c6f61640a2020202072657475726e206c6f6164732866702e7265616428292c0a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203334362c20696e206c6f6164730a2020202072657475726e205f64656661756c745f6465636f6465722e6465636f64652873290a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203333382c20696e206465636f64650a202020206f626a2c20656e64203d2073656c662e7261775f6465636f646528732c206964783d5f7728732c2030292e656e642829290a2020202020202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203335362c20696e207261775f6465636f64650a202020207261697365204a534f4e4465636f64654572726f722822457870656374696e672076616c7565222c20732c206572722e76616c7565292066726f6d204e6f6e650a6a736f6e2e6465636f6465722e4a534f4e4465636f64654572726f723a20457870656374696e672076616c75653a206c696e65203120636f6c756d6e20392028636861722038290a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: bad-json-continue
+        argv:
+        - --continue-on-error
+        - /leaf
+        - bad.json
+        - good.json
+        expected:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_contains:
+          - Could not parse JSON
+          stderr_excludes:
+          - Traceback
+        observed:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 436f756c64206e6f74207061727365204a534f4e20696e20276261642e6a736f6e273a20457870656374696e672076616c75653a206c696e65203120636f6c756d6e20392028636861722038290a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: bad-utf8-continue
+        argv:
+        - --continue-on-error
+        - /leaf
+        - invalid-utf8.json
+        - good.json
+        expected:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_contains:
+          - Could not parse JSON
+          - decode
+          stderr_excludes:
+          - Traceback
+        observed:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 436f756c64206e6f74207061727365204a534f4e20696e2027696e76616c69642d757466382e6a736f6e273a20277574662d382720636f6465632063616e2774206465636f64652062797465203078666620696e20706f736974696f6e20393a20696e76616c696420737461727420627974650a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      - id: missing-file-not-skipped
+        argv:
+        - --continue-on-error
+        - /leaf
+        - good.json
+        - absent.json
+        - good.json
+        expected:
+          exit: 2
+          stdout_hex: 31320a
+          stderr_contains:
+          - absent.json
+          stderr_excludes: []
+        observed:
+          exit: 2
+          stdout_hex: 31320a
+          stderr_hex: 75736167653a206a736f6e706f696e746572205b2d685d205b2d6620504f494e5445525f46494c45207c202d7020504f494e5445525d205b2d2d696e64656e7420494e44454e545d0a202020202020202020202020202020202020205b2d2d636f6e74696e75652d6f6e2d6572726f725d205b2d765d0a202020202020202020202020202020202020205b504f494e5445525d2046494c45205b46494c45202e2e2e5d0a6a736f6e706f696e7465723a206572726f723a2063616e2774206f70656e2027616273656e742e6a736f6e273a205b4572726e6f20325d204e6f20737563682066696c65206f72206469726563746f72793a2027616273656e742e6a736f6e270a
+        checks:
+          returncode: true
+          stdout_exact: true
+          stderr_contains: true
+          stderr_excludes: true
+        passed: true
+      boundary: Source CLI invoked directly without installation, not a generated installed entrypoint/package-install
+        test. Per-file partial stdout and nonzero aggregate status are retained; not all-input or transactional
+        behavior.
+    separate_terminal_newline_report:
+      result: PASS / THREE FINITE CRLF FILE-FORM BOUNDARY OBSERVATIONS
+      at: '2026-10-30T00:12:19.729858+00:00'
+      prompted_by: Independent preflight reviewer /root/resume_gfm_delivery/gfm_preview_review; own reproduction
+        here, not independent finding attribution
+      count: 3
+      records:
+      - id: api-retains-terminal-LF
+        operation: resolve_pointer
+        pointer: '/key
+
+          '
+        document:
+          ? 'key
+
+            '
+          : 1
+          key: 2
+        expected: 1
+        observed: 1
+        passed: true
+      - id: explicit-argument-retains-terminal-LF
+        argv:
+        - -p
+        - '/key
+
+          '
+        - document.json
+        input_document_hex: 7b226b65795c6e223a20312c20226b6579223a20327d
+        pointer_file_hex: 2f6b65790a
+        expected:
+          returncode: 0
+          stdout_hex: 310a
+          stderr_hex: ''
+        observed:
+          returncode: 0
+          stdout_hex: 310a
+          stderr_hex: ''
+        passed: true
+      - id: pointer-file-trims-terminal-LF
+        argv:
+        - -f
+        - pointer.txt
+        - document.json
+        input_document_hex: 7b226b65795c6e223a20312c20226b6579223a20327d
+        pointer_file_hex: 2f6b65790a
+        expected:
+          returncode: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        observed:
+          returncode: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        passed: true
+      boundary: Source file mode strips trailing CR/LF as line endings, so may silently select a different member
+        from exact API/-p input. This is not arbitrary-character pointer-file roundtrip fidelity; one LF case
+        executed, CR/LF source mechanism inspected. Extra records are separate from68API/14CLI and overlap.
+    separate_internal_newline_report:
+      result: PASS / SIX FINITE AUTHOR NEWLINE-CONVERSION OBSERVATIONS
+      author: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
+      recorded_at: '2026-10-30T00:15:24.301624+00:00'
+      discovery_attribution: Independent semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic; these
+        are author replays, not independent review
+      count: 6
+      records:
+      - id: CR-API-exact
+        operation: resolve_pointer
+        document:
+          "a\rb": 1
+          ? 'a
+
+            b'
+          : 2
+          ? "a\r\nb"
+          : 3
+        pointer: "/a\rb"
+        expected: 1
+        observed: 1
+        passed: true
+      - id: CR-CLI-explicit
+        argv:
+        - -p
+        - "/a\rb"
+        - document.json
+        pointer_file_hex: 2f610d62
+        expected:
+          exit: 0
+          stdout_hex: 310a
+          stderr_hex: ''
+        observed:
+          exit: 0
+          stdout_hex: 310a
+          stderr_hex: ''
+        passed: true
+      - id: CR-CLI-file
+        argv:
+        - -f
+        - CR.txt
+        - document.json
+        pointer_file_hex: 2f610d62
+        expected:
+          exit: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        observed:
+          exit: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        passed: true
+      - id: CRLF-API-exact
+        operation: resolve_pointer
+        document:
+          "a\rb": 1
+          ? 'a
+
+            b'
+          : 2
+          ? "a\r\nb"
+          : 3
+        pointer: "/a\r\nb"
+        expected: 3
+        observed: 3
+        passed: true
+      - id: CRLF-CLI-explicit
+        argv:
+        - -p
+        - "/a\r\nb"
+        - document.json
+        pointer_file_hex: 2f610d0a62
+        expected:
+          exit: 0
+          stdout_hex: 330a
+          stderr_hex: ''
+        observed:
+          exit: 0
+          stdout_hex: 330a
+          stderr_hex: ''
+        passed: true
+      - id: CRLF-CLI-file
+        argv:
+        - -f
+        - CRLF.txt
+        - document.json
+        pointer_file_hex: 2f610d0a62
+        expected:
+          exit: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        observed:
+          exit: 0
+          stdout_hex: 320a
+          stderr_hex: ''
+        passed: true
+      boundary: UTF-8 text-mode pointer files normalize internal CR and CRLF to LF before terminal CR/LF stripping.
+        API/-p preserve these literal internal characters. These six observations overlap prior research/preflight
+        probes and are not added to68API/14CLI/3terminal-LF or79upstream counts. No arbitrary-character file-pointer
+        fidelity or full conformance.
+    author_execution_receipt:
+      result: PASS / AUTHOR SOURCE-ONLY FINITE RUNTIME RECONSTRUCTION
+      author: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
+      recorded_at: '2026-10-30T00:30:38.350846+00:00'
+      independent_semantic_review: false
+      source_commit: c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+      source_tree: 72849cb7965788645fa3104482eb6c7bd503601c
+      source_blobs:
+      - path: .coveragerc
+        bytes: 247
+        git_blob: 357bebd9bbdcb92f1a537206623d57b2d4fd0391
+        sha256: 17dfdd9fd6ca4e89d83605dcb9ba5b3711063e41ea41d20dba4e4691f81b8bba
+      - path: .github/workflows/publish.yml
+        bytes: 2901
+        git_blob: 5493fbbe2a5209dc24a06af8b8d5451a251531b8
+        sha256: 72b2c795e039cfb1d5963d28e439720edffbc78820b0bba997f9e0f77fcca0a0
+      - path: .github/workflows/test.yaml
+        bytes: 1872
+        git_blob: 775ec16863f1323771eed5b57cda5b019b082943
+        sha256: ada94b1d5e97d727dea11acfd3dcf3d795327187cf493024d8d4470f7ea63363
+      - path: .gitignore
+        bytes: 84
+        git_blob: 4e74a2d317d54e9279c15d32c3484f3248deea08
+        sha256: 55430c5431e5a70e2d47efddef2ff0255c4a319ac0e7c6de9dce55a335f6be83
+      - path: .readthedocs.yaml
+        bytes: 576
+        git_blob: 57ba54a011acd9ce272681755dd2b986d0e456c1
+        sha256: 5b5c9335d6fa7ff57c3c847a057db901372e2083f259a801046acf5018f544a4
+      - path: AUTHORS
+        bytes: 113
+        git_blob: 8319fec44d8e4d467b2e4827738b91ff706f93d5
+        sha256: 4d58319d0f59c87bef5b07b3fe4db0f19c2d7d5545b034c6bf7b57c89bbef57f
+      - path: LICENSE.txt
+        bytes: 1413
+        git_blob: 491196d773493c591f1287107c3d368f2f8263d3
+        sha256: d8b24f15d472885f788a2d6e985850f264627b86012a17bb242c83f310d907e5
+      - path: MANIFEST.in
+        bytes: 71
+        git_blob: 0f9b9f67c6f5ce6dfdda92573503509776aecaad
+        sha256: d3c47d3def3d000bc1bec6fc5919c3f0a343a81f9bcc49ade5a704593786e426
+      - path: README.md
+        bytes: 1243
+        git_blob: 016ac01da0c360befbcc14b0c674d42873ea16b1
+        sha256: 246fadbc39105b9f7d767fd04828d575c4f7c1492fbc4eb3c2cb86b340b0886d
+      - path: bin/jsonpointer
+        bytes: 4002
+        git_blob: 48afe3b45ae056984063a383d2082ae4c2727cb4
+        sha256: ac5f84ca4b146be30bd8bc9e5dd948fc9b81bad1f2cdd69084b688f4eb4e87e2
+      - path: doc/Makefile
+        bytes: 5616
+        git_blob: 3b70831aea68b70e8baf7719034ea721b59ebd12
+        sha256: e0893b995c517c88f7f5f7c6eaa93d16934120190d9839d3d120dbd2d71c1b58
+      - path: doc/_static/.empty
+        bytes: 0
+        git_blob: e69de29bb2d1d6434b8b29ae775ad8c2e48c5391
+        sha256: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+      - path: doc/commandline.rst
+        bytes: 2503
+        git_blob: cbb2a24549eae81684d80665ac4785f04cf6d431
+        sha256: efdba9daccfe8ae76661f03eaea251480c1bba589ca7d3e5c03b52c4bf61ac67
+      - path: doc/conf.py
+        bytes: 7910
+        git_blob: f472f575f63acd43eda461a02d21f84719f32fef
+        sha256: 29948433491bf1f630becf275c954520f9af944dcc5199946efac7cd698d928a
+      - path: doc/index.rst
+        bytes: 664
+        git_blob: e1e0aaefb113ce4f8436a4bf1021b6078979fa14
+        sha256: a4443e9a5731d5e3cf6f74a414a1121c148896891f7c3dc3f35d9c240d95bdf9
+      - path: doc/mod-jsonpointer.rst
+        bytes: 119
+        git_blob: 7929d6d9bf6dbda2f3ed2437d4d37d4b1281444a
+        sha256: 349d4172a8f0a02ce4a77688e9b85aa100526a181ec82a4c01c0f01b7123defb
+      - path: doc/tutorial.rst
+        bytes: 3371
+        git_blob: 267f05c7b5141f6b99ec85934e5610c6b1f99b54
+        sha256: d95b852843af5e96da8d8a8d541df6aa6e5b35fd467a95331ca7f02f5882afcf
+      - path: jsonpointer.py
+        bytes: 14476
+        git_blob: 4458937f09759a3136441ec8268e9ab81209539d
+        sha256: 4bf107e184983829be5e0c6038a91740e7547e810ef108a905e00755202d22c9
+      - path: makefile
+        bytes: 321
+        git_blob: 3276190789a34b98b4c117da956a494c492ea1e0
+        sha256: 92ed84e8ec137ef770142e35fdb63c10248b7e73389e52f4255c6812e04d3ac9
+      - path: requirements-dev.txt
+        bytes: 33
+        git_blob: 239fccaa5617f3232916f45f1453ae68a87a6e4f
+        sha256: 7272ab2b29dd3ce79746f9128e68956407cfe60543ed4b6d6ed4cb2847fa0723
+      - path: setup.cfg
+        bytes: 76
+        git_blob: 4b36d81b7cf5e9a36ded0d00a9507fac2c2fee07
+        sha256: 18f19f57db624fcdb81f9b34d22ac6fe9f39825d1221a7797e095bf6061e3108
+      - path: setup.py
+        bytes: 1873
+        git_blob: 26f34eea1101cdeb00f1ba2d756861d4ef243d23
+        sha256: 718a22267b266bea2ac81135c5f6c888eb581858e3e5b2d2e2012a606d28a6a9
+      - path: tests.py
+        bytes: 33668
+        git_blob: 23301bb7086f66261aa4cc04b577b0196b156691
+        sha256: 3e91052effd9b6d6fed375b1907c51d3560f54bee865805121d6b4ee75286ef3
+      commands:
+      - name: api-source
+        command:
+        - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+        - -B
+        - finite_probes.py
+        - --module
+        - source/jsonpointer.py
+        - --output
+        - runtime/api-source.json
+        cwd: /workspace/shared/ia-jsonpointer-author-runtime-20261030
+        started_at: '2026-10-30T00:12:17.621580+00:00'
+        finished_at: '2026-10-30T00:12:17.662065+00:00'
+        exit_code: 0
+      - name: api-wheel
+        command:
+        - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+        - -B
+        - finite_probes.py
+        - --module
+        - wheel/jsonpointer.py
+        - --output
+        - runtime/api-wheel.json
+        cwd: /workspace/shared/ia-jsonpointer-author-runtime-20261030
+        started_at: '2026-10-30T00:12:17.662095+00:00'
+        finished_at: '2026-10-30T00:12:17.705993+00:00'
+        exit_code: 0
+      - name: cli-source
+        command:
+        - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+        - -B
+        - cli_probes.py
+        - --source
+        - source
+        - --output
+        - runtime/cli-source.json
+        cwd: /workspace/shared/ia-jsonpointer-author-runtime-20261030
+        started_at: '2026-10-30T00:12:17.706020+00:00'
+        finished_at: '2026-10-30T00:12:18.150432+00:00'
+        exit_code: 0
+      - name: upstream-unittest
+        command:
+        - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+        - -B
+        - -m
+        - unittest
+        - -v
+        cwd: /workspace/shared/ia-jsonpointer-author-runtime-20261030/source
+        started_at: '2026-10-30T00:12:18.150496+00:00'
+        finished_at: '2026-10-30T00:12:19.641994+00:00'
+        exit_code: 0
+      - name: pointer-file-supplement
+        command:
+        - /workspace/shared/ia-tls-checks-venv-20261025/bin/python
+        - -B
+        - pointer_file_supplement.py
+        cwd: /workspace/shared/ia-jsonpointer-author-runtime-20261030
+        started_at: '2026-10-30T00:12:19.642025+00:00'
+        finished_at: '2026-10-30T00:12:19.737688+00:00'
+        exit_code: 0
+      all_commands_exit_zero: true
+      api_records: 68
+      source_and_wheel_api_records_exactly_equal_research: true
+      cli_records: 14
+      cli_predicates_pass: true
+      cli_raw_records_exactly_equal_research: 13
+      cli_raw_differences_retained:
+      - id: bad-json-stops-default
+        author:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 54726163656261636b20286d6f737420726563656e742063616c6c206c617374293a0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203132362c20696e203c6d6f64756c653e0a202020206d61696e28290a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652033382c20696e206d61696e0a202020206f6b203d207265736f6c76655f66696c657328290a2020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203130302c20696e207265736f6c76655f66696c65730a20202020646f63203d206a736f6e2e6c6f61642866290a202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203239332c20696e206c6f61640a2020202072657475726e206c6f6164732866702e7265616428292c0a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203334362c20696e206c6f6164730a2020202072657475726e205f64656661756c745f6465636f6465722e6465636f64652873290a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203333382c20696e206465636f64650a202020206f626a2c20656e64203d2073656c662e7261775f6465636f646528732c206964783d5f7728732c2030292e656e642829290a2020202020202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203335362c20696e207261775f6465636f64650a202020207261697365204a534f4e4465636f64654572726f722822457870656374696e672076616c7565222c20732c206572722e76616c7565292066726f6d204e6f6e650a6a736f6e2e6465636f6465722e4a534f4e4465636f64654572726f723a20457870656374696e672076616c75653a206c696e65203120636f6c756d6e20392028636861722038290a
+        research:
+          exit: 1
+          stdout_hex: 31320a
+          stderr_hex: 54726163656261636b20286d6f737420726563656e742063616c6c206c617374293a0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d6761702d72657365617263682d32303236313032392f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203132362c20696e203c6d6f64756c653e0a202020206d61696e28290a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d6761702d72657365617263682d32303236313032392f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652033382c20696e206d61696e0a202020206f6b203d207265736f6c76655f66696c657328290a2020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d6761702d72657365617263682d32303236313032392f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203130302c20696e207265736f6c76655f66696c65730a20202020646f63203d206a736f6e2e6c6f61642866290a202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203239332c20696e206c6f61640a2020202072657475726e206c6f6164732866702e7265616428292c0a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f5f5f696e69745f5f2e7079222c206c696e65203334362c20696e206c6f6164730a2020202072657475726e205f64656661756c745f6465636f6465722e6465636f64652873290a20202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203333382c20696e206465636f64650a202020206f626a2c20656e64203d2073656c662e7261775f6465636f646528732c206964783d5f7728732c2030292e656e642829290a2020202020202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f6f70742f636f6465782f72756e74696d65732f636f6465782d7072696d6172792d72756e74696d652f646570656e64656e636965732f707974686f6e2f6c69622f707974686f6e332e31322f6a736f6e2f6465636f6465722e7079222c206c696e65203335362c20696e207261775f6465636f64650a202020207261697365204a534f4e4465636f64654572726f722822457870656374696e672076616c7565222c20732c206572722e76616c7565292066726f6d204e6f6e650a6a736f6e2e6465636f6465722e4a534f4e4465636f64654572726f723a20457870656374696e672076616c75653a206c696e65203120636f6c756d6e20392028636861722038290a
+      separate_pointer_file_supplement: 3
+      supplement_origin: Independent preflight reviewer discovery, researcher harness; author replay here only,
+        not a new independent finding
+      upstream_unittest_doctest_cases: 79
+      all_counts_overlap: true
+      no_install_build_lifecycle_or_browser: true
+      source_bytes_unchanged: true
+      boundary: Finite source-only self-checks, not independent review, full RFC conformance, all-input/platform/API/security
+        or supply-chain certification. Original raw traceback absolute-path difference retained; no claim cross-directory
+        raw CLI equality. No third-party complete source/spec/tests intended for public packet.
+      supersedes: author-runtime-report-v2.json
+      separate_internal_newline_supplement: 6
+      internal_newline_discovery_attribution: Independent semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic;
+        author self-authored six-case reproduction, not independent acceptance
+      internal_newline_report_sha256: 926f29ceac884bd36f281297c7d073346d6ef8d9bddc0765414f2d5fb12ad777
+      runtime_self_authored_harnesses: 5
+      separate_pointer_decode_supplement: 2
+      pointer_decode_report_sha256: d416fe142575df11e559bf80124e6b010e45572ea64f327b6796f78b992baff1
+      pointer_decode_discovery_attribution: Independent semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic;
+        author replays are self-check, not independent acceptance
+      pointer_decode_boundary: --continue-on-error catches JSON/text decoding of queried JSON data files, not
+        pointer-file -f UTF-8 read and not file-open errors. Absolute traceback paths remain raw; no cross-directory
+        raw identity. Two observations overlap prior research/probes, not added to 68/14/3/6 or upstream79; no
+        all-CLI-path claim.
+    all_counts_overlap: true
+    source_wheel_api_replay_not_independent_review: true
+    third_party_complete_source_RFC_tests_not_embedded: true
+    independent_discoveries_attribution:
+    - 'Terminal LF pointer-file distinction: preflight /root/resume_gfm_delivery/gfm_preview_review; researcher
+      and author separately reproduced.'
+    - 'Internal CR/CRLF text-mode conversion: semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic;
+      author six-case replay is self-check, not acceptance.'
+    - 'Pointer-file UTF-8 read lies outside data-file --continue-on-error handling: semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic;
+      author two-case replay is self-check, not acceptance.'
+    separate_pointer_decode_report:
+      result: PASS / TWO FINITE AUTHOR POINTER-FILE VERSUS DATA-FILE DECODE OBSERVATIONS
+      author: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author
+      recorded_at: '2026-10-30T00:30:38.309656+00:00'
+      discovery_attribution: Independent semantic reviewer /root/resume_gfm_delivery/jsonpointer_semantic; author
+        replays are self-check, not independent acceptance
+      count: 2
+      records:
+      - id: pointer-file-decode-not-recovered
+        argv:
+        - --continue-on-error
+        - -f
+        - invalid.ptr
+        - good.json
+        fixtures:
+          good.json: 7b2276616c7565223a20377d
+          invalid.ptr: 2fff
+          invalid.json: ff
+        expected:
+          exit: 1
+          stdout_hex: ''
+          stderr_contains: UnicodeDecodeError
+          traceback: true
+        observed:
+          exit: 1
+          stdout_hex: ''
+          stderr_hex: 54726163656261636b20286d6f737420726563656e742063616c6c206c617374293a0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e65203132362c20696e203c6d6f64756c653e0a202020206d61696e28290a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652033382c20696e206d61696e0a202020206f6b203d207265736f6c76655f66696c657328290a2020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652039302c20696e207265736f6c76655f66696c65730a202020207074722c2066696c6573203d2070617273655f706f696e7465722861726773290a20202020202020202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520222f776f726b73706163652f7368617265642f69612d6a736f6e706f696e7465722d617574686f722d72756e74696d652d32303236313033302f736f757263652f62696e2f6a736f6e706f696e746572222c206c696e652036322c20696e2070617273655f706f696e7465720a20202020707472203d20617267732e706f696e7465725f66696c652e7265616428292e72737472697028225c725c6e22290a202020202020202020205e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e5e0a202046696c6520223c66726f7a656e20636f646563733e222c206c696e65203332322c20696e206465636f64650a556e69636f64654465636f64654572726f723a20277574662d382720636f6465632063616e2774206465636f64652062797465203078666620696e20706f736974696f6e20313a20696e76616c696420737461727420627974650a
+        predicates:
+          exit_one: true
+          expected_stdout: true
+          expected_stderr_marker: true
+          traceback_presence: true
+        passed: true
+      - id: json-data-decode-recovered
+        argv:
+        - --continue-on-error
+        - -p
+        - /value
+        - invalid.json
+        - good.json
+        fixtures:
+          good.json: 7b2276616c7565223a20377d
+          invalid.ptr: 2fff
+          invalid.json: ff
+        expected:
+          exit: 1
+          stdout_hex: 370a
+          stderr_contains: Could not parse JSON
+          traceback: false
+        observed:
+          exit: 1
+          stdout_hex: 370a
+          stderr_hex: 436f756c64206e6f74207061727365204a534f4e20696e2027696e76616c69642e6a736f6e273a20277574662d382720636f6465632063616e2774206465636f64652062797465203078666620696e20706f736974696f6e20303a20696e76616c696420737461727420627974650a
+        predicates:
+          exit_one: true
+          expected_stdout: true
+          expected_stderr_marker: true
+          traceback_presence: true
+        passed: true
+      boundary: --continue-on-error catches JSON/text decoding of queried JSON data files, not pointer-file -f
+        UTF-8 read and not file-open errors. Absolute traceback paths remain raw; no cross-directory raw identity.
+        Two observations overlap prior research/probes, not added to 68/14/3/6 or upstream79; no all-CLI-path
+        claim.
+  corrections_and_limits:
+  - Original research v1/v2 seals retained; author added six internal-newline observations without rewriting original68API/14CLI/3supplement.
+  - Source/wheel/sdist parity is module-only; generated packaging and CLI shebang differences retained.
+  - No install/build/lifecycle/browser/attestation/full-conformance/all-input/security/production claim.
+  - Research v2 is retained as a historical snapshot, not authority for broader CLI claims. Final author and semantic
+    supplements explicitly limit --continue-on-error to queried JSON data-file decoding, excluding -f pointer-file
+    UTF-8 decoding and file-open errors. Separate two-case replay is not added to original68/14/3/6 or79upstream
+    coverage.
+identity_boundary:
+  subject: github:stefankoegl/python-json-pointer / pypi:jsonpointer
+  distinct_from:
+  - PyPI json_pointer
+  - RFC 6901 publication
+  - JSON Patch
+  - JSONPath
+  - nlohmann_json
+  license_governance_claims: Omitted; no package-wide legal conclusion.
+objects:
+- candidate_id: python_jsonpointer
+  candidate_path: 01_State/Inbox/candidates/python_jsonpointer.yaml
+  candidate_blob: 6b676c16ec069af46a57142452a1880e4d1481f5
+  baseline_candidate_blob: null
+  preflight:
+    machine_route: review_required
+    canonical_id_exists: false
+    identifier_collisions: []
+    schema_errors:
+      candidate-object.v1.schema.json: []
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+      relation.v0.schema.json: []
+    network_schema_retrieval_attempts: []
+  proposed_path: 01_State/01_Objects/python_jsonpointer.yaml
+  proposed_bytes:
+    path: /workspace/shared/ia-jsonpointer-intake-evidence-20261030/proposed-object.yaml
+    bytes: 13241
+    sha256: bcd6528be0aec17870a72f6eb250abc87a7d9844f400ad64914ea976879b1656
+    git_blob: 6d394cac530c45b0f55e4e6c4b4332392a3d7329
+  proposed_record:
+    id: python_jsonpointer
+    type: system
+    kind: library
+    name_zh: jsonpointer Python JSON Pointer 定位库
+    name_en: jsonpointer Python JSON Pointer resolution library
+    description_zh: 'jsonpointer 是以 PyPI jsonpointer / stefankoegl/python-json-pointer 发布的 Python 库；本记录固定 3.6（2026-10-26
+      发布），源码 commit c8f3f8b7b87074bb5f3effabc6159fdeaa876099。官方文档明确连接 RFC 6901。本切片只记录字符串 JSON Pointer 的 token
+      解析、表示及在已由调用方解析的 Python 数据中定位现存值，沿用 resource_identification 表达文档内值标识，不是 URI/HTTP 获取、永久身份或资源所有权保证。 空字符串指向整个输入，/
+      指向空名称成员；~1 先还原 /、~0 再还原 ~，因此 ~01 是 ~1 而不是 /；无效 ~ 转义或缺少起始 / 被拒绝。JSON 字符串的反斜线转义须调用方先解码；直接 # / #/… URI fragment
+      输入被拒绝，百分号序列按普通名称处理而不作 URI 解码。RFC 6901 的 fragment 应用仍受媒体类型声明约束，不能由 JSON 文档身份推断。对象名称按精确 Unicode 码点匹配，无 NFC/NFD
+      归一化；数组使用无前导零的 ASCII 十进制索引，所查符号、Unicode 数字、空格、尾换行、小数及越界例被拒绝，对象中的 "01" 却是普通键，Python 整数键不自动变为字符串。 API 对数组 -
+      返回 EndOfList sentinel，不是既存 JSON 值，显式 default 也不替换它；继续向下定位报错。所查 source CLI 将该 sentinel 报为定位失败并 exit 1。普通
+      dict 不保留原 JSON 的重复名称，调用方 json.loads 或 CLI json.load 已折为后值，库不能检测原文重复键；这不实现 RFC 6901 对重复名称的失败要求。默认定位失败为 JsonPointerException，显式
+      default 仅处理定位时的该类异常，构造时的无效指针及某些自定义异常仍传播。默认 verbose 的部分错误包含文档内容，关闭 VERBOSE_EXCEPTIONS 只是减少所查消息内容，不是保密保证。
+      库还接受 tuple、bytes 等 Python Sequence 与自定义 `__getitem__`，它们不是 JSON 类型验证；str 下继续索引被拒绝。set/create 是库的修改扩展，不是
+      RFC 6901 修改协议或 JSON Patch。默认 inplace=True、create=False；可替换已有目标或新增缺失末端对象键，但不创建缺失中间路径。默认 set 的 - 可追加列表，数字索引恰好为
+      length 则默认失败，create=True 才映射为追加；创建缺失中间段使用 dict，后续 "0" 是对象键而非自动推断数组，列表 gap 不填。有限内置 dict/list 的所查失败保持原件不变，但自定义
+      `__setitem__` 可先写再抛异常，不能泛称任意对象原子性。所查 inplace=False 的非 root 路径先深复制；root 默认不能原地替换，非原地模式返回 replacement。 附带
+      source CLI 以 UTF-8 文本模式读文件；-f 先把中间 CR/CRLF 转为 LF，再去尾 CR/LF、保留普通空格，可能无报错地选中另一合法成员。所查 a\rb/a\r\nb 指针文件均选到
+      a\nb，而 API/-p 保留原字符；末尾换行也会改变：API / -p 的 /key\n 取 key\n，-f 的同样 UTF-8 字节会取 key。不能声称输入形式可互换或任意字符指针文件无损。定位失败可继续后续文件但最终非零；待查询
+      JSON 数据文件的 JSON/文本解码错误默认中止且可能已有 stdout；--continue-on-error 仅可跳过这类数据文件解码错误后继续，但仍非零，不覆盖 -f 指针文件的 UTF-8 解码错误或缺文件等打开错误。部分
+      stdout 不代表整批成功或事务性输出。 作者在 CPython 3.12.14 以未安装的固定源重放 68 项自写 API 记录（含版本）、14 项 source CLI 记录（含版本）、另行 3 项尾部换行成员补充、6
+      项中间 CR/CRLF 转换补充、2 项指针文件与数据文件解码对照及上游 79 unittest/doctest；例集及重放重叠，不累加覆盖。包声明 Python >=3.10 不等于已验证全版本矩阵。API
+      模块在 source/wheel/sdist 中原字节相同，但整包不相同：sdist setup.cfg 有生成尾部，wheel CLI shebang 有改写；跨目录 CLI 仅 13 条 raw 记录一致，另
+      1 条 traceback 的绝对路径差异保留。未安装、构建、运行浏览器或验证 attestation；不是完整 RFC 符合性、所有 API/输入/平台、安全、跨实现互通、规范化签名、生产推荐或 IA 采用证明。既有
+      RFC 6901→RFC 4627 出版物引用不变。'
+    description_en: 'The Python library published as PyPI jsonpointer / stefankoegl/python-json-pointer is pinned
+      to 3.6, released 2026-10-26, at source commit c8f3f8b7b87074bb5f3effabc6159fdeaa876099. Official documentation
+      connects it to RFC 6901. This slice covers string-pointer token parsing/representation and selected existing-value
+      resolution in already parsed Python data. resource_identification means within-document value identification,
+      not URI/HTTP retrieval, permanent identity or ownership. The empty pointer selects the input; / selects
+      an empty-name member. Decoding ~1 before ~0 makes ~01 into ~1, not /. Invalid tilde escapes or a missing
+      initial slash fail. JSON-string backslash decoding belongs to the caller. Direct # or #/... URI-fragment
+      input fails and percent sequences remain literal; media-type applicability is not inferred from JSON alone.
+      Names use exact Unicode code points without normalization. Array indices use ASCII decimal without leading
+      zeros; tested signs, Unicode digits, whitespace/newline, decimals and bounds fail, while object "01" is
+      an ordinary key and Python integer keys are not coerced. API array - returns EndOfList, not an existing
+      JSON value; default does not replace the sentinel, whereas the source CLI reports it as failure. Ordinary
+      dicts have already lost duplicate member names through caller json.loads or CLI json.load, so the library
+      cannot implement RFC 6901 duplicate-name failure on that lost input. default handles selected resolution-time
+      JsonPointerException, not invalid pointer construction or arbitrary custom exceptions. Some verbose errors
+      include document content; disabling verbose is not a confidentiality guarantee. Python tuple/bytes Sequence
+      and custom `__getitem__` behavior are extensions, not JSON type validation. set/create are library mutation
+      extensions, not RFC 6901 modification rules or JSON Patch. Defaults inplace=True/create=False permit final
+      object-key insertion but reject missing intermediate paths. Default - appends a list; an index equal to
+      length requires create=True for append. Missing structures are dicts, so later numeric tokens become keys
+      rather than inferred arrays; list gaps are not filled. Tested built-in failures preserve input, but a custom
+      setter can mutate then raise, so no universal atomicity. Tested non-root inplace=False deep-copies; root
+      replacement requires non-inplace mode. The source CLI reads UTF-8 in text mode. Pointer-file -f normalizes
+      internal CR/CRLF to LF and then strips terminal CR/LF while retaining ordinary spaces; the tested CR/CRLF
+      paths silently select the LF key, unlike literal API/-p input. A terminal newline-bearing key can also change:
+      exact API/-p /key\n selects key\n but the same UTF-8 pointer-file bytes select key. Input representations
+      are not interchangeable or universally lossless. Resolution failures may continue files with final nonzero
+      status. JSON/text decode failures in queried JSON data files normally stop after possible partial stdout;
+      --continue-on-error continues only those data-file decode failures but stays nonzero. It does not cover
+      -f pointer-file UTF-8 decoding or file-open failures. Partial stdout is not batch success or a transaction.
+      Author source-only CPython 3.12.14 replays cover 68 self-authored API records, 14 source CLI records, a
+      separate three-record terminal-newline supplement, six internal-CR/CRLF observations, two pointer-file/data-file
+      decode observations and 79 upstream unittest/doctest cases; all overlap and are not cumulative coverage.
+      Declared Python >=3.10 is not a tested version matrix. Only the API module is byte-identical across source/wheel/sdist;
+      sdist setup.cfg metadata and the wheel CLI shebang differ. Thirteen cross-directory raw CLI records match;
+      one absolute traceback path differs and is retained. No installation/build/browser/attestation validation,
+      full conformance, arbitrary-input/API/platform/security/interoperability/canonical-signature/production
+      recommendation or IA adoption claim. The existing RFC 6901 publication reference to RFC 4627 is unchanged.'
+    version: '3.6'
+    external_identifiers:
+    - namespace: github
+      value: stefankoegl/python-json-pointer
+    - namespace: pypi
+      value: jsonpointer
+    official_url: https://github.com/stefankoegl/python-json-pointer
+    versions:
+    - version: '3.6'
+      date: '2026-10-26'
+      status: released
+      url: https://github.com/stefankoegl/python-json-pointer/releases/tag/v3.6
+    domains:
+    - structured_data
+    capabilities:
+    - resource_identification
+    scope_notes_zh: 边界以完整 description_zh 为准，须在 HTML、Markdown 与 search index 中可见；不依赖 renderer 未显示的 scope_notes
+      或 relation context 才成立。正向 implements 只覆盖明确字符串表示、唯一字符串对象名称及存在目标等前提下的有限定位行为；API sentinel、宿主重复名称丢失和 URI fragment
+      转换未实现均保留。set/create、Python 扩展容器及 CLI 表示/批次错误行为是实现边界，不扩大 RFC 6901。未执行安装、构建、fuzz、完整平台矩阵、网络获取、签名/attestation、安全或整个包许可适用性评估。固定来源和五份自写可重建
+      harness 随 pending packet 留痕；不嵌入第三方完整 source/RFC/tests。
+    scope_notes_en: The complete visible description carries the operative limits; hidden scope/context is not
+      substituted for rendered disclosure. The bounded implements edge concerns string representation and finite
+      existing-value resolution under suitable unique string-key data. API sentinel, lost duplicates and absent
+      URI-fragment conversion remain explicit. Mutation, Python container extensions and CLI representation/batch-error
+      behavior do not enlarge RFC 6901. No install/build/fuzz/platform matrix/network/attestation/security or
+      package-wide legal-suitability assessment. The pending packet embeds five self-authored reconstructible
+      harnesses, not complete third-party source, RFC or tests.
+    sources:
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/README.md
+      title: jsonpointer 3.6 — official RFC 6901 library identity
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/jsonpointer.py
+      title: jsonpointer 3.6 — token parsing, exact keys, EndOfList, default/errors and set/create extensions
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/tutorial.rst
+      title: jsonpointer 3.6 — documented resolution, mutation, copy and create interfaces
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/bin/jsonpointer
+      title: jsonpointer 3.6 — UTF-8 text-mode pointer file conversion, terminal stripping and partial-output/error
+        behavior
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/tests.py
+      title: jsonpointer 3.6 — fixed upstream unittest/doctest scope, not all-input conformance
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.py
+      title: jsonpointer 3.6 — package identity, declared Python >=3.10 and setup metadata; inspected, not executed
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/LICENSE.txt
+      title: jsonpointer 3.6 — source notice, not package-wide legal assessment
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/releases/tag/v3.6
+      title: Official v3.6 release — observed published 2026-10-26
+      language: en
+      accessed: '2026-10-30'
+    - url: https://pypi.org/project/jsonpointer/3.6/
+      title: PyPI jsonpointer 3.6 — same official project and fixed distribution
+      language: en
+      accessed: '2026-10-30'
+    - url: https://www.rfc-editor.org/rfc/rfc6901.txt
+      title: RFC 6901 (April 2013), sections 3–7 — syntax, value resolution, representations, duplicate-name and
+        error boundaries; fixed RFC 4627 reference
+      language: en
+      accessed: '2026-10-30'
+    last_verified_at: '2026-10-30T00:17:10.489671+00:00'
+    last_verified_by: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author; fixed source/RFC reading
+      and author-side source-only API/CLI/tests reconstruction, not independent acceptance
+relations:
+- proposed_path: 01_State/02_Relations/json-pointer-implementations.yaml
+  operation: create_yaml_document
+  baseline_file: null
+  proposed_bytes:
+    path: /workspace/shared/ia-jsonpointer-intake-evidence-20261030/proposed-relation.yaml
+    bytes: 5226
+    sha256: 62639268d83b5fb45facf738e448313631f6c3f5e836a6f76504022302d40283
+    git_blob: 8957f5c225eaacafd7fb96e7e207372073fedb73
+  proposed_record:
+    id: python_jsonpointer_implements_json_pointer_rfc6901
+    type: relation
+    name_zh: jsonpointer 有界实现 JSON Pointer 字符串定位
+    name_en: jsonpointer implements bounded JSON Pointer string resolution
+    source: python_jsonpointer
+    relation: implements
+    target: json_pointer_rfc6901
+    context:
+      capabilities:
+      - resource_identification
+      version_context:
+        source: PyPI jsonpointer 3.6 / stefankoegl/python-json-pointer at c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+        target: JSON Pointer, RFC 6901 (April 2013), existing fixed publication with RFC 4627 reference unchanged
+      conditions_zh: 限定为固定 3.6 README/源码明确指向 RFC 6901 的字符串指针 token 解析、表示及已解析 Python 数据中的有限现存值定位；对象名称须唯一且为字符串，JSON
+        字符串/URI fragment 转换由调用方另行处理，不修改 RFC 6901 的既有 RFC 4627 引用。不是完整 conforms_to：API 的数组 - 返回 EndOfList 而非既存值；普通
+        dict 已丢失重复名称信息，不能据此证明原 JSON 合规。精确 Unicode、不做百分号解码、数组索引/错误/default/verbose 等条件适用。set/create 和 Python ducktype
+        为库扩展；内置有限失败不改原件不推广为任意自定义 setter 原子性。CLI -f 文本换行转换及去尾 CR/LF 可选择另一合法成员，部分 stdout/继续标志不代表整批成功。只赋予既有 resource_identification
+        的文档内值定位含义，不推断 JSON Patch、JSONPath、HTTP 获取、数据序列化、身份所有权、安全、互通或 IA 采用。
+      conditions_en: 'Limited to the fixed 3.6 documented RFC 6901 string-pointer token representation and finite
+        existing-value resolution in already parsed Python data with unique string object names. Caller JSON-string/URI-fragment
+        conversion remains separate and the existing RFC 4627 publication reference is unchanged. Not full conforms_to:
+        array - produces API EndOfList rather than an existing value, and ordinary dicts have lost duplicate-name
+        information. Exact Unicode, literal percent sequences, index/error/default/verbose conditions apply. set/create
+        and ducktypes are library extensions; tested built-in non-mutation is not arbitrary custom-setter atomicity.
+        CLI -f text-mode newline conversion and terminal CRLF trimming may select another member; partial stdout/continuation
+        is not batch success. Existing resource_identification means within-document value identification only,
+        not JSON Patch/JSONPath/HTTP retrieval/serialization/ownership/security/interoperability or IA adoption.'
+    evidence:
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/README.md
+      title: jsonpointer 3.6 — official RFC 6901 library identity
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/jsonpointer.py
+      title: jsonpointer 3.6 — token parsing, exact keys, EndOfList, default/errors and set/create extensions
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/tutorial.rst
+      title: jsonpointer 3.6 — documented resolution, mutation, copy and create interfaces
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/bin/jsonpointer
+      title: jsonpointer 3.6 — UTF-8 text-mode pointer file conversion, terminal stripping and partial-output/error
+        behavior
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/tests.py
+      title: jsonpointer 3.6 — fixed upstream unittest/doctest scope, not all-input conformance
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.py
+      title: jsonpointer 3.6 — package identity, declared Python >=3.10 and setup metadata; inspected, not executed
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/LICENSE.txt
+      title: jsonpointer 3.6 — source notice, not package-wide legal assessment
+      language: en
+      accessed: '2026-10-30'
+    - url: https://github.com/stefankoegl/python-json-pointer/releases/tag/v3.6
+      title: Official v3.6 release — observed published 2026-10-26
+      language: en
+      accessed: '2026-10-30'
+    - url: https://pypi.org/project/jsonpointer/3.6/
+      title: PyPI jsonpointer 3.6 — same official project and fixed distribution
+      language: en
+      accessed: '2026-10-30'
+    - url: https://www.rfc-editor.org/rfc/rfc6901.txt
+      title: RFC 6901 (April 2013), sections 3–7 — syntax, value resolution, representations, duplicate-name and
+        error boundaries; fixed RFC 4627 reference
+      language: en
+      accessed: '2026-10-30'
+    last_verified_at: '2026-10-30T00:17:10.489671+00:00'
+    last_verified_by: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author; string-representation
+      and finite within-document resolution only, not full conforms_to
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: python_jsonpointer
+  rationale_zh: 已有语法导航中的有界字符串指针实现；不是整体符合性或安全认证。
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  bytes: 52251
+  sha256: 20f30de34bbbc8ac547a79f1d97e0e0453ec1254f45834154edc155d5421def9
+  git_blob: b27eb2b7c8bd9bd3897acf19ba1e76a2cedde8e4
+navigation_decision_zh: 仅新增一个既有 syntax 编者成员；关系新文件沿用既有 *-implementations.yaml 物理模式，避免将定位误作数据序列化，不更改分类和维护方式。
+existing_record_updates: []
+protected_existing_assets:
+- All1032 baseline files unchanged in pending intake; projection changes only navigation plus new object/relation.
+- All133 prior events including123 accepted frozen routes and10 deferred remain byte-identical.
+- Existing JSON-related objects/publications, RFC6901→RFC4627 relation, all previous relations, runtime, schema,
+  renderer, documentation and governance remain unchanged.
+excluded_scope:
+- New taxonomy/capability/predicate/schema/renderer/pages/search or maintenance mechanism.
+- Full RFC conformance, JSON Patch/JSONPath, URI fetching, arbitrary-Python-object atomicity, install/platform/security/supply-chain
+  or adoption proof.
+renderer_boundary_zh: 完整中文 description 必须出现在 HTML、Markdown 和 search index；尤其保留 -f 文本模式中间换行转换及末尾CR/LF去除、sentinel和重复名称丢失，不依靠未渲染scope/context隐藏限制。
+materialization_boundary_zh: 仅 pending candidate/packet 与隔离的假设 projection；不创建真实接纳event、reviewer批准、freeze commit或Canonical物化。父级在fresh
+  exact-byte独立语义review和真实F后才执行接纳；只有normal merge保留F/H祖先。
