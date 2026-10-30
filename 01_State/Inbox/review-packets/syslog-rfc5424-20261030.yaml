@@ -1,0 +1,106 @@
+packet_id: syslog_rfc5424_20261030
+status: pending_independent_semantic_review
+baseline_commit: b5834b854b82690c79dff9a63b7fb1d5cf8b834d
+executor: Agent — OpenAI / dot / add_syslog_standard
+reviewer: null
+review_scope:
+- One fixed RFC 5424 artifact/protocol; existing observability editorial membership; zero technical relations.
+source_evidence:
+  method: Official RFC Editor original publication and information page inspected using web tool.
+  source_mappings: &id001
+  - url: https://www.rfc-editor.org/rfc/rfc5424.html
+    title: RFC 5424 original March 2009 publication — sections 1, 5–6 and 8
+    language: en
+    accessed: '2026-10-30'
+  - url: https://www.rfc-editor.org/info/rfc5424/
+    title: 'RFC Editor: Proposed Standard, March 2009, obsoletes RFC 3164; five errata reports indicated, contents/status
+      unreviewed'
+    language: en
+    accessed: '2026-10-30'
+  limitations:
+  - 固定 2009 年 3 月原始出版物；信息页列五项勘误报告，内容与处理状态未核验，不声称已整合勘误或当前完整修订语义。
+  - Transport-independent message format does not remove mandatory TLS support in §5.1.
+  - No implementation execution, deployment audit or RFC 3339/TLS/UDP technical edge.
+research_boundary:
+  question: Can the existing observability gap in event/log-message representation be filled without expanding the
+    data model?
+  decision: Admit one bounded fixed protocol artifact only if independently accepted.
+  depth: L1 bounded source verification
+  stop: Identity, source scope, restrictions and ordinary path established; no implementation research.
+preflight:
+  fresh_main: b5834b854b82690c79dff9a63b7fb1d5cf8b834d
+  canonical_records: 266
+  candidate_records: 257
+  machine_route: review_required
+  collisions: []
+  github_issue_search: 'syslog OR RFC5424 OR RFC 5424: no matches at preflight'
+  durable_research_search: No syslog/RFC5424 matches.
+objects:
+- candidate_id: syslog_rfc5424
+  candidate_path: 01_State/Inbox/candidates/syslog-rfc5424.yaml
+  candidate_blob: 511eca0080b6003f4770e3123c4f90fd02c80dd4
+  proposed_path: 01_State/01_Objects/syslog_rfc5424.yaml
+  proposed_record:
+    id: syslog_rfc5424
+    type: artifact
+    kind: protocol
+    name_zh: Syslog 协议原始文献（RFC 5424）
+    name_en: Syslog Original Protocol Publication (RFC 5424)
+    official_name: The Syslog Protocol
+    description_zh: 'RFC 5424 原版定义独立于传输层的事件通知消息：头部、结构化数据（可用 NILVALUE）与可选 MSG。它不是存储格式；传输映射另行规定，但 §5.1 要求实现支持 TLS
+      映射，并建议支持 UDP 映射。时间戳采用受限 RFC 3339 语法，或在无法获取系统时间时使用 NILVALUE：T/Z 大写、禁止闰秒、小数秒最多六位。协议本身不保证送达或安全，超长消息可能被截断或丢弃。固定
+      2009 年 3 月原始出版物；信息页列五项勘误报告，内容与处理状态未核验，不声称已整合勘误或当前完整修订语义。 官方状态为 Proposed Standard，取代 RFC 3164。仅作协议文献记录，不表示完整日志平台、部署适用性、实现符合性或
+      IA 采用；observability 仅是编辑导航，无技术关系。
+
+
+      English scope and limitations:
+
+
+      The original RFC 5424 defines transport-independent event messages: a header, structured data (or NILVALUE),
+      and optional MSG. It is not a storage format. Transport mappings are separate, but §5.1 requires TLS mapping
+      support and recommends UDP mapping support. Timestamps use restricted RFC 3339 syntax or NILVALUE when system
+      time is unavailable: uppercase T/Z, no leap seconds, at most six fractional digits. Delivery and security
+      are not guaranteed; oversized messages may be truncated or dropped. Fixed March 2009 original publication,
+      Proposed Standard, obsoleting RFC 3164. Five errata reports are indicated; their contents/status were not
+      reviewed or incorporated. No complete corrected semantics, full logging platform, deployment suitability,
+      implementation conformance or IA adoption is asserted. Observability membership is editorial navigation; no
+      technical relations.'
+    description_en: 'The original RFC 5424 defines transport-independent event messages: a header, structured data
+      (or NILVALUE), and optional MSG. It is not a storage format. Transport mappings are separate, but §5.1 requires
+      TLS mapping support and recommends UDP mapping support. Timestamps use restricted RFC 3339 syntax or NILVALUE
+      when system time is unavailable: uppercase T/Z, no leap seconds, at most six fractional digits. Delivery and
+      security are not guaranteed; oversized messages may be truncated or dropped. Fixed March 2009 original publication,
+      Proposed Standard, obsoleting RFC 3164. Five errata reports are indicated; their contents/status were not
+      reviewed or incorporated. No complete corrected semantics, full logging platform, deployment suitability,
+      implementation conformance or IA adoption is asserted. Observability membership is editorial navigation; no
+      technical relations.'
+    version: RFC 5424 (March 2009 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '5424'
+    official_url: https://www.rfc-editor.org/rfc/rfc5424.html
+    versions:
+    - version: RFC 5424
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc5424/
+    domains:
+    - observability
+    sources: *id001
+    last_verified_at: '2026-10-30T21:35:10.680693+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_syslog_standard; original publication and info page only; errata
+      contents/status unreviewed
+relations: []
+membership_proposals:
+- category_id: observability
+  ref:
+    surface: canonical
+    id: syslog_rfc5424
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: e3ec92e64bae7dcead58ad8d6c43b6c410b93f7137371015d1b6aac5e9b6159e
+  git_blob: c391e23c65cab965a02405aa0637e04eb0d35843
+excluded_scope:
+- No technical relations, existing object edits, runtime experiments, schema, capability, taxonomy, renderer, governance,
+  design, maintenance process, page restoration or held-work changes.
+materialization_boundary: Only candidate and packet; independent semantic acceptance before materialization; frozen
+  new-state ancestor and exact proposed fields except lifecycle/contribution/intake provenance.
