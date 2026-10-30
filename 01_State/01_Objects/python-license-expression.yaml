@@ -1,0 +1,316 @@
+id: python_license_expression
+type: system
+kind: library
+name_zh: AboutCode Python 许可证表达式工具库
+name_en: AboutCode license-expression Python library
+description_zh: 'license-expression 是 AboutCode 的 Python 表达式工具库；本记录固定 PyPI 30.4.4（工件上传日 2025-07-22）和源 commit a3c00c09986bcca1240afd5b1844b56de3f581c1，声明
+  Python >=3.9、boolean.py >=4.0。仅以既有 license_expression 能力收录技术性的解析、注册表校验、归一化和布尔式操作先例，并沿用 syntax 导航；不新增技术关系。固定 README
+  链接 SPDX 2.3 表达式，而 IA 既有规范对象是 SPDX License Expressions 3.0.1；本库的 API 行为不构成对该 3.0.1 语法的完整实现或符合性证明，也不建立 REUSE、IA
+  采用、依赖或兼容关系。
+
+
+  Licensing() 默认没有已知符号表；get_spdx_licensing() 与 get_scancode_licensing() 从固定 ScanCode 派生表加载不同键/别名，不是仅包含官方 SPDX License
+  List 的验证器。已登记 vendor LicenseRef（例如 LicenseRef-scancode-3com-microcode）可通过 strict=True、validate=True；未登记的 LicenseRef-local
+  / DocumentRef-doc:LicenseRef-local 则可先解析、后被键校验拒绝。默认 parse(validate=False, strict=False) 允许未知名称，先进分词器还接受含空格或非 ASCII
+  的一般符号；simple=True 改变分词方式。这些接受行为不证明规范标识符语法或外部文档引用已解析。已知别名/大小写可归一：GPL-2.0→GPL-2.0-only、GPL-2.0+→GPL-2.0-or-later；但未登记
+  MIT+ 被 stock validate 拒绝，+ 不是普遍版本范围求值器。未知 LicenseRef-A 与 LicenseRef-a 的解析对象在所测上下文并不相等，而已注册的自定义符号可被大小写不敏感地识别；不是统一的自定义引用语义规范化。deprecated
+  标记也不自动导致拒绝。
+
+
+  validate=True 检查配置表中的已知键；strict=True 主要检查 WITH 两侧 license/exception 角色及独立 exception 使用，不判断该 exception 在法律上是否适用于许可证。两标志同时开启仍接受混合大小写
+  AnD / WiTh，与固定 SPDX 3.0.1 的全大写或全小写运算符语法不同。任意 AdditionRef 在默认解析中可成为未知 token；未标记 exception 的 AdditionRef 用作 WITH
+  右侧会被 stock strict 拒绝，调用方自行登记 is_exception=True 的符号则可通过；这是配置行为，不证明 AdditionRef 的完整标准实现。换行可被当作空白归一，与 SPDX tag:value
+  上下文的单行要求不同，不把这一约束扩大到所有表示格式。
+
+
+  parse 对已有 LicenseExpression AST 使用已构造对象快路径，在 strict/validate 检查之前原样返回，不按新传入的标志重新验证。先宽松解析的 MIT WITH Apache-2.0
+  对象因而不重做角色检查，validate(该对象) 在键均已知时也可无 errors；对应字符串在 strict=True 时会被拒绝。未知键 AST 在 parse(validate=True) 下同样不重做键校验，但
+  validate(AST) 仍可报告未知键。parse(None/空白) 返回 None；validate(None/空白) 可返回 errors=[] 且 normalized_expression 为字符串 "None"，不是有效许可证结论。所测整数和
+  bytes 输入在 parse 抛 ExpressionError，而 validate 的错误处理可泄漏 AttributeError。不能把任一 API 当成对任意输入都返回统一诊断、严格符合性或授权结果的总验证器。
+
+
+  渲染与别名归一不保留原始词法形式。AND / OR / WITH 与括号按实现规则构造表达式；WITH 是 license-plus-exception 原子项。dedup 去重与 simplify 不同：所测 MIT
+  OR (MIT AND Apache-2.0) 经 simplify 的布尔吸收成为 MIT，而 dedup 保留该结构。is_equivalent 能识别所测交换形式，却对一组仅差分配律展开的等价布尔式返回 false，不是完备的布尔等价判定。contains(''MIT
+  OR Apache-2.0'',''MIT'') 为 true 是库的子式包含，不是逻辑蕴含、必须承担的义务、许可证相容或权利许可。NONE / NOASSERTION 的未知键结果也仅描述本次注册表，不裁定所有 SPDX
+  字段中这些特殊值的合法性。
+
+
+  来源自身的差异保留：固定 README 写 SPDX License List 3.26 / ScanCode 32.3.1；包内 .ABOUT、tag 与 CHANGELOG 则写 License List 3.27，.ABOUT
+  固定 ScanCode commit 1dfa89ae348338b23a359c4c6b23e39c128a41e5 的 index.json，实际包内 JSON 与其原字节相等。License List 版本不等于表达式规范
+  3.0.1。CHANGELOG 的 30.4.4 标题日期为 2025-01-10，与 tag / PyPI 工件的 2025-07-22 时点不同；本记录使用实际 PyPI 上传日，不悄悄修正上游文件或声称最新状态。源仓库
+  71 个 blob、boolean.py 5.0 源 23 个 blob 已核对；仅六个 license_expression 包内文件（含数据/声明）和三个 boolean 文件（含打包测试）在 source/wheel/sdist
+  间原字节相同，不是整发行包一致或可重复构建。vendored 修改版纯 Python Aho-Corasick 不证明 C 扩展等价或性能。
+
+
+  实际运行固定 CPython 3.12.14 与 boolean.py 5.0，只覆盖一个允许的依赖组合，不覆盖全部 >=4.0、Python/平台矩阵。研究者自写 79 条有限记录经作者从公开工件新重建后亲自重放，source/wheel
+  各 79/79；作者另写 50 条有限断言，在 source 和安全解压 wheel 的 -I -S 模式各通过。固定原始上游配置在 source 报 188 pass；wheel 分开执行 176 项 tests 与
+  12 项包内 doctests，对应相同测试范围，不另加成独特覆盖。boolean.py source/wheel 各 86 pass、4 项上游 xfail 原样保留。独立预审 40 项及注册表观察、研究者、作者与上游用例重叠，不相加覆盖。运行器显式核对
+  source/wheel import 路径，无测试源码补丁、适配器或注入 skip；测试依赖只锁版本，四份发行归档另核 SHA-256，不能统称整条依赖链 hash-pin。固定wheel用于运行而未构建这些库；未验证
+  tag 签名。最初缺 setuptools 的收集失败及复用 venv 的 SameFileError 保留，不计通过；作者首次公开获取遇到上游 HTTP 503、测试未启动，该失败日志保留；之后新目录最终重放实际成功。
+
+
+  本记录不解释法律效力，不决定真实工件的许可证适用、权限、义务、相容、合规或安全策略；不执行许可证正文扫描，不证明完整 SBOM/SPDX 符合性，不是生产推荐、IA 采用、签名/供应链认证或未来兼容保证。IA 的许可证属性、既有
+  SPDX/REUSE 对象、能力含义及相关旧 uses 关系均不因收录此工具重新核准。
+
+
+  English scope and limitations:
+
+
+  license-expression is AboutCode''s Python expression utility library, pinned here to PyPI 30.4.4 (artifact upload
+  date 2025-07-22) and source commit a3c00c09986bcca1240afd5b1844b56de3f581c1, declaring Python >=3.9 and boolean.py
+  >=4.0. Existing license_expression records a technical precedent for parsing, registry checking, normalization
+  and Boolean-expression operations, with existing syntax navigation and no new technical relations. The fixed README
+  references SPDX 2.3 expressions, while IA''s existing normative object is SPDX License Expressions 3.0.1. These
+  APIs do not demonstrate full implementation/conformance to that 3.0.1 grammar or establish REUSE, IA-adoption,
+  dependency or compatibility edges.
+
+
+  Licensing() has no known-symbol registry by default. get_spdx_licensing() and get_scancode_licensing() load different
+  keys/aliases from the fixed ScanCode-derived table, not an official-SPDX-License-List-only validator. Registered
+  vendor LicenseRefs such as LicenseRef-scancode-3com-microcode can pass strict=True and validate=True, while absent
+  LicenseRef-local / DocumentRef-doc:LicenseRef-local can parse and then fail known-key validation. Default parse(validate=False,
+  strict=False) permits unknown names; the advanced tokenizer also accepts space-bearing or non-ASCII generic symbols,
+  while simple=True changes tokenization. Acceptance does not establish normative identifier grammar or resolve
+  external document references. Known aliases/case can normalize: GPL-2.0 to GPL-2.0-only and GPL-2.0+ to GPL-2.0-or-later;
+  unregistered MIT+ fails stock validation, and + is not a general version-range evaluator. Parsed unknown LicenseRef-A
+  and LicenseRef-a are unequal in the tested context, whereas registered custom symbols can be recognized case-insensitively:
+  this is not uniform custom-reference semantic normalization. A deprecated flag does not automatically reject a
+  symbol.
+
+
+  validate=True checks configured known keys. strict=True primarily checks license/exception roles around WITH and
+  standalone exception use, not whether an exception legally applies to a license. Even both flags accept mixed-case
+  AnD/WiTh, unlike the fixed SPDX 3.0.1 all-upper/all-lower operator grammar. Arbitrary AdditionRef text can be
+  an unknown token in default parsing; an untyped AdditionRef on the right of WITH fails stock strict checking,
+  whereas caller-registered is_exception=True symbols can pass. This configuration behavior does not demonstrate
+  full normative AdditionRef implementation. Newlines may normalize as whitespace, unlike the SPDX tag:value context''s
+  single-line requirement; that requirement is not generalized to every representation format.
+
+
+  The already-constructed-object fast path returns an existing LicenseExpression AST unchanged before strict/validate
+  checks, without revalidation under newly supplied flags. A previously tolerant-parsed MIT WITH Apache-2.0 AST
+  therefore does not repeat exception-role checking, and validate(that AST) can report no errors when both keys
+  are known; the corresponding string is rejected with strict=True. An unknown-key AST likewise is not rechecked
+  by parse(validate=True), although validate(AST) still reports unknown keys. parse(None/blank) returns None; validate(None/blank)
+  can return errors=[] and normalized_expression equal to the string "None", not a valid-license conclusion. Tested
+  integer and bytes inputs raise ExpressionError through parse, while validate can leak AttributeError from its
+  error handling. Neither API is a total arbitrary-input validator promising uniform diagnostics, strict conformance
+  or authorization.
+
+
+  Rendering and alias normalization do not preserve original lexical form. AND/OR/WITH and parentheses build expressions
+  according to implementation rules; WITH is an atomic license-plus-exception term. dedup differs from simplify:
+  tested MIT OR (MIT AND Apache-2.0) simplifies by Boolean absorption to MIT while dedup preserves that structure.
+  is_equivalent recognizes tested commutative forms but returns false for a pair differing only by distributive
+  expansion, so it is not a complete Boolean-equivalence procedure. contains(''MIT OR Apache-2.0'',''MIT'') returning
+  true is library subexpression containment, not logical implication, required obligations, license compatibility
+  or permission. Unknown-key results for NONE/NOASSERTION describe this registry only, not their legality across
+  all SPDX fields.
+
+
+  Source discrepancies remain explicit: the fixed README says SPDX License List 3.26 / ScanCode 32.3.1, while the
+  packaged .ABOUT, tag and CHANGELOG say License List 3.27. The .ABOUT pins index.json at ScanCode commit 1dfa89ae348338b23a359c4c6b23e39c128a41e5;
+  the packaged JSON is raw-byte-identical to that source. License List versions are not expression specification
+  3.0.1. The CHANGELOG 30.4.4 heading says 2025-01-10, unlike tag/PyPI artifact timing on 2025-07-22. This record
+  uses the observed PyPI upload date without silently correcting upstream files or claiming latest status. All 71
+  library-source blobs and 23 boolean.py 5.0 source blobs were checked. Only six license_expression package files
+  (including data/notices) and three boolean files (including a packaged test) match source/wheel/sdist bytes, not
+  whole-distribution equality or reproducible builds. Vendored modified pure-Python Aho-Corasick code does not establish
+  C-extension equivalence or performance.
+
+
+  Actual execution uses fixed CPython 3.12.14 and boolean.py 5.0, one allowed dependency combination rather than
+  all >=4.0 versions or a Python/platform matrix. The author freshly reconstructed public artifacts and replayed
+  the researcher''s 79 finite records in source/wheel modes, each 79/79, plus 50 separately authored assertions
+  in source and safely extracted-wheel -I -S modes. Unmodified upstream configuration reports 188 source passes;
+  wheel execution splits 176 tests and 12 packaged doctests covering the same scope, not additional unique coverage.
+  boolean.py source/wheel each report 86 passes and four retained upstream xfails. Independent preflight''s 40 observations
+  and registry checks overlap researcher/author/upstream cases and are never added as coverage. The runner explicitly
+  checks source/wheel import paths without test-source patches, test adapters or injected skips. Test dependencies
+  are version-locked only; four release archives separately have verified SHA-256, not an entirely hash-pinned dependency
+  chain. Runtime uses fixed wheels without building these libraries; tag signatures were not verified. Initial missing-setuptools
+  collection failure and existing-venv SameFileError remain recorded, not passes; the author''s first public acquisition
+  stopped on upstream HTTP 503 before tests and remains recorded; the subsequent fresh-directory replay actually
+  succeeded.
+
+
+  This record does not interpret legal effect or determine actual artifacts'' license applicability, rights, obligations,
+  compatibility, compliance or security policy. It does not scan license texts, prove complete SBOM/SPDX conformance,
+  recommend production use, assert IA adoption, authenticate signatures/supply chains or guarantee future compatibility.
+  IA licensing properties, existing SPDX/REUSE records, capability meaning and previous uses relations are not reapproved
+  by this tool entry.'
+description_en: 'license-expression is AboutCode''s Python expression utility library, pinned here to PyPI 30.4.4
+  (artifact upload date 2025-07-22) and source commit a3c00c09986bcca1240afd5b1844b56de3f581c1, declaring Python
+  >=3.9 and boolean.py >=4.0. Existing license_expression records a technical precedent for parsing, registry checking,
+  normalization and Boolean-expression operations, with existing syntax navigation and no new technical relations.
+  The fixed README references SPDX 2.3 expressions, while IA''s existing normative object is SPDX License Expressions
+  3.0.1. These APIs do not demonstrate full implementation/conformance to that 3.0.1 grammar or establish REUSE,
+  IA-adoption, dependency or compatibility edges.
+
+
+  Licensing() has no known-symbol registry by default. get_spdx_licensing() and get_scancode_licensing() load different
+  keys/aliases from the fixed ScanCode-derived table, not an official-SPDX-License-List-only validator. Registered
+  vendor LicenseRefs such as LicenseRef-scancode-3com-microcode can pass strict=True and validate=True, while absent
+  LicenseRef-local / DocumentRef-doc:LicenseRef-local can parse and then fail known-key validation. Default parse(validate=False,
+  strict=False) permits unknown names; the advanced tokenizer also accepts space-bearing or non-ASCII generic symbols,
+  while simple=True changes tokenization. Acceptance does not establish normative identifier grammar or resolve
+  external document references. Known aliases/case can normalize: GPL-2.0 to GPL-2.0-only and GPL-2.0+ to GPL-2.0-or-later;
+  unregistered MIT+ fails stock validation, and + is not a general version-range evaluator. Parsed unknown LicenseRef-A
+  and LicenseRef-a are unequal in the tested context, whereas registered custom symbols can be recognized case-insensitively:
+  this is not uniform custom-reference semantic normalization. A deprecated flag does not automatically reject a
+  symbol.
+
+
+  validate=True checks configured known keys. strict=True primarily checks license/exception roles around WITH and
+  standalone exception use, not whether an exception legally applies to a license. Even both flags accept mixed-case
+  AnD/WiTh, unlike the fixed SPDX 3.0.1 all-upper/all-lower operator grammar. Arbitrary AdditionRef text can be
+  an unknown token in default parsing; an untyped AdditionRef on the right of WITH fails stock strict checking,
+  whereas caller-registered is_exception=True symbols can pass. This configuration behavior does not demonstrate
+  full normative AdditionRef implementation. Newlines may normalize as whitespace, unlike the SPDX tag:value context''s
+  single-line requirement; that requirement is not generalized to every representation format.
+
+
+  The already-constructed-object fast path returns an existing LicenseExpression AST unchanged before strict/validate
+  checks, without revalidation under newly supplied flags. A previously tolerant-parsed MIT WITH Apache-2.0 AST
+  therefore does not repeat exception-role checking, and validate(that AST) can report no errors when both keys
+  are known; the corresponding string is rejected with strict=True. An unknown-key AST likewise is not rechecked
+  by parse(validate=True), although validate(AST) still reports unknown keys. parse(None/blank) returns None; validate(None/blank)
+  can return errors=[] and normalized_expression equal to the string "None", not a valid-license conclusion. Tested
+  integer and bytes inputs raise ExpressionError through parse, while validate can leak AttributeError from its
+  error handling. Neither API is a total arbitrary-input validator promising uniform diagnostics, strict conformance
+  or authorization.
+
+
+  Rendering and alias normalization do not preserve original lexical form. AND/OR/WITH and parentheses build expressions
+  according to implementation rules; WITH is an atomic license-plus-exception term. dedup differs from simplify:
+  tested MIT OR (MIT AND Apache-2.0) simplifies by Boolean absorption to MIT while dedup preserves that structure.
+  is_equivalent recognizes tested commutative forms but returns false for a pair differing only by distributive
+  expansion, so it is not a complete Boolean-equivalence procedure. contains(''MIT OR Apache-2.0'',''MIT'') returning
+  true is library subexpression containment, not logical implication, required obligations, license compatibility
+  or permission. Unknown-key results for NONE/NOASSERTION describe this registry only, not their legality across
+  all SPDX fields.
+
+
+  Source discrepancies remain explicit: the fixed README says SPDX License List 3.26 / ScanCode 32.3.1, while the
+  packaged .ABOUT, tag and CHANGELOG say License List 3.27. The .ABOUT pins index.json at ScanCode commit 1dfa89ae348338b23a359c4c6b23e39c128a41e5;
+  the packaged JSON is raw-byte-identical to that source. License List versions are not expression specification
+  3.0.1. The CHANGELOG 30.4.4 heading says 2025-01-10, unlike tag/PyPI artifact timing on 2025-07-22. This record
+  uses the observed PyPI upload date without silently correcting upstream files or claiming latest status. All 71
+  library-source blobs and 23 boolean.py 5.0 source blobs were checked. Only six license_expression package files
+  (including data/notices) and three boolean files (including a packaged test) match source/wheel/sdist bytes, not
+  whole-distribution equality or reproducible builds. Vendored modified pure-Python Aho-Corasick code does not establish
+  C-extension equivalence or performance.
+
+
+  Actual execution uses fixed CPython 3.12.14 and boolean.py 5.0, one allowed dependency combination rather than
+  all >=4.0 versions or a Python/platform matrix. The author freshly reconstructed public artifacts and replayed
+  the researcher''s 79 finite records in source/wheel modes, each 79/79, plus 50 separately authored assertions
+  in source and safely extracted-wheel -I -S modes. Unmodified upstream configuration reports 188 source passes;
+  wheel execution splits 176 tests and 12 packaged doctests covering the same scope, not additional unique coverage.
+  boolean.py source/wheel each report 86 passes and four retained upstream xfails. Independent preflight''s 40 observations
+  and registry checks overlap researcher/author/upstream cases and are never added as coverage. The runner explicitly
+  checks source/wheel import paths without test-source patches, test adapters or injected skips. Test dependencies
+  are version-locked only; four release archives separately have verified SHA-256, not an entirely hash-pinned dependency
+  chain. Runtime uses fixed wheels without building these libraries; tag signatures were not verified. Initial missing-setuptools
+  collection failure and existing-venv SameFileError remain recorded, not passes; the author''s first public acquisition
+  stopped on upstream HTTP 503 before tests and remains recorded; the subsequent fresh-directory replay actually
+  succeeded.
+
+
+  This record does not interpret legal effect or determine actual artifacts'' license applicability, rights, obligations,
+  compatibility, compliance or security policy. It does not scan license texts, prove complete SBOM/SPDX conformance,
+  recommend production use, assert IA adoption, authenticate signatures/supply chains or guarantee future compatibility.
+  IA licensing properties, existing SPDX/REUSE records, capability meaning and previous uses relations are not reapproved
+  by this tool entry.'
+version: 30.4.4
+external_identifiers:
+- namespace: github
+  value: aboutcode-org/license-expression
+- namespace: pypi
+  value: license-expression
+official_url: https://github.com/aboutcode-org/license-expression
+versions:
+- version: 30.4.4
+  date: '2025-07-22'
+  status: released
+  url: https://pypi.org/project/license-expression/30.4.4/
+domains:
+- licensing
+- software_engineering
+capabilities:
+- license_expression
+scope_notes_zh: 完整中英文操作边界同置既有renderer可见的description_zh，description_en保留英文；不以隐藏字段代替限制。技术relations为空，不合成对象license_expression许可证属性，不改变IA许可证。
+scope_notes_en: Full operative Chinese and English share existing visible description_zh; description_en retains
+  English. Hidden fields do not substitute for limits. No technical relation or synthesized license_expression licensing-property
+  field; no IA-license change.
+sources:
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/README.rst
+  title: license-expression30.4.4 — Official library identity, examples, SPDX2.3 reference and conflicting data
+    labels
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/src/license_expression/__init__.py
+  title: license-expression30.4.4 — Registry/tokenization, strict/validate, existing-AST fast path, diagnostics
+    and Boolean utilities
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/setup.cfg
+  title: license-expression30.4.4 — Fixed30.4.4, Python>=3.9 and boolean.py>=4.0 requirement
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/src/license_expression/data/license_key_index.json.ABOUT
+  title: license-expression30.4.4 — Packaged ScanCode data provenance and SPDX License List3.27 label
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/CHANGELOG.rst
+  title: license-expression30.4.4 — Preserved30.4.4 date-header discrepancy and data-update claim
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/pyproject.toml
+  title: license-expression30.4.4 — Original upstream pytest collection/doctest configuration
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/license-expression/blob/a3c00c09986bcca1240afd5b1844b56de3f581c1/src/license_expression/_pyahocorasick.py
+  title: license-expression30.4.4 — Vendored modified pure-Python tokenizer, not C-equivalence/performance proof
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/license-expression/30.4.4/
+  title: PyPI license-expression30.4.4 — fixed artifacts and actual2025-07-22 upload date
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/bastikr/boolean.py/blob/8a443837e68dc027004294fb17fe1857cf783410/boolean/boolean.py
+  title: boolean.py5.0 — one fixed tested computational dependency, not all allowed versions
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/boolean.py/5.0/
+  title: PyPI boolean.py5.0 — fixed dependency artifacts
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/aboutcode-org/scancode-licensedb/blob/1dfa89ae348338b23a359c4c6b23e39c128a41e5/docs/index.json
+  title: Fixed ScanCode index matching bundled bytes; not pure official-list-only validation
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/spdx/spdx-spec/blob/61a649da8ca27924ac1ca8d2a061cb228839b24c/docs/annexes/spdx-license-expressions.md
+  title: SPDX3.0.1 fixed normative comparison only — no implements relation
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T06:56:17.245319+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; fixed source/spec/data
+  reading and fresh artifact replay, not independent acceptance or legal review
+record_created_at: '2026-10-30T07:13:05.210270+00:00'
+record_updated_at: '2026-10-30T07:13:05.210270+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_license_expression
+  acceptance_event_id: accept-20261030-license-expression-30-4-4-python_license_expression
+  reviewed_candidate_blob: f5afb6a0690673e1bd11696fdb8e0a50d2e17188
+  reviewed_against_commit: a77cb8c029f6899dae31a4be985656f7284e4350
+  candidate_executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+  canonical_serializer: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewed_packet_commit: a77cb8c029f6899dae31a4be985656f7284e4350
+  reviewed_packet_blob: 9b5fe355437bdefd11c69bdee5c02f77e15eb0aa
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a77cb8c029f6899dae31a4be985656f7284e4350/01_State/Inbox/review-packets/license-expression-30.4.4-20261030.yaml
