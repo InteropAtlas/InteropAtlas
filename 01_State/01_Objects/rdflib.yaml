@@ -16,10 +16,97 @@ versions:
   date: '2026-02-13'
   status: released
   url: https://github.com/RDFLib/rdflib/releases/tag/7.6.0
-description_zh: 用于处理 RDF 图的 Python 软件库；本记录固定 7.6.0，限定其内置 SPARQL 1.1 查询处理器对可信、预加载本地图的有界查询路径，不表示完整符合性或离线沙箱。
-description_en: A Python library for working with RDF graphs. This record fixes 7.6.0 and bounds its built-in SPARQL
-  1.1 query processor to trusted, preloaded local-graph query paths; it does not imply complete conformance or an
-  offline sandbox.
+description_zh: '用于处理 RDF 图的 Python 软件库；本记录固定 7.6.0，限定内置 SPARQL 1.1 查询处理器对可信、预加载本地图的有界查询路径，不表示完整符合性或离线沙箱。
+
+
+  结果消费方式不是可互换的行数或真值接口。在固定 CPython 3.12.14 / RDFLib 7.6.0 的 `SELECT ?missing WHERE {}` 新结果上，先读 `.bindings` 得到 `[{}]`、`len=1`、`bool=True`，但迭代为零行；若首先用列表推导式消费，随后
+  bindings 为 `[]`、len 为 0、bool 为 False。`list(result)` 的长度提示路径在该环境先物化，得到空列表但保留 len=1。部分未绑定投影列为 Python `None`，`row.asdict()`
+  省略该列；这不是标准结果格式里的 JSON null。ASK false 的 len 仍为 1，不能以长度判断 ASK 真值。
+
+
+  结果返回也不一律等于快照：本地 Memory store 的基本 SELECT 在创建结果后、首次消费前新增三元组，会读到新增值；首次物化后再新增则不进入缓存结果。先调用 len 可触发物化；本例 ORDER BY 在返回前已排序，因此不能反推所有查询都延迟执行。这里只比较小型单线程内存图，不推断其他
+  store、事务或并发行为。
+
+
+  字面量的词法形式、term 相等和值相等须区分。默认 integer Literal 构造把 ''01'' 与 ''1'' 都规范化为 ''1''，相同主谓下合为一个图三元组；显式 `normalize=False` 保留两种词法形式，此时
+  `==` 为 False、`.eq()` 为 True、`toPython()` 都得到整数 1。该两项样本的 DISTINCT 保留两项，数值 FILTER 匹配两项，而与查询字面量 1 的 sameTerm 只匹配
+  ''1''；不推广到全部 RDF/XSD datatype。
+
+
+  这些是固定源码（8b32146a0f9cb748c2068662e50d02b42fc86dfd）与经官方 tree 核验的 pyparsing 3.3.2 源码，加明示本地生成 distribution metadata
+  的自编小样本结果；不是官方 wheel、sdist、安装或构建测试。初次无 metadata 导入失败保留。内置 Memory/SPARQLProcessor、use_store_provided=False，不替换 evaluator/函数或全局规范化设置；未运行上游/W3C
+  全套、pySHACL 管线、远程端点、SERVICE、外部加载、Update、DESCRIBE、结果格式互通或安全/性能测试。既有实现关系与 pySHACL 依赖不由这些样本重新批准或扩大。
+
+
+  English scope and limitations:
+
+
+  A Python library for RDF graphs, fixed here at 7.6.0 and bounded to its built-in SPARQL 1.1 processor over trusted,
+  preloaded local graphs; not complete conformance or an offline sandbox.
+
+
+  Result consumption is not an interchangeable row-count or truth interface. With a fresh `SELECT ?missing WHERE
+  {}` result on fixed CPython 3.12.14 / RDFLib 7.6.0, reading `.bindings` first gives `[{}]`, len=1 and bool=True,
+  yet iteration yields no rows. Consuming first with a list comprehension instead leaves bindings=[], len=0 and
+  bool=False. In this environment `list(result)` takes a length-hint path that materializes first: the list is empty
+  but len remains 1. A partially unbound projected column is Python `None` and omitted from `row.asdict()`; this
+  does not assert JSON null in a standard result format. An ASK false result still has len=1; length is not ASK
+  truth.
+
+
+  Returning a result is not invariably a snapshot. The basic SELECT over the local Memory store sees a triple added
+  after result creation but before first consumption; additions after materialization are absent from the cached
+  result. Calling len can materialize it. The ORDER BY control sorts before returning, so not every query is lazy.
+  These are small single-threaded in-memory examples, not claims about other stores, transactions or concurrency.
+
+
+  Lexical form, term equality and value equality differ. Default integer Literal construction normalizes both ''01''
+  and ''1'' to ''1'', leaving one triple for the same subject/predicate. Explicit `normalize=False` preserves both
+  lexical forms: `==` is False, `.eq()` is True, and `toPython()` gives integer 1 for both. For these two values
+  DISTINCT retains both and a numeric FILTER matches both, whereas sameTerm against query literal 1 matches only
+  ''1''; this is not generalized to all RDF/XSD datatypes.
+
+
+  These small custom probes run fixed source (8b32146a0f9cb748c2068662e50d02b42fc86dfd) plus pyparsing 3.3.2 source
+  checked against its official tree, with explicitly locally generated distribution metadata, not an official wheel,
+  sdist, installation or build test. The initial import failure without metadata is retained. They use built-in
+  Memory/SPARQLProcessor and use_store_provided=False without replacing evaluators/functions or global normalization
+  settings. They do not run full upstream/W3C suites, the pySHACL pipeline, remote endpoints, SERVICE, external
+  loading, Update, DESCRIBE, result-format interoperability or security/performance tests. Existing implementation
+  and pySHACL dependency edges are neither reapproved nor enlarged by these examples.'
+description_en: 'A Python library for RDF graphs, fixed here at 7.6.0 and bounded to its built-in SPARQL 1.1 processor
+  over trusted, preloaded local graphs; not complete conformance or an offline sandbox.
+
+
+  Result consumption is not an interchangeable row-count or truth interface. With a fresh `SELECT ?missing WHERE
+  {}` result on fixed CPython 3.12.14 / RDFLib 7.6.0, reading `.bindings` first gives `[{}]`, len=1 and bool=True,
+  yet iteration yields no rows. Consuming first with a list comprehension instead leaves bindings=[], len=0 and
+  bool=False. In this environment `list(result)` takes a length-hint path that materializes first: the list is empty
+  but len remains 1. A partially unbound projected column is Python `None` and omitted from `row.asdict()`; this
+  does not assert JSON null in a standard result format. An ASK false result still has len=1; length is not ASK
+  truth.
+
+
+  Returning a result is not invariably a snapshot. The basic SELECT over the local Memory store sees a triple added
+  after result creation but before first consumption; additions after materialization are absent from the cached
+  result. Calling len can materialize it. The ORDER BY control sorts before returning, so not every query is lazy.
+  These are small single-threaded in-memory examples, not claims about other stores, transactions or concurrency.
+
+
+  Lexical form, term equality and value equality differ. Default integer Literal construction normalizes both ''01''
+  and ''1'' to ''1'', leaving one triple for the same subject/predicate. Explicit `normalize=False` preserves both
+  lexical forms: `==` is False, `.eq()` is True, and `toPython()` gives integer 1 for both. For these two values
+  DISTINCT retains both and a numeric FILTER matches both, whereas sameTerm against query literal 1 matches only
+  ''1''; this is not generalized to all RDF/XSD datatypes.
+
+
+  These small custom probes run fixed source (8b32146a0f9cb748c2068662e50d02b42fc86dfd) plus pyparsing 3.3.2 source
+  checked against its official tree, with explicitly locally generated distribution metadata, not an official wheel,
+  sdist, installation or build test. The initial import failure without metadata is retained. They use built-in
+  Memory/SPARQLProcessor and use_store_provided=False without replacing evaluators/functions or global normalization
+  settings. They do not run full upstream/W3C suites, the pySHACL pipeline, remote endpoints, SERVICE, external
+  loading, Update, DESCRIBE, result-format interoperability or security/performance tests. Existing implementation
+  and pySHACL dependency edges are neither reapproved nor enlarged by these examples.'
 open_source: true
 license_expression: BSD-3-Clause
 scope_notes_zh: '沿既有 system/library 模式收录 RDFLib 软件库，固定版本 7.6.0、tag 7.6.0、commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd，GitHub
@@ -49,8 +136,9 @@ scope_notes_zh: '沿既有 system/library 模式收录 RDFLib 软件库，固定
   target_graph.query 调用未强制 use_store_provided=False，因此不把本地内置路径或 RDFLib 的有界实现声明传递成 pySHACL 全面 SPARQL 符合性。
 
 
-  仅核验官方固定源码、测试定义、release/tag/PyPI 与 IA 提案投影；未安装、构建、执行 RDFLib/pySHACL 或上游测试，未查询远程端点。不向 IA 引擎加入依赖或改变查询机制，不声明 IA 采用、部署安全、生产适用性或认证。不新增
-  capability，也不增加 Update、Protocol、结果格式、Federated Query、entailment 或 RDF 1.2 关系。'
+  原收录核验官方固定源码、测试定义、release/tag/PyPI 与 IA 提案投影，未执行上游测试。本轮另按 description 所列固定源码与本地 metadata 形态运行 RDFLib 自编探针；未安装或构建官方发行包，未运行
+  pySHACL 或查询远程端点。不向 IA 引擎加入依赖或改变查询机制，不声明 IA 采用、部署安全、生产适用性或认证。不新增 capability，也不增加 Update、Protocol、结果格式、Federated
+  Query、entailment 或 RDF 1.2 关系。'
 scope_notes_en: 'The RDFLib software library follows the existing system/library pattern, fixed at version/tag 7.6.0
   and commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd; GitHub RDFLib/rdflib, package/import rdflib. The official
   non-draft, non-prerelease release was published on 2026-02-13 and the tag resolved to this commit when checked.
@@ -92,11 +180,12 @@ scope_notes_en: 'The RDFLib software library follows the existing system/library
   local path nor this bounded implementation claim is propagated into full pySHACL SPARQL conformance.
 
 
-  Only official fixed source, test definitions, release/tag/PyPI metadata and IA proposal projections were checked.
-  RDFLib/pySHACL were not installed, built or executed, upstream tests were not run, and no remote endpoint was
-  queried. No IA runtime dependency/query mechanism, adoption, deployment-security assurance, production recommendation
-  or certification is introduced. No capability or Update, Protocol, result-format, Federated Query, entailment
-  or RDF 1.2 relationship is added.'
+  The original intake checked official fixed source, test definitions, release/tag/PyPI metadata and IA proposal
+  projections without running upstream tests. This update separately runs custom RDFLib probes with fixed source
+  and local metadata as described above; no official distribution was installed or built, pySHACL was not run, and
+  no remote endpoint was queried. No IA runtime dependency/query mechanism, adoption, deployment-security assurance,
+  production recommendation or certification is introduced. No capability or Update, Protocol, result-format, Federated
+  Query, entailment or RDF 1.2 relationship is added.'
 sources:
 - url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/pyproject.toml#L1-L53
   title: RDFLib 7.6.0 package identity, BSD-3-Clause, Python and conditional/optional dependency metadata
@@ -186,14 +275,38 @@ sources:
   title: PyPI RDFLib 7.6.0 corroborates fixed package metadata
   language: en
   accessed: '2026-10-24'
-last_verified_at: '2026-10-24T09:22:25.554473+00:00'
-last_verified_by: Agent — OpenAI / dot, fixed RDFLib and pySHACL source evidence executor
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/query.py#L145-L197
+  title: RDFLib 7.6.0 — ResultRow unbound columns and mapping access
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/query.py#L227-L388
+  title: RDFLib 7.6.0 — Result materialization, len/bool and skipped empty bindings
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L495-L622
+  title: RDFLib 7.6.0 — ORDER BY sorting, SELECT projection and ASK/CONSTRUCT
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/term.py#L638-L700
+  title: RDFLib 7.6.0 — Literal normalization at construction
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/term.py#L1352-L1455
+  title: RDFLib 7.6.0 — Literal term equality versus value equality
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/__init__.py#L48-L56
+  title: RDFLib 7.6.0 — Distribution metadata is required at import
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T17:28:56.896178+00:00'
+last_verified_by: Agent — OpenAI / dot / resume_rdflib_evidence; bounded source-runtime probes
 record_created_at: '2026-10-24T09:29:18.384268+00:00'
-record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-30T17:28:56.896178+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  executor: Agent — OpenAI / dot / resume_rdflib_evidence
+  reviewer: Independent Agents — OpenAI / dot / semantic (evidence) and structure (boundaries)
   github_actor: ff6962757
 intake_provenance:
   candidate_id: rdflib
