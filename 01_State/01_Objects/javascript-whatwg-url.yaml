@@ -1,0 +1,287 @@
+id: javascript_whatwg_url
+type: system
+kind: library
+name_zh: whatwg-url JavaScript URL 解析库
+name_en: whatwg-url JavaScript URL parsing library
+description_zh: 'whatwg-url 是 jsdom/whatwg-url / npm whatwg-url 发布的 JavaScript URL 库；本记录固定 17.3.0（2026-10-14），源码
+  commit 6a0e2ad72245ec3b7dfb122709c9f5762313b928。官方 README 把实现基线连接到 URL 规范 commit fde3f74f063341a28d437216f75735b8b40128f5；这不是活标准的新版本对象，不代表后续规范变化已被验证，也不重新核准
+  IA 既有 845bafca 历史快照。一个有界 implements 只覆盖所查 URL/URLSearchParams、解析/序列化和有限低层算法，以既有 resource_identification 表示 URL
+  资源标识语法与记录处理；不是获取资源或永久身份保证。
+
+
+  解析成功、诊断收集和语法有效性是三个不同层次。parseURLWithValidationErrors() 返回含 url 与 validationErrors 的对象；非 null URL 可同时带非致命错误，isValidURLString()
+  是另行的 grammar-based 检查。README 允许 grammar 与诊断结果不一致，但本有限例集未找到二者分歧见证，不能声称等价或捏造反例。https://a.test/%s 可解析、canParse
+  为 true，却有 invalid-URL-unit 且 grammar 为 false；https://a.test:99999 则相关路径均拒绝：parse/diagnostic url 为 null、canParse/grammar
+  为 false、含 port-out-of-range，不是 grammar/诊断分歧。URL.parse()/URL.canParse() 的 WebIDL 转换可在无效字符串返回 null/false 之前，因
+  Symbol 或会抛错的 toString 抛异常；低层记录 API 不是同一转换合同。
+
+
+  构造器、href 与组件 setter 行为不同，不能泛称拒绝、回滚或原子性：对 https://old.test:81/a 设置 host 为 new.test:99999 会改为 https://new.test:81/a；低层
+  host stateOverride 也可先改 host 再返回 null。所查 host/port setter 对 12abc 消费数字前缀 12，而构造器拒绝；所查无效 href 赋值抛错且保留旧值，不能外推所有
+  setter。解析会丢失词法形式，例如大小写、默认端口、点段、某些 IPv4 写法与百分号表示；结果相同不证明原输入相同。
+
+
+  URLSearchParams 是与 URL 同步的有序、可重复名称的 pair 列表，不是唯一键 map；append/set/delete 和稳定 sort 按各自规则修改，稳定排序保留相同名称的值次序。表单重序列化可把空格
+  %20 改为 +、~ 改为 %7E、改写转义大小写，空查询标记 ? 可消失；并非任意原文无损往返。17.3 的 search setter 删除输入中的 tab/LF/CR，再把解析后的 query 同步到同一个 live
+  searchParams 对象。任意修改低层 URL record 可造成不一致，serializeURL 不是验证器：人为 port=99999 可序列化但重新解析失败。file: origin 序列化为字符串 "null"
+  是本实现选择，不证明资源/身份等价；低层 legacy query encoding 也不等于 wrapper 的 UTF-8 行为。
+
+
+  普通无诊断解析的宽松 ToASCII 路径与附加严格诊断检查不同：所查 _dmarc.example.test 的普通路径未调用 ToASCII，诊断路径执行严格检查并报告 domain-to-ASCII，但仍返回同一
+  URL，grammar 为 false；faß.de 的普通解析使用宽松 IDNA。四项插桩仅观察委派调用/选项，非计时、性能优越性或安全证据，也不是 grammar/诊断分歧见证。
+
+
+  固定源有 39 个 Git blob（38 个普通文件及一个仅核对目标文本的 mode120000 symlink）；npm 包有 19 个文件，其中 14 个共同文件原字节相同，另有 5 个仅在发行包内的生成 wrapper，源端另有
+  25 个 blob。运行使用已发布 wrapper，不是本地重新生成，也不声称整包与源码相同。五个 tarball 的公布 SHA512 SRI/SHA1 已核对；固定 release-lock 依赖为 @exodus/bytes
+  1.16.0、tr46 7.0.0、webidl-conversions 8.0.1、punycode 2.3.1。作者在 Node 24.22.1（满足声明 ^22.14.0 || >=24.0.0，不是全版本矩阵）从保留工件重放运行协作者自写
+  40 项有限记录和研究者另写 4 项插桩，并以另写 6 项作者补充断言核对端口/记录/WebIDL边界；研究者、运行协作者、独立预审 15 项观察、作者重放的角色分开，例集及重放重叠，不能累加覆盖。
+
+
+  固定源未改动的选定 Node/WPT runner 在同一已发布 wrapper/精确依赖上下文报告 5633 项、5632 pass、1 项明确 FormData skip、0 fail、29 suites；promise_test
+  适配器是 no-op，三个手工重建组仍标注旧同步 06c4589623bf8f8c92fda5afabe44059a01465dc，其余固定 WPT pin 为 cfb4a4b0bb480522d095557b16d86a15d6897e35（29
+  个核对过的 fixture）。这不是完整 WPT、浏览器、所有输入/API 或整个当前活标准符合性证明。工件重建恢复 114 个 runtime 与 150 个 upstream input 文件；有限40项 harness
+  的 CJS/ESM 审计实际加载 46 个 runtime 文件；这不是上游runner或所有执行的加载计数。不同重建目录中的错误 stack 绝对路径差异保留，不能把去路径的结构化一致性称为原始字节相同。未执行 install、生命周期脚本、生成器、source
+  lint/coverage、浏览器或签名/attestation 验证；不主张 DNS/网络获取、资源可用性、object URL registry、安全过滤器、永久全球身份、RFC3986 可互换性、供应链认证、生产推荐、IA
+  采用、未来兼容或完整标准符合性。既有 URL/RFC3986 对象、旧 alternative_to、python_rfc3986 和 JSON Pointer/RFC4627 引用均不改动。
+
+
+  English scope and limitations:
+
+
+  whatwg-url is the JavaScript URL library published as jsdom/whatwg-url / npm whatwg-url, pinned here to 17.3.0
+  (2026-10-14), source commit 6a0e2ad72245ec3b7dfb122709c9f5762313b928. Its README declares URL-spec commit fde3f74f063341a28d437216f75735b8b40128f5
+  as an implementation baseline, not a new edition of the living standard, verification of later changes, or reapproval
+  of IA''s older 845bafca historical snapshot. One bounded implements edge covers the inspected URL/URLSearchParams,
+  parsing/serialization and finite low-level algorithms. Existing resource_identification means URL identifier
+  syntax and record processing, not resource retrieval or permanent identity.
+
+
+  Parsing success, diagnostic collection and grammar validity are distinct. parseURLWithValidationErrors() returns
+  an object containing url and validationErrors; a non-null record can carry nonfatal errors, while isValidURLString()
+  is a separate grammar-based checker. The README allows grammar/diagnostic disagreement, but these finite observations
+  found no disagreement witness: neither equivalence nor a fabricated counterexample is claimed. https://a.test/%s
+  parses and canParse is true, yet reports invalid-URL-unit and grammar false. https://a.test:99999 is rejected
+  across the relevant paths: parse/diagnostic url null, canParse/grammar false and port-out-of-range; it is not
+  a grammar/diagnostic disagreement. WebIDL conversion for URL.parse()/URL.canParse() can throw for Symbol or
+  throwing toString before the usual invalid-string null/false path. Low-level record APIs do not share that conversion
+  contract.
+
+
+  Constructor, href and component setters differ; there is no universal rejection, rollback or atomicity. Setting
+  host=new.test:99999 on https://old.test:81/a changes it to https://new.test:81/a. A low-level host stateOverride
+  can mutate the supplied record''s host before returning null. Tested host/port setters consume the numeric prefix
+  12 from 12abc while the constructor rejects it. Tested invalid href assignment throws and preserves the old
+  record; this is not generalized to all setters. Parsing loses lexical details such as case, default ports, dot
+  segments, selected IPv4 spellings and percent representations; equal results do not prove equal original input.
+
+
+  URLSearchParams is a live ordered list of repeated-name pairs, not a unique-key map. append/set/delete and stable
+  sort have their own mutation rules; stable sorting preserves same-name value order. Form reserialization can
+  change %20 to +, ~ to %7E and escape case; an empty query marker ? can disappear. It is not arbitrary lexical
+  round-trip preservation. The 17.3 search setter strips tab/LF/CR and synchronizes the parsed query into the
+  same live searchParams object. Arbitrary low-level URL-record mutation can produce inconsistency, and serializeURL
+  is not validation: a manually assigned port=99999 serializes but fails reparsing. Serializing file: origin to
+  the string "null" is an implementation choice, not resource/identity equivalence. Low-level legacy query encoding
+  also differs from wrapper UTF-8 behavior.
+
+
+  Ordinary nondiagnostic relaxed ToASCII processing differs from the additional strict diagnostic check. For tested
+  _dmarc.example.test, the ordinary path makes no ToASCII call; the diagnostic path performs a strict check and
+  reports domain-to-ASCII but returns the same URL, with grammar false. Ordinary parsing of faß.de uses relaxed
+  IDNA. Four instrumented observations record delegated calls/options, not timing, performance superiority, security,
+  or grammar/diagnostic-disagreement evidence.
+
+
+  The fixed source contains 39 Git blobs: 38 regular files and one mode120000 symlink whose target text alone
+  was verified. The npm artifact contains 19 files: 14 common files are raw-byte-identical, five generated wrappers
+  exist only in the distribution, and 25 blobs are source-only. Execution uses published wrappers, not locally
+  regenerated build output, and does not claim whole-package/source parity. All five tarballs'' advertised SHA512
+  SRI/SHA1 digests were checked. Exact release-lock dependencies are @exodus/bytes 1.16.0, tr46 7.0.0, webidl-conversions
+  8.0.1 and punycode 2.3.1. The author replays the runtime collaborator''s 40 finite records and the researcher''s
+  separate four instrumented records, plus six separately authored boundary observations for port/record/WebIDL
+  behavior, from retained artifacts on Node 24.22.1, satisfying declared ^22.14.0 || >=24.0.0 but not a tested
+  version matrix. Researcher, runtime collaborator, independent preflight''s 15 observations and author replay
+  retain distinct roles. Cases and replays overlap and are never added as coverage.
+
+
+  The unchanged selected fixed-source Node/WPT runner, using those published wrappers and exact dependencies,
+  reports 5633 tests: 5632 pass, one explicit FormData skip, zero fail, 29 suites. Its promise_test adapter is
+  a no-op, and three manually recreated groups still cite older sync 06c4589623bf8f8c92fda5afabe44059a01465dc;
+  the other fixed WPT pin is cfb4a4b0bb480522d095557b16d86a15d6897e35 with 29 verified fixtures. This is not full
+  WPT, browser coverage, all-input/API coverage or full/current living-standard conformance. Artifact reconstruction
+  restores 114 runtime files and 150 upstream input files; CJS/ESM auditing of the finite40 harness observes 46
+  runtime files loaded, not an upstream-runner or all-executions load count. Raw absolute stack-path differences
+  between reconstruction directories are retained; structured equality after excluding those paths is not raw-byte
+  equality. No install, lifecycle scripts, generator, source lint/coverage, browser or signature/attestation verification.
+  No fetch/DNS/resource-availability/object-URL-registry/security-sanitizer/permanent-global-identity/RFC3986-interchangeability/supply-chain-certification/production-recommendation/IA-adoption/future-compatibility/full-conformance
+  claim. Existing URL/RFC3986 records, old alternative_to, python_rfc3986 and the JSON Pointer/RFC4627 publication
+  reference remain unchanged.'
+description_en: 'whatwg-url is the JavaScript URL library published as jsdom/whatwg-url / npm whatwg-url, pinned
+  here to 17.3.0 (2026-10-14), source commit 6a0e2ad72245ec3b7dfb122709c9f5762313b928. Its README declares URL-spec
+  commit fde3f74f063341a28d437216f75735b8b40128f5 as an implementation baseline, not a new edition of the living
+  standard, verification of later changes, or reapproval of IA''s older 845bafca historical snapshot. One bounded
+  implements edge covers the inspected URL/URLSearchParams, parsing/serialization and finite low-level algorithms.
+  Existing resource_identification means URL identifier syntax and record processing, not resource retrieval or
+  permanent identity.
+
+
+  Parsing success, diagnostic collection and grammar validity are distinct. parseURLWithValidationErrors() returns
+  an object containing url and validationErrors; a non-null record can carry nonfatal errors, while isValidURLString()
+  is a separate grammar-based checker. The README allows grammar/diagnostic disagreement, but these finite observations
+  found no disagreement witness: neither equivalence nor a fabricated counterexample is claimed. https://a.test/%s
+  parses and canParse is true, yet reports invalid-URL-unit and grammar false. https://a.test:99999 is rejected
+  across the relevant paths: parse/diagnostic url null, canParse/grammar false and port-out-of-range; it is not
+  a grammar/diagnostic disagreement. WebIDL conversion for URL.parse()/URL.canParse() can throw for Symbol or
+  throwing toString before the usual invalid-string null/false path. Low-level record APIs do not share that conversion
+  contract.
+
+
+  Constructor, href and component setters differ; there is no universal rejection, rollback or atomicity. Setting
+  host=new.test:99999 on https://old.test:81/a changes it to https://new.test:81/a. A low-level host stateOverride
+  can mutate the supplied record''s host before returning null. Tested host/port setters consume the numeric prefix
+  12 from 12abc while the constructor rejects it. Tested invalid href assignment throws and preserves the old
+  record; this is not generalized to all setters. Parsing loses lexical details such as case, default ports, dot
+  segments, selected IPv4 spellings and percent representations; equal results do not prove equal original input.
+
+
+  URLSearchParams is a live ordered list of repeated-name pairs, not a unique-key map. append/set/delete and stable
+  sort have their own mutation rules; stable sorting preserves same-name value order. Form reserialization can
+  change %20 to +, ~ to %7E and escape case; an empty query marker ? can disappear. It is not arbitrary lexical
+  round-trip preservation. The 17.3 search setter strips tab/LF/CR and synchronizes the parsed query into the
+  same live searchParams object. Arbitrary low-level URL-record mutation can produce inconsistency, and serializeURL
+  is not validation: a manually assigned port=99999 serializes but fails reparsing. Serializing file: origin to
+  the string "null" is an implementation choice, not resource/identity equivalence. Low-level legacy query encoding
+  also differs from wrapper UTF-8 behavior.
+
+
+  Ordinary nondiagnostic relaxed ToASCII processing differs from the additional strict diagnostic check. For tested
+  _dmarc.example.test, the ordinary path makes no ToASCII call; the diagnostic path performs a strict check and
+  reports domain-to-ASCII but returns the same URL, with grammar false. Ordinary parsing of faß.de uses relaxed
+  IDNA. Four instrumented observations record delegated calls/options, not timing, performance superiority, security,
+  or grammar/diagnostic-disagreement evidence.
+
+
+  The fixed source contains 39 Git blobs: 38 regular files and one mode120000 symlink whose target text alone
+  was verified. The npm artifact contains 19 files: 14 common files are raw-byte-identical, five generated wrappers
+  exist only in the distribution, and 25 blobs are source-only. Execution uses published wrappers, not locally
+  regenerated build output, and does not claim whole-package/source parity. All five tarballs'' advertised SHA512
+  SRI/SHA1 digests were checked. Exact release-lock dependencies are @exodus/bytes 1.16.0, tr46 7.0.0, webidl-conversions
+  8.0.1 and punycode 2.3.1. The author replays the runtime collaborator''s 40 finite records and the researcher''s
+  separate four instrumented records, plus six separately authored boundary observations for port/record/WebIDL
+  behavior, from retained artifacts on Node 24.22.1, satisfying declared ^22.14.0 || >=24.0.0 but not a tested
+  version matrix. Researcher, runtime collaborator, independent preflight''s 15 observations and author replay
+  retain distinct roles. Cases and replays overlap and are never added as coverage.
+
+
+  The unchanged selected fixed-source Node/WPT runner, using those published wrappers and exact dependencies,
+  reports 5633 tests: 5632 pass, one explicit FormData skip, zero fail, 29 suites. Its promise_test adapter is
+  a no-op, and three manually recreated groups still cite older sync 06c4589623bf8f8c92fda5afabe44059a01465dc;
+  the other fixed WPT pin is cfb4a4b0bb480522d095557b16d86a15d6897e35 with 29 verified fixtures. This is not full
+  WPT, browser coverage, all-input/API coverage or full/current living-standard conformance. Artifact reconstruction
+  restores 114 runtime files and 150 upstream input files; CJS/ESM auditing of the finite40 harness observes 46
+  runtime files loaded, not an upstream-runner or all-executions load count. Raw absolute stack-path differences
+  between reconstruction directories are retained; structured equality after excluding those paths is not raw-byte
+  equality. No install, lifecycle scripts, generator, source lint/coverage, browser or signature/attestation verification.
+  No fetch/DNS/resource-availability/object-URL-registry/security-sanitizer/permanent-global-identity/RFC3986-interchangeability/supply-chain-certification/production-recommendation/IA-adoption/future-compatibility/full-conformance
+  claim. Existing URL/RFC3986 records, old alternative_to, python_rfc3986 and the JSON Pointer/RFC4627 publication
+  reference remain unchanged.'
+version: 17.3.0
+external_identifiers:
+- namespace: github
+  value: jsdom/whatwg-url
+- namespace: npm
+  value: whatwg-url
+official_url: https://github.com/jsdom/whatwg-url
+versions:
+- version: 17.3.0
+  date: '2026-10-14'
+  status: released
+  url: https://github.com/jsdom/whatwg-url/releases/tag/v17.3.0
+domains:
+- web
+capabilities:
+- resource_identification
+scope_notes_zh: 完整中文与英文操作边界刻意同置 description_zh，按既有 renderer 在 HTML、Markdown、search 可见；description_en 保留同样英文。不更改
+  renderer 或现有对象/关系。只记录固定实现切片，预审/作者自检不是独立接纳。
+scope_notes_en: Complete operative Chinese and English sections intentionally share the existing rendered description_zh;
+  description_en retains the same English. No renderer changes, hidden-boundary substitution, current/full conformance,
+  or preflight/self-check-as-acceptance claim.
+sources:
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/README.md
+  title: whatwg-url 17.3.0 — official library identity, declared fixed spec baseline, separate validity/diagnostics
+    and mutable-record limits
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/package.json
+  title: whatwg-url 17.3.0 — 17.3.0 identity, declared engines and dependencies; lifecycle scripts inspected,
+    not executed
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/package-lock.json
+  title: whatwg-url 17.3.0 — exact release-lock dependency versions and advertised artifact digests
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/URL-impl.js
+  title: whatwg-url 17.3.0 — constructor/static APIs, href/host/port setters and live search synchronization
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-state-machine.js
+  title: whatwg-url 17.3.0 — bounded parser/serializer/stateOverride and failure boundaries
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-string-validator.js
+  title: whatwg-url 17.3.0 — separate grammar validity checker
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-miscellaneous.js
+  title: whatwg-url 17.3.0 — relaxed parser versus strict diagnostic ToASCII paths
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/URLSearchParams-impl.js
+  title: whatwg-url 17.3.0 — ordered repeated query pairs, mutation and stable sort
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/test/testharness.js
+  title: whatwg-url 17.3.0 — selected Node/WPT adapter, explicit FormData skip and promise_test no-op
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/test/web-platform.js
+  title: whatwg-url 17.3.0 — selected upstream runner and older-sync recreated groups
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/scripts/get-latest-platform-tests.js
+  title: whatwg-url 17.3.0 — fixed WPT pin/fixture selection; inspected, not executed
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/releases/tag/v17.3.0
+  title: Official v17.3.0 release — published 2026-10-14
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.npmjs.com/package/whatwg-url/v/17.3.0
+  title: npm whatwg-url 17.3.0 — official published artifact, not local generated build
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/whatwg/url/blob/fde3f74f063341a28d437216f75735b8b40128f5/url.bs
+  title: URL spec fixed commit explicitly named by this release README; not current/future conformance assurance
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T02:10:32.384642+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_author; fixed-source reading
+  and artifact-only finite/selected upstream self-check, not independent acceptance
+record_created_at: '2026-10-30T02:41:58.924346+00:00'
+record_updated_at: '2026-10-30T02:41:58.924346+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery
+  reviewer: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_semantic
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: javascript_whatwg_url
+  acceptance_event_id: accept-20261030-whatwg-url-17-3-javascript_whatwg_url
+  reviewed_candidate_blob: 6139e5fe75da3fc3f572bb333bb5a29027d03386
+  reviewed_against_commit: a67625f2de7562aa3b8403080073e0361a5a7892
+  candidate_executor: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_author
+  canonical_serializer: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery
+  reviewed_packet_commit: a67625f2de7562aa3b8403080073e0361a5a7892
+  reviewed_packet_blob: 2af16ea7b830e13b005eeea7b44bf5fbdffbd4cd
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a67625f2de7562aa3b8403080073e0361a5a7892/01_State/Inbox/review-packets/whatwg-url-17.3-20261030.yaml
