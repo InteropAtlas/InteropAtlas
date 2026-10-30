@@ -9,10 +9,111 @@ external_identifiers:
 - namespace: github
   value: eclipse-paho/paho.mqtt.python
 official_url: https://github.com/eclipse-paho/paho.mqtt.python
-description_zh: Eclipse Paho 项目的开源 Python MQTT 客户端库，提供连接消息代理、发布消息与订阅主题的 API。本记录固定核验 2.1.0 官方源码与文档声明的 MQTT 5.0 客户端路径，不将实现声明等同于独立符合性认证。
-description_en: The Eclipse Paho project’s open-source Python MQTT client library provides APIs for broker connection,
-  message publishing and topic subscription. This record verifies the official 2.1.0 sources and documented MQTT
-  5.0 client path, not independent conformance certification.
+description_zh: 'Eclipse Paho 项目的开源 Python MQTT 客户端库，提供连接消息代理、发布消息与订阅主题的 API。本记录固定版本 2.1.0（commit af64a4365c6ac5a7a4d339e7b00f44df91353b35），不将实现声明等同于独立符合性认证。
+
+
+  2026-10-30 的离线本地实验与 2026-10-22 的原始收录分开：直接导入已核对固定 Git blob 的源码，以 CallbackAPIVersion.VERSION2、显式 protocol=MQTTv5、新建且从未连接的
+  Client、max_queued_messages=1 和其余默认配置运行。旧 scope notes 的“本批 / for this intake”指原始静态收录；既有 implements → mqtt_5.0 关系仍保留原静态源码/文档证据。本次没有执行、重验证或扩大其连接代理与网络循环路径。
+
+
+  对 QoS 1 和 QoS 2 分别测试：首次 publish 返回 MQTT_ERR_NO_CONN（4），但仍保留一条本地待发消息。对该结果调用 is_published()、wait_for_publish(timeout=0.002)
+  均立即抛 RuntimeError，不是等待超时，也不清空队列。随后同 QoS 的 publish 返回 MQTT_ERR_QUEUE_SIZE（15）；再调用 QoS 0 返回 4，之后同 QoS 的第三次调用仍返回
+  15，即公开 API 返回码序列为 4 → 15 → 4 → 15。被容量拒绝的结果在这两种完成查询中均抛 ValueError。另一个新建客户端先 QoS 0、再 QoS 1 都返回 4，只有 QoS 1 占用该队列容量；不据此推广到所有连接状态下的
+  QoS 0 缓冲行为。这些数值是 Paho 错误码，不是代理发来的 MQTT 5 Reason Code。
+
+
+  固定版本私有字段的只读诊断补充了具体保留值：QoS 1/2 排队对象仍引用调用方传入的 bytearray payload 与 PUBLISH Properties。调用方在返回 4 后修改内容，排队对象中的本地值随之改变；这不是已序列化或已发送的网络数据，也不是私有字段的稳定
+  API 保证。该无 socket 路径在构造 PUBLISH 包之前返回；实验中没有待发网络包。返回错误、完成状态与本地保留状态因此需要分别解读，不能仅凭 NO_CONN 或完成查询异常认定没有排队、已经清除或可以无条件重试；这不是上游推荐的重试策略。
+
+
+  实验为 Python 3.12.14 下的有限源码执行，导入前设置 Python socket audit 失败守卫，观测到 0 个 socket 事件；这不是操作系统级网络隔离认证。所取得的 24 份源码、元数据与测试文件已核对，其中完整
+  src 子树含 12 个条目（11 个 .py 与 py.typed）；探针实际导入 9 个 Paho 模块，不是执行全部 12 项。没有安装发行包、运行完整上游测试，也未调用 connect、网络循环、使用代理/伪 socket、注入
+  ACK 或伪造完成回调。未测试网络序列化、订阅者交付、实际重复投递、重连、会话/跨进程持久性、完整 QoS 协议、安全、性能或生产适用性；不作 MQTT 符合性或 IA 采用断言。
+
+
+  English scope and limitations:
+
+
+  The Eclipse Paho project''s open-source Python MQTT client library provides APIs for broker connection, message
+  publishing and topic subscription. This record fixes version 2.1.0 at commit af64a4365c6ac5a7a4d339e7b00f44df91353b35;
+  implementation claims are not independent conformance certification.
+
+
+  The 2026-10-30 offline local experiment is separate from the original 2026-10-22 intake. It directly imported
+  fixed-source files checked against their Git blobs, using CallbackAPIVersion.VERSION2, explicit protocol=MQTTv5,
+  fresh never-connected Client instances, max_queued_messages=1 and otherwise default settings. The old scope notes''
+  "本批 / for this intake" refer to that original static intake. The existing implements → mqtt_5.0 relation retains
+  its original static source/documentation evidence; this experiment did not execute, revalidate or expand its broker-connection
+  and network-loop path.
+
+
+  Tested separately for QoS 1 and QoS 2, the first publish returns MQTT_ERR_NO_CONN (4) while retaining one local
+  outgoing message. Both is_published() and wait_for_publish(timeout=0.002) immediately raise RuntimeError on that
+  result: this is not a wait timeout, and the queue is not cleared. The next publish at the same QoS returns MQTT_ERR_QUEUE_SIZE
+  (15); a subsequent QoS 0 call returns 4, and a third call at the original QoS still returns 15, giving the public-API
+  return-code sequence 4 → 15 → 4 → 15. Both completion queries raise ValueError for the capacity-rejected result.
+  On another fresh client, QoS 0 followed by QoS 1 both return 4, with only QoS 1 occupying this queue capacity;
+  this is not generalized to QoS 0 buffering in all connection states. These numbers are Paho error codes, not MQTT
+  5 Reason Codes received from a broker.
+
+
+  Read-only diagnostics of fixed-version private fields additionally identify what is retained: the QoS 1/2 queued
+  object references the caller''s bytearray payload and PUBLISH Properties. Caller mutation after return code 4
+  changes the locally retained values. These are not serialized or transmitted network data, nor a stable-API guarantee
+  for private fields. The no-socket path returns before constructing a PUBLISH packet; no outgoing network packet
+  was present in the experiment. Errors, completion status and locally retained state must therefore be distinguished:
+  NO_CONN or a completion-query exception alone does not establish absence of queuing, removal or an unconditional
+  retry rule. This is not an upstream-recommended retry strategy.
+
+
+  This was bounded source execution on Python 3.12.14, with a Python socket-audit failure guard installed before
+  import and 0 socket events observed, not an OS-level network-isolation certification. The 24 retrieved source,
+  metadata and test files were checked, including the complete 12-entry src subtree (11 .py files and py.typed);
+  the probes actually imported 9 Paho modules, not all 12 entries. No distribution package was installed or full
+  upstream suite run; no connect, network loop, broker/fake socket, ACK injection or forged completion callback
+  was used. Network serialization, subscriber delivery, actual duplicate delivery, reconnection, session/cross-process
+  durability, complete QoS protocol behavior, security, performance and production suitability were not tested.
+  MQTT conformance and IA adoption are not asserted.'
+description_en: 'The Eclipse Paho project''s open-source Python MQTT client library provides APIs for broker connection,
+  message publishing and topic subscription. This record fixes version 2.1.0 at commit af64a4365c6ac5a7a4d339e7b00f44df91353b35;
+  implementation claims are not independent conformance certification.
+
+
+  The 2026-10-30 offline local experiment is separate from the original 2026-10-22 intake. It directly imported
+  fixed-source files checked against their Git blobs, using CallbackAPIVersion.VERSION2, explicit protocol=MQTTv5,
+  fresh never-connected Client instances, max_queued_messages=1 and otherwise default settings. The old scope notes''
+  "本批 / for this intake" refer to that original static intake. The existing implements → mqtt_5.0 relation retains
+  its original static source/documentation evidence; this experiment did not execute, revalidate or expand its broker-connection
+  and network-loop path.
+
+
+  Tested separately for QoS 1 and QoS 2, the first publish returns MQTT_ERR_NO_CONN (4) while retaining one local
+  outgoing message. Both is_published() and wait_for_publish(timeout=0.002) immediately raise RuntimeError on that
+  result: this is not a wait timeout, and the queue is not cleared. The next publish at the same QoS returns MQTT_ERR_QUEUE_SIZE
+  (15); a subsequent QoS 0 call returns 4, and a third call at the original QoS still returns 15, giving the public-API
+  return-code sequence 4 → 15 → 4 → 15. Both completion queries raise ValueError for the capacity-rejected result.
+  On another fresh client, QoS 0 followed by QoS 1 both return 4, with only QoS 1 occupying this queue capacity;
+  this is not generalized to QoS 0 buffering in all connection states. These numbers are Paho error codes, not MQTT
+  5 Reason Codes received from a broker.
+
+
+  Read-only diagnostics of fixed-version private fields additionally identify what is retained: the QoS 1/2 queued
+  object references the caller''s bytearray payload and PUBLISH Properties. Caller mutation after return code 4
+  changes the locally retained values. These are not serialized or transmitted network data, nor a stable-API guarantee
+  for private fields. The no-socket path returns before constructing a PUBLISH packet; no outgoing network packet
+  was present in the experiment. Errors, completion status and locally retained state must therefore be distinguished:
+  NO_CONN or a completion-query exception alone does not establish absence of queuing, removal or an unconditional
+  retry rule. This is not an upstream-recommended retry strategy.
+
+
+  This was bounded source execution on Python 3.12.14, with a Python socket-audit failure guard installed before
+  import and 0 socket events observed, not an OS-level network-isolation certification. The 24 retrieved source,
+  metadata and test files were checked, including the complete 12-entry src subtree (11 .py files and py.typed);
+  the probes actually imported 9 Paho modules, not all 12 entries. No distribution package was installed or full
+  upstream suite run; no connect, network loop, broker/fake socket, ACK injection or forged completion callback
+  was used. Network serialization, subscriber delivery, actual duplicate delivery, reconnection, session/cross-process
+  durability, complete QoS protocol behavior, security, performance and production suitability were not tested.
+  MQTT conformance and IA adoption are not asserted.'
 open_source: true
 license_expression: EPL-2.0 OR BSD-3-Clause
 scope_notes_zh: '软件库主体沿用既有 system/library 模式，核验版本 2.1.0 固定为 tag v2.1.0 与 commit af64a4365c6ac5a7a4d339e7b00f44df91353b35；不是
@@ -102,14 +203,46 @@ sources:
   title: Official Paho Python v2.1.0 release, published 2024-04-29
   language: en
   accessed: '2026-10-22'
-last_verified_at: '2026-10-22T22:10:10.441561+00:00'
-last_verified_by: Agent — OpenAI / dot, fixed Paho Python evidence executor
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/enums.py#L4-L21
+  title: 'Fixed Paho error codes: NO_CONN=4 and QUEUE_SIZE=15, not broker Reason Codes'
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L821-L830
+  title: Fresh-client queue and inflight defaults
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1044-L1062
+  title: Public max_queued_messages property and capacity scope
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L2177-L2183
+  title: Public max_queued_messages_set method
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L1772-L1818
+  title: QoS 0 contrast; QoS 1/2 capacity rejection, retention after NO_CONN and Properties assignment
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L537-L582
+  title: NO_CONN / QUEUE_SIZE completion-query exceptions occur before waiting; no Client queue mutation
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L468-L483
+  title: Payload encoding returns bytes/bytearray by reference, including the return at line 483
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/eclipse-paho/paho.mqtt.python/blob/af64a4365c6ac5a7a4d339e7b00f44df91353b35/src/paho/mqtt/client.py#L3367-L3391
+  title: The no-socket path returns before PUBLISH packet construction
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T15:44:59+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/update_paho_publish_evidence; fixed-source inspection and offline author replay only, not network-path or conformance verification
 record_created_at: '2026-10-22T22:17:20.667330+00:00'
-record_updated_at: '2026-10-22T22:17:20.667330+00:00'
+record_updated_at: '2026-10-30T15:44:59+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / MQTT client semantic review
+  executor: Agent — OpenAI / dot / /root/update_paho_publish_evidence
+  reviewer: Independent Agent — OpenAI / dot / /root/verify_paho_publish_scope; exact-patch semantic review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: paho_mqtt_python
