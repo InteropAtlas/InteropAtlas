@@ -3,9 +3,59 @@ type: system
 kind: library
 name_zh: jsonschema Python 数据结构验证库
 name_en: jsonschema Python JSON Schema validation library
-description_zh: Python 的 JSON Schema 验证库；本记录固定到 4.25.1，提供 Draft202012Validator 及其他版本验证器。
-description_en: A Python JSON Schema validation library, pinned here to release 4.25.1, with Draft202012Validator
+description_zh: 'Python 的 JSON Schema 验证库；本记录固定到 4.25.1，提供 Draft202012Validator 及其他版本验证器。
+
+
+  格式（format）检查默认不启用，须向验证器显式提供 FormatChecker；部分格式还需要可选依赖。固定版本文档明确指出：若所用格式检查器缺少必需依赖，该格式检查会不报错通过。因此，验证未报错本身不能证明相应格式已被检查或格式有效；这不表示其他模式约束也会被跳过。
+
+
+  正则表达式也有方言边界：regex 格式检查的是 Python 正则表达式，pattern 和 patternProperties 也采用 Python 正则，而非 ECMA 262 方言。不能据此推断与采用其他正则引擎的实现具有相同的接受结果。
+
+
+  这些限制来自固定版本文档及既有记录的范围，不是新的运行结果。本次仅澄清已有边界，未重跑原始 2026-10-21 收录时的 13 个有限示例，也不宣称完整符合性、宿主协议互通、最新版本或 IA 采用该精确版本；既有实现关系的范围保持不变。
+
+
+  English scope and limitations:
+
+
+  A Python JSON Schema validation library, pinned here to release 4.25.1, with Draft202012Validator and other versioned
+  validators.
+
+
+  Format checks are disabled by default and require an explicit FormatChecker supplied to the validator; some formats
+  also need optional dependencies. The fixed-version documentation states that a format check succeeds without an
+  error when its checker lacks a required dependency. A no-error validation result therefore does not by itself
+  establish that the format was checked or is valid; this does not mean that other schema constraints are skipped.
+
+
+  Regular expressions have a dialect boundary as well: the regex format checks Python regular expressions, and pattern
+  and patternProperties also use Python regular expressions rather than the ECMA 262 dialect. Equivalent acceptance
+  by implementations using other regular-expression engines cannot be inferred.
+
+
+  These limitations come from the fixed-version documentation and the existing record''s scope, not new execution
+  results. This update only clarifies existing boundaries: it does not rerun the original 13 finite examples from
+  the 2026-10-21 intake or claim complete conformance, host-protocol interoperability, latest-release status or
+  IA adoption of this exact version. The existing implementation relation''s scope is unchanged.'
+description_en: 'A Python JSON Schema validation library, pinned here to release 4.25.1, with Draft202012Validator
   and other versioned validators.
+
+
+  Format checks are disabled by default and require an explicit FormatChecker supplied to the validator; some formats
+  also need optional dependencies. The fixed-version documentation states that a format check succeeds without an
+  error when its checker lacks a required dependency. A no-error validation result therefore does not by itself
+  establish that the format was checked or is valid; this does not mean that other schema constraints are skipped.
+
+
+  Regular expressions have a dialect boundary as well: the regex format checks Python regular expressions, and pattern
+  and patternProperties also use Python regular expressions rather than the ECMA 262 dialect. Equivalent acceptance
+  by implementations using other regular-expression engines cannot be inferred.
+
+
+  These limitations come from the fixed-version documentation and the existing record''s scope, not new execution
+  results. This update only clarifies existing boundaries: it does not rerun the original 13 finite examples from
+  the 2026-10-21 intake or claim complete conformance, host-protocol interoperability, latest-release status or
+  IA adoption of this exact version. The existing implementation relation''s scope is unchanged.'
 version: 4.25.1
 external_identifiers:
 - namespace: github
@@ -39,14 +89,27 @@ sources:
   title: jsonschema 4.25.1 — package metadata, Python requirement and MIT license declaration
   language: en
   accessed: '2026-10-21'
-last_verified_at: '2026-10-21T00:51:42.497448+00:00'
-last_verified_by: Agent — OpenAI / dot，fixed-version implementation evidence executor
+- url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst#L173-L217
+  title: jsonschema 4.25.1 — Opt-in format checks and missing required checker dependencies
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst#L288-L296
+  title: jsonschema 4.25.1 — Python regex dialect for regex, pattern and patternProperties
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/f39b3aeb9a6e059034c1792d01c4bead3e9df28d/01_State/Inbox/review-packets/jsonschema-implementation-20261021.yaml
+  title: Historical jsonschema intake packet — 13 finite examples; not a fresh rerun
+  language: zh
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T18:35:07.115106+00:00'
+last_verified_by: Agent — OpenAI / dot / clarify_jsonschema_limits; fixed-source and historical-evidence inspection
+  only
 record_created_at: '2026-10-21T00:58:59.584222+00:00'
-record_updated_at: '2026-10-21T00:58:59.584222+00:00'
+record_updated_at: '2026-10-30T18:35:07.115106+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / clarify_jsonschema_limits
+  reviewer: Independent Agents — OpenAI / dot / clarify_jsonschema_limits/semantic and clarify_jsonschema_limits/structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_jsonschema
