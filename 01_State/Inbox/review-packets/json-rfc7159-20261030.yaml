@@ -1,0 +1,116 @@
+packet_id: json_rfc7159_20261030
+status: pending_independent_semantic_review
+baseline_commit: d9775293a305cb8384f13326b8bcaf30d89564a3
+executor: Agent — OpenAI / dot / research_json_revision_gap
+reviewer: null
+review_scope:
+- One fixed historical RFC7159 artifact/specification; one document-level supersedes to existing RFC4627; existing
+  syntax navigation.
+- 'Local proposal only. Independent from pending #591; no RFC7396 endpoint or relation.'
+source_evidence:
+  method: Official original publication and info page read with web tool on 2026-10-30; no immutable byte download.
+  limitation: Nine errata reports indicated; contents/status not inspected. Prior restricted errata route not retried
+    or bypassed.
+  source_mappings: &id001
+  - &id002
+    url: https://www.rfc-editor.org/rfc/rfc7159.html
+    title: RFC 7159 original March 2014 publication — header and sections 2, 4, 8.1
+    language: en
+    accessed: '2026-10-30'
+  - &id003
+    url: https://www.rfc-editor.org/info/rfc7159/
+    title: RFC Editor information — Proposed Standard, obsolete by RFC 8259; nine errata reports indicated, contents/status
+      unreviewed
+    language: en
+    accessed: '2026-10-30'
+preflight:
+  fresh_main: d9775293a305cb8384f13326b8bcaf30d89564a3
+  canonical_records: 263
+  candidate_records: 254
+  machine_route: review_required
+  collisions: []
+objects:
+- candidate_id: json_rfc7159
+  candidate_path: 01_State/Inbox/candidates/json_rfc7159.yaml
+  candidate_blob: 5cb47179847acd0a2b5cf08fac32b139fefe5061
+  proposed_path: 01_State/01_Objects/json_rfc7159.yaml
+  proposed_record:
+    id: json_rfc7159
+    type: artifact
+    kind: specification
+    name_zh: JSON 历史规范文档（RFC 7159，已废止）
+    name_en: Historical JSON Specification (RFC 7159, Obsoleted)
+    official_name: The JavaScript Object Notation (JSON) Data Interchange Format
+    description_zh: 'JSON 的固定 RFC 7159 历史规范文档，2014 年 3 月以 Proposed Standard 发布，废止 RFC 4627 和 RFC 7158，后被 RFC 8259
+      废止。第 2 节允许任意 JSON 值作顶层文本，第 4 节要求对象成员名 SHOULD 唯一（不是 MUST），第 8.1 节允许 UTF-8/16/32 且默认 UTF-8。仅限 2014 年 3 月原始出版物；官方信息页显示九项勘误报告，本轮未核验内容或处理状态，不声称已整合勘误、当前完整修订语义或实现符合性。
+      保留历史引用不代表推荐旧版、与 RFC 8259 完全等价、实现互通或 IA 采用。
+
+
+      English scope and limitations:
+
+
+      Historical RFC 7159, published March 2014 as a Proposed Standard, obsoleting RFC 4627 and RFC 7158; later
+      obsoleted by RFC 8259. Section 2 permits any JSON value at the top level; section 4 says member names SHOULD
+      be unique, not MUST; section 8.1 permits UTF-8/16/32 with UTF-8 as default. Original publication only. The
+      information page indicates nine errata reports; contents and status were not reviewed. No integrated errata,
+      complete corrected semantics, implementation conformance, equivalence to RFC 8259, interoperability or IA
+      adoption is claimed. Historical preservation is not a recommendation to use the obsolete document.'
+    description_en: Historical RFC 7159, published March 2014 as a Proposed Standard, obsoleting RFC 4627 and RFC
+      7158; later obsoleted by RFC 8259. Section 2 permits any JSON value at the top level; section 4 says member
+      names SHOULD be unique, not MUST; section 8.1 permits UTF-8/16/32 with UTF-8 as default. Original publication
+      only. The information page indicates nine errata reports; contents and status were not reviewed. No integrated
+      errata, complete corrected semantics, implementation conformance, equivalence to RFC 8259, interoperability
+      or IA adoption is claimed. Historical preservation is not a recommendation to use the obsolete document.
+    version: RFC 7159 (March 2014 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '7159'
+    official_url: https://www.rfc-editor.org/rfc/rfc7159.html
+    versions:
+    - version: RFC 7159
+      status: obsoleted
+      url: https://www.rfc-editor.org/info/rfc7159/
+    domains:
+    - structured_data
+    sources: *id001
+    last_verified_at: '2026-10-30T20:21:13.427864+00:00'
+    last_verified_by: Agent — OpenAI / dot / research_json_revision_gap; original publication and info only; errata
+      contents/status unreviewed
+relations:
+- proposal_id: json_rfc7159_supersedes_rfc4627
+  proposed_path: 01_State/02_Relations/json-rfc7159.yaml
+  proposed_record:
+    id: json_rfc7159_supersedes_rfc4627
+    type: relation
+    name_zh: RFC 7159 在文献层面取代 RFC 4627
+    name_en: RFC 7159 supersedes RFC 4627 at the document level
+    source: json_rfc7159
+    relation: supersedes
+    target: json_rfc4627
+    context:
+      version_context:
+        source: RFC 7159, March 2014 original publication; itself obsoleted by RFC 8259
+        target: RFC 4627, July 2006 original historical document
+      conditions_zh: 仅表示固定编号 RFC 文献间明示的 Obsoletes 关系；不表示推荐旧版、实现兼容或符合性，不重定向旧引用，不作 uses/implements 传递推导。
+      conditions_en: Explicit Obsoletes succession between numbered RFC documents only; not a recommendation, implementation
+        compatibility or conformance. No redirection of old references or transitive uses/implements inference.
+    evidence:
+    - *id002
+    - *id003
+    last_verified_at: '2026-10-30T20:21:13.427864+00:00'
+    last_verified_by: Agent — OpenAI / dot / research_json_revision_gap; explicit RFC document succession only
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: json_rfc7159
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: c14eb81958ce45fea9c158220ea72d90b06b614b557a2a1f08d7726a0a40ea2d
+  git_blob: f702902b24de008a145972099c7de83aa10bca8a
+excluded_scope:
+- No RFC7396 or RFC7158 intake or edges. No RFC8259 edge, existing object edits, runtime, renderer, taxonomy, capability,
+  schema, governance, page restoration or held-work changes.
+materialization_boundary: Only candidate and packet locally; no acceptance or remote publication. Future materialization
+  requires true ancestor candidate, independent acceptance, exact fields apart from lifecycle/contribution/intake
+  provenance.
