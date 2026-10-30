@@ -582,3 +582,44 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / OASF record-schema intake review
   github_actor: ff6962757
+---
+id: syslog_rfc5424_uses_rfc3339
+type: relation
+name_zh: Syslog RFC 5424 原始规范使用 RFC 3339 时间戳语法
+name_en: Syslog RFC 5424 original specification uses RFC 3339 timestamp syntax
+source: syslog_rfc5424
+relation: uses
+target: rfc3339
+context:
+  version_context:
+    source: RFC 5424 (March 2009 original publication)
+    target: RFC 3339 (July 2002 original publication)
+  conditions_zh: 文献级使用：RFC 5424 §6 与 §6.2.3 从 RFC 3339 派生 TIMESTAMP 语法，§12.1 将 2002 年 7 月 RFC 3339 列为规范引用。RFC 5424
+    要求大写 T/Z 和 T 分隔符、禁止闰秒，小数秒若出现须为一至六位；无法获取系统时间时必须使用 NILVALUE（不是 RFC 3339 日期时间）。这些限制说明原始规范如何使用 RFC 3339，不表示支持全部
+    RFC 3339 有效形式，也不要求每条消息都有可用时间戳。不声称整个协议依赖、实现符合性、时钟准确性、实际部署或 IA 采用。仅依据原始出版物，未整合后续扩展或勘误；RFC 5424 已记录的五项勘误内容与状态仍未核验。
+  conditions_en: 'Publication-level use: RFC 5424 sections 6 and 6.2.3 derive TIMESTAMP syntax from RFC 3339; section
+    12.1 identifies the July 2002 RFC as normative. RFC 5424 requires uppercase T/Z and the T separator, prohibits
+    leap seconds, and limits any fractional seconds to one through six digits. NILVALUE is mandatory when system
+    time cannot be obtained and is not an RFC 3339 date-time. These restrictions explain how the original specification
+    uses RFC 3339, not support for every RFC 3339-valid form or a usable timestamp in every message. No whole-protocol
+    dependency, implementation conformance, clock accuracy, actual deployment or IA adoption is asserted. Original
+    publications only; later extensions and errata are not consolidated. The five previously recorded RFC 5424 errata
+    remain unreviewed in contents and status.'
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc5424.html
+  title: RFC 5424 original March 2009 publication — sections 6, 6.2.3 and 12.1
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html
+  title: RFC 3339 original July 2002 publication — sections 5.6 and 5.7
+  language: en
+  accessed: '2026-10-30'
+record_created_at: '2026-10-30T22:11:57.429735+00:00'
+record_updated_at: '2026-10-30T22:11:57.429735+00:00'
+last_verified_at: '2026-10-30T22:11:57.429735+00:00'
+last_verified_by: Agent — OpenAI / dot / add_syslog_timestamp_relation; original publications only; errata unreviewed
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_syslog_timestamp_relation
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_timestamp_relation/semantic_review
+  github_actor: ff6962757
