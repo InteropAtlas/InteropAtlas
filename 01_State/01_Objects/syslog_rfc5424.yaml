@@ -6,7 +6,8 @@ name_en: Syslog Original Protocol Publication (RFC 5424)
 official_name: The Syslog Protocol
 description_zh: 'RFC 5424 原版定义独立于传输层的事件通知消息：头部、结构化数据（可用 NILVALUE）与可选 MSG。它不是存储格式；传输映射另行规定，但 §5.1 要求实现支持 TLS 映射，并建议支持
   UDP 映射。时间戳采用受限 RFC 3339 语法，或在无法获取系统时间时使用 NILVALUE：T/Z 大写、禁止闰秒、小数秒最多六位。协议本身不保证送达或安全，超长消息可能被截断或丢弃。固定 2009 年 3 月原始出版物；信息页列五项勘误报告，内容与处理状态未核验，不声称已整合勘误或当前完整修订语义。
-  官方状态为 Proposed Standard，取代 RFC 3164。仅作协议文献记录，不表示完整日志平台、部署适用性、实现符合性或 IA 采用；observability 仅是编辑导航，无技术关系。
+  官方状态为 Proposed Standard，取代 RFC 3164。仅作协议文献记录，不表示完整日志平台、部署适用性、实现符合性或 IA 采用；observability 仅是编辑导航；另以 uses 关系记录原始规范对
+  RFC 3339 时间戳语法的使用。
 
 
   English scope and limitations:
@@ -19,7 +20,8 @@ description_zh: 'RFC 5424 原版定义独立于传输层的事件通知消息：
   oversized messages may be truncated or dropped. Fixed March 2009 original publication, Proposed Standard, obsoleting
   RFC 3164. Five errata reports are indicated; their contents/status were not reviewed or incorporated. No complete
   corrected semantics, full logging platform, deployment suitability, implementation conformance or IA adoption
-  is asserted. Observability membership is editorial navigation; no technical relations.'
+  is asserted. Observability membership is editorial navigation; a separate uses relation records the original specification’s
+  use of RFC 3339 timestamp syntax.'
 description_en: 'The original RFC 5424 defines transport-independent event messages: a header, structured data (or
   NILVALUE), and optional MSG. It is not a storage format. Transport mappings are separate, but §5.1 requires TLS
   mapping support and recommends UDP mapping support. Timestamps use restricted RFC 3339 syntax or NILVALUE when
@@ -27,7 +29,8 @@ description_en: 'The original RFC 5424 defines transport-independent event messa
   are not guaranteed; oversized messages may be truncated or dropped. Fixed March 2009 original publication, Proposed
   Standard, obsoleting RFC 3164. Five errata reports are indicated; their contents/status were not reviewed or incorporated.
   No complete corrected semantics, full logging platform, deployment suitability, implementation conformance or
-  IA adoption is asserted. Observability membership is editorial navigation; no technical relations.'
+  IA adoption is asserted. Observability membership is editorial navigation; a separate uses relation records the
+  original specification’s use of RFC 3339 timestamp syntax.'
 version: RFC 5424 (March 2009 original publication)
 external_identifiers:
 - namespace: rfc
@@ -41,7 +44,7 @@ domains:
 - observability
 sources:
 - url: https://www.rfc-editor.org/rfc/rfc5424.html
-  title: RFC 5424 original March 2009 publication — sections 1, 5–6 and 8
+  title: RFC 5424 original March 2009 publication — sections 1, 5–6, 8 and 12.1
   language: en
   accessed: '2026-10-30'
 - url: https://www.rfc-editor.org/info/rfc5424/
@@ -49,15 +52,15 @@ sources:
     unreviewed'
   language: en
   accessed: '2026-10-30'
-last_verified_at: '2026-10-30T21:35:10.680693+00:00'
-last_verified_by: Agent — OpenAI / dot / add_syslog_standard; original publication and info page only; errata contents/status
-  unreviewed
+last_verified_at: '2026-10-30T22:11:57.429735+00:00'
+last_verified_by: Agent — OpenAI / dot / add_syslog_timestamp_relation; timestamp syntax and normative RFC3339 identity
+  only; prior publication/status boundaries retained; errata unreviewed
 record_created_at: '2026-10-30T21:37:01.520470+00:00'
-record_updated_at: '2026-10-30T21:37:01.520470+00:00'
+record_updated_at: '2026-10-30T22:11:57.429735+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / add_syslog_standard
-  reviewer: Independent Agent — OpenAI / dot / /root/add_syslog_standard/semantic_review
+  executor: Agent — OpenAI / dot / add_syslog_timestamp_relation
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_timestamp_relation/semantic_review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: syslog_rfc5424
