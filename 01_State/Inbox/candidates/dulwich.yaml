@@ -16,13 +16,14 @@ locators:
 - url: https://pypi.org/project/dulwich/1.2.15/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  reasons:
-  - Distinct fixed Python implementation. Existing git_protocol_v2 is a network protocol specification and
-    version_control is a capability, not duplicate project identities. Actual baseline canonical/candidate
-    identifiers have no Dulwich collision; ordinary review_required is not acceptance.
+  state: duplicate
+  matched_canonical_ids:
+  - dulwich
   merge_authorized: false
+  reasons:
+  - Accepted as canonical dulwich by accept-20261030-dulwich-1-2-15-dulwich. Original new-state candidate f2794b8869745c9c722726ca8007d124d112074c
+    and the ordinary review_required route replay against genuine remote-frozen ancestor 8d033670fef84bd54866e3323ecf5fba4e6d79b3;
+    this unique back-reference does not authorize identity merge.
 unknowns:
 - 仅固定 Dulwich 1.2.15 的本地 Git 对象 / 引用 / 历史子功能，非 merge、wire、完整 version_control 或任意 Git 兼容。82 个非测试 runtime Python
   文件（排除 3 个 bundled test helpers，包内共 85 个 .py）四路相同，非整包；359 / 403 个原始 blob 在 sdist 中。实际为纯 Python，Rust 与 merge3
@@ -41,11 +42,16 @@ unknowns:
   63, author 26 and reviewer 24 cases overlap and are not additive; Git 2.52 / 2.47 paths are distinct. Construction,
   Tree.check and reference compatibility are bounded, not generic sanitization. No production, compliance,
   license-election or IA-adoption conclusion.'
-- One bounded provides relation is proposed, not accepted. Exact semantic and rendered endpoint-label review
-  can reject it. No new capability, category or existing endpoint change.
-- Only conditional research/authoring scope passed. Genuine remote pending F and independent exact, F, pre-H
-  and H gates remain future.
+- The original candidate at frozen commit 8d033670fef84bd54866e3323ecf5fba4e6d79b3 records the bounded provides
+  relation as a proposal, not an acceptance. This current candidate back-reference records acceptance by event
+  accept-20261030-dulwich-1-2-15-dulwich; it does not extend the technical scope, create a capability/category
+  or change the original frozen proposal.
+- The final workflow entry in original frozen candidate f2794b8869745c9c722726ca8007d124d112074c is retained
+  as historical pre-acceptance authoring text. Event accept-20261030-dulwich-1-2-15-dulwich binds the completed
+  exact semantic review and separate actual-F verification. This candidate record is not evidence that later
+  publication, CI or deployment gates have completed, and it does not retrospectively mark the original pending
+  candidate as accepted.
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_candidate_author
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/dulwich_independent_preflight
