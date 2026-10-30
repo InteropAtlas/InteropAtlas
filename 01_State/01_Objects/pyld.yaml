@@ -3,9 +3,96 @@ type: system
 kind: library
 name_zh: PyLD Python JSON-LD 处理库
 name_en: PyLD Python JSON-LD processor
-description_zh: Python 的开源 JSON-LD 处理器；本记录固定到3.3.0，记录链接数据的JSON表示处理及图/数据集与RDF表示转换先例。
-description_en: An open-source Python JSON-LD processor, pinned here to 3.3.0 as a precedent for processing JSON
-  Linked Data and converting graph/dataset representations to and from RDF.
+description_zh: 'Python 的开源 JSON-LD 处理器；本记录固定 3.3.0（commit 3ac1987d9be3648c09b7c7e34865ce82d637e742），记录可信内存文档的展开、压缩、扁平化及
+  RDF/N-Quads 转换先例，不把转换成功等同于任意 JSON 的无损往返。
+
+
+  属性保留取决于上下文与 IRI 映射。固定展开代码会跳过展开后既非绝对 IRI、也非 JSON-LD 关键字的属性；绝对 IRI 与关键字不能被笼统称为“未映射所以丢弃”。`jsonld.expand()` 提供 `on_property_dropped`
+  回调，调用者可在其中抛错以拒绝静默忽略；回调收到的是展开后的属性值，不保证是原始 JSON 键拼写。这是调用者可选择的检查方式，不是库默认开启的严格模式。
+
+
+  RDF 转换的文本方向不是无条件保留。固定 `to_rdf` 路径先展开文档；对具有 `@direction` 的字符串值，默认未指定 `rdfDirection` 时，普通字符串/语言 literal 路径不编码方向。显式
+  `i18n-datatype` 使用含语言与方向的 i18n datatype IRI；显式 `compound-literal` 使用空白节点及 RDF value/direction、可选 language 三元组。它们是有条件的编码选择，不意味着原始上下文、JSON
+  结构或所有属性都可无损恢复；接收方是否按相应方式解读仍须单独核验。
+
+
+  原收录的 18 个有限例包含未映射属性、回调拒绝、默认方向省略与显式方向编码，属于 2026-10-21 的历史审核证据。本次仅恢复该公开冻结记录并核对固定 README 与源码，不重新运行这 18 例；原始完整输入脚本、输出字节及完整依赖来源未恢复，不能据此声称新运行或全套符合性。原范围内可能外部加载的处理调用使用显式拒绝
+  loader，而 `from_rdf` 例只解析内存 N-Quads；不能把该 loader 说成所有 API 的通用离线保护。
+
+
+  原 scope_notes 与实现关系范围保持不变：不覆盖真实网络/远程上下文、CLI、framing/canonicalization、跨实现互通、安全或生产适用性；不推断 SHACL 管线、RDF 1.2 支持或 IA
+  采用，也不重新批准或扩大既有 implements 关系。
+
+
+  English scope and limitations:
+
+
+  An open-source Python JSON-LD processor, fixed here at 3.3.0 (commit 3ac1987d9be3648c09b7c7e34865ce82d637e742)
+  as a precedent for trusted in-memory expansion, compaction, flattening and RDF/N-Quads conversion. Successful
+  conversion does not imply lossless round trips for arbitrary JSON.
+
+
+  Property retention depends on context and IRI mapping. The fixed expansion code skips properties whose expanded
+  value is neither an absolute IRI nor a JSON-LD keyword; absolute IRIs and keywords must not be grouped into an
+  unconditional "unmapped means dropped" claim. `jsonld.expand()` offers an `on_property_dropped` callback in which
+  callers may raise an error rather than accept silent omission. The callback receives the expanded property value,
+  not necessarily the original JSON key spelling. This is an optional caller check, not a strict mode enabled by
+  default.
+
+
+  Text direction is not unconditionally retained in RDF conversion. The fixed `to_rdf` path first expands the document.
+  For string values with `@direction`, leaving `rdfDirection` unspecified uses the ordinary string/language literal
+  path without encoding direction. Explicit `i18n-datatype` uses an i18n datatype IRI containing language and direction;
+  explicit `compound-literal` uses a blank node with RDF value/direction and optional language triples. These are
+  conditional encodings, not guarantees that the original context, JSON structure or every property can be recovered
+  losslessly. A recipient''s interpretation of the encoding requires separate verification.
+
+
+  The original 18 finite examples include unmapped properties, rejecting callbacks, omitted direction by default
+  and explicit direction encoding; they are historical reviewed evidence from 2026-10-21. This update only recovers
+  that public frozen record and inspects the fixed README and source; it does not rerun those examples. Original
+  complete input scripts, output bytes and full dependency provenance were not recovered, so no fresh execution
+  or full conformance result is claimed. In the original scope, processing calls capable of external loading used
+  an explicit rejecting loader, whereas the `from_rdf` examples only parsed in-memory N-Quads; that loader is not
+  a universal offline guard for all APIs.
+
+
+  The original scope notes and implementation edge remain unchanged: no real network/remote-context, CLI, framing/canonicalization,
+  cross-implementation interoperability, security or production-fitness coverage; no inferred SHACL pipeline, RDF
+  1.2 support or IA adoption, and no reapproval or enlargement of the existing implements edge.'
+description_en: 'An open-source Python JSON-LD processor, fixed here at 3.3.0 (commit 3ac1987d9be3648c09b7c7e34865ce82d637e742)
+  as a precedent for trusted in-memory expansion, compaction, flattening and RDF/N-Quads conversion. Successful
+  conversion does not imply lossless round trips for arbitrary JSON.
+
+
+  Property retention depends on context and IRI mapping. The fixed expansion code skips properties whose expanded
+  value is neither an absolute IRI nor a JSON-LD keyword; absolute IRIs and keywords must not be grouped into an
+  unconditional "unmapped means dropped" claim. `jsonld.expand()` offers an `on_property_dropped` callback in which
+  callers may raise an error rather than accept silent omission. The callback receives the expanded property value,
+  not necessarily the original JSON key spelling. This is an optional caller check, not a strict mode enabled by
+  default.
+
+
+  Text direction is not unconditionally retained in RDF conversion. The fixed `to_rdf` path first expands the document.
+  For string values with `@direction`, leaving `rdfDirection` unspecified uses the ordinary string/language literal
+  path without encoding direction. Explicit `i18n-datatype` uses an i18n datatype IRI containing language and direction;
+  explicit `compound-literal` uses a blank node with RDF value/direction and optional language triples. These are
+  conditional encodings, not guarantees that the original context, JSON structure or every property can be recovered
+  losslessly. A recipient''s interpretation of the encoding requires separate verification.
+
+
+  The original 18 finite examples include unmapped properties, rejecting callbacks, omitted direction by default
+  and explicit direction encoding; they are historical reviewed evidence from 2026-10-21. This update only recovers
+  that public frozen record and inspects the fixed README and source; it does not rerun those examples. Original
+  complete input scripts, output bytes and full dependency provenance were not recovered, so no fresh execution
+  or full conformance result is claimed. In the original scope, processing calls capable of external loading used
+  an explicit rejecting loader, whereas the `from_rdf` examples only parsed in-memory N-Quads; that loader is not
+  a universal offline guard for all APIs.
+
+
+  The original scope notes and implementation edge remain unchanged: no real network/remote-context, CLI, framing/canonicalization,
+  cross-implementation interoperability, security or production-fitness coverage; no inferred SHACL pipeline, RDF
+  1.2 support or IA adoption, and no reapproval or enlargement of the existing implements edge.'
 version: 3.3.0
 external_identifiers:
 - namespace: github
@@ -69,14 +156,38 @@ sources:
   title: PyLD 3.3.0 — skip rules and pending ToRDF cases
   language: en
   accessed: '2026-10-21'
-last_verified_at: '2026-10-21T05:15:36.943122+00:00'
-last_verified_by: Agent — OpenAI / dot，fixed JSON-LD processor evidence executor
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/README.md#L301-L315
+  title: PyLD 3.3.0 — Ignored-property callback and caller-selected rejection
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py#L2311-L2324
+  title: PyLD 3.3.0 — Expansion skips non-absolute, non-keyword properties and passes expanded property to callback
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py#L1005-L1045
+  title: PyLD 3.3.0 — to_rdf expansion, document loader and direction options
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py#L3937-L4040
+  title: PyLD 3.3.0 — Conditional RDF direction encodings and ordinary literal fallback
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py#L954-L1003
+  title: PyLD 3.3.0 — from_rdf parser selection and default direction option
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/0a5f5e923ccd5b3b4e50b157f8bc3730ec9cb98c/01_State/Inbox/review-packets/pyld-implementation-20261021.yaml
+  title: Historical PyLD intake packet — 18 named results and source fingerprints; not a fresh rerun
+  language: zh
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T17:55:35.018155+00:00'
+last_verified_by: Agent — OpenAI / dot / pyld_proposal; fixed-source and historical-evidence inspection only
 record_created_at: '2026-10-21T05:20:13.051116+00:00'
-record_updated_at: '2026-10-21T05:20:13.051116+00:00'
+record_updated_at: '2026-10-30T17:55:35.018155+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / pyld_proposal
+  reviewer: Independent Agents — OpenAI / dot / deliver_pyld_clarification/semantic and deliver_pyld_clarification/structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: pyld
