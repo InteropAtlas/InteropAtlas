@@ -11,10 +11,13 @@ locators:
 - url: https://www.rfc-editor.org/rfc/rfc5425.html
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - syslog_tls_rfc5425
   reasons:
-  - 固定 RFC 5425 原始传输映射规范身份；当前 Canonical 与 Candidate 未见该 RFC 身份。
+  - Accepted by accept-20261030-syslog-tls-rfc5425; original new-state candidate a82d1610a1bb743a246243deb866858724830302
+    retained at true ancestor 5dea511c6569e47b803f5286795a1ea6d9dbb4a9. Unique back-reference prevents duplicate
+    creation, with no identity merge.
   merge_authorized: false
 unknowns:
 - 固定 2009 年 3 月原始出版物；RFC 9662 后续更新未合并，不是当前完整安全或部署指南；勘误内容与状态未核验。原文标为 Standards Track；当前成熟度分类未重新核验。
@@ -22,4 +25,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_syslog_transport_standard
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_transport_standard/semantic_review

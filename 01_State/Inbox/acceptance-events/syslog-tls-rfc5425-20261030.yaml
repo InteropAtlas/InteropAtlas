@@ -1,0 +1,43 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261030-syslog-tls-rfc5425
+candidate_id: syslog_tls_rfc5425
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: syslog_tls_rfc5425
+review:
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_transport_standard/semantic_review
+  reviewed_at: '2026-10-30T22:33:11.982896+00:00'
+  independent_from_executor: true
+  notes:
+  - Independent primary-source and exact serialized candidate review accepted one fixed March2009 original RFC5425
+    artifact/protocol, one publication-level uses relation to existing original syslog_rfc5424, and existing observability
+    editorial membership.
+  - RFC5425 section4.3 directly imports SYSLOG-MSG and section9.1 identifies March2009 RFC5424; bare uses is true
+    without context rescue. No TLS/reverse/updates edges or RFC9662 object.
+  - Original-only identity; RFC9662 update not replacement and not consolidated; current complete security/deployment
+    guidance explicitly disclaimed. Hop-by-hop/HOSTNAME and no application acknowledgment/remote receipt guarantee
+    visible in bilingual object summary and relation context. No obsolete suite recommendation or runtime/conformance/IA
+    adoption claim.
+  - Original header StandardsTrack only; current maturity unverified and versions field omitted. RFC5425 info429
+    not retried; no errata reviewed or consolidated. This source limitation is accepted, not repaired by unsupported
+    status assertion.
+  - Relation evidence now includes RFC9662 for its update-boundary assertion. Exact materialization and generated/public
+    surfaces require later review. No formal platform approval or held-action authorization given.
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/5dea511c6569e47b803f5286795a1ea6d9dbb4a9/01_State/Inbox/review-packets/syslog-tls-rfc5425-20261030.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/a82d1610a1bb743a246243deb866858724830302
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/67a6ee2e9794c6e230bbbc21a2e78525acbb6a4b
+decided_at: '2026-10-30T22:33:39.924745+00:00'
+notes:
+- One fixed original RFC5425 artifact/protocol; one uses edge to syslog_rfc5424 and existing observability editorial
+  membership.
+- Original March2009 StandardsTrack publication only; current maturity and errata contents/status unverified. RFC9662
+  update not consolidated; not current complete security/deployment guidance.
+- No TLS/reverse/updates edge, RFC9662 object, existing object edit, capability, taxonomy, schema, renderer, governance,
+  maintenance-rule or held-work change.
+- Frozen new-state candidate in true Git ancestor; exact proposed fields materialized unchanged except lifecycle/contribution/intake
+  provenance. Semantic verdict recorded here and in delivery PR; frozen pending packet is not itself an approval.
