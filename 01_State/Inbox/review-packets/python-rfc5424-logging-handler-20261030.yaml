@@ -1,131 +1,17 @@
 packet_id: python_rfc5424_logging_handler_20261030
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: f506dc817eb06fd2937f2a16b98609028fa3fb16
+reviewed_packet_blob: d896f6e15e3084ff20ffd2b5135e9ed80bd3a6ba
+reviewed_packet_path: 01_State/Inbox/review-packets/python-rfc5424-logging-handler-20261030.yaml
 baseline_commit: 3e4b0642baccd1bced946631a251a82a80262b70
 executor: Agent — OpenAI / dot / add_syslog_formatter_precedent
-reviewer: null
-review_scope:
-- One actual system/library identity; fixed-source one-way formatting observations; existing observability editorial
-  membership; NO relation.
-source_evidence:
-  method: Immutable GitHub connector sources independently fetched and inspected; no upstream execution.
-  source_mappings: &id001
-  - url: https://github.com/jobec/rfc5424-logging-handler/blob/8426fd9d143accbfccd1db43553729a53b3f08e9/setup.py
-    title: rfc5424-logging-handler 1.4.3 — package identity/version and historical unbounded dependencies
-    language: en
-    accessed: '2026-10-30'
-  - url: https://github.com/jobec/rfc5424-logging-handler/blob/8426fd9d143accbfccd1db43553729a53b3f08e9/rfc5424logging/handler.py
-    title: rfc5424-logging-handler 1.4.3 — build_msg serialization, sanitization limits and transport selection
-    language: en
-    accessed: '2026-10-30'
-  - url: https://github.com/jobec/rfc5424-logging-handler/blob/8426fd9d143accbfccd1db43553729a53b3f08e9/rfc5424logging/transport.py
-    title: rfc5424-logging-handler 1.4.3 — separate transports and default nontransparent stream framing
-    language: en
-    accessed: '2026-10-30'
-  - url: https://github.com/jobec/rfc5424-logging-handler/blob/8426fd9d143accbfccd1db43553729a53b3f08e9/LICENSE
-    title: rfc5424-logging-handler 1.4.3 — BSD-3-Clause license text
-    language: en
-    accessed: '2026-10-30'
-  limitations:
-  - 仅检查固定 1.4.3 源码；未安装、构建、运行库或测试、发送日志或执行互通测试。当前 Python / 依赖兼容性、维护和安全状态未建立。
-  - Package identity preserved; library also has transports, not a fictional formatting-only component.
-  - Known empty header/SD parameter and registered-ID len(None) cases are static observations.
-research_boundary:
-  question: Can a concrete library and its bounded serializer path fill the existing diagnostics instance gap without
-    a misleading bare implements edge?
-  decision: Object-only; independent exact-byte acceptance required.
-  depth: L1 bounded source verification
-  stop: Fixed identity and meaningful serializer path established; no deployment research.
-preflight:
-  fresh_main: 3e4b0642baccd1bced946631a251a82a80262b70
-  canonical_records: 269
-  candidate_records: 260
-  machine_route: review_required
-  collisions: []
+acceptance_events: 01_State/Inbox/acceptance-events/python-rfc5424-logging-handler-20261030.yaml
 objects:
 - candidate_id: python_rfc5424_logging_handler
-  candidate_path: 01_State/Inbox/candidates/python-rfc5424-logging-handler.yaml
-  candidate_blob: 29f2e4fae9640581c97acf1e8138913321318b2d
-  proposed_path: 01_State/01_Objects/python_rfc5424_logging_handler.yaml
-  proposed_record:
-    id: python_rfc5424_logging_handler
-    type: system
-    kind: library
-    name_zh: rfc5424-logging-handler Python 日志处理库
-    name_en: rfc5424-logging-handler Python logging handler library
-    official_name: rfc5424-logging-handler
-    description_zh: 'Python logging 的 Syslog handler 库，固定 1.4.3（commit 8426fd9d143accbfccd1db43553729a53b3f08e9）。本记录以单向消息格式化为研究范围，并不将整个库重命名为仅格式化组件。Rfc5424SysLogHandler.build_msg(LogRecord)
-      由级别和 facility 构造 PRI，写入版本 1、来自 record.created 的时间戳、头部、结构化数据及可选 MSG，返回 bytes；emit 另行交给 transport.transmit。时间戳默认使用本地时区，utc_timestamp=True
-      转 UTC；非空 MSG 默认 UTF-8 加 BOM，msg_as_utf8=False 不加 BOM，None/空消息省略 MSG。结构化数据值转义反斜杠、双引号和右方括号，头部过滤为可打印 ASCII 并截长。但过滤可令头部或
-      SD 参数名变为空；registered SD-ID 缺少 enterprise_id 时可到达 len(None)。这些是源码静态观察，非已复现实测；不是严格验证器或完整 RFC5424 实现证明。构造器会初始化传输，默认
-      UDP localhost:514；TLS 选择还需 SOCK_STREAM，流默认非透明分帧，不能由此推出 RFC5425 符合性、安全或送达保证。setup.py 的 tzlocal/pytz 依赖未设版本界限，分类列出历史
-      Python 2.7/3.4–3.7，不证明当前兼容性或维护状态。仅检查固定 1.4.3 源码；未安装、构建、运行库或测试、发送日志或执行互通测试。当前 Python / 依赖兼容性、维护和安全状态未建立。 不主张解析、全部输入有效、安全审计、性能或部署推荐、第三方互通或
-      IA 采用；BSD-3-Clause 仅按固定 LICENSE 记录，不作法律适用性判断。只添加既有 observability 编辑导航，不添加 implements 关系，避免裸关系把有界格式化解释为完整协议实现。
-
-
-      English scope and limitations:
-
-
-      Python logging Syslog handler library, pinned to 1.4.3 at commit 8426fd9d143accbfccd1db43553729a53b3f08e9.
-      This record researches one-way message formatting; it does not rename the whole library into a formatting-only
-      component. Rfc5424SysLogHandler.build_msg(LogRecord) constructs PRI from level/facility, version 1, a timestamp
-      from record.created, header, structured data and optional MSG, returning bytes; emit separately calls transport.transmit.
-      Timestamps use the local timezone by default or UTC with utc_timestamp=True. Nonempty MSG is UTF-8 with BOM
-      by default; msg_as_utf8=False omits BOM; None/empty message omits MSG. Structured-data values escape backslash,
-      quote and closing bracket; headers are filtered to printable ASCII and truncated. Filtering can leave empty
-      headers or SD parameter names; a registered SD-ID without enterprise_id can reach len(None). These are static
-      source observations, not reproduced tests: neither strict validation nor complete RFC5424 conformance is established.
-      Construction initializes transport, defaulting to UDP localhost:514; TLS selection also requires SOCK_STREAM
-      and default stream framing is nontransparent. These defaults do not establish RFC5425 conformance, security
-      or delivery guarantees. setup.py leaves tzlocal/pytz unbounded and lists historical Python 2.7/3.4–3.7 classifiers,
-      not contemporary compatibility or maintenance evidence. No upstream installation, build, runtime/test execution,
-      log sending or corpus/interoperability testing was performed. No parsing, all-input validity, security audit,
-      performance/deployment recommendation or IA adoption claim. BSD-3-Clause is recorded from the fixed LICENSE,
-      not legal-suitability advice. Existing observability membership is editorial navigation only; no implements
-      relation is added, avoiding a bare edge that overstates bounded formatting as complete protocol implementation.'
-    description_en: 'Python logging Syslog handler library, pinned to 1.4.3 at commit 8426fd9d143accbfccd1db43553729a53b3f08e9.
-      This record researches one-way message formatting; it does not rename the whole library into a formatting-only
-      component. Rfc5424SysLogHandler.build_msg(LogRecord) constructs PRI from level/facility, version 1, a timestamp
-      from record.created, header, structured data and optional MSG, returning bytes; emit separately calls transport.transmit.
-      Timestamps use the local timezone by default or UTC with utc_timestamp=True. Nonempty MSG is UTF-8 with BOM
-      by default; msg_as_utf8=False omits BOM; None/empty message omits MSG. Structured-data values escape backslash,
-      quote and closing bracket; headers are filtered to printable ASCII and truncated. Filtering can leave empty
-      headers or SD parameter names; a registered SD-ID without enterprise_id can reach len(None). These are static
-      source observations, not reproduced tests: neither strict validation nor complete RFC5424 conformance is established.
-      Construction initializes transport, defaulting to UDP localhost:514; TLS selection also requires SOCK_STREAM
-      and default stream framing is nontransparent. These defaults do not establish RFC5425 conformance, security
-      or delivery guarantees. setup.py leaves tzlocal/pytz unbounded and lists historical Python 2.7/3.4–3.7 classifiers,
-      not contemporary compatibility or maintenance evidence. No upstream installation, build, runtime/test execution,
-      log sending or corpus/interoperability testing was performed. No parsing, all-input validity, security audit,
-      performance/deployment recommendation or IA adoption claim. BSD-3-Clause is recorded from the fixed LICENSE,
-      not legal-suitability advice. Existing observability membership is editorial navigation only; no implements
-      relation is added, avoiding a bare edge that overstates bounded formatting as complete protocol implementation.'
-    version: 1.4.3
-    external_identifiers:
-    - namespace: github
-      value: jobec/rfc5424-logging-handler
-    - namespace: pypi
-      value: rfc5424-logging-handler
-    official_url: https://github.com/jobec/rfc5424-logging-handler
-    domains:
-    - observability
-    open_source: true
-    license_expression: BSD-3-Clause
-    sources: *id001
-    last_verified_at: '2026-10-30T22:52:19.948392+00:00'
-    last_verified_by: Agent — OpenAI / dot / add_syslog_formatter_precedent; fixed source inspection only; no upstream
-      execution
+  canonical_id: python_rfc5424_logging_handler
+  acceptance_event_id: accept-20261030-python-rfc5424-logging-handler
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/f506dc817eb06fd2937f2a16b98609028fa3fb16/01_State/Inbox/review-packets/python-rfc5424-logging-handler-20261030.yaml
 relations: []
-membership_proposals:
-- category_id: observability
-  ref:
-    surface: canonical
-    id: python_rfc5424_logging_handler
-navigation_baseline:
-  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
-  sha256: 617e79bd5e2689b7c261bc5d6aa7a6126ffb69f2a5bf0413b4d0f82bbdfda859
-  git_blob: ef224afbbe01c0e668552adf7a305beb71afceec
-excluded_scope:
-- No relation, new capability/type/schema/taxonomy/UI/governance, existing canonical object edit, maintenance-rule
-  or held-work change.
-materialization_boundary: Only candidate and packet; independent semantic acceptance before materialization; frozen
-  new-state ancestor and exact proposed fields except lifecycle/contribution/intake provenance.
+notes_zh:
+- 引用式交付回执；完整被审原文及来源限制保留在实际冻结祖先，不复制第二套正式字段。
+- 仅限固定库身份与源码观察的单向消息格式化路径；不添加关系，不把整个库虚构为仅格式化组件，不声称完整协议符合性。独立语义复核与结构检查分别记录，CI 不冒充审核。
