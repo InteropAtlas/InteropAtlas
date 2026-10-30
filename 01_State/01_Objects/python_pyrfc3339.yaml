@@ -3,9 +3,42 @@ type: system
 kind: library
 name_zh: pyRFC3339 Python 时间戳转换库
 name_en: pyRFC3339 Python timestamp conversion library
-description_zh: 在Python datetime与时间戳字符串之间解析、生成和转换的库；固定2.1.1，记录日期时间表达先例及严格语法、精度和偏移信息保留的边界。
-description_en: A library for parsing, generating and converting timestamps with Python datetime objects; pinned
-  to 2.1.1 as a date/time representation precedent with explicit syntax, precision and offset-preservation limits.
+description_zh: '固定 pyRFC3339 2.1.1，在 Python datetime 与时间戳字符串之间转换。parse 委托 datetime.fromisoformat，接受输入不等于严格 RFC3339
+  有效。2026-10-22 冻结收录包的 Python 3.12.14 历史控制时区示例显示：无偏移输入配 parse(utc=True) 按宿主本地时区解释，在 UTC 与 UTC+8 下得到不同瞬时值；本轮仅核对固定源码与历史记录，未重跑示例。
+
+
+  固定 generator 源码规定：generate 默认拒绝无时区信息的 naive datetime；accept_naive=True 且 utc=True 才按 UTC 解释，accept_naive=True
+  与 utc=False 组合仍拒绝 naive。generate 默认转 UTC 并截去小数秒而非四舍五入；microseconds=True 输出微秒。这里记录有界转换先例，不证明完整 RFC3339/IXDTF 符合性、跨
+  Python 版本行为、测量精度或 IA 采用。
+
+
+  English scope and limitations:
+
+
+  Pinned to pyRFC3339 2.1.1 for conversion between Python datetime objects and timestamp strings. parse delegates
+  to datetime.fromisoformat; accepted input is not necessarily strictly valid RFC3339. Historical Python 3.12.14
+  controlled-timezone examples in the frozen 2026-10-22 intake packet show that an offset-free input with parse(utc=True)
+  is interpreted in the host local timezone, yielding different instants under UTC and UTC+8. This update inspects
+  fixed source and historical records only; the examples were not rerun.
+
+
+  The fixed generator source specifies that generate rejects naive datetimes by default; accept_naive=True with
+  utc=True assumes UTC, while accept_naive=True with utc=False still rejects naive input. generate defaults to UTC
+  and truncates fractional seconds without rounding; microseconds=True emits microseconds. This is a bounded conversion
+  precedent, not proof of full RFC3339/IXDTF conformance, cross-Python-version behavior, measurement accuracy or
+  IA adoption.'
+description_en: 'Pinned to pyRFC3339 2.1.1 for conversion between Python datetime objects and timestamp strings.
+  parse delegates to datetime.fromisoformat; accepted input is not necessarily strictly valid RFC3339. Historical
+  Python 3.12.14 controlled-timezone examples in the frozen 2026-10-22 intake packet show that an offset-free input
+  with parse(utc=True) is interpreted in the host local timezone, yielding different instants under UTC and UTC+8.
+  This update inspects fixed source and historical records only; the examples were not rerun.
+
+
+  The fixed generator source specifies that generate rejects naive datetimes by default; accept_naive=True with
+  utc=True assumes UTC, while accept_naive=True with utc=False still rejects naive input. generate defaults to UTC
+  and truncates fractional seconds without rounding; microseconds=True emits microseconds. This is a bounded conversion
+  precedent, not proof of full RFC3339/IXDTF conformance, cross-Python-version behavior, measurement accuracy or
+  IA adoption.'
 version: 2.1.1
 external_identifiers:
 - namespace: github
@@ -84,14 +117,27 @@ sources:
   title: pyRFC3339 2.1.1 — fixed release date and distribution identity
   language: en
   accessed: '2026-10-22'
-last_verified_at: '2026-10-22T03:20:23.696317+00:00'
-last_verified_by: Agent — OpenAI / dot, fixed timestamp library evidence executor
+- url: https://github.com/kurtraschke/pyRFC3339/blob/cc6ffe260f63c4e37c2789813894516c089e5cb6/pyrfc3339/parser.py#L30-L60
+  title: pyRFC3339 2.1.1 — Permissive fromisoformat parsing and UTC normalization
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/kurtraschke/pyRFC3339/blob/cc6ffe260f63c4e37c2789813894516c089e5cb6/pyrfc3339/generator.py#L29-L76
+  title: pyRFC3339 2.1.1 — Naive-input UTC assumption and default fractional-second truncation
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/30d548b66cb6860cad92cd82ce15edc248b45fc7/01_State/Inbox/review-packets/timestamp-implementation-20261022.yaml
+  title: Historical pyRFC3339 intake packet — Python 3.12.14 controlled-timezone examples; not a fresh rerun
+  language: zh
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T19:13:44.813241+00:00'
+last_verified_by: Agent — OpenAI / dot / clarify_rfc3339_boundaries; fixed-source and historical-evidence inspection
+  only
 record_created_at: '2026-10-22T03:22:49.213085+00:00'
-record_updated_at: '2026-10-22T03:22:49.213085+00:00'
+record_updated_at: '2026-10-30T19:13:44.813241+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / clarify_rfc3339_boundaries
+  reviewer: Independent Agents — OpenAI / dot / clarify_rfc3339_boundaries/semantic_review and clarify_rfc3339_boundaries/structure_review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_pyrfc3339
