@@ -13,10 +13,13 @@ locators:
 - url: https://github.com/videolan/dav1d/tree/32cf02af50f32af108a3b281c452788dccdac648
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - dav1d
   reasons:
-  - dav1d 软件库身份，不是 AV1 规范文档或 libaom；当前 Canonical 与 Candidate 未见此身份。
+  - Accepted by accept-20261030-dav1d; original new-state candidate c98211292005619d52c7ef6fa6ab5eace414c1f9 retained
+    at true ancestor 31ee141cdb420aaf8d53751b303fbff5568a999f. Unique back-reference prevents duplicate creation,
+    with no identity merge.
   merge_authorized: false
 unknowns:
 - 仅固定 1.5.0 源码与公开 API 注释检查，未构建、执行、下载测试语料或测量性能；不证明完整 AV1/Errata1 符合性、跨实现互通、容器/传输/显示色彩端到端正确性、安全、生产适用性或 IA 采用。
@@ -24,4 +27,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_dav1d_precedent
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / add_dav1d_precedent/semantic_review

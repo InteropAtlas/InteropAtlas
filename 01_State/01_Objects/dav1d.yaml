@@ -1,0 +1,100 @@
+id: dav1d
+type: system
+kind: library
+name_zh: dav1d AV1 解码库
+name_en: dav1d AV1 decoder library
+description_zh: 'dav1d 是 AV1 解码库；本记录固定 1.5.0（GitHub 镜像 tag 1.5.0 解析到 commit 32cf02af50f32af108a3b281c452788dccdac648，README
+  指向 VideoLAN 为规范上游），不称最新版本。公开 C API 的 dav1d_send_data 接收一个或多个开放码流单元（OBU），成功才转移输入引用所有权；EAGAIN 表示当前输入尚不能消费，应先 get_picture
+  取出画面再重试。get_picture 成功时调用者取得输出引用所有权，EAGAIN 通常表示需要更多输入；流结束则反复调用它直到 EAGAIN 排空缓存。用于 seek 的 flush 清除内部状态，不替代流结束排空；之后须送入有效序列头
+  OBU 才能重新开始解码。
+
+
+  strict_std_compliance 默认 0，部分不影响实际解码的规范违规不会中止；src/obu.c 中 forbidden bit 和 trailing-bit 检查受此开关约束。因此解码成功不是严格规范有效性的证明，开启开关也不在此被认证为完整验证器。apply_grain
+  默认 1，画面输出已应用胶片颗粒时再调用 dav1d_apply_grain 会重复应用。仅固定 1.5.0 源码与公开 API 注释检查，未构建、执行、下载测试语料或测量性能；不证明完整 AV1/Errata1 符合性、跨实现互通、容器/传输/显示色彩端到端正确性、安全、生产适用性或
+  IA 采用。 image_color 仅是既有编辑导航，不是色彩管理或技术关系断言。
+
+
+  English scope and limitations:
+
+
+  dav1d is an AV1 decoder library. This record is fixed to 1.5.0 (GitHub mirror tag 1.5.0 resolves to commit 32cf02af50f32af108a3b281c452788dccdac648;
+  README identifies VideoLAN as canonical upstream), not claimed latest. The public C API documents dav1d_send_data
+  input as one or more OBUs and transfers the input reference on success; EAGAIN means the input cannot yet be consumed
+  and pictures should be retrieved before retrying. Successful get_picture transfers the output reference to the
+  caller; EAGAIN normally calls for more input. At end of stream, repeatedly call get_picture until EAGAIN to drain
+  buffered frames. The seek-oriented flush clears decoder state rather than replacing EOS draining; decoding resumes
+  only after a valid sequence-header OBU is sent.
+
+
+  strict_std_compliance defaults to 0; some violations not affecting actual decoding do not abort. Forbidden-bit
+  and trailing-bit checks in src/obu.c are conditional on this setting. Successful decoding is not proof of strict
+  validity, and enabling the setting is not certified here as complete validation. apply_grain defaults to 1; calling
+  dav1d_apply_grain on output that already received grain applies it twice. Evidence is limited to fixed source
+  and public API comments: no build, execution, test-corpus download or performance measurement. No full AV1/Errata1
+  conformance, cross-implementation interoperability, end-to-end container/transport/display-color correctness,
+  security, production suitability or IA adoption is established. Existing image_color membership is editorial navigation,
+  not a color-management or technical-relation assertion.'
+description_en: 'dav1d is an AV1 decoder library. This record is fixed to 1.5.0 (GitHub mirror tag 1.5.0 resolves
+  to commit 32cf02af50f32af108a3b281c452788dccdac648; README identifies VideoLAN as canonical upstream), not claimed
+  latest. The public C API documents dav1d_send_data input as one or more OBUs and transfers the input reference
+  on success; EAGAIN means the input cannot yet be consumed and pictures should be retrieved before retrying. Successful
+  get_picture transfers the output reference to the caller; EAGAIN normally calls for more input. At end of stream,
+  repeatedly call get_picture until EAGAIN to drain buffered frames. The seek-oriented flush clears decoder state
+  rather than replacing EOS draining; decoding resumes only after a valid sequence-header OBU is sent.
+
+
+  strict_std_compliance defaults to 0; some violations not affecting actual decoding do not abort. Forbidden-bit
+  and trailing-bit checks in src/obu.c are conditional on this setting. Successful decoding is not proof of strict
+  validity, and enabling the setting is not certified here as complete validation. apply_grain defaults to 1; calling
+  dav1d_apply_grain on output that already received grain applies it twice. Evidence is limited to fixed source
+  and public API comments: no build, execution, test-corpus download or performance measurement. No full AV1/Errata1
+  conformance, cross-implementation interoperability, end-to-end container/transport/display-color correctness,
+  security, production suitability or IA adoption is established. Existing image_color membership is editorial navigation,
+  not a color-management or technical-relation assertion.'
+version: 1.5.0
+external_identifiers:
+- namespace: github
+  value: videolan/dav1d
+official_url: https://code.videolan.org/videolan/dav1d
+versions:
+- version: 1.5.0
+  status: released
+  url: https://github.com/videolan/dav1d/tree/32cf02af50f32af108a3b281c452788dccdac648
+domains:
+- multimedia
+sources:
+- url: https://github.com/videolan/dav1d/blob/32cf02af50f32af108a3b281c452788dccdac648/README.md
+  title: dav1d 1.5.0 — Project identity and canonical upstream; promotional claims are not independently verified
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/videolan/dav1d/blob/32cf02af50f32af108a3b281c452788dccdac648/meson.build
+  title: dav1d 1.5.0 — Pinned project version 1.5.0
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/videolan/dav1d/blob/32cf02af50f32af108a3b281c452788dccdac648/include/dav1d/dav1d.h
+  title: 'dav1d 1.5.0 — Public API contract: OBU input, EAGAIN, reference ownership, drain, flush and settings'
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/videolan/dav1d/blob/32cf02af50f32af108a3b281c452788dccdac648/src/obu.c
+  title: dav1d 1.5.0 — Conditional strict-compliance checks for trailing bits and forbidden OBU bit
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T20:52:14.974157+00:00'
+last_verified_by: Agent — OpenAI / dot / add_dav1d_precedent; fixed-source and public API inspection only; no execution
+record_created_at: '2026-10-30T20:54:23.372741+00:00'
+record_updated_at: '2026-10-30T20:54:23.372741+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_dav1d_precedent
+  reviewer: Independent Agent — OpenAI / dot / add_dav1d_precedent/semantic_review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: dav1d
+  acceptance_event_id: accept-20261030-dav1d
+  reviewed_candidate_blob: c98211292005619d52c7ef6fa6ab5eace414c1f9
+  reviewed_against_commit: 31ee141cdb420aaf8d53751b303fbff5568a999f
+  candidate_executor: Agent — OpenAI / dot / add_dav1d_precedent
+  canonical_serializer: Agent — OpenAI / dot / add_dav1d_precedent
+  reviewed_packet_commit: 31ee141cdb420aaf8d53751b303fbff5568a999f
+  reviewed_packet_blob: 986be983e33f068994d0da45a5585cd104a015a2
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/31ee141cdb420aaf8d53751b303fbff5568a999f/01_State/Inbox/review-packets/dav1d-20261030.yaml
