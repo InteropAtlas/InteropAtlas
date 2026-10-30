@@ -1,0 +1,51 @@
+contract_version: candidate-object-v1
+candidate_id: javascript_whatwg_url
+label: whatwg-url JavaScript URL library — 17.3.0
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: jsdom/whatwg-url
+- namespace: npm
+  value: whatwg-url
+locators:
+- url: https://github.com/jsdom/whatwg-url
+  role: official
+- url: https://github.com/jsdom/whatwg-url/tree/6a0e2ad72245ec3b7dfb122709c9f5762313b928
+  role: dated
+- url: https://www.npmjs.com/package/whatwg-url/v/17.3.0
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - At actual B 2e73c886b268f5386c165e37d2cecb7a39b498ce, all256 canonical id and247 candidate_id fields plus
+    normalized github:jsdom/whatwg-url and npm:whatwg-url show no collision. All196 relation targets,91 string
+    and105 structured, show no incoming URL relation. This is a library, not the URL standard, a standard edition,
+    native browser URL, python_rfc3986 or RFC3986; no merge or interchangeability inferred. new means bounded
+    no-known-collision, not global uniqueness or acceptance.
+  merge_authorized: false
+unknowns:
+- 仅固定 npm whatwg-url 17.3.0 / jsdom 源 commit 6a0e2ad72245ec3b7dfb122709c9f5762313b928 的有界 URL/URLSearchParams
+  解析、序列化、live query 与所查低层算法。README 实现基线为 URL spec fde3f74f063341a28d437216f75735b8b40128f5，不新建标准版本，不重新核准历史845bafca或旧
+  alternative_to。解析成功、非致命 validationErrors 与 grammar isValidURLString 不等价；允许的 grammar/诊断分歧没有实测见证。WebIDL 转换可先抛错；setter
+  可先改 host 后遇端口失败，不保证原子性；词法归一化、重复有序 query/form重写及空标记丢失、低层记录不一致和 file origin 实现选择均适用。仅使用既有 resource_identification
+  的标识语法/记录处理含义，不推断网络获取、安全、永久身份、RFC3986互换、完整或当前符合性。全部操作边界在对象中英可见描述中保留，不靠隐藏 context 才成立。
+- 'Bounded parsing/serialization, URL/URLSearchParams live queries and inspected low-level algorithms of npm whatwg-url
+  17.3.0 at source 6a0e2ad72245ec3b7dfb122709c9f5762313b928. The README''s declared URL-spec baseline is fde3f74f063341a28d437216f75735b8b40128f5:
+  no new standard edition or reapproval of historical 845bafca/old alternative_to. Parse success, nonfatal validationErrors
+  and grammar isValidURLString are not equivalent; no actual grammar/diagnostic-disagreement witness was found.
+  WebIDL conversion may throw first; setters can mutate host before port failure without universal atomicity.
+  Lexical normalization, ordered duplicate query/form rewriting, empty-marker loss, inconsistent low-level records
+  and file-origin implementation choice remain limits. Existing resource_identification concerns identifier syntax/record
+  processing, not fetching, security, permanent identity, RFC3986 interchangeability or full/current conformance.
+  Complete operative Chinese and English limits remain in the object''s visible description, not only hidden context.'
+- 必须保留对象完整中英描述中的三种有效性、WebIDL转换抛错、setter先改后失败、词法丢失/live query、底层record非验证、file origin及ToASCII路径边界；预审conditional
+  GO不是精确候选接纳。
+- Finite observations and selected upstream runner overlap; published wrappers and exact dependencies, FormData
+  skip, promise_test no-op and older-sync groups limit interpretation; no all-input/current-standard/security/fetch/adoption
+  proof.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_author
+  reviewer: null
