@@ -1,0 +1,237 @@
+id: python_semver
+type: system
+kind: library
+name_zh: Python semver 版本解析与比较库
+name_en: Python semver version parsing and comparison library
+description_zh: 'Python semver 是 python-semver/python-semver / PyPI semver 发布的 Python 库；本记录固定 3.1.0（PyPI 工件发布于 2026-09-12），源码
+  commit 642d1bc8949d38cca7922df478d0f2c06513f99d，声明 Python >=3.10。一个有界 implements 只覆盖默认严格解析和在宿主整数处理限制内的有效 SemVer
+  字符串优先级比较，连接既有 Semantic Versioning 2.0.0；version_expression 表示版本语法与顺序，不证明软件公共 API 的真实兼容性、发布内容不可变或版本递增决策符合规范，也不改变
+  SemVer / CalVer 或 IA 的版本策略。规范对 0.y.z 初始开发和先行版本兼容性的不确定性仍适用。
+
+
+  默认 Version.parse 要求 MAJOR.MINOR.PATCH、ASCII 标识符、核心数字及数字型先行标识符无多余前导零；构建标识符可有前导零。optional_minor_and_patch=True 是补零扩展，不是规范的完整版本语法。构造器、replace
+  和集合比较走 int() / str() 转换而非同一语法验证，bool、浮点数和数字字符串可被转换；任意 prerelease/build 可造成非 SemVer 值。实际观察 Version(1,2,3,''01'')
+  与 Version(1,2,3,''1'') 比较相等，却具有不同 hash，并在所测 set 中保留两个元素；这是无效构造值的反例，不是严格解析有效版本的反例。字符串形式再交给严格解析会拒绝 ''01''。
+
+
+  有效版本的 build 元数据被保存在表示中，但比较、相等和 hash 不使用 build：1.2.3+a 与 1.2.3+b 同优先级且同 hash，原字符串并不相同。有限规范顺序示例通过不代表任意输入可比较：在本次
+  CPython 3.12.14 默认 4300 位整数转换限制下，超限核心数字解析抛 ValueError，而超限数字型先行标识符可先解析成功、在比较转 int 时再抛 ValueError。支持超过 64 位的有限样例不等于无限长度支持。parse
+  接受 str / UTF-8 bytes；无效 UTF-8 可抛 UnicodeDecodeError。is_valid 只捕获 ValueError（含该 UnicodeDecodeError），错误类型的 TypeError
+  可传播，不能把它当作所有输入均返回布尔值的验证器。
+
+
+  match 只支持 <、>、<=、>=、==、!= 六个单比较符，以及不带运算符的完整版本相等；单个 =、caret、tilde、wildcard 和复合 npm range 不支持。它不是 PEP 440 处理器、依赖求解器或
+  npm range 兼容实现。is_compatible 是有方向的字段启发式，不执行实际 API 兼容性检查：正 major 时比较同 major、other.minor 不小于自身且 prerelease 字段相同，忽略
+  patch/build；有效 0.y.z 版本要求前四部分相同，仍忽略 build。正 major 下甚至较低 patch 可返回 true；这不证明兼容、安全升级或依赖可用。
+
+
+  可选 fast_semver_rs_backend 在已安装时可能自动导入；仅默认严格 parse 路径委派，optional_minor_and_patch 路径不委派。委派调用/构造中的 ValueError 回退
+  Python，其他异常不自动回退。本次真实 source / wheel 运行均未安装或执行该 native backend；研究脚本的五项替代函数插桩只观察 Python 委派/回退控制流，不能证明 Rust backend
+  等价、性能或安全。没有 native、跨 Python 版本或平台矩阵保证。
+
+
+  固定源码有 114 个 Git blob，其中两个 symlink 的目标文本与所指仓库内文件内容均已核对；wheel 18783 字节、sdist 304162 字节，SHA-256 与 PyPI 元数据相符。只有八个
+  runtime package 文件核对为 source / wheel / sdist 原字节相同，不声称整个包相同、可重复构建、签名或供应链认证。研究者新跑 87 项记录（82 项有限观察及 5 项替代函数控制流），作者从重建输入亲自重放，并另写
+  47 条有限断言加一个无效构造值 hash/set 观察；独立预审的 33 项观察与这些及上游测试互有重叠，不相加覆盖。固定上游 tests/docs 在 Python 3.12.14 的 source 模式与 wheel
+  模式各报告 416 pass、1 native skip；source 保持 .pytest.ini，wheel 仅将 pytest pythonpath 改为 tests 以导入安装的 wheel，没有测试适配器或测试源码补丁。显示的覆盖率排除了
+  pragma-no-cover 的 native 路径，不是完整标准符合性。测试环境使用固定 wheel 和测试依赖，未构建 semver；另有 -I -S 直接读取 wheel 的标准库-only 有限探针。
+
+
+  只记录上述固定实现切片，不主张完整 SemVer 符合性、生产推荐、IA 采用、实际 API 兼容、依赖解析、native 等价/性能、安全、签名证明或未来兼容。既有标准与能力、engine_v0_1_uses_semver
+  / semver_alternative_calver 不因收录此库重新核准。
+
+
+  English scope and limitations:
+
+
+  Python semver is the Python library published as python-semver/python-semver / PyPI semver, pinned here to 3.1.0
+  (PyPI artifacts published 2026-09-12), source commit 642d1bc8949d38cca7922df478d0f2c06513f99d, declaring Python
+  >=3.10. One bounded implements edge covers default strict parsing and precedence comparison of valid SemVer strings
+  within host integer-processing limits, against the existing Semantic Versioning 2.0.0 object. Existing version_expression
+  means version syntax and order, not proof of actual public-API compatibility, immutable released contents or correct
+  version-increment decisions. No SemVer/CalVer or IA versioning-policy change; SemVer''s initial-development and
+  prerelease compatibility uncertainty remains.
+
+
+  Default Version.parse requires MAJOR.MINOR.PATCH, ASCII identifiers and no extra leading zeros in core numbers
+  or numeric prerelease identifiers; build identifiers may have leading zeros. optional_minor_and_patch=True is
+  a zero-filling extension, not the complete normative version grammar. Constructor, replace and collection comparisons
+  use int()/str() conversion rather than that same grammar validation: bools, floats and numeric strings may be
+  coerced, and arbitrary prerelease/build fields may create non-SemVer values. Observed Version(1,2,3,''01'') and
+  Version(1,2,3,''1'') compare equal but have different hashes and retain two elements in the tested set. This concerns
+  invalid constructed values, not valid strictly parsed versions; strict reparsing rejects the ''01'' string.
+
+
+  For valid versions, build metadata is retained in representation but ignored in precedence, equality and hashing:
+  1.2.3+a and 1.2.3+b compare equally and hash equally without lexical identity. Passing finite specification-order
+  examples does not make every input comparable. Under this CPython 3.12.14 run''s default 4300-digit integer-conversion
+  limit, oversized core numbers fail parsing with ValueError; an oversized numeric prerelease can parse successfully
+  but fail later comparison during int conversion. Finite support beyond 64 bits is not unlimited-length support.
+  parse accepts str and UTF-8 bytes; invalid UTF-8 can raise UnicodeDecodeError. is_valid catches only ValueError
+  (including that UnicodeDecodeError), while unsupported input types can propagate TypeError: it is not a total
+  boolean validator for arbitrary values.
+
+
+  match supports six single operators <, >, <=, >=, == and != plus bare complete-version equality. Single =, caret,
+  tilde, wildcard and compound npm ranges are unsupported. It is not a PEP 440 processor, dependency solver or npm-range
+  implementation. is_compatible is a directional field heuristic, not actual API testing: for positive major versions
+  it checks equal major, other.minor >= self.minor and identical prerelease while ignoring patch/build; valid 0.y.z
+  versions must have identical first four parts, still ignoring build. A lower patch can therefore return true for
+  positive-major versions without proving compatibility, upgrade safety or dependency availability.
+
+
+  The optional fast_semver_rs_backend may be imported automatically when installed. Only default strict parse delegates;
+  optional_minor_and_patch parsing does not. ValueError during delegated parsing/construction falls back to Python,
+  not arbitrary exceptions. Actual source and wheel executions here did not install or execute that native backend.
+  Five replacement-function instrumentation records observe only Python delegation/fallback control flow, not Rust-backend
+  equivalence, performance or security; no native, multi-Python or platform-matrix assurance.
+
+
+  The fixed source has 114 Git blobs, including two symlinks whose target text and resolved in-repository file contents
+  were checked. The 18783-byte wheel and 304162-byte sdist match PyPI-advertised SHA-256. Only eight runtime package
+  files are raw-byte-equal across source/wheel/sdist, not the whole packages, a reproducible build, a signature
+  or supply-chain authentication. Fresh researcher execution records 87 cases (82 finite and five substitute-function
+  control-flow observations), personally replayed by the author from reconstructed inputs; the author also wrote
+  47 finite assertions and one invalid-constructor hash/set observation. Independent preflight''s 33 observations
+  overlap these and upstream tests and are never added as coverage. Fixed upstream tests/docs in source and wheel
+  modes each report 416 pass and one native skip on Python 3.12.14. Source mode keeps .pytest.ini; wheel mode changes
+  only pytest pythonpath to tests to import the installed wheel, without test adapter or test-source patch. Displayed
+  coverage excludes the native pragma-no-cover path and is not full standard conformance. The test environment uses
+  the fixed wheel and test dependencies without building semver; separate probes use -I -S and direct wheel access
+  with stdlib only.
+
+
+  Only this fixed implementation slice is recorded. No full SemVer conformance, production recommendation, IA adoption,
+  actual API compatibility, dependency resolution, native equivalence/performance, security, signature or future-compatibility
+  claim. Existing standard/capability records, engine_v0_1_uses_semver and semver_alternative_calver are not reapproved
+  by this addition.'
+description_en: 'Python semver is the Python library published as python-semver/python-semver / PyPI semver, pinned
+  here to 3.1.0 (PyPI artifacts published 2026-09-12), source commit 642d1bc8949d38cca7922df478d0f2c06513f99d, declaring
+  Python >=3.10. One bounded implements edge covers default strict parsing and precedence comparison of valid SemVer
+  strings within host integer-processing limits, against the existing Semantic Versioning 2.0.0 object. Existing
+  version_expression means version syntax and order, not proof of actual public-API compatibility, immutable released
+  contents or correct version-increment decisions. No SemVer/CalVer or IA versioning-policy change; SemVer''s initial-development
+  and prerelease compatibility uncertainty remains.
+
+
+  Default Version.parse requires MAJOR.MINOR.PATCH, ASCII identifiers and no extra leading zeros in core numbers
+  or numeric prerelease identifiers; build identifiers may have leading zeros. optional_minor_and_patch=True is
+  a zero-filling extension, not the complete normative version grammar. Constructor, replace and collection comparisons
+  use int()/str() conversion rather than that same grammar validation: bools, floats and numeric strings may be
+  coerced, and arbitrary prerelease/build fields may create non-SemVer values. Observed Version(1,2,3,''01'') and
+  Version(1,2,3,''1'') compare equal but have different hashes and retain two elements in the tested set. This concerns
+  invalid constructed values, not valid strictly parsed versions; strict reparsing rejects the ''01'' string.
+
+
+  For valid versions, build metadata is retained in representation but ignored in precedence, equality and hashing:
+  1.2.3+a and 1.2.3+b compare equally and hash equally without lexical identity. Passing finite specification-order
+  examples does not make every input comparable. Under this CPython 3.12.14 run''s default 4300-digit integer-conversion
+  limit, oversized core numbers fail parsing with ValueError; an oversized numeric prerelease can parse successfully
+  but fail later comparison during int conversion. Finite support beyond 64 bits is not unlimited-length support.
+  parse accepts str and UTF-8 bytes; invalid UTF-8 can raise UnicodeDecodeError. is_valid catches only ValueError
+  (including that UnicodeDecodeError), while unsupported input types can propagate TypeError: it is not a total
+  boolean validator for arbitrary values.
+
+
+  match supports six single operators <, >, <=, >=, == and != plus bare complete-version equality. Single =, caret,
+  tilde, wildcard and compound npm ranges are unsupported. It is not a PEP 440 processor, dependency solver or npm-range
+  implementation. is_compatible is a directional field heuristic, not actual API testing: for positive major versions
+  it checks equal major, other.minor >= self.minor and identical prerelease while ignoring patch/build; valid 0.y.z
+  versions must have identical first four parts, still ignoring build. A lower patch can therefore return true for
+  positive-major versions without proving compatibility, upgrade safety or dependency availability.
+
+
+  The optional fast_semver_rs_backend may be imported automatically when installed. Only default strict parse delegates;
+  optional_minor_and_patch parsing does not. ValueError during delegated parsing/construction falls back to Python,
+  not arbitrary exceptions. Actual source and wheel executions here did not install or execute that native backend.
+  Five replacement-function instrumentation records observe only Python delegation/fallback control flow, not Rust-backend
+  equivalence, performance or security; no native, multi-Python or platform-matrix assurance.
+
+
+  The fixed source has 114 Git blobs, including two symlinks whose target text and resolved in-repository file contents
+  were checked. The 18783-byte wheel and 304162-byte sdist match PyPI-advertised SHA-256. Only eight runtime package
+  files are raw-byte-equal across source/wheel/sdist, not the whole packages, a reproducible build, a signature
+  or supply-chain authentication. Fresh researcher execution records 87 cases (82 finite and five substitute-function
+  control-flow observations), personally replayed by the author from reconstructed inputs; the author also wrote
+  47 finite assertions and one invalid-constructor hash/set observation. Independent preflight''s 33 observations
+  overlap these and upstream tests and are never added as coverage. Fixed upstream tests/docs in source and wheel
+  modes each report 416 pass and one native skip on Python 3.12.14. Source mode keeps .pytest.ini; wheel mode changes
+  only pytest pythonpath to tests to import the installed wheel, without test adapter or test-source patch. Displayed
+  coverage excludes the native pragma-no-cover path and is not full standard conformance. The test environment uses
+  the fixed wheel and test dependencies without building semver; separate probes use -I -S and direct wheel access
+  with stdlib only.
+
+
+  Only this fixed implementation slice is recorded. No full SemVer conformance, production recommendation, IA adoption,
+  actual API compatibility, dependency resolution, native equivalence/performance, security, signature or future-compatibility
+  claim. Existing standard/capability records, engine_v0_1_uses_semver and semver_alternative_calver are not reapproved
+  by this addition.'
+version: 3.1.0
+external_identifiers:
+- namespace: github
+  value: python-semver/python-semver
+- namespace: pypi
+  value: semver
+official_url: https://github.com/python-semver/python-semver
+versions:
+- version: 3.1.0
+  date: '2026-09-12'
+  status: released
+  url: https://pypi.org/project/semver/3.1.0/
+domains:
+- software_engineering
+- versioning
+capabilities:
+- version_expression
+scope_notes_zh: 完整中英文同置 description_zh，按既有 renderer 在 HTML/Markdown/search 可见；description_en 保留同样英文。隐藏字段不能代替操作边界。
+scope_notes_en: Complete operative Chinese and English share the existing visible description_zh; description_en
+  retains the same English. Hidden fields are not substituted for limits.
+sources:
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/README.rst
+  title: Python semver 3.1.0 — Official library identity and SemVer link
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/version.py
+  title: Python semver 3.1.0 — Parser, precedence, coercion, match, compatibility and native dispatch
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/pyproject.toml
+  title: Python semver 3.1.0 — Package and Python requirement, optional native dependency
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/__about__.py
+  title: Python semver 3.1.0 — Fixed source version identity
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/.pytest.ini
+  title: Python semver 3.1.0 — Upstream tests/docs and import/coverage configuration
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/semver/3.1.0/
+  title: PyPI semver 3.1.0 — release artifacts and upload date
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/semver/semver/blob/f99d5485190a47c0863949e7da810a5553e0ed4d/semver.md
+  title: Semantic Versioning 2.0.0 — fixed rules 1–11 and grammar
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T05:24:52.412106+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; fixed source/spec
+  reading and fresh author replay, not independent acceptance
+record_created_at: '2026-10-30T05:44:34.416837+00:00'
+record_updated_at: '2026-10-30T05:44:34.416837+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_semver
+  acceptance_event_id: accept-20261030-python-semver-3-1-python_semver
+  reviewed_candidate_blob: 1fd753322c09e3e993a37a394374f0ae512285df
+  reviewed_against_commit: fb5bb68524de15ae68659135a00506cf176992de
+  candidate_executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+  canonical_serializer: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewed_packet_commit: fb5bb68524de15ae68659135a00506cf176992de
+  reviewed_packet_blob: 0fce0b3a6efbbb23caeae69054a9412e9eacc875
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/fb5bb68524de15ae68659135a00506cf176992de/01_State/Inbox/review-packets/python-semver-3.1-20261030.yaml
