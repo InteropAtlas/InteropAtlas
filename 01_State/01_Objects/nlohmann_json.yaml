@@ -3,9 +3,131 @@ type: system
 kind: library
 name_zh: JSON for Modern C++ 数据表示库
 name_en: JSON for Modern C++ library
-description_zh: 以 nlohmann/json 发布的仅头文件 C++11 库，提供 JSON 值、parse 解析与 dump 序列化；本记录固定到 3.12.0。
-description_en: The header-only C++11 library published as nlohmann/json, providing JSON values, parse and dump
-  operations; pinned here to release 3.12.0.
+description_zh: '以 nlohmann/json 发布的仅头文件 C++11 库，提供 JSON 值、parse 解析与 dump 序列化；本记录固定到 3.12.0（commit 55f93686c01528224f448c19128836e7df245f72）。2026-10-30
+  的有限源码实验补充输入消费与值提取边界，不改变原始收录或既有 implements → json_rfc8259 关系的范围，也不是完整 RFC 8259 符合性证明。
+
+
+  输入边界：对于显式长度为 15 字节的 `{"a":1}\0{"b":2}`（\0 表示一个真实 NUL 字节；hex 为 7b2261223a317d007b2262223a327d），完整 std::string 与
+  `std::vector<char>` 的 begin/end 范围分别传入 parse、accept，均只得到首对象或返回 true；不是调用方将 C 字符串预先截断。此处 lexer 在完整首值后的 token 边界把
+  NUL 当作结束标记，不能推广成“任何 NUL 都被接受”：引号内字符串中的真实 NUL 在对照例中抛 parse_error.101，accept 返回 false。同一 15 字节字符串流的 parse(istream)
+  消费 NUL 后留下 7 字节 `{"b":2}`；operator>> 仅取首对象，留下包含 NUL 的 8 字节后缀。
+
+
+  没有 NUL 的对照 `{"a":1} {"b":2}` 与 `{"a":1} garbage`，string、iterator 和 istream 的 parse 均抛 101，string/iterator 的 accept
+  均为 false；一次 operator>> 仍成功读取首对象并留下后缀，对两个对象的对照输入，两次连续 >> 可分别读取两个值。一次提取成功不等于全文验证；严格 parse 的这些正常拒绝行为也不能推导为始终检查调用方提供的每个字节。
+
+
+  成员与返回类型：`{"k":1,"k":2}` 和 `{"k":1,"\u006b":2}` 都得到单一 k=2，重复键例的 accept 为 true；转义后相同的成员名也会以后值覆盖。value(key, default)
+  的返回类型由默认参数推导，即使键已存在也按该类型取值：uint64 最大值 18446744073709551615 配默认 0，在本次 C++11 / GCC 主机上得到 int 的 -1；这是超范围无符号到有符号转换的本机观察，不是所有平台的保证。使用
+  uint64 默认值或显式 `value<std::uint64_t>` 可保留本例原值。3.5 配默认 0 得到 3，配 0.0 得到 3.5；只测试了可表示的浮点到整数转换，没有执行超范围浮点转换。缺失键配默认 7
+  返回 7 且不插入，已有 null 配整数默认则抛 type_error.302，不能把 null 当作缺失键。
+
+
+  过滤与错误必须区分：key 回调可以删除 drop 成员；回调拒绝顶层 123 后返回 null、并非 discarded，且与解析字面量 null 得到的值相等。语法错误在 allow_exceptions=false
+  时返回 discarded，即使同时使用拒绝回调也是如此。因此返回非 discarded 值并不证明原始内容未经筛选，null 也不单独说明输入就是字面量 null。
+
+
+  实验使用固定官方单头文件、默认 json 类型与异常/断言配置，在 Linux x86_64、G++ 14.2.0、-std=c++11 下运行；本机 int 为 32 位。作者的 28 个命名组与未修改的官方 value__return_type
+  示例已重放，另一个独立边界探针在 -O0/-O2 下结果相同；这些检查有重叠，不相加为覆盖率。输入仅为小型可信内存值、字符串与字符串流；没有 socket 或文件输入 API 测试。未运行完整上游套件、JSONTestSuite、fuzz、sanitizer、性能测试、跨实现互通或宿主应用测试，不作安全保证、漏洞判定、生产推荐或最新发行版结论。本次没有重新验证原收录的全部范围、宽字符路径或其他二进制格式。
+
+
+  English scope and limitations:
+
+
+  The header-only C++11 library published as nlohmann/json provides JSON values, parse and dump operations. This
+  record fixes release 3.12.0 at commit 55f93686c01528224f448c19128836e7df245f72. The bounded 2026-10-30 source
+  experiment adds input-consumption and value-extraction evidence without changing the original intake or the scope
+  of the existing implements → json_rfc8259 relation; it is not full RFC 8259 conformance proof.
+
+
+  Input boundaries: for the explicit 15-byte input `{"a":1}\0{"b":2}` (\0 denotes one actual NUL byte; hex 7b2261223a317d007b2262223a327d),
+  parse and accept receive the entire std::string or the full `std::vector<char>` begin/end range, yet return the
+  first object or true. The caller has not truncated a C string. At this token boundary after a complete first value,
+  the lexer treats NUL as an end marker; this does not mean every NUL is accepted. A control with an actual NUL
+  inside a quoted string throws parse_error.101 and accept returns false. For a stream containing the same 15 bytes,
+  parse(istream) consumes NUL and leaves the seven bytes `{"b":2}`; operator>> extracts only the first object, leaving
+  the eight-byte suffix including NUL.
+
+
+  The non-NUL controls `{"a":1} {"b":2}` and `{"a":1} garbage` throw 101 through string, iterator and istream parse,
+  and return false through string/iterator accept. One operator>> still extracts the first object and leaves the
+  suffix; for the two-object control, two consecutive extractions read the two values separately. Successful extraction
+  is not whole-input validation, and the normal strict-parse rejections do not establish that every supplied byte
+  is always checked.
+
+
+  Members and return types: `{"k":1,"k":2}` and `{"k":1,"\u006b":2}` both yield the single member k=2, and accept
+  returns true for the duplicate-key example. Names that coincide after escape decoding also overwrite the earlier
+  value. value(key, default) derives its return type from the default even when the key exists: uint64 maximum 18446744073709551615
+  with default 0 produces int -1 on this C++11 / GCC host. That out-of-range unsigned-to-signed conversion is a
+  host observation, not a portable result guarantee. A uint64 default or explicit `value<std::uint64_t>` preserves
+  the value in this example. For 3.5, default 0 returns 3 whereas 0.0 returns 3.5; only representable floating-to-integral
+  conversion was tested, not an out-of-range conversion. A missing key with default 7 returns 7 without insertion,
+  whereas a present null with an integer default throws type_error.302: null is not a missing key.
+
+
+  Filtering and errors are distinct: a key callback can remove a drop member. Rejecting top-level 123 through a
+  callback returns null, not discarded, and that value equals the result of parsing literal null. A syntax error
+  with allow_exceptions=false returns discarded even with a rejecting callback. A non-discarded result therefore
+  does not establish that the original content was retained without filtering, nor does null alone identify a literal-null
+  input.
+
+
+  The experiment used the fixed official single header, default json type and default exception/assertion configuration
+  on Linux x86_64 with G++ 14.2.0 and -std=c++11; int was 32-bit. The author''s 28 named groups and the unmodified
+  official value__return_type example were replayed; a separate independent boundary probe produced identical results
+  at -O0/-O2. These checks overlap and are not additive coverage. Inputs were tiny trusted memory values, strings
+  and string streams, with no socket or file-input API tests. No full upstream suite, JSONTestSuite, fuzzing, sanitizer,
+  benchmark, cross-implementation interoperability or host-application test was run. There is no security guarantee,
+  vulnerability determination, production recommendation or latest-release claim. This experiment does not revalidate
+  the entire original intake scope, wide-character paths or other binary formats.'
+description_en: 'The header-only C++11 library published as nlohmann/json provides JSON values, parse and dump operations.
+  This record fixes release 3.12.0 at commit 55f93686c01528224f448c19128836e7df245f72. The bounded 2026-10-30 source
+  experiment adds input-consumption and value-extraction evidence without changing the original intake or the scope
+  of the existing implements → json_rfc8259 relation; it is not full RFC 8259 conformance proof.
+
+
+  Input boundaries: for the explicit 15-byte input `{"a":1}\0{"b":2}` (\0 denotes one actual NUL byte; hex 7b2261223a317d007b2262223a327d),
+  parse and accept receive the entire std::string or the full `std::vector<char>` begin/end range, yet return the
+  first object or true. The caller has not truncated a C string. At this token boundary after a complete first value,
+  the lexer treats NUL as an end marker; this does not mean every NUL is accepted. A control with an actual NUL
+  inside a quoted string throws parse_error.101 and accept returns false. For a stream containing the same 15 bytes,
+  parse(istream) consumes NUL and leaves the seven bytes `{"b":2}`; operator>> extracts only the first object, leaving
+  the eight-byte suffix including NUL.
+
+
+  The non-NUL controls `{"a":1} {"b":2}` and `{"a":1} garbage` throw 101 through string, iterator and istream parse,
+  and return false through string/iterator accept. One operator>> still extracts the first object and leaves the
+  suffix; for the two-object control, two consecutive extractions read the two values separately. Successful extraction
+  is not whole-input validation, and the normal strict-parse rejections do not establish that every supplied byte
+  is always checked.
+
+
+  Members and return types: `{"k":1,"k":2}` and `{"k":1,"\u006b":2}` both yield the single member k=2, and accept
+  returns true for the duplicate-key example. Names that coincide after escape decoding also overwrite the earlier
+  value. value(key, default) derives its return type from the default even when the key exists: uint64 maximum 18446744073709551615
+  with default 0 produces int -1 on this C++11 / GCC host. That out-of-range unsigned-to-signed conversion is a
+  host observation, not a portable result guarantee. A uint64 default or explicit `value<std::uint64_t>` preserves
+  the value in this example. For 3.5, default 0 returns 3 whereas 0.0 returns 3.5; only representable floating-to-integral
+  conversion was tested, not an out-of-range conversion. A missing key with default 7 returns 7 without insertion,
+  whereas a present null with an integer default throws type_error.302: null is not a missing key.
+
+
+  Filtering and errors are distinct: a key callback can remove a drop member. Rejecting top-level 123 through a
+  callback returns null, not discarded, and that value equals the result of parsing literal null. A syntax error
+  with allow_exceptions=false returns discarded even with a rejecting callback. A non-discarded result therefore
+  does not establish that the original content was retained without filtering, nor does null alone identify a literal-null
+  input.
+
+
+  The experiment used the fixed official single header, default json type and default exception/assertion configuration
+  on Linux x86_64 with G++ 14.2.0 and -std=c++11; int was 32-bit. The author''s 28 named groups and the unmodified
+  official value__return_type example were replayed; a separate independent boundary probe produced identical results
+  at -O0/-O2. These checks overlap and are not additive coverage. Inputs were tiny trusted memory values, strings
+  and string streams, with no socket or file-input API tests. No full upstream suite, JSONTestSuite, fuzzing, sanitizer,
+  benchmark, cross-implementation interoperability or host-application test was run. There is no security guarantee,
+  vulnerability determination, production recommendation or latest-release claim. This experiment does not revalidate
+  the entire original intake scope, wide-character paths or other binary formats.'
 version: 3.12.0
 external_identifiers:
 - namespace: github
@@ -56,14 +178,46 @@ sources:
   title: JSON for Modern C++ 3.12.0 — MIT license notice
   language: en
   accessed: '2026-10-21'
-last_verified_at: '2026-10-21T01:10:32.968715+00:00'
-last_verified_by: Agent — OpenAI / dot，fixed-version JSON serialization evidence executor
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/single_include/nlohmann/json.hpp#L8615-L8619
+  title: JSON for Modern C++ 3.12.0 — token-boundary NUL and EOF end markers
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/single_include/nlohmann/json.hpp#L12951-L13032
+  title: JSON for Modern C++ 3.12.0 — strict parse/accept, callback filtering and discarded/null handling
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/single_include/nlohmann/json.hpp#L24185-L24189
+  title: JSON for Modern C++ 3.12.0 — non-strict stream extraction
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/single_include/nlohmann/json.hpp#L8908-L8915
+  title: JSON for Modern C++ 3.12.0 — duplicate object key slot lookup
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/single_include/nlohmann/json.hpp#L9097-L9099
+  title: JSON for Modern C++ 3.12.0 — assignment into an existing object key slot
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/basic_json/value.md#L108-L127
+  title: JSON for Modern C++ 3.12.0 — default-derived return type even for an existing key
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/features/parsing/parser_callbacks.md#L61-L69
+  title: JSON for Modern C++ 3.12.0 — skipped nested values and top-level null
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/nlohmann/json/blob/55f93686c01528224f448c19128836e7df245f72/docs/mkdocs/docs/api/operator_gtgt.md
+  title: JSON for Modern C++ 3.12.0 — stream extraction and input consumption
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T16:45:05.484703+00:00'
+last_verified_by: Agent — OpenAI / dot / update_nlohmann_input_evidence; fixed-source boundary replay
 record_created_at: '2026-10-21T01:14:39.614560+00:00'
-record_updated_at: '2026-10-21T01:14:39.614560+00:00'
+record_updated_at: '2026-10-30T16:47:18.940361+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / update_nlohmann_input_evidence
+  reviewer: Independent Agents — OpenAI / dot / verify_nlohmann_input_boundaries (semantic) and final_structure_review (structure)
   github_actor: ff6962757
 intake_provenance:
   candidate_id: nlohmann_json
