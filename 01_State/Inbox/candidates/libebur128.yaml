@@ -14,25 +14,25 @@ locators:
 - url: https://github.com/jiixyj/libebur128/releases/tag/v1.2.6
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
-  reasons:
-  - Distinct fixed C library; existing broadcast_loudness is a separately released Rust library, not a capability
-    or duplicate. Actual baseline/preflight has no identifier or candidate collision. review_required is not
-    acceptance.
+  state: duplicate
+  matched_canonical_ids:
+  - libebur128
   merge_authorized: false
+  reasons:
+  - Accepted as canonical libebur128 by accept-20261030-libebur128-1-2-6-libebur128. Original new-state candidate
+    33102a47d54f7295132a6e5904f41c5a8c918f1e and ordinary review_required route replay against genuine remote-frozen
+    ancestor 8e9bed533049a5f26454a4b669293e76fc75c953; this unique back-reference does not authorize identity merge.
 unknowns:
 - 固定 C libebur1281.2.6，仅既有measurement导航；无新capability、technical relations=[]，不改变已有Rust broadcast_loudness。PCM交错/帧数、有限缩放、mode/布局由调用方负责，未知mode/enum与NaN/超幅可接受，不是总验证器。I无完整合格块可-inf，M/S短输入可有限；4/5通道map不同于6通道index3。状态变更不是完整reset，默认历史可增长，histogram不保证相同，window分配算式仅source-bound无压力测试；truepeak版本/采样率相关。实际CMake两配置与有限75/26/20证据重叠，不是认证；官方suite
   NOT RUN、sndfile失败/拒绝和EBU条款边界保留。完整双语可见；无BS.1770-5/EBU R128v5完整implements、法律/健康/安全/生产/IA采用结论。
-- Fixed C libebur1281.2.6 with existing measurement navigation only; no capability or technical relation, no
-  change to existing Rust broadcast_loudness. Caller owns interleaved PCM/frame counts, finite scaling, modes/layout;
-  unknown flags/enums and NaN/out-of-range values can be accepted, not total validation. I may be -infinity
-  without eligible blocks while short M/S inputs can be finite; four/five-channel maps differ from six-channel
-  index3. Parameter changes are not full reset, history may grow, histogram need not match, window allocation
-  is a source-bound non-stress-tested caveat; true peak varies by version/rate. Actual two CMake builds and
-  overlapping75/26/20 finite evidence are not certification; upstream suite NOT RUN and sndfile/EBU terms boundaries
-  remain. Full visible bilingual limits; no complete BS.1770-5/EBU R128v5 implementation, legal/health/security/production/IA-adoption
-  conclusion.
+- Fixed C libebur1281.2.6 with existing measurement navigation only; no capability or technical relation, no change
+  to existing Rust broadcast_loudness. Caller owns interleaved PCM/frame counts, finite scaling, modes/layout; unknown
+  flags/enums and NaN/out-of-range values can be accepted, not total validation. I may be -infinity without eligible
+  blocks while short M/S inputs can be finite; four/five-channel maps differ from six-channel index3. Parameter
+  changes are not full reset, history may grow, histogram need not match, window allocation is a source-bound non-stress-tested
+  caveat; true peak varies by version/rate. Actual two CMake builds and overlapping75/26/20 finite evidence are
+  not certification; upstream suite NOT RUN and sndfile/EBU terms boundaries remain. Full visible bilingual limits;
+  no complete BS.1770-5/EBU R128v5 implementation, legal/health/security/production/IA-adoption conclusion.
 - No inferred relation to current BS.1770-5 or EBU R128v5 from broad README or -4 header references. No synthesized
   license_expression property.
 - Conditional local authoring GO is not exact semantic acceptance. Actual remote pending-only F and independent
@@ -40,4 +40,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
