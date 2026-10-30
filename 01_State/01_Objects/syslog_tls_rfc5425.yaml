@@ -1,0 +1,67 @@
+id: syslog_tls_rfc5425
+type: artifact
+kind: protocol
+name_zh: Syslog TLS 传输映射原始文献（RFC 5425）
+name_en: Syslog TLS Transport Mapping Original Publication (RFC 5425)
+official_name: Transport Layer Security (TLS) Transport Mapping for Syslog
+description_zh: 'RFC 5425 原版规定 Syslog 的 TLS 传输映射；§4.3 将 RFC 5424 的 SYSLOG-MSG 纳入按字节计数的消息分帧。保护仅逐跳提供，不是端到端来源认证；已认证传输对端不一定对应消息
+  HOSTNAME。协议没有应用层确认，连接中断时发送方不能确定远端应用收到哪些消息，不保证应用送达。固定 2009 年 3 月原始出版物；RFC 9662 后续更新未合并，不是当前完整安全或部署指南；勘误内容与状态未核验。原文标为
+  Standards Track；当前成熟度分类未重新核验。 RFC 9662 更新 TLS 要求、密码套件与协商，并禁止 early data；这里不将旧套件作为推荐。仅作文献记录，不是完整日志平台或实现符合性证明，也不表示
+  IA 采用；observability 仅作编辑导航。
+
+
+  English scope and limitations:
+
+
+  Original March 2009 RFC 5425 maps Syslog over TLS; section 4.3 frames RFC 5424 SYSLOG-MSG using octet counts.
+  Protection is hop-by-hop, not end-to-end origin authentication; an authenticated transport peer need not match
+  HOSTNAME. There are no application-layer acknowledgments or remote-application receipt guarantees. Connection
+  failure can leave receipt uncertain. RFC 9662 updates TLS requirements, cipher suites and negotiation and prohibits
+  early data; these updates are not consolidated here. This original-only record is NOT current complete security
+  or deployment guidance and recommends no old suites. The original header says Standards Track; current maturity
+  classification and errata contents/status are unverified. No full logging platform, implementation conformance
+  or IA adoption is asserted. Observability is editorial navigation only.'
+description_en: Original March 2009 RFC 5425 maps Syslog over TLS; section 4.3 frames RFC 5424 SYSLOG-MSG using
+  octet counts. Protection is hop-by-hop, not end-to-end origin authentication; an authenticated transport peer
+  need not match HOSTNAME. There are no application-layer acknowledgments or remote-application receipt guarantees.
+  Connection failure can leave receipt uncertain. RFC 9662 updates TLS requirements, cipher suites and negotiation
+  and prohibits early data; these updates are not consolidated here. This original-only record is NOT current complete
+  security or deployment guidance and recommends no old suites. The original header says Standards Track; current
+  maturity classification and errata contents/status are unverified. No full logging platform, implementation conformance
+  or IA adoption is asserted. Observability is editorial navigation only.
+version: RFC 5425 (March 2009 original publication)
+external_identifiers:
+- namespace: rfc
+  value: '5425'
+official_url: https://www.rfc-editor.org/rfc/rfc5425.html
+domains:
+- observability
+sources:
+- url: https://www.rfc-editor.org/rfc/rfc5425.html
+  title: RFC 5425 original March 2009 Standards Track publication — sections 3, 4.3, 6.3 and 9.1
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc9662.html
+  title: RFC 9662 sections 4, 6 and 8 — later update boundary, not consolidated here
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T22:32:15.642382+00:00'
+last_verified_by: Agent — OpenAI / dot / add_syslog_transport_standard; original publication and RFC9662 update
+  boundary only; current maturity and errata unverified
+record_created_at: '2026-10-30T22:33:39.924745+00:00'
+record_updated_at: '2026-10-30T22:33:39.924745+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_syslog_transport_standard
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_transport_standard/semantic_review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: syslog_tls_rfc5425
+  acceptance_event_id: accept-20261030-syslog-tls-rfc5425
+  reviewed_candidate_blob: a82d1610a1bb743a246243deb866858724830302
+  reviewed_against_commit: 5dea511c6569e47b803f5286795a1ea6d9dbb4a9
+  candidate_executor: Agent — OpenAI / dot / add_syslog_transport_standard
+  canonical_serializer: Agent — OpenAI / dot / add_syslog_transport_standard
+  reviewed_packet_commit: 5dea511c6569e47b803f5286795a1ea6d9dbb4a9
+  reviewed_packet_blob: 67a6ee2e9794c6e230bbbc21a2e78525acbb6a4b
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/5dea511c6569e47b803f5286795a1ea6d9dbb4a9/01_State/Inbox/review-packets/syslog-tls-rfc5425-20261030.yaml

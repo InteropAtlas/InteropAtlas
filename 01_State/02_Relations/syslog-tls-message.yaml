@@ -1,0 +1,38 @@
+id: syslog_tls_rfc5425_uses_syslog_rfc5424
+type: relation
+name_zh: RFC 5425 原始传输映射规范使用 RFC 5424 Syslog 消息
+name_en: RFC 5425 original transport mapping uses RFC 5424 Syslog messages
+source: syslog_tls_rfc5425
+relation: uses
+target: syslog_rfc5424
+context:
+  version_context:
+    source: RFC 5425 (March 2009 original publication)
+    target: RFC 5424 (March 2009 original publication)
+  conditions_zh: 文献级使用：RFC 5425 §4.3 直接将 RFC 5424 的 SYSLOG-MSG 纳入按字节计数的分帧；§9.1 确定其 2009 年 3 月规范引用身份。只记录原始出版物之间的使用，不表示部署、实现符合性、安全保证或
+    IA 采用。RFC 9662 后续更新未合并；不是当前完整安全或部署指南。保护逐跳，认证对端不一定是 HOSTNAME；无应用层确认或远端应用送达保证。两端勘误内容与状态均未核验。
+  conditions_en: 'Publication-level use: RFC 5425 section 4.3 directly imports RFC 5424 SYSLOG-MSG into octet-counted
+    framing; section 9.1 identifies the March 2009 normative reference. Original publications only, not deployment,
+    implementation conformance, security assurance or IA adoption. RFC 9662 updates are not consolidated; not current
+    complete security or deployment guidance. Protection is hop-by-hop, authenticated peer need not match HOSTNAME,
+    and there are no application acknowledgments or remote-application receipt guarantees. Errata contents/status
+    for both endpoints remain unreviewed.'
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc5425.html
+  title: RFC 5425 original March 2009 Standards Track publication — sections 3, 4.3, 6.3 and 9.1
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc9662.html
+  title: RFC 9662 sections 4, 6 and 8 — later update boundary, not consolidated here
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T22:32:15.642382+00:00'
+last_verified_by: Agent — OpenAI / dot / add_syslog_transport_standard; original framing and reference identity
+  only; errata unreviewed
+record_created_at: '2026-10-30T22:33:39.924745+00:00'
+record_updated_at: '2026-10-30T22:33:39.924745+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_syslog_transport_standard
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_transport_standard/semantic_review
+  github_actor: ff6962757
