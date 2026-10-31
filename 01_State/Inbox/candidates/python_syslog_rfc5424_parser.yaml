@@ -17,11 +17,13 @@ locators:
 - url: https://github.com/EasyPost/syslog-rfc5424-parser/tree/578bf58922a8cb90c3340f072a307721642cb8ff
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_syslog_rfc5424_parser
   reasons:
-  - Fresh main, State and public issue/PR search found no existing library subject; distinct from the existing one-way
-    logging formatter.
+  - Accepted as canonical python_syslog_rfc5424_parser by accept-20261031-python-syslog-rfc5424-parser. Frozen new-state
+    Candidate f925f2fdac13e94d1e94a25dff0d451ff6bb8c87 and review_required route are replayed against actual ancestor
+    f5ef423741ff2a869e3159b98fe22032af2d6984; back-reference prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'EasyPost Python Syslog message parser library, pinned to 0.3.2 at commit 578bf58922a8cb90c3340f072a307721642cb8ff.
@@ -46,4 +48,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / fixed syslog parser semantic review
