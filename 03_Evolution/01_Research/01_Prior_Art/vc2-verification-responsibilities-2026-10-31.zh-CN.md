@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-10-31T10:08:00+00:00
-Document Updated At: 2026-10-31T10:08:00+00:00
+Document Updated At: 2026-10-31T10:48:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -71,3 +71,9 @@ IA 记录基线为 [`bcc579c63474899864747dd2951b70ca5f6c4235`](https://github.c
 ## 交付边界
 
 仅新增本研究及既有 Research README 阅读入口；不新增对象、技术边、候选、schema、分类、UI、renderer 或维护制度，不扩大旧接纳范围、不改变既有 holds。不依赖全域 snapshot 发布，不生成后续套件/密钥/部署清单。适用本地检查、实际提交 CI 和独立逐行终稿复核分别记录于交付 PR；自检与 CI 不冒充独立复核。仅声称 GitHub 文档入口，不声称站点对象页或 Pages 部署。
+
+## 后续附记：包装层静态证据回填（2026-10-31）
+
+[PR #631](https://github.com/InteropAtlas/InteropAtlas/pull/631) 已将同一固定 7.3.0 提交的 `verifyCredential` 包装层静态读证据补入[既有 digitalbazaar_vc 对象](https://github.com/InteropAtlas/InteropAtlas/blob/a55f15dd792d6d98b37b0e668545c032f6ba6a0e/01_State/01_Objects/digitalbazaar_vc.yaml)。这是旧对象证据说明的补充，不是新增实现关系；上文原基线、三职责矩阵与来源指纹作为当时记录保留，不因后续回填而改写。
+
+原 `createPresentation` 未签名构造与新增包装层两批证据均未执行，不能称为“旧运行与新静态”的对照。旧 `last_verified_at/last_verified_by` 及仅覆盖 numeric `version=2.0` 未签名 presentation 构造的 `implements` 窄边未变。新对象说明保留 truthy `credentialStatus` 条件、falsey `verified` 分支与 try 外解构限制；密码套件、密钥、loader、purpose、身份/状态及网络委派仍未审或执行，不证明验签成功、完整符合性或事实真实。
