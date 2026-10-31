@@ -5,11 +5,13 @@ name_zh: FFmpeg 多媒体软件发行体
 name_en: FFmpeg multimedia software distribution
 description_zh: 包含用于处理音视频、字幕及相关元数据的库和工具的软件发行体；本记录固定 9.0.2，记录其原生软件 FFV1 编解码，以及 HLS 播放列表读取与未加密 MPEG-TS 片段解复用路由的有界实现证据。
   另记录在所列条件下，未加密大端 DPX 2.0 单元素 10-bit RGB method-A、encoding=0 的软件解码静态源码对应；未编译运行，不代表完整/核心符合性、写入或时间码支持。
+  2026-10-31 的局部补证仅静态检视同一固定版本的旧式 libswscale 系数路径。SWS_CS_ITU709 为索引 1，其表注释明确写 Rec.709 (1990)；SWS_CS_DEFAULT 为索引 5，不是 709。sws_getCoefficients 对负数、大于 10 或索引 8 回退默认表，而索引 0/2/3（分别标为无 sequence_display_extension、未指定、保留）仍直接取表，不能当通用输入验证器。sws_setColorspaceDetails 接收独立输入/输出系数表、src/dst range 和 16.16 亮度/对比度/饱和度，调用者须检查返回码；所选旧式初始化在未设置条件成立时使用默认表和中性修正，不外推所有新 frame API 或 CLI 元数据默认。实际表初始化消费系数并按有限/全范围调整亮度或色度、应用修正、整数移位与裁剪；不是仅列出 API 名称。所核最小消费链为已初始化、同尺寸 YUV422P→RGB24 的 C fallback：无 resize/filter，满足格式/range 分派条件、未设 SWS_ACCURATE_RND、Bayer/auto dither、偶数输出高度，且架构优化未先替代该回调；sws_scale 经 convert_unscaled 消费 table_rV/table_gU/table_gV/table_bU。调用方还负责有效 planes/strides/slices 与上下文；这些前提不证明任意格式、尺寸、构建或后端均走此路径。矩阵和范围控制不等于 transfer/gamma、primaries、色适应、HDR/tone mapping 或端到端色彩管理。1990 表标签不被改写为 BT.709-6 身份；即使有限系数算术相合，也不证明该版规范符合性或逐像素精确/无损输出。本补证未安装、构建、运行 FFmpeg/FATE、媒体或网络测试，不建立性能、安全、第三方互通、生产适用性或 IA 采用；排除范围不表示整个 FFmpeg 缺少其他路径。不新增标准关系，也不刷新整条记录的 last_verified_at。
 description_en: A distribution of libraries and tools for processing audio, video, subtitles and related metadata;
   pinned to 9.0.2 here, with bounded evidence for native software FFV1 encoding/decoding and HLS playlist reading
   with unencrypted MPEG-TS segment demux routing. Also records static-source correspondence for software decoding
   of unencrypted big-endian DPX 2.0 with one 10-bit RGB method-A element and encoding 0, under the stated conditions.
   Not built or run; no full/core conformance, writing or timecode-support claim.
+  The partial 2026-10-31 supplement statically inspects only the same fixed release’s legacy libswscale coefficient path. SWS_CS_ITU709 is index 1, explicitly labeled Rec.709 (1990) in the table; SWS_CS_DEFAULT is index 5, not 709. sws_getCoefficients falls back for negative indices, values above 10 or index 8, while indices 0/2/3 (labeled no sequence_display_extension, unspecified and reserved respectively) still directly select table rows; it is not a general input validator. sws_setColorspaceDetails takes separate input/output coefficient tables, src/dst range and 16.16 brightness/contrast/saturation, and callers must check its return value. The selected legacy initialization uses the default table and neutral corrections only under its unset-state condition, not a statement about all newer frame APIs or CLI metadata defaults. Table initialization actually consumes the coefficients, adjusts luma or chroma for limited/full range, applies corrections and integer shifts/clipping. The smallest inspected consumer chain is an initialized same-size YUV422P-to-RGB24 C fallback, without resizing/filtering, satisfying format/range dispatch gates, without SWS_ACCURATE_RND, with Bayer/auto dithering and even output height, and only when architecture-specific optimization has not selected another callback; sws_scale reaches convert_unscaled and the table_rV/table_gU/table_gV/table_bU consumers. Callers also provide valid planes/strides/slices and context; these conditions do not establish this path for arbitrary formats, dimensions, builds or backends. Matrix/range controls are not transfer-function/gamma, primaries, chromatic-adaptation, HDR/tone-mapping or end-to-end color management. The 1990 table label is not relabeled BT.709-6, and finite coefficient arithmetic correspondence is not edition conformance or pixel-exact/lossless output evidence. No FFmpeg/FATE installation, build, execution, media or network test was performed for this supplement; no performance, security, third-party interoperability, production-suitability or IA-adoption claim. Exclusions do not imply absence of other FFmpeg paths. No standard relation is added and full-record last_verified_at is unchanged.
 version: 9.0.2
 external_identifiers:
 - namespace: github
@@ -146,14 +148,58 @@ sources:
   title: Printed p23 informative Fig C.3 — method A bit-placement corroboration, not separate normative requirement
   language: en
   accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.h#L458-L474
+  title: FFmpeg 9.0.2 — Legacy matrix identifiers and default coefficient-table getter
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.h#L671-L687
+  title: FFmpeg 9.0.2 — Legacy colorspace setter — separate coefficient/range and fixed-point correction inputs
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L36-L75
+  title: FFmpeg 9.0.2 — 1990-labeled 709 row, getter fallback and real lookup-table consumers
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L550-L598
+  title: FFmpeg 9.0.2 — Architecture-first selection and C YUV422P-to-RGB24 fallback
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L717-L914
+  title: FFmpeg 9.0.2 — YCbCr-to-RGB coefficient/range/correction table initialization
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L855-L1014
+  title: FFmpeg 9.0.2 — Legacy setter copies settings, propagates context and initializes actual tables
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L1175-L1179
+  title: FFmpeg 9.0.2 — Conditional legacy default-table and neutral-correction initialization
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L1629-L1647
+  title: FFmpeg 9.0.2 — Legacy unscaled dispatcher selection
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale_unscaled.c#L2392-L2431
+  title: FFmpeg 9.0.2 — Unscaled YUV-to-RGB format, accurate-rounding, dithering and height gates
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.c#L1163-L1192
+  title: FFmpeg 9.0.2 — scale_internal invokes the selected unscaled consumer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.c#L1586-L1604
+  title: FFmpeg 9.0.2 — Legacy sws_scale entry into the actual consumer chain
+  language: en
+  accessed: '2026-10-31'
 last_verified_at: '2026-10-24T11:22:31.270584+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed public FFmpeg source evidence executor
 record_created_at: '2026-10-24T11:30:22.636812+00:00'
-record_updated_at: '2026-10-29T09:11:24.025194+00:00'
+record_updated_at: '2026-10-31T23:07:50+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_dpx_relation
+  reviewer: Independent Agent — OpenAI / dot / FFmpeg swscale semantic review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: ffmpeg
