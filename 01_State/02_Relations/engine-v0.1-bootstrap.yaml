@@ -69,15 +69,15 @@ target:
 ---
 id: engine_v0_1_uses_bcp47
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-31T03:21:00Z"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: "Agent — OpenAI / dot (historical source-language convention documentary evidence only)"
+  reviewer: "Agent — OpenAI / dot independent semantic and structural reviewers (historical source-language convention documentary evidence only)"
   github_actor: "ff6962757"
 source:
   type: scenario
@@ -86,6 +86,19 @@ relation: uses
 target:
   type: standard
   id: bcp47_rfc5646
+evidence:
+  - url: https://github.com/InteropAtlas/InteropAtlas/blob/74e2ba07e665040907f8fc7e223b579ce8ea64da/schemas/base-object.schema.json
+    title: "Historical bootstrap base schema at original relation commit 74e2ba07: sources[].language explicitly documented as a BCP 47 language tag; declared field convention only, not tag validation, valid actual metadata, runtime checks, released v0.1 identity or full BCP 47 conformance"
+    language: en
+    accessed: 2026-10-31
+  - url: https://github.com/InteropAtlas/InteropAtlas/blob/74e2ba07e665040907f8fc7e223b579ce8ea64da/docs/experiments/engine-v0.1-bootstrap.zh-CN.md
+    title: "Historical pre-implementation bootstrap experiment at 74e2ba07: language-metadata context and explicit BCP 47 / RFC 5646 coverage identity; candidate listing is not implementation adoption or a release claim"
+    language: zh-CN
+    accessed: 2026-10-31
+  - url: https://www.rfc-editor.org/rfc/rfc5646.html
+    title: "RFC 5646 (September 2009), Abstract and §1: language-tag identification component of BCP 47, distinct from RFC 4647 matching; target identity boundary only, not evidence of IA implementation or current adoption"
+    language: en
+    accessed: 2026-10-31
 ---
 id: engine_v0_1_uses_unicode
 record_created_at: "2026-09-01T16:44:53+08:00"
