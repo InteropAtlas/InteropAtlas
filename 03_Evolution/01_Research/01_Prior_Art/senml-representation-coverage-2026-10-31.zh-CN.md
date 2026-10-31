@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-10-31T07:18:00+00:00
-Document Updated At: 2026-10-31T07:18:00+00:00
+Document Updated At: 2026-10-31T08:20:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -71,3 +71,25 @@ Latest Substantive Contribution:
 本次交付止于四行比较、八媒体的原文定位、固定 canonical 绑定和独立最终逐行复核，具体版本与适用仓库检查见交付 PR。作者自检、自动检查和独立复核分别提供不同证据，不相互冒充。
 
 没有新增 canonical 对象、技术关系、候选、UI、renderer、schema、分类或未来维护合同；也不从上述未匹配项制造后续补库清单。该研究通过既有 Research README 提供 GitHub 阅读，不宣称新增网站对象页或已触发 Pages 部署。未知保留，有限底图不能被表格行数解释为设备领域已经完备。
+
+## 后续交付附记（2026-10-31）
+
+本附记记录原研究之后的已交付增量，不改写上文 `7b7964e156edeb5012f9fa3cdba84015f4838655` 历史基线、四行八媒体、来源指纹或原验证范围。**新增文献关系与专用库的有限先例，不等于四表示族或流处理的实现符合性 unknown 已全部解决。** 下列证据仍链接既有 canonical YAML，不引入另一套机器读取模型。
+
+### JSON：一条限定文献使用关系已交付
+
+[PR #621](https://github.com/InteropAtlas/InteropAtlas/pull/621) 已交付于固定 M `80d7996a76a0ebdadb1d1d17e31266d468ae4676`：新增关系 [`senml_rfc8428_json_representations_use_json_rfc8259`](https://github.com/InteropAtlas/InteropAtlas/blob/80d7996a76a0ebdadb1d1d17e31266d468ae4676/01_State/02_Relations/senml-json-representations.yaml)，并在既有 [SenML 对象](https://github.com/InteropAtlas/InteropAtlas/blob/80d7996a76a0ebdadb1d1d17e31266d468ae4676/01_State/01_Objects/senml_rfc8428.yaml) 与 [JSON 对象](https://github.com/InteropAtlas/InteropAtlas/blob/80d7996a76a0ebdadb1d1d17e31266d468ae4676/01_State/01_Objects/json-rfc8259.yaml) 正文保留双端可见的范围说明。
+
+这条 `uses` 仅指 RFC 8428 原版 `application/senml+json` 与 `application/sensml+json` 使用 RFC 8259 编码，不要求其他表示使用 JSON 或每个实现支持 JSON。流与非流仍须分别协商；未终止的 SenSML 流不保证每个时刻都是完整 JSON 文本，任意 JSON 也不一定有效 SenML。不声称 JSON Text Sequences、完整验证、无损转换、实现符合性或 IA 采用；RFC 9100 和勘误未整合。双端正文可见不等于关系裸行已有内联 context，不宣称新增渲染机制。
+
+因此，原 JSON 行“当时未匹配 SenML 技术关系”保留为正确历史观察；后续新增的是一条有界文献关系，不是库实现或流消费证明。#621 的仓库检查、独立复核、P6 与 Pages/实际两端页面读回验证的是记录与交付，不是上游执行或协议认证。
+
+### 专用 Go 库：固定源码切片先例，不是全族符合性证明
+
+[PR #622](https://github.com/InteropAtlas/InteropAtlas/pull/622) 已交付于固定 M `a61d0ed88ff38149d9d3ec2e6ee75a5700c1400e`，新增完整软件库对象 [`farshidtz_senml`](https://github.com/InteropAtlas/InteropAtlas/blob/a61d0ed88ff38149d9d3ec2e6ee75a5700c1400e/01_State/01_Objects/farshidtz_senml.yaml) 及既有 industrial/measurement 编辑归属，**没有新增技术关系或能力断言**。主体为 `farshidtz/senml` / Go module `github.com/farshidtz/senml/v2`，固定官方 v2.0.0（2020-03-26）、源码 commit `320c4746a311e331e1d1b616d3dc5ad2d53e820d`；不是新造的 JSON 转换组件，也不称最新版本。
+
+已记录的有限静态源码先例包括 `Pack`/`Record` 测量与 base 字段、原地 `Normalize` 处理，以及完整 JSON Pack 的字节编解码。`EncodeJSON`/`DecodeJSON` 不自动调用 `Validate` 或 `Normalize`；示例中的显式调用流程未执行。`Validate` 仅作部分检查，空 Pack 不拒绝，负 BaseVersion 分支构造错误而不返回，字符串值按非零长度计数；不能据函数名推完整验证。`Normalize` 注释要求先验证，处理相对时间使用 `time.Now`，BaseTime 的零与缺失合并且只以非零值更新 base，因此未建立全部 base 重置、时间和版本情形的正确性。字符串值与 DataValue 的空值/缺失区别、DataValue 的 base64url 验证以及未知标签保留/尾下划线必理解检查亦有限，不能保证无损往返。
+
+固定 dispatcher 将 `application/senml+json` 路由到完整 JSON Pack codec，没有 `application/sensml+json` 或 EXI 分支；`media_types.go` 中 SenSML/EXI 常量不是实现证据。XML/CBOR/custom CSV 代码存在，但没有因此扩成已核验能力，CSV 流也不等于 SenSML 流。专用库身份与所读 JSON 路径补充了原研究之后的实现先例，却没有证明增量 SenSML、其他表示或完整 RFC 8428 符合性。
+
+#622 的检查、独立复核及页面交付验证只证明既有接受链、记录与呈现已交付；本次来源层仍是固定源码阅读，没有安装、构建或运行上游源码、示例或测试，也没有验证第三方互通、设备适用性、安全、性能或 IA 采用。原 CBOR/XML 精确文献版次区别、EXI 记录未匹配及各表示符合性 unknown 仍保留。此附记不新增补库清单、技术关系、分类或未来维护合同。
