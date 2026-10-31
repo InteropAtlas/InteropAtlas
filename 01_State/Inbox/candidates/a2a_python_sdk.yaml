@@ -17,10 +17,13 @@ locators:
 - url: https://github.com/a2aproject/a2a-python/tree/0d9dafb92328144384eca58a6e8ab80cb8f7d445
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - a2a_python_sdk
   reasons:
-  - Fresh State/public issue/PR search found no SDK subject; distinct from the existing A2A protocol and MCP SDK.
+  - Accepted as canonical a2a_python_sdk by accept-20261031-a2a-python-sdk. Frozen new-state Candidate 606795d43b78a9b5f688a0c42654da868b619660
+    and review_required route are replayed against actual ancestor 3a0f14a7e418a9b45e628fab625f66df7339e73f; back-reference
+    prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'A2A Python SDK (package a2a-sdk), pinned to official v1.3.0 / commit 0d9dafb92328144384eca58a6e8ab80cb8f7d445.
@@ -51,4 +54,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / fixed A2A SDK semantic review
