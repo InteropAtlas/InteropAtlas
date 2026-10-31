@@ -261,3 +261,49 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / Python RFC 9457 semantic review
   github_actor: ff6962757
+---
+id: openapi_3_2_1_uses_json_schema_2020_12
+type: relation
+name_zh: OpenAPI 3.2.1 Schema Object 默认方言使用 JSON Schema 2020-12
+name_en: OpenAPI 3.2.1 Schema Object default dialect uses JSON Schema 2020-12
+source: openapi_3.2.1
+relation: uses
+target: json_schema_2020_12
+context:
+  version_context:
+    source: OpenAPI Specification 3.2.1 (10 September 2026), authoritative versioned HTML
+    target: JSON Schema Draft 2020-12 general-purpose meta-schema vocabularies
+  conditions_zh: 仅表述固定 3.2.1 Schema Object 默认方言的基础：2020-12 通用元模式词汇加 OAS base vocabulary。不是整个 OpenAPI 文档或所有
+    API 载荷都采用 JSON Schema；也不指定某次日期化 3.2/dialect/YYYY-MM-DD 迭代。资源根 $schema 覆盖 jsonSchemaDialect 默认值；工具必须支持 OAS
+    方言，对其他方言支持可选。通用实现可将 OAS base vocabulary 关键词作为未知关键词；format 默认不作验证，类型专用关键词不隐含 type 约束。此文献使用关系不证明完整 OAS 语义、特定验证器符合性、跨版本兼容或
+    HTTP API 互通；未运行上游工具。
+  conditions_en: 'Limited to the default dialect foundation of the fixed 3.2.1 Schema Object: Draft 2020-12
+    general-purpose meta-schema vocabularies plus the OAS base vocabulary. Not the entire OpenAPI document
+    or all API payloads; no dated 3.2/dialect/YYYY-MM-DD iteration is selected. A resource-root $schema overrides
+    jsonSchemaDialect. Tooling must support the OAS dialect; other dialect support is optional. General implementations
+    may treat OAS base-vocabulary keywords as unknown. format is non-validating by default, and type-specific
+    keywords imply no type constraint. This document-use relation establishes neither complete OAS semantics,
+    specific validator conformance, cross-version compatibility nor HTTP API interoperability. No upstream
+    tooling was run.'
+evidence:
+- url: https://spec.openapis.org/oas/v3.2.1.html#schema-object
+  title: OpenAPI 3.2.1 — sections 4.24 and 4.24.1 default 2020-12 foundation and dated OAS 3.2 dialect identity
+  language: en
+  accessed: '2026-10-31'
+- url: https://spec.openapis.org/oas/v3.2.1.html#specifying-schema-dialects
+  title: OpenAPI 3.2.1 — section 4.24.7 resource-root override and optional other-dialect support
+  language: en
+  accessed: '2026-10-31'
+- url: https://spec.openapis.org/oas/v3.2.1.html#data-type-format
+  title: OpenAPI 3.2.1 — sections 4.24.3 and 4.24.3.1 type applicability and non-validating format default
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T19:54:56+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OpenAPI 3.2.1 source review
+record_created_at: '2026-10-31T19:54:56+00:00'
+record_updated_at: '2026-10-31T19:54:56+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 default-dialect evidence review
+  github_actor: ff6962757
