@@ -1,0 +1,164 @@
+packet_id: gdal_20261031
+status: pending_independent_semantic_review
+baseline_commit: 09f55a8fc6a4d4cdf9d2131add523faabb0862f6
+executor: Agent — OpenAI / dot / add_gdal_conversion_precedent
+reviewer: null
+review_scope:
+- One full GDAL system/software identity, bounded document-described GML-file to explicitly selected RFC7946 GeoJSON
+  path, zero technical relations/capabilities and one existing geospatial editorial membership.
+source_evidence:
+  method: Independently refetched seven cited first-party source files through GitHub connector at v3.10.3 commit
+    ed29baf16d20bccbe331d809e0bafd7afde03360; verified byte-for-byte equality with captured evidence and rechecked
+    byte count, SHA256 and git blob hashes. Read gml.rst, ogr2ogr.rst, geojson.rst and local writer branches. Existing
+    official annotated-tag metadata resolves v3.10.3 to that commit (unsigned tag); release published 2025-04-07,
+    non-draft/non-prerelease, immutable=false.
+  limitation: Document synthesis and local source reading, not upstream execution or complete ogr2ogr call-chain
+    validation. No signature verification, conformance test or entire dependency/license audit; only original summaries
+    and fixed source links are included.
+preflight:
+  fresh_main: 09f55a8fc6a4d4cdf9d2131add523faabb0862f6
+  collisions: []
+  search_limit: 'Fresh actual main after predecessor #617 final M release; current State exact identity search,
+    complete current open PR list (4 unrelated holds) and indexed open GDAL issue/PR search (0 results), not global
+    absence.'
+objects:
+- candidate_id: gdal
+  candidate_path: 01_State/Inbox/candidates/gdal.yaml
+  candidate_blob: a9de4a0863df343eeeb0af2c0e342441b9b1827e
+  proposed_path: 01_State/01_Objects/gdal.yaml
+  proposed_record:
+    id: gdal
+    type: system
+    kind: software
+    name_zh: GDAL 地理空间数据抽象库
+    name_en: GDAL — Geospatial Data Abstraction Library
+    official_name: GDAL — Geospatial Data Abstraction Library
+    description_zh: 'GDAL（Geospatial Data Abstraction Library）是栅格与矢量地理空间格式转换软件，含库与命令行工具；本记录固定 v3.10.3（commit ed29baf16d20bccbe331d809e0bafd7afde03360），不是新造的
+      GML 转换器或单独驱动对象。固定官方文档共同描述一条有限文件转换路径：GML 驱动读取可映射为简单要素模型的 GML2/GML3，ogr2ogr 转换简单要素文件格式，GeoJSON 写出时显式设置层创建选项
+      RFC7946=YES。该路径是三份文档的组合，不是官方原样给出的 GML→GeoJSON 命令示例，也不是实测成功；默认 RFC7946=NO，输出仍为 GeoJSON 2008。GML 读取须构建链接 Xerces
+      或 Expat，XML validation 默认关闭；缺失或无法解析 XSD 时的要素类与字段推断可能出错，字段类型及 XML 属性映射受配置影响。多个几何时默认通常只取最后识别的几何；XML geometry
+      元素选择规则、已理解的 XSD/GFS 多几何字段声明可改变这一行为，不能保证所有字段、几何或领域语义保留。CRS 识别依赖层内几何的 srsName 一致性，轴序取决于标识形式和配置；GeoJSON RFC7946
+      写出涉及 WGS84 重投影、可舍入坐标的精度设置及可配置日期线分割启发式，不是无损或任意 CRS 正确性保证。局部 writer 源码显示缺少 SRS 时仅警告并假定 WGS84，无法创建坐标变换时失败；未审完整
+      ogr2ogr 调用链。非有限数默认不写出，WRITE_NON_FINITE_VALUES 可放宽 JSON 数值限制，不能把所有选项均视为符合 RFC7946。这是本地文件转换先例，不保证无网络访问：DOWNLOAD_SCHEMA
+      默认 YES，目前针对看似 WFS response 的文档；可禁用 schema 下载并本地提供所需资源，但未验证完整无网络行为。此范围不涵盖独立 GMLAS 驱动。README 自述 MIT 许可，LICENSE.TXT
+      另列组件条款；不将全部依赖或发行包断言为无例外单一许可。未安装、构建或运行上游命令/测试，不证明完整 RFC7946、OGC 10-100r3、GML-SF0/SF2 或 Core 符合性、第三方互通、安全、性能、部署适用性或
+      IA 采用；不称最新版本。仅既有 geospatial 编辑导航，无技术关系或能力断言。
+
+
+      English scope and limitations:
+
+
+      GDAL (Geospatial Data Abstraction Library) is raster/vector geospatial format translation software with libraries
+      and command-line tools; this record fixes v3.10.3 at commit ed29baf16d20bccbe331d809e0bafd7afde03360, not
+      an invented GML converter or separate driver object. Fixed official documentation jointly describes a bounded
+      file-conversion path: the GML driver reads GML2/GML3 that maps to the simple-feature model, ogr2ogr converts
+      simple-feature file formats, and GeoJSON writing explicitly selects the RFC7946=YES layer creation option.
+      This is a synthesis of three documents, not a verbatim official GML-to-GeoJSON command example or an empirical
+      success; RFC7946 defaults to NO and output remains GeoJSON 2008. GML reading requires a build linked with
+      Xerces or Expat, and XML validation is disabled by default. Missing or unparseable XSD can trigger error-prone
+      feature-class and field inference; field types and XML-attribute mapping depend on configuration. By default,
+      reading multiple geometries normally takes only the last recognized geometry; the XML geometry element selection
+      rule and understood XSD/GFS declarations of multiple geometry fields can alter this behavior, not guarantee
+      preservation of all fields, geometries or domain semantics. CRS reporting depends on consistent srsName across
+      layer geometries, and axis order depends on identifier form and configuration. RFC7946 GeoJSON writing involves
+      WGS84 reprojection, precision settings that can round coordinates and configurable dateline-splitting heuristics,
+      not losslessness or correctness for arbitrary CRS. Local writer-source reading shows that a missing SRS only
+      warns and assumes WGS84, while failure to create a coordinate transformation fails the operation; the complete
+      ogr2ogr call chain was not audited. Nonfinite numbers are not written by default, but WRITE_NON_FINITE_VALUES
+      can relax JSON numeric restrictions, so all option combinations are not claimed RFC7946-conformant. This is
+      a local-file conversion precedent, not a guarantee of no network access: DOWNLOAD_SCHEMA defaults to YES,
+      currently for documents that look like WFS responses. Schema downloading can be disabled and required resources
+      supplied locally, but complete no-network behavior was not verified. This scope does not cover the separate
+      GMLAS driver. README describes an MIT license while LICENSE.TXT lists component terms; no exception-free single-license
+      claim for all dependencies or distribution content. No upstream installation, build, command/test execution,
+      full RFC7946, OGC 10-100r3, GML-SF0/SF2 or Core conformance, third-party interoperability, security, performance,
+      deployment suitability or IA adoption is established; no latest-version claim. Existing geospatial membership
+      is editorial navigation only, with no technical relation or capability assertion.'
+    description_en: 'GDAL (Geospatial Data Abstraction Library) is raster/vector geospatial format translation software
+      with libraries and command-line tools; this record fixes v3.10.3 at commit ed29baf16d20bccbe331d809e0bafd7afde03360,
+      not an invented GML converter or separate driver object. Fixed official documentation jointly describes a
+      bounded file-conversion path: the GML driver reads GML2/GML3 that maps to the simple-feature model, ogr2ogr
+      converts simple-feature file formats, and GeoJSON writing explicitly selects the RFC7946=YES layer creation
+      option. This is a synthesis of three documents, not a verbatim official GML-to-GeoJSON command example or
+      an empirical success; RFC7946 defaults to NO and output remains GeoJSON 2008. GML reading requires a build
+      linked with Xerces or Expat, and XML validation is disabled by default. Missing or unparseable XSD can trigger
+      error-prone feature-class and field inference; field types and XML-attribute mapping depend on configuration.
+      By default, reading multiple geometries normally takes only the last recognized geometry; the XML geometry
+      element selection rule and understood XSD/GFS declarations of multiple geometry fields can alter this behavior,
+      not guarantee preservation of all fields, geometries or domain semantics. CRS reporting depends on consistent
+      srsName across layer geometries, and axis order depends on identifier form and configuration. RFC7946 GeoJSON
+      writing involves WGS84 reprojection, precision settings that can round coordinates and configurable dateline-splitting
+      heuristics, not losslessness or correctness for arbitrary CRS. Local writer-source reading shows that a missing
+      SRS only warns and assumes WGS84, while failure to create a coordinate transformation fails the operation;
+      the complete ogr2ogr call chain was not audited. Nonfinite numbers are not written by default, but WRITE_NON_FINITE_VALUES
+      can relax JSON numeric restrictions, so all option combinations are not claimed RFC7946-conformant. This is
+      a local-file conversion precedent, not a guarantee of no network access: DOWNLOAD_SCHEMA defaults to YES,
+      currently for documents that look like WFS responses. Schema downloading can be disabled and required resources
+      supplied locally, but complete no-network behavior was not verified. This scope does not cover the separate
+      GMLAS driver. README describes an MIT license while LICENSE.TXT lists component terms; no exception-free single-license
+      claim for all dependencies or distribution content. No upstream installation, build, command/test execution,
+      full RFC7946, OGC 10-100r3, GML-SF0/SF2 or Core conformance, third-party interoperability, security, performance,
+      deployment suitability or IA adoption is established; no latest-version claim. Existing geospatial membership
+      is editorial navigation only, with no technical relation or capability assertion.'
+    version: 3.10.3
+    external_identifiers:
+    - namespace: github
+      value: OSGeo/gdal
+    official_url: https://github.com/OSGeo/gdal
+    domains:
+    - geospatial
+    sources:
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/README.md
+      title: GDAL v3.10.3 — full software identity and project description
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/doc/source/drivers/vector/gml.rst
+      title: GDAL v3.10.3 GML driver — limited simple-feature input, parsers, schema inference, CRS/axis order and
+        geometry reading
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/doc/source/programs/ogr2ogr.rst
+      title: GDAL v3.10.3 ogr2ogr — simple-feature file conversion and output/layer creation options
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/doc/source/drivers/vector/geojson.rst
+      title: GDAL v3.10.3 GeoJSON — default GeoJSON 2008, explicit RFC7946=YES, precision/dateline and nonfinite-number
+        options
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/ogr/ogrsf_frmts/geojson/ogrgeojsonwritelayer.cpp
+      title: GDAL v3.10.3 local writer — RFC7946 settings; not an end-to-end call-chain audit
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/ogr/ogrsf_frmts/geojson/ogrgeojsondatasource.cpp
+      title: GDAL v3.10.3 local writer — default RFC7946 false, missing-SRS assumption and transform-creation failure
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/blob/ed29baf16d20bccbe331d809e0bafd7afde03360/LICENSE.TXT
+      title: GDAL v3.10.3 — license text with component-specific terms; no legal-compatibility conclusion
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/OSGeo/gdal/releases/tag/v3.10.3
+      title: Official historical GDAL 3.10.3 release; not latest-version or deployment advice
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T06:40:28.016869+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_gdal_conversion_precedent; fixed documentation and local source
+      reading only; no upstream execution
+relations: []
+membership_proposals:
+- category_id: geospatial
+  ref:
+    surface: canonical
+    id: gdal
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: 70e22696841c11ecd3862774bcbd7c9b36c13e13e3f2419df42ec2142d00924a
+  git_blob: c6dddea089eb3ab324f388dbced04fd3367b8b37
+excluded_scope:
+- No technical relation to RFC7946, OGC 10-100r3, GML-SF0/SF2 or Core; no capabilities, invented component, baseline
+  GML standard, new type/taxonomy/schema/profile/UI/governance/maintenance change or held-work edits.
+- No changes to pygeoapi, GML Profile or existing encoding matrix; no third-party full-text mirror.
+materialization_boundary: Frozen new-state candidate retained in actual Git ancestry; exact independent semantic
+  and structural review plus applicable checks before acceptance. Proposed fields unchanged except lifecycle/contribution/intake
+  provenance.
