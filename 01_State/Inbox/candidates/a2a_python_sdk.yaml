@@ -1,0 +1,57 @@
+contract_version: candidate-object-v1
+candidate_id: a2a_python_sdk
+label: A2A Python SDK (1.3.0)
+publisher: A2A Project / a2a-python maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: a2aproject/a2a-python
+- namespace: pypi
+  value: a2a-sdk
+locators:
+- url: https://github.com/a2aproject/a2a-python
+  role: official
+- url: https://github.com/a2aproject/a2a-python/releases/tag/v1.3.0
+  role: dated
+- url: https://github.com/a2aproject/a2a-python/tree/0d9dafb92328144384eca58a6e8ab80cb8f7d445
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - a2a_python_sdk
+  reasons:
+  - Accepted as canonical a2a_python_sdk by accept-20261031-a2a-python-sdk. Frozen new-state Candidate 606795d43b78a9b5f688a0c42654da868b619660
+    and review_required route are replayed against actual ancestor 3a0f14a7e418a9b45e628fab625f66df7339e73f; back-reference
+    prevents duplicate creation, not identity merging.
+  merge_authorized: false
+unknowns:
+- 'A2A Python SDK (package a2a-sdk), pinned to official v1.3.0 / commit 0d9dafb92328144384eca58a6e8ab80cb8f7d445.
+  The subject is the whole SDK; this record inspects only its TaskStore / InMemoryTaskStore state-storage path,
+  not a fictional standalone class product or a claim that the entire SDK is memory-only. Each InMemoryTaskStore
+  instance holds an owner-to-task-ID nested dictionary. Save replaces the same owner/ID entry; missing get returns
+  None; missing delete is a no-op and deleting the final entry removes the empty owner bucket. Source explicitly
+  says process termination loses data. The interface wording persisting does not establish disk/database durability
+  for this implementation. Record deletion is not running-task cancellation, artifact revocation or durable erasure.
+  The default owner_resolver only returns context.user.user_name; default UnauthenticatedUser has an empty name,
+  and the same resolved name shares a bucket. The store itself does not authenticate, check is_authenticated or
+  automatically combine tenant into the key. Callers/custom resolvers determine grouping: no secure tenant-isolation
+  proof or reproduced exploit. Default use_copying=True wraps save/get/list with protobuf CopyFrom, not an arbitrary
+  Python object-graph deepcopy guarantee. Disabling copying retains and returns the same Task reference, allowing
+  caller mutation to change stored state without another save. Internal threading.RLock protects selected dictionary
+  operations, not multi-call transactions, cross-process locking or distributed consistency; copying is not durability.
+  Listing has filter/order/cursor logic and the source notes updates can move tasks before the cursor and skip them;
+  full pagination/snapshot correctness is not established. DefaultRequestHandler actually consumes the injected
+  store get and maps absence to TaskNotFoundError; this is not an executed request or proof that every SDK server
+  defaults to this store. Fixed source/test recipes were inspected only: no upstream installation, build, import,
+  execution, tests, agents or network exercise. pyproject declares Python >=3.10 and derives version dynamically
+  from Git, not tested contemporary environment/dependency compatibility. README protocol 1.0 support and 0.3 compatibility
+  claims were not independently verified here; no implements/uses edge is added. No complete protocol conformance,
+  long-term memory, recovery continuity, durable artifact delivery, database/cluster behavior, authentication/authorization,
+  security, performance, production suitability, interoperability or IA adoption is established. Exclusion does
+  not imply absence of other SDK storage implementations. Apache-2.0 is recorded from the fixed LICENSE, not legal-suitability
+  advice. Existing agents membership is editorial only; the A2A protocol identity and IA governance remain unchanged.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed A2A SDK semantic review
