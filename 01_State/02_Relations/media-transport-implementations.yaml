@@ -168,3 +168,76 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_hls_patch
   github_actor: ff6962757
+---
+id: pion_rtp_implements_rtp_rfc3550_base_packet
+type: relation
+name_zh: Pion RTP 1.10.6 有界实现 RTP 基础包布局编解码
+name_en: Pion RTP 1.10.6 implements bounded RTP base packet layout encoding/decoding
+source: pion_rtp
+relation: implements
+target: rtp_rfc3550
+context:
+  version_context:
+    source: Pion RTP 1.10.6; tag v1.10.6, commit 9a8f93554133824676326b43f068167fef01a884
+    target: RFC3550, July 2003; section 5.1 base layout and section 4 byte order
+  conditions_zh: 仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC 数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false
+    时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的 Packet.PaddingSize 保持零或一致。Unmarshal
+    的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP 会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录
+    A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。
+  conditions_en: 'From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload
+    and padding delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent padding
+    flags/sizes are caller preconditions, not general validity checks enforced by the library. With P=false both
+    PaddingSize fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize while
+    the deprecated Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer rather
+    than copying; callers own its lifetime and subsequent mutation. Source and test recipes were inspected only:
+    the upstream package was not installed, built or run. This does not establish complete RTP/RTCP sessions, SSRC
+    management, sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile interpretation,
+    Appendix A validation, transport delivery, SRTP/security, third-party interoperability or IA adoption; arbitrary
+    inputs have no byte-identical roundtrip guarantee. Header extensions and other functions are outside this evidence
+    slice, not asserted absent from the library.'
+evidence:
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/README.md#L1-L22
+  title: Pion RTP identity and upstream RFC3550 implementation claim
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L107-L154
+  title: Base header parsing and bounds checks; version is extracted rather than validated
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L230-L256
+  title: Packet payload and padding boundaries; payload aliases caller buffer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L272-L318
+  title: Base header serialization and caller-controlled fields
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L525-L568
+  title: Packet serialization, payload copy and padding bytes
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L610-L615
+  title: Effective padding size and deprecated-field fallback
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet_test.go#L1714-L1745
+  title: No-extension padding test recipes; inspected, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/releases/tag/v1.10.6
+  title: Official Pion RTP v1.10.6 release, published 2026-10-21
+  language: en
+  accessed: '2026-10-31'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-5.1
+  title: RFC3550 section 5.1 base packet layout; section 4 byte order
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:49:26+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Pion RTP source evidence executor
+record_created_at: '2026-10-31T21:05:00+00:00'
+record_updated_at: '2026-10-31T21:05:00+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  github_actor: ff6962757
