@@ -1,142 +1,17 @@
 packet_id: jq_20261031
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: 82c2eb00d086ed4439f40899ee8e6397134d22fb
+reviewed_packet_blob: b984d2820f5902f70f52c8e12ac43b6efca6d6c1
+reviewed_packet_path: 01_State/Inbox/review-packets/jq-20261031.yaml
 baseline_commit: c76e118230613ad765bf5c958eecc4edef2a0412
 executor: Agent — OpenAI / dot / add_jq_sequence_precedent
-reviewer: null
-review_scope:
-- One actual jq system/tool identity with bounded source-observed --seq pathway, zero technical relations/capabilities
-  and existing syntax editorial membership.
-source_evidence:
-  method: First-party source files at jq-1.8.1 commit 4467af7068b1bcd7f882defff6e7ea674c5357f4 independently fetched
-    via GitHub connector, tag resolved and release metadata read. Static CLI input setup/feed traced through util.c
-    to parser.
-  limitation: Source-only, no upstream installation/build/runtime/tests/corpus/network sends. No proven documentation
-    defect or empirical RS-less-input claim.
-preflight:
-  fresh_main: c76e118230613ad765bf5c958eecc4edef2a0412
-  collisions: []
-  search_limit: Current 01_State recursive identity search and indexed open jq/jqlang issue/PR searches; not exhaustive
-    global absence.
+acceptance_events: 01_State/Inbox/acceptance-events/jq-20261031.yaml
 objects:
 - candidate_id: jq
-  candidate_path: 01_State/Inbox/candidates/jq.yaml
-  candidate_blob: 150c1fac21715154d26d664b57bcbab8916fe6cb
-  proposed_path: 01_State/01_Objects/jq.yaml
-  proposed_record:
-    id: jq
-    type: system
-    kind: tool
-    name_zh: jq 命令行 JSON 处理工具
-    name_en: jq command-line JSON processor
-    official_name: jq
-    description_zh: 'jq 是命令行 JSON 处理工具；本记录固定检查 jq-1.8.1（commit 4467af7068b1bcd7f882defff6e7ea674c5357f4），不将整个工具改名为
-      --seq 组件或查询语言规范。源码中的 --seq 选项启用序列解析；普通 JSON 输出分支在每个过滤结果前写 RS（0x1E），序列化结果后通常写 LF（0x0A）。过滤器可产生零个、一个或多个结果；--stream
-      提供路径/值事件而非原始完整记录，--slurp 聚合输入。普通非原始输入驱动对解析错误发出警告并继续。手册描述丢弃后续输入直至 RS；但静态源码的错误分支先设为等待 RS，随后 parser_reset 又将状态设为
-      NORMAL，因此不把手册的恢复描述当作已验证行为。未建立数据修复、成功恢复、完整记录回滚或送达保证。-r 的字符串输出分支绕过 RS；-j 隐含原始输出并抑制 LF，--raw-output0 改用 NUL 终止；-R
-      不安装 JSON 解析器，-n 跳过自动输入但过滤器仍可显式读取输入。彩色输出可加入转义控制序列；原生 Windows jq.exe 文本模式会转换 LF 为 CRLF，手册提示使用 -b。通常以 UTF-8 输出非
-      ASCII 字符，-a 改用转义；jv_string_sized 的无效 UTF-8 字符串替换路径不证明所有无效输入均可接受或字节无损。数字截断保护也不证明所有标量的完整性验证。手册关于无 RS 输入的表述不作为实测保证：仅静态追踪了
-      CLI 设置、字节馈送与等待 RS 的解析器，未运行验证。以上均为固定源码和文档阅读，不是实测；未安装、构建或运行上游程序/测试、语料测试或网络发送。不主张全部选项/输入符合 RFC 7464、GeoJSON 校验或坐标转换、传输/应用顺序或交付保证、安全、性能、部署适用性、当前兼容性、第三方互通或
-      IA 采用。仅增加既有 syntax 编辑导航，不添加技术关系或能力。
-
-
-      English scope and limitations:
-
-
-      jq is a command-line JSON processing tool; this record inspects jq-1.8.1 at commit 4467af7068b1bcd7f882defff6e7ea674c5357f4,
-      not an invented --seq component or a query-language specification. In the source, --seq enables sequence parsing;
-      the ordinary JSON-output branch writes RS (0x1E) before each filter result, serializes it, and normally appends
-      LF (0x0A). Filters may emit zero, one or multiple results; --stream supplies path/value events rather than
-      intact original records, and --slurp aggregates inputs. The ordinary non-raw input driver warns on parse errors
-      and continues. The manual describes discarding subsequent input until RS; however, the inspected error branch
-      sets a waiting-for-RS state before parser_reset sets it back to NORMAL, so that recovery description is not
-      adopted as verified behavior. Data repair, successful recovery, whole-record rollback and delivery guarantees
-      are not established. The -r string-output branch bypasses RS; -j implies raw output and suppresses LF, while
-      --raw-output0 substitutes NUL termination. -R installs no JSON parser; -n bypasses automatic input, although
-      filters can explicitly consume input. Color output can add escape control sequences; native Windows jq.exe
-      text mode converts LF to CRLF, for which the manual advises -b. Non-ASCII output normally uses UTF-8, with
-      -a selecting escapes; the malformed-UTF-8 string replacement path in jv_string_sized proves neither acceptance
-      of every invalid input nor lossless bytes. Numeric truncation guards do not establish completeness validation
-      of every scalar. The manual statement about RS-less input is not adopted as an empirical guarantee: only CLI
-      setup, byte feeding and the RS-waiting parser were statically traced, without runtime verification. All observations
-      are fixed-source/document reading, not empirical execution; no upstream installation, build, program/test
-      execution, corpus testing or network sending occurred. No all-option/all-input RFC 7464 conformance, GeoJSON
-      validation, CRS conversion, transport/application ordering or delivery guarantee, security, performance, deployment
-      suitability, current compatibility, third-party interoperability or IA adoption is claimed. Existing syntax
-      membership is editorial navigation only; no technical relation or capability is added.'
-    description_en: 'jq is a command-line JSON processing tool; this record inspects jq-1.8.1 at commit 4467af7068b1bcd7f882defff6e7ea674c5357f4,
-      not an invented --seq component or a query-language specification. In the source, --seq enables sequence parsing;
-      the ordinary JSON-output branch writes RS (0x1E) before each filter result, serializes it, and normally appends
-      LF (0x0A). Filters may emit zero, one or multiple results; --stream supplies path/value events rather than
-      intact original records, and --slurp aggregates inputs. The ordinary non-raw input driver warns on parse errors
-      and continues. The manual describes discarding subsequent input until RS; however, the inspected error branch
-      sets a waiting-for-RS state before parser_reset sets it back to NORMAL, so that recovery description is not
-      adopted as verified behavior. Data repair, successful recovery, whole-record rollback and delivery guarantees
-      are not established. The -r string-output branch bypasses RS; -j implies raw output and suppresses LF, while
-      --raw-output0 substitutes NUL termination. -R installs no JSON parser; -n bypasses automatic input, although
-      filters can explicitly consume input. Color output can add escape control sequences; native Windows jq.exe
-      text mode converts LF to CRLF, for which the manual advises -b. Non-ASCII output normally uses UTF-8, with
-      -a selecting escapes; the malformed-UTF-8 string replacement path in jv_string_sized proves neither acceptance
-      of every invalid input nor lossless bytes. Numeric truncation guards do not establish completeness validation
-      of every scalar. The manual statement about RS-less input is not adopted as an empirical guarantee: only CLI
-      setup, byte feeding and the RS-waiting parser were statically traced, without runtime verification. All observations
-      are fixed-source/document reading, not empirical execution; no upstream installation, build, program/test
-      execution, corpus testing or network sending occurred. No all-option/all-input RFC 7464 conformance, GeoJSON
-      validation, CRS conversion, transport/application ordering or delivery guarantee, security, performance, deployment
-      suitability, current compatibility, third-party interoperability or IA adoption is claimed. Existing syntax
-      membership is editorial navigation only; no technical relation or capability is added.'
-    version: 1.8.1
-    external_identifiers:
-    - namespace: github
-      value: jqlang/jq
-    official_url: https://github.com/jqlang/jq
-    domains:
-    - structured_data
-    sources:
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/README.md
-      title: 'jq identity: command-line JSON processor'
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/src/main.c
-      title: jq-1.8.1 CLI options, result serialization and ordinary parse-error driver
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/src/util.c
-      title: jq-1.8.1 input setup, direct byte feeding and slurp aggregation
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/src/jv_parse.c
-      title: jq-1.8.1 sequence parser resynchronization and numeric truncation guards
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/src/jv.c
-      title: jq-1.8.1 jv_string_sized malformed UTF-8 replacement path
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/blob/4467af7068b1bcd7f882defff6e7ea674c5357f4/docs/content/manual/v1.8/manual.yml
-      title: 'jq-1.8.1 versioned manual: options and limitations; RS-less-input statement not empirically verified'
-      language: en
-      accessed: '2026-10-31'
-    - url: https://github.com/jqlang/jq/releases/tag/jq-1.8.1
-      title: Official jq 1.8.1 historical release; tag resolved to inspected commit, not latest-version claim
-      language: en
-      accessed: '2026-10-31'
-    last_verified_at: '2026-10-31T04:43:34Z'
-    last_verified_by: Agent — OpenAI / dot / add_jq_sequence_precedent; fixed source/document reading only; no upstream
-      execution
+  canonical_id: jq
+  acceptance_event_id: accept-20261031-jq
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/82c2eb00d086ed4439f40899ee8e6397134d22fb/01_State/Inbox/review-packets/jq-20261031.yaml
 relations: []
-membership_proposals:
-- category_id: syntax
-  ref:
-    surface: canonical
-    id: jq
-navigation_baseline:
-  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
-  sha256: 6bf780cb87f483461e73c9c7fdbcc8c39e4543607aadaac51acfa67e3351a7e1
-  git_blob: dd2839cf6a96abc2c77c6039dd5974e955f1a5a4
-excluded_scope:
-- No technical relation to JSON/RFC7464/RFC8142, no capabilities, new type/taxonomy/schema/profile/UI/governance/maintenance
-  change or held-work edits.
-- No jsonseq comparator intake or quality ranking.
-materialization_boundary: Frozen new-state candidate retained in actual Git ancestry; exact independent semantic
-  and structural review plus applicable checks before acceptance. Proposed fields unchanged except lifecycle/contribution/intake
-  provenance.
+notes_zh:
+- 引用式物化回执；完整提案与来源限制保留于实际冻结祖先。
+- 一个真实 jq CLI 工具对象，仅静态源码观察；恢复行为保留 parser_reset 限制，不添加技术关系或能力。
