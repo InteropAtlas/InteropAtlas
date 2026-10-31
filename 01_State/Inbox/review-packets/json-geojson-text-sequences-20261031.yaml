@@ -1,0 +1,226 @@
+packet_id: json_geojson_text_sequences_20261031
+status: pending_independent_semantic_review
+baseline_commit: 92da1c2cd2b50982a4c509a66b63af4d4d7821f9
+executor: Agent — OpenAI / dot / add_json_geojson_sequence_specs
+reviewer: null
+review_scope:
+- Two fixed original-publication specification records, three documentary uses edges, existing syntax/geospatial
+  editorial memberships.
+source_evidence:
+  method: Official original publications and info pages reopened with web tool on 2026-10-31; no immutable byte
+    download. RFC7159/7946 originals reopened for endpoint definitions.
+  limitation: Errata contents/status unreviewed; no errata routes accessed. No upstream execution or implementation
+    claims.
+preflight:
+  fresh_main: 92da1c2cd2b50982a4c509a66b63af4d4d7821f9
+  collisions: []
+  search_limit: Current 01_State term search and indexed open issue/PR terms, not exhaustive global absence.
+objects:
+- candidate_id: json_text_sequences_rfc7464
+  candidate_path: 01_State/Inbox/candidates/json_text_sequences_rfc7464.yaml
+  candidate_blob: 521bad6af395963696e3c5048ba3cd30803945b8
+  proposed_path: 01_State/01_Objects/json_text_sequences_rfc7464.yaml
+  proposed_record:
+    id: json_text_sequences_rfc7464
+    type: artifact
+    kind: specification
+    name_zh: JSON 文本序列规范（RFC 7464）
+    name_en: JavaScript Object Notation (JSON) Text Sequences (RFC 7464)
+    official_name: JavaScript Object Notation (JSON) Text Sequences
+    description_zh: 'RFC 7464（2015 年 2 月原始出版物，Proposed Standard）定义 JSON 文本序列和 application/json-seq。编码使用 UTF-8，以
+      RS（0x1E）前置、LF（0x0A）结尾；JSON 文本定义引用 RFC 7159，可含任意顶层 JSON 值，序列本身不是单个 JSON 文本。解析语法与编码语法不同：对无效元素建议跳至后续 RS 继续解析（不是修复无效数据），但应用可终止；连续
+      RS 不表示空元素，未定义结束标记或可靠的第 n 项定位。数字、true、false、null 等非自定界值须检查尾随 JSON 空白，否则丢弃可能截断的元素；这依赖编码器接收完整文本，不保证发现任意截断。仅限原始出版物，勘误内容和状态未核验；不保证每条有效、修复或成功恢复；不提供超出序列所表示记录顺序的传输或应用层顺序/交付保证，也不证明安全或实现互通，不等同
+      NDJSON 或 SSE，也不将历史引用改为 RFC 8259。
+
+
+      English scope and limitations:
+
+
+      RFC 7464 (February 2015 original publication, Proposed Standard) defines JSON text sequences and application/json-seq.
+      Encoding uses UTF-8 with RS (0x1E) before each text and LF (0x0A) after it. RFC 7159 supplies JSON-text syntax,
+      including any top-level JSON value; a sequence is not itself one JSON text. Parsing grammar differs: skipping
+      malformed elements to resume at a later RS is recommended, not repair of invalid data; applications may terminate.
+      Consecutive RS do not denote empty elements; no end marker or reliable nth-element identification is defined.
+      Non-self-delimited numbers, true, false and null require trailing JSON whitespace checks, with possibly truncated
+      elements dropped; detection depends on complete encoder input, not arbitrary-corruption detection. Original
+      publication only; errata contents/status unreviewed. No record-validity, repair or successful-recovery guarantee;
+      no transport/application ordering or delivery guarantee beyond the represented record sequence, nor assurance
+      of security or implementation interoperability; not NDJSON or SSE, and the historical reference is not replaced
+      by RFC 8259.'
+    description_en: 'RFC 7464 (February 2015 original publication, Proposed Standard) defines JSON text sequences
+      and application/json-seq. Encoding uses UTF-8 with RS (0x1E) before each text and LF (0x0A) after it. RFC
+      7159 supplies JSON-text syntax, including any top-level JSON value; a sequence is not itself one JSON text.
+      Parsing grammar differs: skipping malformed elements to resume at a later RS is recommended, not repair of
+      invalid data; applications may terminate. Consecutive RS do not denote empty elements; no end marker or reliable
+      nth-element identification is defined. Non-self-delimited numbers, true, false and null require trailing JSON
+      whitespace checks, with possibly truncated elements dropped; detection depends on complete encoder input,
+      not arbitrary-corruption detection. Original publication only; errata contents/status unreviewed. No record-validity,
+      repair or successful-recovery guarantee; no transport/application ordering or delivery guarantee beyond the
+      represented record sequence, nor assurance of security or implementation interoperability; not NDJSON or SSE,
+      and the historical reference is not replaced by RFC 8259.'
+    version: RFC 7464 (February 2015 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '7464'
+    official_url: https://www.rfc-editor.org/rfc/rfc7464.html
+    versions:
+    - version: RFC 7464
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc7464/
+    domains:
+    - structured_data
+    sources:
+    - &id001
+      url: https://www.rfc-editor.org/rfc/rfc7464.html
+      title: RFC 7464 original February 2015 — sections 1–4 and normative RFC 7159 reference in section 5
+      language: en
+      accessed: '2026-10-31'
+    - url: https://www.rfc-editor.org/info/rfc7464/
+      title: RFC Editor — RFC 7464, Proposed Standard; original-publication scope, errata contents/status unreviewed
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T03:56:50Z'
+    last_verified_by: Agent — OpenAI / dot / add_json_geojson_sequence_specs; original publication and info only;
+      errata contents/status unreviewed
+- candidate_id: geojson_text_sequences_rfc8142
+  candidate_path: 01_State/Inbox/candidates/geojson_text_sequences_rfc8142.yaml
+  candidate_blob: 3f20db271be36b1ea9eb156c0e7f9aa7730ed778
+  proposed_path: 01_State/01_Objects/geojson_text_sequences_rfc8142.yaml
+  proposed_record:
+    id: geojson_text_sequences_rfc8142
+    type: artifact
+    kind: specification
+    name_zh: GeoJSON 文本序列规范（RFC 8142）
+    name_en: GeoJSON Text Sequences (RFC 8142)
+    official_name: GeoJSON Text Sequences
+    description_zh: 'RFC 8142（2017 年 4 月原始出版物，Proposed Standard）定义 GeoJSON 文本序列和 application/geo+json-seq。第 2 节采用
+      RFC 7464 全部规则：任意数量 UTF-8 文本各以 RS 前置、LF 结尾，每个文本必须包含 RFC 7946 定义的单个 GeoJSON 对象。Geometry、Feature 和 FeatureCollection
+      可混合；允许类型的沟通方式未定义。允许美化排版和紧凑文本；无内部换行的紧凑形式较适合既有非标准换行解析器，不表示 NDJSON 或 SSE 等价。仅限原始出版物，勘误内容和状态未核验。分帧不保证记录有效或修复，跳过无效文本后恢复解析也不是修复；不提供超出序列所表示记录顺序的传输或应用层顺序/恰好一次交付保证，也不提供安全、坐标转换或实现互通保证；GeoJSON
+      对象约束仍由 RFC 7946 给出。
+
+
+      English scope and limitations:
+
+
+      RFC 8142 (April 2017 original publication, Proposed Standard) defines GeoJSON text sequences and application/geo+json-seq.
+      Section 2 applies all RFC 7464 rules: any number of UTF-8 texts, RS-prefixed and LF-terminated, each containing
+      one RFC 7946 GeoJSON object. Geometry, Feature and FeatureCollection may be mixed; communicating permitted-type
+      policies is unspecified. Pretty printing is allowed; compact texts without internal newlines improve compatibility
+      with existing non-standard newline parsers, not NDJSON or SSE equivalence. Original publication only; errata
+      contents/status unreviewed. Framing does not guarantee validity or repair; skipping invalid texts to resume
+      parsing is not repair. It supplies no transport/application ordering or exactly-once delivery guarantee beyond
+      the represented sequence, nor security, CRS conversion or implementation-interoperability guarantees. RFC
+      7946 still supplies the GeoJSON object constraints.'
+    description_en: 'RFC 8142 (April 2017 original publication, Proposed Standard) defines GeoJSON text sequences
+      and application/geo+json-seq. Section 2 applies all RFC 7464 rules: any number of UTF-8 texts, RS-prefixed
+      and LF-terminated, each containing one RFC 7946 GeoJSON object. Geometry, Feature and FeatureCollection may
+      be mixed; communicating permitted-type policies is unspecified. Pretty printing is allowed; compact texts
+      without internal newlines improve compatibility with existing non-standard newline parsers, not NDJSON or
+      SSE equivalence. Original publication only; errata contents/status unreviewed. Framing does not guarantee
+      validity or repair; skipping invalid texts to resume parsing is not repair. It supplies no transport/application
+      ordering or exactly-once delivery guarantee beyond the represented sequence, nor security, CRS conversion
+      or implementation-interoperability guarantees. RFC 7946 still supplies the GeoJSON object constraints.'
+    version: RFC 8142 (April 2017 original publication)
+    external_identifiers:
+    - namespace: rfc
+      value: '8142'
+    official_url: https://www.rfc-editor.org/rfc/rfc8142.html
+    versions:
+    - version: RFC 8142
+      status: proposed_standard
+      url: https://www.rfc-editor.org/info/rfc8142/
+    domains:
+    - geospatial
+    sources:
+    - &id002
+      url: https://www.rfc-editor.org/rfc/rfc8142.html
+      title: RFC 8142 original April 2017 — sections 2–5 and normative references in section 6.1
+      language: en
+      accessed: '2026-10-31'
+    - url: https://www.rfc-editor.org/info/rfc8142/
+      title: RFC Editor — RFC 8142, Proposed Standard; original-publication scope, errata contents/status unreviewed
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T03:56:50Z'
+    last_verified_by: Agent — OpenAI / dot / add_json_geojson_sequence_specs; original publication and info only;
+      errata contents/status unreviewed
+relations:
+- proposal_id: json_text_sequences_rfc7464_uses_json_rfc7159
+  proposed_path: 01_State/02_Relations/json-geojson-text-sequences.yaml
+  proposed_record:
+    id: json_text_sequences_rfc7464_uses_json_rfc7159
+    type: relation
+    name_zh: RFC 7464 使用 RFC 7159 的 JSON 文本语法
+    name_en: RFC 7464 uses RFC 7159 JSON-text syntax
+    source: json_text_sequences_rfc7464
+    relation: uses
+    target: json_rfc7159
+    context:
+      conditions_zh: 固定原始规范文献间明示的定义引用；不表示运行实现、验证、互通或 IA 采用，不作传递关系推导，不替换历史 JSON 版本。勘误内容和状态未核验。
+      conditions_en: Explicit definition use between fixed original specification documents only; not implementation,
+        validation, interoperability or IA adoption. No transitive inference or historical JSON-version substitution;
+        errata contents/status unreviewed.
+    evidence:
+    - *id001
+    last_verified_at: '2026-10-31T03:56:50Z'
+    last_verified_by: Agent — OpenAI / dot / add_json_geojson_sequence_specs; documentary normative use only
+- proposal_id: geojson_text_sequences_rfc8142_uses_json_text_sequences_rfc7464
+  proposed_path: 01_State/02_Relations/json-geojson-text-sequences.yaml
+  proposed_record:
+    id: geojson_text_sequences_rfc8142_uses_json_text_sequences_rfc7464
+    type: relation
+    name_zh: RFC 8142 使用 RFC 7464 的序列分帧规则
+    name_en: RFC 8142 uses RFC 7464 sequence framing
+    source: geojson_text_sequences_rfc8142
+    relation: uses
+    target: json_text_sequences_rfc7464
+    context:
+      conditions_zh: 固定原始规范文献间明示的定义引用；不表示运行实现、验证、互通或 IA 采用，不作传递关系推导，不替换历史 JSON 版本。勘误内容和状态未核验。
+      conditions_en: Explicit definition use between fixed original specification documents only; not implementation,
+        validation, interoperability or IA adoption. No transitive inference or historical JSON-version substitution;
+        errata contents/status unreviewed.
+    evidence:
+    - *id002
+    last_verified_at: '2026-10-31T03:56:50Z'
+    last_verified_by: Agent — OpenAI / dot / add_json_geojson_sequence_specs; documentary normative use only
+- proposal_id: geojson_text_sequences_rfc8142_uses_geojson_rfc7946
+  proposed_path: 01_State/02_Relations/json-geojson-text-sequences.yaml
+  proposed_record:
+    id: geojson_text_sequences_rfc8142_uses_geojson_rfc7946
+    type: relation
+    name_zh: RFC 8142 使用 RFC 7946 的 GeoJSON 对象定义
+    name_en: RFC 8142 uses RFC 7946 GeoJSON object definitions
+    source: geojson_text_sequences_rfc8142
+    relation: uses
+    target: geojson_rfc7946
+    context:
+      conditions_zh: 固定原始规范文献间明示的定义引用；不表示运行实现、验证、互通或 IA 采用，不作传递关系推导，不替换历史 JSON 版本。勘误内容和状态未核验。
+      conditions_en: Explicit definition use between fixed original specification documents only; not implementation,
+        validation, interoperability or IA adoption. No transitive inference or historical JSON-version substitution;
+        errata contents/status unreviewed.
+    evidence:
+    - *id002
+    last_verified_at: '2026-10-31T03:56:50Z'
+    last_verified_by: Agent — OpenAI / dot / add_json_geojson_sequence_specs; documentary normative use only
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: json_text_sequences_rfc7464
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: geojson_text_sequences_rfc8142
+- category_id: geospatial
+  ref:
+    surface: canonical
+    id: geojson_text_sequences_rfc8142
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: b6593a5ec5544ee6573ac7b1807a401de6b94cec9c9e267290d5feadf789c5dd
+  git_blob: e81d92c104ce68f8f68835d54af8e1430c63ae72
+excluded_scope:
+- No new schema, taxonomy, capabilities, predicates, profiles, UI/search, governance, maintenance policy, implementation
+  edges, NDJSON/SSE equivalence, transitive RFC8259 edge or held-work changes.
+materialization_boundary: Frozen new-state candidates must remain in actual Git ancestry; independent semantic review
+  and applicable checks precede acceptance. Proposed fields unchanged except lifecycle/contribution/intake provenance.
