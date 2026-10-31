@@ -1,0 +1,40 @@
+contract_version: candidate-object-v1
+candidate_id: eclipse_mosquitto
+label: Eclipse Mosquitto MQTT server software (2.1.2)
+publisher: Eclipse Mosquitto project
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: eclipse-mosquitto/mosquitto
+locators:
+- url: https://mosquitto.org/
+  role: official
+- url: https://github.com/eclipse-mosquitto/mosquitto/tree/99fa50f30e325609394c324c8ff71cfbbe95d8ab
+  role: dated
+- url: https://mosquitto.org/blog/2026/02/version-2-1-2-released/
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - No normalized identifier or stable-ID collision found in fresh Canonical/Candidate review; whole existing software
+    project, not a new internal component.
+  merge_authorized: false
+unknowns:
+- 'From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing in an already-active MQTT5 session: selected
+  flags, identifiers, properties and filter/options checks, subscription registration subject to configuration,
+  ACL/subscribe-plugin and resource conditions, then SUBACK construction using the request identifier and filter
+  order and submission to packet__queue. Queueing is not socket writing, peer receipt or message delivery. Listener
+  mount points may rewrite filters; errors can terminate the path and not every input succeeds. This path does not
+  handle User Property, and SUBACK adds no Reason String or User Property; these are selected-code boundaries, not
+  a verdict on complete MQTT5 conformance. Source and test recipes were inspected only: no broker/client installation,
+  build, execution, network connection or interoperability exercise. No complete CONNECT/authentication/session
+  lifecycle, all PUBLISH routing or QoS delivery, retained/shared-message delivery, persistence, bridge behavior,
+  TLS/security audit, arbitrary-build or deployed compatibility, performance, third-party interoperability or IA
+  adoption is established; unreviewed functions are not asserted absent.'
+- No latest-release, modern build/dependency compatibility, security or deployment recommendation is established.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent semantic review
