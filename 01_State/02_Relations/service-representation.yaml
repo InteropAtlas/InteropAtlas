@@ -378,3 +378,41 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
   github_actor: ff6962757
+---
+id: openapi_3_2_1_uses_json_rfc8259
+type: relation
+name_zh: OpenAPI 3.2.1 描述文档的 JSON 表示选项使用 RFC 8259
+name_en: OpenAPI 3.2.1 OAD JSON representation option uses RFC 8259
+source: openapi_3.2.1
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: OpenAPI Specification 3.2.1 (10 September 2026), authoritative versioned HTML
+    target: RFC 8259 (December 2017)
+  conditions_zh: OpenAPI 3.2.1 的 JSON 使用关系仅指描述文档（OAD）的 JSON 表示选项，§3 的 JSON 引用明确指向 RFC 8259；OAD 也可用 YAML 表示，被描述
+    API 的请求、响应及其他内容不限定为这两种格式。任意 JSON 值不一定是有效 OAD；该文献级关系不保证完整 OAS 语义、无损转换、工具符合性、网络互通、安全性或 IA 采用。
+  conditions_en: The OpenAPI 3.2.1 JSON uses relation is limited to the JSON representation option for an OpenAPI
+    Description (OAD); section 3 explicitly links JSON to RFC 8259. OADs may also be represented in YAML, while
+    described API requests, responses and other content are not restricted to these formats. Arbitrary JSON
+    values are not necessarily valid OADs. This documentary relation does not guarantee complete OAS semantics,
+    lossless conversion, tool conformance, network interoperability, security or IA adoption.
+evidence:
+- url: https://spec.openapis.org/oas/v3.2.1.html#format
+  title: OpenAPI 3.2.1 — section 3 defines OAD as a JSON object representable in JSON or YAML; JSON links directly
+    to RFC 8259
+  language: en
+  accessed: '2026-10-31'
+- url: https://spec.openapis.org/oas/v3.2.1.html#bib-rfc8259
+  title: OpenAPI 3.2.1 — H.1 normative reference identifies RFC 8259, December 2017
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:43:12+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OpenAPI 3.2.1 JSON representation source review
+record_created_at: '2026-10-31T20:43:12+00:00'
+record_updated_at: '2026-10-31T20:43:12+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 JSON representation review
+  github_actor: ff6962757
