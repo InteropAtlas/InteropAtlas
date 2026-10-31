@@ -4,10 +4,10 @@ kind: specification
 name_zh: OpenAPI 接口描述规范 3.2.1
 name_en: OpenAPI Specification 3.2.1
 official_name: OpenAPI Specification
-description_zh: OpenAPI Initiative 于 2026-09-10 发布的固定 3.2.1 规范文献，为 HTTP API 定义语言无关的描述结构，包括路径、操作、参数和内容表示；不是运行中的 API、验证器或客户端/服务端实现。另据固定 3.2.1 正文核验：Schema Object 的默认方言以 JSON Schema Draft 2020-12 通用元模式词汇加 OAS base vocabulary 为基础；其方言 URI 属于 3.2/dialect/YYYY-MM-DD 系列，本记录不指定某次日期化 schema 迭代。资源根 $schema 覆盖文档 jsonSchemaDialect 默认值；非默认方言支持可选。format 默认只是非验证性注解，类型专用关键词不隐含 type 约束；通用模式校验不证明 OAS 扩展语义、任意工具支持或 HTTP API 实际互通。
+description_zh: OpenAPI Initiative 于 2026-09-10 发布的固定 3.2.1 规范文献，为 HTTP API 定义语言无关的描述结构，包括路径、操作、参数和内容表示；不是运行中的 API、验证器或客户端/服务端实现。另据固定 3.2.1 正文核验：Schema Object 的默认方言以 JSON Schema Draft 2020-12 通用元模式词汇加 OAS base vocabulary 为基础；其方言 URI 属于 3.2/dialect/YYYY-MM-DD 系列，本记录不指定某次日期化 schema 迭代。资源根 $schema 覆盖文档 jsonSchemaDialect 默认值；非默认方言支持可选。format 默认只是非验证性注解，类型专用关键词不隐含 type 约束；通用模式校验不证明 OAS 扩展语义、任意工具支持或 HTTP API 实际互通。 另据 3.2.1 的描述引用规则，API 描述中的 URI 标识引用按 RFC 3986 确定基 URI；相对 $self 先按下一基址来源解析，Schema Object 还遵循其 JSON Schema $id 规则。标识不等于网络取回地址或 API 调用，取回支持可选，不保证可获取性、安全性或工具互通。对被引用文档的 JSON 或 YAML 表示，URI 片段 SHOULD 按 RFC 6901 JSON Pointer 解释，不能提升为 MUST 或推广到所有片段、Schema 锚点及运行时选择器；不证明指针求值或工具实现成功。
 description_en: The fixed OpenAPI Initiative specification document 3.2.1, published on 2026-09-10, defining language-independent
   HTTP API description structures including paths, operations, parameters and content representations; not a running
-  API, validator or client/server implementation. Separately checked against the fixed 3.2.1 text, the Schema Object default dialect combines JSON Schema Draft 2020-12 general-purpose meta-schema vocabularies with the OAS base vocabulary. Its URI belongs to the 3.2/dialect/YYYY-MM-DD series; this record selects no dated schema iteration. A resource-root $schema overrides the document jsonSchemaDialect default; support for other dialects is optional. format is a non-validating annotation by default, and type-specific keywords do not imply a type constraint. Generic schema validation establishes neither OAS extension semantics, arbitrary tool support nor actual HTTP API interoperability.
+  API, validator or client/server implementation. Separately checked against the fixed 3.2.1 text, the Schema Object default dialect combines JSON Schema Draft 2020-12 general-purpose meta-schema vocabularies with the OAS base vocabulary. Its URI belongs to the 3.2/dialect/YYYY-MM-DD series; this record selects no dated schema iteration. A resource-root $schema overrides the document jsonSchemaDialect default; support for other dialects is optional. format is a non-validating annotation by default, and type-specific keywords do not imply a type constraint. Generic schema validation establishes neither OAS extension semantics, arbitrary tool support nor actual HTTP API interoperability. Under the separately checked 3.2.1 description-reference rules, API-description URI identifiers use RFC 3986 base-URI determination; a relative $self is first resolved against the next base source, and Schema Objects additionally follow their JSON Schema $id rules. Identification is not network retrieval or an API call. Retrieval support is optional, without guarantees of accessibility, safety or tooling interoperability. For a referenced document represented in JSON or YAML, URI fragments SHOULD be interpreted as RFC 6901 JSON Pointers. This is not MUST and is not generalized to all fragments, Schema anchors or runtime selectors; successful pointer evaluation or tool implementation is not established.
 version: 3.2.1
 external_identifiers:
 - namespace: openapi
@@ -38,6 +38,10 @@ scope_notes_en: 'The subject is the fixed OpenAPI Specification 3.2.1 document, 
   implementation conformance, certification, security, deployment, runtime interoperability and IA adoption are
   not established.'
 sources:
+- url: https://spec.openapis.org/oas/v3.2.1.html#relative-references-in-api-description-uris
+  title: OpenAPI 3.2.1 — sections 4.1.2.1 and 4.1.2.2, URI identifiers, base determination, and JSON/YAML fragment recommendation
+  language: en
+  accessed: '2026-10-31'
 - url: https://spec.openapis.org/oas/v3.2.1.html#json-schema-keywords
   title: OpenAPI 3.2.1 — sections 4.24, 4.24.1, 4.24.3.1 and 4.24.7 default Schema Object dialect and evaluation limits
   language: en
@@ -77,11 +81,11 @@ sources:
 last_verified_at: '2026-10-25T01:09:34.933500+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed official OpenAPI document evidence review
 record_created_at: '2026-10-25T01:16:33.782861+00:00'
-record_updated_at: '2026-10-31T19:54:56+00:00'
+record_updated_at: '2026-10-31T20:19:46+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 default-dialect evidence review
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: openapi_3.2.1
