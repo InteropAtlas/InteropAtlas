@@ -1,0 +1,147 @@
+id: git_software
+type: system
+kind: software
+name_zh: Git 分布式版本控制软件
+name_en: Git distributed version-control software
+official_name: Git
+version: 2.52.0
+external_identifiers:
+- namespace: github
+  value: git/git
+official_url: https://git-scm.com/
+description_zh: 'Git 是完整的分布式版本控制软件项目，不是传输协议规范或虚构的独立 ls-refs 组件。本记录核验官方 publish-only 镜像 git/git 的 tag v2.52.0、commit
+  9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed；不声称最新版、签名认证或其他版次。实现固定 Git 2.52.0 与其同提交 ls-refs 文档；既有 #497 使用 Git 2.51.0
+  文档，两份文档的完整 ls-refs 段逐字节相同，但全文不同。这个有限对应不等于完整版次相同，不把工作级 git_protocol_v2 标准改成 Git 软件版次。 仅据固定源码，研究已选择传输协议 v2 的 upload-pack
+  服务端 ls-refs 路径：serve 调度命令，读取 peel、symrefs、ref-prefix、unborn 参数，经仓库 namespace、hideRefs 与配置条件筛选引用，格式化对象标识符/引用名及条件性符号引用目标、peeled
+  对象或 unborn HEAD，再写 stdout pkt-line 并 flush。stdout 写入与刷新不证明网络传输、对端收到或可靠交付。ref-prefix 是优化而非严格授权过滤；达到 65,536 条及以上时清空前缀优化，规范允许服务端返回不匹配引用、由客户端再筛。lsrefs.unborn
+  的 advertise（默认）、allow 与 ignore 分别控制公告/接受；隐藏引用处理不证明安全隔离。仓库、配置、资源与输出错误仍适用，不保证任意输入或仓库均成功；不是完整仓库清单。只检视源码和测试配方，未安装、构建或执行下载的
+  Git、协议测试或网络服务；环境中用于 IA 记账的 Git 不算本源码执行。排除 fetch/packfile/clone/push、完整协商、完整 Git/v2 符合性、仓库原子一致性、认证/TLS/SSH/安全、跨实现互通、性能、当前平台兼容性及
+  IA/GitHub 部署版次或采用证明；未研究功能不表示软件缺失。'
+description_en: 'Git is the whole distributed version-control software project, not a wire-protocol specification
+  or fictional standalone ls-refs component. This record fixes official publish-only mirror git/git tag v2.52.0,
+  commit 9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed, without latest-release, signature-verification or other-version
+  claims. Implementation and matching ls-refs documentation are fixed to Git 2.52.0. Existing PR497 evidence uses
+  Git 2.51.0 documentation: the complete ls-refs subsections are byte-identical, but the full documents differ.
+  This finite correspondence is not whole-edition equality and does not relabel the work-level git_protocol_v2 standard
+  as a Git software release. From fixed source only, this reviews the server ls-refs path after upload-pack has
+  selected wire protocol v2: serve dispatches the command, reads peel, symrefs, ref-prefix and unborn arguments,
+  filters references under repository namespace, hideRefs and configuration conditions, formats object IDs/refnames
+  and conditional symref targets, peeled objects or unborn HEAD, then writes stdout pkt-lines and flushes. Writing/flushing
+  stdout is not evidence of network transfer, peer receipt or reliable delivery. ref-prefix is an optimization,
+  not strict authorization filtering; at 65,536 or more prefix lines the optimization is cleared, and the specification
+  permits nonmatching references for clients to filter. lsrefs.unborn advertise (default), allow and ignore distinguish
+  advertisement/acceptance behavior; hidden-reference processing does not establish security isolation. Repository,
+  configuration, resource and output errors apply, with no every-input/repository success or complete-reference-inventory
+  guarantee. Source and test recipes were inspected only: no downloaded Git installation, build, execution, protocol
+  test or network service. Environment Git used for IA bookkeeping is not execution evidence for this source. Fetch/packfile/clone/push,
+  complete negotiation, complete Git/v2 conformance, repository atomic consistency, authentication/TLS/SSH/security,
+  cross-implementation interoperability, performance, current-platform compatibility and IA/GitHub deployed-version
+  or adoption claims are excluded; unreviewed functions are not asserted absent.'
+open_source: true
+domains:
+- developer_tools
+scope_notes_zh: '实现固定 Git 2.52.0 与其同提交 ls-refs 文档；既有 #497 使用 Git 2.51.0 文档，两份文档的完整 ls-refs 段逐字节相同，但全文不同。这个有限对应不等于完整版次相同，不把工作级
+  git_protocol_v2 标准改成 Git 软件版次。 仅据固定源码，研究已选择传输协议 v2 的 upload-pack 服务端 ls-refs 路径：serve 调度命令，读取 peel、symrefs、ref-prefix、unborn
+  参数，经仓库 namespace、hideRefs 与配置条件筛选引用，格式化对象标识符/引用名及条件性符号引用目标、peeled 对象或 unborn HEAD，再写 stdout pkt-line 并 flush。stdout
+  写入与刷新不证明网络传输、对端收到或可靠交付。ref-prefix 是优化而非严格授权过滤；达到 65,536 条及以上时清空前缀优化，规范允许服务端返回不匹配引用、由客户端再筛。lsrefs.unborn 的 advertise（默认）、allow
+  与 ignore 分别控制公告/接受；隐藏引用处理不证明安全隔离。仓库、配置、资源与输出错误仍适用，不保证任意输入或仓库均成功；不是完整仓库清单。只检视源码和测试配方，未安装、构建或执行下载的 Git、协议测试或网络服务；环境中用于
+  IA 记账的 Git 不算本源码执行。排除 fetch/packfile/clone/push、完整协商、完整 Git/v2 符合性、仓库原子一致性、认证/TLS/SSH/安全、跨实现互通、性能、当前平台兼容性及 IA/GitHub
+  部署版次或采用证明；未研究功能不表示软件缺失。 README/COPYING 的 GPLv2 与兼容异许可部分分别保留；不合成覆盖整树的许可证保证或法律适用性判断。'
+scope_notes_en: 'Implementation and matching ls-refs documentation are fixed to Git 2.52.0. Existing PR497 evidence
+  uses Git 2.51.0 documentation: the complete ls-refs subsections are byte-identical, but the full documents differ.
+  This finite correspondence is not whole-edition equality and does not relabel the work-level git_protocol_v2 standard
+  as a Git software release. From fixed source only, this reviews the server ls-refs path after upload-pack has
+  selected wire protocol v2: serve dispatches the command, reads peel, symrefs, ref-prefix and unborn arguments,
+  filters references under repository namespace, hideRefs and configuration conditions, formats object IDs/refnames
+  and conditional symref targets, peeled objects or unborn HEAD, then writes stdout pkt-lines and flushes. Writing/flushing
+  stdout is not evidence of network transfer, peer receipt or reliable delivery. ref-prefix is an optimization,
+  not strict authorization filtering; at 65,536 or more prefix lines the optimization is cleared, and the specification
+  permits nonmatching references for clients to filter. lsrefs.unborn advertise (default), allow and ignore distinguish
+  advertisement/acceptance behavior; hidden-reference processing does not establish security isolation. Repository,
+  configuration, resource and output errors apply, with no every-input/repository success or complete-reference-inventory
+  guarantee. Source and test recipes were inspected only: no downloaded Git installation, build, execution, protocol
+  test or network service. Environment Git used for IA bookkeeping is not execution evidence for this source. Fetch/packfile/clone/push,
+  complete negotiation, complete Git/v2 conformance, repository atomic consistency, authentication/TLS/SSH/security,
+  cross-implementation interoperability, performance, current-platform compatibility and IA/GitHub deployed-version
+  or adoption claims are excluded; unreviewed functions are not asserted absent. README/COPYING describe GPLv2 and
+  differently licensed compatible parts; no aggregate whole-tree licensing assurance or legal-suitability conclusion
+  is made.'
+sources:
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/README.md#L4-L13
+  title: Whole Git software identity and qualified license statement
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/GIT-VERSION-GEN#L3
+  title: Fixed Git source version v2.52.0
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/builtin/upload-pack.c#L58-L70
+  title: Actual v2-selected upload-pack entry
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/serve.c#L140-L149
+  title: Actual ls-refs capability dispatch
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/serve.c#L254-L372
+  title: Command parsing and serve-loop dispatch; selected path only
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/ls-refs.c#L16-L42
+  title: Configurable unborn advertisement/acceptance
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/ls-refs.c#L78-L150
+  title: Namespace, hidden-reference and output formatting conditions
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/ls-refs.c#L153-L212
+  title: ls-refs arguments, 65536-prefix boundary and enumeration
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/refs.c#L1621-L1674
+  title: Configured hideRefs processing, not a security guarantee
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/pkt-line.c#L251-L285
+  title: Output packet framing and flushing, not peer receipt
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/Documentation/gitprotocol-v2.adoc#L197-L240
+  title: Git 2.52.0 fixed ls-refs specification subsection
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/Documentation/config/lsrefs.adoc
+  title: Fixed lsrefs.unborn configuration semantics
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/t/t5701-git-serve.sh
+  title: ls-refs test recipes inspected only, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed/COPYING
+  title: Fixed license terms and separately licensed parts; no whole-tree assurance
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/git/git/blob/c44beea485f0f2feaf460e2ac87fdd5608d63cf0/Documentation/gitprotocol-v2.adoc#L197-L240
+  title: Existing PR497 Git 2.51.0 evidence; only ls-refs subsection equals 2.52.0
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T22:26:46+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Git ls-refs source evidence executor
+record_created_at: '2026-10-31T22:33:48+00:00'
+record_updated_at: '2026-10-31T22:33:48+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Git ls-refs fixed-source semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: git_software
+  acceptance_event_id: accept-20261031-git-lsrefs
+  reviewed_candidate_blob: d4ebe1bf31b60120064bbbbd00becd3606c7f128
+  reviewed_against_commit: d882fc5f070a17ec521e509ad5f1505cd3bc59cf
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: d882fc5f070a17ec521e509ad5f1505cd3bc59cf
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/d882fc5f070a17ec521e509ad5f1505cd3bc59cf/01_State/Inbox/review-packets/git-lsrefs-20261031.yaml
