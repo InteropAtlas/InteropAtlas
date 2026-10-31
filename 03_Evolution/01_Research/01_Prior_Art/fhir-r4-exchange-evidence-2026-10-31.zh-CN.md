@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-10-31T09:29:00+00:00
-Document Updated At: 2026-10-31T09:29:00+00:00
+Document Updated At: 2026-10-31T10:01:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -82,3 +82,13 @@ Latest Substantive Contribution:
 交付止于上述五行对照、三对象身份和一条静态连接；适用仓库检查与独立终稿逐行复核见交付 PR。作者自检、CI 与独立复核分别记录，不相互冒充。
 
 没有新增对象、技术边、候选、分类、UI、renderer、schema 或维护制度，也不生成后续补库队列。仅通过既有 Research README 提供 GitHub 阅读，不声称新增站点对象页或 Pages 部署。本文不改变任何已有 hold，不依赖全域 snapshot 的发布，不以研究结论代替新接纳或运行验证。
+
+## 后续交付附记（2026-10-31）
+
+本附记记录原研究之后的已交付增量，不改写上文 `ee4abc9243ddc7c0f72e5b9fbb579d91a334849d` 历史基线、五方法对照、来源指纹或原验证范围。
+
+[PR #628](https://github.com/InteropAtlas/InteropAtlas/pull/628) 在固定 M `0f5d0b3376f010171a38c0ae9b69d4c340ddcbb4` 为既有 [`python_fhirclient` 对象](https://github.com/InteropAtlas/InteropAtlas/blob/0f5d0b3376f010171a38c0ae9b69d4c340ddcbb4/01_State/01_Objects/python_fhirclient.yaml) 补充了同一 4.4.0 固定提交的 `read → GET → JSON → model` 只读源码证据与双语边界。研究中的静态发现由此进入既有机器可读 YAML，不是新增实现对象、技术边或另一套事实源。
+
+新增的是源码调用链存在的记录，不是新的网络运行结果：该链未经执行，旧 21 项可信合成内存观察没有重跑或扩充，既有 `last_verified_at` / `last_verified_by` 与仅覆盖模型表示的 `python_fhirclient_implements_fhir_r4_models` 关系保持原样。不能据此推断 HTTP 交换、SMART 鉴权、FHIR 服务器兼容、完整 REST 符合性或远程互通成功；五方法表内其余 unknown 和 INA 导航边界仍保留。
+
+#628 的仓库检查、独立复核与交付读回验证的是对象记录及其呈现，不是上游协议执行或临床适用性。此附记只链接既有对象，不新增补库队列或维护合同。
