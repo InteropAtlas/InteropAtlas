@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261031-mosquitto-broker
+candidate_id: eclipse_mosquitto
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: eclipse_mosquitto
+review:
+  reviewer: Independent Agent — OpenAI / dot / Mosquitto broker fixed-source semantic review
+  reviewed_at: '2026-10-31T21:49:44+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核固定官方 tag/release、源码指纹、whole software 身份、无碰撞路径、有界订阅登记/SUBACK入队 implements 与目标反向可见边界。
+  - 仅已active MQTT5会话的broker订阅处理，经ACL/plugin/配置/资源条件登记并构造SUBACK入队；入队不等于送达，属性处理边界保留。只静态检视源码/测试配方，未运行上游，不宣称完整符合性/认证/交付/安全/互通或IA采用。
+  - 接纳序列化时间不是推测审核耗时；最终物化与实际 H/M 另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/79102ea8e333408c403ecbd4785da46dfdff0169/01_State/Inbox/review-packets/mosquitto-broker-20261031.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e1b710a545b9ae17c16fe3dc460be909b5c550a9
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ed8829689b49b136a06fbbc07722b3bfb097c792
+decided_at: '2026-10-31T21:49:44+00:00'
+notes:
+- 只接纳固定 Mosquitto 软件主体、一条订阅路径 implements 和既有 industrial 编辑导航；旧 holds 未动。
+- 正常 Git 祖先保留完整已审候选和 packet；当前 packet 为引用回执，不复制 Canonical 事实。

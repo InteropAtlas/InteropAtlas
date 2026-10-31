@@ -15,11 +15,13 @@ locators:
 - url: https://mosquitto.org/blog/2026/02/version-2-1-2-released/
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - eclipse_mosquitto
   reasons:
-  - No normalized identifier or stable-ID collision found in fresh Canonical/Candidate review; whole existing software
-    project, not a new internal component.
+  - Accepted as canonical eclipse_mosquitto by accept-20261031-mosquitto-broker. Frozen new-state Candidate e1b710a545b9ae17c16fe3dc460be909b5c550a9
+    and review_required route are replayed against actual ancestor 79102ea8e333408c403ecbd4785da46dfdff0169; this
+    back-reference prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing in an already-active MQTT5 session: selected
@@ -37,4 +39,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / Mosquitto broker fixed-source semantic review
