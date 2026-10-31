@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-10-31T05:43:00+00:00
+Document Updated At: 2026-10-31T07:18:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot
-  Reviewer: Independent Agent — OpenAI / dot / independent_encoding_review
+  Executor: Agent — OpenAI / dot / publish_senml_coverage_comparison
+  Reviewer: Independent Agent — OpenAI / dot / senml_independent_review
   GitHub Actor: ff6962757
 -->
 
@@ -27,6 +27,8 @@ Latest Substantive Contribution:
 ## 有限比较记录
 
 - [OGC API Features Core 四编码类的有限覆盖比较（2026-10-31）](01_Prior_Art/ogc-features-core-encoding-comparison-2026-10-31.zh-CN.md)：对照固定规范、既有记录与 pygeoapi 静态证据，区分精确映射、相关记录和未知；不是全域完备率。
+
+- [SenML 原版四表示族与流媒体的有限覆盖比较（2026-10-31）](01_Prior_Art/senml-representation-coverage-2026-10-31.zh-CN.md)：区分原版八媒体的协商/处理、精确引用版次、既有通用实现与专门证据 unknown；不是当前注册全集。
 
 ## 与 `docs/` 的边界
 
