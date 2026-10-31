@@ -1,0 +1,136 @@
+packet_id: prov_n_20130430_20261031
+status: pending_independent_semantic_review
+baseline_commit: 48966dd7c45930498660dd2a54d151baabd65309
+executor: Agent — OpenAI / dot / add_prov_n_notation
+reviewer: null
+review_scope:
+- One fixed PROV-N original Recommendation artifact/specification; one publication-level uses to existing w3c_prov_dm;
+  existing syntax editorial navigation only.
+source_evidence:
+  method: Independently read captured official original publication bytes; SHA256 and byte counts matched capture
+    manifest. No upstream software run.
+  sources:
+  - id: PROV-N
+    url: https://www.w3.org/TR/2013/REC-prov-n-20130430/
+    final_url: https://www.w3.org/TR/2013/REC-prov-n-20130430/
+    http_status: 200
+    sha256: c7320ed45cc643eca0819b0616835529dfb35dc819eaf50deaf209ee1e974e49
+    bytes: 205708
+    status: W3C Recommendation
+    publication_date: '2013-04-30'
+    git_blob: 70cd70b6bc43b3f3b4ec3dc2534dc7e70c7c58de
+  - id: PROV-DM
+    url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+    final_url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+    http_status: 200
+    sha256: 5c925c21bc96c285b25017c3b90d82cf74251d07713b71fcb81ca60f873c9e88
+    bytes: 271572
+    status: W3C Recommendation
+    publication_date: '2013-04-30'
+    git_blob: 0ff3f4f203c05de2d3ae1b84b3e6636d7c2e3956
+  limitation: 仅限 2013-04-30 原始 Recommendation；勘误未审阅或整合，不是最新纠错版。未核验任何解析器或实现，不证明完整 PROV-CONSTRAINTS 有效性、溯源事实真实性或 IA
+    采用。
+preflight:
+  snapshot: 48966dd7c45930498660dd2a54d151baabd65309
+  canonical_records: 276
+  candidate_records: 267
+  machine_route: review_required
+  collisions: []
+objects:
+- candidate_id: w3c_prov_n_20130430
+  candidate_path: 01_State/Inbox/candidates/w3c_prov_n_20130430.yaml
+  candidate_blob: 5303e2c582969c317d4103f1e37f5e1df8dfe317
+  proposed_path: 01_State/01_Objects/w3c_prov_n_20130430.yaml
+  proposed_record:
+    id: w3c_prov_n_20130430
+    type: artifact
+    kind: specification
+    name_zh: PROV-N 溯源记法（2013 原始推荐标准）
+    name_en: 'PROV-N: The Provenance Notation (2013 Original Recommendation)'
+    official_name: 'PROV-N: The Provenance Notation'
+    description_zh: 'PROV-N 是用于表达 PROV-DM 实例的人可读、紧凑函数式记法（functional notation）。固定 W3C Recommendation 提供正式语法和附加语义规则；语法正确的表达式仍可能不被模型接受。正文产生式和表格是规范性的，示例及单独汇总的便利语法文件是资料性的。仅限
+      2013-04-30 原始 Recommendation；勘误未审阅或整合，不是最新纠错版。未核验任何解析器或实现，不证明完整 PROV-CONSTRAINTS 有效性、溯源事实真实性或 IA 采用。
+
+
+      English scope and limitations:
+
+
+      PROV-N is a compact, human-readable functional notation for expressing PROV-DM instances. This fixed W3C Recommendation
+      specifies a formal grammar and additional semantic rules; syntactically correct expressions can still be unacceptable
+      to the model. In-document productions and tables are normative; examples and the separate convenience grammar
+      file are informative. Original 2013-04-30 Recommendation only: errata were neither reviewed nor consolidated,
+      so this is not a latest corrected edition. No parser or implementation was verified. Not proof of full PROV-CONSTRAINTS
+      validity, provenance truth or IA adoption.'
+    description_en: 'PROV-N is a compact, human-readable functional notation for expressing PROV-DM instances. This
+      fixed W3C Recommendation specifies a formal grammar and additional semantic rules; syntactically correct expressions
+      can still be unacceptable to the model. In-document productions and tables are normative; examples and the
+      separate convenience grammar file are informative. Original 2013-04-30 Recommendation only: errata were neither
+      reviewed nor consolidated, so this is not a latest corrected edition. No parser or implementation was verified.
+      Not proof of full PROV-CONSTRAINTS validity, provenance truth or IA adoption.'
+    version: W3C Recommendation 2013-04-30 (original publication)
+    external_identifiers:
+    - namespace: w3c
+      value: REC-prov-n-20130430
+    official_url: https://www.w3.org/TR/2013/REC-prov-n-20130430/
+    versions:
+    - version: 2013-04-30 original publication
+      status: recommendation
+      date: '2013-04-30'
+      url: https://www.w3.org/TR/2013/REC-prov-n-20130430/
+    domains:
+    - provenance
+    - knowledge_representation
+    sources:
+    - &id001
+      url: https://www.w3.org/TR/2013/REC-prov-n-20130430/
+      title: 'PROV-N: The Provenance Notation — original Recommendation 2013-04-30; sections 1.1–1.2, 3 and C.1'
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T08:35:40.455890+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_prov_n_notation; original publication bytes; errata unreviewed
+relations:
+- proposal_id: w3c_prov_n_20130430_uses_prov_dm
+  proposed_path: 01_State/02_Relations/prov-n.yaml
+  proposed_record:
+    id: w3c_prov_n_20130430_uses_prov_dm
+    type: relation
+    name_zh: PROV-N 使用 PROV-DM 概念数据模型
+    name_en: PROV-N uses the PROV-DM conceptual data model
+    source: w3c_prov_n_20130430
+    relation: uses
+    target: w3c_prov_dm
+    context:
+      version_context:
+        source: PROV-N, original W3C Recommendation 2013-04-30
+        target: PROV-DM, original W3C Recommendation 2013-04-30; existing document identity
+      conditions_zh: 文献级模型使用：§1.1 以人可读函数式记法表达 PROV-DM 实例，§3 将模型构件映射到语法并规定附加语义规则；C.1 明确规范引用同日 PROV-DM Recommendation。不是软件依赖、解析器实现或验证结果，不推导完整
+        Constraints 有效性、溯源真实性或 IA 采用。两端均仅限所列原始出版物，未审阅或整合勘误；不改既有 DM 身份和历史采用说明。
+      conditions_en: 'Publication-level model use: section 1.1 expresses PROV-DM instances in human-readable functional
+        notation; section 3 maps model constructs to syntax and specifies additional semantic rules. C.1 normatively
+        references the same-date PROV-DM Recommendation. Not a software dependency, parser implementation or validation
+        result; no full Constraints validity, provenance truth or IA adoption follows. Both endpoints refer only
+        to the named original publications; errata were not reviewed or consolidated. Existing DM identity and historical
+        adoption text remain unchanged.'
+    evidence:
+    - *id001
+    - url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+      title: PROV-DM original Recommendation 2013-04-30 — publication identity and conceptual model
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T08:35:40.455890+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_prov_n_notation; original publications; errata unreviewed
+membership_proposals:
+- category_id: syntax
+  ref:
+    surface: canonical
+    id: w3c_prov_n_20130430
+navigation_baseline:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  sha256: 4aa3c09e0e66a8947a1e68555325cd6387a7a7ebfca6bc5bf19621888a9b722f
+  git_blob: b21600b1d4c5dcb578c191a0a7d7e0ad1835e187
+excluded_scope:
+- No existing DM edits, PROV-O identity, Python edges, family completion, schema, renderer, capability, governance
+  or maintenance-rule changes. All pre-existing holds retained.
+materialization_boundary: Pending exact independent review; actual frozen new-state candidate must be true ancestor.
+  Exact proposed fields preserved except lifecycle/contribution/intake metadata. Preparation snapshot is not fresh-main
+  authorization.
