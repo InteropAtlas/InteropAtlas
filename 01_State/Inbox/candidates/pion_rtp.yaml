@@ -1,0 +1,39 @@
+contract_version: candidate-object-v1
+candidate_id: pion_rtp
+label: Pion RTP Go library (1.10.6)
+publisher: The Pion community
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: pion/rtp
+locators:
+- url: https://github.com/pion/rtp
+  role: official
+- url: https://github.com/pion/rtp/releases/tag/v1.10.6
+  role: dated
+- url: https://github.com/pion/rtp/tree/9a8f93554133824676326b43f068167fef01a884
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh identity search finds no existing Pion RTP subject or identifier collision; whole Go library, not Pion
+    organization or RFC3550.
+  merge_authorized: false
+unknowns:
+- 'From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload and padding
+  delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent padding flags/sizes
+  are caller preconditions, not general validity checks enforced by the library. With P=false both PaddingSize fields
+  must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize while the deprecated Packet.PaddingSize
+  stays zero or consistent. Unmarshal Payload borrows the input buffer rather than copying; callers own its lifetime
+  and subsequent mutation. Source and test recipes were inspected only: the upstream package was not installed,
+  built or run. This does not establish complete RTP/RTCP sessions, SSRC management, sequence/timestamp generation,
+  clock synchronization, congestion behavior, codec/profile interpretation, Appendix A validation, transport delivery,
+  SRTP/security, third-party interoperability or IA adoption; arbitrary inputs have no byte-identical roundtrip
+  guarantee. Header extensions and other functions are outside this evidence slice, not asserted absent from the
+  library.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent semantic review

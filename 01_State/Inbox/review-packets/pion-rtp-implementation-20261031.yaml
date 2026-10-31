@@ -1,0 +1,268 @@
+packet_id: pion_rtp_implementation_20261031
+status: pending_independent_semantic_review
+baseline_commit: 648bc02c7b0b5ec16642cea4f84b861b951fe53c
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 沿用既有 media_network 导航，为已有 RFC3550 增加一个固定版本的实际库先例和一条基础包布局 implements。不是由条目数或未标注推断领域真实空白。
+- 按现有 Candidate / 独立语义审核 / acceptance-event 路径；不改分类、关系语义、规范、治理或页面机制。
+work_item_preflight:
+  baseline_commit: 648bc02c7b0b5ec16642cea4f84b861b951fe53c
+  searched_at: '2026-10-31T20:56:08+00:00'
+  searched_yaml_files: 794
+  terms:
+  - pion/rtp
+  - pion_rtp
+  - pion rtp
+  hits: []
+  github_issue_search:
+    query: repo:InteropAtlas/InteropAtlas is:issue pion
+    hits: []
+  github_pr_search:
+    query: repo:InteropAtlas/InteropAtlas is:pull-request pion
+    hits: []
+  open_prs:
+  - 591
+  - 498
+  - 439
+  - 416
+  limits: Visible indexed titles/bodies at observation time only; no claim about private or future work.
+official_release:
+  tag: v1.10.6
+  commit: 9a8f93554133824676326b43f068167fef01a884
+  published_at: '2026-10-21T00:15:20Z'
+  release_url: https://github.com/pion/rtp/releases/tag/v1.10.6
+official_source_hashes:
+- file: sources/LICENSE
+  url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/LICENSE
+  bytes: 1078
+  sha256: b85dcd3e453d05982552c52b5fc9e0bdd6d23c6f8e844b984a88af32570b0cc0
+- file: sources/README.md
+  url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/README.md
+  bytes: 4369
+  sha256: 167553a7f8409fabf06b41332f8a64da5d272ae2a12464398e00c94dc5445441
+- file: sources/go.mod
+  url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/go.mod
+  bytes: 168
+  sha256: 438115cd1f1b86735e24ac58d25b8df8b5afbf4a7d471feb36e789d7d5c4e00f
+- file: sources/packet.go
+  url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go
+  bytes: 18587
+  sha256: c0a91f15e78182eb2aa9e1a8c31c3ddbd39c5a91fdfb9d4ccd005829216bc4f7
+- file: sources/packet_test.go
+  url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet_test.go
+  bytes: 49626
+  sha256: b08b12e5219d979f73a90538f5888b48afc24218e24bd86bf2f3b27f55c436d6
+rfc3550_source:
+  url: https://www.rfc-editor.org/rfc/rfc3550.txt
+  bytes: 259985
+  sha256: 4c210e9434b5b4c029e8536ad8991f3709bc3cbfa0999e951bcb4c2143c539e8
+existing_endpoint_blobs:
+  rtp_rfc3550: 21c240705563c581bd9f1de2c5aef71a430fc4d0
+objects:
+- candidate_id: pion_rtp
+  candidate_path: 01_State/Inbox/candidates/pion_rtp.yaml
+  candidate_blob: d6ee78438f58628f460f01c913c77309f1a332dd
+  proposed_record:
+    id: pion_rtp
+    type: system
+    kind: library
+    name_zh: Pion RTP 实时传输 Go 库
+    name_en: Pion RTP Go library
+    official_name: Pion RTP
+    version: 1.10.6
+    external_identifiers:
+    - namespace: github
+      value: pion/rtp
+    description_zh: Pion 项目的开源 Go RTP 库。本记录固定核验 1.10.6 的源码，仅以调用方提供合法字段、X=false 的 RFC3550 基础包布局编解码作为实现先例；不等同于完整 RTP/RTCP
+      会话、独立符合性或互通验证。
+    description_en: The Pion project’s open-source Go RTP library. This record verifies fixed 1.10.6 sources, using
+      RFC3550 base packet layout encoding/decoding with caller-valid fields and X=false as a bounded implementation
+      precedent, not complete RTP/RTCP sessions, independent conformance or interoperability testing.
+    open_source: true
+    license_expression: MIT
+    domains:
+    - media
+    - networking
+    scope_notes_zh: '软件库主体对应官方 tag v1.10.6、commit 9a8f93554133824676326b43f068167fef01a884；不是 Pion 组织、RTP 规范或独立虚构包处理组件。只核验该版次，不自动外推其他版本。
+
+
+      仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC 数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false
+      时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的 Packet.PaddingSize 保持零或一致。Unmarshal
+      的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP 会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录
+      A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。'
+    scope_notes_en: 'The whole software-library subject is pinned to official tag v1.10.6, commit 9a8f93554133824676326b43f068167fef01a884;
+      it is not the Pion organization, the RTP specification or a fictional standalone packet-processing component.
+      Only this version was verified, not other releases.
+
+
+      From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload and padding
+      delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent padding flags/sizes
+      are caller preconditions, not general validity checks enforced by the library. With P=false both PaddingSize
+      fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize while the deprecated
+      Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer rather than copying;
+      callers own its lifetime and subsequent mutation. Source and test recipes were inspected only: the upstream
+      package was not installed, built or run. This does not establish complete RTP/RTCP sessions, SSRC management,
+      sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile interpretation, Appendix
+      A validation, transport delivery, SRTP/security, third-party interoperability or IA adoption; arbitrary inputs
+      have no byte-identical roundtrip guarantee. Header extensions and other functions are outside this evidence
+      slice, not asserted absent from the library.'
+    sources:
+    - &id001
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/README.md#L1-L22
+      title: Pion RTP identity and upstream RFC3550 implementation claim
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/go.mod#L1-L10
+      title: Go module identity and declared toolchain/dependencies; not executed
+      language: en
+      accessed: '2026-10-31'
+    - &id002
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L107-L154
+      title: Base header parsing and bounds checks; version is extracted rather than validated
+      language: en
+      accessed: '2026-10-31'
+    - &id003
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L230-L256
+      title: Packet payload and padding boundaries; payload aliases caller buffer
+      language: en
+      accessed: '2026-10-31'
+    - &id004
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L272-L318
+      title: Base header serialization and caller-controlled fields
+      language: en
+      accessed: '2026-10-31'
+    - &id005
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L525-L568
+      title: Packet serialization, payload copy and padding bytes
+      language: en
+      accessed: '2026-10-31'
+    - &id006
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L610-L615
+      title: Effective padding size and deprecated-field fallback
+      language: en
+      accessed: '2026-10-31'
+    - &id007
+      url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet_test.go#L1714-L1745
+      title: No-extension padding test recipes; inspected, not executed
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/LICENSE
+      title: Fixed-source MIT license
+      language: en
+      accessed: '2026-10-31'
+    - &id008
+      url: https://github.com/pion/rtp/releases/tag/v1.10.6
+      title: Official Pion RTP v1.10.6 release, published 2026-10-21
+      language: en
+      accessed: '2026-10-31'
+    - &id009
+      url: https://www.rfc-editor.org/rfc/rfc3550.html#section-5.1
+      title: RFC3550 section 5.1 base packet layout; section 4 byte order
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T20:49:26+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Pion RTP source evidence executor
+  preflight:
+    canonical_records: 277
+    existing_candidate_records: 268
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    candidate_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+    relation_schema_errors: []
+relations:
+- proposal_id: pion_rtp_implements_rtp_rfc3550_base_packet
+  proposed_record:
+    id: pion_rtp_implements_rtp_rfc3550_base_packet
+    type: relation
+    name_zh: Pion RTP 1.10.6 有界实现 RTP 基础包布局编解码
+    name_en: Pion RTP 1.10.6 implements bounded RTP base packet layout encoding/decoding
+    source: pion_rtp
+    relation: implements
+    target: rtp_rfc3550
+    context:
+      version_context:
+        source: Pion RTP 1.10.6; tag v1.10.6, commit 9a8f93554133824676326b43f068167fef01a884
+        target: RFC3550, July 2003; section 5.1 base layout and section 4 byte order
+      conditions_zh: 仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC 数量≤15
+        和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false 时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的
+        Packet.PaddingSize 保持零或一致。Unmarshal 的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP
+        会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录 A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。
+      conditions_en: 'From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload
+        and padding delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent
+        padding flags/sizes are caller preconditions, not general validity checks enforced by the library. With
+        P=false both PaddingSize fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize
+        while the deprecated Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer
+        rather than copying; callers own its lifetime and subsequent mutation. Source and test recipes were inspected
+        only: the upstream package was not installed, built or run. This does not establish complete RTP/RTCP sessions,
+        SSRC management, sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile
+        interpretation, Appendix A validation, transport delivery, SRTP/security, third-party interoperability or
+        IA adoption; arbitrary inputs have no byte-identical roundtrip guarantee. Header extensions and other functions
+        are outside this evidence slice, not asserted absent from the library.'
+    evidence:
+    - *id001
+    - *id002
+    - *id003
+    - *id004
+    - *id005
+    - *id006
+    - *id007
+    - *id008
+    - *id009
+    last_verified_at: '2026-10-31T20:49:26+00:00'
+    last_verified_by: Agent — OpenAI / dot, fixed Pion RTP source evidence executor
+membership_proposals:
+- category_id: media_network
+  ref:
+    surface: canonical
+    id: pion_rtp
+  rationale_zh: 编辑导航至实际基础 RTP 包编解码先例，不是 capability、采用或互通事实。
+supplementary_verification:
+  observed_at: '2026-10-31T20:49:26+00:00'
+  upstream_install_build_or_execution: false
+  source_test_recipes_inspected_only: true
+materialization_boundary_zh: 精确候选与完整packet需独立语义审核通过后冻结到真实 Git 祖先 F；再引用其实际 commit/blob 物化 acceptance 与 Canonical，packet
+  只留引用回执。
+existing_endpoint_supplements:
+- id: rtp_rfc3550
+  path: 01_State/01_Objects/rtp_rfc3550.yaml
+  description_zh: 规定实时应用的数据传输协议 RTP 及控制协议 RTCP；本协议自身不保证及时交付或服务质量。 Pion RTP 1.10.6 的 implements 入边仅记录 X=false、调用方提供合法字段与一致填充大小的基础包布局编解码；源码检视不是完整
+    RTP/RTCP 会话、符合性或互通测试。
+  description_en: Specifies RTP and RTCP for real-time applications; RTP itself does not guarantee timely delivery
+    or quality of service. The Pion RTP 1.10.6 implements edge records only base packet layout encoding/decoding
+    with X=false, caller-valid fields and coherent padding sizes; source inspection is not complete RTP/RTCP sessions,
+    conformance or interoperability testing.
+  scope_notes_zh: 仅限定 Pion RTP 1.10.6 入边，其他关系与 RFC3550 的原规范事实不变。 仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC
+    数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false 时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的
+    Packet.PaddingSize 保持零或一致。Unmarshal 的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP
+    会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录 A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。
+  scope_notes_en: 'This limits only the Pion RTP 1.10.6 incoming edge; other relations and the original RFC3550
+    normative facts are unchanged. From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields,
+    CSRCs, payload and padding delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and
+    coherent padding flags/sizes are caller preconditions, not general validity checks enforced by the library.
+    With P=false both PaddingSize fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize
+    while the deprecated Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer
+    rather than copying; callers own its lifetime and subsequent mutation. Source and test recipes were inspected
+    only: the upstream package was not installed, built or run. This does not establish complete RTP/RTCP sessions,
+    SSRC management, sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile interpretation,
+    Appendix A validation, transport delivery, SRTP/security, third-party interoperability or IA adoption; arbitrary
+    inputs have no byte-identical roundtrip guarantee. Header extensions and other functions are outside this evidence
+    slice, not asserted absent from the library.'
+  preserve_fields:
+  - record_created_at
+  - metadata_backfilled_at
+  - last_verified_at
+  - last_verified_by
+  - intake_provenance
+  new_sources:
+  - *id002
+  - *id003
+  - *id004
+  - *id005
+  - *id006
