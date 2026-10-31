@@ -1,0 +1,57 @@
+contract_version: candidate-object-v1
+candidate_id: openssl
+label: OpenSSL software toolkit (3.6.0)
+publisher: OpenSSL Project
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: openssl/openssl
+locators:
+- url: https://github.com/openssl/openssl
+  role: official
+- url: https://github.com/openssl/openssl/tree/openssl-3.6.0
+  role: dated
+- url: https://github.com/openssl/openssl/tree/7b371d80d959ec9ab4139d09d78e83c090de9779
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh State/Evolution and public issue/PR checks found no whole-OpenSSL subject; existing TLS document succession,
+    aioquic and libSRTP are distinct.
+  merge_authorized: false
+unknowns:
+- 'OpenSSL is the whole software project containing libssl, libcrypto and the openssl command-line utility. This
+  record pins 3.6.0 / commit 7b371d80d959ec9ab4139d09d78e83c090de9779 and inspects only ordinary version-flexible
+  TLS client version-bound configuration and ClientHello construction, not a fictional standalone bounds component.
+  SSL_CTX/SSL min/max API macros dispatch through ctrl checks and field updates. Zero means automatically selecting
+  the lowest/highest supported version, not wire version zero. Preliminary checks distinguish TLS/DTLS and compile-time
+  exclusions, but are not a general validator guaranteeing min<=max or a nonempty usable range; this is static observation,
+  not a runtime test of contradictory settings. Nonzero bounds may be ignored on version-inflexible methods while
+  returning success; this slice assumes caller-selected version-flexible TLS methods. Getters return configured
+  fields, not an established peer-negotiated version. Connection creation copies context bounds only when method
+  versions match; this does not show that later context changes update existing connections. Context fields initialize
+  to zero, but creation subsequently applies system-default configuration and can fail, so unconstrained final 0/0
+  defaults are not asserted. Actual client range selection enumerates compiled method entries and combines bounds,
+  disabled-version options, security policy and Suite-B restrictions while handling enabled ranges and holes; If
+  no enabled method remains, selection returns no-protocols-available. Configuration success does not establish
+  available ciphers/providers, certificates, peer authentication or satisfied security levels. Actual ClientHello
+  construction consumes this range; TLS1.3 still uses TLS1.2 in legacy_version, which alone does not identify the
+  eventual negotiated version. The extension table/dispatcher reaches the supported_versions constructor: it omits
+  that extension below TLS1.3, otherwise writes the selected range into an in-memory WPACKET with error paths. Constructing
+  data is not network output, peer receipt, successful handshake or authenticated connection evidence. Server selection,
+  QUIC, DTLS and other paths are outside this slice, not claimed absent from the software. Fixed source and test
+  recipes were inspected only: no upstream installation, build, import, execution or tests; no handshake, network,
+  certificate operation or TLS/provider/security-setting change. README TLS1.3/RFC8446 wording is an upstream description
+  of this release, not complete RFC8446 conformance and not an automatic RFC9846 claim. Zero technical relations
+  are added; existing numbered documents and succession edge remain unchanged. No complete protocol conformance,
+  cryptographic/deployment-security audit, third-party interoperability, performance, current platform/dependency
+  compatibility, production suitability or IA adoption is established. VERSION.dat records 2025-10-01 as release
+  date, not a latest-version claim. GitHub tag unknown_key metadata is neither local signature verification nor
+  a compromise conclusion; no local signature audit was performed. Apache-2.0 is recorded from fixed LICENSE.txt
+  only, not legal-suitability or patent-clearance advice. Existing trust membership is editorial navigation only.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent semantic review

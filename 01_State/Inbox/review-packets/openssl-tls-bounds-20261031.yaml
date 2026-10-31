@@ -1,0 +1,266 @@
+packet_id: openssl_tls_bounds_20261031
+status: pending_independent_semantic_review
+baseline_commit: 3131b1eaab7a99d0bc5ce68414e9d6f5d398e99e
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 完整OpenSSL软件的有界TLS客户端配置/ClientHello构造源码先例；不是既有RFC文献研究或其他库的重复。
+- 仅一个system/software对象及trust编辑导航，零技术关系，不改旧协议/后继边/安全配置/治理。
+work_item_preflight:
+  baseline_commit: 3131b1eaab7a99d0bc5ce68414e9d6f5d398e99e
+  searched_at: '2026-10-31T23:37:35+00:00'
+  terms:
+  - openssl
+  - openssl/openssl
+  github_issue_hits: 0
+  github_pr_hits: 0
+  open_prs:
+  - 591
+  - 498
+  - 439
+  - 416
+  limits: Visible indexed observations only; no global completeness claim.
+official_release:
+  version: 3.6.0
+  tag: openssl-3.6.0
+  commit: 7b371d80d959ec9ab4139d09d78e83c090de9779
+  declared_release_date: '2025-10-01'
+  signature_verification: Not independently performed; API unknown_key is not a compromise conclusion
+official_source_manifest:
+  version: 3.6.0
+  commit: 7b371d80d959ec9ab4139d09d78e83c090de9779
+  files:
+  - path: LICENSE.txt
+    bytes: 10175
+    sha256: 7d5450cb2d142651b8afa315b5f238efc805dad827d91ba367d8516bc9d49e7a
+    git_blob: 49cc83d2ee29d13453188217f0e4edd70c7f842f
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/LICENSE.txt
+  - path: README.md
+    bytes: 8472
+    sha256: 97cb61aeffe4d843d841f9ec0420206e7cee3a0fee6114589e38e1b5a8ce1255
+    git_blob: 3a290e67d5d29757d95fc5753714a910ee4a4cf1
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/README.md
+  - path: VERSION.dat
+    bytes: 99
+    sha256: 779a02cb05b3d21b35d52516ae20c3b55e0e722c528161dd016ee064face1542
+    git_blob: cd54c7d895ab53cdaf8411a8843cfc3675aec599
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/VERSION.dat
+  - path: doc/man3/SSL_CTX_new.pod
+    bytes: 10297
+    sha256: e79a33e44b1643e5a6fa824fbea34d28d9c500ff793e5245757b7e548ab46d61
+    git_blob: 627d9e7f0dc36d6ac34bbe7eff909890226ed3fd
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/doc/man3/SSL_CTX_new.pod
+  - path: doc/man3/SSL_CTX_set_min_proto_version.pod
+    bytes: 2639
+    sha256: 30b1c4d280832756af3a756bbdd2bd982bb0c7c2b3079197439c25d4254f9ace
+    git_blob: d9b61dcce9fde9ed35c560db01ad0e4d7a233374
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/doc/man3/SSL_CTX_set_min_proto_version.pod
+  - path: include/openssl/ssl.h.in
+    bytes: 132103
+    sha256: 3d16cc817d05e0017a638c0be5922bd4f35c1245ed5984d0a1d16dfdfc8979c9
+    git_blob: 1cc77189023c5acdd9c9039649f9e8261dd7935e
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/include/openssl/ssl.h.in
+  - path: ssl/s3_lib.c
+    bytes: 141020
+    sha256: 12c763ac9e75f94ba636163e9475b31de3370e9f116063235a27000b84d89c13
+    git_blob: 226493a1615abc8e238db76f7eee1d0b947435eb
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/s3_lib.c
+  - path: ssl/ssl_lib.c
+    bytes: 229260
+    sha256: d6cead361c58e412fddbdb4eb8de893e787ad08e652e1fe305065ddead557ab9
+    git_blob: da99fd263125c0b10495410691293d4990c4f8ad
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/ssl_lib.c
+  - path: ssl/ssl_local.h
+    bytes: 127094
+    sha256: 4240aabe4c201847b6620c1c49300f663bdecabace29921177bcbe286427c70d
+    git_blob: 104379e990b1c670237f350d4f8cd0a98e1ac650
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/ssl_local.h
+  - path: ssl/statem/extensions.c
+    bytes: 69769
+    sha256: 132adf4f79396ee5bfd8bc38669fa47c319ede1fdfc46d2dce47b60930ccd1ce
+    git_blob: b3158dfd77c7c127a653149a3d7204b519f684f1
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/extensions.c
+  - path: ssl/statem/extensions_clnt.c
+    bytes: 77537
+    sha256: b6c4c3dff317ecdc311bec6b3307a1be92d66dd20c3ed3f83b3d2670c5b37d9e
+    git_blob: 0dc418a8cbb4ed61cd987c8808c795aec554ad09
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/extensions_clnt.c
+  - path: ssl/statem/statem_clnt.c
+    bytes: 140333
+    sha256: 4ce70a82366e0220e44666e507ecdfec16e5715f98a2a137a433e97ec0adb91f
+    git_blob: a968becdfc96cde3421193a97fad0ccb0b5e81dc
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/statem_clnt.c
+  - path: ssl/statem/statem_lib.c
+    bytes: 100038
+    sha256: 7bb126c0a47d3123741bf285b2b6563f9c4f01e127066e04bc39b0a649e7052a
+    git_blob: 65530df7a433c4140bece860d6023e9c39c75237
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/statem_lib.c
+  - path: test/ssl_test.c
+    bytes: 20866
+    sha256: 960686ae19c0cde618afaa403ca05393dce9c265ca0fe2345456fa4b2e660b52
+    git_blob: 841d2294abaa3454066c711f8189d0750d0b84ef
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/test/ssl_test.c
+  - path: test/sslapitest.c
+    bytes: 479379
+    sha256: 932419c0c1c55852a0c0b9b47c71f5bb869e2d4210774a324874580111047ab8
+    git_blob: 02c78ece8e729488bd3d3488ba2a07d74e4ddc34
+    official_tree_match: true
+    url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/test/sslapitest.c
+  execution: Static source inspection only; no installation/build/runtime/handshake/network/security-setting change
+objects:
+- candidate_id: openssl
+  candidate_path: 01_State/Inbox/candidates/openssl.yaml
+  candidate_blob: d9ac45a020f84b6e276b7cf794c28f6ba947c757
+  proposed_record:
+    id: openssl
+    type: system
+    kind: software
+    name_zh: OpenSSL 软件工具包
+    name_en: OpenSSL software toolkit
+    official_name: OpenSSL
+    version: 3.6.0
+    external_identifiers:
+    - namespace: github
+      value: openssl/openssl
+    official_url: https://openssl.org/
+    description_zh: OpenSSL 是包含 libssl、libcrypto 与 openssl 命令行工具的完整软件项目；本记录固定 3.6.0 / commit 7b371d80d959ec9ab4139d09d78e83c090de9779，只检视普通、版本可变
+      TLS 客户端的版本上下界配置及 ClientHello 构造源码路径，不虚构独立 bounds 组件。SSL_CTX/SSL 的 min/max API 宏经 ctrl 调用检查和字段设置；0 表示自动选择支持的最低/最高版本，不是线上的版本号
+      0。预检查区分 TLS/DTLS 并考虑编译排除，但不是保证 min<=max 或非空可用范围的通用验证器；这是静态代码观察，不是矛盾配置的运行测试。非零界限在固定版本 method 上可被忽略而仍返回成功；本片限定调用方选用版本可变
+      TLS method。getter 返回配置字段，不是对端已协商的版本。连接创建时，method 版本匹配才复制 context 的上下界；不能据此声称之后修改 context 会更新现有连接。context 字段先置零，但创建随后应用系统默认配置并可能失败，故不声称最终默认均为无约束
+      0/0。实际客户端范围选择枚举编译后的 method 表，结合上下界、禁用版本选项、安全策略与 Suite-B 限制处理可用区间和空洞；无剩余方法则返回 no-protocols-available。配置成功不是密码套件/provider、证书、身份认证或安全等级已满足的证明。ClientHello
+      真实构造入口消费该范围，TLS1.3 的 legacy_version 字段仍用 TLS1.2；该字段本身不能判定最终协商版本。扩展表/dispatcher 将调用导向 supported_versions 构造器：最大版本低于
+      TLS1.3 时省略该扩展，否则按选定范围写入内存 WPACKET，并有错误分支。构造数据不是网络写入、对端接收、成功握手或认证连接。服务器选择、QUIC、DTLS 及其他实现路径不在此片；排除范围不等于软件缺少这些功能。仅静态检查固定源码和测试配方；未安装、构建、导入、运行上游或其测试，未握手、联网、操作证书或改变
+      TLS/provider/安全配置。README 提及 TLS1.3 / RFC8446 只是该版本上游说明，不证明完整 RFC8446，更不自动成为 RFC9846 符合性；零技术关系，旧编号文献及取代边不变。未建立完整协议符合性、密码学或部署安全审计、第三方互通、性能、当前平台/依赖兼容性、生产适用性或
+      IA 采用。VERSION.dat 记录发布日 2025-10-01，不称最新版；GitHub tag 的 unknown_key 状态不是本次已验签或遭入侵结论，未本地验证签名。Apache-2.0 仅按固定
+      LICENSE.txt 记录，不作法律适用或专利清理判断。trust 仅为既有编辑导航。
+    description_en: 'OpenSSL is the whole software project containing libssl, libcrypto and the openssl command-line
+      utility. This record pins 3.6.0 / commit 7b371d80d959ec9ab4139d09d78e83c090de9779 and inspects only ordinary
+      version-flexible TLS client version-bound configuration and ClientHello construction, not a fictional standalone
+      bounds component. SSL_CTX/SSL min/max API macros dispatch through ctrl checks and field updates. Zero means
+      automatically selecting the lowest/highest supported version, not wire version zero. Preliminary checks distinguish
+      TLS/DTLS and compile-time exclusions, but are not a general validator guaranteeing min<=max or a nonempty
+      usable range; this is static observation, not a runtime test of contradictory settings. Nonzero bounds may
+      be ignored on version-inflexible methods while returning success; this slice assumes caller-selected version-flexible
+      TLS methods. Getters return configured fields, not an established peer-negotiated version. Connection creation
+      copies context bounds only when method versions match; this does not show that later context changes update
+      existing connections. Context fields initialize to zero, but creation subsequently applies system-default
+      configuration and can fail, so unconstrained final 0/0 defaults are not asserted. Actual client range selection
+      enumerates compiled method entries and combines bounds, disabled-version options, security policy and Suite-B
+      restrictions while handling enabled ranges and holes; If no enabled method remains, selection returns no-protocols-available.
+      Configuration success does not establish available ciphers/providers, certificates, peer authentication or
+      satisfied security levels. Actual ClientHello construction consumes this range; TLS1.3 still uses TLS1.2 in
+      legacy_version, which alone does not identify the eventual negotiated version. The extension table/dispatcher
+      reaches the supported_versions constructor: it omits that extension below TLS1.3, otherwise writes the selected
+      range into an in-memory WPACKET with error paths. Constructing data is not network output, peer receipt, successful
+      handshake or authenticated connection evidence. Server selection, QUIC, DTLS and other paths are outside this
+      slice, not claimed absent from the software. Fixed source and test recipes were inspected only: no upstream
+      installation, build, import, execution or tests; no handshake, network, certificate operation or TLS/provider/security-setting
+      change. README TLS1.3/RFC8446 wording is an upstream description of this release, not complete RFC8446 conformance
+      and not an automatic RFC9846 claim. Zero technical relations are added; existing numbered documents and succession
+      edge remain unchanged. No complete protocol conformance, cryptographic/deployment-security audit, third-party
+      interoperability, performance, current platform/dependency compatibility, production suitability or IA adoption
+      is established. VERSION.dat records 2025-10-01 as release date, not a latest-version claim. GitHub tag unknown_key
+      metadata is neither local signature verification nor a compromise conclusion; no local signature audit was
+      performed. Apache-2.0 is recorded from fixed LICENSE.txt only, not legal-suitability or patent-clearance advice.
+      Existing trust membership is editorial navigation only.'
+    domains:
+    - security
+    - networking
+    open_source: true
+    license_expression: Apache-2.0
+    sources:
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/README.md
+      title: Whole toolkit identity, official mirror and upstream RFC8446 reference
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/VERSION.dat
+      title: Fixed 3.6.0 release identity and declared date
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/doc/man3/SSL_CTX_set_min_proto_version.pod
+      title: Bounds API, automatic zero, options and QUIC exclusions
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/doc/man3/SSL_CTX_new.pod
+      title: Context and method configuration documentation
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/include/openssl/ssl.h.in
+      title: Public min/max macros dispatch to control IDs
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/ssl_lib.c
+      title: Control validation, stored bounds, creation-time copy and system configuration
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/statem_lib.c
+      title: Bound helper, fixed-method ignore, enabled-method filtering and ClientHello version
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/statem_clnt.c
+      title: Actual ClientHello entry and extension-construction call
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/extensions.c
+      title: Supported-versions entry in the actual extension table and dispatcher
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/ssl/statem/extensions_clnt.c
+      title: Selected range written into in-memory supported_versions WPACKET
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/test/ssl_test.c
+      title: Bounds-setting source test recipes; inspected, not run
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/test/sslapitest.c
+      title: Protocol-limit/reset source test recipes; inspected, not run
+      language: en
+      accessed: '2026-10-31'
+    - url: https://github.com/openssl/openssl/blob/7b371d80d959ec9ab4139d09d78e83c090de9779/LICENSE.txt
+      title: Fixed Apache License 2.0 text
+      language: en
+      accessed: '2026-10-31'
+    last_verified_at: '2026-10-31T23:37:35+00:00'
+    last_verified_by: Agent — OpenAI / dot / fixed OpenSSL source inspection only; no upstream execution or settings
+      changes
+  preflight:
+    canonical_records: 282
+    existing_candidate_records: 273
+    canonical_id_exists: false
+    machine_route: review_required
+    normalized_identifier_collisions: []
+    other_candidate_collisions: []
+    candidate_errors: []
+    schema_errors:
+      base-object.schema.json: []
+      identity-object.v0.schema.json: []
+      implementation-profile.v0.schema.json: []
+    relation_schema_errors: []
+relations: []
+membership_proposals:
+- category_id: trust
+  ref:
+    surface: canonical
+    id: openssl
+  rationale_zh: TLS版本配置与实际构造路径的编辑导航，不是安全保证、协议符合性或IA采用关系。
+supplementary_verification:
+  observed_at: '2026-10-31T23:37:35+00:00'
+  upstream_install_build_import_or_execution: false
+  handshake_network_certificate_or_security_setting_change: false
+  source_test_recipes_inspected_only: true
+materialization_boundary_zh: 精确packet独立审核后冻结真实Git祖先F；按实际commit/blob物化event/Canonical，当前packet成为reference-only receipt。
