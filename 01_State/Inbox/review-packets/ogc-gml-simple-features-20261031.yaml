@@ -1,135 +1,20 @@
 packet_id: ogc_gml_simple_features_20261031
-status: pending_independent_semantic_review
+status: materialized
+reviewed_packet_commit: c8c7d1b5b24ba90efa51aeac4b2abc3764b7378c
+reviewed_packet_blob: 48613e45602d65af64c65e538ec7fd09690f8ed1
+reviewed_packet_path: 01_State/Inbox/review-packets/ogc-gml-simple-features-20261031.yaml
 baseline_commit: bb9d8861c81c4531c30a692b2d42e7b79415dff7
 executor: Agent — OpenAI / dot / add_gml_profile_standard
-reviewer: null
-review_scope:
-- One exact profile publication, one optional-class documentary uses edge, one existing geospatial editorial membership.
-source_evidence:
-  method: Official PDF, cover and sections 1/2/10 visually read; official catalog and Core 17-069r4 read. PDF 939007
-    bytes SHA256 57a016ccef9fe93e57d771fd833358ce13ef60acb24f4661283940be6c2d8f43.
-  limitation: No mirrored full text/PDF, no upstream execution or implementation claims; no complete conformance
-    or later-corrigenda audit.
-preflight:
-  fresh_main: bb9d8861c81c4531c30a692b2d42e7b79415dff7
-  collisions: []
-  search_limit: Current State terms and indexed open issue/existing open PR scan, not global absence.
+acceptance_events: 01_State/Inbox/acceptance-events/ogc-gml-simple-features-20261031.yaml
 objects:
 - candidate_id: ogc_gml_simple_features_10_100r3
-  candidate_path: 01_State/Inbox/candidates/ogc_gml_simple_features_10_100r3.yaml
-  candidate_blob: 9f7d8ced8d91787b34d4b9b8221f4159410686a3
-  proposed_path: 01_State/01_Objects/ogc_gml_simple_features_10_100r3.yaml
-  proposed_record:
-    id: ogc_gml_simple_features_10_100r3
-    type: artifact
-    kind: profile
-    name_zh: GML 简单要素 Profile（OGC 10-100r3 勘误出版物）
-    name_en: GML Simple Features Profile (OGC 10-100r3 corrigendum)
-    official_name: Geography Markup Language (GML) simple features profile (with Corrigendum)
-    description_zh: '固定 OGC 10-100r3《Geography Markup Language (GML) simple features profile (with Corrigendum)》（2012-04-05
-      勘误出版物），限定 GML 3.2 与 XML Schema 的要素编码规则，含 SF0、SF1、SF2 三个符合级别。封面 Version 2.0 与外部标识 http://www.opengis.net/spec/gmlsf/2.0.1
-      同时保留，不将二者默默统一，也不代表整个 GML 或单独的编码类对象。该 Profile 不解决未知应用模式的领域语义；SF2 对非空间属性的放宽不等于任意几何或实现支持。固定 OGC API Features
-      Core 17-069r4 / 1.0.1 第 8.4 节的可选 GML-SF0 类及第 8.5 节的可选 GML-SF2 类在文献中引用本 Profile；第 8.1 节明确这些编码类不是 Core 强制，可采用其他编码。Core
-      对这两个类另加的二维线性几何限制不是整个 Profile 的范围。此为规范文献依赖，不证明任何实现采用、符合性或互通。仅按该勘误出版物记录；文档保留 technical-note 修订标记，未逐条审计符合性或核验所有后续勘误，不声称最新版本。
-
-
-      English scope and limitations:
-
-
-      Fixed OGC 10-100r3, Geography Markup Language (GML) simple features profile (with Corrigendum), published
-      2012-04-05. It constrains feature encoding using GML 3.2 and XML Schema and includes compliance levels SF0,
-      SF1 and SF2. Cover Version 2.0 and external identifier http://www.opengis.net/spec/gmlsf/2.0.1 are both preserved,
-      not silently unified. This is neither all GML nor an invented individual encoding-class object. It does not
-      resolve domain semantics of unknown application schemas; SF2 relaxation of non-spatial properties does not
-      imply arbitrary geometry or implementation support. Fixed OGC API Features Core 17-069r4 / 1.0.1 cites this
-      Profile for its optional section 8.4 GML-SF0 and section 8.5 GML-SF2 classes; section 8.1 makes these encoding
-      classes non-mandatory for Core and allows other encodings. Core adds two-dimensional linear-geometry constraints
-      for those classes; these are not the scope of the entire Profile. This is documentary specification use, not
-      evidence of implementation adoption, conformance or interoperability. Limited to this corrigendum publication,
-      which retains technical-note revision marks; no clause-by-clause conformance audit or review of all later
-      corrigenda, and no latest-version claim.'
-    description_en: Fixed OGC 10-100r3, Geography Markup Language (GML) simple features profile (with Corrigendum),
-      published 2012-04-05. It constrains feature encoding using GML 3.2 and XML Schema and includes compliance
-      levels SF0, SF1 and SF2. Cover Version 2.0 and external identifier http://www.opengis.net/spec/gmlsf/2.0.1
-      are both preserved, not silently unified. This is neither all GML nor an invented individual encoding-class
-      object. It does not resolve domain semantics of unknown application schemas; SF2 relaxation of non-spatial
-      properties does not imply arbitrary geometry or implementation support. Fixed OGC API Features Core 17-069r4
-      / 1.0.1 cites this Profile for its optional section 8.4 GML-SF0 and section 8.5 GML-SF2 classes; section 8.1
-      makes these encoding classes non-mandatory for Core and allows other encodings. Core adds two-dimensional
-      linear-geometry constraints for those classes; these are not the scope of the entire Profile. This is documentary
-      specification use, not evidence of implementation adoption, conformance or interoperability. Limited to this
-      corrigendum publication, which retains technical-note revision marks; no clause-by-clause conformance audit
-      or review of all later corrigenda, and no latest-version claim.
-    version: 2.0 (OGC 10-100r3; 2012-04-05 corrigendum)
-    external_identifiers:
-    - namespace: ogc
-      value: 10-100r3
-    - namespace: uri
-      value: http://www.opengis.net/spec/gmlsf/2.0.1
-    official_url: https://docs.ogc.org/profile/10-100r3/10-100r3.pdf
-    domains:
-    - geospatial
-    sources:
-    - &id002
-      url: https://docs.ogc.org/profile/10-100r3/10-100r3.pdf
-      title: OGC 10-100r3, 2012-04-05 corrigendum — cover Version 2.0, external identifier /spec/gmlsf/2.0.1; sections
-        1–2 and compliance levels SF0/SF1/SF2
-      language: en
-      accessed: '2026-10-31'
-    - url: https://www.ogc.org/standards/gml/
-      title: OGC GML directory — 10-100r3 listed separately as Profile; version column blank
-      language: en
-      accessed: '2026-10-31'
-    - &id001
-      url: https://docs.ogc.org/is/17-069r4/17-069r4.html
-      title: OGC 17-069r4 / 1.0.1 — section 3 cites 2012 OGC 10-100r3; section 8.1 makes encoding classes optional,
-        sections 8.4/SF0 and 8.5/SF2 cite the profile
-      language: en
-      accessed: '2026-10-31'
-    last_verified_at: '2026-10-31T05:55:00Z'
-    last_verified_by: Agent — OpenAI / dot / add_gml_profile_standard; exact publication and documentary use only
+  canonical_id: ogc_gml_simple_features_10_100r3
+  acceptance_event_id: accept-20261031-gml-profile-ogc_gml_simple_features_10_100r3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/c8c7d1b5b24ba90efa51aeac4b2abc3764b7378c/01_State/Inbox/review-packets/ogc-gml-simple-features-20261031.yaml
 relations:
 - proposal_id: ogc_features_core_1_0_1_uses_gml_simple_features_10_100r3
-  proposed_path: 01_State/02_Relations/ogc-gml-simple-features.yaml
-  proposed_record:
-    id: ogc_features_core_1_0_1_uses_gml_simple_features_10_100r3
-    type: relation
-    name_zh: Core 1.0.1 的可选 GML-SF0/SF2 编码类在文献中使用 OGC 10-100r3
-    name_en: Core 1.0.1 optional GML-SF0/SF2 encoding classes documentarily use OGC 10-100r3
-    source: ogc_api_features_17_069r4
-    relation: uses
-    target: ogc_gml_simple_features_10_100r3
-    context:
-      version_context:
-        source: OGC 17-069r4 / 1.0.1, sections 8.4/SF0 and 8.5/SF2
-        target: OGC 10-100r3, 2012-04-05 corrigendum; cover Version 2.0; external identifier http://www.opengis.net/spec/gmlsf/2.0.1
-      conditions_zh: 仅固定 Core 第 8.4 节 GML-SF0 与第 8.5 节 GML-SF2 两个可选编码类的直接文献依赖，分别使用 Level 0 与 Level 2；第 8.1 节明确均非
-        Core 强制，也允许其他编码。对应 profile 参数 URI 为 http://www.opengis.net/def/profile/ogc/2.0/gml-sf0 和 http://www.opengis.net/def/profile/ogc/2.0/gml-sf2。Core
-        对这两个类的二维线性几何限制不是整个 Profile 的限制。不是所有 Core 部署均使用 GML，不证明实现支持、符合性、互通或 IA 采用；不拆分 SF0/SF2 假对象，不推导传递关系。
-      conditions_en: Direct documentary dependency only for the optional Core section 8.4 GML-SF0 and section 8.5
-        GML-SF2 encoding classes, using Level 0 and Level 2 respectively. Section 8.1 makes both non-mandatory for
-        Core and allows other encodings. Their profile parameter URIs are http://www.opengis.net/def/profile/ogc/2.0/gml-sf0
-        and http://www.opengis.net/def/profile/ogc/2.0/gml-sf2. Core two-dimensional linear-geometry constraints
-        for those classes do not define the entire Profile. Not all Core deployments use GML; no implementation
-        support, conformance, interoperability or IA adoption is established. No invented SF0/SF2 objects or transitive
-        inference.
-    evidence:
-    - *id001
-    - *id002
-    last_verified_at: '2026-10-31T05:55:00Z'
-    last_verified_by: Agent — OpenAI / dot / add_gml_profile_standard; documentary optional-class use only
-membership_proposals:
-- category_id: geospatial
-  ref:
-    surface: canonical
-    id: ogc_gml_simple_features_10_100r3
-navigation_baseline:
-  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
-  sha256: 682d6d67e030e39a833c9be2f7cef74535848ae6787ebb689993a47f48d07da9
-  git_blob: 0dd72cd54e602fa656effee0589d2f429900cac7
-excluded_scope:
-- No new schema, renderer, taxonomy, class objects, capabilities, predicates, governance, maintenance rules, implementation
-  claims, full PDF mirror or changes to any held work.
-materialization_boundary: Frozen new-state candidate remains in actual Git ancestry; independent exact semantic
-  and structural review plus applicable checks before acceptance. Proposed fields unchanged except lifecycle/contribution/intake
-  provenance.
+  canonical_relation_id: ogc_features_core_1_0_1_uses_gml_simple_features_10_100r3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/c8c7d1b5b24ba90efa51aeac4b2abc3764b7378c/01_State/Inbox/review-packets/ogc-gml-simple-features-20261031.yaml
+notes_zh:
+- 引用式物化回执；完整提案和来源限制保留于实际冻结祖先。
+- 单个2012-04-05勘误Profile、一条限Core两个可选编码类的文献uses及既有geospatial编辑导航；不声明实现支持，不改模型或维护规则。
