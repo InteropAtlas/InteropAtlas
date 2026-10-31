@@ -1,0 +1,46 @@
+contract_version: candidate-object-v1
+candidate_id: git_software
+label: Git distributed version-control software (2.52.0)
+publisher: Git project
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: git/git
+locators:
+- url: https://git-scm.com/
+  role: official
+- url: https://github.com/git/git/tree/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Whole Git software differs from existing git_protocol_v2 document and Dulwich local-library precedent; normalized
+    identifiers and candidate route require independent review.
+  merge_authorized: false
+unknowns:
+- 'Implementation and matching ls-refs documentation are fixed to Git 2.52.0. Existing PR497 evidence uses Git 2.51.0
+  documentation: the complete ls-refs subsections are byte-identical, but the full documents differ. This finite
+  correspondence is not whole-edition equality and does not relabel the work-level git_protocol_v2 standard as a
+  Git software release.'
+- 'From fixed source only, this reviews the server ls-refs path after upload-pack has selected wire protocol v2:
+  serve dispatches the command, reads peel, symrefs, ref-prefix and unborn arguments, filters references under repository
+  namespace, hideRefs and configuration conditions, formats object IDs/refnames and conditional symref targets,
+  peeled objects or unborn HEAD, then writes stdout pkt-lines and flushes. Writing/flushing stdout is not evidence
+  of network transfer, peer receipt or reliable delivery. ref-prefix is an optimization, not strict authorization
+  filtering; at 65,536 or more prefix lines the optimization is cleared, and the specification permits nonmatching
+  references for clients to filter. lsrefs.unborn advertise (default), allow and ignore distinguish advertisement/acceptance
+  behavior; hidden-reference processing does not establish security isolation. Repository, configuration, resource
+  and output errors apply, with no every-input/repository success or complete-reference-inventory guarantee. Source
+  and test recipes were inspected only: no downloaded Git installation, build, execution, protocol test or network
+  service. Environment Git used for IA bookkeeping is not execution evidence for this source. Fetch/packfile/clone/push,
+  complete negotiation, complete Git/v2 conformance, repository atomic consistency, authentication/TLS/SSH/security,
+  cross-implementation interoperability, performance, current-platform compatibility and IA/GitHub deployed-version
+  or adoption claims are excluded; unreviewed functions are not asserted absent.'
+- No aggregate whole-tree license expression, tag-signature verification or independently confirmed release-announcement
+  date is asserted.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent semantic review
