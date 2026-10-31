@@ -307,3 +307,74 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 default-dialect evidence review
   github_actor: ff6962757
+---
+id: openapi_3_2_1_uses_uri_rfc3986
+type: relation
+name_zh: OpenAPI 3.2.1 描述引用的基 URI 确定使用 RFC 3986
+name_en: OpenAPI 3.2.1 description-reference base determination uses RFC 3986
+source: openapi_3.2.1
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: OpenAPI Specification 3.2.1 (10 September 2026), authoritative versioned HTML
+    target: RFC 3986 / STD 66 (January 2005)
+  conditions_zh: 限固定 OAS 3.2.1 的 API 描述 URI 标识引用。§4.1.2.2 允许未另行限定的 URI 字段为 RFC 3986 §4.2 相对引用；§4.1.2.2.1 要求基
+    URI 按 RFC 3986 §5.1.1–5.1.4 确定，Schema Object 还遵循 JSON Schema 2020-12 §8.2。相对 $self 先对下一可能基址来源解析再用于其他引用。标识可不同于文件位置；文档取回支持可选，不能把此关系解释为
+    API 端点 URL 规则、自动网络请求、安全取回或实际互通。
+  conditions_en: Limited to API-description URI identifiers in fixed OAS 3.2.1. Section 4.1.2.2 allows RFC
+    3986 section 4.2 relative references unless otherwise specified. Section 4.1.2.2.1 requires base determination
+    under RFC 3986 sections 5.1.1–5.1.4, with JSON Schema 2020-12 section 8.2 additionally applying to Schema
+    Objects. A relative $self is first resolved against the next possible base source. Identifiers may differ
+    from document locations; retrieval support is optional. This is not API-endpoint URL resolution, automatic
+    network access, safe retrieval or demonstrated interoperability.
+evidence:
+- url: https://spec.openapis.org/oas/v3.2.1.html#establishing-the-base-uri
+  title: OpenAPI 3.2.1 — sections 4.1.2.2 and 4.1.2.2.1 identifier context and normative RFC 3986 base determination
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:19:46+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OpenAPI 3.2.1 reference-source review
+record_created_at: '2026-10-31T20:19:46+00:00'
+record_updated_at: '2026-10-31T20:19:46+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
+  github_actor: ff6962757
+---
+id: openapi_3_2_1_uses_json_pointer_rfc6901
+type: relation
+name_zh: OpenAPI 3.2.1 推荐用 JSON Pointer 解释指定 JSON/YAML 描述片段
+name_en: OpenAPI 3.2.1 recommends JSON Pointer for specified JSON/YAML description fragments
+source: openapi_3.2.1
+relation: uses
+target: json_pointer_rfc6901
+context:
+  version_context:
+    source: OpenAPI Specification 3.2.1 (10 September 2026), authoritative versioned HTML
+    target: RFC 6901 (April 2013)
+  conditions_zh: 限固定 OAS 3.2.1 §4.1.2.2.2：URI 片段依据被引用文档的片段解析机制处理；当其表示为 JSON 或 YAML 时，片段 SHOULD 按 RFC 6901 JSON
+    Pointer 解释。此建议不是 MUST，不要求所有引用带片段，也不把所有片段、Schema 的 $anchor/$dynamicAnchor 或 header/query/path/runtime 选择器自动归为
+    JSON Pointer。描述文档的完整解析、Schema 自身规则及其他上下文仍需单独遵守；不证明指针目标存在、运行时求值成功或工具符合性。
+  conditions_en: Limited to fixed OAS 3.2.1 section 4.1.2.2.2. URI fragments follow the referenced document’s
+    fragment-resolution mechanism; when its representation is JSON or YAML, the fragment SHOULD be interpreted
+    as an RFC 6901 JSON Pointer. This is not MUST, does not require fragments in all references, and does not
+    automatically classify all fragments, Schema $anchor/$dynamicAnchor identifiers or header/query/path/runtime
+    selectors as JSON Pointers. Complete document parsing, Schema-specific rules and other contexts remain
+    separately applicable. Target existence, successful runtime evaluation and tool conformance are not established.
+evidence:
+- url: https://spec.openapis.org/oas/v3.2.1.html#resolving-uri-fragments
+  title: OpenAPI 3.2.1 — section 4.1.2.2.2 referenced JSON/YAML fragment recommendation; section 4.1.2.1 complete
+    parsing and named Schema targets
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:19:46+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OpenAPI 3.2.1 reference-source review
+record_created_at: '2026-10-31T20:19:46+00:00'
+record_updated_at: '2026-10-31T20:19:46+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
+  github_actor: ff6962757
