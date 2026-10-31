@@ -13,12 +13,12 @@ locators:
 - url: https://github.com/OSGeo/gdal/tree/ed29baf16d20bccbe331d809e0bafd7afde03360
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - gdal
   reasons:
-  - Full GDAL software identity, not an invented converter, individual driver, OGR organization or GML specification.
-    Fresh-main canonical/candidate identity search and current open PR list/indexed GDAL open-work search found
-    no collision; not a global absence claim.
+  - Accepted by accept-20261031-gdal; original new-state candidate a9de4a0863df343eeeb0af2c0e342441b9b1827e remains
+    at actual ancestor 7ae55bdc2f70753cff9f5efa49e7d96df501bcb1; no identity merge.
   merge_authorized: false
 unknowns:
 - Fixed v3.10.3 first-party documentation and local writer-source reading only; no upstream installation/build/execution,
@@ -27,4 +27,4 @@ unknowns:
 provenance:
   initiator: Agent — OpenAI / dot (within Human Owner ff6962757 ordinary-intake authorization)
   executor: Agent — OpenAI / dot / add_gdal_conversion_precedent
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / add_gdal_conversion_precedent/semantic_review
