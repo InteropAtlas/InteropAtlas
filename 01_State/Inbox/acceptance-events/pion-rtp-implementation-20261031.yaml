@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261031-pion-rtp
+candidate_id: pion_rtp
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: pion_rtp
+review:
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  reviewed_at: '2026-10-31T21:05:00+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核固定官方 tag/release、源码指纹、真实 library 身份、无碰撞路径、基础布局有界 implements 与目标反向可见边界。
+  - 明确 X=false 与合法字段/一致 padding 是调用方前提；Payload 借用输入；只检视源码/测试配方，未构建或运行上游，不宣称完整 RTP/RTCP、符合性、互通、安全或 IA 采用。
+  - 接纳序列化时间不是推测审核耗时；最终物化与实际 H/M 另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/b8f63b927af87b3ad5e25977b2f858c4d6a88d27/01_State/Inbox/review-packets/pion-rtp-implementation-20261031.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/d6ee78438f58628f460f01c913c77309f1a332dd
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/6389681c41e4f552a0f7377ad454641c0cc10bda
+decided_at: '2026-10-31T21:05:00+00:00'
+notes:
+- 只接纳固定 Pion RTP 库主体、一条基础包布局 implements 和既有 media_network 编辑导航；旧 holds 未动。
+- 正常 Git 祖先保留完整已审候选和 packet；当前 packet 为引用回执，不复制 Canonical 事实。

@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/pion/rtp/tree/9a8f93554133824676326b43f068167fef01a884
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - pion_rtp
   reasons:
-  - Fresh identity search finds no existing Pion RTP subject or identifier collision; whole Go library, not Pion
-    organization or RFC3550.
+  - Accepted as canonical pion_rtp by accept-20261031-pion-rtp. Frozen new-state Candidate d6ee78438f58628f460f01c913c77309f1a332dd
+    and review_required route are replayed against actual ancestor b8f63b927af87b3ad5e25977b2f858c4d6a88d27; this
+    back-reference prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload and padding
@@ -36,4 +38,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
