@@ -4,10 +4,10 @@ kind: specification
 name_zh: OpenAPI 接口描述规范 3.2.1
 name_en: OpenAPI Specification 3.2.1
 official_name: OpenAPI Specification
-description_zh: OpenAPI Initiative 于 2026-09-10 发布的固定 3.2.1 规范文献，为 HTTP API 定义语言无关的描述结构，包括路径、操作、参数和内容表示；不是运行中的 API、验证器或客户端/服务端实现。
+description_zh: OpenAPI Initiative 于 2026-09-10 发布的固定 3.2.1 规范文献，为 HTTP API 定义语言无关的描述结构，包括路径、操作、参数和内容表示；不是运行中的 API、验证器或客户端/服务端实现。另据固定 3.2.1 正文核验：Schema Object 的默认方言以 JSON Schema Draft 2020-12 通用元模式词汇加 OAS base vocabulary 为基础；其方言 URI 属于 3.2/dialect/YYYY-MM-DD 系列，本记录不指定某次日期化 schema 迭代。资源根 $schema 覆盖文档 jsonSchemaDialect 默认值；非默认方言支持可选。format 默认只是非验证性注解，类型专用关键词不隐含 type 约束；通用模式校验不证明 OAS 扩展语义、任意工具支持或 HTTP API 实际互通。
 description_en: The fixed OpenAPI Initiative specification document 3.2.1, published on 2026-09-10, defining language-independent
   HTTP API description structures including paths, operations, parameters and content representations; not a running
-  API, validator or client/server implementation.
+  API, validator or client/server implementation. Separately checked against the fixed 3.2.1 text, the Schema Object default dialect combines JSON Schema Draft 2020-12 general-purpose meta-schema vocabularies with the OAS base vocabulary. Its URI belongs to the 3.2/dialect/YYYY-MM-DD series; this record selects no dated schema iteration. A resource-root $schema overrides the document jsonSchemaDialect default; support for other dialects is optional. format is a non-validating annotation by default, and type-specific keywords do not imply a type constraint. Generic schema validation establishes neither OAS extension semantics, arbitrary tool support nor actual HTTP API interoperability.
 version: 3.2.1
 external_identifiers:
 - namespace: openapi
@@ -21,8 +21,7 @@ versions:
 scope_notes_zh: 主体是固定 OpenAPI Specification 3.2.1 文献，而非 OpenAPI 家族、组织、资讯性 JSON Schema 制品或某个 API 实现。版本化官方 HTML 为该文献指定的权威文本；原始捕获哈希限定此次证据，不宣称
   URL 永久不可变或当前最新版。发布日期来自标题和 Appendix A，不使用 HTTP Last-Modified 2026-10-22。符合规范的 OpenAPI 文档是可用 JSON 或 YAML 表示的 JSON
   对象；这不要求被描述 API 的请求/响应内容也使用这两种格式。openapi 字段标识规范版本，与 info.version 描述的文档版本及被描述 API 的版本不同。资讯性 JSON Schema 若与规范正文有差异，以正文为准；本记录不证明模式验证器覆盖所有规范要求。major/minor
-  特征集与 patch 文本修订的区分不构成任意实现或跨版本兼容性保证，索引的 previous revisions obsolete 仅针对日期化 schema 迭代，不用于判定规范文献取代。本批零技术关系：不将既有 3.1.1
-  的三条 uses 边复制或重定向，不从版次顺序推断 supersedes/extends/compatible_with，旧文献、来源与历史保持原样。仅核实文献身份和上述描述范围，未穷尽审计功能、勘误或安全要求，未执行页面脚本、上游工具、API
+  特征集与 patch 文本修订的区分不构成任意实现或跨版本兼容性保证，索引的 previous revisions obsolete 仅针对日期化 schema 迭代，不用于判定规范文献取代。初次收录批次没有技术关系；后续单独核验的 Schema Object 默认方言 uses 关系不复制或重定向既有 3.1.1 的三条边，不从版次顺序推断 supersedes/extends/compatible_with，旧文献、来源与历史保持原样。仅核实文献身份和上述描述范围，未穷尽审计功能、勘误或安全要求，未执行页面脚本、上游工具、API
   或验证器；不证明实现符合性、认证、安全性、部署、运行时互通或 IA 采用。
 scope_notes_en: 'The subject is the fixed OpenAPI Specification 3.2.1 document, not the OpenAPI family, organization,
   informational JSON Schema artifact or an API implementation. The designated versioned HTML is authoritative for
@@ -33,13 +32,16 @@ scope_notes_en: 'The subject is the fixed OpenAPI Specification 3.2.1 document, 
   the described API version. Specification text prevails over a differing informational JSON Schema; validator coverage
   of all requirements is not established. Major/minor feature sets and patch text revisions do not guarantee arbitrary
   implementation or cross-version compatibility. The index calls previous date-stamped schema iterations obsolete,
-  not specification editions. This slice adds zero technical relations: no copying or retargeting the three existing
-  3.1.1 uses edges, and no supersedes/extends/compatible_with inference from version order. Existing documents,
+  not specification editions. The initial intake added no technical relations. The subsequently reviewed Schema Object default-dialect uses relation does not copy or retarget the three existing 3.1.1 edges, and makes no supersedes/extends/compatible_with inference from version order. Existing documents,
   sources and history remain unchanged. Only document identity and this description scope are reviewed, not exhaustive
   features, errata or security requirements. No page scripts, upstream tools, APIs or validators were executed;
   implementation conformance, certification, security, deployment, runtime interoperability and IA adoption are
   not established.'
 sources:
+- url: https://spec.openapis.org/oas/v3.2.1.html#json-schema-keywords
+  title: OpenAPI 3.2.1 — sections 4.24, 4.24.1, 4.24.3.1 and 4.24.7 default Schema Object dialect and evaluation limits
+  language: en
+  accessed: '2026-10-31'
 - url: https://spec.openapis.org/oas/v3.2.1.html
   title: OpenAPI Specification 3.2.1 — fixed version, publication date and authoritative HTML status
   language: en
@@ -75,11 +77,11 @@ sources:
 last_verified_at: '2026-10-25T01:09:34.933500+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed official OpenAPI document evidence review
 record_created_at: '2026-10-25T01:16:33.782861+00:00'
-record_updated_at: '2026-10-25T01:16:33.782861+00:00'
+record_updated_at: '2026-10-31T19:54:56+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: Agent — OpenAI / dot, independent OpenAPI intake reviewer
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 default-dialect evidence review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: openapi_3.2.1
