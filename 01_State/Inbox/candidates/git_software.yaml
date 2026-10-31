@@ -13,11 +13,13 @@ locators:
 - url: https://github.com/git/git/tree/9a2fb147f2c61d0cab52c883e7e26f5b7948e3ed
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - git_software
   reasons:
-  - Whole Git software differs from existing git_protocol_v2 document and Dulwich local-library precedent; normalized
-    identifiers and candidate route require independent review.
+  - Accepted as canonical git_software by accept-20261031-git-lsrefs. Frozen new-state Candidate d4ebe1bf31b60120064bbbbd00becd3606c7f128
+    and review_required route are replayed against actual ancestor d882fc5f070a17ec521e509ad5f1505cd3bc59cf; this
+    back-reference prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'Implementation and matching ls-refs documentation are fixed to Git 2.52.0. Existing PR497 evidence uses Git 2.51.0
@@ -43,4 +45,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / Git ls-refs fixed-source semantic review
