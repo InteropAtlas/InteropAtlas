@@ -1,22 +1,22 @@
 id: json_rfc8259
 record_created_at: "2026-08-30T18:40:18+08:00"
-record_updated_at: "2026-10-31T07:29:55.964254+00:00"
+record_updated_at: '2026-10-31T20:43:12+00:00'
 metadata_backfilled_at: "2026-09-02T11:23:23+08:00"
 metadata_provenance:
   lifecycle_time: mixed
-  contribution_identity: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / link_senml_json_representation
-  reviewer: Independent Agent — OpenAI / dot / link_senml_json_representation/semantic_review
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 JSON representation review
   github_actor: ff6962757
 type: standard
 kind: format
 name_zh: JSON 数据交换格式（RFC 8259）
 name_en: JSON Data Interchange Format (RFC 8259)
 official_name: The JavaScript Object Notation (JSON) Data Interchange Format
-description_zh: 轻量、文本型、与编程语言无关的数据交换格式，是 JSON Schema 的基础数据模型之一。
-description_en: A lightweight, text-based, language-independent data interchange format and the underlying data model used by JSON Schema.
+description_zh: 轻量、文本型、与编程语言无关的数据交换格式，是 JSON Schema 的基础数据模型之一。 OpenAPI 3.2.1 的 JSON 使用关系仅指描述文档（OAD）的 JSON 表示选项，§3 的 JSON 引用明确指向 RFC 8259；OAD 也可用 YAML 表示，被描述 API 的请求、响应及其他内容不限定为这两种格式。任意 JSON 值不一定是有效 OAD；该文献级关系不保证完整 OAS 语义、无损转换、工具符合性、网络互通、安全性或 IA 采用。
+description_en: A lightweight, text-based, language-independent data interchange format and the underlying data model used by JSON Schema. The OpenAPI 3.2.1 JSON uses relation is limited to the JSON representation option for an OpenAPI Description (OAD); section 3 explicitly links JSON to RFC 8259. OADs may also be represented in YAML, while described API requests, responses and other content are not restricted to these formats. Arbitrary JSON values are not necessarily valid OADs. This documentary relation does not guarantee complete OAS semantics, lossless conversion, tool conformance, network interoperability, security or IA adoption.
 domains:
   - data
 layers:
@@ -39,6 +39,10 @@ versions:
     status: standards_track
     url: https://www.rfc-editor.org/rfc/rfc8259.html
 sources:
+  - url: https://spec.openapis.org/oas/v3.2.1.html#format
+    title: OpenAPI 3.2.1 — section 3 OAD JSON representation option; JSON link to RFC 8259 in H.1 normative references
+    language: en
+    accessed: '2026-10-31'
   - url: https://www.rfc-editor.org/rfc/rfc8259.html
     title: RFC 8259
     language: en
