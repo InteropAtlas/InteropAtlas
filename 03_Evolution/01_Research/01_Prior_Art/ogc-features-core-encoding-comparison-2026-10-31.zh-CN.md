@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-10-31T05:43:00+00:00
-Document Updated At: 2026-10-31T05:43:00+00:00
+Document Updated At: 2026-10-31T07:09:50+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -80,3 +80,30 @@ canonical 检索限于基线的 `01_State/01_Objects/*.yaml` 和 `01_State/02_Re
 ## 本次停止条件
 
 四行问题、既有记录绑定、固定静态证据和未知项已完成独立核对。本研究不升级为GML intake、符合性测试、全球分母或持续维护合同；未来如有具体新问题，可沿用现有研究机制另行评估。该文档经研究入口提供GitHub阅读，不宣称自动生成网站对象页。
+
+## 后续交付附记（2026-10-31）
+
+本附记记录原研究之后已经交付的增量，不回写上文 `975a717e1fe7fb46e484812fe4bd6800d5bc35aa` 历史四行、原来源指纹或原验证范围。**记录映射的新增不等于编码实现符合性的未知已经解决。** 下列路径仍是已有 canonical YAML，不另造机器读取模型。
+
+### GML Profile：精确文献映射已补录，编码实现未知保留
+
+[PR #617](https://github.com/InteropAtlas/InteropAtlas/pull/617) 已交付于固定 M `09f55a8fc6a4d4cdf9d2131add523faabb0862f6`：
+
+- 新增规范对象 [`ogc_gml_simple_features_10_100r3`](https://github.com/InteropAtlas/InteropAtlas/blob/09f55a8fc6a4d4cdf9d2131add523faabb0862f6/01_State/01_Objects/ogc_gml_simple_features_10_100r3.yaml)。精确身份为 OGC 10-100r3、2012-04-05 corrigendum；封面 Version 2.0 与外部标识 URI `/spec/gmlsf/2.0.1` 分别保留，不混成另一个版次。
+- 新增**一条文献级关系** [`ogc_features_core_1_0_1_uses_gml_simple_features_10_100r3`](https://github.com/InteropAtlas/InteropAtlas/blob/09f55a8fc6a4d4cdf9d2131add523faabb0862f6/01_State/02_Relations/ogc-gml-simple-features.yaml)：仅 Core §8.4/SF0、§8.5/SF2 两个可选类分别使用 Level 0、Level 2；不是所有 Core 部署必须使用 GML。Profile 本身涉及 SF0/SF1/SF2，Core 两个编码类的二维线性几何限制不能反投为整个 Profile 的限制。不拆分虚构 SF0/SF2 对象，不推导传递关系。
+
+所以，原矩阵两行的“固定基线未找到精确 profile 对象/编码关系”是正确历史观察；后续已补**规范对象及一条限定文献边**。pygeoapi 或其他实现是否输出符合 GML-SF0/SF2 的 HTTP 表示，仍未由此建立；不能将这次收录说成实现未知已解决。
+
+交付验证范围：#617 的固定 M 已完成仓库适用验证、独立语义/结构复核、P6 冻结接受链核对以及 Pages/实际页面字节读回；这是记录、仓库与页面交付验证，不是执行上游或 GML 编码认证。该 PR 已公开保留未解决 P1 review thread 与其未知来源说明，本附记不把交付完成改称 bot-clean，不改变任何 review 状态。
+
+### GDAL：有限文件转换先例，不是 Web 编码类实现证明
+
+[PR #618](https://github.com/InteropAtlas/InteropAtlas/pull/618) 已交付于固定 M `40e7d2358b72afe2b820ae4fdc3b934f3d8eed89`，新增完整软件对象 [`gdal`](https://github.com/InteropAtlas/InteropAtlas/blob/40e7d2358b72afe2b820ae4fdc3b934f3d8eed89/01_State/01_Objects/gdal.yaml)，以及既有 geospatial 编辑归属；没有新增技术关系或能力。
+
+记录边界：GDAL 是完整地理空间数据转换软件，固定 v3.10.3 / `ed29baf16d20bccbe331d809e0bafd7afde03360`；不是新造的 GML 转换器、独立驱动对象或 OGC Web 编码类。官方固定文档共同描述 GML 驱动读取可映射为简单要素模型的数据、ogr2ogr 文件转换、GeoJSON writer 的局部路径；这是文献组合并辅以局部源码检查，不是官方原样给出的 GML→GeoJSON 命令实例，也未运行验证。
+
+GeoJSON 写出默认 `RFC7946=NO`（GeoJSON 2008）；需显式 `RFC7946=YES` 才选择该输出模式，仍不代表全部选项组合均已证明符合 RFC 7946。GML 读入的 schema 推断、字段/几何映射、CRS/轴序及输出重投影、精度/日期线处理均有边界，不能保证无损保留源语义或任意 CRS 正确。`DOWNLOAD_SCHEMA` 默认 YES（当前针对看似 WFS response 的文档），所以“本地文件转换”不是保证离线；可禁用下载并本地供给所需资源，但未验证完整无网络行为。不把独立 GMLAS 驱动混入此切片。
+
+交付验证范围：#618 固定 M 已完成适用仓库验证、独立语义/结构复核、完整 P6 冻结接受链核对、Pages 与对象/索引/搜索实际字节读回，并核验完整双语正文可见性。它验证记录接受、渲染与交付，不验证上游转换执行结果或规范符合性。未安装、构建或运行上游命令/测试，未审完整 ogr2ogr 调用链；不声称第三方互通、安全、性能、部署适用性或 IA 采用。
+
+该先例不新增 GDAL→Core/Profile/GeoJSON 技术关系或能力断言，既有 geospatial 成员关系只是编辑导航；不从一般 GML 文件转换推导 GML-SF0/SF2、OGC 10-100r3 或 Core 符合性。上文 HTML/GeoJSON 的既有边界和两 GML 编码类的实现 unknown 均保留。
