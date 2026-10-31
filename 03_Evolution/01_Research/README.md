@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-05T14:25:00+08:00
+Document Updated At: 2026-10-31T05:43:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Executor: Agent — OpenAI / dot
+  Reviewer: Independent Agent — OpenAI / dot / independent_encoding_review
   GitHub Actor: ff6962757
 -->
 
@@ -23,6 +23,10 @@ Latest Substantive Contribution:
 3. [`03_Tests/`](03_Tests/) — Fit Test、Stress Test 与非规范性对象适配测试。
 
 它们分别回答：**我们依据什么？当前判断经得起什么审计？关键假设经过了什么测试？**
+
+## 有限比较记录
+
+- [OGC API Features Core 四编码类的有限覆盖比较（2026-10-31）](01_Prior_Art/ogc-features-core-encoding-comparison-2026-10-31.zh-CN.md)：对照固定规范、既有记录与 pygeoapi 静态证据，区分精确映射、相关记录和未知；不是全域完备率。
 
 ## 与 `docs/` 的边界
 
