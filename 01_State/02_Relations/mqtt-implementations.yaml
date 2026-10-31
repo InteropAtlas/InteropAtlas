@@ -61,3 +61,72 @@ latest_substantive_contribution:
   executor: Agent — OpenAI / dot
   reviewer: Independent Agent — OpenAI / dot / MQTT client semantic review
   github_actor: ff6962757
+---
+id: eclipse_mosquitto_implements_mqtt5_subscribe_path
+type: relation
+name_zh: Mosquitto 2.1.2 有界实现 MQTT5 已激活会话的订阅登记与 SUBACK 入队
+name_en: Mosquitto 2.1.2 implements bounded MQTT5 active-session subscription registration and SUBACK queueing
+source: eclipse_mosquitto
+relation: implements
+target: mqtt_5.0
+context:
+  version_context:
+    source: Mosquitto 2.1.2; v2.1.2, commit 99fa50f30e325609394c324c8ff71cfbbe95d8ab
+    target: OASIS MQTT Version 5.0 OS, sections 3.8 and 3.9
+  conditions_zh: 仅据固定 2.1.2 源码，记录已有 active MQTT5 会话的 broker SUBSCRIBE 处理：检查选定标志、标识符、属性与过滤器/选项，经配置、ACL/订阅插件及资源条件后登记订阅，并按原请求标识符和过滤器顺序构造
+    SUBACK、交给 packet__queue；入队不等于 socket 写入、对端收到或消息交付。监听器 mount point 可改写过滤器；错误可以中止路径，不保证每个输入均成功。此路径不处理 User Property，SUBACK
+    不添加 Reason String 或 User Property；这些是选中代码的范围，不是全部 MQTT5 符合性裁决。仅检视源码与测试配方，未安装、构建或运行 broker/client、连接网络或执行互通测试。不主张完整
+    CONNECT/认证/会话生命周期、全部 PUBLISH 路由及 QoS 交付、retained/shared 消息交付、持久化、bridge、TLS/安全审计、任意构建或部署兼容性、性能、第三方互通或 IA 采用；未研究的功能不表示软件缺失。
+  conditions_en: 'From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing in an already-active MQTT5
+    session: selected flags, identifiers, properties and filter/options checks, subscription registration subject
+    to configuration, ACL/subscribe-plugin and resource conditions, then SUBACK construction using the request identifier
+    and filter order and submission to packet__queue. Queueing is not socket writing, peer receipt or message delivery.
+    Listener mount points may rewrite filters; errors can terminate the path and not every input succeeds. This
+    path does not handle User Property, and SUBACK adds no Reason String or User Property; these are selected-code
+    boundaries, not a verdict on complete MQTT5 conformance. Source and test recipes were inspected only: no broker/client
+    installation, build, execution, network connection or interoperability exercise. No complete CONNECT/authentication/session
+    lifecycle, all PUBLISH routing or QoS delivery, retained/shared-message delivery, persistence, bridge behavior,
+    TLS/security audit, arbitrary-build or deployed compatibility, performance, third-party interoperability or
+    IA adoption is established; unreviewed functions are not asserted absent.'
+evidence:
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/read_handle.c#L77-L80
+  title: Broker dispatch to the subscription handler
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L47-L99
+  title: Active-session requirement, identifier/property checks and User Property boundary
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L101-L173
+  title: Selected filter/options checks and requested QoS cap
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L176-L277
+  title: Configuration, ACL/plugin, registration and ordered SUBACK path
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/subs.c#L565-L617
+  title: Operative subscription registration routing
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/send_suback.c#L29-L58
+  title: SUBACK construction and queueing; property omissions
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/lib/property_mosq.c#L176-L219
+  title: Property-list read and check delegation; not exhaustive validation proof
+  language: en
+  accessed: '2026-10-31'
+- url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+  title: OASIS MQTT5 OS sections 3.8 and 3.9 subscription and acknowledgement requirements
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T21:46:41+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Mosquitto broker source evidence executor
+record_created_at: '2026-10-31T21:49:44+00:00'
+record_updated_at: '2026-10-31T21:49:44+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Mosquitto broker fixed-source semantic review
+  github_actor: ff6962757

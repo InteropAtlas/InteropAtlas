@@ -1,0 +1,125 @@
+id: eclipse_mosquitto
+type: system
+kind: software
+name_zh: Eclipse Mosquitto MQTT 消息服务器软件
+name_en: Eclipse Mosquitto MQTT server software
+official_name: Eclipse Mosquitto
+version: 2.1.2
+external_identifiers:
+- namespace: github
+  value: eclipse-mosquitto/mosquitto
+official_url: https://mosquitto.org/
+description_zh: Eclipse Mosquitto 是提供 MQTT broker 并随附客户端库和工具的现成软件项目；本记录不是虚构的独立订阅组件。固定 tag v2.1.2、commit 99fa50f30e325609394c324c8ff71cfbbe95d8ab，不声称其他版次或最新版。仅据固定
+  2.1.2 源码，记录已有 active MQTT5 会话的 broker SUBSCRIBE 处理：检查选定标志、标识符、属性与过滤器/选项，经配置、ACL/订阅插件及资源条件后登记订阅，并按原请求标识符和过滤器顺序构造
+  SUBACK、交给 packet__queue；入队不等于 socket 写入、对端收到或消息交付。监听器 mount point 可改写过滤器；错误可以中止路径，不保证每个输入均成功。此路径不处理 User Property，SUBACK
+  不添加 Reason String 或 User Property；这些是选中代码的范围，不是全部 MQTT5 符合性裁决。仅检视源码与测试配方，未安装、构建或运行 broker/client、连接网络或执行互通测试。不主张完整
+  CONNECT/认证/会话生命周期、全部 PUBLISH 路由及 QoS 交付、retained/shared 消息交付、持久化、bridge、TLS/安全审计、任意构建或部署兼容性、性能、第三方互通或 IA 采用；未研究的功能不表示软件缺失。
+description_en: 'Eclipse Mosquitto is a real software project providing an MQTT broker plus client libraries and
+  utilities, not a fictional standalone subscription component. Pinned to tag v2.1.2, commit 99fa50f30e325609394c324c8ff71cfbbe95d8ab,
+  without claims about other or latest releases. From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing
+  in an already-active MQTT5 session: selected flags, identifiers, properties and filter/options checks, subscription
+  registration subject to configuration, ACL/subscribe-plugin and resource conditions, then SUBACK construction
+  using the request identifier and filter order and submission to packet__queue. Queueing is not socket writing,
+  peer receipt or message delivery. Listener mount points may rewrite filters; errors can terminate the path and
+  not every input succeeds. This path does not handle User Property, and SUBACK adds no Reason String or User Property;
+  these are selected-code boundaries, not a verdict on complete MQTT5 conformance. Source and test recipes were
+  inspected only: no broker/client installation, build, execution, network connection or interoperability exercise.
+  No complete CONNECT/authentication/session lifecycle, all PUBLISH routing or QoS delivery, retained/shared-message
+  delivery, persistence, bridge behavior, TLS/security audit, arbitrary-build or deployed compatibility, performance,
+  third-party interoperability or IA adoption is established; unreviewed functions are not asserted absent.'
+open_source: true
+license_expression: EPL-2.0 OR BSD-3-Clause
+domains:
+- networking
+scope_notes_zh: 仅据固定 2.1.2 源码，记录已有 active MQTT5 会话的 broker SUBSCRIBE 处理：检查选定标志、标识符、属性与过滤器/选项，经配置、ACL/订阅插件及资源条件后登记订阅，并按原请求标识符和过滤器顺序构造
+  SUBACK、交给 packet__queue；入队不等于 socket 写入、对端收到或消息交付。监听器 mount point 可改写过滤器；错误可以中止路径，不保证每个输入均成功。此路径不处理 User Property，SUBACK
+  不添加 Reason String 或 User Property；这些是选中代码的范围，不是全部 MQTT5 符合性裁决。仅检视源码与测试配方，未安装、构建或运行 broker/client、连接网络或执行互通测试。不主张完整
+  CONNECT/认证/会话生命周期、全部 PUBLISH 路由及 QoS 交付、retained/shared 消息交付、持久化、bridge、TLS/安全审计、任意构建或部署兼容性、性能、第三方互通或 IA 采用；未研究的功能不表示软件缺失。
+  许可证字段仅记录固定 LICENSE.txt 声明，不作法律适用性判断。
+scope_notes_en: 'From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing in an already-active MQTT5
+  session: selected flags, identifiers, properties and filter/options checks, subscription registration subject
+  to configuration, ACL/subscribe-plugin and resource conditions, then SUBACK construction using the request identifier
+  and filter order and submission to packet__queue. Queueing is not socket writing, peer receipt or message delivery.
+  Listener mount points may rewrite filters; errors can terminate the path and not every input succeeds. This path
+  does not handle User Property, and SUBACK adds no Reason String or User Property; these are selected-code boundaries,
+  not a verdict on complete MQTT5 conformance. Source and test recipes were inspected only: no broker/client installation,
+  build, execution, network connection or interoperability exercise. No complete CONNECT/authentication/session
+  lifecycle, all PUBLISH routing or QoS delivery, retained/shared-message delivery, persistence, bridge behavior,
+  TLS/security audit, arbitrary-build or deployed compatibility, performance, third-party interoperability or IA
+  adoption is established; unreviewed functions are not asserted absent. The license field records the fixed LICENSE.txt
+  declaration, not legal-suitability advice.'
+sources:
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/README.md#L1-L20
+  title: Eclipse Mosquitto whole software identity, MQTT server and accompanying clients
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/config.mk#L165
+  title: Fixed source version 2.1.2
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/read_handle.c#L77-L80
+  title: Broker dispatch to the subscription handler
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L47-L99
+  title: Active-session requirement, identifier/property checks and User Property boundary
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L101-L173
+  title: Selected filter/options checks and requested QoS cap
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L176-L277
+  title: Configuration, ACL/plugin, registration and ordered SUBACK path
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/subs.c#L565-L617
+  title: Operative subscription registration routing
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/send_suback.c#L29-L58
+  title: SUBACK construction and queueing; property omissions
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/lib/property_mosq.c#L176-L219
+  title: Property-list read and check delegation; not exhaustive validation proof
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/test/broker/02-subscribe-dollar-v5.py
+  title: MQTT5 subscription test recipe; inspected only, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/test/broker/02-shared-nolocal.py
+  title: Shared/no-local restriction test recipe; inspected only, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/LICENSE.txt
+  title: Fixed source license declaration, not legal-suitability advice
+  language: en
+  accessed: '2026-10-31'
+- url: https://mosquitto.org/blog/2026/02/version-2-1-2-released/
+  title: Official Mosquitto 2.1.2 release dated 2026-02-09
+  language: en
+  accessed: '2026-10-31'
+- url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
+  title: OASIS MQTT5 OS sections 3.8 and 3.9 subscription and acknowledgement requirements
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T21:46:41+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Mosquitto broker source evidence executor
+record_created_at: '2026-10-31T21:49:44+00:00'
+record_updated_at: '2026-10-31T21:49:44+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Mosquitto broker fixed-source semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: eclipse_mosquitto
+  acceptance_event_id: accept-20261031-mosquitto-broker
+  reviewed_candidate_blob: e1b710a545b9ae17c16fe3dc460be909b5c550a9
+  reviewed_against_commit: 79102ea8e333408c403ecbd4785da46dfdff0169
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 79102ea8e333408c403ecbd4785da46dfdff0169
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/79102ea8e333408c403ecbd4785da46dfdff0169/01_State/Inbox/review-packets/mosquitto-broker-20261031.yaml
