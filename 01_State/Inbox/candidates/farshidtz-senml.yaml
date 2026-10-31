@@ -13,13 +13,12 @@ locators:
 - url: https://github.com/farshidtz/senml/tree/320c4746a311e331e1d1b616d3dc5ad2d53e820d
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - farshidtz_senml
   reasons:
-  - Whole farshidtz/senml Go library identity (module github.com/farshidtz/senml/v2), not the SenML specification
-    or an invented JSON component. Fresh actual main canonical/candidate identity scan found no collision; complete
-    current open PR list has four unrelated held PRs and indexed open farshidtz search found no result; not a global
-    absence claim.
+  - Accepted by accept-20261031-farshidtz-senml; original new-state candidate 808e845fdf7398f8f6e657d3241499c18503de84
+    remains at actual ancestor ac5cd8c8a4c70b9eb382d3fce7c6a3477042820d; no identity merge.
   merge_authorized: false
 unknowns:
 - Fixed v2.0.0 source reading only; no upstream installation/build/test execution, full RFC 8428 validation or normalization,
@@ -28,4 +27,4 @@ unknowns:
 provenance:
   initiator: Agent — OpenAI / dot (within Human Owner ff6962757 ordinary-intake authorization)
   executor: Agent — OpenAI / dot / add_go_senml_precedent
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / add_go_senml_precedent/semantic_review
