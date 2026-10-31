@@ -6,7 +6,7 @@ name_en: Sensor Measurement Lists Original Specification (SenML, RFC 8428)
 official_name: Sensor Measurement Lists (SenML)
 description_zh: 'RFC 8428 原版定义简单传感器测量与设备参数的数据表示：记录包可携带名称、单位、时间和值，共享数据模型有 JSON、CBOR、XML、EXI 表达，但不要求每个实现支持全部表达。它不是传输协议或完整设备信息模型；数据保护依赖外层机制。原版
   CBOR 规范引用为 RFC 7049，不替换为 RFC 8949。固定 2018 年 8 月原始出版物；RFC 9100 后续更新版本机制与特性，未合并到本记录；信息页显示一项勘误；内容与处理状态未核验，不声称当前完整修订语义。
-  RFC 9100 将版本号解释为特性位图，而非简单线性版本顺序。仅作文献级收录，不证明实现符合性或 IA 采用；industrial 与 measurement 为可重叠编辑导航，无技术关系。
+  RFC 9100 将版本号解释为特性位图，而非简单线性版本顺序。仅作文献级收录，不证明实现符合性或 IA 采用；industrial 与 measurement 为可重叠编辑导航。
 
 
   English scope and limitations:
@@ -18,15 +18,37 @@ description_zh: 'RFC 8428 原版定义简单传感器测量与设备参数的数
   on outer mechanisms. The original CBOR reference is RFC 7049, not RFC 8949. Proposed Standard, later updated by
   RFC 9100: its feature-bitmap version mechanism is not consolidated here. The information page indicates one erratum;
   its contents and status are unreviewed. No current consolidated semantics, implementation conformance or IA adoption
-  is claimed. Industrial and measurement memberships are overlapping editorial navigation only; no technical relations.'
+  is claimed. Industrial and measurement memberships are overlapping editorial navigation only.
+
+
+  本页 SenML RFC 8428 → JSON RFC 8259 的“使用”仅指原版 application/senml+json 与 application/sensml+json 两种表示的文献级编码使用，不表示其他
+  SenML 表示均使用 JSON 编码或每个实现均须支持 JSON。流式 SenSML 与非流 SenML 需分别协商；流接收不能等待可能永不到达的包结束标记。任意 JSON 不一定是有效 SenML；尚未终止的 SenSML
+  流不保证每个时刻都是完整 JSON 文本。本关系不声称 JSON 文本序列格式或实现符合性，也不证明完整验证、无损转换或 IA 采用。仅限原始出版物，RFC 9100 更新及勘误未整合。
+
+
+  The SenML RFC 8428 → JSON RFC 8259 uses link is limited to documentary encoding use by the original application/senml+json
+  and application/sensml+json representations. It does not require JSON encoding for every SenML representation
+  or JSON support in every implementation. Streaming SenSML and non-streaming SenML require separate negotiation;
+  a stream receiver cannot wait for a possibly absent end-of-pack marker. Arbitrary JSON is not necessarily valid
+  SenML, and an unfinished SenSML stream need not be a complete JSON text at every instant. This relation does not
+  assert the JSON Text Sequences format, implementation conformance, complete validation, lossless conversion or
+  IA adoption. Only original publications are covered; RFC 9100 updates and errata are not consolidated.'
 description_en: 'The August 2018 original RFC 8428 specifies simple sensor measurement and device-parameter representations.
   Packs contain records that can carry names, units, times and values. JSON, CBOR, XML and EXI share a data model;
   supporting every representation is not mandatory. This is not a transport protocol or complete device model; protection
   relies on outer mechanisms. The original CBOR reference is RFC 7049, not RFC 8949. Proposed Standard, later updated
   by RFC 9100: its feature-bitmap version mechanism is not consolidated here. The information page indicates one
   erratum; its contents and status are unreviewed. No current consolidated semantics, implementation conformance
-  or IA adoption is claimed. Industrial and measurement memberships are overlapping editorial navigation only; no
-  technical relations.'
+  or IA adoption is claimed. Industrial and measurement memberships are overlapping editorial navigation only.
+
+
+  The SenML RFC 8428 → JSON RFC 8259 uses link is limited to documentary encoding use by the original application/senml+json
+  and application/sensml+json representations. It does not require JSON encoding for every SenML representation
+  or JSON support in every implementation. Streaming SenSML and non-streaming SenML require separate negotiation;
+  a stream receiver cannot wait for a possibly absent end-of-pack marker. Arbitrary JSON is not necessarily valid
+  SenML, and an unfinished SenSML stream need not be a complete JSON text at every instant. This relation does not
+  assert the JSON Text Sequences format, implementation conformance, complete validation, lossless conversion or
+  IA adoption. Only original publications are covered; RFC 9100 updates and errata are not consolidated.'
 version: RFC 8428 (August 2018 original publication)
 external_identifiers:
 - namespace: rfc
@@ -52,15 +74,20 @@ sources:
   title: 'RFC 9100 sections 1–4: update boundary only, not consolidated into this original-publication record'
   language: en
   accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc8428.txt
+  title: RFC 8428 original August 2018 — sections 4.8, 5, 12.3, 12.3.1–2 and 15.1; JSON/SenSML-JSON relation scope
+    only
+  language: en
+  accessed: '2026-10-31'
 last_verified_at: '2026-10-30T21:54:16.441098+00:00'
 last_verified_by: Agent — OpenAI / dot / add_senml_standard; original publication, status and RFC9100 update boundary
   only; errata unreviewed
 record_created_at: '2026-10-30T21:55:31.463095+00:00'
-record_updated_at: '2026-10-30T21:55:31.463095+00:00'
+record_updated_at: '2026-10-31T07:29:55.964254+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / add_senml_standard
-  reviewer: Independent Agent — OpenAI / dot / add_senml_standard/semantic_review
+  executor: Agent — OpenAI / dot / link_senml_json_representation
+  reviewer: Independent Agent — OpenAI / dot / link_senml_json_representation/semantic_review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: senml_rfc8428
