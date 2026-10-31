@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-10-31T08:26:00+00:00
-Document Updated At: 2026-10-31T08:26:00+00:00
+Document Updated At: 2026-10-31T09:07:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -128,3 +128,13 @@ DM、Constraints、AQ 的原对象 URL 是不带日期的官方入口；本研�
 本次交付止于固定 12 文献、表外 Submission 的身份说明、当前记录/有限证据对照及独立最终逐行复核；适用仓库检查与确切交付版本见交付 PR。仓库 CI、自检与独立复核分别记录，不互相替代，也不把文档检查当上游程序验证。
 
 没有新增或修改 canonical、关系、候选、模型、分类、schema、UI、renderer 或未来维护制度；没有解除 PROV-O hold 或展开依赖闭包/实现候选收集。入口是现有 Research README 与 GitHub 文档；本次两个 Markdown 路径不匹配 Pages 的 push 路径过滤，不宣称新增网站对象页或部署。所有未证实项保留 unknown，不能由条目数推导溯源领域完备。
+
+## 后续交付附记：PROV-N 原始记法文献（2026-10-31）
+
+本附记记录原研究之后的限定增量，不改写上文 `bdeefaa5eeffd2cf152f9096747bbb89324819fe` 历史基线、12 行矩阵、来源指纹或旧九项 smoke 范围。原 PROV-N 行“当时未匹配独立文献对象”保留为历史观察；新增文献记录不能自动填补实现符合性的 unknown。
+
+[PR #625](https://github.com/InteropAtlas/InteropAtlas/pull/625) 交付于固定 M `b77308b5f5aac776d8ac446003ad0b9cd7100076`：原始 W3C Recommendation 2013-04-30 对象 [`w3c_prov_n_20130430`](https://github.com/InteropAtlas/InteropAtlas/blob/b77308b5f5aac776d8ac446003ad0b9cd7100076/01_State/01_Objects/w3c_prov_n_20130430.yaml)，以及 [`w3c_prov_n_20130430_uses_prov_dm`](https://github.com/InteropAtlas/InteropAtlas/blob/b77308b5f5aac776d8ac446003ad0b9cd7100076/01_State/02_Relations/prov-n.yaml) 到既有 [`w3c_prov_dm`](https://github.com/InteropAtlas/InteropAtlas/blob/b77308b5f5aac776d8ac446003ad0b9cd7100076/01_State/01_Objects/w3c-prov-dm.yaml) 的文献级 `uses`。这提供了人可读、紧凑函数式记法这一具体表示选择，不是解析器或验证器已可用的证明。
+
+PROV-N 原文提供正式语法和附加语义规则，不能说“只有语法、没有语义”；语法正确的表达式仍可能不被模型接受。正文产生式/表格为规范性内容，示例和单独汇总的便利语法文件是资料性内容。新关系限定该原始记法文献使用同日 PROV-DM 概念并将其映射到表示，不能推出完整 PROV-CONSTRAINTS 有效性、推理、现实事件/归因真实性或 IA 采用。勘误未审阅或整合，不称最新纠错版。
+
+本次仅回读已交付 canonical 与来源范围，不安装、构建、运行上游或验证任何 PROV-N parser。没有新增 Python 实现边，也未将 `python_prov` 的上游 PROV-N 声明升级为旧九项 smoke 的已验行为。PROV-O 两身份 hold、其余家族项的历史未匹配与实现 unknown 保持；不为补齐 12 项继续新增对象、关系或维护制度。
