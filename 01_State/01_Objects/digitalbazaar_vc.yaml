@@ -1,50 +1,45 @@
 id: digitalbazaar_vc
 type: system
 kind: library
-name_zh: Digital Bazaar VC JavaScript 库（本记录仅核 7.3.0 未签名 VC2 presentation 对象构造）
-name_en: 'Digital Bazaar VC JavaScript library (reviewed scope: 7.3.0 unsigned VC2 presentation-object construction
-  only)'
-description_zh: 固定 @digitalbazaar/vc 7.3.0；本记录仅核实 VC2 presentation 对象在加安全机制之前的有界构造，不是 VC2 验证器、合规文档或发行者/验证者实现的证明。
-description_en: Fixed @digitalbazaar/vc 7.3.0; this record covers only bounded pre-security VC2 presentation-object
-  construction, not a VC2 validator or evidence of conforming documents or issuer/verifier implementations.
-version: 7.3.0
-external_identifiers:
-- namespace: npm
-  value: '@digitalbazaar/vc'
-- namespace: github
-  value: digitalbazaar/vc
-official_url: https://github.com/digitalbazaar/vc/tree/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59
-versions:
-- version: 7.3.0
-  status: released
-  url: https://github.com/digitalbazaar/vc/tree/v7.3.0
-open_source: true
-license_expression: BSD-3-Clause
-scope_notes_zh: 主体是 @digitalbazaar/vc JavaScript 库，不是规范、组织、上下文数据包或托管凭证服务。固定 7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59；注释标签
-  v7.3.0 的 tag object 为 2d52d616476839bd6a0ada12f24030974ed5ae1c，标签/提交未签名，固定源码而非可变 main/tag 为证据。只核 createPresentation
-  的 numeric version=2.0 路径：构造 @context=[https://www.w3.org/ns/credentials/v2]、type=[VerifiablePresentation] 的未签名内存对象；可选嵌入普通
-  VC2-shaped credential 对象及 id/holder。上游另有发行、签名、验证和 VC1 功能，不计本次机制。此构造在安全机制之前，不生成 proof，不满足或证明 VC2 第1.3节合规文档/发行者/验证者实现及第4.13节嵌入凭证的
-  securing 要求。truthy id/holder 直接复制，无类型/URL检查；调用方须自行保证合适值。verifiableCredential 可省略；[] 也会输出为空数组，因此成功不保证 present 时
-  one-or-more 的规范数量要求。嵌入输入经 [].concat 包装和局部检查，内部对象引用共享，无深复制或不可变保证。检查覆盖识别的首上下文、VerifiableCredential 类型、部分 subject/issuer/typed-object/URL
-  形状，但可放过空 subject 数组及 falsey 日期值，不是严格模型验证器；proof 仅局部形状检查，无签名/身份/状态真实性验证。VC2 truthy validFrom/validUntil 使用未锚定、允许省略时区的正则及
-  now/maxClockSkew 时间窗口筛选，不保证全部规范日期要求或 validFrom<=validUntil；默认 now 为当时 Date、skew 为300秒，时间有效性筛选可拒绝结构有效数据，成功结果随时间变化。数值2.0与字符串"2.0"不同。VC1兼容分支不计本边、不进行迁移；EnvelopedVerifiableCredential
+name_zh: Digital Bazaar VC JavaScript 库（7.3.0：未签名 presentation 构造与凭证验证包装层静态切片）
+name_en: 'Digital Bazaar VC JavaScript library (7.3.0 static slices: unsigned presentation construction and credential-verification
+  wrapper)'
+description_zh: '本记录仅含两个未执行的静态切片：未签名 presentation 构造与凭证验证包装层。 主体是 @digitalbazaar/vc JavaScript 库，不是规范、组织、上下文数据包或托管凭证服务。固定
+  7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59；注释标签 v7.3.0 的 tag object 为 2d52d616476839bd6a0ada12f24030974ed5ae1c，标签/提交未签名，固定源码而非可变
+  main/tag 为证据。原构造切片只核 createPresentation 的 numeric version=2.0 路径：构造 @context=[https://www.w3.org/ns/credentials/v2]、type=[VerifiablePresentation]
+  的未签名内存对象；可选嵌入普通 VC2-shaped credential 对象及 id/holder。发行、签名和 VC1 功能不计本记录；验证仅增补下述包装层静态控制流，不涵盖委派实现或密码有效性。此构造在安全机制之前，不生成
+  proof，不满足或证明 VC2 第1.3节合规文档/发行者/验证者实现及第4.13节嵌入凭证的 securing 要求。truthy id/holder 直接复制，无类型/URL检查；调用方须自行保证合适值。verifiableCredential
+  可省略；[] 也会输出为空数组，因此成功不保证 present 时 one-or-more 的规范数量要求。嵌入输入经 [].concat 包装和局部检查，内部对象引用共享，无深复制或不可变保证。检查覆盖识别的首上下文、VerifiableCredential
+  类型、部分 subject/issuer/typed-object/URL 形状，但可放过空 subject 数组及 falsey 日期值，不是严格模型验证器；proof 仅局部形状检查，无签名/身份/状态真实性验证。VC2
+  truthy validFrom/validUntil 使用未锚定、允许省略时区的正则及 now/maxClockSkew 时间窗口筛选，不保证全部规范日期要求或 validFrom<=validUntil；默认 now
+  为当时 Date、skew 为300秒，时间有效性筛选可拒绝结构有效数据，成功结果随时间变化。数值2.0与字符串"2.0"不同。VC1兼容分支不计本边、不进行迁移；EnvelopedVerifiableCredential
   不受支持，不覆盖完整表示空间。上下文映射来自声明依赖 @digitalbazaar/credentials-context ^3.2.0 中所核 v3.2.0 固定源码；其 context JSON/静态导出对象与最终
   REC B.1 的官方 context 解析结构相同、原始字节不同，仅支持所用标识/字段对应，不证明 JSON-LD 扩展/压缩/规范化或完整符合性。Node>=18、BSD-3-Clause 为固定包/许可证声明，非运行兼容性测试或法律审计；依赖范围
   ^3.2.0、jsonld ^9.0.0、jsonld-signatures ^11.6.0 不是已安装版本，未获取 npm 包字节。调用方负责完整属性/数量/上下文规范检查、合适时间策略、安全机制、状态与信任判断。固定
   README 仍展示 VC1 示例，JSDoc 声称缺少 credential 会抛错，与当前实现的可选分支不符，未据此扩大结论。只读源码和测试定义，未安装/执行上游、运行测试、生成密钥、签名/验证凭证或查询身份/状态；不作完整标准合规、安全认证、法律效力、生产就绪、第三方互通或
-  IA 采用声明。
-scope_notes_en: 'The identity is the @digitalbazaar/vc JavaScript library, not a specification, organization, context-data
+  IA 采用声明。 另于2026-10-31静态阅读同一固定提交的 verifyCredential 包装层，未执行：公共函数先在 try 外解构 credential，try 内才拒绝 falsey credential
+  并 await 内部函数；因此不保证所有输入/属性访问错误都被捕获。内部先做上述局部 _checkCredential；若 credential.credentialStatus 为 truthy 且 options.checkStatus
+  非函数，则在委派前抛错。配置提供的或默认 documentLoader 与 purpose 后，await jsigs.verify；此处未审或执行密码套件、密钥、loader、purpose、身份/状态或网络实现。委派结果的
+  verified 为 falsey 时直接返回并跳过状态回调；否则 credentialStatus 为 truthy 时 await checkStatus(options)，写入 statusResult，其 verified
+  为 falsey 时将总 verified 置 false。这里不是 verified 的严格 boolean 类型校验，回调返回 false 也不等于返回 {verified:false}；本层未完整校验委派/回调返回类型，null/undefined
+  的属性访问、赋值或回调抛错等可进入公共 try 内的失败包装，不能声称全部失败都原样返回。catch 返回 verified:false、含 credential/verified:false/error 的 results
+  数组及顶层 error。此静态控制流不证明验签或状态查询成功，不等同或自动违背 VC2 第7.1节算法，不证明 conforming document、完整 verifier、事实真实性、业务 validation、授权、信任或安全部署。既有
+  implements 关系仍仅覆盖 numeric version=2.0 的未签名 presentation 构造，不因新增包装层读证据而扩大。两批证据均为静态源码/测试定义阅读，不存在旧运行与新静态的比较；旧验证日期/身份不刷新，不提供安装或部署建议。
+
+
+  English scope: The identity is the @digitalbazaar/vc JavaScript library, not a specification, organization, context-data
   package or hosted credential service. Fixed 7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59; annotated
   v7.3.0 tag object 2d52d616476839bd6a0ada12f24030974ed5ae1c refers to it, with unsigned tag/commit metadata. Evidence
-  is fixed source rather than mutable main/tag. Scope is only createPresentation with numeric version=2.0: an unsigned
-  in-memory object with @context=[https://www.w3.org/ns/credentials/v2], type=[VerifiablePresentation], and optional
-  ordinary VC2-shaped embedded objects/id/holder. Other issuance, signing, verification and VC1 functionality is
-  not covered. This pre-security construction creates no proof and neither satisfies nor establishes the securing/conformance
-  requirements of VC2 section1.3 or section4.13 for embedded credentials. Truthy id/holder are copied without type/URL
-  validation; callers must supply appropriate values. verifiableCredential may be omitted, and [] is emitted as
-  an empty array, so success does not enforce the normative one-or-more constraint when present. [].concat wraps
-  inputs and local checks run, but credential-object references remain shared, without deep-copy or immutability
-  guarantees. Checks cover a recognized first context, VerifiableCredential type and some subject/issuer/typed-object/URL
+  is fixed source rather than mutable main/tag. The original construction slice covers only createPresentation with
+  numeric version=2.0: an unsigned in-memory object with @context=[https://www.w3.org/ns/credentials/v2], type=[VerifiablePresentation],
+  and optional ordinary VC2-shaped embedded objects/id/holder. Other issuance, signing and VC1 functionality is
+  not covered; verification is limited to the static wrapper control flow below, excluding delegated implementations
+  and cryptographic validity. This pre-security construction creates no proof and neither satisfies nor establishes
+  the securing/conformance requirements of VC2 section1.3 or section4.13 for embedded credentials. Truthy id/holder
+  are copied without type/URL validation; callers must supply appropriate values. verifiableCredential may be omitted,
+  and [] is emitted as an empty array, so success does not enforce the normative one-or-more constraint when present.
+  [].concat wraps inputs and local checks run, but credential-object references remain shared, without deep-copy
+  or immutability guarantees. Checks cover a recognized first context, VerifiableCredential type and some subject/issuer/typed-object/URL
   shapes, yet empty subject arrays and falsey dates can pass; this is not a strict model validator. Proof checks
   concern partial shape, not signature, identity or status authenticity. Truthy VC2 validFrom/validUntil receive
   an unanchored regex check with optional timezone plus now/maxClockSkew filtering, not all normative date requirements
@@ -61,7 +56,155 @@ scope_notes_en: 'The identity is the @digitalbazaar/vc JavaScript library, not a
   credentials throw are stale relative to the optional current branch, not evidence for broader coverage. Static
   source and test-definition inspection only: no upstream installation/execution/testing, key generation, credential
   signing/verification or identity/status lookup; no complete conformance, security certification, legal validity,
-  production readiness, third-party interoperability or IA adoption claim.'
+  production readiness, third-party interoperability or IA adoption claim. Separately, on 2026-10-31 the verifyCredential
+  wrapper at the same fixed commit was read statically, not executed. The public function destructures credential
+  before try, then rejects a falsey credential and awaits the internal function inside try; not all input/property-access
+  errors are caught. Internally, the partial _checkCredential runs first. A truthy credential.credentialStatus with
+  a non-function options.checkStatus throws before delegation. After selecting supplied or default documentLoader
+  and purpose, it awaits jsigs.verify; cryptographic suites, keys, loader, purpose, identity/status and network
+  implementations are not reviewed or executed here. A falsey delegated result.verified returns directly and skips
+  the status callback; otherwise a truthy credentialStatus triggers await checkStatus(options), assigns statusResult,
+  and a falsey statusResult.verified sets the overall verified to false. This is not strict boolean-type validation,
+  and a callback returning false is not equivalent to returning {verified:false}. Delegated/callback return types
+  are not fully validated here: null/undefined property access, assignment errors or callback exceptions can enter
+  the public try-contained failure envelope; not every failure preserves the original result. The catch returns
+  verified:false, a results array containing credential/verified:false/error, and a top-level error. This static
+  control flow establishes neither successful signature/status checking nor equivalence to or automatic violation
+  of VC2 section7.1, conforming documents, a complete verifier, factual truth, business validation, authorization,
+  trust or safe deployment. The existing implements relation remains restricted to unsigned presentation construction
+  with numeric version=2.0; the wrapper evidence does not expand it. Both evidence batches are static source/test-definition
+  inspection, not a comparison of old runtime observations with new static evidence. Old verification date/identity
+  remain unchanged; no installation or deployment advice is given.'
+description_en: 'The identity is the @digitalbazaar/vc JavaScript library, not a specification, organization, context-data
+  package or hosted credential service. Fixed 7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59; annotated
+  v7.3.0 tag object 2d52d616476839bd6a0ada12f24030974ed5ae1c refers to it, with unsigned tag/commit metadata. Evidence
+  is fixed source rather than mutable main/tag. The original construction slice covers only createPresentation with
+  numeric version=2.0: an unsigned in-memory object with @context=[https://www.w3.org/ns/credentials/v2], type=[VerifiablePresentation],
+  and optional ordinary VC2-shaped embedded objects/id/holder. Other issuance, signing and VC1 functionality is
+  not covered; verification is limited to the static wrapper control flow below, excluding delegated implementations
+  and cryptographic validity. This pre-security construction creates no proof and neither satisfies nor establishes
+  the securing/conformance requirements of VC2 section1.3 or section4.13 for embedded credentials. Truthy id/holder
+  are copied without type/URL validation; callers must supply appropriate values. verifiableCredential may be omitted,
+  and [] is emitted as an empty array, so success does not enforce the normative one-or-more constraint when present.
+  [].concat wraps inputs and local checks run, but credential-object references remain shared, without deep-copy
+  or immutability guarantees. Checks cover a recognized first context, VerifiableCredential type and some subject/issuer/typed-object/URL
+  shapes, yet empty subject arrays and falsey dates can pass; this is not a strict model validator. Proof checks
+  concern partial shape, not signature, identity or status authenticity. Truthy VC2 validFrom/validUntil receive
+  an unanchored regex check with optional timezone plus now/maxClockSkew filtering, not all normative date requirements
+  or a validFrom<=validUntil constraint. Defaults are the current Date and300seconds; time-window selection can
+  reject structurally valid data and makes results time-dependent. Numeric2.0 differs from string"2.0". VC1 compatibility
+  is excluded and performs no migration; EnvelopedVerifiableCredential is unsupported, so the full representation
+  space is not covered. Context mapping was inspected in fixed credentials-context3.2.0 within the declared ^3.2.0
+  range; its JSON and statically extracted export equal the final REC B.1 official context as parsed objects, not
+  as bytes. This supports the observed identifier/field correspondence, not JSON-LD expansion/compaction/canonicalization
+  or complete conformance. Node>=18 and BSD-3-Clause are package/license declarations, not tested runtime compatibility
+  or legal audit. Runtime ranges ^3.2.0, jsonld^9.0.0 and jsonld-signatures^11.6.0 do not prove installed versions;
+  npm archive bytes were not acquired. Callers retain complete normative property/cardinality/context validation,
+  time policy, securing, status and trust responsibilities. Fixed README VC1 examples and JSDoc claiming missing
+  credentials throw are stale relative to the optional current branch, not evidence for broader coverage. Static
+  source and test-definition inspection only: no upstream installation/execution/testing, key generation, credential
+  signing/verification or identity/status lookup; no complete conformance, security certification, legal validity,
+  production readiness, third-party interoperability or IA adoption claim. Separately, on 2026-10-31 the verifyCredential
+  wrapper at the same fixed commit was read statically, not executed. The public function destructures credential
+  before try, then rejects a falsey credential and awaits the internal function inside try; not all input/property-access
+  errors are caught. Internally, the partial _checkCredential runs first. A truthy credential.credentialStatus with
+  a non-function options.checkStatus throws before delegation. After selecting supplied or default documentLoader
+  and purpose, it awaits jsigs.verify; cryptographic suites, keys, loader, purpose, identity/status and network
+  implementations are not reviewed or executed here. A falsey delegated result.verified returns directly and skips
+  the status callback; otherwise a truthy credentialStatus triggers await checkStatus(options), assigns statusResult,
+  and a falsey statusResult.verified sets the overall verified to false. This is not strict boolean-type validation,
+  and a callback returning false is not equivalent to returning {verified:false}. Delegated/callback return types
+  are not fully validated here: null/undefined property access, assignment errors or callback exceptions can enter
+  the public try-contained failure envelope; not every failure preserves the original result. The catch returns
+  verified:false, a results array containing credential/verified:false/error, and a top-level error. This static
+  control flow establishes neither successful signature/status checking nor equivalence to or automatic violation
+  of VC2 section7.1, conforming documents, a complete verifier, factual truth, business validation, authorization,
+  trust or safe deployment. The existing implements relation remains restricted to unsigned presentation construction
+  with numeric version=2.0; the wrapper evidence does not expand it. Both evidence batches are static source/test-definition
+  inspection, not a comparison of old runtime observations with new static evidence. Old verification date/identity
+  remain unchanged; no installation or deployment advice is given.'
+version: 7.3.0
+external_identifiers:
+- namespace: npm
+  value: '@digitalbazaar/vc'
+- namespace: github
+  value: digitalbazaar/vc
+official_url: https://github.com/digitalbazaar/vc/tree/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59
+versions:
+- version: 7.3.0
+  status: released
+  url: https://github.com/digitalbazaar/vc/tree/v7.3.0
+open_source: true
+license_expression: BSD-3-Clause
+scope_notes_zh: 主体是 @digitalbazaar/vc JavaScript 库，不是规范、组织、上下文数据包或托管凭证服务。固定 7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59；注释标签
+  v7.3.0 的 tag object 为 2d52d616476839bd6a0ada12f24030974ed5ae1c，标签/提交未签名，固定源码而非可变 main/tag 为证据。原构造切片只核 createPresentation
+  的 numeric version=2.0 路径：构造 @context=[https://www.w3.org/ns/credentials/v2]、type=[VerifiablePresentation] 的未签名内存对象；可选嵌入普通
+  VC2-shaped credential 对象及 id/holder。发行、签名和 VC1 功能不计本记录；验证仅增补下述包装层静态控制流，不涵盖委派实现或密码有效性。此构造在安全机制之前，不生成 proof，不满足或证明
+  VC2 第1.3节合规文档/发行者/验证者实现及第4.13节嵌入凭证的 securing 要求。truthy id/holder 直接复制，无类型/URL检查；调用方须自行保证合适值。verifiableCredential
+  可省略；[] 也会输出为空数组，因此成功不保证 present 时 one-or-more 的规范数量要求。嵌入输入经 [].concat 包装和局部检查，内部对象引用共享，无深复制或不可变保证。检查覆盖识别的首上下文、VerifiableCredential
+  类型、部分 subject/issuer/typed-object/URL 形状，但可放过空 subject 数组及 falsey 日期值，不是严格模型验证器；proof 仅局部形状检查，无签名/身份/状态真实性验证。VC2
+  truthy validFrom/validUntil 使用未锚定、允许省略时区的正则及 now/maxClockSkew 时间窗口筛选，不保证全部规范日期要求或 validFrom<=validUntil；默认 now
+  为当时 Date、skew 为300秒，时间有效性筛选可拒绝结构有效数据，成功结果随时间变化。数值2.0与字符串"2.0"不同。VC1兼容分支不计本边、不进行迁移；EnvelopedVerifiableCredential
+  不受支持，不覆盖完整表示空间。上下文映射来自声明依赖 @digitalbazaar/credentials-context ^3.2.0 中所核 v3.2.0 固定源码；其 context JSON/静态导出对象与最终
+  REC B.1 的官方 context 解析结构相同、原始字节不同，仅支持所用标识/字段对应，不证明 JSON-LD 扩展/压缩/规范化或完整符合性。Node>=18、BSD-3-Clause 为固定包/许可证声明，非运行兼容性测试或法律审计；依赖范围
+  ^3.2.0、jsonld ^9.0.0、jsonld-signatures ^11.6.0 不是已安装版本，未获取 npm 包字节。调用方负责完整属性/数量/上下文规范检查、合适时间策略、安全机制、状态与信任判断。固定
+  README 仍展示 VC1 示例，JSDoc 声称缺少 credential 会抛错，与当前实现的可选分支不符，未据此扩大结论。只读源码和测试定义，未安装/执行上游、运行测试、生成密钥、签名/验证凭证或查询身份/状态；不作完整标准合规、安全认证、法律效力、生产就绪、第三方互通或
+  IA 采用声明。 另于2026-10-31静态阅读同一固定提交的 verifyCredential 包装层，未执行：公共函数先在 try 外解构 credential，try 内才拒绝 falsey credential
+  并 await 内部函数；因此不保证所有输入/属性访问错误都被捕获。内部先做上述局部 _checkCredential；若 credential.credentialStatus 为 truthy 且 options.checkStatus
+  非函数，则在委派前抛错。配置提供的或默认 documentLoader 与 purpose 后，await jsigs.verify；此处未审或执行密码套件、密钥、loader、purpose、身份/状态或网络实现。委派结果的
+  verified 为 falsey 时直接返回并跳过状态回调；否则 credentialStatus 为 truthy 时 await checkStatus(options)，写入 statusResult，其 verified
+  为 falsey 时将总 verified 置 false。这里不是 verified 的严格 boolean 类型校验，回调返回 false 也不等于返回 {verified:false}；本层未完整校验委派/回调返回类型，null/undefined
+  的属性访问、赋值或回调抛错等可进入公共 try 内的失败包装，不能声称全部失败都原样返回。catch 返回 verified:false、含 credential/verified:false/error 的 results
+  数组及顶层 error。此静态控制流不证明验签或状态查询成功，不等同或自动违背 VC2 第7.1节算法，不证明 conforming document、完整 verifier、事实真实性、业务 validation、授权、信任或安全部署。既有
+  implements 关系仍仅覆盖 numeric version=2.0 的未签名 presentation 构造，不因新增包装层读证据而扩大。两批证据均为静态源码/测试定义阅读，不存在旧运行与新静态的比较；旧验证日期/身份不刷新，不提供安装或部署建议。
+scope_notes_en: 'The identity is the @digitalbazaar/vc JavaScript library, not a specification, organization, context-data
+  package or hosted credential service. Fixed 7.3.0 / commit 08cd6f3d0c07bd62e899bd670a450ea92fe1bf59; annotated
+  v7.3.0 tag object 2d52d616476839bd6a0ada12f24030974ed5ae1c refers to it, with unsigned tag/commit metadata. Evidence
+  is fixed source rather than mutable main/tag. The original construction slice covers only createPresentation with
+  numeric version=2.0: an unsigned in-memory object with @context=[https://www.w3.org/ns/credentials/v2], type=[VerifiablePresentation],
+  and optional ordinary VC2-shaped embedded objects/id/holder. Other issuance, signing and VC1 functionality is
+  not covered; verification is limited to the static wrapper control flow below, excluding delegated implementations
+  and cryptographic validity. This pre-security construction creates no proof and neither satisfies nor establishes
+  the securing/conformance requirements of VC2 section1.3 or section4.13 for embedded credentials. Truthy id/holder
+  are copied without type/URL validation; callers must supply appropriate values. verifiableCredential may be omitted,
+  and [] is emitted as an empty array, so success does not enforce the normative one-or-more constraint when present.
+  [].concat wraps inputs and local checks run, but credential-object references remain shared, without deep-copy
+  or immutability guarantees. Checks cover a recognized first context, VerifiableCredential type and some subject/issuer/typed-object/URL
+  shapes, yet empty subject arrays and falsey dates can pass; this is not a strict model validator. Proof checks
+  concern partial shape, not signature, identity or status authenticity. Truthy VC2 validFrom/validUntil receive
+  an unanchored regex check with optional timezone plus now/maxClockSkew filtering, not all normative date requirements
+  or a validFrom<=validUntil constraint. Defaults are the current Date and300seconds; time-window selection can
+  reject structurally valid data and makes results time-dependent. Numeric2.0 differs from string"2.0". VC1 compatibility
+  is excluded and performs no migration; EnvelopedVerifiableCredential is unsupported, so the full representation
+  space is not covered. Context mapping was inspected in fixed credentials-context3.2.0 within the declared ^3.2.0
+  range; its JSON and statically extracted export equal the final REC B.1 official context as parsed objects, not
+  as bytes. This supports the observed identifier/field correspondence, not JSON-LD expansion/compaction/canonicalization
+  or complete conformance. Node>=18 and BSD-3-Clause are package/license declarations, not tested runtime compatibility
+  or legal audit. Runtime ranges ^3.2.0, jsonld^9.0.0 and jsonld-signatures^11.6.0 do not prove installed versions;
+  npm archive bytes were not acquired. Callers retain complete normative property/cardinality/context validation,
+  time policy, securing, status and trust responsibilities. Fixed README VC1 examples and JSDoc claiming missing
+  credentials throw are stale relative to the optional current branch, not evidence for broader coverage. Static
+  source and test-definition inspection only: no upstream installation/execution/testing, key generation, credential
+  signing/verification or identity/status lookup; no complete conformance, security certification, legal validity,
+  production readiness, third-party interoperability or IA adoption claim. Separately, on 2026-10-31 the verifyCredential
+  wrapper at the same fixed commit was read statically, not executed. The public function destructures credential
+  before try, then rejects a falsey credential and awaits the internal function inside try; not all input/property-access
+  errors are caught. Internally, the partial _checkCredential runs first. A truthy credential.credentialStatus with
+  a non-function options.checkStatus throws before delegation. After selecting supplied or default documentLoader
+  and purpose, it awaits jsigs.verify; cryptographic suites, keys, loader, purpose, identity/status and network
+  implementations are not reviewed or executed here. A falsey delegated result.verified returns directly and skips
+  the status callback; otherwise a truthy credentialStatus triggers await checkStatus(options), assigns statusResult,
+  and a falsey statusResult.verified sets the overall verified to false. This is not strict boolean-type validation,
+  and a callback returning false is not equivalent to returning {verified:false}. Delegated/callback return types
+  are not fully validated here: null/undefined property access, assignment errors or callback exceptions can enter
+  the public try-contained failure envelope; not every failure preserves the original result. The catch returns
+  verified:false, a results array containing credential/verified:false/error, and a top-level error. This static
+  control flow establishes neither successful signature/status checking nor equivalence to or automatic violation
+  of VC2 section7.1, conforming documents, a complete verifier, factual truth, business validation, authorization,
+  trust or safe deployment. The existing implements relation remains restricted to unsigned presentation construction
+  with numeric version=2.0; the wrapper evidence does not expand it. Both evidence batches are static source/test-definition
+  inspection, not a comparison of old runtime observations with new static evidence. Old verification date/identity
+  remain unchanged; no installation or deployment advice is given.'
 sources:
 - url: https://github.com/digitalbazaar/vc/blob/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59/package.json
   title: Fixed package identity,7.3.0,ESM entry,Node>=18,license and runtime dependency ranges
@@ -107,14 +250,22 @@ sources:
   title: VC2 final Recommendation section4.13 representation and securing boundaries
   language: en
   accessed: '2026-10-24'
+- url: https://github.com/digitalbazaar/vc/blob/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59/lib/index.js#L286-L302
+  title: 'verifyCredential public wrapper: static inspection; pre-try destructuring and try-contained failure envelope'
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/digitalbazaar/vc/blob/08cd6f3d0c07bd62e899bd670a450ea92fe1bf59/lib/index.js#L328-L363
+  title: 'verifyCredential internal wrapper: static control flow and unreviewed external delegation'
+  language: en
+  accessed: '2026-10-31'
 last_verified_at: '2026-10-25T00:01:46.490098+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed-source presentation-construction evidence review
 record_created_at: '2026-10-25T00:13:45.695093+00:00'
-record_updated_at: '2026-10-25T00:13:45.695093+00:00'
+record_updated_at: '2026-10-31T10:17:54.311972+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / VC2 presentation construction intake review
+  executor: Agent — OpenAI / dot / clarify_vc_wrapper_evidence
+  reviewer: Independent Agents — OpenAI / dot / clarify_vc_wrapper_evidence / semantic_review and structural_review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: digitalbazaar_vc
