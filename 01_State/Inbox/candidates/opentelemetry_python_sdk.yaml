@@ -1,0 +1,57 @@
+contract_version: candidate-object-v1
+candidate_id: opentelemetry_python_sdk
+label: OpenTelemetry Python SDK package (1.45.1)
+publisher: OpenTelemetry Python contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: pypi
+  value: opentelemetry-sdk
+locators:
+- url: https://pypi.org/project/opentelemetry-sdk/
+  role: official
+- url: https://github.com/open-telemetry/opentelemetry-python/releases/tag/v1.45.1
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - opentelemetry_python_sdk
+  reasons:
+  - Accepted as canonical opentelemetry_python_sdk by accept-20261101-otel-sdk-batchspan. Frozen new-state Candidate
+    c4de2bfae90f17c42ded098d7bd67a79c66094c3 and review_required route are replayed against actual ancestor 6eeb4f53dd270878f405ad5f97824b058e03ef01;
+    back-reference prevents duplicate creation, not identity merging.
+  merge_authorized: false
+unknowns:
+- 'The independent Python distribution opentelemetry-sdk, pinned to 1.45.1 / commit 14971cef9c84c2354cbaf6871090896fad0f9a1a.
+  The subject is the whole SDK library package, not opentelemetry-api, the monorepo, a separate internal BatchSpanProcessor
+  product, an exporter or Collector. This static slice follows trace batching only: processors registered with the
+  default synchronous multi-processor receive on_end after a started SDK Span ends for the first time and produces
+  a ReadableSpan. BatchSpanProcessor emits only spans with a context and a true sampled flag. Not every recorded
+  span is necessarily exported; all samplers, logs/metrics and automatic instrumentation were not reviewed. The
+  caller supplies an exporter. The bounded in-memory deque defaults to queue2048, batch512 and schedule5000ms, overridable
+  by constructor arguments or corresponding environment variables; parameter checks are not performance evidence.
+  Shutdown rejects new items. Appending left to a full deque can discard its oldest rightmost item, and fork reinitialization
+  clears the queue: neither persistence nor cross-process retention is established, and concurrent metric-count
+  accuracy was not assessed. Under an export lock the worker selects scheduled/threshold batches, pops oldest items
+  first up to the configured batch size, then calls exporter.export. This code does not consume SpanExportResult;
+  Exception is logged with no requeue/retry at this layer, without judging retries inside a particular exporter.
+  An exporter callback is not network sending, remote receipt or Collector acknowledgement. The fixed export_timeout_millis
+  is unused for export. The shared force_flush timeout argument is unused and exporter.force_flush is not called.
+  After shutdown this path returns False; otherwise it blocks in EXPORT_ALL and returns True, including when export
+  exceptions were logged or failure returns ignored. True therefore establishes neither delivery success nor return
+  within a timeout. This does not deny deadline checks in provider/multi-processor code. The BatchSpanProcessor.shutdown
+  wrapper itself has no timeout parameter. Shared shutdown defaults to a join of at most30000ms, then prevents further
+  batches and calls exporter.shutdown with remaining timeout if its signature supports it, otherwise without that
+  argument. An existing export may still be running and exporter.shutdown may itself block or raise, so this is
+  not an overall hard deadline, guaranteed drain or receipt guarantee. Only fixed source was inspected: no SDK/exporter
+  installation, import, thread instantiation, build, execution or tests, network requests or real telemetry. The
+  old API package''s22 in-memory carrier examples are not SDK tests. Fixed metadata dependency declarations do not
+  prove installation or compatibility. Source-tree identity does not verify PyPI wheel/sdist bytes, signatures or
+  reproducible builds. Apache-2.0 records only fixed metadata and repository LICENSE, not an all-dependency license
+  audit. No full specification conformance, security, performance, production suitability, cross-implementation
+  interoperability or IA adoption is established. No technical relation or new capability is added; observability
+  is existing editorial navigation only, with old API, Trace Context edition boundaries and relations unchanged.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed OpenTelemetry SDK batch-span semantic review
