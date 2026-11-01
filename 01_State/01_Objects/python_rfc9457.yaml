@@ -11,9 +11,71 @@ external_identifiers:
 - namespace: pypi
   value: rfc9457
 official_url: https://github.com/NRWLDev/rfc9457
-description_zh: 用于构造异常形式问题对象及 Python 字典表示的开源库。本记录固定核验 0.4.1 的 Problem 与 marshal() 路径，不把字典构造称为 JSON 字节序列化或 HTTP 响应处理。
-description_en: An open-source Python library for exception-backed problem objects and dictionary representations.
-  This record verifies the 0.4.1 Problem and marshal() path, not JSON byte serialization or HTTP response handling.
+description_zh: 'rfc9457 是 NRWLDev/rfc9457 / PyPI rfc9457 的 Python 软件库；本记录固定 0.4.1 / commit b7bd8868f714ccc808343331c2dd08c8369c753f，仅记录
+  Problem 与 marshal() 的有限路径，不是 RFC 文献、Web 框架或完整 HTTP 响应实现。核心文档字符串中的 RFC9547 是旧记录已说明的笔误，不创建另一标准身份。
+
+
+  Problem 继承 Exception，接收 title、type_、detail、默认 500 的 status、headers 与扩展。marshal() 返回含 type/title/status、扩展及真值 detail
+  的 Python dict，不产生 JSON 文本/字节；headers 单独保存，不写入该字典，instance 可以作为未验证扩展传入。成员类型、状态码范围、扩展语义、JSON 可序列化性及实际 HTTP 响应的状态一致性、内容类型、协商与传输由调用方/框架负责。
+
+
+  显式 type_ 为假值时，type 属性从异常类名派生；非 strict 模式且 uri 为假值时使用 {type}。strict=True 先要求真值 uri，然后仍执行 Python str.format，代入 status/type/title/扩展；只有格式替换成功后，显式
+  type_ 为假值才把结果改为 about:blank。因此格式错误可先于回退抛出，真值 type_ 不触发该回退。此过程不是 URI 解析、相对解析、编码、解引用或 RFC 6570 引擎；strict 不是完整 RFC
+  校验，也不自动选择相应 HTTP reason-phrase title。
+
+
+  构造时只明确拒绝 type 或空白/全空格扩展键，不是全面保留成员保护；普通命名构造参数并不同时成为 extras。extras 可变，之后插入 type/title/status 可导致格式调用的重复关键字错误，即使
+  uri 不含占位符，也不能说它们必然成功覆盖输出。正常路径复制 extras，再在 self.detail 为真值时写入 detail；不据此保证任意修改后扩展、输入或输出有效、安全或无损。
+
+
+  状态/header/redirect 辅助类与 OpenAPI 描述字典不扩大原实现关系；README 的 Starlette/FastAPI 使用说法未独立验证为集成、采用或符合性。Python>=3.10、唯一运行时依赖
+  multidict>=6.0.5、Beta 与许可仍为固定项目元数据声明，不是已测平台矩阵、稳定性、生产适用性或法律审计；开发 extras/构建工具不混作运行时依赖。
+
+
+  原 #520 的七份固定源码及发布/registry 核验保持为历史。本次只重新静态读取并核对四份固定源码/元数据及旧记录，补足源对象可见边界；未安装、构建、导入或执行上游代码/测试，未做输入实验、HTTP 服务或网络/框架互通测试。IA
+  自身检查不是上游运行证据，不证明完整 RFC 9457/OpenAPI 符合性、安全或 IA 采用。原 scope、身份、来源及访问日期、创建/intake 与全记录核验日期不改；标准反向页仍不展示关系条件，源描述补证不代表双向显示限制已解决。'
+description_en: 'rfc9457 is the Python library published as NRWLDev/rfc9457 / PyPI rfc9457, pinned here to 0.4.1
+  / commit b7bd8868f714ccc808343331c2dd08c8369c753f. This record covers only the bounded Problem and marshal() path,
+  not an RFC publication, web framework or complete HTTP-response implementation. The core docstring''s RFC9547
+  typo is already explained in the original record and creates no other standard identity.
+
+
+  Problem subclasses Exception and takes title, type_, detail, status defaulting to 500, headers and extensions.
+  marshal() returns a Python dict containing type/title/status, extensions and truthy detail, not JSON text/bytes.
+  Headers are stored separately, outside that dict; instance may be supplied as an unvalidated extension. Member
+  types, status ranges, extension semantics, JSON serializability and actual HTTP response-status consistency, media
+  type, negotiation and transport remain caller/framework responsibilities.
+
+
+  With falsey explicit type_, the type property derives its value from the exception class name. Non-strict mode
+  uses {type} when uri is falsey. strict=True first requires a truthy uri, then still invokes Python str.format
+  with status/type/title/extensions; only after successful formatting does falsey explicit type_ replace the result
+  with about:blank. Formatting errors can therefore precede fallback, and truthy type_ does not trigger that fallback.
+  This is not URI parsing, relative resolution, encoding, dereferencing or an RFC 6570 engine. strict is not complete
+  RFC validation and does not automatically choose the corresponding HTTP reason-phrase title.
+
+
+  Construction explicitly rejects only type or blank/whitespace extension keys, not all reserved-member risks; ordinary
+  named constructor arguments do not simultaneously become extras. extras is mutable: later insertion of type/title/status
+  can cause duplicate keyword errors in formatting even when uri contains no placeholders, rather than necessarily
+  overriding output successfully. The normal path copies extras, then writes detail when self.detail is truthy;
+  arbitrary mutated extensions, inputs or outputs are not guaranteed valid, safe or lossless.
+
+
+  Status/header/redirect helpers and OpenAPI description dictionaries do not broaden the original implementation
+  relation. README Starlette/FastAPI use claims were not independently verified as integration, adoption or conformance.
+  Python>=3.10, the sole runtime dependency multidict>=6.0.5, Beta and license remain fixed project-metadata declarations,
+  not a tested platform matrix, stability, production suitability or legal audit; development extras/build tools
+  are not runtime dependencies.
+
+
+  Original #520 seven-source and release/registry verification remains historical. This supplement only statically
+  rereads and checks four fixed source/metadata files and old records to expose source-object boundaries. No upstream
+  code/tests were installed, built, imported or executed; no input experiments, HTTP service or network/framework
+  interoperability tests ran. IA checks are not upstream-runtime evidence and establish neither full RFC 9457/OpenAPI
+  conformance, security nor IA adoption. Original scope, identity, sources/access dates, creation/intake and whole-record
+  verification dates remain unchanged. The standard''s reverse page still omits relation conditions; this source-description
+  supplement does not claim to solve two-way boundary visibility.'
 open_source: true
 license_expression: Apache-2.0
 scope_notes_zh: '软件库主体按既有 system/library 模式收录，固定版本 0.4.1、tag v0.4.1、commit b7bd8868f714ccc808343331c2dd08c8369c753f；包与导入名为
@@ -119,11 +181,11 @@ sources:
 last_verified_at: '2026-10-24T08:26:38.503365+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed Python RFC 9457 source evidence executor
 record_created_at: '2026-10-24T08:33:29.566912+00:00'
-record_updated_at: '2026-10-24T08:33:29.566912+00:00'
+record_updated_at: '2026-11-01T09:35:58.307765+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / Python RFC 9457 semantic review
+  executor: Agent — OpenAI / dot / supplement_rfc9457_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / rfc9457_semantics and rfc9457_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_rfc9457
