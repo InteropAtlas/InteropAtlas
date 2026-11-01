@@ -3,10 +3,83 @@ type: system
 kind: library
 name_zh: html5lib Python HTML解析与序列化库
 name_en: html5lib Python HTML parsing and serialization library
-description_zh: 将HTML文档或片段解析为内存树并序列化的Python库；固定1.1，仅记录有界文档表示先例及容错、上下文、编码和输出默认行为。
-description_en: A Python library for parsing HTML documents/fragments into in-memory trees and serializing them;
-  pinned to 1.1 with bounded document-representation precedents and recovery, context, encoding and output-default
-  limits.
+description_zh: 'html5lib 是将 HTML 文档或片段解析为内存树并可序列化的 Python 库；本记录固定 1.1 / commit f87487a4ada2d6cf223bdd182774a01ba3c84618，不称最新版。既有切片使用默认标准库
+  etree 后端与带命名空间的 HTML 元素；旧 README 的 WHATWG HTML 设计目标不等于当前 HTML Living Standard 的精确完整符合性。本次只补明已有容错、上下文、编码和输出限制，不建立技术关系或实施
+  IA 页面。
+
+
+  默认 `strict=False` 记录解析错误并尝试恢复/构树；`strict=True` 在该解析器记录 parse error 时抛出 `ParseError`，不是完整作者文档符合性验证，也不保证任意错误输入都只产生该错误或得到恢复。片段的
+  container 上下文影响构树，旧例中相同 tr/td 输入在 table 与默认 div 得到不同树。`scripting` 选择 noscript 解析模式，不执行 JavaScript；脚本文本可保留在树中，不等于执行脚本。
+
+
+  字节输入与已解码字符串必须分开。str 不重新进行字节编码嗅探，给 Unicode 输入传以 `_encoding` 结尾的参数会抛 `TypeError`；已替换解码的字符串不能仅凭自身还原被替换的原字节。固定字节 API
+  使用 `override_encoding`、`transport_encoding` 等参数；BOM 优先，再考虑可识别的 override、transport、meta、父/likely 编码及可选 chardet
+  等，最后使用默认/回退编码。源码 meta 预扫描为1024字节，不沿用旧说明的512或笼统 encoding 参数覆盖 BOM 的说法。旧字节例显式 `useChardet=False`，不是该参数的默认值（固定源码默认
+  True）；旧无编码信息例回退 windows-1252，不能泛称所有无编码信息情形立即如此。解码使用替换错误策略，显式 UTF-8 的无效字节可成为替换字符，不证明严格字节有效性。
+
+
+  默认序列化可省略可选标签与部分属性引号，`inject_meta_charset=True`，`sanitize=False`。指定实际编码、encoding 为真值时走 bytes 输出，并可按选项注入 charset
+  meta；不保证任意空参数或无效编码都成功返回 bytes。解析/序列化不保证原文本逐字往返或任意树格式无损转换；序列化异常不等于 parser strict 的同一门。本切片未测试或推荐安全过滤，不由默认参数推输入安全、实体防护或部署适用性。
+
+
+  原 #504 于2026-10-21的20项可信小型合成内存观察包括版本、固定 prescan 源码值和有限解析/序列化行为，并非20项全为行为测试；仅使用标准库 etree。原14份来源指纹、10份安装源码逐字比较、官方
+  wheel SHA256及独立重放属于旧工作，不是完整依赖安全或符合性认证。另 #506 的7个跨库合成输入是2个 URI、4个编码、1个 single-base，涉及 rfc3986、HTTPX、html5lib，不能全部算作本库测试或与20项合称本次27项新测试。本次只静态复核五份固定源码/文档及实际显示，未安装、导入、运行上游或旧例、解析新输入、获取用户
+  HTML、执行脚本或生成新页面；Atlas 检查不是上游运行证据。
+
+
+  可选 chardet 猜测、lxml/genshi 后端、全部 HTML 规则、真实 HTTP/浏览器布局、导航和脚本行为、安全评估、性能、生产适用性、第三方互通、完整符合性及 IA 采用均未由此建立。原身份、许可、scope、7条来源及日期、intake、全记录核验日期和旧未解审查历史保持。只有既有
+  document_representation 能力字段引用，不从能力页邻接标准推出 implements；标准、能力页面、分类和维护机制不变。'
+description_en: 'html5lib is a Python library for parsing HTML documents or fragments into in-memory trees and serializing
+  them, pinned here to 1.1 / commit f87487a4ada2d6cf223bdd182774a01ba3c84618, not described as the latest release.
+  The existing slice uses the default standard-library etree backend with namespaced HTML elements. The old README''s
+  WHATWG HTML design goal is not exact full conformance to the current HTML Living Standard. This supplement makes
+  existing recovery, context, encoding and output limits visible; it adds no technical relation or IA page implementation.
+
+
+  Default `strict=False` records parse errors and attempts recovery/tree construction. `strict=True` raises `ParseError`
+  when this parser records a parse error, not a complete authoring-conformance assessment or a guarantee that arbitrary
+  erroneous inputs only yield that error or recover. Fragment container context affects tree construction: the old
+  identical tr/td input produced different trees under table and default div. `scripting` selects noscript parsing
+  behavior, not JavaScript execution; script text can remain in the tree without being executed.
+
+
+  Bytes and already decoded strings must be distinguished. str input does not repeat byte-encoding sniffing, and
+  passing parameters ending in `_encoding` for Unicode input raises `TypeError`. A replacement-decoded string alone
+  cannot recover the replaced original bytes. The fixed bytes API uses `override_encoding`, `transport_encoding`
+  and other parameters. A BOM takes precedence, followed by recognized override, transport, meta, parent/likely
+  encodings and optional chardet, among other sources, before default/fallback encoding. Source meta prescanning
+  is 1024 bytes, not the older 512-byte wording or generic encoding parameter overriding a BOM. The old bytes probes
+  explicitly used `useChardet=False`, not its fixed-source default True. The old no-encoding-information example
+  fell back to windows-1252; not every such situation immediately does so. Decoding uses replacement error handling:
+  invalid bytes under explicit UTF-8 can become replacement characters rather than establishing strict byte validity.
+
+
+  Default serialization can omit optional tags and some attribute quotes; `inject_meta_charset=True` and `sanitize=False`.
+  Supplying an actual encoding, with a truthy encoding value, takes the bytes-output path and can inject charset
+  metadata according to options; arbitrary empty parameters or invalid encodings are not guaranteed to return bytes
+  successfully. Parsing/serialization does not promise lexical source round trips or lossless conversion across
+  arbitrary tree formats. Serialization exceptions are not the parser strict gate. Security filtering was neither
+  tested nor recommended in this slice, and defaults do not establish input safety, entity protection or deployment
+  suitability.
+
+
+  The original #504 twenty trusted small synthetic-memory observations on 2026-10-21 include version, the fixed
+  prescan source value and bounded parse/serialize behavior, not twenty purely behavioral tests; they use only standard-library
+  etree. The original fourteen source fingerprints, ten byte-identical installed files, official wheel SHA256 and
+  independent replay belong to that historical work, not a full dependency-security or conformance certification.
+  The separate #506 seven cross-library synthetic inputs comprise two URI, four encoding and one single-base case
+  involving rfc3986, HTTPX and html5lib. They are not seven tests solely of this library or twenty-seven new tests
+  combined with the old twenty. This supplement statically inspects five fixed source/document files and actual
+  display; it does not install, import or run upstream code/old probes, parse new input, fetch user HTML, execute
+  scripts or generate new pages. Atlas checks are not upstream-runtime evidence.
+
+
+  Optional chardet guessing, lxml/genshi backends, every HTML rule, real HTTP/browser layout/navigation/script behavior,
+  security assessment, performance, production suitability, third-party interoperability, full conformance and IA
+  adoption are not established. Original identity, license, scope, seven sources/dates, intake, whole-record verification
+  date and unresolved review history are retained. Only the existing document_representation capability-field reference
+  is present; neighboring standards on its capability page do not imply implements. Standards, capability pages,
+  classification and maintenance mechanisms remain unchanged.'
 version: '1.1'
 external_identifiers:
 - namespace: github
@@ -81,11 +154,11 @@ sources:
 last_verified_at: '2026-10-21T12:54:54.912059+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed HTML library evidence executor
 record_created_at: '2026-10-21T13:09:39.870512+00:00'
-record_updated_at: '2026-10-21T13:09:39.870512+00:00'
+record_updated_at: '2026-11-01T07:47:03.305407+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_html5lib_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / html5lib_semantics and html5lib_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_html5lib
