@@ -8,11 +8,65 @@ version: 2.8.1
 external_identifiers:
 - namespace: github
   value: cisco/libsrtp
-description_zh: Cisco libSRTP 项目的开源 C 库，提供按调用方策略与密钥材料执行 SRTP/SRTCP 包保护和验证的 API。本记录固定核验 2.8.1 的官方源码与文档，不将项目的 RFC3711
-  实现声明等同于独立符合性或部署安全认证。
-description_en: The Cisco libSRTP project’s open-source C library exposes policy- and key-configured SRTP/SRTCP
-  packet-protection and verification APIs. This record verifies the official 2.8.1 sources and documentation, not
-  independent conformance or deployment-security certification.
+description_zh: 'Cisco libSRTP 是开源 C 库；本记录固定 2.8.1 / commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa，不是 Cisco 组织、SRTP
+  规范或完整会议应用。本次把既有调用条件补到可见描述，依据固定 README、公共头文件和 CMake 配置；这是上游声明与 API 合同的静态核对，不是密码实现内部审计、运行或部署安全认证。
+
+
+  固定 README 声称支持 RFC3711 mandatory-to-implement 特性，并允许通过策略选择部分特性；该声明不等于独立穷尽符合性。README 明确排除非零密钥派生率、AES-f8 及按包索引选择主密钥。最后一项不等于没有
+  MKI：公共头文件另有 MKI API。README 的额外 AES-GCM 声明不在本批新增 RFC7714 或其他关系。
+
+
+  调用合同要求先初始化并由调用方提供 SRTP/SRTCP 策略和主密钥材料。公共 protect/unprotect 合同要求包缓冲区 32 位对齐；发送保护还要求足够可写尾部空间，RTP 与 RTCP 合同分别使用 `SRTP_MAX_TRAILER_LEN`
+  与 `SRTP_MAX_SRTCP_TRAILER_LEN`，不是同一个经过本次测试的数值。只有返回成功时才可按合同解释输出包和长度；非成功时不能假定两者有效，也不保证不变、回滚或清零。认证失败、重放拒绝及其他错误应区分；这不建立安全密钥交换或端点认证。`allow_repeat_tx`
+  的合同要求重复发送的 RTP 载荷不变，本次没有发送或处理包。
+
+
+  固定 CMake 的 OpenSSL、MbedTLS、NSS 选项互斥且默认关闭，选定分支才要求相应后端。README 说明内部实现提供 AES-128/AES-256 与 SHA1，AES-192/AES-GCM 需要外部后端；不表示所有构建依赖全部后端或所有配置已经验证，也不在此推荐任一配置。固定
+  README 提到乱序超过 65k 包会失步，而 protect/unprotect 头文件要求乱序少于 32768 包；保留这一文档不一致，不选择正确阈值、不替上游解决，也未测试任一阈值。
+
+
+  原 #514 的五来源、release/tag/RFC 与 IA 核验仍是历史；本次仅重读上述三份固定文档/配置并核对原指纹，不重新核验规范、许可证、发布状态或密码实现。未构建、运行库/上游测试、处理包、握手、操作密钥或更改安全设置。许可证字段仍针对固定库源码而非外部后端。没有完整符合性、所有平台/后端适用性、真实互通、部署推荐、安全或
+  IA 采用结论，也不扩为 RTSP/WebRTC/ST2110 完整实现。原 scope、身份、来源及访问日期、创建/intake 和全记录核验日期保留；仅补源描述，标准反向页仍不展示关系条件，未修复该显示限制。'
+description_en: 'Cisco libSRTP is an open-source C library, pinned here to 2.8.1 / commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa,
+  not Cisco as an organization, the SRTP specification or a complete conferencing application. This supplement makes
+  existing caller conditions visible using the fixed README, public header and CMake configuration. It statically
+  checks upstream statements and API contracts, not cryptographic implementation internals, runtime behavior or
+  deployment-security certification.
+
+
+  The fixed README claims RFC3711 mandatory-to-implement features, with some policy-selectable; that is not independent
+  exhaustive conformance. It excludes nonzero key-derivation rates, AES-f8 and packet-index-based master-key selection.
+  The last exclusion does not mean no MKI: the public header exposes MKI APIs. The README''s additional AES-GCM
+  claim creates no RFC7714 or other new relation here.
+
+
+  The contracts require initialization and caller-supplied SRTP/SRTCP policies and master-key material. Public protect/unprotect
+  contracts require 32-bit-aligned packet buffers. Sender protection also requires writable trailer capacity: the
+  RTP and RTCP contracts respectively name `SRTP_MAX_TRAILER_LEN` and `SRTP_MAX_SRTCP_TRAILER_LEN`, not one numeric
+  limit tested here. Output packet and length are interpreted under the success contract only; non-success gives
+  no valid-output assumption or unchanged-buffer, rollback or zeroization guarantee. Authentication failure, replay
+  rejection and other errors are distinct; this does not establish safe key exchange or endpoint authentication.
+  The `allow_repeat_tx` contract requires unchanged RTP payload on retransmission; no packets were sent or processed
+  here.
+
+
+  Fixed CMake OpenSSL, MbedTLS and NSS options are mutually exclusive and default OFF; the selected branch requires
+  its backend. The README describes internal AES-128/AES-256 and SHA1, with AES-192/AES-GCM requiring an external
+  backend. This neither makes all backends dependencies of every build nor verifies all configurations or recommends
+  one. The fixed README says synchronization is lost beyond 65k reordered packets, whereas protect/unprotect header
+  contracts require reordering below 32768. That documentation discrepancy remains unresolved: neither threshold
+  is selected as correct, repaired upstream or tested here.
+
+
+  Original #514 five-source, release/tag/RFC and IA verification remains history. Current work rereads only these
+  three fixed documents/configuration files and checks their old fingerprints, not normative text, licenses, publication
+  state or cryptographic internals anew. No library/upstream build or run, packet processing, handshake, key operation
+  or security-setting change occurred. The license field still concerns fixed library sources rather than external
+  backends. Complete conformance, every-platform/backend applicability, actual interoperability, deployment recommendation,
+  security or IA adoption is not established; this is not a complete RTSP/WebRTC/ST2110 implementation claim. Original
+  scope, identity, sources/access dates, creation/intake and whole-record verification remain intact. Only source
+  descriptions are supplemented: the standard reverse page still omits relation conditions, and that display limitation
+  is not repaired.'
 open_source: true
 license_expression: BSD-3-Clause
 domains:
@@ -116,11 +170,11 @@ sources:
 last_verified_at: '2026-10-22T16:22:18.927416+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed libSRTP evidence executor
 record_created_at: '2026-10-22T16:31:08.562725+00:00'
-record_updated_at: '2026-10-22T16:31:08.562725+00:00'
+record_updated_at: '2026-11-01T14:24:11.187525+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
+  executor: Agent — OpenAI / dot / supplement_libsrtp_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / libsrtp_semantics and libsrtp_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: cisco_libsrtp
