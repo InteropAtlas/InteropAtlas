@@ -1,0 +1,61 @@
+contract_version: candidate-object-v1
+candidate_id: govuk_frontend
+label: GOV.UK Frontend component library (6.6.0)
+publisher: Government Digital Service / GOV.UK Frontend maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: alphagov/govuk-frontend
+- namespace: npm
+  value: govuk-frontend
+locators:
+- url: https://github.com/alphagov/govuk-frontend
+  role: official
+- url: https://github.com/alphagov/govuk-frontend/releases/tag/v6.6.0
+  role: dated
+- url: https://github.com/alphagov/govuk-frontend/tree/24bde7283766754254275ff27d09e78ff2bfa85d
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh State/Evolution and public issue/PR checks found no whole-Frontend software subject; existing GOV.UK Design
+    System guidance and axe_core evaluation library are distinct.
+  merge_authorized: false
+unknowns:
+- 'GOV.UK Frontend is the whole software library distributing JavaScript, Sass and component templates. This record
+  pins 6.6.0 / commit 24bde7283766754254275ff27d09e78ff2bfa85d and inspects only the Accordion initialization, expanded/collapsed
+  state and attribute-synchronization path. It is not a standalone Accordion product or a version upgrade of the
+  existing GOV.UK Design System guidance project. initAll/createAll finds data-module="govuk-accordion" markup and
+  constructs the component; root type, govuk-frontend-supported marker, duplicate-initialization checks, sections
+  and heading/content markup prerequisites apply. The initialization marker is set before the subclass finishes,
+  not transaction or rollback evidence; dataset configuration can override supplied configuration and defaults.
+  Templates derive heading/content IDs from the caller id; remembering expansion requires domain-wide unique IDs,
+  and source does not prove arbitrary markup or copied attributes conflict-free. Initialization creates controls
+  and aria-controls; header and show-all clicks reach setExpanded through actual handlers. isExpanded reads the
+  expanded CSS modifier class, not aria-expanded as its state source. setExpanded synchronizes the class, aria-expanded,
+  composed aria-label, text, icons and show-all state. Expansion removes hidden; collapse writes hidden="until-found".
+  Missing content throws, while missing some generated controls can return early; arbitrary DOM input success is
+  not guaranteed. Enhanced styling depends on the supported marker and applicable CSS support paths; source-level
+  state/style writes are not observed browser visibility or assistive-technology tests. rememberExpanded defaults
+  true and uses the button aria-controls value as a sessionStorage key; this code adds no pathname prefix, making
+  the caller ID-uniqueness contract important. A non-null stored value expands only when its string equals true.
+  Storage/read exceptions are caught and ignored, and remembering can be disabled. No reliable durability, cross-device
+  or server-storage guarantee follows. A document-level beforematch handler is registered only when document supports
+  onbeforematch; it can expand the matching element''s closest section through setExpanded(true), but does not call
+  storeState. This transition is not claimed remembered or supported by every browser. Fixed source and test recipes
+  were inspected only: no upstream JavaScript installation/build/execution, Puppeteer/axe or browser UI exercise,
+  and no IA page/style/view implementation or change. No keyboard, screen-reader/assistive-technology, every-browser
+  or whole-site accessibility test was performed. Attribute synchronization is not complete WCAG/WAI-ARIA conformance,
+  certification, security, performance, contemporary compatibility, production suitability or IA adoption. Zero
+  technical relations; existing design membership is editorial navigation only. Neither the old guidance subject
+  nor axe_core is converted into this library or claimed to depend on this release. Official publication was 2026-10-15,
+  not a latest-version claim; fixed source identity does not prove npm distribution-byte identity, verified signatures
+  or reproducible builds. README generally licenses code under MIT unless otherwise stated and Crown-copyright documentation
+  under OGL 3.0; the license field records fixed code licensing, not an all-tree/assets audit or legal-suitability
+  advice.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed GOV.UK Frontend Accordion semantic review
