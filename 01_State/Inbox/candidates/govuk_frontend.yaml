@@ -17,11 +17,13 @@ locators:
 - url: https://github.com/alphagov/govuk-frontend/tree/24bde7283766754254275ff27d09e78ff2bfa85d
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - govuk_frontend
   reasons:
-  - Fresh State/Evolution and public issue/PR checks found no whole-Frontend software subject; existing GOV.UK Design
-    System guidance and axe_core evaluation library are distinct.
+  - Accepted as canonical govuk_frontend by accept-20261101-govuk-accordion. Frozen new-state Candidate 81dc96188b37e9fd9742a7d951cb540a74a6b9aa
+    and review_required route are replayed against actual ancestor c253c425b624a579a88e0aa87dba4398e311b74d; back-reference
+    prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'GOV.UK Frontend is the whole software library distributing JavaScript, Sass and component templates. This record

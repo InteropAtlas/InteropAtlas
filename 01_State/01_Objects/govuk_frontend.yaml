@@ -1,0 +1,130 @@
+id: govuk_frontend
+type: system
+kind: library
+name_zh: GOV.UK Frontend 组件库
+name_en: GOV.UK Frontend component library
+official_name: GOV.UK Frontend
+version: 6.6.0
+external_identifiers:
+- namespace: github
+  value: alphagov/govuk-frontend
+- namespace: npm
+  value: govuk-frontend
+official_url: https://github.com/alphagov/govuk-frontend
+description_zh: GOV.UK Frontend 是分发 JavaScript、Sass 与组件模板的完整软件库；本记录固定 6.6.0 / commit 24bde7283766754254275ff27d09e78ff2bfa85d，仅检视
+  Accordion 初始化、展开/折叠状态与属性同步路径。不是独立 Accordion 产品，也不是既有 GOV.UK Design System 指导项目的版本升级。initAll/createAll 发现 data-module="govuk-accordion"
+  标记并构造组件；root 类型、govuk-frontend-supported 标记、重复初始化、sections 与 heading/content 标记等前提适用。初始化标记先于子类全部完成写入，不是事务或回滚保证；dataset
+  配置可覆盖传入配置与默认值。模板以调用方 id 建立 heading/content ID；记忆展开状态时要求域内唯一 ID，源码不证明任意输入标记或属性没有冲突。初始化生成控制按钮及 aria-controls，header
+  click 与 show-all click 经处理函数到达 setExpanded。isExpanded 读取 expanded CSS modifier class，不以 aria-expanded 为状态源；setExpanded
+  同步展开类、aria-expanded、组合 aria-label、文字、图标及 show-all 状态。展开移除 hidden，折叠写 hidden="until-found"。缺少内容会抛错，缺少部分生成的控制元素会提前返回；不保证任意
+  DOM 输入均成功。样式增强受 supported 标记和相应 CSS 支持路径约束，源码中的状态/样式写入不是实际浏览器可见性或辅助技术行为测试。默认 rememberExpanded=true，按按钮 aria-controls
+  值为 sessionStorage 键储存状态字符串；源码不额外加 pathname，调用方 ID 唯一性因此重要。读取值不是 null 时，仅字符串 'true' 视为展开，其余值折叠；存储/读取异常被捕获忽略，且可禁用记忆。不是可靠耐久、跨设备或服务器存储保证。仅在
+  document 支持 onbeforematch 时注册 document 级处理器；匹配元素的最近 section 可被 setExpanded(true) 展开，但该处理器不调用 storeState，不声称这类转换会被记忆或所有浏览器支持。仅固定源码与测试配方检视；未安装、构建、执行上游
+  JavaScript、Puppeteer/axe 或浏览器 UI，未实施或修改 IA 页面、样式或视角。没有键盘、屏幕阅读器/辅助技术、所有浏览器或完整网站可访问性实测；属性同步不等于 WCAG/WAI-ARIA 完整符合性、认证、安全、性能、当前兼容性、生产适用性或
+  IA 采用。零技术关系；design 仅为既有编辑导航，不把旧指导对象或 axe_core 改成此库，也不声称它们依赖本版。官方发布日为 2026-10-15，不称最新版；固定源码身份不证明 npm 分发字节相同、已验签或可复现构建。README
+  将通常的代码许可（除另有说明外）记为 MIT，并将 Crown copyright 文档记为 OGL 3.0；本字段仅记录固定代码许可，不是整树/全部资产审计或法律适用建议。
+description_en: 'GOV.UK Frontend is the whole software library distributing JavaScript, Sass and component templates.
+  This record pins 6.6.0 / commit 24bde7283766754254275ff27d09e78ff2bfa85d and inspects only the Accordion initialization,
+  expanded/collapsed state and attribute-synchronization path. It is not a standalone Accordion product or a version
+  upgrade of the existing GOV.UK Design System guidance project. initAll/createAll finds data-module="govuk-accordion"
+  markup and constructs the component; root type, govuk-frontend-supported marker, duplicate-initialization checks,
+  sections and heading/content markup prerequisites apply. The initialization marker is set before the subclass
+  finishes, not transaction or rollback evidence; dataset configuration can override supplied configuration and
+  defaults. Templates derive heading/content IDs from the caller id; remembering expansion requires domain-wide
+  unique IDs, and source does not prove arbitrary markup or copied attributes conflict-free. Initialization creates
+  controls and aria-controls; header and show-all clicks reach setExpanded through actual handlers. isExpanded reads
+  the expanded CSS modifier class, not aria-expanded as its state source. setExpanded synchronizes the class, aria-expanded,
+  composed aria-label, text, icons and show-all state. Expansion removes hidden; collapse writes hidden="until-found".
+  Missing content throws, while missing some generated controls can return early; arbitrary DOM input success is
+  not guaranteed. Enhanced styling depends on the supported marker and applicable CSS support paths; source-level
+  state/style writes are not observed browser visibility or assistive-technology tests. rememberExpanded defaults
+  true and uses the button aria-controls value as a sessionStorage key; this code adds no pathname prefix, making
+  the caller ID-uniqueness contract important. A non-null stored value expands only when its string equals true.
+  Storage/read exceptions are caught and ignored, and remembering can be disabled. No reliable durability, cross-device
+  or server-storage guarantee follows. A document-level beforematch handler is registered only when document supports
+  onbeforematch; it can expand the matching element''s closest section through setExpanded(true), but does not call
+  storeState. This transition is not claimed remembered or supported by every browser. Fixed source and test recipes
+  were inspected only: no upstream JavaScript installation/build/execution, Puppeteer/axe or browser UI exercise,
+  and no IA page/style/view implementation or change. No keyboard, screen-reader/assistive-technology, every-browser
+  or whole-site accessibility test was performed. Attribute synchronization is not complete WCAG/WAI-ARIA conformance,
+  certification, security, performance, contemporary compatibility, production suitability or IA adoption. Zero
+  technical relations; existing design membership is editorial navigation only. Neither the old guidance subject
+  nor axe_core is converted into this library or claimed to depend on this release. Official publication was 2026-10-15,
+  not a latest-version claim; fixed source identity does not prove npm distribution-byte identity, verified signatures
+  or reproducible builds. README generally licenses code under MIT unless otherwise stated and Crown-copyright documentation
+  under OGL 3.0; the license field records fixed code licensing, not an all-tree/assets audit or legal-suitability
+  advice.'
+domains:
+- web
+- human_system_interaction
+open_source: true
+license_expression: MIT
+sources:
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/README.md
+  title: Whole library identity, accessibility limits and code/documentation licensing distinction
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/LICENSE.txt
+  title: Fixed code MIT license text
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/package.json
+  title: npm library identity, 6.6.0 and distribution entry points
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/init.mjs
+  title: initAll/createAll real component construction path
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/common/index.mjs
+  title: Frontend support marker condition
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/common/configuration.mjs
+  title: Defaults, JavaScript configuration and dataset precedence
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/component.mjs
+  title: Root/support/duplicate-init checks and early init marker
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/components/accordion/accordion.mjs
+  title: Actual handlers, class-derived state, ARIA/hidden writes and sessionStorage boundaries
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/components/accordion/template.njk
+  title: Caller markup IDs and component structure
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/components/accordion/accordion.yaml
+  title: Component parameters and domain-wide ID-uniqueness contract
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/components/accordion/_mixin.scss
+  title: Supported enhancement and conditional display paths
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/alphagov/govuk-frontend/blob/24bde7283766754254275ff27d09e78ff2bfa85d/packages/govuk-frontend/src/govuk/components/accordion/_index.scss
+  title: Accordion stylesheet entry and mixin inclusion
+  language: en
+  accessed: '2026-11-01'
+last_verified_at: '2026-11-01T00:13:51+00:00'
+last_verified_by: Agent — OpenAI / dot / fixed GOV.UK Frontend source inspection only; no upstream JavaScript or
+  UI execution
+record_created_at: '2026-11-01T00:18:09+00:00'
+record_updated_at: '2026-11-01T00:18:09+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed GOV.UK Frontend Accordion semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: govuk_frontend
+  acceptance_event_id: accept-20261101-govuk-accordion
+  reviewed_candidate_blob: 81dc96188b37e9fd9742a7d951cb540a74a6b9aa
+  reviewed_against_commit: c253c425b624a579a88e0aa87dba4398e311b74d
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: c253c425b624a579a88e0aa87dba4398e311b74d
+  reviewed_packet_blob: 0e2fd6c7cfe07d312ca432c562f3a09d80d3703e
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/c253c425b624a579a88e0aa87dba4398e311b74d/01_State/Inbox/review-packets/govuk-accordion-20261101.yaml
