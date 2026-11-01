@@ -3,9 +3,73 @@ type: system
 kind: library
 name_zh: rfc3986 Python URI引用处理库
 name_en: rfc3986 Python URI-reference library
-description_zh: 表示和处理URI引用的Python库；固定2.0.0，记录组件表示、相对引用解析及显式验证配置的有界资源标识先例。
-description_en: A Python library for representing and processing URI references; pinned to 2.0.0 as a bounded resource-identification
-  precedent with component representation, relative resolution and explicit validation configuration.
+description_zh: 'rfc3986 是 Python URI 引用处理库；本记录固定 2.0.0 / commit 7a64092490c1b3c4f354b9b14d060fa758d66848，记录组件表示、相对引用解析、部分规范化和显式验证配置。这里处理的是标识字符串，不保证永久标识、可访问性、资源所有权或身份管理；不把库名或既有有界实现边扩大为完整
+  RFC 或浏览器 WHATWG URL 行为。
+
+
+  URIReference.from_string 对 path/query/fragment 做百分号编码，旧例包括空格、UTF-8 文本及无效百分号文本。因此不保证原输入逐字保留，后续检查通过不能证明原串严格符合 RFC
+  ABNF；也不保证所有无效输入都被安全修复或拒绝。Validator 默认既不要求组件存在，也不启用组件有效性检查。allowlist 本身不要求缺失组件出现，require_presence_of 需单独配置；允许的
+  scheme/host 值会规范化，但 validate 不自动规范化传入的 URIReference，旧大写值与小写 allowlist 可不匹配。默认无配置不等于任意对象或错误类型都不会抛异常。check_validity_of
+  的 port 路径另有0至65535的库级范围，不只是 RFC3986 通用端口的 *DIGIT 语法。
+
+
+  resolve_with 要求按该库检查有效且带 scheme 的 base，并先规范化 base。默认 strict=False 只在引用现有 scheme 直接等于已规范化 base.scheme 时移除引用 scheme
+  再相对处理；strict=True 不执行该移除，不能泛化为所有大小写等价 scheme 都走同一分支。这些方法构造字符串引用，不做 DNS 或资源获取；内部旧 is_valid 调用及弃用警告属于既有观察。normalize
+  创建新 URIReference 而非原地改写，做选定的 scheme/常规 host 小写、百分号十六进制大写和点段移除，保留路径大小写；IPv6 zone ID 有专门保留处理，不能概括为 host 每个字符均小写。旧例保留
+  unreserved 百分号编码与显式 HTTP 默认端口，不能据此宣称完整规范化或任意方案的语义等价。
+
+
+  原 #505 的24项可信内存核验包含版本/依赖状态与行为观察，使用 python -S、独立目录且未装可选 idna；18份固定源指纹、13份安装源码字节比对、wheel SHA256 和独立重放均属2026-10-21的旧工作。另
+  #506 的7个跨库可信合成输入为2 URI、4编码、1 single-base，涉及 rfc3986/HTTPX/html5lib，不是7项全为 URI，也不与原24项合计为本次新测试。本次仅固定四份源码与既有显示/记录的静态复核，未安装、导入或执行上游、重跑旧例、重新核验安装文件或
+  wheel、进行 DNS/网络请求或修改安全设置；Atlas 检查不是上游库运行证据。
+
+
+  原 IRI/IDNA、其他扩展、完整 RFC、WHATWG 浏览器行为、实际网络、生产适用性、互通、安全认证及 IA 采用未知保持。这不是访问控制、URL 安全过滤或 SSRF 防护保证，也不是完整依赖/供应链安全审计。原身份、许可、scope、7条来源及日期、intake
+  和全记录核验日期保持；既有关系、标准与能力页面不变。仅 source 描述补明不修复标准反向关系条件的隐藏显示，不关闭旧 #505 的未解审核意见。'
+description_en: 'rfc3986 is a Python URI-reference library, pinned here to 2.0.0 / commit 7a64092490c1b3c4f354b9b14d060fa758d66848.
+  This slice records components, relative-reference resolution, selected normalization and explicit validation configuration.
+  It handles identifier strings, not permanence, availability, resource ownership or identity management. Neither
+  its name nor the existing bounded implementation relation establishes complete RFC or browser WHATWG URL behavior.
+
+
+  URIReference.from_string percent-encodes path/query/fragment; historical examples include spaces, UTF-8 text and
+  malformed percent text. The result does not guarantee preservation of the original spelling, and passing later
+  checks does not prove strict RFC ABNF validity of the original input. It does not guarantee safe repair or rejection
+  of every invalid input. Validator defaults enable neither required-component presence nor component-validity checks.
+  An allowlist alone does not require an absent component: require_presence_of is separate. Allowed scheme/host
+  values are normalized, but validate does not automatically normalize its supplied URIReference; historical uppercase
+  values can fail lowercase allowlists. Empty default configuration is not a promise that arbitrary objects or erroneous
+  types cannot raise exceptions. The check_validity_of port path also applies a package-specific 0–65535 range,
+  not just the generic RFC3986 *DIGIT port syntax.
+
+
+  resolve_with requires a base valid under the library''s check and containing a scheme, then normalizes that base.
+  Default strict=False removes the reference scheme for relative processing only when the reference''s current scheme
+  directly equals the normalized base.scheme. strict=True skips that removal; this is not generalized to every case-equivalent
+  scheme. These methods construct string references, not DNS or resource retrieval; the internal old is_valid call
+  and deprecation warning belong to prior observations. normalize creates a new URIReference, not an in-place update.
+  Selected operations lowercase the scheme and ordinary host, uppercase percent-escape hex and remove dot segments
+  while preserving path case. IPv6 zone IDs receive special preservation handling, so not every host character is
+  necessarily lowercased. Historical examples retain escaped unreserved characters and explicit default HTTP ports;
+  complete normalization or semantic equivalence for arbitrary schemes is not established.
+
+
+  The original #505 twenty-four trusted in-memory checks include version/dependency-state checks and behavioral
+  observations, using python -S and a separate directory without optional idna. Eighteen fixed-source fingerprints,
+  byte comparisons of thirteen installed source files, the wheel SHA256 and independent replay belong to the old
+  2026-10-21 work. Separately, #506 has seven trusted cross-library synthetic inputs: two URI, four encoding and
+  one single-base input involving rfc3986/HTTPX/html5lib, not seven URI-only tests or a new combined total with
+  the original twenty-four. This update only statically revisits four fixed source files and existing displays/records.
+  It does not install, import or execute upstream code, rerun examples, reverify installed files or wheels, perform
+  DNS/network requests or change security settings; Atlas checks are not upstream execution evidence.
+
+
+  IRI/IDNA, other extensions, complete RFC requirements, WHATWG browser behavior, actual networking, production
+  suitability, interoperability, security certification and IA adoption remain unestablished by this slice. This
+  is not access control, URL-security filtering, SSRF protection or a complete dependency/supply-chain security
+  audit. Original identity, license, scope, seven sources/dates, intake and whole-record verification dates remain.
+  Existing relations, standard and capability pages are unchanged. A source-only description does not repair hidden
+  reverse-relation conditions or close the old unresolved #505 review finding.'
 version: 2.0.0
 external_identifiers:
 - namespace: github
@@ -86,11 +150,11 @@ sources:
 last_verified_at: '2026-10-21T13:53:57.073782+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed URI-reference library evidence executor
 record_created_at: '2026-10-21T14:09:11.620196+00:00'
-record_updated_at: '2026-10-21T14:09:11.620196+00:00'
+record_updated_at: '2026-11-01T06:02:42.643662+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_rfc3986_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / rfc3986_semantics and rfc3986_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_rfc3986
