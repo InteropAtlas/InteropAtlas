@@ -3,9 +3,63 @@ type: system
 kind: software
 name_zh: pygeoapi 地理空间 API 服务端软件
 name_en: pygeoapi geospatial API server software
-description_zh: 固定 0.24.0 的 Python 地理空间 API 服务端软件；本记录只核实 OGC API Features Core 的配置依赖发现与要素 GET 读取路由，不表示完整符合性或认证。
-description_en: Python geospatial API server software pinned to 0.24.0; this record covers only configuration-dependent
-  OGC API Features Core discovery and feature GET routing, not full conformance or certification.
+description_zh: 'pygeoapi 是完整的 Python 地理空间 API 服务端软件；本记录固定 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0，不是标准、托管端点、单一
+  provider 或 GeoJSON 库。既有 implements 只记录 OGC API Features Core 配置依赖的发现与要素 GET 读取路由切片，不表示完整符合性或认证。
+
+
+  固定源码中的 /conformance 按资源/provider 类型等配置组合静态类别 URI，而不是验证底层数据或实现行为。返回类别声明不等于已通过相应测试。集合元数据列表（dataset=None）会省略 visibility=hidden
+  的集合；生成集合元数据发生异常时，列表跳过该集合，直接请求单集合则返回错误。隐藏列表项不构成访问控制，也不能把失败省略理解为该集合已成功读取。
+
+
+  固定 provider 文档矩阵将 CSV 与 GeoJSON 的 datetime、sortby 标为不支持。两者所检 query 函数虽在签名接受 datetime_、sortby，函数体并未应用或转传这两个参数。这里只描述这些固定函数体和矩阵；保留装饰器及其他调用层的存在，不外推所有
+  provider 或部署端到端结果。参数名字不等于过滤/排序能力已实现。
+
+
+  Flask 的同一组要素路由另列 POST/PUT/DELETE 分支，因此本记录的 GET 切片不等于整个软件只读；路由分支存在也不是事务成功或事务扩展符合性实测。配置、provider、依赖、数据与标识字段仍影响实际路径，不从这五份源码/文档推断完整
+  Core、可选编码、任意 CRS/bbox 行为、CITE 结果或外部互通。
+
+
+  本次只把已记录的具体条件补入可见描述，重读原证据中五份固定源码/文档的相关范围并核对原指纹，不是全库审计或新的上游执行。部分主题原已在来源标题提示；原 #534 静态研究、后续 #616/#619 已交付研究及 IA 检查历史仍保留，不称本次重跑这些工作。未安装、导入、构建、运行或部署上游，未执行
+  provider 查询、输入数据或上游/CITE 测试；本记录的实现证据不是部署测试结果、安全保证或 IA 采用证明。原发布/标签、规范版次桥接、许可证及依赖等历史不因本次五文件补证而重新核验；原获取失败和未知项仍保留。原
+  scope、11 条来源与日期、身份、创建/intake 和全记录验证时间不变。仅源描述变化，标准反向页仍不显示完整关系条件，未修复该展示限制。'
+description_en: 'pygeoapi is the whole Python geospatial API server software, pinned here to 0.24.0 / commit f765a64fa65350dc93d9df0a1b38755bef6c31b0,
+  not a standard, hosted endpoint, single provider or GeoJSON library. Its existing implements relation records
+  only configuration-dependent OGC API Features Core discovery and feature GET-routing paths, not full conformance
+  or certification.
+
+
+  In the fixed source, /conformance combines static class URIs according to resource/provider types and related
+  configuration rather than validating underlying data or implementation behavior. Returned declarations do not
+  establish passing tests. Collection metadata listings (dataset=None) omit collections with visibility=hidden;
+  when metadata generation raises an exception, the listing skips that collection whereas a direct single-collection
+  request returns an error. Hiding a listing entry is not access control, and omission after failure is not successful
+  collection retrieval.
+
+
+  The fixed provider matrix marks datetime and sortby unsupported for CSV and GeoJSON. Their inspected query signatures
+  accept datetime_ and sortby, but the function bodies neither apply nor forward those arguments. This describes
+  only those fixed bodies and the matrix; decorators and other calling layers remain present, and no inference is
+  made about every provider or deployed end-to-end behavior. Parameter names do not establish implemented filtering
+  or sorting.
+
+
+  The same Flask feature routes also have POST/PUT/DELETE branches, so this record''s GET slice does not make the
+  entire product read-only. Branch presence is not a successful transaction test or transaction-extension conformance.
+  Configuration, providers, dependencies and data/identifier fields still affect actual paths. These five source/document
+  files do not establish complete Core or optional-encoding support, arbitrary CRS/bbox behavior, CITE results or
+  external interoperability.
+
+
+  This supplement makes already-recorded conditions visible, rereads relevant ranges in five fixed source/document
+  files from the original evidence and checks their original fingerprints, not the whole library or a new upstream
+  execution. Some topics were already signaled by source titles. Original #534 static research, delivered #616/#619
+  research and IA verification history remain intact and are not claimed to have been rerun here. No upstream installation,
+  import, build, execution or deployment, provider query, input-data experiment or upstream/CITE test occurred.
+  The implementation evidence is not a deployment-test result, security guarantee or proof of IA adoption. Historical
+  release/tag, normative-edition bridge, license and dependency facts are not revalidated by this five-file supplement;
+  earlier acquisition failures and unknowns remain. Original scope, 11 sources/access dates, identity, creation/intake
+  and whole-record verification time remain unchanged. Only source descriptions change; the standard reverse page
+  still omits full relation conditions, and that display limitation is not repaired.'
 version: 0.24.0
 external_identifiers:
 - namespace: github
@@ -104,11 +158,11 @@ sources:
 last_verified_at: '2026-10-24T15:21:43.509806+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed public pygeoapi source evidence executor
 record_created_at: '2026-10-24T15:30:43.470282+00:00'
-record_updated_at: '2026-10-24T15:30:43.470282+00:00'
+record_updated_at: '2026-11-01T15:41:29.230802+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / review_pygeoapi_features_intake
+  executor: Agent — OpenAI / dot / supplement_pygeoapi_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / pygeoapi_semantics and pygeoapi_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: pygeoapi
