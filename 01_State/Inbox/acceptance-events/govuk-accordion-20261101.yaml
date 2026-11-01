@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261101-govuk-accordion
+candidate_id: govuk_frontend
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: govuk_frontend
+review:
+  reviewer: Independent Agent — OpenAI / dot / fixed GOV.UK Frontend Accordion semantic review
+  reviewed_at: '2026-11-01T00:18:09+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立核验固定官方 tag/release/commit、源指纹、whole-library身份、无碰撞路线及有限Accordion初始化/状态/属性同步路径。
+  - 仅object-only，不新增关系；保留调用方markup/唯一ID、初始化marker非事务、dataset覆盖、CSS/support条件、CSS class状态源、sessionStorage异常吞掉与非耐久、beforematch条件及不持久化边界。未安装、构建、导入或执行上游/测试，未进行浏览器/键盘/屏幕阅读器测试，不声称WCAG/ARIA符合性、安全、生产或IA采用。
+  - reviewed_at为接受序列化时刻，不推测审核耗时；实际物化树与H/M另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/c253c425b624a579a88e0aa87dba4398e311b74d/01_State/Inbox/review-packets/govuk-accordion-20261101.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/81dc96188b37e9fd9742a7d951cb540a74a6b9aa
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0e2fd6c7cfe07d312ca432c562f3a09d80d3703e
+decided_at: '2026-11-01T00:18:09+00:00'
+notes:
+- 只接纳固定GOV.UK Frontend软件主体与既有design编辑导航，不改既有govuk_design_system/axe_core或标准，不实施IA页面/UI，不改分类、治理或旧holds。
+- 真实Git祖先保留完整已审Candidate和packet，当前packet为reference-only receipt。
