@@ -3,9 +3,37 @@ type: system
 kind: library
 name_zh: pySHACL Python RDF 图约束验证库
 name_en: pySHACL Python RDF graph validation library
-description_zh: Python 的 SHACL 验证库；本记录固定到 0.40.1，通过 validate 接口按 shapes 图检查 RDF 数据图并返回符合性结果与报告。
-description_en: A Python SHACL validation library, pinned here to 0.40.1; its validate interface checks RDF data
-  graphs against shapes graphs and returns a conformance result and report.
+description_zh: 'pySHACL 是 Python RDF 图约束验证库，不是 W3C 规范或 RDFLib 本体；本记录仍固定 0.40.1 / commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75，以
+  SHACL 2017 Recommendation 为实现目标，有限记录 Core/SPARQL 约束检查和验证报告。validate 的结果取决于选项和实际检查范围：focus_nodes/use_shapes
+  可筛选对象，abort_on_first 可提前结束，报告不保证穷尽全部问题；预推理、meta-SHACL、Advanced Features 和 JS 需相应选项，JS 另需可选依赖。本次静态补证限定普通 Core
+  constraint-component 结果消费路径：allow_infos 允许 Info，allow_warnings 同时允许 Info/Warning；允许级别的结果可不使 conforms 变假，但
+  shape.py 仍收集这些报告，Validator 分别写入 sh:conforms 与 sh:result。因此 conforms=True 不等于没有验证结果，也不是删除 Warning/Info 报告；不将此结论泛化到
+  custom-constraint 循环、所有扩展或远程模式。普通不符合结果仍是验证报告；捕获的 ValidationFailure 返回 False、failure 对象和文本，不是普通 RDF 报告图；其他加载/运行异常不由该捕获一概处理，普通报告还可按选项序列化为字节。加载
+  shapes 时会临时改变 RDFLib 的全局字面量归一化与布尔映射；unpatch 写回库设定的默认值，并非保存/还原任意宿主自定义状态，该加载片段也不是 finally 保护。不声称异常后一定恢复、并发安全或已修复这些行为。原
+  #478 曾记录 19 个本地可信内存图运行样例，已含基数与 severity 场景；本次仅检视固定源码，不新增这些覆盖，不曾安装、导入或执行 pySHACL/RDFLib，也未新运行验证、查询、网络端点或上游测试。不声明完整符合性认证、SHACL
+  1.2/全部扩展、HTTP 服务/Oxigraph 实测、宿主协议互通、安全或生产推荐；不改变 IA 模型、采用方式或既有关系。'
+description_en: 'pySHACL is the Python RDF graph validation library, not the W3C specification or RDFLib itself.
+  This record remains pinned to 0.40.1 / commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75, targeting the SHACL
+  2017 Recommendation and recording a limited Core/SPARQL constraint and report slice. validate results depend
+  on options and the actual scope checked: focus_nodes/use_shapes can filter that scope and abort_on_first
+  can stop early, so reports need not exhaust every problem. Pre-inference, meta-SHACL, Advanced Features and
+  JS require their options; JS also needs optional dependencies. This static supplement bounds the result-consumption
+  claim to the ordinary Core constraint-component path: allow_infos permits Info, while allow_warnings permits
+  both Info and Warning. Allowed-severity results need not make conforms false, but shape.py still collects
+  those reports and Validator writes sh:conforms and sh:result separately. Thus conforms=True does not mean
+  that there are no validation results, nor that Warning/Info reports were deleted. This is not generalized
+  to the custom-constraint loop, all extensions or remote modes. Ordinary non-conformance still produces a
+  validation report. A caught ValidationFailure returns False, a failure object and text, not an ordinary RDF
+  report graph; other loading/runtime exceptions are not universally caught there, and an ordinary report can
+  optionally be serialized to bytes. Loading shapes temporarily changes RDFLib global literal normalization
+  and Boolean mappings. unpatch writes library defaults rather than saving/restoring arbitrary host-customized
+  state, and this loading segment is not protected by finally. Recovery after exceptions, thread safety or
+  a fix for these behaviors is not asserted. Original #478 recorded 19 local trusted in-memory graph examples,
+  already including cardinality and severity cases. This supplement only inspects fixed source, adds no such
+  coverage, and did not install, import or execute pySHACL/RDFLib or newly run validation, queries, network
+  endpoints or upstream tests. No complete conformance certification, SHACL 1.2/all-extension support, tested
+  HTTP-service/Oxigraph coverage, host-protocol interoperability, security or production recommendation is
+  claimed. IA models, adoption and existing relations are unchanged.'
 version: 0.40.1
 external_identifiers:
 - namespace: github
@@ -57,14 +85,18 @@ sources:
   title: pySHACL 0.40.1 — RDFLib literal and Boolean mapping changes
   language: en
   accessed: '2026-10-21'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/shape.py#L725-L815
+  title: pySHACL 0.40.1 — ordinary constraint severity handling retains reports; separate custom loop
+  language: en
+  accessed: '2026-11-01'
 last_verified_at: '2026-10-21T04:35:19.773595+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
 record_created_at: '2026-10-21T04:39:44.884351+00:00'
-record_updated_at: '2026-10-21T04:39:44.884351+00:00'
+record_updated_at: '2026-11-01T01:29:42.545519+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_pyshacl_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / pyshacl_semantics and pyshacl_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: pyshacl
