@@ -3,12 +3,76 @@ type: system
 kind: library
 name_zh: CloudEvents Kotlin 事件表示库（源码发布 0.2.0）
 name_en: CloudEvents Kotlin event representation SDK (source release 0.2.0)
-description_zh: Kotlin 事件表示库；固定官方源码发布 0.2.0，静态核对 v1.0 事件上下文、非冲突扩展与 JSON 单事件/批量读写。需调用方提供有效字段；构造/编码不自动验证。不是完整 CloudEvents
-  1.0.2 符合性、Maven 二进制、运行测试、网络绑定或投递保证。
-description_en: 'Kotlin event representation SDK at official source release 0.2.0: static correspondence for v1.0
-  context, non-colliding extensions and single-event/batch JSON codecs. Callers supply valid fields; construction/encoding
-  does not automatically validate. Not full CloudEvents 1.0.2 conformance, a verified Maven binary, runtime test,
-  network binding or delivery guarantee.'
+description_zh: 'CloudEvents Kotlin 是事件表示库，本记录固定官方源码发布 0.2.0 / commit 27b718156fd9410a926e08f087ee67c7ba421c1a，限定原
+  v1.0 上下文、有效非冲突扩展与内存 JSON 单事件/批量路径，不是规范、部署服务或已验证 Maven 二进制。原 README 的 Maven 发布说明、未签名 tag 与 1.0.2 版次依据保持历史，本次不重新核验当前
+  registry、发布状态或规范；不由 wire specversion="1.0" 推断 patch 符合性，也不改变 JavaScript SDK 的版次边界。
+
+
+  调用方须提供有效字段及不与核心字段重名的扩展。builder/构造器会检查扩展名，但不调用语义 validate；单独 validate(STRICT) 对已实现条件收集违规，仅有违规时抛异常，LENIENT 返回含违规列表的
+  ValidationResult。JSON decoder 对单事件及每个批量事件构造后调用 STRICT；encoder 不调用，但仍可能因 payload 解析/序列化失败。因此成功构造/编码不证明有效事件，也不能说所有入口没有检查。名称检查排除空名、data
+  与非小写 ASCII 字母/数字，却不排除 id 等所有核心名；encoder 先写核心字段、再写扩展、最后写 data，允许的核心名冲突可覆盖成员，不能推断任意扩展最终保留。source+id 唯一性、发生时间、含义、载荷
+  schema、权限与真实性仍由应用负责。
+
+
+  解码排除已识别核心/data 成员及 null 扩展，重建 string/int32/bool；引号内数字或布尔保持字符串。URI、URI-reference、Timestamp、Binary 扩展编码为字符串，解码不自动恢复原包装类型；可选
+  null 属性视为 unset，不保证任意类型往返。v1.0 中 data 与 data_base64 同时存在会先被拒绝，包括 data 显式 null 的情形；缺失 data 与显式 null 不同。内部 JsonData/StringData/Base64Data/NullData
+  carrier 保留来源表示路线，不是新公共构造 API。已解码 carrier 重编码沿其路线，普通 core 字节 payload 则在 JSON/缺省 content type 时解析为 JSON 值，否则 Base64；content-type
+  helper 只匹配 subtype/suffix，不是完整 MIME 校验。不能任意修改 carrier 的 content type 后假定转换符合或无损。
+
+
+  encodeToString/decodeFromString 与 encodeBatch/decodeBatch 是分别调用的内存字符串单对象/事件数组入口，使用不同媒体类型常量，不代表网络协商、事务/原子处理或投递保证。当前只静态重读十二份固定
+  core/JSON 源码并核对 Git tree 和原 #559 对应哈希，不重做原 39 份捕获、32 SDK 文件、六份测试定义及两份规范核验，不安装、构建或运行 SDK、Kotlin、Gradle、测试、输入样例或网络绑定；Atlas
+  检查不是 SDK 执行。
+
+
+  原 settings.gradle.kts 固定 raw GET 的 proxy tunnel 403 拒绝保持，未重试、换通道或重建该文件，完整构建输入仍缺失。原 32 份 SDK 捕获的逐项 status/final
+  URL 未保存限制不被当前选定文件响应替代；不冒称恢复完整 HTTP 日志。既有 scope 仅纠正 LENIENT 返回类型一句，其余 scope、身份、32 份来源及访问日期、创建/intake、全记录核验、implements
+  和能力字段保留。源对象描述补证与该精度纠错不修标准/能力页的条件展示或查询；不扩 v0.3、其他格式/网络绑定、完整符合性、安全、生产适用、第三方互通、IA 采用、UI、模型或维护方式。'
+description_en: 'CloudEvents Kotlin is an event representation library, pinned here to official source release 0.2.0
+  at commit 27b718156fd9410a926e08f087ee67c7ba421c1a. Scope remains the original v1.0 context, valid non-colliding
+  extensions and in-memory single-event/batch JSON paths, not the specification, a deployed service or verified
+  Maven binary. Original README publication caveats, unsigned-tag statement and 1.0.2 edition evidence remain history,
+  not newly checked current registry/release/normative facts. Wire specversion="1.0" does not establish patch conformance,
+  and JavaScript SDK edition limits are unchanged.
+
+
+  Callers supply valid fields and extensions not colliding with core names. Builder/construction checks extension
+  names but does not call semantic validate. Separate validate(STRICT) collects implemented violations and throws
+  only when violations exist; LENIENT returns a ValidationResult containing the violations. JSON decoding constructs
+  and invokes STRICT for a single event and each batch event; encoding does not, but payload parsing/serialization
+  can still fail. Successful construction/encoding does not prove event validity, nor are all entry points devoid
+  of checks. Naming rejects empty names, data and non-lowercase-ASCII-alphanumeric names, not every core name such
+  as id. Encoder writes context, then extensions, then data: permitted core-name collisions can overwrite members,
+  without guaranteeing arbitrary extensions survive. Source+id uniqueness, occurrence time, meaning, payload schema,
+  authorization and authenticity remain application responsibilities.
+
+
+  Decoding excludes recognized core/data members and null extensions, reconstructing string/int32/bool; quoted numbers/booleans
+  stay strings. URI, URI-reference, Timestamp and Binary extensions encode as strings without automatic recovery
+  of their wrapper types. Optional null attributes become unset; arbitrary-type roundtrips are not promised. In
+  v1.0, simultaneous data and data_base64 is rejected before explicit-null handling, including data:null; missing
+  data differs from explicit null. Internal JsonData/StringData/Base64Data/NullData carriers preserve origin routes,
+  not new public construction APIs. Existing carriers retain their encoding route; plain core byte payloads are
+  parsed as JSON for JSON/absent content type, otherwise Base64-encoded. The content-type helper matches subtype/suffix,
+  not full MIME validity. Arbitrary carrier content-type edits do not establish conforming or lossless conversion.
+
+
+  encodeToString/decodeFromString and encodeBatch/decodeBatch are separate in-memory string/object/array entry points
+  with distinct media-type constants, not network negotiation, transactional/atomic processing or delivery. Current
+  work only statically reinspects twelve fixed core/JSON sources against the Git tree and corresponding original
+  #559 hashes; it does not redo the original 39 captures, 32 SDK files, six test definitions and two normative reviews.
+  No SDK, Kotlin, Gradle, tests, input examples or network bindings were installed, built or run in this supplement.
+  Atlas checks are not SDK execution.
+
+
+  The original fixed settings.gradle.kts raw-GET proxy-tunnel403 refusal remains: no retry, alternate channel or
+  reconstruction of that file, and complete build inputs are still absent. Original per-file status/final-URL omissions
+  for 32 SDK captures are not repaired by current selected file responses or represented as restored complete HTTP
+  logs. Only the LENIENT return-type sentence in original scope is corrected; all other scope, identity, 32 sources/access
+  dates, creation/intake, whole-record verification, implements relation and capability field remain intact. Source
+  description supplementation and that precision correction do not repair standard/capability condition display
+  or queries. No expansion to v0.3, other formats/network bindings, full conformance, security, production suitability,
+  third-party interoperability, IA adoption, UI, model or maintenance practice.'
 version: 0.2.0
 versions:
 - version: 0.2.0
@@ -39,13 +103,13 @@ scope_notes_zh: 主体是官方 cloudevents/sdk-kotlin 源码项目及 core/JSON
   data 为 JSON 值，包括原样 JSON string，非 JSON content type 下 data 字符串保留为文本；data_base64 解码为字节。解码产生内部 JsonData/StringData/Base64Data/NullData
   carrier，保留其来源表示供重编码；这些类不是独立公共构造 API。普通 core 字节 payload 无 carrier，编码按 content type：JSON/缺省时解析为 JSON 值，否则 Base64，不宣称所有
   byte payload 都走 binary 或都为 JSON；不要改变已解码 carrier 的 content type 后假定任意转换仍符合规范。时间使用 Instant，重编码 UTC 而非保留原 offset
-  拼写；不主张字节规范化/字节相同、所有类型或任意输入往返。 validate(STRICT) 是单独步骤，会对已实现的必需非空、字符串/source URI 与版次字段检查收集违规后抛异常；LENIENT 返回违规列表。JSON
-  解码调用 STRICT；builder 和 encoder 不调用，成功构造/编码不证明有效事件。扩展命名仅拒绝 data 和非小写 ASCII 字母/数字，并未禁止 id 等核心名；encoder 在核心字段后写扩展，可覆盖其成员。有效、非冲突名称/值由调用方保证。URI
-  包装本身不验证语法，datacontenttype 只按 String 检查而非完整 RFC2046，Instant/URI helper 并非本次完整 RFC3339/3986 认证。无严格 validator、非法输入全拒绝、重复
-  JSON key、资源耗尽或安全保证。 作者只实读固定源码/六份测试定义/两份规范并核验 39 份捕获，其中 32 SDK 文件与官方 Git tree blob 相符；未运行 SDK、Kotlin/Gradle/build/upstream
-  tests 或跨实现互通。settings.gradle.kts 固定 raw GET 曾被 proxy tunnel403 拒绝，未重试/换通道；完整构建输入缺失。32 SDK 捕获的单项 status/final URL
-  因后续并行异常未保存，原 headers/hash 保留，不伪称完整 HTTP 日志。排除 v0.3、protobuf/其他格式、HTTP/Kafka/AMQP/MQTT/NATS 绑定、发布订阅/路由/自动采集、部署兼容性、加密认证、投递保证与
-  IA 采用。保留既有 JavaScript SDK 的版次边界，不回改旧审计或推导身份等价。
+  拼写；不主张字节规范化/字节相同、所有类型或任意输入往返。 validate(STRICT) 是单独步骤，会对已实现的必需非空、字符串/source URI 与版次字段检查收集违规后抛异常；LENIENT 返回含违规列表的
+  ValidationResult。JSON 解码调用 STRICT；builder 和 encoder 不调用，成功构造/编码不证明有效事件。扩展命名仅拒绝 data 和非小写 ASCII 字母/数字，并未禁止 id 等核心名；encoder
+  在核心字段后写扩展，可覆盖其成员。有效、非冲突名称/值由调用方保证。URI 包装本身不验证语法，datacontenttype 只按 String 检查而非完整 RFC2046，Instant/URI helper 并非本次完整
+  RFC3339/3986 认证。无严格 validator、非法输入全拒绝、重复 JSON key、资源耗尽或安全保证。 作者只实读固定源码/六份测试定义/两份规范并核验 39 份捕获，其中 32 SDK 文件与官方 Git
+  tree blob 相符；未运行 SDK、Kotlin/Gradle/build/upstream tests 或跨实现互通。settings.gradle.kts 固定 raw GET 曾被 proxy tunnel403
+  拒绝，未重试/换通道；完整构建输入缺失。32 SDK 捕获的单项 status/final URL 因后续并行异常未保存，原 headers/hash 保留，不伪称完整 HTTP 日志。排除 v0.3、protobuf/其他格式、HTTP/Kafka/AMQP/MQTT/NATS
+  绑定、发布订阅/路由/自动采集、部署兼容性、加密认证、投递保证与 IA 采用。保留既有 JavaScript SDK 的版次边界，不回改旧审计或推导身份等价。
 scope_notes_en: 'The official cloudevents/sdk-kotlin source project and its core/JSON modules, not the specification,
   hypothetical Maven coordinates or a deployed service. GitHub source release/tag v0.2.0 resolves to 27b718156fd9410a926e08f087ee67c7ba421c1a.
   Fixed README explicitly tracks 1.0.2 text and test definitions cite its JSON clauses; the patch target is not
@@ -70,19 +134,19 @@ scope_notes_en: 'The official cloudevents/sdk-kotlin source project and its core
   JSON for JSON/absent content type, otherwise Base64-encoded; this is not universal binary typing. Arbitrarily
   changing carrier content type is excluded. Instant re-encodes UTC, not original offset spelling; no byte canonicalization/equality
   or blanket type/input roundtrip. Explicit validate(STRICT) collects implemented nonempty/string/source-URI/version-field
-  violations and throws; LENIENT returns them. JSON decode invokes STRICT, but builder and encoder do not. AttributeNaming
-  excludes data and non-lowercase-ASCII-alphanumeric names, not existing core names such as id; extensions written
-  after core members can overwrite them. Callers ensure valid non-colliding names/values. URI wrappers do not validate
-  their strings, datacontenttype is checked as String rather than full RFC2046, and Instant/URI helpers are not
-  certified RFC3339/3986 validators here. No all-invalid-input rejection, duplicate-key, resource-exhaustion or
-  secure-parser claim. Author inspected fixed code, six test definitions and two specifications and rehashed39 captures,
-  including32 SDK files matching official tree blobs. No SDK/Kotlin/Gradle/build/upstream tests or cross-implementation
-  execution. Exact settings.gradle.kts raw GET was denied by proxy tunnel403, without retry/alternate route; full
-  build inputs are absent. Per-file status/final URLs for32 SDK captures were not persisted after a later parallel
-  exception; original headers and hashes remain, not invented complete HTTP logs. Excluded: v0.3, protobuf/other
-  formats, HTTP/Kafka/AMQP/MQTT/NATS bindings, publish-subscribe/routing/automatic capture, deployed platform compatibility,
-  cryptographic verification, delivery guarantees and IA adoption. Existing JavaScript SDK version limits/history
-  stay unchanged; no identity equivalence inference.'
+  violations and throws; LENIENT returns a ValidationResult containing the violations. JSON decode invokes STRICT,
+  but builder and encoder do not. AttributeNaming excludes data and non-lowercase-ASCII-alphanumeric names, not
+  existing core names such as id; extensions written after core members can overwrite them. Callers ensure valid
+  non-colliding names/values. URI wrappers do not validate their strings, datacontenttype is checked as String rather
+  than full RFC2046, and Instant/URI helpers are not certified RFC3339/3986 validators here. No all-invalid-input
+  rejection, duplicate-key, resource-exhaustion or secure-parser claim. Author inspected fixed code, six test definitions
+  and two specifications and rehashed39 captures, including32 SDK files matching official tree blobs. No SDK/Kotlin/Gradle/build/upstream
+  tests or cross-implementation execution. Exact settings.gradle.kts raw GET was denied by proxy tunnel403, without
+  retry/alternate route; full build inputs are absent. Per-file status/final URLs for32 SDK captures were not persisted
+  after a later parallel exception; original headers and hashes remain, not invented complete HTTP logs. Excluded:
+  v0.3, protobuf/other formats, HTTP/Kafka/AMQP/MQTT/NATS bindings, publish-subscribe/routing/automatic capture,
+  deployed platform compatibility, cryptographic verification, delivery guarantees and IA adoption. Existing JavaScript
+  SDK version limits/history stay unchanged; no identity equivalence inference.'
 sources:
 - url: https://github.com/cloudevents/sdk-kotlin/releases/tag/v0.2.0
   title: Official GitHub source releasev0.2.0; not verified Maven binary
@@ -215,11 +279,11 @@ sources:
 last_verified_at: '2026-10-29T11:13:34.367079+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed-source/normative comparison only; no SDK build or runtime
 record_created_at: '2026-10-29T11:22:22.082338+00:00'
-record_updated_at: '2026-10-29T11:22:22.082338+00:00'
+record_updated_at: '2026-11-01T13:17:23.176175+00:00'
 latest_substantive_contribution:
-  initiator: Human — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Agent — OpenAI / independent semantic reviewer / review_cloudevents_kotlin_packet
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_cloudevents_kotlin_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / cloudevents_kotlin_semantics and cloudevents_kotlin_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: cloudevents_kotlin_sdk
