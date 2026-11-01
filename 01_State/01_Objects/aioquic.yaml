@@ -11,11 +11,68 @@ external_identifiers:
 - namespace: pypi
   value: aioquic
 official_url: https://github.com/aiortc/aioquic
-description_zh: 面向 Python 客户端与服务器集成的开源 QUIC 与 HTTP/3 库。固定核验 1.7.0 的 Sans-I/O 协议核心与调用边界，仅接纳 QUIC v1 连接/数据报/流处理及 HTTP/3
-  HEADERS、DATA、事件、SETTINGS 的有界实现。
-description_en: An open-source QUIC and HTTP/3 library for integration into Python clients and servers. This record
-  fixes 1.7.0 and its Sans-I/O integration boundaries, covering bounded QUIC v1 connection/datagram/stream handling
-  and HTTP/3 HEADERS, DATA, events and SETTINGS.
+description_zh: 'aioquic 是面向 Python 客户端与服务器集成的开源软件库；本记录固定 1.7.0 / commit 8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0，不是
+  aiortc、RFC 文献或完整网络应用。既有两条关系只接纳 QUIC v1 连接/数据报/流路径及 HTTP/3 HEADERS、DATA、事件、SETTINGS 的有界实现，不是全部条款或可选功能符合性。
+
+
+  Sans-I/O 核心由 API、receive_datagram、get_timer/handle_timer 驱动；实际网络 I/O、定时器调度与持续发送由调用方或 asyncio 适配层承担。每个 datagrams_to_send
+  结果的目的地址都须使用。固定版本可在地址和可用连接 ID 等条件下探测服务器 preferred address，并非必然迁移；固定初始地址的 connected UDP socket 或单目标隧道不自动等于完整集成。远端
+  PATH_CHALLENGE 排队有上限，源码明确承认偏离 RFC9000；其资源限制意图不等于本次证明了抗耗尽效果或安全性。
+
+
+  H3Connection 消费 QUIC 事件、生成 HTTP 事件，经 QUIC 流排入 HEADERS/DATA，处理 SETTINGS，QPACK 编解码使用 pylsqpack。调用方仍须供给事件并驱动底层发送。控制流解析器丢弃未使用的
+  GOAWAY 载荷，不能称完整 GOAWAY/优雅关闭实现；enable_webtransport 默认 False，不表示所有扩展默认可用。
+
+
+  低层 QuicConfiguration 的 server_name 默认 None，并连同 verify_mode 与 CA 输入传入 TLS Context。显式 verify_mode 可覆盖默认值，否则 TLS
+  Context 客户端为 CERT_REQUIRED、服务端为 CERT_NONE；客户端相关路径先验签，再按模式决定是否调用证书校验。证书校验函数仅在 server_name 非 None 时进行名称/IP 匹配；None
+  不等于关闭所有证书校验，日期与 CA/证书链处理是另行存在的路径。asyncio 客户端 connect 会把未设置名称补为 host。这些是固定源码条件，不是漏洞判断、当前安全状态、部署建议或安全保证。
+
+
+  本次只重读原证据中七份固定源码/文档的相关路径并核对原指纹，不是全库审计；部分限制原已在 source 标题提示，本次把调用条件与限制连接到可见正文。原 #521 的 18 源、测试定义、tag/PyPI 与 IA 核验仍为历史，不称本次重新核验全部来源、发布状态或规范。Python
+  要求、依赖、C 扩展及上游稳定性分类仍属原固定元数据声明，不是本次运行结论。未安装、导入、构建或运行上游，未执行输入、网络、握手或证书实验，未操作信任设置；不证明外部互通、性能、完整符合性、IA 采用或部署安全。不增加
+  capability、协议或扩展关系。原 scope、25 条来源及访问日期、身份、创建/intake 和全记录验证时间保留；仅补源描述，两个标准反向页仍不显示完整关系条件，未修复该显示限制。'
+description_en: 'aioquic is an open-source software library for integration into Python clients and servers, pinned
+  here to 1.7.0 / commit 8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0, not aiortc, an RFC document or a complete network
+  application. Its two existing relations cover bounded QUIC v1 connection/datagram/stream paths and HTTP/3 HEADERS,
+  DATA, events and SETTINGS, not all-clause or all-option conformance.
+
+
+  API calls, receive_datagram and get_timer/handle_timer drive the Sans-I/O core; callers or the asyncio adapter
+  perform actual network I/O, timer scheduling and ongoing transmission. Every destination returned by datagrams_to_send
+  must be honored. The fixed version can probe the server preferred address subject to address and available connection-ID
+  conditions, not inevitable migration. A connected UDP socket fixed to the initial address or a single-destination
+  tunnel is not automatically complete integration. Queued remote PATH_CHALLENGE values are bounded, with an explicit
+  source acknowledgement of deviation from RFC9000; the resource-limiting intent is not verified exhaustion resistance
+  or security.
+
+
+  H3Connection consumes QUIC events, emits HTTP events, queues HEADERS/DATA on QUIC streams and handles SETTINGS;
+  QPACK encoding/decoding uses pylsqpack. Callers still supply events and drive underlying transmission. The control-stream
+  parser discards unused GOAWAY payload, not complete GOAWAY/graceful-shutdown handling. enable_webtransport defaults
+  to False, not universal default extension availability.
+
+
+  Bare QuicConfiguration defaults server_name to None and passes it with verify_mode and CA inputs to TLS Context.
+  Explicit verify_mode overrides defaults; otherwise TLS Context uses CERT_REQUIRED for clients and CERT_NONE for
+  servers. The relevant client path verifies the signature before deciding by mode whether to invoke certificate
+  verification. The certificate-verification function performs name/IP matching only when server_name is not None.
+  None does not disable all certificate verification: date and CA/certificate-chain handling are separate paths.
+  asyncio client connect fills an unset name from host. These are fixed-source conditions, not a vulnerability determination,
+  current security assessment, deployment recommendation or security guarantee.
+
+
+  This supplement rereads relevant paths in seven fixed source/document files from the original evidence and checks
+  their old fingerprints, not the whole library. Some limitations were already signaled by source titles; caller
+  conditions and limitations are now connected in the visible description. Original #521 review of 18 source files,
+  test definitions, tag/PyPI and IA projections remains history, not current revalidation of every source, publication
+  state or normative text. Python requirements, dependencies, the C extension and upstream stability classifier
+  remain historical fixed-metadata declarations, not current runtime findings. No upstream installation, import,
+  build or execution, input/network/handshake/certificate experiment or trust-setting change occurred. External
+  interoperability, performance, full conformance, IA adoption or deployment security is not established. No capability,
+  protocol or extension relation is added. Original scope, 25 sources/access dates, identity, creation/intake and
+  whole-record verification time remain intact. Only source descriptions change; both standard reverse pages still
+  omit full relation conditions, and that display limitation is not repaired.'
 open_source: true
 license_expression: BSD-3-Clause
 scope_notes_zh: '按既有 system/library 模式收录 aioquic 软件库，固定版本 1.7.0、annotated tag 1.7.0、commit 8c5c6b49ee8c0d19b310c9b9e6a3b6301360dbb0；GitHub
@@ -194,11 +251,11 @@ sources:
 last_verified_at: '2026-10-24T08:55:10.170878+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed aioquic source evidence executor
 record_created_at: '2026-10-24T09:00:38.183442+00:00'
-record_updated_at: '2026-10-24T09:00:38.183442+00:00'
+record_updated_at: '2026-11-01T15:06:31.297772+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / aioquic semantic review
+  executor: Agent — OpenAI / dot / supplement_aioquic_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / aioquic_semantics and aioquic_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: aioquic
