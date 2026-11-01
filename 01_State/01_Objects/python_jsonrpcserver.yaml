@@ -3,9 +3,70 @@ type: system
 kind: library
 name_zh: jsonrpcserver Python 请求分派库
 name_en: jsonrpcserver Python request-dispatch library
-description_zh: 固定 5.0.9 的 Python 库；本记录仅核实 JSON-RPC 2.0 默认同步、进程内、单请求分派与有限响应机制，不声称完整协议符合性或网络服务。
-description_en: A Python library pinned to 5.0.9; this record verifies only bounded JSON-RPC 2.0 default synchronous
-  in-process single-request dispatch and responses, not complete protocol conformance or a network service.
+description_zh: 'jsonrpcserver 是 Python 请求分派库；本记录固定 5.0.9 / commit 2c0567515d67c6b1bd85db8e7985cada472489e3，仅限默认同步、进程内、单请求路径，不称最新版或网络服务。本次把既有有限处理条件补到可见描述，不新增或扩大原
+  JSON-RPC 2.0 implements 关系。
+
+
+  默认 `dispatch`（`dispatch_to_json`）使用 `json.loads`、随包 schema、默认 context/后处理与 `json.dumps`。普通方法来自注册表或显式 methods 字典；按位置数组或按名称对象绑定
+  Python 调用签名，不是参数值或语义类型验证。方法应返回库的 Success/Error Result，或抛出 JsonRpcError；不把任意 Python 返回值视为成功结果。调用方仍负责错误 code/message/data
+  的类型及结果、错误数据的可序列化性。
+
+
+  普通有效通知以缺少 id 判别，先经过方法处理再过滤响应，dispatch 返回空字符串而非 JSON null；显式 null id 不等于缺少 id。这不是无条件静默保证：内部调度故障可能产生 -32000、null
+  id 的 Server Error，固定测试定义也包含通知返回该错误的反例。它不同于普通方法内被捕获的 Exception 转为 -32603 Internal Error；不能推成所有异常都转换为同一种协议错误。`json.dumps`
+  位于调度异常捕获之外，不可序列化结果等可能以 Python 异常外逸；异常分支的回退后处理也不受同一捕获递归保护。
+
+
+  随包 schema 不强制拒绝 `rpc.` 保留前缀；签名绑定和 Python 默认 JSON 行为不证明所有 JSON 边界严格符合。批处理全部排除，不从源码存在批处理、异步或客户端路径推成本切片证据。方法名、绑定诊断和异常文字可能进入错误数据或日志，不作安全披露保证。
+
+
+  原 #540 的 14,506 字节 sdist 哈希核对、16 个运行时成员及共 21 个 Git 对应文件逐字比较、另 8 个打包生成文件，以及历史仓库重定向和相同 ID 观察属于旧静态工作，不是本次重新执行或所有权、治理、维护连续性判断。本次仅静态复核六份固定源码/测试定义和实际显示；未安装、导入、运行库、方法、上游测试或旧例，未进行序列化输入实验、网络/HTTP、认证或
+  MCP 集成。Atlas 自身检查不是上游运行证据。
+
+
+  不由此建立完整协议符合性、安全、生产适用性、第三方互通、当前维护或 IA 采用。原身份、许可、scope、来源与访问日期、创建/intake 及全记录核验日期保留。本对象未标注能力；既有标准对象和关系条件不变。仅补源对象描述，标准反向页面仍不展示关系条件，不能声称双向显示限制已解决。'
+description_en: 'jsonrpcserver is a Python request-dispatch library, pinned here to 5.0.9 / commit 2c0567515d67c6b1bd85db8e7985cada472489e3.
+  This record covers only the default synchronous, in-process, single-request path, not the latest release or a
+  network service. This supplement makes existing bounded conditions visible without adding or broadening the existing
+  JSON-RPC 2.0 implements relation.
+
+
+  Default `dispatch` (`dispatch_to_json`) uses `json.loads`, the shipped schema, default context/post-processing
+  and `json.dumps`. Ordinary methods come from the registry or an explicit methods dictionary. Positional arrays
+  or named objects bind Python call signatures; this is not semantic argument-value/type validation. Methods should
+  return library Success/Error Results or raise JsonRpcError, rather than arbitrary Python returns being treated
+  as success. Callers remain responsible for error code/message/data types and the serializability of results and
+  error data.
+
+
+  Ordinary valid notifications omit id, undergo method handling before response filtering and yield an empty dispatch
+  string, not JSON null; explicit null id is not omission. This is not unconditional silence: internal dispatcher
+  failure can produce Server Error -32000 with null id, including a notification counterexample in a fixed test
+  definition. That differs from caught ordinary method Exception becoming Internal Error -32603; not all exceptions
+  become one protocol error. `json.dumps` runs outside dispatcher exception handling, so non-serializable results
+  and similar failures can escape as Python exceptions. The error branch''s fallback post-processing is not recursively
+  protected by the same catch.
+
+
+  The shipped schema does not enforce rejection of the reserved `rpc.` prefix. Signature binding and default Python
+  JSON behavior do not establish strict conformance at every JSON boundary. Batch is entirely excluded; the existence
+  of batch, async or client paths is not evidence for this slice. Method names, binding diagnostics and exception
+  text may reach error data or logs, without a safe-disclosure guarantee.
+
+
+  Original #540 verification of the 14,506-byte sdist hash, byte comparisons for 16 runtime members and 21 files
+  with Git counterparts, eight separate packaging-generated files, and historical repository redirect/same-ID observations
+  belong to that older static work. They are not repeated here or ownership, governance or maintenance-continuity
+  findings. This supplement only statically inspects six fixed source/test-definition files and actual display.
+  It does not install, import or execute the library, methods, upstream tests or old probes, try serialization inputs,
+  or perform network/HTTP, authentication or MCP integration. Atlas checks are not upstream-runtime evidence.
+
+
+  Full protocol conformance, security, production suitability, third-party interoperability, current maintenance
+  and IA adoption are not established. Original identity, license, scope, sources/access dates, creation/intake
+  and whole-record verification dates remain intact. This object has no assigned capability; the existing standard
+  and relation conditions are unchanged. Only the source object''s description is supplemented: the standard''s
+  reverse page still does not display relation conditions, so two-way boundary visibility is not claimed.'
 version: 5.0.9
 external_identifiers:
 - namespace: pypi
@@ -100,11 +161,11 @@ sources:
 last_verified_at: '2026-10-24T18:27:57.890699+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed archive and source evidence executor
 record_created_at: '2026-10-24T18:37:07.298272+00:00'
-record_updated_at: '2026-10-24T18:37:07.298272+00:00'
+record_updated_at: '2026-11-01T08:27:14.309653+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / jsonrpcserver synchronous single-dispatch intake review
+  executor: Agent — OpenAI / dot / supplement_jsonrpcserver_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / jsonrpcserver_semantics and jsonrpcserver_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_jsonrpcserver
