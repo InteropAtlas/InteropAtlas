@@ -3,9 +3,81 @@ type: system
 kind: library
 name_zh: geojson Python 地理数据编解码库
 name_en: geojson Python geospatial encoding/decoding library
-description_zh: 面向GeoJSON几何、要素与要素集合的开源Python对象和编解码库；本记录固定3.3.0，并保留精度、局部检查及归一化边界。
-description_en: An open-source Python object and encoding/decoding library for GeoJSON geometries, features and
-  feature collections, pinned to 3.3.0 with precision, partial-check and normalization boundaries.
+description_zh: 'geojson 是 Python GeoJSON 对象与编解码库；本记录固定 3.3.0 / commit f14b85252bd93eb336f9918a3cf8c601b6094714，记录七种几何类型、Feature/FeatureCollection
+  及 `__geo_interface__` 适配的有限先例，不是完整 GIS 或 OGC API 服务。既有精度、局部检查和归一化限制在此补明，不扩大原有界实现关系。
+
+
+  几何构造默认 validate=False；precision=None 时使用6位小数。clean_coordinates 递归处理 list/tuple，并在 Real/Decimal 数值分支执行 round；已有相应
+  Geometry 或嵌套 Geometry 的坐标可直接保留，不能概括为所有对象的每个数值都会重舍入。默认 loads 通过 object_hook 将识别出的普通几何字典交构造器，因而可发生同样舍入；显式 precision
+  改变精度策略，不保证字节或数值精度无损，也不是每次往返必然改变数值。
+
+
+  is_valid 只取局部 errors 的否定：Point 检查位置为2/3个数值，Polygon 检查环长度与闭合但不完整核验各位置维数，也不重排方向；Feature 的检查委托给真值 geometry，不检查 properties
+  类型。局部 True 不是完整 RFC7946、地理范围、拓扑或 bbox 符合性，也不保证任意非法构造值只会返回 False 而不抛异常。原规范边界保持：超过3个坐标元素是 SHOULD NOT，非右手规则 Polygon
+  的解析兼容建议不能被库局部行为改写成更强拒绝要求；本次没有重新核验整份规范。
+
+
+  Feature 使用 properties or {}，旧 null properties→{} 观察不是仅 None 才转换的保证；null geometry 的旧例保留为 null，不据此断言任意非法 geometry
+  都被保留。to_instance 在非 strict 的特定 AttributeError/KeyError 分支返回原对象，未知 type 的普通 JSON 对象因而可仍是 dict；strict coercion 可拒绝，但不是捕获所有异常或完整验证。这里的
+  strict 属于对象转换，不是把 loads(strict=True) 的标准库 JSON 参数当作完整 GeoJSON 验证开关。默认 dumps 的 allow_nan=False 和 loads 的 parse_constant
+  拒绝相应非有限数/NaN、Infinity 常量，调用方可覆盖默认策略；Point 的简单局部检查本身可接受 NaN，不能把 is_valid 与 JSON 序列化政策混为一谈。
+
+
+  原 #489 在2026-10-21的21项可信内存观察含版本、九类对象小样本、上述边界及无网络尝试，不是21项全为行为测试。原13份来源指纹、9份安装源码字节比较及独立重放属于旧工作。该旧环境未安装可选 simplejson；mapping
+  的某些回退可使用它，与 codec 固定使用标准库 json 不同，不表示所有部署均缺依赖或已测安装后的行为。本次仅静态复核五份固定源码与既有记录/显示，未安装、导入、执行上游或重跑旧例，未下载/处理真实地理数据或开展
+  OGC/CRS/网络测试；Atlas 检查不是上游运行证据。
+
+
+  不建立 CRS 转换、地理范围/拓扑、反经线、bbox、完整规范符合性、安全、性能、生产适用性、第三方互通或 IA 采用结论。原身份、许可、scope、8条来源及日期、intake 和全记录核验日期保持；不改标准、关系、能力页面或导航。仅
+  source 描述补明不修复标准反向关系条件的隐藏显示，也不把其他 OGC uses 关系传递为本库的 OGC 实现证明。'
+description_en: 'geojson is a Python GeoJSON object and encoding/decoding library, pinned here to 3.3.0 / commit
+  f14b85252bd93eb336f9918a3cf8c601b6094714. This finite precedent covers seven geometry types, Feature/FeatureCollection
+  and `__geo_interface__` adaptation, not a complete GIS or OGC API service. Existing precision, local-check and
+  normalization limits are made visible without expanding the bounded implementation relation.
+
+
+  Geometry construction defaults to validate=False; precision=None selects six decimal places. clean_coordinates
+  recursively handles lists/tuples and rounds Real/Decimal numeric branches. Coordinates from an existing corresponding
+  Geometry or nested Geometry can be retained directly: not every number in every object is necessarily rounded
+  again. Default loads sends recognized ordinary geometry dictionaries through constructors via object_hook, so
+  this rounding can occur there too. Explicit precision changes the policy, not a guarantee of byte or numeric-precision
+  preservation; neither does every round trip necessarily change values.
+
+
+  is_valid only negates local errors. Point checks a position with two/three numeric values; Polygon checks ring
+  length/closure but not every position dimension and does not rewrite winding. Feature delegates checks to truthy
+  geometry without validating properties type. Local True is not complete RFC7946, geographic-range, topology or
+  bbox conformance, nor a promise that arbitrary invalid constructed values only return False rather than raise.
+  Existing normative boundaries remain: positions beyond three elements are subject to SHOULD NOT, and the parser-compatibility
+  advice for non-right-hand-rule Polygons must not be strengthened into rejection requirements based on library
+  behavior. This update does not reverify the whole specification.
+
+
+  Feature uses properties or {}, so the historical null-properties-to-{} observation is not a claim that only None
+  is converted. The old null-geometry example remains null, not a guarantee that arbitrary invalid geometry is preserved.
+  In specific AttributeError/KeyError branches, non-strict to_instance returns the original object; an ordinary
+  JSON object with unknown type can therefore remain a dict. Strict coercion can reject it, but does not catch every
+  exception or establish complete validation. This strict belongs to object conversion: loads(strict=True) passes
+  a standard-library JSON option, not a full GeoJSON validation switch. Default dumps allow_nan=False and loads
+  parse_constant reject the relevant nonfinite numbers/NaN and Infinity constants, but callers can override these
+  defaults. Point''s simple local check can itself accept NaN; is_valid and JSON serialization policy are different.
+
+
+  The original #489 work on 2026-10-21 had twenty-one trusted in-memory observations including version checks, small
+  samples of nine object classes, these boundaries and no network attempts, not twenty-one purely behavioral tests.
+  Thirteen source fingerprints, byte comparisons of nine installed source files and independent replay are historical
+  work. Optional simplejson was absent in that old environment; some mapping fallbacks can use it, unlike codec''s
+  fixed standard-library json import. This does not mean every deployment lacks it or that its installed behavior
+  was tested. The present update only statically revisits five fixed source files and existing records/displays.
+  It does not install, import or execute upstream code, rerun old examples, download/process real geospatial data
+  or perform OGC/CRS/network tests; Atlas checks are not upstream execution evidence.
+
+
+  CRS transformation, geographic range/topology, antimeridian handling, bbox, complete conformance, security, performance,
+  production suitability, third-party interoperability and IA adoption are not established. Original identity, license,
+  scope, eight sources/dates, intake and whole-record verification dates remain. Standards, relations, capability
+  pages and navigation are unchanged. A source-only description does not repair hidden reverse-relation conditions
+  or turn neighboring OGC uses relations into proof that this library implements an OGC service.'
 version: 3.3.0
 external_identifiers:
 - namespace: github
@@ -79,11 +151,11 @@ sources:
 last_verified_at: '2026-10-21T07:34:27.995529+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed GeoJSON library evidence executor
 record_created_at: '2026-10-21T07:43:15.262148+00:00'
-record_updated_at: '2026-10-21T07:43:15.262148+00:00'
+record_updated_at: '2026-11-01T06:36:35.094233+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_geojson_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / geojson_semantics and geojson_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_geojson
