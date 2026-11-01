@@ -3,10 +3,69 @@ type: system
 kind: library
 name_zh: SPDX Python Model 数据模型库
 name_en: SPDX Python Model
-description_zh: 固定 0.0.6 的 Python 库；本记录仅核实生成的 SPDX 3.0.1 CreationInfo 五字段绑定及 JSON-LD 表示/读写机制，不证明完整 SPDX 验证、来源身份真实性、可靠时间或无损往返。
-description_en: A Python library pinned to 0.0.6; this record verifies only generated SPDX 3.0.1 CreationInfo five-field
-  bindings and JSON-LD representation/read-write mechanisms, not complete SPDX validation, provenance identity authenticity,
-  reliable timestamps or lossless roundtrips.
+description_zh: 'SPDX Python Model 是 Python 数据模型库；本记录固定 0.0.6 / commit 6dc821545e2e96fc8501f47f946c8fa72e579bc4，不是
+  SPDX 规范/组织、SPDX Python Tools 或 shacl2code 生成器，也不称最新版。本次仅把既有 CreationInfo 五字段与有限 JSON-LD 机制的条件补到可见描述，不扩大原 implements
+  关系。
+
+
+  范围为生成的 SPDX 3.0.1 CreationInfo：comment、created、createdBy、createdUsing、specVersion。赋值/解码会检查相应类型和模式，但构造或加载成功不保证必填字段齐全；缺失值及数量约束在编码时检查，实际
+  Agent/Tool 对象还须通过自身编码要求。specVersion 检查 SemVer 语法，不强制值等于 3.0.1。创建者和工具可以保留为未解析字符串引用，写出引用不认证身份、创建事实或工具历史。
+
+
+  created 的既有规范边界是元素最后变更时间也可能适用，不一定是 SPDX 导出时间；本次不重新核验该规范语义。固定实现拒绝小数秒字符串，截去 Python datetime 微秒，零偏移归一为 UTC；非零时分偏移字符串因字段的
+  Z 结尾模式被拒绝，而非转换为 UTC。datetime 的时区偏移秒先被截去再检查 UTC-Z，无时区 datetime 依赖主机本地时区；这些处理不证明时间可信。
+
+
+  未知属性不自动保留，序列化可重分配空白节点 ID 并排序对象，不保证字节保持或任意语义无损往返。顶层加载只按已识别的上下文 URL 选择绑定，上下文列表只取首个字符串，不是通用 JSON-LD 处理器。输出字节摘要不是数字签名或来源真实性验证。
+
+
+  原 #533 的发布归档与固定源码核验保持为历史；本次重新取得官方固定 wheel/sdist 并核对原哈希，两者生成的 `bindings/v3_0_1/model.py` 字节相同，属于归档成员而非已提交的 Git
+  源文件；固定 Git loader 单独核对，不能把其 Git 匹配推广到生成模型。仅静态阅读，不安装、导入、执行库、上游测试或生成器，不进行输入实验或网络身份查询。Atlas 自身检查不是上游运行证据。
+
+
+  Beta、Python>=3.9 和许可仍是既有项目/发布声明，不是稳定性、生产适用性、运行兼容性或法律审计结论。无必需运行时依赖不等于无构建依赖；版本化生成输入 URL 和本地覆盖不证明发布时输入字节或可复现构建。不建立完整
+  SPDX 验证、安全、第三方互通、IA 采用或 IA 来源规则变更。原 scope、身份、来源及访问日期、创建/intake 和全记录核验日期保留。仅补源对象描述，标准反向页仍不展示关系条件，不能声称双向显示限制已解决。'
+description_en: 'SPDX Python Model is a Python data-model library, pinned here to 0.0.6 / commit 6dc821545e2e96fc8501f47f946c8fa72e579bc4.
+  It is not the SPDX specification/organization, SPDX Python Tools or the shacl2code generator, nor a claim about
+  the latest release. This supplement makes existing five-field CreationInfo and limited JSON-LD conditions visible
+  without broadening the existing implements relation.
+
+
+  Scope is generated SPDX 3.0.1 CreationInfo comment, created, createdBy, createdUsing and specVersion. Assignment/decoding
+  applies relevant type/pattern checks, but successful construction/loading does not ensure required fields are
+  present. Missing-value/cardinality checks occur during encoding; supplied Agent/Tool objects must also satisfy
+  their own encoding requirements. specVersion checks SemVer syntax, not equality to 3.0.1. Creator/tool references
+  may remain unresolved strings; writing them authenticates neither identities, creation facts nor tooling history.
+
+
+  The existing normative boundary allows created to mean element last-change time, not necessarily SPDX export time;
+  that normative interpretation is not newly reverified here. The fixed implementation rejects fractional-second
+  strings, truncates Python datetime microseconds and normalizes zero offsets to UTC. Strings with nonzero hour/minute
+  offsets fail the field''s trailing-Z pattern rather than converting to UTC. Datetime timezone-offset seconds truncate
+  before the UTC-Z check; naive datetime depends on the host timezone. None establishes trustworthy time.
+
+
+  Unknown properties are not automatically preserved; serialization can reassign blank-node IDs and sort objects,
+  without byte-preserving or universal semantic-roundtrip guarantees. Top-level loading selects only recognized
+  context URLs, taking the first string in a context list, rather than providing generic JSON-LD processing. Output-byte
+  digests are not digital signatures or provenance-authenticity checks.
+
+
+  Original #533 released-archive and fixed-source verification remains historical. This supplement retrieves the
+  exact official wheel/sdist again and checks their original hashes: identical generated `bindings/v3_0_1/model.py`
+  bytes are archive members, not committed Git source. The fixed Git loader is checked separately; its Git match
+  must not be generalized to the generated model. This is static reading only, without installing, importing or
+  executing the library, upstream tests or generator, trying input experiments or querying network identities. Atlas
+  checks are not upstream-runtime evidence.
+
+
+  Beta, Python>=3.9 and license remain existing project/package declarations, not stability, production suitability,
+  runtime-compatibility or legal-audit findings. No mandatory runtime dependencies does not mean no build dependencies;
+  versioned generator-input URLs and local overrides do not establish original release-input bytes or reproducible
+  builds. Complete SPDX validation, security, third-party interoperability, IA adoption or changes to IA provenance
+  practices are not established. Original scope, identity, sources/access dates, creation/intake and whole-record
+  verification dates remain intact. Only the source object''s description is supplemented: the standard''s reverse
+  page still does not display relation conditions, so two-way boundary visibility is not claimed.'
 version: 0.0.6
 external_identifiers:
 - namespace: github
@@ -123,11 +182,11 @@ sources:
 last_verified_at: '2026-10-24T14:45:09.136279+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed SPDX Python Model source and archive evidence executor
 record_created_at: '2026-10-24T14:52:47.351646+00:00'
-record_updated_at: '2026-10-24T14:52:47.351646+00:00'
+record_updated_at: '2026-11-01T09:03:02.814265+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / SPDX Python Model CreationInfo intake review
+  executor: Agent — OpenAI / dot / supplement_spdx_model_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / spdx_model_semantics and spdx_model_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: spdx_python_model
