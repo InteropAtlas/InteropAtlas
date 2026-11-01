@@ -3,9 +3,65 @@ type: system
 kind: library
 name_zh: MCP Python 客户端与服务端开发库
 name_en: MCP Python client and server SDK
-description_zh: 用于构建模型上下文协议客户端与服务端的 Python SDK，提供资源、工具、提示和会话接口；本记录固定到 1.26.0。
-description_en: A Python SDK for building Model Context Protocol clients and servers, with resource, tool, prompt
-  and session interfaces; pinned here to release 1.26.0.
+description_zh: 'MCP Python SDK 是用于客户端与服务端的 Python 软件库，本记录固定 1.26.0 / commit 3d9d34552a9ab8988acf8d06e4a705bd799fc32b；不是协议规范或已部署
+  Agent 产品。这里只补充原客户端/服务端会话、工具、资源和提示证据的适用条件，不扩大既有 implements 关系。
+
+
+  固定源码的 LATEST_PROTOCOL_VERSION 为 2025-11-25，支持列表另含 2024-11-05、2025-03-26、2025-06-18；符号名不表示今天的最新协议。客户端 initialize
+  按回调/配置构造能力（含任务处理器提供的能力），提出该固定 latest 值，拒绝不在支持列表中的返回版本，而非只接受 latest；随后保存服务端能力并发送 InitializedNotification。服务端返回受支持的请求版本，否则返回固定
+  latest，并携带配置的能力；回应后会把状态设为 Initialized，收到 initialized 通知也会设该状态，不能说它必等通知才完成状态设置。Ping 可在初始化前接收。这些是限定源码路径，不证明每个 API
+  都自动强制每项对端能力或整个握手完整符合。
+
+
+  该版 Tasks 文档明确标为实验功能、跟踪草案且 API 可不经通知变化；不推断今天稳定、持久存储、任务连续性或完整任务符合性。README 所列 stdio、SSE、Streamable HTTP 及资源/工具/提示接口是固定文档声明，不是本次对全部传输、外部服务或第三方互通的运行验证。Python>=3.10
+  是元数据要求，不是已测试的版本矩阵。
+
+
+  原 #471 的隔离目标目录 PyPI 安装、Python 3.12.14 下十三项纯内存观察保持为历史；其中使用当时解析的依赖而非历史锁文件，并保留 FastMCP lifespan 的 pydantic-settings
+  IncompleteFieldDefinitionWarning。本次仅静态重读七份固定源码/文档并匹配 Git tree 与旧证据，不重跑原样例或原十一份来源核验，不证明发布包与源码构建相等。没有安装、导入、执行该 SDK、启动服务或传输、调用其工具，亦无网络监听、外部服务、凭据或授权/安全配置操作；Atlas
+  检查及本次使用的连接器不是旧 SDK 的运行证据。
+
+
+  不主张全部可选能力、完整符合性、安全、生产适用、最新发行版、第三方互通或 IA 采用，不添加 JSON-RPC/JSON Schema 等传递关系、能力概念或 self_hostable 推断。原 scope、身份、八份来源及访问日期、创建/intake
+  和全记录核验日期保留。仅补源对象描述，标准反向页仍不展示 SDK 关系条件，不能声称双向显示限制已修复；不改变 UI、搜索、视角、模型或维护方式。'
+description_en: 'MCP Python SDK is a Python library for clients and servers, pinned here to 1.26.0 at commit 3d9d34552a9ab8988acf8d06e4a705bd799fc32b,
+  not the protocol specification or a deployed Agent product. This supplement makes conditions on the original session/tool/resource/prompt
+  evidence visible without broadening the existing implements relation.
+
+
+  Fixed source sets LATEST_PROTOCOL_VERSION to 2025-11-25 and also supports 2024-11-05, 2025-03-26 and 2025-06-18;
+  the symbol name is not a claim about today''s latest protocol. Client initialize builds callback/configuration-dependent
+  capabilities, including task-handler capabilities, proposes that fixed latest value and rejects a returned version
+  outside the supported list rather than requiring latest only; it then stores server capabilities and sends InitializedNotification.
+  The server returns a supported requested version or otherwise the fixed latest, with configured capabilities.
+  It marks its state Initialized after responding as well as on the initialized notification, so it must not be
+  described as always waiting for that notification before setting the state. Ping can be received before initialization.
+  These are bounded source paths, not proof every API automatically enforces every peer capability or that the entire
+  handshake fully conforms.
+
+
+  This version''s Tasks document explicitly labels the feature experimental, tracking a draft with APIs subject
+  to change without notice; current stability, durable storage, task continuity or complete task conformance is
+  not inferred. README''s stdio, SSE, Streamable HTTP and resource/tool/prompt interfaces are fixed documented statements,
+  not new execution of every transport, external service or third-party interoperability. Python>=3.10 is package
+  metadata, not a tested version matrix.
+
+
+  Original #471 isolated-target PyPI installation and thirteen pure-memory observations under Python 3.12.14 remain
+  historical. They used then-resolved dependencies rather than a historical lockfile and retained a pydantic-settings
+  IncompleteFieldDefinitionWarning for FastMCP lifespan. Current work only statically reinspects seven fixed source/documentation
+  files matching the Git tree and old evidence; it does not rerun the examples or original eleven-source review,
+  or establish release-package/source-build equality. The SDK was not installed, imported or executed in this supplement;
+  no server/transport or its tool invocation, network listener, external service, credentials, authorization or
+  security configuration was used. Atlas checks and connectors used here are not runtime evidence for the old SDK.
+
+
+  Every optional capability, full conformance, safety, production suitability, latest-release status, third-party
+  interoperability and IA adoption are not asserted; no transitive JSON-RPC/JSON Schema relations, capability concepts
+  or self_hostable inference are added. Original scope, identity, eight sources/access dates, creation/intake and
+  whole-record verification dates remain intact. Only the source description changes: the standard''s reverse page
+  still omits SDK relation conditions, so two-way boundary visibility is not claimed repaired. UI, search, views,
+  model and maintenance practices are unchanged.'
 version: 1.26.0
 external_identifiers:
 - namespace: github
@@ -65,11 +121,11 @@ sources:
 last_verified_at: '2026-10-21T01:37:53.060395+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed-version MCP SDK evidence executor
 record_created_at: '2026-10-21T01:41:23.011171+00:00'
-record_updated_at: '2026-10-21T01:41:23.011171+00:00'
+record_updated_at: '2026-11-01T12:32:53.651676+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_mcp_sdk_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / mcp_sdk_semantics and mcp_sdk_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: mcp_python_sdk
