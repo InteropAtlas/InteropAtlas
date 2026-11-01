@@ -3,10 +3,69 @@ type: system
 kind: library
 name_zh: OAuthLib Python 授权协议库
 name_en: OAuthLib Python authorization protocol library
-description_zh: 固定 4.0.0 的 Python 库；本记录仅核实 WebApplicationClient 对 OAuth 2.0 授权码请求及响应的构造/解析机制，不执行 HTTP，也不证明完整客户端部署、身份认证或安全符合性。
-description_en: A Python library pinned to 4.0.0; this record verifies only WebApplicationClient construction/parsing
-  mechanics for OAuth 2.0 authorization-code requests and responses, not HTTP execution, a complete client deployment,
-  identity authentication or security conformance.
+description_zh: 'OAuthLib 是 Python 授权协议库；本记录固定 4.0.0 / commit 145a9a4690cb4d9de30d15fcc2984e34c49df741，只记录 WebApplicationClient
+  的授权码请求参数、回调 code/错误解析、令牌请求表单与响应体解析，不是 HTTP 集成、托管认证服务或上游全部 OAuth1/其他 grant/服务端/OIDC 功能。授权不等于身份认证，方法返回字符串或 (URL,
+  headers, body)，不发送 HTTP。
+
+
+  低层回调解析仅在预期 state 为真值时比较；高层 prepare_authorization_request 用 state or state_generator() 保存 state，prepare_token_request
+  用 state or self.state 选择预期值，且仅在 authorization_response 为真值时解析回调。不能把这些不同接口说成自动完成所有 state/会话验证。调用方仍负责同一授权事务、会话和单次使用、可信端点与回调/issuer
+  绑定、重定向 URI 一致性、客户端认证及凭据/令牌保护；client_id 不是认证凭据。
+
+
+  PKCE 参数须显式传入请求：challenge/verifier 非 None 时才由对应 helper 纳入，构造器字段或生成 helper 不会自动接入各请求。create_code_challenge 的 method=None
+  分支采用 plain 转换；这里不把该默认分支扩成显式传入任意 method 都相同行为。S256 及对应 challenge/verifier 须在同一授权事务各阶段显式配置和传递，默认值不是部署推荐。沿用既有 RFC9700
+  记录的公共客户端必须使用 PKCE、机密客户端建议使用及挑战绑定事务/用户代理边界，不据本次局部源码检视宣称重新核验全部规范或当前部署安全。
+
+
+  URL 层是可由 OAUTHLIB_INSECURE_TRANSPORT 放宽的 HTTPS 字符串前缀守卫，不是 TLS/证书或端点真实性验证；只有 body 的接口不能检查 URL。令牌响应先作 JSON 解析，ValueError
+  后回退表单解析；access_token 的检查是字段存在，不是令牌真实性验证。缺 token_type 仅在 OAUTHLIB_STRICT_TOKEN_TYPE 环境值为真值时拒绝，OAUTHLIB_RELAX_TOKEN_SCOPE
+  可放宽 scope 变化检查。字段解析不是 JWT、用户身份或任意畸形输入的全面验证。
+
+
+  这些机制已在原 #532 收录；本次仅以同一固定版四份源码复核并使既有关键条件可见，不新增实现覆盖或运行证据。原批次与本次均未安装、导入、执行 OAuthLib/上游测试，未进行 HTTP、授权、登录、凭据/令牌交换或环境/TLS
+  设置操作；Atlas 的检查不是 OAuthLib 测试。不声称完整标准/BCP 符合性、安全评估、生产适用、第三方互通或 IA 采用，也不推荐其他 grant。原版本、许可、依赖和发布时间证据保持，未借局部补证更新全记录核验日期。仅源对象描述补明，不改变标准或实现边语义，也不声称修复标准反向页隐藏的关系条件。'
+description_en: 'OAuthLib is a Python authorization-protocol library, pinned here to 4.0.0 / commit 145a9a4690cb4d9de30d15fcc2984e34c49df741.
+  This record covers only WebApplicationClient authorization-code request parameters, callback code/error parsing,
+  token-request forms and token-response-body parsing, not an HTTP integration, hosted authentication service or
+  all upstream OAuth1, other grants, server and OIDC features. Authorization is not identity authentication. Methods
+  return strings or (URL, headers, body), not HTTP exchanges.
+
+
+  Low-level callback parsing compares state only when the expected state is truthy. High-level prepare_authorization_request
+  stores state or state_generator(); prepare_token_request selects state or self.state and parses a callback only
+  when authorization_response is truthy. These distinct interfaces do not automatically complete all state/session
+  validation. Integrations still manage the same authorization transaction, sessions and single use, trusted endpoints
+  and callback/issuer binding, redirect-URI consistency, client authentication and credential/token protection.
+  client_id is not an authentication credential.
+
+
+  PKCE parameters must be passed explicitly: the corresponding helpers include challenge/verifier when not None,
+  while constructor fields or generation helpers do not automatically wire them into requests. The method=None branch
+  of create_code_challenge performs the plain transformation; this default branch is not a claim that any explicitly
+  supplied method behaves identically. S256 and its corresponding challenge/verifier require explicit configuration
+  and propagation through stages of the same authorization transaction. Defaults are not deployment recommendations.
+  The existing RFC9700 record''s public-client PKCE requirement, advice for confidential clients and transaction/user-agent
+  binding remain; this local-source check is not revalidation of the whole specification or current deployment security.
+
+
+  URL checks are an HTTPS string-prefix guard relaxable through OAUTHLIB_INSECURE_TRANSPORT, not TLS/certificate
+  or endpoint-authenticity verification; body-only interfaces cannot inspect a URL. Token-response parsing tries
+  JSON and falls back to form parsing after ValueError. The access_token check establishes field presence, not token
+  authenticity. Missing token_type is rejected only with a truthy OAUTHLIB_STRICT_TOKEN_TYPE environment value,
+  and OAUTHLIB_RELAX_TOKEN_SCOPE can relax scope-change checks. Field parsing is not JWT, user-identity or comprehensive
+  arbitrary-malformed-input validation.
+
+
+  These mechanisms were already recorded in #532. This update statically rechecks four files from the same fixed
+  source and exposes existing essential conditions; it adds no implementation coverage or runtime evidence. Neither
+  the original batch nor this update installed, imported or executed OAuthLib/upstream tests or performed HTTP,
+  authorization, login, credential/token exchange or environment/TLS-setting operations. Atlas checks are not OAuthLib
+  tests. No complete standard/BCP conformance, security assessment, production fitness, third-party interoperability,
+  IA adoption or other-grant recommendation is asserted. Existing version, license, dependency and publication evidence
+  remains; this local supplement does not advance whole-record verification dates. Only the source object''s description
+  is clarified: standard/relation semantics stay unchanged, and hidden conditions on the standard''s reverse page
+  are not claimed repaired.'
 version: 4.0.0
 external_identifiers:
 - namespace: github
@@ -104,11 +163,11 @@ sources:
 last_verified_at: '2026-10-24T14:02:51.974788+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed OAuthLib source evidence executor
 record_created_at: '2026-10-24T14:12:47.220013+00:00'
-record_updated_at: '2026-10-24T14:12:47.220013+00:00'
+record_updated_at: '2026-11-01T03:18:07.598250+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review
+  executor: Agent — OpenAI / dot / supplement_oauthlib_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / oauthlib_semantics and oauthlib_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: oauthlib
