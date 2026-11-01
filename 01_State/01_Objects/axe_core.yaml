@@ -3,9 +3,62 @@ type: system
 kind: library
 name_zh: axe-core JavaScript 无障碍测试引擎
 name_en: axe-core JavaScript accessibility testing engine
-description_zh: 固定 4.14.0 的 JavaScript 库，对选定呈现状态和启用规则执行自动无障碍检查；规则级结果不证明页面或网站完整符合性。
-description_en: A JavaScript library pinned to 4.14.0 for automated accessibility checks of selected rendered states
-  and enabled rules; rule-level results do not establish complete page or site conformance.
+description_zh: 'axe-core 是 JavaScript 无障碍测试引擎库，本记录固定 4.14.0 / commit e797173108eadfa4355fe06af331791734e1757f；不是组织、浏览器扩展、商业平台或认证服务。仅记录选定呈现状态和启用规则的有界自动检查，不把规则结果等同于页面或网站完整符合性。
+
+
+  标准结果区分 passes、violations、incomplete 与 inapplicable：没有匹配内容与通过不同，不确定项需要进一步检查和人工复核，没有 violations 不证明符合性。报告器可改变输出格式或内容；include/exclude、runOnly、规则开关与上下文会改变检查范围。固定规则选择源码先排除非完整页面上下文的
+  page-level 规则，再依次处理按 rule 的 runOnly、显式规则 enabled、tag 选择和默认规则。标签不证明默认启用；固定目录说明 WCAG 2.2、AAA、experimental 与 deprecated
+  组默认禁用，target-size 虽有 wcag22aa/wcag258 标签却 enabled=false，增强对比度也默认禁用。显式 rule/tag 选择可改变默认集，但仍受各自选择条件约束。
+
+
+  固定文档的已呈现内容包含视觉隐藏但仍呈现的内容；未激活或未呈现的交互状态须激活后另行检查。被测 iframe 需要引擎，配置不自动广播到各 frame。README 声明 JSDOM 支持有限，其中 color-contrast
+  不可用；这些是该固定文档的边界，不是本次浏览器、辅助技术或网站实测。package engines.node>=4、.nvmrc=24 与构建检查 Node 24+ 是不同声明，不能互相替代为已验证运行兼容性。
+
+
+  原 #531 的静态来源核验与 IA 检查保持为历史；本次只重新静态阅读九份固定源码/文档，与旧证据及 Git tree 匹配，不重做原全部来源核验。未验证 npm 分发字节、安装、构建或执行 axe/上游测试，未运行浏览器、审计网站或把
+  axe 接入 IA。既有 MPL-2.0 与第三方许可通知边界保留，不新增法律适配、发行构建相等、签名、当前维护或安全评估。
+
+
+  不主张 WCAG、WAI-ARIA 或 ACT Rules Format 的完整实现、检出百分比、零误报、法律合规、辅助技术互通、生产适用或 IA 采用。原 scope、身份、十份来源及访问日期、创建/intake 和全记录核验日期保留；既有
+  provides 关系不扩展，也不添加 capabilities 字段。源对象描述补充不修复能力查询未枚举该关系或能力反向页不显示条件的既有限制，不改变 UI、搜索或视角，不重启工作区无障碍审计。'
+description_en: 'axe-core is a JavaScript accessibility testing engine library, pinned here to 4.14.0 at commit
+  e797173108eadfa4355fe06af331791734e1757f, not an organization, extension, commercial platform or certification
+  service. This record covers bounded automatic checks of selected rendered states and enabled rules; rule results
+  do not establish complete page or site conformance.
+
+
+  Standard results distinguish passes, violations, incomplete and inapplicable: no matching content is not a pass,
+  uncertainty needs further testing and manual review, and no violations does not establish conformance. Reporters
+  may change output format/content; include/exclude, runOnly, rule switches and context change checking scope. Fixed
+  rule-selection code first excludes page-level rules in non-page contexts, then handles rule-based runOnly, explicit
+  per-rule enabled, tag selection and defaults in that order. Tags do not prove default activation. The fixed catalog
+  marks WCAG 2.2, AAA, experimental and deprecated groups disabled by default; target-size has wcag22aa/wcag258
+  tags but enabled=false, and enhanced contrast is also default-disabled. Explicit rule/tag selection can change
+  defaults, subject to its selection conditions.
+
+
+  Fixed documentation includes visually hidden but rendered content among rendered content; inactive or non-rendered
+  interaction states require activation and separate checks. Tested iframes need the engine, and configuration is
+  not automatically broadcast to frames. README documents limited JSDOM support, including unavailable color-contrast
+  checking. These are fixed documented limits, not new browser, assistive-technology or website experiments. Package
+  engines.node>=4, .nvmrc=24 and the Node24+ build guard are distinct declarations, not interchangeable proof of
+  runtime compatibility.
+
+
+  Original #531 static-source verification and IA checks remain historical. This supplement only statically reinspects
+  nine fixed source/documentation files matching old evidence and the Git tree; it does not redo the full original
+  source review. npm distribution bytes are not verified; axe/upstream tests were not installed, built or executed,
+  no browser or website audit ran and axe was not integrated into IA. Existing MPL-2.0 and third-party notice boundaries
+  remain, without new licensing-suitability, release-build equality, signature, current-maintenance or security
+  findings.
+
+
+  Complete WCAG, WAI-ARIA or ACT Rules Format implementation, detection percentages, zero false positives, legal
+  compliance, assistive-technology interoperability, production suitability and IA adoption are not asserted. Original
+  scope, identity, ten sources/access dates, creation/intake and whole-record verification dates remain intact.
+  The existing provides relation is not expanded and no capabilities field is added. This source-description supplement
+  does not fix the capability query''s omission of that relation or missing reverse-page conditions, change UI/search/views
+  or reopen the workspace accessibility audit.'
 version: 4.14.0
 external_identifiers:
 - namespace: github
@@ -89,11 +142,11 @@ sources:
 last_verified_at: '2026-10-24T13:22:02.682553+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed axe-core source evidence executor
 record_created_at: '2026-10-24T13:31:13.025037+00:00'
-record_updated_at: '2026-10-24T13:31:13.025037+00:00'
+record_updated_at: '2026-11-01T11:58:25.825804+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / axe-core capability intake semantic reviewer
+  executor: Agent — OpenAI / dot / supplement_axe_core_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / axe_core_semantics and axe_core_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: axe_core
