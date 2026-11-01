@@ -3,9 +3,45 @@ type: system
 kind: library
 name_zh: HTTPX Python HTTP 客户端库
 name_en: HTTPX Python HTTP client library
-description_zh: 开源 Python HTTP 客户端库；本记录固定到0.28.1，作为同步/异步请求、响应和资源表示处理的实现先例，保留网络与版本支持边界。
-description_en: An open-source Python HTTP client library, pinned here to 0.28.1 as a sync/async request, response
-  and resource-representation handling precedent with explicit transport and version boundaries.
+description_zh: 'HTTPX 是完整的开源 Python HTTP 客户端库；本记录仍固定 0.28.1 / commit 26d48e0634e6ee9cdc0533996db289ce4b430177，作为同步/异步请求、响应和资源表示处理的有限实现先例。网络传输委托
+  httpcore，不等于独立 HTTPX 线协议符合性认证。官方声明 HTTP/1.1 与 HTTP/2 支持；HTTP/2 默认关闭，须可选 h2 依赖、显式启用及对端支持，启用并不保证实际使用 HTTP/2。默认
+  follow_redirects=False、verify=True、trust_env=True；固定 _config.py 在 verify is True 且 trust_env=True 时读取 SSL_CERT_FILE/SSL_CERT_DIR，FILE
+  优先，同 tag SSL 文档对此表述不同。本记录按固定源码限定，未测试真实 TLS 或环境证书效果，不更改 SSL 设置。响应文本是另一有界路径：首次成功访问 .text 并缓存文本前可显式设置 response.encoding；缓存已存在时
+  setter 抛 ValueError，失败且未建立缓存的访问不属该条件。未显式设置时使用可识别的 Content-Type charset，否则取 default_encoding（默认 UTF-8，可配字符串或在已有内容时调用的回调，选出值为空/None
+  时回退 UTF-8，不承诺任意无效编码名均会回退），不内置 HTML meta/BOM 编码嗅探。TextDecoder 使用 errors=''replace'' 的增量解码器并最终 flush；字符串可能含替换字符，仅凭该字符串不能恢复被替换的字节信息，但读取
+  .text 并不删除原 .content。未读取内容的流式响应访问 .content/.text 可抛 ResponseNotRead；这些调用规则不证明网络传输或跨库互通。旧 #485 记录 17 项可信内存
+  MockTransport、默认值及缺依赖检查，Mock 请求显式 trust_env=False，无 DNS/socket 连接；MockTransport 调用给定 handler 返回 Response，不是真实网络。旧
+  #506 另有 7 个跨库可信合成输入的独立重放（2 URI、4 编码、1 single-base），涉及 rfc3986/HTTPX/html5lib，不能全称 HTTPX 测试或与前者合计为网络测试。本次只核固定源码并补明已有证据边界，未安装、导入或执行
+  HTTPX/httpcore，未新运行上述样例、上游测试、网络请求或证书验证；不重新核验全记录时效。保留上游 Beta 分类，不证明真实传输、代理、HTTP/3、CLI、完整 RFC 符合性、跨实现互通、安全或生产适用性，不是
+  IA 采用或推荐。web_resource_transfer 是既有能力引用，不是技术关系；本批不新增 implements 边、不改变旧范围或关系语义。'
+description_en: 'HTTPX is the whole open-source Python HTTP client library. This record remains pinned to 0.28.1
+  / commit 26d48e0634e6ee9cdc0533996db289ce4b430177 as a limited sync/async request, response and resource-representation
+  precedent. Network transport is delegated to httpcore, not independently certified HTTPX wire-protocol conformance.
+  Upstream declares HTTP/1.1 and HTTP/2 support; HTTP/2 defaults to off and needs optional h2, explicit enabling
+  and peer support, so enabling it does not guarantee actual HTTP/2 use. Defaults are follow_redirects=False,
+  verify=True and trust_env=True. Fixed _config.py reads SSL_CERT_FILE/SSL_CERT_DIR when verify is True and
+  trust_env=True, preferring FILE; same-tag SSL documentation differs. This record follows the fixed code without
+  testing real TLS or certificate-environment effects or changing SSL settings. Response text is a separate
+  bounded path: response.encoding can be explicitly set before .text successfully caches text; with that cache
+  present its setter raises ValueError, unlike a failed access that did not create the cache. Otherwise a recognized
+  Content-Type charset is used, then default_encoding (UTF-8 by default, configurable as a string or a callable
+  invoked with available content, falling back to UTF-8 for an empty/None selected value, not promising fallback
+  for every invalid encoding name), without built-in HTML meta/BOM sniffing. TextDecoder uses an incremental
+  codec with errors=''replace'' and a final flush. The string can contain replacement characters, and replaced
+  byte information cannot be recovered from that string alone, but reading .text does not delete the original
+  .content. Accessing .content/.text on an unread streaming response can raise ResponseNotRead. These API rules
+  do not establish network transfer or cross-library interoperability. Original #485 recorded 17 trusted in-memory
+  MockTransport, default-value and missing-dependency checks; mock requests explicitly used trust_env=False
+  with no DNS/socket connections. MockTransport calls a supplied handler to return a Response, not a real network.
+  Original #506 separately recorded independent replay of seven trusted cross-library synthetic inputs (two
+  URI, four encoding, one single-base) involving rfc3986/HTTPX/html5lib; they are not all HTTPX tests and must
+  not be combined with the earlier checks as network tests. This supplement only inspects fixed source and
+  makes existing evidence limits visible. It did not install, import or execute HTTPX/httpcore, newly run those
+  examples or upstream tests, make network requests or verify certificates, and does not revalidate the whole
+  record''s freshness. The upstream Beta classifier is retained. Real transport, proxies, HTTP/3, CLI, complete
+  RFC conformance, cross-implementation interoperability, security and production fitness are not established;
+  this is not IA adoption or a recommendation. web_resource_transfer is an existing capability reference, not
+  a technical relation. No implements edge or change to prior scope or relation semantics is introduced.'
 version: 0.28.1
 external_identifiers:
 - namespace: github
@@ -106,12 +142,11 @@ sources:
 last_verified_at: '2026-10-21T06:07:22.346851+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed HTTP client evidence executor
 record_created_at: '2026-10-21T06:15:01.172077+00:00'
-record_updated_at: '2026-10-21T20:44:36.915013+00:00'
+record_updated_at: '2026-11-01T02:08:01.962022+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot main-session semantic review, response text decoding slice; review
-    confirmation recorded 2026-10-21T20:44:18Z
+  executor: Agent — OpenAI / dot / supplement_httpx_visible_evidence
+  reviewer: Independent Agents — OpenAI / dot / httpx_semantics and httpx_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: httpx
