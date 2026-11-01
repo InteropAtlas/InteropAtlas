@@ -3,12 +3,70 @@ type: system
 kind: library
 name_zh: fhirclient Python FHIR模型与客户端库
 name_en: fhirclient Python FHIR model and client library
-description_zh: >-
-  含FHIR生成模型和SMART/FHIR客户端的开源Python库，固定4.4.0。既有21项可信合成内存观察仅覆盖FHIR 4.0.1的有限模型表示及局部校验、有损映射限制；另以固定源码只读确认read → GET → JSON → 模型构造路径。后者未经执行，不证明HTTP请求、SMART鉴权、FHIR服务器兼容或远程互通成功；既有implements关系仍仅覆盖模型切片。
+description_zh: '含FHIR生成模型和SMART/FHIR客户端的开源Python库，固定4.4.0。既有21项可信合成内存观察仅覆盖FHIR 4.0.1的有限模型表示及局部校验、有损映射限制；另以固定源码只读确认read
+  → GET → JSON → 模型构造路径。后者未经执行，不证明HTTP请求、SMART鉴权、FHIR服务器兼容或远程互通成功；既有implements关系仍仅覆盖模型切片。
 
-  An open-source Python library with generated FHIR models and a SMART/FHIR client, pinned to 4.4.0. The existing 21 trusted synthetic in-memory observations cover only a bounded FHIR 4.0.1 model-representation path with partial-validation and lossy-mapping limits. A separate read-only inspection identifies the fixed read → GET → JSON → model-construction code path. That path was not executed and does not establish successful HTTP exchange, SMART authorization, FHIR-server compatibility or remote interoperability; the existing implements relation remains limited to the model slice.
-description_en: >-
-  An open-source Python library with generated FHIR models and a SMART/FHIR client, pinned to 4.4.0. The existing 21 trusted synthetic in-memory observations cover only a bounded FHIR 4.0.1 model-representation path with partial-validation and lossy-mapping limits. A separate read-only inspection identifies the fixed read → GET → JSON → model-construction code path. That path was not executed and does not establish successful HTTP exchange, SMART authorization, FHIR-server compatibility or remote interoperability; the existing implements relation remains limited to the model slice.
+  An open-source Python library with generated FHIR models and a SMART/FHIR client, pinned to 4.4.0. The existing
+  21 trusted synthetic in-memory observations cover only a bounded FHIR 4.0.1 model-representation path with partial-validation
+  and lossy-mapping limits. A separate read-only inspection identifies the fixed read → GET → JSON → model-construction
+  code path. That path was not executed and does not establish successful HTTP exchange, SMART authorization, FHIR-server
+  compatibility or remote interoperability; the existing implements relation remains limited to the model slice.
+
+
+  固定 4.4.0 源码的模型构造默认 strict=True；strict=False 只在 update_with_json 调用处捕获 FHIRValidationError 并记 warning。该更新路径逐属性赋值、累计错误后抛出，因此可能留下部分已赋值数据而不自动回滚；仍存在类型、声明必填项和未知键检查，不能称为完全关闭校验或吞掉一切异常。资源构造器在调用基类前检查
+  resourceType 不匹配并直接抛出 Exception，不受上述 lenient 捕获控制；这不是对 with_json 工厂所有分派路径的断言。后续 as_json 还会独立检查并可能抛出 FHIRValidationError，所以
+  lenient 构造成功不保证随后能序列化；返回字典也不证明网络响应或完整 FHIR 约束有效。
+
+
+  本次只静态复核固定提交 0989e0f166e18037406763cb4ab9e509f9dfddbf 的两个基类文件相关范围，把上述既有模型边界加入可见摘要；未 import、安装、执行上游、发送 HTTP/SMART
+  请求或输入临床数据。原 #490 的21项有限观察（含版本与无网络观察）及 #627–629 已完成研究保持，不重跑、不改称本次新测试；不扩展现有模型 implements 或临床、安全、服务器互通结论。原 scope、来源日期、验证及
+  intake 历史保留，源摘要补证不意味着规范和能力反向页已显示全部关系条件。
+
+
+  In the fixed 4.4.0 source, model construction defaults to strict=True; strict=False catches FHIRValidationError
+  only around update_with_json and logs warnings. That update path assigns properties while accumulating errors
+  before raising, so partially assigned data can remain without automatic rollback. Type, declared-required-property
+  and unknown-key checks still exist; this is not complete validation disablement or suppression of every exception.
+  The resource constructor directly raises Exception for a resourceType mismatch before calling its base constructor,
+  outside that lenient catch; this is not a statement about every with_json factory dispatch path. Later as_json
+  independently checks again and can raise FHIRValidationError, so successful lenient construction does not guarantee
+  subsequent serialization. A returned dictionary does not establish a valid network response or complete FHIR constraint
+  validity.
+
+
+  This supplement statically reviews relevant ranges of two base-class files at fixed commit 0989e0f166e18037406763cb4ab9e509f9dfddbf
+  and makes these existing model limitations visible. No upstream import, installation or execution, HTTP/SMART
+  request or clinical input was performed. Original #490''s 21 bounded observations, including version and no-network
+  observations, and the completed #627–629 research remain history, not reruns or new tests. The existing model
+  implements relation and clinical, security or server-interoperability claims are not expanded. Original scope,
+  source dates, verification and intake history remain; the source-summary supplement does not expose all relation
+  conditions on the standard or capability reverse pages.'
+description_en: 'An open-source Python library with generated FHIR models and a SMART/FHIR client, pinned to 4.4.0.
+  The existing 21 trusted synthetic in-memory observations cover only a bounded FHIR 4.0.1 model-representation
+  path with partial-validation and lossy-mapping limits. A separate read-only inspection identifies the fixed read
+  → GET → JSON → model-construction code path. That path was not executed and does not establish successful HTTP
+  exchange, SMART authorization, FHIR-server compatibility or remote interoperability; the existing implements relation
+  remains limited to the model slice.
+
+
+  In the fixed 4.4.0 source, model construction defaults to strict=True; strict=False catches FHIRValidationError
+  only around update_with_json and logs warnings. That update path assigns properties while accumulating errors
+  before raising, so partially assigned data can remain without automatic rollback. Type, declared-required-property
+  and unknown-key checks still exist; this is not complete validation disablement or suppression of every exception.
+  The resource constructor directly raises Exception for a resourceType mismatch before calling its base constructor,
+  outside that lenient catch; this is not a statement about every with_json factory dispatch path. Later as_json
+  independently checks again and can raise FHIRValidationError, so successful lenient construction does not guarantee
+  subsequent serialization. A returned dictionary does not establish a valid network response or complete FHIR constraint
+  validity.
+
+
+  This supplement statically reviews relevant ranges of two base-class files at fixed commit 0989e0f166e18037406763cb4ab9e509f9dfddbf
+  and makes these existing model limitations visible. No upstream import, installation or execution, HTTP/SMART
+  request or clinical input was performed. Original #490''s 21 bounded observations, including version and no-network
+  observations, and the completed #627–629 research remain history, not reruns or new tests. The existing model
+  implements relation and clinical, security or server-interoperability claims are not expanded. Original scope,
+  source dates, verification and intake history remain; the source-summary supplement does not expose all relation
+  conditions on the standard or capability reverse pages.'
 version: 4.4.0
 external_identifiers:
 - namespace: github
@@ -101,11 +159,11 @@ sources:
 last_verified_at: '2026-10-21T07:55:48.789787+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed FHIR model-library evidence executor
 record_created_at: '2026-10-21T08:01:03.644755+00:00'
-record_updated_at: '2026-10-31T09:39:06.370550+00:00'
+record_updated_at: '2026-11-01T19:19:41.142390+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / clarify_fhirclient_static_read
-  reviewer: Independent Agents — OpenAI / dot / clarify_fhirclient_static_read / semantic_review and structural_review
+  executor: Agent — OpenAI / dot / supplement_fhirclient_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / fhirclient_semantics and fhirclient_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_fhirclient
