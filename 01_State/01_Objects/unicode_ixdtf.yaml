@@ -3,11 +3,67 @@ type: system
 kind: library
 name_zh: ixdtf 扩展时间戳解析库（0.6.7 源快照）
 name_en: ixdtf extended timestamp parser (0.6.7 source snapshot)
-description_zh: ICU4X 项目中独立版本的 Rust 解析库；此处为官方 ICU4X 2.4.0 源码中的 0.6.7，限所列 UTF-8 注释解析及显式 Z 偏移助手的静态源码证据，未构建运行，不代表完整
-  RFC 9557 符合性或时区/历法语义处理。
-description_en: An independently versioned Rust parser in ICU4X; 0.6.7 in the official ICU4X 2.4.0 source tree,
-  bounded to static evidence for the stated UTF-8 annotation parsing and explicit Z-offset helper. Not built or
-  run; not full RFC 9557 conformance or time-zone/calendar semantic processing.
+description_zh: 'ixdtf 是 ICU4X 项目中独立版本的 Rust 解析包；本记录固定官方 ICU4X 2.4.0 commit 031d9e89f6a3fd26a14491e090729d46094328fd
+  中 utils/ixdtf 的 0.6.7 源快照，不把项目发行号等同包版本，也不是整个 ICU/ICU4X、TZDB 或历法库。原 crates.io API 403 后没有重试或绕过；未核验发布 crate 归档、checksum、yank
+  状态或发布包与源码相等，固定 Git 源码不能补足这些未知。
+
+
+  所检路径限新建 IxdtfParser::from_str(...).parse() 的默认 Some handler：先解析独立时区注释，再处理普通 key=value 注释。未知普通非关键 key 被忽略，未知普通关键
+  key 返回 UnrecognizedCritical；这不表示所有关键注释的应用语义已被处理。时区注释返回原始名称或数值偏移及 critical 标志，标志仅捕获而非处理；历法只返回首个 u-ca 的原始值，不保留其
+  critical 标志。所检路径不查询时区数据库或历法规则，不保证名称存在、历法有效或 offset 与 zone 一致，冲突处理仍由调用方承担。重复历法全部排除在原正面范围外，不把代码中的有限首项比较推广为任意重复组合的正确关键语义。
+
+
+  解析 Z 时保留独立的 UtcOffsetRecordOrZ::Z；只有调用方显式调用 resolve_rfc_9557() 才映射为负号、小时 0、分钟 0 的偏移记录，已有数值偏移原样返回。解析成功不是自动计算瞬时值、时区/历法转换或原字符串序列化保证。库还接受日期单独、缺偏移和其他
+  Temporal 形式，因此成功不等于严格 RFC 9557 验证；原正面子集仍限有效四位年、有秒且秒为 00–59、可选至多 9 位小数、显式偏移及至多一个非关键时区和一个非关键 u-ca，不因宽松接受路径扩大此范围。raw
+  from_utf8、UTF-16、自定义 handler、完整无效输入验证和其他语义处理均未纳入。
+
+
+  本次仅核对原证据中七份固定源码指纹并静态阅读相关消费链，把已有具体限制补入可见描述；来源标题原已有部分提示，不是全库审计或新运行。原 #557 的十五份源码、八项静态控制流 trace 与 IA 检查历史保留，trace
+  不是 Rust 执行。没有安装、cargo/build、运行 Rust、输入解析样例、查询时区数据库或执行上游测试、安全及互通实验；不证明完整 RFC 符合性、安全、生产适用性、时钟精度或 IA 采用。
+
+
+  原 scope、24 条来源及日期、独立身份/source_snapshot、创建/intake 和全记录验证时间均保留；本次不重审 RFC/errata、发布/标签/许可历史，不声称最新版。只改变源对象描述；规范反向页仍不展示完整实现条件，能力字段引用也不是新增技术关系，未改变这些展示机制。'
+description_en: 'ixdtf is an independently versioned Rust parser package in ICU4X. This record pins the utils/ixdtf
+  0.6.7 source snapshot in official ICU4X 2.4.0 commit 031d9e89f6a3fd26a14491e090729d46094328fd; the project release
+  number is not the package version, nor is this the whole ICU/ICU4X, TZDB or a calendar library. The original crates.io
+  API 403 was not retried or bypassed. The published crate archive, checksum, yank status and archive/source equality
+  remain unverified; fixed Git source does not fill those unknowns.
+
+
+  The inspected path is a new IxdtfParser::from_str(...).parse() with the default Some handler: it parses the separate
+  time-zone annotation before ordinary key=value annotations. Unknown ordinary non-critical keys are ignored and
+  unknown ordinary critical keys produce UnrecognizedCritical; this does not mean that every critical annotation''s
+  application semantics have been handled. A time-zone annotation returns the raw name or numeric offset and critical
+  flag, which is captured rather than handled. The calendar result contains only the first u-ca raw value, not its
+  critical flag. The inspected path does not query time-zone databases or calendar rules, establish name existence,
+  calendar validity or offset/zone consistency; conflict handling remains the caller''s responsibility. Repeated
+  calendars remain entirely outside the original positive scope; limited first-item comparison is not generalized
+  to correct critical semantics for arbitrary duplicate combinations.
+
+
+  Parsing Z preserves the distinct UtcOffsetRecordOrZ::Z variant. Only an explicit caller invocation of resolve_rfc_9557()
+  maps it to an offset record with negative sign, hour 0 and minute 0; existing numeric offsets are returned unchanged.
+  Successful parsing is not automatic instant calculation, time-zone/calendar conversion or original-string serialization.
+  The parser also accepts date-only, missing-offset and other Temporal forms, so success is not strict RFC 9557
+  validation. The original positive subset remains valid four-digit years, explicit seconds 00–59, optional at most
+  nine fractional digits, an explicit offset and at most one non-critical time-zone annotation and one non-critical
+  u-ca; permissive acceptance paths do not broaden this scope. Raw from_utf8, UTF-16, custom handlers, exhaustive
+  invalid-input validation and other semantic processing are excluded.
+
+
+  This supplement checks original fingerprints of seven fixed source files and statically reads the relevant consumption
+  chains to make recorded limitations visible. Source titles already signaled some details; this is not a whole-library
+  audit or a new execution. Original #557 history of fifteen source files, eight static control-flow traces and
+  IA checks remains; traces are not Rust runs. No installation, cargo/build, Rust execution, parser input examples,
+  time-zone database query, upstream tests or security/interoperability experiments were performed. Full RFC conformance,
+  security, production suitability, clock accuracy and IA adoption are not established.
+
+
+  Original scope, 24 sources/access dates, independent identity/source_snapshot, creation/intake and whole-record
+  verification time remain unchanged. RFC/errata and release/tag/license history are not re-reviewed here, and no
+  latest-version claim is made. Only source-object descriptions change: the standard reverse page still omits full
+  implementation conditions, and the capability-field reference is not a new technical relation. Those display mechanisms
+  are unchanged.'
 version: 0.6.7
 external_identifiers:
 - namespace: crates_io
@@ -162,11 +218,11 @@ sources:
 last_verified_at: '2026-10-29T09:48:40.903709+00:00'
 last_verified_by: Agent — OpenAI / dot, bounded fixed-source ixdtf and RFC comparison
 record_created_at: '2026-10-29T10:00:11.821045+00:00'
-record_updated_at: '2026-10-29T10:00:11.821045+00:00'
+record_updated_at: '2026-11-01T17:10:16.684756+00:00'
 latest_substantive_contribution:
-  initiator: Human — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / review_ixdtf_parser_packet
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_ixdtf_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / ixdtf_semantics and ixdtf_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: unicode_ixdtf
