@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/libexpat/libexpat/tree/a76b1174c1ea52abb639a4c69d52b630a8a106a2
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - expat
   reasons:
-  - Fresh State/Evolution and public issue/PR checks found only a GDAL dependency mention (#618), not a whole Expat
-    object; existing XSD-validation and HTML parsing libraries are distinct.
+  - Accepted as canonical expat by accept-20261101-expat-incremental. Frozen new-state Candidate 6db433334377a259e1e425ca6ab7bb5ff7660d67
+    and review_required route are replayed against actual ancestor 613b39eafcdd43e0db833ecebd9cd440d30133c7; back-reference
+    prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'Security source notice: the README in fixed R_2_9_0 explicitly warns that Expat has unfixed security issues and

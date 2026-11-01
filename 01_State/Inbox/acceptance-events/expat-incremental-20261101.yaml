@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261101-expat-incremental
+candidate_id: expat
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: expat
+review:
+  reviewer: Independent Agent — OpenAI / dot / fixed Expat incremental callback semantic review
+  reviewed_at: '2026-11-01T00:58:39+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立核验固定官方tag/release/commit、源指纹、whole-library身份、无碰撞路线及增量输入/回调/暂停恢复有限路径。
+  - 仅object-only，不新增关系；固定README未修复安全问题警告显著保留，未读取所指issue、不判断当前漏洞或修复状态，不推荐部署。保留interimOK不等最终成功、final块、字符回调分段非NUL、Stop可继续回调、Resume可重暂停/报错及caller缓冲区责任。FourthEdition不等旧SecondEdition；未安装、构建、运行上游/测试、解析XML或复现漏洞，不声称完整规范符合性、安全、生产或IA采用。
+  - reviewed_at为接受序列化时刻，不推测审核耗时；实际物化树与H/M另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/613b39eafcdd43e0db833ecebd9cd440d30133c7/01_State/Inbox/review-packets/expat-incremental-20261101.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/6db433334377a259e1e425ca6ab7bb5ff7660d67
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e1ee7fa8caae638562f67a4a67837285d9cb2f95
+decided_at: '2026-11-01T00:58:39+00:00'
+notes:
+- 只接纳固定Expat完整库与既有syntax编辑导航，不改既有XML/GDAL/xmlschema/html5lib对象，不改分类、关系语义、治理、UI或旧holds。
+- 真实Git祖先保留完整已审Candidate和packet，当前packet为reference-only receipt。
