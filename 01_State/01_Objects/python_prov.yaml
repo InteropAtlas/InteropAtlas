@@ -3,12 +3,52 @@ type: system
 kind: library
 name_zh: prov Python 溯源记录库（3.2.3）
 name_en: prov Python provenance record library (3.2.3)
-description_zh: Python 溯源记录库；固定 3.2.3，用 Entity、Activity、Agent 及所列五种关系表达调用方断言，并提供显式 PROV-JSON 内存读写。证据为固定源码与九项有界作者
-  smoke，不是完整 PROV-DM/约束验证、断言真实性、自动采集或跨实现互通认证。
-description_en: 'Python provenance record library pinned to 3.2.3: Entity, Activity, Agent and five specified relations
-  represent caller assertions, with explicit in-memory PROV-JSON reading/writing. Evidence is fixed source and nine
-  bounded author smoke cases, not full PROV-DM/constraint validation, assertion truth, automatic capture or cross-implementation
-  certification.'
+description_zh: 'Python 溯源记录库，固定 3.2.3 与官方源码 commit f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf。以 Entity、Activity、Agent
+  及 generation、usage、derivation、attribution、association 五种关系表达调用方断言，并提供显式 format="json" 的 PROV-JSON 内存读写。正面范围仍要求角色正确的限定名、namespace
+  与适当属性；记录、查询或读回成功不证明现实事件、责任或完整 PROV 约束有效，也不是自动采集或跨实现互通认证。
+
+
+  固定源码及旧九项有界 smoke 已记录具体宽松行为：generation(None) 可以建立缺少必需实体的记录；该路径在 add_attributes 遇到 None 时跳过，并非对其他属性名称、类型也不作检查。多个
+  prov:value 也可被接受。这些 characterization 说明构建成功不等于完整 PROV-DM/PROV-CONSTRAINTS 验证，不把非法或缺项输入新增为正面符合性范围。
+
+
+  旧案例的默认 ProvJSONSerializer.deserialize 路径对 JSON 对象重复键发出 ProvFutureRejectionWarning 并保留后值，再作文档解码。自定义 object_pairs_hook/object_hook
+  可改变所得对象，警告处理策略也可能中止，不能概括为所有输入必成功或所有 JSON 入口都如此；直接 ProvJSONDecoder 不发同样的重复键警告。固定版 warning 对未来拒绝的文字只是该版本历史，不是对后来版本行为的核验。这里不保证任意输入、数据类型或原字节无损往返、安全或完整约束符合性。
+
+
+  本次仅静态复核四份固定文件的相关源码范围，并把已有边界补入可见描述；没有 import、安装、运行上游或重放旧例。原 #558 的九项 smoke（含三项上述宽松行为观察）、#624 家族研究及 #626 附记均已完成并保留，不能称本次新测试或未完成研究。旧隔离参数和
+  audit guard 的观察不是 OS 沙箱或安全认证。本次不重新核验发布 wheel、全部 RECORD 或供应链；不处理 PROV-O 双身份、不新增关系，原 scope、来源日期、验证及 intake 历史保持。源摘要补证不意味着规范或能力反向页已显示全部关系条件。'
+description_en: 'A Python provenance-record library pinned to 3.2.3 and official source commit f9fe0198f8ec5d06ea2e7aac20a1fcb85f8769cf.
+  Entity, Activity and Agent plus generation, usage, derivation, attribution and association represent caller assertions;
+  explicit format="json" provides in-memory PROV-JSON reading and writing. The positive scope still requires role-correct
+  qualified names, namespaces and appropriate attributes. Successful recording, querying or reading does not establish
+  real events, responsibility or full PROV constraint validity, automatic capture or cross-implementation interoperability.
+
+
+  Fixed source and the original nine bounded smoke observations document concrete permissive behavior: generation(None)
+  can create a record missing its required entity. That path skips None in add_attributes; this does not mean other
+  attribute names or types receive no checks. Multiple prov:value attributes can also be accepted. These characterizations
+  show that successful construction is not complete PROV-DM/PROV-CONSTRAINTS validation; invalid or incomplete inputs
+  are not added to the positive conformance scope.
+
+
+  The original example''s default ProvJSONSerializer.deserialize path issues ProvFutureRejectionWarning for repeated
+  JSON object keys and retains the last value before document decoding. Custom object_pairs_hook/object_hook can
+  change the resulting object, and warning handling can interrupt the operation; neither unconditional success nor
+  identical behavior at every JSON entry point is asserted. Direct ProvJSONDecoder does not issue the same duplicate-key
+  warning. The fixed version''s text about future rejection is historical source text, not verification of later
+  versions. Arbitrary inputs, all data types, byte-preserving round trips, security and full constraint conformance
+  are not guaranteed.
+
+
+  This supplement statically reviews relevant ranges of four fixed source files and makes existing limitations visible,
+  without importing, installing or executing upstream software or replaying old examples. Original #558''s nine
+  smoke observations, including the three permissive characterizations, and the completed #624 family study/#626
+  appendix remain completed history, not new tests or unfinished research. Historical isolation flags and audit-guard
+  observations are not an OS sandbox or security certification. The wheel, all RECORD entries and supply chain are
+  not reverified here. PROV-O''s two identities are not resolved and no relation is added; original scope, source
+  dates, verification and intake history remain. A source-summary supplement does not make full relation conditions
+  visible on the standard or capability reverse pages.'
 version: 3.2.3
 versions:
 - version: 3.2.3
@@ -192,11 +232,11 @@ sources:
 last_verified_at: '2026-10-29T10:30:09.891837+00:00'
 last_verified_by: Agent — OpenAI / dot, bounded source/artifact comparison and nine self-authored memory smoke cases
 record_created_at: '2026-10-29T10:41:16.953962+00:00'
-record_updated_at: '2026-10-29T10:41:16.953962+00:00'
+record_updated_at: '2026-11-01T18:38:13.114704+00:00'
 latest_substantive_contribution:
-  initiator: Human — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Agent — OpenAI / /root/review_python_prov_packet
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_python_prov_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / python_prov_semantics and python_prov_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_prov
