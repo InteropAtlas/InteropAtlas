@@ -13,11 +13,13 @@ locators:
 - url: https://github.com/open-telemetry/opentelemetry-python/releases/tag/v1.45.1
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - opentelemetry_python_sdk
   reasons:
-  - 'Fresh searches found only API carrier work #479/#600, not the SDK distribution or BatchSpanProcessor path;
-    package identity is not the shared monorepo GitHub identity.'
+  - Accepted as canonical opentelemetry_python_sdk by accept-20261101-otel-sdk-batchspan. Frozen new-state Candidate
+    c4de2bfae90f17c42ded098d7bd67a79c66094c3 and review_required route are replayed against actual ancestor 6eeb4f53dd270878f405ad5f97824b058e03ef01;
+    back-reference prevents duplicate creation, not identity merging.
   merge_authorized: false
 unknowns:
 - 'The independent Python distribution opentelemetry-sdk, pinned to 1.45.1 / commit 14971cef9c84c2354cbaf6871090896fad0f9a1a.
@@ -52,4 +54,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / fixed OpenTelemetry SDK batch-span semantic review

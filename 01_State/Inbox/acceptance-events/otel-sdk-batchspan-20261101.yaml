@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261101-otel-sdk-batchspan
+candidate_id: opentelemetry_python_sdk
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: opentelemetry_python_sdk
+review:
+  reviewer: Independent Agent — OpenAI / dot / fixed OpenTelemetry SDK batch-span semantic review
+  reviewed_at: '2026-11-01T02:44:32+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立核验固定官方SDK包身份、7源指纹、无碰撞路线、注册/span结束与sampled gate、有界队列及exporter消费链。
+  - 仅object-only；保留丢旧、fork清队列、export返回未消费/异常本层不重试、未用timeout、flush非送达、shutdown非整体硬截止。仅静态、未运行上游；旧API22例不属于SDK，零技术边/新能力。
+  - reviewed_at为接纳序列化时刻，不推测审核耗时；实际树及H/M另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/6eeb4f53dd270878f405ad5f97824b058e03ef01/01_State/Inbox/review-packets/otel-sdk-batchspan-20261101.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/c4de2bfae90f17c42ded098d7bd67a79c66094c3
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0e5022d575e4edd4b0628556c54475e12ca79797
+decided_at: '2026-11-01T02:44:32+00:00'
+notes:
+- 只接纳固定SDK独立完整发行包与既有observability编辑导航，旧API/TraceContext/关系不变，不改分类、关系语义、治理、UI或旧holds。
+- 真实Git祖先保留完整已审Candidate和packet，当前packet为reference-only receipt。
