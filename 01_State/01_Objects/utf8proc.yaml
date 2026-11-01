@@ -3,10 +3,57 @@ type: system
 kind: library
 name_zh: utf8proc C Unicode / UTF-8 库
 name_en: utf8proc C Unicode / UTF-8 library
-description_zh: 开源 C Unicode / UTF-8 处理库；固定 2.12.0，记录有界单码点编解码及调用方验证前置条件，不将其 Unicode 18.0 声明等同现有 Unicode 17.0 端点。
-description_en: An open-source C Unicode / UTF-8 processing library, pinned to 2.12.0; records bounded single-codepoint
-  encoding/decoding and caller-validation prerequisites without equating its Unicode 18.0 claim with the existing
-  Unicode 17.0 endpoint.
+description_zh: 'utf8proc 是 C Unicode / UTF-8 处理库；本记录固定 2.12.0 / commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac，限单码点读取、范围检查和编码的既有切片。源码声明
+  Unicode 18.0.0，API 2.12.0 不等于共享库 ABI 或现有 Unicode 17.0 规范端点；不新增 implements 关系，text_encoding 能力也不意味着语言标签识别。
+
+
+  `utf8proc_iterate` 读取一个码点，不验证整个缓冲区。这里的前提是有效指针及不超过已分配输入的非负显式长度；成功返回消耗字节数，非法或截断序列返回错误且输出置为 -1，零长度返回 0 且输出为 -1。一次成功不证明余下输入有效，也不证明任意指针、负长度或不可信缓冲区安全。
+
+
+  `utf8proc_codepoint_valid` 检查 U+0000..U+10FFFF 范围并排除 surrogate，不判断是否已分配或适合应用，非字符码点也可通过。`utf8proc_encode_char`
+  要求调用方提供至少四字节输出空间，为 API 兼容可把 surrogate 编成非法 UTF-8；负值及超范围值仍返回 0，不能说接受所有整数。若要求有效 UTF-8，调用方须先检查码点有效性；编码成功不等于有效性证明，内存前置条件也不是资源或安全保证。
+
+
+  原 #502 的 C99 本地构建、22 项混合观察和独立编译重放保持为历史；22 项含版本核对、错误消息及有限行为记录，不是 22 项独立符合性测试。本次只静态复核五份固定源码/声明，与原七源中的对应哈希及 Git tree
+  匹配，未重新编译、安装、导入、运行库或输入探针，也未重跑旧例、上游套件或验证发行构建可复现性。原运行时版本报告不改称本次运行。
+
+
+  规范化、大小写折叠、字素分割及完整 Unicode 行为不由此证明。既有 MIT 库代码与单独 Unicode 数据许可声明分开保留，不把裸 MIT 扩大到所有数据，不新增组合 SPDX 表达式或法律适用性结论。没有完整
+  Unicode 符合性、安全认证、跨实现互通、生产适用、最新版本或 IA 采用保证。原 scope、来源及访问日期、身份、创建/intake 与全记录核验日期保留；只补源对象描述，不改变能力页面或使其显示这些条件。'
+description_en: 'utf8proc is a C Unicode / UTF-8 processing library, pinned here to 2.12.0 at commit 79cdd5ab40c79afa559f689ffc13b76812dee1ac.
+  This existing slice covers single-codepoint reading, range checks and encoding. Source declares Unicode 18.0.0;
+  API 2.12.0 is not the shared-library ABI or existing Unicode 17.0 standard endpoint. No implements relation is
+  added, and text_encoding does not imply language-tag identification.
+
+
+  `utf8proc_iterate` reads one codepoint, not the entire buffer. This scope assumes valid pointers and nonnegative
+  explicit lengths within allocated input. Success returns consumed bytes; invalid or truncated sequences return
+  an error with output -1; zero length returns 0 with output -1. One success does not validate remaining input or
+  establish safety for arbitrary pointers, negative lengths or untrusted buffers.
+
+
+  `utf8proc_codepoint_valid` checks U+0000..U+10FFFF excluding surrogates, not assignment or application suitability;
+  noncharacters may pass. `utf8proc_encode_char` requires at least four output bytes supplied by the caller and
+  permits surrogate encoding as invalid UTF-8 for API compatibility. Negative/out-of-range values still return 0,
+  so it does not accept every integer. Callers requiring valid UTF-8 must check codepoint validity first; encoding
+  success is not validity proof, and memory preconditions are not resource or security guarantees.
+
+
+  Original #502 local C99 compilation, 22 mixed observations and independent compilation/replay remain historical.
+  Those records include version checks, an error-message observation and finite behavior cases, not 22 independent
+  conformance tests. This supplement only statically reinspects five fixed source/declaration files, matching corresponding
+  original seven-source hashes and the Git tree. It does not recompile, install, import or run the library/input
+  probes, rerun old examples/upstream suites or establish reproducible release builds. The old runtime version report
+  is not a new execution.
+
+
+  Normalization, case folding, grapheme segmentation and full Unicode behavior are not established here. Existing
+  MIT library-code and separate Unicode-data declarations remain distinct: bare MIT is not extended to all data,
+  and no composite SPDX expression or legal-applicability finding is added. No complete Unicode conformance, security
+  certification, cross-implementation interoperability, production suitability, latest-version or IA-adoption guarantee
+  follows. Original scope, sources/access dates, identity, creation/intake and whole-record verification dates remain
+  intact. Only the source description changes; the capability page is unchanged and does not newly display these
+  conditions.'
 version: 2.12.0
 external_identifiers:
 - namespace: github
@@ -71,11 +118,11 @@ sources:
 last_verified_at: '2026-10-21T11:48:02.521706+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed UTF-8 implementation evidence executor
 record_created_at: '2026-10-21T11:52:48.218274+00:00'
-record_updated_at: '2026-10-21T11:52:48.218274+00:00'
+record_updated_at: '2026-11-01T11:25:25.269101+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_utf8proc_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / utf8proc_semantics and utf8proc_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: utf8proc
