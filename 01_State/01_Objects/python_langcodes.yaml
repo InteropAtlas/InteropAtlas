@@ -3,10 +3,67 @@ type: system
 kind: library
 name_zh: Langcodes Python语言标签库
 name_en: Langcodes Python language-tag library
-description_zh: 处理IETF语言标签的开源Python库；固定3.5.1，记录标签对象表示、归一化和局部validity先例及非严格输入语法、旧数据与可选依赖限制。
-description_en: An open-source Python library for IETF language tags, pinned to 3.5.1; records tag-object representation,
-  normalization and local-validity precedents with non-strict input grammar, dated-data and optional-dependency
-  limits.
+description_zh: 'Langcodes 是 Python 语言标签库；本记录固定 3.5.1 / commit 4701cd34cc607c4ffcd2ed675f03b1d6529398da，仅记录 RFC5646
+  导向的标签解析、Language 对象表示、字符串输出、归一化和局部 validity 先例。它不是文本语言自动检测的证据；本切片未测 RFC4647 语言匹配，不能由 BCP47 简称或 language_identification
+  能力名称推完整 BCP47 实现。
+
+
+  Language.get 默认 normalize=True，会替换部分旧代码；normalize=False 跳过这些有条件的替换，但解析器仍将字符转为小写、把下划线当分隔符并重新格式化，不能保证原输入逐字往返。standardize_tag
+  还使用 CLDR 替换（例如 sh→sr-Latn）及可选 macrolanguage 归并，不等同纯 RFC5646 规范化或有效性证明。普通解析分支拒绝非 ASCII、部分错误顺序和5至8字母主语言子标签；后者比 RFC5646
+  ABNF 窄，不能把它当完整原始语法识别器，也不把普通分支泛化到私用或 grandfathered 特殊标签。
+
+
+  is_valid 只局部检查 language/script/territory/variant 数据、重复 variant/extension 与 extlang 数量，不完整核验每个 extlang 的登记/前缀或
+  extension 内容语义。tag_is_valid 先默认 Language.get 归一化，再执行局部检查，所以旧例 en_US 可返回 True，而原串并不因此符合 RFC 语法；该包装仅捕获 LanguageTagError，不保证任意非字符串或任何异常都转为
+  False。私用标签局部 valid 不赋予公开或跨系统共同含义。
+
+
+  固定 is_valid 文档注明 CLDR40，随包 IANA 文本 File-Date 为2021-08-06；这是固定来源时点，不是当前完整注册表或全部生成表同一发布日期的声明。language_data 为可选依赖，名称查询路径延迟导入它；原
+  #501 环境未安装该依赖，核心路径可运行而 display_name 抛 ModuleNotFoundError。这是那个环境的观察，不表示所有部署均缺依赖；安装后的名称/人口数据行为未在该切片或本次核验。
+
+
+  原 #501 的24个可信合成内存例、10份安装源码字节核对及独立重放属于2026-10-21的历史，不计作本次新增覆盖。本次仅以固定源码和既有记录补明可见边界，未安装、导入或执行上游、重跑旧例、安装可选依赖或更新注册表；Atlas
+  检查不是 Langcodes 上游测试。不声称完整 RFC/BCP47 符合性、扩展语义验证、当前数据完整性、任意输入资源安全、跨实现一致、生产推荐或 IA 采用，也不否定库未被该切片检视的其他功能。原身份、许可、来源、scope、intake
+  与全记录核验日期保留；既有实现边和标准页不变，仅 source 描述补明不修复标准反向关系条件的隐藏显示，也不关闭旧 #501 的未解审核意见。'
+description_en: 'Langcodes is a Python language-tag library, pinned here to 3.5.1 / commit 4701cd34cc607c4ffcd2ed675f03b1d6529398da.
+  This slice records RFC5646-oriented parsing, Language objects, tag output, normalization and local validity, not
+  automatic identification of text language. RFC4647 language matching was not tested; neither the BCP47 shorthand
+  nor the language_identification capability name establishes complete BCP47 implementation.
+
+
+  Language.get defaults to normalize=True and replaces selected legacy codes. normalize=False skips those conditional
+  replacements, but parsing still lowercases characters, accepts underscores as separators and reformats tags; it
+  is not an original lexical round-trip guarantee. standardize_tag also applies CLDR replacements such as sh→sr-Latn
+  and optional macrolanguage folding, not pure RFC5646 canonicalization or proof of validity. Ordinary parsing rejects
+  non-ASCII input, some out-of-order subtags and five-to-eight-letter primary language subtags; the last restriction
+  is narrower than RFC5646 ABNF. It is not a complete recognizer of original-input grammar, and ordinary-branch
+  rules are not generalized to private-use or special grandfathered tags.
+
+
+  is_valid checks selected language/script/territory/variant data, duplicate variants/extensions and extlang counts,
+  not every extlang registration/prefix or extension-content semantics. tag_is_valid first uses default Language.get
+  normalization and then local validity. The historical en_US example can therefore return True without its original
+  spelling satisfying RFC grammar. This wrapper catches only LanguageTagError, not every non-string input or arbitrary
+  exception with a False result. Local validity of private-use tags does not assign public or cross-system agreed
+  meaning.
+
+
+  The fixed is_valid docstring names CLDR40 and the bundled IANA text has File-Date 2021-08-06. Those are fixed-source
+  time boundaries, not a current-complete-registry claim or one publication date for all generated tables. language_data
+  is optional and lazily imported by name-query paths. It was absent in the original #501 environment: core operations
+  ran while display_name raised ModuleNotFoundError. That observation does not mean every deployment lacks the dependency;
+  name/population behavior with it installed was not checked in that slice or this update.
+
+
+  The original #501 twenty-four trusted synthetic-memory examples, byte comparisons of ten installed source files
+  and independent replay are historical work from 2026-10-21, not new coverage here. This update only makes existing
+  limits visible using fixed sources and prior records. No upstream installation/import/execution, old-example rerun,
+  optional-dependency installation or registry update occurred; Atlas checks are not upstream Langcodes tests. Complete
+  RFC/BCP47 conformance, extension-semantic validation, current data completeness, arbitrary-input resource safety,
+  cross-implementation equivalence, production recommendation and IA adoption are not established. Other library
+  features outside this slice are not denied. Original identity, license, sources, scope, intake and whole-record
+  verification dates remain. Existing implementation relations and the standard page are unchanged; a source-only
+  description does not repair hidden reverse-relation conditions or close the old unresolved #501 review finding.'
 version: 3.5.1
 external_identifiers:
 - namespace: github
@@ -78,11 +135,11 @@ sources:
 last_verified_at: '2026-10-21T11:08:05.782976+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed language-tag implementation evidence executor
 record_created_at: '2026-10-21T11:19:39.179639+00:00'
-record_updated_at: '2026-10-21T11:19:39.179639+00:00'
+record_updated_at: '2026-11-01T04:23:27.823251+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_langcodes_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / langcodes_semantics and langcodes_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_langcodes
