@@ -3,9 +3,67 @@ type: system
 kind: library
 name_zh: CloudEvents JavaScript 事件处理开发库
 name_en: CloudEvents JavaScript SDK
-description_zh: 用于构造、序列化和解析 CloudEvents 事件的 JavaScript/TypeScript 开发库，含 HTTP binary/structured 消息表示转换；本记录固定到 10.0.0。
-description_en: A JavaScript/TypeScript SDK for constructing, serializing and parsing CloudEvents, including HTTP
-  binary/structured message representation conversion; pinned here to 10.0.0.
+description_zh: 'CloudEvents JavaScript SDK 是构造、序列化和解析事件的 JavaScript/TypeScript 软件库；本记录固定 10.0.0 / commit c23895145a2f055e8e90714401fc67252a0edf21，含
+  HTTP binary/structured 消息表示转换，不是事件规范或部署服务。固定 README 明示支持 CloudEvents 1.0，HTTP 源码引用 1.0.1；wire specversion=1.0
+  不能证明 patch 版 1.0.2 符合性，因此不建立到既有 1.0.2 的 implements 关系。
+
+
+  CloudEvent 对假值 id/time/specversion 补默认值；生成标识与自动时间不证明事件身份真实性或实际发生时间。strict 默认 true；false 跳过基于扩展名/值检查的拒绝分支和末尾 validate
+  调用，但 schemaurl/dataschema 的版本搭配检查仍执行，不能称关闭所有检查。validateCloudEvent 对非 1.0 版本返回 false，构造器调用 validate 却不要求返回 true；构造成功不等于有效版次或完整符合性。二进制
+  data 可表示为 data_base64，不说明全部载荷都是 JSON，也不保证所有类型无损转换。
+
+
+  默认 JSON 数字解析受 JavaScript 数值精度限制。固定 JSONParser 在装饰器及载荷定义/类型检查之后，当 CE_USE_BIG_INT 环境值严格等于字符串 true 时，将 JSON 绑定赋为
+  useNativeBigInt 的 JSONbig；否则赋回模块初始化保存的 __JSON，再解析字符串或返回对象。它不是 finally 中恢复任意宿主当前 JSON 绑定的机制，也不提供所有类型任意精度。这里仅确认静态赋值路径，不改环境变量或运行它；宿主其他代码的影响仍未评估，不能推断必然破坏、没有副作用、隔离或安全性。
+
+
+  HTTP binary/structured 路径转换 headers/body 消息表示，不证明网络收发、传输安全或框架集成。原 #473 记录 Node v24.19.0 下以 ignore-scripts 安装发布
+  npm 10.0.0，并做了 16 个本地消息/默认值/验证/二进制/structured/大整数例；锁定与 integrity、uuid 弃用警告及媒体类型预期修正仍是历史证据，不当作本轮重跑或源码构建等价。
+
+
+  本次只静态复核七份固定源码/元数据与旧记录，将已有条件补入源对象描述；七份（包括 constants）均匹配原 packet。未安装、导入、构建、执行上游或输入实验，未发送事件、修改宿主设置或评估宿主进程副作用。IA 自身检查不是
+  SDK 运行证据。原 scope、身份、七条来源及访问日期、创建/intake 与全记录核验日期保留；不新增技术关系、capability、UI 或维护机制。不证明所有格式/绑定、完整 CloudEvents 符合性、跨实现互通、安全、最新发行版、生产适用性、self_hostable
+  或 IA 采用。'
+description_en: 'CloudEvents JavaScript SDK is a JavaScript/TypeScript library for constructing, serializing and
+  parsing events, pinned here to 10.0.0 / commit c23895145a2f055e8e90714401fc67252a0edf21. It includes HTTP binary/structured
+  message-representation conversion, not an event specification or deployed service. The fixed README states CloudEvents
+  1.0 support, while HTTP source references 1.0.1. Wire specversion=1.0 does not establish patch-version 1.0.2 conformance,
+  so no implements edge to the existing 1.0.2 object is added.
+
+
+  CloudEvent supplies defaults for falsey id/time/specversion; generated identifiers and automatic timestamps do
+  not establish event-identity authenticity or occurrence time. strict defaults to true. false skips rejection based
+  on extension-name/value checks and the final validate call, but version-specific schemaurl/dataschema sanity checks
+  still run: not every check is disabled. validateCloudEvent returns false for non-1.0 versions, and the constructor
+  calls validate without requiring a true result. Successful construction is not valid-version or full-conformance
+  proof. Binary data can be represented as data_base64; this does not make every payload JSON or guarantee all-type
+  lossless conversion.
+
+
+  Default JSON number parsing is limited by JavaScript numeric precision. After decorator and payload-defined/type
+  checks, the fixed JSONParser assigns the JSON binding to JSONbig with useNativeBigInt only when the CE_USE_BIG_INT
+  environment value is exactly the string true; otherwise it assigns the module-initial saved __JSON, then parses
+  strings or returns objects. This is not a finally-based restoration of an arbitrary host''s current JSON binding,
+  nor arbitrary precision for every type. Only static assignment paths are confirmed here, without changing the
+  environment or running them. Effects on other host code remain unassessed; inevitable breakage, absence of side
+  effects, isolation or safety must not be inferred.
+
+
+  HTTP binary/structured paths convert headers/body message representations, not evidence of network delivery, transport
+  security or framework integration. Original #473 records installation of published npm 10.0.0 with ignore-scripts
+  under Node v24.19.0 and sixteen local message/default/validation/binary/structured/big-integer examples. Its lock/integrity,
+  uuid deprecation warning and corrected media-type expectation remain historical evidence, not current reruns or
+  source-build equivalence.
+
+
+  This supplement only statically rechecks seven fixed source/metadata files and old records to expose existing
+  source-object conditions. All seven, including constants, match the original packet. No upstream installation,
+  import, build, execution or input experiment, event transmission, host-setting change or host-process side-effect
+  assessment occurred in this supplement. IA checks are not SDK runtime evidence. Original scope, identity, seven
+  sources/access dates, creation/intake and whole-record verification dates remain unchanged; no technical relation,
+  capability, UI or maintenance mechanism is added. All formats/bindings, complete CloudEvents conformance, cross-implementation
+  interoperability, security, latest-release status, production suitability, self_hostable or IA adoption are not
+  established.'
 version: 10.0.0
 external_identifiers:
 - namespace: github
@@ -66,11 +124,11 @@ sources:
 last_verified_at: '2026-10-21T02:03:44.026877+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed-version event SDK evidence executor
 record_created_at: '2026-10-21T02:11:23.027976+00:00'
-record_updated_at: '2026-10-21T02:11:23.027976+00:00'
+record_updated_at: '2026-11-01T10:06:27.492830+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_cloudevents_js_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / cloudevents_js_semantics and cloudevents_js_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: cloudevents_javascript_sdk
