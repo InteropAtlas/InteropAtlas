@@ -3,9 +3,64 @@ type: system
 kind: library
 name_zh: ph-ubl23 UBL 2.3 Java 绑定库
 name_en: ph-ubl23 UBL 2.3 Java binding library
-description_zh: 独立发布的 Java/JAXB 模块，提供 UBL 2.3 文档类型模型、XML 读写及可配置的 XSD 支持；本记录固定 Maven 10.2.1，不表示完整业务文档符合性。
-description_en: A separately published Java/JAXB module providing UBL 2.3 document models, XML reading/writing and
-  configurable XSD support; pinned to Maven 10.2.1, not a complete business-document conformance claim.
+description_zh: 'ph-ubl23 是独立发布的 Java/JAXB 模块，提供 UBL 2.3 文档类型模型、XML 读写及可配置的 XSD 支持；本记录固定 Maven 10.2.1 / ph-ubl commit
+  a1e8996af1cf56304048f13b4fc819680d109a7b，不是整个套件、可选码表模块或电子发票服务。应用须提供相容的 JAXB provider，单个 JAR 不是自包含验证器。
+
+
+  固定依赖 ph-jaxb 12.3.5 的 schema-use 初始全局默认是 true；新建 GenericJAXBMarshaller 实例取得当时默认值，改变全局默认不会自动改变既有实例，实例 setUseSchema
+  则可单独改变自身设置。UBL23Marshaller 的 Invoice 工厂把模型、QName 和 XSD 资源列表传给该通用 marshaller。createValidationSchema 在禁用 schema
+  或没有 XSD 资源时返回 null；创建 JAXB marshaller 的路径只在获得非 null schema 时调用 setSchema。这是固定源码中的配置与消费链，不是所有 provider、缓存或异常分支的运行验证。
+
+
+  所检 validate 路径先创建 marshaller、设置事件收集器并调用 customization；此后 getSchema 为 null 时记录警告，但仍尝试将对象包装后 marshal 到 DefaultHandler。它不是“无
+  schema 就拒绝调用”的 guard，也不表示必成功、没有其他检查或异常。customization、包装和 JAXB 处理仍可能影响执行，源码保留 JAXBException catch。方法名 validate、对象构造成功或序列化成功都不能单独证明
+  XSD 有效，更不能证明 UBL 的完整业务文档约束、IND5、码表、Peppol/EN 16931、税务或签名验证。
+
+
+  本次仅把已记录的具体限制补入可见描述，核对原证据中七份固定 Java/POM 文件指纹并阅读相关范围；不是全库审计或新运行。部分身份提示已在来源标题中出现。原 #530 静态研究及其未执行 Java/Maven 的历史保留；另项
+  #488 的五输入研究与独立重放已交付，本次不重做、不把其执行归给 ph-ubl23。没有安装、构建、执行 Java/Maven/JAXB、输入 XML 或运行上游测试、业务/安全/互通实验。
+
+
+  原生成模型来自发布 source JAR 而非已提交源码、有限 XSD 比较、发布/标签/许可及依赖历史均保留；本次不重新取得发布包或重核整个 schema bundle，不声称最新版本、完整 UBL 符合性、安全或生产保证、IA
+  采用。原 scope、九条来源与日期、身份、创建/intake 和全记录验证时间不变。只改变源对象描述，标准反向页仍不展示完整关系条件，未修复该展示限制。'
+description_en: 'ph-ubl23 is a separately published Java/JAXB module providing UBL 2.3 document models, XML reading/writing
+  and configurable XSD support. This record is pinned to Maven 10.2.1 / ph-ubl commit a1e8996af1cf56304048f13b4fc819680d109a7b,
+  not the whole suite, optional codelist module or e-invoicing service. The application must supply a compatible
+  JAXB provider; the single JAR is not a self-contained validator.
+
+
+  In the fixed ph-jaxb 12.3.5 dependency, the initial global schema-use default is true. A new GenericJAXBMarshaller
+  instance takes the then-current default; changing the global default does not automatically change existing instances,
+  while setUseSchema can change an individual instance. UBL23Marshaller''s Invoice factory passes the model, QName
+  and XSD resource list to that generic marshaller. createValidationSchema returns null when schema use is disabled
+  or no XSD resources are present; the JAXB marshaller creation path calls setSchema only for a non-null schema.
+  This is the fixed-source configuration and consumption chain, not runtime verification of all providers, caches
+  or exceptional branches.
+
+
+  The inspected validate path creates a marshaller, installs an event collector and invokes customization. If getSchema
+  is null afterwards, it logs a warning but still attempts to wrap the object and marshal it to DefaultHandler.
+  This is not a guard rejecting every call without a schema, nor a guarantee of success or absence of other checks
+  and exceptions. Customization, wrapping and JAXB processing can still affect execution, and the source retains
+  a JAXBException catch. The name validate, successful object construction or successful serialization alone does
+  not prove XSD validity, much less all UBL business-document constraints, IND5, codelists, Peppol/EN 16931, tax
+  compliance or signature verification.
+
+
+  This supplement makes already-recorded limitations visible, checks original fingerprints of seven fixed Java/POM
+  files and reads the relevant ranges, not the entire library or a new execution. Some identity details were already
+  signaled in source titles. Original #530 static research and its history of not executing Java/Maven remain intact.
+  The separate #488 five-input study and independent replay were delivered; they are neither repeated here nor attributed
+  to ph-ubl23 execution. No installation, build, Java/Maven/JAXB execution, XML input, upstream test or business/security/interoperability
+  experiment occurred.
+
+
+  Historical generated-model provenance from the published source JAR rather than committed source, limited XSD
+  comparisons and release/tag/license/dependency evidence remain. This does not reacquire release packages or recheck
+  the entire schema bundle, establish a latest version, full UBL conformance, security/production assurance or IA
+  adoption. Original scope, nine sources/access dates, identity, creation/intake and whole-record verification time
+  remain unchanged. Only source-object descriptions change; the standard reverse page still omits full relation
+  conditions, and that display limitation is not repaired.'
 version: 10.2.1
 external_identifiers:
 - namespace: maven
@@ -77,11 +132,11 @@ sources:
 last_verified_at: '2026-10-24T12:40:50.352537+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed public ph-ubl23 module evidence executor
 record_created_at: '2026-10-24T12:48:40.498027+00:00'
-record_updated_at: '2026-10-24T12:48:40.498027+00:00'
+record_updated_at: '2026-11-01T16:28:09.238076+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer
+  executor: Agent — OpenAI / dot / supplement_ph_ubl23_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / ph_ubl23_semantics and ph_ubl23_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: ph_ubl23
