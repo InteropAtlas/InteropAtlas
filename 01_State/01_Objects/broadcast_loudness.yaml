@@ -3,10 +3,69 @@ type: system
 kind: library
 name_zh: broadcast-loudness Rust 节目响度测量库
 name_en: broadcast-loudness Rust programme-loudness library
-description_zh: 独立发布的 Rust 音频响度测量库；本记录固定 0.5.0，仅以静态证据覆盖 48 kHz、调用方归一化有限平面立体声输入的 BS.1770-5 Annex 1 集成响度路径，不表示完整符合性或运行验证。
-description_en: A separately published Rust loudness library; pinned to 0.5.0, with static evidence limited to BS.1770-5
-  Annex 1 integrated loudness for caller-normalized finite planar stereo PCM at 48 kHz, not full conformance or
-  runtime verification.
+description_zh: 'broadcast-loudness 是独立发布的 Rust 音频响度库，固定 crate 0.5.0 / commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce
+  的同名子目录，不是整个工作区。本记录仍只接纳 BS.1770-5 Annex 1 的有界集成响度源码路径：LoudnessMeter::new(48000, ChannelLayout::Stereo)，等长、全部有限、由调用方按标称满刻度缩放并限于
+  [-1,1] 的 planar f32 PCM，成功 push_stereo_planar_f32 后 finish()，再读 integrated_lufs()。库检查有限性，但不强制该幅度范围，也不替调用方归一化。
+
+
+  该路径使用双级 K 加权与左右单位权重，在 48 kHz 下由完整 4,800 帧子块形成 19,200 帧（400 ms）门限块，每 100 ms 一步；finish 丢弃未满的最后子块。集成值初始化为负无穷，integrated_lufs
+  只读缓存，不实时计算；finish 前、无完整块或无合格块可得到负无穷。完整 400 ms 本身也不保证有限结果，这个 API 哨兵不是规范对空集合的数值定义。finish 按严格大于 -70 的绝对门，再按绝对门后能量均值所对应响度低
+  10 的相对门筛选；系数推导和 log/pow 往返不证明比特精确、阈值边缘表现或数值误差界。
+
+
+  失败批次不具有原子性：push_stereo_planar_f32 先检查完成状态、布局与等长条件，再逐帧检查左右两个样本均有限才处理该帧。后续非法帧本身尚未处理，但此前有效前缀可能已改变过滤器和累积器；frame_count
+  却只在整批成功后增加。不保证回滚、整批安全重试或错误后继续测量正确，不把此顺序推广到其他输入重载。门限块与短期历史向量随时长增长，即使有界环形缓冲存在，也不是恒定总内存。
+
+
+  原 #536 的官方归档校验（49,240 字节，19 个非生成成员与 3 个生成元数据成员）、注册表/发布与依赖/打包测试限制、规范 PDF 映射及独立标量算术/视觉核验均保留为历史。本次只静态重读六份固定 Git 源码/文档并匹配原证据，不重新下载或核验归档、注册表、清单、许可证或规范，不把它称作
+  Rust 运行验证。原 crates.io 版本 API 的 403 未重试或换渠道取得其响应；发布测试的工作区开发依赖缺失并非本次执行失败，也不证明库目标无法编译。没有安装、编译、导入、执行 Rust 库、Cargo、上游测试、示例、输入实验或音频处理。
+
+
+  其他采样率/布局/输入重载、Annex 2 真峰值及其他附录、LRA/瞬时/短期精度、EBU R128 目标/符合性、解码/归一化、声压或听觉健康、平台/MSRV 实测、性能、安全、第三方互通和 IA 采用均不由此证明。原
+  scope、独立 crate 身份、十份来源及访问日期、创建/intake、全记录核验与既有关系保持；不新增能力或关系。仅补源对象描述，标准反向页仍不展示这些条件，不声称修复双向显示；不改变 UI、模型、治理或维护方式。'
+description_en: 'broadcast-loudness is a separately published Rust audio-loudness crate, pinned to 0.5.0 and its
+  subdirectory at commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce, not the whole workspace. The accepted BS.1770-5
+  Annex 1 source path remains bounded: LoudnessMeter::new(48000, ChannelLayout::Stereo), equal-length finite planar
+  f32 PCM caller-scaled to nominal full scale and restricted to [-1,1], successful push_stereo_planar_f32 calls,
+  finish(), then integrated_lufs(). The library checks finiteness but neither enforces that amplitude range nor
+  normalizes audio for callers.
+
+
+  This path uses two-stage K weighting and unit stereo weights. At 48 kHz, complete 4,800-frame sub-blocks form
+  19,200-frame (400 ms) gating blocks at 100 ms steps; finish discards an incomplete final sub-block. Integrated
+  loudness starts at negative infinity and integrated_lufs only reads the cache, not live integration. Before finish,
+  without full blocks or without eligible blocks, it can return negative infinity. A full 400 ms alone does not
+  ensure a finite result; this API sentinel is not a normative numeric definition of an empty set. finish uses a
+  strictly-above -70 absolute gate, then a relative gate ten below the loudness corresponding to the absolute-gated
+  energy mean. Derived coefficients and log/pow conversions do not establish bit-exactness, threshold-edge behavior
+  or numerical error bounds.
+
+
+  Failed batches are non-atomic. push_stereo_planar_f32 first checks finished state, layout and equal lengths, then
+  checks both samples of each frame for finiteness before processing that frame. A later invalid frame itself has
+  not been processed, but a preceding valid prefix may already have changed filters and accumulators; frame_count
+  advances only after the entire batch succeeds. No rollback, safe whole-batch retry or correct continuation after
+  errors is promised, and this ordering is not generalized to other overloads. Gating and short-term history vectors
+  grow with duration; bounded ring buffers do not imply constant total memory.
+
+
+  Original #536 archive verification (49,240 bytes, nineteen non-generated members and three generated metadata
+  members), registry/release and dependency/packaged-test limits, normative PDF mapping and independent scalar-arithmetic/visual
+  review remain historical. Current work statically reinspects six fixed Git source/documentation files against
+  old evidence, without re-downloading or revalidating the archive, registry, manifests, licenses or normative text;
+  this is not Rust runtime verification. The original crates.io version-API 403 was not retried or acquired through
+  another channel. The packaged tests'' missing workspace development dependency is not a newly executed failure
+  or proof the library target cannot compile. No Rust library/Cargo installation, compilation, import, upstream
+  tests/examples, input experiments or audio processing occurred.
+
+
+  Other rates/layouts/overloads, Annex 2 true peak and other annexes, LRA/momentary/short-term accuracy, EBU R128
+  targets/conformance, decoding/normalization, sound-pressure or hearing-health assessment, tested platform/MSRV
+  support, performance, security, third-party interoperability and IA adoption are not established. Original scope,
+  separate-crate identity, ten sources/access dates, creation/intake, whole-record verification and existing relation
+  remain intact; no capability or edge is added. Only the source description is supplemented: the standard''s reverse
+  page still omits these conditions, so two-way visibility is not claimed repaired. UI, model, governance and maintenance
+  practices are unchanged.'
 version: 0.5.0
 external_identifiers:
 - namespace: crates_io
@@ -104,11 +163,11 @@ sources:
 last_verified_at: '2026-10-24T16:22:56.596196+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed public package and Annex 1 source evidence executor
 record_created_at: '2026-10-24T16:35:21.055813+00:00'
-record_updated_at: '2026-10-24T16:35:21.055813+00:00'
+record_updated_at: '2026-11-01T13:52:53.363435+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / review_loudness_annex1_intake
+  executor: Agent — OpenAI / dot / supplement_broadcast_loudness_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / broadcast_loudness_semantics and broadcast_loudness_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: broadcast_loudness
