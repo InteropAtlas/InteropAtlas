@@ -1,0 +1,131 @@
+schema_version: '0.1'
+task:
+  issue: 411
+  repository: InteropAtlas/InteropAtlas
+  branch: feat/adaptive-naming-skill-v0.1
+  mode: Adaptive Naming Fit Test
+  status: in_progress
+  snapshot_version: 19
+  skill_version: 0.1.0
+  skill_blob_sha: 17fe093fdbf4625317b80bcddd2d16985fa6972f
+lineage:
+  archives:
+  - {snapshot: 15, commit: c88ae5262fd419ba52d36b1804e9266bcce5486f, blob_sha: 1ad511f025ae7feade609cb2cf4ce892f0510e57, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v15.yaml}
+  - {snapshot: 17, commit: 256037c76856349a05365112713d2e9945ce74e2, blob_sha: 22259078f5a7c1297d86998316580b3d13f80a26, path: 03_Evolution/01_Research/03_Tests/archive/organization-naming-411-state-v17.yaml}
+  preservation_note: 历史完整YAML按原blob归档；current state仅保留当前可执行事实、候选摘要和最新增量。没有重新初始化任务，也没有恢复G0–G8 benchmark。
+brief:
+  object: InteropAtlas上层长期umbrella organization；可承载多个项目、研究、工具、公共知识工作与创造活动。
+  semantic_core: [公共共同体的共享知识, 个人视角、解释与选择, 视角产生创造与发现, 创造回到公共知识并支持下一轮]
+  architecture_requirements: ['[Name]', '[Name] Research', '[Name] Commons', '[Name] Tools', '[Name] / InteropAtlas', 'A project by [Name]']
+  quality_requirements:
+  - 低误读、低听写分叉；Owner明确偏好不要容易误读的名称
+  - 与愿景关系可在一两句内自然说明，不靠虚构词源
+  - 架构测试先判断呈现的组织身份类型，再判断语法是否可拼接
+  - 长期母组织尺度，不被单一工作室、平台、材料、行业或项目锁定
+  reality_constraints:
+    finalist_domain_gate: 同名普通可注册.org为finalist硬门槛；不作为早期创意质量淘汰条件
+    trademark_priority: [US, EU, CN, WIPO/Madrid]
+    primary_activity_scope: [研究与教育, 软件/在线工具/技术服务, 出版/公共知识/信息服务]
+    secondary_activity_scope: [资助]
+current_status:
+  biggest_unknown: Pluralway的joined/spaced拼写成本与Plural/Plurality相关近名空间是否仍允许其通过.org和商标导向筛查？
+  strongest_candidates: [N039]
+  promising_candidates: [N039]
+  finalists: []
+  owner_review_needed_now: false
+  information_gain: RND-016至RND-018继续排除了多批现实碰撞或身份尺度不足候选；RND-019确认Pluralway exact仍相对干净，但Plural/Plurality在AI、研究、软件和公共事务领域已有高相关身份，近名空间从未验证提升为Yellow。
+  blockers:
+  - id: B01
+    type: domain_adapter
+    statement: 当前原生Web adapter无法取得pluralway.org的PIR authoritative RDAP exact-domain对象；搜索无结果不得转available。
+  - id: B02
+    type: independent_reviewer_runtime
+    statement: 当前runtime未暴露可调用的独立subagent；RND-016至RND-018只有主执行器quality preflight，不能冒充blind independent review。
+historical_state:
+  detailed_history: 见lineage.archives；snapshot v15保留N001–N032全部候选、证据、diagnostics、rounds与Owner信号；snapshot v17保留N033–N040完整逐维记录。
+  notable_holds:
+  - {id: N005, name: Eachward, status: hold_owner_quality_oral_ambiguity}
+  - {id: N010, name: Viewloom, status: hold_quality_project_scale}
+  - {id: N014, name: Reverna, status: hold_quality_oral_and_genericity}
+  - {id: N020, name: Manyroot, status: hold_quality_established_plant_sense}
+  - {id: N031, name: Elsecraft, status: hold_quality_project_scale}
+candidate_summaries:
+- {id: N033, name: Coagency, round: RND-016, quality: '共同能动性清楚；agency身份锁定与连写分词成本', reality: 'Red：CoAgency Lab、CoAgency International及相关软件', status: retired_reality}
+- {id: N034, name: Coemerge, round: RND-016, quality: '共同涌现语义强；co-emerge/co-merge与连字符归一化有成本', reality: 'Red：多个活跃CoEmerge exact身份', status: retired_reality}
+- {id: N035, name: Intergrow, round: RND-016, quality: '读写稳定；商业增长/农业/发展项目气质过强', reality: 'Red：Intergrow Brands与组织咨询exact', status: retired_reality}
+- {id: N036, name: Commoning, round: RND-016, quality: '与commons过程高度贴合但更像概念/运动/研究主题而非独立母品牌', reality: '既有学术与实践概念场占用；非exact Red', status: hold_quality_generic_concept}
+- {id: N037, name: Manyform, round: RND-017, quality: '多形式/多视角可解释；仍有设计/数据产品感', reality: 'Red：Manyform Data活跃AI/数据平台', status: retired_reality}
+- {id: N038, name: Interkind, round: RND-017, quality: '关系结构与母组织尺度较好；kind类别/物种/善意多义', reality: 'Red：活跃Interkind app/API及相关人机概念', status: retired_reality}
+- id: N039
+  name: Pluralway
+  round: RND-017
+  active: true
+  construction: plural + way；公共知识允许多种个人路径、解释和创造方式，并让这些路径重新贡献公共世界。
+  pronunciation_hint: PLOOR-ul-way
+  quality:
+    distinctiveness: 较强但下调；exact词形有限检索较干净，plural根本身在目标领域拥挤
+    pronounceability: 强；两个常用片段音节边界清楚
+    spelling_burden: 中；口头可恢复为Plural Way（空格），核心语义不变但品牌拼写需要归一化
+    memorability: 较强
+    semantic_fit: 强；plural承载多视角，way承载个人路径/方法；不强迫裸名编码完整循环
+    semantic_room: 强
+    target_scale_fit: 较强至强；六语境整体呈umbrella identity，不像固定工作室或工具
+    architecture_extensibility: 强
+    independent_review: pending_runtime_capability
+  architecture_cases: [Pluralway, Pluralway Research, Pluralway Commons, Pluralway Tools, Pluralway / InteropAtlas, A project by Pluralway]
+  reality:
+    exact_and_spaced:
+      observation: no_material_exact_collision_found
+      confidence: low_to_medium
+      queries: ['Pluralway', 'Plural Way', 'Plural Ways']
+      note: exact/空格近形有限检索未见决定性同名组织或软件；Plural Way/Plural Ways主要作为普通短语出现。
+    near_field:
+      observation: yellow
+      confidence: high
+      evidence:
+      - {source: https://www.plurality.institute/, observation: Plurality Institute是合作规模化、AI与开放工具/研究社区hub，与长期研究/公共知识/技术范围高度相邻}
+      - {source: https://plural.sh/, observation: Plural是活跃AI/Kubernetes基础设施软件品牌}
+      - {source: https://pluralpolicy.com/, observation: Plural是活跃政府事务搜索/AI摘要/工作流平台}
+      interpretation: 这些不是Pluralway exact冲突，不能直接判Red；但表明Plural/Plurality在目标领域已形成高相关命名占用，后续近似商标风险必须检查。
+    domains:
+    - {domain: pluralway.org, observation: unverified, queried: true, method_attempted: 'PIR RDAP / RDAP.org bootstrap through current native web adapter', result: adapter_could_not_fetch_exact_domain_object, interpretation: unknown/error不转available}
+    trademark_oriented_risk: {observation: unverified, precondition: '.org与语言/近名质量继续支持后再投入官方四法域筛查'}
+  status: promising_reality_yellow_near_field_domain_unverified
+- {id: N040, name: Commonform, round: RND-017, quality: '共享底座→多种形式可解释；form带表单/设计/软件对象感', reality: 'Red：Commonform软件/系统工作室与开放法律表单项目', status: retired_reality}
+- {id: N041, name: Pluralground, round: RND-018, quality: '读写稳定、母组织尺度尚可，但plural + ground容易被理解为多个基础而非共享底座，语义张力高于Pluralway', reality: '有限exact检索未见实质身份；未因搜索空白推断可用', status: hold_quality_semantic_tension}
+- {id: N042, name: Pluralwise, round: RND-018, quality: '读写较稳，但-wise既可作方式副词又可被解释为wisdom，核心语义不够锁定', reality: '有限exact检索未见实质身份', status: hold_quality_semantic_ambiguity}
+- {id: N043, name: Commonspan, round: RND-018, quality: 'shared span/连接可解释，但span稳定触发工程跨度与软件tracing对象，组织身份偏技术', reality: '搜索主要出现CommonSpan代码类/技术用法，未见决定性组织identity', status: hold_quality_technical_reading}
+- {id: N044, name: Evercommon, round: RND-018, quality: '长期commons意图可解释，但自然英语ever common更易读成越来越普通/常见，触发语义误读', reality: '有旧npm包/网页用法但未见高相关活跃母组织；质量已足以停止', status: hold_quality_semantic_misread}
+rounds:
+- {id: RND-016, action: generate_and_verify, generated_count: 4, candidate_ids: [N033, N034, N035, N036], quality_preflight_before_reality: true, independent_quality_review_completed: false, result: '三名exact现实Red；Commoning概念身份过强；无promising。'}
+- {id: RND-017, action: generate_and_verify, generated_count: 4, candidate_ids: [N037, N038, N039, N040], quality_preflight_before_reality: true, independent_quality_review_completed: false, result: 'Manyform/Interkind/Commonform现实退出；Pluralway成为唯一promising，.org未验证。'}
+- {id: RND-018, action: generate_and_verify_backup_batch, generated_count: 4, candidate_ids: [N041, N042, N043, N044], quality_preflight_before_reality: true, independent_quality_review_completed: false, result: '四名均因语义张力、后缀歧义、技术身份或自然反读未超过Pluralway；没有新增promising。'}
+- id: RND-019
+  action: near_name_and_semantic_field_check
+  generated_count: 0
+  candidate_ids: [N039]
+  actions_performed: [exact_and_spaced_search, related_root_field_search, architecture_recheck, diagnose, update_state]
+  result: Pluralway exact仍未见决定性碰撞，但Plurality Institute及Plural软件/公共事务平台使相关根命名空间判为Yellow；候选保持promising_partial，不进入finalist。
+diagnostics:
+- {id: D47, statement: '关系/生成语义可以支持母组织尺度，但co-/inter-与普通词组合仍频繁出现现实exact身份；局部证据不足以禁用这些构词法。', confidence: medium}
+- {id: D48, statement: 'Commoning证明语义天然贴合仍可能因概念/运动身份而失去独立母品牌尺度。', confidence: high}
+- {id: D49, subject: N039, statement: 'Pluralway的Plural Way空格恢复是品牌拼写归一化成本，不是Eachward/Each Word式语义错读；仍需真人/独立复核而非由Agent代替。', confidence: medium}
+- {id: D50, subject: N039, statement: 'Pluralway exact距离优于本轮多数候选，但Plural/Plurality在AI、研究、软件与公共事务领域的活跃身份构成近名Yellow；不能由exact clean外推商标安全。', confidence: high}
+- {id: D51, statement: '当前runtime无独立reviewer能力；主执行器preflight不能标成blind independent review。', confidence: high}
+- {id: D52, statement: 'RND-018备份批没有产生超过Pluralway的候选；继续同类透明复合的边际信息价值下降。', confidence: medium}
+skill_feedback:
+- {id: SF04, status: acted_locally_no_core_change, observation: '单一state YAML膨胀', action: '完整快照按blob归档，current state压缩为可执行摘要+增量；Skill核心未改。'}
+- {id: SF06, status: experience_candidate, observation: '任务可要求独立Reviewer但runtime不一定提供subagent能力', risk: '自评若伪装成独立评审会破坏实验完整性', proposed_change: '未来模板可增加review_independence_status/runtime_capability；单任务证据不足以改Skill。'}
+next_action:
+  action: resolve_reality_and_review_blockers
+  target: [N039]
+  rationale: 四个连续微循环后只有Pluralway保持promising；继续同类生成边际信息价值下降，当前最高价值是解决finalist硬门槛与独立复核。
+  steps:
+  - 取得pluralway.org的可复核机器信号，仍按Domain Availability Verification Method优先registry authoritative；若需fallback可用合格registrar signal，unknown/error不得转available
+  - 若.org通过，做US→EU→CN→WIPO/Madrid的exact+核心近似字标筛查，重点09/16/41/42及研究教育、软件技术、出版公共知识
+  - 进入Owner Exposure Gate前补blind independent质量复核，尤其检验Pluralway→Plural Way的听写恢复、Plural/Plurality近名感知和六语境母组织身份
+  - 只有以上支持时才向Owner呈现为候选；否则退回generate并换构词/语义策略，不降低门槛
+  owner_question: null
+stop:
+  status: blocked_before_owner_gate
+  reason: 当前没有finalist；Pluralway受.org机器验证与独立Reviewer能力阻塞。尚不需要Owner做名称偏好判断。
