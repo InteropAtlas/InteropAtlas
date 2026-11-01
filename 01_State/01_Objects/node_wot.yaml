@@ -3,9 +3,75 @@ type: system
 kind: software
 name_zh: Eclipse Thingweb node-wot 软件框架
 name_en: Eclipse Thingweb node-wot framework
-description_zh: 用于以 Node.js/TypeScript 构建 Web of Things 客户端与服务端的软件框架，以事物描述（TD）连接应用与设备接口；本记录固定到 0.9.2。
-description_en: A Node.js/TypeScript framework for Web of Things clients and servers, using Thing Descriptions to
-  connect applications and device interfaces; pinned here to release 0.9.2.
+description_zh: 'Eclipse Thingweb node-wot 是包含 core 与协议绑定包的 Node.js/TypeScript 软件框架；本记录固定 0.9.2 / commit 2fd12ddf95ad9684e89d703bb916bc07e1959c79，不是
+  TD 规范、物理设备或新的 framework 类型。当前补证限既有 core 的 TD 1.1 表示、解析/序列化与 consume/produce 条件，不扩大原 TD implements 或后来 MQTT uses；本次不重新核验
+  MQTT 源码或其关系证据。
+
+
+  parseTD 去掉开头 BOM 后调用 JSON.parse，并补充/调整上下文、类型与默认字段，检查所列属性/动作/事件 form 的 forms、href 和相对 URI 的 base 条件。有自有 base 时，normalize
+  未指定或为 true 才归一化收集到的相对 form URI；false 不等于跳过所有 form 检查。它不是完整 TD/JSON-LD 校验或无损表示。isThingDescription 复用为 ExposedThingInit
+  放宽部分 required 字段的 schema 校验器；仍有 schema 检查，成功不证明完整规范符合性。本次未安装/重核该依赖 schema 的发布字节，不新增任意输入的校验结论。
+
+
+  consume 对输入 JSON.stringify 后以 normalize=true 调用 parseTD，再构造 ConsumedThing。produce 经 validateExposedThingInit，拒绝显式/识别的
+  ThingModel 声明，再构造并加入 ExposedThing；这不证明物理设备交互。generic discover 明确抛出未实现错误，但另有 exploreDirectory/requestThingDescription，不能泛称所有发现相关功能都不存在。通信仍需合适绑定，README
+  中客户端/服务端角色支持不同，不推断全部协议互通。
+
+
+  serializeTD 先通过 JSON 读写复制输入；复制的 security 为 null/undefined 或 length 为零时，赋值 nosec_sc 的 securityDefinitions 与 security，再做其他清理和字符串化。这是源码行为，不是安全配置验证或
+  nosec 部署建议，也不保证任意输入成功或普遍保留既有元数据。parseTD 缺 security 时的警告同样不是安全保证。
+
+
+  原 #472 的 Node v24.19.0、npm core ignore-scripts 安装与十五项无网络本地 core 示例保持为历史；当时使用即时解析依赖而非旧 lockfile，uuid 弃用警告及严格 TD
+  校验预期纠正均保留。旧例未注册绑定、启动服务/监听器或操作设备。本次仅静态重读七份固定源码并核对原指纹，不重跑十五例、不安装、构建、导入或执行上游，不改环境/安全设置，也不进行网络或设备实验；Atlas 自身检查不是上游运行证据。
+
+
+  不证明完整 TD、JSON-LD 或 Scripting API 符合性、安全、全部可选特性、最新发行版、生产适用性或 IA 采用，不新增 capability 或 self_hostable 推断。原 scope、八份来源及访问日期、身份/许可、创建/intake
+  与全记录核验日期保留。仅源对象描述补证，TD 与 MQTT 目标页仍不展示 node-wot 关系条件；不声称双向显示已修复。'
+description_en: 'Eclipse Thingweb node-wot is a Node.js/TypeScript software framework comprising core and protocol-binding
+  packages, pinned here to 0.9.2 / commit 2fd12ddf95ad9684e89d703bb916bc07e1959c79. It is not a TD specification,
+  physical device or new framework kind. This supplement covers existing core TD 1.1 representation, parsing/serialization
+  and consume/produce conditions without expanding the TD implements or later MQTT uses relation; MQTT source/relationship
+  evidence is not reverified here.
+
+
+  parseTD removes a leading BOM before JSON.parse, supplies/adjusts contexts, types and defaults, and checks forms,
+  href and relative-URI base conditions for the listed property/action/event forms. With an own base, normalize
+  omitted or true normalizes collected relative form URIs; false does not skip all form checks. This is not complete
+  TD/JSON-LD validation or lossless representation. isThingDescription reuses a schema validator with selected required
+  fields relaxed for ExposedThingInit; schema checks remain and success is not full normative conformance. Dependency-schema
+  release bytes were not installed/reverified here, and no new arbitrary-input validation verdict is added.
+
+
+  consume JSON-stringifies input, calls parseTD with normalize=true and then constructs ConsumedThing. produce calls
+  validateExposedThingInit, rejecting explicit/recognized ThingModel declarations, before constructing and adding
+  ExposedThing; this does not prove physical device interaction. Generic discover explicitly throws not-implemented,
+  while separate exploreDirectory/requestThingDescription methods exist; not all discovery-related functionality
+  is absent. Communication needs suitable bindings, whose documented client/server roles differ, not universal protocol
+  interoperability.
+
+
+  serializeTD first copies input through JSON serialization/parsing. When copied security is null/undefined or has
+  length zero, it assigns nosec_sc securityDefinitions and security before other cleanup/stringification. This is
+  source behavior, not secure-configuration validation or a nosec deployment recommendation, and does not guarantee
+  arbitrary-input success or universal metadata preservation. parseTD''s missing-security warning likewise supplies
+  no security assurance.
+
+
+  Original #472 Node v24.19.0, npm core ignore-scripts installation and fifteen non-network local core examples
+  remain historical. They used contemporaneously resolved dependencies rather than the old lockfile; the uuid deprecation
+  warning and corrected strict-TD-validation expectation remain retained. Those examples registered no bindings,
+  started no servers/listeners and operated no devices. Current work only statically rereads seven fixed source
+  files and checks original fingerprints, without rerunning the fifteen examples, installing/building/importing/executing
+  upstream code, changing environment/security settings or performing network/device experiments. Atlas checks are
+  not upstream-runtime evidence.
+
+
+  Complete TD, JSON-LD or Scripting API conformance, security, every optional feature, latest-release/production
+  suitability or IA adoption is not established; no capability or self_hostable inference is added. Original scope,
+  eight sources/access dates, identity/license, creation/intake and whole-record verification dates remain intact.
+  Only the source description is supplemented: TD and MQTT target pages still omit node-wot relation conditions,
+  so two-way visibility repair is not claimed.'
 version: 0.9.2
 external_identifiers:
 - namespace: github
@@ -68,11 +134,11 @@ sources:
 last_verified_at: '2026-10-21T01:52:13.902357+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed-version WoT implementation evidence executor
 record_created_at: '2026-10-21T01:55:33.848207+00:00'
-record_updated_at: '2026-10-21T01:55:33.848207+00:00'
+record_updated_at: '2026-11-01T10:41:45.668397+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_node_wot_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / node_wot_semantics and node_wot_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: node_wot
