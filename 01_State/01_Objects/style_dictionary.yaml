@@ -3,10 +3,76 @@ type: system
 kind: software
 name_zh: Style Dictionary 设计令牌构建工具
 name_en: Style Dictionary design-token build tool
-description_zh: 面向设计令牌转换与多平台样式输出的开源构建工具；固定5.7.0，仅记录有界内置转换/CSS输出先例及格式支持、类型验证和引用处理限制。
-description_en: An open-source build tool for design-token transformations and cross-platform style output, pinned
-  to 5.7.0; records bounded built-in processing/CSS-output precedents and format-support, type-validation and reference-handling
-  limits.
+description_zh: 'Style Dictionary 是设计令牌构建工具，含 CLI 与程序接口；本记录固定 5.7.0 / commit 745264a62d01037581c6654fb4ac66bb3d245f07，仅将既有内置转换与
+  CSS 输出切片的限制补明，不是 IA 采用或生成样式的决定。固定版本文档明确 DTCG 2025.10 尚未完整支持；这是该固定文档的声明，不判断当前最新版。
+
+
+  `detectDtcgSyntax` 递归寻找 `$value`/`$type` 键，不验证令牌结构或值；已有内存 tokens 且未指定 `usesDtcg` 时的自动检测不等于覆盖所有显式配置。`convertToDTCG`
+  克隆输入并改写 value/type/description 键，默认可把共同类型提升到组；`applyTypesToGroup=false` 保留逐令牌类型。这不是把旧 size 类型转换为 DTCG 类型或完整迁移/验证，也不是任意输入都不会抛错。运行时组类型下放与子项覆盖是另一处理步骤。原混合
+  legacy/DTCG 例自动选择 DTCG 后未输出 legacy value 令牌；原 number 类型配非数字字符串仍可继续处理。这些有限观察不证明混合输入保留或类型符合，也不推所有非法输入都被接受。
+
+
+  内置转换在旧例中处理 duration 毫秒/秒与 `$root` 命名。CSS 默认输出解析后的值，`outputReferences=true` 可保留 CSS 变量引用，但不是所有引用、所有格式或原令牌的无损往返保证；输出
+  CSS 文本不等于真实视觉/UI 测试。缺失/循环引用在旧例显式 `brokenReferences=throw` 时抛错，固定源码默认也是 throw。值转换 wrapper 捕获相应转换调用的异常，以传入 token
+  的当前值字段作为 fallback 并汇总诊断；没有保存转换调用前的值快照，不保证恢复被转换调用修改的值，也不等于恢复最初输入或整批事务回滚；wrapper 外所有逻辑并非都由它涵盖。`warnings=error` 才把该类转换错误汇总变为异常；引用错误设置与转换诊断设置不可混同，日志或输出成功不是输入验证。
+
+
+  原 #503 于2026-10-21的19项可信合成观察包括包版本、内存令牌/普通对象配置、内置转换/格式化及一个写入新临时目录的 CSS 文件，不是19项全为行为测试。配置的 source/include 为空，未加载用户配置或外部扩展。原16份固定来源指纹、12份安装文件逐字相同、1份主模块仅按官方发布脚本替换
+  VERSION，以及 npm tarball integrity 核对和独立重放，均属于旧工作；integrity 匹配不是签名、attestation 或完整依赖供应链认证。本次只静态复核八份固定源码/文档和实际显示，未安装、导入或执行
+  Node/npm、Style Dictionary、旧例、用户配置或扩展，未生成 CSS 或改变 IA 样式；Atlas 检查不是上游运行证据。
+
+
+  未据此建立 ZIP、全部平台输出、任意输入安全、完整 DTCG 符合性、真实视觉行为、性能、生产适用性、第三方互通或 IA 采用结论。原身份、许可、10条来源及日期、intake、全记录核验日期和旧未解审查历史保持；原
+  scope 仅同步纠正 fallback 同句，其余范围不变。此静态纠正不表示旧19项观察执行过修改 token 后抛错的实验。只有既有能力字段引用，没有新增技术关系；能力页邻接标准不证明本工具符合该标准，标准、能力页面、分类和维护机制不变。'
+description_en: 'Style Dictionary is a design-token build tool with a CLI and programmatic API, pinned here to 5.7.0
+  / commit 745264a62d01037581c6654fb4ac66bb3d245f07. This supplement makes existing limits of built-in processing
+  and CSS output visible; it is not a decision to adopt the tool or generate IA styles. The fixed-version documentation
+  says DTCG 2025.10 is not fully supported, a statement from that document rather than an assessment of today''s
+  latest release.
+
+
+  `detectDtcgSyntax` recursively looks for `$value`/`$type` keys without validating token structure or values. Automatic
+  detection for existing inline tokens when `usesDtcg` is unspecified does not imply that every explicit configuration
+  is overridden. `convertToDTCG` clones input and renames value/type/description keys, optionally hoisting a common
+  type to groups by default; `applyTypesToGroup=false` retains per-token types. This is not conversion of legacy
+  size types to DTCG types, complete migration/validation or a promise that arbitrary inputs never raise. Runtime
+  group-type delegation with child overrides is a separate step. The old mixed legacy/DTCG example selected DTCG
+  and omitted legacy value tokens; the old number token containing a nonnumeric string continued processing. These
+  finite observations establish neither mixed-input preservation nor type validity and do not mean every invalid
+  input is accepted.
+
+
+  Built-in transformations handled duration milliseconds/seconds and `$root` names in the old examples. CSS defaults
+  to resolved values; `outputReferences=true` can retain CSS variable references, not every reference, every format
+  or lossless original-token round trips. CSS text output is not actual visual/UI testing. Missing/circular references
+  threw with the old probe''s explicit `brokenReferences=throw`, also the fixed source default. The value-transform
+  wrapper catches exceptions from the corresponding transform invocation, uses the passed token''s current value
+  field as fallback and collects diagnostics. It saves no pre-invocation value snapshot and does not guarantee recovery
+  of values mutated by the transform, restoration of the initial input or whole-batch transaction rollback; not
+  all logic outside the wrapper is covered. `warnings=error` makes that class of collected transformation errors
+  throw. Reference-error policy and transformation diagnostics are distinct; logging or output success is not input
+  validation.
+
+
+  The original #503 work on 2026-10-21 recorded nineteen trusted synthetic observations including package version,
+  inline tokens/plain-object configuration, built-in transformations/formatting and one CSS file written to a fresh
+  temporary directory, not nineteen purely behavioral tests. source/include were empty; user configuration and external
+  extensions were not loaded. Sixteen fixed-source fingerprints, twelve byte-identical installed files, one main-module
+  VERSION substitution following the official release script, npm tarball integrity checking and independent replay
+  belong to that historical work. Integrity matching is not signature, attestation or whole-dependency supply-chain
+  certification. This supplement only statically inspects eight fixed sources/documents and actual display; it does
+  not install, import or execute Node/npm, Style Dictionary, old examples, user configuration or extensions, generate
+  CSS or change IA styles. Atlas checks are not upstream execution evidence.
+
+
+  ZIP, all-platform output, arbitrary-input safety, complete DTCG conformance, actual visual behavior, performance,
+  production suitability, third-party interoperability and IA adoption are not established. Original identity, license,
+  ten sources/dates, intake, whole-record verification dates and old unresolved review history remain; only the
+  same fallback sentence in the original scope is corrected, with all other scope unchanged. This static correction
+  does not imply that the old nineteen observations tested a transform mutating its token and then throwing. Only
+  the existing capability-field reference is present, with no new technical relation. A neighboring standard on
+  the capability page does not establish this tool''s conformance; standards, capability pages, classification and
+  maintenance mechanisms are unchanged.'
 version: 5.7.0
 external_identifiers:
 - namespace: github
@@ -24,7 +90,7 @@ capabilities:
 open_source: true
 license_expression: Apache-2.0
 scope_notes_zh: 固定 npm style-dictionary 5.7.0，官方 tag v5.7.0 指向745264a62d01037581c6654fb4ac66bb3d245f07；Node.js要求>=22，提供CLI与程序API的设计令牌构建工具，沿用system/software，不新增工具类型。固定文档明示DTCG2025.10尚未完整支持，本切片只记录现有设计令牌交换能力和处理先例，不建立implements。detectDtcgSyntax只寻找$value/$type键，不验证令牌结构或值；convertToDTCG克隆输入并转换value/type/description键，默认可将共同$type提升到组，applyTypesToGroup=false可保留逐token类型；它不把size等旧类型名称改成DTCG类型，也不构成完整格式迁移/验证。运行时可将组类型下放到token并保留子组覆盖；在本例的混合legacy与DTCG输入里自动选择DTCG，legacy
-  value token未出现在输出，不能承诺混合格式保留。number类型配非数字字符串也可继续处理，成功不证明类型符合。固定内置转换支持本例的duration毫秒/秒转换和$root命名；CSS默认输出解析后的值，outputReferences=true可保留CSS变量引用，不保证任意输出格式无损往返。缺失/循环引用在本例明确brokenReferences=throw时抛错，当前源码默认亦为throw；值转换异常由wrapper保留转换前的值并汇总错误，warnings=error才将该类汇总变为异常，日志设置/输出成功不能替代输入验证。19项可信合成例仅使用内存token、显式普通对象配置、空source/include与内置转换/格式化，一个CSS文件写入新临时目录；未加载用户配置或外部扩展，未测ZIP、全部平台输出、真实视觉/UI、任意输入安全、全DTCG符合性、第三方互通或IA采用。16份固定源指纹、12份安装文件逐字一致，以及仅VERSION占位符按官方发布脚本替换的一个文件分别留痕；npm
+  value token未出现在输出，不能承诺混合格式保留。number类型配非数字字符串也可继续处理，成功不证明类型符合。固定内置转换支持本例的duration毫秒/秒转换和$root命名；CSS默认输出解析后的值，outputReferences=true可保留CSS变量引用，不保证任意输出格式无损往返。缺失/循环引用在本例明确brokenReferences=throw时抛错，当前源码默认亦为throw；值转换异常时wrapper读取传入token当前的value/$value字段作为fallback并汇总错误；未保存调用前快照，不保证恢复转换调用已修改的值，warnings=error才将该类汇总变为异常，日志设置/输出成功不能替代输入验证。19项可信合成例仅使用内存token、显式普通对象配置、空source/include与内置转换/格式化，一个CSS文件写入新临时目录；未加载用户配置或外部扩展，未测ZIP、全部平台输出、真实视觉/UI、任意输入安全、全DTCG符合性、第三方互通或IA采用。16份固定源指纹、12份安装文件逐字一致，以及仅VERSION占位符按官方发布脚本替换的一个文件分别留痕；npm
   tarball integrity核对不等于签名/证明或完整依赖供应链审计。Apache-2.0按官方包元数据与LICENSE记录，不作为法律适用性意见。
 scope_notes_en: Pinned to npm style-dictionary 5.7.0 and official tag v5.7.0 at commit 745264a62d01037581c6654fb4ac66bb3d245f07.
   This design-token build tool requires Node.js >=22 and offers a CLI and programmatic API; it uses the existing
@@ -39,15 +105,16 @@ scope_notes_en: Pinned to npm style-dictionary 5.7.0 and official tag v5.7.0 at 
   type validity. Built-in transforms handle the tested duration milliseconds/seconds and $root names. CSS defaults
   to resolved values, while outputReferences=true can preserve CSS variable references; arbitrary-format lossless
   round trips are not established. Missing/circular references throw with the probe’s explicit brokenReferences=throw
-  setting, also the current source default. On a value-transform exception, the wrapper preserves the prior value
-  and collects diagnostics; warnings=error makes that class of collected error throw. Logging/output success is
-  not input validation. Nineteen trusted synthetic examples use only inline tokens, explicit plain-object config,
-  empty source/include and built-in transforms/formats, writing one CSS file to a fresh temporary directory. User
-  config, external extensions, ZIP, every platform output, actual visual/UI behavior, arbitrary-input safety, full
-  DTCG conformance, third-party interoperability and IA adoption were not tested. Sixteen fixed source fingerprints,
-  twelve byte-identical installed files and one documented release-script VERSION substitution are recorded separately.
-  npm tarball integrity matching is not a signature/attestation or whole-dependency supply-chain audit. Apache-2.0
-  is recorded from official package metadata and LICENSE, not as a legal-suitability opinion.
+  setting, also the current source default. On a value-transform exception, the wrapper reads the passed token's
+  current value/$value field as fallback and collects diagnostics; no pre-call snapshot is saved and values mutated
+  by the transform are not guaranteed to be restored; warnings=error makes that class of collected error throw.
+  Logging/output success is not input validation. Nineteen trusted synthetic examples use only inline tokens, explicit
+  plain-object config, empty source/include and built-in transforms/formats, writing one CSS file to a fresh temporary
+  directory. User config, external extensions, ZIP, every platform output, actual visual/UI behavior, arbitrary-input
+  safety, full DTCG conformance, third-party interoperability and IA adoption were not tested. Sixteen fixed source
+  fingerprints, twelve byte-identical installed files and one documented release-script VERSION substitution are
+  recorded separately. npm tarball integrity matching is not a signature/attestation or whole-dependency supply-chain
+  audit. Apache-2.0 is recorded from official package metadata and LICENSE, not as a legal-suitability opinion.
 sources:
 - url: https://github.com/style-dictionary/style-dictionary/blob/745264a62d01037581c6654fb4ac66bb3d245f07/README.md
   title: Style Dictionary 5.7.0 — design-token build tool, CLI and Node API
@@ -92,11 +159,11 @@ sources:
 last_verified_at: '2026-10-21T12:18:22.139491+00:00'
 last_verified_by: Agent — OpenAI / dot, fixed design-token implementation evidence executor
 record_created_at: '2026-10-21T12:29:45.981573+00:00'
-record_updated_at: '2026-10-21T12:29:45.981573+00:00'
+record_updated_at: '2026-11-01T07:19:12.442798+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  executor: Agent — OpenAI / dot / supplement_style_dictionary_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / style_dictionary_semantics and style_dictionary_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: style_dictionary
