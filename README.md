@@ -4,14 +4,14 @@
 
 <!-- InteropAtlas Document Metadata v0
 Document Status: active
-Document Updated At: 2026-09-24T23:59:00+08:00
+Document Updated At: 2026-10-12T04:22:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: Human Owner — ff6962757
+  Executor: Agent — OpenAI / dot
+  Reviewer: pending independent review
   GitHub Actor: ff6962757
 -->
 
@@ -112,7 +112,7 @@ InteropAtlas 优先把可验证、可追溯、可复用的互操作知识沉淀�
 2. 我们现在在建设什么；
 3. 我可以从哪里参与。
 
-从那里可以继续进入当前 Focus、Inbox、PR、Project、Candidate Pool、Human / Machine 路线或深入文档。Issue 只承载可继续推进的具体任务；研究可以发生在任何任务中，不再单独把 Research 当作一种 Issue 类型。你不需要为了参与项目先通读 Master Design、Roadmap、全部 `docs/` 或完整 Issue backlog。
+从那里可以继续进入当前 Issue、PR、Project、Candidate Pool、Human / Machine 路线或深入文档。Issue 只承载可继续推进的具体任务；研究可以发生在任何任务中，不再单独把 Research 当作一种 Issue 类型。你不需要为了参与项目先通读 Master Design、Roadmap、全部 `docs/` 或完整 Issue backlog。
 
 如果你是 Agent，仓库级执行约束另见 [`AGENTS.md`](AGENTS.md)；具体贡献规则见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
