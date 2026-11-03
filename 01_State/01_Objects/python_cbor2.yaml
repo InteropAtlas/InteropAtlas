@@ -1,0 +1,125 @@
+id: python_cbor2
+type: system
+kind: library
+name_zh: cbor2 Python CBOR 编解码库
+name_en: cbor2 Python CBOR encoding/decoding library
+description_zh: 固定6.1.5的Python CBOR二进制编解码库，底层以Rust实现；35项小输入核验含1项版本核对和34项行为观察。默认重复映射键后值覆盖，整数1与true在Python dict中合并，拒重选项也按Python键相等判断；loads只返回首项，不拒绝尾随项。默认允许不定长项，UTF-8默认严格；替换模式有损，tuple变list且非首选整数重编码不保留原字节。canonical=True按编码长度再字节序排序（RFC8949
+  §4.2.3的排序而非§4.2.1纯字节序），与indefinite_containers=True合用仍可输出不定长项。不是完整RFC验证、通用无损转换、确定性profile或签名规范化认证；未验证安全性、跨实现互通或IA采用。本次仅核对发布wheel哈希，未从源码重建二进制、未验证发布attestation，不构成供应链认证。
+description_en: A fixed 6.1.5 Python CBOR binary codec implemented in Rust; 35 tiny checks comprise one version
+  check and 34 behavior observations. Duplicate map keys default to the last value; integer 1 and true collapse
+  in Python dict, and duplicate rejection also uses Python key equality. loads returns only the first item without
+  rejecting trailing items. Indefinite items are allowed and UTF-8 is strict by default; replacement mode is lossy,
+  tuples become lists and nonpreferred integers do not preserve original bytes on re-encoding. canonical=True sorts
+  by encoded length then bytes (the ordering in RFC8949 section 4.2.3, not section 4.2.1 purely bytewise order)
+  and still permits indefinite output with indefinite_containers=True. This is not full RFC validation, universal
+  lossless conversion, complete deterministic-profile or signature canonicalization certification; security, cross-implementation
+  interchange and IA adoption were not verified. Only the published wheel hash was checked; the binary was not rebuilt
+  from source and release attestations were not verified. This is not supply-chain certification.
+version: 6.1.5
+external_identifiers:
+- namespace: github
+  value: agronholm/cbor2
+- namespace: pypi
+  value: cbor2
+official_url: https://github.com/agronholm/cbor2
+versions:
+- version: 6.1.5
+  date: '2026-10-01'
+  status: released
+  url: https://pypi.org/project/cbor2/6.1.5/
+domains:
+- data_representation
+- serialization
+capabilities:
+- data_serialization
+open_source: true
+license_expression: MIT
+scope_notes_zh: 主体是 PyPI cbor2 Python 发行包及 agronholm/cbor2 源码，固定 6.1.5/tag commit cf5b8c5cc96609f423a9ef07bde2da0f284c9169；底层以
+  Rust 实现，不与同名 ldclabs/cbor2 Rust crate 或 CBOR 标准合并。针对可信内存数据核验 Python dumps/loads 的整数、字节串/文本、数组、映射、布尔/null、浮点及少量标签读写。35项作者核验包括1项包版本核对与34项行为观察，不是完整RFC/上游套件。tuple默认返回list，非首选整数编码重编码会缩短，不能保证原字节或全部Python/CBOR类型无损往返。默认loads返回第一个数据项而不拒绝尾随项；流中多项需由应用显式继续解码/处理。映射默认重复键后值覆盖，allow_duplicate_keys=False可拒绝但按Python键相等判断；整数1与true这类CBOR通用模型中不同的键会在dict中合并，显式拒重模式也会将其视作重复。应用需规定可表示的键类型/相等语义，不能把该选项当完整CBOR通用键验证。默认允许不定长容器/字符串，可通过allow_indefinite=False拒绝；默认UTF-8严格，str_errors=replace会损失非法字节信息。max_depth默认400，本例只验证显式较小限值，不证明资源安全。canonical=True的map排序按编码长度再字节序，对应RFC8949
+  §4.2.3所述排序而不是§4.2.1纯字节序；与indefinite_containers=True合用仍可输出不定长项，故参数名不证明任一完整确定性profile或签名规范化。未测试所有语义标签、应用schema、JSON诊断转换、hooks、共享/循环/字符串引用、第三方互通、网络协议、安全性、性能或IA采用。wheel
+  SHA256与PyPI元数据匹配，固定源码与Git tree blob匹配；未从源码重建二进制或验证发布证明，不据此作供应链认证。
+scope_notes_en: The subject is the PyPI cbor2 Python distribution and agronholm/cbor2 source, fixed to 6.1.5 / tag
+  commit cf5b8c5cc96609f423a9ef07bde2da0f284c9169. Its implementation is Rust-based, but it is not the separate
+  ldclabs/cbor2 Rust crate or the CBOR standard. Thirty-five author checks (one package-version check and 34 behavior
+  observations) cover trusted in-memory dumps/loads for integers, bytes/text, arrays, maps, booleans/null, floats
+  and selected tags, not a full RFC or upstream suite. Tuples decode as lists by default and nonpreferred integers
+  re-encode more shortly, so byte preservation and lossless handling of every Python/CBOR type are not promised.
+  loads returns the first item without rejecting trailing items; applications must explicitly handle stream continuation.
+  Duplicate map keys default to last-value retention; allow_duplicate_keys=False rejects using Python key equality.
+  Keys distinct in the CBOR generic model, such as integer 1 and true, collapse in dict and are also rejected as
+  duplicates by that option. Applications must constrain representable key types/equality; this is not complete
+  generic CBOR-key validation. Indefinite strings/containers are allowed by default and can be refused with allow_indefinite=False.
+  UTF-8 errors are strict by default, while str_errors=replace loses invalid-byte information. max_depth defaults
+  to 400; only a small explicit limit was probed, not resource safety. canonical=True orders map keys by encoded
+  length and then bytes, corresponding to the ordering described in RFC8949 section 4.2.3 rather than the purely
+  bytewise section 4.2.1 order. Combining it with indefinite_containers=True can still emit indefinite items, so
+  the option name is not proof of any complete deterministic profile or signature canonicalization. Every semantic
+  tag, application schemas, diagnostic JSON conversion, hooks, shared/cyclic/string references, third-party interoperability,
+  network protocols, security, performance and IA adoption remain untested. The wheel SHA256 matches PyPI metadata
+  and fixed sources match Git tree blobs, but the binary was not rebuilt or release attestations verified; this
+  is not supply-chain certification.
+sources:
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/README.rst
+  title: cbor2 6.1.5 — explicit RFC8949 codec identity and Rust implementation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/pyproject.toml
+  title: cbor2 — Python package identity, dynamic release version, Python requirement and MIT declaration
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/LICENSE.txt
+  title: cbor2 — fixed MIT license text
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/docs/usage.rst
+  title: cbor2 — Python/CBOR type mappings, tag support and optional-reference limitations
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/lib.rs
+  title: cbor2 — public loads/dumps options, defaults and one-item decode
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/encoder.rs
+  title: cbor2 — length-first canonical key ordering, float width and independent indefinite-container option
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/blob/cf5b8c5cc96609f423a9ef07bde2da0f284c9169/rust/decoder.rs
+  title: cbor2 — Python-key duplicate behavior, indefinite input and UTF-8 handling
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/agronholm/cbor2/releases/tag/6.1.5
+  title: Official 6.1.5 release date and tag, separately resolved to fixed commit
+  language: en
+  accessed: '2026-10-29'
+- url: https://pypi.org/pypi/cbor2/6.1.5/json
+  title: Official PyPI 6.1.5 project identity and CPython3.12 Linux wheel SHA256
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-4.2
+  title: RFC8949 §§4.2.1/4.2.3 — distinct deterministic key ordering and prohibition of indefinite items
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-5.6.1
+  title: RFC8949 §§5.3.1/5.6.1 — duplicate map keys, validity and generic key equivalence
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T19:06:35.942236+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_forgejo_delivery/prepare_cbor2_intake; fixed-source reading
+  and 35 limited wheel checks
+record_created_at: '2026-10-29T19:28:47.389023+00:00'
+record_updated_at: '2026-10-29T19:28:47.389023+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cbor2_intake
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cbor2_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_cbor2
+  acceptance_event_id: accept-20261029-python-cbor2-rfc8949-python_cbor2
+  reviewed_candidate_blob: 0c3445480588ffd85f1513989e63989930d22290
+  reviewed_against_commit: e3f6837cdb87091e689b1d771a4ccca8eb5f502e
+  candidate_executor: Agent — OpenAI / dot / /root/resume_forgejo_delivery/prepare_cbor2_intake
+  canonical_serializer: Agent — OpenAI / dot / /root/resume_cbor2_intake
+  reviewed_packet_commit: e3f6837cdb87091e689b1d771a4ccca8eb5f502e
+  reviewed_packet_blob: 20b230a066d8e44f6fbace3bee713182df4f62d6
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/e3f6837cdb87091e689b1d771a4ccca8eb5f502e/01_State/Inbox/review-packets/python-cbor2-rfc8949-20261029.yaml

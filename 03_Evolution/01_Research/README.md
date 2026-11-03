@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-05T14:25:00+08:00
+Document Updated At: 2026-10-31T10:08:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Executor: Agent — OpenAI / dot / publish_vc_verification_coverage
+  Reviewer: Independent Agent — OpenAI / dot / vc_verification_review
   GitHub Actor: ff6962757
 -->
 
@@ -23,6 +23,18 @@ Latest Substantive Contribution:
 3. [`03_Tests/`](03_Tests/) — Fit Test、Stress Test 与非规范性对象适配测试。
 
 它们分别回答：**我们依据什么？当前判断经得起什么审计？关键假设经过了什么测试？**
+
+## 有限比较记录
+
+- [OGC API Features Core 四编码类的有限覆盖比较（2026-10-31）](01_Prior_Art/ogc-features-core-encoding-comparison-2026-10-31.zh-CN.md)：对照固定规范、既有记录与 pygeoapi 静态证据，区分精确映射、相关记录和未知；不是全域完备率。
+
+- [SenML 原版四表示族与流媒体的有限覆盖比较（2026-10-31）](01_Prior_Art/senml-representation-coverage-2026-10-31.zh-CN.md)：区分原版八媒体的协商/处理、精确引用版次、既有通用实现与专门证据 unknown；不是当前注册全集。
+
+- [PROV 固定文献家族与有限实现证据覆盖对照（2026-10-31）](01_Prior_Art/prov-family-coverage-2026-10-31.zh-CN.md)：以 2013-04-30 的 12 文献为有界分母，区分职责、已录对象、双 PROV-O 身份 hold 与 python_prov 3.2.3 旧证据范围；不推全域完备。
+
+- [FHIR R4 五种交换方法与既有模型库证据的有限对照（2026-10-31）](01_Prior_Art/fhir-r4-exchange-evidence-2026-10-31.zh-CN.md)：分开标准身份、INA 导航、旧内存模型观察与新只读 GET 静态路径；不推真实交换或完整符合性。
+
+- [VC2 验证职责与既有库包装层的有限对照（2026-10-31）](01_Prior_Art/vc2-verification-responsibilities-2026-10-31.zh-CN.md)：对照固定 Recommendation 三顶层算法职责与局部预检、外部委派、状态回调和失败返回；不推完整符合性或验签成功。
 
 ## 与 `docs/` 的边界
 

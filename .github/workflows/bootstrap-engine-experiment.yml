@@ -23,6 +23,8 @@ jobs:
           python-version: '3.12'
       - name: Install bootstrap dependency
         run: pip install -r 02_Runtime/01_Engine/requirements.txt
+      - name: Verify maintenance dashboard snapshot boundaries
+        run: python 02_Runtime/01_Engine/test_maintenance_dashboard.py
       - name: Verify repository layout contract
         run: python 02_Runtime/01_Engine/test_repository_layout.py
       - name: Verify semantic normalization contract

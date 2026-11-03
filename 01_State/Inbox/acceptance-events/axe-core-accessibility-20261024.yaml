@@ -1,0 +1,34 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-axe-core-accessibility
+candidate_id: axe_core
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: axe_core
+review:
+  reviewer: Independent Agent — OpenAI / dot / axe-core capability intake semantic reviewer
+  reviewed_at: '2026-10-24T13:28:15Z'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate 8986cc786edf4b43b7af4c1dc66f80567074dba4 与 packet e61c1de0c72569d9536dfac9cde20b27b7e8adf3；主体为固定
+    axe-core 4.14.0 JavaScript 库，commit e797173108eadfa4355fe06af331791734e1757f，不混同组织、扩展、商业平台或规范。
+  - system/library → provides → accessibility_conformance_testing 是既有模型的有界实例；独立复核已核对 adopted D1–D10、kind/profile、关系合同和目标能力语义。首次出现
+    system-source provides 不代表更改谓词或认证含义。
+  - 独立重新获取12份固定上游源码并核对 Git blob，15份已捕获来源指纹与内容一致。发布轻量标签和 package 身份确认；release 非 immutable，证据固定 commit。npm 分发字节未验证，未重试绕过此前访问限制。
+  - 保留选定呈现状态与启用规则、四类标准结果、人工复核、frame/页面上下文/JSDOM 限制，以及默认禁用规则可被显式选择改变的边界。视觉隐藏但仍呈现内容与未激活/未呈现区域分别处理。无违规不是完整符合性。
+  - 包 engines.node>=4 与源码 Node24+ 构建要求分开；MPL-2.0 声明和第三方 MIT/ISC 通知保留。未执行 axe/npm、上游构建/测试、网站审计或 IA CI 集成，不声称 WCAG/ARIA/ACT
+    implements、法律/安全/互通/检出率/IA采用。
+  - 既有 bootstrap capability 查询只读取 object.capabilities；本批不添加重复字段边或改变消费者。该 provides 关系通过 graph/反向链接验证。
+  - 作者134+12回归及独立适用非浏览器检查通过；既有104事件验证，其中94个accepted事件按冻结历史回放，10个deferred验证。正常 Git fetch 核对真实远端冻结；六文件物化另需独立结构复核和远端适用
+    CI（含浏览器）通过。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/58179e90bc708335ac94ad0b45719311a7c37331/01_State/Inbox/review-packets/axe-core-accessibility-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/8986cc786edf4b43b7af4c1dc66f80567074dba4
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e61c1de0c72569d9536dfac9cde20b27b7e8adf3
+decided_at: '2026-10-24T13:31:13.025037+00:00'
+notes:
+- 仅接纳一个库对象、一个有界 provides 关系和一个既有 design 导航成员，不扩展能力、测试模型、标准版次、页面或维护方式。
+- 完整被审原稿保留在真实正常祖先；当前 packet 仅为引用式回执。保留全部旧对象/关系/事件、历史底图、PR488、PR498/439/416 与 Apple/Material 关系。

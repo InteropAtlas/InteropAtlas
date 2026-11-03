@@ -1,0 +1,243 @@
+id: cisco_libsrtp_implements_srtp_rfc3711
+type: relation
+name_zh: libSRTP 2.8.1 有界实现 SRTP
+name_en: libSRTP 2.8.1 implements bounded SRTP packet processing
+source: cisco_libsrtp
+relation: implements
+target: srtp_rfc3711
+context:
+  version_context:
+    source: libSRTP 2.8.1; official tag v2.8.1, commit 6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa
+    target: RFC3711, March 2004
+  conditions_zh: 依据固定 2.8.1 README 的 RFC3711 mandatory-to-implement 特性声明和公共 SRTP/SRTCP 保护/验证 API，仅记录配置策略下的包处理实现。非零密钥派生率、AES-f8、按包索引选择主密钥不受支持；这不等于缺少
+    MKI API。可选加密后端、调用方策略/密钥材料、初始化、缓冲区对齐与尾部容量、错误处理等条件均适用。README 的 >65k 乱序说法与头文件 <32768 契约存在未测试差异，不保证某个乱序阈值。未运行上游库，不声称穷尽符合性、部署安全、密钥建立、端点认证、第三方互通或
+    IA 采用，也不传递为 RTP、RTSP、WebRTC 或 ST2110 的完整实现。
+  conditions_en: Based on the fixed 2.8.1 README’s RFC3711 mandatory-to-implement feature claim and public SRTP/SRTCP
+    protection/verification API, limited to packet processing under configured policies. Nonzero key-derivation
+    rates, AES-f8 and packet-index-based master-key selection are unsupported; this does not mean MKI APIs are absent.
+    Optional crypto backend, caller policy/key material, initialization, buffer alignment/trailer capacity and error
+    handling apply. The README’s >65k reordering wording and header’s <32768 contract differ and were not tested;
+    no reordering threshold is guaranteed. The upstream library was not run. This is not exhaustive conformance,
+    deployment-security, key-establishment, endpoint-authentication, third-party-interoperability or IA-adoption
+    evidence, and does not transitively establish complete RTP, RTSP, WebRTC or ST2110 implementations.
+evidence:
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L105-L154
+  title: libSRTP overview — SRTP/SRTCP protection APIs and caller policies
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L197-L223
+  title: libSRTP supported features — mandatory-feature claim and optional exclusions
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md#L230-L255
+  title: libSRTP implementation notes — backend requirements, caller storage and reordering wording
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L329-L426
+  title: libSRTP public policy and sender API — caller key material, initialization, buffer contract and error boundary
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L483-L522
+  title: libSRTP receiver API — verification, authentication/replay failures and stricter reordering contract
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h#L1274-L1427
+  title: libSRTP public RTCP protection and verification APIs
+  language: en
+  accessed: '2026-10-22'
+- url: https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/CMakeLists.txt#L84-L118
+  title: libSRTP CMake — optional mutually exclusive OpenSSL, MbedTLS or NSS backend
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3711.html#section-5
+  title: RFC3711 section 5 — mandatory implementation, optional transforms and default parameters
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T16:22:18.927416+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed libSRTP evidence executor
+record_created_at: '2026-10-22T16:31:08.562725+00:00'
+record_updated_at: '2026-10-22T16:31:08.562725+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
+  github_actor: ff6962757
+---
+id: ffmpeg_implements_hls_rfc8216
+type: relation
+name_zh: FFmpeg 9.0.2 有界实现 HLS 播放列表读取与未加密 MPEG-TS 解复用路由
+name_en: FFmpeg 9.0.2 implements bounded HLS playlist reading and unencrypted MPEG-TS demux routing
+source: ffmpeg
+relation: implements
+target: hls_rfc8216
+context:
+  version_context:
+    source: FFmpeg 9.0.2; official-mirror n9.0.2, commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8
+    target: RFC 8216, August 2017; Informational Independent Submission, not IETF Standards Track
+  conditions_zh: 依据固定 libavformat/hls.c 对 RFC 8216 的明示引用和实际读取路径，仅记录 EXTM3U、EXTINF、TARGETDURATION、MEDIA-SEQUENCE、PLAYLIST-TYPE
+    EVENT/VOD、ENDLIST、BYTERANGE 及有限 STREAM-INF/MEDIA 处理、片段 URI 解析和受支持的未加密 MPEG-TS 片段经可用子解复用器打开的路径。不是全部标签、属性或输入的严格验证：EXT-X-VERSION
+    没有解析分支而被通用注释路径跳过，不声称完整第 7 版客户端或 RFC §7 版本兼容性验证。I-FRAME、SESSION、DATERANGE 及显式 DISCONTINUITY 标签也未在该解析器设分支；这不证明所有下游不连续性机制均不存在。动态变体/质量切换不受支持，CLOSED-CAPTIONS
+    不由该 rendition 路径支持。调用方流选择、协议/扩展名约束、IO、编译组件、HTTP/HTTPS/TLS 后端与子解复用器可用性适用；扩展名被允许不保证编解码兼容性。排除加密/DRM、复用和片段生成、fMP4/CMAF、packed-audio/WebVTT
+    细节及当前 Apple/LL-HLS 扩展；不把部分 KEY 代码当作通用解密支持。仅检视公开固定源码和测试配方，未安装、构建或运行 FFmpeg/FATE，未连接网络流；不声称完整客户端/服务器符合性、安全认证、网络或第三方互通、任意构建可用性或
+    IA 采用。
+  conditions_en: 'Based on the explicit RFC 8216 reference and operative fixed libavformat/hls.c read paths, limited
+    to EXTM3U, EXTINF, TARGETDURATION, MEDIA-SEQUENCE, PLAYLIST-TYPE EVENT/VOD, ENDLIST, BYTERANGE, bounded STREAM-INF/MEDIA
+    handling, segment URI resolution and opening supported unencrypted MPEG-TS segments through an available subdemuxer.
+    This is not strict validation of every tag, attribute or input: EXT-X-VERSION has no parser branch and is skipped
+    by generic comment handling, so no complete version-7 client or RFC §7 version-compatibility validation is claimed.
+    I-FRAME, SESSION, DATERANGE and explicit DISCONTINUITY tags also lack branches in that parser; this does not
+    prove all downstream discontinuity mechanisms absent. Dynamic variant/quality switching is unsupported; CLOSED-CAPTIONS
+    is unsupported by that rendition path. Caller stream selection, protocol/extension constraints, IO, enabled
+    components, HTTP/HTTPS/TLS backends and subdemuxer availability apply; an allowed extension does not guarantee
+    codec compatibility. Encryption/DRM, muxing and segment production, fMP4/CMAF, packed-audio/WebVTT specifics
+    and current Apple/LL-HLS extensions are excluded; partial KEY machinery is not general decryption support. Public
+    fixed source and test recipes were inspected only: no FFmpeg/FATE installation, build, execution or network-stream
+    exercise. No complete client/server conformance, security certification, network/third-party interoperability,
+    arbitrary-build availability or IA adoption is established.'
+evidence:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L24-L28
+  title: HLS demuxer source — explicit RFC 8216 reference
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L874-L1125
+  title: Playlist parser — bounded tags, skipped comments and segment URI records
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L530-L548
+  title: Rendition path — CLOSED-CAPTIONS exclusion
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L682-L813
+  title: Protocol and segment-extension constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L1850-L1855
+  title: Source limitation — dynamic variant/quality switching unsupported
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L2300-L2374
+  title: Initial/subordinate playlists and rendition association
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L2469-L2518
+  title: Segment probing, extension checks and selected subdemuxer opening
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c#L3078-L3089
+  title: Registered HLS demuxer callbacks
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/doc/demuxers.texi#L546-L574
+  title: HLS demuxer documentation — caller variant selection and extension constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/Makefile#L277
+  title: HLS demuxer component build gate
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L3943
+  title: HLS demuxer selected components; protocols and TLS remain separate build requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L4112-L4113
+  title: TLS backend selection is separate from HLS demuxer selection
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/tests/fate/hlsenc.mak#L1-L79
+  title: Local MPEG-TS playlist and byte-range test recipes — inspected, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-3.2
+  title: RFC 8216 §3.2 — MPEG-2 Transport Stream segment context
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-4.3
+  title: RFC 8216 §4.3 — playlist tags, including VERSION and rendition requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-7
+  title: RFC 8216 §7 — version-compatibility requirements, not a verified implementation claim
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T15:57:19.218278+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded fixed-source HLS evidence executor
+record_created_at: '2026-10-24T15:57:19.218278+00:00'
+record_updated_at: '2026-10-24T15:57:19.218278+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_hls_patch
+  github_actor: ff6962757
+---
+id: pion_rtp_implements_rtp_rfc3550_base_packet
+type: relation
+name_zh: Pion RTP 1.10.6 有界实现 RTP 基础包布局编解码
+name_en: Pion RTP 1.10.6 implements bounded RTP base packet layout encoding/decoding
+source: pion_rtp
+relation: implements
+target: rtp_rfc3550
+context:
+  version_context:
+    source: Pion RTP 1.10.6; tag v1.10.6, commit 9a8f93554133824676326b43f068167fef01a884
+    target: RFC3550, July 2003; section 5.1 base layout and section 4 byte order
+  conditions_zh: 仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC 数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false
+    时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的 Packet.PaddingSize 保持零或一致。Unmarshal
+    的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP 会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录
+    A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。
+  conditions_en: 'From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload
+    and padding delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent padding
+    flags/sizes are caller preconditions, not general validity checks enforced by the library. With P=false both
+    PaddingSize fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize while
+    the deprecated Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer rather
+    than copying; callers own its lifetime and subsequent mutation. Source and test recipes were inspected only:
+    the upstream package was not installed, built or run. This does not establish complete RTP/RTCP sessions, SSRC
+    management, sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile interpretation,
+    Appendix A validation, transport delivery, SRTP/security, third-party interoperability or IA adoption; arbitrary
+    inputs have no byte-identical roundtrip guarantee. Header extensions and other functions are outside this evidence
+    slice, not asserted absent from the library.'
+evidence:
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/README.md#L1-L22
+  title: Pion RTP identity and upstream RFC3550 implementation claim
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L107-L154
+  title: Base header parsing and bounds checks; version is extracted rather than validated
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L230-L256
+  title: Packet payload and padding boundaries; payload aliases caller buffer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L272-L318
+  title: Base header serialization and caller-controlled fields
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L525-L568
+  title: Packet serialization, payload copy and padding bytes
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L610-L615
+  title: Effective padding size and deprecated-field fallback
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet_test.go#L1714-L1745
+  title: No-extension padding test recipes; inspected, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/releases/tag/v1.10.6
+  title: Official Pion RTP v1.10.6 release, published 2026-10-21
+  language: en
+  accessed: '2026-10-31'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-5.1
+  title: RFC3550 section 5.1 base packet layout; section 4 byte order
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:49:26+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Pion RTP source evidence executor
+record_created_at: '2026-10-31T21:05:00+00:00'
+record_updated_at: '2026-10-31T21:05:00+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  github_actor: ff6962757

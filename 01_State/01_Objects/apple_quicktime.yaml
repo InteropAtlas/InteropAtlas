@@ -1,0 +1,87 @@
+id: apple_quicktime
+type: artifact
+kind: format
+name_zh: QuickTime 文件格式（QTFF）
+name_en: QuickTime File Format (QTFF)
+description_zh: Apple 定义的原子式媒体文件格式，将 movie 描述、时间和样本位置与媒体样本分离，样本可在同一或不同文件中；本次限定审阅印载 2001-03-01 的经典文档，不代表全部当前功能。
+description_en: Apple-defined atom-based media-file format separating movie description, timing and sample locations
+  from media samples, which may reside in the same or separate files; bounded review of the classic document printed2001-03-01,
+  not all current features.
+external_identifiers:
+- namespace: apple
+  value: quicktime
+official_url: https://developer.apple.com/documentation/quicktime-file-format
+scope_notes_zh: 保留既有 apple_quicktime / apple:quicktime 工作级文件格式主体；apple:quicktime 是 IA 由官方 locator 派生的既有别名，不是 Apple
+  正式标准或文档编号。本次技术审阅限定为 Apple 官方经典 QuickTime File Format 文档，其封面印载 2001-03-01，引言称内容截至 March 2001。该日期只是明确的文档审阅上下文，不赋予所有文件一个通用格式版本，因此本记录不设置
+  version 字段。所捕获 PDF 有 274 页，生成元数据为 2006-07-15，并含 2001/2002 版权文字；不将这些元数据、版权年、2026 网页页脚或采集时间当作格式发布日期。捕获哈希只标识所审字节，不证明
+  URL 或发布物不可变。当前 Apple 官方文档用于佐证文件格式身份和基本结构，但内容可变；其变更记录包含 2007 和 2016 等后续变化，不能以经典文档代表全部当前功能，也不能把顶部 2016-09-13 条目当作整个网站的固定版次。格式以具有长度/类型信息的原子及分层结构组织媒体文件，区分
+  movie 描述、时间信息、样本位置索引与实际媒体样本；经典文档第 17 页明确允许样本在同一或不同文件中，第 24–25 页区分 moov 描述与 mdat 样本。这里是表示结构的文档事实，不保证某个文件有效、外部媒体存在或可访问，也不保证播放器/解析器正确处理未知原子或成功解码。QuickTime
+  File Format 不等同于 QuickTime Player、QuickTime 框架/API、音视频编码器、FCPXML 或 Apple 组织；当前网页的 Framework 渲染元数据也不改变此处 artifact/format
+  的语义分类。ISO-BMFF、MP4、JPEG-2000 等相关格式不因结构相似或历史沿革就等同于本主体，亦不据此建立精确版次依赖。本次没有安装或执行应用、解析器、编解码器、参考代码或媒体样例；未穷尽核查当前/最新完整格式、后续或弃用功能、实现行为、完整符合性、安全、普遍无损或跨应用互通。不主张开放标准、许可或专利授权、认证、部署、推荐、实施采用或
+  IA 采用。本批零技术关系，仅提议一个既有 editing 导航成员；不从媒体类型、API、标准名称、链接或历史关联增加依赖或实现边。
+scope_notes_en: 'Preserves the existing work-level file-format identity apple_quicktime / apple:quicktime. The external
+  identifier is IA''s existing official-locator-derived alias, not an Apple-issued standard or document number.
+  Technical inspection is bounded to Apple''s classic QuickTime File Format document: its cover prints 2001-03-01
+  and the introduction says the content is current as of March2001. This is a document-review context, not a universal
+  version assigned to every QTFF file; no version field is set. The captured PDF has274pages, generation metadata
+  dated2006-07-15 and2001/2002 copyright text. None of those metadata, copyright years, the2026 website footer or
+  capture time is substituted for the printed technical date or used to invent a format release. The capture hash
+  identifies inspected bytes, not immutable publication or URL status. Current official Apple documentation corroborates
+  the format identity and basic structure but remains mutable. Its change log includes later2007 and2016 changes:
+  the classic document does not establish all current features, and the top listed2016-09-13 entry does not freeze
+  the whole website as a2016edition. The format organizes media-file representations through atoms with size/type
+  information and hierarchical structures, separating movie description, timing and sample-location indexing from
+  actual media samples. Classic page17 permits samples in the same or separate files; pages24–25 distinguish moov
+  description from mdat samples. These are documented representation structures, not evidence that a particular
+  file is valid, external media exists or is accessible, or a parser/player correctly handles unknown atoms or decodes
+  samples. QTFF is distinct from QuickTime Player, the QuickTime framework/API, audio/video codecs, FCPXML and the
+  Apple organization. A current documentation renderer''s Framework metadata does not alter this artifact/format
+  classification. Related ISO-BMFF, MP4 and JPEG-2000 subjects are not equated through structural similarity or
+  historical lineage, nor is an exact-edition dependency inferred. No application, parser, codec, reference code
+  or media sample was installed or executed. Current/latest complete revision, later/deprecated features, implementation
+  behavior, full conformance, security, universal losslessness and cross-application interoperability were not exhaustively
+  established. No open-standard, license/patent grant, certification, deployment, recommendation, implementation-adoption
+  or IA-adoption claim is made. This batch has zero technical relations and proposes only one existing editing membership;
+  names, links, APIs, media types and history do not establish dependency or implementation edges.'
+sources:
+- url: https://developer.apple.com/standards/classic-quicktime/
+  title: 'Apple classic QuickTime documentation entry: classic PDF distinguished from current QTFF documentation'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/standards/qtff-2001.pdf
+  title: 'Classic QuickTime File Format, printed2001-03-01: pages1/13 date,17/19 atom and media-description structures,24–25
+    movie description/media samples'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/quicktime-file-format.md
+  title: 'Current mutable QTFF overview: format identity, distinct related file types; Framework is renderer metadata'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/quicktime-file-format/storing_and_sharing_media_with_quicktime_files.md
+  title: 'Current mutable media-storage explanation: media description/index separate from samples; no external-media
+    availability guarantee'
+  language: en
+  accessed: '2026-10-24'
+- url: https://developer.apple.com/documentation/quicktime-file-format/revision_history.md
+  title: 'Current mutable QTFF change log: later2007/2016 entries limit any latest/full-current claim'
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T22:51:36.695640+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded QTFF document-format evidence executor
+record_created_at: '2026-10-24T23:11:52.575593+00:00'
+record_updated_at: '2026-10-24T23:11:52.575593+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI, independent QuickTime intake reviewer (review_quicktime_format_intake)
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: apple_quicktime
+  acceptance_event_id: accept-20261024-quicktime-file-format
+  reviewed_candidate_blob: 19bc4d33e7f255588e766993afb7a0c3dc404e40
+  reviewed_against_commit: 585e08f95422df1d139856e45dceeb12cd28589d
+  candidate_executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 585e08f95422df1d139856e45dceeb12cd28589d
+  reviewed_packet_blob: 1a09e39ea104659ecab6159a80ee9b01f93f7cc5
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/585e08f95422df1d139856e45dceeb12cd28589d/01_State/Inbox/review-packets/quicktime-file-format-20261024.yaml

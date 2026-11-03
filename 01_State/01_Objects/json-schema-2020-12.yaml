@@ -1,22 +1,22 @@
 id: json_schema_2020_12
 record_created_at: "2026-08-30T18:40:26+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-31T19:54:56+00:00"
 metadata_backfilled_at: "2026-09-02T11:23:23+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot, OpenAPI 3.2.1 default-dialect evidence review"
   github_actor: "ff6962757"
 type: standard
 kind: specification
 name_zh: JSON Schema 2020-12
 name_en: JSON Schema 2020-12
 official_name: JSON Schema Draft 2020-12
-description_zh: 用于描述 JSON 数据结构、验证规则和相关语义的规范。InteropAtlas 当前使用 Draft 2020-12 编写自身数据 Schema。
-description_en: A specification for describing JSON document structure, validation rules, and related semantics. InteropAtlas currently uses Draft 2020-12 for its own data schemas.
+description_zh: 用于描述 JSON 数据结构、验证规则和相关语义的规范。InteropAtlas 当前使用 Draft 2020-12 编写自身数据 Schema。OpenAPI 3.2.1 的使用关系仅指 Schema Object 默认方言以此词汇为基础并加入 OAS base vocabulary；不代表整个 OpenAPI 文档、所有 API 载荷或任意验证器完整符合性，资源根可另选方言。
+description_en: A specification for describing JSON document structure, validation rules, and related semantics. InteropAtlas currently uses Draft 2020-12 for its own data schemas. The OpenAPI 3.2.1 use relation concerns only the Schema Object default dialect based on these vocabularies plus the OAS base vocabulary, not the entire OpenAPI document, every API payload or complete conformance of arbitrary validators; resource roots can select another dialect.
 domains:
   - data
 layers:
@@ -47,3 +47,5 @@ sources:
     title: JSON Schema Draft 2020-12
     language: en
     accessed: 2026-08-30
+scope_notes_zh: 本记录的 OpenAPI 3.2.1 uses 入边仅表述其 Schema Object 默认方言使用 Draft 2020-12 通用元模式词汇并加入 OAS base vocabulary，不表示整个 OpenAPI 文档或所有 API 载荷都是 JSON Schema。该方言属于 OAS 3.2 的日期化 URI 系列，此入边不指定某次迭代；资源根 $schema 可覆盖文档默认值，对其他方言的工具支持可选。通用模式校验不证明 OAS 扩展语义、特定工具完整符合性、跨版本兼容或实际 HTTP API 互通；未运行上游工具。既有其他入边仍以各自版本与条件为限。
+scope_notes_en: The incoming OpenAPI 3.2.1 uses edge is limited to its Schema Object default dialect using Draft 2020-12 general-purpose meta-schema vocabularies plus the OAS base vocabulary, not the whole OpenAPI document or all API payloads. That dialect belongs to the dated OAS 3.2 URI series; this edge selects no dated iteration. A resource-root $schema can override the document default, and tool support for other dialects is optional. Generic schema validation establishes neither OAS extension semantics, complete conformance of a particular tool, cross-version compatibility nor actual HTTP API interoperability. No upstream tooling was run. Other incoming edges retain their own version and scope conditions.

@@ -1,0 +1,32 @@
+contract_version: candidate-object-v1
+candidate_id: ffmpeg
+label: FFmpeg multimedia software distribution — fixed release 9.0.2
+publisher: FFmpeg project
+family: system
+kind: software
+external_identifiers:
+- namespace: github
+  value: FFmpeg/FFmpeg
+locators:
+- url: https://ffmpeg.org/
+  role: official
+- url: https://github.com/FFmpeg/FFmpeg
+  role: official
+- url: https://github.com/FFmpeg/FFmpeg/tree/946fcce07b6dcd0331c8cc609192aeff5e1924f8
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - ffmpeg
+  reasons:
+  - Accepted as canonical ffmpeg by accept-20261024-ffmpeg-ffv1. Frozen new-state Candidate e2f6b9e68ed8bcf0892568a62d5582df576dd458
+    and review_required route are replayed against actual ancestor 500cba4cf9a7de6c143010e6b381953bc5c588f4; this
+    back-reference prevents duplicate creation and does not merge subjects.
+  merge_authorized: false
+unknowns:
+- 未构建或执行 FFmpeg、上游 FATE 或任何第三方二进制；实际构建的组件可用性与许可取决于配置和外部库。
+- 只拟关联原生软件 FFV1 编解码的受支持版本 0、1、3 配置；不判定全 RFC 符合性、安全、第三方互通、IA 采用或任意转换无损。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_ffv1_intake

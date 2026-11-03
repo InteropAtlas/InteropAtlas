@@ -1,0 +1,21 @@
+packet_id: python_semver_3_1_20261030
+status: materialized
+reviewed_packet_commit: fb5bb68524de15ae68659135a00506cf176992de
+reviewed_packet_blob: 0fce0b3a6efbbb23caeae69054a9412e9eacc875
+reviewed_packet_path: 01_State/Inbox/review-packets/python-semver-3.1-20261030.yaml
+baseline_commit: 592b7e85abdd8c5faaba1728af7060d83105b020
+executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+acceptance_events: 01_State/Inbox/acceptance-events/python-semver-3.1-20261030.yaml
+objects:
+- candidate_id: python_semver
+  canonical_id: python_semver
+  acceptance_event_id: accept-20261030-python-semver-3-1-python_semver
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/fb5bb68524de15ae68659135a00506cf176992de/01_State/Inbox/review-packets/python-semver-3.1-20261030.yaml
+relations:
+- canonical_id: python_semver_implements_semantic_versioning_2_0_0
+  canonical_path: 01_State/02_Relations/semver-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/fb5bb68524de15ae68659135a00506cf176992de/01_State/Inbox/review-packets/python-semver-3.1-20261030.yaml
+notes_zh:
+- 引用式回执；完整已审字段、固定公共输入与自写可重建脚本保存于真实冻结祖先，不复制第二套正式字段。
+- 仅固定 Python semver 3.1.0 的有界版本语法与优先级操作，保留构造/比较/hash、范围表达、兼容启发式、整数/native 等可见边界；不是完整符合性或真实 API 兼容保证。
+- 沿用 version_expression、syntax 与现有 SemVer 身份；只在正确 memberships 层级新增一项，旧 proposals 与其他顶层字段不变。

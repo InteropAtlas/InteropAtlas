@@ -5,20 +5,32 @@ publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.330
+- namespace: smpte
+  value: st.330
 locators:
-  - url: https://pub.smpte.org/latest/st330/
-    role: official
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+  role: official
+- url: https://smpte-ra.org/umid-information
+  role: official
+- url: https://pub.smpte.org/pub/st330/st330-2022.pdf
+  role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_umid
   reasons:
-    - SMPTE ST 330 specifies the Unique Material Identifier (UMID) for identifying media essence in files and streams.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical smpte_umid by accept-20261024-umid-mxf-package-identity. Frozen new-state Candidate 529ddd43862d666e097891d98e1f309b889d3064
+    and review_required route replay against actual ancestor 482240f94bed85fccbcb7235b819425e893bc82e; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
-unknowns: []
+unknowns:
+- ST 330:2022 是已证实的后续修订；本次不声称 2011 为最新版、所有版本等同或已完成 2022 条文复核，不另建版次对象。
+- 标准的全局唯一性目标不证明任意生成器的实际唯一性、身份认证、权利归属或可信来源；未运行生成器、解析器、媒体软件或符合性/互通测试。
+- MXF 关系仅限 ST 377-1:2019 的 32 字节 Basic UMID Package ID。Source Clip 存在时其 SourcePackageID 有 32 个零字节终止引用链的明确例外，不把它当作普通生成的
+  UMID；Extended UMID 不在该 Package ID 关系内。
+- 原始 MXF PDF 第 8 页 Scope 的 StrikeOut 批注权威和含义未知；保留批注，只使用未受覆盖的下方固定引用及无批注的操作页，不臆造勘误或全面重验既有 MXF 对象。
+- 不从 ST 330:2011 对 ST 336:2007 的引用连接到既有 2017 KLV 对象；其他 UUID、时间码、地理/国家代码及生成方法依赖不在此批。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_umid_package_identity)

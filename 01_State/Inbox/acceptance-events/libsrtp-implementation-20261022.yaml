@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261022-libsrtp-cisco-libsrtp
+candidate_id: cisco_libsrtp
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: cisco_libsrtp
+review:
+  reviewer: Independent Agent — OpenAI / dot / media-transport and libSRTP semantic review
+  reviewed_at: '2026-10-22T16:31:08.562725+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者核验固定 libSRTP 2.8.1 release/tag/commit、5份官方源的Git blob与SHA256、既有RFC3711端点，以及 system/library 主体身份、无碰撞预检与有条件implements关系。
+  - 独立复核保留 mandatory-feature 上游声明而非独立符合性证明、可选后端、调用方策略/密钥/缓冲/错误处理责任、MKI 区别及 README/头文件乱序阈值差异；没有上游运行测试或部署安全、互通、IA采用声明。
+  - 初始语义通过结论于2026-10-22 16:25 UTC收到；随后仅将两语言scope_notes列表逐句同序转为段落字符串并独立复核。reviewed_at记录接受序列化时点，不推测审核耗时。最终精确物化另作结构复核，CI不替代独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/f903230091bbffeb57b2411208f7f80cd9ff8d05/01_State/Inbox/review-packets/libsrtp-implementation-20261022.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/4db9d776805e04d3f3c55e6ee6d84b224d2974cb
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/243d102d05d5eb2b7b21145a5a6c52f468c29746
+decided_at: '2026-10-22T16:31:08.562725+00:00'
+notes:
+- 仅接纳固定核验的 libSRTP 软件库主体、一条有条件 implements RFC3711 关系和既有 media_network 编辑导航；不触碰 identity-risk 候选。
+- 正常Git祖先保留完整已审候选和packet；当前packet为reference-only receipt，不复制Canonical事实。

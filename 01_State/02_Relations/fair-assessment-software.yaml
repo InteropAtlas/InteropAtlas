@@ -1,0 +1,93 @@
+id: fuji_uses_fair_principles_2016
+type: relation
+name_zh: F-UJI 经配置指标使用 FAIR 原则作评估框架（非认证）
+name_en: F-UJI uses FAIR principles through configured assessment metrics (not certification)
+source: fuji
+relation: uses
+target: fair_principles_2016
+context:
+  version_context:
+    source: F-UJI4.0.1 source7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a, selected default FAIRsFAIR metric configuration0.8
+    target: FAIR Guiding Principles2016 publication, DOI10.1038/sdata.2016.18; guidance, not a software conformance
+      specification
+  conditions_zh: 软件把 FAIR 作为方法输入，经可配置 FAIRsFAIR 指标、evaluator 与按原则/类别汇总辅助研究数据评估。源码架构与作者论文共同支持实际 uses，不是把 7 个合成例泛化成全程序证明。17
+    个默认指标项不是全部原则覆盖，A2 被注释，领域/元数据/外部服务/配置影响结果。来源组件 creator:null 或识别命名空间可通过、related-only 失败，score 不证明详细来源或真实性；两个指定
+    URL 的汇总特例见对象 scope。仅 7 个离线组件例实际执行，无完整采集/服务/汇总/上游套件运行。FAIR 是原则非规范；不主张 implements、完整 FAIR/认证、客观统一度量、安全/合法性/质量、PROV-O
+    图符合性、自动修复或 IA 采用。
+  conditions_en: F-UJI takes FAIR as methodological input through configured FAIRsFAIR metrics, evaluators and principle/category
+    summaries. Source architecture and authors' paper support this use, not extrapolation of seven synthetic cases
+    to all-program correctness. Seventeen entries are not complete coverage; A2 is commented out and domain/metadata/external-service/configuration
+    affect results. creator:null or a recognized namespace can pass while related-only fails, so scores do not prove
+    detailed provenance/truth; object scope records two named-URL summary overrides. Only seven offline component
+    cases executed, not complete harvesting/service/summary/upstream suite. No implements/fullFAIR/certification,
+    universal objective measurement, security/legal/quality, PROV-O graph validity, automated repair or IA-adoption
+    claim.
+evidence:
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/README.md#L12-L47
+  title: Declared FAIRsFAIR assessment purpose and metadata/human-interpretation limits
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/yaml/metrics_v0.8.yaml
+  title: Fixed17 metric entries;16 explicit principle fields, F4 in identifier; A2 commented
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L198-L208
+  title: Default0.8 metric configuration and loading
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metric_helper.py#L80-L116
+  title: Metric/test identifier normalization and configuration filtering
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_object_controller.py#L17-L250
+  title: Source-only assessment orchestration, evaluator results and summary
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L638-L731
+  title: Category/principle summaries; explicit two-input-ID score/maturity/status overrides
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator_data_provenance.py#L12-L247
+  title: Actual offline component; key/namespace presence and related-resource limitation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/evaluators/fair_evaluator.py#L56-L198
+  title: Metric/test setup, component evaluation and dictionary results
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/helper/metadata_mapper.py
+  title: Fixed provenance property mappings, not graph validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/models/base_model_.py
+  title: Actual generated model dictionary serialization
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/__init__.py
+  title: Source version discovery and generated-model imports
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/tests/functional/test_evaluation.py
+  title: Unexecuted upstream service tests; not evidence of complete-suite pass
+  language: en
+  accessed: '2026-10-29'
+- url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600246/
+  title: 'F-UJI authors2021 paper: principles-metrics-tests method, Figure1 and reference2 to2016 FAIR; not4.0.1
+    execution'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.nature.com/articles/sdata201618
+  title: FAIR2016 Box2 R1.2 and Principles precede implementation; selected indexed publisher text, not direct HTTP
+  language: en
+  accessed: '2026-10-29'
+  retrieval_method: search_indexed_publisher_text
+  direct_access_verified: false
+last_verified_at: '2026-10-29T11:58:53.092338+00:00'
+last_verified_by: Agent — OpenAI / dot, methodological uses and limited component characterization
+record_created_at: '2026-10-29T12:15:36.581069+00:00'
+record_updated_at: '2026-10-29T12:15:36.581069+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer / root/review_fuji_fair_packet
+  github_actor: ff6962757

@@ -1,0 +1,61 @@
+contract_version: candidate-object-v1
+candidate_id: expat
+label: Expat XML parsing library (2.9.0)
+publisher: Expat maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: libexpat/libexpat
+locators:
+- url: https://github.com/libexpat/libexpat
+  role: official
+- url: https://github.com/libexpat/libexpat/releases/tag/R_2_9_0
+  role: dated
+- url: https://github.com/libexpat/libexpat/tree/a76b1174c1ea52abb639a4c69d52b630a8a106a2
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - expat
+  reasons:
+  - Accepted as canonical expat by accept-20261101-expat-incremental. Frozen new-state Candidate 6db433334377a259e1e425ca6ab7bb5ff7660d67
+    and review_required route are replayed against actual ancestor 613b39eafcdd43e0db833ecebd9cd440d30133c7; back-reference
+    prevents duplicate creation, not identity merging.
+  merge_authorized: false
+unknowns:
+- 'Security source notice: the README in fixed R_2_9_0 explicitly warns that Expat has unfixed security issues and
+  points to upstream issue #1160. That issue was not read for this record; its current status, specific vulnerabilities,
+  fixes and risks across all versions are not assessed. This is neither a security assessment nor a deployment recommendation.
+  Expat is the whole C99 stream-oriented XML parsing library. This record pins 2.9.0 / commit a76b1174c1ea52abb639a4c69d52b630a8a106a2
+  and inspects only caller-supplied chunks, element/character callbacks and suspension/resumption; it does not create
+  a separate internal-parser identity. XML_ParserCreate creates an instance and XML_SetElementHandler/XML_SetCharacterDataHandler
+  store callbacks. XML_Parse/ParseBuffer reaches callProcessor and contentProcessor/doContent, which dispatch actual
+  element and character callbacks. XML_Parse usually copies into an internal buffer, but XML_CONTEXT_BYTES=0 has
+  a direct-processing branch; copying is not universal across builds. Incomplete-token processing can be deferred.
+  An intermediate XML_STATUS_OK does not establish that all supplied input has produced callbacks or that the whole
+  document ultimately parses successfully. The final Parse/ParseBuffer call must set isFinal=true and may provide
+  zero bytes; completion requires no error and no remaining suspension. Character data is not NUL-terminated and
+  contiguous text can be split across callbacks, not one complete text node. XML_StopParser normally must be called
+  inside a callback, except non-resumable abort of an already suspended instance. resumable=true suspends, while
+  false aborts; callbacks can still follow, such as the end callback after an empty-element start. Not-started,
+  already-suspended and finished states have error branches. With XML_DTD, resumable suspension of an external parameter
+  entity is rejected, not a rule about all entities or a security guarantee. XML_ResumeParser must run outside callbacks
+  on a suspended instance and consumes the retained buffer rather than rereading from the beginning; it can suspend
+  again, fail or finish according to saved finalBuffer. Nested child parsers must resume first; parents do not resume
+  automatically. The complete entity-handling chain was not reviewed. Callers must supply valid input lengths, obtain
+  the buffer before ParseBuffer and report only bytes actually filled; capacity checks do not prove those bytes
+  were initialized. Callback pointers are not persistent text ownership: callers copy/manage data they retain, free
+  parser instances and manage their own user data. The fixed README names XML 1.0 Fourth Edition, not the existing
+  2000 Second Edition; no implements/uses or other technical relation is created. Only fixed sources and limited
+  regression-test source were inspected. No upstream installation/build/execution, XML parsing, tests/fuzz or vulnerability
+  reproduction occurred; test source is not a passing test result. Complete XML/namespace/encoding behavior, DTD/XSD
+  validation, XXE/DoS prevention, untrusted-input safety, thread safety, performance, production suitability, third-party
+  interoperability and IA adoption are not established. Existing syntax membership is editorial navigation only;
+  existing XML, GDAL, xmlschema and html5lib subjects are unchanged. MIT records only the fixed COPYING text, not
+  a whole-tree license audit or legal advice. Fixed source identity does not prove release-binary bytes, verified
+  signatures or reproducible builds, and is not a latest-version claim.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed Expat incremental callback semantic review

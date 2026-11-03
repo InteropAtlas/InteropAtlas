@@ -1,0 +1,35 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-oauthlib-authcode
+candidate_id: oauthlib
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: oauthlib
+review:
+  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review
+  reviewed_at: '2026-10-24T14:09:09.973Z'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate 9caf715bdc200e7630e420d4d33f936d498df68d 与 packet 2075eaa57c7c9042372515dff426e4c00f055858；主体为
+    OAuthLib Python 库固定4.0.0，commit145a9a4690cb4d9de30d15fcc2984e34c49df741，不混同社区、HTTP集成、OAuth规范、托管服务或身份认证系统。
+  - 仅接纳 WebApplicationClient 对 RFC6749 授权码请求/响应的构造与解析机制；调用方负责 HTTP/TLS、端点及回调/issuer绑定、同一事务/会话生命周期、重定向URI一致性、客户端认证和凭据/令牌保护。client_id不是认证。
+  - state比较要求真值预期值，高层令牌准备仅在authorization_response为真值时解析回调。PKCE可选/default-plain，S256与challenge/verifier须显式配置并在同一授权事务各阶段传递；已修正原稿可能误读为跨不同事务的中文措辞。
+  - 令牌解析允许JSON/表单回退，token_type严格检查和scope变化检查可配置；不是令牌真实性、JWT或身份验证。保留RFC9700安全边界，不增BCP符合性边、不推荐其他grant或默认值部署。
+  - 独立核对18份来源指纹和13份固定Git源码身份。Python>=3.9取自setup/PyPI而非陈旧README；BSD3声明与可选extras不作法律审计。PyPI归档哈希仅发布方元数据，未下载分发归档或重算哈希。
+  - 作者与独立134+12检查、schema/identity/graph、105个旧事件（95个accepted冻结回放和10个deferred）及适用semantic render/docs检查通过。两个额外legacy
+    renderer诊断复现基线不支持类型错误，不计PASS、不改runtime。
+  - 只检视公开源码及上游测试定义，未安装/导入/运行OAuthLib、构建上游或进行真实网络授权/凭据操作。正常Git fetch已核对真实冻结祖先；六文件物化另需独立结构复核与远端适用CI/E2E。
+  - 时间与复核证据说明：独立报告记载复核完成于 2026-10-24 14:07 UTC；reviewed_at 记录协调者确认该 PASS 的时间 2026-10-24T14:09:09.973Z，而非声称更精确的报告完成时刻。独立报告
+    SHA-256 为 7b930f1910fa6b0fc71faa7cd52dc40c9b9324703c4c780b73f1a44af83fd18e。semantic_review_url 定位真实冻结被审原稿，不单独充当复核结论；PR
+    交接摘要另列独立 Reviewer、精确绑定、已解决措辞发现及检查结果。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/fefff97034ce3e678aec750133da53653607fb2e/01_State/Inbox/review-packets/oauthlib-authcode-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9caf715bdc200e7630e420d4d33f936d498df68d
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/2075eaa57c7c9042372515dff426e4c00f055858
+decided_at: '2026-10-24T14:12:47.220013+00:00'
+notes:
+- 仅接纳一个库对象、一个有界implements关系和一个既有trust成员，不增加能力、协议、其他grant、身份认证profile或改变维护方式。
+- 完整被审原稿保留在真实正常祖先；当前packet仅为引用式回执。全部旧记录/事件、历史底图、PR488、RFC9700、C2PA/PROV-O身份问题、PR498/439/416与Apple/Material范围保持不变。

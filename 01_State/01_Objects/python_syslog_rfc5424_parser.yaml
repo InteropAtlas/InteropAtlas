@@ -1,0 +1,104 @@
+id: python_syslog_rfc5424_parser
+type: system
+kind: library
+name_zh: syslog-rfc5424-parser Python 消息解析库
+name_en: syslog-rfc5424-parser Python message parser library
+official_name: syslog-rfc5424-parser
+version: 0.3.2
+external_identifiers:
+- namespace: github
+  value: EasyPost/syslog-rfc5424-parser
+- namespace: pypi
+  value: syslog-rfc5424-parser
+official_url: https://github.com/EasyPost/syslog-rfc5424-parser
+description_zh: EasyPost 的 Python Syslog 消息解析库，固定 0.3.2（commit 578bf58922a8cb90c3340f072a307721642cb8ff）。本记录以 SyslogMessage.parse(str)
+  经 Lark 文法形成结构化字段、as_dict() 暴露字段的单条文本解析路径为先例，不把整个库重命名为虚构的解析组件。仅检视固定源码与测试配方，未安装、构建或运行上游。不是严格 RFC5424 验证器：PRI 文法接受
+  1–3 位数字（包括前导零及超出 0..191 的值），未识别 facility 标为 unknown；version 接受 1..999，未见按版本分派；时间戳仅匹配字符串形状，不核验日期/时间范围或闰秒，不转换时间。SD
+  名称正则未强制可打印 ASCII，也不验证企业标识；参数值只剥外层引号，未显式执行 RFC5424 特定反转义，导入依赖的 ESCAPED_STRING 实际接受范围未另行核验。重复 SD-ID 未被此路径拒绝；RFC5424
+  允许重复 SD-PARAM，但字典只保留同名参数末值。数字 PROCID 转整数，原有前导零丢失；不是无损解析或任意往返。仅 lark.UnexpectedInput 被转成 ParseError，不保证全部失败使用该异常。库另有字符串序列化方法，本记录不据其插值逻辑主张通用写入或转义保证。历史依赖固定
+  lark-parser==0.6.*；README 的 Python 2.7/3.3+ 与 setup 列出的 2.7/3.4–3.7、release 移除 3.3 的说明有历史差别，不构成当前兼容性承诺。没有接收/分帧/传输、字节解码或
+  UTF-8/BOM 验证、TLS、安全、送达、完整符合性、性能、维护状态、现代依赖兼容性、第三方互通或 IA 采用证明。ISC 仅按固定 LICENSE 记录，不作适用性意见。仅加入既有 observability 编辑导航，不新增
+  implements/uses 关系，不改变已有日志格式化库的 object-only 决定。
+description_en: 'EasyPost Python Syslog message parser library, pinned to 0.3.2 at commit 578bf58922a8cb90c3340f072a307721642cb8ff.
+  This record covers one-message text parsing through SyslogMessage.parse(str), a Lark grammar, structured fields
+  and as_dict(); the whole library is not renamed into a fictional parser component. Fixed source and test recipes
+  were inspected only; no upstream installation, build or execution. Not a strict RFC5424 validator: PRI accepts
+  1–3 digits including leading zeroes and values outside 0..191, with unrecognized facility mapped to unknown; version
+  accepts 1..999 without evident version-specific dispatch. Timestamps are string-pattern matched, not calendar/time-range
+  or leap-second validated or converted. The SD-name regex does not enforce printable ASCII or enterprise identity
+  validity. Parameter values only lose outer quotes, without explicit RFC5424-specific unescaping; the imported
+  dependency ESCAPED_STRING acceptance was not separately verified. Duplicate SD-IDs are not rejected in this path;
+  RFC5424 permits repeated SD-PARAMs, but the dictionary retains only the last same-name value. Digit-only PROCID
+  becomes an integer, losing lexical leading zeroes. No lossless parsing or arbitrary roundtrip is established.
+  Only lark.UnexpectedInput is translated to ParseError; not all failures are promised to use that exception. A
+  separate string serializer exists, but its interpolation does not establish a general writer or escaping guarantee
+  in this slice. Historical dependency lark-parser==0.6.* and README Python 2.7/3.3+ differ from setup classifiers
+  2.7/3.4–3.7 and the release note dropping 3.3; none promises current compatibility. No receiving/framing/transport,
+  byte decoding or UTF-8/BOM validation, TLS, security, delivery, complete conformance, performance, maintenance
+  status, modern dependency compatibility, third-party interoperability or IA adoption is established. ISC is recorded
+  from the fixed LICENSE, not a suitability opinion. Existing observability membership is editorial only; no implements/uses
+  edge is added and the existing formatter object-only decision is unchanged.'
+domains:
+- observability
+open_source: true
+license_expression: ISC
+sources:
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/README.md
+  title: Project identity and historical compatibility/performance claims; not independently tested
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/setup.py
+  title: Package version, identity, license and historical classifiers
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/requirements.txt
+  title: Historical Lark dependency constraint
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/syslog_rfc5424_parser/parser.py
+  title: Grammar and transformer; non-strict validation and representation limits
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/syslog_rfc5424_parser/message.py
+  title: Single text-message parse, dictionaries and separate serialization
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/tests/test_message_parser.py
+  title: Parsing test recipes; inspected, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/tests/test_parser.py
+  title: Grammar test recipes; inspected, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/blob/578bf58922a8cb90c3340f072a307721642cb8ff/LICENSE
+  title: Fixed source license
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/releases/tag/syslog-rfc5424-parser-0.3.2
+  title: Official 0.3.2 release and historical interpreter change
+  language: en
+  accessed: '2026-10-31'
+- url: https://www.rfc-editor.org/rfc/rfc5424.html#section-6
+  title: RFC5424 syntax, PRI, version and structured-data rules; comparisons are static
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T21:23:43+00:00'
+last_verified_by: Agent — OpenAI / dot / fixed syslog parser source inspection only; no upstream execution
+record_created_at: '2026-10-31T21:25:58+00:00'
+record_updated_at: '2026-10-31T21:25:58+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed syslog parser semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_syslog_rfc5424_parser
+  acceptance_event_id: accept-20261031-python-syslog-rfc5424-parser
+  reviewed_candidate_blob: f925f2fdac13e94d1e94a25dff0d451ff6bb8c87
+  reviewed_against_commit: f5ef423741ff2a869e3159b98fe22032af2d6984
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: f5ef423741ff2a869e3159b98fe22032af2d6984
+  reviewed_packet_blob: bba1788f71b1ce18fc09ed88fc89e28121812440
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/f5ef423741ff2a869e3159b98fe22032af2d6984/01_State/Inbox/review-packets/syslog-parser-precedent-20261031.yaml

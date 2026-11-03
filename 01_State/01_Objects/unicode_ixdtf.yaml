@@ -1,0 +1,236 @@
+id: unicode_ixdtf
+type: system
+kind: library
+name_zh: ixdtf 扩展时间戳解析库（0.6.7 源快照）
+name_en: ixdtf extended timestamp parser (0.6.7 source snapshot)
+description_zh: 'ixdtf 是 ICU4X 项目中独立版本的 Rust 解析包；本记录固定官方 ICU4X 2.4.0 commit 031d9e89f6a3fd26a14491e090729d46094328fd
+  中 utils/ixdtf 的 0.6.7 源快照，不把项目发行号等同包版本，也不是整个 ICU/ICU4X、TZDB 或历法库。原 crates.io API 403 后没有重试或绕过；未核验发布 crate 归档、checksum、yank
+  状态或发布包与源码相等，固定 Git 源码不能补足这些未知。
+
+
+  所检路径限新建 IxdtfParser::from_str(...).parse() 的默认 Some handler：先解析独立时区注释，再处理普通 key=value 注释。未知普通非关键 key 被忽略，未知普通关键
+  key 返回 UnrecognizedCritical；这不表示所有关键注释的应用语义已被处理。时区注释返回原始名称或数值偏移及 critical 标志，标志仅捕获而非处理；历法只返回首个 u-ca 的原始值，不保留其
+  critical 标志。所检路径不查询时区数据库或历法规则，不保证名称存在、历法有效或 offset 与 zone 一致，冲突处理仍由调用方承担。重复历法全部排除在原正面范围外，不把代码中的有限首项比较推广为任意重复组合的正确关键语义。
+
+
+  解析 Z 时保留独立的 UtcOffsetRecordOrZ::Z；只有调用方显式调用 resolve_rfc_9557() 才映射为负号、小时 0、分钟 0 的偏移记录，已有数值偏移原样返回。解析成功不是自动计算瞬时值、时区/历法转换或原字符串序列化保证。库还接受日期单独、缺偏移和其他
+  Temporal 形式，因此成功不等于严格 RFC 9557 验证；原正面子集仍限有效四位年、有秒且秒为 00–59、可选至多 9 位小数、显式偏移及至多一个非关键时区和一个非关键 u-ca，不因宽松接受路径扩大此范围。raw
+  from_utf8、UTF-16、自定义 handler、完整无效输入验证和其他语义处理均未纳入。
+
+
+  本次仅核对原证据中七份固定源码指纹并静态阅读相关消费链，把已有具体限制补入可见描述；来源标题原已有部分提示，不是全库审计或新运行。原 #557 的十五份源码、八项静态控制流 trace 与 IA 检查历史保留，trace
+  不是 Rust 执行。没有安装、cargo/build、运行 Rust、输入解析样例、查询时区数据库或执行上游测试、安全及互通实验；不证明完整 RFC 符合性、安全、生产适用性、时钟精度或 IA 采用。
+
+
+  原 scope、24 条来源及日期、独立身份/source_snapshot、创建/intake 和全记录验证时间均保留；本次不重审 RFC/errata、发布/标签/许可历史，不声称最新版。只改变源对象描述；规范反向页仍不展示完整实现条件，能力字段引用也不是新增技术关系，未改变这些展示机制。'
+description_en: 'ixdtf is an independently versioned Rust parser package in ICU4X. This record pins the utils/ixdtf
+  0.6.7 source snapshot in official ICU4X 2.4.0 commit 031d9e89f6a3fd26a14491e090729d46094328fd; the project release
+  number is not the package version, nor is this the whole ICU/ICU4X, TZDB or a calendar library. The original crates.io
+  API 403 was not retried or bypassed. The published crate archive, checksum, yank status and archive/source equality
+  remain unverified; fixed Git source does not fill those unknowns.
+
+
+  The inspected path is a new IxdtfParser::from_str(...).parse() with the default Some handler: it parses the separate
+  time-zone annotation before ordinary key=value annotations. Unknown ordinary non-critical keys are ignored and
+  unknown ordinary critical keys produce UnrecognizedCritical; this does not mean that every critical annotation''s
+  application semantics have been handled. A time-zone annotation returns the raw name or numeric offset and critical
+  flag, which is captured rather than handled. The calendar result contains only the first u-ca raw value, not its
+  critical flag. The inspected path does not query time-zone databases or calendar rules, establish name existence,
+  calendar validity or offset/zone consistency; conflict handling remains the caller''s responsibility. Repeated
+  calendars remain entirely outside the original positive scope; limited first-item comparison is not generalized
+  to correct critical semantics for arbitrary duplicate combinations.
+
+
+  Parsing Z preserves the distinct UtcOffsetRecordOrZ::Z variant. Only an explicit caller invocation of resolve_rfc_9557()
+  maps it to an offset record with negative sign, hour 0 and minute 0; existing numeric offsets are returned unchanged.
+  Successful parsing is not automatic instant calculation, time-zone/calendar conversion or original-string serialization.
+  The parser also accepts date-only, missing-offset and other Temporal forms, so success is not strict RFC 9557
+  validation. The original positive subset remains valid four-digit years, explicit seconds 00–59, optional at most
+  nine fractional digits, an explicit offset and at most one non-critical time-zone annotation and one non-critical
+  u-ca; permissive acceptance paths do not broaden this scope. Raw from_utf8, UTF-16, custom handlers, exhaustive
+  invalid-input validation and other semantic processing are excluded.
+
+
+  This supplement checks original fingerprints of seven fixed source files and statically reads the relevant consumption
+  chains to make recorded limitations visible. Source titles already signaled some details; this is not a whole-library
+  audit or a new execution. Original #557 history of fifteen source files, eight static control-flow traces and
+  IA checks remains; traces are not Rust runs. No installation, cargo/build, Rust execution, parser input examples,
+  time-zone database query, upstream tests or security/interoperability experiments were performed. Full RFC conformance,
+  security, production suitability, clock accuracy and IA adoption are not established.
+
+
+  Original scope, 24 sources/access dates, independent identity/source_snapshot, creation/intake and whole-record
+  verification time remain unchanged. RFC/errata and release/tag/license history are not re-reviewed here, and no
+  latest-version claim is made. Only source-object descriptions change: the standard reverse page still omits full
+  implementation conditions, and the capability-field reference is not a new technical relation. Those display mechanisms
+  are unchanged.'
+version: 0.6.7
+external_identifiers:
+- namespace: crates_io
+  value: ixdtf
+official_url: https://github.com/unicode-org/icu4x/tree/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf
+versions:
+- version: 0.6.7
+  status: source_snapshot
+  url: https://github.com/unicode-org/icu4x/tree/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf
+domains:
+- time
+- information_interchange
+capabilities:
+- date_time_representation
+open_source: true
+license_expression: Unicode-3.0
+scope_notes_zh: 主体仅为 utils/ixdtf 的独立版本 Rust package，不是整个 ICU4X/ICU/Unicode、组织、TZDB 或完整历法库。官方 icu@2.4.0 标签指向 031d9e89f6a3fd26a14491e090729d46094328fd，package
+  Cargo.toml 标为 0.6.7 与 independent=true；这里只核实该官方源快照，不把 ICU4X 2.4.0 等同于 ixdtf 版本。crates.io API 返回 403，未重试/绕过；没有核验
+  0.6.7 crate 归档、registry checksum、yank 状态或发布包与源码相等，不声称 latest/已测试发行包。Unicode-3.0 仅据固定 workspace manifest 与 LICENSE。
+  源码证据限定新建 UTF-8 IxdtfParser::from_str(...).parse() 的默认 Some handler，以及调用方显式调用 UtcOffsetRecordOrZ::resolve_rfc_9557()。正面输入子集为有效
+  RFC 式四位年 YYYY-MM-DD、T、HH:MM:SS（秒 00–59）、可选 1–9 位点分小数、Z 或 ±HH:MM；可选一个放在前面的非关键时区注释及一个非关键 u-ca，名称/值和相互一致性由调用方约束。记录返回日期/时间/偏移、时区原始名称或数值偏移、首个历法原始值；未知普通非关键
+  key 被忽略，未知普通关键 key 返回 UnrecognizedCritical。Z 保留为单独枚举，只有显式 helper 才映射为负零偏移，已有正/负数值偏移原样返回；不是自动计算瞬时值或保留原字符串的序列化保证。
+  parser 同时接受日期单独、基本/扩展年、缺偏移和其他 Temporal 形式，成功不等于严格 RFC 验证。时区 critical 标志只捕获不处理，时区名无需在数据库存在，offset/zone 一致性留给应用；历法不查询
+  CLDR/转换，u-ca 结果不保留其 critical 标志。不声明处理关键时区或关键历法的应用语义。重复历法全部排除在正面范围外：代码与首项比较，两个值不同且首项/当前项关键时会报错，但相同重复关键项不会更新首项状态，不能推广成任意重复组合的正确关键语义。下划线实验
+  key、全部注册 key、无效输入穷尽验证、其他时间精度/闰秒、自定义 handler、UTF-16、duration、写入、时区/历法解析和规则查询均未纳入。只静态阅读源码与上游测试文本，代表性输入是源路径推演而非 Rust
+  运行；未安装、构建、执行测试或互通、安全、生产适用性、时钟同步/精度、IA 采用验证。 实验下划线key在默认路径并不作RFC§3.2专门拒绝；时区.、..或slash后数字等词法外输入也不能作为严格拒绝保证。代码消费超过9位的小数，最多累计前18位且位数饱和255；正面≤9是本次证据范围，不是声称其他精度被拒绝。raw
+  from_utf8和UTF-16均不在此from_str子集中。
+scope_notes_en: 'Only the independently versioned utils/ixdtf Rust package, not the ICU4X/ICU/Unicode project as
+  a whole, an organization, TZDB or full calendar library. Official tag icu@2.4.0 points to 031d9e89f6a3fd26a14491e090729d46094328fd;
+  the package manifest declares 0.6.7 and independent=true. This is the official source snapshot, not a conflation
+  of package and ICU4X versions. The crates.io API returned403 and was not retried or bypassed. No 0.6.7 crate archive,
+  registry checksum, yank status or archive/source equality was verified; no latest/tested-distribution claim. Unicode-3.0
+  is recorded only from the fixed workspace manifest and LICENSE. Static scope is a fresh UTF-8 IxdtfParser::from_str(...).parse()
+  using its default Some handler, plus explicit caller invocation of UtcOffsetRecordOrZ::resolve_rfc_9557(). Positive
+  input subset: valid RFC-style four-digit YYYY-MM-DD, T, HH:MM:SS with seconds00–59, optional1–9 decimal fractional
+  digits, Z or ±HH:MM; optional one leading elective time-zone annotation and one elective u-ca, with names/values
+  and consistency constrained by the caller. It returns date/time/offset, raw zone name or numeric offset, and the
+  first raw calendar value. Unknown ordinary elective keys are ignored; unknown ordinary critical keys yield UnrecognizedCritical.
+  Z remains a separate variant until the explicit helper maps it to negative-zero offset; numeric offsets are returned
+  unchanged. This is not instant calculation or source-spelling preservation through serialization. The parser additionally
+  accepts date-only/basic/expanded-year/offset-optional and other Temporal forms; success is not strict RFC validation.
+  Time-zone critical flags are captured, not acted on, names need not exist in a database and offset/zone consistency
+  is application work. Calendars are not CLDR-validated or converted; the returned u-ca value loses its critical
+  flag. No application semantics for critical zone/calendar tags is claimed. Repeated calendars are entirely outside
+  the positive scope: comparisons use the first item; differing first/current values fail if either item is critical,
+  but an identical later critical item does not update the first-item state, so arbitrary duplicate sequences are
+  not certified. Experimental underscore keys, all registered keys, exhaustive invalid-input rejection, other precisions/leap
+  seconds, custom handlers, UTF-16, duration, writing, time-zone/calendar resolution and rule lookup are excluded.
+  Only fixed source and upstream test text were read; representative inputs are source traces, not Rust execution.
+  No installation/build/test execution, interoperation, security, production suitability, synchronization/accuracy
+  or IA adoption claim. Default handling does not specially reject experimental underscore keys under RFC section3.2.
+  Zone forms such as dot/dot-dot or a digit after slash are not strictly rejected. Fraction parsing consumes more
+  than9 digits, accumulating only the first18 with a digit count saturating at255; the positive at-most9 restriction
+  is review scope, not a rejection claim. Raw from_utf8 and UTF-16 are outside this from_str subset.'
+sources:
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/Cargo.toml
+  title: Independent ixdtf package0.6.7 in fixed source tree
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/Cargo.toml#L110-L128
+  title: ICU4X workspace identity and inherited license metadata
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/LICENSE
+  title: Unicode License V3 at fixed source commit
+  language: en
+  accessed: '2026-10-29'
+- url: https://api.github.com/repos/unicode-org/icu4x/git/ref/tags/icu%402.4.0
+  title: Official ICU4X2.4.0 lightweight tag ref — exact source commit, not crate archive verification
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L18-L24
+  title: ixdtf explicit RFC9557 and Z-update identification
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/mod.rs#L83-L138
+  title: UTF-8 from_str and parse default Some handler into operative parser
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/datetime.rs#L41-L107
+  title: Date/time/offset and annotation parse path with end-of-input check
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/annotations.rs#L29-L122
+  title: Operative annotation fields, first-calendar comparison and unknown critical rejection
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/timezone.rs#L26-L145
+  title: Time-zone critical flag captured, lexical name parsing without database resolution
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L11-L24
+  title: Returned intermediate fields; calendar value only
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/records.rs#L203-L222
+  title: Explicit resolve_rfc_9557 helper maps Z to negative-zero; numeric offsets unchanged
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/time.rs#L95-L193
+  title: Time/fraction helpers; no actual leap-second validation and fractions wider than the positive scope
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/grammar.rs#L7-L34
+  title: Annotation and zone character predicates; not complete semantic validation
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/core.rs#L120-L127
+  title: Cursor end-of-input check
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/encoding.rs#L63-L85
+  title: Utf8 byte access and exact u-ca key check; raw bytes are not an independent UTF8 validator
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/lib.rs#L283-L372
+  title: Documented application responsibility and custom-handler critical-treatment boundary
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L265-L325
+  title: Upstream annotation/critical/duplicate tests inspected as source, not executed
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/unicode-org/icu4x/blob/031d9e89f6a3fd26a14491e090729d46094328fd/utils/ixdtf/src/parsers/tests.rs#L1097-L1144
+  title: Upstream Z test expects Z variant, not automatic helper conversion; not executed
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-2
+  title: RFC9557 updated Z-offset semantics
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.2
+  title: Experimental underscore keys require controlled-experiment handling; excluded
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.3
+  title: Elective/critical and repeated-key semantics; bounded comparison only
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-3.4
+  title: Offset/zone consistency is not performed by this parser
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+  title: Annotation syntax, with zone names and excluded dot components
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-5
+  title: u-ca calendar presentation semantics; raw parsing is not calendar resolution
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T09:48:40.903709+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded fixed-source ixdtf and RFC comparison
+record_created_at: '2026-10-29T10:00:11.821045+00:00'
+record_updated_at: '2026-11-01T17:10:16.684756+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_ixdtf_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / ixdtf_semantics and ixdtf_structure
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: unicode_ixdtf
+  acceptance_event_id: accept-20261029-ixdtf-rfc9557-unicode_ixdtf
+  reviewed_candidate_blob: c7f7f756fdde02a4bc28185501502bf5c158313d
+  reviewed_against_commit: c064f98ebd0ffdf4ac982c2a10b9235bd5dc1c19
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: c064f98ebd0ffdf4ac982c2a10b9235bd5dc1c19
+  reviewed_packet_blob: aeecececa33497921163f6ef0270556d6188d55e
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/c064f98ebd0ffdf4ac982c2a10b9235bd5dc1c19/01_State/Inbox/review-packets/ixdtf-rfc9557-parser-20261029.yaml

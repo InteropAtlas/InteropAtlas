@@ -1,22 +1,22 @@
 id: uri_rfc3986
 record_created_at: "2026-08-30T18:40:48+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: '2026-10-31T20:19:46+00:00'
 metadata_backfilled_at: "2026-09-02T11:23:23+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
   github_actor: "ff6962757"
 type: standard
 kind: specification
 name_zh: URI 通用语法（RFC 3986）
 name_en: URI Generic Syntax (RFC 3986)
 official_name: "Uniform Resource Identifier (URI): Generic Syntax"
-description_zh: 定义统一资源标识符（URI）的通用语法。InteropAtlas 在 Schema 的 $id、来源链接和未来资源标识中依赖 URI 概念。
-description_en: Defines the generic syntax of Uniform Resource Identifiers (URIs). InteropAtlas relies on URI concepts for schema identifiers, source links, and future resource identification.
+description_zh: 定义统一资源标识符（URI）的通用语法。InteropAtlas 在 Schema 的 $id、来源链接和未来资源标识中依赖 URI 概念。 OpenAPI 3.2.1 的 uses 入边只限定 API 描述引用的基 URI 规则，含相对 $self 和 Schema Object 的额外规则；不等于 API 端点 URL 规则、网络取回保证或互通证明。
+description_en: Defines the generic syntax of Uniform Resource Identifiers (URIs). InteropAtlas relies on URI concepts for schema identifiers, source links, and future resource identification. The OpenAPI 3.2.1 uses edge is limited to base-URI rules for API-description references, including relative $self and additional Schema Object rules, not API-endpoint URL rules, guaranteed network retrieval or demonstrated interoperability.
 domains:
   - web
   - identifiers
@@ -40,7 +40,13 @@ versions:
     status: internet_standard
     url: https://www.rfc-editor.org/rfc/rfc3986.html
 sources:
+  - url: https://spec.openapis.org/oas/v3.2.1.html#establishing-the-base-uri
+    title: OpenAPI 3.2.1 — section 4.1.2.2.1 RFC 3986 base determination, relative self identifiers, and optional retrieval
+    language: en
+    accessed: '2026-10-31'
   - url: https://www.rfc-editor.org/info/rfc3986/
     title: RFC 3986 - URI Generic Syntax
     language: en
     accessed: 2026-08-30
+scope_notes_zh: 另据 3.2.1 的描述引用规则，API 描述中的 URI 标识引用按 RFC 3986 确定基 URI；相对 $self 先按下一基址来源解析，Schema Object 还遵循其 JSON Schema $id 规则。标识不等于网络取回地址或 API 调用，取回支持可选，不保证可获取性、安全性或工具互通。 仅限定 OpenAPI 3.2.1 入边，其他入边仍按各自文献和条件解释。
+scope_notes_en: Under the separately checked 3.2.1 description-reference rules, API-description URI identifiers use RFC 3986 base-URI determination; a relative $self is first resolved against the next base source, and Schema Objects additionally follow their JSON Schema $id rules. Identification is not network retrieval or an API call. Retrieval support is optional, without guarantees of accessibility, safety or tooling interoperability. This limits only the OpenAPI 3.2.1 incoming edge; other incoming edges retain their own documents and conditions.

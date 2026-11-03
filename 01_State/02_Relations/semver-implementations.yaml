@@ -1,0 +1,67 @@
+id: python_semver_implements_semantic_versioning_2_0_0
+type: relation
+name_zh: Python semver 有界实现 SemVer 版本语法与优先级
+name_en: Python semver implements bounded SemVer version syntax and precedence
+source: python_semver
+relation: implements
+target: semantic_versioning_2_0_0
+context:
+  capabilities:
+  - version_expression
+  version_context:
+    source: Python semver 3.1.0 at 642d1bc8949d38cca7922df478d0f2c06513f99d
+    target: Existing Semantic Versioning 2.0.0; fixed normative source f99d5485190a47c0863949e7da810a5553e0ed4d,
+      not a new edition
+  conditions_zh: 仅固定 Python semver 3.1.0 的默认严格解析及宿主整数限制内的有效 SemVer 字符串优先级；version_expression 不证明 API 兼容或完整发布/递增义务。可选补零、构造/replace/集合转换不是严格语法；无效构造值可相等而
+    hash 不同。有效 build 被优先级忽略，相等不是词法身份。match 是六单比较符/裸版本而非 npm range；is_valid 可传播 TypeError；is_compatible 是有方向的字段启发式。UTF-8/Python整数限制适用，超长数字先行字段可解析后比较失败。可选
+    native 自动导入只影响严格 parse，ValueError 回退；实际 backend 未运行，替代函数不是 native 试验。仅八个运行文件跨 source/wheel/sdist 相同；有限探针及上游一项
+    native skip 不证明完整符合性、真实兼容、安全、生产推荐、IA 采用或未来保证。完整中英操作边界在可见 description 保留。
+  conditions_en: Only default strict parsing and precedence of valid SemVer strings within host integer limits in
+    fixed Python semver 3.1.0. version_expression is not API testing or all release/increment obligations. Optional
+    zero filling and constructor/replace/collection coercion are not strict grammar; invalid constructed values
+    can compare equal with different hashes. Valid build is ignored for precedence, not lexical identity. match
+    is six single operators/bare equality, not npm ranges; is_valid can propagate TypeError; is_compatible is a
+    directional field heuristic. UTF-8/Python integer limits apply, including huge numeric prerelease parse-success/comparison-failure.
+    Optional native autoimport affects strict parse with ValueError fallback; no real backend ran, and substitutions
+    are not native testing. Only eight runtime files match source/wheel/sdist. Finite observations/upstream with
+    one native skip do not prove full conformance, real compatibility, security, production suitability, IA adoption
+    or future guarantees. Full operative Chinese/English limits remain visible in description.
+evidence:
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/README.rst
+  title: Python semver 3.1.0 — Official library identity and SemVer link
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/version.py
+  title: Python semver 3.1.0 — Parser, precedence, coercion, match, compatibility and native dispatch
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/pyproject.toml
+  title: Python semver 3.1.0 — Package and Python requirement, optional native dependency
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/src/semver/__about__.py
+  title: Python semver 3.1.0 — Fixed source version identity
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/python-semver/python-semver/blob/642d1bc8949d38cca7922df478d0f2c06513f99d/.pytest.ini
+  title: Python semver 3.1.0 — Upstream tests/docs and import/coverage configuration
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/semver/3.1.0/
+  title: PyPI semver 3.1.0 — release artifacts and upload date
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/semver/semver/blob/f99d5485190a47c0863949e7da810a5553e0ed4d/semver.md
+  title: Semantic Versioning 2.0.0 — fixed rules 1–11 and grammar
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T05:24:52.412106+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; bounded fixed
+  implementation evidence, not full conforms_to
+record_created_at: '2026-10-30T05:44:34.416837+00:00'
+record_updated_at: '2026-10-30T05:44:34.416837+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
+  github_actor: ff6962757

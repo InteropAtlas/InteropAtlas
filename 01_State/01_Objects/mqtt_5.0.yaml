@@ -3,8 +3,13 @@ type: artifact
 kind: protocol
 name_zh: MQTT 5.0 发布订阅消息协议
 name_en: MQTT Version 5.0
-description_zh: 定义客户端与服务器之间采用发布订阅模式的消息协议。
-description_en: Defines a client-server messaging protocol using the publish/subscribe pattern.
+description_zh: 定义客户端与服务器之间采用发布订阅模式的消息协议。 本记录相接的 Mosquitto 2.1.2 先例仅限已有 active MQTT5 会话中的 SUBSCRIBE 处理、条件性订阅登记和
+  SUBACK 构造/入队；不是连接建立、送达或完整协议/安全/互通证明。源码未运行，ACL/插件/配置/资源条件及属性处理边界适用。
+description_en: Defines a client-server messaging protocol using the publish/subscribe pattern. The linked Mosquitto
+  2.1.2 precedent is limited to SUBSCRIBE handling, conditional subscription registration and SUBACK construction/queueing
+  in an already-active MQTT5 session, not connection establishment, delivery or full protocol/security/interoperability
+  evidence. Sources were not run; ACL/plugin/configuration/resource conditions and property-handling boundaries
+  apply.
 version: '5.0'
 external_identifiers:
 - namespace: oasis
@@ -14,19 +19,59 @@ versions:
 - version: '5.0'
   status: oasis_standard
   url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
-scope_notes_zh: 固定OASIS 5.0规范；未逐条审核服务质量、安全配置或实现兼容性。
-scope_notes_en: The fixed OASIS 5.0 specification; QoS details, security configurations and implementation compatibility are outside this review.
+scope_notes_zh: '固定OASIS 5.0规范；未逐条审核服务质量、安全配置或实现兼容性。
+
+
+  Mosquitto 2.1.2 局部实现边界：仅据固定 2.1.2 源码，记录已有 active MQTT5 会话的 broker SUBSCRIBE 处理：检查选定标志、标识符、属性与过滤器/选项，经配置、ACL/订阅插件及资源条件后登记订阅，并按原请求标识符和过滤器顺序构造
+  SUBACK、交给 packet__queue；入队不等于 socket 写入、对端收到或消息交付。监听器 mount point 可改写过滤器；错误可以中止路径，不保证每个输入均成功。此路径不处理 User Property，SUBACK
+  不添加 Reason String 或 User Property；这些是选中代码的范围，不是全部 MQTT5 符合性裁决。仅检视源码与测试配方，未安装、构建或运行 broker/client、连接网络或执行互通测试。不主张完整
+  CONNECT/认证/会话生命周期、全部 PUBLISH 路由及 QoS 交付、retained/shared 消息交付、持久化、bridge、TLS/安全审计、任意构建或部署兼容性、性能、第三方互通或 IA 采用；未研究的功能不表示软件缺失。'
+scope_notes_en: 'The fixed OASIS 5.0 specification; QoS details, security configurations and implementation compatibility
+  are outside this review.
+
+
+  Mosquitto 2.1.2 bounded implementation: From fixed 2.1.2 sources only, limited to broker SUBSCRIBE processing
+  in an already-active MQTT5 session: selected flags, identifiers, properties and filter/options checks, subscription
+  registration subject to configuration, ACL/subscribe-plugin and resource conditions, then SUBACK construction
+  using the request identifier and filter order and submission to packet__queue. Queueing is not socket writing,
+  peer receipt or message delivery. Listener mount points may rewrite filters; errors can terminate the path and
+  not every input succeeds. This path does not handle User Property, and SUBACK adds no Reason String or User Property;
+  these are selected-code boundaries, not a verdict on complete MQTT5 conformance. Source and test recipes were
+  inspected only: no broker/client installation, build, execution, network connection or interoperability exercise.
+  No complete CONNECT/authentication/session lifecycle, all PUBLISH routing or QoS delivery, retained/shared-message
+  delivery, persistence, bridge behavior, TLS/security audit, arbitrary-build or deployed compatibility, performance,
+  third-party interoperability or IA adoption is established; unreviewed functions are not asserted absent.'
 sources:
 - url: https://docs.oasis-open.org/mqtt/mqtt/v5.0/os/mqtt-v5.0-os.html
   title: MQTT 5.0 OASIS Standard
   language: en
   accessed: '2026-09-13'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L47-L99
+  title: Active-session requirement, identifier/property checks and User Property boundary
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L101-L173
+  title: Selected filter/options checks and requested QoS cap
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/handle_subscribe.c#L176-L277
+  title: Configuration, ACL/plugin, registration and ordered SUBACK path
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/subs.c#L565-L617
+  title: Operative subscription registration routing
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/eclipse-mosquitto/mosquitto/blob/99fa50f30e325609394c324c8ff71cfbbe95d8ab/src/send_suback.c#L29-L58
+  title: SUBACK construction and queueing; property omissions
+  language: en
+  accessed: '2026-10-31'
 record_created_at: '2026-09-13T15:14:23+00:00'
-record_updated_at: '2026-09-13T15:14:23+00:00'
+record_updated_at: '2026-10-31T21:49:44+00:00'
 latest_substantive_contribution:
-  initiator: Human — ff6962757
-  executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-  reviewer: pending independent serialization review
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Mosquitto broker fixed-source semantic review
   github_actor: ff6962757
 intake_provenance:
   candidate_id: mqtt_5.0

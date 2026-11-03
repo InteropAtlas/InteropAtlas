@@ -1,0 +1,85 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-timecode-dpx-smpte_st12_1
+candidate_id: smpte_st12_1
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: smpte_st12_1
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)
+  reviewed_at: '2026-10-29T07:12:03Z'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 smpte_st12_1，审阅候选 blob a66197a37cb6cc7bc0af70fdd2fe02339886c39d。
+  - 新独立语义 PASS 绑定精确 packet dace3a1f43f9f12937eb7a5cda8206e1fd6e9ba6；两既有工作级标准身份、固定 2014 版、一个 DPX 字段/版次有界 uses 和两个既有编辑导航成员。独立
+    Reviewer 上下文不同于当前作者，非作者自检或普通代码评审无发现。
+  - 独立报告 SHA256 f537de825db97ed3fac2b313d904fd58a1f427a72828a482c7942d24f957026c；绑定清单 SHA256 9454e0a78e13708d7318154dc5c4a149b4ae9673414b5896544fb42d28beb305。reviewed_at
+    为 Reviewer 实际封存时间。semantic_review_url 指向真实冻结且仍为 pending 的原稿；该原稿自身不是批准，审核结果和身份在本事件与交付 PR 独立记录。
+  - ST 12-1:2014 批准日 2014-02-20；范围区分时间地址/二进制组/标志与 LTC/VITC 结构，VITC 调制/位置仅限所列模拟系统。不将 ST 12-2 ATC 或 D-VITC 并入本标准主体。
+  - DPX 固定 2014-11-01 批准文献，含 2015-01-15 Table 5B 纠正，2017-05-22 从 ST 268:2014 重编号为 ST 268-1:2014 且内容未变。保留 smpte:st.268，不创建别名/版次主体、身份合并或所有版次等同。Stable
+    封页不是撤销、最新版本或现行技术推荐。
+  - DPX §2 明确 ST 12-1:2014；§6.2 的非核心字段 58/59 分别是偏移 1920/1924 的 4 字节 U32，以 Table 6 表示时间码与用户位。未知正确值按 §4.3 必须填 UNDEFINED，U32
+    为 FFFFFFFF hex；核心读取器可不读。不是每个文件都含有效时间码或完整 LTC/VITC 信号。
+  - 无 MXF、ST 268-2、ATC、其他旧版引用或软件实现关系扩张。没有 UTC 同步、完整符合性、设备/安全认证、跨实现互通、部署或 IA 采用结论。
+  - 原始官方 PDF 经作者和 Reviewer 独立重算指纹及有限章节阅读；DPX physical page 比 printed page 大 1。未改批注、再抓取、复制标准全文入库、执行媒体工具或上游代码。捕获者未记录最终跳转
+    URL/HTTP 状态，不将其伪造为已核实。
+  - 准备阶段作者 134 unittest、12 custom、20 overlapping standalone、10 Markdown/docs 检查通过；121 旧事件审计含 111 accepted 冻结回放及
+    10 deferred，与基线 JSON 相同。静态投影保留全部既有对象页与 203 搜索记录。此为自检，不冒充独立复核。
+  - 可选 V1 fixture 保留基线相同 3/17 失败，P5 1/1 通过；30 既有静态链接问题未新增。本地 Chromium 曾在加载页面前被拒，本片不重试/绕过，不声称本地浏览器或交互测试通过。
+  - 现有 renderer 展示端点/谓词但不完整展示 relation context；两端对象 scope 明示固定版本、非核心/非信号传输/非符合性边界，完整关系条件留在 Canonical YAML。不修改 renderer。最终物化需独立结构复核和实际
+    head CI。
+  - 正常远端 fetch 验证真实冻结提交、单一父提交、精确候选与 packet 字节。不得压平或重建冻结历史；不改变 schema、治理、总体设计、维护机制、持有候选或其他历史事实。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/11b0e4c5462e374f509363dfdd7f033d6a7c9028/01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/a66197a37cb6cc7bc0af70fdd2fe02339886c39d
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/dace3a1f43f9f12937eb7a5cda8206e1fd6e9ba6
+decided_at: '2026-10-29T07:14:22.373152+00:00'
+notes:
+- 两对象、一有界关系、两既有导航成员的批次；本事件只对应一个 Candidate，不重复接纳。
+- 243 旧对象、184 旧关系、121 旧事件及历史覆盖快照保持原字节；真实冻结祖先保存完整原稿。
+---
+contract_version: acceptance-event-v1
+event_id: accept-20261029-timecode-dpx-smpte_st268_dpx
+candidate_id: smpte_st268_dpx
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: smpte_st268_dpx
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)
+  reviewed_at: '2026-10-29T07:12:03Z'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 smpte_st268_dpx，审阅候选 blob c6d332bbe6c9214fa123682ea9177fb9442c01ea。
+  - 新独立语义 PASS 绑定精确 packet dace3a1f43f9f12937eb7a5cda8206e1fd6e9ba6；两既有工作级标准身份、固定 2014 版、一个 DPX 字段/版次有界 uses 和两个既有编辑导航成员。独立
+    Reviewer 上下文不同于当前作者，非作者自检或普通代码评审无发现。
+  - 独立报告 SHA256 f537de825db97ed3fac2b313d904fd58a1f427a72828a482c7942d24f957026c；绑定清单 SHA256 9454e0a78e13708d7318154dc5c4a149b4ae9673414b5896544fb42d28beb305。reviewed_at
+    为 Reviewer 实际封存时间。semantic_review_url 指向真实冻结且仍为 pending 的原稿；该原稿自身不是批准，审核结果和身份在本事件与交付 PR 独立记录。
+  - ST 12-1:2014 批准日 2014-02-20；范围区分时间地址/二进制组/标志与 LTC/VITC 结构，VITC 调制/位置仅限所列模拟系统。不将 ST 12-2 ATC 或 D-VITC 并入本标准主体。
+  - DPX 固定 2014-11-01 批准文献，含 2015-01-15 Table 5B 纠正，2017-05-22 从 ST 268:2014 重编号为 ST 268-1:2014 且内容未变。保留 smpte:st.268，不创建别名/版次主体、身份合并或所有版次等同。Stable
+    封页不是撤销、最新版本或现行技术推荐。
+  - DPX §2 明确 ST 12-1:2014；§6.2 的非核心字段 58/59 分别是偏移 1920/1924 的 4 字节 U32，以 Table 6 表示时间码与用户位。未知正确值按 §4.3 必须填 UNDEFINED，U32
+    为 FFFFFFFF hex；核心读取器可不读。不是每个文件都含有效时间码或完整 LTC/VITC 信号。
+  - 无 MXF、ST 268-2、ATC、其他旧版引用或软件实现关系扩张。没有 UTC 同步、完整符合性、设备/安全认证、跨实现互通、部署或 IA 采用结论。
+  - 原始官方 PDF 经作者和 Reviewer 独立重算指纹及有限章节阅读；DPX physical page 比 printed page 大 1。未改批注、再抓取、复制标准全文入库、执行媒体工具或上游代码。捕获者未记录最终跳转
+    URL/HTTP 状态，不将其伪造为已核实。
+  - 准备阶段作者 134 unittest、12 custom、20 overlapping standalone、10 Markdown/docs 检查通过；121 旧事件审计含 111 accepted 冻结回放及
+    10 deferred，与基线 JSON 相同。静态投影保留全部既有对象页与 203 搜索记录。此为自检，不冒充独立复核。
+  - 可选 V1 fixture 保留基线相同 3/17 失败，P5 1/1 通过；30 既有静态链接问题未新增。本地 Chromium 曾在加载页面前被拒，本片不重试/绕过，不声称本地浏览器或交互测试通过。
+  - 现有 renderer 展示端点/谓词但不完整展示 relation context；两端对象 scope 明示固定版本、非核心/非信号传输/非符合性边界，完整关系条件留在 Canonical YAML。不修改 renderer。最终物化需独立结构复核和实际
+    head CI。
+  - 正常远端 fetch 验证真实冻结提交、单一父提交、精确候选与 packet 字节。不得压平或重建冻结历史；不改变 schema、治理、总体设计、维护机制、持有候选或其他历史事实。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/11b0e4c5462e374f509363dfdd7f033d6a7c9028/01_State/Inbox/review-packets/timecode-dpx-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/c6d332bbe6c9214fa123682ea9177fb9442c01ea
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/dace3a1f43f9f12937eb7a5cda8206e1fd6e9ba6
+decided_at: '2026-10-29T07:14:22.373152+00:00'
+notes:
+- 两对象、一有界关系、两既有导航成员的批次；本事件只对应一个 Candidate，不重复接纳。
+- 243 旧对象、184 旧关系、121 旧事件及历史覆盖快照保持原字节；真实冻结祖先保存完整原稿。

@@ -1,0 +1,160 @@
+id: axe_core
+type: system
+kind: library
+name_zh: axe-core JavaScript 无障碍测试引擎
+name_en: axe-core JavaScript accessibility testing engine
+description_zh: 'axe-core 是 JavaScript 无障碍测试引擎库，本记录固定 4.14.0 / commit e797173108eadfa4355fe06af331791734e1757f；不是组织、浏览器扩展、商业平台或认证服务。仅记录选定呈现状态和启用规则的有界自动检查，不把规则结果等同于页面或网站完整符合性。
+
+
+  标准结果区分 passes、violations、incomplete 与 inapplicable：没有匹配内容与通过不同，不确定项需要进一步检查和人工复核，没有 violations 不证明符合性。报告器可改变输出格式或内容；include/exclude、runOnly、规则开关与上下文会改变检查范围。固定规则选择源码先排除非完整页面上下文的
+  page-level 规则，再依次处理按 rule 的 runOnly、显式规则 enabled、tag 选择和默认规则。标签不证明默认启用；固定目录说明 WCAG 2.2、AAA、experimental 与 deprecated
+  组默认禁用，target-size 虽有 wcag22aa/wcag258 标签却 enabled=false，增强对比度也默认禁用。显式 rule/tag 选择可改变默认集，但仍受各自选择条件约束。
+
+
+  固定文档的已呈现内容包含视觉隐藏但仍呈现的内容；未激活或未呈现的交互状态须激活后另行检查。被测 iframe 需要引擎，配置不自动广播到各 frame。README 声明 JSDOM 支持有限，其中 color-contrast
+  不可用；这些是该固定文档的边界，不是本次浏览器、辅助技术或网站实测。package engines.node>=4、.nvmrc=24 与构建检查 Node 24+ 是不同声明，不能互相替代为已验证运行兼容性。
+
+
+  原 #531 的静态来源核验与 IA 检查保持为历史；本次只重新静态阅读九份固定源码/文档，与旧证据及 Git tree 匹配，不重做原全部来源核验。未验证 npm 分发字节、安装、构建或执行 axe/上游测试，未运行浏览器、审计网站或把
+  axe 接入 IA。既有 MPL-2.0 与第三方许可通知边界保留，不新增法律适配、发行构建相等、签名、当前维护或安全评估。
+
+
+  不主张 WCAG、WAI-ARIA 或 ACT Rules Format 的完整实现、检出百分比、零误报、法律合规、辅助技术互通、生产适用或 IA 采用。原 scope、身份、十份来源及访问日期、创建/intake 和全记录核验日期保留；既有
+  provides 关系不扩展，也不添加 capabilities 字段。源对象描述补充不修复能力查询未枚举该关系或能力反向页不显示条件的既有限制，不改变 UI、搜索或视角，不重启工作区无障碍审计。'
+description_en: 'axe-core is a JavaScript accessibility testing engine library, pinned here to 4.14.0 at commit
+  e797173108eadfa4355fe06af331791734e1757f, not an organization, extension, commercial platform or certification
+  service. This record covers bounded automatic checks of selected rendered states and enabled rules; rule results
+  do not establish complete page or site conformance.
+
+
+  Standard results distinguish passes, violations, incomplete and inapplicable: no matching content is not a pass,
+  uncertainty needs further testing and manual review, and no violations does not establish conformance. Reporters
+  may change output format/content; include/exclude, runOnly, rule switches and context change checking scope. Fixed
+  rule-selection code first excludes page-level rules in non-page contexts, then handles rule-based runOnly, explicit
+  per-rule enabled, tag selection and defaults in that order. Tags do not prove default activation. The fixed catalog
+  marks WCAG 2.2, AAA, experimental and deprecated groups disabled by default; target-size has wcag22aa/wcag258
+  tags but enabled=false, and enhanced contrast is also default-disabled. Explicit rule/tag selection can change
+  defaults, subject to its selection conditions.
+
+
+  Fixed documentation includes visually hidden but rendered content among rendered content; inactive or non-rendered
+  interaction states require activation and separate checks. Tested iframes need the engine, and configuration is
+  not automatically broadcast to frames. README documents limited JSDOM support, including unavailable color-contrast
+  checking. These are fixed documented limits, not new browser, assistive-technology or website experiments. Package
+  engines.node>=4, .nvmrc=24 and the Node24+ build guard are distinct declarations, not interchangeable proof of
+  runtime compatibility.
+
+
+  Original #531 static-source verification and IA checks remain historical. This supplement only statically reinspects
+  nine fixed source/documentation files matching old evidence and the Git tree; it does not redo the full original
+  source review. npm distribution bytes are not verified; axe/upstream tests were not installed, built or executed,
+  no browser or website audit ran and axe was not integrated into IA. Existing MPL-2.0 and third-party notice boundaries
+  remain, without new licensing-suitability, release-build equality, signature, current-maintenance or security
+  findings.
+
+
+  Complete WCAG, WAI-ARIA or ACT Rules Format implementation, detection percentages, zero false positives, legal
+  compliance, assistive-technology interoperability, production suitability and IA adoption are not asserted. Original
+  scope, identity, ten sources/access dates, creation/intake and whole-record verification dates remain intact.
+  The existing provides relation is not expanded and no capabilities field is added. This source-description supplement
+  does not fix the capability query''s omission of that relation or missing reverse-page conditions, change UI/search/views
+  or reopen the workspace accessibility audit.'
+version: 4.14.0
+external_identifiers:
+- namespace: github
+  value: dequelabs/axe-core
+- namespace: npm
+  value: axe-core
+official_url: https://github.com/dequelabs/axe-core/tree/e797173108eadfa4355fe06af331791734e1757f
+versions:
+- version: 4.14.0
+  status: released
+  url: https://github.com/dequelabs/axe-core/releases/tag/v4.14.0
+open_source: true
+license_expression: MPL-2.0
+scope_notes_zh: 主体为 axe-core 库，不是 Deque 组织、浏览器扩展、商业产品或认证服务。轻量标签 v4.14.0 解析到固定 commit e797173108eadfa4355fe06af331791734e1757f；release
+  元数据标记 immutable=false，故证据固定 commit，不声称最新版本、签名验证或可复现构建。axe.run 检查选定的已呈现内容（包括视觉隐藏但仍呈现的内容），标准结果区分 passes、violations、incomplete
+  与 inapplicable；不确定项需人工复核，没有违规不证明符合性。include/exclude、runOnly、规则开关、页面上下文、报告器及环境改变检查或结果范围；非完整页面上下文不运行 page-level
+  规则。未激活或未呈现的隐藏交互状态须激活后另行检查，被测 iframe 需加载引擎，配置不自动广播到各 frame。JSDOM 支持有限，其中 color-contrast 不可用；上游浏览器支持声明未经本轮实测。固定目录说明
+  WCAG 2.2、AAA、experimental 和 deprecated 规则默认禁用；target-size 虽含 wcag22aa/wcag258 标签但 enabled=false，增强对比度同样默认禁用，显式
+  rule/tag 选择可改变默认规则集。package.json 的 engines.node>=4 是包声明；源码 .nvmrc=24 与构建检查要求 Node 24+，不能据此把开发要求当成所有调用环境的要求或反向宣称
+  Node 4 已验证可用。MPL-2.0 是项目声明，第三方 MIT/ISC 通知单独保留，不是许可适配或法律审计。npm 分发字节未验证，也未安装、运行、构建或执行上游测试。只提供有界自动测试能力，不声称实现 WCAG、WAI-ARIA、ACT
+  Rules Format，亦无完整符合性、检出百分比、零误报、法律合规、安全、辅助技术互通或 IA 采用结论。
+scope_notes_en: 'The subject is the axe-core library, not Deque as an organization, an extension, commercial platform
+  or certification service. Lightweight tag v4.14.0 resolves to commit e797173108eadfa4355fe06af331791734e1757f;
+  release metadata says immutable=false, so evidence is pinned to the commit, without latest-version, signature-verification
+  or reproducible-build claims. axe.run checks selected rendered content, including visually hidden rendered content.
+  Standard results distinguish passes, violations, incomplete and inapplicable; uncertain results need manual review,
+  and no violations does not establish conformance. Context inclusion/exclusion, runOnly, rule switches, page context,
+  reporters and environment alter checking or reporting scope; page-level rules are omitted for non-page contexts.
+  Inactive/non-rendered hidden interaction states must be activated and checked separately. Tested iframes need
+  the engine, and configuration is not automatically broadcast to frames. JSDOM support is limited, including unavailable
+  color-contrast checking; publisher browser-support statements were not independently tested. The fixed catalog
+  marks WCAG 2.2, AAA, experimental and deprecated rules disabled by default: target-size has wcag22aa/wcag258 tags
+  but enabled=false, and enhanced contrast is also default-disabled. Explicit rule/tag selection can change defaults.
+  Package engines.node>=4 is a declaration, distinct from .nvmrc=24 and the Node24+ build/test guard; neither is
+  a verified runtime-compatibility result. The project declares MPL-2.0, while third-party MIT/ISC notices remain
+  separate, not a licensing-suitability audit. npm distribution bytes were not verified; no package installation,
+  execution, build or upstream tests occurred. This bounded automated-testing capability does not assert implementation
+  of WCAG, WAI-ARIA or ACT Rules Format, complete conformance, a detection percentage, zero false positives, legal
+  compliance, security, assistive-technology interoperability or IA adoption.'
+sources:
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/package.json
+  title: Fixed axe-core package identity, version, JavaScript entry point, Node declaration and MPL-2.0
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/README.md#L15-L19
+  title: Rule families and manual-review boundary, not an independently measured detection rate
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/README.md#L37-L91
+  title: Rendered interaction states, frame inclusion and limited JSDOM support
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/doc/API.md#L37-L73
+  title: 'API scope: rendered content, selected states and engine inclusion'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/releases/tag/v4.14.0
+  title: Official release 4.14.0, published 2026-10-05; mutable release metadata
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/dequelabs/axe-core/git/ref/tags/v4.14.0
+  title: Lightweight release tag resolution to the fixed commit
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/.nvmrc
+  title: Fixed development Node version 24
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/build/check-node-version.mjs
+  title: Build/test Node major-version guard, distinct from package engines
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/LICENSE
+  title: Project MPL-2.0 license declaration
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/dequelabs/axe-core/blob/e797173108eadfa4355fe06af331791734e1757f/LICENSE-3RD-PARTY.txt
+  title: Separate third-party MIT and ISC notices
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T13:22:02.682553+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed axe-core source evidence executor
+record_created_at: '2026-10-24T13:31:13.025037+00:00'
+record_updated_at: '2026-11-01T11:58:25.825804+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_axe_core_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / axe_core_semantics and axe_core_structure
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: axe_core
+  acceptance_event_id: accept-20261024-axe-core-accessibility
+  reviewed_candidate_blob: 8986cc786edf4b43b7af4c1dc66f80567074dba4
+  reviewed_against_commit: 58179e90bc708335ac94ad0b45719311a7c37331
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 58179e90bc708335ac94ad0b45719311a7c37331
+  reviewed_packet_blob: e61c1de0c72569d9536dfac9cde20b27b7e8adf3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/58179e90bc708335ac94ad0b45719311a7c37331/01_State/Inbox/review-packets/axe-core-accessibility-20261024.yaml

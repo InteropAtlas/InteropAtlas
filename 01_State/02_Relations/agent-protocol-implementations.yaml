@@ -1,0 +1,55 @@
+id: mcp_python_sdk_implements_mcp_2025_11_25
+type: relation
+name_zh: MCP Python SDK 1.26.0 实现日期版 MCP 客户端与服务端接口
+name_en: MCP Python SDK 1.26.0 implements dated MCP client and server interfaces
+source: mcp_python_sdk
+relation: implements
+target: mcp_2025_11_25
+context:
+  version_context:
+    source: MCP Python SDK 1.26.0, upstream commit 3d9d34552a9ab8988acf8d06e4a705bd799fc32b
+    target: Model Context Protocol Specification 2025-11-25
+  conditions_zh: 限定为固定版本官方源码和文档记录的客户端/服务端会话、初始化协商以及工具、资源、提示接口。该版本的 LATEST_PROTOCOL_VERSION 为 2025-11-25，不把源码符号名理解为今天的最新版本；支持旧日期版不等于会话无须协商，具体功能取决于双方声明的能力及配置。Tasks
+    仍按实验 API 处理；本关系不证明所有可选功能或所有传输的完整符合性、授权配置安全或第三方互通。13 个纯内存示例仅为补充验证，不是协议认证，也不将 JSON Schema/JSON-RPC/JSON 引用路径传递成额外
+    implements 结论。
+  conditions_en: Limited to client/server sessions, initialization negotiation and tool, resource and prompt interfaces
+    documented in the fixed official source. Its LATEST_PROTOCOL_VERSION is 2025-11-25, not a claim about the latest
+    version today. Supporting older dated versions does not remove session negotiation; actual features depend on
+    declared peer capabilities and configuration. Tasks remain experimental APIs. This relation does not certify
+    every optional feature or transport, secure authorization configuration or third-party interoperability. Thirteen
+    in-memory examples are supplementary verification, not protocol certification, and JSON Schema/JSON-RPC/JSON
+    reference paths are not promoted transitively into additional implements claims.
+evidence:
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/README.md
+  title: MCP Python SDK 1.26.0 — client/server SDK identity, resources, tools, prompts and documented transports
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/types.py
+  title: MCP Python SDK 1.26.0 — LATEST_PROTOCOL_VERSION = 2025-11-25 and message types
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/shared/version.py
+  title: MCP Python SDK 1.26.0 — supported dated protocol versions
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/client/session.py
+  title: MCP Python SDK 1.26.0 — initialization, capability negotiation and protocol-version check
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/server/session.py
+  title: MCP Python SDK 1.26.0 — server initialization version selection
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/docs/experimental/tasks.md
+  title: MCP Python SDK 1.26.0 — Tasks are experimental and APIs may change without notice
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T01:37:53.060395+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed-version MCP SDK evidence executor
+record_created_at: '2026-10-21T01:41:23.011171+00:00'
+record_updated_at: '2026-10-21T01:41:23.011171+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757

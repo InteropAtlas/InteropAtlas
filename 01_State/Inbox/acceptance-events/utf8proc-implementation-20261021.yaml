@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-utf8proc-utf8proc
+candidate_id: utf8proc
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: utf8proc
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T11:49:58.099624+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者已读完整候选/proposed 与固定 README、header、iterate/codepoint_valid/encode_char 源码及许可全文。
+  - 从七份固定官方源在独立目录构建，无 stderr，重跑22项可信合成内存例成功；核查非负显式长度、四字节输出及 surrogate 编码与解码的不同契约。
+  - 认可独立 library、既有 text_encoding 和 syntax 导航；relations 空，Unicode 18.0 与现有17.0端点分开，代码/数据许可分开记录且不猜 SPDX 表达式。
+  - 独立语义结论于2026-10-21 11:48 UTC传达，11:49 UTC核对两处显式十六进制范围修正；reviewed_at为执行方记录收到结论的时点，不推测审核耗时。精确序列化不作为新的语义审核，CI不替代独立审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/502
+- https://github.com/InteropAtlas/InteropAtlas/blob/df326520011ccef4fa3cb7f4a33722dd48fe9779/01_State/Inbox/review-packets/utf8proc-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ac69c50c18b7b66759c9eff1712361da1d7ea8bf
+decided_at: '2026-10-21T11:52:48.218274+00:00'
+notes:
+- 接纳固定 utf8proc 2.12.0 独立 C 库，不与 Unicode 规范或其他语言绑定合并；当前候选回指仅防止重复创建。
+- 单码点编解码及码点范围检查不等同全字符串验证、字符已分配、应用安全、完整 Unicode 符合性、第三方互通或 IA 采用；不建立任何技术关系。

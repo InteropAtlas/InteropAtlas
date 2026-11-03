@@ -31,6 +31,8 @@ jobs:
       - name: Build semantic human-readable site
         run: |
           python 02_Runtime/01_Engine/render_site_semantic.py --root . --output build/site
+          python 02_Runtime/01_Engine/maintenance_dashboard.py --output build/site --refresh
+          test -f build/site/maintenance.html
           test -f build/site/objects/automated_build_deployment.html
           test -f build/site/objects/forgejo_actions.html
           test -f build/site/objects/yaml_1.2.2.html

@@ -1,0 +1,56 @@
+id: smpte_st268_dpx_uses_smpte_st12_1
+type: relation
+name_zh: DPX电视信息头使用SMPTE时间码与用户位表示
+name_en: DPX television headers use SMPTE time-code and user-bit representation
+source: smpte_st268_dpx
+relation: uses
+target: smpte_st12_1
+context:
+  version_context:
+    source: SMPTE ST 268-1:2014 (originally ST 268:2014), approved 2014-11-01, Table 5B corrected 2015-01-15; 2017
+      renumbering has unchanged content
+    target: SMPTE ST 12-1:2014, approved 2014-02-20; exact dated normative reference, existing work-level smpte:st.12-1
+  conditions_zh: 仅固定 ST 268-1:2014（原 ST 268:2014）电视信息头的非核心字段 58/59：§2 明确引用 ST 12-1:2014；§6.2 将时间码与用户位分别设为偏移 1920
+    与 1924 的 4 字节 U32 字段，并指向 Table 6 的表示。Table 6 沿用 SMPTE 12M 标签；不是另指一个已审阅的旧版目标或完整 LTC/VITC 波形。§4.3 的核心读取器可不读这些非核心字段，正确值未知时写入方必须填
+    UNDEFINED；§4.2 对 U32 指定 FFFFFFFF hex。不能把未定义值当有效时间码，不能推导每个 DPX 文件都存在有效时间码或所有核心实现都读取它们。关系是有版次与字段条件的规范 uses，不是时间码信号运输、强制运行时依赖、所有版本兼容、图像/软件完整符合性、UTC
+    同步、认证或 IA 采用。其他 DPX 规范引用、MXF、ATC、ST 268-2 和软件实现均不增加边。
+  conditions_en: Limited to non-core fields 58/59 in the fixed ST 268-1:2014 (formerly ST 268:2014) television header.
+    Section 2 cites exactly ST 12-1:2014; section 6.2 places time code and user bits in four-byte U32 fields at
+    offsets 1920 and 1924, respectively, using Table 6 representation. Table 6 retains SMPTE 12M labels; this does
+    not select a separately reviewed older endpoint or describe complete LTC/VITC waveforms. Section 4.3 allows
+    core readers not to read non-core fields and requires writers to use UNDEFINED when a correct non-core value
+    is unknown; section 4.2 gives FFFFFFFF hex for U32. Undefined is not valid time code, and neither valid time
+    code in every DPX file nor consumption by every core implementation follows. This is a version- and field-conditioned
+    normative uses relation, not signal transport, a mandatory runtime dependency, all-edition compatibility, complete
+    image/software conformance, UTC synchronization, certification or IA adoption. No edges for other DPX references,
+    MXF, ATC, ST 268-2 or implementations are added.
+evidence:
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=4
+  title: ST 268:2014 printed p3 §§1–2 — DPX scope and exact ST 12-1:2014 reference
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=10
+  title: ST 268:2014 printed p9 §§4.2–4.3 — undefined values and non-core boundaries
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=13
+  title: ST 268:2014 printed p12 §6.2 — fields 58/59
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=19
+  title: ST 268:2014 printed p18 Table 6 — time-code and user-bit representation
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=6
+  title: ST 12-1:2014 §1 — time-code structure distinct from complete transport implementations
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T07:01:52.390409+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded DPX/time-code representation evidence review
+record_created_at: '2026-10-29T07:14:22.373152+00:00'
+record_updated_at: '2026-10-29T07:14:22.373152+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_timecode_dpx_packet)
+  github_actor: ff6962757

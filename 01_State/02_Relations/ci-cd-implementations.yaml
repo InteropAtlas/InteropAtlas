@@ -1,14 +1,14 @@
 id: forgejo_actions_alternative_to_github_actions
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T17:42:11.431947+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / collaboration agent /root/review_forgejo_evidence_scope"
   github_actor: "ff6962757"
 type: relation
 name_zh: Forgejo Actions 是 GitHub Actions 的替代实现
@@ -30,3 +30,48 @@ conditions_en: >-
   model and many workflows can migrate with small changes, but Forgejo explicitly does not target full
   compatibility, so this relation is not modeled as compatible_with.
 confidence: 0.95
+context:
+  version_context:
+    source: Existing work-level Forgejo Actions system identity, not a fixed older release. Added evidence
+      is restricted to Forgejo documentation under /docs/v17.0/, observed 2026-10-29; versioned documentation
+      is not asserted to be immutable or an installed/tested software build.
+    target: Existing work-level GitHub Actions system identity; GitHub.com OIDC documentation observed 2026-10-29,
+      not a claim about every GitHub Enterprise Server release.
+    comparison_boundary: Preserves the existing repository-workflow/CI/CD alternative scope and original bilingual
+      conditions. The new concrete example concerns documented OIDC enablement settings, workflow/job precedence
+      and the Forgejo fork pull_request restriction. It is not a general permissions mapping, a compatibility
+      guarantee for actions or workflows, a measured migration-success rate, or proof of provider trust/token
+      exchange, deployed runner behavior or IA adoption. The v17.0-specific behavior is not projected onto
+      earlier or later Forgejo versions.
+evidence:
+- url: https://forgejo.org/docs/v17.0/user/actions/github-actions/#familiarity-instead-of-compatibility
+  title: Forgejo v17.0 documentation, observed 2026-10-29 — familiar repository/YAML/runner model and intended
+    migration ease, not full compatibility or measured migration success
+  language: en
+  accessed: '2026-10-29'
+- url: https://forgejo.org/docs/v17.0/user/actions/github-actions/#known-list-of-differences
+  title: 'Forgejo v17.0 documented difference — OIDC enable-openid-connect rather than GitHub permissions:
+    id-token: write; the list is explicitly incomplete'
+  language: en
+  accessed: '2026-10-29'
+- url: https://forgejo.org/docs/v17.0/user/actions/reference/#enable-openid-connect
+  title: Forgejo v17.0 workflow-level OIDC enablement — ID-token request variables; disabled for pull_request
+    events from forks
+  language: en
+  accessed: '2026-10-29'
+- url: https://forgejo.org/docs/v17.0/user/actions/reference/#jobsjob_idenable-openid-connect
+  title: Forgejo v17.0 job-level OIDC enablement — overrides workflow setting; the same fork pull_request restriction
+    applies
+  language: en
+  accessed: '2026-10-29'
+- url: https://forgejo.org/docs/v17.0/user/actions/security-openid-connect/#prerequisites
+  title: Forgejo v17.0 OIDC prerequisites — external-system trust is separate from enabling ID-token requests
+  language: en
+  accessed: '2026-10-29'
+- url: https://docs.github.com/en/actions/how-tos/secure-your-work/security-harden-deployments/oidc-in-cloud-providers#adding-permissions-settings
+  title: 'GitHub.com OIDC documentation, observed 2026-10-29 — workflow/job permissions id-token: write permits
+    requesting an OIDC token, not resource-write authority; external trust and token exchange remain separate'
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T17:42:11.431947+00:00'
+last_verified_by: Agent — OpenAI / dot / Forgejo GitHub scoped-evidence executor

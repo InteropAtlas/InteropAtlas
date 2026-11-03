@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-ttml1-second-edition-2013
+candidate_id: ttml1_second_edition_2013
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: ttml1_second_edition_2013
+review:
+  reviewer: Independent Agent — OpenAI / dot / timed-text semantic review
+  reviewed_at: '2026-10-24T10:06:02+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义审核通过精确 Candidate 81ed4cbc53cf527a46ba40fd06c2b02d162a7a00 与 packet 5063349ac9266a294067906c73133d2978fb119b，核对固定
+    TTML1 第二版身份、EBU 1.0.1 规范引用、两条 uses 条件、三个既有端点及来源。
+  - 独立确认 w3c_ttml2 已是工作级端点；IMSC 1.2 的 2020-01-28 第二版 CR 上下文不等同于 2018 Recommendation，不合并版次或推出宽泛兼容性。Text/Image 约束分开，既有对象不改写。
+  - 语义复核先于远端冻结；正常 Git fetch 后核对真实祖先 SHA、完整字节与 blob。三个 W3C 原始字节指纹复验；EBU 固定 PDF 通过官方文本抽取核对，原始下载 403 无哈希，不绕过或虚构。最终六文件另作独立结构复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/0978b73300a69cc33abbf2b8610dbdcadb9d7a29/01_State/Inbox/review-packets/timed-text-representation-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/81ed4cbc53cf527a46ba40fd06c2b02d162a7a00
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/5063349ac9266a294067906c73133d2978fb119b
+decided_at: '2026-10-24T10:09:37.543455+00:00'
+notes:
+- 仅接受一个固定 TTML1 格式对象、两条有界 uses 关系及一个既有 editing 导航成员；不改变 domains、capability、谓词、taxonomy、schema、治理、页面或维护方式。
+- 正常祖先保留被审原稿；当前 packet 仅引用式回执。其他项目与快照发布不在本次范围内。

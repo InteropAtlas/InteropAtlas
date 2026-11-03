@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-mcp-python-sdk-mcp_python_sdk
+candidate_id: mcp_python_sdk
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: mcp_python_sdk
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T01:39:21+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者直接读取固定 types 常量、shared/version、两端初始化协商、README、Tasks 实验警告、pyproject 与 MIT 许可，并核验 11 个官方文件的 blob/SHA；审查主体、字段、版本和限制，接受
+    ordinary intake。
+  - 最终候选与冻结审核包逐字节复核通过；被审 proposed_record 原样物化，仅追加生命周期、贡献及接纳溯源。后续序列化检查与这次语义审核分开。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/471
+- https://github.com/InteropAtlas/InteropAtlas/blob/af265ff5fad43332bdcea22483b9486d45cb68b3/01_State/Inbox/review-packets/mcp-python-sdk-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/54cf36fadafa6856981dfff0e896a11353c2fc78
+decided_at: '2026-10-21T01:41:23.011171+00:00'
+notes:
+- 接纳独立 MCP Python SDK 软件库与固定 1.26.0 证据，不与协议规范、组织或部署产品合并；不新增或强配 capability。
+- 包内唯一 implements 关系限定到既有 2025-11-25 协议端点，保留协商、能力配置和实验功能边界；不证明全可选功能、网络传输、授权安全或第三方互通。

@@ -1,0 +1,23 @@
+packet_id: umid_mxf_package_identity_20261024
+status: materialized
+reviewed_packet_commit: 482240f94bed85fccbcb7235b819425e893bc82e
+reviewed_packet_blob: d8744538a0d6dc1041145b564e71fb692dc5de96
+reviewed_packet_path: 01_State/Inbox/review-packets/umid-mxf-package-identity-20261024.yaml
+baseline_commit: 9fef55fe423bb7c21466984ddde441ce2c35185d
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/umid-mxf-package-identity-20261024.yaml
+objects:
+- candidate_id: smpte_umid
+  canonical_id: smpte_umid
+  acceptance_event_id: accept-20261024-umid-mxf-package-identity
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/482240f94bed85fccbcb7235b819425e893bc82e/01_State/Inbox/review-packets/umid-mxf-package-identity-20261024.yaml
+relations:
+- proposal_id: smpte_mxf_uses_smpte_umid
+  canonical_relation_id: smpte_mxf_uses_smpte_umid
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/482240f94bed85fccbcb7235b819425e893bc82e/01_State/Inbox/review-packets/umid-mxf-package-identity-20261024.yaml
+notes_zh:
+- 引用式回执；完整标准/关系、源指纹与导航提案保留在真实正常祖先 commit/blob。
+- 保持工作级 ST 330 身份，固定 2011；2022 后续修订不替代或等同受审端点。
+- MXF 2019 的 32 字节 Basic Package ID、抽象 Generic Package 必需 UID、条件 Source Clip 与全零终止哨兵严格区分；无 Extended 扩大或唯一性/认证/权利/可信来源保证。
+- MXF Scope 批注不确定性保留，使用未覆盖的下方日期引用及独立无批注操作页；旧 MXF/KLV 字节不改。
+- 不因 ST 336:2007 引用连接到已接纳的 2017 KLV。仅一关系、一 metadata 成员，无上游执行、完整符合性或其他范围扩张。

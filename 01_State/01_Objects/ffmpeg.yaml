@@ -1,0 +1,213 @@
+id: ffmpeg
+type: system
+kind: software
+name_zh: FFmpeg 多媒体软件发行体
+name_en: FFmpeg multimedia software distribution
+description_zh: 包含用于处理音视频、字幕及相关元数据的库和工具的软件发行体；本记录固定 9.0.2，记录其原生软件 FFV1 编解码，以及 HLS 播放列表读取与未加密 MPEG-TS 片段解复用路由的有界实现证据。
+  另记录在所列条件下，未加密大端 DPX 2.0 单元素 10-bit RGB method-A、encoding=0 的软件解码静态源码对应；未编译运行，不代表完整/核心符合性、写入或时间码支持。
+  2026-10-31 的局部补证仅静态检视同一固定版本的旧式 libswscale 系数路径。SWS_CS_ITU709 为索引 1，其表注释明确写 Rec.709 (1990)；SWS_CS_DEFAULT 为索引 5，不是 709。sws_getCoefficients 对负数、大于 10 或索引 8 回退默认表，而索引 0/2/3（分别标为无 sequence_display_extension、未指定、保留）仍直接取表，不能当通用输入验证器。sws_setColorspaceDetails 接收独立输入/输出系数表、src/dst range 和 16.16 亮度/对比度/饱和度，调用者须检查返回码；所选旧式初始化在未设置条件成立时使用默认表和中性修正，不外推所有新 frame API 或 CLI 元数据默认。实际表初始化消费系数并按有限/全范围调整亮度或色度、应用修正、整数移位与裁剪；不是仅列出 API 名称。所核最小消费链为已初始化、同尺寸 YUV422P→RGB24 的 C fallback：无 resize/filter，满足格式/range 分派条件、未设 SWS_ACCURATE_RND、Bayer/auto dither、偶数输出高度，且架构优化未先替代该回调；sws_scale 经 convert_unscaled 消费 table_rV/table_gU/table_gV/table_bU。调用方还负责有效 planes/strides/slices 与上下文；这些前提不证明任意格式、尺寸、构建或后端均走此路径。矩阵和范围控制不等于 transfer/gamma、primaries、色适应、HDR/tone mapping 或端到端色彩管理。1990 表标签不被改写为 BT.709-6 身份；即使有限系数算术相合，也不证明该版规范符合性或逐像素精确/无损输出。本补证未安装、构建、运行 FFmpeg/FATE、媒体或网络测试，不建立性能、安全、第三方互通、生产适用性或 IA 采用；排除范围不表示整个 FFmpeg 缺少其他路径。不新增标准关系，也不刷新整条记录的 last_verified_at。
+description_en: A distribution of libraries and tools for processing audio, video, subtitles and related metadata;
+  pinned to 9.0.2 here, with bounded evidence for native software FFV1 encoding/decoding and HLS playlist reading
+  with unencrypted MPEG-TS segment demux routing. Also records static-source correspondence for software decoding
+  of unencrypted big-endian DPX 2.0 with one 10-bit RGB method-A element and encoding 0, under the stated conditions.
+  Not built or run; no full/core conformance, writing or timecode-support claim.
+  The partial 2026-10-31 supplement statically inspects only the same fixed release’s legacy libswscale coefficient path. SWS_CS_ITU709 is index 1, explicitly labeled Rec.709 (1990) in the table; SWS_CS_DEFAULT is index 5, not 709. sws_getCoefficients falls back for negative indices, values above 10 or index 8, while indices 0/2/3 (labeled no sequence_display_extension, unspecified and reserved respectively) still directly select table rows; it is not a general input validator. sws_setColorspaceDetails takes separate input/output coefficient tables, src/dst range and 16.16 brightness/contrast/saturation, and callers must check its return value. The selected legacy initialization uses the default table and neutral corrections only under its unset-state condition, not a statement about all newer frame APIs or CLI metadata defaults. Table initialization actually consumes the coefficients, adjusts luma or chroma for limited/full range, applies corrections and integer shifts/clipping. The smallest inspected consumer chain is an initialized same-size YUV422P-to-RGB24 C fallback, without resizing/filtering, satisfying format/range dispatch gates, without SWS_ACCURATE_RND, with Bayer/auto dithering and even output height, and only when architecture-specific optimization has not selected another callback; sws_scale reaches convert_unscaled and the table_rV/table_gU/table_gV/table_bU consumers. Callers also provide valid planes/strides/slices and context; these conditions do not establish this path for arbitrary formats, dimensions, builds or backends. Matrix/range controls are not transfer-function/gamma, primaries, chromatic-adaptation, HDR/tone-mapping or end-to-end color management. The 1990 table label is not relabeled BT.709-6, and finite coefficient arithmetic correspondence is not edition conformance or pixel-exact/lossless output evidence. No FFmpeg/FATE installation, build, execution, media or network test was performed for this supplement; no performance, security, third-party interoperability, production-suitability or IA-adoption claim. Exclusions do not imply absence of other FFmpeg paths. No standard relation is added and full-record last_verified_at is unchanged.
+version: 9.0.2
+external_identifiers:
+- namespace: github
+  value: FFmpeg/FFmpeg
+official_url: https://ffmpeg.org/
+versions:
+- version: 9.0.2
+  status: released
+  url: https://github.com/FFmpeg/FFmpeg/tree/n9.0.2
+open_source: true
+scope_notes_zh: 主体是整个软件发行体，不是社区、单一 CLI、FFV1 规范或另立的 libavcodec 对象。官方镜像的注释标签 n9.0.2（tag object ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3）指向
+  commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8，RELEASE 为 9.0.2；不声称最新版本。FFV1 部分仅从固定公开源码检视原生 libavcodec FFV1 软件编码器和解码器，关系限定于
+  RFC 9043 的版本 0、1、3 及受支持像素格式/配置；v3 编码设置 micro-version 4，排除实验性 2/4、Vulkan 与其他硬件路径。编译选项可禁用组件，原生 FFV1 选择内部 rangecoder，不等于整个发行体无外部依赖。固定
+  LICENSE.md 说明主要为 LGPL-2.1-or-later，启用可选 GPL、version3 或外部库可能改变生成二进制的许可；不为所有构建赋予无条件统一许可，不作法律适用性意见。未安装、构建或运行 FFmpeg/FATE；上游测试配方仅作源码证据，不是执行通过。未验证全部
+  RFC 特性、安全、任意安装包、第三方互通或 IA 采用；不把 FFV1 的无损编码属性扩展成所有 FFmpeg 像素、色彩、元数据或容器转换均无损。 2026-10-24 的局部补充仅检视同一固定版本的 libavformat
+  HLS 播放列表读取及未加密 MPEG-TS 片段解复用路由；hls.c 明示 RFC 8216。EXT-X-VERSION 被跳过，非完整版本兼容性验证；不支持动态变体/质量切换，rendition 路径不支持 CLOSED-CAPTIONS。组件、协议/TLS、IO
+  与子解复用器可用性等条件适用。排除加密/DRM、复用/片段生成、fMP4/CMAF、LL-HLS 和完整客户端/服务器符合性。此补充不刷新整条记录的 last_verified_at，不构成上游执行、网络互通或安全验证。
+  2026-10-29 的局部补充：固定9.0.2原生libavcodec dpx软件解码路径，与ST 268-1:2014所述DPX 2.0头布局和样本打包的有界静态对应，不是上游对2014全文符合性的声明。只限格式有效、未加密、大端SDPX/V2.0、orientation=0、一个unsigned
+  RGB元素(descriptor=50)、10-bit、packing=1(method A)、encoding=0；全局与首元素数据偏移一致且至少2048，行紧排为4×width字节且无额外行/图像padding，电影/电视帧率和电视timecode为未定义值。调用方提供完整文件AVPacket，尺寸及缓冲区通过库约束，组件已启用并选择软件AV_PIX_FMT_GBRP10路径。代码从32位字依次取RGB，写入GBR平面；不承诺颜色解释/变换或其他元数据保真。仅检视固定源码，未编译、运行或测试FFmpeg/FATE、媒体和第三方互通。不是完整/核心符合性验证器：多元素、其他方向/符号/位深/packing、RLE、加密、额外padding、色度/ADX、时间码、Vulkan、序列输入或写入均不纳入。编码器写V1.0，不能沿此证据声称DPX
+  2.0写入。 本补充不刷新全记录 last_verified_at，不将排除范围误写为其他实现路径不存在。
+scope_notes_en: 'The subject is the software distribution, not its community, the CLI alone, the FFV1 specification
+  or a separately created libavcodec object. Official-mirror annotated tag n9.0.2 (tag object ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3)
+  points to commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8; RELEASE states 9.0.2. No latest-release claim is made.
+  The FFV1 fixed-source inspection covers only native libavcodec FFV1 software encoding/decoding of supported RFC
+  9043 version 0/1/3 configurations; v3 encoding sets micro-version 4. Experimental versions 2/4, Vulkan and other
+  hardware paths are excluded. Build options can disable components. Native FFV1 selects the internal range coder,
+  which does not make the entire distribution dependency-free. The fixed LICENSE.md describes principally LGPL-2.1-or-later
+  licensing; optional GPL/version3 components and external libraries can change resulting binary terms. No unconditional
+  license expression for every build or legal-suitability opinion is supplied. FFmpeg and FATE were not installed,
+  built or run; upstream test recipes are source evidence, not passing execution results. No exhaustive RFC conformance,
+  security, arbitrary installed-build availability, third-party interoperability or IA adoption was verified. FFV1
+  lossless coding does not establish lossless preservation of pixels, color, metadata or containers in all FFmpeg
+  conversions. The partial 2026-10-24 supplement inspects the same fixed release’s libavformat HLS playlist reading
+  and unencrypted MPEG-TS segment demux routing; hls.c explicitly cites RFC 8216. EXT-X-VERSION is skipped, not
+  completely validated for version compatibility. Dynamic variant/quality switching is unsupported, and the rendition
+  path does not support CLOSED-CAPTIONS. Component, protocol/TLS, IO and subdemuxer availability constraints apply.
+  Encryption/DRM, muxing/segment generation, fMP4/CMAF, LL-HLS and full client/server conformance are excluded.
+  This supplement does not refresh the full-record last_verified_at or establish upstream execution, network interoperability
+  or security verification. Partial supplement on 2026-10-29: Bounded static correspondence of the fixed 9.0.2 native
+  libavcodec dpx software decoder to ST 268-1:2014 DPX 2.0 header/sample layout, not an upstream declaration of
+  full 2014 conformance. Only well-formed, unencrypted, big-endian SDPX/V2.0, orientation 0, one unsigned RGB element
+  (descriptor 50), 10-bit, packing 1 (method A), encoding 0; equal global/first-element data offsets at least 2048,
+  tightly packed rows of 4*width bytes with no additional line/image padding, and undefined film/TV frame-rate and
+  TV timecode fields. Caller supplies a complete-file AVPacket, dimensions/buffers meet library constraints, the
+  decoder is enabled and software AV_PIX_FMT_GBRP10 is selected. Code extracts RGB from each 32-bit word into GBR
+  planes; color interpretation/transformation and other metadata preservation are not claimed. Fixed-source inspection
+  only: no FFmpeg/FATE build, media execution or third-party interoperation. Not a full/core-conformance validator.
+  Multiple elements, other orientations/signs/depths/packing, RLE, encryption, extra padding, colorimetry/ADX, timecode,
+  Vulkan, sequence input and writing are excluded. The encoder emits V1.0, not evidence for DPX 2.0 writing. This
+  supplement does not refresh the full-record last_verified_at; exclusions are not claims that other implementation
+  paths are absent.'
+sources:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/README.md
+  title: FFmpeg 9.0.2 README — distribution of multimedia libraries and tools
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/RELEASE
+  title: FFmpeg fixed RELEASE —9.0.2
+  language: en
+  accessed: '2026-10-24'
+- url: https://ffmpeg.org/download.html
+  title: Official FFmpeg download page — source distribution and GitHub mirror identity
+  language: en
+  accessed: '2026-10-24'
+- url: https://api.github.com/repos/FFmpeg/FFmpeg/git/tags/ce8f11b9fac4cd7ccfb41ca7c01bc17f5cda8cc3
+  title: Annotated n9.0.2 tag object — fixed commit identity
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/LICENSE.md
+  title: FFmpeg 9.0.2 LICENSE — configuration and external-library dependent terms
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/Makefile#L383-L385
+  title: Native FFV1 encoder/decoder build gates and separate Vulkan encoder
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/hls.c
+  title: Fixed HLS demuxer — RFC 8216 citation, bounded playlist parsing and segment routing
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/doc/demuxers.texi#L546-L574
+  title: HLS demuxer documentation — caller variant selection and extension constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavformat/Makefile#L277
+  title: HLS demuxer component build gate
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L3943
+  title: HLS demuxer selected components; protocols and TLS remain separate build requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L300-L367
+  title: Packet, endian/version, dimension and descriptor/depth/packing/encoding parsing; nonzero encoding rejected
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L80-L93
+  title: Fixed read10in32 word extraction
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L127-L170
+  title: 10-bit method-A RGB extraction into GBR planes and row advance
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpx.c#L832-L851
+  title: Actual decoder registration with separate optional Vulkan path
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/Makefile#L344-L345
+  title: Native DPX decoder/encoder component build gates
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/dpxenc.c#L205-L219
+  title: Excluded writing path sets header V1.0
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=11
+  title: ST 268:2014 printed p10 §§5.1–5.2 — V2.0 and exact field offsets
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=15
+  title: Printed p14 Table 1 — descriptor 50 and note 2 component order
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=16
+  title: Printed p15 Tables 2/3A/3B — orientation 0, depth 10 and method A
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=17
+  title: Printed p16 Table 3C — encoding 0 and scanline word boundary
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/latest/st268-1/st0268-1-2014_stable2015.pdf#page=24
+  title: Printed p23 informative Fig C.3 — method A bit-placement corroboration, not separate normative requirement
+  language: en
+  accessed: '2026-10-29'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.h#L458-L474
+  title: FFmpeg 9.0.2 — Legacy matrix identifiers and default coefficient-table getter
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.h#L671-L687
+  title: FFmpeg 9.0.2 — Legacy colorspace setter — separate coefficient/range and fixed-point correction inputs
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L36-L75
+  title: FFmpeg 9.0.2 — 1990-labeled 709 row, getter fallback and real lookup-table consumers
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L550-L598
+  title: FFmpeg 9.0.2 — Architecture-first selection and C YUV422P-to-RGB24 fallback
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/yuv2rgb.c#L717-L914
+  title: FFmpeg 9.0.2 — YCbCr-to-RGB coefficient/range/correction table initialization
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L855-L1014
+  title: FFmpeg 9.0.2 — Legacy setter copies settings, propagates context and initializes actual tables
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L1175-L1179
+  title: FFmpeg 9.0.2 — Conditional legacy default-table and neutral-correction initialization
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/utils.c#L1629-L1647
+  title: FFmpeg 9.0.2 — Legacy unscaled dispatcher selection
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale_unscaled.c#L2392-L2431
+  title: FFmpeg 9.0.2 — Unscaled YUV-to-RGB format, accurate-rounding, dithering and height gates
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.c#L1163-L1192
+  title: FFmpeg 9.0.2 — scale_internal invokes the selected unscaled consumer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libswscale/swscale.c#L1586-L1604
+  title: FFmpeg 9.0.2 — Legacy sws_scale entry into the actual consumer chain
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-24T11:22:31.270584+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public FFmpeg source evidence executor
+record_created_at: '2026-10-24T11:30:22.636812+00:00'
+record_updated_at: '2026-10-31T23:07:50+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / FFmpeg swscale semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: ffmpeg
+  acceptance_event_id: accept-20261024-ffmpeg-ffv1
+  reviewed_candidate_blob: e2f6b9e68ed8bcf0892568a62d5582df576dd458
+  reviewed_against_commit: 500cba4cf9a7de6c143010e6b381953bc5c588f4
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 500cba4cf9a7de6c143010e6b381953bc5c588f4
+  reviewed_packet_blob: 1902b6cb3a68f53e8c1d2026ac2a5e0e11e10bb6
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/500cba4cf9a7de6c143010e6b381953bc5c588f4/01_State/Inbox/review-packets/ffmpeg-ffv1-implementation-20261024.yaml

@@ -1,0 +1,87 @@
+id: smpte_umid
+type: artifact
+kind: standard
+name_zh: SMPTE ST 330 唯一素材标识符（UMID）
+name_en: SMPTE ST 330 — Unique Material Identifier (UMID)
+description_zh: 规定视听素材实例 UMID 标识结构的标准；本次固定 ST 330:2011，区分 Basic 与 Extended 形式，不把素材标识等同于作品、权利或可信来源证明。
+description_en: A standard defining UMID structures for audiovisual-material instances; reviewed at ST 330:2011,
+  distinguishing Basic and Extended forms without treating material identity as proof of works, rights or trustworthy
+  provenance.
+version: '2011'
+external_identifiers:
+- namespace: smpte
+  value: st.330
+official_url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+versions:
+- version: '2011'
+  status: standard
+  url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf
+scope_notes_zh: 保留既有 smpte_umid / smpte:st.330 工作级标准身份，审阅上下文固定为 2011-08-23 批准的 SMPTE ST 330:2011；不新建 2011 版次主体。官方
+  2022 版封面明确其修订 2011 版，因此本记录不声称 2011 最新、所有版次等同或 2022 已完整审阅。§1 将 UMID 用于视听素材实例的标识及关联元数据，不用于识别作品、节目内容、版权或权利所有权。§5
+  与 §6.1.1 定义 32 字节 Basic UMID：按顺序包含 12 字节通用标签、1 字节长度、3 字节实例号和 16 字节素材号；64 字节 Extended UMID 在 Basic 后附加 32 字节 source
+  pack，二者不能互换。此处只记录标准身份、标识目的和基本结构，不详尽复核所有生成方法或 source pack 字段语义。标准的全局唯一性目标及所定义的生成方法不等于任意实现实际无碰撞，更不是实体认证、版权/权利管理、可信来源、完整素材历史或安全保证。未执行
+  UMID 生成器、文件解析器、媒体应用、符合性或互通测试。与 MXF 的具体用途由另一个有版次上下文的关系单独限定：ST 377-1:2019 Package ID 仅允许 32 字节 Basic UMID，并保留终止
+  source-reference chain 的全零特殊值；不将该值当作普通生成的唯一素材标识。该关系不扩大为任意 MXF/Extended UMID 用途或软件符合性。本次不从 ST 330:2011 对 ST 336:2007
+  的引用推断对既有 ST 336:2017 对象的依赖；不增加 UUID、时间码、国家码或地理编码等其他关系。不声称完整符合性、第三方互通、认证、部署、推荐、实现采用或 IA 采用。
+scope_notes_en: Preserves the existing work-level standard identity smpte_umid / smpte:st.330, reviewed specifically
+  at SMPTE ST 330:2011 approved 2011-08-23, without creating a separate 2011-edition subject. The official 2022
+  cover expressly identifies a revision of the 2011 edition; this record does not call 2011 latest, equate editions
+  or claim a full 2022 review. Section 1 concerns identifying instances of audiovisual material and associating
+  metadata, not identifying works, program content, copyright or ownership of rights. Sections 5 and 6.1.1 define
+  a 32-byte Basic UMID containing, in order, a 12-byte universal label, one-byte length, three-byte instance number
+  and 16-byte material number. A 64-byte Extended UMID appends a 32-byte source pack to the Basic form; the forms
+  are not interchangeable. This is a bounded account of standard identity, identification purpose and basic structure,
+  not an exhaustive review of every generation method or source-pack field. The standard's global-uniqueness objective
+  and specified generation methods do not prove collision-free behavior in arbitrary implementations, entity authentication,
+  copyright/rights management, trustworthy provenance, complete material history or security. No UMID generator,
+  file parser, media application, conformance or interoperability test was executed. The separately qualified MXF
+  relation records the ST 377-1:2019 Package ID use of 32-byte Basic UMID and the all-zero source-reference-chain
+  termination sentinel; that sentinel is not an ordinary generated unique material identifier. It does not expand
+  to arbitrary MXF/Extended UMID uses or actual software compliance. The ST 330:2011 reference to ST 336:2007 is
+  not turned into a dependency on the accepted ST 336:2017 object. UUID, timecode, country-code and geospatial references
+  are outside this slice. No full conformance, third-party interoperability, certification, deployment, recommendation,
+  implementation adoption or IA adoption is established.
+sources:
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=1
+  title: ST 330:2011 cover — standard identity, edition and approval date
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=3
+  title: ST 330:2011 §1 — audiovisual-material instances and explicit works/rights exclusions
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=5
+  title: ST 330:2011 §5 and Figure 1 — Basic and Extended structures
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/doc/st330/20110823-pub/st0330-2011.pdf#page=6
+  title: ST 330:2011 §6.1.1 — ordered 32-byte Basic UMID structure
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st330/st330-2022.pdf#page=1
+  title: ST 330:2022 cover — later revision exists; not the reviewed endpoint edition
+  language: en
+  accessed: '2026-10-24'
+- url: https://smpte-ra.org/umid-information
+  title: SMPTE Registration Authority UMID information — supplemental standard identity
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T21:38:00.917872+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded ST 330:2011 public-source evidence executor
+record_created_at: '2026-10-24T21:44:35.208274+00:00'
+record_updated_at: '2026-10-24T21:44:35.208274+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_umid_package_identity)
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: smpte_umid
+  acceptance_event_id: accept-20261024-umid-mxf-package-identity
+  reviewed_candidate_blob: 529ddd43862d666e097891d98e1f309b889d3064
+  reviewed_against_commit: 482240f94bed85fccbcb7235b819425e893bc82e
+  candidate_executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 482240f94bed85fccbcb7235b819425e893bc82e
+  reviewed_packet_blob: d8744538a0d6dc1041145b564e71fb692dc5de96
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/482240f94bed85fccbcb7235b819425e893bc82e/01_State/Inbox/review-packets/umid-mxf-package-identity-20261024.yaml

@@ -1,0 +1,83 @@
+id: ebu_libadm
+type: system
+kind: library
+name_zh: libadm音频定义模型处理库
+name_en: libadm Audio Definition Model handling library
+description_zh: 'libadm 是用于解析、修改、创建和写入音频定义模型（ADM）XML 的 C++ 库；本记录固定 0.14.0 及官方 commit 1f3e87dc37736ed42104969f00b6c4cbd43221e6，不是
+  BS.2076 标准、EBU 组织或最新版声明。
+
+
+  固定 README 的 Current Limitations 明示：标准修订纳入可能滞后，不能保证覆盖全部用途，缺少部分 ADM 子元素，且不支持串行 ADM（S-ADM；原文 SADM，BS.2125）。固定 CHANGELOG
+  的 0.14.0 条目记录若干 BS.2076-2 功能；这些上游文档声明不证明完整 BS.2076-2 或 BS.2076-3 符合性，也不代表对当前所有版本或实现源码的独立判断。
+
+
+  本次只读取两份固定上游文档并核对其 Git 对象字节，把原 scope 中的限制补入可见描述；没有构建或执行 libadm、XML/音频样例、上游测试或配对实验。旧 #456 的 IA 检查和独立复核是已完成历史，不能说项目从未验证；#583
+  的 libbw64 实测也不能归为 libadm 运行。既有 libbw64 → recommended_with → libadm 是文档建议关系，不是标准 implements 边或已测配对；关系和 libbw64
+  的原可见限制保持不变，不声称反向页已展示全部关系条件。
+
+
+  旧来源访问日期、scope、身份、创建和 intake 历史保留。旧审核包没有两文档的原始文件哈希，本次只能确认新取得字节与固定 Git 对象相符，不冒称与旧捕获逐字节相等。不推断完整验证、互通、安全、生产适用性或 IA
+  采用。'
+description_en: 'libadm is a C++ library for parsing, modifying, creating and writing Audio Definition Model (ADM)
+  XML. This record pins release 0.14.0 and official commit 1f3e87dc37736ed42104969f00b6c4cbd43221e6; the subject
+  is not the BS.2076 standard or EBU organization, and no latest-release claim is made.
+
+
+  Current Limitations in the fixed README states that incorporation of standard revisions may lag, coverage of all
+  use cases is not guaranteed, some ADM sub-elements are missing, and serial ADM (S-ADM; written SADM, BS.2125 in
+  the source) is not supported. The fixed CHANGELOG entry for 0.14.0 lists selected BS.2076-2 features. These upstream
+  documentation statements do not establish full BS.2076-2 or BS.2076-3 conformance or an independent judgment of
+  every current version or implementation source.
+
+
+  This supplement only reads two fixed upstream documents and verifies their Git-object bytes to make limitations
+  already in scope visible. No libadm build or execution, XML/audio example, upstream test or paired-library experiment
+  was performed. Original #456 IA checks and independent review remain completed history, not a claim that the project
+  was never verified; #583 libbw64 execution must not be attributed to libadm. The existing libbw64 → recommended_with
+  → libadm relation is a documentary recommendation, not a standard implements edge or tested pairing. That relation
+  and libbw64''s existing visible limitations remain unchanged; full relation conditions are not claimed to have
+  become visible on the reverse page.
+
+
+  Original source access dates, scope, identity, creation and intake history remain. The old review packet contains
+  no original file hashes for these two documents, so this supplement establishes equality of newly obtained bytes
+  with fixed Git objects, not byte-for-byte equality with historical captures. Full validation, interoperability,
+  security, production suitability and IA adoption are not inferred.'
+version: 0.14.0
+external_identifiers:
+- namespace: github
+  value: ebu/libadm
+official_url: https://github.com/ebu/libadm
+versions:
+- version: 0.14.0
+  status: released
+  url: https://github.com/ebu/libadm/releases/tag/0.14.0
+scope_notes_zh: 主体是软件库，而非BS.2076标准或EBU组织。0.14.0变更日志记录了若干BS.2076-2功能；README说明标准修订可能滞后、部分子元素缺失且不支持S-ADM。此处不宣称完整符合BS.2076-2或BS.2076-3，不把发行版固定解释为最新版本声明。
+scope_notes_en: The subject is the software library, not the BS.2076 standard or EBU organization. The 0.14.0 changelog
+  records selected BS.2076-2 features; the README warns of delayed revision support, missing sub-elements and no
+  S-ADM support. No full conformance to BS.2076-2 or BS.2076-3, or latest-release status, is asserted.
+sources:
+- url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/README.md
+  title: libadm 0.14.0 — Introduction, features and scope
+  language: en
+  accessed: '2026-10-20'
+- url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/CHANGELOG.md
+  title: libadm 0.14.0 — Release changelog
+  language: en
+  accessed: '2026-10-20'
+record_created_at: '2026-10-20T16:14:01.823988+00:00'
+record_updated_at: '2026-11-01T17:57:46.640437+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_libadm_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / libadm_semantics and libadm_structure
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: ebu_libadm
+  acceptance_event_id: accept-20261020-audio-library-ebu_libadm
+  reviewed_candidate_blob: bf638955bec57ed73109b00085feed58bed879e8
+  reviewed_against_commit: 5b4df08a8c88f67bbd075efd966f43752388151b
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 5b4df08a8c88f67bbd075efd966f43752388151b
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150

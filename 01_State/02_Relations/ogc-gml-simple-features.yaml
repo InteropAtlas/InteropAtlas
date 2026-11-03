@@ -1,0 +1,40 @@
+id: ogc_features_core_1_0_1_uses_gml_simple_features_10_100r3
+type: relation
+name_zh: Core 1.0.1 的可选 GML-SF0/SF2 编码类在文献中使用 OGC 10-100r3
+name_en: Core 1.0.1 optional GML-SF0/SF2 encoding classes documentarily use OGC 10-100r3
+source: ogc_api_features_17_069r4
+relation: uses
+target: ogc_gml_simple_features_10_100r3
+context:
+  version_context:
+    source: OGC 17-069r4 / 1.0.1, sections 8.4/SF0 and 8.5/SF2
+    target: OGC 10-100r3, 2012-04-05 corrigendum; cover Version 2.0; external identifier http://www.opengis.net/spec/gmlsf/2.0.1
+  conditions_zh: 仅固定 Core 第 8.4 节 GML-SF0 与第 8.5 节 GML-SF2 两个可选编码类的直接文献依赖，分别使用 Level 0 与 Level 2；第 8.1 节明确均非 Core
+    强制，也允许其他编码。对应 profile 参数 URI 为 http://www.opengis.net/def/profile/ogc/2.0/gml-sf0 和 http://www.opengis.net/def/profile/ogc/2.0/gml-sf2。Core
+    对这两个类的二维线性几何限制不是整个 Profile 的限制。不是所有 Core 部署均使用 GML，不证明实现支持、符合性、互通或 IA 采用；不拆分 SF0/SF2 假对象，不推导传递关系。
+  conditions_en: Direct documentary dependency only for the optional Core section 8.4 GML-SF0 and section 8.5 GML-SF2
+    encoding classes, using Level 0 and Level 2 respectively. Section 8.1 makes both non-mandatory for Core and
+    allows other encodings. Their profile parameter URIs are http://www.opengis.net/def/profile/ogc/2.0/gml-sf0
+    and http://www.opengis.net/def/profile/ogc/2.0/gml-sf2. Core two-dimensional linear-geometry constraints for
+    those classes do not define the entire Profile. Not all Core deployments use GML; no implementation support,
+    conformance, interoperability or IA adoption is established. No invented SF0/SF2 objects or transitive inference.
+evidence:
+- url: https://docs.ogc.org/is/17-069r4/17-069r4.html
+  title: OGC 17-069r4 / 1.0.1 — section 3 cites 2012 OGC 10-100r3; section 8.1 makes encoding classes optional,
+    sections 8.4/SF0 and 8.5/SF2 cite the profile
+  language: en
+  accessed: '2026-10-31'
+- url: https://docs.ogc.org/profile/10-100r3/10-100r3.pdf
+  title: OGC 10-100r3, 2012-04-05 corrigendum — cover Version 2.0, external identifier /spec/gmlsf/2.0.1; sections
+    1–2 and compliance levels SF0/SF1/SF2
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T05:55:00Z'
+last_verified_by: Agent — OpenAI / dot / add_gml_profile_standard; documentary optional-class use only
+record_created_at: '2026-10-31T06:07:14.861887+00:00'
+record_updated_at: '2026-10-31T06:07:14.861887+00:00'
+latest_substantive_contribution:
+  initiator: Agent — OpenAI / dot (within Human Owner ff6962757 ordinary-intake authorization)
+  executor: Agent — OpenAI / dot / add_gml_profile_standard
+  reviewer: Agent — OpenAI / dot / add_gml_profile_standard/semantic_review
+  github_actor: ff6962757

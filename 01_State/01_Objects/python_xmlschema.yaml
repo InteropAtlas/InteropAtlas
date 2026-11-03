@@ -1,0 +1,159 @@
+id: python_xmlschema
+type: system
+kind: library
+name_zh: xmlschema Python XSD 库
+name_en: xmlschema Python XSD library
+description_zh: 'xmlschema 是 Python XSD 验证及 XML 数据编解码库；本记录固定 4.3.2 / commit 627c179541ec2e79c0b42c1d493074f7450324c1，依赖
+  elementpath 和 Python XML 处理设施。官方声明支持 XSD 1.0/1.1，XMLSchema 默认指向 XMLSchema10，XMLSchema11 须显式选择；一般支持声明不是某一精确规范的完整符合性证明。
+
+
+  验证模式和接口必须区分。默认 strict 遇验证错误抛出；顶层 decode 的 lax 模式收集错误并返回数据及错误，原有限例中不可解码值可为 None。顶层 decode/encode 在 skip 模式丢弃验证错误，原例可保留非法词法文本，未报错不等于验证通过；iter_decode/iter_encode
+  仍可传播错误，不能把 skip 泛化为所有接口或任意异常均无错误。数据的无项、单项、多项也可能有不同返回形状。实例不符合、XML 解析异常和模式构造异常不是同一种结果；is_valid 不是吞掉所有解析或构造异常的通用布尔包装。
+
+
+  在 validate/iter_errors 验证路径中，path 未选到节点且默认 allow_empty=True 时可没有空选择错误；allow_empty=False 可要求该分支报错。这不表示所有 decode
+  接口都接受或执行同一控制，也不证明任意选择或完整文档都已检查。实例 schemaLocation 提示默认不用于动态加载模式（use_location_hints=False），不等于任何资源都不会读取。
+
+
+  固定资源默认 allow=''all''、defuse=''remote''，不是默认离线或对全部输入禁用实体。原 #487 的25个可信内存例显式使用 allow=''none''、defuse=''always''，并正常读取随包可信元模式；没有据此完成外部资源或实体攻击评估。原
+  Decimal 示例保持该值，但编码后的 Element 再解码可改变命名空间键及字典形状，不是通用无损往返保证。随包 XSD_1.0/XMLSchema.xsd 自称非规范且指向2004-03 PER，不能仅据其副本或总体支持声明推出2004-10精确
+  XSD 规范全符合；本对象没有技术 implements 边。
+
+
+  原 #487 的25例与后续 #488 的5个可信 UBL 合成输入是不同已完成历史。后者仅区分 XML 良构、XSD 结果和 IND5 空元素约束，含 XSD 有效但不满足该约束的有限反例，不是全面 UBL、业务、税务或互通认证。原
+  scope 中“本批未测 UBL”等未覆盖项指原收录批次，不能概括为历史从未做过该后续实验；两组不合称30项本次测试。本次只以固定源码和既有研究补明可见条件，没有重跑两组实验、安装/导入/执行上游、解析 XML、访问远端模式或恢复任何停止的
+  UBL 工作。Atlas 检查不是 xmlschema 上游测试。不声称 XSD 1.1 实测、完整 W3C 套件、完整标准符合性、安全评估、生产适用、第三方互通或 IA 采用；原身份、来源、许可、intake 与全记录核验日期保持，零新技术边，也不改变页面机制或规范语义。'
+description_en: 'xmlschema is a Python XSD validation and XML data encoding/decoding library, pinned here to 4.3.2
+  / commit 627c179541ec2e79c0b42c1d493074f7450324c1, using elementpath and Python XML facilities. Upstream declares
+  XSD 1.0/1.1 support; XMLSchema defaults to XMLSchema10 and XMLSchema11 requires explicit selection. A general
+  support claim is not proof of complete conformance to a precise specification edition.
+
+
+  Modes and interfaces must be distinguished. Default strict raises on validation errors. Top-level decode in lax
+  mode collects errors and returns data plus errors; the original finite examples could substitute None for undecodable
+  values. Top-level decode/encode discard validation errors in skip mode, and an original example could retain invalid
+  lexical text: no reported error is not successful validation. iter_decode/iter_encode can still propagate errors,
+  so skip is not a promise that every interface or arbitrary exception becomes error-free. Zero, one or multiple
+  data items can also yield different return shapes. Instance non-conformance, XML parse exceptions and schema-construction
+  exceptions are distinct; is_valid is not a general Boolean wrapper absorbing all parse or construction exceptions.
+
+
+  On the validate/iter_errors validation path, an empty path selection with default allow_empty=True may produce
+  no empty-selection error; allow_empty=False can require an error in that branch. This is not a claim that every
+  decode interface accepts or executes the same control, or that any selection or entire document was fully checked.
+  Instance schemaLocation hints are not used for dynamic schema loading by default (use_location_hints=False), which
+  does not mean no resources are read.
+
+
+  Fixed resource defaults are allow=''all'' and defuse=''remote'', not offline operation or entity prevention for
+  every input. The original #487 twenty-five trusted-memory examples explicitly used allow=''none'' and defuse=''always''
+  while reading bundled trusted meta-schemas normally; this did not assess external resources or entity attacks.
+  A Decimal value survived the original example, but decoding the encoded Element could change namespace keys and
+  dictionary shape, not a general lossless round trip. Bundled XSD_1.0/XMLSchema.xsd labels itself non-normative
+  and points to a March 2004 PER. Neither that copy nor the general support claim proves complete conformance to
+  the precise October 2004 XSD documents; this object has no technical implements edge.
+
+
+  The original #487 twenty-five examples and the later #488 five trusted synthetic UBL inputs are separate completed
+  histories. The latter only distinguished XML well-formedness, XSD results and the IND5 empty-element constraint,
+  including finite examples valid under XSD but not satisfying that constraint; it was not comprehensive UBL, business,
+  tax or interoperability certification. The old scope''s UBL exclusions describe the original intake, not a claim
+  that the later experiment never occurred. The two groups are not thirty new tests. This update only exposes existing
+  conditions using fixed sources and prior research; neither group was rerun, and no upstream installation/import/execution,
+  XML parsing, remote-schema access or resumption of stopped UBL work occurred. Atlas checks are not upstream xmlschema
+  tests. No executed XSD 1.1, full W3C suite, complete standards conformance, security assessment, production fitness,
+  third-party interoperability or IA adoption is established. Original identity, sources, license, intake and whole-record
+  verification dates remain; no technical edge, page mechanism or specification semantics is changed.'
+version: 4.3.2
+external_identifiers:
+- namespace: github
+  value: sissaschool/xmlschema
+- namespace: pypi
+  value: xmlschema
+official_url: https://github.com/sissaschool/xmlschema
+versions:
+- version: 4.3.2
+  status: released
+  url: https://github.com/sissaschool/xmlschema/releases/tag/v4.3.2
+domains:
+- schema
+- validation
+- structured_data
+capabilities:
+- schema_validation
+open_source: true
+license_expression: MIT
+scope_notes_zh: 固定 4.3.2 的 Python XSD 验证/编解码库，依赖 elementpath 和 Python XML 处理设施；官方声明 XSD 1.0/1.1，默认 XMLSchema 指向
+  XMLSchema10，XMLSchema11 需显式选择。默认 strict；lax 保留错误并可能将不可解码值置 None，skip 顶层解码可保留非法词法文本而不报告错误，不等于验证通过。资源默认 allow=all、defuse=remote，不是默认离线或所有输入均禁实体；本轮可信内存输入显式
+  allow=none、defuse=always，正常读取随包可信元模式，未测实体攻击或外部资源。默认忽略实例 schemaLocation；path 空选择默认可空泛通过，allow_empty=False 可要求报错。25例观察区分实例不符合、XML解析异常和模式构造异常；Decimal
+  示例保持该值，但将编码后的 Element 再解码会改变命名空间键和字典形状，不作通用无损往返保证。随包 XSD_1.0/XMLSchema.xsd 自述非规范且文档指向2004-03 PER，不能仅凭元模式复制或总体支持声明推出2004-10精确规范全符合；本批不建
+  implements。未跑 XSD1.1、W3C全套测试、UBL实例/业务规则、第三方互通或生产安全评估，不表示IA采用。
+scope_notes_en: Fixed to the 4.3.2 Python XSD validation/encoding/decoding library, using elementpath and Python
+  XML facilities. Upstream declares XSD 1.0/1.1; XMLSchema defaults to XMLSchema10, while XMLSchema11 requires explicit
+  selection. Strict is default; lax retains errors and may substitute None, while top-level skip decoding can retain
+  invalid lexical text without reporting errors, not successful validation. Resource defaults are allow=all and
+  defuse=remote, not offline operation or entity prevention for every input. Trusted-memory tests explicitly use
+  allow=none and defuse=always; bundled trusted meta-schemas are read normally, with no external-resource or entity-attack
+  assessment. Instance schemaLocation hints are ignored by default; an empty path selection can pass vacuously unless
+  allow_empty=False is requested. Twenty-five observations distinguish instance violations, XML parse exceptions
+  and schema-construction exceptions. A Decimal value survives the tested conversion, but decoding the encoded Element
+  changes namespace keys and dictionary shape, not a general lossless round trip. Bundled XSD_1.0/XMLSchema.xsd
+  labels itself non-normative and points to a March 2004 PER; neither that copy nor the general support claim alone
+  proves full conformance to the precise October 2004 documents, so no implements edge is added. XSD 1.1 execution,
+  a full W3C suite, UBL/business rules, third-party interoperability, production security and IA adoption are not
+  established.
+sources:
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/README.rst
+  title: xmlschema 4.3.2 — library identity, XSD support and default class
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/pyproject.toml
+  title: xmlschema 4.3.2 — 4.3.2 identity, Python and elementpath dependency
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/LICENSE
+  title: xmlschema 4.3.2 — MIT license text
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/features.rst
+  title: xmlschema 4.3.2 — strict/lax/skip modes and default loading policies
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/doc/usage.rst
+  title: xmlschema 4.3.2 — schema validation and decoding APIs
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/settings.py
+  title: xmlschema 4.3.2 — resource and schema defaults
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/validators/schemas.py
+  title: xmlschema 4.3.2 — default XSD class, validation selection and schema-location hints
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/resources/parsers.py
+  title: xmlschema 4.3.2 — parse errors distinct from validation errors
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/sissaschool/xmlschema/blob/627c179541ec2e79c0b42c1d493074f7450324c1/xmlschema/schemas/XSD_1.0/XMLSchema.xsd
+  title: xmlschema 4.3.2 — bundled non-normative meta-schema and March 2004 PER documentation pointer
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:48:45.103038+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed XSD library evidence executor
+record_created_at: '2026-10-21T06:54:25.169946+00:00'
+record_updated_at: '2026-11-01T03:50:21.666426+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / supplement_xmlschema_visible_scope
+  reviewer: Independent Agents — OpenAI / dot / xmlschema_semantics and xmlschema_structure
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_xmlschema
+  acceptance_event_id: accept-20261021-python-xmlschema-python-xmlschema
+  reviewed_candidate_blob: ecc47180f667b3c6d79608ac7dce40601dcd0636
+  reviewed_against_commit: fd8c3c1358533804a3d5c9f5e1fdd7fe71ce3c68
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: fd8c3c1358533804a3d5c9f5e1fdd7fe71ce3c68
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/487

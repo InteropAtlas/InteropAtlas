@@ -12,6 +12,7 @@ from bootstrap_query import index_objects, load_atlas
 from graph_index import GraphIndex, ref_id, relation_predicate
 from kind_registry import has_profile, load_kind_registry
 from semantic_model import is_capability
+from workspace_projection import RECORDED, project_field
 
 TYPE_LABELS = {
     "implementation": "实现（Implementation）",
@@ -533,6 +534,9 @@ def render_standard(
         lines.append(f"- **标准类别：** {human_value(obj.get('kind'))}")
     if obj.get("official_name"):
         lines.append(f"- **官方名称：** {obj['official_name']}")
+    version = project_field(obj, "version")
+    if version["state"] == RECORDED and str(version["value"]).strip():
+        lines.append(f"- **记录版次：** {version['value']}")
     if obj.get("official_url"):
         lines.append(f"- **官方网站：** {obj['official_url']}")
     lines.append("")
@@ -566,6 +570,9 @@ def render_standard(
                     text += f" · {human_value(version['status'])}"
                 lines.append(f"- {text}")
         lines.append("")
+    scope_notes = project_field(obj, "scope_notes_zh")
+    if scope_notes["state"] == RECORDED and str(scope_notes["value"]).strip():
+        lines += ["## 范围与边界", "", str(scope_notes["value"]), ""]
     add_evidence_and_assessment(lines, obj)
     return finish(lines)
 

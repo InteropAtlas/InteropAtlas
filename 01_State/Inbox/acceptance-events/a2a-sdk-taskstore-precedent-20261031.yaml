@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261031-a2a-python-sdk
+candidate_id: a2a_python_sdk
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: a2a_python_sdk
+review:
+  reviewer: Independent Agent — OpenAI / dot / fixed A2A SDK semantic review
+  reviewed_at: '2026-10-31T22:11:33+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立核验固定官方 tag/release/commit、源指纹、whole-library身份、无碰撞路线及有限内存任务存取路径。
+  - 仅object-only，不新增关系；保留进程丢失、用户名分桶/默认空名、CopyFrom可关闭、锁非事务/分布式与当前兼容性未知。未安装、构建、导入或执行上游、测试或网络服务，不声称耐久、长期记忆、恢复连续性、安全隔离、协议符合性或IA采用。
+  - reviewed_at为接受序列化时刻，不推测审核耗时；实际物化树与H/M另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/3a0f14a7e418a9b45e628fab625f66df7339e73f/01_State/Inbox/review-packets/a2a-sdk-taskstore-precedent-20261031.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/606795d43b78a9b5f688a0c42654da868b619660
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/1027616220bc2bdc0f1a715693440b7a6f538a81
+decided_at: '2026-10-31T22:11:33+00:00'
+notes:
+- 只接纳固定软件库主体与既有agents编辑导航，不改原A2A协议、MCP SDK、治理或旧holds。
+- 真实Git祖先保留完整已审Candidate和packet，当前packet为reference-only receipt。

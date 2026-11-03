@@ -1,0 +1,625 @@
+id: mcp_uses_json_schema_2020_12
+type: relation
+name_zh: MCP 2025-11-25 使用 JSON Schema 2020-12 默认方言
+name_en: MCP 2025-11-25 uses JSON Schema 2020-12 as its default dialect
+source: mcp_2025_11_25
+relation: uses
+target: json_schema_2020_12
+context:
+  version_context:
+    source: MCP 2025-11-25
+    target: JSON Schema Draft 2020-12
+  conditions_zh: 仅表述 MCP 2025-11-25 中 Schema 的默认方言和最低支持要求：缺少 $schema 时按 2020-12 解释，客户端与服务端须支持此方言；显式 $schema 可指定其他方言，须依声明或默认方言验证并适当报告不支持的方言。不是所有
+    MCP Schema 都只能使用 2020-12，也不证明具体实现符合 MCP 或覆盖全部协议要求。
+  conditions_en: 'Limited to the dated MCP schema default and minimum support: absent $schema means 2020-12, which clients
+    and servers must support. An explicit $schema may select another dialect; validation follows the declared or default dialect,
+    with unsupported dialects reported appropriately. This is not an exclusive-dialect rule or implementation conformance
+    claim.'
+evidence:
+- url: https://modelcontextprotocol.io/specification/2025-11-25/basic#json-schema-usage
+  title: MCP 2025-11-25 — JSON Schema Usage, Schema Dialect and Implementation Requirements
+  language: en
+  accessed: '2026-10-21'
+- url: https://json-schema.org/draft/2020-12
+  title: JSON Schema Draft 2020-12 — target specification identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 8259 JSON 表示
+name_en: WoT Thing Description 1.1 uses RFC 8259 JSON representation
+source: wot_td_1.1
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 8259
+  conditions_zh: 仅表述固定 2023-12-05 推荐标准中事物描述（TD）实例的 JSON 序列化；第 6 节明确引用 RFC 8259 第 8.1 节的开放生态编码要求，包括 UTF-8 和不得添加 BOM。该表示关系不证明被描述设备的能力、传输绑定或任意实现之间的互通。
+  conditions_en: Limited to TD instance JSON serialization in the fixed 2023-12-05 Recommendation. Section 6 invokes RFC 8259
+    section 8.1 for open-ecosystem encoding, including UTF-8 and no added BOM. This representation relation does not certify
+    device capabilities, transport bindings or implementation interoperability.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
+  title: WoT Thing Description 1.1 — Section 6 TD Representation Format and G.1 RFC8259 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc8259.html#section-8.1
+  title: RFC 8259 — Character Encoding
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json_ld
+type: relation
+name_zh: WoT 事物描述 1.1 使用 JSON-LD 1.1 语法
+name_en: WoT Thing Description 1.1 uses JSON-LD 1.1 syntax
+source: wot_td_1.1
+relation: uses
+target: json_ld_1.1
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: JSON-LD 1.1, W3C Recommendation 2020-07-16
+  conditions_zh: 仅表述固定事物描述 1.1 的 JSON 表示与 JSON-LD 1.1 语法对齐，以支持上下文扩展和语义处理；第 6 节允许按原始 JSON 或用 JSON-LD 1.1 处理器处理，不要求每个实现执行 JSON-LD
+    展开或远程上下文获取。该关系不推定设备互通、安全性或 IA 已采用 JSON-LD。
+  conditions_en: Limited to the fixed TD 1.1 JSON representation using JSON-LD 1.1 syntax for context extensions and semantic
+    processing. Section 6 permits raw JSON or JSON-LD 1.1 processing; this does not require every implementation to expand
+    JSON-LD or fetch remote contexts, certify interoperability/security, or assert IA adoption.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/
+  title: WoT Thing Description 1.1 — Sections 1.1 and 6; G.1 JSON-LD 1.1 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
+  title: JSON-LD 1.1 — fixed W3C Recommendation identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:17:20.475675+00:00'
+record_updated_at: '2026-10-21T00:20:18.716502+00:00'
+last_verified_at: '2026-10-21T00:17:20.475675+00:00'
+last_verified_by: Agent — OpenAI / dot，protocol data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_uri
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 3986 URI 引用
+name_en: CloudEvents 1.0.2 uses RFC 3986 URI references
+source: cloudevents_1.0.2
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: CloudEvents Core Specification 1.0.2
+    target: RFC 3986
+  conditions_zh: 仅表述固定核心规范的 URI/URI-reference 类型及 source 属性使用 RFC 3986 语法：source 必填且为非空 URI-reference，绝对 URI 是建议而非强制。生产者定义标识内容的具体语义；本关系不表示该标识必须是可抓取
+    URL，也不证明生产者身份可信。
+  conditions_en: Limited to the fixed core URI/URI-reference types and source attribute using RFC 3986 syntax. Source is required
+    and nonempty; an absolute URI is recommended, not mandatory. Producer-defined identifier semantics do not imply dereferenceability
+    or trusted producer identity.
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type-system
+  title: CloudEvents 1.0.2 — Type System, RFC3986 URI and URI-reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source
+  title: CloudEvents 1.0.2 — required source attribute
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-4.1
+  title: RFC 3986 — URI Reference
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_rfc3339
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 3339 时间戳表达
+name_en: CloudEvents 1.0.2 uses RFC 3339 timestamp expressions
+source: cloudevents_1.0.2
+relation: uses
+target: rfc3339
+context:
+  version_context:
+    source: CloudEvents Core Specification 1.0.2
+    target: RFC 3339
+  conditions_zh: 仅表述 Timestamp 类型的规范字符串编码及可选 time 属性：time 存在时须符合 RFC 3339；绑定和运行时也可使用可转换的原生类型，不要求每次传输都使用字符串。time 仍可省略；关系不保证时钟同步、时间精度或所填值必然是真实发生时刻，也不自动接纳
+    RFC 9557 扩展。
+  conditions_en: Limited to canonical Timestamp string encoding and the optional time attribute, which follows RFC 3339 when
+    present. Convertible native representations remain possible. Time can be omitted; this does not guarantee clock synchronization,
+    accuracy or actual occurrence time, or automatically include RFC 9557 extensions.
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type-system
+  title: CloudEvents 1.0.2 — Timestamp encoding and native-type conversion
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#time
+  title: CloudEvents 1.0.2 — optional time attribute and occurrence-time limitation
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html
+  title: RFC 3339 — Internet timestamp profile
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: cloudevents_1.0.2_uses_json
+type: relation
+name_zh: CloudEvents 1.0.2 使用 RFC 8259 JSON 事件格式
+name_en: CloudEvents 1.0.2 uses the RFC 8259 JSON event format
+source: cloudevents_1.0.2
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: CloudEvents Core and JSON Event Format 1.0.2
+    target: RFC 8259
+  conditions_zh: 仅表述核心规范要求实现支持的 1.0.2 JSON 事件格式使用 RFC 8259 表示事件。不是每次传输或 data 载荷都必须为 JSON；该格式允许二进制 data 通过 data_base64 封装，其他事件格式和协议绑定仍各自适用。不把核心类型系统中的历史
+    RFC 7159 引用重写为 RFC 8259。
+  conditions_en: 'Limited to the JSON Event Format 1.0.2 that core implementations must support, using RFC 8259 to represent
+    events. Not every transfer or data payload must be JSON: binary data can use data_base64, and other formats/bindings remain
+    separate. This does not rewrite the core type system historical RFC 7159 reference.'
+evidence:
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#overview
+  title: CloudEvents Core 1.0.2 — required JSON event-format support
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md#1-introduction
+  title: JSON Event Format 1.0.2 — explicit RFC8259 representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md#31-handling-of-data
+  title: JSON Event Format 1.0.2 — binary and non-JSON payload handling
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: vc_data_model_2.0_uses_json_ld
+type: relation
+name_zh: 可验证凭证数据模型 2.0 使用 JSON-LD 1.1 序列化
+name_en: Verifiable Credentials Data Model 2.0 uses JSON-LD 1.1 serialization
+source: vc_data_model_2.0
+relation: uses
+target: json_ld_1.1
+context:
+  version_context:
+    source: VC Data Model 2.0, W3C Recommendation 2025-05-15
+    target: JSON-LD 1.1, W3C Recommendation 2020-07-16
+  conditions_zh: 仅表述固定凭证数据模型 2.0 的 JSON-LD 1.1 序列化；application/vc 与 application/vp 表示须使用 compacted document form。第 6.3 节的资料性说明允许符合文档条件的类型特定处理，不要求每个消费者使用通用
+    JSON-LD 库；上下文与文档符合性要求仍保留。不推定某签名套件、发行者可信度、法律效力或 IA 采用。
+  conditions_en: Limited to the fixed VC2.0 JSON-LD1.1 serialization, using compacted document form for application/vc and
+    application/vp. Informative section6.3 describes type-specific processing of conforming documents without a general JSON-LD
+    library; context and conformance requirements remain. No signing-suite, issuer-trust, legal-validity or IA-adoption claim.
+evidence:
+- url: https://www.w3.org/TR/2025/REC-vc-data-model-2.0-20250515/
+  title: VC Data Model 2.0 — Section 6.1 JSON-LD, Section 6.3 informative processing guidance and normative JSON-LD11 reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
+  title: JSON-LD 1.1 — fixed Recommendation identity
+  language: en
+  accessed: '2026-10-21'
+record_created_at: '2026-10-21T00:26:15.774574+00:00'
+record_updated_at: '2026-10-21T00:31:03.776305+00:00'
+last_verified_at: '2026-10-21T00:26:15.774574+00:00'
+last_verified_by: Agent — OpenAI / dot，service data representation evidence executor
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: ubl_2_3_uses_xml_1_0_second_edition
+type: relation
+name_zh: UBL 2.3 使用 XML 1.0（第二版）
+name_en: UBL 2.3 uses Extensible Markup Language (XML) 1.0 (Second Edition)
+source: ubl_2.3
+relation: uses
+target: xml_1.0_second_edition
+context:
+  version_context:
+    source: UBL 2.3, OASIS Standard 2021-06-15
+    target: Extensible Markup Language (XML) 1.0 (Second Edition), W3C Recommendation 2000-10-06
+  conditions_zh: UBL 2.3 规范性 XML 表示使用其 §1.4 指定的 XML 1.0 第二版。§4.3 要求编码声明，UTF-8 为 SHOULD 而非 MUST；XML 良构不等于 UBL 模式或业务符合性。非规范替代表示与任意扩展内容不据此扩为同一符合性主张。
+  conditions_en: The normative XML representation uses the second edition named in UBL 2.3 section 1.4. Section
+    4.3 requires an encoding declaration but only SHOULD for UTF-8. XML well-formedness is not UBL schema or business
+    conformance. No equivalent conformance claim is extended to non-normative alternative representations or arbitrary
+    extension content.
+evidence:
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2000/REC-xml-20001006
+  title: Extensible Markup Language (XML) 1.0 (Second Edition) — fixed W3C Recommendation
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+record_created_at: '2026-10-21T06:34:15.447887+00:00'
+record_updated_at: '2026-10-21T06:34:15.447887+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: ubl_2_3_uses_xml_schema_structures_2004
+type: relation
+name_zh: UBL 2.3 使用 XML Schema 第 1 部分：结构（2004 第二版）
+name_en: 'UBL 2.3 uses XML Schema Part 1: Structures (Second Edition, 2004)'
+source: ubl_2.3
+relation: uses
+target: xml_schema_structures_2004
+context:
+  version_context:
+    source: UBL 2.3, OASIS Standard 2021-06-15
+    target: 'XML Schema Part 1: Structures (Second Edition, 2004), W3C Recommendation 2004-10-28'
+  conditions_zh: UBL 2.3 §1.4/3.1/6.1 使用固定 Structures 第二版定义其规范性 XSD 表示；§4.2 IND1 要求实例通过对应模式。§4.1/6.1 还有模式不能完全表达的文档与扩展约束，因此
+    XSD 验证不是完整 UBL 符合性，更不是交易双方业务互通证明。
+  conditions_en: UBL 2.3 sections 1.4/3.1/6.1 use the fixed Structures second edition for normative XSD representations;
+    section 4.2 IND1 requires corresponding-schema validation. Sections 4.1/6.1 retain additional document and extension
+    constraints, so XSD validation alone proves neither complete UBL conformance nor trading-partner interoperability.
+evidence:
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/
+  title: 'XML Schema Part 1: Structures (Second Edition, 2004) — fixed W3C Recommendation'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+record_created_at: '2026-10-21T06:34:15.447887+00:00'
+record_updated_at: '2026-10-21T06:34:15.447887+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: ubl_2_3_uses_xml_schema_datatypes_2004
+type: relation
+name_zh: UBL 2.3 使用 XML Schema 第 2 部分：数据类型（2004 第二版）
+name_en: 'UBL 2.3 uses XML Schema Part 2: Datatypes (Second Edition, 2004)'
+source: ubl_2.3
+relation: uses
+target: xml_schema_datatypes_2004
+context:
+  version_context:
+    source: UBL 2.3, OASIS Standard 2021-06-15
+    target: 'XML Schema Part 2: Datatypes (Second Edition, 2004), W3C Recommendation 2004-10-28'
+  conditions_zh: UBL 2.3 §1.4/3.1 明确采用固定 Datatypes 第二版作为 XSD 数据类型基础。该引用不证明业务值已获认可；§4.2 推荐另查代码表等内容规则，两阶段说明附录 E 为非规范性。不推出当前地区发票/税务实施规则已满足。
+  conditions_en: 'UBL 2.3 sections 1.4/3.1 explicitly use the fixed Datatypes second edition as the XSD datatype
+    basis. This does not establish business-value acceptance: section 4.2 recommends separate content-rule checks
+    such as code lists, with the two-phase account in non-normative Appendix E. No jurisdiction-specific invoicing
+    or taxation profile compliance is inferred.'
+evidence:
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html
+  title: UBL 2.3 — normative references 1.4, schemas 3.1, constraints 4.1–4.3, conformance 6.1
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2004/REC-xmlschema-2-20041028/
+  title: 'XML Schema Part 2: Datatypes (Second Edition, 2004) — fixed W3C Recommendation'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+record_created_at: '2026-10-21T06:34:15.447887+00:00'
+record_updated_at: '2026-10-21T06:34:15.447887+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: rfc9557_extends_rfc3339
+type: relation
+name_zh: RFC 9557 以可选后缀扩展 RFC 3339 时间戳语法
+name_en: RFC 9557 extends RFC 3339 timestamp syntax with optional suffixes
+source: rfc9557
+relation: extends
+target: rfc3339
+context:
+  capabilities:
+  - date_time_representation
+  version_context:
+    source: RFC 9557, April 2024 (IETF Proposed Standard)
+    target: RFC 3339, July 2002; section 5.6 grammar, with section 4.3 semantics updated by RFC 9557 section 2
+  conditions_zh: 仅表述 RFC 9557 §4.1 导入 RFC 3339 §5.6 的 date-time 与 time-numoffset，并以可选后缀定义 date-time-ext 的文献级语法扩展；直接依据正文，不把
+    RFC 元数据 Updates 自动映射为 extends。§1.1 的原有字符串兼容性不代表旧解析器接受扩展输入，也不抹去 §2 对 Z 的语义更新。此边不表示废止、替换、等价、双向兼容、关系传递性、普遍采用或任何实现（包括
+    pyRFC3339）符合 IXDTF；不扩展既有 RFC 3339 与 ISO 8601 的关系边界。
+  conditions_en: Limited to the publication-level grammar extension in RFC 9557 section 4.1, importing date-time
+    and time-numoffset from RFC 3339 section 5.6 and adding optional suffixes through date-time-ext. The body text,
+    not automatic translation of RFC Updates metadata, supports extends. Section 1.1 compatibility for existing
+    strings neither makes old parsers accept extended inputs nor erases section 2 changes to Z semantics. No obsolescence,
+    replacement, equivalence, bidirectional compatibility, transitivity, universal adoption or implementation conformance
+    (including pyRFC3339) is asserted; the existing RFC 3339/ISO 8601 boundary remains unchanged.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc9557.html#section-4.1
+  title: RFC 9557 — section 4.1 ABNF imports and optional-suffix extension; read with sections 1.1 and 2
+  language: en
+  accessed: '2026-10-22'
+- url: https://www.rfc-editor.org/rfc/rfc3339.txt
+  title: RFC 3339 (July 2002) — section 5.6 date-time and time-numoffset grammar
+  language: en
+  accessed: '2026-10-22'
+last_verified_at: '2026-10-22T03:38:53.228786+00:00'
+last_verified_by: Agent — OpenAI / dot，RFC 9557 normative-source evidence executor
+record_created_at: '2026-10-22T10:55:15.800329+00:00'
+record_updated_at: '2026-10-22T10:55:15.800329+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_packet_commit: 227325c7cdc0f2430aa1dc0422706b75de9e45e6
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/512
+  scope_zh: 仅接纳 RFC 9557 §4.1 导入 RFC 3339 §5.6 并增加可选后缀的 extends 关系；保留 §2 对 Z 的语义更新，不把 Updates 元数据泛化为关系词义，不推旧解析器兼容、替代、等价或实现符合性。
+---
+id: wot_td_1.1_uses_uri_rfc3986
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 3986 URI 标识与基址解析
+name_en: WoT Thing Description 1.1 uses RFC 3986 URI identifiers and base resolution
+source: wot_td_1.1
+relation: uses
+target: uri_rfc3986
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 3986 / STD 66, January 2005
+  conditions_zh: 仅表述固定推荐标准 §5.3.1.1 中可选 id 的 URI 标识形式，以及可选 base 按 RFC 3986 解析 TD 相对 URI 的规则。base 不影响 @context 中的
+    URI 或语义处理涉及的 Linked Data 图中的 IRI。此文献级 uses 不要求所有 TD 提供这两个成员，不保证 URI 可解引用、设备互通，也不沿 node-wot 等实现关系传递为 RFC 3986
+    符合性。
+  conditions_en: 'Limited to section 5.3.1.1: optional id uses URI identification, and optional base applies RFC
+    3986 resolution to TD relative URIs. base excludes @context URIs and Linked Data graph IRIs used in semantic
+    processing. This specification-level uses edge neither mandates those members nor guarantees dereferenceability,
+    device interoperability or transitive implementation conformance, including node-wot.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#thing
+  title: WoT TD 1.1 — section 5.3.1.1 Thing, id and base definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3986.txt
+  title: RFC 3986 / STD 66 — URI identity and section 5 reference resolution
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_json_pointer_rfc6901
+type: relation
+name_zh: WoT 事物描述 1.1 在指定安全与事物模型特性中使用 JSON Pointer
+name_en: WoT Thing Description 1.1 uses JSON Pointer in specified security and Thing Model features
+source: wot_td_1.1
+relation: uses
+target: json_pointer_rfc6901
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: RFC 6901, April 2013
+  conditions_zh: 仅限使用相关特性时的规范规则：§5.3.3.1 中 body 安全信息位置的 name 是相对于每个交互输入 DataSchema 根的 JSON Pointer；§9.3.2 的 tm:ref
+    以 URI、# 与 JSON Pointer 定位模型子定义（URI 可为空以引用同一文档）；§9.3.4 的 tm:optional 指针须解析到完整交互可供性 Map。三者不可混为同一根位置；不要求所有 TD 含指针，不推出任意实现的
+    JSON Pointer 支持、完整符合性或安全保证。
+  conditions_en: 'Feature-conditional rules only: body-security name points from each interaction input DataSchema
+    root (5.3.3.1); tm:ref combines a possibly empty URI, # and JSON Pointer to locate a model subdefinition (9.3.2);
+    tm:optional pointers resolve whole interaction-affordance Maps (9.3.4). These roots are not interchangeable.
+    Not every TD needs pointers; implementation support, complete conformance and security guarantees are not inferred.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#sec-body-name-json-pointer
+  title: WoT TD 1.1 — body security name pointer relative to the input DataSchema root
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#tm-tmRef1
+  title: WoT TD 1.1 — section 9.3.2 tm:ref URI and JSON Pointer pattern
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#thing-model-td-optional
+  title: WoT TD 1.1 — section 9.3.4 tm:optional pointer and complete-affordance constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc6901.txt
+  title: RFC 6901 — JSON Pointer syntax, evaluation and fragment representation
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: wot_td_1.1_uses_bcp47_rfc5646
+type: relation
+name_zh: WoT 事物描述 1.1 使用 RFC 5646 语言标签标识多语言元数据
+name_en: WoT Thing Description 1.1 uses RFC 5646 language tags for multilingual metadata
+source: wot_td_1.1
+relation: uses
+target: bcp47_rfc5646
+context:
+  version_context:
+    source: WoT Thing Description 1.1, W3C Recommendation 2023-12-05
+    target: BCP 47 language-tag specification RFC 5646, September 2009
+  conditions_zh: 仅表述 §5.3.1.7 与 §6.3.2 中 MultiLanguage Map（如 titles、descriptions）的键须为有效语言标签、值为相应语言的文本；G.1 的规范性 BCP47
+    引用明确指向 RFC 5646。此关系不要求每份 TD 提供多语言元数据，也不涵盖 RFC 4647 的语言匹配、协商、自动翻译、内容质量或任何实现的语言支持保证。
+  conditions_en: Limited to MultiLanguage Map keys, including titles and descriptions, using valid language tags
+    with corresponding-language text values (5.3.1.7 and 6.3.2). Normative reference G.1 identifies BCP47 as RFC
+    5646. Multilingual metadata is not mandatory for every TD. RFC 4647 matching, negotiation, translation, content
+    quality and implementation language-support guarantees are outside this edge.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#multilanguage
+  title: WoT TD 1.1 — section 5.3.1.7 MultiLanguage language-tag keys
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#td-multi-languages
+  title: WoT TD 1.1 — section 6.3.2 multilingual JSON serialization
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#bib-bcp47
+  title: WoT TD 1.1 — normative BCP47 reference identifies RFC 5646
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc5646.txt
+  title: RFC 5646 — Tags for Identifying Languages, September 2009
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T07:22:17.052291+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor
+record_created_at: '2026-10-24T07:22:17.052291+00:00'
+record_updated_at: '2026-10-24T07:22:17.052291+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: pending independent review
+  github_actor: ff6962757
+---
+id: agntcy_oasf_1_0_0_uses_rfc3339
+type: relation
+name_zh: OASF 1.0.0 记录的必需 created_at 属性要求 RFC3339 时间戳
+name_en: OASF 1.0.0 requires RFC3339 timestamps for record.created_at
+source: agntcy_oasf_1_0_0
+relation: uses
+target: rfc3339
+context:
+  version_context:
+    source: OASF 1.0.0 record/schema at commit 1d2eed1089e39a37678c4a1d9773ff618279d897
+    target: RFC 3339, July 2002
+  conditions_zh: 仅表述固定 record.json 中必需 created_at 属性的 RFC3339 MUST 文字要求，不是实现符合性保证。datetime_t 正则允许省略时区后缀，且不足以验证日历/数值范围；其
+    T/t 分隔符与空格示例有差异，RFC3339 §5.6 允许应用选择空格，故不把空格一律判为违规。保留来源差异，不证明服务器完整验证、运行行为、时间准确性、时钟同步或互通，也不自动包含 RFC9557 扩展。
+  conditions_en: Limited to the RFC3339 MUST statement for required created_at in the fixed record.json, not implementation
+    conformance. The datetime_t regex permits an absent timezone suffix and does not validate all calendar/range
+    constraints. Its T/t separator differs from space examples; RFC3339 section5.6 permits application selection
+    of a space, so spaces are not categorically violations. Source differences are retained without proving complete
+    server validation, runtime behavior, timestamp accuracy, clock synchronization or interoperability. RFC9557
+    extensions are not automatically included.
+evidence:
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/objects/record.json#L37-L40
+  title: OASF record.created_at is required and its value MUST conform to RFC3339
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/dictionary.json#L385-L389
+  title: OASF created_at maps to datetime_t
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/agntcy/oasf/blob/1d2eed1089e39a37678c4a1d9773ff618279d897/schema/dictionary.json#L807-L814
+  title: OASF datetime_t description and regex limitations
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html#section-5.6
+  title: RFC3339 section5.6 syntax and application separator choice
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html#section-5.7
+  title: RFC3339 section5.7 date/time restrictions
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T19:47:48.366121+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OASF timestamp-requirement evidence executor
+record_created_at: '2026-10-24T19:54:22.384718+00:00'
+record_updated_at: '2026-10-24T19:54:22.384718+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OASF record-schema intake review
+  github_actor: ff6962757
+---
+id: syslog_rfc5424_uses_rfc3339
+type: relation
+name_zh: Syslog RFC 5424 原始规范使用 RFC 3339 时间戳语法
+name_en: Syslog RFC 5424 original specification uses RFC 3339 timestamp syntax
+source: syslog_rfc5424
+relation: uses
+target: rfc3339
+context:
+  version_context:
+    source: RFC 5424 (March 2009 original publication)
+    target: RFC 3339 (July 2002 original publication)
+  conditions_zh: 文献级使用：RFC 5424 §6 与 §6.2.3 从 RFC 3339 派生 TIMESTAMP 语法，§12.1 将 2002 年 7 月 RFC 3339 列为规范引用。RFC 5424
+    要求大写 T/Z 和 T 分隔符、禁止闰秒，小数秒若出现须为一至六位；无法获取系统时间时必须使用 NILVALUE（不是 RFC 3339 日期时间）。这些限制说明原始规范如何使用 RFC 3339，不表示支持全部
+    RFC 3339 有效形式，也不要求每条消息都有可用时间戳。不声称整个协议依赖、实现符合性、时钟准确性、实际部署或 IA 采用。仅依据原始出版物，未整合后续扩展或勘误；RFC 5424 已记录的五项勘误内容与状态仍未核验。
+  conditions_en: 'Publication-level use: RFC 5424 sections 6 and 6.2.3 derive TIMESTAMP syntax from RFC 3339; section
+    12.1 identifies the July 2002 RFC as normative. RFC 5424 requires uppercase T/Z and the T separator, prohibits
+    leap seconds, and limits any fractional seconds to one through six digits. NILVALUE is mandatory when system
+    time cannot be obtained and is not an RFC 3339 date-time. These restrictions explain how the original specification
+    uses RFC 3339, not support for every RFC 3339-valid form or a usable timestamp in every message. No whole-protocol
+    dependency, implementation conformance, clock accuracy, actual deployment or IA adoption is asserted. Original
+    publications only; later extensions and errata are not consolidated. The five previously recorded RFC 5424 errata
+    remain unreviewed in contents and status.'
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc5424.html
+  title: RFC 5424 original March 2009 publication — sections 6, 6.2.3 and 12.1
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc3339.html
+  title: RFC 3339 original July 2002 publication — sections 5.6 and 5.7
+  language: en
+  accessed: '2026-10-30'
+record_created_at: '2026-10-30T22:11:57.429735+00:00'
+record_updated_at: '2026-10-30T22:11:57.429735+00:00'
+last_verified_at: '2026-10-30T22:11:57.429735+00:00'
+last_verified_by: Agent — OpenAI / dot / add_syslog_timestamp_relation; original publications only; errata unreviewed
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_syslog_timestamp_relation
+  reviewer: Independent Agent — OpenAI / dot / add_syslog_timestamp_relation/semantic_review
+  github_actor: ff6962757

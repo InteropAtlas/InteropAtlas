@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-python-geojson-python-geojson
+candidate_id: python_geojson
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_geojson
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T07:40:38.918709+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者已读全部 proposed 对象和关系，连接器直读固定 README 的 RFC7946 对象声明和 geometry.py，并核 codec/feature/base 行为及测试脚本。
+  - 独立重跑21项可信内存观察，包含13个官方源码 SHA/blob 和9个安装源码逐字节核对；认可独立软件主体、既有 data_serialization、有限 implements 和 geospatial 导航。
+  - 保留六位舍入、局部 is_valid、null/未知 type/非有限数覆盖以及 RFC SHOULD 限制，不推断完整验证器、GIS、OGC 服务或认证。
+  - 本时间为执行方实际记录收到审核结论的时点，不推测审核用时；后续精确序列化复核不是新的独立语义审核，CI 不替代审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/489
+- https://github.com/InteropAtlas/InteropAtlas/blob/bcc66f0f246a1a6965756038b095734b173ecaad/01_State/Inbox/review-packets/python-geojson-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/fa9ce570e88f2bf1f92d63dec6fa1f737d9bd69d
+decided_at: '2026-10-21T07:43:15.262148+00:00'
+notes:
+- 固定3.3.0独立库主体，不与GeoJSON规范、OGC规范或通用JSON库合并；当前候选回指只防止再次创建。
+- bounded implements 仅对象模型和编解码，不保证所有可构造数据符合RFC，也不将共享能力或宿主 uses 传递为协议实现。

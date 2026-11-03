@@ -5,21 +5,37 @@ publisher: Apple Inc.
 family: artifact
 kind: format
 external_identifiers:
-  - namespace: apple
-    value: quicktime
+- namespace: apple
+  value: quicktime
 locators:
-  - url: https://developer.apple.com/documentation/quicktime-file-format
-    role: official
+- url: https://developer.apple.com/documentation/quicktime-file-format
+  role: official
+- url: https://developer.apple.com/standards/classic-quicktime/
+  role: official
+- url: https://developer.apple.com/standards/qtff-2001.pdf
+  role: official
+- url: https://developer.apple.com/documentation/quicktime-file-format.md
+  role: official
+- url: https://developer.apple.com/documentation/quicktime-file-format/storing_and_sharing_media_with_quicktime_files.md
+  role: official
+- url: https://developer.apple.com/documentation/quicktime-file-format/revision_history.md
+  role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - apple_quicktime
   reasons:
-    - The QuickTime File Format (.mov) is Apple's object-oriented media container; its atom-based structure underlies ISOBMFF/MP4.
-    - Apple already exists as a canonical organization in InteropAtlas; this candidate is the format artifact, not a duplicate organization.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical apple_quicktime by accept-20261024-quicktime-file-format. Frozen new-state Candidate 19bc4d33e7f255588e766993afb7a0c3dc404e40
+    and review_required route replay against actual ancestor 585e08f95422df1d139856e45dceeb12cd28589d; this back-reference
+    prevents duplicate creation without merging subjects.
   merge_authorized: false
-unknowns: []
+unknowns:
+- 2001-03-01/March 2001 是所审经典文档印载日期，不是所有 QTFF 文件的通用版本或最新版本。PDF 的 2006-07-15 生成元数据和 2001/2002 版权文字不替代该技术日期；不宣称 URL
+  或字节不可变。
+- 当前官方变更记录列有 2007 与 2016 等后续变化，最新完整格式修订未穷尽核实；顶部 2016-09-13 条目不等于整个当前网站冻结为 2016 版，2026 页脚或采集时间也不是格式发布日期。
+- 媒体样本可位于同一或不同文件；引用/索引不证明样本存在、可访问或可成功解码。未运行解析器、媒体文件、应用、框架或参考代码，未验证实现、新增/弃用功能、完整符合性、安全、无损往返或跨应用互通。
+- 不从公开文档推断开放标准、许可、专利授权、免版税实现或推荐；不接纳 QuickTime 应用，不建立 ISO-BMFF/MP4/JPEG-2000 等价、uses/implements/extends 或其他技术关系。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  reviewer: Agent — OpenAI, independent QuickTime intake reviewer (review_quicktime_format_intake)

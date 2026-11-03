@@ -1,0 +1,73 @@
+packet_id: audio_file_relations_20261020
+status: pending_independent_semantic_review
+baseline_commit: 07c882d8e90c5fdfb66d445a2676e77ea8a9cb7e
+executor: Agent — OpenAI / dot
+reviewer: null
+review_scope_zh:
+- 仅新增两个已有正式对象间的关系；使用现有uses、supersedes谓词和relation.v0字符串端点，不更改对象、模型、治理或页面。
+- 审核关系方向、端点身份、证据定位与版次边界；逐项给出acceptable_for_ordinary_acceptance、deferred或rejected。
+- 对象当前固定版次不自动成为未注明版次引用的语义；不推断格式兼容、等价、强制采用或实现符合性。
+source_evidence:
+- evidence_id: bw64_adm_linkage
+  url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2088-2-202511-I!!PDF-E.pdf
+  accessed: '2026-10-20'
+  observed_via: author_web_retrieval
+  locator: Scope; Annex 1 section 1 (printed pages 1–3)
+  observation_zh: BS.2088-2说明BW64承载包括BS.2076定义的ADM在内的元数据，并以chna块将文件音轨关联至ADM标识。此处引用未指定BS.2076版次。
+- evidence_id: ebu_rf64_supersession
+  url: https://tech.ebu.ch/publications/tech3306
+  accessed: '2026-10-20'
+  observed_via: author_web_retrieval
+  locator: Publication summary; all versions / 2.0 (June 2018)
+  excerpt: which has effectively superseded the EBU specification
+  observation_zh: EBU将BS.2088称为Tech 3306的实质后继规范，终版2.0是指向ITU建议书的文档，EBU不再发展Tech 3306。2018年声明未指定BS.2088版次，不能归因于2025年的-2版首次发生替代。
+relations:
+- proposal_id: bw64_uses_adm
+  evidence_ids:
+  - bw64_adm_linkage
+  proposed_record:
+    id: bw64_uses_adm
+    type: relation
+    name_zh: BW64使用ADM元数据模型
+    name_en: BW64 uses the ADM metadata model
+    source: itur_bs2088_bw64
+    relation: uses
+    target: itur_bs2076_adm
+    context:
+      version_context:
+        source: BS.2088-2 (11/2025)
+        target: BS.2076 (undated reference; work-level)
+      conditions_zh: 仅表述BS.2088-2的ADM元数据及音轨标识关联机制；原文未指定BS.2076版次，本关系不把端点当前固定的BS.2076-3解释为专门的版次引用或兼容性认证，也不表示所有音频都必须包含ADM。
+      conditions_en: Limited to the ADM metadata and track-ID linkage mechanism in BS.2088-2. The source references
+        BS.2076 without an edition; the endpoint currently pinned to BS.2076-3 does not establish an edition-specific
+        citation, compatibility certification or universal requirement for ADM in all audio.
+    evidence:
+    - url: https://www.itu.int/dms_pubrec/itu-r/rec/bs/R-REC-BS.2088-2-202511-I!!PDF-E.pdf
+      title: ITU-R BS.2088-2 — Scope and Annex 1 section 1
+      language: en
+      accessed: '2026-10-20'
+- proposal_id: bs2088_supersedes_ebu_rf64
+  evidence_ids:
+  - ebu_rf64_supersession
+  proposed_record:
+    id: bs2088_supersedes_ebu_rf64
+    type: relation
+    name_zh: BS.2088实质取代EBU Tech 3306
+    name_en: BS.2088 effectively supersedes EBU Tech 3306
+    source: itur_bs2088_bw64
+    relation: supersedes
+    target: ebu_rf64
+    context:
+      version_context:
+        source: BS.2088 (work-level statement published in 2018)
+        target: EBU Tech 3306, final pointer version 2.0 (06/2018)
+      conditions_zh: 仅记录EBU对出版物继承关系的明确声明；该历史声明未指定BS.2088版次，不表示当前端点BS.2088-2于2025年首次取代Tech 3306，也不声明RF64与BW64文件完全兼容、主体等价或历史RF64对象应被删除。
+      conditions_en: Records only EBU’s explicit publication-succession statement. The historical statement does
+        not specify a BS.2088 edition, does not date the succession to the current BS.2088-2 endpoint in 2025, and
+        asserts neither universal RF64/BW64 file compatibility nor identity equivalence or removal of the historical
+        RF64 record.
+    evidence:
+    - url: https://tech.ebu.ch/publications/tech3306
+      title: EBU Tech 3306 — publication summary and final Version 2.0
+      language: en
+      accessed: '2026-10-20'

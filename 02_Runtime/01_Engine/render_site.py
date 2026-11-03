@@ -7,8 +7,11 @@ import argparse
 import html
 from collections import defaultdict
 from pathlib import Path
+from urllib.parse import urlsplit
 
 import markdown
+from markdown.extensions import Extension
+from markdown.treeprocessors import Treeprocessor
 
 from bootstrap_query import index_objects, load_atlas
 from graph_index import GraphIndex
@@ -181,9 +184,31 @@ def page_shell(title: str, body: str, prefix: str = "", breadcrumb: str | None =
 <body><nav class=\"site-nav\" aria-label=\"主导航\"><a href=\"{prefix}index.html\"><strong>InteropAtlas</strong></a><span>· 人类可读实验站</span><button id=\"theme-toggle\" class=\"theme-toggle\" type=\"button\" onclick=\"toggleTheme()\">主题</button></nav>{trail}<main>{body}</main></body></html>"""
 
 
+class LocalMarkdownLinks(Treeprocessor):
+    """Map parsed local Markdown anchors without rewriting source text or URLs."""
+
+    def run(self, root):
+        for anchor in root.iter("a"):
+            href = anchor.get("href", "")
+            try:
+                target = urlsplit(href)
+            except ValueError:
+                continue
+            if target.scheme or target.netloc or href.startswith("//"):
+                continue
+            path = href.split("#", 1)[0].split("?", 1)[0]
+            if path.endswith(".md"):
+                anchor.set("href", path[:-3] + ".html" + href[len(path):])
+
+
+class LocalMarkdownLinksExtension(Extension):
+    def extendMarkdown(self, md):
+        # Inline parsing runs at priority 20; code and raw HTML remain untouched.
+        md.treeprocessors.register(LocalMarkdownLinks(md), "local_markdown_links", 15)
+
+
 def markdown_to_html(text: str) -> str:
-    text = text.replace(".md)", ".html)")
-    return markdown.markdown(text, extensions=["extra", "sane_lists"])
+    return markdown.markdown(text, extensions=["extra", "sane_lists", LocalMarkdownLinksExtension()])
 
 
 def object_card(obj: dict, path: Path) -> str:

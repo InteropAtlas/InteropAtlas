@@ -1,0 +1,112 @@
+id: pion_rtp
+type: system
+kind: library
+name_zh: Pion RTP 实时传输 Go 库
+name_en: Pion RTP Go library
+official_name: Pion RTP
+version: 1.10.6
+external_identifiers:
+- namespace: github
+  value: pion/rtp
+description_zh: Pion 项目的开源 Go RTP 库。本记录固定核验 1.10.6 的源码，仅以调用方提供合法字段、X=false 的 RFC3550 基础包布局编解码作为实现先例；不等同于完整 RTP/RTCP
+  会话、独立符合性或互通验证。 调用方需提供 V=2、PT≤127、至多15个CSRC及一致的填充标志/大小；库不验证这些字段范围。Unmarshal 载荷借用输入缓冲区。仅静态检视，未安装、构建或运行上游；不证明 SRTP/安全或
+  IA 采用。 P=false 时两个 PaddingSize 均零；P=true 时有效值 1..255，Header.PaddingSize 优先，弃用的 Packet.PaddingSize 保持零或一致。
+description_en: 'The Pion project’s open-source Go RTP library. This record verifies fixed 1.10.6 sources, using
+  RFC3550 base packet layout encoding/decoding with caller-valid fields and X=false as a bounded implementation
+  precedent, not complete RTP/RTCP sessions, independent conformance or interoperability testing. Callers must supply
+  V=2, PT<=127, at most 15 CSRCs and coherent padding flags/sizes; the library does not enforce these field ranges.
+  Unmarshal payload borrows the input buffer. Static inspection only: the upstream package was not installed, built
+  or run; this is not SRTP/security or IA-adoption evidence. With P=false both PaddingSize fields are zero; with
+  P=true the effective size is 1..255, Header.PaddingSize takes precedence and deprecated Packet.PaddingSize stays
+  zero or consistent.'
+open_source: true
+license_expression: MIT
+domains:
+- media
+- networking
+scope_notes_zh: '软件库主体对应官方 tag v1.10.6、commit 9a8f93554133824676326b43f068167fef01a884；不是 Pion 组织、RTP 规范或独立虚构包处理组件。只核验该版次，不自动外推其他版本。
+
+
+  仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC 数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false
+  时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的 Packet.PaddingSize 保持零或一致。Unmarshal 的
+  Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP 会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录
+  A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。'
+scope_notes_en: 'The whole software-library subject is pinned to official tag v1.10.6, commit 9a8f93554133824676326b43f068167fef01a884;
+  it is not the Pion organization, the RTP specification or a fictional standalone packet-processing component.
+  Only this version was verified, not other releases.
+
+
+  From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs, payload and padding delimitation
+  with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent padding flags/sizes are caller
+  preconditions, not general validity checks enforced by the library. With P=false both PaddingSize fields must
+  be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize while the deprecated Packet.PaddingSize
+  stays zero or consistent. Unmarshal Payload borrows the input buffer rather than copying; callers own its lifetime
+  and subsequent mutation. Source and test recipes were inspected only: the upstream package was not installed,
+  built or run. This does not establish complete RTP/RTCP sessions, SSRC management, sequence/timestamp generation,
+  clock synchronization, congestion behavior, codec/profile interpretation, Appendix A validation, transport delivery,
+  SRTP/security, third-party interoperability or IA adoption; arbitrary inputs have no byte-identical roundtrip
+  guarantee. Header extensions and other functions are outside this evidence slice, not asserted absent from the
+  library.'
+sources:
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/README.md#L1-L22
+  title: Pion RTP identity and upstream RFC3550 implementation claim
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/go.mod#L1-L10
+  title: Go module identity and declared toolchain/dependencies; not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L107-L154
+  title: Base header parsing and bounds checks; version is extracted rather than validated
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L230-L256
+  title: Packet payload and padding boundaries; payload aliases caller buffer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L272-L318
+  title: Base header serialization and caller-controlled fields
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L525-L568
+  title: Packet serialization, payload copy and padding bytes
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L610-L615
+  title: Effective padding size and deprecated-field fallback
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet_test.go#L1714-L1745
+  title: No-extension padding test recipes; inspected, not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/LICENSE
+  title: Fixed-source MIT license
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/releases/tag/v1.10.6
+  title: Official Pion RTP v1.10.6 release, published 2026-10-21
+  language: en
+  accessed: '2026-10-31'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-5.1
+  title: RFC3550 section 5.1 base packet layout; section 4 byte order
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T20:49:26+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed Pion RTP source evidence executor
+record_created_at: '2026-10-31T21:05:00+00:00'
+record_updated_at: '2026-10-31T21:05:00+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: pion_rtp
+  acceptance_event_id: accept-20261031-pion-rtp
+  reviewed_candidate_blob: d6ee78438f58628f460f01c913c77309f1a332dd
+  reviewed_against_commit: b8f63b927af87b3ad5e25977b2f858c4d6a88d27
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: b8f63b927af87b3ad5e25977b2f858c4d6a88d27
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/b8f63b927af87b3ad5e25977b2f858c4d6a88d27/01_State/Inbox/review-packets/pion-rtp-implementation-20261031.yaml

@@ -1,0 +1,38 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-cloudevents-kotlin-cloudevents_kotlin_sdk
+candidate_id: cloudevents_kotlin_sdk
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: cloudevents_kotlin_sdk
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer / review_cloudevents_kotlin_packet
+  reviewed_at: '2026-10-29T11:19:26.181575+00:00'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 cloudevents_kotlin_sdk，审阅候选 blob 56b73704a82eb61907542e676d2e03cadfe3886f。
+  - 独立语义PASS绑定精确packet edd1c782658e1e244cfc78642440a2a2843d9909 与新候选 56b73704a82eb61907542e676d2e03cadfe3886f；报告SHA256
+    5479d821a17015845f8def1e46967c8281a3d9975d4221ec8d61c9f364f1cd47，真实reviewed_at_utc 2026-10-29T11:19:26.181575+00:00。semantic_review_url引用真实冻结且保留pending状态的准备原稿，不把原稿本身当审批；Reviewer身份/决定记于本事件及交付PR。
+  - 只接纳cloudevents/sdk-kotlin官方GitHub源码发布v0.2.0，commit27b718156fd9410a926e08f087ee67c7ba421c1a；固定README/测试明示1.0.2文本，非仅据wire1.0推断patch。Maven二进制、安装/构建/运行/平台兼容性均未核验；tag未签名，非安全认证。
+  - 一条data_serialization能力字段、一条有界implements至既有cloudevents_1.0.2、services编辑成员。目标core固定规范要求JSON，batch是另一个显式入口，不新建格式节点/边；旧JavaScript版次边界、PROV-O身份、标准记录/日期均不改。
+  - 静态正面功能：有效caller输入下core上下文/独立payload/非冲突扩展构建与读取，JSON单事件/数组batch内存encode/decode；不是完整core/JSON符合性认证或网络绑定/服务/路由/投递保证。
+  - 构造和encoder不调用validate；decode调用已实现的STRICT检查而非完整验证。core名如id可被程序扩展覆盖序列化成员；URI包装不检语法、contenttype只检String；合法非冲突字段及唯一性/实际时间/载荷schema/真实性由应用负责。
+  - JSON扩展decode仅string/int32/bool，URI/Timestamp/Binary字符串不恢复原类型。payload有JSON/文本/Base64/null内部carrier；不是公共工厂。普通字节按contenttype路由，不能概括所有bytes为binary；任意修改carrier
+    contenttype/任意输入往返不在范围，Instant UTC非原offset/字节相同保证。
+  - 39份捕获body/headers作者及Reviewer重hash，32SDKbody与官方完整tree blob相等；6份测试仅定义未运行。SDK捕获单项status/finalURL未保存，不虚构HTTP日志；获取窗口非文件时间或逐请求仪表。
+  - 固定settings.gradle.kts raw GET先前proxy tunnel403拒绝，缺完整构建输入；未重试/换路/下载archive/执行Gradle或SDK。此限与独立语义静态证据充分性判断同时保留，不把IA测试误写为上游runtime。
+  - 作者134unittest+12custom、20重叠standalone与10docs/Markdown加新对象Markdown通过；127旧事件117accepted真实冻结回放+10deferred保持，仅新增1review_required候选。作者报告SHA25696034b153c9b74861416eac2c2b6fdcad10ccb6d343b3d405fd16296543c6e3d，自测不代替独立审阅。
+  - 现有renderer省略完整scope_notes/relationcontext。Reviewer实读三端HTML，可见source-release/static/有效非冲突字段/构造编码不自动验证/非fullconformance-runtime-networkdelivery摘要和反向source-release名称作为导航，未当成全面符合性。
+  - 可选V1 fixture3/17失败、P5 1/1通过、30旧链接问题与12兼容警告基线同一；本地Chromium既有拒绝未重试/绕过。PR/main实际BrowserCI、正常merge、Pages/live后续单独验证。
+  - connector真实远端freeze经普通fetch精确字节/唯一父基线校验；物化保持冻结祖先不压平。#498拒绝/#439待Owner/#416暂停及旧候选/审计/治理/schema/renderer/维护保持；最终独立结构复核与适用远端检查另行完成。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/7e79ce099bf8ac40644be0f09437caf874851d36/01_State/Inbox/review-packets/cloudevents-kotlin-json-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/56b73704a82eb61907542e676d2e03cadfe3886f
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/edd1c782658e1e244cfc78642440a2a2843d9909
+decided_at: '2026-10-29T11:22:22.082338+00:00'
+notes:
+- 一新对象、一有界implements、一能力字段与一个既有services编辑导航成员；仅接纳一个候选。
+- 249旧对象、190旧关系、127旧事件、240旧候选及历史覆盖快照保持；完整准备原稿在真实冻结祖先可恢复。

@@ -1,0 +1,133 @@
+id: farshidtz_senml
+type: system
+kind: software
+name_zh: farshidtz/senml — Go SenML 软件库
+name_en: farshidtz/senml — Go SenML library
+official_name: farshidtz/senml
+description_zh: 'farshidtz/senml 是专门处理传感器测量列表（SenML）的 Go 软件库，module 为 github.com/farshidtz/senml/v2；本记录固定官方 v2.0.0（2020-03-26，commit
+  320c4746a311e331e1d1b616d3dc5ad2d53e820d），保留整库身份，不另造 JSON 转换组件。静态源码显示 Pack 为 Record 列表，Record 提供测量名称、单位、时间、值和共享
+  base 字段；Normalize 原地组合 base 名称、时间、单位、数值与 sum；codec 提供完整 JSON Pack 的字节编码与解码。这是专用记录模型与处理先例，不是通用 JSON 库或实测互通。EncodeJSON/DecodeJSON
+  不自动调用 Validate 或 Normalize，示例中的显式调用流程也未运行。Validate 仅检查部分名称、值类型冲突及 sum 条件：空 Pack 不拒绝，负 BaseVersion 分支构造错误但不返回，空字符串值按长度计数。Normalize
+  注释要求先验证；相对时间取 time.Now，BaseTime 将零与缺失合并且仅非零值更新 base，不能保证全部 base 重置、时间或版本情况正确。StringValue/DataValue 的 string 与
+  omitempty 不能区分缺失和空字符串；DataValue 不作 base64url 校验；固定结构未保留未知标签或执行未知尾下划线标签的必理解检查。因此不承诺完整 RFC 8428 符合性、完整验证/规范化或无损往返。固定
+  Encode/Decode dispatcher 将 application/senml+json 路由到完整 JSON Pack codec，未提供 application/sensml+json 或 EXI 分支；media_types.go
+  中相应常量不是实现证据，不声称增量 SenSML 支持。XML/CBOR/custom CSV 代码存在但不扩入本次能力核验，CSV 流不等于 SenSML 流。LICENSE 为项目 MIT 文本，go.mod 声明
+  Go 1.14 与 fxamacker/cbor/v2 v2.2.0，仅记录元数据，不证明依赖、许可或安全审计。未安装、构建或运行上游源码、示例或测试，不证明第三方互通、设备适用性、安全、性能或 IA 采用；不称最新版本。仅既有
+  industrial/measurement 编辑导航，无技术关系或能力断言。
+
+
+  English scope and limitations:
+
+
+  farshidtz/senml is a dedicated Go library for Sensor Measurement Lists (SenML), with module github.com/farshidtz/senml/v2.
+  This record fixes official v2.0.0 (2020-03-26, commit 320c4746a311e331e1d1b616d3dc5ad2d53e820d) as the whole library,
+  not an invented JSON conversion component. Static source reading shows Pack as a list of Records with measurement
+  names, units, times, values and shared base fields; Normalize combines base names, times, units, values and sums
+  in place; the codec encodes and decodes complete JSON Pack bytes. This is a dedicated record-model and processing
+  precedent, not a general-purpose JSON library or measured interoperability. EncodeJSON/DecodeJSON do not automatically
+  call Validate or Normalize; the explicit example workflow was not executed either. Validate checks only some name,
+  conflicting-value-type and sum conditions: it does not reject an empty Pack, its negative BaseVersion branch constructs
+  but does not return an error, and it counts string values by nonzero length. Normalize requires prior validation
+  according to its comment; relative times use time.Now, and BaseTime conflates zero with absence and updates the
+  base only for nonzero values, so correct handling of all base resets, time or version cases is not established.
+  StringValue/DataValue use string and omitempty, losing the distinction between absence and an empty string; DataValue
+  is not base64url-validated; the fixed structure does not preserve unknown labels or enforce must-understand handling
+  for unknown trailing-underscore labels. Full RFC 8428 conformance, complete validation/normalization and lossless
+  round-trips are therefore not claimed. The fixed Encode/Decode dispatcher routes application/senml+json to the
+  complete JSON Pack codec and has no application/sensml+json or EXI branch; corresponding media_types.go constants
+  are not implementation evidence, and incremental SenSML support is not claimed. XML/CBOR/custom CSV code exists
+  but is outside this capability review; CSV streaming is not SenSML streaming. LICENSE is the project MIT text
+  and go.mod declares Go 1.14 and fxamacker/cbor/v2 v2.2.0; these are metadata, not a dependency, license or security
+  audit. No upstream source, example or test was installed, built or executed; third-party interoperability, device
+  suitability, security, performance or IA adoption is not established; no latest-version claim. Existing industrial/measurement
+  memberships are editorial navigation only, with no technical relation or capability assertion.'
+description_en: 'farshidtz/senml is a dedicated Go library for Sensor Measurement Lists (SenML), with module github.com/farshidtz/senml/v2.
+  This record fixes official v2.0.0 (2020-03-26, commit 320c4746a311e331e1d1b616d3dc5ad2d53e820d) as the whole library,
+  not an invented JSON conversion component. Static source reading shows Pack as a list of Records with measurement
+  names, units, times, values and shared base fields; Normalize combines base names, times, units, values and sums
+  in place; the codec encodes and decodes complete JSON Pack bytes. This is a dedicated record-model and processing
+  precedent, not a general-purpose JSON library or measured interoperability. EncodeJSON/DecodeJSON do not automatically
+  call Validate or Normalize; the explicit example workflow was not executed either. Validate checks only some name,
+  conflicting-value-type and sum conditions: it does not reject an empty Pack, its negative BaseVersion branch constructs
+  but does not return an error, and it counts string values by nonzero length. Normalize requires prior validation
+  according to its comment; relative times use time.Now, and BaseTime conflates zero with absence and updates the
+  base only for nonzero values, so correct handling of all base resets, time or version cases is not established.
+  StringValue/DataValue use string and omitempty, losing the distinction between absence and an empty string; DataValue
+  is not base64url-validated; the fixed structure does not preserve unknown labels or enforce must-understand handling
+  for unknown trailing-underscore labels. Full RFC 8428 conformance, complete validation/normalization and lossless
+  round-trips are therefore not claimed. The fixed Encode/Decode dispatcher routes application/senml+json to the
+  complete JSON Pack codec and has no application/sensml+json or EXI branch; corresponding media_types.go constants
+  are not implementation evidence, and incremental SenSML support is not claimed. XML/CBOR/custom CSV code exists
+  but is outside this capability review; CSV streaming is not SenSML streaming. LICENSE is the project MIT text
+  and go.mod declares Go 1.14 and fxamacker/cbor/v2 v2.2.0; these are metadata, not a dependency, license or security
+  audit. No upstream source, example or test was installed, built or executed; third-party interoperability, device
+  suitability, security, performance or IA adoption is not established; no latest-version claim. Existing industrial/measurement
+  memberships are editorial navigation only, with no technical relation or capability assertion.'
+version: 2.0.0
+external_identifiers:
+- namespace: github
+  value: farshidtz/senml
+official_url: https://github.com/farshidtz/senml
+domains:
+- industrial
+- measurement
+sources:
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/README.md
+  title: farshidtz/senml v2.0.0 — whole-library identity and unexecuted example workflow
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/senml.go
+  title: farshidtz/senml v2.0.0 — Pack/Record, partial Validate and in-place Normalize limitations
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/codec/codec_json.go
+  title: farshidtz/senml v2.0.0 — complete JSON Pack encoding/decoding without automatic validation
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/codec/codec.go
+  title: farshidtz/senml v2.0.0 — bounded media-type dispatcher
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/media_types.go
+  title: farshidtz/senml v2.0.0 — constants, not proof of implemented codecs
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/codec/codec_json_test.go
+  title: farshidtz/senml v2.0.0 — test source only; not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/examples_test.go
+  title: farshidtz/senml v2.0.0 — explicit validation/normalization example source; not executed
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/go.mod
+  title: farshidtz/senml v2.0.0 — historical module/toolchain/dependency declarations only
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/blob/320c4746a311e331e1d1b616d3dc5ad2d53e820d/LICENSE
+  title: farshidtz/senml v2.0.0 — project MIT text; not dependency/license audit
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/farshidtz/senml/releases/tag/v2.0.0
+  title: Official historical v2.0.0 release, 2020-03-26; not a latest-version or full-conformance endorsement
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T07:49:45.023804+00:00'
+last_verified_by: Agent — OpenAI / dot / add_go_senml_precedent; fixed source reading only; no upstream execution
+record_created_at: '2026-10-31T07:58:29.676415+00:00'
+record_updated_at: '2026-10-31T07:58:29.676415+00:00'
+latest_substantive_contribution:
+  initiator: Agent — OpenAI / dot (within Human Owner ff6962757 ordinary-intake authorization)
+  executor: Agent — OpenAI / dot / add_go_senml_precedent
+  reviewer: Independent Agent — OpenAI / dot / add_go_senml_precedent/semantic_review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: farshidtz_senml
+  acceptance_event_id: accept-20261031-farshidtz-senml
+  reviewed_candidate_blob: 808e845fdf7398f8f6e657d3241499c18503de84
+  reviewed_against_commit: ac5cd8c8a4c70b9eb382d3fce7c6a3477042820d
+  candidate_executor: Agent — OpenAI / dot / add_go_senml_precedent
+  canonical_serializer: Agent — OpenAI / dot / add_go_senml_precedent
+  reviewed_packet_commit: ac5cd8c8a4c70b9eb382d3fce7c6a3477042820d
+  reviewed_packet_blob: aff37554e9288d34462b37651d75db440b13330f
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/ac5cd8c8a4c70b9eb382d3fce7c6a3477042820d/01_State/Inbox/review-packets/farshidtz-senml-20261031.yaml

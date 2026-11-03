@@ -1,0 +1,348 @@
+id: libebur128
+type: system
+kind: library
+name_zh: libebur128 C 节目响度测量库
+name_en: libebur128 C programme-loudness measurement library
+description_zh: 'libebur128 是独立的 C 节目响度测量库；本记录固定 v1.2.6（官方 release 发布于 2021-02-14）、轻量 tag 所指 commit 67b33abe1558160ed76ada1322329b0e9e058b02
+  / tree 66cbb166495a71a284777669b5cb81730589201c。官方固定 codeload 归档 25,912 字节，SHA-256 1b5c0793ba89c495cb9dae885a74361ddb878de77acead17ec7f4cf199c2f131，19
+  个成员与固定 Git blob 原字节逐一相等。这里只增加既有 measurement 编者导航，不新增 capability 或技术关系。IA 已有 broadcast_loudness Rust 0.5.0 的有界静态记录；本次不同
+  C 库的实际构建与有限运行证据补充输入/API/证据多样性，不是“此前零响度实现”，也不改变或重新核准 Rust 对象。上游宽泛声称 EBU R128，header/README 涉及 BS.1770-4，而 IA 的
+  itur_bs1770 是 BS.1770-5、ebu_r128 是 v5；不据此建立当前版本 implements/兼容/采用关系或完整符合性结论。
+
+
+  库计算调用方提供的 PCM，不是音频解码器、自动施加增益的响度归一器、媒体交付 profile 检查器或播放器。short/int/float/double API 使用交错通道（interleaved）；frames
+  是帧数而不是总 samples 数，缓冲区长度、通道布局、样本有限性与标称满刻度缩放由调用方负责。有限测试的主信号是数学生成的 48 kHz、1 kHz 正弦，绝非 EBU 官方向量。固定源初始化允许 1..64 通道、16..2,822,400
+  Hz，并要求包含 M；未识别的额外 mode bit 在命名测试仍被接受，不是严格枚举验证；README 的“所有采样率”不能扩大为每个参数值都准确。只在若干命名参数点观察，不覆盖全部声道/采样率/类型。非有限 double
+  NaN 输入实际可返回 SUCCESS 并传播到响度 NaN；1.25/1.5 这类有限超单位幅度可被接收且峰值不削波。API 成功不是自动验证、归一化、任意输入安全或数值准确保证。
+
+
+  M 表示最后 400 ms、S 最后 3 s；I、LRA、sample/true peak 等读取受各自 mode flags 限制。空/静音/门下或未积足完整门限块时，I 可为负无穷哨兵；48 kHz 的命名测试 19,199
+  帧仍无完整 400 ms 块，19,200 帧才产生有限结果，这不保证任意 19,200 帧均合格。M/S 则可在不足其窗口时，依初始零填充读出有限值，不是“已准备完整窗口”的 guard。静音示例的 relative
+  threshold=-70、LRA=0 仅为该 API 观察，不把空集合哨兵当规范普遍定义。有限相对增益、分块与多实例观察不证明所有完整流等价、阈值边缘、绝对误差界或物理标定。多实例 I 按库的能量/门限数据合并，不是各
+  LUFS 的算术平均，也不证明任意文件拼接或测量设置可以互换。
+
+
+  不能把 header 的常规默认列表照套全部布局：固定源码对 4 通道使用 L/R/Ls/Rs、5 通道使用 L/R/C/Ls/Rs；通常 6 通道的 index 3 才是 EBUR128_UNUSED（不计响度，例如
+  LFE）。被排除响度的通道仍可有 sample peak。调用方须显式确认映射；DUAL_MONO 仅允许单通道。set_channel 对未知 enum 数值 12345 的命名测试仍返回 SUCCESS，此后未处理音频；这不是
+  enum 合法性或安全使用证明。研究首版据 header 假设 4 通道 index 3 未使用，出现 1/74 断言失败；保留旧探针和结果，随后按源码更正自写断言并增加 4/6 通道对照为 75/75，未修改上游。作者另做
+  4/5/6 对照；这些有限测试不等于覆盖所有 enum、声场布局或多通道规范。
+
+
+  状态和资源并非无条件重置或恒定：零帧 add 调用仍将 previous sample/true peak 清零，但保留累计 peak；change_parameters 的采样率改变会清过滤器/音频窗口，却可保留 I/LRA
+  历史和同通道累计 peak，并不等于新建状态。改变通道数会重置 map；未完成块可丢失。max_history 只在非 histogram 路径限制历史，默认队列可随合格数据时长增长；histogram 的离散结果不保证与队列比特相同。读取窗口须不超过所设窗口，模式和资源错误要检查返回码，不能假定所有错误原子回滚。源码层面，set_max_window
+  的增长分配先按 samplerate*window 计算，而 init/change_parameters 有 /1000；因此不能按初始化的毫秒换算估计增长分配量。此处未做增长大分配、OOM 或压力测试，不声称漏洞、查询上限失效或所有窗口调用失败；loudness_window
+  的上限 guard 仍存在。
+
+
+  true peak 是固定版本定义的 custom polyphase FIR 插值结果，header 明确不应跨版本直接比较：<96 kHz 使用 4x、96..<192 kHz 使用 2x，>=192 kHz 路径不插值，所测返回
+  sample-peak 值。有限峰值例不证明任意信号重建最大峰、BS.1770 Annex 2 或全部规范/平台符合性。实际研究/作者构建环境为 Linux x86_64、GCC 14.2.0、CMake 3.31.10、libc/libm；官方
+  CMake Release 核心 shared/system queue 与 static/internal queue 分开成功，原源不改，ENABLE_TESTS=OFF、ENABLE_FUZZER=OFF。工具版本记录不是全供应链
+  hash-pin，不声称其他平台、编译器、ANSI C 可移植性、性能、线程安全、sanitizer 或二进制可复现构建。
+
+
+  作者从公开 Git 与固定 codeload 独立重取并核 19 个原字节成员，亲自执行最终研究 v4：同 75 条有限输出断言加成功返回码 fail-closed 检查，在两个 CMake 配置各通过，不是 150 条独特覆盖。作者另写最终
+  v3 的 26 条有限断言，在这两个库及 direct GNU11/source 三配置各通过，不是 78 条独特覆盖；早期版本/结果保留，v2 加强 getter 返回码，v3 把一个过宽 S-mode 标签改为实际初始
+  I/400ms buffer 的 shortterm 拒绝。独立预审另有 20 条有限检查，三方及各配置大量重叠，不相加覆盖。CMake 兼容/弃用提示及 direct GNU11 原源的 set-but-unused
+  警告原样保留，不声称零警告。最终原源和所有先前失败均保留，成功只指这些命名构建与探针，不是下述上游 suite。 研究 v3 后被独审发现仍有三个成功 getter 未核返回码，旧“完整 fail-closed”措辞过强；v4
+  修复三漏项并立即检查七条已赋值成功路径，保留旧文件/结果，未改库。独立预审原 20 例亦有三个 getter 仅看输出，另存 v2 补返回码并初始化数值，20 行输出不变，仍是同 20 而非 40；作者重放其明确署名测试代码，不能把作者执行冒独立复核。
+
+
+  上游 conformance suite 明确 NOT RUN：启用 ENABLE_TESTS 的实际 configure 因缺 libsndfile 失败；曾有开发包获取被拒绝/不可用，未重试或另路绕过。EBU 音频条款涉及下载即接受及
+  internal R&D 用途，未在本地取得或使用任何 EBU 音频向量，也未代用户接受条款；研究早先的 web 工具 ZIP 读取遇到 unsupported-type，不算已取得语料或测试通过，不能从工具报错推断网络内部从无请求。读到条款后未再获取；合成波形不是官方向量。固定
+  test/tests.c 末尾无条件 return 0、PASSED/FAILED 宏仅打印，缺文件分支可给 0.0/NaN；不能凭进程 exit 0 当作上游测试通过。核心能构建不等于官方测试套件已运行，也不能以套件受阻反推核心不能编译。
+
+
+  README/COPYING 对主库作 MIT 说明，但 bundled ebur128/queue/sys/queue.h 及 doc/license/queue.txt 另带 UC Berkeley 三条再分发/不背书条款，另有
+  doc/license/R128Scan.txt；不把裸 MIT 泛化为整树所有内容的法律判定，不合成 license_expression 属性或改变 IA 许可证。本记录不是实际声压/听觉健康评估、安全收听建议、法律意见、广播/法规认证、安全或生产推荐、IA
+  采用、签名认证或未来保证。tag 是轻量指向而非签名证明；不声称最新版本。所有限制在现有 HTML、Markdown 与搜索可见，不依赖隐藏字段。
+
+
+  English scope and limitations:
+
+
+  libebur128 is a distinct C programme-loudness measurement library, pinned to v1.2.6 (official release published
+  2021-02-14), lightweight tag commit 67b33abe1558160ed76ada1322329b0e9e058b02 and tree 66cbb166495a71a284777669b5cb81730589201c.
+  The fixed official codeload archive is 25,912 bytes with SHA-256 1b5c0793ba89c495cb9dae885a74361ddb878de77acead17ec7f4cf199c2f131;
+  all 19 members match fixed Git-blob bytes. This adds only existing editorial measurement navigation, no capability
+  or technical relation. IA already has a bounded static broadcast_loudness Rust 0.5.0 record; this distinct C implementation''s
+  actual builds and finite runtime evidence add input/API/evidence diversity, not a previously zero-implementation
+  gap or reapproval of the Rust record. Upstream broadly references EBU R128 and header/README BS.1770-4, whereas
+  IA''s current itur_bs1770 means BS.1770-5 and ebu_r128 means v5. No current-edition implements/compatibility/adoption
+  relation or complete conformance is inferred.
+
+
+  The library measures caller-supplied PCM; it is not an audio decoder, gain-applying loudness normalizer, media-delivery-profile
+  compliance checker or player. short/int/float/double APIs use interleaved channels; frames means frames, not total
+  sample count. Correct buffer length, channel layout, finite samples and nominal full-scale scaling are caller
+  obligations. Principal finite signals are mathematically generated 48 kHz, 1 kHz sines, never official EBU vectors.
+  Fixed-source initialization accepts 1..64 channels and 16..2,822,400 Hz with M present; a named extra unknown
+  mode bit was still accepted, not strict enum validation; README''s all-samplerates claim is not accuracy evidence
+  at every accepted value. Only named parameter examples were observed, not all channels/rates/types. Actual NaN
+  double input can return SUCCESS and propagate NaN loudness; finite out-of-unit-range amplitudes such as 1.25/1.5
+  can be accepted without peak clipping. API success does not imply input validation, normalization, arbitrary-input
+  safety or numerical accuracy.
+
+
+  M reads the last 400 ms and S the last 3 s; I, LRA and sample/true-peak APIs have mode requirements. Empty, silent,
+  under-gate or incomplete integrated blocks can yield a negative-infinity sentinel. In the named 48 kHz signal,
+  19,199 frames lacked a complete 400 ms block and 19,200 yielded a finite I value; this does not make every 19,200-frame
+  input eligible. M/S can already be finite before their full window, using initially zero-filled data, not a readiness
+  guard. Silence examples of relative threshold=-70 and LRA=0 are API observations, not universal normative empty-set
+  values. Finite gain/chunk/multi-state examples establish no all-stream equivalence, threshold-edge behavior, absolute
+  error bound or physical calibration. Multi-state I pools implementation energy/gating data, not arithmetic mean
+  LUFS or proof that arbitrary file concatenation and differing measurement setups are interchangeable.
+
+
+  The header''s general default mapping is not uniform across channel counts: fixed source special-cases four channels
+  as L/R/Ls/Rs and five as L/R/C/Ls/Rs; in the usual six-channel layout index 3 is EBUR128_UNUSED for loudness (for
+  example LFE). A loudness-excluded channel can still have a sample peak. Callers must confirm the map; DUAL_MONO
+  is restricted to mono. A named set_channel test with unknown enum value 12345 still returned SUCCESS; no audio
+  was processed afterward, so this establishes neither enum validity nor safe use. The researcher''s first header-based
+  four-channel/index-3-unused assumption failed one of 74 assertions; original probe/results remain retained. Correcting
+  that self-authored expectation against source and adding four/six-channel comparisons produced 75/75 without modifying
+  upstream. The author separately checks four/five/six-channel examples; none covers every enum, sound-field layout
+  or multichannel normative requirement.
+
+
+  State/resource operations are not unconditional resets or constant-memory guarantees. A zero-frame add still clears
+  previous sample/true peaks but retains accumulated peaks. A samplerate change clears filters/audio window while
+  retaining I/LRA histories and same-channel accumulated peaks, unlike a fresh state. Changing channel count resets
+  mapping; unfinished blocks can be lost. max_history limits history only outside histogram mode; default queues
+  may grow with eligible-data duration, and discrete histogram results need not bit-match queue results. A query
+  window must remain within the configured window; callers must check mode/allocation error codes rather than assume
+  atomic rollback. At source level, growing set_max_window computes allocation from samplerate*window while init/change_parameters
+  divide by 1000; initialization''s millisecond allocation estimate therefore cannot be assumed for growth. No large-growth
+  allocation, OOM or resource stress test was performed; this is not a vulnerability finding, disabled-query-bound
+  claim or assertion all window calls fail. loudness_window retains its upper-window guard.
+
+
+  True peak is the fixed version''s implementation-defined custom polyphase FIR result, explicitly not promised
+  comparable across versions: 4x below 96 kHz, 2x at 96..<192 kHz, and no interpolation at >=192 kHz, where tested
+  values equal sample peak. Finite peak witnesses do not certify maximum reconstruction peaks for every signal,
+  BS.1770 Annex 2 or complete normative/platform conformance. Actual research/author environment is Linux x86_64,
+  GCC 14.2.0, CMake 3.31.10 and libc/libm. Official CMake Release core builds succeeded separately as shared/system
+  queue and static/internal queue with unmodified source, ENABLE_TESTS=OFF and ENABLE_FUZZER=OFF. Recorded tool
+  versions are not an entirely hash-pinned supply chain. Other platforms/compilers, ANSI-C portability, performance,
+  thread safety, sanitizers and reproducible binaries are not established.
+
+
+  The author independently reacquired public Git and the fixed codeload archive, verified all 19 raw members and
+  personally replayed final researcher v4: the same 75 finite output assertions with fail-closed success-return
+  checks passed each CMake configuration, not 150 unique checks. The author separately wrote final v3 with 26 finite
+  assertions, passing those two libraries and direct GNU11/source, not 78 unique checks. Earlier author versions/results
+  remain: v2 strengthened getter return checking, and v3 narrowed one overbroad S-mode label to actual initial I/400ms-buffer
+  shortterm rejection. Independent preflight has 20 finite checks; participants/configurations overlap and counts
+  are not summed. CMake compatibility/deprecation diagnostics and the direct GNU11 upstream set-but-unused warning
+  are retained, not warning-free. Original source and earlier failures remain preserved; success means only these
+  named builds/probes, not the upstream suite below. Independent review found three still-unchecked successful getters
+  in research v3; its previous complete fail-closed wording was too broad. V4 fixes those three and immediately
+  checks seven assigned-success paths, retaining old evidence without library edits. Independent preflight''s original
+  20 likewise had three output-only getters; separately retained v2 strengthens return checking and initializes
+  values, with the same 20 output rows, not 40. The author replays that explicitly reviewer-authored test code without
+  relabeling author execution independent review.
+
+
+  The upstream conformance suite is explicitly NOT RUN: actual ENABLE_TESTS configuration failed because libsndfile
+  was unavailable. A development-package acquisition was denied/unavailable, with no retry or alternative bypass.
+  EBU audio terms require acceptance on download and internal-R&D usage; no EBU audio vectors were materialized
+  locally or used, and no terms were accepted on the user''s behalf. An earlier research web-tool ZIP read returned
+  unsupported-type, not an acquired corpus or passed test; the tool error cannot prove no underlying network request
+  occurred. No further acquisition followed reading the terms. Synthetic signals are not official vectors. Fixed
+  test/tests.c ends with unconditional return 0; PASSED/FAILED macros only print and missing-file paths can return
+  0.0/NaN. Process exit 0 cannot establish upstream test success. A successful core build is not an executed official
+  suite, and blocked test dependencies do not mean the core library cannot compile.
+
+
+  README/COPYING describe the main library as MIT, while bundled ebur128/queue/sys/queue.h and doc/license/queue.txt
+  separately contain UC Berkeley three-clause redistribution/non-endorsement terms, with doc/license/R128Scan.txt
+  also present. Bare MIT is not generalized into a legal judgment for every tree member; no license_expression licensing
+  property or IA-license change is synthesized. This is not physical sound-pressure calibration, hearing-health
+  assessment, safe-listening advice, legal advice, regulatory/broadcast certification, security/production recommendation,
+  IA adoption, signature authentication or a future guarantee. The lightweight tag is not signed proof; no latest-version
+  claim. Full limits remain visible in existing HTML, Markdown and search, not hidden-field-only context.'
+description_en: 'libebur128 is a distinct C programme-loudness measurement library, pinned to v1.2.6 (official release
+  published 2021-02-14), lightweight tag commit 67b33abe1558160ed76ada1322329b0e9e058b02 and tree 66cbb166495a71a284777669b5cb81730589201c.
+  The fixed official codeload archive is 25,912 bytes with SHA-256 1b5c0793ba89c495cb9dae885a74361ddb878de77acead17ec7f4cf199c2f131;
+  all 19 members match fixed Git-blob bytes. This adds only existing editorial measurement navigation, no capability
+  or technical relation. IA already has a bounded static broadcast_loudness Rust 0.5.0 record; this distinct C implementation''s
+  actual builds and finite runtime evidence add input/API/evidence diversity, not a previously zero-implementation
+  gap or reapproval of the Rust record. Upstream broadly references EBU R128 and header/README BS.1770-4, whereas
+  IA''s current itur_bs1770 means BS.1770-5 and ebu_r128 means v5. No current-edition implements/compatibility/adoption
+  relation or complete conformance is inferred.
+
+
+  The library measures caller-supplied PCM; it is not an audio decoder, gain-applying loudness normalizer, media-delivery-profile
+  compliance checker or player. short/int/float/double APIs use interleaved channels; frames means frames, not total
+  sample count. Correct buffer length, channel layout, finite samples and nominal full-scale scaling are caller
+  obligations. Principal finite signals are mathematically generated 48 kHz, 1 kHz sines, never official EBU vectors.
+  Fixed-source initialization accepts 1..64 channels and 16..2,822,400 Hz with M present; a named extra unknown
+  mode bit was still accepted, not strict enum validation; README''s all-samplerates claim is not accuracy evidence
+  at every accepted value. Only named parameter examples were observed, not all channels/rates/types. Actual NaN
+  double input can return SUCCESS and propagate NaN loudness; finite out-of-unit-range amplitudes such as 1.25/1.5
+  can be accepted without peak clipping. API success does not imply input validation, normalization, arbitrary-input
+  safety or numerical accuracy.
+
+
+  M reads the last 400 ms and S the last 3 s; I, LRA and sample/true-peak APIs have mode requirements. Empty, silent,
+  under-gate or incomplete integrated blocks can yield a negative-infinity sentinel. In the named 48 kHz signal,
+  19,199 frames lacked a complete 400 ms block and 19,200 yielded a finite I value; this does not make every 19,200-frame
+  input eligible. M/S can already be finite before their full window, using initially zero-filled data, not a readiness
+  guard. Silence examples of relative threshold=-70 and LRA=0 are API observations, not universal normative empty-set
+  values. Finite gain/chunk/multi-state examples establish no all-stream equivalence, threshold-edge behavior, absolute
+  error bound or physical calibration. Multi-state I pools implementation energy/gating data, not arithmetic mean
+  LUFS or proof that arbitrary file concatenation and differing measurement setups are interchangeable.
+
+
+  The header''s general default mapping is not uniform across channel counts: fixed source special-cases four channels
+  as L/R/Ls/Rs and five as L/R/C/Ls/Rs; in the usual six-channel layout index 3 is EBUR128_UNUSED for loudness (for
+  example LFE). A loudness-excluded channel can still have a sample peak. Callers must confirm the map; DUAL_MONO
+  is restricted to mono. A named set_channel test with unknown enum value 12345 still returned SUCCESS; no audio
+  was processed afterward, so this establishes neither enum validity nor safe use. The researcher''s first header-based
+  four-channel/index-3-unused assumption failed one of 74 assertions; original probe/results remain retained. Correcting
+  that self-authored expectation against source and adding four/six-channel comparisons produced 75/75 without modifying
+  upstream. The author separately checks four/five/six-channel examples; none covers every enum, sound-field layout
+  or multichannel normative requirement.
+
+
+  State/resource operations are not unconditional resets or constant-memory guarantees. A zero-frame add still clears
+  previous sample/true peaks but retains accumulated peaks. A samplerate change clears filters/audio window while
+  retaining I/LRA histories and same-channel accumulated peaks, unlike a fresh state. Changing channel count resets
+  mapping; unfinished blocks can be lost. max_history limits history only outside histogram mode; default queues
+  may grow with eligible-data duration, and discrete histogram results need not bit-match queue results. A query
+  window must remain within the configured window; callers must check mode/allocation error codes rather than assume
+  atomic rollback. At source level, growing set_max_window computes allocation from samplerate*window while init/change_parameters
+  divide by 1000; initialization''s millisecond allocation estimate therefore cannot be assumed for growth. No large-growth
+  allocation, OOM or resource stress test was performed; this is not a vulnerability finding, disabled-query-bound
+  claim or assertion all window calls fail. loudness_window retains its upper-window guard.
+
+
+  True peak is the fixed version''s implementation-defined custom polyphase FIR result, explicitly not promised
+  comparable across versions: 4x below 96 kHz, 2x at 96..<192 kHz, and no interpolation at >=192 kHz, where tested
+  values equal sample peak. Finite peak witnesses do not certify maximum reconstruction peaks for every signal,
+  BS.1770 Annex 2 or complete normative/platform conformance. Actual research/author environment is Linux x86_64,
+  GCC 14.2.0, CMake 3.31.10 and libc/libm. Official CMake Release core builds succeeded separately as shared/system
+  queue and static/internal queue with unmodified source, ENABLE_TESTS=OFF and ENABLE_FUZZER=OFF. Recorded tool
+  versions are not an entirely hash-pinned supply chain. Other platforms/compilers, ANSI-C portability, performance,
+  thread safety, sanitizers and reproducible binaries are not established.
+
+
+  The author independently reacquired public Git and the fixed codeload archive, verified all 19 raw members and
+  personally replayed final researcher v4: the same 75 finite output assertions with fail-closed success-return
+  checks passed each CMake configuration, not 150 unique checks. The author separately wrote final v3 with 26 finite
+  assertions, passing those two libraries and direct GNU11/source, not 78 unique checks. Earlier author versions/results
+  remain: v2 strengthened getter return checking, and v3 narrowed one overbroad S-mode label to actual initial I/400ms-buffer
+  shortterm rejection. Independent preflight has 20 finite checks; participants/configurations overlap and counts
+  are not summed. CMake compatibility/deprecation diagnostics and the direct GNU11 upstream set-but-unused warning
+  are retained, not warning-free. Original source and earlier failures remain preserved; success means only these
+  named builds/probes, not the upstream suite below. Independent review found three still-unchecked successful getters
+  in research v3; its previous complete fail-closed wording was too broad. V4 fixes those three and immediately
+  checks seven assigned-success paths, retaining old evidence without library edits. Independent preflight''s original
+  20 likewise had three output-only getters; separately retained v2 strengthens return checking and initializes
+  values, with the same 20 output rows, not 40. The author replays that explicitly reviewer-authored test code without
+  relabeling author execution independent review.
+
+
+  The upstream conformance suite is explicitly NOT RUN: actual ENABLE_TESTS configuration failed because libsndfile
+  was unavailable. A development-package acquisition was denied/unavailable, with no retry or alternative bypass.
+  EBU audio terms require acceptance on download and internal-R&D usage; no EBU audio vectors were materialized
+  locally or used, and no terms were accepted on the user''s behalf. An earlier research web-tool ZIP read returned
+  unsupported-type, not an acquired corpus or passed test; the tool error cannot prove no underlying network request
+  occurred. No further acquisition followed reading the terms. Synthetic signals are not official vectors. Fixed
+  test/tests.c ends with unconditional return 0; PASSED/FAILED macros only print and missing-file paths can return
+  0.0/NaN. Process exit 0 cannot establish upstream test success. A successful core build is not an executed official
+  suite, and blocked test dependencies do not mean the core library cannot compile.
+
+
+  README/COPYING describe the main library as MIT, while bundled ebur128/queue/sys/queue.h and doc/license/queue.txt
+  separately contain UC Berkeley three-clause redistribution/non-endorsement terms, with doc/license/R128Scan.txt
+  also present. Bare MIT is not generalized into a legal judgment for every tree member; no license_expression licensing
+  property or IA-license change is synthesized. This is not physical sound-pressure calibration, hearing-health
+  assessment, safe-listening advice, legal advice, regulatory/broadcast certification, security/production recommendation,
+  IA adoption, signature authentication or a future guarantee. The lightweight tag is not signed proof; no latest-version
+  claim. Full limits remain visible in existing HTML, Markdown and search, not hidden-field-only context.'
+version: 1.2.6
+external_identifiers:
+- namespace: github
+  value: jiixyj/libebur128
+official_url: https://github.com/jiixyj/libebur128
+versions:
+- version: 1.2.6
+  date: '2021-02-14'
+  status: released
+  url: https://github.com/jiixyj/libebur128/releases/tag/v1.2.6
+domains:
+- audio
+- broadcasting
+scope_notes_zh: 完整中英操作边界置于既有renderer可见的description_zh，description_en保留英文；capabilities不合成，technical relations=[]，仅既有measurement导航，不改变Rust/规范对象或IA许可证。
+scope_notes_en: Full operative Chinese/English share existing visible description_zh; description_en retains English.
+  No synthesized capabilities/licensing property or technical relation; existing measurement navigation only, no
+  Rust/normative/IA-license change.
+sources:
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/README.md
+  title: Fixed library identity, release notes and broad upstream scope; not exact current-standard conformance
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/ebur128.h
+  title: Fixed public PCM/mode/channel/state/peak API contract and implementation-defined peak warning
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/ebur128.c
+  title: Fixed actual channel map, gating, state, resource and finite-input behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/CMakeLists.txt
+  title: Fixed original CMake core configuration
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/CMakeLists.txt
+  title: Shared/static library, system/internal queue and libm build choices
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/test/CMakeLists.txt
+  title: TestsOFF default and required libsndfile when enabled
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/test/tests.c
+  title: Upstream suite exit0/print-only and missing-file caveats, not a suite execution
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/COPYING
+  title: Main-library license text, not whole-tree legal conclusion
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/queue/sys/queue.h
+  title: Bundled queue copyright and separate redistribution/non-endorsement terms
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/doc/license/queue.txt
+  title: Separate bundled queue notice
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/doc/license/R128Scan.txt
+  title: Additional fixed provenance/license notice
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jiixyj/libebur128/releases/tag/v1.2.6
+  title: Official v1.2.6 release published2021-02-14; not latest/signature claim
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T08:34:00.330407+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author; fixed source/archive
+  acquisition and actual named builds/finite probes, not independent acceptance or conformance certification
+record_created_at: '2026-10-30T08:52:11.835161+00:00'
+record_updated_at: '2026-10-30T08:52:11.835161+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewer: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_independent_preflight
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: libebur128
+  acceptance_event_id: accept-20261030-libebur128-1-2-6-libebur128
+  reviewed_candidate_blob: 33102a47d54f7295132a6e5904f41c5a8c918f1e
+  reviewed_against_commit: 8e9bed533049a5f26454a4b669293e76fc75c953
+  candidate_executor: Agent — OpenAI / dot / /root/restore_ia_current_workspace/semver_candidate_author
+  canonical_serializer: Agent — OpenAI / dot / /root/restore_ia_current_workspace
+  reviewed_packet_commit: 8e9bed533049a5f26454a4b669293e76fc75c953
+  reviewed_packet_blob: f3093cc74dfaf6f9943f5c4c0c592e2b451b27f0
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/8e9bed533049a5f26454a4b669293e76fc75c953/01_State/Inbox/review-packets/libebur128-1.2.6-20261030.yaml

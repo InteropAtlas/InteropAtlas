@@ -1,24 +1,28 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_mxf
-label: SMPTE ST 377-1 — Material Exchange Format (MXF) — File Format Specification
+label: SMPTE ST 377-1 — Material Exchange Format (MXF) — File Format Specification (reviewed 2019 edition)
 publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.377-1
+- namespace: smpte
+  value: st.377-1
 locators:
-  - url: https://pub.smpte.org/latest/st377-1/
-    role: official
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf
+  role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_mxf
   reasons:
-    - SMPTE ST 377-1 specifies the Material eXchange Format (MXF), the professional file container for broadcast and file-based production (also basis of IMF track files).
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical smpte_mxf by accept-20261024-mxf-klv-smpte_mxf. Original new-state Candidate 12428c0451024bc6729accee35ef200051ff706b
+    and review_required route are replayed against actual frozen ancestor f3ff74edd93479a9f82d25f44c1024e0591fef30;
+    this back-reference prevents duplicate creation, not an identity merge.
   merge_authorized: false
-unknowns: []
+unknowns:
+- 官方原始 PDF 页 8 Scope 带 /StrikeOut 批注，其权威性和含义未确认；不去批注、不认定勘误/撤销/无害标记。独立语义复核须明确同意采用封面和无批注操作页的有限证据，否则暂缓 MXF 和关系。
+- 只评估固定版本中的 KLV 编码依赖及明确约束；不声明整个标准、任意文件/设备/软件的符合性、互通、安全或 IA 采用。
 provenance:
   initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)

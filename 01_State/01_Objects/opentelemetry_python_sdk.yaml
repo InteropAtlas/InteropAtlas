@@ -1,0 +1,103 @@
+id: opentelemetry_python_sdk
+type: system
+kind: library
+name_zh: OpenTelemetry Python SDK 库包
+name_en: OpenTelemetry Python SDK package
+official_name: opentelemetry-sdk
+version: 1.45.1
+external_identifiers:
+- namespace: pypi
+  value: opentelemetry-sdk
+official_url: https://pypi.org/project/opentelemetry-sdk/
+description_zh: 独立 Python 发行包 opentelemetry-sdk，固定 1.45.1 / commit 14971cef9c84c2354cbaf6871090896fad0f9a1a；主体是整个
+  SDK 库包，不是 opentelemetry-api、整个 monorepo、内部 BatchSpanProcessor 产品、Exporter 或 Collector。本记录仅静态检视 trace 批处理切片：注册到默认同步
+  multi-processor 的处理器，在已开始且首次结束的 SDK Span 生成 ReadableSpan 后收到 on_end；BatchSpanProcessor 只把具有 context 且 sampled
+  标志为真的 span 交给 shared processor。不是所有记录的 span 必然导出，也未审全部 sampler、logs/metrics 或自动 instrumentation。调用方配置 exporter；有界内存
+  deque 默认容量2048、batch512、调度5000ms，可由构造参数或对应环境变量覆盖，参数检查不证明性能。shutdown 后拒收；满队列 appendleft 可丢弃右端最旧项，fork 重置会清队列，不是持久或跨进程保存，也未审并发计数准确性。worker
+  按调度/阈值选择批次，在 export lock 下先 pop 最旧项、每批最多配置 batch 大小，再调用 exporter.export；该段不消费返回的 SpanExportResult，Exception 被记录且本层不重新入队/重试，不推断具体
+  exporter 内部是否重试。exporter 回调不是网络发送、远端接收或 Collector 确认。固定实现的 export_timeout_millis 未用于 export；shared force_flush
+  的 timeout 参数未使用，也未调用 exporter.force_flush。该路径 shutdown 后返回 False，否则阻塞调用 EXPORT_ALL 后返回 True；export 异常被记录或返回失败也可
+  True，故不代表成功送达或超时内返回。此限制不否认 provider/multi-processor 自己的 deadline 判断。BatchSpanProcessor.shutdown 包装本身不接收 timeout
+  参数；shared shutdown 默认 join 最多30000ms，随后阻止后续批次，并按 exporter.shutdown 签名传剩余 timeout 或无参调用。正在执行的 export 可能仍未结束，exporter.shutdown
+  也可能阻塞/抛异常，因此不是整体硬截止、完整排空或送达保证。仅固定源码检视；没有安装、导入、实例化线程、构建或运行 SDK/exporter/测试，没有网络请求或实际遥测。旧 API 包的22个内存载体示例不属于本 SDK
+  测试。固定元数据中 API 等依赖声明不等实际安装/兼容验证；源码树不等 PyPI wheel/sdist 字节、签名或可复现构建验证。Apache-2.0 只据固定元数据与仓库 LICENSE，不是全依赖许可审计。无完整规范符合性、安全、性能、生产、跨实现互通或
+  IA 采用保证；零技术关系/新能力，observability 仅既有编辑导航，旧 API、Trace Context 版次与关系不变。
+description_en: 'The independent Python distribution opentelemetry-sdk, pinned to 1.45.1 / commit 14971cef9c84c2354cbaf6871090896fad0f9a1a.
+  The subject is the whole SDK library package, not opentelemetry-api, the monorepo, a separate internal BatchSpanProcessor
+  product, an exporter or Collector. This static slice follows trace batching only: processors registered with the
+  default synchronous multi-processor receive on_end after a started SDK Span ends for the first time and produces
+  a ReadableSpan. BatchSpanProcessor emits only spans with a context and a true sampled flag. Not every recorded
+  span is necessarily exported; all samplers, logs/metrics and automatic instrumentation were not reviewed. The
+  caller supplies an exporter. The bounded in-memory deque defaults to queue2048, batch512 and schedule5000ms, overridable
+  by constructor arguments or corresponding environment variables; parameter checks are not performance evidence.
+  Shutdown rejects new items. Appending left to a full deque can discard its oldest rightmost item, and fork reinitialization
+  clears the queue: neither persistence nor cross-process retention is established, and concurrent metric-count
+  accuracy was not assessed. Under an export lock the worker selects scheduled/threshold batches, pops oldest items
+  first up to the configured batch size, then calls exporter.export. This code does not consume SpanExportResult;
+  Exception is logged with no requeue/retry at this layer, without judging retries inside a particular exporter.
+  An exporter callback is not network sending, remote receipt or Collector acknowledgement. The fixed export_timeout_millis
+  is unused for export. The shared force_flush timeout argument is unused and exporter.force_flush is not called.
+  After shutdown this path returns False; otherwise it blocks in EXPORT_ALL and returns True, including when export
+  exceptions were logged or failure returns ignored. True therefore establishes neither delivery success nor return
+  within a timeout. This does not deny deadline checks in provider/multi-processor code. The BatchSpanProcessor.shutdown
+  wrapper itself has no timeout parameter. Shared shutdown defaults to a join of at most30000ms, then prevents further
+  batches and calls exporter.shutdown with remaining timeout if its signature supports it, otherwise without that
+  argument. An existing export may still be running and exporter.shutdown may itself block or raise, so this is
+  not an overall hard deadline, guaranteed drain or receipt guarantee. Only fixed source was inspected: no SDK/exporter
+  installation, import, thread instantiation, build, execution or tests, network requests or real telemetry. The
+  old API package''s22 in-memory carrier examples are not SDK tests. Fixed metadata dependency declarations do not
+  prove installation or compatibility. Source-tree identity does not verify PyPI wheel/sdist bytes, signatures or
+  reproducible builds. Apache-2.0 records only fixed metadata and repository LICENSE, not an all-dependency license
+  audit. No full specification conformance, security, performance, production suitability, cross-implementation
+  interoperability or IA adoption is established. No technical relation or new capability is added; observability
+  is existing editorial navigation only, with old API, Trace Context edition boundaries and relations unchanged.'
+open_source: true
+license_expression: Apache-2.0
+sources:
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/pyproject.toml
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/pyproject.toml
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/README.rst
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/README.rst
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/version/__init__.py
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/src/opentelemetry/sdk/version/__init__.py
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/export/__init__.py
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/src/opentelemetry/sdk/trace/export/__init__.py
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/_shared_internal/__init__.py
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/src/opentelemetry/sdk/_shared_internal/__init__.py
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py
+  title: OpenTelemetry SDK 1.45.1 fixed opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/LICENSE
+  title: OpenTelemetry SDK 1.45.1 fixed LICENSE
+  language: en
+  accessed: '2026-11-01'
+last_verified_at: '2026-11-01T02:42:22+00:00'
+last_verified_by: Agent — OpenAI / dot / fixed SDK trace batching source inspection only; no upstream execution
+record_created_at: '2026-11-01T02:44:32+00:00'
+record_updated_at: '2026-11-01T02:44:32+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed OpenTelemetry SDK batch-span semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: opentelemetry_python_sdk
+  acceptance_event_id: accept-20261101-otel-sdk-batchspan
+  reviewed_candidate_blob: c4de2bfae90f17c42ded098d7bd67a79c66094c3
+  reviewed_against_commit: 6eeb4f53dd270878f405ad5f97824b058e03ef01
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 6eeb4f53dd270878f405ad5f97824b058e03ef01
+  reviewed_packet_blob: 0e5022d575e4edd4b0628556c54475e12ca79797
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/6eeb4f53dd270878f405ad5f97824b058e03ef01/01_State/Inbox/review-packets/otel-sdk-batchspan-20261101.yaml

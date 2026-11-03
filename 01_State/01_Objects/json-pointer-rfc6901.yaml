@@ -1,14 +1,14 @@
 id: json_pointer_rfc6901
 record_created_at: "2026-08-31T13:33:21+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: '2026-10-31T20:19:46+00:00'
 metadata_backfilled_at: "2026-09-02T11:23:23+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot, OpenAPI 3.2.1 reference-resolution evidence review
   github_actor: "ff6962757"
 type: standard
 kind: specification
@@ -26,8 +26,14 @@ system_roles:
 capabilities:
   - resource_identification
 maturity: stable
-summary_zh: 定义一种字符串语法，用于标识 JSON 文档中的特定值，可作为结构化数据内部引用和定位机制的基础组件。
-summary_en: Defines a string syntax for identifying a specific value within a JSON document, providing a building block for references and addressing inside structured data.
+summary_zh: 定义一种字符串语法，用于标识 JSON 文档中的特定值，可作为结构化数据内部引用和定位机制的基础组件。 OpenAPI 3.2.1 的 uses 入边仅指对被引用 JSON/YAML 表示的 URI 片段采用 JSON Pointer 的 SHOULD 建议，非所有片段或锚点的强制规则，也不证明求值成功。
+summary_en: Defines a string syntax for identifying a specific value within a JSON document, providing a building block for references and addressing inside structured data. The incoming OpenAPI 3.2.1 uses edge is only its SHOULD recommendation for URI fragments of referenced JSON/YAML representations, not a mandatory rule for all fragments or anchors, nor evidence of successful evaluation.
 sources:
+  - url: https://spec.openapis.org/oas/v3.2.1.html#resolving-uri-fragments
+    title: OpenAPI 3.2.1 — section 4.1.2.2.2 JSON/YAML URI fragment interpretation is SHOULD, not MUST
+    language: en
+    accessed: '2026-10-31'
   - title: RFC 6901
     url: https://www.rfc-editor.org/rfc/rfc6901.html
+scope_notes_zh: 对被引用文档的 JSON 或 YAML 表示，URI 片段 SHOULD 按 RFC 6901 JSON Pointer 解释，不能提升为 MUST 或推广到所有片段、Schema 锚点及运行时选择器；不证明指针求值或工具实现成功。 仅限定 OpenAPI 3.2.1 入边；既有 3.1.1 的片段和消息体选择器条件保持原样。
+scope_notes_en: For a referenced document represented in JSON or YAML, URI fragments SHOULD be interpreted as RFC 6901 JSON Pointers. This is not MUST and is not generalized to all fragments, Schema anchors or runtime selectors; successful pointer evaluation or tool implementation is not established. This limits only the OpenAPI 3.2.1 incoming edge; existing 3.1.1 fragment and body-selector conditions remain unchanged.

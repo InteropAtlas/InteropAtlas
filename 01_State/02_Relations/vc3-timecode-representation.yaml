@@ -1,0 +1,48 @@
+id: smpte_vc3_uses_smpte_st12_1
+type: relation
+name_zh: VC-3可选码流内时间码使用ST12-1表示（已不推荐但仍允许）
+name_en: Optional VC-3 in-bitstream time code uses ST12-1 representation (deprecated but permitted)
+source: smpte_vc3
+relation: uses
+target: smpte_st12_1
+context:
+  version_context:
+    source: SMPTE ST 2019-1:2016 base text, approved 2016-05-18; known Amendment 1:2023 excluded
+    target: SMPTE ST 12-1:2014, approved 2014-02-20; exact dated normative reference, existing accepted work-level
+      smpte:st.12-1
+  conditions_zh: 仅固定 ST 2019-1:2016 基础文本的可选内嵌时间码：§3（第 7 页）明确引用 ST 12-1:2014；§7.2.6 定义偏移 0x030 的 TCP（Time Code Present）标志，1
+    为有时间码、0 为无。§7.2.7 仅在 TCP=1 时要求 8 字节时间码区遵循 ST 12-1 并按 Table 10 布置（偏移 0x031–0x038）。第 37 页两条资料性注释分别说明码流内时间码已不推荐但仍允许，以及
+    VC-3 不受 ST 12-1 有限帧率集合约束、TCP=0 时可在带外指定时间码；注释提到 2015 revision 不被当作本次另一个已核实版次。此为有标志、字段及版次边界的 uses，不是建议采用、全码流强制依赖、网络
+    TCP、完整 LTC/VITC 传输、实现完整符合性、UTC 同步、认证、跨系统互通或 IA 采用。未把 2023 修正、Avid 产品、MXF 或其他不同版次规范引用并入此边。
+  conditions_en: 'Only the optional in-bitstream time code in the fixed ST 2019-1:2016 base text: section 3 on page
+    7 cites exactly ST 12-1:2014. Section 7.2.6 defines TCP (Time Code Present) at byte offset 0x030, with 1 meaning
+    present and 0 absent. Section 7.2.7 requires ST 12-1 time code in the eight-byte area only if TCP=1, arranged
+    by Table 10 at offsets 0x031–0x038. The two page-37 informative notes say this in-bitstream feature is deprecated
+    but permitted, VC-3 is not restricted to the limited ST 12-1 frame-rate set, and time code may be out of band
+    when TCP=0. The note mentions a 2015 revision; no separate 2015 edition is inferred or reviewed here. This flag-,
+    field- and edition-conditioned uses relation is not an adoption recommendation, universal bitstream dependency,
+    network TCP, complete LTC/VITC transport, full implementation conformance, UTC synchronization, certification,
+    cross-system interoperability or IA adoption. The 2023 amendment, Avid products, MXF and other dated normative
+    references are not folded into this edge.'
+evidence:
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=7
+  title: ST 2019-1:2016 §3 — ST 12-1:2014 exact normative reference
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=36
+  title: ST 2019-1:2016 §§7.2.6–7.2.7 — Time Code Present flag and conditional use
+  language: en
+  accessed: '2026-10-29'
+- url: https://pub.smpte.org/pub/st2019-1/st2019-1-2016.pdf#page=37
+  title: ST 2019-1:2016 Table 10 and informative notes — deprecated-but-permitted, frame rates and out-of-band boundary
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T07:54:17.810716+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded conditional VC-3 time-code evidence review
+record_created_at: '2026-10-29T08:03:10.212848+00:00'
+record_updated_at: '2026-10-29T08:03:10.212848+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_vc3_timecode_packet)
+  github_actor: ff6962757

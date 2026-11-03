@@ -1,24 +1,27 @@
 contract_version: candidate-object-v1
 candidate_id: smpte_klv
-label: SMPTE ST 336 — Data Encoding Protocol using Key-Length-Value (KLV)
+label: SMPTE ST 336 — Data Encoding Protocol Using Key-Length-Value (reviewed 2017 edition)
 publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.336
+- namespace: smpte
+  value: st.336
 locators:
-  - url: https://pub.smpte.org/latest/st336/
-    role: official
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf
+  role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_klv
   reasons:
-    - SMPTE ST 336 defines the Key-Length-Value (KLV) data encoding used throughout MXF, ST 2110-40 ancillary data and metadata systems.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - Accepted as canonical smpte_klv by accept-20261024-mxf-klv-smpte_klv. Original new-state Candidate 9d1ec02d4dd9173bf06647530e8af24904794b0a
+    and review_required route are replayed against actual frozen ancestor f3ff74edd93479a9f82d25f44c1024e0591fef30;
+    this back-reference prevents duplicate creation, not an identity merge.
   merge_authorized: false
-unknowns: []
+unknowns:
+- 对固定标准身份、KLV 结构及长度/分组边界作规范文献检视；未执行编码器/解码器或符合性套件，不认证实现、codec/profile、传输或 IA 采用。
 provenance:
   initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
-  reviewer: null
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)

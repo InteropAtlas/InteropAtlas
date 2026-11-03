@@ -1,0 +1,98 @@
+id: javascript_whatwg_url_implements_url_living_standard
+type: relation
+name_zh: whatwg-url 有界实现 URL 解析与序列化
+name_en: whatwg-url implements bounded URL parsing and serialization
+source: javascript_whatwg_url
+relation: implements
+target: url_living_standard
+context:
+  capabilities:
+  - resource_identification
+  version_context:
+    source: npm whatwg-url 17.3.0 / jsdom/whatwg-url at 6a0e2ad72245ec3b7dfb122709c9f5762313b928
+    target: Existing URL Living Standard; release README declares implementation baseline fde3f74f063341a28d437216f75735b8b40128f5,
+      not an edition or assurance against later changes
+  conditions_zh: 仅固定 npm whatwg-url 17.3.0 / jsdom 源 commit 6a0e2ad72245ec3b7dfb122709c9f5762313b928 的有界 URL/URLSearchParams
+    解析、序列化、live query 与所查低层算法。README 实现基线为 URL spec fde3f74f063341a28d437216f75735b8b40128f5，不新建标准版本，不重新核准历史845bafca或旧
+    alternative_to。解析成功、非致命 validationErrors 与 grammar isValidURLString 不等价；允许的 grammar/诊断分歧没有实测见证。WebIDL 转换可先抛错；setter
+    可先改 host 后遇端口失败，不保证原子性；词法归一化、重复有序 query/form重写及空标记丢失、低层记录不一致和 file origin 实现选择均适用。仅使用既有 resource_identification
+    的标识语法/记录处理含义，不推断网络获取、安全、永久身份、RFC3986互换、完整或当前符合性。全部操作边界在对象中英可见描述中保留，不靠隐藏 context 才成立。
+  conditions_en: 'Bounded parsing/serialization, URL/URLSearchParams live queries and inspected low-level algorithms
+    of npm whatwg-url 17.3.0 at source 6a0e2ad72245ec3b7dfb122709c9f5762313b928. The README''s declared URL-spec
+    baseline is fde3f74f063341a28d437216f75735b8b40128f5: no new standard edition or reapproval of historical
+    845bafca/old alternative_to. Parse success, nonfatal validationErrors and grammar isValidURLString are not
+    equivalent; no actual grammar/diagnostic-disagreement witness was found. WebIDL conversion may throw first;
+    setters can mutate host before port failure without universal atomicity. Lexical normalization, ordered duplicate
+    query/form rewriting, empty-marker loss, inconsistent low-level records and file-origin implementation choice
+    remain limits. Existing resource_identification concerns identifier syntax/record processing, not fetching,
+    security, permanent identity, RFC3986 interchangeability or full/current conformance. Complete operative Chinese
+    and English limits remain in the object''s visible description, not only hidden context.'
+evidence:
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/README.md
+  title: whatwg-url 17.3.0 — official library identity, declared fixed spec baseline, separate validity/diagnostics
+    and mutable-record limits
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/package.json
+  title: whatwg-url 17.3.0 — 17.3.0 identity, declared engines and dependencies; lifecycle scripts inspected,
+    not executed
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/package-lock.json
+  title: whatwg-url 17.3.0 — exact release-lock dependency versions and advertised artifact digests
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/URL-impl.js
+  title: whatwg-url 17.3.0 — constructor/static APIs, href/host/port setters and live search synchronization
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-state-machine.js
+  title: whatwg-url 17.3.0 — bounded parser/serializer/stateOverride and failure boundaries
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-string-validator.js
+  title: whatwg-url 17.3.0 — separate grammar validity checker
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/url-miscellaneous.js
+  title: whatwg-url 17.3.0 — relaxed parser versus strict diagnostic ToASCII paths
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/lib/URLSearchParams-impl.js
+  title: whatwg-url 17.3.0 — ordered repeated query pairs, mutation and stable sort
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/test/testharness.js
+  title: whatwg-url 17.3.0 — selected Node/WPT adapter, explicit FormData skip and promise_test no-op
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/test/web-platform.js
+  title: whatwg-url 17.3.0 — selected upstream runner and older-sync recreated groups
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/blob/6a0e2ad72245ec3b7dfb122709c9f5762313b928/scripts/get-latest-platform-tests.js
+  title: whatwg-url 17.3.0 — fixed WPT pin/fixture selection; inspected, not executed
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/jsdom/whatwg-url/releases/tag/v17.3.0
+  title: Official v17.3.0 release — published 2026-10-14
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.npmjs.com/package/whatwg-url/v/17.3.0
+  title: npm whatwg-url 17.3.0 — official published artifact, not local generated build
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/whatwg/url/blob/fde3f74f063341a28d437216f75735b8b40128f5/url.bs
+  title: URL spec fixed commit explicitly named by this release README; not current/future conformance assurance
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T02:10:32.384642+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_author; bounded fixed-release
+  implementation evidence, not full conforms_to
+record_created_at: '2026-10-30T02:41:58.924346+00:00'
+record_updated_at: '2026-10-30T02:41:58.924346+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery
+  reviewer: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery/whatwg_url_semantic
+  github_actor: ff6962757

@@ -1,0 +1,33 @@
+contract_version: candidate-object-v1
+candidate_id: ph_ubl23
+label: ph-ubl23 Java UBL 2.3 binding module — fixed Maven release 10.2.1
+publisher: Philip Helger
+family: system
+kind: library
+external_identifiers:
+- namespace: maven
+  value: com.helger.ubl:ph-ubl23
+locators:
+- url: https://github.com/phax/ph-ubl/tree/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23
+  role: dated
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1.pom
+  role: official
+- url: https://github.com/phax/ph-ubl/releases/tag/ph-ubl-parent-pom-10.2.1
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - ph_ubl23
+  reasons:
+  - Accepted as canonical ph_ubl23 by accept-20261024-ph-ubl23-implementation. Frozen new-state Candidate 5429b884de10944567584d514fe126344294c815
+    and review_required route are replayed against actual ancestor ecbe9e495cd7dbab3e0cf31b816d7f60868b30aa; this
+    back-reference prevents duplicate creation and does not merge subjects.
+  merge_authorized: false
+unknowns:
+- 只检视固定公开源码、POM、JAR内目录与源文本；未安装或运行Java/Maven、构建库、执行上游测试或重跑PR488的IND5实验。
+- Java 17及相容JAXB provider由调用环境提供；schema使用可被禁用，XSD支持不等于完整UBL、码表、业务规则、税务或特定电子发票profile符合性。
+- 仅比较Invoice、Order、Catalogue和九个common XSD；其中三个common XSD的四个外部import位置被适配，不声称整个bundle未经修改或所有文档路径均实测。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer

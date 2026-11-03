@@ -1,0 +1,35 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-pygeoapi-features-core
+candidate_id: pygeoapi
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: pygeoapi
+review:
+  reviewer: Independent Agent — OpenAI / dot / review_pygeoapi_features_intake
+  reviewed_at: '2026-10-24T15:27:43.606475+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 APPROVE 精确 Candidate eddcda9f8961221048126081f74941a449c5abd1 与 packet 49db5027ce295ead6f715db759c82168e9c777a5；主体为
+    pygeoapi 服务端软件固定 0.24.0，commit f765a64fa65350dc93d9df0a1b38755bef6c31b0，不混同规范、组织、托管服务实例、provider 或 GeoJSON 库。
+  - 独立报告 SHA-256 3be35668b1be336ba47134d5f62528d75a43683709372c22b98592d3a39f2981；reviewed_at 采用独立报告记录的完成时间。semantic_review_url
+    指向保留 pending 状态的被审原稿，不是独立结论本身；独立身份、结论、发现修正与检查摘要另记录于交付 PR。
+  - 仅接纳配置依赖的发现与要素 GET 读取路由。固定测试源码的两处 17-069r4 引用仅桥接 landing-page/尾斜杠语义，不证明完整 Core 1.0.1 符合性。集合列表/详情对应章节已修正为 §§7.13–7.14。
+  - /conformance 按配置组装类别 URI，不执行符合性验证；CSV/GeoJSON 的 datetime、sortby 不受支持。Core 不强制某一编码或 OpenAPI 3.0，/openapi 是软件路径选择。完整软件还有其他
+    API 与写入方法，关系不扩为事务或所有 provider 的行为保证。
+  - 独立 Reviewer 检视作者已捕获的一手正文并重算全部28项指纹及24个固定Git blob，未独立重新下载。25项为原始源码/规范HTTP正文；三项发布/标签元数据来自此前已取得的connector响应，文件哈希不是原始HTTP响应字节哈希。
+  - 发布元数据原始shell读取出现HTTP403，两个标签读取的个别结果未记录；未重试或绕过拒绝。额外itemtypes源码/测试捕获缺失，不声称其本地哈希或穷尽行为验证；已捕获路由、核心发现和provider证据支持本次有限范围。
+  - 独立最终20个Engine脚本146项检查及9项整合/渲染检查通过；作者134+12及6项render/docs检查通过。全部107旧事件含97个accepted真实冻结回放和10个deferred通过，929个旧文件不变。可选历史fixture的3/17失败与纯净基线相同，不计PASS、不作无关修复。
+  - Python>=3.12、MIT、Production/Stable 为上游声明；18项基础依赖与可选provider/框架及构建依赖区分。未下载PyPI归档、安装/导入/构建/执行/部署上游或运行上游/CITE测试，不作认证、安全、任意CRS/3Dbbox/反经线、第三方互通或IA采用判断。
+  - 已正常fetch真实冻结祖先；六文件物化另需独立结构复核及远端适用CI/E2E。本地浏览器因既有启动限制NOT RUN，未重试/绕过；Atlas浏览器检查不等于pygeoapi上游测试。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/692b96f2079bc4e3e3f0898afcc6ba12eabeb608/01_State/Inbox/review-packets/pygeoapi-features-core-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/eddcda9f8961221048126081f74941a449c5abd1
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/49db5027ce295ead6f715db759c82168e9c777a5
+decided_at: '2026-10-24T15:30:43.470282+00:00'
+notes:
+- 仅接纳一个软件对象、一个有界implements关系和一个既有geospatial成员，不新增标准/能力/类别或改变维护规则。
+- 完整被审原稿保留在真实正常祖先；当前packet仅为引用式回执。全部旧记录/事件、GeoJSON关系、历史底图、PR488、C2PA/PROV-O身份问题、PR498/439/416与Apple/Material范围保持不变。

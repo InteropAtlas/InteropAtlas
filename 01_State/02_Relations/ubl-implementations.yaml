@@ -1,0 +1,95 @@
+id: ph_ubl23_implements_ubl_2_3
+type: relation
+name_zh: ph-ubl23 10.2.1 有界实现 UBL 2.3 的 Java 模型和 XML 路径
+name_en: ph-ubl23 10.2.1 implements bounded UBL 2.3 Java models and XML paths
+source: ph_ubl23
+relation: implements
+target: ubl_2.3
+context:
+  version_context:
+    source: com.helger.ubl:ph-ubl23:10.2.1; fixed commit a1e8996af1cf56304048f13b4fc819680d109a7b; ph-jaxb 12.3.5
+      source commit e36574b3aafe277142d04cf864bcd911bf554987
+    target: UBL 2.3 OASIS Standard,15 June 2021, OS xsdrt runtime schemas; not later UBL editions or business profiles
+  conditions_zh: 限定为生成式JAXB文档模型、XML读写和使用随包运行模式及外部依赖的可配置XSD支持，不是完整UBL文档符合性。UBL23Marshaller将模型、QName和schema资源组合；生成InvoiceType源仅在发布source
+    JAR中检视。Java 17+、ph-jaxb 12.3.5、ph-xsds-xmldsig/xades132/xades141/ccts-cct-schemamodule4.1.0及相容JAXB provider是调用条件；模块的jaxb-impl为test-scope，ph-jaxb的runtime为optional。DEFAULT_USE_SCHEMA=true仅为初始默认，全局及setUseSchema可改变；无schema时validate仅警告并序列化，不证明XSD有效。比较仅覆盖Invoice、Order、Catalogue及九个common文件：前三者加六个common逐字匹配官方OS，另三个common调整外部import的schemaLocation，由catalog、依赖资源及BASE_XSDS组装支持；不是未经修改的完整官方bundle，也未验证全部schema/文档组合。上游测试源仅检视未执行且含旧版样例，未构建或运行Java/Maven。保留PR488已证实的XSD有效但违反IND5反例，不重复或改写该实验。未验证§6.1所要求的§3.5扩展、§4约束和全部业务规则；不声称码表验证、Peppol/EN
+    16931或税务符合、签名验证、安全、生产互通、IA采用、字节/语义无损往返。Apache 2声明与OASIS模式通知并存，不作法律审计。
+  conditions_en: 'Limited to generated JAXB document models, XML read/write and configurable XSD support using bundled
+    runtime schemas plus external dependencies, not complete UBL document conformance. UBL23Marshaller combines
+    model, QName and schema resources; generated InvoiceType source was inspected only in the published source JAR.
+    Callers need Java 17+, ph-jaxb 12.3.5, four ph-xsds 4.1.0 modules (xmldsig/xades132/xades141/ccts-cct-schemamodule)
+    and a compatible JAXB provider: module jaxb-impl is test-scope and ph-jaxb runtime is optional. DEFAULT_USE_SCHEMA=true
+    is an initial default; global and setUseSchema settings can change it. With no schema, validate warns and marshals,
+    not proof of XSD validity. Comparison covered only Invoice, Order, Catalogue and nine common files: nine byte
+    matches to official OS, three common schemaLocation adaptations wired through catalog/dependency resources/BASE_XSDS.
+    No untouched full-bundle or all-schema/document-combination claim. Upstream tests include older examples and
+    were inspected, not executed; no Java/Maven build or run. PR488 already demonstrates XSD-valid documents violating
+    IND5 and is neither repeated nor rewritten. UBL §6.1 extension/§3.5 and §4 constraints, full business rules,
+    code-list validation, Peppol/EN 16931, tax compliance, signature verification, security, production interoperability,
+    IA adoption and lossless byte/semantic round trips are not established. Apache 2 declaration and OASIS schema
+    notices coexist; no legal audit.'
+evidence:
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java#L129-L213
+  title: UBL23Marshaller — model/QName/schema wrapper and external BASE_XSDS assembly
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/java/com/helger/ubl23/UBL23Marshaller.java#L914-L929
+  title: Fixed Invoice marshaller factory
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/pom.xml
+  title: Module generation, bindings and test-scope JAXB implementation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/bindings23.xjb
+  title: Fixed JAXB model bindings
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/main/jaxb/catalog.txt
+  title: Namespace catalog maps external schemas to ph-xsds artifacts
+  language: en
+  accessed: '2026-10-24'
+- url: https://repo.maven.apache.org/maven2/com/helger/ubl/ph-ubl23/10.2.1/ph-ubl23-10.2.1-sources.jar
+  title: Generated InvoiceType source in published source JAR; inspected, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/builder/JAXBBuilderDefaultSettings.java#L47-L67
+  title: ph-jaxb 12.3.5 initial schema-use default true, globally configurable
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java#L327-L344
+  title: ph-jaxb per-instance schema-use switch
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-commons/blob/e36574b3aafe277142d04cf864bcd911bf554987/ph-jaxb/src/main/java/com/helger/jaxb/GenericJAXBMarshaller.java#L703-L729
+  title: No-schema validate warning does not establish schema validity
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl23/src/test/java/com/helger/ubl23/UBL23FuncTest.java#L224-L266
+  title: Selected Invoice read/validate/rewrite test source; not run
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/phax/ph-ubl/blob/a1e8996af1cf56304048f13b4fc819680d109a7b/ph-ubl-testfiles/src/main/java/com/helger/ubl/testfiles/UBLTestFiles.java#L84-L140
+  title: Shared test corpus includes older UBL examples; not exhaustive 2.3 coverage
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/xsdrt/maindoc/UBL-Invoice-2.3.xsd
+  title: Official UBL 2.3 OS Invoice runtime XSD — exact inspected byte match
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html#S-DOCUMENT-AND-SCHEMA-CONFORMANCE
+  title: UBL 2.3 §6.1 — schema plus extension and additional constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://docs.oasis-open.org/ubl/os-UBL-2.3/UBL-2.3.html#S-EMPTY-ELEMENTS
+  title: UBL 2.3 §4.4 IND5 — distinct from XSD validity
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:40:50.352537+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public ph-ubl23 module evidence executor
+record_created_at: '2026-10-24T12:48:40.498027+00:00'
+record_updated_at: '2026-10-24T12:48:40.498027+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / ph-ubl23 module intake reviewer
+  github_actor: ff6962757

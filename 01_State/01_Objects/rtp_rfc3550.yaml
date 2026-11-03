@@ -4,24 +4,90 @@ kind: protocol
 name_zh: RTP 实时传输协议（RFC 3550）
 name_en: 'RTP: A Transport Protocol for Real-Time Applications (RFC 3550)'
 official_name: 'RTP: A Transport Protocol for Real-Time Applications'
-description_zh: 规定实时应用的数据传输协议 RTP 及控制协议 RTCP；本协议自身不保证及时交付或服务质量。
-description_en: Specifies RTP and RTCP for real-time applications; RTP itself does not guarantee timely delivery or quality of service.
+description_zh: 规定实时应用的数据传输协议 RTP 及控制协议 RTCP；本协议自身不保证及时交付或服务质量。 Pion RTP 1.10.6 的 implements 入边仅记录 X=false、调用方提供合法字段与一致填充大小的基础包布局编解码；源码检视不是完整
+  RTP/RTCP 会话、符合性或互通测试。
+description_en: Specifies RTP and RTCP for real-time applications; RTP itself does not guarantee timely delivery
+  or quality of service. The Pion RTP 1.10.6 implements edge records only base packet layout encoding/decoding with
+  X=false, caller-valid fields and coherent padding sizes; source inspection is not complete RTP/RTCP sessions,
+  conformance or interoperability testing.
 organization: ietf
-domains: [networking, media]
-layers: [network_transport]
+domains:
+- networking
+- media
+layers:
+- network_transport
 capabilities: []
 external_identifiers:
-- {namespace: rfc, value: '3550'}
+- namespace: rfc
+  value: '3550'
 official_url: https://www.rfc-editor.org/rfc/rfc3550.html
 versions:
-- {version: RFC 3550, status: internet_standard, url: 'https://www.rfc-editor.org/rfc/rfc3550.html'}
-openness: {specification_access: open, governance: open, patent_terms: unknown, certification: unknown}
+- version: RFC 3550
+  status: internet_standard
+  url: https://www.rfc-editor.org/rfc/rfc3550.html
+openness:
+  specification_access: open
+  governance: open
+  patent_terms: unknown
+  certification: unknown
 sources:
-- {url: 'https://www.rfc-editor.org/info/rfc3550/', title: 'RFC 3550: status and document', language: en, accessed: '2026-09-13'}
+- url: https://www.rfc-editor.org/info/rfc3550/
+  title: 'RFC 3550: status and document'
+  language: en
+  accessed: '2026-09-13'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L107-L154
+  title: Base header parsing and bounds checks; version is extracted rather than validated
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L230-L256
+  title: Packet payload and padding boundaries; payload aliases caller buffer
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L272-L318
+  title: Base header serialization and caller-controlled fields
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L525-L568
+  title: Packet serialization, payload copy and padding bytes
+  language: en
+  accessed: '2026-10-31'
+- url: https://github.com/pion/rtp/blob/9a8f93554133824676326b43f068167fef01a884/packet.go#L610-L615
+  title: Effective padding size and deprecated-field fallback
+  language: en
+  accessed: '2026-10-31'
 record_created_at: '2026-09-13T09:59:39+00:00'
-record_updated_at: '2026-09-13T09:59:39+00:00'
+record_updated_at: '2026-10-31T21:05:00+00:00'
 metadata_backfilled_at: '2026-09-13T11:40:52+00:00'
 last_verified_at: '2026-09-13T09:59:39+00:00'
 last_verified_by: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
-latest_substantive_contribution: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: pending independent review, github_actor: ff6962757}
-intake_provenance: {candidate_id: ietf_rtp, acceptance_event_id: accept-20260913-ietf_rtp, reviewed_candidate_blob: 553390ba51275b84a311450f060b4df1390572fb, reviewed_against_commit: 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa, candidate_executor: 'Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)', canonical_serializer: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro}
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: ietf_rtp
+  acceptance_event_id: accept-20260913-ietf_rtp
+  reviewed_candidate_blob: 553390ba51275b84a311450f060b4df1390572fb
+  reviewed_against_commit: 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa
+  candidate_executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  canonical_serializer: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
+scope_notes_zh: 仅限定 Pion RTP 1.10.6 入边，其他关系与 RFC3550 的原规范事实不变。 仅据固定 1.10.6 源码，记录 RFC3550 §5.1 在无头扩展（X=false）情况下的基础头字段、CSRC、载荷与填充分界编解码。V=2、PT≤127、CSRC
+  数量≤15 和一致的填充标志/大小是调用方前提，不是库已执行的通用合法性验证。P=false 时两个 PaddingSize 字段均为零；P=true 时有效大小为 1..255，优先使用 Header.PaddingSize，已弃用的
+  Packet.PaddingSize 保持零或一致。Unmarshal 的 Payload 借用输入缓冲区而非复制；调用方负责生命周期和后续修改。只检视源码与测试配方，未安装、构建或运行上游。不是完整 RTP/RTCP
+  会话、SSRC 管理、序号/时间戳生成、时钟同步、拥塞、编解码器/配置解释、附录 A 验证、传输交付、SRTP/安全、第三方互通或 IA 采用证明；不保证任意输入逐字节往返。头扩展及其他功能未纳入此证据切片，不表示库没有这些功能。
+scope_notes_en: 'This limits only the Pion RTP 1.10.6 incoming edge; other relations and the original RFC3550 normative
+  facts are unchanged. From fixed 1.10.6 source only, limited to RFC3550 section 5.1 base header fields, CSRCs,
+  payload and padding delimitation with no header extension (X=false). V=2, PT<=127, at most 15 CSRCs and coherent
+  padding flags/sizes are caller preconditions, not general validity checks enforced by the library. With P=false
+  both PaddingSize fields must be zero; with P=true the effective size is 1..255, preferring Header.PaddingSize
+  while the deprecated Packet.PaddingSize stays zero or consistent. Unmarshal Payload borrows the input buffer rather
+  than copying; callers own its lifetime and subsequent mutation. Source and test recipes were inspected only: the
+  upstream package was not installed, built or run. This does not establish complete RTP/RTCP sessions, SSRC management,
+  sequence/timestamp generation, clock synchronization, congestion behavior, codec/profile interpretation, Appendix
+  A validation, transport delivery, SRTP/security, third-party interoperability or IA adoption; arbitrary inputs
+  have no byte-identical roundtrip guarantee. Header extensions and other functions are outside this evidence slice,
+  not asserted absent from the library.'
+metadata_provenance:
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit

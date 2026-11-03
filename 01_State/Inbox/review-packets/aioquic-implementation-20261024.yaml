@@ -1,0 +1,23 @@
+packet_id: aioquic_implementation_20261024
+status: materialized
+reviewed_packet_commit: bcc8ff2c15f860ec283c256702596fafc97bf5dd
+reviewed_packet_blob: 47b3c0e11ef078fcf1fa29bedbb1bcaab033129b
+reviewed_packet_path: 01_State/Inbox/review-packets/aioquic-implementation-20261024.yaml
+baseline_commit: 263f6783df914f47d9afd41b0e9d7370a01778fd
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/aioquic-implementation-20261024.yaml
+objects:
+- candidate_id: aioquic
+  canonical_id: aioquic
+  acceptance_event_id: accept-20261024-aioquic
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/bcc8ff2c15f860ec283c256702596fafc97bf5dd/01_State/Inbox/review-packets/aioquic-implementation-20261024.yaml
+relations:
+- proposal_id: aioquic_implements_quic_rfc9000
+  canonical_relation_id: aioquic_implements_quic_rfc9000
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/bcc8ff2c15f860ec283c256702596fafc97bf5dd/01_State/Inbox/review-packets/aioquic-implementation-20261024.yaml
+- proposal_id: aioquic_implements_http3_rfc9114
+  canonical_relation_id: aioquic_implements_http3_rfc9114
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/bcc8ff2c15f860ec283c256702596fafc97bf5dd/01_State/Inbox/review-packets/aioquic-implementation-20261024.yaml
+notes_zh:
+- 仅为引用式回执；完整被审对象/关系/来源指纹/身份预检/导航提案保留在真实 Git commit/blob。
+- 两条实现关系严格限定 QUIC v1 与 HTTP/3 帧/事件路径；上游未执行，不是全条款符合性、安全或采用保证。独立语义与最终结构复核分开。

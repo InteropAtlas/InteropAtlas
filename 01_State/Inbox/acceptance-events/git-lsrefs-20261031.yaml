@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261031-git-lsrefs
+candidate_id: git_software
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: git_software
+review:
+  reviewer: Independent Agent — OpenAI / dot / Git ls-refs fixed-source semantic review
+  reviewed_at: '2026-10-31T22:33:48+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核固定Git tag/commit与源码指纹、whole software身份、无碰撞路径、有界v2 ls-refs实现及目标反向可见边界；核验2.51/2.52仅ls-refs段相同而全文不同。
+  - 仅已选择v2的服务端ls-refs路径，namespace/hideRefs/unborn及65536前缀条件适用；stdout输出不等于送达。静态源码/测试配方未运行，不主张完整协议、网络、安全或采用；target旧bootstrap事实和provenance历史保留，当前投影按既有profile§9。
+  - 接纳序列化时间不是推测审核耗时；最终物化与实际 H/M 另作独立复核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/d882fc5f070a17ec521e509ad5f1505cd3bc59cf/01_State/Inbox/review-packets/git-lsrefs-20261031.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/d4ebe1bf31b60120064bbbbd00becd3606c7f128
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/cdaa447a29857cbd9ab22d8c287e152dbc76da75
+decided_at: '2026-10-31T22:33:48+00:00'
+notes:
+- 只接纳固定Git软件主体、一条ls-refs路径implements和既有collaboration编辑导航；旧holds未动。
+- 正常 Git 祖先保留完整已审候选和 packet；当前 packet 为引用回执，不复制 Canonical 事实。

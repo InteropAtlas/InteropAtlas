@@ -1,0 +1,69 @@
+id: smpte_mxf_uses_smpte_klv
+type: relation
+name_zh: MXF 文件规范在特定约束下使用 KLV 编码
+name_en: MXF file specification uses KLV coding under file-specific constraints
+source: smpte_mxf
+relation: uses
+target: smpte_klv
+context:
+  version_context:
+    source: SMPTE ST 377-1:2019, approved 2019-11-28; existing work-level smpte:st.377-1 identity
+    target: SMPTE ST 336:2017, approved 2017-07-21; exact dated reference, existing work-level smpte:st.336 identity
+  conditions_zh: 固定 ST 377-1:2019 → ST 336:2017；§3 页 9 明确该版本引用，§§6.3–6.3.9 页 30/32/33 给出实际编码要求，不只是书目关联。MXF 数据项、集合与包采用
+    ST 336 KLV，除可选 Run-In 外数据连续编码、无间隙。MXF KLV Keys 和 ULs 必须 16 字节；这不把组内 Local Tags 误称为完整键。MXF 编码器可选 BER 短式或长式长度，长式总编码长度不得超过
+    9 字节，数值小于 128 也可用长式；0x80 未定长度禁止。解码器须处理短/长式且不得假定长度字段固定字节数。Local Sets 至少须解码 2 字节 Tag 配 2 字节长度或 BER 长度的语法；Variable-Length
+    Packs 至少须解码 2 字节长度或 BER 长度的语法；这两类的全部 ST 336 形式仅为 SHOULD，不升级为全部强制。Defined-Length Packs 按 ST 336 解码，不等同固定常数总长度；上述三类编码器使用符合
+    ST 336 的 Keys。其他 MXF 规范可加长度约束。递归分组一般不允许，除非相关 Application-Specific Metadata、Descriptive Metadata 或 Essence Container
+    规范另定；MXF Structural 和 MXF Descriptive Metadata Sets 仍禁止递归组结构。官方 MXF 页 8 Scope 的 /StrikeOut 批注权威/含义未知，未用被划线文字作干净规范依据；这里的固定引用和操作页没有批注。仅表示这些标准条款之间受约束的
+    uses，不是两格式等同、任意 KLV 接受、所有解码器实际能力、完整符合性、codec/profile/素材容器支持、第三方互通、安全认证或 IA 采用。
+  conditions_en: 'Fixed ST 377-1:2019 → ST 336:2017: the dated normative reference is on page 9 and operative §§6.3–6.3.9
+    are on pages 30/32/33, not merely a bibliography association. MXF data items, sets and packs use ST 336 KLV,
+    with contiguous coding and no gaps except optional Run-In. MXF KLV Keys and ULs must be 16 bytes; group-local
+    tags are not misidentified as full keys. Encoders may use BER short or long length forms, with long-form encoding
+    limited to nine bytes total, even for values below 128; 0x80 unspecified length is forbidden. Decoders must
+    handle both forms without assuming fixed length-field size. Required Local Set syntax support covers two-byte
+    tags with two-byte or BER lengths; required Variable-Length Pack support covers two-byte or BER lengths. Support
+    for all ST 336 forms of these two constructs is only SHOULD, not universally mandatory. Defined-Length Packs
+    are decoded as specified by ST 336, not assumed to have constant total length; encoders use ST 336-compliant
+    keys for all three constructs. Other MXF specifications may add length constraints. Recursive grouping is generally
+    prohibited unless specified by an Application-Specific Metadata, Descriptive Metadata or Essence Container specification;
+    recursive structures remain prohibited in MXF Structural and MXF Descriptive Metadata Sets. The official MXF
+    page 8 Scope StrikeOut annotation has unknown authority/meaning and its struck-through text is not used as clean
+    normative evidence; the cited reference and operative pages have no annotations. This bounded standards-level
+    uses assertion does not establish format equivalence, arbitrary KLV acceptance, actual decoder capabilities,
+    full conformance, codec/profile/essence-container support, third-party interoperability, security certification
+    or IA adoption.'
+evidence:
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=9
+  title: ST 377-1 §3 — exact ST 336:2017 normative reference
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=30
+  title: ST 377-1 §§6.3–6.3.1 — operative KLV reliance, optional Run-In exception
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=32
+  title: ST 377-1 §§6.3.4–6.3.7 — narrower length/set/pack rules and SHOULD distinction
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/latest/st377-1/st377-1-2019.pdf#page=33
+  title: ST 377-1 §§6.3.7–6.3.9 — defined-length packs, key size and recursion constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=6
+  title: ST 336 §5.1 — KLV structure
+  language: en
+  accessed: '2026-10-24'
+- url: https://pub.smpte.org/pub/st336/st0336-2017.pdf#page=12
+  title: ST 336 §5.3 — general length rules allow narrower application restrictions
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T17:06:39.157450+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded MXF/KLV normative dependency executor
+record_created_at: '2026-10-24T17:18:03.292066+00:00'
+record_updated_at: '2026-10-24T17:18:03.292066+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (review_mxf_klv_intake)
+  github_actor: ff6962757

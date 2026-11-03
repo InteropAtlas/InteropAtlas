@@ -1,0 +1,25 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-json-rfc4627-json_rfc4627
+candidate_id: json_rfc4627
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: json_rfc4627
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T01:22:14+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者直接读取JSON-RPC 官方第 1/2 节、RFC Editor 状态和 RFC 4627 固定原文第 2–6 节，并核验来源与冻结候选/审核包；审查主体、字段、版本与功能限制，接受 ordinary intake。
+  - 最终候选与冻结审核包逐字节复核通过；被审 proposed_record 原样物化，仅追加生命周期、贡献及接纳溯源。后续序列化检查与这次语义审核分开。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/470
+- https://github.com/InteropAtlas/InteropAtlas/blob/2e3329b1405a19ccbf0bbf0f6a5cbfa47452caf7/01_State/Inbox/review-packets/json-rfc4627-reference-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/98053fc061916faa758deac8d6c6ea4fe640f4f6
+decided_at: '2026-10-21T01:24:10.359241+00:00'
+notes:
+- 接纳 RFC 4627 历史 Informational 文档；明确已被 RFC 7159 废止，不视为现行 JSON 定义或与 RFC 8259 等同。
+- 包内唯一 uses 关系只保留 JSON-RPC 明确旧版引用；不引入替代谓词、不作传递性或宿主协议/实现符合性推断。

@@ -1,0 +1,110 @@
+id: expat
+type: system
+kind: library
+name_zh: Expat XML 解析库
+name_en: Expat XML parsing library
+official_name: Expat
+version: 2.9.0
+external_identifiers:
+- namespace: github
+  value: libexpat/libexpat
+official_url: https://github.com/libexpat/libexpat
+description_zh: '安全来源提示：固定 R_2_9_0 源码 README 明确警告 Expat 存在未修复安全问题，并指向上游 issue #1160；本记录没有读取该 issue，不判断其当前状态、具体漏洞、修复或所有版本风险，不是安全评估或部署推荐。Expat
+  是完整的 C99 流式 XML 解析库；本记录固定 2.9.0 / commit a76b1174c1ea52abb639a4c69d52b630a8a106a2，仅检视调用方分块输入、元素/字符回调和暂停/恢复路径，不创建内部
+  parser 组件身份。XML_ParserCreate 创建实例，XML_SetElementHandler 与 XML_SetCharacterDataHandler 保存回调；XML_Parse/ParseBuffer
+  经 callProcessor、contentProcessor/doContent 实际分派元素与字符回调。XML_Parse 通常复制到内部 buffer，但 XML_CONTEXT_BYTES=0 有直接处理分支，不声称所有构建总是复制。未完整
+  token 的处理可延后；中间 XML_STATUS_OK 不等于当前输入已全部产生回调或整篇最终解析成功。调用方最后一次 Parse/ParseBuffer 必须设置 isFinal=true，可提供零字节；无错误且不再暂停时才完成。字符回调数据不以
+  NUL 终止，连续文本可被拆成多次回调，不等于完整文本节点。XML_StopParser 通常须在回调内调用，已暂停实例的不可恢复 abort 除外；resumable=true 表示暂停，false 表示中止，后续仍可能有回调，例如空元素
+  start 后的 end。尚未开始、重复暂停、已结束状态有错误分支；XML_DTD 构建下外部 parameter entity 的可恢复暂停被拒绝，不扩为所有实体规则或安全保证。XML_ResumeParser 须在回调外对已暂停实例调用，消费保留缓冲区而非从头重读；可再次暂停、报错，或按保存的
+  finalBuffer 完成。嵌套子 parser 要先恢复，父 parser 不会自动恢复；本批未审实体处理全链。调用方须提供有效输入长度，ParseBuffer 前取得 buffer 并仅报告实际填入的字节；源码容量检查不证明调用方已初始化这些字节。回调指针不是持久文本所有权，需要长期保存的数据由调用方复制并管理；parser
+  须释放，应用自有 user data 仍由应用管理。固定 README 指向 XML 1.0 Fourth Edition，不等于已有 2000 Second Edition，也不据此建立任何 implements/uses
+  关系。仅固定源及局部回归测试源码检视；未安装、构建、运行上游、解析 XML、执行测试/fuzz 或复现漏洞，源码测试不是通过结果。不声称完整 XML/命名空间/编码规则、DTD/XSD 验证、XXE/DoS 防护、不可信输入安全、并发安全、性能、生产适用性、第三方互通或
+  IA 采用。syntax 仅沿用编辑导航，不改既有 XML 标准、GDAL、xmlschema 或 html5lib 对象。MIT 仅据固定 COPYING 许可正文记录，不是全树许可审计或法律建议；固定源码身份不证明发行二进制字节、验签或可复现构建，不称最新版。'
+description_en: 'Security source notice: the README in fixed R_2_9_0 explicitly warns that Expat has unfixed security
+  issues and points to upstream issue #1160. That issue was not read for this record; its current status, specific
+  vulnerabilities, fixes and risks across all versions are not assessed. This is neither a security assessment nor
+  a deployment recommendation. Expat is the whole C99 stream-oriented XML parsing library. This record pins 2.9.0
+  / commit a76b1174c1ea52abb639a4c69d52b630a8a106a2 and inspects only caller-supplied chunks, element/character
+  callbacks and suspension/resumption; it does not create a separate internal-parser identity. XML_ParserCreate
+  creates an instance and XML_SetElementHandler/XML_SetCharacterDataHandler store callbacks. XML_Parse/ParseBuffer
+  reaches callProcessor and contentProcessor/doContent, which dispatch actual element and character callbacks. XML_Parse
+  usually copies into an internal buffer, but XML_CONTEXT_BYTES=0 has a direct-processing branch; copying is not
+  universal across builds. Incomplete-token processing can be deferred. An intermediate XML_STATUS_OK does not establish
+  that all supplied input has produced callbacks or that the whole document ultimately parses successfully. The
+  final Parse/ParseBuffer call must set isFinal=true and may provide zero bytes; completion requires no error and
+  no remaining suspension. Character data is not NUL-terminated and contiguous text can be split across callbacks,
+  not one complete text node. XML_StopParser normally must be called inside a callback, except non-resumable abort
+  of an already suspended instance. resumable=true suspends, while false aborts; callbacks can still follow, such
+  as the end callback after an empty-element start. Not-started, already-suspended and finished states have error
+  branches. With XML_DTD, resumable suspension of an external parameter entity is rejected, not a rule about all
+  entities or a security guarantee. XML_ResumeParser must run outside callbacks on a suspended instance and consumes
+  the retained buffer rather than rereading from the beginning; it can suspend again, fail or finish according to
+  saved finalBuffer. Nested child parsers must resume first; parents do not resume automatically. The complete entity-handling
+  chain was not reviewed. Callers must supply valid input lengths, obtain the buffer before ParseBuffer and report
+  only bytes actually filled; capacity checks do not prove those bytes were initialized. Callback pointers are not
+  persistent text ownership: callers copy/manage data they retain, free parser instances and manage their own user
+  data. The fixed README names XML 1.0 Fourth Edition, not the existing 2000 Second Edition; no implements/uses
+  or other technical relation is created. Only fixed sources and limited regression-test source were inspected.
+  No upstream installation/build/execution, XML parsing, tests/fuzz or vulnerability reproduction occurred; test
+  source is not a passing test result. Complete XML/namespace/encoding behavior, DTD/XSD validation, XXE/DoS prevention,
+  untrusted-input safety, thread safety, performance, production suitability, third-party interoperability and IA
+  adoption are not established. Existing syntax membership is editorial navigation only; existing XML, GDAL, xmlschema
+  and html5lib subjects are unchanged. MIT records only the fixed COPYING text, not a whole-tree license audit or
+  legal advice. Fixed source identity does not prove release-binary bytes, verified signatures or reproducible builds,
+  and is not a latest-version claim.'
+domains:
+- structured_data
+open_source: true
+license_expression: MIT
+sources:
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/README.md
+  title: Fixed library identity, Fourth Edition statement and unfixed-security-issues warning
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/COPYING
+  title: Fixed MIT/X Consortium license text and disclaimer
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/Changes
+  title: 2.9.0 release identity
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/lib/expat.h
+  title: 2.9.0 version macros and Parse/Stop/Resume API contracts
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/lib/xmlparse.c
+  title: Actual incremental processing, callbacks, suspension and resumption
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/doc/reference.html
+  title: Caller buffer, final-input, callback-data and parser lifecycle contracts
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/tests/basic_tests.c
+  title: Limited static regression intent only; not executed
+  language: en
+  accessed: '2026-11-01'
+- url: https://github.com/libexpat/libexpat/blob/a76b1174c1ea52abb639a4c69d52b630a8a106a2/expat/tests/README.md
+  title: Upstream test-suite role, not usage-example or test-execution evidence
+  language: en
+  accessed: '2026-11-01'
+last_verified_at: '2026-11-01T00:55:54+00:00'
+last_verified_by: Agent — OpenAI / dot / fixed Expat source inspection only; no upstream or XML execution
+record_created_at: '2026-11-01T00:58:39+00:00'
+record_updated_at: '2026-11-01T00:58:39+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed Expat incremental callback semantic review
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: expat
+  acceptance_event_id: accept-20261101-expat-incremental
+  reviewed_candidate_blob: 6db433334377a259e1e425ca6ab7bb5ff7660d67
+  reviewed_against_commit: 613b39eafcdd43e0db833ecebd9cd440d30133c7
+  candidate_executor: Agent — OpenAI / dot
+  canonical_serializer: Agent — OpenAI / dot
+  reviewed_packet_commit: 613b39eafcdd43e0db833ecebd9cd440d30133c7
+  reviewed_packet_blob: e1ee7fa8caae638562f67a4a67837285d9cb2f95
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/613b39eafcdd43e0db833ecebd9cd440d30133c7/01_State/Inbox/review-packets/expat-incremental-20261101.yaml

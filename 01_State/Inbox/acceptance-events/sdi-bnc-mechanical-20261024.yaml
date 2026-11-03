@@ -1,0 +1,28 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-iec-61169-8-2007
+candidate_id: iec_61169_8_2007
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: iec_61169_8_2007
+review:
+  reviewer: Agent — OpenAI / independent SDI BNC semantic reviewer
+  reviewed_at: '2026-10-24T10:53:55Z'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核通过精确 Candidate b8c561c4b37a82e337c604da37399ba0f3d77e4c 与 packet 14f9f678cfb623a66ea12d59641291d84992f1d7；核对
+    IEC 2007 第一版身份、50 Ω 标题和规范性附录 A 的 75 Ω 接口边界、三份 SMPTE 的实际条款及固定版次。
+  - 独立阅读并目视核验公开预览和 SMPTE 原始 PDF 页面，复验五份来源字节指纹；未取得 IEC 付费全文中的具体尺寸表，未据未知尺寸或机械吻合作电气/产品符合性断言。
+  - ST 292-1 的公母 75 Ω BNC 要求与 ST 424、ST 2082-1 的优选接口及允许电气合格替代的条件分开；机械尺寸引用不承接 SMPTE 的电气性能要求，也不推出跨速率或设备互通。
+  - 语义复核在最初远端冻结前完成；对实际冻结原稿的最终确认不改变原稿。正常 Git fetch 核验真实祖先 SHA 与完整字节；六文件物化另作独立结构复核，远端适用 CI 仍须通过。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/a53131ae93656e9086c6c0e21a5d1b42e9409d08/01_State/Inbox/review-packets/sdi-bnc-mechanical-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/b8c561c4b37a82e337c604da37399ba0f3d77e4c
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/14f9f678cfb623a66ea12d59641291d84992f1d7
+decided_at: '2026-10-24T10:54:53.955664+00:00'
+notes:
+- 仅接纳一个固定 IEC 标准主体、三条有条件 uses 关系与一个现有 physical 导航成员；不改变三个 SMPTE 对象、分类、谓词、schema、runtime、治理或维护方式。
+- 保留被审正常祖先；当前 packet 仅引用式回执。待批准底图和其他工作不在范围内。

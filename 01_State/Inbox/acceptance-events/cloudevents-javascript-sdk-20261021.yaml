@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-cloudevents-js-cloudevents_javascript_sdk
+candidate_id: cloudevents_javascript_sdk
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: cloudevents_javascript_sdk
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T02:09:35+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者直接读取固定 README 1.0/HTTP 1.0.1 版本声明、构造默认与 strict、spec.validateCloudEvent、parsers 全局 JSON 绑定赋值及 Apache-2.0
+    声明，并核验 11 个官方文件 blob/SHA；接受仅软件对象和导航，不将支持声明升级为 1.0.2 符合性。
+  - 最终候选与冻结审核包逐字节复核通过；被审 proposed_record 原样物化，仅追加生命周期、贡献及接纳溯源。后续序列化检查与这次语义审核分开。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/473
+- https://github.com/InteropAtlas/InteropAtlas/blob/640c41f7d0e2cadff1c9e6f2d7c156a85214b7ab/01_State/Inbox/review-packets/cloudevents-javascript-sdk-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/01d5a5616eb684726b7f9d64b5dd231d5487378f
+decided_at: '2026-10-21T02:11:23.027976+00:00'
+notes:
+- 接纳独立 CloudEvents JavaScript SDK 与固定 10.0.0 证据，使用既有 system/library，不与事件规范或部署服务合并；不新增或强配 capability。
+- 本包 relations 为空；官方明示 1.0/HTTP 1.0.1 与既有 1.0.2 精确关系保持未决，不从 wire specversion 推断 patch 符合性。保留默认字段、校验/精度、JSON 绑定赋值和未测试宿主影响限制，不证明网络交付或互通。

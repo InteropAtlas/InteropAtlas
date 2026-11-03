@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-python-xmlschema-python-xmlschema
+candidate_id: python_xmlschema
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_xmlschema
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T06:51:13.855118+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者已读 proposed、固定官方 README/默认设置/空 path 源码与非规范元模式 PER 指针；独立重算15源码 hash/blob 并亲自重跑25例全部通过。
+  - 认可独立软件主体、已有 schema_validation 和 syntax 导航，保留 strict/lax/skip、资源策略、异常类型、命名空间映射及精确版次证据限制；relations 为空，不强接2004规范
+    implements。
+  - 本字段时间为执行方实际记录已收到审核结论的时点，不用于推测审核用时；后续精确序列化复核不是新的独立语义审核，CI 不替代审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/487
+- https://github.com/InteropAtlas/InteropAtlas/blob/fd8c3c1358533804a3d5c9f5e1fdd7fe71ce3c68/01_State/Inbox/review-packets/python-xmlschema-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ecc47180f667b3c6d79608ac7dce40601dcd0636
+decided_at: '2026-10-21T06:54:25.169946+00:00'
+notes:
+- 固定4.3.2核查范围，不合并规范、JSON Schema库或elementpath依赖；current candidate回指只防止再次创建。
+- 有限内存观察不证明完整XSD符合性、UBL业务验证、安全、跨实现互通或IA采用。

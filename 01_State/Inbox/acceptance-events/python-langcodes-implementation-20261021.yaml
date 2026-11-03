@@ -1,0 +1,27 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-python-langcodes-python-langcodes
+candidate_id: python_langcodes
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: python_langcodes
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T11:14:31.950841+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者已读完整候选和全部 proposed 对象/关系，以及固定 README、pyproject、MIT 和 tag_parser/get/is_valid 源码。
+  - 独立重跑24项可信内存标签例，含14个来源指纹、10个安装源码字节核对与无网络尝试；原22例保留，新增两例单独核验。
+  - 认可独立 library、既有 language_identification、metadata 导航和限定 RFC5646 标签处理 implements；不升级为全部 BCP47、完整ABNF/注册表验证、语言检测或匹配。
+  - 独立语义结论于2026-10-21 11:12 UTC传达，11:13 UTC核对六处英文间距修正；reviewed_at为执行方记录收到结论的时点，不推测审核耗时。后续精确序列化不是新的语义审核，CI不替代独立审核。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/501
+- https://github.com/InteropAtlas/InteropAtlas/blob/2eca5491a788e9884941c814d730e76292f9f86a/01_State/Inbox/review-packets/python-langcodes-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/57add87024396bab4cd75f6fba5a36e816b9a58b
+decided_at: '2026-10-21T11:19:39.179639+00:00'
+notes:
+- 固定 langcodes 3.5.1 的独立包主体，不与RFC5646、CLDR、可选 language_data 包或语言检测服务合并；当前候选回指仅防止重复创建。
+- 宽松下划线/较窄主语言语法、CLDR替换、局部有效性、2021-08-06随包注册表和可选数据缺失限制保留；不推断完整符合性、认证、第三方互通或IA采用。

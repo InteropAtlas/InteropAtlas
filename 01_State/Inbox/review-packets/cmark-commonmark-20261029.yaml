@@ -1,0 +1,23 @@
+packet_id: cmark_commonmark_20261029
+status: materialized
+reviewed_packet_commit: a6cb20481f065a7224a6f1017c2955e0d1277caf
+reviewed_packet_blob: 53092d52f4fd6e78fcffcd3fa82bc1c6954628d0
+reviewed_packet_path: 01_State/Inbox/review-packets/cmark-commonmark-20261029.yaml
+baseline_commit: 06c95c8808658700f7dc524f6d5d0bdc6eb88d99
+executor: Agent — OpenAI / dot / /root/resume_cmark_delivery
+acceptance_events: 01_State/Inbox/acceptance-events/cmark-commonmark-20261029.yaml
+objects:
+- candidate_id: cmark
+  canonical_id: cmark
+  acceptance_event_id: accept-20261029-cmark-commonmark-cmark
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a6cb20481f065a7224a6f1017c2955e0d1277caf/01_State/Inbox/review-packets/cmark-commonmark-20261029.yaml
+relations:
+- canonical_id: cmark_implements_commonmark_0_31_2
+  canonical_path: 01_State/02_Relations/commonmark-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/a6cb20481f065a7224a6f1017c2955e0d1277caf/01_State/Inbox/review-packets/cmark-commonmark-20261029.yaml
+notes_zh:
+- 引用式回执；完整已审字段、固定来源、构建及有限执行证据保存在真实冻结祖先，不复制第二套正式字段。
+- cmark 0.31.2 只作有界核心 CommonMark 实例；652 示例明确 --unsafe；保留 --safe 空操作、HTML-only 默认省略、非法 UTF-8 透传/替换、词法损失、CommonMark
+  原始 HTML 和四种 GFM 扩展边界。
+- 自定义 GCC 构建及哈希不是官方发行、可复现、签名/attestation 或供应链认证；不是清理器/安全或任意输入符合性认证。COPYING 范围不同，未填写 license_expression/open_source。
+- 仅一条 implements、既有 document_representation 能力引用与 syntax 编者成员。不改现有 CommonMark/GFM/cbor2/renderer/schema/身份 hold/治理/维护方式。

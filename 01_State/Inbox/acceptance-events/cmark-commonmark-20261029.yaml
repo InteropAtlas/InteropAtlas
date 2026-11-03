@@ -1,0 +1,50 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-cmark-commonmark-cmark
+candidate_id: cmark
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: cmark
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cbor2_intake/review_cmark_semantics
+  reviewed_at: '2026-10-29T20:27:36.867175+00:00'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 cmark，审阅候选 blob 0208f59d4039d61a26f18ca2ea0e485b9ea40e85。
+  - 独立语义 PASS 绑定精确 packet 53092d52f4fd6e78fcffcd3fa82bc1c6954628d0 与候选 0208f59d4039d61a26f18ca2ea0e485b9ea40e85；报告
+    SHA256 88c5c6856f95f704d0ed297146c83547c7c056e70f8e7dda13009c02b515b8a8，真实 reviewed_at 2026-10-29T20:27:36.867175+00:00。semantic_review_url
+    引用真实冻结且保留 pending 状态的准备原稿，不把原稿本身当审批；Reviewer 身份与决定记于本事件及交付 PR。
+  - 主体仅官方 commonmark/cmark C 库与 CLI，固定 0.31.2 / eec0eeba6d31189fd828314576494566d539b1e3；不是 CommonMark 标准、commonmark.js、cmark-gfm、语言封装或
+    GitHub 生产渲染服务。沿用 system/library。
+  - 仅一条有界 implements → 既有 commonmark_0_31_2、既有 document_representation 能力引用、一个 syntax 编者成员。物理关系文件沿用现有按领域存放 implementation
+    实例模式，不是新分类或维护流程。
+  - 169 份封存材料核对；官方 tree 为 136 entries，其中 119 文件及 17 trees。118 文件原始 Git blob 相同；Makefile.nmake 的 CRLF 按固定 .gitattributes
+    仅作比较转换，原始文件未改且不参与编译。五份直接 HTTP 200 捕获和八份 connector envelope 分开记录；connector 不暴露 HTTP 状态，不填造 200。
+  - 固定 test/spec.txt 去元数据后的正文与官方 0.31.2 正文逐字节一致；不是只凭版本号推断。研究者和作者各自执行自写 CLI harness：显式 --unsafe 下逐字节通过公开 652 个规范示例，以及
+    35 项有限诊断（1 CLI 版本、34 行为）。独立 Reviewer 的实际执行范围以其单独报告为准，不自动把作者的 35 项计数归给 Reviewer。
+  - 作者在全新副本使用 GCC 14.2 自定义构建，19 个库 C 文件由固定 CMake 清单导出，另加 main.c；生成版本/导出头，使用已检入的 scanners.c，不修改源码。不执行上游 CMake、安装、生成器或上游完整测试运行器；不是官方发行二进制、可复现构建、签名/attestation
+    验证或供应链认证。
+  - HTML renderer 默认省略原始 HTML 并过滤部分 URL scheme；--unsafe 放行，旧 --safe 是空操作，不能取消 --unsafe。部分 image data URL 可通过；不是清理器、安全保证或所有
+    URL 类型禁止。CommonMark 输出可保留原始 HTML，XML 源码保留转义后的 raw 节点；默认 HTML 策略不能外推到所有输出。
+  - 非法 UTF-8 默认可能原样输出；--validate-utf8 替换非法序列而非拒绝输入；NUL 与换行可能规范化。CommonMark 重渲染改变词法标记，所选往返保留生成 HTML 不等于保留源字节。核心路径未启用
+    GFM 表格、任务列表复选框、删除线及裸 URL 扩展自动链接。
+  - 上述重要限制均保留在完整可见中文 description 及双语 YAML，而非只藏在 scope_notes。完整 scope_notes 与 relation context 仍由既有 renderer 省略，英文
+    description 不冒充已在中文 UI 显示。15 个来源链接及标准/能力反向链接通过静态核验，不声称本地视觉或交互测试。
+  - COPYING 含不同源码组件、文档和测试通知，省略 license_expression/open_source，不将不同范围压成一个法律结论。没有动态库 ABI/AST 修改 API、groff/LaTeX、fuzz/病理/资源、任意输入、第三方互通、性能、安全或
+    IA 采用认证。
+  - 作者 134 unittest、12 custom checks、20 个重叠 standalone modules 和适用 Markdown/docs/render 通过；130 旧事件中 120 accepted
+    的真实冻结回放与 10 deferred 保持。可选 V1 fixture 3/17 失败与 P5 1/1 通过均与基线相同；12 旧警告和 30 旧链接问题不增加。
+  - 本地 Chromium 既有拒绝未重试或绕过。connector 创建真实 F，普通 fetch 校验唯一父 B 和精确已审 bytes；后续 H 保留 F 祖先。独立语义不是正式 GitHub APPROVE；远端
+    P6/Browser/CI/bot、normal merge、main/Pages/live 后续分别验证。#276 发布拒绝、#498/#439/#416 和身份风险 hold 不变。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/a6cb20481f065a7224a6f1017c2955e0d1277caf/01_State/Inbox/review-packets/cmark-commonmark-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/0208f59d4039d61a26f18ca2ea0e485b9ea40e85
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/53092d52f4fd6e78fcffcd3fa82bc1c6954628d0
+decided_at: '2026-10-29T20:43:36.058806+00:00'
+notes:
+- 作者最终报告 SHA256 5fb959000ce278519091d82b0cac9a83af068278b5df176d43cd532c5d6f498a
+- 仅一个库对象、一条有界 implements、一个既有能力字段引用及一个 syntax 编者成员；只接纳一个候选。
+- 252 旧对象、192 旧关系、130 旧事件、243 旧候选和历史覆盖快照保持。完整准备原稿在真实冻结祖先可恢复。

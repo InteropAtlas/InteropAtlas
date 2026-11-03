@@ -1,0 +1,33 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-spdx-python-model-creation-info
+candidate_id: spdx_python_model
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: spdx_python_model
+review:
+  reviewer: Independent Agent — OpenAI / dot / SPDX Python Model CreationInfo intake review
+  reviewed_at: '2026-10-24T14:50:03.578902+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 APPROVE 精确 Candidate 9e6fb7be2a8e30e7578a7502e72e9d2b828fd47f 与 packet e4a156f62c4a0148f6d163d4a5cc7a20d4e884ff；主体为
+    spdx-python-model Python 库固定0.0.6，commit6dc821545e2e96fc8501f47f946c8fa72e579bc4，不混同SPDX组织/规范、SPDX Python Tools、生成器或托管验证服务。
+  - 独立报告 SHA-256 798fb97b7d27b1127ac8f2d9f57f1178e83bfc438f18ba6fc98395b525c35607；reviewed_at 为协调者核对已收到报告与精确字节的确认时间，不冒充独立
+    Reviewer 的精确结束时刻。semantic_review_url 指向保留 pending 状态的被审原稿，不是独立结论本身；独立身份、结论、发现修正和检查摘要另记录于交付 PR。
+  - 仅接纳生成的 SPDX3.0.1 CreationInfo 五字段及 JSON-LD 表示/编码解码机制。缺必填值和数量约束在编码时检查；赋值/解码的类型/模式检查不是完整SPDX符合性。specVersion为SemVer形状而非固定值3.0.1，字符串creator/tool引用不认证身份或事实。
+  - 已核对并保留时间细节：小数秒字符串拒绝；datetime微秒与时区偏移秒截去；零偏移归一至UTC；非零时分偏移字符串被UTC-Z模式拒绝而非转换；无时区datetime依赖主机时区。created可为元素最后变更而非导出时刻。
+  - 生成源码为真实发布归档的 bindings/v3_0_1/model.py 成员，不是虚构GitHub源文件。作者与独立Reviewer均重新下载并重算wheel/sdist，生成model.py字节相同，十项引用归档成员指纹通过独立核对。固定生成器的输入URL/本地覆盖不证明原始构建输入或可复现构建。
+  - 独立最终20个Engine测试脚本与适用非浏览器workflow检查通过；作者134+12及六项render/docs检查通过。全部106旧事件含96个accepted真实冻结回放与10个deferred通过，924个旧文件不变。额外历史实验harness的三项失败在纯净基线同样复现，不计PASS、不作无关修复。
+  - 未知属性、空白节点ID/顺序、有限上下文选择限制保留，不声称通用JSON-LD、全SPDX验证、无损往返、可信创建者/时间/工具历史或摘要等于签名。Beta、Python>=3.9、Apache2仅声明，shacl2code为构建而非运行依赖。
+  - 仅静态源码与归档检视，无安装/导入/构建/执行库或上游测试、网络身份核实。已正常fetch真实冻结祖先；六文件物化另需独立结构复核与远端适用CI/E2E。本地浏览器因已知启动限制NOT RUN，未重试/绕过。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/9e4d43d330244fab2687871891240a185a9b39c7/01_State/Inbox/review-packets/spdx-python-model-creation-info-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9e6fb7be2a8e30e7578a7502e72e9d2b828fd47f
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/e4a156f62c4a0148f6d163d4a5cc7a20d4e884ff
+decided_at: '2026-10-24T14:52:47.351646+00:00'
+notes:
+- 仅接纳一个库对象、一个有界implements关系和一个既有metadata成员，不增加能力/标准/版本/身份规则或改变IA来源政策及维护方式。
+- 完整被审原稿保留在真实正常祖先；当前packet仅为引用式回执。全部旧记录/事件、历史底图、PR488、C2PA/PROV-O身份问题、PR498/439/416与Apple/Material范围保持不变。

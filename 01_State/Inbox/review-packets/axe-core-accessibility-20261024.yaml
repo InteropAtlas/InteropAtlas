@@ -1,0 +1,22 @@
+packet_id: axe_core_accessibility_20261024
+status: materialized
+reviewed_packet_commit: 58179e90bc708335ac94ad0b45719311a7c37331
+reviewed_packet_blob: e61c1de0c72569d9536dfac9cde20b27b7e8adf3
+reviewed_packet_path: 01_State/Inbox/review-packets/axe-core-accessibility-20261024.yaml
+baseline_commit: bced670fd75906921a6e343b117f21a28fbf79c8
+executor: Agent — OpenAI / dot
+acceptance_events: 01_State/Inbox/acceptance-events/axe-core-accessibility-20261024.yaml
+objects:
+- candidate_id: axe_core
+  canonical_id: axe_core
+  acceptance_event_id: accept-20261024-axe-core-accessibility
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/58179e90bc708335ac94ad0b45719311a7c37331/01_State/Inbox/review-packets/axe-core-accessibility-20261024.yaml
+relations:
+- proposal_id: axe_core_provides_accessibility_conformance_testing
+  canonical_relation_id: axe_core_provides_accessibility_conformance_testing
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/58179e90bc708335ac94ad0b45719311a7c37331/01_State/Inbox/review-packets/axe-core-accessibility-20261024.yaml
+notes_zh:
+- 仅为引用式回执；被审主体、关系、固定来源指纹、模型语义核对与导航提案保留在真实 Git 祖先 commit/blob。
+- 能力仅限固定 axe-core 4.14.0 对选定呈现状态及启用规则的自动检查；保留人工复核、frame/规则/环境边界，无违规不等于完整符合性。
+- 不添加重复 capabilities 字段；既有 bootstrap 查询不会据 provides 自动枚举该库，此消费者限制明确保留，不改 query/runtime。
+- 未验证 npm 分发字节或执行 axe/npm、网站审计、上游构建/测试；不引入 WCAG/ARIA/ACT implements、认证、IA采用或其他扩展。

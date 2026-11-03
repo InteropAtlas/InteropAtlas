@@ -1,0 +1,37 @@
+id: libbw64_recommended_with_libadm
+type: relation
+name_zh: libbw64文档推荐配合libadm处理ADM元数据
+name_en: libbw64 documentation recommends libadm for ADM metadata processing
+source: ebu_libbw64
+relation: recommended_with
+target: ebu_libadm
+context:
+  version_context:
+    source: libbw64 0.10.0
+    target: libadm (undated library reference; work-level)
+  conditions_zh: 仅表示libbw64 0.10.0 README建议使用libadm解析、创建、修改及写入axml块内的ADM XML。该建议未指定libadm版次；目标记录固定到0.14.0不代表经过验证的版本配对、强制依赖、兼容性认证或部署采用。
+  conditions_en: Limited to the libbw64 0.10.0 README suggestion to use libadm to parse, create, modify and write
+    ADM XML in the axml chunk. It names no libadm release; the target record pinned to 0.14.0 does not establish
+    a tested version pair, mandatory dependency, compatibility certification or deployment adoption.
+evidence:
+- url: https://github.com/ebu/libbw64/blob/3a43f909f7e8f6bef93403816e9b73b8bfa5a133/README.md
+  title: 'libbw64 0.10.0 — Introduction: libadm recommendation'
+  language: en
+  accessed: '2026-10-20'
+- url: https://github.com/ebu/libadm/blob/1f3e87dc37736ed42104969f00b6c4cbd43221e6/README.md
+  title: 'libadm 0.14.0 — Introduction: use alongside libbw64'
+  language: en
+  accessed: '2026-10-20'
+record_created_at: '2026-10-20T16:14:01.823988+00:00'
+record_updated_at: '2026-10-20T16:14:01.823988+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_audio_library_semantics
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / review_audio_library_semantics
+  reviewed_packet_commit: 5b4df08a8c88f67bbd075efd966f43752388151b
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150
+  scope_zh: 仅接纳官方README推荐配合处理ADM XML的recommended_with关系；不把未限定目标版次的建议解释为强制依赖、版本配对验证、兼容性认证或部署采用。

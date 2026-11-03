@@ -1,0 +1,80 @@
+id: python_jsonpointer_implements_json_pointer_rfc6901
+type: relation
+name_zh: jsonpointer 有界实现 JSON Pointer 字符串定位
+name_en: jsonpointer implements bounded JSON Pointer string resolution
+source: python_jsonpointer
+relation: implements
+target: json_pointer_rfc6901
+context:
+  capabilities:
+  - resource_identification
+  version_context:
+    source: PyPI jsonpointer 3.6 / stefankoegl/python-json-pointer at c8f3f8b7b87074bb5f3effabc6159fdeaa876099
+    target: JSON Pointer, RFC 6901 (April 2013), existing fixed publication with RFC 4627 reference unchanged
+  conditions_zh: 限定为固定 3.6 README/源码明确指向 RFC 6901 的字符串指针 token 解析、表示及已解析 Python 数据中的有限现存值定位；对象名称须唯一且为字符串，JSON
+    字符串/URI fragment 转换由调用方另行处理，不修改 RFC 6901 的既有 RFC 4627 引用。不是完整 conforms_to：API 的数组 - 返回 EndOfList 而非既存值；普通
+    dict 已丢失重复名称信息，不能据此证明原 JSON 合规。精确 Unicode、不做百分号解码、数组索引/错误/default/verbose 等条件适用。set/create 和 Python ducktype
+    为库扩展；内置有限失败不改原件不推广为任意自定义 setter 原子性。CLI -f 文本换行转换及去尾 CR/LF 可选择另一合法成员，部分 stdout/继续标志不代表整批成功。只赋予既有 resource_identification
+    的文档内值定位含义，不推断 JSON Patch、JSONPath、HTTP 获取、数据序列化、身份所有权、安全、互通或 IA 采用。
+  conditions_en: 'Limited to the fixed 3.6 documented RFC 6901 string-pointer token representation and finite
+    existing-value resolution in already parsed Python data with unique string object names. Caller JSON-string/URI-fragment
+    conversion remains separate and the existing RFC 4627 publication reference is unchanged. Not full conforms_to:
+    array - produces API EndOfList rather than an existing value, and ordinary dicts have lost duplicate-name
+    information. Exact Unicode, literal percent sequences, index/error/default/verbose conditions apply. set/create
+    and ducktypes are library extensions; tested built-in non-mutation is not arbitrary custom-setter atomicity.
+    CLI -f text-mode newline conversion and terminal CRLF trimming may select another member; partial stdout/continuation
+    is not batch success. Existing resource_identification means within-document value identification only, not
+    JSON Patch/JSONPath/HTTP retrieval/serialization/ownership/security/interoperability or IA adoption.'
+evidence:
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/README.md
+  title: jsonpointer 3.6 — official RFC 6901 library identity
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/jsonpointer.py
+  title: jsonpointer 3.6 — token parsing, exact keys, EndOfList, default/errors and set/create extensions
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/doc/tutorial.rst
+  title: jsonpointer 3.6 — documented resolution, mutation, copy and create interfaces
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/bin/jsonpointer
+  title: jsonpointer 3.6 — UTF-8 text-mode pointer file conversion, terminal stripping and partial-output/error
+    behavior
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/tests.py
+  title: jsonpointer 3.6 — fixed upstream unittest/doctest scope, not all-input conformance
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/setup.py
+  title: jsonpointer 3.6 — package identity, declared Python >=3.10 and setup metadata; inspected, not executed
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/blob/c8f3f8b7b87074bb5f3effabc6159fdeaa876099/LICENSE.txt
+  title: jsonpointer 3.6 — source notice, not package-wide legal assessment
+  language: en
+  accessed: '2026-10-30'
+- url: https://github.com/stefankoegl/python-json-pointer/releases/tag/v3.6
+  title: Official v3.6 release — observed published 2026-10-26
+  language: en
+  accessed: '2026-10-30'
+- url: https://pypi.org/project/jsonpointer/3.6/
+  title: PyPI jsonpointer 3.6 — same official project and fixed distribution
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.rfc-editor.org/rfc/rfc6901.txt
+  title: RFC 6901 (April 2013), sections 3–7 — syntax, value resolution, representations, duplicate-name and error
+    boundaries; fixed RFC 4627 reference
+  language: en
+  accessed: '2026-10-30'
+last_verified_at: '2026-10-30T00:17:10.489671+00:00'
+last_verified_by: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_author; string-representation and
+  finite within-document resolution only, not full conforms_to
+record_created_at: '2026-10-30T00:51:26.596509+00:00'
+record_updated_at: '2026-10-30T00:51:26.596509+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_jsonpointer_delivery
+  reviewer: Agent — OpenAI / dot / /root/resume_gfm_delivery/jsonpointer_semantic
+  github_actor: ff6962757

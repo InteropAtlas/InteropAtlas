@@ -5,16 +5,24 @@ from __future__ import annotations
 
 import os
 import unittest
+from pathlib import Path
 from urllib.parse import urljoin, urlparse
 
+import yaml
 from playwright.sync_api import Browser, Playwright, expect, sync_playwright
 
 
 BASE_URL = os.environ.get("IA_E2E_BASE_URL", "http://127.0.0.1:8000/").rstrip("/") + "/"
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def page_url(object_id: str) -> str:
     return urljoin(BASE_URL, f"objects/{object_id}.html")
+
+
+def media_record(object_id: str) -> dict:
+    path = REPO_ROOT / "01_State" / "01_Objects" / f"{object_id}.yaml"
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
 class RepresentativeHumanTaskWalkthrough(unittest.TestCase):
@@ -81,6 +89,47 @@ class RepresentativeHumanTaskWalkthrough(unittest.TestCase):
             expect(official).to_be_visible()
             href = official.get_attribute("href")
             self.assertTrue(href and href.startswith("https://forgejo.org/"), href)
+        finally:
+            context.close()
+
+    def test_find_subtitle_formats_and_verify_recorded_version_scope_and_sources(self) -> None:
+        context, page = self.new_page()
+        try:
+            page.goto(urljoin(BASE_URL, "search.html"))
+            search = page.get_by_role("searchbox", name="搜索词")
+            search.fill("字幕")
+            page.get_by_role("button", name="搜索", exact=True).click()
+            search_url = page.url
+            for object_id in ("w3c_imsc", "ebu_tt_d"):
+                record = media_record(object_id)
+                candidate = page.locator(f'.search-result a[href="objects/{object_id}.html"]')
+                expect(candidate).to_be_visible()
+                candidate.click()
+                self.assertEqual(page.url, page_url(object_id))
+                expect(page.locator("main li").filter(has_text="记录版次：")).to_contain_text(record["version"])
+                expect(page.get_by_role("heading", name="范围与边界", exact=True)).to_be_visible()
+                expect(page.get_by_text(record["scope_notes_zh"], exact=True)).to_be_visible()
+                for source in record["sources"]:
+                    expect(page.locator(f'main a[href="{source["url"]}"]').first).to_be_visible()
+                if record.get("versions"):
+                    expect(page.get_by_role("heading", name="版本", exact=True)).to_be_visible()
+                page.go_back()
+                self.assertEqual(page.url, search_url)
+                expect(search).to_have_value("字幕")
+        finally:
+            context.close()
+
+    def test_media_scope_and_version_remain_available_without_javascript(self) -> None:
+        context = self.browser.new_context(java_script_enabled=False, viewport={"width": 390, "height": 844})
+        page = context.new_page()
+        try:
+            for object_id in ("w3c_imsc", "ebu_tt_d"):
+                record = media_record(object_id)
+                response = page.goto(page_url(object_id))
+                self.assertTrue(response and response.ok)
+                expect(page.locator("main li").filter(has_text="记录版次：")).to_contain_text(record["version"])
+                expect(page.get_by_text(record["scope_notes_zh"], exact=True)).to_be_visible()
+                expect(page.locator(f'main a[href="{record["sources"][0]["url"]}"]').first).to_be_visible()
         finally:
             context.close()
 

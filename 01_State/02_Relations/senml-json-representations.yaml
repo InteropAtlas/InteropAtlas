@@ -1,0 +1,38 @@
+id: senml_rfc8428_json_representations_use_json_rfc8259
+type: relation
+name_zh: SenML RFC 8428 的两种 JSON 表示使用 RFC 8259 编码
+name_en: SenML RFC 8428 JSON representations use RFC 8259 encoding
+source: senml_rfc8428
+relation: uses
+target: json_rfc8259
+context:
+  version_context:
+    source: RFC 8428 (August 2018 original publication), application/senml+json and application/sensml+json only
+    target: RFC 8259 (December 2017 original publication)
+  conditions_zh: 本页 SenML RFC 8428 → JSON RFC 8259 的“使用”仅指原版 application/senml+json 与 application/sensml+json 两种表示的文献级编码使用，不表示其他
+    SenML 表示均使用 JSON 编码或每个实现均须支持 JSON。流式 SenSML 与非流 SenML 需分别协商；流接收不能等待可能永不到达的包结束标记。任意 JSON 不一定是有效 SenML；尚未终止的 SenSML
+    流不保证每个时刻都是完整 JSON 文本。本关系不声称 JSON 文本序列格式或实现符合性，也不证明完整验证、无损转换或 IA 采用。仅限原始出版物，RFC 9100 更新及勘误未整合。
+  conditions_en: The SenML RFC 8428 → JSON RFC 8259 uses link is limited to documentary encoding use by the original
+    application/senml+json and application/sensml+json representations. It does not require JSON encoding for every
+    SenML representation or JSON support in every implementation. Streaming SenSML and non-streaming SenML require
+    separate negotiation; a stream receiver cannot wait for a possibly absent end-of-pack marker. Arbitrary JSON
+    is not necessarily valid SenML, and an unfinished SenSML stream need not be a complete JSON text at every instant.
+    This relation does not assert the JSON Text Sequences format, implementation conformance, complete validation,
+    lossless conversion or IA adoption. Only original publications are covered; RFC 9100 updates and errata are
+    not consolidated.
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc8428.txt
+  title: RFC 8428 original August 2018 — sections 4.8, 5, 12.3, 12.3.1–2 and 15.1; JSON/SenSML-JSON relation scope
+    only
+  language: en
+  accessed: '2026-10-31'
+last_verified_at: '2026-10-31T07:29:55.964254+00:00'
+last_verified_by: Agent — OpenAI / dot / link_senml_json_representation; original-publication JSON encoding relation
+  only; errata unreviewed
+record_created_at: '2026-10-31T07:29:55.964254+00:00'
+record_updated_at: '2026-10-31T07:29:55.964254+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / link_senml_json_representation
+  reviewer: Independent Agent — OpenAI / dot / link_senml_json_representation/semantic_review
+  github_actor: ff6962757

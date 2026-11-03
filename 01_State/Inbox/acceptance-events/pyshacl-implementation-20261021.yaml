@@ -1,0 +1,26 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261021-pyshacl-pyshacl
+candidate_id: pyshacl
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: pyshacl
+review:
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  reviewed_at: '2026-10-21T04:37:10+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立审核者读取完整候选/审核包 diff、固定 README/pyproject、entrypoints/monkey 源码和 19 例脚本结果；独立重算 10 个官方文件 SHA256 与 Git blob，并亲自重跑
+    19 个可信内存图例全部通过。
+  - 接受固定 0.40.1 软件主体、有条件 implements→SHACL 2017 与既有能力/导航；副作用和可选特性边界保留。冻结原稿 proposed_record 全字段原样物化，仅追加生命周期、贡献和接纳溯源；精确序列化检查与语义审核分开。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/pull/478
+- https://github.com/InteropAtlas/InteropAtlas/blob/7d92e6c9358a7e6f4a08648f3d8573e9a865ff08/01_State/Inbox/review-packets/pyshacl-implementation-20261021.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ca0c1f30e60471ead785122bc45eefac76abbe82
+decided_at: '2026-10-21T04:39:44.884351+00:00'
+notes:
+- 接纳独立 Python 软件库主体，不与 W3C SHACL 规范、RDFLib 库或项目组织合并。
+- 只补 RDF 图约束验证先例，不宣称完整符合性、SHACL 1.2/全部扩展、远程服务、第三方互通、安全/生产推荐或 IA 采用。

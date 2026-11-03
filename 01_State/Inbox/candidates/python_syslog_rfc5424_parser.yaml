@@ -1,0 +1,51 @@
+contract_version: candidate-object-v1
+candidate_id: python_syslog_rfc5424_parser
+label: syslog-rfc5424-parser Python library (0.3.2)
+publisher: EasyPost / syslog-rfc5424-parser maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: EasyPost/syslog-rfc5424-parser
+- namespace: pypi
+  value: syslog-rfc5424-parser
+locators:
+- url: https://github.com/EasyPost/syslog-rfc5424-parser
+  role: official
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/releases/tag/syslog-rfc5424-parser-0.3.2
+  role: dated
+- url: https://github.com/EasyPost/syslog-rfc5424-parser/tree/578bf58922a8cb90c3340f072a307721642cb8ff
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_syslog_rfc5424_parser
+  reasons:
+  - Accepted as canonical python_syslog_rfc5424_parser by accept-20261031-python-syslog-rfc5424-parser. Frozen new-state
+    Candidate f925f2fdac13e94d1e94a25dff0d451ff6bb8c87 and review_required route are replayed against actual ancestor
+    f5ef423741ff2a869e3159b98fe22032af2d6984; back-reference prevents duplicate creation, not identity merging.
+  merge_authorized: false
+unknowns:
+- 'EasyPost Python Syslog message parser library, pinned to 0.3.2 at commit 578bf58922a8cb90c3340f072a307721642cb8ff.
+  This record covers one-message text parsing through SyslogMessage.parse(str), a Lark grammar, structured fields
+  and as_dict(); the whole library is not renamed into a fictional parser component. Fixed source and test recipes
+  were inspected only; no upstream installation, build or execution. Not a strict RFC5424 validator: PRI accepts
+  1–3 digits including leading zeroes and values outside 0..191, with unrecognized facility mapped to unknown; version
+  accepts 1..999 without evident version-specific dispatch. Timestamps are string-pattern matched, not calendar/time-range
+  or leap-second validated or converted. The SD-name regex does not enforce printable ASCII or enterprise identity
+  validity. Parameter values only lose outer quotes, without explicit RFC5424-specific unescaping; the imported
+  dependency ESCAPED_STRING acceptance was not separately verified. Duplicate SD-IDs are not rejected in this path;
+  RFC5424 permits repeated SD-PARAMs, but the dictionary retains only the last same-name value. Digit-only PROCID
+  becomes an integer, losing lexical leading zeroes. No lossless parsing or arbitrary roundtrip is established.
+  Only lark.UnexpectedInput is translated to ParseError; not all failures are promised to use that exception. A
+  separate string serializer exists, but its interpolation does not establish a general writer or escaping guarantee
+  in this slice. Historical dependency lark-parser==0.6.* and README Python 2.7/3.3+ differ from setup classifiers
+  2.7/3.4–3.7 and the release note dropping 3.3; none promises current compatibility. No receiving/framing/transport,
+  byte decoding or UTF-8/BOM validation, TLS, security, delivery, complete conformance, performance, maintenance
+  status, modern dependency compatibility, third-party interoperability or IA adoption is established. ISC is recorded
+  from the fixed LICENSE, not a suitability opinion. Existing observability membership is editorial only; no implements/uses
+  edge is added and the existing formatter object-only decision is unchanged.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / fixed syslog parser semantic review

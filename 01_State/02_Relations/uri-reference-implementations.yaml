@@ -1,0 +1,65 @@
+id: python_rfc3986_implements_uri_reference_processing
+type: relation
+name_zh: rfc3986 2.0.0 有界实现URI引用处理
+name_en: rfc3986 2.0.0 implements bounded URI-reference processing
+source: python_rfc3986
+relation: implements
+target: uri_rfc3986
+context:
+  capabilities:
+  - resource_identification
+  version_context:
+    source: PyPI rfc3986 2.0.0; official tag 2.0.0 commit 7a64092490c1b3c4f354b9b14d060fa758d66848
+    target: RFC3986 / STD66, January 2005
+  conditions_zh: 仅固定库官方RFC3986声明对应的URIReference组件表示及源码§5导向的相对引用字符串处理，不是完整RFC3986符合性。from_string会转义部分原输入，不是严格原输入ABNF判定；resolve_with需要有scheme的有效base并先规范化base，strict=False默认同scheme处理与strict=True有别。Validator需显式配置存在性和组件检查，端口还有库级范围；通用normalize不实现所有百分号/方案规范化，不能将其成功打包为全validity或语义等价证明。此关系不覆盖IRI/IDNA、全部方案、浏览器URL行为、真实网络获取、资源永久性/所有权、访问控制或安全认证，不从URI处理传递为HTTP客户端/服务器实现、第三方互通或IA采用。
+  conditions_en: Only the fixed library’s official RFC3986 claim as evidenced by URIReference component representation
+    and source section-5-oriented relative-reference string processing, not complete RFC3986 conformance. from_string
+    escapes some input rather than strictly validating the original ABNF. resolve_with requires a valid base with
+    a scheme, normalizes it and distinguishes default strict=False same-scheme handling from strict=True. Validator
+    requires explicit presence/component configuration and adds a package port range; generic normalize does not
+    implement every percent-encoding/scheme normalization. Their success is not bundled into full validity or semantic-equivalence
+    proof. This relation does not cover IRI/IDNA, all schemes, browser URL behavior, actual retrieval, resource
+    permanence/ownership, access control or security certification, and does not transitively imply HTTP client/server
+    implementation, third-party interoperability or IA adoption.
+evidence:
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/README.rst
+  title: rfc3986 2.0.0 — RFC3986 implementation identity and URI-reference purpose
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/uri.py
+  title: rfc3986 2.0.0 — URIReference components, input encoding and normalization
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/_mixin.py
+  title: rfc3986 2.0.0 — relative-reference resolution, strict option and representation
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/validators.py
+  title: rfc3986 2.0.0 — explicit validator configuration, presence and component limits
+  language: en
+  accessed: '2026-10-21'
+- url: https://github.com/python-hyper/rfc3986/blob/7a64092490c1b3c4f354b9b14d060fa758d66848/src/rfc3986/normalizers.py
+  title: rfc3986 2.0.0 — selected case, escape and dot-segment operations
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-3
+  title: RFC3986 — generic URI components, distinct from scheme-specific validity
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-5.2
+  title: RFC3986 — relative-reference resolution and optional non-strict same-scheme behavior
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-6.2.2
+  title: RFC3986 — normalization techniques, not a claim that this library implements all of them
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T13:53:57.073782+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed URI-reference library evidence executor
+record_created_at: '2026-10-21T14:09:11.620196+00:00'
+record_updated_at: '2026-10-21T14:09:11.620196+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757

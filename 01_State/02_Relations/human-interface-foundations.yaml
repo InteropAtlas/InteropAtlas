@@ -2,15 +2,15 @@
 ---
 id: wai_aria_provides_web_accessibility
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 提供 Web 无障碍语义能力
@@ -25,18 +25,48 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation, 2023-06-06
+    target: Existing IA capability web_accessibility
+  conditions_zh: 限定为用角色、状态和属性向辅助技术表达界面结构与行为语义。用户代理处理 ARIA 不得干扰宿主语言内建功能；可以改变无障碍 API 映射，但不得为重映射 ARIA 而改变 DOM。此语义基础不保证页面已正确实现交互、完整符合
+    WCAG，或具体浏览器与辅助技术组合互通；本次不核验 IA 页面或采用声明。
+  conditions_en: Limited to roles, states and properties conveying interface structure and behavior semantics
+    to assistive technologies. ARIA processing must not interfere with built-in host-language features; accessibility
+    API mappings may change, but not the DOM to remap ARIA. This semantic basis does not establish implemented
+    interaction, complete WCAG conformance or browser/assistive-technology interoperability; IA pages and adoption
+    are not assessed.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: 'WAI-ARIA 1.2 — abstract: roles, states and properties conveying accessibility semantics'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x3-1-non-interference-with-the-host-language
+  title: 'WAI-ARIA 1.2 — section 3.1: host-language non-interference and accessibility API mapping'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#introroles
+  title: 'WAI-ARIA 1.2 — section 4.1: role semantics'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#introstates
+  title: 'WAI-ARIA 1.2 — section 4.2: state/property information'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:18:33.592829+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: wai_aria_supports_human_system_interaction
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 为可访问人机交互提供界面语义
@@ -46,18 +76,45 @@ relation: provides
 target: {type: capability, id: human_system_interaction}
 capability_context: [human_system_interaction, web_accessibility]
 confidence: 0.95
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation, 2023-06-06
+    target: Existing IA capability human_system_interaction
+  conditions_zh: 限定为可访问交互的界面语义与焦点信息，不是完整交互实现。规范列出的复合容器角色要求作者管理焦点；aria-activedescendant 将活动后代的焦点信息传给辅助技术时，实际
+    DOM 焦点仍可在容器或控制输入上。aria-keyshortcuts 仅公开快捷键信息，不得使用户代理自动改变键盘行为，脚本键盘事件须由作者处理。不证明可用性评价或具体页面符合性。
+  conditions_en: Limited to semantics and focus information for accessible interaction, not a complete interaction
+    implementation. Authors must manage focus for the listed composite-container roles. With aria-activedescendant,
+    assistive technology receives active-descendant focus information while DOM focus can remain on the container
+    or controlling input. aria-keyshortcuts exposes shortcuts without automatically changing user-agent keyboard
+    behavior; authors must handle scripted keyboard events. This does not establish usability evaluation or
+    page conformance.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#managingfocus
+  title: 'WAI-ARIA 1.2 — section 4.3: DOM focus and active-descendant communication'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#managingfocus_authors
+  title: 'WAI-ARIA 1.2 — section 4.3.1: author responsibility for composite-widget focus'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#aria-keyshortcuts
+  title: 'WAI-ARIA 1.2 — aria-keyshortcuts: exposure does not implement keyboard behavior'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:18:33.592829+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: wai_aria_recommended_with_html
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T16:02:08.557825+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent ARIA HTML semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 与 HTML 语义配合使用
@@ -74,18 +131,69 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, fixed W3C Recommendation 2023-06-06
+    target: Existing HTML Living Standard identity; authoring constraints supported by fixed ARIA in HTML Recommendation
+      2026-08-11, whose abstract explicitly covers WAI-ARIA 1.2. Current HTML section 3.2.9 observed 2026-10-29;
+      no whole-HTML revalidation or new endpoint.
+  conditions_zh: 沿用既有原生 HTML 语义优先、必要时用 ARIA 补充的配合建议。WAI-ARIA 1.2 §8.5 的精确前提是：存在具有相同角色语义和值的宿主特性，且作者无充分理由放弃它时，作者
+    SHOULD 使用该原生特性；不把 SHOULD 升级成无例外禁令。具体 role 与 aria-* 的使用仍受 HTML 宿主的作者约束，不能假定任意组合合法或 ARIA 一概覆盖原生语义。这是角色、状态和属性所表达的无障碍语义配合，不证明定制控件交互已实现。ARIA
+    in HTML 非规范性 §2 的例子说明，给超链接设置 aria-disabled=true 不会使链接实际不可点击/操作。用户代理处理 ARIA 不得干扰宿主内建功能，也不得为了将 ARIA 重映射为宿主特性而改变
+    DOM；可访问性 API 映射则可改变。本边不证明完整 WCAG 符合性、具体浏览器/辅助技术组合互通或 IA 页面已采用、已符合。
+  conditions_en: Preserves the existing complementary-use advice to prefer native HTML semantics and add ARIA
+    where needed. The precise WAI-ARIA 1.2 section 8.5 condition is that, where a host feature with identical
+    role semantics and values exists and the author has no compelling reason to avoid it, authors SHOULD use
+    that native feature; this is not an exceptionless prohibition. Particular role and aria-* uses remain subject
+    to HTML host-language authoring constraints, not a blanket permission for every combination or for ARIA
+    to override all native semantics. This concerns accessibility semantics expressed through roles, states
+    and properties, not proof that custom-widget interaction is implemented. The non-normative ARIA in HTML
+    section 2 example states that aria-disabled=true on a hyperlink does not make it functionally unclickable
+    or inoperable. User-agent ARIA processing must not interfere with built-in host features or alter the DOM
+    to remap ARIA into host features; accessibility API mappings may change. This does not establish complete
+    WCAG conformance, interoperability of a particular browser/assistive-technology combination, or IA-page
+    adoption/conformance.
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: WAI-ARIA 1.2 abstract — explicitly complements HTML; roles, states and properties convey semantics
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x8-5-conflicts-with-host-language-semantics
+  title: WAI-ARIA 1.2 §8.4–8.5 — implicit semantics, conditional SHOULD for native features and host-language
+    conflicts
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#x3-1-non-interference-with-the-host-language
+  title: WAI-ARIA 1.2 §3.1 — host-feature non-interference and DOM/accessibility-mapping distinction
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-html-aria-20260811/#rules-wd
+  title: ARIA in HTML 2026-08-11 abstract and §1 — WAI-ARIA 1.2 authoring rules on HTML elements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-html-aria-20260811/#x2-aria-semantics-that-extend-and-diverge-from-html
+  title: ARIA in HTML §2, non-normative — semantics versus actual hyperlink operability
+  language: en
+  accessed: '2026-10-29'
+- url: https://html.spec.whatwg.org/multipage/dom.html#wai-aria
+  title: HTML Living Standard §3.2.9, observed 2026-10-29 — delegates conformance-checker rules and accessibility
+    API mapping
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T16:02:08.557825+00:00'
+last_verified_by: Agent — OpenAI / dot / ARIA HTML scoped-use evidence executor
 ---
 id: wai_aria_recommended_with_svg
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T16:35:51.077947+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: WAI-ARIA 与 SVG 2 可访问性语义配合使用
@@ -100,18 +208,69 @@ sources:
     title: WAI-ARIA 1.2
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: WAI-ARIA 1.2, W3C Recommendation 2023-06-06; its SVG2 reference is explicitly dated 2018-10-04
+      Candidate Recommendation
+    target: Existing svg_2 identity, with this relationship evidenced against the fixed SVG 2 Candidate Recommendation
+      2018-10-04; no promotion to Recommendation or object identity/version change
+    reference_boundary: SVG 2 2018 itself cites WAI-ARIA 1.1, 2017-12-14. The source WAI-ARIA 1.2 declares
+      complementarity with SVG2; this is not a claim that SVG 2 2018 normatively cites WAI-ARIA 1.2 or supports
+      every later feature.
+  conditions_zh: 限定为标准层面的 SVG 可访问性语义配合：WAI-ARIA 1.2 明确说明与 SVG2 配合，SVG2 的固定 2018 CR 提供角色、状态和属性的宿主规则。具体 role
+    须依 SVG2 §5.13：可渲染元素可指定 role，非渲染元素上的 role 被忽略；使用列表中首个已识别、非抽象且该元素类型允许的角色，并满足相关可访问名称与必需状态/属性要求。忽略某元素的 role
+    不等于其文字绝不能参与其他元素的名称/描述计算，后者还受 SVG-AAM 规则约束。aria-* 状态/属性虽可出现于 SVG 元素，并非处处有意义，也不保证除进入 DOM 外一定被处理；隐式语义、允许范围和可访问性树纳入条件须按相应规范处理。这不是全面
+    SVG2/WAI-ARIA1.2 特性兼容、自动交互或视觉效果保证，也不证明浏览器/辅助技术实测互通、完整 WCAG 符合性或 IA 已采用。SVG2 保持 Candidate Recommendation；其自身引用的
+    WAI-ARIA1.1 不自动升级为1.2。
+  conditions_en: 'Limited to standards-level SVG accessibility semantics: WAI-ARIA 1.2 explicitly describes
+    complementarity with SVG2, while the fixed SVG 2 2018 CR supplies host rules for roles, states and properties.
+    Particular role use follows SVG2 section 5.13: renderable elements may specify a role, roles on non-rendered
+    elements are ignored, and the assigned role is the first recognized, non-abstract token allowed for that
+    element type, with the relevant accessible-name and required state/property information. Ignoring an element
+    role does not mean its text can never contribute to another element name/description; that computation
+    also follows SVG-AAM. State/property attributes on SVG elements are not always meaningful and may receive
+    no processing beyond DOM inclusion. Implicit semantics, permitted uses and accessibility-tree inclusion
+    remain subject to their specifications. This is not comprehensive SVG2/WAI-ARIA1.2 feature compatibility,
+    automatic interaction or visual-output assurance, tested browser/assistive-technology interoperability,
+    complete WCAG conformance or IA adoption. SVG2 remains a Candidate Recommendation; its own WAI-ARIA1.1
+    reference is not upgraded to 1.2.'
+evidence:
+- url: https://www.w3.org/TR/2023/REC-wai-aria-1.2-20230606/#abstract
+  title: WAI-ARIA 1.2 abstract and SVG2 bibliography entry — complementarity; SVG2 explicitly dated 4 October
+    2018 CR
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/
+  title: SVG 2 fixed 2018-10-04 Candidate Recommendation — scope and work-in-progress status
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/struct.html#RoleAttribute
+  title: SVG 2 §§5.13.2–5.13.4 — allowed non-abstract roles, names, state/property semantics and host restrictions
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/struct.html#DescriptionAndTitleElements
+  title: SVG 2 §5.8 — descriptive text and accessible-name/description boundary, including referenced non-rendered
+    elements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2018/CR-SVG2-20181004/refs.html#ref-wai-aria
+  title: SVG 2 bibliography — WAI-ARIA 1.1, 14 December 2017, not a historical citation of WAI-ARIA1.2
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T16:35:51.077947+00:00'
+last_verified_by: Agent — OpenAI / dot / ARIA SVG scoped-use evidence executor
 ---
 id: aria_apg_describes_wai_aria_patterns
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T17:03:56.857952+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / review_apg_aria_scope (independent semantic reviewer)"
   github_actor: "ff6962757"
 type: relation
 name_zh: ARIA APG 描述 WAI-ARIA 的常见组件实践模式
@@ -126,18 +285,81 @@ sources:
     title: ARIA Authoring Practices Guide
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: Existing rolling ARIA Authoring Practices Guide reference_project; current W3C Introduction, Read
+      Me First and Related Specifications observed 2026-10-29. No assertion of an immutable current-APG release
+      or verified repository commit.
+    target: Existing published wai_aria_1.2 identity retained. Current APG Read Me First explicitly describes
+      its purpose as illustrating ARIA 1.2; this is a scoped authoring-guidance relationship, not an audit
+      of every pattern against the 2023-06-06 Recommendation.
+    historical_boundary: 'The fixed 2021-11-29 APG Group Note is historical, not a substitute for current APG:
+      its status anticipates updates outside the formal document stream, and its WAI-ARIA-1.2 reference is
+      the 2021-03-02 CR. Current APG Related Specifications still lists the 2021-12-08 CR. Neither bibliography
+      is silently upgraded to the 2023 Recommendation.'
+  conditions_zh: 限定为 APG 对 ARIA 编写模式、键盘交互及可访问性语义的说明性指导。APG 是非规范性资源，没有自身符合性模型；模式和示例可以传达相关标准要求，但 APG 建议本身不因此成为新增规范要求，示例也不是唯一允许实现。APG
+    不提供穷尽的有效界面目录、统一 UI 设计系统或生产就绪代码。ARIA role 本身不会让浏览器自动实现键盘行为或样式，作者仍须实现相应交互。Read Me First 表明示例有意不包含针对 ARIA
+    1.2 浏览器/辅助技术支持缺口的变通代码；用于生产前应针对目标受众相关的浏览器与辅助技术组合实测。此边不证明任一示例已通过这些测试、完整符合 WCAG、全部当前模式逐项符合 WAI-ARIA 1.2 的
+    2023 REC，或 IA 已采用/符合。
+  conditions_en: Limited to informative APG guidance on ARIA authoring patterns, keyboard interaction and accessibility
+    semantics. APG has no conformance model of its own. Its patterns and examples can convey requirements from
+    relevant standards, but APG advice is not thereby a new normative requirement and examples are not the
+    only permitted implementations. APG is not an exhaustive catalog of valid interfaces, a unified UI design
+    system or production-ready code. An ARIA role does not make browsers implement keyboard behavior or styling;
+    authors must implement the corresponding interaction. Read Me First says examples intentionally omit workarounds
+    for ARIA 1.2 support gaps in browsers and assistive technologies, so production use calls for testing the
+    combinations relevant to the target audience. This edge does not establish that any example passed such
+    tests, complete WCAG conformance, an exhaustive check of current patterns against the WAI-ARIA 1.2 2023
+    REC, or IA adoption/conformance.
+evidence:
+- url: https://www.w3.org/WAI/ARIA/apg/about/introduction/#apg-is--not-normative
+  title: Current APG Introduction, observed 2026-10-29 — informative guidance without its own conformance model;
+    requirements remain in normative standards
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/about/introduction/#not-design-system
+  title: Current APG Introduction, observed 2026-10-29 — illustrative patterns, not an exhaustive catalog,
+    unified design system or production-ready code
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/#no_aria_better_bad_aria
+  title: Current APG Read Me First, observed 2026-10-29 — role semantics do not automatically implement keyboard
+    behavior or styling
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/practices/read-me-first/#browser_and_AT_support
+  title: Current APG Read Me First, observed 2026-10-29 — explicit ARIA 1.2 illustration purpose; omitted support
+    workarounds and audience-specific production testing caution
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/#sotd
+  title: Historical APG Group Note 2021-11-29 — continuing updates outside the formal publication stream; not
+    current APG or the final ARIA Recommendation
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2021/NOTE-wai-aria-practices-1.2-20211129/#bib-wai-aria-1.2
+  title: Historical APG Note bibliography — WAI-ARIA 1.2 cited as 2021-03-02 Candidate Recommendation
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/WAI/ARIA/apg/about/related-specifications/#bib-wai-aria-1.2
+  title: Current APG Related Specifications, observed 2026-10-29 — still labels WAI-ARIA 1.2 as 2021-12-08
+    CR; not proof of final-edition alignment
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T17:03:56.857952+00:00'
+last_verified_by: Agent — OpenAI / dot / APG ARIA scoped-guidance evidence executor
 ---
 id: act_rules_format_provides_accessibility_conformance_testing
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:20:35.238094+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: ACT Rules Format 提供无障碍符合性测试规则表达能力
@@ -152,18 +374,55 @@ sources:
     title: ACT Rules Format 1.1
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: ACT Rules Format 1.1, fixed W3C Recommendation, 2026-02-05
+    target: Existing IA capability accessibility_conformance_testing
+  conditions_zh: 限定为表达人工或自动无障碍测试规则的格式，包括适用性、预期和要求映射，不是测试引擎或全站认证。Conformance 映射下 passed 或 inapplicable 仍可能需要进一步测试；该映射中的
+    satisfying test 只有在该测试对象的全部结果均为 passed 时，才能据此判定相应要求得到满足。Secondary 须按具体映射解释，不能一概等同于直接符合性判定。示例一致性不保证不会产生误判；不据此断言
+    IA 网站符合性或规范采用。
+  conditions_en: Limited to representing manual or automated accessibility test rules, including applicability,
+    expectations and requirement mappings, not a test engine or whole-site certification. For conformance mappings,
+    passed or inapplicable outcomes can still need further testing; a satisfying test in this mapping establishes
+    the mapped requirement only when all outcomes for that test subject are passed. Secondary results must
+    be interpreted according to their specific mapping, not categorically equated with direct conformance judgments.
+    Consistency with examples does not guarantee error-free results; no IA-site conformance or adoption claim
+    is assessed.
+evidence:
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#intro
+  title: 'ACT Rules Format 1.1 — section 1: manual and automated test-rule descriptions'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#scope
+  title: 'ACT Rules Format 1.1 — section 2: scope and applicability to accessibility requirements'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#conformance-requirements
+  title: 'ACT Rules Format 1.1 — section 4.4.1.1: outcome mapping and satisfying tests'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#secondary-requirements
+  title: 'ACT Rules Format 1.1 — section 4.4.1.2: secondary mappings and further testing'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#rule-accuracy
+  title: 'ACT Rules Format 1.1 — section 5 (non-normative): limitations of example-based accuracy'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:19:59.363617+00:00'
+last_verified_by: Agent — OpenAI / dot, existing accessibility capability-edge evidence executor
 ---
 id: act_rules_format_recommended_with_wcag
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T15:30:57.554658+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / ACT-WCAG scoped-use semantic reviewer"
   github_actor: "ff6962757"
 type: relation
 name_zh: ACT Rules Format 可用于表达针对 WCAG 要求的测试规则
@@ -178,18 +437,61 @@ sources:
     title: ACT Rules Format 1.1
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: ACT Rules Format 1.1, W3C Recommendation 2026-02-05
+    target: WCAG 2.2, W3C Recommendation 2024-12-12; this date is explicitly identified by the source informative
+      WCAG22 reference
+  conditions_zh: 仅在编写针对 WCAG 2.2 要求的人工或自动测试规则时，记录 ACT Rules Format 1.1 与 WCAG 2.2 的配合用途：ACT 提供规则描述、适用性、预期及要求/结果映射结构，WCAG
+    提供被测试的无障碍要求。须区别 Conformance Requirement 与 Secondary 映射。对前者，任一 failed 表示该测试对象未满足所映射要求；全部 passed 或 inapplicable
+    通常仍可能需要进一步测试。只有具体 satisfying test 的全部结果均为 passed，才据该映射判定该测试对象满足对应要求；不能将这点扩大到未测要求或完整页面。Secondary 须按具体映射解释。ACT
+    规则结果不是 WCAG 成功准则自身的 passed/failed 标签，也不是完整 WCAG2.2符合性证明；页面符合性仍须满足 WCAG §5.2 的全部要求，包括完整页面、完整流程等边界。该边不是要求必须使用
+    ACT、完整测试覆盖、工具准确性/互通或 IA 页面符合性/采用声明。源文档将 WCAG22 列为资料性参考，不改成规范性依赖。
+  conditions_en: 'Limited to the existing complementary use when authoring manual or automated test rules for
+    WCAG 2.2 requirements: ACT Rules Format 1.1 structures rule descriptions, applicability, expectations and
+    requirement/outcome mappings; WCAG supplies the accessibility requirements being tested. Conformance Requirement
+    and Secondary mappings must be distinguished. For a Conformance Requirement, any failed outcome means that
+    the mapped requirement is not satisfied for that test subject; all passed or inapplicable outcomes may
+    still need further testing. Only all-passed outcomes of a specific satisfying test establish satisfaction
+    of its mapped requirement for that test subject, not untested requirements or an entire page. Secondary
+    results require their particular mapping. ACT outcomes are not WCAG success-criterion passed/failed labels
+    or proof of complete WCAG 2.2 conformance; page conformance still needs all WCAG section 5.2 requirements,
+    including full-page and complete-process boundaries. This does not require use of ACT or establish complete
+    test coverage, tool accuracy/interoperability, or IA-page conformance/adoption. The source lists WCAG22
+    as an informative reference, not a normative dependency.'
+evidence:
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#scope
+  title: ACT Rules Format 1.1 §2 and informative WCAG22 reference — WCAG-directed rule authoring; target dated
+    12 December 2024
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#accessibility-requirements-mapping
+  title: ACT Rules Format 1.1 §4.4–4.4.1.2 — requirement and outcome mappings, satisfying tests and secondary
+    requirements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/REC-act-rules-format-1.1-20260205/#rule-accuracy
+  title: ACT Rules Format 1.1 §5, non-normative — examples do not guarantee error-free implementations
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2024/REC-WCAG22-20241212/#conformance-reqs
+  title: WCAG 2.2 2024-12-12 §5.2 — all five conformance requirements; full pages and complete processes
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T15:30:57.554658+00:00'
+last_verified_by: Agent — OpenAI / dot / ACT WCAG scoped-use evidence executor
 ---
 id: design_tokens_format_provides_token_exchange
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:09:22.264759+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Design Tokens Format 提供设计令牌交换能力
@@ -204,18 +506,55 @@ sources:
     title: Design Tokens Format Module 2025.10
     language: en
     accessed: 2026-09-01
+context:
+  version_context:
+    source: Design Tokens Format Module 2025.10, fixed Final Community Group Report, 2025-10-28
+    target: Existing IA capability design_token_exchange
+  conditions_zh: 限定为按该版本 JSON 结构交换设计令牌及其值、类型、分组和引用；这是 Community Group 的交换格式规范，不是 W3C Recommendation，也不在 W3C
+    标准轨道。令牌类型按规范的显式类型、引用解析或分组继承规则确定，不能仅猜测值内容；需要实际值时必须解析引用，循环引用被禁止。处理工具须保留其不理解的扩展数据，但保留数据不等于理解其语义。本次只核交换格式能力，不证明任意工具兼容、视觉结果等价、旧
+    visual_information_presentation 能力上下文或 IA 已采用。
+  conditions_en: Limited to exchanging design-token values, types, groups and references in this version's
+    JSON structure. This Community Group interchange specification is not a W3C Recommendation and is not on
+    the W3C Standards Track. Token types follow explicit-type, reference-resolution or group-inheritance rules,
+    not guesses from values; references must be resolved when actual values are needed, and cycles are forbidden.
+    Processing tools must retain unknown extension data, but retention does not mean understanding its semantics.
+    Only format-level exchange capability is reviewed, not arbitrary tool compatibility, equal visual results,
+    the legacy visual_information_presentation context, or IA adoption.
+evidence:
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#sotd
+  title: 'Design Tokens Format 2025.10 — document status: Final Community Group Report, not W3C Standards Track'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#file-format
+  title: 'Design Tokens Format 2025.10 — section 4: JSON interchange structure'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#x5-2-2-type
+  title: 'Design Tokens Format 2025.10 — section 5.2.2: unambiguous type and resolution/inheritance rules'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#extensions
+  title: 'Design Tokens Format 2025.10 — section 5.2.3: retention of unknown extension data'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#reference-resolution
+  title: 'Design Tokens Format 2025.10 — section 7.2: resolution when values are needed; no circular references'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:06:47.655585+00:00'
+last_verified_by: Agent — OpenAI / dot, existing text/design capability-edge evidence executor
 ---
 id: design_tokens_format_supports_visual_information_presentation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:47:42.490184+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Design Tokens Format 支持视觉呈现决策的跨工具复用
@@ -227,6 +566,30 @@ capability_context: [design_token_exchange, visual_information_presentation]
 conditions_zh: "该格式表达设计决策的可交换值，本身不规定具体视觉层级、排版或可用性规则。"
 conditions_en: "The format exchanges design-decision values; it does not itself prescribe visual hierarchy, typography, or usability rules."
 confidence: 0.85
+context:
+  version_context:
+    source: Design Tokens Format Module 2025.10, Final Community Group Report 2025-10-28; not a W3C Recommendation
+      or W3C Standards Track specification
+    target: Existing IA capability visual_information_presentation
+  conditions_zh: 沿用旧边的有限范围：通过具名的设计决策值及其类型，支持视觉呈现决策在设计、转换和文档工具之间复用。格式定义值的交换表示，不负责选择合适的视觉层级、排版或可用性规则；具体呈现仍依赖消费这些值的工具和实现。它是面向实现的社区组格式报告，而非
+    W3C Recommendation；不证明任意工具已兼容、输出视觉一致或 IA 已采用。
+  conditions_en: Within the existing edge’s limited scope, named design-decision values and their types support
+    reuse of visual-presentation decisions across design, translation and documentation tools. The format represents
+    values for exchange; it does not choose appropriate visual hierarchy, typography or usability rules. Actual
+    presentation depends on consuming tools and implementations. This is a Community Group format report intended
+    for implementation, not a W3C Recommendation; arbitrary-tool compatibility, visually identical output and
+    IA adoption are not established.
+evidence:
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#introduction
+  title: Design Tokens 2025.10 §2–3 — design decisions and tool roles
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/community/reports/design-tokens/CG-FINAL-format-20251028/#name-and-value
+  title: Design Tokens 2025.10 §5.1–5.2.2 — named values and token types
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:43:06.065948+00:00'
+last_verified_by: Agent — OpenAI / dot, existing interface-expression capability evidence executor
 ---
 id: design_tokens_format_governed_by_dtcg
 record_created_at: "2026-09-01T16:44:53+08:00"

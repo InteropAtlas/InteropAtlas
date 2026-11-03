@@ -1,0 +1,53 @@
+id: hls_rfc8216_uses_scte35
+type: relation
+name_zh: HLS可选DateRange信令使用SCTE-35消息表示
+name_en: Optional HLS DateRange signaling uses SCTE-35 message representation
+source: hls_rfc8216
+relation: uses
+target: scte35
+context:
+  version_context:
+    source: RFC 8216 (August 2017), Informational Independent Submission
+    target: ANSI/SCTE 35 (August 2014), exact §11.1 dated reference
+  conditions_zh: 只限固定 RFC 8216（2017-08）§4.3.2.7.1 的可选 Media Playlist 表示，目标按 §11.1 限定 ANSI/SCTE 35（2014-08）。源媒体中的
+    SCTE-35 拼接信息 MAY 由 EXT-X-DATERANGE 表示，不是所有 HLS 播放列表必需支持的特性。本批只审阅该节第二段的具体情况：包含 splice_null()、splice_schedule()、bandwidth_reservation()
+    或 private_cmd() 的 splice_info_section() SHOULD 通过 SCTE35-CMD 属性表示，值为整个 section 的大端二进制十六进制序列；不把 SHOULD 提升为 MUST。§4.3.2.7
+    中 ID 与 START-DATE 必需，含 DateRange 的播放列表 MUST 有至少一个 EXT-X-PROGRAM-DATE-TIME。该节映射还规定 SCTE35-CMD 的 START-DATE MUST
+    对应命令的 splice_time()，无该时间时对应命令出现在源流中的节目时间。此处不是穷尽 DateRange 语法或所有 SCTE35 命令映射的实现配方；未声称对 splice_insert()/time_signal()/segmentation_descriptor()
+    的其他映射、§8.10 示例或后来 HLS 扩展完成审阅/测试。仅为有版次/属性/命令条件的 uses，不是全 HLS 强制依赖、完整 SCTE35 语法符合性、软件/设备支持、广告交付、无缝拼接、互通、安全性、部署或
+    IA 采用。
+  conditions_en: 'Limited to the optional Media Playlist representation in fixed RFC8216 (2017-08) section4.3.2.7.1,
+    with the ANSI/SCTE35 (2014-08) target pinned by section11.1. Source-media SCTE35 splice information MAY use
+    EXT-X-DATERANGE; it is not required in every HLS playlist. The reviewed operative case is the second paragraph:
+    a splice_info_section() containing splice_null(), splice_schedule(), bandwidth_reservation() or private_cmd()
+    SHOULD be represented in SCTE35-CMD as a hexadecimal sequence of the whole section in big-endian binary. SHOULD
+    is not promoted to MUST. Section4.3.2.7 requires ID and START-DATE, and a playlist with DateRange MUST contain
+    at least one EXT-X-PROGRAM-DATE-TIME. The mapping further requires SCTE35-CMD START-DATE to be the command splice_time(),
+    or the program time at which the command appeared in the source stream if it specifies no splice_time(). This
+    is not an exhaustive DateRange grammar or implementation recipe for all SCTE35 commands. Other splice_insert()/time_signal()/segmentation_descriptor()
+    mappings, section8.10 examples and later HLS extensions are not claimed reviewed/tested. This version-, attribute-
+    and command-conditioned uses relation does not establish mandatory whole-HLS dependency, full SCTE35 syntax
+    conformance, software/device support, ad delivery, seamless splicing, interoperability, security, deployment
+    or IA adoption.'
+evidence:
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-4.3.2.7
+  title: RFC 8216 §4.3.2.7 — optional SCTE35 attributes, ID/START-DATE and program-date-time requirements
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-4.3.2.7.1
+  title: RFC 8216 §4.3.2.7.1 — operative MAY/SHOULD SCTE35-CMD mapping and time binding
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#ref-SCTE35
+  title: RFC 8216 §11.1 Normative References — exact August 2014 target
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T08:29:57.134184+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded optional RFC8216 SCTE35-CMD evidence review
+record_created_at: '2026-10-29T08:40:30.090114+00:00'
+record_updated_at: '2026-10-29T08:40:30.090114+00:00'
+latest_substantive_contribution:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Agent — OpenAI / independent semantic reviewer (/root/review_hls_scte35_evidence)
+  github_actor: ff6962757

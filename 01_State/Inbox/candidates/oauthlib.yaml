@@ -1,0 +1,35 @@
+contract_version: candidate-object-v1
+candidate_id: oauthlib
+label: OAuthLib Python library — fixed 4.0.0, bounded authorization-code client mechanics
+publisher: The OAuthlib Community
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: oauthlib/oauthlib
+- namespace: pypi
+  value: oauthlib
+locators:
+- url: https://github.com/oauthlib/oauthlib/tree/145a9a4690cb4d9de30d15fcc2984e34c49df741
+  role: dated
+- url: https://pypi.org/project/oauthlib/4.0.0/
+  role: dated
+- url: https://github.com/oauthlib/oauthlib/releases/tag/v4.0.0
+  role: official
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - oauthlib
+  reasons:
+  - Accepted as canonical oauthlib by accept-20261024-oauthlib-authcode. Frozen new-state Candidate 9caf715bdc200e7630e420d4d33f936d498df68d
+    and review_required route are replayed against actual ancestor fefff97034ce3e678aec750133da53653607fb2e; this
+    back-reference prevents duplicate creation and does not merge subjects.
+  merge_authorized: false
+unknowns:
+- 只检视固定公开源码、上游测试定义和发布元数据；没有安装、构建、导入或运行 OAuthLib，也没有实际 HTTP/授权交互、凭据或令牌操作。
+- PyPI wheel/sdist SHA-256 仅为发布方元数据；未下载这些分发归档并重算哈希，不声称包字节与源码逐字一致、签名或可复现构建。
+- 关系只覆盖 WebApplicationClient 的授权码请求/响应机械处理；不表示完整客户端部署、OAuth/OIDC 身份认证、RFC9700 全面符合性或安全认证。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review

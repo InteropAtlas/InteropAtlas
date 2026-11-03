@@ -48,7 +48,10 @@ class HomepageStatusTests(unittest.TestCase):
             main = page.locator("main")
             for label in ("你想做什么？", "查找对象", "理解一个对象", "比较候选方案", "验证来源", "探索关系", "按能力浏览", "其他入口"):
                 expect(main).not_to_contain_text(label)
-            self.assertEqual(main.locator("a").count(), 1)
+            self.assertEqual(
+                sorted(main.locator("a").evaluate_all("links => links.map(link => link.getAttribute('href'))")),
+                ["maintenance.html", "search.html"],
+            )
         finally:
             context.close()
 

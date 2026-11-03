@@ -2,15 +2,15 @@
 ---
 id: json_ld_uses_json
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T00:41:05.576335+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 使用 JSON 语法
@@ -25,18 +25,35 @@ sources:
     title: JSON-LD 1.1
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: JSON-LD 1.1, W3C Recommendation 2020-07-16
+    target: RFC 8259
+  conditions_zh: 仅表述固定 JSON-LD 1.1 推荐标准第 9 节的表示要求：使用有效 RFC 8259 JSON 文本，或可在 JSON-LD 内部表示中等价表示该 JSON 文本的格式。JSON-LD
+    另有文档形态与对象键唯一性要求，并非任意 JSON 都是有效 JSON-LD。此语法关系不证明共享语义、处理器符合性、RDF 1.2 特性或 IA 采用。
+  conditions_en: 'Limited to section 9 of the fixed JSON-LD 1.1 Recommendation: valid RFC 8259 JSON text, or a format
+    representable equivalently in the JSON-LD internal representation. Additional document-shape and unique-object-key
+    requirements apply; arbitrary JSON is not necessarily valid JSON-LD. This syntax relation does not establish
+    shared semantics, processor conformance, RDF 1.2 features or IA adoption.'
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#json-ld-grammar
+  title: JSON-LD 1.1 — section 9 JSON-LD Grammar, fixed Recommendation 2020-07-16
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T00:39:33.158985+00:00'
+last_verified_by: Agent — OpenAI / dot，JSON foundation relation evidence executor
 ---
 id: json_ld_maps_to_rdf
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-29T13:49:55.469486+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: mixed
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Agent — OpenAI / dot / independent semantic reviewer / review_jsonld_scope_evidence"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 可映射到 RDF 数据模型
@@ -45,8 +62,6 @@ source: {type: standard, id: json_ld_1.1}
 relation: maps_to
 target: {type: standard, id: rdf_1.2_concepts}
 capability_context: [graph_representation, linked_data_serialization]
-conditions_zh: JSON-LD 1.1 可表达 RDF 图的常规 Linked Data 模型，但并不原生覆盖 RDF 1.2 新增的 triple terms。
-conditions_en: JSON-LD 1.1 can express conventional RDF Linked Data graphs, but does not natively cover RDF 1.2 triple terms.
 confidence: 0.95
 sources:
   - url: https://www.w3.org/TR/json-ld11/
@@ -57,18 +72,52 @@ sources:
     title: RDF 1.2 Concepts and Abstract Data Model
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: JSON-LD 1.1 and JSON-LD 1.1 Processing Algorithms and API, W3C Recommendations 2020-07-16
+    target: RDF 1.2 Concepts and Abstract Data Model, W3C Candidate Recommendation Snapshot 2026-04-07
+  conditions_zh: 限定于固定 JSON-LD 1.1 及其 2020 API 按标准而非广义 RDF 解释后、符合 RDF 1.1 的图；固定 RDF 1.2 CR 第 2.1 节明确该数据可作为 1.2-basic，继而作为
+    1.2 数据。作为 graph source 使用时只取默认图并忽略命名图。不覆盖空白节点谓词的广义输出；2020 转换中的 @direction 可能丢失或通过 i18n datatype / compound-literal
+    另行编码，不能据此声称原生 RDF 1.2 directional language-tagged strings 支持。此边不声称 JSON-LD 1.1 原生表达 triple terms、覆盖 RDF 1.2
+    全部特性、完整保留原始 JSON 无损往返、处理器符合性、库间互通或 IA 已采用。RDF 1.2 证据仅绑定上述 CR 快照，不代表后续版本或 Recommendation 状态。
+  conditions_en: Limited to RDF 1.1-conforming graphs obtained by standard, non-generalized RDF interpretation under
+    the fixed JSON-LD 1.1 specification and its 2020 API. Section 2.1 of the fixed RDF 1.2 CR permits such data
+    as 1.2-basic and then 1.2 data. A graph-source consumer uses only the default graph and ignores named graphs.
+    Generalized output with blank-node predicates is excluded. In the 2020 conversion, @direction may be lost or
+    encoded through i18n datatypes or compound literals; this does not establish native RDF 1.2 directional language-tagged-string
+    support. No native JSON-LD 1.1 triple terms, full RDF 1.2 feature coverage, lossless preservation of original
+    JSON, processor conformance, library interoperability or IA adoption is asserted. The target evidence is this
+    CR snapshot, not later editions or Recommendation status.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
+  title: 'JSON-LD 1.1 — fixed Recommendation 2020-07-16, sections 8/10: RDF1.1 correspondence, generalized data
+    and graph-source limits'
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#defined-version-labels
+  title: RDF 1.2 Concepts — fixed CR Snapshot 2026-04-07, section 2.1 version-label inclusion; sections 1.9/3.1/3.4
+    for syntax and term boundaries
+  language: en
+  accessed: '2026-10-29'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-api-20200716/#deserialize-json-ld-to-rdf-algorithm
+  title: 'JSON-LD 1.1 Processing Algorithms and API — fixed Recommendation 2020-07-16, sections 8.1/8.2: standard
+    output, generalized predicates and direction handling'
+  language: en
+  accessed: '2026-10-29'
+last_verified_at: '2026-10-29T13:49:55.469486+00:00'
+last_verified_by: Agent — OpenAI / dot / JSON-LD RDF 1.2 fixed-source evidence executor
 ---
 id: json_ld_provides_linked_data_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T05:07:30.727540+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 提供链接数据序列化能力
@@ -77,18 +126,34 @@ source: {type: standard, id: json_ld_1.1}
 relation: provides
 target: {type: capability, id: linked_data_serialization}
 confidence: 1.0
+context:
+  version_context:
+    source: JSON-LD 1.1, W3C Recommendation 2020-07-16
+    target: Existing IA capability linked_data_serialization
+  conditions_zh: 限定为固定 JSON-LD 1.1 的链接数据 JSON 表示；解释依赖 JSON-LD 规则与上下文，不是任意 JSON 都具有链接数据语义。不保证原始 JSON 全字段无损往返、唯一字节表示、处理器符合性或
+    IA 采用。
+  conditions_en: Limited to the fixed JSON-LD 1.1 representation of Linked Data in JSON. Interpretation depends
+    on JSON-LD rules and contexts; arbitrary JSON does not thereby acquire Linked Data semantics. This does not
+    guarantee lossless preservation of all original JSON fields, unique bytes, processor conformance or IA adoption.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#data-model
+  title: JSON-LD 1.1 — fixed 2020 Recommendation, abstract and section 8 data model
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:06:04.946581+00:00'
+last_verified_by: Agent — OpenAI / dot，bounded semantic capability evidence executor
 ---
 id: json_ld_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T05:07:30.727540+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 可表达图关系数据
@@ -99,18 +164,39 @@ target: {type: capability, id: graph_representation}
 conditions_zh: 该能力通过 JSON-LD 与 RDF 数据模型的映射实现；RDF 1.2 triple-term 关系元数据当前仍需额外映射。
 conditions_en: This capability is provided through JSON-LD's mapping to RDF; RDF 1.2 triple-term relationship metadata currently requires an additional mapping.
 confidence: 0.9
+context:
+  version_context:
+    source: JSON-LD 1.1, W3C Recommendation 2020-07-16
+    target: Existing IA capability graph_representation
+  conditions_zh: 限定为第 8/10 节的图与数据集表示能力：与 RDF 1.1 的对应存在广义数据集及方向信息等边界，不是所有 JSON-LD 都可直接解释为标准 RDF 1.1。作为 graph source
+    使用时只取默认图并忽略命名图。本次不核定 RDF 1.2 跨版映射、转换管道或实现互通。
+  conditions_en: Limited to graph/dataset representation in sections 8 and 10. Generalized datasets and direction
+    information limit the correspondence with RDF 1.1; not all JSON-LD is directly interpretable as standard RDF
+    1.1. A graph-source consumer uses only the default graph and ignores named graphs. This review does not establish
+    RDF 1.2 mapping, conversion pipelines or implementation interoperability.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#data-model
+  title: JSON-LD 1.1 — section 8 Data Model
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
+  title: JSON-LD 1.1 — section 10 Relationship to RDF and graph-source constraint
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:06:04.946581+00:00'
+last_verified_by: Agent — OpenAI / dot，bounded semantic capability evidence executor
 ---
 id: rdf_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 提供图关系表示能力
@@ -119,6 +205,35 @@ source: {type: standard, id: rdf_1.2_concepts}
 relation: provides
 target: {type: capability, id: graph_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: RDF 1.2 Concepts and Abstract Data Model, W3C Candidate Recommendation Snapshot 2026-04-07; not
+      a W3C Recommendation
+    target: Existing IA capability graph_representation
+  conditions_zh: 限定为该候选推荐快照的抽象图数据模型：RDF 图是三元组的集合，主语为 IRI 或空白节点，谓语为 IRI，宾语还可为字面量或 triple term。出现 triple term
+    不自动断言其中命题为真。规范定义供具体语法、API 和查询语言引用的模型，明确实现不能直接符合本概念文档；本边不证明存储、查询或软件互通，也不重新核验旧 IA 采用/导出设想及其它 RDF 1.1/1.2
+    映射。
+  conditions_en: 'Limited to the abstract graph data model in this Candidate Recommendation Snapshot: an RDF
+    graph is a set of triples, with an IRI or blank-node subject, an IRI predicate, and an object that may
+    also be a literal or triple term. Occurrence of a triple term does not itself assert its proposition. The
+    specification supplies a model for concrete syntaxes, APIs and query languages and explicitly states that
+    implementations cannot conform directly to this Concepts document. Storage, query execution, software interoperability,
+    legacy IA adoption/export plans and other RDF 1.1/1.2 mappings are not verified.'
+evidence:
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#section-rdf-graph
+  title: RDF 1.2 Concepts 2026-04-07 §3–3.2 — graphs, triples and RDF terms
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#conformance
+  title: RDF 1.2 Concepts 2026-04-07 §2 — abstract-model conformance boundary
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/CR-rdf12-concepts-20260407/#section-triple-terms-reification
+  title: RDF 1.2 Concepts 2026-04-07 §1.5 — triple terms and assertion distinction
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: rdf_turtle_implements_rdf_model
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -148,15 +263,15 @@ sources:
 ---
 id: rdf_turtle_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 1.2 Turtle 提供 RDF 图的文本表示
@@ -165,18 +280,46 @@ source: {type: standard, id: rdf_1.2_turtle}
 relation: provides
 target: {type: capability, id: graph_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: RDF 1.2 Turtle, W3C Working Draft 2026-07-23, matching the existing object edition; not a W3C Recommendation
+    target: Existing IA capability graph_representation
+  conditions_zh: 限定为现有对象所记 2026-07-23 工作草案的 RDF 图文本表示。符合文法及附加约束的 Turtle 文档序列化一个 RDF 图；triple term、reifying
+    triple 与同时断言三元组的 annotation syntax 须区分。具体解析器需按解析规则向应用提供该图，这不是任意软件已实现、全版本兼容或原始文本逐字往返的保证。本次不核验旧 IA 关系元数据映射实验或其它
+    implements/maps_to 边。
+  conditions_en: Limited to textual RDF graph representation in the 2026-07-23 Working Draft recorded by the
+    existing object. A Turtle document satisfying its grammar and additional constraints serializes an RDF
+    graph; triple terms, reifying triples and annotation syntax that also asserts the triple must be distinguished.
+    A conforming parser exposes the graph according to the parsing rules, not a guarantee that arbitrary software
+    implements them, supports every version or preserves original bytes on round trips. Legacy IA relationship-metadata
+    experiments and other implements/maps_to edges are not verified.
+evidence:
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#conformance
+  title: RDF 1.2 Turtle 2026-07-23 §5 — document and parser conformance
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#triple-terms
+  title: RDF 1.2 Turtle 2026-07-23 §2.10–2.11 — triple terms, reifying triples and annotations
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-parsing
+  title: RDF 1.2 Turtle 2026-07-23 §7 — parsing to an RDF graph
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: rdf_turtle_provides_linked_data_serialization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: RDF 1.2 Turtle 提供链接数据序列化能力
@@ -185,44 +328,41 @@ source: {type: standard, id: rdf_1.2_turtle}
 relation: provides
 target: {type: capability, id: linked_data_serialization}
 confidence: 1.0
----
-id: skos_uses_rdf
-record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
-metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
-metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
-latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
-  github_actor: "ff6962757"
-type: relation
-name_zh: SKOS 基于 RDF 数据模型
-name_en: SKOS is based on the RDF data model
-source: {type: standard, id: skos_reference}
-relation: uses
-target: {type: standard, id: rdf_1.2_concepts}
-capability_context: [knowledge_organization, graph_representation]
-confidence: 1.0
-sources:
-  - url: https://www.w3.org/TR/skos-reference/
-    title: SKOS Simple Knowledge Organization System Reference
-    language: en
-    accessed: 2026-08-30
+context:
+  version_context:
+    source: RDF 1.2 Turtle, W3C Working Draft 2026-07-23, matching the existing object edition; not a W3C Recommendation
+    target: Existing IA capability linked_data_serialization
+  conditions_zh: 限定为将 RDF 图编码成可交换、可解析的 Turtle 文本：媒体类型为 text/turtle，编码为 UTF-8，文档须满足文法及附加约束。版本指令和可选媒体类型版本参数是版本提示，不要求解析器拒绝声明版本之外的特性；带
+    1.1 版本指令的文档仍可能使 Turtle 1.1 解析器失败。草案未定义不符合文法输入的解析器处理方式。本边不证明真实网络交换、任意工具互通、逐字往返或 IA 已采用该格式。
+  conditions_en: 'Limited to encoding an RDF graph as exchangeable, parseable Turtle text: media type text/turtle,
+    UTF-8 encoding, and the grammar plus additional document constraints. Version directives and the optional
+    media-type version parameter are hints, not a requirement that parsers reject features outside the announced
+    version; a 1.1 version directive can still cause Turtle 1.1 parsers to fail. The draft does not define
+    parser handling of non-conforming input. Actual network exchange, arbitrary-tool interoperability, byte-preserving
+    round trips and IA adoption are not established.'
+evidence:
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-mime
+  title: RDF 1.2 Turtle 2026-07-23 §5–6 — conformance, text/turtle and UTF-8
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2026/WD-rdf12-turtle-20260723/#sec-version
+  title: RDF 1.2 Turtle 2026-07-23 §2.4 — version announcements are hints
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: skos_provides_knowledge_organization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T09:26:26.111734+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: SKOS 提供知识组织能力
@@ -231,18 +371,51 @@ source: {type: standard, id: skos_reference}
 relation: provides
 target: {type: capability, id: knowledge_organization}
 confidence: 1.0
+context:
+  version_context:
+    source: SKOS Reference, fixed W3C Recommendation, 2009-08-18
+    target: Existing IA capability knowledge_organization
+  conditions_zh: 限定为用 RDF 表达概念、概念方案、标签、层级与关联等知识组织结构。SKOS 不把概念方案边界封闭为一份完整清单；未列出成员不能据此认定不存在。broader、narrower
+    和 related 本身不声明传递性，层级传递推理使用对应 Transitive 属性。此边不证明具体分类内容正确或完整、实现互通或 IA 已采用 SKOS；不据此修改 IA 分类、谓词或推理规则，旧 RDF
+    1.2 映射亦未重新核验。
+  conditions_en: Limited to representing concepts, schemes, labels and hierarchical/associative knowledge structures
+    in RDF. SKOS does not close a concept scheme into an exhaustive member list; absent members cannot thereby
+    be declared nonexistent. broader, narrower and related are not declared transitive; hierarchical closure
+    uses the corresponding Transitive properties. This does not establish classification correctness/completeness,
+    implementation interoperability or IA adoption, and does not change IA categories, predicates or inference.
+    Legacy RDF 1.2 mappings are not reverified.
+evidence:
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#intro
+  title: 'SKOS Reference — section 1.2: RDF representation of knowledge organization systems'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#schemes
+  title: 'SKOS Reference — section 4, especially 4.6.1: concept schemes are not closed member lists'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#labels
+  title: 'SKOS Reference — section 5: lexical labels'
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/#semantic-relations
+  title: 'SKOS Reference — section 8, especially 8.6.4 and 8.6.6: direct relations and transitive hierarchy
+    properties'
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T09:25:00.925357+00:00'
+last_verified_by: Agent — OpenAI / dot, existing repository-exchange and knowledge-organization evidence executor
 ---
 id: topic_maps_provides_knowledge_organization
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:23:45.532849+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: Topic Maps 提供知识组织能力
@@ -251,6 +424,26 @@ source: {type: standard, id: topic_maps_iso_13250}
 relation: provides
 target: {type: capability, id: knowledge_organization}
 confidence: 1.0
+context:
+  version_context:
+    source: ISO/IEC 13250 family endpoint, limited here to ISO/IEC 13250-2:2006 public official catalogue abstract;
+      paid full text not read
+    target: Existing IA capability knowledge_organization
+  conditions_zh: 仅据 ISO/IEC 13250-2:2006 官方公开目录摘要，限定为 Topic Maps 模型的抽象结构与解释、合并规则和基本主题标识所提供的知识组织基础。目录将该模型定位为交换语法解释及后续规范的基础，不等于已经具备查询引擎或约束验证实现。本次未读取付费标准全文，未核验
+    Part 5、标准族全部部分、详尽图模型或旧 IA 采用陈述；单独的图表示能力边保持原样而未补证。
+  conditions_en: Based only on the public official catalogue abstract for ISO/IEC 13250-2:2006, limited to
+    the knowledge-organization foundation supplied by the model’s abstract structure/interpretation, merging
+    rules and basic subject identifiers. Its role as a basis for interchange interpretation and supporting
+    specifications does not establish a query engine or constraint-validation implementation. The paid full
+    text, Part 5, the entire standards family, detailed graph model and legacy IA-adoption statements were
+    not verified; the separate graph-representation edge remains unchanged and without added evidence.
+evidence:
+- url: https://www.iso.org/standard/40017.html
+  title: ISO/IEC 13250-2:2006 official catalogue — public abstract only
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:21:16.365203+00:00'
+last_verified_by: Agent — OpenAI / dot, existing graph-model capability evidence executor
 ---
 id: topic_maps_provides_graph_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -274,15 +467,15 @@ confidence: 0.95
 ---
 id: html_provides_hypertext_navigation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:47:42.490184+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTML 提供超文本导航能力
@@ -296,18 +489,41 @@ sources:
     title: HTML Standard
     language: en
     accessed: 2026-08-30
+context:
+  version_context:
+    source: WHATWG HTML Living Standard, official Links page captured 2026-10-21, header Last Updated 20 October
+      2026; no fixed release number asserted
+    target: Existing IA capability hypertext_navigation
+  conditions_zh: 限定为 HTML 规范定义的超链接与导航机制，不把所有资源链接都当作用户导航。a/area 元素没有 href 时不创建超链接；跟随链接仍受文档活动状态、URL 解析及目标 navigable
+    选择等处理条件约束，下载与导航须区分。本边不是任意链接可访问、安全或永久有效的保证，也不证明某浏览器实现、实际网络互通或 IA 已采用/验证其全部行为。
+  conditions_en: Limited to HTML-defined hyperlink and navigation mechanisms, not all resource links as user
+    navigation. An a/area element without href creates no hyperlink; following links remains subject to document
+    activity, URL parsing and target-navigable selection, and downloading must be distinguished from navigation.
+    This is not a guarantee that arbitrary links are reachable, safe or permanent, or proof of browser implementation,
+    actual network interoperability or IA adoption/validation of all behavior.
+evidence:
+- url: https://html.spec.whatwg.org/multipage/links.html#links-created-by-a-and-area-elements
+  title: HTML Living Standard §4.6.1–2 — link kinds and a/area hyperlinks
+  language: en
+  accessed: '2026-10-21'
+- url: https://html.spec.whatwg.org/multipage/links.html#following-hyperlinks
+  title: HTML Living Standard §4.6.5–6 — conditional navigation and downloading
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:43:06.065948+00:00'
+last_verified_by: Agent — OpenAI / dot, existing interface-expression capability evidence executor
 ---
 id: html_provides_document_representation
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-21T10:47:42.490184+00:00"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot"
+  reviewer: "Independent Agent — OpenAI / dot / main-session semantic review"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTML 提供文档结构表示能力
@@ -316,18 +532,42 @@ source: {type: standard, id: html_living_standard}
 relation: provides
 target: {type: capability, id: document_representation}
 confidence: 1.0
+context:
+  version_context:
+    source: WHATWG HTML Living Standard, official Introduction and DOM pages captured 2026-10-21, header Last
+      Updated 20 October 2026; no fixed release number asserted
+    target: Existing IA capability document_representation
+  conditions_zh: 限定为用具有规定语义的元素、属性及结构表达文档内容，供人类呈现和机器处理。HTML 的语义不等于特定视觉样式；语法正确不自动满足元素的语义用途。HTML 语法、XML 语法与 DOM
+    表示的处理方式和可表示内容并不完全相同，不据此保证任意相互转换无损、逐字往返、浏览器一致呈现或无障碍符合性；旧 IA 生成视图设想未在本次核验。
+  conditions_en: Limited to representing document content through elements, attributes and structure with defined
+    semantics for human presentation and machine processing. HTML semantics do not prescribe a particular visual
+    style, and syntactic correctness alone does not satisfy intended element semantics. HTML syntax, XML syntax
+    and DOM representations differ in processing and expressible content; arbitrary lossless conversion, byte-preserving
+    round trips, identical browser rendering and accessibility conformance are not established. Legacy IA generated-view
+    plans are not verified.
+evidence:
+- url: https://html.spec.whatwg.org/multipage/dom.html#semantics-2
+  title: HTML Living Standard §3.2.1 — element and attribute semantics
+  language: en
+  accessed: '2026-10-21'
+- url: https://html.spec.whatwg.org/multipage/introduction.html#html-vs-xhtml
+  title: HTML Living Standard §1.8 — HTML/XML syntax and DOM representation boundaries
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T10:43:06.065948+00:00'
+last_verified_by: Agent — OpenAI / dot, existing interface-expression capability evidence executor
 ---
 id: json_ld_governed_by_w3c
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-31T01:58:00Z"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: "Agent — OpenAI / dot (linked-data external-stewardship evidence enrichment only)"
+  reviewer: "Agent — OpenAI / dot independent semantic and structural reviewers (linked-data external-stewardship evidence enrichment only)"
   github_actor: "ff6962757"
 type: relation
 name_zh: JSON-LD 由 W3C 标准化
@@ -336,6 +576,11 @@ source: {type: standard, id: json_ld_1.1}
 relation: governed_by
 target: {type: organization, id: w3c}
 confidence: 1.0
+evidence:
+  - url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/
+    title: "JSON-LD 1.1 — Recommendation 2020-07-16, Status of This Document: JSON-LD Working Group development and publication under the W3C Process"
+    language: en
+    accessed: 2026-10-31
 ---
 id: rdf_governed_by_w3c
 record_created_at: "2026-09-01T16:44:53+08:00"
@@ -379,15 +624,15 @@ confidence: 1.0
 ---
 id: skos_governed_by_w3c
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-31T01:58:00Z"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: "Agent — OpenAI / dot (linked-data external-stewardship evidence enrichment only)"
+  reviewer: "Agent — OpenAI / dot independent semantic and structural reviewers (linked-data external-stewardship evidence enrichment only)"
   github_actor: "ff6962757"
 type: relation
 name_zh: SKOS 由 W3C 标准化
@@ -396,18 +641,23 @@ source: {type: standard, id: skos_reference}
 relation: governed_by
 target: {type: organization, id: w3c}
 confidence: 1.0
+evidence:
+  - url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/
+    title: "SKOS Reference — Recommendation 2009-08-18, Status of This Document: Semantic Web Deployment Working Group within the W3C Semantic Web Activity; W3C review and endorsement"
+    language: en
+    accessed: 2026-10-31
 ---
 id: html_governed_by_whatwg
 record_created_at: "2026-09-01T16:44:53+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
+record_updated_at: "2026-10-31T01:58:00Z"
 metadata_backfilled_at: "2026-09-02T11:31:29+08:00"
 metadata_provenance:
-  lifecycle_time: reconstructed_from_git
-  contribution_identity: owner_confirmed_cutoff
+  lifecycle_time: mixed
+  contribution_identity: commit_explicit
 latest_substantive_contribution:
   initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
+  executor: "Agent — OpenAI / dot (linked-data external-stewardship evidence enrichment only)"
+  reviewer: "Agent — OpenAI / dot independent semantic and structural reviewers (linked-data external-stewardship evidence enrichment only)"
   github_actor: "ff6962757"
 type: relation
 name_zh: HTML Living Standard 由 WHATWG 维护
@@ -416,3 +666,439 @@ source: {type: standard, id: html_living_standard}
 relation: governed_by
 target: {type: organization, id: whatwg}
 confidence: 1.0
+evidence:
+  - url: https://html.spec.whatwg.org/multipage/introduction.html
+    title: "HTML Living Standard — Introduction sections 1.2 and 1.6: development at WHATWG and continuous maintenance"
+    language: en
+    accessed: 2026-10-31
+  - url: https://whatwg.org/working-mode
+    title: "WHATWG Working Mode — standards editors, change criteria and conflict resolution; institutional maintenance, not an IA adoption or governance claim"
+    language: en
+    accessed: 2026-10-31
+---
+id: shacl_2017_provides_schema_validation
+type: relation
+name_zh: SHACL 2017 提供 RDF 图约束验证能力
+name_en: SHACL 2017 provides RDF graph constraint validation
+source: shacl_2017
+relation: provides
+target: schema_validation
+context:
+  version_context:
+    source: SHACL, W3C Recommendation 2017-07-20
+    target: Existing IA capability schema_validation
+  conditions_zh: 以 data graph 与 shapes graph 为输入，按 shapes 约束产生验证报告；不是原始 JSON 语法检查、事实真实性或业务正确性保证。区分 SHACL Core 与
+    SHACL-SPARQL；递归 shapes 的验证行为在该版未定义，验证也可能发生实现相关 failure。此能力归属不证明任一处理器全符合性或 IA 采用。
+  conditions_en: Given data and shapes graphs, SHACL checks shape constraints and produces a validation report;
+    this is not raw JSON syntax checking or assurance of truth or application correctness. SHACL Core and SHACL-SPARQL
+    remain distinct. This version leaves recursive-shape validation undefined, and validation can report implementation-specific
+    failures. Capability attribution does not certify any processor or imply IA adoption.
+evidence:
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#conformance
+  title: SHACL 2017 — section 1.3 Core and SHACL-SPARQL conformance scopes
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#validation
+  title: SHACL 2017 — section 3.4 validation, failures and recursive shapes
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#validation-report
+  title: SHACL 2017 — section 3.6 validation report
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:06:04.946581+00:00'
+last_verified_by: Agent — OpenAI / dot，bounded semantic capability evidence executor
+record_created_at: '2026-10-21T05:06:04.946581+00:00'
+record_updated_at: '2026-10-21T05:07:30.727540+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: json_ld_1_1_maps_to_rdf_1_1
+type: relation
+name_zh: JSON-LD 1.1 按限定条件映射到 RDF 1.1 数据模型
+name_en: JSON-LD 1.1 maps conditionally to the RDF 1.1 data model
+source: json_ld_1.1
+relation: maps_to
+target: rdf_1.1_concepts
+context:
+  version_context:
+    source: JSON-LD 1.1, W3C Recommendation 2020-07-16
+    target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
+  conditions_zh: 仅固定第 8/10 节与 RDF 1.1 的对应；JSON-LD 可表达图/数据集，但广义数据集和方向信息等扩展不都能直接解释为标准 RDF 1.1。作为 graph source 使用时只取默认图并忽略命名图；规范转换算法另见独立
+    API 文档。不是无损往返、RDF 1.2 映射或库间兼容性证明。旧指向 RDF 1.2 的关系未由本次复核认可或改写。
+  conditions_en: Limited to the RDF 1.1 correspondence in fixed sections 8/10. Generalized datasets and direction
+    information prevent direct standard RDF 1.1 interpretation of every JSON-LD document. A graph-source consumer
+    uses only the default graph; normative conversion algorithms are in the separate API specification. No lossless
+    round-trip, RDF 1.2 mapping or library interoperability is established. The old RDF 1.2 edge is neither verified
+    nor rewritten here.
+evidence:
+- url: https://www.w3.org/TR/2020/REC-json-ld11-20200716/#relationship-to-rdf
+  title: JSON-LD 1.1 — sections 8/10 and RDF11-CONCEPTS reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
+  title: RDF 1.1 Concepts and Abstract Syntax — fixed Recommendation 2014-02-25, sections 3/4
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:31:07.552589+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+record_created_at: '2026-10-21T05:35:18.111584+00:00'
+record_updated_at: '2026-10-21T05:35:18.111584+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: shacl_2017_uses_rdf_1_1
+type: relation
+name_zh: SHACL 2017 使用 RDF 1.1 图与术语
+name_en: SHACL 2017 uses RDF 1.1 graphs and terminology
+source: shacl_2017
+relation: uses
+target: rdf_1.1_concepts
+context:
+  version_context:
+    source: SHACL, W3C Recommendation 2017-07-20
+    target: RDF 1.1 Concepts and Abstract Syntax, W3C Recommendation 2014-02-25
+  conditions_zh: 限固定 SHACL 第 1.1 节明确采用的 RDF 1.1 图、三元组与术语及第 3 节数据图/形状图。此模型依赖不指定 JSON-LD 输入处理、图选择、完整转换管道或 RDF 1.2
+    支持；不由两条边推断 PyLD 与 pySHACL 兼容或实现符合性。
+  conditions_en: Limited to RDF 1.1 graphs, triples and terminology explicitly adopted in SHACL section 1.1 and
+    the data/shapes graphs in section 3. This model dependency does not specify JSON-LD input handling, graph selection,
+    a complete conversion pipeline or RDF 1.2 support. These edges do not establish PyLD/pySHACL compatibility or
+    implementation conformance.
+evidence:
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#terminology
+  title: SHACL 2017 — section 1.1 Basic RDF Terminology and normative RDF11-CONCEPTS reference
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2017/REC-shacl-20170720/#validation
+  title: SHACL 2017 — section 3 validation and graphs
+  language: en
+  accessed: '2026-10-21'
+- url: https://www.w3.org/TR/2014/REC-rdf11-concepts-20140225/
+  title: RDF 1.1 Concepts and Abstract Syntax — fixed Recommendation 2014-02-25, sections 3/4
+  language: en
+  accessed: '2026-10-21'
+last_verified_at: '2026-10-21T05:31:07.552589+00:00'
+last_verified_by: Agent — OpenAI / dot，fixed RDF 1.1 reference evidence executor
+record_created_at: '2026-10-21T05:35:18.111584+00:00'
+record_updated_at: '2026-10-21T05:35:18.111584+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+  github_actor: ff6962757
+---
+id: rdflib_implements_sparql11_query_2013
+type: relation
+name_zh: RDFLib 7.6.0 有界实现 SPARQL 1.1 查询语言
+name_en: RDFLib 7.6.0 implements bounded SPARQL 1.1 Query Language paths
+source: rdflib
+relation: implements
+target: sparql11_query_2013
+context:
+  version_context:
+    source: RDFLib 7.6.0; tag 7.6.0, commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd
+    target: W3C SPARQL 1.1 Query Language, Recommendation 2013-03-21
+  conditions_zh: 限内置 SPARQLProcessor、可信查询及预加载本地图；Graph.query 使用 use_store_provided=False 绕过 store.query，且不覆盖处理器注册/evaluator/函数。覆盖
+    SELECT、ASK、CONSTRUCT、DESCRIBE、基本图模式及源码/测试支持的部分聚合和子查询；DESCRIBE 采用 CBD，输出范围由处理器决定。此参数不是离线或沙箱开关，SERVICE、FROM/FROM
+    NAMED、插件及间接加载可能访问网络/文件，本边排除这些外部路径和不可信输入。固定 W3C harness 存在 AVG、聚合/分组、pp37 与语法负例 xfail 及 SERVICE skip，不声称完整符合性、全测试通过或安全。上游测试仅审阅未执行；不扩展至
+    Update、Protocol、结果格式、Federated Query、entailment、RDF 1.2 或 IA 采用。
+  conditions_en: 'Limited to built-in SPARQLProcessor, trusted queries and preloaded local graph data; Graph.query
+    uses use_store_provided=False to bypass store.query, without processor-registration/evaluator/function overrides.
+    Covers SELECT, ASK, CONSTRUCT, DESCRIBE, basic graph patterns and only source/test-supported aggregate and subquery
+    paths. DESCRIBE uses CBD with processor-determined scope. The option is not an offline/sandbox switch: SERVICE,
+    FROM/FROM NAMED, plugins and indirect loading can access network/files; these external paths and untrusted input
+    are excluded. The fixed W3C harness has AVG, aggregate/grouping, pp37 and negative-syntax xfails plus SERVICE
+    skips; no full conformance, all-tests-pass or security claim. Upstream tests were inspected, not run. Update,
+    Protocol, result formats, Federated Query, entailment, RDF 1.2 and IA adoption are outside scope.'
+evidence:
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/intro_to_sparql.md#L1-L9
+  title: RDFLib query documentation distinguishes Query from Update and lists four query forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/graph.py#L1675-L1742
+  title: Graph.query — use_store_provided=False bypasses store dispatch, not a network/file sandbox
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugin.py#L503-L520
+  title: RDFLib built-in SPARQLProcessor registration, separate from UpdateProcessor
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/processor.py#L108-L146
+  title: SPARQLProcessor query parse, translate and evaluate path
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L77-L104
+  title: Built-in basic graph pattern evaluation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L276-L340
+  title: Built-in evaluation dispatch and custom evaluator priority
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L576-L650
+  title: SELECT, ASK, CONSTRUCT and DESCRIBE; DESCRIBE uses CBD
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_agg_distinct.py
+  title: Local aggregate-query test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_subselect.py
+  title: Local subquery test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_construct_bindings.py
+  title: CONSTRUCT and initial-binding test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_sparql/test_sparql.py#L888-L977
+  title: DESCRIBE test definitions, inspected not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/test/test_w3c_spec/test_sparql11_w3c.py#L28-L222
+  title: W3C harness declares xfail query cases and SERVICE skips; not a full-conformance result
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/docs/security_considerations.md#L1-L18
+  title: RDFLib documents arbitrary and indirect network/file access; input trust and external restrictions matter
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/evaluate.py#L343-L376
+  title: Built-in SERVICE evaluation can call urlopen
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/__init__.py#L9-L52
+  title: SPARQL_LOAD_GRAPHS=True and custom evaluator entry points
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/rdflib/plugins/sparql/sparql.py#L264-L384
+  title: Dataset clauses can load graphs through QueryContext and Graph.parse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#QueryForms
+  title: W3C SPARQL 1.1 Query Language — query forms
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#describe
+  title: W3C section 16.4 — DESCRIBE description determined by the query processor
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T09:22:25.554473+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed RDFLib query source evidence executor
+record_created_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  github_actor: ff6962757
+---
+id: pyshacl_depends_on_rdflib
+type: relation
+name_zh: pySHACL 0.40.1 声明 RDFLib 必需依赖
+name_en: pySHACL 0.40.1 declares a mandatory RDFLib dependency
+source: pyshacl
+relation: depends_on
+target: rdflib
+context:
+  version_context:
+    source: pySHACL 0.40.1, commit 469cca7a22a078b36c167c1e8dadecf5e5ec6c75
+    target: RDFLib declared range >=7.3.0,<8.0 with html extra; lock pins 7.6.0, object evidence commit 8b32146a0f9cb748c2068662e50d02b42fc86dfd
+  conditions_zh: 仅陈述固定 pyproject 的必需包依赖 rdflib[html]>=7.3.0,<8.0，以及同一源码 poetry.lock 中 main 组、optional=false 的 7.6.0
+    锁定事实；html extra 是该声明的一部分，不称为纯 RDFLib 普通查询的通用必需项。SPARQL 约束路径调用 target_graph.query，但未强制 use_store_provided=False，不能保证始终使用本地内置处理器。声明范围、仓库锁定和实际安装是不同事实；不声称实机已安装
+    7.6.0、所有范围版本兼容或测试通过，不传递为 pySHACL 的完整 SPARQL/SHACL 符合性、离线或安全保证。
+  conditions_en: States only the fixed pyproject mandatory rdflib[html]>=7.3.0,<8.0 dependency and the same source
+    tree poetry.lock entry for 7.6.0, main group, optional=false. The html extra belongs to this declaration, not
+    to a universal prerequisite for plain RDFLib queries. The SPARQL-constraint path calls target_graph.query without
+    forcing use_store_provided=False, so built-in local processing is not guaranteed. Declared range, repository
+    lock and actual installation are distinct. No actual installation of 7.6.0, compatibility across the full range
+    or executed-test success is asserted, and no full SPARQL/SHACL conformance, offline or security guarantee is
+    inherited.
+evidence:
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyproject.toml#L46-L47
+  title: pySHACL 0.40.1 mandatory rdflib[html]>=7.3.0,<8.0 dependency
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/poetry.lock#L1156-L1178
+  title: pySHACL fixed lock — RDFLib 7.6.0 main-group, non-optional package
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/pySHACL/blob/469cca7a22a078b36c167c1e8dadecf5e5ec6c75/pyshacl/constraints/sparql/sparql_based_constraints.py#L169-L170
+  title: pySHACL constraint path calls Graph.query without forcing built-in-store bypass
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/RDFLib/rdflib/blob/8b32146a0f9cb748c2068662e50d02b42fc86dfd/pyproject.toml#L1-L53
+  title: RDFLib 7.6.0 package identity, BSD-3-Clause, Python and conditional/optional dependency metadata
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T09:22:25.554473+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed pySHACL dependency evidence executor
+record_created_at: '2026-10-24T09:29:18.384268+00:00'
+record_updated_at: '2026-10-24T09:29:18.384268+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / rdflib semantic review
+  github_actor: ff6962757
+---
+id: dcat_3_uses_dcmi_metadata_terms
+type: relation
+name_zh: DCAT 3 复用 DCMI Terms 的目录描述术语
+name_en: DCAT 3 reuses DCMI Terms for catalog description
+source: dcat_3
+relation: uses
+target: dcmi_metadata_terms
+context:
+  version_context:
+    source: DCAT 3, W3C Recommendation 2024-08-22
+    target: DCMI Metadata Terms, DCMI Recommendation 2020-01-20; existing work-level dcmi_metadata_terms endpoint
+  conditions_zh: 仅表述固定 DCAT 3 中 dcterms:description、dcterms:title 的复用及 dcat:resource 对 dcterms:hasPart 的子属性关系，限定
+    http://purl.org/dc/terms/，不混同 /elements/1.1/。外部术语的权威定义属于其原始规范；现有工作级端点以所列日期限定本断言，不推广至所有版本。词汇复用不表示每项属性必填、完整实现或符合性、IA
+    采用，也不推导传递依赖。
+  conditions_en: Limited to the fixed DCAT 3 reuse of dcterms:description and dcterms:title, and dcat:resource as
+    a subproperty of dcterms:hasPart. The namespace is http://purl.org/dc/terms/, not /elements/1.1/. External definitions
+    remain authoritative in their originating specification. The dated context bounds this work-level endpoint assertion,
+    not every edition. No universal mandatory-property, full implementation/conformance, IA-adoption or transitive-dependency
+    claim.
+evidence:
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_description
+  title: DCAT 3 §6.4.5 — dcterms:description
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_title
+  title: DCAT 3 §6.4.6 — dcterms:title
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:catalog_resource
+  title: DCAT 3 §6.3.3 — dcat:resource is a subproperty of dcterms:hasPart
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#bib-dcterms
+  title: DCAT 3 normative DCTERMS reference — DCMI Recommendation 2020-01-20
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#conformance
+  title: DCAT 3 §4 — conformance and profile-specific constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#dependencies
+  title: DCAT 3 §6.2.2 — originating specifications control external-term definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.dublincore.org/specifications/dublin-core/dcmi-terms/2020-01-20/
+  title: DCMI Metadata Terms 2020-01-20 — Terms namespace and property identities
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:10:46.181613+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded DCAT vocabulary evidence executor
+record_created_at: '2026-10-24T12:10:46.181613+00:00'
+record_updated_at: '2026-10-24T12:10:46.181613+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / DCAT vocabulary semantic review
+  github_actor: ff6962757
+---
+id: dcat_3_uses_skos_reference
+type: relation
+name_zh: DCAT 3 在 SKOS 分类路径中复用概念与概念方案
+name_en: DCAT 3 reuses concepts and concept schemes for SKOS-based classification
+source: dcat_3
+relation: uses
+target: skos_reference
+context:
+  version_context:
+    source: DCAT 3, W3C Recommendation 2024-08-22
+    target: SKOS Reference, W3C Recommendation 2009-08-18; existing work-level skos_reference endpoint
+  conditions_zh: 限定采用 SKOS 的目录分类路径中对 skos:ConceptScheme 与 skos:Concept 的复用。目录也可使用 skos:Collection、owl:Ontology 或类似组织方式；不是所有目录都必须采用
+    SKOS。DCAT 3 的 dcat:theme 没有自动将值推断为 skos:Concept 的 range。外部术语定义以 SKOS 规范为准；所列日期限定现有工作级端点的本断言。不声称全部属性必填、完整 SKOS
+    实现或符合性、IA 分类体系采用、跨版等价或传递依赖。
+  conditions_en: Limited to reuse of skos:ConceptScheme and skos:Concept in SKOS-based catalog classification. skos:Collection,
+    owl:Ontology or similar alternatives remain available; SKOS is not mandatory for every catalog. DCAT 3 gives
+    dcat:theme no range that automatically infers skos:Concept values. SKOS controls its term definitions; the dated
+    context bounds this work-level assertion. No universal mandatory-property, full SKOS implementation/conformance,
+    IA-taxonomy adoption, cross-edition equivalence or transitive-dependency claim.
+evidence:
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Class:Concept_Scheme
+  title: DCAT 3 §6.10 — skos:ConceptScheme reuse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Class:Concept
+  title: DCAT 3 §6.11 — skos:Concept reuse
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:catalog_themes
+  title: DCAT 3 §6.3.2 — classification alternatives including OWL
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#Property:resource_theme
+  title: DCAT 3 §6.4.12 — theme property and removed Concept range
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#bib-skos-reference
+  title: DCAT 3 normative SKOS reference — Recommendation 2009-08-18
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2024/REC-vocab-dcat-3-20240822/#dependencies
+  title: DCAT 3 §6.2.2 — originating specifications control external-term definitions
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.w3.org/TR/2009/REC-skos-reference-20090818/
+  title: SKOS Reference — fixed Recommendation 2009-08-18
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T12:10:46.181613+00:00'
+last_verified_by: Agent — OpenAI / dot, bounded DCAT vocabulary evidence executor
+record_created_at: '2026-10-24T12:10:46.181613+00:00'
+record_updated_at: '2026-10-24T12:10:46.181613+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / DCAT vocabulary semantic review
+  github_actor: ff6962757
+---
+id: w3c_prov_constraints_uses_prov_dm
+type: relation
+name_zh: PROV-CONSTRAINTS 使用 PROV-DM 概念数据模型
+name_en: PROV-CONSTRAINTS uses the PROV-DM conceptual data model
+source: w3c_prov_constraints
+relation: uses
+target: w3c_prov_dm
+context:
+  version_context:
+    source: PROV-CONSTRAINTS, original W3C Recommendation 2013-04-30; existing document identity
+    target: PROV-DM, original W3C Recommendation 2013-04-30; existing document identity
+  conditions_zh: 文献级模型使用：PROV-CONSTRAINTS §1.2 在 PROV-DM 实例上定义一致性意义的有效性、规范化和等价性；§1.4 以熟悉 PROV-DM 为前提，D.1 将其列为规范引用。此关系连接记录表示模型与一致性定义，不是软件实现或验证结果。它不表示
+    Python prov 执行这些约束，不推导传递符合性、溯源真实性或 IA 完整采用。仅限所列原始出版物；未核验或整合勘误，不推广至其他版本。既有端点身份与历史采用说明保持不变。
+  conditions_en: 'Publication-level model use: PROV-CONSTRAINTS section 1.2 defines consistency-oriented validity,
+    normalization and equivalence over PROV-DM instances; section 1.4 assumes familiarity with PROV-DM and D.1 lists
+    it as normative. This connects a record representation model to consistency definitions, not software implementation
+    or validation results. It does not assert that Python prov executes these constraints, or imply transitive conformance,
+    provenance truth or full IA adoption. Only the named original publications are covered; errata were not reviewed
+    or consolidated and no other editions are asserted. Existing endpoint identities and historical adoption descriptions
+    remain unchanged.'
+evidence:
+- url: https://www.w3.org/TR/2013/REC-prov-constraints-20130430/
+  title: PROV-CONSTRAINTS original Recommendation 2013-04-30 — sections 1.2, 1.4 and D.1
+  language: en
+  accessed: '2026-10-30'
+- url: https://www.w3.org/TR/2013/REC-prov-dm-20130430/
+  title: PROV-DM original Recommendation 2013-04-30 — publication identity and conceptual model
+  language: en
+  accessed: '2026-10-30'
+record_created_at: '2026-10-30T23:30:46.177465+00:00'
+record_updated_at: '2026-10-30T23:30:46.177465+00:00'
+last_verified_at: '2026-10-30T23:30:46.177465+00:00'
+last_verified_by: Agent — OpenAI / dot / connect_provenance_constraints; original publications and relation only;
+  errata unreviewed
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / connect_provenance_constraints
+  reviewer: Independent Agent — OpenAI / dot / connect_provenance_constraints/semantic_review
+  github_actor: ff6962757

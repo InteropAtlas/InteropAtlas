@@ -1,0 +1,98 @@
+id: ffmpeg_implements_ffv1_rfc9043
+type: relation
+name_zh: FFmpeg 9.0.2 有界实现 FFV1 版本 0、1、3 软件编解码
+name_en: FFmpeg 9.0.2 implements bounded FFV1 version 0, 1 and 3 software coding
+source: ffmpeg
+relation: implements
+target: ffv1_rfc9043
+context:
+  version_context:
+    source: FFmpeg 9.0.2; official annotated tag n9.0.2, commit 946fcce07b6dcd0331c8cc609192aeff5e1924f8; native
+      libavcodec FFV1 software encoder/decoder
+    target: RFC 9043 (August 2021, Informational), FFV1 versions 0, 1, 3; v3 encoding micro-version 4
+  conditions_zh: 依据固定公开源码及 RFC 9043 对 FFmpeg 参考实现的标识，仅记录原生 libavcodec FFV1 软件编码器/解码器对版本 0、1、3 的受支持配置实现；不是全部 RFC
+    特性或通用符合性认证。v3 编码设置 micro-version 4。版本 0/1 为单 slice；多 slice 或 two-pass 要求更高版本，在本范围内须使用 v3，two-pass 不能配 Golomb-Rice。较高位深受像素格式和版本约束，编码器对本范围内大于
+    8-bit 的路径使用 range coder，不能把注册格式列表理解为每个格式适用于每个版本。Bayer、浮点/remapping 和 ec=2 CRC 路径需要被排除的 v4；普通 ec=1 CRC 要求 v3。实验性版本
+    2/4、Vulkan 和其他硬件路径均不属于本边。原生编解码组件有独立构建开关，且选择内部 rangecoder；不保证任意发行二进制包含这些组件，也不意味着整个 FFmpeg 无外部依赖。许可取决于构建配置及外部库。仅检视源码及上游
+    v0/v3 测试配方，未构建或执行 FFmpeg/FATE，未在所检配方块发现显式 v1 测试，v1 证据来自编码/解析源码。RFC附录中的历史测试或安全陈述不迁移到 9.0.2；不声称第三方互通、部署安全、IA采用、任意输入有效性或所有转换的像素/色彩/元数据/容器无损。保持既有
+    RFC 对象的信息类状态及身份不变。
+  conditions_en: Fixed public source plus RFC 9043 identification of the FFmpeg reference implementation support
+    only native libavcodec FFV1 software encoding/decoding of supported versions 0/1/3 configurations, not every
+    RFC feature or universal conformance. Version 3 encoding sets micro-version 4. Versions 0/1 use one slice; multislice
+    or two-pass needs a later version, v3 within this scope, and two-pass cannot use Golomb-Rice. Higher depths
+    have pixel-format/version constraints; above 8-bit encoding within this scope uses range coding. The registration
+    list does not mean every format works with every version. Bayer, float/remapping and ec=2 CRC paths require
+    excluded v4; ordinary ec=1 CRC requires v3. Experimental versions 2/4, Vulkan and other hardware paths are excluded.
+    Separate native codec build gates select the internal range coder; arbitrary binaries need not include the components,
+    and the distribution is not declared dependency-free. Licensing depends on build options and external libraries.
+    Source and upstream v0/v3 recipes were inspected, not built or executed; no explicit v1 test appears in the
+    inspected recipe block, so v1 support is source-backed. Historical RFC appendix testing/security statements
+    are not transferred to 9.0.2. No third-party interoperability, deployment security, IA adoption, arbitrary-input
+    validity or lossless preservation across all pixel/color/metadata/container conversions is asserted. The existing
+    RFC object retains its Informational status and identity.
+evidence:
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1enc.c#L392-L444
+  title: Fixed FFV1 encoder — v0/1 headers and v3 micro-version 4
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1enc.c#L605-L655
+  title: Fixed FFV1 encoder — version/features, two-pass coder and experimental 2/4 gates
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1enc.c#L796-L1034
+  title: Fixed FFV1 encoder — single-slice 0/1, depth/format/coder and excluded-v4 constraints
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1enc.c#L2092-L2131
+  title: Fixed native FFV1 encoder registration and finite pixel-format list
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1_parse.c#L84-L100
+  title: Fixed FFV1 parser — global-header versions and micro-version
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1_parse.c#L216-L452
+  title: Fixed FFV1 parser — v0/1 frame headers and supported format mapping
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/ffv1dec.c#L945-L1093
+  title: Fixed FFV1 decoder — software/hardware separation and native registration
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/libavcodec/Makefile#L383-L385
+  title: Fixed FFV1 build gates — native encoder/decoder versus Vulkan
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/configure#L3190-L3192
+  title: Fixed configure declarations — internal range coder and separate Vulkan selection
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/LICENSE.md
+  title: Fixed license — build configuration and external-library boundary
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/FFmpeg/FFmpeg/blob/946fcce07b6dcd0331c8cc609192aeff5e1924f8/tests/fate/vcodec.mak#L157-L182
+  title: Upstream FFV1 v0/v3 test recipes inspected only, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9043.html#section-1
+  title: RFC 9043 — Informational versions 0/1/3 scope
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9043.html#section-4.2.2
+  title: RFC 9043 — v3 micro-version 4 stable variant
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9043.html#appendix-C.1
+  title: RFC 9043 — historical FFmpeg reference implementation, not current-release security/test certification
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T11:22:31.270584+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed public FFmpeg source evidence executor
+record_created_at: '2026-10-24T11:30:22.636812+00:00'
+record_updated_at: '2026-10-24T11:30:22.636812+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / review_ffmpeg_ffv1_intake
+  github_actor: ff6962757

@@ -1,0 +1,40 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261024-broadcast-loudness-annex1
+candidate_id: broadcast_loudness
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: broadcast_loudness
+review:
+  reviewer: Independent Agent — OpenAI / dot / review_loudness_annex1_intake
+  reviewed_at: '2026-10-24T16:30:05.643362+00:00'
+  independent_from_executor: true
+  notes:
+  - 独立语义复核 PASS，无阻塞发现，精确 Candidate 9ff8476a7509725d289056564bb7680fba5074da 与 packet 1febac4f4ade8f118a8f2b02cf39169eac340ae1；主体为独立发布的
+    broadcast-loudness Rust crate 0.5.0，不是整个 fishloa/rust-broadcast 工作区。唯一外部标识为 crates_io:broadcast-loudness。
+  - 独立报告 SHA-256 438ef676120e95755c0b5d634e97cac79088ba13dd83a0621c3a9ee00eac6153；reviewed_at 采用独立报告完成时间。semantic_review_url
+    指向保留 pending 状态的被审原稿，不是独立结论本身；独立身份、结论与检查摘要另记录于交付 PR。
+  - 只接纳固定 commit 579ad2c08b675fc52dee6db4ecb16b3038bb19ce 的 BS.1770-5 Annex 1 集成响度路径：48 kHz、Stereo、等长且全部有限、由调用方按满刻度归一到
+    [-1,1] 的 planar f32，成功 push_stereo_planar_f32 后 finish，再 integrated_lufs。范围约束来自调用方，不是库的幅度检查或归一化。
+  - 保留 400 ms 完整块/100 ms 步长、严格双门限、末尾不完整子块丢弃、finish 前及无合格块的负无穷哨兵；不将哨兵当作规范空集合定义。失败批次可先变更有效前缀状态而 frame_count 尚未增加，不承诺原子性、回滚、整批安全重试或正确继续。历史数组随时长增长。
+  - 静态映射不提供数值容差、比特精确或阈值边缘保证；排除其他率/布局/重载、真峰值和其他附录、LRA/瞬时/短期精度、R128 V5 目标/符合性、完整 Recommendation 符合性、认证、安全、第三方互通或 IA
+    采用。未运行 Rust、音频、上游构建/测试/示例；独立标量算术不是库运行。
+  - 独立检查复用已捕获一手字节，无重新下载。49,240 字节归档 SHA-256 与捕获注册表 checksum 一致；19 个非生成成员匹配固定 Git 树，3 个为生成包元数据；官方 PDF 32 页，Annex
+    1 的四幅页面重新渲染与捕获图像一致。crates.io 版本 API 的既有 HTTP 403/curl 22 不重试、不绕过。
+  - 元数据声明 Rust edition 2024、MSRV 1.95.0、MIT OR Apache-2.0。许可证文本在固定仓库但不在归档；包内测试引用被归一化清单省略的工作区 test_alloc dev dependency，仅为完整测试集不自包含的静态发现，不是执行失败、库无法构建或法律结论。依赖范围与
+    lock 版本、std/no_std 源码路径均保留限定。
+  - 独立与作者适用 Atlas 检查均通过：134 unittest 加 12 自定义检查、全量 108 旧事件（98 accepted 真实冻结回放及 10 其他事件）、机器复核、图/迁移/渲染/文档链接。934 基线文件不变。作者另核对可选历史
+    fixture 的 3/17 失败与基线相同，独立 Reviewer 仅检查该补充报告、不冒称重跑或 PASS。
+  - 正常取得真实远端冻结祖先后物化同一 payload；六文件还需独立结构复核和全量检查，再完成实际 head 的远端 CI/E2E。本地浏览器因已知启动限制 NOT RUN，不重试/绕过；Atlas 检查不等于 Rust
+    crate 测试。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/89ce9bd64a102ae7e457877403c475c501ce3693/01_State/Inbox/review-packets/broadcast-loudness-annex1-20261024.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9ff8476a7509725d289056564bb7680fba5074da
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/1febac4f4ade8f118a8f2b02cf39169eac340ae1
+decided_at: '2026-10-24T16:35:21.055813+00:00'
+notes:
+- 只新增一个库对象、一个有界 implements 与一个现有 measurement 成员，不新增标准/能力/类别，不改变维护机制。
+- 完整原稿保留在真实正常祖先；当前 packet 仅为引用式回执。所有旧对象/关系/事件、既有 BS.1770 及 R128 未定版引用、历史快照和 PR498/439/416 保持不变。

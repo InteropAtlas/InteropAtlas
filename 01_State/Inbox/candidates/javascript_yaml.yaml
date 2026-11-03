@@ -1,0 +1,99 @@
+contract_version: candidate-object-v1
+candidate_id: javascript_yaml
+label: yaml JavaScript YAML library (npm yaml / eemeli/yaml) — 2.9.1
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: eemeli/yaml
+- namespace: npm
+  value: yaml
+locators:
+- url: https://github.com/eemeli/yaml
+  role: official
+- url: https://www.npmjs.com/package/yaml
+  role: official
+- url: https://github.com/eemeli/yaml/tree/1440ecd3d1bff41e4ac399f8f6839e810328bd16
+  role: dated
+- url: https://github.com/eemeli/yaml/releases/tag/v2.9.1
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - javascript_yaml
+  reasons:
+  - Accepted as canonical javascript_yaml by accept-20261029-javascript-yaml-1-2-2-javascript_yaml. Original new-state
+    candidate 86131f41d595ce37ef8a4bf7b5db4a6e545698fa and ordinary review_required route replay against real
+    frozen ancestor 5f4327db3aa6615f82192099bc23e251ce391882; this unique back-reference prevents duplicate creation
+    and authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- npm 的 yaml 包，来自 eemeli/yaml，固定为 2.9.1，使用 JavaScript 值解析和输出 YAML 文本。其 YAML 1.2 支持连接到规范修订 1.2.2，后者定义同一 1.2 语言且没有规范性变更；这是有界实现关系，不是完整符合性声明。version:'1.2'
+  默认值不强制所有文档采用 1.2：显式或流中继承的 YAML 1.1 上下文不在该关系范围内。默认 Core 将 yes/no/on/off 保留为字符串，将 012 解释为十进制 12，并接受非有限数；并不自动兼容
+  JSON。schema:'json' 选择 YAML 的 JSON 兼容 schema，不是 JSON Schema/Draft 验证。默认 JavaScript Number 可能丢失整数精度；intAsBigInt:true
+  仅保留整数，不提供任意精度浮点，重解析输出的 BigInt 仍需此选项。Object 键会转成字符串：数字 1 与字符串 "1" 可能碰撞，复杂键产生警告，null 变成空键。mapAsMap:true 保留已检查的数字/字符串区别，但使用
+  JavaScript Map 身份，不保证任意 YAML 键等价。默认 uniqueKeys 拒绝已检查的重复标量键，但标量 === 比较也遗漏重复 NaN，且不深比较别名或集合键：相等序列可保持为不同 Map 键，而别名可在没有
+  DUPLICATE_KEY 的情况下合并。uniqueKeys:false 下所查重复键以后值为准。parseDocument 可保留错误而 toJS 仍返回部分值，而 Document.toString 拒绝该带错误文档；所查重复输入在
+  parse 的 logLevel:'silent' 下也返回后值。调用者须检查错误和警告，包括流中的各个文档。别名可共享引用或形成循环，不只是 JSON 树；小型别名限额检查不证明资源安全。Core 默认 resolveKnownTags:true
+  也解析显式 YAML 1.1 标签，包括 timestamp→Date、binary→Buffer；禁用已知标签或遇到未知标签时可仅警告并返回字符串，而非拒绝。应用自定义标签回调与可选 merge 键属于扩展，不是核心互通保证。Document
+  保留了所选注释但改变词法形式；parse/stringify 丢失注释与样式，尾随注释归属也不完全稳定。所查原生 Date 经默认 stringify/parse 变成字符串；数据往返不是原生值的普遍保留、通用无损、跨语言、规范化或签名归一化输出。发布的
+  npm CommonJS 字节通过 47 项有限诊断（1 项版本、46 项行为记录）及单独 3 项键补充；不宣称完整上游套件、源码构建、浏览器一致性、全部 API、模糊、安全或供应链认证。
+- 'The npm yaml package from eemeli/yaml, fixed to 2.9.1, parses and emits YAML text using JavaScript values.
+  Its YAML 1.2 support is related to specification revision 1.2.2, which defines the same 1.2 language without
+  normative changes; this is a bounded implementation link, not full conformance. The version:''1.2'' default
+  does not force every document to 1.2: explicit or inherited YAML 1.1 stream contexts are outside this link.
+  Default Core leaves yes/no/on/off as strings, interprets 012 as decimal 12, and accepts nonfinite numbers; it
+  is not automatic JSON compatibility. schema:''json'' selects YAML''s JSON-compatible schema, not JSON Schema/Draft
+  validation. Default JavaScript Number can lose integer precision; intAsBigInt:true preserves integers, not arbitrary-precision
+  floats, and reparsing emitted BigInt needs the option again. Object keys stringify: numeric 1 and string "1"
+  can collide, complex keys warn, and null becomes an empty key. mapAsMap:true retains the checked numeric/string
+  distinction but uses JavaScript Map identity, not universal YAML key equivalence. Default uniqueKeys rejects
+  the checked repeated scalar key, but scalar === comparison also misses repeated NaN and does not deep-compare
+  alias or collection keys: equal sequence keys can remain distinct Map keys, while aliases can collapse without
+  DUPLICATE_KEY. With uniqueKeys:false the checked duplicate is last-wins. parseDocument can retain errors while
+  toJS returns partial values and Document.toString refuses that error-bearing document; on the checked duplicate
+  input, parse with logLevel:''silent'' also returned last-wins data. Callers must inspect errors and warnings,
+  including individual stream documents. Aliases can share references or create cycles, not just JSON trees; small
+  alias-limit checks do not establish resource safety. Core''s default resolveKnownTags:true also resolves explicit
+  YAML 1.1 tags, including timestamp to Date and binary to Buffer; disabling known tags or encountering an unknown
+  tag can warn and return a string rather than reject. Application custom-tag callbacks and optional merge keys
+  are extensions, not core interoperability guarantees. Document preserved selected comments but changed lexical
+  form; parse/stringify lost comments and style, and trailing-comment association is not fully stable. The checked
+  native Date became a string after default stringify/parse; data roundtrip is not universal native-value preservation,
+  lossless cross-language, canonical or signature-normalized output. Published npm CommonJS bytes were exercised
+  in 47 finite diagnostics (one version and 46 behavior records) plus a separate three-record key supplement;
+  no upstream full suite, source build, browser parity, all-API, fuzz, security or supply-chain certification
+  is claimed.'
+- 身份为 npm:yaml / github:eemeli/yaml，不是 js-yaml、PyYAML、ruamel.yaml 或 YAML 规范。v2.9.1 发布于 2026-09-11；轻量 tag 与 npm
+  gitHead 均指向 1440ecd3d1bff41e4ac399f8f6839e810328bd16。实际树 a17f0d114d69218d5059ca4bfcb20923b349b2cc 有 181 个条目：155
+  个 blob、22 个树、4 个 gitlink；仅保留并核对 25 个选定固定源码文件，不是完整源码或子模块归档。发布的 npm 制品含 233 个普通文件，SHA1/SHA512 与 registry 元数据一致，README/LICENSE/package.json
+  与选定源码字节一致；不证明源码构建等价或签名/证明验证。运行使用 Node v24.22.1/Linux x64 的发布 CommonJS 分发，未执行 npm install、生命周期脚本、构建或运行时网络；包元数据确有构建/生命周期命令，只是未执行。诊断为自写有限样例，不是上游套件。初始
+  45 项中 44 项通过，失败源于作者误以为后续文档会重置继承的 YAML 1.1；依据固定 directives 源码纠正预期，保留原失败报告并补充显式 1.2/混合流样例。最终 47 项与单独 3 项键补充由本作者另行重放，类型化预期/实际记录一致；这是作者核验，不是独立语义复核。仅建议
+  data_serialization：已查映射、序列、标量及文本输出支持结构化数据表示、存储、交换和重解析。所查默认普通时间戳保留为字符串；Core 显式已知标签兼容包括 YAML 1.1 类型，1.2 默认禁用 merge。%YAML
+  1.2.2 不是语言指令（所查为 BAD_DIRECTIVE）；语言指令为 %YAML 1.2。不建立其他运行时、CLI、浏览器、任意输入、上游套件/gitlink 测试、性能、跨实现互通、清理器、安全性、IA 采用或许可/治理结论。
+  另行 4 项作者补充确认 NaN 键在 Map 中合并、带错误 Document.toString 拒绝输出、intAsBigInt 不避免浮点精度损失及原生 Date 往返变为字符串；不改写历史 47 项或 3 项计数。
+- 'Identity is npm:yaml / github:eemeli/yaml, not js-yaml, PyYAML, ruamel.yaml, or the YAML standard. Release
+  v2.9.1 was published 2026-09-11; lightweight tag and npm gitHead identify 1440ecd3d1bff41e4ac399f8f6839e810328bd16.
+  Its actual tree a17f0d114d69218d5059ca4bfcb20923b349b2cc has 181 entries: 155 blobs, 22 trees and four gitlinks.
+  Only 25 selected fixed-source files were retained/blob-verified, not a complete source or submodule archive.
+  The published npm artifact contains 233 regular files; SHA1/SHA512 match registry metadata and README/LICENSE/package.json
+  match selected source bytes. This is not a source-build equivalence or signature/attestation proof. Runtime
+  used the published CommonJS distribution under Node v24.22.1/Linux x64 without npm install, lifecycle scripts,
+  build or runtime network; package metadata does contain build/lifecycle commands, which were not executed. Finite
+  diagnostics are self-authored, not the upstream test suite. The initial 45-record run had 44 passes because
+  its author incorrectly expected a following document to reset inherited YAML 1.1: that expectation was corrected
+  using fixed directives source, with the failed historical report retained and explicit 1.2/mixed-stream cases
+  added. The final 47-record report and separate three-key supplement were independently replayed by this author
+  with equal typed expected/observed records; this is author verification, not independent semantic review. Only
+  data_serialization is proposed: checked mappings, sequences, scalars and selected text emission support representing/storing/exchanging/reparsing
+  structured data. Plain timestamps remain strings in the checked default; Core''s explicit known-tag compatibility
+  includes YAML 1.1 types, and merge is disabled by default in 1.2. %YAML 1.2.2 is not a language directive (checked
+  BAD_DIRECTIVE); %YAML 1.2 is the language directive. Other runtime engines, CLI, browser, arbitrary inputs,
+  upstream suite/gitlink tests, performance, cross-implementation interoperability, sanitizer status, security,
+  IA adoption, and licensing/governance conclusions are not established. Four additional author probes separately
+  confirmed NaN-key Map collapse, error-bearing Document.toString refusal, float precision loss despite intAsBigInt,
+  and native Date-to-string roundtrip; these are not added to the historical 47 or three-record counts.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / /root/resume_cmark_delivery/yaml_author
+  reviewer: Agent — OpenAI / independent semantic reviewer /root/resume_cmark_delivery/yaml_independent

@@ -1,0 +1,32 @@
+contract_version: candidate-object-v1
+candidate_id: python_geojson
+label: geojson Python library (3.3.0)
+publisher: Jazzband / geojson contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: jazzband/geojson
+- namespace: pypi
+  value: geojson
+locators:
+- url: https://github.com/jazzband/geojson
+  role: official
+- url: https://github.com/jazzband/geojson/tree/f14b85252bd93eb336f9918a3cf8c601b6094714
+  role: dated
+- url: https://pypi.org/project/geojson/3.3.0/
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_geojson
+  reasons:
+  - 经独立语义审核由 accept-20261021-python-geojson-python-geojson 接纳；原始 new 状态保留于冻结候选 commit/blob，当前回指仅防止重复创建。
+  merge_authorized: false
+unknowns:
+- 默认坐标舍入、局部 is_valid、null properties 归一化与默认非严格类型转换均保留；不是完整 RFC 7946 验证器或无损往返保证。
+- 仅21项可信内存观察，未测 CRS 转换、地理拓扑、反经线、bbox、OGC服务、第三方互通、完整符合性或安全；不表示IA采用。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / main-session semantic review

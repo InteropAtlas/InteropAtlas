@@ -1,0 +1,40 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261029-scte35-hls-scte35
+candidate_id: scte35
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: scte35
+review:
+  reviewer: Agent — OpenAI / independent semantic reviewer (/root/review_hls_scte35_evidence)
+  reviewed_at: '2026-10-29T08:35:01Z'
+  independent_from_executor: true
+  notes:
+  - 本事件仅接纳 scte35，审阅候选 blob 419d8663311bdbdb9c5280778ac4ab6ac3e9882d。
+  - 新独立语义PASS绑定精确packet 9393f540d4157cef80ed19047bc1c2980a9d8678 与一个既有候选；一个2014历史标准身份/有限公开预览范围、一个HLS可选DateRange/CMD
+    uses与一个既有media_network导航成员。独立Reviewer必须明确判断七页preview证据足以支持此限定对象，不能由机器通过代替。
+  - 独立报告SHA256 bb86fd807d2ad1d07638206c5454c19a157de4bf170d3f2081ee0b366ce6cd98；独立绑定记录SHA256 bb86fd807d2ad1d07638206c5454c19a157de4bf170d3f2081ee0b366ce6cd98。reviewed_at为Reviewer真实封存时间；semantic_review_url指向真实冻结且保留pending历史状态的准备原稿，本身不是批准。审核身份/结论另记本事件与交付PR。
+  - 保留scte35/scte:scte-35工作级身份。ANSI版次目录明确2014及Historical，公开七页preview的封面和§1支持身份/范围，RFC8216§11.1明确2014年8月目标。没有完整SCTE标准文本或后来35-1/35-2身份等价证据，不建别名、合并或版次主体。
+  - preview§1只支持MPEG-2传输流内的拼接/插播事件提示与范围边界；假定MPEG-2传输流本身符合规范，不保证无缝拼接，不规定拼接方法、额外流约束或设备约束。后续语法、命令、描述符与整体符合性未审阅。
+  - 完整RFC8216§4.3.2.7.1允许源媒体SCTE35信息MAY映射至Media Playlist EXT-X-DATERANGE；仅四命令splice_null/splice_schedule/bandwidth_reservation/private_cmd的完整section
+    SHOULD由SCTE35-CMD按大端二进制十六进制表示，保留MAY/SHOULD而非所有HLS必需依赖。
+  - DateRange的ID和START-DATE必需；含DateRange的播放列表MUST有至少一个EXT-X-PROGRAM-DATE-TIME；CMD的START-DATE按命令splice_time或无时间时源流中的节目时间。不是完整实现配方、所有命令映射、§8.10示例或后来HLS扩展审计/测试。
+  - 原HLS对象、来源、provenance和核验日期不改；RFC8216仍是Informational Independent Submission，不是IETF Standards Track。无软件/设备支持、广告交付、完整符合性、无缝拼接、部署、互通、安全性或IA采用结论。
+  - 三份成功研究捕获由作者和Reviewer独立重hash与实读，仍是同批来源而非独立再抓取。ANSI公开preview七页各1个Link批注，预览标识与源字节未改；捕获记录三个HTTP200及finalURL、两个403无body，未记录逐响应UTC时间，不伪造。两个发布方403不重试或绕过，preview不冒充完整正文。
+  - 作者134unittest、12custom、20重叠standalone、10Markdown/docs通过；124旧事件含114accepted真实冻结回放与10deferred，与基线JSON相同。206旧搜索记录和205无关对象页保持，HLS生成页只有预期forward
+    use，Canonical不改。作者自检不是独立复核。
+  - 可选V1 fixture保留基线同样3/17失败、P5 1/1通过，30旧静态链接缺陷与12兼容警告不增；本地Chromium此前被拒，本片不重试/绕过，不声称本地交互通过。实际PR/main远端BrowserCI另验证。
+  - 既有renderer展示端点/谓词而不完整展开relation context；新SCTE35名称/summary/scope保留历史2014、preview限度、可选HLS映射与非全符合性限制。HLS forward
+    use导航指向此限定目标，非全HLS必需支持。双端静态呈现已由独立语义Reviewer审阅，不改renderer。
+  - 真实远端freeze经普通fetch核对精确候选/packet字节与单父基线；物化必须保留该freeze祖先，不重建/压平历史。schema、治理、维护、历史快照与持有事项不改；最终独立结构复核、实际headCI、正常merge/main/Pages/live另行完成。
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/1081594acc4cb47909b5fd105ba78a806a59384a/01_State/Inbox/review-packets/scte35-hls-signaling-20261029.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/419d8663311bdbdb9c5280778ac4ab6ac3e9882d
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/9393f540d4157cef80ed19047bc1c2980a9d8678
+decided_at: '2026-10-29T08:40:30.090114+00:00'
+notes:
+- 一个对象、一可选有界关系、一个既有导航成员；本事件仅接纳一个Candidate，不重复接纳。
+- 246旧对象、186旧关系、124旧事件及历史覆盖快照保持原字节；真实冻结祖先保存完整原稿。

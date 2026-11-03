@@ -1,0 +1,120 @@
+id: oauthlib_implements_oauth2_rfc6749
+type: relation
+name_zh: OAuthLib 4.0.0 实现有限 OAuth 2.0 授权码客户端机制
+name_en: OAuthLib 4.0.0 implements bounded OAuth 2.0 authorization-code client mechanics
+source: oauthlib
+relation: implements
+target: oauth2_rfc6749
+description_zh: OAuthLib 4.0.0 的 WebApplicationClient 实现 RFC6749 授权码客户端的有限请求/响应构造与解析机制，不构成完整客户端或安全符合性证明。
+description_en: OAuthLib 4.0.0 WebApplicationClient implements bounded RFC6749 authorization-code client request/response
+  construction and parsing mechanics, not a complete client or security-conformance claim.
+context:
+  version_context:
+    source: 4.0.0 / commit 145a9a4690cb4d9de30d15fcc2984e34c49df741
+    target: RFC 6749, October 2012; authorization-code mechanics only; later RFC9700 security requirements remain
+      separate
+  scope:
+    source_profile: WebApplicationClient authorization-code request/response helpers
+    target_sections:
+    - 4.1.1 authorization request
+    - 4.1.2 authorization response
+    - 4.1.3 access token request
+    - 4.1.4 and 5.1–5.2 response-body parsing
+    excluded: HTTP transport, full client deployment, authorization-server behavior, other grants, OAuth1, OIDC
+      identity authentication and full RFC9700 conformance
+  conditions_zh: 仅核固定 WebApplicationClient 的授权请求参数、回调 code/错误解析、令牌请求表单及令牌响应体解析，不表示完整 RFC6749 符合性。回调预期 state 为真值才比较；prepare_authorization_request
+    生成/保存 state，prepare_token_request 仅在 authorization_response 为真值时调用回调解析。调用方须管理会话和单次事务生命周期、可信端点/回调/issuer 绑定、重定向
+    URI 一致性、机密客户端认证及凭据/令牌保护。client_id 默认可写入请求体但不是认证证明；可选 client_secret 可被序列化，本路径不自行构造 HTTP Basic 或完成认证传输。方法构造字符串/元组而不发起
+    HTTP；HTTPS 前缀守卫及其可放宽配置不验证证书、HTTP响应或端点真实性，body-only 接口没有 URL 可检查。PKCE 是可选扩展，默认 plain，S256 和对应 challenge/verifier
+    须显式配置/传递，不能因存有构造器属性就认为自动启用。响应体允许 JSON/表单回退；access_token 只检查字段存在，token_type 缺失仅在严格选项为真值时拒绝，scope 变化检查可放宽；不是令牌真实性、JWT
+    或身份验证。RFC9700 §2.1.1 要求公共客户端使用 PKCE、建议机密客户端使用并绑定事务；§2.4 禁止密码 grant，其他 grant 的库支持不构成部署建议。本边不声称 BCP 全符合、生产安全、第三方互通认证或
+    IA采用。Python>=3.9 是包元数据，运行环境未实测；BSD3 和可选 extras 不作许可适配审计。仅固定源码及测试定义检视，未安装/导入/执行库、下载分发归档、交换任何实际凭据或进行网络授权。
+  conditions_en: 'Only fixed WebApplicationClient authorization parameters, callback code/error parsing, token-request
+    form construction and token-response-body parsing were verified, not complete RFC6749 conformance. Callback
+    state comparison requires a truthy expected state; prepare_authorization_request generates/stores state, and
+    prepare_token_request invokes callback parsing only with a truthy authorization_response. Integrations manage
+    session/one-time transaction lifecycle, trusted endpoint/callback/issuer binding, redirect-URI consistency,
+    confidential-client authentication and credential/token protection. client_id may be serialized by default but
+    is not authenticated proof; optional client_secret can be serialized, while this path does not itself construct
+    HTTP Basic or complete authenticated transport. Methods prepare strings/tuples and send no HTTP; configurable
+    HTTPS-prefix guards do not verify certificates, HTTP responses or endpoint authenticity, and body-only helpers
+    have no URL to check. PKCE is an optional extension defaulting to plain; S256 plus corresponding challenge/verifier
+    must be explicitly configured/passed, not inferred from constructor attributes. Response parsing allows JSON/form
+    fallback, checks only presence of access_token, rejects missing token_type only with the truthy strict option,
+    and permits relaxing scope-change checks; it is not token authenticity, JWT or identity validation. RFC9700
+    section2.1.1 requires public-client PKCE and recommends confidential-client PKCE with transaction binding; section2.4
+    prohibits password grants, and library support for other grants is no deployment recommendation. No full BCP
+    conformity, production security, third-party interoperability certification or IA adoption is asserted. Python>=3.9
+    is package metadata, not tested runtime compatibility; BSD3 and optional extras are not a license-compatibility
+    audit. Fixed source and test definitions only: no library install/import/execution, distribution archive download,
+    actual credentials or network authorization.'
+evidence:
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/web_application.py#L18-L174
+  title: Authorization-code class identity, authorization URI and token-form construction
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/web_application.py#L176-L222
+  title: Callback parser delegates state/code handling
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/parameters.py#L68-L90
+  title: Request parameters and optional PKCE challenge
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/parameters.py#L146-L171
+  title: 'Token body: grant type, client ID, optional verifier and secret'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/parameters.py#L269-L284
+  title: Truthy expected-state comparison, OAuth errors and code presence
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/base.py#L221-L291
+  title: Generated/stored state and conditional callback processing in high-level preparation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/clients/base.py#L450-L529
+  title: 'PKCE verifier/challenge helpers: omitted-method plain and explicit S256'
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/utils.py#L78-L82
+  title: Configurable HTTPS-prefix guard, not HTTP/TLS execution
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/oauthlib/oauth2/rfc6749/parameters.py#L359-L472
+  title: Permissive token parsing, token_type strict option and scope relaxation
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/tests/oauth2/rfc6749/clients/test_web_application.py#L71-L261
+  title: Upstream request/state/body test definitions inspected, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://github.com/oauthlib/oauthlib/blob/145a9a4690cb4d9de30d15fcc2984e34c49df741/tests/oauth2/rfc6749/clients/test_base.py#L240-L332
+  title: Upstream URL/PKCE test definitions inspected, not executed
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc6749.html#section-4.1
+  title: RFC6749 authorization-code requirements; transport/authentication beyond helpers
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc6749.html#section-2.2
+  title: Client identifier is not a secret or sufficient client authentication
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9700.html#section-2.1.1
+  title: Later PKCE and transaction-binding security requirements
+  language: en
+  accessed: '2026-10-24'
+- url: https://www.rfc-editor.org/rfc/rfc9700.html#section-2.4
+  title: Password-grant prohibition; no endorsement of other supported grants
+  language: en
+  accessed: '2026-10-24'
+last_verified_at: '2026-10-24T14:02:51.974788+00:00'
+last_verified_by: Agent — OpenAI / dot, fixed OAuthLib source evidence executor
+record_created_at: '2026-10-24T14:12:47.220013+00:00'
+record_updated_at: '2026-10-24T14:12:47.220013+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot
+  reviewer: Independent Agent — OpenAI / dot / OAuthLib authorization-code intake review
+  github_actor: ff6962757
