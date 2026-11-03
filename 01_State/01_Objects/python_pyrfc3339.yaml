@@ -26,7 +26,23 @@ description_zh: '固定 pyRFC3339 2.1.1，在 Python datetime 与时间戳字符
   utc=True assumes UTC, while accept_naive=True with utc=False still rejects naive input. generate defaults to UTC
   and truncates fractional seconds without rounding; microseconds=True emits microseconds. This is a bounded conversion
   precedent, not proof of full RFC3339/IXDTF conformance, cross-Python-version behavior, measurement accuracy or
-  IA adoption.'
+  IA adoption.
+
+
+  原 2026-10-22 冻结包中 Python 3.12.14 的有限 zero_offset_roundtrip 观察还显示：分别以 Z、+00:00、-00:00 结尾的三个输入，经 generate(parse(...),
+  utc=False) 均再生为 2026-10-22T12:34:56Z，不能从这个结果恢复原来的三种零偏移拼写。本次只静态核对固定 parser/generator 相关范围与旧记录，未重跑原40项示例。固定 parser
+  把末尾 Z/z 改为 +00:00 后委托 datetime.fromisoformat；generator 仅在 dt.tzinfo == UTC 分支将末尾 +00:00 改为 Z。该旧观察不推广到任意自定义零偏移
+  tzinfo、其他 Python 版本或所有输入，也不重新裁决 RFC3339/9557 的规范语义。
+
+
+  The bounded zero_offset_roundtrip observation in the original frozen 2026-10-22 packet, using Python 3.12.14,
+  also shows three inputs ending in Z, +00:00 and -00:00 all regenerated as 2026-10-22T12:34:56Z by generate(parse(...),
+  utc=False). That result does not recover which of the three zero-offset spellings was supplied. This supplement
+  only statically checks relevant ranges of the fixed parser/generator and historical records; the original 40 examples
+  were not rerun. The fixed parser changes a terminal Z/z to +00:00 before delegating to datetime.fromisoformat;
+  the generator changes terminal +00:00 to Z only in its dt.tzinfo == UTC branch. This historical observation is
+  not generalized to arbitrary custom zero-offset tzinfo objects, other Python versions or all inputs, and does
+  not newly adjudicate RFC3339/9557 semantics.'
 description_en: 'Pinned to pyRFC3339 2.1.1 for conversion between Python datetime objects and timestamp strings.
   parse delegates to datetime.fromisoformat; accepted input is not necessarily strictly valid RFC3339. Historical
   Python 3.12.14 controlled-timezone examples in the frozen 2026-10-22 intake packet show that an offset-free input
@@ -38,7 +54,17 @@ description_en: 'Pinned to pyRFC3339 2.1.1 for conversion between Python datetim
   utc=True assumes UTC, while accept_naive=True with utc=False still rejects naive input. generate defaults to UTC
   and truncates fractional seconds without rounding; microseconds=True emits microseconds. This is a bounded conversion
   precedent, not proof of full RFC3339/IXDTF conformance, cross-Python-version behavior, measurement accuracy or
-  IA adoption.'
+  IA adoption.
+
+
+  The bounded zero_offset_roundtrip observation in the original frozen 2026-10-22 packet, using Python 3.12.14,
+  also shows three inputs ending in Z, +00:00 and -00:00 all regenerated as 2026-10-22T12:34:56Z by generate(parse(...),
+  utc=False). That result does not recover which of the three zero-offset spellings was supplied. This supplement
+  only statically checks relevant ranges of the fixed parser/generator and historical records; the original 40 examples
+  were not rerun. The fixed parser changes a terminal Z/z to +00:00 before delegating to datetime.fromisoformat;
+  the generator changes terminal +00:00 to Z only in its dt.tzinfo == UTC branch. This historical observation is
+  not generalized to arbitrary custom zero-offset tzinfo objects, other Python versions or all inputs, and does
+  not newly adjudicate RFC3339/9557 semantics.'
 version: 2.1.1
 external_identifiers:
 - namespace: github
@@ -133,11 +159,11 @@ last_verified_at: '2026-10-30T19:13:44.813241+00:00'
 last_verified_by: Agent — OpenAI / dot / clarify_rfc3339_boundaries; fixed-source and historical-evidence inspection
   only
 record_created_at: '2026-10-22T03:22:49.213085+00:00'
-record_updated_at: '2026-10-30T19:13:44.813241+00:00'
+record_updated_at: '2026-11-01T19:51:58.906553+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / clarify_rfc3339_boundaries
-  reviewer: Independent Agents — OpenAI / dot / clarify_rfc3339_boundaries/semantic_review and clarify_rfc3339_boundaries/structure_review
+  executor: Agent — OpenAI / dot / supplement_pyrfc3339_zero_offset_scope
+  reviewer: Independent Agents — OpenAI / dot / pyrfc3339_semantics and pyrfc3339_structure
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_pyrfc3339
