@@ -1,0 +1,45 @@
+contract_version: candidate-object-v1
+candidate_id: python_json_patch
+label: python-json-patch Python library (1.42)
+publisher: Stefan Kögl / python-json-patch maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: stefankoegl/python-json-patch
+- namespace: pypi
+  value: jsonpatch
+locators:
+- url: https://github.com/stefankoegl/python-json-patch
+  role: official
+- url: https://github.com/stefankoegl/python-json-patch/tree/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Full current Canonical/Candidate identity and name search has no collision; python_jsonpointer and json_patch_rfc6902
+    are distinct existing subjects.
+  merge_authorized: false
+unknowns:
+- python-json-patch is a Python JSON Patch library distributed under the name jsonpatch, pinned here to v1.42 source
+  commit 004f8cb832cb1fbb3141a5f06ab00440ca7c91b9; no PyPI build artifact equivalence was checked. The README identifies
+  RFC 6902 application as its purpose. The source registers six built-in operations (add, remove, replace, move,
+  copy, test), and apply_patch delegates sequential application to JsonPatch.apply. This is a static source/documentation
+  precedent, not an executed example or full conformance certification. For plain JSON-shaped dict/list data and
+  built-in operations, default in_place=False deep-copies the input; a failure stops application without copying
+  partial changes back to the original. Default in_place=True, atomic=False does not roll back changes already made.
+  Opting into atomic=True with in_place=True journals built-in mutations for rollback; the documented exact-restoration
+  guarantee is limited to plain dict/list containers, excluding read-mutating containers such as defaultdict. Custom
+  operations can use copy-based restoration, replacing nested containers with copies and not necessarily restoring
+  arbitrary extra state. Root replacement returns a new value rather than rebinding the caller variable, so callers
+  must use the result even with in_place=True; earlier member changes to the original may remain. Only a bounded
+  implements relation to the existing April 2013 RFC 6902 publication is asserted; its original RFC 4627 reference
+  and six unreviewed errata remain unchanged. No upstream installation, import, execution, doctests, tests, CLI,
+  network or service was performed. No arbitrary-input/duplicate-name validation, diff-generation correctness, full
+  RFC conformance, HTTP PATCH atomicity, security, performance, third-party interoperability or IA adoption is established.
+  BSD-3-Clause is recorded from fixed source and LICENSE only.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_python_json_patch
+  reviewer: pending independent semantic review
