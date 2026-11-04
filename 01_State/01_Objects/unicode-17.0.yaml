@@ -1,32 +1,157 @@
 id: unicode_17.0
-record_created_at: "2026-08-30T18:42:12+08:00"
-record_updated_at: "2026-09-01T16:44:53+08:00"
-metadata_backfilled_at: "2026-09-02T11:23:23+08:00"
+record_created_at: '2026-08-30T18:42:12+08:00'
+record_updated_at: '2026-11-04T23:22:34.334692+00:00'
+metadata_backfilled_at: '2026-09-02T11:23:23+08:00'
 metadata_provenance:
   lifecycle_time: reconstructed_from_git
   contribution_identity: owner_confirmed_cutoff
 latest_substantive_contribution:
-  initiator: "Human — ff6962757"
-  executor: "Agent — OpenAI / ChatGPT / GPT-5.6 Sol"
-  reviewer: "Human — ff6962757"
-  github_actor: "ff6962757"
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_unicode_normalization_library
+  reviewer: /root/select_evidenced_coverage_continuation/add_unicode_normalization_library/review_normalization_semantics
+  github_actor: ff6962757
 type: standard
 kind: standard
 name_zh: Unicode 17.0
 name_en: Unicode 17.0
 official_name: The Unicode Standard, Version 17.0.0
-description_zh: 统一字符编码标准。InteropAtlas 的中英双语文本、YAML/JSON 数据和多数现代工具链都依赖 Unicode 字符体系。
-description_en: The universal character encoding standard. InteropAtlas bilingual text, YAML/JSON data, and most modern tooling rely on Unicode character representation.
+description_zh: '统一字符编码标准。InteropAtlas 的中英双语文本、YAML/JSON 数据和多数现代工具链都依赖 Unicode 字符体系。
+
+
+  仅新增 unicode-normalization 入边的范围附记，不改上述规范身份、原有事实或原接纳范围：本记录固定真实 crates.io 发行 0.1.25（2025-10-30），docs.rs 发布元数据 .cargo_vcs_info
+  与官方 PR115 绑定 commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1；该版没有 v0.1.25 Git tag 或 GitHub Release，不虚构 tag 链接，也不声称最新版。Cargo
+  版本为 0.1.25，表与生成器声明 Unicode 17.0.0；未重跑生成器或逐项校对整个 UCD。19 份固定完整仓库文件的字节、Git blob 与 SHA256 已核，但不是完整 checkout、下载的 .crate
+  归档、签名或供应链认证；registry checksum 仅为元数据，未验证发布包字节。Cargo 的 MIT OR Apache-2.0 仅记该版上游声明，不扩大为全部生成数据的法律判断，不套用 0.1.26 许可或
+  Unicode18 表。
+
+
+  此条 implements 仅静态描述有效 Rust &str 经 UnicodeNormalization.nfd()/nfc() 的 char 迭代路径，对应 Unicode17 第3章 §§3.11/3.12 与
+  UAX15 revision57：规范分解使用预展开的 canonical_fully_decomposed 表，ASCII 和无映射标量直通，Hangul 使用算法；随后按规范组合类（CCC）稳定排序非starter片段，同类保持输入次序，CCC=0
+  为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，待组合 starter 与当前字符之间已有的未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
+  Full_Composition_Exclusion 排除项建立组合表，但未逐项验证表值。Hangul 实际音节范围 U+AC00..U+D7A3，小于 D7A4，不采用源码注释的 D7AF；L+V 与 LV+T 组合不把
+  U+11A7 作为有效尾辅音。源码存在局部 unsafe，不是全 safe Rust 或安全认证。
+
+
+  输入前提是有效 Rust str/char，不接收任意非法 UTF-8 或 surrogate，不是畸形字节修复器。输出是 Unicode 标量，不是字节、字素簇、原位置索引或已分配字符验证。规范化可能改变标量数量、次序及
+  UTF-8 字节，不承诺原字节、语言语义或字体显示保真。一次完整输入使用同一迭代器；分别规范化各 chunk 再拼接不保证等价，也无跨独立 chunk 状态传承保证。迭代器为惰性，next 可消费多个输入；待处理非starter片段可能缓存至下一starter或EOF，NFC还存待组合字符与未组合项，TinyVec
+  inline容量4不是总内存限额；不证明固定资源、零分配、恒定延迟或恶意输入安全。
+
+
+  有限证据仅为固定上游源码断言配方：U+1E0B U+0323 的 NFD 预期 U+0064 U+0323 U+0307，NFC 预期 U+1E0D U+0307；U+D4DB 的 NFD 预期 U+1111 U+1171
+  U+11B6，NFC保留该音节；U+2026 在 NFD/NFC 保留，NFKD/NFKC 三句点例只用于区分形式。NFKD/NFKC、quick check、CJK variants及其他API不纳入正面范围；quick
+  check 不转换文本且可返回 Maybe。stream_safe() 是单独选择的处理，plain nfd()/nfc() 不自动插入 U+034F 或限制为30个非starter。本次未安装、导入、构建、运行上游、依赖、样例、测试或生成器，未下载大
+  testdata；Cargo 排除 tests/* 下的 suite 配方；本次只读固定仓库源码，未核发布包所含测试，也未通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
+  Unicode 符合性、编码转码、大小写折叠、字素分割、排序、IDNA/PRECIS、同形字符安全、跨实现互通、生产适用或 IA 采用保证；不核实的其他能力不表示不存在。
+
+
+  English scope of the added incoming edge only:
+
+
+  This record pins the real crates.io release 0.1.25 (2025-10-30). The published .cargo_vcs_info on docs.rs and
+  official PR115 bind commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1. No v0.1.25 Git tag or GitHub Release exists;
+  no tag URL or latest-version claim is invented. Cargo says 0.1.25, while tables and generator declare Unicode
+  17.0.0; the generator was not rerun and the entire UCD was not checked entry by entry. Bytes, Git blobs and SHA256
+  of 19 complete fixed repository files were checked, not a full checkout, downloaded .crate archive, signature
+  or supply-chain certification. Registry checksum is metadata only, not verification of package bytes. Cargo MIT
+  OR Apache-2.0 is recorded solely as this version''s upstream declaration, not a legal finding covering all generated
+  data; neither the 0.1.26 license nor Unicode18 tables is substituted.
+
+
+  This implements edge describes only a static char-iterator slice of UnicodeNormalization.nfd()/nfc() on valid
+  Rust &str, corresponding to Unicode17 chapter 3 sections 3.11/3.12 and UAX15 revision57. Canonical decomposition
+  uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles Hangul
+  algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving equal-class
+  order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes canonically before
+  table-based and algorithmic recomposition with blocking: an intervening uncomposed character after the composee
+  whose CCC is greater than or equal to the current CCC blocks composition, rather than merging every composable
+  adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table;
+  individual table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4,
+  not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
+  blocks exist, so this is not entirely safe Rust or security certification.
+
+
+  Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
+  repair. Outputs are Unicode scalars, not bytes, grapheme clusters, original-position indices or assigned-character
+  validation. Normalization may change scalar count/order and UTF-8 bytes without guaranteeing original-byte, language-semantic
+  or font-rendering fidelity. One complete input is processed through one iterator: independently normalizing chunks
+  then concatenating is not guaranteed equivalent, and no state continuity across independent chunks is promised.
+  Iterators are lazy, but next may consume multiple inputs. Pending nonstarter segments may buffer until the next
+  starter or EOF; NFC also retains a composee and uncombined characters. TinyVec inline capacity 4 is not a total
+  memory bound. Fixed resources, zero allocation, constant latency and hostile-input safety are unproven.
+
+
+  Finite evidence consists only of fixed upstream source assertion recipes: U+1E0B U+0323 expects NFD U+0064 U+0323
+  U+0307 and NFC U+1E0D U+0307; U+D4DB expects NFD U+1111 U+1171 U+11B6 and unchanged NFC; U+2026 remains unchanged
+  under NFD/NFC, with the NFKD/NFKC three-period recipe used only to distinguish forms. NFKD/NFKC, quick check,
+  CJK variants and other APIs are outside the positive slice. Quick check does not transform text and may return
+  Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically insert U+034F or
+  impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution, examples, tests or
+  generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes under tests/*; only
+  fixed repository source was inspected, with no package-test-content verification or passed official NormalizationTest/UCD
+  coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not guarantee
+  full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS, confusable
+  security, cross-implementation interoperability, production suitability or IA adoption. Unexamined capabilities
+  are not asserted absent.'
+description_en: 'The universal character encoding standard. InteropAtlas bilingual text, YAML/JSON data, and most
+  modern tooling rely on Unicode character representation.
+
+
+  Scope note only for the added unicode-normalization incoming edge, preserving standard identity, existing facts
+  and original acceptance scope: This record pins the real crates.io release 0.1.25 (2025-10-30). The published
+  .cargo_vcs_info on docs.rs and official PR115 bind commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1. No v0.1.25
+  Git tag or GitHub Release exists; no tag URL or latest-version claim is invented. Cargo says 0.1.25, while tables
+  and generator declare Unicode 17.0.0; the generator was not rerun and the entire UCD was not checked entry by
+  entry. Bytes, Git blobs and SHA256 of 19 complete fixed repository files were checked, not a full checkout, downloaded
+  .crate archive, signature or supply-chain certification. Registry checksum is metadata only, not verification
+  of package bytes. Cargo MIT OR Apache-2.0 is recorded solely as this version''s upstream declaration, not a legal
+  finding covering all generated data; neither the 0.1.26 license nor Unicode18 tables is substituted.
+
+
+  This implements edge describes only a static char-iterator slice of UnicodeNormalization.nfd()/nfc() on valid
+  Rust &str, corresponding to Unicode17 chapter 3 sections 3.11/3.12 and UAX15 revision57. Canonical decomposition
+  uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles Hangul
+  algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving equal-class
+  order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes canonically before
+  table-based and algorithmic recomposition with blocking: an intervening uncomposed character after the composee
+  whose CCC is greater than or equal to the current CCC blocks composition, rather than merging every composable
+  adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table;
+  individual table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4,
+  not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
+  blocks exist, so this is not entirely safe Rust or security certification.
+
+
+  Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
+  repair. Outputs are Unicode scalars, not bytes, grapheme clusters, original-position indices or assigned-character
+  validation. Normalization may change scalar count/order and UTF-8 bytes without guaranteeing original-byte, language-semantic
+  or font-rendering fidelity. One complete input is processed through one iterator: independently normalizing chunks
+  then concatenating is not guaranteed equivalent, and no state continuity across independent chunks is promised.
+  Iterators are lazy, but next may consume multiple inputs. Pending nonstarter segments may buffer until the next
+  starter or EOF; NFC also retains a composee and uncombined characters. TinyVec inline capacity 4 is not a total
+  memory bound. Fixed resources, zero allocation, constant latency and hostile-input safety are unproven.
+
+
+  Finite evidence consists only of fixed upstream source assertion recipes: U+1E0B U+0323 expects NFD U+0064 U+0323
+  U+0307 and NFC U+1E0D U+0307; U+D4DB expects NFD U+1111 U+1171 U+11B6 and unchanged NFC; U+2026 remains unchanged
+  under NFD/NFC, with the NFKD/NFKC three-period recipe used only to distinguish forms. NFKD/NFKC, quick check,
+  CJK variants and other APIs are outside the positive slice. Quick check does not transform text and may return
+  Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically insert U+034F or
+  impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution, examples, tests or
+  generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes under tests/*; only
+  fixed repository source was inspected, with no package-test-content verification or passed official NormalizationTest/UCD
+  coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not guarantee
+  full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS, confusable
+  security, cross-implementation interoperability, production suitability or IA adoption. Unexamined capabilities
+  are not asserted absent.'
 domains:
-  - text
-  - internationalization
+- text
+- internationalization
 layers:
-  - data_syntax
+- data_syntax
 system_roles:
-  - communicate
-  - store
+- communicate
+- store
 capabilities:
-  - text_encoding
+- text_encoding
 maturity: mature
 openness:
   specification_access: open
@@ -35,12 +160,116 @@ openness:
   certification: not_required
 official_url: https://www.unicode.org/versions/Unicode17.0.0/
 versions:
-  - version: 17.0.0
-    date: 2025-09-09
-    status: published
-    url: https://www.unicode.org/versions/Unicode17.0.0/
+- version: 17.0.0
+  date: 2025-09-09
+  status: published
+  url: https://www.unicode.org/versions/Unicode17.0.0/
 sources:
-  - url: https://www.unicode.org/versions/Unicode17.0.0/
-    title: Unicode 17.0.0
-    language: en
-    accessed: 2026-08-30
+- url: https://www.unicode.org/versions/Unicode17.0.0/
+  title: Unicode 17.0.0
+  language: en
+  accessed: 2026-08-30
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/test.rs
+  title: Finite upstream assertion recipes only, not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/README.md
+  title: Whole library identity and versioned package guidance
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/LICENSE-APACHE
+  title: Fixed Apache2 text, not legal suitability finding
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/COPYRIGHT
+  title: Fixed copyright statement, not whole-data licensing conclusion
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/quick_check.rs
+  title: Non-transforming quick checks, including Maybe
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/recompose.rs
+  title: Canonical recomposition state, blocking and retained characters
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/.github/workflows/rust.yml
+  title: Upstream workflow configuration, not proof of execution
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/tests/tests.rs
+  title: Repository-only official-suite recipes excluded by Cargo; not run
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/perfect_hash.rs
+  title: Fixed lookup mechanism source, not execution
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/tests/test_streamsafe_regression.rs
+  title: Excluded repository test recipe, outside positive slice
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/scripts/unicode.py
+  title: Read-only generation recipe, Unicode17 source and composition exclusions; not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/Cargo.toml
+  title: Exact crate version 0.1.25, official identity, declared license and tests exclusion
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/tables.rs
+  title: Complete fixed generated file declares Unicode 17.0.0; not exhaustive UCD verification
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/stream_safe.rs
+  title: Separate opt-in U+034F insertion, not plain NFD/NFC
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/LICENSE-MIT
+  title: Fixed MIT text, not legal suitability finding
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/decompose.rs
+  title: Canonical decomposition and stable CCC ordering with pending buffer
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/normalize.rs
+  title: Canonical lookup and actual Hangul bounds/unsafe paths
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/lib.rs
+  title: Public &str nfd/nfc API; stale dependency example not release identity
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/lookups.rs
+  title: CCC, canonical mapping and composition lookup wiring
+  language: en
+  accessed: '2026-11-04'
+- url: https://crates.io/crates/unicode-normalization/0.1.25
+  title: Actual 0.1.25 crate release on 2025-10-30, not latest
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/rust-lang/crates.io-index/blob/master/un/ic/unicode-normalization
+  title: Registry release metadata and checksum; archive not downloaded
+  language: en
+  accessed: '2026-11-04'
+- url: https://docs.rs/crate/unicode-normalization/0.1.25/source/.cargo_vcs_info.json
+  title: Published VCS metadata binds exact source commit, not package-byte audit
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/unicode-rs/unicode-normalization/pull/115
+  title: Official 0.1.25 release PR, merged to exact source commit
+  language: en
+  accessed: '2026-11-04'
+- url: https://api.github.com/repos/unicode-rs/unicode-normalization
+  title: Whole official repository identity, ID33898571, not fork
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.unicode.org/reports/tr15/tr15-57.html
+  title: UAX15 revision57 / Unicode17; canonical forms and concatenation limits
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.unicode.org/versions/Unicode17.0.0/core-spec/chapter-3/
+  title: Unicode17 chapter3 sections3.11/3.12 canonical normalization and Hangul
+  language: en
+  accessed: '2026-11-04'

@@ -1,0 +1,32 @@
+packet_id: unicode_normalization_0125_20261104
+status: materialized
+reviewed_packet_commit: cf38b69594fb6bbf3facebb357affc3a7ef97149
+reviewed_packet_blob: 065c32504bf24c1923ee35ffbb22c9e7e9854a5a
+reviewed_packet_path: 01_State/Inbox/review-packets/unicode-normalization-0.1.25-20261104.yaml
+baseline_commit: 888a6eac1e670715b0f37365cdfe2b4acb187115
+executor: Agent — OpenAI / dot / add_unicode_normalization_library
+acceptance_events: 01_State/Inbox/acceptance-events/unicode-normalization-0.1.25-20261104.yaml
+objects:
+- candidate_id: unicode_normalization
+  canonical_id: unicode_normalization
+  acceptance_event_id: accept-20261104-unicode-normalization-0-1-25
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/cf38b69594fb6bbf3facebb357affc3a7ef97149/01_State/Inbox/review-packets/unicode-normalization-0.1.25-20261104.yaml
+relations:
+- canonical_id: unicode_normalization_implements_unicode_17.0
+  canonical_path: 01_State/02_Relations/unicode-normalization-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/cf38b69594fb6bbf3facebb357affc3a7ef97149/01_State/Inbox/review-packets/unicode-normalization-0.1.25-20261104.yaml
+existing_objects:
+- canonical_id: unicode_17.0
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/cf38b69594fb6bbf3facebb357affc3a7ef97149/01_State/Inbox/review-packets/unicode-normalization-0.1.25-20261104.yaml
+  scope: Only added incoming unicode_normalization edge limitations and sources; original standard identity, facts,
+    created time and intake retained
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  category_id: syntax
+  canonical_id: unicode_normalization
+  semantics: Existing editorial navigation only, not a technical relation
+notes_zh:
+- 引用式回执；完整已审 Candidate、拟入库字段与19份固定源码指纹保留于真实祖先 commit/blob。
+- 整体 unicode-normalization 0.1.25；单条有界 implements 仅静态 NFD/NFC 路径，不是完整 Unicode 符合性。完整双语前提与限制在源/目标 description 及关系
+  context 保留。
+- 真实 github repo 身份，不以 locator 冒充 identifier；不改 utf8proc、Unicode原事实/历史 intake、分类/模型/UI/治理/维护；旧拒绝/未知结果保持。

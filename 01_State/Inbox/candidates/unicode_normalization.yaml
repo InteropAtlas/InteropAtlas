@@ -1,0 +1,75 @@
+contract_version: candidate-object-v1
+candidate_id: unicode_normalization
+label: unicode-normalization Rust library (0.1.25)
+publisher: unicode-rs / contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: unicode-rs/unicode-normalization
+locators:
+- url: https://github.com/unicode-rs/unicode-normalization
+  role: official
+- url: https://github.com/unicode-rs/unicode-normalization/tree/5a69b3bafb625caccdec7871a42bed0d9a6604d1
+  role: dated
+- url: https://crates.io/crates/unicode-normalization/0.1.25
+  role: catalog
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - unicode_normalization
+  reasons:
+  - Accepted as canonical unicode_normalization by accept-20261104-unicode-normalization-0-1-25. Original new-state
+    Candidate 31cb817b8734d2c900676ad7acb6c53673b825e4 replays review_required against real ancestor cf38b69594fb6bbf3facebb357affc3a7ef97149;
+    this back-reference authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- 'This record pins the real crates.io release 0.1.25 (2025-10-30). The published .cargo_vcs_info on docs.rs and
+  official PR115 bind commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1. No v0.1.25 Git tag or GitHub Release exists;
+  no tag URL or latest-version claim is invented. Cargo says 0.1.25, while tables and generator declare Unicode
+  17.0.0; the generator was not rerun and the entire UCD was not checked entry by entry. Bytes, Git blobs and SHA256
+  of 19 complete fixed repository files were checked, not a full checkout, downloaded .crate archive, signature
+  or supply-chain certification. Registry checksum is metadata only, not verification of package bytes. Cargo MIT
+  OR Apache-2.0 is recorded solely as this version''s upstream declaration, not a legal finding covering all generated
+  data; neither the 0.1.26 license nor Unicode18 tables is substituted.
+
+
+  This implements edge describes only a static char-iterator slice of UnicodeNormalization.nfd()/nfc() on valid
+  Rust &str, corresponding to Unicode17 chapter 3 sections 3.11/3.12 and UAX15 revision57. Canonical decomposition
+  uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles Hangul
+  algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving equal-class
+  order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes canonically before
+  table-based and algorithmic recomposition with blocking: an intervening uncomposed character after the composee
+  whose CCC is greater than or equal to the current CCC blocks composition, rather than merging every composable
+  adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table;
+  individual table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4,
+  not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
+  blocks exist, so this is not entirely safe Rust or security certification.
+
+
+  Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
+  repair. Outputs are Unicode scalars, not bytes, grapheme clusters, original-position indices or assigned-character
+  validation. Normalization may change scalar count/order and UTF-8 bytes without guaranteeing original-byte, language-semantic
+  or font-rendering fidelity. One complete input is processed through one iterator: independently normalizing chunks
+  then concatenating is not guaranteed equivalent, and no state continuity across independent chunks is promised.
+  Iterators are lazy, but next may consume multiple inputs. Pending nonstarter segments may buffer until the next
+  starter or EOF; NFC also retains a composee and uncombined characters. TinyVec inline capacity 4 is not a total
+  memory bound. Fixed resources, zero allocation, constant latency and hostile-input safety are unproven.
+
+
+  Finite evidence consists only of fixed upstream source assertion recipes: U+1E0B U+0323 expects NFD U+0064 U+0323
+  U+0307 and NFC U+1E0D U+0307; U+D4DB expects NFD U+1111 U+1171 U+11B6 and unchanged NFC; U+2026 remains unchanged
+  under NFD/NFC, with the NFKD/NFKC three-period recipe used only to distinguish forms. NFKD/NFKC, quick check,
+  CJK variants and other APIs are outside the positive slice. Quick check does not transform text and may return
+  Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically insert U+034F or
+  impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution, examples, tests or
+  generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes under tests/*; only
+  fixed repository source was inspected, with no package-test-content verification or passed official NormalizationTest/UCD
+  coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not guarantee
+  full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS, confusable
+  security, cross-implementation interoperability, production suitability or IA adoption. Unexamined capabilities
+  are not asserted absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_unicode_normalization_library
+  reviewer: /root/select_evidenced_coverage_continuation/add_unicode_normalization_library/review_normalization_semantics
