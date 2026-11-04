@@ -15,13 +15,13 @@ locators:
 - url: https://pypi.org/project/h11/0.16.0/
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - h11
   reasons:
-  - Fresh whole-tree and reachable-history searches plus visible all-state PR, issue and branch searches found no
-    whole h11 record. Four HTTPX history commits explicitly distinguish h11 as a separate dependency; they are not
-    an h11 intake. github:python-hyper/h11 is the official whole-repository identity, not a source-file locator.
-    No merge/split.
+  - Accepted as canonical h11 by accept-20261104-h11-0-16-0. Frozen new-state Candidate fc78ceb0134f6e43a6b720308c4b6fc2feec7c24
+    and review_required route replay against real ancestor 695233ac945ab5306d011dedb543b509d0b1a487; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'This record pins h11 0.16.0, official tag v0.16.0 and commit 1c5b07581f058886c8bdd87adababd7d959dc7ca, and statically
@@ -60,4 +60,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_h11_library
-  reviewer: pending independent semantic review
+  reviewer: Agent — OpenAI / dot / review_h11_semantics

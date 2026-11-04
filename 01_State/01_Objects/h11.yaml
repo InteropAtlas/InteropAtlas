@@ -1,0 +1,210 @@
+id: h11
+type: system
+kind: library
+name_zh: h11 Python HTTP/1.1 状态机库
+name_en: h11 Python HTTP/1.1 state-machine library
+official_name: h11
+version: 0.16.0
+external_identifiers:
+- namespace: github
+  value: python-hyper/h11
+official_url: https://github.com/python-hyper/h11
+description_zh: '整体开源 Python 库 h11，不是独立的 Connection 子项目、HTTPX 或 HTTP 标准。本记录固定 h11 0.16.0、官方 tag v0.16.0 与 commit
+  1c5b07581f058886c8bdd87adababd7d959dc7ca，只静态核验普通 HTTP/1.1 GET/POST 请求及其对应最终 200 响应的接收解析切片，调用方须先让状态机记录正确的请求方法和合法事件顺序。Connection.receive_data
+  仅缓冲字节并返回 None，不返回事件；next_event 才解析单个事件并改变状态，或返回 NEED_DATA / PAUSED。固定 README 的返回事件概述、api.rst 关闭章节的 receive_data
+  返回 ConnectionClosed 概述与源码不符，本记录按固定源码限定。对所选普通消息，支持的 Transfer-Encoding: chunked 优先于有效 Content-Length；无 TE 时使用有效
+  CL；二者都无时请求正文按 0 字节，响应正文按 EOF 结束。这是接收路径的 framing 选择，不是建议发送歧义头，也不外推至发送路径自动补头。正文可分段产生 Data，无须等待整个正文。CL 正文未足额、chunked
+  正文未完成或头部不完整时提前 EOF 产生 RemoteProtocolError；EOF-framed 响应则由 EOF 结束正文并产生 EndOfMessage，之后可按状态产生 ConnectionClosed。receive_data(b"")
+  表示 EOF，不是普通空片段；重复 EOF 可接受，EOF 后非空字节抛 RuntimeError；有缓冲或 PAUSED 时不会保证立即产生关闭事件。对端 DONE 且接收缓冲非空时 PAUSED；DONE 而无缓冲、无
+  EOF 时可为 NEED_DATA，不是 DONE 必然 PAUSED。默认 max_incomplete_event_size=16384，只在 next_event 得到 NEED_DATA 后，剩余接收缓冲严格大于该值时触发
+  RemoteProtocolError（error_status_hint=431）；等于阈值不因这条判断报错。完整事件和 PAUSED 下缓冲可暂时超过阈值；这不是 receive_data 时硬截断、完整头部总长限制、body
+  上限或总内存保证，应用仍负责 I/O、背压与资源限制。next_event 解析或状态处理异常将 their_state 置 ERROR，后续 next_event 继续报错，没有回滚或 start_next_cycle
+  修复保证；start_next_cycle 只在双方 DONE 时重设 IDLE，提前调用抛 LocalProtocolError 本身不损坏连接，可在条件满足后再试。Connection: close 等状态会阻止复用，不声称连接永远可重用。本批排除
+  HEAD、CONNECT、Upgrade、信息响应、其他状态码、HTTP/1.0 兼容性、完整头部/扩展/trailer 符合性及发送侧编解码验收。全库不含 I/O；本记录不证明真实网络、socket/TLS/DNS、完整客户端或服务器、路由、认证、内容协商、跨实现互通、全
+  RFC 符合性、安全防护、性能/内存保障、生产适用性或 IA 采用。仅阅读完整固定源码和测试配方，未安装、导入、构建、运行上游或其测试。PyPI 正式版本发行日期为 2025-04-24，固定 changelog 标注
+  2025-04-23，分别保留；上游 setup 分类仍是 Alpha，released 不等于稳定成熟。web_resource_transfer 与 transport 仅用作既有能力引用和编辑导航，不是技术关系或已执行网络传输；本批不新增技术边，尤其不把
+  RFC7230 消息 framing 引用强配给共享语义 RFC9110。未核验的能力不等于不存在。
+
+
+  English scope and limitations:
+
+
+  This record pins h11 0.16.0, official tag v0.16.0 and commit 1c5b07581f058886c8bdd87adababd7d959dc7ca, and statically
+  inspects only the receiving/parsing slice for ordinary HTTP/1.1 GET/POST requests and their matching final 200
+  responses. The caller must first establish the correct request method and legal event order in the state machine.
+  Connection.receive_data only buffers bytes and returns None, not events; next_event parses one event and changes
+  state, or returns NEED_DATA / PAUSED. The fixed README event-return summary and api.rst closing-section claim
+  that receive_data returns ConnectionClosed disagree with code; this record follows the fixed code. For the selected
+  ordinary messages, supported Transfer-Encoding: chunked takes precedence over valid Content-Length; without TE,
+  valid CL is used; without either, a request has a zero-byte body and a response is EOF-framed. This is receive-side
+  framing selection, not advice to send ambiguous headers or a claim about send-side automatic headers. Data can
+  be emitted incrementally without waiting for the whole body. Premature EOF during an incomplete CL body, chunked
+  body or headers raises RemoteProtocolError; EOF instead ends an EOF-framed response body with EndOfMessage, followed
+  by ConnectionClosed as state permits. receive_data(b"") means EOF, not an ordinary empty fragment. Repeated EOF
+  is allowed, and nonempty bytes after EOF raise RuntimeError; buffering or PAUSED can delay a closing event. Peer
+  DONE with nonempty receive buffer yields PAUSED; DONE with no buffered data and no EOF can yield NEED_DATA, so
+  DONE does not always mean PAUSED. The default max_incomplete_event_size=16384 is checked only after next_event
+  obtains NEED_DATA, and only remaining receive-buffer length strictly greater than the limit triggers RemoteProtocolError
+  (error_status_hint=431); equality does not fail this check. Complete events and PAUSED buffers can temporarily
+  exceed it. This is not a receive_data hard cutoff, complete-header total-size limit, body limit or total-memory
+  guarantee; the application retains I/O, backpressure and resource-limit duties. A next_event parsing or state-processing
+  exception sets their_state to ERROR and later next_event calls keep failing, without rollback or recovery through
+  start_next_cycle. start_next_cycle resets both sides to IDLE only when both are DONE. An early call raises LocalProtocolError
+  without itself damaging the connection and may be retried when ready. Connection: close and other states prevent
+  reuse; indefinite reuse is not promised. HEAD, CONNECT, Upgrade, informational responses, other status codes,
+  HTTP/1.0 compatibility, complete header/extension/trailer conformance and send-side encoding acceptance are outside
+  this slice. The whole library contains no I/O. Real networking, sockets/TLS/DNS, a complete client/server, routing,
+  authentication, content negotiation, cross-implementation interoperability, full RFC conformance, security protection,
+  performance/memory guarantees, production fitness and IA adoption are not established. Complete fixed source and
+  test recipes were read only, with no upstream installation, import, build, execution or tests. PyPI dates this
+  release 2025-04-24, while the fixed changelog says 2025-04-23; these separate dates are retained. Upstream setup
+  still classifies Alpha; released does not imply stable or mature. web_resource_transfer and transport are existing
+  capability-reference/editorial-navigation mechanisms, not a technical edge or executed network transfer. No technical
+  relation is added, particularly no forced mapping from the RFC7230 framing citation to shared-semantics RFC9110.
+  Unexamined capabilities are not asserted absent.'
+description_en: 'The whole open-source Python h11 library, not a standalone Connection project, HTTPX or an HTTP
+  standard. This record pins h11 0.16.0, official tag v0.16.0 and commit 1c5b07581f058886c8bdd87adababd7d959dc7ca,
+  and statically inspects only the receiving/parsing slice for ordinary HTTP/1.1 GET/POST requests and their matching
+  final 200 responses. The caller must first establish the correct request method and legal event order in the state
+  machine. Connection.receive_data only buffers bytes and returns None, not events; next_event parses one event
+  and changes state, or returns NEED_DATA / PAUSED. The fixed README event-return summary and api.rst closing-section
+  claim that receive_data returns ConnectionClosed disagree with code; this record follows the fixed code. For the
+  selected ordinary messages, supported Transfer-Encoding: chunked takes precedence over valid Content-Length; without
+  TE, valid CL is used; without either, a request has a zero-byte body and a response is EOF-framed. This is receive-side
+  framing selection, not advice to send ambiguous headers or a claim about send-side automatic headers. Data can
+  be emitted incrementally without waiting for the whole body. Premature EOF during an incomplete CL body, chunked
+  body or headers raises RemoteProtocolError; EOF instead ends an EOF-framed response body with EndOfMessage, followed
+  by ConnectionClosed as state permits. receive_data(b"") means EOF, not an ordinary empty fragment. Repeated EOF
+  is allowed, and nonempty bytes after EOF raise RuntimeError; buffering or PAUSED can delay a closing event. Peer
+  DONE with nonempty receive buffer yields PAUSED; DONE with no buffered data and no EOF can yield NEED_DATA, so
+  DONE does not always mean PAUSED. The default max_incomplete_event_size=16384 is checked only after next_event
+  obtains NEED_DATA, and only remaining receive-buffer length strictly greater than the limit triggers RemoteProtocolError
+  (error_status_hint=431); equality does not fail this check. Complete events and PAUSED buffers can temporarily
+  exceed it. This is not a receive_data hard cutoff, complete-header total-size limit, body limit or total-memory
+  guarantee; the application retains I/O, backpressure and resource-limit duties. A next_event parsing or state-processing
+  exception sets their_state to ERROR and later next_event calls keep failing, without rollback or recovery through
+  start_next_cycle. start_next_cycle resets both sides to IDLE only when both are DONE. An early call raises LocalProtocolError
+  without itself damaging the connection and may be retried when ready. Connection: close and other states prevent
+  reuse; indefinite reuse is not promised. HEAD, CONNECT, Upgrade, informational responses, other status codes,
+  HTTP/1.0 compatibility, complete header/extension/trailer conformance and send-side encoding acceptance are outside
+  this slice. The whole library contains no I/O. Real networking, sockets/TLS/DNS, a complete client/server, routing,
+  authentication, content negotiation, cross-implementation interoperability, full RFC conformance, security protection,
+  performance/memory guarantees, production fitness and IA adoption are not established. Complete fixed source and
+  test recipes were read only, with no upstream installation, import, build, execution or tests. PyPI dates this
+  release 2025-04-24, while the fixed changelog says 2025-04-23; these separate dates are retained. Upstream setup
+  still classifies Alpha; released does not imply stable or mature. web_resource_transfer and transport are existing
+  capability-reference/editorial-navigation mechanisms, not a technical edge or executed network transfer. No technical
+  relation is added, particularly no forced mapping from the RFC7230 framing citation to shared-semantics RFC9110.
+  Unexamined capabilities are not asserted absent.'
+open_source: true
+license_expression: MIT
+domains:
+- networking
+- web
+capabilities:
+- web_resource_transfer
+sources:
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/README.rst
+  title: Whole-library identity and no I/O; stale receive_data summary is not adopted
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/LICENSE.txt
+  title: Fixed MIT notice, not suitability advice
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/setup.py
+  title: Whole h11 package and Alpha classifier
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_version.py
+  title: Fixed released version 0.16.0
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/__init__.py
+  title: Public Connection/events and RFC7230 citation
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_connection.py
+  title: Actual receive_data/next_event, receiving framing, strict NEED_DATA limit and state transitions
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_readers.py
+  title: Incremental CL/chunked/EOF body readers and early EOF errors
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_headers.py
+  title: Valid Content-Length and supported single chunked Transfer-Encoding
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_state.py
+  title: ERROR and both-DONE reuse constraints
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_receivebuffer.py
+  title: Receive buffer without I/O or total-memory hard limit
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_events.py
+  title: Public events and validation, not full protocol compliance
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/_util.py
+  title: Protocol errors and conversion; stale comment not API authority
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/docs/source/api.rst
+  title: API and error/reuse guide; stale closing summary not adopted
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/docs/source/changes.rst
+  title: 0.16.0 changelog dated 2025-04-23, distinct from PyPI publication
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/docs/source/supported-http.rst
+  title: Upstream stated support, not runtime acceptance
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/tests/test_connection.py
+  title: 'Static recipes only: framing, incomplete limit, PAUSED, ERROR and EOF'
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/tests/test_io.py
+  title: Static body-reader and chunk-footer recipes only; not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/python-hyper/h11/blob/1c5b07581f058886c8bdd87adababd7d959dc7ca/h11/tests/test_state.py
+  title: Static state/reuse recipes only; not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://pypi.org/project/h11/0.16.0/
+  title: Official PyPI h11 0.16.0 release dated 2025-04-24, linked to same repository
+  language: en
+  accessed: '2026-11-04'
+- url: https://api.github.com/repos/python-hyper/h11
+  title: GitHub authority identity python-hyper/h11, repository ID 57372073
+  language: en
+  accessed: '2026-11-04'
+- url: https://api.github.com/repos/python-hyper/h11/git/ref/tags/v0.16.0
+  title: Official v0.16.0 direct commit ref
+  language: en
+  accessed: '2026-11-04'
+last_verified_at: '2026-11-04T21:25:43.916584+00:00'
+last_verified_by: Agent — OpenAI / dot / add_h11_library; fixed source/test-recipe inspection only, no upstream
+  execution
+record_created_at: '2026-11-04T21:28:26.543969+00:00'
+record_updated_at: '2026-11-04T21:28:26.543969+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_h11_library
+  reviewer: Agent — OpenAI / dot / review_h11_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: h11
+  acceptance_event_id: accept-20261104-h11-0-16-0
+  reviewed_candidate_blob: fc78ceb0134f6e43a6b720308c4b6fc2feec7c24
+  reviewed_against_commit: 695233ac945ab5306d011dedb543b509d0b1a487
+  candidate_executor: Agent — OpenAI / dot / add_h11_library
+  canonical_serializer: Agent — OpenAI / dot / add_h11_library
+  reviewed_packet_commit: 695233ac945ab5306d011dedb543b509d0b1a487
+  reviewed_packet_blob: d2a604b26ced52a8e448e9fbba8c453e34475f2b
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/695233ac945ab5306d011dedb543b509d0b1a487/01_State/Inbox/review-packets/h11-0.16.0-20261104.yaml
