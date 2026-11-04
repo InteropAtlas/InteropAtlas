@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/PJK/libcbor/releases/tag/v0.12.0
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - libcbor
   reasons:
-  - Fresh current-tree and all reachable Git-object contents, all-state PRs, issues, branches and active authors
-    show no matching whole libcbor intake. Verified github:PJK/libcbor is the real repository identity, distinct
-    from agronholm/cbor2 and the RFC8949 standard. No identity merge/split.
+  - Accepted as canonical libcbor by accept-20261104-libcbor-0-12-0. Original new-state Candidate 515c460512b567ab7730f607fc496373facb345f
+    replays review_required against real ancestor 9129b198b9549b95ea2715ea48c64ca862d06f14; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'This record pins libcbor 0.12.0, official tag v0.12.0 and commit ae000f44e8d2a69e1f72a738f7c0b6b4b7cc4fbf, and
@@ -56,4 +57,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_libcbor_library
-  reviewer: pending independent semantic review
+  reviewer: /root/select_evidenced_coverage_continuation/add_libcbor_library/review_libcbor_semantics
