@@ -117,7 +117,7 @@ preflight:
 objects:
 - candidate_id: pion_rtcp
   candidate_path: 01_State/Inbox/candidates/pion_rtcp.yaml
-  candidate_blob: 5721519356480899765289883910ae58be1196ca
+  candidate_blob: 2e4969f246f753d186ae89f13e0d857fc4b5c9f6
   proposed_path: 01_State/01_Objects/pion_rtcp.yaml
   proposed_record:
     id: pion_rtcp
@@ -134,8 +134,8 @@ objects:
     description_zh: 'Pion 项目的整体开源 Go RTCP 库，模块 github.com/pion/rtcp，不是 Pion RTP、Pion SDP、规范或虚构的独立 SR/RR 组件。本记录固定
       Pion RTCP 1.2.19、官方 tag v1.2.19 与 commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2，只记录 RFC3550 §6.4.1/§6.4.2
       的 SenderReport/ReceiverReport 基础包字段 Marshal/Unmarshal 与 §4 大端字节序，不是完整 RTCP 实现的符合性结论。调用前提是 P=false、无 profile-specific
-      extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24*RC 字节、header.Length=6+6*RC；RR 为 8+24*RC
-      字节、header.Length=1+6*RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal 只在 >=1<<25
+      extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24×RC 字节、header.Length=6+6×RC；RR 为 8+24×RC
+      字节、header.Length=1+6×RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal 只在 >=1<<25
       时拒绝并写低24位，Unmarshal 不作符号扩展，不能声称完整 signed24 处理。直接 Unmarshal 检查 V=2 与包类型、基础长度和报告块，但不核对 header.Length 或解释 padding，也不清空
       Reports；错误可留下部分状态，复用目标不属于此契约。SR/RR 的 Marshal 在报告块超过31时拒绝，并生成 V=2、P=false 与相应包型/长度。64位 NTPTime、32位 RTPTime、SSRC、计数与报告统计字段仅编码调用方给定值，不证明时钟取样/同步、NTP/RTP映射、loss/jitter/RTT统计计算或实际收发。上游
       SR “valid”测试配方实际52字节却用 length=7声明32字节，不作为合规向量；仅静态读源码与测试配方，未安装、导入、构建、运行上游或其测试。无完整 RTP/RTCP会话、compound/SDES-CNAME规则、发送间隔/成员/SSRC管理、其他RTCP包型、RFC5506、profile扩展、网络传输、SRTP/SRTCP、安全、第三方互通或
@@ -149,16 +149,16 @@ objects:
       and covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
       and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
       extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode
-      target for each call. SR must have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes with
-      header.Length=1+6*RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
+      target for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with
+      header.Length=1+6×RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
       signed24 and may be negative; the library uses uint32, Marshal rejects only values >=1<<25 and writes the
       low 24 bits, and Unmarshal does not sign-extend. This is not complete signed24 handling. Direct Unmarshal
       checks V=2, packet type, base length and report blocks, but does not validate header.Length or interpret padding,
       and does not clear Reports. Errors may leave partial state; target reuse is outside this contract. SR/RR Marshal
-      rejects more than31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
+      rejects more than 31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
       NTPTime, 32-bit RTPTime, SSRC, counts and report statistics fields encode supplied values, not clock sampling/synchronization,
-      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains52
-      bytes but length=7 declares32 bytes; it is not used as a conformance vector. Source and test recipes were
+      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains 52
+      bytes but length=7 declares 32 bytes; it is not used as a conformance vector. Source and test recipes were
       inspected only, without installing, importing, building or running upstream or its tests. No complete RTP/RTCP
       session, compound/SDES-CNAME rules, scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile
       extensions, network transport, SRTP/SRTCP, security, third-party interoperability or IA adoption is claimed.
@@ -169,16 +169,16 @@ objects:
       packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2 and section 4 big-endian byte order, not
       full RTCP conformance. Caller preconditions are P=false, no profile-specific extensions, RC equal to 0..31
       report blocks, an exact single complete packet, and a fresh zero-value decode target for each call. SR must
-      have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes with header.Length=1+6*RC. TotalLost
+      have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with header.Length=1+6×RC. TotalLost
       is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is signed24 and may be negative;
       the library uses uint32, Marshal rejects only values >=1<<25 and writes the low 24 bits, and Unmarshal does
       not sign-extend. This is not complete signed24 handling. Direct Unmarshal checks V=2, packet type, base length
       and report blocks, but does not validate header.Length or interpret padding, and does not clear Reports. Errors
-      may leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than31 report blocks
+      may leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than 31 report blocks
       and emits V=2, P=false and the appropriate packet type/length. The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts
       and report statistics fields encode supplied values, not clock sampling/synchronization, NTP/RTP mapping,
-      loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains52 bytes but
-      length=7 declares32 bytes; it is not used as a conformance vector. Source and test recipes were inspected
+      loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains 52 bytes but
+      length=7 declares 32 bytes; it is not used as a conformance vector. Source and test recipes were inspected
       only, without installing, importing, building or running upstream or its tests. No complete RTP/RTCP session,
       compound/SDES-CNAME rules, scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile extensions,
       network transport, SRTP/SRTCP, security, third-party interoperability or IA adoption is claimed. Unexamined
@@ -222,7 +222,7 @@ objects:
       language: en
       accessed: '2026-11-04'
     - url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/sender_report_test.go
-      title: Static recipes only; valid52-byte fixture declares32, not a conformance vector
+      title: Static recipes only; valid 52-byte fixture declares 32, not a conformance vector
       language: en
       accessed: '2026-11-04'
     - url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/receiver_report_test.go
@@ -277,8 +277,8 @@ existing_object_updates:
 
       以下仅限定新增的 Pion RTCP 1.2.19 入边，不改上述 Pion RTP 边界及 RFC 原事实：本记录固定 Pion RTCP 1.2.19、官方 tag v1.2.19 与 commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2，只记录
       RFC3550 §6.4.1/§6.4.2 的 SenderReport/ReceiverReport 基础包字段 Marshal/Unmarshal 与 §4 大端字节序，不是完整 RTCP 实现的符合性结论。调用前提是
-      P=false、无 profile-specific extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24*RC 字节、header.Length=6+6*RC；RR
-      为 8+24*RC 字节、header.Length=1+6*RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal
+      P=false、无 profile-specific extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24×RC 字节、header.Length=6+6×RC；RR
+      为 8+24×RC 字节、header.Length=1+6×RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal
       只在 >=1<<25 时拒绝并写低24位，Unmarshal 不作符号扩展，不能声称完整 signed24 处理。直接 Unmarshal 检查 V=2 与包类型、基础长度和报告块，但不核对 header.Length
       或解释 padding，也不清空 Reports；错误可留下部分状态，复用目标不属于此契约。SR/RR 的 Marshal 在报告块超过31时拒绝，并生成 V=2、P=false 与相应包型/长度。64位 NTPTime、32位
       RTPTime、SSRC、计数与报告统计字段仅编码调用方给定值，不证明时钟取样/同步、NTP/RTP映射、loss/jitter/RTT统计计算或实际收发。上游 SR “valid”测试配方实际52字节却用 length=7声明32字节，不作为合规向量；仅静态读源码与测试配方，未安装、导入、构建、运行上游或其测试。无完整
@@ -292,16 +292,16 @@ existing_object_updates:
       and covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
       and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
       extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode
-      target for each call. SR must have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes with
-      header.Length=1+6*RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
+      target for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with
+      header.Length=1+6×RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
       signed24 and may be negative; the library uses uint32, Marshal rejects only values >=1<<25 and writes the
       low 24 bits, and Unmarshal does not sign-extend. This is not complete signed24 handling. Direct Unmarshal
       checks V=2, packet type, base length and report blocks, but does not validate header.Length or interpret padding,
       and does not clear Reports. Errors may leave partial state; target reuse is outside this contract. SR/RR Marshal
-      rejects more than31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
+      rejects more than 31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
       NTPTime, 32-bit RTPTime, SSRC, counts and report statistics fields encode supplied values, not clock sampling/synchronization,
-      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains52
-      bytes but length=7 declares32 bytes; it is not used as a conformance vector. Source and test recipes were
+      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains 52
+      bytes but length=7 declares 32 bytes; it is not used as a conformance vector. Source and test recipes were
       inspected only, without installing, importing, building or running upstream or its tests. No complete RTP/RTCP
       session, compound/SDES-CNAME rules, scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile
       extensions, network transport, SRTP/SRTCP, security, third-party interoperability or IA adoption is claimed.
@@ -317,16 +317,16 @@ existing_object_updates:
       and covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
       and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
       extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode
-      target for each call. SR must have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes with
-      header.Length=1+6*RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
+      target for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with
+      header.Length=1+6×RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is
       signed24 and may be negative; the library uses uint32, Marshal rejects only values >=1<<25 and writes the
       low 24 bits, and Unmarshal does not sign-extend. This is not complete signed24 handling. Direct Unmarshal
       checks V=2, packet type, base length and report blocks, but does not validate header.Length or interpret padding,
       and does not clear Reports. Errors may leave partial state; target reuse is outside this contract. SR/RR Marshal
-      rejects more than31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
+      rejects more than 31 report blocks and emits V=2, P=false and the appropriate packet type/length. The 64-bit
       NTPTime, 32-bit RTPTime, SSRC, counts and report statistics fields encode supplied values, not clock sampling/synchronization,
-      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains52
-      bytes but length=7 declares32 bytes; it is not used as a conformance vector. Source and test recipes were
+      NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains 52
+      bytes but length=7 declares 32 bytes; it is not used as a conformance vector. Source and test recipes were
       inspected only, without installing, importing, building or running upstream or its tests. No complete RTP/RTCP
       session, compound/SDES-CNAME rules, scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile
       extensions, network transport, SRTP/SRTCP, security, third-party interoperability or IA adoption is claimed.
@@ -409,12 +409,12 @@ relations:
     target: rtp_rfc3550
     context:
       version_context:
-        source: Pion RTCP1.2.19; tag v1.2.19, commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2
-        target: RFC3550 July2003 sections6.4.1/6.4.2 base layout and section4 byte order
+        source: Pion RTCP 1.2.19; tag v1.2.19, commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2
+        target: RFC3550 July 2003 sections 6.4.1/6.4.2 base layout and section 4 byte order
       conditions_zh: 本记录固定 Pion RTCP 1.2.19、官方 tag v1.2.19 与 commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2，只记录
         RFC3550 §6.4.1/§6.4.2 的 SenderReport/ReceiverReport 基础包字段 Marshal/Unmarshal 与 §4 大端字节序，不是完整 RTCP 实现的符合性结论。调用前提是
-        P=false、无 profile-specific extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24*RC 字节、header.Length=6+6*RC；RR
-        为 8+24*RC 字节、header.Length=1+6*RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal
+        P=false、无 profile-specific extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24×RC 字节、header.Length=6+6×RC；RR
+        为 8+24×RC 字节、header.Length=1+6×RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal
         只在 >=1<<25 时拒绝并写低24位，Unmarshal 不作符号扩展，不能声称完整 signed24 处理。直接 Unmarshal 检查 V=2 与包类型、基础长度和报告块，但不核对 header.Length
         或解释 padding，也不清空 Reports；错误可留下部分状态，复用目标不属于此契约。SR/RR 的 Marshal 在报告块超过31时拒绝，并生成 V=2、P=false 与相应包型/长度。64位 NTPTime、32位
         RTPTime、SSRC、计数与报告统计字段仅编码调用方给定值，不证明时钟取样/同步、NTP/RTP映射、loss/jitter/RTT统计计算或实际收发。上游 SR “valid”测试配方实际52字节却用
@@ -424,16 +424,16 @@ relations:
         and covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
         and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
         extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode
-        target for each call. SR must have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes
-        with header.Length=1+6*RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative
+        target for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes
+        with header.Length=1+6×RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative
         loss is signed24 and may be negative; the library uses uint32, Marshal rejects only values >=1<<25 and writes
         the low 24 bits, and Unmarshal does not sign-extend. This is not complete signed24 handling. Direct Unmarshal
         checks V=2, packet type, base length and report blocks, but does not validate header.Length or interpret
         padding, and does not clear Reports. Errors may leave partial state; target reuse is outside this contract.
-        SR/RR Marshal rejects more than31 report blocks and emits V=2, P=false and the appropriate packet type/length.
+        SR/RR Marshal rejects more than 31 report blocks and emits V=2, P=false and the appropriate packet type/length.
         The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts and report statistics fields encode supplied values, not
         clock sampling/synchronization, NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream
-        SR “valid” test recipe contains52 bytes but length=7 declares32 bytes; it is not used as a conformance vector.
+        SR “valid” test recipe contains 52 bytes but length=7 declares 32 bytes; it is not used as a conformance vector.
         Source and test recipes were inspected only, without installing, importing, building or running upstream
         or its tests. No complete RTP/RTCP session, compound/SDES-CNAME rules, scheduling/member/SSRC management,
         other RTCP packet types, RFC5506, profile extensions, network transport, SRTP/SRTCP, security, third-party
@@ -464,7 +464,7 @@ relations:
       language: en
       accessed: '2026-11-04'
     - url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/sender_report_test.go
-      title: Static recipes only; valid52-byte fixture declares32, not a conformance vector
+      title: Static recipes only; valid 52-byte fixture declares 32, not a conformance vector
       language: en
       accessed: '2026-11-04'
     - url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/receiver_report_test.go
@@ -518,7 +518,7 @@ static_boundary_observations:
   RR_bytes: 752
   RR_Length: 187
 excluded_scope:
-- FullRTCP/compound/SDES-CNAME/statistics/timing/transport/security/interoperability/IA adoption are not established.
+- Full RTCP/compound/SDES-CNAME/statistics/timing/transport/security/interoperability/IA adoption are not established.
 - Do not import upstream or run its tests; malformed SR test recipe remains a counterexample.
 - All existing holds/refusals/unknown writes preserved; no formal APPROVE, resolve or dismiss.
 materialization_boundary: Independent exact-byte Candidate/packet semantic review first. Retain this full packet/new-state

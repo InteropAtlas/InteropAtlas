@@ -25,15 +25,15 @@ unknowns:
   covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
   and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
   extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode target
-  for each call. SR must have 28+24*RC bytes with header.Length=6+6*RC; RR must have 8+24*RC bytes with header.Length=1+6*RC.
+  for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with header.Length=1+6×RC.
   TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is signed24 and may be negative;
   the library uses uint32, Marshal rejects only values >=1<<25 and writes the low 24 bits, and Unmarshal does not
   sign-extend. This is not complete signed24 handling. Direct Unmarshal checks V=2, packet type, base length and
   report blocks, but does not validate header.Length or interpret padding, and does not clear Reports. Errors may
-  leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than31 report blocks and
+  leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than 31 report blocks and
   emits V=2, P=false and the appropriate packet type/length. The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts and
   report statistics fields encode supplied values, not clock sampling/synchronization, NTP/RTP mapping, loss/jitter/RTT
-  computation or actual transport. The upstream SR “valid” test recipe contains52 bytes but length=7 declares32
+  computation or actual transport. The upstream SR “valid” test recipe contains 52 bytes but length=7 declares 32
   bytes; it is not used as a conformance vector. Source and test recipes were inspected only, without installing,
   importing, building or running upstream or its tests. No complete RTP/RTCP session, compound/SDES-CNAME rules,
   scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile extensions, network transport, SRTP/SRTCP,
