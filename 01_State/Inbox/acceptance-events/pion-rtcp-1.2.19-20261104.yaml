@@ -1,0 +1,32 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261104-pion-rtcp-1-2-19
+candidate_id: pion_rtcp
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: pion_rtcp
+review:
+  reviewer: Independent Agent — OpenAI / dot / review_pion_rtcp_semantics
+  reviewed_at: '2026-11-04T19:51:29.551167+00:00'
+  independent_from_executor: true
+  notes:
+  - Independent exact-byte F Candidate/packet review supports whole Pion RTCP1.2.19 and one bounded RFC3550 SR/RR
+    layout implements relation; fixed official sources and new review_required identity route checked.
+  - P=false, no extensions, RC0..31, exact single-packet length, fresh zero-value decode target and nonnegative
+    TotalLost0..0x7fffff are caller preconditions, visible in both languages. Direct Length/P and reused Reports
+    limits, unsigned loss/1<<25 check, malformed SR recipe and no-upstream-execution boundary retained.
+  - reviewed_at is the actual independent F review report time; decided_at is later materialization. C/H/P/M and
+    publication require separate checks/reviews.
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/6472eb5951ef564558d9136c372cca0f3bdffa4a/01_State/Inbox/review-packets/pion-rtcp-1.2.19-20261104.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/2e4969f246f753d186ae89f13e0d857fc4b5c9f6
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/d82e3b08a6fe53dfaeaa0aaacf91bdfecc7d5b08
+decided_at: '2026-11-04T19:52:01.864406+00:00'
+notes:
+- One library object, one bounded relation, one existing navigation membership and visible new-edge limitations
+  on existing RFC3550. Old standard facts/intake/lifecycle verification and Pion RTP boundaries preserved.
+- Real Git ancestry retains complete reviewed new-state Candidate and packet; current packet is a reference receipt.
+  All prior holds remain.
