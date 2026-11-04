@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/stefankoegl/python-json-patch/tree/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - python_json_patch
   reasons:
-  - Full current Canonical/Candidate identity and name search has no collision; python_jsonpointer and json_patch_rfc6902
-    are distinct existing subjects.
+  - Accepted as canonical python_json_patch by accept-20261104-python-json-patch-1-42. Frozen new-state Candidate
+    784c42499b6aca11e3a137443699693e033ccb68 and review_required route replay against real ancestor 6d41009163490daf44acfb5a9a16ebd3b196e839;
+    retained back-reference prevents duplicate creation and authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - python-json-patch is a Python JSON Patch library distributed under the name jsonpatch, pinned here to v1.42 source
@@ -42,4 +44,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_python_json_patch
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / review_patch_semantics
