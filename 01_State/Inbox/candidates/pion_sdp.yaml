@@ -1,0 +1,52 @@
+contract_version: candidate-object-v1
+candidate_id: pion_sdp
+label: Pion SDP Go library (3.0.20)
+publisher: The Pion community
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: pion/sdp
+locators:
+- url: https://github.com/pion/sdp
+  role: official
+- url: https://github.com/pion/sdp/tree/8921edc83d51945017b2e1a987733a23bb9a9004
+  role: dated
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh whole-repository/history and visible all-state PR/issue searches have no matching pion/sdp library identity.
+    Existing pion_rtp is a different repository and sdp_rfc8866 is a standard, not this library.
+  merge_authorized: false
+unknowns:
+- Pion SDP is the whole Pion Go library for session-description text parsing and serialization, module github.com/pion/sdp/v3,
+  not Pion WebRTC, Pion RTP or a fictional standalone parser component. This record pins official tag v3.0.20 to
+  source commit 8921edc83d51945017b2e1a987733a23bb9a9004; no latest-release or other-build equivalence is claimed.
+  Static inspection covers caller-provided SDP strings/bytes through SessionDescription.UnmarshalString/Unmarshal
+  into structured fields and Marshal back to text bytes. Each parse uses a fresh zero-valued SessionDescription;
+  callers supply complete, valid supported inputs and non-nil media pointers. The represented fields are session
+  v/o/s/i/u/e/p/c/b/t/r/z/k/a and media m/i/c/b/k/a, not a claim to interpret every extension. Parsing mutates the
+  receiver directly, can leave partial state on error, and does not reset every existing field. It checks v=0 without
+  assigning Version; receiver reuse is not a full-replacement operation. The state machine rejects unknown line
+  types and fields disallowed in the current state, but EOF while reading the next line type can end successfully
+  without proving mandatory-field completeness; this does not mean every truncated input succeeds. For camera compatibility,
+  missing origin address type defaults to IP4/0.0.0.0; an explicit IP6 type with missing address defaults to ::.
+  Some non-spec media-field orders are accepted. Partial type, IN/IP4/IP6 and base-port 0..65535 checks exist, but
+  digit-by-digit uint64 accumulation lacks overflow checks; this is not a complete syntax, semantic or numeric-range
+  validator. Session/media a= attributes have no known-name whitelist and normally split at the first non-leading
+  colon into generic key/value, retaining unknown names without validating extension semantics. Empty values lose
+  their colon when serialized. Marshal emits current fields in fixed order with CRLF without complete validity checking;
+  LF, blank lines, field order and repeat-time shorthand can be normalized, so arbitrary byte-for-byte round trips
+  are not guaranteed. The README only says SDP; Unmarshal/Marshal comments explicitly cite RFC4566 section 5 and
+  the former also cites draft-ietf-rtcweb-jsep-24. This cannot establish an implementation of the existing RFC8866
+  object. This batch accepts only the library, adds no technical relation or old RFC endpoint to force one, and
+  leaves sdp_rfc8866 unchanged. Fixed source and test recipes were read only; no upstream installation, import,
+  build, execution, tests or examples were performed. No network negotiation, offer/answer, ICE/DTLS/RTP interoperability,
+  media transport, complete SDP/RFC conformance, security certification, performance or IA adoption is claimed.
+  Unexamined library paths are not asserted absent. MIT is recorded only from the fixed LICENSE, not as legal suitability
+  advice.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_pion_sdp_library
+  reviewer: pending independent semantic review
