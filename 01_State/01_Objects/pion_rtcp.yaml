@@ -1,0 +1,162 @@
+id: pion_rtcp
+type: system
+kind: library
+name_zh: Pion RTCP 控制包 Go 库
+name_en: Pion RTCP Go control-packet library
+official_name: Pion RTCP
+version: 1.2.19
+external_identifiers:
+- namespace: github
+  value: pion/rtcp
+official_url: https://github.com/pion/rtcp
+description_zh: 'Pion 项目的整体开源 Go RTCP 库，模块 github.com/pion/rtcp，不是 Pion RTP、Pion SDP、规范或虚构的独立 SR/RR 组件。本记录固定 Pion
+  RTCP 1.2.19、官方 tag v1.2.19 与 commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2，只记录 RFC3550 §6.4.1/§6.4.2 的 SenderReport/ReceiverReport
+  基础包字段 Marshal/Unmarshal 与 §4 大端字节序，不是完整 RTCP 实现的符合性结论。调用前提是 P=false、无 profile-specific extensions、RC 等于报告块数且为
+  0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24×RC 字节、header.Length=6+6×RC；RR 为 8+24×RC 字节、header.Length=1+6×RC。TotalLost
+  仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal 只在 >=1<<25 时拒绝并写低24位，Unmarshal 不作符号扩展，不能声称完整
+  signed24 处理。直接 Unmarshal 检查 V=2 与包类型、基础长度和报告块，但不核对 header.Length 或解释 padding，也不清空 Reports；错误可留下部分状态，复用目标不属于此契约。SR/RR
+  的 Marshal 在报告块超过31时拒绝，并生成 V=2、P=false 与相应包型/长度。64位 NTPTime、32位 RTPTime、SSRC、计数与报告统计字段仅编码调用方给定值，不证明时钟取样/同步、NTP/RTP映射、loss/jitter/RTT统计计算或实际收发。上游
+  SR “valid”测试配方实际52字节却用 length=7声明32字节，不作为合规向量；仅静态读源码与测试配方，未安装、导入、构建、运行上游或其测试。无完整 RTP/RTCP会话、compound/SDES-CNAME规则、发送间隔/成员/SSRC管理、其他RTCP包型、RFC5506、profile扩展、网络传输、SRTP/SRTCP、安全、第三方互通或
+  IA 采用主张；未纳入范围不表示库没有这些能力。
+
+
+  English scope and limitations:
+
+
+  This record pins Pion RTCP 1.2.19, official tag v1.2.19 and commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2, and
+  covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
+  and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
+  extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode target
+  for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with header.Length=1+6×RC.
+  TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is signed24 and may be negative;
+  the library uses uint32, Marshal rejects only values >=1<<25 and writes the low 24 bits, and Unmarshal does not
+  sign-extend. This is not complete signed24 handling. Direct Unmarshal checks V=2, packet type, base length and
+  report blocks, but does not validate header.Length or interpret padding, and does not clear Reports. Errors may
+  leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than 31 report blocks and
+  emits V=2, P=false and the appropriate packet type/length. The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts and
+  report statistics fields encode supplied values, not clock sampling/synchronization, NTP/RTP mapping, loss/jitter/RTT
+  computation or actual transport. The upstream SR “valid” test recipe contains 52 bytes but length=7 declares 32
+  bytes; it is not used as a conformance vector. Source and test recipes were inspected only, without installing,
+  importing, building or running upstream or its tests. No complete RTP/RTCP session, compound/SDES-CNAME rules,
+  scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile extensions, network transport, SRTP/SRTCP,
+  security, third-party interoperability or IA adoption is claimed. Unexamined capabilities are not asserted absent.'
+description_en: The whole open-source Pion Go RTCP library, module github.com/pion/rtcp, not Pion RTP, Pion SDP,
+  a standard or a fictional standalone SR/RR component. This record pins Pion RTCP 1.2.19, official tag v1.2.19
+  and commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2, and covers only SenderReport/ReceiverReport base packet field
+  Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2 and section 4 big-endian byte order, not full RTCP conformance.
+  Caller preconditions are P=false, no profile-specific extensions, RC equal to 0..31 report blocks, an exact single
+  complete packet, and a fresh zero-value decode target for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC;
+  RR must have 8+24×RC bytes with header.Length=1+6×RC. TotalLost is restricted to the nonnegative 0..0x7fffff subset.
+  RFC cumulative loss is signed24 and may be negative; the library uses uint32, Marshal rejects only values >=1<<25
+  and writes the low 24 bits, and Unmarshal does not sign-extend. This is not complete signed24 handling. Direct
+  Unmarshal checks V=2, packet type, base length and report blocks, but does not validate header.Length or interpret
+  padding, and does not clear Reports. Errors may leave partial state; target reuse is outside this contract. SR/RR
+  Marshal rejects more than 31 report blocks and emits V=2, P=false and the appropriate packet type/length. The
+  64-bit NTPTime, 32-bit RTPTime, SSRC, counts and report statistics fields encode supplied values, not clock sampling/synchronization,
+  NTP/RTP mapping, loss/jitter/RTT computation or actual transport. The upstream SR “valid” test recipe contains
+  52 bytes but length=7 declares 32 bytes; it is not used as a conformance vector. Source and test recipes were
+  inspected only, without installing, importing, building or running upstream or its tests. No complete RTP/RTCP
+  session, compound/SDES-CNAME rules, scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile
+  extensions, network transport, SRTP/SRTCP, security, third-party interoperability or IA adoption is claimed. Unexamined
+  capabilities are not asserted absent.
+open_source: true
+license_expression: MIT
+domains:
+- media
+- networking
+sources:
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/README.md
+  title: Whole Pion RTCP library identity
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/doc.go
+  title: Package explicitly cites RFC3550/5506; only SR/RR base fields selected
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/go.mod
+  title: Separate module github.com/pion/rtcp; not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/header.go
+  title: RFC3550 SR/RR packet identifiers; V=2 and count checks
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/packet.go
+  title: Factory uses header.Length; distinct from scoped direct APIs
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/sender_report.go
+  title: SR field offsets, big-endian encoding, Reports append and direct Length/P limits
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/receiver_report.go
+  title: RR field encoding, Reports reuse and direct Length/P limits
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/reception_report.go
+  title: 24-byte report fields; uint32 loss with >=1<<25 check, not signed24
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/sender_report_test.go
+  title: Static recipes only; valid 52-byte fixture declares 32, not a conformance vector
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/receiver_report_test.go
+  title: Static recipes only; 1<<25 loss rejection does not prove signed24
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/header_test.go
+  title: Header test recipes inspected, not run
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/util.go
+  title: Padding helper; extensions excluded
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/errors.go
+  title: Named errors are not proof all APIs enforce every condition
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/LICENSE
+  title: Fixed MIT license notice; not legal suitability advice
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/releases/tag/v1.2.19
+  title: Official release published 2026-10-01; separately pinned tag/commit
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-4
+  title: 'RFC3550 section 4: Byte order'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-6.4.1
+  title: 'RFC3550 section 6.4.1: SR fields and shared report-block layout'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-6.4.2
+  title: 'RFC3550 section 6.4.2: RR base layout'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#appendix-A.3
+  title: Signed24 loss and clamping; algorithm not claimed implemented
+  language: en
+  accessed: '2026-11-04'
+last_verified_at: '2026-11-04T19:43:04.487014+00:00'
+last_verified_by: Agent — OpenAI / dot / add_pion_rtcp_library; fixed sources only, no upstream execution
+record_created_at: '2026-11-04T19:52:01.864406+00:00'
+record_updated_at: '2026-11-04T19:52:01.864406+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_pion_rtcp_library
+  reviewer: Independent Agent — OpenAI / dot / review_pion_rtcp_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: pion_rtcp
+  acceptance_event_id: accept-20261104-pion-rtcp-1-2-19
+  reviewed_candidate_blob: 2e4969f246f753d186ae89f13e0d857fc4b5c9f6
+  reviewed_against_commit: 6472eb5951ef564558d9136c372cca0f3bdffa4a
+  candidate_executor: Agent — OpenAI / dot / add_pion_rtcp_library
+  canonical_serializer: Agent — OpenAI / dot / add_pion_rtcp_library
+  reviewed_packet_commit: 6472eb5951ef564558d9136c372cca0f3bdffa4a
+  reviewed_packet_blob: d82e3b08a6fe53dfaeaa0aaacf91bdfecc7d5b08
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/6472eb5951ef564558d9136c372cca0f3bdffa4a/01_State/Inbox/review-packets/pion-rtcp-1.2.19-20261104.yaml

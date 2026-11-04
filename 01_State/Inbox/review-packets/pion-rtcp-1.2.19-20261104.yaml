@@ -1,0 +1,29 @@
+packet_id: pion_rtcp_1219_20261104
+status: materialized
+reviewed_packet_commit: 6472eb5951ef564558d9136c372cca0f3bdffa4a
+reviewed_packet_blob: d82e3b08a6fe53dfaeaa0aaacf91bdfecc7d5b08
+reviewed_packet_path: 01_State/Inbox/review-packets/pion-rtcp-1.2.19-20261104.yaml
+baseline_commit: bcec4952e2fd22632730764ac0ca79dc0150313e
+executor: Agent — OpenAI / dot / add_pion_rtcp_library
+acceptance_events: 01_State/Inbox/acceptance-events/pion-rtcp-1.2.19-20261104.yaml
+objects:
+- candidate_id: pion_rtcp
+  canonical_id: pion_rtcp
+  acceptance_event_id: accept-20261104-pion-rtcp-1-2-19
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/6472eb5951ef564558d9136c372cca0f3bdffa4a/01_State/Inbox/review-packets/pion-rtcp-1.2.19-20261104.yaml
+relations:
+- path: 01_State/02_Relations/media-transport-implementations.yaml
+  relation_id: pion_rtcp_implements_rtp_rfc3550_sr_rr_packet_layout
+existing_objects:
+- path: 01_State/01_Objects/rtp_rfc3550.yaml
+  scope: Visible bilingual limits for the new Pion RTCP incoming edge only; original standard and Pion RTP records
+    preserved
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  category_id: media_network
+  canonical_id: pion_rtcp
+  semantics: Existing editorial navigation only, not a technical relation
+notes_zh:
+- 引用式回执；完整已审Candidate、拟入库字段与14份固定源码指纹保留于真实祖先commit/blob。
+- 仅SR/RR基础字段静态实现先例；P=false、无扩展、RC0..31、精确单包、fresh零值、TotalLost非负子域、directAPI限制与错误SR配方均双语可见；未运行上游。
+- 不改分类、模型、UI、规范、治理或维护方式；旧拒绝/未知结果保持。

@@ -4,12 +4,64 @@ kind: protocol
 name_zh: RTP 实时传输协议（RFC 3550）
 name_en: 'RTP: A Transport Protocol for Real-Time Applications (RFC 3550)'
 official_name: 'RTP: A Transport Protocol for Real-Time Applications'
-description_zh: 规定实时应用的数据传输协议 RTP 及控制协议 RTCP；本协议自身不保证及时交付或服务质量。 Pion RTP 1.10.6 的 implements 入边仅记录 X=false、调用方提供合法字段与一致填充大小的基础包布局编解码；源码检视不是完整
+description_zh: '规定实时应用的数据传输协议 RTP 及控制协议 RTCP；本协议自身不保证及时交付或服务质量。 Pion RTP 1.10.6 的 implements 入边仅记录 X=false、调用方提供合法字段与一致填充大小的基础包布局编解码；源码检视不是完整
   RTP/RTCP 会话、符合性或互通测试。
-description_en: Specifies RTP and RTCP for real-time applications; RTP itself does not guarantee timely delivery
+
+
+  以下仅限定新增的 Pion RTCP 1.2.19 入边，不改上述 Pion RTP 边界及 RFC 原事实：本记录固定 Pion RTCP 1.2.19、官方 tag v1.2.19 与 commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2，只记录
+  RFC3550 §6.4.1/§6.4.2 的 SenderReport/ReceiverReport 基础包字段 Marshal/Unmarshal 与 §4 大端字节序，不是完整 RTCP 实现的符合性结论。调用前提是
+  P=false、无 profile-specific extensions、RC 等于报告块数且为 0..31、只传一个精确裁边的完整包，并且每次解码使用新的零值对象。SR 长度须为 28+24×RC 字节、header.Length=6+6×RC；RR
+  为 8+24×RC 字节、header.Length=1+6×RC。TotalLost 仅限 0..0x7fffff 的非负子域；RFC 的累计丢失量是 signed24 且可为负，库用 uint32，Marshal 只在
+  >=1<<25 时拒绝并写低24位，Unmarshal 不作符号扩展，不能声称完整 signed24 处理。直接 Unmarshal 检查 V=2 与包类型、基础长度和报告块，但不核对 header.Length 或解释
+  padding，也不清空 Reports；错误可留下部分状态，复用目标不属于此契约。SR/RR 的 Marshal 在报告块超过31时拒绝，并生成 V=2、P=false 与相应包型/长度。64位 NTPTime、32位
+  RTPTime、SSRC、计数与报告统计字段仅编码调用方给定值，不证明时钟取样/同步、NTP/RTP映射、loss/jitter/RTT统计计算或实际收发。上游 SR “valid”测试配方实际52字节却用 length=7声明32字节，不作为合规向量；仅静态读源码与测试配方，未安装、导入、构建、运行上游或其测试。无完整
+  RTP/RTCP会话、compound/SDES-CNAME规则、发送间隔/成员/SSRC管理、其他RTCP包型、RFC5506、profile扩展、网络传输、SRTP/SRTCP、安全、第三方互通或 IA 采用主张；未纳入范围不表示库没有这些能力。
+
+
+  English scope of the Pion RTCP edge only:
+
+
+  This record pins Pion RTCP 1.2.19, official tag v1.2.19 and commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2, and
+  covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
+  and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
+  extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode target
+  for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with header.Length=1+6×RC.
+  TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is signed24 and may be negative;
+  the library uses uint32, Marshal rejects only values >=1<<25 and writes the low 24 bits, and Unmarshal does not
+  sign-extend. This is not complete signed24 handling. Direct Unmarshal checks V=2, packet type, base length and
+  report blocks, but does not validate header.Length or interpret padding, and does not clear Reports. Errors may
+  leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than 31 report blocks and
+  emits V=2, P=false and the appropriate packet type/length. The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts and
+  report statistics fields encode supplied values, not clock sampling/synchronization, NTP/RTP mapping, loss/jitter/RTT
+  computation or actual transport. The upstream SR “valid” test recipe contains 52 bytes but length=7 declares 32
+  bytes; it is not used as a conformance vector. Source and test recipes were inspected only, without installing,
+  importing, building or running upstream or its tests. No complete RTP/RTCP session, compound/SDES-CNAME rules,
+  scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile extensions, network transport, SRTP/SRTCP,
+  security, third-party interoperability or IA adoption is claimed. Unexamined capabilities are not asserted absent.'
+description_en: 'Specifies RTP and RTCP for real-time applications; RTP itself does not guarantee timely delivery
   or quality of service. The Pion RTP 1.10.6 implements edge records only base packet layout encoding/decoding with
   X=false, caller-valid fields and coherent padding sizes; source inspection is not complete RTP/RTCP sessions,
   conformance or interoperability testing.
+
+
+  The following limits only the new Pion RTCP 1.2.19 incoming edge; the existing Pion RTP scope and RFC facts remain
+  unchanged. This record pins Pion RTCP 1.2.19, official tag v1.2.19 and commit 09df03af9612ef9ed56c073b9a8de82f2ee035d2,
+  and covers only SenderReport/ReceiverReport base packet field Marshal/Unmarshal under RFC3550 sections 6.4.1/6.4.2
+  and section 4 big-endian byte order, not full RTCP conformance. Caller preconditions are P=false, no profile-specific
+  extensions, RC equal to 0..31 report blocks, an exact single complete packet, and a fresh zero-value decode target
+  for each call. SR must have 28+24×RC bytes with header.Length=6+6×RC; RR must have 8+24×RC bytes with header.Length=1+6×RC.
+  TotalLost is restricted to the nonnegative 0..0x7fffff subset. RFC cumulative loss is signed24 and may be negative;
+  the library uses uint32, Marshal rejects only values >=1<<25 and writes the low 24 bits, and Unmarshal does not
+  sign-extend. This is not complete signed24 handling. Direct Unmarshal checks V=2, packet type, base length and
+  report blocks, but does not validate header.Length or interpret padding, and does not clear Reports. Errors may
+  leave partial state; target reuse is outside this contract. SR/RR Marshal rejects more than 31 report blocks and
+  emits V=2, P=false and the appropriate packet type/length. The 64-bit NTPTime, 32-bit RTPTime, SSRC, counts and
+  report statistics fields encode supplied values, not clock sampling/synchronization, NTP/RTP mapping, loss/jitter/RTT
+  computation or actual transport. The upstream SR “valid” test recipe contains 52 bytes but length=7 declares 32
+  bytes; it is not used as a conformance vector. Source and test recipes were inspected only, without installing,
+  importing, building or running upstream or its tests. No complete RTP/RTCP session, compound/SDES-CNAME rules,
+  scheduling/member/SSRC management, other RTCP packet types, RFC5506, profile extensions, network transport, SRTP/SRTCP,
+  security, third-party interoperability or IA adoption is claimed. Unexamined capabilities are not asserted absent.'
 organization: ietf
 domains:
 - networking
@@ -55,15 +107,51 @@ sources:
   title: Effective padding size and deprecated-field fallback
   language: en
   accessed: '2026-10-31'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/doc.go
+  title: Package explicitly cites RFC3550/5506; only SR/RR base fields selected
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/packet.go
+  title: Factory uses header.Length; distinct from scoped direct APIs
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/sender_report.go
+  title: SR field offsets, big-endian encoding, Reports append and direct Length/P limits
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/receiver_report.go
+  title: RR field encoding, Reports reuse and direct Length/P limits
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/pion/rtcp/blob/09df03af9612ef9ed56c073b9a8de82f2ee035d2/reception_report.go
+  title: 24-byte report fields; uint32 loss with >=1<<25 check, not signed24
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-4
+  title: 'RFC3550 section 4: Byte order'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-6.4.1
+  title: 'RFC3550 section 6.4.1: SR fields and shared report-block layout'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#section-6.4.2
+  title: 'RFC3550 section 6.4.2: RR base layout'
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc3550.html#appendix-A.3
+  title: Signed24 loss and clamping; algorithm not claimed implemented
+  language: en
+  accessed: '2026-11-04'
 record_created_at: '2026-09-13T09:59:39+00:00'
-record_updated_at: '2026-10-31T21:05:00+00:00'
+record_updated_at: '2026-11-04T19:52:01.864406+00:00'
 metadata_backfilled_at: '2026-09-13T11:40:52+00:00'
 last_verified_at: '2026-09-13T09:59:39+00:00'
 last_verified_by: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / Pion RTP fixed-source semantic review
+  executor: Agent — OpenAI / dot / add_pion_rtcp_library
+  reviewer: Independent Agent — OpenAI / dot / review_pion_rtcp_semantics
   github_actor: ff6962757
 intake_provenance:
   candidate_id: ietf_rtp
