@@ -1,0 +1,71 @@
+id: python_m3u8_implements_hls_rfc8216
+type: relation
+name_zh: m3u8 有界实现 RFC 8216 媒体播放列表文本读写
+name_en: m3u8 implements bounded RFC 8216 Media Playlist text parsing and output
+source: python_m3u8
+relation: implements
+target: hls_rfc8216
+context:
+  version_context:
+    source: m3u8 6.0.0 / 49417d05602fc472b518ec61aa9b327cd00e079d
+    target: RFC 8216, August 2017 Informational Independent Submission; HLS protocol version 7, not IETF Standards
+      Track; later HLS extensions excluded
+  conditions_zh: 仅限固定 6.0.0 README 明示的 RFC 8216 对应及已有字符串→loads/M3U8→parse 字典→Media Playlist 模型→dumps 文本路径：EXTINF
+    duration/title、片段 URI 字符串、TARGETDURATION、MEDIA-SEQUENCE、VERSION、PLAYLIST-TYPE、ENDLIST 和 EXTM3U 识别/生成。默认 strict=False，loads
+    无 strict 参数；未知行不通用保留，回调可覆盖内建解析。strict 只有部分拒绝/版本规则，不保证首行、必需标签、重复项、时长或完整版本符合性。输出重排/规范化，MEDIA-SEQUENCE:0 可省略，未知标签/注释/字节往返不保真。只作固定源码静态检视，不是执行或完整
+    conforms_to；排除网络加载、媒体下载/播放/解码、加密/DRM、主播放列表选择、实时行为、后续 HLS 扩展、互通、安全、性能或 IA 采用；不改变既有目标或其他关系。
+  conditions_en: 'Only the fixed 6.0.0 README RFC 8216 mapping and existing-string → loads/M3U8 → parse dictionary
+    → Media Playlist model → dumps text path: EXTINF duration/title, segment URI strings, TARGETDURATION, MEDIA-SEQUENCE,
+    VERSION, PLAYLIST-TYPE, ENDLIST and EXTM3U recognition/generation. Default strict=False; loads has no strict
+    parameter. Unknown lines have no generic preservation path and callbacks can override built-in parsing. Strict
+    mode has limited rejection/version rules, not first-line, mandatory-tag, duplicate, duration or full version-conformance
+    guarantees. Output reorders/normalizes, can omit MEDIA-SEQUENCE:0 and does not preserve unknown tags/comments/bytes.
+    Static fixed-source inspection only, not execution or full conforms_to; network loading, media downloading/playback/decoding,
+    encryption/DRM, master-playlist selection, live behavior, later HLS extensions, interoperability, security,
+    performance and IA adoption are excluded. Existing target and other relations remain unchanged.'
+evidence:
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/README.md
+  title: Project identity and explicit RFC 8216 tag-section mapping; later-extension list is excluded
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/__init__.py
+  title: Existing-string loads entry point; network load is excluded
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/parser.py
+  title: Selected tag parsing and URI strings; permissive/default and custom-parser boundaries
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/model.py
+  title: M3U8 model initialization and selected dumps paths; normalization and truthiness omissions
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/protocol.py
+  title: Selected tag spellings; not a complete conformance claim
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/version_matching.py
+  title: Limited strict version matching; no VERSION means no matching errors
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/m3u8/version_matching_rules.py
+  title: Only three registered threshold-rule classes; not complete RFC section 7
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/globocom/m3u8/blob/49417d05602fc472b518ec61aa9b327cd00e079d/tests/test_strict_validations.py
+  title: Static xfail placeholders expose validation limits; tests not run
+  language: en
+  accessed: '2026-11-04'
+- url: https://www.rfc-editor.org/rfc/rfc8216.html#section-4.3
+  title: Original RFC 8216 selected playlist tags; partial field handling is not full conformance
+  language: en
+  accessed: '2026-11-04'
+last_verified_at: '2026-11-04T17:18:36.256381+00:00'
+last_verified_by: Agent — OpenAI / dot / add_m3u8_implementation; bounded static implementation relationship only
+record_created_at: '2026-11-04T17:21:50.717367+00:00'
+record_updated_at: '2026-11-04T17:21:50.717367+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_m3u8_implementation
+  reviewer: Independent Agent — OpenAI / dot / review_m3u8_semantics
+  github_actor: ff6962757

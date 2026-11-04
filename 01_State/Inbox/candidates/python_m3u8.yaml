@@ -1,0 +1,53 @@
+contract_version: candidate-object-v1
+candidate_id: python_m3u8
+label: m3u8 Python playlist library (6.0.0)
+publisher: Globo.com / m3u8 maintainers
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: globocom/m3u8
+- namespace: pypi
+  value: m3u8
+locators:
+- url: https://github.com/globocom/m3u8
+  role: official
+- url: https://github.com/globocom/m3u8/tree/49417d05602fc472b518ec61aa9b327cd00e079d
+  role: dated
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - python_m3u8
+  reasons:
+  - Accepted as canonical python_m3u8 by accept-20261104-python-m3u8-6-0-0. Frozen new-state Candidate 9f8d9e3d15d30f0678a723d740d761b015d62ebe
+    and review_required route replay against real ancestor b7b369a98fd2f07a4048a7729dc7d84c64fd347d; retained back-reference
+    prevents duplicate creation and authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- 'm3u8 is the whole Python playlist parsing and serialization library maintained by Globo.com, not a separate parser.py
+  or M3U8 class object. This record pins library release 6.0.0 to source commit 49417d05602fc472b518ec61aa9b327cd00e079d;
+  the library version is not an HLS protocol version, and neither latest-release status nor PyPI artifact equivalence
+  is claimed. The fixed README explicitly cites RFC 8216 and links the selected tags to specific sections. Static
+  inspection is limited to existing strings passed by loads to M3U8, whose parse call returns a dictionary used
+  to initialize a Media Playlist model, followed by dumps text output: EXTINF duration/title, segment URI strings,
+  TARGETDURATION, MEDIA-SEQUENCE, VERSION, PLAYLIST-TYPE, ENDLIST, and EXTM3U recognition/generation. URIs are only
+  strings here; no media was read. Default strict=False applies; loads exposes no strict parameter. The EXTM3U branch
+  only uses startswith and pass, not first-line or exact-marker validation. Lines unrecognized by built-in branches
+  or a callback have no generic preservation path by default. custom_tags_parser can receive # lines before built-in
+  processing and skip it by returning a truthy value, without automatically guaranteeing custom-tag output. strict=True
+  rejects unrecognized lines and EXTINF without a comma and runs limited version-threshold checks; it is not a full
+  RFC validator and does not establish mandatory-tag, uniqueness, numeric-range, segment-duration or complete version-rule
+  validation. Permissive int/float conversion can still fail. Output is generated from current attributes in a fixed
+  order, normalizing PLAYLIST-TYPE case and number formatting; explicit MEDIA-SEQUENCE:0 can be omitted. Unknown
+  tags, comments, whitespace, order and byte-for-byte round trips are not guaranteed. The target remains the August
+  2017 Informational Independent Submission RFC 8216 (HLS version 7), not an IETF Standards Track specification;
+  later HLS extensions are excluded. No upstream installation, import, build, execution, tests or examples, network
+  playlists or media access was performed. No network loading, master-playlist/variant selection, live reload, segment
+  generation, downloading, demuxing, decoding, playback, encryption/DRM, LL-HLS/SCTE35, arbitrary-input/tag support,
+  full client/server conformance, security, performance, third-party interoperability or IA adoption is established.
+  MIT is recorded only from fixed LICENSE/setup metadata, not as legal suitability advice; exclusions do not imply
+  that other library paths are absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_m3u8_implementation
+  reviewer: Independent Agent — OpenAI / dot / review_m3u8_semantics
