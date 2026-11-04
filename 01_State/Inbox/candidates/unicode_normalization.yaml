@@ -15,13 +15,13 @@ locators:
 - url: https://crates.io/crates/unicode-normalization/0.1.25
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - unicode_normalization
   reasons:
-  - Fresh current tree, all reachable local Git objects, all-state exact-identity PRs, issues, matching branches
-    and active-author coordination show no matching whole-library intake. The broader unicode-rs search contains
-    unrelated ICU4X ixdtf records, not this repository. Verified github:unicode-rs/unicode-normalization is distinct
-    from JuliaStrings/utf8proc and the Unicode standard; no identity merge/split.
+  - Accepted as canonical unicode_normalization by accept-20261104-unicode-normalization-0-1-25. Original new-state
+    Candidate 31cb817b8734d2c900676ad7acb6c53673b825e4 replays review_required against real ancestor cf38b69594fb6bbf3facebb357affc3a7ef97149;
+    this back-reference authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'This record pins the real crates.io release 0.1.25 (2025-10-30). The published .cargo_vcs_info on docs.rs and
@@ -72,4 +72,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_unicode_normalization_library
-  reviewer: pending independent semantic review
+  reviewer: /root/select_evidenced_coverage_continuation/add_unicode_normalization_library/review_normalization_semantics
