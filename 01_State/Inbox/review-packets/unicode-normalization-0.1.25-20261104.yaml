@@ -184,7 +184,7 @@ preflight:
 objects:
 - candidate_id: unicode_normalization
   candidate_path: 01_State/Inbox/candidates/unicode_normalization.yaml
-  candidate_blob: 289bdde4e15e3f6eb0189c0442ba75f6768251b1
+  candidate_blob: 31cb817b8734d2c900676ad7acb6c53673b825e4
   proposed_path: 01_State/01_Objects/unicode_normalization.yaml
   proposed_record:
     id: unicode_normalization
@@ -212,7 +212,7 @@ objects:
 
       此条 implements 仅静态描述有效 Rust &str 经 UnicodeNormalization.nfd()/nfc() 的 char 迭代路径，对应 Unicode17 第3章 §§3.11/3.12
       与 UAX15 revision57：规范分解使用预展开的 canonical_fully_decomposed 表，ASCII 和无映射标量直通，Hangul 使用算法；随后按规范组合类（CCC）稳定排序非starter片段，同类保持输入次序，CCC=0
-      为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，前一个未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
+      为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，待组合 starter 与当前字符之间已有的未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
       Full_Composition_Exclusion 排除项建立组合表，但未逐项验证表值。Hangul 实际音节范围 U+AC00..U+D7A3，小于 D7A4，不采用源码注释的 D7AF；L+V 与 LV+T
       组合不把 U+11A7 作为有效尾辅音。源码存在局部 unsafe，不是全 safe Rust 或安全认证。
 
@@ -225,7 +225,7 @@ objects:
       有限证据仅为固定上游源码断言配方：U+1E0B U+0323 的 NFD 预期 U+0064 U+0323 U+0307，NFC 预期 U+1E0D U+0307；U+D4DB 的 NFD 预期 U+1111 U+1171
       U+11B6，NFC保留该音节；U+2026 在 NFD/NFC 保留，NFKD/NFKC 三句点例只用于区分形式。NFKD/NFKC、quick check、CJK variants及其他API不纳入正面范围；quick
       check 不转换文本且可返回 Maybe。stream_safe() 是单独选择的处理，plain nfd()/nfc() 不自动插入 U+034F 或限制为30个非starter。本次未安装、导入、构建、运行上游、依赖、样例、测试或生成器，未下载大
-      testdata；tests/* 被 Cargo 排除，所读仅固定仓库配方，不是发布包测试或已通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
+      testdata；Cargo 排除 tests/* 下的 suite 配方；本次只读固定仓库源码，未核发布包所含测试，也未通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
       Unicode 符合性、编码转码、大小写折叠、字素分割、排序、IDNA/PRECIS、同形字符安全、跨实现互通、生产适用或 IA 采用保证；不核实的其他能力不表示不存在。
 
 
@@ -247,12 +247,12 @@ objects:
       uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles
       Hangul algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving
       equal-class order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes
-      canonically before table-based and algorithmic recomposition with blocking: the previous uncomposed character''s
-      CCC greater than or equal to the current CCC blocks composition, rather than merging every composable adjacent
-      pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table; individual
-      table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4, not
-      the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
-      blocks exist, so this is not entirely safe Rust or security certification.
+      canonically before table-based and algorithmic recomposition with blocking: an intervening uncomposed character
+      after the composee whose CCC is greater than or equal to the current CCC blocks composition, rather than merging
+      every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing
+      the composition table; individual table values were not exhaustively validated. Actual Hangul syllables are
+      U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid
+      trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security certification.
 
 
       Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -272,12 +272,12 @@ objects:
       quick check, CJK variants and other APIs are outside the positive slice. Quick check does not transform text
       and may return Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically
       insert U+034F or impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution,
-      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*;
-      these are fixed repository recipes, not package-contained tests or a passed official NormalizationTest/UCD
-      coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not
-      guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS,
-      confusable security, cross-implementation interoperability, production suitability or IA adoption. Unexamined
-      capabilities are not asserted absent.'
+      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes
+      under tests/*; only fixed repository source was inspected, with no package-test-content verification or passed
+      official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s
+      identity. This edge does not guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation,
+      collation, IDNA/PRECIS, confusable security, cross-implementation interoperability, production suitability
+      or IA adoption. Unexamined capabilities are not asserted absent.'
     description_en: 'The whole unicode-rs/unicode-normalization Rust library, not an internal NFD/NFC module, utf8proc
       or the Unicode standard. This record pins the real crates.io release 0.1.25 (2025-10-30). The published .cargo_vcs_info
       on docs.rs and official PR115 bind commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1. No v0.1.25 Git tag or
@@ -294,12 +294,12 @@ objects:
       uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles
       Hangul algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving
       equal-class order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes
-      canonically before table-based and algorithmic recomposition with blocking: the previous uncomposed character''s
-      CCC greater than or equal to the current CCC blocks composition, rather than merging every composable adjacent
-      pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table; individual
-      table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4, not
-      the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
-      blocks exist, so this is not entirely safe Rust or security certification.
+      canonically before table-based and algorithmic recomposition with blocking: an intervening uncomposed character
+      after the composee whose CCC is greater than or equal to the current CCC blocks composition, rather than merging
+      every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing
+      the composition table; individual table values were not exhaustively validated. Actual Hangul syllables are
+      U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid
+      trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security certification.
 
 
       Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -319,12 +319,12 @@ objects:
       quick check, CJK variants and other APIs are outside the positive slice. Quick check does not transform text
       and may return Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically
       insert U+034F or impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution,
-      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*;
-      these are fixed repository recipes, not package-contained tests or a passed official NormalizationTest/UCD
-      coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not
-      guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS,
-      confusable security, cross-implementation interoperability, production suitability or IA adoption. Unexamined
-      capabilities are not asserted absent.'
+      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes
+      under tests/*; only fixed repository source was inspected, with no package-test-content verification or passed
+      official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s
+      identity. This edge does not guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation,
+      collation, IDNA/PRECIS, confusable security, cross-implementation interoperability, production suitability
+      or IA adoption. Unexamined capabilities are not asserted absent.'
     open_source: true
     license_expression: MIT OR Apache-2.0
     domains:
@@ -472,7 +472,7 @@ existing_object_updates:
 
       此条 implements 仅静态描述有效 Rust &str 经 UnicodeNormalization.nfd()/nfc() 的 char 迭代路径，对应 Unicode17 第3章 §§3.11/3.12
       与 UAX15 revision57：规范分解使用预展开的 canonical_fully_decomposed 表，ASCII 和无映射标量直通，Hangul 使用算法；随后按规范组合类（CCC）稳定排序非starter片段，同类保持输入次序，CCC=0
-      为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，前一个未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
+      为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，待组合 starter 与当前字符之间已有的未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
       Full_Composition_Exclusion 排除项建立组合表，但未逐项验证表值。Hangul 实际音节范围 U+AC00..U+D7A3，小于 D7A4，不采用源码注释的 D7AF；L+V 与 LV+T
       组合不把 U+11A7 作为有效尾辅音。源码存在局部 unsafe，不是全 safe Rust 或安全认证。
 
@@ -485,7 +485,7 @@ existing_object_updates:
       有限证据仅为固定上游源码断言配方：U+1E0B U+0323 的 NFD 预期 U+0064 U+0323 U+0307，NFC 预期 U+1E0D U+0307；U+D4DB 的 NFD 预期 U+1111 U+1171
       U+11B6，NFC保留该音节；U+2026 在 NFD/NFC 保留，NFKD/NFKC 三句点例只用于区分形式。NFKD/NFKC、quick check、CJK variants及其他API不纳入正面范围；quick
       check 不转换文本且可返回 Maybe。stream_safe() 是单独选择的处理，plain nfd()/nfc() 不自动插入 U+034F 或限制为30个非starter。本次未安装、导入、构建、运行上游、依赖、样例、测试或生成器，未下载大
-      testdata；tests/* 被 Cargo 排除，所读仅固定仓库配方，不是发布包测试或已通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
+      testdata；Cargo 排除 tests/* 下的 suite 配方；本次只读固定仓库源码，未核发布包所含测试，也未通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
       Unicode 符合性、编码转码、大小写折叠、字素分割、排序、IDNA/PRECIS、同形字符安全、跨实现互通、生产适用或 IA 采用保证；不核实的其他能力不表示不存在。
 
 
@@ -507,12 +507,12 @@ existing_object_updates:
       uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles
       Hangul algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving
       equal-class order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes
-      canonically before table-based and algorithmic recomposition with blocking: the previous uncomposed character''s
-      CCC greater than or equal to the current CCC blocks composition, rather than merging every composable adjacent
-      pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table; individual
-      table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4, not
-      the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
-      blocks exist, so this is not entirely safe Rust or security certification.
+      canonically before table-based and algorithmic recomposition with blocking: an intervening uncomposed character
+      after the composee whose CCC is greater than or equal to the current CCC blocks composition, rather than merging
+      every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing
+      the composition table; individual table values were not exhaustively validated. Actual Hangul syllables are
+      U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid
+      trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security certification.
 
 
       Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -532,12 +532,12 @@ existing_object_updates:
       quick check, CJK variants and other APIs are outside the positive slice. Quick check does not transform text
       and may return Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically
       insert U+034F or impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution,
-      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*;
-      these are fixed repository recipes, not package-contained tests or a passed official NormalizationTest/UCD
-      coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not
-      guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS,
-      confusable security, cross-implementation interoperability, production suitability or IA adoption. Unexamined
-      capabilities are not asserted absent.'
+      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes
+      under tests/*; only fixed repository source was inspected, with no package-test-content verification or passed
+      official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s
+      identity. This edge does not guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation,
+      collation, IDNA/PRECIS, confusable security, cross-implementation interoperability, production suitability
+      or IA adoption. Unexamined capabilities are not asserted absent.'
     description_en: 'The universal character encoding standard. InteropAtlas bilingual text, YAML/JSON data, and
       most modern tooling rely on Unicode character representation.
 
@@ -559,12 +559,12 @@ existing_object_updates:
       uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles
       Hangul algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving
       equal-class order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes
-      canonically before table-based and algorithmic recomposition with blocking: the previous uncomposed character''s
-      CCC greater than or equal to the current CCC blocks composition, rather than merging every composable adjacent
-      pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table; individual
-      table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4, not
-      the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
-      blocks exist, so this is not entirely safe Rust or security certification.
+      canonically before table-based and algorithmic recomposition with blocking: an intervening uncomposed character
+      after the composee whose CCC is greater than or equal to the current CCC blocks composition, rather than merging
+      every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing
+      the composition table; individual table values were not exhaustively validated. Actual Hangul syllables are
+      U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid
+      trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security certification.
 
 
       Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -584,12 +584,12 @@ existing_object_updates:
       quick check, CJK variants and other APIs are outside the positive slice. Quick check does not transform text
       and may return Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically
       insert U+034F or impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution,
-      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*;
-      these are fixed repository recipes, not package-contained tests or a passed official NormalizationTest/UCD
-      coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not
-      guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS,
-      confusable security, cross-implementation interoperability, production suitability or IA adoption. Unexamined
-      capabilities are not asserted absent.'
+      examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes
+      under tests/*; only fixed repository source was inspected, with no package-test-content verification or passed
+      official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s
+      identity. This edge does not guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation,
+      collation, IDNA/PRECIS, confusable security, cross-implementation interoperability, production suitability
+      or IA adoption. Unexamined capabilities are not asserted absent.'
     domains:
     - text
     - internationalization
@@ -786,9 +786,9 @@ relations:
 
         此条 implements 仅静态描述有效 Rust &str 经 UnicodeNormalization.nfd()/nfc() 的 char 迭代路径，对应 Unicode17 第3章 §§3.11/3.12
         与 UAX15 revision57：规范分解使用预展开的 canonical_fully_decomposed 表，ASCII 和无映射标量直通，Hangul 使用算法；随后按规范组合类（CCC）稳定排序非starter片段，同类保持输入次序，CCC=0
-        为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，前一个未组合字符 CCC 大于等于当前 CCC 会阻塞，不是任意邻接可组合字符都合并；生成器依
-        Full_Composition_Exclusion 排除项建立组合表，但未逐项验证表值。Hangul 实际音节范围 U+AC00..U+D7A3，小于 D7A4，不采用源码注释的 D7AF；L+V 与 LV+T
-        组合不把 U+11A7 作为有效尾辅音。源码存在局部 unsafe，不是全 safe Rust 或安全认证。
+        为starter边界，不能以 General_Category=Mark 替代。NFC 先规范分解再按组合表和阻塞规则重组，待组合 starter 与当前字符之间已有的未组合字符 CCC 大于等于当前 CCC
+        会阻塞，不是任意邻接可组合字符都合并；生成器依 Full_Composition_Exclusion 排除项建立组合表，但未逐项验证表值。Hangul 实际音节范围 U+AC00..U+D7A3，小于 D7A4，不采用源码注释的
+        D7AF；L+V 与 LV+T 组合不把 U+11A7 作为有效尾辅音。源码存在局部 unsafe，不是全 safe Rust 或安全认证。
 
 
         输入前提是有效 Rust str/char，不接收任意非法 UTF-8 或 surrogate，不是畸形字节修复器。输出是 Unicode 标量，不是字节、字素簇、原位置索引或已分配字符验证。规范化可能改变标量数量、次序及
@@ -799,7 +799,7 @@ relations:
         有限证据仅为固定上游源码断言配方：U+1E0B U+0323 的 NFD 预期 U+0064 U+0323 U+0307，NFC 预期 U+1E0D U+0307；U+D4DB 的 NFD 预期 U+1111
         U+1171 U+11B6，NFC保留该音节；U+2026 在 NFD/NFC 保留，NFKD/NFKC 三句点例只用于区分形式。NFKD/NFKC、quick check、CJK variants及其他API不纳入正面范围；quick
         check 不转换文本且可返回 Maybe。stream_safe() 是单独选择的处理，plain nfd()/nfc() 不自动插入 U+034F 或限制为30个非starter。本次未安装、导入、构建、运行上游、依赖、样例、测试或生成器，未下载大
-        testdata；tests/* 被 Cargo 排除，所读仅固定仓库配方，不是发布包测试或已通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
+        testdata；Cargo 排除 tests/* 下的 suite 配方；本次只读固定仓库源码，未核发布包所含测试，也未通过官方 NormalizationTest/UCD 全覆盖。src/lib.rs 的0.1.20依赖示例不作为本版身份。此边不是完整
         Unicode 符合性、编码转码、大小写折叠、字素分割、排序、IDNA/PRECIS、同形字符安全、跨实现互通、生产适用或 IA 采用保证；不核实的其他能力不表示不存在。'
       conditions_en: 'This record pins the real crates.io release 0.1.25 (2025-10-30). The published .cargo_vcs_info
         on docs.rs and official PR115 bind commit 5a69b3bafb625caccdec7871a42bed0d9a6604d1. No v0.1.25 Git tag or
@@ -817,12 +817,13 @@ relations:
         decomposition uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through,
         and handles Hangul algorithmically. Nonstarter segments are stably ordered by canonical combining class
         (CCC), preserving equal-class order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute.
-        NFC decomposes canonically before table-based and algorithmic recomposition with blocking: the previous
-        uncomposed character''s CCC greater than or equal to the current CCC blocks composition, rather than merging
-        every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing
-        the composition table; individual table values were not exhaustively validated. Actual Hangul syllables
-        are U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as
-        a valid trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security certification.
+        NFC decomposes canonically before table-based and algorithmic recomposition with blocking: an intervening
+        uncomposed character after the composee whose CCC is greater than or equal to the current CCC blocks composition,
+        rather than merging every composable adjacent pair. The generator excludes Full_Composition_Exclusion entries
+        when constructing the composition table; individual table values were not exhaustively validated. Actual
+        Hangul syllables are U+AC00..U+D7A3, below D7A4, not the D7AF source comment. L+V and LV+T composition excludes
+        U+11A7 as a valid trailing consonant. Local unsafe blocks exist, so this is not entirely safe Rust or security
+        certification.
 
 
         Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -842,12 +843,12 @@ relations:
         quick check, CJK variants and other APIs are outside the positive slice. Quick check does not transform
         text and may return Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically
         insert U+034F or impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution,
-        examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*;
-        these are fixed repository recipes, not package-contained tests or a passed official NormalizationTest/UCD
-        coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not
-        guarantee full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS,
-        confusable security, cross-implementation interoperability, production suitability or IA adoption. Unexamined
-        capabilities are not asserted absent.'
+        examples, tests or generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes
+        under tests/*; only fixed repository source was inspected, with no package-test-content verification or
+        passed official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20 dependency example is not this
+        release''s identity. This edge does not guarantee full Unicode conformance, transcoding, case folding, grapheme
+        segmentation, collation, IDNA/PRECIS, confusable security, cross-implementation interoperability, production
+        suitability or IA adoption. Unexamined capabilities are not asserted absent.'
     evidence:
     - url: https://github.com/unicode-rs/unicode-normalization/blob/5a69b3bafb625caccdec7871a42bed0d9a6604d1/src/test.rs
       title: Finite upstream assertion recipes only, not executed

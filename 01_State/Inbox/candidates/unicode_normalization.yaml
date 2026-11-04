@@ -39,12 +39,12 @@ unknowns:
   uses pre-expanded canonical_fully_decomposed tables, passes ASCII and unmapped scalars through, and handles Hangul
   algorithmically. Nonstarter segments are stably ordered by canonical combining class (CCC), preserving equal-class
   order, with CCC=0 starter boundaries; General_Category=Mark is not a substitute. NFC decomposes canonically before
-  table-based and algorithmic recomposition with blocking: the previous uncomposed character''s CCC greater than
-  or equal to the current CCC blocks composition, rather than merging every composable adjacent pair. The generator
-  excludes Full_Composition_Exclusion entries when constructing the composition table; individual table values were
-  not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4, not the D7AF source comment.
-  L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe blocks exist, so this is
-  not entirely safe Rust or security certification.
+  table-based and algorithmic recomposition with blocking: an intervening uncomposed character after the composee
+  whose CCC is greater than or equal to the current CCC blocks composition, rather than merging every composable
+  adjacent pair. The generator excludes Full_Composition_Exclusion entries when constructing the composition table;
+  individual table values were not exhaustively validated. Actual Hangul syllables are U+AC00..U+D7A3, below D7A4,
+  not the D7AF source comment. L+V and LV+T composition excludes U+11A7 as a valid trailing consonant. Local unsafe
+  blocks exist, so this is not entirely safe Rust or security certification.
 
 
   Inputs must already be valid Rust str/char, not arbitrary invalid UTF-8 or surrogates; this is not malformed-byte
@@ -63,11 +63,12 @@ unknowns:
   CJK variants and other APIs are outside the positive slice. Quick check does not transform text and may return
   Maybe. stream_safe() is separate opt-in processing: plain nfd()/nfc() does not automatically insert U+034F or
   impose a 30-nonstarter limit. No upstream/dependency installation, import, build, execution, examples, tests or
-  generator run occurred, and large testdata was not downloaded. Cargo excludes tests/*; these are fixed repository
-  recipes, not package-contained tests or a passed official NormalizationTest/UCD coverage run. The src/lib.rs 0.1.20
-  dependency example is not this release''s identity. This edge does not guarantee full Unicode conformance, transcoding,
-  case folding, grapheme segmentation, collation, IDNA/PRECIS, confusable security, cross-implementation interoperability,
-  production suitability or IA adoption. Unexamined capabilities are not asserted absent.'
+  generator run occurred, and large testdata was not downloaded. Cargo excludes suite recipes under tests/*; only
+  fixed repository source was inspected, with no package-test-content verification or passed official NormalizationTest/UCD
+  coverage run. The src/lib.rs 0.1.20 dependency example is not this release''s identity. This edge does not guarantee
+  full Unicode conformance, transcoding, case folding, grapheme segmentation, collation, IDNA/PRECIS, confusable
+  security, cross-implementation interoperability, production suitability or IA adoption. Unexamined capabilities
+  are not asserted absent.'
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_unicode_normalization_library
