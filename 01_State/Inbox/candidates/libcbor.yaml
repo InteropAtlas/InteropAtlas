@@ -1,0 +1,60 @@
+contract_version: candidate-object-v1
+candidate_id: libcbor
+label: libcbor C CBOR library (0.12.0)
+publisher: Pavel Kalvoda and contributors / PJK
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: PJK/libcbor
+locators:
+- url: https://github.com/PJK/libcbor
+  role: official
+- url: https://github.com/PJK/libcbor/tree/ae000f44e8d2a69e1f72a738f7c0b6b4b7cc4fbf
+  role: dated
+- url: https://github.com/PJK/libcbor/releases/tag/v0.12.0
+  role: catalog
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - libcbor
+  reasons:
+  - Accepted as canonical libcbor by accept-20261104-libcbor-0-12-0. Original new-state Candidate 515c460512b567ab7730f607fc496373facb345f
+    replays review_required against real ancestor 9129b198b9549b95ea2715ea48c64ca862d06f14; this back-reference
+    authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- 'This record pins libcbor 0.12.0, official tag v0.12.0 and commit ae000f44e8d2a69e1f72a738f7c0b6b4b7cc4fbf, and
+  statically inspects only a limited cbor_stream_decode token-decoding slice of RFC8949 sections 3/3.1: major type
+  0 unsigned integers with embedded values or 1/2/4/8-byte big-endian arguments, and major type 2/3 definite byte/text
+  strings restricted to lengths 0..255 with an embedded length or a one-byte length argument, excluding 2/4/8-byte
+  length-argument branches. Callers must provide a genuinely readable buffer and correct source_size, valid callback
+  function pointers, and input lifetime covering callback use. They may copy the valid no-op functions in cbor_empty_callbacks
+  and replace selected callbacks; null pointers are not no-ops. Positive text mapping requires the caller to ensure
+  valid UTF-8 payload beforehand; this low-level function does not validate UTF-8. Each fresh call parses from the
+  current token start. FINISHED means exactly one callback, not complete decoding or validation of the buffer or
+  a CBOR document. Integer callbacks select uint8/16/32/64 by wire width, with uint8 for embedded values; total
+  read is 1/2/3/5/9 and required=0. Nonpreferred integer encodings such as 0x18 0x00 are also accepted, without
+  shortest-form or deterministic-encoding validation. For short definite strings, header size h is 1 or 2 and payload
+  size is n; completion passes a borrowed source+h pointer and byte length n, with read=h+n and required=0. It neither
+  copies payload, transfers ownership, adds NUL nor extends input lifetime. A zero-length callback can pass a pointer
+  after the header with length 0, which grants no permission to dereference beyond the buffer. Truncation yields
+  NEDATA, read=0 and no callback; required is the total buffer length needed from the original token start, not
+  an additional-byte count. No input requires 1 byte; a lone 0x58/0x78 requires 2; once n is known, incomplete payload
+  requires 2+n. No stream parser state is retained internally by this low-level function: callers preserve incomplete
+  prefixes, append data and retry, and advance by read after success. The fixed data.h comment saying no-input read=1
+  disagrees with code/test recipes: actual read=0 and required=1. Several callbacks.h definite/indefinite comments
+  are reversed, so actual dispatch controls this scope. Some upstream string recipes allocate only headers but overstate
+  source_size, and callbacks compare pointers/lengths only; they are not evidence of valid payload, UTF-8 or memory
+  safety. The 0x61 0xFF recipe is not valid-text evidence either. The truncation helper loops over available but
+  always calls decode(data,1), so it does not prove all-prefix coverage. Complete fixed source and test recipes
+  were read only, with no upstream installation, import, build, execution or tests and no decoder inputs. This edge
+  does not certify full RFC conformance or upstream full-conformance claims. Nesting, maps/duplicate keys, document
+  termination/trailing data, negatives, tags, floats, indefinite containers, encoding, high-level APIs, large-length/size_t
+  overflow paths, JSON conversion, cross-implementation interchange, security/resources/performance and IA adoption
+  are unverified. No allocations in the function body does not imply allocation-free or safe callbacks/applications.
+  Unexamined capabilities are not asserted absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_libcbor_library
+  reviewer: /root/select_evidenced_coverage_continuation/add_libcbor_library/review_libcbor_semantics

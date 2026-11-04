@@ -1,0 +1,31 @@
+packet_id: libcbor_0120_20261104
+status: materialized
+reviewed_packet_commit: 9129b198b9549b95ea2715ea48c64ca862d06f14
+reviewed_packet_blob: dad8f9d7fc3f408c158a73bfc527635a90755ff3
+reviewed_packet_path: 01_State/Inbox/review-packets/libcbor-0.12.0-20261104.yaml
+baseline_commit: c9024e82b98f31261fde0a17d820e8ec38b5fb4c
+executor: Agent — OpenAI / dot / add_libcbor_library
+acceptance_events: 01_State/Inbox/acceptance-events/libcbor-0.12.0-20261104.yaml
+objects:
+- candidate_id: libcbor
+  canonical_id: libcbor
+  acceptance_event_id: accept-20261104-libcbor-0-12-0
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/9129b198b9549b95ea2715ea48c64ca862d06f14/01_State/Inbox/review-packets/libcbor-0.12.0-20261104.yaml
+relations:
+- canonical_id: libcbor_implements_cbor_rfc8949
+  canonical_path: 01_State/02_Relations/data-serialization-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/9129b198b9549b95ea2715ea48c64ca862d06f14/01_State/Inbox/review-packets/libcbor-0.12.0-20261104.yaml
+existing_objects:
+- canonical_id: cbor_rfc8949
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/9129b198b9549b95ea2715ea48c64ca862d06f14/01_State/Inbox/review-packets/libcbor-0.12.0-20261104.yaml
+  scope: Only added incoming libcbor edge limitations and sources; original standard identity, facts, created time
+    and intake retained
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  category_id: syntax
+  canonical_id: libcbor
+  semantics: Existing editorial navigation only, not a technical relation
+notes_zh:
+- 引用式回执；完整已审 Candidate、拟入库字段与17份固定源码指纹保留于真实祖先 commit/blob。
+- 整体 libcbor 0.12.0；单条有界 implements 仅静态 token 解码，不是全 RFC 符合性。完整双语前提与限制在源/目标 description 及关系 context 保留。
+- 真实 github repo 身份，不以 locator 冒充 identifier；不改 cbor2、RFC原事实/历史 intake、分类/模型/UI/治理/维护；旧拒绝/未知结果保持。

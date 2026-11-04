@@ -1,0 +1,34 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261104-libcbor-0-12-0
+candidate_id: libcbor
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: libcbor
+review:
+  reviewer: /root/select_evidenced_coverage_continuation/add_libcbor_library/review_libcbor_semantics
+  reviewed_at: '2026-11-04T22:23:05.288490+00:00'
+  independent_from_executor: true
+  notes:
+  - Independent exact-byte actual F review supports whole libcbor 0.12.0, genuine github:PJK/libcbor and one bounded
+    implements edge to existing RFC8949.
+  - The static uint and short definite byte/text token slice has genuine buffer/callback and valid UTF-8 preconditions.
+    FINISHED is one callback, NEDATA read=0 and required is total length, input is borrowed and parser state is
+    caller-owned. Nonpreferred uint and source/test pitfalls remain visible in both languages at both endpoints.
+  - reviewed_at is actual independent F report completion, not serialization time. C/H/P/M and publication have
+    separate checks and reviews.
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/9129b198b9549b95ea2715ea48c64ca862d06f14/01_State/Inbox/review-packets/libcbor-0.12.0-20261104.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/515c460512b567ab7730f607fc496373facb345f
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/dad8f9d7fc3f408c158a73bfc527635a90755ff3
+decided_at: '2026-11-04T22:23:36.574685+00:00'
+notes:
+- One library, one bounded implements relation, one existing capability reference and syntax editorial membership.
+  No new taxonomy/schema/UI/governance/maintenance mechanism.
+- Original standard facts, identity, created time, historical intake and cbor2 preserved. Target only adds the incoming-edge
+  scope and sources, with actual update/contribution metadata.
+- Full new-state Candidate and pending proposal remain in actual ancestor F; current packet is a reference receipt.
+  All prior holds preserved.
