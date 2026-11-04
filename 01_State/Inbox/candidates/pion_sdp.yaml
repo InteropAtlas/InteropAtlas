@@ -13,11 +13,13 @@ locators:
 - url: https://github.com/pion/sdp/tree/8921edc83d51945017b2e1a987733a23bb9a9004
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - pion_sdp
   reasons:
-  - Fresh whole-repository/history and visible all-state PR/issue searches have no matching pion/sdp library identity.
-    Existing pion_rtp is a different repository and sdp_rfc8866 is a standard, not this library.
+  - Accepted as canonical pion_sdp by accept-20261104-pion-sdp-3-0-20. Frozen new-state Candidate e03191d9f4e6015ec21ef3a5e9cfacaa6f116712
+    and review_required route replay against real ancestor 510cf25b42fb3f6158cbf416f4f2969d60977c67; current back-reference
+    prevents duplicate creation and authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - Pion SDP is the whole Pion Go library for session-description text parsing and serialization, module github.com/pion/sdp/v3,
@@ -49,4 +51,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_pion_sdp_library
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / review_pion_sdp_semantics
