@@ -1,0 +1,63 @@
+contract_version: candidate-object-v1
+candidate_id: h11
+label: h11 Python HTTP/1.1 state-machine library (0.16.0)
+publisher: Nathaniel J. Smith and contributors / python-hyper
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: python-hyper/h11
+locators:
+- url: https://github.com/python-hyper/h11
+  role: official
+- url: https://github.com/python-hyper/h11/tree/1c5b07581f058886c8bdd87adababd7d959dc7ca
+  role: dated
+- url: https://pypi.org/project/h11/0.16.0/
+  role: catalog
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - h11
+  reasons:
+  - Accepted as canonical h11 by accept-20261104-h11-0-16-0. Frozen new-state Candidate fc78ceb0134f6e43a6b720308c4b6fc2feec7c24
+    and review_required route replay against real ancestor 695233ac945ab5306d011dedb543b509d0b1a487; this back-reference
+    authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- 'This record pins h11 0.16.0, official tag v0.16.0 and commit 1c5b07581f058886c8bdd87adababd7d959dc7ca, and statically
+  inspects only the receiving/parsing slice for ordinary HTTP/1.1 GET/POST requests and their matching final 200
+  responses. The caller must first establish the correct request method and legal event order in the state machine.
+  Connection.receive_data only buffers bytes and returns None, not events; next_event parses one event and changes
+  state, or returns NEED_DATA / PAUSED. The fixed README event-return summary and api.rst closing-section claim
+  that receive_data returns ConnectionClosed disagree with code; this record follows the fixed code. For the selected
+  ordinary messages, supported Transfer-Encoding: chunked takes precedence over valid Content-Length; without TE,
+  valid CL is used; without either, a request has a zero-byte body and a response is EOF-framed. This is receive-side
+  framing selection, not advice to send ambiguous headers or a claim about send-side automatic headers. Data can
+  be emitted incrementally without waiting for the whole body. Premature EOF during an incomplete CL body, chunked
+  body or headers raises RemoteProtocolError; EOF instead ends an EOF-framed response body with EndOfMessage, followed
+  by ConnectionClosed as state permits. receive_data(b"") means EOF, not an ordinary empty fragment. Repeated EOF
+  is allowed, and nonempty bytes after EOF raise RuntimeError; buffering or PAUSED can delay a closing event. Peer
+  DONE with nonempty receive buffer yields PAUSED; DONE with no buffered data and no EOF can yield NEED_DATA, so
+  DONE does not always mean PAUSED. The default max_incomplete_event_size=16384 is checked only after next_event
+  obtains NEED_DATA, and only remaining receive-buffer length strictly greater than the limit triggers RemoteProtocolError
+  (error_status_hint=431); equality does not fail this check. Complete events and PAUSED buffers can temporarily
+  exceed it. This is not a receive_data hard cutoff, complete-header total-size limit, body limit or total-memory
+  guarantee; the application retains I/O, backpressure and resource-limit duties. A next_event parsing or state-processing
+  exception sets their_state to ERROR and later next_event calls keep failing, without rollback or recovery through
+  start_next_cycle. start_next_cycle resets both sides to IDLE only when both are DONE. An early call raises LocalProtocolError
+  without itself damaging the connection and may be retried when ready. Connection: close and other states prevent
+  reuse; indefinite reuse is not promised. HEAD, CONNECT, Upgrade, informational responses, other status codes,
+  HTTP/1.0 compatibility, complete header/extension/trailer conformance and send-side encoding acceptance are outside
+  this slice. The whole library contains no I/O. Real networking, sockets/TLS/DNS, a complete client/server, routing,
+  authentication, content negotiation, cross-implementation interoperability, full RFC conformance, security protection,
+  performance/memory guarantees, production fitness and IA adoption are not established. Complete fixed source and
+  test recipes were read only, with no upstream installation, import, build, execution or tests. PyPI dates this
+  release 2025-04-24, while the fixed changelog says 2025-04-23; these separate dates are retained. Upstream setup
+  still classifies Alpha; released does not imply stable or mature. web_resource_transfer and transport are existing
+  capability-reference/editorial-navigation mechanisms, not a technical edge or executed network transfer. No technical
+  relation is added, particularly no forced mapping from the RFC7230 framing citation to shared-semantics RFC9110.
+  Unexamined capabilities are not asserted absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_h11_library
+  reviewer: Agent — OpenAI / dot / review_h11_semantics
