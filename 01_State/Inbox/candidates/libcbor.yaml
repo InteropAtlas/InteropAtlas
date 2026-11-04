@@ -40,19 +40,19 @@ unknowns:
   after the header with length 0, which grants no permission to dereference beyond the buffer. Truncation yields
   NEDATA, read=0 and no callback; required is the total buffer length needed from the original token start, not
   an additional-byte count. No input requires 1 byte; a lone 0x58/0x78 requires 2; once n is known, incomplete payload
-  requires 2+n. No stream parser state is retained internally: callers preserve incomplete prefixes, append data
-  and retry, and advance by read after success. The fixed data.h comment saying no-input read=1 disagrees with code/test
-  recipes: actual read=0 and required=1. Several callbacks.h definite/indefinite comments are reversed, so actual
-  dispatch controls this scope. Some upstream string recipes allocate only headers but overstate source_size, and
-  callbacks compare pointers/lengths only; they are not evidence of valid payload, UTF-8 or memory safety. The 0x61
-  0xFF recipe is not valid-text evidence either. The truncation helper loops over available but always calls decode(data,1),
-  so it does not prove all-prefix coverage. Complete fixed source and test recipes were read only, with no upstream
-  installation, import, build, execution or tests and no decoder inputs. This edge does not certify full RFC conformance
-  or upstream full-conformance claims. Nesting, maps/duplicate keys, document termination/trailing data, negatives,
-  tags, floats, indefinite containers, encoding, high-level APIs, large-length/size_t overflow paths, JSON conversion,
-  cross-implementation interchange, security/resources/performance and IA adoption are unverified. No allocations
-  in the function body does not imply allocation-free or safe callbacks/applications. Unexamined capabilities are
-  not asserted absent.'
+  requires 2+n. No stream parser state is retained internally by this low-level function: callers preserve incomplete
+  prefixes, append data and retry, and advance by read after success. The fixed data.h comment saying no-input read=1
+  disagrees with code/test recipes: actual read=0 and required=1. Several callbacks.h definite/indefinite comments
+  are reversed, so actual dispatch controls this scope. Some upstream string recipes allocate only headers but overstate
+  source_size, and callbacks compare pointers/lengths only; they are not evidence of valid payload, UTF-8 or memory
+  safety. The 0x61 0xFF recipe is not valid-text evidence either. The truncation helper loops over available but
+  always calls decode(data,1), so it does not prove all-prefix coverage. Complete fixed source and test recipes
+  were read only, with no upstream installation, import, build, execution or tests and no decoder inputs. This edge
+  does not certify full RFC conformance or upstream full-conformance claims. Nesting, maps/duplicate keys, document
+  termination/trailing data, negatives, tags, floats, indefinite containers, encoding, high-level APIs, large-length/size_t
+  overflow paths, JSON conversion, cross-implementation interchange, security/resources/performance and IA adoption
+  are unverified. No allocations in the function body does not imply allocation-free or safe callbacks/applications.
+  Unexamined capabilities are not asserted absent.'
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_libcbor_library
