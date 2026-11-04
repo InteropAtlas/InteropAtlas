@@ -1,0 +1,43 @@
+id: python_json_patch_implements_json_patch_rfc6902
+type: relation
+name_zh: python-json-patch 有界实现 RFC 6902 补丁应用
+name_en: python-json-patch implements bounded RFC 6902 patch application
+source: python_json_patch
+relation: implements
+target: json_patch_rfc6902
+context:
+  version_context:
+    source: python-json-patch 1.42 / 004f8cb832cb1fbb3141a5f06ab00440ca7c91b9
+    target: RFC 6902, April 2013 original publication; existing RFC 4627 reference and unreviewed errata boundary
+      unchanged
+  conditions_zh: 仅限固定 README 明示 RFC 6902 目标、源码登记的六种内建操作及 apply_patch → JsonPatch.apply 顺序应用路径；静态证据不是运行验证或完整 conforms_to。限定普通
+    JSON 形状 dict/list 数据，不为任意输入、重复名称、自定义操作或容器担保。默认复制、非原子就地应用、opt-in atomic 的普通 dict/list 恢复限制和根替换返回值均按对象描述适用。不从
+    HTTP PATCH 推导库原子性，不核验六项勘误，不修改标准对象，不新增 JSON Merge Patch、JSON Pointer 依赖版本或 IA 采用声明。
+  conditions_en: Limited to the fixed README RFC 6902 purpose, the six registered built-in operations and the sequential
+    apply_patch → JsonPatch.apply path. Static evidence is not runtime validation or full conforms_to. Scope is
+    plain JSON-shaped dict/list data, not arbitrary-input, duplicate-name, custom-operation or custom-container
+    guarantees. Default copying, non-atomic in-place application, opt-in atomic restoration limits and root-return
+    requirements apply as described on the object. No HTTP PATCH atomicity inference, errata verification, target
+    change, JSON Merge Patch claim, version-specific JSON Pointer dependency relation or IA adoption.
+evidence:
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/README.md
+  title: Project identity and explicit RFC 6902 application purpose; six-operation map is in source
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/jsonpatch.py
+  title: Version 1.42, six built-in operations and sequential apply/copy/rollback/root-return paths; static inspection
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/doc/tutorial.rst
+  title: Failure/atomic/custom-container/root-replacement limits and examples; examples not executed
+  language: en
+  accessed: '2026-11-04'
+last_verified_at: '2026-11-04T16:06:03.864719+00:00'
+last_verified_by: Agent — OpenAI / dot / add_python_json_patch; bounded static implementation relationship only
+record_created_at: '2026-11-04T16:18:51.180041+00:00'
+record_updated_at: '2026-11-04T16:18:51.180041+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_python_json_patch
+  reviewer: Independent Agent — OpenAI / dot / review_patch_semantics
+  github_actor: ff6962757

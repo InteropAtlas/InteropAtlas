@@ -1,0 +1,102 @@
+id: python_json_patch
+type: system
+kind: library
+name_zh: python-json-patch Python JSON Patch 库
+name_en: python-json-patch Python JSON Patch library
+official_name: python-json-patch
+version: '1.42'
+external_identifiers:
+- namespace: github
+  value: stefankoegl/python-json-patch
+- namespace: pypi
+  value: jsonpatch
+official_url: https://github.com/stefankoegl/python-json-patch
+description_zh: 'python-json-patch 是 Python JSON Patch 库，发行包名为 jsonpatch；本记录固定 v1.42 的源码 commit 004f8cb832cb1fbb3141a5f06ab00440ca7c91b9，不声称已核验
+  PyPI 构建产物。README 明确以 RFC 6902 为应用目标，源码登记 add、remove、replace、move、copy、test 六种内建操作，apply_patch 调用 JsonPatch.apply
+  依序应用。此处是静态源码与文档先例，不是执行实例或完整符合性认证。对普通 JSON 形状的 dict/list 数据及内建操作，默认 in_place=False 深复制输入，失败停止并不把已完成的复制件修改写回原件；in_place=True、atomic=False
+  默认不回滚已发生修改。另行设置 atomic=True 与 in_place=True 时，内建操作通过日志撤销失败前的修改，文档将精确恢复保证限定于普通 dict/list；defaultdict 等读取即变更的容器不在保证内。自定义操作可能走复制恢复，嵌套容器会被副本替换，任意额外状态不保证恢复。根替换返回新值而不能重新绑定调用方变量，即使
+  in_place=True 也必须使用返回值；原容器成员此前可能已改变。只建立到现有 RFC 6902 原始出版物的有界 implements 关系，不改变其 2013 年 4 月、RFC 4627 引用与六项勘误未核边界。没有安装、导入或执行上游、doctest、测试、CLI、网络或服务；不主张任意输入/重复名称校验、补丁生成正确性、完整
+  RFC 符合性、HTTP PATCH 原子性、安全、性能、第三方互通或 IA 采用。BSD-3-Clause 仅按固定源码和 LICENSE 记录。
+
+
+  English scope and limitations:
+
+
+  python-json-patch is a Python JSON Patch library distributed under the name jsonpatch, pinned here to v1.42 source
+  commit 004f8cb832cb1fbb3141a5f06ab00440ca7c91b9; no PyPI build artifact equivalence was checked. The README identifies
+  RFC 6902 application as its purpose. The source registers six built-in operations (add, remove, replace, move,
+  copy, test), and apply_patch delegates sequential application to JsonPatch.apply. This is a static source/documentation
+  precedent, not an executed example or full conformance certification. For plain JSON-shaped dict/list data and
+  built-in operations, default in_place=False deep-copies the input; a failure stops application without copying
+  partial changes back to the original. Default in_place=True, atomic=False does not roll back changes already made.
+  Opting into atomic=True with in_place=True journals built-in mutations for rollback; the documented exact-restoration
+  guarantee is limited to plain dict/list containers, excluding read-mutating containers such as defaultdict. Custom
+  operations can use copy-based restoration, replacing nested containers with copies and not necessarily restoring
+  arbitrary extra state. Root replacement returns a new value rather than rebinding the caller variable, so callers
+  must use the result even with in_place=True; earlier member changes to the original may remain. Only a bounded
+  implements relation to the existing April 2013 RFC 6902 publication is asserted; its original RFC 4627 reference
+  and six unreviewed errata remain unchanged. No upstream installation, import, execution, doctests, tests, CLI,
+  network or service was performed. No arbitrary-input/duplicate-name validation, diff-generation correctness, full
+  RFC conformance, HTTP PATCH atomicity, security, performance, third-party interoperability or IA adoption is established.
+  BSD-3-Clause is recorded from fixed source and LICENSE only.'
+description_en: python-json-patch is a Python JSON Patch library distributed under the name jsonpatch, pinned here
+  to v1.42 source commit 004f8cb832cb1fbb3141a5f06ab00440ca7c91b9; no PyPI build artifact equivalence was checked.
+  The README identifies RFC 6902 application as its purpose. The source registers six built-in operations (add,
+  remove, replace, move, copy, test), and apply_patch delegates sequential application to JsonPatch.apply. This
+  is a static source/documentation precedent, not an executed example or full conformance certification. For plain
+  JSON-shaped dict/list data and built-in operations, default in_place=False deep-copies the input; a failure stops
+  application without copying partial changes back to the original. Default in_place=True, atomic=False does not
+  roll back changes already made. Opting into atomic=True with in_place=True journals built-in mutations for rollback;
+  the documented exact-restoration guarantee is limited to plain dict/list containers, excluding read-mutating containers
+  such as defaultdict. Custom operations can use copy-based restoration, replacing nested containers with copies
+  and not necessarily restoring arbitrary extra state. Root replacement returns a new value rather than rebinding
+  the caller variable, so callers must use the result even with in_place=True; earlier member changes to the original
+  may remain. Only a bounded implements relation to the existing April 2013 RFC 6902 publication is asserted; its
+  original RFC 4627 reference and six unreviewed errata remain unchanged. No upstream installation, import, execution,
+  doctests, tests, CLI, network or service was performed. No arbitrary-input/duplicate-name validation, diff-generation
+  correctness, full RFC conformance, HTTP PATCH atomicity, security, performance, third-party interoperability or
+  IA adoption is established. BSD-3-Clause is recorded from fixed source and LICENSE only.
+domains:
+- structured_data
+open_source: true
+license_expression: BSD-3-Clause
+sources:
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/README.md
+  title: Project identity and explicit RFC 6902 application purpose; six-operation map is in source
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/jsonpatch.py
+  title: Version 1.42, six built-in operations and sequential apply/copy/rollback/root-return paths; static inspection
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/doc/tutorial.rst
+  title: Failure/atomic/custom-container/root-replacement limits and examples; examples not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/setup.py
+  title: Distribution name jsonpatch and source-derived version metadata; setup not executed
+  language: en
+  accessed: '2026-11-04'
+- url: https://github.com/stefankoegl/python-json-patch/blob/004f8cb832cb1fbb3141a5f06ab00440ca7c91b9/LICENSE
+  title: Fixed source license notice; no legal suitability assessment
+  language: en
+  accessed: '2026-11-04'
+last_verified_at: '2026-11-04T16:06:03.864719+00:00'
+last_verified_by: Agent — OpenAI / dot / add_python_json_patch; fixed source/documentation only, no upstream execution
+record_created_at: '2026-11-04T16:18:51.180041+00:00'
+record_updated_at: '2026-11-04T16:18:51.180041+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_python_json_patch
+  reviewer: Independent Agent — OpenAI / dot / review_patch_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: python_json_patch
+  acceptance_event_id: accept-20261104-python-json-patch-1-42
+  reviewed_candidate_blob: 784c42499b6aca11e3a137443699693e033ccb68
+  reviewed_against_commit: 6d41009163490daf44acfb5a9a16ebd3b196e839
+  candidate_executor: Agent — OpenAI / dot / add_python_json_patch
+  canonical_serializer: Agent — OpenAI / dot / add_python_json_patch
+  reviewed_packet_commit: 6d41009163490daf44acfb5a9a16ebd3b196e839
+  reviewed_packet_blob: c24ef5ba9294fad0002039ac3c6c3d24a10658cc
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/6d41009163490daf44acfb5a9a16ebd3b196e839/01_State/Inbox/review-packets/python-json-patch-1.42-20261104.yaml
