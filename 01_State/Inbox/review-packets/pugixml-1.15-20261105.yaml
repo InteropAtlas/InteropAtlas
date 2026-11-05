@@ -1,0 +1,612 @@
+packet_id: pugixml_115_20261105
+status: pending_independent_semantic_review
+baseline_commit: 871cb3ae6cd9e5c75eec042d2bec8390750b39c4
+executor: Agent — OpenAI / dot / add_next_interop_library
+reviewer: null
+review_scope:
+- One whole pugixml library, one bounded implements edge to existing xml_1.0_second_edition, syntax editorial navigation.
+  No additional capability inferred.
+- Both endpoints expose equivalent full bilingual bounds in descriptions; existing target identity, original facts,
+  scope_notes, verification dates and intake preserved; only new incoming-edge appendix/sources added.
+- No taxonomy, schema, runtime, UI, governance or maintenance changes.
+work_item_preflight:
+  observed_at: '2026-11-05T02:11:33.917692+00:00'
+  main: 871cb3ae6cd9e5c75eec042d2bec8390750b39c4
+  open_pull_requests:
+  - 680
+  - 672
+  - 591
+  - 498
+  - 416
+  history:
+    shallow:
+      command:
+      - rev-parse
+      - --is-shallow-repository
+      exit_code: 0
+      stdout: 'false
+
+        '
+      stderr: ''
+    tree:
+      command:
+      - grep
+      - -inE
+      - pugixml|4923301
+      - 871cb3ae6cd9e5c75eec042d2bec8390750b39c4
+      - --
+      - 01_State
+      - 03_Evolution
+      exit_code: 1
+      stdout: ''
+      stderr: ''
+    history:
+      command:
+      - log
+      - --all
+      - --oneline
+      - -G
+      - pugixml|4923301
+      - --
+      - 01_State
+      - 03_Evolution
+      exit_code: 0
+      stdout: ''
+      stderr: ''
+    paths:
+      command:
+      - log
+      - --all
+      - --oneline
+      - --
+      - '*pugixml*'
+      exit_code: 0
+      stdout: ''
+      stderr: ''
+  all_state_matching_PRs: []
+  matching_issues: []
+  remote_branch_count: 258
+  matching_branches: []
+  limits: Visible accessible sources and reachable local history, not inaccessible/deleted/unreachable histories.
+official_source_manifest:
+  repository: zeux/pugixml
+  repository_id: 4923301
+  fork: false
+  tag: v1.15
+  tag_type: lightweight
+  commit: ee86beb30e4973f5feffe3ce63bfa4fbadf72f38
+  tree: 3aaf3c60e8a170f573facc54d5b41e0a9b7a6a4d
+  release_date: '2025-01-10'
+  files:
+  - path: README.md
+    blob: 1d49def009e19e7b19370d994f6118cf482dada7
+    bytes: 3062
+    sha256: 667553d89e287203ca6ed690fa8cfc0ba24b3d7e624724bf14e6c63aab44911e
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/README.md
+  - path: LICENSE.md
+    blob: 1ea0d5eef9a8c6613843b678d947f62b9be561f5
+    bytes: 1079
+    sha256: 0d0b3772af2fa45628a548a3b34583707ebcc68bb6f83ec48ca273aab4a510f1
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/LICENSE.md
+  - path: src/pugiconfig.hpp
+    blob: 5f1bafdbe91e559e0d918d6e8f79ad3e6051bbc9
+    bytes: 3053
+    sha256: 981cd9ad3313878817d7b548c9929cc09d3bc42be2c0c1dcb0d77290fc98b92d
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugiconfig.hpp
+  - path: src/pugixml.hpp
+    blob: 74e884b53ec2cc7c6ba1fc11e3e0d1f5436b9734
+    bytes: 55963
+    sha256: 2555f950fd080e02ff16f36698ddf8d4a46d3a484b9337b4cbfc6300043be734
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.hpp
+  - path: src/pugixml.cpp
+    blob: 53a0526e42d46f70b68cf9f8970b3439a28fb057
+    bytes: 356069
+    sha256: 67c3892efba51d4e4eb6ce5609286fd2703aede6ba49a6d2130068cad09e0744
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.cpp
+  - path: docs/manual.adoc
+    blob: 5c04ff680f624a422bafe33c09997051e6e97f5a
+    bytes: 237795
+    sha256: e8e728f7ff0ebb34b4b65508c5a09ae421641f05b250b5465ece8cab9fc5ebc3
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/docs/manual.adoc
+  - path: tests/test_write.cpp
+    blob: 0410e82ef01c2bdecfac9a1756c9378abed46e00
+    bytes: 22942
+    sha256: 4d1bb893bbe5af47e6429af0474c910509fbf81af959eeec434c4727fbe4767f
+    url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/tests/test_write.cpp
+  execution: Static only; no upstream installation/import/build/run/test; no release archive verification
+preflight:
+  canonical_records: 294
+  candidate_records: 285
+  machine_route: review_required
+  normalized_identifier_collisions: []
+  other_candidate_collisions: []
+  candidate_errors: []
+  nonempty_P6_identifier_set:
+  - - github
+    - zeux/pugixml
+objects:
+- candidate_id: pugixml
+  candidate_path: 01_State/Inbox/candidates/pugixml.yaml
+  candidate_blob: e5bc47476497bd45c94e7588c8ac5e1014d85780
+  proposed_path: 01_State/01_Objects/pugixml.yaml
+  proposed_record:
+    id: pugixml
+    type: system
+    kind: library
+    name_zh: pugixml C++ XML 处理库
+    name_en: pugixml C++ XML processing library
+    official_name: pugixml
+    version: '1.15'
+    versions:
+    - version: '1.15'
+      date: '2025-01-10'
+      status: released
+      url: https://github.com/zeux/pugixml/releases/tag/v1.15
+    external_identifiers:
+    - namespace: github
+      value: zeux/pugixml
+    official_url: https://pugixml.org/
+    description_zh: '主体是整体 pugixml 开源 C++ XML 处理库，不是独立转义模块或 XML 标准。固定 pugixml 1.15 源码 ee86beb30e4973f5feffe3ce63bfa4fbadf72f38。仅将整体库中的普通元素字符数据（node_pcdata）序列化转义路径映射到
+      XML 1.0 第二版（2000-10-06）第 2.2、2.4、4.1、4.6 节，不声称库明确以该旧版为完整实现目标。前提是 PUGIXML_WCHAR_MODE 未定义（char 模式），使用 xml_node::print(xml_writer&,
+      ...) 且显式 encoding_utf8、flags 恰为 format_raw，输入为正确 NUL 结尾的有效 UTF-8；除结尾终止符外，所有码点必须属于该版 [2] Char：U+0009、U+000A、U+000D、U+0020–U+D7FF、U+E000–U+FFFD、U+10000–U+10FFFF。调用者已成功构建节点、保持其生命周期并提供正常工作的
+      writer，周围 XML 上下文须另外保证良构。静态调用链从 print/node_output 的 node_pcdata 分支到 text_output/text_output_escaped 和 ctx_special_pcdata
+      表：&、<、> 分别写为 实体引用 amp、lt、gt（各以 & 开头、以 ; 结尾）；所有 > 都转义，故文本中不会原样输出 ]]>。单引号、双引号以及 tab/LF/CR 在该文本路径保持字面值，有效非 ASCII UTF-8 字节直接输出，不做规范化或合法性验证。format_raw
+      仅抑制排版缩进/附加换行，并不禁用转义。第 2.11 节的后续 XML 解析会将 CR/CRLF 规范化为 LF，因此不保证文本或字节无损往返。不是属性转义：属性走不同表，默认引号以及 tab/LF/CR 有不同处理；CDATA、名称、注释、处理指令和完整文档结构均不在正面切片内。非法输入不被该声明修复或拒绝：例如源码与测试配方会把
+      U+0004 写作 十进制字符引用（数字 04），但它仍违反 XML 1.0 Char/字符引用约束；嵌入 NUL 会终止字符串，非法 UTF-8、代理码点、U+FFFE/U+FFFF 和越界码点均排除。format_no_escapes、format_skip_control_chars、其他
+      flags、宽字符模式及其他编码不在范围。该版手册明确不保证完整 W3C 符合性或完整 Unicode 校验；不能将上游测试可接受的输入误当合法 XML。tests/test_write.cpp 的 write_escape/write_escape_roundtrip
+      仅为静态配方，包含非法控制字符和 CR 往返差异，不是本次执行结果或完整符合性测试。七份选定完整固定文件逐份核对 Git blob/字节后只读；没有上游安装、导入、构建、执行、测试或生成器运行，也未验证发布归档或完整源码树。MIT
+      仅记录固定上游许可，不作法律适用判断。不声称完整解析器/处理器符合性、XML 其他版次等价、DTD/实体处理、XSD、XPath、跨库互通、安全、性能、部署或 IA 采用；未审核能力不等于不存在。
+
+
+      English scope and limitations:
+
+
+      Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s ordinary element
+      character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition (2000-10-06),
+      sections 2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older edition in
+      full. Preconditions: PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&, ...) uses explicit
+      encoding_utf8 and flags exactly format_raw, and input is properly NUL-terminated valid UTF-8. Apart from the
+      terminating NUL, code points must satisfy that edition''s [2] Char: U+0009, U+000A, U+000D, U+0020–U+D7FF,
+      U+E000–U+FFFD or U+10000–U+10FFFF. The caller has successfully constructed a live node and supplies a functioning
+      writer; surrounding XML context must separately be well-formed. Static call flow from print/node_output''s
+      node_pcdata branch through text_output/text_output_escaped and the ctx_special_pcdata table writes &, < and
+      > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]> does not survive in the emitted text. Single/double
+      quotes and tab/LF/CR remain literal on this text path; valid non-ASCII UTF-8 bytes are emitted directly, without
+      normalization or validation. format_raw suppresses presentation indentation/added newlines, not escaping.
+      Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF, so neither text nor byte-lossless roundtripping
+      is claimed. This is not attribute escaping: attributes use a different table and different default quote and
+      tab/LF/CR treatment. CDATA, names, comments, processing instructions and complete document structure are outside
+      positive scope. Invalid inputs are not repaired or rejected by this assertion: source and test recipes serialize
+      U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference constraints. Embedded NUL terminates
+      strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points are excluded. format_no_escapes,
+      format_skip_control_chars, other flags, wide-character mode and other encodings are excluded. The pinned manual
+      disclaims full W3C conformance and complete Unicode validation; acceptance by an upstream test is not proof
+      of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static recipes, including illegal
+      controls and the CR roundtrip difference, not executed results or comprehensive conformance testing. Seven
+      selected complete pinned files were byte/Git-blob checked and read statically; no upstream installation, import,
+      build, execution, tests or generators, and no release-archive or entire-source-tree verification. MIT records
+      the pinned upstream license, not legal suitability. Full parser/processor conformance, equivalence to other
+      XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security, performance, deployment
+      and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+    description_en: 'The whole open-source pugixml C++ XML processing library, not a standalone escaping module
+      or XML standard. Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s
+      ordinary element character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition
+      (2000-10-06), sections 2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older
+      edition in full. Preconditions: PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&,
+      ...) uses explicit encoding_utf8 and flags exactly format_raw, and input is properly NUL-terminated valid
+      UTF-8. Apart from the terminating NUL, code points must satisfy that edition''s [2] Char: U+0009, U+000A,
+      U+000D, U+0020–U+D7FF, U+E000–U+FFFD or U+10000–U+10FFFF. The caller has successfully constructed a live node
+      and supplies a functioning writer; surrounding XML context must separately be well-formed. Static call flow
+      from print/node_output''s node_pcdata branch through text_output/text_output_escaped and the ctx_special_pcdata
+      table writes &, < and > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]> does not survive in the
+      emitted text. Single/double quotes and tab/LF/CR remain literal on this text path; valid non-ASCII UTF-8 bytes
+      are emitted directly, without normalization or validation. format_raw suppresses presentation indentation/added
+      newlines, not escaping. Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF, so neither text
+      nor byte-lossless roundtripping is claimed. This is not attribute escaping: attributes use a different table
+      and different default quote and tab/LF/CR treatment. CDATA, names, comments, processing instructions and complete
+      document structure are outside positive scope. Invalid inputs are not repaired or rejected by this assertion:
+      source and test recipes serialize U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference
+      constraints. Embedded NUL terminates strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code
+      points are excluded. format_no_escapes, format_skip_control_chars, other flags, wide-character mode and other
+      encodings are excluded. The pinned manual disclaims full W3C conformance and complete Unicode validation;
+      acceptance by an upstream test is not proof of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip
+      are static recipes, including illegal controls and the CR roundtrip difference, not executed results or comprehensive
+      conformance testing. Seven selected complete pinned files were byte/Git-blob checked and read statically;
+      no upstream installation, import, build, execution, tests or generators, and no release-archive or entire-source-tree
+      verification. MIT records the pinned upstream license, not legal suitability. Full parser/processor conformance,
+      equivalence to other XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security,
+      performance, deployment and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+    open_source: true
+    license_expression: MIT
+    domains:
+    - data
+    - structured_data
+    sources:
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/README.md
+      title: pugixml 1.15 pinned README.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/LICENSE.md
+      title: pugixml 1.15 pinned LICENSE.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugiconfig.hpp
+      title: pugixml 1.15 pinned src/pugiconfig.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.hpp
+      title: pugixml 1.15 pinned src/pugixml.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.cpp
+      title: pugixml 1.15 pinned src/pugixml.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/docs/manual.adoc
+      title: pugixml 1.15 pinned docs/manual.adoc; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/tests/test_write.cpp
+      title: pugixml 1.15 pinned tests/test_write.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/releases/tag/v1.15
+      title: Official pugixml 1.15 release, 2025-01-10
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml
+      title: Official whole library, repository ID 4923301
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml/git/ref/tags/v1.15
+      title: Lightweight tag resolves to pinned commit; no signature claim
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#charsets
+      title: 'XML 1.0 Second Edition section 2.2: permitted Char repertoire'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#syntax
+      title: 'Fixed XML 2000 section 2.4: character data and markup'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-references
+      title: 'Fixed XML 2000 section 4.1: character reference constraints'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-predefined-ent
+      title: 'Fixed XML 2000 section 4.6: predefined entities'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-line-ends
+      title: 'Fixed XML 2000 section 2.11: end-of-line normalization'
+      language: en
+      accessed: '2026-11-05'
+    last_verified_at: '2026-11-05T02:11:33.917692+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_next_interop_library; static source only, no upstream execution
+existing_object_updates:
+- path: 01_State/01_Objects/xml_1.0_second_edition.yaml
+  baseline_blob: fcfda96afbf4f724bddb4fd1796b367581be09c4
+  proposed_record:
+    id: xml_1.0_second_edition
+    type: artifact
+    kind: specification
+    name_zh: XML 1.0（第二版）
+    name_en: Extensible Markup Language (XML) 1.0 (Second Edition)
+    description_zh: 'W3C 固定 2000 推荐文档，规定 XML 1.0 标记语法、良构约束及处理器要求。
+
+
+      本批 pugixml 新入边的独立限定（不改变既有标准事实或其他关系）：
+
+
+      固定 pugixml 1.15 源码 ee86beb30e4973f5feffe3ce63bfa4fbadf72f38。仅将整体库中的普通元素字符数据（node_pcdata）序列化转义路径映射到 XML 1.0
+      第二版（2000-10-06）第 2.2、2.4、4.1、4.6 节，不声称库明确以该旧版为完整实现目标。前提是 PUGIXML_WCHAR_MODE 未定义（char 模式），使用 xml_node::print(xml_writer&,
+      ...) 且显式 encoding_utf8、flags 恰为 format_raw，输入为正确 NUL 结尾的有效 UTF-8；除结尾终止符外，所有码点必须属于该版 [2] Char：U+0009、U+000A、U+000D、U+0020–U+D7FF、U+E000–U+FFFD、U+10000–U+10FFFF。调用者已成功构建节点、保持其生命周期并提供正常工作的
+      writer，周围 XML 上下文须另外保证良构。静态调用链从 print/node_output 的 node_pcdata 分支到 text_output/text_output_escaped 和 ctx_special_pcdata
+      表：&、<、> 分别写为 实体引用 amp、lt、gt（各以 & 开头、以 ; 结尾）；所有 > 都转义，故文本中不会原样输出 ]]>。单引号、双引号以及 tab/LF/CR 在该文本路径保持字面值，有效非 ASCII UTF-8 字节直接输出，不做规范化或合法性验证。format_raw
+      仅抑制排版缩进/附加换行，并不禁用转义。第 2.11 节的后续 XML 解析会将 CR/CRLF 规范化为 LF，因此不保证文本或字节无损往返。不是属性转义：属性走不同表，默认引号以及 tab/LF/CR 有不同处理；CDATA、名称、注释、处理指令和完整文档结构均不在正面切片内。非法输入不被该声明修复或拒绝：例如源码与测试配方会把
+      U+0004 写作 十进制字符引用（数字 04），但它仍违反 XML 1.0 Char/字符引用约束；嵌入 NUL 会终止字符串，非法 UTF-8、代理码点、U+FFFE/U+FFFF 和越界码点均排除。format_no_escapes、format_skip_control_chars、其他
+      flags、宽字符模式及其他编码不在范围。该版手册明确不保证完整 W3C 符合性或完整 Unicode 校验；不能将上游测试可接受的输入误当合法 XML。tests/test_write.cpp 的 write_escape/write_escape_roundtrip
+      仅为静态配方，包含非法控制字符和 CR 往返差异，不是本次执行结果或完整符合性测试。七份选定完整固定文件逐份核对 Git blob/字节后只读；没有上游安装、导入、构建、执行、测试或生成器运行，也未验证发布归档或完整源码树。MIT
+      仅记录固定上游许可，不作法律适用判断。不声称完整解析器/处理器符合性、XML 其他版次等价、DTD/实体处理、XSD、XPath、跨库互通、安全、性能、部署或 IA 采用；未审核能力不等于不存在。
+
+
+      English scope and limitations for the new pugixml incoming edge only:
+
+
+      Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s ordinary element
+      character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition (2000-10-06),
+      sections 2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older edition in
+      full. Preconditions: PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&, ...) uses explicit
+      encoding_utf8 and flags exactly format_raw, and input is properly NUL-terminated valid UTF-8. Apart from the
+      terminating NUL, code points must satisfy that edition''s [2] Char: U+0009, U+000A, U+000D, U+0020–U+D7FF,
+      U+E000–U+FFFD or U+10000–U+10FFFF. The caller has successfully constructed a live node and supplies a functioning
+      writer; surrounding XML context must separately be well-formed. Static call flow from print/node_output''s
+      node_pcdata branch through text_output/text_output_escaped and the ctx_special_pcdata table writes &, < and
+      > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]> does not survive in the emitted text. Single/double
+      quotes and tab/LF/CR remain literal on this text path; valid non-ASCII UTF-8 bytes are emitted directly, without
+      normalization or validation. format_raw suppresses presentation indentation/added newlines, not escaping.
+      Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF, so neither text nor byte-lossless roundtripping
+      is claimed. This is not attribute escaping: attributes use a different table and different default quote and
+      tab/LF/CR treatment. CDATA, names, comments, processing instructions and complete document structure are outside
+      positive scope. Invalid inputs are not repaired or rejected by this assertion: source and test recipes serialize
+      U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference constraints. Embedded NUL terminates
+      strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points are excluded. format_no_escapes,
+      format_skip_control_chars, other flags, wide-character mode and other encodings are excluded. The pinned manual
+      disclaims full W3C conformance and complete Unicode validation; acceptance by an upstream test is not proof
+      of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static recipes, including illegal
+      controls and the CR roundtrip difference, not executed results or comprehensive conformance testing. Seven
+      selected complete pinned files were byte/Git-blob checked and read statically; no upstream installation, import,
+      build, execution, tests or generators, and no release-archive or entire-source-tree verification. MIT records
+      the pinned upstream license, not legal suitability. Full parser/processor conformance, equivalence to other
+      XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security, performance, deployment
+      and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+    description_en: 'The fixed 2000 W3C Recommendation specifying XML 1.0 markup syntax, well-formedness constraints
+      and processor requirements.
+
+
+      Independent limits for the new pugixml incoming edge, without changing existing standard facts or other relations:
+      Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s ordinary element
+      character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition (2000-10-06),
+      sections 2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older edition in
+      full. Preconditions: PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&, ...) uses explicit
+      encoding_utf8 and flags exactly format_raw, and input is properly NUL-terminated valid UTF-8. Apart from the
+      terminating NUL, code points must satisfy that edition''s [2] Char: U+0009, U+000A, U+000D, U+0020–U+D7FF,
+      U+E000–U+FFFD or U+10000–U+10FFFF. The caller has successfully constructed a live node and supplies a functioning
+      writer; surrounding XML context must separately be well-formed. Static call flow from print/node_output''s
+      node_pcdata branch through text_output/text_output_escaped and the ctx_special_pcdata table writes &, < and
+      > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]> does not survive in the emitted text. Single/double
+      quotes and tab/LF/CR remain literal on this text path; valid non-ASCII UTF-8 bytes are emitted directly, without
+      normalization or validation. format_raw suppresses presentation indentation/added newlines, not escaping.
+      Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF, so neither text nor byte-lossless roundtripping
+      is claimed. This is not attribute escaping: attributes use a different table and different default quote and
+      tab/LF/CR treatment. CDATA, names, comments, processing instructions and complete document structure are outside
+      positive scope. Invalid inputs are not repaired or rejected by this assertion: source and test recipes serialize
+      U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference constraints. Embedded NUL terminates
+      strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points are excluded. format_no_escapes,
+      format_skip_control_chars, other flags, wide-character mode and other encodings are excluded. The pinned manual
+      disclaims full W3C conformance and complete Unicode validation; acceptance by an upstream test is not proof
+      of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static recipes, including illegal
+      controls and the CR roundtrip difference, not executed results or comprehensive conformance testing. Seven
+      selected complete pinned files were byte/Git-blob checked and read statically; no upstream installation, import,
+      build, execution, tests or generators, and no release-archive or entire-source-tree verification. MIT records
+      the pinned upstream license, not legal suitability. Full parser/processor conformance, equivalence to other
+      XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security, performance, deployment
+      and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+    version: 1.0 (Second Edition)
+    external_identifiers:
+    - namespace: w3c
+      value: REC-xml-20001006
+    official_url: https://www.w3.org/TR/2000/REC-xml-20001006
+    versions:
+    - version: 1.0 (Second Edition)
+      status: recommendation
+      date: '2000-10-06'
+      url: https://www.w3.org/TR/2000/REC-xml-20001006
+    domains:
+    - data
+    - structured_data
+    capabilities:
+    - data_serialization
+    scope_notes_zh: 版次固定为 UBL 2.3 明确引用的 2000 第二版；文档说明该版汇入勘误而非新的 XML 版本，不代表现行 XML 全族。第 2.1/2.8/5.1 节区分良构、基于 DTD 的有效性和验证/非验证处理器；这些不是
+      XSD 验证或业务符合性。第 4.3.3 节要求 XML 处理器支持 UTF-8 和 UTF-16，不意味着所有 XML 必须采用 UTF-8；未核任何处理库、外部实体加载策略或部署安全。
+    scope_notes_en: Fixed to the 2000 second edition explicitly cited by UBL 2.3; it incorporates errata rather
+      than defining a new XML version and does not represent the current XML family. Sections 2.1/2.8/5.1 distinguish
+      well-formedness, DTD validity and validating/non-validating processors, not XSD validation or business conformance.
+      Section 4.3.3 requires processor support for UTF-8 and UTF-16, not exclusive UTF-8 use. No library, external-entity
+      loading policy or deployment security is assessed.
+    sources:
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006
+      title: Extensible Markup Language (XML) 1.0 (Second Edition) — fixed W3C Recommendation 2000-10-06
+      language: en
+      accessed: '2026-10-21'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/README.md
+      title: pugixml 1.15 pinned README.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/LICENSE.md
+      title: pugixml 1.15 pinned LICENSE.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugiconfig.hpp
+      title: pugixml 1.15 pinned src/pugiconfig.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.hpp
+      title: pugixml 1.15 pinned src/pugixml.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.cpp
+      title: pugixml 1.15 pinned src/pugixml.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/docs/manual.adoc
+      title: pugixml 1.15 pinned docs/manual.adoc; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/tests/test_write.cpp
+      title: pugixml 1.15 pinned tests/test_write.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/releases/tag/v1.15
+      title: Official pugixml 1.15 release, 2025-01-10
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml
+      title: Official whole library, repository ID 4923301
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml/git/ref/tags/v1.15
+      title: Lightweight tag resolves to pinned commit; no signature claim
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#charsets
+      title: 'XML 1.0 Second Edition section 2.2: permitted Char repertoire'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#syntax
+      title: 'Fixed XML 2000 section 2.4: character data and markup'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-references
+      title: 'Fixed XML 2000 section 4.1: character reference constraints'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-predefined-ent
+      title: 'Fixed XML 2000 section 4.6: predefined entities'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-line-ends
+      title: 'Fixed XML 2000 section 2.11: end-of-line normalization'
+      language: en
+      accessed: '2026-11-05'
+    last_verified_at: '2026-10-21T06:29:37.653787+00:00'
+    last_verified_by: Agent — OpenAI / dot，fixed XML/XSD reference evidence executor
+    record_created_at: '2026-10-21T06:34:15.447887+00:00'
+    record_updated_at: '2026-10-21T06:34:15.447887+00:00'
+    latest_substantive_contribution:
+      initiator: Human Owner — ff6962757
+      executor: Agent — OpenAI / dot
+      reviewer: Independent Agent — OpenAI / dot / main-session semantic review
+      github_actor: ff6962757
+    intake_provenance:
+      candidate_id: xml_1.0_second_edition
+      acceptance_event_id: accept-20261021-commerce-xml-xml-1.0-second-edition
+      reviewed_candidate_blob: a4c54d4ec6e5cf7fc7b82bcefa50cff242d2f8e3
+      reviewed_against_commit: ddf19ba42f0bacf0a27d516b4bbdba0cb4161e54
+      candidate_executor: Agent — OpenAI / dot
+      canonical_serializer: Agent — OpenAI / dot
+      reviewed_packet_commit: ddf19ba42f0bacf0a27d516b4bbdba0cb4161e54
+      semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/pull/486
+relations:
+- canonical_id: pugixml_implements_xml_pcdata_escaping
+  path: 01_State/02_Relations/data-serialization-implementations.yaml
+  baseline_blob: fb8e45181deb9b687ffe73799c2a8792586b1e04
+  proposed_record:
+    id: pugixml_implements_xml_pcdata_escaping
+    type: relation
+    name_zh: pugixml 1.15 实现有界 XML 字符数据转义
+    name_en: pugixml 1.15 implements bounded XML character-data escaping
+    source: pugixml
+    relation: implements
+    target: xml_1.0_second_edition
+    context:
+      version_context:
+        source: pugixml 1.15 / ee86beb30e4973f5feffe3ce63bfa4fbadf72f38
+        target: XML 1.0 Second Edition, 2000-10-06, sections 2.2/2.4/4.1/4.6; 2.11 limitation
+      conditions_zh: 固定 pugixml 1.15 源码 ee86beb30e4973f5feffe3ce63bfa4fbadf72f38。仅将整体库中的普通元素字符数据（node_pcdata）序列化转义路径映射到
+        XML 1.0 第二版（2000-10-06）第 2.2、2.4、4.1、4.6 节，不声称库明确以该旧版为完整实现目标。前提是 PUGIXML_WCHAR_MODE 未定义（char 模式），使用 xml_node::print(xml_writer&,
+        ...) 且显式 encoding_utf8、flags 恰为 format_raw，输入为正确 NUL 结尾的有效 UTF-8；除结尾终止符外，所有码点必须属于该版 [2] Char：U+0009、U+000A、U+000D、U+0020–U+D7FF、U+E000–U+FFFD、U+10000–U+10FFFF。调用者已成功构建节点、保持其生命周期并提供正常工作的
+        writer，周围 XML 上下文须另外保证良构。静态调用链从 print/node_output 的 node_pcdata 分支到 text_output/text_output_escaped 和 ctx_special_pcdata
+        表：&、<、> 分别写为 实体引用 amp、lt、gt（各以 & 开头、以 ; 结尾）；所有 > 都转义，故文本中不会原样输出 ]]>。单引号、双引号以及 tab/LF/CR 在该文本路径保持字面值，有效非 ASCII UTF-8 字节直接输出，不做规范化或合法性验证。format_raw
+        仅抑制排版缩进/附加换行，并不禁用转义。第 2.11 节的后续 XML 解析会将 CR/CRLF 规范化为 LF，因此不保证文本或字节无损往返。不是属性转义：属性走不同表，默认引号以及 tab/LF/CR 有不同处理；CDATA、名称、注释、处理指令和完整文档结构均不在正面切片内。非法输入不被该声明修复或拒绝：例如源码与测试配方会把
+        U+0004 写作 十进制字符引用（数字 04），但它仍违反 XML 1.0 Char/字符引用约束；嵌入 NUL 会终止字符串，非法 UTF-8、代理码点、U+FFFE/U+FFFF 和越界码点均排除。format_no_escapes、format_skip_control_chars、其他
+        flags、宽字符模式及其他编码不在范围。该版手册明确不保证完整 W3C 符合性或完整 Unicode 校验；不能将上游测试可接受的输入误当合法 XML。tests/test_write.cpp 的 write_escape/write_escape_roundtrip
+        仅为静态配方，包含非法控制字符和 CR 往返差异，不是本次执行结果或完整符合性测试。七份选定完整固定文件逐份核对 Git blob/字节后只读；没有上游安装、导入、构建、执行、测试或生成器运行，也未验证发布归档或完整源码树。MIT
+        仅记录固定上游许可，不作法律适用判断。不声称完整解析器/处理器符合性、XML 其他版次等价、DTD/实体处理、XSD、XPath、跨库互通、安全、性能、部署或 IA 采用；未审核能力不等于不存在。
+      conditions_en: 'Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s
+        ordinary element character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition
+        (2000-10-06), sections 2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older
+        edition in full. Preconditions: PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&,
+        ...) uses explicit encoding_utf8 and flags exactly format_raw, and input is properly NUL-terminated valid
+        UTF-8. Apart from the terminating NUL, code points must satisfy that edition''s [2] Char: U+0009, U+000A,
+        U+000D, U+0020–U+D7FF, U+E000–U+FFFD or U+10000–U+10FFFF. The caller has successfully constructed a live
+        node and supplies a functioning writer; surrounding XML context must separately be well-formed. Static call
+        flow from print/node_output''s node_pcdata branch through text_output/text_output_escaped and the ctx_special_pcdata
+        table writes &, < and > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]> does not survive in
+        the emitted text. Single/double quotes and tab/LF/CR remain literal on this text path; valid non-ASCII UTF-8
+        bytes are emitted directly, without normalization or validation. format_raw suppresses presentation indentation/added
+        newlines, not escaping. Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF, so neither text
+        nor byte-lossless roundtripping is claimed. This is not attribute escaping: attributes use a different table
+        and different default quote and tab/LF/CR treatment. CDATA, names, comments, processing instructions and
+        complete document structure are outside positive scope. Invalid inputs are not repaired or rejected by this
+        assertion: source and test recipes serialize U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference
+        constraints. Embedded NUL terminates strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range
+        code points are excluded. format_no_escapes, format_skip_control_chars, other flags, wide-character mode
+        and other encodings are excluded. The pinned manual disclaims full W3C conformance and complete Unicode
+        validation; acceptance by an upstream test is not proof of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip
+        are static recipes, including illegal controls and the CR roundtrip difference, not executed results or
+        comprehensive conformance testing. Seven selected complete pinned files were byte/Git-blob checked and read
+        statically; no upstream installation, import, build, execution, tests or generators, and no release-archive
+        or entire-source-tree verification. MIT records the pinned upstream license, not legal suitability. Full
+        parser/processor conformance, equivalence to other XML editions, DTD/entity handling, XSD, XPath, cross-library
+        interoperability, security, performance, deployment and IA adoption are unproved; unexamined capabilities
+        are not asserted absent.'
+    evidence:
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/README.md
+      title: pugixml 1.15 pinned README.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/LICENSE.md
+      title: pugixml 1.15 pinned LICENSE.md; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugiconfig.hpp
+      title: pugixml 1.15 pinned src/pugiconfig.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.hpp
+      title: pugixml 1.15 pinned src/pugixml.hpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/src/pugixml.cpp
+      title: pugixml 1.15 pinned src/pugixml.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/docs/manual.adoc
+      title: pugixml 1.15 pinned docs/manual.adoc; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/blob/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38/tests/test_write.cpp
+      title: pugixml 1.15 pinned tests/test_write.cpp; static inspection only
+      language: en
+      accessed: '2026-11-05'
+    - url: https://github.com/zeux/pugixml/releases/tag/v1.15
+      title: Official pugixml 1.15 release, 2025-01-10
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml
+      title: Official whole library, repository ID 4923301
+      language: en
+      accessed: '2026-11-05'
+    - url: https://api.github.com/repos/zeux/pugixml/git/ref/tags/v1.15
+      title: Lightweight tag resolves to pinned commit; no signature claim
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#charsets
+      title: 'XML 1.0 Second Edition section 2.2: permitted Char repertoire'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#syntax
+      title: 'Fixed XML 2000 section 2.4: character data and markup'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-references
+      title: 'Fixed XML 2000 section 4.1: character reference constraints'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-predefined-ent
+      title: 'Fixed XML 2000 section 4.6: predefined entities'
+      language: en
+      accessed: '2026-11-05'
+    - url: https://www.w3.org/TR/2000/REC-xml-20001006#sec-line-ends
+      title: 'Fixed XML 2000 section 2.11: end-of-line normalization'
+      language: en
+      accessed: '2026-11-05'
+    last_verified_at: '2026-11-05T02:11:33.917692+00:00'
+    last_verified_by: Agent — OpenAI / dot / add_next_interop_library; valid-input PCDATA serialization only, not
+      full conformance
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  baseline_blob: 9b0d351e651bd4b3a897d7bc142433a7b78cde0b
+  insertion_before: 'canonical_relation_refs:'
+  exact_insertion: "# pugixml 1.15: whole library; valid-input PCDATA escaping only.\n- category_id: syntax\n  ref:\
+    \ {surface: canonical, id: pugixml}\n"
+  semantics: Existing editorial navigation only
+materialization_boundary: Independent actual frozen Candidate/full proposal review before review_required acceptance;
+  preserve all frozen ancestors. H/P/CI/public body/Ready/actual-H review/merge/M/live are separate gates.
+exclusions:
+- All held PRs and refused/uncertain operations preserved; no formal APPROVE, resolve/dismiss or external-agent
+  contact.
+- No full XML parser/processor or whole-document conformance, invalid-input validation, other editions or upstream
+  execution claims.

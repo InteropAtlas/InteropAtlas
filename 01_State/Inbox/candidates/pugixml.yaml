@@ -1,0 +1,54 @@
+contract_version: candidate-object-v1
+candidate_id: pugixml
+label: pugixml C++ XML processing library (1.15)
+publisher: Arseny Kapoulkine and pugixml contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: zeux/pugixml
+locators:
+- url: https://pugixml.org/
+  role: official
+- url: https://github.com/zeux/pugixml/tree/ee86beb30e4973f5feffe3ce63bfa4fbadf72f38
+  role: dated
+- url: https://github.com/zeux/pugixml/releases/tag/v1.15
+  role: catalog
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh main, all-state issue/PR searches, 258 remote branch names and reachable local history contain no pugixml
+    intake. Whole github:zeux/pugixml is distinct from XML standard and existing Expat library. No identity merge/split.
+  merge_authorized: false
+unknowns:
+- 'Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s ordinary element
+  character-data (node_pcdata) serialization escaping path is mapped to XML 1.0 Second Edition (2000-10-06), sections
+  2.2, 2.4, 4.1 and 4.6; this does not assert an upstream claim to implement that older edition in full. Preconditions:
+  PUGIXML_WCHAR_MODE is undefined (char mode), xml_node::print(xml_writer&, ...) uses explicit encoding_utf8 and
+  flags exactly format_raw, and input is properly NUL-terminated valid UTF-8. Apart from the terminating NUL, code
+  points must satisfy that edition''s [2] Char: U+0009, U+000A, U+000D, U+0020–U+D7FF, U+E000–U+FFFD or U+10000–U+10FFFF.
+  The caller has successfully constructed a live node and supplies a functioning writer; surrounding XML context
+  must separately be well-formed. Static call flow from print/node_output''s node_pcdata branch through text_output/text_output_escaped
+  and the ctx_special_pcdata table writes &, < and > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]>
+  does not survive in the emitted text. Single/double quotes and tab/LF/CR remain literal on this text path; valid
+  non-ASCII UTF-8 bytes are emitted directly, without normalization or validation. format_raw suppresses presentation
+  indentation/added newlines, not escaping. Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF,
+  so neither text nor byte-lossless roundtripping is claimed. This is not attribute escaping: attributes use a different
+  table and different default quote and tab/LF/CR treatment. CDATA, names, comments, processing instructions and
+  complete document structure are outside positive scope. Invalid inputs are not repaired or rejected by this assertion:
+  source and test recipes serialize U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference
+  constraints. Embedded NUL terminates strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points
+  are excluded. format_no_escapes, format_skip_control_chars, other flags, wide-character mode and other encodings
+  are excluded. The pinned manual disclaims full W3C conformance and complete Unicode validation; acceptance by
+  an upstream test is not proof of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static
+  recipes, including illegal controls and the CR roundtrip difference, not executed results or comprehensive conformance
+  testing. Seven selected complete pinned files were byte/Git-blob checked and read statically; no upstream installation,
+  import, build, execution, tests or generators, and no release-archive or entire-source-tree verification. MIT
+  records the pinned upstream license, not legal suitability. Full parser/processor conformance, equivalence to
+  other XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security, performance, deployment
+  and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_next_interop_library
+  reviewer: pending independent semantic review
