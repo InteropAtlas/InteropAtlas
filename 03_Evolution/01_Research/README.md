@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T11:55:36.520248+00:00
+Document Updated At: 2026-11-05T12:42:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: mixed
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / develop_coverage_dimension_reconciliation
-  Reviewer: Independent Agent — OpenAI / dot / review_coverage_dimension_reconciliation
+  Executor: Agent — OpenAI / dot / advance_coverage_basemap
+  Reviewer: Independent Agent — OpenAI / dot / review_domain_evidence_actions
   GitHub Actor: ff6962757
 -->
 
@@ -43,6 +43,8 @@ Latest Substantive Contribution:
 - [HLS 文本、媒体读取与定时信令的有限对照（2026-11-05）](01_Prior_Art/hls-playlist-media-signaling-2026-11-05.zh-CN.md)：区分 m3u8 文本载体、FFmpeg 选定媒体读取与可选 SCTE35-CMD 映射，保留零时长、时间绑定和实际拼接的证据边界。
 
 - [六个覆盖维度与跨域组合证据的有限对照（2026-11-05）](03_Tests/coverage-dimension-reconciliation-2026-11-05.zh-CN.md)：将 Issue #276 的既有六维连接到 Syslog、WoT/MQTT、HLS 的机器载体、研究与实验，区分可回答的问题、组合限制与具体未知；不是全域快照或覆盖完成声明。
+
+- [既有领域的证据问题与跨域后续研究（2026-11-05）](02_Audits/domain-evidence-actions-2026-11-05.zh-CN.md)：沿所有既有导航领域连接代表问题、接纳链、有限关系和既有证据，提出少量跨域后续研究；不是全库快照、完整率或新维护队列。
 
 ## 与 `docs/` 的边界
 
