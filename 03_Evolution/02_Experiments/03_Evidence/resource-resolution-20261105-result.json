@@ -1,0 +1,145 @@
+{
+  "results": [
+    {
+      "name": "id_only_accept",
+      "resource_supply": "none",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "accepted",
+      "errors": [],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "id_only_reject_instance",
+      "resource_supply": "none",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "instance_rejected",
+      "errors": [
+        {
+          "class": "jsonschema.exceptions.ValidationError",
+          "message": "'seven' is not of type 'integer'",
+          "validator": "type",
+          "schema_path": [
+            "type"
+          ],
+          "instance_path": []
+        }
+      ],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "same_root_registry_A",
+      "resource_supply": "preloaded_registry",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "accepted",
+      "errors": [],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "same_root_registry_B",
+      "resource_supply": "preloaded_registry",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "instance_rejected",
+      "errors": [
+        {
+          "class": "jsonschema.exceptions.ValidationError",
+          "message": "7 is not of type 'string'",
+          "validator": "type",
+          "schema_path": [
+            "type"
+          ],
+          "instance_path": []
+        }
+      ],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "relative_base_a",
+      "resource_supply": "preloaded_registry",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "accepted",
+      "errors": [],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "relative_base_b",
+      "resource_supply": "preloaded_registry",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "instance_rejected",
+      "errors": [
+        {
+          "class": "jsonschema.exceptions.ValidationError",
+          "message": "7 is not of type 'string'",
+          "validator": "type",
+          "schema_path": [
+            "type"
+          ],
+          "instance_path": []
+        }
+      ],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "missing_resource_rejected_callback",
+      "resource_supply": "none",
+      "retrieve_policy": "reject",
+      "callback_urls": [
+        "https://example.invalid/a/target.json"
+      ],
+      "outcome": "resolution_exception",
+      "exception_chain": [
+        {
+          "class": "jsonschema.exceptions._WrappedReferencingError",
+          "message": "Unresolvable: target.json",
+          "repr": "<WrappedReferencingError Unresolvable(ref='target.json')>",
+          "suppress_context": true
+        },
+        {
+          "class": "referencing.exceptions.Unresolvable",
+          "message": "target.json",
+          "repr": "Unresolvable(ref='target.json')",
+          "suppress_context": true
+        }
+      ],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "explicit_memory_callback",
+      "resource_supply": "memory_only_callback",
+      "retrieve_policy": "memory_only_or_reject",
+      "callback_urls": [
+        "https://example.invalid/a/target.json"
+      ],
+      "outcome": "accepted",
+      "errors": [],
+      "blocked_audit_events": []
+    },
+    {
+      "name": "registered_resource_bad_instance",
+      "resource_supply": "preloaded_registry",
+      "retrieve_policy": "reject",
+      "callback_urls": [],
+      "outcome": "instance_rejected",
+      "errors": [
+        {
+          "class": "jsonschema.exceptions.ValidationError",
+          "message": "'seven' is not of type 'integer'",
+          "validator": "type",
+          "schema_path": [
+            "type"
+          ],
+          "instance_path": []
+        }
+      ],
+      "blocked_audit_events": []
+    }
+  ],
+  "audit_blocked_events": [],
+  "assertions": "9 expected classifications and callback lists matched; zero guarded events",
+  "interpretation": "Callback invocation is a retrieval request, not proof of network access. These results cover only the explicit in-memory registry/callback configuration."
+}

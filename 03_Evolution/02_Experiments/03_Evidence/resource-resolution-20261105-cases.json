@@ -1,0 +1,79 @@
+[
+  {
+    "name": "id_only_accept",
+    "schema_json": "{\"$id\":\"https://example.invalid/identity-only\",\"type\":\"integer\"}",
+    "instance_json": "7",
+    "registry_json": {},
+    "callback_json": {}
+  },
+  {
+    "name": "id_only_reject_instance",
+    "schema_json": "{\"$id\":\"https://example.invalid/identity-only\",\"type\":\"integer\"}",
+    "instance_json": "\"seven\"",
+    "registry_json": {},
+    "callback_json": {}
+  },
+  {
+    "name": "same_root_registry_A",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"integer\"}"
+    },
+    "callback_json": {}
+  },
+  {
+    "name": "same_root_registry_B",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"string\"}"
+    },
+    "callback_json": {}
+  },
+  {
+    "name": "relative_base_a",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"integer\"}",
+      "https://example.invalid/b/target.json": "{\"type\":\"string\"}"
+    },
+    "callback_json": {}
+  },
+  {
+    "name": "relative_base_b",
+    "schema_json": "{\"$id\":\"https://example.invalid/b/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"integer\"}",
+      "https://example.invalid/b/target.json": "{\"type\":\"string\"}"
+    },
+    "callback_json": {}
+  },
+  {
+    "name": "missing_resource_rejected_callback",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {},
+    "callback_json": {}
+  },
+  {
+    "name": "explicit_memory_callback",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "7",
+    "registry_json": {},
+    "callback_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"integer\"}"
+    }
+  },
+  {
+    "name": "registered_resource_bad_instance",
+    "schema_json": "{\"$id\":\"https://example.invalid/a/root.json\",\"$ref\":\"target.json\",\"$schema\":\"https://json-schema.org/draft/2020-12/schema\"}",
+    "instance_json": "\"seven\"",
+    "registry_json": {
+      "https://example.invalid/a/target.json": "{\"type\":\"integer\"}"
+    },
+    "callback_json": {}
+  }
+]
