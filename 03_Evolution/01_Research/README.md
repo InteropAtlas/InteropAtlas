@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T12:42:00+00:00
+Document Updated At: 2026-11-05T13:26:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: mixed
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Independent Agent — OpenAI / dot / review_domain_evidence_actions
+  Reviewer: Independent Agent — OpenAI / dot / review_bw64_adm_boundary
   GitHub Actor: ff6962757
 -->
 
@@ -45,6 +45,8 @@ Latest Substantive Contribution:
 - [六个覆盖维度与跨域组合证据的有限对照（2026-11-05）](03_Tests/coverage-dimension-reconciliation-2026-11-05.zh-CN.md)：将 Issue #276 的既有六维连接到 Syslog、WoT/MQTT、HLS 的机器载体、研究与实验，区分可回答的问题、组合限制与具体未知；不是全域快照或覆盖完成声明。
 
 - [既有领域的证据问题与跨域后续研究（2026-11-05）](02_Audits/domain-evidence-actions-2026-11-05.zh-CN.md)：沿所有既有导航领域连接代表问题、接纳链、有限关系和既有证据，提出少量跨域后续研究；不是全库快照、完整率或新维护队列。
+
+- [libbw64 与 libadm 的 AXML／音轨关联责任交接（2026-11-05）](01_Prior_Art/libbw64-libadm-handoff-2026-11-05.zh-CN.md)：固定源码区分块读取、XML／ADM 内部引用与调用方 CHNA／fmt 核对，附机器可读来源及未执行配对见证；不宣称版本配对或完整符合性。
 
 ## 与 `docs/` 的边界
 
