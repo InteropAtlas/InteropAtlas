@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/intel/tinycbor/releases/tag/v7.1
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - tinycbor
   reasons:
-  - Fresh main, all-state TinyCBOR issue/PR searches, 260 remote branch names and complete locally reachable Git-object
-    history contain no TinyCBOR intake. Whole github:intel/tinycbor is distinct from libcbor and RFC8949. No identity
-    merge/split.
+  - Accepted as canonical tinycbor by accept-20261105-tinycbor-v7-1. Original new-state Candidate b7449675f84022a5009266474c3e2ed1f661b715
+    replays review_required against real ancestor b7747706710c98bb1bd8e60455762f5e341d9e19; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'Pins the whole TinyCBOR library''s official release 7.1, lightweight tag v7.1 and commit da6421f2b5b91e3468c0af7265117427ea73f19e.
@@ -55,4 +56,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / deliver_next_library_instance
-  reviewer: pending independent semantic review
+  reviewer: /root/continue_unicode_work/deliver_next_library_instance/review_tinycbor_semantics

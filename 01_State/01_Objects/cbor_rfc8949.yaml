@@ -52,7 +52,57 @@ description_zh: 'RFC 8949 是 CBOR 的 STD 94 互联网标准文档；它不创�
   termination/trailing data, negatives, tags, floats, indefinite containers, encoding, high-level APIs, large-length/size_t
   overflow paths, JSON conversion, cross-implementation interchange, security/resources/performance and IA adoption
   are unverified. No allocations in the function body does not imply allocation-free or safe callbacks/applications.
-  Unexamined capabilities are not asserted absent.'
+  Unexamined capabilities are not asserted absent.
+
+
+  本批 TinyCBOR 新入边的独立限定（不改变既有标准事实、libcbor 限定或其他关系）：
+
+
+  固定整体 TinyCBOR 的官方 release 7.1、轻量 tag v7.1 与 commit da6421f2b5b91e3468c0af7265117427ea73f19e。7.1 是发布/tag 身份；固定
+  CMakeLists.txt 仍写 project VERSION 7.0，不声称已核二进制或包内版本一致。仅静态追踪 cbor_encoder_init(&encoder, buffer, 9, 0) 后恰一次 cbor_encode_uint(&encoder,
+  value)，映射 RFC 8949 §§3/3.1 的 major type 0 无符号整数，而不是凭源码旧 RFC 7049 注释宣称新版整体符合性。value 为 uint64_t，范围 0..18446744073709551615（含两端）。调用方须提供相互不重叠、生命周期有效且无并发修改的可写
+  CborEncoder 与真实 9 字节缓冲，buffer+9 合法；uint8_t 是 8 位 unsigned char，uint64_t 为 8 字节，编译器/平台的 cbor_htonll 路径正确产生网络字节序。would_overflow
+  把指针分别转换成 ptrdiff_t，故另要求该实现转换后的 end 非零，end 与 buffer 的整数差恰为 9，后续减法均有定义且不溢出；仅提供可写空间并不能证明所有 C 平台符合这些前提。CBOR_ENCODER_WRITER_CONTROL
+  为默认 0，flags 恰为 0，未启用自定义 writer；不审其他构建配置、平台移植性或指针转换。源码先把 remaining 从 2 减为 1，再构造并复制一个 major type 0 项。value 在 0..23、24..255、256..65535、65536..4294967295、4294967296..18446744073709551615
+  时，依次写 1、2、3、5、9 字节：首段直接内嵌值，其余首字节为 0x18、0x19、0x1a、0x1b，后跟 1、2、4、8 字节大端值。每段选择可用的最短整数头，这是局部源码推导，不是完整确定性编码验证。该有界成功分支返回
+  CborNoError，将输出指针推进实际长度；cbor_encoder_get_buffer_size 使用原 buffer 返回该长度，extra_bytes_needed 为 0。仅此前缀是编码数据；未写后缀保持原内容，不应发送整个
+  9 字节缓冲。没有另加 NUL 终止符、容器、tag 或帧封装；编码本身可包含零字节。缺少空间、空指针、无效对象、复用/多次编码、writer 回调、负数、浮点、字符串/UTF-8、容器/重复键、解码、JSON转换和其他
+  major type 不在正面范围，未审能力不表示不存在。十份选定完整固定仓库文件均核对 Git blob、字节数与 SHA256 后静态阅读；上游测试文件里的 unsigned 边界向量与 encodeOne 只是未执行配方，不是已跑测试或穷尽证明。没有安装、导入、构建、运行上游库、依赖、测试或生成器。没有验证发布归档、完整源树、签名、二进制包、跨实现互通、安全、性能、生产部署或
+  IA 采用，不声称完整 RFC 8949 符合性。MIT 仅记录固定 LICENSE 声明，不作法律适用判断。
+
+
+  English scope and limitations for the new TinyCBOR incoming edge only:
+
+
+  Pins the whole TinyCBOR library''s official release 7.1, lightweight tag v7.1 and commit da6421f2b5b91e3468c0af7265117427ea73f19e.
+  7.1 is the release/tag identity: fixed CMakeLists.txt still says project VERSION 7.0, so binary or package version
+  consistency is not verified. Static inspection follows only cbor_encoder_init(&encoder, buffer, 9, 0) and exactly
+  one cbor_encode_uint(&encoder, value), mapped to RFC 8949 sections 3/3.1 major type 0 unsigned integers; older
+  RFC 7049 source comments do not establish full conformance to the newer edition. value is uint64_t in 0..18446744073709551615
+  inclusive. The caller supplies distinct non-overlapping live writable CborEncoder and genuine nine-byte buffer
+  objects without concurrent modification, with valid buffer+9 arithmetic. uint8_t is eight-bit unsigned char, uint64_t
+  occupies eight bytes, and the selected compiler/platform cbor_htonll path correctly produces network byte order.
+  would_overflow converts pointers separately to ptrdiff_t: the implementation''s converted end must be nonzero,
+  its integer difference from buffer exactly nine, and the subsequent subtraction defined without overflow. Writable
+  capacity alone does not establish these premises on every C platform. CBOR_ENCODER_WRITER_CONTROL has its default
+  value zero, flags is exactly zero, and no custom writer is enabled; other build configurations, portability and
+  pointer conversions are not verified. The source decrements remaining from two to one, then constructs and copies
+  one major type 0 item. Values in 0..23, 24..255, 256..65535, 65536..4294967295 and 4294967296..18446744073709551615
+  write respectively 1, 2, 3, 5 and 9 bytes. The first range embeds the value; other ranges start with 0x18, 0x19,
+  0x1a or 0x1b followed by 1, 2, 4 or 8 big-endian value bytes. Each range selects the shortest available integer
+  head, a local static deduction rather than complete deterministic-encoding validation. This bounded success branch
+  returns CborNoError and advances the output pointer by the encoded length. cbor_encoder_get_buffer_size with the
+  original buffer returns that length, and extra_bytes_needed is zero. Only that prefix is encoded data; the unwritten
+  suffix retains its prior contents and the entire nine-byte buffer must not be treated as the item. No NUL terminator,
+  container, tag or framing is appended; encoded data itself may contain zero bytes. Insufficient capacity, null
+  pointers, invalid objects, reuse/multiple encodings, writer callbacks, negatives, floats, strings/UTF-8, containers/duplicate
+  keys, decoding, JSON conversion and other major types are outside positive scope; unexamined capabilities are
+  not asserted absent. Ten selected complete pinned repository files were checked against Git blobs, byte counts
+  and SHA256 and read statically. Upstream unsigned boundary vectors and encodeOne are unexecuted recipes, not executed
+  tests or exhaustive proof. No upstream library, dependency, test or generator was installed, imported, built or
+  run. Release archives, the entire source tree, signatures, binary packages, cross-implementation interchange,
+  security, performance, production deployment and IA adoption are unverified; full RFC 8949 conformance is not
+  claimed. MIT records the fixed LICENSE declaration, not legal suitability.'
 description_en: 'RFC 8949 is the CBOR Internet Standard document, STD 94; it does not create a new format version.
   CBOR uses an extended JSON data model.
 
@@ -87,7 +137,39 @@ description_en: 'RFC 8949 is the CBOR Internet Standard document, STD 94; it doe
   document termination/trailing data, negatives, tags, floats, indefinite containers, encoding, high-level APIs,
   large-length/size_t overflow paths, JSON conversion, cross-implementation interchange, security/resources/performance
   and IA adoption are unverified. No allocations in the function body does not imply allocation-free or safe callbacks/applications.
-  Unexamined capabilities are not asserted absent.'
+  Unexamined capabilities are not asserted absent.
+
+
+  Independent limits for the new TinyCBOR incoming edge, preserving all existing standard facts, libcbor scope and
+  other relations: Pins the whole TinyCBOR library''s official release 7.1, lightweight tag v7.1 and commit da6421f2b5b91e3468c0af7265117427ea73f19e.
+  7.1 is the release/tag identity: fixed CMakeLists.txt still says project VERSION 7.0, so binary or package version
+  consistency is not verified. Static inspection follows only cbor_encoder_init(&encoder, buffer, 9, 0) and exactly
+  one cbor_encode_uint(&encoder, value), mapped to RFC 8949 sections 3/3.1 major type 0 unsigned integers; older
+  RFC 7049 source comments do not establish full conformance to the newer edition. value is uint64_t in 0..18446744073709551615
+  inclusive. The caller supplies distinct non-overlapping live writable CborEncoder and genuine nine-byte buffer
+  objects without concurrent modification, with valid buffer+9 arithmetic. uint8_t is eight-bit unsigned char, uint64_t
+  occupies eight bytes, and the selected compiler/platform cbor_htonll path correctly produces network byte order.
+  would_overflow converts pointers separately to ptrdiff_t: the implementation''s converted end must be nonzero,
+  its integer difference from buffer exactly nine, and the subsequent subtraction defined without overflow. Writable
+  capacity alone does not establish these premises on every C platform. CBOR_ENCODER_WRITER_CONTROL has its default
+  value zero, flags is exactly zero, and no custom writer is enabled; other build configurations, portability and
+  pointer conversions are not verified. The source decrements remaining from two to one, then constructs and copies
+  one major type 0 item. Values in 0..23, 24..255, 256..65535, 65536..4294967295 and 4294967296..18446744073709551615
+  write respectively 1, 2, 3, 5 and 9 bytes. The first range embeds the value; other ranges start with 0x18, 0x19,
+  0x1a or 0x1b followed by 1, 2, 4 or 8 big-endian value bytes. Each range selects the shortest available integer
+  head, a local static deduction rather than complete deterministic-encoding validation. This bounded success branch
+  returns CborNoError and advances the output pointer by the encoded length. cbor_encoder_get_buffer_size with the
+  original buffer returns that length, and extra_bytes_needed is zero. Only that prefix is encoded data; the unwritten
+  suffix retains its prior contents and the entire nine-byte buffer must not be treated as the item. No NUL terminator,
+  container, tag or framing is appended; encoded data itself may contain zero bytes. Insufficient capacity, null
+  pointers, invalid objects, reuse/multiple encodings, writer callbacks, negatives, floats, strings/UTF-8, containers/duplicate
+  keys, decoding, JSON conversion and other major types are outside positive scope; unexamined capabilities are
+  not asserted absent. Ten selected complete pinned repository files were checked against Git blobs, byte counts
+  and SHA256 and read statically. Upstream unsigned boundary vectors and encodeOne are unexecuted recipes, not executed
+  tests or exhaustive proof. No upstream library, dependency, test or generator was installed, imported, built or
+  run. Release archives, the entire source tree, signatures, binary packages, cross-implementation interchange,
+  security, performance, production deployment and IA adoption are unverified; full RFC 8949 conformance is not
+  claimed. MIT records the fixed LICENSE declaration, not legal suitability.'
 organization: ietf
 domains:
 - data_representation
@@ -192,13 +274,73 @@ sources:
   title: 'RFC8949 sections 3/3.1: unsigned values, definite strings, big-endian arguments and UTF-8'
   language: en
   accessed: '2026-11-04'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/CMakeLists.txt
+  title: TinyCBOR v7.1 pinned CMakeLists.txt; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/LICENSE
+  title: TinyCBOR v7.1 pinned LICENSE; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/README
+  title: TinyCBOR v7.1 pinned README; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/src/cbor.h
+  title: TinyCBOR v7.1 pinned src/cbor.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/src/cborencoder.c
+  title: TinyCBOR v7.1 pinned src/cborencoder.c; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/src/cborinternal_p.h
+  title: TinyCBOR v7.1 pinned src/cborinternal_p.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/src/cborinternalmacros_p.h
+  title: TinyCBOR v7.1 pinned src/cborinternalmacros_p.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/src/compilersupport_p.h
+  title: TinyCBOR v7.1 pinned src/compilersupport_p.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/tests/encoder/data.cpp
+  title: TinyCBOR v7.1 pinned tests/encoder/data.cpp; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/blob/da6421f2b5b91e3468c0af7265117427ea73f19e/tests/encoder/tst_encoder.cpp
+  title: TinyCBOR v7.1 pinned tests/encoder/tst_encoder.cpp; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/intel/tinycbor/releases/tag/v7.1
+  title: Official TinyCBOR release 7.1, 2026-10-23; fixed CMake project VERSION still 7.0
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/intel/tinycbor
+  title: Official whole library, repository ID 36690613
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/intel/tinycbor/git/ref/tags/v7.1
+  title: Lightweight tag resolves to pinned commit; no signature claim
+  language: en
+  accessed: '2026-11-05'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-3
+  title: 'RFC 8949 section 3: integer argument and network-byte-order representation'
+  language: en
+  accessed: '2026-11-05'
+- url: https://www.rfc-editor.org/rfc/rfc8949.html#section-3.1
+  title: 'RFC 8949 section 3.1: major type 0 unsigned integers'
+  language: en
+  accessed: '2026-11-05'
 scope_notes_zh: 本轮接纳范围限文档身份、标准等级、格式连续性和数据模型概括；具体转换规则另行核验。
 record_created_at: '2026-09-13T12:46:37+00:00'
-record_updated_at: '2026-11-04T22:23:36.574685+00:00'
+record_updated_at: '2026-11-05T03:39:32.890393+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / add_libcbor_library
-  reviewer: /root/select_evidenced_coverage_continuation/add_libcbor_library/review_libcbor_semantics
+  executor: Agent — OpenAI / dot / deliver_next_library_instance
+  reviewer: /root/continue_unicode_work/deliver_next_library_instance/review_tinycbor_semantics
   github_actor: ff6962757
 intake_provenance:
   candidate_id: cbor_rfc8949
