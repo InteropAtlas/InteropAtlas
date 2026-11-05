@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T14:58:07+00:00
+Document Updated At: 2026-11-05T15:36:18+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_mcp_schema_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_timestamp_portability_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -542,3 +542,10 @@ agents 行的方言问题现补有[固定源码责任矩阵及验证器实验](.
 已有 jsonschema4.26.0 上，12个合成输入对进一步区分了省略、2020-12、Draft7和未知声明：同一 prefixItems 非整数输入在Draft7下被接受，未知URN则 warning 后回退，正面对照接受、非整数被拒绝。该结果只属于验证器，不是SDK端点运行或完整协议不符合裁决。SDK的依赖范围、锁文件4.25.1、历史13例及本轮4.26.0分别保留；IA的4.25.1对象与既有实现关系不因此改版。
 
 与前述WoT资源修订和UBL结构/业务限制一起，这份证据回答了同一个组合问题的另一段：规范与模式存在后，是否确实到达预期验证器，错误又由谁转成可见结果。三类本地证据不能合成统一验证流水线或新的技术边。源码责任及依赖实验已不再未知；固定SDK实际方言调用、FastMCP转换后的值、真实协议响应和跨实现互通仍未执行。这个边界比缺少capability或notes注释更具体，但不要求为改变查询结果补标签，也不改变页面、维护机制或任何既有hold。
+
+
+## 2026-11-05 追加：同一时间表示的跨领域含义
+
+[时间字段可迁移性比较](../01_Prior_Art/timestamp-portability-2026-11-05.zh-CN.md)沿四条现有外部 RFC3339 uses，把 services 的事件时间、observability 的 Syslog 时间、geospatial 的查询条件及 agents 的记录创建时间放在同一组具体迁移问题下。共同语法不证明字段指称同一事实。OGC 条文还要求 datetime 匹配无 temporal geometry 的要素；Syslog 的可选 timeQuality 独立说明时区知识、同步状态与误差。这些事实不能从一个合法时间字符串或小数位数推出来。
+
+固定实现源码进一步分开原始字符串、原生时间值、缺省时间和实际操作：pygeoapi 把参数与集合 extents 交给条件检查，再交 provider；所查 CSV/GeoJSON 路径未应用该过滤，响应 timeStamp 另取当前 UTC。CloudEvents 两 SDK 的 time 转换入口和 pyRFC3339 的既有精度/零偏移观察，说明表示可读、数值保留、偏移知识与真实发生时间不能互相替代。所有新结论是文献/源码比较，旧40/16/12观察没有重跑；没有新增关系、统一时间格式、页面、维护门槛或全局覆盖率。剩余缺口是具体字段映射的业务依据和实际选定入口的交换结果，不是缺少 capability 或 notes 标签。
