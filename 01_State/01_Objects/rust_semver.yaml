@@ -1,0 +1,161 @@
+id: rust_semver
+type: system
+kind: library
+name_zh: Rust semver 版本处理库
+name_en: Rust semver version library
+official_name: semver
+version: 1.0.28
+versions:
+- version: 1.0.28
+  date: '2026-04-04'
+  status: released
+  url: https://github.com/dtolnay/semver/releases/tag/1.0.28
+external_identifiers:
+- namespace: github
+  value: dtolnay/semver
+official_url: https://github.com/dtolnay/semver
+description_zh: '主体是整体 Rust semver 开源库，用于 Cargo 风格的语义化版本解析和求值；不是内部 Display 模块、Python semver 库、Cargo 本身或 SemVer 标准。固定
+  Rust semver 1.0.28、官方 tag 1.0.28 和 commit 7625c7aa3f0e8ba21e099d1765bcebcb72aa8816。只将 Version::new(major, minor,
+  patch) 后使用默认 Display 格式 {} 输出核心版本号的源码路径，映射到 Semantic Versioning 2.0.0 第 2 条的 X.Y.Z 非负十进制整数、无前导零语法。三个实参均为 Rust
+  u64，范围各为 0..18446744073709551615（含两端）；构造器逐字段存储并令 pre 与 build 分别为 Prerelease::EMPTY 和 BuildMetadata::EMPTY。对象在格式化期间有效、未被修改，使用正常工作的格式化输出接收端；默认
+  {} 不指定宽度、填充、对齐、精度或其他格式标志。Display 通过无外层格式选项的三个 u64 Display 输出与两个点号拼接；零输出为 0，非零无前导零，不添加先行版本、构建元数据、前缀、空白或换行。结果长度为
+  5..62 个 ASCII 字节，是静态推导，不是实测。pad 在无 width 时直接进入输出；指定 width 可能产生填充，不能把该输出一般化为合法裸版本字符串。输出错误按 fmt::Result 传播，接收端可能已写入前缀，不保证事务式输出或完整字节写入。这里只描述已构造核心版本的表示，不从字符串解析或验证输入，也不证明任意长度的
+  SemVer 数字支持；u64 上限是库表示限制，不是规范上限。第 2 条同时要求的数值递增、其他条款的公共 API 声明、发布不可变性及兼容性规则均不由该构造/显示切片实施。0.y.z 的语法可表示不代表稳定 API。README
+  明确该库遵循 Cargo 对 SemVer 的解释，不把 Cargo 版本要求语法泛化为其他生态或 SemVer 2.0.0 的统一要求语法。先行版本、构建元数据、比较/优先级、相等/hash、VersionReq、依赖求解、serde、解析器及不同格式标志不在正面范围；未审能力不等于不存在。八份选定完整固定仓库文件逐份核对
+  Git blob、字节数与 SHA256 后静态读取；tests/test_version.rs 中构造/显示案例只是未执行测试配方，不是边界全覆盖或运行证据。没有安装、导入、构建、执行上游库、依赖、测试或生成器；未验证
+  crates.io 包、发布归档、完整源码树或签名。MIT OR Apache-2.0 仅记录固定上游双许可声明，不作法律适用判断。不声称完整 SemVer 符合性、跨生态互通、安全、性能、生产部署或 IA 采用。
+
+
+  English scope and limitations:
+
+
+  Pins Rust semver 1.0.28, official tag 1.0.28 and commit 7625c7aa3f0e8ba21e099d1765bcebcb72aa8816. Only the source
+  path from Version::new(major, minor, patch) to default Display formatting {} of the core version is mapped to
+  Semantic Versioning 2.0.0 rule 2 syntax: X.Y.Z nonnegative decimal integers without leading zeroes. Each argument
+  is a Rust u64 in 0..18446744073709551615 inclusive; the constructor stores the three fields and sets pre and build
+  to Prerelease::EMPTY and BuildMetadata::EMPTY. The object remains valid and unmodified during formatting, with
+  a functioning formatting sink; default {} specifies no width, fill, alignment, precision or other formatting flags.
+  Display joins three u64 Display outputs, without forwarding outer formatting options, with two dots. Zero emits
+  0 and nonzero values have no leading zeroes; no prerelease, build metadata, prefix, whitespace or newline is added.
+  Output length is 5..62 ASCII bytes, a static deduction rather than a measurement. With no width, pad directly
+  performs the output; an explicit width can add padding and must not be generalized to a valid bare version string.
+  Output errors propagate as fmt::Result; a sink may already have received a prefix, so transactional output or
+  complete byte delivery is not guaranteed. This describes representation of an already constructed core version,
+  not string parsing or validation, and does not establish arbitrary-length SemVer number support: the u64 ceiling
+  belongs to the library representation, not the specification. Numeric increment obligations elsewhere in rule
+  2 and the public API declaration, release immutability and compatibility rules in other clauses are not implemented
+  by this construction/display slice. Syntactic representability of 0.y.z does not imply a stable API. README explicitly
+  follows Cargo interpretation of SemVer; Cargo version-requirement syntax is not generalized to other ecosystems
+  or to uniform SemVer 2.0.0 requirements syntax. Prerelease, build metadata, comparison/precedence, equality/hash,
+  VersionReq, dependency solving, serde, parsers and other formatting flags are outside positive scope; unexamined
+  capabilities are not asserted absent. Eight selected complete pinned repository files were byte-count/Git-blob/SHA256
+  checked and read statically. Construction/display examples in tests/test_version.rs are unexecuted recipes, not
+  exhaustive boundary coverage or runtime evidence. No upstream library, dependency, test or generator installation,
+  import, build or execution occurred; crates.io packages, release archives, the entire source tree and signatures
+  were not verified. MIT OR Apache-2.0 records the pinned upstream dual-license declaration, not legal suitability.
+  Full SemVer conformance, cross-ecosystem interoperability, security, performance, production deployment and IA
+  adoption are unproved.'
+description_en: 'The whole open-source Rust semver library for parsing/evaluating Cargo-flavored semantic versions,
+  not an internal Display module, Python semver library, Cargo itself or the SemVer standard. Pins Rust semver 1.0.28,
+  official tag 1.0.28 and commit 7625c7aa3f0e8ba21e099d1765bcebcb72aa8816. Only the source path from Version::new(major,
+  minor, patch) to default Display formatting {} of the core version is mapped to Semantic Versioning 2.0.0 rule
+  2 syntax: X.Y.Z nonnegative decimal integers without leading zeroes. Each argument is a Rust u64 in 0..18446744073709551615
+  inclusive; the constructor stores the three fields and sets pre and build to Prerelease::EMPTY and BuildMetadata::EMPTY.
+  The object remains valid and unmodified during formatting, with a functioning formatting sink; default {} specifies
+  no width, fill, alignment, precision or other formatting flags. Display joins three u64 Display outputs, without
+  forwarding outer formatting options, with two dots. Zero emits 0 and nonzero values have no leading zeroes; no
+  prerelease, build metadata, prefix, whitespace or newline is added. Output length is 5..62 ASCII bytes, a static
+  deduction rather than a measurement. With no width, pad directly performs the output; an explicit width can add
+  padding and must not be generalized to a valid bare version string. Output errors propagate as fmt::Result; a
+  sink may already have received a prefix, so transactional output or complete byte delivery is not guaranteed.
+  This describes representation of an already constructed core version, not string parsing or validation, and does
+  not establish arbitrary-length SemVer number support: the u64 ceiling belongs to the library representation, not
+  the specification. Numeric increment obligations elsewhere in rule 2 and the public API declaration, release immutability
+  and compatibility rules in other clauses are not implemented by this construction/display slice. Syntactic representability
+  of 0.y.z does not imply a stable API. README explicitly follows Cargo interpretation of SemVer; Cargo version-requirement
+  syntax is not generalized to other ecosystems or to uniform SemVer 2.0.0 requirements syntax. Prerelease, build
+  metadata, comparison/precedence, equality/hash, VersionReq, dependency solving, serde, parsers and other formatting
+  flags are outside positive scope; unexamined capabilities are not asserted absent. Eight selected complete pinned
+  repository files were byte-count/Git-blob/SHA256 checked and read statically. Construction/display examples in
+  tests/test_version.rs are unexecuted recipes, not exhaustive boundary coverage or runtime evidence. No upstream
+  library, dependency, test or generator installation, import, build or execution occurred; crates.io packages,
+  release archives, the entire source tree and signatures were not verified. MIT OR Apache-2.0 records the pinned
+  upstream dual-license declaration, not legal suitability. Full SemVer conformance, cross-ecosystem interoperability,
+  security, performance, production deployment and IA adoption are unproved.'
+open_source: true
+license_expression: MIT OR Apache-2.0
+domains:
+- software_engineering
+- versioning
+sources:
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/README.md
+  title: Rust semver 1.0.28 pinned README.md; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/src/identifier.rs
+  title: Rust semver 1.0.28 pinned src/identifier.rs; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/LICENSE-APACHE
+  title: Rust semver 1.0.28 pinned LICENSE-APACHE; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/src/lib.rs
+  title: Rust semver 1.0.28 pinned src/lib.rs; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/tests/test_version.rs
+  title: Rust semver 1.0.28 pinned tests/test_version.rs; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/src/display.rs
+  title: Rust semver 1.0.28 pinned src/display.rs; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/Cargo.toml
+  title: Rust semver 1.0.28 pinned Cargo.toml; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/blob/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816/LICENSE-MIT
+  title: Rust semver 1.0.28 pinned LICENSE-MIT; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/dtolnay/semver/releases/tag/1.0.28
+  title: Official semver 1.0.28 release, 2026-04-04
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/dtolnay/semver
+  title: Official whole library, repository ID 22432442
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/dtolnay/semver/git/tags/5368cdfc013f90a4ecb686a013374a651a846e0e
+  title: Annotated tag binds exact commit; no independent signature verification
+  language: en
+  accessed: '2026-11-05'
+- url: https://semver.org/spec/v2.0.0.html#spec-item-2
+  title: Semantic Versioning 2.0.0 rule 2; syntax slice only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/semver/semver/blob/f99d5485190a47c0863949e7da810a5553e0ed4d/semver.md
+  title: Pinned SemVer 2.0.0 text, Git blob fb25b8ecba2dcd0e494ef6336d6180e05d82642d
+  language: en
+  accessed: '2026-11-05'
+last_verified_at: '2026-11-05T02:49:27.058523+00:00'
+last_verified_by: Agent — OpenAI / dot / add_new_standard_implementation; static source only, no upstream execution
+record_created_at: '2026-11-05T03:00:19.103224+00:00'
+record_updated_at: '2026-11-05T03:00:19.103224+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_new_standard_implementation
+  reviewer: Agent — OpenAI / dot / /root/continue_unicode_work/add_new_standard_implementation/review_rust_semver_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: rust_semver
+  acceptance_event_id: accept-20261105-rust-semver-1-0-28
+  reviewed_candidate_blob: 94ee87984dd2265cedcfab422fca2d708c0fd907
+  reviewed_against_commit: 7bfdb832019505d6d9198bec0cf49dda9fb18ed3
+  candidate_executor: Agent — OpenAI / dot / add_new_standard_implementation
+  canonical_serializer: Agent — OpenAI / dot / add_new_standard_implementation
+  reviewed_packet_commit: 7bfdb832019505d6d9198bec0cf49dda9fb18ed3
+  reviewed_packet_blob: ee3e757ea6f3a789030944aebe6d865a0dc836ef
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/7bfdb832019505d6d9198bec0cf49dda9fb18ed3/01_State/Inbox/review-packets/rust-semver-1.0.28-20261105.yaml
