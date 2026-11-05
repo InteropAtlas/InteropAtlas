@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T14:20:00+00:00
+Document Updated At: 2026-11-05T14:58:07+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Independent Agent — OpenAI / dot / review_wot_final_evidence
+  Executor: Agent — OpenAI / dot / finish_wot_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_mcp_schema_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -533,3 +533,12 @@ print(json.dumps({
 industrial 行的 JSON/JSON-LD 边界现在增加了[有限离线实验](../../02_Experiments/02_Pilots/wot-td-resource-runtime-2026-11-05.zh-CN.md)及[机器可读输入/来源](../../02_Experiments/03_Evidence/wot-td-resource-probe-20261105-manifest.json)、[完整结果](../../02_Experiments/03_Evidence/wot-td-resource-probe-20261105-result.json)。官方 TD1.1 errata 保留同一 Recommendation 身份，却修订了 TD/TM JSON Schema 资源。相同合成 context 输入在固定前后资源的 Draft7 验证中出现接受差异，涉及映射值和数组位置；空 context 数组及 old→other→new 对照仍被两版接受，不能把通过等同完整符合性。
 
 这为 #276 的外部证据时效性问题提供一个实际边界：出版版本标签不独自固定机器资源字节、验证器方言或具体调用入口。它不是重新盘点领域数，也不自动要求更新全部日期或生成快照。现有 node-wot 十五例已经记录 March-2025 依赖标签，实验未证明其历史安装字节等于所查资源，亦未运行 node-wot/Ajv/JSON-LD 或设备链，因此没有把旧例作废、把剩余端到端问题说成已解决。下一处真正尚缺的证据是某个选定运行入口的确切依赖资源与处理路径，而不是再补一条无范围的“支持 TD1.1”。其他领域的未知仍须各自取证，本例不宣告整体底图完成。
+
+
+## 2026-11-05 追加：MCP 工具模式由谁实际验证
+
+agents 行的方言问题现补有[固定源码责任矩阵及验证器实验](../../02_Experiments/02_Pilots/mcp-schema-responsibility-2026-11-05.zh-CN.md)。SDK1.26.0 的低层服务端在定义存在、输入开关启用时委派 jsonschema；直接 CallToolResult 返回跳过其后的低层输出模式分支。FastMCP 则关闭那一步低层输入检查，使用条件预解析与 Pydantic，某些直接结果仍有自己的输出模型检查；客户端只对非 isError 的结果检查结构化输出。这些分支不能概括为“全部验证”或“完全不验证”。
+
+已有 jsonschema4.26.0 上，12个合成输入对进一步区分了省略、2020-12、Draft7和未知声明：同一 prefixItems 非整数输入在Draft7下被接受，未知URN则 warning 后回退，正面对照接受、非整数被拒绝。该结果只属于验证器，不是SDK端点运行或完整协议不符合裁决。SDK的依赖范围、锁文件4.25.1、历史13例及本轮4.26.0分别保留；IA的4.25.1对象与既有实现关系不因此改版。
+
+与前述WoT资源修订和UBL结构/业务限制一起，这份证据回答了同一个组合问题的另一段：规范与模式存在后，是否确实到达预期验证器，错误又由谁转成可见结果。三类本地证据不能合成统一验证流水线或新的技术边。源码责任及依赖实验已不再未知；固定SDK实际方言调用、FastMCP转换后的值、真实协议响应和跨实现互通仍未执行。这个边界比缺少capability或notes注释更具体，但不要求为改变查询结果补标签，也不改变页面、维护机制或任何既有hold。
