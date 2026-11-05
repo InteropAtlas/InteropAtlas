@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T11:50:00+00:00
-Document Updated At: 2026-11-05T11:54:00+00:00
+Document Updated At: 2026-11-05T12:17:26+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / develop_coverage_dimension_reconciliation
-  Reviewer: Independent Agent — OpenAI / dot / review_coverage_dimension_reconciliation
+  Executor: Agent — OpenAI / dot / test_hls_daterange_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_hls_daterange_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -184,3 +184,9 @@ print(json.dumps({
 | HLS 文本、媒体与信令研究 | `44ce342d6986b24f00bed8385ccad79d33ce12175185fbc563a630c3e0199ae4` |
 
 本研究只形成这一有限对照及 Research 导航入口。原日期快照、既有接纳和关系条件、候选身份争议及独立授权边界均未改变。
+
+## 2026-11-05 后续补充：DateRange 零值的实际保持结果
+
+上述固定输入、指纹与静态判断保留为原研究历史。[后续有限内存实验](../../02_Experiments/02_Pilots/hls-daterange-runtime-2026-11-05.zh-CN.md)在仓库基线 `079e7b053ef1a8aadb57f2ae512043ef342fb282`、CPython3.12.14 和经指纹核对的 m3u8 6.0.0 下执行九个固定输入：DURATION 与 PLANNED-DURATION 各自取省略、零和非零对照，DateRange 放在普通 EXTINF/URI 之前。显式零值进入模型为 float 0.0，但 dumps 省略对应属性，再由同库解析为缺失/None；非零数值和省略对照保持。固定 ID、START-DATE 字符串及 PROGRAM-DATE-TIME 时间值保持，输出文本并非逐字节保持。
+
+因此上表中“零 DURATION 的模型值与输出属性”已有该输入子集的执行答案。没有 END-DATE、END-ON-NEXT 时，DURATION=0 的输出丢失改变了已知零与未知持续时间的区别；PLANNED-DURATION 的丢失另属预计时长信息，不能一概混同。本次再解析仍由 m3u8 完成，独立消费者、SCTE命令、媒体时钟及实际拼接仍未验证；FFmpeg 的既有判断仍仅为静态读取。这项补充只增强局部证据，不刷新原对象/关系验证时间、不新增关系，也不改变六维、其他工作流、整体分母或任何既有 hold。
