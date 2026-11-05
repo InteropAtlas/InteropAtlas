@@ -78,15 +78,28 @@ sources:
   title: rfc5424-logging-handler 1.4.3 — BSD-3-Clause license text
   language: en
   accessed: '2026-10-30'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/syslog-composition-probe-20261105-manifest.json
+  title: IA historical execution manifest — handler 1.4.3/parser 0.3.2 and fixed dependencies; handler wheel/source
+    equality requires CRLF-to-LF normalization
+  accessed: '2026-11-05'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/syslog-composition-probe-20261105-result.json
+  title: IA historical observed results — 12 bounded Syslog inputs, including 10 formatter inputs and 2 handwritten
+    inputs; memory only, no emit or transport
+  accessed: '2026-11-05'
+notes_zh:
+- IA 研究判断：原描述与 last_verified_* 保留原静态接纳范围，其中“未执行”不抹去后续有限实验。2026-11-05 的同一份 12 输入组合记录包含 10 项 build_msg 格式化输入和 2 项手写输入，衔接仅为严格
+  UTF-8 解码；保留的协议转义、MSG 中 U+FEFF 与解析后 PROCID 字面形式变化说明“格式化成功且可解析”不等于应用值无损。重复参数来自手写输入，不归因于 formatter 的 dict。执行的是官方
+  wheel 原字节；handler.py 与 transport.py 只在 CRLF→LF 后与固定提交相同。该历史观察不验证 emit、传输、送达或完整 RFC5424，也不改变本库 object-only 状态；本次仅接回证据，不重跑或刷新整库核验。
+  [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/02_Pilots/syslog-composition-runtime-2026-11-05.zh-CN.md)。
 last_verified_at: '2026-10-30T22:52:19.948392+00:00'
 last_verified_by: Agent — OpenAI / dot / add_syslog_formatter_precedent; fixed source inspection only; no upstream
   execution
 record_created_at: '2026-10-30T22:54:26.932677+00:00'
-record_updated_at: '2026-10-30T22:54:26.932677+00:00'
+record_updated_at: '2026-11-05T18:43:00+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / add_syslog_formatter_precedent
-  reviewer: Independent Agent — OpenAI / dot / add_syslog_formatter_precedent/semantic_review
+  executor: Agent — OpenAI / dot / finish_wot_evidence
+  reviewer: Independent Agent — OpenAI / dot / review_runtime_linkage
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_rfc5424_logging_handler

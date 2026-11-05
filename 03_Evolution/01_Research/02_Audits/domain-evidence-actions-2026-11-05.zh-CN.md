@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T18:11:55.002588+00:00
+Document Updated At: 2026-11-05T18:43:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_evidence_integration
+  Reviewer: Independent Agent — OpenAI / dot / review_runtime_linkage
   GitHub Actor: ff6962757
 -->
 
@@ -602,3 +602,47 @@ PYTHONDONTWRITEBYTECODE=1 python 03_Evolution/01_Research/02_Audits/evidence-lin
 当前 Human 输出的限制也实测保留：六个对象页都显示新来源入口；MCP 实现页显示可点击的研究报告链接。五个标准页的既有模板不打印 notes 正文，只保留 assessment 计数，机器投影仍能恢复完整内容。搜索索引没有纳入 sources/notes，本次字节不变；没有声称新报告关键词已可搜索，也不借此修改 renderer、页面展示或搜索规则。静态生成比较只变化六个对象页，其他生成文件不变。没有启动本地浏览器或重试既有 Chromium 拒绝。
 
 这次接合使“从一个已知对象继续查到已完成的具体答案”可按现有机制复核；它不代表全部领域的证据均已接通、整体底图已完成、历史实现重新验证或资料判断升格为外部权威。原资源/部署、跨实现交换、未知和所有 hold 继续保留。
+
+
+## 2026-11-05 追加：从实现记录找回已有保持性反例
+
+前一节把六个研究问题接回标准/实现入口；本次处理另一个具体访问问题：**从两个 Syslog 库或 m3u8 的现有对象出发，能否直接找回已完成的“接受输入却不保留值”观察，并区分观察、关系范围与未知？** 基线固定为 `682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d`。这是已有证据的接合，不是新增上游实验、完整率测量或新维护合同。
+
+基线中，三对象的 `project_evidence` 分别返回 4、10、10 条原 sources，notes-only assessment 均为 `not_recorded`；这些状态不表示没有研究。Syslog 已可从 RFC3339 经前节时间比较清单间接抵达，全文研究也已有链接。本次补的是**实现对象本身的直接恢复路径**，不宣称证据原来全局不可发现。没有因为 notes 缺失而补能力标签或技术边。
+
+| 实现入口 | 新的直接证据入口 | 能回答的有限问题与边界 |
+| --- | --- | --- |
+| `python_rfc5424_logging_handler` 与 `python_syslog_rfc5424_parser` | 同一份 [Syslog 清单](../../02_Experiments/03_Evidence/syslog-composition-probe-20261105-manifest.json)、[12 输入结果](../../02_Experiments/03_Evidence/syslog-composition-probe-20261105-result.json)和[报告](../../02_Experiments/02_Pilots/syslog-composition-runtime-2026-11-05.zh-CN.md) | 10 项 formatter 输入、2 项手写输入，不是两套24例。严格 UTF-8 解码后的语法接受并不还原所有应用值：协议转义、BOM、重复参数和 PROCID 分别保留其观察层次。手写重复参数不归给 formatter。两库仍 object-only，没有从实验补 implements。 |
+| `python_m3u8` | [HLS 清单](../../02_Experiments/03_Evidence/hls-daterange-probe-20261105-manifest.json)、[九输入结果](../../02_Experiments/03_Evidence/hls-daterange-probe-20261105-result.json)和[报告](../../02_Experiments/02_Pilots/hls-daterange-runtime-2026-11-05.zh-CN.md) | 在固定位置及组合中，显式零值在输出后成为缺失；非零/省略对照分开。DURATION 与 PLANNED-DURATION 不混为一项含义。再解析是同一库，既有静态 implements 切片不因链接扩大到 DateRange、SCTE35 或完整 HLS。 |
+
+两个实验不互相组合为一个交换系统，也不合并成21项“互操作覆盖”。它们共同提醒本次使用者先指定需要保留的内容：应用值、参数的重数、标识的字面形式、实际/预计时长、或者原始字节；“返回成功”不能替代该项判断。这个判断放在三对象各自 `notes_zh` 字符串列表中，由既有 projection 标为 IA-authored assessment。来源字段追加的是固定提交下的历史清单/观察 JSON，不把报告解释当成新的外部权威。
+
+### 历史身份、范围与时间没有被合并
+
+Syslog 结果固定 handler1.4.3、parser0.3.2、Lark0.6.7、tzlocal5.3.1、pytz2025.2、CPython3.12.14 和 UTC；这是选定实验环境，不是上游历史锁定。parser 的 message.py、parser.py 与原提交字节相同，handler wheel 中的 handler.py、transport.py 则仅在 CRLF→LF 后与原提交相同，不能笼统称所有源码字节相等。HLS 结果固定 m3u8 6.0.0 官方 wheel，八个 Python 文件与 `49417d05602fc472b518ec61aa9b327cd00e079d` 字节相同。
+
+三对象原描述和 `last_verified_at/by` 保留静态接纳范围及原日期；原文的未执行陈述不被改写为实验结论，也不抹去另有环境与日期的后续实验。新增 notes 明确这种分层，`record_updated_at` 与当前贡献信息只标识此次接合。旧 sources 的顺序、值和 accessed、版本、身份、intake、created 与全部关系不变。历史报告、脚本、清单和结果字节也不变。本次没有下载、安装、导入或运行这些上游库。
+
+### 用既有读取机制恢复
+
+在含本次接合的干净 tracked checkout 中，使用当前 Engine 已有依赖可执行下方一次性只读配方。输出原有对象来源、独立 assessment 和核验字段，不执行历史实验、不判断完整符合性，也不创建通用查询合同。历史 JSON 中的输入、输出与版本可从返回的固定 URL 继续恢复。
+
+```python
+from pathlib import Path
+import json, sys
+sys.dont_write_bytecode = True
+root = Path('.').resolve()
+sys.path.insert(0, str(root / '02_Runtime/01_Engine'))
+from bootstrap_query import load_atlas, index_objects
+from workspace_projection import project_evidence, project_field
+objects, _ = load_atlas(root)
+index = index_objects(objects)
+ids = ['python_rfc5424_logging_handler', 'python_syslog_rfc5424_parser', 'python_m3u8']
+print(json.dumps({i: {
+    'evidence': project_evidence(index[i]),
+    'historical_verification': {f: project_field(index[i], f)
+                              for f in ['last_verified_at', 'last_verified_by']},
+} for i in ids}, ensure_ascii=False, indent=2, default=str))
+```
+
+本次本地实际读取恢复 6、12、12 条 sources，各含两条追加的固定历史来源，并恢复三个 IA-authored notes；两条 Syslog 路径是同一清单/结果。原始核验字段逐值保留。这是 IA 数据读取检验，不是重新执行12例或9例。所有既有 hold、取消的 live-page retrieval 及页面/显示暂停保持不变。

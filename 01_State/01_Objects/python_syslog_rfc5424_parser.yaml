@@ -83,14 +83,26 @@ sources:
   title: RFC5424 syntax, PRI, version and structured-data rules; comparisons are static
   language: en
   accessed: '2026-10-31'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/syslog-composition-probe-20261105-manifest.json
+  title: IA historical execution manifest — parser 0.3.2, Lark 0.6.7 and the handler/dependency combination; fixed
+    parser source bytes match
+  accessed: '2026-11-05'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/syslog-composition-probe-20261105-result.json
+  title: IA historical observed results — the same 12-input Syslog composition study; grammar parameters versus
+    public dictionaries, not complete RFC5424 validation
+  accessed: '2026-11-05'
+notes_zh:
+- IA 研究判断：原描述与 last_verified_* 保留原静态接纳范围；后续 2026-11-05 的 12 输入实验另有固定依赖与结果。公开字典中的 SD 值保留协议转义、MSG 保留 U+FEFF，数字 PROCID
+  0012 变为整数 12；手写的同一 SD-ID 内重复参数在文法序列中均存在，公开字典只保留末值。这支持该组合和输入下“接受文本不等于保留应用值”的判断，不证明全部输入行为或整个协议不符合。它与 formatter 链接指向同一实验，不能重复计数；parser
+  的 message.py 与 parser.py 字节与原固定提交一致，依赖环境并非原历史锁定。未测重新序列化后交给其他消费者，也未测网络/分帧，不新增 implements/uses；本次不重跑或刷新整库核验。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/02_Pilots/syslog-composition-runtime-2026-11-05.zh-CN.md)。
 last_verified_at: '2026-10-31T21:23:43+00:00'
 last_verified_by: Agent — OpenAI / dot / fixed syslog parser source inspection only; no upstream execution
 record_created_at: '2026-10-31T21:25:58+00:00'
-record_updated_at: '2026-10-31T21:25:58+00:00'
+record_updated_at: '2026-11-05T18:43:00+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot
-  reviewer: Independent Agent — OpenAI / dot / fixed syslog parser semantic review
+  executor: Agent — OpenAI / dot / finish_wot_evidence
+  reviewer: Independent Agent — OpenAI / dot / review_runtime_linkage
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_syslog_rfc5424_parser

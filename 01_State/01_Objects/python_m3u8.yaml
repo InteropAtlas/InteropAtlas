@@ -113,14 +113,27 @@ sources:
   title: Fixed MIT notice only; no legal suitability assessment
   language: en
   accessed: '2026-11-04'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/hls-daterange-probe-20261105-manifest.json
+  title: IA historical execution manifest — m3u8 6.0.0 verified wheel and eight fixed-commit Python source matches;
+    nine in-memory DateRange fixtures
+  accessed: '2026-11-05'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/03_Evidence/hls-daterange-probe-20261105-result.json
+  title: IA historical observed results — nine m3u8 DateRange zero/omitted/nonzero combinations; same-library loads/model/dumps/loads,
+    no media or FFmpeg
+  accessed: '2026-11-05'
+notes_zh:
+- IA 研究判断：原描述、last_verified_* 与既有 implements 的枚举范围仍指原静态接纳切片，不随本链接扩大。后续 2026-11-05 的九个固定 DateRange 输入中，DURATION=0
+  与 PLANNED-DURATION=0 先成为 float 0.0，dumps 省略后同库再解析成为缺失/None；非零与省略对照分别保持。实际时长与预计时长须分开，例如 DURATION=2.5、PLANNED-DURATION=0
+  输出仍保留实际 2.5。官方 6.0.0 wheel 的八个 Python 文件与原固定提交逐字节相同；这是历史内存观察，不是独立消费者互通、FFmpeg、SCTE35、媒体时间线或完整 HLS 验证，未验证其他位置或任意输入。本次仅增加可恢复证据，不重跑或刷新整库核验。
+  [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/682fe7d50b6474aa35b6f8e6c1ec6a70987f3d3d/03_Evolution/02_Experiments/02_Pilots/hls-daterange-runtime-2026-11-05.zh-CN.md)。
 last_verified_at: '2026-11-04T17:18:36.256381+00:00'
 last_verified_by: Agent — OpenAI / dot / add_m3u8_implementation; fixed source/documentation only, no upstream execution
 record_created_at: '2026-11-04T17:21:50.717367+00:00'
-record_updated_at: '2026-11-04T17:21:50.717367+00:00'
+record_updated_at: '2026-11-05T18:43:00+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / add_m3u8_implementation
-  reviewer: Independent Agent — OpenAI / dot / review_m3u8_semantics
+  executor: Agent — OpenAI / dot / finish_wot_evidence
+  reviewer: Independent Agent — OpenAI / dot / review_runtime_linkage
   github_actor: ff6962757
 intake_provenance:
   candidate_id: python_m3u8
