@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T12:42:00+00:00
+Document Updated At: 2026-11-05T13:05:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Independent Agent — OpenAI / dot / review_domain_evidence_actions
+  Reviewer: Independent Agent — OpenAI / dot / review_coverage_query_fit
   GitHub Actor: ff6962757
 -->
 
@@ -418,3 +418,111 @@ Latest Substantive Contribution:
 - 本研究不修改 Unicode、pugixml、Rust semver、fhirclient 可见摘要以及其他既有身份或发布 hold；也不把某处 hold 扩大成所有领域研究停工的理由。若具体后续步骤触及 held 操作、真实服务或新的权限，应单独确认那个动作，独立的来源核对仍可继续。
 
 因此，本研究为整体底图补上的是跨现有领域的“问题—证据—未知—下一步”阅读路径，而不是用代表样本或实验数量替代完整地图。
+
+## 2026-11-05 追加：现有机器读取的有界适配检验
+
+前文提出了 CloudEvents 字段保留问题；本节进一步检验：**直接使用现有 capability 比较与 evidence projection，是否足以找到这两个实现并理解其证据边界？** 新取样基线固定为 `f521367cbf59033b40fee06b491576ce2bc0e3ac`，前文研究及链接仍保留原基线。本节只执行 IA 自身的本地读取/投影代码，没有安装、导入或运行 CloudEvents SDK，也没有修改数据、Runtime 或任何既有选择合同。
+
+结果是否定的，但这不是 Runtime 缺陷。`project_compare` 按明确 capability 成员选择；Kotlin 记录 `data_serialization`，JavaScript 未注释该 capability，因此请求两个 ID 时只返回 Kotlin。JavaScript 已有来源和历史运行记录，不能把被选择器排除解释成没有序列化能力或没有证据，也不为改变查询结果而补标签。JavaScript 未建立到 CloudEvents 1.0.2 的 implements 则是另一个独立的版次证据问题，不等同于缺 capability 注释。
+
+`project_evidence` 的 assessment 专指 `notes_zh`。两个 SDK 的这个字段都未记录，所以该投影返回 `not_recorded`，但其 `description_zh`、`scope_notes_zh` 中有大量条件和限制。不能把这个状态改读成“没有任何评估”，也不能在查询中悄悄把描述升级为外部权威证据。该投影的 sources 仅保留 title/url/accessed 及恢复路径，未输出 language；要查原来源字段及完整限制，应回到同一 Canonical 记录。这里不建议更改现有投影的语义。
+
+因此本次研究显式选择两个 SDK、固定 CloudEvents 标准及 JSON/URI/RFC3339 三个依赖对象，另取四条已有关系，保留原始字段与 context/evidence 后，再观察既有投影。选择是针对本研究问题，不是新增默认视图、通用查询 API、全库快照或替代方案排名。下面的可复现配方检验选择/恢复行为，不自动判断规范符合性、证据质量或字段在 SDK 中的真实运行结果。
+
+### 可复现配方与本次观察
+
+在完整仓库的固定基线 checkout 根目录，使用该版 Engine 的既有 Python 依赖执行下段；工作树的 tracked 文件必须干净。配方只输出本问题的选择结果、字段状态、恢复路径和输入摘要，没有文件写入或网络调用。`load_atlas` 会读取现有本地存储，随后只保留本问题明确选择的记录。不要把本节作为新 Runtime 接口或自动更新任务。
+
+```python
+from pathlib import Path
+from copy import deepcopy
+import hashlib, json, subprocess, sys
+
+root = Path('.').resolve()
+baseline = 'f521367cbf59033b40fee06b491576ce2bc0e3ac'
+assert subprocess.check_output(['git', 'rev-parse', 'HEAD'], text=True).strip() == baseline
+assert not subprocess.check_output(['git', 'status', '--porcelain', '--untracked-files=no'], text=True).strip()
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(root / '02_Runtime/01_Engine'))
+from bootstrap_query import load_atlas, index_objects
+from relation_model import normalize_relation
+from workspace_projection import project_compare, project_evidence, project_field
+
+pair = ['cloudevents_javascript_sdk', 'cloudevents_kotlin_sdk']
+ids = {'cloudevents_1.0.2', *pair, 'json_rfc8259', 'uri_rfc3986', 'rfc3339'}
+rids = {'cloudevents_1.0.2_uses_json', 'cloudevents_1.0.2_uses_uri',
+        'cloudevents_1.0.2_uses_rfc3339', 'cloudevents_kotlin_sdk_implements_cloudevents_1_0_2'}
+objects, relations = load_atlas(root)
+index = index_objects(objects)
+chosen = sorted([r for r in relations if r.get('id') in rids], key=lambda r: r['id'])
+assert len(chosen) == 4 and {r['id'] for r in chosen} == rids
+descriptors = [normalize_relation(r) for r in chosen]
+assert {d.source_id for d in descriptors} | {d.target_id for d in descriptors} | {pair[0]} == ids
+assert len(ids) == 6 and ids <= index.keys()
+raw = {'objects': {i: deepcopy(index[i]) for i in sorted(ids)}, 'relations': deepcopy(chosen)}
+fields = ['version', 'capabilities', 'description_zh', 'description_en',
+          'scope_notes_zh', 'scope_notes_en', 'last_verified_at', 'last_verified_by']
+comparison = project_compare('data_serialization', pair, fields, index)
+explicit = {i: {f: project_field(index[i], f) for f in fields} for i in pair}
+assert comparison['requested_ids'] == pair and comparison['included_ids'] == [pair[1]]
+assert explicit[pair[0]]['capabilities']['state'] == 'not_recorded'
+assert explicit[pair[0]]['capabilities']['value'] is None
+assert explicit[pair[1]]['capabilities']['value'] == ['data_serialization']
+for i in pair:
+    for f in ['description_zh', 'description_en', 'scope_notes_zh', 'scope_notes_en']:
+        assert explicit[i][f]['state'] == 'recorded' and explicit[i][f]['value'] == raw['objects'][i][f]
+    p = project_evidence(index[i])
+    assert p['evidence_state'] == 'recorded' and p['assessment']['state'] == 'not_recorded'
+    assert 'notes_zh' not in index[i]
+    assert p['assessment']['recoverable_from']['canonical_field'] == 'notes_zh'
+    assert all('language' in s for s in raw['objects'][i]['sources'])
+    assert all('language' not in s for s in p['sources'])
+assert raw['objects'] == {i: index[i] for i in sorted(ids)} and raw['relations'] == chosen
+for r, d in zip(raw['relations'], descriptors):
+    assert dict(d.context) == r['context'] and list(d.evidence) == r['evidence']
+
+# Serialization normalizes YAML dates to strings; no semantics or new fields are inferred.
+def encoded(value):
+    return json.dumps(value, ensure_ascii=False, sort_keys=True, default=str).encode()
+raw_digest = hashlib.sha256(encoded(raw)).hexdigest()
+assert encoded(json.loads(encoded(raw))) == encoded(raw)
+paths = {r['_physical_source'] for r in [*raw['objects'].values(), *raw['relations']]}
+paths |= {'02_Runtime/01_Engine/' + name for name in ['bootstrap_query.py',
+          'workspace_projection.py', 'relation_model.py', 'repository_layout.py']}
+print(json.dumps({
+    'baseline': baseline,
+    'selected_objects': {i: raw['objects'][i]['_physical_source'] for i in sorted(ids)},
+    'selected_relations': {r['id']: r['_physical_source'] for r in raw['relations']},
+    'capability_comparison_included_ids': comparison['included_ids'],
+    'explicit_pair_ids': list(explicit),
+    'sdk_capability_states': {i: explicit[i]['capabilities']['state'] for i in pair},
+    'sdk_evidence_states': {i: project_evidence(index[i])['evidence_state'] for i in pair},
+    'notes_zh_only_assessment_states': {i: project_evidence(index[i])['assessment']['state'] for i in pair},
+    'preserved': ['raw description/scope/sources', 'raw relation context/evidence', 'original verification fields'],
+    'raw_source_language': 'present in both SDKs; absent from evidence presentation',
+    'raw_selected_records_sha256': raw_digest,
+    'input_sha256': {p: hashlib.sha256((root / p).read_bytes()).hexdigest() for p in sorted(paths)},
+    'boundary': 'Fixed question only. Annotation absence is not lack of support; projections do not decide evidence sufficiency or conformance.',
+}, ensure_ascii=False, indent=2))
+```
+
+本次在 Python 3.12.14 / PyYAML 6.0.3 下实际运行配方通过：capability 比较仅含 Kotlin，显式研究选择含两 SDK；两者 sources 均为 recorded，而 notes_zh-only assessment 均为 not_recorded。原始描述、scope、sources.language 及关系 context/evidence 保留，既有投影输出的省略没有被解释成否定事实。没有改写原核验日期或验证人。
+
+- 配方输出 JSON 的 UTF-8 SHA256：`679273477bf5461d046f6bbe4dbedef7f6683ad26d3ef47928fcc431a86a820e`。
+- 选定原始记录按配方序列化的 SHA256：`40aeece1af8a2fff86947a1e68c09a1c1c51929f3fcbe155bd494f499a85a833`。它是复现校验值，不是新 Canonical 事实或全域快照。
+- 同一基线既有 `test_workspace_projection.py` 六项测试也通过。它们与上述真实记录适配检验相互补充，但都不是 SDK 执行、端到端交换或全 Runtime 验证。
+
+### 从可恢复字段到真正尚未回答的问题
+
+机器查询把资料带回来了，下面才是基于资料的研究判断。这里的“旧观察”指 [JavaScript 原冻结 packet](https://github.com/InteropAtlas/InteropAtlas/blob/640c41f7d0e2cadff1c9e6f2d7c156a85214b7ab/01_State/Inbox/review-packets/cloudevents-javascript-sdk-20261021.yaml#L171-L191) 所记录的 16 项命名检查，不是本轮重跑；该 packet 保存版本、依赖/integrity 和检查名称，但没有恢复出具体输入、输出或原 probe 脚本。Kotlin 依据[原冻结 packet](https://github.com/InteropAtlas/InteropAtlas/blob/7e79ce099bf8ac40644be0f09437caf874851d36/01_State/Inbox/review-packets/cloudevents-kotlin-json-20261029.yaml#L752-L816)及[当前对象的静态补充](https://github.com/InteropAtlas/InteropAtlas/blob/f521367cbf59033b40fee06b491576ce2bc0e3ac/01_State/01_Objects/cloudevents_kotlin_sdk.yaml)；本轮未恢复原源码捕获目录、重新下载上游或执行 Kotlin。两个冻结 packet 的 Git blob 分别核为 `3c29a02133fd8a8dc55942be818fd2dfe58bc6a2` 与 `edd1c782658e1e244cfc78642440a2a2843d9909`，这是记录身份核对，不是新 SDK 测试。
+
+1. **缺省与自动生成。** Kotlin 的静态范围要求调用方提供有效核心字段，builder/encoder 不调用语义 validate，decoder 调用已实现的 STRICT 检查。JavaScript 旧观察包括补 id/time、拒绝缺 type；[当前描述](https://github.com/InteropAtlas/InteropAtlas/blob/f521367cbf59033b40fee06b491576ce2bc0e3ac/01_State/01_Objects/cloudevents_javascript_sdk.yaml)进一步区分 falsey id/time/specversion 的默认路径。剩余问题是应用允许自动生成身份/时间，还是要求缺省信息保持缺省。构造成功、生成 ID 或生成时间都不是事件真实性证据。
+2. **缺值与显式 null。** Kotlin 静态路径区分没有 data 与 data:null；可选属性/扩展 null 视为 unset，data 与 data_base64 同时出现先被拒绝，包括 data:null。JavaScript 的 16 项命名检查没有明确的缺 data/null 配对用例，不能用“structured roundtrip”补造该结果。剩余问题是选定消费者是否区分缺值和显式空值，以及是否有同输入的两端观察。
+3. **二进制与载荷含义。** Kotlin 内部 carrier 保留来源路线；普通 bytes 在 JSON/缺省 content type 下解析为 JSON，否则 Base64；任意改变 carrier content type 不在正面范围。JavaScript 旧观察明确记有 data_base64 编码/恢复及 HTTP binary/structured 表示往返，却没有可恢复的共同字节向量。要先选定应保留的是原字节、JSON 值、文本还是来源表示；HTTP binary binding 不能等同于 JSON 格式中的 data_base64。已有[关系条件](https://github.com/InteropAtlas/InteropAtlas/blob/f521367cbf59033b40fee06b491576ce2bc0e3ac/01_State/02_Relations/cloudevents-sdk-implementations.yaml)保留了这个范围，未证明跨 SDK 往返。
+4. **扩展类型与名称。** Kotlin 仅恢复 string/int32/bool；URI/Timestamp/Binary 字符串不自动恢复包装类型，null 扩展不保留，允许的核心名冲突可覆盖成员。JavaScript 旧观察只明确默认 strict 拒非法扩展名、false 绕过该名称检查。问题是应用要求原扩展类型还是字符串值；名称有效、JSON 可读与类型往返不是同一证据。
+5. **时间瞬间、拼写与真实性。** [CloudEvents→RFC3339 条件](https://github.com/InteropAtlas/InteropAtlas/blob/f521367cbf59033b40fee06b491576ce2bc0e3ac/01_State/02_Relations/protocol-data-representation.yaml)保留可选 time，不证明时钟准确或真实发生时刻。Kotlin 既有静态记录指出 Instant 重编码为 UTC，不保原 offset 拼写；JavaScript 旧观察只有默认 time，没有 offset/精度用例。需要同一瞬间、原拼写或真实发生时间，应分别提出要求，不能互相代替。
+6. **数值精度。** JavaScript 旧观察记有默认解析超安全整数舍入、opt-in 大整数路径保值，但没有在本轮恢复具体数值/输出；[当前静态补充](https://github.com/InteropAtlas/InteropAtlas/blob/f521367cbf59033b40fee06b491576ce2bc0e3ac/01_State/01_Objects/cloudevents_javascript_sdk.yaml)仍将 JSON 绑定赋值及宿主副作用列为未评估范围。Kotlin 的 int32 限制针对扩展值，不等于载荷任意精度保证。应先定义某个大整数必须在哪些边界精确保留；不得由两段不同证据推出共同数值域，也不在本研究切换宿主设置。
+
+本节的新执行结果只回答 **IA 的选择器和投影返回什么、哪些字段必须回源**；六项字段判断复用既有证据，仍没有新的 SDK 同输入对照。可以据此把下一个实际问题收敛到缺省/null 或明确扩展类型的一组输入，但须先取得可复现的具体输入、版本和输出记录，而不是重复旧 16 项名称或宣称已经互通。Kotlin 的缺失构建输入与 403 边界不被该提议解除。
+
+服务事件、JSON/URI 表示和 RFC3339 时间之间的已有关系，为这个问题提供跨领域入口。查询返回的对象数、来源条数或字段存在状态不衡量这些领域的完整性；本节没有新增能力注释、implements 或技术关系，也没有替代任何全域快照。对于前文其他领域，同样应先核选择条件和字段语义，再决定一个“未显示”是否真的代表未记录；这里尚未在其他领域执行同样测试，不把一例结果推广成全域保证。
