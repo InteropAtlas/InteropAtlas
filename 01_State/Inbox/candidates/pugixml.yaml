@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/zeux/pugixml/releases/tag/v1.15
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - pugixml
   reasons:
-  - Fresh main, all-state issue/PR searches, 258 remote branch names and reachable local history contain no pugixml
-    intake. Whole github:zeux/pugixml is distinct from XML standard and existing Expat library. No identity merge/split.
+  - Accepted as canonical pugixml by accept-20261105-pugixml-1-15. Original new-state Candidate e5bc47476497bd45c94e7588c8ac5e1014d85780
+    replays review_required against real ancestor 34ee5d07a607f16fb119124799b167c813b00159; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'Pinned pugixml 1.15 source ee86beb30e4973f5feffe3ce63bfa4fbadf72f38. Only the whole library''s ordinary element
@@ -30,25 +32,26 @@ unknowns:
   points must satisfy that edition''s [2] Char: U+0009, U+000A, U+000D, U+0020–U+D7FF, U+E000–U+FFFD or U+10000–U+10FFFF.
   The caller has successfully constructed a live node and supplies a functioning writer; surrounding XML context
   must separately be well-formed. Static call flow from print/node_output''s node_pcdata branch through text_output/text_output_escaped
-  and the ctx_special_pcdata table writes &, < and > as entity references amp, lt and gt (each delimited by & and ;). Every > is escaped, so literal ]]>
-  does not survive in the emitted text. Single/double quotes and tab/LF/CR remain literal on this text path; valid
-  non-ASCII UTF-8 bytes are emitted directly, without normalization or validation. format_raw suppresses presentation
-  indentation/added newlines, not escaping. Subsequent XML parsing under section 2.11 normalizes CR/CRLF to LF,
-  so neither text nor byte-lossless roundtripping is claimed. This is not attribute escaping: attributes use a different
-  table and different default quote and tab/LF/CR treatment. CDATA, names, comments, processing instructions and
-  complete document structure are outside positive scope. Invalid inputs are not repaired or rejected by this assertion:
-  source and test recipes serialize U+0004 as a decimal character reference with digits 04, which remains illegal under XML 1.0 Char/character-reference
-  constraints. Embedded NUL terminates strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points
-  are excluded. format_no_escapes, format_skip_control_chars, other flags, wide-character mode and other encodings
-  are excluded. The pinned manual disclaims full W3C conformance and complete Unicode validation; acceptance by
-  an upstream test is not proof of valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static
-  recipes, including illegal controls and the CR roundtrip difference, not executed results or comprehensive conformance
-  testing. Seven selected complete pinned files were byte/Git-blob checked and read statically; no upstream installation,
-  import, build, execution, tests or generators, and no release-archive or entire-source-tree verification. MIT
-  records the pinned upstream license, not legal suitability. Full parser/processor conformance, equivalence to
-  other XML editions, DTD/entity handling, XSD, XPath, cross-library interoperability, security, performance, deployment
-  and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+  and the ctx_special_pcdata table writes &, < and > as entity references amp, lt and gt (each delimited by & and
+  ;). Every > is escaped, so literal ]]> does not survive in the emitted text. Single/double quotes and tab/LF/CR
+  remain literal on this text path; valid non-ASCII UTF-8 bytes are emitted directly, without normalization or validation.
+  format_raw suppresses presentation indentation/added newlines, not escaping. Subsequent XML parsing under section
+  2.11 normalizes CR/CRLF to LF, so neither text nor byte-lossless roundtripping is claimed. This is not attribute
+  escaping: attributes use a different table and different default quote and tab/LF/CR treatment. CDATA, names,
+  comments, processing instructions and complete document structure are outside positive scope. Invalid inputs are
+  not repaired or rejected by this assertion: source and test recipes serialize U+0004 as a decimal character reference
+  with digits 04, which remains illegal under XML 1.0 Char/character-reference constraints. Embedded NUL terminates
+  strings; invalid UTF-8, surrogates, U+FFFE/U+FFFF and out-of-range code points are excluded. format_no_escapes,
+  format_skip_control_chars, other flags, wide-character mode and other encodings are excluded. The pinned manual
+  disclaims full W3C conformance and complete Unicode validation; acceptance by an upstream test is not proof of
+  valid XML. tests/test_write.cpp write_escape/write_escape_roundtrip are static recipes, including illegal controls
+  and the CR roundtrip difference, not executed results or comprehensive conformance testing. Seven selected complete
+  pinned files were byte/Git-blob checked and read statically; no upstream installation, import, build, execution,
+  tests or generators, and no release-archive or entire-source-tree verification. MIT records the pinned upstream
+  license, not legal suitability. Full parser/processor conformance, equivalence to other XML editions, DTD/entity
+  handling, XSD, XPath, cross-library interoperability, security, performance, deployment and IA adoption are unproved;
+  unexamined capabilities are not asserted absent.'
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_next_interop_library
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / review_pugixml_semantics
