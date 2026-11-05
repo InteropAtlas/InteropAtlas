@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T05:35:24.767450+00:00
+Document Updated At: 2026-11-05T05:49:54.416371+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Agent — OpenAI / dot / review_wot_crossdomain (independent)
+  Reviewer: Independent Agent — OpenAI / dot / review_hls_crossdomain
   GitHub Actor: ff6962757
 -->
 
@@ -39,6 +39,8 @@ Latest Substantive Contribution:
 - [Syslog 消息组成与既有读写先例的有限覆盖对照（2026-11-05）](01_Prior_Art/syslog-message-composition-coverage-2026-11-05.zh-CN.md)：按原版 HEADER / STRUCTURED-DATA / 可选 MSG 区分格式化、文本解析与组合未知；传输分帧另列，不推无损往返或送达。
 
 - [WoT 描述、表示与 MQTT 交互证据的跨域对照（2026-11-05）](01_Prior_Art/wot-mqtt-crossdomain-evidence-2026-11-05.zh-CN.md)：连接既有工业、语法、语义和元数据入口，保留 TD、绑定、客户端与 broker 的不同角色/版次/条件，不把图中相连当作已测设备链。
+
+- [HLS 文本、媒体读取与定时信令的有限对照（2026-11-05）](01_Prior_Art/hls-playlist-media-signaling-2026-11-05.zh-CN.md)：区分 m3u8 文本载体、FFmpeg 选定媒体读取与可选 SCTE35-CMD 映射，保留零时长、时间绑定和实际拼接的证据边界。
 
 ## 与 `docs/` 的边界
 
