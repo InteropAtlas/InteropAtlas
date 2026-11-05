@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T16:42:13+00:00
+Document Updated At: 2026-11-05T17:21:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_quantity_preservation
+  Reviewer: Independent Agent — OpenAI / dot / review_resource_resolution
   GitHub Actor: ff6962757
 -->
 
@@ -565,3 +565,10 @@ MCP 的 result.isError 可在 JSON-RPC 结果信封内报告工具失败；固�
 [SenML 与 FHIR Quantity 的量值保留比较](../01_Prior_Art/quantity-preservation-2026-11-05.zh-CN.md)把 industrial/measurement、health 与 syntax 的既有记录连接到一个具体交接问题。SenML base 值/单位的活动范围、FHIR显示单位与编码身份、comparator 的界限语义，以及缺值不能补零分别保留。最明确的合同差异是 SenML 1.1/1.10 语义相同，而 FHIR decimal 原表示精度须为展示保留，不能把同一重序列化策略无条件视作两边都无损。
 
 证据文件绑定官方条文、固定源码、11个明确未执行的原始JSON输入和两条已有JSON uses；一次性配方恢复完整关系条件并检验字节、引用与有限 Decimal 算术，不运行上游实现或把反例误称符合性通过。实际单位映射、测量对象/时间/主体对应、限定词承载和选定实现的交换结果仍未知；无版本UCUM system不被强行当作出版版本。没有新转换器、Canonical边、快照、UI或维护机制，也没有重做或替代 held FHIR 摘要工作。
+
+
+## 2026-11-05 追加：引用到资源的责任边界
+
+[跨领域资源责任比较](../../02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md)连接 agents、industrial、语法/语义和服务事件中的具体问题，而不是再增加一份对象清单。九个实际离线 JSON Schema 案例区分同输入/不同 registry、同资源集合/不同 base、缺资源异常与普通实例拒绝；相同引用字符串不固定最终使用的资源。JSON-LD/PyLD 只读证据进一步区分上下文 base、最终文档 URL、缓存与 loader，CloudEvents source 则说明 URI-reference 也可以只承担事件标识。
+
+机器证据保留具体 JSON 文本、实际输出、安装环境、规范/源码身份及七条已有关系的完整 context/evidence。未执行的 JSON-LD 说明例明确为空实际结果；未把 SDK 调用语句、node-wot 依赖标签、历史例或规范要求替换成新的端到端观测。资源实际供应和选定调用配置是比补一条无条件“支持 URI”更具体的缺口；它不授权联网加载、解除 hold、改写关系语义或设立新维护机制。

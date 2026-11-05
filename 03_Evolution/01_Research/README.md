@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T16:42:13+00:00
+Document Updated At: 2026-11-05T17:21:00+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: mixed
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_quantity_preservation
+  Reviewer: Independent Agent — OpenAI / dot / review_resource_resolution
   GitHub Actor: ff6962757
 -->
 
@@ -55,6 +55,8 @@ Latest Substantive Contribution:
 - [HTTP 与工具调用的失败信号比较（2026-11-05）](01_Prior_Art/failure-signal-comparison-2026-11-05.zh-CN.md)：连接问题详情、HTTPX、JSON-RPC 与 MCP 的状态、信封、工具结果和本地异常来源，区分解析/返回成功与任务完成；不建立统一错误映射或重试规则。
 
 - [SenML 与 FHIR Quantity 的量值保留条件（2026-11-05）](01_Prior_Art/quantity-preservation-2026-11-05.zh-CN.md)：用源绑定原始JSON比较继承、单位身份、界限与展示精度，附一次性机器复核配方；不将同一数字当量值等价，不创建跨格式转换规则。
+
+- [引用何时成为被使用的资源（2026-11-05）](../02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md)：以九个实际离线 JSON Schema 案例、JSON-LD/PyLD 静态路径和 CloudEvents 标识反例，区分 base、供应资源、缓存/加载与结果；不把 URI 相同当解释相同或创建共同执行管道。
 
 ## 与 `docs/` 的边界
 

@@ -1,0 +1,856 @@
+{
+  "record_kind": "bounded_resource_resolution_evidence",
+  "date_utc": "2026-11-05",
+  "baseline": "7f58751be3be669159036df039a208f2d1e9ec30",
+  "boundary": "One-time evidence, not a new query contract, taxonomy, relation, registry, maintenance requirement or completeness inventory. Third-party source captures are identified here, not mirrored in the repository.",
+  "executed": {
+    "scope": "9 offline installed-jsonschema cases only; no MCP SDK, node-wot or PyLD execution",
+    "artifacts": {
+      "probe.py": {
+        "file": "resource-resolution-20261105-probe.py",
+        "sha256": "d2a68deb5ac66a373843deadc06d17eeb3cc66b8a54cd98e87400f2f5c93b382",
+        "bytes": 7705
+      },
+      "cases.json": {
+        "file": "resource-resolution-20261105-cases.json",
+        "sha256": "f25b2703acfb794a73f7dee603f67ad2f06497dc9511e7a23d4c33978d095641",
+        "bytes": 3017
+      },
+      "results.json": {
+        "file": "resource-resolution-20261105-result.json",
+        "sha256": "e506597d0dc4e08e95637b9d30fba128ce67c312683ec15b6912d8bf80252ace",
+        "bytes": 4165
+      },
+      "environment-manifest.json": {
+        "file": "resource-resolution-20261105-environment.json",
+        "sha256": "9349b90542658667625478aa54077afc75560e3a428433c7c5b03bd994f69e6d",
+        "bytes": 4042
+      }
+    },
+    "independent_replay": "Exact probe inspected and run independently; cases, results and environment byte-identical in the captured environment."
+  },
+  "json_schema_normative": {
+    "title": "JSON Schema: A Media Type for Describing JSON Documents",
+    "edition": "2020-12 Core / draft-bhutton-json-schema-01, 16 June 2022; published Internet-Draft, not an RFC",
+    "official_url": "https://json-schema.org/draft/2020-12/json-schema-core",
+    "retrieved_utc_date": "2026-11-05",
+    "retrieval": "Read-only web connector; specification prose only; not library retrieval callback",
+    "clauses": [
+      {
+        "section": "8.2.1",
+        "url": "https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.1",
+        "quote": "The \"$id\" keyword identifies a schema resource with its canonical [RFC6596] URI.",
+        "meaning_zh": "其绝对 URI 同时作为该资源内相对 URI 引用的基址；URI 不必是网络定位符。"
+      },
+      {
+        "section": "8.2.3.1",
+        "url": "https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1",
+        "quote": "Resolved against the current URI base, it produces the URI of the schema to apply.",
+        "meaning_zh": "$ref 为静态引用 applicator，结果来自被引用 schema。"
+      },
+      {
+        "section": "9.1.2",
+        "url": "https://json-schema.org/draft/2020-12/json-schema-core#section-9.1.2",
+        "quote": "Implementations SHOULD be able to associate arbitrary URIs with an arbitrary schema and/or automatically associate a schema's \"$id\"-given URI, depending on the trust that the validator has in the schema.",
+        "meaning_zh": "URI/schema 关联可在处理实例之前供应；远程 URI 不必意味着下载。A/B 使用相互独立 registry，不是在同一 registry 声明同 URI 的两个 schema。"
+      },
+      {
+        "section": "9.2",
+        "url": "https://json-schema.org/draft/2020-12/json-schema-core#section-9.2",
+        "quote": "If the resulting URI identifies a schema within the current document, or within another schema document that has been made available to the implementation, then that schema SHOULD be used automatically.",
+        "meaning_zh": "解引用先做基于当前 base 的 URI-reference 解析，再使用已供应资源；此条款不证明任何具体实现的远程下载行为。"
+      }
+    ]
+  },
+  "jsonld_static_sources": {
+    "scope": "Static primary-source capture only; no PyLD install/import/execution, no referenced context retrieval or service operation, no historical rerun.",
+    "baseline_repository_commit": "7f58751be3be669159036df039a208f2d1e9ec30",
+    "retrieved_date_utc": "2026-11-05",
+    "capture_method": "HTTPS GET of the two exact W3C dated Recommendations and five exact commit-pinned upstream source files; response bodies saved without reformatting. URLs within these resources were not followed.",
+    "source_line_numbering": "1-based lines of saved original bytes; W3C section fragments are stable semantic anchors; HTML source line numbers are capture-specific.",
+    "sources": [
+      {
+        "path": "sources/json-ld11.html",
+        "url": "https://www.w3.org/TR/2020/REC-json-ld11-20200716/",
+        "fixed_identity": "W3C Recommendation 16 July 2020",
+        "bytes": 1021461,
+        "sha256": "9e2c9972d0f60bc744e975731643a9a63d410afc6b682eb8898ad2720e452866",
+        "line_anchors": {
+          "the-context": [
+            2389,
+            2548
+          ],
+          "base-iri-explanation": [
+            3764,
+            3835
+          ],
+          "loading-documents": [
+            9855,
+            9890
+          ],
+          "iana-security": [
+            13060,
+            13086
+          ]
+        }
+      },
+      {
+        "path": "sources/json-ld11-api.html",
+        "url": "https://www.w3.org/TR/2020/REC-json-ld11-api-20200716/",
+        "fixed_identity": "W3C Recommendation 16 July 2020",
+        "bytes": 899664,
+        "sha256": "380ddb64232c701a8ff969e22646451e20fe66d264e34a5bc4c5b018e8c77f55",
+        "line_anchors": {
+          "context-processing-algorithm": [
+            2324,
+            2747
+          ],
+          "alg-context-string": [
+            2509,
+            2577
+          ],
+          "remote-context-base-rule": [
+            2634,
+            2655
+          ],
+          "remote-document-and-context-retrieval": [
+            7515,
+            7605
+          ],
+          "remotedocument": [
+            7630,
+            7670
+          ],
+          "iri-expansion": [
+            4398,
+            4525
+          ]
+        }
+      },
+      {
+        "path": "sources/lib_pyld_context_resolver.py",
+        "url": "https://raw.githubusercontent.com/digitalbazaar/pyld/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/context_resolver.py",
+        "fixed_identity": "3ac1987d9be3648c09b7c7e34865ce82d637e742",
+        "bytes": 8994,
+        "sha256": "2e2d6f2a9e375479140e44ee0d764b8c50ec18ed7eb9c673dd7fa6da367e147b",
+        "line_anchors": {
+          "resolve/cache": [
+            44,
+            131
+          ],
+          "fetch": [
+            134,
+            207
+          ],
+          "nested-context-urls": [
+            209,
+            241
+          ]
+        }
+      },
+      {
+        "path": "sources/lib_pyld_resolved_context.py",
+        "url": "https://raw.githubusercontent.com/digitalbazaar/pyld/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/resolved_context.py",
+        "fixed_identity": "3ac1987d9be3648c09b7c7e34865ce82d637e742",
+        "bytes": 1137,
+        "sha256": "ed22eb6dd75faae552fe32558852aef85e964996f8dc67ee0ed9149fd4c484c2",
+        "line_anchors": {
+          "processed-context-cache": [
+            16,
+            40
+          ]
+        }
+      },
+      {
+        "path": "sources/lib_pyld_jsonld.py",
+        "url": "https://raw.githubusercontent.com/digitalbazaar/pyld/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py",
+        "fixed_identity": "3ac1987d9be3648c09b7c7e34865ce82d637e742",
+        "bytes": 264413,
+        "sha256": "97a88014435cde5d142d076127bd7e4970f64ba77433fa47797523eff2e62bda",
+        "line_anchors": {
+          "expand-options": [
+            598,
+            657
+          ],
+          "mapping-expansion": [
+            2311,
+            2324
+          ],
+          "context-process": [
+            3250,
+            3315
+          ],
+          "base-branch": [
+            3413,
+            3433
+          ],
+          "iri-expansion": [
+            6053,
+            6140
+          ],
+          "default-loader": [
+            6560,
+            6577
+          ],
+          "load-document": [
+            6580,
+            6655
+          ]
+        }
+      },
+      {
+        "path": "sources/lib_pyld_documentloader_requests.py",
+        "url": "https://raw.githubusercontent.com/digitalbazaar/pyld/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/documentloader/requests.py",
+        "fixed_identity": "3ac1987d9be3648c09b7c7e34865ce82d637e742",
+        "bytes": 4952,
+        "sha256": "e782dcd57207f029a018bf57a352cacafab536f98df5c9d71b5940a6b9c01e02",
+        "line_anchors": {
+          "loader-retrieval-parsing": [
+            34,
+            109
+          ]
+        }
+      },
+      {
+        "path": "sources/README.md",
+        "url": "https://raw.githubusercontent.com/digitalbazaar/pyld/3ac1987d9be3648c09b7c7e34865ce82d637e742/README.md",
+        "fixed_identity": "3ac1987d9be3648c09b7c7e34865ce82d637e742",
+        "bytes": 15728,
+        "sha256": "7f98c19980c7a8b2437e9f0915e067a29e1e207126cd50e280add29450819aad",
+        "line_anchors": {
+          "custom-context-resolver-example": [
+            245,
+            300
+          ]
+        }
+      }
+    ]
+  },
+  "jsonld_unexecuted_illustration": {
+    "status": "UNEXECUTED_SOURCE_DERIVED_ILLUSTRATION",
+    "not_a_network_observation": true,
+    "not_part_of_historical_18_cases": true,
+    "input": {
+      "@context": "https://example.invalid/context.jsonld",
+      "@id": "urn:example:item",
+      "label": "A"
+    },
+    "supplied_remote_documents": {
+      "case_A": {
+        "contextUrl": null,
+        "documentUrl": "https://example.invalid/context.jsonld",
+        "document": {
+          "@context": {
+            "label": "https://example.invalid/vocab/name"
+          }
+        }
+      },
+      "case_B": {
+        "contextUrl": null,
+        "documentUrl": "https://example.invalid/context.jsonld",
+        "document": {
+          "@context": {
+            "label": "https://example.invalid/vocab/title"
+          }
+        }
+      }
+    },
+    "source_derived_expected_expansions_NOT_OBSERVED": {
+      "case_A": [
+        {
+          "@id": "urn:example:item",
+          "https://example.invalid/vocab/name": [
+            {
+              "@value": "A"
+            }
+          ]
+        }
+      ],
+      "case_B": [
+        {
+          "@id": "urn:example:item",
+          "https://example.invalid/vocab/title": [
+            {
+              "@value": "A"
+            }
+          ]
+        }
+      ]
+    },
+    "conditions": [
+      "Each hypothetical operation uses separate empty ContextResolver caches so no previous cached context overrides the supplied document.",
+      "A caller-supplied in-memory loader returns exactly the chosen RemoteDocument for exactly the stated context identifier; all other loading is rejected. This is a hypothetical setup, not code executed here.",
+      "JSON-LD 1.1 expansion with no expandContext, no @base, no scoped/nested contexts, no @import, no redirects, no HTTP headers, no external retrieval.",
+      "Absolute identifier and term mappings isolate mapping dependence from relative-base questions."
+    ],
+    "supports": [
+      "jsonld.py L598-L657, L2311-L2324, L6084-L6090",
+      "context_resolver.py L64-L78, L120-L131, L165-L205",
+      "JSON-LD 1.1 API context-processing-algorithm and iri-expansion"
+    ],
+    "actual_result": null
+  },
+  "context_sources": [
+    {
+      "id": "rfc3986",
+      "url": "https://www.rfc-editor.org/rfc/rfc3986.txt",
+      "edition": "RFC 3986, January 2005",
+      "capture": "rfc3986.txt",
+      "sha256": "3102dae4b68cebe40337730312fcb612297b8928547267e8b3d1ee6002b2d683",
+      "bytes": 141811,
+      "anchors": [
+        "section-1.2.2",
+        "section-5"
+      ],
+      "captured_lines": [
+        [
+          461,
+          500
+        ]
+      ],
+      "role": "Normative identification/interaction distinction; base-resolution background."
+    },
+    {
+      "id": "cloudevents_source",
+      "url": "https://github.com/cloudevents/spec/blob/fc1f6f31f5f011a72183f1bcea20c987cb683ade/cloudevents/spec.md#L263-L295",
+      "edition": "CloudEvents 1.0.2 / v1.0.2",
+      "ref": "fc1f6f31f5f011a72183f1bcea20c987cb683ade",
+      "git_blob": "03fa928fa7457c54918425db7f1d5487bb95fe3e",
+      "capture": "cloudevents-spec-1.0.2.md",
+      "sha256": "e327435c858d19fd171e4ab9781a01fc22dfa949d23c4220976529ebd16a1aa3",
+      "bytes": 25542,
+      "role": "source identifies event context; URI-reference field is not an automatic retrieval instruction."
+    },
+    {
+      "file": "lowlevel-server.py",
+      "repository": "modelcontextprotocol/python-sdk",
+      "path": "src/mcp/server/lowlevel/server.py",
+      "ref": "3d9d34552a9ab8988acf8d06e4a705bd799fc32b",
+      "git_blob": "67453624c38449f59124fb3ee2d4f7f6dd675d49",
+      "sha256": "910890555395de8303deaef64963b056443f0e0bdd1d22f61a51481d70c3bdaa",
+      "bytes": 33499,
+      "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/server/lowlevel/server.py",
+      "role": "Static call-argument check only: selected validate calls do not explicitly pass registry; no SDK execution or inference about default remote behavior."
+    },
+    {
+      "file": "client-session.py",
+      "repository": "modelcontextprotocol/python-sdk",
+      "path": "src/mcp/client/session.py",
+      "ref": "3d9d34552a9ab8988acf8d06e4a705bd799fc32b",
+      "git_blob": "8519f15cecb8245051d3ec1929af7d1d32a718a5",
+      "sha256": "037d437b93b086c0510fe885df696b680ac943fbd81c9624618ac8fd7b9d017f",
+      "bytes": 23495,
+      "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/client/session.py",
+      "role": "Static call-argument check only: selected validate calls do not explicitly pass registry; no SDK execution or inference about default remote behavior."
+    }
+  ],
+  "existing_atlas_context": {
+    "selection": "Explicit existing IDs for this comparison, not a capability filter or completeness denominator. Original fields/context/evidence preserved. No inferred relation closure.",
+    "object_projection": "Identity/version/source only, not a full object or evidence projection. Omitted fields are not negative facts. Original raw-record digest uses JSON ensure_ascii=False, sort_keys=True; YAML dates serialized as strings by the one-time selection.",
+    "objects": [
+      {
+        "id": "cloudevents_1.0.2",
+        "version": "1.0.2",
+        "physical_source": "01_State/01_Objects/cloudevents_1.0.2.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/cloudevents_1.0.2.yaml",
+        "raw_loaded_record_sha256": "62ab908b4fced93b27ff64ff59ee97b1fea0b31e97fb7322d975854dbabb9d7a"
+      },
+      {
+        "id": "json_ld_1.1",
+        "version": null,
+        "physical_source": "01_State/01_Objects/json-ld-1.1.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/json-ld-1.1.yaml",
+        "raw_loaded_record_sha256": "ca24762c87be473f01df55caedecaef190937f325e00f4d999752dfce6090fa8"
+      },
+      {
+        "id": "json_schema_2020_12",
+        "version": null,
+        "physical_source": "01_State/01_Objects/json-schema-2020-12.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/json-schema-2020-12.yaml",
+        "raw_loaded_record_sha256": "5100796ae8fd1c4c92e7530fe8a32a550ebf7113a8d78720c7e57ad3b92b169c"
+      },
+      {
+        "id": "mcp_2025_11_25",
+        "version": "2025-11-25",
+        "physical_source": "01_State/01_Objects/mcp_2025_11_25.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/mcp_2025_11_25.yaml",
+        "raw_loaded_record_sha256": "ec5ba1381298b700ffd51139521aa45a16e180bda20536bd9cb9e825f843d6fd"
+      },
+      {
+        "id": "mcp_python_sdk",
+        "version": "1.26.0",
+        "physical_source": "01_State/01_Objects/mcp_python_sdk.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/mcp_python_sdk.yaml",
+        "raw_loaded_record_sha256": "1383d417bb60c04c3378c03f8c8d05e307608bd3edabc728d650de0e3b687bcd"
+      },
+      {
+        "id": "pyld",
+        "version": "3.3.0",
+        "physical_source": "01_State/01_Objects/pyld.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/pyld.yaml",
+        "raw_loaded_record_sha256": "ded0ce35bd4d2fb187f7b4c7278ffaac8b3024757325ad526f59726432508d39"
+      },
+      {
+        "id": "python_jsonschema",
+        "version": "4.25.1",
+        "physical_source": "01_State/01_Objects/python_jsonschema.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/python_jsonschema.yaml",
+        "raw_loaded_record_sha256": "2fe979f4e52daf2a174cc9455d6cc37a2005ffd99e7d473c9baaff8f496d02a5"
+      },
+      {
+        "id": "uri_rfc3986",
+        "version": null,
+        "physical_source": "01_State/01_Objects/uri-rfc3986.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/uri-rfc3986.yaml",
+        "raw_loaded_record_sha256": "6800d9635ef94c04d005472b212691767cf7ab383d2ac1dd38e81934b61067ec"
+      },
+      {
+        "id": "wot_td_1.1",
+        "version": "1.1",
+        "physical_source": "01_State/01_Objects/wot_td_1.1.yaml",
+        "baseline_blob_url": "https://github.com/InteropAtlas/InteropAtlas/blob/7f58751be3be669159036df039a208f2d1e9ec30/01_State/01_Objects/wot_td_1.1.yaml",
+        "raw_loaded_record_sha256": "738410024cf5a62e39502c6a59c52a4a8e21ecf0d61fa08894a915e6d3c742d7"
+      }
+    ],
+    "relations": [
+      {
+        "id": "mcp_python_sdk_implements_mcp_2025_11_25",
+        "type": "relation",
+        "name_zh": "MCP Python SDK 1.26.0 实现日期版 MCP 客户端与服务端接口",
+        "name_en": "MCP Python SDK 1.26.0 implements dated MCP client and server interfaces",
+        "source": "mcp_python_sdk",
+        "relation": "implements",
+        "target": "mcp_2025_11_25",
+        "context": {
+          "version_context": {
+            "source": "MCP Python SDK 1.26.0, upstream commit 3d9d34552a9ab8988acf8d06e4a705bd799fc32b",
+            "target": "Model Context Protocol Specification 2025-11-25"
+          },
+          "conditions_zh": "限定为固定版本官方源码和文档记录的客户端/服务端会话、初始化协商以及工具、资源、提示接口。该版本的 LATEST_PROTOCOL_VERSION 为 2025-11-25，不把源码符号名理解为今天的最新版本；支持旧日期版不等于会话无须协商，具体功能取决于双方声明的能力及配置。Tasks 仍按实验 API 处理；本关系不证明所有可选功能或所有传输的完整符合性、授权配置安全或第三方互通。13 个纯内存示例仅为补充验证，不是协议认证，也不将 JSON Schema/JSON-RPC/JSON 引用路径传递成额外 implements 结论。",
+          "conditions_en": "Limited to client/server sessions, initialization negotiation and tool, resource and prompt interfaces documented in the fixed official source. Its LATEST_PROTOCOL_VERSION is 2025-11-25, not a claim about the latest version today. Supporting older dated versions does not remove session negotiation; actual features depend on declared peer capabilities and configuration. Tasks remain experimental APIs. This relation does not certify every optional feature or transport, secure authorization configuration or third-party interoperability. Thirteen in-memory examples are supplementary verification, not protocol certification, and JSON Schema/JSON-RPC/JSON reference paths are not promoted transitively into additional implements claims."
+        },
+        "evidence": [
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/README.md",
+            "title": "MCP Python SDK 1.26.0 — client/server SDK identity, resources, tools, prompts and documented transports",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/types.py",
+            "title": "MCP Python SDK 1.26.0 — LATEST_PROTOCOL_VERSION = 2025-11-25 and message types",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/shared/version.py",
+            "title": "MCP Python SDK 1.26.0 — supported dated protocol versions",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/client/session.py",
+            "title": "MCP Python SDK 1.26.0 — initialization, capability negotiation and protocol-version check",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/src/mcp/server/session.py",
+            "title": "MCP Python SDK 1.26.0 — server initialization version selection",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/modelcontextprotocol/python-sdk/blob/3d9d34552a9ab8988acf8d06e4a705bd799fc32b/docs/experimental/tasks.md",
+            "title": "MCP Python SDK 1.26.0 — Tasks are experimental and APIs may change without notice",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "last_verified_at": "2026-10-21T01:37:53.060395+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，fixed-version MCP SDK evidence executor",
+        "record_created_at": "2026-10-21T01:41:23.011171+00:00",
+        "record_updated_at": "2026-10-21T01:41:23.011171+00:00",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/agent-protocol-implementations.yaml",
+        "_source": "relations/mcp_python_sdk_implements_mcp_2025_11_25.yaml"
+      },
+      {
+        "id": "pyld_implements_json_ld_1_1",
+        "type": "relation",
+        "name_zh": "PyLD 支持 JSON-LD 1.1 表示处理",
+        "name_en": "PyLD implements JSON-LD 1.1 representation processing",
+        "source": "pyld",
+        "relation": "implements",
+        "target": "json_ld_1.1",
+        "context": {
+          "capabilities": [
+            "linked_data_serialization",
+            "graph_representation"
+          ],
+          "version_context": {
+            "source": "PyLD 3.3.0, fixed upstream 3ac1987d9be3648c09b7c7e34865ce82d637e742",
+            "target": "JSON-LD 1.1, W3C Recommendation 2020-07-16"
+          },
+          "conditions_zh": "限固定版本的JSON-LD 1.1展开、压缩、扁平化及RDF转换实现先例；官方目标声明不是全符合性认证。处理模式、上下文/加载器及RDF方向选项影响结果，未映射字段可被丢弃。此关系不把独立API/Framing/Canonicalization规范全套纳入本端点，不证明任意JSON无损转换、远程加载安全、SHACL管道、RDF1.2或跨实现互通。",
+          "conditions_en": "Limited to the fixed version as a JSON-LD 1.1 expansion, compaction, flattening and RDF-conversion implementation precedent, not certification from an upstream conformance aim. Processing mode, contexts/loaders and RDF direction options affect results; unmapped fields can be dropped. This edge does not fold the separate API, Framing or Canonicalization specifications into this endpoint or prove arbitrary lossless JSON conversion, remote-loading security, a SHACL pipeline, RDF 1.2 or cross-implementation interoperability."
+        },
+        "evidence": [
+          {
+            "url": "https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/README.md",
+            "title": "PyLD 3.3.0 — Features & conformance aims and processing examples",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/lib/pyld/jsonld.py",
+            "title": "PyLD 3.3.0 — processing entry points, mode defaults and RDF conversion options",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/digitalbazaar/pyld/blob/3ac1987d9be3648c09b7c7e34865ce82d637e742/tests/runtests.py",
+            "title": "PyLD 3.3.0 — test runner skips; not a complete test result",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://www.w3.org/TR/2020/REC-json-ld11-20200716/#data-model",
+            "title": "JSON-LD 1.1 — fixed 2020 Recommendation data model and representation scope",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "last_verified_at": "2026-10-21T05:15:36.943122+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，fixed JSON-LD processor evidence executor",
+        "record_created_at": "2026-10-21T05:20:13.051116+00:00",
+        "record_updated_at": "2026-10-21T05:20:13.051116+00:00",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/data-serialization-implementations.yaml",
+        "_source": "relations/pyld_implements_json_ld_1_1.yaml"
+      },
+      {
+        "id": "mcp_uses_json_schema_2020_12",
+        "type": "relation",
+        "name_zh": "MCP 2025-11-25 使用 JSON Schema 2020-12 默认方言",
+        "name_en": "MCP 2025-11-25 uses JSON Schema 2020-12 as its default dialect",
+        "source": "mcp_2025_11_25",
+        "relation": "uses",
+        "target": "json_schema_2020_12",
+        "context": {
+          "version_context": {
+            "source": "MCP 2025-11-25",
+            "target": "JSON Schema Draft 2020-12"
+          },
+          "conditions_zh": "仅表述 MCP 2025-11-25 中 Schema 的默认方言和最低支持要求：缺少 $schema 时按 2020-12 解释，客户端与服务端须支持此方言；显式 $schema 可指定其他方言，须依声明或默认方言验证并适当报告不支持的方言。不是所有 MCP Schema 都只能使用 2020-12，也不证明具体实现符合 MCP 或覆盖全部协议要求。",
+          "conditions_en": "Limited to the dated MCP schema default and minimum support: absent $schema means 2020-12, which clients and servers must support. An explicit $schema may select another dialect; validation follows the declared or default dialect, with unsupported dialects reported appropriately. This is not an exclusive-dialect rule or implementation conformance claim."
+        },
+        "evidence": [
+          {
+            "url": "https://modelcontextprotocol.io/specification/2025-11-25/basic#json-schema-usage",
+            "title": "MCP 2025-11-25 — JSON Schema Usage, Schema Dialect and Implementation Requirements",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://json-schema.org/draft/2020-12",
+            "title": "JSON Schema Draft 2020-12 — target specification identity",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "record_created_at": "2026-10-21T00:17:20.475675+00:00",
+        "record_updated_at": "2026-10-21T00:20:18.716502+00:00",
+        "last_verified_at": "2026-10-21T00:17:20.475675+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，protocol data representation evidence executor",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/protocol-data-representation.yaml",
+        "_source": "relations/mcp_uses_json_schema_2020_12.yaml"
+      },
+      {
+        "id": "wot_td_1.1_uses_json_ld",
+        "type": "relation",
+        "name_zh": "WoT 事物描述 1.1 使用 JSON-LD 1.1 语法",
+        "name_en": "WoT Thing Description 1.1 uses JSON-LD 1.1 syntax",
+        "source": "wot_td_1.1",
+        "relation": "uses",
+        "target": "json_ld_1.1",
+        "context": {
+          "version_context": {
+            "source": "WoT Thing Description 1.1, W3C Recommendation 2023-12-05",
+            "target": "JSON-LD 1.1, W3C Recommendation 2020-07-16"
+          },
+          "conditions_zh": "仅表述固定事物描述 1.1 的 JSON 表示与 JSON-LD 1.1 语法对齐，以支持上下文扩展和语义处理；第 6 节允许按原始 JSON 或用 JSON-LD 1.1 处理器处理，不要求每个实现执行 JSON-LD 展开或远程上下文获取。该关系不推定设备互通、安全性或 IA 已采用 JSON-LD。",
+          "conditions_en": "Limited to the fixed TD 1.1 JSON representation using JSON-LD 1.1 syntax for context extensions and semantic processing. Section 6 permits raw JSON or JSON-LD 1.1 processing; this does not require every implementation to expand JSON-LD or fetch remote contexts, certify interoperability/security, or assert IA adoption."
+        },
+        "evidence": [
+          {
+            "url": "https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/",
+            "title": "WoT Thing Description 1.1 — Sections 1.1 and 6; G.1 JSON-LD 1.1 reference",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://www.w3.org/TR/2020/REC-json-ld11-20200716/",
+            "title": "JSON-LD 1.1 — fixed W3C Recommendation identity",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "record_created_at": "2026-10-21T00:17:20.475675+00:00",
+        "record_updated_at": "2026-10-21T00:20:18.716502+00:00",
+        "last_verified_at": "2026-10-21T00:17:20.475675+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，protocol data representation evidence executor",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/protocol-data-representation.yaml",
+        "_source": "relations/wot_td_1.1_uses_json_ld.yaml"
+      },
+      {
+        "id": "cloudevents_1.0.2_uses_uri",
+        "type": "relation",
+        "name_zh": "CloudEvents 1.0.2 使用 RFC 3986 URI 引用",
+        "name_en": "CloudEvents 1.0.2 uses RFC 3986 URI references",
+        "source": "cloudevents_1.0.2",
+        "relation": "uses",
+        "target": "uri_rfc3986",
+        "context": {
+          "version_context": {
+            "source": "CloudEvents Core Specification 1.0.2",
+            "target": "RFC 3986"
+          },
+          "conditions_zh": "仅表述固定核心规范的 URI/URI-reference 类型及 source 属性使用 RFC 3986 语法：source 必填且为非空 URI-reference，绝对 URI 是建议而非强制。生产者定义标识内容的具体语义；本关系不表示该标识必须是可抓取 URL，也不证明生产者身份可信。",
+          "conditions_en": "Limited to the fixed core URI/URI-reference types and source attribute using RFC 3986 syntax. Source is required and nonempty; an absolute URI is recommended, not mandatory. Producer-defined identifier semantics do not imply dereferenceability or trusted producer identity."
+        },
+        "evidence": [
+          {
+            "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#type-system",
+            "title": "CloudEvents 1.0.2 — Type System, RFC3986 URI and URI-reference",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/spec.md#source",
+            "title": "CloudEvents 1.0.2 — required source attribute",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://www.rfc-editor.org/rfc/rfc3986.html#section-4.1",
+            "title": "RFC 3986 — URI Reference",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "record_created_at": "2026-10-21T00:26:15.774574+00:00",
+        "record_updated_at": "2026-10-21T00:31:03.776305+00:00",
+        "last_verified_at": "2026-10-21T00:26:15.774574+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，service data representation evidence executor",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/protocol-data-representation.yaml",
+        "_source": "relations/cloudevents_1.0.2_uses_uri.yaml"
+      },
+      {
+        "id": "wot_td_1.1_uses_uri_rfc3986",
+        "type": "relation",
+        "name_zh": "WoT 事物描述 1.1 使用 RFC 3986 URI 标识与基址解析",
+        "name_en": "WoT Thing Description 1.1 uses RFC 3986 URI identifiers and base resolution",
+        "source": "wot_td_1.1",
+        "relation": "uses",
+        "target": "uri_rfc3986",
+        "context": {
+          "version_context": {
+            "source": "WoT Thing Description 1.1, W3C Recommendation 2023-12-05",
+            "target": "RFC 3986 / STD 66, January 2005"
+          },
+          "conditions_zh": "仅表述固定推荐标准 §5.3.1.1 中可选 id 的 URI 标识形式，以及可选 base 按 RFC 3986 解析 TD 相对 URI 的规则。base 不影响 @context 中的 URI 或语义处理涉及的 Linked Data 图中的 IRI。此文献级 uses 不要求所有 TD 提供这两个成员，不保证 URI 可解引用、设备互通，也不沿 node-wot 等实现关系传递为 RFC 3986 符合性。",
+          "conditions_en": "Limited to section 5.3.1.1: optional id uses URI identification, and optional base applies RFC 3986 resolution to TD relative URIs. base excludes @context URIs and Linked Data graph IRIs used in semantic processing. This specification-level uses edge neither mandates those members nor guarantees dereferenceability, device interoperability or transitive implementation conformance, including node-wot."
+        },
+        "evidence": [
+          {
+            "url": "https://www.w3.org/TR/2023/REC-wot-thing-description11-20231205/#thing",
+            "title": "WoT TD 1.1 — section 5.3.1.1 Thing, id and base definitions",
+            "language": "en",
+            "accessed": "2026-10-24"
+          },
+          {
+            "url": "https://www.rfc-editor.org/rfc/rfc3986.txt",
+            "title": "RFC 3986 / STD 66 — URI identity and section 5 reference resolution",
+            "language": "en",
+            "accessed": "2026-10-24"
+          }
+        ],
+        "last_verified_at": "2026-10-24T07:22:17.052291+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，fixed WoT TD 1.1 normative-source evidence executor",
+        "record_created_at": "2026-10-24T07:22:17.052291+00:00",
+        "record_updated_at": "2026-10-24T07:22:17.052291+00:00",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "pending independent review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/protocol-data-representation.yaml",
+        "_source": "relations/wot_td_1.1_uses_uri_rfc3986.yaml"
+      },
+      {
+        "id": "python_jsonschema_implements_json_schema_2020_12",
+        "type": "relation",
+        "name_zh": "jsonschema 4.25.1 实现 JSON Schema 2020-12 验证",
+        "name_en": "jsonschema 4.25.1 implements JSON Schema 2020-12 validation",
+        "source": "python_jsonschema",
+        "relation": "implements",
+        "target": "json_schema_2020_12",
+        "context": {
+          "capabilities": [
+            "schema_validation"
+          ],
+          "version_context": {
+            "source": "jsonschema 4.25.1, upstream commit 331c38425519b69118d22ebe467ad230fb83a010",
+            "target": "JSON Schema Draft 2020-12"
+          },
+          "conditions_zh": "依据固定发行版文档的 Draft202012Validator 支持，限定为结构化实例验证。format 检查须显式启用且某些格式需要可选依赖；正则表达式采用 Python 方言。本关系不宣称完整符合性认证、任意词汇表扩展支持、MCP/WoT/CloudEvents 整体协议实现或应用间互通。 某格式缺少所需可选依赖时可能不报错通过，不把这一结果当作格式有效的保证。",
+          "conditions_en": "Based on the fixed release documented Draft202012Validator support, limited to structured-instance validation. Format checks are opt-in and some require optional dependencies; regular expressions use the Python dialect. This is not a complete conformance certification, arbitrary-vocabulary support claim, full MCP/WoT/CloudEvents implementation or application-interoperability assertion. A format with missing required optional dependencies can pass without an error; that result is not a format-validity guarantee."
+        },
+        "evidence": [
+          {
+            "url": "https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/README.rst",
+            "title": "jsonschema 4.25.1 — Python implementation identity and supported drafts",
+            "language": "en",
+            "accessed": "2026-10-21"
+          },
+          {
+            "url": "https://github.com/python-jsonschema/jsonschema/blob/331c38425519b69118d22ebe467ad230fb83a010/docs/validate.rst",
+            "title": "jsonschema 4.25.1 — versioned validators, opt-in formats and regex limitations",
+            "language": "en",
+            "accessed": "2026-10-21"
+          }
+        ],
+        "last_verified_at": "2026-10-21T00:51:42.497448+00:00",
+        "last_verified_by": "Agent — OpenAI / dot，fixed-version implementation evidence executor",
+        "record_created_at": "2026-10-21T00:58:59.584222+00:00",
+        "record_updated_at": "2026-10-21T00:58:59.584222+00:00",
+        "latest_substantive_contribution": {
+          "initiator": "Human Owner — ff6962757",
+          "executor": "Agent — OpenAI / dot",
+          "reviewer": "Independent Agent — OpenAI / dot / main-session semantic review",
+          "github_actor": "ff6962757"
+        },
+        "_physical_source": "01_State/02_Relations/schema-validation-implementations.yaml",
+        "_source": "relations/python_jsonschema_implements_json_schema_2020_12.yaml"
+      }
+    ],
+    "input_sha256": {
+      "01_State/01_Objects/cloudevents_1.0.2.yaml": "2e8fcdc52a8cb070c59befb6345ec0d4c51882c835f14b6b142ee5af5cc54657",
+      "01_State/01_Objects/json-ld-1.1.yaml": "b423a12595a2e3416daaca1b4fb435dbd725077988370c7b21462c6818a4c254",
+      "01_State/01_Objects/json-schema-2020-12.yaml": "2f7148d5303aa960675e705af4e8048e3649ff8b73bab42c4f498d768a452a52",
+      "01_State/01_Objects/mcp_2025_11_25.yaml": "40068c0821dd8c3face53786781b12b338ed5130e18ae9cb52ecd427ee4a5527",
+      "01_State/01_Objects/mcp_python_sdk.yaml": "8ce239b089d91dbd67728c8311487dd5e0c7ae742330a75e783cdc73c9ce58a4",
+      "01_State/01_Objects/pyld.yaml": "72cd08fba481897beedb4df93bbcacae4f5ac6d41f5f7b6da3de3a15f23f453f",
+      "01_State/01_Objects/python_jsonschema.yaml": "6914634adaff63dce2c9472f6d64a04fe12305d991f0604c47dfc7e7b0a26174",
+      "01_State/01_Objects/uri-rfc3986.yaml": "941b7ab26ce0e70f120ca38f8d8c4cda3351e8b0c8a44ee855874a65cf45c13f",
+      "01_State/01_Objects/wot_td_1.1.yaml": "ddfe9ecd6fa68d78e7c7cdddbcef808284e0d33a942d1952d56296b32d968a13",
+      "01_State/02_Relations/agent-protocol-implementations.yaml": "f1a33a8569377799bfabe84f3b6c23ad49a2dc12d82e5a9add4f474dd432da9b",
+      "01_State/02_Relations/data-serialization-implementations.yaml": "43baa7ac9f16f2df1ebf19cf617f2282ee16f34a32adb991a36484975fb94c0b",
+      "01_State/02_Relations/protocol-data-representation.yaml": "480c477ce97168cb6589c62fbca0ed005196c7af8397291ff820b513dc07417f",
+      "01_State/02_Relations/schema-validation-implementations.yaml": "cd039f09391ff047f71b5991bbd1ee07be2ceec9ea5a6e5ef9d9438df8d030f2",
+      "02_Runtime/01_Engine/bootstrap_query.py": "d34ca91c4d435bf5ad1fcb4759ac03d242248a75c08cda55a49cb08329bec75b",
+      "02_Runtime/01_Engine/relation_model.py": "1e564ee358e037d0021f30916ca66f0ff187c8beed1b439e7c08809c04049bbc",
+      "02_Runtime/01_Engine/repository_layout.py": "b38c68cc601e199e1147bdc5951362cba53fe364c87a8cbe331ea01129e79eee"
+    },
+    "normalization": "Existing load_atlas + normalize_relation selected both endpoints from the nine explicit IDs, yielding seven original relations with full context/evidence. This is not inferred closure."
+  },
+  "not_executed": [
+    "PyLD and remote JSON-LD contexts",
+    "MCP SDK / node-wot deployment",
+    "default registry/loader or external retrieval",
+    "cache or redirect runtime behavior",
+    "cross-implementation interoperability or conformance suite"
+  ],
+  "json_schema_core_capture": {
+    "requested_url": "https://json-schema.org/draft/2020-12/json-schema-core",
+    "final_url": "https://json-schema.org/draft/2020-12/json-schema-core",
+    "capture_date_utc": "2026-11-05",
+    "edition": "draft-bhutton-json-schema-01",
+    "publication_date": "2022-06-16",
+    "title": "JSON Schema: A Media Type for Describing JSON Documents",
+    "document_status": "Internet-Draft; not RFC",
+    "method": "TinyFish fetch_content format=html; fetched before separate raw HTTP attempt",
+    "scope": "Official prose reference read only, not probe callback retrieval; no execution of downloaded code",
+    "capture_kind": "Connector-extracted HTML, not original HTTP response bytes",
+    "full_original_capture_available": false,
+    "limitations": [
+      "Connector extraction returns broad document prose through appendices but strips structure including headings and anchors; original full-document completeness is not asserted.",
+      "A subsequent direct raw reference read received HTTP 403 Forbidden; no retry or alternate raw-fetch route attempted.",
+      "No original HTTP ETag or Last-Modified returned by connector; hashes identify captured extraction only."
+    ],
+    "short_quote_checks": [
+      {
+        "section": "8.2.1",
+        "official_section_url": "https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.1",
+        "exact_quote_in_extraction": "The \"$id\" keyword identifies a schema resource with its canonical [RFC6596] URI.",
+        "verified": true,
+        "earlier_quote_note": "Earlier short quote omitted inline bibliographic marker [RFC6596]; substantive wording unchanged.",
+        "anchor_note": "Official section anchor from separately read official web view; extraction does not preserve heading/anchor markup."
+      },
+      {
+        "section": "8.2.3.1",
+        "official_section_url": "https://json-schema.org/draft/2020-12/json-schema-core#section-8.2.3.1",
+        "exact_quote_in_extraction": "Resolved against the current URI base, it produces the URI of the schema to apply.",
+        "verified": true,
+        "earlier_quote_note": "Exact match after HTML removal and whitespace normalization.",
+        "anchor_note": "Official section anchor from separately read official web view; extraction does not preserve heading/anchor markup."
+      },
+      {
+        "section": "9.1.2",
+        "official_section_url": "https://json-schema.org/draft/2020-12/json-schema-core#section-9.1.2",
+        "exact_quote_in_extraction": "Implementations SHOULD be able to associate arbitrary URIs with an arbitrary schema and/or automatically associate a schema's \"$id\"-given URI, depending on the trust that the validator has in the schema.",
+        "verified": true,
+        "earlier_quote_note": "Exact match after HTML removal and whitespace normalization.",
+        "anchor_note": "Official section anchor from separately read official web view; extraction does not preserve heading/anchor markup."
+      },
+      {
+        "section": "9.2",
+        "official_section_url": "https://json-schema.org/draft/2020-12/json-schema-core#section-9.2",
+        "exact_quote_in_extraction": "If the resulting URI identifies a schema within the current document, or within another schema document that has been made available to the implementation, then that schema SHOULD be used automatically.",
+        "verified": true,
+        "earlier_quote_note": "Exact match after HTML removal and whitespace normalization.",
+        "anchor_note": "Official section anchor from separately read official web view; extraction does not preserve heading/anchor markup."
+      }
+    ],
+    "files": {
+      "connector-extracted-response.json": {
+        "bytes": 118963,
+        "sha256": "a1c3d87eb4e31aad64afcfd7771a64d178f5bd4e2eee4829c073c1156f4cc95d"
+      },
+      "core-2020-12.connector-extracted.html": {
+        "bytes": 115591,
+        "sha256": "1c8f486182bf67c75798bb6778703bbfbaa460b833220493e4664ce6b43e4eed"
+      }
+    }
+  }
+}
