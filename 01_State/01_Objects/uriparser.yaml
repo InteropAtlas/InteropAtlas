@@ -1,0 +1,195 @@
+id: uriparser
+type: system
+kind: library
+name_zh: uriparser C 语言 URI 库
+name_en: uriparser C URI library
+official_name: uriparser
+version: 1.0.3
+versions:
+- version: 1.0.3
+  date: '2026-10-30'
+  status: released
+  url: https://github.com/uriparser/uriparser/releases/tag/uriparser-1.0.3
+external_identifiers:
+- namespace: github
+  value: uriparser/uriparser
+official_url: https://uriparser.github.io/
+description_zh: '主体是 uriparser 整体开源 C99 URI 解析与处理库，不是独立 escape 组件、Python rfc3986、URI 标准或浏览器 URL 模型。本记录固定 uriparser
+  1.0.3、官方 tag uriparser-1.0.3 与 commit fe754ef0d62c882747222c4455cb028b03dca33b，仅静态核验 uriEscapeExA 对 RFC3986 §§2.1/2.3
+  的组件数据百分号编码，按 §§2.2/2.4 限定调用方责任。仅限 ASCII 兼容平台上的 char API，正面范围是字节 0x01..0x7F，spaceToPlus 与 normalizeBreaks 均须为 URI_FALSE。调用方提供有效可读输入区间
+  [inFirst,inAfterLast)，有序指针属于同一对象；若 inAfterLast 为 NULL，则输入须是有效 NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少 3 × n + 1，n
+  为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个 NUL 处停止，取先到者；NUL 不会编码为
+  %00，不是二进制保真编码。ASCII 字母、数字与 -._~ 原样复制，其余范围内字节输出大写 %HH；空格为 %20、CR 为 %0D、LF 为 %0A，斜杠为 %2F、加号为 %2B、百分号为 %25。这些是静态源码推导，不是执行观测。函数追加
+  NUL，返回指向该终止符的指针，不是整数状态或完整 URI 有效性证明。仅适用于未转义的组件数据，保留字符在该位置必须是数据而非结构分隔符；调用方决定组件与 scheme 语义并负责 URI 组装。已有转义串的百分号会再次编码；不声称整个
+  URI 保真转换、规范化或资源等价。正面范围外的 spaceToPlus=true 会把空格改为 +；normalizeBreaks=true 会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需
+  6 × n + 1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8 验证、IRI/IDNA。完整固定源码、头文件及测试配方只读，未安装、构建、导入、运行上游或其测试。test.cpp
+  的相关配方使用 wchar_t/uriEscapeW，不是 char API 的执行或符合性证据。主体库源码与头文件声明 BSD-3-Clause；仓库另有 LGPL-2.1-or-later 测试和 Apache-2.0
+  模糊测试例外，不作法律适用性结论。不采用上游严格符合性/性能自述作为验证结果；不验证完整 RFC、URI 解析/ABNF 接收、解析引用、比较/规范化、解码、scheme 有效性、浏览器 URL 行为、网络取回、跨库互通、安全/性能或
+  IA 采用。未核验能力不等于库不具备。
+
+
+  English scope and limitations:
+
+
+  This record pins uriparser 1.0.3, official tag uriparser-1.0.3 and commit fe754ef0d62c882747222c4455cb028b03dca33b,
+  and statically inspects only uriEscapeExA component-data percent encoding under RFC3986 sections 2.1/2.3, with
+  caller responsibilities constrained by sections 2.2/2.4. Positive scope is the char API on an ASCII-compatible
+  platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies a
+  valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is NULL,
+  input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime and
+  capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe capacity
+  arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal starting
+  input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL, whichever
+  comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters, digits and -._~
+  are copied; every other included byte becomes uppercase %HH. Space becomes %20, CR %0D, LF %0A, slash %2F, plus
+  %2B and percent %25. These examples are static source inferences, not execution observations. The function appends
+  NUL and returns a pointer to that terminator, not an integer status or proof of complete-URI validity. Scope is
+  unescaped component data whose reserved characters are data rather than structural delimiters; callers determine
+  component/scheme semantics and assemble the URI. Already escaped percent signs are encoded again; no URI-preserving
+  whole-string transformation, normalization or resource equivalence is claimed. Outside positive scope, spaceToPlus=true
+  changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing
+  worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not
+  arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source,
+  headers and test recipes were read only, without upstream installation, build, import, execution or tests. Related
+  test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers
+  declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and Apache-2.0 fuzzing, without
+  a legal-suitability conclusion. Upstream strict-conformance/performance claims are not adopted as verification.
+  Full RFC conformance, URI parsing/ABNF acceptance, reference resolution, comparison/normalization, decoding, scheme
+  validity, browser URL behavior, network retrieval, cross-library interoperability, security/performance and IA
+  adoption are unverified. Unexamined capabilities are not asserted absent.'
+description_en: The whole open-source uriparser C99 URI parsing and handling library, not a standalone escape component,
+  Python rfc3986, URI standard or browser URL model. This record pins uriparser 1.0.3, official tag uriparser-1.0.3
+  and commit fe754ef0d62c882747222c4455cb028b03dca33b, and statically inspects only uriEscapeExA component-data
+  percent encoding under RFC3986 sections 2.1/2.3, with caller responsibilities constrained by sections 2.2/2.4.
+  Positive scope is the char API on an ASCII-compatible platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks
+  set to URI_FALSE. The caller supplies a valid readable range [inFirst,inAfterLast) with ordered pointers into
+  the same object; if inAfterLast is NULL, input must be a valid NUL-terminated string. Output must be a disjoint
+  writable buffer with valid lifetime and capacity at least 3 × n + 1, where n is the input-range length or characters
+  before NUL, using overflow-safe capacity arithmetic. The API has no output-capacity argument and performs no capacity
+  check. It rejects equal starting input/output pointers only, not general overlap. Processing stops at the explicit
+  end or first NUL, whichever comes first; NUL is not encoded as %00, so this is not binary-preserving encoding.
+  ASCII letters, digits and -._~ are copied; every other included byte becomes uppercase %HH. Space becomes %20,
+  CR %0D, LF %0A, slash %2F, plus %2B and percent %25. These examples are static source inferences, not execution
+  observations. The function appends NUL and returns a pointer to that terminator, not an integer status or proof
+  of complete-URI validity. Scope is unescaped component data whose reserved characters are data rather than structural
+  delimiters; callers determine component/scheme semantics and assemble the URI. Already escaped percent signs are
+  encoded again; no URI-preserving whole-string transformation, normalization or resource equivalence is claimed.
+  Outside positive scope, spaceToPlus=true changes spaces to +, while normalizeBreaks=true changes lone CR/LF and
+  CRLF into percent-encoded CRLF, needing worst-case 6 × n + 1 output capacity; these options are not generic RFC3986
+  guarantees. The wchar_t API is not arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA
+  are excluded. Complete pinned source, headers and test recipes were read only, without upstream installation,
+  build, import, execution or tests. Related test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution
+  or conformance evidence. Library source/headers declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later
+  tests and Apache-2.0 fuzzing, without a legal-suitability conclusion. Upstream strict-conformance/performance
+  claims are not adopted as verification. Full RFC conformance, URI parsing/ABNF acceptance, reference resolution,
+  comparison/normalization, decoding, scheme validity, browser URL behavior, network retrieval, cross-library interoperability,
+  security/performance and IA adoption are unverified. Unexamined capabilities are not asserted absent.
+open_source: true
+license_expression: BSD-3-Clause
+license_notes: 'Library source/headers: BSD-3-Clause. Repository exceptions: tests LGPL-2.1-or-later; fuzzing Apache-2.0.
+  No legal-suitability conclusion.'
+domains:
+- web
+- identifiers
+capabilities:
+- resource_identification
+sources:
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/CMakeLists.txt
+  title: uriparser 1.0.3 pinned CMakeLists.txt; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/README.md
+  title: uriparser 1.0.3 pinned README.md; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/doc/rfc3986.htm
+  title: uriparser 1.0.3 pinned doc/rfc3986.htm; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/include/uriparser/COPYING
+  title: uriparser 1.0.3 pinned include/uriparser/COPYING; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/include/uriparser/Uri.h
+  title: uriparser 1.0.3 pinned include/uriparser/Uri.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/include/uriparser/UriBase.h
+  title: uriparser 1.0.3 pinned include/uriparser/UriBase.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/include/uriparser/UriDefsAnsi.h
+  title: uriparser 1.0.3 pinned include/uriparser/UriDefsAnsi.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/src/COPYING
+  title: uriparser 1.0.3 pinned src/COPYING; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/src/UriCommon.c
+  title: uriparser 1.0.3 pinned src/UriCommon.c; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/src/UriCommon.h
+  title: uriparser 1.0.3 pinned src/UriCommon.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/src/UriEscape.c
+  title: uriparser 1.0.3 pinned src/UriEscape.c; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/src/UriSets.h
+  title: uriparser 1.0.3 pinned src/UriSets.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/test/test.cpp
+  title: uriparser 1.0.3 pinned test/test.cpp; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/uriparser/uriparser/releases/tag/uriparser-1.0.3
+  title: Official 1.0.3 release, 2026-10-30
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/uriparser/uriparser
+  title: Official whole-library identity, repository ID 116530664, not a fork
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/uriparser/uriparser/git/ref/tags/uriparser-1.0.3
+  title: Official annotated tag; no signature-authentication claim
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/uriparser/uriparser/git/tags/b500111d9368381f20dab937184c492d217044d1
+  title: Annotated tag resolves to fixed commit
+  language: en
+  accessed: '2026-11-05'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-2.1
+  title: RFC3986 percent encoding and uppercase hex recommendation
+  language: en
+  accessed: '2026-11-05'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-2.3
+  title: RFC3986 unreserved characters
+  language: en
+  accessed: '2026-11-05'
+- url: https://www.rfc-editor.org/rfc/rfc3986.html#section-2.4
+  title: RFC3986 encoding context and avoiding repeated encoding
+  language: en
+  accessed: '2026-11-05'
+last_verified_at: '2026-11-05T00:13:31.619953+00:00'
+last_verified_by: Agent — OpenAI / dot / implement_uriparser_library; static pinned source only, no upstream execution
+record_created_at: '2026-11-05T00:29:03.339387+00:00'
+record_updated_at: '2026-11-05T00:29:03.339387+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / implement_uriparser_library
+  reviewer: Independent Agent — OpenAI / dot / review_uriparser_semantics
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: uriparser
+  acceptance_event_id: accept-20261105-uriparser-1-0-3
+  reviewed_candidate_blob: ba2e2c8d7d5c127ead7c25a9da632c8c7f0629d4
+  reviewed_against_commit: 2d1d6c91c275598caa373dd54ac29e1b8c29e022
+  candidate_executor: Agent — OpenAI / dot / implement_uriparser_library
+  canonical_serializer: Agent — OpenAI / dot / implement_uriparser_library
+  reviewed_packet_commit: 2d1d6c91c275598caa373dd54ac29e1b8c29e022
+  reviewed_packet_blob: 18af4370e1cf5460fa068f3883a4e70d02de4049
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d1d6c91c275598caa373dd54ac29e1b8c29e022/01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml

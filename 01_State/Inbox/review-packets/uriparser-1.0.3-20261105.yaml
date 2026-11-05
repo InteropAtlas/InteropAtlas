@@ -1,0 +1,32 @@
+packet_id: uriparser_103_20261105
+status: materialized
+reviewed_packet_commit: 2d1d6c91c275598caa373dd54ac29e1b8c29e022
+reviewed_packet_blob: 18af4370e1cf5460fa068f3883a4e70d02de4049
+reviewed_packet_path: 01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml
+baseline_commit: 888a6eac1e670715b0f37365cdfe2b4acb187115
+executor: Agent — OpenAI / dot / implement_uriparser_library
+acceptance_events: 01_State/Inbox/acceptance-events/uriparser-1.0.3-20261105.yaml
+objects:
+- candidate_id: uriparser
+  canonical_id: uriparser
+  acceptance_event_id: accept-20261105-uriparser-1-0-3
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d1d6c91c275598caa373dd54ac29e1b8c29e022/01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml
+relations:
+- canonical_id: uriparser_implements_uri_component_encoding
+  canonical_path: 01_State/02_Relations/uri-reference-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d1d6c91c275598caa373dd54ac29e1b8c29e022/01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml
+existing_objects:
+- canonical_id: uri_rfc3986
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d1d6c91c275598caa373dd54ac29e1b8c29e022/01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml
+  scope: Only new uriparser incoming-edge limits and sources; existing standard identity, descriptions, scope_notes
+    and intake preserved
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  category_id: syntax
+  canonical_id: uriparser
+  semantics: Existing editorial navigation only, not a technical relation
+notes_zh:
+- 引用式回执；完整已审 Candidate、拟入库字段与 13 份固定源码指纹保留于真实祖先 commit/blob。
+- 整体 uriparser 1.0.3；单条有界 implements 仅静态 ASCII char 组件数据百分号编码，不是全 RFC 符合性。完整双语前提与限制在源/目标 description 及关系 context
+  保留。
+- 真实 github repo 身份，不以 locator 冒充 identifier；不改 Python rfc3986、URI 标准原事实/历史 intake、分类/模型/UI/治理/维护；旧拒绝/未知结果保持。

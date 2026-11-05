@@ -1,0 +1,56 @@
+contract_version: candidate-object-v1
+candidate_id: uriparser
+label: uriparser C URI library (1.0.3)
+publisher: uriparser project and contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: uriparser/uriparser
+locators:
+- url: https://uriparser.github.io/
+  role: official
+- url: https://github.com/uriparser/uriparser/tree/fe754ef0d62c882747222c4455cb028b03dca33b
+  role: dated
+- url: https://github.com/uriparser/uriparser/releases/tag/uriparser-1.0.3
+  role: catalog
+identity_resolution:
+  state: duplicate
+  matched_canonical_ids:
+  - uriparser
+  reasons:
+  - Accepted as canonical uriparser by accept-20261105-uriparser-1-0-3. Original new-state Candidate ba2e2c8d7d5c127ead7c25a9da632c8c7f0629d4
+    replays review_required against real ancestor 2d1d6c91c275598caa373dd54ac29e1b8c29e022; this back-reference
+    authorizes no identity merge.
+  merge_authorized: false
+unknowns:
+- This record pins uriparser 1.0.3, official tag uriparser-1.0.3 and commit fe754ef0d62c882747222c4455cb028b03dca33b,
+  and statically inspects only uriEscapeExA component-data percent encoding under RFC3986 sections 2.1/2.3, with
+  caller responsibilities constrained by sections 2.2/2.4. Positive scope is the char API on an ASCII-compatible
+  platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies a
+  valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is NULL,
+  input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime and
+  capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe capacity
+  arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal starting
+  input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL, whichever
+  comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters, digits and -._~
+  are copied; every other included byte becomes uppercase %HH. Space becomes %20, CR %0D, LF %0A, slash %2F, plus
+  %2B and percent %25. These examples are static source inferences, not execution observations. The function appends
+  NUL and returns a pointer to that terminator, not an integer status or proof of complete-URI validity. Scope is
+  unescaped component data whose reserved characters are data rather than structural delimiters; callers determine
+  component/scheme semantics and assemble the URI. Already escaped percent signs are encoded again; no URI-preserving
+  whole-string transformation, normalization or resource equivalence is claimed. Outside positive scope, spaceToPlus=true
+  changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing
+  worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not
+  arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source,
+  headers and test recipes were read only, without upstream installation, build, import, execution or tests. Related
+  test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers
+  declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and Apache-2.0 fuzzing, without
+  a legal-suitability conclusion. Upstream strict-conformance/performance claims are not adopted as verification.
+  Full RFC conformance, URI parsing/ABNF acceptance, reference resolution, comparison/normalization, decoding, scheme
+  validity, browser URL behavior, network retrieval, cross-library interoperability, security/performance and IA
+  adoption are unverified. Unexamined capabilities are not asserted absent.
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / implement_uriparser_library
+  reviewer: Independent Agent — OpenAI / dot / review_uriparser_semantics

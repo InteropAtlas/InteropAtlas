@@ -1,0 +1,35 @@
+contract_version: acceptance-event-v1
+event_id: accept-20261105-uriparser-1-0-3
+candidate_id: uriparser
+decision: accepted
+machine_route: review_required
+accepted_canonical_id: uriparser
+review:
+  reviewer: Independent Agent — OpenAI / dot / review_uriparser_semantics
+  reviewed_at: '2026-11-05T00:28:40.965752+00:00'
+  independent_from_executor: true
+  notes:
+  - Independent exact-byte actual F review supports whole uriparser 1.0.3 and one bounded implements edge to existing
+    RFC3986.
+  - Positive scope is static char-only ASCII component data with both flags false, valid readable bounded or NUL-terminated
+    input, disjoint capacity-checked-by-caller 3 × n + 1 output, first-NUL termination, uppercase escaping and caller-owned
+    component semantics. Double encoding, excluded flags, license exceptions and non-executed wchar_t recipes remain
+    visible in both languages at both endpoints and relation context.
+  - reviewed_at is actual independent F report completion, not serialization time. C/H/P/M and public publication
+    have separate checks and reviews.
+authority:
+  mutation_impact: M1
+  ordinary_path: true
+  approver: null
+evidence_basis:
+- https://github.com/InteropAtlas/InteropAtlas/blob/2d1d6c91c275598caa373dd54ac29e1b8c29e022/01_State/Inbox/review-packets/uriparser-1.0.3-20261105.yaml
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/ba2e2c8d7d5c127ead7c25a9da632c8c7f0629d4
+- https://api.github.com/repos/InteropAtlas/InteropAtlas/git/blobs/18af4370e1cf5460fa068f3883a4e70d02de4049
+decided_at: '2026-11-05T00:29:03.339387+00:00'
+notes:
+- One library, one bounded implements relation, one existing capability reference and syntax editorial membership.
+  No taxonomy/schema/runtime/UI/governance/maintenance change.
+- Original URI standard identity, descriptions, scope_notes and historical intake are preserved; only a bounded
+  new incoming-edge description and sources are added. Python rfc3986 is unchanged.
+- Full new-state Candidate and pending proposal remain in real ancestor F; current packet is a reference receipt.
+  All prior holds preserved.
