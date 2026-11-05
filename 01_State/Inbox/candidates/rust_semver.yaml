@@ -1,0 +1,55 @@
+contract_version: candidate-object-v1
+candidate_id: rust_semver
+label: Rust semver version library (1.0.28)
+publisher: David Tolnay and semver contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: dtolnay/semver
+locators:
+- url: https://github.com/dtolnay/semver
+  role: official
+- url: https://github.com/dtolnay/semver/tree/7625c7aa3f0e8ba21e099d1765bcebcb72aa8816
+  role: dated
+- url: https://github.com/dtolnay/semver/releases/tag/1.0.28
+  role: catalog
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh main, all-state issue/PR searches, 259 remote branch names and reachable history contain no Rust semver
+    intake. Whole github:dtolnay/semver is distinct from existing Python semver and SemVer standard. No identity
+    merge/split.
+  merge_authorized: false
+unknowns:
+- 'Pins Rust semver 1.0.28, official tag 1.0.28 and commit 7625c7aa3f0e8ba21e099d1765bcebcb72aa8816. Only the source
+  path from Version::new(major, minor, patch) to default Display formatting {} of the core version is mapped to
+  Semantic Versioning 2.0.0 rule 2 syntax: X.Y.Z nonnegative decimal integers without leading zeroes. Each argument
+  is a Rust u64 in 0..18446744073709551615 inclusive; the constructor stores the three fields and sets pre and build
+  to Prerelease::EMPTY and BuildMetadata::EMPTY. The object remains valid and unmodified during formatting, with
+  a functioning formatting sink; default {} specifies no width, fill, alignment, precision or other formatting flags.
+  Display joins three u64 Display outputs, without forwarding outer formatting options, with two dots. Zero emits
+  0 and nonzero values have no leading zeroes; no prerelease, build metadata, prefix, whitespace or newline is added.
+  Output length is 5..62 ASCII bytes, a static deduction rather than a measurement. With no width, pad directly
+  performs the output; an explicit width can add padding and must not be generalized to a valid bare version string.
+  Output errors propagate as fmt::Result; a sink may already have received a prefix, so transactional output or
+  complete byte delivery is not guaranteed. This describes representation of an already constructed core version,
+  not string parsing or validation, and does not establish arbitrary-length SemVer number support: the u64 ceiling
+  belongs to the library representation, not the specification. Numeric increment obligations elsewhere in rule
+  2 and the public API declaration, release immutability and compatibility rules in other clauses are not implemented
+  by this construction/display slice. Syntactic representability of 0.y.z does not imply a stable API. README explicitly
+  follows Cargo interpretation of SemVer; Cargo version-requirement syntax is not generalized to other ecosystems
+  or to uniform SemVer 2.0.0 requirements syntax. Prerelease, build metadata, comparison/precedence, equality/hash,
+  VersionReq, dependency solving, serde, parsers and other formatting flags are outside positive scope; unexamined
+  capabilities are not asserted absent. Eight selected complete pinned repository files were byte-count/Git-blob/SHA256
+  checked and read statically. Construction/display examples in tests/test_version.rs are unexecuted recipes, not
+  exhaustive boundary coverage or runtime evidence. No upstream library, dependency, test or generator installation,
+  import, build or execution occurred; crates.io packages, release archives, the entire source tree and signatures
+  were not verified. MIT OR Apache-2.0 records the pinned upstream dual-license declaration, not legal suitability.
+  Full SemVer conformance, cross-ecosystem interoperability, security, performance, production deployment and IA
+  adoption are unproved.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_new_standard_implementation
+  reviewer: pending independent semantic review
