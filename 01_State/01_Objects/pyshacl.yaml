@@ -89,14 +89,27 @@ sources:
   title: pySHACL 0.40.1 — ordinary constraint severity handling retains reports; separate custom loop
   language: en
   accessed: '2026-11-01'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/json-ld/jsonld-shacl-produced-20261021.json
+  title: 'IA historical upstream inputs and transformations: original JSON-LD versus N-Quads before caller graph
+    selection, not pySHACL input-field preservation'
+  accessed: '2026-11-05'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/json-ld/jsonld-shacl-result-20261021.json
+  title: 'IA historical pySHACL pipeline observations: ten ordinary checks, returned ValidationFailure and raised
+    ReportableRuntimeError; expected-result pass is not conformance'
+  accessed: '2026-11-05'
+notes_zh:
+- IA 研究判断：独立的 2026-10-21 实验先由调用方把 Dataset.default_graph 或全部图三元组显式复制到 Graph，再调用 validate；不是 pySHACL 自动忽略或选取命名图。同一混合数据集的默认图与
+  union 对照分别为 conforms=true/零结果和 false/两结果；仅命名图的数据在默认图 targetClass 下因无焦点而通过，改用 targetNode 则检出缺失属性。七个输入产生十二个预期观察，不是十二个符合文档，也不是原十九例接纳测试。普通不符合、返回
+  ValidationFailure 和 meta_shacl=True 时抛 ReportableRuntimeError 分开保存。冻结 JSON 只记录安装包版本 pyshacl0.40.1/RDFLib7.6.0
+  等，不证明发行包字节等同本对象固定 Git 提交；原始字段丢失发生在上游，不归因于验证器。本次不重跑、不改变选图合同、技术关系、原描述/范围或核验日期。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/03_Evidence/jsonld-shacl-boundary-probe-2026-10-21.zh-CN.md)。
 last_verified_at: '2026-10-21T04:35:19.773595+00:00'
 last_verified_by: Agent — OpenAI / dot，fixed-version SHACL implementation evidence executor
 record_created_at: '2026-10-21T04:39:44.884351+00:00'
-record_updated_at: '2026-11-01T01:29:42.545519+00:00'
+record_updated_at: '2026-11-05T19:16:00+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / supplement_pyshacl_visible_scope
-  reviewer: Independent Agents — OpenAI / dot / pyshacl_semantics and pyshacl_structure
+  executor: Agent — OpenAI / dot / finish_wot_evidence
+  reviewer: Independent Agent — OpenAI / dot / review_input_scope_linkage
   github_actor: ff6962757
 intake_provenance:
   candidate_id: pyshacl

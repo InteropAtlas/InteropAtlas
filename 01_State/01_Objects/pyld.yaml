@@ -180,14 +180,26 @@ sources:
   title: Historical PyLD intake packet — 18 named results and source fingerprints; not a fresh rerun
   language: zh
   accessed: '2026-10-30'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/json-ld/jsonld-shacl-produced-20261021.json
+  title: 'IA historical pipeline inputs and PyLD output: seven JSON-LD inputs, expansion, N-Quads and dropped properties;
+    not the original 18-example intake'
+  accessed: '2026-11-05'
+- url: https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/json-ld/jsonld-shacl-result-20261021.json
+  title: 'IA historical downstream observations: caller-selected graphs and pySHACL outcomes, not PyLD validation
+    or 12 conforming documents'
+  accessed: '2026-11-05'
+notes_zh:
+- IA 研究判断：2026-10-21 的独立 JSON-LD→RDF→SHACL 实验中，固定上下文下的未映射额外属性在 PyLD 展开时被丢弃；后续所选图的 conforms=true 没有检查那项原始属性。该结论只针对所列输入/配置，不把所有未映射拼写或全部
+  JSON-LD 属性泛化为丢失。七个输入与下游十二个预期观察属于同一有限实验，区别于原收录十八例；这些资产不补造原十八例未恢复的完整脚本/输出。冻结 JSON 记录安装包版本 PyLD3.3.0，未提供执行发行包哈希或与本对象固定
+  Git 提交逐字节相等的证据；Python3.12.14 与分离环境来自报告。调用方显式选图，外部加载被拒，不据此推断通用管道、远程上下文、安全或 RDF1.2 支持。本次只接回历史证据，不重跑或刷新核验日期。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/02_Experiments/03_Evidence/jsonld-shacl-boundary-probe-2026-10-21.zh-CN.md)。
 last_verified_at: '2026-10-30T17:55:35.018155+00:00'
 last_verified_by: Agent — OpenAI / dot / pyld_proposal; fixed-source and historical-evidence inspection only
 record_created_at: '2026-10-21T05:20:13.051116+00:00'
-record_updated_at: '2026-10-30T17:55:35.018155+00:00'
+record_updated_at: '2026-11-05T19:16:00+00:00'
 latest_substantive_contribution:
   initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / pyld_proposal
-  reviewer: Independent Agents — OpenAI / dot / deliver_pyld_clarification/semantic and deliver_pyld_clarification/structure
+  executor: Agent — OpenAI / dot / finish_wot_evidence
+  reviewer: Independent Agent — OpenAI / dot / review_input_scope_linkage
   github_actor: ff6962757
 intake_provenance:
   candidate_id: pyld

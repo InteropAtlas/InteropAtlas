@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T18:43:00+00:00
+Document Updated At: 2026-11-05T19:16:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_runtime_linkage
+  Reviewer: Independent Agent — OpenAI / dot / review_input_scope_linkage
   GitHub Actor: ff6962757
 -->
 
@@ -646,3 +646,30 @@ print(json.dumps({i: {
 ```
 
 本次本地实际读取恢复 6、12、12 条 sources，各含两条追加的固定历史来源，并恢复三个 IA-authored notes；两条 Syslog 路径是同一清单/结果。原始核验字段逐值保留。这是 IA 数据读取检验，不是重新执行12例或9例。所有既有 hold、取消的 live-page retrieval 及页面/显示暂停保持不变。
+
+
+## 2026-11-05 追加：哪些原始信息真正进入下一步检查
+
+本次选择一个已有材料能够具体回答的问题：**原始信息经过转换、选取或 API 传递后，哪一部分真正成为下一步检查的输入？** 基线为 `815c973e5ee8e7ee755417718e70f892f3e8d977`。接合的是两份已完成研究，分别连接 `pyld` / `pyshacl` 与 `ebu_libbw64` / `ebu_libadm` 的拥有者记录；两组不是彼此兼容的技术，也不组成共同管道。
+
+| 既有研究 | 可直接恢复的具体判断 | 证据模式与未回答项 |
+| --- | --- | --- |
+| [JSON-LD→RDF→SHACL](../../02_Experiments/03_Evidence/jsonld-shacl-boundary-probe-2026-10-21.zh-CN.md) | 固定输入的未映射属性在展开时丢弃，随后图验证通过没有检查该原属性。调用方显式复制默认图或 union 后再调用验证器；同一混合数据集得到不同结果，仅命名图数据还显示 targetClass 无焦点与 targetNode 的区别。 | 历史实际观察：七输入、十二个预期结果，包含不符合、returned failure 与异常，不是十二个符合文档。它们不是原 PyLD十八例/pySHACL十九例的替代资产。不推断所有图选择、远程数据或 RDF1.2。 |
+| [libbw64/libadm 交接](../01_Prior_Art/libbw64-libadm-handoff-2026-11-05.zh-CN.md) | 所选块 API 提供 AXML/CHNA 原始值；parseXml 入口没有 CHNA/fmt 参数。XML 内部引用解析不能代替调用方的跨块音轨关联检查，支持字段再生成也不是任意 XML 字节保留。 | 已复核静态源码判断；配对/封套见证均 UNEXECUTED，actual_result 为 null。没有此配对的编译或运行结果；common-definitions 完整标识库存等准备前提仍待核对。既有推荐不变为已测版本组合。 |
+
+这不是又一份“验证不足”的泛论：第一组能指出丢弃和显式选取发生在验证器之前；第二组能指出相关信息未作为所选 API 的输入。两组证据强度不同，不能把静态预期换名为实测，也不把案例数合成覆盖分数或新分类。UBL 的既有对象/关系已说明 #488 的 IND5 与 XSD 反例，本次不机械追加它或重跑任何探针。
+
+### 恢复路径、身份与旧边界
+
+两组原来都可从本审计及历史研究抵达；JSON-LD 实验另有 URI 研究经本审计的间接入口。四对象原有 sources 数分别是14、7、13、2，均无 notes_zh，但这不表示没有条件、判断或研究。新增的是**从拥有者对象直接恢复对应输入/输出或静态来源的路径**，不宣称全局发现了缺失知识。
+
+- PyLD/pySHACL 各追加同一对[原始输入与转换输出](../../02_Experiments/json-ld/jsonld-shacl-produced-20261021.json)、[验证结果](../../02_Experiments/json-ld/jsonld-shacl-result-20261021.json)。只看后者会遗漏哪些原始字段已不在 RDF 中。JSON 记录的安装包版本与当前对象3.3.0/0.40.1 相同，但没有执行发行包的哈希或与 Canonical 固定 Git 提交字节相等的证据。Python3.12.14 和分离环境/进程由报告记录，不能说它们写在两份结果 JSON 中。四个原脚本/输出哈希与报告相符；本次仅核历史资产字节，没有执行上游。原 PyLD十八例完整脚本/输出未恢复的历史限制不被这组不同实验补齐。
+- libbw64/libadm 各追加同一[静态 source_verification 区段](https://github.com/InteropAtlas/InteropAtlas/blob/815c973e5ee8e7ee755417718e70f892f3e8d977/03_Evolution/01_Research/01_Prior_Art/libbw64-libadm-handoff-2026-11-05.json#L17-L387)：32 份选定文件身份、哈希、Git commit/tree 记录及静态范围。facts 区段止于 findings/合成见证之前；不把整个混合 JSON 标成运行证据。研究判断和完整报告入口放 notes_zh，而不是新增外部权威来源。文件身份核对不等于签名验证或与更早捕获的字节相等。
+
+原描述、scope、版本/身份、source 顺序和值/日期、intake、record_created 和 last_verified_at/by 保持原样，包括 libadm 未记录核验字段的状态。现有技术关系逐字节不变，#583 既有 libbw64 实测不转移给 libadm，旧接纳例与本次所接研究不合并计数。仅 record_updated 与当前贡献信息反映此次接合；历史报告、输入、脚本和结果也不改写。
+
+### 沿用现有读取，不另造查询机制
+
+沿前节完整只读配方，将 `ids` 列表替换为 `['pyld', 'pyshacl', 'ebu_libbw64', 'ebu_libadm']`，其余读取/投影代码不变，即可恢复四个 owning-record 入口。本次实际执行该替换后的 IA 查询：sources 数为16、9、14、3，恢复四个独立 IA-authored assessment；六条追加引用对应三份不同历史 JSON，其中 ADM 仅指限定行段。新 notes 不作为外部证据，原核验字段保持原值或 not_recorded。
+
+这份读取检查不重做七输入/十二观察、构建 libadm 或运行未执行见证，不创建新 API、字段、规范、自动队列或维护合同。所有关系、既有 holds、取消的 live-page retrieval 及页面/显示暂停保持不变。
