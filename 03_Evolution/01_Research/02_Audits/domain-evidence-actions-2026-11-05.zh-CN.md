@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T16:09:31+00:00
+Document Updated At: 2026-11-05T16:42:13+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_failure_signal_comparison
+  Reviewer: Independent Agent — OpenAI / dot / review_quantity_preservation
   GitHub Actor: ff6962757
 -->
 
@@ -558,3 +558,10 @@ agents 行的方言问题现补有[固定源码责任矩阵及验证器实验](.
 MCP 的 result.isError 可在 JSON-RPC 结果信封内报告工具失败；固定 FastMCP 的普通异常包装和未知工具路径不能用规范示例机械预测。客户端还会为超时与断流在本地构造错误，因此 McpError 或内部 JSONRPCError 本身不能证明收到对端错误。已补23份规范/固定源码的字节身份、条件化责任比较及明确未执行的示例，历史17/13/12观察没有重跑。
 
 具体未知现在落到真实生产端适配器、实际所收信封/本地异常来源，以及方法完成/副作用合同，而不是笼统的“有没有错误支持”或缺少注释。这些研究条件没有拼成通用错误映射、自动重试规则或已运行链路；未改 Canonical、Runtime、页面、维护机制与任何 hold。
+
+
+## 2026-11-05 追加：共享 JSON 数字之外的量值含义
+
+[SenML 与 FHIR Quantity 的量值保留比较](../01_Prior_Art/quantity-preservation-2026-11-05.zh-CN.md)把 industrial/measurement、health 与 syntax 的既有记录连接到一个具体交接问题。SenML base 值/单位的活动范围、FHIR显示单位与编码身份、comparator 的界限语义，以及缺值不能补零分别保留。最明确的合同差异是 SenML 1.1/1.10 语义相同，而 FHIR decimal 原表示精度须为展示保留，不能把同一重序列化策略无条件视作两边都无损。
+
+证据文件绑定官方条文、固定源码、11个明确未执行的原始JSON输入和两条已有JSON uses；一次性配方恢复完整关系条件并检验字节、引用与有限 Decimal 算术，不运行上游实现或把反例误称符合性通过。实际单位映射、测量对象/时间/主体对应、限定词承载和选定实现的交换结果仍未知；无版本UCUM system不被强行当作出版版本。没有新转换器、Canonical边、快照、UI或维护机制，也没有重做或替代 held FHIR 摘要工作。
