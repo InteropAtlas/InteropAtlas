@@ -1,0 +1,908 @@
+{
+  "study": "OpenTelemetry Python API to SDK parent/sampling/on_end conditional handoff",
+  "document_status": "Research / Fixed-source conditional handoff",
+  "recorded_at": "2026-11-05T20:47:00+00:00",
+  "source_verification": {
+    "study": "OpenTelemetry Python API to SDK parent/sampling/on_end conditional handoff",
+    "interopatlas_baseline": "cb25cf9677c94acd8b8b00e2c3720107836e7d96",
+    "upstream_commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+    "version_scope": "1.45.1, retained from frozen intake identity",
+    "source_count": 9,
+    "new_source_files_relative_to_two_historical_packets": 3,
+    "commit_tree_binding": {
+      "commit_url": "https://api.github.com/repos/open-telemetry/opentelemetry-python/git/commits/14971cef9c84c2354cbaf6871090896fad0f9a1a",
+      "tree_sha": "9d8ff2530a761674d3da99b194d0868a575a3be6",
+      "tree_url": "https://api.github.com/repos/open-telemetry/opentelemetry-python/git/trees/9d8ff2530a761674d3da99b194d0868a575a3be6?recursive=1",
+      "tree_truncated": false,
+      "tree_entry_count": 1549,
+      "all_selected_paths_blobs_sizes_match": true,
+      "independent_commit_or_release_signature_verification": false
+    },
+    "sources": [
+      {
+        "source_id": "api_context",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-api/src/opentelemetry/context/__init__.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/context/__init__.py",
+        "github_returned_blob": "9bd2084d3c4842a0ee9a4bd6eab31203ac281c5d",
+        "bytes": 4710,
+        "sha256": "a979c3f42ea14c0e8309f29e9cf9b2f94af7ff63e963e8d3211e7ad1cc8b0ec6",
+        "git_blob_sha1": "9bd2084d3c4842a0ee9a4bd6eab31203ac281c5d",
+        "line_count": 147,
+        "official_tree_blob": "9bd2084d3c4842a0ee9a4bd6eab31203ac281c5d",
+        "official_tree_size": 4710,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 59,
+            "end_line": 116,
+            "purpose": "Explicit Context is used even when empty; set_value copies; attachment is separate",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/context/__init__.py#L59-L116"
+          }
+        ]
+      },
+      {
+        "source_id": "api_propagation",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-api/src/opentelemetry/trace/propagation/__init__.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/__init__.py",
+        "github_returned_blob": "93a09160a81710a3b4540b980ec2d7a296f5718d",
+        "bytes": 1136,
+        "sha256": "7f064ececa407f1a421113a4a7f82b73bec72a95ca6f1a7013940db0bbb2495d",
+        "git_blob_sha1": "93a09160a81710a3b4540b980ec2d7a296f5718d",
+        "line_count": 37,
+        "official_tree_blob": "93a09160a81710a3b4540b980ec2d7a296f5718d",
+        "official_tree_size": 1136,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": false,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 12,
+            "end_line": 37,
+            "purpose": "Selected Context current-span storage/retrieval and INVALID_SPAN fallback",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/__init__.py#L12-L37"
+          }
+        ]
+      },
+      {
+        "source_id": "api_span",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-api/src/opentelemetry/trace/span.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py",
+        "github_returned_blob": "bf68050a19b6db3a99ea9b298e8b28b1d6f0e3b0",
+        "bytes": 20543,
+        "sha256": "67886d3802f7d87adcc6bc26d790ecef0b1fb89b1aed3e28f7c6d73b0b739e38",
+        "git_blob_sha1": "bf68050a19b6db3a99ea9b298e8b28b1d6f0e3b0",
+        "line_count": 616,
+        "official_tree_blob": "bf68050a19b6db3a99ea9b298e8b28b1d6f0e3b0",
+        "official_tree_size": 20543,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 199,
+            "end_line": 228,
+            "purpose": "Trace Context 2 sampled/random flags",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py#L199-L228"
+          },
+          {
+            "start_line": 453,
+            "end_line": 473,
+            "purpose": "ID validity and default TraceState",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py#L453-L473"
+          },
+          {
+            "start_line": 523,
+            "end_line": 539,
+            "purpose": "NonRecordingSpan context, false recording, no-op end",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py#L523-L539"
+          },
+          {
+            "start_line": 585,
+            "end_line": 594,
+            "purpose": "Invalid ID/context constants",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/span.py#L585-L594"
+          }
+        ]
+      },
+      {
+        "source_id": "api_trace",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-api/src/opentelemetry/trace/__init__.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/__init__.py",
+        "github_returned_blob": "cb8a5400601327bc033429c6ddf8cdb7324e24d1",
+        "bytes": 23188,
+        "sha256": "395e280f8dc25cb5ffa8fdea946b00d3c76423c76ee239bdccaecad151317f78",
+        "git_blob_sha1": "cb8a5400601327bc033429c6ddf8cdb7324e24d1",
+        "line_count": 661,
+        "official_tree_blob": "cb8a5400601327bc033429c6ddf8cdb7324e24d1",
+        "official_tree_size": 23188,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 286,
+            "end_line": 295,
+            "purpose": "start_span does not activate current span",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/__init__.py#L286-L295"
+          },
+          {
+            "start_line": 404,
+            "end_line": 473,
+            "purpose": "Proxy/no-op differs from SDK route",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/__init__.py#L404-L473"
+          },
+          {
+            "start_line": 520,
+            "end_line": 575,
+            "purpose": "Provider selection and absent-provider default",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/__init__.py#L520-L575"
+          }
+        ]
+      },
+      {
+        "source_id": "api_tracecontext",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-api/src/opentelemetry/trace/propagation/tracecontext.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/tracecontext.py",
+        "github_returned_blob": "bc069bd783124bb4ce694b0db14b5f663bf2083d",
+        "bytes": 4128,
+        "sha256": "ac6fbcf1610a51ebf9d9161e42e9e98d4e22a50552c57bb37596a62963e00776",
+        "git_blob_sha1": "bc069bd783124bb4ce694b0db14b5f663bf2083d",
+        "line_count": 115,
+        "official_tree_blob": "bc069bd783124bb4ce694b0db14b5f663bf2083d",
+        "official_tree_size": 4128,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 37,
+            "end_line": 61,
+            "purpose": "Previously known rejection branches retain supplied Context",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/tracecontext.py#L37-L61"
+          },
+          {
+            "start_line": 63,
+            "end_line": 86,
+            "purpose": "Valid extraction produces remote SpanContext wrapped in NonRecordingSpan",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-api/src/opentelemetry/trace/propagation/tracecontext.py#L63-L86"
+          }
+        ]
+      },
+      {
+        "source_id": "sampling",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py",
+        "github_returned_blob": "156b659f3329c862d405da728cbca6def86bf6fa",
+        "bytes": 18044,
+        "sha256": "e895f62d5659b6c94fa0a12b17afeb78f1c683e11b01201f032977777a9c6d5e",
+        "git_blob_sha1": "156b659f3329c862d405da728cbca6def86bf6fa",
+        "line_count": 488,
+        "official_tree_blob": "156b659f3329c862d405da728cbca6def86bf6fa",
+        "official_tree_size": 18044,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": false,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 147,
+            "end_line": 159,
+            "purpose": "Separate recording/sampled decisions",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L147-L159"
+          },
+          {
+            "start_line": 176,
+            "end_line": 187,
+            "purpose": "SamplingResult empty attributes",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L176-L187"
+          },
+          {
+            "start_line": 209,
+            "end_line": 243,
+            "purpose": "Static samplers, discarded DROP attributes, parent tracestate",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L209-L243"
+          },
+          {
+            "start_line": 300,
+            "end_line": 364,
+            "purpose": "ParentBased remote/local and valid/invalid selection",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L300-L364"
+          },
+          {
+            "start_line": 370,
+            "end_line": 421,
+            "purpose": "AlwaysRecordSampler contrast and DEFAULT_ON identity",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L370-L421"
+          },
+          {
+            "start_line": 455,
+            "end_line": 488,
+            "purpose": "Environment default and valid-parent tracestate",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/sampling.py#L455-L488"
+          }
+        ]
+      },
+      {
+        "source_id": "sdk_export",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-sdk/src/opentelemetry/sdk/trace/export/__init__.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/export/__init__.py",
+        "github_returned_blob": "525334173d8cc78f40067f72c7a117ad9240ac15",
+        "bytes": 10674,
+        "sha256": "ea5e93aa63c87733ec6cfe0cdbd7686668650a15c424b4cdd2f4281ac150cfef",
+        "git_blob_sha1": "525334173d8cc78f40067f72c7a117ad9240ac15",
+        "line_count": 316,
+        "official_tree_blob": "525334173d8cc78f40067f72c7a117ad9240ac15",
+        "official_tree_size": 10674,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 206,
+            "end_line": 215,
+            "purpose": "Previously reviewed on_end sampled filter and shared emit call",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/export/__init__.py#L206-L215"
+          }
+        ]
+      },
+      {
+        "source_id": "sdk_id_generator",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-sdk/src/opentelemetry/sdk/trace/id_generator.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/id_generator.py",
+        "github_returned_blob": "f23e3338b2cd5dbbe6e36e293034af80855309b0",
+        "bytes": 2440,
+        "sha256": "c4ac75dde46e185dd03bbf876046bf5c4dad7409efdb30a45db904a5f73dfd1b",
+        "git_blob_sha1": "f23e3338b2cd5dbbe6e36e293034af80855309b0",
+        "line_count": 72,
+        "official_tree_blob": "f23e3338b2cd5dbbe6e36e293034af80855309b0",
+        "official_tree_size": 2440,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": false,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 54,
+            "end_line": 72,
+            "purpose": "Default generator nonzero IDs and random flag; no uniqueness guarantee",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/id_generator.py#L54-L72"
+          }
+        ]
+      },
+      {
+        "source_id": "sdk_trace",
+        "repository": "open-telemetry/opentelemetry-python",
+        "path": "opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py",
+        "commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+        "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py",
+        "github_returned_blob": "4555a2817f973544f3eb4cc7a113f4a78f6baa7a",
+        "bytes": 51652,
+        "sha256": "27cf9cca07c5a76dadcdf3de5d66b063aea11d45783acfd48810cfc5cea38db0",
+        "git_blob_sha1": "4555a2817f973544f3eb4cc7a113f4a78f6baa7a",
+        "line_count": 1425,
+        "official_tree_blob": "4555a2817f973544f3eb4cc7a113f4a78f6baa7a",
+        "official_tree_size": 51652,
+        "commit_tree_binding_verified": true,
+        "acquired_on_utc": "2026-11-05",
+        "acquisition": "Official GitHub file response at the explicit immutable commit; complete UTF-8 content.",
+        "same_source_file_in_historical_packet": true,
+        "evidence_type": "fixed_source_inspection_only",
+        "runtime_executed": false,
+        "relevant_anchors": [
+          {
+            "start_line": 163,
+            "end_line": 189,
+            "purpose": "Registered synchronous processor forwarding",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L163-L189"
+          },
+          {
+            "start_line": 943,
+            "end_line": 978,
+            "purpose": "Start, normal first end and post-end recording false",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L943-L978"
+          },
+          {
+            "start_line": 1103,
+            "end_line": 1105,
+            "purpose": "Tracer enablement",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L1103-L1105"
+          },
+          {
+            "start_line": 1138,
+            "end_line": 1220,
+            "purpose": "Parent selection, sampler call, child flags/context and recording branch",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L1138-L1220"
+          },
+          {
+            "start_line": 1253,
+            "end_line": 1279,
+            "purpose": "Provider sampler/env/ID-generator and disablement",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L1253-L1279"
+          },
+          {
+            "start_line": 1335,
+            "end_line": 1343,
+            "purpose": "Disabled provider no-op tracer",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L1335-L1343"
+          },
+          {
+            "start_line": 1374,
+            "end_line": 1398,
+            "purpose": "Provider transfers sampler/processor and registration",
+            "url": "https://github.com/open-telemetry/opentelemetry-python/blob/14971cef9c84c2354cbaf6871090896fad0f9a1a/opentelemetry-sdk/src/opentelemetry/sdk/trace/__init__.py#L1374-L1398"
+          }
+        ]
+      }
+    ],
+    "limits": [
+      "No upstream import, installation, execution, build or tests.",
+      "No SDK, threads, exporter or telemetry instantiated.",
+      "No real data or live service/transport integration.",
+      "No PyPI wheel/sdist or dependency installation equivalence.",
+      "No implements, dependency, composed-protocol or adoption relation inferred.",
+      "2021 Trace Context endpoint and Trace Context 2/random-bit source boundary unchanged."
+    ],
+    "annotation_boundary": "Anchor purposes are InteropAtlas navigation annotations, not upstream assertions or runtime observations."
+  },
+  "existing_evidence": {
+    "baseline": "cb25cf9677c94acd8b8b00e2c3720107836e7d96",
+    "records": [
+      {
+        "commit": "d453849f9510a2c575642a33ec50b77bf031f36d",
+        "path": "01_State/Inbox/review-packets/opentelemetry-api-implementation-20261021.yaml",
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/d453849f9510a2c575642a33ec50b77bf031f36d/01_State/Inbox/review-packets/opentelemetry-api-implementation-20261021.yaml",
+        "bytes": 14116,
+        "sha256": "e23a471c4befea0c1ead57604a16e04ee5093d3507d8ced6a226817f2a4fb504",
+        "git_blob_sha1": "c8e16a3d5eab22e962cf5b6b16c6285b9ecbd4b3",
+        "verified_against_local_git_object": true,
+        "use": "Historical aggregate 22 in-memory examples; no exact per-case fixtures/results reconstructed.",
+        "rerun": false
+      },
+      {
+        "commit": "6eeb4f53dd270878f405ad5f97824b058e03ef01",
+        "path": "01_State/Inbox/review-packets/otel-sdk-batchspan-20261101.yaml",
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/6eeb4f53dd270878f405ad5f97824b058e03ef01/01_State/Inbox/review-packets/otel-sdk-batchspan-20261101.yaml",
+        "bytes": 13948,
+        "sha256": "160dfe3a630cc64b47b0644dbbb5bbdf678909440739a79d8db7e4448006fa2a",
+        "git_blob_sha1": "0e5022d575e4edd4b0628556c54475e12ca79797",
+        "verified_against_local_git_object": true,
+        "use": "Historical static batching/flush/shutdown inspection; sampling.py absent from its seven-source manifest.",
+        "rerun": false
+      },
+      {
+        "commit": "cb25cf9677c94acd8b8b00e2c3720107836e7d96",
+        "path": "01_State/01_Objects/opentelemetry_python_api.yaml",
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/cb25cf9677c94acd8b8b00e2c3720107836e7d96/01_State/01_Objects/opentelemetry_python_api.yaml",
+        "bytes": 10959,
+        "sha256": "446a9f5b1022a78d85abef8b6271a2fa4c04eb83a1efe135f726ea6272962cee",
+        "git_blob_sha1": "d275d8aa9e0b6b0be4a37d1551042dcc9c776c7a",
+        "verified_against_local_git_object": true,
+        "use": "Current API propagation and stale-context limitations"
+      },
+      {
+        "commit": "cb25cf9677c94acd8b8b00e2c3720107836e7d96",
+        "path": "01_State/01_Objects/opentelemetry_python_sdk.yaml",
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/cb25cf9677c94acd8b8b00e2c3720107836e7d96/01_State/01_Objects/opentelemetry_python_sdk.yaml",
+        "bytes": 9607,
+        "sha256": "1c1492d672734c0c3fa8f56efdd979a05f6d66d2f0e1115e5c420553cb89039b",
+        "git_blob_sha1": "e4052bfdc6713f388a7518770b269e21bbf2bebd",
+        "verified_against_local_git_object": true,
+        "use": "Current SDK batching boundary and retained historical evidence"
+      },
+      {
+        "commit": "cb25cf9677c94acd8b8b00e2c3720107836e7d96",
+        "path": "03_Evolution/01_Research/02_Audits/domain-evidence-actions-2026-11-05.zh-CN.md",
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/cb25cf9677c94acd8b8b00e2c3720107836e7d96/03_Evolution/01_Research/02_Audits/domain-evidence-actions-2026-11-05.zh-CN.md",
+        "bytes": 111599,
+        "sha256": "016b232a435411571f2a8852197083eb46f51cc33e871a05882fa93dc9f682f0",
+        "git_blob_sha1": "508cf3897e0d55b446d7538139044adb42d100de",
+        "verified_against_local_git_object": true,
+        "use": "Existing observability unclosed sampler bridge, lines204–216"
+      }
+    ]
+  },
+  "illustrative_cases": {
+    "study_mode": "fixed_source_analysis",
+    "upstream_commit": "14971cef9c84c2354cbaf6871090896fad0f9a1a",
+    "common_assumptions": [
+      "Illustrative source predictions only, never instantiated or executed.",
+      "Enabled SDK provider and tracer, valid construction/call arguments, no custom sampler/delegate mutation.",
+      "No explicit sampler and OTEL_TRACES_SAMPLER absent for default cases; contrast uses truthy explicit AlwaysRecordSampler(DEFAULT_ON).",
+      "Default RandomIdGenerator and SynchronousMultiSpanProcessor; target BatchSpanProcessor registered.",
+      "Recording span start succeeds; first end is invoked normally; preceding metrics/_on_ending and earlier registered callbacks return normally.",
+      "No concurrent enablement/config/context changes, no exception/interrupt invalidating the normal path.",
+      "No business attributes or links in the examples; no real data.",
+      "Generated IDs are symbolic, not runtime observations or collision-free guarantees."
+    ],
+    "actual_execution_count": 0,
+    "historical_api_22_cases_reconstructed": false,
+    "cases": [
+      {
+        "case_id": "S01",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Pass returned extracted Context explicitly as start_span(context=returned_context); extraction base is empty Context.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": true,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "00f067aa0ba902b7",
+          "trace_flags_hex": "01",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "wrapper": "NonRecordingSpan"
+        },
+        "illustrative_carrier": {
+          "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "tracestate": "vendor=value"
+        },
+        "source_prediction": {
+          "parentbased_delegate": "remote_parent_sampled=ALWAYS_ON",
+          "decision": "RECORD_AND_SAMPLE",
+          "recording_after_start_before_end": true,
+          "recording_after_end": false,
+          "child_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "child_span_id": "generate_span_id() call; value unknown",
+          "child_is_remote": false,
+          "child_sampled": true,
+          "child_trace_flags_hex": "01",
+          "child_trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": true,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "api_span",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "S02",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Pass returned extracted Context explicitly as start_span(context=returned_context); extraction base is empty Context.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": true,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "00f067aa0ba902b7",
+          "trace_flags_hex": "00",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "wrapper": "NonRecordingSpan"
+        },
+        "illustrative_carrier": {
+          "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-00",
+          "tracestate": "vendor=value"
+        },
+        "source_prediction": {
+          "parentbased_delegate": "remote_parent_not_sampled=ALWAYS_OFF",
+          "decision": "DROP",
+          "recording_after_start_before_end": false,
+          "recording_after_end": false,
+          "child_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "child_span_id": "generate_span_id() call; value unknown",
+          "child_is_remote": false,
+          "child_sampled": false,
+          "child_trace_flags_hex": "00",
+          "child_trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "registered_bsp_on_end_reached_on_normal_first_end": false,
+          "bsp_calls_shared_emit": false,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "api_span",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "S03",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "explicit AlwaysRecordSampler(DEFAULT_ON)",
+        "parent_selection": "Pass returned extracted Context explicitly as start_span(context=returned_context); extraction base is empty Context.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": true,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "00f067aa0ba902b7",
+          "trace_flags_hex": "01",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "wrapper": "NonRecordingSpan"
+        },
+        "illustrative_carrier": {
+          "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "tracestate": "vendor=value"
+        },
+        "source_prediction": {
+          "parentbased_delegate": "remote_parent_sampled=ALWAYS_ON",
+          "decision": "RECORD_AND_SAMPLE",
+          "recording_after_start_before_end": true,
+          "recording_after_end": false,
+          "child_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "child_span_id": "generate_span_id() call; value unknown",
+          "child_is_remote": false,
+          "child_sampled": true,
+          "child_trace_flags_hex": "01",
+          "child_trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": true,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "api_span",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "S04",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "explicit AlwaysRecordSampler(DEFAULT_ON)",
+        "parent_selection": "Pass returned extracted Context explicitly as start_span(context=returned_context); extraction base is empty Context.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": true,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "00f067aa0ba902b7",
+          "trace_flags_hex": "00",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "wrapper": "NonRecordingSpan"
+        },
+        "illustrative_carrier": {
+          "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-00",
+          "tracestate": "vendor=value"
+        },
+        "source_prediction": {
+          "parentbased_delegate": "remote_parent_not_sampled=ALWAYS_OFF",
+          "decision": "RECORD_ONLY",
+          "recording_after_start_before_end": true,
+          "recording_after_end": false,
+          "child_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "child_span_id": "generate_span_id() call; value unknown",
+          "child_is_remote": false,
+          "child_sampled": false,
+          "child_trace_flags_hex": "00",
+          "child_trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": false,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "api_span",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "B01",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Explicit Context contains valid local unsampled span (e.g. previous child actually placed in selected Context).",
+        "input_parent": {
+          "valid": true,
+          "is_remote": false,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "00f067aa0ba902b7",
+          "trace_flags_hex": "00",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ]
+        },
+        "illustrative_carrier": null,
+        "source_prediction": {
+          "parentbased_delegate": "local_parent_not_sampled=ALWAYS_OFF",
+          "decision": "DROP",
+          "child_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "child_is_remote": false,
+          "child_trace_flags_hex": "00",
+          "child_trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ],
+          "recording_after_start_before_end": false,
+          "registered_bsp_on_end_reached_on_normal_first_end": false,
+          "bsp_calls_shared_emit": false
+        },
+        "source_ids": [
+          "api_propagation",
+          "api_context",
+          "sampling",
+          "sdk_trace",
+          "api_span"
+        ]
+      },
+      {
+        "case_id": "B02",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Explicit empty Context, no current span in that Context.",
+        "input_parent": {
+          "valid": false,
+          "helper_returns": "INVALID_SPAN"
+        },
+        "illustrative_carrier": null,
+        "source_prediction": {
+          "parentbased_delegate": "root=ALWAYS_ON",
+          "decision": "RECORD_AND_SAMPLE",
+          "sdk_parent": null,
+          "child_trace_id": "generate_trace_id() call; nonzero random value unknown",
+          "child_span_id": "generate_span_id() call; nonzero random value unknown",
+          "child_is_remote": false,
+          "child_trace_flags_hex": "03",
+          "child_trace_state": [],
+          "recording_after_start_before_end": true,
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": true,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_propagation",
+          "api_context",
+          "api_span",
+          "sampling",
+          "sdk_trace",
+          "sdk_id_generator",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "B03",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Explicit Context contains NonRecordingSpan wrapping manually defined invalid SpanContext; not an extraction result.",
+        "input_parent": {
+          "valid": false,
+          "is_remote": true,
+          "trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "span_id": "0000000000000000",
+          "trace_flags_hex": "03",
+          "trace_state": [
+            [
+              "vendor",
+              "value"
+            ]
+          ]
+        },
+        "illustrative_carrier": null,
+        "source_prediction": {
+          "parentbased_delegate": "root=ALWAYS_ON",
+          "decision": "RECORD_AND_SAMPLE",
+          "sdk_parent": null,
+          "child_trace_id": "generate_trace_id() call; nonzero random value unknown",
+          "child_span_id": "generate_span_id() call; nonzero random value unknown",
+          "child_is_remote": false,
+          "child_trace_flags_hex": "03",
+          "child_trace_state": [],
+          "recording_after_start_before_end": true,
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": true,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_span",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "sdk_id_generator",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "B04",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Invalid traceparent rejection returns supplied base Context containing a valid local sampled span; pass that returned Context explicitly.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": false,
+          "trace_id": "11111111111111111111111111111111",
+          "span_id": "2222222222222222",
+          "trace_flags_hex": "01",
+          "trace_state": [
+            [
+              "local",
+              "value"
+            ]
+          ]
+        },
+        "illustrative_carrier": {
+          "traceparent": "invalid"
+        },
+        "source_prediction": {
+          "extraction_result": "supplied base Context unchanged",
+          "parentbased_delegate": "local_parent_sampled=ALWAYS_ON",
+          "decision": "RECORD_AND_SAMPLE",
+          "child_trace_id": "11111111111111111111111111111111",
+          "child_is_remote": false,
+          "child_trace_flags_hex": "01",
+          "child_trace_state": [
+            [
+              "local",
+              "value"
+            ]
+          ],
+          "recording_after_start_before_end": true,
+          "registered_bsp_on_end_reached_on_normal_first_end": true,
+          "bsp_calls_shared_emit": true,
+          "successful_queue_retention_or_delivery": "NOT_ESTABLISHED"
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "sdk_export"
+        ]
+      },
+      {
+        "case_id": "B05",
+        "execution_status": "UNEXECUTED",
+        "actual_result": null,
+        "configuration": "default ParentBased(ALWAYS_ON)",
+        "parent_selection": "Sampled remote Context was extracted but not attached or passed; start_span(context=None) selects an ambient valid local unsampled parent instead.",
+        "input_parent": {
+          "valid": true,
+          "is_remote": false,
+          "trace_id": "11111111111111111111111111111111",
+          "span_id": "2222222222222222",
+          "trace_flags_hex": "00",
+          "trace_state": [
+            [
+              "local",
+              "value"
+            ]
+          ]
+        },
+        "illustrative_carrier": {
+          "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+          "tracestate": "vendor=value"
+        },
+        "source_prediction": {
+          "ignored_extracted_parent_trace_id": "4bf92f3577b34da6a3ce929d0e0e4736",
+          "parentbased_delegate": "local_parent_not_sampled=ALWAYS_OFF",
+          "decision": "DROP",
+          "child_trace_id": "11111111111111111111111111111111",
+          "child_is_remote": false,
+          "child_trace_flags_hex": "00",
+          "child_trace_state": [
+            [
+              "local",
+              "value"
+            ]
+          ],
+          "recording_after_start_before_end": false,
+          "registered_bsp_on_end_reached_on_normal_first_end": false,
+          "bsp_calls_shared_emit": false
+        },
+        "source_ids": [
+          "api_tracecontext",
+          "api_context",
+          "api_propagation",
+          "sampling",
+          "sdk_trace",
+          "api_span"
+        ]
+      }
+    ]
+  },
+  "verification_boundary": {
+    "source_identity_checks": "Nine source byte lengths, SHA-256 values and Git blob SHA-1 values match official responses and their nontruncated commit tree.",
+    "repository_identity_checks": "Five referenced InteropAtlas records match their fixed git objects.",
+    "source_signature_independently_verified": false,
+    "upstream_code_installed_imported_or_executed": false,
+    "actual_execution_count": 0,
+    "telemetry_or_export_network_activity": false,
+    "historical_results_rerun_or_reconstructed": false,
+    "interpretation": "Source predictions are conditional analyses, not observed behavior, conformance, queue retention or delivery results. The report carries their limits."
+  }
+}

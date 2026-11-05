@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T20:10:00+00:00
+Document Updated At: 2026-11-05T20:47:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_alternatives_answerability
+  Reviewer: Independent Agent — OpenAI / dot
   GitHub Actor: ff6962757
 -->
 
@@ -753,3 +753,14 @@ print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
 本次执行确认三个 capability 均存在，所选关系数依次为0、1、1；后两项分别是表中 URL/URI 与 Forgejo/GitHub Actions 边。完整加载记录恢复三条边自己的条件、版本和 evidence；未选择的 SemVer/CalVer 也通过谓词遍历保持可见。所有 source/target 方向照录，包括 SemVer→CalVer，不根据比较文字反转。这只是让既有比较连同限制可读取，不给它补 capability 注释，不改变查询或关系语义，也不生成新的替代边。
 
 具体应用仍需给出自己的任务约束、所用版本和迁移/交换证据，才能判断一条记录是否足够支持选择。当前三条记录不能证明替代方案已穷尽，也不能证明某项现实任务无解。本次在这一有限问题上停止，不把读取差异升级为新 API、通用选择器、维护规则或覆盖评分；原有页面/显示暂停与全部 hold 保留。
+
+
+## 2026-11-05 追加：已提取父上下文如何到达采样与处理器
+
+前文 observability 行将 API 传播与 SDK 批处理之间的衔接保留为未回答问题；原固定基线和历史结论不改写。本次[固定源码研究](../01_Prior_Art/otel-sampling-handoff-2026-11-05.zh-CN.md)及[机器可读证据](../01_Prior_Art/otel-sampling-handoff-2026-11-05.json)补充了其中的 parent-context → sampler → on_end 路径。
+
+在明确把 extract 返回的有效远程父 Context 传给启用的 SDK tracer、未提供 sampler 且未设置 OTEL_TRACES_SAMPLER 的条件下，固定1.45.1源码的默认 ParentBased(ALWAYS_ON) 将 sampled / unsampled 父分别导向 RECORD_AND_SAMPLE / DROP。显式对照 AlwaysRecordSampler(DEFAULT_ON) 仅把后者改为 RECORD_ONLY：子 span 在结束前可 recording，正常首次结束可到达已注册 on_end，但 BatchSpanProcessor 因 sampled=false 不调用内部 emit。处理器链此前的回调均正常返回等条件详见报告。
+
+这让“关联 trace ID”“处理器观察结束”“通过批处理 sampled 筛选”三个问题能分别追溯，不把上下文存在当作导出成功。extract 本身不激活 SDK 或自动选择后续父上下文；无效 carrier 返回保留的有效 base Context 时，也不能直接认定生成新 root。
+
+这是九份固定官方源码及九个**未执行**假设案例的条件推导，实际结果全部为 null；不是 SDK 运行、跨服务互通、队列保留或网络送达证据。API 历史22例汇总、SDK 静态批处理记录、2021/Trace Context 2 版次边界仍分别保留。没有新增技术边、Canonical 验证日期、页面或维护要求。
