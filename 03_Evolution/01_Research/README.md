@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T05:00:49.952462+00:00
+Document Updated At: 2026-11-05T05:35:24.767450+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Agent — OpenAI / dot / review_syslog_composition (independent)
+  Reviewer: Agent — OpenAI / dot / review_wot_crossdomain (independent)
   GitHub Actor: ff6962757
 -->
 
@@ -37,6 +37,8 @@ Latest Substantive Contribution:
 - [VC2 验证职责与既有库包装层的有限对照（2026-10-31）](01_Prior_Art/vc2-verification-responsibilities-2026-10-31.zh-CN.md)：对照固定 Recommendation 三顶层算法职责与局部预检、外部委派、状态回调和失败返回；不推完整符合性或验签成功。
 
 - [Syslog 消息组成与既有读写先例的有限覆盖对照（2026-11-05）](01_Prior_Art/syslog-message-composition-coverage-2026-11-05.zh-CN.md)：按原版 HEADER / STRUCTURED-DATA / 可选 MSG 区分格式化、文本解析与组合未知；传输分帧另列，不推无损往返或送达。
+
+- [WoT 描述、表示与 MQTT 交互证据的跨域对照（2026-11-05）](01_Prior_Art/wot-mqtt-crossdomain-evidence-2026-11-05.zh-CN.md)：连接既有工业、语法、语义和元数据入口，保留 TD、绑定、客户端与 broker 的不同角色/版次/条件，不把图中相连当作已测设备链。
 
 ## 与 `docs/` 的边界
 
