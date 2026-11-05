@@ -3,15 +3,15 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: experiment_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-09-05T14:55:00+08:00
+Document Updated At: 2026-11-05T05:17:27.272260+00:00
 Metadata Backfilled At: 2026-09-02T11:02:46+08:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / ChatGPT / GPT-5.6 Sol
-  Reviewer: pending Owner review
+  Executor: Agent — OpenAI / dot / advance_coverage_basemap
+  Reviewer: Agent — OpenAI / dot / review_syslog_runtime (independent)
   GitHub Actor: ff6962757
 -->
 
@@ -39,6 +39,10 @@ Latest Substantive Contribution:
 这些路径可能被 Runtime、测试或历史复现流程引用；在没有完成依赖迁移前，不为了视觉整齐强制改名或搬动。
 
 实验结果如果被正式采用，应进入 `01_State`、`02_Runtime` 或 `docs/` 中相应的当前产物；本目录继续保存其试验过程和证据。
+
+## 有限组合实验
+
+- [Syslog 读写组合的有限内存实验](02_Pilots/syslog-composition-runtime-2026-11-05.zh-CN.md)：固定发行包和显式解码，观察转义、BOM、重复参数和 PROCID 的保留边界；不改变 Canonical 或 Runtime。
 
 ## 与 `docs/` 的边界
 

@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-11-05T04:57:40.804766+00:00
-Document Updated At: 2026-11-05T05:00:49.952462+00:00
+Document Updated At: 2026-11-05T05:17:27.272260+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Agent — OpenAI / dot / review_syslog_composition (independent)
+  Reviewer: Agent — OpenAI / dot / review_syslog_runtime (independent)
   GitHub Actor: ff6962757
 -->
 
@@ -124,3 +124,7 @@ Canonical 文件均使用上述基线；本次读取指纹如下，不改变各�
 | [01_State/02_Relations/syslog-tls-message.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/7c267fad8db959051a10ef7564715ebf08fd5c51/01_State/02_Relations/syslog-tls-message.yaml) | `d3f09b563e1149595a99a12f08e0aeada1a6ae512b12d0f47253941ae42c3d8b` |
 
 两份关系文件的指纹覆盖完整文件，判断只使用前述精确关系 ID，不将其他关系自动纳入本研究。规范要求、原有记录、本次静态推导与未建立证据分别保留；本文是有限研究，不是 Canonical 接纳或完整协议符合性审查。
+
+## 后续有限执行证据
+
+[2026-11-05 内存组合实验](../../02_Experiments/02_Pilots/syslog-composition-runtime-2026-11-05.zh-CN.md)在固定 PyPI 发行包、Python 与依赖环境中，验证了显式 UTF-8 解码后的少量输入：转义被接受但未还原应用值，BOM 保留为 U+FEFF，重复参数的字典映射和数字 PROCID 产生已记录的信息变化。本文前面的源码研究及其未执行上游的历史范围不变；运行证据以该实验的版本、夹具与结果为准，不扩大为全部符合性或传输保证。

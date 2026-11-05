@@ -1,0 +1,380 @@
+{
+  "baseline": "626ede0b12e965f41739f02593baa3712282fc00",
+  "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+  "versions": {
+    "rfc5424-logging-handler": "1.4.3",
+    "syslog-rfc5424-parser": "0.3.2",
+    "lark-parser": "0.6.7",
+    "pytz": "2025.2",
+    "tzlocal": "5.3.1 (distribution and source hashes verified)"
+  },
+  "timezone": "TZ=UTC; system ZoneInfo UTC",
+  "handoff": "bytes.decode(utf-8, errors=strict)",
+  "guard_self_test": [
+    "socket.__new__",
+    "subprocess.Popen",
+    "ctypes.dlopen",
+    "os.system"
+  ],
+  "rows": [
+    {
+      "id": "plain",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": null,
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944202d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID - hello",
+      "grammar_sd": [],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {},
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "unicode_bom",
+      "origin": "formatter",
+      "input_msg": "日志",
+      "input_sd_value": null,
+      "msg_as_utf8": true,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944202d20efbbbfe697a5e5bf97",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID - ﻿日志",
+      "grammar_sd": [],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {},
+        "msg": "﻿日志"
+      }
+    },
+    {
+      "id": "unicode_no_bom",
+      "origin": "formatter",
+      "input_msg": "日志",
+      "input_sd_value": null,
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944202d20e697a5e5bf97",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID - 日志",
+      "grammar_sd": [],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {},
+        "msg": "日志"
+      }
+    },
+    {
+      "id": "no_msg",
+      "origin": "formatter",
+      "input_msg": "",
+      "input_sd_value": null,
+      "msg_as_utf8": true,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944202d",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID -",
+      "grammar_sd": [],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {},
+        "msg": null
+      }
+    },
+    {
+      "id": "sd_empty",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d22225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              ""
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": ""
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "sd_unicode",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "日志",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d22e697a5e5bf97225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"日志\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "日志"
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "日志"
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "sd_backslash",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "\\",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d225c5c225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"\\\\\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "\\\\"
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "\\\\"
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "sd_quote",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "\"",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d225c22225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"\\\"\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "\\\""
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "\\\""
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "sd_bracket",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "]",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d225c5d225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"\\]\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "\\]"
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "\\]"
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "sd_combined",
+      "origin": "formatter",
+      "input_msg": "hello",
+      "input_sd_value": "\\\"]",
+      "msg_as_utf8": false,
+      "wire_hex": "3c31343e3120323032342d30312d30315430303a30303a30302b30303a303020686f7374206170702030303132204944205b70726f626540333234373320703d225c5c5c225c5d225d2068656c6c6f",
+      "text": "<14>1 2024-01-01T00:00:00+00:00 host app 0012 ID [probe@32473 p=\"\\\\\\\"\\]\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "\\\\\\\"\\]"
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "2024-01-01T00:00:00+00:00",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "\\\\\\\"\\]"
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "duplicate_param",
+      "origin": "handwritten",
+      "text": "<14>1 - host app 0012 ID [probe@32473 p=\"first\" p=\"second\"] hello",
+      "grammar_sd": [
+        [
+          "probe@32473",
+          [
+            [
+              "p",
+              "first"
+            ],
+            [
+              "p",
+              "second"
+            ]
+          ]
+        ]
+      ],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "-",
+        "hostname": "host",
+        "appname": "app",
+        "procid": 12,
+        "msgid": "ID",
+        "sd": {
+          "probe@32473": {
+            "p": "second"
+          }
+        },
+        "msg": "hello"
+      }
+    },
+    {
+      "id": "procid_nonnumeric",
+      "origin": "handwritten",
+      "text": "<14>1 - host app worker-12 ID - hello",
+      "grammar_sd": [],
+      "parsed": {
+        "severity": "info",
+        "facility": "user",
+        "version": 1,
+        "timestamp": "-",
+        "hostname": "host",
+        "appname": "app",
+        "procid": "worker-12",
+        "msgid": "ID",
+        "sd": {},
+        "msg": "hello"
+      }
+    }
+  ],
+  "blocked_events": []
+}
