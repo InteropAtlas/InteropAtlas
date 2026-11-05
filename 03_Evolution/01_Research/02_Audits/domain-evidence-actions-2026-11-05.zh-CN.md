@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T13:05:00+00:00
+Document Updated At: 2026-11-05T14:20:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Independent Agent — OpenAI / dot / review_coverage_query_fit
+  Reviewer: Independent Agent — OpenAI / dot / review_wot_final_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -526,3 +526,10 @@ print(json.dumps({
 本节的新执行结果只回答 **IA 的选择器和投影返回什么、哪些字段必须回源**；六项字段判断复用既有证据，仍没有新的 SDK 同输入对照。可以据此把下一个实际问题收敛到缺省/null 或明确扩展类型的一组输入，但须先取得可复现的具体输入、版本和输出记录，而不是重复旧 16 项名称或宣称已经互通。Kotlin 的缺失构建输入与 403 边界不被该提议解除。
 
 服务事件、JSON/URI 表示和 RFC3339 时间之间的已有关系，为这个问题提供跨领域入口。查询返回的对象数、来源条数或字段存在状态不衡量这些领域的完整性；本节没有新增能力注释、implements 或技术关系，也没有替代任何全域快照。对于前文其他领域，同样应先核选择条件和字段语义，再决定一个“未显示”是否真的代表未记录；这里尚未在其他领域执行同样测试，不把一例结果推广成全域保证。
+
+
+## 2026-11-05 追加：固定规范身份之外的验证资源证据
+
+industrial 行的 JSON/JSON-LD 边界现在增加了[有限离线实验](../../02_Experiments/02_Pilots/wot-td-resource-runtime-2026-11-05.zh-CN.md)及[机器可读输入/来源](../../02_Experiments/03_Evidence/wot-td-resource-probe-20261105-manifest.json)、[完整结果](../../02_Experiments/03_Evidence/wot-td-resource-probe-20261105-result.json)。官方 TD1.1 errata 保留同一 Recommendation 身份，却修订了 TD/TM JSON Schema 资源。相同合成 context 输入在固定前后资源的 Draft7 验证中出现接受差异，涉及映射值和数组位置；空 context 数组及 old→other→new 对照仍被两版接受，不能把通过等同完整符合性。
+
+这为 #276 的外部证据时效性问题提供一个实际边界：出版版本标签不独自固定机器资源字节、验证器方言或具体调用入口。它不是重新盘点领域数，也不自动要求更新全部日期或生成快照。现有 node-wot 十五例已经记录 March-2025 依赖标签，实验未证明其历史安装字节等于所查资源，亦未运行 node-wot/Ajv/JSON-LD 或设备链，因此没有把旧例作废、把剩余端到端问题说成已解决。下一处真正尚缺的证据是某个选定运行入口的确切依赖资源与处理路径，而不是再补一条无范围的“支持 TD1.1”。其他领域的未知仍须各自取证，本例不宣告整体底图完成。
