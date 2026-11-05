@@ -1,0 +1,4047 @@
+{
+  "scope": "Python Draft7 validation of two pinned official schema-resource revisions using synthetic local inputs only.",
+  "not_established": [
+    "node-wot execution or installed dependency byte identity",
+    "historical #472 old-schema use or invalidation",
+    "JSON-LD processing or conformance",
+    "complete TD/TM conformance",
+    "remote context fetch or device interoperability"
+  ],
+  "execution": {
+    "python_version": "3.12.14",
+    "executable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "dependencies": [
+      {
+        "distribution": "jsonschema",
+        "version": "4.26.0",
+        "module_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/jsonschema/__init__.py",
+        "module_entry_sha256": "a7e470e134bfd0e3c76482722260d6b1d5a099de823d61cc5cbabb06e4314c67"
+      },
+      {
+        "distribution": "referencing",
+        "version": "0.37.0",
+        "module_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/referencing/__init__.py",
+        "module_entry_sha256": "e4864a5da007fc55b20894646939f55dca6d2df83d72f78b6fdbb99d853124ab"
+      },
+      {
+        "distribution": "jsonschema-specifications",
+        "version": "2025.9.1",
+        "module_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/jsonschema_specifications/__init__.py",
+        "module_entry_sha256": "aa84c1d83298eeabcdac684c3c7ea0b6600944b8a599543e7c56704faaf2ab0d"
+      },
+      {
+        "distribution": "attrs",
+        "version": "26.1.0",
+        "module_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/attrs/__init__.py",
+        "module_entry_sha256": "47168064dc1888487e7dcbc72d936943f0d62a78bbdccfe3c443c47ed8aad597"
+      },
+      {
+        "distribution": "rpds-py",
+        "version": "2026.6.3",
+        "module_path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/site-packages/rpds/__init__.py",
+        "module_entry_sha256": "c373205d6ee5a530880b0d0a5dbc36d105f9ef7fe46ec12758878cb0202e82f3"
+      }
+    ],
+    "format_checker": null,
+    "format_note": "No format checker; fixtures vary context only. anyUri in these schemas is type:string, not URI validation.",
+    "schema_mutations": false,
+    "fixture_mutations": false,
+    "imports_wot_or_node_wot_software": false
+  },
+  "input_hashes": {
+    "manifest_sha256": "2d193145ab96f811d90e5de6ea09046303208f3608cee8e791b78a6881b819a3",
+    "fixtures_canonical_json_sha256": "4c76dc90fa70a545b8c5bdbae6ae2bf49e6747ff5c8a12dd59ed1734c14013e9",
+    "recipe_sha256": "4bb70603c81b3b0ad7281104ca1e459c7ca0a95e48462d0dd4ffbf48e46de01a"
+  },
+  "source_checks": [
+    {
+      "file": "pre-td.json",
+      "sha256": "87baa853cd571b55008f2a728ce0ba49abcab43fc5d1e4992dcc31e899b068d8",
+      "git_blob_sha1": "02bbc18cc647e7369ead1a23097c7531906272bf"
+    },
+    {
+      "file": "pre-tm.json",
+      "sha256": "d4fecbf6e9713a7c98c85ef8065800b85f72dd690be5016511c72406ed7314f2",
+      "git_blob_sha1": "67611f26a552c4e002a52be3181bbef528c16050"
+    },
+    {
+      "file": "head-td.json",
+      "sha256": "faf3f6a70afecb64353eefd35ca33de7892feb51d8837e79d77794d816bc61d7",
+      "git_blob_sha1": "9dc9d2591c564b023b1d02ca0d30fb2816af99a8"
+    },
+    {
+      "file": "head-tm.json",
+      "sha256": "f5df99f473b05051aa3cdbec297d05d113d2dae21a0f4e5764321af49822b07e",
+      "git_blob_sha1": "0b502d812e4e5135b6df75350fcb84035d171eb3"
+    },
+    {
+      "file": "post-td.json",
+      "sha256": "faf3f6a70afecb64353eefd35ca33de7892feb51d8837e79d77794d816bc61d7",
+      "git_blob_sha1": "9dc9d2591c564b023b1d02ca0d30fb2816af99a8"
+    },
+    {
+      "file": "post-tm.json",
+      "sha256": "f5df99f473b05051aa3cdbec297d05d113d2dae21a0f4e5764321af49822b07e",
+      "git_blob_sha1": "0b502d812e4e5135b6df75350fcb84035d171eb3"
+    },
+    {
+      "file": "post-errata.html",
+      "sha256": "c8d1419594dee950cb4aed858d41230470c441e427cf402d07ef0f8746313706",
+      "git_blob_sha1": "3b1ba10ddf48fe2ecef94bf413a1cc27750e5a36"
+    },
+    {
+      "file": "merge_parent-td.json",
+      "sha256": "87baa853cd571b55008f2a728ce0ba49abcab43fc5d1e4992dcc31e899b068d8",
+      "git_blob_sha1": "02bbc18cc647e7369ead1a23097c7531906272bf"
+    },
+    {
+      "file": "merge_parent-tm.json",
+      "sha256": "d4fecbf6e9713a7c98c85ef8065800b85f72dd690be5016511c72406ed7314f2",
+      "git_blob_sha1": "67611f26a552c4e002a52be3181bbef528c16050"
+    }
+  ],
+  "guards": {
+    "socket_guard_test": "Offline experiment forbids socket operations: socket.__new__",
+    "external_ref_guard_test": {
+      "exception": "_WrappedReferencingError",
+      "message": "Unresolvable: https://example.invalid/blocked-schema"
+    },
+    "actual_schema_validation_external_retrieval_attempts": [],
+    "actual_schema_validation_socket_operations": []
+  },
+  "dialect_controls": {
+    "prefixItems_recognized": false,
+    "prefixItems_string_constraint_accepts_numeric_item": true,
+    "items_tuple_string_constraint_accepts_numeric_item": false
+  },
+  "schema_checks": [
+    {
+      "kind": "td",
+      "role": "pre",
+      "dialect": "http://json-schema.org/draft-07/schema#",
+      "resource_version": "1.1-09-November-2023",
+      "check_schema": "passed",
+      "prefixItems_locations": [
+        "/definitions/thing-context/anyOf/2",
+        "/definitions/thing-context/anyOf/3"
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "dialect": "http://json-schema.org/draft-07/schema#",
+      "resource_version": "1.1-12-March-2025",
+      "check_schema": "passed",
+      "prefixItems_locations": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "dialect": "http://json-schema.org/draft-07/schema#",
+      "resource_version": "1.1-09-November-2023",
+      "check_schema": "passed",
+      "prefixItems_locations": [
+        "/definitions/thing-context/anyOf/2",
+        "/definitions/thing-context/anyOf/3"
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "dialect": "http://json-schema.org/draft-07/schema#",
+      "resource_version": "1.1-12-March-2025",
+      "check_schema": "passed",
+      "prefixItems_locations": []
+    }
+  ],
+  "ref_audit": [
+    {
+      "file": "pre-td.json",
+      "ref_count": 153,
+      "external_ref_count": 0,
+      "nested_id_count": 0
+    },
+    {
+      "file": "pre-tm.json",
+      "ref_count": 256,
+      "external_ref_count": 0,
+      "nested_id_count": 0
+    },
+    {
+      "file": "post-td.json",
+      "ref_count": 151,
+      "external_ref_count": 0,
+      "nested_id_count": 0
+    },
+    {
+      "file": "post-tm.json",
+      "ref_count": 254,
+      "external_ref_count": 0,
+      "nested_id_count": 0
+    }
+  ],
+  "error_path_notes": "instance_pointer uses input root; source_schema_pointer uses exact unmodified schema-resource root; evaluation_schema_pointer is jsonschema traversal through refs. All nested error contexts retained.",
+  "counts": {
+    "fixtures_per_kind": 24,
+    "validation_runs": 96,
+    "changed_pre_post_pairs": 24
+  },
+  "matrix": [
+    {
+      "kind": "td",
+      "case": "new_scalar",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_scalar",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "new_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_new",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "new_old",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "other_new",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "other_old",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_other",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_other_new",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "new_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "new_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "old_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "old_new_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "old_new_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_expanded_term_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_null_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_boolean_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_array_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "new_numeric_tail",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "old_numeric_tail",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "td",
+      "case": "empty_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "td",
+      "case": "unrelated_scalar",
+      "pre": false,
+      "post": false,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "new_scalar",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_scalar",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "new_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_new",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "new_old",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "other_new",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "other_old",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_other",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_other_new",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "new_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "new_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "old_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "old_new_string_map",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "old_new_numeric_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_expanded_term_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_null_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_boolean_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_array_map",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "new_numeric_tail",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "old_numeric_tail",
+      "pre": true,
+      "post": false,
+      "changed": true
+    },
+    {
+      "kind": "tm",
+      "case": "empty_array",
+      "pre": true,
+      "post": true,
+      "changed": false
+    },
+    {
+      "kind": "tm",
+      "case": "unrelated_scalar",
+      "pre": false,
+      "post": false,
+      "changed": false
+    }
+  ],
+  "results": [
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_old",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "other_old",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_other",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_new_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_expanded_term_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_null_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_boolean_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_array_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "new_numeric_tail",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "old_numeric_tail",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "empty_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "pre",
+      "case": "unrelated_scalar",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "'https://example.invalid/context' is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/type",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_old",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "not",
+              "message": "'https://www.w3.org/2019/wot/td/v1' should not be valid under {'$ref': '#/definitions/thing-context-td-uri-v1'}",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/not",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/not",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "other_new",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "other_old",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "not",
+              "message": "'https://www.w3.org/2019/wot/td/v1' should not be valid under {'$ref': '#/definitions/thing-context-td-uri-v1'}",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/not",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/not",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_other",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': 42} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': 42} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_new_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/2/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_expanded_term_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "{'@id': 'https://example.invalid/ns#'} is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "{'@id': 'https://example.invalid/ns#'} is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_null_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': None} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': None} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "None is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': None} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': None} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': None} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "None is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_boolean_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': True} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': True} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "True is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': True} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': True} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': True} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "True is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_array_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "['https://example.invalid/ns#'] is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "['https://example.invalid/ns#'] is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "new_numeric_tail",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "42 is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "old_numeric_tail",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "42 is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "empty_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "td",
+      "role": "post",
+      "case": "unrelated_scalar",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "'https://example.invalid/context' is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/type",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_old",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "other_old",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_other",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_new_numeric_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_expanded_term_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_null_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_boolean_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_array_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "new_numeric_tail",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "old_numeric_tail",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "empty_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "pre",
+      "case": "unrelated_scalar",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "'https://example.invalid/context' is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/type",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_scalar",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_old",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "not",
+              "message": "'https://www.w3.org/2019/wot/td/v1' should not be valid under {'$ref': '#/definitions/thing-context-td-uri-v1'}",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/not",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/not",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "other_new",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2022/wot/td/v1.1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "other_old",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "not",
+              "message": "'https://www.w3.org/2019/wot/td/v1' should not be valid under {'$ref': '#/definitions/thing-context-td-uri-v1'}",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/not",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/not",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "['https://example.invalid/context', 'https://www.w3.org/2019/wot/td/v1'] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_other",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_other_new",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': 42} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': 42} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_new_string_map",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_new_numeric_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/2/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/2/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': 42} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/2",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': 42} is not of type 'string'",
+                  "instance_pointer": "/@context/2",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/2/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 'https://www.w3.org/2022/wot/td/v1.1', {'ex': 42}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_expanded_term_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "{'@id': 'https://example.invalid/ns#'} is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': {'@id': 'https://example.invalid/ns#'}} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "{'@id': 'https://example.invalid/ns#'} is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': {'@id': 'https://example.invalid/ns#'}}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_null_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': None} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': None} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "None is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': None} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': None} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': None} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "None is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': None}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_boolean_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': True} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': True} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "True is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': True} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': True} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': True} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "True is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': True}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_array_map",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "['https://example.invalid/ns#'] is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "{'ex': ['https://example.invalid/ns#']} is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "{'ex': ['https://example.invalid/ns#']} is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "['https://example.invalid/ns#'] is not of type 'string'",
+                  "instance_pointer": "/@context/1/ex",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/additionalProperties/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', {'ex': ['https://example.invalid/ns#']}] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "new_numeric_tail",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "42 is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2022/wot/td/v1.1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "old_numeric_tail",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/0",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/items/0/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/0/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/0/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "42 is not of type 'string'",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/items/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "anyOf",
+              "message": "42 is not valid under any of the given schemas",
+              "instance_pointer": "/@context/1",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf",
+              "context": [
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'string'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/0/type",
+                  "source_schema_pointer": "/definitions/anyUri/type",
+                  "context": []
+                },
+                {
+                  "validator": "type",
+                  "message": "42 is not of type 'object'",
+                  "instance_pointer": "/@context/1",
+                  "evaluation_schema_pointer": "/properties/@context/anyOf/3/additionalItems/anyOf/1/type",
+                  "source_schema_pointer": "/definitions/thing-context/anyOf/3/additionalItems/anyOf/1/type",
+                  "context": []
+                }
+              ]
+            },
+            {
+              "validator": "type",
+              "message": "['https://www.w3.org/2019/wot/td/v1', 42] is not of type 'string'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/type",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "empty_array",
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "kind": "tm",
+      "role": "post",
+      "case": "unrelated_scalar",
+      "accepted": false,
+      "errors": [
+        {
+          "validator": "anyOf",
+          "message": "'https://example.invalid/context' is not valid under any of the given schemas",
+          "instance_pointer": "/@context",
+          "evaluation_schema_pointer": "/properties/@context/anyOf",
+          "source_schema_pointer": "/definitions/thing-context/anyOf",
+          "context": [
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/0/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/0/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2022/wot/td/v1.1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/1/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1.1/const",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/2/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/2/type",
+              "context": []
+            },
+            {
+              "validator": "type",
+              "message": "'https://example.invalid/context' is not of type 'array'",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/3/type",
+              "source_schema_pointer": "/definitions/thing-context/anyOf/3/type",
+              "context": []
+            },
+            {
+              "validator": "const",
+              "message": "'https://www.w3.org/2019/wot/td/v1' was expected",
+              "instance_pointer": "/@context",
+              "evaluation_schema_pointer": "/properties/@context/anyOf/4/const",
+              "source_schema_pointer": "/definitions/thing-context-td-uri-v1/const",
+              "context": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
