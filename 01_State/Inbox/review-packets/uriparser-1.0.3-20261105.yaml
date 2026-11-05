@@ -162,7 +162,7 @@ preflight:
 objects:
 - candidate_id: uriparser
   candidate_path: 01_State/Inbox/candidates/uriparser.yaml
-  candidate_blob: 9aaa499d398bb5ccb16d9c5a217a702efd7d2ac8
+  candidate_blob: ba2e2c8d7d5c127ead7c25a9da632c8c7f0629d4
   proposed_path: 01_State/01_Objects/uriparser.yaml
   proposed_record:
     id: uriparser
@@ -185,11 +185,11 @@ objects:
       1.0.3、官方 tag uriparser-1.0.3 与 commit fe754ef0d62c882747222c4455cb028b03dca33b，仅静态核验 uriEscapeExA 对 RFC3986
       §§2.1/2.3 的组件数据百分号编码，按 §§2.2/2.4 限定调用方责任。仅限 ASCII 兼容平台上的 char API，正面范围是字节 0x01..0x7F，spaceToPlus 与 normalizeBreaks
       均须为 URI_FALSE。调用方提供有效可读输入区间 [inFirst,inAfterLast)，有序指针属于同一对象；若 inAfterLast 为 NULL，则输入须是有效 NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少
-      3*n+1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个 NUL 处停止，取先到者；NUL
-      不会编码为 %00，不是二进制保真编码。ASCII 字母、数字与 -._~ 原样复制，其余范围内字节输出大写 %HH；空格为 %20、CR 为 %0D、LF 为 %0A，斜杠为 %2F、加号为 %2B、百分号为
-      %25。这些是静态源码推导，不是执行观测。函数追加 NUL，返回指向该终止符的指针，不是整数状态或完整 URI 有效性证明。仅适用于未转义的组件数据，保留字符在该位置必须是数据而非结构分隔符；调用方决定组件与 scheme
-      语义并负责 URI 组装。已有转义串的百分号会再次编码；不声称整个 URI 保真转换、规范化或资源等价。正面范围外的 spaceToPlus=true 会把空格改为 +；normalizeBreaks=true
-      会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6*n+1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
+      3 × n + 1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个 NUL
+      处停止，取先到者；NUL 不会编码为 %00，不是二进制保真编码。ASCII 字母、数字与 -._~ 原样复制，其余范围内字节输出大写 %HH；空格为 %20、CR 为 %0D、LF 为 %0A，斜杠为 %2F、加号为
+      %2B、百分号为 %25。这些是静态源码推导，不是执行观测。函数追加 NUL，返回指向该终止符的指针，不是整数状态或完整 URI 有效性证明。仅适用于未转义的组件数据，保留字符在该位置必须是数据而非结构分隔符；调用方决定组件与
+      scheme 语义并负责 URI 组装。已有转义串的百分号会再次编码；不声称整个 URI 保真转换、规范化或资源等价。正面范围外的 spaceToPlus=true 会把空格改为 +；normalizeBreaks=true
+      会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6 × n + 1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
       验证、IRI/IDNA。完整固定源码、头文件及测试配方只读，未安装、构建、导入、运行上游或其测试。test.cpp 的相关配方使用 wchar_t/uriEscapeW，不是 char API 的执行或符合性证据。主体库源码与头文件声明
       BSD-3-Clause；仓库另有 LGPL-2.1-or-later 测试和 Apache-2.0 模糊测试例外，不作法律适用性结论。不采用上游严格符合性/性能自述作为验证结果；不验证完整 RFC、URI 解析/ABNF
       接收、解析引用、比较/规范化、解码、scheme 有效性、浏览器 URL 行为、网络取回、跨库互通、安全/性能或 IA 采用。未核验能力不等于库不具备。
@@ -204,7 +204,7 @@ objects:
       platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies
       a valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is
       NULL, input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime
-      and capacity at least 3*n+1, where n is the input-range length or characters before NUL, using overflow-safe
+      and capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe
       capacity arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal
       starting input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL,
       whichever comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters,
@@ -215,7 +215,7 @@ objects:
       callers determine component/scheme semantics and assemble the URI. Already escaped percent signs are encoded
       again; no URI-preserving whole-string transformation, normalization or resource equivalence is claimed. Outside
       positive scope, spaceToPlus=true changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF
-      into percent-encoded CRLF, needing worst-case 6*n+1 output capacity; these options are not generic RFC3986
+      into percent-encoded CRLF, needing worst-case 6 × n + 1 output capacity; these options are not generic RFC3986
       guarantees. The wchar_t API is not arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA
       are excluded. Complete pinned source, headers and test recipes were read only, without upstream installation,
       build, import, execution or tests. Related test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution
@@ -232,8 +232,8 @@ objects:
       sections 2.2/2.4. Positive scope is the char API on an ASCII-compatible platform, bytes 0x01..0x7F, with both
       spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies a valid readable range [inFirst,inAfterLast)
       with ordered pointers into the same object; if inAfterLast is NULL, input must be a valid NUL-terminated string.
-      Output must be a disjoint writable buffer with valid lifetime and capacity at least 3*n+1, where n is the
-      input-range length or characters before NUL, using overflow-safe capacity arithmetic. The API has no output-capacity
+      Output must be a disjoint writable buffer with valid lifetime and capacity at least 3 × n + 1, where n is
+      the input-range length or characters before NUL, using overflow-safe capacity arithmetic. The API has no output-capacity
       argument and performs no capacity check. It rejects equal starting input/output pointers only, not general
       overlap. Processing stops at the explicit end or first NUL, whichever comes first; NUL is not encoded as %00,
       so this is not binary-preserving encoding. ASCII letters, digits and -._~ are copied; every other included
@@ -244,8 +244,8 @@ objects:
       semantics and assemble the URI. Already escaped percent signs are encoded again; no URI-preserving whole-string
       transformation, normalization or resource equivalence is claimed. Outside positive scope, spaceToPlus=true
       changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing
-      worst-case 6*n+1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not
-      arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned
+      worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is
+      not arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned
       source, headers and test recipes were read only, without upstream installation, build, import, execution or
       tests. Related test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence.
       Library source/headers declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and
@@ -376,11 +376,11 @@ existing_object_updates:
       仅新增 uriparser 入边的范围附记，不改上述规范身份、原有语义或其他入边范围：本记录固定 uriparser 1.0.3、官方 tag uriparser-1.0.3 与 commit fe754ef0d62c882747222c4455cb028b03dca33b，仅静态核验
       uriEscapeExA 对 RFC3986 §§2.1/2.3 的组件数据百分号编码，按 §§2.2/2.4 限定调用方责任。仅限 ASCII 兼容平台上的 char API，正面范围是字节 0x01..0x7F，spaceToPlus
       与 normalizeBreaks 均须为 URI_FALSE。调用方提供有效可读输入区间 [inFirst,inAfterLast)，有序指针属于同一对象；若 inAfterLast 为 NULL，则输入须是有效
-      NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少 3*n+1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个
+      NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少 3 × n + 1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个
       NUL 处停止，取先到者；NUL 不会编码为 %00，不是二进制保真编码。ASCII 字母、数字与 -._~ 原样复制，其余范围内字节输出大写 %HH；空格为 %20、CR 为 %0D、LF 为 %0A，斜杠为
       %2F、加号为 %2B、百分号为 %25。这些是静态源码推导，不是执行观测。函数追加 NUL，返回指向该终止符的指针，不是整数状态或完整 URI 有效性证明。仅适用于未转义的组件数据，保留字符在该位置必须是数据而非结构分隔符；调用方决定组件与
       scheme 语义并负责 URI 组装。已有转义串的百分号会再次编码；不声称整个 URI 保真转换、规范化或资源等价。正面范围外的 spaceToPlus=true 会把空格改为 +；normalizeBreaks=true
-      会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6*n+1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
+      会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6 × n + 1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
       验证、IRI/IDNA。完整固定源码、头文件及测试配方只读，未安装、构建、导入、运行上游或其测试。test.cpp 的相关配方使用 wchar_t/uriEscapeW，不是 char API 的执行或符合性证据。主体库源码与头文件声明
       BSD-3-Clause；仓库另有 LGPL-2.1-or-later 测试和 Apache-2.0 模糊测试例外，不作法律适用性结论。不采用上游严格符合性/性能自述作为验证结果；不验证完整 RFC、URI 解析/ABNF
       接收、解析引用、比较/规范化、解码、scheme 有效性、浏览器 URL 行为、网络取回、跨库互通、安全/性能或 IA 采用。未核验能力不等于库不具备。
@@ -395,7 +395,7 @@ existing_object_updates:
       platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies
       a valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is
       NULL, input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime
-      and capacity at least 3*n+1, where n is the input-range length or characters before NUL, using overflow-safe
+      and capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe
       capacity arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal
       starting input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL,
       whichever comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters,
@@ -406,7 +406,7 @@ existing_object_updates:
       callers determine component/scheme semantics and assemble the URI. Already escaped percent signs are encoded
       again; no URI-preserving whole-string transformation, normalization or resource equivalence is claimed. Outside
       positive scope, spaceToPlus=true changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF
-      into percent-encoded CRLF, needing worst-case 6*n+1 output capacity; these options are not generic RFC3986
+      into percent-encoded CRLF, needing worst-case 6 × n + 1 output capacity; these options are not generic RFC3986
       guarantees. The wchar_t API is not arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA
       are excluded. Complete pinned source, headers and test recipes were read only, without upstream installation,
       build, import, execution or tests. Related test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution
@@ -429,7 +429,7 @@ existing_object_updates:
       platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies
       a valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is
       NULL, input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime
-      and capacity at least 3*n+1, where n is the input-range length or characters before NUL, using overflow-safe
+      and capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe
       capacity arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal
       starting input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL,
       whichever comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters,
@@ -440,7 +440,7 @@ existing_object_updates:
       callers determine component/scheme semantics and assemble the URI. Already escaped percent signs are encoded
       again; no URI-preserving whole-string transformation, normalization or resource equivalence is claimed. Outside
       positive scope, spaceToPlus=true changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF
-      into percent-encoded CRLF, needing worst-case 6*n+1 output capacity; these options are not generic RFC3986
+      into percent-encoded CRLF, needing worst-case 6 × n + 1 output capacity; these options are not generic RFC3986
       guarantees. The wchar_t API is not arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA
       are excluded. Complete pinned source, headers and test recipes were read only, without upstream installation,
       build, import, execution or tests. Related test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution
@@ -637,11 +637,11 @@ relations:
       conditions_zh: 本记录固定 uriparser 1.0.3、官方 tag uriparser-1.0.3 与 commit fe754ef0d62c882747222c4455cb028b03dca33b，仅静态核验
         uriEscapeExA 对 RFC3986 §§2.1/2.3 的组件数据百分号编码，按 §§2.2/2.4 限定调用方责任。仅限 ASCII 兼容平台上的 char API，正面范围是字节 0x01..0x7F，spaceToPlus
         与 normalizeBreaks 均须为 URI_FALSE。调用方提供有效可读输入区间 [inFirst,inAfterLast)，有序指针属于同一对象；若 inAfterLast 为 NULL，则输入须是有效
-        NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少 3*n+1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个
+        NUL 终止字符串。输出须是与输入不重叠、生命周期有效的可写缓冲，容量至少 3 × n + 1，n 为输入区间字符数（或 NUL 前字符数），容量计算不得溢出。API 没有输出容量参数，也不检查容量；只拒绝输入输出起始指针相等，不能据此声称一般重叠检测。处理在显式区间末尾或首个
         NUL 处停止，取先到者；NUL 不会编码为 %00，不是二进制保真编码。ASCII 字母、数字与 -._~ 原样复制，其余范围内字节输出大写 %HH；空格为 %20、CR 为 %0D、LF 为 %0A，斜杠为
         %2F、加号为 %2B、百分号为 %25。这些是静态源码推导，不是执行观测。函数追加 NUL，返回指向该终止符的指针，不是整数状态或完整 URI 有效性证明。仅适用于未转义的组件数据，保留字符在该位置必须是数据而非结构分隔符；调用方决定组件与
         scheme 语义并负责 URI 组装。已有转义串的百分号会再次编码；不声称整个 URI 保真转换、规范化或资源等价。正面范围外的 spaceToPlus=true 会把空格改为 +；normalizeBreaks=true
-        会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6*n+1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
+        会把单独 CR、LF 或 CRLF 改成百分号编码的 CRLF，最坏输出容量需 6 × n + 1，不能泛化为 RFC3986 保证。wchar_t API 不是任意 Unicode 转码；本范围不覆盖高位字节、UTF-8
         验证、IRI/IDNA。完整固定源码、头文件及测试配方只读，未安装、构建、导入、运行上游或其测试。test.cpp 的相关配方使用 wchar_t/uriEscapeW，不是 char API 的执行或符合性证据。主体库源码与头文件声明
         BSD-3-Clause；仓库另有 LGPL-2.1-or-later 测试和 Apache-2.0 模糊测试例外，不作法律适用性结论。不采用上游严格符合性/性能自述作为验证结果；不验证完整 RFC、URI
         解析/ABNF 接收、解析引用、比较/规范化、解码、scheme 有效性、浏览器 URL 行为、网络取回、跨库互通、安全/性能或 IA 采用。未核验能力不等于库不具备。
@@ -651,7 +651,7 @@ relations:
         platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies
         a valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast
         is NULL, input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid
-        lifetime and capacity at least 3*n+1, where n is the input-range length or characters before NUL, using
+        lifetime and capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using
         overflow-safe capacity arithmetic. The API has no output-capacity argument and performs no capacity check.
         It rejects equal starting input/output pointers only, not general overlap. Processing stops at the explicit
         end or first NUL, whichever comes first; NUL is not encoded as %00, so this is not binary-preserving encoding.
@@ -662,15 +662,15 @@ relations:
         data rather than structural delimiters; callers determine component/scheme semantics and assemble the URI.
         Already escaped percent signs are encoded again; no URI-preserving whole-string transformation, normalization
         or resource equivalence is claimed. Outside positive scope, spaceToPlus=true changes spaces to +, while
-        normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing worst-case 6*n+1 output
-        capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not arbitrary Unicode transcoding;
-        high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source, headers and test recipes
-        were read only, without upstream installation, build, import, execution or tests. Related test.cpp recipes
-        use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers declare
-        BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and Apache-2.0 fuzzing, without
-        a legal-suitability conclusion. Upstream strict-conformance/performance claims are not adopted as verification.
-        Full RFC conformance, URI parsing/ABNF acceptance, reference resolution, comparison/normalization, decoding,
-        scheme validity, browser URL behavior, network retrieval, cross-library interoperability, security/performance
+        normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing worst-case 6 × n + 1
+        output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not arbitrary Unicode
+        transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source, headers
+        and test recipes were read only, without upstream installation, build, import, execution or tests. Related
+        test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library
+        source/headers declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and Apache-2.0
+        fuzzing, without a legal-suitability conclusion. Upstream strict-conformance/performance claims are not
+        adopted as verification. Full RFC conformance, URI parsing/ABNF acceptance, reference resolution, comparison/normalization,
+        decoding, scheme validity, browser URL behavior, network retrieval, cross-library interoperability, security/performance
         and IA adoption are unverified. Unexamined capabilities are not asserted absent.
     evidence:
     - url: https://github.com/uriparser/uriparser/blob/fe754ef0d62c882747222c4455cb028b03dca33b/CMakeLists.txt
@@ -772,4 +772,6 @@ exclusions:
   or whole-URI transformation claim.
 revision_reason: Independent rendered-path review found target reverse rows omit relation context. This second freeze
   adds a bounded bilingual target description note using existing fields; no renderer/schema change. Earlier candidate-only
-  F remains real ancestry; earlier local materialization is superseded and not published.
+  F remains real ancestry; earlier local materialization is superseded and not published. A third freeze replaces
+  asterisk capacity formulas with plain multiplication signs because the existing Markdown renderer treated paired
+  asterisks as emphasis; no semantic or renderer change.

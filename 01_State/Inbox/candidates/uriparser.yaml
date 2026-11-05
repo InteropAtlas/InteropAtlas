@@ -29,7 +29,7 @@ unknowns:
   platform, bytes 0x01..0x7F, with both spaceToPlus and normalizeBreaks set to URI_FALSE. The caller supplies a
   valid readable range [inFirst,inAfterLast) with ordered pointers into the same object; if inAfterLast is NULL,
   input must be a valid NUL-terminated string. Output must be a disjoint writable buffer with valid lifetime and
-  capacity at least 3*n+1, where n is the input-range length or characters before NUL, using overflow-safe capacity
+  capacity at least 3 × n + 1, where n is the input-range length or characters before NUL, using overflow-safe capacity
   arithmetic. The API has no output-capacity argument and performs no capacity check. It rejects equal starting
   input/output pointers only, not general overlap. Processing stops at the explicit end or first NUL, whichever
   comes first; NUL is not encoded as %00, so this is not binary-preserving encoding. ASCII letters, digits and -._~
@@ -40,7 +40,7 @@ unknowns:
   component/scheme semantics and assemble the URI. Already escaped percent signs are encoded again; no URI-preserving
   whole-string transformation, normalization or resource equivalence is claimed. Outside positive scope, spaceToPlus=true
   changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing
-  worst-case 6*n+1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not arbitrary
+  worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not arbitrary
   Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source, headers
   and test recipes were read only, without upstream installation, build, import, execution or tests. Related test.cpp
   recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers
