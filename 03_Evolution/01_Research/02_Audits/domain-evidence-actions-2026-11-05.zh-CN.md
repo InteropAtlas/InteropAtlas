@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T17:21:00+00:00
+Document Updated At: 2026-11-05T18:11:55.002588+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_resource_resolution
+  Reviewer: Independent Agent — OpenAI / dot / review_evidence_integration
   GitHub Actor: ff6962757
 -->
 
@@ -572,3 +572,33 @@ MCP 的 result.isError 可在 JSON-RPC 结果信封内报告工具失败；固�
 [跨领域资源责任比较](../../02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md)连接 agents、industrial、语法/语义和服务事件中的具体问题，而不是再增加一份对象清单。九个实际离线 JSON Schema 案例区分同输入/不同 registry、同资源集合/不同 base、缺资源异常与普通实例拒绝；相同引用字符串不固定最终使用的资源。JSON-LD/PyLD 只读证据进一步区分上下文 base、最终文档 URL、缓存与 loader，CloudEvents source 则说明 URI-reference 也可以只承担事件标识。
 
 机器证据保留具体 JSON 文本、实际输出、安装环境、规范/源码身份及七条已有关系的完整 context/evidence。未执行的 JSON-LD 说明例明确为空实际结果；未把 SDK 调用语句、node-wot 依赖标签、历史例或规范要求替换成新的端到端观测。资源实际供应和选定调用配置是比补一条无条件“支持 URI”更具体的缺口；它不授权联网加载、解除 hold、改写关系语义或设立新维护机制。
+
+## 2026-11-05 追加：把已完成研究接回现有对象证据
+
+六个后续研究问题已有固定报告和机器材料，但在本次基线 `314d70148ae1f154c852c85f9d4886804c74ac54` 的所选六个对象中，来源/判断字段尚未指向这些材料。资料已存在；缺少这条读取路径不是缺少研究，更不是对应标准、能力或实现不存在。#697–703 为七个 PR、六个实质研究问题，#703 只修正 #702 的 URL 用语，不能另计研究覆盖。
+
+本次只接合既有字段：八条新增 `sources` 引用限定的历史来源身份/条款定位或真实结果，六条 `notes_zh` 列表项保留 IA 自有比较判断及固定报告链接。JSON 中的来源清单、实际观察、未执行说明例与研究判断不混称“通过的测试”。比较报告进入现有 assessment 投影，不作为外部规范权威；官方一手来源保留在前，原顺序、字段和 accessed 日期不变。
+
+| 既有对象入口 | 可继续追问的问题 | 新来源入口的限定 |
+| --- | --- | --- |
+| `wot_td_1.1` | 同一 Recommendation 身份是否固定验证资源？ | TD/TM 固定资源来源段与历史 Draft7 实际结果；不证明 node-wot/JSON-LD 运行 |
+| `mcp_python_sdk` | 工具模式在哪些调用路径被验证？ | 同一 1.26.0 固定提交的静态源码清单；不将独立 jsonschema4.26.0 实验归到 SDK |
+| `rfc3339` | 共同时间语法是否指同一事实并保留同样信息？ | 固定规范、实现来源和历史观察身份段；不声明新执行 |
+| `problem_details_rfc9457` | HTTP 问题内容与其他失败信号分别说明什么？ | HTTP/JSON-RPC/MCP 来源身份段，排除未执行说明输入；不建立统一错误映射 |
+| `senml_rfc8428` | 相同 JSON 数字是否足以跨格式保留量值？ | external_sources 定位段，不把未执行例子或研究比较当转换结果；不改 held FHIR 摘要 |
+| `uri_rfc3986` | 引用标识何时成为被使用的资源？ | RFC3986 §1.2.2 及固定 context_sources 身份段；不是 RFC3986 任意实现的运行验证 |
+
+[一次性复核配方](evidence-linkage-reproduce-2026-11-05.py)使用未改变的 `load_atlas`、`project_evidence`、`project_field`，对同一六个 ID 检查前后读取及原字段保留。[实际输出](evidence-linkage-result-2026-11-05.json)记录每个问题的来源入口、assessment 角色、恢复位置、原验证字段是否存在及原值、旧来源摘要和历史工件 hash。它不新增查询合同、能力标签、关系边、维护清单或 CI gate，也不执行上游库。
+
+在一个已有依赖、保留基线历史的本地 checkout 中运行；基线目录须已检出上述精确提交，脚本不替调用方下载、切换或修改它：
+
+```sh
+PYTHONDONTWRITEBYTECODE=1 python 03_Evolution/01_Research/02_Audits/evidence-linkage-reproduce-2026-11-05.py \
+  --root . --baseline-root /path/to/baseline-checkout
+```
+
+实际配方确认：六个原 assessment 为 not_recorded 的记录现在能恢复明确的 IA 自有 notes；这个变化只表示加入了有内容的判断链接，不把原 not_recorded 当作研究不存在。旧来源投影前缀保持不变，全部非所选对象和全部原关系保持不变。原 description/summary/scope、版本、标识、intake、record_created_at 和 last_verified_at/by 逐字段不变，原来缺少验证字段的记录也不补造。record_updated_at 与本次贡献身份反映这次实质接合；RFC3339 的生命周期来源改为 mixed，当前贡献来源改为 commit_explicit，以区分旧的重建创建时间和本次直接记录，不改变旧 metadata_backfilled_at。
+
+当前 Human 输出的限制也实测保留：六个对象页都显示新来源入口；MCP 实现页显示可点击的研究报告链接。五个标准页的既有模板不打印 notes 正文，只保留 assessment 计数，机器投影仍能恢复完整内容。搜索索引没有纳入 sources/notes，本次字节不变；没有声称新报告关键词已可搜索，也不借此修改 renderer、页面展示或搜索规则。静态生成比较只变化六个对象页，其他生成文件不变。没有启动本地浏览器或重试既有 Chromium 拒绝。
+
+这次接合使“从一个已知对象继续查到已完成的具体答案”可按现有机制复核；它不代表全部领域的证据均已接通、整体底图已完成、历史实现重新验证或资料判断升格为外部权威。原资源/部署、跨实现交换、未知和所有 hold 继续保留。

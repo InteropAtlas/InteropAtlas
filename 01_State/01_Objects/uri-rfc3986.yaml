@@ -1,15 +1,15 @@
 id: uri_rfc3986
 record_created_at: '2026-08-30T18:40:48+08:00'
-record_updated_at: '2026-11-05T00:29:03.339387+00:00'
+record_updated_at: "2026-11-05T18:11:55.002588+00:00"
 metadata_backfilled_at: '2026-09-02T11:23:23+08:00'
 metadata_provenance:
   lifecycle_time: mixed
   contribution_identity: commit_explicit
 latest_substantive_contribution:
-  initiator: Human Owner — ff6962757
-  executor: Agent — OpenAI / dot / implement_uriparser_library
-  reviewer: Independent Agent — OpenAI / dot / review_uriparser_semantics
-  github_actor: ff6962757
+  initiator: "Human Owner — ff6962757"
+  executor: "Agent — OpenAI / dot / finish_wot_evidence"
+  reviewer: "Independent Agent — OpenAI / dot / review_evidence_integration"
+  github_actor: "ff6962757"
 type: standard
 kind: specification
 name_zh: URI 通用语法（RFC 3986）
@@ -116,6 +116,8 @@ versions:
   date: 2005-01-01
   status: internet_standard
   url: https://www.rfc-editor.org/rfc/rfc3986.html
+notes_zh:
+- "IA 研究判断：标识、基址、供应资源、缓存/加载与处理结果须分开。九个离线案例只属于 jsonschema4.26.0/referencing0.37.0 的显式内存配置，PyLD3.3.0 部分仅静态；不是 RFC3986 任意实现的运行保证，也不扩大 uriparser 入边。本链接采用已澄清官方 $schema URI 与合成资源 URL 区别的报告。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md)。"
 sources:
 - url: https://spec.openapis.org/oas/v3.2.1.html#establishing-the-base-uri
   title: OpenAPI 3.2.1 — section 4.1.2.2.1 RFC 3986 base determination, relative self identifiers, and optional
@@ -206,6 +208,12 @@ sources:
   title: RFC3986 encoding context and avoiding repeated encoding
   language: en
   accessed: '2026-11-05'
+- url: "https://www.rfc-editor.org/rfc/rfc3986#section-1.2.2"
+  title: "RFC3986 section 1.2.2 — identification does not imply access; operations depend on the containing protocol or format"
+  accessed: "2026-11-05"
+- url: "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/03_Evidence/resource-resolution-20261105-sources.json#L293-L346"
+  title: "IA historical context-source locator — RFC3986, CloudEvents and fixed MCP source identities; not RFC3986 runtime validation"
+  accessed: "2026-11-05"
 scope_notes_zh: 另据 3.2.1 的描述引用规则，API 描述中的 URI 标识引用按 RFC 3986 确定基 URI；相对 $self 先按下一基址来源解析，Schema Object 还遵循其 JSON
   Schema $id 规则。标识不等于网络取回地址或 API 调用，取回支持可选，不保证可获取性、安全性或工具互通。 仅限定 OpenAPI 3.2.1 入边，其他入边仍按各自文献和条件解释。
 scope_notes_en: Under the separately checked 3.2.1 description-reference rules, API-description URI identifiers
