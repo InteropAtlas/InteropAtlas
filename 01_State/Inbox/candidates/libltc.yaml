@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/x42/libltc/releases/tag/v1.3.2
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - libltc
   reasons:
-  - Fresh main, all-state issue/PR searches, 257 remote branch names and reachable history do not contain libltc
-    intake. Whole github:x42/libltc is distinct from the SMPTE standard and its predecessor libltcsmpte. No identity
-    merge/split.
+  - Accepted as canonical libltc by accept-20261105-libltc-1-3-2. Original new-state Candidate 08511a006be6bd1ee4118eaf9a0f56b741ef722e
+    replays review_required against real ancestor eb18bd1cf45aa991819ca88126f17fc75324f99a; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'Pins libltc 1.3.2, official lightweight tag v1.3.2 and commit bf84b01097a1789c0296cc5fcfc3bf4608407930. Fixed
@@ -51,4 +52,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_next_library_candidate
-  reviewer: pending independent semantic review
+  reviewer: Agent — OpenAI / independent semantic reviewer / review_libltc_semantics
