@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T19:16:00+00:00
+Document Updated At: 2026-11-05T20:10:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_input_scope_linkage
+  Reviewer: Independent Agent — OpenAI / dot / review_alternatives_answerability
   GitHub Actor: ff6962757
 -->
 
@@ -673,3 +673,83 @@ print(json.dumps({i: {
 沿前节完整只读配方，将 `ids` 列表替换为 `['pyld', 'pyshacl', 'ebu_libbw64', 'ebu_libadm']`，其余读取/投影代码不变，即可恢复四个 owning-record 入口。本次实际执行该替换后的 IA 查询：sources 数为16、9、14、3，恢复四个独立 IA-authored assessment；六条追加引用对应三份不同历史 JSON，其中 ADM 仅指限定行段。新 notes 不作为外部证据，原核验字段保持原值或 not_recorded。
 
 这份读取检查不重做七输入/十二观察、构建 libadm 或运行未执行见证，不创建新 API、字段、规范、自动队列或维护合同。所有关系、既有 holds、取消的 live-page retrieval 及页面/显示暂停保持不变。
+
+
+## 2026-11-05 追加：恢复替代关系时，选择结果与条件在哪里
+
+现有底图能回答“记录了哪些替代路线、比较条件是什么”，但只读一个 capability 查询的三元组还不够。本次固定基线为 `b5e96ae4799a2a8a7271e7629a3d52409d44cb56`，遍历既有 loader 返回的关系，得到三条显式 `alternative_to`。这里只清点该基线已录的这个谓词，不建立现实方案全集、全域快照或替代充分性判断，也不重复核验三条边的外部来源。
+
+[六维研究](../03_Tests/coverage-dimension-reconciliation-2026-11-05.zh-CN.md)已用 URL/URI 说明有界替代，并指向会保留条件的 `alternative_relations()`；[领域选择审计](domain-selection-audit-2026-11-05/README.zh-CN.md)处理导航、implements 与对象字段。本次补的是它们尚未并列检验的两种读取差异：**已有边未被能力查询选中**，以及**选中后的 CLI 输出未携带已有条件**。这两种差异都不能直接归为 Canonical 缺陷。
+
+### 三条已有比较，各自能回答什么
+
+| 已录关系与固定来源 | 本次能力查询 | 能恢复的条件与未回答的问题 |
+| --- | --- | --- |
+| [semver_alternative_calver](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/01_State/02_Relations/versioning-alternatives.yaml#L13-L51) | `version_expression` 未选中此边 | SemVer 2.0.0 的公共 API/兼容性表达与 CalVer 的时间/节奏目标可作条件性比较；可组合使用，不是规则可互换或必须二选一。原边有两个 evidence 项及版本限定，但没有显式关系 capability context。两端对象和 notes 中的同一能力不自动补成该 context；空查询不表示没有这项知识。 |
+| [url_standard_alternative_context_uri](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/01_State/02_Relations/engine-v0.1-bootstrap.yaml#L248-L307) | `resource_identification` 选中此边 | WHATWG 所定义的 Web URL 行为与 RFC3986 通用语法/引用解析按应用要求比较。明确要求 RFC3986 的协议不能据此自动替换；解析成功也不证明原输入符合两套规则。原边保留三个 evidence 项，以及当时观察的 Living Standard 与固定 RFC 的不同身份。 |
+| [forgejo_actions_alternative_to_github_actions](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/01_State/02_Relations/ci-cd-implementations.yaml#L1-L77) | `automated_build_deployment` 选中此边 | 熟悉的工作流模型不表示完全兼容。已有六个 evidence 项限定文档级 OIDC 比较：启用设置、workflow/job 优先级、Forgejo fork 限制和外部 provider trust 分开。v17.0 文档观察不扩展为所有版本、实机迁移成功或 token exchange 已完成。 |
+
+以上 source 数量只是核对既有载体，不是证据充分性或覆盖评分。三条边原有的观察/核验日期保持原值；本次实际执行的是 IA 读取，不是重新观察上游网站或运行这些技术。
+
+### 按现有读取层次保留条件
+
+[选择函数](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/02_Runtime/01_Engine/bootstrap_query.py#L112-L131)检查 `normalize_relation()` 后的显式 capability context，返回匹配的完整加载记录。[兼容读取](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/02_Runtime/01_Engine/relation_model.py#L115-L136)会把已有 legacy `capability_context` 与顶层 conditions 纳入规范化 context；Forgejo 的正面结果走的是这条既有路径，不需要修改数据。SemVer/CalVer 没有相应显式字段，normalizer 也不从端点能力或 notes 推断它。
+
+随后，[`run()` / CLI](https://github.com/InteropAtlas/InteropAtlas/blob/b5e96ae4799a2a8a7271e7629a3d52409d44cb56/02_Runtime/01_Engine/bootstrap_query.py#L134-L171)把选中边缩成 source/relation/target 三元组。条件、版本、evidence 与关系 ID 不在这个投影里，但仍在原记录中。因此，六维研究所说的“保留条件”适用于该 helper 返回的记录，不能扩大为 CLI 三元组自身已经包含这些材料。查询没有选中一条边，与记录没有这项比较，是不同答案。
+
+下面是一段固定基线、只读、仅向 stdout 输出的完整例子。使用已有 Engine 依赖，在该提交的干净 checkout 根目录运行；它不下载或切换 checkout，也不改写记录。三条完整加载记录保留既有字段，loader 追加的 `_physical_source` / `_source` 只是物理/逻辑恢复位置，不是原 YAML 字节或外部证据。`normalized_context` 另列现有 normalizer 的结果，避免把 legacy 字段移动误说成源文件修改。
+
+```python
+from pathlib import Path
+import json
+import subprocess
+import sys
+
+root = Path.cwd()
+baseline = "b5e96ae4799a2a8a7271e7629a3d52409d44cb56"
+assert subprocess.check_output(
+    ["git", "rev-parse", "HEAD"], text=True
+).strip() == baseline
+sys.dont_write_bytecode = True
+sys.path.insert(0, str(root / "02_Runtime/01_Engine"))
+from bootstrap_query import load_atlas, index_objects, alternative_relations, run
+from relation_model import normalize_relation
+
+objects, relations = load_atlas(root)
+index = index_objects(objects)
+alternatives = sorted(
+    (r for r in relations if normalize_relation(r).predicate == "alternative_to"),
+    key=lambda r: r["id"],
+)
+assert {r["id"] for r in alternatives} == {
+    "semver_alternative_calver",
+    "url_standard_alternative_context_uri",
+    "forgejo_actions_alternative_to_github_actions",
+}
+capabilities = [
+    "version_expression", "resource_identification", "automated_build_deployment"
+]
+assert all(capability in index for capability in capabilities)
+result = {
+    "baseline": baseline,
+    "loaded_alternative_records": alternatives,
+    "normalized_context": {
+        r["id"]: normalize_relation(r).context for r in alternatives
+    },
+    "capability_queries": {
+        capability: {
+            "capability_exists": capability in index,
+            "selected_relation_ids": [
+                r["id"] for r in alternative_relations(relations, capability)
+            ],
+            "cli_triples": run(root, capability)["alternative_relations"],
+        }
+        for capability in capabilities
+    },
+}
+print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
+```
+
+本次执行确认三个 capability 均存在，所选关系数依次为0、1、1；后两项分别是表中 URL/URI 与 Forgejo/GitHub Actions 边。完整加载记录恢复三条边自己的条件、版本和 evidence；未选择的 SemVer/CalVer 也通过谓词遍历保持可见。所有 source/target 方向照录，包括 SemVer→CalVer，不根据比较文字反转。这只是让既有比较连同限制可读取，不给它补 capability 注释，不改变查询或关系语义，也不生成新的替代边。
+
+具体应用仍需给出自己的任务约束、所用版本和迁移/交换证据，才能判断一条记录是否足够支持选择。当前三条记录不能证明替代方案已穷尽，也不能证明某项现实任务无解。本次在这一有限问题上停止，不把读取差异升级为新 API、通用选择器、维护规则或覆盖评分；原有页面/显示暂停与全部 hold 保留。
