@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-10-31T10:08:00+00:00
+Document Updated At: 2026-11-05T05:00:49.952462+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: owner_confirmed_cutoff
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / publish_vc_verification_coverage
-  Reviewer: Independent Agent — OpenAI / dot / vc_verification_review
+  Executor: Agent — OpenAI / dot / advance_coverage_basemap
+  Reviewer: Agent — OpenAI / dot / review_syslog_composition (independent)
   GitHub Actor: ff6962757
 -->
 
@@ -35,6 +35,8 @@ Latest Substantive Contribution:
 - [FHIR R4 五种交换方法与既有模型库证据的有限对照（2026-10-31）](01_Prior_Art/fhir-r4-exchange-evidence-2026-10-31.zh-CN.md)：分开标准身份、INA 导航、旧内存模型观察与新只读 GET 静态路径；不推真实交换或完整符合性。
 
 - [VC2 验证职责与既有库包装层的有限对照（2026-10-31）](01_Prior_Art/vc2-verification-responsibilities-2026-10-31.zh-CN.md)：对照固定 Recommendation 三顶层算法职责与局部预检、外部委派、状态回调和失败返回；不推完整符合性或验签成功。
+
+- [Syslog 消息组成与既有读写先例的有限覆盖对照（2026-11-05）](01_Prior_Art/syslog-message-composition-coverage-2026-11-05.zh-CN.md)：按原版 HEADER / STRUCTURED-DATA / 可选 MSG 区分格式化、文本解析与组合未知；传输分帧另列，不推无损往返或送达。
 
 ## 与 `docs/` 的边界
 
