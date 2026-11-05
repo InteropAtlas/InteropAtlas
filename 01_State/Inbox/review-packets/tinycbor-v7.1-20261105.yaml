@@ -1,0 +1,31 @@
+packet_id: tinycbor_v71_20261105
+status: materialized
+reviewed_packet_commit: b7747706710c98bb1bd8e60455762f5e341d9e19
+reviewed_packet_blob: d4b1a6b519b05b4696bc97131787753df99bf202
+reviewed_packet_path: 01_State/Inbox/review-packets/tinycbor-v7.1-20261105.yaml
+baseline_commit: 871cb3ae6cd9e5c75eec042d2bec8390750b39c4
+executor: Agent — OpenAI / dot / deliver_next_library_instance
+acceptance_events: 01_State/Inbox/acceptance-events/tinycbor-v7.1-20261105.yaml
+objects:
+- candidate_id: tinycbor
+  canonical_id: tinycbor
+  acceptance_event_id: accept-20261105-tinycbor-v7-1
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/b7747706710c98bb1bd8e60455762f5e341d9e19/01_State/Inbox/review-packets/tinycbor-v7.1-20261105.yaml
+relations:
+- canonical_id: tinycbor_implements_cbor_uint
+  canonical_path: 01_State/02_Relations/data-serialization-implementations.yaml
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/b7747706710c98bb1bd8e60455762f5e341d9e19/01_State/Inbox/review-packets/tinycbor-v7.1-20261105.yaml
+existing_objects:
+- canonical_id: cbor_rfc8949
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/b7747706710c98bb1bd8e60455762f5e341d9e19/01_State/Inbox/review-packets/tinycbor-v7.1-20261105.yaml
+  scope: New tinycbor incoming-edge appendix and sources only; existing identity, original facts, scope_notes and
+    historical intake preserved
+navigation:
+  path: 01_State/Inbox/relations/intake-coverage-20260913.yaml
+  category_id: syntax
+  canonical_id: tinycbor
+  semantics: Existing editorial navigation only
+notes_zh:
+- 引用式回执；完整已审 Candidate、提案及十份固定源码指纹保留于真实冻结祖先。
+- 整体 TinyCBOR 官方 release/tag v7.1，单条有界 implements 仅静态无符号整数编码；完整双语范围在两端可见 description 与关系 context 中，不是运行或完整符合性；CMake7.0版本差异明确。
+- 既有标准、其他关系、项目规则及旧 holds 不变；没有上游执行、formal APPROVE、resolve/dismiss 或外部 agent 联系。
