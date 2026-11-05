@@ -3,13 +3,13 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T20:47:00+00:00
+Document Updated At: 2026-11-05T21:12:00+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / finish_wot_evidence
+  Executor: Agent — OpenAI / dot
   Reviewer: Independent Agent — OpenAI / dot
   GitHub Actor: ff6962757
 -->
@@ -764,3 +764,12 @@ print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
 这让“关联 trace ID”“处理器观察结束”“通过批处理 sampled 筛选”三个问题能分别追溯，不把上下文存在当作导出成功。extract 本身不激活 SDK 或自动选择后续父上下文；无效 carrier 返回保留的有效 base Context 时，也不能直接认定生成新 root。
 
 这是九份固定官方源码及九个**未执行**假设案例的条件推导，实际结果全部为 null；不是 SDK 运行、跨服务互通、队列保留或网络送达证据。API 历史22例汇总、SDK 静态批处理记录、2021/Trace Context 2 版次边界仍分别保留。没有新增技术边、Canonical 验证日期、页面或维护要求。
+
+
+## 2026-11-05 追加：从无符号整数编码前缀到 token 解码
+
+在 syntax 原行基础上，追加 TinyCBOR 7.1 → libcbor 0.12.0 的有界源码推导：十个 uint 分界值，10个完整前缀、40个截断前缀、40个从原 token 起点重试及20个尾字节用例。12份固定文件的 Git blob、字节数和 SHA256 与冻结复核包一致。全部110个组合用例仍为 UNEXECUTED、actual_result=null，没有运行任一上游库，也没有新增已观察互通边。
+
+核心增量是把输出前缀长度与 uint 回调、read/required 对齐：空输入预期 read=0/required=1；非空截断 required 是 token 所需总长；完整项后追加字节仍只消费首项。真实缓冲、回调与平台条件必须成立。FINISHED 不表示完整文档已消费或验证，局部最短整数头不证明确定性 profile。原 cbor2 35项观察、两条实现边与原审计边界保持不变。
+
+详见[固定源码报告](../01_Prior_Art/cbor-uint-handoff-2026-11-05.zh-CN.md)与[机器可读证据](../01_Prior_Art/cbor-uint-handoff-2026-11-05.json)。原审计行的固定基线与历史表述保持不变。
