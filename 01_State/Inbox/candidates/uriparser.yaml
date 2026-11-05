@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/uriparser/uriparser/releases/tag/uriparser-1.0.3
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - uriparser
   reasons:
-  - Fresh main, all-state issue/PR searches, all 256 remote branch names and locally reachable history have no whole
-    uriparser intake. Official github:uriparser/uriparser identity is distinct from python_rfc3986 and uri_rfc3986.
-    No identity merge/split.
+  - Accepted as canonical uriparser by accept-20261105-uriparser-1-0-3. Original new-state Candidate ba2e2c8d7d5c127ead7c25a9da632c8c7f0629d4
+    replays review_required against real ancestor 2d1d6c91c275598caa373dd54ac29e1b8c29e022; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - This record pins uriparser 1.0.3, official tag uriparser-1.0.3 and commit fe754ef0d62c882747222c4455cb028b03dca33b,
@@ -40,10 +41,10 @@ unknowns:
   component/scheme semantics and assemble the URI. Already escaped percent signs are encoded again; no URI-preserving
   whole-string transformation, normalization or resource equivalence is claimed. Outside positive scope, spaceToPlus=true
   changes spaces to +, while normalizeBreaks=true changes lone CR/LF and CRLF into percent-encoded CRLF, needing
-  worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not arbitrary
-  Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source, headers
-  and test recipes were read only, without upstream installation, build, import, execution or tests. Related test.cpp
-  recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers
+  worst-case 6 × n + 1 output capacity; these options are not generic RFC3986 guarantees. The wchar_t API is not
+  arbitrary Unicode transcoding; high-bit bytes, UTF-8 validation and IRI/IDNA are excluded. Complete pinned source,
+  headers and test recipes were read only, without upstream installation, build, import, execution or tests. Related
+  test.cpp recipes use wchar_t/uriEscapeW and are not char-API execution or conformance evidence. Library source/headers
   declare BSD-3-Clause; the repository separately excepts LGPL-2.1-or-later tests and Apache-2.0 fuzzing, without
   a legal-suitability conclusion. Upstream strict-conformance/performance claims are not adopted as verification.
   Full RFC conformance, URI parsing/ABNF acceptance, reference resolution, comparison/normalization, decoding, scheme
@@ -52,4 +53,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / implement_uriparser_library
-  reviewer: pending independent semantic review
+  reviewer: Independent Agent — OpenAI / dot / review_uriparser_semantics
