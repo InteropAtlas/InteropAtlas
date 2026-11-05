@@ -1,0 +1,54 @@
+contract_version: candidate-object-v1
+candidate_id: libltc
+label: libltc C linear timecode library (1.3.2)
+publisher: Robin Gareus and libltc contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: x42/libltc
+locators:
+- url: https://x42.github.io/libltc/
+  role: official
+- url: https://github.com/x42/libltc/tree/bf84b01097a1789c0296cc5fcfc3bf4608407930
+  role: dated
+- url: https://github.com/x42/libltc/releases/tag/v1.3.2
+  role: catalog
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh main, all-state issue/PR searches, 257 remote branch names and reachable history do not contain libltc
+    intake. Whole github:x42/libltc is distinct from the SMPTE standard and its predecessor libltcsmpte. No identity
+    merge/split.
+  merge_authorized: false
+unknowns:
+- 'Pins libltc 1.3.2, official lightweight tag v1.3.2 and commit bf84b01097a1789c0296cc5fcfc3bf4608407930. Fixed
+  source alone maps bounded ltc_frame_increment time-address arithmetic to the 25-frame progression in SMPTE ST
+  12-1:2014 section 6.2 and tens/units BCD representation in section 8.2; old SMPTE 12M-1999 comments do not establish
+  edition equivalence or full conformance. The caller supplies a live readable/writable LTCFrame object without
+  concurrent modification and accesses named fields. Every decimal digit is valid (units 0..9), with combined frames
+  00..24, seconds/minutes 00..59 and hours 00..23. A valid combined numeric range alone does not suffice if an individual
+  BCD digit is invalid. fps is exactly 25, dfbit is 0, standard is LTC_TV_625_50, and flags is exactly LTC_NO_PARITY
+  (enum value 8), excluding LTC_USE_DATE (1). The enum and implementation govern, not the header comment incorrectly
+  saying bit 4. Each call advances only the eight time-address fields one count: frame 24 carries into seconds,
+  seconds/minutes 59 carry, and 23:59:59:24 wraps to 00:00:00:00. Only that day wrap returns 1; all other valid
+  inputs return 0. These are static control-flow deductions, not execution results; the date-error return -1 is
+  unreachable within this domain. The function neither initializes the object nor validates null pointers, BCD digits
+  or frame rate; invalid inputs are outside positive scope. The standard argument is unused on this parity-suppressed
+  branch, not generally ignored. Logical values of user fields, flags, parity field and sync_word remain unchanged,
+  without byte-for-byte object-representation or padding preservation claims. LTC_NO_PARITY intentionally skips
+  parity correction; its previous value may no longer fit the changed address, so this is not proof of a complete
+  conforming LTC codeword. This slice does not verify C bit-field layout, endianness or wire bit order, or execute
+  encoding, decoding, audio waveforms, synchronization or transport. Drop-frame counting, other rates, 50-frame
+  pairs, PAL color framing, dates/timezones, user-bit semantics, timing accuracy and full-standard conformance are
+  excluded. LTC in the function name does not turn address arithmetic into LTC-signal verification. Seven selected
+  complete pinned repository files were read statically, without upstream installation, import, build, execution
+  or tests. tests/ltcloop.c is a one-frame encode/decode loopback recipe, not executed or comprehensive testing
+  of this BCD-carry slice. Fixed library source/headers declare LGPL-3.0-or-later; this records upstream licensing,
+  not legal suitability. The release archive was not verified. Cross-library/device interoperability, security,
+  performance, deployment and IA adoption are unproved; unexamined capabilities are not asserted absent.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_next_library_candidate
+  reviewer: pending independent semantic review
