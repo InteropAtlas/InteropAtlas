@@ -35,3 +35,110 @@ semantic_review:
   verdict: acceptable_for_ordinary_acceptance
   review_url: https://github.com/InteropAtlas/InteropAtlas/pull/456#issuecomment-6295510150
   scope_zh: 仅接纳官方README推荐配合处理ADM XML的recommended_with关系；不把未限定目标版次的建议解释为强制依赖、版本配对验证、兼容性认证或部署采用。
+---
+id: libltc_implements_25_frame_time_address
+type: relation
+name_zh: libltc 1.3.2 实现有界 25 帧时间地址递增
+name_en: libltc 1.3.2 implements bounded 25-frame time-address increment
+source: libltc
+relation: implements
+target: smpte_st12_1
+context:
+  version_context:
+    source: libltc 1.3.2 / bf84b01097a1789c0296cc5fcfc3bf4608407930
+    target: SMPTE ST 12-1:2014 sections 6.2/8.2; existing exact edition
+  conditions_zh: 固定 libltc 1.3.2、官方轻量 tag v1.3.2 与 commit bf84b01097a1789c0296cc5fcfc3bf4608407930。只据固定源码将 ltc_frame_increment
+    的有界时间地址算术映射到 SMPTE ST 12-1:2014 §6.2 的 25 帧计数及 §8.2 的十位/个位 BCD 表示，不以旧 SMPTE 12M-1999 注释证明版次等同或完整符合性。调用方提供生命周期有效、可读写且无并发修改的
+    LTCFrame 对象，以命名字段访问；每一十进制位均合法（个位 0..9），组合值为帧 00..24、秒/分 00..59、时 00..23。仅组合数值落在范围内而个别 BCD 位非法并不满足前提。fps 必须为
+    25，dfbit 为 0，standard 为 LTC_TV_625_50，flags 恰为 LTC_NO_PARITY（枚举值 8），不启用 LTC_USE_DATE（1）。以枚举和实现为准，不采用头文件注释中误称
+    bit 4 的描述。每次调用仅将八个时间地址字段推进一个计数位置：帧 24 后进秒，秒/分 59 后进位，23:59:59:24 回到 00:00:00:00；仅该全天回绕返回 1，其余合法输入返回 0。此为静态控制流推导，不是运行结果；该范围内日期错误返回
+    -1 的路径不可达。函数不初始化对象，也不验证空指针、BCD 合法性或帧率；非法输入不在正面范围。standard 参数在该不计算奇偶校正的分支不起作用，但不能据此泛化其他调用。用户字段、标志、奇偶校正字段和 sync_word
+    的逻辑值不变，不声称结构体字节/填充逐字节保真。LTC_NO_PARITY 有意跳过奇偶校正，旧值可能不再适合改变后的地址，故结果不是已经符合完整 LTC 码字要求的证明。本切片不校验 C 位域的内存布局、大小端或线上位序，不执行编码、解码、音频波形、同步或传输；也不覆盖丢帧计数、其他帧率、50
+    帧帧对、PAL 色帧、日期/时区、用户位语义、时间精度或完整标准符合性。函数名称含 LTC 不把时间地址算术自动变成 LTC 信号验证。七份选定完整固定仓库文件仅静态读取，没有安装、导入、构建、运行上游或其测试。tests/ltcloop.c
+    是单帧编解码回环配方，不是本 BCD 进位切片的执行或全范围测试证据。固定库源/头文件声明 LGPL-3.0-or-later，仅记录上游许可声明，不作法律适用性判断。发布归档未核，未证明跨库/设备互通、安全、性能、部署或
+    IA 采用；未审能力不等于库不具备。
+  conditions_en: 'Pins libltc 1.3.2, official lightweight tag v1.3.2 and commit bf84b01097a1789c0296cc5fcfc3bf4608407930.
+    Fixed source alone maps bounded ltc_frame_increment time-address arithmetic to the 25-frame progression in SMPTE
+    ST 12-1:2014 section 6.2 and tens/units BCD representation in section 8.2; old SMPTE 12M-1999 comments do not
+    establish edition equivalence or full conformance. The caller supplies a live readable/writable LTCFrame object
+    without concurrent modification and accesses named fields. Every decimal digit is valid (units 0..9), with combined
+    frames 00..24, seconds/minutes 00..59 and hours 00..23. A valid combined numeric range alone does not suffice
+    if an individual BCD digit is invalid. fps is exactly 25, dfbit is 0, standard is LTC_TV_625_50, and flags is
+    exactly LTC_NO_PARITY (enum value 8), excluding LTC_USE_DATE (1). The enum and implementation govern, not the
+    header comment incorrectly saying bit 4. Each call advances only the eight time-address fields one count: frame
+    24 carries into seconds, seconds/minutes 59 carry, and 23:59:59:24 wraps to 00:00:00:00. Only that day wrap
+    returns 1; all other valid inputs return 0. These are static control-flow deductions, not execution results;
+    the date-error return -1 is unreachable within this domain. The function neither initializes the object nor
+    validates null pointers, BCD digits or frame rate; invalid inputs are outside positive scope. The standard argument
+    is unused on this parity-suppressed branch, not generally ignored. Logical values of user fields, flags, parity
+    field and sync_word remain unchanged, without byte-for-byte object-representation or padding preservation claims.
+    LTC_NO_PARITY intentionally skips parity correction; its previous value may no longer fit the changed address,
+    so this is not proof of a complete conforming LTC codeword. This slice does not verify C bit-field layout, endianness
+    or wire bit order, or execute encoding, decoding, audio waveforms, synchronization or transport. Drop-frame
+    counting, other rates, 50-frame pairs, PAL color framing, dates/timezones, user-bit semantics, timing accuracy
+    and full-standard conformance are excluded. LTC in the function name does not turn address arithmetic into LTC-signal
+    verification. Seven selected complete pinned repository files were read statically, without upstream installation,
+    import, build, execution or tests. tests/ltcloop.c is a one-frame encode/decode loopback recipe, not executed
+    or comprehensive testing of this BCD-carry slice. Fixed library source/headers declare LGPL-3.0-or-later; this
+    records upstream licensing, not legal suitability. The release archive was not verified. Cross-library/device
+    interoperability, security, performance, deployment and IA adoption are unproved; unexamined capabilities are
+    not asserted absent.'
+evidence:
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/README.md
+  title: libltc 1.3.2 pinned README.md; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/COPYING
+  title: libltc 1.3.2 pinned COPYING; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/configure.ac
+  title: libltc 1.3.2 pinned configure.ac; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/src/ltc.h
+  title: libltc 1.3.2 pinned src/ltc.h; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/src/timecode.c
+  title: libltc 1.3.2 pinned src/timecode.c; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/tests/ltcloop.c
+  title: libltc 1.3.2 pinned tests/ltcloop.c; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/blob/bf84b01097a1789c0296cc5fcfc3bf4608407930/tests/Makefile.am
+  title: libltc 1.3.2 pinned tests/Makefile.am; static inspection only
+  language: en
+  accessed: '2026-11-05'
+- url: https://github.com/x42/libltc/releases/tag/v1.3.2
+  title: Official libltc 1.3.2 release, 2022-09-04
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/x42/libltc
+  title: Official whole library, repository ID 5425807
+  language: en
+  accessed: '2026-11-05'
+- url: https://api.github.com/repos/x42/libltc/git/ref/tags/v1.3.2
+  title: Lightweight tag resolves to pinned commit; no signature claim
+  language: en
+  accessed: '2026-11-05'
+- url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=10
+  title: 'ST 12-1:2014 section 6.2: 25-frame time-address progression'
+  language: en
+  accessed: '2026-11-05'
+- url: https://pub.smpte.org/pub/st12-1/st0012-1-2014.pdf#page=12
+  title: 'ST 12-1:2014 section 8.2: time-address BCD fields'
+  language: en
+  accessed: '2026-11-05'
+last_verified_at: '2026-11-05T01:21:05.731657+00:00'
+last_verified_by: Agent — OpenAI / dot / add_next_library_candidate; named-field arithmetic only, not LTC transport
+  or full conformance
+record_created_at: '2026-11-05T01:24:46.036522+00:00'
+record_updated_at: '2026-11-05T01:24:46.036522+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / add_next_library_candidate
+  reviewer: Agent — OpenAI / independent semantic reviewer / review_libltc_semantics
+  github_actor: ff6962757
