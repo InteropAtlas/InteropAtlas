@@ -302,6 +302,8 @@ Latest Substantive Contribution:
 
 - 下一步研究判断：先把既有固定控制器的输入/输出依赖追清，再设计纯离线、可信合成逐指标结果的汇总探针；input_id 仅作为字面字符串，不访问任何 URL。比较原始结果和汇总字段，保持7例为旧证据，不扩大为完整FAIR测量或验证来源真实性。
 
+- 后续静态研究：[F-UJI 汇总分数范围](../01_Prior_Art/fuji-score-scope-2026-11-05.zh-CN.md)已把默认 0.8 的 17 项/26 分配置、控制器实际结果清单与百分比/成熟度/通过数的不同分母接起来。它不执行汇总器，也不把上述运行探针标成完成；不同指标集合可能得到相同百分比，比较时须保留各自分母和清单。
+
 - 跨域边界：FAIR同一candidate/accepted/canonical对象同时属于 metadata 与 research；fuji_uses_fair_principles_2016 是实际方法使用边，不是 implements；PROV namespace识别不建立 PROV-O 图符合性关系。
 
 - 证据入口：[fuji-fair-assessment-20261029.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/Inbox/review-packets/fuji-fair-assessment-20261029.yaml)；[fair-indexed-evidence-20260913.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/Inbox/review-packets/fair-indexed-evidence-20260913.yaml)。
