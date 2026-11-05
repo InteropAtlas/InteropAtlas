@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T15:36:18+00:00
+Document Updated At: 2026-11-05T16:09:31+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_timestamp_portability_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_failure_signal_comparison
   GitHub Actor: ff6962757
 -->
 
@@ -549,3 +549,12 @@ agents 行的方言问题现补有[固定源码责任矩阵及验证器实验](.
 [时间字段可迁移性比较](../01_Prior_Art/timestamp-portability-2026-11-05.zh-CN.md)沿四条现有外部 RFC3339 uses，把 services 的事件时间、observability 的 Syslog 时间、geospatial 的查询条件及 agents 的记录创建时间放在同一组具体迁移问题下。共同语法不证明字段指称同一事实。OGC 条文还要求 datetime 匹配无 temporal geometry 的要素；Syslog 的可选 timeQuality 独立说明时区知识、同步状态与误差。这些事实不能从一个合法时间字符串或小数位数推出来。
 
 固定实现源码进一步分开原始字符串、原生时间值、缺省时间和实际操作：pygeoapi 把参数与集合 extents 交给条件检查，再交 provider；所查 CSV/GeoJSON 路径未应用该过滤，响应 timeStamp 另取当前 UTC。CloudEvents 两 SDK 的 time 转换入口和 pyRFC3339 的既有精度/零偏移观察，说明表示可读、数值保留、偏移知识与真实发生时间不能互相替代。所有新结论是文献/源码比较，旧40/16/12观察没有重跑；没有新增关系、统一时间格式、页面、维护门槛或全局覆盖率。剩余缺口是具体字段映射的业务依据和实际选定入口的交换结果，不是缺少 capability 或 notes 标签。
+
+
+## 2026-11-05 追加：失败信号从哪里来、消费者还需判断什么
+
+[HTTP 与工具调用的失败信号比较](../01_Prior_Art/failure-signal-comparison-2026-11-05.zh-CN.md)连接 services 的问题详情、transport 的 HTTP 客户端、syntax/semantic 的 JSON/URI 与 agents 的 JSON-RPC/MCP。RFC9457 的状态生成一致性不等于接收端分歧时无条件优先级；HTTPX 的 JSON 解析和实际状态判断仍不解释问题类型。202 接受处理也不等于最终完成。
+
+MCP 的 result.isError 可在 JSON-RPC 结果信封内报告工具失败；固定 FastMCP 的普通异常包装和未知工具路径不能用规范示例机械预测。客户端还会为超时与断流在本地构造错误，因此 McpError 或内部 JSONRPCError 本身不能证明收到对端错误。已补23份规范/固定源码的字节身份、条件化责任比较及明确未执行的示例，历史17/13/12观察没有重跑。
+
+具体未知现在落到真实生产端适配器、实际所收信封/本地异常来源，以及方法完成/副作用合同，而不是笼统的“有没有错误支持”或缺少注释。这些研究条件没有拼成通用错误映射、自动重试规则或已运行链路；未改 Canonical、Runtime、页面、维护机制与任何 hold。

@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: research_record
 Document Created At: 2026-09-01T15:04:02+08:00
-Document Updated At: 2026-11-05T15:36:18+00:00
+Document Updated At: 2026-11-05T16:09:31+00:00
 Metadata Provenance: mixed
 Lifecycle Time Provenance: reconstructed_from_git
 Contribution Identity Provenance: mixed
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / finish_wot_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_timestamp_portability_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_failure_signal_comparison
   GitHub Actor: ff6962757
 -->
 
@@ -51,6 +51,8 @@ Latest Substantive Contribution:
 - [既有领域导航、实现关系与字段恢复的跨域审计（2026-11-05）](02_Audits/domain-selection-audit-2026-11-05/README.zh-CN.md)：对全部现有种子导航和显式 implements 做身份／选择／来源角色核对，提供一次性配方与例外结果；不将缺字段当作知识缺口，不替代完整清单或修改选择合同。
 
 - [时间字段的跨领域可迁移性（2026-11-05）](01_Prior_Art/timestamp-portability-2026-11-05.zh-CN.md)：沿四条既有 RFC3339 外部 uses 比较发生/创建/日志/查询时间、缺失、偏移与精度，连接固定转换先例和时间质量证据；不把共同格式当共同含义或互通证明。
+
+- [HTTP 与工具调用的失败信号比较（2026-11-05）](01_Prior_Art/failure-signal-comparison-2026-11-05.zh-CN.md)：连接问题详情、HTTPX、JSON-RPC 与 MCP 的状态、信封、工具结果和本地异常来源，区分解析/返回成功与任务完成；不建立统一错误映射或重试规则。
 
 ## 与 `docs/` 的边界
 
