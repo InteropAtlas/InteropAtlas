@@ -3,7 +3,7 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: bounded_experiment_record
 Document Created At: 2026-11-05T17:21:00+00:00
-Document Updated At: 2026-11-05T17:21:00+00:00
+Document Updated At: 2026-11-05T17:35:40+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
@@ -57,7 +57,7 @@ Core 全文的直接原始读取返回 HTTP 403，本轮没有重试或绕行；
 
 ### 固定输入与方法
 
-[离线脚本](../03_Evidence/resource-resolution-20261105-probe.py) 为可直接执行的有限离线脚本。[原始 JSON 输入](../03_Evidence/resource-resolution-20261105-cases.json) 保留实际解析的 UTF-8 JSON 文本：根 schema、instance、registry URI→资源文本及 callback URI→资源文本。根引用固定 `target.json`，根 base 为 `https://example.invalid/a/root.json` 或 `/b/root.json`；资源分别是 `{"type":"integer"}` 与 `{"type":"string"}`。所有 URL 均为合成标识，没有网络访问。
+[离线脚本](../03_Evidence/resource-resolution-20261105-probe.py) 为可直接执行的有限离线脚本。[原始 JSON 输入](../03_Evidence/resource-resolution-20261105-cases.json) 保留实际解析的 UTF-8 JSON 文本：根 schema、instance、registry URI→资源文本及 callback URI→资源文本。根引用固定 `target.json`，根 base 为 `https://example.invalid/a/root.json` 或 `/b/root.json`；资源分别是 `{"type":"integer"}` 与 `{"type":"string"}`。用于资源标识和引用目标的 URL 均为 example.invalid 合成标识；`$schema` 保留官方方言 URI。本次没有网络访问。
 
 逐例使用新的 `Registry(retrieve=retrieve)`，通过 `with_resources` 预供资源，再明确调用 `Draft202012Validator(..., registry=registry).iter_errors(instance)`。未调用 `check_schema`，不将此结果当成 schema 自身合法性证明。callback 只记录 URI，返回既有内存资源或抛 `NoSuchResource`；无 HTTP、文件或其他外部加载。进程 audit guard 在第三方导入前生效，拒绝 socket、HTTP/urllib、子进程等事件；探测阶段同时拒绝 `open`。
 
