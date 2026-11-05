@@ -15,12 +15,13 @@ locators:
 - url: https://github.com/dtolnay/semver/releases/tag/1.0.28
   role: catalog
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - rust_semver
   reasons:
-  - Fresh main, all-state issue/PR searches, 259 remote branch names and reachable history contain no Rust semver
-    intake. Whole github:dtolnay/semver is distinct from existing Python semver and SemVer standard. No identity
-    merge/split.
+  - Accepted as canonical rust_semver by accept-20261105-rust-semver-1-0-28. Original new-state Candidate 94ee87984dd2265cedcfab422fca2d708c0fd907
+    replays review_required against real ancestor 7bfdb832019505d6d9198bec0cf49dda9fb18ed3; this back-reference
+    authorizes no identity merge.
   merge_authorized: false
 unknowns:
 - 'Pins Rust semver 1.0.28, official tag 1.0.28 and commit 7625c7aa3f0e8ba21e099d1765bcebcb72aa8816. Only the source
@@ -52,4 +53,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / add_new_standard_implementation
-  reviewer: pending independent semantic review
+  reviewer: Agent — OpenAI / dot / /root/continue_unicode_work/add_new_standard_implementation/review_rust_semver_semantics
