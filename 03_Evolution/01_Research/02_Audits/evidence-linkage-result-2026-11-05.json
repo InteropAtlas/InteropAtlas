@@ -1,0 +1,396 @@
+{
+  "kind": "one_time_evidence_linkage_audit",
+  "baseline": "314d70148ae1f154c852c85f9d4886804c74ac54",
+  "environment": {
+    "python": "3.12.14 (main, Aug 25 2026, 14:00:49) [Clang 22.1.3 ]",
+    "PyYAML": "6.0.3"
+  },
+  "selected_objects": 6,
+  "added_source_entries": 8,
+  "added_assessment_notes": 6,
+  "unselected_object_records_unchanged": 289,
+  "all_relation_records_unchanged": true,
+  "results": [
+    {
+      "object_id": "wot_td_1.1",
+      "question": "同一 Recommendation 身份是否固定验证资源？",
+      "before": {
+        "original_source_count": 1,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "IA historical source locator — fixed official TD/TM resource identities and hashes; not a new specification",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/03_Evidence/wot-td-resource-probe-20261105-manifest.json#L1-L224",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "wot_td_1.1",
+              "canonical_field": "sources"
+            }
+          },
+          {
+            "title": "IA historical observed results — fixed TD/TM resources with Draft7; no node-wot or JSON-LD execution",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/03_Evidence/wot-td-resource-probe-20261105-result.json",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "wot_td_1.1",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：规范身份、辅助资源字节与验证器行为须分别确定。固定前后 TD/TM schema 的部分合成输入判定不同；所列 Draft7 观察不等于完整 TD 符合性、node-wot 或 JSON-LD 运行。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/wot-td-resource-runtime-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "wot_td_1.1",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "wot_td_1.1",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "bb958c9b6a4f2e110ac3fe531cec3128da6f07dfb1698e0589ed32743668b491",
+        "last_verified_at": {
+          "present": false,
+          "value": null
+        },
+        "last_verified_by": {
+          "present": false,
+          "value": null
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/wot-td-resource-runtime-2026-11-05.zh-CN.md",
+        "sha256": "075fa5074b9edfa25834ae19081cf1a071f8164b0da0653332235f2eb7f2357d"
+      },
+      "historical_source_files": {
+        "03_Evolution/02_Experiments/03_Evidence/wot-td-resource-probe-20261105-manifest.json": "2d193145ab96f811d90e5de6ea09046303208f3608cee8e791b78a6881b819a3",
+        "03_Evolution/02_Experiments/03_Evidence/wot-td-resource-probe-20261105-result.json": "e1c7fe4b7db7c3a4a9cf469a1830636522c105765667d019631cc4ffdf79460b"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    },
+    {
+      "object_id": "mcp_python_sdk",
+      "question": "所声明的工具模式在哪些路径实际被验证？",
+      "before": {
+        "original_source_count": 8,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "IA historical source manifest — MCP Python SDK 1.26.0 fixed static paths; not SDK execution",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/03_Evidence/mcp-schema-source-manifest-20261105.json",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "mcp_python_sdk",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：固定 SDK 1.26.0 的低层、FastMCP 与客户端存在不同验证条件，应按具体调用分支解释。该研究的 SDK 证据仅为静态源码；独立 jsonschema4.26.0 方言实验不是 SDK 执行，也不更新其依赖版本或既有实现边。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/mcp-schema-responsibility-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "mcp_python_sdk",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "mcp_python_sdk",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "929002735875398075b21679f6b4dae118003cab47376bac1d5aad76c76c5d70",
+        "last_verified_at": {
+          "present": true,
+          "value": "2026-10-21T01:37:53.060395+00:00"
+        },
+        "last_verified_by": {
+          "present": true,
+          "value": "Agent — OpenAI / dot，fixed-version MCP SDK evidence executor"
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/mcp-schema-responsibility-2026-11-05.zh-CN.md",
+        "sha256": "3717d23e9026e7e6be7568658b6b608c49f1680d30f28869cfe66e78c1d33866"
+      },
+      "historical_source_files": {
+        "03_Evolution/02_Experiments/03_Evidence/mcp-schema-source-manifest-20261105.json": "55a08647fd9dde95e31febff514064ff8410003ab853dbd711fbb8504d2e08a3"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    },
+    {
+      "object_id": "rfc3339",
+      "question": "共同时间语法是否表示同一事实并保留同样信息？",
+      "before": {
+        "original_source_count": 1,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "IA historical source locator — dated standards, fixed implementation sources and prior observations; no new execution",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/timestamp-portability-2026-11-05-sources.json#L67-L1008",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "rfc3339",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：发生、创建、记录与查询时间的字段含义，以及缺失、偏移、精度和时钟质量须分别判断；共同 RFC3339 语法不保证它们等价。该比较引用固定规范、静态实现路径和明确标注的历史观察，本次接合没有新增实现执行。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/timestamp-portability-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "rfc3339",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "rfc3339",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "155717b976696e235f4d94e855aed2f3a49e7f4edb444f695ae524ee038d9e16",
+        "last_verified_at": {
+          "present": false,
+          "value": null
+        },
+        "last_verified_by": {
+          "present": false,
+          "value": null
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/timestamp-portability-2026-11-05.zh-CN.md",
+        "sha256": "bdfaf17aba923cf504d6c2ef3e77d91fac00a9ba71c9678b3b73d42b42ac2ce4"
+      },
+      "historical_source_files": {
+        "03_Evolution/01_Research/01_Prior_Art/timestamp-portability-2026-11-05-sources.json": "e24999994e6237a761a1dce15c3108718400dbd833a5e96ac28157cd0fe73171"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    },
+    {
+      "object_id": "problem_details_rfc9457",
+      "question": "HTTP 问题内容与其他失败信号各自说明什么？",
+      "before": {
+        "original_source_count": 1,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "IA historical source locator — HTTP and JSON-RPC/MCP normative and fixed-code references only; excludes unexecuted illustrations",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/failure-signal-comparison-2026-11-05-sources.json#L67-L657",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "problem_details_rfc9457",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：HTTP 状态、问题内容、JSON-RPC error、MCP 工具失败及本地异常的来源和责任不同，解析或返回成功不足以证明业务完成。比较不建立统一错误映射、优先级或重试规则；其中说明输入未作为真实交换执行。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/failure-signal-comparison-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "problem_details_rfc9457",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "problem_details_rfc9457",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "5bd0974107326fd1ea6fc902bfb5c8480036c2fa91d54e6def3991498f420d2d",
+        "last_verified_at": {
+          "present": false,
+          "value": null
+        },
+        "last_verified_by": {
+          "present": false,
+          "value": null
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/failure-signal-comparison-2026-11-05.zh-CN.md",
+        "sha256": "bc1a276db68dd46a97c2f0d2bcec40b62f575b2f584df53ff505e6a8887f07aa"
+      },
+      "historical_source_files": {
+        "03_Evolution/01_Research/01_Prior_Art/failure-signal-comparison-2026-11-05-sources.json": "63629e4363828fea6b86ed2f734259a63c6723f41faf4fca648fa5726faeaddb"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    },
+    {
+      "object_id": "senml_rfc8428",
+      "question": "相同 JSON 数字是否足以跨格式保留量值？",
+      "before": {
+        "original_source_count": 4,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "IA historical source locator — external source identities, hashes and clauses only; not quantity conversion or observed illustration results",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/quantity-preservation-2026-11-05-evidence.json#L80-L462",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "senml_rfc8428",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：SenML base/单位继承与 FHIR Quantity 的单位身份、comparator、缺值及展示精度不是可直接互换的条件。研究保留两份规范的差别；JSON 说明例明确未执行，一次性 Decimal 算术不是格式校验或实际转换。本接合不改 FHIR 摘要或创建通用转换规则。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/quantity-preservation-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "senml_rfc8428",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "senml_rfc8428",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "7c9117eb850c4eeff112ce4a5afbf60465d35dc3ee8fb6ddfd10cdc2a699d984",
+        "last_verified_at": {
+          "present": true,
+          "value": "2026-10-30T21:54:16.441098+00:00"
+        },
+        "last_verified_by": {
+          "present": true,
+          "value": "Agent — OpenAI / dot / add_senml_standard; original publication, status and RFC9100 update boundary only; errata unreviewed"
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/01_Research/01_Prior_Art/quantity-preservation-2026-11-05.zh-CN.md",
+        "sha256": "bf5778f6b43316a2b878c6e3eceafc4b50ea2c8c66d2a8e8d96ba09c434562d7"
+      },
+      "historical_source_files": {
+        "03_Evolution/01_Research/01_Prior_Art/quantity-preservation-2026-11-05-evidence.json": "5b8c148c4ecd1f40fc30cf8c1119aea9df2c05aa3c16d401fbe1474927dc476d"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    },
+    {
+      "object_id": "uri_rfc3986",
+      "question": "引用标识何时成为被实际使用的资源？",
+      "before": {
+        "original_source_count": 22,
+        "assessment_state": "not_recorded",
+        "report_already_present_at_baseline": true,
+        "report_link_in_selected_record": false
+      },
+      "after": {
+        "added_factual_source_references": [
+          {
+            "title": "RFC3986 section 1.2.2 — identification does not imply access; operations depend on the containing protocol or format",
+            "url": "https://www.rfc-editor.org/rfc/rfc3986#section-1.2.2",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "uri_rfc3986",
+              "canonical_field": "sources"
+            }
+          },
+          {
+            "title": "IA historical context-source locator — RFC3986, CloudEvents and fixed MCP source identities; not RFC3986 runtime validation",
+            "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/03_Evidence/resource-resolution-20261105-sources.json#L293-L346",
+            "accessed": "2026-11-05",
+            "recoverable_from": {
+              "canonical_object_id": "uri_rfc3986",
+              "canonical_field": "sources"
+            }
+          }
+        ],
+        "assessment": {
+          "state": "recorded",
+          "notes": [
+            "IA 研究判断：标识、基址、供应资源、缓存/加载与处理结果须分开。九个离线案例只属于 jsonschema4.26.0/referencing0.37.0 的显式内存配置，PyLD3.3.0 部分仅静态；不是 RFC3986 任意实现的运行保证，也不扩大 uriparser 入边。本链接采用已澄清官方 $schema URI 与合成资源 URL 区别的报告。 [研究报告](https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md)。"
+          ],
+          "authority": "interopatlas_authored",
+          "is_external_evidence": false,
+          "recoverable_from": {
+            "canonical_object_id": "uri_rfc3986",
+            "canonical_field": "notes_zh"
+          }
+        },
+        "notes_field_recovery": {
+          "canonical_object_id": "uri_rfc3986",
+          "canonical_field": "notes_zh"
+        }
+      },
+      "preserved": {
+        "old_source_prefix_sha256": "b3d9130c89db69f6170d388b92c4d880ad762676e9e1362029acd4af41f00279",
+        "last_verified_at": {
+          "present": false,
+          "value": null
+        },
+        "last_verified_by": {
+          "present": false,
+          "value": null
+        },
+        "all_other_record_fields_equal_except_declared_metadata": true
+      },
+      "historical_report": {
+        "url": "https://github.com/InteropAtlas/InteropAtlas/blob/314d70148ae1f154c852c85f9d4886804c74ac54/03_Evolution/02_Experiments/02_Pilots/resource-resolution-boundary-2026-11-05.zh-CN.md",
+        "sha256": "4e421c6f1436b1e4f9781429b81c7c91027c4b47c4757d0dd4fb219689fc7bda"
+      },
+      "historical_source_files": {
+        "03_Evolution/02_Experiments/03_Evidence/resource-resolution-20261105-sources.json": "50447faaf6c9000c0a74acae858f24d75e3bfad2ac64af7483fe2f37fb4bd349"
+      },
+      "rendering_limit": "Existing standard views expose sources and assessment count, not notes text; existing implementation view exposes notes. Search index does not include source/assessment text. No renderer changes."
+    }
+  ],
+  "engine_sha256": {
+    "02_Runtime/01_Engine/bootstrap_query.py": "d34ca91c4d435bf5ad1fcb4759ac03d242248a75c08cda55a49cb08329bec75b",
+    "02_Runtime/01_Engine/workspace_projection.py": "5b6125b4caa5dcd3710863fee1deec0a7e0cef67e954da610d82f120f5ac5dc0",
+    "02_Runtime/01_Engine/relation_model.py": "1e564ee358e037d0021f30916ca66f0ff187c8beed1b439e7c08809c04049bbc",
+    "02_Runtime/01_Engine/repository_layout.py": "b38c68cc601e199e1147bdc5951362cba53fe364c87a8cbe331ea01129e79eee"
+  },
+  "recipe_sha256": "8c51d7e72662719e4496d099a2b32c298917df1a5cea77bf0b702b89551fb57a",
+  "boundary": "This is a finite retrieval/preservation audit, not new upstream execution, revalidation of whole records, completeness measurement, new source authority, query contract or maintenance gate. Before not_recorded meant the selected record lacked an assessment link, not that research was absent."
+}
