@@ -1,0 +1,58 @@
+contract_version: candidate-object-v1
+candidate_id: tinycbor
+label: TinyCBOR C CBOR library (release/tag v7.1)
+publisher: Intel and TinyCBOR contributors
+family: system
+kind: library
+external_identifiers:
+- namespace: github
+  value: intel/tinycbor
+locators:
+- url: https://github.com/intel/tinycbor
+  role: official
+- url: https://github.com/intel/tinycbor/tree/da6421f2b5b91e3468c0af7265117427ea73f19e
+  role: dated
+- url: https://github.com/intel/tinycbor/releases/tag/v7.1
+  role: catalog
+identity_resolution:
+  state: new
+  matched_canonical_ids: []
+  reasons:
+  - Fresh main, all-state TinyCBOR issue/PR searches, 260 remote branch names and complete locally reachable Git-object
+    history contain no TinyCBOR intake. Whole github:intel/tinycbor is distinct from libcbor and RFC8949. No identity
+    merge/split.
+  merge_authorized: false
+unknowns:
+- 'Pins the whole TinyCBOR library''s official release 7.1, lightweight tag v7.1 and commit da6421f2b5b91e3468c0af7265117427ea73f19e.
+  7.1 is the release/tag identity: fixed CMakeLists.txt still says project VERSION 7.0, so binary or package version
+  consistency is not verified. Static inspection follows only cbor_encoder_init(&encoder, buffer, 9, 0) and exactly
+  one cbor_encode_uint(&encoder, value), mapped to RFC 8949 sections 3/3.1 major type 0 unsigned integers; older
+  RFC 7049 source comments do not establish full conformance to the newer edition. value is uint64_t in 0..18446744073709551615
+  inclusive. The caller supplies distinct non-overlapping live writable CborEncoder and genuine nine-byte buffer
+  objects without concurrent modification, with valid buffer+9 arithmetic. uint8_t is eight-bit unsigned char, uint64_t
+  occupies eight bytes, and the selected compiler/platform cbor_htonll path correctly produces network byte order.
+  would_overflow converts pointers separately to ptrdiff_t: the implementation''s converted end must be nonzero,
+  its integer difference from buffer exactly nine, and the subsequent subtraction defined without overflow. Writable
+  capacity alone does not establish these premises on every C platform. CBOR_ENCODER_WRITER_CONTROL has its default
+  value zero, flags is exactly zero, and no custom writer is enabled; other build configurations, portability and
+  pointer conversions are not verified. The source decrements remaining from two to one, then constructs and copies
+  one major type 0 item. Values in 0..23, 24..255, 256..65535, 65536..4294967295 and 4294967296..18446744073709551615
+  write respectively 1, 2, 3, 5 and 9 bytes. The first range embeds the value; other ranges start with 0x18, 0x19,
+  0x1a or 0x1b followed by 1, 2, 4 or 8 big-endian value bytes. Each range selects the shortest available integer
+  head, a local static deduction rather than complete deterministic-encoding validation. This bounded success branch
+  returns CborNoError and advances the output pointer by the encoded length. cbor_encoder_get_buffer_size with the
+  original buffer returns that length, and extra_bytes_needed is zero. Only that prefix is encoded data; the unwritten
+  suffix retains its prior contents and the entire nine-byte buffer must not be treated as the item. No NUL terminator,
+  container, tag or framing is appended; encoded data itself may contain zero bytes. Insufficient capacity, null
+  pointers, invalid objects, reuse/multiple encodings, writer callbacks, negatives, floats, strings/UTF-8, containers/duplicate
+  keys, decoding, JSON conversion and other major types are outside positive scope; unexamined capabilities are
+  not asserted absent. Ten selected complete pinned repository files were checked against Git blobs, byte counts
+  and SHA256 and read statically. Upstream unsigned boundary vectors and encodeOne are unexecuted recipes, not executed
+  tests or exhaustive proof. No upstream library, dependency, test or generator was installed, imported, built or
+  run. Release archives, the entire source tree, signatures, binary packages, cross-implementation interchange,
+  security, performance, production deployment and IA adoption are unverified; full RFC 8949 conformance is not
+  claimed. MIT records the fixed LICENSE declaration, not legal suitability.'
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / deliver_next_library_instance
+  reviewer: pending independent semantic review
