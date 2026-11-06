@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T06:41:37+00:00
+Document Updated At: 2026-11-06T12:36:06.566923+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / advance_independent_ia_work
-  Reviewer: Independent Agent — OpenAI / dot / review_payload_presence_evidence
+  Executor: Agent — OpenAI / dot / advance_transport_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_aioquic_handoff
   GitHub Actor: ff6962757
 -->
 
@@ -83,6 +83,8 @@ Latest Substantive Contribution:
 - 未回答：一个明确请求/响应流程是否按返回地址发出每个数据报、驱动所有必需事件/定时器，并在连接关闭时正确报告未完成请求？
 
 - 下一步研究判断：从现有 aioquic 两条 context 及同一版本内存交换测试定义梳理一个请求/响应和一个关闭路径的调用顺序、观察点与失败条件；先建立可检验配方，任何未来运行仍单列版本/依赖/信任配置，不从规范边继承部署安全。
+
+- **11月6日续证**：[请求完成与关闭责任研究](../01_Prior_Art/aioquic-request-closure-handoff-2026-11-06.zh-CN.md)已静态连接逐地址发送、timer/事件驱动和应用 waiter：示例已处理 ConnectionTerminated 的请求失败，不能再称其缺失；普通流 reset 的 H3 内部清理没有直接映射到示例请求 future。原请求夹具绕过目的地址路由且不在 transfer 中驱动 timer，不能代证完整集成。七项配方均 UNEXECUTED，实际交付、取消和关闭时序仍待明确配置后的观察；没有运行、扩展关系或改变安全结论。
 
 - 跨域边界：显式跨域为 transport 的 QUIC 与 trust 的 TLS13，经 quic_tls_security/quic_tls_version 连接。 RFC9846 已于 PR551 收录；RFC8446 的 superseded 说明已在当前对象，旧 RFC9001→8446 引用保持。不要再创建“补RFC9846/修注记”工作或自动重定向关系。
 
