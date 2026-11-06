@@ -1,0 +1,419 @@
+{
+  "title": "CloudEvents data presence across fixed entry points",
+  "ia_baseline": "6a76609fd995836f96aa6357b094b3d117343783",
+  "source_rechecked_at": "2026-11-06T06:41:37+00:00",
+  "evidence_level": "UNEXECUTED_SOURCE_DERIVATION",
+  "execution": {
+    "upstream_installed": false,
+    "upstream_imported": false,
+    "upstream_built": false,
+    "upstream_executed": false,
+    "events_transmitted": false
+  },
+  "scope": {
+    "js_version": "10.0.0",
+    "kotlin_version": "source 0.2.0",
+    "envelope_headers": {
+      "content-type": "application/cloudevents+json"
+    },
+    "js_receive": "HTTP.toEvent({headers, body: input_json}) then HTTP.structured(event)",
+    "js_control": "new CloudEvent(JSON.parse(input_json), false) then HTTP.structured(event)",
+    "kotlin": "JsonEventFormat.decodeFromString(input_json) then encodeToString(event)",
+    "observation": "Parse the emitted structured JSON and compare data member presence and JSON value. Do not test JS event hasOwnProperty(data) or full byte equality.",
+    "assumptions": [
+      "Fixed id/source/type/specversion/time/datacontenttype from each input; no optional extensions or data_base64.",
+      "Normal native JavaScript JSON binding at module initialization and at getVersion; CE_USE_BIG_INT is not the string true. No host modification, getter, proxy, or prototype pollution.",
+      "Surrounding parsing, context construction, time and validation steps succeed as specified; predictions describe selected payload branches, not a runtime success guarantee.",
+      "Kotlin decoded carrier and content type are not changed before re-encoding."
+    ],
+    "excluded": [
+      "binary or batch bindings",
+      "CloudEvents 0.3",
+      "data_base64 or conflicting fields",
+      "extension values",
+      "whole-event exact byte equality",
+      "arbitrary numeric precision",
+      "network delivery",
+      "package/build equivalence",
+      "full conformance",
+      "security",
+      "cross-implementation execution"
+    ]
+  },
+  "sources": [
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/message/http/index.ts",
+      "git_blob": "cdba2629a2e54b8028435c0c117139a042c269d1",
+      "bytes": 9651,
+      "sha256": "772578a8f60b22a4adf3a4d1aeb13b4f0cfd931964e6466903e09abe36bbc16d",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/message/http/index.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/message/http/headers.ts",
+      "git_blob": "b0cc519b912588225fbc9d3fcade218f99f64408",
+      "bytes": 7836,
+      "sha256": "15743a1598e133abaf75b469401b5a0dfd46e47dffa91d98360899e2c33a12a1",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/message/http/headers.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/event/cloudevent.ts",
+      "git_blob": "16c722b8240e0b759b829af4aa38d3c318245be5",
+      "bytes": 8418,
+      "sha256": "08505528484ac9bed9028437c93eb24d1bb27648ed873f02ec881c19c853577f",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/event/cloudevent.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/event/validation.ts",
+      "git_blob": "c5e81864a123fd9e5b403b7006849c23472f744e",
+      "bytes": 3977,
+      "sha256": "67303cea0730a59d5e4071e209f90bda64b23bec9cf3986932afe61f5e4bc504",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/event/validation.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/parsers.ts",
+      "git_blob": "4613a1ce09e0499094a15afc7a1ae3c4890b85e0",
+      "bytes": 3171,
+      "sha256": "f818f4e93a50d437b322a45f250265a87dee699567ae8d4faf94611a644e994b",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/parsers.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "src/constants.ts",
+      "git_blob": "dc8c5c8ea5e163030bc67ab455b6c469f0a3ac81",
+      "bytes": 1446,
+      "sha256": "656f7b975e6b01167e69395db3eb3d58d7a46778cb90a2171d81f984ed4cc4b0",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/src/constants.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "package.json",
+      "git_blob": "214d34a550f1df8a99c558a7d267b1d226d35034",
+      "bytes": 4826,
+      "sha256": "01b126b3e9fb9ae7e5de11620234f95bb756a34620dc290e7491f10b68d5038c",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/package.json"
+    },
+    {
+      "repository": "cloudevents/sdk-javascript",
+      "commit": "c23895145a2f055e8e90714401fc67252a0edf21",
+      "path": "test/integration/cloud_event_test.ts",
+      "git_blob": "84472070588c522bd2cbf97c64a9e7d4ea5bc3ab",
+      "bytes": 9164,
+      "sha256": "944ef8140bbc2356f5a72777c3462599fc451939aa11ec0b91e53c9f2f8c9e56",
+      "url": "https://github.com/cloudevents/sdk-javascript/blob/c23895145a2f055e8e90714401fc67252a0edf21/test/integration/cloud_event_test.ts"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt",
+      "git_blob": "4a2ccb9f4b446dc9d39dd5c09b1ffa41edf69ee5",
+      "bytes": 3473,
+      "sha256": "73f9a834af452e200d3f2882cea6977450277af456eb538aac8015d058b895a3",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonDataReader.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt",
+      "git_blob": "b7df6434e9d18a51faa1c2596406ca3ce5e62ed9",
+      "bytes": 3181,
+      "sha256": "d38b1e526e6da01acf52544bcc02496a76c528728320143a35654508c4785bdf",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDataCarrier.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt",
+      "git_blob": "e582fda3415effd1e0921242d22dbd4a96727bd0",
+      "bytes": 4150,
+      "sha256": "6e79386678c9f65111ec25383eb27f81c2300657e0233a67b0521ad57357ce8f",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventDecoder.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt",
+      "git_blob": "188fd8ec4db85cab95e93495608f2d49260d39cb",
+      "bytes": 5707,
+      "sha256": "d16af750bd1d25ae5c9276666a1211e0486836471a4bf80d5dacc46ee93dc679",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/EventEncoder.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt",
+      "git_blob": "ff1caddbdb649d08177aa5387b2d89cc0b78e035",
+      "bytes": 2103,
+      "sha256": "b2682a65772e02480d6416304442d076bf20cdbee60f17a2f083523ba9ecf389",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonEventFormat.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt",
+      "git_blob": "ed3e3db718d8ed2f8f8a1baf75873d82ed56b8d0",
+      "bytes": 558,
+      "sha256": "dfa5e569ba01622315303399bd3a9df2472a7a731996dc449db1b0c89513726a",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonContentType.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt",
+      "git_blob": "a15b96cc95f995f75ba954bcd3dd329f287d5eb6",
+      "bytes": 1633,
+      "sha256": "54e0c18a1d52129b110919c4295345743101fc0ffd0a1ffc349b110c1b06c5d9",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonFieldReader.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt",
+      "git_blob": "257fec51dab62446937467a325397d15a913c90b",
+      "bytes": 3724,
+      "sha256": "2857e9aaee8c08795d0b954353f806d90ce2e29a034d84aa53e538ed8f3bfcca",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/json/src/commonMain/kotlin/io/cloudevents/kotlin/json/JsonExtensionReader.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt",
+      "git_blob": "0502f9a5c5511e0152b88f29efbd4d5057101ca6",
+      "bytes": 4595,
+      "sha256": "89b83cc00fac76c5fef1990afb2509d3ea899c5281f39ee9179660800f20cfd7",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/CloudEventBuilder.kt"
+    },
+    {
+      "repository": "cloudevents/sdk-kotlin",
+      "commit": "27b718156fd9410a926e08f087ee67c7ba421c1a",
+      "path": "core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt",
+      "git_blob": "040e35d3e284454b29f02536b7b110ee912ae2a1",
+      "bytes": 5437,
+      "sha256": "ec914f1c12d6684e319d0f30a8a6e1a8b254893bf163c871d3b07340c5d3e36c",
+      "url": "https://github.com/cloudevents/sdk-kotlin/blob/27b718156fd9410a926e08f087ee67c7ba421c1a/core/src/commonMain/kotlin/io/cloudevents/kotlin/core/Validation.kt"
+    }
+  ],
+  "cases": [
+    {
+      "id": "absent",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\"}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      }
+    },
+    {
+      "id": "null",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":null}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": null,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": null,
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "false",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":false}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": false,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": false,
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "zero",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":0}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": 0,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": 0,
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "empty_string",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":\"\"}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": false,
+        "data_value": null,
+        "value_meaning": "not applicable because member absent"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": "",
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": "",
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "true",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":true}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": true,
+        "data_value": true,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": true,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": true,
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "one",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":1}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": true,
+        "data_value": 1,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": 1,
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": 1,
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "string_null",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":\"null\"}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": true,
+        "data_value": "null",
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": "null",
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": "null",
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "empty_object",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":{}}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": true,
+        "data_value": {},
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": {},
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": {},
+        "value_meaning": "literal JSON value"
+      }
+    },
+    {
+      "id": "empty_array",
+      "input_json": "{\"specversion\":\"1.0\",\"id\":\"ia-payload-presence-001\",\"source\":\"urn:interopatlas:payload-presence\",\"type\":\"org.interopatlas.payload.presence\",\"time\":\"2026-11-06T00:00:00.000Z\",\"datacontenttype\":\"application/json\",\"data\":[]}",
+      "status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "predicted_js_structured": {
+        "data_member_present": true,
+        "data_value": [],
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_js_direct_strict_false": {
+        "data_member_present": true,
+        "data_value": [],
+        "value_meaning": "literal JSON value"
+      },
+      "predicted_kotlin_decode_encode": {
+        "data_member_present": true,
+        "data_value": [],
+        "value_meaning": "literal JSON value"
+      }
+    }
+  ]
+}

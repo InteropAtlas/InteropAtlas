@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T06:24:52.696331+00:00
+Document Updated At: 2026-11-06T06:41:37+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
   Executor: Agent — OpenAI / dot / advance_independent_ia_work
-  Reviewer: Independent Agent — OpenAI / dot / review_srtp_evidence
+  Reviewer: Independent Agent — OpenAI / dot / review_payload_presence_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -827,3 +827,12 @@ industrial 的[单事件源码附录](../01_Prior_Art/wot-mqtt-crossdomain-evide
 [libSRTP 固定源码研究](../01_Prior_Art/libsrtp-index-window-boundary-2026-11-06.zh-CN.md)推进 media_network 行留下的 ROC/index/replay 问题：16位序号的32768半圈参与ROC估计，默认128窗口则另按索引差与已见标记决定重放检查。落后128的输入会被窗口拒绝；窗口内未见输入也只通过这一关，选定接收路径后面还有认证及其他失败出口。因此README的65k表述或头文件的32768合同都不能单独当作可接受重排量。两处原文差异保留，不替上游裁决普适阈值。
 
 十份选定完整文件核对字节/Git blob/SHA256，九组条件例全部未执行；上游测试定义中的过旧容忍、参考值重设与失败率判据亦与运行结果分开。没有库运行、包处理、密钥、网络、安全设置或新技术边。该结果连接媒体传输与trust的现有问题，提供可核查的责任边界，不替代实际交换或整体覆盖证据。
+
+
+## 2026-11-06 追加：CloudEvents 载荷在接收入口的存在性
+
+services 行原先缺少缺值/null 的同输入运行对照；新[固定源码研究](../01_Prior_Art/cloudevents-payload-presence-2026-11-06.zh-CN.md)没有把它冒充已完成实验，而是定位一个具体入口差异。JavaScript10.0.0 的 HTTP structured 接收先对映射成员做 truthy 判断，再无条件删除原成员；data 在映射表中。因此所选 null、false、0和空字符串在该入口被丢弃，重新 structured 输出不含 data；同值直接构造 CloudEvent 则按非 undefined 保留。空对象/空数组为正面对照。库级“能构造 null”和接收路径“保留 null”不是同一证据。
+
+Kotlin0.2.0 已知的成员存在性、NullData/JsonData及重编码路线构成静态对照。18份完整选定固定文件核 Git blob/字节数/SHA256；[十组精确输入和条件预测](../01_Prior_Art/cloudevents-payload-presence-2026-11-06.json)均为 UNEXECUTED_SOURCE_DERIVATION、actual_result=null，不是 SDK 输出。比较目标是输出 JSON 的 data 成员存在性和值，不能用 JS 事件对象 hasOwnProperty 或全事件字节相等替代。
+
+新增的是接收入口可定位的信息丢失点及直接构造反例，不是重新盘点领域、补能力标签或扩展技术关系。真实发布包执行、两端交换与业务含义仍待具体证据；JavaScript既有版次边界及 Kotlin settings.gradle.kts403/构建输入缺失保留。未执行上游、修改宿主设置或发送事件，也未改 Canonical、UI、维护机制、全域快照或任何既有 hold。
