@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T04:44:58+00:00
+Document Updated At: 2026-11-06T06:24:52.696331+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / trace_wot_mqtt_handoff
-  Reviewer: Independent Agent — OpenAI / dot / review_wot_mqtt_handoff
+  Executor: Agent — OpenAI / dot / advance_independent_ia_work
+  Reviewer: Independent Agent — OpenAI / dot / review_srtp_evidence
   GitHub Actor: ff6962757
 -->
 
@@ -820,3 +820,10 @@ IA 输入固定于 [`359258b67daa8d82db43a36d3288ccdbb816d891`](https://github.c
 industrial 的[单事件源码附录](../01_Prior_Art/wot-mqtt-crossdomain-evidence-2026-11-05.zh-CN.md#2026-11-06-附录单个事件-form-的发布订阅与调用方边界)补上了原 form→绑定问题的一段，而非再增加“支持 MQTT”的关系。固定 node-wot 与 MQTT.js 中，生成事件 form 的 mqv:qos 被发布侧采用，但消费订阅没有转交此字段；新订阅等待 SUBACK，错误经带 packet 的包装传播，grants 则未进入 WoT 返回值。已有订阅短路可以没有新 ACK；精确 Map 查找也不能替代过滤器匹配。
 
 因此 TD、订阅 Promise、broker 接受过滤器、消息回调与 value() 解码校验是不同观察点。该静态分解连接描述、表示和工业交互责任，不证明实际 QoS、设备语义或端到端成功。前文历史输入、运行结果、原始来源和所有 hold 保留；没有改 Canonical、领域导航、总体设计或维护机制，也没有新建全局快照。实际环境/依赖字节、授权连接与参与者观察仍是后续证据条件，不因这次研究而自动获准。
+
+
+## 2026-11-06 追加：媒体包索引估计与重放接纳的不同条件
+
+[libSRTP 固定源码研究](../01_Prior_Art/libsrtp-index-window-boundary-2026-11-06.zh-CN.md)推进 media_network 行留下的 ROC/index/replay 问题：16位序号的32768半圈参与ROC估计，默认128窗口则另按索引差与已见标记决定重放检查。落后128的输入会被窗口拒绝；窗口内未见输入也只通过这一关，选定接收路径后面还有认证及其他失败出口。因此README的65k表述或头文件的32768合同都不能单独当作可接受重排量。两处原文差异保留，不替上游裁决普适阈值。
+
+十份选定完整文件核对字节/Git blob/SHA256，九组条件例全部未执行；上游测试定义中的过旧容忍、参考值重设与失败率判据亦与运行结果分开。没有库运行、包处理、密钥、网络、安全设置或新技术边。该结果连接媒体传输与trust的现有问题，提供可核查的责任边界，不替代实际交换或整体覆盖证据。
