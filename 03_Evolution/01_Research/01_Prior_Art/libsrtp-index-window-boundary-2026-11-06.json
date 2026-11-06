@@ -1,0 +1,274 @@
+{
+  "title": "libSRTP 2.8.1 packet-index estimation and replay-window boundary",
+  "baseline": "af2f5502ea67820696da5629ff6839534257127e",
+  "upstream_commit": "6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa",
+  "recorded_at": "2026-11-06T06:23:02.366089+00:00",
+  "evidence_kind": "Fixed source inspection and unexecuted conditional derivation",
+  "source_verification": [
+    {
+      "path": "README.md",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/README.md",
+      "sha256": "62b2d8688ecdd6782c2eedac738ac6ba0b77593dadbad9b01e1f92618d3ef25f",
+      "git_blob": "66a0013072f74dfd5303fc52334475d6e788ab42",
+      "bytes": 24588
+    },
+    {
+      "path": "include/srtp.h",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/include/srtp.h",
+      "sha256": "e4ac6bbeb78f9101e2e7c9397a4acd9e31d1e5288c22d2106e77d1b2dfe7a3c5",
+      "git_blob": "d1098fbd08ae474e3e1e4e168bde82c9ecd2bb5b",
+      "bytes": 73695
+    },
+    {
+      "path": "crypto/include/rdbx.h",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/crypto/include/rdbx.h",
+      "sha256": "cdac63d072ce474153eb1fc348d7a78145c1025e61a0637200e9dfafa64cc0de",
+      "git_blob": "2194178ee2ab3f4cc980a0af81c375d32879ce88",
+      "bytes": 6762
+    },
+    {
+      "path": "crypto/replay/rdbx.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/crypto/replay/rdbx.c",
+      "sha256": "7cb0c4220facb8983347fd497b29ea5f4236c84c40293d13f98daf7caea886b1",
+      "git_blob": "e12005cd42363cd96c1774007b68a15db24ea699",
+      "bytes": 11699
+    },
+    {
+      "path": "srtp/srtp.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/srtp/srtp.c",
+      "sha256": "c10dd1db5296d45bd323ded2a1a37e65d09cb07a39a1cf71bb5147923f9d18ab",
+      "git_blob": "397f4cb0561dd0c9ce83850ef77cab4c707f58a5",
+      "bytes": 174513
+    },
+    {
+      "path": "test/rdbx_driver.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/test/rdbx_driver.c",
+      "sha256": "ff15918e371259116247a47e3bae592b3a6927f1939717cdd2b124d9de5dbddd",
+      "git_blob": "2cb676f0f77751f11dea24180b2a97d4fd8023a8",
+      "bytes": 9967
+    },
+    {
+      "path": "test/roc_driver.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/test/roc_driver.c",
+      "sha256": "2ebaa19dc9bb931ec6396bd9aec49fa5ba1952ac6c9c4abd78a06e8dd39d0b79",
+      "git_blob": "11d1bbb0c3c86217f3da5bb844a5859aec003b99",
+      "bytes": 4990
+    },
+    {
+      "path": "test/ut_sim.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/test/ut_sim.c",
+      "sha256": "8a8095ee1c2f161e57fdd1df7953e57f01b51276c9e8336d7bcf825ec16b609d",
+      "git_blob": "98d9ab283b49b400811d7b3eb2f9e780772fb792",
+      "bytes": 2787
+    },
+    {
+      "path": "test/ut_sim.h",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/test/ut_sim.h",
+      "sha256": "6c7cc15e97ee5383e4e84bcfc8f84b7a29ef401e6c50ca98f18de970bac22837",
+      "git_blob": "e678b5fdf7e4df7948b7d56061032281ee4b83ab",
+      "bytes": 2386
+    },
+    {
+      "path": "crypto/math/datatypes.c",
+      "source_url": "https://github.com/cisco/libsrtp/blob/6ff02afa8d2dc3f2e8896af391d137c1c66ff6fa/crypto/math/datatypes.c",
+      "sha256": "5568bdd99e1a1b5bc03abea94118ba406c00bcfc33c2cd46aa838bb9baa14d9d",
+      "git_blob": "52c713603f58edd8ed9685db5fd121b96a1fb64d",
+      "bytes": 14544
+    }
+  ],
+  "scope": {
+    "sequence_bits": 16,
+    "no_64bit_math": false,
+    "roc_test": false,
+    "pending_roc": 0,
+    "window_policy_value": 0,
+    "effective_window_length": 128,
+    "receiver": "Existing RTP receiver stream; non-GCM path with authentication enabled; valid call inputs and preceding steps successful",
+    "excluded": [
+      "SRTCP",
+      "AEAD/GCM",
+      "explicit ROC update",
+      "provisional stream",
+      "ROC wraparound",
+      "concurrent calls",
+      "cryptographic primitive review",
+      "deployment recommendation"
+    ]
+  },
+  "illustrative_cases": [
+    {
+      "id": "oldest_clear_slot",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 1000,
+      "local_index": 66536,
+      "incoming_seq": 873,
+      "window_length": 128,
+      "slot_state": "clear",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 66409,
+        "delta": -127,
+        "replay_check": "srtp_err_status_ok",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "same_slot_already_seen",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 1000,
+      "local_index": 66536,
+      "incoming_seq": 873,
+      "window_length": 128,
+      "slot_state": "set",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 66409,
+        "delta": -127,
+        "replay_check": "srtp_err_status_replay_fail",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "just_outside_window",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 1000,
+      "local_index": 66536,
+      "incoming_seq": 872,
+      "window_length": 128,
+      "slot_state": "outside",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 66408,
+        "delta": -128,
+        "replay_check": "srtp_err_status_replay_old",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "current_index_seen",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 1000,
+      "local_index": 66536,
+      "incoming_seq": 1000,
+      "window_length": 128,
+      "slot_state": "set",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 66536,
+        "delta": 0,
+        "replay_check": "srtp_err_status_replay_fail",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "forward_rollover",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 65530,
+      "local_index": 131066,
+      "incoming_seq": 5,
+      "window_length": 128,
+      "slot_state": "ahead",
+      "source_expected": {
+        "estimated_roc": 2,
+        "estimated_index": 131077,
+        "delta": 11,
+        "replay_check": "srtp_err_status_ok",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "previous_rollover_clear_slot",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 2,
+      "local_seq": 5,
+      "local_index": 131077,
+      "incoming_seq": 65530,
+      "window_length": 128,
+      "slot_state": "clear",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 131066,
+        "delta": -11,
+        "replay_check": "srtp_err_status_ok",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "half_range_tie_low_local",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 1000,
+      "local_index": 66536,
+      "incoming_seq": 33768,
+      "window_length": 128,
+      "slot_state": "ahead",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 99304,
+        "delta": 32768,
+        "replay_check": "srtp_err_status_ok",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "half_range_tie_high_local",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 1,
+      "local_seq": 40000,
+      "local_index": 105536,
+      "incoming_seq": 7232,
+      "window_length": 128,
+      "slot_state": "outside",
+      "source_expected": {
+        "estimated_roc": 1,
+        "estimated_index": 72768,
+        "delta": -32768,
+        "replay_check": "srtp_err_status_replay_old",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    },
+    {
+      "id": "initial_zero_state",
+      "execution_status": "UNEXECUTED_SOURCE_DERIVATION",
+      "actual_result": null,
+      "local_roc": 0,
+      "local_seq": 0,
+      "local_index": 0,
+      "incoming_seq": 65000,
+      "window_length": 128,
+      "slot_state": "ahead",
+      "source_expected": {
+        "estimated_roc": 0,
+        "estimated_index": 65000,
+        "delta": 65000,
+        "replay_check": "srtp_err_status_ok",
+        "public_api_result": "NOT_DETERMINED"
+      }
+    }
+  ],
+  "verification_boundary": {
+    "upstream_installed": false,
+    "upstream_imported": false,
+    "upstream_built": false,
+    "upstream_executed": false,
+    "upstream_tests_executed": false,
+    "packet_processing": false,
+    "keys_generated_or_used": false,
+    "network_telemetry": false,
+    "local_checks": "Selected UTF-8 bytes, byte count, Git blob and SHA256 checked. Standard-library arithmetic checked hand-written example identities and window predicates; it is not execution of upstream functions or public API.",
+    "limitations": "Selected source files only; no whole-tree/release/archive/signature/build equivalence or security certification. Existing README/header mismatch is retained. Test definitions are not test outcomes."
+  }
+}
