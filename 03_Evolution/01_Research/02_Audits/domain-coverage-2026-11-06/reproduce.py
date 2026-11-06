@@ -251,7 +251,7 @@ def markdown(r):
         '复用既有加载、语义、关系与投影代码；没有新 Engine、JSON API 合同、页面或 CI 维护要求。snapshot.json 是日期化研究证据，不是第二事实源。它不会自动跟随 main 更新。', '',
         '在具有完整历史的本地仓库创建冻结 checkout，然后用当前目录的脚本生成到临时目录：', '', '```bash',
         f'git worktree add --detach /tmp/ia-coverage-20261106 {BASELINE}',
-        'python 03_Evolution/01_Research/02_Audits/domain-coverage-2026-11-06/reproduce.py \\',
+        'python3 03_Evolution/01_Research/02_Audits/domain-coverage-2026-11-06/reproduce.py \\',
         '  --root /tmp/ia-coverage-20261106 --output /tmp/ia-coverage-output',
         '```', '',
         '依赖使用冻结 Engine 的 requirements.txt。脚本拒绝错误提交、修改过的输入或新增的输入文件；验收审计缺少冻结 Git 历史时会失败，不猜测。', '',

@@ -1032,7 +1032,7 @@ Latest Substantive Contribution:
 
 ```bash
 git worktree add --detach /tmp/ia-coverage-20261106 545b0cccee3f377d968315defc9565eb5b9aafb8
-python 03_Evolution/01_Research/02_Audits/domain-coverage-2026-11-06/reproduce.py \
+python3 03_Evolution/01_Research/02_Audits/domain-coverage-2026-11-06/reproduce.py \
   --root /tmp/ia-coverage-20261106 --output /tmp/ia-coverage-output
 ```
 
