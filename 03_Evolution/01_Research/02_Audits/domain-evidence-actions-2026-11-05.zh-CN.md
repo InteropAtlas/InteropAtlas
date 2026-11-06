@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T04:03:11+00:00
+Document Updated At: 2026-11-06T04:17:39+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / resume_integrated_basemap
-  Reviewer: Independent semantic and source reviewer — OpenAI / dot / assess_fuji_domain_integration
+  Executor: Agent — OpenAI / dot / deepen_vc_schema_boundary
+  Reviewer: Independent Agent — OpenAI / dot / review_vc_schema_boundary
   GitHub Actor: ff6962757
 -->
 
@@ -108,6 +108,8 @@ Latest Substantive Contribution:
 - 证据入口：[vc2-verification-responsibilities-2026-10-31.zh-CN.md](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/03_Evolution/01_Research/01_Prior_Art/vc2-verification-responsibilities-2026-10-31.zh-CN.md)。
 
 - 补充实现来源：[digitalbazaar_vc.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/01_Objects/digitalbazaar_vc.yaml)。
+
+- **后续附记（2026-11-06，原问题与取样日期保留）**：同一固定 7.3.0 源码的[credentialSchema 续证](../01_Prior_Art/vc2-verification-responsibilities-2026-10-31.zh-CN.md#后续附记credentialschema-声明context-预检与结构校验2026-11-06)已把问题收窄到声明、context 预检及实际 schema 评估的责任交接。§4.11 要求每项已声明 schema 有 `type` 和 URL `id`；包装层 `mustHaveType` 不含 `credentialSchema`，context helper 只比对首项标识，没有直接 schema 校验分支。这不是完整库不符合性的裁决：§1.3 允许忽略可选属性，A.9/B.4 为非规范性说明，委派和具体应用仍未审。三个缺 id／缺 type／字段齐备的片段均 **UNEXECUTED**，不声称包装层或签名验证成功/失败。表示的术语映射不能替代结构约束或业务接纳；下一步未知是明确 schema 类型、固定依赖及调用方后的实际评估责任，不是重做 wrapper 回填、扩展 implements 或强加 JSON-LD→RDF→SHACL 管道。
 
 
 ### syntax：两个实现都连到 CBOR，是否足以推断字节/值无损交换或确定性编码？
