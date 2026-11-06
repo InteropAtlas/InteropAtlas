@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T12:36:06.566923+00:00
+Document Updated At: 2026-11-06T16:02:34+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / advance_transport_evidence
-  Reviewer: Independent Agent — OpenAI / dot / review_aioquic_handoff
+  Executor: Agent — OpenAI / dot / advance_authorized_work
+  Reviewer: Independent Agent — OpenAI / dot / review_loudness_comparison
   GitHub Actor: ff6962757
 -->
 
@@ -64,6 +64,8 @@ Latest Substantive Contribution:
 - 未回答：若要比较两个已有库在同一测量任务的结果，需要怎样对齐 PCM 布局、帧数、声道映射、门控/尾块、返回码与非有限值，才能解释差异而非把 API success 当测量有效？
 
 - 下一步研究判断：先对照已有 Rust 静态条件与 libebur128 的实际命名观察，列明同一可信 48kHz 立体声输入的表示转换、完整400ms块、finish/返回码和预期读数依据；只对还没有共同证据的比较设计后续观察，不重跑已记录探针来制造进度。
+
+- **11 月 6 日续证**：[两库比较前提研究](../01_Prior_Art/loudness-comparison-boundaries-2026-11-06.zh-CN.md)已把同一 48 kHz / f32 立体声输入的布局、完整窗口数与检查点分开：Rust finish 才计算缓存且封口，C global 查询不封口并保留未满尾段。19,199 至 24,000 帧的窗口数只是静态推导，不是合格块数或读数。两库门限分别为 LKFS 域严格 > 与能量域 >=，但尚无触达相等分支的 PCM 或实测差值。四项精确配方均 UNEXECUTED，已有 C 有限运行证据保留；未运行 Rust、下载受阻资源或新增标准符合性关系。原下一步的比较前提已得到源码回答，实际数值对照仍未知。
 
 - 跨域边界：已记录的 measurement↔editing 连接是 R128→BS1770；测量、施加增益与交付要求必须分开。 libebur128 官方 conformance suite 明确 NOT RUN；libsndfile 获取曾被拒绝/不可用，EBU音频下载涉及接受条款。不得把下载/官方套件执行列为立即授权动作，也不把合成波形等同官方向量。si_brochure_9 仍 identity_risk，具体修订及语言待固定。
 

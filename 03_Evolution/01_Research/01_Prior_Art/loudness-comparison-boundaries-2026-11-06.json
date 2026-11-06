@@ -1,0 +1,220 @@
+{
+  "study": "loudness-comparison-boundaries-2026-11-06",
+  "evidence_kind": "fixed-source comparison; no upstream execution",
+  "ia_baseline": "ec90b3c983a84e7c7cf885156a268f7343f26765",
+  "sources": [
+    {
+      "repository": "fishloa/rust-broadcast",
+      "commit": "579ad2c08b675fc52dee6db4ecb16b3038bb19ce",
+      "path": "broadcast-loudness/src/loudness_meter.rs",
+      "url": "https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/loudness_meter.rs",
+      "git_blob": "02f936336c8edd3fa55896d48c3d3d4762448b26",
+      "bytes": 41921,
+      "sha256": "3ca67698eb46e96f3ff13898b574afeb60fc8bb7a5f0d8fd0493027fbac15f36",
+      "inspected_on": "2026-11-06"
+    },
+    {
+      "repository": "fishloa/rust-broadcast",
+      "commit": "579ad2c08b675fc52dee6db4ecb16b3038bb19ce",
+      "path": "broadcast-loudness/src/channel_layout.rs",
+      "url": "https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/channel_layout.rs",
+      "git_blob": "6ea47557b2597a9c669c65d1f551c1961fd6b792",
+      "bytes": 3556,
+      "sha256": "5bf9ec103f87f180cc00e75c9a6d904e5a182a7294489a91011f9051984e12f5",
+      "inspected_on": "2026-11-06"
+    },
+    {
+      "repository": "fishloa/rust-broadcast",
+      "commit": "579ad2c08b675fc52dee6db4ecb16b3038bb19ce",
+      "path": "broadcast-loudness/src/filter.rs",
+      "url": "https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/src/filter.rs",
+      "git_blob": "86d86dfeb33320a005d13af7f1d9051647201710",
+      "bytes": 5313,
+      "sha256": "2f5413c8a36e1f54bb37f80ac9d32e3c978d1c48cffe1c50f2471563da021815",
+      "inspected_on": "2026-11-06"
+    },
+    {
+      "repository": "fishloa/rust-broadcast",
+      "commit": "579ad2c08b675fc52dee6db4ecb16b3038bb19ce",
+      "path": "broadcast-loudness/Cargo.toml",
+      "url": "https://github.com/fishloa/rust-broadcast/blob/579ad2c08b675fc52dee6db4ecb16b3038bb19ce/broadcast-loudness/Cargo.toml",
+      "git_blob": "7c868b81fd1ad2d7898e9f8a42537a864306a35d",
+      "bytes": 1090,
+      "sha256": "c7b8a48427c432634f8bdd44967440d5ab60d5cae6591bb3f8796db8c4871fe8",
+      "inspected_on": "2026-11-06"
+    },
+    {
+      "repository": "jiixyj/libebur128",
+      "commit": "67b33abe1558160ed76ada1322329b0e9e058b02",
+      "path": "ebur128/ebur128.c",
+      "url": "https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/ebur128.c",
+      "git_blob": "6550e899f1d2589c6768e2ec52fe4cbc97b4b7a5",
+      "bytes": 53176,
+      "sha256": "c2fc562f1088cacab4d21250b6e04996ef36c7694ea901e08cc4d64eb542b78d",
+      "inspected_on": "2026-11-06"
+    },
+    {
+      "repository": "jiixyj/libebur128",
+      "commit": "67b33abe1558160ed76ada1322329b0e9e058b02",
+      "path": "ebur128/ebur128.h",
+      "url": "https://github.com/jiixyj/libebur128/blob/67b33abe1558160ed76ada1322329b0e9e058b02/ebur128/ebur128.h",
+      "git_blob": "707bec00c44b47b8bd5ad5077691c08792bba4f5",
+      "bytes": 15547,
+      "sha256": "a988fa03828bcdd6258e6c52300d709a58727272a9ce6cd3fbf351f090517111",
+      "inspected_on": "2026-11-06"
+    }
+  ],
+  "source_scope": "Complete selected file bytes verified; semantic review limited to cited paths, not whole-file or whole-repository conformance.",
+  "upstream_execution": "NOT RUN",
+  "audio_generation": "NOT RUN",
+  "audio_processing": "NOT RUN",
+  "numeric_comparison_result": null,
+  "scope": {
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "sample_type": "same finite f32 values in [-1, 1]",
+    "rust": "0.5.0 / Stereo / push_stereo_planar_f32 / finish / integrated_lufs",
+    "c": "v1.2.6 / EBUR128_MODE_I / default L,R / non-histogram / unchanged history limit / add_frames_float / loudness_global",
+    "preconditions": [
+      "New valid states; no reset, allocation failure, history truncation or upstream error.",
+      "Every input call succeeds; buffer lengths, frame counts and layout are correct.",
+      "Do not infer numeric equality, finite loudness, accuracy, conformance or normative superiority."
+    ]
+  },
+  "static_frame_schedule": [
+    {
+      "frames": 19199,
+      "complete_window_count_before_gating": 0,
+      "incomplete_100ms_tail_frames": 4799,
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "frames": 19200,
+      "complete_window_count_before_gating": 1,
+      "incomplete_100ms_tail_frames": 0,
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "frames": 19201,
+      "complete_window_count_before_gating": 1,
+      "incomplete_100ms_tail_frames": 1,
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "frames": 23999,
+      "complete_window_count_before_gating": 1,
+      "incomplete_100ms_tail_frames": 4799,
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "frames": 24000,
+      "complete_window_count_before_gating": 2,
+      "incomplete_100ms_tail_frames": 0,
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    }
+  ],
+  "static_findings": [
+    {
+      "id": "F1",
+      "claim": "At 48 kHz both selected schedules form the first complete 400 ms window at 19200 frames and another every 4800 frames. Counts are before gating, not stored or accepted block counts.",
+      "sources": [
+        "broadcast-loudness/src/loudness_meter.rs#L300-L414",
+        "ebur128/ebur128.c#L454-L508",
+        "ebur128/ebur128.c#L978-L1045"
+      ]
+    },
+    {
+      "id": "F2",
+      "claim": "Rust finish computes cached integrated loudness, discards an incomplete 100 ms sub-block and seals the instance. C global queries stored block energy without sealing or clearing unfinished input.",
+      "sources": [
+        "broadcast-loudness/src/loudness_meter.rs#L512-L639",
+        "ebur128/ebur128.c#L1090-L1180"
+      ]
+    },
+    {
+      "id": "F3",
+      "claim": "Rust uses strict LKFS-domain > gates; selected non-histogram C path uses inclusive energy-domain >= gates. No concrete PCM was shown to reach an equality branch or produce different library outputs.",
+      "sources": [
+        "broadcast-loudness/src/loudness_meter.rs#L588-L617",
+        "broadcast-loudness/src/loudness_meter.rs#L683-L690",
+        "ebur128/ebur128.c#L512-L516",
+        "ebur128/ebur128.c#L708-L778",
+        "ebur128/ebur128.c#L1117-L1152"
+      ]
+    },
+    {
+      "id": "F4",
+      "claim": "Two sequential Rust biquads, combined C filter coefficients and distinct energy/loudness arithmetic do not establish bitwise numerical equivalence. No numerical difference was measured.",
+      "sources": [
+        "broadcast-loudness/src/filter.rs#L81-L95",
+        "broadcast-loudness/src/loudness_meter.rs#L104-L121",
+        "ebur128/ebur128.c#L286-L306",
+        "ebur128/ebur128.c#L601-L686"
+      ]
+    }
+  ],
+  "hypothetical_input": {
+    "status": "NOT GENERATED",
+    "n_starts_at": 0,
+    "left": "0.25 for even n; -0.25 for odd n",
+    "right": "0.125 for even floor(n/2); -0.125 for odd floor(n/2)",
+    "notes": "All amplitudes are exactly representable in f32. This is not an official or calibrated loudness reference."
+  },
+  "recipes": [
+    {
+      "id": "P1",
+      "name": "Fresh-state prefix comparison",
+      "frames": [
+        19199,
+        19200,
+        19201,
+        23999,
+        24000
+      ],
+      "calls": "Fresh state per prefix and per library; identical f32 samples; Rust finish then getter; C add then global query.",
+      "observe": "Return status and numeric category separately; complete window counts are static, LUFS values unknown.",
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "id": "P2",
+      "name": "One-shot versus chunked input",
+      "frames": 24000,
+      "chunks": [
+        19201,
+        4799
+      ],
+      "calls": "Use fresh states, compare one-shot and split input, Rust finish only after the last chunk.",
+      "observe": "Tail retention across successful input calls; actual chunked numeric equality remains untested.",
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "id": "P3",
+      "name": "Non-sealing C query checkpoints",
+      "calls": "C add 19201, global query, add 4799, global query; Rust two separate fresh instances, finished at 19201 and 24000.",
+      "observe": "Compare matching prefixes rather than treating Rust finish as a reusable query.",
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    },
+    {
+      "id": "P4",
+      "name": "Finish negative control",
+      "calls": "Rust add 19201, finish, attempt add 4799. Keep separate from C query-then-continue.",
+      "observe": "Source-derived expected Error::Finished; no actual call or result.",
+      "execution_status": "UNEXECUTED",
+      "actual_result": null
+    }
+  ],
+  "retained_boundaries": [
+    "Rust upstream execution remains absent; historical finite C builds/probes are retained and not rerun.",
+    "No crates API, libsndfile acquisition, EBU audio, conformance suite or acceptance of download terms.",
+    "No Canonical, relation, taxonomy, page, governance, workflow or maintenance change.",
+    "No retry or bypass of unrelated held operations."
+  ]
+}
