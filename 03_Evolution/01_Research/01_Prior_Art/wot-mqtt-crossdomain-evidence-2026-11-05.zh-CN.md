@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Prior Art Comparison
 Document Created At: 2026-11-05T05:32:33.298829+00:00
-Document Updated At: 2026-11-05T05:35:24.767450+00:00
+Document Updated At: 2026-11-06T04:44:58+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / advance_coverage_basemap
-  Reviewer: Agent — OpenAI / dot / review_wot_crossdomain (independent)
+  Executor: Agent — OpenAI / dot / trace_wot_mqtt_handoff
+  Reviewer: Independent Agent — OpenAI / dot / review_wot_mqtt_handoff
   GitHub Actor: ff6962757
 -->
 
@@ -130,3 +130,55 @@ print(json.dumps({'objects':[index[key] for key in sorted(ids)],'relations':sele
 | [01_State/02_Relations/protocol-data-representation.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/ff6ac83a2e5ad2ae1fdb87dd44c2d6980919f3e1/01_State/02_Relations/protocol-data-representation.yaml) | `480c477ce97168cb6589c62fbca0ed005196c7af8397291ff820b513dc07417f` |
 | [01_State/02_Relations/wot-implementations.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/ff6ac83a2e5ad2ae1fdb87dd44c2d6980919f3e1/01_State/02_Relations/wot-implementations.yaml) | `7b477c2876faa541b505fd56e0847afe11d0f9118719823122d3edfc91dca263` |
 | [01_State/Inbox/relations/intake-coverage-20260913.yaml](https://github.com/InteropAtlas/InteropAtlas/blob/ff6ac83a2e5ad2ae1fdb87dd44c2d6980919f3e1/01_State/Inbox/relations/intake-coverage-20260913.yaml) | `45d0270be0bdfed6609b0ac17ae2fe985804d598e9f99a21bdcfc87c9c796efc` |
+
+
+## 2026-11-06 附录：单个事件 form 的发布、订阅与调用方边界
+
+本次增量基于 IA `847aac759caab42f0e207aea31294b0c1443ffdb`，仅静态读取既有固定 node-wot 0.9.2 与 MQTT.js 5.13.0 源码，不改前文历史基线、测试或指纹。新的发现不是再说“没有端到端测试”：**同一个生成事件 form 的 QoS 字段在发布侧被采用，在消费订阅侧没有传入；首次订阅会等待 SUBACK，但其授予值没有进入 WoT Subscription 返回值。** 这把原来的组合未知缩小到具体参数与返回值交接，仍不证明任何实际 MQTT 运行。
+
+### 假设输入与前置条件（全部 UNEXECUTED）
+
+只选一个事件：Thing title 为 `pump`，事件名 `alarm`，事件 data schema 为 `{"type":"integer"}`，应用拟发出值 `7`。暴露端配置为 `uri="mqtt://broker.example:1883"`、`protocolVersion=5`、`selfHost=false`；假定其外部连接已经成功、Thing 名不冲突、相关表与事件存在、监听器注册成功，且默认 JSON codec 未被替换。`broker.example` 只是说明地址，不是已连接或授权的部署目标。
+
+消费端是**另一个角色**：假定有已注册的 MQTT ClientFactory，其创建的 MqttClient 配置也显式为 `protocolVersion=5`，接收该生成 TD、选择无 URI template 的事件 form，且没有显式 `formIndex` 覆盖、旧连接池或重复订阅。服务端配置不会自动替消费端配置协议版本。连接、ACL、MQTT.js 实际安装字节和运行环境均未验证；默认工厂、凭据取得、连接握手、底层包解析/网络传输不是本次证明范围。
+
+### 选中交互的有限源码链
+
+1. **生成描述不是订阅确认。** [exposeEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-broker-server.ts#L178-L206) 对 `pump/alarm` 生成主题 `pump/events/alarm`、href `mqtt://broker.example:1883/pump/events/alarm`、contentType `application/json`、op `["subscribeevent","unsubscribeevent"]` 及 `mqv:qos="2"`。它注册的是 ExposedThing 的本地事件监听器，不是在此替消费端向 broker 订阅。[expose](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-broker-server.ts#L91-L127) 的 async `expose()` 调用 `exposeEvent()` 后发布 TD，既没有等待消费端 SUBACK，也没有等待该事件注册返回的 Promise；甚至 broker 未初始化时直接返回。因此不能拿 expose Promise 完成作为消费者可收到事件的证明。
+
+2. **op 选择与 href 选题是不同步骤。** [findForm](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/consumed-thing.ts#L396-L436) 的无显式 formIndex 路径按操作与 scheme 找 form，[subscribeEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/consumed-thing.ts#L816-L869) 调用 `getClientFor(...,"subscribeevent",...)` 后等待 `subscribeResource`。[subscribeResource](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-client.ts#L57-L90) 从 href 的 host 形成 broker URI，以 `pathname.slice(1)` 形成 filter。本例为 `pump/events/alarm`。该表达式是 `pathname.slice(1) ?? form["mqv:filter"]`，空字符串也不是 null/undefined，因此不能假定一个只有 mqv:filter 的 form 会自动回退到该字段；这是选题表达式的范围，不是本例运行观察。
+
+3. **生成 QoS 不等于订阅请求 QoS。** [pool.subscribe](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-message-pool.ts#L47-L69) 在本地 Map 登记 filter 与回调，随后 `await this.client.subscribeAsync(filters)`，没有传入 form 的 `mqv:qos`，也没有返回 grants。[subscribe 默认选项](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L1149-L1203) 的缺省订阅选项是 `qos:0`。相比之下，[exposeEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-broker-server.ts#L178-L206) 发布事件时传入 `mapQoS(form["mqv:qos"])`，[mapQoS](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/util.ts#L22-L36) 把字符串 `"2"` 转成数值 `2`。可得的源码结论是本例两端请求参数不同；不是已经观测到某个 broker 的最终投递 QoS，也不能由 form 的 `"2"` 许诺消费端端到端 QoS2。
+
+4. **首次订阅的成功/失败确实有 ACK 路径。** 在前述新订阅条件下，[订阅等待与回调](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L1229-L1314) 建立按 messageId 等待的 SUBSCRIBE Promise。[SUBACK handler](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/handlers/ack.ts#L119-L145) 检查 `packet.granted` 各值的 `0x80` 位；失败时构造含理由名称的 Error 并设置 code，再回调。[订阅等待与回调](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L1229-L1314) 把失败包装为 `ErrorWithSubackPacket`；[ErrorWithSubackPacket](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/shared.ts#L45-L56) 只显式保留 message 与 packet，不复制原 Error.code。[subscribeAsync](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L1331-L1353) 拒绝该错误或成功返回 grants；池与 `subscribeResource` 都 await 它，[subscribeEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/consumed-thing.ts#L816-L869) 只在成功后创建 WoT Subscription。因此不能说“SUBACK 拒绝被无条件当成功”，也不能许诺调用方顶层 `.code` 仍在；在这条失败路径中可以定位的是错误消息及 `.packet.granted`，不是本次实测异常。连接池的客户端 `error` 事件另经 errors Map 转发给 errorListener；它不等于此次 subscribe Promise 的拒绝通道。
+
+5. **Promise 完成还不等于 payload 已送达或被验证。** 在已注册监听器、应用随后 `emitEvent("alarm",7)` 的假设下，[emitEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/exposed-thing.ts#L154-L161) 进入 [notify](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/protocol-listener-registry.ts#L72-L95)，再经 [valueToContent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/content-serdes.ts#L160-L194) 和 [JsonCodec.valueToBytes](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/codecs/json-codec.ts#L58-L65) 的 `JSON.stringify` / `Buffer.from`，源码推导本例负载为 UTF-8 文本 `7`（单字节 `0x37`）。事件 listener 将 buffer 交给 broker client 的 `publish`，使用前述 QoS2 参数；此调用未把发布确认回传给 `emitEvent`。若 MQTT.js 后来发出该 exact topic 的 message 事件，[pool 消息/错误分发](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-message-pool.ts#L26-L44) 的 `subscribers.get(receivedTopic)` 才找到本例回调，[subscribeResource](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-client.ts#L57-L90) 将负载按 form contentType 包成 Content；[subscribeEvent](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/consumed-thing.ts#L816-L869) 把它包装为 InteractionOutput 给 listener。只有调用 `value()` 才在 [InteractionOutput.value](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/interaction-output.ts#L82-L142) 中读取、解码并交给 Ajv 校验 schema；Ajv 内部行为与实际输出未执行。订阅成功本身不验证设备语义、单位、事件发生、负载完整性或 data schema。
+
+### 同一订阅入口的两个限定分支
+
+- **已有订阅不保证新 SUBACK。** [已有订阅短路](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts#L1167-L1226) 在已记住相同/不低 QoS 且无强制 resubscribe 时不添加请求；空 subs 直接 `callback(null,[])`，不发送新 SUBSCRIBE。因此“await subscribeResource 完成意味着此次一定收到新 SUBACK”只在排除该分支后才成立。池自身对重复 filter 保留原回调并警告，并非为第二个调用方自动建立独立交付；本例排除了重复状态。
+- **SUBACK 接受过滤器不等于池能分发匹配消息。** 若仅把消费 form 的 href 路径改为 `pump/events/+`（仍是同一事件订阅的未执行变体，不是生成 form），并假定 broker 接受过滤器且将 `pump/events/alarm` 消息交给 MQTT.js，则 [pool 消息/错误分发](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-message-pool.ts#L26-L44) 用完整 receivedTopic 精确查 Map；只登记 `pump/events/+` 的 Map 中没有该键。这里没有实现通配符匹配，故不能由 SUBACK 成功推导该回调收到消息。实际 broker 接受、MQTT 包抵达、通配符运行结果全部未知。
+
+以上仅建立一个 form→绑定→主题/序列化→ACK/回调的条件化源码链。不把暴露端、消费端或 broker 合成同一角色，不把 Paho/Mosquitto 自动补进被测依赖。下一步若要证明实际交付，仍须另行固定并授权环境、客户端/服务器配置、包与 ACK、消费者 listener 和 value() 观察点；本附录不授权运行。连接恢复/竞态、全部 MQTT 错误、包解析、URI 编码边缘、取消订阅及其他 WoT 操作没有穷尽审计。
+
+### 本附录实际获取的全文身份
+
+下表仅为本次通过 GitHub 读取的 UTF-8 全文件字节，全部重算 Git blob SHA-1 并与返回值相符，再计算 SHA256。源码只存于仓库外的工作证据，不提交第三方全文；完整获取不表示逐行审计。此前 `serdes.ts` 与本次 `content-serdes.ts` 是不同文件，原指纹不替换。
+
+| 固定源码 | 字节数 | Git blob SHA-1 | SHA256 |
+| --- | ---: | --- | --- |
+| [mqtt-broker-server.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-broker-server.ts) | 19340 | `810f3fddcb7056c60e031fa983cdacc3abdcd395` | `502a9f47e986a943ee21b6557e080e1b7e9fa2035f591f4adda34e8ed04523a8` |
+| [mqtt-client.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-client.ts) | 7511 | `9fc120155963aa8a7b588c795423a33a2218b9de` | `450909ffdf10c3032ce22535c840b58aee1a955f11f8bcbf5ef9d87242700502` |
+| [client.ts](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/client.ts) | 62055 | `d18a89481aa86c8d227a08e6b4179c9e01439cbb` | `953aef75f270916a7e182fbb6c0ef8e812c03259bdb2f7ffaeb8fa0ac8fb0a98` |
+| [ack.ts](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/handlers/ack.ts) | 4587 | `953c405538ca6f19a1cd700128d8babc41291523` | `eb629b92a93eec4f25b709a4a7a5f86ff06c3e5460a94cd58bb79546f6cf29e0` |
+| [mqtt-message-pool.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/mqtt-message-pool.ts) | 3983 | `a8591303a1b41bfe459df1dd1d18fe387a66cfb3` | `f8ee5dd48b8d1d49910b55c83b63a018a47b982e4d86bef24f1c1eff266e7b27` |
+| [consumed-thing.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/consumed-thing.ts) | 33295 | `a17c72a2cc7fcab15f41cc3624f546b17f80e62c` | `cba0f6a6fc316971fc67b02aaf7041b8e33cd8b6890935e325b197086bebbe52` |
+| [exposed-thing.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/exposed-thing.ts) | 26910 | `51401068da3ae924b1038807c9f66599ffc363ae` | `0dcc2e056b597033afe601a760caf9b2a4b8e07ba69a0fa98f822062819c47eb` |
+| [content-serdes.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/content-serdes.ts) | 7550 | `d6cac11892acd8e56be0306234ed3d96bbfb2841` | `d362e78a29b18122280dd5abe4cac586b6daad8d3af99a8b27224bdda15cc89b` |
+| [shared.ts](https://github.com/mqttjs/MQTT.js/blob/1eb17d0e318095dafd3a3ad94c4c62c615deb288/src/lib/shared.ts) | 2693 | `dd4828b47706c6bfa08fabb53a1d8e2459ead011` | `4383d6162fa3176f5fd922ac9fe88252a36c8f66e6cbfd2925352d23bfaf08f9` |
+| [interaction-output.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/interaction-output.ts) | 6110 | `4031e06b9251e6417317ab9d7c10ddfd7481dc65` | `187971dbaf7393527e2d69fb230485bdeecf672ba9579bdffaa4b27b43ade2de` |
+| [protocol-listener-registry.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/protocol-listener-registry.ts) | 3548 | `b5575488faefb38bdfbf53e0200bde80990de324` | `e5387560c39f741d894916a8bc8f4afc5c338e236af923d47bbd47738852083f` |
+| [json-codec.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/core/src/codecs/json-codec.ts) | 2373 | `fc2895a0daa941d5cec8106836a3df699010055c` | `2cf61af9386afda0e6ba098ef134760b7514983d6c31dab9b9b83f4c4cf07f6f` |
+| [util.ts](https://github.com/eclipse-thingweb/node-wot/blob/2fd12ddf95ad9684e89d703bb916bc07e1959c79/packages/binding-mqtt/src/util.ts) | 1397 | `e0ad7dcebc5f44475798919913596141f8a1e981` | `e6c961b807650827fb0a26375a1d498f308429f5421b45da1598565c4196e026` |
+
+所有假设输入均为 UNEXECUTED，实际结果未知。未编译、导入或运行任何上游代码，未安装依赖、启动网络/broker/设备或处理凭据。

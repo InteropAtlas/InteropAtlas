@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-06T04:17:39+00:00
+Document Updated At: 2026-11-06T04:44:58+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot / deepen_vc_schema_boundary
-  Reviewer: Independent Agent — OpenAI / dot / review_vc_schema_boundary
+  Executor: Agent — OpenAI / dot / trace_wot_mqtt_handoff
+  Reviewer: Independent Agent — OpenAI / dot / review_wot_mqtt_handoff
   GitHub Actor: ff6962757
 -->
 
@@ -195,6 +195,8 @@ Latest Substantive Contribution:
 - 已录关系：[node_wot_implements_wot_td_1_1](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/wot-implementations.yaml)；[node_wot_uses_mqtt_5_0](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/wot-implementations.yaml)；[paho_mqtt_python_implements_mqtt_5.0](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/mqtt-implementations.yaml)；[eclipse_mosquitto_implements_mqtt5_subscribe_path](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/mqtt-implementations.yaml)；[wot_td_1.1_uses_json](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/protocol-data-representation.yaml)；[wot_td_1.1_uses_json_ld](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/protocol-data-representation.yaml)；[wot_td_1.1_uses_uri_rfc3986](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/protocol-data-representation.yaml)；[wot_td_1.1_uses_json_pointer_rfc6901](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/protocol-data-representation.yaml)；[wot_td_1.1_uses_bcp47_rfc5646](https://github.com/InteropAtlas/InteropAtlas/blob/1539ad70b34fd06dc9b18b9e781bf16bde269b59/01_State/02_Relations/protocol-data-representation.yaml)
 
 - 未回答：一个TD form的href/op、主题/负载与具体MQTT5绑定配置能否一一对应到参与者实际成功/失败观察？
+
+- 11月6日增量：[单事件源码交接附录](../01_Prior_Art/wot-mqtt-crossdomain-evidence-2026-11-05.zh-CN.md#2026-11-06-附录单个事件-form-的发布订阅与调用方边界)已定位发布 QoS2 与消费订阅缺省 QoS0 的参数差异、首次 SUBACK 拒绝传播/授予值丢弃，以及重复订阅和精确主题分发的限定；所有输入未执行，实际交付仍未知。下项原始研究建议的静态部分由该附录部分推进，未授权网络验证。
 
 - 下一步研究判断：先在既有fixed-source form/绑定路径中选一条业务交互，追配置进入绑定、主题/负载及SUBACK理由码到调用方的位置；只有需要实际链时再固定已授权broker/参与者及认证ACL，不能现在启动设备/网络或以图可达代替运行。
 
@@ -811,3 +813,10 @@ IA 输入固定于 [`359258b67daa8d82db43a36d3288ccdbb816d891`](https://github.c
 新取得的固定 [`pyproject.toml`](https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml#L64-L65) 声明 Python `~=3.13.0`，注释明确目前仅支持 Python 3.13；pandas 声明为 `~=2.2.3`。文件为 4572 bytes，Git blob `b4a116d0a5a064a0e058d6292c5d9970beb0abea`、SHA256 `ec6150209655113c010ab720edef490d9fa49df21cd84b515208f7a522c74192`。本次可用环境为 Python 3.12.14、pandas 2.2.3、numpy 2.3.5；现有依赖可见不等于已运行，也不能称满足整个 F-UJI支持环境。没有安装依赖、初始化服务或访问任何 `input_id`。
 
 原行的实际运行问题仍待授权及明确实验环境后检验；原七个 R1.2组件观察与本次静态推导分列，不把旧结果移作新方法执行证据。当前新增的是可核查的同输入分支预期、输入不被该方法改写的范围，以及后续运行环境前提。所有 Canonical字段、关系、历史日期、既有结果文件、待批整体快照与其他具体 hold均未改变。
+
+
+## 2026-11-06 补记：WoT 事件交接的参数与返回值
+
+industrial 的[单事件源码附录](../01_Prior_Art/wot-mqtt-crossdomain-evidence-2026-11-05.zh-CN.md#2026-11-06-附录单个事件-form-的发布订阅与调用方边界)补上了原 form→绑定问题的一段，而非再增加“支持 MQTT”的关系。固定 node-wot 与 MQTT.js 中，生成事件 form 的 mqv:qos 被发布侧采用，但消费订阅没有转交此字段；新订阅等待 SUBACK，错误经带 packet 的包装传播，grants 则未进入 WoT 返回值。已有订阅短路可以没有新 ACK；精确 Map 查找也不能替代过滤器匹配。
+
+因此 TD、订阅 Promise、broker 接受过滤器、消息回调与 value() 解码校验是不同观察点。该静态分解连接描述、表示和工业交互责任，不证明实际 QoS、设备语义或端到端成功。前文历史输入、运行结果、原始来源和所有 hold 保留；没有改 Canonical、领域导航、总体设计或维护机制，也没有新建全局快照。实际环境/依赖字节、授权连接与参与者观察仍是后续证据条件，不因这次研究而自动获准。
