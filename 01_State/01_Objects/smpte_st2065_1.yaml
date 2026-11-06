@@ -1,0 +1,83 @@
+id: smpte_st2065_1
+type: artifact
+kind: standard
+name_zh: SMPTE ST 2065-1 学院色彩编码规范（2021）
+name_en: SMPTE ST 2065-1 — Academy Color Encoding Specification (ACES) (2021)
+version: '2021'
+external_identifiers:
+- namespace: smpte
+  value: st.2065-1
+official_url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf
+description_zh: 规定用于交换尚未经过色彩渲染的图像数据的 ACES RGB 编码；固定 ST 2065-1:2021，区分颜色空间、颜色空间编码和颜色图像编码。它是 ACES 系统的编码规范组件，而非整个系统或图像容器格式。
+description_en: Specifies ACES RGB encoding for interchange of image data that have not been color rendered. Pins
+  ST 2065-1:2021 and distinguishes color space, color-space encoding and color-image encoding; a component of the
+  ACES system, not the whole system or an image-container format.
+scope_notes_zh: 沿用既有 smpte_st2065_1 / smpte:st.2065-1 工作级标准身份，固定审阅官方 ST 2065-1:2021。封面写明修订 ST 2065-1:2012，批准日为 2020-09-09；批准日/目录路径不把版名改为2020，亦不依据
+  HTTP Last-Modified 推断新版。官方目录当前标 stabilized，不据此推断撤销。此次检查封面、前言、引言、§1及§4的编码范围：AP0 RGB 色度坐标、白点、线性传递、binary16 和 scene-referred
+  图像状态；不把它笼统称为所有 ACES 工作空间。规范明确 ACES 值使用 binary16，但 NaN/Inf 等非实数虽可出现在文件中，却不是有效 ACES 颜色值，其解释处理超出范围。实际相机/虚拟相机特性表征程序在引言列为本规范范围之外。没有穷尽审核规范性
+  Annex A 的 RICD 数学或实现全部符合性，不证明输入/输出变换、ACEScg/ACEScct、OpenEXR 容器、完整 ACES 1.x/2.x 系统或软件实现等同。仅独立接纳既有组件，不消费或改变 aces
+  系统候选身份；不增加依赖、实现或等价关系。未运行软件、媒体或转换测试。
+scope_notes_en: 'Preserves the existing work-level smpte_st2065_1 / smpte:st.2065-1 identity and fixes review to
+  ST 2065-1:2021. The cover identifies a revision of ST 2065-1:2012 approved 2020-09-09; this approval date does
+  not change its 2021 edition designation. The official catalogue labels it stabilized, not withdrawn. Review covers
+  identity, introductory scope and section 4: AP0, linear encoding, binary16 and scene-referred image state. Non-real
+  binary16 values are not valid ACES color values, and their processing is outside scope. Camera characterization,
+  complete Annex A mathematical verification, input/output transforms, alternative ACES encodings, container layout
+  and complete ACES system/implementation conformance are not established. This independent component does not resolve
+  or replace the legacy aces system candidate. No technical edges or runtime-test claims are proposed.'
+versions:
+- version: '2021'
+  status: standard
+  url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf
+sources:
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=1
+  title: ST 2065-1:2021 identity; revision of 2012; approval 2020-09-09
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=3
+  title: Foreword, change summary and specification/system distinction
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=5
+  title: 'Scope: RGB encoding for non-color-rendered image interchange'
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=7
+  title: 'Section 4.2: AP0 chromaticities and white point'
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=8
+  title: 'Sections 4.2.7 and 4.3.2.1: linear and binary16 encoding'
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf#page=9
+  title: Valid-value boundary and scene-referred image state
+  language: en
+  accessed: '2026-11-06'
+- url: https://pub.smpte.org/doc/st2065-1/
+  title: Official version catalogue and stabilized label
+  language: en
+  accessed: '2026-11-06'
+- url: https://docs.acescentral.com/encodings/aces2065-1/
+  title: Official ACES component identification and exact 2021 reference
+  language: en
+  accessed: '2026-11-06'
+last_verified_at: '2026-11-06T16:37:40Z'
+last_verified_by: Agent — OpenAI / dot / review_media_seed_intake; identity and selected-source scope review only
+record_created_at: '2026-11-06T16:38:57.260068+00:00'
+record_updated_at: '2026-11-06T16:38:57.260068+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: smpte_st2065_1
+  acceptance_event_id: accept-20261106-seed-smpte_st2065_1
+  reviewed_candidate_blob: 465aad68734e4b3c8f90d7268941e4de23c6448b
+  reviewed_against_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  candidate_executor: Agent — OpenAI / dot / seed identity intake
+  canonical_serializer: Agent — OpenAI / dot / seed identity intake
+  reviewed_packet_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  reviewed_packet_blob: 60e76df41217bed624d83181effc0da9bf3404fa
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d8302fee9f58929087a98bfbc8224713004c2b4/01_State/Inbox/review-packets/seed-identities-20261106.yaml

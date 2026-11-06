@@ -1,0 +1,85 @@
+id: openexr_reference_software
+type: system
+kind: software
+name_zh: OpenEXR 参考软件发行体
+name_en: OpenEXR reference software distribution
+version: 3.3.3
+external_identifiers:
+- namespace: github
+  value: AcademySoftwareFoundation/openexr
+official_url: https://openexr.com/
+description_zh: OpenEXR 项目提供的 EXR 图像读写参考软件，包含 C++ 库、OpenEXRCore C 库及相关工具；本记录固定软件发行版 3.3.3，只确认软件身份、发行状态和文档说明的范围。
+description_en: The OpenEXR reference software for EXR image reading and writing, including the C++ libraries, OpenEXRCore
+  C library and associated tools. Pinned to software release 3.3.3; records identity, release status and documented
+  scope only.
+scope_notes_zh: 主体为软件发行体，不是 EXR 文件格式、File Layout 文档或 ASWF/OpenEXR 项目团队。官方注释标签 v3.3.3 的 tag object 为 7be48a297eeafb50e867acd323f330469b5d011d，指向
+  commit da760aa4b6bee4b9d74b8c6a151221b035fc47b7；官方 release 于 2025-03-24 发布，prerelease=false。固定 openexr_version.h
+  明确软件库版号 3.3.3，并把格式版号指向另一个 ImfVersion.h；后者的 EXR_VERSION=2 是文件头版本字段，不能改写为格式 3.3.3 或完整特性集合。固定 File Layout 文档说明其只是字节布局概述，若与
+  C++ 库不一致以库为准。软件文档列出独立 C++ 与 C APIs，本次未核实所有函数或任何特定编解码路径。未安装、构建、运行软件/媒体/测试或进行签名验证，不建立完整符合性、性能、安全、跨工具互通、无损或 IA 采用断言。固定历史发行不表示当前最新、安全推荐或任意构建可用；发布后是否有其他安全修复不在本记录的审阅范围。旧
+  aswf_openexr 的 mixed-identity 风险、原标识及导航不变，不添加 implements 或其他技术边。
+scope_notes_en: A software-distribution identity, distinct from the EXR format, layout document and project team.
+  Official annotated tag v3.3.3 (tag object 7be48a297eeafb50e867acd323f330469b5d011d) resolves to da760aa4b6bee4b9d74b8c6a151221b035fc47b7.
+  The release was published 2025-03-24 and is not marked prerelease. The library version header states 3.3.3; the
+  separate file-version header has EXR_VERSION=2. Neither number is substituted for the other. The layout overview
+  defers to the C++ library on disagreements. Only identity and documented scope were checked, without installation,
+  build, execution, media tests or signature verification. No implementation/conformance, security, performance,
+  universal losslessness, interoperability, latest-version, recommendation or adoption claim is made. The legacy
+  aswf_openexr candidate remains unresolved and unchanged in identity; no technical edge is proposed.
+open_source: true
+versions:
+- version: 3.3.3
+  date: '2025-03-24'
+  status: released
+  url: https://github.com/AcademySoftwareFoundation/openexr/releases/tag/v3.3.3
+sources:
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/README.md
+  title: Fixed software/project overview and ASWF host
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/website/API.rst
+  title: Fixed C++ and C API/library boundaries
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/src/lib/OpenEXRCore/openexr_version.h
+  title: Software-library version 3.3.3, explicitly separate from file version
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/src/lib/OpenEXR/ImfVersion.h
+  title: File-header version and flags, not software release number
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/website/OpenEXRFileLayout.rst
+  title: Layout overview and C++ library precedence
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/LICENSE.md
+  title: License attached to the fixed software snapshot
+  language: en
+  accessed: '2026-11-06'
+- url: https://api.github.com/repos/AcademySoftwareFoundation/openexr/git/tags/7be48a297eeafb50e867acd323f330469b5d011d
+  title: Official tag-to-commit metadata; no independent signature verification
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/openexr/releases/tag/v3.3.3
+  title: Official 3.3.3 software release
+  language: en
+  accessed: '2026-11-06'
+last_verified_at: '2026-11-06T16:37:40Z'
+last_verified_by: Agent — OpenAI / dot / review_media_seed_intake; identity and selected-source scope review only
+record_created_at: '2026-11-06T16:38:57.260068+00:00'
+record_updated_at: '2026-11-06T16:38:57.260068+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: openexr_reference_software
+  acceptance_event_id: accept-20261106-seed-openexr_reference_software
+  reviewed_candidate_blob: 079461c5e12832d1da2cf8f213d9a4073965fd2d
+  reviewed_against_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  candidate_executor: Agent — OpenAI / dot / seed identity intake
+  canonical_serializer: Agent — OpenAI / dot / seed identity intake
+  reviewed_packet_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  reviewed_packet_blob: 60e76df41217bed624d83181effc0da9bf3404fa
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d8302fee9f58929087a98bfbc8224713004c2b4/01_State/Inbox/review-packets/seed-identities-20261106.yaml

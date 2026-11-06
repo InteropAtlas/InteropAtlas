@@ -5,13 +5,34 @@ publisher: Academy of Motion Picture Arts and Sciences (AMPAS)
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: ampas, value: aces}
+- namespace: ampas
+  value: aces
 locators:
-- {url: 'https://docs.acescentral.com/', role: official}
+- url: https://docs.acescentral.com/
+  role: official
+- url: https://github.com/aces-aswf/aces/blob/35e1e6ac2c26ec75433547d5d0a3a881f39bd9f5/README.md
+  role: dated
+- url: https://github.com/aces-aswf/aces/releases/tag/v2.0.0%2B2025.04.04
+  role: dated
+- url: https://github.com/aces-aswf/aces-core/blob/1256fee50ee35548c6eab8eca854ff3349008489/README.md
+  role: dated
+- url: https://www.aswf.io/news/aces/
+  role: official
 identity_resolution:
   state: identity_risk
   matched_canonical_ids: []
-  reasons: [ACES 是系统级对象，不等于单独的 SMPTE ST 2065-1。保留既有 identity_risk；移除与风险状态矛盾的旧 state new 描述。]
+  reasons:
+  - ACES 是系统级对象，不等于单独的 SMPTE ST 2065-1。保留既有 identity_risk；移除与风险状态矛盾的旧 state new 描述。
+  - 2026-11-06 只读核定：ACES1.3固定源码1256fee50ee35548c6eab8eca854ff3349008489说明新增gamut compression等变换但不改变原核心外观；ACES2.0将core、input/colorspaces、output、look、AMF分到独立仓库。
+  - 官方系统包v2.0.0+2025.04.04→35e1e6ac2c26ec75433547d5d0a3a881f39bd9f5（2025-04-04发布，非prerelease）；MAJOR.MINOR.PATCH描述core变化，build日期固定模块集合，不能冒充单个组件/规范版号。包内aces-core
+    gitlink为2d7af39344725aaa8ac3bf1746693c9a1d6c4792。
+  - ASWF与AMPAS官方于2025-08-06宣布ACES加入ASWF；这是维护/托管沿革，不倒写2025-04-04历史包发布者或旧ampas:aces的身份。
   merge_authorized: false
-unknowns: [区分系统、具体版本、组件规范、变换与实现；保留已有 smpte_st2065_1 候选，不自动合并。, 核对 ACES 1.x 与 2.x 的版本边界及治理/发布来源，再分别提交身份审查。, 本轮修订日期 2026-09-13；修订内容仍需独立 Reviewer，原始作者及材料见基线 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa 同路径。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 剩余是原ACES系统级主体是否可由现有artifact/specification准确表示规范体系，还是需要另有已授权的family/kind主身份决定；不能把所有软件、用户扩展和组件规范集合概称单份正式规范。系统与组件独立已由官方证据证实，不要求先穷尽全系统建模。
+- 既有smpte_st2065_1为独立规范组件，固定ST2065-1:2021可单独接纳；这不会将本ACES系统候选改为该组件、消耗旧ID、解除本风险或增加未经审阅的包含/依赖/实现边。
+- 原 2026-09-13 候选和作者历史保留于 Git；本次仅补有明确来源的身份边界，不重指原 ID、自动分拆或追认旧材料已获正式接纳。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake

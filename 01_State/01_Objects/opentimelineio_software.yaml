@@ -1,0 +1,76 @@
+id: opentimelineio_software
+type: system
+kind: software
+name_zh: OpenTimelineIO 编辑时间线软件发行体
+name_en: OpenTimelineIO editorial timeline software distribution
+version: 0.18.1
+external_identifiers:
+- namespace: github
+  value: AcademySoftwareFoundation/OpenTimelineIO
+official_url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO
+description_zh: 提供编辑时间线内存数据模型、操作及序列化功能的 C++ 核心库、官方 Python 绑定和随发行体提供的工具；固定 0.18.1，官方发行页标为 Beta 18.1 / Pre-release。
+description_en: The C++ core library, official Python binding and bundled tools for editorial timeline data-model
+  manipulation and serialization. Pinned to 0.18.1, officially labeled Beta 18.1 / Pre-release.
+scope_notes_zh: 主体是软件发行体，固定官方 v0.18.1 → commit 44236713c1db295a6ffc66189ae98dbdfd0cb9c4；release 于 2025-11-09 发布且
+  prerelease=true，不把 README 对 API 稳定性的表述升级为稳定发行认证。数据模型记录剪辑顺序、时长和外部媒体引用；它本身不是媒体容器。v0.16 之后的 PyPI 主包只含核心库和原生格式；外部
+  EDL/AAF/FCPXML 等适配器已移到独立仓库/Plugins 包，不视为本记录固定发行的全部内置能力。固定版本中的 File Format Specification 仍标注描述 Beta 13 的 DRAFT，且明确无顶层文件格式版本，各类型由
+  OTIO_SCHEMA 单独版本化；0.18.1 不能作为格式统一版号。仅核软件身份和文档边界，未安装、构建、运行、校验实际序列化结果、读取媒体或测试适配器；不保证往返无损、外部资源可用、所有适配器特性支持、安全、符合性、性能、跨应用互通或
+  IA 采用。旧 aswf_otio 保持 identity_risk，不将其改为本软件对象，不添加 implements 或其他技术边。
+scope_notes_en: A software distribution fixed to official tag v0.18.1 and commit 44236713c1db295a6ffc66189ae98dbdfd0cb9c4.
+  The release was published 2025-11-09 with prerelease=true; the documented stable API is not a stable-release designation.
+  Its model represents editorial timing and external media references, not media essence. After v0.16, separately
+  distributed adapter plugins are not all included in the core package. The pinned format document remains a Beta-13
+  draft and specifies per-type OTIO_SCHEMA versions, not a top-level format version. No installation, build, execution,
+  media access, serialization validation or adapter tests were performed. No universal lossless interchange, media
+  availability, complete feature support, conformance, safety, performance or adoption claim is made. The legacy
+  aswf_otio identity remains unresolved; no technical edges are proposed.
+open_source: true
+versions:
+- version: 0.18.1
+  date: '2025-11-09'
+  status: prerelease
+  url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/releases/tag/v0.18.1
+sources:
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/README.md
+  title: Fixed C++ core/Python binding/software scope, external references and separated plugins
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/setup.py
+  title: Fixed software package version and license metadata; source inspected, not executed
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/docs/tutorials/otio-file-format-specification.md
+  title: Beta-13 draft and per-type rather than top-level format versioning
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/docs/tutorials/feature-matrix.rst
+  title: Documented adapter feature limitations, not a runtime test
+  language: en
+  accessed: '2026-11-06'
+- url: https://api.github.com/repos/AcademySoftwareFoundation/OpenTimelineIO/git/ref/tags/v0.18.1
+  title: Official lightweight tag resolves to fixed commit
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/releases/tag/v0.18.1
+  title: Official Beta 18.1 pre-release status and date
+  language: en
+  accessed: '2026-11-06'
+last_verified_at: '2026-11-06T16:37:40Z'
+last_verified_by: Agent — OpenAI / dot / review_media_seed_intake; identity and selected-source scope review only
+record_created_at: '2026-11-06T16:38:57.260068+00:00'
+record_updated_at: '2026-11-06T16:38:57.260068+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: opentimelineio_software
+  acceptance_event_id: accept-20261106-seed-opentimelineio_software
+  reviewed_candidate_blob: 3489834b80c1a187b08fa8c612fbc4fa1ac3c0b7
+  reviewed_against_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  candidate_executor: Agent — OpenAI / dot / seed identity intake
+  canonical_serializer: Agent — OpenAI / dot / seed identity intake
+  reviewed_packet_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  reviewed_packet_blob: 60e76df41217bed624d83181effc0da9bf3404fa
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d8302fee9f58929087a98bfbc8224713004c2b4/01_State/Inbox/review-packets/seed-identities-20261106.yaml

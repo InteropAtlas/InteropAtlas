@@ -291,16 +291,27 @@ publisher: OPC Foundation
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: opc, value: ua-family}
+- namespace: opc
+  value: ua-family
 locators:
-- {url: 'https://reference.opcfoundation.org/', role: official}
+- url: https://reference.opcfoundation.org/
+  role: official
+- url: https://reference.opcfoundation.org/specs/OPC-10000-1/v1.05.06/3
+  role: official
 identity_resolution:
-  state: identity_risk
-  matched_canonical_ids: []
-  reasons: [为工业设备与信息模型互操作建立待拆解入口。]
+  state: duplicate
+  matched_canonical_ids:
+  - opc_ua_family
+  reasons:
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-opc_ua_family 接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
-unknowns: [各部分有独立版本，须确定 family/part/edition 身份，不能为全套指定一个统一版本。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐一读取所有 part 正文及其下载的优先官方版本；本次不声称全套完整性、IEC 62541 对应关系或实现符合性。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: sparql11_query_2013
@@ -595,16 +606,27 @@ publisher: BIPM
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: bipm, value: si-brochure-9}
+- namespace: bipm
+  value: si-brochure-9
 locators:
-- {url: 'https://www.bipm.org/en/publications/si-brochure', role: official}
+- url: https://www.bipm.org/en/publications/si-brochure
+  role: official
+- url: https://www.bipm.org/en/si-brochure-9
+  role: official
 identity_resolution:
-  state: identity_risk
-  matched_canonical_ids: []
-  reasons: [给测量单位与物理量语义提供权威入口。]
+  state: duplicate
+  matched_canonical_ids:
+  - si_brochure_9
+  reasons:
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-si_brochure_9 接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
-unknowns: [需固定第九版的具体修订及语言文本；本轮仅核对官方出版入口，尚未审读全文。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐条审读所有历史修订、全部语言文本及在线附录 2、3；不以已核 V4.01 英文保证整个第九版所有文本等同。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: ieee_802_3_family
@@ -613,16 +635,26 @@ publisher: IEEE 802.3 Working Group
 family: artifact
 kind: standard
 external_identifiers:
-- {namespace: ieee, value: 802.3-family}
+- namespace: ieee
+  value: 802.3-family
 locators:
-- {url: 'https://www.ieee802.org/3/', role: official}
+- url: https://www.ieee802.org/3/
+  role: official
 identity_resolution:
-  state: identity_risk
-  matched_canonical_ids: []
-  reasons: [补充物理接口与链路层标准的分类种子。]
+  state: duplicate
+  matched_canonical_ids:
+  - ieee_802_3_family
+  reasons:
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-ieee_802_3_family
+    接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
-unknowns: [先确定工作级、整合版本、修订件和勘误身份；本轮未读取全部标准正文。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐一核验家族所有历史出版物、全部正文、实现及当前勘误完整性；这些限制不被写成单一版本的已知事实。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: mcp_2025_11_25
