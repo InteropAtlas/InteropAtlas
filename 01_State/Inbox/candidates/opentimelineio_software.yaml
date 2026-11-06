@@ -15,11 +15,13 @@ locators:
 - url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/releases/tag/v0.18.1
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - opentimelineio_software
   reasons:
-  - 独立软件发行体身份；软件版本由官方 tag、commit、版本文件及 release 元数据共同固定，不是文件格式版号。
-  - 未匹配当前 Canonical；旧 mixed-identity seed 保留，不将其改名、消耗、标为 duplicate 或用来建立软件等价。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-opentimelineio_software
+    接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 未安装、构建、运行或进行实现符合性/安全/互通测试；没有拟议 implements 或其他技术关系。
@@ -27,4 +29,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake

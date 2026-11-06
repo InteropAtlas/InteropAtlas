@@ -13,16 +13,17 @@ locators:
 - url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf
   role: dated
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - smpte_st2065_1
   reasons:
-  - 固定 ST 2065-1:2021 官方文献支持 ACES RGB 图像交换编码规范的独立身份，保持既有 smpte_st2065_1 / smpte:st.2065-1 工作级标准标识，2021 仅为本轮审阅上下文。
-  - 标准组件不同于 ACES 系统、OpenEXR 容器、输入/输出变换或软件实现；将原 core working color space 概述准确限定为 primary interchange encoding。
-  - 对基线 Canonical 标识索引核对无碰撞，保持 state new，待独立语义复核与真实冻结后的接纳事件，不继承此前待审材料的批准。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-smpte_st2065_1
+    接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 未穷尽核验所有条款及 Annex A 数学，不证明完整 ACES 系统或实现符合性；原 aces 系统候选及其 mixed-identity 风险保持。
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Agent — OpenAI / dot / review_media_seed_intake

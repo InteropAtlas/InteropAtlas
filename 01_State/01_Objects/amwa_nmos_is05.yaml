@@ -1,0 +1,83 @@
+id: amwa_nmos_is05
+type: artifact
+kind: specification
+name_zh: AMWA IS-05 NMOS 设备连接管理规范
+name_en: AMWA IS-05 NMOS Device Connection Management Specification
+official_name: AMWA IS-05 NMOS Device Connection Management Specification
+description_zh: AMWA 发布的 NMOS 设备连接管理规范，主体是 IS-05 工作级规范而非单一发布版。本轮以固定 v1.2.0 文献核验：Connection API 管理逻辑 Sender 与 Receiver
+  的连接参数，区分约束、暂存配置与生效配置，提供单项和批量操作，以及立即或定时生效机制；规范包含 RAML、JSON Schema 及补充规范性正文。这些是该固定文献的要求与描述，不是任何设备或软件已实现、符合或互通的证据。
+description_en: The work-level AMWA IS-05 specification for NMOS device connection management, not one individual
+  release. In the fixed v1.2.0 documentation reviewed here, the Connection API manages connection parameters for
+  logical Senders and Receivers, distinguishes constraints, staged settings and active settings, and provides single
+  and bulk operations with immediate or scheduled activation. The specification includes RAML, JSON Schema and additional
+  normative prose. These are requirements and descriptions in that release, not evidence of implementation, conformance
+  or interoperability by any device or software.
+external_identifiers:
+- namespace: amwa
+  value: is-05
+official_url: https://specs.amwa.tv/is-05/
+versions:
+- version: 1.2.0
+  status: published_specification
+  url: https://specs.amwa.tv/is-05/v1.2.0/
+scope_notes_zh: 保留既有 amwa_nmos_is05 / amwa:is-05 工作级身份及官方工作入口，不把它改为 v1.2.0 版次身份。官方 spec.yml 将 IS-05 与多个发布版分别列出；versions
+  只列本轮实读的发布文献，不是完整版本史，也不表示各版语义相同。正文技术描述限于官方 tag v1.2.0 对应 commit 354c183f7f36554412f69c4a7152fec672a21e01 的 Overview
+  与 APIs；文献发布版 1.2.0 与接口路径中的 v<MAJOR>.<MINOR> 是不同层次。该版允许通过独立 Transports register 扩展传输类型，不能把某次注册表状态或任意设备支持当作整个工作级规范的固定事实。未穷尽审查所有传输映射、API
+  条款或跨版本组合；不作 ST 2110 媒体传输、实现符合性、部署、安全性或 IA 采用判断，未执行 API、设备或软件测试。与 IS-04 的共同使用有版本及行为条件，本轮不接纳该关系，也不将旧提案自动重定向或升级为兼容性保证。
+scope_notes_en: Preserves the existing work-level identity amwa_nmos_is05 / amwa:is-05 and its official work entry
+  point; it does not relabel that identity as edition v1.2.0. The official spec.yml lists IS-05 separately from
+  its releases. The versions array records only the publication inspected here, not a complete version history or
+  semantic equivalence across editions. Technical descriptions are limited to Overview and APIs at official v1.2.0
+  tag commit 354c183f7f36554412f69c4a7152fec672a21e01. Publication version 1.2.0 is distinct from the v<MAJOR>.<MINOR>
+  interface-path version. This edition permits transport extensions through a separate Transports register; a register
+  snapshot or arbitrary device support is not an invariant of the whole work. Not all transport mappings, API clauses
+  or cross-version combinations were reviewed. No ST 2110 media transport, implementation conformance, deployment,
+  security or IA-adoption claim is made, and no API, device or software test was run. Joint use with IS-04 has version
+  and behaviour conditions. This intake accepts no such relation and does not automatically retarget the old proposal
+  or turn it into an interoperability guarantee.
+sources:
+- url: https://github.com/AMWA-TV/is-05/blob/354c183f7f36554412f69c4a7152fec672a21e01/spec.yml
+  title: 'Official IS-05 metadata: work identifier, specification name and status, separate release list'
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AMWA-TV/is-05/blob/354c183f7f36554412f69c4a7152fec672a21e01/docs/Overview.md
+  title: 'IS-05 v1.2.0 fixed Overview: Connection API and constraints, staged, active, single and bulk resources'
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AMWA-TV/is-05/blob/354c183f7f36554412f69c4a7152fec672a21e01/docs/APIs.md
+  title: 'IS-05 v1.2.0 fixed APIs: separate transport register, JSON representation and major/minor API-path versioning'
+  language: en
+  accessed: '2026-11-06'
+- url: https://github.com/AMWA-TV/is-05/blob/354c183f7f36554412f69c4a7152fec672a21e01/docs/Interoperability%20-%20IS-04.md
+  title: 'IS-05 v1.2.0 fixed IS-04 interoperability chapter: conditional version and behaviour requirements; relation
+    not accepted here'
+  language: en
+  accessed: '2026-11-06'
+- url: https://specs.amwa.tv/nmos/by-type/
+  title: 'Official current index: IS-04 and IS-05 work entries and separately listed releases'
+  language: en
+  accessed: '2026-11-06'
+- url: https://specs.amwa.tv/is-05/v1.2.0/
+  title: Official version-specific IS-05 v1.2.0 publication entry
+  language: en
+  accessed: '2026-11-06'
+last_verified_at: '2026-11-06T16:37:05Z'
+last_verified_by: Independent Agent — OpenAI / dot / review_seed_identity_authority; identity and selected-source
+  scope review only
+record_created_at: '2026-11-06T16:38:57.260068+00:00'
+record_updated_at: '2026-11-06T16:38:57.260068+00:00'
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
+  github_actor: ff6962757
+intake_provenance:
+  candidate_id: amwa_nmos_is05
+  acceptance_event_id: accept-20261106-seed-amwa_nmos_is05
+  reviewed_candidate_blob: 92302f1e2d76f5549819db017501daf03031f4b8
+  reviewed_against_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  candidate_executor: Agent — OpenAI / dot / seed identity intake
+  canonical_serializer: Agent — OpenAI / dot / seed identity intake
+  reviewed_packet_commit: 2d8302fee9f58929087a98bfbc8224713004c2b4
+  reviewed_packet_blob: 60e76df41217bed624d83181effc0da9bf3404fa
+  semantic_review_url: https://github.com/InteropAtlas/InteropAtlas/blob/2d8302fee9f58929087a98bfbc8224713004c2b4/01_State/Inbox/review-packets/seed-identities-20261106.yaml

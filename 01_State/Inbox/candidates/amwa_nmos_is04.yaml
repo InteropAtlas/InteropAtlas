@@ -11,12 +11,13 @@ locators:
 - url: https://specs.amwa.tv/is-04/
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - amwa_nmos_is04
   reasons:
-  - 官方固定 spec.yml 将该工作级 AMWA 编号、规范名称与独立 releases 数组分列；保留原 candidate_id、外部工作标识与工作入口，不将其改为任何单一版次。
-  - 原工作级身份及固定版次边界已经独立身份复核确认；本提案进入 review_required 而非 accepted。完整冻结提案的最终语义复核及正式接纳仍在后续事件记录。基线 identity_risk 候选及原作者历史保留于
-    Git，不回写历史路由。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-amwa_nmos_is04
+    接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 本轮仅核验所列固定发布文献；不声称完整版本史、全部条款、跨版兼容或任何实现的符合性。
@@ -24,4 +25,4 @@ unknowns:
 provenance:
   initiator: Human Owner — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority

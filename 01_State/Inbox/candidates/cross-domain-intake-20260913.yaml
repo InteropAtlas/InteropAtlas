@@ -299,20 +299,19 @@ locators:
 - url: https://reference.opcfoundation.org/specs/OPC-10000-1/v1.05.06/3
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - opc_ua_family
   reasons:
-  - OPC Foundation 的 OPC 10000-1 v1.05.06 §3 明确认定 OPC UA 为多部分 OPC 10000 系列，足以解释原 family 主体，不将原 ID 改为某一 part 或 patch
-    版。
-  - 原 opc:ua-family 原字节保留，并明确为 IA 遗留构造标记而非 Foundation 分配编号；各 part、release、模型版本和辅助包标签保持分别识别，不为全套赋统一版本。
-  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；不把目录中全部 Companion Specifications、IEC 出版物或实现合并为同一主体。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-opc_ua_family 接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 未逐一读取所有 part 正文及其下载的优先官方版本；本次不声称全套完整性、IEC 62541 对应关系或实现符合性。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: sparql11_query_2013
@@ -615,20 +614,19 @@ locators:
 - url: https://www.bipm.org/en/si-brochure-9
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - si_brochure_9
   reasons:
-  - BIPM 官方 si-brochure-9 条目将第九版、其 2019–2026 年内修订及法／英文本放在同一版次级出版条目中，原候选可保持第九版主体而非改成单一 revision/language。
-  - 原 bipm:si-brochure-9 原字节保留，明确为对应官方条目 slug 的 IA locator-derived 标记，不冒充正式编号；V4.01 英文仅是本次已核证据，DOI 不被当成 revision/language
-    唯一标识。
-  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；本次不创建单版新对象，也不将家族候选转为 duplicate。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-si_brochure_9 接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 未逐条审读所有历史修订、全部语言文本及在线附录 2、3；不以已核 V4.01 英文保证整个第九版所有文本等同。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: ieee_802_3_family
@@ -643,19 +641,20 @@ locators:
 - url: https://www.ieee802.org/3/
   role: official
 identity_resolution:
-  state: new
-  matched_canonical_ids: []
+  state: duplicate
+  matched_canonical_ids:
+  - ieee_802_3_family
   reasons:
-  - 官方家族说明、工作组入口及出版目录足以将原主体固定为 IEEE 802.3 以太网标准家族；本提案不将旧 ID 重解释为 802.3-2022 或任一单独修订件。
-  - 原 ieee:802.3-family 原字节保留，并明确为 IA 遗留构造的家族级标记而非 IEEE 正式分配编号；各整合版、修订件、corrigendum 与 errata 分别识别，不设全家族统一版本。
-  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；该机械结论不替代独立身份和语义复核。
+  - 独立语义复核真实冻结 2d8302fee9f58929087a98bfbc8224713004c2b4 的本候选和完整 packet 通过，由 accept-20261106-seed-ieee_802_3_family
+    接纳；保留原主体、外部标识与来源限定，回指唯一正式对象。
+  - 旧 identity_risk 或 new 材料及原作者由 Git 历史保留；本次 duplicate 不宣称版本等价、旧混合种子已解除、身份合并/拆分或技术互通。
   merge_authorized: false
 unknowns:
 - 未逐一核验家族所有历史出版物、全部正文、实现及当前勘误完整性；这些限制不被写成单一版本的已知事实。
 provenance:
   initiator: Human — ff6962757
   executor: Agent — OpenAI / dot / seed identity intake
-  reviewer: null
+  reviewer: Independent Agent — OpenAI / dot / review_seed_identity_authority
 ---
 contract_version: candidate-object-v1
 candidate_id: mcp_2025_11_25
