@@ -291,16 +291,28 @@ publisher: OPC Foundation
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: opc, value: ua-family}
+- namespace: opc
+  value: ua-family
 locators:
-- {url: 'https://reference.opcfoundation.org/', role: official}
+- url: https://reference.opcfoundation.org/
+  role: official
+- url: https://reference.opcfoundation.org/specs/OPC-10000-1/v1.05.06/3
+  role: official
 identity_resolution:
-  state: identity_risk
+  state: new
   matched_canonical_ids: []
-  reasons: [为工业设备与信息模型互操作建立待拆解入口。]
+  reasons:
+  - OPC Foundation 的 OPC 10000-1 v1.05.06 §3 明确认定 OPC UA 为多部分 OPC 10000 系列，足以解释原 family 主体，不将原 ID 改为某一 part 或 patch
+    版。
+  - 原 opc:ua-family 原字节保留，并明确为 IA 遗留构造标记而非 Foundation 分配编号；各 part、release、模型版本和辅助包标签保持分别识别，不为全套赋统一版本。
+  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；不把目录中全部 Companion Specifications、IEC 出版物或实现合并为同一主体。
   merge_authorized: false
-unknowns: [各部分有独立版本，须确定 family/part/edition 身份，不能为全套指定一个统一版本。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐一读取所有 part 正文及其下载的优先官方版本；本次不声称全套完整性、IEC 62541 对应关系或实现符合性。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null
 ---
 contract_version: candidate-object-v1
 candidate_id: sparql11_query_2013
@@ -595,16 +607,28 @@ publisher: BIPM
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: bipm, value: si-brochure-9}
+- namespace: bipm
+  value: si-brochure-9
 locators:
-- {url: 'https://www.bipm.org/en/publications/si-brochure', role: official}
+- url: https://www.bipm.org/en/publications/si-brochure
+  role: official
+- url: https://www.bipm.org/en/si-brochure-9
+  role: official
 identity_resolution:
-  state: identity_risk
+  state: new
   matched_canonical_ids: []
-  reasons: [给测量单位与物理量语义提供权威入口。]
+  reasons:
+  - BIPM 官方 si-brochure-9 条目将第九版、其 2019–2026 年内修订及法／英文本放在同一版次级出版条目中，原候选可保持第九版主体而非改成单一 revision/language。
+  - 原 bipm:si-brochure-9 原字节保留，明确为对应官方条目 slug 的 IA locator-derived 标记，不冒充正式编号；V4.01 英文仅是本次已核证据，DOI 不被当成 revision/language
+    唯一标识。
+  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；本次不创建单版新对象，也不将家族候选转为 duplicate。
   merge_authorized: false
-unknowns: [需固定第九版的具体修订及语言文本；本轮仅核对官方出版入口，尚未审读全文。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐条审读所有历史修订、全部语言文本及在线附录 2、3；不以已核 V4.01 英文保证整个第九版所有文本等同。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null
 ---
 contract_version: candidate-object-v1
 candidate_id: ieee_802_3_family
@@ -613,16 +637,25 @@ publisher: IEEE 802.3 Working Group
 family: artifact
 kind: standard
 external_identifiers:
-- {namespace: ieee, value: 802.3-family}
+- namespace: ieee
+  value: 802.3-family
 locators:
-- {url: 'https://www.ieee802.org/3/', role: official}
+- url: https://www.ieee802.org/3/
+  role: official
 identity_resolution:
-  state: identity_risk
+  state: new
   matched_canonical_ids: []
-  reasons: [补充物理接口与链路层标准的分类种子。]
+  reasons:
+  - 官方家族说明、工作组入口及出版目录足以将原主体固定为 IEEE 802.3 以太网标准家族；本提案不将旧 ID 重解释为 802.3-2022 或任一单独修订件。
+  - 原 ieee:802.3-family 原字节保留，并明确为 IA 遗留构造的家族级标记而非 IEEE 正式分配编号；各整合版、修订件、corrigendum 与 errata 分别识别，不设全家族统一版本。
+  - 对 520236e4 基线使用既有 identifier index 检查无 Canonical 外部标识碰撞；该机械结论不替代独立身份和语义复核。
   merge_authorized: false
-unknowns: [先确定工作级、整合版本、修订件和勘误身份；本轮未读取全部标准正文。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 未逐一核验家族所有历史出版物、全部正文、实现及当前勘误完整性；这些限制不被写成单一版本的已知事实。
+provenance:
+  initiator: Human — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null
 ---
 contract_version: candidate-object-v1
 candidate_id: mcp_2025_11_25

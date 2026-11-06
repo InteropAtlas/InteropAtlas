@@ -5,13 +5,33 @@ publisher: Academy Software Foundation / OpenEXR project
 family: artifact
 kind: format
 external_identifiers:
-- {namespace: aswf, value: openexr}
+- namespace: aswf
+  value: openexr
 locators:
-- {url: 'https://openexr.com/en/latest/', role: official}
+- url: https://openexr.com/en/latest/
+  role: official
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/README.md
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/website/OpenEXRFileLayout.rst
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/src/lib/OpenEXRCore/openexr_version.h
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/openexr/blob/da760aa4b6bee4b9d74b8c6a151221b035fc47b7/src/lib/OpenEXR/ImfVersion.h
+  role: dated
 identity_resolution:
   state: identity_risk
   matched_canonical_ids: []
-  reasons: ['原候选把图像文件格式、开源库和项目维护主体混在一个 aswf:openexr 标识下；本轮不自动拆分或更换身份。']
+  reasons:
+  - 原候选把图像文件格式、开源库和项目维护主体混在一个 aswf:openexr 标识下；本轮不自动拆分或更换身份。
+  - 2026-11-06 只读核定：官方固定源码 da760aa4b6bee4b9d74b8c6a151221b035fc47b7 的 README 区分 EXR 文件格式、参考实现与项目；软件库版本为3.3.3，ImfVersion.h
+    文件头 EXR_VERSION 为2，两个数字不可混用。
+  - 同一固定来源的 File Layout 明确只是布局概述，不独立定义格式，冲突时以 C++ 库为准；并非必须先为所有角色建对象才能认识格式，但本补证不替旧 mixed identity 作主身份裁决。
   merge_authorized: false
-unknowns: [先确定文件格式对象、参考实现对象与项目对象的独立身份，再建立实现关系。, 核对具体格式版本、库发行版及维护主体证据；latest 文档入口不是固定版本凭据。, 本轮修订日期 2026-09-13；修订内容仍需独立 Reviewer，原始作者及材料见基线 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa 同路径。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 剩余是旧 aswf:openexr 记录究竟持续指称文件格式工作级主体还是包含项目/参考实现的复合主体，以及旧别名的确切角色裁决；不是缺少软件发行版证据。保持既有ID、artifact/format、identity_risk和merge_authorized=false。
+- 新增独立软件发行体可单独审核，但不能自动把本候选标为duplicate或accepted；没有任何格式/软件等价或implements边。
+- 原 2026-09-13 候选和作者历史保留于 Git；本次仅补有明确来源的身份边界，不重指原 ID、自动分拆或追认旧材料已获正式接纳。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null

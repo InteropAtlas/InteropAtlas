@@ -5,21 +5,24 @@ publisher: Society of Motion Picture and Television Engineers (SMPTE)
 family: artifact
 kind: standard
 external_identifiers:
-  - namespace: smpte
-    value: st.2065-1
+- namespace: smpte
+  value: st.2065-1
 locators:
-  - url: https://pub.smpte.org/latest/st2065-1/
-    role: official
+- url: https://pub.smpte.org/latest/st2065-1/
+  role: official
+- url: https://pub.smpte.org/doc/st2065-1/20200909-pub/st2065-1-2021.pdf
+  role: dated
 identity_resolution:
   state: new
   matched_canonical_ids: []
   reasons:
-    - SMPTE ST 2065-1 (ACES2065-1) defines the Academy Color Encoding Specification, the core working color space of the ACES system.
-    - Distinct standard component of the ACES system; kept as a separate candidate from the AMPAS ACES system object.
-    - No matching identifier exists in the InteropAtlas canonical index; state 'new'.
+  - 固定 ST 2065-1:2021 官方文献支持 ACES RGB 图像交换编码规范的独立身份，保持既有 smpte_st2065_1 / smpte:st.2065-1 工作级标准标识，2021 仅为本轮审阅上下文。
+  - 标准组件不同于 ACES 系统、OpenEXR 容器、输入/输出变换或软件实现；将原 core working color space 概述准确限定为 primary interchange encoding。
+  - 对基线 Canonical 标识索引核对无碰撞，保持 state new，待独立语义复核与真实冻结后的接纳事件，不继承此前待审材料的批准。
   merge_authorized: false
-unknowns: []
+unknowns:
+- 未穷尽核验所有条款及 Annex A 数学，不证明完整 ACES 系统或实现符合性；原 aces 系统候选及其 mixed-identity 风险保持。
 provenance:
-  initiator: Human — ff6962757
-  executor: Agent — Doubao (MainAgent, P6 video/media/broadcast continuous intake executor)
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
   reviewer: null

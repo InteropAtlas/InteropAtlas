@@ -5,13 +5,23 @@ publisher: Advanced Media Workflow Association (AMWA)
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: amwa, value: is-05}
+- namespace: amwa
+  value: is-05
 locators:
-- {url: 'https://specs.amwa.tv/is-05/', role: official}
+- url: https://specs.amwa.tv/is-05/
+  role: official
 identity_resolution:
-  state: identity_risk
+  state: new
   matched_canonical_ids: []
-  reasons: [官方索引当前提供 v1.2.0 的发送端/接收端连接管理文档，并有独立的 IS-04 互操作章节。原候选只标明工作级 IS-05。]
+  reasons:
+  - 官方固定 spec.yml 将该工作级 AMWA 编号、规范名称与独立 releases 数组分列；保留原 candidate_id、外部工作标识与工作入口，不将其改为任何单一版次。
+  - 原工作级身份及固定版次边界已经独立身份复核确认；本提案进入 review_required 而非 accepted。完整冻结提案的最终语义复核及正式接纳仍在后续事件记录。基线 identity_risk 候选及原作者历史保留于
+    Git，不回写历史路由。
   merge_authorized: false
-unknowns: [明确工作级对象与 v1.2.0 发布版身份；不能沿用旧记忆将 v1.1.2 说成当前索引版本。, 逐条审查支持的传输类型及与 IS-04 的版本兼容条件，不笼统宣称与所有设备互通。, 本轮修订日期 2026-09-13；修订内容仍需独立 Reviewer，原始作者及材料见基线 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa 同路径。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 本轮仅核验所列固定发布文献；不声称完整版本史、全部条款、跨版兼容或任何实现的符合性。
+- IS-05 / IS-04 关系提案继续独立待审，本轮不自动接纳、重定向或作跨版互通保证。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null

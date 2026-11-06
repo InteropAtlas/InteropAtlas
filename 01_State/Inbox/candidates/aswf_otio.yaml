@@ -5,13 +5,33 @@ publisher: Academy Software Foundation / OpenTimelineIO project
 family: artifact
 kind: specification
 external_identifiers:
-- {namespace: aswf, value: otio}
+- namespace: aswf
+  value: otio
 locators:
-- {url: 'https://opentimelineio.readthedocs.io/en/latest/', role: official}
+- url: https://opentimelineio.readthedocs.io/en/latest/
+  role: official
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/README.md
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/docs/tutorials/otio-file-format-specification.md
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/releases/tag/v0.18.1
+  role: dated
+- url: https://github.com/AcademySoftwareFoundation/OpenTimelineIO/blob/44236713c1db295a6ffc66189ae98dbdfd0cb9c4/docs/tutorials/feature-matrix.rst
+  role: dated
 identity_resolution:
   state: identity_risk
   matched_canonical_ids: []
-  reasons: [OTIO 的编辑交换数据、API、适配器和软件项目必须分清；当前 latest 页标示 0.19.0.dev1，不能当作稳定发行版。]
+  reasons:
+  - OTIO 的编辑交换数据、API、适配器和软件项目仍须分清；原 2026-09-13 材料所称 latest 0.19.0.dev1 是当时观察，不据此声称当前最新或稳定发行状态。
+  - 2026-11-06 只读核定：官方 v0.18.1 固定 commit 44236713c1db295a6ffc66189ae98dbdfd0cb9c4，release 于2025-11-09发布并标 Beta 18.1
+    / prerelease=true；README 的API稳定表述不是稳定发行状态。
+  - 该版本 File Format Specification 仍自称 Beta 13 的 DRAFT，说明没有顶层文件格式版号、按OTIO_SCHEMA逐类型版本化；软件0.18.1不是统一格式版本。时间线数据模型引用外部媒体，适配器并非全部内置或保证无损。
   merge_authorized: false
-unknowns: [选择稳定发行版和明确数据模型/序列化/API 的收录边界；不自动合并或拆分原身份。, 说明外部媒体引用和适配器转换限制；不得推定所有格式无损互转。, 本轮修订日期 2026-09-13；修订内容仍需独立 Reviewer，原始作者及材料见基线 0d7eb7e337a16ec1dfa4552f8f5f3cbe61297bfa 同路径。]
-provenance: {initiator: Human — ff6962757, executor: Agent — OpenAI / ChatGPT / GPT-6 Astra Pro, reviewer: null}
+unknowns:
+- 剩余是旧 aswf:otio 对 format/API/specification 与实现/插件项目之间的持续主指称裁决，不能用一份Beta13格式草案悄悄替换整个旧format-and-API主体；本补证保持artifact/specification和identity_risk。
+- 未来如果接纳有界规范对象，必须明确文档快照、草案状态和逐类型schema集合；即使软件身份独立接纳，也不解除旧候选风险或推定所有适配器无损互转。
+- 原 2026-09-13 候选和作者历史保留于 Git；本次仅补有明确来源的身份边界，不重指原 ID、自动分拆或追认旧材料已获正式接纳。
+provenance:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / seed identity intake
+  reviewer: null
