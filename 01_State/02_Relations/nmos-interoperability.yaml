@@ -1,0 +1,54 @@
+id: is05_is04
+type: relation
+name_zh: IS-05 v1.2.0 文献中的有条件 IS-04 配合使用建议
+name_en: Conditional IS-04 co-use recommendation in IS-05 v1.2.0
+source: amwa_nmos_is05
+relation: recommended_with
+target: amwa_nmos_is04
+context:
+  version_context:
+    source: IS-05 v1.2.0 / 354c183f7f36554412f69c4a7152fec672a21e01
+    target: IS-04 work-level specification; co-deployed IS-04 APIs SHOULD be version 1.3 or greater; subscription
+      behaviour reference is IS-04 v1.3.2
+  conditions_zh: '仅记录固定 IS-05 v1.2.0 的 Interoperability: IS-04 章节所述配合使用设计与有条件建议：Connection API 与 IS-04 共享数据模型，设计为配合使用；当二者共同部署时，IS-04
+    APIs SHOULD 运行在 1.3 或更高版本。这里的 1.3 是 API 版本要求，不是 IS-04 发布版 1.3.3 的精确引用。共同使用还受该章行为条款约束，包括控制端点发现、Sender/Receiver
+    UUID 一致、修改生效参数或重新激活时递增相应 IS-04 资源的 version，以及用 master_enable 与 sender_id/receiver_id 填充 subscription。该章对 subscription
+    行为的链接明确指向 IS-04 v1.3.2 Behaviour: Nodes，不改写为 v1.3.3，也不表示两版行为等同。本文献建议不是必须共同部署的要求，不证明任意设备实现、跨版本组合或实际部署已互通；1.3
+    或更高的文字不是对未来版本兼容性的独立保证。旧 Node API /target 方法被取代，不等于整个 IS-04 被 IS-05 取代。本关系不作完整符合性、互操作认证、安全性或 IA 采用结论，未运行设备、API
+    或软件测试。'
+  conditions_en: 'Records only the co-use design and conditional recommendation in the fixed IS-05 v1.2.0 Interoperability:
+    IS-04 chapter: the Connection API shares a data model with IS-04 and is designed to be used alongside it; when
+    co-deployed, the IS-04 APIs SHOULD operate at version 1.3 or greater. This is an API-version recommendation,
+    not an exact citation of IS-04 publication v1.3.3. Joint use remains subject to the chapter''s behaviour requirements,
+    including control-endpoint discovery, matching Sender/Receiver UUIDs, incrementing the corresponding IS-04 resource
+    version when active parameters change or are re-activated, and populating subscription using master_enable and
+    sender_id/receiver_id. The chapter''s subscription-behaviour link explicitly names IS-04 v1.3.2 Behaviour: Nodes;
+    it is not rewritten as v1.3.3 and does not establish equivalence between those editions. The documentation does
+    not require joint deployment or prove interoperability of arbitrary implementations, version combinations or
+    deployments; its phrase 1.3 or greater is not an independent guarantee of future-version compatibility. Supersession
+    of the legacy Node API /target method does not mean IS-05 supersedes IS-04 as a whole. No complete conformance,
+    interoperability certification, security or IA-adoption claim is made, and no device, API or software tests
+    were run.'
+evidence:
+- url: https://github.com/AMWA-TV/is-05/blob/354c183f7f36554412f69c4a7152fec672a21e01/docs/Interoperability%20-%20IS-04.md
+  title: 'IS-05 v1.2.0 fixed Interoperability: IS-04 chapter; conditional co-use, API version and behaviour requirements'
+  language: en
+  accessed: '2026-11-06'
+record_created_at: '2026-11-06T17:07:05.666114+00:00'
+record_updated_at: '2026-11-06T17:07:05.666114+00:00'
+last_verified_at: '2026-11-06T17:07:05.666114+00:00'
+last_verified_by: Agent — OpenAI / dot / resolve_nmos_relation_evidence; fixed IS-05 v1.2.0 chapter only
+latest_substantive_contribution:
+  initiator: Human Owner — ff6962757
+  executor: Agent — OpenAI / dot / advance_authorized_work
+  reviewer: Independent Agent — OpenAI / dot / review_nmos_couse_relation
+  github_actor: ff6962757
+semantic_review:
+  reviewer: Independent Agent — OpenAI / dot / review_nmos_couse_relation
+  reviewed_packet_commit: 1bedd87d9059780e053799e6737131c88621e1c4
+  verdict: acceptable_for_ordinary_acceptance
+  review_url: https://github.com/InteropAtlas/InteropAtlas/pull/720
+  scope_zh: 独立阅读固定完整 IS-05 v1.2.0 章节并核验公开冻结整树，仅批准工作级 IS-05 → IS-04 的有条件文献配合建议。API SHOULD ≥1.3、行为引用 v1.3.2 与端点所检
+    v1.3.3 分开；不批准强制共同部署、版本等价、实测互通或完整符合性。
+  report_sha256: d63633d0e0f5bdad89a1a810d637c2b11b749805235ddab34e0f52c4067558b4
+  reviewed_at: '2026-11-06T17:10:53.098187+00:00'
