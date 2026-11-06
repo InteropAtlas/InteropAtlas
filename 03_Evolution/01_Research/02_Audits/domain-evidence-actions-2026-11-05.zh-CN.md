@@ -3,14 +3,14 @@
 <!-- InteropAtlas Document Metadata v0
 Document Status: Research / Evidence Reconciliation
 Document Created At: 2026-11-05T12:42:00+00:00
-Document Updated At: 2026-11-05T21:12:00+00:00
+Document Updated At: 2026-11-06T04:03:11+00:00
 Metadata Provenance: direct_record
 Lifecycle Time Provenance: direct_record
 Contribution Identity Provenance: commit_explicit
 Latest Substantive Contribution:
   Initiator: Human Owner — ff6962757
-  Executor: Agent — OpenAI / dot
-  Reviewer: Independent Agent — OpenAI / dot
+  Executor: Agent — OpenAI / dot / resume_integrated_basemap
+  Reviewer: Independent semantic and source reviewer — OpenAI / dot / assess_fuji_domain_integration
   GitHub Actor: ff6962757
 -->
 
@@ -775,3 +775,37 @@ print(json.dumps(result, ensure_ascii=False, indent=2, default=str))
 核心增量是把输出前缀长度与 uint 回调、read/required 对齐：空输入预期 read=0/required=1；非空截断 required 是 token 所需总长；完整项后追加字节仍只消费首项。真实缓冲、回调与平台条件必须成立。FINISHED 不表示完整文档已消费或验证，局部最短整数头不证明确定性 profile。原 cbor2 35项观察、两条实现边与原审计边界保持不变。
 
 详见[固定源码报告](../01_Prior_Art/cbor-uint-handoff-2026-11-05.zh-CN.md)与[机器可读证据](../01_Prior_Art/cbor-uint-handoff-2026-11-05.json)。原审计行的固定基线与历史表述保持不变。
+
+
+## 2026-11-06 追加：同一组指标证据为何能对应不同汇总
+
+research 原行问的是同一组逐指标结果经过普通与特例 `input_id` 后如何变化。[后续分母研究](../01_Prior_Art/fuji-score-scope-2026-11-05.zh-CN.md)已解释配置清单、实际传入结果与汇总分母的区别。本次把尚未并列写出的两个分支放到**相同合成输入**下对照，区分“汇总值变化”和“证据范围扩大”。这是固定源码的算术推导，**未编译、导入或执行 F-UJI 方法，未调用 pandas 汇总，实际返回值仍未知**。
+
+IA 输入固定于 [`359258b67daa8d82db43a36d3288ccdbb816d891`](https://github.com/InteropAtlas/InteropAtlas/tree/359258b67daa8d82db43a36d3288ccdbb816d891)。本次重新取得并按既有[六文件清单](../01_Prior_Art/fuji-score-scope-2026-11-05.json)逐份核对 Git blob、字节数与 SHA256；运行的只是已有 IA 配置盘点脚本，输出与已提交 JSON 完整字节相同，不是上游运行。上游仍固定 `7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a`，不声称最新发行物或线上状态。
+
+### 固定输入与分支预期
+
+- 两行输入：`FsF-R1.2-01M` 的 earned/total 为 1/1、maturity 为 2、test_status 为 pass；`FsF-F1-01MD` 为 0/1、0、fail。
+- 十七行输入：采用已核对的默认 0.8配置全部 17 个标识及各自 total（合计 26），人为设每行 earned=0、maturity=0、test_status=fail。这只构造汇总函数的输入，不证明17 个 evaluator 实际能返回这组行。
+- 普通条件是 `input_id` 不等于源码列出的两个字面字符串；特例条件是恰好等于其中任一个。两个字符串仅用于读取源码条件，没有访问所指 URL，也没有评价对应人员、账户或实际数据。
+
+| 同一组假设输入 | 普通分支的 FAIR 预期 | 任一特例分支的 FAIR 预期 | 两分支共同保留的输入范围 |
+| --- | --- | --- | --- |
+| 两行：R1.2 通过、F1 不通过 | earned/total 1/2；50%；maturity 1；status_passed/status_total 1/2 | 2/2；100%；maturity 1.5；2/2 | 仍只处理这两行，分数分母 2；未补 A、I类别或其指标 |
+| 配置 17 行：全部人为设为不通过 | 0/26；0%；maturity 0；0/17 | 26/26；100%；maturity 3；17/17 | 仍是所提供的 17 行，分数分母 26；不添加配置外原则或测试 |
+
+以上四格均为**未执行预期，不是四项新增测试**。标识有效、分值有限且总分大于零、状态仅 pass/fail是本对照的输入前提；空集合、异常标识、未知状态、重复项及非有限值未被检验。
+
+预期直接来自 [`get_assessment_summary`](https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/fuji_server/controllers/fair_check.py#L638-L730) 的三个步骤：
+
+1. 特例只在新建的 `summary_dict` 列表里把 earned 取为该行 total、maturity 取为 3、status 取为 1；普通分支取原行值。两分支均从原行读取 total和标识，不把配置清单作为额外输入。
+2. 两行特例的 F、R类别成熟度各为 3，A、I 仍缺失。总体按固定四类计算为 (3+3)/4=1.5；普通分支为 (0+2)/4=0.5，再按源码的正值小于 1分支置为 1。十七行特例才有四类各 3，总体为 3。这里没有把少行结果补成全配置验证。
+3. 这段方法只读取 `results` 中的原行，向另建列表与返回字典写值；特例没有把原行的 fail 改成 pass。该结论限于此方法的写入路径，不断言调用它的其他代码、完整请求或并发环境都不会修改输入。
+
+所以，若未来授权的运行观察符合这些预期，特例中的“100%”也不能替换逐指标原始证据，更不能自动扩大到完整 FAIR原则或真实可复用性。分母研究中的两个 100%与这里同一输入下的分支差异回答不同问题：前者检查**比较了哪些指标**，后者检查**汇总值如何从这些指标形成**。底图使用者需要同时恢复输入清单、原始逐项结果、实际分支条件与汇总定义；只取一个百分比会丢失这几层区别。这是本研究对已有证据的判断，不增加评分、分类或查询合同。
+
+### 后续运行仍有明确前提
+
+新取得的固定 [`pyproject.toml`](https://github.com/pangaea-data-publisher/fuji/blob/7bc65525efdca9aaaaef3bc9f96dd27a5101bb0a/pyproject.toml#L64-L65) 声明 Python `~=3.13.0`，注释明确目前仅支持 Python 3.13；pandas 声明为 `~=2.2.3`。文件为 4572 bytes，Git blob `b4a116d0a5a064a0e058d6292c5d9970beb0abea`、SHA256 `ec6150209655113c010ab720edef490d9fa49df21cd84b515208f7a522c74192`。本次可用环境为 Python 3.12.14、pandas 2.2.3、numpy 2.3.5；现有依赖可见不等于已运行，也不能称满足整个 F-UJI支持环境。没有安装依赖、初始化服务或访问任何 `input_id`。
+
+原行的实际运行问题仍待授权及明确实验环境后检验；原七个 R1.2组件观察与本次静态推导分列，不把旧结果移作新方法执行证据。当前新增的是可核查的同输入分支预期、输入不被该方法改写的范围，以及后续运行环境前提。所有 Canonical字段、关系、历史日期、既有结果文件、待批整体快照与其他具体 hold均未改变。
