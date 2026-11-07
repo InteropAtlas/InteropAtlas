@@ -1,0 +1,3263 @@
+{
+  "test_kind": "synthetic_structural_regression",
+  "passed": 21,
+  "total": 21,
+  "cases": [
+    {
+      "case": "完整匿名合成链",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [],
+        "capture_complete": true,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "允许声明同族探索",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploitation",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "有预算的同族对比，不要求固定类数",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [],
+        "capture_complete": true,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "缺少实际输入",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [
+          "inputs_missing"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "不存在的产物引用",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "MISSING"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "artifact_reference_missing"
+        ],
+        "gaps": [
+          "outputs_not_original"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "转述冒充直接反馈",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "reported",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "direct_reason",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "reported_feedback_promoted_to_direct"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "推断升级硬门槛",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "gate"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "gate_without_direct_authorization"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "筛选后新增候选",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B",
+                "Z"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "candidate_added_after_generation",
+          "drop_reason_missing"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "缺少去留依据",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "drop_reason_missing"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "域名结论缺查询",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": []
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "available_without_required_evidence"
+        ],
+        "gaps": [
+          "screen_evidence_incomplete"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "恢复字段静默丢失",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "actual": {
+        "errors": [
+          "recovery_entry_dropped:search_landscape",
+          "recovery_invalid:search_landscape"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "诚实记录历史未知",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "unknown",
+            "reason": "原始记录未找到"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [
+          "recovery_unknown:search_landscape"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "重建不能冒充原始输出",
+      "input": {
+        "record_kind": "reconstruction",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "reconstructed",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "synthetic_artifact_in_real_record"
+        ],
+        "gaps": [
+          "inputs_not_original",
+          "outputs_not_original"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "用户暂停优先",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": true,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "resume_not_ready"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "空批次不是完整链",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [
+          "batches_missing"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "原始证据缺出处",
+      "input": {
+        "record_kind": "live",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "original",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "original",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "original",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [
+          "original_source_locator_missing"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "合成反馈混入真实记录",
+      "input": {
+        "record_kind": "live",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "synthetic_artifact_in_real_record"
+        ],
+        "gaps": [
+          "inputs_not_original",
+          "outputs_not_original"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "占位审查不足",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "checked": true
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [
+          "batch_review_missing"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "反馈角色缺失",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "feedback_role_invalid"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "未展示项错误筛查仍检查",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "B",
+                "claim": "available",
+                "queries": []
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "available_without_required_evidence"
+        ],
+        "gaps": [
+          "screen_evidence_incomplete"
+        ],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "筛查结论缺失",
+      "input": {
+        "record_kind": "synthetic",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "synthetic",
+            "text": "比较匿名样例的结构。"
+          },
+          {
+            "id": "OUT",
+            "kind": "synthetic",
+            "text": "A、B、C 为匿名测试 ID，不是名称。"
+          },
+          {
+            "id": "FB",
+            "kind": "synthetic",
+            "text": "我更喜欢A，B暂时没有感觉。"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [
+          "screen_claim_missing"
+        ],
+        "gaps": [],
+        "capture_complete": false,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    },
+    {
+      "case": "本地原始产物有执行定位",
+      "input": {
+        "record_kind": "live",
+        "owner_paused": true,
+        "generation_resume_requested": false,
+        "artifacts": [
+          {
+            "id": "IN",
+            "kind": "original",
+            "text": "比较匿名样例的结构。",
+            "origin": "local_execution",
+            "execution_ref": "synthetic-test-execution"
+          },
+          {
+            "id": "OUT",
+            "kind": "original",
+            "text": "A、B、C 为匿名测试 ID，不是名称。",
+            "origin": "local_execution",
+            "execution_ref": "synthetic-test-execution"
+          },
+          {
+            "id": "FB",
+            "kind": "original",
+            "text": "我更喜欢A，B暂时没有感觉。",
+            "origin": "local_execution",
+            "execution_ref": "synthetic-test-execution"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "SYN-1",
+            "purpose": "exploration",
+            "method_ref": "pilot-v0.1",
+            "runtime": {
+              "level": "synthetic"
+            },
+            "inputs": [
+              "IN"
+            ],
+            "outputs": [
+              "OUT"
+            ],
+            "stages": {
+              "generated": [
+                "A",
+                "B",
+                "C"
+              ],
+              "intrinsic": [
+                "A",
+                "B"
+              ],
+              "reality": [
+                "A"
+              ],
+              "exposed": [
+                "A"
+              ]
+            },
+            "decisions": [
+              {
+                "candidate_id": "C",
+                "from": "generated",
+                "to": "intrinsic",
+                "reason": "合成质量淘汰"
+              },
+              {
+                "candidate_id": "B",
+                "from": "intrinsic",
+                "to": "reality",
+                "reason": "合成现实淘汰"
+              }
+            ],
+            "feedback": [
+              {
+                "source_artifact": "FB",
+                "quote": "我更喜欢A，B暂时没有感觉。",
+                "interpretation": "原因未知；短度仅作为待验证解释。",
+                "basis": "inference",
+                "role": "prefer"
+              }
+            ],
+            "screenings": [
+              {
+                "candidate_id": "A",
+                "claim": "available",
+                "observed_at": "2026-09-11T00:00:00Z",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "public_tm",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  },
+                  {
+                    "intent": "domain",
+                    "source": "synthetic-fixture",
+                    "result": "仅合成测试"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "筛查导致集合缩小；原因未由名称判断。",
+              "stage_observations": {
+                "generated": "三项",
+                "intrinsic": "两项",
+                "reality": "一项",
+                "exposed": "一项"
+              },
+              "evidence_refs": [
+                "OUT"
+              ],
+              "scope": "synthetic"
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "合成状态"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "合成状态"
+          }
+        }
+      },
+      "previous": null,
+      "actual": {
+        "errors": [],
+        "gaps": [],
+        "capture_complete": true,
+        "semantic_and_reality_clearance": "not_assessed"
+      },
+      "passed": true
+    }
+  ],
+  "limits": "不是历史重放，不测试名称质量，不证明偏好解释或现实结果真实。"
+}

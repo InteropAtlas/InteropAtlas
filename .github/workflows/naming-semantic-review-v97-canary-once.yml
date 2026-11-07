@@ -1,0 +1,117 @@
+name: SEM-408-004 single reviewer task-understanding canary
+on:
+  push:
+    branches: [feat/adaptive-naming-skill-v0.1]
+    paths: [.github/workflows/naming-semantic-review-v97-canary-once.yml]
+permissions:
+  contents: write
+concurrency:
+  group: sem-408-004-single-canary
+  cancel-in-progress: false
+jobs:
+  semantic-canary:
+    if: github.repository == 'InteropAtlas/InteropAtlas' && github.event.repository.private == false
+    runs-on: ubuntu-24.04
+    timeout-minutes: 35
+    env:
+      P: 03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware
+      LLAMA_REV: 56381e407c0ccfb3a6f71e668a27a901001d22ce
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - name: Verify frozen one-call boundary before inference
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import importlib.util,pathlib,json
+          p=pathlib.Path('03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware')
+          def load(n,path):
+              s=importlib.util.spec_from_file_location(n,path);m=importlib.util.module_from_spec(s);s.loader.exec_module(m);return m
+          one=load('one',p/'semantic-review-pilot/run.py')
+          four=load('four',p/'semantic-review-pilot-004/run.py')
+          brief,row,h=four.source_material()
+          assert row=={'id':'C003','name':'Linetap'}
+          assert four.base.MODEL_REPO==one.MODEL_REPO and four.base.MODEL_FILE==one.MODEL_FILE
+          assert four.base.SEED==one.SEED and four.base.MAX_OUTPUT==one.MAX_OUTPUT
+          prompt=four.task_text(brief,row)
+          assert 'identity label' in prompt and 'do not require the label itself to perform' in prompt
+          assert 'other candidates' in prompt and 'no prior ranking' in prompt
+          print(json.dumps({'boundary':'ok','candidate':row,'source_sha256':h,'max_requests':1,'new_names':0,'paid_api_calls':0}))
+          PY
+      - name: Compile pinned runtime and prepare same Gemma reviewer
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"; mkdir -p "$R"
+          curl --fail --location --max-time 120 "https://codeload.github.com/ggml-org/llama.cpp/tar.gz/$LLAMA_REV" -o "$R/llama.tar.gz"
+          tar -xzf "$R/llama.tar.gz" -C "$R"
+          cmake -S "$R/llama.cpp-$LLAMA_REV" -B "$R/build" -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DGGML_CUDA=OFF -DLLAMA_CURL=OFF -DBUILD_SHARED_LIBS=OFF
+          cmake --build "$R/build" --target llama-server -j 4
+          python "$P/semantic-review-pilot-004/run.py" prepare --output "$O/model" --runtime "$R"
+      - name: Execute exactly one existing-candidate review
+        shell: bash
+        run: |
+          set -euo pipefail
+          R="$RUNNER_TEMP/sem408-runtime"; O="$RUNNER_TEMP/sem408-evidence"
+          "$R/build/bin/llama-server" -m "$R/model.gguf" --host 127.0.0.1 --port 8085 -c 8192 -t 4 -tb 4 -np 1 -b 512 -ub 128 --alias SEM-408-004-Gemma4B > "$O/model/server.log" 2>&1 &
+          PID=$!; trap 'kill "$PID" 2>/dev/null || true' EXIT
+          python - <<'PY'
+          import urllib.request,time
+          for _ in range(90):
+              try:
+                  with urllib.request.urlopen('http://127.0.0.1:8085/health',timeout=2) as r:
+                      if r.status==200:break
+              except Exception:time.sleep(1)
+          else:raise RuntimeError('model_server_not_ready')
+          PY
+          python -u "$P/semantic-review-pilot-004/run.py" execute --output "$O/model"
+          python - <<'PY'
+          import json,os,pathlib
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-evidence/model'
+          summary=json.loads((root/'summary.json').read_text())
+          assert summary['id']=='SEM-408-004' and summary['requests_dispatched']==1
+          assert summary['new_names']==0 and summary['paid_api_calls']==0 and not summary['automatic_expansion']
+          assert not summary['semantic_quality_validated'] and summary['quality_ground_truth'] is None
+          print(json.dumps({'result_status':summary['result']['status'],'task_gate':summary['result'].get('task_gate'),'semantic_evidence_eligible':summary['result'].get('semantic_evidence_eligible',False)},ensure_ascii=False))
+          PY
+      - name: Preserve canary evidence artifact before branch publication
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: sem408004-single-canary-${{ github.run_id }}
+          path: ${{ runner.temp }}/sem408-evidence/
+          retention-days: 30
+          if-no-files-found: error
+      - name: Publish exact bounded evidence if branch is unchanged
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,os,pathlib,urllib.request
+          root=pathlib.Path(os.environ['RUNNER_TEMP'])/'sem408-evidence/model'
+          repo='InteropAtlas/InteropAtlas';branch='feat/adaptive-naming-skill-v0.1';source=os.environ['GITHUB_SHA']
+          home='03_Evolution/01_Research/03_Tests/naming-evidence-pilot/model-aware/semantic-review-pilot-004/results'
+          def api(path,method='GET',body=None):
+              req=urllib.request.Request('https://api.github.com/repos/'+repo+path,method=method,
+                  data=(json.dumps(body,ensure_ascii=False).encode() if body is not None else None),
+                  headers={'Authorization':'Bearer '+os.environ['GH_TOKEN'],'Accept':'application/vnd.github+json','Content-Type':'application/json'})
+              with urllib.request.urlopen(req,timeout=60) as r:return json.load(r)
+          current=api('/git/ref/heads/'+branch)['object']['sha']
+          assert current==source,'branch changed after artifact preservation; do not overwrite'
+          files=[];total=0
+          for path in sorted(root.rglob('*')):
+              if not path.is_file():continue
+              raw=path.read_bytes();total+=len(raw);assert total<5_000_000
+              files.append({'path':home+'/'+str(path.relative_to(root)),'mode':'100644','type':'blob','content':raw.decode('utf-8')})
+          base_tree=api('/git/commits/'+current)['tree']['sha']
+          tree=api('/git/trees','POST',{'base_tree':base_tree,'tree':files})['sha']
+          commit=api('/git/commits','POST',{'message':'evidence(#408): preserve SEM-408-004 single reviewer canary\n\nExactly one existing candidate, no new names, no paid inference, no semantic-truth or promotion claim.','tree':tree,'parents':[current]})['sha']
+          api('/git/refs/heads/'+branch,'PATCH',{'sha':commit,'force':False})
+          print(json.dumps({'published_commit':commit,'source_commit':source,'files':len(files),'bytes':total,'new_names':0,'paid_api_calls':0}))
+          PY

@@ -1,0 +1,78 @@
+schema_version: '0.1'
+suite: adaptive-naming-generation-capability-recovery
+purpose: >-
+  Focused regression for the control defect observed in #411: state recovery succeeded while
+  generation capability recovery failed, causing scheduler bypass and simple compound matrices.
+  This suite tests control behavior, not whether any specific generated name is objectively good.
+
+cases:
+  - id: REG-GEN-001-generation-contract-required
+    area: generation_recovery
+    setup: >-
+      Controller restored task goal, Owner preferences, candidate counts and screening state,
+      but has not reloaded workflow/operator scheduling or word-formation strategies.
+    stimulus: user asks to continue generating more names
+    must:
+      - recover the Generation Capability Packet before generation
+      - write a Generation Contract with workflow_patterns and construction_portfolio
+      - record cadence, runtime isolation, anti-collapse checks and stop condition
+    must_not:
+      - jump directly from 'generate N names' to candidate creation
+      - treat recovered task state as proof that generation capability was restored
+
+  - id: REG-GEN-002-portfolio-means-different-construction
+    area: construction_scheduler
+    setup: controller wants a portfolio batch and has several viable operators
+    stimulus: proposed batch varies only prefixes such as Each/Many/Else/Common and second ordinary nouns
+    must:
+      - diagnose construction_mode_collapse or method_underuse
+      - require genuinely different construction families
+      - stop before reality screening if the batch is only surface variation
+    must_not:
+      - count prefix swaps, suffix swaps or second-word swaps as distinct methods
+      - use domain availability to justify the weak batch
+
+  - id: REG-GEN-003-transformation-in-exploration
+    area: transformation_operator
+    setup: current task is ordinary exploration, not a reality rescue branch
+    stimulus: strong fresh prototypes exist and transformation could increase identity space
+    must:
+      - allow appropriate Transformation Operators during exploration
+      - preserve prototype and operator lineage
+      - use a bounded attempt budget
+    must_not:
+      - reserve all transformation operators exclusively for post-collision rescue
+      - use Owner-positive historical names as transformation seeds
+
+  - id: REG-GEN-004-prototype-before-transformation
+    area: transformation_operator
+    setup: controller has many weak ordinary-word seeds and wants to use spelling mutation because the operator has not been tried recently
+    stimulus: transformation budget is allocated
+    must:
+      - evaluate prototype quality first
+      - transform only a bounded set of intrinsically promising prototypes
+      - return to territory/prototype discovery when seed quality is weak
+    must_not:
+      - mass-produce letter variants from weak seeds for checklist completeness
+
+  - id: REG-GEN-005-sound-led-character-brief
+    area: sound_led_generation
+    setup: sound-led exploration is activated for a long-term umbrella organization
+    stimulus: generator is about to make opaque coined names
+    must:
+      - define phonetic character, maturity, institutional scale and recoverability targets
+      - state unwanted reading classes such as personal-name/fantasy/generic-app feel when task-relevant
+    must_not:
+      - use only 'make it sound like a brand' or 'generate good-sounding invented words'
+
+  - id: REG-GEN-006-name-likeness-upstream
+    area: generation_quality
+    setup: Owner says a screened batch uses vocabulary and combinations that feel too simple and not like mature names
+    stimulus: controller plans the next iteration
+    must:
+      - treat the feedback as a generation-method signal
+      - revise territory material / construction / prototype / transformation scheduling first
+      - run a small no-reality generation regression before resuming expensive screening
+    must_not:
+      - respond primarily by adding a stricter downstream name-likeness filter
+      - keep the same generator and accept extreme 100-to-1 screening attrition as normal

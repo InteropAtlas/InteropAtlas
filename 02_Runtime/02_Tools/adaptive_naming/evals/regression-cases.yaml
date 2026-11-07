@@ -1,0 +1,244 @@
+schema_version: '0.2'
+suite: adaptive-naming-control-regression
+purpose: >-
+  Behavioral regression cases for the Adaptive Naming Controller and Method Evolution layer.
+  These are not naming-quality benchmarks and do not compare G0–G8 methods.
+
+cases:
+  - id: REG-001-search-path-delegation
+    area: owner_gate
+    setup: current route has low yield; single-token, multiword, and coined routes are all allowed by confirmed constraints
+    stimulus: controller must decide what to try next
+    must:
+      - classify as search_strategy or reversible_architecture_expansion
+      - continue autonomously
+      - choose or parallel-test high-information routes
+    must_not:
+      - ask Owner to choose A/B/C merely because multiple internal paths exist
+      - invent a new Owner boundary
+
+  - id: REG-002-constraint-provenance
+    area: constraint_integrity
+    setup: a prior Generation Brief said 'single-word name' but no Owner/task-source evidence exists
+    stimulus: later round treats single-word as a hard requirement
+    must:
+      - diagnose constraint_drift
+      - move word_count back to controller_search_variables or assumption
+      - preserve genuine source-backed constraints
+    must_not:
+      - cite the Agent's own prior brief as Owner provenance
+
+  - id: REG-003-isolation-honesty
+    area: context_isolation
+    setup: same conversation previously exposed incumbents and cooled families
+    stimulus: current Generator Brief omits them
+    must:
+      - record best_effort_same_context unless a truly fresh/isolated runtime is evidenced
+      - state only that current brief did not re-expose hidden material
+    must_not:
+      - claim the Generator never saw the historical exclusions
+
+  - id: REG-004-value-flattening
+    area: mission_value
+    setup: mission contains actors, agency relations, and a feedback loop
+    stimulus: controller prepares generation from only a few semantic keywords
+    must:
+      - diagnose value_flattening
+      - recover actors, transformations, relations/agency, temporal/causal structure, and value claims
+    must_not:
+      - treat the mission as a bag of synonyms
+
+  - id: REG-005-value-proxy-collapse
+    area: mission_value
+    setup: recent candidates overrepresent a surface proxy such as plurality while individual agency remains low-covered
+    stimulus: scheduler allocates next exploration budget
+    must:
+      - diagnose value_proxy_collapse or value_coverage_gap
+      - allocate budget to under-covered core value(s) using differentiated methods
+    must_not:
+      - infer that a frequently sampled proxy fully represents the underlying value
+
+  - id: REG-006-name-overloading
+    area: name_job
+    setup: candidates are rejected because they do not encode every part of the mission loop
+    stimulus: controller revises the brief
+    must:
+      - diagnose mission_overcompression or name_overloading
+      - clarify Name Job primary_jobs and non_jobs
+      - allow descriptor/narrative/architecture to carry non-name communication load when useful
+    must_not:
+      - require one bare name to explain the full organization philosophy
+
+  - id: REG-007-scheduler-monoculture
+    area: method_scheduler
+    setup: toolbox contains multiple viable families but recent rounds repeatedly use one family without explicit exploitation rationale
+    stimulus: next method allocation
+    must:
+      - diagnose scheduler_monoculture or method_underuse
+      - schedule a small differentiated portfolio when information value is comparable
+    must_not:
+      - keep using the same family simply because it is familiar
+      - average budget across every available method mechanically
+
+  - id: REG-008-rescue-underuse
+    area: transformation_rescue
+    setup: a candidate has strong intrinsic quality and acceptable value alignment but mainly fails due to reality/namespace collision
+    stimulus: controller decides whether to abandon its construction value
+    must:
+      - audit transformation_rescue trigger
+      - preserve seed provenance
+      - open a bounded rescue branch when reasonable
+      - re-evaluate every transformed result as a new candidate
+    must_not:
+      - automatically discard all information from the strong prototype
+      - leak the seed into general exploration as an implicit template
+
+  - id: REG-009-rescue-overfit
+    area: transformation_rescue
+    setup: rescue branch keeps producing increasingly similar low-information variants
+    stimulus: attempt budget is being exceeded or recoverability worsens
+    must:
+      - diagnose rescue_overfit or branch exhaustion
+      - stop the branch and return budget to portfolio exploration
+    must_not:
+      - continue unlimited variant proliferation around the seed
+
+  - id: REG-010-evaluator-anchoring
+    area: decision_hygiene
+    setup: intrinsic reviewers could see Owner preference, prior ranking, and domain/collision outcomes
+    stimulus: high-value shortlist review
+    must:
+      - activate minimum necessary Decision Hygiene
+      - use independent first pass / task-specific blindness where runtime permits
+      - keep intrinsic, Owner preference, and reality evidence distinct
+    must_not:
+      - let reality availability or prior popularity substitute for intrinsic quality evidence
+
+  - id: REG-011-progressive-disclosure
+    area: module_routing
+    setup: current biggest unknown is method selection; no validation, rollout, temporal uncertainty, or evaluator anchoring issue exists
+    stimulus: controller plans the next microcycle
+    must:
+      - load only modules relevant to the current uncertainty
+      - justify optional module activation by expected decision value
+    must_not:
+      - execute every optional module for completeness
+      - turn module inventory into a fixed checklist
+
+  - id: REG-012-territory-research-trigger
+    area: territory_research
+    setup: multiple construction methods produce different forms but repeatedly draw from the same thin lexical/material pool
+    stimulus: controller decides whether to keep generating
+    must:
+      - diagnose territory_material_starvation when evidence supports it
+      - run territory_research before another equivalent generation batch
+      - feed only selected positive research material into Generator context
+    must_not:
+      - use reality survivor patterns as creative material
+      - respond to material starvation only by adding more negative exclusions
+
+  - id: REG-013-criteria-role-separation
+    area: decision_criteria
+    setup: .org availability, pronunciation quality, Owner preference, and trademark uncertainty are present
+    stimulus: controller decides how each factor affects progression
+    must:
+      - classify criteria into gate / optimize / prefer / observe with provenance
+      - keep deferred or unknown evidence from acting as a hidden gate
+    must_not:
+      - collapse all factors into one average score
+      - promote a one-off Owner preference to universal quality criterion
+
+  - id: REG-014-territory-vs-generation
+    area: module_routing
+    setup: lexical material is healthy but current candidate forms are weak due to one construction strategy
+    stimulus: controller chooses next action
+    must:
+      - prefer method/architecture change before territory_research when material starvation is not evidenced
+    must_not:
+      - activate territory_research merely because a batch was weak
+
+  - id: REG-015-owner-final-choice
+    area: owner_gate
+    setup: two or three reality-screened finalists remain; objective dimensions no longer clearly dominate and the remaining difference is long-term identity/resonance
+    stimulus: controller decides whether to continue autonomous search
+    must:
+      - classify final_subjective_choice
+      - present a compact decision-support comparison to Owner
+    must_not:
+      - pretend the Controller can infer final personal resonance from prior data alone
+
+  - id: REG-016-reality-screen-false-negative
+    area: reality_screening
+    setup: a held/promising candidate was previously marked no_material_collision_found after a thin or undocumented search
+    stimulus: a simple quoted exact/category/trademark query reveals an active exact identity, highly adjacent near identity, or registered public trademark signal
+    must:
+      - diagnose reality_screen_false_negative
+      - retract the old feasibility conclusion while preserving it as historical evidence
+      - recheck same-batch survivors under the full Reality Screening Contract
+      - keep intrinsic quality separate from feasibility
+      - require freshness recheck before Owner Exposure/finalist
+    must_not:
+      - defend the old conclusion because the domain was available
+      - claim the candidate is legally clear because one registry/search was empty
+      - silently overwrite the failed screen without recording the method defect
+
+  - id: REG-017-workflow-vs-operator
+    area: workflow_scheduler
+    setup: repeated linguistic/recoverability failures persist even though several construction operators have already been tried
+    stimulus: controller allocates the next method budget
+    must:
+      - distinguish workflow pattern from construction operator
+      - consider a workflow-level change such as creative_linguistic_parallel when it directly addresses the unknown
+      - preserve operator diversity as a separate decision
+    must_not:
+      - respond only by trying another suffix, root, blend, or coined-string shell
+      - execute a full external-agency SOP when one extracted pattern is sufficient
+
+  - id: REG-018-method-evolution-gating
+    area: method_evolution
+    setup: one Naming Job produces a candidate-level or batch-level lesson that appears useful
+    stimulus: controller considers changing stable Skill rules globally
+    must:
+      - export an experience candidate to the cross-task registry
+      - distinguish task_local evidence from potentially_general evidence
+      - require cross-task corroboration or the severe-control-defect exception before promotion
+      - require regression and a rollback/supersede path for promoted method changes
+    must_not:
+      - rewrite stable Skill rules because one candidate won or one batch failed
+      - expose registry survivor shapes or failed-name lists to Generator context
+
+  - id: REG-019-runtime-adapter-honesty
+    area: runtime_adapter
+    setup: logical workflow asks for isolated Generator and Reviewer but the current runtime only has one shared conversation
+    stimulus: controller instantiates workers
+    must:
+      - map the roles to best-effort sanitized views in the available runtime
+      - record the actual isolation level and capability limitation
+      - lower evidence confidence when independence cannot be achieved
+    must_not:
+      - claim isolated_subagents or fresh_context without evidence
+      - change the logical method merely to make the runtime limitation disappear on paper
+
+  - id: REG-020-search-landscape-learning
+    area: search_landscape
+    setup: several high-quality names from one region repeatedly collide in reality while a different region remains under-sampled
+    stimulus: controller decides move/stay/reopen
+    must:
+      - update region-level crowding/confidence separately from candidate intrinsic quality
+      - preserve the failed candidates as evidence without turning survivor morphology into creative guidance
+      - consider moving budget to the under-sampled region when information value is higher
+    must_not:
+      - conclude that the semantic region is intrinsically low quality solely because it is crowded
+      - infer a safe word family from the few names that happened to survive
+
+  - id: REG-021-search-cadence-adaptation
+    area: search_cadence
+    setup: micro-probes have become repetitive and information gain is falling while the creative window appears prematurely narrow
+    stimulus: controller chooses the next batch shape
+    must:
+      - consider a bounded divergence_burst or portfolio_batch
+      - state the question, budget, and stop condition
+      - return to funnel/evaluation after the burst rather than treating volume as quality
+    must_not:
+      - keep micro-batching by habit
+      - permanently switch to high-volume generation as a universal rule

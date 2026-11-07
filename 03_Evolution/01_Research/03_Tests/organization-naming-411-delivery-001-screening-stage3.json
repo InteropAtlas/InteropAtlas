@@ -1,0 +1,164 @@
+{
+  "id": "DELIVERY-411-001-SCREEN-03",
+  "status": "browser_runs_terminal_required_trademark_coverage_still_incomplete",
+  "date": "2026-09-13",
+  "executor": "OpenAI / ChatGPT / GPT-6 Astra Pro",
+  "primary_issue": 411,
+  "previous_checkpoint": {
+    "path": "03_Evolution/01_Research/03_Tests/organization-naming-411-delivery-001-screening-stage2.json",
+    "commit": "289f2dc3ce83b2a15f5671490f2cb899a8db3f8f"
+  },
+  "in_progress_checkpoint_commit": "8c7dc103f479f6af2a0f2ad48e400307f3874d45",
+  "candidate": {"id": "D012", "name": "Common Latitude"},
+  "connection": {"provider": "TinyFish", "connected_for_current_request": true, "actual_browser_invoked": true, "additional_connection_request_for_tinyfish_needed": false},
+  "purpose": "Actual candidate trademark screening, not model/reviewer testing or a change of naming method.",
+  "evidence_level": "browser_executor_reports; no query-bound source-page screenshot/export was returned for independent inspection",
+  "counts": {"new_names_this_stage": 0, "inherited_generated": 48, "inherited_internally_retained": 6, "fully_screened_for_owner_exposure": 0, "formal_owner_review_presented": 0, "new_owner_accepted": 0, "browser_runs_started": 5, "browser_runs_terminal": 5, "browser_runs_active_at_close": 0},
+  "runs": [
+    {
+      "id": "271c9de3-7eb1-42d6-902f-0c205bacf03d",
+      "url": "https://agent.tinyfish.ai/runs/271c9de3-7eb1-42d6-902f-0c205bacf03d",
+      "target": "https://tmsearch.uspto.gov/",
+      "provider_status": "completed",
+      "screen_status": "incomplete_query_scope_uncertain",
+      "reported_step_count": 21,
+      "reported_duration_seconds": 378,
+      "reported_queries": [
+        {"query": "\"COMMON LATITUDE\"", "mode": "Wordmark basic", "status_filters": "live_and_dead", "reported_count": 3128, "reported_inspected_scope": "first_page_50_not_all_3128", "accepted_inference": "none_about_exact_mark_absence"},
+        {"query": "COMMONLATITUDE", "mode": "Wordmark basic", "status_filters": "live_and_dead", "reported_count": 0, "reported_message": "No results found", "accepted_inference": "reported_single_token_query_no_hits_only_not_composite_or_near_clearance"}
+      ],
+      "report_errors_not_adopted": [
+        "The report called all 3128 results LATITUDE-only while admitting only the first 50 were inspected.",
+        "The report claimed quoted phrase searching was unsupported. Official USPTO guidance explicitly prescribes CM plus a quoted multiword phrase.",
+        "The report inferred no application or registration exists from one search; no universal absence claim is accepted."
+      ],
+      "screenshots_exported_to_controller": false
+    },
+    {
+      "id": "ece9d968-8854-4ade-a600-2dc0aea122b8",
+      "url": "https://agent.tinyfish.ai/runs/ece9d968-8854-4ade-a600-2dc0aea122b8",
+      "target": "https://www.tmdn.org/tmview/",
+      "provider_status": "failed",
+      "screen_status": "no_candidate_result_obtained",
+      "error": "This task timed out before it finished. Try a simpler goal, or retry.",
+      "reported_step_count": 34,
+      "reported_duration_seconds": 1189,
+      "candidate_results": null,
+      "scope": "No EU, CN or WIPO record absence inferred.",
+      "boundary_observation": "Progress text mentioned clicking a proxy/firewall check despite the explicit no-bypass instruction. No complete action trace or successful access was returned; those labels do not establish compliant access. No result accepted, no circumvention authorized, and no follow-up bypass attempted."
+    },
+    {
+      "id": "2607d67f-b3e7-469f-89ea-325d920cfa40",
+      "url": "https://agent.tinyfish.ai/runs/2607d67f-b3e7-469f-89ea-325d920cfa40",
+      "target": "https://tmsearch.uspto.gov/",
+      "provider_status": "failed",
+      "screen_status": "expert_mode_correction_not_completed",
+      "requested_queries": ["CM:\"common latitude\"", "CM:(common AND latitude)", "CM:commonlatitude"],
+      "requested_mode": "Expert",
+      "purpose": "Correct basic-mode ambiguity, not duplicate an accepted full screen.",
+      "error": "This task timed out before it finished. Try a simpler goal, or retry.",
+      "reported_duration_seconds": 1196,
+      "wait_terminal_step_count": 71,
+      "postfailure_metadata_step_count": 70,
+      "metadata_read_after_failure_not_used_for_polling": true,
+      "provider_timestamps_utc": {"created_at": "2026-09-13T11:08:58Z", "started_at": "2026-09-13T11:09:03Z", "finished_at": "2026-09-13T11:28:59Z"},
+      "configured_limits": {"max_steps": 32, "max_duration_seconds": 240},
+      "limit_observation": "Returned progress/duration exceeded requested limits. Limits were requested, not demonstrably enforced. Step-count disagreement is preserved rather than silently harmonized.",
+      "results": null
+    },
+    {
+      "id": "77944434-3d73-4142-a358-828c87b175e7",
+      "url": "https://agent.tinyfish.ai/runs/77944434-3d73-4142-a358-828c87b175e7",
+      "target": "https://www3.wipo.int/madrid/monitor/en/",
+      "provider_status": "completed",
+      "screen_status": "limited_report_query_field_confirmation_missing",
+      "reported_step_count": 58,
+      "reported_duration_seconds": 1080,
+      "configured_limits": {"max_steps": 18, "max_duration_seconds": 180, "mode": "strict"},
+      "reported_searches": [
+        {"field_verbatim": "Mark (all text fields) / Holder Name", "query": "\"COMMON LATITUDE\"", "operator_reported": "Exact Phrase (quoted)", "total_results_reported": 0, "message": "No documents match your query"},
+        {"field_verbatim": "Mark (all text fields) / Holder Name", "query": "COMMONLATITUDE", "operator_reported": "Normal keyword", "total_results_reported": 0, "message": "No documents match your query"}
+      ],
+      "additional_reported_broad_search": {"query": "COMMON LATITUDE", "reported_count": 267, "sample_marks_reported": ["LATITUDE", "COMMON", "NORTH LATITUDE"], "all_records_reviewed": "not_established"},
+      "screenshots_exported_to_controller": false,
+      "export_report_verbatim": "Not obtained (interface supported search execution but no direct export for zero-result pages provided).",
+      "adjudication": [
+        "Preserve the two reported zero-result messages as a browser-executor observation, not an independently confirmed complete mark search.",
+        "The field label combines Mark and Holder Name; without a query-bound view, the precise field actually searched is not established.",
+        "A sampled broad result set does not prove exact absence among all 267 results.",
+        "Madrid registrations are not a replacement for complete domestic US, EU or CN records."
+      ],
+      "legal_clearance": false
+    },
+    {
+      "id": "591a394d-8f09-4864-9e8e-26370af7e819",
+      "url": "https://agent.tinyfish.ai/runs/591a394d-8f09-4864-9e8e-26370af7e819",
+      "target": "https://sbj.cnipa.gov.cn/sbj/sbcx/",
+      "provider_status": "completed",
+      "screen_status": "blocked_at_sso_before_actual_trademark_query",
+      "reported_step_count": 13,
+      "reported_duration_seconds": 474,
+      "configured_limits": {"max_steps": 18, "max_duration_seconds": 180, "mode": "strict"},
+      "requested_queries": ["COMMON LATITUDE", "COMMONLATITUDE"],
+      "observed_navigation_report": [
+        "CNIPA landing page loaded; the executor performed a portal document/site search, explicitly not a trademark database search.",
+        "Normal official link led to https://wcjs.sbj.cnipa.gov.cn/ and the SGTMI trademark comprehensive-information query form.",
+        "Attempting the actual query led to https://sso.cnipa.gov.cn/login in this session. No credential, account creation, or verification bypass was used."
+      ],
+      "portal_site_search_no_hits_counts_as_trademark_evidence": false,
+      "candidate_database_results": null,
+      "reported_data_update_date": "2026-09-11",
+      "data_update_date_independently_verified": false,
+      "access_limit": "Login requirement observed in this browser session; not asserted to be universal across every public CNIPA access route.",
+      "user_account_existence": "unknown_not_inferred_from_use_vault_false"
+    }
+  ],
+  "official_query_guidance": {
+    "url": "https://www.uspto.gov/trademarks/search/federal-trademark-searching",
+    "read_this_stage": true,
+    "relevant_sections": ["Search strategy for words", "Combined term search"],
+    "observation": "Official guidance supports CM quoted phrases and expanded/alternative/combined queries. An exact knockout query alone is not comprehensive confusing-similarity clearance."
+  },
+  "other_access_reads": {
+    "madrid_monitor": "Normal fetch returned help content, not candidate results.",
+    "cnipa_landing": "Normal fetch returned official links including wcjs.sbj.cnipa.gov.cn, not candidate results.",
+    "wipo_branddb": "No usable candidate search content obtained.",
+    "uspto_search_information": "Only help/announcement/security boilerplate obtained; not a submitted-query result."
+  },
+  "delivery_decision": {
+    "D012": "internal_hold_required_screening_incomplete",
+    "six_retained_names_promoted": false,
+    "reason": "The connection is working, but the returned data does not complete the required four-scope candidate screening. Provider completed status is not screening passed.",
+    "not_a_name_quality_failure": true,
+    "screening_scope_not_expanded": "Existing preliminary risk screening remains the requirement. No demand for guaranteed registration, exhaustive internet coverage or a lawyer opinion for every draft has been added.",
+    "new_browser_run_dispatch_after_this_unit": "paused_pending_better_access_or_a_specific_corrective_path; do_not_repeat_same_failing_forms",
+    "unrelated_generation_and_language_work": "not_globally_paused"
+  },
+  "targeted_alternative_for_access_blocker": {
+    "provider": "Questel / Markify",
+    "status": "official_capabilities_read_not_connected_tested_or_purchased",
+    "urls": ["https://www.markify.com/services/prosearch.html", "https://www.markify.com/services/comprehensive-search.html", "https://markify.help.questel.com/en/support/solutions/articles/77000545687-what-is-markify-prosearch-platform"],
+    "declared_relevant_coverage": ["US USPTO", "EUIPO", "China CN", "WIPO and WIPO Pending"],
+    "declared_relevant_features": ["identical and similar trademark queries", "exportable reports", "bulk naming search", "data/API access"],
+    "claim_limit": "Vendor statements, not a verified result for any candidate or a guarantee this environment can operate the service.",
+    "trial_gate": "Vendor says account signup and confirmation precede its contact and trial access; not guaranteed immediate self-service activation.",
+    "pricing_limit": "Public per-register/report prices are not a quote for this batch or a ProSearch subscription; no spend authorized by this record.",
+    "plugin_directory_query": "Markify trademark Corsearch",
+    "matching_plugins_returned": 0,
+    "contacted_vendor": false,
+    "account_created": false,
+    "payment_or_subscription_started": false
+  },
+  "owner_decision_proposal": {
+    "category": "material_effect_on_completion_and_efficiency; new_external_account_or_service_access",
+    "recommendation": "Authorize trial/quotation access to an export-capable professional trademark data service, scoped to this name batch, instead of further open-ended browser-form retries. No automatic purchase or trademark filing.",
+    "status": "pending_owner_not_approved",
+    "owner_not_asked_to_review_raw_names_or_run_queries": true
+  },
+  "billing": {"browser_is_metered": true, "amount_charged": null, "no_zero_cost_claim": true, "name_registrations_or_purchases": 0, "new_naming_model_benchmarks": 0},
+  "macro_next_action": "generate_fully_screen_and_present_40_organization_names_with_existing_complex_method",
+  "next_action": "resolve_professional_database_or_authorized_registry_access_for_the_specific_screening_gap; preserve_completed_observations_and_do_not_rerun_the_five_terminal_browser_runs",
+  "historical_raw_generation_and_stage1_stage2_unchanged": true,
+  "stable_skill_changed": false,
+  "owner_aesthetic_decision_requested": false
+}

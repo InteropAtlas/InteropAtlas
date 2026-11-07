@@ -1,0 +1,804 @@
+{
+  "scope": "Final bounded verification of claim handling, local original provenance, and documented batch_review mapping. Every input is anonymous synthetic test data, including fixtures labeled live/original.",
+  "cases": [
+    {
+      "case": "review_mapping_same_family_control",
+      "input": {
+        "record_kind": "synthetic",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "synthetic",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 0,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [],\n  \"capture_complete\": true,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "missing_claim",
+      "input": {
+        "record_kind": "synthetic",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "synthetic",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 1,
+      "stdout": "{\n  \"errors\": [\n    \"screen_claim_missing\"\n  ],\n  \"gaps\": [],\n  \"capture_complete\": false,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "explicit_unknown",
+      "input": {
+        "record_kind": "synthetic",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "synthetic",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "unknown",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "unknown",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 2,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [\n    \"screen_result_unresolved\"\n  ],\n  \"capture_complete\": false,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "explicit_not_assessed",
+      "input": {
+        "record_kind": "synthetic",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "synthetic",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "not_assessed",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "not_assessed",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 2,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [\n    \"screen_result_unresolved\"\n  ],\n  \"capture_complete\": false,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "explicit_error",
+      "input": {
+        "record_kind": "synthetic",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "synthetic",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "error",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "error",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 2,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [\n    \"screen_result_unresolved\"\n  ],\n  \"capture_complete\": false,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "local_execution_with_ref",
+      "input": {
+        "record_kind": "live",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "original",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE",
+            "origin": "local_execution",
+            "execution_ref": "synthetic-fixture-run-01"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 0,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [],\n  \"capture_complete\": true,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "case": "local_execution_missing_ref",
+      "input": {
+        "record_kind": "live",
+        "artifacts": [
+          {
+            "id": "a",
+            "kind": "original",
+            "text": "ANONYMOUS SYNTHETIC EVIDENCE",
+            "origin": "local_execution"
+          }
+        ],
+        "batches": [
+          {
+            "batch_id": "b1",
+            "purpose": "exploration",
+            "method_ref": "test-only",
+            "runtime": "synthetic offline",
+            "inputs": [
+              "a"
+            ],
+            "outputs": [
+              "a"
+            ],
+            "stages": {
+              "generated": [
+                "c1",
+                "c2"
+              ],
+              "intrinsic": [
+                "c1",
+                "c2"
+              ],
+              "reality": [
+                "c1",
+                "c2"
+              ],
+              "exposed": [
+                "c1",
+                "c2"
+              ]
+            },
+            "decisions": [],
+            "feedback": [],
+            "screenings": [
+              {
+                "candidate_id": "c1",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              },
+              {
+                "candidate_id": "c2",
+                "claim": "screened_with_limitations",
+                "observed_at": "2026-09-11",
+                "queries": [
+                  {
+                    "intent": "identity",
+                    "source": "synthetic fixture",
+                    "result": "unknown"
+                  }
+                ]
+              }
+            ],
+            "batch_review": {
+              "assessment": "原因未知；匿名合成结构对照，不作事实证明。",
+              "stage_observations": {
+                "generated": "same anonymous family retained",
+                "intrinsic": "same anonymous family retained",
+                "reality": "same anonymous family retained",
+                "exposed": "same anonymous family retained"
+              },
+              "evidence_refs": [
+                "a"
+              ]
+            }
+          }
+        ],
+        "recovery": {
+          "mission_value_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "name_job_model": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "search_landscape": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "scheduler_state": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "generation_runtime_evidence": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          },
+          "candidate_reality_evidence_links": {
+            "status": "present",
+            "value": "synthetic placeholder"
+          }
+        }
+      },
+      "exit_code": 2,
+      "stdout": "{\n  \"errors\": [],\n  \"gaps\": [\n    \"original_source_locator_missing\"\n  ],\n  \"capture_complete\": false,\n  \"semantic_and_reality_clearance\": \"not_assessed\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

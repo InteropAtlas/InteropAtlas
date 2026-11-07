@@ -1,0 +1,184 @@
+{
+  "suite": "anonymous_synthetic_controls_v1",
+  "baseline_commit": "fc84a477c805e828ce47666dbb5c3e0470c57324",
+  "baseline_blob": "a045604850ec9490ce0bce37f44f90e003891e5d",
+  "frozen_at_utc": "2026-09-12T03:07:28.625389+00:00",
+  "comparison_scope": "actual structural validator versus task-local preflight extension; not models or Skill effectiveness",
+  "cases": [
+    {
+      "id": "C01",
+      "title": "完整的不同形态批次",
+      "recipe": "clean",
+      "expected": "pass"
+    },
+    {
+      "id": "C02",
+      "title": "明确且预算内的同族探索",
+      "recipe": "focused",
+      "expected": "pass"
+    },
+    {
+      "id": "C03",
+      "title": "把广泛探索做成单一形态",
+      "recipe": "monoculture",
+      "expected": "review"
+    },
+    {
+      "id": "C04",
+      "title": "只改purpose、不提供定向合同",
+      "recipe": "unbudgeted",
+      "expected": "review"
+    },
+    {
+      "id": "C05",
+      "title": "质量筛选后才集中",
+      "recipe": "intrinsic_narrowing",
+      "expected": "review"
+    },
+    {
+      "id": "C06",
+      "title": "现实筛选后才集中",
+      "recipe": "reality_narrowing",
+      "expected": "review"
+    },
+    {
+      "id": "C07",
+      "title": "把后续筛选集中归咎于生成",
+      "recipe": "wrong_attribution",
+      "expected": "block"
+    },
+    {
+      "id": "C08",
+      "title": "把排序反馈标为直接原因",
+      "recipe": "rank_as_reason",
+      "expected": "block"
+    },
+    {
+      "id": "C09",
+      "title": "排序后的原因解释保留为假设",
+      "recipe": "rank_hypothesis",
+      "expected": "pass"
+    },
+    {
+      "id": "C10",
+      "title": "明确原因按原因记录",
+      "recipe": "explicit_reason",
+      "expected": "pass"
+    },
+    {
+      "id": "C11",
+      "title": "复用排序原句冒充硬门槛授权",
+      "recipe": "rank_as_gate",
+      "expected": "block"
+    },
+    {
+      "id": "C12",
+      "title": "明确约束的结构记录",
+      "recipe": "explicit_constraint",
+      "expected": "pass"
+    },
+    {
+      "id": "C13",
+      "title": "原始产物字节哈希不符",
+      "recipe": "hash_mismatch",
+      "expected": "block"
+    },
+    {
+      "id": "C14",
+      "title": "恢复引用格式正确但提交不存在",
+      "recipe": "dangling_ref",
+      "expected": "block"
+    },
+    {
+      "id": "C15",
+      "title": "筛查为未知却写可用",
+      "recipe": "screen_unknown",
+      "expected": "review"
+    },
+    {
+      "id": "C16",
+      "title": "有查询字段却没有证据产物",
+      "recipe": "screen_no_artifact",
+      "expected": "review"
+    },
+    {
+      "id": "C17",
+      "title": "从转述中伪造原话",
+      "recipe": "reported_as_direct",
+      "expected": "block"
+    },
+    {
+      "id": "C18",
+      "title": "用户暂停时请求恢复生成",
+      "recipe": "resume_paused",
+      "expected": "block"
+    },
+    {
+      "id": "C19",
+      "title": "历史记录缺输入，只作存档",
+      "recipe": "incomplete_audit",
+      "expected": "review"
+    },
+    {
+      "id": "C20",
+      "title": "未记录形态，不臆测多样性",
+      "recipe": "missing_features",
+      "expected": "review"
+    },
+    {
+      "id": "C21",
+      "title": "有定向合同但超预算",
+      "recipe": "over_budget",
+      "expected": "block"
+    },
+    {
+      "id": "C22",
+      "title": "同上下文却宣称真正隔离",
+      "recipe": "isolation_overclaim",
+      "expected": "block"
+    },
+    {
+      "id": "C23",
+      "title": "待核实的语义分类不冒充已确认",
+      "recipe": "feature_unreviewed",
+      "expected": "review"
+    },
+    {
+      "id": "C24",
+      "title": "查询明确否定却声称可用",
+      "recipe": "screen_blocked",
+      "expected": "block"
+    },
+    {
+      "id": "C25",
+      "title": "产物的相对路径越界",
+      "recipe": "path_escape",
+      "expected": "block"
+    },
+    {
+      "id": "C26",
+      "title": "假借通用复核说明释放集中批次",
+      "recipe": "blanket_waiver",
+      "expected": "review"
+    },
+    {
+      "id": "C27",
+      "title": "显式预算合同不能用布尔值",
+      "recipe": "boolean_budget",
+      "expected": "block"
+    },
+    {
+      "id": "C28",
+      "title": "只展示一个候选不被多样性规则误拦",
+      "recipe": "single_candidate",
+      "expected": "pass"
+    }
+  ],
+  "criteria": [
+    "block = invalid/contradictory metadata or action outside permission; review = unresolved evidence/semantic risk; pass = structural permission only",
+    "candidate IDs are anonymous fixture identifiers, never generated names",
+    "expected labels fixed before preflight implementation; same author, no blind or independent holdout claim",
+    "concentration is an observation requiring review, not an automatic bad-name verdict",
+    "valid bounded homogeneous exploration must not be rejected merely for homogeneity"
+  ]
+}
